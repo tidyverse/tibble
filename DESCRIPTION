@@ -19,7 +19,9 @@ Imports:
     utils,
     lazyeval (>= 0.1.10)
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    methods
 LazyData: yes
 License: MIT + file LICENSE
 RoxygenNote: 4.1.1.9001
