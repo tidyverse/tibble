@@ -152,24 +152,6 @@ as_data_frame <- function(x) {
   x
 }
 
-#' Convert row names to an explicit variable.
-#'
-#' @param df Input data frame with rownames.
-#' @param var Name of variable to use
-#' @export
-#' @examples
-#' mtcars %>% tbl_df()
-#'
-#' mtcars %>% add_rownames()
-add_rownames <- function(df, var = "rowname") {
-  stopifnot(is.data.frame(df))
-
-  rn <- as_data_frame(setNames(list(rownames(df)), var))
-  rownames(df) <- NULL
-
-  bind_cols(rn, df)
-}
-
 # Grouping methods ------------------------------------------------------------
 
 #' @export
