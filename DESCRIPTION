@@ -1,0 +1,31 @@
+Package: tibble
+Type: Package
+Version: 0.4.3.9000
+Title: A Grammar of Data Manipulation
+Description: A fast, consistent tool for working with data frame like objects,
+    both in memory and out of memory.
+Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
+    person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "aut"),
+    person("RStudio", role = "cph")
+    )
+URL: https://github.com/hadley/dplyr
+BugReports: https://github.com/hadley/dplyr/issues
+Depends:
+    R (>= 3.1.2)
+Imports:
+    assertthat,
+    utils,
+    R6,
+    Rcpp,
+    magrittr,
+    lazyeval (>= 0.1.10),
+    DBI (>= 0.3)
+Suggests:
+    testthat,
+    knitr,
+    methods
+VignetteBuilder: knitr
+LazyData: yes
+License: MIT + file LICENSE
+RoxygenNote: 4.1.1.9001
