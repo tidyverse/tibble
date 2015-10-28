@@ -20,7 +20,6 @@ Imports:
     lazyeval (>= 0.1.10)
 Suggests:
     testthat
-VignetteBuilder: knitr
 LazyData: yes
 License: MIT + file LICENSE
 RoxygenNote: 4.1.1.9001
