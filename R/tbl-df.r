@@ -99,7 +99,7 @@ auto_copy.tbl_df <- function(x, y, copy = FALSE, ...) {
 
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
-  as_regular_df(x)
+  structure(x, class = "data.frame")
 }
 
 #' @rdname dplyr-formatting
