@@ -30,13 +30,14 @@ auto_name <- function(x) {
   x
 }
 
-is.lang <- function(x) {
+is_lang <- function(x) {
   is.name(x) || is.atomic(x) || is.call(x)
 }
-is.lang.list <- function(x) {
+
+is_lang_list <- function(x) {
   if (is.null(x)) return(TRUE)
 
-  is.list(x) && all_apply(x, is.lang)
+  is.list(x) && all_apply(x, is_lang)
 }
 
 only_has_names <- function(x, nms) {
@@ -49,6 +50,7 @@ all_apply <- function(xs, f) {
   }
   TRUE
 }
+
 any_apply <- function(xs, f) {
   for (x in xs) {
     if (f(x)) return(TRUE)
@@ -61,7 +63,9 @@ drop_last <- function(x) {
   x[-length(x)]
 }
 
-compact <- function(x) Filter(Negate(is.null), x)
+compact <- function(x) {
+  Filter(Negate(is.null), x)
+}
 
 names2 <- function(x) {
   names(x) %||% rep("", length(x))
@@ -69,7 +73,7 @@ names2 <- function(x) {
 
 "%||%" <- function(x, y) if(is.null(x)) y else x
 
-is.wholenumber <- function(x, tol = .Machine$double.eps ^ 0.5) {
+is_wholenumber <- function(x, tol = .Machine$double.eps ^ 0.5) {
   abs(x - round(x)) < tol
 }
 
@@ -85,9 +89,13 @@ deparse_all <- function(x) {
   vapply(x, deparse2, FUN.VALUE = character(1))
 }
 
-commas <- function(...) paste0(..., collapse = ", ")
+commas <- function(...) {
+  paste0(..., collapse = ", ")
+}
 
-in_travis <- function() identical(Sys.getenv("TRAVIS"), "true")
+in_travis <- function() {
+  identical(Sys.getenv("TRAVIS"), "true")
+}
 
 named <- function(...) {
   x <- c(...)
@@ -107,7 +115,9 @@ unique_name <- local({
   }
 })
 
-isFALSE <- function(x) identical(x, FALSE)
+is_false <- function(x) {
+  identical(x, FALSE)
+}
 
 substitute_q <- function(x, env) {
   call <- substitute(substitute(x, env), list(x = x))
