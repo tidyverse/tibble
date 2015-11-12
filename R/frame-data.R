@@ -64,16 +64,10 @@ frame_data <- function(...) {
     ))
   }
 
-  frame_nrow <- n_elements / frame_ncol
-
-  # Extract the columns from 'frame_rest'
-  frame_col <- lapply(seq_len(frame_ncol), function(i) {
-    indices <- seq.default(from = i, to = length(frame_rest), by = frame_ncol)
-    col <- frame_rest[indices]
-    if (all(vapply(col, length, integer(1L)) == 1L)) {
-      col <- unlist(col)
-    }
-    col
+  frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
+  frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
+    col <- frame_mat[, i]
+    if (is.list(col[[1]])) col else unlist(col)
   })
 
   # Create a tbl_df and return it
