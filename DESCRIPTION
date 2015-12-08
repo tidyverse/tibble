@@ -24,4 +24,4 @@ Suggests:
     methods
 LazyData: yes
 License: MIT + file LICENSE
-RoxygenNote: 4.1.1.9001
+RoxygenNote: 5.0.1.9000
