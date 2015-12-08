@@ -3,6 +3,7 @@
 
 #include <Rcpp.h>
 
+#include "../inst/include/dplyr.h"
 using namespace Rcpp;
 
 // shallow_copy
@@ -13,6 +14,47 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
     __result = Rcpp::wrap(shallow_copy(data));
+    return __result;
+END_RCPP
+}
+// compatible_data_frame
+dplyr::BoolResult compatible_data_frame(DataFrame& x, DataFrame& y, bool ignore_col_order, bool convert);
+RcppExport SEXP tibble_compatible_data_frame(SEXP xSEXP, SEXP ySEXP, SEXP ignore_col_orderSEXP, SEXP convertSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< DataFrame& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< DataFrame& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< bool >::type ignore_col_order(ignore_col_orderSEXP);
+    Rcpp::traits::input_parameter< bool >::type convert(convertSEXP);
+    __result = Rcpp::wrap(compatible_data_frame(x, y, ignore_col_order, convert));
+    return __result;
+END_RCPP
+}
+// equal_data_frame
+dplyr::BoolResult equal_data_frame(DataFrame x, DataFrame y, bool ignore_col_order, bool ignore_row_order, bool convert);
+RcppExport SEXP tibble_equal_data_frame(SEXP xSEXP, SEXP ySEXP, SEXP ignore_col_orderSEXP, SEXP ignore_row_orderSEXP, SEXP convertSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< DataFrame >::type x(xSEXP);
+    Rcpp::traits::input_parameter< DataFrame >::type y(ySEXP);
+    Rcpp::traits::input_parameter< bool >::type ignore_col_order(ignore_col_orderSEXP);
+    Rcpp::traits::input_parameter< bool >::type ignore_row_order(ignore_row_orderSEXP);
+    Rcpp::traits::input_parameter< bool >::type convert(convertSEXP);
+    __result = Rcpp::wrap(equal_data_frame(x, y, ignore_col_order, ignore_row_order, convert));
+    return __result;
+END_RCPP
+}
+// all_equal_data_frame
+dplyr::BoolResult all_equal_data_frame(List args, Environment env);
+RcppExport SEXP tibble_all_equal_data_frame(SEXP argsSEXP, SEXP envSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< List >::type args(argsSEXP);
+    Rcpp::traits::input_parameter< Environment >::type env(envSEXP);
+    __result = Rcpp::wrap(all_equal_data_frame(args, env));
     return __result;
 END_RCPP
 }
