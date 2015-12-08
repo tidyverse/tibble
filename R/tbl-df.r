@@ -7,13 +7,16 @@
 #'
 #' @section Methods:
 #'
-#' \code{tbl_df} implements two important base methods:
+#' \code{tbl_df} implements four important base methods:
 #'
 #' \describe{
 #' \item{print}{Only prints the first 10 rows, and the columns that fit on
 #'   screen}
 #' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
+#' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
+#'   so is considerably faster. Throws error if column does not exist.}
 #' }
+#'
 #'
 #' @export
 #' @param data a data frame
@@ -69,7 +72,6 @@
 #' anti_join(player_info, hof)
 #' }
 tbl_df <- function(data) {
-  assert_that(is.data.frame(data))
   as_data_frame(data)
 }
 
@@ -82,7 +84,7 @@ as.tbl.data.frame <- function(x, ...) {
 
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
-  structure(x, class = "data.frame")
+  as_regular_df(x)
 }
 
 #' @rdname dplyr-formatting
@@ -103,7 +105,23 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 }
 
 #' @export
-`[.tbl_df` <- function (x, i, j, drop = FALSE) {
+`[[.tbl_df` <- function(x, i) {
+  if (is.character(i) && !(i %in% names(x)))
+    stop("Unknown name", call. = FALSE)
+
+  .subset2(x, i)
+}
+
+#' @export
+`$.tbl_df` <- function(x, i) {
+  if (is.character(i) && !(i %in% names(x)))
+    stop("Unknown name", call. = FALSE)
+
+  .subset2(x, i)
+}
+
+#' @export
+`[.tbl_df` <- function(x, i, j, drop = FALSE) {
   if (missing(i) && missing(j)) return(x)
   if (drop) warning("drop ignored", call. = FALSE)
 
