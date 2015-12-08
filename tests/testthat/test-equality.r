@@ -18,6 +18,34 @@ test_that("data frames equal to themselves", {
   expect_true(all.equal(tbl_df(df_all), tbl_df(df_all)))
 })
 
+test_that("data frames equal to random permutations of themselves", {
+  scramble <- function(x){
+    x[sample(nrow(x)), sample(ncol(x)), drop = FALSE]
+  }
+
+  expect_equal(tbl_df(mtcars), tbl_df(scramble(mtcars)))
+  expect_equal(tbl_df(iris), tbl_df(scramble(iris)))
+  expect_equal(tbl_df(df_all), tbl_df(scramble(df_all)))
+})
+
+test_that("data frames not equal if missing row", {
+  expect_match(all.equal(tbl_df(mtcars), mtcars[-1, ]), "Different number of rows")
+  expect_match(all.equal(tbl_df(iris), iris[-1, ]),     "Different number of rows")
+  expect_match(all.equal(tbl_df(df_all), df_all[-1, ]), "Different number of rows")
+})
+
+test_that("data frames not equal if missing col", {
+  expect_match(all.equal(tbl_df(mtcars), mtcars[, -1]), "Cols in x but not y: mpg")
+  expect_match(all.equal(tbl_df(iris), iris[, -1]),     "Cols in x but not y: Sepal.Length")
+  expect_match(all.equal(tbl_df(df_all), df_all[, -1]), "Cols in x but not y: a")
+})
+
+test_that("factors equal only if levels equal", {
+  df1 <- data.frame(x = factor(c("a", "b")))
+  df2 <- data.frame(x = factor(c("a", "d")))
+  expect_match(all.equal(tbl_df(df1), tbl_df(df2)), "Factor levels not equal for column x" )
+})
+
 test_that("BoolResult does not overwrite singleton R_TrueValue", {
   dplyr:::equal_data_frame(mtcars, mtcars)
   expect_equal( class(2 == 2), "logical" )
@@ -52,4 +80,17 @@ test_that( "handle Date columns of different types, integer and numeric (#1204)"
   a <- data.frame(date = as.Date("2015-06-07"))
   b <- data.frame(date = structure( as.integer(a$date), class = "Date" ) )
   expect_true( all.equal(a, b) )
+})
+
+test_that("equality test fails when convert is FALSE and types don't match (#1484)", {
+  df1 <- data_frame(x = "a")
+  df2 <- data_frame(x = factor("a"))
+
+  expect_equal( all_equal(df1, df2, convert = FALSE), "Incompatible type for column x: x character, y factor" )
+  expect_warning( all_equal(df1, df2, convert = TRUE) )
+})
+
+test_that("equality handles data frames with 0 columns (#1506)", {
+  df0 <- data_frame(x = numeric(0), y = character(0) )
+  expect_equal(df0, df0)
 })
