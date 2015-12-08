@@ -167,13 +167,6 @@ rule <- function(char = "-") {
   paste0(rep(char, getOption("width") - 2), collapse = "")
 }
 
-#' @export
-print.BoolResult <- function(x, ...) {
-  cat(x)
-  if (!x) cat(": ", attr(x, "comment"), sep = "")
-  cat("\n")
-}
-
 obj_type <- function(x) UseMethod("obj_type")
 #' @export
 obj_type.NULL <- function(x) "<NULL>"
