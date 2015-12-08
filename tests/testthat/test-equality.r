@@ -53,3 +53,16 @@ test_that( "handle Date columns of different types, integer and numeric (#1204)"
   b <- data.frame(date = structure( as.integer(a$date), class = "Date" ) )
   expect_true( all.equal(a, b) )
 })
+
+test_that("equality test fails when convert is FALSE and types don't match (#1484)", {
+  df1 <- data_frame(x = "a")
+  df2 <- data_frame(x = factor("a"))
+
+  expect_equal( all.equal(df1, df2, convert = FALSE), "Incompatible type for column x: x character, y factor" )
+  expect_warning( all.equal(df1, df2, convert = TRUE) )
+})
+
+test_that("equality handles data frames with 0 columns (#1506)", {
+  df0 <- data_frame(x = numeric(0), y = character(0) )
+  expect_equal(df0, df0)
+})
