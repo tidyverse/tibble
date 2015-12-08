@@ -15,13 +15,13 @@ test_that("data_frame returns correct number of rows with all combinatinos", {
 })
 
 test_that("can't make data_frame containing data.frame or array", {
-  expect_error(data_frame(mtcars), "only contain 1d atomic vectors and lists")
-  expect_error(data_frame(diag(5)), "only contain 1d atomic vectors and lists")
+  expect_error(data_frame(mtcars), "must be a 1d atomic vector or list")
+  expect_error(data_frame(diag(5)), "must be a 1d atomic vector or list")
 })
 
 test_that("null isn't a valid column", {
-  expect_error(data_frame(a = NULL), "only contain 1d atomic vectors and lists")
-  expect_error(as_data_frame(list(a = NULL)), "only contain 1d atomic vectors and lists")
+  expect_error(data_frame(a = NULL))
+  expect_error(as_data_frame(list(a = NULL)), "must be a 1d atomic vector or list")
 })
 
 test_that("length 1 vectors are recycled", {
@@ -48,8 +48,8 @@ test_that("empty input makes 0 x 0 tbl_df", {
 # as_data_frame -----------------------------------------------------------
 
 test_that("columns must be same length", {
-  l <- list(x = 1, y = 1:2)
-  expect_error(as_data_frame(l), "not all same length")
+  l <- list(x = 1:2, y = 1:3)
+  expect_error(as_data_frame(l), "must be length 1 or")
 })
 
 test_that("columns must be named", {
@@ -61,20 +61,14 @@ test_that("columns must be named", {
 })
 
 test_that("can't coerce list data.frame or array", {
-  expect_error(as_data_frame(list(x = mtcars)), "only contain 1d atomic vectors and lists")
-  expect_error(as_data_frame(list(x = diag(5))), "only contain 1d atomic vectors and lists")
+  expect_error(as_data_frame(list(x = mtcars)), "must be a 1d atomic vector or list")
+  expect_error(as_data_frame(list(x = diag(5))), "must be a 1d atomic vector or list")
 })
 
 test_that("Zero column list makes 0 x 0 tbl_df", {
   zero <- as_data_frame(list())
   expect_is(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
-})
-
-test_that("error on NA column names (#1101)", {
-  df <- data.frame( x = 1:10, y = 1:10 )
-  names(df)[1] <- NA
-  expect_error( as_data_frame(df), "All columns must be named" )
 })
 
 test_that("add_rownames keeps the tbl classes (#882)", {
