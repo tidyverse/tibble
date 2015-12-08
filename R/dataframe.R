@@ -199,7 +199,7 @@ add_rownames <- function(df, var = "rowname") {
   rn <- as_data_frame(setNames(list(rownames(df)), var))
   rownames(df) <- NULL
 
-  bind_cols(rn, df)
+  as_data_frame(cbind(rn, df))
 }
 
 #' Add a row to a data frame
