@@ -29,8 +29,9 @@ convert factor to character and integer to double.}
   result in an \code{if} expression.
 }
 \description{
-You can use \code{all_equal} with any data frame, and dplyr also provides
-\code{tbl_df} and \code{tbl_dt} methods for \code{\link{all.equal}}.
+When comparing two \code{tbl_df} using \code{\link{all.equal}}, column and
+row order is ignored by default, and types are not coerced.  The \code{dplyr}
+package provides a much more efficient implementation for this funcitonality.
 }
 \examples{
 scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
