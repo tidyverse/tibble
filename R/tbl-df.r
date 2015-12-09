@@ -126,9 +126,8 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   if (nargs() == 2L) {
     .check_names_df(x,i)
     result <- .subset(x, i)
-    class(result) <- c("tbl_df", "data.frame")
     attr(result, "row.names") <- .set_row_names(nr)
-    return(result)
+    return(as_data_frame.data.frame(result))
   }
 
   # First, subset columns
@@ -147,7 +146,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
     }
   }
 
-  class(x) <- c("tbl_df", "data.frame")
   attr(x, "row.names") <- .set_row_names(nr)
-  x
+  as_data_frame.data.frame(x)
 }
