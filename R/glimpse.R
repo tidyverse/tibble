@@ -28,7 +28,7 @@ glimpse <- function(x, width = getOption("width"), ...) {
 }
 
 #' @export
-glimpse.tbl <- function(x, width = getOption("width"), ...) {
+glimpse.data.frame <- function(x, width = getOption("width"), ...) {
   cat("Observations: ", big_mark(nrow(x)), "\n", sep = "")
   if (ncol(x) == 0) return(invisible())
 
@@ -50,9 +50,6 @@ glimpse.tbl <- function(x, width = getOption("width"), ...) {
 
   cat(paste0(var_names, truncated, collapse = "\n"), "\n", sep = "")
 }
-
-#' @export
-glimpse.data.frame <- glimpse.tbl
 
 #' @export
 glimpse.default <- function(x, width = getOption("width"), max.level = 3, ...) {
