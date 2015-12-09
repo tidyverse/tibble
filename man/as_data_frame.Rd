@@ -2,23 +2,49 @@
 % Please edit documentation in R/dataframe.R
 \name{as_data_frame}
 \alias{as_data_frame}
-\title{Coerce a list to a data frame.}
+\alias{as_data_frame.data.frame}
+\alias{as_data_frame.list}
+\alias{as_data_frame.matrix}
+\alias{as_data_frame.tbl_df}
+\title{Coerce lists and matrices to data frames.}
 \usage{
-as_data_frame(x)
+as_data_frame(x, ...)
+
+\method{as_data_frame}{tbl_df}(x, ...)
+
+\method{as_data_frame}{data.frame}(x, ...)
+
+\method{as_data_frame}{list}(x, validate = TRUE, ...)
+
+\method{as_data_frame}{matrix}(x, ...)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}
+
+\item{...}{Other arguments passed on to individual methods.}
+
+\item{validate}{When \code{TRUE}, verifies that the input is a valid data
+frame (i.e. all columns are named, and are 1d vectors or lists). You may
+want to suppress this when you know that you already have a valid data
+frame and you want to save some time.}
 }
 \description{
 \code{as.data.frame} is effectively a thin wrapper around \code{data.frame},
 and hence is rather slow (because it calls \code{data.frame} on each element
-before \code{cbind}ing together). \code{as_data_frame} just verifies that
-the list is structured correctly (i.e. named, and each element is same
-length) then sets class and row name attributes.
+before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
+with more efficient methods for matrices and data frames.
+}
+\details{
+This is an S3 generic. dplyr includes methods for data frames (adds tbl_df
+classes), tbl_dfs (trivial!), grouped_dfs (ungroups), lists, and matrices.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
 df <- as_data_frame(l)
+
+m <- matrix(rnorm(50), ncol = 5)
+colnames(m) <- c("a", "b", "c", "d", "e")
+df <- as_data_frame(m)
 
 # Coercing to a data frame does not copy columns
 changes(as_data_frame(l), as_data_frame(l))
@@ -30,8 +56,16 @@ changes(as_data_frame(l), as_data_frame(l))
 l2 <- replicate(26, sample(letters), simplify = FALSE)
 names(l2) <- letters
 microbenchmark::microbenchmark(
+  as_data_frame(l2, validate = FALSE),
   as_data_frame(l2),
   as.data.frame(l2)
+)
+
+m <- matrix(runif(26 * 100), ncol = 26)
+colnames(m) <- letters
+microbenchmark::microbenchmark(
+  as_data_frame(m),
+  as.data.frame(m)
 )
 }
 }

@@ -7,13 +7,16 @@
 #'
 #' @section Methods:
 #'
-#' \code{tbl_df} implements two important base methods:
+#' \code{tbl_df} implements four important base methods:
 #'
 #' \describe{
 #' \item{print}{Only prints the first 10 rows, and the columns that fit on
 #'   screen}
 #' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
+#' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
+#'   so is considerably faster. Throws error if column does not exist.}
 #' }
+#'
 #'
 #' @export
 #' @param data a data frame
@@ -69,13 +72,7 @@
 #' anti_join(player_info, hof)
 #' }
 tbl_df <- function(data) {
-  assert_that(is.data.frame(data))
   as_data_frame(data)
-}
-
-#' @export
-as.tbl.data.frame <- function(x, ...) {
-  tbl_df(x)
 }
 
 # Standard data frame methods --------------------------------------------------
@@ -103,7 +100,23 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 }
 
 #' @export
-`[.tbl_df` <- function (x, i, j, drop = FALSE) {
+`[[.tbl_df` <- function(x, i) {
+  if (is.character(i) && !(i %in% names(x)))
+    stop("Unknown name", call. = FALSE)
+
+  .subset2(x, i)
+}
+
+#' @export
+`$.tbl_df` <- function(x, i) {
+  if (is.character(i) && !(i %in% names(x)))
+    stop("Unknown name", call. = FALSE)
+
+  .subset2(x, i)
+}
+
+#' @export
+`[.tbl_df` <- function(x, i, j, drop = FALSE) {
   if (missing(i) && missing(j)) return(x)
   if (drop) warning("drop ignored", call. = FALSE)
 
@@ -113,9 +126,8 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   if (nargs() == 2L) {
     .check_names_df(x,i)
     result <- .subset(x, i)
-    class(result) <- c("tbl_df", "data.frame")
     attr(result, "row.names") <- .set_row_names(nr)
-    return(result)
+    return(as_data_frame.data.frame(result))
   }
 
   # First, subset columns
@@ -134,7 +146,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
     }
   }
 
-  class(x) <- c("tbl_df", "data.frame")
   attr(x, "row.names") <- .set_row_names(nr)
-  x
+  as_data_frame.data.frame(x)
 }
