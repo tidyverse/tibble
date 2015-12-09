@@ -37,8 +37,8 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   rows <- nrow(x)
 
   if (is.null(n)) {
-    if (is.na(rows) || rows > getOption("dplyr.print_max")) {
-      n <- getOption("dplyr.print_min")
+    if (is.na(rows) || rows > getOption("dplyr.print_max", 20L)) {
+      n <- getOption("dplyr.print_min", 10L)
     } else {
       n <- rows
     }
