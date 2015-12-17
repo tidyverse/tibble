@@ -200,6 +200,34 @@ add_rownames <- function(df, var = "rowname") {
   as_data_frame(cbind(rn, df))
 }
 
+#' Convert a column of tbl into rownames of data.frame.
+#'
+#' Inverted operation of add_rownames
+#'
+#' @param df Input data frame with rownames.
+#' @param var Name of variable to use
+#' @export
+#' @seealso \code{\link{add_rownames}}
+#' @examples
+#' tbl_df(mtcars)
+#'
+#' mtcars_tbl <- add_rownames(mtcars)
+#' mtcars_data.frame <- col2rowname(mtcars_tbl)
+col2rowname <- function(df, var = "rowname") {
+  stopifnot(is.data.frame(df))
+
+  if ( !var %in% colnames(df) ) {
+    stop(paste("No", var, "column in the colnames.") )
+  }
+
+  df <- as.data.frame(df)
+  rownames(df) <- df[[var]]
+  df[, var] <- NULL
+  return (df)
+
+}
+
+
 #' Add a row to a data frame
 #'
 #' This is a convenient way to add a single row of data to an existing data
