@@ -86,9 +86,11 @@ test_that("add_rownames keeps the tbl classes (#882)", {
   expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
 })
 
-test_that("col2rowname returns data.frame.", {
-  res <- col2rowname( add_rownames( mtcars) )
+test_that("use_as_rownames returns data.frame.", {
+  res <- use_as_rownames( add_rownames( mtcars) )
   expect_equal( class(res), c("data.frame"))
+  expect_equal(rownames(res), rownames(mtcars))
+
 })
 
 test_that("matrix", {

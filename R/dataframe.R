@@ -212,8 +212,8 @@ add_rownames <- function(df, var = "rowname") {
 #' tbl_df(mtcars)
 #'
 #' mtcars_tbl <- add_rownames(mtcars)
-#' mtcars_data.frame <- col2rowname(mtcars_tbl)
-col2rowname <- function(df, var = "rowname") {
+#' mtcars_data.frame <- use_as_rownames(mtcars_tbl)
+use_as_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if ( !var %in% colnames(df) ) {
