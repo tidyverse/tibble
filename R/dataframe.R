@@ -182,18 +182,19 @@ as_data_frame.matrix <- function(x, ...) {
   as_data_frame(as.data.frame(x))
 }
 
-#' Converting between rownames and a column
+#' Conversion between rownames and a column in data frame
 #'
-#' add_rownames: Convert row names to an explicit variable.
+#' @details add_rownames: Convert row names to an explicit variable.
 #'
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
 #' @export
-#' @rdname add_rownames
+#' @rdname rownames
+#' @return add_rownames: c("tbl_df", "tbl", "data.frame")
 #' @examples
 #' tbl_df(mtcars)
 #'
-#' mtcars_tbl <- add_rownames(mtcars)
+#' (mtcars_tbl <- add_rownames(mtcars) )
 add_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
@@ -202,30 +203,39 @@ add_rownames <- function(df, var = "rowname") {
   }
 
   rn <- as_data_frame(setNames(list(rownames(df)), var))
-  rownames(rn) <-rn[[var]]
+  rownames(df) <- NULL
 
   as_data_frame(cbind(rn, df))
+
 }
 
-#' use_as_rownames: Inverted operation of add_rownames, returning a data.frame
+
+#' @details use_as_rownames: Inverted operation of add_rownames, returning a data.frame
 #'
-#' @rdname add_rownames
+#' @rdname rownames
+#' @return use_as_rownames: data.frame
 #' @export
 #' @examples
 #'
-#' mtcars_data.frame <- use_as_rownames(mtcars_tbl)
+#' head ( use_as_rownames(mtcars_tbl) )
+#'
 use_as_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if ( !var %in% colnames(df) ) {
-    stop(paste("No", var, "column in the colnames.") )
-  }
+  if (!identical(rownames(df), as.character(seq_len(NROW(df))))) {
+    stop("Row names exists. Nothing is done.")
 
-  df <- as.data.frame(df)
-  rownames(df) <- df[[var]]
-  df[, var] <- NULL
-  return (df)
+  } else {
+    if ( !var %in% colnames(df) ) {
+      stop(paste("No", var, "column in the colnames.") )
+    }
 
+    df <- as.data.frame(df)
+
+    rownames(df) <- df[[var]]
+    df[, var] <- NULL
+    return (df)
+    }
 }
 
 

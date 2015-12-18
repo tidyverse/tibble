@@ -3,7 +3,7 @@
 \name{add_rownames}
 \alias{add_rownames}
 \alias{use_as_rownames}
-\title{Converting between rownames and a column}
+\title{Conversion between rownames and a column in data frame}
 \usage{
 add_rownames(df, var = "rowname")
 
@@ -14,7 +14,15 @@ use_as_rownames(df, var = "rowname")
 
 \item{var}{Name of variable to use}
 }
+\value{
+add_rownames: c("tbl_df", "tbl", "data.frame")
+
+use_as_rownames: data.frame
+}
 \description{
+Conversion between rownames and a column in data frame
+}
+\details{
 add_rownames: Convert row names to an explicit variable.
 
 use_as_rownames: Inverted operation of add_rownames, returning a data.frame
@@ -22,8 +30,9 @@ use_as_rownames: Inverted operation of add_rownames, returning a data.frame
 \examples{
 tbl_df(mtcars)
 
-mtcars_tbl <- add_rownames(mtcars)
+(mtcars_tbl <- add_rownames(mtcars) )
 
-mtcars_data.frame <- use_as_rownames(mtcars_tbl)
+head ( use_as_rownames(mtcars_tbl) )
+
 }
 

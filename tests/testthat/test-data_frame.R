@@ -84,7 +84,8 @@ test_that("Zero column list makes 0 x 0 tbl_df", {
 test_that("add_rownames keeps the tbl classes (#882)", {
   res <- add_rownames( mtcars, "Make&Model" )
   expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
-  expect_equal( rownames(res), rownames(mtcars) )
+  expect_error(add_rownames( mtcars, "wt"),
+               paste("There is a column named wt already!")  )
 })
 
 test_that("use_as_rownames returns data.frame.", {
@@ -96,6 +97,10 @@ test_that("use_as_rownames returns data.frame.", {
   mtcars$num <- 32:1
   res1 <- use_as_rownames( add_rownames( mtcars), var="num")
   expect_equal(rownames(res1), as.character(mtcars$num ))
+  expect_error(use_as_rownames(res1), "Row names exists. Nothing is done.")
+  expect_error(use_as_rownames( add_rownames( mtcars, var), "num2"),
+               paste("No num2 column in the colnames.")  )
+
 })
 
 test_that("matrix", {
