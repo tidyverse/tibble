@@ -2,9 +2,12 @@
 % Please edit documentation in R/dataframe.R
 \name{add_rownames}
 \alias{add_rownames}
-\title{Convert row names to an explicit variable.}
+\alias{use_as_rownames}
+\title{Converting between rownames and a column}
 \usage{
 add_rownames(df, var = "rowname")
+
+use_as_rownames(df, var = "rowname")
 }
 \arguments{
 \item{df}{Input data frame with rownames.}
@@ -12,11 +15,15 @@ add_rownames(df, var = "rowname")
 \item{var}{Name of variable to use}
 }
 \description{
-Convert row names to an explicit variable.
+add_rownames: Convert row names to an explicit variable.
+
+use_as_rownames: Inverted operation of add_rownames, returning a data.frame
 }
 \examples{
 tbl_df(mtcars)
 
-add_rownames(mtcars)
+mtcars_tbl <- add_rownames(mtcars)
+
+mtcars_data.frame <- use_as_rownames(mtcars_tbl)
 }
 

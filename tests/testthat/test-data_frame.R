@@ -84,13 +84,18 @@ test_that("Zero column list makes 0 x 0 tbl_df", {
 test_that("add_rownames keeps the tbl classes (#882)", {
   res <- add_rownames( mtcars, "Make&Model" )
   expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
+  expect_equal( rownames(res), rownames(mtcars) )
 })
 
 test_that("use_as_rownames returns data.frame.", {
-  res <- use_as_rownames( add_rownames( mtcars) )
+  var <- "car"
+  res <- use_as_rownames( add_rownames( mtcars, var), var)
   expect_equal( class(res), c("data.frame"))
   expect_equal(rownames(res), rownames(mtcars))
-
+  expect_equal(res[[var]], NULL)
+  mtcars$num <- 32:1
+  res1 <- use_as_rownames( add_rownames( mtcars), var="num")
+  expect_equal(rownames(res1), as.character(mtcars$num ))
 })
 
 test_that("matrix", {
