@@ -31,7 +31,6 @@ tbl_df(mtcars)
 (mtcars_tbl <- add_rownames(mtcars) )
 
 head ( use_as_rownames(mtcars_tbl) )
-df <- mtcars_tbl
-var = "rowname"
+
 }
 

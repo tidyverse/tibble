@@ -97,9 +97,9 @@ test_that("use_as_rownames returns data.frame.", {
   mtcars$num <- rev(seq_len(nrow(mtcars)))
   res1 <- use_as_rownames( add_rownames( mtcars), var="num")
   expect_equal(rownames(res1), as.character(mtcars$num ))
-  expect_error(use_as_rownames(res1), "Row names exists. Nothing is done.")
+  expect_error(use_as_rownames(res1), "This data frame already has row names.")
   expect_error(use_as_rownames( add_rownames( mtcars, var), "num2"),
-               paste("No num2 column in the colnames.")  )
+               paste("This data frame has no column named num2.")  )
 
 })
 

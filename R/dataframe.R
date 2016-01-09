@@ -231,7 +231,7 @@ use_as_rownames <- function(df, var = "rowname") {
       stop(paste0("This data frame has no column named ", var, ".") )
     }
 
-    df <- as_data_frame(df)
+    df <- as.data.frame(df)
 
     rownames(df) <- df[[var]]
     df[, var] <- NULL
