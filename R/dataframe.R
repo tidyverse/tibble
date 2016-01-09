@@ -184,7 +184,7 @@ as_data_frame.matrix <- function(x, ...) {
 
 #' Conversion between rownames and a column in data frame
 #'
-#' @details add_rownames: Convert row names to an explicit variable.
+#' \code{add_rownames} Convert row names to an explicit variable.
 #'
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
@@ -210,7 +210,8 @@ add_rownames <- function(df, var = "rowname") {
 }
 
 
-#' @details use_as_rownames: Inverted operation of add_rownames, returning a data.frame
+#' \code{use_as_rownames} Convert a column variable to row names. This is an
+#' inverted operation of add_rownames, returning a data.frame
 #'
 #' @rdname rownames
 #' @return use_as_rownames: data.frame
@@ -223,14 +224,14 @@ use_as_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (!identical(rownames(df), as.character(seq_len(NROW(df))))) {
-    stop("Row names exists. Nothing is done.")
+    stop("This data frame already has row names.")
 
   } else {
     if ( !var %in% colnames(df) ) {
-      stop(paste("No", var, "column in the colnames.") )
+      stop(paste0("This data frame has no column named ", var, ".") )
     }
 
-    df <- as.data.frame(df)
+    df <- as_data_frame(df)
 
     rownames(df) <- df[[var]]
     df[, var] <- NULL

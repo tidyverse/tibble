@@ -94,7 +94,7 @@ test_that("use_as_rownames returns data.frame.", {
   expect_equal( class(res), c("data.frame"))
   expect_equal(rownames(res), rownames(mtcars))
   expect_equal(res[[var]], NULL)
-  mtcars$num <- 32:1
+  mtcars$num <- rev(seq_len(nrow(mtcars)))
   res1 <- use_as_rownames( add_rownames( mtcars), var="num")
   expect_equal(rownames(res1), as.character(mtcars$num ))
   expect_error(use_as_rownames(res1), "Row names exists. Nothing is done.")
