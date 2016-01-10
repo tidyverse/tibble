@@ -88,17 +88,17 @@ test_that("add_rownames keeps the tbl classes (#882)", {
                paste("There is a column named wt already!")  )
 })
 
-test_that("use_as_rownames returns data.frame.", {
+test_that("column_to_rownames returns tbl", {
   var <- "car"
-  res <- use_as_rownames( add_rownames( mtcars, var), var)
-  expect_equal( class(res), c("data.frame"))
+  res <- column_to_rownames( add_rownames( mtcars, var), var)
+  expect_equal( class(res), c("tbl_df", "tbl", "data.frame"))
   expect_equal(rownames(res), rownames(mtcars))
-  expect_equal(res[[var]], NULL)
+  expect_error(res[[var]], "Error : Unknown name\n")
   mtcars$num <- rev(seq_len(nrow(mtcars)))
-  res1 <- use_as_rownames( add_rownames( mtcars), var="num")
-  expect_equal(rownames(res1), as.character(mtcars$num ))
-  expect_error(use_as_rownames(res1), "This data frame already has row names.")
-  expect_error(use_as_rownames( add_rownames( mtcars, var), "num2"),
+  res1 <- column_to_rownames( add_rownames( mtcars), var="num")
+  expect_equal(rownames(res1), as.character(mtcars$num) )
+  expect_error(column_to_rownames(res1), "This data frame already has row names.")
+  expect_error(column_to_rownames( add_rownames( mtcars, var), "num2"),
                paste("This data frame has no column named num2.")  )
 
 })

@@ -2,35 +2,35 @@
 % Please edit documentation in R/dataframe.R
 \name{add_rownames}
 \alias{add_rownames}
-\alias{use_as_rownames}
+\alias{column_to_rownames}
+\alias{rownames_to_column}
 \title{Conversion between rownames and a column in data frame}
 \usage{
 add_rownames(df, var = "rowname")
 
-use_as_rownames(df, var = "rowname")
+rownames_to_column(df, var = "rowname")
+
+column_to_rownames(df, var = "rowname")
 }
 \arguments{
 \item{df}{Input data frame with rownames.}
 
 \item{var}{Name of variable to use}
 }
-\value{
-add_rownames: c("tbl_df", "tbl", "data.frame")
-
-use_as_rownames: data.frame
-}
 \description{
-\code{add_rownames} Convert row names to an explicit variable.
+\code{add_rownames or rownames_to_column} convert row names to an explicit variable.
 
-\code{use_as_rownames} Convert a column variable to row names. This is an
-inverted operation of add_rownames, returning a data.frame
+\code{column_to_rownames} convert a column variable to row names. This is an
+inverted operation of add_rownames or rownames_to_column.
 }
 \examples{
 tbl_df(mtcars)
 
 (mtcars_tbl <- add_rownames(mtcars) )
 
-head ( use_as_rownames(mtcars_tbl) )
+rownames_to_column(mtcars)
+
+column_to_rownames(mtcars_tbl)
 
 }
 
