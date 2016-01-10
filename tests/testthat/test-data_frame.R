@@ -86,6 +86,10 @@ test_that("add_rownames keeps the tbl classes (#882)", {
   expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
   expect_error(add_rownames( mtcars, "wt"),
                paste("There is a column named wt already!")  )
+  res1 <- rownames_to_column( mtcars, "Make&Model" )
+  expect_equal( class(res1), c("tbl_df","tbl", "data.frame"))
+  expect_error(rownames_to_column( mtcars, "wt"),
+               paste("There is a column named wt already!")  )
 })
 
 test_that("column_to_rownames returns tbl", {
