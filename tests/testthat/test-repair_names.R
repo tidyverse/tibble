@@ -1,52 +1,81 @@
 context("repair_names")
 
 test_that("repair column names when none are provided", {
-    dat <- as_data_frame(diag(3))
+    dat <- data.frame(a = 1, b = 2, c = 3)
     colnames(dat) <- NULL
 
-    ## ensure we start with a "bad" state
-    expect_true( is.null(colnames(dat)) )
+    # ensure we start with a "bad" state
+    expect_null(colnames(dat))
 
     fixed_dat <- repair_names(dat)
     fixed_names <- colnames(fixed_dat)
-    ## no empty names
-    expect_false( any(sapply(fixed_names, is.null)) )
-    ## no repeats
-    expect_false( any(table(fixed_names) > 1) )
+    # no empty names
+    expect_false(any(sapply(fixed_names, is.null)))
+    # no repeats
+    expect_false(any(table(fixed_names) > 1))
 })
 
-test_that("repair column names when some are provided", {
-    dat <- as_data_frame(diag(3))
+test_that("repair missing column names", {
+    dat <- data.frame(a = 1, b = 2, c = 3)
     colnames(dat)[2] <- NA
 
-    ## ensure we start with a "bad" state
-    expect_true( any(sapply(colnames(dat), is.na)) )
+    # ensure we start with a "bad" state
+    expect_true(any(sapply(colnames(dat), is.na)))
 
     fixed_dat <- repair_names(dat)
     fixed_names <- colnames(fixed_dat)
-    ## no empty names
-    expect_false(any(sapply(fixed_names, is.null)) )
-    ## no repeats
+    # no empty names
+    expect_false(any(sapply(fixed_names, is.null)))
+    # no repeats
     expect_false(any(table(fixed_names) > 1))
 
-    ## ensure all valid column names are retained
-    expect_equal( length(setdiff(Filter(Negate(is.na), colnames(dat)), fixed_names)), 0 )
+    # ensure all valid column names are retained
+    expect_equal(length(setdiff(Filter(function(a) ! (is.na(a) | a == ''),
+                                       colnames(dat)),
+                                fixed_names)), 0)
 })
 
-test_that("repair column names with some repeats", {
-    dat <- as_data_frame(diag(3))
-    colnames(dat) <- c('a', 'a', 'b')
+test_that("repair various name problems", {
+    # still-to-add:
+    # missing_dup1 = c('a', '', 'V1')
+    combos <- list(Null = NULL,
+                   Empty = c('', '', ''),
+                   EmptyWithNA = c('', NA, NA),
+                   Dup1 = c('a', 'a', 'b'),
+                   Evil1 = c('a', 'a', 'a1'),
+                   OneNA = c('a', 'b', NA),
+                   Missing2 = c('', '', 'b'),
+                   Vnames1 = c('V1', '', ''),
+                   Vnames2 = c('V2', '', ''),
+                   Vnames3 = c('V1', '', 'a'),
+                   VnamesDup1 = c('V1', 'V1', 'c'),
+                   VnamesDup2 = c('V1', 'V1', '')
+                   )
+    for (combo_name in names(combos)) {
+        dat <- data.frame(a = 1, b = 2, c = 3)
+        colnames(dat) <- combos[[ combo_name ]]
 
-    ## ensure we start with a "bad" state
-    expect_true( any(table(colnames(dat)) > 1) )
+        # ensure we start with a "bad" state
+        old_names <- colnames(dat)
+        expect_true(is.null(old_names) ||
+                        any(table(old_names) > 1) ||
+                        any(old_names == '' | is.na(old_names)),
+                    info = combo_name)
 
-    fixed_dat <- repair_names(dat)
-    fixed_names <- colnames(fixed_dat)
-    ## no empty names
-    expect_false(any(sapply(fixed_names, is.null)) )
-    ## no repeats
-    expect_false(any(table(fixed_names) > 1))
+        fixed_dat <- repair_names(dat)
+        fixed_names <- colnames(fixed_dat)
+        # no empty names
+        expect_false(any(sapply(fixed_names, is.null)), info = combo_name)
+        # no repeats
+        expect_false(any(table(fixed_names) > 1), info = combo_name)
 
-    ## ensure all valid column names are retained
-    expect_equal( length(setdiff(Filter(Negate(is.na), colnames(dat)), fixed_names)), 0 )
+        # ensure all valid column names are retained
+        expect_equal(length(setdiff(Filter(function(a) ! (is.na(a) | a == ''),
+                                           colnames(dat)),
+                                    fixed_names)), 0, info = combo_name)
+        message(sprintf('%12s:  "%12s" --> "%12s"',
+                        combo_name,
+                        paste(old_names, collapse = ', '),
+                        paste(fixed_names, collapse = ', ')))
+    }
 })
