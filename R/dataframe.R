@@ -103,7 +103,7 @@ lst_ <- function(xs) {
 #' with more efficient methods for matrices and data frames.
 #'
 #' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-#' classes), tbl_dfs (trivial!), lists, and matrices.
+#' classes), tbl_dfs (trivial!), lists, matrices, and tables.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -186,6 +186,12 @@ as_data_frame.matrix <- function(x, ...) {
     colnames(x) <- paste0("V", seq_len(ncol(x)))
   }
   x
+}
+
+#' @export
+#' @rdname as_data_frame
+as_data_frame.table <- function(x, ...) {
+  as_data_frame(as.data.frame(x, stringsAsFactors = FALSE))
 }
 
 #' @export
