@@ -184,7 +184,7 @@ as_data_frame.matrix <- function(x, ...) {
 
 #' Conversion between rownames and a column in data frame
 #'
-#' \code{add_rownames or rownames_to_column} convert row names to an explicit variable.
+#' \code{rownames_to_column} convert row names to an explicit variable.
 #'
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
@@ -193,10 +193,11 @@ as_data_frame.matrix <- function(x, ...) {
 #' @examples
 #' tbl_df(mtcars)
 #'
-#' (mtcars_tbl <- add_rownames(mtcars) )
-#'
+#' (mtcars_tbl <- rownames_to_column(tbl_df(mtcars) ))
 #' rownames_to_column(mtcars)
-add_rownames <- function(df, var = "rowname") {
+#'
+rownames_to_column <- function(df, var = "rowname") {
+
   stopifnot(is.data.frame(df))
 
   if (var %in% colnames(df) ) {
@@ -206,16 +207,13 @@ add_rownames <- function(df, var = "rowname") {
   rn <- as_data_frame(setNames(list(rownames(df)), var))
   rownames(df) <- NULL
 
-  as_data_frame(cbind(rn, df))
-
+  rn_df <- cbind(rn, df)
+  class(rn_df) <- class(df)
+  return (rn_df)
 }
 
-#' @rdname rownames
-#' @export
-rownames_to_column <- add_rownames
-
 #' \code{column_to_rownames} convert a column variable to row names. This is an
-#' inverted operation of add_rownames or rownames_to_column.
+#' inverted operation of rownames_to_column.
 #'
 #' @rdname rownames
 #' @export
