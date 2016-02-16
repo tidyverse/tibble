@@ -1,20 +1,5 @@
 context("repair_names")
 
-test_that("repair column names when none are provided", {
-    dat <- data.frame(a = 1, b = 2, c = 3)
-    colnames(dat) <- NULL
-
-    # ensure we start with a "bad" state
-    expect_null(colnames(dat))
-
-    fixed_dat <- repair_names(dat)
-    fixed_names <- colnames(fixed_dat)
-    # no empty names
-    expect_false(any(sapply(fixed_names, is.null)))
-    # no repeats
-    expect_false(any(table(fixed_names) > 1))
-})
-
 test_that("repair missing column names", {
     dat <- data.frame(a = 1, b = 2, c = 3)
     colnames(dat)[2] <- NA
@@ -37,7 +22,6 @@ test_that("repair missing column names", {
 
 test_that("repair various name problems", {
     # still-to-add:
-    # missing_dup1 = c('a', '', 'V1')
     combos <- list(Null = NULL,
                    Empty = c('', '', ''),
                    EmptyWithNA = c('', NA, NA),
@@ -64,18 +48,13 @@ test_that("repair various name problems", {
 
         fixed_dat <- repair_names(dat)
         fixed_names <- colnames(fixed_dat)
-        # no empty names
-        expect_false(any(sapply(fixed_names, is.null)), info = combo_name)
         # no repeats
         expect_false(any(table(fixed_names) > 1), info = combo_name)
 
         # ensure all valid column names are retained
-        expect_equal(length(setdiff(Filter(function(a) ! (is.na(a) | a == ''),
-                                           colnames(dat)),
-                                    fixed_names)), 0, info = combo_name)
-        message(sprintf('%12s:  "%12s" --> "%12s"',
-                        combo_name,
-                        paste(old_names, collapse = ', '),
-                        paste(fixed_names, collapse = ', ')))
+        if (! is.null(old_names)) {
+          valid <- ! is.na(old_names) & old_names != '' & ! duplicated(old_names)
+          expect_true(all(fixed_names[valid] == old_names[valid]))
+        }
     }
 })

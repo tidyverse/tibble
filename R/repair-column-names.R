@@ -12,21 +12,23 @@ repair_names <- function(x, prefix = "V", sep = "") {
   col_names <- colnames(x)
   col_names <-
     if (is.null(col_names)) {
-      col_names <- rep('', ncol(x))
+      rep('', ncol(x))
     } else {
       ifelse(is.na(col_names), '', col_names)
     }
-  sub_names <- col_names[ col_names != '' ]
+  blanks <- col_names == ''
+
+  sub_names <- col_names[!blanks]
   sub_names <- make.unique(sub_names, sep = sep)
-  col_names[ col_names != '' ] <- sub_names
+  col_names[!blanks] <- sub_names
 
-  nmissing <- sum(col_names == '')
-  new_names <- paste(prefix, 1:ceiling(1.5 * nmissing), sep = sep)
-  new_names <- head(setdiff(new_names,
-                            intersect(col_names, new_names)),
-                    n = sum(col_names == ''))
-
-  col_names[ col_names == '' ] <- new_names
+  if (any(blanks)) {
+    new_names <- paste(prefix, 1:ncol(x), sep = sep)
+    new_names <- head(setdiff(new_names,
+                              intersect(col_names, new_names)),
+                      n = sum(blanks))
+    col_names[blanks] <- new_names
+  }
 
   colnames(x) <- col_names
   x
