@@ -67,7 +67,7 @@ frame_data <- function(...) {
   frame_nrow <- n_elements / frame_ncol
 
   # Extract the columns from 'frame_rest'
-  frame_columns <- lapply(seq_len(frame_ncol), function(i) {
+  frame_col <- lapply(seq_len(frame_ncol), function(i) {
     indices <- seq.default(from = i, to = length(frame_rest), by = frame_ncol)
     col <- frame_rest[indices]
     if (all(vapply(col, length, integer(1L)) == 1L)) {
@@ -77,8 +77,8 @@ frame_data <- function(...) {
   })
 
   # Create a tbl_df and return it
-  names(frame_columns) <- frame_names
-  as_data_frame(frame_columns)
+  names(frame_col) <- frame_names
+  as_data_frame(frame_col)
 }
 
 #' @rdname frame_data
