@@ -67,7 +67,12 @@ frame_data <- function(...) {
   frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
   frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
     col <- frame_mat[, i]
-    if (is.list(col[[1]])) col else unlist(col)
+    if (any(vapply(col, function(x) is.list(x) || length(x) != 1L,
+                   logical(1L)))) {
+      col
+    } else {
+      unlist(col)
+    }
   })
 
   # Create a tbl_df and return it
