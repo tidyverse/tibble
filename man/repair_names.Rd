@@ -9,7 +9,7 @@ repair_names(x, prefix = "V", sep = "")
 \arguments{
 \item{x}{tbl, tbl_df, or data.frame}
 
-\item{prefix}{character, the prefix to use for new colum names}
+\item{prefix}{character, the prefix to use for new column names}
 
 \item{sep}{character, a character string to separate the terms. Not
 \code{NA_character_}.}

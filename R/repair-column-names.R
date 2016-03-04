@@ -3,7 +3,7 @@
 #' Ensure the tbl or data.frame has legitimate and optionally unique
 #' column names.
 #' @param x tbl, tbl_df, or data.frame
-#' @param prefix character, the prefix to use for new colum names
+#' @param prefix character, the prefix to use for new column names
 #' @param sep character, a character string to separate the terms. Not
 #'     \code{NA_character_}.
 #' @return data.frame with possibly-repaired column names
