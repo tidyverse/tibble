@@ -21,9 +21,9 @@ test_that("repair missing column names", {
 })
 
 test_that("repair various name problems", {
-    # still-to-add:
     combos <- list(Null = NULL,
                    Empty = c('', '', ''),
+                   Spaces = c('a', 'b', ' '),
                    EmptyWithNA = c('', NA, NA),
                    Dup1 = c('a', 'a', 'b'),
                    Evil1 = c('a', 'a', 'a1'),
@@ -43,18 +43,26 @@ test_that("repair various name problems", {
         old_names <- colnames(dat)
         expect_true(is.null(old_names) ||
                         any(table(old_names) > 1) ||
-                        any(old_names == '' | is.na(old_names)),
+                        any(old_names == '' | is.na(old_names)) ||
+                        any(grepl('^ +', old_names)),
                     info = combo_name)
 
         fixed_dat <- repair_names(dat)
         fixed_names <- colnames(fixed_dat)
+
         # no repeats
         expect_false(any(table(fixed_names) > 1), info = combo_name)
 
         # ensure all valid column names are retained
         if (! is.null(old_names)) {
-          valid <- ! is.na(old_names) & old_names != '' & ! duplicated(old_names)
-          expect_true(all(fixed_names[valid] == old_names[valid]))
+            valid <- ! is.na(old_names) & old_names != '' &
+                ! duplicated(old_names) & ! grepl('^ +', old_names)
+            expect_true(all(fixed_names[valid] == old_names[valid]))
         }
     }
+})
+
+test_that("check pathological cases", {
+    expect_null(repair_names(data.frame()))
+    expect_null(repair_names(data.frame(row.names = 1:10)))
 })

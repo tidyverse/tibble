@@ -9,12 +9,13 @@
 #' @return data.frame with possibly-repaired column names
 #' @export
 repair_names <- function(x, prefix = "V", sep = "") {
+  if (! isTRUE(ncol(x) > 0)) return()
   col_names <- colnames(x)
   col_names <-
     if (is.null(col_names)) {
       rep('', ncol(x))
     } else {
-      ifelse(is.na(col_names), '', col_names)
+      ifelse(is.na(col_names) | grepl('^ +$', col_names), '', col_names)
     }
   blanks <- col_names == ''
 
