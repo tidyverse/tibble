@@ -199,6 +199,7 @@ as_data_frame.NULL <- function(x, ...) {
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
 #' @export
+#' @importFrom stats setNames
 #' @examples
 #' tbl_df(mtcars)
 #'
