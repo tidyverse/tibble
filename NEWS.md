@@ -1,3 +1,10 @@
+Version 0.2-1 (2016-03-08)
+===
+
+- Use new-style `.travis.yml`
+- Fix NOTE from `R CMD check`.
+
+
 Version 0.2 (2016-03-02)
 ===
 

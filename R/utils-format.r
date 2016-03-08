@@ -33,6 +33,7 @@ dim_desc <- function(x) {
 
 #' @export
 #' @rdname formatting
+#' @importFrom stats setNames
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   rows <- nrow(x)
 
@@ -58,6 +59,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   return(structure(c(shrunk, list(width = width)), class = "trunc_mat"))
 }
 
+#' @importFrom stats setNames
 shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   rownames(df) <- NULL
 

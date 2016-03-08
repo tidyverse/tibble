@@ -58,6 +58,7 @@ glimpse.tbl <- function(x, width = getOption("width"), ...) {
 glimpse.data.frame <- glimpse.tbl
 
 #' @export
+#' @importFrom utils str
 glimpse.default <- function(x, width = getOption("width"), max.level = 3, ...) {
   str(x, width = width, max.level = max.level, ...)
   invisible(x)
