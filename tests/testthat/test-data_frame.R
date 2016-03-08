@@ -19,9 +19,12 @@ test_that("can't make data_frame containing data.frame or array", {
   expect_error(data_frame(diag(5)), "must be a 1d atomic vector or list")
 })
 
-test_that("null isn't a valid column", {
-  expect_error(data_frame(a = NULL))
-  expect_error(as_data_frame(list(a = NULL)), "must be a 1d atomic vector or list")
+test_that("bogus columns raise an error", {
+  expect_error(as_data_frame(list(1)), "named")
+  expect_error(data_frame(a = NULL), "1d atomic vector or list")
+  expect_error(data_frame(a = ~a), "1d atomic vector or list")
+  expect_error(data_frame(a = new.env()), "1d atomic vector or list")
+  expect_error(data_frame(a = quote(a)), "1d atomic vector or list")
 })
 
 test_that("length 1 vectors are recycled", {
@@ -33,12 +36,6 @@ test_that("length 1 vectors are recycled", {
   )
 })
 
-test_that("missing names are imputed from call", {
-  x <- 1:10
-  df <- data_frame(x, y = x)
-  expect_equal(tbl_vars(df), c("x", "y"))
-})
-
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- data_frame()
   expect_is(zero, "tbl_df")
@@ -48,11 +45,6 @@ test_that("empty input makes 0 x 0 tbl_df", {
 
 test_that("SE version", {
   expect_identical(data_frame_(list(a = ~1:10)), data_frame(a = 1:10))
-})
-
-test_that("is.tbl", {
-  expect_true(is.tbl(as_data_frame(iris)))
-  expect_false(is.tbl(iris))
 })
 
 # as_data_frame -----------------------------------------------------------
@@ -81,6 +73,7 @@ test_that("Zero column list makes 0 x 0 tbl_df", {
   expect_equal(dim(zero), c(0L, 0L))
 })
 
+<<<<<<< HEAD
 test_that("rownames_to_column keeps the tbl classes (#882)", {
   res <- rownames_to_column( mtcars, "Make&Model" )
   expect_equal( class(res), class(mtcars) )
@@ -106,15 +99,17 @@ test_that("column_to_rownames returns tbl", {
   expect_error(column_to_rownames( rownames_to_column( mtcars, var), "num2"),
                paste("This data frame has no column named num2.")  )
 
+=======
+test_that("NULL makes 0 x 0 tbl_df", {
+  nnnull <- as_data_frame(NULL)
+  expect_is(nnnull, "tbl_df")
+  expect_equal(dim(nnnull), c(0L, 0L))
 })
 
-test_that("matrix", {
-  expect_identical(as_data_frame(diag(3L)),
-                   as_data_frame(as.data.frame(diag(3L))))
-})
-
-test_that("as.tbl", {
-  expect_identical(as.tbl(data.frame()), data_frame())
+test_that("add_rownames keeps the tbl classes (#882)", {
+  res <- add_rownames( mtcars, "Make&Model" )
+  expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
+>>>>>>> krlmlr/master
 })
 
 # Validation --------------------------------------------------------------

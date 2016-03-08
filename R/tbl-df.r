@@ -35,19 +35,6 @@ tbl_df <- function(data) {
   as_data_frame(data)
 }
 
-#' @export
-as.tbl.data.frame <- function(x, ...) {
-  tbl_df(x)
-}
-
-#' @export
-tbl_vars.data.frame <- function(x) names(x)
-
-#' @export
-same_src.data.frame <- function(x, y) {
-  is.data.frame(y)
-}
-
 # Standard data frame methods --------------------------------------------------
 
 #' @export
@@ -55,7 +42,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   structure(x, class = "data.frame")
 }
 
-#' @rdname dplyr-formatting
+#' @rdname formatting
 #' @export
 print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   cat("Source: local data frame ", dim_desc(x), "\n", sep = "")
@@ -73,9 +60,12 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 }
 
 #' @export
-`[[.tbl_df` <- function(x, i) {
+`[[.tbl_df` <- function(x, i, exact = TRUE) {
   if (is.character(i) && !(i %in% names(x)))
     stop("Unknown name", call. = FALSE)
+  if (!exact) {
+    warning("exact ignored", call. = FALSE)
+  }
 
   .subset2(x, i)
 }

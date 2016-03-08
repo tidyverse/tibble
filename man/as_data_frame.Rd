@@ -2,6 +2,7 @@
 % Please edit documentation in R/dataframe.R
 \name{as_data_frame}
 \alias{as_data_frame}
+\alias{as_data_frame.NULL}
 \alias{as_data_frame.data.frame}
 \alias{as_data_frame.list}
 \alias{as_data_frame.matrix}
@@ -17,6 +18,8 @@ as_data_frame(x, ...)
 \method{as_data_frame}{list}(x, validate = TRUE, ...)
 
 \method{as_data_frame}{matrix}(x, ...)
+
+\method{as_data_frame}{NULL}(x, ...)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}
@@ -35,8 +38,8 @@ before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
 with more efficient methods for matrices and data frames.
 }
 \details{
-This is an S3 generic. dplyr includes methods for data frames (adds tbl_df
-classes), tbl_dfs (trivial!), grouped_dfs (ungroups), lists, and matrices.
+This is an S3 generic. tibble includes methods for data frames (adds tbl_df
+classes), tbl_dfs (trivial!), lists, and matrices.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)

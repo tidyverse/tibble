@@ -13,6 +13,8 @@
 #' @param x An object to glimpse at.
 #' @param width Width of output: defaults to the width of the console.
 #' @param ... Other arguments passed onto individual methods.
+#' @return x original x is (invisibly) returned, allowing \code{glimpse} to be
+#' used within a data pipe line.
 #' @export
 #' @examples
 #' glimpse(mtcars)
@@ -49,14 +51,17 @@ glimpse.tbl <- function(x, width = getOption("width"), ...) {
   truncated <- str_trunc(formatted, data_width)
 
   cat(paste0(var_names, truncated, collapse = "\n"), "\n", sep = "")
+  invisible(x)
 }
 
 #' @export
 glimpse.data.frame <- glimpse.tbl
 
 #' @export
+#' @importFrom utils str
 glimpse.default <- function(x, width = getOption("width"), max.level = 3, ...) {
   str(x, width = width, max.level = max.level, ...)
+  invisible(x)
 }
 
 str_trunc <- function(x, max_width) {

@@ -76,7 +76,6 @@ lst_ <- function(xs) {
     deparse2 <- function(x) paste(deparse(x$expr, 500L), collapse = "")
     defaults <- vapply(xs[missing_names], deparse2, character(1),
       USE.NAMES = FALSE)
-
     col_names[missing_names] <- defaults
   }
 
@@ -85,7 +84,10 @@ lst_ <- function(xs) {
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    output[[i]] <- lazyeval::lazy_eval(xs[[i]], output)
+    res <- lazyeval::lazy_eval(xs[[i]], output)
+    if (!is.null(res)) {
+      output[[i]] <-  res
+    }
     names(output)[i] <- col_names[[i]]
   }
 
@@ -100,8 +102,8 @@ lst_ <- function(xs) {
 #' before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
 #' with more efficient methods for matrices and data frames.
 #'
-#' This is an S3 generic. dplyr includes methods for data frames (adds tbl_df
-#' classes), tbl_dfs (trivial!), grouped_dfs (ungroups), lists, and matrices.
+#' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
+#' classes), tbl_dfs (trivial!), lists, and matrices.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -179,7 +181,17 @@ as_data_frame.list <- function(x, validate = TRUE, ...) {
 #' @export
 #' @rdname as_data_frame
 as_data_frame.matrix <- function(x, ...) {
-  as_data_frame(as.data.frame(x))
+  x <- matrixToDataFrame(x)
+  if (is.null(colnames(x))) {
+    colnames(x) <- paste0("V", seq_len(ncol(x)))
+  }
+  x
+}
+
+#' @export
+#' @rdname as_data_frame
+as_data_frame.NULL <- function(x, ...) {
+  as_data_frame(list())
 }
 
 #' Conversion between rownames and a column in data frame
@@ -189,7 +201,11 @@ as_data_frame.matrix <- function(x, ...) {
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
 #' @export
+<<<<<<< HEAD
 #' @rdname rownames
+=======
+#' @importFrom stats setNames
+>>>>>>> krlmlr/master
 #' @examples
 #' tbl_df(mtcars)
 #'

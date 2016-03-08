@@ -1,3 +1,19 @@
+Version 0.2 (2016-03-02)
+===
+
+- Functions related to `tbl` and `src` stay in `dplyr` (#26). Remove unused `make_tbl()`.
+- Non-scalar input to `frame_data()` and `tibble()` (including lists) creates list-valued columns (#7).
+- Use C++ implementation for `as_data_frame.matrix()` (#14). Also add former `matrixToDataFrame()` tests, and fix unwanted conversion to factor.
+- `as_data_frame(NULL)` is 0-row 0-column data frame (#17, @jennybc). `frame_data()` and `tibble()` create empty `data_frame` if no rows are given (#20).
+- `data_frame(NULL)` raises error "must be a 1d atomic vector or list".
+- `lst(NULL)` doesn't raise an error anymore (#17, @jennybc), but always uses deparsed expression as name (even for `NULL`).
+- `trunc_mat()` and `print()` use `width` argument also for zero-row and zero-column data frames (#18).
+- `glimpse()` now (invisibly) returns `x`, so it can be used within a chain of `dplyr` verbs (@edwindj).
+- `base::getElement()` now works with tibbles (#9).
+- Remove spurious usage of "dplyr" in documentation (#3).
+- Almost full test coverage.
+
+
 tibble 0.1
 ==========
 
