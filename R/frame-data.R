@@ -67,8 +67,7 @@ frame_data <- function(...) {
   frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
   frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
     col <- frame_mat[, i]
-    if (any(vapply(col, function(x) is.list(x) || length(x) != 1L,
-                   logical(1L)))) {
+    if (any(vapply(col, needs_list_col, logical(1L)))) {
       col
     } else {
       unlist(col)
