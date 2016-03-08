@@ -3,8 +3,9 @@ Package: tibble
 Type: Package
 Version: 0.2-2
 Date: 2016-03-08
-Title: Simple data frames
-Description: Data frames and data sources in "dplyr" style.
+Title: Simple Data Frames
+Description: Provides a 'tbl_df' class that offers better checking and
+        printing capabilities than traditional data frames.
 Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role
         = "aut"), person("Romain", "Francois", ,
         "romain@r-enthusiasts.com", role = "aut"), person("Kirill",
