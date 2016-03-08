@@ -201,11 +201,8 @@ as_data_frame.NULL <- function(x, ...) {
 #' @param df Input data frame with rownames.
 #' @param var Name of variable to use
 #' @export
-<<<<<<< HEAD
 #' @rdname rownames
-=======
 #' @importFrom stats setNames
->>>>>>> krlmlr/master
 #' @examples
 #' tbl_df(mtcars)
 #'

@@ -33,11 +33,6 @@ S3method(type_sum,logical)
 S3method(type_sum,matrix)
 S3method(type_sum,numeric)
 export(add_row)
-<<<<<<< HEAD
-export(as.tbl)
-=======
-export(add_rownames)
->>>>>>> krlmlr/master
 export(as_data_frame)
 export(column_to_rownames)
 export(data_frame)
@@ -48,16 +43,7 @@ export(glimpse)
 export(knit_print.trunc_mat)
 export(lst)
 export(lst_)
-<<<<<<< HEAD
 export(rownames_to_column)
-export(same_src)
-export(src)
-export(src_df)
-export(src_local)
-export(src_tbls)
-export(tbl)
-=======
->>>>>>> krlmlr/master
 export(tbl_df)
 export(tibble)
 export(trunc_mat)

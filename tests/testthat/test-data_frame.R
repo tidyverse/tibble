@@ -73,7 +73,7 @@ test_that("Zero column list makes 0 x 0 tbl_df", {
   expect_equal(dim(zero), c(0L, 0L))
 })
 
-<<<<<<< HEAD
+
 test_that("rownames_to_column keeps the tbl classes (#882)", {
   res <- rownames_to_column( mtcars, "Make&Model" )
   expect_equal( class(res), class(mtcars) )
@@ -98,18 +98,20 @@ test_that("column_to_rownames returns tbl", {
   expect_error(column_to_rownames(res1), "This data frame already has row names.")
   expect_error(column_to_rownames( rownames_to_column( mtcars, var), "num2"),
                paste("This data frame has no column named num2.")  )
+  })
 
-=======
+
 test_that("NULL makes 0 x 0 tbl_df", {
   nnnull <- as_data_frame(NULL)
   expect_is(nnnull, "tbl_df")
   expect_equal(dim(nnnull), c(0L, 0L))
 })
 
-test_that("add_rownames keeps the tbl classes (#882)", {
-  res <- add_rownames( mtcars, "Make&Model" )
+test_that("rownames_to_column keeps the tbl classes (#882)", {
+  mtcars <- tbl_df(mtcars)
+  res <- rownames_to_column( mtcars, "Make&Model" )
   expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
->>>>>>> krlmlr/master
+
 })
 
 # Validation --------------------------------------------------------------
