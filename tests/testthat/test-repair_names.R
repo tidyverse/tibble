@@ -5,12 +5,10 @@ test_that("repair missing column names", {
   colnames(dat)[2] <- NA
 
   # ensure we start with a "bad" state
-  expect_true(any(sapply(colnames(dat), is.na)))
+  expect_true(any(is.na(colnames(dat))))
 
   fixed_dat <- repair_names(dat)
   fixed_names <- colnames(fixed_dat)
-  # no empty names
-  expect_false(any(sapply(fixed_names, is.null)))
   # no repeats
   expect_false(any(table(fixed_names) > 1))
 
@@ -54,6 +52,24 @@ test_that("repair various name problems", {
     expect_false(any(table(fixed_names) > 1), info = combo_name)
 
     # ensure all valid column names are retained
+    if (! is.null(old_names)) {
+      valid <- ! is.na(old_names) & old_names != '' &
+        ! duplicated(old_names) & ! grepl('^ +', old_names)
+      expect_true(all(fixed_names[valid] == old_names[valid]))
+    }
+
+    #################################
+    # same test with a list
+    dat <- list(a = 1, b = 2, c = 3)
+    names(dat) <- combos[[ combo_name ]]
+
+    fixed_dat <- repair_names(dat)
+    fixed_names <- names(fixed_dat)
+
+    # no repeats
+    expect_false(any(table(fixed_names) > 1), info = combo_name)
+
+    # ensure all valid names are retained
     if (! is.null(old_names)) {
       valid <- ! is.na(old_names) & old_names != '' &
         ! duplicated(old_names) & ! grepl('^ +', old_names)
