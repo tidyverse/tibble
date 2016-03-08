@@ -15,3 +15,7 @@ is_1d <- function(x) {
   # dimension check is for matrices and data.frames
   (is_atomic(x) || is.list(x)) && length(dim(x)) <= 1
 }
+
+needs_list_col <- function(x) {
+  is.list(x) || length(x) != 1L
+}
