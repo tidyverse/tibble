@@ -1,3 +1,10 @@
+Version 0.2-2 (2016-03-08)
+===
+
+- `frame_data()` now also creates a list column if one of the entries is a list (#32).
+- New `rownames_to_column()` and `column_to_rownames()` functions, replace `add_rownames()` (#11, @zhilongjia).
+
+
 Version 0.2-1 (2016-03-08)
 ===
 
