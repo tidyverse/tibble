@@ -204,11 +204,10 @@ as_data_frame.NULL <- function(x, ...) {
 #' @rdname rownames
 #' @importFrom stats setNames
 #' @examples
-#' tbl_df(mtcars)
-#'
-#' (mtcars_tbl <- rownames_to_column(tbl_df(mtcars) ))
 #' rownames_to_column(mtcars)
 #'
+#' mtcars_tbl <- rownames_to_column(tbl_df(mtcars))
+#' mtcars_tbl
 rownames_to_column <- function(df, var = "rowname") {
 
   stopifnot(is.data.frame(df))
@@ -226,14 +225,13 @@ rownames_to_column <- function(df, var = "rowname") {
 }
 
 #' \code{column_to_rownames} convert a column variable to row names. This is an
-#' inverted operation of rownames_to_column.
+#' inverted operation of \code{rownames_to_column}.
 #'
 #' @rdname rownames
 #' @export
 #' @examples
 #'
 #' column_to_rownames(mtcars_tbl)
-#'
 column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 

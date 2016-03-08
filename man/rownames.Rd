@@ -18,16 +18,14 @@ column_to_rownames(df, var = "rowname")
 \code{rownames_to_column} convert row names to an explicit variable.
 
 \code{column_to_rownames} convert a column variable to row names. This is an
-inverted operation of rownames_to_column.
+inverted operation of \code{rownames_to_column}.
 }
 \examples{
-tbl_df(mtcars)
-
-(mtcars_tbl <- rownames_to_column(tbl_df(mtcars) ))
 rownames_to_column(mtcars)
 
+mtcars_tbl <- rownames_to_column(tbl_df(mtcars))
+mtcars_tbl
 
 column_to_rownames(mtcars_tbl)
-
 }
 
