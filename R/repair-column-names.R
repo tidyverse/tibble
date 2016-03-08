@@ -9,28 +9,26 @@
 #' @return data.frame with possibly-repaired column names
 #' @export
 repair_names <- function(x, prefix = "V", sep = "") {
-  if (! isTRUE(ncol(x) > 0)) return()
-  col_names <- colnames(x)
-  col_names <-
-    if (is.null(col_names)) {
-      rep('', ncol(x))
+  if (! isTRUE(length(x) > 0)) return(x)
+  xnames <- names(x)
+  xnames <-
+    if (is.null(xnames)) {
+      rep('', length(x))
     } else {
-      ifelse(is.na(col_names) | grepl('^ +$', col_names), '', col_names)
+      ifelse(is.na(xnames) | grepl('^ +$', xnames), '', xnames)
     }
-  blanks <- col_names == ''
+  blanks <- xnames == ''
 
-  sub_names <- col_names[!blanks]
+  sub_names <- xnames[!blanks]
   sub_names <- make.unique(sub_names, sep = sep)
-  col_names[!blanks] <- sub_names
+  xnames[!blanks] <- sub_names
 
   if (any(blanks)) {
-    new_names <- paste(prefix, 1:ncol(x), sep = sep)
-    new_names <- head(setdiff(new_names,
-                              intersect(col_names, new_names)),
-                      n = sum(blanks))
-    col_names[blanks] <- new_names
+    new_names <- paste(prefix, 1:length(x), sep = sep)
+    new_names <- head(setdiff(new_names, xnames), n = sum(blanks))
+    xnames[blanks] <- new_names
   }
 
-  colnames(x) <- col_names
+  names(x) <- xnames
   x
 }

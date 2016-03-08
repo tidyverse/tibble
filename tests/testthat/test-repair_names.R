@@ -63,6 +63,8 @@ test_that("repair various name problems", {
 })
 
 test_that("check pathological cases", {
-  expect_null(repair_names(data.frame()))
-  expect_null(repair_names(data.frame(row.names = 1:10)))
+  df <- data.frame()
+  expect_identical(repair_names(df), df)
+  df <- data.frame(row.names = 1:3)
+  expect_identical(repair_names(df), df)
 })
