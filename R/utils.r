@@ -21,13 +21,15 @@ needs_list_col <- function(x) {
 }
 
 tibble_opt <- function(x) {
-  getOption(paste0("tibble.", x)) %||%
+  x_tibble <- paste0("tibble.", x)
+  getOption(x_tibble) %||%
   if (!is.null(res))
     return(res)
 
-  res <- getOption(paste0("dplyr.", x))
+  x_dplyr <- paste0("dplyr.", x)
+  res <- getOption(x_dplyr)
   if (!is.null(res))
     return(res)
 
-  op.tibble[[x]]
+  op.tibble[[x_tibble]]
 }
