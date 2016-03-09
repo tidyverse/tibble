@@ -2,8 +2,9 @@
 % Please edit documentation in R/tibble.R
 \docType{package}
 \name{tibble-package}
-\title{Simple data frames}
+\title{Simple Data Frames}
 \description{
-Data frames and data sources in "dplyr" style.
+Provides a 'tbl_df' class that offers better checking and
+printing capabilities than traditional data frames.
 }
 
