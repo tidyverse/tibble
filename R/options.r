@@ -15,13 +15,19 @@
   #' \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
   #'   \code{width} option).}
   tibble.width = NULL
-#' }
+  #' }
 ))
 
-.onLoad <- function(libname, pkgname) {
-  op <- options()
-  toset <- !(names(op.tibble) %in% names(op))
-  if(any(toset)) options(op.tibble[toset])
+tibble_opt <- function(x) {
+  x_tibble <- paste0("tibble.", x)
+  res <- getOption(x_tibble)
+  if (!is.null(res))
+    return(res)
 
-  invisible()
+  x_dplyr <- paste0("dplyr.", x)
+  res <- getOption(x_dplyr)
+  if (!is.null(res))
+    return(res)
+
+  op.tibble[[x_tibble]]
 }
