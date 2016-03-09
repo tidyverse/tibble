@@ -2,11 +2,11 @@
 #'
 #' @param x Object to show.
 #' @param n Number of rows to show. If \code{NULL}, the default, will print
-#'   all rows if less than option \code{dplyr.print_max}. Otherwise, will
-#'   print \code{dplyr.print_min}
+#'   all rows if less than option \code{tibble.print_max}. Otherwise, will
+#'   print \code{tibble.print_min}
 #' @param width Width of text output to generate. This defaults to NULL, which
 #'   means use \code{getOption("width")} and only display the columns that
-#'   fit on one screen. You can also set \code{options(dplyr.width = Inf)} to
+#'   fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 #'   override this default and always print all columns.
 #' @keywords internal
 #' @examples
