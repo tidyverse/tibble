@@ -19,11 +19,8 @@
 #' @examples
 #' glimpse(mtcars)
 #'
-#' \donttest{
 #' if (require("Lahman")) {
-#'   batting <- tbl(src_df("Lahman"), "Batting")
-#'   glimpse(batting)
-#' }
+#'   glimpse(Lahman::Batting)
 #' }
 glimpse <- function(x, width = getOption("width"), ...) {
   UseMethod("glimpse")
