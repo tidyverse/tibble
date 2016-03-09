@@ -3,11 +3,13 @@
 #' @param x Object to show.
 #' @param n Number of rows to show. If \code{NULL}, the default, will print
 #'   all rows if less than option \code{tibble.print_max}. Otherwise, will
-#'   print \code{tibble.print_min}
+#'   print \code{tibble.print_min} rows.
 #' @param width Width of text output to generate. This defaults to NULL, which
-#'   means use \code{getOption("width")} and only display the columns that
+#'   means use \code{getOption("tibble.width")} or (if also NULL)
+#'   \code{getOption("width")}; the latter displays only the columns that
 #'   fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 #'   override this default and always print all columns.
+#' @seealso \link{tibble-package}
 #' @keywords internal
 #' @examples
 #' dim_desc(mtcars)

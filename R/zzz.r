@@ -1,5 +1,7 @@
 #' @name tibble-package
 #' @section Package options:
+#' Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
+#' (indirectly) by \code{\link{print.tbl_df}}.
 #' \describe{
 (op.tibble <- lst(
   #' \item{\code{tibble.print_max}}{Row number threshold: Maximum number of rows
