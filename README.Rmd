@@ -19,5 +19,9 @@ knitr::opts_chunk$set(
 Data frames in `dplyr` style.
 
 ```{r}
-tibble::tbl_df(iris)
+library(tibble)
+tbl_df(iris)
+glimpse(iris)
+head(rownames_to_column(mtcars, "model"))
+trunc_mat(iris)
 ```
