@@ -20,7 +20,7 @@ needs_list_col <- function(x) {
   is.list(x) || length(x) != 1L
 }
 
-tibble_opt <- function(x, default) {
+tibble_opt <- function(x) {
   getOption(paste0("tibble.", x)) %||%
   if (!is.null(res))
     return(res)
@@ -29,5 +29,5 @@ tibble_opt <- function(x, default) {
   if (!is.null(res))
     return(res)
 
-  default
+  op.tibble[[x]]
 }
