@@ -19,3 +19,15 @@ is_1d <- function(x) {
 needs_list_col <- function(x) {
   is.list(x) || length(x) != 1L
 }
+
+tibble_opt <- function(x, default) {
+  getOption(paste0("tibble.", x)) %||%
+  if (!is.null(res))
+    return(res)
+
+  res <- getOption(paste0("dplyr.", x))
+  if (!is.null(res))
+    return(res)
+
+  default
+}
