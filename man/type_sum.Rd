@@ -2,7 +2,7 @@
 % Please edit documentation in R/type-sum.r
 \name{type_sum}
 \alias{type_sum}
-\title{Provide a succint summary of a type}
+\title{Provide a succinct summary of a type}
 \usage{
 type_sum(x)
 }

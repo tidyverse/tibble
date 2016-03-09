@@ -1,4 +1,4 @@
-#' Provide a succint summary of a type
+#' Provide a succinct summary of a type
 #'
 #' All methods should return a string with four or less characters, suitable
 #' for succinctly display column types.
