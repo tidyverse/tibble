@@ -22,7 +22,7 @@ needs_list_col <- function(x) {
 
 tibble_opt <- function(x) {
   x_tibble <- paste0("tibble.", x)
-  getOption(x_tibble) %||%
+  res <- getOption(x_tibble)
   if (!is.null(res))
     return(res)
 
