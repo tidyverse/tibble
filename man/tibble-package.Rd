@@ -2,8 +2,31 @@
 % Please edit documentation in R/tibble.R
 \docType{package}
 \name{tibble-package}
-\title{Simple data frames}
+\alias{tibble-package}
+\title{Simple Data Frames}
 \description{
-Data frames and data sources in "dplyr" style.
+Provides a 'tbl_df' class that offers better checking and
+printing capabilities than traditional data frames.
+}
+\section{Getting started}{
+
+See \code{\link{tbl_df}} for an introduction,
+\code{\link{data_frame}} and \code{\link{frame_data}} for construction,
+\code{\link{as_data_frame}} for coercion,
+and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
+}
+
+\section{Package options}{
+
+Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
+(indirectly) by \code{\link{print.tbl_df}}.
+\describe{
+\item{\code{tibble.print_max}}{Row number threshold: Maximum number of rows
+  printed. Set to \code{Inf} to always print all rows.  Default: 20.}
+\item{\code{tibble.print_min}}{Number of rows printed if row number
+  threshold is exceeded. Default: 10.}
+\item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
+  \code{width} option).}
+}
 }
 

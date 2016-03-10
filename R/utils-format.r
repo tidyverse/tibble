@@ -2,12 +2,14 @@
 #'
 #' @param x Object to show.
 #' @param n Number of rows to show. If \code{NULL}, the default, will print
-#'   all rows if less than option \code{dplyr.print_max}. Otherwise, will
-#'   print \code{dplyr.print_min}
+#'   all rows if less than option \code{tibble.print_max}. Otherwise, will
+#'   print \code{tibble.print_min} rows.
 #' @param width Width of text output to generate. This defaults to NULL, which
-#'   means use \code{getOption("width")} and only display the columns that
-#'   fit on one screen. You can also set \code{options(dplyr.width = Inf)} to
+#'   means use \code{getOption("tibble.width")} or (if also NULL)
+#'   \code{getOption("width")}; the latter displays only the columns that
+#'   fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 #'   override this default and always print all columns.
+#' @seealso \link{tibble-package}
 #' @keywords internal
 #' @examples
 #' dim_desc(mtcars)
@@ -38,8 +40,8 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   rows <- nrow(x)
 
   if (is.null(n)) {
-    if (is.na(rows) || rows > getOption("dplyr.print_max", 20L)) {
-      n <- getOption("dplyr.print_min", 10L)
+    if (is.na(rows) || rows > tibble_opt("print_max")) {
+      n <- tibble_opt("print_min")
     } else {
       n <- rows
     }
@@ -49,7 +51,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   var_types <- vapply(df, type_sum, character(1))
   var_names <- names(df)
 
-  width <- width %||% getOption("dplyr.width", NULL) %||% getOption("width")
+  width <- width %||% tibble_opt("width") %||% getOption("width")
   if (ncol(df) == 0 || nrow(df) == 0) {
     shrunk <- list(table = NULL, extra = setNames(var_types, var_names))
   } else {

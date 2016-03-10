@@ -32,11 +32,8 @@ the underlying data, even when applied to a remote data source.)
 \examples{
 glimpse(mtcars)
 
-\donttest{
 if (require("Lahman")) {
-  batting <- tbl(src_df("Lahman"), "Batting")
-  glimpse(batting)
-}
+  glimpse(Lahman::Batting)
 }
 }
 
