@@ -102,10 +102,10 @@ First release. Contains functions related to table sources, the `tbl` class and 
 pre-tibble
 ==========
 
-* Dplyr uses `setOldClass(c("tbl_df", "tbl", "data.frame"))` to help with S4 
+* Uses `setOldClass(c("tbl_df", "tbl", "data.frame"))` to help with S4
   (#969).
 
-*  `glimpse` now (invisibly) returns its argument (#1570).
+*  `glimpse()` now (invisibly) returns its argument (#1570).
 
 * `tbl_df` automatically generates column names (#1606).
 
