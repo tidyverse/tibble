@@ -109,6 +109,18 @@ test_that("NULL makes 0 x 0 tbl_df", {
   expect_equal(dim(nnnull), c(0L, 0L))
 })
 
+
+test_that("Can convert tables to data frame", {
+  mtcars_table <- xtabs(mtcars, formula = ~vs+am+cyl)
+
+  mtcars_tbl <- as_data_frame(mtcars_table)
+  expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "n"))
+
+  mtcars_tbl <- as_data_frame(mtcars_table, "Freq")
+  expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "Freq"))
+})
+
+
 # Validation --------------------------------------------------------------
 
 test_that("2d object isn't a valid column", {

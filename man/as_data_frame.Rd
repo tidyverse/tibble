@@ -6,6 +6,7 @@
 \alias{as_data_frame.data.frame}
 \alias{as_data_frame.list}
 \alias{as_data_frame.matrix}
+\alias{as_data_frame.table}
 \alias{as_data_frame.tbl_df}
 \title{Coerce lists and matrices to data frames.}
 \usage{
@@ -19,6 +20,8 @@ as_data_frame(x, ...)
 
 \method{as_data_frame}{matrix}(x, ...)
 
+\method{as_data_frame}{table}(x, n = "n", ...)
+
 \method{as_data_frame}{NULL}(x, ...)
 }
 \arguments{
@@ -30,6 +33,8 @@ as_data_frame(x, ...)
 frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
 frame and you want to save some time.}
+
+\item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
 \code{as.data.frame} is effectively a thin wrapper around \code{data.frame},
@@ -39,7 +44,7 @@ with more efficient methods for matrices and data frames.
 }
 \details{
 This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-classes), tbl_dfs (trivial!), lists, and matrices.
+classes), tbl_dfs (trivial!), lists, matrices, and tables.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
