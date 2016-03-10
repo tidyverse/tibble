@@ -1,3 +1,14 @@
+Version 0.2-3 (2016-03-10)
+===
+
+- New function `repair_names()` fixes missing and duplicate names (#10, #15, @r2evans).
+- Finer coverage analysis (#37).
+- Use `tibble` prefix for options (#13, #36).
+- Expand README.
+- Fix typos in documentation.
+- Remove use of `src()` from examples.
+
+
 Version 0.2-2 (2016-03-08)
 ===
 

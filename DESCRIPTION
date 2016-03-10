@@ -1,15 +1,16 @@
 Encoding: UTF-8
 Package: tibble
 Type: Package
-Version: 0.2-2
-Date: 2016-03-08
+Version: 0.2-3
+Date: 2016-03-10
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class that offers better checking and
-    printing capabilities than traditional data frames.
-Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role = "aut"),
-    person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "aut"),
-    person("Kirill", "Müller", , "krlmlr+r@mailbox.org", role = c("aut", "cre")),
-    person("RStudio", role = "cph") )
+        printing capabilities than traditional data frames.
+Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role
+        = "aut"), person("Romain", "Francois", ,
+        "romain@r-enthusiasts.com", role = "aut"), person("Kirill",
+        "Müller", , "krlmlr+r@mailbox.org", role = c("aut", "cre")),
+        person("RStudio", role = "cph") )
 URL: https://github.com/krlmlr/tibble
 BugReports: https://github.com/krlmlr/tibble/issues
 Depends: R (>= 3.1.2)
