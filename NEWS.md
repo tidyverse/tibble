@@ -1,32 +1,41 @@
-Version 0.1-4 (2016-01-07)
+Version 0.2-3 (2016-03-10)
 ===
 
-- Non-scalar input to `frame_data()` and `tibble()` creates list-valued columns (#7).
-- `frame_data()` and `tibble()` create empty `data_frame` if no rows are given (#20).
-- `as_data_frame(NULL)` is 0-row 0-column data frame (#17, @jennybc).
+- New function `repair_names()` fixes missing and duplicate names (#10, #15, @r2evans).
+- Finer coverage analysis (#37).
+- Use `tibble` prefix for options (#13, #36).
+- Expand README.
+- Fix typos in documentation.
+- Remove use of `src()` from examples.
+
+
+Version 0.2-2 (2016-03-08)
+===
+
+- `frame_data()` now also creates a list column if one of the entries is a list (#32).
+- New `rownames_to_column()` and `column_to_rownames()` functions, replace `add_rownames()` (#11, @zhilongjia).
+
+
+Version 0.2-1 (2016-03-08)
+===
+
+- Use new-style `.travis.yml`
+- Fix NOTE from `R CMD check`.
+
+
+Version 0.2 (2016-03-02)
+===
+
+- Functions related to `tbl` and `src` stay in `dplyr` (#26). Remove unused `make_tbl()`.
+- Non-scalar input to `frame_data()` and `tibble()` (including lists) creates list-valued columns (#7).
+- Use C++ implementation for `as_data_frame.matrix()` (#14). Also add former `matrixToDataFrame()` tests, and fix unwanted conversion to factor.
+- `as_data_frame(NULL)` is 0-row 0-column data frame (#17, @jennybc). `frame_data()` and `tibble()` create empty `data_frame` if no rows are given (#20).
+- `data_frame(NULL)` raises error "must be a 1d atomic vector or list".
 - `lst(NULL)` doesn't raise an error anymore (#17, @jennybc), but always uses deparsed expression as name (even for `NULL`).
 - `trunc_mat()` and `print()` use `width` argument also for zero-row and zero-column data frames (#18).
-
-
-Version 0.1-3 (2016-01-05)
-===
-
-- Use C++ implementation for `as_data_frame.matrix()` (#14)
-- `as_data_frame(NULL)` returns `NULL` (#16, @jennybc)
-
-
-Version 0.1-2 (2015-12-30)
-===
-
-- Add former `matrixToDataFrame()` tests, and fix unwanted conversion to factor.
+- `glimpse()` now (invisibly) returns `x`, so it can be used within a chain of `dplyr` verbs (@edwindj).
 - `base::getElement()` now works with tibbles (#9).
-
-
-Version 0.1-1 (2015-12-30)
-===
-
 - Remove spurious usage of "dplyr" in documentation (#3).
-- Remove unused `make_tbl()`.
 - Almost full test coverage.
 
 

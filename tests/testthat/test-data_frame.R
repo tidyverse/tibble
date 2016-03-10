@@ -36,12 +36,6 @@ test_that("length 1 vectors are recycled", {
   )
 })
 
-test_that("missing names are imputed from call", {
-  x <- 1:10
-  df <- data_frame(x, y = x)
-  expect_equal(tbl_vars(df), c("x", "y"))
-})
-
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- data_frame()
   expect_is(zero, "tbl_df")
@@ -51,11 +45,6 @@ test_that("empty input makes 0 x 0 tbl_df", {
 
 test_that("SE version", {
   expect_identical(data_frame_(list(a = ~1:10)), data_frame(a = 1:10))
-})
-
-test_that("is.tbl", {
-  expect_true(is.tbl(as_data_frame(iris)))
-  expect_false(is.tbl(iris))
 })
 
 # as_data_frame -----------------------------------------------------------
@@ -84,19 +73,40 @@ test_that("Zero column list makes 0 x 0 tbl_df", {
   expect_equal(dim(zero), c(0L, 0L))
 })
 
+
+test_that("rownames_to_column keeps the tbl classes (#882)", {
+  res <- rownames_to_column( mtcars, "Make&Model" )
+  expect_equal( class(res), class(mtcars) )
+  expect_error(rownames_to_column( mtcars, "wt"),
+               paste("There is a column named wt already!")  )
+  res1 <- rownames_to_column( tbl_df(mtcars), "Make&Model" )
+  expect_equal( class(res1), class(tbl_df(mtcars)) )
+  expect_error(rownames_to_column( mtcars, "wt"),
+               paste("There is a column named wt already!")  )
+})
+
+test_that("column_to_rownames returns tbl", {
+  var <- "car"
+  mtcars <- tbl_df(mtcars)
+  res <- column_to_rownames( rownames_to_column( mtcars, var), var)
+  expect_equal( class(res), class(mtcars) )
+  expect_equal(rownames(res), rownames(mtcars))
+  expect_equal(res, mtcars)
+  expect_false(var %in% names(res))
+
+  mtcars$num <- rev(seq_len(nrow(mtcars)))
+  res1 <- column_to_rownames( rownames_to_column( mtcars), var="num")
+  expect_equal(rownames(res1), as.character(mtcars$num) )
+  expect_error(column_to_rownames(res1), "This data frame already has row names.")
+  expect_error(column_to_rownames( rownames_to_column( mtcars, var), "num2"),
+               paste("This data frame has no column named num2.")  )
+})
+
+
 test_that("NULL makes 0 x 0 tbl_df", {
   nnnull <- as_data_frame(NULL)
   expect_is(nnnull, "tbl_df")
   expect_equal(dim(nnnull), c(0L, 0L))
-})
-
-test_that("add_rownames keeps the tbl classes (#882)", {
-  res <- add_rownames( mtcars, "Make&Model" )
-  expect_equal( class(res), c("tbl_df","tbl", "data.frame"))
-})
-
-test_that("as.tbl", {
-  expect_identical(as.tbl(data.frame()), data_frame())
 })
 
 # Validation --------------------------------------------------------------

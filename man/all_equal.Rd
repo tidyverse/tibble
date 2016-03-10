@@ -31,7 +31,7 @@ convert factor to character and integer to double.}
 \description{
 When comparing two \code{tbl_df} using \code{\link{all.equal}}, column and
 row order is ignored by default, and types are not coerced.  The \code{dplyr}
-package provides a much more efficient implementation for this funcitonality.
+package provides a much more efficient implementation for this functionality.
 }
 \examples{
 scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
