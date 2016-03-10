@@ -8,7 +8,7 @@ r:
   - devel
 
 r_github_packages:
-  - jimhester/covr
+  - jimhester/covr#154
 
 after_success:
   - Rscript -e 'covr::codecov()'
