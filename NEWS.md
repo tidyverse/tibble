@@ -97,3 +97,55 @@ First release. Contains functions related to table sources, the `tbl` class and 
 - `lst()`, `lst_()`
 - `add_row()`
 - `add_rownames()`
+
+
+pre-tibble
+==========
+
+* Uses `setOldClass(c("tbl_df", "tbl", "data.frame"))` to help with S4
+  (#969).
+
+*  `glimpse()` now (invisibly) returns its argument (#1570).
+
+* `tbl_df` automatically generates column names (#1606).
+
+* `glimpse()` is now a generic. The default method dispatches to `str()`
+  (#1325).
+
+* `tbl_df`s gain `$` and `[[` methods that are ~5x faster than the defaults,
+  never do partial matching (#1504), and throw an error if the variable
+  does not exist.
+
+* `all_equal()` allows to compare data frames ignoring row and column order,
+  and optionally ignoring minor differences in type (e.g. int vs. double)
+  (#821).
+
+* `as_data_frame()` is now an S3 generic with methods for lists (the old
+  `as_data_frame()`), data frames (trivial), and matrices (with efficient
+  C++ implementation) (#876).
+
+* New `add_row()` makes it easy to add a new row to data frame (#1021)
+
+* New `lst()` and `lst_()` which create lists in the same way that
+  `data_frame()` and `data_frame_()` create data frames (#1290).
+
+* The internals of `data_frame()` and `as_data_frame()` have been aligned,
+  so `as_data_frame()` will now automatically recycle length-1 vectors.
+  Both functions give more informative error messages if you attempting to
+  create an invalid data frame. You can no longer create a data frame with
+  duplicated names (#820).
+
+* `vignette("data_frames")` describes the difference between tbl_dfs and
+  regular data frames (#1468).
+
+* `print.tbl_df()` is considerably faster if you have very wide data frames.
+  It will now also only list the first 100 additional variables not already
+  on screen - control this with the new `n_extra` parameter to `print()`
+  (#1161).
+
+* `data_frame()` and `as_data_frame()` now check that you don't have any
+  `POSIXlt` columns, and tell you to use `POSIXct` if you do (#813).
+
+* `trunc_mat()` correctly prints the type of list columns (#1379)
+
+* `frame_data()` properly constructs rectangular tables. (#1377, @kevinushey)
