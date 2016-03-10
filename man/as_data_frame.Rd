@@ -20,7 +20,7 @@ as_data_frame(x, ...)
 
 \method{as_data_frame}{matrix}(x, ...)
 
-\method{as_data_frame}{table}(x, ...)
+\method{as_data_frame}{table}(x, n = "n", ...)
 
 \method{as_data_frame}{NULL}(x, ...)
 }
@@ -33,6 +33,8 @@ as_data_frame(x, ...)
 frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
 frame and you want to save some time.}
+
+\item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
 \code{as.data.frame} is effectively a thin wrapper around \code{data.frame},

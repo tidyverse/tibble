@@ -189,6 +189,7 @@ as_data_frame.matrix <- function(x, ...) {
 }
 
 #' @export
+#' @param n Name for count column, default: \code{"n"}.
 #' @rdname as_data_frame
 as_data_frame.table <- function(x, n = "n", ...) {
   as_data_frame(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
