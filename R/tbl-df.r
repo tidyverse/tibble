@@ -10,8 +10,8 @@
 #' \code{tbl_df} implements four important base methods:
 #'
 #' \describe{
-#' \item{print}{Only prints the first 10 rows, and the columns that fit on
-#'   screen}
+#' \item{print}{By default only prints the first 10 rows (at most 20), and the
+#'   columns that fit on screen; see \code{\link{print.tbl_df}}}
 #' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
 #' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
 #'   so is considerably faster. Throws error if column does not exist.}
