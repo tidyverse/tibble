@@ -190,8 +190,8 @@ as_data_frame.matrix <- function(x, ...) {
 
 #' @export
 #' @rdname as_data_frame
-as_data_frame.table <- function(x, ...) {
-  as_data_frame(as.data.frame(x, stringsAsFactors = FALSE))
+as_data_frame.table <- function(x, n = "n", ...) {
+  as_data_frame(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
 }
 
 #' @export
