@@ -1,40 +1,27 @@
-Version 0.2-5 (2016-03-10)
+Version 0.3 (2016-03-10)
 ===
 
-- Include vignette (#38).
-- Use AppVeyor for testing.
 
+- Features
+    - New `as_data_frame.table()` with argument `n` to control name of count column (#22, #23).
+    - New function `repair_names()` fixes missing and duplicate names (#10, #15, @r2evans).
+    - `frame_data()` now also creates a list column if one of the entries is a list (#32).
+    - New `rownames_to_column()` and `column_to_rownames()` functions, replace `add_rownames()` (#11, @zhilongjia).
+    - Use `tibble` prefix for options (#13, #36).
 
-Version 0.2-4 (2016-03-10)
-===
+- Documentation
+    - Add pre-tibble NEWS (#39, #40).
+    - Include vignette (#38).
+    - Expand README.
+    - Fix typos in documentation.
+    - Remove use of `src()` from examples.
 
-- Prepare CRAN release, check with win-builder and valgrind.
-- New `as_data_frame.table()` with argument `n` to control name of count column (#22, #23).
-
-
-Version 0.2-3 (2016-03-10)
-===
-
-- New function `repair_names()` fixes missing and duplicate names (#10, #15, @r2evans).
-- Finer coverage analysis (#37).
-- Use `tibble` prefix for options (#13, #36).
-- Expand README.
-- Fix typos in documentation.
-- Remove use of `src()` from examples.
-
-
-Version 0.2-2 (2016-03-08)
-===
-
-- `frame_data()` now also creates a list column if one of the entries is a list (#32).
-- New `rownames_to_column()` and `column_to_rownames()` functions, replace `add_rownames()` (#11, @zhilongjia).
-
-
-Version 0.2-1 (2016-03-08)
-===
-
-- Use new-style `.travis.yml`
-- Fix NOTE from `R CMD check`.
+- Prepare CRAN release
+    - Use new-style `.travis.yml`
+    - Use AppVeyor for testing.
+    - Finer coverage analysis (#37).
+    - Check with win-builder and valgrind.
+    - Fix NOTE from `R CMD check`.
 
 
 Version 0.2 (2016-03-02)
