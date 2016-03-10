@@ -19,7 +19,8 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     Lahman (>= 3.0.1),
-    magrittr
+    magrittr,
+    microbenchmark
 LazyData: yes
 License: MIT + file LICENSE
 RoxygenNote: 5.0.1
