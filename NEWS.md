@@ -1,3 +1,10 @@
+Version 0.2-4 (2016-03-10)
+===
+
+- Prepare CRAN release, check with win-builder and valgrind.
+- New `as_data_frame.table()` with argument `n` to control name of count column (#22, #23).
+
+
 Version 0.2-3 (2016-03-10)
 ===
 
