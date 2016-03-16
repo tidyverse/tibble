@@ -22,4 +22,4 @@ License: MIT + file LICENSE
 RoxygenNote: 5.0.1
 LinkingTo: Rcpp
 VignetteBuilder: knitr
-Remotes: hadley/testthat
+Remotes: hadley/testthat, hadley/lazyeval
