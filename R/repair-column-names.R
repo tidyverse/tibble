@@ -1,13 +1,21 @@
 #' Check validity/format of a data.frame or tbl.
 #'
-#' Ensure the tbl or data.frame has legitimate and optionally unique
-#' column names.
-#' @param x tbl, tbl_df, or data.frame
+#' Ensure the object (e.g., tbl, data.frame or list) has legitimate and unique
+#' names without leading or trailing blanks.
+#'
+#' The function does not change any names that are correct already.
+#'
+#' @param x named object
 #' @param prefix character, the prefix to use for new column names
 #' @param sep character, a character string to separate the terms. Not
 #'     \code{NA_character_}.
-#' @return data.frame with possibly-repaired column names
+#' @return input with reparied names
 #' @export
+#' @examples
+#' repair_names(list(3, 4, 5)) # works for lists, too
+#' repair_names(mtcars) # a no-op
+#' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
+#' repair_names(tbl)
 repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0)
     return(x)
