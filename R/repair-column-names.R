@@ -25,9 +25,8 @@ repair_names <- function(x, prefix = "V", sep = "") {
 
 init_names <- function(x) {
   xnames <- names(x)
-  if (is.null(xnames)) {
+  if (is.null(xnames))
     rep("", length(x))
-  } else {
-    ifelse(is.na(xnames) | grepl("^ +$", xnames), "", xnames)
-  }
+  else
+    ifelse(is.na(xnames), "", trimws(xnames))
 }

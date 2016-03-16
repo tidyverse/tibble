@@ -24,14 +24,14 @@ test_that("repair various name problems", {
                  Spaces = c('a', 'b', ' '),
                  EmptyWithNA = c('', NA, NA),
                  Dup1 = c('a', 'a', 'b'),
-                 Evil1 = c('a', 'a', 'a1'),
+                 Evil1 = c('a', 'a ', 'a1'),
                  OneNA = c('a', 'b', NA),
                  Missing2 = c('', '', 'b'),
                  Vnames1 = c('V1', '', ''),
-                 Vnames2 = c('V2', '', ''),
+                 Vnames2 = c('V2', ' ', ''),
                  Vnames3 = c('V1', '', 'a'),
-                 VnamesDup1 = c('V1', 'V1', 'c'),
-                 VnamesDup2 = c('V1', 'V1', '')
+                 VnamesDup1 = c('V1', ' V1 ', 'c'),
+                 VnamesDup2 = c(' V1', 'V1', '')
                  )
   for (combo_name in names(combos)) {
     dat <- data.frame(a = 1, b = 2, c = 3)
@@ -39,6 +39,8 @@ test_that("repair various name problems", {
 
     # ensure we start with a "bad" state
     old_names <- colnames(dat)
+    if (!is.null(old_names))
+      old_names <- trimws(old_names)
     expect_true(is.null(old_names) ||
                   any(table(old_names) > 1) ||
                   any(old_names == '' | is.na(old_names)) ||
