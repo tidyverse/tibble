@@ -72,3 +72,10 @@ test_that("check pathological cases", {
   l <- list(V = 3, W = 4, 5)
   expect_identical(repair_names(l), setNames(l, c("V", "W", "V1")))
 })
+
+test_that("check object class", {
+  expect_equal(class(iris), class(repair_names(iris)))
+  expect_equal(class(tbl_df(iris)), class(repair_names(tbl_df(iris))))
+  expect_equal(class(repair_names(1:10)), "integer")
+  expect_error(repair_names(cat), "non-vector")
+})
