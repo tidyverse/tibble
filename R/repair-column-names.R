@@ -9,26 +9,25 @@
 #' @return data.frame with possibly-repaired column names
 #' @export
 repair_names <- function(x, prefix = "V", sep = "") {
-  if (! isTRUE(length(x) > 0)) return(x)
-  xnames <- names(x)
-  xnames <-
-    if (is.null(xnames)) {
-      rep('', length(x))
-    } else {
-      ifelse(is.na(xnames) | grepl('^ +$', xnames), '', xnames)
-    }
-  blanks <- xnames == ''
+  if (length(x) == 0)
+    return(x)
 
-  sub_names <- xnames[!blanks]
-  sub_names <- make.unique(sub_names, sep = sep)
-  xnames[!blanks] <- sub_names
+  xnames <- init_names(x)
+  blanks <- xnames == ""
+  order <- c(which(!blanks), which(blanks))
 
-  if (any(blanks)) {
-    new_names <- paste(prefix, 1:length(x), sep = sep)
-    new_names <- head(setdiff(new_names, xnames), n = sum(blanks))
-    xnames[blanks] <- new_names
-  }
+  xnames[blanks] <- prefix
+  xnames[order] <- make.unique(xnames[order], sep = sep)
 
   names(x) <- xnames
   x
+}
+
+init_names <- function(x) {
+  xnames <- names(x)
+  if (is.null(xnames)) {
+    rep("", length(x))
+  } else {
+    ifelse(is.na(xnames) | grepl("^ +$", xnames), "", xnames)
+  }
 }
