@@ -1,5 +1,11 @@
 context("repair_names")
 
+test_that("trim_ws", {
+  expect_equal(trim_ws(" a"), "a")
+  expect_equal(trim_ws("a "), "a")
+  expect_equal(trim_ws(" a "), "a")
+})
+
 test_that("repair missing column names", {
   dat <- data.frame(a = 1, b = 2, c = 3)
   colnames(dat)[2] <- NA
@@ -40,7 +46,7 @@ test_that("repair various name problems", {
     # ensure we start with a "bad" state
     old_names <- colnames(dat)
     if (!is.null(old_names))
-      old_names <- trimws(old_names)
+      old_names <- trim_ws(old_names)
     expect_true(is.null(old_names) ||
                   any(table(old_names) > 1) ||
                   any(old_names == '' | is.na(old_names)) ||

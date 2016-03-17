@@ -45,5 +45,5 @@ init_names <- function(x) {
   if (is.null(xnames))
     rep("", length(x))
   else
-    ifelse(is.na(xnames), "", trimws(xnames))
+    ifelse(is.na(xnames), "", trim_ws(xnames))
 }
