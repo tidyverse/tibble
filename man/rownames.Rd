@@ -34,7 +34,6 @@ inverted operation of \code{rownames_to_column}.
 has_rownames(mtcars)
 has_rownames(iris)
 rownames(remove_rownames(mtcars))
-
 rownames_to_column(mtcars)
 
 mtcars_tbl <- rownames_to_column(tbl_df(mtcars))

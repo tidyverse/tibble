@@ -207,26 +207,29 @@ as_data_frame.NULL <- function(x, ...) {
 #' @export
 #' @rdname rownames
 #' @importFrom stats setNames
+#' @include rownames.R
 #' @examples
-#'
 #' rownames_to_column(mtcars)
 #'
 #' mtcars_tbl <- rownames_to_column(tbl_df(mtcars))
 #' mtcars_tbl
 rownames_to_column <- function(df, var = "rowname") {
-
   stopifnot(is.data.frame(df))
 
-  if (var %in% colnames(df) ) {
-    stop(paste("There is a column named", var, "already!"))
-  }
+  if (var %in% colnames(df))
+    stop("There is a column named ", var, " already!", call. = FALSE)
 
-  rn <- as_data_frame(setNames(list(rownames(df)), var))
-  rownames(df) <- NULL
+  rn <- data_frame(rownames(df))
+  names(rn) <- var
 
-  rn_df <- cbind(rn, df)
-  class(rn_df) <- class(df)
-  return (rn_df)
+  attribs <- attributes(df)
+
+  new_df <- c(rn, df)
+  attribs[["names"]] <- names(new_df)
+
+  attributes(new_df) <- attribs[names(attribs) != "row.names"]
+  attr(new_df, "row.names") <- .set_row_names(nrow(df))
+  new_df
 }
 
 #' \code{column_to_rownames} convert a column variable to row names. This is an
@@ -240,18 +243,15 @@ rownames_to_column <- function(df, var = "rowname") {
 column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (!identical(rownames(df), as.character(seq_len(NROW(df))))) {
-    stop("This data frame already has row names.")
+  if (has_rownames(df))
+    stop("This data frame already has row names.", call. = FALSE)
 
-  } else {
-    if ( !var %in% colnames(df) ) {
-      stop(paste0("This data frame has no column named ", var, ".") )
-    }
+  if (!var %in% colnames(df))
+    stop("This data frame has no column named ", var, ".", call. = FALSE)
 
-    rownames(df) <- df[[var]]
-    df[, var] <- NULL
-    return (df)
-    }
+  rownames(df) <- df[[var]]
+  df[[var]] <- NULL
+  df
 }
 
 
