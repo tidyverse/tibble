@@ -7,7 +7,7 @@
 repair_names(x, prefix = "V", sep = "")
 }
 \arguments{
-\item{x}{tbl, tbl_df, or data.frame}
+\item{x}{named object}
 
 \item{prefix}{character, the prefix to use for new column names}
 
@@ -15,10 +15,19 @@ repair_names(x, prefix = "V", sep = "")
 \code{NA_character_}.}
 }
 \value{
-data.frame with possibly-repaired column names
+input with reparied names
 }
 \description{
-Ensure the tbl or data.frame has legitimate and optionally unique
-column names.
+Ensure the object (e.g., tbl, data.frame or list) has legitimate and unique
+names without leading or trailing blanks.
+}
+\details{
+The function does not change any names that are correct already.
+}
+\examples{
+repair_names(list(3, 4, 5)) # works for lists, too
+repair_names(mtcars) # a no-op
+tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
+repair_names(tbl)
 }
 
