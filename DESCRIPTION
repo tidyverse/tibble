@@ -22,7 +22,3 @@ License: MIT + file LICENSE
 RoxygenNote: 5.0.1
 LinkingTo: Rcpp
 VignetteBuilder: knitr
-Collate: 'RcppExports.R' 'all-equal.r' 'rownames.R' 'dataframe.R'
-        'frame-data.R' 'glimpse.R' 'repair-column-names.R'
-        'src-local.r' 'src.r' 'tbl-df.r' 'tibble.R' 'type-sum.r'
-        'utils-format.r' 'utils.r'
