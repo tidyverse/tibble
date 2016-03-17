@@ -1,3 +1,10 @@
+Version 0.3-2 (2016-03-17)
+===
+
+- Cleanup for `column_to_rownames()` and `rownames_to_columns()` (#45).
+- New `has_rownames()` and `remove_rownames()` (#44).
+
+
 Version 0.3-1 (2016-03-17)
 ===
 
