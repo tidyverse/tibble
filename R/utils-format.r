@@ -63,7 +63,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
 
 #' @importFrom stats setNames
 shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
-  rownames(df) <- NULL
+  df <- remove_rownames(df)
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
   # pass
