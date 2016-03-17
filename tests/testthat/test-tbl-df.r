@@ -38,3 +38,9 @@ test_that("[[.tbl_df ignores exact argument",{
   expect_warning(foo[["x", exact = FALSE]], "ignored")
   expect_identical(getElement(foo, "y"), 1:10)
 })
+
+test_that("can use recursive indexing with [[", {
+  foo <- data_frame(x = list(y = 1:3, z = 4:5))
+  expect_equal(foo[[c(1, 1)]], 1:3)
+  expect_equal(foo[[c("x", "y")]], 1:3)
+})
