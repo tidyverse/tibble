@@ -7,6 +7,13 @@ test_that("[ never drops", {
   expect_equal(mtcars2[, 1], mtcars2[1])
 })
 
+test_that("[ retains class", {
+  mtcars2 <- tbl_df(mtcars)
+  expect_identical(class(mtcars2), class(mtcars2[1:5, ]))
+  expect_identical(class(mtcars2), class(mtcars2[, 1:5]))
+  expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
+})
+
 test_that("[ with 0 cols creates correct row names (#656)", {
   zero_row <- tbl_df(iris)[, 0]
   expect_is(zero_row, "tbl_df")
