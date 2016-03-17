@@ -179,6 +179,12 @@ test_that("can add new row", {
   expect_identical(df_all_new$b, c(df_all$b, 3L))
   expect_identical(df_all_new$c, c(df_all$c, NA))
 
+  iris_new <- add_row(iris, Species = "unknown")
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_row(tbl_df(iris), Species = "unknown")
+  expect_equal(class(tbl_df(iris)), class(iris_new))
+
   new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
   expect_true(all(is.na(new_iris_row)))
 })

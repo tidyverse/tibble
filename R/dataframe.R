@@ -300,7 +300,7 @@ add_row <- function(.data, ...) {
   df[missing_vars] <- NA
   df <- df[names(.data)]
 
-  as_data_frame(rbind(.data, df))
+  rbind(.data, df)
 }
 
 # Validity checks --------------------------------------------------------------
