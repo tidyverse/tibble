@@ -1,3 +1,10 @@
+Version 0.3-1 (2016-03-17)
+===
+
+- Cleanup for `repair_names()` (#43).
+- Cleanup for `add_row()` (#46).
+
+
 Version 0.3 (2016-03-10)
 ===
 

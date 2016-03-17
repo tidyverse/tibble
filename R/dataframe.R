@@ -230,6 +230,7 @@ as_data_frame.NULL <- function(x, ...) {
 #' @export
 add_row <- function(.data, ...) {
   df <- data_frame(...)
+  attr(df, "row.names") <- .set_row_names(1L)
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
@@ -243,7 +244,7 @@ add_row <- function(.data, ...) {
   df[missing_vars] <- NA
   df <- df[names(.data)]
 
-  as_data_frame(rbind(.data, df))
+  rbind(.data, df)
 }
 
 # Validity checks --------------------------------------------------------------
