@@ -19,7 +19,7 @@ has_rownames <- function(df) {
 #' rownames(remove_rownames(mtcars))
 remove_rownames <- function(df) {
   stopifnot(is.data.frame(df))
-  attr(df, "row.names") <- .set_row_names(nrow(df))
+  rownames(df) <- NULL
   df
 }
 
