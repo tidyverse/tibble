@@ -286,6 +286,7 @@ column_to_rownames <- function(df, var = "rowname") {
 #' @export
 add_row <- function(.data, ...) {
   df <- data_frame(...)
+  attr(df, "row.names") <- .set_row_names(1L)
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
