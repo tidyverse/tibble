@@ -1,22 +1,21 @@
-#' Check validity/format of a data.frame or tbl.
+#' Repair object names.
 #'
-#' Ensure the object (e.g., tbl, data.frame or list) has legitimate and unique
-#' names without leading or trailing blanks.
+#' \code{repair_names} ensures its input has non-missing and
+#' unique names. It also strips any leading or trailing spaces.
+#' Valid names are left as is.
 #'
-#' The function does not change any names that are correct already.
-#'
-#' @param x named object
-#' @param prefix character, the prefix to use for new column names
-#' @param sep character, a character string to separate the terms. Not
-#'     \code{NA_character_}.
-#' @return input with reparied names
+#' @param x A named vector.
+#' @param prefix A string, the prefix to use for new column names.
+#' @param sep A string, inserted between the column name and de-duplicating
+#'    number.
+#' @return \code{x} with valid names.
 #' @export
 #' @examples
 #' repair_names(list(3, 4, 5)) # works for lists, too
 #' repair_names(mtcars) # a no-op
 #' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
 #' repair_names(tbl)
-repair_names <- function(x, prefix = "V", sep = "") {
+repair_names <- function(x, prefix = "V", sep = "_") {
   if (length(x) == 0)
     return(x)
 
