@@ -201,16 +201,14 @@ as_data_frame.NULL <- function(x, ...) {
   as_data_frame(list())
 }
 
-#' Conversion between rownames and a column in data frame
-#'
 #' \code{rownames_to_column} convert row names to an explicit variable.
 #'
-#' @param df Input data frame with rownames.
 #' @param var Name of variable to use
 #' @export
 #' @rdname rownames
 #' @importFrom stats setNames
 #' @examples
+#'
 #' rownames_to_column(mtcars)
 #'
 #' mtcars_tbl <- rownames_to_column(tbl_df(mtcars))

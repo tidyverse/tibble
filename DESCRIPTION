@@ -5,7 +5,7 @@ Version: 0.3
 Date: 2016-03-10
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class that offers better checking and
-        printing capabilities than traditional data frames.
+    printing capabilities than traditional data frames.
 Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role
         = "aut"), person("Romain", "Francois", ,
         "romain@r-enthusiasts.com", role = "aut"), person("Kirill",
@@ -13,12 +13,38 @@ Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role
         person("RStudio", role = "cph") )
 URL: https://github.com/krlmlr/tibble
 BugReports: https://github.com/krlmlr/tibble/issues
-Depends: R (>= 3.1.2)
-Imports: methods, assertthat, utils, lazyeval (>= 0.1.10), Rcpp
-Suggests: testthat, knitr, rmarkdown, Lahman (>= 3.0.1), magrittr,
-        microbenchmark
+Depends:
+    R (>= 3.1.2)
+Imports:
+    methods,
+    assertthat,
+    utils,
+    lazyeval (>= 0.1.10),
+    Rcpp
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown,
+    Lahman (>= 3.0.1),
+    magrittr,
+    microbenchmark
 LazyData: yes
 License: MIT + file LICENSE
 RoxygenNote: 5.0.1
 LinkingTo: Rcpp
 VignetteBuilder: knitr
+Collate:
+    'RcppExports.R'
+    'all-equal.r'
+    'rownames.R'
+    'dataframe.R'
+    'frame-data.R'
+    'glimpse.R'
+    'repair-column-names.R'
+    'src-local.r'
+    'src.r'
+    'tbl-df.r'
+    'tibble.R'
+    'type-sum.r'
+    'utils-format.r'
+    'utils.r'
