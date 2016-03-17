@@ -4,7 +4,7 @@
 \alias{repair_names}
 \title{Repair object names.}
 \usage{
-repair_names(x, prefix = "V", sep = "_")
+repair_names(x, prefix = "V", sep = "")
 }
 \arguments{
 \item{x}{A named vector.}

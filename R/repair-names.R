@@ -15,7 +15,7 @@
 #' repair_names(mtcars) # a no-op
 #' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
 #' repair_names(tbl)
-repair_names <- function(x, prefix = "V", sep = "_") {
+repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0)
     return(x)
 
