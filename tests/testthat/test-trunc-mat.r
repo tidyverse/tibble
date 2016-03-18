@@ -102,3 +102,8 @@ test_that("trunc_mat output matches known output", {
       knit_cacheable = TRUE)
   )
 })
+
+test_that("obj_type shows only first class name for S4", {
+  A <- methods::setClass("A")
+  expect_equal(obj_type(A), "<S4:classGeneratorFunction>")
+})
