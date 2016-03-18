@@ -18,7 +18,7 @@
 obj_sum <- function(x) UseMethod("obj_sum")
 #' @export
 obj_sum.default <- function(x) {
-  paste0("<", type_sum(x), if (is_vector_s3(x)) size_sum(x), ">")
+  paste0(type_sum(x), if (is_vector_s3(x)) size_sum(x))
 }
 
 #' @export

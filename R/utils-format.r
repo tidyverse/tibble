@@ -74,9 +74,12 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   }
 
   # List columns need special treatment because format can't be trusted
-  classes <- paste0("(", vapply(df, type_sum, character(1)), ")")
+  classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
   is_list <- vapply(df, is.list, logical(1))
-  df[is_list] <- lapply(df[is_list], function(x) vapply(x, obj_sum, character(1)))
+  df[is_list] <- lapply(df[is_list], function(x) {
+    summary <- vapply(x, obj_sum, character(1))
+    paste0("<", summary, ">")
+  })
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -133,7 +136,7 @@ print.trunc_mat <- function(x, ...) {
   }
 
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " (", x$extra, ")", collapse = ", ")
+    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
     cat(wrap("Variables not shown: ", var_types, width = x$width),
         ".\n", sep = "")
   }
@@ -147,7 +150,7 @@ knit_print.trunc_mat <- function(x, options) {
   kable <- knitr::kable(x$table, row.names = FALSE)
 
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " (", x$extra, ")", collapse = ", ")
+    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
     extra <- wrap("\n(_Variables not shown_: ", var_types, ")", width = x$width)
   } else {
     extra <- "\n"
