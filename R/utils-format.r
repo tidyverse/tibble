@@ -194,6 +194,3 @@ big_mark <- function(x, ...) {
   mark <- if (identical(getOption("OutDec"), ",")) "." else ","
   formatC(x, big.mark = mark, ...)
 }
-
-# trimws() is not available in R 3.1.3
-trim_ws <- function(x) gsub("^ *(|(.*[^ ])) *$", "\\1", x)

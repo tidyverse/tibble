@@ -1,11 +1,5 @@
 context("repair_names")
 
-test_that("trim_ws", {
-  expect_equal(trim_ws(" a"), "a")
-  expect_equal(trim_ws("a "), "a")
-  expect_equal(trim_ws(" a "), "a")
-})
-
 test_that("repair missing column names", {
   dat <- data.frame(a = 1, b = 2, c = 3)
   colnames(dat)[2] <- NA
