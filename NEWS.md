@@ -1,35 +1,14 @@
 Version 0.3-4 (2016-03-18)
 ===
 
-bump version to 0.3-4
-Pull prefix/suffix out obj_sum.
-And consistently use <> for types everywhere.
-Cleaner of implementation obj_sum
-Update docs
-Rename obj_type to obj_sum
-And better integrate with type_sum.
-Test subsetting errors
-Improve rowname tools docs
-Start clarifying role of tbl_df
-Remove empty files
-Clean out .Rbuildignore
-Rewrite vignette to focus on tibbles
-Update namespace
-Rename vignette to tibble
-Update readme
-Improve [.tbl_df error message
-Special-case obj_type for common vector types
-Tests for missing obj_type cases
-Remove unused method
-Return 0-row but n-col data frame if no data
-Improve frame_data docs
-And a few minor code tweaks.
-Extract out make_unique and simplify tests
-Remove unneeded trim_ws
-Simpler strategy for repair_names
-Combine names2 and init_names
-Don't trim ws in repair_names.
-Closes #47
+- Renamed `obj_type()` to `obj_sum()`, improvements, better integration with `type_sum()`.
+- Add tests.
+- Improve documentation and vignette.
+- Internal cleanup.
+- Improve `[.tbl_df()` error message.
+- `frame_data()` returns 0-row but n-col data frame if no data.
+- Further cleanup of `repair_names()`.
+- Don't trim ws in `repair_names()` (#47).
 
 
 Version 0.3-3 (2016-03-18)
