@@ -51,8 +51,9 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
 #' @export
 `[[.tbl_df` <- function(x, i, exact = TRUE) {
-  if (is.character(i) && length(i) == 1L && !(i %in% names(x)))
-    stop("Unknown name", call. = FALSE)
+  if (is.character(i) && length(i) == 1L && !(i %in% names(x))) {
+    stop("Unknown column '", i, "'", call. = FALSE)
+  }
   if (!exact) {
     warning("exact ignored", call. = FALSE)
   }
@@ -62,8 +63,9 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
 #' @export
 `$.tbl_df` <- function(x, i) {
-  if (is.character(i) && !(i %in% names(x)))
+  if (is.character(i) && !(i %in% names(x))) {
     stop("Unknown column '", i, "'", call. = FALSE)
+  }
 
   .subset2(x, i)
 }
