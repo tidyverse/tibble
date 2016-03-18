@@ -94,7 +94,7 @@ flights
 #>   (dbl), distance (dbl), hour (dbl), minute (dbl).
 ```
 
-Tibles are strict about subsetting. If you try and access a variable that does not exist, you'll get an error:
+Tibles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
 
 ``` r
 flights$yea
