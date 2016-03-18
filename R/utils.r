@@ -1,5 +1,10 @@
 names2 <- function(x) {
-  names(x) %||% rep("", length(x))
+  xnames <- names(x)
+  if (is.null(xnames)) {
+    rep("", length(x))
+  } else {
+    ifelse(is.na(xnames), "", xnames)
+  }
 }
 
 "%||%" <- function(x, y) {

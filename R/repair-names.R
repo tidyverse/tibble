@@ -19,7 +19,7 @@ repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0)
     return(x)
 
-  xnames <- init_names(x)
+  xnames <- names2(x)
   blanks <- xnames == ""
 
   # The order vector defines the order in which make.unique() should process the
@@ -39,11 +39,3 @@ repair_names <- function(x, prefix = "V", sep = "") {
   x
 }
 
-init_names <- function(x) {
-  xnames <- names(x)
-  if (is.null(xnames)) {
-    rep("", length(x))
-  } else {
-    ifelse(is.na(xnames), "", xnames)
-  }
-}
