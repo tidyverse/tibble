@@ -1,9 +1,12 @@
-#' Row-wise data_frame creation
+#' Row-wise tibble creation
 #'
-#' Create a row-wise \code{\link{data_frame}}.
+#' Create \code{\link{data_frame}}s laying out the data in rows, rather than
+#' in columns. This is useful for small tables of data where readability is
+#' important.
 #'
 #' @param ... Arguments specifying the structure of a \code{data_frame}.
-#'
+#'   Variable names should be formulas, and may only appear before the data.
+#' @return A \code{\link{tbl_df}}.
 #' @export
 #' @examples
 #' frame_data(
@@ -11,6 +14,14 @@
 #'   "a",   1,
 #'   "b",   2,
 #'   "c",   3
+#' )
+#'
+#' # frame_data will create a list column if the value in each cell is
+#' # not a scalar
+#' frame_data(
+#'   ~x,  ~y,
+#'   "a", 1:3,
+#'   "b", 4:6
 #' )
 frame_data <- function(...) {
 
@@ -32,12 +43,14 @@ frame_data <- function(...) {
       break
 
     if (length(el) != 2) {
-      stop("expected a column name with a single argument; e.g. '~ name'")
+      stop("expected a column name with a single argument; e.g. '~ name'",
+        call. = FALSE)
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-        stop("expected a symbol or string denoting a column name")
+      stop("expected a symbol or string denoting a column name",
+        call. = FALSE)
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
@@ -46,7 +59,7 @@ frame_data <- function(...) {
   }
 
   if (!length(frame_names)) {
-    stop("no column names detected in 'frame_data()' call")
+    stop("no column names detected in 'frame_data()' call", call. = FALSE)
   }
 
   frame_rest <- dots[i:length(dots)]
@@ -57,11 +70,14 @@ frame_data <- function(...) {
   # structure.
   frame_ncol <- length(frame_names)
   if (n_elements %% frame_ncol != 0) {
-    stop(sprintf(
-      "invalid 'frame_data()' specification: had %s elements and %s columns",
-      n_elements,
-      frame_ncol
-    ))
+    stop(
+      sprintf(
+        "invalid 'frame_data()' specification: had %s elements and %s columns",
+        n_elements,
+        frame_ncol
+      ),
+      call. = FALSE
+    )
   }
 
   frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
