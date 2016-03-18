@@ -1,4 +1,4 @@
-#' Create a data frame tbl.
+#' S3 class: tbl_df
 #'
 #' A data frame tbl wraps a local data frame. The main advantage to using
 #' a \code{tbl_df} over a regular data frame is the printing:
@@ -16,24 +16,14 @@
 #' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
 #'   so is considerably faster. Throws error if column does not exist.}
 #' }
-#'
-#'
 #' @export
 #' @param data a data frame
-#' @examples
-#' ds <- tbl_df(mtcars)
-#' ds
-#' as.data.frame(ds)
-#'
-#' if (require("Lahman")) {
-#' batting <- tbl_df(Batting)
-#' dim(batting)
-#' colnames(batting)
-#' head(batting)
-#' }
+#' @keywords internal
 tbl_df <- function(data) {
   as_data_frame(data)
 }
+
+methods::setOldClass(c("tbl_df", "tbl", "data.frame"))
 
 # Standard data frame methods --------------------------------------------------
 

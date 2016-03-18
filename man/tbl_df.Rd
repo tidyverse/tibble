@@ -2,7 +2,7 @@
 % Please edit documentation in R/tbl-df.r
 \name{tbl_df}
 \alias{tbl_df}
-\title{Create a data frame tbl.}
+\title{S3 class: tbl_df}
 \usage{
 tbl_df(data)
 }
@@ -28,16 +28,5 @@ screen, describing the rest of it as text.
   so is considerably faster. Throws error if column does not exist.}
 }
 }
-\examples{
-ds <- tbl_df(mtcars)
-ds
-as.data.frame(ds)
-
-if (require("Lahman")) {
-batting <- tbl_df(Batting)
-dim(batting)
-colnames(batting)
-head(batting)
-}
-}
+\keyword{internal}
 
