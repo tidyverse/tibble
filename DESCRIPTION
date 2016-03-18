@@ -30,3 +30,4 @@ LazyData: yes
 License: MIT + file LICENSE
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
+Remotes: hadley/testthat, hadley/lazyeval#53
