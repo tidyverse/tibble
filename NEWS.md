@@ -1,3 +1,16 @@
+Version 0.3-4 (2016-03-18)
+===
+
+- Renamed `obj_type()` to `obj_sum()`, improvements, better integration with `type_sum()`.
+- Add tests.
+- Improve documentation and vignette.
+- Internal cleanup.
+- Improve `[.tbl_df()` error message.
+- `frame_data()` returns 0-row but n-col data frame if no data.
+- Further cleanup of `repair_names()`.
+- Don't trim ws in `repair_names()` (#47).
+
+
 Version 0.3-3 (2016-03-18)
 ===
 
