@@ -123,3 +123,9 @@ test_that("S3 others list all classes", {
   x <- structure(list(), class = c("a", "b", "c"))
   expect_equal(obj_type(x), "<S3: a/b/c>")
 })
+
+test_that("common data vectors treated as atomic", {
+  expect_equal(obj_type(factor(1:3)), "<fctr[3]>")
+  expect_equal(obj_type(Sys.Date() + 1:3), "<date[3]>")
+  expect_equal(obj_type(Sys.time() + 1:3), "<time[3]>")
+})

@@ -171,13 +171,23 @@ obj_type.NULL <- function(x) "<NULL>"
 #' @export
 obj_type.default <- function(x) {
   if (!is.object(x)) {
-    paste0("<", type_sum(x), if (!is.array(x)) paste0("[", length(x), "]"), ">")
+    obj_type_atomic(x)
   } else if (!isS4(x)) {
     paste0("<S3: ", paste0(class(x), collapse = "/"), ">")
   } else {
     paste0("<S4: ", methods::is(x)[[1]], ">")
   }
 }
+
+obj_type_atomic <- function(x) {
+  paste0("<", type_sum(x), if (!is.array(x)) paste0("[", length(x), "]"), ">")
+}
+#' @export
+obj_type.factor <- obj_type_atomic
+#' @export
+obj_type.Date <- obj_type_atomic
+#' @export
+obj_type.POSIXct <- obj_type_atomic
 
 #' @export
 obj_type.data.frame <- function(x) {
