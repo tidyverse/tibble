@@ -20,20 +20,14 @@ repair_names <- function(x, prefix = "V", sep = "") {
     return(x)
 
   xnames <- names2(x)
-  blanks <- xnames == ""
+  blank <- xnames == ""
 
-  # The order vector defines the order in which make.unique() should process the
-  # entries.  Blanks are initialized with the prefix. The index of the first
-  # blank entry appears twice in this vector if there's no column named like the
-  # prefix, to make sure that blank columns always start with V1 (or a higher
-  # index if appropriate).  See also the "pathological cases" test.
-  order <- c(
-    which(!blanks),
-    if (all(xnames[!blanks] != prefix) && any(blanks))
-      which.max(blanks),
-    which(blanks))
-  xnames[blanks] <- prefix
-  xnames[order] <- make.unique(xnames[order], sep = sep)
+  # Ensure existing names are unique
+  xnames[!blank] <- make.unique(xnames[!blank], sep = sep)
+
+  # Replace blank names
+  new_vars <- setdiff(paste(prefix, seq_along(x), sep = sep), xnames)
+  xnames[blank] <- new_vars[seq_len(sum(blank))]
 
   names(x) <- xnames
   x
