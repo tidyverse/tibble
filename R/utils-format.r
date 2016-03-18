@@ -173,19 +173,15 @@ obj_type.default <- function(x) {
   if (!is.object(x)) {
     paste0("<", type_sum(x), if (!is.array(x)) paste0("[", length(x), "]"), ">")
   } else if (!isS4(x)) {
-    paste0("<S3:", paste0(class(x), collapse = ", "), ">")
+    paste0("<S3: ", paste0(class(x), collapse = "/"), ">")
   } else {
-    paste0("<S4:", paste0(methods::is(x)[[1]], collapse = ", "), ">")
+    paste0("<S4: ", methods::is(x)[[1]], ">")
   }
 }
 
 #' @export
 obj_type.data.frame <- function(x) {
   paste0("<", class(x)[1], " [", paste0(dim(x), collapse = ","), "]", ">")
-}
-#' @export
-obj_type.data_frame <- function(x) {
-  paste0("<data_frame [", paste0(dim(x), collapse = ","), "]", ">")
 }
 
 # function for the thousand separator,
