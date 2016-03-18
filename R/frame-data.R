@@ -32,7 +32,9 @@ frame_data <- function(...) {
   i <- 1
   while (TRUE) {
     if (i > length(dots)) {
-      return(data_frame())
+      out <- rep(list(logical()), length(frame_names))
+      names(out) <- frame_names
+      return(as_data_frame(out))
     }
 
     el <- dots[[i]]

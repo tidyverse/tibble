@@ -11,8 +11,6 @@ test_that("frame_data() constructs 'data_frame' as expected", {
   compared <- data_frame(colA = c("a", "b"), colB = c(1, 2))
   expect_equal(result, compared)
 
-  expect_identical(frame_data(~a, ~b), data_frame())
-
   ## wide
   wide <- frame_data(
     ~colA, ~colB, ~colC, ~colD,
@@ -91,4 +89,9 @@ test_that("frame_data can have list columns", {
   )
   expect_equal(df$x, c(1, 2))
   expect_equal(df$y, list(list(a = 1), list(b = 2)))
+})
+
+test_that("frame_data creates n-col empty data frame", {
+  df <- frame_data(~x, ~y)
+  expect_equal(names(df), c("x", "y"))
 })
