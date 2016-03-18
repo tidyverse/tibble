@@ -103,29 +103,3 @@ test_that("trunc_mat output matches known output", {
   )
 })
 
-
-# obj_type ----------------------------------------------------------------
-
-test_that("shows only first class name for S4", {
-  A <- methods::setClass("A")
-  expect_equal(obj_type(A), "<S4: classGeneratorFunction>")
-})
-
-test_that("NULL handled specially", {
-  expect_equal(obj_type(NULL), "<NULL>")
-})
-
-test_that("data frame includes rows and cols", {
-  expect_equal(obj_type(mtcars), "<data.frame [32,11]>")
-})
-
-test_that("S3 others list all classes", {
-  x <- structure(list(), class = c("a", "b", "c"))
-  expect_equal(obj_type(x), "<S3: a/b/c>")
-})
-
-test_that("common data vectors treated as atomic", {
-  expect_equal(obj_type(factor(1:3)), "<fctr[3]>")
-  expect_equal(obj_type(Sys.Date() + 1:3), "<date[3]>")
-  expect_equal(obj_type(Sys.time() + 1:3), "<time[3]>")
-})

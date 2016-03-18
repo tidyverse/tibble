@@ -76,7 +76,7 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   # List columns need special treatment because format can't be trusted
   classes <- paste0("(", vapply(df, type_sum, character(1)), ")")
   is_list <- vapply(df, is.list, logical(1))
-  df[is_list] <- lapply(df[is_list], function(x) vapply(x, obj_type, character(1)))
+  df[is_list] <- lapply(df[is_list], function(x) vapply(x, obj_sum, character(1)))
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -165,34 +165,7 @@ wrap <- function(..., indent = 0, width) {
   paste0(wrapped, collapse = "\n")
 }
 
-obj_type <- function(x) UseMethod("obj_type")
-#' @export
-obj_type.NULL <- function(x) "<NULL>"
-#' @export
-obj_type.default <- function(x) {
-  if (!is.object(x)) {
-    obj_type_atomic(x)
-  } else if (!isS4(x)) {
-    paste0("<S3: ", paste0(class(x), collapse = "/"), ">")
-  } else {
-    paste0("<S4: ", methods::is(x)[[1]], ">")
-  }
-}
 
-obj_type_atomic <- function(x) {
-  paste0("<", type_sum(x), if (!is.array(x)) paste0("[", length(x), "]"), ">")
-}
-#' @export
-obj_type.factor <- obj_type_atomic
-#' @export
-obj_type.Date <- obj_type_atomic
-#' @export
-obj_type.POSIXct <- obj_type_atomic
-
-#' @export
-obj_type.data.frame <- function(x) {
-  paste0("<", class(x)[1], " [", paste0(dim(x), collapse = ","), "]", ">")
-}
 
 # function for the thousand separator,
 # returns "," unless it's used for the decimal point, in which case returns "."
