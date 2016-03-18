@@ -8,7 +8,10 @@ try_read_output <- function(filename) {
 }
 
 write_output <- function(text, filename) {
-  writeLines(text, output_file(filename))
+  tryCatch(
+    writeLines(text, output_file(filename)),
+    error = function(e) NULL
+  )
 }
 
 expect_output_identical <- function(x, filename) {
