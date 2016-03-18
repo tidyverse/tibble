@@ -45,8 +45,6 @@ test_that("repair various name problems", {
 
     # ensure we start with a "bad" state
     old_names <- colnames(dat)
-    if (!is.null(old_names))
-      old_names <- trim_ws(old_names)
     expect_true(is.null(old_names) ||
                   any(table(old_names) > 1) ||
                   any(old_names == '' | is.na(old_names)) ||

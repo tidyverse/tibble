@@ -1,12 +1,12 @@
 #' Repair object names.
 #'
 #' \code{repair_names} ensures its input has non-missing and
-#' unique names. It also strips any leading or trailing spaces.
-#' Valid names are left as is.
+#' unique names (duplicated names get a numeric suffix). Valid names are
+#' left as is.
 #'
 #' @param x A named vector.
 #' @param prefix A string, the prefix to use for new column names.
-#' @param sep A string, inserted between the column name and de-duplicating
+#' @param sep A string inserted between the column name and de-duplicating
 #'    number.
 #' @return \code{x} with valid names.
 #' @export
@@ -41,8 +41,9 @@ repair_names <- function(x, prefix = "V", sep = "") {
 
 init_names <- function(x) {
   xnames <- names(x)
-  if (is.null(xnames))
+  if (is.null(xnames)) {
     rep("", length(x))
-  else
-    ifelse(is.na(xnames), "", trim_ws(xnames))
+  } else {
+    ifelse(is.na(xnames), "", xnames)
+  }
 }
