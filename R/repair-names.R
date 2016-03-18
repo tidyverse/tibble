@@ -16,20 +16,24 @@
 #' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
 #' repair_names(tbl)
 repair_names <- function(x, prefix = "V", sep = "") {
-  if (length(x) == 0)
+  if (length(x) == 0) {
+    names(x) <- character()
     return(x)
+  }
 
-  xnames <- names2(x)
-  blank <- xnames == ""
-
-  # Ensure existing names are unique
-  xnames[!blank] <- make.unique(xnames[!blank], sep = sep)
-
-  # Replace blank names
-  new_vars <- setdiff(paste(prefix, seq_along(x), sep = sep), xnames)
-  xnames[blank] <- new_vars[seq_len(sum(blank))]
-
-  names(x) <- xnames
-  x
+  new_names <- make_unique(names2(x), prefix = prefix, sep = sep)
+  setNames(x, new_names)
 }
 
+make_unique <- function(x, prefix = "V", sep = "") {
+  blank <- x == ""
+
+  # Ensure existing names are unique
+  x[!blank] <- make.unique(x[!blank], sep = sep)
+
+  # Replace blank names
+  new_vars <- setdiff(paste(prefix, seq_along(x), sep = sep), x)
+  x[blank] <- new_vars[seq_len(sum(blank))]
+
+  x
+}
