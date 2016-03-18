@@ -19,11 +19,11 @@ occur in a data frame should return a string with four or less characters.
 \code{obj_sum} also includes the size of the object.
 }
 \examples{
-type_sum(1:10)
-type_sum(matrix(1:10))
-type_sum(Sys.Date())
-type_sum(Sys.time())
-type_sum(mean)
+obj_sum(1:10)
+obj_sum(matrix(1:10))
+obj_sum(Sys.Date())
+obj_sum(Sys.time())
+obj_sum(mean)
 }
 \keyword{internal}
 
