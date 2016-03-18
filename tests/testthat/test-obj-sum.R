@@ -25,3 +25,11 @@ test_that("common data vectors treated as atomic", {
   expect_equal(obj_sum(Sys.Date() + 1:3), "<date [3]>")
   expect_equal(obj_sum(Sys.time() + 1:3), "<time [3]>")
 })
+
+
+# type_sum ----------------------------------------------------------------
+
+test_that("less common objects get abbreviations", {
+  expect_equal(type_sum(environment()), "env")
+  expect_equal(type_sum(environment), "fun")
+})
