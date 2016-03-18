@@ -53,6 +53,6 @@ test_that("handles atomic vectors", {
 })
 
 test_that("error conditions", {
-  expect_error(matrixToDataFrame(1:10, "not a matrix"))
-  expect_error(matrixToDataFrame(iris3, "not a matrix"))
+  expect_error(matrixToDataFrame(1:10), "not a matrix")
+  expect_error(matrixToDataFrame(iris3), "not a matrix")
 })
