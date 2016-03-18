@@ -1,3 +1,13 @@
+Version 0.3-3 (2016-03-18)
+===
+
+`[[.tbl_df` now falls back to regular subsetting when used with anything other than a single string.
+Fixes #29
+When used in list-columns, S4 objects only print the class name than the full class hierarchy. Fixes #33.
+Also give the file a better name
+add test that [ does not change class
+
+
 Version 0.3-2 (2016-03-17)
 ===
 
