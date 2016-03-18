@@ -1,0 +1,5 @@
+[1] "\n\n|a     |b     |c     |d     |e      |f          |\n|:-----|:-----|:-----|:-----|:------|:----------|\n|<dbl> |<int> |<lgl> |<chr> |<fctr> |<date>     |\n|1.0   |1     |TRUE  |a     |a      |2015-12-10 |\n|2.5   |2     |FALSE |b     |b      |2015-12-11 |\n\n(_Variables not shown_: g <time>, h <list>)"
+attr(,"class")
+[1] "knit_asis"
+attr(,"knit_cacheable")
+[1] TRUE
