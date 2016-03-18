@@ -1,5 +1,10 @@
 names2 <- function(x) {
-  names(x) %||% rep("", length(x))
+  xnames <- names(x)
+  if (is.null(xnames)) {
+    rep("", length(x))
+  } else {
+    ifelse(is.na(xnames), "", xnames)
+  }
 }
 
 "%||%" <- function(x, y) {
@@ -9,6 +14,10 @@ names2 <- function(x) {
 # is.atomic() is TRUE for atomic vectors AND NULL!
 is_atomic <- function(x) {
   is.atomic(x) && !is.null(x)
+}
+
+is_vector <- function(x) {
+  is_atomic(x) || is.list(x)
 }
 
 is_1d <- function(x) {

@@ -74,9 +74,12 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   }
 
   # List columns need special treatment because format can't be trusted
-  classes <- paste0("(", vapply(df, type_sum, character(1)), ")")
+  classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
   is_list <- vapply(df, is.list, logical(1))
-  df[is_list] <- lapply(df[is_list], function(x) vapply(x, obj_type, character(1)))
+  df[is_list] <- lapply(df[is_list], function(x) {
+    summary <- vapply(x, obj_sum, character(1))
+    paste0("<", summary, ">")
+  })
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -133,7 +136,7 @@ print.trunc_mat <- function(x, ...) {
   }
 
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " (", x$extra, ")", collapse = ", ")
+    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
     cat(wrap("Variables not shown: ", var_types, width = x$width),
         ".\n", sep = "")
   }
@@ -147,7 +150,7 @@ knit_print.trunc_mat <- function(x, options) {
   kable <- knitr::kable(x$table, row.names = FALSE)
 
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " (", x$extra, ")", collapse = ", ")
+    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
     extra <- wrap("\n(_Variables not shown_: ", var_types, ")", width = x$width)
   } else {
     extra <- "\n"
@@ -165,28 +168,7 @@ wrap <- function(..., indent = 0, width) {
   paste0(wrapped, collapse = "\n")
 }
 
-obj_type <- function(x) UseMethod("obj_type")
-#' @export
-obj_type.NULL <- function(x) "<NULL>"
-#' @export
-obj_type.default <- function(x) {
-  if (!is.object(x)) {
-    paste0("<", type_sum(x), if (!is.array(x)) paste0("[", length(x), "]"), ">")
-  } else if (!isS4(x)) {
-    paste0("<S3:", paste0(class(x), collapse = ", "), ">")
-  } else {
-    paste0("<S4:", paste0(methods::is(x)[[1]], collapse = ", "), ">")
-  }
-}
 
-#' @export
-obj_type.data.frame <- function(x) {
-  paste0("<", class(x)[1], " [", paste0(dim(x), collapse = ","), "]", ">")
-}
-#' @export
-obj_type.data_frame <- function(x) {
-  paste0("<data_frame [", paste0(dim(x), collapse = ","), "]", ">")
-}
 
 # function for the thousand separator,
 # returns "," unless it's used for the decimal point, in which case returns "."
@@ -194,6 +176,3 @@ big_mark <- function(x, ...) {
   mark <- if (identical(getOption("OutDec"), ",")) "." else ","
   formatC(x, big.mark = mark, ...)
 }
-
-# trimws() is not available in R 3.1.3
-trim_ws <- function(x) gsub("^ *(|(.*[^ ])) *$", "\\1", x)

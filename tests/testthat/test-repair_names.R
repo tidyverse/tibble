@@ -1,87 +1,42 @@
 context("repair_names")
 
-test_that("trim_ws", {
-  expect_equal(trim_ws(" a"), "a")
-  expect_equal(trim_ws("a "), "a")
-  expect_equal(trim_ws(" a "), "a")
+test_that("zero-length inputs given character names", {
+  out <- repair_names(character())
+  expect_equal(names(out), character())
 })
 
-test_that("repair missing column names", {
-  dat <- data.frame(a = 1, b = 2, c = 3)
-  colnames(dat)[2] <- NA
-
-  # ensure we start with a "bad" state
-  expect_true(any(is.na(colnames(dat))))
-
-  fixed_dat <- repair_names(dat)
-  fixed_names <- colnames(fixed_dat)
-  # no repeats
-  expect_false(any(table(fixed_names) > 1))
-
-  # ensure all valid column names are retained
-  expect_equal(length(setdiff(Filter(function(a) ! (is.na(a) | a == ''),
-                                     colnames(dat)),
-                              fixed_names)), 0)
+test_that("unnamed input gives uniquely named output", {
+  out <- repair_names(1:3)
+  expect_equal(names(out), c("V1", "V2", "V3"))
 })
 
-test_that("repair various name problems", {
-  combos <- list(Null = NULL,
-                 Empty = c('', '', ''),
-                 Spaces = c('a', 'b', ' '),
-                 EmptyWithNA = c('', NA, NA),
-                 Dup1 = c('a', 'a', 'b'),
-                 Evil1 = c('a', 'a ', 'a1'),
-                 OneNA = c('a', 'b', NA),
-                 Missing2 = c('', '', 'b'),
-                 Vnames1 = c('V1', '', ''),
-                 Vnames2 = c('V2', ' ', ''),
-                 Vnames3 = c('V1', '', 'a'),
-                 VnamesDup1 = c('V1', ' V1 ', 'c'),
-                 VnamesDup2 = c(' V1', 'V1', '')
-                 )
-  for (combo_name in names(combos)) {
-    dat <- data.frame(a = 1, b = 2, c = 3)
-    colnames(dat) <- combos[[ combo_name ]]
+# make_unique -------------------------------------------------------------
 
-    # ensure we start with a "bad" state
-    old_names <- colnames(dat)
-    if (!is.null(old_names))
-      old_names <- trim_ws(old_names)
-    expect_true(is.null(old_names) ||
-                  any(table(old_names) > 1) ||
-                  any(old_names == '' | is.na(old_names)) ||
-                  any(grepl('^ +| +$', old_names)),
-                info = combo_name)
-
-    fixed_dat <- repair_names(dat)
-    fixed_names <- colnames(fixed_dat)
-
-    # no repeats
-    expect_false(any(table(fixed_names) > 1), info = combo_name)
-
-    # ensure all valid column names are retained
-    if (! is.null(old_names)) {
-      valid <- ! is.na(old_names) & old_names != '' &
-        ! duplicated(old_names)
-      expect_equal(fixed_names[valid], old_names[valid])
-    }
-  }
+test_that("duplicates are de-deduped", {
+  expect_equal(make_unique(c("x", "x")), c("x", "x1"))
 })
 
-test_that("check pathological cases", {
-  df <- data.frame()
-  expect_identical(repair_names(df), df)
-  df <- data.frame(row.names = 1:3)
-  expect_identical(repair_names(df), df)
-  l <- list(3, 4, 5)
-  expect_identical(repair_names(l), setNames(l, paste0("V", 1:3)))
-  l <- list(V = 3, W = 4, 5)
-  expect_identical(repair_names(l), setNames(l, c("V", "W", "V1")))
+test_that("blanks get prefix + numeric id", {
+  expect_equal(make_unique(c("", "")), c("V1", "V2"))
 })
 
-test_that("check object class", {
-  expect_equal(class(iris), class(repair_names(iris)))
-  expect_equal(class(tbl_df(iris)), class(repair_names(tbl_df(iris))))
-  expect_equal(class(repair_names(1:10)), "integer")
-  expect_error(repair_names(cat), "non-vector")
+test_that("blanks skip existing names", {
+  expect_equal(make_unique(c("", "V1")), c("V2", "V1"))
+})
+
+test_that("blanks skip names created when de-duping", {
+  expect_equal(make_unique(c("", "V", "V")), c("V2", "V", "V1"))
+})
+
+# names2 ------------------------------------------------------------------
+
+test_that("names2 returns character vector even if names NULL", {
+  expect_equal(names2(1:3), rep("", 3))
+})
+
+test_that("names2 replaces missing value with blanks", {
+  x <- 1:3
+  names(x) <- c("a", "b", NA)
+
+  expect_equal(names2(x), c("a", "b", ""))
 })

@@ -1,35 +1,29 @@
-#' Provide a succinct summary of a type
+#' Provide a succinct summary of an object
 #'
-#' All methods should return a string with four or less characters, suitable
-#' for succinctly display column types.
+#' \code{type_sum} gives a brief summary of object type. Objects that commonly
+#' occur in a data frame should return a string with four or less characters.
+#' \code{obj_sum} also includes the size of the object if \code{is_s3_vector}
+#' is \code{TRUE}.
 #'
 #' @param x an object to summarise. Generally only methods of atomic vectors
 #'   and variants have been implemented.
 #' @keywords internal
-#' @export
 #' @examples
-#' type_sum(1:10)
-#' type_sum(matrix(1:10))
-#' type_sum(Sys.Date())
-#' type_sum(Sys.time())
-#' type_sum(mean)
-type_sum <- function(x) UseMethod("type_sum")
-
+#' obj_sum(1:10)
+#' obj_sum(matrix(1:10))
+#' obj_sum(Sys.Date())
+#' obj_sum(Sys.time())
+#' obj_sum(mean)
 #' @export
-type_sum.data.frame <- function(x) {
-  if (length(x) == 0) return(character(0))
-
-  vapply(x, type_sum, character(1))
+obj_sum <- function(x) UseMethod("obj_sum")
+#' @export
+obj_sum.default <- function(x) {
+  paste0(type_sum(x), if (is_vector_s3(x)) size_sum(x))
 }
 
 #' @export
-type_sum.numeric <- function(x) "dbl"
-#' @export
-type_sum.integer <- function(x) "int"
-#' @export
-type_sum.logical <- function(x) "lgl"
-#' @export
-type_sum.character <- function(x) "chr"
+#' @rdname obj_sum
+type_sum <- function(x) UseMethod("type_sum")
 
 #' @export
 type_sum.factor <- function(x) "fctr"
@@ -37,13 +31,45 @@ type_sum.factor <- function(x) "fctr"
 type_sum.POSIXt <- function(x) "time"
 #' @export
 type_sum.Date <- function(x) "date"
-
 #' @export
-type_sum.matrix <- function(x) {
-  paste0(NextMethod(), "[", paste0(dim(x), collapse = ","), "]")
+type_sum.data.frame <- function(x) class(x)[[1]]
+#' @export
+type_sum.default <- function(x) {
+  if (!is.object(x)) {
+    switch(typeof(x),
+      logical = "lgl",
+      integer = "int",
+      double = "dbl",
+      character = "chr",
+      complex = "cplx",
+      closure = "fun",
+      environment = "env",
+      typeof(x)
+    )
+  } else if (!isS4(x)) {
+    paste0("S3: ", paste0(class(x), collapse = "/"))
+  } else {
+    paste0("S4: ", methods::is(x)[[1]])
+  }
 }
-#' @export
-type_sum.array <- type_sum.matrix
+
+size_sum <- function(x) {
+  if (!is_vector(x)) return("")
+
+  dim <- dim(x) %||% length(x)
+  paste0(" [", paste0(dim, collapse = ","), "]" )
+}
 
 #' @export
-type_sum.default <- function(x) unname(abbreviate(class(x)[1], 4))
+#' @rdname obj_sum
+is_vector_s3 <- function(x) UseMethod("is_vector_s3")
+#' @export
+is_vector_s3.factor <- function(x) TRUE
+#' @export
+is_vector_s3.Date <- function(x) TRUE
+#' @export
+is_vector_s3.POSIXct <- function(x) TRUE
+#' @export
+is_vector_s3.data.frame <- function(x) TRUE
+#' @export
+is_vector_s3.default <- function(x) !is.object(x) && is_vector(x)

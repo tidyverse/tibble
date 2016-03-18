@@ -1,12 +1,20 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-tibble [![Build Status](https://travis-ci.org/hadley/tibble.svg?branch=master)](https://travis-ci.org/hadley/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/tibble/master.svg)](https://codecov.io/github/hadley/tibble?branch=master)
-=====================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-Data frames in `dplyr` style.
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+tibble
+======
+
+[![Build Status](https://travis-ci.org/hadley/tibble.svg?branch=master)](https://travis-ci.org/hadley/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/tibble/master.svg)](https://codecov.io/github/hadley/tibble?branch=master)
+
+tibble extracts the idea of a **data\_frame** (aka a tibble diff, or tibble for short) from dplyr. As the name suggests a **data\_frame** is a modern reimagining of a data.frame, keeping what time has proven to be effective, and throwing out what is not. In spoken language it's hard to tell the difference between a `data.frame` and `data_frame` so we call the new style tibble dfs (inspired by `dplyr::tbl_df()`), or just tibbles for short.
+
+Creating tibbles
+----------------
+
+You can create a tibble from an existing object with `as_data_frame()`:
 
 ``` r
 library(tibble)
-tbl_df(iris)
+as_data_frame(iris)
 #> Source: local data frame [150 x 5]
 #> 
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -22,36 +30,75 @@ tbl_df(iris)
 #> 9           4.4         2.9          1.4         0.2  setosa
 #> 10          4.9         3.1          1.5         0.1  setosa
 #> ..          ...         ...          ...         ...     ...
-glimpse(iris)
-#> Observations: 150
-#> Variables: 5
-#> $ Sepal.Length (dbl) 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9,...
-#> $ Sepal.Width  (dbl) 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1,...
-#> $ Petal.Length (dbl) 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5,...
-#> $ Petal.Width  (dbl) 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1,...
-#> $ Species      (fctr) setosa, setosa, setosa, setosa, setosa, setosa, ...
-head(rownames_to_column(mtcars, "model"))
-#>               model  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#> 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-#> 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-#> 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-#> 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-#> 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#> 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
-trunc_mat(iris)
 ```
 
-| Sepal.Length | Sepal.Width | Petal.Length | Petal.Width | Species |
-|:-------------|:------------|:-------------|:------------|:--------|
-| (dbl)        | (dbl)       | (dbl)        | (dbl)       | (fctr)  |
-| 5.1          | 3.5         | 1.4          | 0.2         | setosa  |
-| 4.9          | 3.0         | 1.4          | 0.2         | setosa  |
-| 4.7          | 3.2         | 1.3          | 0.2         | setosa  |
-| 4.6          | 3.1         | 1.5          | 0.2         | setosa  |
-| 5.0          | 3.6         | 1.4          | 0.2         | setosa  |
-| 5.4          | 3.9         | 1.7          | 0.4         | setosa  |
-| 4.6          | 3.4         | 1.4          | 0.3         | setosa  |
-| 5.0          | 3.4         | 1.5          | 0.2         | setosa  |
-| 4.4          | 2.9         | 1.4          | 0.2         | setosa  |
-| 4.9          | 3.1         | 1.5          | 0.1         | setosa  |
-| ...          | ...         | ...          | ...         | ...     |
+You can create a new tibble from vectors that represent the columns with `data_frame()`:
+
+``` r
+data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
+#> Source: local data frame [5 x 3]
+#> 
+#>       x     y     z
+#>   (int) (dbl) (dbl)
+#> 1     1     1     2
+#> 2     2     1     5
+#> 3     3     1    10
+#> 4     4     1    17
+#> 5     5     1    26
+```
+
+`data_frame()` is does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variabels, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
+
+You can define a tibble row-by-row with `frame_data()`:
+
+``` r
+frame_data(
+  ~x, ~y,  ~z,
+  "a", 2,  3.6,
+  "b", 1,  8.5
+)
+#> Source: local data frame [2 x 3]
+#> 
+#>       x     y     z
+#>   (chr) (dbl) (dbl)
+#> 1     a     2   3.6
+#> 2     b     1   8.5
+```
+
+Tibbles vs data frames
+----------------------
+
+There are two main differences in the usage of a data frame vs a tibble: printing, and subsetting.
+
+Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. Each column gives both the name and its type. This makes it much eaiser to work with large data:
+
+``` r
+library(nycflights13)
+flights
+#> Source: local data frame [336,776 x 16]
+#> 
+#>     year month   day dep_time dep_delay arr_time arr_delay carrier tailnum
+#>    (int) (int) (int)    (int)     (dbl)    (int)     (dbl)   (chr)   (chr)
+#> 1   2013     1     1      517         2      830        11      UA  N14228
+#> 2   2013     1     1      533         4      850        20      UA  N24211
+#> 3   2013     1     1      542         2      923        33      AA  N619AA
+#> 4   2013     1     1      544        -1     1004       -18      B6  N804JB
+#> 5   2013     1     1      554        -6      812       -25      DL  N668DN
+#> 6   2013     1     1      554        -4      740        12      UA  N39463
+#> 7   2013     1     1      555        -5      913        19      B6  N516JB
+#> 8   2013     1     1      557        -3      709       -14      EV  N829AS
+#> 9   2013     1     1      557        -3      838        -8      B6  N593JB
+#> 10  2013     1     1      558        -2      753         8      AA  N3ALAA
+#> ..   ...   ...   ...      ...       ...      ...       ...     ...     ...
+#> Variables not shown: flight (int), origin (chr), dest (chr), air_time
+#>   (dbl), distance (dbl), hour (dbl), minute (dbl).
+```
+
+Tibles are strict about subsetting. If you try and access a variable that does not, you'll get an error:
+
+``` r
+flights$yea
+#> Error: Unknown column 'yea'
+```
+
+Tibbles clearly delinerate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector.

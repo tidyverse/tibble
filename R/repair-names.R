@@ -1,12 +1,12 @@
 #' Repair object names.
 #'
 #' \code{repair_names} ensures its input has non-missing and
-#' unique names. It also strips any leading or trailing spaces.
-#' Valid names are left as is.
+#' unique names (duplicated names get a numeric suffix). Valid names are
+#' left as is.
 #'
 #' @param x A named vector.
 #' @param prefix A string, the prefix to use for new column names.
-#' @param sep A string, inserted between the column name and de-duplicating
+#' @param sep A string inserted between the column name and de-duplicating
 #'    number.
 #' @return \code{x} with valid names.
 #' @export
@@ -16,33 +16,24 @@
 #' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
 #' repair_names(tbl)
 repair_names <- function(x, prefix = "V", sep = "") {
-  if (length(x) == 0)
+  if (length(x) == 0) {
+    names(x) <- character()
     return(x)
+  }
 
-  xnames <- init_names(x)
-  blanks <- xnames == ""
-
-  # The order vector defines the order in which make.unique() should process the
-  # entries.  Blanks are initialized with the prefix. The index of the first
-  # blank entry appears twice in this vector if there's no column named like the
-  # prefix, to make sure that blank columns always start with V1 (or a higher
-  # index if appropriate).  See also the "pathological cases" test.
-  order <- c(
-    which(!blanks),
-    if (all(xnames[!blanks] != prefix) && any(blanks))
-      which.max(blanks),
-    which(blanks))
-  xnames[blanks] <- prefix
-  xnames[order] <- make.unique(xnames[order], sep = sep)
-
-  names(x) <- xnames
-  x
+  new_names <- make_unique(names2(x), prefix = prefix, sep = sep)
+  setNames(x, new_names)
 }
 
-init_names <- function(x) {
-  xnames <- names(x)
-  if (is.null(xnames))
-    rep("", length(x))
-  else
-    ifelse(is.na(xnames), "", trim_ws(xnames))
+make_unique <- function(x, prefix = "V", sep = "") {
+  blank <- x == ""
+
+  # Ensure existing names are unique
+  x[!blank] <- make.unique(x[!blank], sep = sep)
+
+  # Replace blank names
+  new_vars <- setdiff(paste(prefix, seq_along(x), sep = sep), x)
+  x[blank] <- new_vars[seq_len(sum(blank))]
+
+  x
 }

@@ -11,7 +11,7 @@ repair_names(x, prefix = "V", sep = "")
 
 \item{prefix}{A string, the prefix to use for new column names.}
 
-\item{sep}{A string, inserted between the column name and de-duplicating
+\item{sep}{A string inserted between the column name and de-duplicating
 number.}
 }
 \value{
@@ -19,8 +19,8 @@ number.}
 }
 \description{
 \code{repair_names} ensures its input has non-missing and
-unique names. It also strips any leading or trailing spaces.
-Valid names are left as is.
+unique names (duplicated names get a numeric suffix). Valid names are
+left as is.
 }
 \examples{
 repair_names(list(3, 4, 5)) # works for lists, too

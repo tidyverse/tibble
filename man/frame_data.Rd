@@ -3,17 +3,23 @@
 \name{frame_data}
 \alias{frame_data}
 \alias{tibble}
-\title{Row-wise data_frame creation}
+\title{Row-wise tibble creation}
 \usage{
 frame_data(...)
 
 tibble(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{data_frame}.}
+\item{...}{Arguments specifying the structure of a \code{data_frame}.
+Variable names should be formulas, and may only appear before the data.}
+}
+\value{
+A \code{\link{tbl_df}}.
 }
 \description{
-Create a row-wise \code{\link{data_frame}}.
+Create \code{\link{data_frame}}s laying out the data in rows, rather than
+in columns. This is useful for small tables of data where readability is
+important.
 }
 \examples{
 frame_data(
@@ -21,6 +27,14 @@ frame_data(
   "a",   1,
   "b",   2,
   "c",   3
+)
+
+# frame_data will create a list column if the value in each cell is
+# not a scalar
+frame_data(
+  ~x,  ~y,
+  "a", 1:3,
+  "b", 4:6
 )
 }
 
