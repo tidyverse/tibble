@@ -14,6 +14,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/iris-3-5.txt")
 
   expect_output_identical(
+    print(tbl_df(iris), n = NULL, width = 70L),
+    "trunc_mat/iris--70.txt")
+
+  expect_output_identical(
     print(df_all, n = NULL, width = 30L),
     "trunc_mat/all--30.txt")
 
