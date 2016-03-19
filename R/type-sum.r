@@ -16,9 +16,10 @@
 #' obj_sum(mean)
 #' @export
 obj_sum <- function(x) UseMethod("obj_sum")
+
 #' @export
 obj_sum.default <- function(x) {
-  paste0(type_sum(x), if (is_vector_s3(x)) size_sum(x))
+  paste0(type_sum(x), size_sum(x))
 }
 
 #' @export
@@ -54,7 +55,7 @@ type_sum.default <- function(x) {
 }
 
 size_sum <- function(x) {
-  if (!is_vector(x)) return("")
+  if (!is_vector_s3(x)) return("")
 
   dim <- dim(x) %||% length(x)
   paste0(" [", paste0(dim, collapse = ","), "]" )

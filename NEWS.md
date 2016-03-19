@@ -1,3 +1,11 @@
+Version 0.3-5 (2016-03-19)
+===
+
+- README corrections (@bhive01, #52).
+- Full test coverage (#24, #53).
+- Clean up tests that match against known output (#49).
+
+
 Version 0.3-4 (2016-03-18)
 ===
 

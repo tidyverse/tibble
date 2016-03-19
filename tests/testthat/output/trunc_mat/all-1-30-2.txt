@@ -1,0 +1,7 @@
+       a     b     c     d
+   <dbl> <int> <lgl> <chr>
+1      1     1  TRUE     a
+..   ...   ...   ...   ...
+Variables not shown: e
+  <fctr>, f <date>, and 2
+  more <...>.

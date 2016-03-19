@@ -1,0 +1,4 @@
+Source: local data frame [0 x 2]
+
+Variables not shown: a <chr>,
+  b <lgl>.
