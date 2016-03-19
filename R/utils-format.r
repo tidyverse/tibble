@@ -132,8 +132,10 @@ print.trunc_mat <- function(x, ...) {
     if (is.na(x$rows_missing)) {
       cat(".. (more rows)")
     } else if (x$rows_missing > 0) {
-      cat(wrap(".. (", big_mark(x$rows_missing), " more rows)",
-               width = x$width), "\n", sep ="")
+      cat(wrap(".. (",
+               big_mark(x$rows_missing), " more rows, ",
+               big_mark(x$rows_total), " total)", width = x$width),
+          "\n", sep ="")
     }
   }
 

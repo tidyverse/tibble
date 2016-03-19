@@ -6,7 +6,9 @@
 ..
   (147
   more
-  rows)
+  rows,
+  150
+  total)
 Variables
   not
   shown:
