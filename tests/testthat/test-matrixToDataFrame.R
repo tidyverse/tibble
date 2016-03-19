@@ -49,5 +49,10 @@ test_that("handles atomic vectors", {
   x <- matrix(list("a"), nrow = 2)
   out <- matrixToDataFrame(x)
   expect_equal( x[,1], list( "a", "a" ) )
-  
+
+})
+
+test_that("error conditions", {
+  expect_error(matrixToDataFrame(1:10), "not a matrix")
+  expect_error(matrixToDataFrame(iris3), "not a matrix")
 })

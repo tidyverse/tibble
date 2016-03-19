@@ -95,3 +95,12 @@ test_that("frame_data creates n-col empty data frame", {
   df <- frame_data(~x, ~y)
   expect_equal(names(df), c("x", "y"))
 })
+
+test_that("frame_data recognizes quoted non-formula call", {
+  df <- frame_data(
+    ~x, ~y,
+    quote(mean(1)), 1
+  )
+  expect_equal(df$x, list(quote(mean(1))))
+  expect_equal(df$y, 1)
+})
