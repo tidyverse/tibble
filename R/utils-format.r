@@ -112,7 +112,9 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     dot_width <- pmin(w[-1][!too_wide], 3)
     dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""),
       FUN.VALUE = character(1))
-    shrunk <- rbind(shrunk, ".." = dots)
+    rows_missing <- rows - n
+  } else {
+    rows_missing <- 0L
   }
 
   if (any(extra_wide)) {
@@ -127,13 +129,21 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     extra <- c(extra[1:n_extra], setNames("...", more))
   }
 
-  list(table = shrunk, extra = extra)
+  list(table = shrunk, extra = extra, rows_missing = rows_missing,
+       rows_total = rows)
 }
 
 #' @export
 print.trunc_mat <- function(x, ...) {
   if (!is.null(x$table)) {
     print(x$table)
+
+    if (is.na(x$rows_missing)) {
+      cat(".. (more rows)")
+    } else if (x$rows_missing > 0) {
+      cat(wrap(".. (", big_mark(x$rows_missing), " more rows)",
+               width = x$width), "\n", sep ="")
+    }
   }
 
   if (length(x$extra) > 0) {
