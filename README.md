@@ -18,7 +18,7 @@ as_data_frame(iris)
 #> Source: local data frame [150 x 5]
 #> 
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           (dbl)       (dbl)        (dbl)       (dbl)  (fctr)
+#>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 #> 1           5.1         3.5          1.4         0.2  setosa
 #> 2           4.9         3.0          1.4         0.2  setosa
 #> 3           4.7         3.2          1.3         0.2  setosa
@@ -39,7 +39,7 @@ data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
 #> Source: local data frame [5 x 3]
 #> 
 #>       x     y     z
-#>   (int) (dbl) (dbl)
+#>   <int> <dbl> <dbl>
 #> 1     1     1     2
 #> 2     2     1     5
 #> 3     3     1    10
@@ -47,7 +47,7 @@ data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
 #> 5     5     1    26
 ```
 
-`data_frame()` is does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
+`data_frame()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
 You can define a tibble row-by-row with `frame_data()`:
 
@@ -60,7 +60,7 @@ frame_data(
 #> Source: local data frame [2 x 3]
 #> 
 #>       x     y     z
-#>   (chr) (dbl) (dbl)
+#>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
 #> 2     b     1   8.5
 ```
@@ -78,7 +78,7 @@ flights
 #> Source: local data frame [336,776 x 16]
 #> 
 #>     year month   day dep_time dep_delay arr_time arr_delay carrier tailnum
-#>    (int) (int) (int)    (int)     (dbl)    (int)     (dbl)   (chr)   (chr)
+#>    <int> <int> <int>    <int>     <dbl>    <int>     <dbl>   <chr>   <chr>
 #> 1   2013     1     1      517         2      830        11      UA  N14228
 #> 2   2013     1     1      533         4      850        20      UA  N24211
 #> 3   2013     1     1      542         2      923        33      AA  N619AA
@@ -90,8 +90,8 @@ flights
 #> 9   2013     1     1      557        -3      838        -8      B6  N593JB
 #> 10  2013     1     1      558        -2      753         8      AA  N3ALAA
 #> ..   ...   ...   ...      ...       ...      ...       ...     ...     ...
-#> Variables not shown: flight (int), origin (chr), dest (chr), air_time
-#>   (dbl), distance (dbl), hour (dbl), minute (dbl).
+#> Variables not shown: flight <int>, origin <chr>, dest <chr>, air_time
+#>   <dbl>, distance <dbl>, hour <dbl>, minute <dbl>.
 ```
 
 Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
