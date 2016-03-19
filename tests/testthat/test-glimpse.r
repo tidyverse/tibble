@@ -10,6 +10,10 @@ test_that("glimpse output matches known output", {
     "glimpse/iris-70.txt")
 
   expect_output_identical(
+    glimpse(tbl_df(iris[integer()]), width = 70L),
+    "glimpse/iris-empty-70.txt")
+
+  expect_output_identical(
     glimpse(tbl_df(df_all), width = 70L),
     "glimpse/all-70.txt")
 

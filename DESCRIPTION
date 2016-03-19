@@ -21,6 +21,7 @@ Imports:
     Rcpp
 Suggests:
     testthat,
+    withr,
     knitr,
     rmarkdown,
     Lahman (>= 3.0.1),

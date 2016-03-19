@@ -35,6 +35,14 @@ test_that("[.tbl_df is careful about names (#1245)",{
   expect_error( foo[, c("x", "y", "z") ] )
 })
 
+test_that("[.tbl_df is no-op if args missing",{
+  expect_identical(df_all[], df_all)
+})
+
+test_that("[.tbl_df warns for drop argument",{
+  expect_warning(df_all[1, 2, drop = TRUE], "ignored")
+})
+
 
 # [[ ----------------------------------------------------------------------
 
