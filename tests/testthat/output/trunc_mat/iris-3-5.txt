@@ -1,5 +1,3 @@
-Source: local data frame [150 x 5]
-
   Sepal.Length
          <dbl>
 1          5.1

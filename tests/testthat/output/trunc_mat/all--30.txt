@@ -1,5 +1,3 @@
-Source: local data frame [2 x 8]
-
       a     b     c     d
   <dbl> <int> <lgl> <chr>
 1   1.0     1  TRUE     a
