@@ -46,6 +46,10 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
+  trunc_mat_impl(df, n, width, n_extra, rows)
+}
+
+trunc_mat_impl <- function(df, n, width, n_extra, rows) {
   var_types <- vapply(df, type_sum, character(1))
   var_names <- names(df)
 

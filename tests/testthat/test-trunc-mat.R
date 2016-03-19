@@ -18,6 +18,11 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/iris--70.txt")
 
   expect_output_file_rel(
+    print(trunc_mat_impl(iris[1:10, ], n = 10, width = 70L, n_extra = 100,
+                         rows = NA_integer_)),
+    "trunc_mat/iris_unk--70.txt")
+
+  expect_output_file_rel(
     print(df_all, n = NULL, width = 30L),
     "trunc_mat/all--30.txt")
 
