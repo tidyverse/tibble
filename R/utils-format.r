@@ -150,7 +150,7 @@ print.trunc_mat <- function(x, ...) {
                width = x$width), "\n", sep ="")
     }
   } else if (is.na(x$rows_total)) {
-    cat("(at least ", x$rows_min, " more rows)\n", sep = "")
+    cat("(at least ", x$rows_min, " rows)\n", sep = "")
   } else {
     cat("(", x$rows_total, " rows)\n", sep = "")
   }
