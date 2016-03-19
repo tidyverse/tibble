@@ -15,8 +15,6 @@ You can create a tibble from an existing object with `as_data_frame()`:
 ``` r
 library(tibble)
 as_data_frame(iris)
-#> Source: local data frame [150 x 5]
-#> 
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 #> 1           5.1         3.5          1.4         0.2  setosa
@@ -29,7 +27,7 @@ as_data_frame(iris)
 #> 8           5.0         3.4          1.5         0.2  setosa
 #> 9           4.4         2.9          1.4         0.2  setosa
 #> 10          4.9         3.1          1.5         0.1  setosa
-#> ..          ...         ...          ...         ...     ...
+#> .. (140 more rows, 150 total)
 ```
 
 This will work for reasonable inputs that are already data.frame, list, matrix, or table.
@@ -38,8 +36,6 @@ You can also create a new tibble from vectors that represent the columns with `d
 
 ``` r
 data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
-#> Source: local data frame [5 x 3]
-#> 
 #>       x     y     z
 #>   <int> <dbl> <dbl>
 #> 1     1     1     2
@@ -59,8 +55,6 @@ frame_data(
   "a", 2,  3.6,
   "b", 1,  8.5
 )
-#> Source: local data frame [2 x 3]
-#> 
 #>       x     y     z
 #>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
@@ -84,8 +78,6 @@ Tibbles have a refined print method that shows only the first 10 rows, and all t
 ``` r
 library(nycflights13)
 flights
-#> Source: local data frame [336,776 x 16]
-#> 
 #>     year month   day dep_time dep_delay arr_time arr_delay carrier tailnum
 #>    <int> <int> <int>    <int>     <dbl>    <int>     <dbl>   <chr>   <chr>
 #> 1   2013     1     1      517         2      830        11      UA  N14228
@@ -98,7 +90,7 @@ flights
 #> 8   2013     1     1      557        -3      709       -14      EV  N829AS
 #> 9   2013     1     1      557        -3      838        -8      B6  N593JB
 #> 10  2013     1     1      558        -2      753         8      AA  N3ALAA
-#> ..   ...   ...   ...      ...       ...      ...       ...     ...     ...
+#> .. (336,766 more rows, 336,776 total)
 #> Variables not shown: flight <int>, origin <chr>, dest <chr>, air_time
 #>   <dbl>, distance <dbl>, hour <dbl>, minute <dbl>.
 ```
