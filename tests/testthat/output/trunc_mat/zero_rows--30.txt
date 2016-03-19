@@ -1,2 +1,3 @@
+(0 rows)
 Variables not shown: a <chr>,
   b <lgl>.
