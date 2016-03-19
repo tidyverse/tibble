@@ -47,7 +47,7 @@ data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
 #> 5     5     1    26
 ```
 
-`data_frame()` is does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variabels, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
+`data_frame()` is does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
 You can define a tibble row-by-row with `frame_data()`:
 
@@ -94,7 +94,7 @@ flights
 #>   (dbl), distance (dbl), hour (dbl), minute (dbl).
 ```
 
-Tibles are strict about subsetting. If you try and access a variable that does not, you'll get an error:
+Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
 
 ``` r
 flights$yea
