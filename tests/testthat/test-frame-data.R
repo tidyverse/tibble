@@ -101,6 +101,6 @@ test_that("frame_data recognizes quoted non-formula call", {
     ~x, ~y,
     quote(mean(1)), 1
   )
-  expect_equal(df$x, 1)
+  expect_equal(df$x, list(quote(mean(1))))
   expect_equal(df$y, 1)
 })
