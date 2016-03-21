@@ -1,5 +1,5 @@
 ## Test environments
-* ubuntu 12.04 (on travis-ci), R 3.2.3, R-devel and R-oldrel
+* ubuntu 12.04 (on travis-ci), R 3.2.4, R-devel and R-oldrel
 * win-builder (devel and release)
 
 ## R CMD check results
