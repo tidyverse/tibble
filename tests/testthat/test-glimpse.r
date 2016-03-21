@@ -17,6 +17,13 @@ test_that("glimpse output matches known output", {
     glimpse(tbl_df(df_all), width = 70L),
     "glimpse/all-70.txt")
 
+  withr::with_options(
+    list(tibble.width = 50),
+    expect_output_identical(
+      glimpse(tbl_df(df_all)),
+      "glimpse/all-50.txt")
+  )
+
   expect_output_identical(
     glimpse(5),
     "glimpse/5.txt")
