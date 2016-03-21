@@ -51,7 +51,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
   var_types <- vapply(df, type_sum, character(1))
   var_names <- names(df)
 
-  width <- width %||% tibble_opt("width") %||% getOption("width")
+  width <- tibble_width(width)
   if (ncol(df) == 0 || nrow(df) == 0) {
     shrunk <- list(table = NULL, extra = setNames(var_types, var_names))
   } else {
@@ -175,4 +175,8 @@ wrap <- function(..., indent = 0, width) {
 big_mark <- function(x, ...) {
   mark <- if (identical(getOption("OutDec"), ",")) "." else ","
   formatC(x, big.mark = mark, ...)
+}
+
+tibble_width <- function(width) {
+  width %||% tibble_opt("width") %||% getOption("width")
 }
