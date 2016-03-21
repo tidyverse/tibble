@@ -12,7 +12,6 @@
 #' @seealso \link{tibble-package}
 #' @keywords internal
 #' @examples
-#' dim_desc(mtcars)
 #' trunc_mat(mtcars)
 #'
 #' print(tbl_df(mtcars))
@@ -23,8 +22,6 @@
 #' @name formatting
 NULL
 
-#' @export
-#' @rdname formatting
 dim_desc <- function(x) {
   d <- dim(x)
   d2 <- big_mark(d)
