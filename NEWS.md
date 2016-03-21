@@ -23,6 +23,7 @@ Version 1.0 (2016-03-21)
     - New `has_rownames()` and `remove_rownames()` (#44).
     - New `repair_names()` fixes missing and duplicate names (#10, #15,
       @r2evans).
+    - New `is_vector_s3()`.
 
 - Features
     - New `as_data_frame.table()` with argument `n` to control name of count
