@@ -5,7 +5,7 @@ tibble
 
 [![Build Status](https://travis-ci.org/hadley/tibble.svg?branch=master)](https://travis-ci.org/hadley/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/tibble/master.svg)](https://codecov.io/github/hadley/tibble?branch=master)
 
-tibble extracts the idea of a **data\_frame** (aka a tibble diff, or tibble for short) from dplyr. As the name suggests a **data\_frame** is a modern reimagining of a data.frame, keeping what time has proven to be effective, and throwing out what is not. In spoken language it's hard to tell the difference between a `data.frame` and `data_frame` so we call the new style tibble dfs (inspired by `dplyr::tbl_df()`), or just tibbles for short.
+tibble implements a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. It extracts these basic ideas out of [dplyr](https://cran.r-project.org/package=dplyr), which is now more clearly focused on data manipulation. tibble provides a lighter-weight package for the basic care and feeding of `tbl_df`'s, aka "tibble diffs" or just "tibbles". Tibbles are data.frames with nicer behavior around printing, subsetting, and factor handling.
 
 Creating tibbles
 ----------------
@@ -18,7 +18,7 @@ as_data_frame(iris)
 #> Source: local data frame [150 x 5]
 #> 
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           (dbl)       (dbl)        (dbl)       (dbl)  (fctr)
+#>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 #> 1           5.1         3.5          1.4         0.2  setosa
 #> 2           4.9         3.0          1.4         0.2  setosa
 #> 3           4.7         3.2          1.3         0.2  setosa
@@ -32,14 +32,16 @@ as_data_frame(iris)
 #> ..          ...         ...          ...         ...     ...
 ```
 
-You can create a new tibble from vectors that represent the columns with `data_frame()`:
+This will work for reasonable inputs that are already data.frame, list, matrix, or table.
+
+You can also create a new tibble from vectors that represent the columns with `data_frame()`:
 
 ``` r
 data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
 #> Source: local data frame [5 x 3]
 #> 
 #>       x     y     z
-#>   (int) (dbl) (dbl)
+#>   <int> <dbl> <dbl>
 #> 1     1     1     2
 #> 2     2     1     5
 #> 3     3     1    10
@@ -47,7 +49,7 @@ data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
 #> 5     5     1    26
 ```
 
-`data_frame()` is does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
+`data_frame()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
 You can define a tibble row-by-row with `frame_data()`:
 
@@ -60,9 +62,16 @@ frame_data(
 #> Source: local data frame [2 x 3]
 #> 
 #>       x     y     z
-#>   (chr) (dbl) (dbl)
+#>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
 #> 2     b     1   8.5
+```
+
+You can see why this variant of the data.frame is called a "tibble diff" from its class:
+
+``` r
+class(as_data_frame(iris))
+#> [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
 Tibbles vs data frames
@@ -70,7 +79,7 @@ Tibbles vs data frames
 
 There are two main differences in the usage of a data frame vs a tibble: printing, and subsetting.
 
-Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. Each column gives both the name and its type. This makes it much eaiser to work with large data:
+Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. In addition to its name, each column reports its type, a nice feature borrowed from `str()`:
 
 ``` r
 library(nycflights13)
@@ -78,7 +87,7 @@ flights
 #> Source: local data frame [336,776 x 16]
 #> 
 #>     year month   day dep_time dep_delay arr_time arr_delay carrier tailnum
-#>    (int) (int) (int)    (int)     (dbl)    (int)     (dbl)   (chr)   (chr)
+#>    <int> <int> <int>    <int>     <dbl>    <int>     <dbl>   <chr>   <chr>
 #> 1   2013     1     1      517         2      830        11      UA  N14228
 #> 2   2013     1     1      533         4      850        20      UA  N24211
 #> 3   2013     1     1      542         2      923        33      AA  N619AA
@@ -90,8 +99,8 @@ flights
 #> 9   2013     1     1      557        -3      838        -8      B6  N593JB
 #> 10  2013     1     1      558        -2      753         8      AA  N3ALAA
 #> ..   ...   ...   ...      ...       ...      ...       ...     ...     ...
-#> Variables not shown: flight (int), origin (chr), dest (chr), air_time
-#>   (dbl), distance (dbl), hour (dbl), minute (dbl).
+#> Variables not shown: flight <int>, origin <chr>, dest <chr>, air_time
+#>   <dbl>, distance <dbl>, hour <dbl>, minute <dbl>.
 ```
 
 Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
@@ -101,4 +110,30 @@ flights$yea
 #> Error: Unknown column 'yea'
 ```
 
-Tibbles clearly delinerate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector.
+Tibbles also clearly delineate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector. No more `drop = FALSE`!
+
+``` r
+class(iris[ , 1])
+#> [1] "numeric"
+class(iris[ , 1, drop = FALSE])
+#> [1] "data.frame"
+class(as_data_frame(iris)[ , 1])
+#> [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+Installation
+------------
+
+tibble is *coming soon to CRAN, but it's not there yet*:
+
+``` r
+# will not work yet
+#install.packages("tibble")
+```
+
+You can try out the dev version with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("hadley/tibble")
+```

@@ -11,7 +11,8 @@
 #' \code{data.frames}, and a default method that calls \code{\link{str}}.
 #'
 #' @param x An object to glimpse at.
-#' @param width Width of output: defaults to the width of the console.
+#' @param width Width of output: defaults to the setting of the option
+#'   \code{tibble.width} or the width of the console.
 #' @param ... Other arguments passed onto individual methods.
 #' @return x original x is (invisibly) returned, allowing \code{glimpse} to be
 #' used within a data pipe line.
@@ -22,12 +23,14 @@
 #' if (require("Lahman")) {
 #'   glimpse(Lahman::Batting)
 #' }
-glimpse <- function(x, width = getOption("width"), ...) {
+glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
 }
 
 #' @export
-glimpse.tbl <- function(x, width = getOption("width"), ...) {
+glimpse.tbl <- function(x, width = NULL, ...) {
+  width <- tibble_width(width)
+
   cat("Observations: ", big_mark(nrow(x)), "\n", sep = "")
   if (ncol(x) == 0) return(invisible())
 
@@ -56,8 +59,8 @@ glimpse.data.frame <- glimpse.tbl
 
 #' @export
 #' @importFrom utils str
-glimpse.default <- function(x, width = getOption("width"), max.level = 3, ...) {
-  str(x, width = width, max.level = max.level, ...)
+glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
+  str(x, width = tibble_width(width), max.level = max.level, ...)
   invisible(x)
 }
 
