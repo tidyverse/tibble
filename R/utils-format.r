@@ -25,12 +25,11 @@ NULL
 
 #' @export
 #' @rdname formatting
-dim_desc <- function(x) {
-  d <- dim(x)
-  d2 <- big_mark(d)
-  d2[is.na(d)] <- "??"
+dim_desc <- function(x) UseMethod("dim_desc", x)
 
-  paste0("[", paste0(d2, collapse = " x "), "]")
+#' @export
+dim_desc.default <- function(x) {
+  format_dim(dim(x))
 }
 
 #' @export
@@ -63,6 +62,8 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
 
 #' @importFrom stats setNames
 shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
+  dim <- c(rows, ncol(df))
+
   df <- remove_rownames(df)
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
@@ -106,12 +107,17 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   shrunk <- rbind(" " = classes, shrunk)
   colnames(shrunk) <- colnames(df)[!too_wide]
 
-  needs_dots <- is.na(rows) || rows > n
+  if (is.na(rows))
+    needs_dots <- (nrow(df) >= n)
+  else
+    needs_dots <- rows > n
   if (needs_dots) {
     dot_width <- pmin(w[-1][!too_wide], 3)
     dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""),
       FUN.VALUE = character(1))
     shrunk <- rbind(shrunk, ".." = dots)
+  } else {
+    dim[[1]] <- nrow(df)
   }
 
   if (any(extra_wide)) {
@@ -126,7 +132,12 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     extra <- c(extra[1:n_extra], setNames("...", more))
   }
 
-  list(table = shrunk, extra = extra)
+  list(table = shrunk, extra = extra, dim = dim)
+}
+
+#' @export
+dim_desc.trunc_mat <- function(x) {
+  format_dim(x$dim)
 }
 
 #' @export
@@ -169,6 +180,14 @@ wrap <- function(..., indent = 0, width) {
 }
 
 
+
+format_dim <- function(d) {
+  d <- as.integer(d)
+  d2 <- big_mark(d)
+  d2[is.na(d)] <- "??"
+
+  paste0("[", paste0(d2, collapse = " x "), "]")
+}
 
 # function for the thousand separator,
 # returns "," unless it's used for the decimal point, in which case returns "."
