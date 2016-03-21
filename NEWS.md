@@ -1,54 +1,28 @@
-Version 0.3-6 (2016-03-21)
+Version 0.4 (2016-03-21)
 ===
 
-- `glimpse()` obtains default width from `tibble.width` option (#35, #56).
-- Don't export `dim_desc()` (#50, #55).
-- Don't test R-devel on AppVeyor because of missing directory on CRAN.
-- Edits to `README` (#54, @jennybc).
-
-
-Version 0.3-5 (2016-03-19)
-===
-
-- README corrections (@bhive01, #52).
-- Full test coverage (#24, #53).
-- Clean up tests that match against known output (#49).
-
-
-Version 0.3-4 (2016-03-18)
-===
-
-- Renamed `obj_type()` to `obj_sum()`, improvements, better integration with `type_sum()`.
-- Add tests.
-- Improve documentation and vignette.
-- Internal cleanup.
-- Improve `[.tbl_df()` error message.
-- `frame_data()` returns 0-row but n-col data frame if no data.
-- Further cleanup of `repair_names()`.
-- Don't trim ws in `repair_names()` (#47).
-
-
-Version 0.3-3 (2016-03-18)
-===
-
-- `[[.tbl_df()` now falls back to regular subsetting when used with anything other than a single string (#29).
-- When used in list-columns, S4 objects only print the class name rather than the full class hierarchy (#33).
-- Further cleanup for `repair_names()`.
-- Add test that `[.tbl_df()` does not change class (#41, @jennybc).
-
-
-Version 0.3-2 (2016-03-17)
-===
-
-- Cleanup for `column_to_rownames()` and `rownames_to_columns()` (#45).
-- New `has_rownames()` and `remove_rownames()` (#44).
-
-
-Version 0.3-1 (2016-03-17)
-===
-
-- Cleanup for `repair_names()` (#43).
-- Cleanup for `add_row()` (#46).
+- Interface changes
+    - `glimpse()` obtains default width from `tibble.width` option (#35, #56).
+    - Don't export `dim_desc()` (#50, #55).
+    - New `has_rownames()` and `remove_rownames()` (#44).
+- Minor modifications
+    - `frame_data()` returns 0-row but n-col data frame if no data.
+    - `[[.tbl_df()` now falls back to regular subsetting when used with anything other than a single string (#29).
+    - When used in list-columns, S4 objects only print the class name rather than the full class hierarchy (#33).
+    - Add test that `[.tbl_df()` does not change class (#41, @jennybc).
+    - Improve `[.tbl_df()` error message.
+- Documentation
+    - Improve documentation and vignette.
+    - Update README, with edits (#52, @bhive01) and enhancements (#54, @jennybc).
+- Code quality
+    - Full test coverage (#24, #53).
+    - Renamed `obj_type()` to `obj_sum()`, improvements, better integration with `type_sum()`.
+    - Cleanup for `column_to_rownames()` and `rownames_to_columns()` (#45).
+    - Cleanup for `repair_names()` (#43). Whitespace are not touched by this function (#47).
+    - Cleanup for `add_row()` (#46).
+    - Regression tests load known output from file (#49).
+    - Internal cleanup.
+    - Don't test R-devel on AppVeyor because of missing directory on CRAN.
 
 
 Version 0.3 (2016-03-10)
