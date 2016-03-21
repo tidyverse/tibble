@@ -1,3 +1,12 @@
+Version 0.3-6 (2016-03-21)
+===
+
+- `glimpse()` obtains default width from `tibble.width` option (#35, #56).
+- Don't export `dim_desc()` (#50, #55).
+- Don't test R-devel on AppVeyor because of missing directory on CRAN.
+- Edits to `README` (#54, @jennybc).
+
+
 Version 0.3-5 (2016-03-19)
 ===
 
