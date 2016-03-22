@@ -3,7 +3,7 @@
 tibble
 ======
 
-[![Build Status](https://travis-ci.org/hadley/tibble.svg?branch=master)](https://travis-ci.org/hadley/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/tibble/master.svg)](https://codecov.io/github/hadley/tibble?branch=master)
+[![Build Status](https://travis-ci.org/hadley/tibble.svg?branch=master)](https://travis-ci.org/hadley/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/tibble/master.svg)](https://codecov.io/github/hadley/tibble?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 
 tibble implements a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. It extracts these basic ideas out of [dplyr](https://cran.r-project.org/package=dplyr), which is now more clearly focused on data manipulation. tibble provides a lighter-weight package for the basic care and feeding of `tbl_df`'s, aka "tibble diffs" or just "tibbles". Tibbles are data.frames with nicer behavior around printing, subsetting, and factor handling.
 
@@ -124,11 +124,10 @@ class(as_data_frame(iris)[ , 1])
 Installation
 ------------
 
-tibble is *coming soon to CRAN, but it's not there yet*:
+tibble is on CRAN, install using:
 
 ``` r
-# will not work yet
-#install.packages("tibble")
+install.packages("tibble")
 ```
 
 You can try out the dev version with:

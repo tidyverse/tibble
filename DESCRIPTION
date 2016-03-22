@@ -1,6 +1,6 @@
 Package: tibble
 Encoding: UTF-8
-Version: 0.4
+Version: 1.0
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class that offers better checking and
     printing capabilities than traditional data frames.
@@ -10,8 +10,8 @@ Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("RStudio", role = "cph")
     )
-URL: https://github.com/krlmlr/tibble
-BugReports: https://github.com/krlmlr/tibble/issues
+URL: https://github.com/hadley/tibble
+BugReports: https://github.com/hadley/tibble/issues
 Depends: R (>= 3.1.2)
 Imports:
     methods,
