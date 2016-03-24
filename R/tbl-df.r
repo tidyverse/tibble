@@ -1,28 +1,3 @@
-#' S3 class: tbl_df
-#'
-#' A data frame tbl wraps a local data frame. The main advantage to using
-#' a \code{tbl_df} over a regular data frame is the printing:
-#' tbl objects only print a few rows and all the columns that fit on one
-#' screen, describing the rest of it as text.
-#'
-#' @section Methods:
-#'
-#' \code{tbl_df} implements four important base methods:
-#'
-#' \describe{
-#' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see \code{\link{print.tbl_df}}}
-#' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
-#' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
-#'   so is considerably faster. Throws error if column does not exist.}
-#' }
-#' @export
-#' @param data a data frame
-#' @keywords internal
-tbl_df <- function(data) {
-  as_data_frame(data)
-}
-
 methods::setOldClass(c("tbl_df", "tbl", "data.frame"))
 
 # Standard data frame methods --------------------------------------------------

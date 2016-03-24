@@ -3,8 +3,23 @@
 #' @import assertthat
 #' @importFrom utils head tail
 #' @aliases NULL
-#' @section Getting started:
-#' See \code{\link{tbl_df}} for an introduction,
+#' @details The S3 class \code{tbl_df} wraps a local data frame. The main
+#' advantage to using a \code{tbl_df} over a regular data frame is the printing:
+#' tbl objects only print a few rows and all the columns that fit on one screen,
+#' describing the rest of it as text.
+#'
+#' @section Methods:
+#'
+#' \code{tbl_df} implements four important base methods:
+#'
+#' \describe{
+#' \item{print}{By default only prints the first 10 rows (at most 20), and the
+#'   columns that fit on screen; see \code{\link{print.tbl_df}}}
+#' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
+#' \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
+#'   so is considerably faster. Throws error if column does not exist.}
+#' }
+#' @section Important functions:
 #' \code{\link{data_frame}} and \code{\link{frame_data}} for construction,
 #' \code{\link{as_data_frame}} for coercion,
 #' and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
