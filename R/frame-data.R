@@ -6,7 +6,7 @@
 #'
 #' @param ... Arguments specifying the structure of a \code{data_frame}.
 #'   Variable names should be formulas, and may only appear before the data.
-#' @return A \code{\link{tbl_df}}.
+#' @return A \code{data_frame}.
 #' @export
 #' @examples
 #' frame_data(
