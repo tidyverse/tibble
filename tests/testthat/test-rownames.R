@@ -14,16 +14,16 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal( class(res), class(mtcars) )
   expect_error(rownames_to_column( mtcars, "wt"),
                paste("There is a column named wt already!")  )
-  res1 <- rownames_to_column( tbl_df(mtcars), "Make&Model" )
+  res1 <- rownames_to_column( as_data_frame(mtcars), "Make&Model" )
   expect_false(has_rownames(res1))
-  expect_equal( class(res1), class(tbl_df(mtcars)) )
+  expect_equal( class(res1), class(as_data_frame(mtcars)) )
   expect_error(rownames_to_column( mtcars, "wt"),
                paste("There is a column named wt already!")  )
 })
 
 test_that("column_to_rownames returns tbl", {
   var <- "car"
-  mtcars <- tbl_df(mtcars)
+  mtcars <- as_data_frame(mtcars)
   res <- column_to_rownames( rownames_to_column( mtcars, var), var)
   expect_true(has_rownames(res))
   expect_equal( class(res), class(mtcars) )
