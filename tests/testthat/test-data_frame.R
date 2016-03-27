@@ -49,6 +49,15 @@ test_that("SE version", {
 
 # as_data_frame -----------------------------------------------------------
 
+test_that("classes are fixed after as_data_frame()", {
+  expect_equal(class(as_data_frame(iris)), class(data_frame()))
+  expect_equal(class(as_data_frame(as.list(iris))), class(data_frame()))
+  expect_equal(class(as_data_frame(as_data_frame(iris))), class(data_frame()))
+  iris_df <- structure(as_data_frame(iris),
+                       class = c("my_special_df", c(class(data_frame()))))
+  expect_equal(class(as_data_frame(iris_df)), class(data_frame()))
+})
+
 test_that("columns must be same length", {
   l <- list(x = 1:2, y = 1:3)
   expect_error(as_data_frame(l), "must be length 1 or")
