@@ -100,8 +100,8 @@ lst_ <- function(xs) {
 #' before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
 #' with more efficient methods for matrices and data frames.
 #'
-#' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-#' classes), tbl_dfs (trivial!), lists, matrices, and tables.
+#' This is an S3 generic. tibble includes methods for data frames (sets tbl_df
+#' classes), lists, matrices, and tables.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -139,12 +139,6 @@ lst_ <- function(xs) {
 #' }
 as_data_frame <- function(x, ...) {
   UseMethod("as_data_frame")
-}
-
-#' @export
-#' @rdname as_data_frame
-as_data_frame.tbl_df <- function(x, ...) {
-  x
 }
 
 #' @export
