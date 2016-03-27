@@ -7,12 +7,9 @@
 \alias{as_data_frame.list}
 \alias{as_data_frame.matrix}
 \alias{as_data_frame.table}
-\alias{as_data_frame.tbl_df}
 \title{Coerce lists and matrices to data frames.}
 \usage{
 as_data_frame(x, ...)
-
-\method{as_data_frame}{tbl_df}(x, ...)
 
 \method{as_data_frame}{data.frame}(x, ...)
 
@@ -43,8 +40,8 @@ before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
 with more efficient methods for matrices and data frames.
 }
 \details{
-This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-classes), tbl_dfs (trivial!), lists, matrices, and tables.
+This is an S3 generic. tibble includes methods for data frames (sets tbl_df
+classes), lists, matrices, and tables.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
