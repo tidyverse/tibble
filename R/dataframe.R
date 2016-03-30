@@ -101,7 +101,7 @@ lst_ <- function(xs) {
 #' with more efficient methods for matrices and data frames.
 #'
 #' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-#' classes), tbl_dfs (trivial!), lists, matrices, and tables.
+#' classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.

@@ -44,7 +44,7 @@ with more efficient methods for matrices and data frames.
 }
 \details{
 This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-classes), tbl_dfs (trivial!), lists, matrices, and tables.
+classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)

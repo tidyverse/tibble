@@ -2,19 +2,19 @@ context("Truncated matrix")
 
 test_that("trunc_mat output matches known output", {
   expect_output_identical(
-    print(tbl_df(mtcars), n = 8L, width = 30L),
+    print(as_data_frame(mtcars), n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt")
 
   expect_output_identical(
-    print(tbl_df(iris), n = 5L, width = 30L),
+    print(as_data_frame(iris), n = 5L, width = 30L),
     "trunc_mat/iris-5-30.txt")
 
   expect_output_identical(
-    print(tbl_df(iris), n = 3L, width = 5L),
+    print(as_data_frame(iris), n = 3L, width = 5L),
     "trunc_mat/iris-3-5.txt")
 
   expect_output_identical(
-    print(tbl_df(iris), n = NULL, width = 70L),
+    print(as_data_frame(iris), n = NULL, width = 70L),
     "trunc_mat/iris--70.txt")
 
   expect_output_identical(
@@ -26,7 +26,7 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/zero_rows--30.txt")
 
   expect_output_identical(
-    print(tbl_df(iris)[character()], n = 5L, width = 30L),
+    print(as_data_frame(iris)[character()], n = 5L, width = 30L),
     "trunc_mat/zero_cols-5-30.txt")
 
   expect_output_identical(

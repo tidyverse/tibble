@@ -1,9 +1,9 @@
 context("Equality")
 
 test_that("data frames equal to themselves", {
-  expect_true(all.equal(tbl_df(mtcars), tbl_df(mtcars)))
-  expect_true(all.equal(tbl_df(iris), tbl_df(iris)))
-  expect_true(all.equal(tbl_df(df_all), tbl_df(df_all)))
+  expect_true(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)))
+  expect_true(all.equal(as_data_frame(iris), as_data_frame(iris)))
+  expect_true(all.equal(as_data_frame(df_all), as_data_frame(df_all)))
 })
 
 test_that("data frames equal to random permutations of themselves", {
@@ -11,23 +11,23 @@ test_that("data frames equal to random permutations of themselves", {
     x[sample(nrow(x)), sample(ncol(x)), drop = FALSE]
   }
 
-  expect_equal(tbl_df(mtcars), tbl_df(scramble(mtcars)))
-  expect_equal(tbl_df(iris), tbl_df(scramble(iris)))
-  expect_equal(tbl_df(df_all), tbl_df(scramble(df_all)))
+  expect_equal(as_data_frame(mtcars), as_data_frame(scramble(mtcars)))
+  expect_equal(as_data_frame(iris), as_data_frame(scramble(iris)))
+  expect_equal(as_data_frame(df_all), as_data_frame(scramble(df_all)))
 })
 
 test_that("data frames not equal if missing row", {
-  expect_match(all.equal(tbl_df(mtcars), tbl_df(mtcars)[-1, ]), "Different number of rows")
-  expect_match(all.equal(tbl_df(iris), tbl_df(iris)[-1, ]),     "Different number of rows")
-  expect_match(all.equal(tbl_df(df_all), tbl_df(df_all)[-1, ]), "Different number of rows")
+  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[-1, ]), "Different number of rows")
+  expect_match(all.equal(as_data_frame(iris), as_data_frame(iris)[-1, ]),     "Different number of rows")
+  expect_match(all.equal(as_data_frame(df_all), as_data_frame(df_all)[-1, ]), "Different number of rows")
 })
 
 test_that("data frames not equal if missing col", {
-  expect_match(all.equal(tbl_df(mtcars), tbl_df(mtcars)[, -1]), "Cols in x but not y: mpg")
-  expect_match(all.equal(tbl_df(mtcars)[, -1], tbl_df(mtcars)), "Cols in y but not x: mpg")
-  expect_match(all.equal(tbl_df(iris), tbl_df(iris)[, -1]),     "Cols in x but not y: Sepal.Length")
-  expect_match(all.equal(tbl_df(df_all), tbl_df(df_all)[, -1]), "Cols in x but not y: a")
-  expect_match(all.equal(tbl_df(mtcars), rev(tbl_df(mtcars)),
+  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[, -1]), "Cols in x but not y: mpg")
+  expect_match(all.equal(as_data_frame(mtcars)[, -1], as_data_frame(mtcars)), "Cols in y but not x: mpg")
+  expect_match(all.equal(as_data_frame(iris), as_data_frame(iris)[, -1]),     "Cols in x but not y: Sepal.Length")
+  expect_match(all.equal(as_data_frame(df_all), as_data_frame(df_all)[, -1]), "Cols in x but not y: a")
+  expect_match(all.equal(as_data_frame(mtcars), rev(as_data_frame(mtcars)),
                          ignore_col_order = FALSE),
                "Column names same but in different order")
 })
@@ -35,7 +35,7 @@ test_that("data frames not equal if missing col", {
 test_that("factors equal only if levels equal", {
   df1 <- data.frame(x = factor(c("a", "b")))
   df2 <- data.frame(x = factor(c("a", "d")))
-  expect_match(all.equal(tbl_df(df1), tbl_df(df2)), "Factor levels not equal for column x" )
+  expect_match(all.equal(as_data_frame(df1), as_data_frame(df2)), "Factor levels not equal for column x" )
 })
 
 test_that("all.equal.data.frame handles data.frames with NULL names", {
@@ -83,5 +83,5 @@ test_that("equality handles data frames with 0 columns (#1506)", {
 })
 
 test_that("equality fails if types different", {
-  expect_equal(all.equal(tbl_df(iris), iris), "Different types: x tbl_df, tbl, data.frame, y data.frame")
+  expect_equal(all.equal(as_data_frame(iris), iris), "Different types: x tbl_df, tbl, data.frame, y data.frame")
 })

@@ -81,6 +81,15 @@ test_that("NULL makes 0 x 0 tbl_df", {
 })
 
 
+test_that("as_data_frame.tbl_df() leaves classes unchanged (#60)", {
+  df <- data_frame()
+  expect_equal(class(df),
+               c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(structure(df, class = c("my_df", class(df)))),
+               c("my_df", "tbl_df", "tbl", "data.frame"))
+})
+
+
 test_that("Can convert tables to data frame", {
   mtcars_table <- xtabs(mtcars, formula = ~vs+am+cyl)
 
@@ -153,8 +162,8 @@ test_that("can add new row", {
   iris_new <- add_row(iris, Species = "unknown")
   expect_equal(class(iris), class(iris_new))
 
-  iris_new <- add_row(tbl_df(iris), Species = "unknown")
-  expect_equal(class(tbl_df(iris)), class(iris_new))
+  iris_new <- add_row(as_data_frame(iris), Species = "unknown")
+  expect_equal(class(as_data_frame(iris)), class(iris_new))
 
   new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
   expect_true(all(is.na(new_iris_row)))

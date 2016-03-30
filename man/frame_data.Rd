@@ -14,7 +14,7 @@ tibble(...)
 Variable names should be formulas, and may only appear before the data.}
 }
 \value{
-A \code{\link{tbl_df}}.
+A \code{data_frame}.
 }
 \description{
 Create \code{\link{data_frame}}s laying out the data in rows, rather than
