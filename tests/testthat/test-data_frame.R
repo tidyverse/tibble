@@ -81,6 +81,15 @@ test_that("NULL makes 0 x 0 tbl_df", {
 })
 
 
+test_that("as_data_frame.tbl_df() leaves classes unchanged (#60)", {
+  df <- data_frame()
+  expect_equal(class(df),
+               c("tbl_df", "tbl", "data.frame"))
+  expect_equal(class(structure(df, class = c("my_df", class(df)))),
+               c("my_df", "tbl_df", "tbl", "data.frame"))
+})
+
+
 test_that("Can convert tables to data frame", {
   mtcars_table <- xtabs(mtcars, formula = ~vs+am+cyl)
 
