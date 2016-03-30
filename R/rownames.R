@@ -16,7 +16,7 @@
 #'
 #' head(rownames_to_column(mtcars))
 #'
-#' mtcars_tbl <- rownames_to_column(tbl_df(mtcars))
+#' mtcars_tbl <- rownames_to_column(as_data_frame(mtcars))
 #' mtcars_tbl
 #' column_to_rownames(mtcars_tbl)
 #' @name rownames
