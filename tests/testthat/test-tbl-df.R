@@ -17,6 +17,17 @@ test_that("[ retains class", {
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
 })
 
+test_that("[ and as_data_frame commute", {
+  mtcars1 <- remove_rownames(mtcars)
+  mtcars2 <- as_data_frame(mtcars1)
+  expect_identical(mtcars2, as_data_frame(mtcars1))
+  expect_identical(mtcars2[], as_data_frame(mtcars1[]))
+  expect_identical(mtcars2[1:5, ], as_data_frame(mtcars1[1:5, ]))
+  expect_identical(mtcars2[, 1:5], as_data_frame(mtcars1[, 1:5]))
+  expect_identical(mtcars2[1:5, 1:5], as_data_frame(mtcars1[1:5, 1:5]))
+  expect_identical(mtcars2[1:5], as_data_frame(mtcars1[1:5]))
+})
+
 test_that("[ with 0 cols creates correct row names (#656)", {
   zero_row <- as_data_frame(iris)[, 0]
   expect_is(zero_row, "tbl_df")
