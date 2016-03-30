@@ -1,3 +1,12 @@
+# tibble 1.0-1 (2016-03-30)
+
+- Document behavior of `as_data_frame.tbl_df()` for subclasses (#60).
+- Test subsetting in all variants (#62).
+- Subsetting with empty index (e.g., `x[]`) also removes row names.
+- Document and test that subsetting removes row names.
+- Remove `tbl_df()` (#57).
+
+
 Version 1.0 (2016-03-21)
 ===
 
