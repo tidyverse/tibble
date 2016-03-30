@@ -72,18 +72,19 @@ test_that("can use recursive indexing with [[", {
 test_that("[[ throws error if name doesn't exist", {
   df <- data_frame(x = 1)
   expect_error(df[["y"]], "Unknown column 'y'")
-  expect_error(df[[1, "y"]], "Unknown column 'y'")
+  expect_warning(expect_error(df[[1, "y"]], "Unknown column 'y'"),
+                 "deprecated")
 })
 
-test_that("can use two-dimensional indexing with [[", {
+test_that("warning with two-dimensional indexing with [[", {
   iris2 <- as_data_frame(iris)
-  expect_equal(iris2[[1, 2]], iris[[1, 2]])
-  expect_equal(iris2[[2, 3]], iris[[2, 3]])
+  expect_warning(expect_equal(iris2[[1, 2]], iris2[[2]][[1]]), "deprecated")
+  expect_warning(expect_equal(iris2[[2, 3]], iris2[[3]][[2]]), "deprecated")
 })
 
 # $ -----------------------------------------------------------------------
 
-test_that("[[ throws error if name doesn't exist", {
+test_that("$ throws error if name doesn't exist", {
   df <- data_frame(x = 1)
   expect_error(df$y, "Unknown column 'y'")
 })
