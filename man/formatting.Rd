@@ -8,7 +8,7 @@
 \usage{
 \method{print}{tbl_df}(x, ..., n = NULL, width = NULL)
 
-trunc_mat(x, n = NULL, width = NULL, n_extra = 100)
+trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
 \arguments{
 \item{x}{Object to show.}

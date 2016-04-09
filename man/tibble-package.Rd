@@ -46,6 +46,8 @@ Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
   threshold is exceeded. Default: 10.}
 \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
   \code{width} option).}
+\item{\code{tibble.max_extra_cols}}{Number of extra columns
+  printed in reduced form. Default: 100.}
 }
 }
 

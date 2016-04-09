@@ -33,7 +33,7 @@ dim_desc <- function(x) {
 #' @export
 #' @rdname formatting
 #' @importFrom stats setNames
-trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
+trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
   if (is.null(n)) {
@@ -43,6 +43,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
       n <- rows
     }
   }
+  n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
   var_types <- vapply(df, type_sum, character(1))
