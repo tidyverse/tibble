@@ -17,14 +17,22 @@ test_that("[ retains class", {
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
 })
 
-test_that("[ and as_data_frame commute", {
+test_that("[ and as_data_frame commute for columns if no row names", {
+  iris2 <- as_data_frame(iris)
+  expect_identical(iris2, as_data_frame(iris))
+  expect_identical(iris2[], as_data_frame(iris[]))
+  expect_identical(iris2[, 1:5], as_data_frame(iris[, 1:5]))
+  expect_identical(iris2[1:5], as_data_frame(iris[1:5]))
+})
+
+test_that("[ and as_data_frame commute with offset if row names", {
   mtcars2 <- as_data_frame(mtcars)
   expect_identical(mtcars2, as_data_frame(mtcars))
-  expect_identical(mtcars2[], remove_rownames(as_data_frame(mtcars[])))
-  expect_identical(mtcars2[1:5, ], remove_rownames(as_data_frame(mtcars[1:5, ])))
-  expect_identical(mtcars2[, 1:5], remove_rownames(as_data_frame(mtcars[, 1:5])))
-  expect_identical(mtcars2[1:5, 1:5], remove_rownames(as_data_frame(mtcars[1:5, 1:5])))
-  expect_identical(mtcars2[1:5], remove_rownames(as_data_frame(mtcars[1:5])))
+  expect_identical(mtcars2[], as_data_frame(mtcars[]))
+  expect_identical(mtcars2[1:5, ], as_data_frame(mtcars[1:5, ]))
+  expect_identical(mtcars2[, 1:6], as_data_frame(mtcars[, 1:5]))
+  expect_identical(mtcars2[1:5, 1:6], as_data_frame(mtcars[1:5, 1:5]))
+  expect_identical(mtcars2[1:6], as_data_frame(mtcars[1:5]))
 })
 
 test_that("[ with 0 cols creates correct row names (#656)", {
