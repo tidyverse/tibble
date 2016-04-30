@@ -105,8 +105,13 @@ lst_ <- function(xs) {
 #' Other types are first coerced via \code{\link[base]{as.data.frame}} with
 #' \code{stringsAsFactors = FALSE}.
 #'
+#' Nontrivial row names (for data frames) or names (for vectors) are converted
+#' to a column.
+#'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
+#' @param rowname_var The name of the column that will store existing row names.
+#'   If \code{NULL}, a unique name will be generated (with a message).
 #' @param validate When \code{TRUE}, verifies that the input is a valid data
 #'   frame (i.e. all columns are named, and are 1d vectors or lists). You may
 #'   want to suppress this when you know that you already have a valid data

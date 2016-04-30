@@ -32,6 +32,9 @@ as_data_frame(x, ..., rowname_var = NULL)
 
 \item{...}{Other arguments passed on to individual methods.}
 
+\item{rowname_var}{The name of the column that will store existing row names.
+If \code{NULL}, a unique name will be generated (with a message).}
+
 \item{validate}{When \code{TRUE}, verifies that the input is a valid data
 frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
@@ -50,6 +53,9 @@ This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
 Other types are first coerced via \code{\link[base]{as.data.frame}} with
 \code{stringsAsFactors = FALSE}.
+
+Nontrivial row names (for data frames) or names (for vectors) are converted
+to a column.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
