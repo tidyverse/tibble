@@ -48,7 +48,7 @@ type_sum.default <- function(x) {
       typeof(x)
     )
   } else if (!isS4(x)) {
-    paste0("S3: ", paste0(class(x), collapse = "/"))
+    paste0("S3: ", class(x)[[1]])
   } else {
     paste0("S4: ", methods::is(x)[[1]])
   }

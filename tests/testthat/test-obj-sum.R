@@ -7,17 +7,17 @@ test_that("shows only first class name for S4", {
   expect_equal(obj_sum(A), "S4: classGeneratorFunction")
 })
 
+test_that("shows only first class name for S3", {
+  x <- structure(list(), class = c("a", "b", "c"))
+  expect_equal(obj_sum(x), "S3: a")
+})
+
 test_that("NULL handled specially", {
   expect_equal(obj_sum(NULL), "NULL")
 })
 
 test_that("data frame includes rows and cols", {
   expect_equal(obj_sum(mtcars), "data.frame [32,11]")
-})
-
-test_that("S3 others list all classes", {
-  x <- structure(list(), class = c("a", "b", "c"))
-  expect_equal(obj_sum(x), "S3: a/b/c")
 })
 
 test_that("common data vectors treated as atomic", {
