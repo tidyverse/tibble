@@ -139,7 +139,7 @@ lst_ <- function(xs) {
 #'   as.data.frame(m)
 #' )
 #' }
-as_data_frame <- function(x, ...) {
+as_data_frame <- function(x, ..., rowname_var = NULL) {
   UseMethod("as_data_frame")
 }
 
@@ -151,7 +151,13 @@ as_data_frame.tbl_df <- function(x, ...) {
 
 #' @export
 #' @rdname as_data_frame
-as_data_frame.data.frame <- function(x, ...) {
+as_data_frame.data.frame <- function(x, ..., rowname_var = NULL) {
+  if (has_rownames(x))
+    x <- rownames_to_column(x, guess_rowname_var(x, rowname_var))
+  cast_to_data_frame(x)
+}
+
+cast_to_data_frame <- function(x) {
   class(x) <- c("tbl_df", "tbl", "data.frame")
   x
 }
@@ -180,12 +186,15 @@ as_data_frame.list <- function(x, validate = TRUE, ...) {
 
 #' @export
 #' @rdname as_data_frame
-as_data_frame.matrix <- function(x, ...) {
-  x <- matrixToDataFrame(x)
-  if (is.null(colnames(x))) {
-    colnames(x) <- paste0("V", seq_len(ncol(x)))
+as_data_frame.matrix <- function(x, ..., rowname_var = NULL) {
+  x_df <- matrixToDataFrame(x)
+  if (is.null(colnames(x_df))) {
+    colnames(x_df) <- paste0("V", seq_len(ncol(x_df)))
   }
-  x
+  if (!is.null(rownames(x))) {
+    x_df <- prepend_column(x_df, guess_rowname_var(x_df, rowname_var), rownames(x))
+  }
+  x_df
 }
 
 #' @export
@@ -203,9 +212,10 @@ as_data_frame.NULL <- function(x, ...) {
 
 #' @export
 #' @rdname as_data_frame
-as_data_frame.default <- function(x, ...) {
+as_data_frame.default <- function(x, ..., rowname_var = NULL) {
   value <- x
-  as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
+  as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...),
+                rowname_var = rowname_var)
 }
 
 #' Add a row to a data frame

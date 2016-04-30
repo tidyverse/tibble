@@ -11,21 +11,21 @@
 \alias{as_data_frame.tbl_df}
 \title{Coerce lists and matrices to data frames.}
 \usage{
-as_data_frame(x, ...)
+as_data_frame(x, ..., rowname_var = NULL)
 
 \method{as_data_frame}{tbl_df}(x, ...)
 
-\method{as_data_frame}{data.frame}(x, ...)
+\method{as_data_frame}{data.frame}(x, ..., rowname_var = NULL)
 
 \method{as_data_frame}{list}(x, validate = TRUE, ...)
 
-\method{as_data_frame}{matrix}(x, ...)
+\method{as_data_frame}{matrix}(x, ..., rowname_var = NULL)
 
 \method{as_data_frame}{table}(x, n = "n", ...)
 
 \method{as_data_frame}{NULL}(x, ...)
 
-\method{as_data_frame}{default}(x, ...)
+\method{as_data_frame}{default}(x, ..., rowname_var = NULL)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}

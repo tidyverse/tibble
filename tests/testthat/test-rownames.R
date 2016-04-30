@@ -20,22 +20,3 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_error(rownames_to_column( mtcars, "wt"),
                paste("There is a column named wt already!")  )
 })
-
-test_that("column_to_rownames returns tbl", {
-  var <- "car"
-  mtcars <- as_data_frame(mtcars)
-  res <- column_to_rownames( rownames_to_column( mtcars, var), var)
-  expect_true(has_rownames(res))
-  expect_equal( class(res), class(mtcars) )
-  expect_equal(rownames(res), rownames(mtcars))
-  expect_equal(res, mtcars)
-  expect_false(var %in% names(res))
-
-  mtcars$num <- rev(seq_len(nrow(mtcars)))
-  res1 <- column_to_rownames( rownames_to_column( mtcars), var="num")
-  expect_true(has_rownames(res1))
-  expect_equal(rownames(res1), as.character(mtcars$num) )
-  expect_error(column_to_rownames(res1), "This data frame already has row names.")
-  expect_error(column_to_rownames( rownames_to_column( mtcars, var), "num2"),
-               paste("This data frame has no column named num2.")  )
-})

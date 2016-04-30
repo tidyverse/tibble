@@ -8,12 +8,12 @@ test_that("data frames equal to themselves", {
 
 test_that("data frames equal to random permutations of themselves", {
   scramble <- function(x){
-    x[sample(nrow(x)), sample(ncol(x)), drop = FALSE]
+    x[sample(nrow(x)), sample(ncol(x))]
   }
 
-  expect_equal(as_data_frame(mtcars), as_data_frame(scramble(mtcars)))
-  expect_equal(as_data_frame(iris), as_data_frame(scramble(iris)))
-  expect_equal(as_data_frame(df_all), as_data_frame(scramble(df_all)))
+  expect_equal(as_data_frame(mtcars), scramble(as_data_frame(mtcars)))
+  expect_equal(as_data_frame(iris), scramble(as_data_frame(iris)))
+  expect_equal(as_data_frame(df_all), scramble(as_data_frame(df_all)))
 })
 
 test_that("data frames not equal if missing row", {
@@ -23,8 +23,8 @@ test_that("data frames not equal if missing row", {
 })
 
 test_that("data frames not equal if missing col", {
-  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[, -1]), "Cols in x but not y: mpg")
-  expect_match(all.equal(as_data_frame(mtcars)[, -1], as_data_frame(mtcars)), "Cols in y but not x: mpg")
+  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[, -1]), "Cols in x but not y: ")
+  expect_match(all.equal(as_data_frame(mtcars)[, -1], as_data_frame(mtcars)), "Cols in y but not x: ")
   expect_match(all.equal(as_data_frame(iris), as_data_frame(iris)[, -1]),     "Cols in x but not y: Sepal.Length")
   expect_match(all.equal(as_data_frame(df_all), as_data_frame(df_all)[, -1]), "Cols in x but not y: a")
   expect_match(all.equal(as_data_frame(mtcars), rev(as_data_frame(mtcars)),

@@ -24,6 +24,14 @@
 #' @name rownames
 NULL
 
+#' @export
+`row.names<-.tbl_df` <- function(x, value) {
+  if (!is.null(value) && !identical(value, as.character(seq_len(nrow(x))))) {
+    stop("Setting row names not allowed for tibbles.", call. = FALSE)
+  }
+  invisible(x)
+}
+
 
 #' @export
 #' @rdname rownames
@@ -75,4 +83,13 @@ column_to_rownames <- function(df, var = "rowname") {
   rownames(df) <- df[[var]]
   df[[var]] <- NULL
   df
+}
+
+guess_rowname_var <- function(x, var) {
+  if (is.null(var)) {
+    var <- make.unique(c(colnames(x), formals(rownames_to_column)$var),
+                       sep = formals(repair_names)$sep)[[length(x) + 1L]]
+    message("Storing row names in new '", var, "' column. Use rownames_to_column() or rowname_var argument to override.")
+  }
+  var
 }

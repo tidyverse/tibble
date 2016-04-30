@@ -1,17 +1,19 @@
-Source: local data frame [32 x 11]
+Source: local data frame [32 x 12]
 
-     mpg   cyl  disp    hp
-   <dbl> <dbl> <dbl> <dbl>
-1   21.0     6 160.0   110
-2   21.0     6 160.0   110
-3   22.8     4 108.0    93
-4   21.4     6 258.0   110
-5   18.7     8 360.0   175
-6   18.1     6 225.0   105
-7   14.3     8 360.0   245
-8   24.4     4 146.7    62
-..   ...   ...   ...   ...
-Variables not shown: drat
-  <dbl>, wt <dbl>, qsec
-  <dbl>, vs <dbl>, am <dbl>,
-  gear <dbl>, carb <dbl>.
+             rowname   mpg
+               <chr> <dbl>
+1          Mazda RX4  21.0
+2      Mazda RX4 Wag  21.0
+3         Datsun 710  22.8
+4     Hornet 4 Drive  21.4
+5  Hornet Sportabout  18.7
+6            Valiant  18.1
+7         Duster 360  14.3
+8          Merc 240D  24.4
+..               ...   ...
+Variables not shown: cyl
+  <dbl>, disp <dbl>, hp
+  <dbl>, drat <dbl>, wt
+  <dbl>, qsec <dbl>, vs
+  <dbl>, am <dbl>, gear
+  <dbl>, carb <dbl>.

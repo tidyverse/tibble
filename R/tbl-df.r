@@ -64,7 +64,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
       result <- x
     }
     attr(result, "row.names") <- .set_row_names(nr)
-    return(as_data_frame.data.frame(result))
+    return(cast_to_data_frame(result))
   }
 
   # First, subset columns
@@ -84,5 +84,5 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   }
 
   attr(x, "row.names") <- .set_row_names(nr)
-  as_data_frame.data.frame(x)
+  cast_to_data_frame(x)
 }
