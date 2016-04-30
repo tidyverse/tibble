@@ -204,7 +204,8 @@ as_data_frame.NULL <- function(x, ...) {
 #' @export
 #' @rdname as_data_frame
 as_data_frame.default <- function(x, ...) {
-  as_data_frame(as.data.frame(x, stringsAsFactors = FALSE, ...))
+  value <- x
+  as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
 
 #' Add a row to a data frame
