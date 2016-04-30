@@ -152,8 +152,14 @@ as_data_frame.tbl_df <- function(x, ...) {
 #' @export
 #' @rdname as_data_frame
 as_data_frame.data.frame <- function(x, ..., rowname_var = NULL) {
-  if (has_rownames(x))
-    x <- rownames_to_column(x, guess_rowname_var(x, rowname_var))
+  if (has_rownames(x) && is.null(rowname_var)) {
+    rowname_var <- guess_rowname_var(x)
+    message("Storing row names in new '", rowname_var,
+            "' column. Use rownames_to_column() or rowname_var argument to override.")
+  }
+  if (!is.null(rowname_var))
+    x <- rownames_to_column(x, rowname_var)
+
   cast_to_data_frame(x)
 }
 

@@ -85,11 +85,7 @@ column_to_rownames <- function(df, var = "rowname") {
   df
 }
 
-guess_rowname_var <- function(x, var) {
-  if (is.null(var)) {
-    var <- make.unique(c(colnames(x), formals(rownames_to_column)$var),
-                       sep = formals(repair_names)$sep)[[length(x) + 1L]]
-    message("Storing row names in new '", var, "' column. Use rownames_to_column() or rowname_var argument to override.")
-  }
-  var
+guess_rowname_var <- function(x) {
+  make.unique(c(colnames(x), formals(rownames_to_column)$var),
+              sep = formals(repair_names)$sep)[[length(x) + 1L]]
 }
