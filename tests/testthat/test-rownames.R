@@ -5,7 +5,7 @@ test_that("has_rownames and remove_rownames", {
   expect_true(has_rownames(mtcars))
   expect_false(has_rownames(remove_rownames(mtcars)))
   expect_false(has_rownames(remove_rownames(iris)))
-  expect_error(has_rownames(1:10))
+  expect_false(has_rownames(1:10))
 })
 
 test_that("rownames_to_column keeps the tbl classes (#882)", {

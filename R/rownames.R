@@ -28,7 +28,6 @@ NULL
 #' @export
 #' @rdname rownames
 has_rownames <- function(df) {
-  stopifnot(is.data.frame(df))
   .row_names_info(df) > 0L
 }
 
