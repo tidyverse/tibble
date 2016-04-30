@@ -4,6 +4,7 @@
 \alias{as_data_frame}
 \alias{as_data_frame.NULL}
 \alias{as_data_frame.data.frame}
+\alias{as_data_frame.default}
 \alias{as_data_frame.list}
 \alias{as_data_frame.matrix}
 \alias{as_data_frame.table}
@@ -23,6 +24,8 @@ as_data_frame(x, ...)
 \method{as_data_frame}{table}(x, n = "n", ...)
 
 \method{as_data_frame}{NULL}(x, ...)
+
+\method{as_data_frame}{default}(x, ...)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}
@@ -45,6 +48,8 @@ with more efficient methods for matrices and data frames.
 \details{
 This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
+Other types are first coerced via \code{\link[base]{as.data.frame}} with
+\code{stringsAsFactors = FALSE}.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
