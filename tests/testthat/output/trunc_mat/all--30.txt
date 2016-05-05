@@ -2,6 +2,6 @@
   <dbl> <int> <lgl> <chr>
 1   1.0     1  TRUE     a
 2   2.5     2 FALSE     b
-... with 4 more variables (e
+... with 4 more variables: e
   <fctr>, f <date>, g <time>,
-  h <list>)
+  h <list>

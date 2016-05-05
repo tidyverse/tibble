@@ -169,12 +169,12 @@ print_extra_cols <- function(x, with) {
       if (x$n_extra < length(var_types)) {
         var_types <- c(var_types[seq_len(x$n_extra)], "...")
       }
-      vars <- paste0(" (", paste(var_types, collapse = ", "), ")")
+      vars <- paste0(": ", paste(var_types, collapse = ", "))
     } else {
       vars <- ""
     }
     cat(wrap("... ", if (with) "and" else "with", " ", length(x$extra),
-             " more variables ", vars, width = x$width),
+             " more variables", vars, width = x$width),
         "\n", sep = "")
   }
 }
