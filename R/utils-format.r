@@ -173,13 +173,16 @@ print_extra_rows <- function(x) {
 print_extra_cols <- function(x, with) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), " <", x$extra, ">")
-    if (x$n_extra < length(var_types)) {
-      var_types <- c(var_types[seq_len(x$n_extra)], "...")
+    if (x$n_extra > 0) {
+      if (x$n_extra < length(var_types)) {
+        var_types <- c(var_types[seq_len(x$n_extra)], "...")
+      }
+      vars <- paste0(" (", paste(var_types, collapse = ", "), ")")
+    } else {
+      vars <- ""
     }
     cat(wrap("... ", if (with) "and" else "with", " ", length(x$extra),
-             " more variables (",
-             paste(var_types, collapse = ", "), ")",
-             width = x$width),
+             " more variables ", vars, width = x$width),
         "\n", sep = "")
   }
 }

@@ -49,6 +49,10 @@ test_that("trunc_mat output matches known output", {
     print(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
     "trunc_mat/all-1-30-2.txt")
 
+  expect_output_file_rel(
+    print(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L)),
+    "trunc_mat/all-1-30-0.txt")
+
   knit <- knitr::knit_print(trunc_mat(df_all, width = 60L))
   expect_output_file_rel(
     cat(knit),
