@@ -132,8 +132,15 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 #' @export
 print.trunc_mat <- function(x, ...) {
   print_table(x)
-  with <- print_extra_rows(x)
-  print_extra_cols(x, with)
+
+  extra_rows <- format_extra_rows(x)
+  extra_cols <- format_extra_cols(x)
+
+  extra <- c(extra_rows, extra_cols)
+  extra[[1]] <- paste0("with ", extra[[1]])
+  extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
+  lapply(extra, function(ex) cat(wrap("... ", ex, width = x$width), "\n", sep = ""))
+
   invisible(x)
 }
 
@@ -142,27 +149,21 @@ print_table <- function(x) {
     print(x$table)
 }
 
-print_extra_rows <- function(x) {
-  with <- TRUE
+format_extra_rows <- function(x) {
   if (!is.null(x$table)) {
     if (is.na(x$rows_missing)) {
-      cat("... with more rows")
+      "more rows"
     } else if (x$rows_missing > 0) {
-      cat(wrap("... with ",
-               big_mark(x$rows_missing), " more rows", width = x$width),
-          "\n", sep ="")
-    } else {
-      with <- FALSE
+      paste0(big_mark(x$rows_missing), " more rows")
     }
   } else if (is.na(x$rows_total)) {
-    cat("... with at least ", x$rows_min, " rows total\n", sep = "")
+    paste0("at least ", x$rows_min, " rows total")
   } else {
-    cat("... with ", x$rows_total, " rows total\n", sep = "")
+    paste0(x$rows_total, " rows total")
   }
-  with
 }
 
-print_extra_cols <- function(x, with) {
+format_extra_cols <- function(x) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), " <", x$extra, ">")
     if (x$n_extra > 0) {
@@ -173,9 +174,7 @@ print_extra_cols <- function(x, with) {
     } else {
       vars <- ""
     }
-    cat(wrap("... ", if (with) "and" else "with", " ", length(x$extra),
-             " more variables", vars, width = x$width),
-        "\n", sep = "")
+    paste0(length(x$extra), " more variables", vars)
   }
 }
 
