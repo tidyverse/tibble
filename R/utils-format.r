@@ -42,32 +42,30 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 }
 
 trunc_mat_impl <- function(df, n, width, n_extra, rows) {
-  var_types <- vapply(df, type_sum, character(1))
-  var_names <- names(df)
-
   width <- tibble_width(width)
-  if (ncol(df) == 0 || nrow(df) == 0) {
-    shrunk <- new_shrunk_mat(NULL, extra = setNames(var_types, var_names))
-  } else {
-    shrunk <- shrink_mat(df, width, var_names, var_types, rows, n)
-  }
 
-  structure(c(shrunk, list(
-    width = width, rows_total = rows, rows_min = nrow(df), n_extra = n_extra
-  )), class = "trunc_mat")
+  shrunk <- shrink_mat(df, width, rows, n)
+  trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
+                     n_extra = n_extra)
+
+  structure(c(shrunk, trunc_info), class = "trunc_mat")
 }
 
 #' @importFrom stats setNames
-shrink_mat <- function(df, width, var_names, var_types, rows, n) {
+shrink_mat <- function(df, width, rows, n) {
+  var_types <- vapply(df, type_sum, character(1))
+
+  if (ncol(df) == 0 || nrow(df) == 0) {
+    return(new_shrunk_mat(NULL, var_types))
+  }
+
   df <- remove_rownames(df)
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
   # pass
   max_cols <- floor(width / 5)
-  extra_wide <- seq_along(var_names) > max_cols
-  if (any(extra_wide)) {
-    df <- df[!extra_wide]
-  }
+  extra_wide <- (seq_along(df) > max_cols)
+  df[] <- df[!extra_wide]
 
   # List columns need special treatment because format can't be trusted
   classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
@@ -115,14 +113,8 @@ shrink_mat <- function(df, width, var_names, var_types, rows, n) {
     rows_missing <- 0L
   }
 
-  if (any(extra_wide)) {
-    extra_wide[seq_along(too_wide)] <- too_wide
-    extra <- setNames(var_types[extra_wide], var_names[extra_wide])
-  } else {
-    extra <- setNames(var_types[too_wide], var_names[too_wide])
-  }
-
-  new_shrunk_mat(shrunk, extra, rows_missing)
+  extra_wide[seq_along(too_wide)] <- too_wide
+  new_shrunk_mat(shrunk, var_types[extra_wide], rows_missing)
 }
 
 new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
