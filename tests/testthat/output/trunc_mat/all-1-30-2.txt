@@ -1,7 +1,6 @@
       a     b     c     d
   <dbl> <int> <lgl> <chr>
 1     1     1  TRUE     a
-.. (1 more rows)
-Variables not shown: e
-  <fctr>, f <date>, and 2
-  more <...>.
+... with 1 more rows
+... and 4 more variables (e
+  <fctr>, f <date>, ...)

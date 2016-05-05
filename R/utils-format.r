@@ -55,18 +55,18 @@ trunc_mat_impl <- function(df, n, width, n_extra, rows) {
 
   width <- tibble_width(width)
   if (ncol(df) == 0 || nrow(df) == 0) {
-    shrunk <- list(table = NULL, extra = setNames(var_types, var_names))
+    shrunk <- new_shrunk_mat(NULL, extra = setNames(var_types, var_names))
   } else {
-    shrunk <- shrink_mat(df, width, n_extra, var_names, var_types, rows, n)
+    shrunk <- shrink_mat(df, width, var_names, var_types, rows, n)
   }
 
   structure(c(shrunk, list(
-    width = width, rows_total = rows, rows_min = nrow(df)
+    width = width, rows_total = rows, rows_min = nrow(df), n_extra = n_extra
   )), class = "trunc_mat")
 }
 
 #' @importFrom stats setNames
-shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
+shrink_mat <- function(df, width, var_names, var_types, rows, n) {
   df <- remove_rownames(df)
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
@@ -130,35 +130,44 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     extra <- setNames(var_types[too_wide], var_names[too_wide])
   }
 
-  if (length(extra) > n_extra) {
-    more <- paste0("and ", length(extra) - n_extra, " more")
-    extra <- c(extra[1:n_extra], setNames("...", more))
-  }
+  new_shrunk_mat(shrunk, extra, rows_missing)
+}
 
-  list(table = shrunk, extra = extra, rows_missing = rows_missing)
+new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
+  list(table = table, extra = extra, rows_missing = rows_missing)
 }
 
 #' @export
 print.trunc_mat <- function(x, ...) {
+  with <- TRUE
   if (!is.null(x$table)) {
     print(x$table)
 
     if (is.na(x$rows_missing)) {
-      cat(".. (more rows)")
+      cat("... with more rows")
     } else if (x$rows_missing > 0) {
-      cat(wrap(".. (", big_mark(x$rows_missing), " more rows)",
-               width = x$width), "\n", sep ="")
+      cat(wrap("... with ",
+               big_mark(x$rows_missing), " more rows", width = x$width),
+          "\n", sep ="")
+    } else {
+      with <- FALSE
     }
   } else if (is.na(x$rows_total)) {
-    cat("(at least ", x$rows_min, " rows)\n", sep = "")
+    cat("... with at least ", x$rows_min, " rows total\n", sep = "")
   } else {
-    cat("(", x$rows_total, " rows)\n", sep = "")
+    cat("... with ", x$rows_total, " rows total\n", sep = "")
   }
 
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
-    cat(wrap("Variables not shown: ", var_types, width = x$width),
-        ".\n", sep = "")
+    var_types <- paste0(names(x$extra), " <", x$extra, ">")
+    if (x$n_extra < length(var_types)) {
+      var_types <- c(var_types[seq_len(x$n_extra)], "...")
+    }
+    cat(wrap("... ", if (with) "and" else "with", " ", length(x$extra),
+             " more variables (",
+             paste(var_types, collapse = ", "), ")",
+             width = x$width),
+        "\n", sep = "")
   }
   invisible()
 }

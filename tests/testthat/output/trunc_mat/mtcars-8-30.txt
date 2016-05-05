@@ -8,8 +8,8 @@
 6  18.1     6 225.0   105
 7  14.3     8 360.0   245
 8  24.4     4 146.7    62
-.. (24 more rows)
-Variables not shown: drat
-  <dbl>, wt <dbl>, qsec
+... with 24 more rows
+... and 7 more variables
+  (drat <dbl>, wt <dbl>, qsec
   <dbl>, vs <dbl>, am <dbl>,
-  gear <dbl>, carb <dbl>.
+  gear <dbl>, carb <dbl>)

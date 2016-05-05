@@ -1,1 +1,1 @@
-(at least 150 rows)
+... with at least 150 rows total
