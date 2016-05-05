@@ -7,8 +7,7 @@
   with
   147
   more
-  rows
-...
+  rows,
   and
   4
   more

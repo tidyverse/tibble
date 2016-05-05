@@ -126,7 +126,10 @@ print.trunc_mat <- function(x, ...) {
   print_table(x)
 
   extra <- format_extra(x)
-  lapply(extra, function(ex) cat(wrap("... ", ex, width = x$width), "\n", sep = ""))
+  if (length(extra) > 0) {
+    cat(wrap("... ", paste(extra, collapse = ", "), width = x$width), "\n",
+        sep = "")
+  }
 
   invisible(x)
 }
