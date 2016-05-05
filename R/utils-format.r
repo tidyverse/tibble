@@ -133,15 +133,20 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 print.trunc_mat <- function(x, ...) {
   print_table(x)
 
+  extra <- format_extra(x)
+  lapply(extra, function(ex) cat(wrap("... ", ex, width = x$width), "\n", sep = ""))
+
+  invisible(x)
+}
+
+format_extra <- function(x) {
   extra_rows <- format_extra_rows(x)
   extra_cols <- format_extra_cols(x)
 
   extra <- c(extra_rows, extra_cols)
   extra[[1]] <- paste0("with ", extra[[1]])
   extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
-  lapply(extra, function(ex) cat(wrap("... ", ex, width = x$width), "\n", sep = ""))
-
-  invisible(x)
+  extra
 }
 
 print_table <- function(x) {
