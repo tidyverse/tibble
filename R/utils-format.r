@@ -22,14 +22,6 @@
 #' @name formatting
 NULL
 
-dim_desc <- function(x) {
-  d <- dim(x)
-  d2 <- big_mark(d)
-  d2[is.na(d)] <- "??"
-
-  paste0("[", paste0(d2, collapse = " x "), "]")
-}
-
 #' @export
 #' @rdname formatting
 #' @importFrom stats setNames
