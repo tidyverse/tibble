@@ -1,5 +1,11 @@
 context("Truncated matrix")
 
+test_that("print() returns output invisibly", {
+  expect_output(ret <- withVisible(print(as_data_frame(mtcars))))
+  expect_false(ret$visible)
+  expect_identical(ret$value, as_data_frame(mtcars))
+})
+
 test_that("trunc_mat output matches known output", {
   expect_output_file_rel(
     print(as_data_frame(mtcars), n = 8L, width = 30L),

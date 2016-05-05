@@ -139,10 +139,20 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 
 #' @export
 print.trunc_mat <- function(x, ...) {
+  print_table(x)
+  with <- print_extra_rows(x)
+  print_extra_cols(x, with)
+  invisible(x)
+}
+
+print_table <- function(x) {
+  if (!is.null(x$table))
+    print(x$table)
+}
+
+print_extra_rows <- function(x) {
   with <- TRUE
   if (!is.null(x$table)) {
-    print(x$table)
-
     if (is.na(x$rows_missing)) {
       cat("... with more rows")
     } else if (x$rows_missing > 0) {
@@ -157,7 +167,10 @@ print.trunc_mat <- function(x, ...) {
   } else {
     cat("... with ", x$rows_total, " rows total\n", sep = "")
   }
+  with
+}
 
+print_extra_cols <- function(x, with) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), " <", x$extra, ">")
     if (x$n_extra < length(var_types)) {
@@ -169,7 +182,6 @@ print.trunc_mat <- function(x, ...) {
              width = x$width),
         "\n", sep = "")
   }
-  invisible()
 }
 
 #' knit_print method for trunc mat
