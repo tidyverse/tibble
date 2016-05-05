@@ -1,3 +1,12 @@
+# tibble 1.0-2 (2016-05-06)
+
+- Add missing test from dplyr.
+- `type_sum()` shows only topmost class for S3 objects.
+- Enhance `knit_print()` tests.
+- Use new `expect_output_file()` from `testthat`.
+- Two-dimensional indexing with `[[` works (#58, #63).
+
+
 # tibble 1.0-1 (2016-03-30)
 
 - Document behavior of `as_data_frame.tbl_df()` for subclasses (#60).
