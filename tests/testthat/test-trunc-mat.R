@@ -46,4 +46,11 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/all-knit-120.txt")
   expect_is(knit, "knit_asis")
   expect_true(attr(knit, "knit_cacheable"))
+
+  knit <- knitr::knit_print(trunc_mat(mtcars, width = 60L))
+  expect_output_file_rel(
+    cat(knit),
+    "trunc_mat/mtcars-knit-60.txt")
+  expect_is(knit, "knit_asis")
+  expect_true(attr(knit, "knit_cacheable"))
 })
