@@ -144,8 +144,10 @@ format_extra <- function(x) {
   extra_cols <- format_extra_cols(x)
 
   extra <- c(extra_rows, extra_cols)
-  extra[[1]] <- paste0("with ", extra[[1]])
-  extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
+  if (length(extra) >= 1) {
+    extra[[1]] <- paste0("with ", extra[[1]])
+    extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
+  }
   extra
 }
 
@@ -189,9 +191,10 @@ format_extra_cols <- function(x) {
 knit_print.trunc_mat <- function(x, options) {
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " <", x$extra, ">", collapse = ", ")
-    extra <- wrap("\n(_Variables not shown_: ", var_types, ")", width = x$width)
+  extra <- format_extra(x)
+
+  if (length(extra) > 0) {
+    extra <- wrap("(", paste(extra, collapse = ", "), ")", width = x$width)
   } else {
     extra <- "\n"
   }
