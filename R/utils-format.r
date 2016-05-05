@@ -176,7 +176,9 @@ format_extra_cols <- function(x) {
     } else {
       vars <- ""
     }
-    paste0(length(x$extra), " more variables", vars)
+    paste0(length(x$extra), " ",
+           if (!identical(x$rows_total, 0L)) "more ",
+           "variables", vars)
   }
 }
 

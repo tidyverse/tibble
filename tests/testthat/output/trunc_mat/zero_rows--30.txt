@@ -1,3 +1,2 @@
 ... with 0 rows total, and 2
-  more variables: a <chr>, b
-  <lgl>
+  variables: a <chr>, b <lgl>
