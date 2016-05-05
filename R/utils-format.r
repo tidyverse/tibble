@@ -105,7 +105,7 @@ shrink_mat <- function(df, width, var_names, var_types, rows, n) {
   if (is.na(rows))
     needs_dots <- (nrow(df) >= n)
   else
-    needs_dots <- rows > n
+    needs_dots <- (rows > n)
   if (needs_dots) {
     dot_width <- pmin(w[-1][!too_wide], 3)
     dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""),
