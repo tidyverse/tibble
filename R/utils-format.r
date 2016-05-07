@@ -79,6 +79,10 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     paste0("<", summary, ">")
   })
 
+  # Character columns need special treatment because of NA
+  is_character <- vapply(df, is.character, logical(1))
+  df[is_character] <- lapply(df[is_character], format_character)
+
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
 
@@ -167,6 +171,11 @@ wrap <- function(..., indent = 0, width) {
 }
 
 
+
+format_character <- function(x) {
+  x[is.na(x)] <- "<NA>"
+  x
+}
 
 # function for the thousand separator,
 # returns "," unless it's used for the decimal point, in which case returns "."
