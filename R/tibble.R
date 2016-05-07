@@ -41,7 +41,11 @@
 
   #' \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
   #'   \code{width} option).}
-  tibble.width = NULL
+  tibble.width = NULL,
+
+  #' \item{\code{tibble.max_extra_cols}}{Number of extra columns
+  #'   printed in reduced form. Default: 100.}
+  tibble.max_extra_cols = 100L
   #' }
 ))
 
