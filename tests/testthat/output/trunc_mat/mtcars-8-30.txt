@@ -10,6 +10,6 @@
 8  24.4     4 146.7    62
 ... with 24 more rows, and 7
   more variables: drat <dbl>,
-  wt <dbl>, qsec <dbl>, vs
-  <dbl>, am <dbl>, gear
-  <dbl>, carb <dbl>
+  wt <dbl>, qsec <dbl>,
+  vs <dbl>, am <dbl>,
+  gear <dbl>, carb <dbl>

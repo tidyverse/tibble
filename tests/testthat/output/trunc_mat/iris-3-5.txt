@@ -12,11 +12,7 @@
   4
   more
   variables:
-  Sepal.Width
-  <dbl>,
-  Petal.Length
-  <dbl>,
-  Petal.Width
-  <dbl>,
-  Species
-  <fctr>
+  Sepal.Width <dbl>,
+  Petal.Length <dbl>,
+  Petal.Width <dbl>,
+  Species <fctr>

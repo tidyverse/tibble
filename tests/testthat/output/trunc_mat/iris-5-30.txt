@@ -8,5 +8,5 @@
 ... with 145 more rows, and 3
   more variables:
   Petal.Length <dbl>,
-  Petal.Width <dbl>, Species
-  <fctr>
+  Petal.Width <dbl>,
+  Species <fctr>

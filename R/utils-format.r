@@ -167,7 +167,7 @@ format_extra_rows <- function(x) {
 
 format_extra_cols <- function(x) {
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), " <", x$extra, ">")
+    var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
     if (x$n_extra > 0) {
       if (x$n_extra < length(var_types)) {
         var_types <- c(var_types[seq_len(x$n_extra)], "...")
@@ -200,10 +200,13 @@ knit_print.trunc_mat <- function(x, options) {
   knitr::asis_output(res)
 }
 
+NBSP <- "\U00A0"
+
 wrap <- function(..., indent = 0, width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
     width = width)
+  wrapped <- gsub(NBSP, " ", wrapped)
 
   paste0(wrapped, collapse = "\n")
 }
