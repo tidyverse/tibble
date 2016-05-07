@@ -90,10 +90,10 @@ flights
 #> 8   2013     1     1      557            600        -3      709
 #> 9   2013     1     1      557            600        -3      838
 #> 10  2013     1     1      558            600        -2      753
-#> ... with 336,766 more rows
-#> ... and 12 more variables (sched_arr_time <int>, arr_delay <dbl>, carrier
-#>   <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time
-#>   <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <time>)
+#> ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
+#>   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>, origin
+#>   <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>, minute
+#>   <dbl>, time_hour <time>
 ```
 
 Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
