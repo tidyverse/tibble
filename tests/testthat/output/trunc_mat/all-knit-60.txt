@@ -5,5 +5,6 @@
 |<dbl> |<int> |<lgl> |<chr> |<fctr> |<date>     |
 |1.0   |1     |TRUE  |a     |a      |2015-12-10 |
 |2.5   |2     |FALSE |b     |b      |2015-12-11 |
+|NA    |NA    |NA    |NA    |NA     |NA         |
 
 (_Variables not shown_: g <time>, h <list>)
