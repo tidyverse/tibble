@@ -36,6 +36,12 @@ test_that("length 1 vectors are recycled", {
   )
 })
 
+test_that("missing names are imputed from call", {
+  x <- 1:10
+  df <- data_frame(x, y = x)
+  expect_equal(names(df), c("x", "y"))
+})
+
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- data_frame()
   expect_is(zero, "tbl_df")
@@ -67,7 +73,7 @@ test_that("can't coerce list data.frame or array", {
   expect_error(as_data_frame(list(x = diag(5))), "must be a 1d atomic vector or list")
 })
 
-test_that("Zero column list makes 0 x 0 tbl_df", {
+test_that("empty list() makes 0 x 0 tbl_df", {
   zero <- as_data_frame(list())
   expect_is(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))

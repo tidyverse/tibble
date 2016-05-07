@@ -25,9 +25,13 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 }
 
 #' @export
-`[[.tbl_df` <- function(x, i, exact = TRUE) {
-  if (is.character(i) && length(i) == 1L && !(i %in% names(x))) {
-    stop("Unknown column '", i, "'", call. = FALSE)
+`[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
+  if (missing(j))
+    colname <- i
+  else
+    colname <- j
+  if (is.character(colname) && length(colname) == 1L && !(colname %in% names(x))) {
+    stop("Unknown column '", colname, "'", call. = FALSE)
   }
   if (!exact) {
     warning("exact ignored", call. = FALSE)
