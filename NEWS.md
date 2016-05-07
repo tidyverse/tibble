@@ -1,3 +1,9 @@
+# tibble 1.0-3 (2016-05-07)
+
+- Format `NA` values in character columns as `<NA>`, like `print.data.frame()` does (#69).
+- Turn number of printed extra cols into an option (#68, @lionel-).
+
+
 # tibble 1.0-2 (2016-05-06)
 
 - Add missing test from dplyr.
