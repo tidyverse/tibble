@@ -1,11 +1,11 @@
 # A data frame with all major types
 df_all <- data_frame(
-  a = c(1, 2.5),
-  b = 1:2,
-  c = c(T, F),
-  d = c("a", "b"),
-  e = factor(c("a", "b")),
-  f = as.Date("2015-12-09") + 1:2,
-  g = as.POSIXct("2015-12-09 10:51:34 UTC") + 1:2,
-  h = as.list(1:2)
+  a = c(1, 2.5, NA),
+  b = c(1:2, NA),
+  c = c(T, F, NA),
+  d = c("a", "b", NA),
+  e = factor(c("a", "b", NA)),
+  f = as.Date("2015-12-09") + c(1:2, NA),
+  g = as.POSIXct("2015-12-09 10:51:34 UTC") + c(1:2, NA),
+  h = as.list(c(1:2, NA))
 )
