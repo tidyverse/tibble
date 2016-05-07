@@ -33,7 +33,7 @@ dim_desc <- function(x) {
 #' @export
 #' @rdname formatting
 #' @importFrom stats setNames
-trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
+trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
   if (is.null(n)) {
@@ -43,6 +43,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = 100) {
       n <- rows
     }
   }
+  n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
   var_types <- vapply(df, type_sum, character(1))
@@ -77,6 +78,10 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
     summary <- vapply(x, obj_sum, character(1))
     paste0("<", summary, ">")
   })
+
+  # Character columns need special treatment because of NA
+  is_character <- vapply(df, is.character, logical(1))
+  df[is_character] <- lapply(df[is_character], format_character)
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -166,6 +171,11 @@ wrap <- function(..., indent = 0, width) {
 }
 
 
+
+format_character <- function(x) {
+  x[is.na(x)] <- "<NA>"
+  x
+}
 
 # function for the thousand separator,
 # returns "," unless it's used for the decimal point, in which case returns "."

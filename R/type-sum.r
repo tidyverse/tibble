@@ -27,6 +27,8 @@ obj_sum.default <- function(x) {
 type_sum <- function(x) UseMethod("type_sum")
 
 #' @export
+type_sum.ordered <- function(x) "ord"
+#' @export
 type_sum.factor <- function(x) "fctr"
 #' @export
 type_sum.POSIXt <- function(x) "time"
@@ -64,6 +66,8 @@ size_sum <- function(x) {
 #' @export
 #' @rdname obj_sum
 is_vector_s3 <- function(x) UseMethod("is_vector_s3")
+#' @export
+is_vector_s3.ordered <- function(x) TRUE
 #' @export
 is_vector_s3.factor <- function(x) TRUE
 #' @export
