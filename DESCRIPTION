@@ -22,7 +22,7 @@ Imports:
 Suggests:
     testthat,
     withr,
-    knitr,
+    knitr (>= 1.13),
     rmarkdown,
     Lahman (>= 3.0.1),
     microbenchmark

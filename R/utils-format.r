@@ -161,7 +161,7 @@ knit_print.trunc_mat <- function(x, options) {
   }
 
   res <- paste(c('', '', kable, '', extra), collapse = '\n')
-  knitr::asis_output(res)
+  knitr::asis_output(res, cacheable = TRUE)
 }
 
 wrap <- function(..., indent = 0, width) {
