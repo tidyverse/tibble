@@ -145,11 +145,9 @@ print.trunc_mat <- function(x, ...) {
   invisible()
 }
 
-knit_print <- function(x, ...) NULL
-
 #' knit_print method for trunc mat
 #' @keywords internal
-#' @rawNamespace S3method(knit_print, trunc_mat)
+#' @export
 knit_print.trunc_mat <- function(x, options) {
   kable <- knitr::kable(x$table, row.names = FALSE)
 
