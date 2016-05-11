@@ -33,6 +33,10 @@ functions allow to you detect if a data frame has row names
 them back-and-forth between an explicit column (\code{rownames_to_column}
 and \code{column_to_rownames}).
 }
+\details{
+In the printed output, the presence of row names is indicated by a star just
+above the row numbers.
+}
 \examples{
 has_rownames(mtcars)
 has_rownames(iris)

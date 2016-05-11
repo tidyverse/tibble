@@ -11,6 +11,9 @@
 #' them back-and-forth between an explicit column (\code{rownames_to_column}
 #' and \code{column_to_rownames}).
 #'
+#' In the printed output, the presence of row names is indicated by a star just
+#' above the row numbers.
+#'
 #' @param df A data frame
 #' @param var Name of column to use for rownames.
 #' @examples
