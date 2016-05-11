@@ -1,3 +1,11 @@
+# tibble 1.0-5 (2016-05-12)
+
+- Indicate presence of row names by a star in printed output (#72).
+- Warn if setting non-`NULL` row names (#75).
+- `has_rownames()` supports arguments that are not data frames.
+- Converting a tibble without row names to a regular data frame does not add explicit row names.
+
+
 # tibble 1.0-4 (2016-05-11)
 
 - New `enframe()` that converts vectors to two-column tibbles (#31, #74).
