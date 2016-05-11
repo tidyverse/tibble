@@ -39,3 +39,7 @@ test_that("column_to_rownames returns tbl", {
   expect_error(column_to_rownames( rownames_to_column( mtcars, var), "num2"),
                paste("This data frame has no column named num2.")  )
 })
+
+test_that("converting to data frame does not add row names", {
+  expect_false(has_rownames(as.data.frame(as_data_frame(iris))))
+})
