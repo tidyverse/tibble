@@ -49,7 +49,7 @@ with more efficient methods for matrices and data frames.
 This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
 Other types are first coerced via \code{\link[base]{as.data.frame}} with
-\code{stringsAsFactors = FALSE}.
+\code{stringsAsFactors = FALSE} and have their row names removed.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
