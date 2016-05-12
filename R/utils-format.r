@@ -53,14 +53,15 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   if (ncol(df) == 0 || nrow(df) == 0) {
     shrunk <- list(table = NULL, extra = setNames(var_types, var_names))
   } else {
-    shrunk <- shrink_mat(df, width, n_extra, var_names, var_types, rows, n)
+    shrunk <- shrink_mat(df, width, n_extra, var_names, var_types, rows, n,
+                         has_rownames(x))
   }
 
   return(structure(c(shrunk, list(width = width)), class = "trunc_mat"))
 }
 
 #' @importFrom stats setNames
-shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
+shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n, star) {
   df <- remove_rownames(df)
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
@@ -106,6 +107,8 @@ shrink_mat <- function(df, width, n_extra, var_names, var_types, rows, n) {
   }
   shrunk <- format(df[, !too_wide, drop = FALSE])
   shrunk <- rbind(" " = classes, shrunk)
+  if (star)
+    rownames(shrunk)[[1]] <- "*"
   colnames(shrunk) <- colnames(df)[!too_wide]
 
   needs_dots <- is.na(rows) || rows > n
