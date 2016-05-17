@@ -140,6 +140,11 @@ print.trunc_mat <- function(x, ...) {
   invisible(x)
 }
 
+print_table <- function(x) {
+  if (!is.null(x$table))
+    print(x$table)
+}
+
 format_extra <- function(x) {
   extra_rows <- format_extra_rows(x)
   extra_cols <- format_extra_cols(x)
@@ -150,11 +155,6 @@ format_extra <- function(x) {
     extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
   }
   extra
-}
-
-print_table <- function(x) {
-  if (!is.null(x$table))
-    print(x$table)
 }
 
 format_extra_rows <- function(x) {
