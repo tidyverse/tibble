@@ -38,15 +38,11 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
-  trunc_mat_impl(df, n, width, n_extra, rows, has_rownames(x))
-}
-
-trunc_mat_impl <- function(df, n, width, n_extra, rows, star) {
   width <- tibble_width(width)
 
-  shrunk <- shrink_mat(df, width, rows, n, star)
+  shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra)
+                     n_extra = n_extra, summary = obj_sum(x))
 
   structure(c(shrunk, trunc_info), class = "trunc_mat")
 }
@@ -129,6 +125,7 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 
 #' @export
 print.trunc_mat <- function(x, ...) {
+  print_summary(x)
   print_table(x)
 
   extra <- format_extra(x)
@@ -138,6 +135,10 @@ print.trunc_mat <- function(x, ...) {
   }
 
   invisible(x)
+}
+
+print_summary <- function(x) {
+  cat("<", x$summary, ">\n", sep = "")
 }
 
 print_table <- function(x) {
