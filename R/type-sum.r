@@ -60,6 +60,7 @@ size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
   dim <- dim(x) %||% length(x)
+  dim[is.na(dim)] <- "??"
   paste0(" [", paste0(dim, collapse = ","), "]" )
 }
 
