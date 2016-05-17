@@ -107,6 +107,22 @@ test_that("Can convert tables to data frame", {
 })
 
 
+test_that("Can convert atomic vectors to data frame", {
+  expect_equal(as_data_frame(1:3), data_frame(value = 1:3))
+  expect_equal(as_data_frame(c(TRUE, FALSE, NA)), data_frame(value = c(TRUE, FALSE, NA)))
+  expect_equal(as_data_frame(1.5:3.5), data_frame(value = 1.5:3.5))
+  expect_equal(as_data_frame(letters), data_frame(value = letters))
+})
+
+
+test_that("Can convert named atomic vectors to data frame", {
+  expect_equal(as_data_frame(setNames(nm = 1:3)), data_frame(value = 1:3))
+  expect_equal(as_data_frame(setNames(nm = c(TRUE, FALSE, NA))), data_frame(value = c(TRUE, FALSE, NA)))
+  expect_equal(as_data_frame(setNames(nm = 1.5:3.5)), data_frame(value = 1.5:3.5))
+  expect_equal(as_data_frame(setNames(nm = letters)), data_frame(value = letters))
+})
+
+
 # Validation --------------------------------------------------------------
 
 test_that("2d object isn't a valid column", {

@@ -1,3 +1,10 @@
+# tibble 1.0-4 (2016-05-11)
+
+- New `enframe()` that converts vectors to two-column tibbles (#31, #74).
+- Fix compatibility with `knitr` 1.13 (#76).
+- Implement `as_data_frame.default()` (#71, hadley/dplyr#1752).
+
+
 # tibble 1.0-3 (2016-05-07)
 
 - Format `NA` values in character columns as `<NA>`, like `print.data.frame()` does (#69).
