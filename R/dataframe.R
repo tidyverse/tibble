@@ -102,6 +102,8 @@ lst_ <- function(xs) {
 #'
 #' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 #' classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
+#' Other types are first coerced via \code{\link[base]{as.data.frame}} with
+#' \code{stringsAsFactors = FALSE}.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -197,6 +199,13 @@ as_data_frame.table <- function(x, n = "n", ...) {
 #' @rdname as_data_frame
 as_data_frame.NULL <- function(x, ...) {
   as_data_frame(list())
+}
+
+#' @export
+#' @rdname as_data_frame
+as_data_frame.default <- function(x, ...) {
+  value <- x
+  as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
 
 #' Add a row to a data frame

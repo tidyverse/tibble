@@ -1,5 +1,5 @@
     mpg   cyl  disp    hp
-  <dbl> <dbl> <dbl> <dbl>
+* <dbl> <dbl> <dbl> <dbl>
 1  21.0     6 160.0   110
 2  21.0     6 160.0   110
 3  22.8     4 108.0    93

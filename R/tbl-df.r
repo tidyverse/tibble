@@ -4,7 +4,8 @@ methods::setOldClass(c("tbl_df", "tbl", "data.frame"))
 
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
-  structure(x, class = "data.frame")
+  class(x) <- "data.frame"
+  x
 }
 
 #' @rdname formatting
