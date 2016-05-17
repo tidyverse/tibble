@@ -1,1 +1,1 @@
-... with 150 rows total
+<tbl_df [150,0]>

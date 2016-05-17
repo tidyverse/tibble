@@ -1,2 +1,3 @@
-... with 0 rows total, and 2
-  variables: a <chr>, b <lgl>
+<tbl_df [0,2]>
+... with 2 variables:
+  a <chr>, b <lgl>

@@ -1,2 +1,3 @@
+<unknown_rows [??,0]>
 ... with at least 5 rows
   total
