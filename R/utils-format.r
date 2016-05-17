@@ -38,13 +38,13 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
-  trunc_mat_impl(df, n, width, n_extra, rows)
+  trunc_mat_impl(df, n, width, n_extra, rows, has_rownames(x))
 }
 
-trunc_mat_impl <- function(df, n, width, n_extra, rows) {
+trunc_mat_impl <- function(df, n, width, n_extra, rows, star) {
   width <- tibble_width(width)
 
-  shrunk <- shrink_mat(df, width, rows, n)
+  shrunk <- shrink_mat(df, width, rows, n, star)
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
                      n_extra = n_extra)
 
@@ -52,7 +52,7 @@ trunc_mat_impl <- function(df, n, width, n_extra, rows) {
 }
 
 #' @importFrom stats setNames
-shrink_mat <- function(df, width, rows, n) {
+shrink_mat <- function(df, width, rows, n, star) {
   var_types <- vapply(df, type_sum, character(1))
 
   if (ncol(df) == 0 || nrow(df) == 0) {
@@ -102,6 +102,8 @@ shrink_mat <- function(df, width, rows, n) {
   }
   shrunk <- format(df[, !too_wide, drop = FALSE])
   shrunk <- rbind(" " = classes, shrunk)
+  if (star)
+    rownames(shrunk)[[1]] <- "*"
   colnames(shrunk) <- colnames(df)[!too_wide]
 
   if (is.na(rows))

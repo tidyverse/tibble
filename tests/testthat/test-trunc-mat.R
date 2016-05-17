@@ -25,7 +25,7 @@ test_that("trunc_mat output matches known output", {
 
   expect_output_file_rel(
     print(trunc_mat_impl(iris[1:10, ], n = 10, width = 70L, n_extra = 100,
-                         rows = NA_integer_)),
+                         rows = NA_integer_, star = FALSE)),
     "trunc_mat/iris_unk-10-70.txt")
 
   expect_output_file_rel(

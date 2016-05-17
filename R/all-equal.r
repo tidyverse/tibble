@@ -52,7 +52,10 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
     return("Column names same but in different order")
   }
 
-  current <- `rownames<-`(current[names(target)], rownames(current))
+  current <- as_data_frame(remove_rownames(current))
+  target <- as_data_frame(remove_rownames(target))
+
+  current <- current[names(target)]
 
   types <- unlist(mapply(
     function(x, y) {
