@@ -33,24 +33,15 @@ test_that("trunc_mat output matches known output", {
     print(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
     "trunc_mat/all-1-30-2.txt")
 
-  knit <- knitr::knit_print(trunc_mat(df_all, width = 60L))
-  expect_output_file_rel(
-    cat(knit),
+  expect_output_knit(
+    knitr::knit_print(trunc_mat(df_all, width = 60L)),
     "trunc_mat/all-knit-60.txt")
-  expect_is(knit, "knit_asis")
-  expect_true(attr(knit, "knit_cacheable"))
 
-  knit <- knitr::knit_print(trunc_mat(df_all, width = 120L))
-  expect_output_file_rel(
-    cat(knit),
+  expect_output_knit(
+    knitr::knit_print(trunc_mat(df_all, width = 120L)),
     "trunc_mat/all-knit-120.txt")
-  expect_is(knit, "knit_asis")
-  expect_true(attr(knit, "knit_cacheable"))
 
-  knit <- knitr::knit_print(trunc_mat(mtcars, width = 60L))
-  expect_output_file_rel(
-    cat(knit),
+  expect_output_knit(
+    knitr::knit_print(trunc_mat(mtcars, width = 60L)),
     "trunc_mat/mtcars-knit-60.txt")
-  expect_is(knit, "knit_asis")
-  expect_true(attr(knit, "knit_cacheable"))
 })
