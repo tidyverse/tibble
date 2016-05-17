@@ -166,8 +166,6 @@ format_extra_rows <- function(x) {
     }
   } else if (is.na(x$rows_total)) {
     paste0("at least ", x$rows_min, " rows total")
-  } else {
-    paste0(x$rows_total, " rows total")
   }
 }
 
