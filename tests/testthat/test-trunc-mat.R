@@ -24,8 +24,7 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/iris--70.txt")
 
   expect_output_file_rel(
-    print(trunc_mat_impl(iris[1:10, ], n = 10, width = 70L, n_extra = 100,
-                         rows = NA_integer_, star = FALSE)),
+    print(as_unknown_rows(iris), n = 10, width = 70L),
     "trunc_mat/iris_unk-10-70.txt")
 
   expect_output_file_rel(
@@ -41,8 +40,7 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/zero_cols-5-30.txt")
 
   expect_output_file_rel(
-    print(trunc_mat_impl(iris[, character()], n = 5L, width = 30L,
-                         n_extra = 100L, rows = NA_integer_)),
+    print(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
     "trunc_mat/zero-cols_unk-5-30.txt")
 
   expect_output_file_rel(
