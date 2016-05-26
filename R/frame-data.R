@@ -2,7 +2,7 @@
 #'
 #' Create \code{\link{data_frame}}s laying out the data in rows, rather than
 #' in columns. This is useful for small tables of data where readability is
-#' important.
+#' important.  Please see \link{tibble-package} for a general introduction.
 #'
 #' @param ... Arguments specifying the structure of a \code{data_frame}.
 #'   Variable names should be formulas, and may only appear before the data.
