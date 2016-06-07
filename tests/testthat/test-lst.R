@@ -11,3 +11,7 @@ test_that("lst handles internal references", {
   expect_identical(lst(a = 1, b = a), list(a = 1, b = 1))
   expect_identical(lst(a = NULL, b = a), list(a = NULL, b = NULL))
 })
+
+test_that("lst creates formulas with correct environment", {
+  expect_identical(environment(lst(~x)[[1]]), environment())
+})

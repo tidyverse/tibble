@@ -1,3 +1,7 @@
+
+- The formulas created with `lst()` are now set correctly.
+
+
 # tibble 1.0-5 (2016-05-12)
 
 - Indicate presence of row names by a star in printed output (#72).
