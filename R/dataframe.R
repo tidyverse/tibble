@@ -77,6 +77,8 @@ lst_ <- function(xs) {
     col_names[missing_names] <- defaults
   }
 
+  env <- xs[[1]]$env
+
   # Evaluate each column in turn
   output <- vector("list", n)
   names(output) <- character(n)
@@ -84,6 +86,7 @@ lst_ <- function(xs) {
   for (i in seq_len(n)) {
     res <- lazyeval::lazy_eval(xs[[i]], output)
     if (!is.null(res)) {
+      res <- adjust_nse(res, env)
       output[[i]] <-  res
     }
     names(output)[i] <- col_names[[i]]
@@ -92,6 +95,16 @@ lst_ <- function(xs) {
   output
 }
 
+adjust_nse <- function(x, env) {
+  UseMethod("adjust_nse")
+}
+adjust_nse.default <- function(x, env) {
+  x
+}
+adjust_nse.formula <- function(x, env) {
+  environment(x) <- env
+  x
+}
 
 #' Coerce lists and matrices to data frames.
 #'
