@@ -35,6 +35,8 @@ type_sum.POSIXt <- function(x) "time"
 #' @export
 type_sum.Date <- function(x) "date"
 #' @export
+type_sum.tbl_df <- function(x) "tibble"
+#' @export
 type_sum.data.frame <- function(x) class(x)[[1]]
 #' @export
 type_sum.default <- function(x) {

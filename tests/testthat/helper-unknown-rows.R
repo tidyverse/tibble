@@ -15,3 +15,7 @@ head.unknown_rows <- function(x, n) {
 }
 
 registerS3method("head", "unknown_rows", head.unknown_rows)
+
+type_sum.unknown_rows <- function(x) "unknown_rows"
+
+registerS3method("type_sum", "unknown_rows", type_sum.unknown_rows)
