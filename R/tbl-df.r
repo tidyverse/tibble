@@ -18,7 +18,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 .check_names_df <- function(j, ...) UseMethod(".check_names_df")
 
 .check_names_df.default <- function(j, ...) {
-  stop("undefined index type: ", class(j))
+  stop("unsupported index type: ", class(j)[[1L]])
 }
 
 .check_names_df.character <- function(j, x) {

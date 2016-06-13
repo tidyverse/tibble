@@ -68,6 +68,15 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   expect_error(foo[c(TRUE, TRUE, NA)], "NA column indexes not supported", fixed = TRUE)
 })
 
+test_that("[.tbl_df rejects unknown column indexes (#83)",{
+  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  expect_error(foo[list(1:3)], "unsupported index type: list", fixed = TRUE)
+  expect_error(foo[as.list(1:3)], "unsupported index type: list", fixed = TRUE)
+  expect_error(foo[factor(1:3)], "unsupported index type: factor", fixed = TRUE)
+  expect_error(foo[Sys.Date()], "unsupported index type: Date", fixed = TRUE)
+  expect_error(foo[Sys.time()], "unsupported index type: POSIXct", fixed = TRUE)
+})
+
 test_that("[.tbl_df is no-op if args missing",{
   expect_identical(df_all[], df_all)
 })
