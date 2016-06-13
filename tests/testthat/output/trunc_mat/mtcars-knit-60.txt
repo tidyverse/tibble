@@ -1,5 +1,7 @@
 
 
+data.frame [32 x 11]
+
 |mpg   |cyl   |disp  |hp    |drat  |wt    |qsec  |vs    |am    |
 |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
 |<dbl> |<dbl> |<dbl> |<dbl> |<dbl> |<dbl> |<dbl> |<dbl> |<dbl> |
@@ -13,6 +15,6 @@
 |24.4  |4     |146.7 |62    |3.69  |3.190 |20.00 |1     |0     |
 |22.8  |4     |140.8 |95    |3.92  |3.150 |22.90 |1     |0     |
 |19.2  |6     |167.6 |123   |3.92  |3.440 |18.30 |1     |0     |
-|...   |...   |...   |...   |...   |...   |...   |...   |...   |
 
-(_Variables not shown_: gear <dbl>, carb <dbl>)
+(with 22 more rows, and 2 more variables: gear <dbl>,
+  carb <dbl>)

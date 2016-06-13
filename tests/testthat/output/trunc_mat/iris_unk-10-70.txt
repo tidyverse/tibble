@@ -1,4 +1,4 @@
-<tibble [150 x 5]>
+<unknown_rows [?? x 5]>
    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 1           5.1         3.5          1.4         0.2  setosa
@@ -11,4 +11,4 @@
 8           5.0         3.4          1.5         0.2  setosa
 9           4.4         2.9          1.4         0.2  setosa
 10          4.9         3.1          1.5         0.1  setosa
-... with 140 more rows
+... with more rows
