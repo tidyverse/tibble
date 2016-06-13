@@ -57,6 +57,13 @@ test_that("SE version", {
   expect_identical(data_frame_(list(a = ~1:10)), data_frame(a = 1:10))
 })
 
+test_that("names in list columns are preserved", {
+  foo <- data_frame(x = list(y = 1:3, z = 4:5))
+  expect_equal(names(foo), "x")
+  expect_equal(names(foo$x), c("y", "z"))
+})
+
+
 # as_data_frame -----------------------------------------------------------
 
 test_that("columns must be same length", {
