@@ -168,7 +168,7 @@ as_data_frame.list <- function(x, validate = TRUE, ...) {
   }
 
   if (validate) {
-    check_data_frame(x)
+    x <- check_data_frame(x)
   }
   x <- recycle_columns(x)
 
@@ -274,6 +274,8 @@ check_data_frame <- function(x) {
   if (any(!is_1d)) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
+
+  x[] <- lapply(x, strip_dim)
 
   posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
   if (any(posixlt)) {
