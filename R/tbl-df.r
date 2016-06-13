@@ -15,13 +15,13 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   invisible(x)
 }
 
-.check_names_df <- function(j, ...) UseMethod(".check_names_df")
+check_names_df <- function(j, ...) UseMethod("check_names_df")
 
-.check_names_df.default <- function(j, ...) {
+check_names_df.default <- function(j, ...) {
   stop("unsupported index type: ", class(j)[[1L]])
 }
 
-.check_names_df.character <- function(j, x) {
+check_names_df.character <- function(j, x) {
   pos <- safe_match(j, names(x))
   if(any(is.na(pos))){
     names <- j[is.na(pos)]
@@ -30,7 +30,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   pos
 }
 
-.check_names_df.numeric <- function(j, x) {
+check_names_df.numeric <- function(j, x) {
   if (any(is.na(j))) {
     stop("NA column indexes not supported", call. = FALSE)
   }
@@ -51,7 +51,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   seq_along(x)[j]
 }
 
-.check_names_df.logical <- function(j, x) {
+check_names_df.logical <- function(j, x) {
   if (!(length(j) %in% c(1L, length(x)))) {
     stop("length of logical index vector must be 1 or ", length(x), ", got: ", length(j), call. = FALSE)
   }
@@ -95,7 +95,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   # Escape early if nargs() == 2L; ie, column subsetting
   if (nargs() <= 2L) {
     if (!missing(i)) {
-      i <- .check_names_df(i, x)
+      i <- check_names_df(i, x)
       result <- .subset(x, i)
     } else {
       result <- x
@@ -106,7 +106,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
   # First, subset columns
   if (!missing(j)) {
-    j <- .check_names_df(j, x)
+    j <- check_names_df(j, x)
     x <- .subset(x, j)
   }
 
