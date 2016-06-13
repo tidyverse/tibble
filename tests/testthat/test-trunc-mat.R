@@ -32,6 +32,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/all--30.txt")
 
   expect_output_file_rel(
+    print(data_frame(a = seq.int(10000)), n = 5L, width = 30L),
+    "trunc_mat/long-5-30.txt")
+
+  expect_output_file_rel(
     print(data_frame(a = character(), b = logical()), width = 30L),
     "trunc_mat/zero_rows--30.txt")
 
@@ -42,6 +46,11 @@ test_that("trunc_mat output matches known output", {
   expect_output_file_rel(
     print(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
     "trunc_mat/zero-cols_unk-5-30.txt")
+
+  expect_output_file_rel(
+    print(as_unknown_rows(data_frame(a = seq.int(10000))), n = 5L,
+          width = 30L),
+    "trunc_mat/long_unk-5-30.txt")
 
   expect_output_file_rel(
     print(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),

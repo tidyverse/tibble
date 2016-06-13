@@ -1,4 +1,4 @@
-<tibble [150,5]>
+<tibble [150 x 5]>
   Sepal.Length
          <dbl>
 1          5.1

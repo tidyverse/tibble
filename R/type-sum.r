@@ -62,8 +62,9 @@ size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
   dim <- dim(x) %||% length(x)
-  dim[is.na(dim)] <- "??"
-  paste0(" [", paste0(dim, collapse = ","), "]" )
+  format_dim <- vapply(dim, big_mark, character(1))
+  format_dim[is.na(dim)] <- "??"
+  paste0(" [", paste0(format_dim, collapse = " x "), "]" )
 }
 
 #' @export
