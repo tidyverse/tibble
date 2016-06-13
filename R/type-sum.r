@@ -23,6 +23,16 @@ obj_sum.default <- function(x) {
 }
 
 #' @export
+obj_sum.list <- function(x) {
+  vapply(x, obj_sum, character(1L))
+}
+
+#' @export
+obj_sum.POSIXlt <- function(x) {
+  rep("POSIXlt", length(x))
+}
+
+#' @export
 #' @rdname obj_sum
 type_sum <- function(x) UseMethod("type_sum")
 
