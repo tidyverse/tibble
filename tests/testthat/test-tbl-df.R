@@ -38,11 +38,31 @@ test_that("[ with 0 cols creates correct row names (#656)", {
 
 test_that("[.tbl_df is careful about names (#1245)",{
   foo <- data_frame(x = 1:10, y = 1:10)
-  expect_error( foo["z"] )
-  expect_error( foo[ c("x", "y", "z") ] )
+  expect_error(foo["z"], "undefined columns")
+  expect_error(foo[ c("x", "y", "z") ], "undefined columns")
 
-  expect_error( foo[, "z"] )
-  expect_error( foo[, c("x", "y", "z") ] )
+  expect_error(foo[, "z"], "undefined columns")
+  expect_error(foo[, c("x", "y", "z") ], "undefined columns")
+})
+
+test_that("[.tbl_df is careful about column indexes (#83)",{
+  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[1:3], foo)
+  expect_error(foo[1:4], "invalid column index")
+  expect_error(foo[-1:1], "mixed with negative")
+  expect_error(foo[-4], "invalid column index")
+  expect_error(foo[0], "invalid column index")
+})
+
+test_that("[.tbl_df is careful about column flags (#83)",{
+  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[TRUE], foo)
+  expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
+  expect_identical(foo[FALSE], foo[integer()])
+  expect_identical(foo[c(FALSE, TRUE)], foo[2])
+
+  expect_error(foo[c(TRUE, TRUE)], "won't recycle")
+  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "too many")
 })
 
 test_that("[.tbl_df is no-op if args missing",{
