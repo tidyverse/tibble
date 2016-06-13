@@ -48,6 +48,7 @@ test_that("[.tbl_df is careful about names (#1245)",{
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
+  expect_error(foo[0.5], "invalid non-integer column indexes: 0.5", fixed = TRUE)
   expect_error(foo[1:5], "invalid column indexes: 4, 5", fixed = TRUE)
   expect_error(foo[-1:1], "mixed with negative")
   expect_error(foo[c(-1, 1)], "mixed with negative")
