@@ -22,6 +22,8 @@ check_names_df.default <- function(j, ...) {
 }
 
 check_names_df.character <- function(j, x) {
+  check_needs_no_dim(j)
+
   pos <- safe_match(j, names(x))
   if(any(is.na(pos))){
     names <- j[is.na(pos)]
@@ -31,6 +33,8 @@ check_names_df.character <- function(j, x) {
 }
 
 check_names_df.numeric <- function(j, x) {
+  check_needs_no_dim(j)
+
   if (any(is.na(j))) {
     stop("NA column indexes not supported", call. = FALSE)
   }
@@ -52,6 +56,8 @@ check_names_df.numeric <- function(j, x) {
 }
 
 check_names_df.logical <- function(j, x) {
+  check_needs_no_dim(j)
+
   if (!(length(j) %in% c(1L, length(x)))) {
     stop("length of logical index vector must be 1 or ", length(x), ", got: ", length(j), call. = FALSE)
   }
@@ -59,6 +65,12 @@ check_names_df.logical <- function(j, x) {
     stop("NA column indexes not supported", call. = FALSE)
   }
   seq_along(x)[j]
+}
+
+check_needs_no_dim <- function(j) {
+  if (needs_dim(j)) {
+    stop("unsupported use of matrix or array for column indexing", call. = FALSE)
+  }
 }
 
 #' @export

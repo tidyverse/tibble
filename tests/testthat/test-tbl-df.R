@@ -43,6 +43,9 @@ test_that("[.tbl_df is careful about names (#1245)",{
 
   expect_error(foo[, "z"], "undefined columns")
   expect_error(foo[, c("x", "y", "z") ], "undefined columns")
+
+  expect_error(foo[as.matrix("x")], "matrix")
+  expect_error(foo[array("x", dim = c(1, 1, 1))], "array")
 })
 
 test_that("[.tbl_df is careful about column indexes (#83)",{
@@ -54,6 +57,9 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
   expect_error(foo[c(-1, 1)], "mixed with negative")
   expect_error(foo[-4], "invalid negative column indexes: -4", fixed = TRUE)
   expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
+
+  expect_error(foo[as.matrix(1)], "matrix")
+  expect_error(foo[array(1, dim = c(1, 1, 1))], "array")
 })
 
 test_that("[.tbl_df is careful about column flags (#83)",{
@@ -66,6 +72,9 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   expect_error(foo[c(TRUE, TRUE)], "length of logical index vector must be 1 or 3, got: 2", fixed = TRUE)
   expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "length of logical index vector must be 1 or 3, got: 4", fixed = TRUE)
   expect_error(foo[c(TRUE, TRUE, NA)], "NA column indexes not supported", fixed = TRUE)
+
+  expect_error(foo[as.matrix(TRUE)], "matrix")
+  expect_error(foo[array(TRUE, dim = c(1, 1, 1))], "array")
 })
 
 test_that("[.tbl_df rejects unknown column indexes (#83)",{
