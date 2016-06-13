@@ -25,6 +25,12 @@ is_1d <- function(x) {
   (is_atomic(x) || is.list(x)) && length(dim(x)) <= 1
 }
 
+strip_dim <- function(x) {
+  if (is_atomic(x))
+    dim(x) <- NULL
+  x
+}
+
 needs_list_col <- function(x) {
   is.list(x) || length(x) != 1L
 }

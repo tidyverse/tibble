@@ -19,6 +19,10 @@ test_that("can't make data_frame containing data.frame or array", {
   expect_error(data_frame(diag(5)), "must be a 1d atomic vector or list")
 })
 
+test_that("dim attribute is stripped of 1D array (#84)", {
+  expect_null(dim(data_frame(x = array(1:3))$x))
+})
+
 test_that("bogus columns raise an error", {
   expect_error(as_data_frame(list(1)), "named")
   expect_error(data_frame(a = NULL), "1d atomic vector or list")
@@ -52,6 +56,13 @@ test_that("empty input makes 0 x 0 tbl_df", {
 test_that("SE version", {
   expect_identical(data_frame_(list(a = ~1:10)), data_frame(a = 1:10))
 })
+
+test_that("names in list columns are preserved", {
+  foo <- data_frame(x = list(y = 1:3, z = 4:5))
+  expect_equal(names(foo), "x")
+  expect_equal(names(foo$x), c("y", "z"))
+})
+
 
 # as_data_frame -----------------------------------------------------------
 
