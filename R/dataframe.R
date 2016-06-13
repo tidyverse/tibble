@@ -168,7 +168,7 @@ as_data_frame.list <- function(x, validate = TRUE, ...) {
   }
 
   if (validate) {
-    check_data_frame(x)
+    x <- check_data_frame(x)
   }
   x <- recycle_columns(x)
 
@@ -207,6 +207,20 @@ as_data_frame.default <- function(x, ...) {
   value <- x
   as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
+
+#' Test if the object is a tibble.
+#'
+#' @param x An object
+#' @return \code{TRUE} if the object inherits from the \code{tbl_df} class.
+#' @export
+is.data_frame <- function(x) {
+  "tbl_df" %in% class(x)
+}
+
+#' @rdname is.data_frame
+#' @export
+is_data_frame <- is.data_frame
+
 
 #' Add a row to a data frame
 #'
@@ -274,6 +288,8 @@ check_data_frame <- function(x) {
   if (any(!is_1d)) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
+
+  x[] <- lapply(x, strip_dim)
 
   posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
   if (any(posixlt)) {

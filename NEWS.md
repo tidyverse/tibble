@@ -1,3 +1,11 @@
+# tibble 1.0-7 (2016-06-13)
+
+- Tibbles with `POSIXlt` columns can be printed now, the text `<POSIXlt>` is shown as placeholder to encourage usage of `POSIXct` (#86).
+- New `is.data_frame()` and `is_data_frame()` (#79).
+- Strict checking of integer and logical column indexes. For integers, passing a non-integer index or an out-of-bounds index raises an error. For logicals, only vectors of length 1 or `ncol` are supported. Passing a matrix or an array now raises an error in any case (#83).
+- The `.Dim` attribute is silently stripped off columns that are 1d matrices (#84).
+
+
 # tibble 1.0-6 (2016-06-13)
 
 - Reworked output: More concise summary, removed empty line, showing number of hidden rows and columns (#51).
