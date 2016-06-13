@@ -48,10 +48,11 @@ test_that("[.tbl_df is careful about names (#1245)",{
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
-  expect_error(foo[1:4], "invalid column index")
+  expect_error(foo[1:5], "invalid column indexes: 4, 5", fixed = TRUE)
   expect_error(foo[-1:1], "mixed with negative")
-  expect_error(foo[-4], "invalid column index")
-  expect_error(foo[0], "invalid column index")
+  expect_error(foo[c(-1, 1)], "mixed with negative")
+  expect_error(foo[-4], "invalid negative column indexes: -4", fixed = TRUE)
+  expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 })
 
 test_that("[.tbl_df is careful about column flags (#83)",{
@@ -59,10 +60,11 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   expect_identical(foo[TRUE], foo)
   expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
   expect_identical(foo[FALSE], foo[integer()])
-  expect_identical(foo[c(FALSE, TRUE)], foo[2])
+  expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error(foo[c(TRUE, TRUE)], "won't recycle")
-  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "too many")
+  expect_error(foo[c(TRUE, TRUE)], "length of logical index vector must be 1 or 3, got: 2", fixed = TRUE)
+  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "length of logical index vector must be 1 or 3, got: 4", fixed = TRUE)
+  expect_error(foo[c(TRUE, TRUE, NA)], "NA column indexes not supported", fixed = TRUE)
 })
 
 test_that("[.tbl_df is no-op if args missing",{
