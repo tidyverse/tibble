@@ -72,3 +72,12 @@ test_that("trunc_mat output matches known output", {
     knitr::knit_print(trunc_mat(mtcars, width = 60L)),
     "trunc_mat/mtcars-knit-60.txt")
 })
+
+test_that("trunc_mat for POSIXlt columns (#86)", {
+  df <- data_frame(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
+  df$y <- as.POSIXlt(df$x)
+
+  expect_output_file_rel(
+    print(as_data_frame(df), n = 8L, width = 60L),
+    "trunc_mat/POSIXlt-8-30.txt")
+})

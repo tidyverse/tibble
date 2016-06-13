@@ -67,7 +67,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
   is_list <- vapply(df, is.list, logical(1))
   df[is_list] <- lapply(df[is_list], function(x) {
-    summary <- vapply(x, obj_sum, character(1))
+    summary <- obj_sum(x)
     paste0("<", summary, ">")
   })
 
