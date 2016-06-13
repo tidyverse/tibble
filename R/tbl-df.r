@@ -15,13 +15,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   invisible(x)
 }
 
-.check_names_df <- function(x, j){
-  if( is.character(j) && any( wrong <- ! j %in% names(x) ) ){
-    names <- j[wrong]
-    stop( sprintf( "undefined columns: %s", paste(names, collapse = ", " ) ) ) ;
-  }
-}
-
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (missing(j))
@@ -56,7 +49,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   # Escape early if nargs() == 2L; ie, column subsetting
   if (nargs() <= 2L) {
     if (!missing(i)) {
-      .check_names_df(x, i)
+      i <- check_names_df(i, x)
       result <- .subset(x, i)
     } else {
       result <- x
@@ -67,7 +60,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
   # First, subset columns
   if (!missing(j)) {
-    .check_names_df(x,j)
+    j <- check_names_df(j, x)
     x <- .subset(x, j)
   }
 
