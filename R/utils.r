@@ -20,9 +20,13 @@ is_vector <- function(x) {
   is_atomic(x) || is.list(x)
 }
 
+needs_dim <- function(x) {
+  length(dim(x)) > 1L
+}
+
 is_1d <- function(x) {
   # dimension check is for matrices and data.frames
-  (is_atomic(x) || is.list(x)) && length(dim(x)) <= 1
+  is_vector(x) && !needs_dim(x)
 }
 
 strip_dim <- function(x) {
