@@ -1,3 +1,10 @@
+# tibble 1.0-6 (2016-06-13)
+
+- Reworked output: More concise summary, removed empty line, showing number of hidden rows and columns (#51).
+- Link to the package documentation from the `tibble` help page (#82).
+- Don't rely on `knitr` internals for testing (#78).
+
+
 # tibble 1.0-5 (2016-05-12)
 
 - Indicate presence of row names by a star in printed output (#72).
