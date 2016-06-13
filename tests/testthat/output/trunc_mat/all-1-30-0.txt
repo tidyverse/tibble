@@ -3,5 +3,4 @@
   <dbl> <int> <lgl> <chr>
 1     1     1  TRUE     a
 ... with 2 more rows, and 4
-  more variables: e <fctr>,
-  f <date>, ...
+  more variables

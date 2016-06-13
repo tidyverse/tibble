@@ -19,7 +19,7 @@ A \code{data_frame}.
 \description{
 Create \code{\link{data_frame}}s laying out the data in rows, rather than
 in columns. This is useful for small tables of data where readability is
-important.
+important.  Please see \link{tibble-package} for a general introduction.
 }
 \examples{
 frame_data(

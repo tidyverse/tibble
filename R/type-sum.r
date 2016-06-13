@@ -35,6 +35,8 @@ type_sum.POSIXt <- function(x) "time"
 #' @export
 type_sum.Date <- function(x) "date"
 #' @export
+type_sum.tbl_df <- function(x) "tibble"
+#' @export
 type_sum.data.frame <- function(x) class(x)[[1]]
 #' @export
 type_sum.default <- function(x) {
@@ -60,7 +62,9 @@ size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
   dim <- dim(x) %||% length(x)
-  paste0(" [", paste0(dim, collapse = ","), "]" )
+  format_dim <- vapply(dim, big_mark, character(1))
+  format_dim[is.na(dim)] <- "??"
+  paste0(" [", paste0(format_dim, collapse = " x "), "]" )
 }
 
 #' @export
