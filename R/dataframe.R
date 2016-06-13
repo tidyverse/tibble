@@ -208,6 +208,20 @@ as_data_frame.default <- function(x, ...) {
   as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
 
+#' Test if the object is a tibble.
+#'
+#' @param x An object
+#' @return \code{TRUE} if the object inherits from the \code{tbl_df} class.
+#' @export
+is.data_frame <- function(x) {
+  "tbl_df" %in% class(x)
+}
+
+#' @rdname is.data_frame
+#' @export
+is_data_frame <- is.data_frame
+
+
 #' Add a row to a data frame
 #'
 #' This is a convenient way to add a single row of data to an existing data

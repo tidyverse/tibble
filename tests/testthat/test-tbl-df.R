@@ -94,3 +94,16 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$part, "Unknown column 'part'")
   expect_error(df$partial, NA)
 })
+
+# is.data_frame -----------------------------------------------------------
+
+test_that("is.data_frame", {
+  expect_false(is.data_frame(iris))
+  expect_true(is.data_frame(as_data_frame(iris)))
+  expect_false(is.data_frame(NULL))
+  expect_false(is.data_frame(0))
+})
+
+test_that("is_data_frame", {
+  expect_identical(is.data_frame, is_data_frame)
+})
