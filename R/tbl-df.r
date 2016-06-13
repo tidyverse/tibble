@@ -43,6 +43,10 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   if (any(neg_too_small)) {
     stop("invalid negative column indexes: ", paste(j[neg_too_small], collapse = ", "), call. = FALSE)
   }
+  zero <- (j == 0)
+  if (any(zero)) {
+    stop("zero column indexes not supported", call. = FALSE)
+  }
   pos_too_large <- (j > length(x))
   if (any(pos_too_large)) {
     stop("invalid column indexes: ", paste(j[pos_too_large], collapse = ", "), call. = FALSE)

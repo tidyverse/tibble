@@ -28,12 +28,12 @@ test_that("[ and as_data_frame commute", {
 })
 
 test_that("[ with 0 cols creates correct row names (#656)", {
-  zero_row <- as_data_frame(iris)[, 0]
+  zero_row <- as_data_frame(iris)[, integer()]
   expect_is(zero_row, "tbl_df")
   expect_equal(nrow(zero_row), 150)
   expect_equal(ncol(zero_row), 0)
 
-  expect_identical(zero_row, as_data_frame(iris)[0])
+  expect_identical(zero_row, as_data_frame(iris)[integer()])
 })
 
 test_that("[.tbl_df is careful about names (#1245)",{
@@ -49,9 +49,10 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
   expect_error(foo[1:5], "invalid column indexes: 4, 5", fixed = TRUE)
-  expect_error(foo[-1:1], "mixed with negative")
+  expect_error(foo[-1:1], "zero column indexes")
   expect_error(foo[c(-1, 1)], "mixed with negative")
   expect_error(foo[-4], "invalid negative column indexes: -4", fixed = TRUE)
+  expect_error(foo[0], "zero column indexes")
   expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 })
 
