@@ -148,3 +148,17 @@ test_that("is.data_frame", {
 test_that("is_data_frame", {
   expect_identical(is.data_frame, is_data_frame)
 })
+
+
+# cbind and rbind ---------------------------------------------------------
+
+test_that("cbind", {
+  expect_identical(cbind(df_all[1:4], df_all[-1:-4]), df_all)
+  expect_identical(cbind(df_all[1:4], as.data.frame(df_all[-1:-4])), df_all)
+  expect_identical(cbind(as.data.frame(df_all[1:4]), df_all[-1:-4]), df_all)
+  expect_identical(cbind(as.data.frame(df_all[1:4]), as.data.frame(df_all[-1:-4])), df_all)
+})
+
+test_that("is_data_frame", {
+  expect_identical(is.data_frame, is_data_frame)
+})

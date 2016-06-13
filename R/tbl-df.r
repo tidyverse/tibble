@@ -77,3 +77,22 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   attr(x, "row.names") <- .set_row_names(nr)
   as_data_frame.data.frame(x)
 }
+
+#' @export
+cbind.tbl_df <- function(..., deparse.level = 1) {
+  as_data_frame(cbind.data.frame(..., deparse.level = deparse.level))
+}
+
+#' @export
+rbind.tbl_df <- function(..., deparse.level = 1, make.row.names = FALSE,
+                         stringsAsFactors = FALSE) {
+  if (make.row.names) {
+    warning("row names not supported for tibble", call. = FALSE)
+  }
+  if (stringsAsFactors) {
+    warning("not converting strings to factors for tibble", call. = FALSE)
+  }
+  as_data_frame(rbind.data.frame(..., deparse.level = deparse.level,
+                                 make.row.names = FALSE,
+                                 stringsAsFactors = FALSE))
+}
