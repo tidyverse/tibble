@@ -15,11 +15,50 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   invisible(x)
 }
 
-.check_names_df <- function(x, j){
-  if( is.character(j) && any( wrong <- ! j %in% names(x) ) ){
-    names <- j[wrong]
-    stop( sprintf( "undefined columns: %s", paste(names, collapse = ", " ) ) ) ;
+.check_names_df <- function(j, ...) UseMethod(".check_names_df")
+
+.check_names_df.default <- function(j, ...) {
+  stop("undefined index type: ", class(j))
+}
+
+.check_names_df.character <- function(j, x) {
+  pos <- safe_match(j, names(x))
+  if(any(is.na(pos))){
+    names <- j[is.na(pos)]
+    stop("undefined columns: ", paste(names, collapse = ", "), call. = FALSE)
   }
+  pos
+}
+
+.check_names_df.numeric <- function(j, x) {
+  if (any(is.na(j))) {
+    stop("NA column indexes not supported", call. = FALSE)
+  }
+
+  non_integer <- (j != trunc(j))
+  if (any(non_integer)) {
+    stop("invalid non-integer column indexes: ", paste(j[non_integer], collapse = ", "), call. = FALSE)
+  }
+  neg_too_small <- (j < -length(x))
+  if (any(neg_too_small)) {
+    stop("invalid negative column indexes: ", paste(j[neg_too_small], collapse = ", "), call. = FALSE)
+  }
+  pos_too_large <- (j > length(x))
+  if (any(pos_too_large)) {
+    stop("invalid column indexes: ", paste(j[pos_too_large], collapse = ", "), call. = FALSE)
+  }
+
+  seq_along(x)[j]
+}
+
+.check_names_df.logical <- function(j, x) {
+  if (!(length(j) %in% c(1L, length(x)))) {
+    stop("length of logical index vector must be 1 or ", length(x), ", got: ", length(j), call. = FALSE)
+  }
+  if (any(is.na(j))) {
+    stop("NA column indexes not supported", call. = FALSE)
+  }
+  seq_along(x)[j]
 }
 
 #' @export
@@ -56,7 +95,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   # Escape early if nargs() == 2L; ie, column subsetting
   if (nargs() <= 2L) {
     if (!missing(i)) {
-      .check_names_df(x, i)
+      i <- .check_names_df(i, x)
       result <- .subset(x, i)
     } else {
       result <- x
@@ -67,7 +106,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
   # First, subset columns
   if (!missing(j)) {
-    .check_names_df(x,j)
+    j <- .check_names_df(j, x)
     x <- .subset(x, j)
   }
 

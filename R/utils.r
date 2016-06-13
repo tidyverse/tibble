@@ -34,3 +34,11 @@ strip_dim <- function(x) {
 needs_list_col <- function(x) {
   is.list(x) || length(x) != 1L
 }
+
+# Work around bug in R 3.3.0
+safe_match <- function(x, table) {
+  if (getRversion() == "3.3.0")
+    match(x, table, incomparables = character())
+  else
+    match(x, table)
+}
