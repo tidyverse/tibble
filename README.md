@@ -15,7 +15,7 @@ You can create a tibble from an existing object with `as_data_frame()`:
 ``` r
 library(tibble)
 as_data_frame(iris)
-#> <tbl_df [150,5]>
+#> <tibble [150 x 5]>
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 #> 1           5.1         3.5          1.4         0.2  setosa
@@ -37,7 +37,7 @@ You can also create a new tibble from vectors that represent the columns with `d
 
 ``` r
 data_frame(x = 1:5, y = 1, z = x ^ 2 + y)
-#> <tbl_df [5,3]>
+#> <tibble [5 x 3]>
 #>       x     y     z
 #>   <int> <dbl> <dbl>
 #> 1     1     1     2
@@ -57,7 +57,7 @@ frame_data(
   "a", 2,  3.6,
   "b", 1,  8.5
 )
-#> <tbl_df [2,3]>
+#> <tibble [2 x 3]>
 #>       x     y     z
 #>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
@@ -81,7 +81,7 @@ Tibbles have a refined print method that shows only the first 10 rows, and all t
 ``` r
 library(nycflights13)
 flights
-#> <tbl_df [336776,19]>
+#> <tibble [336,776 x 19]>
 #>     year month   day dep_time sched_dep_time dep_delay arr_time
 #>    <int> <int> <int>    <int>          <int>     <dbl>    <int>
 #> 1   2013     1     1      517            515         2      830
