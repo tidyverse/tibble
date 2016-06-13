@@ -137,8 +137,12 @@ print.trunc_mat <- function(x, ...) {
   invisible(x)
 }
 
+format_summary <- function(x) {
+  x$summary
+}
+
 print_summary <- function(x) {
-  cat("<", x$summary, ">\n", sep = "")
+  cat("<", format_summary(x), ">\n", sep = "")
 }
 
 print_table <- function(x) {
@@ -191,6 +195,8 @@ format_extra_cols <- function(x) {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
+  summary <- format_summary(x)
+
   kable <- knitr::kable(x$table, row.names = FALSE)
 
   extra <- format_extra(x)
@@ -201,7 +207,7 @@ knit_print.trunc_mat <- function(x, options) {
     extra <- "\n"
   }
 
-  res <- paste(c('', '', kable, '', extra), collapse = '\n')
+  res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
   knitr::asis_output(res, cacheable = TRUE)
 }
 
