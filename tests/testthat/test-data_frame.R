@@ -57,6 +57,12 @@ test_that("SE version", {
   expect_identical(data_frame_(list(a = ~1:10)), data_frame(a = 1:10))
 })
 
+test_that("names are stripped off vectors", {
+  foo <- data_frame(x = c(y = 1, z = 2))
+  expect_equal(names(foo), "x")
+  expect_null(names(foo$x))
+})
+
 test_that("names in list columns are preserved", {
   foo <- data_frame(x = list(y = 1:3, z = 4:5))
   expect_equal(names(foo), "x")
