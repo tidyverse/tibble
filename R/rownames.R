@@ -50,7 +50,7 @@ rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (var %in% colnames(df))
-    stop("There is a column named ", var, " already!", call. = FALSE)
+    stopc("There is a column named ", var, " already!")
 
   rn <- data_frame(rownames(df))
   names(rn) <- var
@@ -71,10 +71,10 @@ column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (has_rownames(df))
-    stop("This data frame already has row names.", call. = FALSE)
+    stopc("This data frame already has row names.")
 
   if (!var %in% colnames(df))
-    stop("This data frame has no column named ", var, ".", call. = FALSE)
+    stopc("This data frame has no column named ", var, ".")
 
   rownames(df) <- df[[var]]
   df[[var]] <- NULL
@@ -84,7 +84,7 @@ column_to_rownames <- function(df, var = "rowname") {
 #' @export
 `row.names<-.tbl_df` <- function(x, value) {
   if (!is.null(value)) {
-    warning("Setting row names on a tibble is deprecated.", call. = FALSE)
+    warningc("Setting row names on a tibble is deprecated.")
   }
   NextMethod()
 }

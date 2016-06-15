@@ -69,7 +69,7 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
   if (length(types) > 0L) {
     types <- paste0("Incompatible type for column ", names(types), ": ", types)
     if (convert) {
-      lapply(types, warning, call. = FALSE)
+      lapply(types, warningc)
     } else {
       return(types)
     }
