@@ -10,7 +10,7 @@ check_names_df.character <- function(j, x) {
   pos <- safe_match(j, names(x))
   if(any(is.na(pos))){
     names <- j[is.na(pos)]
-    stopc("Unknown columns ", format_vars(names))
+    stopc("Unknown columns ", format_n(names))
   }
   pos
 }
@@ -24,15 +24,15 @@ check_names_df.numeric <- function(j, x) {
 
   non_integer <- (j != trunc(j))
   if (any(non_integer)) {
-    stopc("Invalid non-integer column indexes: ", format_vars(j[non_integer]))
+    stopc("Invalid non-integer column indexes: ", format_n(j[non_integer]))
   }
   neg_too_small <- (j < -length(x))
   if (any(neg_too_small)) {
-    stopc("Invalid negative column indexes: ", format_vars(j[neg_too_small]))
+    stopc("Invalid negative column indexes: ", format_n(j[neg_too_small]))
   }
   pos_too_large <- (j > length(x))
   if (any(pos_too_large)) {
-    stopc("Invalid column indexes: ", format_vars(j[pos_too_large]))
+    stopc("Invalid column indexes: ", format_n(j[pos_too_large]))
   }
 
   seq_along(x)[j]
