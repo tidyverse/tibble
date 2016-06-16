@@ -239,3 +239,8 @@ big_mark <- function(x, ...) {
 tibble_width <- function(width) {
   width %||% tibble_opt("width") %||% getOption("width")
 }
+
+vars <- function(..., vars) {
+  vars <- paste(encodeString(vars, quote = "'"), collapse = ", ")
+  paste0(..., vars)
+}
