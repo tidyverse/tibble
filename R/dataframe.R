@@ -322,7 +322,7 @@ invalid_df <- function(problem, df, vars) {
   }
   stopc(
     problem, ".\n",
-    "Problem variables: ", paste0(vars, collapse = ", "), ".\n"
+    "Problem variables: ", paste0(vars, collapse = ", ")
   )
 }
 
