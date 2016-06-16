@@ -1,3 +1,9 @@
+# tibble 1.0-9 (2016-06-16)
+
+- Change formatting of summary line: Begins with hash `#` and contains more text (#95).
+- Correctly print list of lists (#97).
+
+
 # tibble 1.0-8 (2016-06-16)
 
 - Consistently surround variable names with single quotes in error messages.
