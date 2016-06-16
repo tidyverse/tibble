@@ -1,5 +1,5 @@
 Observations: 3
-Variables: 8
+Variables: 9
 $ a (dbl) 1.0, 2.5, NA
 $ b (int) 1, 2, NA
 $ c (lgl) TRUE, FALSE, NA
@@ -8,3 +8,4 @@ $ e (fctr) a, b, NA
 $ f (date) 2015-12-10, 2015-12-11, NA
 $ g (time) 2015-12-09 10:51:35, 2015-12-09 10:51:36, NA
 $ h (list) 1, 2, NA
+$ i (list) 1, 2, 3, 4, 5, 6, NA

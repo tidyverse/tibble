@@ -32,6 +32,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/all--30.txt")
 
   expect_output_file_rel(
+    print(df_all, n = NULL, width = 300L),
+    "trunc_mat/all--300.txt")
+
+  expect_output_file_rel(
     print(data_frame(a = seq.int(10000)), n = 5L, width = 30L),
     "trunc_mat/long-5-30.txt")
 
