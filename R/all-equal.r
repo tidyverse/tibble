@@ -34,19 +34,20 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
 
   if (!identical(class(target), class(current))) {
-    return(paste0("Different types: x ", paste(class(target), collapse = ", "),
-                  ", y ", paste(class(current), collapse = ", ")))
+    return(paste0("Different types: ",
+                  "x ", format_vars(class(target)), ", ",
+                  "y ", format_vars(class(current))))
   }
   if (nrow(target) != nrow(current)) {
     return("Different number of rows")
   }
   extra_x <- setdiff(names(target), names(current))
   if (length(extra_x) > 0L) {
-    return(paste0("Cols in x but not y: ", paste(extra_x, collapse = ", ")))
+    return(paste0("Cols in x but not y: ", format_vars(extra_x)))
   }
   extra_y <- setdiff(names(current), names(target))
   if (length(extra_y) > 0L) {
-    return(paste0("Cols in y but not x: ", paste(extra_y, collapse = ", ")))
+    return(paste0("Cols in y but not x: ", format_vars(extra_y)))
   }
   if (!ignore_col_order && names(target) != names(current)) {
     return("Column names same but in different order")
