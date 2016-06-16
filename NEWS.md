@@ -1,3 +1,9 @@
+# tibble 1.0-8 (2016-06-16)
+
+- Consistently surround variable names with single quotes in error messages.
+- Use "Unknown column 'x'" as error message if column not found, like base R (#94).
+
+
 # tibble 1.0-7 (2016-06-13)
 
 - Tibbles with `POSIXlt` columns can be printed now, the text `<POSIXlt>` is shown as placeholder to encourage usage of `POSIXct` (#86).
