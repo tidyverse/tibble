@@ -142,7 +142,7 @@ format_summary <- function(x) {
 }
 
 print_summary <- function(x) {
-  cat("<", format_summary(x), ">\n", sep = "")
+  cat("# ", wrap(format_summary(x), width = getOption("width")), "\n", sep = "")
 }
 
 print_table <- function(x) {

@@ -24,12 +24,17 @@ obj_sum.default <- function(x) {
 
 #' @export
 obj_sum.list <- function(x) {
-  vapply(x, obj_sum, character(1L))
+  vapply(x, obj_sum.default, character(1L))
 }
 
 #' @export
 obj_sum.POSIXlt <- function(x) {
   rep("POSIXlt", length(x))
+}
+
+#' @export
+obj_sum.tbl_df <- function(x) {
+  paste0("A tibble: ", dim_desc(x))
 }
 
 #' @export
@@ -68,13 +73,17 @@ type_sum.default <- function(x) {
   }
 }
 
-size_sum <- function(x) {
-  if (!is_vector_s3(x)) return("")
-
+dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))
   format_dim[is.na(dim)] <- "??"
-  paste0(" [", paste0(format_dim, collapse = " x "), "]" )
+  paste0(format_dim, collapse = " x ")
+}
+
+size_sum <- function(x) {
+  if (!is_vector_s3(x)) return("")
+
+  paste0(" [", dim_desc(x), "]" )
 }
 
 #' @export
