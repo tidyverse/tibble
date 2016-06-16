@@ -38,11 +38,11 @@ test_that("[ with 0 cols creates correct row names (#656)", {
 
 test_that("[.tbl_df is careful about names (#1245)",{
   foo <- data_frame(x = 1:10, y = 1:10)
-  expect_error(foo["z"], "undefined columns")
-  expect_error(foo[ c("x", "y", "z") ], "undefined columns")
+  expect_error(foo["z"], "Unknown columns 'z'", fixed = TRUE)
+  expect_error(foo[ c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
 
-  expect_error(foo[, "z"], "undefined columns")
-  expect_error(foo[, c("x", "y", "z") ], "undefined columns")
+  expect_error(foo[, "z"], "Unknown columns 'z'", fixed = TRUE)
+  expect_error(foo[, c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
 
   expect_error(foo[as.matrix("x")], "matrix")
   expect_error(foo[array("x", dim = c(1, 1, 1))], "array")
@@ -51,11 +51,11 @@ test_that("[.tbl_df is careful about names (#1245)",{
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
-  expect_error(foo[0.5], "invalid non-integer column indexes: 0.5", fixed = TRUE)
-  expect_error(foo[1:5], "invalid column indexes: 4, 5", fixed = TRUE)
+  expect_error(foo[0.5], "Invalid non-integer column indexes: 0.5", fixed = TRUE)
+  expect_error(foo[1:5], "Invalid column indexes: 4, 5", fixed = TRUE)
   expect_error(foo[-1:1], "mixed with negative")
   expect_error(foo[c(-1, 1)], "mixed with negative")
-  expect_error(foo[-4], "invalid negative column indexes: -4", fixed = TRUE)
+  expect_error(foo[-4], "Invalid negative column indexes: -4", fixed = TRUE)
   expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 
   expect_error(foo[as.matrix(1)], "matrix")
@@ -69,8 +69,8 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   expect_identical(foo[FALSE], foo[integer()])
   expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error(foo[c(TRUE, TRUE)], "length of logical index vector must be 1 or 3, got: 2", fixed = TRUE)
-  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "length of logical index vector must be 1 or 3, got: 4", fixed = TRUE)
+  expect_error(foo[c(TRUE, TRUE)], "Length of logical index vector must be 1 or 3, got: 2", fixed = TRUE)
+  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "Length of logical index vector must be 1 or 3, got: 4", fixed = TRUE)
   expect_error(foo[c(TRUE, TRUE, NA)], "NA column indexes not supported", fixed = TRUE)
 
   expect_error(foo[as.matrix(TRUE)], "matrix")
@@ -79,11 +79,11 @@ test_that("[.tbl_df is careful about column flags (#83)",{
 
 test_that("[.tbl_df rejects unknown column indexes (#83)",{
   foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
-  expect_error(foo[list(1:3)], "unsupported index type: list", fixed = TRUE)
-  expect_error(foo[as.list(1:3)], "unsupported index type: list", fixed = TRUE)
-  expect_error(foo[factor(1:3)], "unsupported index type: factor", fixed = TRUE)
-  expect_error(foo[Sys.Date()], "unsupported index type: Date", fixed = TRUE)
-  expect_error(foo[Sys.time()], "unsupported index type: POSIXct", fixed = TRUE)
+  expect_error(foo[list(1:3)], "Unsupported index type: list", fixed = TRUE)
+  expect_error(foo[as.list(1:3)], "Unsupported index type: list", fixed = TRUE)
+  expect_error(foo[factor(1:3)], "Unsupported index type: factor", fixed = TRUE)
+  expect_error(foo[Sys.Date()], "Unsupported index type: Date", fixed = TRUE)
+  expect_error(foo[Sys.time()], "Unsupported index type: POSIXct", fixed = TRUE)
 })
 
 test_that("[.tbl_df is no-op if args missing",{

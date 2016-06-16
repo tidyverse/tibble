@@ -130,7 +130,7 @@ print.trunc_mat <- function(x, ...) {
 
   extra <- format_extra(x)
   if (length(extra) > 0) {
-    cat(wrap("... ", paste(extra, collapse = ", "), width = x$width), "\n",
+    cat(wrap("... ", collapse(extra), width = x$width), "\n",
         sep = "")
   }
 
@@ -181,7 +181,7 @@ format_extra_cols <- function(x) {
       if (x$n_extra < length(var_types)) {
         var_types <- c(var_types[seq_len(x$n_extra)], "...")
       }
-      vars <- paste0(": ", paste(var_types, collapse = ", "))
+      vars <- paste0(": ", collapse(var_types))
     } else {
       vars <- ""
     }
@@ -202,7 +202,7 @@ knit_print.trunc_mat <- function(x, options) {
   extra <- format_extra(x)
 
   if (length(extra) > 0) {
-    extra <- wrap("(", paste(extra, collapse = ", "), ")", width = x$width)
+    extra <- wrap("(", collapse(extra), ")", width = x$width)
   } else {
     extra <- "\n"
   }
@@ -239,3 +239,13 @@ big_mark <- function(x, ...) {
 tibble_width <- function(width) {
   width %||% tibble_opt("width") %||% getOption("width")
 }
+
+format_n <- function(x) collapse(quote_n(x))
+
+quote_n <- function(x) UseMethod("quote_n")
+#' @export
+quote_n.default <- function(x) as.character(x)
+#' @export
+quote_n.character <- function(x) encodeString(x, quote = "'")
+
+collapse <- function(x) paste(x, collapse = ", ")

@@ -23,10 +23,10 @@ test_that("data frames not equal if missing row", {
 })
 
 test_that("data frames not equal if missing col", {
-  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[, -1]), "Cols in x but not y: mpg")
-  expect_match(all.equal(as_data_frame(mtcars)[, -1], as_data_frame(mtcars)), "Cols in y but not x: mpg")
-  expect_match(all.equal(as_data_frame(iris), as_data_frame(iris)[, -1]),     "Cols in x but not y: Sepal.Length")
-  expect_match(all.equal(as_data_frame(df_all), as_data_frame(df_all)[, -1]), "Cols in x but not y: a")
+  expect_match(all.equal(as_data_frame(mtcars), as_data_frame(mtcars)[, -1]), "Cols in x but not y: 'mpg'")
+  expect_match(all.equal(as_data_frame(mtcars)[, -1], as_data_frame(mtcars)), "Cols in y but not x: 'mpg'")
+  expect_match(all.equal(as_data_frame(iris), as_data_frame(iris)[, -1]),     "Cols in x but not y: 'Sepal.Length'")
+  expect_match(all.equal(as_data_frame(df_all), as_data_frame(df_all)[, -1]), "Cols in x but not y: 'a'")
   expect_match(all.equal(as_data_frame(mtcars), rev(as_data_frame(mtcars)),
                          ignore_col_order = FALSE),
                "Column names same but in different order")
@@ -83,5 +83,5 @@ test_that("equality handles data frames with 0 columns (#1506)", {
 })
 
 test_that("equality fails if types different", {
-  expect_equal(all.equal(as_data_frame(iris), iris), "Different types: x tbl_df, tbl, data.frame, y data.frame")
+  expect_equal(all.equal(as_data_frame(iris), iris), "Different types: x 'tbl_df', 'tbl', 'data.frame', y 'data.frame'")
 })

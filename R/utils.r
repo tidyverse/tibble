@@ -48,3 +48,11 @@ safe_match <- function(x, table) {
     match(x, table)
   # nocov end
 }
+
+stopc <- function(...) {
+  stop(..., domain = NA)
+}
+
+warningc <- function(...) {
+  warning(..., domain = NA)
+}

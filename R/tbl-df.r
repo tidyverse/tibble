@@ -22,10 +22,10 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   else
     colname <- j
   if (is.character(colname) && length(colname) == 1L && !(colname %in% names(x))) {
-    stop("Unknown column '", colname, "'", call. = FALSE)
+    stopc("Unknown column '", colname, "'")
   }
   if (!exact) {
-    warning("exact ignored", call. = FALSE)
+    warningc("exact ignored")
   }
 
   NextMethod()
@@ -34,7 +34,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 #' @export
 `$.tbl_df` <- function(x, i) {
   if (is.character(i) && !(i %in% names(x))) {
-    stop("Unknown column '", i, "'", call. = FALSE)
+    stopc("Unknown column '", i, "'")
   }
 
   .subset2(x, i)
@@ -42,7 +42,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
 
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE) {
-  if (drop) warning("drop ignored", call. = FALSE)
+  if (drop) warningc("drop ignored")
 
   nr <- nrow(x)
 

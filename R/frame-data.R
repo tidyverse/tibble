@@ -45,14 +45,12 @@ frame_data <- function(...) {
       break
 
     if (length(el) != 2) {
-      stop("expected a column name with a single argument; e.g. '~ name'",
-        call. = FALSE)
+      stopc("expected a column name with a single argument; e.g. '~ name'")
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      stop("expected a symbol or string denoting a column name",
-        call. = FALSE)
+      stopc("expected a symbol or string denoting a column name")
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
@@ -61,7 +59,7 @@ frame_data <- function(...) {
   }
 
   if (!length(frame_names)) {
-    stop("no column names detected in 'frame_data()' call", call. = FALSE)
+    stopc("no column names detected in 'frame_data()' call")
   }
 
   frame_rest <- dots[i:length(dots)]
@@ -72,13 +70,12 @@ frame_data <- function(...) {
   # structure.
   frame_ncol <- length(frame_names)
   if (n_elements %% frame_ncol != 0) {
-    stop(
+    stopc(
       sprintf(
         "invalid 'frame_data()' specification: had %s elements and %s columns",
         n_elements,
         frame_ncol
-      ),
-      call. = FALSE
+      )
     )
   }
 

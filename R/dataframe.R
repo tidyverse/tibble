@@ -255,9 +255,8 @@ add_row <- function(.data, ...) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stop(
-      "This row would add new variables: ", paste0(extra_vars, collapse = ", "),
-      call. = FALSE
+    stopc(
+      "This row would add new variables: ", format_n(extra_vars)
     )
   }
 
@@ -321,10 +320,9 @@ invalid_df <- function(problem, df, vars) {
   if (is.logical(vars)) {
     vars <- names(df)[vars]
   }
-  stop(
+  stopc(
     problem, ".\n",
-    "Problem variables: ", paste0(vars, collapse = ", "), ".\n",
-    call. = FALSE
+    "Problem variables: ", format_n(vars)
   )
 }
 
