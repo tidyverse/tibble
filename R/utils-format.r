@@ -240,10 +240,10 @@ tibble_width <- function(width) {
   width %||% tibble_opt("width") %||% getOption("width")
 }
 
-format_n <- function(x) UseMethod("format_n")
+quote_n <- function(x) UseMethod("quote_n")
 #' @export
-format_n.default <- function(x) collapse_n(x)
+quote_n.default <- function(x) as.character(x)
 #' @export
-format_n.character <- function(x) collapse_n(encodeString(x, quote = "'"))
+quote_n.character <- function(x) encodeString(x, quote = "'")
 
-collapse_n <- function(x) paste(x, collapse = ", ")
+format_n <- function(x) paste(quote_n(x), collapse = ", ")
