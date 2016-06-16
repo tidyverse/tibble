@@ -176,7 +176,7 @@ format_extra_rows <- function(x) {
 
 format_extra_cols <- function(x) {
   if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
+    var_types <- paste0(quote_n(names(x$extra)), NBSP, "<", x$extra, ">")
     if (x$n_extra > 0) {
       if (x$n_extra < length(var_types)) {
         var_types <- c(var_types[seq_len(x$n_extra)], "...")

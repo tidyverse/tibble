@@ -5,5 +5,5 @@
 2   2.5     2 FALSE     b
 3    NA    NA    NA  <NA>
 ... with 4 more variables:
-  e <fctr>, f <date>,
-  g <time>, h <list>
+  'e' <fctr>, 'f' <date>,
+  'g' <time>, 'h' <list>
