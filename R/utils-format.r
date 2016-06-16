@@ -240,6 +240,10 @@ tibble_width <- function(width) {
   width %||% tibble_opt("width") %||% getOption("width")
 }
 
-format_vars <- function(varnames) {
-  paste(encodeString(varnames, quote = "'"), collapse = ", ")
-}
+format_n <- function(x) UseMethod("format_n")
+#' @export
+format_n.default <- function(x) collapse_n(x)
+#' @export
+format_n.character <- function(x) collapse_n(encodeString(x, quote = "'"))
+
+collapse_n <- function(x) paste(x, collapse = ", ")
