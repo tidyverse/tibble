@@ -24,7 +24,7 @@ obj_sum.default <- function(x) {
 
 #' @export
 obj_sum.list <- function(x) {
-  vapply(x, obj_sum, character(1L))
+  vapply(x, obj_sum.default, character(1L))
 }
 
 #' @export
