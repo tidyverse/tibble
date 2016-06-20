@@ -85,7 +85,10 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 format_v.list <- function(x) {
   x <- lapply(x, format_v)
   x <- vapply(x, function(x) paste(x, collapse = ". "), character(1L))
-  paste0("<", x, ">", collapse = ", ")
+  if (length(x) == 1L)
+    x
+  else
+    paste0("<", x, ">", collapse = ", ")
 }
 
 #' @export
