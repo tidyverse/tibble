@@ -151,7 +151,10 @@ as_data_frame.tbl_df <- function(x, ...) {
 
 #' @export
 #' @rdname as_data_frame
-as_data_frame.data.frame <- function(x, ...) {
+as_data_frame.data.frame <- function(x, validate = TRUE, ...) {
+  if (validate) {
+    x <- check_data_frame(x)
+  }
   class(x) <- c("tbl_df", "tbl", "data.frame")
   x
 }
