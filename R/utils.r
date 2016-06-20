@@ -57,7 +57,7 @@ warningc <- function(...) {
   warning(..., call. = FALSE, domain = NA)
 }
 
-ncharw <- function(x) {
+nchar_width <- function(x) {
   nchar(x, type = "width")
 }
 

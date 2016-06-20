@@ -83,10 +83,10 @@ shrink_mat <- function(df, width, rows, n, star) {
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
     pmax(
-      ncharw(encodeString(values)),
-      ncharw(encodeString(names))
+      nchar_width(encodeString(values)),
+      nchar_width(encodeString(names))
     ),
-    ncharw(encodeString(c("", classes)))
+    nchar_width(encodeString(c("", classes)))
   )
   cumw <- cumsum(w + 1)
 
@@ -225,7 +225,7 @@ NBSP <- "\U00A0"
 wrap <- function(..., indent = 0, prefix = "", width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
-    width = max(width - ncharw(prefix), 0))
+    width = max(width - nchar_width(prefix), 0))
   wrapped <- paste0(prefix, wrapped)
   wrapped <- gsub(NBSP, " ", wrapped)
 
