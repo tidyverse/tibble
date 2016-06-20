@@ -77,7 +77,21 @@ str_trunc <- function(x, max_width) {
 }
 
 format_v <- function(x) UseMethod("format_v")
+
 #' @export
 format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+
+#' @export
+format_v.list <- function(x) {
+  x <- lapply(x, format_v)
+  atomic <- vapply(x, length, integer(1L)) == 1L
+  x <- vapply(x, function(x) paste(x, collapse = ", "), character(1L))
+  x[!atomic] <- paste0("<", x[!atomic], ">")
+  if (length(x) == 1L)
+    x
+  else
+    paste0("[", paste(x, collapse = ", "), "]")
+}
+
 #' @export
 format_v.character <- function(x) encodeString(x, quote = '"')

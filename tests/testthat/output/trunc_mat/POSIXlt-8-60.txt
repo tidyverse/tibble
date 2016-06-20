@@ -9,4 +9,4 @@
 6 2016-01-01 12:35:02 <POSIXlt>
 7 2016-01-01 12:35:03 <POSIXlt>
 8 2016-01-01 12:35:04 <POSIXlt>
-... with 4 more rows
+# ... with 4 more rows

@@ -83,5 +83,14 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
 
   expect_output_file_rel(
     print(as_data_frame(df), n = 8L, width = 60L),
-    "trunc_mat/POSIXlt-8-30.txt")
+    "trunc_mat/POSIXlt-8-60.txt")
+})
+
+test_that("trunc_mat for wide-character columns (#100)", {
+  x <- c("成交日期", "合同录入日期")
+  df <- setNames(data_frame(1:3, 4:6), x)
+
+  expect_output_file_rel(
+    print(df, n = 8L, width = 60L),
+    "trunc_mat/wide-8-60.txt")
 })

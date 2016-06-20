@@ -42,7 +42,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra, summary = obj_sum(x))
+                     n_extra = n_extra, summary = tbl_sum(x))
 
   structure(c(shrunk, trunc_info), class = "trunc_mat")
 }
@@ -83,10 +83,10 @@ shrink_mat <- function(df, width, rows, n, star) {
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
     pmax(
-      nchar(encodeString(values)),
-      nchar(encodeString(names))
+      nchar_width(encodeString(values)),
+      nchar_width(encodeString(names))
     ),
-    nchar(encodeString(c("", classes)))
+    nchar_width(encodeString(c("", classes)))
   )
   cumw <- cumsum(w + 1)
 
@@ -127,27 +127,36 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 print.trunc_mat <- function(x, ...) {
   print_summary(x)
   print_table(x)
+  print_extra(x)
+  invisible(x)
+}
 
+print_summary <- function(x) {
+  summary <- format_summary(x)
+  if (length(summary) > 0) {
+    print_comment(summary, width = x$width)
+  }
+}
+
+print_table <- function(x) {
+  if (!is.null(x$table)) {
+    print(x$table)
+  }
+}
+
+print_extra <- function(x) {
   extra <- format_extra(x)
   if (length(extra) > 0) {
-    cat(wrap("... ", collapse(extra), width = x$width), "\n",
-        sep = "")
+    print_comment("... ", collapse(extra), width = x$width)
   }
+}
 
-  invisible(x)
+print_comment <- function(..., width) {
+  cat_line(wrap(..., prefix = "# ", width = min(width, getOption("width"))))
 }
 
 format_summary <- function(x) {
   x$summary
-}
-
-print_summary <- function(x) {
-  cat("# ", wrap(format_summary(x), width = getOption("width")), "\n", sep = "")
-}
-
-print_table <- function(x) {
-  if (!is.null(x$table))
-    print(x$table)
 }
 
 format_extra <- function(x) {
@@ -213,10 +222,11 @@ knit_print.trunc_mat <- function(x, options) {
 
 NBSP <- "\U00A0"
 
-wrap <- function(..., indent = 0, width) {
+wrap <- function(..., indent = 0, prefix = "", width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
-    width = width)
+    width = max(width - nchar_width(prefix), 0))
+  wrapped <- paste0(prefix, wrapped)
   wrapped <- gsub(NBSP, " ", wrapped)
 
   paste0(wrapped, collapse = "\n")

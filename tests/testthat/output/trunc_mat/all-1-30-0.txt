@@ -2,5 +2,5 @@
       a     b     c     d
   <dbl> <int> <lgl> <chr>
 1     1     1  TRUE     a
-... with 2 more rows, and 5
-  more variables
+# ... with 2 more rows, and 5
+#   more variables

@@ -50,9 +50,17 @@ safe_match <- function(x, table) {
 }
 
 stopc <- function(...) {
-  stop(..., domain = NA)
+  stop(..., call. = FALSE, domain = NA)
 }
 
 warningc <- function(...) {
-  warning(..., domain = NA)
+  warning(..., call. = FALSE, domain = NA)
+}
+
+nchar_width <- function(x) {
+  nchar(x, type = "width")
+}
+
+cat_line <- function(...) {
+  cat(..., "\n", sep = "")
 }

@@ -15,7 +15,7 @@ as_data_frame(x, ...)
 
 \method{as_data_frame}{tbl_df}(x, ...)
 
-\method{as_data_frame}{data.frame}(x, ...)
+\method{as_data_frame}{data.frame}(x, validate = TRUE, ...)
 
 \method{as_data_frame}{list}(x, validate = TRUE, ...)
 

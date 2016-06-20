@@ -1,3 +1,13 @@
+# tibble 1.0-10 (2016-06-20)
+
+- `glimpse()` shows nesting structure for lists (#98).
+- `as_data_frame.data.frame()` gains `validate` argument (as in `as_data_frame.list()`), if `TRUE` the input is validated.
+- Computation of column width properly handles wide (e.g., Chinese) characters (#100).
+- Add comment char `# ` for trailing metadata (#101).
+- Restore full package coverage.
+- Fixed regression: `stop()` and `warning()` are now always called with `call. = FALSE`.
+
+
 # tibble 1.0-9 (2016-06-16)
 
 - Change formatting of summary line: Begins with hash `#` and contains more text (#95).
