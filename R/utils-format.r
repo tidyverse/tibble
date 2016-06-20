@@ -83,10 +83,10 @@ shrink_mat <- function(df, width, rows, n, star) {
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
     pmax(
-      nchar(encodeString(values)),
-      nchar(encodeString(names))
+      ncharw(encodeString(values)),
+      ncharw(encodeString(names))
     ),
-    nchar(encodeString(c("", classes)))
+    ncharw(encodeString(c("", classes)))
   )
   cumw <- cumsum(w + 1)
 
