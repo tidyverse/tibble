@@ -127,18 +127,8 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 print.trunc_mat <- function(x, ...) {
   print_summary(x)
   print_table(x)
-
-  extra <- format_extra(x)
-  if (length(extra) > 0) {
-    cat(wrap("... ", collapse(extra), width = x$width), "\n",
-        sep = "")
-  }
-
+  print_extra(x)
   invisible(x)
-}
-
-format_summary <- function(x) {
-  x$summary
 }
 
 print_summary <- function(x) {
@@ -152,6 +142,18 @@ print_summary <- function(x) {
 print_table <- function(x) {
   if (!is.null(x$table))
     print(x$table)
+}
+
+print_extra <- function(x) {
+  extra <- format_extra(x)
+  if (length(extra) > 0) {
+    cat(wrap("... ", collapse(extra), width = x$width), "\n",
+        sep = "")
+  }
+}
+
+format_summary <- function(x) {
+  x$summary
 }
 
 format_extra <- function(x) {
