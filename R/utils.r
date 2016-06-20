@@ -56,3 +56,11 @@ stopc <- function(...) {
 warningc <- function(...) {
   warning(..., call. = FALSE, domain = NA)
 }
+
+nchar_width <- function(x) {
+  nchar(x, type = "width")
+}
+
+cat_line <- function(...) {
+  cat(..., "\n", sep = "")
+}
