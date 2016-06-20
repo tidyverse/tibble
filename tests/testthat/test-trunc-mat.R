@@ -85,3 +85,14 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
     print(as_data_frame(df), n = 8L, width = 60L),
     "trunc_mat/POSIXlt-8-30.txt")
 })
+
+test_that("strings are shortend", {
+  vec <- c("a", "123456789", "1234 678901234 67890")
+  exp_10 <- c("a", "123456789", "1234 67890...")
+
+  expect_equal(format_character(vec), vec)
+
+  withr::with_options(
+    list(tibble.print_string_max = 10),
+    expect_equal(format_character(vec), exp_10))
+})
