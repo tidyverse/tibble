@@ -85,7 +85,7 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 format_v.list <- function(x) {
   x <- lapply(x, format_v)
   atomic <- vapply(x, length, integer(1L)) == 1L
-  x <- vapply(x, function(x) paste(x, collapse = ". "), character(1L))
+  x <- vapply(x, function(x) paste(x, collapse = ", "), character(1L))
   x[!atomic] <- paste0("<", x[!atomic], ">")
   if (length(x) == 1L)
     x
