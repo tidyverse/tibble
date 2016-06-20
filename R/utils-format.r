@@ -144,7 +144,8 @@ format_summary <- function(x) {
 print_summary <- function(x) {
   summary <- format_summary(x)
   if (!is.null(summary)) {
-    cat("# ", wrap(summary, width = getOption("width")), "\n", sep = "")
+    cat(paste0("# ", wrap(summary, width = getOption("width") - 2), "\n",
+               collapse = ""))
   }
 }
 
