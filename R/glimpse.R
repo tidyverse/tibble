@@ -77,7 +77,16 @@ str_trunc <- function(x, max_width) {
 }
 
 format_v <- function(x) UseMethod("format_v")
+
 #' @export
 format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+
+#' @export
+format_v.list <- function(x) {
+  x <- lapply(x, format_v)
+  x <- vapply(x, function(x) paste(x, collapse = ". "), character(1L))
+  paste0("<", x, ">", collapse = ", ")
+}
+
 #' @export
 format_v.character <- function(x) encodeString(x, quote = '"')
