@@ -133,23 +133,26 @@ print.trunc_mat <- function(x, ...) {
 
 print_summary <- function(x) {
   summary <- format_summary(x)
-  if (!is.null(summary)) {
-    cat(paste0("# ", wrap(summary, width = getOption("width") - 2), "\n",
-               collapse = ""))
+  if (length(summary) > 0) {
+    print_comment(summary, width = x$width)
   }
 }
 
 print_table <- function(x) {
-  if (!is.null(x$table))
+  if (!is.null(x$table)) {
     print(x$table)
+  }
 }
 
 print_extra <- function(x) {
   extra <- format_extra(x)
   if (length(extra) > 0) {
-    cat(wrap("... ", collapse(extra), width = x$width), "\n",
-        sep = "")
+    print_comment("... ", collapse(extra), width = x$width)
   }
+}
+
+print_comment <- function(..., width) {
+  cat_line(wrap(..., prefix = "# ", width = min(width, getOption("width"))))
 }
 
 format_summary <- function(x) {
@@ -219,10 +222,11 @@ knit_print.trunc_mat <- function(x, options) {
 
 NBSP <- "\U00A0"
 
-wrap <- function(..., indent = 0, width) {
+wrap <- function(..., indent = 0, prefix = "", width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
-    width = width)
+    width = max(width - ncharw(prefix), 0))
+  wrapped <- paste0(prefix, wrapped)
   wrapped <- gsub(NBSP, " ", wrapped)
 
   paste0(wrapped, collapse = "\n")
