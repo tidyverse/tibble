@@ -20,8 +20,12 @@ is_vector <- function(x) {
   is_atomic(x) || is.list(x)
 }
 
+has_names <- function(x) {
+  !is.null(names(x))
+}
+
 has_dim <- function(x) {
-  length(dim(x)) > 0L
+  length(dim(x)) > 0L || has_names(x)
 }
 
 needs_dim <- function(x) {
