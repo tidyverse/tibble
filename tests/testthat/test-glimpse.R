@@ -24,6 +24,13 @@ test_that("glimpse output matches known output", {
       "glimpse/all-50.txt")
   )
 
+  withr::with_options(
+    list(tibble.width = 35),
+    expect_output_file_rel(
+      glimpse(as_data_frame(df_all)),
+      "glimpse/all-35.txt")
+  )
+
   expect_output_file_rel(
     glimpse(5),
     "glimpse/5.txt")
