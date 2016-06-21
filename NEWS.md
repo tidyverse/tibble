@@ -1,3 +1,8 @@
+# tibble 1.0-11 (2016-06-21)
+
+- Avoid unnecessary copying of variables (regression from 1.0-10).
+
+
 # tibble 1.0-10 (2016-06-20)
 
 - `glimpse()` shows nesting structure for lists (#98).
