@@ -20,6 +20,10 @@ is_vector <- function(x) {
   is_atomic(x) || is.list(x)
 }
 
+has_dim <- function(x) {
+  length(dim(x)) > 0L
+}
+
 needs_dim <- function(x) {
   length(dim(x)) > 1L
 }
@@ -30,7 +34,9 @@ is_1d <- function(x) {
 }
 
 strip_dim <- function(x) {
-  if (is_atomic(x))
+  # Careful update only if necessary, to avoid copying which is checked by
+  # the "copying" test in dplyr
+  if (is_atomic(x) && has_dim(x))
     dim(x) <- NULL
   x
 }
