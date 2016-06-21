@@ -42,7 +42,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   df <- as.data.frame(head(x, rows))
 
   var_types <- vapply(df, type_sum, character(1))
-  var_names <- paste0("$ ", format(names(df)), " (", var_types, ") ")
+  var_names <- paste0("$ ", format(names(df)), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 
