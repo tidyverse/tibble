@@ -1,5 +1,34 @@
 context("Glimpse")
 
+test_that("format_v for values", {
+  expect_equal(format_v(1), "1")
+  expect_equal(format_v(1:3), c("1", "2", "3"))
+  expect_equal(format_v(NA), "NA")
+  expect_equal(format_v(TRUE), "TRUE")
+  expect_equal(format_v(logical()), character())
+})
+
+test_that("format_v for character", {
+  expect_equal(format_v("1"), paste0('"', "1", '"'))
+  expect_equal(format_v(letters), paste0('"', letters, '"'))
+  expect_equal(format_v(NA_character_), "NA")
+  expect_equal(format_v(character()), character())
+})
+
+test_that("format_v for list", {
+  expect_equal(format_v(list(1:3)), "<1, 2, 3>")
+  expect_equal(format_v(as.list(1:3)), "[1, 2, 3]")
+  expect_equal(format_v(list(1:3, 4)), "[<1, 2, 3>, 4]")
+  expect_equal(format_v(list(1:3, 4:5)), "[<1, 2, 3>, <4, 5>]")
+  expect_equal(format_v(list()), "[]")
+
+  skip("format_v corner cases")
+  expect_equal(format_v(list(list())), "[[]]")
+  expect_equal(format_v(list(character())), "[<>]")
+  expect_equal(format_v(list(1:3, list(4))), "[<1, 2, 3>, [4]]")
+  expect_equal(format_v(list(1:3, list(4:5))), "[<1, 2, 3>, [<4, 5>]]")
+})
+
 test_that("glimpse output matches known output", {
   expect_output_file_rel(
     glimpse(as_data_frame(mtcars), width = 70L),
