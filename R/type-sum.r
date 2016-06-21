@@ -84,6 +84,13 @@ tbl_sum.tbl_df <- function(x) {
   paste0("A tibble: ", dim_desc(x))
 }
 
+# FIXME: This belongs in dplyr, but can only be added there once tibble has been
+# updated.
+#' @export
+tbl_sum.tbl_sql <- function(x) {
+  NULL
+}
+
 dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))

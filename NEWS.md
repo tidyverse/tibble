@@ -1,3 +1,12 @@
+# tibble 1.0-12 (2016-06-22)
+
+- Use angle brackets for type in `glimpse()` (#98).
+- Explicit tests for `format_v()` (#98).
+- Fix examples, regression in 1.0-10.
+- Names are removed from vectors again, regression added in 1.0-11.
+- Provide default implementation for `tbl_sum.tbl_sql()` to allow `dplyr` release before a `tibble` release.
+
+
 # tibble 1.0-11 (2016-06-21)
 
 - Avoid unnecessary copying of variables (regression from 1.0-10).
