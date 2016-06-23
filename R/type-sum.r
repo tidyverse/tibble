@@ -87,6 +87,11 @@ tbl_sum.tbl_df <- function(x) {
 # FIXME: This belongs in dplyr, but can only be added there once tibble has been
 # updated.
 #' @export
+tbl_sum.grouped_df <- function(x) {
+  NULL
+}
+
+#' @export
 tbl_sum.tbl_sql <- function(x) {
   NULL
 }
