@@ -49,7 +49,7 @@ remove_rownames <- function(df) {
 rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (var %in% colnames(df))
+  if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
 
   rn <- data_frame(rownames(df))
@@ -73,7 +73,7 @@ column_to_rownames <- function(df, var = "rowname") {
   if (has_rownames(df))
     stopc("This data frame already has row names.")
 
-  if (!var %in% colnames(df))
+  if (!has_name(df, var))
     stopc("This data frame has no column named ", var, ".")
 
   rownames(df) <- df[[var]]

@@ -36,7 +36,7 @@ test_that("column_to_rownames returns tbl", {
   expect_equal(class(res), class(mtcars1))
   expect_equal(rownames(res), rownames(mtcars1))
   expect_equal(res, mtcars1)
-  expect_false(var %in% names(res))
+  expect_false(has_name(res, var))
 
   mtcars1$num <- rev(seq_len(nrow(mtcars)))
   res0 <- rownames_to_column(mtcars1)
