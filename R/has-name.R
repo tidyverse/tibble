@@ -8,7 +8,7 @@
 #'
 #' @param x A data frame or another named object
 #' @param name Element name(s) to check
-#' @value A logical vector of the same length as \code{name}
+#' @return A logical vector of the same length as \code{name}
 #' @examples
 #' has_name(iris, "Species")
 #' has_name(mtcars, "gears")
