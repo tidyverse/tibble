@@ -1,6 +1,6 @@
 context("frame_data()")
 
-test_that("frame_data() constructs 'data_frame' as expected", {
+test_that("frame_data() constructs 'tibble' as expected", {
 
   result <- frame_data(
     ~colA, ~colB,
@@ -8,7 +8,7 @@ test_that("frame_data() constructs 'data_frame' as expected", {
     "b", 2
   )
 
-  compared <- data_frame(colA = c("a", "b"), colB = c(1, 2))
+  compared <- tibble(colA = c("a", "b"), colB = c(1, 2))
   expect_equal(result, compared)
 
   ## wide
@@ -18,7 +18,7 @@ test_that("frame_data() constructs 'data_frame' as expected", {
     5, 6, 7, 8
   )
 
-  wide_expectation <- data_frame(
+  wide_expectation <- tibble(
     colA = c(1, 5),
     colB = c(2, 6),
     colC = c(3, 7),
@@ -37,7 +37,7 @@ test_that("frame_data() constructs 'data_frame' as expected", {
     5, 10
   )
 
-  long_expectation <- data_frame(
+  long_expectation <- tibble(
     colA = as.numeric(1:5),
     colB = as.numeric(6:10)
   )
@@ -49,12 +49,12 @@ test_that("frame_data() constructs 'data_frame' as expected", {
 test_that("frame_data() creates lists for non-atomic inputs (#7)", {
   expect_identical(
     frame_data(~a, ~b, NA, "A", letters, LETTERS[-1L]),
-    data_frame(a = list(NA, letters), b = list("A", LETTERS[-1L]))
+    tibble(a = list(NA, letters), b = list("A", LETTERS[-1L]))
   )
 
   expect_identical(
     frame_data(~a, ~b, NA, NULL, 1, 2),
-    data_frame(a = c(NA, 1), b = list(NULL, 2))
+    tibble(a = c(NA, 1), b = list(NULL, 2))
   )
 })
 
