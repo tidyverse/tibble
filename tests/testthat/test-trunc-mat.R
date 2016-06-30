@@ -87,6 +87,8 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
 })
 
 test_that("trunc_mat for wide-character columns (#100)", {
+  skip_on_os("windows")
+
   x <- c("成交日期", "合同录入日期")
   df <- setNames(data_frame(1:3, 4:6), x)
 
