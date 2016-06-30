@@ -1,8 +1,8 @@
 # tibble 1.0-13 (2016-06-30)
 
 - New `has_name() (#102).
-- `$` only warns and also performs partial matching if column not found.
-- `[[` returns `NULL` if column not found.
+- `$` only warns and also performs partial matching if column not found (#109).
+- `[[` returns `NULL` if column not found (#109).
 - Test output for `NULL` value of `tbl_sum()`.
 - Restore full test coverage.
 - Provide default implementation for `tbl_sum.tbl_grouped_df()` to allow `dplyr` release before a `tibble` release.
