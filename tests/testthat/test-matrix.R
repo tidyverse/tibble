@@ -20,7 +20,7 @@ test_that("preserves attributes except dim and names", {
   dim(date) <- c(2, 1)
   colnames(date) <- "a"
 
-  out <- as_data_frame.matrix(date)
+  out <- as_tibble.matrix(date)
   expect_equal(attributes(out[[1]])$name, NULL)
   expect_equal(attributes(out[[1]])$class, "Date")
 })

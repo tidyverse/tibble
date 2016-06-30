@@ -72,7 +72,7 @@ tibble(y = strptime("2000/01/01", "\%x"))
 }
 }
 \seealso{
-\code{\link{as_data_frame}} to turn an existing list into
+\code{\link{as_tibble}} to turn an existing list into
   a data frame.
 }
 

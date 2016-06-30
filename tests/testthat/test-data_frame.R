@@ -146,6 +146,11 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 
+test_that("aliases", {
+  expect_identical(as_data_frame, as_tibble)
+})
+
+
 # Validation --------------------------------------------------------------
 
 test_that("2d object isn't a valid column", {

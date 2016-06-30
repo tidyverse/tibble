@@ -20,7 +20,7 @@
 #'   so you can refer to previously created variables.
 #' @param xs  A list of unevaluated expressions created with \code{~},
 #'   \code{quote()}, or \code{\link[lazyeval]{lazy}}.
-#' @seealso \code{\link{as_data_frame}} to turn an existing list into
+#' @seealso \code{\link{as_tibble}} to turn an existing list into
 #'   a data frame.
 #' @export
 #' @examples
@@ -48,13 +48,13 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 tibble <- function(...) {
-  as_data_frame(lst(...))
+  as_tibble(lst(...))
 }
 
 #' @export
 #' @rdname tibble
 tibble_ <- function(xs) {
-  as_data_frame(lst_(xs))
+  as_tibble(lst_(xs))
 }
 
 #' @export
@@ -107,13 +107,15 @@ lst_ <- function(xs) {
 #'
 #' \code{as.data.frame} is effectively a thin wrapper around \code{data.frame},
 #' and hence is rather slow (because it calls \code{data.frame} on each element
-#' before \code{cbind}ing together). \code{as_data_frame} is a new S3 generic
+#' before \code{cbind}ing together). \code{as_tibble} is a new S3 generic
 #' with more efficient methods for matrices and data frames.
 #'
 #' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-#' classes), tbl_dfs (returns unchanged input), lists, matrices, and tables.
+#' classes), tibbles (returns unchanged input), lists, matrices, and tables.
 #' Other types are first coerced via \code{\link[base]{as.data.frame}} with
 #' \code{stringsAsFactors = FALSE}.
+#'
+#' \code{as_data_frame} is an alias.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -124,44 +126,44 @@ lst_ <- function(xs) {
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)
-#' df <- as_data_frame(l)
+#' df <- as_tibble(l)
 #'
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
-#' df <- as_data_frame(m)
+#' df <- as_tibble(m)
 #'
-#' # as_data_frame is considerably simpler than as.data.frame
+#' # as_tibble is considerably simpler than as.data.frame
 #' # making it more suitable for use when you have things that are
 #' # lists
 #' \dontrun{
 #' l2 <- replicate(26, sample(letters), simplify = FALSE)
 #' names(l2) <- letters
 #' microbenchmark::microbenchmark(
-#'   as_data_frame(l2, validate = FALSE),
-#'   as_data_frame(l2),
+#'   as_tibble(l2, validate = FALSE),
+#'   as_tibble(l2),
 #'   as.data.frame(l2)
 #' )
 #'
 #' m <- matrix(runif(26 * 100), ncol = 26)
 #' colnames(m) <- letters
 #' microbenchmark::microbenchmark(
-#'   as_data_frame(m),
+#'   as_tibble(m),
 #'   as.data.frame(m)
 #' )
 #' }
-as_data_frame <- function(x, ...) {
-  UseMethod("as_data_frame")
+as_tibble <- function(x, ...) {
+  UseMethod("as_tibble")
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.tbl_df <- function(x, ...) {
+#' @rdname as_tibble
+as_tibble.tbl_df <- function(x, ...) {
   x
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.data.frame <- function(x, validate = TRUE, ...) {
+#' @rdname as_tibble
+as_tibble.data.frame <- function(x, validate = TRUE, ...) {
   if (validate) {
     x <- check_data_frame(x)
   }
@@ -170,8 +172,8 @@ as_data_frame.data.frame <- function(x, validate = TRUE, ...) {
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.list <- function(x, validate = TRUE, ...) {
+#' @rdname as_tibble
+as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
     x <- list()
     class(x) <- c("tbl_df", "tbl", "data.frame")
@@ -192,8 +194,8 @@ as_data_frame.list <- function(x, validate = TRUE, ...) {
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.matrix <- function(x, ...) {
+#' @rdname as_tibble
+as_tibble.matrix <- function(x, ...) {
   x <- matrixToDataFrame(x)
   if (is.null(colnames(x))) {
     colnames(x) <- paste0("V", seq_len(ncol(x)))
@@ -203,23 +205,28 @@ as_data_frame.matrix <- function(x, ...) {
 
 #' @export
 #' @param n Name for count column, default: \code{"n"}.
-#' @rdname as_data_frame
-as_data_frame.table <- function(x, n = "n", ...) {
-  as_data_frame(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
+#' @rdname as_tibble
+as_tibble.table <- function(x, n = "n", ...) {
+  as_tibble(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.NULL <- function(x, ...) {
-  as_data_frame(list())
+#' @rdname as_tibble
+as_tibble.NULL <- function(x, ...) {
+  as_tibble(list())
 }
 
 #' @export
-#' @rdname as_data_frame
-as_data_frame.default <- function(x, ...) {
+#' @rdname as_tibble
+as_tibble.default <- function(x, ...) {
   value <- x
-  as_data_frame(as.data.frame(value, stringsAsFactors = FALSE, ...))
+  as_tibble(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
+
+#' @export
+#' @rdname as_tibble
+as_data_frame <- as_tibble
+
 
 #' Test if the object is a tibble.
 #'
