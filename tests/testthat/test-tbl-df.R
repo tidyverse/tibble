@@ -139,15 +139,15 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$partial, NA)
 })
 
-# is.data_frame -----------------------------------------------------------
+# is.tibble ---------------------------------------------------------------
 
-test_that("is.data_frame", {
-  expect_false(is.data_frame(iris))
-  expect_true(is.data_frame(as_data_frame(iris)))
-  expect_false(is.data_frame(NULL))
-  expect_false(is.data_frame(0))
+test_that("is.tibble", {
+  expect_false(is.tibble(iris))
+  expect_true(is.tibble(as_data_frame(iris)))
+  expect_false(is.tibble(NULL))
+  expect_false(is.tibble(0))
 })
 
-test_that("is_data_frame", {
-  expect_identical(is.data_frame, is_data_frame)
+test_that("is_tibble", {
+  expect_identical(is.tibble, is_tibble)
 })

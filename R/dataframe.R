@@ -233,13 +233,13 @@ as_data_frame <- as_tibble
 #' @param x An object
 #' @return \code{TRUE} if the object inherits from the \code{tbl_df} class.
 #' @export
-is.data_frame <- function(x) {
+is.tibble <- function(x) {
   "tbl_df" %in% class(x)
 }
 
-#' @rdname is.data_frame
+#' @rdname is.tibble
 #' @export
-is_data_frame <- is.data_frame
+is_tibble <- is.tibble
 
 
 #' Add a row to a data frame
