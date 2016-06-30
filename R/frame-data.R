@@ -1,12 +1,12 @@
 #' Row-wise tibble creation
 #'
-#' Create \code{\link{data_frame}}s laying out the data in rows, rather than
+#' Create \code{\link{tibble}}s laying out the data in rows, rather than
 #' in columns. This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' @param ... Arguments specifying the structure of a \code{data_frame}.
+#' @param ... Arguments specifying the structure of a \code{tibble}.
 #'   Variable names should be formulas, and may only appear before the data.
-#' @return A \code{data_frame}.
+#' @return A \code{\link{tibble}}.
 #' @export
 #' @examples
 #' frame_data(
@@ -34,7 +34,7 @@ frame_data <- function(...) {
     if (i > length(dots)) {
       out <- rep(list(logical()), length(frame_names))
       names(out) <- frame_names
-      return(as_data_frame(out))
+      return(as_tibble(out))
     }
 
     el <- dots[[i]]
@@ -91,5 +91,5 @@ frame_data <- function(...) {
 
   # Create a tbl_df and return it
   names(frame_col) <- frame_names
-  as_data_frame(frame_col)
+  as_tibble(frame_col)
 }

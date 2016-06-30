@@ -31,7 +31,7 @@
 #'
 #' lst(n = 5, x = runif(n))
 #'
-#' # data_frame never coerces its inputs
+#' # tibble never coerces its inputs
 #' str(tibble(letters))
 #' str(tibble(x = list(diag(1), diag(2))))
 #'
@@ -44,7 +44,7 @@
 #' # data frames can only contain 1d atomic vectors and lists
 #' # and can not contain POSIXlt
 #' \dontrun{
-#' tibble(x = data_frame(1, 2, 3))
+#' tibble(x = tibble(1, 2, 3))
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 tibble <- function(...) {
@@ -165,7 +165,7 @@ as_tibble.tbl_df <- function(x, ...) {
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...) {
   if (validate) {
-    x <- check_data_frame(x)
+    x <- check_tibble(x)
   }
   class(x) <- c("tbl_df", "tbl", "data.frame")
   x
@@ -183,7 +183,7 @@ as_tibble.list <- function(x, validate = TRUE, ...) {
   }
 
   if (validate) {
-    x <- check_data_frame(x)
+    x <- check_tibble(x)
   }
   x <- recycle_columns(x)
 
@@ -253,7 +253,7 @@ is_tibble <- is.tibble
 #'   it'll be given the value \code{NA}.
 #' @examples
 #' # add_row ---------------------------------
-#' df <- data_frame(x = 1:3, y = 3:1)
+#' df <- tibble(x = 1:3, y = 3:1)
 #'
 #' add_row(df, x = 4, y = 0)
 #'
@@ -270,7 +270,7 @@ is_tibble <- is.tibble
 #' }
 #' @export
 add_row <- function(.data, ...) {
-  df <- data_frame(...)
+  df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(1L)
 
   extra_vars <- setdiff(names(df), names(.data))
@@ -289,7 +289,7 @@ add_row <- function(.data, ...) {
 
 # Validity checks --------------------------------------------------------------
 
-check_data_frame <- function(x) {
+check_tibble <- function(x) {
   # Names
   names_x <- names2(x)
   bad_name <- is.na(names_x) | names_x == ""

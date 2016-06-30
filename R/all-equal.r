@@ -15,7 +15,7 @@
 #'   result in an \code{if} expression.
 #' @examples
 #' scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
-#' mtcars_df <- as_data_frame(mtcars)
+#' mtcars_df <- as_tibble(mtcars)
 #'
 #' # By default, ordering of rows and columns ignored
 #' all.equal(mtcars_df, scramble(mtcars_df))
@@ -25,8 +25,8 @@
 #' all.equal(mtcars_df, scramble(mtcars_df), ignore_row_order = FALSE)
 #'
 #' # By default all.equal is sensitive to variable differences
-#' df1 <- data_frame(x = "a")
-#' df2 <- data_frame(x = factor("a"))
+#' df1 <- tibble(x = "a")
+#' df2 <- tibble(x = factor("a"))
 #' all.equal(df1, df2)
 #' # But you can request to convert similar types
 #' all.equal(df1, df2, convert = TRUE)
@@ -53,8 +53,8 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
     return("Column names same but in different order")
   }
 
-  current <- as_data_frame(remove_rownames(current))
-  target <- as_data_frame(remove_rownames(target))
+  current <- as_tibble(remove_rownames(current))
+  target <- as_tibble(remove_rownames(target))
 
   current <- current[names(target)]
 

@@ -54,7 +54,7 @@ tibble(x = runif(10), y = x * 2)
 
 lst(n = 5, x = runif(n))
 
-# data_frame never coerces its inputs
+# tibble never coerces its inputs
 str(tibble(letters))
 str(tibble(x = list(diag(1), diag(2))))
 
@@ -67,7 +67,7 @@ tibble_(list(x = ~1:10, y = quote(x * 2)))
 # data frames can only contain 1d atomic vectors and lists
 # and can not contain POSIXlt
 \dontrun{
-tibble(x = data_frame(1, 2, 3))
+tibble(x = tibble(1, 2, 3))
 tibble(y = strptime("2000/01/01", "\%x"))
 }
 }

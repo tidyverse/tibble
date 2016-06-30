@@ -23,7 +23,7 @@
 #'
 #' head(rownames_to_column(mtcars))
 #'
-#' mtcars_tbl <- as_data_frame(rownames_to_column(mtcars))
+#' mtcars_tbl <- as_tibble(rownames_to_column(mtcars))
 #' mtcars_tbl
 #' column_to_rownames(as.data.frame(mtcars_tbl))
 #' @name rownames
@@ -52,7 +52,7 @@ rownames_to_column <- function(df, var = "rowname") {
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
 
-  rn <- data_frame(rownames(df))
+  rn <- tibble(rownames(df))
   names(rn) <- var
 
   attribs <- attributes(df)

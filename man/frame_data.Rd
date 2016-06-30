@@ -7,14 +7,14 @@
 frame_data(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{data_frame}.
+\item{...}{Arguments specifying the structure of a \code{tibble}.
 Variable names should be formulas, and may only appear before the data.}
 }
 \value{
-A \code{data_frame}.
+A \code{\link{tibble}}.
 }
 \description{
-Create \code{\link{data_frame}}s laying out the data in rows, rather than
+Create \code{\link{tibble}}s laying out the data in rows, rather than
 in columns. This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.
 }

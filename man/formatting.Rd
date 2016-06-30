@@ -29,10 +29,10 @@ Tools for describing matrices
 \examples{
 trunc_mat(mtcars)
 
-print(as_data_frame(mtcars))
-print(as_data_frame(mtcars), n = 1)
-print(as_data_frame(mtcars), n = 3)
-print(as_data_frame(mtcars), n = 100)
+print(as_tibble(mtcars))
+print(as_tibble(mtcars), n = 1)
+print(as_tibble(mtcars), n = 3)
+print(as_tibble(mtcars), n = 100)
 
 }
 \seealso{
