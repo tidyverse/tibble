@@ -1,3 +1,11 @@
+# tibble 1.0-15 (2016-07-01)
+
+- Prefer `tibble()` and `as_tibble()` over `data_frame()` and `as_data_frame()` in code and documentation (#82).
+- `tibble()` is no longer an alias for `frame_data()` (#82).
+- Rename `is_data_frame()` to `is_tibble()`.
+- `obj_sum()` and `type_sum()` show `"tibble"` instead of `"tbl_df"` for tibbles (#82).
+
+
 # tibble 1.0-14 (2016-07-01)
 
 - `$` doesn't attempt partial matching (#109).
