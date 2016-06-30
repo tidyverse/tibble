@@ -1,3 +1,13 @@
+# tibble 1.0-13 (2016-06-30)
+
+- New `has_name() (#102).
+- `$` only warns and also performs partial matching if column not found.
+- `[[` returns `NULL` if column not found.
+- Test output for `NULL` value of `tbl_sum()`.
+- Restore full test coverage.
+- Provide default implementation for `tbl_sum.tbl_grouped_df()` to allow `dplyr` release before a `tibble` release.
+
+
 # tibble 1.0-12 (2016-06-22)
 
 - Use angle brackets for type in `glimpse()` (#98).
