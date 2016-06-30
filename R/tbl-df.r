@@ -21,9 +21,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
     colname <- i
   else
     colname <- j
-  if (is.character(colname) && length(colname) == 1L && !(colname %in% names(x))) {
-    stopc("Unknown column '", colname, "'")
-  }
   if (!exact) {
     warningc("exact ignored")
   }

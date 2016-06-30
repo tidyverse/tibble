@@ -110,10 +110,10 @@ test_that("can use recursive indexing with [[", {
   expect_equal(foo[[c("x", "y")]], 1:3)
 })
 
-test_that("[[ throws error if name doesn't exist", {
+test_that("[[ returns NULL if name doesn't exist", {
   df <- data_frame(x = 1)
-  expect_error(df[["y"]], "Unknown column 'y'")
-  expect_error(df[[1, "y"]], "Unknown column 'y'")
+  expect_null(df[["y"]])
+  expect_null(df[[1, "y"]])
 })
 
 test_that("can use two-dimensional indexing with [[", {
