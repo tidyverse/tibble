@@ -1,6 +1,6 @@
 #' Build a data frame or list.
 #'
-#' \code{data_frame} is trimmed down version of \code{\link{data.frame}} that:
+#' \code{tibble} is a trimmed down version of \code{\link{data.frame}} that:
 #' \enumerate{
 #' \item Never coerces inputs (i.e. strings stay as strings!).
 #' \item Never adds \code{row.names}.
@@ -11,8 +11,10 @@
 #' \item Automatically adds column names.
 #' }
 #'
-#' \code{lst} is similar to \code{\link{list}}, but like \code{data_frame}, it
+#' \code{lst} is similar to \code{\link{list}}, but like \code{tibble}, it
 #' evaluates its arguments lazily and in order, and automatically adds names.
+#'
+#' \code{data_frame} is an alias to \code{tibble}.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.
@@ -23,46 +25,54 @@
 #' @export
 #' @examples
 #' a <- 1:5
-#' data_frame(a, b = a * 2)
-#' data_frame(a, b = a * 2, c = 1)
-#' data_frame(x = runif(10), y = x * 2)
+#' tibble(a, b = a * 2)
+#' tibble(a, b = a * 2, c = 1)
+#' tibble(x = runif(10), y = x * 2)
 #'
 #' lst(n = 5, x = runif(n))
 #'
 #' # data_frame never coerces its inputs
-#' str(data_frame(letters))
-#' str(data_frame(x = list(diag(1), diag(2))))
+#' str(tibble(letters))
+#' str(tibble(x = list(diag(1), diag(2))))
 #'
 #' # or munges column names
-#' data_frame(`a + b` = 1:5)
+#' tibble(`a + b` = 1:5)
 #'
 #' # With the SE version, you give it a list of formulas/expressions
-#' data_frame_(list(x = ~1:10, y = quote(x * 2)))
+#' tibble_(list(x = ~1:10, y = quote(x * 2)))
 #'
 #' # data frames can only contain 1d atomic vectors and lists
 #' # and can not contain POSIXlt
 #' \dontrun{
-#' data_frame(x = data_frame(1, 2, 3))
-#' data_frame(y = strptime("2000/01/01", "%x"))
+#' tibble(x = data_frame(1, 2, 3))
+#' tibble(y = strptime("2000/01/01", "%x"))
 #' }
-data_frame <- function(...) {
+tibble <- function(...) {
   as_data_frame(lst(...))
 }
 
 #' @export
-#' @rdname data_frame
-data_frame_ <- function(xs) {
+#' @rdname tibble
+tibble_ <- function(xs) {
   as_data_frame(lst_(xs))
 }
 
 #' @export
-#' @rdname data_frame
+#' @rdname tibble
+data_frame <- tibble
+
+#' @export
+#' @rdname tibble
+data_frame_ <- tibble_
+
+#' @export
+#' @rdname tibble
 lst <- function(...) {
   lst_(lazyeval::lazy_dots(...))
 }
 
 #' @export
-#' @rdname data_frame
+#' @rdname tibble
 lst_ <- function(xs) {
   n <- length(xs)
   if (n == 0) return(list())

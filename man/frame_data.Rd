@@ -2,12 +2,9 @@
 % Please edit documentation in R/frame-data.R
 \name{frame_data}
 \alias{frame_data}
-\alias{tibble}
 \title{Row-wise tibble creation}
 \usage{
 frame_data(...)
-
-tibble(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{data_frame}.

@@ -70,6 +70,12 @@ test_that("names in list columns are preserved", {
 })
 
 
+test_that("data_frame aliases", {
+  expect_identical(data_frame, tibble)
+  expect_identical(data_frame_, tibble_)
+})
+
+
 # as_data_frame -----------------------------------------------------------
 
 test_that("columns must be same length", {

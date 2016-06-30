@@ -93,7 +93,3 @@ frame_data <- function(...) {
   names(frame_col) <- frame_names
   as_data_frame(frame_col)
 }
-
-#' @rdname frame_data
-#' @export
-tibble <- frame_data
