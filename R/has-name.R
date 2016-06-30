@@ -3,6 +3,9 @@
 #' This function returns a logical value that indicates if a data frame or
 #' another named object contains an element with a specific name.
 #'
+#' Unnamed objects are treated as if all names are empty strings.
+#' \code{NA} input gives \code{FALSE} as output.
+#'
 #' @param x A data frame or another named object
 #' @param name Element name(s) to check
 #' @value A logical vector of the same length as \code{name}
