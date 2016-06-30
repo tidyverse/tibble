@@ -126,13 +126,16 @@ test_that("can use two-dimensional indexing with [[", {
 
 test_that("$ throws error if name doesn't exist", {
   df <- data_frame(x = 1)
-  expect_error(df$y, "Unknown column 'y'")
+  expect_warning(expect_null(df$y),
+                 "Unknown column 'y'")
 })
 
 test_that("$ doesn't do partial matching", {
   df <- data_frame(partial = 1)
-  expect_error(df$p, "Unknown column 'p'")
-  expect_error(df$part, "Unknown column 'part'")
+  expect_warning(expect_identical(df$p, 1),
+                 "Unknown column 'p'")
+  expect_warning(expect_identical(df$part, 1),
+                 "Unknown column 'part'")
   expect_error(df$partial, NA)
 })
 
