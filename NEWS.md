@@ -1,3 +1,9 @@
+# tibble 1.0-14 (2016-07-01)
+
+- `$` doesn't attempt partial matching (#109).
+- Skip test that fails on Windows (#100).
+
+
 # tibble 1.0-13 (2016-06-30)
 
 - New `has_name() (#102).
