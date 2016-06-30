@@ -51,7 +51,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
       result <- x
     }
     attr(result, "row.names") <- .set_row_names(nr)
-    return(as_data_frame.data.frame(result, validate = FALSE))
+    return(as_tibble.data.frame(result, validate = FALSE))
   }
 
   # First, subset columns
@@ -71,5 +71,5 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL) {
   }
 
   attr(x, "row.names") <- .set_row_names(nr)
-  as_data_frame.data.frame(x, validate = FALSE)
+  as_tibble.data.frame(x, validate = FALSE)
 }

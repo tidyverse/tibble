@@ -24,14 +24,15 @@ describing the rest of it as text.
   columns that fit on screen; see \code{\link{print.tbl_df}}}
 \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
 \item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
-  so is considerably faster. Throws error if column does not exist.}
+  so is considerably faster. Returns \code{NULL} if column does not exist,
+  \code{$} warns.}
 }
 }
 
 \section{Important functions}{
 
-\code{\link{data_frame}} and \code{\link{frame_data}} for construction,
-\code{\link{as_data_frame}} for coercion,
+\code{\link{tibble}} and \code{\link{frame_data}} for construction,
+\code{\link{as_tibble}} for coercion,
 and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
 }
 

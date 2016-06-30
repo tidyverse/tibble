@@ -1,5 +1,5 @@
 # A data frame with all major types
-df_all <- data_frame(
+df_all <- tibble(
   a = c(1, 2.5, NA),
   b = c(1:2, NA),
   c = c(T, F, NA),

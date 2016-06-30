@@ -4,40 +4,40 @@ context("tbl_df")
 # [ -----------------------------------------------------------------------
 
 test_that("[ never drops", {
-  mtcars2 <- as_data_frame(mtcars)
+  mtcars2 <- as_tibble(mtcars)
   expect_is(mtcars2[, 1], "data.frame")
   expect_is(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
 })
 
 test_that("[ retains class", {
-  mtcars2 <- as_data_frame(mtcars)
+  mtcars2 <- as_tibble(mtcars)
   expect_identical(class(mtcars2), class(mtcars2[1:5, ]))
   expect_identical(class(mtcars2), class(mtcars2[, 1:5]))
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
 })
 
-test_that("[ and as_data_frame commute", {
-  mtcars2 <- as_data_frame(mtcars)
-  expect_identical(mtcars2, as_data_frame(mtcars))
-  expect_identical(mtcars2[], remove_rownames(as_data_frame(mtcars[])))
-  expect_identical(mtcars2[1:5, ], remove_rownames(as_data_frame(mtcars[1:5, ])))
-  expect_identical(mtcars2[, 1:5], remove_rownames(as_data_frame(mtcars[, 1:5])))
-  expect_identical(mtcars2[1:5, 1:5], remove_rownames(as_data_frame(mtcars[1:5, 1:5])))
-  expect_identical(mtcars2[1:5], remove_rownames(as_data_frame(mtcars[1:5])))
+test_that("[ and as_tibble commute", {
+  mtcars2 <- as_tibble(mtcars)
+  expect_identical(mtcars2, as_tibble(mtcars))
+  expect_identical(mtcars2[], remove_rownames(as_tibble(mtcars[])))
+  expect_identical(mtcars2[1:5, ], remove_rownames(as_tibble(mtcars[1:5, ])))
+  expect_identical(mtcars2[, 1:5], remove_rownames(as_tibble(mtcars[, 1:5])))
+  expect_identical(mtcars2[1:5, 1:5], remove_rownames(as_tibble(mtcars[1:5, 1:5])))
+  expect_identical(mtcars2[1:5], remove_rownames(as_tibble(mtcars[1:5])))
 })
 
 test_that("[ with 0 cols creates correct row names (#656)", {
-  zero_row <- as_data_frame(iris)[, 0]
+  zero_row <- as_tibble(iris)[, 0]
   expect_is(zero_row, "tbl_df")
   expect_equal(nrow(zero_row), 150)
   expect_equal(ncol(zero_row), 0)
 
-  expect_identical(zero_row, as_data_frame(iris)[0])
+  expect_identical(zero_row, as_tibble(iris)[0])
 })
 
 test_that("[.tbl_df is careful about names (#1245)",{
-  foo <- data_frame(x = 1:10, y = 1:10)
+  foo <- tibble(x = 1:10, y = 1:10)
   expect_error(foo["z"], "Unknown columns 'z'", fixed = TRUE)
   expect_error(foo[ c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
 
@@ -49,7 +49,7 @@ test_that("[.tbl_df is careful about names (#1245)",{
 })
 
 test_that("[.tbl_df is careful about column indexes (#83)",{
-  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
   expect_error(foo[0.5], "Invalid non-integer column indexes: 0.5", fixed = TRUE)
   expect_error(foo[1:5], "Invalid column indexes: 4, 5", fixed = TRUE)
@@ -63,7 +63,7 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
 })
 
 test_that("[.tbl_df is careful about column flags (#83)",{
-  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[TRUE], foo)
   expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
   expect_identical(foo[FALSE], foo[integer()])
@@ -78,7 +78,7 @@ test_that("[.tbl_df is careful about column flags (#83)",{
 })
 
 test_that("[.tbl_df rejects unknown column indexes (#83)",{
-  foo <- data_frame(x = 1:10, y = 1:10, z = 1:10)
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(foo[list(1:3)], "Unsupported index type: list", fixed = TRUE)
   expect_error(foo[as.list(1:3)], "Unsupported index type: list", fixed = TRUE)
   expect_error(foo[factor(1:3)], "Unsupported index type: factor", fixed = TRUE)
@@ -98,26 +98,26 @@ test_that("[.tbl_df warns for drop argument",{
 # [[ ----------------------------------------------------------------------
 
 test_that("[[.tbl_df ignores exact argument",{
-  foo <- data_frame(x = 1:10, y = 1:10)
+  foo <- tibble(x = 1:10, y = 1:10)
   expect_warning(foo[["x"]], NA)
   expect_warning(foo[["x", exact = FALSE]], "ignored")
   expect_identical(getElement(foo, "y"), 1:10)
 })
 
 test_that("can use recursive indexing with [[", {
-  foo <- data_frame(x = list(y = 1:3, z = 4:5))
+  foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(foo[[c(1, 1)]], 1:3)
   expect_equal(foo[[c("x", "y")]], 1:3)
 })
 
 test_that("[[ returns NULL if name doesn't exist", {
-  df <- data_frame(x = 1)
+  df <- tibble(x = 1)
   expect_null(df[["y"]])
   expect_null(df[[1, "y"]])
 })
 
 test_that("can use two-dimensional indexing with [[", {
-  iris2 <- as_data_frame(iris)
+  iris2 <- as_tibble(iris)
   expect_equal(iris2[[1, 2]], iris[[1, 2]])
   expect_equal(iris2[[2, 3]], iris[[2, 3]])
 })
@@ -125,13 +125,13 @@ test_that("can use two-dimensional indexing with [[", {
 # $ -----------------------------------------------------------------------
 
 test_that("$ throws warning if name doesn't exist", {
-  df <- data_frame(x = 1)
+  df <- tibble(x = 1)
   expect_warning(expect_null(df$y),
                  "Unknown column 'y'")
 })
 
 test_that("$ doesn't do partial matching", {
-  df <- data_frame(partial = 1)
+  df <- tibble(partial = 1)
   expect_warning(expect_null(df$p),
                  "Unknown column 'p'")
   expect_warning(expect_null(df$part),
@@ -139,15 +139,15 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$partial, NA)
 })
 
-# is.data_frame -----------------------------------------------------------
+# is.tibble ---------------------------------------------------------------
 
-test_that("is.data_frame", {
-  expect_false(is.data_frame(iris))
-  expect_true(is.data_frame(as_data_frame(iris)))
-  expect_false(is.data_frame(NULL))
-  expect_false(is.data_frame(0))
+test_that("is.tibble", {
+  expect_false(is.tibble(iris))
+  expect_true(is.tibble(as_tibble(iris)))
+  expect_false(is.tibble(NULL))
+  expect_false(is.tibble(0))
 })
 
-test_that("is_data_frame", {
-  expect_identical(is.data_frame, is_data_frame)
+test_that("is_tibble", {
+  expect_identical(is.tibble, is_tibble)
 })
