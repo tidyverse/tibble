@@ -15,5 +15,10 @@ test_that("vectorized", {
 })
 
 test_that("NA", {
-  expect_equal(has_name(list(a = 1), NA), FALSE)
+  expect_false(has_name(list(a = 1), NA))
+})
+
+test_that("unnamed", {
+  expect_false(has_name(1, "a"))
+  expect_true(has_name(1, ""))
 })
