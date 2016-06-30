@@ -1,5 +1,5 @@
 as_unknown_rows <- function(x) {
-  x <- as_data_frame(x)
+  x <- as_tibble(x)
   class(x) <- c("unknown_rows", class(x))
   x
 }

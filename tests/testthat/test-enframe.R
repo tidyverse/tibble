@@ -2,21 +2,21 @@ context("enframe")
 
 test_that("can convert unnamed vector", {
   expect_identical(enframe(3:1),
-                   data_frame(name = 1:3, value = 3:1))
+                   tibble(name = 1:3, value = 3:1))
 })
 
 test_that("can convert named vector", {
   expect_identical(enframe(c(a = 2, b = 1)),
-                   data_frame(name = letters[1:2], value = as.numeric(2:1)))
+                   tibble(name = letters[1:2], value = as.numeric(2:1)))
 })
 
 test_that("can convert zero-length vector", {
   expect_identical(enframe(logical()),
-                   data_frame(name = integer(), value = logical()))
+                   tibble(name = integer(), value = logical()))
 })
 
 test_that("can use custom names", {
   expect_identical(enframe(letters, name = "index", value = "letter"),
-                   data_frame(index = seq_along(letters),
-                              letter = letters))
+                   tibble(index = seq_along(letters),
+                          letter = letters))
 })
