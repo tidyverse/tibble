@@ -1,3 +1,8 @@
+# tibble 1.0-16 (2016-07-01)
+
+- `as_data_frame()` is S3 generic again (#109).
+
+
 # tibble 1.0-15 (2016-07-01)
 
 - Prefer `tibble()` and `as_tibble()` over `data_frame()` and `as_data_frame()` in code and documentation (#82).
