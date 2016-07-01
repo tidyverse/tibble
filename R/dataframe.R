@@ -225,8 +225,30 @@ as_tibble.default <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
-as_data_frame <- as_tibble
+as_data_frame <- function(x, ...) {
+  UseMethod("as_data_frame")
+}
 
+#' @export
+as_data_frame.tbl_df <- as_tibble.tbl_df
+
+#' @export
+as_data_frame.data.frame <- as_tibble.data.frame
+
+#' @export
+as_data_frame.list <- as_tibble.list
+
+#' @export
+as_data_frame.matrix <- as_tibble.matrix
+
+#' @export
+as_data_frame.table <- as_tibble.table
+
+#' @export
+as_data_frame.NULL <- as_tibble.NULL
+
+#' @export
+as_data_frame.default <- as_tibble.default
 
 #' Test if the object is a tibble.
 #'
