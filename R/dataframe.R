@@ -333,7 +333,7 @@ check_tibble <- function(x) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
 
-  x[] <- lapply(x, strip_dim)
+  x <- lapply(x, strip_dim)
 
   posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
   if (any(posixlt)) {
