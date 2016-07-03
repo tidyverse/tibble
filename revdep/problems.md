@@ -10,7 +10,7 @@
 |language |en_US:en                     |
 |collate  |en_US.UTF-8                  |
 |tz       |Europe/Zurich                |
-|date     |2016-07-02                   |
+|date     |2016-07-03                   |
 
 ## Packages
 
@@ -24,7 +24,7 @@
 |Rcpp           |   |0.12.5  |2016-05-14 |cran (@0.12.5)           |
 |rmarkdown      |   |0.9.6   |2016-05-01 |cran (@0.9.6)            |
 |testthat       |   |1.0.2   |2016-04-23 |cran (@1.0.2)            |
-|tibble         |   |1.0     |2016-07-02 |local (hadley/tibble@NA) |
+|tibble         |   |1.1     |2016-07-03 |local (hadley/tibble@NA) |
 |withr          |   |1.0.2   |2016-06-20 |cran (@1.0.2)            |
 
 # Check results
