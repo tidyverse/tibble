@@ -175,20 +175,24 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...) {
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
-    x <- list()
-    class(x) <- c("tbl_df", "tbl", "data.frame")
-    attr(x, "row.names") <- .set_row_names(0L)
-    attr(x, "names") <- character(0L)
-    return(x)
+    list_to_tibble(repair_names(list()), validate = FALSE, nrow = 0)
+  } else {
+    list_to_tibble(x, validate)
   }
+}
 
+list_to_tibble <- function(x, validate, nrow = NULL) {
   if (validate) {
     x <- check_tibble(x)
   }
   x <- recycle_columns(x)
 
+  if (is.null(nrow)) {
+    nrow <- length(x[[1L]])
+  }
+
   class(x) <- c("tbl_df", "tbl", "data.frame")
-  attr(x, "row.names") <- .set_row_names(length(x[[1]]))
+  attr(x, "row.names") <- .set_row_names(nrow)
 
   x
 }
@@ -341,6 +345,10 @@ check_tibble <- function(x) {
 }
 
 recycle_columns <- function(x) {
+  if (length(x) == 0) {
+    return(x)
+  }
+
   # Validate column lengths
   lengths <- vapply(x, NROW, integer(1))
   max <- max(lengths)
