@@ -57,7 +57,7 @@ test_that("SE version", {
   expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
-test_that("names are stripped off vectors", {
+test_that("names are stripped from vectors", {
   foo <- tibble(x = c(y = 1, z = 2))
   expect_equal(names(foo), "x")
   expect_null(names(foo$x))
@@ -69,6 +69,15 @@ test_that("names in list columns are preserved", {
   expect_equal(names(foo$x), c("y", "z"))
 })
 
+test_that("attributes are preserved", {
+  df <- structure(
+    data.frame( x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2) ),
+    meta = "this is important"
+  )
+  res <- as_tibble(df)
+
+  expect_identical(attr(res, "meta"), attr(df, "meta"))
+})
 
 test_that("tibble aliases", {
   expect_identical(data_frame, tibble)
