@@ -164,7 +164,7 @@ as_tibble.tbl_df <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...) {
-  list_to_tibble(unclass(x), validate, raw_rownames(x))
+  list_to_tibble(x, validate, raw_rownames(x))
 }
 
 #' @export
@@ -178,6 +178,9 @@ as_tibble.list <- function(x, validate = TRUE, ...) {
 }
 
 list_to_tibble <- function(x, validate, rownames = NULL) {
+  # this is to avoid any method dispatch that may happen when processing x
+  x <- unclass(x)
+
   if (validate) {
     x <- check_tibble(x)
   }
