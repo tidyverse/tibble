@@ -1,3 +1,8 @@
+# tibble 1.0-18 (2016-07-03)
+
+- `as_tibble.data.frame()` preserves attributes.
+
+
 # tibble 1.0-17 (2016-07-03)
 
 - `as_tibble.data.frame()` uses `as_tibble.list()` and avoids calling overriden methods which may lead to endless recursion.
