@@ -12,16 +12,12 @@ Follow-up release.
 
 ## Output
 
-- Reworked output: More concise summary, removed empty line, showing number of hidden rows and columns (#51).
-- Change formatting of summary line: Begins with hash `#` and contains more text (#95).
-- Add comment char `# ` for trailing metadata (#101).
-- Computation of column width properly handles wide (e.g., Chinese) characters, tests still fail on Windows (#100).
-- Use angle brackets for type in `glimpse()` (#98).
-- `glimpse()` shows nesting structure for lists (#98).
-- Tibbles with `POSIXlt` columns can be printed now, the text `<POSIXlt>` is shown as placeholder to encourage usage of `POSIXct` (#86).
-- Indicate presence of row names by a star in printed output (#72).
+- Reworked output: More concise summary (begins with hash `#` and contains more text (#95)), removed empty line, showing number of hidden rows and columns (#51). The trailing metadata also begins with hash `#` (#101). Presence of row names is indicated by a star in printed output (#72).
 - Format `NA` values in character columns as `<NA>`, like `print.data.frame()` does (#69).
-- Turn number of printed extra cols into an option (#68, @lionel-).
+- The number of printed extra cols is now an option (#68, @lionel-).
+- Computation of column width properly handles wide (e.g., Chinese) characters, tests still fail on Windows (#100).
+- `glimpse()` shows nesting structure for lists and uses angle brackets for type (#98).
+- Tibbles with `POSIXlt` columns can be printed now, the text `<POSIXlt>` is shown as placeholder to encourage usage of `POSIXct` (#86).
 - `type_sum()` shows only topmost class for S3 objects.
 
 
@@ -38,8 +34,7 @@ Follow-up release.
 
 - The `.Dim` attribute is silently stripped from columns that are 1d matrices (#84).
 - Converting a tibble without row names to a regular data frame does not add explicit row names.
-- `as_tibble.data.frame()` preserves attributes.
-- `as_tibble.data.frame()` uses `as_tibble.list()` and avoids calling overriden methods which may lead to endless recursion.
+- `as_tibble.data.frame()` preserves attributes, and uses `as_tibble.list()` to calling overriden methods which may lead to endless recursion.
 
 
 ## New features
@@ -51,6 +46,7 @@ Follow-up release.
 - `obj_sum()` and `type_sum()` show `"tibble"` instead of `"tbl_df"` for tibbles (#82).
 - `as_tibble.data.frame()` gains `validate` argument (as in `as_tibble.list()`), if `TRUE` the input is validated.
 - Implement `as_tibble.default()` (#71, hadley/dplyr#1752).
+- `has_rownames()` supports arguments that are not data frames.
 
 
 ## Bug fixes
@@ -67,16 +63,15 @@ Follow-up release.
 
 ## Internal
 
+- Don't rely on `knitr` internals for testing (#78).
+- Fix compatibility with `knitr` 1.13 (#76).
+- Enhance `knit_print()` tests.
 - Provide default implementation for `tbl_sum.tbl_sql()` and `tbl_sum.tbl_grouped_df()` to allow `dplyr` release before a `tibble` release.
 - Explicit tests for `format_v()` (#98).
 - Test output for `NULL` value of `tbl_sum()`.
-- Don't rely on `knitr` internals for testing (#78).
-- `has_rownames()` supports arguments that are not data frames.
-- Fix compatibility with `knitr` 1.13 (#76).
-- Add missing test from dplyr.
-- Enhance `knit_print()` tests.
-- Use new `expect_output_file()` from `testthat`.
 - Test subsetting in all variants (#62).
+- Add missing test from dplyr.
+- Use new `expect_output_file()` from `testthat`.
 
 
 Version 1.0 (2016-03-21)
