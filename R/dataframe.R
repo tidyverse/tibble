@@ -164,35 +164,31 @@ as_tibble.tbl_df <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...) {
-  if (validate) {
-    x <- check_tibble(x)
-  }
-  class(x) <- c("tbl_df", "tbl", "data.frame")
-  x
+  list_to_tibble(unclass(x), validate, raw_rownames(x))
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
-    list_to_tibble(repair_names(list()), validate = FALSE, nrow = 0)
+    list_to_tibble(repair_names(list()), validate = FALSE, .set_row_names(0L))
   } else {
     list_to_tibble(x, validate)
   }
 }
 
-list_to_tibble <- function(x, validate, nrow = NULL) {
+list_to_tibble <- function(x, validate, rownames = NULL) {
   if (validate) {
     x <- check_tibble(x)
   }
   x <- recycle_columns(x)
 
-  if (is.null(nrow)) {
-    nrow <- length(x[[1L]])
+  if (is.null(rownames)) {
+    rownames <- .set_row_names(NROW(x[[1L]]))
   }
 
   class(x) <- c("tbl_df", "tbl", "data.frame")
-  attr(x, "row.names") <- .set_row_names(nrow)
+  attr(x, "row.names") <- rownames
 
   x
 }

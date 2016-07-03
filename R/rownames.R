@@ -88,3 +88,7 @@ column_to_rownames <- function(df, var = "rowname") {
   }
   NextMethod()
 }
+
+raw_rownames <- function(x) {
+  .row_names_info(x, 0L) %||%  .set_row_names(.row_names_info(x, 2L))
+}
