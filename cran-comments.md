@@ -9,6 +9,4 @@
 ## Reverse dependencies
 
 I checked all 10 reverse dependencies for version 1.0 and for the current release,
-and compared the results. They were identical, except for a new warning for the
-"photobiologyInOut" package, which currently has a check error anyway on my
-system.
+and compared the results. They were identical.
