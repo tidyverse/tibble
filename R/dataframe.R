@@ -164,31 +164,34 @@ as_tibble.tbl_df <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...) {
-  if (validate) {
-    x <- check_tibble(x)
-  }
-  class(x) <- c("tbl_df", "tbl", "data.frame")
-  x
+  list_to_tibble(x, validate, raw_rownames(x))
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
-    x <- list()
-    class(x) <- c("tbl_df", "tbl", "data.frame")
-    attr(x, "row.names") <- .set_row_names(0L)
-    attr(x, "names") <- character(0L)
-    return(x)
+    list_to_tibble(repair_names(list()), validate = FALSE, .set_row_names(0L))
+  } else {
+    list_to_tibble(x, validate)
   }
+}
+
+list_to_tibble <- function(x, validate, rownames = NULL) {
+  # this is to avoid any method dispatch that may happen when processing x
+  x <- unclass(x)
 
   if (validate) {
     x <- check_tibble(x)
   }
   x <- recycle_columns(x)
 
+  if (is.null(rownames)) {
+    rownames <- .set_row_names(NROW(x[[1L]]))
+  }
+
   class(x) <- c("tbl_df", "tbl", "data.frame")
-  attr(x, "row.names") <- .set_row_names(length(x[[1]]))
+  attr(x, "row.names") <- rownames
 
   x
 }
@@ -330,7 +333,7 @@ check_tibble <- function(x) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
 
-  x[] <- lapply(x, strip_dim)
+  x <- lapply(x, strip_dim)
 
   posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
   if (any(posixlt)) {
@@ -341,6 +344,10 @@ check_tibble <- function(x) {
 }
 
 recycle_columns <- function(x) {
+  if (length(x) == 0) {
+    return(x)
+  }
+
   # Validate column lengths
   lengths <- vapply(x, NROW, integer(1))
   max <- max(lengths)
