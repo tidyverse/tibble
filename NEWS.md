@@ -1,3 +1,8 @@
+# tibble 1.0-17 (2016-07-03)
+
+- `as_tibble.data.frame()` uses `as_tibble.list()` and avoids calling overriden methods which may lead to endless recursion.
+
+
 # tibble 1.0-16 (2016-07-01)
 
 - `as_data_frame()` is S3 generic again (#109).
