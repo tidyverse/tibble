@@ -115,7 +115,7 @@ class(df2[[1]])
 class(df2$x)
 ```
 
-Tibbles are also stricter with `$`. Tibbles never do partial matching, and will throw an error if the column does not exist:
+Tibbles are also stricter with `$`. Tibbles never do partial matching, and will throw a warning and return `NULL` if the column does not exist:
 
 ```{r, error = TRUE}
 df <- data.frame(abc = 1)
