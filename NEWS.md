@@ -39,7 +39,7 @@ Follow-up release.
 
 ## New features
 
-- New `has_name() (#102).
+- New `has_name()` (#102).
 - Prefer `tibble()` and `as_tibble()` over `data_frame()` and `as_data_frame()` in code and documentation (#82).
 - New `is.tibble()` and `is_tibble()` (#79).
 - New `enframe()` that converts vectors to two-column tibbles (#31, #74).
