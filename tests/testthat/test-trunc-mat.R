@@ -28,6 +28,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/iris_unk-10-70.txt")
 
   expect_output_file_rel(
+    print(as_unknown_rows(iris[1:5,]), n = 10, width = 70L),
+    "trunc_mat/iris5_unk-10-70.txt")
+
+  expect_output_file_rel(
     print(df_all, n = NULL, width = 30L),
     "trunc_mat/all--30.txt")
 
