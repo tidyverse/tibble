@@ -42,7 +42,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra, summary = tbl_sum(x))
+                     rows_asked = n, n_extra = n_extra, summary = tbl_sum(x))
 
   structure(c(shrunk, trunc_info), class = "trunc_mat")
 }
@@ -179,7 +179,7 @@ format_extra_rows <- function(x) {
       paste0(big_mark(x$rows_missing), " more rows")
     }
   } else if (is.na(x$rows_total)) {
-    paste0("at least ", x$rows_min, " rows total")
+    paste0(if (x$rows_asked <= x$rows_min) "at least ", x$rows_min, " rows total")
   }
 }
 
