@@ -42,7 +42,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     rows_asked = n, n_extra = n_extra, summary = tbl_sum(x))
+                     n_extra = n_extra, summary = tbl_sum(x))
 
   structure(c(shrunk, trunc_info), class = "trunc_mat")
 }
@@ -178,8 +178,8 @@ format_extra_rows <- function(x) {
     } else if (x$rows_missing > 0) {
       paste0(big_mark(x$rows_missing), " more rows")
     }
-  } else if (is.na(x$rows_total)) {
-    paste0(if (x$rows_asked <= x$rows_min) "at least ", x$rows_min, " rows total")
+  } else if (is.na(x$rows_total) && x$rows_min > 0) {
+    paste0("at least ", x$rows_min, " rows total")
   }
 }
 
@@ -195,7 +195,7 @@ format_extra_cols <- function(x) {
       vars <- ""
     }
     paste0(length(x$extra), " ",
-           if (!identical(x$rows_total, 0L)) "more ",
+           if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
            "variables", vars)
   }
 }

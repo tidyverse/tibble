@@ -1,5 +1,4 @@
-# ... with 0 rows total, and
-#   5 more variables:
+# ... with 5 variables:
 #   Sepal.Length <dbl>,
 #   Sepal.Width <dbl>,
 #   Petal.Length <dbl>,
