@@ -178,7 +178,7 @@ format_extra_rows <- function(x) {
     } else if (x$rows_missing > 0) {
       paste0(big_mark(x$rows_missing), " more rows")
     }
-  } else if (is.na(x$rows_total)) {
+  } else if (is.na(x$rows_total) && x$rows_min > 0) {
     paste0("at least ", x$rows_min, " rows total")
   }
 }
@@ -195,7 +195,7 @@ format_extra_cols <- function(x) {
       vars <- ""
     }
     paste0(length(x$extra), " ",
-           if (!identical(x$rows_total, 0L)) "more ",
+           if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
            "variables", vars)
   }
 }
