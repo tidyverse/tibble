@@ -1,3 +1,9 @@
+# tibble 1.1-1 (2016-07-13)
+
+- Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).
+- Minor changes in vignette (#115, @helix123).
+
+
 # tibble 1.1 (2016-07-01)
 
 Follow-up release.
