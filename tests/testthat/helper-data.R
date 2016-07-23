@@ -10,3 +10,7 @@ df_all <- tibble(
   h = as.list(c(1:2, NA)),
   i = list(list(1, 2:3), list(4:6), list(NA))
 )
+
+# A labelled data frame
+df_labelled <- as_tibble(mtcars)
+attr(df_labelled$mpg, "label") <- "mile per gallon"
