@@ -56,6 +56,8 @@ shrink_mat <- function(df, width, rows, n, star) {
   }
 
   df <- remove_rownames(df)
+  col_names <- tickit(colnames(df))
+  names(var_types) <- col_names
 
   # Minimum width of each column is 5 "(int)", so we can make a quick first
   # pass
@@ -77,8 +79,7 @@ shrink_mat <- function(df, width, rows, n, star) {
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
-
-  names <- c("", colnames(mat))
+  names <- c("", col_names)
 
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
@@ -97,10 +98,11 @@ shrink_mat <- function(df, width, rows, n, star) {
     df[[1]] <- substr(df[[1]], 1, width)
   }
   shrunk <- format(df[, !too_wide, drop = FALSE])
+
   shrunk <- rbind(" " = classes, shrunk)
   if (star)
     rownames(shrunk)[[1]] <- "*"
-  colnames(shrunk) <- colnames(df)[!too_wide]
+  colnames(shrunk) <- col_names[!too_wide]
 
   if (is.na(rows))
     needs_dots <- (nrow(df) >= n)
