@@ -49,10 +49,10 @@ tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
-You can define a tibble row-by-row with `frame_data()`:
+You can define a tibble row-by-row with `nibble()`:
 
 ``` r
-frame_data(
+nibble(
   ~x, ~y,  ~z,
   "a", 2,  3.6,
   "b", 1,  8.5
