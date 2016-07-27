@@ -49,6 +49,8 @@ type_sum.factor <- function(x) "fctr"
 #' @export
 type_sum.POSIXt <- function(x) "dttm"
 #' @export
+type_sum.difftime <- function(x) "time"
+#' @export
 type_sum.Date <- function(x) "date"
 #' @export
 type_sum.data.frame <- function(x) class(x)[[1]]
