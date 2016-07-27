@@ -25,7 +25,7 @@ test_that("common data vectors treated as atomic", {
   expect_equal(obj_sum(factor(1:3)), "fctr [3]")
   expect_equal(obj_sum(ordered(1:3)), "ord [3]")
   expect_equal(obj_sum(Sys.Date() + 1:3), "date [3]")
-  expect_equal(obj_sum(Sys.time() + 1:3), "time [3]")
+  expect_equal(obj_sum(Sys.time() + 1:3), "dttm [3]")
 })
 
 

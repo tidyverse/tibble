@@ -47,7 +47,7 @@ type_sum.ordered <- function(x) "ord"
 #' @export
 type_sum.factor <- function(x) "fctr"
 #' @export
-type_sum.POSIXt <- function(x) "time"
+type_sum.POSIXt <- function(x) "dttm"
 #' @export
 type_sum.Date <- function(x) "date"
 #' @export
