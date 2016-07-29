@@ -14,7 +14,7 @@ it'll be given the value \code{NA}.}
 }
 \description{
 This is a convenient way to add a single row of data to an existing data
-frame. See \code{\link{frame_data}} for an easy way to create an complete
+frame. See \code{\link{nibble}} for an easy way to create an complete
 data frame row-by-row.
 }
 \examples{

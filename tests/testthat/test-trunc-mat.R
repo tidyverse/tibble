@@ -7,6 +7,8 @@ test_that("print() returns output invisibly", {
 })
 
 test_that("trunc_mat output matches known output", {
+  skip_on_os("windows")
+
   expect_output_file_rel(
     print(as_tibble(mtcars), n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt")
@@ -82,6 +84,8 @@ test_that("trunc_mat output matches known output", {
 })
 
 test_that("trunc_mat for POSIXlt columns (#86)", {
+  skip_on_os("windows")
+
   df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
   df$y <- as.POSIXlt(df$x)
 

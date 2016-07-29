@@ -270,7 +270,7 @@ is_tibble <- is.tibble
 #' Add a row to a data frame
 #'
 #' This is a convenient way to add a single row of data to an existing data
-#' frame. See \code{\link{frame_data}} for an easy way to create an complete
+#' frame. See \code{\link{nibble}} for an easy way to create an complete
 #' data frame row-by-row.
 #'
 #' @param .data Data frame to append to.

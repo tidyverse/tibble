@@ -1,6 +1,6 @@
 
 
-A tibble: 3 x 9
+A tibble: 3 × 9
 
 |a     |b     |c     |d     |e      |f          |
 |:-----|:-----|:-----|:-----|:------|:----------|
@@ -9,4 +9,4 @@ A tibble: 3 x 9
 |2.5   |2     |FALSE |b     |b      |2015-12-11 |
 |NA    |NA    |NA    |<NA>  |NA     |NA         |
 
-(with 3 more variables: g <time>, h <list>, i <list>)
+(with 3 more variables: g <dttm>, h <list>, i <list>)
