@@ -28,6 +28,10 @@ test_that("common data vectors treated as atomic", {
   expect_equal(obj_sum(Sys.time() + 1:3), "dttm [3]")
 })
 
+test_that("difftime is shown as time", {
+  expect_equal(obj_sum(Sys.time() - Sys.time() + 1:3), "time [3]")
+})
+
 
 # type_sum ----------------------------------------------------------------
 
