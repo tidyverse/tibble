@@ -33,10 +33,8 @@ something <- function(x, max_rows = 10) {
     ")",
     sep = "\n"
   )
-  parsed <- parse(text = text, keep.source = TRUE)
-  single <- parsed[[1]]
-  attributes(single) <- attributes(parsed)
-  single
+  cat(text, sep = "\n")
+  invisible(text)
 }
 
 #' @export
