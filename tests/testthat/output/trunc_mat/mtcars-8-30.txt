@@ -1,4 +1,4 @@
-# A tibble: 32 x 11
+# A tibble: 32 × 11
     mpg   cyl  disp    hp
 * <dbl> <dbl> <dbl> <dbl>
 1  21.0     6 160.0   110

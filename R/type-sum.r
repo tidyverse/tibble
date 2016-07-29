@@ -106,7 +106,7 @@ dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))
   format_dim[is.na(dim)] <- "??"
-  paste0(format_dim, collapse = " x ")
+  paste0(format_dim, collapse = " × ")
 }
 
 size_sum <- function(x) {
