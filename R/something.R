@@ -50,4 +50,4 @@ can_something.numeric <- function(x) TRUE
 can_something.character <- function(x) TRUE
 
 #' @export
-can_something.factor <- function(x) TRUE
+can_something.factor <- function(x) FALSE
