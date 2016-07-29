@@ -1,3 +1,10 @@
+# tibble 1.1-3 (2016-07-30)
+
+- Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
+- Use `dttm` instead of `time` for `POSIXt` values (#133).
+- Rename `frame_data()` to `nibble()`, the former is still available as alias (#132).
+
+
 # tibble 1.1-2 (2016-07-29)
 
 - Back-tick non-semantic column names (#131).
