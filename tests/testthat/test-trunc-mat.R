@@ -48,6 +48,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/zero_cols-5-30.txt")
 
   expect_output_file_rel(
+    print(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L),
+    "trunc_mat/zero-rows_unk-5-30.txt")
+
+  expect_output_file_rel(
     print(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
     "trunc_mat/zero-cols_unk-5-30.txt")
 
