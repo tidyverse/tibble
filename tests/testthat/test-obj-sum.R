@@ -17,8 +17,10 @@ test_that("NULL handled specially", {
 })
 
 test_that("data frame and tibbles include rows and cols", {
-  expect_equal(obj_sum(mtcars), "data.frame [32 x 11]")
-  expect_equal(obj_sum(as_tibble(mtcars)), "tibble [32 x 11]")
+  skip_on_os("windows")
+
+  expect_equal(obj_sum(mtcars), "data.frame [32 × 11]")
+  expect_equal(obj_sum(as_tibble(mtcars)), "tibble [32 × 11]")
 })
 
 test_that("common data vectors treated as atomic", {
