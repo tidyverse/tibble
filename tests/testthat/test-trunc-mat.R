@@ -100,3 +100,13 @@ test_that("trunc_mat for wide-character columns (#100)", {
     print(df, n = 8L, width = 60L),
     "trunc_mat/wide-8-60.txt")
 })
+
+test_that("trunc_mat backticks non-syntactic names", {
+  tb <- tibble(
+    `:)` = "smile",
+    ` ` = "space"
+  )
+  narrow <- trunc_mat(tb, width = 5)
+  expect_equal(names(narrow$table), "`:)`")
+  expect_equal(names(narrow$extra), "` `")
+})

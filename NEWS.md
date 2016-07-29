@@ -1,3 +1,8 @@
+# tibble 1.1-2 (2016-07-29)
+
+- Back-tick non-semantic column names (#131).
+
+
 # tibble 1.1-1 (2016-07-13)
 
 - Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).

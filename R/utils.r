@@ -74,3 +74,11 @@ nchar_width <- function(x) {
 cat_line <- function(...) {
   cat(..., "\n", sep = "")
 }
+
+is_syntactic <- function(x) make.names(x) == x
+
+tickit <- function(x) {
+  needs_ticks <- !is_syntactic(x)
+  x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
+  x
+}
