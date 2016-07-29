@@ -15,7 +15,7 @@ something <- function(x, max_rows = 10) {
   }
 
   if (nrow(x) > max_rows) {
-    warningc("Using first ", max_rows, " rows, set argument max_rows to increase.")
+    warningc("Using first ", max_rows, " out of ", nrow(x), " rows, set argument max_rows to increase.")
     x <- x[seq_len(max_rows), ]
   }
 
