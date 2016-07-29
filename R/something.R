@@ -11,7 +11,7 @@
 something <- function(x, max_rows = 10) {
   can_do <- vapply(x, can_something, logical(1))
   if (!all(can_do)) {
-    stopc("Can't do something on x")
+    stopc("Can't do something on x because of columns ", format_n(names(x)[!can_do]))
   }
 
   if (nrow(x) > max_rows) {
