@@ -1,3 +1,8 @@
+# tibble 1.1-5 (2016-07-31)
+
+- `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
+
+
 # tibble 1.1-4 (2016-07-31)
 
 - `as_tibble.matrix()` doesn't add the `class` attribute of the original matrix to the columns of the new data frame. A test had to be adapted for this, but it used a matrix of `Date` objects which don't seem to be that useful in R (#110).
