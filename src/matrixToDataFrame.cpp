@@ -72,6 +72,7 @@ List copy_columns( const Matrix<RTYPE>& m ){
     Vector<RTYPE> vec( column.begin(), column.end() )  ;
     copy_most_attributes( vec, m ) ;
     Rf_setAttrib( vec, R_DimSymbol, R_NilValue ) ;
+    Rf_setAttrib( vec, R_ClassSymbol, R_NilValue ) ;
     out[j] = vec ;
   }
 
