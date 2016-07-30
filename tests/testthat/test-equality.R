@@ -85,3 +85,8 @@ test_that("equality handles data frames with 0 columns (#1506)", {
 test_that("equality fails if types different", {
   expect_equal(all.equal(as_tibble(iris), iris), "Different types: x 'tbl_df', 'tbl', 'data.frame', y 'data.frame'")
 })
+
+test_that("equality works for data frames with columns named like arguments to order() (#107)", {
+  U <- data_frame(method = c("old","new"), time = c(4.5, 2.3))
+  expect_equal(U, U)
+})
