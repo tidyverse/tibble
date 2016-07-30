@@ -1,3 +1,8 @@
+# tibble 1.1-4 (2016-07-31)
+
+- `as_tibble.matrix()` doesn't add the `class` attribute of the original matrix to the columns of the new data frame. A test had to be adapted for this, but it used a matrix of `Date` objects which don't seem to be that useful in R (#110).
+
+
 # tibble 1.1-3 (2016-07-30)
 
 - Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
