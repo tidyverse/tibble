@@ -1,5 +1,3 @@
-# check_names_df ----------------------------------------------------------
-
 check_names_df <- function(j, ...) UseMethod("check_names_df")
 
 #' @export
@@ -14,7 +12,7 @@ check_names_df.character <- function(j, x) {
   pos <- safe_match(j, names(x))
   if(any(is.na(pos))){
     unknown_names <- j[is.na(pos)]
-    stopc("Unknown columns ", format_n(unknown_names))
+    stopc(pluralise_msg("Unknown column(s): ", unknown_names))
   }
   pos
 }
@@ -29,15 +27,15 @@ check_names_df.numeric <- function(j, x) {
 
   non_integer <- (j != trunc(j))
   if (any(non_integer)) {
-    stopc("Invalid non-integer column indexes: ", format_n(j[non_integer]))
+    stopc(pluralise_msg("Invalid non-integer column index(es): ", j[non_integer]))
   }
   neg_too_small <- (j < -length(x))
   if (any(neg_too_small)) {
-    stopc("Invalid negative column indexes: ", format_n(j[neg_too_small]))
+    stopc(pluralise_msg("Invalid negative column index(es): ", j[neg_too_small]))
   }
   pos_too_large <- (j > length(x))
   if (any(pos_too_large)) {
-    stopc("Invalid column indexes: ", format_n(j[pos_too_large]))
+    stopc(pluralise_msg("Invalid column index(es): ", j[pos_too_large]))
   }
 
   seq_along(x)[j]
@@ -79,7 +77,7 @@ check_names_before_after.character <- function(j, names) {
   pos <- safe_match(j, names)
   if(any(is.na(pos))){
     unknown_names <- j[is.na(pos)]
-    stopc("Unknown columns ", format_n(unknown_names))
+    stopc(pluralise_msg("Unknown column(s): ", unknown_names))
   }
   pos
 }

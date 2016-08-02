@@ -38,11 +38,11 @@ test_that("[ with 0 cols creates correct row names (#656)", {
 
 test_that("[.tbl_df is careful about names (#1245)",{
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo["z"], "Unknown columns 'z'", fixed = TRUE)
-  expect_error(foo[ c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
+  expect_error(foo["z"], "Unknown column: 'z'", fixed = TRUE)
+  expect_error(foo[ c("x", "y", "z") ], "Unknown column: 'z'", fixed = TRUE)
 
-  expect_error(foo[, "z"], "Unknown columns 'z'", fixed = TRUE)
-  expect_error(foo[, c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
+  expect_error(foo[, "z"], "Unknown column: 'z'", fixed = TRUE)
+  expect_error(foo[, c("x", "y", "z") ], "Unknown column: 'z'", fixed = TRUE)
 
   expect_error(foo[as.matrix("x")], "matrix")
   expect_error(foo[array("x", dim = c(1, 1, 1))], "array")
@@ -51,11 +51,11 @@ test_that("[.tbl_df is careful about names (#1245)",{
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
-  expect_error(foo[0.5], "Invalid non-integer column indexes: 0.5", fixed = TRUE)
+  expect_error(foo[0.5], "Invalid non-integer column index: 0.5", fixed = TRUE)
   expect_error(foo[1:5], "Invalid column indexes: 4, 5", fixed = TRUE)
   expect_error(foo[-1:1], "mixed with negative")
   expect_error(foo[c(-1, 1)], "mixed with negative")
-  expect_error(foo[-4], "Invalid negative column indexes: -4", fixed = TRUE)
+  expect_error(foo[-4], "Invalid negative column index: -4", fixed = TRUE)
   expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 
   expect_error(foo[as.matrix(1)], "matrix")
