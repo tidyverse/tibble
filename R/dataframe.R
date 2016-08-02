@@ -301,7 +301,7 @@ add_row <- function(.data, ...) {
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
     stopc(
-      "This row would add new variables: ", format_n(extra_vars)
+      "This row would add new variable(s): ", format_n(extra_vars)
     )
   }
 
@@ -371,7 +371,7 @@ invalid_df <- function(problem, df, vars) {
   }
   stopc(
     problem, ".\n",
-    "Problem variables: ", format_n(vars)
+    "Problem variable(s): ", format_n(vars)
   )
 }
 
