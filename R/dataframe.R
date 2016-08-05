@@ -296,7 +296,7 @@ is_tibble <- is.tibble
 #' @export
 add_row <- function(.data, ...) {
   df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(1L)
+  attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {

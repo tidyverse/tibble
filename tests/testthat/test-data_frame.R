@@ -232,3 +232,18 @@ test_that("error if adding row with unknown variables", {
   expect_error(add_row(tibble(a = 3), xxyzy = "err"),
                "would add new variables")
 })
+
+test_that("can add multiple rows", {
+  df <- tibble(a = 3)
+  df_new <- add_row(df, a = 4:5)
+  expect_identical(nrow(df_new), nrow(df) + 2L)
+  expect_identical(df_new$a, c(df$a, 4:5))
+})
+
+test_that("can recycle when adding rows", {
+  iris_new <- add_row(iris, Sepal.Length = -1:-2, Species = "unknown")
+  expect_identical(nrow(iris_new), nrow(iris) + 2L)
+  expect_identical(iris_new$Sepal.Length, c(iris$Sepal.Length, -1:-2))
+  expect_identical(as.character(iris_new$Species),
+                   c(as.character(iris$Species), "unknown", "unknown"))
+})
