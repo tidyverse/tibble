@@ -115,7 +115,7 @@ lst_ <- function(xs) {
 #' Other types are first coerced via \code{\link[base]{as.data.frame}} with
 #' \code{stringsAsFactors = FALSE}.
 #'
-#' \code{as_data_frame} is an alias.
+#' \code{as_data_frame} and \code{as.tibble} are aliases.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
@@ -225,6 +225,12 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE, ...))
+}
+
+#' @export
+#' @rdname as_tibble
+as.tibble <- function(x, ...) {
+  UseMethod("as_tibble")
 }
 
 #' @export
