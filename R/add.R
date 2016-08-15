@@ -7,12 +7,17 @@
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs. If you don't supply the name of a variable,
 #'   it'll be given the value \code{NA}.
+#' @param .before,.after One-based row index where to add the new rows,
+#'   default: after last row
 #' @family addition
 #' @examples
 #' # add_row ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
 #' add_row(df, x = 4, y = 0)
+#'
+#' # You can specify where to add the new rows
+#' add_row(df, x = 4, y = 0, .before = 2)
 #'
 #' # You can supply vectors, to add multiple rows (this isn't
 #' # recommended because it's a bit hard to read)
@@ -26,7 +31,7 @@
 #' add_row(df, z = 10)
 #' }
 #' @export
-add_row <- function(.data, ...) {
+add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
@@ -41,7 +46,16 @@ add_row <- function(.data, ...) {
   df[missing_vars] <- NA
   df <- df[names(.data)]
 
-  rbind(.data, df)
+  position <- position_from_before_after(.before, .after, nrow(.data))
+
+  if (position <= 0L) {
+    structure(rbind(df, .data), class = class(.data))
+  } else if (position >= nrow(.data)) {
+    rbind(.data, df)
+  } else {
+    indexes <- seq_len(position)
+    rbind(.data[indexes, ], df, .data[-indexes, ])
+  }
 }
 
 #' Add columns to a data frame
@@ -88,4 +102,23 @@ add_column <- function(.data, ...) {
   }
 
   structure(cbind(.data, df), class = class(.data))
+}
+
+
+# helpers -----------------------------------------------------------------
+
+position_from_before_after <- function(.before, .after, len) {
+  if (is.null(.before)) {
+    if (is.null(.after)) {
+      len
+    } else {
+      .after
+    }
+  } else {
+    if (is.null(.after)) {
+      .before - 1L
+    } else {
+      stopc("Can't specify both .before and .after")
+    }
+  }
 }
