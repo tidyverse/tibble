@@ -267,9 +267,9 @@ is.tibble <- function(x) {
 is_tibble <- is.tibble
 
 
-#' Add a row to a data frame
+#' Add rows to a data frame
 #'
-#' This is a convenient way to add a single row of data to an existing data
+#' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See \code{\link{nibble}} for an easy way to create an complete
 #' data frame row-by-row.
 #'
@@ -296,7 +296,7 @@ is_tibble <- is.tibble
 #' @export
 add_row <- function(.data, ...) {
   df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(1L)
+  attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
