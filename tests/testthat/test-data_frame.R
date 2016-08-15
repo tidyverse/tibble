@@ -252,3 +252,51 @@ test_that("can recycle when adding rows", {
   expect_identical(as.character(iris_new$Species),
                    c(as.character(iris$Species), "unknown", "unknown"))
 })
+
+# add_column ------------------------------------------------------------
+
+test_that("can add new column", {
+  df_all_new <- add_column(df_all, j = 1:3, k = 3:1)
+  expect_identical(nrow(df_all_new), nrow(df_all))
+  expect_identical(df_all_new[seq_along(df_all)], df_all)
+  expect_identical(df_all_new$j, 1:3)
+  expect_identical(df_all_new$k, 3:1)
+})
+
+test_that("add_column() keeps class of object", {
+  iris_new <- add_column(iris, x = 1:150)
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_column(as_tibble(iris), x = 1:150)
+  expect_equal(class(as_tibble(iris)), class(iris_new))
+})
+
+test_that("add_column() keeps unchanged if no arguments", {
+  expect_identical(iris, add_column(iris))
+})
+
+test_that("error if adding existing columns", {
+  expect_error(add_column(tibble(a = 3), a = 5),
+               "Columns already in data frame")
+})
+
+test_that("error if adding wrong number of rows with add_column()", {
+  expect_error(add_column(tibble(a = 3), b = 4:5),
+               "Expected 1 rows, got 2")
+})
+
+test_that("can add multiple columns", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4:6, c = 3:1)
+  expect_identical(ncol(df_new), ncol(df) + 2L)
+  expect_identical(df_new$b, 4:6)
+  expect_identical(df_new$c, 3:1)
+})
+
+test_that("can recycle when adding columns", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4, c = 3:1)
+  expect_identical(ncol(df_new), ncol(df) + 2L)
+  expect_identical(df_new$b, rep(4, 3))
+  expect_identical(df_new$c, 3:1)
+})
