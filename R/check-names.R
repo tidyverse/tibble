@@ -1,9 +1,11 @@
 check_names_df <- function(j, ...) UseMethod("check_names_df")
 
+#' @export
 check_names_df.default <- function(j, ...) {
   stopc("Unsupported index type: ", class(j)[[1L]])
 }
 
+#' @export
 check_names_df.character <- function(j, x) {
   check_needs_no_dim(j)
 
@@ -15,6 +17,7 @@ check_names_df.character <- function(j, x) {
   pos
 }
 
+#' @export
 check_names_df.numeric <- function(j, x) {
   check_needs_no_dim(j)
 
@@ -38,6 +41,7 @@ check_names_df.numeric <- function(j, x) {
   seq_along(x)[j]
 }
 
+#' @export
 check_names_df.logical <- function(j, x) {
   check_needs_no_dim(j)
 
