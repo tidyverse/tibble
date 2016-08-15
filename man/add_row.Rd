@@ -35,4 +35,7 @@ add_row(df, x = 4)
 add_row(df, z = 10)
 }
 }
+\seealso{
+Other addition: \code{\link{add_column}}
+}
 
