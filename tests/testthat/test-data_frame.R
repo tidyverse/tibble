@@ -234,10 +234,10 @@ test_that("error if adding row with unknown variables", {
 })
 
 test_that("can add multiple rows", {
-  df <- tibble(a = 3)
+  df <- tibble(a = 3L)
   df_new <- add_row(df, a = 4:5)
   expect_identical(nrow(df_new), nrow(df) + 2L)
-  expect_identical(df_new$a, c(df$a, 4:5))
+  expect_identical(df_new$a, 3:5)
 })
 
 test_that("can recycle when adding rows", {
