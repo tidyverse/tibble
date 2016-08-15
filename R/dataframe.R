@@ -276,6 +276,7 @@ is_tibble <- is.tibble
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs. If you don't supply the name of a variable,
 #'   it'll be given the value \code{NA}.
+#' @family addition
 #' @examples
 #' # add_row ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
@@ -310,6 +311,52 @@ add_row <- function(.data, ...) {
   df <- df[names(.data)]
 
   rbind(.data, df)
+}
+
+#' Add columns to a data frame
+#'
+#' This is a convenient way to add one or more columns to an existing data
+#' frame.
+#'
+#' @param .data Data frame to append to.
+#' @param ... Name-value pairs, all values must have one element for each row
+#'   in the data frame, or be of length 1
+#' @family addition
+#' @examples
+#' # add_row ---------------------------------
+#' df <- tibble(x = 1:3, y = 3:1)
+#'
+#' add_column(df, z = -1:1, w = 0)
+#'
+#' # You can't overwrite existing columns
+#' \dontrun{
+#' add_column(df, x = 4:6)
+#' }
+
+#' # You can't create new observations
+#' \dontrun{
+#' add_column(df, z = 1:5)
+#' }
+#' @export
+add_column <- function(.data, ...) {
+  df <- tibble(...)
+
+  if (ncol(df) == 0L) {
+    return(.data)
+  }
+
+  if (nrow(df) != nrow(.data)) {
+    stopc("Expected ", nrow(.data), " rows, got ", nrow(df))
+  }
+
+  extra_vars <- intersect(names(df), names(.data))
+  if (length(extra_vars) > 0) {
+    stopc(
+      "Columns already in data frame: ", format_n(extra_vars)
+    )
+  }
+
+  structure(cbind(.data, df), class = class(.data))
 }
 
 # Validity checks --------------------------------------------------------------
