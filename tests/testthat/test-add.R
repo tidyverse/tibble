@@ -19,6 +19,22 @@ test_that("add_row() keeps class of object", {
   expect_equal(class(as_tibble(iris)), class(iris_new))
 })
 
+test_that("add_row() keeps class of object when adding in the middle", {
+  iris_new <- add_row(iris, Species = "unknown", .after = 10)
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_row(as_tibble(iris), Species = "unknown")
+  expect_equal(class(as_tibble(iris)), class(iris_new))
+})
+
+test_that("add_row() keeps class of object when adding in the beginning", {
+  iris_new <- add_row(iris, Species = "unknown", .after = 0)
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_row(as_tibble(iris), Species = "unknown")
+  expect_equal(class(as_tibble(iris)), class(iris_new))
+})
+
 test_that("adds empty row if no arguments", {
   new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
   expect_true(all(is.na(new_iris_row)))
@@ -42,6 +58,32 @@ test_that("can recycle when adding rows", {
   expect_identical(iris_new$Sepal.Length, c(iris$Sepal.Length, -1:-2))
   expect_identical(as.character(iris_new$Species),
                    c(as.character(iris$Species), "unknown", "unknown"))
+})
+
+test_that("can add as first row via .before = 1", {
+  df <- tibble(a = 3L)
+  df_new <- add_row(df, a = 2L, .before = 1)
+  expect_identical(nrow(df_new), nrow(df) + 1L)
+  expect_identical(df_new$a, 2:3)
+})
+
+test_that("can add as first row via .after = 0", {
+  df <- tibble(a = 3L)
+  df_new <- add_row(df, a = 2L, .after = 0)
+  expect_identical(nrow(df_new), nrow(df) + 1L)
+  expect_identical(df_new$a, 2:3)
+})
+
+test_that("can add row inbetween", {
+  df <- tibble(a = 1:3)
+  df_new <- add_row(df, a = 4:5, .after = 2)
+  expect_identical(nrow(df_new), nrow(df) + 2L)
+  expect_identical(df_new$a, c(1:2, 4:5, 3L))
+})
+
+test_that("error if both .before and .after are given", {
+  df <- tibble(a = 1:3)
+  expect_error(add_row(df, a = 4:5, .after = 2, .before = 3))
 })
 
 # add_column ------------------------------------------------------------
