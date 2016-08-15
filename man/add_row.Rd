@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataframe.R
 \name{add_row}
 \alias{add_row}
-\title{Add a row to a data frame}
+\title{Add rows to a data frame}
 \usage{
 add_row(.data, ...)
 }
@@ -13,7 +13,7 @@ add_row(.data, ...)
 it'll be given the value \code{NA}.}
 }
 \description{
-This is a convenient way to add a single row of data to an existing data
+This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link{nibble}} for an easy way to create an complete
 data frame row-by-row.
 }
