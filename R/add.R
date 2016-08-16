@@ -43,7 +43,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   missing_vars <- setdiff(names(.data), names(df))
-  df[missing_vars] <- NA
+  df[missing_vars] <- lapply(.data[missing_vars], na_value)
   df <- df[names(.data)]
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
@@ -58,6 +58,13 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   set_class(remove_rownames(out), class(.data))
+}
+
+na_value <- function(boilerplate) {
+  if (is.list(boilerplate))
+    list(NULL)
+  else
+    NA
 }
 
 #' Add columns to a data frame
