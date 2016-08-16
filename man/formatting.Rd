@@ -39,6 +39,7 @@ print(as_tibble(mtcars), n = 1)
 print(as_tibble(mtcars), n = 3)
 print(as_tibble(mtcars), n = 100)
 
+print(nycflights13::flights, n_extra = 2)
 print(nycflights13::flights, width = Inf)
 }
 \seealso{
