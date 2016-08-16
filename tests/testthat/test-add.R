@@ -202,6 +202,12 @@ test_that("error if both .before and .after are given", {
                "Can't specify both [.]before and [.]after")
 })
 
+test_that("error if column named by .before or .after not found", {
+  df <- tibble(a = 1:3)
+  expect_error(add_column(df, b = 4:6, .after = "x"), "Unknown columns")
+  expect_error(add_column(df, b = 4:6, .before = "x"), "Unknown columns")
+})
+
 test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(iris))
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = 0)))
