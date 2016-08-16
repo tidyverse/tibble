@@ -86,6 +86,13 @@ test_that("error if both .before and .after are given", {
   expect_error(add_row(df, a = 4:5, .after = 2, .before = 3))
 })
 
+test_that("missing row names stay missing when adding row", {
+  expect_false(has_rownames(iris))
+  expect_false(has_rownames(add_row(iris, Species = "unknown", .after = 0)))
+  expect_false(has_rownames(add_row(iris, Species = "unknown", .after = nrow(iris))))
+  expect_false(has_rownames(add_row(iris, Species = "unknown", .before = 10)))
+})
+
 # add_column ------------------------------------------------------------
 
 test_that("can add new column", {
@@ -185,4 +192,11 @@ test_that("can add column relative to named column", {
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
   expect_error(add_column(df, a = 4:5, .after = 2, .before = 3))
+})
+
+test_that("missing row names stay missing when adding column", {
+  expect_false(has_rownames(iris))
+  expect_false(has_rownames(add_column(iris, x = 1:150, .after = 0)))
+  expect_false(has_rownames(add_column(iris, x = 1:150, .after = ncol(iris))))
+  expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
 })
