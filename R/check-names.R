@@ -67,19 +67,19 @@ check_names_before_after.NULL <- function(j, ...) {
 }
 
 #' @export
-check_names_before_after.character <- function(j, x) {
+check_names_before_after.character <- function(j, names) {
   check_needs_no_dim(j)
 
-  pos <- safe_match(j, names(x))
+  pos <- safe_match(j, names)
   if(any(is.na(pos))){
-    names <- j[is.na(pos)]
-    stopc("Unknown columns ", format_n(names))
+    unknown_names <- j[is.na(pos)]
+    stopc("Unknown columns ", format_n(unknown_names))
   }
   pos
 }
 
 #' @export
-check_names_before_after.numeric <- function(j, x) {
+check_names_before_after.numeric <- function(j, names) {
   check_needs_no_dim(j)
 
   if (any(is.na(j))) {
@@ -90,7 +90,7 @@ check_names_before_after.numeric <- function(j, x) {
   if (any(non_integer)) {
     stopc("Invalid non-integer column indexes: ", format_n(j[non_integer]))
   }
-  invalid <- (j < 0 | j > length(x) + 1)
+  invalid <- (j < 0 | j > length(names) + 1)
   if (any(invalid)) {
     stopc("Invalid column indexes: ", format_n(j[invalid]))
   }
