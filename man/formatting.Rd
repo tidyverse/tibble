@@ -22,6 +22,11 @@ means use \code{getOption("tibble.width")} or (if also NULL)
 \code{getOption("width")}; the latter displays only the columns that
 fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 override this default and always print all columns.}
+
+\item{n_extra}{Number of extra columns to print abbreviated information for,
+if the width is too small for the entire tibble. If \code{NULL}, the
+default, will print information about at most \code{tibble.max_extra_cols}
+extra columns.}
 }
 \description{
 Tools for describing matrices
