@@ -32,9 +32,6 @@ the underlying data, even when applied to a remote data source.)
 }
 \examples{
 glimpse(mtcars)
-
-if (require("Lahman")) {
-  glimpse(Lahman::Batting)
-}
+glimpse(nycflights13::flights)
 }
 
