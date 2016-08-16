@@ -9,60 +9,66 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r echo=FALSE}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(tibble)
 ```
 
+The presentation of a column in a tibble is powered by two S3 generics:
 
-The presentation of a column in a tibble is powered by the S3 generics
-`type_sum()` and, to a limited extent, `obj_sum()`.
-The former determines what goes into the column header,
-the latter is mostly responsible for rendering list columns.
-Package authors who provide S3 or S4 classes that can be used as a column
-in a data frame can override these generics to make sure their data
-is represented ideally in a tibble.
-This vignette assumes a package that implements an S3 class `"foo"` and uses
-`roxygen2` to create documentation and the `NAMESPACE` file.
+* `type_sum()` determines what goes into the column header.
+* `obj_sum()` is used when rendering list columns.
 
-A prerequisite for overriding the generics is to import the `tibble` package.
-Add `tibble` to the `Imports:` section of your `DESCRIPTION`, or simply call
+If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the `tibble` package. Either add `tibble` to the `Imports:` section of your `DESCRIPTION`, or simply call:
 
-```r
+```{r, eval = FALSE}
 devtools::use_package("tibble")
 ```
 
-in your package directory.
+This vignette assumes a package that implements an S3 class `"foo"` and uses
+`roxygen2` to create documentation and the `NAMESPACE` file:
 
+```{r}
+#' @export
+foo <- function(x) {
+  stopifnot(is.numeric(x))
+  structure(x, class = "foo")
+}
+```
 
 ## `type_sum()`
 
-Implementations of this method is expected to return an atomic character value that can be used in a column header.
-Examples:
+This method should return a length-1 character vector that can be used in a column header. Strive for an evocative abbreviation that's under 6 characters. 
 
 ```{r}
 type_sum(1)
 type_sum(1:10)
 type_sum(Sys.time())
-type_sum(structure(1:10, class = "unknown"))
 ```
 
 The default implementation works reasonably well for any kind of object,
-but the generated output may be too wide and waste precious space when displaying the tibble.
-To avoid this for `foo`, you'd write
+but the generated output may be too wide and waste precious space when displaying the tibble:
 
-```r
+```{r}
+type_sum(foo(1:10))
+```
+
+To avoid this for provide a method for `type_sum()`:
+
+```{r}
 #' @export
 type_sum.foo <- function(x, ...) {
   "foo"
 }
-```
 
+type_sum(foo(1:10))
+```
 
 ## `obj_sum()`
 
-This method is primarily used for displaying list columns.
-A list column is a powerful way to attach hierarchical or unstructured data to an observation in a data frame.
-Implementations of `obj_sum()` are expected to return a character vector as long as the input, with brief description of the contents of each input element.
+This method is primarily used for displaying list columns. A list column is a powerful way to attach hierarchical or unstructured data to an observation in a data frame. Implementations of `obj_sum()` are expected to return a character vector as long as the input, with brief description of the contents of each input element.
+
 Examples:
 
 ```{r}
@@ -70,16 +76,31 @@ obj_sum(1)
 obj_sum(1:10)
 obj_sum(Sys.time())
 obj_sum(list(1:5))
-obj_sum(as.list(1:5))
+obj_sum(list("a", "b", "c"))
 ```
 
-The default implementation calls `type_sum()` and appends the size of the object in brackets.
-If `foo` encapsulates a simple vector, or a list, the default should be fine, and you don't need to override `obj_sum()`.
-An example for a necessary override is the included implementation for the `POSIXlt` class.
-Recall that objects of this class are stored as named lists where each component has the same length.
-Because of this, using objects of this class is not recommended in a tibble or data frame,
-and the summary method just returns the same text without revealing the data:
+The default implementation calls `type_sum()` and appends the size of the object in brackets. If your object is built on top of an atomic vector the default will be adequate. You, will, however, need to provide a method if your object is vectorised and built on top of a list.
+
+An example of an object of this type in base R `POSIXlt`: it is a list with 9 components.
 
 ```{r}
-tibble:::obj_sum.POSIXlt
+x <- as.POSIXlt(Sys.time() + c(0, 60, 3600)) 
+str(unclass(x))
+```
+
+But it pretends to be a vector with 3 elements:
+
+```{r}
+x
+length(x)
+str(x)
+```
+
+So we need to define a method that returns a character vector the same length as `x`:
+
+```{r}
+#' @export
+obj_sum.POSIXlt <- function(x) {
+  rep("POSIXlt", length(x))
+}
 ```
