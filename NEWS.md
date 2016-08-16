@@ -15,29 +15,29 @@
 - `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
 
 
-# tibble 1.1-5 (2016-07-31)
+## tibble 1.1-5 (2016-07-31)
 
 - `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
 
 
-# tibble 1.1-4 (2016-07-31)
+## tibble 1.1-4 (2016-07-31)
 
 - `as_tibble.matrix()` doesn't add the `class` attribute of the original matrix to the columns of the new data frame. A test had to be adapted for this, but it used a matrix of `Date` objects which don't seem to be that useful in R (#110).
 
 
-# tibble 1.1-3 (2016-07-30)
+## tibble 1.1-3 (2016-07-30)
 
 - Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
 - Use `dttm` instead of `time` for `POSIXt` values (#133).
 - Rename `frame_data()` to `nibble()`, the former is still available as alias (#132).
 
 
-# tibble 1.1-2 (2016-07-29)
+## tibble 1.1-2 (2016-07-29)
 
 - Back-tick non-semantic column names (#131).
 
 
-# tibble 1.1-1 (2016-07-13)
+## tibble 1.1-1 (2016-07-13)
 
 - Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).
 - Minor changes in vignette (#115, @helix123).
