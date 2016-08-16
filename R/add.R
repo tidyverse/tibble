@@ -66,6 +66,8 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, all values must have one element for each row
 #'   in the data frame, or be of length 1
+#' @param .before,.after One-based column index or column name where to add the
+#'   new columns, default: after last column
 #' @family addition
 #' @examples
 #' # add_row ---------------------------------
@@ -83,7 +85,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 #' add_column(df, z = 1:5)
 #' }
 #' @export
-add_column <- function(.data, ...) {
+add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   df <- tibble(...)
 
   if (ncol(df) == 0L) {
@@ -101,11 +103,27 @@ add_column <- function(.data, ...) {
     )
   }
 
-  structure(cbind(.data, df), class = class(.data))
+  position <- position_from_before_after_names(.before, .after, colnames(.data))
+
+  if (position <= 0L) {
+    structure(cbind(df, .data), class = class(.data))
+  } else if (position >= ncol(.data)) {
+    structure(cbind(.data, df), class = class(.data))
+  } else {
+    indexes <- seq_len(position)
+    structure(cbind(.data[indexes], df, .data[-indexes]), class = class(.data))
+  }
 }
 
 
 # helpers -----------------------------------------------------------------
+
+position_from_before_after_names <- function(.before, .after, names) {
+  .before <- check_names_before_after(.before, names)
+  .after <- check_names_before_after(.after, names)
+
+  position_from_before_after(.before, .after, length(names))
+}
 
 position_from_before_after <- function(.before, .after, len) {
   if (is.null(.before)) {

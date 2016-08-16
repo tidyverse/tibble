@@ -4,13 +4,16 @@
 \alias{add_column}
 \title{Add columns to a data frame}
 \usage{
-add_column(.data, ...)
+add_column(.data, ..., .before = NULL, .after = NULL)
 }
 \arguments{
 \item{.data}{Data frame to append to.}
 
 \item{...}{Name-value pairs, all values must have one element for each row
 in the data frame, or be of length 1}
+
+\item{.before, .after}{One-based column index or column name where to add the
+new columns, default: after last column}
 }
 \description{
 This is a convenient way to add one or more columns to an existing data
