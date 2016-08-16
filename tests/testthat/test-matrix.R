@@ -15,6 +15,13 @@ test_that("preserves col names", {
   expect_equal(names(out), c("a", "b"))
 })
 
+test_that("creates col names", {
+  x <- matrix(1:4, nrow = 2)
+
+  out <- as_tibble(x)
+  expect_equal(names(out), c("V1", "V2"))
+})
+
 test_that("preserves attributes except dim, names, and class", {
   date <- Sys.Date() + 0:3
   dim(date) <- c(2, 2)
