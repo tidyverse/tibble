@@ -109,9 +109,6 @@ shrink_mat <- function(df, width, rows, n, star) {
   else
     needs_dots <- (rows > n)
   if (needs_dots) {
-    dot_width <- pmin(w[-1][!too_wide], 3)
-    dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""),
-      FUN.VALUE = character(1))
     rows_missing <- rows - n
   } else {
     rows_missing <- 0L
