@@ -104,6 +104,22 @@ test_that("add_column() keeps class of object", {
   expect_equal(class(as_tibble(iris)), class(iris_new))
 })
 
+test_that("add_column() keeps class of object when adding in the middle", {
+  iris_new <- add_column(iris, x = 1:150, .after = 3)
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_column(as_tibble(iris), x = 1:150)
+  expect_equal(class(as_tibble(iris)), class(iris_new))
+})
+
+test_that("add_column() keeps class of object when adding in the beginning", {
+  iris_new <- add_column(iris, x = 1:150, .after = 0)
+  expect_equal(class(iris), class(iris_new))
+
+  iris_new <- add_column(as_tibble(iris), x = 1:150)
+  expect_equal(class(as_tibble(iris)), class(iris_new))
+})
+
 test_that("add_column() keeps unchanged if no arguments", {
   expect_identical(iris, add_column(iris))
 })
@@ -132,4 +148,41 @@ test_that("can recycle when adding columns", {
   expect_identical(ncol(df_new), ncol(df) + 2L)
   expect_identical(df_new$b, rep(4, 3))
   expect_identical(df_new$c, 3:1)
+})
+
+test_that("can add as first column via .before = 1", {
+  df <- tibble(a = 3L)
+  df_new <- add_column(df, b = 2L, .before = 1)
+  expect_identical(ncol(df_new), ncol(df) + 1L)
+  expect_identical(names(df_new), c("b", "a"))
+  expect_identical(df_new$b, 2L)
+})
+
+test_that("can add as first column via .after = 0", {
+  df <- tibble(a = 3L)
+  df_new <- add_column(df, b = 2L, .after = 0)
+  expect_identical(ncol(df_new), ncol(df) + 1L)
+  expect_identical(names(df_new), c("b", "a"))
+  expect_identical(df_new$b, 2L)
+})
+
+test_that("can add column inbetween", {
+  df <- tibble(a = 1:3, c = 4:6)
+  df_new <- add_column(df, b = -1:1, .after = 1)
+  expect_identical(ncol(df_new), ncol(df) + 1L)
+  expect_identical(names(df_new), c("a", "b", "c"))
+  expect_identical(df_new$b, -1:1)
+})
+
+test_that("can add column relative to named column", {
+  df <- tibble(a = 1:3, c = 4:6)
+  df_new <- add_column(df, b = -1:1, .before = "c")
+  expect_identical(ncol(df_new), ncol(df) + 1L)
+  expect_identical(names(df_new), c("a", "b", "c"))
+  expect_identical(df_new$b, -1:1)
+})
+
+test_that("error if both .before and .after are given", {
+  df <- tibble(a = 1:3)
+  expect_error(add_column(df, a = 4:5, .after = 2, .before = 3))
 })
