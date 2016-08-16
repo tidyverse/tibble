@@ -118,23 +118,23 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
 # helpers -----------------------------------------------------------------
 
-pos_from_before_after_names <- function(.before, .after, names) {
-  .before <- check_names_before_after(.before, names)
-  .after <- check_names_before_after(.after, names)
+pos_from_before_after_names <- function(before, after, names) {
+  before <- check_names_before_after(before, names)
+  after <- check_names_before_after(after, names)
 
-  pos_from_before_after(.before, .after, length(names))
+  pos_from_before_after(before, after, length(names))
 }
 
-pos_from_before_after <- function(.before, .after, len) {
-  if (is.null(.before)) {
-    if (is.null(.after)) {
+pos_from_before_after <- function(before, after, len) {
+  if (is.null(before)) {
+    if (is.null(after)) {
       len
     } else {
-      .after
+      after
     }
   } else {
-    if (is.null(.after)) {
-      .before - 1L
+    if (is.null(after)) {
+      before - 1L
     } else {
       stopc("Can't specify both .before and .after")
     }
