@@ -198,7 +198,8 @@ test_that("can add column relative to named column", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_error(add_column(df, a = 4:5, .after = 2, .before = 3))
+  expect_error(add_column(df, b = 4:6, .after = 2, .before = 3),
+               "Can't specify both [.]before and [.]after")
 })
 
 test_that("missing row names stay missing when adding column", {
