@@ -1,8 +1,8 @@
-context("nibble()")
+context("tribble()")
 
-test_that("nibble() constructs 'tibble' as expected", {
+test_that("tribble() constructs 'tibble' as expected", {
 
-  result <- nibble(
+  result <- tribble(
     ~colA, ~colB,
     "a", 1,
     "b", 2
@@ -12,7 +12,7 @@ test_that("nibble() constructs 'tibble' as expected", {
   expect_equal(result, compared)
 
   ## wide
-  wide <- nibble(
+  wide <- tribble(
     ~colA, ~colB, ~colC, ~colD,
     1, 2, 3, 4,
     5, 6, 7, 8
@@ -28,7 +28,7 @@ test_that("nibble() constructs 'tibble' as expected", {
   expect_equal(wide, wide_expectation)
 
   ## long
-  long <- nibble(
+  long <- tribble(
     ~colA, ~colB,
     1, 6,
     2, 7,
@@ -46,34 +46,34 @@ test_that("nibble() constructs 'tibble' as expected", {
 
 })
 
-test_that("nibble() creates lists for non-atomic inputs (#7)", {
+test_that("tribble() creates lists for non-atomic inputs (#7)", {
   expect_identical(
-    nibble(~a, ~b, NA, "A", letters, LETTERS[-1L]),
+    tribble(~a, ~b, NA, "A", letters, LETTERS[-1L]),
     tibble(a = list(NA, letters), b = list("A", LETTERS[-1L]))
   )
 
   expect_identical(
-    nibble(~a, ~b, NA, NULL, 1, 2),
+    tribble(~a, ~b, NA, NULL, 1, 2),
     tibble(a = c(NA, 1), b = list(NULL, 2))
   )
 })
 
-test_that("nibble() errs appropriately on bad calls", {
+test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(nibble(a~b), "single argument")
+  expect_error(tribble(a~b), "single argument")
 
   # invalid colname syntax
-  expect_error(nibble(~a + b), "symbol or string")
+  expect_error(tribble(~a + b), "symbol or string")
 
-  # nibble() must be passed colnames
-  expect_error(nibble(
+  # tribble() must be passed colnames
+  expect_error(tribble(
     "a", "b",
     1, 2
   ))
 
-  # nibble() must produce rectangular structure (no filling)
-  expect_error(nibble(
+  # tribble() must produce rectangular structure (no filling)
+  expect_error(tribble(
     ~a, ~b, ~c,
     1, 2,
     3, 4, 5
@@ -81,8 +81,8 @@ test_that("nibble() errs appropriately on bad calls", {
 
 })
 
-test_that("nibble can have list columns", {
-  df <- nibble(
+test_that("tribble can have list columns", {
+  df <- tribble(
     ~x, ~y,
     1,  list(a = 1),
     2,  list(b = 2)
@@ -91,13 +91,13 @@ test_that("nibble can have list columns", {
   expect_equal(df$y, list(list(a = 1), list(b = 2)))
 })
 
-test_that("nibble creates n-col empty data frame", {
-  df <- nibble(~x, ~y)
+test_that("tribble creates n-col empty data frame", {
+  df <- tribble(~x, ~y)
   expect_equal(names(df), c("x", "y"))
 })
 
-test_that("nibble recognizes quoted non-formula call", {
-  df <- nibble(
+test_that("tribble recognizes quoted non-formula call", {
+  df <- tribble(
     ~x, ~y,
     quote(mean(1)), 1
   )

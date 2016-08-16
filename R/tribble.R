@@ -4,7 +4,7 @@
 #' in columns. This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' \code{frame_data()} is an older name for \code{nibble()}. It will eventually
+#' \code{frame_data()} is an older name for \code{tribble()}. It will eventually
 #' be phased out.
 #'
 #' @param ... Arguments specifying the structure of a \code{tibble}.
@@ -12,21 +12,21 @@
 #' @return A \code{\link{tibble}}.
 #' @export
 #' @examples
-#' nibble(
+#' tribble(
 #'   ~colA, ~colB,
 #'   "a",   1,
 #'   "b",   2,
 #'   "c",   3
 #' )
 #'
-#' # nibble will create a list column if the value in each cell is
+#' # tribble will create a list column if the value in any cell is
 #' # not a scalar
-#' nibble(
+#' tribble(
 #'   ~x,  ~y,
 #'   "a", 1:3,
 #'   "b", 4:6
 #' )
-nibble <- function(...) {
+tribble <- function(...) {
 
   dots <- list(...)
 
@@ -62,7 +62,7 @@ nibble <- function(...) {
   }
 
   if (!length(frame_names)) {
-    stopc("no column names detected in 'nibble()' call")
+    stopc("no column names detected in 'tribble()' call")
   }
 
   frame_rest <- dots[i:length(dots)]
@@ -75,7 +75,7 @@ nibble <- function(...) {
   if (n_elements %% frame_ncol != 0) {
     stopc(
       sprintf(
-        "invalid 'nibble()' specification: had %s elements and %s columns",
+        "invalid 'tribble()' specification: had %s elements and %s columns",
         n_elements,
         frame_ncol
       )
@@ -98,5 +98,5 @@ nibble <- function(...) {
 }
 
 #' @export
-#' @rdname nibble
-frame_data <- nibble
+#' @rdname tribble
+frame_data <- tribble
