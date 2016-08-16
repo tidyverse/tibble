@@ -1,7 +1,7 @@
 #' Add rows to a data frame
 #'
 #' This is a convenient way to add one or more rows of data to an existing data
-#' frame. See \code{\link{nibble}} for an easy way to create an complete
+#' frame. See \code{\link{tribble}} for an easy way to create an complete
 #' data frame row-by-row.
 #'
 #' @param .data Data frame to append to.
