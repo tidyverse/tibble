@@ -1,7 +1,7 @@
 ## tibble 1.1-7 (2016-08-17)
 
 - `print.tbl_df()` gains `n_extra` method and will have the same interface as `trunc_mat()` from now on.
-- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman`.
+- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman` (#121).
 - Full test coverage.
 
 
