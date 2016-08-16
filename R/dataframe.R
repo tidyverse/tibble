@@ -81,9 +81,8 @@ lst_ <- function(xs) {
   col_names <- names2(xs)
   missing_names <- col_names == ""
   if (any(missing_names)) {
-    deparse2 <- function(x) paste(deparse(x$expr, 500L), collapse = "")
-    defaults <- vapply(xs[missing_names], deparse2, character(1),
-      USE.NAMES = FALSE)
+    missing_exprs <- lapply(xs[missing_names], `[[`, "expr")
+    defaults <- vapply(missing_exprs, deparse2, character(1), USE.NAMES = FALSE)
     col_names[missing_names] <- defaults
   }
 
