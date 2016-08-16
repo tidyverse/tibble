@@ -11,8 +11,8 @@ check_names_df.character <- function(j, x) {
 
   pos <- safe_match(j, names(x))
   if(any(is.na(pos))){
-    names <- j[is.na(pos)]
-    stopc("Unknown columns ", format_n(names))
+    unknown_names <- j[is.na(pos)]
+    stopc("Unknown columns ", format_n(unknown_names))
   }
   pos
 }
