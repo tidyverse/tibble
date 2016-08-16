@@ -13,6 +13,7 @@
 #'   if the width is too small for the entire tibble. If `NULL`, the
 #'   default, will print information about at most `tibble.max_extra_cols`
 #'   extra columns.
+#' @param row_numbers Show row numbers? Default: \code{TRUE}
 #' @seealso \link{tibble-package}
 #' @keywords internal
 #' @examples
@@ -34,7 +35,7 @@ NULL
 #' @export
 #' @rdname formatting
 #' @importFrom stats setNames
-trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
+trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL, row_numbers = TRUE) {
   rows <- nrow(x)
 
   if (is_null(n)) {
@@ -49,7 +50,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   df <- as.data.frame(head(x, n))
   width <- tibble_width(width)
 
-  shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
+  shrunk <- shrink_mat(df, width, rows, n, row_numbers, star = has_rownames(x))
   trunc_info <- list(
     width = width, rows_total = rows, rows_min = nrow(df),
     n_extra = n_extra, summary = tbl_sum(x)
@@ -62,7 +63,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 }
 
 #' @importFrom stats setNames
-shrink_mat <- function(df, width, rows, n, star) {
+shrink_mat <- function(df, width, rows, n, row_numbers, star) {
   var_types <- map_chr(df, type_sum)
 
   if (ncol(df) == 0 || nrow(df) == 0) {
@@ -130,11 +131,11 @@ shrink_mat <- function(df, width, rows, n, star) {
   }
 
   extra_wide[seq_along(too_wide)] <- too_wide
-  new_shrunk_mat(shrunk, var_types[extra_wide], rows_missing)
+  new_shrunk_mat(shrunk, var_types[extra_wide], rows_missing, row_numbers)
 }
 
-new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
-  list(table = table, extra = extra, rows_missing = rows_missing)
+new_shrunk_mat <- function(table, extra, rows_missing = NULL, row_numbers = TRUE) {
+  list(table = table, extra = extra, rows_missing = rows_missing, row_numbers = row_numbers)
 }
 
 #' @export

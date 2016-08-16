@@ -10,14 +10,14 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @rdname formatting
 #' @export
-format.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  format(trunc_mat(x, n = n, width = width, n_extra = n_extra))
+format.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL, row_numbers = TRUE) {
+  format(trunc_mat(x, n = n, width = width, n_extra = n_extra, row_numbers = row_numbers))
 }
 
 #' @rdname formatting
 #' @export
-print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL, row_numbers = TRUE) {
+  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra, row_numbers = row_numbers))
   invisible(x)
 }
 
