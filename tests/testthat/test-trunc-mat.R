@@ -1,5 +1,14 @@
 context("Truncated matrix")
 
+test_that("interface of print() identical to trunc_mat()", {
+  print_arg_names <- names(formals(print.tbl_df))
+  print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
+
+  trunc_mat_arg_names <- names(formals(trunc_mat))
+
+  expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
+})
+
 test_that("print() returns output invisibly", {
   expect_output(ret <- withVisible(print(as_tibble(mtcars))))
   expect_false(ret$visible)

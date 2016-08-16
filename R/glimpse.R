@@ -19,10 +19,7 @@
 #' @export
 #' @examples
 #' glimpse(mtcars)
-#'
-#' if (require("Lahman")) {
-#'   glimpse(Lahman::Batting)
-#' }
+#' glimpse(nycflights13::flights)
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
 }
