@@ -1,3 +1,5 @@
+# check_names_df ----------------------------------------------------------
+
 check_names_df <- function(j, ...) UseMethod("check_names_df")
 
 #' @export
@@ -54,16 +56,20 @@ check_names_df.logical <- function(j, x) {
   seq_along(x)[j]
 }
 
+check_needs_no_dim <- function(j) {
+  if (needs_dim(j)) {
+    stopc("Unsupported use of matrix or array for column indexing")
+  }
+}
+
+
+# check_names_before_after ------------------------------------------------
+
 check_names_before_after <- function(j, ...) UseMethod("check_names_before_after")
 
 #' @export
 check_names_before_after.default <- function(j, ...) {
-  stopc("Unsupported index type: ", class(j)[[1L]])
-}
-
-#' @export
-check_names_before_after.NULL <- function(j, ...) {
-  NULL
+  j
 }
 
 #' @export
@@ -76,30 +82,4 @@ check_names_before_after.character <- function(j, names) {
     stopc("Unknown columns ", format_n(unknown_names))
   }
   pos
-}
-
-#' @export
-check_names_before_after.numeric <- function(j, names) {
-  check_needs_no_dim(j)
-
-  if (any(is.na(j))) {
-    stopc("NA column indexes not supported")
-  }
-
-  non_integer <- (j != trunc(j))
-  if (any(non_integer)) {
-    stopc("Invalid non-integer column indexes: ", format_n(j[non_integer]))
-  }
-  invalid <- (j < 0 | j > length(names) + 1)
-  if (any(invalid)) {
-    stopc("Invalid column indexes: ", format_n(j[invalid]))
-  }
-
-  j
-}
-
-check_needs_no_dim <- function(j) {
-  if (needs_dim(j)) {
-    stopc("Unsupported use of matrix or array for column indexing")
-  }
 }
