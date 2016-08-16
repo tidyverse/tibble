@@ -54,6 +54,50 @@ check_names_df.logical <- function(j, x) {
   seq_along(x)[j]
 }
 
+check_names_before_after <- function(j, ...) UseMethod("check_names_before_after")
+
+#' @export
+check_names_before_after.default <- function(j, ...) {
+  stopc("Unsupported index type: ", class(j)[[1L]])
+}
+
+#' @export
+check_names_before_after.NULL <- function(j, ...) {
+  NULL
+}
+
+#' @export
+check_names_before_after.character <- function(j, x) {
+  check_needs_no_dim(j)
+
+  pos <- safe_match(j, names(x))
+  if(any(is.na(pos))){
+    names <- j[is.na(pos)]
+    stopc("Unknown columns ", format_n(names))
+  }
+  pos
+}
+
+#' @export
+check_names_before_after.numeric <- function(j, x) {
+  check_needs_no_dim(j)
+
+  if (any(is.na(j))) {
+    stopc("NA column indexes not supported")
+  }
+
+  non_integer <- (j != trunc(j))
+  if (any(non_integer)) {
+    stopc("Invalid non-integer column indexes: ", format_n(j[non_integer]))
+  }
+  invalid <- (j < 0 | j > length(x) + 1)
+  if (any(invalid)) {
+    stopc("Invalid column indexes: ", format_n(j[invalid]))
+  }
+
+  j
+}
+
 check_needs_no_dim <- function(j) {
   if (needs_dim(j)) {
     stopc("Unsupported use of matrix or array for column indexing")
