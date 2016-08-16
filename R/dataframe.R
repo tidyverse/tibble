@@ -199,11 +199,7 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ...) {
-  x <- matrixToDataFrame(x)
-  if (is.null(colnames(x))) {
-    colnames(x) <- paste0("V", seq_len(ncol(x)))
-  }
-  x
+  matrixToDataFrame(x)
 }
 
 #' @export
