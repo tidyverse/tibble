@@ -1,3 +1,13 @@
+## tibble 1.1-6 (2016-08-16)
+
+- Internal: Cleanup of formatting code.
+- `add_row()` now correctly handles existing columns of type `list` that are not updated (#148).
+- `nibble()` has been renamed to `tribble()`, stands for "transposed tibble" (#143).
+- `add_row()` and `add_column()` gain `.before` and `.after` arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named `.before` or `.after` (#99).
+- New `add_column()`, analogously to `add_row()` (#99).
+- `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
+
+
 # tibble 1.1-5 (2016-07-31)
 
 - `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
