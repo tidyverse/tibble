@@ -1,3 +1,30 @@
+## tibble 1.1-6 (2016-08-16)
+
+- Internal: Cleanup of formatting code.
+- `add_row()` now correctly handles existing columns of type `list` that are not updated (#148).
+- `nibble()` has been renamed to `tribble()`, stands for "transposed tibble" (#143).
+- `add_row()` and `add_column()` gain `.before` and `.after` arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named `.before` or `.after` (#99).
+- New `add_column()`, analogously to `add_row()` (#99).
+- `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
+
+
+# tibble 1.1-5 (2016-07-31)
+
+- `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
+
+
+# tibble 1.1-4 (2016-07-31)
+
+- `as_tibble.matrix()` doesn't add the `class` attribute of the original matrix to the columns of the new data frame. A test had to be adapted for this, but it used a matrix of `Date` objects which don't seem to be that useful in R (#110).
+
+
+# tibble 1.1-3 (2016-07-30)
+
+- Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
+- Use `dttm` instead of `time` for `POSIXt` values (#133).
+- Rename `frame_data()` to `nibble()`, the former is still available as alias (#132).
+
+
 # tibble 1.1-2 (2016-07-29)
 
 - Back-tick non-semantic column names (#131).

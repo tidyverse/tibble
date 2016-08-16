@@ -6,12 +6,12 @@
 using namespace Rcpp;
 
 // matrixToDataFrame
-List matrixToDataFrame(RObject x);
+List matrixToDataFrame(SEXP x);
 RcppExport SEXP tibble_matrixToDataFrame(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< RObject >::type x(xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
     __result = Rcpp::wrap(matrixToDataFrame(x));
     return __result;
 END_RCPP
