@@ -49,13 +49,15 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   pos <- pos_from_before_after(.before, .after, nrow(.data))
 
   if (pos <= 0L) {
-    structure(rbind(df, .data), class = class(.data))
+    out <- rbind(df, .data)
   } else if (pos >= nrow(.data)) {
-    rbind(.data, df)
+    out <- rbind(.data, df)
   } else {
     indexes <- seq_len(pos)
-    rbind(.data[indexes, ], df, .data[-indexes, ])
+    out <- rbind(.data[indexes, ], df, .data[-indexes, ])
   }
+
+  set_class(remove_rownames(out), class(.data))
 }
 
 #' Add columns to a data frame
@@ -106,13 +108,15 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
   if (pos <= 0L) {
-    structure(cbind(df, .data), class = class(.data))
+    out <- cbind(df, .data)
   } else if (pos >= ncol(.data)) {
-    structure(cbind(.data, df), class = class(.data))
+    out <- cbind(.data, df)
   } else {
     indexes <- seq_len(pos)
-    structure(cbind(.data[indexes], df, .data[-indexes]), class = class(.data))
+    out <- cbind(.data[indexes], df, .data[-indexes])
   }
+
+  set_class(remove_rownames(out), class(.data))
 }
 
 

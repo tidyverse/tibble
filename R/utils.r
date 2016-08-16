@@ -32,6 +32,8 @@ needs_dim <- function(x) {
   length(dim(x)) > 1L
 }
 
+set_class <- `class<-`
+
 is_1d <- function(x) {
   # dimension check is for matrices and data.frames
   is_vector(x) && !needs_dim(x)
