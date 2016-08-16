@@ -19,7 +19,7 @@
 #'   "c",   3
 #' )
 #'
-#' # tribble will create a list column if the value in each cell is
+#' # tribble will create a list column if the value in any cell is
 #' # not a scalar
 #' tribble(
 #'   ~x,  ~y,
