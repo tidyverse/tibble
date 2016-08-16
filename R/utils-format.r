@@ -59,7 +59,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   col_names <- tickit(colnames(df))
   names(var_types) <- col_names
 
-  # Minimum width of each column is 5 "(int)", so we can make a quick first
+  # Minimum width of each column is 5 "<int>", so we can make a quick first
   # pass
   max_cols <- floor(width / 5)
   extra_wide <- (seq_along(df) > max_cols)
@@ -108,6 +108,7 @@ shrink_mat <- function(df, width, rows, n, star) {
     needs_dots <- (nrow(df) >= n)
   else
     needs_dots <- (rows > n)
+
   if (needs_dots) {
     rows_missing <- rows - n
   } else {
