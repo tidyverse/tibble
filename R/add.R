@@ -46,14 +46,14 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   df[missing_vars] <- NA
   df <- df[names(.data)]
 
-  position <- position_from_before_after(.before, .after, nrow(.data))
+  pos <- pos_from_before_after(.before, .after, nrow(.data))
 
-  if (position <= 0L) {
+  if (pos <= 0L) {
     structure(rbind(df, .data), class = class(.data))
-  } else if (position >= nrow(.data)) {
+  } else if (pos >= nrow(.data)) {
     rbind(.data, df)
   } else {
-    indexes <- seq_len(position)
+    indexes <- seq_len(pos)
     rbind(.data[indexes, ], df, .data[-indexes, ])
   }
 }
@@ -103,14 +103,14 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     )
   }
 
-  position <- position_from_before_after_names(.before, .after, colnames(.data))
+  pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
-  if (position <= 0L) {
+  if (pos <= 0L) {
     structure(cbind(df, .data), class = class(.data))
-  } else if (position >= ncol(.data)) {
+  } else if (pos >= ncol(.data)) {
     structure(cbind(.data, df), class = class(.data))
   } else {
-    indexes <- seq_len(position)
+    indexes <- seq_len(pos)
     structure(cbind(.data[indexes], df, .data[-indexes]), class = class(.data))
   }
 }
@@ -118,14 +118,14 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
 # helpers -----------------------------------------------------------------
 
-position_from_before_after_names <- function(.before, .after, names) {
+pos_from_before_after_names <- function(.before, .after, names) {
   .before <- check_names_before_after(.before, names)
   .after <- check_names_before_after(.after, names)
 
-  position_from_before_after(.before, .after, length(names))
+  pos_from_before_after(.before, .after, length(names))
 }
 
-position_from_before_after <- function(.before, .after, len) {
+pos_from_before_after <- function(.before, .after, len) {
   if (is.null(.before)) {
     if (is.null(.after)) {
       len
