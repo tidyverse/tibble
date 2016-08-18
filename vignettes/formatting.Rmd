@@ -1,6 +1,6 @@
 ---
 title: "Formatting of column data"
-author: "Kirill Müller"
+author: "Kirill Müller, Hadley Wickham"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
