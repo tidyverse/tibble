@@ -256,7 +256,25 @@ big_mark <- function(x, ...) {
 }
 
 tibble_width <- function(width) {
-  width %||% tibble_opt("width") %||% getOption("width")
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width))
+    return(width)
+
+  getOption("width")
+}
+
+tibble_glimpse_width <- function(width) {
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width) && is.finite(width))
+    return(width)
+
+  getOption("width")
 }
 
 format_n <- function(x) collapse(quote_n(x))
