@@ -34,6 +34,14 @@ test_that("preserves attributes except dim and names", {
   expect_equal(attributes(out[[2]])$special, 42)
 })
 
+test_that("properly handles poly class (#110)", {
+  p <- poly(1:6, 3)
+  p_df <- as_tibble(p)
+
+  expect_equal(names(p_df), colnames(p))
+  expect_equal(class(p_df[[1L]]), class(p[,1]))
+})
+
 test_that("handles atomic vectors", {
   x <- matrix(TRUE, nrow = 2)
   out <- as_tibble(x)
