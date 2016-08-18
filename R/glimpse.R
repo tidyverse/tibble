@@ -12,7 +12,7 @@
 #'
 #' @param x An object to glimpse at.
 #' @param width Width of output: defaults to the setting of the option
-#'   \code{tibble.width} or the width of the console.
+#'   \code{tibble.width} (if finite) or the width of the console.
 #' @param ... Other arguments passed onto individual methods.
 #' @return x original x is (invisibly) returned, allowing \code{glimpse} to be
 #' used within a data pipe line.
@@ -30,7 +30,8 @@ glimpse <- function(x, width = NULL, ...) {
 
 #' @export
 glimpse.tbl <- function(x, width = NULL, ...) {
-  width <- tibble_width(width)
+  width <- tibble_glimpse_width(width)
+  stopifnot(is.finite(width))
 
   cat("Observations: ", big_mark(nrow(x)), "\n", sep = "")
   if (ncol(x) == 0) return(invisible())
