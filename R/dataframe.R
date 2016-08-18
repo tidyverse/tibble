@@ -203,6 +203,11 @@ as_tibble.matrix <- function(x, ...) {
 }
 
 #' @export
+as_tibble.poly <- function(x, ...) {
+  as_tibble(unclass(x))
+}
+
+#' @export
 #' @param n Name for count column, default: \code{"n"}.
 #' @rdname as_tibble
 as_tibble.table <- function(x, n = "n", ...) {

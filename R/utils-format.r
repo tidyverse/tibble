@@ -23,6 +23,9 @@
 #' print(as_tibble(mtcars), n = 3)
 #' print(as_tibble(mtcars), n = 100)
 #'
+#' if (!requireNamespace("nycflights13", quietly = TRUE))
+#'   stop("Please install the nycflights13 package to run the rest of this example")
+#'
 #' print(nycflights13::flights, n_extra = 2)
 #' print(nycflights13::flights, width = Inf)
 #' @name formatting
@@ -253,7 +256,25 @@ big_mark <- function(x, ...) {
 }
 
 tibble_width <- function(width) {
-  width %||% tibble_opt("width") %||% getOption("width")
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width))
+    return(width)
+
+  getOption("width")
+}
+
+tibble_glimpse_width <- function(width) {
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width) && is.finite(width))
+    return(width)
+
+  getOption("width")
 }
 
 format_n <- function(x) collapse(quote_n(x))

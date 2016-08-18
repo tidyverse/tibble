@@ -1,7 +1,16 @@
+## tibble 1.1-8 (2016-08-18)
+
+- The `tibble.width` option is used for `glimpse()` only if it is finite (#153).
+- Add guidance to install `nycflights13` package to examples (#152).
+- New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (#151).
+- `as_tibble.matrix()` doesn't remove the `"class"` attribute anymore, to support (again) conversion of `factor` and `Date` matrices (#110, #154).
+- New `as_tibble.poly()` to support conversion of a `poly` object to a tibble.
+
+
 ## tibble 1.1-7 (2016-08-17)
 
 - `print.tbl_df()` gains `n_extra` method and will have the same interface as `trunc_mat()` from now on.
-- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman`.
+- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman` (#121).
 - Full test coverage.
 
 
