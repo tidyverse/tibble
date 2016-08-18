@@ -22,7 +22,7 @@ test_that("creates col names", {
   expect_equal(names(out), c("V1", "V2"))
 })
 
-test_that("preserves attributes except dim, names, and class", {
+test_that("preserves attributes except dim and names", {
   date <- Sys.Date() + 0:3
   dim(date) <- c(2, 2)
   colnames(date) <- c("a", "b")
@@ -30,7 +30,7 @@ test_that("preserves attributes except dim, names, and class", {
 
   out <- as_tibble.matrix(date)
   expect_null(attributes(out[[1]])$names)
-  expect_null(attributes(out[[1]])$class)
+  expect_equal(attributes(out[[1]])$class, "Date")
   expect_equal(attributes(out[[2]])$special, 42)
 })
 
