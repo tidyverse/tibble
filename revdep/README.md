@@ -18,13 +18,13 @@
 |:--------------|:--|:-------|:----------|:------------------------|
 |assertthat     |   |0.1     |2013-12-06 |cran (@0.1)              |
 |knitr          |   |1.14    |2016-08-13 |cran (@1.14)             |
-|Lahman         |   |4.0-1   |2015-09-15 |cran (@4.0-1)            |
 |lazyeval       |   |0.2.0   |2016-06-12 |cran (@0.2.0)            |
 |microbenchmark |   |1.4-2.1 |2015-11-25 |cran (@1.4-2.1)          |
+|nycflights13   |   |0.2.0   |2016-04-30 |cran (@0.2.0)            |
 |Rcpp           |   |0.12.6  |2016-07-19 |cran (@0.12.6)           |
 |rmarkdown      |   |1.0     |2016-07-08 |cran (@1.0)              |
 |testthat       |   |1.0.2   |2016-04-23 |cran (@1.0.2)            |
-|tibble         |   |1.1     |2016-08-19 |local (hadley/tibble@NA) |
+|tibble         |   |1.1-8   |2016-08-19 |local (hadley/tibble@NA) |
 |withr          |   |1.0.2   |2016-06-20 |cran (@1.0.2)            |
 
 # Check results
@@ -40,11 +40,8 @@ checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘bigrf’
 
 checking dependencies in R code ... NOTE
-#
-# There is insufficient memory for the Java Runtime Environment to continue.
-# Native memory allocation (malloc) failed to allocate 56 bytes for AllocateHeap
-# An error report file with more information is saved as:
-# /home/muelleki/git/R/tibble/revdep/checks/blkbox.Rcheck/00_pkg_src/blkbox/hs_err_pid25697.log
+Error occurred during initialization of VM
+Could not allocate metaspace: 1073741824 bytes
 ```
 
 ## cellranger (1.1.0)
