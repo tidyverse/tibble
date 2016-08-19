@@ -17,7 +17,7 @@
 - `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
 - Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
 - Back-tick non-semantic column names on output (#131).
-- Use `dttm` instead of `time` for `POSIXt` values (#133).
+- Use `dttm` instead of `time` for `POSIXt` values (#133), which is now used for columns of the `difftime` class.
 - Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).
 
 ## Documentation
