@@ -1,3 +1,8 @@
+## tibble 1.1-9 (2016-08-19)
+
+- Revdep checks.
+
+
 ## tibble 1.1-8 (2016-08-18)
 
 - The `tibble.width` option is used for `glimpse()` only if it is finite (#153).
