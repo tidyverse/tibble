@@ -1,3 +1,5 @@
+# tibble 1.2 (2016-08-26)
+
 ## Bug fixes
 
 - The `tibble.width` option is used for `glimpse()` only if it is finite (#153, @kwstat).
