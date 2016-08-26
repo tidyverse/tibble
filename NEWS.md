@@ -1,59 +1,31 @@
-## tibble 1.1-9 (2016-08-19)
+# tibble 1.2 (2016-08-26)
 
-- Revdep checks.
+## Bug fixes
 
-
-## tibble 1.1-8 (2016-08-18)
-
-- The `tibble.width` option is used for `glimpse()` only if it is finite (#153).
-- Add guidance to install `nycflights13` package to examples (#152).
-- New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (#151).
-- `as_tibble.matrix()` doesn't remove the `"class"` attribute anymore, to support (again) conversion of `factor` and `Date` matrices (#110, #154).
-- New `as_tibble.poly()` to support conversion of a `poly` object to a tibble.
-
-
-## tibble 1.1-7 (2016-08-17)
-
-- `print.tbl_df()` gains `n_extra` method and will have the same interface as `trunc_mat()` from now on.
-- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman` (#121).
-- Full test coverage.
-
-
-## tibble 1.1-6 (2016-08-16)
-
-- Internal: Cleanup of formatting code.
+- The `tibble.width` option is used for `glimpse()` only if it is finite (#153, @kwstat).
+- New `as_tibble.poly()` to support conversion of a `poly` object to a tibble (#110).
 - `add_row()` now correctly handles existing columns of type `list` that are not updated (#148).
-- `nibble()` has been renamed to `tribble()`, stands for "transposed tibble" (#143).
-- `add_row()` and `add_column()` gain `.before` and `.after` arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named `.before` or `.after` (#99).
-- New `add_column()`, analogously to `add_row()` (#99).
-- `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
-
-
-## tibble 1.1-5 (2016-07-31)
-
 - `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
 
+## Interface changes
 
-## tibble 1.1-4 (2016-07-31)
+- New `add_column()`, analogously to `add_row()` (#99).
+- `print.tbl_df()` gains `n_extra` method and will have the same interface as `trunc_mat()` from now on.
+- `add_row()` and `add_column()` gain `.before` and `.after` arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named `.before` or `.after` (#99).
+- Rename `frame_data()` to `tribble()`, stands for "transposed tibble". The former is still available as alias (#132, #143).
 
-- `as_tibble.matrix()` doesn't add the `class` attribute of the original matrix to the columns of the new data frame. A test had to be adapted for this, but it used a matrix of `Date` objects which don't seem to be that useful in R (#110).
+## Features
 
-
-## tibble 1.1-3 (2016-07-30)
-
+- `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
 - Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
-- Use `dttm` instead of `time` for `POSIXt` values (#133).
-- Rename `frame_data()` to `nibble()`, the former is still available as alias (#132).
-
-
-## tibble 1.1-2 (2016-07-29)
-
-- Back-tick non-semantic column names (#131).
-
-
-## tibble 1.1-1 (2016-07-13)
-
+- Back-tick non-semantic column names on output (#131).
+- Use `dttm` instead of `time` for `POSIXt` values (#133), which is now used for columns of the `difftime` class.
 - Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).
+
+## Documentation
+
+- New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (#151).
+- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman` (#121), with guidance to install `nycflights13` package if necessary (#152).
 - Minor changes in vignette (#115, @helix123).
 
 
