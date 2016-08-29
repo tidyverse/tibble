@@ -102,7 +102,11 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   if (nrow(df) != nrow(.data)) {
-    stopc("Expected ", nrow(.data), " rows, got ", nrow(df))
+    if (nrow(df) == 1) {
+      df <- do.call(rbind, replicate(nrow(.data), df, simplify = FALSE))
+    } else {
+      stopc("Expected ", nrow(.data), " rows, got ", nrow(df))
+    }
   }
 
   extra_vars <- intersect(names(df), names(.data))

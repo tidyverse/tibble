@@ -164,6 +164,21 @@ test_that("can recycle when adding columns", {
   expect_identical(df_new$c, 3:1)
 })
 
+test_that("can recycle when adding a column of length 1", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4)
+  expect_identical(ncol(df_new), ncol(df) + 1L)
+  expect_identical(df_new$b, rep(4, 3))
+})
+
+test_that("can recyle when adding multiple columns of length 1", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4, c = 5)
+  expect_identical(ncol(df_new), ncol(df) + 2L)
+  expect_identical(df_new$b, rep(4, 3))
+  expect_identical(df_new$c, rep(5, 3))
+})
+
 test_that("can add as first column via .before = 1", {
   df <- tibble(a = 3L)
   df_new <- add_column(df, b = 2L, .before = 1)
