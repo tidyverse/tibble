@@ -230,29 +230,8 @@ as_tibble.default <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as.tibble <- function(x, ...) {
-  UseMethod("as.tibble")
+  UseMethod("as_tibble")
 }
-
-#' @export
-as.tibble.tbl_df <- as_tibble.tbl_df
-
-#' @export
-as.tibble.data.frame <- as_tibble.data.frame
-
-#' @export
-as.tibble.list <- as_tibble.list
-
-#' @export
-as.tibble.matrix <- as_tibble.matrix
-
-#' @export
-as.tibble.table <- as_tibble.table
-
-#' @export
-as.tibble.NULL <- as_tibble.NULL
-
-#' @export
-as.tibble.default <- as_tibble.default
 
 #' @export
 #' @rdname as_tibble
