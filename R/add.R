@@ -103,7 +103,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   if (nrow(df) != nrow(.data)) {
     if (nrow(df) == 1) {
-      df <- do.call(rbind, replicate(nrow(.data), df, simplify = FALSE))
+      df <- df[rep(1L, nrow(.data)), ]
     } else {
       stopc("Expected ", nrow(.data), " rows, got ", nrow(df))
     }
