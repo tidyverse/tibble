@@ -1,3 +1,9 @@
+## tibble 1.2-11 (2016-08-29)
+
+- Add `as.tibble()` as an alias to `as_tibble()` (#160, @LaDilettante).
+- Added tests for `tibble_width()` and `tibble_glimpse_width()` (#163, @LaDilettante).
+
+
 ## tibble 1.2-10 (2016-08-29)
 
 - Same as 1.2.
