@@ -307,6 +307,15 @@ check_tibble <- function(x) {
     invalid_df("Date/times must be stored as POSIXct, not POSIXlt", x, posixlt)
   }
 
+  native_names <- enc2native(names(x))
+  if (any(native_names != names(x))) {
+    warning("Column names contain codepoints not representable in native encoding, using placeholders", call. = FALSE)
+    names(x) <- native_names
+  } else if (any(Encoding(native_names) != Encoding(names(x)))) {
+    warning("Converting column names to native encoding", call. = FALSE)
+    names(x) <- native_names
+  }
+
   x
 }
 
