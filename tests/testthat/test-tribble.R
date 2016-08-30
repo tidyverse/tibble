@@ -104,3 +104,24 @@ test_that("tribble recognizes quoted non-formula call", {
   expect_equal(df$x, list(quote(mean(1))))
   expect_equal(df$y, 1)
 })
+
+# ---- frame_matrix() ----
+
+test_that("frame_matrix constructs a matrix as expected", {
+  result <- frame_matrix(
+    ~col1, ~col2,
+    10,     3,
+    3,     2
+  )
+  expected <- matrix(c(10, 3, 3, 2), ncol = 2)
+  colnames(expected) <- c("col1", "col2")
+  expect_equal(result, expected)
+})
+
+test_that("frame_matrix cannot have list columns", {
+  expect_error(frame_matrix(
+    ~x,  ~y,
+    "a", 1:3,
+    "b", 4:6
+  ), "cannot have list columns")
+})

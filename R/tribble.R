@@ -27,11 +27,17 @@
 #'   "b", 4:6
 #' )
 tribble <- function(...) {
-  browser()
-  data <- extract_data(...)
 
-  frame_names <- data[[1]]
-  frame_mat <- data[[2]]
+  data <- extract_data(...)
+  frame_names <- data$frame_names
+
+  if (is.null(data$frame_rest)) {
+    out <- rep(list(logical()), length(frame_names))
+    names(out) <- frame_names
+    return(as_tibble(out))
+  }
+
+  frame_mat <- matrix(data$frame_rest, ncol = length(frame_names), byrow = TRUE)
 
   frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
     col <- frame_mat[, i]
@@ -47,6 +53,22 @@ tribble <- function(...) {
   as_tibble(frame_col)
 }
 
+frame_matrix <- function(...) {
+  data <- extract_data(...)
+  frame_names <- data$frame_names
+  frame_rest <- data$frame_rest
+
+  if (any(vapply(frame_rest, needs_list_col, logical(1)))) {
+    stopc("frame_matrix cannot have list columns")
+  }
+
+  frame_ncol <- length(frame_names)
+  frame_mat <- matrix(unlist(frame_rest), ncol = frame_ncol, byrow = TRUE)
+  colnames(frame_mat) <- frame_names
+
+  frame_mat
+}
+
 extract_data <- function(...) {
   dots <- list(...)
 
@@ -55,9 +77,7 @@ extract_data <- function(...) {
   i <- 1
   while (TRUE) {
     if (i > length(dots)) {
-      out <- rep(list(logical()), length(frame_names))
-      names(out) <- frame_names
-      return(as_tibble(out))
+      return(list(frame_names = frame_names, frame_rest = NULL))
     }
 
     el <- dots[[i]]
@@ -102,8 +122,7 @@ extract_data <- function(...) {
     )
   }
 
-  frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
-  list(frame_names, frame_mat)
+  list(frame_names = frame_names, frame_rest = frame_rest)
 }
 
 #' @export
