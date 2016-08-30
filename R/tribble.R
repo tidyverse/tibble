@@ -27,7 +27,27 @@
 #'   "b", 4:6
 #' )
 tribble <- function(...) {
+  browser()
+  data <- extract_data(...)
 
+  frame_names <- data[[1]]
+  frame_mat <- data[[2]]
+
+  frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
+    col <- frame_mat[, i]
+    if (any(vapply(col, needs_list_col, logical(1L)))) {
+      col
+    } else {
+      unlist(col)
+    }
+  })
+
+  # Create a tbl_df and return it
+  names(frame_col) <- frame_names
+  as_tibble(frame_col)
+}
+
+extract_data <- function(...) {
   dots <- list(...)
 
   # Extract the names.
@@ -83,18 +103,7 @@ tribble <- function(...) {
   }
 
   frame_mat <- matrix(frame_rest, ncol = frame_ncol, byrow = TRUE)
-  frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
-    col <- frame_mat[, i]
-    if (any(vapply(col, needs_list_col, logical(1L)))) {
-      col
-    } else {
-      unlist(col)
-    }
-  })
-
-  # Create a tbl_df and return it
-  names(frame_col) <- frame_names
-  as_tibble(frame_col)
+  list(frame_names, frame_mat)
 }
 
 #' @export
