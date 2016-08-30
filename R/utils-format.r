@@ -284,12 +284,18 @@ pluralise_msg <- function(message, objects) {
 pluralise <- function(message, objects) {
   stopifnot(length(objects) > 0)
   if (length(objects) == 1) {
-    # strip [, remove everything within ()
-    gsub("\\[|\\]|\\([^\\) ]+\\)", "", message, perl = TRUE)
+    # strip [, unless there is space in between
+    message <- gsub("\\[(\\S+)\\]", "\\1", message, perl = TRUE)
+    # remove ( and its content, unless there is space in between
+    message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
   } else {
-    # strip (, remove everything within []
-    gsub("\\(|\\)|\\[[^\\] ]+\\]\\s*", "", message, perl = TRUE)
+    # strip (, unless there is space in between
+    message <- gsub("\\((\\S+)\\)", "\\1", message, perl = TRUE)
+    # remove [ and its content, unless there is space in between
+    message <- gsub("\\[[^\\] ]+\\]\\s+", "", message, perl = TRUE)
   }
+
+  message
 }
 
 format_n <- function(x) collapse(quote_n(x))
