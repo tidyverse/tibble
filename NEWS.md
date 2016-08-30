@@ -1,3 +1,10 @@
+## tibble 1.2-12 (2016-08-30)
+
+- Simplify tests for `add_row()` and `add_column()` (#165, #166, @LaDilettante).
+- `add_column()` can add columns of length 1 (#162, #164, @LaDilettante).
+- Singular and plural variants for error messages that mention a list of objects (#116, #138, @LaDilettante).
+
+
 ## tibble 1.2-11 (2016-08-29)
 
 - Add `as.tibble()` as an alias to `as_tibble()` (#160, @LaDilettante).
