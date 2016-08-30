@@ -277,6 +277,27 @@ tibble_glimpse_width <- function(width) {
   getOption("width")
 }
 
+pluralise_msg <- function(message, objects) {
+  paste0(pluralise(message, objects), format_n(objects))
+}
+
+pluralise <- function(message, objects) {
+  stopifnot(length(objects) > 0)
+  if (length(objects) == 1) {
+    # strip [, unless there is space in between
+    message <- gsub("\\[(\\S+)\\]", "\\1", message, perl = TRUE)
+    # remove ( and its content, unless there is space in between
+    message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
+  } else {
+    # strip (, unless there is space in between
+    message <- gsub("\\((\\S+)\\)", "\\1", message, perl = TRUE)
+    # remove [ and its content, unless there is space in between
+    message <- gsub("\\[[^\\] ]+\\]\\s+", "", message, perl = TRUE)
+  }
+
+  message
+}
+
 format_n <- function(x) collapse(quote_n(x))
 
 quote_n <- function(x) UseMethod("quote_n")
