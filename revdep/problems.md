@@ -24,7 +24,7 @@
 |Rcpp           |   |0.12.6  |2016-07-19 |cran (@0.12.6)           |
 |rmarkdown      |   |1.0     |2016-07-08 |cran (@1.0)              |
 |testthat       |   |1.0.2   |2016-04-23 |cran (@1.0.2)            |
-|tibble         |   |1.1-8   |2016-08-19 |local (hadley/tibble@NA) |
+|tibble         |   |1.1-8   |2016-08-19 |local (tidyverse/tibble@NA) |
 |withr          |   |1.0.2   |2016-06-20 |cran (@1.0.2)            |
 
 # Check results
