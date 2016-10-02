@@ -57,6 +57,17 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
     out <- rbind(.data[indexes, ], df, .data[-indexes, ])
   }
 
+  # If .data is empty, coerce the out column class to .data class
+  if (nrow(.data) == 0) {
+    for (i in 1:ncol(out)) {
+      if (class(.data[[i]])[1] == "factor") {
+        out[[i]] <- as.factor(NA)
+      } else {
+        class(out[[i]]) <- class(.data[[i]])
+      }
+    }
+  }
+
   set_class(remove_rownames(out), class(.data))
 }
 
