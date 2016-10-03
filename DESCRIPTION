@@ -18,7 +18,7 @@ Imports:
     assertthat,
     utils,
     lazyeval (>= 0.1.10),
-    Rcpp
+    Rcpp (>= 0.12.3)
 Suggests:
     testthat,
     withr,
