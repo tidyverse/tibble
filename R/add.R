@@ -47,7 +47,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   df <- df[names(.data)]
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
-  out <- rbind_safe(.data, df, pos)
+  out <- rbind_at(.data, df, pos)
 
   set_class(remove_rownames(out), class(.data))
 }
@@ -59,24 +59,19 @@ na_value <- function(boilerplate) {
     NA
 }
 
-rbind_position <- function(old, new, pos) {
-  if (pos <= 0L) {
-    out <- rbind(new, old)
-  } else if (pos >= nrow(old)) {
-    out <- rbind(old, new)
-  } else {
-    indexes <- seq_len(pos)
-    out <- rbind(old[indexes, ], new, old[-indexes, ])
-  }
-  out
-}
-
-rbind_safe <- function(old, new, pos) {
+rbind_at <- function(old, new, pos) {
   if (nrow(old) == 0) {
     old <- old[1, ]
     out <- rbind(old, new)[-1, ]
   } else {
-    out <- rbind_position(old, new, pos)
+    if (pos <= 0L) {
+      out <- rbind(new, old)
+    } else if (pos >= nrow(old)) {
+      out <- rbind(old, new)
+    } else {
+      indexes <- seq_len(pos)
+      out <- rbind(old[indexes, ], new, old[-indexes, ])
+    }
   }
   out
 }
