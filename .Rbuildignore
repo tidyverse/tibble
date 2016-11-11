@@ -8,3 +8,5 @@
 ^revdep$
 ^README-.*\.png$
 ^appveyor\.yml$
+^\.deploy_key\.pub$
+^\.deploy_key\.enc$
