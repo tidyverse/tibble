@@ -106,9 +106,7 @@ dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))
   format_dim[is.na(dim)] <- "??"
-  mult <- " \u00d7 " # unicode multiplication sign
-  if(enc2native(mult) != mult) mult <- " x " # lowercase x
-  paste0(format_dim, collapse = mult)
+  paste0(format_dim, collapse = mult_sign())
 }
 
 size_sum <- function(x) {
