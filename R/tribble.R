@@ -27,17 +27,15 @@
 #'   "b", 4:6
 #' )
 tribble <- function(...) {
+  data <- extract_frame_data_from_dots(...)
 
-  data <- extract_data(...)
-  frame_names <- data$frame_names
-
-  if (is.null(data$frame_rest)) {
-    out <- rep(list(logical()), length(frame_names))
-    names(out) <- frame_names
+  if (length(data$frame_rest) == 0) {
+    out <- rep(list(logical()), length(data$frame_names))
+    names(out) <- data$frame_names
     return(as_tibble(out))
   }
 
-  frame_mat <- matrix(data$frame_rest, ncol = length(frame_names), byrow = TRUE)
+  frame_mat <- matrix(data$frame_rest, ncol = length(data$frame_names), byrow = TRUE)
 
   frame_col <- lapply(seq_len(ncol(frame_mat)), function(i) {
     col <- frame_mat[, i]
@@ -49,37 +47,55 @@ tribble <- function(...) {
   })
 
   # Create a tbl_df and return it
-  names(frame_col) <- frame_names
+  names(frame_col) <- data$frame_names
   as_tibble(frame_col)
 }
 
 frame_matrix <- function(...) {
-  data <- extract_data(...)
-  frame_names <- data$frame_names
-  frame_rest <- data$frame_rest
+  data <- extract_frame_data_from_dots(...)
 
-  if (any(vapply(frame_rest, needs_list_col, logical(1)))) {
+  if (any(vapply(data$frame_rest, needs_list_col, logical(1)))) {
     stopc("frame_matrix cannot have list columns")
   }
 
-  frame_ncol <- length(frame_names)
-  frame_mat <- matrix(unlist(frame_rest), ncol = frame_ncol, byrow = TRUE)
-  colnames(frame_mat) <- frame_names
+  frame_ncol <- length(data$frame_names)
+
+  if (length(data$frame_rest) == 0) {
+    frame_mat <- matrix(logical(0), ncol = frame_ncol)
+  } else {
+    frame_mat <- matrix(unlist(data$frame_rest), ncol = frame_ncol, byrow = TRUE)
+  }
+
+  if (length(data$frame_names) != 0) {
+    colnames(frame_mat) <- data$frame_names
+  }
 
   frame_mat
 }
 
-extract_data <- function(...) {
+extract_frame_data_from_dots <- function(...) {
   dots <- list(...)
 
   # Extract the names.
-  frame_names <- character()
-  i <- 1
-  while (TRUE) {
-    if (i > length(dots)) {
-      return(list(frame_names = frame_names, frame_rest = NULL))
-    }
+  frame_names <- extract_frame_names_from_dots(dots)
 
+  # Extract the data
+  if (length(frame_names) == 0 & length(dots) != 0) {
+    stopc("expected at least one column name; e.g. '~name'")
+  }
+  frame_rest <- dots[-seq_along(frame_names)]
+
+  validate_rectangular_shape(frame_names, frame_rest)
+
+  list(frame_names = frame_names, frame_rest = frame_rest)
+}
+
+extract_frame_names_from_dots <- function(dots) {
+  frame_names <- character()
+
+  if (length(dots) == 0) return(frame_names);
+
+  for (i in 1:length(dots)) {
     el <- dots[[i]]
     if (!is.call(el))
       break
@@ -88,7 +104,7 @@ extract_data <- function(...) {
       break
 
     if (length(el) != 2) {
-      stopc("expected a column name with a single argument; e.g. '~ name'")
+      stopc("expected a column name with a single argument; e.g. '~name'")
     }
 
     candidate <- el[[2]]
@@ -97,32 +113,26 @@ extract_data <- function(...) {
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
-
-    i <- i + 1
   }
 
-  if (!length(frame_names)) {
-    stopc("no column names detected in 'tribble()' call")
-  }
+  frame_names
+}
 
-  frame_rest <- dots[i:length(dots)]
-  n_elements <- length(frame_rest)
+validate_rectangular_shape <- function(frame_names, frame_rest) {
+  if (length(frame_names) == 0 & length(frame_rest) == 0) return();
 
   # Figure out the associated number of rows and number of columns,
   # and validate that the supplied formula produces a rectangular
   # structure.
-  frame_ncol <- length(frame_names)
-  if (n_elements %% frame_ncol != 0) {
+  if (length(frame_rest) %% length(frame_names) != 0) {
     stopc(
       sprintf(
-        "invalid 'tribble()' specification: had %s elements and %s columns",
-        n_elements,
-        frame_ncol
+        "invalid specification: had %s elements and %s columns",
+        length(frame_rest),
+        length(frame_names)
       )
     )
   }
-
-  list(frame_names = frame_names, frame_rest = frame_rest)
 }
 
 #' @export
