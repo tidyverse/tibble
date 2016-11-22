@@ -302,9 +302,13 @@ mult_sign <- function(with_spaces = TRUE) {
   # unicode multiplication sign
   mult <- "\u00d7"
   # if unicode doesn't render, use lowercase x
-  if(enc2native(mult) != mult) mult <- "x"
+  if (enc2native(mult) != mult) {
+    mult <- "x"
+  }
   # whitespace on either side?
-  if(with_spaces) mult <- paste0(" ", mult, " ")
+  if (with_spaces) {
+    mult <- paste0(" ", mult, " ")
+  }
 
   mult
 }
