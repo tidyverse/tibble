@@ -80,7 +80,7 @@ extract_frame_data_from_dots <- function(...) {
   frame_names <- extract_frame_names_from_dots(dots)
 
   # Extract the data
-  if (length(frame_names) == 0 & length(dots) != 0) {
+  if (length(frame_names) == 0 && length(dots) != 0) {
     stopc("expected at least one column name; e.g. '~name'")
   }
   frame_rest <- dots[-seq_along(frame_names)]
@@ -95,7 +95,7 @@ extract_frame_names_from_dots <- function(dots) {
 
   if (length(dots) == 0) return(frame_names);
 
-  for (i in 1:length(dots)) {
+  for (i in seq_along(dots)) {
     el <- dots[[i]]
     if (!is.call(el))
       break
@@ -119,7 +119,7 @@ extract_frame_names_from_dots <- function(dots) {
 }
 
 validate_rectangular_shape <- function(frame_names, frame_rest) {
-  if (length(frame_names) == 0 & length(frame_rest) == 0) return();
+  if (length(frame_names) == 0 && length(frame_rest) == 0) return();
 
   # Figure out the associated number of rows and number of columns,
   # and validate that the supplied formula produces a rectangular

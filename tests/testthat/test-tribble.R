@@ -105,15 +105,20 @@ test_that("tribble recognizes quoted non-formula call", {
   expect_equal(df$y, 1)
 })
 
+test_that("tribble returns 0x0 tibble when there's no argument", {
+  df <- tribble()
+  expect_equal(df, tibble())
+})
+
 # ---- frame_matrix() ----
 
 test_that("frame_matrix constructs a matrix as expected", {
   result <- frame_matrix(
     ~col1, ~col2,
     10,     3,
-    3,     2
+    5,     2
   )
-  expected <- matrix(c(10, 3, 3, 2), ncol = 2)
+  expected <- matrix(c(10, 5, 3, 2), ncol = 2)
   colnames(expected) <- c("col1", "col2")
   expect_equal(result, expected)
 })
