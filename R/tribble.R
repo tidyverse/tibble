@@ -28,64 +28,33 @@
 #' )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_tibble(data)
+  turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
 }
 
-#' Turn frame data into a tibble
+#' @export
+#' @rdname tribble
+frame_data <- tribble
+
+#' Row-wise matrix creation
 #'
-#' @param data a list with 2 elements,
-#' \code{frame_names}-a character vector, and \code{frame_rest}-a list
-turn_frame_data_into_tibble <- function(data) {
-  if (length(data$frame_rest) == 0) {
-    data$frame_rest <- matrix(logical(), ncol = length(data$frame_names))
-  }
-
-  frame_mat <- matrix(data$frame_rest, ncol = length(data$frame_names), byrow = TRUE)
-  frame_col <- turn_matrix_into_list(frame_mat)
-
-  # Create a tbl_df and return it
-  names(frame_col) <- data$frame_names
-  as_tibble(frame_col)
-}
-
-turn_matrix_into_list <- function(frame_mat) {
-  frame_col <- vector("list", length = ncol(frame_mat))
-  # if a frame_mat's col is a list column, keep it unchanged (does not unlist)
-  for (i in seq_len(ncol(frame_mat))) {
-    col <- frame_mat[, i]
-    if (any(vapply(col, needs_list_col, logical(1L)))) {
-      frame_col[[i]] <- col
-    } else {
-      frame_col[[i]] <- unlist(col)
-    }
-  }
-  return(frame_col)
-}
-
+#' Create matrices laying out the data in rows, similar to
+#' \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
+#' This is useful for small matrices, e.g. covariance matrices, where readability
+#' is important. The syntax is inspired by \code{\link{tribble}}.
+#'
+#' @param ... Arguments specifying the structure of a \code{frame_matrix}.
+#'   Column names should be formulas, and may only appear before the data.
+#' @return A \code{\link{frame_matrix}}.
+#' @export
+#' @examples
+#' frame_matrix(
+#'   ~col1, ~col2,
+#'   1,     3,
+#'   5,     2
+#' )
 frame_matrix <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_frame_matrix(data)
-}
-
-#' Turn frame data into a frame_matrix
-#'
-#' @param data to be a list with 2 elements,
-#' \code{frame_names}-a character vector, and \code{frame_rest}-a list
-turn_frame_data_into_frame_matrix <- function(data) {
-  if (any(vapply(data$frame_rest, needs_list_col, logical(1)))) {
-    stopc("frame_matrix cannot have list columns")
-  }
-
-  frame_ncol <- length(data$frame_names)
-
-  if (length(data$frame_rest) == 0) {
-    frame_mat <- matrix(logical(0), ncol = frame_ncol)
-  } else {
-    frame_mat <- matrix(unlist(data$frame_rest), ncol = frame_ncol, byrow = TRUE)
-  }
-
-  colnames(frame_mat) <- data$frame_names
-  frame_mat
+  turn_frame_data_into_frame_matrix(data$frame_names, data$frame_rest)
 }
 
 extract_frame_data_from_dots <- function(...) {
@@ -107,8 +76,6 @@ extract_frame_data_from_dots <- function(...) {
 
 extract_frame_names_from_dots <- function(dots) {
   frame_names <- character()
-
-  if (length(dots) == 0) return(frame_names);
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
@@ -150,6 +117,46 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-#' @export
-#' @rdname tribble
-frame_data <- tribble
+turn_frame_data_into_tibble <- function(names, rest) {
+  if (length(rest) == 0) {
+    rest <- logical()
+  }
+
+  frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
+  frame_col <- turn_matrix_into_list(frame_mat)
+
+  # Create a tbl_df and return it
+  names(frame_col) <- names
+  as_tibble(frame_col)
+}
+
+turn_matrix_into_list <- function(frame_mat) {
+  frame_col <- vector("list", length = ncol(frame_mat))
+  # if a frame_mat's col is a list column, keep it unchanged (does not unlist)
+  for (i in seq_len(ncol(frame_mat))) {
+    col <- frame_mat[, i]
+    if (any(vapply(col, needs_list_col, logical(1L)))) {
+      frame_col[[i]] <- col
+    } else {
+      frame_col[[i]] <- unlist(col)
+    }
+  }
+  return(frame_col)
+}
+
+turn_frame_data_into_frame_matrix <- function(names, rest) {
+  if (any(vapply(rest, needs_list_col, logical(1)))) {
+    stopc("frame_matrix cannot have list columns")
+  }
+
+  frame_ncol <- length(names)
+
+  if (length(rest) == 0) {
+    frame_mat <- matrix(logical(0), ncol = frame_ncol)
+  } else {
+    frame_mat <- matrix(unlist(rest), ncol = frame_ncol, byrow = TRUE)
+  }
+
+  colnames(frame_mat) <- names
+  frame_mat
+}
