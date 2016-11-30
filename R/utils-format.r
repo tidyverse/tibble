@@ -244,9 +244,13 @@ wrap <- function(..., indent = 0, prefix = "", width) {
 }
 
 
-
 format_character <- function(x) {
   x[is.na(x)] <- "<NA>"
+  max_chars <- getOption("tibble.print_string_max", Inf)
+  if (max_chars < Inf & max_chars >= 4) {
+    longer <- nchar(x) > max_chars
+    x[longer] <- sprintf("%.*s...", max_chars, x[longer])
+  }
   x
 }
 

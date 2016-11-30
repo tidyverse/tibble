@@ -123,3 +123,14 @@ test_that("trunc_mat backticks non-syntactic names", {
   expect_equal(names(narrow$table), "`:)`")
   expect_equal(names(narrow$extra), "` `")
 })
+
+test_that("strings are shortend", {
+  vec <- c("a", "123456789", "1234 678901234 67890")
+  exp_10 <- c("a", "123456789", "1234 67890...")
+
+  expect_equal(format_character(vec), vec)
+
+  withr::with_options(
+    list(tibble.print_string_max = 10),
+    expect_equal(format_character(vec), exp_10))
+})

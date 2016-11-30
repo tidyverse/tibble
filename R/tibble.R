@@ -40,6 +40,11 @@
   #'   threshold is exceeded. Default: 10.}
   tibble.print_min = 10L,
 
+  #' \item{\code{tibble.print_string_max}}{Printed character threshold: Maximum number of
+  #'   printed characters of a string. Longer strings are abbreviated with \code{"..."}.
+  #'   Default: \code{Inf}}
+  tibble.print_string_max = Inf,
+
   #' \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
   #'   \code{width} option).}
   tibble.width = NULL,
