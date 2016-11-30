@@ -1,3 +1,12 @@
+## tibble 1.2-13 (2016-11-30)
+
+- New `frame_matrix()` (#140, #168, @LaDilettante).
+- The `max.print` option is ignored when printing a tibble (#194, #195, @t-kalinowski).
+- Fix typo in `obj_sum` documentation (#193, @etiennebr).
+- Keep column classes when adding row to empty tibble (#171, #177, @LaDilettante).
+- Now explicitly stating minimum Rcpp version 0.12.3.
+
+
 ## tibble 1.2-12 (2016-08-30)
 
 - Simplify tests for `add_row()` and `add_column()` (#165, #166, @LaDilettante).

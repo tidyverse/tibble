@@ -149,6 +149,8 @@ print_summary <- function(x) {
 
 print_table <- function(x) {
   if (!is.null(x$table)) {
+    old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
+    on.exit(options(old_option), add = TRUE)
     print(x$table)
   }
 }

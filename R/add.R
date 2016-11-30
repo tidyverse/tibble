@@ -47,15 +47,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   df <- df[names(.data)]
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
-
-  if (pos <= 0L) {
-    out <- rbind(df, .data)
-  } else if (pos >= nrow(.data)) {
-    out <- rbind(.data, df)
-  } else {
-    indexes <- seq_len(pos)
-    out <- rbind(.data[indexes, ], df, .data[-indexes, ])
-  }
+  out <- rbind_at(.data, df, pos)
 
   set_class(remove_rownames(out), class(.data))
 }
@@ -65,6 +57,23 @@ na_value <- function(boilerplate) {
     list(NULL)
   else
     NA
+}
+
+rbind_at <- function(old, new, pos) {
+  if (nrow(old) == 0) {
+    old <- old[1, ]
+    out <- rbind(old, new)[-1, ]
+  } else {
+    if (pos <= 0L) {
+      out <- rbind(new, old)
+    } else if (pos >= nrow(old)) {
+      out <- rbind(old, new)
+    } else {
+      indexes <- seq_len(pos)
+      out <- rbind(old[indexes, ], new, old[-indexes, ])
+    }
+  }
+  out
 }
 
 #' Add columns to a data frame

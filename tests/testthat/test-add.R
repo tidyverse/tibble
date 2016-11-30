@@ -96,6 +96,11 @@ test_that("adding to a list column adds a NULL value (#148)", {
   expect_null(add_row(data_frame(a = as.list(1:3), b = 1:3), b = 4:6)$a[[5]])
 })
 
+test_that("add_row() keeps the class of empty columns", {
+  new_tibble <- add_row(df_empty, to_be_added = 5)
+  expect_equal(sapply(df_empty, class), sapply(new_tibble, class))
+})
+
 # add_column ------------------------------------------------------------
 
 test_that("can add new column", {
