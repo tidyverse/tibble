@@ -3,7 +3,7 @@
 \docType{package}
 \name{tibble-package}
 \alias{tibble-package}
-\title{Simple Data Frames}
+\title{tibble: Simple Data Frames}
 \description{
 Provides a 'tbl_df' class that offers better checking and
 printing capabilities than traditional data frames.
@@ -50,5 +50,28 @@ Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
 \item{\code{tibble.max_extra_cols}}{Number of extra columns
   printed in reduced form. Default: 100.}
 }
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tidyverse/tibble}
+  \item Report bugs at \url{https://github.com/tidyverse/tibble/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+
+Authors:
+\itemize{
+  \item Hadley Wickham \email{hadley@rstudio.com}
+  \item Romain Francois \email{romain@r-enthusiasts.com}
+}
+
+Other contributors:
+\itemize{
+  \item RStudio [copyright holder]
+}
+
 }
 
