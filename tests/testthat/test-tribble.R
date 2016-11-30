@@ -93,7 +93,7 @@ test_that("tribble can have list columns", {
 
 test_that("tribble creates n-col empty data frame", {
   df <- tribble(~x, ~y)
-  expect_equal(names(df), c("x", "y"))
+  expect_equal(df, tibble(x = logical(), y = logical()))
 })
 
 test_that("tribble recognizes quoted non-formula call", {
@@ -119,6 +119,15 @@ test_that("frame_matrix constructs a matrix as expected", {
     5,     2
   )
   expected <- matrix(c(10, 5, 3, 2), ncol = 2)
+  colnames(expected) <- c("col1", "col2")
+  expect_equal(result, expected)
+})
+
+test_that("frame_matrix constructs empty matrix as expected", {
+  result <- frame_matrix(
+    ~col1, ~col2
+  )
+  expected <- matrix(logical(), ncol = 2)
   colnames(expected) <- c("col1", "col2")
   expect_equal(result, expected)
 })
