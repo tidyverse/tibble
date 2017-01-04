@@ -35,12 +35,12 @@
 |:-----------------|:-------|------:|--------:|-----:|
 |easyformatr       |0.1.2   |      1|        0|     0|
 |geojson           |0.1.0   |      1|        0|     0|
-|ggfortify         |0.3.0.0 |      1|        0|     1|
 |highcharter       |0.4.0   |      0|        1|     0|
 |photobiologyInOut |0.4.12  |      1|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
 |sf                |0.2-7   |      1|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
+|tidyr             |0.6.0   |      1|        0|     0|
 |valr              |0.1.1   |      1|        0|     0|
 
 ## easyformatr (0.1.2)
@@ -67,36 +67,6 @@ Package required but not available: ‘protolite’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
-```
-
-## ggfortify (0.3.0.0)
-Maintainer: Masaaki Horikoshi <sinhrks@gmail.com>  
-Bug reports: https://github.com/sinhrks/ggfortify/issues
-
-1 error  | 0 warnings | 1 note 
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  stress after  10 iters: 0.00951, magic = 0.500
-  stress after  20 iters: 0.00941, magic = 0.500
-  Successfully loaded changepoint package version 2.2.2
-   NOTE: Predefined penalty values changed in version 2.2.  Previous penalty values with a postfix 1 i.e. SIC1 are now without i.e. SIC and previous penalties without a postfix i.e. SIC are now with a postfix 0 i.e. SIC0. See NEWS and help files for further details.
-  Loading required package: sandwich
-  Loading required package: urca
-  Loading required package: lmtest
-  testthat results ================================================================
-  OK: 1151 SKIPPED: 4 FAILED: 1
-  1. Error: fortify.MSwM works for sample data (@test-MSwM.R#7) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking installed package size ... NOTE
-  installed size is  5.7Mb
-  sub-directories of 1Mb or more:
-    doc   5.0Mb
 ```
 
 ## highcharter (0.4.0)
@@ -200,6 +170,31 @@ Last 13 lines of output:
   2. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_mutate.R#133) 
   3. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#100) 
   4. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#118) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
+
+## tidyr (0.6.0)
+Maintainer: Hadley Wickham <hadley@rstudio.com>  
+Bug reports: https://github.com/hadley/tidyr/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  > 
+  > test_check("tidyr")
+  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
+  error\$message does not match "Unknown columns".
+  Actual value: "Unknown column: 'z'"
+  
+  
+  testthat results ================================================================
+  OK: 192 SKIPPED: 0 FAILED: 1
+  1. Failure: errors are raised (@test-drop_na.R#53) 
   
   Error: testthat unit tests failed
   Execution halted

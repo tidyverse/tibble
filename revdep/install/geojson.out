@@ -1,0 +1,2 @@
+ERROR: dependency ‘protolite’ is not available for package ‘geojson’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/geojson’

@@ -1,0 +1,9 @@
+* installing *source* package ‘protolite’ ...
+** package ‘protolite’ successfully unpacked and MD5 sums checked
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-pthread
+Using PKG_LIBS=-lprotobuf -pthread -lpthread
+Failed to run protoc.
+Please install the 'protobuf-compiler' package for your system.
+ERROR: configuration failed for package ‘protolite’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/protolite’

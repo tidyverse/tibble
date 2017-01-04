@@ -58,7 +58,7 @@
 |geojson           |0.1.0   |      1|        0|     0|
 |getlandsat        |0.1.0   |      0|        0|     0|
 |ggenealogy        |0.3.0   |      0|        0|     0|
-|ggfortify         |0.3.0.0 |      1|        0|     1|
+|ggfortify         |0.3.0.0 |      0|        0|     1|
 |ggguitar          |0.1.1   |      0|        0|     0|
 |ggplot2           |2.2.1   |      0|        0|     0|
 |ggpmisc           |0.2.13  |      0|        0|     0|
@@ -113,7 +113,7 @@
 |srvyr             |0.2.0   |      0|        0|     0|
 |taxize            |0.8.0   |      0|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      0|        0|     0|
+|tidyr             |0.6.0   |      1|        0|     0|
 |tidyverse         |1.0.0   |      0|        0|     0|
 |units             |0.4-1   |      0|        0|     0|
 |valr              |0.1.1   |      1|        0|     0|
@@ -308,26 +308,9 @@ Maintainer: Lindsay Rutter <lrutter@iastate.edu>
 Maintainer: Masaaki Horikoshi <sinhrks@gmail.com>  
 Bug reports: https://github.com/sinhrks/ggfortify/issues
 
-1 error  | 0 warnings | 1 note 
+0 errors | 0 warnings | 1 note 
 
 ```
-checking tests ... ERROR
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  stress after  10 iters: 0.00951, magic = 0.500
-  stress after  20 iters: 0.00941, magic = 0.500
-  Successfully loaded changepoint package version 2.2.2
-   NOTE: Predefined penalty values changed in version 2.2.  Previous penalty values with a postfix 1 i.e. SIC1 are now without i.e. SIC and previous penalties without a postfix i.e. SIC are now with a postfix 0 i.e. SIC0. See NEWS and help files for further details.
-  Loading required package: sandwich
-  Loading required package: urca
-  Loading required package: lmtest
-  testthat results ================================================================
-  OK: 1151 SKIPPED: 4 FAILED: 1
-  1. Error: fortify.MSwM works for sample data (@test-MSwM.R#7) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
 checking installed package size ... NOTE
   installed size is  5.7Mb
   sub-directories of 1Mb or more:
@@ -784,7 +767,26 @@ Last 13 lines of output:
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/tidyr/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  > 
+  > test_check("tidyr")
+  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
+  error\$message does not match "Unknown columns".
+  Actual value: "Unknown column: 'z'"
+  
+  
+  testthat results ================================================================
+  OK: 192 SKIPPED: 0 FAILED: 1
+  1. Failure: errors are raised (@test-drop_na.R#53) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## tidyverse (1.0.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
