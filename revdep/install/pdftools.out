@@ -1,0 +1,21 @@
+* installing *source* package ‘pdftools’ ...
+** package ‘pdftools’ successfully unpacked and MD5 sums checked
+Package poppler-cpp was not found in the pkg-config search path.
+Perhaps you should add the directory containing `poppler-cpp.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'poppler-cpp' found
+Using PKG_CFLAGS=-I/usr/include/poppler/cpp -I/usr/include/poppler
+Using PKG_LIBS=-lpoppler-cpp
+------------------------- ANTICONF ERROR ---------------------------
+Configuration failed because poppler-cpp was not found. Try installing:
+ * deb: libpoppler-cpp-dev (Debian, Ubuntu, etc)
+ * rpm: poppler-cpp-devel (Fedora, CentOS, RHEL)
+ * csw: poppler_dev (Solaris)
+ * brew: poppler (Mac OSX)
+If poppler-cpp is already installed, check that 'pkg-config' is in your
+PATH and PKG_CONFIG_PATH contains a poppler-cpp.pc file. If pkg-config
+is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:
+R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
+--------------------------------------------------------------------
+ERROR: configuration failed for package ‘pdftools’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/pdftools’

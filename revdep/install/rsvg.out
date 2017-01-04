@@ -1,0 +1,21 @@
+* installing *source* package ‘rsvg’ ...
+** package ‘rsvg’ successfully unpacked and MD5 sums checked
+Package librsvg-2.0 was not found in the pkg-config search path.
+Perhaps you should add the directory containing `librsvg-2.0.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'librsvg-2.0' found
+Using PKG_CFLAGS=
+Using PKG_LIBS=-lrsvg
+------------------------- ANTICONF ERROR ---------------------------
+Configuration failed because librsvg-2.0 was not found. Try installing:
+ * deb: librsvg2-dev (Debian, Ubuntu, etc)
+ * rpm: librsvg2-devel (Fedora, EPEL)
+ * csw: librsvg_dev, sunx11_devel (Solaris)
+ * brew: librsvg (OSX)
+If librsvg-2.0 is already installed, check that 'pkg-config' is in your
+PATH and PKG_CONFIG_PATH contains a librsvg-2.0.pc file. If pkg-config
+is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:
+R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
+--------------------------------------------------------------------
+ERROR: configuration failed for package ‘rsvg’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/rsvg’

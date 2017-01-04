@@ -1,0 +1,11 @@
+* installing *source* package ‘rjags’ ...
+** package ‘rjags’ successfully unpacked and MD5 sums checked
+checking for pkg-config... /usr/bin/pkg-config
+configure: WARNING: pkg-config file for jags 4 unavailable
+configure: WARNING: Consider adding the directory containing `jags.pc`
+configure: WARNING: to the PKG_CONFIG_PATH environment variable
+configure: Attempting legacy configuration of rjags
+checking for jags... no
+configure: error: "automatic detection of JAGS failed. Please use pkg-config to locate the JAGS library. See the INSTALL file for details."
+ERROR: configuration failed for package ‘rjags’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/rjags’

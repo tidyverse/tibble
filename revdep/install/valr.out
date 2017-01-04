@@ -1,0 +1,126 @@
+* installing *source* package ‘valr’ ...
+** package ‘valr’ successfully unpacked and MD5 sums checked
+** libs
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c RcppExports.cpp -o RcppExports.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c absdist.cpp -o absdist.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c closest.cpp -o closest.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c complement.cpp -o complement.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c coverage.cpp -o coverage.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c intersect.cpp -o intersect.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c merge.cpp -o merge.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c random.cpp -o random.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c reldist.cpp -o reldist.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c shuffle.cpp -o shuffle.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c subtract.cpp -o subtract.o
+g++ -std=c++11 -I/usr/share/R/include -DNDEBUG -I../inst/include  -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/Rcpp/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/BH/include" -I"/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include"   -fdiagnostics-color=always -time -pipe  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c utils.cpp -o utils.o
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kcoverage.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kabsdist.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.18 0.04
+# as 0.00 0.00
+# cc1plus 0.18 0.05
+# as 0.00 0.00
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kshuffle.cpp:14[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+/usr/lib/R/etc/Makeconf:141: recipe for target 'absdist.o' failed
+make: *** [absdist.o] Error 1
+make: *** Waiting for unfinished jobs....
+/usr/lib/R/etc/Makeconf:141: recipe for target 'coverage.o' failed
+make: *** [coverage.o] Error 1
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Ksubtract.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kclosest.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kcomplement.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.21 0.02
+# cc1plus 0.19 0.04
+# as 0.00 0.00
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'closest.o' failed
+make: *** [closest.o] Error 1
+/usr/lib/R/etc/Makeconf:141: recipe for target 'subtract.o' failed
+make: *** [subtract.o] Error 1
+# cc1plus 0.16 0.06
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'shuffle.o' failed
+make: *** [shuffle.o] Error 1
+# cc1plus 0.18 0.06
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'complement.o' failed
+make: *** [complement.o] Error 1
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Krandom.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.19 0.05
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'random.o' failed
+make: *** [random.o] Error 1
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kmerge.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[KRcppExports.cpp:4[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.22 0.03
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'merge.o' failed
+make: *** [merge.o] Error 1
+# cc1plus 0.22 0.03
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'RcppExports.o' failed
+make: *** [RcppExports.o] Error 1
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kintersect.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.21 0.04
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'intersect.o' failed
+make: *** [intersect.o] Error 1
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kreldist.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+In file included from [01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr.h:4:0[m[K,
+                 from [01m[K../inst/include/valr.h:5[m[K,
+                 from [01m[Kutils.cpp:1[m[K:
+[01m[K/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/dplyr/include/dplyr/main.h:10:19:[m[K [01;31m[Kfatal error: [m[Kplogr.h: No such file or directory
+compilation terminated.
+# cc1plus 0.24 0.03
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'reldist.o' failed
+make: *** [reldist.o] Error 1
+# cc1plus 0.20 0.07
+# as 0.00 0.00
+/usr/lib/R/etc/Makeconf:141: recipe for target 'utils.o' failed
+make: *** [utils.o] Error 1
+ERROR: compilation failed for package ‘valr’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/valr’
