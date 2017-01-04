@@ -30,5 +30,6 @@ Suggests:
 LinkingTo: Rcpp
 LazyData: yes
 License: MIT + file LICENSE
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 5.0.1.9000
 VignetteBuilder: knitr

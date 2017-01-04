@@ -11,13 +11,13 @@ frame_matrix(...)
 Column names should be formulas, and may only appear before the data.}
 }
 \value{
-A \code{\link{frame_matrix}}.
+A \link{matrix}.
 }
 \description{
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
 This is useful for small matrices, e.g. covariance matrices, where readability
-is important. The syntax is inspired by \code{\link{tribble}}.
+is important. The syntax is inspired by \code{\link[=tribble]{tribble()}}.
 }
 \examples{
 frame_matrix(

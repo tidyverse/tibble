@@ -7,7 +7,7 @@
 #' @param x An atomic vector
 #' @param name,value Names of the columns that store the names and values
 #'
-#' @return A \code{\link{tibble}}
+#' @return A [tibble]
 #' @export
 #'
 #' @examples

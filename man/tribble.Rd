@@ -14,10 +14,10 @@ frame_data(...)
 Variable names should be formulas, and may only appear before the data.}
 }
 \value{
-A \code{\link{tibble}}.
+A \link{tibble}.
 }
 \description{
-Create \code{\link{tibble}}s using an easier to read row-by-row layout.
+Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.
 }

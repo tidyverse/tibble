@@ -1,15 +1,15 @@
 #' Row-wise tibble creation
 #'
-#' Create \code{\link{tibble}}s using an easier to read row-by-row layout.
+#' Create [tibble]s using an easier to read row-by-row layout.
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' \code{frame_data()} is an older name for \code{tribble()}. It will eventually
+#' `frame_data()` is an older name for `tribble()`. It will eventually
 #' be phased out.
 #'
-#' @param ... Arguments specifying the structure of a \code{tibble}.
+#' @param ... Arguments specifying the structure of a `tibble`.
 #'   Variable names should be formulas, and may only appear before the data.
-#' @return A \code{\link{tibble}}.
+#' @return A [tibble].
 #' @export
 #' @examples
 #' tribble(
@@ -38,13 +38,13 @@ frame_data <- tribble
 #' Row-wise matrix creation
 #'
 #' Create matrices laying out the data in rows, similar to
-#' \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
+#' `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
 #' This is useful for small matrices, e.g. covariance matrices, where readability
-#' is important. The syntax is inspired by \code{\link{tribble}}.
+#' is important. The syntax is inspired by [tribble()].
 #'
-#' @param ... Arguments specifying the structure of a \code{frame_matrix}.
+#' @param ... Arguments specifying the structure of a `frame_matrix`.
 #'   Column names should be formulas, and may only appear before the data.
-#' @return A \code{\link{frame_matrix}}.
+#' @return A [matrix].
 #' @export
 #' @examples
 #' frame_matrix(

@@ -21,15 +21,15 @@ all_equal(target, current, ignore_col_order = TRUE, ignore_row_order = TRUE,
 \item{convert}{Should similar classes be converted? Currently this will
 convert factor to character and integer to double.}
 
-\item{...}{Ignored. Needed for compatibility with \code{all.equal}.}
+\item{...}{Ignored. Needed for compatibility with \code{all.equal()}.}
 }
 \value{
 \code{TRUE} if equal, otherwise a character vector describing
-  the reasons why they're not equal. Use \code{\link{isTRUE}} if using the
-  result in an \code{if} expression.
+the reasons why they're not equal. Use \code{\link[=isTRUE]{isTRUE()}} if using the
+result in an \code{if} expression.
 }
 \description{
-When comparing two \code{tbl_df} using \code{\link{all.equal}}, column and
+When comparing two \code{tbl_df} using \code{\link[=all.equal]{all.equal()}}, column and
 row order is ignored by default, and types are not coerced.  The \code{dplyr}
 package provides a much more efficient implementation for this functionality.
 }

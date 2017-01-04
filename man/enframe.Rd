@@ -12,7 +12,7 @@ enframe(x, name = "name", value = "value")
 \item{name, value}{Names of the columns that store the names and values}
 }
 \value{
-A \code{\link{tibble}}
+A \link{tibble}
 }
 \description{
 A helper function that converts named atomic vectors or lists to two-column

@@ -18,7 +18,7 @@ number.}
 \code{x} with valid names.
 }
 \description{
-\code{repair_names} ensures its input has non-missing and
+\code{repair_names()} ensures its input has non-missing and
 unique names (duplicated names get a numeric suffix). Valid names are
 left as is.
 }

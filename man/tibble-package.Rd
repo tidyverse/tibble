@@ -21,34 +21,36 @@ describing the rest of it as text.
 
 \describe{
 \item{print}{By default only prints the first 10 rows (at most 20), and the
-  columns that fit on screen; see \code{\link{print.tbl_df}}}
+columns that fit on screen; see \code{\link[=print.tbl_df]{print.tbl_df()}}}
 \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
-\item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
-  so is considerably faster. Returns \code{NULL} if column does not exist,
-  \code{$} warns.}
+\item{\code{[[}, \code{$}}{Calls [.subset2()] directly,
+so is considerably faster. Returns \code{NULL} if column does not exist,
+\code{$} warns.}
 }
+
+[\code{}{Never simplifies (drops), so always returns data.frame} \item{}[[\code{,}$`}{Calls [.subset2()]: R:%60%7D%7BNever%20simplifies%20(drops),%20so%20always%20returns%20data.frame%7D%0A%5Citem%7B%60[[%60,%20%60$%60%7D%7BCalls%20[.subset2()
 }
 
 \section{Important functions}{
 
-\code{\link{tibble}} and \code{\link{tribble}} for construction,
-\code{\link{as_tibble}} for coercion,
-and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
+\code{\link[=tibble]{tibble()}} and \code{\link[=tribble]{tribble()}} for construction,
+\code{\link[=as_tibble]{as_tibble()}} for coercion,
+and \code{\link[=print.tbl_df]{print.tbl_df()}} and \code{\link[=glimpse]{glimpse()}} for display.
 }
 
 \section{Package options}{
 
-Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
-(indirectly) by \code{\link{print.tbl_df}}.
+Display options for \code{tbl_df}, used by \code{\link[=trunc_mat]{trunc_mat()}} and
+(indirectly) by \code{\link[=print.tbl_df]{print.tbl_df()}}.
 \describe{
 \item{\code{tibble.print_max}}{Row number threshold: Maximum number of rows
-  printed. Set to \code{Inf} to always print all rows.  Default: 20.}
+printed. Set to \code{Inf} to always print all rows.  Default: 20.}
 \item{\code{tibble.print_min}}{Number of rows printed if row number
-  threshold is exceeded. Default: 10.}
+threshold is exceeded. Default: 10.}
 \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
-  \code{width} option).}
+\code{width} option).}
 \item{\code{tibble.max_extra_cols}}{Number of extra columns
-  printed in reduced form. Default: 100.}
+printed in reduced form. Default: 100.}
 }
 }
 
