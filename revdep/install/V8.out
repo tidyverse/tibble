@@ -1,0 +1,15 @@
+* installing *source* package ‘V8’ ...
+** package ‘V8’ successfully unpacked and MD5 sums checked
+Using PKG_CFLAGS=-I/usr/include/v8-3.14
+Using PKG_LIBS=-lv8
+------------------------- ANTICONF ERROR ---------------------------
+Configuration failed because  was not found. Try installing:
+ * deb: libv8-3.14-dev (formerly: libv8-dev) (Debian, Ubuntu)
+ * rpm: v8-314-devel (formerly: v8-devel) (Fedora, EPEL)
+ * brew: v8-315 (OSX) -- NOT regular v8! Tap from homebrew/versions
+ * csw: libv8_dev (Solaris)
+To use a custom libv8, set INCLUDE_DIR and LIB_DIR manually via:
+R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
+--------------------------------------------------------------------
+ERROR: configuration failed for package ‘V8’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/V8’

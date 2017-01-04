@@ -1,0 +1,2 @@
+ERROR: dependencies ‘rgbif’, ‘V8’ are not available for package ‘spocc’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/spocc’
