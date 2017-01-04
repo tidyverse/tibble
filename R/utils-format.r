@@ -300,6 +300,21 @@ pluralise <- function(message, objects) {
   message
 }
 
+mult_sign <- function() {
+  # unicode multiplication sign
+  mult <- "\u00d7"
+  # if unicode doesn't render, use lowercase x
+  if (enc2native(mult) != mult) {
+    mult <- "x"
+  }
+
+  mult
+}
+
+spaces_around <- function(x) {
+  paste0(" ", x, " ")
+}
+
 format_n <- function(x) collapse(quote_n(x))
 
 quote_n <- function(x) UseMethod("quote_n")
