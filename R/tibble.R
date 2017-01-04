@@ -15,8 +15,8 @@
 #' \describe{
 #' \item{print}{By default only prints the first 10 rows (at most 20), and the
 #'   columns that fit on screen; see [print.tbl_df()]}
-#' \item{`[`}{Never simplifies (drops), so always returns data.frame}
-#' \item{`[[`, `$`}{Calls [.subset2()] directly,
+#' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
+#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
 #'   so is considerably faster. Returns `NULL` if column does not exist,
 #'   `$` warns.}
 #' }
