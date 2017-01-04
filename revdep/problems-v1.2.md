@@ -29,40 +29,19 @@
 
 # Check results
 
-16 packages with problems
+9 packages with problems
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
-|bsam              |1.1.1   |      1|        0|     0|
 |easyformatr       |0.1.2   |      1|        0|     0|
 |geojson           |0.1.0   |      1|        0|     0|
+|ggfortify         |0.3.0.0 |      1|        0|     1|
 |highcharter       |0.4.0   |      0|        1|     0|
-|jpmesh            |0.3.0   |      1|        0|     0|
-|pdfsearch         |0.1.1   |      1|        0|     0|
 |photobiologyInOut |0.4.12  |      1|        0|     0|
-|phylopath         |0.2.1   |      1|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
-|radiant.data      |0.6.0   |      1|        0|     0|
-|rgbif             |0.9.6   |      1|        0|     0|
 |sf                |0.2-7   |      1|        0|     0|
-|spocc             |0.6.0   |      1|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
-|units             |0.4-1   |      1|        0|     0|
 |valr              |0.1.1   |      1|        0|     0|
-
-## bsam (1.1.1)
-Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>  
-Bug reports: https://github.com/ianjonsen/bsam/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘rjags’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
 
 ## easyformatr (0.1.2)
 Maintainer: Brandon Taylor <brandon.taylor221@gmail.com>  
@@ -86,10 +65,38 @@ Bug reports: https://github.com/ropensci/geojson/issues
 checking package dependencies ... ERROR
 Package required but not available: ‘protolite’
 
-Package suggested but not available for checking: ‘geojsonlint’
-
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
+```
+
+## ggfortify (0.3.0.0)
+Maintainer: Masaaki Horikoshi <sinhrks@gmail.com>  
+Bug reports: https://github.com/sinhrks/ggfortify/issues
+
+1 error  | 0 warnings | 1 note 
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  stress after  10 iters: 0.00951, magic = 0.500
+  stress after  20 iters: 0.00941, magic = 0.500
+  Successfully loaded changepoint package version 2.2.2
+   NOTE: Predefined penalty values changed in version 2.2.  Previous penalty values with a postfix 1 i.e. SIC1 are now without i.e. SIC and previous penalties without a postfix i.e. SIC are now with a postfix 0 i.e. SIC0. See NEWS and help files for further details.
+  Loading required package: sandwich
+  Loading required package: urca
+  Loading required package: lmtest
+  testthat results ================================================================
+  OK: 1151 SKIPPED: 4 FAILED: 1
+  1. Error: fortify.MSwM works for sample data (@test-MSwM.R#7) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+
+checking installed package size ... NOTE
+  installed size is  5.7Mb
+  sub-directories of 1Mb or more:
+    doc   5.0Mb
 ```
 
 ## highcharter (0.4.0)
@@ -109,34 +116,6 @@ Error: processing vignette 'replicating-highcharts-demos.Rmd' failed with diagno
 cannot open the connection
 Execution halted
 
-```
-
-## jpmesh (0.3.0)
-Maintainer: Shinya Uryu <suika1127@gmail.com>  
-Bug reports: https://github.com/uribo/jpmesh/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
-
-## pdfsearch (0.1.1)
-Maintainer: Brandon LeBeau <lebebr01+pdfsearch@gmail.com>  
-Bug reports: https://github.com/lebebr01/pdfsearch/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘pdftools’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
 ```
 
 ## photobiologyInOut (0.4.12)
@@ -164,31 +143,6 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## phylopath (0.2.1)
-Maintainer: Wouter van der Bijl <wouter.van.der.bijl@zoologi.su.se>  
-Bug reports: https://github.com/Ax3man/phylopath/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘phylopath-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: DAG
-> ### Title: Directed acyclic graphs (DAGs)
-> ### Aliases: DAG
-> 
-> ### ** Examples
-> 
->   # Use formula notation to create DAGs:
->   plot(DAG(A~B, B~C))
-Error in `[.data.frame`(nodes_df, , i) : undefined columns selected
-Calls: plot -> plot.DAG -> <Anonymous> -> [ -> [.data.frame
-Execution halted
-```
-
 ## plotly (4.5.6)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
@@ -214,44 +168,6 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## radiant.data (0.6.0)
-Maintainer: Vincent Nijs <radiant@rady.ucsd.edu>  
-Bug reports: https://github.com/radiant-rstats/radiant.data/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘radiant.data-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: dtab.explore
-> ### Title: Make a tabel of summary statistics in DT
-> ### Aliases: dtab.explore
-> 
-> ### ** Examples
-> 
-> tab <- explore("diamonds", "price:x") %>% dtab
-Error in loadNamespace(name) : there is no package called ‘crosstalk’
-Calls: %>% ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-Execution halted
-```
-
-## rgbif (0.9.6)
-Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
-Bug reports: https://github.com/ropensci/rgbif/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘V8’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
-
 ## sf (0.2-7)
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
 Bug reports: https://github.com/edzer/sfr/issues/
@@ -262,20 +178,6 @@ Bug reports: https://github.com/edzer/sfr/issues/
 checking whether package ‘sf’ can be installed ... ERROR
 Installation failed.
 See ‘/home/muelleki/git/R/tibble/revdep/checks/sf.Rcheck/00install.out’ for details.
-```
-
-## spocc (0.6.0)
-Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
-Bug reports: https://github.com/ropensci/spocc/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Packages required but not available: ‘rgbif’ ‘V8’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
 ```
 
 ## tidyquant (0.1.0)
@@ -301,20 +203,6 @@ Last 13 lines of output:
   
   Error: testthat unit tests failed
   Execution halted
-```
-
-## units (0.4-1)
-Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
-Bug reports: https://github.com/edzer/units/issues/
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘udunits2’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
 ```
 
 ## valr (0.1.1)

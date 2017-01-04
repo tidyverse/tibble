@@ -1,2 +1,0 @@
-ERROR: dependencies ‘jsonvalidate’, ‘V8’ are not available for package ‘geojsonlint’
-* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/geojsonlint’

@@ -29,22 +29,23 @@
 
 # Check results
 
-84 packages
+85 packages
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
+|abjutils          |0.0.1   |      0|        0|     0|
 |biomartr          |0.2.1   |      0|        0|     0|
 |blkbox            |1.0     |      0|        0|     2|
 |blob              |1.0.0   |      0|        0|     0|
 |blockTools        |0.6-3   |      0|        0|     0|
-|bsam              |1.1.1   |      1|        0|     0|
+|bsam              |1.1.1   |      0|        0|     0|
 |cellranger        |1.1.0   |      0|        0|     0|
 |checkmate         |1.8.2   |      0|        0|     0|
 |corrr             |0.2.1   |      0|        0|     0|
 |countyweather     |0.1.0   |      0|        0|     0|
 |datapasta         |1.0.0   |      0|        0|     0|
 |datastepr         |0.0.2   |      0|        0|     0|
-|DiagrammeR        |0.9.0   |      0|        0|     2|
+|DiagrammeR        |0.9.0   |      0|        0|     1|
 |docxtools         |0.1.0   |      0|        0|     0|
 |docxtractr        |0.2.0   |      0|        0|     0|
 |dotwhisker        |0.2.3   |      0|        0|     0|
@@ -57,7 +58,7 @@
 |geojson           |0.1.0   |      1|        0|     0|
 |getlandsat        |0.1.0   |      0|        0|     0|
 |ggenealogy        |0.3.0   |      0|        0|     0|
-|ggfortify         |0.3.0.0 |      0|        0|     1|
+|ggfortify         |0.3.0.0 |      1|        0|     1|
 |ggguitar          |0.1.1   |      0|        0|     0|
 |ggplot2           |2.2.1   |      0|        0|     0|
 |ggpmisc           |0.2.13  |      0|        0|     0|
@@ -66,26 +67,26 @@
 |highcharter       |0.4.0   |      0|        1|     0|
 |hypoparsr         |0.1.0   |      0|        0|     0|
 |isdparser         |0.1.0   |      0|        0|     0|
-|jpmesh            |0.3.0   |      1|        0|     0|
+|jpmesh            |0.3.0   |      0|        0|     1|
 |knitr             |1.15.1  |      0|        0|     0|
 |KraljicMatrix     |0.1.0   |      0|        0|     0|
 |manifestoR        |1.2.3   |      0|        0|     0|
 |modelr            |0.1.0   |      0|        0|     1|
 |monkeylearn       |0.1.1   |      0|        0|     0|
-|mregions          |0.1.4   |      0|        0|     1|
+|mregions          |0.1.4   |      0|        0|     0|
 |natserv           |0.1.4   |      0|        0|     0|
 |nycflights13      |0.2.1   |      0|        0|     1|
 |oai               |0.2.2   |      0|        0|     0|
 |openadds          |0.2.0   |      0|        0|     0|
 |pangaear          |0.2.4   |      0|        0|     0|
-|pdfsearch         |0.1.1   |      1|        0|     0|
+|pdfsearch         |0.1.1   |      0|        0|     0|
 |photobiologyInOut |0.4.12  |      1|        0|     0|
 |photobiology      |0.9.13  |      0|        0|     0|
-|phylopath         |0.2.1   |      1|        0|     0|
+|phylopath         |0.2.2   |      0|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
 |poio              |0.0-1   |      0|        0|     1|
 |pollstR           |1.4.0   |      0|        0|     0|
-|radiant.data      |0.6.0   |      1|        0|     0|
+|radiant.data      |0.6.0   |      0|        0|     0|
 |randNames         |0.2.3   |      0|        0|     0|
 |rbgm              |0.0.4   |      0|        0|     0|
 |rbhl              |0.3.0   |      0|        0|     0|
@@ -93,7 +94,7 @@
 |readr             |1.0.0   |      0|        0|     1|
 |refimpact         |0.1.0   |      0|        0|     0|
 |reutils           |0.2.3   |      0|        0|     0|
-|rgbif             |0.9.6   |      1|        0|     0|
+|rgbif             |0.9.6   |      0|        0|     0|
 |rgho              |1.0.0   |      0|        0|     0|
 |riem              |0.1.1   |      0|        0|     0|
 |ritis             |0.5.4   |      0|        0|     0|
@@ -108,15 +109,20 @@
 |solrium           |0.4.0   |      0|        0|     0|
 |spbabel           |0.4.5   |      0|        0|     0|
 |spdplyr           |0.1.2   |      0|        0|     0|
-|spocc             |0.6.0   |      1|        0|     0|
+|spocc             |0.6.0   |      0|        0|     0|
 |srvyr             |0.2.0   |      0|        0|     0|
 |taxize            |0.8.0   |      0|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      1|        0|     0|
+|tidyr             |0.6.0   |      0|        0|     0|
 |tidyverse         |1.0.0   |      0|        0|     0|
-|units             |0.4-1   |      1|        0|     0|
+|units             |0.4-1   |      0|        0|     0|
 |valr              |0.1.1   |      1|        0|     0|
 |wand              |0.2.0   |      0|        0|     0|
+
+## abjutils (0.0.1)
+Maintainer: Fernando Correa <fcorrea@abj.org.br>
+
+0 errors | 0 warnings | 0 notes
 
 ## biomartr (0.2.1)
 Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>  
@@ -152,15 +158,7 @@ Maintainer: Ryan T. Moore <rtm@american.edu>
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>  
 Bug reports: https://github.com/ianjonsen/bsam/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘rjags’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## cellranger (1.1.0)
 Maintainer: Jennifer Bryan <jenny@stat.ubc.ca>  
@@ -200,12 +198,9 @@ Bug reports: https://github.com/bramtayl/datastepr/issues
 Maintainer: Richard Iannone <riannone@me.com>  
 Bug reports: https://github.com/rich-iannone/DiagrammeR/issues
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note 
 
 ```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking: ‘DiagrammeRsvg’ ‘rsvg’
-
 checking installed package size ... NOTE
   installed size is 10.6Mb
   sub-directories of 1Mb or more:
@@ -294,8 +289,6 @@ Bug reports: https://github.com/ropensci/geojson/issues
 checking package dependencies ... ERROR
 Package required but not available: ‘protolite’
 
-Package suggested but not available for checking: ‘geojsonlint’
-
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
@@ -315,9 +308,26 @@ Maintainer: Lindsay Rutter <lrutter@iastate.edu>
 Maintainer: Masaaki Horikoshi <sinhrks@gmail.com>  
 Bug reports: https://github.com/sinhrks/ggfortify/issues
 
-0 errors | 0 warnings | 1 note 
+1 error  | 0 warnings | 1 note 
 
 ```
+checking tests ... ERROR
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  stress after  10 iters: 0.00951, magic = 0.500
+  stress after  20 iters: 0.00941, magic = 0.500
+  Successfully loaded changepoint package version 2.2.2
+   NOTE: Predefined penalty values changed in version 2.2.  Previous penalty values with a postfix 1 i.e. SIC1 are now without i.e. SIC and previous penalties without a postfix i.e. SIC are now with a postfix 0 i.e. SIC0. See NEWS and help files for further details.
+  Loading required package: sandwich
+  Loading required package: urca
+  Loading required package: lmtest
+  testthat results ================================================================
+  OK: 1151 SKIPPED: 4 FAILED: 1
+  1. Error: fortify.MSwM works for sample data (@test-MSwM.R#7) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+
 checking installed package size ... NOTE
   installed size is  5.7Mb
   sub-directories of 1Mb or more:
@@ -393,14 +403,13 @@ Bug reports: http://www.github.com/ropenscilabs/isdparser/issues
 Maintainer: Shinya Uryu <suika1127@gmail.com>  
 Bug reports: https://github.com/uribo/jpmesh/issues
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
 
 ```
-checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+checking installed package size ... NOTE
+  installed size is 206.0Mb
+  sub-directories of 1Mb or more:
+    extdata  205.2Mb
 ```
 
 ## knitr (1.15.1)
@@ -442,12 +451,7 @@ Bug reports: http://github.com/ropenscilabs/monkeylearn/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropenscilabs/mregions/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking: ‘geojsonio’ ‘rmapshaper’
-```
+0 errors | 0 warnings | 0 notes
 
 ## natserv (0.1.4)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
@@ -490,15 +494,7 @@ Bug reports: https://github.com/ropensci/pangaear/issues
 Maintainer: Brandon LeBeau <lebebr01+pdfsearch@gmail.com>  
 Bug reports: https://github.com/lebebr01/pdfsearch/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘pdftools’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## photobiologyInOut (0.4.12)
 Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
@@ -531,30 +527,11 @@ Bug reports: https://bitbucket.org/aphalo/photobiology/issues
 
 0 errors | 0 warnings | 0 notes
 
-## phylopath (0.2.1)
+## phylopath (0.2.2)
 Maintainer: Wouter van der Bijl <wouter.van.der.bijl@zoologi.su.se>  
 Bug reports: https://github.com/Ax3man/phylopath/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘phylopath-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: DAG
-> ### Title: Directed acyclic graphs (DAGs)
-> ### Aliases: DAG
-> 
-> ### ** Examples
-> 
->   # Use formula notation to create DAGs:
->   plot(DAG(A~B, B~C))
-Error in `[.data.frame`(nodes_df, , i) : undefined columns selected
-Calls: plot -> plot.DAG -> <Anonymous> -> [ -> [.data.frame
-Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## plotly (4.5.6)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
@@ -602,25 +579,7 @@ Bug reports: https://github.com/rOpenGov/pollstR/issues
 Maintainer: Vincent Nijs <radiant@rady.ucsd.edu>  
 Bug reports: https://github.com/radiant-rstats/radiant.data/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘radiant.data-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: dtab.explore
-> ### Title: Make a tabel of summary statistics in DT
-> ### Aliases: dtab.explore
-> 
-> ### ** Examples
-> 
-> tab <- explore("diamonds", "price:x") %>% dtab
-Error in loadNamespace(name) : there is no package called ‘crosstalk’
-Calls: %>% ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## randNames (0.2.3)
 Maintainer: Karthik Ram <karthik.ram@gmail.com>  
@@ -675,15 +634,7 @@ Bug reports: https://github.com/gschofl/reutils/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropensci/rgbif/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘V8’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## rgho (1.0.0)
 Maintainer: Antoine Filipovic-Pierucci <pierucci@gmail.com>  
@@ -790,15 +741,7 @@ Bug reports: https://github.com/mdsumner/spdplyr/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropensci/spocc/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Packages required but not available: ‘rgbif’ ‘V8’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## srvyr (0.2.0)
 Maintainer: Greg Freedman Ellis <greg.freedman@gmail.com>  
@@ -841,26 +784,7 @@ Last 13 lines of output:
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/tidyr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error\$message does not match "Unknown columns".
-  Actual value: "Unknown column: 'z'"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## tidyverse (1.0.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
@@ -872,15 +796,7 @@ Bug reports: https://github.com/hadley/tidyverse/issues
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
 Bug reports: https://github.com/edzer/units/issues/
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘udunits2’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## valr (0.1.1)
 Maintainer: Jay Hesselberth <jay.hesselberth@gmail.com>  

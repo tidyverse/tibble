@@ -1,21 +1,9 @@
 * installing *source* package ‘protolite’ ...
 ** package ‘protolite’ successfully unpacked and MD5 sums checked
-Package protobuf was not found in the pkg-config search path.
-Perhaps you should add the directory containing `protobuf.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'protobuf' found
-Using PKG_CFLAGS=
-Using PKG_LIBS=-lprotobuf
-------------------------- ANTICONF ERROR ---------------------------
-Configuration failed because protobuf was not found. Try installing:
- * deb: libprotobuf-dev (Debian, Ubuntu, etc)
- * rpm: protobuf-devel (Fedora, EPEL)
- * csw: protobuf_dev (Solaris)
- * brew: protobuf (OSX)
-If protobuf is already installed, check that 'pkg-config' is in your
-PATH and PKG_CONFIG_PATH contains a protobuf.pc file. If pkg-config
-is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:
-R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
---------------------------------------------------------------------
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-pthread
+Using PKG_LIBS=-lprotobuf -pthread -lpthread
+Failed to run protoc.
+Please install the 'protobuf-compiler' package for your system.
 ERROR: configuration failed for package ‘protolite’
 * removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/protolite’
