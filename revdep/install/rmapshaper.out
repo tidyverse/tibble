@@ -1,2 +1,0 @@
-ERROR: dependencies ‘V8’, ‘geojsonio’ are not available for package ‘rmapshaper’
-* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/rmapshaper’
