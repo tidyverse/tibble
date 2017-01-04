@@ -29,4 +29,3 @@ tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
                  validate = FALSE)
 repair_names(tbl)
 }
-

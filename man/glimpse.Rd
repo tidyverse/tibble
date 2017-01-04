@@ -30,6 +30,7 @@ the underlying data, even when applied to a remote data source.)
 \code{glimpse} is an S3 generic with a customised method for \code{tbl}s and
 \code{data.frames}, and a default method that calls \code{\link{str}}.
 }
+
 \examples{
 glimpse(mtcars)
 
@@ -38,4 +39,3 @@ if (!requireNamespace("nycflights13", quietly = TRUE))
 
 glimpse(nycflights13::flights)
 }
-

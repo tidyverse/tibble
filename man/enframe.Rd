@@ -23,4 +23,3 @@ For unnamed vectors, the natural sequence is used as name column.
 enframe(1:3)
 enframe(c(a = 5, b = 7))
 }
-

@@ -38,4 +38,3 @@ obj_sum(Sys.time())
 obj_sum(mean)
 }
 \keyword{internal}
-

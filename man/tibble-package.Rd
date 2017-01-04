@@ -51,6 +51,7 @@ Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
   printed in reduced form. Default: 100.}
 }
 }
+
 \seealso{
 Useful links:
 \itemize{
@@ -74,4 +75,3 @@ Other contributors:
 }
 
 }
-

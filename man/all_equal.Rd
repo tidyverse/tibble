@@ -51,4 +51,3 @@ all.equal(df1, df2)
 # But you can request to convert similar types
 all.equal(df1, df2, convert = TRUE)
 }
-

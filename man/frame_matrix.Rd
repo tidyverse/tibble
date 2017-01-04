@@ -26,4 +26,3 @@ frame_matrix(
   5,     2
 )
 }
-
