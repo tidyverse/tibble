@@ -1,7 +1,7 @@
 #' Row-wise tibble creation
 #'
-#' Create \code{\link{tibble}}s laying out the data in rows, rather than
-#' in columns. This is useful for small tables of data where readability is
+#' Create \code{\link{tibble}}s using an easier to read row-by-row layout.
+#' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
 #' \code{frame_data()} is an older name for \code{tribble()}. It will eventually
