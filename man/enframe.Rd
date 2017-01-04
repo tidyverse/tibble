@@ -12,7 +12,7 @@ enframe(x, name = "name", value = "value")
 \item{name, value}{Names of the columns that store the names and values}
 }
 \value{
-A \code{\link{tibble}}
+A \link{tibble}
 }
 \description{
 A helper function that converts named atomic vectors or lists to two-column
@@ -23,4 +23,3 @@ For unnamed vectors, the natural sequence is used as name column.
 enframe(1:3)
 enframe(c(a = 5, b = 7))
 }
-

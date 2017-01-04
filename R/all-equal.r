@@ -1,7 +1,7 @@
 #' Flexible equality comparison for data frames.
 #'
-#' When comparing two \code{tbl_df} using \code{\link{all.equal}}, column and
-#' row order is ignored by default, and types are not coerced.  The \code{dplyr}
+#' When comparing two `tbl_df` using [all.equal()], column and
+#' row order is ignored by default, and types are not coerced.  The `dplyr`
 #' package provides a much more efficient implementation for this functionality.
 #'
 #' @param target,current Two data frames to compare.
@@ -9,10 +9,10 @@
 #' @param ignore_row_order Should order of rows be ignored?
 #' @param convert Should similar classes be converted? Currently this will
 #'   convert factor to character and integer to double.
-#' @param ... Ignored. Needed for compatibility with \code{all.equal}.
-#' @return \code{TRUE} if equal, otherwise a character vector describing
-#'   the reasons why they're not equal. Use \code{\link{isTRUE}} if using the
-#'   result in an \code{if} expression.
+#' @param ... Ignored. Needed for compatibility with `all.equal()`.
+#' @return `TRUE` if equal, otherwise a character vector describing
+#'   the reasons why they're not equal. Use [isTRUE()] if using the
+#'   result in an `if` expression.
 #' @examples
 #' scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
 #' mtcars_df <- as_tibble(mtcars)

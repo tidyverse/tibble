@@ -46,15 +46,15 @@ frame and you want to save some time.}
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
-\code{as.data.frame} is effectively a thin wrapper around \code{data.frame},
-and hence is rather slow (because it calls \code{data.frame} on each element
-before \code{cbind}ing together). \code{as_tibble} is a new S3 generic
+\code{\link[=as.data.frame]{as.data.frame()}} is effectively a thin wrapper around \code{data.frame},
+and hence is rather slow (because it calls \code{\link[=data.frame]{data.frame()}} on each element
+before \link{cbind}ing together). \code{as_tibble} is a new S3 generic
 with more efficient methods for matrices and data frames.
 }
 \details{
 This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 classes), tibbles (returns unchanged input), lists, matrices, and tables.
-Other types are first coerced via \code{\link[base]{as.data.frame}} with
+Other types are first coerced via \code{as.data.frame()} with
 \code{stringsAsFactors = FALSE}.
 
 \code{as_data_frame} and \code{as.tibble} are aliases.
@@ -87,4 +87,3 @@ microbenchmark::microbenchmark(
 )
 }
 }
-

@@ -20,15 +20,15 @@ is_vector_s3(x)
 and variants have been implemented.}
 }
 \description{
-\code{type_sum} gives a brief summary of object type. Objects that commonly
+\code{type_sum()} gives a brief summary of object type. Objects that commonly
 occur in a data frame should return a string with four or less characters.
 
-\code{obj_sum} also includes the size of the object if \code{is_vector_s3}
+\code{obj_sum()} also includes the size of the object if \code{is_vector_s3()}
 is \code{TRUE}.
 
-\code{tbl_sum} gives a brief textual description of a table-like object,
+\code{tbl_sum()} gives a brief textual description of a table-like object,
 which should include the dimensions, the data source, and possible grouping
-(for dplyr).  The default implementation forwards to \code{obj_sum}
+(for \code{dplyr}).  The default implementation forwards to \code{obj_sum()}.
 }
 \examples{
 obj_sum(1:10)
@@ -38,4 +38,3 @@ obj_sum(Sys.time())
 obj_sum(mean)
 }
 \keyword{internal}
-

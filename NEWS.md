@@ -1,3 +1,10 @@
+## tibble 1.2-14 (2017-01-04)
+
+- `glimpse()` now uses `type_sum()` also for S3 objects (#185, #186, @holstius).
+- Reword documentation for `tribble()` (#191, @kwstat).
+- Unicode multiplication sign is rendered as `x` if it cannot be represented in the current locale (#192, @ncarchedi).
+
+
 ## tibble 1.2-13 (2016-11-30)
 
 - New `frame_matrix()` (#140, #168, @LaDilettante).
