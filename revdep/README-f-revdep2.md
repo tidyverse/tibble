@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-01-04                   |
+|date     |2017-01-05                   |
 
 ## Packages
 
@@ -50,12 +50,12 @@
 |docxtractr        |0.2.0   |      0|        0|     0|
 |dotwhisker        |0.2.3   |      0|        0|     0|
 |dplyr             |0.5.0   |      0|        0|     1|
-|easyformatr       |0.1.2   |      1|        0|     0|
+|easyformatr       |0.1.2   |      0|        0|     0|
 |eurostat          |2.2.1   |      0|        0|     0|
 |fbar              |0.1.16  |      0|        0|     1|
 |feather           |0.3.1   |      0|        0|     0|
 |forcats           |0.1.1   |      0|        0|     0|
-|geojson           |0.1.0   |      1|        0|     0|
+|geojson           |0.1.0   |      0|        0|     0|
 |getlandsat        |0.1.0   |      0|        0|     0|
 |ggenealogy        |0.3.0   |      0|        0|     0|
 |ggfortify         |0.3.0.0 |      0|        0|     1|
@@ -102,7 +102,7 @@
 |rnoaa             |0.6.6   |      0|        0|     0|
 |rorcid            |0.3.0   |      0|        0|     0|
 |rtide             |0.0.3   |      0|        0|     0|
-|sf                |0.2-7   |      1|        0|     0|
+|sf                |0.2-8   |      0|        0|     1|
 |sjmisc            |2.2.0   |      0|        0|     0|
 |sjPlot            |2.2.0   |      0|        0|     1|
 |sjstats           |0.7.1   |      0|        0|     0|
@@ -111,12 +111,12 @@
 |spdplyr           |0.1.2   |      0|        0|     0|
 |spocc             |0.6.0   |      0|        0|     0|
 |srvyr             |0.2.0   |      0|        0|     0|
-|taxize            |0.8.0   |      0|        0|     0|
+|taxize            |0.8.0   |      1|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
 |tidyr             |0.6.0   |      1|        0|     0|
 |tidyverse         |1.0.0   |      0|        0|     0|
 |units             |0.4-1   |      0|        0|     0|
-|valr              |0.1.1   |      1|        0|     0|
+|valr              |0.1.1   |      0|        0|     1|
 |wand              |0.2.0   |      0|        0|     0|
 
 ## abjutils (0.0.1)
@@ -242,13 +242,7 @@ checking installed package size ... NOTE
 Maintainer: Brandon Taylor <brandon.taylor221@gmail.com>  
 Bug reports: https://github.com/bramtayl/easyformatr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking whether package ‘easyformatr’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/easyformatr.Rcheck/00install.out’ for details.
-```
+0 errors | 0 warnings | 0 notes
 
 ## eurostat (2.2.1)
 Maintainer: Lahti Leo <louhos@googlegroups.com>  
@@ -283,15 +277,7 @@ Bug reports: https://github.com/hadley/forcats/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropensci/geojson/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘protolite’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## getlandsat (0.1.0)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
@@ -667,16 +653,18 @@ Bug reports: https://github.com/poissonconsulting/rtide/issues
 
 0 errors | 0 warnings | 0 notes
 
-## sf (0.2-7)
+## sf (0.2-8)
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
 Bug reports: https://github.com/edzer/sfr/issues/
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
 
 ```
-checking whether package ‘sf’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/sf.Rcheck/00install.out’ for details.
+checking installed package size ... NOTE
+  installed size is  8.5Mb
+  sub-directories of 1Mb or more:
+    doc    4.0Mb
+    libs   3.7Mb
 ```
 
 ## sjmisc (2.2.0)
@@ -736,7 +724,26 @@ Bug reports: https://github.com/gergness/srvyr/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropensci/taxize/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  Not Found (HTTP 404).
+  1: get_gbifid("Satyrium", phylum = "Tracheophyta", rows = 1, verbose = FALSE) at testthat/test-get_gbifid.R:34
+  2: lapply(as.character(sciname), fun, ask, verbose, rows, ...)
+  3: FUN(X[[i]], ...)
+  4: gbif_name_backbone(sciname, ...)
+  5: stop_for_status(temp)
+  
+  testthat results ================================================================
+  OK: 24 SKIPPED: 138 FAILED: 1
+  1. Error: get_gbifid phylum/class/order/family parameters work (@test-get_gbifid.R#34) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## tidyquant (0.1.0)
 Maintainer: Matt Dancho <mdancho@gmail.com>  
@@ -804,12 +811,13 @@ Bug reports: https://github.com/edzer/units/issues/
 Maintainer: Jay Hesselberth <jay.hesselberth@gmail.com>  
 Bug reports: https://github.com/jayhesselberth/valr/issues
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
 
 ```
-checking whether package ‘valr’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/valr.Rcheck/00install.out’ for details.
+checking installed package size ... NOTE
+  installed size is 12.4Mb
+  sub-directories of 1Mb or more:
+    libs  11.4Mb
 ```
 
 ## wand (0.2.0)
