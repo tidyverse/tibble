@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-01-04                   |
+|date     |2017-01-05                   |
 
 ## Packages
 
@@ -29,45 +29,15 @@
 
 # Check results
 
-9 packages with problems
+5 packages with problems
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
-|easyformatr       |0.1.2   |      1|        0|     0|
-|geojson           |0.1.0   |      1|        0|     0|
 |highcharter       |0.4.0   |      0|        1|     0|
 |photobiologyInOut |0.4.12  |      1|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
-|sf                |0.2-7   |      1|        0|     0|
+|taxize            |0.8.0   |      1|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      1|        0|     0|
-|valr              |0.1.1   |      1|        0|     0|
-
-## easyformatr (0.1.2)
-Maintainer: Brandon Taylor <brandon.taylor221@gmail.com>  
-Bug reports: https://github.com/bramtayl/easyformatr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking whether package ‘easyformatr’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/easyformatr.Rcheck/00install.out’ for details.
-```
-
-## geojson (0.1.0)
-Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
-Bug reports: https://github.com/ropensci/geojson/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘protolite’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
 
 ## highcharter (0.4.0)
 Maintainer: Joshua Kunst <jbkunst@gmail.com>  
@@ -138,16 +108,29 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## sf (0.2-7)
-Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
-Bug reports: https://github.com/edzer/sfr/issues/
+## taxize (0.8.0)
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
+Bug reports: https://github.com/ropensci/taxize/issues
 
 1 error  | 0 warnings | 0 notes
 
 ```
-checking whether package ‘sf’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/sf.Rcheck/00install.out’ for details.
+checking tests ... ERROR
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  Not Found (HTTP 404).
+  1: get_gbifid("Satyrium", phylum = "Tracheophyta", rows = 1, verbose = FALSE) at testthat/test-get_gbifid.R:34
+  2: lapply(as.character(sciname), fun, ask, verbose, rows, ...)
+  3: FUN(X[[i]], ...)
+  4: gbif_name_backbone(sciname, ...)
+  5: stop_for_status(temp)
+  
+  testthat results ================================================================
+  OK: 24 SKIPPED: 138 FAILED: 1
+  1. Error: get_gbifid phylum/class/order/family parameters work (@test-get_gbifid.R#34) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 ```
 
 ## tidyquant (0.1.0)
@@ -173,42 +156,5 @@ Last 13 lines of output:
   
   Error: testthat unit tests failed
   Execution halted
-```
-
-## tidyr (0.6.0)
-Maintainer: Hadley Wickham <hadley@rstudio.com>  
-Bug reports: https://github.com/hadley/tidyr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error\$message does not match "Unknown columns".
-  Actual value: "Unknown column: 'z'"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
-## valr (0.1.1)
-Maintainer: Jay Hesselberth <jay.hesselberth@gmail.com>  
-Bug reports: https://github.com/jayhesselberth/valr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking whether package ‘valr’ can be installed ... ERROR
-Installation failed.
-See ‘/home/muelleki/git/R/tibble/revdep/checks/valr.Rcheck/00install.out’ for details.
 ```
 
