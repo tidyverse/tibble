@@ -84,3 +84,7 @@ tickit <- function(x) {
   x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
   x
 }
+
+deparse2 <- function(x) {
+  paste(deparse(x, 500L), collapse = "")
+}
