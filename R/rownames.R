@@ -1,15 +1,15 @@
 #' Tools for working with row names
 #'
 #' While a tibble can have row names (e.g., when converting from a regular data
-#' frame), they are removed when subsetting with the \code{[} operator.
-#' A warning will be raised when attempting to assign non-\code{NULL} row names
+#' frame), they are removed when subsetting with the `[` operator.
+#' A warning will be raised when attempting to assign non-`NULL` row names
 #' to a tibble.
 #' Generally, it is best to avoid row names, because they are basically a
 #' character column with different semantics to every other column. These
 #' functions allow to you detect if a data frame has row names
-#' (\code{has_rownames}), remove them (\code{remove_rownames}), or convert
-#' them back-and-forth between an explicit column (\code{rownames_to_column}
-#' and \code{column_to_rownames}).
+#' (`has_rownames()`), remove them (`remove_rownames()`), or convert
+#' them back-and-forth between an explicit column (`rownames_to_column()`
+#' and `column_to_rownames()`).
 #'
 #' In the printed output, the presence of row names is indicated by a star just
 #' above the row numbers.

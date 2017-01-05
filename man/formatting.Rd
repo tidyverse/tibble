@@ -49,4 +49,3 @@ print(nycflights13::flights, width = Inf)
 \link{tibble-package}
 }
 \keyword{internal}
-
