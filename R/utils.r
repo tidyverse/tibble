@@ -77,7 +77,7 @@ cat_line <- function(...) {
   cat(..., "\n", sep = "")
 }
 
-is_syntactic <- function(x) make.names(x) == x
+is_syntactic <- function(x) vapply(make.names(x) == x, isTRUE, logical(1))
 
 tickit <- function(x) {
   needs_ticks <- !is_syntactic(x)
