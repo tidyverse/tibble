@@ -33,7 +33,7 @@
 all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("Please install dplyr to use all_equal()", call. = FALSE)
+    stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
   }
 
   dplyr::all_equal(
