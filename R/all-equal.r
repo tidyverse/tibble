@@ -2,7 +2,7 @@
 #'
 #' When comparing two `tbl_df` using [all.equal()], column and
 #' row order is ignored by default, and types are not coerced.  The `dplyr`
-#' package provides a much more efficient implementation for this functionality.
+#' package is necessary to use this function.
 #'
 #' @param target,current Two data frames to compare.
 #' @param ignore_col_order Should order of columns be ignored?
