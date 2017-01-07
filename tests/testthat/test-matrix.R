@@ -68,3 +68,10 @@ test_that("auto-assigning names", {
   expect_identical(as_tibble(diag(3L)),
                    as_tibble(as.data.frame(diag(3L))))
 })
+
+test_that("forwarding to as.data.frame() for ts objects (#184)", {
+  mts <- cbind(
+    A = ts(c(1, 1, 2, 2),     start = 2016, freq = 4),
+    B = ts(c(11, 11, 12, 13), start = 2016, freq = 4))
+  expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))
+})
