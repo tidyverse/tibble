@@ -21,12 +21,13 @@ Imports:
     lazyeval (>= 0.1.10),
     Rcpp (>= 0.12.3)
 Suggests:
-    testthat,
-    withr,
+    dplyr,
     knitr (>= 1.5.32),
-    rmarkdown,
+    microbenchmark,
     nycflights13,
-    microbenchmark
+    testthat,
+    rmarkdown,
+    withr
 LinkingTo: Rcpp
 LazyData: yes
 License: MIT + file LICENSE

@@ -31,7 +31,7 @@ result in an \code{if} expression.
 \description{
 When comparing two \code{tbl_df} using \code{\link[=all.equal]{all.equal()}}, column and
 row order is ignored by default, and types are not coerced.  The \code{dplyr}
-package provides a much more efficient implementation for this functionality.
+package is necessary to use this function.
 }
 \examples{
 scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
