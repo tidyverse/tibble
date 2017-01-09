@@ -36,7 +36,12 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
     stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
   }
 
-  dplyr::all_equal(
+  dplyr_all_equal <- get(
+    "all.equal.tbl_df", asNamespace("dplyr"), mode = "function",
+    inherits = FALSE)
+  stopifnot(getNamespaceName(environment(dplyr_all_equal)) == "dplyr")
+
+  dplyr_all_equal(
     target = target, current = current, ignore_col_order = ignore_col_order,
     ignore_row_order = ignore_row_order, convert = convert, ...)
 }
