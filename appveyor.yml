@@ -49,9 +49,6 @@ environment:
 
   - R_VERSION: patched
 
-matrix:
-  fast_finish: true
-
 build_script:
   - travis-tool.sh install_deps
 
