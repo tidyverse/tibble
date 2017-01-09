@@ -33,7 +33,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   if (is.character(i) && !has_name(x, i)) {
     # R uses `*tmp*` as argument name for partial updates of the form
     # df$col[indexes] <- values
-    if (all(deparse(substitute(x)) == "*tmp*")) {
+    if (identical(substitute(x), quote(`*tmp*`))) {
       warningc("Uninitialised column '", i, "', please create the column before populating parts of it.")
     } else {
       warningc("Unknown column '", i, "'.")
