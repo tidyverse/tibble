@@ -32,6 +32,10 @@
 #' }
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
+  if (inherits(.data, "grouped_df")) {
+    stop("Cannot add rows to grouped data frames", call. = FALSE)
+  }
+
   df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 

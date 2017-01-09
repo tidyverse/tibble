@@ -31,7 +31,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' @export
 `$.tbl_df` <- function(x, i) {
   if (is.character(i) && !has_name(x, i)) {
-    warningc("Unknown column '", i, "'")
+    warningc("Unknown or uninitialised column: '", i, "'.")
   }
   .subset2(x, i)
 }

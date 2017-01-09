@@ -23,12 +23,10 @@ describing the rest of it as text.
 \item{print}{By default only prints the first 10 rows (at most 20), and the
 columns that fit on screen; see \code{\link[=print.tbl_df]{print.tbl_df()}}}
 \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
-\item{\code{[[}, \code{$}}{Calls [.subset2()] directly,
+\item{\code{[[}, \code{$}}{Calls \code{\link[=.subset2]{.subset2()}} directly,
 so is considerably faster. Returns \code{NULL} if column does not exist,
 \code{$} warns.}
 }
-
-[\code{}{Never simplifies (drops), so always returns data.frame} \item{}[[\code{,}$`}{Calls [.subset2()]: R:%60%7D%7BNever%20simplifies%20(drops),%20so%20always%20returns%20data.frame%7D%0A%5Citem%7B%60[[%60,%20%60$%60%7D%7BCalls%20[.subset2()
 }
 
 \section{Important functions}{

@@ -101,6 +101,12 @@ test_that("add_row() keeps the class of empty columns", {
   expect_equal(sapply(df_empty, class), sapply(new_tibble, class))
 })
 
+test_that("add_row() fails nicely for grouped data frames (#179)", {
+  expect_error(
+    add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
+    "grouped data frame")
+})
+
 # add_column ------------------------------------------------------------
 
 test_that("can add new column", {

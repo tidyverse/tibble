@@ -208,6 +208,11 @@ as_tibble.poly <- function(x, ...) {
 }
 
 #' @export
+as_tibble.ts <- function(x, ...) {
+  as_tibble(as.data.frame(x, ...))
+}
+
+#' @export
 #' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
 as_tibble.table <- function(x, n = "n", ...) {

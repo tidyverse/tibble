@@ -1,3 +1,13 @@
+## tibble 1.2-15 (2017-01-10)
+
+- Test R 3.1.3 and later in AppVeyor, using `Depends: R (>= 3.1.0)` in `DESCRIPTION`. Support for R 3.0.0 requires a `lazyeval` update (#189).
+- An attempt to partially update a missing column now throws a clearer warning (#199).
+- Time series matrices (objects of class `mts` and `ts`) are now supported in `as_tibble()` (#184).
+- An attempt to call `add_row()` for a grouped data frame results in a helpful error message (#179).
+- The `all_equal()` function (called by `all.equal.tbl_df()`) now forwards to `dplyr` and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declard class (`data.frame` vs. `tbl_df`) are ignored. This ensures consistent behavior of this function, regardless if `dplyr` is loaded or not (#198).
+- Backtick `NA` names in printing (#206, #207, @jennybc).
+
+
 ## tibble 1.2-14 (2017-01-04)
 
 - `glimpse()` now uses `type_sum()` also for S3 objects (#185, #186, @holstius).
