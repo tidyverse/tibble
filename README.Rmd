@@ -72,7 +72,7 @@ flights
 Tibbles are strict about subsetting. If you try to access a variable that does not exist via `$`, you'll get a warning:
 
 ```{r, error = TRUE}
-flights$yea
+flights$year
 ```
 
 Tibbles also clearly delineate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector. No more `drop = FALSE`!
