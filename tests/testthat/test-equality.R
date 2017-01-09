@@ -80,6 +80,8 @@ test_that("equality test fails when convert is FALSE and types don't match (#148
   df2 <- tibble(x = factor("a"))
 
   expect_equal( all.equal(df1, df2, convert = FALSE), "Incompatible type for column x: x character, y factor" )
+
+  skip_if_not(sessionInfo()$loadedOnly$dplyr$Version >= "0.5.0")
   expect_warning( all.equal(df1, df2, convert = TRUE) )
 })
 
