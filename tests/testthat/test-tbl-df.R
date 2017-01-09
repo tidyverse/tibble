@@ -130,6 +130,11 @@ test_that("$ throws warning if name doesn't exist", {
                  "Unknown column 'y'")
 })
 
+test_that("$ throws different warning if attempting a partial initialization (#199)", {
+  df <- tibble(x = 1)
+  expect_warning(df$y[1] <- 2, "Uninitialised column 'y'")
+})
+
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
   expect_warning(expect_null(df$p),
