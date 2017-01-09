@@ -36,7 +36,8 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
     stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
   }
 
-  dplyr_all_equal <- utils::getS3method("all.equal", "tbl_df")
+  dplyr_all_equal <-
+    utils::getS3method("all.equal", "tbl_df", envir = asNamespace("dplyr"))
   stopifnot(getNamespaceName(environment(dplyr_all_equal)) == "dplyr")
 
   dplyr_all_equal(
