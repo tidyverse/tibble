@@ -36,10 +36,7 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
     stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
   }
 
-  dplyr_all_equal <- mget("all_equal", asNamespace("dplyr"), mode = "function", NULL)[[1L]]
-  if (is.null(dplyr_all_equal)) {
-    stop("Cannot find all_equal() in dplyr", call. = FALSE)
-  }
+  dplyr_all_equal <- get("all_equal", asNamespace("dplyr"), mode = "function")
 
   dplyr_all_equal(
     target = target, current = current, ignore_col_order = ignore_col_order,
