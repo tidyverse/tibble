@@ -113,7 +113,7 @@
 |srvyr             |0.2.0   |      0|        0|     0|
 |taxize            |0.8.0   |      1|        0|     0|
 |tidyquant         |0.1.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      1|        0|     0|
+|tidyr             |0.6.0   |      0|        0|     0|
 |tidyverse         |1.0.0   |      0|        0|     0|
 |units             |0.4-1   |      0|        0|     0|
 |valr              |0.1.1   |      0|        0|     1|
@@ -774,26 +774,7 @@ Last 13 lines of output:
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/tidyr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error\$message does not match "Unknown columns".
-  Actual value: "Unknown column: 'z'"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## tidyverse (1.0.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
