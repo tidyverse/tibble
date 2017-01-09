@@ -31,13 +31,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' @export
 `$.tbl_df` <- function(x, i) {
   if (is.character(i) && !has_name(x, i)) {
-    # R uses `*tmp*` as argument name for partial updates of the form
-    # df$col[indexes] <- values
-    if (identical(substitute(x), quote(`*tmp*`))) {
-      warningc("Uninitialised column '", i, "', please create the column before populating parts of it.")
-    } else {
-      warningc("Unknown column '", i, "'.")
-    }
+    warningc("Unknown or uninitialised column: '", i, "'.")
   }
   .subset2(x, i)
 }
