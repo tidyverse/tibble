@@ -30,7 +30,7 @@
 
 # Check results
 
-9 packages with problems
+8 packages with problems
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
@@ -42,7 +42,6 @@
 |rbgm              |0.0.4   |      0|        1|     0|
 |sf                |0.2-8   |      1|        0|     1|
 |tidyquant         |0.2.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      1|        0|     0|
 
 ## dat (0.1.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -232,31 +231,6 @@ Last 13 lines of output:
   2. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_mutate.R#151) 
   3. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#100) 
   4. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#118) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
-## tidyr (0.6.0)
-Maintainer: Hadley Wickham <hadley@rstudio.com>  
-Bug reports: https://github.com/hadley/tidyr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error\$message does not match "Unknown columns".
-  Actual value: "Unknown column: 'z'"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
   
   Error: testthat unit tests failed
   Execution halted
