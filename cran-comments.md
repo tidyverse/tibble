@@ -1,5 +1,5 @@
 ## Test environments
-* ubuntu 12.04 (on travis-ci), R 3.3.1, R-devel and R-oldrel
+* ubuntu 12.04 (on travis-ci), R 3.3.2, R-devel and R-oldrel
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -8,6 +8,5 @@
 
 ## Reverse dependencies
 
-I checked all 30 reverse dependencies for version 1.0 and for the current release,
-and compared the results. They were identical, except for the `bigrf` package
-which failed memory allocation in both cases but for two different reasons.
+I checked all 88 reverse dependencies for version 1.2 and for the current release,
+and compared the outputs of R CMD check. They were identical for all packages; tidyr requires version 0.6.1 which contains a compatibility fix.
