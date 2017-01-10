@@ -1,45 +1,41 @@
-## tibble 1.2-15 (2017-01-10)
+# tibble 1.3.0 (2017-01-10)
 
-- Test R 3.1.3 and later in AppVeyor, using `Depends: R (>= 3.1.0)` in `DESCRIPTION`. Support for R 3.0.0 requires a `lazyeval` update (#189).
-- An attempt to partially update a missing column now throws a clearer warning (#199).
+## Bug fixes
+
 - Time series matrices (objects of class `mts` and `ts`) are now supported in `as_tibble()` (#184).
-- An attempt to call `add_row()` for a grouped data frame results in a helpful error message (#179).
 - The `all_equal()` function (called by `all.equal.tbl_df()`) now forwards to `dplyr` and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declard class (`data.frame` vs. `tbl_df`) are ignored. This ensures consistent behavior of this function, regardless if `dplyr` is loaded or not (#198).
-- Backtick `NA` names in printing (#206, #207, @jennybc).
 
+## Interface changes
 
-## tibble 1.2-14 (2017-01-04)
-
-- `glimpse()` now uses `type_sum()` also for S3 objects (#185, #186, @holstius).
-- Reword documentation for `tribble()` (#191, @kwstat).
-- Unicode multiplication sign is rendered as `x` if it cannot be represented in the current locale (#192, @ncarchedi).
-
-
-## tibble 1.2-13 (2016-11-30)
-
-- New `frame_matrix()` (#140, #168, @LaDilettante).
-- The `max.print` option is ignored when printing a tibble (#194, #195, @t-kalinowski).
-- Fix typo in `obj_sum` documentation (#193, @etiennebr).
-- Keep column classes when adding row to empty tibble (#171, #177, @LaDilettante).
-- Now explicitly stating minimum Rcpp version 0.12.3.
-
-
-## tibble 1.2-12 (2016-08-30)
-
-- Simplify tests for `add_row()` and `add_column()` (#165, #166, @LaDilettante).
-- `add_column()` can add columns of length 1 (#162, #164, @LaDilettante).
-- Singular and plural variants for error messages that mention a list of objects (#116, #138, @LaDilettante).
-
-
-## tibble 1.2-11 (2016-08-29)
-
+- Now requiring R 3.1.0 instead of R 3.1.3 (#189).
 - Add `as.tibble()` as an alias to `as_tibble()` (#160, @LaDilettante).
-- Added tests for `tibble_width()` and `tibble_glimpse_width()` (#163, @LaDilettante).
+- New `frame_matrix()` (#140, #168, @LaDilettante).
 
+## Features
 
-## tibble 1.2-10 (2016-08-29)
+### General
 
-- Same as 1.2.
+- Keep column classes when adding row to empty tibble (#171, #177, @LaDilettante).
+- Singular and plural variants for error messages that mention a list of objects (#116, #138, @LaDilettante).
+- `add_column()` can add columns of length 1 (#162, #164, @LaDilettante).
+
+### Input validation
+
+- An attempt to read or update a missing column now throws a clearer warning (#199).
+- An attempt to call `add_row()` for a grouped data frame results in a helpful error message (#179).
+
+### Printing
+
+- Render Unicode multiplication sign as `x` if it cannot be represented in the current locale (#192, @ncarchedi).
+- Backtick `NA` names in printing (#206, #207, @jennybc).
+- `glimpse()` now uses `type_sum()` also for S3 objects (#185, #186, @holstius).
+- The `max.print` option is ignored when printing a tibble (#194, #195, @t-kalinowski).
+
+## Documentation
+
+- Fix typo in `obj_sum` documentation (#193, @etiennebr).
+- Reword documentation for `tribble()` (#191, @kwstat).
+- Now explicitly stating minimum Rcpp version 0.12.3.
 
 
 # tibble 1.2 (2016-08-26)
