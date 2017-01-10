@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-01-05                   |
+|date     |2017-01-10                   |
 
 ## Packages
 
@@ -29,15 +29,43 @@
 
 # Check results
 
-5 packages with problems
+8 packages with problems
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
+|dat               |0.1.0   |      1|        0|     0|
 |highcharter       |0.4.0   |      0|        1|     0|
+|jpmesh            |0.3.0   |      1|        0|     0|
 |photobiologyInOut |0.4.12  |      1|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
-|taxize            |0.8.0   |      1|        0|     0|
-|tidyquant         |0.1.0   |      1|        0|     0|
+|rbgm              |0.0.4   |      0|        1|     0|
+|sf                |0.2-8   |      1|        0|     1|
+|tidyquant         |0.2.0   |      1|        0|     0|
+
+## dat (0.1.0)
+Maintainer: Sebastian Warnholz <wahani@gmail.com>  
+Bug reports: https://github.com/wahani/dat/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+    print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  tests/testthat/test-trunc-mat.R:9:16: style: Variable and function names should not be longer than 25 characters.
+    expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+  
+  testthat results ================================================================
+  OK: 107 SKIPPED: 0 FAILED: 1
+  1. Failure: Package Style (@test-lintr.R#5) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## highcharter (0.4.0)
 Maintainer: Joshua Kunst <jbkunst@gmail.com>  
@@ -56,6 +84,18 @@ Error: processing vignette 'replicating-highcharts-demos.Rmd' failed with diagno
 cannot open the connection
 Execution halted
 
+```
+
+## jpmesh (0.3.0)
+Maintainer: Shinya Uryu <suika1127@gmail.com>  
+Bug reports: https://github.com/uribo/jpmesh/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking whether package ‘jpmesh’ can be installed ... ERROR
+Installation failed.
+See ‘/home/muelleki/git/R/tibble/revdep/checks/jpmesh.Rcheck/00install.out’ for details.
 ```
 
 ## photobiologyInOut (0.4.12)
@@ -108,32 +148,69 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## taxize (0.8.0)
-Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
-Bug reports: https://github.com/ropensci/taxize/issues
+## rbgm (0.0.4)
+Maintainer: Michael D. Sumner <mdsumner@gmail.com>  
+Bug reports: https://github.com/AustralianAntarcticDivision/rbgm/issues/
 
-1 error  | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+  Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
+Loading required package: sp
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:raster':
+... 8 lines ...
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/rgdal/libs/rgdal.so':
+  libgdal.so.1: cannot open shared object file: No such file or directory
+Quitting from lines 16-24 (BGM_Spatial.Rmd) 
+Error: processing vignette 'BGM_Spatial.Rmd' failed with diagnostics:
+package or namespace load failed for 'rgdal'
+Execution halted
+```
+
+## sf (0.2-8)
+Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
+Bug reports: https://github.com/edzer/sfr/issues/
+
+1 error  | 0 warnings | 1 note 
 
 ```
 checking tests ... ERROR
-Running the tests in ‘tests/test-all.R’ failed.
+Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Not Found (HTTP 404).
-  1: get_gbifid("Satyrium", phylum = "Tracheophyta", rows = 1, verbose = FALSE) at testthat/test-get_gbifid.R:34
-  2: lapply(as.character(sciname), fun, ask, verbose, rows, ...)
-  3: FUN(X[[i]], ...)
-  4: gbif_name_backbone(sciname, ...)
-  5: stop_for_status(temp)
+  > test_check("sf")
+  1. Error: st_transform works (@test_gdal.R#11) ---------------------------------
+  package rgdal is required for spTransform methods
+  1: spTransform(sp, CRS(toCrs)) at testthat/test_gdal.R:11
+  2: spTransform(sp, CRS(toCrs)) at /tmp/RtmpvuUUir/devtools345049746f77/sp/R/Spatial-methods.R:93
+  3: stop("package rgdal is required for spTransform methods") at /tmp/RtmpvuUUir/devtools345049746f77/sp/R/Spatial-methods.R:97
   
   testthat results ================================================================
-  OK: 24 SKIPPED: 138 FAILED: 1
-  1. Error: get_gbifid phylum/class/order/family parameters work (@test-get_gbifid.R#34) 
+  OK: 190 SKIPPED: 0 FAILED: 1
+  1. Error: st_transform works (@test_gdal.R#11) 
   
   Error: testthat unit tests failed
   Execution halted
+
+checking installed package size ... NOTE
+  installed size is  8.5Mb
+  sub-directories of 1Mb or more:
+    doc    4.0Mb
+    libs   3.7Mb
 ```
 
-## tidyquant (0.1.0)
+## tidyquant (0.2.0)
 Maintainer: Matt Dancho <mdancho@gmail.com>  
 Bug reports: https://github.com/mdancho84/tidyquant/issues
 
@@ -143,16 +220,16 @@ Bug reports: https://github.com/mdancho84/tidyquant/issues
 checking tests ... ERROR
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-         AAPL %>% tq_mutate_(x_fun = "close", mutate_fun = mutate_fun)
+         AAPL %>% tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)
      }, paste0("fun = ", mutate_fun, " not a valid option.")) at testthat/test_tq_transform.R:118
   2: paste0("fun = ", mutate_fun, " not a valid option.") at /tmp/RtmpGs2f8Q/devtools11166987ba25/hadley-testthat-3b2f225/R/expect-output.R:147
   
   testthat results ================================================================
-  OK: 125 SKIPPED: 1 FAILED: 4
-  1. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_mutate.R#115) 
-  2. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_mutate.R#133) 
-  3. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#100) 
-  4. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#118) 
+  OK: 133 SKIPPED: 1 FAILED: 4
+  1. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_mutate.R#133) 
+  2. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_mutate.R#151) 
+  3. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#100) 
+  4. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#118) 
   
   Error: testthat unit tests failed
   Execution halted

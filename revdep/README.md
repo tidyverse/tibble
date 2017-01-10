@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-01-05                   |
+|date     |2017-01-10                   |
 
 ## Packages
 
@@ -29,7 +29,7 @@
 
 # Check results
 
-85 packages
+88 packages
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
@@ -38,13 +38,15 @@
 |blkbox            |1.0     |      0|        0|     2|
 |blob              |1.0.0   |      0|        0|     0|
 |blockTools        |0.6-3   |      0|        0|     0|
+|bold              |0.4.0   |      0|        0|     1|
 |bsam              |1.1.1   |      0|        0|     0|
 |cellranger        |1.1.0   |      0|        0|     0|
 |checkmate         |1.8.2   |      0|        0|     0|
 |corrr             |0.2.1   |      0|        0|     0|
 |countyweather     |0.1.0   |      0|        0|     0|
-|datapasta         |1.0.0   |      0|        0|     0|
+|datapasta         |1.1.0   |      0|        0|     0|
 |datastepr         |0.0.2   |      0|        0|     0|
+|dat               |0.1.0   |      1|        0|     0|
 |DiagrammeR        |0.9.0   |      0|        0|     1|
 |docxtools         |0.1.0   |      0|        0|     0|
 |docxtractr        |0.2.0   |      0|        0|     0|
@@ -67,13 +69,14 @@
 |highcharter       |0.4.0   |      0|        1|     0|
 |hypoparsr         |0.1.0   |      0|        0|     0|
 |isdparser         |0.1.0   |      0|        0|     0|
-|jpmesh            |0.3.0   |      0|        0|     1|
+|jpmesh            |0.3.0   |      1|        0|     0|
 |knitr             |1.15.1  |      0|        0|     0|
 |KraljicMatrix     |0.1.0   |      0|        0|     0|
 |manifestoR        |1.2.3   |      0|        0|     0|
 |modelr            |0.1.0   |      0|        0|     1|
 |monkeylearn       |0.1.1   |      0|        0|     0|
 |mregions          |0.1.4   |      0|        0|     0|
+|msgtools          |0.2.4   |      0|        0|     0|
 |natserv           |0.1.4   |      0|        0|     0|
 |nycflights13      |0.2.1   |      0|        0|     1|
 |oai               |0.2.2   |      0|        0|     0|
@@ -84,11 +87,11 @@
 |photobiology      |0.9.13  |      0|        0|     0|
 |phylopath         |0.2.2   |      0|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
-|poio              |0.0-1   |      0|        0|     1|
+|poio              |0.0-2   |      0|        0|     1|
 |pollstR           |1.4.0   |      0|        0|     0|
 |radiant.data      |0.6.0   |      0|        0|     0|
 |randNames         |0.2.3   |      0|        0|     0|
-|rbgm              |0.0.4   |      0|        0|     0|
+|rbgm              |0.0.4   |      0|        1|     0|
 |rbhl              |0.3.0   |      0|        0|     0|
 |rdpla             |0.1.0   |      0|        0|     0|
 |readr             |1.0.0   |      0|        0|     1|
@@ -102,8 +105,8 @@
 |rnoaa             |0.6.6   |      0|        0|     0|
 |rorcid            |0.3.0   |      0|        0|     0|
 |rtide             |0.0.3   |      0|        0|     0|
-|sf                |0.2-8   |      0|        0|     1|
-|sjmisc            |2.2.0   |      0|        0|     0|
+|sf                |0.2-8   |      1|        0|     1|
+|sjmisc            |2.2.1   |      0|        0|     0|
 |sjPlot            |2.2.0   |      0|        0|     1|
 |sjstats           |0.7.1   |      0|        0|     0|
 |solrium           |0.4.0   |      0|        0|     0|
@@ -111,9 +114,9 @@
 |spdplyr           |0.1.2   |      0|        0|     0|
 |spocc             |0.6.0   |      0|        0|     0|
 |srvyr             |0.2.0   |      0|        0|     0|
-|taxize            |0.8.0   |      1|        0|     0|
-|tidyquant         |0.1.0   |      1|        0|     0|
-|tidyr             |0.6.0   |      1|        0|     0|
+|taxize            |0.8.0   |      0|        0|     0|
+|tidyquant         |0.2.0   |      1|        0|     0|
+|tidyr             |0.6.0   |      0|        0|     0|
 |tidyverse         |1.0.0   |      0|        0|     0|
 |units             |0.4-1   |      0|        0|     0|
 |valr              |0.1.1   |      0|        0|     1|
@@ -154,6 +157,17 @@ Maintainer: Ryan T. Moore <rtm@american.edu>
 
 0 errors | 0 warnings | 0 notes
 
+## bold (0.4.0)
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
+Bug reports: https://github.com/ropensci/bold/issues
+
+0 errors | 0 warnings | 1 note 
+
+```
+checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘sangerseqR’
+```
+
 ## bsam (1.1.1)
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>  
 Bug reports: https://github.com/ianjonsen/bsam/issues
@@ -183,8 +197,9 @@ Maintainer: Rachel Severson <rachel.severson@colostate.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## datapasta (1.0.0)
-Maintainer: Miles McBain <miles.mcbain@gmail.com>
+## datapasta (1.1.0)
+Maintainer: Miles McBain <miles.mcbain@gmail.com>  
+Bug reports: https://github.com/milesmcbain/datapasta/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -193,6 +208,31 @@ Maintainer: Brandon Taylor <brandon.taylor221@gmail.com>
 Bug reports: https://github.com/bramtayl/datastepr/issues
 
 0 errors | 0 warnings | 0 notes
+
+## dat (0.1.0)
+Maintainer: Sebastian Warnholz <wahani@gmail.com>  
+Bug reports: https://github.com/wahani/dat/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+    print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  tests/testthat/test-trunc-mat.R:9:16: style: Variable and function names should not be longer than 25 characters.
+    expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+  
+  testthat results ================================================================
+  OK: 107 SKIPPED: 0 FAILED: 1
+  1. Failure: Package Style (@test-lintr.R#5) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## DiagrammeR (0.9.0)
 Maintainer: Richard Iannone <riannone@me.com>  
@@ -372,13 +412,12 @@ Bug reports: http://www.github.com/ropenscilabs/isdparser/issues
 Maintainer: Shinya Uryu <suika1127@gmail.com>  
 Bug reports: https://github.com/uribo/jpmesh/issues
 
-0 errors | 0 warnings | 1 note 
+1 error  | 0 warnings | 0 notes
 
 ```
-checking installed package size ... NOTE
-  installed size is 206.0Mb
-  sub-directories of 1Mb or more:
-    extdata  205.2Mb
+checking whether package ‘jpmesh’ can be installed ... ERROR
+Installation failed.
+See ‘/home/muelleki/git/R/tibble/revdep/checks/jpmesh.Rcheck/00install.out’ for details.
 ```
 
 ## knitr (1.15.1)
@@ -419,6 +458,12 @@ Bug reports: http://github.com/ropenscilabs/monkeylearn/issues
 ## mregions (0.1.4)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropenscilabs/mregions/issues
+
+0 errors | 0 warnings | 0 notes
+
+## msgtools (0.2.4)
+Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>  
+Bug reports: https://github.com/RL10N/msgtools/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -527,7 +572,7 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## poio (0.0-1)
+## poio (0.0-2)
 Maintainer: Richard Cotton <richierocks@gmail.com>  
 Bug reports: https://github.com/RL10N/poio/issues
 
@@ -560,7 +605,32 @@ Bug reports: https://github.com/karthik/randNames/issues
 Maintainer: Michael D. Sumner <mdsumner@gmail.com>  
 Bug reports: https://github.com/AustralianAntarcticDivision/rbgm/issues/
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+  Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
+Loading required package: sp
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:raster':
+... 8 lines ...
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/rgdal/libs/rgdal.so':
+  libgdal.so.1: cannot open shared object file: No such file or directory
+Quitting from lines 16-24 (BGM_Spatial.Rmd) 
+Error: processing vignette 'BGM_Spatial.Rmd' failed with diagnostics:
+package or namespace load failed for 'rgdal'
+Execution halted
+```
 
 ## rbhl (0.3.0)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
@@ -657,9 +727,26 @@ Bug reports: https://github.com/poissonconsulting/rtide/issues
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
 Bug reports: https://github.com/edzer/sfr/issues/
 
-0 errors | 0 warnings | 1 note 
+1 error  | 0 warnings | 1 note 
 
 ```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  > test_check("sf")
+  1. Error: st_transform works (@test_gdal.R#11) ---------------------------------
+  package rgdal is required for spTransform methods
+  1: spTransform(sp, CRS(toCrs)) at testthat/test_gdal.R:11
+  2: spTransform(sp, CRS(toCrs)) at /tmp/RtmpvuUUir/devtools345049746f77/sp/R/Spatial-methods.R:93
+  3: stop("package rgdal is required for spTransform methods") at /tmp/RtmpvuUUir/devtools345049746f77/sp/R/Spatial-methods.R:97
+  
+  testthat results ================================================================
+  OK: 190 SKIPPED: 0 FAILED: 1
+  1. Error: st_transform works (@test_gdal.R#11) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+
 checking installed package size ... NOTE
   installed size is  8.5Mb
   sub-directories of 1Mb or more:
@@ -667,7 +754,7 @@ checking installed package size ... NOTE
     libs   3.7Mb
 ```
 
-## sjmisc (2.2.0)
+## sjmisc (2.2.1)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>  
 Bug reports: https://github.com/sjPlot/sjmisc/issues
 
@@ -724,28 +811,9 @@ Bug reports: https://github.com/gergness/srvyr/issues
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: https://github.com/ropensci/taxize/issues
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 0 notes
 
-```
-checking tests ... ERROR
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  Not Found (HTTP 404).
-  1: get_gbifid("Satyrium", phylum = "Tracheophyta", rows = 1, verbose = FALSE) at testthat/test-get_gbifid.R:34
-  2: lapply(as.character(sciname), fun, ask, verbose, rows, ...)
-  3: FUN(X[[i]], ...)
-  4: gbif_name_backbone(sciname, ...)
-  5: stop_for_status(temp)
-  
-  testthat results ================================================================
-  OK: 24 SKIPPED: 138 FAILED: 1
-  1. Error: get_gbifid phylum/class/order/family parameters work (@test-get_gbifid.R#34) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
-## tidyquant (0.1.0)
+## tidyquant (0.2.0)
 Maintainer: Matt Dancho <mdancho@gmail.com>  
 Bug reports: https://github.com/mdancho84/tidyquant/issues
 
@@ -755,16 +823,16 @@ Bug reports: https://github.com/mdancho84/tidyquant/issues
 checking tests ... ERROR
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-         AAPL %>% tq_mutate_(x_fun = "close", mutate_fun = mutate_fun)
+         AAPL %>% tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)
      }, paste0("fun = ", mutate_fun, " not a valid option.")) at testthat/test_tq_transform.R:118
   2: paste0("fun = ", mutate_fun, " not a valid option.") at /tmp/RtmpGs2f8Q/devtools11166987ba25/hadley-testthat-3b2f225/R/expect-output.R:147
   
   testthat results ================================================================
-  OK: 125 SKIPPED: 1 FAILED: 4
-  1. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_mutate.R#115) 
-  2. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_mutate.R#133) 
-  3. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#100) 
-  4. Error: Test error on invalid x_fun, .x and .y inputs. (@test_tq_transform.R#118) 
+  OK: 133 SKIPPED: 1 FAILED: 4
+  1. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_mutate.R#133) 
+  2. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_mutate.R#151) 
+  3. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#100) 
+  4. Error: Test error on invalid ohlc_fun, x and y inputs. (@test_tq_transform.R#118) 
   
   Error: testthat unit tests failed
   Execution halted
@@ -774,26 +842,7 @@ Last 13 lines of output:
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/tidyr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error\$message does not match "Unknown columns".
-  Actual value: "Unknown column: 'z'"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## tidyverse (1.0.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
