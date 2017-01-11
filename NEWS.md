@@ -3,7 +3,7 @@
 ## Bug fixes
 
 - Time series matrices (objects of class `mts` and `ts`) are now supported in `as_tibble()` (#184).
-- The `all_equal()` function (called by `all.equal.tbl_df()`) now forwards to `dplyr` and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declard class (`data.frame` vs. `tbl_df`) are ignored. This ensures consistent behavior of this function, regardless if `dplyr` is loaded or not (#198).
+- The `all_equal()` function (called by `all.equal.tbl_df()`) now forwards to `dplyr` and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (`data.frame` vs. `tbl_df`) are ignored. This ensures consistent behavior of this function, regardless if `dplyr` is loaded or not (#198).
 
 ## Interface changes
 
