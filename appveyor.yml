@@ -26,10 +26,12 @@ environment:
   - R_VERSION: 3.1.0
     RTOOLS_VERSION: 32
     CRAN: http://mran.microsoft.com/snapshot/2015-06-01
+    PKGTYPE: source
 
   - R_VERSION: 3.0.2
     RTOOLS_VERSION: 32
     CRAN: http://mran.microsoft.com/snapshot/2015-06-01
+    PKGTYPE: source
 
   - R_VERSION: devel
     GCC_PATH: mingw_32
