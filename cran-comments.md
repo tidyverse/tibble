@@ -8,5 +8,7 @@
 
 ## Reverse dependencies
 
-I checked all 88 reverse dependencies for version 1.2 and for the current release,
-and compared the outputs of R CMD check. They were identical for all packages; tidyr requires version 0.6.1 which contains a compatibility fix.
+I checked all 88 reverse dependencies on CRAN and Bioconductor for version 1.2
+and for the current release, and compared the outputs of R CMD check. They were
+identical for all packages; tidyr requires version 0.6.1 which contains a
+compatibility fix.
