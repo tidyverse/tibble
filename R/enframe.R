@@ -31,6 +31,6 @@ enframe <- function(x, name = "name", value = "value") {
 deframe <- function(x) {
   value <- x[[2L]]
   name <- x[[1L]]
-  names(ret) <- name
-  ret
+  names(value) <- name
+  value
 }
