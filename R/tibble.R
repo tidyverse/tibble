@@ -1,6 +1,5 @@
 #' @useDynLib tibble
 #' @importFrom Rcpp sourceCpp
-#' @import assertthat
 #' @importFrom utils head tail
 #' @aliases NULL
 #' @details The S3 class `tbl_df` wraps a local data frame. The main
