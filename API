@@ -1,6 +1,6 @@
 # API for tibble package
 
-## Exports
+## Exported functions
 
 add_column(.data, ..., .before = NULL, .after = NULL)
 add_row(.data, ..., .before = NULL, .after = NULL)
@@ -10,6 +10,7 @@ as_tibble(x, ...)
 column_to_rownames(df, var = "rowname")
 data_frame(...)
 data_frame_(xs)
+deframe(x)
 enframe(x, name = "name", value = "value")
 frame_data(...)
 frame_matrix(...)
