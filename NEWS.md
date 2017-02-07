@@ -9,7 +9,8 @@
 
 - Now requiring R 3.1.0 instead of R 3.1.3 (#189).
 - Add `as.tibble()` as an alias to `as_tibble()` (#160, @LaDilettante).
-- New `frame_matrix()` (#140, #168, @LaDilettante).
+- New `frame_matrix()`, similar to `frame_data()` but for matrices (#140, #168, @LaDilettante).
+- New `deframe()` as reverse operation to `enframe()` (#146, #214).
 - Removed unused dependency on `assertthat`.
 
 ## Features
