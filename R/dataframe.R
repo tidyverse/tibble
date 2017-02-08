@@ -82,18 +82,17 @@ lst_ <- function(xs) {
   missing_names <- col_names == ""
   if (any(missing_names)) {
     deparse2 <- function(x) paste(deparse(x$expr, 500L), collapse = "")
-    defaults <- vapply(xs[missing_names], deparse2, character(1),
-      USE.NAMES = FALSE)
+    defaults <- map_chr(xs[missing_names], deparse2)
     col_names[missing_names] <- defaults
   }
 
   # Evaluate each column in turn
-  output <- vector("list", n)
+  output <- new_lst(n)
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
     res <- lazyeval::lazy_eval(xs[[i]], output)
-    if (!is.null(res)) {
+    if (!is_null(res)) {
       output[[i]] <-  res
     }
     names(output)[i] <- col_names[[i]]
@@ -186,7 +185,7 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
   }
   x <- recycle_columns(x)
 
-  if (is.null(rownames)) {
+  if (is_null(rownames)) {
     rownames <- .set_row_names(NROW(x[[1L]]))
   }
 
@@ -295,14 +294,14 @@ check_tibble <- function(x) {
   }
 
   # Types
-  is_1d <- vapply(x, is_1d, logical(1))
+  is_1d <- map_lgl(x, is_1d)
   if (any(!is_1d)) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
 
-  x[] <- lapply(x, strip_dim)
+  x[] <- map(x, strip_dim)
 
-  posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
+  posixlt <- map_lgl(x, inherits, "POSIXlt")
   if (any(posixlt)) {
     invalid_df("Date/times must be stored as POSIXct, not POSIXlt", x, posixlt)
   }
@@ -316,7 +315,7 @@ recycle_columns <- function(x) {
   }
 
   # Validate column lengths
-  lengths <- vapply(x, NROW, integer(1))
+  lengths <- map_int(x, NROW)
   max <- max(lengths)
 
   bad_len <- lengths != 1L & lengths != max
@@ -326,14 +325,14 @@ recycle_columns <- function(x) {
 
   short <- lengths == 1
   if (max != 1L && any(short)) {
-    x[short] <- lapply(x[short], rep, max)
+    x[short] <- map(x[short], rep, max)
   }
 
   x
 }
 
 invalid_df <- function(problem, df, vars) {
-  if (is.logical(vars)) {
+  if (is_logical(vars)) {
     vars <- names(df)[vars]
   }
   stopc(

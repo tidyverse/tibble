@@ -43,13 +43,12 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
 
-  var_types <- vapply(x, type_sum, character(1))
+  var_types <- map_chr(x, type_sum)
   var_names <- paste0("$ ", format(names(x)), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 
-  formatted <- vapply(df, function(x) paste0(format_v(x), collapse = ", "),
-    character(1), USE.NAMES = FALSE)
+  formatted <- map_chr(df, function(x) paste0(format_v(x), collapse = ", "))
   truncated <- str_trunc(formatted, data_width)
 
   cat(paste0(var_names, truncated, collapse = "\n"), "\n", sep = "")
@@ -85,14 +84,15 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 
 #' @export
 format_v.list <- function(x) {
-  x <- lapply(x, format_v)
-  atomic <- vapply(x, length, integer(1L)) == 1L
-  x <- vapply(x, function(x) paste(x, collapse = ", "), character(1L))
+  x <- map(x, format_v)
+  atomic <- map_int(x, length) == 1L
+  x <- map_chr(x, function(x) paste(x, collapse = ", "))
   x[!atomic] <- paste0("<", x[!atomic], ">")
-  if (length(x) == 1L)
+  if (length(x) == 1L) {
     x
-  else
+  } else {
     paste0("[", paste(x, collapse = ", "), "]")
+  }
 }
 
 #' @export

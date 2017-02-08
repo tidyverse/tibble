@@ -15,11 +15,12 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends:
     R (>= 3.1.0)
 Imports:
-    methods,
     assertthat,
-    utils,
     lazyeval (>= 0.1.10),
-    Rcpp (>= 0.12.3)
+    methods,
+    rlang,
+    Rcpp (>= 0.12.3),
+    utils
 Suggests:
     dplyr,
     knitr (>= 1.5.32),
@@ -34,3 +35,4 @@ License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Remotes: hadley/rlang

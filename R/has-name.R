@@ -13,6 +13,5 @@
 #' has_name(iris, "Species")
 #' has_name(mtcars, "gears")
 #' @export
-has_name <- function(x, name) {
-  name %in% names2(x)
-}
+#' @name has_name
+has_name <- rlang::has_name

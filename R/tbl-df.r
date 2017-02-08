@@ -65,7 +65,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     if (length(x) == 0) {
       nr <- length(attr(x, "row.names")[i])
     } else {
-      x <- lapply(x, `[`, i)
+      x <- map(x, `[`, i)
       nr <- length(x[[1]])
     }
   }

@@ -33,17 +33,19 @@
 all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
+    abort("Please install dplyr to use all.equal() on tibbles")
   }
 
   dplyr_all_equal <- get(
-    "all.equal.tbl_df", asNamespace("dplyr"), mode = "function",
-    inherits = FALSE)
-  stopifnot(getNamespaceName(environment(dplyr_all_equal)) == "dplyr")
+    "all.equal.tbl_df", ns_env("dplyr"), mode = "function",
+    inherits = FALSE
+  )
+  stopifnot(ns_env_name(dplyr_all_equal) == "dplyr")
 
   dplyr_all_equal(
     target = target, current = current, ignore_col_order = ignore_col_order,
-    ignore_row_order = ignore_row_order, convert = convert, ...)
+    ignore_row_order = ignore_row_order, convert = convert, ...
+  )
 }
 
 #' @export
