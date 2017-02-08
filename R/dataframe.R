@@ -68,25 +68,15 @@ data_frame_ <- tibble_
 #' @export
 #' @rdname tibble
 lst <- function(...) {
-  lst_(lazyeval::lazy_dots(...))
-}
+  xs <- tidy_dots(..., .named = 500L)
 
-#' @export
-#' @rdname tibble
-lst_ <- function(xs) {
   n <- length(xs)
-  if (n == 0) return(list())
-
-  # If named not supplied, used deparsed expression
-  col_names <- names2(xs)
-  missing_names <- col_names == ""
-  if (any(missing_names)) {
-    deparse2 <- function(x) paste(deparse(x$expr, 500L), collapse = "")
-    defaults <- map_chr(xs[missing_names], deparse2)
-    col_names[missing_names] <- defaults
+  if (n == 0) {
+    return(list())
   }
 
   # Evaluate each column in turn
+  col_names <- names2(xs)
   output <- new_lst(n)
   names(output) <- character(n)
 
@@ -99,6 +89,13 @@ lst_ <- function(xs) {
   }
 
   output
+}
+
+#' @export
+#' @rdname tibble
+lst_ <- function(xs) {
+  warn("The underscored versions are deprecated. Please use `lst(!!! x)`")
+  lst(!!! xs)
 }
 
 
