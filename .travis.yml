@@ -11,7 +11,7 @@ r_github_packages:
   - jimhester/covr
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov(line_exclusions = "compat-purrr.R")'
 
 notifications:
   email:
