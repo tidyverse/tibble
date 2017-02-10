@@ -1,7 +1,7 @@
 #' @useDynLib tibble
-#' @importFrom Rcpp sourceCpp
-#' @import assertthat
+#' @import rlang
 #' @importFrom utils head tail
+#' @importFrom Rcpp sourceCpp
 #' @aliases NULL
 #' @details The S3 class `tbl_df` wraps a local data frame. The main
 #' advantage to using a `tbl_df` over a regular data frame is the printing:
@@ -53,12 +53,12 @@
 tibble_opt <- function(x) {
   x_tibble <- paste0("tibble.", x)
   res <- getOption(x_tibble)
-  if (!is.null(res))
+  if (!is_null(res))
     return(res)
 
   x_dplyr <- paste0("dplyr.", x)
   res <- getOption(x_dplyr)
-  if (!is.null(res))
+  if (!is_null(res))
     return(res)
 
   op.tibble[[x_tibble]]
