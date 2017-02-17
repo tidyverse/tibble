@@ -16,7 +16,6 @@ Depends:
     R (>= 3.1.0)
 Imports:
     assertthat,
-    lazyeval (>= 0.1.10),
     methods,
     rlang,
     Rcpp (>= 0.12.3),

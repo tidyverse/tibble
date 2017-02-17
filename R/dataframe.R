@@ -81,7 +81,7 @@ lst <- function(...) {
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    res <- lazyeval::lazy_eval(xs[[i]], output)
+    res <- rlang::tidy_eval(xs[[i]], discard_unnamed(output))
     if (!is_null(res)) {
       output[[i]] <-  res
     }
@@ -89,6 +89,10 @@ lst <- function(...) {
   }
 
   output
+}
+
+discard_unnamed <- function(x) {
+  discard(x, names2(x) == "")
 }
 
 #' @export

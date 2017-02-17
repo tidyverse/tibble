@@ -26,7 +26,6 @@ test_that("dim attribute is stripped of 1D array (#84)", {
 test_that("bogus columns raise an error", {
   expect_error(as_tibble(list(1)), "named")
   expect_error(tibble(a = NULL), "1d atomic vector or list")
-  expect_error(tibble(a = ~a), "1d atomic vector or list")
   expect_error(tibble(a = new.env()), "1d atomic vector or list")
   expect_error(tibble(a = quote(a)), "1d atomic vector or list")
 })
@@ -54,7 +53,7 @@ test_that("empty input makes 0 x 0 tbl_df", {
 })
 
 test_that("SE version", {
-  expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
+  expect_warning(expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10)))
 })
 
 test_that("names are stripped from vectors", {
