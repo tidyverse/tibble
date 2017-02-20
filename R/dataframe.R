@@ -98,7 +98,7 @@ discard_unnamed <- function(x) {
 #' @export
 #' @rdname tibble
 lst_ <- function(xs) {
-  warn("The underscored versions are deprecated. Please use `lst(!!! x)`")
+  xs <- compat_lazy_dots(xs)
   lst(!!! xs)
 }
 
