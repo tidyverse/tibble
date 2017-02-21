@@ -32,7 +32,7 @@
 #' all.equal(df1, df2, convert = TRUE)
 all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
+  if (!is_installed("dplyr")) {
     abort("Please install dplyr to use all.equal() on tibbles")
   }
 
