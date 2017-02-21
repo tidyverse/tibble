@@ -53,7 +53,10 @@ test_that("empty input makes 0 x 0 tbl_df", {
 })
 
 test_that("SE version", {
-  expect_warning(expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10)))
+  expect_warning(
+    expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10)),
+    "underscored versions are deprecated"
+  )
 })
 
 test_that("names are stripped from vectors", {
