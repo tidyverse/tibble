@@ -1,3 +1,4 @@
+# nocov
 
 # This file serves as a reference for compatibility functions for
 # purrr. They are not drop-in replacements but allow a similar style
@@ -159,3 +160,5 @@ accumulate_right <- function(.x, .f, ..., .init) {
   f <- function(x, y) .f(y, x, ...)
   Reduce(f, .x, init = .init, right = TRUE, accumulate = TRUE)
 }
+
+# nocov end
