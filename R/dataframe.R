@@ -68,7 +68,7 @@ data_frame_ <- tibble_
 #' @export
 #' @rdname tibble
 lst <- function(...) {
-  xs <- tidy_dots(..., .named = 500L)
+  xs <- tidy_quotes(..., .named = 500L)
 
   n <- length(xs)
   if (n == 0) {
