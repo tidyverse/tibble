@@ -98,7 +98,7 @@ discard_unnamed <- function(x) {
 #' @export
 #' @rdname tibble
 lst_ <- function(xs) {
-  xs <- compat_lazy_dots(xs)
+  xs <- compat_lazy_dots(xs, caller_env())
   lst(!!! xs)
 }
 
