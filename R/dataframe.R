@@ -81,7 +81,7 @@ lst <- function(...) {
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    res <- rlang::tidy_eval(xs[[i]], discard_unnamed(output))
+    res <- tidy_eval(xs[[i]], output)
     if (!is_null(res)) {
       output[[i]] <-  res
     }
