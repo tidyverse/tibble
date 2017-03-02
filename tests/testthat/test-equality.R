@@ -41,7 +41,7 @@ test_that("data frames not equal if missing col", {
 test_that("factors equal only if levels equal", {
   df1 <- data.frame(x = factor(c("a", "b")))
   df2 <- data.frame(x = factor(c("a", "d")))
-  expect_match(all.equal(as_tibble(df1), as_tibble(df2)), "Factor levels not equal for column 'x'" )
+  expect_match(all.equal(as_tibble(df1), as_tibble(df2)), "Factor levels not equal for column" )
 })
 
 test_that("all.equal.data.frame handles data.frames with NULL names", {
@@ -79,7 +79,7 @@ test_that("equality test fails when convert is FALSE and types don't match (#148
   df1 <- tibble(x = "a")
   df2 <- tibble(x = factor("a"))
 
-  expect_equal( all.equal(df1, df2, convert = FALSE), "Incompatible type for column 'x': x character, y factor" )
+  expect_match( all.equal(df1, df2, convert = FALSE), "Incompatible type" )
 
   skip_if_not(sessionInfo()$loadedOnly$dplyr$Version >= "0.5.0")
   expect_warning( all.equal(df1, df2, convert = TRUE) )
