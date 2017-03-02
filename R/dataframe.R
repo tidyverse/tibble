@@ -151,7 +151,7 @@ lst_ <- function(xs) {
 #'   as.data.frame(m)
 #' )
 #' }
-as_tibble <- function(x, ...) {
+as_tibble <- as.tibble <- function(x, ...) {
   UseMethod("as_tibble")
 }
 
