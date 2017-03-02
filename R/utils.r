@@ -65,36 +65,3 @@ tickit <- function(x) {
   x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
   x
 }
-
-warn_underscored <- function() {
-  warn(paste(
-    "The underscored versions are deprecated in favour of",
-    "tidy evaluation idioms. Please see unquoting documentation",
-    "in rlang."
-  ))
-}
-warn_text_se <- function() {
-  warn("Text parsing is deprecated, please supply an expression or formula")
-}
-
-compat_lazy_dots <- function(dots, env = caller_env()) {
-  warn_underscored()
-
-  warned <- FALSE
-  compat_lazy <- function(lazy, env = caller_env()) {
-    if (inherits(lazy, "lazy")) {
-      new_tidy_quote(lazy$expr, lazy$env)
-    } else if (is_string(lazy)) {
-      if (!warned) {
-        warn_text_se()
-        warned <<- TRUE
-      }
-      parse_f(lazy, env)
-    } else if (is_lang(lazy)) {
-      new_tidy_quote(lazy, env)
-    }
-  }
-
-  dots <- as.list(dots)
-  map(dots, compat_lazy, env = env)
-}
