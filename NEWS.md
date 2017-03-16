@@ -1,3 +1,8 @@
+## tibble 1.2-16 (2017-03-16)
+
+- Added new `dput_tribble()` command which generates a `tribble()` from an existing `tibble`
+  or `data.frame` (#127, @NikNakk)
+
 ## tibble 1.2-15 (2017-01-10)
 
 - Test R 3.1.3 and later in AppVeyor, using `Depends: R (>= 3.1.0)` in `DESCRIPTION`. Support for R 3.0.0 requires a `lazyeval` update (#189).
