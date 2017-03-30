@@ -31,5 +31,5 @@ LinkingTo: Rcpp
 LazyData: yes
 License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
