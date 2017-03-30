@@ -1,4 +1,4 @@
-#' @useDynLib tibble
+#' @useDynLib tibble, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils head tail
 #' @aliases NULL

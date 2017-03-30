@@ -39,6 +39,10 @@
 - Reword documentation for `tribble()` (#191, @kwstat).
 - Now explicitly stating minimum Rcpp version 0.12.3.
 
+## Internal
+
+- Using registration of native routines.
+
 
 # tibble 1.2 (2016-08-26)
 
