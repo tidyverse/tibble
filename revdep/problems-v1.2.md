@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-03-29                   |
+|date     |2017-03-31                   |
 
 ## Packages
 
@@ -21,8 +21,8 @@
 |lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                    |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                  |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                    |
-|Rcpp           |   |0.12.10    |2017-03-29 |Github (RcppCore/Rcpp@876d635)   |
-|rmarkdown      |   |1.3        |2016-12-21 |cran (@1.3)                      |
+|Rcpp           |   |0.12.10    |2017-03-31 |Github (RcppCore/Rcpp@886f5df)   |
+|rmarkdown      |   |1.4        |2017-03-24 |cran (@1.4)                      |
 |testthat       |   |1.0.2.9000 |2017-02-27 |Github (hadley/testthat@b72a228) |
 |tibble         |   |1.2        |2016-08-26 |cran (@1.2)                      |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.3.1)                   |
@@ -31,19 +31,19 @@
 
 11 packages with problems
 
-|package           |version | errors| warnings| notes|
-|:-----------------|:-------|------:|--------:|-----:|
-|dat               |0.1.0   |      1|        0|     0|
-|flextable         |0.1.0   |      0|        1|     0|
-|FSelectorRcpp     |0.1.2   |      1|        0|     2|
-|ggimage           |0.0.4   |      1|        0|     0|
-|haven             |1.0.0   |      2|        0|     1|
-|hddtools          |0.6     |      1|        0|     0|
-|heemod            |0.8.0   |      1|        1|     1|
-|highcharter       |0.5.0   |      0|        1|     1|
-|officer           |0.1.1   |      2|        1|     0|
-|photobiologyInOut |0.4.13  |      1|        0|     0|
-|plotly            |4.5.6   |      1|        0|     0|
+|package       |version | errors| warnings| notes|
+|:-------------|:-------|------:|--------:|-----:|
+|dat           |0.1.0   |      1|        0|     0|
+|flextable     |0.1.0   |      0|        1|     0|
+|FSelectorRcpp |0.1.2   |      1|        0|     2|
+|ggimage       |0.0.4   |      1|        0|     0|
+|haven         |1.0.0   |      2|        0|     1|
+|hddtools      |0.6     |      1|        0|     0|
+|heemod        |0.8.0   |      1|        1|     1|
+|highcharter   |0.5.0   |      0|        1|     1|
+|officer       |0.1.1   |      2|        1|     0|
+|plotly        |4.5.6   |      1|        0|     0|
+|refimpact     |0.1.0   |      1|        0|     0|
 
 ## dat (0.1.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -221,7 +221,7 @@ Bug reports: https://github.com/ropensci/hddtools/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [14s/22s]
+  Running ‘testthat.R’ [13s/24s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   3: stop(gettextf("unable to find an inherited method for function %s for signature %s", 
@@ -249,7 +249,7 @@ Bug reports: https://github.com/pierucci/heemod/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [33s/36s]
+  Running ‘testthat.R’ [32s/36s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   5: as.data.frame(flexsurv::summary.flexsurvreg(x, t = times_surv, type = "cumhaz"))
@@ -349,7 +349,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [21s/21s]
+  Running ‘testthat.R’ [20s/20s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   9: ph_with_img(., type = "body", src = img.file, height = 1.06, width = 1.39)
@@ -380,20 +380,6 @@ Execution halted
 
 ```
 
-## photobiologyInOut (0.4.13)
-Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
-Bug reports: https://bitbucket.org/aphalo/photobiologyinout/issues/
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required and available but unsuitable version: ‘photobiology’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
-
 ## plotly (4.5.6)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
@@ -402,7 +388,7 @@ Bug reports: https://github.com/ropensci/plotly/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [46s/47s]
+  Running ‘testthat.R’ [44s/45s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   [1] "Running test: plotly-group-within-trace"
@@ -417,6 +403,34 @@ Last 13 lines of output:
   testthat results ================================================================
   OK: 813 SKIPPED: 17 FAILED: 1
   1. Error: datetimes are converted to e.g. 2013-01-02 05:00:00 (@test-ggplot-date.R#11) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
+
+## refimpact (0.1.0)
+Maintainer: Perry Stephenson <perry.stephenson+cran@gmail.com>  
+Bug reports: https://github.com/perrystephenson/refimpact/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+  Running ‘testthat.R’ [1s/22s]
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  7: parseJSON(txt, bigint_as_char) at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/fromJSON.R:115
+  8: parse_con(txt, bigint_as_char) at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/parseJSON.R:3
+  9: open(con, "rb") at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/push_parser.R:6
+  10: open.connection(con, "rb")
+  
+  testthat results ================================================================
+  OK: 21 SKIPPED: 0 FAILED: 5
+  1. Error: get_institutions() returns a tibble (@test_institutions.R#6) 
+  2. Error: Function returns sensible data frames for sensible queries (@test_search_case_studies.R#6) 
+  3. Error: get_tag_types() returns a tibble (@test_tag_types.R#6) 
+  4. Error: get_tag_value() returns a tibble (@test_tag_values.R#6) 
+  5. Error: get_units_of_assessment() returns a tibble (@test_units_of_assessment.R#6) 
   
   Error: testthat unit tests failed
   Execution halted
