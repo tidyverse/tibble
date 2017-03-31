@@ -52,7 +52,7 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
 all.equal.tbl_df <- function(target, current, ...) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     warning("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
-    NextMethod()
+    return(NextMethod())
   }
 
   all_equal(target, current, ...)
