@@ -12,5 +12,6 @@ I checked all 118 reverse dependencies on CRAN and Bioconductor for version 1.2
 and for the current release, and compared the outputs of R CMD check. They were
 identical for all packages.
 
-The previous attempt to release didn't cover an error in the `readr` package
-due to a missing dependency, this should be fixed in `readr` 1.1.0.
+The compatibility error in the `readr` package is now finally resolved.
+The test error for the `refimpact` package seems to occur only sporadically,
+this looks like an unstable test to me, and not like a regression caused by tibble.
