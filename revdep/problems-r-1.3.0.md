@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-03-29                   |
+|date     |2017-03-31                   |
 
 ## Packages
 
@@ -21,29 +21,28 @@
 |lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                    |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                  |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                    |
-|Rcpp           |   |0.12.10    |2017-03-29 |Github (RcppCore/Rcpp@876d635)   |
-|rmarkdown      |   |1.3        |2016-12-21 |cran (@1.3)                      |
+|Rcpp           |   |0.12.10    |2017-03-31 |Github (RcppCore/Rcpp@886f5df)   |
+|rmarkdown      |   |1.4        |2017-03-24 |cran (@1.4)                      |
 |testthat       |   |1.0.2.9000 |2017-02-27 |Github (hadley/testthat@b72a228) |
 |tibble         |   |1.2        |2016-08-26 |cran (@1.2)                      |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.3.1)                   |
 
 # Check results
 
-11 packages with problems
+10 packages with problems
 
-|package           |version | errors| warnings| notes|
-|:-----------------|:-------|------:|--------:|-----:|
-|dat               |0.1.0   |      1|        0|     0|
-|flextable         |0.1.0   |      0|        1|     0|
-|FSelectorRcpp     |0.1.2   |      1|        0|     2|
-|ggimage           |0.0.4   |      1|        0|     0|
-|haven             |1.0.0   |      2|        0|     1|
-|hddtools          |0.6     |      1|        0|     0|
-|heemod            |0.8.0   |      1|        1|     1|
-|highcharter       |0.5.0   |      0|        1|     1|
-|officer           |0.1.1   |      2|        1|     0|
-|photobiologyInOut |0.4.13  |      1|        0|     0|
-|plotly            |4.5.6   |      1|        0|     0|
+|package       |version | errors| warnings| notes|
+|:-------------|:-------|------:|--------:|-----:|
+|dat           |0.1.0   |      1|        0|     0|
+|flextable     |0.1.0   |      0|        1|     0|
+|FSelectorRcpp |0.1.2   |      1|        0|     2|
+|ggimage       |0.0.4   |      1|        0|     0|
+|haven         |1.0.0   |      2|        0|     1|
+|hddtools      |0.6     |      1|        0|     0|
+|heemod        |0.8.0   |      1|        1|     1|
+|highcharter   |0.5.0   |      0|        1|     1|
+|officer       |0.1.1   |      2|        1|     0|
+|plotly        |4.5.6   |      1|        0|     0|
 
 ## dat (0.1.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -53,7 +52,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [11s/11s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -221,7 +220,7 @@ Bug reports: https://github.com/ropensci/hddtools/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [13s/22s]
+  Running ‘testthat.R’ [14s/22s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   3: stop(gettextf("unable to find an inherited method for function %s for signature %s", 
@@ -380,20 +379,6 @@ Execution halted
 
 ```
 
-## photobiologyInOut (0.4.13)
-Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
-Bug reports: https://bitbucket.org/aphalo/photobiologyinout/issues/
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required and available but unsuitable version: ‘photobiology’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
-
 ## plotly (4.5.6)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
@@ -402,7 +387,7 @@ Bug reports: https://github.com/ropensci/plotly/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [47s/46s]
+  Running ‘testthat.R’ [44s/44s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   [1] "Running test: plotly-group-within-trace"

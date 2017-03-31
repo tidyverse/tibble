@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-03-29                   |
+|date     |2017-03-31                   |
 
 ## Packages
 
@@ -21,8 +21,8 @@
 |lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                    |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                  |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                    |
-|Rcpp           |   |0.12.10    |2017-03-29 |Github (RcppCore/Rcpp@876d635)   |
-|rmarkdown      |   |1.3        |2016-12-21 |cran (@1.3)                      |
+|Rcpp           |   |0.12.10    |2017-03-31 |Github (RcppCore/Rcpp@886f5df)   |
+|rmarkdown      |   |1.4        |2017-03-24 |cran (@1.4)                      |
 |testthat       |   |1.0.2.9000 |2017-02-27 |Github (hadley/testthat@b72a228) |
 |tibble         |   |1.2        |2016-08-26 |cran (@1.2)                      |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.3.1)                   |
@@ -34,7 +34,7 @@
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
 |abjutils          |0.0.1   |      0|        0|     0|
-|anomalyDetection  |0.1.0   |      0|        0|     0|
+|anomalyDetection  |0.1.1   |      0|        0|     0|
 |biomartr          |0.4.0   |      0|        0|     0|
 |blkbox            |1.0     |      0|        0|     2|
 |blob              |1.0.0   |      0|        0|     0|
@@ -108,7 +108,7 @@
 |openadds          |0.2.0   |      0|        0|     0|
 |pangaear          |0.3.0   |      0|        0|     0|
 |pdfsearch         |0.1.1   |      0|        0|     0|
-|photobiologyInOut |0.4.13  |      1|        0|     0|
+|photobiologyInOut |0.4.13  |      0|        0|     0|
 |photobiology      |0.9.14  |      0|        0|     0|
 |phylopath         |0.2.3   |      0|        0|     0|
 |plotly            |4.5.6   |      1|        0|     0|
@@ -157,7 +157,7 @@ Maintainer: Fernando Correa <fcorrea@abj.org.br>
 
 0 errors | 0 warnings | 0 notes
 
-## anomalyDetection (0.1.0)
+## anomalyDetection (0.1.1)
 Maintainer: Bradley Boehmke <bradleyboehmke@gmail.com>  
 Bug reports: https://github.com/bradleyboehmke/anomalyDetection/issues
 
@@ -270,7 +270,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [11s/11s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -619,7 +619,7 @@ Bug reports: https://github.com/ropensci/hddtools/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [13s/22s]
+  Running ‘testthat.R’ [14s/22s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   3: stop(gettextf("unable to find an inherited method for function %s for signature %s", 
@@ -946,15 +946,7 @@ Bug reports: https://github.com/lebebr01/pdfsearch/issues
 Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
 Bug reports: https://bitbucket.org/aphalo/photobiologyinout/issues/
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required and available but unsuitable version: ‘photobiology’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## photobiology (0.9.14)
 Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
@@ -976,7 +968,7 @@ Bug reports: https://github.com/ropensci/plotly/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [47s/46s]
+  Running ‘testthat.R’ [44s/44s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   [1] "Running test: plotly-group-within-trace"

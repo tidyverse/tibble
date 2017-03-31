@@ -16,7 +16,7 @@
 
 |package        |*  |version    |date       |source                           |
 |:--------------|:--|:----------|:----------|:--------------------------------|
-|assertthat     |   |0.1        |2013-12-06 |cran (@0.1)                      |
+|dplyr          |   |0.5.0      |2016-06-24 |CRAN (R 3.3.2)                   |
 |knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                   |
 |lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                    |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                  |
@@ -29,7 +29,7 @@
 
 # Check results
 
-11 packages with problems
+10 packages with problems
 
 |package       |version | errors| warnings| notes|
 |:-------------|:-------|------:|--------:|-----:|
@@ -43,7 +43,6 @@
 |highcharter   |0.5.0   |      0|        1|     1|
 |officer       |0.1.1   |      2|        1|     0|
 |plotly        |4.5.6   |      1|        0|     0|
-|refimpact     |0.1.0   |      1|        0|     0|
 
 ## dat (0.1.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -53,7 +52,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [10s/10s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -221,7 +220,7 @@ Bug reports: https://github.com/ropensci/hddtools/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [13s/24s]
+  Running ‘testthat.R’ [14s/22s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   3: stop(gettextf("unable to find an inherited method for function %s for signature %s", 
@@ -249,7 +248,7 @@ Bug reports: https://github.com/pierucci/heemod/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [32s/36s]
+  Running ‘testthat.R’ [33s/36s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   5: as.data.frame(flexsurv::summary.flexsurvreg(x, t = times_surv, type = "cumhaz"))
@@ -349,7 +348,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [20s/20s]
+  Running ‘testthat.R’ [21s/21s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   9: ph_with_img(., type = "body", src = img.file, height = 1.06, width = 1.39)
@@ -388,7 +387,7 @@ Bug reports: https://github.com/ropensci/plotly/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [44s/45s]
+  Running ‘testthat.R’ [44s/44s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   [1] "Running test: plotly-group-within-trace"
@@ -403,34 +402,6 @@ Last 13 lines of output:
   testthat results ================================================================
   OK: 813 SKIPPED: 17 FAILED: 1
   1. Error: datetimes are converted to e.g. 2013-01-02 05:00:00 (@test-ggplot-date.R#11) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
-## refimpact (0.1.0)
-Maintainer: Perry Stephenson <perry.stephenson+cran@gmail.com>  
-Bug reports: https://github.com/perrystephenson/refimpact/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’ [1s/22s]
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  7: parseJSON(txt, bigint_as_char) at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/fromJSON.R:115
-  8: parse_con(txt, bigint_as_char) at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/parseJSON.R:3
-  9: open(con, "rb") at /tmp/RtmptEsk2b/devtools8d9d52fae03/jsonlite/R/push_parser.R:6
-  10: open.connection(con, "rb")
-  
-  testthat results ================================================================
-  OK: 21 SKIPPED: 0 FAILED: 5
-  1. Error: get_institutions() returns a tibble (@test_institutions.R#6) 
-  2. Error: Function returns sensible data frames for sensible queries (@test_search_case_studies.R#6) 
-  3. Error: get_tag_types() returns a tibble (@test_tag_types.R#6) 
-  4. Error: get_tag_value() returns a tibble (@test_tag_values.R#6) 
-  5. Error: get_units_of_assessment() returns a tibble (@test_units_of_assessment.R#6) 
   
   Error: testthat unit tests failed
   Execution halted
