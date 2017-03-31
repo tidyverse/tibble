@@ -14,4 +14,4 @@ identical for all packages.
 
 The compatibility error in the `readr` package is now finally resolved.
 The test error for the `refimpact` package seems to occur only sporadically,
-this looks like an unstable test to me, and not like a regression caused by tibble.
+this looks like an unstable test to me, and not like a regression caused by `tibble`.
