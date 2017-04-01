@@ -8,8 +8,7 @@
 all_equal(target, current, ignore_col_order = TRUE, ignore_row_order = TRUE,
   convert = FALSE, ...)
 
-\method{all.equal}{tbl_df}(target, current, ignore_col_order = TRUE,
-  ignore_row_order = TRUE, convert = FALSE, ...)
+\method{all.equal}{tbl_df}(target, current, ...)
 }
 \arguments{
 \item{target, current}{Two data frames to compare.}

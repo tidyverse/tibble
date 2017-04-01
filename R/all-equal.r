@@ -33,7 +33,7 @@
 all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
+    stop("Please install dplyr to use all_equal()", call. = FALSE)
   }
 
   dplyr_all_equal <- get(
@@ -49,4 +49,11 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
 #' @export
 #' @rdname all_equal
 #' @method all.equal tbl_df
-all.equal.tbl_df <- all_equal
+all.equal.tbl_df <- function(target, current, ...) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    warning("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
+    return(NextMethod())
+  }
+
+  all_equal(target, current, ...)
+}
