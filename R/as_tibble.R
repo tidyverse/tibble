@@ -135,6 +135,7 @@ as.tibble <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
+#' @usage NULL
 as_data_frame <- function(x, ...) {
   UseMethod("as_data_frame")
 }

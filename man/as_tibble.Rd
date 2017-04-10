@@ -30,8 +30,6 @@ as_tibble(x, ...)
 \method{as_tibble}{default}(x, ...)
 
 as.tibble(x, ...)
-
-as_data_frame(x, ...)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}
