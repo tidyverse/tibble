@@ -9,6 +9,13 @@ lst(...)
 
 lst_(xs)
 }
+\arguments{
+\item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
+so you can refer to previously created variables.}
+
+\item{xs}{A list of unevaluated expressions created with \code{~},
+\code{\link[=quote]{quote()}}, or \code{\link[lazyeval:lazy]{lazyeval::lazy()}}.}
+}
 \description{
 \code{lst()} is similar to \code{\link[=list]{list()}}, but like \code{tibble()}, it
 evaluates its arguments lazily and in order, and automatically adds names.

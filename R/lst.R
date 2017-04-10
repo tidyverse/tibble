@@ -4,6 +4,7 @@
 #' evaluates its arguments lazily and in order, and automatically adds names.
 #'
 #' @export
+#' @inheritParams tibble
 lst <- function(...) {
   lst_(lazyeval::lazy_dots(...))
 }
