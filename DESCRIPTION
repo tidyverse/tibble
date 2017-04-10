@@ -2,13 +2,13 @@ Package: tibble
 Encoding: UTF-8
 Version: 1.3.0
 Title: Simple Data Frames
-Description: Provides a 'tbl_df' class that offers better checking and
-    printing capabilities than traditional data frames.
+Description: Provides a 'tbl_df' class (the "tibble") that provides
+    stricter checking and better formatting than the traditional data frame.
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", "aut"),
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
-    person("RStudio", role = "cph")
+    person("RStudio", role = c("cph", "fnd"))
     )
 URL: https://github.com/tidyverse/tibble
 BugReports: https://github.com/tidyverse/tibble/issues
