@@ -104,7 +104,7 @@ Tibbles are strict about subsetting. If you try to access a variable that does n
 
 ``` r
 flights$yea
-#> Warning: Unknown column 'yea'
+#> Warning: Unknown or uninitialised column: 'yea'.
 #> NULL
 ```
 
