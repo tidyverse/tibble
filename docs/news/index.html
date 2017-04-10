@@ -294,8 +294,108 @@
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
 </ul>
 </div>
+<div id="documentation-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation-2" class="anchor"></a>Documentation</h2>
+<ul>
+<li>Document behavior of <code><a href="../reference/as_tibble.html">as_tibble.tbl_df()</a></code> for subclasses (#60).</li>
+<li>Document and test that subsetting removes row names.</li>
+</ul>
 </div>
-    NA
+<div id="internal-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-1" class="anchor"></a>Internal</h2>
+<ul>
+<li>Don’t rely on <code>knitr</code> internals for testing (#78).</li>
+<li>Fix compatibility with <code>knitr</code> 1.13 (#76).</li>
+<li>Enhance <code>knit_print()</code> tests.</li>
+<li>Provide default implementation for <code>tbl_sum.tbl_sql()</code> and <code>tbl_sum.tbl_grouped_df()</code> to allow <code>dplyr</code> release before a <code>tibble</code> release.</li>
+<li>Explicit tests for <code>format_v()</code> (#98).</li>
+<li>Test output for <code>NULL</code> value of <code><a href="../reference/obj_sum.html">tbl_sum()</a></code>.</li>
+<li>Test subsetting in all variants (#62).</li>
+<li>Add missing test from dplyr.</li>
+<li>Use new <code>expect_output_file()</code> from <code>testthat</code>.</li>
+</ul>
+</div>
+</div>
+    <div id="version-1-0-2016-03-21" class="section level1">
+<h1 class="hasAnchor">
+<a href="#version-1-0-2016-03-21" class="anchor"></a>Version 1.0 (2016-03-21)</h1>
+<ul>
+<li><p>Initial CRAN release</p></li>
+<li><p>Extracted from <code>dplyr</code> 0.4.3</p></li>
+<li>Exported functions:
+<ul>
+<li><code>tbl_df()</code></li>
+<li><code><a href="../reference/as_tibble.html">as_data_frame()</a></code></li>
+<li>
+<code><a href="../reference/tibble.html">data_frame()</a></code>, <code><a href="../reference/tibble.html">data_frame_()</a></code>
+</li>
+<li>
+<code><a href="../reference/tribble.html">frame_data()</a></code>, <code><a href="../reference/tibble.html">tibble()</a></code>
+</li>
+<li><code><a href="../reference/glimpse.html">glimpse()</a></code></li>
+<li>
+<code><a href="../reference/formatting.html">trunc_mat()</a></code>, <code><a href="../reference/knit_print.trunc_mat.html">knit_print.trunc_mat()</a></code>
+</li>
+<li><code><a href="../reference/obj_sum.html">type_sum()</a></code></li>
+<li>New <code><a href="../reference/lst.html">lst()</a></code> and <code><a href="../reference/lst.html">lst_()</a></code> create lists in the same way that <code><a href="../reference/tibble.html">data_frame()</a></code> and <code><a href="../reference/tibble.html">data_frame_()</a></code> create data frames (hadley/dplyr#1290). <code><a href="../reference/lst.html">lst(NULL)</a></code> doesn’t raise an error (#17, @jennybc), but always uses deparsed expression as name (even for <code>NULL</code>).</li>
+<li>New <code><a href="../reference/add_row.html">add_row()</a></code> makes it easy to add a new row to data frame (hadley/dplyr#1021).</li>
+<li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (#11, @zhilongjia).</li>
+<li>New <code><a href="../reference/rownames.html">has_rownames()</a></code> and <code><a href="../reference/rownames.html">remove_rownames()</a></code> (#44).</li>
+<li>New <code><a href="../reference/repair_names.html">repair_names()</a></code> fixes missing and duplicate names (#10, #15, @r2evans).</li>
+<li>New <code><a href="../reference/obj_sum.html">is_vector_s3()</a></code>.</li>
+</ul>
+</li>
+<li>Features
+<ul>
+<li>New <code>as_data_frame.table()</code> with argument <code>n</code> to control name of count column (#22, #23).</li>
+<li>Use <code>tibble</code> prefix for options (#13, #36).</li>
+<li>
+<code><a href="../reference/glimpse.html">glimpse()</a></code> now (invisibly) returns its argument (hadley/dplyr#1570). It is now a generic, the default method dispatches to <code>str()</code> (hadley/dplyr#1325). The default width is obtained from the <code>tibble.width</code> option (#35, #56).</li>
+<li>
+<code><a href="../reference/as_tibble.html">as_data_frame()</a></code> is now an S3 generic with methods for lists (the old <code><a href="../reference/as_tibble.html">as_data_frame()</a></code>), data frames (trivial), matrices (with efficient C++ implementation) (hadley/dplyr#876), and <code>NULL</code> (returns a 0-row 0-column data frame) (#17, @jennybc).</li>
+<li>Non-scalar input to <code><a href="../reference/tribble.html">frame_data()</a></code> and <code><a href="../reference/tibble.html">tibble()</a></code> (including lists) creates list-valued columns (#7). These functions return 0-row but n-col data frame if no data.</li>
+</ul>
+</li>
+<li>Bug fixes
+<ul>
+<li>
+<code><a href="../reference/tribble.html">frame_data()</a></code> properly constructs rectangular tables (hadley/dplyr#1377, @kevinushey).</li>
+</ul>
+</li>
+<li>Minor modifications
+<ul>
+<li>Uses <code>setOldClass(c("tbl_df", "tbl", "data.frame"))</code> to help with S4 (hadley/dplyr#969).</li>
+<li>
+<code>tbl_df()</code> automatically generates column names (hadley/dplyr#1606).</li>
+<li>
+<code>tbl_df</code>s gain <code>$</code> and <code>[[</code> methods that are ~5x faster than the defaults, never do partial matching (hadley/dplyr#1504), and throw an error if the variable does not exist. <code>[[.tbl_df()</code> falls back to regular subsetting when used with anything other than a single string (#29). <code>base::getElement()</code> now works with tibbles (#9).</li>
+<li>
+<code><a href="../reference/all_equal.html">all_equal()</a></code> allows to compare data frames ignoring row and column order, and optionally ignoring minor differences in type (e.g. int vs. double) (hadley/dplyr#821). Used by <code>all.equal()</code> for tibbles. (This package contains a pure R implementation of <code><a href="../reference/all_equal.html">all_equal()</a></code>, the <code>dplyr</code> code has identical behavior but is written in C++ and thus faster.)</li>
+<li>The internals of <code><a href="../reference/tibble.html">data_frame()</a></code> and <code><a href="../reference/as_tibble.html">as_data_frame()</a></code> have been aligned, so <code><a href="../reference/as_tibble.html">as_data_frame()</a></code> will now automatically recycle length-1 vectors. Both functions give more informative error messages if you are attempting to create an invalid data frame. You can no longer create a data frame with duplicated names (hadley/dplyr#820). Both functions now check that you don’t have any <code>POSIXlt</code> columns, and tell you to use <code>POSIXct</code> if you do (hadley/dplyr#813). <code><a href="../reference/tibble.html">data_frame(NULL)</a></code> raises error “must be a 1d atomic vector or list”.</li>
+<li>
+<code><a href="../reference/formatting.html">trunc_mat()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code> are considerably faster if you have very wide data frames. They will now also only list the first 100 additional variables not already on screen - control this with the new <code>n_extra</code> parameter to <code>print()</code> (hadley/dplyr#1161). The type of list columns is printed correctly (hadley/dplyr#1379). The <code>width</code> argument is used also for 0-row or 0-column data frames (#18).</li>
+<li>When used in list-columns, S4 objects only print the class name rather than the full class hierarchy (#33).</li>
+<li>Add test that <code>[.tbl_df()</code> does not change class (#41, @jennybc). Improve <code>[.tbl_df()</code> error message.</li>
+</ul>
+</li>
+<li>Documentation
+<ul>
+<li>Update README, with edits (#52, @bhive01) and enhancements (#54, @jennybc).</li>
+<li>
+<code><a href="../articles/tibble.html">vignette("tibble")</a></code> describes the difference between tbl_dfs and regular data frames (hadley/dplyr#1468).</li>
+</ul>
+</li>
+<li>Code quality
+<ul>
+<li>Test using new-style Travis-CI and AppVeyor. Full test coverage (#24, #53). Regression tests load known output from file (#49).</li>
+<li>Renamed <code>obj_type()</code> to <code><a href="../reference/obj_sum.html">obj_sum()</a></code>, improvements, better integration with <code><a href="../reference/obj_sum.html">type_sum()</a></code>.</li>
+<li>Internal cleanup.</li>
+</ul>
+</li>
+</ul>
+</div>
     </div>
   </div>
 
@@ -306,7 +406,7 @@
         <li><a href="#tibble-1-3-0-2017-01-10">1.3.0</a></li>
         <li><a href="#tibble-1-2-2016-08-26">1.2</a></li>
         <li><a href="#tibble-1-1-2016-07-01">1.1</a></li>
-        <li><a href="#NA">NA</a></li>
+        <li><a href="#version-1-0-2016-03-21">1.0</a></li>
       </ul>
     </div>
   </div>
