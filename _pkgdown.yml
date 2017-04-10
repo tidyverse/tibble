@@ -7,3 +7,29 @@ home:
   links:
   - text: Learn more
     href: http://r4ds.had.co.nz/tibbles.html
+
+reference:
+- title: Tibbles
+  contents:
+  - ends_with("ibble")
+  - enframe
+  - all_equal
+  - has_name
+
+- title: Manipulation
+  contents:
+  - add_row
+  - add_column
+  - repair_names
+
+- title: Helpers
+  contents:
+  - glimpse
+  - rownames
+
+- title: Vectors, matrices, and lists
+  contents:
+  - deframe
+  - lst
+  - contains("matrix")
+
