@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-tibble
-======
+tibble <img src="man/figures/logo.png" align="right" />
+=======================================================
 
 [![Build Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/tibble/master.svg)](https://codecov.io/github/tidyverse/tibble?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 
