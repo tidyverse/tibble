@@ -67,28 +67,3 @@ tribble(
   "b", 1,  8.5
 )
 ```
-
-## Tibbles vs data frames
-
-There are two main differences in the usage of a data frame vs a tibble: printing, and subsetting.
-
-Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. In addition to its name, each column reports its type, a nice feature borrowed from `str()`:
-
-```{r}
-library(nycflights13)
-flights
-```
-
-Tibbles are strict about subsetting. If you try to access a variable that does not exist via `$`, you'll get a warning:
-
-```{r, error = TRUE}
-flights$yea
-```
-
-Tibbles also clearly delineate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector. No more `drop = FALSE`!
-
-```{r}
-flights[, "dest"]
-```
-
-If you want a single vector, be explicit and use `[[`.

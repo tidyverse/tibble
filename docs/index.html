@@ -33,10 +33,22 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="articles/tibble.html">Intro</a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/extending.html">Extending tibble</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -129,52 +141,6 @@ devtools::<span class="kw">install_github</span>(<span class="st">"tidyverse/tib
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     a     2   3.6</span>
 <span class="co">#&gt; 2     b     1   8.5</span></code></pre></div>
-</div>
-<div id="tibbles-vs-data-frames" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tibbles-vs-data-frames" class="anchor"></a>Tibbles vs data frames</h2>
-<p>There are two main differences in the usage of a data frame vs a tibble: printing, and subsetting.</p>
-<p>Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. In addition to its name, each column reports its type, a nice feature borrowed from <code>str()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nycflights13)
-flights
-<span class="co">#&gt; # A tibble: 336,776 × 19</span>
-<span class="co">#&gt;     year month   day dep_time sched_dep_time dep_delay arr_time</span>
-<span class="co">#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;</span>
-<span class="co">#&gt; 1   2013     1     1      517            515         2      830</span>
-<span class="co">#&gt; 2   2013     1     1      533            529         4      850</span>
-<span class="co">#&gt; 3   2013     1     1      542            540         2      923</span>
-<span class="co">#&gt; 4   2013     1     1      544            545        -1     1004</span>
-<span class="co">#&gt; 5   2013     1     1      554            600        -6      812</span>
-<span class="co">#&gt; 6   2013     1     1      554            558        -4      740</span>
-<span class="co">#&gt; 7   2013     1     1      555            600        -5      913</span>
-<span class="co">#&gt; 8   2013     1     1      557            600        -3      709</span>
-<span class="co">#&gt; 9   2013     1     1      557            600        -3      838</span>
-<span class="co">#&gt; 10  2013     1     1      558            600        -2      753</span>
-<span class="co">#&gt; # ... with 336,766 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,</span>
-<span class="co">#&gt; #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span>
-<span class="co">#&gt; #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</span></code></pre></div>
-<p>Tibbles are strict about subsetting. If you try to access a variable that does not exist via <code>$</code>, you’ll get a warning:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights$yea
-<span class="co">#&gt; Warning: Unknown or uninitialised column: 'yea'.</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
-<p>Tibbles also clearly delineate <code>[</code> and <code>[[</code>: <code>[</code> always returns another tibble, <code>[[</code> always returns a vector. No more <code>drop = FALSE</code>!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights[, <span class="st">"dest"</span>]
-<span class="co">#&gt; # A tibble: 336,776 × 1</span>
-<span class="co">#&gt;     dest</span>
-<span class="co">#&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1    IAH</span>
-<span class="co">#&gt; 2    IAH</span>
-<span class="co">#&gt; 3    MIA</span>
-<span class="co">#&gt; 4    BQN</span>
-<span class="co">#&gt; 5    ATL</span>
-<span class="co">#&gt; 6    ORD</span>
-<span class="co">#&gt; 7    FLL</span>
-<span class="co">#&gt; 8    IAD</span>
-<span class="co">#&gt; 9    MCO</span>
-<span class="co">#&gt; 10   ORD</span>
-<span class="co">#&gt; # ... with 336,766 more rows</span></code></pre></div>
-<p>If you want a single vector, be explicit and use <code>[[</code>.</p>
 </div>
 </div>
 </div>

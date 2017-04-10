@@ -1,6 +1,5 @@
 ---
 title: "Tibbles"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Tibbles}
@@ -12,6 +11,7 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(tibble)
+set.seed(1014)
 ```
 
 Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).
@@ -125,4 +125,4 @@ df2 <- tibble(abc = 1)
 df2$a
 ```
 
-Also, tibbles ignore the `drop` argument.
+tibbles also ignore the `drop` argument.

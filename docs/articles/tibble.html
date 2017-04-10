@@ -33,10 +33,22 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/tibble.html">Intro</a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/extending.html">Extending tibble</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -61,7 +73,6 @@
     <div class="page-header toc-ignore">
       <h1>Tibbles</h1>
             
-            <h4 class="date">2017-04-10</h4>
           </div>
 
     
@@ -130,12 +141,12 @@ microbenchmark::<span class="kw">microbenchmark</span>(
   <span class="kw">as.data.frame</span>(l)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;              expr      min        lq      mean    median        uq</span>
-<span class="co">#&gt;      as_tibble(l)  209.489  224.8365  268.9583  237.4245  256.8245</span>
-<span class="co">#&gt;  as.data.frame(l) 1203.876 1258.8500 1424.0870 1296.2005 1429.9265</span>
-<span class="co">#&gt;       max neval cld</span>
-<span class="co">#&gt;  1899.435   100  a </span>
-<span class="co">#&gt;  3544.995   100   b</span></code></pre></div>
+<span class="co">#&gt;              expr      min        lq      mean   median        uq      max</span>
+<span class="co">#&gt;      as_tibble(l)  210.728  231.0655  292.9692  246.168  274.6345 1955.960</span>
+<span class="co">#&gt;  as.data.frame(l) 1223.732 1290.6575 1508.2970 1349.561 1516.2820 4071.902</span>
+<span class="co">#&gt;  neval cld</span>
+<span class="co">#&gt;    100  a </span>
+<span class="co">#&gt;    100   b</span></code></pre></div>
 <p>The speed of <code>as.data.frame()</code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
@@ -190,7 +201,7 @@ df2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.
 df2$a
 <span class="co">#&gt; Warning: Unknown or uninitialised column: 'a'.</span>
 <span class="co">#&gt; NULL</span></code></pre></div>
-<p>Also, tibbles ignore the <code>drop</code> argument.</p>
+<p>tibbles also ignore the <code>drop</code> argument.</p>
 </div>
 </div>
 </div>
