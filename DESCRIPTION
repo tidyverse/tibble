@@ -5,9 +5,9 @@ Title: Simple Data Frames
 Description: Provides a 'tbl_df' class (the "tibble") that provides
     stricter checking and better formatting than the traditional data frame.
 Authors@R: c(
-    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
-    person("Romain", "Francois", , "romain@r-enthusiasts.com", "aut"),
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
+    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
+    person("Romain", "Francois", , "romain@r-enthusiasts.com", "ctb"),
     person("RStudio", role = c("cph", "fnd"))
     )
 URL:  http://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
