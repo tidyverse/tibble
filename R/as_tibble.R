@@ -129,6 +129,7 @@ as_tibble.default <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
+#' @usage NULL
 as.tibble <- function(x, ...) {
   UseMethod("as_tibble")
 }

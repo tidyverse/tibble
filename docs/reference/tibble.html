@@ -81,7 +81,7 @@
     </div>
 
     
-    <p><code>tibble()</code> is a trimmed down version of <code>data.frame()</code> that:</p><ol>
+    <p><code>tibble()</code> is a trimmed down version of <code>data.frame()</code> that:</p><ul>
 <li><p>Never coerces inputs (i.e. strings stay as strings!).</p></li>
 <li><p>Never adds <code>row.names</code>.</p></li>
 <li><p>Never munges column names.</p></li>
@@ -89,20 +89,12 @@
 <li><p>Evaluates its arguments lazily and in order.</p></li>
 <li><p>Adds <code>tbl_df</code> class to output.</p></li>
 <li><p>Automatically adds column names.</p></li>
-</ol>
+</ul>
     
 
     <pre><span class='fu'>tibble</span>(<span class='no'>...</span>)
 
-<span class='fu'>tibble_</span>(<span class='no'>xs</span>)
-
-<span class='fu'>data_frame</span>(<span class='no'>...</span>)
-
-<span class='fu'>data_frame_</span>(<span class='no'>xs</span>)
-
-<span class='fu'>lst</span>(<span class='no'>...</span>)
-
-<span class='fu'>lst_</span>(<span class='no'>xs</span>)</pre>
+<span class='fu'>tibble_</span>(<span class='no'>xs</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -118,12 +110,6 @@ so you can refer to previously created variables.</p></td>
 <code>quote()</code>, or <code><a href='http://www.rdocumentation.org/packages/lazyeval/topics/lazy_'>lazyeval::lazy()</a></code>.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
-evaluates its arguments lazily and in order, and automatically adds names.
-    <code>data_frame</code> is an alias to <code>tibble</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -160,7 +146,7 @@ a data frame.</p>
 #&gt; 8  0.86444107 1.72888215
 #&gt; 9  0.07708986 0.15417972
 #&gt; 10 0.43100342 0.86200684</div><div class='input'>
-<span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
+<span class='fu'><a href='lst.html'>lst</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
 #&gt; [1] 5
 #&gt; 
 #&gt; $x
@@ -207,8 +193,6 @@ a data frame.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
@@ -223,7 +207,7 @@ a data frame.</p>
 </div>
 
 <div class="author">
-  <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Romain Francois, Kirill Müller, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

@@ -130,12 +130,12 @@ microbenchmark::<span class="kw">microbenchmark</span>(
   <span class="kw">as.data.frame</span>(l)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;              expr      min       lq      mean    median       uq      max</span>
-<span class="co">#&gt;      as_tibble(l)  207.224  231.161  270.8284  250.5555  294.297  458.101</span>
-<span class="co">#&gt;  as.data.frame(l) 1178.799 1260.401 1521.5710 1344.2780 1572.101 3681.365</span>
-<span class="co">#&gt;  neval cld</span>
-<span class="co">#&gt;    100  a </span>
-<span class="co">#&gt;    100   b</span></code></pre></div>
+<span class="co">#&gt;              expr      min        lq      mean    median        uq</span>
+<span class="co">#&gt;      as_tibble(l)  209.489  224.8365  268.9583  237.4245  256.8245</span>
+<span class="co">#&gt;  as.data.frame(l) 1203.876 1258.8500 1424.0870 1296.2005 1429.9265</span>
+<span class="co">#&gt;       max neval cld</span>
+<span class="co">#&gt;  1899.435   100  a </span>
+<span class="co">#&gt;  3544.995   100   b</span></code></pre></div>
 <p>The speed of <code>as.data.frame()</code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
@@ -215,7 +215,7 @@ df2$a
 </div>
 
 <div class="author">
-  <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>, Romain Francois, Kirill Müller, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>.</p>
+  <p>Developed by Kirill Müller, <a href="http://hadley.nz">Hadley Wickham</a>, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

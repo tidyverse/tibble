@@ -28,8 +28,6 @@ as_tibble(x, ...)
 \method{as_tibble}{NULL}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
-
-as.tibble(x, ...)
 }
 \arguments{
 \item{x}{A list. Each element of the list must have the same length.}
