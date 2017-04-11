@@ -100,12 +100,28 @@ evaluates its arguments lazily and in order, and automatically adds names.</p>
     <pre><span class='fu'>lst</span>(<span class='no'>...</span>)
 
 <span class='fu'>lst_</span>(<span class='no'>xs</span>)</pre>
-        
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
+so you can refer to previously created variables.</p></td>
+    </tr>
+    <tr>
+      <th>xs</th>
+      <td><p>A list of unevaluated expressions created with <code>~</code>,
+<code>quote()</code>, or <code><a href='http://www.rdocumentation.org/packages/lazyeval/topics/lazy_'>lazyeval::lazy()</a></code>.</p></td>
+    </tr>
+    </table>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>
