@@ -97,7 +97,7 @@
 frame.</p>
     
 
-    <pre><span class='fu'>add_column</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>add_column</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -134,13 +134,13 @@ new columns, default: after last column</p></td>
 #&gt; 2     2     2     0     0
 #&gt; 3     3     1     1     0</div><div class='input'>
 <span class='co'># You can't overwrite existing columns</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># add_column(df, x = 4:6)</span>
-<span class='co'>## ---------------------------------------------</span>
+<span class='fu'>not_run</span>({
+  <span class='fu'>add_column</span>(<span class='no'>df</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
+})
 <span class='co'># You can't create new observations</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># add_column(df, z = 1:5)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>not_run</span>({
+  <span class='fu'>add_column</span>(<span class='no'>df</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

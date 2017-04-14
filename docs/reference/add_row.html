@@ -98,7 +98,7 @@ frame. See <code><a href='tribble.html'>tribble()</a></code> for an easy way to 
 data frame row-by-row.</p>
     
 
-    <pre><span class='fu'>add_row</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>add_row</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -162,9 +162,9 @@ default: after last row</p></td>
 #&gt; 3     3     1
 #&gt; 4     4    NA</div><div class='input'>
 <span class='co'># You can't create new variables</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># add_row(df, z = 10)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>not_run</span>({
+  <span class='fu'>add_row</span>(<span class='no'>df</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

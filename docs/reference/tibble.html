@@ -104,7 +104,7 @@
 </ul>
     
 
-    <pre><span class='fu'>tibble</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>)
 
 <span class='fu'>tibble_</span>(<span class='no'>xs</span>)</pre>
     
@@ -195,10 +195,10 @@ a data frame.</p>
 #&gt; 10    10    20</div><div class='input'>
 <span class='co'># data frames can only contain 1d atomic vectors and lists</span>
 <span class='co'># and can not contain POSIXlt</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># tibble(x = tibble(1, 2, 3))</span>
-<span class='co'># tibble(y = strptime("2000/01/01", "%x"))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>not_run</span>({
+  <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
+  <span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>strptime</span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>))
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

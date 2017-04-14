@@ -141,12 +141,12 @@ microbenchmark::<span class="kw">microbenchmark</span>(
   <span class="kw">as.data.frame</span>(l)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;              expr      min        lq      mean    median        uq</span>
-<span class="co">#&gt;      as_tibble(l)  208.821  230.5715  255.9526  253.2195  273.1465</span>
-<span class="co">#&gt;  as.data.frame(l) 1238.578 1282.1615 1504.8026 1372.1985 1519.8645</span>
-<span class="co">#&gt;       max neval cld</span>
-<span class="co">#&gt;   367.398   100  a </span>
-<span class="co">#&gt;  3453.912   100   b</span></code></pre></div>
+<span class="co">#&gt;              expr      min       lq      mean   median       uq      max</span>
+<span class="co">#&gt;      as_tibble(l)  215.614  365.403  422.6626  380.678  395.287 2955.611</span>
+<span class="co">#&gt;  as.data.frame(l) 1400.574 2010.204 2193.1325 2038.702 2116.091 5450.629</span>
+<span class="co">#&gt;  neval cld</span>
+<span class="co">#&gt;    100  a </span>
+<span class="co">#&gt;    100   b</span></code></pre></div>
 <p>The speed of <code>as.data.frame()</code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
