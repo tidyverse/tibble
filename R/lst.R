@@ -9,6 +9,7 @@
 #'
 #' # You can splice-unquote a list of quotes and formulas
 #' lst(!!! list(n = ~5, y = quote(runif(n))))
+#'
 #' @export
 #' @rdname tibble
 lst <- function(...) {

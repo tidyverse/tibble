@@ -15,7 +15,7 @@
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.
 #' @param xs  A list of unevaluated expressions created with `~`,
-#'   [quote()], or [lazyeval::lazy()].
+#'   [quote()], or (deprecated) [lazyeval::lazy()].
 #' @seealso [as_tibble()] to turn an existing list into
 #'   a data frame.
 #' @export
@@ -34,8 +34,8 @@
 #' # or munges column names
 #' tibble(`a + b` = 1:5)
 #'
-#' # With the SE version, you give it a list of formulas/expressions
-#' tibble_(list(x = ~1:10, y = quote(x * 2)))
+#' # You can splice-unquote a list of quotes and formulas
+#' tibble(!!! list(x = ~1:10, y = quote(x * 2)))
 #'
 #' # data frames can only contain 1d atomic vectors and lists
 #' # and can not contain POSIXlt
