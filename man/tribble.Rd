@@ -6,8 +6,6 @@
 \title{Row-wise tibble creation}
 \usage{
 tribble(...)
-
-frame_data(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{tibble}.

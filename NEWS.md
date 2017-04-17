@@ -1,3 +1,8 @@
+## tibble 1.3.0.9000 (2017-04-17)
+
+- `pkgdown` website.
+
+
 # tibble 1.3.0 (2017-01-10)
 
 ## Bug fixes
@@ -132,7 +137,7 @@ Follow-up release.
 - Subsetting with empty index (e.g., `x[]`) also removes row names.
 
 
-# Documentation
+## Documentation
 
 - Document behavior of `as_tibble.tbl_df()` for subclasses (#60).
 - Document and test that subsetting removes row names.
@@ -151,8 +156,7 @@ Follow-up release.
 - Use new `expect_output_file()` from `testthat`.
 
 
-Version 1.0 (2016-03-21)
-===
+# Version 1.0 (2016-03-21)
 
 - Initial CRAN release
 
