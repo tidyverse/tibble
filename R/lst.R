@@ -9,11 +9,10 @@
 #'
 #' # You can splice-unquote a list of quotes and formulas
 #' lst(!!! list(n = ~5, y = quote(runif(n))))
-
 #' @export
 #' @rdname tibble
 lst <- function(...) {
-  xs <- tidy_quotes(..., .named = 500L)
+  xs <- dots_quos(..., .named = 500L)
 
   n <- length(xs)
   if (n == 0) {
@@ -22,11 +21,11 @@ lst <- function(...) {
 
   # Evaluate each column in turn
   col_names <- names2(xs)
-  output <- new_lst(n)
+  output <- list_len(n)
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    res <- tidy_eval(xs[[i]], output)
+    res <- eval_tidy(xs[[i]], output)
     if (!is_null(res)) {
       output[[i]] <-  res
     }
