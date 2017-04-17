@@ -1,4 +1,4 @@
-# nocov
+# nocov - compat-purrr (last updated: rlang 0.0.0.9007)
 
 # This file serves as a reference for compatibility functions for
 # purrr. They are not drop-in replacements but allow a similar style
@@ -108,9 +108,6 @@ map_if <- function(.x, .p, .f, ...) {
   .x
 }
 
-flatten <- function(.x) {
-  unlist(.x, FALSE, FALSE)
-}
 compact <- function(.x) {
   Filter(length, .x)
 }
