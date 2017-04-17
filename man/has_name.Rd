@@ -19,6 +19,6 @@ This function returns a logical value that indicates if a data frame or
 another named object contains an element with a specific name.
 }
 \details{
-Unnamed objects are treated as if all names are empty strings.
-\code{NA} input gives \code{FALSE} as output.
+Unnamed objects are treated as if all names are empty strings. \code{NA}
+input gives \code{FALSE} as output.
 }
