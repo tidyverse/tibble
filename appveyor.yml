@@ -45,6 +45,9 @@ environment:
     RTOOLS_VERSION: 32
     CRAN: http://cran.rstudio.com
 
+matrix:
+  fast_finish: true
+
 build_script:
   - travis-tool.sh install_deps
 

@@ -1,10 +1,8 @@
 ---
-title: "Formatting of column data"
-author: "Kirill Müller, Hadley Wickham"
-date: "`r Sys.Date()`"
+title: "Extending tibble"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Formatting of column data}
+  %\VignetteIndexEntry{Extending tibble}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +13,7 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(tibble)
 ```
 
-The presentation of a column in a tibble is powered by two S3 generics:
+To extend the tibble package for new types of columnar data, you need to understand how printing works. The presentation of a column in a tibble is powered by two S3 generics:
 
 * `type_sum()` determines what goes into the column header.
 * `obj_sum()` is used when rendering list columns.

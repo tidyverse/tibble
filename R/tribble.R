@@ -33,6 +33,7 @@ tribble <- function(...) {
 
 #' @export
 #' @rdname tribble
+#' @usage NULL
 frame_data <- tribble
 
 #' Row-wise matrix creation
