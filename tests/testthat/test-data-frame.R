@@ -26,7 +26,6 @@ test_that("dim attribute is stripped of 1D array (#84)", {
 test_that("bogus columns raise an error", {
   expect_error(as_tibble(list(1)), "named")
   expect_error(tibble(a = NULL), "1d atomic vector or list")
-  expect_error(tibble(a = ~a), "1d atomic vector or list")
   expect_error(tibble(a = new.env()), "1d atomic vector or list")
   expect_error(tibble(a = quote(a)), "1d atomic vector or list")
 })

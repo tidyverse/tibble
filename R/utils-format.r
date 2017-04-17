@@ -37,7 +37,7 @@ NULL
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is.null(n)) {
+  if (is_null(n)) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -58,7 +58,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
 #' @importFrom stats setNames
 shrink_mat <- function(df, width, rows, n, star) {
-  var_types <- vapply(df, type_sum, character(1))
+  var_types <- map_chr(df, type_sum)
 
   if (ncol(df) == 0 || nrow(df) == 0) {
     return(new_shrunk_mat(NULL, var_types))
@@ -75,16 +75,16 @@ shrink_mat <- function(df, width, rows, n, star) {
   df[] <- df[!extra_wide]
 
   # List columns need special treatment because format can't be trusted
-  classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
-  is_list <- vapply(df, is.list, logical(1))
-  df[is_list] <- lapply(df[is_list], function(x) {
+  classes <- paste0("<", map_chr(df, type_sum), ">")
+  is_list <- map_lgl(df, is.list)
+  df[is_list] <- map(df[is_list], function(x) {
     summary <- obj_sum(x)
     paste0("<", summary, ">")
   })
 
   # Character columns need special treatment because of NA
-  is_character <- vapply(df, is.character, logical(1))
-  df[is_character] <- lapply(df[is_character], format_character)
+  is_character <- map_lgl(df, is.character)
+  df[is_character] <- map(df[is_character], format_character)
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -148,7 +148,7 @@ print_summary <- function(x) {
 }
 
 print_table <- function(x) {
-  if (!is.null(x$table)) {
+  if (!is_null(x$table)) {
     old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
     on.exit(options(old_option), add = TRUE)
     print(x$table)
@@ -177,13 +177,13 @@ format_extra <- function(x) {
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
     extra[[1]] <- paste0("with ", extra[[1]])
-    extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
+    extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
   }
   extra
 }
 
 format_extra_rows <- function(x) {
-  if (!is.null(x$table)) {
+  if (!is_null(x$table)) {
     if (is.na(x$rows_missing)) {
       "more rows"
     } else if (x$rows_missing > 0) {
@@ -258,22 +258,22 @@ big_mark <- function(x, ...) {
 }
 
 tibble_width <- function(width) {
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   width <- tibble_opt("width")
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   getOption("width")
 }
 
 tibble_glimpse_width <- function(width) {
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   width <- tibble_opt("width")
-  if (!is.null(width) && is.finite(width))
+  if (!is_null(width) && is.finite(width))
     return(width)
 
   getOption("width")

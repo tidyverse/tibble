@@ -15,10 +15,11 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends:
     R (>= 3.1.0)
 Imports:
+    assertthat,
     methods,
-    utils,
-    lazyeval (>= 0.1.10),
-    Rcpp (>= 0.12.3)
+    rlang,
+    Rcpp (>= 0.12.3),
+    utils
 Suggests:
     covr,
     dplyr,
@@ -34,3 +35,4 @@ License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Remotes: hadley/rlang

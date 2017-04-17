@@ -30,7 +30,7 @@ obj_sum.default <- function(x) {
 
 #' @export
 obj_sum.list <- function(x) {
-  vapply(x, obj_sum.default, character(1L))
+  map_chr(x, obj_sum.default)
 }
 
 #' @export
@@ -104,7 +104,7 @@ tbl_sum.tbl_sql <- function(x) {
 
 dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
-  format_dim <- vapply(dim, big_mark, character(1))
+  format_dim <- map_chr(dim, big_mark)
   format_dim[is.na(dim)] <- "??"
   paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
