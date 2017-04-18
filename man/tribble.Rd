@@ -9,7 +9,10 @@ tribble(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{tibble}.
-Variable names should be formulas, and may only appear before the data.}
+Variable names should be formulas, and may only appear before the data.
+If a function needs to be applied to the data for a column (e.g. \code{factor}),
+this should apear after the \code{~}, e.g. factor(column_A). Other arguments
+cab be provided as needed.}
 }
 \value{
 A \link{tibble}.
@@ -30,6 +33,13 @@ tribble(
   "b",   2,
   "c",   3
 )
+
+# Conversion functions can be supplied, including additional
+# paremeters if needed.
+tribble(
+  ~colA, ~factor(colB, levels = c("B", "A")),
+  "X",   "A",
+  "Y",   "B")
 
 # tribble will create a list column if the value in any cell is
 # not a scalar
