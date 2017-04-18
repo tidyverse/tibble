@@ -162,7 +162,7 @@ format_table <- function(x) {
   table_with_row_names <- c(list(row.names(table)), table)
   table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
   same_width_table <- map(table_with_names, format, justify = "right")
-  rows <- eval_tidy(quo(paste(!!! same_width_table)))
+  rows <- invoke(paste, same_width_table)
   rows
 }
 
