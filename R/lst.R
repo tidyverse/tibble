@@ -8,7 +8,7 @@
 #' lst(n = 5, x = runif(n))
 #'
 #' # You can splice-unquote a list of quotes and formulas
-#' lst(!!! list(n = quo(2 + 3), y = quote(runif(n))))
+#' lst(!!! list(n = rlang::quo(2 + 3), y = quote(runif(n))))
 #'
 #' @export
 #' @rdname tibble
