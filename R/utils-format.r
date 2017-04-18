@@ -151,11 +151,7 @@ print.trunc_mat <- function(x, ...) {
 }
 
 format_summary <- function(x) {
-  if (length(x$summary) > 0L) {
-    format_comment(x$summary, width = x$width)
-  } else {
-    character()
-  }
+  format_comment(x$summary, width = x$width)
 }
 
 format_table <- function(x) {
@@ -172,7 +168,7 @@ format_table <- function(x) {
 format_extra <- function(x) {
   extra <- format_extra_raw(x)
   if (length(extra) >= 1) {
-    format_comment("... ", paste(extra, collapse = ", "), width = x$width)
+    format_comment(paste0("... ", paste(extra, collapse = ", ")), width = x$width)
   } else {
     character()
   }
@@ -220,8 +216,9 @@ format_extra_cols <- function(x) {
   }
 }
 
-format_comment <- function(..., width) {
-  wrap(..., prefix = "# ", width = min(width, getOption("width")))
+format_comment <- function(x, width) {
+  if (length(x) == 0L) return(character())
+  wrap(x, prefix = "# ", width = min(width, getOption("width")))
 }
 
 #' knit_print method for trunc mat
