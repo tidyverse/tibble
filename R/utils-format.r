@@ -133,40 +133,26 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 }
 
 #' @export
+format.trunc_mat <- function(x, ...) {
+  c(
+    format_summary(x),
+    format_table(x),
+    format_extra(x)
+  )
+}
+
+#' @export
 print.trunc_mat <- function(x, ...) {
-  print_summary(x)
-  print_table(x)
-  print_extra(x)
+  cat_line(format(x, ...))
   invisible(x)
 }
 
-print_summary <- function(x) {
-  summary <- format_summary(x)
-  if (length(summary) > 0) {
-    print_comment(summary, width = x$width)
-  }
-}
-
-print_table <- function(x) {
-  table <- format_table(x)
-  if (length(table) > 0) {
-    cat_line(table)
-  }
-}
-
-print_extra <- function(x) {
-  extra <- format_extra(x)
-  if (length(extra) > 0) {
-    print_comment("... ", collapse(extra), width = x$width)
-  }
-}
-
-print_comment <- function(..., width) {
-  cat_line(wrap(..., prefix = "# ", width = min(width, getOption("width"))))
-}
-
 format_summary <- function(x) {
-  x$summary
+  if (length(x$summary) > 0L) {
+    format_comment(x$summary, width = x$width)
+  } else {
+    character()
+  }
 }
 
 format_table <- function(x) {
@@ -181,6 +167,15 @@ format_table <- function(x) {
 }
 
 format_extra <- function(x) {
+  extra <- format_extra_raw(x)
+  if (length(extra) >= 1) {
+    format_comment("... ", paste(extra, collapse = ", "), width = x$width)
+  } else {
+    character()
+  }
+}
+
+format_extra_raw <- function(x) {
   extra_rows <- format_extra_rows(x)
   extra_cols <- format_extra_cols(x)
 
@@ -189,6 +184,7 @@ format_extra <- function(x) {
     extra[[1]] <- paste0("with ", extra[[1]])
     extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
   }
+
   extra
 }
 
@@ -221,15 +217,19 @@ format_extra_cols <- function(x) {
   }
 }
 
+format_comment <- function(..., width) {
+  wrap(..., prefix = "# ", width = min(width, getOption("width")))
+}
+
 #' knit_print method for trunc mat
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_summary(x)
+  summary <- x$summary
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  extra <- format_extra(x)
+  extra <- format_extra_raw(x)
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
