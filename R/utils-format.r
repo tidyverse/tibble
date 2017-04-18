@@ -148,14 +148,10 @@ print_summary <- function(x) {
 }
 
 print_table <- function(x) {
-  table <- x$table
-  if (is_null(table)) return()
-
-  table_with_row_names <- c(list(row.names(table)), table)
-  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
-  same_width_table <- map(table_with_names, format, justify = "right")
-  rows <- eval_tidy(quo(paste(!!! same_width_table)))
-  cat(paste0(rows, "\n"), sep = "")
+  table <- format_table(x)
+  if (length(table) > 0) {
+    cat(paste0(table, "\n"), sep = "")
+  }
 }
 
 print_extra <- function(x) {
@@ -171,6 +167,17 @@ print_comment <- function(..., width) {
 
 format_summary <- function(x) {
   x$summary
+}
+
+format_table <- function(x) {
+  table <- x$table
+  if (is_null(table)) return()
+
+  table_with_row_names <- c(list(row.names(table)), table)
+  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
+  same_width_table <- map(table_with_names, format, justify = "right")
+  rows <- eval_tidy(quo(paste(!!! same_width_table)))
+  rows
 }
 
 format_extra <- function(x) {
