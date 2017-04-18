@@ -63,9 +63,6 @@ test_that("tribble() errs appropriately on bad calls", {
   # invalid colname syntax
   expect_error(tribble(a~b), "single argument")
 
-  # invalid colname syntax
-  expect_error(tribble(~a + b), "symbol or string")
-
   # tribble() must be passed colnames
   expect_error(tribble(
     "a", "b",
@@ -79,6 +76,21 @@ test_that("tribble() errs appropriately on bad calls", {
     3, 4, 5
   ))
 
+})
+
+test_that("tribble supports conversion functions #149", {
+  conversion <- tribble(
+    ~factor(colA), ~factor(colB, levels = c("B", "A")),
+    3, "A",
+    4, "B"
+  )
+
+  conversion_expectation <- tibble(
+    colA = factor(3:4),
+    colB = factor(c("A", "B"), levels = c("B", "A"))
+  )
+
+  expect_equal(conversion, conversion_expectation)
 })
 
 test_that("tribble can have list columns", {

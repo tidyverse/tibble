@@ -9,6 +9,9 @@
 #'
 #' @param ... Arguments specifying the structure of a `tibble`.
 #'   Variable names should be formulas, and may only appear before the data.
+#'   If a function needs to be applied to the data for a column (e.g. `factor`),
+#'   this should apear after the `~`, e.g. factor(column_A). Other arguments
+#'   cab be provided as needed.
 #' @return A [tibble].
 #' @export
 #' @examples
@@ -19,6 +22,13 @@
 #'   "c",   3
 #' )
 #'
+#' # Conversion functions can be supplied, including additional
+#' # paremeters if needed.
+#' tribble(
+#'   ~colA, ~factor(colB, levels = c("B", "A")),
+#'   "X",   "A",
+#'   "Y",   "B")
+#'
 #' # tribble will create a list column if the value in any cell is
 #' # not a scalar
 #' tribble(
@@ -28,7 +38,8 @@
 #' )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
+  turn_frame_data_into_tibble(data$frame_names, data$frame_rest, data$frame_functions,
+                              parent.frame())
 }
 
 #' @export
@@ -62,7 +73,8 @@ extract_frame_data_from_dots <- function(...) {
   dots <- list(...)
 
   # Extract the names.
-  frame_names <- extract_frame_names_from_dots(dots)
+  frame_functions <- extract_frame_names_functions_from_dots(dots)
+  frame_names <- names(frame_functions)
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
@@ -77,11 +89,11 @@ extract_frame_data_from_dots <- function(...) {
 
   validate_rectangular_shape(frame_names, frame_rest)
 
-  list(frame_names = frame_names, frame_rest = frame_rest)
+  list(frame_names = frame_names, frame_functions = frame_functions, frame_rest = frame_rest)
 }
 
-extract_frame_names_from_dots <- function(dots) {
-  frame_names <- character()
+extract_frame_names_functions_from_dots <- function(dots) {
+  frame_functions <- list()
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
@@ -95,15 +107,27 @@ extract_frame_names_from_dots <- function(dots) {
       stopc("expected a column name with a single argument; e.g. '~name'")
     }
 
-    candidate <- el[[2]]
+    if (is.call(el[[2]])) {
+      # e.g. ~factor(col_fac, levels = c("B", "A"))
+      if (length(el[[2]]) == 1L) {
+        stopc("conversion functions must have at least one argument giving the column name")
+      }
+      frame_func <- el[[2]]
+      candidate <- frame_func[[2]]
+      frame_func[[2]] <- quote(.)
+    } else {
+      # e.g. ~col2
+      candidate <- el[[2]]
+      frame_func <- quote(.)
+    }
+
     if (!(is.symbol(candidate) || is.character(candidate))) {
       stopc("expected a symbol or string denoting a column name")
     }
 
-    frame_names <- c(frame_names, as.character(el[[2]]))
+    frame_functions <- c(frame_functions, setNames(list(frame_func), as.character(candidate)))
   }
-
-  frame_names
+  frame_functions
 }
 
 validate_rectangular_shape <- function(frame_names, frame_rest) {
@@ -123,13 +147,14 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-turn_frame_data_into_tibble <- function(names, rest) {
+turn_frame_data_into_tibble <- function(names, rest, functions, envir) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
+  frame_col_processed <- apply_functions_to_frame_data(frame_col, functions, envir)
 
   # Create a tbl_df and return it
-  names(frame_col) <- names
-  as_tibble(frame_col)
+  names(frame_col_processed) <- names
+  as_tibble(frame_col_processed)
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {
@@ -156,4 +181,16 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 
   colnames(frame_mat) <- names
   frame_mat
+}
+
+apply_functions_to_frame_data <- function(data, functions, envir) {
+  apply_function <- function(column, func) {
+    col_processed <- eval(eval(substitute(substitute(func, list(. = column)), list(func = func))), envir = envir)
+    if (length(col_processed) != length(column)) {
+      stopc(sprintf("Function %s returns %d items; expecting %d.",
+                    deparse(func), length(col_data), length(data)))
+    }
+    col_processed
+  }
+  map2(data, functions, apply_function)
 }

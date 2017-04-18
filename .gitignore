@@ -1,5 +1,7 @@
 *.o
 src/*.o-*
+src-i386/
+src-x64/
 *.so
 *.dll
 .RData
