@@ -173,7 +173,7 @@ format_extra <- function(x) {
   if (length(extra) >= 1) {
     extra[[1]] <- paste0("with ", extra[[1]])
     extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
-    paste(extra, collapse = ", ")
+    collapse(extra)
   } else {
     character()
   }

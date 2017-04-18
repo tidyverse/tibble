@@ -48,7 +48,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
 
   data_width <- width - nchar(var_names) - 2
 
-  formatted <- map_chr(df, function(x) paste0(format_v(x), collapse = ", "))
+  formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
   cat_line(var_names, truncated)
@@ -86,12 +86,12 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 format_v.list <- function(x) {
   x <- map(x, format_v)
   atomic <- map_int(x, length) == 1L
-  x <- map_chr(x, function(x) paste(x, collapse = ", "))
+  x <- map_chr(x, collapse)
   x[!atomic] <- paste0("<", x[!atomic], ">")
   if (length(x) == 1L) {
     x
   } else {
-    paste0("[", paste(x, collapse = ", "), "]")
+    paste0("[", collapse(x), "]")
   }
 }
 
