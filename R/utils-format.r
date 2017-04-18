@@ -53,7 +53,10 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
                      n_extra = n_extra, summary = tbl_sum(x))
 
-  structure(c(shrunk, trunc_info), class = "trunc_mat")
+  structure(
+    c(shrunk, trunc_info),
+    class = c(paste0("trunc_mat_", class(x)), "trunc_mat")
+  )
 }
 
 #' @importFrom stats setNames
