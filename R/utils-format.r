@@ -138,9 +138,9 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 #' @export
 format.trunc_mat <- function(x, ...) {
   c(
-    format_summary(x),
+    format_comment(format_summary(x), width = x$width),
     format_table(x),
-    format_extra(x)
+    format_comment(pre_dots(format_extra(x)), width = x$width)
   )
 }
 
@@ -151,7 +151,7 @@ print.trunc_mat <- function(x, ...) {
 }
 
 format_summary <- function(x) {
-  format_comment(x$summary, width = x$width)
+  x$summary
 }
 
 format_table <- function(x) {
@@ -166,15 +166,6 @@ format_table <- function(x) {
 }
 
 format_extra <- function(x) {
-  extra <- format_extra_raw(x)
-  if (length(extra) >= 1) {
-    format_comment(paste0("... ", paste(extra, collapse = ", ")), width = x$width)
-  } else {
-    character()
-  }
-}
-
-format_extra_raw <- function(x) {
   extra_rows <- format_extra_rows(x)
   extra_cols <- format_extra_cols(x)
 
@@ -182,9 +173,10 @@ format_extra_raw <- function(x) {
   if (length(extra) >= 1) {
     extra[[1]] <- paste0("with ", extra[[1]])
     extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
+    paste(extra, collapse = ", ")
+  } else {
+    character()
   }
-
-  extra
 }
 
 format_extra_rows <- function(x) {
@@ -221,15 +213,23 @@ format_comment <- function(x, width) {
   wrap(x, prefix = "# ", width = min(width, getOption("width")))
 }
 
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0("... ", x)
+  } else {
+    character()
+  }
+}
+
 #' knit_print method for trunc mat
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- x$summary
+  summary <- format_summary(x)
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  extra <- format_extra_raw(x)
+  extra <- format_extra(x)
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
