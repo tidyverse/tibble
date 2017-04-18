@@ -138,9 +138,9 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 #' @export
 format.trunc_mat <- function(x, ...) {
   c(
-    format_comment(format_summary(x), width = x$width),
-    format_table(x),
-    format_comment(pre_dots(format_extra(x)), width = x$width)
+    format_comment(format_header(x), width = x$width),
+    format_body(x),
+    format_comment(pre_dots(format_footer(x)), width = x$width)
   )
 }
 
@@ -150,11 +150,11 @@ print.trunc_mat <- function(x, ...) {
   invisible(x)
 }
 
-format_summary <- function(x) {
+format_header <- function(x) {
   x$summary
 }
 
-format_table <- function(x) {
+format_body <- function(x) {
   table <- x$table
   if (is_null(table)) return()
 
@@ -165,9 +165,9 @@ format_table <- function(x) {
   rows
 }
 
-format_extra <- function(x) {
-  extra_rows <- format_extra_rows(x)
-  extra_cols <- format_extra_cols(x)
+format_footer <- function(x) {
+  extra_rows <- format_footer_rows(x)
+  extra_cols <- format_footer_cols(x)
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
@@ -179,7 +179,7 @@ format_extra <- function(x) {
   }
 }
 
-format_extra_rows <- function(x) {
+format_footer_rows <- function(x) {
   if (!is_null(x$table)) {
     if (is.na(x$rows_missing)) {
       "more rows"
@@ -191,7 +191,7 @@ format_extra_rows <- function(x) {
   }
 }
 
-format_extra_cols <- function(x) {
+format_footer_cols <- function(x) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
     if (x$n_extra > 0) {
@@ -225,11 +225,11 @@ pre_dots <- function(x) {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_summary(x)
+  summary <- format_header(x)
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  extra <- format_extra(x)
+  extra <- format_footer(x)
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
