@@ -148,11 +148,14 @@ print_summary <- function(x) {
 }
 
 print_table <- function(x) {
-  if (!is_null(x$table)) {
-    old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
-    on.exit(options(old_option), add = TRUE)
-    print(x$table)
-  }
+  table <- x$table
+  if (is_null(table)) return()
+
+  table_with_row_names <- c(list(row.names(table)), table)
+  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
+  same_width_table <- map(table_with_names, format, justify = "right")
+  rows <- eval_tidy(quo(paste(!!! same_width_table)))
+  cat(paste0(rows, "\n"), sep = "")
 }
 
 print_extra <- function(x) {
