@@ -150,7 +150,7 @@ print_summary <- function(x) {
 print_table <- function(x) {
   table <- format_table(x)
   if (length(table) > 0) {
-    cat(paste0(table, "\n"), sep = "")
+    cat_line(table)
   }
 }
 
