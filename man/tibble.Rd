@@ -43,7 +43,7 @@ evaluates its arguments lazily and in order, and automatically adds names.
 lst(n = 5, x = runif(n))
 
 # You can splice-unquote a list of quotes and formulas
-lst(!!! list(n = ~5, y = quote(runif(n))))
+lst(!!! list(n = quo(2 + 3), y = quote(runif(n))))
 
 a <- 1:5
 tibble(a, b = a * 2)
@@ -60,7 +60,7 @@ str(tibble(x = list(diag(1), diag(2))))
 tibble(`a + b` = 1:5)
 
 # You can splice-unquote a list of quotes and formulas
-tibble(!!! list(x = ~1:10, y = quote(x * 2)))
+tibble(!!! list(x = quo(1:10), y = quote(x * 2)))
 
 # data frames can only contain 1d atomic vectors and lists
 # and can not contain POSIXlt
