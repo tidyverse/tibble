@@ -22,7 +22,7 @@
 #'   "c",   3
 #' )
 #'
-#' # Conversion functions can be supplied, including additional
+#' # Conversion quosures can be supplied, including additional
 #' # paremeters if needed.
 #' tribble(
 #'   ~colA, ~factor(colB, levels = c("B", "A")),
@@ -38,7 +38,7 @@
 #' )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_tibble(data$frame_names, data$frame_rest, data$frame_functions,
+  turn_frame_data_into_tibble(data$frame_names, data$frame_rest, data$frame_quosures,
                               parent.frame())
 }
 
@@ -73,8 +73,8 @@ extract_frame_data_from_dots <- function(...) {
   dots <- list(...)
 
   # Extract the names.
-  frame_functions <- extract_frame_names_functions_from_dots(dots)
-  frame_names <- names(frame_functions)
+  frame_quosures <- extract_frame_names_quosures_from_dots(dots)
+  frame_names <- names(frame_quosures)
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
@@ -89,11 +89,11 @@ extract_frame_data_from_dots <- function(...) {
 
   validate_rectangular_shape(frame_names, frame_rest)
 
-  list(frame_names = frame_names, frame_functions = frame_functions, frame_rest = frame_rest)
+  list(frame_names = frame_names, frame_quosures = frame_quosures, frame_rest = frame_rest)
 }
 
-extract_frame_names_functions_from_dots <- function(dots) {
-  frame_functions <- list()
+extract_frame_names_quosures_from_dots <- function(dots) {
+  frame_quosures <- list()
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
@@ -107,27 +107,31 @@ extract_frame_names_functions_from_dots <- function(dots) {
       stopc("expected a column name with a single argument; e.g. '~name'")
     }
 
+    cur_quosure <- rlang::as_quosure(el)
+
     if (is.call(el[[2]])) {
       # e.g. ~factor(col_fac, levels = c("B", "A"))
-      if (length(el[[2]]) == 1L) {
-        stopc("conversion functions must have at least one argument giving the column name")
+      cur_call <- el[[2]]
+      # Works down the tree of calls until the first parameter is a call
+      while (length(cur_call) > 1L && is.call(cur_call[[2]])) {
+        cur_call <- cur_call[[2]]
       }
-      frame_func <- el[[2]]
-      candidate <- frame_func[[2]]
-      frame_func[[2]] <- quote(.)
+      if (length(cur_call) == 1L) {
+        stopc("conversion quosures must have at least one argument giving the column name")
+      }
+      candidate <- cur_call[[2]]
     } else {
       # e.g. ~col2
-      candidate <- el[[2]]
-      frame_func <- quote(.)
+      candidate <- cur_quosure[[2]]
     }
 
     if (!(is.symbol(candidate) || is.character(candidate))) {
       stopc("expected a symbol or string denoting a column name")
     }
 
-    frame_functions <- c(frame_functions, setNames(list(frame_func), as.character(candidate)))
+    frame_quosures <- c(frame_quosures, setNames(list(cur_quosure), as.character(candidate)))
   }
-  frame_functions
+  frame_quosures
 }
 
 validate_rectangular_shape <- function(frame_names, frame_rest) {
@@ -147,13 +151,13 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-turn_frame_data_into_tibble <- function(names, rest, functions, envir) {
+turn_frame_data_into_tibble <- function(names, rest, quosures, envir) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
-  frame_col_processed <- apply_functions_to_frame_data(frame_col, functions, envir)
+  names(frame_col) <- names
+  frame_col_processed <- apply_quosures_to_frame_data(frame_col, quosures, envir)
 
   # Create a tbl_df and return it
-  names(frame_col_processed) <- names
   as_tibble(frame_col_processed)
 }
 
@@ -183,14 +187,18 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
   frame_mat
 }
 
-apply_functions_to_frame_data <- function(data, functions, envir) {
-  apply_function <- function(column, func) {
-    col_processed <- eval(eval(substitute(substitute(func, list(. = column)), list(func = func))), envir = envir)
-    if (length(col_processed) != length(column)) {
-      stopc(sprintf("Function %s returns %d items; expecting %d.",
-                    deparse(func), length(col_data), length(data)))
+apply_quosures_to_frame_data <- function(data, quosures, envir) {
+  for (i in seq_along(data)) {
+    cur_quosure <- quosures[[i]]
+    if (is.call(cur_quosure[[2]])) {
+      # Only need to evaluate if a call rather than a symbol
+      res <- eval_tidy(cur_quosure, data)
+      if (length(res) != length(data[[i]])) {
+        stopc(sprintf("Quosure %s returns %d items; expecting %d.",
+                      deparse(cur_quosure), length(col_data), length(data)))
+      }
+      data[[i]] <- res
     }
-    col_processed
   }
-  map2(data, functions, apply_function)
+  data
 }
