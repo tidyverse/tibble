@@ -79,15 +79,17 @@ test_that("tribble() errs appropriately on bad calls", {
 })
 
 test_that("tribble supports conversion functions #149", {
+  sys_date <- Sys.Date()
   conversion <- tribble(
-    ~factor(colA), ~factor(colB, levels = c("B", "A")),
-    3, "A",
-    4, "B"
+    ~factor(colA), ~factor(colB, levels = c("B", "A")), ~asin(sqrt(arcsin_sqrt_prop)),
+    3, "A", 0.4,
+    4, "B", 0.3
   )
 
   conversion_expectation <- tibble(
     colA = factor(3:4),
-    colB = factor(c("A", "B"), levels = c("B", "A"))
+    colB = factor(c("A", "B"), levels = c("B", "A")),
+    arcsin_sqrt_prop = asin(sqrt(c(0.4, 0.3)))
   )
 
   expect_equal(conversion, conversion_expectation)
