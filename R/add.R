@@ -47,7 +47,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   missing_vars <- setdiff(names(.data), names(df))
-  df[missing_vars] <- lapply(.data[missing_vars], na_value)
+  df[missing_vars] <- map(.data[missing_vars], na_value)
   df <- df[names(.data)]
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
@@ -57,10 +57,11 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 }
 
 na_value <- function(boilerplate) {
-  if (is.list(boilerplate))
+  if (is.list(boilerplate)) {
     list(NULL)
-  else
+  } else {
     NA
+  }
 }
 
 rbind_at <- function(old, new, pos) {
@@ -154,14 +155,14 @@ pos_from_before_after_names <- function(before, after, names) {
 }
 
 pos_from_before_after <- function(before, after, len) {
-  if (is.null(before)) {
-    if (is.null(after)) {
+  if (is_null(before)) {
+    if (is_null(after)) {
       len
     } else {
       after
     }
   } else {
-    if (is.null(after)) {
+    if (is_null(after)) {
       before - 1L
     } else {
       stopc("Can't specify both .before and .after")

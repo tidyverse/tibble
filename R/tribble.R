@@ -137,7 +137,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
   # if a frame_mat's col is a list column, keep it unchanged (does not unlist)
   for (i in seq_len(ncol(frame_mat))) {
     col <- frame_mat[, i]
-    if (any(vapply(col, needs_list_col, logical(1L)))) {
+    if (some(col, needs_list_col)) {
       frame_col[[i]] <- col
     } else {
       frame_col[[i]] <- unlist(col)
@@ -147,7 +147,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
 }
 
 turn_frame_data_into_frame_matrix <- function(names, rest) {
-  if (any(vapply(rest, needs_list_col, logical(1)))) {
+  if (some(rest, needs_list_col)) {
     stopc("frame_matrix() cannot have list columns")
   }
 

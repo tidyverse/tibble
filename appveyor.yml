@@ -49,6 +49,7 @@ matrix:
   fast_finish: true
 
 build_script:
+  - travis-tool.sh r_install curl
   - travis-tool.sh install_deps
 
 test_script:

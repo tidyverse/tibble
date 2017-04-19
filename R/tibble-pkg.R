@@ -1,6 +1,7 @@
 #' @useDynLib tibble, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils head tail
+#' @import rlang
 #' @aliases NULL
 #' @details The S3 class `tbl_df` wraps a local data frame. The main
 #' advantage to using a `tbl_df` over a regular data frame is the printing:

@@ -10,7 +10,7 @@ check_names_df.character <- function(j, x) {
   check_needs_no_dim(j)
 
   pos <- safe_match(j, names(x))
-  if(any(is.na(pos))){
+  if(anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
     stopc(pluralise_msg("Unknown column(s): ", unknown_names))
   }
@@ -21,7 +21,7 @@ check_names_df.character <- function(j, x) {
 check_names_df.numeric <- function(j, x) {
   check_needs_no_dim(j)
 
-  if (any(is.na(j))) {
+  if (anyNA(j)) {
     stopc("NA column indexes not supported")
   }
 
@@ -48,7 +48,7 @@ check_names_df.logical <- function(j, x) {
   if (!(length(j) %in% c(1L, length(x)))) {
     stopc("Length of logical index vector must be 1 or ", length(x), ", got: ", length(j))
   }
-  if (any(is.na(j))) {
+  if (anyNA(j)) {
     stopc("NA column indexes not supported")
   }
   seq_along(x)[j]
@@ -59,7 +59,6 @@ check_needs_no_dim <- function(j) {
     stopc("Unsupported use of matrix or array for column indexing")
   }
 }
-
 
 # check_names_before_after ------------------------------------------------
 
@@ -75,7 +74,7 @@ check_names_before_after.character <- function(j, names) {
   check_needs_no_dim(j)
 
   pos <- safe_match(j, names)
-  if(any(is.na(pos))){
+  if(anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
     stopc(pluralise_msg("Unknown column(s): ", unknown_names))
   }

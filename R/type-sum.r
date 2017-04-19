@@ -30,7 +30,7 @@ obj_sum.default <- function(x) {
 
 #' @export
 obj_sum.list <- function(x) {
-  vapply(x, obj_sum.default, character(1L))
+  map_chr(x, obj_sum.default)
 }
 
 #' @export
@@ -88,23 +88,9 @@ tbl_sum.tbl_df <- function(x) {
   paste0("A tibble: ", dim_desc(x))
 }
 
-# FIXME: This belongs in dplyr, but can only be added there once tibble has been
-# updated.
-# nocov start
-#' @export
-tbl_sum.grouped_df <- function(x) {
-  NULL
-}
-
-#' @export
-tbl_sum.tbl_sql <- function(x) {
-  NULL
-}
-# nocov end
-
 dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
-  format_dim <- vapply(dim, big_mark, character(1))
+  format_dim <- map_chr(dim, big_mark)
   format_dim[is.na(dim)] <- "??"
   paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
