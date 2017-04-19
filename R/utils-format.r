@@ -50,8 +50,10 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   width <- tibble_width(width)
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
-  trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra, summary = tbl_sum(x))
+  trunc_info <- list(
+    width = width, rows_total = rows, rows_min = nrow(df),
+    n_extra = n_extra, summary = tbl_sum(x)
+  )
 
   structure(
     c(shrunk, trunc_info),
