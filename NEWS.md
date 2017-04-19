@@ -1,3 +1,10 @@
+### tibble 1.3.0.9001 (2017-04-19)
+
+- Own printing routine, not relying on `print.data.frame()` anymore. Now providing `format.tbl_df()` and full support for Unicode characters in names and data (#235).
+- Minor efficiency gains by replacing `any(is.na())` with `anyNA()` (#229, @csgillespie).
+- Using `rlang` instead of `lazyeval` (#225, @lionel-).
+
+
 ## tibble 1.3.0.9000 (2017-04-17)
 
 - `pkgdown` website.
