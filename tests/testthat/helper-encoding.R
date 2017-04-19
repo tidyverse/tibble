@@ -28,26 +28,26 @@ get_alien_lang_string <- function() {
   lang_strings$different[[1L]]
 }
 
-with_non_utf8_encoding <- function(code) {
-  old_encoding <- set_non_utf8_encoding()
-  on.exit(set_encoding(old_encoding), add = TRUE)
+with_non_utf8_locale <- function(code) {
+  old_locale <- set_non_utf8_locale()
+  on.exit(set_locale(old_locale), add = TRUE)
   code
 }
 
-set_non_utf8_encoding <- function() {
+set_non_utf8_locale <- function() {
   if (.Platform$OS.type == "windows") return(NULL)
   tryCatch(
-    locale <- set_encoding("en_US.ISO88591"),
+    locale <- set_locale("en_US.ISO88591"),
     warning = function(e) {
-      testthat::skip("Cannot set latin-1 encoding")
+      testthat::skip("Cannot set latin-1 locale")
     }
   )
   locale
 }
 
-set_encoding <- function(encoding) {
-  if (is.null(encoding)) return(NULL)
+set_locale <- function(locale) {
+  if (is.null(locale)) return(NULL)
   locale <- Sys.getlocale("LC_CTYPE")
-  Sys.setlocale("LC_CTYPE", encoding)
+  Sys.setlocale("LC_CTYPE", locale)
   locale
 }
