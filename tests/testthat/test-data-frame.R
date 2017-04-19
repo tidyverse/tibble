@@ -53,7 +53,6 @@ test_that("empty input makes 0 x 0 tbl_df", {
 })
 
 test_that("SE version", {
-  skip("Currently broken in rlang")
   expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
