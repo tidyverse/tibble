@@ -112,6 +112,17 @@ test_that("trunc_mat for wide-character columns (#100)", {
     "trunc_mat/wide-8-60.txt")
 })
 
+test_that("trunc_mat for wide-character columns in non-UTF-8 locale", {
+  with_non_utf8_locale({
+    x <- c("\u6210\u4ea4\u65e5\u671f", "\u5408\u540c\u5f55\u5165\u65e5\u671f")
+    df <- setNames(tibble(1:3, 4:6), x)
+
+    expect_output_file_rel(
+      print(df, n = 8L, width = 60L),
+      "trunc_mat/wide-8-60.txt")
+  })
+})
+
 test_that("trunc_mat backticks non-syntactic names", {
   tb <- tibble(
     `:)` = "smile",
