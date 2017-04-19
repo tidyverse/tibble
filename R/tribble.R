@@ -139,8 +139,10 @@ turn_matrix_into_column_list <- function(frame_mat) {
     col <- frame_mat[, i]
     if (some(col, needs_list_col)) {
       frame_col[[i]] <- col
-    } else {
-      frame_col[[i]] <- unlist(col)
+    } else if (inherits(col, "list")){
+      frame_col[[i]] <- rlang::invoke(c, col)
+    } else{
+      frame_col[[i]] <- col
     }
   }
   return(frame_col)
