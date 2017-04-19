@@ -1,4 +1,4 @@
-# nocov - compat-lazyeval (last updated: rlang 0.0.0.9016)
+# nocov - compat-lazyeval (last updated: rlang 0.0.0.9018)
 
 # This file serves as a reference for compatibility functions for lazyeval.
 # Please find the most recent version in rlang's repository.
@@ -25,7 +25,7 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
   }
 
   coerce_type(lazy, "quosure",
-    quosure = as_quosure(lazy),
+    formula = as_quosure(lazy, env),
     symbol = ,
     language = new_quosure(lazy, env),
     string = ,
