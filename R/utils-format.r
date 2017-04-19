@@ -212,7 +212,7 @@ format_footer_cols <- function(x) {
 
 format_comment <- function(x, width) {
   if (length(x) == 0L) return(character())
-  wrap(x, prefix = "# ", width = min(width, getOption("width")))
+  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
 }
 
 pre_dots <- function(x) {
