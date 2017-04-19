@@ -27,6 +27,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/iris-5-30.txt")
 
   expect_output_file_rel(
+    print(as_tibble(iris), n = 5L, width = 24L, row_numbers = FALSE),
+    "trunc_mat/iris-5-30-no-rownumbers.txt")
+
+  expect_output_file_rel(
     print(as_tibble(iris), n = 3L, width = 5L),
     "trunc_mat/iris-3-5.txt")
 
