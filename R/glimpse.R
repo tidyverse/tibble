@@ -33,10 +33,10 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   stopifnot(is.finite(width))
 
-  cat("Observations: ", big_mark(nrow(x)), "\n", sep = "")
+  cat_line("Observations: ", big_mark(nrow(x)))
   if (ncol(x) == 0) return(invisible())
 
-  cat("Variables: ", big_mark(ncol(x)), "\n", sep = "")
+  cat_line("Variables: ", big_mark(ncol(x)))
 
   # this is an overestimate, but shouldn't be too expensive.
   # every type needs at least three characters: "x, "
@@ -48,10 +48,10 @@ glimpse.tbl <- function(x, width = NULL, ...) {
 
   data_width <- width - nchar(var_names) - 2
 
-  formatted <- map_chr(df, function(x) paste0(format_v(x), collapse = ", "))
+  formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
-  cat(paste0(var_names, truncated, collapse = "\n"), "\n", sep = "")
+  cat_line(var_names, truncated)
   invisible(x)
 }
 
@@ -86,12 +86,12 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 format_v.list <- function(x) {
   x <- map(x, format_v)
   atomic <- map_int(x, length) == 1L
-  x <- map_chr(x, function(x) paste(x, collapse = ", "))
+  x <- map_chr(x, collapse)
   x[!atomic] <- paste0("<", x[!atomic], ">")
   if (length(x) == 1L) {
     x
   } else {
-    paste0("[", paste(x, collapse = ", "), "]")
+    paste0("[", collapse(x), "]")
   }
 }
 

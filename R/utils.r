@@ -51,7 +51,7 @@ nchar_width <- function(x) {
 }
 
 cat_line <- function(...) {
-  cat(..., "\n", sep = "")
+  cat(paste0(..., "\n"), sep = "")
 }
 
 is_syntactic <- function(x) {

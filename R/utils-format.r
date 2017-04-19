@@ -50,10 +50,15 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   width <- tibble_width(width)
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
-  trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra, summary = tbl_sum(x))
+  trunc_info <- list(
+    width = width, rows_total = rows, rows_min = nrow(df),
+    n_extra = n_extra, summary = tbl_sum(x)
+  )
 
-  structure(c(shrunk, trunc_info), class = "trunc_mat")
+  structure(
+    c(shrunk, trunc_info),
+    class = c(paste0("trunc_mat_", class(x)), "trunc_mat")
+  )
 }
 
 #' @importFrom stats setNames
@@ -133,56 +138,50 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 }
 
 #' @export
+format.trunc_mat <- function(x, ...) {
+  c(
+    format_comment(format_header(x), width = x$width),
+    format_body(x),
+    format_comment(pre_dots(format_footer(x)), width = x$width)
+  )
+}
+
+#' @export
 print.trunc_mat <- function(x, ...) {
-  print_summary(x)
-  print_table(x)
-  print_extra(x)
+  cat_line(format(x, ...))
   invisible(x)
 }
 
-print_summary <- function(x) {
-  summary <- format_summary(x)
-  if (length(summary) > 0) {
-    print_comment(summary, width = x$width)
-  }
-}
-
-print_table <- function(x) {
-  if (!is_null(x$table)) {
-    old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
-    on.exit(options(old_option), add = TRUE)
-    print(x$table)
-  }
-}
-
-print_extra <- function(x) {
-  extra <- format_extra(x)
-  if (length(extra) > 0) {
-    print_comment("... ", collapse(extra), width = x$width)
-  }
-}
-
-print_comment <- function(..., width) {
-  cat_line(wrap(..., prefix = "# ", width = min(width, getOption("width"))))
-}
-
-format_summary <- function(x) {
+format_header <- function(x) {
   x$summary
 }
 
-format_extra <- function(x) {
-  extra_rows <- format_extra_rows(x)
-  extra_cols <- format_extra_cols(x)
+format_body <- function(x) {
+  table <- x$table
+  if (is_null(table)) return()
+
+  table_with_row_names <- c(list(row.names(table)), table)
+  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
+  same_width_table <- map(table_with_names, justify_right)
+  rows <- invoke(paste, same_width_table)
+  rows
+}
+
+format_footer <- function(x) {
+  extra_rows <- format_footer_rows(x)
+  extra_cols <- format_footer_cols(x)
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
     extra[[1]] <- paste0("with ", extra[[1]])
     extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
+    collapse(extra)
+  } else {
+    character()
   }
-  extra
 }
 
-format_extra_rows <- function(x) {
+format_footer_rows <- function(x) {
   if (!is_null(x$table)) {
     if (is.na(x$rows_missing)) {
       "more rows"
@@ -194,7 +193,7 @@ format_extra_rows <- function(x) {
   }
 }
 
-format_extra_cols <- function(x) {
+format_footer_cols <- function(x) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
     if (x$n_extra > 0) {
@@ -211,15 +210,36 @@ format_extra_cols <- function(x) {
   }
 }
 
+format_comment <- function(x, width) {
+  if (length(x) == 0L) return(character())
+  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
+}
+
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0("... ", x)
+  } else {
+    character()
+  }
+}
+
+justify_right <- function(x) {
+  width <- nchar_width(x)
+  max_width <- max(width)
+  spaces_template <- paste(rep(" ", max_width), collapse = "")
+  spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
+  paste0(spaces, x)
+}
+
 #' knit_print method for trunc mat
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_summary(x)
+  summary <- format_header(x)
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  extra <- format_extra(x)
+  extra <- format_footer(x)
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
