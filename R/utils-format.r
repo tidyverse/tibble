@@ -162,7 +162,7 @@ format_body <- function(x) {
 
   table_with_row_names <- c(list(row.names(table)), table)
   table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
-  same_width_table <- map(table_with_names, format, justify = "right")
+  same_width_table <- map(table_with_names, justify_right)
   rows <- invoke(paste, same_width_table)
   rows
 }
@@ -221,6 +221,14 @@ pre_dots <- function(x) {
   } else {
     character()
   }
+}
+
+justify_right <- function(x) {
+  width <- nchar_width(x)
+  max_width <- max(width)
+  spaces_template <- paste(rep(" ", max_width), collapse = "")
+  spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
+  paste0(spaces, x)
 }
 
 #' knit_print method for trunc mat
