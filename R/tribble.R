@@ -38,8 +38,10 @@
 #' )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_tibble(data$frame_names, data$frame_rest, data$frame_quosures,
-                              parent.frame())
+  turn_frame_data_into_tibble(
+    data$frame_names,
+    data$frame_rest,
+    data$frame_quosures)
 }
 
 #' @export
@@ -107,7 +109,7 @@ extract_frame_names_quosures_from_dots <- function(dots) {
       stopc("expected a column name with a single argument; e.g. '~name'")
     }
 
-    cur_quosure <- rlang::as_quosure(el)
+    cur_quosure <- as_quosure(el)
 
     if (is.call(el[[2]])) {
       # e.g. ~factor(col_fac, levels = c("B", "A"))
@@ -116,7 +118,7 @@ extract_frame_names_quosures_from_dots <- function(dots) {
       while (length(cur_call) > 1L && is.call(cur_call[[2]])) {
         cur_call <- cur_call[[2]]
       }
-      if (length(cur_call) == 1L) {
+      if (length(cur_call) == 1L || !is.symbol(cur_call[[2]])) {
         stopc("conversion quosures must have at least one argument giving the column name")
       }
       candidate <- cur_call[[2]]
@@ -151,11 +153,11 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-turn_frame_data_into_tibble <- function(names, rest, quosures, envir) {
+turn_frame_data_into_tibble <- function(names, rest, quosures) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
   names(frame_col) <- names
-  frame_col_processed <- apply_quosures_to_frame_data(frame_col, quosures, envir)
+  frame_col_processed <- apply_quosures_to_frame_data(frame_col, quosures)
 
   # Create a tbl_df and return it
   as_tibble(frame_col_processed)
@@ -187,7 +189,7 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
   frame_mat
 }
 
-apply_quosures_to_frame_data <- function(data, quosures, envir) {
+apply_quosures_to_frame_data <- function(data, quosures) {
   for (i in seq_along(data)) {
     cur_quosure <- quosures[[i]]
     if (is.call(cur_quosure[[2]])) {
