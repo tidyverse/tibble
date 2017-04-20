@@ -61,7 +61,7 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(tribble(a~b), "single argument")
+  expect_error(tribble(a~b), "specified as e.g. colA~factor(.)")
 
   # tribble() must be passed colnames
   expect_error(tribble(
@@ -76,12 +76,13 @@ test_that("tribble() errs appropriately on bad calls", {
     3, 4, 5
   ))
 
+  # tribble() expects . placeholder for conversion functions
+  expect_error(tribble(colA~factor()), "`.` placeholder")
 })
 
 test_that("tribble supports conversion functions #149", {
-  sys_date <- Sys.Date()
   conversion <- tribble(
-    ~factor(colA), ~factor(colB, levels = c("B", "A")), ~asin(sqrt(arcsin_sqrt_prop)),
+    colA~factor(.), colB~factor(., levels = c("B", "A")), colC~asin(sqrt(.)),
     3, "A", 0.4,
     4, "B", 0.3
   )
@@ -89,7 +90,7 @@ test_that("tribble supports conversion functions #149", {
   conversion_expectation <- tibble(
     colA = factor(3:4),
     colB = factor(c("A", "B"), levels = c("B", "A")),
-    arcsin_sqrt_prop = asin(sqrt(c(0.4, 0.3)))
+    colC = asin(sqrt(c(0.4, 0.3)))
   )
 
   expect_equal(conversion, conversion_expectation)
