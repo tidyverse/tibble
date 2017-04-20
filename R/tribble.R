@@ -161,8 +161,8 @@ call_contains_dot <- function(cur_call) {
 }
 
 extract_quosure <- function(el) {
-  candidate <- el[[2]]
-  if (!is.call(el[[3]]) && !identical(el[[3]], quote(.))) {
+  col_quosure <- expr_interp(el[-2])
+  if (!is.call(col_quosure[[2]]) && !identical(col_quosure[[2]], quote(.))) {
     stopc("conversion expressions should be specified as e.g. colA~factor(.)")
   }
   if (!is.character(el[[2]]) && !is_symbol(el[[2]])) {
@@ -171,16 +171,15 @@ extract_quosure <- function(el) {
               deparse(el))
     )
   }
-  col_quosure <- expr_interp(el[-2])
   if ((length(col_quosure[[2]]) == 1L &&
-      !identical(col_quosure[[2]], quote(.))) ||
+       !identical(col_quosure[[2]], quote(.))) ||
       (length(col_quosure[[2]]) > 1L &&
-      !call_contains_dot(col_quosure[[2]]))) {
+       !call_contains_dot(col_quosure[[2]]))) {
     stopc(
       sprintf(
         "conversion expression '%s' does not contain a `.` placeholder for data",
-              deparse(el))
-      )
+        deparse(el))
+    )
   }
   list(col_name = as.character(el[[2]]), col_quosure = col_quosure)
 }
