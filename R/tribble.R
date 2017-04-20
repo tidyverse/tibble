@@ -11,7 +11,7 @@
 #'   Variable names should be formulas, and may only appear before the data.
 #'   If a function needs to be applied to the data for a column (e.g. `factor`),
 #'   this should apear after the `~`, e.g. factor(column_A). Other arguments
-#'   cab be provided as needed.
+#'   can be provided as needed.
 #' @return A [tibble].
 #' @export
 #' @examples
