@@ -171,16 +171,17 @@ extract_quosure <- function(el) {
               deparse(el))
     )
   }
-  if (length(el[[3]]) == 1L ||
-      (!identical(el[[3]], quote(.)) &&
-      !call_contains_dot(el[[3]]))) {
+  col_quosure <- expr_interp(el[-2])
+  if (length(col_quosure[[2]]) == 1L ||
+      (!identical(col_quosure[[2]], quote(.)) &&
+      !call_contains_dot(col_quosure[[2]]))) {
     stopc(
       sprintf(
         "conversion expression '%s' does not contain a `.` placeholder for data",
               deparse(el))
       )
   }
-  list(col_name = as.character(el[[2]]), col_quosure = expr_interp(el[-2]))
+  list(col_name = as.character(el[[2]]), col_quosure = col_quosure)
 }
 
 validate_rectangular_shape <- function(frame_names, frame_rest) {
