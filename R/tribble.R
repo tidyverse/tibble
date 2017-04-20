@@ -172,8 +172,9 @@ extract_quosure <- function(el) {
     )
   }
   col_quosure <- expr_interp(el[-2])
-  if (length(col_quosure[[2]]) == 1L ||
-      (!identical(col_quosure[[2]], quote(.)) &&
+  if ((length(col_quosure[[2]]) == 1L &&
+      !identical(col_quosure[[2]], quote(.))) ||
+      (length(col_quosure[[2]]) > 1L &&
       !call_contains_dot(col_quosure[[2]]))) {
     stopc(
       sprintf(
