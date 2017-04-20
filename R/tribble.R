@@ -140,7 +140,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
     if (some(col, needs_list_col) || !inherits(col, "list")) {
       frame_col[[i]] <- col
     } else {
-      frame_col[[i]] <- rlang::invoke(c, col)
+      frame_col[[i]] <- invoke(c, col)
     }
   }
   return(frame_col)
