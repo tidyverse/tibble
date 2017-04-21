@@ -167,7 +167,7 @@ extract_quosure <- function(el) {
   }
   if (!is.character(el[[2]]) && !is_symbol(el[[2]])) {
     stopc(
-      sprintf("column name for '%s' should be a character or bare name",
+      sprintf("column name for '%s' should be a symbol or character",
               deparse(el))
     )
   }

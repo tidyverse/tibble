@@ -62,6 +62,8 @@ test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
   expect_error(tribble(a~b), "specified as e.g. colA~factor(.)")
+  expect_error(tribble(~a + b), "expected a symbol")
+  expect_error(tribble(a + b~factor(.), "should be a symbol"))
 
   # tribble() must be passed colnames
   expect_error(tribble(
@@ -78,6 +80,12 @@ test_that("tribble() errs appropriately on bad calls", {
 
   # tribble() expects . placeholder for conversion functions
   expect_error(tribble(colA~factor()), "`.` placeholder")
+  expect_error(
+    tribble(colA~Sys.Date - as.Date(), "2013-04-05"), "`.` placeholder"
+  )
+
+  # Conversion functions must return same length as data
+  expect_error(tribble(colA~mean(.), 1, 4), "items; expecting 2")
 })
 
 test_that("tribble supports conversion functions #149", {
