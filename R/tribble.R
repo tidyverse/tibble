@@ -250,7 +250,7 @@ apply_quosures_to_frame_data <- function(data, quosures) {
         stopc(
           sprintf(
             "conversion '%s%s' returns %d items; expecting %d.",
-            deparse(as_symbol(names(data)[i]), backtick = TRUE),
+            deparse(as.symbol(names(data)[i]), backtick = TRUE),
             deparse(cur_quosure),
             length(res),
             length(data[[i]])
