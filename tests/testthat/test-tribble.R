@@ -46,6 +46,23 @@ test_that("tribble() constructs 'tibble' as expected", {
 
 })
 
+test_that("tribble() handles columns with a class (#161)", {
+  sys_date <- Sys.Date()
+  sys_time <- Sys.time()
+  date_time_col <- tribble(
+    ~dt, ~dttm,
+    sys_date, sys_time,
+    as.Date("2003-01-02"), as.POSIXct("2004-04-05 13:45:17", tz = "UTC")
+  )
+
+  date_time_col_expectation <- tibble(
+    dt = c(sys_date, as.Date("2003-01-02")),
+    dttm = c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
+  )
+
+  expect_equal(date_time_col, date_time_col_expectation)
+})
+
 test_that("tribble() creates lists for non-atomic inputs (#7)", {
   expect_identical(
     tribble(~a, ~b, NA, "A", letters, LETTERS[-1L]),
