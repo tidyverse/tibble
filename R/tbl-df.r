@@ -69,7 +69,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   # Next, subset rows
   if (!missing(i)) {
     if (length(x) == 0) {
-      nr <- length(attr(x, "row.names")[i])
+      nr <- length(seq_len(nr)[i])
     } else {
       x <- map(x, `[`, i)
       nr <- length(x[[1]])
