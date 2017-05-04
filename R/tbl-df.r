@@ -63,19 +63,21 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   # First, subset columns
   if (!missing(j)) {
     j <- check_names_df(j, x)
-    x <- .subset(x, j)
+    result <- .subset(x, j)
+  } else {
+    result <- x
   }
 
   # Next, subset rows
   if (!missing(i)) {
-    if (length(x) == 0) {
-      nr <- length(seq_len(nr)[i])
+    if (length(result) == 0) {
+      nr <- length(attr(x, "row.names")[i])
     } else {
-      x <- map(x, `[`, i)
-      nr <- length(x[[1]])
+      result <- map(result, `[`, i)
+      nr <- length(result[[1]])
     }
   }
 
-  attr(x, "row.names") <- .set_row_names(nr)
-  as_tibble.data.frame(x, validate = FALSE)
+  attr(result, "row.names") <- .set_row_names(nr)
+  as_tibble.data.frame(result, validate = FALSE)
 }
