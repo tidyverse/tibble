@@ -9,7 +9,7 @@
 #' functions allow to you detect if a data frame has row names
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
-#' and `column_to_rownames()`). Also included is a `rowid_to_column` which 
+#' and `column_to_rownames()`). Also included is `rowid_to_column()` which 
 #' adds a column at the start of the dataframe of ascending sequential row
 #' ids starting at 1.
 #'
@@ -74,11 +74,8 @@ rowid_to_column <- function(df, var = "rowid") {
   
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
-  
-  if(nrow(df) == 0)
-    stopc('Data frame must have 1 or more rows')
-  
-  rn <- tibble(seq(1, nrow(df)))
+
+  rn <- tibble(seq_len(nrow(df)))
   names(rn) <- var
   new_df <- cbind(rn, df)
   new_df
