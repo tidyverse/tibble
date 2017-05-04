@@ -65,28 +65,20 @@ rownames_to_column <- function(df, var = "rowname") {
   new_df
 }
 
-rownames_to_column_numeric <- function(df, var = "rowname") {
+#' @export
+#' @rdname rownames
+rowid_to_column <- function(df, var = "rowid") {
   stopifnot(is.data.frame(df))
-
+  
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
-
-  rn <- tibble(rownames(df))
+  
+  if(nrow(df) == 0)
+    stopc('Data frame must have 1 or more rows')
+  
+  rn <- tibble(seq(1, nrow(df)))
   names(rn) <- var
-
-  if(mean(grepl('[0-9]*', rn[[var]])) == 1){
-    rn[[var]] <- as.numeric(rn[[var]])
-  } else {
-    stopc("Row names must be valid numbers to be changed to numeric!")
-}
-
-  attribs <- attributes(df)
-
-  new_df <- c(rn, df)
-  attribs[["names"]] <- names(new_df)
-
-  attributes(new_df) <- attribs[names(attribs) != "row.names"]
-  attr(new_df, "row.names") <- .set_row_names(nrow(df))
+  new_df <- cbind(rn, df)
   new_df
 }
 
