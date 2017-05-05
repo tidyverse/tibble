@@ -50,20 +50,11 @@ remove_rownames <- function(df) {
 #' @rdname rownames
 rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
-
+  
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
-
-  rn <- tibble(rownames(df))
-  names(rn) <- var
-
-  attribs <- attributes(df)
-
-  new_df <- c(rn, df)
-  attribs[["names"]] <- names(new_df)
-
-  attributes(new_df) <- attribs[names(attribs) != "row.names"]
-  attr(new_df, "row.names") <- .set_row_names(nrow(df))
+  
+  new_df <- add_column(df, !!(var) := rownames(df), .before = 1)
   new_df
 }
 
@@ -75,9 +66,7 @@ rowid_to_column <- function(df, var = "rowid") {
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
 
-  rn <- tibble(seq_len(nrow(df)))
-  names(rn) <- var
-  new_df <- cbind(rn, df)
+  new_df <- add_column(df, !!(var) := seq_len(nrow(df)), .before = 1)
   new_df
 }
 
