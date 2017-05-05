@@ -28,7 +28,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
 
 test_that("rowid_to_column adds row names and errors if col name reused", {
   res <- rowid_to_column( mtcars)
-  expect_true(ncol(res)==12)
+  expect_true(ncol(res) == ncol(mtcars) + 1)
   expect_error(rowid_to_column( mtcars, var = 'mpg'),
                paste("There is a column named mpg already!") )
 })
