@@ -36,6 +36,26 @@ test_that("[ with 0 cols creates correct row names (#656)", {
   expect_identical(zero_row, as_tibble(iris)[0])
 })
 
+test_that("[ with 0 cols returns correct number of rows", {
+  iris_tbl <- as_tibble(iris)
+  nrow_iris <- nrow(iris_tbl)
+
+  expect_equal(nrow(iris_tbl[0]), nrow_iris)
+  expect_equal(nrow(iris_tbl[, 0]), nrow_iris)
+
+  expect_equal(nrow(iris_tbl[, 0][1:10, ]), 10)
+  expect_equal(nrow(iris_tbl[0][1:10, ]), 10)
+  expect_equal(nrow(iris_tbl[1:10, ][, 0]), 10)
+  expect_equal(nrow(iris_tbl[1:10, ][0]), 10)
+  expect_equal(nrow(iris_tbl[1:10, 0]), 10)
+
+  expect_equal(nrow(iris_tbl[, 0][-(1:10), ]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[0][-(1:10), ]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), ][, 0]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), ][0]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
+})
+
 test_that("[.tbl_df is careful about names (#1245)",{
   z_msg <- "Unknown column: 'z'"
 
