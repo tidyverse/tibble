@@ -34,18 +34,7 @@ tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 make_tidy <- function(name, syntactic = FALSE) {
   name[is.na(name)] <- ""
   name <- make_syntactic(name, syntactic)
-  need_append_pos <- duplicated(name) | name == ""
-  if (any(need_append_pos)) {
-    rx <- "[.][.][1-9][0-9]*$"
-    has_suffix <- grepl(rx, name)
-    name[has_suffix] <- gsub(rx, "", name[has_suffix])
-    need_append_pos <- need_append_pos | has_suffix
-  }
-  name[need_append_pos] <- paste0(
-    name[need_append_pos], "..", seq_along(name)[need_append_pos]
-  )
-
-  name
+  append_pos(name)
 }
 
 make_syntactic <- function(name, syntactic) {
@@ -54,6 +43,20 @@ make_syntactic <- function(name, syntactic) {
   blank <- name == ""
   fix_syntactic <- (name != "") & !is_syntactic(name)
   name[fix_syntactic] <- make.names(name[fix_syntactic])
+}
+
+append_pos <- function(name) {
+  need_append_pos <- duplicated(name) | name == ""
+  if (any(need_append_pos)) {
+    rx <- "[.][.][1-9][0-9]*$"
+    has_suffix <- grepl(rx, name)
+    name[has_suffix] <- gsub(rx, "", name[has_suffix])
+    need_append_pos <- need_append_pos | has_suffix
+  }
+
+  need_append_pos <- which(need_append_pos)
+  name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
+  name
 }
 
 describe_tidying <- function(orig_name, name, quiet) {
