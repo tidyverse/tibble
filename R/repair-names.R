@@ -1,21 +1,82 @@
 #' Repair object names.
 #'
-#' `repair_names()` ensures its input has non-missing and
-#' unique names (duplicated names get a numeric suffix). Valid names are
-#' left as is.
-#'
+#' `tidy_names()` ensures its input has non-missing and
+#' unique names (duplicated names get a suffix of the format `..#`
+#' where `#` is the position in the vector).
+#' Valid names are left unchanged, with the exception that existing suffixes
+#' are reorganized.
 #' @param x A named vector.
+#' @param syntactic Should all names be made syntactically valid via [make.names()]?
+#' @param quiet If `TRUE` suppresses output from this function
+#' @return `x` with valid names.
+#' @examples
+#' # Works for lists and vectors, too:
+#' tidy_names(3:5)
+#' tidy_names(list(3, 4, 5))
+#'
+#' # Clean data frames are left unchanged:
+#' tidy_names(mtcars)
+#'
+#' # By default, all rename operations are printed to the console:
+#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
+#'                  validate = FALSE)
+#' tidy_names(tbl)
+#'
+#' # Optionally, names can be made syntactic:
+#' tidy_names(tibble("a b" = 1), syntactic = TRUE)
+tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
+  orig_names <- names2(x)
+  new_names <- make_tidy(names2(x), syntactic)
+  describe_tidying(orig_names, new_names, quiet)
+  set_names(x, new_names)
+}
+
+make_tidy <- function(name, syntactic = FALSE) {
+  name[is.na(name)] <- ""
+  name <- make_syntactic(name, syntactic)
+  need_append_pos <- duplicated(name) | name == ""
+  if (any(need_append_pos)) {
+    rx <- "[.][.][1-9][0-9]*$"
+    has_suffix <- grepl(rx, name)
+    name[has_suffix] <- gsub(rx, "", name[has_suffix])
+    need_append_pos <- need_append_pos | has_suffix
+  }
+  name[need_append_pos] <- paste0(
+    name[need_append_pos], "..", seq_along(name)[need_append_pos]
+  )
+
+  name
+}
+
+make_syntactic <- function(name, syntactic) {
+  if (!syntactic) return(name)
+
+  blank <- name == ""
+  fix_syntactic <- (name != "") & !is_syntactic(name)
+  name[fix_syntactic] <- make.names(name[fix_syntactic])
+}
+
+describe_tidying <- function(orig_name, name, quiet) {
+  stopifnot(length(orig_name) == length(name))
+  if (quiet) return()
+  new_names <- name != orig_name
+  if (any(new_names)) {
+    message(
+      "New names:\n",
+      paste0(orig_name[new_names], " -> ", name[new_names], collapse = "\n")
+    )
+  }
+}
+
+#' @rdname tidy_names
+#' @description
+#' `repair_names()` is an older version with different renaming heuristics,
+#' kept for backward compatibility.  New code should prefer `tidy_names()`.
+#'
 #' @param prefix A string, the prefix to use for new column names.
 #' @param sep A string inserted between the column name and de-duplicating
 #'    number.
-#' @return `x` with valid names.
 #' @export
-#' @examples
-#' repair_names(list(3, 4, 5)) # works for lists, too
-#' repair_names(mtcars) # a no-op
-#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
-#'                  validate = FALSE)
-#' repair_names(tbl)
 repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0) {
     names(x) <- character()
