@@ -54,3 +54,7 @@ test_that("corner case", {
   expect_equal(make_tidy(c("a..2", "a", "a")), c("a..1", "a", "a..3"))
   expect_equal(make_tidy(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
 })
+
+test_that("syntactic", {
+  expect_equal(make_tidy("a b", syntactic = TRUE), make.names("a b"))
+})
