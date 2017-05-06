@@ -9,9 +9,10 @@
 #' functions allow to you detect if a data frame has row names
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
-#' and `column_to_rownames()`). Also included is `rowid_to_column()` which 
+#' and `column_to_rownames()`). 
+#' Also included is `rowid_to_column()` which 
 #' adds a column at the start of the dataframe of ascending sequential row
-#' ids starting at 1.
+#' ids starting at 1. Note that this will remove any existing row names.
 #'
 #' In the printed output, the presence of row names is indicated by a star just
 #' above the row numbers.
