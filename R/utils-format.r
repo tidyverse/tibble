@@ -33,7 +33,6 @@ NULL
 
 #' @export
 #' @rdname formatting
-#' @importFrom stats setNames
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
@@ -61,7 +60,6 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   )
 }
 
-#' @importFrom stats setNames
 shrink_mat <- function(df, width, rows, n, star) {
   var_types <- map_chr(df, type_sum)
 
