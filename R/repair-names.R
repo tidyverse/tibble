@@ -24,6 +24,7 @@
 #'
 #' # Optionally, names can be made syntactic:
 #' tidy_names(tibble("a b" = 1), syntactic = TRUE)
+#' @export
 tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   orig_names <- names2(x)
   new_names <- make_tidy(names2(x), syntactic)
