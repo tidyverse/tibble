@@ -31,20 +31,24 @@
 #' # making it more suitable for use when you have things that are
 #' # lists
 #' \dontrun{
-#' l2 <- replicate(26, sample(letters), simplify = FALSE)
-#' names(l2) <- letters
-#' microbenchmark::microbenchmark(
-#'   as_tibble(l2, validate = FALSE),
-#'   as_tibble(l2),
-#'   as.data.frame(l2)
-#' )
+#' if (requireNamespace("microbenchmark", quiet = TRUE)) {
+#'   l2 <- replicate(26, sample(letters), simplify = FALSE)
+#'   names(l2) <- letters
+#'   microbenchmark::microbenchmark(
+#'     as_tibble(l2, validate = FALSE),
+#'     as_tibble(l2),
+#'     as.data.frame(l2)
+#'   )
+#' }
 #'
-#' m <- matrix(runif(26 * 100), ncol = 26)
-#' colnames(m) <- letters
-#' microbenchmark::microbenchmark(
-#'   as_tibble(m),
-#'   as.data.frame(m)
-#' )
+#' if (requireNamespace("microbenchmark", quiet = TRUE)) {
+#'   m <- matrix(runif(26 * 100), ncol = 26)
+#'   colnames(m) <- letters
+#'   microbenchmark::microbenchmark(
+#'     as_tibble(m),
+#'     as.data.frame(m)
+#'   )
+#' }
 #' }
 as_tibble <- function(x, ...) {
   UseMethod("as_tibble")

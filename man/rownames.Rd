@@ -5,6 +5,7 @@
 \alias{has_rownames}
 \alias{remove_rownames}
 \alias{rownames_to_column}
+\alias{rowid_to_column}
 \alias{column_to_rownames}
 \title{Tools for working with row names}
 \usage{
@@ -13,6 +14,8 @@ has_rownames(df)
 remove_rownames(df)
 
 rownames_to_column(df, var = "rowname")
+
+rowid_to_column(df, var = "rowid")
 
 column_to_rownames(df, var = "rowname")
 }
@@ -32,6 +35,9 @@ functions allow to you detect if a data frame has row names
 (\code{has_rownames()}), remove them (\code{remove_rownames()}), or convert
 them back-and-forth between an explicit column (\code{rownames_to_column()}
 and \code{column_to_rownames()}).
+Also included is \code{rowid_to_column()} which
+adds a column at the start of the dataframe of ascending sequential row
+ids starting at 1. Note that this will remove any existing row names.
 }
 \details{
 In the printed output, the presence of row names is indicated by a star just

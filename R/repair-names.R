@@ -23,7 +23,7 @@ repair_names <- function(x, prefix = "V", sep = "") {
   }
 
   new_names <- make_unique(names2(x), prefix = prefix, sep = sep)
-  setNames(x, new_names)
+  set_names(x, new_names)
 }
 
 make_unique <- function(x, prefix = "V", sep = "") {

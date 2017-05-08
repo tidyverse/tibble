@@ -13,7 +13,7 @@
 #' @export
 #' @rdname tibble
 lst <- function(...) {
-  xs <- dots_quos(..., .named = 500L)
+  xs <- quos(..., .named = 500L)
 
   n <- length(xs)
   if (n == 0) {

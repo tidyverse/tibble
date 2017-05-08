@@ -94,14 +94,14 @@ check_tibble <- function(x) {
   }
 
   # Types
-  is_1d <- vapply(x, is_1d, logical(1))
+  is_1d <- map_lgl(x, is_1d)
   if (any(!is_1d)) {
     invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
   }
 
-  x[] <- lapply(x, strip_dim)
+  x[] <- map(x, strip_dim)
 
-  posixlt <- vapply(x, inherits, "POSIXlt", FUN.VALUE = logical(1))
+  posixlt <- map_lgl(x, inherits, "POSIXlt")
   if (any(posixlt)) {
     invalid_df("Date/times must be stored as POSIXct, not POSIXlt", x, posixlt)
   }
@@ -115,7 +115,7 @@ recycle_columns <- function(x) {
   }
 
   # Validate column lengths
-  lengths <- vapply(x, NROW, integer(1))
+  lengths <- map_int(x, NROW)
   max <- max(lengths)
 
   bad_len <- lengths != 1L & lengths != max
@@ -125,7 +125,7 @@ recycle_columns <- function(x) {
 
   short <- lengths == 1
   if (max != 1L && any(short)) {
-    x[short] <- lapply(x[short], rep, max)
+    x[short] <- map(x[short], rep, max)
   }
 
   x

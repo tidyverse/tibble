@@ -39,11 +39,11 @@ safe_match <- function(x, table) {
 }
 
 stopc <- function(...) {
-  stop(..., call. = FALSE, domain = NA)
+  abort(paste0(...))
 }
 
 warningc <- function(...) {
-  warning(..., call. = FALSE, domain = NA)
+  warn(paste0(...))
 }
 
 nchar_width <- function(x) {
