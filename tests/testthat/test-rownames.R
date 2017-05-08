@@ -14,29 +14,47 @@ test_that("setting row names on a tibble raises a warning", {
 })
 
 test_that("rownames_to_column keeps the tbl classes (#882)", {
-  res <- rownames_to_column(mtcars, "Make&Model")
+  res <- rownames_to_column(mtcars)
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
-  expect_error(rownames_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!"))
+  expect_equal(res$rowname, rownames(mtcars))
+  expect_error(
+    rownames_to_column(mtcars, "wt"),
+    "There is a column named wt already!",
+    fixed = TRUE
+  )
+
   res1 <- rownames_to_column(as_tibble(mtcars), "Make&Model")
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(as_tibble(mtcars)))
-  expect_error(rownames_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!"))
+  expect_equal(res1$`Make&Model`, rownames(mtcars))
+  expect_error(
+    rownames_to_column(as_tibble(mtcars), "wt"),
+    "There is a column named wt already!",
+    fixed = TRUE
+  )
 })
 
 test_that("rowid_to_column keeps the tbl classes", {
   res <- rowid_to_column(mtcars)
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
-  expect_error(rowid_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!"))
-  res1 <- rowid_to_column(as_tibble(mtcars))
+  expect_equal(res$rowid, seq_len(nrow(mtcars)))
+  expect_error(
+    rowid_to_column(mtcars, "wt"),
+    "There is a column named wt already!",
+    fixed = TRUE
+  )
+
+  res1 <- rowid_to_column(as_tibble(mtcars), "row_id")
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(as_tibble(mtcars)))
-  expect_error(rowid_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!"))
+  expect_equal(res1$row_id, seq_len(nrow(mtcars)))
+  expect_error(
+    rowid_to_column(as_tibble(mtcars), "wt"),
+    "There is a column named wt already!",
+    fixed = TRUE
+  )
 })
 
 test_that("column_to_rownames returns tbl", {
