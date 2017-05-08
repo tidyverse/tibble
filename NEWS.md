@@ -1,3 +1,13 @@
+### tibble 1.3.0.9002 (2017-05-08)
+
+- New `rowid_to_column()` that adds a `rowid` column as first column and removes row names (#243, @barnettjacob).
+- Use `rlang` functions (#244).
+- The `all.equal.tbl_df()` method has been removed, calling `all.equal()` now forwards to `base::all.equal.data.frame()`. To compare tibbles ignoring row and column order, please use `dplyr::all_equal()` (#247).
+- The `microbenchmark` package is now used conditionaly (#245).
+- Subsetting zero columns no longer returns wrong number of rows (#241, @echasnovski).
+- `tribble()` now handles values that have a class (#237, @NikNakk).
+
+
 ### tibble 1.3.0.9001 (2017-04-19)
 
 - Own printing routine, not relying on `print.data.frame()` anymore. Now providing `format.tbl_df()` and full support for Unicode characters in names and data (#235).
