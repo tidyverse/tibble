@@ -9,7 +9,18 @@ tribble(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{tibble}.
-Variable names should be formulas, and may only appear before the data.}
+Variable names should be formulas, and may only appear before the data.
+
+If a function needs to be applied to the data for a column (e.g. \code{factor}),
+this should apear after the \code{~}, with the column name before,
+e.g. \code{colA~factor(.)}. \code{.} should be used as a placeholder for the data.
+Other arguments can be provided as needed, e.g.
+\code{colA~factor(., levels = C("A", "B")}.
+
+As with \link{tibble}, functions can refer back to earlier columns in the
+data. Conversions can include any valid expression, and are evaluated using
+\code{\link[rlang]{eval_tidy}} and so support splicing with
+\code{\link[rlang]{!!}}.}
 }
 \value{
 A \link{tibble}.
@@ -30,6 +41,28 @@ tribble(
   "b",   2,
   "c",   3
 )
+
+# Conversion expressions can be supplied, including additional
+# paremeters if needed.
+tribble(
+  ~colA, colB~factor(., levels = c("B", "A")),
+  "X",   "A",
+  "Y",   "B"
+)
+
+# More complex conversion expressions are also possible
+
+ tribble(
+   colA~as.numeric(Sys.Date() - as.Date(.), unit = "days"),
+   "2015-01-02",
+   "2016-03-04"
+)
+
+# Conversion expressions must always include the placeholder `.`
+
+\dontrun{
+tribble(colA~factor(), 1)
+}
 
 # tribble will create a list column if the value in any cell is
 # not a scalar

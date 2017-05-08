@@ -78,10 +78,9 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(tribble(a~b), "single argument")
-
-  # invalid colname syntax
-  expect_error(tribble(~a + b), "symbol or string")
+  expect_error(tribble(a~b), "specified as e.g. colA~factor(.)")
+  expect_error(tribble(~a + b), "expected a symbol")
+  expect_error(tribble(a + b~factor(.), "should be a symbol"))
 
   # tribble() must be passed colnames
   expect_error(tribble(
@@ -96,6 +95,30 @@ test_that("tribble() errs appropriately on bad calls", {
     3, 4, 5
   ))
 
+  # tribble() expects . placeholder for conversion functions
+  expect_error(tribble(colA~factor()), "`.` placeholder")
+  expect_error(
+    tribble(colA~Sys.Date - as.Date(), "2013-04-05"), "`.` placeholder"
+  )
+
+  # Conversion functions must return same length as data
+  expect_error(tribble(colA~mean(.), 1, 4), "items; expecting 2")
+})
+
+test_that("tribble supports conversion functions #149", {
+  conversion <- tribble(
+    colA~factor(.), colB~factor(., levels = c("B", "A")), colC~asin(sqrt(.)),
+    3, "A", 0.4,
+    4, "B", 0.3
+  )
+
+  conversion_expectation <- tibble(
+    colA = factor(3:4),
+    colB = factor(c("A", "B"), levels = c("B", "A")),
+    colC = asin(sqrt(c(0.4, 0.3)))
+  )
+
+  expect_equal(conversion, conversion_expectation)
 })
 
 test_that("tribble can have list columns", {

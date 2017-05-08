@@ -9,6 +9,17 @@
 #'
 #' @param ... Arguments specifying the structure of a `tibble`.
 #'   Variable names should be formulas, and may only appear before the data.
+#'
+#'   If a function needs to be applied to the data for a column (e.g. `factor`),
+#'   this should apear after the `~`, with the column name before,
+#'   e.g. `colA~factor(.)`. `.` should be used as a placeholder for the data.
+#'   Other arguments can be provided as needed, e.g.
+#'   `colA~factor(., levels = C("A", "B")`.
+#'
+#'   As with \link{tibble}, functions can refer back to earlier columns in the
+#'   data. Conversions can include any valid expression, and are evaluated using
+#'   \code{\link[rlang]{eval_tidy}} and so support splicing with
+#'   \code{\link[rlang]{!!}}.
 #' @return A [tibble].
 #' @export
 #' @examples
@@ -19,6 +30,26 @@
 #'   "c",   3
 #' )
 #'
+#' # Conversion expressions can be supplied, including additional
+#' # paremeters if needed.
+#' tribble(
+#'   ~colA, colB~factor(., levels = c("B", "A")),
+#'   "X",   "A",
+#'   "Y",   "B"
+#' )
+#'
+#' # More complex conversion expressions are also possible
+#'  tribble(
+#'    colA~as.numeric(Sys.Date() - as.Date(.), unit = "days"),
+#'    "2015-01-02",
+#'    "2016-03-04"
+#' )
+#'
+#' # Conversion expressions must always include the placeholder `.`
+#' \dontrun{
+#' tribble(colA~factor(), 1)
+#' }
+#'
 #' # tribble will create a list column if the value in any cell is
 #' # not a scalar
 #' tribble(
@@ -28,7 +59,10 @@
 #' )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
-  turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
+  turn_frame_data_into_tibble(
+    data$frame_names,
+    data$frame_rest,
+    data$frame_quosures)
 }
 
 #' @export
@@ -62,7 +96,8 @@ extract_frame_data_from_dots <- function(...) {
   dots <- list(...)
 
   # Extract the names.
-  frame_names <- extract_frame_names_from_dots(dots)
+  frame_quosures <- extract_frame_names_quosures_from_dots(dots)
+  frame_names <- names(frame_quosures)
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
@@ -77,11 +112,11 @@ extract_frame_data_from_dots <- function(...) {
 
   validate_rectangular_shape(frame_names, frame_rest)
 
-  list(frame_names = frame_names, frame_rest = frame_rest)
+  list(frame_names = frame_names, frame_quosures = frame_quosures, frame_rest = frame_rest)
 }
 
-extract_frame_names_from_dots <- function(dots) {
-  frame_names <- character()
+extract_frame_names_quosures_from_dots <- function(dots) {
+  frame_quosures <- list()
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
@@ -91,19 +126,62 @@ extract_frame_names_from_dots <- function(dots) {
     if (!identical(el[[1]], as.name("~")))
       break
 
-    if (length(el) != 2) {
-      stopc("expected a column name with a single argument; e.g. '~name'")
+    if (length(el) == 3L) {
+      # e.g. colA~factor(., levels = c("B", "A")) {
+      col_data <- extract_quosure(el)
+    } else {
+      if (!(is.symbol(el[[2]]) || is.character(el[[2]]))) {
+        stopc("expected a symbol or string denoting a column name")
+      }
+      col_data <- list(
+        col_name = as.character(el[[2]]),
+        col_quosure = quo(.)
+        )
     }
 
-    candidate <- el[[2]]
-    if (!(is.symbol(candidate) || is.character(candidate))) {
-      stopc("expected a symbol or string denoting a column name")
-    }
-
-    frame_names <- c(frame_names, as.character(el[[2]]))
+    frame_quosures <- c(
+      frame_quosures,
+      setNames(list(col_data$col_quosure), col_data$col_name))
   }
+  frame_quosures
+}
 
-  frame_names
+call_contains_dot <- function(cur_call) {
+  for (i in 2:length(cur_call)) {
+    if (identical(cur_call[[i]], quote(.))) {
+      return(TRUE)
+    }
+    if (is.call(cur_call[[i]]) && length(cur_call[[i]]) > 1L) {
+      if (call_contains_dot(cur_call[[i]])) {
+        return(TRUE)
+      }
+    }
+  }
+  return(FALSE)
+}
+
+extract_quosure <- function(el) {
+  col_quosure <- expr_interp(el[-2])
+  if (!is.call(col_quosure[[2]]) && !identical(col_quosure[[2]], quote(.))) {
+    stopc("conversion expressions should be specified as e.g. colA~factor(.)")
+  }
+  if (!is.character(el[[2]]) && !is_symbol(el[[2]])) {
+    stopc(
+      sprintf("column name for '%s' should be a symbol or character",
+              deparse(el))
+    )
+  }
+  if ((length(col_quosure[[2]]) == 1L &&
+       !identical(col_quosure[[2]], quote(.))) ||
+      (length(col_quosure[[2]]) > 1L &&
+       !call_contains_dot(col_quosure[[2]]))) {
+    stopc(
+      sprintf(
+        "conversion expression '%s' does not contain a `.` placeholder for data",
+        deparse(el))
+    )
+  }
+  list(col_name = as.character(el[[2]]), col_quosure = col_quosure)
 }
 
 validate_rectangular_shape <- function(frame_names, frame_rest) {
@@ -123,13 +201,14 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-turn_frame_data_into_tibble <- function(names, rest) {
+turn_frame_data_into_tibble <- function(names, rest, quosures) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
+  names(frame_col) <- names
+  frame_col_processed <- apply_quosures_to_frame_data(frame_col, quosures)
 
   # Create a tbl_df and return it
-  names(frame_col) <- names
-  as_tibble(frame_col)
+  as_tibble(frame_col_processed)
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {
@@ -156,4 +235,31 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 
   colnames(frame_mat) <- names
   frame_mat
+}
+
+apply_quosures_to_frame_data <- function(data, quosures) {
+  output <- list_len(length(data))
+  for (i in seq_along(data)) {
+    cur_quosure <- quosures[[i]]
+    output[[i]] <- data[[i]]
+    if (is.call(cur_quosure[[2]])) {
+      names(output)[i] <- "."
+      # Only need to evaluate if a call rather than a symbol
+      res <- eval_tidy(cur_quosure, output)
+      if (length(res) != length(data[[i]])) {
+        stopc(
+          sprintf(
+            "conversion '%s%s' returns %d items; expecting %d.",
+            deparse(as.symbol(names(data)[i]), backtick = TRUE),
+            deparse(cur_quosure),
+            length(res),
+            length(data[[i]])
+            )
+          )
+      }
+      output[[i]] <- res
+    }
+    names(output)[i] <- names(data)[i]
+  }
+  output
 }
