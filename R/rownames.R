@@ -9,7 +9,10 @@
 #' functions allow to you detect if a data frame has row names
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
-#' and `column_to_rownames()`).
+#' and `column_to_rownames()`). 
+#' Also included is `rowid_to_column()` which 
+#' adds a column at the start of the dataframe of ascending sequential row
+#' ids starting at 1. Note that this will remove any existing row names.
 #'
 #' In the printed output, the presence of row names is indicated by a star just
 #' above the row numbers.
@@ -52,16 +55,19 @@ rownames_to_column <- function(df, var = "rowname") {
   if (has_name(df, var))
     stopc("There is a column named ", var, " already!")
 
-  rn <- tibble(rownames(df))
-  names(rn) <- var
+  new_df <- add_column(df, !!(var) := rownames(df), .before = 1)
+  new_df
+}
 
-  attribs <- attributes(df)
+#' @export
+#' @rdname rownames
+rowid_to_column <- function(df, var = "rowid") {
+  stopifnot(is.data.frame(df))
 
-  new_df <- c(rn, df)
-  attribs[["names"]] <- names(new_df)
+  if (has_name(df, var))
+    stopc("There is a column named ", var, " already!")
 
-  attributes(new_df) <- attribs[names(attribs) != "row.names"]
-  attr(new_df, "row.names") <- .set_row_names(nrow(df))
+  new_df <- add_column(df, !!(var) := seq_len(nrow(df)), .before = 1)
   new_df
 }
 
