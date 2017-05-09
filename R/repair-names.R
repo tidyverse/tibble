@@ -11,19 +11,19 @@
 #' @return `x` with valid names.
 #' @examples
 #' # Works for lists and vectors, too:
-#' tidy_names(3:5)
-#' tidy_names(list(3, 4, 5))
+#' set_tidy_names(3:5)
+#' set_tidy_names(list(3, 4, 5))
 #'
 #' # Clean data frames are left unchanged:
-#' tidy_names(mtcars)
+#' set_tidy_names(mtcars)
 #'
 #' # By default, all rename operations are printed to the console:
 #' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
 #'                  validate = FALSE)
-#' tidy_names(tbl)
+#' set_tidy_names(tbl)
 #'
 #' # Optionally, names can be made syntactic:
-#' tidy_names(tibble("a b" = 1), syntactic = TRUE)
+#' tidy_names("a b", syntactic = TRUE)
 #' @export
 #' @rdname tidy_names
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
