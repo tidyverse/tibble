@@ -1,4 +1,4 @@
-# A tibble: 3 × 9
+# A tibble: 3 x 9
       a     b     c     d
   <dbl> <int> <lgl> <chr>
 1   1.0     1  TRUE     a

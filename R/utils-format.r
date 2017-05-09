@@ -323,14 +323,7 @@ pluralise <- function(message, objects) {
 }
 
 mult_sign <- function() {
-  # unicode multiplication sign
-  mult <- "\u00d7"
-  # if unicode doesn't render, use lowercase x
-  if (enc2native(mult) != mult) {
-    mult <- "x"
-  }
-
-  mult
+  "x"
 }
 
 spaces_around <- function(x) {

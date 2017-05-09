@@ -1,4 +1,4 @@
-# A tibble: 12 × 2
+# A tibble: 12 x 2
                     x         y
                <dttm>    <dttm>
 1 2016-01-01 12:34:57 <POSIXlt>
