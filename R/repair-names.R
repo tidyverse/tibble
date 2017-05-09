@@ -27,9 +27,7 @@
 #' @export
 #' @rdname tidy_names
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
-  orig_names <- names2(x)
-  new_names <- tidy_names(names2(x), syntactic)
-  describe_tidying(orig_names, new_names, quiet)
+  new_names <- tidy_names(names2(x), syntactic, quiet)
   set_names(x, new_names)
 }
 
@@ -38,10 +36,15 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' argument as a string to be used to name a data frame or a vector.
 #' @param name A character vector representing names.
 #' @export
-tidy_names <- function(name, syntactic = FALSE) {
+tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   name[is.na(name)] <- ""
+  orig_name <- name
+
   name <- make_syntactic(name, syntactic)
-  append_pos(name)
+  name <- append_pos(name)
+
+  describe_tidying(orig_name, name, quiet)
+  name
 }
 
 make_syntactic <- function(name, syntactic) {

@@ -59,3 +59,18 @@ test_that("corner case", {
 test_that("syntactic", {
   expect_equal(tidy_names("a b", syntactic = TRUE), make.names("a b"))
 })
+
+test_that("message", {
+  expect_message(
+    tidy_names(""),
+    "New names:\n -> ..1",
+    fixed = TRUE
+  )
+})
+
+test_that("quiet", {
+  expect_message(
+    tidy_names("", quiet = TRUE),
+    NA
+  )
+})
