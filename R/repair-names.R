@@ -25,14 +25,20 @@
 #' # Optionally, names can be made syntactic:
 #' tidy_names(tibble("a b" = 1), syntactic = TRUE)
 #' @export
-tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
+#' @rdname tidy_names
+set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   orig_names <- names2(x)
-  new_names <- make_tidy(names2(x), syntactic)
+  new_names <- tidy_names(names2(x), syntactic)
   describe_tidying(orig_names, new_names, quiet)
   set_names(x, new_names)
 }
 
-make_tidy <- function(name, syntactic = FALSE) {
+#' @description
+#' `tidy_names()` is the workhorse behind `set_tidy_names()`, it treats the
+#' argument as a string to be used to name a data frame or a vector.
+#' @param name A character vector representing names.
+#' @export
+tidy_names <- function(name, syntactic = FALSE) {
   name[is.na(name)] <- ""
   name <- make_syntactic(name, syntactic)
   append_pos(name)
