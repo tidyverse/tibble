@@ -56,7 +56,7 @@ make_syntactic <- function(name, syntactic) {
 }
 
 append_pos <- function(name) {
-  need_append_pos <- duplicated(name) | name == ""
+  need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
   if (any(need_append_pos)) {
     rx <- "[.][.][1-9][0-9]*$"
     has_suffix <- grepl(rx, name)
