@@ -27,16 +27,3 @@ test_that("blanks skip existing names", {
 test_that("blanks skip names created when de-duping", {
   expect_equal(make_unique(c("", "V", "V")), c("V2", "V", "V1"))
 })
-
-# names2 ------------------------------------------------------------------
-
-test_that("names2 returns character vector even if names NULL", {
-  expect_equal(names2(1:3), rep("", 3))
-})
-
-test_that("names2 replaces missing value with blanks", {
-  x <- 1:3
-  names(x) <- c("a", "b", NA)
-
-  expect_equal(names2(x), c("a", "b", ""))
-})
