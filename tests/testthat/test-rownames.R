@@ -74,9 +74,16 @@ test_that("column_to_rownames returns tbl", {
   expect_warning(res <- column_to_rownames(res0, var = "num"))
   expect_true(has_rownames(res))
   expect_equal(rownames(res), as.character(mtcars1$num))
-  expect_error(column_to_rownames(res), "This data frame already has row names.")
-  expect_error(column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
-               paste("This data frame has no column named num2."))
+  expect_error(
+    column_to_rownames(res),
+    "This data frame already has row names.",
+    fixed = TRUE
+  )
+  expect_error(
+    column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
+    "This data frame has no column named num2.",
+    fixed = TRUE
+  )
 })
 
 test_that("converting to data frame does not add row names", {

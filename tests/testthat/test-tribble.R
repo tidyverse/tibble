@@ -78,23 +78,37 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(tribble(a~b), "single argument")
+  expect_error(
+    tribble(a~b),
+    "single argument",
+    fixed = TRUE
+  )
 
   # invalid colname syntax
-  expect_error(tribble(~a + b), "symbol or string")
+  expect_error(
+    tribble(~a + b),
+    "symbol or string",
+    fixed = TRUE
+  )
 
   # tribble() must be passed colnames
-  expect_error(tribble(
-    "a", "b",
-    1, 2
-  ))
+  expect_error(
+    tribble(
+      "a", "b",
+      1, 2
+    ),
+    fixed = TRUE
+  )
 
   # tribble() must produce rectangular structure (no filling)
-  expect_error(tribble(
-    ~a, ~b, ~c,
-    1, 2,
-    3, 4, 5
-  ))
+  expect_error(
+    tribble(
+      ~a, ~b, ~c,
+      1, 2,
+      3, 4, 5
+    ),
+    fixed = TRUE
+  )
 
 })
 
@@ -150,9 +164,13 @@ test_that("frame_matrix constructs empty matrix as expected", {
 })
 
 test_that("frame_matrix cannot have list columns", {
-  expect_error(frame_matrix(
-    ~x,  ~y,
-    "a", 1:3,
-    "b", 4:6
-  ), "cannot have list columns")
+  expect_error(
+    frame_matrix(
+      ~x,  ~y,
+      "a", 1:3,
+      "b", 4:6
+    ),
+    "cannot have list columns",
+    fixed = TRUE
+  )
 })
