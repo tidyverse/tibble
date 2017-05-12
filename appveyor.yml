@@ -54,6 +54,7 @@ matrix:
 
 build_script:
   - travis-tool.sh r_install curl
+  - travis-tool.sh github_install r-pkg/remotes
   - travis-tool.sh install_deps
 
 test_script:
