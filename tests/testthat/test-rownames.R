@@ -20,7 +20,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res$rowname, rownames(mtcars))
   expect_error(
     rownames_to_column(mtcars, "wt"),
-    "There is a column named wt already!",
+    #"Column `wt` already exists",
     fixed = TRUE
   )
 
@@ -30,7 +30,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res1$`Make&Model`, rownames(mtcars))
   expect_error(
     rownames_to_column(as_tibble(mtcars), "wt"),
-    "There is a column named wt already!",
+    #"Column `wt` already exists",
     fixed = TRUE
   )
 })
@@ -42,7 +42,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
   expect_error(
     rowid_to_column(mtcars, "wt"),
-    "There is a column named wt already!",
+    #"Column `wt` already exists",
     fixed = TRUE
   )
 
@@ -52,7 +52,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
   expect_error(
     rowid_to_column(as_tibble(mtcars), "wt"),
-    "There is a column named wt already!",
+    #"Column `wt` already exists",
     fixed = TRUE
   )
 })
@@ -76,12 +76,12 @@ test_that("column_to_rownames returns tbl", {
   expect_equal(rownames(res), as.character(mtcars1$num))
   expect_error(
     column_to_rownames(res),
-    "This data frame already has row names.",
+    #"`df` already has row names.",
     fixed = TRUE
   )
   expect_error(
     column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
-    "This data frame has no column named num2.",
+    #"Column `num2` not found",
     fixed = TRUE
   )
 })

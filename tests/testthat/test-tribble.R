@@ -80,14 +80,14 @@ test_that("tribble() errs appropriately on bad calls", {
   # invalid colname syntax
   expect_error(
     tribble(a~b),
-    "single argument",
+    #"expected a column name with a single argument; e.g. `~name`",
     fixed = TRUE
   )
 
   # invalid colname syntax
   expect_error(
     tribble(~a + b),
-    "symbol or string",
+    #"Expected a symbol or string denoting a column name, not a call",
     fixed = TRUE
   )
 
@@ -170,7 +170,7 @@ test_that("frame_matrix cannot have list columns", {
       "a", 1:3,
       "b", 4:6
     ),
-    "cannot have list columns",
+    "Can't use list columns in `frame_matrix()`",
     fixed = TRUE
   )
 })
