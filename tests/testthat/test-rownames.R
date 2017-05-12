@@ -76,7 +76,7 @@ test_that("column_to_rownames returns tbl", {
   expect_equal(rownames(res), as.character(mtcars1$num))
   expect_error(
     column_to_rownames(res),
-    "`df` already has row names.",
+    "`df` already has row names",
     fixed = TRUE
   )
   expect_error(

@@ -57,7 +57,7 @@ test_that("[ with 0 cols returns correct number of rows", {
 })
 
 test_that("[.tbl_df is careful about names (#1245)",{
-  z_msg <- "Unknown column: 'z'"
+  z_msg <- "Column `z` not found"
 
   foo <- tibble(x = 1:10, y = 1:10)
   expect_error(foo["z"], z_msg, fixed = TRUE)
@@ -84,27 +84,22 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
 
   expect_error(
     foo[0.5],
-    "Column indexes must be integer, not 0.5",
+    "Column index must be integer, not 0.5",
     fixed = TRUE
   )
   expect_error(
     foo[1:5],
-    "Column indexes must be between 1 and 3, not 4, 5",
+    "Column indexes must be at most 3 if positive, not 4, 5",
     fixed = TRUE
   )
-  expect_error(
-    foo[-1:1],
-    "Only zeros may be mixed with negative subscripts",
-    fixed = TRUE
-  )
-  expect_error(
-    foo[c(-1, 1)],
-    "Only zeros may be mixed with negative subscripts",
-    fixed = TRUE
-  )
+
+  # Message from base R
+  expect_error(foo[-1:1])
+  expect_error(foo[c(-1, 1)])
+
   expect_error(
     foo[-4],
-    "Column index must be positive, not -4",
+    "Column index must be at least -3 if negative, not -4",
     fixed = TRUE
   )
   expect_error(

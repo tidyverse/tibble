@@ -33,7 +33,7 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    stop("Cannot add rows to grouped data frames", call. = FALSE)
+    stop("Can't add rows to grouped data frames", call. = FALSE)
   }
 
   df <- tibble(...)
@@ -41,9 +41,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stopc(
-      "This row would add new variables: ", format_n(extra_vars)
-    )
+    stopc(pluralise_msg("Can't add row with new variable(s) ", extra_vars))
   }
 
   missing_vars <- setdiff(names(.data), names(df))
@@ -119,14 +117,19 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      stopc("Expected ", nrow(.data), " rows, got ", nrow(df))
+      stopc(
+        "`.data` must have ", nrow(.data),
+        pluralise_n(" row(s)", nrow(.data)),
+        ", not ", nrow(df)
+      )
     }
   }
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
     stopc(
-      "Columns already in data frame: ", format_n(extra_vars)
+      pluralise_msg("Column(s) ", extra_vars),
+      pluralise(" already exist[s]", extra_vars)
     )
   }
 
@@ -165,7 +168,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       before - 1L
     } else {
-      stopc("Can't specify both .before and .after")
+      stopc("Can't specify both `.before` and `.after`")
     }
   }
 }
