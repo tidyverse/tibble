@@ -68,12 +68,12 @@ test_that("[.tbl_df is careful about names (#1245)",{
 
   expect_error(
     foo[as.matrix("x")],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
   expect_error(
     foo[array("x", dim = c(1, 1, 1))],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
 })
@@ -84,27 +84,27 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
 
   expect_error(
     foo[0.5],
-    #"Column indexes must be integer, not 0.5",
+    "Column indexes must be integer, not 0.5",
     fixed = TRUE
   )
   expect_error(
     foo[1:5],
-    #"Column indexes must be between 1 and 3, not 4, 5",
+    "Column indexes must be between 1 and 3, not 4, 5",
     fixed = TRUE
   )
   expect_error(
     foo[-1:1],
-    #"Only zeros may be mixed with negative subscripts",
+    "Only zeros may be mixed with negative subscripts",
     fixed = TRUE
   )
   expect_error(
     foo[c(-1, 1)],
-    #"Only zeros may be mixed with negative subscripts",
+    "Only zeros may be mixed with negative subscripts",
     fixed = TRUE
   )
   expect_error(
     foo[-4],
-    #"Column indexes must be positive, not -4",
+    "Column index must be positive, not -4",
     fixed = TRUE
   )
   expect_error(
@@ -115,12 +115,12 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
 
   expect_error(
     foo[as.matrix(1)],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
   expect_error(
     foo[array(1, dim = c(1, 1, 1))],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
 })
@@ -134,12 +134,12 @@ test_that("[.tbl_df is careful about column flags (#83)",{
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    #"Length of logical index vector must be 1 or 3 (the number of rows), not 2",
+    "Length of logical index vector must be 1 or 3 (the number of rows), not 2",
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    #"Length of logical index vector must be 1 or 3 (the number of rows), not 4",
+    "Length of logical index vector must be 1 or 3 (the number of rows), not 4",
     fixed = TRUE
   )
   expect_error(
@@ -150,12 +150,12 @@ test_that("[.tbl_df is careful about column flags (#83)",{
 
   expect_error(
     foo[as.matrix(TRUE)],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
   expect_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    #"Can't use matrix or array for column indexing",
+    "Can't use matrix or array for column indexing",
     fixed = TRUE
   )
 })
