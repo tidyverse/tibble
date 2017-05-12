@@ -170,7 +170,7 @@ test_that("frame_matrix cannot have list columns", {
       "a", 1:3,
       "b", 4:6
     ),
-    "Can't use list columns in `frame_matrix()`",
+    #"Can't use list columns in `frame_matrix()`",
     fixed = TRUE
   )
 })
