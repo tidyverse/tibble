@@ -137,8 +137,14 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 
 #' @export
 format.trunc_mat <- function(x, ...) {
+  named_header <- format_header(x)
+  if (length(named_header) == 0L) {
+    header <- NULL
+  } else {
+    header <- paste0(justify(names(named_header), right = FALSE), ": ", named_header)
+  }
   c(
-    format_comment(format_header(x), width = x$width),
+    format_comment(header, width = x$width),
     format_body(x),
     format_comment(pre_dots(format_footer(x)), width = x$width)
   )
@@ -222,6 +228,7 @@ pre_dots <- function(x) {
 }
 
 justify <- function(x, right = TRUE) {
+  if (length(x) == 0L) return(character())
   width <- nchar_width(x)
   max_width <- max(width)
   spaces_template <- paste(rep(" ", max_width), collapse = "")
@@ -237,7 +244,12 @@ justify <- function(x, right = TRUE) {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_header(x)
+  header <- as_tibble(as.list(format_header(x)))
+  if (all(names2(header) == "")) {
+    header_kable <- paste(header, collapse = ", ")
+  } else {
+    header_kable <- knitr::kable(header, row.names = FALSE)
+  }
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
@@ -249,7 +261,7 @@ knit_print.trunc_mat <- function(x, options) {
     extra <- "\n"
   }
 
-  res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
+  res <- paste(c('', '', header_kable, '', kable, '', extra), collapse = '\n')
   knitr::asis_output(res, cacheable = TRUE)
 }
 
