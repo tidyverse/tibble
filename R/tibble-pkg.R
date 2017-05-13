@@ -14,7 +14,7 @@
 #'
 #' \describe{
 #' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see [print.tbl_df()]}
+#'   columns that fit on screen; see [print.tbl()]}
 #' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
 #' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
 #'   so is considerably faster. Returns `NULL` if column does not exist,
@@ -23,13 +23,13 @@
 #' @section Important functions:
 #' [tibble()] and [tribble()] for construction,
 #' [as_tibble()] for coercion,
-#' and [print.tbl_df()] and [glimpse()] for display.
+#' and [print.tbl()] and [glimpse()] for display.
 "_PACKAGE"
 
 #' @name tibble-package
 #' @section Package options:
 #' Display options for `tbl_df`, used by [trunc_mat()] and
-#' (indirectly) by [print.tbl_df()].
+#' (indirectly) by [print.tbl()].
 #' \describe{
 (op.tibble <- list(
   #' \item{`tibble.print_max`}{Row number threshold: Maximum number of rows
