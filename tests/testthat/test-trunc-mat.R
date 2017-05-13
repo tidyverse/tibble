@@ -1,7 +1,7 @@
 context("Truncated matrix")
 
 test_that("interface of print() identical to trunc_mat()", {
-  print_arg_names <- names(formals(print.tbl_df))
+  print_arg_names <- names(formals(print.tbl))
   print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
 
   trunc_mat_arg_names <- names(formals(trunc_mat))
