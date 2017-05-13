@@ -160,7 +160,7 @@ format_body <- function(x) {
 
   table_with_row_names <- c(list(row.names(table)), table)
   table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
-  same_width_table <- map(table_with_names, justify_right)
+  same_width_table <- map(table_with_names, justify)
   rows <- invoke(paste, same_width_table)
   rows
 }
@@ -221,12 +221,16 @@ pre_dots <- function(x) {
   }
 }
 
-justify_right <- function(x) {
+justify <- function(x, right = TRUE) {
   width <- nchar_width(x)
   max_width <- max(width)
   spaces_template <- paste(rep(" ", max_width), collapse = "")
   spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
-  paste0(spaces, x)
+  if (right) {
+    paste0(spaces, x)
+  } else {
+    paste0(x, spaces)
+  }
 }
 
 #' knit_print method for trunc mat
@@ -319,14 +323,7 @@ pluralise <- function(message, objects) {
 }
 
 mult_sign <- function() {
-  # unicode multiplication sign
-  mult <- "\u00d7"
-  # if unicode doesn't render, use lowercase x
-  if (enc2native(mult) != mult) {
-    mult <- "x"
-  }
-
-  mult
+  "x"
 }
 
 spaces_around <- function(x) {
