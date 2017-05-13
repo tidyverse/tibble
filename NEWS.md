@@ -1,3 +1,11 @@
+### tibble 1.3.0.9003 (2017-05-13)
+
+- The `print()`, `format()`, and `tbl_sum()` methods are now implemented for class `"tbl"` and not for `"tbl_df"`. This allows subclasses to use tibble's formatting facilities. The formatting of the header can be tweaked by implementing `tbl_sum()` for the subclass.
+- New `set_tidy_names()` and `tidy_names()`, a simpler version of `repair_names()` which works unchanged for now (#217).
+- Printing now uses `x` again instead of the Unicode multiplication sign, to avoid encoding issues (#216).
+- `glimpse()` now properly displays tibbles with foreign characters in column names (#235).
+
+
 ### tibble 1.3.0.9002 (2017-05-08)
 
 - New `rowid_to_column()` that adds a `rowid` column as first column and removes row names (#243, @barnettjacob).
