@@ -84,7 +84,7 @@ tbl_sum <- function(x) UseMethod("tbl_sum", x)
 tbl_sum.default <- function(x) obj_sum(x)
 
 #' @export
-tbl_sum.tbl_df <- function(x) {
+tbl_sum.tbl <- function(x) {
   paste0("A tibble: ", dim_desc(x))
 }
 
