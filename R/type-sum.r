@@ -81,10 +81,7 @@ type_sum.default <- function(x) {
 tbl_sum <- function(x) UseMethod("tbl_sum", x)
 
 #' @export
-tbl_sum.default <- function(x) c("Summary" = obj_sum(x))
-
-#' @export
-tbl_sum.data.frame <- function(x) c("A data frame" = dim_desc(x))
+tbl_sum.default <- function(x) obj_sum(x)
 
 #' @export
 tbl_sum.tbl <- function(x) {

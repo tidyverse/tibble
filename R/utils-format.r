@@ -141,7 +141,8 @@ format.trunc_mat <- function(x, ...) {
   if (length(named_header) == 0L) {
     header <- NULL
   } else {
-    header <- paste0(justify(names(named_header), right = FALSE), ": ", named_header)
+    named_header[names2(named_header) != ""] <- paste0(justify(names(named_header), right = FALSE), ": ", named_header)
+    header <- named_header
   }
   c(
     format_comment(header, width = x$width),
@@ -244,7 +245,7 @@ justify <- function(x, right = TRUE) {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  header <- as_tibble(as.list(format_header(x)))
+  header <- format_header(x)
   if (length(header) > 0L) {
     header[names2(header) != ""] <- paste0(names2(header), ": ", header)
     header_kable <- header
