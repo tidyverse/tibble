@@ -85,7 +85,7 @@ tbl_sum.default <- function(x) obj_sum(x)
 
 #' @export
 tbl_sum.tbl <- function(x) {
-  paste0("A tibble: ", dim_desc(x))
+  c("A tibble" = dim_desc(x))
 }
 
 dim_desc <- function(x) {
