@@ -1,3 +1,8 @@
+### tibble 1.3.0.9006 (2017-05-14)
+
+- Internal: `justify()` gains `space` argument, default `" "`. Only header is justified with NBSP.
+
+
 ### tibble 1.3.0.9005 (2017-05-14)
 
 - Internal: `justify()` uses non-breaking spaces.
