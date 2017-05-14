@@ -1,3 +1,8 @@
+### tibble 1.3.0.9005 (2017-05-14)
+
+- Internal: `justify()` uses non-breaking spaces.
+
+
 ### tibble 1.3.0.9004 (2017-05-14)
 
 - `tbl_sum()` is now expected to return a named character vector, for better terminal output.
