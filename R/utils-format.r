@@ -248,9 +248,9 @@ knit_print.trunc_mat <- function(x, options) {
   header <- format_header(x)
   if (length(header) > 0L) {
     header[names2(header) != ""] <- paste0(names2(header), ": ", header)
-    header_kable <- header
+    summary <- header
   } else {
-    header_kable <- character()
+    summary <- character()
   }
 
   kable <- knitr::kable(x$table, row.names = FALSE)
@@ -263,7 +263,7 @@ knit_print.trunc_mat <- function(x, options) {
     extra <- "\n"
   }
 
-  res <- paste(c('', '', header_kable, '', kable, '', extra), collapse = '\n')
+  res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
   knitr::asis_output(res, cacheable = TRUE)
 }
 
