@@ -232,7 +232,7 @@ justify <- function(x, right = TRUE) {
   if (length(x) == 0L) return(character())
   width <- nchar_width(x)
   max_width <- max(width)
-  spaces_template <- paste(rep(" ", max_width), collapse = "")
+  spaces_template <- paste(rep("\u00a0", max_width), collapse = "")
   spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
   if (right) {
     paste0(spaces, x)
