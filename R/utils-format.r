@@ -245,10 +245,11 @@ justify <- function(x, right = TRUE) {
 #' @export
 knit_print.trunc_mat <- function(x, options) {
   header <- as_tibble(as.list(format_header(x)))
-  if (all(names2(header) == "")) {
-    header_kable <- paste(header, collapse = ", ")
+  if (length(header) > 0L) {
+    header[names2(header) != ""] <- paste0(names2(header), ": ", header)
+    header_kable <- header
   } else {
-    header_kable <- knitr::kable(header, row.names = FALSE)
+    header_kable <- character()
   }
 
   kable <- knitr::kable(x$table, row.names = FALSE)
