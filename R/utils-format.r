@@ -141,7 +141,7 @@ format.trunc_mat <- function(x, ...) {
   if (length(named_header) == 0L) {
     header <- NULL
   } else {
-    named_header[names2(named_header) != ""] <- paste0(justify(names(named_header), right = FALSE), ": ", named_header)
+    named_header[names2(named_header) != ""] <- paste0(justify(names(named_header), right = FALSE, space = "\u00a0"), ": ", named_header)
     header <- named_header
   }
   c(
@@ -228,11 +228,11 @@ pre_dots <- function(x) {
   }
 }
 
-justify <- function(x, right = TRUE) {
+justify <- function(x, right = TRUE, space = " ") {
   if (length(x) == 0L) return(character())
   width <- nchar_width(x)
   max_width <- max(width)
-  spaces_template <- paste(rep("\u00a0", max_width), collapse = "")
+  spaces_template <- paste(rep(space, max_width), collapse = "")
   spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
   if (right) {
     paste0(spaces, x)
