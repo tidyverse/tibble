@@ -141,7 +141,6 @@ format.trunc_mat <- function(x, ...) {
   if (all(names2(named_header) == "")) {
     header <- named_header
   } else {
-    named_header[names2(named_header) != ""] <-
     header <- paste0(
       justify(
         paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
