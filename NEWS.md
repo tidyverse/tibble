@@ -1,3 +1,8 @@
+### tibble 1.3.0.9007 (2017-05-15)
+
+- Formatting of tibble headers now inserts space after the colon, not before.
+
+
 ### tibble 1.3.0.9006 (2017-05-14)
 
 - Internal: `justify()` gains `space` argument, default `" "`. Only header is justified with NBSP.
