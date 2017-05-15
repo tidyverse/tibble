@@ -1,3 +1,8 @@
+### tibble 1.3.0.9009 (2017-05-15)
+
+- Improve formatting of error messages (#223).
+
+
 ### tibble 1.3.0.9008 (2017-05-15)
 
 - Formatting of tibble headers now inserts space after the colon, not before.
