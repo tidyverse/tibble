@@ -137,8 +137,22 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 
 #' @export
 format.trunc_mat <- function(x, ...) {
+  named_header <- format_header(x)
+  if (all(names2(named_header) == "")) {
+    header <- named_header
+  } else {
+    header <- paste0(
+      justify(
+        paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
+      ),
+      # We add a space after the NBSP inserted by justify()
+      # so that wrapping occurs at the right location for very narrow outputs
+      " ",
+      named_header
+    )
+  }
   c(
-    format_comment(format_header(x), width = x$width),
+    format_comment(header, width = x$width),
     format_body(x),
     format_comment(pre_dots(format_footer(x)), width = x$width)
   )
@@ -221,10 +235,11 @@ pre_dots <- function(x) {
   }
 }
 
-justify <- function(x, right = TRUE) {
+justify <- function(x, right = TRUE, space = " ") {
+  if (length(x) == 0L) return(character())
   width <- nchar_width(x)
   max_width <- max(width)
-  spaces_template <- paste(rep(" ", max_width), collapse = "")
+  spaces_template <- paste(rep(space, max_width), collapse = "")
   spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
   if (right) {
     paste0(spaces, x)
@@ -237,7 +252,13 @@ justify <- function(x, right = TRUE) {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_header(x)
+  header <- format_header(x)
+  if (length(header) > 0L) {
+    header[names2(header) != ""] <- paste0(names2(header), ": ", header)
+    summary <- header
+  } else {
+    summary <- character()
+  }
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 

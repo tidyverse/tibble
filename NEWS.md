@@ -1,3 +1,29 @@
+### tibble 1.3.0.9009 (2017-05-15)
+
+- Improve formatting of error messages (#223).
+
+
+### tibble 1.3.0.9008 (2017-05-15)
+
+- Formatting of tibble headers now inserts space after the colon, not before.
+
+
+### tibble 1.3.0.9006 (2017-05-14)
+
+- Internal: `justify()` gains `space` argument, default `" "`. Only header is justified with NBSP.
+
+
+### tibble 1.3.0.9005 (2017-05-14)
+
+- Internal: `justify()` uses non-breaking spaces.
+
+
+### tibble 1.3.0.9004 (2017-05-14)
+
+- `tbl_sum()` is now expected to return a named character vector, for better terminal output.
+- `print.tbl_df()` is still implemented for compatibility with downstream packages, but only calls `NextMethod()`.
+
+
 ### tibble 1.3.0.9003 (2017-05-13)
 
 - The `print()`, `format()`, and `tbl_sum()` methods are now implemented for class `"tbl"` and not for `"tbl_df"`. This allows subclasses to use tibble's formatting facilities. The formatting of the header can be tweaked by implementing `tbl_sum()` for the subclass.

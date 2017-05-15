@@ -21,6 +21,12 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
+#' @rdname formatting
+#' @export
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
+}
+
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (missing(j))
