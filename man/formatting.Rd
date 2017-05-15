@@ -3,6 +3,7 @@
 \name{format.tbl}
 \alias{format.tbl}
 \alias{print.tbl}
+\alias{print.tbl_df}
 \alias{formatting}
 \alias{trunc_mat}
 \title{Tools for describing matrices}
@@ -10,6 +11,8 @@
 \method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 \method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+
+\method{print}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
