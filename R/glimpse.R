@@ -31,7 +31,9 @@ glimpse <- function(x, width = NULL, ...) {
 #' @export
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
-  stopifnot(is.finite(width))
+  if (!is.finite(width)) {
+    stopc("`width` must be finite")
+  }
 
   cat_line("Observations: ", big_mark(nrow(x)))
   if (ncol(x) == 0) return(invisible())

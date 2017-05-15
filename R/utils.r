@@ -60,8 +60,12 @@ is_syntactic <- function(x) {
   ret
 }
 
-tickit <- function(x) {
+tick_non_syntactic <- function(x) {
   needs_ticks <- !is_syntactic(x)
-  x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
+  x[needs_ticks] <- tick(x[needs_ticks])
   x
+}
+
+tick <- function(x) {
+  paste0("`", gsub("`", "\\\\`", x), "`")
 }

@@ -85,25 +85,25 @@ check_tibble <- function(x) {
   names_x <- names2(x)
   bad_name <- is.na(names_x) | names_x == ""
   if (any(bad_name)) {
-    invalid_df("Each variable must be named", x, which(bad_name))
+    invalid_df("must be named", x, which(bad_name))
   }
 
   dups <- duplicated(names_x)
   if (any(dups)) {
-    invalid_df("Each variable must have a unique name", x, dups)
+    invalid_df("must have [a] unique name(s)", x, dups)
   }
 
   # Types
   is_1d <- map_lgl(x, is_1d)
   if (any(!is_1d)) {
-    invalid_df("Each variable must be a 1d atomic vector or list", x, !is_1d)
+    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
   }
 
   x[] <- map(x, strip_dim)
 
   posixlt <- map_lgl(x, inherits, "POSIXlt")
   if (any(posixlt)) {
-    invalid_df("Date/times must be stored as POSIXct, not POSIXlt", x, posixlt)
+    invalid_df("[is](are) [a] date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
   }
 
   x
@@ -120,7 +120,9 @@ recycle_columns <- function(x) {
 
   bad_len <- lengths != 1L & lengths != max
   if (any(bad_len)) {
-    invalid_df(paste0("Variables must be length 1 or ", max), x, bad_len)
+    invalid_df_msg(
+      paste0("must be length 1 or ", max, ", not "), x, bad_len, lengths[bad_len]
+    )
   }
 
   short <- lengths == 1
@@ -136,8 +138,18 @@ invalid_df <- function(problem, df, vars) {
     vars <- names(df)[vars]
   }
   stopc(
-    problem, ".\n",
-    "Problem variables: ", format_n(vars)
+    pluralise_msg("Column(s) ", vars), " ",
+    pluralise(problem, vars)
+  )
+}
+
+invalid_df_msg <- function(problem, df, vars, extra) {
+  if (is.logical(vars)) {
+    vars <- names(df)[vars]
+  }
+  stopc(
+    pluralise_msg("Column(s) ", vars), " ",
+    pluralise_msg(problem, extra)
   )
 }
 

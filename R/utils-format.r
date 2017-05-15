@@ -68,7 +68,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   }
 
   df <- remove_rownames(df)
-  col_names <- tickit(colnames(df))
+  col_names <- tick_non_syntactic(colnames(df))
   names(var_types) <- col_names
 
   # Minimum width of each column is 5 "<int>", so we can make a quick first
@@ -327,17 +327,21 @@ pluralise_msg <- function(message, objects) {
 }
 
 pluralise <- function(message, objects) {
-  stopifnot(length(objects) > 0)
-  if (length(objects) == 1) {
+  pluralise_n(message, length(objects))
+}
+
+pluralise_n <- function(message, n) {
+  stopifnot(n > 0)
+  if (n == 1) {
     # strip [, unless there is space in between
-    message <- gsub("\\[(\\S+)\\]", "\\1", message, perl = TRUE)
+    message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)
     # remove ( and its content, unless there is space in between
     message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
   } else {
     # strip (, unless there is space in between
-    message <- gsub("\\((\\S+)\\)", "\\1", message, perl = TRUE)
+    message <- gsub("\\(([^\\) ]+)\\)", "\\1", message, perl = TRUE)
     # remove [ and its content, unless there is space in between
-    message <- gsub("\\[[^\\] ]+\\]\\s+", "", message, perl = TRUE)
+    message <- gsub("\\[[^\\] ]+\\]\\s*", "", message, perl = TRUE)
   }
 
   message
@@ -357,6 +361,6 @@ quote_n <- function(x) UseMethod("quote_n")
 #' @export
 quote_n.default <- function(x) as.character(x)
 #' @export
-quote_n.character <- function(x) encodeString(x, quote = "'")
+quote_n.character <- function(x) tick(x)
 
 collapse <- function(x) paste(x, collapse = ", ")
