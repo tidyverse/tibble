@@ -25,7 +25,7 @@ environment:
   matrix:
   - R_VERSION: 3.1.0
     RTOOLS_VERSION: 32
-    CRAN: http://cran.rstudio.com
+    CRAN: http://mran.revolutionanalytics.com/snapshot/2015-03-31
 
   - R_VERSION: devel
     GCC_PATH: mingw_32
