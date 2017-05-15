@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-13                   |
+|date     |2017-05-15                   |
 
 ## Packages
 
@@ -26,19 +26,18 @@
 |rlang          |   |0.1        |2017-05-06 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9003 |2017-05-13 |Github (tidyverse/tibble@7503b32) |
+|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
 
-18 packages with problems
+15 packages with problems
 
 |package       |version | errors| warnings| notes|
 |:-------------|:-------|------:|--------:|-----:|
 |atlantistools |0.4.1   |      0|        1|     1|
 |dat           |0.2.0   |      1|        0|     0|
 |dplyr         |0.5.0   |      1|        0|     2|
-|ecoseries     |0.1.3   |      1|        0|     0|
 |filesstrings  |0.4.0   |      1|        0|     0|
 |FSelectorRcpp |0.1.3   |      1|        0|     2|
 |ggimage       |0.0.4   |      1|        0|     0|
@@ -46,12 +45,10 @@
 |huxtable      |0.2.2   |      1|        1|     0|
 |monkeylearn   |0.1.1   |      0|        1|     0|
 |officer       |0.1.3   |      2|        1|     0|
-|poio          |0.0-3   |      0|        1|     0|
 |readr         |1.1.0   |      1|        0|     1|
-|rif           |0.1.0   |      1|        1|     0|
+|rif           |0.1.0   |      1|        0|     0|
 |rio           |0.5.0   |      2|        1|     0|
-|srvyr         |0.2.1   |      0|        1|     0|
-|tidyr         |0.6.2   |      1|        0|     0|
+|solrium       |0.4.0   |      1|        0|     0|
 |unpivotr      |0.1.1   |      1|        0|     0|
 
 ## atlantistools (0.4.1)
@@ -81,7 +78,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [11s/11s]
+  Running ‘testthat.R’ [12s/12s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -141,32 +138,6 @@ It is good practice to register native routines and to disable symbol
 search.
 
 See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-```
-
-## ecoseries (0.1.3)
-Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>  
-Bug reports: https://github.com/fernote7/ecoseries/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘ecoseries-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: series_sidra
-> ### Title: A function to extract Sidra series using their API
-> ### Aliases: series_sidra
-> ### Keywords: sidra
-> 
-> ### ** Examples
-> 
-> sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-Error in function (type, msg, asError = TRUE)  : 
-  Failed to connect to api.sidra.ibge.gov.br port 80: Connection timed out
-Calls: series_sidra ... <Anonymous> -> curlPerform -> .Call -> <Anonymous> -> fun
-Execution halted
 ```
 
 ## filesstrings (0.4.0)
@@ -272,9 +243,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 13 Mai 2017 10:31
+Invalid timestamp string (length=17): 15 Mai 2017 19:53
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmpeVvhzx/file23e12bcf0193.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpE2tY0m/file38806512f5de.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -393,7 +364,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [151s/154s]
+  Running ‘testthat.R’ [163s/162s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -430,22 +401,6 @@ Quitting from lines 180-190 (powerpoint.Rmd)
 Error: processing vignette 'powerpoint.Rmd' failed with diagnostics:
 file.exists(src) is not TRUE
 Execution halted
-
-```
-
-## poio (0.0-3)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://github.com/RL10N/poio/issues
-
-0 errors | 1 warning  | 0 notes
-
-```
-checking Rd cross-references ... WARNING
-Package unavailable to check Rd xrefs: ‘ISOcodes’
-Missing link or links in documentation object 'print.po.Rd':
-  ‘[tibble]{print.tbl_df}’
-
-See section 'Cross-references' in the 'Writing R Extensions' manual.
 
 ```
 
@@ -486,37 +441,28 @@ checking installed package size ... NOTE
 Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>  
 Bug reports: https://github.com/ropensci/rif/issues
 
-1 error  | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/50m]
+  Running ‘test-all.R’ [2s/17s]
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
+  > library(rif)
+  > 
+  > test_check("rif")
+  1. Failure: literature_retractions (@test-literature_retractions.R#7) ----------
+  length(tt) not equal to 4653.
+  1/1 mismatches
+  [1] 4963 - 4653 == 310
+  
+  
   testthat results ================================================================
-  OK: 0 SKIPPED: 0 FAILED: 22
-  1. Error: federation_data (@test-federation_data.R#4) 
-  2. Error: federation_facet (@test-federation_facet.R#4) 
-  3. Error: federation_search (@test-federation_search.R#4) 
-  4. Error: lexical_chunks (@test-lexical_chunks.R#4) 
-  5. Error: lexical_entities (@test-lexical_entities.R#4) 
-  6. Error: lexical_pmchunks (@test-lexical_pmchunks.R#4) 
-  7. Error: lexical_pmentities (@test-lexical_pmentities.R#4) 
-  8. Error: lexical_pos (@test-lexical_pos.R#4) 
-  9. Error: lexical_sentences (@test-lexical_sentences.R#4) 
-  1. ...
+  OK: 144 SKIPPED: 0 FAILED: 1
+  1. Failure: literature_retractions (@test-literature_retractions.R#7) 
   
   Error: testthat unit tests failed
   Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Quitting from lines 51-53 (rif_vignette.Rmd) 
-Error: processing vignette 'rif_vignette.Rmd' failed with diagnostics:
-Internal Server Error (HTTP 500)
-Execution halted
-
 ```
 
 ## rio (0.5.0)
@@ -542,7 +488,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 13 Mai 2017 10:50
+Invalid timestamp string (length=17): 15 Mai 2017 20:11
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -578,63 +524,28 @@ Execution halted
 
 ```
 
-## srvyr (0.2.1)
-Maintainer: Greg Freedman Ellis <greg.freedman@gmail.com>  
-Bug reports: https://github.com/gergness/srvyr/issues
-
-0 errors | 1 warning  | 0 notes
-
-```
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-17: fun(x, options = options)
-18: value_fun(ev$value, ev$visible)
-19: withVisible(value_fun(ev$value, ev$visible))
-20: withCallingHandlers(withVisible(value_fun(ev$value, ev$visible)),     warning = wHandler, error = eHandler, message = mHandler)
-21: handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value,     ev$visible)), warning = wHandler, error = eHandler, message = mHandler))
-22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
-23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
-... 8 lines ...
-31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
-32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
-33: vweave_rmarkdown(...)
-34: engine$weave(file, quiet = quiet, encoding = enc)
-35: doTryCatch(return(expr), name, parentenv, handler)
-36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-37: tryCatchList(expr, classes, parentenv, handlers)
-38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
-39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/srvyr.Rcheck/vign_test/srvyr")
-An irrecoverable exception occurred. R is aborting now ...
-Segmentation fault (core dumped)
-```
-
-## tidyr (0.6.2)
-Maintainer: Hadley Wickham <hadley@rstudio.com>  
-Bug reports: https://github.com/tidyverse/tidyr/issues
+## solrium (0.4.0)
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
+Bug reports: http://www.github.com/ropensci/solrium/issues
 
 1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > library(testthat)
-  > library(tidyr)
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error$message does not match "Unknown column".
-  Actual value: "Column `z` not found"
+  Running ‘test-all.R’ [0m/15m]
+Running the tests in ‘tests/test-all.R’ failed.
+Complete output:
+  > library('testthat')
+  > test_check('solrium')
+  Loading required package: solrium
   
+  Attaching package: 'solrium'
   
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
+  The following object is masked from 'package:stats':
   
-  Error: testthat unit tests failed
-  Execution halted
+      optimize
+  
+  Terminated
 ```
 
 ## unpivotr (0.1.1)
