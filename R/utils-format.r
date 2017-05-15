@@ -85,7 +85,7 @@ shrink_mat <- function(df, width, rows, n, star) {
     paste0("<", summary, ">")
   })
 
-  # Character columns need special treatment because of NA
+  # Character columns need special treatment because of NA and escapes
   is_character <- map_lgl(df, is.character)
   df[is_character] <- map(df[is_character], format_character)
 
@@ -96,8 +96,8 @@ shrink_mat <- function(df, width, rows, n, star) {
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
     pmax(
-      nchar_width(encodeString(values)),
-      nchar_width(encodeString(names))
+      nchar_width(values),
+      nchar_width(tick_non_syntactic(names))
     ),
     nchar_width(encodeString(c("", classes)))
   )
@@ -289,8 +289,16 @@ wrap <- function(..., indent = 0, prefix = "", width) {
 
 
 format_character <- function(x) {
-  x[is.na(x)] <- "<NA>"
-  x
+  res <- quote_escaped(x)
+  res[is.na(x)] <- "<NA>"
+  res
+}
+
+quote_escaped <- function(x) {
+  res <- encodeString(x, quote = '"')
+  plain <- which(res == paste0('"', x, '"'))
+  res[plain] <- x[plain]
+  res
 }
 
 # function for the thousand separator,
