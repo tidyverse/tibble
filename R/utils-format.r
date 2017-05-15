@@ -138,11 +138,19 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 #' @export
 format.trunc_mat <- function(x, ...) {
   named_header <- format_header(x)
-  if (length(named_header) == 0L) {
-    header <- NULL
-  } else {
-    named_header[names2(named_header) != ""] <- paste0(justify(names(named_header), right = FALSE, space = "\u00a0"), ": ", named_header)
+  if (all(names2(named_header) == "")) {
     header <- named_header
+  } else {
+    named_header[names2(named_header) != ""] <-
+    header <- paste0(
+      justify(
+        paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
+      ),
+      # We add a space after the NBSP inserted by justify()
+      # so that wrapping occurs at the right location for very narrow outputs
+      " ",
+      named_header
+    )
   }
   c(
     format_comment(header, width = x$width),
