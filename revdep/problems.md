@@ -10,49 +10,42 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-13                   |
+|date     |2017-05-15                   |
 
 ## Packages
 
 |package        |*  |version    |date       |source                            |
 |:--------------|:--|:----------|:----------|:---------------------------------|
-|assertthat     |   |0.2.0      |2017-04-11 |cran (@0.2.0)                     |
-|covr           |   |2.2.2      |2017-01-05 |cran (@2.2.2)                     |
 |dplyr          |   |0.5.0      |2016-06-24 |cran (@0.5.0)                     |
 |knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                    |
+|lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                     |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                   |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                     |
 |Rcpp           |   |0.12.10    |2017-03-19 |CRAN (R 3.4.0)                    |
-|rlang          |   |0.1        |2017-05-06 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9003 |2017-05-13 |Github (tidyverse/tibble@7503b32) |
+|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
 
-18 packages with problems
+13 packages with problems
 
 |package       |version | errors| warnings| notes|
 |:-------------|:-------|------:|--------:|-----:|
 |atlantistools |0.4.1   |      0|        1|     1|
 |dat           |0.2.0   |      1|        0|     0|
-|dplyr         |0.5.0   |      1|        0|     2|
-|ecoseries     |0.1.3   |      1|        0|     0|
-|filesstrings  |0.4.0   |      1|        0|     0|
+|doctr         |0.2.0   |      1|        0|     0|
 |FSelectorRcpp |0.1.3   |      1|        0|     2|
 |ggimage       |0.0.4   |      1|        0|     0|
 |haven         |1.0.0   |      2|        0|     2|
-|huxtable      |0.2.2   |      1|        1|     0|
+|huxtable      |0.2.2   |      1|        0|     0|
 |monkeylearn   |0.1.1   |      0|        1|     0|
 |officer       |0.1.3   |      2|        1|     0|
-|poio          |0.0-3   |      0|        1|     0|
-|readr         |1.1.0   |      1|        0|     1|
 |rif           |0.1.0   |      1|        1|     0|
 |rio           |0.5.0   |      2|        1|     0|
-|srvyr         |0.2.1   |      0|        1|     0|
-|tidyr         |0.6.2   |      1|        0|     0|
-|unpivotr      |0.1.1   |      1|        0|     0|
+|solrium       |0.4.0   |      1|        0|     0|
+|timekit       |0.2.0   |      0|        1|     0|
 
 ## atlantistools (0.4.1)
 Maintainer: Alexander Keth <alexander.keth@uni-hamburg.de>  
@@ -81,7 +74,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [11s/11s]
+  Running ‘testthat.R’ [10s/11s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -101,77 +94,8 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## dplyr (0.5.0)
-Maintainer: Hadley Wickham <hadley@rstudio.com>  
-Bug reports: https://github.com/hadley/dplyr/issues
-
-1 error  | 0 warnings | 2 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  
-  
-  testthat results ================================================================
-  OK: 1501 SKIPPED: 1 FAILED: 8
-  1. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#139) 
-  2. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#143) 
-  3. Failure: filter uses the white list (#566) (@test-filter.r#193) 
-  4. Failure: ungrouped output (@test-output.R#10) 
-  5. Failure: ungrouped output (@test-output.R#10) 
-  6. Failure: ungrouped output (@test-output.R#10) 
-  7. Failure: ungrouped output (@test-output.R#10) 
-  8. Failure: ungrouped output (@test-output.R#10) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking installed package size ... NOTE
-  installed size is 23.4Mb
-  sub-directories of 1Mb or more:
-    libs  21.3Mb
-
-checking compiled code ... NOTE
-File ‘dplyr/libs/dplyr.so’:
-  Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
-
-It is good practice to register native routines and to disable symbol
-search.
-
-See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-```
-
-## ecoseries (0.1.3)
-Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>  
-Bug reports: https://github.com/fernote7/ecoseries/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘ecoseries-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: series_sidra
-> ### Title: A function to extract Sidra series using their API
-> ### Aliases: series_sidra
-> ### Keywords: sidra
-> 
-> ### ** Examples
-> 
-> sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-Error in function (type, msg, asError = TRUE)  : 
-  Failed to connect to api.sidra.ibge.gov.br port 80: Connection timed out
-Calls: series_sidra ... <Anonymous> -> curlPerform -> .Call -> <Anonymous> -> fun
-Execution halted
-```
-
-## filesstrings (0.4.0)
-Maintainer: Rory Nolan <rorynoolan@gmail.com>  
-Bug reports: https://www.github.com/rorynolan/filesstrings/issues
+## doctr (0.2.0)
+Maintainer: Caio Lente <me@ctlente.com>
 
 1 error  | 0 warnings | 0 notes
 
@@ -180,18 +104,18 @@ checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Attributes: < Length mismatch: comparison on first 2 components >
-  
-  
-  2. Failure: MergeTablesOnDisk works (@test_files.R#82) -------------------------
-  readr::read_csv("merged.csv") not equal to tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)).
-  Attributes: < Length mismatch: comparison on first 2 components >
+  Conflicts with tidy packages ---------------------------------------------------
+  filter():  dplyr, stats
+  is_null(): purrr, testthat
+  lag():     dplyr, stats
+  matches(): dplyr, testthat
+  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) ---------
+  `len` is not strictly more than `len2`. Difference: 0
   
   
   testthat results ================================================================
-  OK: 141 SKIPPED: 0 FAILED: 2
-  1. Failure: MergeTablesOnDisk works (@test_files.R#80) 
-  2. Failure: MergeTablesOnDisk works (@test_files.R#82) 
+  OK: 46 SKIPPED: 0 FAILED: 1
+  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) 
   
   Error: testthat unit tests failed
   Execution halted
@@ -272,9 +196,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 13 Mai 2017 10:31
+Invalid timestamp string (length=17): 15 Mai 2017 18:08
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmpeVvhzx/file23e12bcf0193.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpsaAf2u/file74fb2abab8f4.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -315,37 +239,28 @@ See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>  
 Bug reports: https://github.com/hughjonesd/huxtable/issues
 
-1 error  | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  5: withVisible(code) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  6: rmarkdown::render("rowheight-multicol-test.Rmd", quiet = TRUE) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  7: convert(output_file, run_citeproc) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:655
-  8: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
-         output_format$pandoc$args, !quiet) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:585
-  9: stop("pandoc document conversion failed with error ", result, call. = FALSE) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/pandoc.R:100
-  
-  testthat results ================================================================
-  OK: 200 SKIPPED: 14 FAILED: 2
-  1. Error: slice, filter and arrange work (@test-dplyr.R#24) 
-  2. Error: Row heights do not screw up latex multicol (@test-with-pandoc.R#20) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Quitting from lines 320-337 (huxtable.Rmd) 
-Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
-is.data.frame(df) is not TRUE
-Execution halted
-
+  21: eval(exprs, env)
+  22: source_file(path, new.env(parent = env), chdir = TRUE)
+  23: force(code)
+  24: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE)        end_context()    })
+  25: FUN(X[[i]], ...)
+  26: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE)
+  27: force(code)
+  28: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE))
+  29: test_files(paths, reporter = reporter, env = env, ...)
+  30: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
+  31: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
+  32: run_tests(package, test_path, filter, reporter, ...)
+  33: test_check("huxtable")
+  An irrecoverable exception occurred. R is aborting now ...
+  Segmentation fault (core dumped)
 ```
 
 ## monkeylearn (0.1.1)
@@ -393,7 +308,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [151s/154s]
+  Running ‘testthat.R’ [26s/26s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -433,55 +348,6 @@ Execution halted
 
 ```
 
-## poio (0.0-3)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://github.com/RL10N/poio/issues
-
-0 errors | 1 warning  | 0 notes
-
-```
-checking Rd cross-references ... WARNING
-Package unavailable to check Rd xrefs: ‘ISOcodes’
-Missing link or links in documentation object 'print.po.Rd':
-  ‘[tibble]{print.tbl_df}’
-
-See section 'Cross-references' in the 'Writing R Extensions' manual.
-
-```
-
-## readr (1.1.0)
-Maintainer: Jim Hester <james.hester@rstudio.com>  
-Bug reports: https://github.com/tidyverse/readr/issues
-
-1 error  | 0 warnings | 1 note 
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Actual value: "Column `b` must be length 1 or 3, not 2"
-  
-  
-  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
-  error$message does not match "Variables must be length 1 or .*".
-  Actual value: "Column `a` must be length 1 or 2, not 0"
-  
-  
-  testthat results ================================================================
-  OK: 488 SKIPPED: 2 FAILED: 2
-  1. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#151) 
-  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking installed package size ... NOTE
-  installed size is 12.5Mb
-  sub-directories of 1Mb or more:
-    libs  11.8Mb
-```
-
 ## rif (0.1.0)
 Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>  
 Bug reports: https://github.com/ropensci/rif/issues
@@ -490,7 +356,7 @@ Bug reports: https://github.com/ropensci/rif/issues
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/50m]
+  Running ‘test-all.R’ [0m/62m]
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   testthat results ================================================================
@@ -514,7 +380,7 @@ Error in re-building vignettes:
   ...
 Quitting from lines 51-53 (rif_vignette.Rmd) 
 Error: processing vignette 'rif_vignette.Rmd' failed with diagnostics:
-Internal Server Error (HTTP 500)
+Failure when receiving data from the peer
 Execution halted
 
 ```
@@ -542,7 +408,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 13 Mai 2017 10:50
+Invalid timestamp string (length=17): 15 Mai 2017 18:24
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -578,9 +444,33 @@ Execution halted
 
 ```
 
-## srvyr (0.2.1)
-Maintainer: Greg Freedman Ellis <greg.freedman@gmail.com>  
-Bug reports: https://github.com/gergness/srvyr/issues
+## solrium (0.4.0)
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
+Bug reports: http://www.github.com/ropensci/solrium/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+  Running ‘test-all.R’ [0m/66m]
+Running the tests in ‘tests/test-all.R’ failed.
+Complete output:
+  > library('testthat')
+  > test_check('solrium')
+  Loading required package: solrium
+  
+  Attaching package: 'solrium'
+  
+  The following object is masked from 'package:stats':
+  
+      optimize
+  
+  Terminated
+```
+
+## timekit (0.2.0)
+Maintainer: Matt Dancho <mdancho@business-science.io>  
+Bug reports: https://github.com/business-science/timekit/issues
 
 0 errors | 1 warning  | 0 notes
 
@@ -604,64 +494,8 @@ Error in re-building vignettes:
 36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
 37: tryCatchList(expr, classes, parentenv, handlers)
 38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
-39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/srvyr.Rcheck/vign_test/srvyr")
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/timekit.Rcheck/vign_test/timekit")
 An irrecoverable exception occurred. R is aborting now ...
 Segmentation fault (core dumped)
-```
-
-## tidyr (0.6.2)
-Maintainer: Hadley Wickham <hadley@rstudio.com>  
-Bug reports: https://github.com/tidyverse/tidyr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > library(testthat)
-  > library(tidyr)
-  > 
-  > test_check("tidyr")
-  1. Failure: errors are raised (@test-drop_na.R#53) -----------------------------
-  error$message does not match "Unknown column".
-  Actual value: "Column `z` not found"
-  
-  
-  testthat results ================================================================
-  OK: 192 SKIPPED: 0 FAILED: 1
-  1. Failure: errors are raised (@test-drop_na.R#53) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
-## unpivotr (0.1.1)
-Maintainer: Duncan Garmonsway <nacnudus@gmail.com>  
-Bug reports: https://github.com/nacnudus/unpivotr/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  
-  The following objects are masked from 'package:stats':
-  
-      filter, lag
-  
-  The following objects are masked from 'package:base':
-  
-      intersect, setdiff, setequal, union
-  
-  testthat results ================================================================
-  OK: 119 SKIPPED: 0 FAILED: 1
-  1. Failure: 'cross' works (@test-anchor.R#19) 
-  
-  Error: testthat unit tests failed
-  Execution halted
 ```
 

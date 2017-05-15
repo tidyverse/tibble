@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-13                   |
+|date     |2017-05-15                   |
 
 ## Packages
 
@@ -24,12 +24,12 @@
 |Rcpp           |   |0.12.10    |2017-03-19 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9002 |2017-05-13 |Github (tidyverse/tibble@afeafd9) |
+|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
 
-149 packages
+150 packages
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
@@ -45,6 +45,7 @@
 |blockTools        |0.6-3   |      0|        0|     1|
 |bold              |0.4.0   |      0|        0|     1|
 |breathtestcore    |0.3.0   |      0|        0|     0|
+|breathteststan    |0.3.0   |      0|        0|     1|
 |bsam              |1.1.1   |      0|        0|     0|
 |ccafs             |0.1.0   |      0|        0|     0|
 |cdata             |0.1.1   |      0|        0|     0|
@@ -60,13 +61,13 @@
 |datastepr         |0.0.2   |      0|        0|     0|
 |dat               |0.2.0   |      1|        0|     0|
 |DiagrammeR        |0.9.0   |      0|        0|     1|
-|doctr             |0.2.0   |      0|        0|     0|
+|doctr             |0.2.0   |      1|        0|     0|
 |docxtractr        |0.2.0   |      0|        0|     0|
 |dotwhisker        |0.2.6   |      0|        0|     0|
 |dplyr             |0.5.0   |      0|        0|     2|
 |drake             |3.0.0   |      0|        0|     0|
 |easyformatr       |0.1.2   |      0|        0|     0|
-|ecoseries         |0.1.3   |      1|        0|     0|
+|ecoseries         |0.1.3   |      0|        0|     0|
 |enigma            |0.3.0   |      0|        0|     0|
 |esc               |0.3.0   |      0|        0|     0|
 |eurostat          |3.1.1   |      0|        0|     0|
@@ -92,7 +93,7 @@
 |ggguitar          |0.1.1   |      0|        0|     0|
 |ggimage           |0.0.4   |      1|        0|     0|
 |ggplot2           |2.2.1   |      0|        0|     0|
-|ggpmisc           |0.2.14  |      0|        0|     0|
+|ggpmisc           |0.2.15  |      0|        0|     0|
 |giphyr            |0.1.1   |      0|        0|     0|
 |gitlabr           |0.9     |      0|        0|     0|
 |GSODR             |1.0.2.1 |      0|        0|     0|
@@ -160,11 +161,11 @@
 |rtide             |0.0.4   |      0|        0|     0|
 |rtimes            |0.4.0   |      0|        0|     0|
 |sfdct             |0.0.3   |      0|        0|     0|
-|sf                |0.4-2   |      0|        0|     1|
+|sf                |0.4-3   |      0|        0|     1|
 |sjmisc            |2.4.0   |      0|        0|     0|
 |sjPlot            |2.3.1   |      0|        0|     1|
 |sjstats           |0.10.0  |      0|        0|     1|
-|solrium           |0.4.0   |      0|        0|     0|
+|solrium           |0.4.0   |      1|        0|     0|
 |spbabel           |0.4.7   |      0|        0|     0|
 |spdplyr           |0.1.2   |      0|        0|     0|
 |spocc             |0.7.0   |      0|        0|     0|
@@ -173,7 +174,7 @@
 |tidyquant         |0.5.1   |      0|        0|     1|
 |tidyr             |0.6.2   |      0|        0|     0|
 |tidyverse         |1.1.1   |      0|        0|     0|
-|timekit           |0.2.0   |      0|        0|     0|
+|timekit           |0.2.0   |      0|        1|     0|
 |Tmisc             |0.1.14  |      0|        0|     0|
 |units             |0.4-4   |      0|        0|     0|
 |unpivotr          |0.1.1   |      0|        0|     0|
@@ -294,6 +295,18 @@ Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
 
 0 errors | 0 warnings | 0 notes
 
+## breathteststan (0.3.0)
+Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
+
+0 errors | 0 warnings | 1 note 
+
+```
+checking installed package size ... NOTE
+  installed size is 23.4Mb
+  sub-directories of 1Mb or more:
+    libs  23.3Mb
+```
+
 ## bsam (1.1.1)
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>  
 Bug reports: https://github.com/ianjonsen/bsam/issues
@@ -387,7 +400,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [11s/12s]
+  Running ‘testthat.R’ [10s/11s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -425,7 +438,29 @@ checking installed package size ... NOTE
 ## doctr (0.2.0)
 Maintainer: Caio Lente <me@ctlente.com>
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  Conflicts with tidy packages ---------------------------------------------------
+  filter():  dplyr, stats
+  is_null(): purrr, testthat
+  lag():     dplyr, stats
+  matches(): dplyr, testthat
+  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) ---------
+  `len` is not strictly more than `len2`. Difference: 0
+  
+  
+  testthat results ================================================================
+  OK: 46 SKIPPED: 0 FAILED: 1
+  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## docxtractr (0.2.0)
 Maintainer: Bob Rudis <bob@rudis.net>
@@ -476,27 +511,7 @@ Bug reports: https://github.com/bramtayl/easyformatr/issues
 Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>  
 Bug reports: https://github.com/fernote7/ecoseries/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘ecoseries-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: series_sidra
-> ### Title: A function to extract Sidra series using their API
-> ### Aliases: series_sidra
-> ### Keywords: sidra
-> 
-> ### ** Examples
-> 
-> sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-Error in function (type, msg, asError = TRUE)  : 
-  Failed to connect to api.sidra.ibge.gov.br port 80: Connection timed out
-Calls: series_sidra ... <Anonymous> -> curlPerform -> .Call -> <Anonymous> -> fun
-Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## enigma (0.3.0)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
@@ -714,7 +729,7 @@ Bug reports: https://github.com/tidyverse/ggplot2/issues
 
 0 errors | 0 warnings | 0 notes
 
-## ggpmisc (0.2.14)
+## ggpmisc (0.2.15)
 Maintainer: Pedro J. Aphalo <pedro.aphalo@helsinki.fi>  
 Bug reports: https://bitbucket.org/aphalo/ggpmisc/issues
 
@@ -767,9 +782,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 13 Mai 2017 09:06
+Invalid timestamp string (length=17): 15 Mai 2017 18:08
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmplyEUmM/file6101c7013dc.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpsaAf2u/file74fb2abab8f4.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -840,24 +855,24 @@ Bug reports: https://github.com/hughjonesd/huxtable/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [10s/13s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-         message = handle_message)) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  5: withVisible(code) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  6: rmarkdown::render("rowheight-multicol-test.Rmd", quiet = TRUE) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  7: convert(output_file, run_citeproc) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:655
-  8: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
-         output_format$pandoc$args, !quiet) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:585
-  9: stop("pandoc document conversion failed with error ", result, call. = FALSE) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/pandoc.R:100
-  
-  testthat results ================================================================
-  OK: 203 SKIPPED: 14 FAILED: 1
-  1. Error: Row heights do not screw up latex multicol (@test-with-pandoc.R#20) 
-  
-  Error: testthat unit tests failed
-  Execution halted
+  21: eval(exprs, env)
+  22: source_file(path, new.env(parent = env), chdir = TRUE)
+  23: force(code)
+  24: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE)        end_context()    })
+  25: FUN(X[[i]], ...)
+  26: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE)
+  27: force(code)
+  28: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE))
+  29: test_files(paths, reporter = reporter, env = env, ...)
+  30: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
+  31: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
+  32: run_tests(package, test_path, filter, reporter, ...)
+  33: test_check("huxtable")
+  An irrecoverable exception occurred. R is aborting now ...
+  Segmentation fault (core dumped)
 ```
 
 ## hypoparsr (0.1.0)
@@ -1078,7 +1093,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [23s/24s]
+  Running ‘testthat.R’ [26s/26s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -1307,7 +1322,7 @@ Bug reports: https://github.com/ropensci/rif/issues
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/48m]
+  Running ‘test-all.R’ [0m/62m]
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   testthat results ================================================================
@@ -1331,7 +1346,7 @@ Error in re-building vignettes:
   ...
 Quitting from lines 51-53 (rif_vignette.Rmd) 
 Error: processing vignette 'rif_vignette.Rmd' failed with diagnostics:
-Service Unavailable (HTTP 503)
+Failure when receiving data from the peer
 Execution halted
 
 ```
@@ -1359,7 +1374,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 13 Mai 2017 09:21
+Invalid timestamp string (length=17): 15 Mai 2017 18:24
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -1443,7 +1458,7 @@ Bug reports: https://github.com/r-gris/sfdct/issues
 
 0 errors | 0 warnings | 0 notes
 
-## sf (0.4-2)
+## sf (0.4-3)
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>  
 Bug reports: https://github.com/edzer/sfr/issues/
 
@@ -1451,10 +1466,11 @@ Bug reports: https://github.com/edzer/sfr/issues/
 
 ```
 checking installed package size ... NOTE
-  installed size is 10.3Mb
+  installed size is 11.9Mb
   sub-directories of 1Mb or more:
-    doc    4.0Mb
-    libs   4.2Mb
+    doc      4.0Mb
+    libs     4.4Mb
+    sqlite   1.5Mb
 ```
 
 ## sjmisc (2.4.0)
@@ -1489,7 +1505,25 @@ Package unavailable to check Rd xrefs: ‘piecewiseSEM’
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
 Bug reports: http://www.github.com/ropensci/solrium/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+  Running ‘test-all.R’ [0m/66m]
+Running the tests in ‘tests/test-all.R’ failed.
+Complete output:
+  > library('testthat')
+  > test_check('solrium')
+  Loading required package: solrium
+  
+  Attaching package: 'solrium'
+  
+  The following object is masked from 'package:stats':
+  
+      optimize
+  
+  Terminated
+```
 
 ## spbabel (0.4.7)
 Maintainer: Michael D. Sumner <mdsumner@gmail.com>  
@@ -1550,7 +1584,32 @@ Bug reports: https://github.com/tidyverse/tidyverse/issues
 Maintainer: Matt Dancho <mdancho@business-science.io>  
 Bug reports: https://github.com/business-science/timekit/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+17: fun(x, options = options)
+18: value_fun(ev$value, ev$visible)
+19: withVisible(value_fun(ev$value, ev$visible))
+20: withCallingHandlers(withVisible(value_fun(ev$value, ev$visible)),     warning = wHandler, error = eHandler, message = mHandler)
+21: handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value,     ev$visible)), warning = wHandler, error = eHandler, message = mHandler))
+22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+... 8 lines ...
+31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
+32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
+33: vweave_rmarkdown(...)
+34: engine$weave(file, quiet = quiet, encoding = enc)
+35: doTryCatch(return(expr), name, parentenv, handler)
+36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+37: tryCatchList(expr, classes, parentenv, handlers)
+38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/timekit.Rcheck/vign_test/timekit")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
+```
 
 ## Tmisc (0.1.14)
 Maintainer: Stephen Turner <vustephen@gmail.com>
