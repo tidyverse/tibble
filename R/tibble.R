@@ -96,7 +96,10 @@ check_tibble <- function(x) {
   # Types
   is_1d <- map_lgl(x, is_1d)
   if (any(!is_1d)) {
-    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
+    invalid_df_msg(
+      "must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d,
+      map(x[!is_1d], function(.) friendly_type(type_of(.)))
+    )
   }
 
   x[] <- map(x, strip_dim)

@@ -16,12 +16,12 @@ test_that("can't make tibble containing data.frame or array", {
   )
   expect_error(
     tibble(diag(5)),
-    "Column `diag(5)` must be a 1d atomic vector or a list",
+    "Column `diag(5)` must be a 1d atomic vector or a list, not a matrix",
     fixed = TRUE
   )
   expect_error(
     tibble(mtcars, diag(5)),
-    "Columns `mtcars`, `diag(5)` must be 1d atomic vectors or lists",
+    "Columns `mtcars`, `diag(5)` must be 1d atomic vectors or lists, but:\n* `mtcars` is a data frame\n* `diag(5)` is a matrix",
     fixed = TRUE
   )
 })
