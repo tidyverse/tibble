@@ -9,8 +9,8 @@
 #' functions allow to you detect if a data frame has row names
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
-#' and `column_to_rownames()`). 
-#' Also included is `rowid_to_column()` which 
+#' and `column_to_rownames()`).
+#' Also included is `rowid_to_column()` which
 #' adds a column at the start of the dataframe of ascending sequential row
 #' ids starting at 1. Note that this will remove any existing row names.
 #'
@@ -52,8 +52,9 @@ remove_rownames <- function(df) {
 rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var))
-    stopc("There is a column named ", var, " already!")
+  if (has_name(df, var)) {
+    stopc("Column `", var, "` already exists")
+  }
 
   new_df <- add_column(df, !!(var) := rownames(df), .before = 1)
   new_df
@@ -64,8 +65,9 @@ rownames_to_column <- function(df, var = "rowname") {
 rowid_to_column <- function(df, var = "rowid") {
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var))
-    stopc("There is a column named ", var, " already!")
+  if (has_name(df, var)) {
+    stopc("Column `", var, "` already exists")
+  }
 
   new_df <- add_column(df, !!(var) := seq_len(nrow(df)), .before = 1)
   new_df
@@ -76,11 +78,13 @@ rowid_to_column <- function(df, var = "rowid") {
 column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (has_rownames(df))
-    stopc("This data frame already has row names.")
+  if (has_rownames(df)) {
+    stopc("`df` already has row names")
+  }
 
-  if (!has_name(df, var))
-    stopc("This data frame has no column named ", var, ".")
+  if (!has_name(df, var)) {
+    stopc("Column `num2` not found")
+  }
 
   rownames(df) <- df[[var]]
   df[[var]] <- NULL

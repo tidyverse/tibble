@@ -66,7 +66,7 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    stopc("expected at least one column name; e.g. '~name'")
+    stopc("Expected at least one column name; e.g. `~name`")
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (length(frame_rest) == 0L) {
@@ -92,12 +92,15 @@ extract_frame_names_from_dots <- function(dots) {
       break
 
     if (length(el) != 2) {
-      stopc("expected a column name with a single argument; e.g. '~name'")
+      stopc("Expected a column name with a single argument; e.g. `~name`")
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      stopc("expected a symbol or string denoting a column name")
+      stopc(
+        "Expected a symbol or string denoting a column name, not ",
+        friendly_type(type_of(candidate))
+      )
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
@@ -148,7 +151,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
 
 turn_frame_data_into_frame_matrix <- function(names, rest) {
   if (some(rest, needs_list_col)) {
-    stopc("frame_matrix() cannot have list columns")
+    stopc("Can't use list columns in `frame_matrix()`")
   }
 
   frame_ncol <- length(names)
