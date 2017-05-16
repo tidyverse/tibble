@@ -67,5 +67,6 @@ tick_non_syntactic <- function(x) {
 }
 
 tick <- function(x) {
-  paste0("`", gsub("`", "\\\\`", x), "`")
+  x[is.na(x)] <- "NA"
+  encodeString(x, quote = "`")
 }
