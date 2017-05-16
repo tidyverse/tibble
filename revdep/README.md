@@ -10,23 +10,21 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-15                   |
+|date     |2017-05-16                   |
 
 ## Packages
 
 |package        |*  |version    |date       |source                            |
 |:--------------|:--|:----------|:----------|:---------------------------------|
-|assertthat     |   |0.2.0      |2017-04-11 |cran (@0.2.0)                     |
-|covr           |   |2.2.2      |2017-01-05 |cran (@2.2.2)                     |
-|dplyr          |   |0.5.0      |2016-06-24 |cran (@0.5.0)                     |
+|dplyr          |   |0.5.0      |2016-06-24 |CRAN (R 3.4.0)                    |
 |knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                    |
+|lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                     |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                   |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                     |
 |Rcpp           |   |0.12.10    |2017-03-19 |CRAN (R 3.4.0)                    |
-|rlang          |   |0.1        |2017-05-06 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
+|tibble         |   |1.3.0.9010 |2017-05-16 |Github (tidyverse/tibble@f883382) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
@@ -66,7 +64,7 @@
 |doctr             |0.2.0   |      0|        0|     0|
 |docxtractr        |0.2.0   |      0|        0|     0|
 |dotwhisker        |0.2.6   |      0|        0|     0|
-|dplyr             |0.5.0   |      1|        0|     2|
+|dplyr             |0.5.0   |      0|        0|     2|
 |drake             |3.0.0   |      0|        0|     0|
 |easyformatr       |0.1.2   |      0|        0|     0|
 |ecoseries         |0.1.3   |      0|        0|     0|
@@ -78,7 +76,7 @@
 |fbar              |0.1.23  |      0|        0|     0|
 |feather           |0.3.1   |      0|        0|     1|
 |fileplyr          |0.2.0   |      0|        0|     0|
-|filesstrings      |0.4.0   |      1|        0|     0|
+|filesstrings      |0.4.0   |      0|        0|     0|
 |flextable         |0.1.0   |      0|        0|     0|
 |fmbasics          |0.2.0   |      0|        0|     0|
 |foghorn           |0.4.2   |      0|        0|     0|
@@ -105,7 +103,7 @@
 |heemod            |0.9.1   |      0|        0|     0|
 |highcharter       |0.5.0   |      0|        0|     1|
 |HURDAT            |0.1.0   |      0|        0|     0|
-|huxtable          |0.2.2   |      1|        1|     0|
+|huxtable          |0.2.2   |      1|        0|     0|
 |hypoparsr         |0.1.0   |      0|        0|     0|
 |inferr            |0.1.1   |      0|        0|     0|
 |isdparser         |0.2.0   |      0|        0|     0|
@@ -147,7 +145,7 @@
 |rbhl              |0.8.0   |      0|        0|     0|
 |rdefra            |0.3.4   |      0|        0|     0|
 |rdpla             |0.1.0   |      0|        0|     0|
-|readr             |1.1.0   |      1|        0|     1|
+|readr             |1.1.0   |      0|        0|     1|
 |readxl            |1.0.0   |      0|        0|     1|
 |refimpact         |0.1.0   |      0|        0|     0|
 |rerddap           |0.4.2   |      0|        0|     0|
@@ -155,7 +153,7 @@
 |rgbif             |0.9.8   |      0|        0|     0|
 |rgho              |1.0.1   |      0|        0|     0|
 |riem              |0.1.1   |      0|        0|     0|
-|rif               |0.1.0   |      1|        0|     0|
+|rif               |0.2.0   |      0|        0|     0|
 |rio               |0.5.0   |      2|        1|     0|
 |ritis             |0.5.4   |      0|        0|     0|
 |rmarkdown         |1.5     |      0|        0|     1|
@@ -177,10 +175,10 @@
 |tidyquant         |0.5.1   |      0|        0|     1|
 |tidyr             |0.6.3   |      0|        0|     0|
 |tidyverse         |1.1.1   |      0|        0|     0|
-|timekit           |0.2.0   |      0|        0|     0|
+|timekit           |0.2.0   |      0|        1|     0|
 |Tmisc             |0.1.14  |      0|        0|     0|
 |units             |0.4-4   |      0|        0|     0|
-|unpivotr          |0.1.1   |      1|        0|     0|
+|unpivotr          |0.1.1   |      0|        0|     0|
 |valr              |0.2.0   |      0|        0|     1|
 |wand              |0.2.0   |      0|        0|     1|
 |wikitaxa          |0.1.4   |      0|        0|     0|
@@ -403,7 +401,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [12s/12s]
+  Running ‘testthat.R’ [10s/11s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -458,29 +456,9 @@ Bug reports: https://github.com/fsolt/dotwhisker/issues
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/dplyr/issues
 
-1 error  | 0 warnings | 2 notes
+0 errors | 0 warnings | 2 notes
 
 ```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  
-  
-  testthat results ================================================================
-  OK: 1501 SKIPPED: 1 FAILED: 8
-  1. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#139) 
-  2. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#143) 
-  3. Failure: filter uses the white list (#566) (@test-filter.r#193) 
-  4. Failure: ungrouped output (@test-output.R#10) 
-  5. Failure: ungrouped output (@test-output.R#10) 
-  6. Failure: ungrouped output (@test-output.R#10) 
-  7. Failure: ungrouped output (@test-output.R#10) 
-  8. Failure: ungrouped output (@test-output.R#10) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
 checking installed package size ... NOTE
   installed size is 23.4Mb
   sub-directories of 1Mb or more:
@@ -581,29 +559,7 @@ Bug reports: https://github.com/talegari/fileplyr/issues
 Maintainer: Rory Nolan <rorynoolan@gmail.com>  
 Bug reports: https://www.github.com/rorynolan/filesstrings/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Attributes: < Length mismatch: comparison on first 2 components >
-  
-  
-  2. Failure: MergeTablesOnDisk works (@test_files.R#82) -------------------------
-  readr::read_csv("merged.csv") not equal to tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)).
-  Attributes: < Length mismatch: comparison on first 2 components >
-  
-  
-  testthat results ================================================================
-  OK: 141 SKIPPED: 0 FAILED: 2
-  1. Failure: MergeTablesOnDisk works (@test_files.R#80) 
-  2. Failure: MergeTablesOnDisk works (@test_files.R#82) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## flextable (0.1.0)
 Maintainer: David Gohel <david.gohel@ardata.fr>
@@ -805,9 +761,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 15 Mai 2017 19:53
+Invalid timestamp string (length=17): 16 Mai 2017 07:41
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmpE2tY0m/file38806512f5de.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpoSRpAy/file97357e984afe.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -880,37 +836,28 @@ Bug reports: https://github.com/timtrice/HURDAT/issues
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>  
 Bug reports: https://github.com/hughjonesd/huxtable/issues
 
-1 error  | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  5: withVisible(code) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  6: rmarkdown::render("rowheight-multicol-test.Rmd", quiet = TRUE) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
-  7: convert(output_file, run_citeproc) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:655
-  8: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
-         output_format$pandoc$args, !quiet) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/render.R:585
-  9: stop("pandoc document conversion failed with error ", result, call. = FALSE) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/pandoc.R:100
-  
-  testthat results ================================================================
-  OK: 200 SKIPPED: 14 FAILED: 2
-  1. Error: slice, filter and arrange work (@test-dplyr.R#24) 
-  2. Error: Row heights do not screw up latex multicol (@test-with-pandoc.R#20) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Quitting from lines 320-337 (huxtable.Rmd) 
-Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
-is.data.frame(df) is not TRUE
-Execution halted
-
+  21: eval(exprs, env)
+  22: source_file(path, new.env(parent = env), chdir = TRUE)
+  23: force(code)
+  24: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE)        end_context()    })
+  25: FUN(X[[i]], ...)
+  26: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE)
+  27: force(code)
+  28: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE))
+  29: test_files(paths, reporter = reporter, env = env, ...)
+  30: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
+  31: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
+  32: run_tests(package, test_path, filter, reporter, ...)
+  33: test_check("huxtable")
+  An irrecoverable exception occurred. R is aborting now ...
+  Segmentation fault (core dumped)
 ```
 
 ## hypoparsr (0.1.0)
@@ -1131,7 +1078,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [163s/162s]
+  Running ‘testthat.R’ [24s/24s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -1294,29 +1241,9 @@ Bug reports: https://github.com/ropensci/rdpla/issues
 Maintainer: Jim Hester <james.hester@rstudio.com>  
 Bug reports: https://github.com/tidyverse/readr/issues
 
-1 error  | 0 warnings | 1 note 
+0 errors | 0 warnings | 1 note 
 
 ```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Actual value: "Column `b` must be length 1 or 3, not 2"
-  
-  
-  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
-  error$message does not match "Variables must be length 1 or .*".
-  Actual value: "Column `a` must be length 1 or 2, not 0"
-  
-  
-  testthat results ================================================================
-  OK: 488 SKIPPED: 2 FAILED: 2
-  1. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#151) 
-  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
 checking installed package size ... NOTE
   installed size is 12.5Mb
   sub-directories of 1Mb or more:
@@ -1372,33 +1299,11 @@ Bug reports: http://github.com/ropenscilabs/riem/issues
 
 0 errors | 0 warnings | 0 notes
 
-## rif (0.1.0)
+## rif (0.2.0)
 Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>  
 Bug reports: https://github.com/ropensci/rif/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘test-all.R’ [2s/17s]
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  > library(rif)
-  > 
-  > test_check("rif")
-  1. Failure: literature_retractions (@test-literature_retractions.R#7) ----------
-  length(tt) not equal to 4653.
-  1/1 mismatches
-  [1] 4963 - 4653 == 310
-  
-  
-  testthat results ================================================================
-  OK: 144 SKIPPED: 0 FAILED: 1
-  1. Failure: literature_retractions (@test-literature_retractions.R#7) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## rio (0.5.0)
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>  
@@ -1423,7 +1328,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 15 Mai 2017 20:11
+Invalid timestamp string (length=17): 16 Mai 2017 07:56
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -1558,7 +1463,7 @@ Bug reports: http://www.github.com/ropensci/solrium/issues
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/15m]
+  Running ‘test-all.R’ [0m/107m]
 Running the tests in ‘tests/test-all.R’ failed.
 Complete output:
   > library('testthat')
@@ -1633,7 +1538,32 @@ Bug reports: https://github.com/tidyverse/tidyverse/issues
 Maintainer: Matt Dancho <mdancho@business-science.io>  
 Bug reports: https://github.com/business-science/timekit/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+17: fun(x, options = options)
+18: value_fun(ev$value, ev$visible)
+19: withVisible(value_fun(ev$value, ev$visible))
+20: withCallingHandlers(withVisible(value_fun(ev$value, ev$visible)),     warning = wHandler, error = eHandler, message = mHandler)
+21: handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value,     ev$visible)), warning = wHandler, error = eHandler, message = mHandler))
+22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+... 8 lines ...
+31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
+32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
+33: vweave_rmarkdown(...)
+34: engine$weave(file, quiet = quiet, encoding = enc)
+35: doTryCatch(return(expr), name, parentenv, handler)
+36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+37: tryCatchList(expr, classes, parentenv, handlers)
+38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/timekit.Rcheck/vign_test/timekit")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
+```
 
 ## Tmisc (0.1.14)
 Maintainer: Stephen Turner <vustephen@gmail.com>
@@ -1650,29 +1580,7 @@ Bug reports: https://github.com/edzer/units/issues/
 Maintainer: Duncan Garmonsway <nacnudus@gmail.com>  
 Bug reports: https://github.com/nacnudus/unpivotr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  
-  The following objects are masked from 'package:stats':
-  
-      filter, lag
-  
-  The following objects are masked from 'package:base':
-  
-      intersect, setdiff, setequal, union
-  
-  testthat results ================================================================
-  OK: 119 SKIPPED: 0 FAILED: 1
-  1. Failure: 'cross' works (@test-anchor.R#19) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## valr (0.2.0)
 Maintainer: Jay Hesselberth <jay.hesselberth@gmail.com>  

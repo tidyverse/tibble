@@ -10,13 +10,13 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-15                   |
+|date     |2017-05-16                   |
 
 ## Packages
 
 |package        |*  |version    |date       |source                            |
 |:--------------|:--|:----------|:----------|:---------------------------------|
-|dplyr          |   |0.5.0      |2016-06-24 |cran (@0.5.0)                     |
+|dplyr          |   |0.5.0      |2016-06-24 |CRAN (R 3.4.0)                    |
 |knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                    |
 |lazyeval       |   |0.2.0      |2016-06-12 |cran (@0.2.0)                     |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                   |
@@ -24,12 +24,12 @@
 |Rcpp           |   |0.12.10    |2017-03-19 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
+|tibble         |   |1.3.0.9010 |2017-05-16 |Github (tidyverse/tibble@f883382) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
 
-150 packages
+151 packages
 
 |package           |version | errors| warnings| notes|
 |:-----------------|:-------|------:|--------:|-----:|
@@ -61,7 +61,7 @@
 |datastepr         |0.0.2   |      0|        0|     0|
 |dat               |0.2.0   |      1|        0|     0|
 |DiagrammeR        |0.9.0   |      0|        0|     1|
-|doctr             |0.2.0   |      1|        0|     0|
+|doctr             |0.2.0   |      0|        0|     0|
 |docxtractr        |0.2.0   |      0|        0|     0|
 |dotwhisker        |0.2.6   |      0|        0|     0|
 |dplyr             |0.5.0   |      0|        0|     2|
@@ -102,6 +102,7 @@
 |hddtools          |0.7     |      0|        0|     0|
 |heemod            |0.9.1   |      0|        0|     0|
 |highcharter       |0.5.0   |      0|        0|     1|
+|HURDAT            |0.1.0   |      0|        0|     0|
 |huxtable          |0.2.2   |      1|        0|     0|
 |hypoparsr         |0.1.0   |      0|        0|     0|
 |inferr            |0.1.1   |      0|        0|     0|
@@ -152,7 +153,7 @@
 |rgbif             |0.9.8   |      0|        0|     0|
 |rgho              |1.0.1   |      0|        0|     0|
 |riem              |0.1.1   |      0|        0|     0|
-|rif               |0.1.0   |      1|        1|     0|
+|rif               |0.2.0   |      0|        0|     0|
 |rio               |0.5.0   |      2|        1|     0|
 |ritis             |0.5.4   |      0|        0|     0|
 |rmarkdown         |1.5     |      0|        0|     1|
@@ -172,7 +173,7 @@
 |srvyr             |0.2.1   |      0|        0|     0|
 |taxize            |0.8.4   |      0|        0|     0|
 |tidyquant         |0.5.1   |      0|        0|     1|
-|tidyr             |0.6.2   |      0|        0|     0|
+|tidyr             |0.6.3   |      0|        0|     0|
 |tidyverse         |1.1.1   |      0|        0|     0|
 |timekit           |0.2.0   |      0|        1|     0|
 |Tmisc             |0.1.14  |      0|        0|     0|
@@ -438,29 +439,7 @@ checking installed package size ... NOTE
 ## doctr (0.2.0)
 Maintainer: Caio Lente <me@ctlente.com>
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Conflicts with tidy packages ---------------------------------------------------
-  filter():  dplyr, stats
-  is_null(): purrr, testthat
-  lag():     dplyr, stats
-  matches(): dplyr, testthat
-  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) ---------
-  `len` is not strictly more than `len2`. Difference: 0
-  
-  
-  testthat results ================================================================
-  OK: 46 SKIPPED: 0 FAILED: 1
-  1. Failure: diagnose() results differ based on ci (@test_compare.R#32) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## docxtractr (0.2.0)
 Maintainer: Bob Rudis <bob@rudis.net>
@@ -782,9 +761,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 15 Mai 2017 18:08
+Invalid timestamp string (length=17): 16 Mai 2017 07:41
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmpsaAf2u/file74fb2abab8f4.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpoSRpAy/file97357e984afe.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -846,6 +825,12 @@ checking installed package size ... NOTE
     doc          13.7Mb
     htmlwidgets   1.9Mb
 ```
+
+## HURDAT (0.1.0)
+Maintainer: Tim Trice <tim.trice@gmail.com>  
+Bug reports: https://github.com/timtrice/HURDAT/issues
+
+0 errors | 0 warnings | 0 notes
 
 ## huxtable (0.2.2)
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>  
@@ -1093,7 +1078,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [26s/26s]
+  Running ‘testthat.R’ [24s/24s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -1314,42 +1299,11 @@ Bug reports: http://github.com/ropenscilabs/riem/issues
 
 0 errors | 0 warnings | 0 notes
 
-## rif (0.1.0)
+## rif (0.2.0)
 Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>  
 Bug reports: https://github.com/ropensci/rif/issues
 
-1 error  | 1 warning  | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘test-all.R’ [0m/62m]
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  testthat results ================================================================
-  OK: 0 SKIPPED: 0 FAILED: 22
-  1. Error: federation_data (@test-federation_data.R#4) 
-  2. Error: federation_facet (@test-federation_facet.R#4) 
-  3. Error: federation_search (@test-federation_search.R#4) 
-  4. Error: lexical_chunks (@test-lexical_chunks.R#4) 
-  5. Error: lexical_entities (@test-lexical_entities.R#4) 
-  6. Error: lexical_pmchunks (@test-lexical_pmchunks.R#4) 
-  7. Error: lexical_pmentities (@test-lexical_pmentities.R#4) 
-  8. Error: lexical_pos (@test-lexical_pos.R#4) 
-  9. Error: lexical_sentences (@test-lexical_sentences.R#4) 
-  1. ...
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Quitting from lines 51-53 (rif_vignette.Rmd) 
-Error: processing vignette 'rif_vignette.Rmd' failed with diagnostics:
-Failure when receiving data from the peer
-Execution halted
-
-```
+0 errors | 0 warnings | 0 notes
 
 ## rio (0.5.0)
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>  
@@ -1374,7 +1328,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 15 Mai 2017 18:24
+Invalid timestamp string (length=17): 16 Mai 2017 07:56
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -1509,7 +1463,7 @@ Bug reports: http://www.github.com/ropensci/solrium/issues
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/66m]
+  Running ‘test-all.R’ [0m/107m]
 Running the tests in ‘tests/test-all.R’ failed.
 Complete output:
   > library('testthat')
@@ -1568,7 +1522,7 @@ checking installed package size ... NOTE
     doc   4.5Mb
 ```
 
-## tidyr (0.6.2)
+## tidyr (0.6.3)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/tidyverse/tidyr/issues
 
