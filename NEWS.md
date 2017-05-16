@@ -1,3 +1,8 @@
+### tibble 1.3.0.9010 (2017-05-16)
+
+- String values are now quoted when printing if they contain non-printable characters or quotes (#253).
+
+
 ### tibble 1.3.0.9009 (2017-05-15)
 
 - Improve formatting of error messages (#223).
