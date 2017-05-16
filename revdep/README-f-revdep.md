@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-15                   |
+|date     |2017-05-16                   |
 
 ## Packages
 
@@ -18,7 +18,7 @@
 |:--------------|:--|:----------|:----------|:---------------------------------|
 |assertthat     |   |0.2.0      |2017-04-11 |cran (@0.2.0)                     |
 |covr           |   |2.2.2      |2017-01-05 |cran (@2.2.2)                     |
-|dplyr          |   |0.5.0      |2016-06-24 |cran (@0.5.0)                     |
+|dplyr          |   |0.5.0      |2016-06-24 |CRAN (R 3.4.0)                    |
 |knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                    |
 |microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                   |
 |nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                     |
@@ -26,7 +26,7 @@
 |rlang          |   |0.1        |2017-05-06 |CRAN (R 3.4.0)                    |
 |rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
 |testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
-|tibble         |   |1.3.0.9009 |2017-05-15 |Github (tidyverse/tibble@6719b5d) |
+|tibble         |   |1.3.0.9010 |2017-05-16 |Github (tidyverse/tibble@f883382) |
 |withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
@@ -155,7 +155,7 @@
 |rgbif             |0.9.8   |      0|        0|     0|
 |rgho              |1.0.1   |      0|        0|     0|
 |riem              |0.1.1   |      0|        0|     0|
-|rif               |0.1.0   |      1|        0|     0|
+|rif               |0.2.0   |      0|        0|     0|
 |rio               |0.5.0   |      2|        1|     0|
 |ritis             |0.5.4   |      0|        0|     0|
 |rmarkdown         |1.5     |      0|        0|     1|
@@ -166,13 +166,13 @@
 |sfdct             |0.0.3   |      0|        0|     0|
 |sf                |0.4-3   |      0|        0|     1|
 |sjmisc            |2.4.0   |      0|        0|     0|
-|sjPlot            |2.3.1   |      0|        0|     1|
+|sjPlot            |2.3.1   |      0|        1|     1|
 |sjstats           |0.10.0  |      0|        0|     1|
 |solrium           |0.4.0   |      1|        0|     0|
 |spbabel           |0.4.7   |      0|        0|     0|
 |spdplyr           |0.1.2   |      0|        0|     0|
 |spocc             |0.7.0   |      0|        0|     0|
-|srvyr             |0.2.1   |      0|        0|     0|
+|srvyr             |0.2.1   |      0|        1|     0|
 |taxize            |0.8.4   |      0|        0|     0|
 |tidyquant         |0.5.1   |      0|        0|     1|
 |tidyr             |0.6.3   |      0|        0|     0|
@@ -403,7 +403,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [12s/12s]
+  Running ‘testthat.R’ [12s/11s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -805,9 +805,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 15 Mai 2017 19:53
+Invalid timestamp string (length=17): 16 Mai 2017 10:04
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/RtmpE2tY0m/file38806512f5de.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpCbLIK8/file5bdb37ca500b.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -1131,7 +1131,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [163s/162s]
+  Running ‘testthat.R’ [159s/157s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -1372,33 +1372,11 @@ Bug reports: http://github.com/ropenscilabs/riem/issues
 
 0 errors | 0 warnings | 0 notes
 
-## rif (0.1.0)
+## rif (0.2.0)
 Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>  
 Bug reports: https://github.com/ropensci/rif/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘test-all.R’ [2s/17s]
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-  > library(rif)
-  > 
-  > test_check("rif")
-  1. Failure: literature_retractions (@test-literature_retractions.R#7) ----------
-  length(tt) not equal to 4653.
-  1/1 mismatches
-  [1] 4963 - 4653 == 310
-  
-  
-  testthat results ================================================================
-  OK: 144 SKIPPED: 0 FAILED: 1
-  1. Failure: literature_retractions (@test-literature_retractions.R#7) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## rio (0.5.0)
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>  
@@ -1423,7 +1401,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 15 Mai 2017 20:11
+Invalid timestamp string (length=17): 16 Mai 2017 10:22
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -1532,9 +1510,32 @@ Bug reports: https://github.com/strengejacke/sjmisc/issues
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>  
 Bug reports: https://github.com/sjPlot/devel/issues
 
-0 errors | 0 warnings | 1 note 
+0 errors | 1 warning  | 1 note 
 
 ```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+17: eval(expr, envir, enclos)
+18: withVisible(eval(expr, envir, enclos))
+19: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHandler,     error = eHandler, message = mHandler)
+20: handle(ev <- withCallingHandlers(withVisible(eval(expr, envir,     enclos)), warning = wHandler, error = eHandler, message = mHandler))
+21: timing_fn(handle(ev <- withCallingHandlers(withVisible(eval(expr,     envir, enclos)), warning = wHandler, error = eHandler, message = mHandler)))
+22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+... 8 lines ...
+31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
+32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
+33: vweave_rmarkdown(...)
+34: engine$weave(file, quiet = quiet, encoding = enc)
+35: doTryCatch(return(expr), name, parentenv, handler)
+36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+37: tryCatchList(expr, classes, parentenv, handlers)
+38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/sjPlot.Rcheck/vign_test/sjPlot")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
+
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘plm’
 ```
@@ -1558,7 +1559,7 @@ Bug reports: http://www.github.com/ropensci/solrium/issues
 
 ```
 checking tests ... ERROR
-  Running ‘test-all.R’ [0m/15m]
+  Running ‘test-all.R’ [0m/34m]
 Running the tests in ‘tests/test-all.R’ failed.
 Complete output:
   > library('testthat')
@@ -1596,7 +1597,32 @@ Bug reports: https://github.com/ropensci/spocc/issues
 Maintainer: Greg Freedman Ellis <greg.freedman@gmail.com>  
 Bug reports: https://github.com/gergness/srvyr/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+17: fun(x, options = options)
+18: value_fun(ev$value, ev$visible)
+19: withVisible(value_fun(ev$value, ev$visible))
+20: withCallingHandlers(withVisible(value_fun(ev$value, ev$visible)),     warning = wHandler, error = eHandler, message = mHandler)
+21: handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value,     ev$visible)), warning = wHandler, error = eHandler, message = mHandler))
+22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+... 8 lines ...
+31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
+32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
+33: vweave_rmarkdown(...)
+34: engine$weave(file, quiet = quiet, encoding = enc)
+35: doTryCatch(return(expr), name, parentenv, handler)
+36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+37: tryCatchList(expr, classes, parentenv, handlers)
+38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/srvyr.Rcheck/vign_test/srvyr")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
+```
 
 ## taxize (0.8.4)
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
