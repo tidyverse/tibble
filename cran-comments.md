@@ -5,11 +5,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 note
-
-- about the MIT license
-
-- about unrecognized role "fnd" (funder)
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 

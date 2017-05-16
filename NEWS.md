@@ -26,7 +26,7 @@
 - Using `rlang` instead of `lazyeval` (#225, @lionel-), and `rlang` functions (#244).
 - `tribble()` now handles values that have a class (#237, @NikNakk).
 - Minor efficiency gains by replacing `any(is.na())` with `anyNA()` (#229, @csgillespie).
-- The `microbenchmark` package is now used conditionaly (#245).
+- The `microbenchmark` package is now used conditionally (#245).
 - `pkgdown` website.
 
 
