@@ -8,4 +8,4 @@ Error in system("convert --version", intern = TRUE, ignore.stderr = TRUE) :
   error in running command
 Error : unable to load R code in package ‘gridGraphics’
 ERROR: lazy loading failed for package ‘gridGraphics’
-* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.3/gridGraphics’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/gridGraphics’
