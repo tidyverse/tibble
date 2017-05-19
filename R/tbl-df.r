@@ -23,9 +23,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @rdname formatting
 #' @export
-print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  NextMethod()
-}
+print.tbl_df <- print.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
