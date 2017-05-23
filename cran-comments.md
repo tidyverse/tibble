@@ -5,9 +5,7 @@
 
 ## R CMD check results
 
-0 errors | 1 warning | 1 note
-
-- A spurious warning about a graphic included from the README via img.shields.io
+0 errors | 0 warnings | 1 note
 
 - A note that it's been six days since the last update (apologies!)
 
