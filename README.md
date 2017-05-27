@@ -3,7 +3,7 @@
 tibble <img src="man/figures/logo.png" align="right" />
 =======================================================
 
-[![Build Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/tibble) [![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/tibble/master.svg)](https://codecov.io/github/tidyverse/tibble?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
+[![Build Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/tibble) [![codecov](https://codecov.io/gh/krlmlr/bindrcpp/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/bindrcpp) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 
 Overview
 --------
@@ -35,18 +35,18 @@ Create a tibble from an existing object with `as_tibble()`:
 ``` r
 library(tibble)
 as_tibble(iris)
-#> # A tibble: 150 × 5
+#> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
-#> 1           5.1         3.5          1.4         0.2  setosa
-#> 2           4.9         3.0          1.4         0.2  setosa
-#> 3           4.7         3.2          1.3         0.2  setosa
-#> 4           4.6         3.1          1.5         0.2  setosa
-#> 5           5.0         3.6          1.4         0.2  setosa
-#> 6           5.4         3.9          1.7         0.4  setosa
-#> 7           4.6         3.4          1.4         0.3  setosa
-#> 8           5.0         3.4          1.5         0.2  setosa
-#> 9           4.4         2.9          1.4         0.2  setosa
+#>  1          5.1         3.5          1.4         0.2  setosa
+#>  2          4.9         3.0          1.4         0.2  setosa
+#>  3          4.7         3.2          1.3         0.2  setosa
+#>  4          4.6         3.1          1.5         0.2  setosa
+#>  5          5.0         3.6          1.4         0.2  setosa
+#>  6          5.4         3.9          1.7         0.4  setosa
+#>  7          4.6         3.4          1.4         0.3  setosa
+#>  8          5.0         3.4          1.5         0.2  setosa
+#>  9          4.4         2.9          1.4         0.2  setosa
 #> 10          4.9         3.1          1.5         0.1  setosa
 #> # ... with 140 more rows
 ```
@@ -57,7 +57,7 @@ You can also create a new tibble from column vectors with `tibble()`:
 
 ``` r
 tibble(x = 1:5, y = 1, z = x ^ 2 + y)
-#> # A tibble: 5 × 3
+#> # A tibble: 5 x 3
 #>       x     y     z
 #>   <int> <dbl> <dbl>
 #> 1     1     1     2
@@ -77,7 +77,7 @@ tribble(
   "a", 2,  3.6,
   "b", 1,  8.5
 )
-#> # A tibble: 2 × 3
+#> # A tibble: 2 x 3
 #>       x     y     z
 #>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
