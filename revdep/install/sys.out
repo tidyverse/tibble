@@ -1,0 +1,11 @@
+* installing *source* package ‘sys’ ...
+** package ‘sys’ successfully unpacked and MD5 sums checked
+Building with AppArmor (Linux)
+Using PKG_CFLAGS=
+Using PKG_LIBS=-lapparmor
+On Debian/Ubuntu this package requires AppArmor.
+Please run: sudo apt-get install libapparmor-dev
+To build without AppArmor support, set NO_APPARMOR=1 for example:
+install.packages('sys', configure.vars = 'NO_APPARMOR=1')
+ERROR: configuration failed for package ‘sys’
+* removing ‘/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/sys’
