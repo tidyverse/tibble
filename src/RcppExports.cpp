@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // matrixToDataFrame
 List matrixToDataFrame(SEXP x);
-RcppExport SEXP tibble_matrixToDataFrame(SEXP xSEXP) {
+RcppExport SEXP _tibble_matrixToDataFrame(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"tibble_matrixToDataFrame", (DL_FUNC) &tibble_matrixToDataFrame, 1},
+    {"_tibble_matrixToDataFrame", (DL_FUNC) &_tibble_matrixToDataFrame, 1},
     {NULL, NULL, 0}
 };
 
