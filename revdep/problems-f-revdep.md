@@ -10,44 +10,66 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-05-27                   |
+|date     |2017-05-16                   |
 
 ## Packages
 
-|package        |*  |version |date       |source                           |
-|:--------------|:--|:-------|:----------|:--------------------------------|
-|covr           |   |2.2.2   |2017-01-05 |cran (@2.2.2)                    |
-|dplyr          |   |0.5.0   |2016-06-24 |CRAN (R 3.4.0)                   |
-|knitr          |   |1.16    |2017-05-18 |cran (@1.16)                     |
-|microbenchmark |   |1.4-2.1 |2015-11-25 |cran (@1.4-2.1)                  |
-|nycflights13   |   |0.2.2   |2017-01-27 |cran (@0.2.2)                    |
-|Rcpp           |   |0.12.11 |2017-05-22 |cran (@0.12.11)                  |
-|rlang          |   |0.1.1   |2017-05-18 |Github (tidyverse/rlang@684221a) |
-|rmarkdown      |   |1.5     |2017-04-26 |cran (@1.5)                      |
-|testthat       |   |1.0.2   |2016-04-23 |cran (@1.0.2)                    |
-|tibble         |   |1.3.2   |2017-05-27 |local                            |
-|withr          |   |1.0.2   |2016-06-20 |CRAN (R 3.4.0)                   |
+|package        |*  |version    |date       |source                            |
+|:--------------|:--|:----------|:----------|:---------------------------------|
+|assertthat     |   |0.2.0      |2017-04-11 |cran (@0.2.0)                     |
+|covr           |   |2.2.2      |2017-01-05 |cran (@2.2.2)                     |
+|dplyr          |   |0.5.0      |2016-06-24 |CRAN (R 3.4.0)                    |
+|knitr          |   |1.15.1     |2016-11-22 |cran (@1.15.1)                    |
+|microbenchmark |   |1.4-2.1    |2015-11-25 |cran (@1.4-2.1)                   |
+|nycflights13   |   |0.2.2      |2017-01-27 |cran (@0.2.2)                     |
+|Rcpp           |   |0.12.10    |2017-03-19 |CRAN (R 3.4.0)                    |
+|rlang          |   |0.1        |2017-05-06 |CRAN (R 3.4.0)                    |
+|rmarkdown      |   |1.5        |2017-04-26 |cran (@1.5)                       |
+|testthat       |   |1.0.2      |2016-04-23 |cran (@1.0.2)                     |
+|tibble         |   |1.3.0.9010 |2017-05-16 |Github (tidyverse/tibble@f883382) |
+|withr          |   |1.0.2      |2016-06-20 |CRAN (R 3.4.0)                    |
 
 # Check results
 
-14 packages with problems
+16 packages with problems
 
-|package      |version | errors| warnings| notes|
-|:------------|:-------|------:|--------:|-----:|
-|dat          |0.2.0   |      1|        0|     0|
-|dplyr        |0.5.0   |      1|        0|     2|
-|filesstrings |0.4.0   |      1|        0|     0|
-|ggimage      |0.0.4   |      1|        0|     0|
-|haven        |1.0.0   |      2|        0|     2|
-|huxtable     |0.3.0   |      1|        0|     0|
-|officer      |0.1.3   |      2|        1|     0|
-|olsrr        |0.1.0   |      0|        1|     0|
-|radiant.data |0.8.1   |      1|        0|     0|
-|readtext     |0.50    |      1|        0|     0|
-|rio          |0.5.0   |      2|        1|     0|
-|tidyquant    |0.5.1   |      2|        1|     1|
-|timekit      |0.3.0   |      1|        1|     0|
-|unpivotr     |0.1.1   |      1|        0|     0|
+|package       |version | errors| warnings| notes|
+|:-------------|:-------|------:|--------:|-----:|
+|atlantistools |0.4.1   |      0|        1|     1|
+|dat           |0.2.0   |      1|        0|     0|
+|dplyr         |0.5.0   |      1|        0|     2|
+|filesstrings  |0.4.0   |      1|        0|     0|
+|FSelectorRcpp |0.1.3   |      1|        0|     2|
+|ggimage       |0.0.4   |      1|        0|     0|
+|haven         |1.0.0   |      2|        0|     2|
+|huxtable      |0.2.2   |      1|        1|     0|
+|monkeylearn   |0.1.1   |      0|        1|     0|
+|officer       |0.1.3   |      2|        1|     0|
+|readr         |1.1.0   |      1|        0|     1|
+|rio           |0.5.0   |      2|        1|     0|
+|sjPlot        |2.3.1   |      0|        1|     1|
+|solrium       |0.4.0   |      1|        0|     0|
+|srvyr         |0.2.1   |      0|        1|     0|
+|unpivotr      |0.1.1   |      1|        0|     0|
+
+## atlantistools (0.4.1)
+Maintainer: Alexander Keth <alexander.keth@uni-hamburg.de>  
+Bug reports: https://github.com/alketh/atlantistools/issues
+
+0 errors | 1 warning  | 1 note 
+
+```
+checking sizes of PDF files under ‘inst/doc’ ... WARNING
+  ‘gs+qpdf’ made some significant size reductions:
+     compacted ‘model-calibration.pdf’ from 766Kb to 493Kb
+  consider running tools::compactPDF(gs_quality = "ebook") on these files
+
+checking installed package size ... NOTE
+  installed size is  5.6Mb
+  sub-directories of 1Mb or more:
+    doc       1.5Mb
+    extdata   3.0Mb
+```
 
 ## dat (0.2.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -57,7 +79,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [12s/18s]
+  Running ‘testthat.R’ [12s/11s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -85,29 +107,29 @@ Bug reports: https://github.com/hadley/dplyr/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [8s/13s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  
+  
   testthat results ================================================================
-  OK: 1499 SKIPPED: 1 FAILED: 10
-  1.  Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#139) 
-  2.  Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#143) 
-  3.  Failure: filter uses the white list (#566) (@test-filter.r#193) 
-  4.  Failure: ungrouped output (@test-output.R#10) 
-  5.  Failure: ungrouped output (@test-output.R#10) 
-  6.  Failure: ungrouped output (@test-output.R#10) 
-  7.  Failure: ungrouped output (@test-output.R#10) 
-  8.  Failure: ungrouped output (@test-output.R#10) 
-  9.  Failure: summarise gives proper errors (#153) (@test-summarise.r#61) 
-  10. Failure: summarise gives proper errors (#153) (@test-summarise.r#62) 
+  OK: 1501 SKIPPED: 1 FAILED: 8
+  1. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#139) 
+  2. Failure: duplicated column name is explicit about which column (#996) (@test-arrange.r#143) 
+  3. Failure: filter uses the white list (#566) (@test-filter.r#193) 
+  4. Failure: ungrouped output (@test-output.R#10) 
+  5. Failure: ungrouped output (@test-output.R#10) 
+  6. Failure: ungrouped output (@test-output.R#10) 
+  7. Failure: ungrouped output (@test-output.R#10) 
+  8. Failure: ungrouped output (@test-output.R#10) 
   
   Error: testthat unit tests failed
   Execution halted
 
 checking installed package size ... NOTE
-  installed size is 23.9Mb
+  installed size is 23.4Mb
   sub-directories of 1Mb or more:
-    libs  21.8Mb
+    libs  21.3Mb
 
 checking compiled code ... NOTE
 File ‘dplyr/libs/dplyr.so’:
@@ -145,6 +167,43 @@ Last 13 lines of output:
   
   Error: testthat unit tests failed
   Execution halted
+```
+
+## FSelectorRcpp (0.1.3)
+Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>  
+Bug reports: https://github.com/mi2-warsaw/FSelectorRcpp/issues
+
+1 error  | 0 warnings | 2 notes
+
+```
+checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  The following objects are masked from 'package:base':
+  
+      intersect, setdiff, setequal, union
+  
+  > library(entropy)
+  
+  Attaching package: 'entropy'
+  
+  The following object is masked from 'package:FSelectorRcpp':
+  
+      discretize
+  
+  > 
+  > test_check("FSelectorRcpp")
+  Segmentation fault (core dumped)
+
+checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘RTCGA.rnaseq’
+
+checking installed package size ... NOTE
+  installed size is  9.6Mb
+  sub-directories of 1Mb or more:
+    doc    2.2Mb
+    libs   7.2Mb
 ```
 
 ## ggimage (0.0.4)
@@ -185,9 +244,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 27 Mai 2017 22:54
+Invalid timestamp string (length=17): 16 Mai 2017 10:04
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/Rtmpu5IV2u/filecfc063e3e269.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/RtmpCbLIK8/file5bdb37ca500b.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -224,18 +283,17 @@ search.
 See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
 ```
 
-## huxtable (0.3.0)
+## huxtable (0.2.2)
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>  
 Bug reports: https://github.com/hughjonesd/huxtable/issues
 
-1 error  | 0 warnings | 0 notes
+1 error  | 1 warning  | 0 notes
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [10s/16s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-         message = handle_message)) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
   4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
   5: withVisible(code) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
   6: rmarkdown::render("rowheight-multicol-test.Rmd", quiet = TRUE) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
@@ -245,11 +303,39 @@ Last 13 lines of output:
   9: stop("pandoc document conversion failed with error ", result, call. = FALSE) at /tmp/Rtmp2UybSq/devtoolsc0a2aa8de4c/rmarkdown/R/pandoc.R:100
   
   testthat results ================================================================
-  OK: 208 SKIPPED: 14 FAILED: 1
-  1. Error: Row heights do not screw up latex multicol (@test-with-pandoc.R#20) 
+  OK: 200 SKIPPED: 14 FAILED: 2
+  1. Error: slice, filter and arrange work (@test-dplyr.R#24) 
+  2. Error: Row heights do not screw up latex multicol (@test-with-pandoc.R#20) 
   
   Error: testthat unit tests failed
   Execution halted
+
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Quitting from lines 320-337 (huxtable.Rmd) 
+Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
+is.data.frame(df) is not TRUE
+Execution halted
+
+```
+
+## monkeylearn (0.1.1)
+Maintainer: Maëlle Salmon <maelle.salmon@yahoo.se>  
+Bug reports: http://github.com/ropenscilabs/monkeylearn/issues
+
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+pandoc: Could not fetch http://ropensci.org/public_images/github_footer.png
+TlsExceptionHostPort (HandshakeFailed Error_EOF) "ropensci.org" 80
+Error: processing vignette 'monkeylearn_intro.Rmd' failed with diagnostics:
+pandoc document conversion failed with error 67
+Execution halted
+
 ```
 
 ## officer (0.1.3)
@@ -279,7 +365,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [173s/263s]
+  Running ‘testthat.R’ [159s/157s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -319,80 +405,37 @@ Execution halted
 
 ```
 
-## olsrr (0.1.0)
-Maintainer: Aravind Hebbali <hebbali.aravind@gmail.com>  
-Bug reports: https://github.com/rsquaredacademy/olsrr/issues
+## readr (1.1.0)
+Maintainer: Jim Hester <james.hester@rstudio.com>  
+Bug reports: https://github.com/tidyverse/readr/issues
 
-0 errors | 1 warning  | 0 notes
-
-```
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-17: eval(expr, envir, enclos)
-18: withVisible(eval(expr, envir, enclos))
-19: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHandler,     error = eHandler, message = mHandler)
-20: handle(ev <- withCallingHandlers(withVisible(eval(expr, envir,     enclos)), warning = wHandler, error = eHandler, message = mHandler))
-21: timing_fn(handle(ev <- withCallingHandlers(withVisible(eval(expr,     envir, enclos)), warning = wHandler, error = eHandler, message = mHandler)))
-22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
-23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
-... 8 lines ...
-31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
-32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
-33: vweave_rmarkdown(...)
-34: engine$weave(file, quiet = quiet, encoding = enc)
-35: doTryCatch(return(expr), name, parentenv, handler)
-36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-37: tryCatchList(expr, classes, parentenv, handlers)
-38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
-39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/olsrr.Rcheck/vign_test/olsrr")
-An irrecoverable exception occurred. R is aborting now ...
-Segmentation fault (core dumped)
-```
-
-## radiant.data (0.8.1)
-Maintainer: Vincent Nijs <radiant@rady.ucsd.edu>  
-Bug reports: https://github.com/radiant-rstats/radiant.data/issues
-
-1 error  | 0 warnings | 0 notes
+1 error  | 0 warnings | 1 note 
 
 ```
-checking examples ... ERROR
-Running examples in ‘radiant.data-Ex.R’ failed
-The error most likely occurred in:
+checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  Actual value: "Column `b` must be length 1 or 3, not 2"
+  
+  
+  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
+  error$message does not match "Variables must be length 1 or .*".
+  Actual value: "Column `a` must be length 1 or 2, not 0"
+  
+  
+  testthat results ================================================================
+  OK: 488 SKIPPED: 2 FAILED: 2
+  1. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#151) 
+  2. Failure: fwf_cols throws error when arguments are not length 1 or 2 (@test-read-fwf.R#152) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: plot.pivotr
-> ### Title: Plot method for the pivotr function
-> ### Aliases: plot.pivotr
-> 
-> ### ** Examples
-... 11 lines ...
- 4: f(..., self = self)
- 5: self$position$compute_layer(data, params, layout)
- 6: f(..., self = self)
- 7: l$compute_position(d, layout)
- 8: f(l = layers[[i]], d = data[[i]])
- 9: by_layer(function(l, d) l$compute_position(d, layout))
-10: ggplot_build(x)
-11: print.ggplot(x)
-12: function (x, ...) UseMethod("print")(x)
-An irrecoverable exception occurred. R is aborting now ...
-Segmentation fault (core dumped)
-```
-
-## readtext (0.50)
-Maintainer: Kenneth Benoit <kbenoit@lse.ac.uk>  
-Bug reports: https://github.com/kbenoit/readtext/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘antiword’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+checking installed package size ... NOTE
+  installed size is 12.5Mb
+  sub-directories of 1Mb or more:
+    libs  11.8Mb
 ```
 
 ## rio (0.5.0)
@@ -418,14 +461,14 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 27 Mai 2017 23:23
+Invalid timestamp string (length=17): 16 Mai 2017 10:22
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
 checking tests ... ERROR
-  Running ‘test-all.R’ [8s/14s]
+  Running ‘test-all.R’
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   
@@ -454,112 +497,71 @@ Execution halted
 
 ```
 
-## tidyquant (0.5.1)
-Maintainer: Matt Dancho <mdancho@business-science.io>  
-Bug reports: https://github.com/business-science/tidyquant/issues
+## sjPlot (2.3.1)
+Maintainer: Daniel Lüdecke <d.luedecke@uke.de>  
+Bug reports: https://github.com/sjPlot/devel/issues
 
-2 errors | 1 warning  | 1 note 
+0 errors | 1 warning  | 1 note 
 
 ```
-checking examples ... ERROR
-Running examples in ‘tidyquant-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: as_tibble
-> ### Title: Coerce to tibble. Enable preserving row names when coercing
-> ###   matrix and time-series-like objects with row names.
-> ### Aliases: as_tibble
-> 
-... 22 lines ...
-
- This message is shown once per session and may be disabled by setting 
- options("getSymbols.warning4.0"=FALSE). See ?getSymbols for more details.
-Warning in if (as.character(sc[[1]]) != calling.fun) return() :
-  the condition has length > 1 and only the first element will be used
-Warning in download.file(paste(yahoo.URL, "s=", Symbols.name, "&a=", from.m,  :
-  cannot open URL 'https://ichart.finance.yahoo.com/table.csv?s=AAPL&a=0&b=01&c=2007&d=4&e=27&f=2017&g=d&q=q&y=0&z=AAPL&x=.csv': HTTP status was '404 Not Found'
-Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&a=", from.m,  : 
-  cannot open URL 'https://ichart.finance.yahoo.com/table.csv?s=AAPL&a=0&b=01&c=2007&d=4&e=27&f=2017&g=d&q=q&y=0&z=AAPL&x=.csv'
-Calls: %>% ... <Anonymous> -> do.call -> getSymbols.yahoo -> download.file
-Execution halted
-
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-      As of 0.4-0, 'getSymbols' uses env=parent.frame() and
-   auto.assign=TRUE by default.
-  
-   This  behavior  will be  phased out in 0.5-0  when the call  will
-   default to use auto.assign=FALSE. getOption("getSymbols.env") and 
-   getOptions("getSymbols.auto.assign") are now checked for alternate defaults
-  
-   This message is shown once per session and may be disabled by setting 
-   options("getSymbols.warning4.0"=FALSE). See ?getSymbols for more details.
-  Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&a=", from.m,  : 
-    cannot open URL 'https://ichart.finance.yahoo.com/table.csv?s=AAPL&a=0&b=01&c=2007&d=4&e=27&f=2017&g=d&q=q&y=0&z=AAPL&x=.csv'
-  Calls: test_check ... with_reporter -> force -> source_file -> eval -> eval
-  testthat results ================================================================
-  OK: 0 SKIPPED: 0 FAILED: 0
-  Execution halted
-
 checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
-The following object is masked from 'package:tibble':
-
-    as_tibble
-
-Getting data...
-
-Warning in value[[3L]](cond) :
+17: eval(expr, envir, enclos)
+18: withVisible(eval(expr, envir, enclos))
+19: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHandler,     error = eHandler, message = mHandler)
+20: handle(ev <- withCallingHandlers(withVisible(eval(expr, envir,     enclos)), warning = wHandler, error = eHandler, message = mHandler))
+21: timing_fn(handle(ev <- withCallingHandlers(withVisible(eval(expr,     envir, enclos)), warning = wHandler, error = eHandler, message = mHandler)))
+22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
 ... 8 lines ...
-Warning: x = 'AAPL', get = 'splits': Error in download.file(paste(yahoo.URL, Symbol.name, "&a=", from.m, "&b=", : cannot open URL 'https://ichart.finance.yahoo.com/x?s=AAPL&a=0&b=01&c=1990&d=4&e=27&f=2017&g=v&y=0&z=30000'
+31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
+32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
+33: vweave_rmarkdown(...)
+34: engine$weave(file, quiet = quiet, encoding = enc)
+35: doTryCatch(return(expr), name, parentenv, handler)
+36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+37: tryCatchList(expr, classes, parentenv, handlers)
+38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/sjPlot.Rcheck/vign_test/sjPlot")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
 
-additional arguments ignored in warning()
-Warning: x = 'AAPL', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&a=", from.m, : cannot open URL 'https://ichart.finance.yahoo.com/table.csv?s=AAPL&a=4&b=27&c=2005&d=4&e=27&f=2017&g=d&q=q&y=0&z=AAPL&x=.csv'
-
-Warning: x = 'AAPL', get = 'key.ratios': Error in value[[3L]](cond): object 'key_ratios' not found
-
-Quitting from lines 176-179 (TQ01-core-functions-in-tidyquant.Rmd) 
-Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-no applicable method for 'filter_' applied to an object of class "logical"
-Execution halted
-
-checking installed package size ... NOTE
-  installed size is  5.2Mb
-  sub-directories of 1Mb or more:
-    doc   4.5Mb
+checking Rd cross-references ... NOTE
+Package unavailable to check Rd xrefs: ‘plm’
 ```
 
-## timekit (0.3.0)
-Maintainer: Matt Dancho <mdancho@business-science.io>  
-Bug reports: https://github.com/business-science/timekit/issues
+## solrium (0.4.0)
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>  
+Bug reports: http://www.github.com/ropensci/solrium/issues
 
-1 error  | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-      as_tibble
+  Running ‘test-all.R’ [0m/34m]
+Running the tests in ‘tests/test-all.R’ failed.
+Complete output:
+  > library('testthat')
+  > test_check('solrium')
+  Loading required package: solrium
   
-  Error in xts::xts(data, ...) : 
-    order.by requires an appropriate time-based object
-  Calls: test_check ... tk_xts -> tk_xts_ -> tk_xts_.default -> <Anonymous>
-  In addition: Warning messages:
-  1: x = 'AAPL', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&a=", from.m, : cannot open URL 'https://ichart.finance.yahoo.com/table.csv?s=AAPL&a=0&b=01&c=2015&d=11&e=31&f=2016&g=d&q=q&y=0&z=AAPL&x=.csv'
-   
-  2: In tk_xts_.default(data = data, select = select, date_var = date_var,  :
-    `select` is only applicable to data.frame and tibble objects.
-  3: In tk_xts_.default(data = data, select = select, date_var = date_var,  :
-    `date_var` is only applicable to data.frame and tibble objects.
-  testthat results ================================================================
-  OK: 39 SKIPPED: 0 FAILED: 0
-  Execution halted
+  Attaching package: 'solrium'
+  
+  The following object is masked from 'package:stats':
+  
+      optimize
+  
+  Terminated
+```
 
+## srvyr (0.2.1)
+Maintainer: Greg Freedman Ellis <greg.freedman@gmail.com>  
+Bug reports: https://github.com/gergness/srvyr/issues
+
+0 errors | 1 warning  | 0 notes
+
+```
 checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
@@ -579,7 +581,7 @@ Error in re-building vignettes:
 36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
 37: tryCatchList(expr, classes, parentenv, handlers)
 38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
-39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/timekit.Rcheck/vign_test/timekit")
+39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/srvyr.Rcheck/vign_test/srvyr")
 An irrecoverable exception occurred. R is aborting now ...
 Segmentation fault (core dumped)
 ```
