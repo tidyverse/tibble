@@ -43,6 +43,10 @@ test_that("glimpse output matches known output", {
     "glimpse/iris-empty-70.txt")
 
   expect_output_file_rel(
+    glimpse(tibble("mean(x)" = 5, "var(x)" = 3), width = 28),
+    "glimpse/non-syntactic.txt")
+
+  expect_output_file_rel(
     glimpse(as_tibble(df_all), width = 70L),
     "glimpse/all-70.txt")
 
