@@ -1,5 +1,5 @@
-# A tibble: 2 x 1
-   `\n`
-  <chr>
-1  "\n"
-2  "\""
+# A tibble: 2 x 2
+   `\n`   `\r`
+  <chr> <fctr>
+1  "\n"   "\n"
+2  "\""   "\""
