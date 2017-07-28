@@ -1,3 +1,11 @@
+### tibble 1.3.3.9001 (2017-07-28)
+
+- Escape factor levels when printing (#277).
+- Adding columns to zero-row data frames now also works when mixing lengths 1 and 0 in the new columns (#167).
+- Non-syntactic names are now also escaped in `glimpse()` (#280).
+- The `validate` argument is now also supported in `as_tibble.tbl_df()`, with default to `FALSE` (#278).
+
+
 # tibble 1.3.3 (2017-05-27)
 
 ## Bug fixes

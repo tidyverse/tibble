@@ -213,6 +213,18 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 
+test_that("as_tibble() can validate (#278)", {
+  df <- tibble(a = 1, b = 2)
+  names(df) <- c("", NA)
+  expect_error(as_tibble(df), NA)
+  expect_error(
+    as_tibble(df, validate = TRUE),
+    "Columns 1, 2 must be named",
+    fixed = TRUE
+  )
+})
+
+
 test_that("as_data_frame is an alias of as_tibble", {
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })

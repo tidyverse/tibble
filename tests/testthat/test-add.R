@@ -200,6 +200,12 @@ test_that("can recyle when adding multiple columns of length 1", {
   expect_identical(df_new, tibble(a = 1:3, b = rep(4, 3), c = rep(5, 3)))
 })
 
+test_that("can recyle for zero-row data frame (#167)", {
+  df <- tibble(a = 1:3)[0, ]
+  df_new <- add_column(df, b = 4, c = character())
+  expect_identical(df_new, tibble(a = integer(), b = numeric(), c = character()))
+})
+
 test_that("can add as first column via .before = 1", {
   df <- tibble(a = 3L)
   df_new <- add_column(df, b = 2L, .before = 1)
