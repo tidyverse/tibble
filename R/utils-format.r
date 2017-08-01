@@ -34,7 +34,8 @@ NULL
 #' @export
 #' @rdname formatting
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
-  rows <- nrow(x)
+  # some packages may override `dim` in ways that make `nrow` expensive
+  rows <- if ("data.frame" %in% class(x)) nrow(x) else NA
 
   if (is_null(n)) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
