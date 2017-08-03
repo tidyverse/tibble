@@ -100,7 +100,13 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ...) {
-  matrixToDataFrame(x)
+  rownames <- dimnames(x)[[1]]
+
+  x <- matrixToDataFrame(x)
+
+  if (!is.null(rownames)) attr(x, "row.names") <- rownames
+
+  x
 }
 
 #' @export
