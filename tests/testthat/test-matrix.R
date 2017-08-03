@@ -15,6 +15,14 @@ test_that("preserves col names", {
   expect_equal(names(out), c("a", "b"))
 })
 
+test_that("preserves row names", {
+  x <- matrix(1:4, nrow = 2)
+  rownames(x) <- c("a", "b")
+
+  out <- as_tibble(x)
+  expect_equal(rownames(out), c("a", "b"))
+})
+
 test_that("creates col names", {
   x <- matrix(1:4, nrow = 2)
 
