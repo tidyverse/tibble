@@ -299,7 +299,7 @@ test_that("columns must be named (#1101)", {
 
 test_that("names must be unique (#820)", {
   expect_error(
-    check_tibble(list(x = 1, x = 2)),
+    check_tibble(list(x = 1, x = 2, y = 3)),
     "Column `x` must have a unique name",
     fixed = TRUE
   )

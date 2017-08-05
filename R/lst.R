@@ -26,7 +26,8 @@ lst <- function(...) {
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    res <- eval_tidy(xs[[i]], output)
+    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
+    res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
       output[[i]] <-  res
     }
