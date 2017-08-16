@@ -148,19 +148,23 @@ format_footer_rows <- function(x) {
 format_footer_cols <- function(x, extra_cols) {
   if (length(extra_cols) == 0) return(NULL)
 
-  if (x$n_extra > 0) {
-    if (x$n_extra < length(extra_cols)) {
-      extra_cols <- c(extra_cols[seq_len(x$n_extra)], "...")
-    }
-    vars <- paste0(": ", collapse(extra_cols))
-  } else {
-    vars <- ""
-  }
+  vars <- format_extra_vars(extra_cols, x$n_extra)
   paste0(
     big_mark(length(extra_cols)), " ",
     if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
     pluralise("variable(s)", extra_cols), vars
   )
+}
+
+format_extra_vars <- function(extra_cols, n_extra) {
+  if (n_extra > 0) {
+    if (n_extra < length(extra_cols)) {
+      extra_cols <- c(extra_cols[seq_len(n_extra)], "...")
+    }
+    paste0(": ", collapse(extra_cols))
+  } else {
+    ""
+  }
 }
 
 format_comment <- function(x, width) {
