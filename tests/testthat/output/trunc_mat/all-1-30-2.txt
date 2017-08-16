@@ -2,5 +2,6 @@
       a     b c     d    
   <dbl> <int> <lgl> <chr>
 1  1.00     1 *     a    
-# ... with 3 more variables:
-#   e <fctr>, f <date>, ...
+# ... with 2 more rows, and 3
+#   more variables: e <fctr>,
+#   f <date>, ...

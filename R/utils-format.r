@@ -134,7 +134,7 @@ format_footer <- function(x, mcf_formatted) {
 }
 
 format_footer_rows <- function(x) {
-  if (!is_null(x$table)) {
+  if (length(x$mcf) != 0) {
     if (is.na(x$rows_missing)) {
       "more rows"
     } else if (x$rows_missing > 0) {
