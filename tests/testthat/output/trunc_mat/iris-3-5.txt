@@ -3,21 +3,9 @@
 #   150
 #   x
 #   5
-  Sepal.Length
-         <dbl>
-1          5.1
-2          4.9
-3          4.7
-# ...
-#   with
-#   147
-#   more
-#   rows,
-#   and
-#   4
-#   more
-#   variables:
-#   Sepal.Width <dbl>,
-#   Petal.Length <dbl>,
-#   Petal.Width <dbl>,
-#   Species <fctr>
+ 
+ 
+1
+2
+3
+with 5 more variables: Sepal.Length <dbl>, Sepal.Width <dbl>, Petal.Length <dbl>, Petal.Width <dbl>, Species <fctr>

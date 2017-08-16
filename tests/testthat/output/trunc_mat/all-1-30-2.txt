@@ -1,7 +1,5 @@
 # A tibble: 3 x 9
-      a     b     c     d
+      a     b     c d    
   <dbl> <int> <lgl> <chr>
-1     1     1  TRUE     a
-# ... with 2 more rows, and 5
-#   more variables: e <fctr>,
-#   f <date>, ...
+1  1.00     1     * a    
+with 3 more variables: e <fctr>, f <date>, ...

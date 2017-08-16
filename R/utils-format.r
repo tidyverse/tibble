@@ -46,7 +46,6 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
   df <- as.data.frame(head(x, n))
-  width <- tibble_width(width)
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
   trunc_info <- list(
@@ -61,71 +60,12 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 }
 
 shrink_mat <- function(df, width, rows, n, star) {
-  var_types <- map_chr(df, type_sum)
-
-  if (ncol(df) == 0 || nrow(df) == 0) {
-    return(new_shrunk_mat(NULL, var_types))
-  }
-
   df <- remove_rownames(df)
-  col_names <- tick_non_syntactic(colnames(df))
-  names(var_types) <- col_names
-
-  # Minimum width of each column is 5 "<int>", so we can make a quick first
-  # pass
-  max_cols <- floor(width / 5)
-  extra_wide <- (seq_along(df) > max_cols)
-  df[] <- df[!extra_wide]
-
-  classes <- paste0("<", map_chr(df, type_sum), ">")
-
-  # List columns need special treatment because format() can't be trusted
-  is_list <- map_lgl(df, is.list)
-
-  df[is_list] <- map(df[is_list], function(x) {
-    summary <- obj_sum(x)
-    paste0("<", summary, ">")
-  })
-
-  # Character columns need special treatment because of NA and escapes
-  is_character <- map_lgl(df, is.character)
-  df[is_character] <- map(df[is_character], format_character)
-
-  # Factor columns need special treatment because of NA and escapes
-  is_factor <- map_lgl(df, is.factor)
-  df[is_factor] <- map(df[is_factor], format_factor)
-
-  mat <- format(df, justify = "left")
-  values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
-  names <- c("", col_names)
-
-  # Column needs to be as wide as widest of name, values, and class
-  w <- pmax(
-    pmax(
-      nchar_width(values),
-      nchar_width(names)
-    ),
-    nchar_width(encodeString(c("", classes)))
-  )
-  cumw <- cumsum(w + 1)
-
-  too_wide <- cumw[-1] > width
-  # Always display at least one column
-  if (all(too_wide)) {
-    too_wide[1] <- FALSE
-    df[[1]] <- substr(df[[1]], 1, width)
-  }
-  shrunk <- format(df[, !too_wide, drop = FALSE])
-
-  shrunk <- rbind(" " = classes, shrunk)
-  if (star)
-    rownames(shrunk)[[1]] <- "*"
-  colnames(shrunk) <- col_names[!too_wide]
-
-  if (is.na(rows))
+  if (is.na(rows)) {
     needs_dots <- (nrow(df) >= n)
-  else
+  } else {
     needs_dots <- (rows > n)
+  }
 
   if (needs_dots) {
     rows_missing <- rows - n
@@ -133,16 +73,21 @@ shrink_mat <- function(df, width, rows, n, star) {
     rows_missing <- 0L
   }
 
-  extra_wide[seq_along(too_wide)] <- too_wide
-  new_shrunk_mat(shrunk, var_types[extra_wide], rows_missing)
-}
+  mcf <- colformat::multicolformat(
+    df,
+    has_row_id = if (star) "*" else TRUE,
+    needs_dots = needs_dots
+  )
 
-new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
-  list(table = table, extra = extra, rows_missing = rows_missing)
+  list(mcf = mcf, rows_missing = rows_missing)
 }
 
 #' @export
-format.trunc_mat <- function(x, ...) {
+format.trunc_mat <- function(x, width = NULL, ...) {
+  if (is.null(width)) {
+    width <- x$width
+  }
+
   named_header <- format_header(x)
   if (all(names2(named_header) == "")) {
     header <- named_header
@@ -157,11 +102,11 @@ format.trunc_mat <- function(x, ...) {
       named_header
     )
   }
-  c(
-    format_comment(header, width = x$width),
-    format_body(x),
-    format_comment(pre_dots(format_footer(x)), width = x$width)
-  )
+
+  comment <- format_comment(header, width = width)
+  mcf <- format(x$mcf, width = width, ...)
+  footer <- format_footer(x, mcf)
+  c(comment, mcf, footer)
 }
 
 #' @export
@@ -174,20 +119,9 @@ format_header <- function(x) {
   x$summary
 }
 
-format_body <- function(x) {
-  table <- x$table
-  if (is_null(table)) return()
-
-  table_with_row_names <- c(list(row.names(table)), table)
-  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
-  same_width_table <- map(table_with_names, justify)
-  rows <- invoke(paste, same_width_table)
-  rows
-}
-
-format_footer <- function(x) {
+format_footer <- function(x, mcf_formatted) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x)
+  extra_cols <- format_footer_cols(x, colformat::extra_cols(mcf_formatted))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
@@ -204,28 +138,29 @@ format_footer_rows <- function(x) {
     if (is.na(x$rows_missing)) {
       "more rows"
     } else if (x$rows_missing > 0) {
-      paste0(big_mark(x$rows_missing), " more rows")
+      paste0(big_mark(x$rows_missing), pluralise_n(" more row(s)", x$rows_missing))
     }
   } else if (is.na(x$rows_total) && x$rows_min > 0) {
-    paste0("at least ", x$rows_min, " rows total")
+    paste0("at least ", big_mark(x$rows_min), pluralise_n(" row(s) total", x$rows_min))
   }
 }
 
-format_footer_cols <- function(x) {
-  if (length(x$extra) > 0) {
-    var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
-    if (x$n_extra > 0) {
-      if (x$n_extra < length(var_types)) {
-        var_types <- c(var_types[seq_len(x$n_extra)], "...")
-      }
-      vars <- paste0(": ", collapse(var_types))
-    } else {
-      vars <- ""
+format_footer_cols <- function(x, extra_cols) {
+  if (length(extra_cols) == 0) return(NULL)
+
+  if (x$n_extra > 0) {
+    if (x$n_extra < length(extra_cols)) {
+      extra_cols <- c(extra_cols[seq_len(x$n_extra)], "...")
     }
-    paste0(length(x$extra), " ",
-           if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
-           "variables", vars)
+    vars <- paste0(": ", collapse(extra_cols))
+  } else {
+    vars <- ""
   }
+  paste0(
+    big_mark(length(extra_cols)), " ",
+    if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
+    pluralise("variable(s)", extra_cols), vars
+  )
 }
 
 format_comment <- function(x, width) {

@@ -5,4 +5,4 @@
 3     3
 4     4
 5     5
-# ... with more rows
+with at least 5 rows total

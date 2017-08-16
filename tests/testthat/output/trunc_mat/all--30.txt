@@ -1,10 +1,7 @@
 # A tibble: 3 x 9
-      a     b     c     d
+      a     b     c d    
   <dbl> <int> <lgl> <chr>
-1   1.0     1  TRUE     a
-2   2.5     2 FALSE     b
-3    NA    NA    NA  <NA>
-# ... with 5 more variables:
-#   e <fctr>, f <date>,
-#   g <dttm>, h <list>,
-#   i <list>
+1  1.00     1     * a    
+2  2.50     2     - b    
+3 NA       NA     ? ?    
+with 5 more variables: e <fctr>, f <date>, g <dttm>, h <list>, i <list>
