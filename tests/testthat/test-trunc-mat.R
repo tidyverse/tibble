@@ -134,26 +134,3 @@ test_that("trunc_mat for wide-character columns in non-UTF-8 locale", {
       "trunc_mat/wide-8-60.txt")
   })
 })
-
-test_that("trunc_mat backticks non-syntactic names", {
-  tb <- tibble(
-    `:)` = "smile",
-    ` ` = "space"
-  )
-  narrow <- trunc_mat(tb, width = 5)
-  expect_equal(names(narrow$table), "`:)`")
-  expect_equal(names(narrow$extra), "` `")
-})
-
-test_that("trunc_mat backticks NA names", {
-  tb <- tibble(
-    x = 1,
-    y = 2,
-    z = 3
-  )
-  ## there must be at least 2 NA names
-  colnames(tb)[1:2] <- NA
-  narrow <- trunc_mat(tb, width = 5)
-  expect_equal(names(narrow$table), "`NA`")
-  expect_equal(names(narrow$extra), c("`NA`", "z"))
-})
