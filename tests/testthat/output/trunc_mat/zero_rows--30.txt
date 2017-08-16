@@ -1,2 +1,3 @@
 # A tibble: 0 x 2
-with 2 variables: a <chr>, b <lgl>
+# ... with 2 variables:
+#   a <chr>, b <lgl>

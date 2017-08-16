@@ -105,7 +105,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 
   comment <- format_comment(header, width = width)
   mcf <- format(x$mcf, width = width, ...)
-  footer <- format_footer(x, mcf)
+  footer <- format_comment(pre_dots(format_footer(x, mcf)), width = x$width)
   c(comment, mcf, footer)
 }
 

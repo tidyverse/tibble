@@ -6,4 +6,5 @@
 3    4.70   3.20   1.30 0.200
 4    4.60   3.10   1.50 0.200
 5    5.00   3.60   1.40 0.200
-with 1 more variable: Species <fctr>
+# ... with 1 more variable:
+#   Species <fctr>
