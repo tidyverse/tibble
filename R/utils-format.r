@@ -193,6 +193,8 @@ justify <- function(x, right = TRUE, space = " ") {
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
+  return(invisible())
+
   header <- format_header(x)
   if (length(header) > 0L) {
     header[names2(header) != ""] <- paste0(names2(header), ": ", header)
@@ -201,9 +203,9 @@ knit_print.trunc_mat <- function(x, options) {
     summary <- character()
   }
 
-  kable <- knitr::kable(x$table, row.names = FALSE)
+  kable <- knitr::knit_print(x$mcf, row.names = FALSE)
 
-  extra <- format_footer(x)
+  extra <- format_footer(x, format(x$mcf, x$width))
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
