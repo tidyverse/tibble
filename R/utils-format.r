@@ -104,8 +104,9 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   }
 
   comment <- format_comment(header, width = width)
-  mcf <- format(x$mcf, width = width, ...)
-  footer <- format_comment(pre_dots(format_footer(x, mcf)), width = width)
+  squeezed <- colformat::squeeze(x$mcf, width = width)
+  mcf <- format(squeezed)
+  footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
   c(comment, mcf, footer)
 }
 
@@ -119,9 +120,9 @@ format_header <- function(x) {
   x$summary
 }
 
-format_footer <- function(x, mcf_formatted) {
+format_footer <- function(x, mcf_squeezed) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, colformat::extra_cols(mcf_formatted))
+  extra_cols <- format_footer_cols(x, colformat::extra_cols(mcf_squeezed))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
