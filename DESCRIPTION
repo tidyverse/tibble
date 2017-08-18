@@ -36,4 +36,4 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Remotes:
-    krlmlr/colformat@fd042cd
+    krlmlr/colformat@fc19be1
