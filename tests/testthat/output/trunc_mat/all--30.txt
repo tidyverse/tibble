@@ -3,7 +3,7 @@
   <dbl> <int> <lgl> <chr>
 1  1.00     1 T     a    
 2  2.50     2 F     b    
-3 NA       NA NA    NA   
+3 NA       NA NA    <NA> 
 # ... with 5 more variables:
 #   e <fctr>, f <date>,
 #   g <dttm>, h <list>,
