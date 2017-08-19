@@ -45,7 +45,7 @@
 #' }
 tibble <- function(...) {
   xs <- quos(..., .named = TRUE)
-  as_tibble(lst_quos(xs))
+  as_tibble(lst_quos(xs, expand = TRUE))
 }
 
 #' @export
