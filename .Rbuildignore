@@ -13,3 +13,4 @@
 ^API$
 ^_pkgdown\.yml$
 ^docs$
+^tic\.R$
