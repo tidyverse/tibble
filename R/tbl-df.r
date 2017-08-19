@@ -1,4 +1,5 @@
-methods::setOldClass(c("tbl_df", "tbl", "data.frame"))
+#' @importFrom methods setOldClass
+setOldClass(c("tbl_df", "tbl", "data.frame"))
 
 # Standard data frame methods --------------------------------------------------
 
