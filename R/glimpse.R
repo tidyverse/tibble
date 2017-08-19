@@ -87,15 +87,11 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 
 #' @export
 format_v.list <- function(x) {
-  x <- map(x, format_v)
-  atomic <- map_int(x, length) == 1L
-  x <- map_chr(x, collapse)
-  x[!atomic] <- paste0("<", x[!atomic], ">")
-  if (length(x) == 1L) {
-    x
-  } else {
-    paste0("[", collapse(x), "]")
-  }
+  out <- map(x, format_v)
+  atomic <- map_int(out, length) == 1L
+  out <- map_chr(out, collapse)
+  out[!atomic] <- paste0("<", out[!atomic], ">")
+  paste0("[", collapse(out), "]")
 }
 
 #' @export
