@@ -4,6 +4,7 @@
 #' which should include the dimensions, the data source, and possible grouping
 #' (for `dplyr`).  The default implementation forwards to [colformat::obj_sum()].
 #' @seealso [colformat::type_sum()], [colformat::is_vector_s3()]
+#' @param x Object to summarise
 #' @export
 tbl_sum <- function(x) UseMethod("tbl_sum", x)
 

@@ -6,6 +6,9 @@
 \usage{
 tbl_sum(x)
 }
+\arguments{
+\item{x}{Object to summarise}
+}
 \description{
 \code{tbl_sum()} gives a brief textual description of a table-like object,
 which should include the dimensions, the data source, and possible grouping
