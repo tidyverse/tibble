@@ -326,3 +326,15 @@ test_that("mutate() semantics for tibble() (#213)", {
     tibble(b = c(1, 1), c = c(1, 1), a = 1:2)
   )
 })
+
+test_that("types preserved when recycling in tibble() (#284)", {
+  expect_equal(
+    tibble(a = 1:2, b = as.difftime(1, units = "hours")),
+    tibble(a = 1:2, b = as.difftime(c(1, 1), units = "hours"))
+  )
+
+  expect_equal(
+    tibble(b = as.difftime(1, units = "hours"), a = 1:2),
+    tibble(b = as.difftime(c(1, 1), units = "hours"), a = 1:2)
+  )
+})
