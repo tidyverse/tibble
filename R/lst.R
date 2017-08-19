@@ -14,7 +14,10 @@
 #' @rdname tibble
 lst <- function(...) {
   xs <- quos(..., .named = 500L)
+  lst_quos(xs)
+}
 
+lst_quos <- function(xs) {
   n <- length(xs)
   if (n == 0) {
     return(list())
