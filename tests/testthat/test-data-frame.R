@@ -309,3 +309,20 @@ test_that("names must be unique (#820)", {
     fixed = TRUE
   )
 })
+
+test_that("mutate() semantics for tibble() (#213)", {
+  expect_equal(
+    tibble(a = 1:2, b = 1, c = b / sum(b)),
+    tibble(a = 1:2, b = c(1, 1), c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, a = 1:2, c = b / sum(b)),
+    tibble(b = c(1, 1), a = 1:2, c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, c = b / sum(b), a = 1:2),
+    tibble(b = c(1, 1), c = c(1, 1), a = 1:2)
+  )
+})
