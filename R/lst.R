@@ -40,10 +40,6 @@ lst_quos <- function(xs) {
   output
 }
 
-discard_unnamed <- function(x) {
-  discard(x, names2(x) == "")
-}
-
 #' @export
 #' @rdname tibble
 lst_ <- function(xs) {
