@@ -15,7 +15,7 @@
 \usage{
 as_tibble(x, ...)
 
-\method{as_tibble}{tbl_df}(x, validate = FALSE, ...)
+\method{as_tibble}{tbl_df}(x, ..., validate = FALSE)
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ...)
 
