@@ -1,72 +1,4 @@
 1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/abjutils/new/abjutils.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/abjutils/old/abjutils.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/afmToolkit/new/afmToolkit.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/afmToolkit/old/afmToolkit.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/new/alfred.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/old/alfred.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/new/anomalyDetection.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/old/anomalyDetection.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/antaresViz/new/antaresViz.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/antaresViz/old/antaresViz.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/atlantistools/new/atlantistools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/atlantistools/old/atlantistools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/babynames/new/babynames.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/babynames/old/babynames.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/banR/new/banR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/banR/old/banR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/batchtools/new/batchtools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/batchtools/old/batchtools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bikedata/new/bikedata.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bikedata/old/bikedata.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bioCancer/new/bioCancer.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bioCancer/old/bioCancer.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/biomartr/new/biomartr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/biomartr/old/biomartr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blkbox/new/blkbox.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blkbox/old/blkbox.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blob/new/blob.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blob/old/blob.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blockTools/new/blockTools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blockTools/old/blockTools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blscrapeR/new/blscrapeR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/blscrapeR/old/blscrapeR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bold/new/bold.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bold/old/bold.Rcheck’
-1c1
 < * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/breathtestcore/new/breathtestcore.Rcheck’
 ---
 > * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/breathtestcore/old/breathtestcore.Rcheck’
@@ -74,13 +6,13 @@
 < * checking examples ... ERROR
 < Running examples in ‘breathtestcore-Ex.R’ failed
 < The error most likely occurred in:
-< 
+<
 < > ### Name: augment.breathtestfit
 < > ### Title: Augmented prediction for breathtest fit
 < > ### Aliases: augment.breathtestfit
-< > 
+< >
 < > ### ** Examples
-< > 
+< >
 < > library(broom)
 < > # Generate simulated data
 < > data = cleanup_data(simulate_breathtest_data(n_records = 3)$data)
@@ -88,7 +20,7 @@
 < > fit = nls_fit(data)
 < Warning in if (validate) return(NextMethod()) :
 <   the condition has length > 1 and only the first element will be used
-< Error in if (validate) return(NextMethod()) : 
+< Error in if (validate) return(NextMethod()) :
 <   argument is not interpretable as logical
 < Calls: nls_fit ... withVisible -> <Anonymous> -> <Anonymous> -> as_tibble.tbl_df
 < Execution halted
@@ -103,17 +35,17 @@
 < Last 13 lines of output:
 <   testthat results ================================================================
 <   OK: 182 SKIPPED: 0 FAILED: 10
-<   1.  Error: broom/tidy returns a simplified data set with only maes_ghoos t50 (@test_broom.R#5) 
-<   2.  Error: broom/augment returns predictions (@test_broom.R#15) 
-<   3.  Error: One-group nlme fit returns valid result (@test_nlme_fit.R#18) 
-<   4.  Error: Two-group nlme fit returns valid result (@test_nlme_fit.R#37) 
-<   5.  Error: Nice data return nice result (@test_nls_fit.R#12) 
-<   6.  Error: Nasty data return results with na (@test_nls_fit.R#24) 
-<   7.  Error: Single record give valid result after passing through cleanup_data (@test_nls_fit.R#38) 
-<   8.  Error: Plot layers match expectations (@test_plot_breathtestfit.R#8) 
-<   9.  Error: Successful nlme fit plots data and fit (@test_plot_breathtestfit.R#28) 
-<   10. Error: Plot multiple groups (@test_plot_breathtestfit.R#41) 
-<   
+<   1.  Error: broom/tidy returns a simplified data set with only maes_ghoos t50 (@test_broom.R#5)
+<   2.  Error: broom/augment returns predictions (@test_broom.R#15)
+<   3.  Error: One-group nlme fit returns valid result (@test_nlme_fit.R#18)
+<   4.  Error: Two-group nlme fit returns valid result (@test_nlme_fit.R#37)
+<   5.  Error: Nice data return nice result (@test_nls_fit.R#12)
+<   6.  Error: Nasty data return results with na (@test_nls_fit.R#24)
+<   7.  Error: Single record give valid result after passing through cleanup_data (@test_nls_fit.R#38)
+<   8.  Error: Plot layers match expectations (@test_plot_breathtestfit.R#8)
+<   9.  Error: Successful nlme fit plots data and fit (@test_plot_breathtestfit.R#28)
+<   10. Error: Plot multiple groups (@test_plot_breathtestfit.R#41)
+<
 <   Error: testthat unit tests failed
 <   Execution halted
 97c60
@@ -137,403 +69,19 @@
 <   9: function_list[[k]](value)
 <   10: tibble::as_tibble(., cf)
 <   11: as_tibble.tbl_df(., cf)
-<   
+<
 <   testthat results ================================================================
 <   OK: 20 SKIPPED: 0 FAILED: 3
-<   1. Error: Multiple chains return valid results similar to nlme (@test_stan_fit.R#70) 
-<   2. Error: Non-gaussian residuals with student_t_df <10 gives result close to nlme (@test_stan_fit.R#94) 
-<   3. Error: Multiple records per patients return multiple groups (@test_stan_fit.R#128) 
-<   
+<   1. Error: Multiple chains return valid results similar to nlme (@test_stan_fit.R#70)
+<   2. Error: Non-gaussian residuals with student_t_df <10 gives result close to nlme (@test_stan_fit.R#94)
+<   3. Error: Multiple records per patients return multiple groups (@test_stan_fit.R#128)
+<
 <   Error: testthat unit tests failed
 <   Execution halted
 77c60
 < Status: 1 ERROR, 1 NOTE
 ---
 > Status: 1 NOTE
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bsam/new/bsam.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/bsam/old/bsam.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ccafs/new/ccafs.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ccafs/old/ccafs.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cdata/new/cdata.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cdata/old/cdata.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cellranger/new/cellranger.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cellranger/old/cellranger.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cepR/new/cepR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cepR/old/cepR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/charlatan/new/charlatan.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/charlatan/old/charlatan.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/checkmate/new/checkmate.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/checkmate/old/checkmate.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ciTools/new/ciTools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ciTools/old/ciTools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/condformat/new/condformat.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/condformat/old/condformat.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/congressbr/new/congressbr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/congressbr/old/congressbr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/corrr/new/corrr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/corrr/old/corrr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/countyweather/new/countyweather.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/countyweather/old/countyweather.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cpr/new/cpr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/cpr/old/cpr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/crplyr/new/crplyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/crplyr/old/crplyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dat/new/dat.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dat/old/dat.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datacheckr/new/datacheckr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datacheckr/old/datacheckr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dataCompareR/new/dataCompareR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dataCompareR/old/dataCompareR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datadogr/new/datadogr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datadogr/old/datadogr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dataonderivatives/new/dataonderivatives.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dataonderivatives/old/dataonderivatives.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datapasta/new/datapasta.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datapasta/old/datapasta.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datastepr/new/datastepr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/datastepr/old/datastepr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dbplyr/new/dbplyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dbplyr/old/dbplyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/DiagrammeR/new/DiagrammeR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/DiagrammeR/old/DiagrammeR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/docxtractr/new/docxtractr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/docxtractr/old/docxtractr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dotwhisker/new/dotwhisker.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dotwhisker/old/dotwhisker.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dplyr/new/dplyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/dplyr/old/dplyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/drake/new/drake.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/drake/old/drake.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/easyformatr/new/easyformatr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/easyformatr/old/easyformatr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ecoseries/new/ecoseries.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ecoseries/old/ecoseries.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/edeaR/new/edeaR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/edeaR/old/edeaR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/enigma/new/enigma.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/enigma/old/enigma.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/esc/new/esc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/esc/old/esc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/eurostat/new/eurostat.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/eurostat/old/eurostat.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/evaluator/new/evaluator.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/evaluator/old/evaluator.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fastqcr/new/fastqcr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fastqcr/old/fastqcr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fbar/new/fbar.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fbar/old/fbar.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fcuk/new/fcuk.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fcuk/old/fcuk.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/feather/new/feather.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/feather/old/feather.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fileplyr/new/fileplyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fileplyr/old/fileplyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/filesstrings/new/filesstrings.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/filesstrings/old/filesstrings.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/flextable/new/flextable.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/flextable/old/flextable.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fmbasics/new/fmbasics.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/fmbasics/old/fmbasics.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/foghorn/new/foghorn.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/foghorn/old/foghorn.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/forcats/new/forcats.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/forcats/old/forcats.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ftDK/new/ftDK.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ftDK/old/ftDK.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gastempt/new/gastempt.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gastempt/old/gastempt.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gdns/new/gdns.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gdns/old/gdns.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/geojson/new/geojson.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/geojson/old/geojson.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/getCRUCLdata/new/getCRUCLdata.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/getCRUCLdata/old/getCRUCLdata.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/getlandsat/new/getlandsat.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/getlandsat/old/getlandsat.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggalt/new/ggalt.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggalt/old/ggalt.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggeffects/new/ggeffects.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggeffects/old/ggeffects.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggenealogy/new/ggenealogy.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggenealogy/old/ggenealogy.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggformula/new/ggformula.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggformula/old/ggformula.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggfortify/new/ggfortify.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggfortify/old/ggfortify.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggguitar/new/ggguitar.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggguitar/old/ggguitar.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggimage/new/ggimage.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggimage/old/ggimage.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggplot2/new/ggplot2.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggplot2/old/ggplot2.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggpmisc/new/ggpmisc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ggpmisc/old/ggpmisc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/giphyr/new/giphyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/giphyr/old/giphyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gitlabr/new/gitlabr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/gitlabr/old/gitlabr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/GSODR/new/GSODR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/GSODR/old/GSODR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hansard/new/hansard.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hansard/old/hansard.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/haploR/new/haploR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/haploR/old/haploR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/haven/new/haven.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/haven/old/haven.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hddtools/new/hddtools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hddtools/old/hddtools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/heemod/new/heemod.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/heemod/old/heemod.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/highcharter/new/highcharter.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/highcharter/old/highcharter.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/HURDAT/new/HURDAT.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/HURDAT/old/HURDAT.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/huxtable/new/huxtable.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/huxtable/old/huxtable.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hypoparsr/new/hypoparsr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/hypoparsr/old/hypoparsr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/iadf/new/iadf.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/iadf/old/iadf.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/inferr/new/inferr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/inferr/old/inferr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/influxdbr/new/influxdbr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/influxdbr/old/influxdbr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/IONiseR/new/IONiseR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/IONiseR/old/IONiseR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/isdparser/new/isdparser.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/isdparser/old/isdparser.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/jpmesh/new/jpmesh.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/jpmesh/old/jpmesh.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/jpndistrict/new/jpndistrict.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/jpndistrict/old/jpndistrict.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/knitr/new/knitr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/knitr/old/knitr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/KraljicMatrix/new/KraljicMatrix.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/KraljicMatrix/old/KraljicMatrix.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/lifelogr/new/lifelogr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/lifelogr/old/lifelogr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/manifestoR/new/manifestoR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/manifestoR/old/manifestoR.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mnis/new/mnis.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mnis/old/mnis.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/modelr/new/modelr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/modelr/old/modelr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/modeval/new/modeval.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/modeval/old/modeval.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/monkeylearn/new/monkeylearn.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/monkeylearn/old/monkeylearn.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mregions/new/mregions.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mregions/old/mregions.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mrgsolve/new/mrgsolve.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/mrgsolve/old/mrgsolve.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/msgtools/new/msgtools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/msgtools/old/msgtools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/myTAI/new/myTAI.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/myTAI/old/myTAI.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nandb/new/nandb.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nandb/old/nandb.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/naniar/new/naniar.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/naniar/old/naniar.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/natserv/new/natserv.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/natserv/old/natserv.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nneo/new/nneo.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nneo/old/nneo.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/noaastormevents/new/noaastormevents.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/noaastormevents/old/noaastormevents.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nycflights13/new/nycflights13.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/nycflights13/old/nycflights13.Rcheck’
 1c1
 < * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/oai/new/oai.Rcheck’
 ---
@@ -547,154 +95,22 @@
 > Last 13 lines of output:
 >   > library(testthat)
 >   > library("oai")
->   > 
+>   >
 >   > test_check("oai")
 >   1. Failure: badArgument is triggered (@test-handle_errors.R#28) ----------------
 >   handle_errors(xml) did not throw an error.
->   
->   
+>
+>
 >   testthat results ================================================================
 >   OK: 137 SKIPPED: 0 FAILED: 1
->   1. Failure: badArgument is triggered (@test-handle_errors.R#28) 
->   
+>   1. Failure: badArgument is triggered (@test-handle_errors.R#28)
+>
 >   Error: testthat unit tests failed
 >   Execution halted
 63c79
 < Status: OK
 ---
 > Status: 1 ERROR
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/observer/new/observer.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/observer/old/observer.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/odbc/new/odbc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/odbc/old/odbc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/officer/new/officer.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/officer/old/officer.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/olsrr/new/olsrr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/olsrr/old/olsrr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/openadds/new/openadds.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/openadds/old/openadds.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pangaear/new/pangaear.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pangaear/old/pangaear.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/parlitools/new/parlitools.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/parlitools/old/parlitools.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pdfsearch/new/pdfsearch.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pdfsearch/old/pdfsearch.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/photobiology/new/photobiology.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/photobiology/old/photobiology.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/photobiologyInOut/new/photobiologyInOut.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/photobiologyInOut/old/photobiologyInOut.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/phylopath/new/phylopath.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/phylopath/old/phylopath.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pinnacle.data/new/pinnacle.data.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pinnacle.data/old/pinnacle.data.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pkggraph/new/pkggraph.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/pkggraph/old/pkggraph.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/plotly/new/plotly.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/plotly/old/plotly.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/poio/new/poio.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/poio/old/poio.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/polypoly/new/polypoly.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/polypoly/old/polypoly.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/postlightmercury/new/postlightmercury.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/postlightmercury/old/postlightmercury.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/prcr/new/prcr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/prcr/old/prcr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/prisonbrief/new/prisonbrief.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/prisonbrief/old/prisonbrief.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/purrr/new/purrr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/purrr/old/purrr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/radiant.data/new/radiant.data.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/radiant.data/old/radiant.data.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/randNames/new/randNames.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/randNames/old/randNames.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbcb/new/rbcb.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbcb/old/rbcb.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbgm/new/rbgm.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbgm/old/rbgm.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbhl/new/rbhl.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rbhl/old/rbhl.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rcv/new/rcv.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rcv/old/rcv.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdefra/new/rdefra.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdefra/old/rdefra.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdiversity/new/rdiversity.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdiversity/old/rdiversity.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdpla/new/rdpla.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rdpla/old/rdpla.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readr/new/readr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readr/old/readr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readtext/new/readtext.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readtext/old/readtext.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readxl/new/readxl.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/readxl/old/readxl.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/recipes/new/recipes.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/recipes/old/recipes.Rcheck’
 1c1
 < * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/REDCapR/new/REDCapR.Rcheck’
 ---
@@ -707,319 +123,21 @@
 < Running the tests in ‘tests/test-all.R’ failed.
 < Last 13 lines of output:
 <   returned_object$success isn't true.
-<   
-<   
+<
+<
 <   testthat results ================================================================
 <   OK: 563 SKIPPED: 0 FAILED: 7
-<   1. Failure: FullPathSpecified (@test-file-oneshot.R#67) 
-<   2. Error: FullPathSpecified (@test-file-oneshot.R#81) 
-<   3. Failure: Write Batch -Insert (@test-write-batch.R#16) 
-<   4. Failure: Write Batch -Insert (@test-write-batch.R#52) 
-<   5. Failure: Write Batch -Insert (@test-write-batch.R#54) 
-<   6. Failure: Write Batch -Insert (@test-write-batch.R#57) 
-<   7. Failure: Write Batch -Insert (@test-write-batch.R#58) 
-<   
+<   1. Failure: FullPathSpecified (@test-file-oneshot.R#67)
+<   2. Error: FullPathSpecified (@test-file-oneshot.R#81)
+<   3. Failure: Write Batch -Insert (@test-write-batch.R#16)
+<   4. Failure: Write Batch -Insert (@test-write-batch.R#52)
+<   5. Failure: Write Batch -Insert (@test-write-batch.R#54)
+<   6. Failure: Write Batch -Insert (@test-write-batch.R#57)
+<   7. Failure: Write Batch -Insert (@test-write-batch.R#58)
+<
 <   Error: testthat unit tests failed
 <   Execution halted
 74c57
 < Status: 1 ERROR
 ---
 > Status: OK
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/refimpact/new/refimpact.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/refimpact/old/refimpact.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rematch2/new/rematch2.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rematch2/old/rematch2.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rerddap/new/rerddap.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rerddap/old/rerddap.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/reutils/new/reutils.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/reutils/old/reutils.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rgbif/new/rgbif.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rgbif/old/rgbif.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rgho/new/rgho.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rgho/old/rgho.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/riem/new/riem.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/riem/old/riem.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rif/new/rif.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rif/old/rif.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rio/new/rio.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rio/old/rio.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ritis/new/ritis.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/ritis/old/ritis.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rmapzen/new/rmapzen.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rmapzen/old/rmapzen.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rmarkdown/new/rmarkdown.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rmarkdown/old/rmarkdown.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rnoaa/new/rnoaa.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rnoaa/old/rnoaa.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rodham/new/rodham.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rodham/old/rodham.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rorcid/new/rorcid.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rorcid/old/rorcid.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rsample/new/rsample.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rsample/old/rsample.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtide/new/rtide.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtide/old/rtide.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtimes/new/rtimes.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtimes/old/rtimes.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtimicropem/new/rtimicropem.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/rtimicropem/old/rtimicropem.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/SanFranBeachWater/new/SanFranBeachWater.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/SanFranBeachWater/old/SanFranBeachWater.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sf/new/sf.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sf/old/sf.Rcheck’
-182c182
-< < Reading layer `a.sqlite' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/new/sf.Rcheck/sf/sqlite/b.sqlite' using driver `SQLite'
----
-> < Reading layer `a.sqlite' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/old/sf.Rcheck/sf/sqlite/b.sqlite' using driver `SQLite'
-186c186
-< < Reading layer `a.sqlite' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/new/sf.Rcheck/sf/sqlite/b.sqlite' using driver `SQLite'
----
-> < Reading layer `a.sqlite' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/old/sf.Rcheck/sf/sqlite/b.sqlite' using driver `SQLite'
-190c190
-< < Reading layer `PointTimeSeriesObservation' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/new/sf.Rcheck/sf/gml/fmi_test.gml' using driver `GML'
----
-> < Reading layer `PointTimeSeriesObservation' from data source `/home/muelleki/git/R/tibble/revdep/checks/sf/old/sf.Rcheck/sf/gml/fmi_test.gml' using driver `GML'
-213c213
-<   Dataset /home/muelleki/git/R/tibble/revdep/checks/sf/new/sf.Rcheck/tests/testthat/x.gpkg already exists: remove first, use update=TRUE to append,
----
->   Dataset /home/muelleki/git/R/tibble/revdep/checks/sf/old/sf.Rcheck/tests/testthat/x.gpkg already exists: remove first, use update=TRUE to append,
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sfdct/new/sfdct.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sfdct/old/sfdct.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/simglm/new/simglm.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/simglm/old/simglm.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjlabelled/new/sjlabelled.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjlabelled/old/sjlabelled.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjmisc/new/sjmisc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjmisc/old/sjmisc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjPlot/new/sjPlot.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjPlot/old/sjPlot.Rcheck’
-79d78
-< Learn more about sjPlot with 'browseVignettes("sjPlot")'.
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjstats/new/sjstats.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sjstats/old/sjstats.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/snakecase/new/snakecase.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/snakecase/old/snakecase.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/solrium/new/solrium.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/solrium/old/solrium.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spbabel/new/spbabel.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spbabel/old/spbabel.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spdplyr/new/spdplyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spdplyr/old/spdplyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spocc/new/spocc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/spocc/old/spocc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/srvyr/new/srvyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/srvyr/old/srvyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/survminer/new/survminer.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/survminer/old/survminer.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/survtmle/new/survtmle.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/survtmle/old/survtmle.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sweep/new/sweep.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/sweep/old/sweep.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tabularaster/new/tabularaster.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tabularaster/old/tabularaster.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/taxa/new/taxa.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/taxa/old/taxa.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/taxize/new/taxize.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/taxize/old/taxize.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/TCGAbiolinks/old/TCGAbiolinks.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tetraclasse/new/tetraclasse.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tetraclasse/old/tetraclasse.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidygraph/new/tidygraph.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidygraph/old/tidygraph.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyquant/new/tidyquant.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyquant/old/tidyquant.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyr/new/tidyr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyr/old/tidyr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyRSS/new/tidyRSS.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyRSS/old/tidyRSS.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyverse/new/tidyverse.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/tidyverse/old/tidyverse.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/timekit/new/timekit.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/timekit/old/timekit.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/timetk/new/timetk.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/timetk/old/timetk.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/Tmisc/new/Tmisc.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/Tmisc/old/Tmisc.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/units/new/units.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/units/old/units.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/unpivotr/new/unpivotr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/unpivotr/old/unpivotr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/valr/new/valr.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/valr/old/valr.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/waccR/new/waccR.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/waccR/old/waccR.Rcheck’
-58,80c58,80
-< 7fcf2a7b1000-7fcf2aa5f000 r-xp 00000000 08:01 790438                     /usr/lib/R/lib/libR.so
-< 7fcf2aa5f000-7fcf2ac5f000 ---p 002ae000 08:01 790438                     /usr/lib/R/lib/libR.so
-< 7fcf2ac5f000-7fcf2ac7c000 r--p 002ae000 08:01 790438                     /usr/lib/R/lib/libR.so
-< 7fcf2ac7c000-7fcf2ac87000 rw-p 002cb000 08:01 790438                     /usr/lib/R/lib/libR.so
-< 7fcf2ac87000-7fcf2add8000 rw-p 00000000 00:00 0 
-< 7fcf2add8000-7fcf2adfe000 r-xp 00000000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-< 7fcf2ae03000-7fcf2ae05000 r-xp 00000000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-< 7fcf2ae05000-7fcf2ae06000 r--p 00001000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-< 7fcf2ae06000-7fcf2ae07000 rw-p 00002000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-< 7fcf2ae07000-7fcf2afdf000 rw-p 00000000 00:00 0 
-< 7fcf2afe1000-7fcf2afe2000 rw-p 00000000 00:00 0 
-< 7fcf2afe2000-7fcf2aff1000 r-xp 00000000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-< 7fcf2aff1000-7fcf2aff2000 ---p 0000f000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-< 7fcf2aff2000-7fcf2aff3000 r--p 0000f000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-< 7fcf2aff3000-7fcf2aff4000 rw-p 00010000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-< 7fcf2aff4000-7fcf2affb000 r--s 00000000 08:01 27320                      /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
-< 7fcf2affb000-7fcf2affd000 rw-p 00000000 00:00 0 
-< 7fcf2affd000-7fcf2affe000 r--p 00025000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-< 7fcf2affe000-7fcf2afff000 rw-p 00026000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-< 7fcf2afff000-7fcf2b000000 rw-p 00000000 00:00 0 
-< 7fffb32e2000-7fffb335a000 rw-p 00000000 00:00 0                          [stack]
-< 7fffb33c6000-7fffb33c8000 r--p 00000000 00:00 0                          [vvar]
-< 7fffb33c8000-7fffb33ca000 r-xp 00000000 00:00 0                          [vdso]
----
-> 7f30a61fd000-7f30a64ab000 r-xp 00000000 08:01 790438                     /usr/lib/R/lib/libR.so
-> 7f30a64ab000-7f30a66ab000 ---p 002ae000 08:01 790438                     /usr/lib/R/lib/libR.so
-> 7f30a66ab000-7f30a66c8000 r--p 002ae000 08:01 790438                     /usr/lib/R/lib/libR.so
-> 7f30a66c8000-7f30a66d3000 rw-p 002cb000 08:01 790438                     /usr/lib/R/lib/libR.so
-> 7f30a66d3000-7f30a6824000 rw-p 00000000 00:00 0 
-> 7f30a6824000-7f30a684a000 r-xp 00000000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-> 7f30a684f000-7f30a6851000 r-xp 00000000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-> 7f30a6851000-7f30a6852000 r--p 00001000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-> 7f30a6852000-7f30a6853000 rw-p 00002000 08:21 16386534                   /home/muelleki/git/R/tibble/revdep/library/waccR/glue/libs/glue.so
-> 7f30a6853000-7f30a6a2b000 rw-p 00000000 00:00 0 
-> 7f30a6a2d000-7f30a6a2e000 rw-p 00000000 00:00 0 
-> 7f30a6a2e000-7f30a6a3d000 r-xp 00000000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-> 7f30a6a3d000-7f30a6a3e000 ---p 0000f000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-> 7f30a6a3e000-7f30a6a3f000 r--p 0000f000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-> 7f30a6a3f000-7f30a6a40000 rw-p 00010000 08:21 16516136                   /home/muelleki/git/R/tibble/revdep/library/waccR/htmltools/libs/htmltools.so
-> 7f30a6a40000-7f30a6a47000 r--s 00000000 08:01 27320                      /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
-> 7f30a6a47000-7f30a6a49000 rw-p 00000000 00:00 0 
-> 7f30a6a49000-7f30a6a4a000 r--p 00025000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-> 7f30a6a4a000-7f30a6a4b000 rw-p 00026000 08:01 16865                      /lib/x86_64-linux-gnu/ld-2.23.so
-> 7f30a6a4b000-7f30a6a4c000 rw-p 00000000 00:00 0 
-> 7ffec4180000-7ffec41f9000 rw-p 00000000 00:00 0                          [stack]
-> 7ffec41fa000-7ffec41fc000 r--p 00000000 00:00 0                          [vvar]
-> 7ffec41fc000-7ffec41fe000 r-xp 00000000 00:00 0                          [vdso]
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/wand/new/wand.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/wand/old/wand.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/wikitaxa/new/wikitaxa.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/wikitaxa/old/wikitaxa.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/worrms/new/worrms.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/worrms/old/worrms.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/zeligverse/new/zeligverse.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/zeligverse/old/zeligverse.Rcheck’
-1c1
-< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/zFactor/new/zFactor.Rcheck’
----
-> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/zFactor/old/zFactor.Rcheck’
