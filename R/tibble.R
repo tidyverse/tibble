@@ -44,13 +44,15 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 tibble <- function(...) {
-  as_tibble(lst(...))
+  xs <- quos(..., .named = TRUE)
+  as_tibble(lst_quos(xs, expand = TRUE))
 }
 
 #' @export
 #' @rdname tibble
 tibble_ <- function(xs) {
-  as_tibble(lst_(xs))
+  xs <- compat_lazy_dots(xs, caller_env())
+  tibble(!!! xs)
 }
 
 #' @export

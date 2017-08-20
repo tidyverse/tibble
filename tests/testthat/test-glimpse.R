@@ -16,13 +16,12 @@ test_that("format_v for character", {
 })
 
 test_that("format_v for list", {
-  expect_equal(format_v(list(1:3)), "<1, 2, 3>")
+  expect_equal(format_v(list(1:3)), "[<1, 2, 3>]")
   expect_equal(format_v(as.list(1:3)), "[1, 2, 3]")
   expect_equal(format_v(list(1:3, 4)), "[<1, 2, 3>, 4]")
   expect_equal(format_v(list(1:3, 4:5)), "[<1, 2, 3>, <4, 5>]")
   expect_equal(format_v(list()), "[]")
 
-  skip("format_v corner cases")
   expect_equal(format_v(list(list())), "[[]]")
   expect_equal(format_v(list(character())), "[<>]")
   expect_equal(format_v(list(1:3, list(4))), "[<1, 2, 3>, [4]]")
