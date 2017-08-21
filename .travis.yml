@@ -28,6 +28,10 @@ sudo: false
 dist: trusty
 cache: packages
 latex: false
+r:
+- oldrel
+- release
+- devel
 
 #env
 env:
