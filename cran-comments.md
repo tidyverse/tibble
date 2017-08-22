@@ -1,13 +1,13 @@
 ## Test environments
-* local install, R 3.4.0
-* ubuntu 12.04 (on travis-ci), R 3.4.0, R-devel and R-oldrel
+* local install, R 3.4.1
+* ubuntu 12.04 (on travis-ci), R 3.4.1, R-devel and R-oldrel
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies
 
-This is a bugfix release for functions introduced in tibble 1.3.1 (released only a few days ago).  I have fixed the defects that were revealed during CRAN submission of tibble 1.3.2.
+Checked all 208 reverse dependencies on CRAN and BioConductor, no regressions.

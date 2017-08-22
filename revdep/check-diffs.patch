@@ -1,0 +1,29 @@
+1c1
+< * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/REDCapR/new/REDCapR.Rcheck’
+---
+> * using log directory ‘/home/muelleki/git/R/tibble/revdep/checks/REDCapR/old/REDCapR.Rcheck’
+53,59d52
+<
+<   3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138) -------------
+<   wrong sign in 'by' argument
+<   1: REDCapR::redcap_write(ds = returned_object1$data, redcap_uri = project$redcap_uri,
+<          token = project$token) at testthat/test-write-batch.R:138
+<   2: REDCapR::create_batch_glossary(row_count = base::nrow(ds_to_write), batch_size = batch_size)
+<
+61,64c54,64
+<   OK: 560 SKIPPED: 0 FAILED: 3
+<   1. Error: Full Directory Specific (@test-file-oneshot.R#183)
+<   2. Failure: Write Batch -Update Two Fields (@test-write-batch.R#127)
+<   3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138)
+---
+>   OK: 533 SKIPPED: 0 FAILED: 17
+>   1. Error: NameComesFromREDCap (@test-file-oneshot.R#30)
+>   2. Failure: FullPathSpecified (@test-file-oneshot.R#67)
+>   3. Error: FullPathSpecified (@test-file-oneshot.R#81)
+>   4. Failure: Read, Insert, and Update (@test-project.R#16)
+>   5. Error: Read, Insert, and Update (@test-project.R#27)
+>   6. Failure: Write Batch -Update One Field (@test-write-batch.R#79)
+>   7. Failure: Write Batch -Update One Field (@test-write-batch.R#112)
+>   8. Failure: Write Batch -Update One Field (@test-write-batch.R#114)
+>   9. Failure: Write Batch -Update One Field (@test-write-batch.R#117)
+>   1. ...
