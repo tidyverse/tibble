@@ -14,7 +14,10 @@
 #' @rdname tibble
 lst <- function(...) {
   xs <- quos(..., .named = 500L)
+  lst_quos(xs)
+}
 
+lst_quos <- function(xs, expand = FALSE) {
   n <- length(xs)
   if (n == 0) {
     return(list())
@@ -26,9 +29,11 @@ lst <- function(...) {
   names(output) <- character(n)
 
   for (i in seq_len(n)) {
-    res <- eval_tidy(xs[[i]], output)
+    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
+    res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
       output[[i]] <-  res
+      if (expand) output <- expand_lst(output, i)
     }
     names(output)[i] <- col_names[[i]]
   }
@@ -36,8 +41,24 @@ lst <- function(...) {
   output
 }
 
-discard_unnamed <- function(x) {
-  discard(x, names2(x) == "")
+expand_lst <- function(output, i) {
+  idx_to_fix <- integer()
+  if (i > 1L) {
+    if (length(output[[i]]) == 1L && length(output[[1L]]) != 1L) {
+      idx_to_fix <- i
+      idx_boilerplate <- 1L
+    } else if (length(output[[i]]) != 1L && all(map(output[seq2(1L, i - 1L)], length) == 1L)) {
+      idx_to_fix <- seq2(1L, i - 1L)
+      idx_boilerplate <- i
+    }
+  }
+
+  if (length(idx_to_fix) > 0L) {
+    ones <- rep(1L, length(output[[idx_boilerplate]]))
+    output[idx_to_fix] <- map(output[idx_to_fix], `[`, ones)
+  }
+
+  output
 }
 
 #' @export

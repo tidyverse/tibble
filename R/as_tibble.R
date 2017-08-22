@@ -57,7 +57,7 @@ as_tibble <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.tbl_df <- function(x, validate = FALSE, ...) {
+as_tibble.tbl_df <- function(x, ..., validate = FALSE) {
   if (validate) return(NextMethod())
   x
 }

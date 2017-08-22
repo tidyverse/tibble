@@ -1,15 +1,8 @@
 #' Provide a succinct summary of an object
 #'
 #' @description
-#' `type_sum()` gives a brief summary of object type. Objects that commonly
-#' occur in a data frame should return a string with four or less characters.
-#'
 #' `obj_sum()` also includes the size of the object if `is_vector_s3()`
 #' is `TRUE`.
-#'
-#' `tbl_sum()` gives a brief textual description of a table-like object,
-#' which should include the dimensions, the data source, and possible grouping
-#' (for `dplyr`).  The default implementation forwards to `obj_sum()`.
 #'
 #' @param x an object to summarise. Generally only methods of atomic vectors
 #'   and variants have been implemented.
@@ -39,6 +32,9 @@ obj_sum.POSIXlt <- function(x) {
 }
 
 #' @export
+#' @description
+#' `type_sum()` gives a brief summary of object type. Objects that commonly
+#' occur in a data frame should return a string with four or less characters.
 #' @rdname obj_sum
 type_sum <- function(x) UseMethod("type_sum")
 
@@ -77,6 +73,10 @@ type_sum.default <- function(x) {
 }
 
 #' @rdname obj_sum
+#' @description
+#' `tbl_sum()` gives a brief textual description of a table-like object,
+#' which should include the dimensions, the data source, and possible grouping
+#' (for `dplyr`).  The default implementation forwards to `obj_sum()`.
 #' @export
 tbl_sum <- function(x) UseMethod("tbl_sum", x)
 
