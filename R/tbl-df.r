@@ -12,7 +12,8 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' @rdname formatting
 #' @export
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  format(trunc_mat(x, n = n, width = width, n_extra = n_extra))
+  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
+  format(mat)
 }
 
 #' @rdname formatting
