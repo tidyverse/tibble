@@ -1,6 +1,4 @@
 # A tibble: 3 x 9
-      a     b     c     d
-  <dbl> <int> <lgl> <chr>
-1     1     1  TRUE     a
+<body of 3 row(s) created by colformat>
 # ... with 2 more rows, and 5
 #   more variables

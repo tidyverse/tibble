@@ -1,8 +1,2 @@
-      a
-  <int>
-1     1
-2     2
-3     3
-4     4
-5     5
+<body of 7 row(s) created by colformat>
 # ... with more rows
