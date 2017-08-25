@@ -83,10 +83,6 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/all-1-30-0.txt")
 
   expect_output_file_rel(
-    print_without_body(trunc_mat(tibble(`\n` = c("\n", '"'), `\r` = factor(`\n`)))),
-    "trunc_mat/newline.txt")
-
-  expect_output_file_rel(
     print_without_body(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
     "trunc_mat/non-syntactic.txt")
 
