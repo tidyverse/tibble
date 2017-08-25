@@ -105,7 +105,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 
   comment <- format_comment(header, width = width)
   squeezed <- colformat::squeeze(x$mcf, width = width)
-  mcf <- format(squeezed)
+  mcf <- format_body(squeezed)
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
   c(comment, mcf, footer)
 }
@@ -118,6 +118,10 @@ print.trunc_mat <- function(x, ...) {
 
 format_header <- function(x) {
   x$summary
+}
+
+format_body <- function(x) {
+  format(x)
 }
 
 format_footer <- function(x, mcf_squeezed) {
