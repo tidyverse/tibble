@@ -110,6 +110,14 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   c(comment, mcf, footer)
 }
 
+# Needs to be defined in package code: r-lib/pkgload#85
+print_without_body <- function(x, ...) {
+  mockr::with_mock(
+    format_body = function(x, ...) { paste0("<body of ", length(format(x)), " row(s) created by colformat>") },
+    print(x, ...)
+  )
+}
+
 #' @export
 print.trunc_mat <- function(x, ...) {
   cat_line(format(x, ...))
@@ -212,7 +220,7 @@ knit_print.trunc_mat <- function(x, options) {
 
   squeezed <- colformat::squeeze(x$mcf, x$width)
 
-  kable <- knitr::knit_print(squeezed)
+  kable <- format_knitr_body(squeezed)
   extra <- format_footer(x, squeezed)
 
   if (length(extra) > 0) {
@@ -223,6 +231,18 @@ knit_print.trunc_mat <- function(x, options) {
 
   res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
   knitr::asis_output(res, cacheable = TRUE)
+}
+
+format_knitr_body <- function(x) {
+  knitr::knit_print(x)
+}
+
+# Needs to be defined in package code: r-lib/pkgload#85
+knit_print_without_body <- function(x, ...) {
+  mockr::with_mock(
+    format_knitr_body = function(x, ...) { paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by colformat>") },
+    knitr::knit_print(x, ...)
+  )
 }
 
 NBSP <- "\U00A0"

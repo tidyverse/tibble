@@ -25,6 +25,7 @@ Suggests:
     dplyr,
     knitr (>= 1.5.32),
     microbenchmark,
+    mockr,
     nycflights13,
     testthat,
     rmarkdown,

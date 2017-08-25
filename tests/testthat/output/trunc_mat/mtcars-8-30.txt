@@ -1,14 +1,5 @@
 # A tibble: 32 x 11
-    mpg   cyl  disp    hp
-* <dbl> <dbl> <dbl> <dbl>
-1  21.0  6.00   160 110  
-2  21.0  6.00   160 110  
-3  22.8  4.00   108  93.0
-4  21.4  6.00   258 110  
-5  18.7  8.00   360 175  
-6  18.1  6.00   225 105  
-7  14.3  8.00   360 245  
-8  24.4  4.00   147  62.0
+<body of 10 row(s) created by colformat>
 # ... with 24 more rows, and
 #   7 more variables:
 #   drat <dbl>, wt <dbl>,

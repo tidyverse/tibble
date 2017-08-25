@@ -19,84 +19,87 @@ test_that("trunc_mat output matches known output", {
   skip_on_os("windows")
 
   expect_output_file_rel(
-    print(as_tibble(mtcars), n = 8L, width = 30L),
+    print_without_body(as_tibble(mtcars), n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt")
 
   expect_output_file_rel(
-    print(as_tibble(iris), n = 5L, width = 30L),
+    print_without_body(as_tibble(iris), n = 5L, width = 30L),
     "trunc_mat/iris-5-30.txt")
 
   expect_output_file_rel(
-    print(as_tibble(iris), n = 3L, width = 5L),
+    print_without_body(as_tibble(iris), n = 3L, width = 5L),
     "trunc_mat/iris-3-5.txt")
 
   expect_output_file_rel(
-    print(as_tibble(iris), n = NULL, width = 70L),
+    print_without_body(as_tibble(iris), n = NULL, width = 70L),
     "trunc_mat/iris--70.txt")
 
   expect_output_file_rel(
-    print(as_unknown_rows(iris), n = 10, width = 70L),
+    print_without_body(as_unknown_rows(iris), n = 10, width = 70L),
     "trunc_mat/iris_unk-10-70.txt")
 
   expect_output_file_rel(
-    print(df_all, n = NULL, width = 30L),
+    print_without_body(df_all, n = NULL, width = 30L),
     "trunc_mat/all--30.txt")
 
   expect_output_file_rel(
-    print(df_all, n = NULL, width = 300L),
+    print_without_body(df_all, n = NULL, width = 300L),
     "trunc_mat/all--300.txt")
 
   expect_output_file_rel(
-    print(tibble(a = seq.int(10000)), n = 5L, width = 30L),
+    print_without_body(tibble(a = seq.int(10000)), n = 5L, width = 30L),
     "trunc_mat/long-5-30.txt")
 
   expect_output_file_rel(
-    print(tibble(a = character(), b = logical()), width = 30L),
+    print_without_body(tibble(a = character(), b = logical()), width = 30L),
     "trunc_mat/zero_rows--30.txt")
 
   expect_output_file_rel(
-    print(as_tibble(iris)[character()], n = 5L, width = 30L),
+    print_without_body(as_tibble(iris)[character()], n = 5L, width = 30L),
     "trunc_mat/zero_cols-5-30.txt")
 
   expect_output_file_rel(
-    print(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L),
+    print_without_body(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L),
     "trunc_mat/zero-rows_unk-5-30.txt")
 
   expect_output_file_rel(
-    print(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
+    print_without_body(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
     "trunc_mat/zero-cols_unk-5-30.txt")
 
   expect_output_file_rel(
-    print(as_unknown_rows(tibble(a = seq.int(10000))), n = 5L,
-          width = 30L),
+    print_without_body(
+      as_unknown_rows(tibble(a = seq.int(10000))),
+      n = 5L,
+      width = 30L
+    ),
     "trunc_mat/long_unk-5-30.txt")
 
   expect_output_file_rel(
-    print(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
+    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
     "trunc_mat/all-1-30-2.txt")
 
   expect_output_file_rel(
-    print(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L)),
+    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L)),
     "trunc_mat/all-1-30-0.txt")
 
   expect_output_file_rel(
-    print(trunc_mat(tibble(`\n` = c("\n", '"'), `\r` = factor(`\n`)))),
+    print_without_body(trunc_mat(tibble(`\n` = c("\n", '"'), `\r` = factor(`\n`)))),
     "trunc_mat/newline.txt")
 
   expect_output_file_rel(
-    print(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
+    print_without_body(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
     "trunc_mat/non-syntactic.txt")
 
   expect_output_knit(
-    knitr::knit_print(trunc_mat(df_all, width = 60L)),
+    knit_print_without_body(trunc_mat(df_all, width = 60L)),
     "trunc_mat/all-knit-60.txt")
 
   expect_output_knit(
-    knitr::knit_print(trunc_mat(df_all, width = 120L)),
+    knit_print_without_body(trunc_mat(df_all, width = 120L)),
     "trunc_mat/all-knit-120.txt")
 
   expect_output_knit(
-    knitr::knit_print(trunc_mat(mtcars, width = 60L)),
+    knit_print_without_body(trunc_mat(mtcars, width = 60L)),
     "trunc_mat/mtcars-knit-60.txt")
 })
 
