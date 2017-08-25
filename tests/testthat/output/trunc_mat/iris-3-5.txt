@@ -3,20 +3,17 @@
 #   150
 #   x
 #   5
-  Sepal.Length
-         <dbl>
-1          5.1
-2          4.9
-3          4.7
+<body of 5 row(s) created by colformat>
 # ...
 #   with
 #   147
 #   more
 #   rows,
 #   and
-#   4
+#   5
 #   more
 #   variables:
+#   Sepal.Length <dbl>,
 #   Sepal.Width <dbl>,
 #   Petal.Length <dbl>,
 #   Petal.Width <dbl>,

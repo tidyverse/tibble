@@ -2,11 +2,6 @@
 
 A tibble: 3 x 9
 
-|a     |b     |c     |d     |e      |f          |
-|:-----|:-----|:-----|:-----|:------|:----------|
-|<dbl> |<int> |<lgl> |<chr> |<fctr> |<date>     |
-|1.0   |1     |TRUE  |a     |a      |2015-12-10 |
-|2.5   |2     |FALSE |b     |b      |2015-12-11 |
-|NA    |NA    |NA    |<NA>  |<NA>   |NA         |
+<body of 6 row(s) created by colformat>
 
 (with 3 more variables: g <dttm>, h <list>, i <list>)
