@@ -245,20 +245,6 @@ knit_print_without_body <- function(x, ...) {
   )
 }
 
-NBSP <- "\U00A0"
-
-wrap <- function(..., indent = 0, prefix = "", width) {
-  x <- paste0(..., collapse = "")
-  wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
-    width = max(width - nchar_width(prefix), 0))
-  wrapped <- paste0(prefix, wrapped)
-  wrapped <- gsub(NBSP, " ", wrapped)
-
-  paste0(wrapped, collapse = "\n")
-}
-
-
-
 format_factor <- function(x) {
   format_character(as.character(x))
 }
