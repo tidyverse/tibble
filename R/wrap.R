@@ -19,8 +19,7 @@ col_strwrap <- function(x, width, indent, exdent) {
   words_bw <- strsplit(crayon::strip_style(x), space_rx, perl = TRUE)[[1L]]
   stopifnot(length(words) == length(words_bw))
 
-  dots_list <- map(nchar_width(words_bw), rep, x = ".")
-  dots <- map_chr(dots_list, paste, collapse = "")
+  dots <- strrep(".", nchar_width(words_bw))
 
   wrapped_dots <- strwrap(
     paste(dots, collapse = " "),
