@@ -12,8 +12,8 @@ tbl_sum(x)
 \description{
 \code{tbl_sum()} gives a brief textual description of a table-like object,
 which should include the dimensions, the data source, and possible grouping
-(for \code{dplyr}).  The default implementation forwards to \code{\link[colformat:obj_sum]{colformat::obj_sum()}}.
+(for \code{dplyr}).  The default implementation forwards to \code{\link[pillar:obj_sum]{pillar::obj_sum()}}.
 }
 \seealso{
-\code{\link[colformat:type_sum]{colformat::type_sum()}}, \code{\link[colformat:is_vector_s3]{colformat::is_vector_s3()}}
+\code{\link[pillar:type_sum]{pillar::type_sum()}}, \code{\link[pillar:is_vector_s3]{pillar::is_vector_s3()}}
 }
