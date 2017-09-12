@@ -1,6 +1,6 @@
 ### tibble 1.3.4.9001 (2017-08-25)
 
-- Integrate colformat (#294).
+- Integrate pillar (#294).
 
 
 # tibble 1.3.4 (2017-08-21)

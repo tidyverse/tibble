@@ -1,4 +1,4 @@
 # A tibble: 0 x 2
-<body of 0 row(s) created by colformat>
+<body of 0 row(s) created by pillar>
 # ... with 2 variables:
 #   a <chr>, b <lgl>

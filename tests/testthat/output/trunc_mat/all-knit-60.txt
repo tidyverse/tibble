@@ -2,6 +2,6 @@
 
 A tibble: 3 x 9
 
-<body of 6 row(s) created by colformat>
+<body of 6 row(s) created by pillar>
 
 (with 3 more variables: g <dttm>, h <list>, i <list>)

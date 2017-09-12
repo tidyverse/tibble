@@ -6,4 +6,4 @@ type_sum.override_type_sum <- function(x, ...) {
   "SC"
 }
 
-registerS3method("type_sum", "override_type_sum", type_sum.override_type_sum, envir = asNamespace("colformat"))
+registerS3method("type_sum", "override_type_sum", type_sum.override_type_sum, envir = asNamespace("pillar"))
