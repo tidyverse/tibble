@@ -73,7 +73,7 @@ shrink_mat <- function(df, width, rows, n, star) {
     rows_missing <- 0L
   }
 
-  mcf <- colformat::multicolformat(
+  mcf <- pillar::colonnade(
     df,
     has_row_id = if (star) "*" else TRUE,
     needs_dots = needs_dots
@@ -104,7 +104,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   }
 
   comment <- format_comment(header, width = width)
-  squeezed <- colformat::squeeze(x$mcf, width = width)
+  squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
   c(comment, mcf, footer)
@@ -113,7 +113,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 # Needs to be defined in package code: r-lib/pkgload#85
 print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_body = function(x, ...) { paste0("<body of ", length(format(x)), " row(s) created by colformat>") },
+    format_body = function(x, ...) { paste0("<body of ", length(format(x)), " row(s) created by pillar>") },
     print(x, ...)
   )
 }
@@ -134,7 +134,7 @@ format_body <- function(x) {
 
 format_footer <- function(x, mcf_squeezed) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, colformat::extra_cols(mcf_squeezed))
+  extra_cols <- format_footer_cols(x, pillar::extra_cols(mcf_squeezed))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
@@ -218,7 +218,7 @@ knit_print.trunc_mat <- function(x, options) {
     summary <- character()
   }
 
-  squeezed <- colformat::squeeze(x$mcf, x$width)
+  squeezed <- pillar::squeeze(x$mcf, x$width)
 
   kable <- format_knitr_body(squeezed)
   extra <- format_footer(x, squeezed)
@@ -240,7 +240,7 @@ format_knitr_body <- function(x) {
 # Needs to be defined in package code: r-lib/pkgload#85
 knit_print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_knitr_body = function(x, ...) { paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by colformat>") },
+    format_knitr_body = function(x, ...) { paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by pillar>") },
     knitr::knit_print(x, ...)
   )
 }

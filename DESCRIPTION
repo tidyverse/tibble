@@ -15,7 +15,7 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends:
     R (>= 3.1.0)
 Imports:
-    colformat,
+    pillar,
     methods,
     rlang,
     Rcpp (>= 0.12.3),
@@ -37,4 +37,4 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Remotes:
-    hadley/colformat@5694b78
+    hadley/pillar@831aade

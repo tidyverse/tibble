@@ -3,7 +3,7 @@
 #   150
 #   x
 #   5
-<body of 5 row(s) created by colformat>
+<body of 5 row(s) created by pillar>
 # ...
 #   with
 #   147

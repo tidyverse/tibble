@@ -1,2 +1,2 @@
-<body of 12 row(s) created by colformat>
+<body of 12 row(s) created by pillar>
 # ... with more rows
