@@ -5,10 +5,10 @@
 #' data frame row-by-row.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs. If you don't supply the name of a variable,
-#'   it'll be given the value `NA`.
+#' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
+#'   in `.data` can be used, unset columns will get an `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
-#'   default: after last row
+#'   default: after last row.
 #' @family addition
 #' @examples
 #' # add_row ---------------------------------
@@ -87,10 +87,10 @@ rbind_at <- function(old, new, pos) {
 #' frame.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, all values must have one element for each row
-#'   in the data frame, or be of length 1
+#' @param ... Name-value pairs, passed on to [tibble()]. All values must have
+#'   one element for each row in the data frame, or be of length 1.
 #' @param .before,.after One-based column index or column name where to add the
-#'   new columns, default: after last column
+#'   new columns, default: after last column.
 #' @family addition
 #' @examples
 #' # add_column ---------------------------------

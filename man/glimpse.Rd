@@ -12,7 +12,7 @@ glimpse(x, width = NULL, ...)
 \item{width}{Width of output: defaults to the setting of the option
 \code{tibble.width} (if finite) or the width of the console.}
 
-\item{...}{Other arguments passed onto individual methods.}
+\item{...}{Other arguments passed on to individual methods.}
 }
 \value{
 x original x is (invisibly) returned, allowing \code{glimpse()} to be

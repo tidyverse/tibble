@@ -13,7 +13,7 @@
 #' @param x An object to glimpse at.
 #' @param width Width of output: defaults to the setting of the option
 #'   `tibble.width` (if finite) or the width of the console.
-#' @param ... Other arguments passed onto individual methods.
+#' @param ... Other arguments passed on to individual methods.
 #' @return x original x is (invisibly) returned, allowing `glimpse()` to be
 #'   used within a data pipe line.
 #' @export

@@ -13,7 +13,9 @@
 #'
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.
+#'   so you can refer to previously created variables.  These arguments are
+#'   processed with [rlang::quos()] and support unquote via `!!` and
+#'   unquote-splice via `!!!`.
 #' @param xs  A list of unevaluated expressions created with `~`,
 #'   [quote()], or (deprecated) [lazyeval::lazy()].
 #' @seealso [as_tibble()] to turn an existing list into
