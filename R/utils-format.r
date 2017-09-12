@@ -132,9 +132,9 @@ format_body <- function(x) {
   format(x)
 }
 
-format_footer <- function(x, mcf_squeezed) {
+format_footer <- function(x, colonnade_squeezed) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, pillar::extra_cols(mcf_squeezed))
+  extra_cols <- format_footer_cols(x, pillar::extra_cols(colonnade_squeezed))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
