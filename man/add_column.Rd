@@ -20,7 +20,7 @@ This is a convenient way to add one or more columns to an existing data
 frame.
 }
 \examples{
-# add_row ---------------------------------
+# add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
 add_column(df, z = -1:1, w = 0)
