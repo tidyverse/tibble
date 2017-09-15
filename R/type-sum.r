@@ -26,7 +26,7 @@ dim_desc <- function(x) {
 size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
-  paste0(" [", dim_desc(x), "]" )
+  paste0(" [", dim_desc(x), "]")
 }
 
 #' @importFrom pillar obj_sum

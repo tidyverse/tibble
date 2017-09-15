@@ -156,4 +156,3 @@ invalid_df_msg <- function(problem, df, vars, extra) {
     pluralise_msg(problem, extra)
   )
 }
-

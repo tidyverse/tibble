@@ -12,7 +12,7 @@ df_all <- tibble(
 )
 
 # An empty data frame with all major types
-df_empty = tibble(
+df_empty <- tibble(
   a = integer(0),
   b = double(0),
   c = logical(0),

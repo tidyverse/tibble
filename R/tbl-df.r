@@ -33,10 +33,11 @@ print.tbl_df <- print.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
-  if (missing(j))
+  if (missing(j)) {
     colname <- i
-  else
+  } else {
     colname <- j
+  }
   if (!exact) {
     warningc("exact ignored")
   }

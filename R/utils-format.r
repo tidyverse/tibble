@@ -113,7 +113,9 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 # Needs to be defined in package code: r-lib/pkgload#85
 print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_body = function(x, ...) { paste0("<body of ", length(format(x)), " row(s) created by pillar>") },
+    format_body = function(x, ...) {
+      paste0("<body of ", length(format(x)), " row(s) created by pillar>")
+    },
     print(x, ...)
   )
 }
@@ -229,7 +231,7 @@ knit_print.trunc_mat <- function(x, options) {
     extra <- "\n"
   }
 
-  res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
+  res <- paste(c("", "", summary, "", kable, "", extra), collapse = "\n")
   knitr::asis_output(res, cacheable = TRUE)
 }
 
@@ -240,7 +242,9 @@ format_knitr_body <- function(x) {
 # Needs to be defined in package code: r-lib/pkgload#85
 knit_print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_knitr_body = function(x, ...) { paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by pillar>") },
+    format_knitr_body = function(x, ...) {
+      paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by pillar>")
+    },
     knitr::knit_print(x, ...)
   )
 }

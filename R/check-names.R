@@ -76,7 +76,7 @@ check_names_before_after.character <- function(j, names) {
   check_needs_no_dim(j)
 
   pos <- safe_match(j, names)
-  if(anyNA(pos)) {
+  if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
     stopc(pluralise_msg("Column(s) ", unknown_names), " not found")
   }

@@ -39,7 +39,7 @@ test_that("properly handles poly class (#110)", {
   p_df <- as_tibble(p)
 
   expect_equal(names(p_df), colnames(p))
-  expect_equal(class(p_df[[1L]]), class(p[,1]))
+  expect_equal(class(p_df[[1L]]), class(p[, 1]))
 })
 
 test_that("handles atomic vectors", {
@@ -65,13 +65,16 @@ test_that("handles atomic vectors", {
 })
 
 test_that("auto-assigning names", {
-  expect_identical(as_tibble(diag(3L)),
-                   as_tibble(as.data.frame(diag(3L))))
+  expect_identical(
+    as_tibble(diag(3L)),
+    as_tibble(as.data.frame(diag(3L)))
+  )
 })
 
 test_that("forwarding to as.data.frame() for ts objects (#184)", {
   mts <- cbind(
     A = ts(c(1, 1, 2, 2),     start = 2016, freq = 4),
-    B = ts(c(11, 11, 12, 13), start = 2016, freq = 4))
+    B = ts(c(11, 11, 12, 13), start = 2016, freq = 4)
+  )
   expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))
 })

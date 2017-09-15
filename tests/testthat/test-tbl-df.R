@@ -56,7 +56,7 @@ test_that("[ with 0 cols returns correct number of rows", {
   expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
 })
 
-test_that("[.tbl_df is careful about names (#1245)",{
+test_that("[.tbl_df is careful about names (#1245)", {
   z_msg <- "Column `z` not found"
 
   foo <- tibble(x = 1:10, y = 1:10)
@@ -78,7 +78,7 @@ test_that("[.tbl_df is careful about names (#1245)",{
   )
 })
 
-test_that("[.tbl_df is careful about column indexes (#83)",{
+test_that("[.tbl_df is careful about column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
 
@@ -120,7 +120,7 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
   )
 })
 
-test_that("[.tbl_df is careful about column flags (#83)",{
+test_that("[.tbl_df is careful about column flags (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[TRUE], foo)
   expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
@@ -155,7 +155,7 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   )
 })
 
-test_that("[.tbl_df rejects unknown column indexes (#83)",{
+test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(
     foo[list(1:3)],
@@ -184,18 +184,18 @@ test_that("[.tbl_df rejects unknown column indexes (#83)",{
   )
 })
 
-test_that("[.tbl_df is no-op if args missing",{
+test_that("[.tbl_df is no-op if args missing", {
   expect_identical(df_all[], df_all)
 })
 
-test_that("[.tbl_df warns for drop argument",{
+test_that("[.tbl_df warns for drop argument", {
   expect_warning(df_all[1, 2, drop = TRUE], "ignored")
 })
 
 
 # [[ ----------------------------------------------------------------------
 
-test_that("[[.tbl_df ignores exact argument",{
+test_that("[[.tbl_df ignores exact argument", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_warning(foo[["x"]], NA)
   expect_warning(foo[["x", exact = FALSE]], "ignored")
@@ -224,8 +224,10 @@ test_that("can use two-dimensional indexing with [[", {
 
 test_that("$ throws warning if name doesn't exist", {
   df <- tibble(x = 1)
-  expect_warning(expect_null(df$y),
-                 "Unknown or uninitialised column: 'y'")
+  expect_warning(
+    expect_null(df$y),
+    "Unknown or uninitialised column: 'y'"
+  )
 })
 
 test_that("$ throws different warning if attempting a partial initialization (#199)", {
@@ -235,10 +237,14 @@ test_that("$ throws different warning if attempting a partial initialization (#1
 
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
-  expect_warning(expect_null(df$p),
-                 "Unknown or uninitialised column: 'p'")
-  expect_warning(expect_null(df$part),
-                 "Unknown or uninitialised column: 'part'")
+  expect_warning(
+    expect_null(df$p),
+    "Unknown or uninitialised column: 'p'"
+  )
+  expect_warning(
+    expect_null(df$part),
+    "Unknown or uninitialised column: 'part'"
+  )
   expect_error(df$partial, NA)
 })
 

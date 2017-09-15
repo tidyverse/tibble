@@ -32,7 +32,7 @@ col_strwrap <- function(x, width, indent, exdent) {
   )
   wrapped_dots_string <- paste(wrapped_dots, collapse = "\n")
 
-  space <- strsplit(wrapped_dots_string, "[.]+",)[[1L]]
+  space <- strsplit(wrapped_dots_string, "[.]+")[[1L]]
   wrapped_styled_string <- paste0(c("", words), c(space, ""), collapse = "")
   strsplit(wrapped_styled_string, "\n", fixed = TRUE)[[1L]]
 }
