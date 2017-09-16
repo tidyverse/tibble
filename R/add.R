@@ -137,27 +137,21 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
-  # The positions for the new columns
   end_pos <- ncol(.data) + seq_len(ncol(df))
 
   if (pos <= 0L) {
-    #out <- cbind(df, .data)
-    # Add to end, then rearrange to the beginning
-    .data[, end_pos] <- df
-    .data <- .data[, c(end_pos, seq_len(ncol(.data))[-end_pos])]
+    indexes_orig <- seq_len(ncol(.data))
+    .data[end_pos] <- df
+    .data <- .data[c(end_pos, indexes_orig)]
   } else if (pos >= ncol(.data)) {
-    #out <- cbind(.data, df)
-    # Add to end
-    .data[, end_pos] <- df
+    .data[end_pos] <- df
   } else {
-    indexes <- seq_len(pos)
-    #out <- cbind(.data[indexes], df, .data[-indexes])
-    # Add to end then position correctly
-    .data[, end_pos] <- df
-    .data <- .data[, c(indexes, end_pos, (length(indexes)+1):(length(.data)-1))]
+    indexes_before <- seq_len(pos)
+    indexes_after <- (length(indexes_before)+1):ncol(.data)
+    .data[end_pos] <- df
+    .data <- .data[c(indexes_before, end_pos, indexes_after)]
   }
 
-  #out <- set_class(remove_rownames(out), class(.data))
   .data
 }
 
