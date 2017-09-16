@@ -56,7 +56,7 @@ rownames_to_column <- function(df, var = "rowname") {
     stopc("Column `", var, "` already exists")
   }
 
-  new_df <- add_column(df, !! (var) := rownames(df), .before = 1)
+  new_df <- add_column(df, !! var := rownames(df), .before = 1)
   new_df
 }
 
@@ -69,7 +69,7 @@ rowid_to_column <- function(df, var = "rowid") {
     stopc("Column `", var, "` already exists")
   }
 
-  new_df <- add_column(df, !! (var) := seq_len(nrow(df)), .before = 1)
+  new_df <- add_column(df, !! var := seq_len(nrow(df)), .before = 1)
   new_df
 }
 
