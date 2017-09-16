@@ -140,19 +140,17 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   end_pos <- ncol(.data) + seq_len(ncol(df))
 
   if (pos <= 0L) {
-    indexes_orig <- seq_len(ncol(.data))
-    .data[end_pos] <- df
-    .data <- .data[c(end_pos, indexes_orig)]
-  } else if (pos >= ncol(.data)) {
-    .data[end_pos] <- df
+    indexes <- c(end_pos, seq_len(ncol(.data)))
+  } else if (pos > ncol(.data)) {
+    indexes <- seq_len(ncol(.data) + ncol(df))
   } else {
     indexes_before <- seq_len(pos)
-    indexes_after <- (length(indexes_before)+1):ncol(.data)
-    .data[end_pos] <- df
-    .data <- .data[c(indexes_before, end_pos, indexes_after)]
+    indexes_after <- rlang::seq2(length(indexes_before) + 1, ncol(.data))
+    indexes <- c(indexes_before, end_pos, indexes_after)
   }
 
-  .data
+  .data[end_pos] <- df
+  .data[indexes]
 }
 
 
