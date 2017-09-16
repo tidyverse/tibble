@@ -137,16 +137,28 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
+  # The positions for the new columns
+  end_pos <- ncol(.data) + seq_len(ncol(df))
+
   if (pos <= 0L) {
-    out <- cbind(df, .data)
+    #out <- cbind(df, .data)
+    # Add to end, then rearrange to the beginning
+    .data[, end_pos] <- df
+    .data <- .data[, c(end_pos, seq_len(ncol(.data))[-end_pos])]
   } else if (pos >= ncol(.data)) {
-    out <- cbind(.data, df)
+    #out <- cbind(.data, df)
+    # Add to end
+    .data[, end_pos] <- df
   } else {
     indexes <- seq_len(pos)
-    out <- cbind(.data[indexes], df, .data[-indexes])
+    #out <- cbind(.data[indexes], df, .data[-indexes])
+    # Add to end then position correctly
+    .data[, end_pos] <- df
+    .data <- .data[, c(indexes, end_pos, (length(indexes)+1):(length(.data)-1))]
   }
 
-  set_class(remove_rownames(out), class(.data))
+  #out <- set_class(remove_rownames(out), class(.data))
+  .data
 }
 
 
