@@ -1,5 +1,7 @@
 ### tibble 1.3.4.9001 (2017-08-25)
 
+- Prevent `add_column()` from dropping classes and attributes by removing the use of `cbind()`. Additionally this ensures that `add_column()` can be used with grouped data frames (#303, @DavisVaughan).
+
 - Integrate pillar (#294).
 
 
