@@ -174,5 +174,5 @@ pos_from_before_after <- function(before, after, len) {
 }
 
 limit_pos_range <- function(pos, len) {
-  max(c(0, min(c(len, pos))))
+  max(c(0L, min(c(len, pos))))
 }
