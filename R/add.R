@@ -139,15 +139,9 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   end_pos <- ncol(.data) + seq_len(ncol(df))
 
-  if (pos <= 0L) {
-    indexes <- c(end_pos, seq_len(ncol(.data)))
-  } else if (pos > ncol(.data)) {
-    indexes <- seq_len(ncol(.data) + ncol(df))
-  } else {
-    indexes_before <- seq_len(pos)
-    indexes_after <- rlang::seq2(length(indexes_before) + 1, ncol(.data))
-    indexes <- c(indexes_before, end_pos, indexes_after)
-  }
+  indexes_before <- rlang::seq2(1L, pos)
+  indexes_after <- rlang::seq2(pos + 1L, ncol(.data))
+  indexes <- c(indexes_before, end_pos, indexes_after)
 
   .data[end_pos] <- df
   .data[indexes]
@@ -168,13 +162,17 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       len
     } else {
-      after
+      limit_pos_range(after, len)
     }
   } else {
     if (is_null(after)) {
-      before - 1L
+      limit_pos_range(before - 1L, len)
     } else {
       stopc("Can't specify both `.before` and `.after`")
     }
   }
+}
+
+limit_pos_range <- function(pos, len) {
+  max(c(0, min(c(len, pos))))
 }
