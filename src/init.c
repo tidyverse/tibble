@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <R_ext/Rdynload.h>
 #include "tibble.h"
 
 // According to the C standard, names starting with underscore are reserved
@@ -10,4 +11,5 @@ static const R_CallMethodDef CallEntries[] = {
 void R_init_tibble(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
+    R_forceSymbols(dll, TRUE);
 }
