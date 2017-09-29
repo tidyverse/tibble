@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <inttypes.h>
 #include <limits.h>
-#include <math.h>
 #include <stdint.h>
 #include <string.h>
 #include "tibble.h"
@@ -102,7 +101,12 @@ static SEXP get_names(SEXP x, R_xlen_t ncol)
     // otherwise, allocate new names
     PROTECT(colnames = allocVector(STRSXP, ncol)); nprot++;
 
-    ndigit = (R_xlen_t)((ncol == 0) ? 1 : 1 + floor(log10((double)(ncol))));
+    // if we really wanted to save a few bytes:
+    //
+    //  ndigit = (ncol == 0) ? 1 : 1 + floor(log10((double)ncol));
+    //
+    // but there's no need to get fancy since log10(2^64) = 19.266
+    ndigit = 20;
     buf = R_alloc(1 + ndigit + 1, 1); // V + (number) + NUL
 
     for (i = 0; i < ncol; i++) {
