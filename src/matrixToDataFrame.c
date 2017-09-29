@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <inttypes.h>
+#include <limits.h>
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
@@ -15,7 +16,7 @@ static SEXP pairlist_shallow_copy(SEXP p)
     SET_TAG(q, TAG(p));
     p = CDR(p);
 
-    while (!Rf_isNull(p)){
+    while (!Rf_isNull(p)) {
         PROTECT(s = Rf_cons(CAR(p), R_NilValue)); nprot++;
         SETCDR(q, s);
         q = CDR(q);
@@ -42,8 +43,8 @@ static void copy_attributes(SEXP out, SEXP data)
 // same as copy_attributes but without names
 static void copy_most_attributes(SEXP out, SEXP data)
 {
-  copy_attributes(out, data);
-  Rf_setAttrib(out, R_NamesSymbol, R_NilValue);
+    copy_attributes(out, data);
+    Rf_setAttrib(out, R_NamesSymbol, R_NilValue);
 }
 
 static void get_dim(SEXP x, R_xlen_t *nrowptr, R_xlen_t *ncolptr)
@@ -244,6 +245,7 @@ SEXP tibble_matrixToDataFrame(SEXP x)
     case VECSXP:
         copy_columns_vec(out, x, nrow, ncol);
         break;
+
     default:
         error("data type not handled") ;
         break;
