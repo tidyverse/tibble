@@ -91,7 +91,7 @@ static SEXP get_names(SEXP x, R_xlen_t ncol)
 
     // check for column names, use them if present
     PROTECT(dimnames = getAttrib(x, R_DimNamesSymbol)); nprot++;
-    if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) > 1) {
+    if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) == 2) {
         colnames = VECTOR_ELT(dimnames, 1);
         if (TYPEOF(colnames) == STRSXP) {
             goto Return;
@@ -117,6 +117,38 @@ static SEXP get_names(SEXP x, R_xlen_t ncol)
 Return:
     UNPROTECT(nprot);
     return colnames;
+}
+
+static SEXP get_rownames(SEXP x, R_xlen_t nrow)
+{
+    SEXP dimnames, rownames;
+    int nprot = 0;
+
+#ifndef TIBBLE_DROP_ROWNAMES
+    // check for row names, use them if present
+    PROTECT(dimnames = getAttrib(x, R_DimNamesSymbol)); nprot++;
+    if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) == 2) {
+        rownames = VECTOR_ELT(dimnames, 0);
+        if (TYPEOF(rownames) == STRSXP) {
+            goto Return;
+        }
+    }
+#endif
+
+    // otherwise, allocate new row names attribute
+    if (nrow <= INT_MAX) {
+        PROTECT(rownames = allocVector(INTSXP, 2)); nprot++;
+        INTEGER(rownames)[0] = NA_INTEGER;
+        INTEGER(rownames)[1] = -(int)nrow;
+    } else {
+        PROTECT(rownames = allocVector(REALSXP, 2)); nprot++;
+        REAL(rownames)[0] = NA_REAL;
+        REAL(rownames)[1] = -(double)nrow;
+    }
+
+Return:
+    UNPROTECT(nprot);
+    return rownames;
 }
 
 // don't use DATAPTR, it's not part of the public API
@@ -225,9 +257,22 @@ static void copy_column_attributes(SEXP out, SEXP x, R_xlen_t ncol)
     }
 }
 
+static SEXP get_class(void)
+{
+	SEXP cls;
+
+    PROTECT(cls = allocVector(STRSXP, 3));
+    SET_STRING_ELT(cls, 0, mkChar("tbl_df"));
+    SET_STRING_ELT(cls, 1, mkChar("tbl"));
+    SET_STRING_ELT(cls, 2, mkChar("data.frame"));
+	UNPROTECT(1);
+
+	return cls;
+}
+
 SEXP tibble_matrixToDataFrame(SEXP x)
 {
-    SEXP out, names, cls, rn;
+    SEXP out;
     R_xlen_t nrow = 0, ncol = 0;
     int nprot = 0;
 
@@ -257,25 +302,9 @@ SEXP tibble_matrixToDataFrame(SEXP x)
 
     copy_column_attributes(out, x, ncol);
 
-    PROTECT(names = get_names(x, ncol)); nprot++;
-    setAttrib(out, R_NamesSymbol, names);
-
-    PROTECT(cls = allocVector(STRSXP, 3)); nprot++;
-    SET_STRING_ELT(cls, 0, mkChar("tbl_df"));
-    SET_STRING_ELT(cls, 1, mkChar("tbl"));
-    SET_STRING_ELT(cls, 2, mkChar("data.frame"));
-    setAttrib(out, R_ClassSymbol, cls);
-
-    if (nrow <= INT_MAX) {
-        PROTECT(rn = allocVector(INTSXP, 2)); nprot++;
-        INTEGER(rn)[0] = NA_INTEGER;
-        INTEGER(rn)[1] = -(int)nrow;
-    } else {
-        PROTECT(rn = allocVector(REALSXP, 2)); nprot++;
-        REAL(rn)[0] = NA_REAL;
-        REAL(rn)[1] = -(double)nrow;
-    }
-    setAttrib(out, R_RowNamesSymbol, rn);
+    setAttrib(out, R_NamesSymbol, get_names(x, ncol));
+    setAttrib(out, R_RowNamesSymbol, get_rownames(x, nrow));
+    setAttrib(out, R_ClassSymbol, get_class());
 
     UNPROTECT(nprot);
     return out;
