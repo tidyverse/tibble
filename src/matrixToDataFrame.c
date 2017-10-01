@@ -165,6 +165,7 @@ static void *get_data(SEXP x, SEXPTYPE type, size_t *widthptr)
     case LGLSXP:
         ptr = LOGICAL(x);
         width = sizeof(int);
+        break;
 
     case INTSXP:
         ptr = INTEGER(x);
