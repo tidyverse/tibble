@@ -55,12 +55,15 @@ print.tbl_df <- print.tbl
 
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE) {
-  if (drop) warningc("drop ignored")
-
   nr <- nrow(x)
 
+  # Ignore drop as an argument
+  n_real_args <- nargs() - !missing(drop)
+
   # Escape early if nargs() == 2L; ie, column subsetting
-  if (nargs() <= 2L) {
+  if (n_real_args <= 2L) {
+    if (!missing(drop)) warningc("drop ignored")
+
     if (!missing(i)) {
       i <- check_names_df(i, x)
       result <- .subset(x, i)
@@ -90,5 +93,7 @@ print.tbl_df <- print.tbl
   }
 
   attr(result, "row.names") <- .set_row_names(nr)
-  as_tibble.data.frame(result, validate = FALSE)
+
+  if (drop && length(result) == 1L) result[[1L]]
+  else as_tibble.data.frame(result, validate = FALSE)
 }

@@ -188,8 +188,12 @@ test_that("[.tbl_df is no-op if args missing", {
   expect_identical(df_all[], df_all)
 })
 
-test_that("[.tbl_df warns for drop argument", {
-  expect_warning(df_all[1, 2, drop = TRUE], "ignored")
+test_that("[.tbl_df supports drop argument (#311)", {
+  expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][1])
+})
+
+test_that("[.tbl_df ignores drop argument (with warning) without j argument (#307)", {
+  expect_warning(expect_identical(df_all[1, drop = TRUE], df_all[1]))
 })
 
 
