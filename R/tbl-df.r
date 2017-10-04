@@ -94,6 +94,9 @@ print.tbl_df <- print.tbl
 
   attr(result, "row.names") <- .set_row_names(nr)
 
-  if (drop && length(result) == 1L) result[[1L]]
-  else as_tibble.data.frame(result, validate = FALSE)
+  if (drop && length(result) == 1L) {
+    result[[1L]]
+  } else {
+    as_tibble.data.frame(result, validate = FALSE)
+  }
 }
