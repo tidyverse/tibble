@@ -1,6 +1,7 @@
 #include <stddef.h>
-#include <R_ext/Rdynload.h>
 #include "tibble.h"
+
+#include <R_ext/Rdynload.h>
 
 // According to the C standard, names starting with underscore are reserved
 static const R_CallMethodDef CallEntries[] = {

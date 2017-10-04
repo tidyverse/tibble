@@ -1,5 +1,3 @@
-#define R_NO_REMAP
-
 #include <inttypes.h>
 #include <limits.h>
 #include <stdint.h>
