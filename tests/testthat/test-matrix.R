@@ -80,11 +80,26 @@ test_that("forwarding to as.data.frame() for ts objects (#184)", {
 })
 
 
-test_that("converting from matrix keeps row names if argument has them", {
-    x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
-    df <- data.frame(A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30,
-                     row.names = letters[1:6])
-    out <- as_tibble(x)
-    expect_identical(rownames(out), rownames(x))
-    expect_identical(out, as_tibble(df))
+test_that("converting from matrix removes row names by default", {
+  x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
+  df <- data.frame(A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30)
+  out <- as_tibble(x)
+  expect_false(has_rownames(out))
+  expect_identical(out, as_tibble(df))
+})
+
+test_that("converting from matrix keeps row names if argument has them, with rownames = NA", {
+  x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
+  df <- data.frame(A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30,
+                   row.names = letters[1:6])
+  out <- as_tibble(x, rownames = NA)
+  expect_identical(rownames(out), rownames(x))
+  expect_identical(out, as_tibble(df))
+})
+
+test_that("converting from matrix supports storing row names in a column", {
+  x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
+  df <- tibble(id = letters[1:6], A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30)
+  out <- as_tibble(x, rownames = "id")
+  expect_identical(out, df)
 })

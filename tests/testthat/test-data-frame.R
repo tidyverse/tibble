@@ -228,6 +228,21 @@ test_that("as_tibble() can validate (#278)", {
 })
 
 
+test_that("as_tibble() can convert row names", {
+  df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
+  expect_identical(
+    as_tibble(df, rownames = NULL),
+    tibble(a = 1:3, b = 2:4)
+  )
+  expect_identical(
+    as_tibble(df, rownames = "id"),
+    tibble(id = letters[5:7], a = 1:3, b = 2:4)
+  )
+  expect_identical(rownames(as_tibble(df)), rownames(df))
+  expect_identical(unclass(as_tibble(df)), unclass(df))
+})
+
+
 test_that("as_data_frame is an alias of as_tibble", {
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })

@@ -246,10 +246,8 @@ static SEXP get_class(void)
 {
   SEXP cls;
 
-  PROTECT(cls = Rf_allocVector(STRSXP, 3));
-  SET_STRING_ELT(cls, 0, Rf_mkChar("tbl_df"));
-  SET_STRING_ELT(cls, 1, Rf_mkChar("tbl"));
-  SET_STRING_ELT(cls, 2, Rf_mkChar("data.frame"));
+  PROTECT(cls = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(cls, 0, Rf_mkChar("data.frame"));
   UNPROTECT(1);
 
   return cls;
