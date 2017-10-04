@@ -82,6 +82,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   list(mcf = mcf, rows_missing = rows_missing)
 }
 
+#' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
   if (is.null(width)) {
@@ -107,7 +108,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
-  c(comment, mcf, footer)
+  c(style_subtle(comment), mcf, style_subtle(footer))
 }
 
 # Needs to be defined in package code: r-lib/pkgload#85
