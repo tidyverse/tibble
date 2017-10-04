@@ -184,6 +184,25 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   )
 })
 
+test_that("[.tbl_df supports character subsetting (#312)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[as.character(2:4), ], foo[2:4, ])
+  expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
+  expect_identical(foo[as.character(9:12), ], foo[9:12, ])
+  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
+test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
+  foo <- as_tibble(mtcars)
+  idx <- function(x) rownames(mtcars)[x]
+  expect_identical(foo[idx(2:4), ], foo[2:4, ])
+  expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
+  expect_identical(foo[idx(29:34), ], foo[29:34, ])
+  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
 test_that("[.tbl_df is no-op if args missing", {
   expect_identical(df_all[], df_all)
 })

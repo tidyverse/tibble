@@ -5,5 +5,6 @@
 #include <Rdefines.h>
 
 SEXP tibble_matrixToDataFrame(SEXP xSEXP);
+SEXP tibble_string_to_indices(SEXP x);
 
 #endif /* TIBBLE_H */
