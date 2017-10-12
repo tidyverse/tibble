@@ -84,6 +84,14 @@ print.tbl_df <- print.tbl
 
   # Next, subset rows
   if (!missing(i)) {
+    if (is.logical(i) && !(length(i) %in% c(1, nrow(x)))) {
+      warningc(
+        "Length of logical index must be 1",
+        if (nrow(x) != 1) paste0(" or ", nrow(x)),
+        ", not ", length(i)
+      )
+    }
+
     if (length(result) == 0) {
       nr <- length(attr(x, "row.names")[i])
     } else {

@@ -203,6 +203,18 @@ test_that("[.tbl_df supports character subsetting if row names are present (#312
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
+test_that("[.tbl_df supports logical subsetting (#318)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[c(FALSE, rep(TRUE, 3), rep(F, 6)), ], foo[2:4, ])
+  expect_identical(foo[TRUE, ], foo)
+  expect_identical(foo[FALSE, ], foo[0L, ])
+  expect_warning(
+    foo[c(TRUE, FALSE), ],
+    "Length of logical index must be 1 or 10, not 2",
+    fixed = TRUE
+  )
+})
+
 test_that("[.tbl_df is no-op if args missing", {
   expect_identical(df_all[], df_all)
 })
