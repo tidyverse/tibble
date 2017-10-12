@@ -87,7 +87,7 @@ print.tbl_df <- print.tbl
     if (length(result) == 0) {
       nr <- length(attr(x, "row.names")[i])
     } else {
-      if (!is.numeric(i)) {
+      if (is.character(i)) {
         if (has_rownames(x)) {
           i <- match(i, rownames(x))
         } else {
