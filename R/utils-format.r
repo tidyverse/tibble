@@ -305,7 +305,7 @@ pluralise <- function(message, objects) {
 }
 
 pluralise_n <- function(message, n) {
-  stopifnot(n > 0)
+  stopifnot(n >= 0)
   if (n == 1) {
     # strip [, unless there is space in between
     message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)
