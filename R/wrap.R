@@ -1,5 +1,6 @@
 NBSP <- "\U00A0"
 
+#' @import backports
 wrap <- function(..., indent = 0, prefix = "", width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap2(x, width - nchar_width(prefix), indent)
