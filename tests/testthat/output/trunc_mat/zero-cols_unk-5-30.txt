@@ -1,3 +1,4 @@
-<body of 0 row(s) created by pillar>
+# A tibble: ?? x 0
+<body created by pillar>
 # ... with at least 5 rows
 #   total

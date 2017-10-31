@@ -115,7 +115,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 print_without_body <- function(x, ...) {
   mockr::with_mock(
     format_body = function(x, ...) {
-      paste0("<body of ", length(format(x)), " row(s) created by pillar>")
+      paste0("<body created by pillar>")
     },
     print(x, ...)
   )
@@ -244,7 +244,7 @@ format_knitr_body <- function(x) {
 knit_print_without_body <- function(x, ...) {
   mockr::with_mock(
     format_knitr_body = function(x, ...) {
-      paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by pillar>")
+      paste0("<body created by pillar>")
     },
     knitr::knit_print(x, ...)
   )

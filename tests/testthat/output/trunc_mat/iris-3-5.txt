@@ -3,7 +3,7 @@
 #   150
 #   x
 #   5
-<body of 0 row(s) created by pillar>
+<body created by pillar>
 # ...
 #   with
 #   147

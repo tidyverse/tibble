@@ -1,2 +1,3 @@
-<body of 12 row(s) created by pillar>
+# A tibble: ?? x 5
+<body created by pillar>
 # ... with more rows
