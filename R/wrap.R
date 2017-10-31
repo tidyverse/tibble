@@ -1,6 +1,5 @@
 NBSP <- "\U00A0"
 
-#' @import backports
 wrap <- function(..., indent = 0, prefix = "", width) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap2(x, width - nchar_width(prefix), indent)
@@ -20,7 +19,11 @@ col_strwrap <- function(x, width, indent, exdent) {
   words_bw <- strsplit(crayon::strip_style(x), space_rx, perl = TRUE)[[1L]]
   stopifnot(length(words) == length(words_bw))
 
-  dots <- strrep(".", nchar_width(words_bw))
+  # strrep() requires R 3.3.0
+  dots <- map_chr(
+    nchar_width(words_bw),
+    function(x) paste(rep(".", x), collapse = "")
+  )
 
   wrapped_dots <- strwrap(
     paste(dots, collapse = " "),
