@@ -2,6 +2,6 @@
 
 A tibble: 3 x 9
 
-<body of 12 row(s) created by pillar>
+<body created by pillar>
 
 

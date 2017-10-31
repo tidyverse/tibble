@@ -1,5 +1,5 @@
 # A tibble: ?? x 5
-<body of 0 row(s) created by pillar>
+<body created by pillar>
 # ... with 5 variables:
 #   Sepal.Length <dbl>,
 #   Sepal.Width <dbl>,
