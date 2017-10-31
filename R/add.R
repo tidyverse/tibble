@@ -4,6 +4,8 @@
 #' frame. See [tribble()] for an easy way to create an complete
 #' data frame row-by-row.
 #'
+#' `add_case()` is an alias of `add_row()`.
+#'
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
 #'   in `.data` can be used, unset columns will get an `NA` value.
@@ -53,6 +55,11 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   set_class(remove_rownames(out), class(.data))
 }
+
+#' @export
+#' @rdname add_row
+#' @usage NULL
+add_case <- add_row
 
 na_value <- function(boilerplate) {
   if (is.list(boilerplate)) {
