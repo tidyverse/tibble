@@ -20,10 +20,7 @@ col_strwrap <- function(x, width, indent, exdent) {
   stopifnot(length(words) == length(words_bw))
 
   # strrep() requires R 3.3.0
-  dots <- map_chr(
-    nchar_width(words_bw),
-    function(x) paste(rep(".", x), collapse = "")
-  )
+  dots <- strrep(".", nchar_width(words_bw))
 
   wrapped_dots <- strwrap(
     paste(dots, collapse = " "),
