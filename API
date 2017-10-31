@@ -2,6 +2,7 @@
 
 ## Exported functions
 
+add_case(.data, ..., .before = NULL, .after = NULL)
 add_column(.data, ..., .before = NULL, .after = NULL)
 add_row(.data, ..., .before = NULL, .after = NULL)
 as.tibble(x, ...)
