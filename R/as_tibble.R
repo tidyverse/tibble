@@ -102,10 +102,8 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
     rownames <- .set_row_names(NROW(x[[1L]]))
   }
 
-  class(x) <- c("tbl_df", "tbl", "data.frame")
   attr(x, "row.names") <- rownames
-
-  x
+  new_tibble(x)
 }
 
 #' @export
