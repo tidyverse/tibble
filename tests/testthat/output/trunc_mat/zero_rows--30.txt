@@ -1,3 +1,4 @@
 # A tibble: 0 x 2
+<body created by pillar>
 # ... with 2 variables:
 #   a <chr>, b <lgl>

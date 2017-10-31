@@ -1,22 +1,17 @@
-#include <R.h>
-#include <Rinternals.h>
-#include <stdlib.h> // for NULL
+#include <stddef.h>
+#include "tibble.h"
+
 #include <R_ext/Rdynload.h>
 
-/* FIXME:
- Check these declarations against the C/Fortran source code.
- */
-
-/* .Call calls */
-extern SEXP tibble_matrixToDataFrame(SEXP);
-
+// According to the C standard, names starting with underscore are reserved
 static const R_CallMethodDef CallEntries[] = {
   {"tibble_matrixToDataFrame", (DL_FUNC) &tibble_matrixToDataFrame, 1},
+  {"tibble_string_to_indices", (DL_FUNC) &tibble_string_to_indices, 1},
   {NULL, NULL, 0}
 };
 
-void R_init_tibble(DllInfo *dll)
-{
+void R_init_tibble(DllInfo *dll) {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
+  R_forceSymbols(dll, TRUE);
 }

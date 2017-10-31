@@ -60,7 +60,6 @@ test_that("length 1 vectors are recycled", {
     tibble(x = 1:10, y = 1:2),
     "Column `y` must be length 1 or 10, not 2",
     fixed = TRUE
-
   )
 })
 
@@ -95,7 +94,7 @@ test_that("names in list columns are preserved", {
 
 test_that("attributes are preserved", {
   df <- structure(
-    data.frame( x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2) ),
+    data.frame(x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2)),
     meta = "this is important"
   )
   res <- as_tibble(df)
@@ -179,15 +178,19 @@ test_that("NULL makes 0 x 0 tbl_df", {
 
 test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
   df <- tibble()
-  expect_equal(class(df),
-               c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(structure(df, class = c("my_df", class(df)))),
-               c("my_df", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    class(df),
+    c("tbl_df", "tbl", "data.frame")
+  )
+  expect_equal(
+    class(structure(df, class = c("my_df", class(df)))),
+    c("my_df", "tbl_df", "tbl", "data.frame")
+  )
 })
 
 
 test_that("Can convert tables to data frame", {
-  mtcars_table <- xtabs(mtcars, formula = ~vs+am+cyl)
+  mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
 
   mtcars_tbl <- as_tibble(mtcars_table)
   expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "n"))
@@ -210,6 +213,33 @@ test_that("Can convert named atomic vectors to data frame", {
   expect_equal(as_tibble(setNames(nm = c(TRUE, FALSE, NA))), tibble(value = c(TRUE, FALSE, NA)))
   expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(value = 1.5:3.5))
   expect_equal(as_tibble(setNames(nm = letters)), tibble(value = letters))
+})
+
+
+test_that("as_tibble() can validate (#278)", {
+  df <- tibble(a = 1, b = 2)
+  names(df) <- c("", NA)
+  expect_error(as_tibble(df), NA)
+  expect_error(
+    as_tibble(df, validate = TRUE),
+    "Columns 1, 2 must be named",
+    fixed = TRUE
+  )
+})
+
+
+test_that("as_tibble() can convert row names", {
+  df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
+  expect_identical(
+    as_tibble(df, rownames = NULL),
+    tibble(a = 1:3, b = 2:4)
+  )
+  expect_identical(
+    as_tibble(df, rownames = "id"),
+    tibble(id = letters[5:7], a = 1:3, b = 2:4)
+  )
+  expect_identical(rownames(as_tibble(df)), rownames(df))
+  expect_identical(unclass(as_tibble(df)), unclass(df))
 })
 
 
@@ -287,7 +317,7 @@ test_that("columns must be named (#1101)", {
 
 test_that("names must be unique (#820)", {
   expect_error(
-    check_tibble(list(x = 1, x = 2)),
+    check_tibble(list(x = 1, x = 2, y = 3)),
     "Column `x` must have a unique name",
     fixed = TRUE
   )
@@ -295,5 +325,34 @@ test_that("names must be unique (#820)", {
     check_tibble(list(x = 1, x = 2, y = 3, y = 4)),
     "Columns `x`, `y` must have unique names",
     fixed = TRUE
+  )
+})
+
+test_that("mutate() semantics for tibble() (#213)", {
+  expect_equal(
+    tibble(a = 1:2, b = 1, c = b / sum(b)),
+    tibble(a = 1:2, b = c(1, 1), c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, a = 1:2, c = b / sum(b)),
+    tibble(b = c(1, 1), a = 1:2, c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, c = b / sum(b), a = 1:2),
+    tibble(b = c(1, 1), c = c(1, 1), a = 1:2)
+  )
+})
+
+test_that("types preserved when recycling in tibble() (#284)", {
+  expect_equal(
+    tibble(a = 1:2, b = as.difftime(1, units = "hours")),
+    tibble(a = 1:2, b = as.difftime(c(1, 1), units = "hours"))
+  )
+
+  expect_equal(
+    tibble(b = as.difftime(1, units = "hours"), a = 1:2),
+    tibble(b = as.difftime(c(1, 1), units = "hours"), a = 1:2)
   )
 })

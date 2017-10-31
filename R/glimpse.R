@@ -13,7 +13,7 @@
 #' @param x An object to glimpse at.
 #' @param width Width of output: defaults to the setting of the option
 #'   `tibble.width` (if finite) or the width of the console.
-#' @param ... Other arguments passed onto individual methods.
+#' @param ... Other arguments passed on to individual methods.
 #' @return x original x is (invisibly) returned, allowing `glimpse()` to be
 #'   used within a data pipe line.
 #' @export
@@ -46,7 +46,8 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   df <- as.data.frame(head(x, rows))
 
   var_types <- map_chr(x, type_sum)
-  var_names <- paste0("$ ", justify(names(x), right = FALSE), " <", var_types, "> ")
+  ticked_names <- tick_non_syntactic(names(x))
+  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 
@@ -70,7 +71,7 @@ glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
 str_trunc <- function(x, max_width) {
   width <- nchar(x)
 
-  for(i in seq_along(x)) {
+  for (i in seq_along(x)) {
     if (width[i] <= max_width[i]) next
 
     x[i] <- paste0(substr(x[i], 1, max_width[i] - 3), "...")
@@ -86,15 +87,11 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 
 #' @export
 format_v.list <- function(x) {
-  x <- map(x, format_v)
-  atomic <- map_int(x, length) == 1L
-  x <- map_chr(x, collapse)
-  x[!atomic] <- paste0("<", x[!atomic], ">")
-  if (length(x) == 1L) {
-    x
-  } else {
-    paste0("[", collapse(x), "]")
-  }
+  out <- map(x, format_v)
+  atomic <- map_int(out, length) == 1L
+  out <- map_chr(out, collapse)
+  out[!atomic] <- paste0("<", out[!atomic], ">")
+  paste0("[", collapse(out), "]")
 }
 
 #' @export

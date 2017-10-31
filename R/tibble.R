@@ -13,7 +13,9 @@
 #'
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.
+#'   so you can refer to previously created variables.  These arguments are
+#'   processed with [rlang::quos()] and support unquote via `!!` and
+#'   unquote-splice via `!!!`.
 #' @param xs  A list of unevaluated expressions created with `~`,
 #'   [quote()], or (deprecated) [lazyeval::lazy()].
 #' @seealso [as_tibble()] to turn an existing list into
@@ -44,13 +46,15 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 tibble <- function(...) {
-  as_tibble(lst(...))
+  xs <- quos(..., .named = TRUE)
+  as_tibble(lst_quos(xs, expand = TRUE))
 }
 
 #' @export
 #' @rdname tibble
 tibble_ <- function(xs) {
-  as_tibble(lst_(xs))
+  xs <- compat_lazy_dots(xs, caller_env())
+  tibble(!!! xs)
 }
 
 #' @export
@@ -116,7 +120,7 @@ recycle_columns <- function(x) {
 
   # Validate column lengths
   lengths <- map_int(x, NROW)
-  max <- max(lengths)
+  max <- max(c(lengths[lengths != 1L], 0L))
 
   bad_len <- lengths != 1L & lengths != max
   if (any(bad_len)) {
@@ -126,7 +130,7 @@ recycle_columns <- function(x) {
   }
 
   short <- lengths == 1
-  if (max != 1L && any(short)) {
+  if (max > 1L && any(short)) {
     x[short] <- map(x[short], rep, max)
   }
 
@@ -152,4 +156,3 @@ invalid_df_msg <- function(problem, df, vars, extra) {
     pluralise_msg(problem, extra)
   )
 }
-
