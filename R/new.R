@@ -9,11 +9,19 @@
 new_tibble <- function(x, ..., subclass = NULL) {
   # Can't use structure() here because it breaks the row.names attribute
   attribs <- list(...)
-  attribs <- modifyList(attributes(x), attribs)
-  if (!has_rownames(x) && "row.names" %in% names(attribs)) {
-    attribs[["row.names"]] <- .row_names_info(x, 0)
-  }
-  attributes(x)[names(attribs)] <- attribs
+
+  # reduce2() is not in the purrr compat layer
+  nested_attribs <- map2(names(attribs), attribs, function(name, value) list(name = value))
+  x <- reduce(
+    .init = x,
+    nested_attribs,
+    function(x, attr) {
+      if (!is.null(attr[[1]])) {
+        attr(x, names(attr)) <- attr[[1]]
+      }
+      x
+    }
+  )
 
   class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
   x
