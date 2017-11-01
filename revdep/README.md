@@ -30,28 +30,18 @@
 
 # Revdeps
 
-## Couldn't check (1)
-
-|package |version |error |warning |note |
-|:-------|:-------|:-----|:-------|:----|
-|heemod  |?       |      |        |     |
-
-## Broken (12)
+## Broken (8)
 
 |package                                            |version |error  |warning |note |
 |:--------------------------------------------------|:-------|:------|:-------|:----|
 |[batchtools](problems.md#batchtools)               |0.9.6   |__+1__ |        |1    |
 |[dbplyr](problems.md#dbplyr)                       |1.1.0   |__+1__ |        |1    |
 |[GSODR](problems.md#gsodr)                         |1.1.0   |__+1__ |        |     |
-|[msgtools](problems.md#msgtools)                   |0.2.7   |__+2__ |__+1__  |     |
 |[oai](problems.md#oai)                             |0.2.2   |__+1__ |        |     |
-|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |__+1__ |__+1__  |     |
-|[recipes](problems.md#recipes)                     |0.1.0   |__+2__ |        |     |
-|[rgho](problems.md#rgho)                           |1.0.1   |__+1__ |__+1__  |     |
+|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |       |__+1__  |     |
 |[RxODE](problems.md#rxode)                         |0.6-1   |__+1__ |        |1    |
 |[sjlabelled](problems.md#sjlabelled)               |1.0.4   |__+1__ |        |3    |
 |[sjmisc](problems.md#sjmisc)                       |2.6.2   |__+1__ |        |1    |
-|[tidyquant](problems.md#tidyquant)                 |0.5.3   |__+1__ |        |1    |
 
 ## All (263)
 
@@ -168,6 +158,7 @@
 |haploR                                             |1.6.2   |       |        |     |
 |[haven](problems.md#haven)                         |1.1.0   |       |        |2    |
 |[hddtools](problems.md#hddtools)                   |0.7     |1      |        |     |
+|heemod                                             |0.9.2   |       |        |     |
 |[highcharter](problems.md#highcharter)             |0.5.0   |       |        |1    |
 |HURDAT                                             |0.1.0   |       |        |     |
 |[huxtable](problems.md#huxtable)                   |1.1.0   |1      |        |1    |
@@ -196,7 +187,7 @@
 |[mosaicModel](problems.md#mosaicmodel)             |0.3.0   |       |        |1    |
 |[mregions](problems.md#mregions)                   |0.1.6   |       |        |1    |
 |[mrgsolve](problems.md#mrgsolve)                   |0.8.9   |       |        |1    |
-|[msgtools](problems.md#msgtools)                   |0.2.7   |__+2__ |__+1__  |     |
+|msgtools                                           |0.2.7   |       |        |     |
 |[myTAI](problems.md#mytai)                         |0.6.0   |       |        |1    |
 |[nandb](problems.md#nandb)                         |0.2.1   |1      |        |     |
 |naniar                                             |0.1.0   |       |        |     |
@@ -216,7 +207,7 @@
 |[perccalc](problems.md#perccalc)                   |1.0.0   |       |        |1    |
 |[petro.One](problems.md#petroone)                  |0.1.0   |1      |        |1    |
 |photobiology                                       |0.9.17  |       |        |     |
-|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |__+1__ |__+1__  |     |
+|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |       |__+1__  |     |
 |phylopath                                          |0.3.1   |       |        |     |
 |pinnacle.data                                      |0.1.4   |       |        |     |
 |pkggraph                                           |0.2.2   |       |        |     |
@@ -245,7 +236,7 @@
 |[readr](problems.md#readr)                         |1.1.1   |       |        |2    |
 |[readtext](problems.md#readtext)                   |0.50    |1      |        |     |
 |[readxl](problems.md#readxl)                       |1.0.0   |       |        |1    |
-|[recipes](problems.md#recipes)                     |0.1.0   |__+2__ |        |     |
+|recipes                                            |0.1.0   |       |        |     |
 |[REDCapR](problems.md#redcapr)                     |0.9.8   |1      |        |     |
 |[refimpact](problems.md#refimpact)                 |1.0.0   |       |        |2    |
 |rematch2                                           |2.0.1   |       |        |     |
@@ -253,7 +244,7 @@
 |[rerddap](problems.md#rerddap)                     |0.4.2   |1      |        |1    |
 |reutils                                            |0.2.3   |       |        |     |
 |[rgbif](problems.md#rgbif)                         |0.9.8   |1      |        |     |
-|[rgho](problems.md#rgho)                           |1.0.1   |__+1__ |__+1__  |     |
+|rgho                                               |1.0.1   |       |        |     |
 |riem                                               |0.1.1   |       |        |     |
 |[rif](problems.md#rif)                             |0.2.0   |1      |        |     |
 |Rilostat                                           |0.2     |       |        |     |
@@ -299,7 +290,7 @@
 |tfruns                                             |1.0     |       |        |     |
 |tibbletime                                         |0.0.2   |       |        |     |
 |tidygraph                                          |1.0.0   |       |        |     |
-|[tidyquant](problems.md#tidyquant)                 |0.5.3   |__+1__ |        |1    |
+|[tidyquant](problems.md#tidyquant)                 |0.5.3   |1      |1       |1    |
 |[tidyr](problems.md#tidyr)                         |0.7.2   |       |        |1    |
 |[tidyRSS](problems.md#tidyrss)                     |1.2.2   |       |        |1    |
 |tidystats                                          |0.1     |       |        |     |
@@ -319,5 +310,4 @@
 |[XKCDdata](problems.md#xkcddata)                   |0.1.0   |       |        |1    |
 |[zeligverse](problems.md#zeligverse)               |0.1.1   |       |        |1    |
 |[zFactor](problems.md#zfactor)                     |0.1.7   |       |        |1    |
-|heemod                                             |?       |       |        |     |
 

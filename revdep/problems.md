@@ -1375,73 +1375,6 @@ Version: 0.8.9
         libs   5.7Mb
     ```
 
-# msgtools
-
-Version: 0.2.7
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > pkg <- dummy_pkg()
-    Creating package 'translateme' in '/home/muelleki/tmp/RtmpYHNB4K'
-    No DESCRIPTION found. Creating with values:
-    
-    
-    Package: translateme
-    Title: An Example Package
-    Version: 0.0.0.9000
-    Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-    Description: Demonstrates 'msgtools' functionality
-    Depends: R (>= 3.4.2)
-    License: Unlimited
-    Encoding: UTF-8
-    LazyData: true
-    BugReports: https://github.com/RL10N/msgtools/issues
-    > 
-    > # get message distances
-    > dist <- get_message_distances(pkg = pkg)
-    Error: Column 8 must be named
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      4: inherits(get_message_distances(pkg = pkg_dir), "data.frame")
-      5: get_message_distances(pkg = pkg_dir)
-      6: as_tibble(sapply(msgs[["msgid"]], adist, y = msgs[["msgid"]], fixed = TRUE))
-      7: as_tibble.matrix(sapply(msgs[["msgid"]], adist, y = msgs[["msgid"]], fixed = TRUE))
-      8: as_tibble(matrixToDataFrame(x), ..., rownames = rownames)
-      9: as_tibble.data.frame(matrixToDataFrame(x), ..., rownames = rownames)
-      10: list_to_tibble(x, validate, raw_rownames(x))
-      11: check_tibble(x)
-      12: invalid_df("must be named", x, which(bad_name))
-      13: stopc(pluralise_msg("Column(s) ", vars), " ", pluralise(problem, vars))
-      14: abort(paste0(...))
-      
-      ═ DONE ═════════════════════════════════════════════════════════════════════════
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    ......... done.
-    .... done.
-    0 translated messages, 8 untranslated messages.
-    Quitting from lines 163-164 (Tutorial.Rmd) 
-    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
-    Column 8 must be named
-    Execution halted
-    ```
-
 # myTAI
 
 Version: 0.6.0
@@ -1818,48 +1751,29 @@ Version: 0.4.13
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘photobiologyInOut-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: mat2mspct
-    > ### Title: Convert a matrix into a collection of spectra
-    > ### Aliases: mat2mspct
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > x <- matrix(1:100, ncol = 2)
-    > wl <- (301:350)
-    > z <- mat2mspct(x, wl, "filter_spct", "Tpc")
-    Error: Columns 2, 3 must be named
-    Execution halted
-    ```
-
 *   checking re-building of vignette outputs ... WARNING
     ```
     ...
-    Read 7 items
-    Read 8 items
-    Read 33 items
-    Read 33 items
-    Read 33 items
-    Read 8 items
-    Read 159 items
-    Read 159 items
-    Read 159 items
-    Read 5 items
-    Read 8 items
-    Read 8 items
-    Read 5 items
-    Read 8 items
-    Read 8 items
-    Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=Kumpula,%20Helsinki,%20Finland&sensor=false
-    Read 25 items
-    Quitting from lines 851-855 (user-guide.Rnw) 
-    Error: processing vignette 'user-guide.Rnw' failed with diagnostics:
-    Columns 2, 3 must be named
+    ! Package inputenc Error: Unicode char ⁵ (U+2075)
+    (inputenc)                not set up for use with LaTeX.
+    
+    See the inputenc package documentation for explanation.
+    Type  H <return>  for immediate help.
+    ! Package inputenc Error: Unicode char ⁻ (U+207B)
+    (inputenc)                not set up for use with LaTeX.
+    
+    See the inputenc package documentation for explanation.
+    Type  H <return>  for immediate help.
+    ! Package inputenc Error: Unicode char ⁻ (U+207B)
+    (inputenc)                not set up for use with LaTeX.
+    
+    See the inputenc package documentation for explanation.
+    Type  H <return>  for immediate help.
+    ! Package inputenc Error: Unicode char ⁻ (U+207B)
+    (inputenc)                not set up for use with LaTeX.
+    
+    See
+    Calls: buildVignettes -> texi2pdf -> texi2dvi
     Execution halted
     ```
 
@@ -2077,60 +1991,6 @@ Version: 1.0.0
         libs   4.3Mb
     ```
 
-# recipes
-
-Version: 0.1.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > ### ** Examples
-    > 
-    > library(lubridate)
-    
-    Attaching package: ‘lubridate’
-    
-    The following object is masked from ‘package:base’:
-    
-        date
-    
-    > 
-    > examples <- data.frame(Dan = ymd("2002-03-04") + days(1:10),
-    +                        Stefan = ymd("2006-01-13") + days(1:10))
-    > date_rec <- recipe(~ Dan + Stefan, examples) %>%
-    +    step_date(all_predictors())
-    > 
-    > date_rec <- prep(date_rec, training = examples)
-    step 1 date training 
-    Error: Columns 1, 2, 3, 4, 5, 6 must be named
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      step 1 window training 
-      step 1 window training 
-      step 1 window training 
-      testthat results ================================================================
-      OK: 530 SKIPPED: 0 FAILED: 7
-      1. Error: default option (@test_date.R#20) 
-      2. Error: nondefault options (@test_date.R#56) 
-      3. Error: ordinal values (@test_date.R#76) 
-      4. Error: printing (@test_date.R#96) 
-      5. Error: Date class (@test_holiday.R#14) 
-      6. Error: POSIXct class (@test_holiday.R#36) 
-      7. Error: printing (@test_holiday.R#55) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # REDCapR
 
 Version: 0.9.8
@@ -2246,42 +2106,6 @@ Version: 0.9.8
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# rgho
-
-Version: 1.0.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘rgho-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_gho_data
-    > ### Title: Returns GHO Data
-    > ### Aliases: get_gho_data
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > result <- get_gho_data(
-    +   dimension = "GHO",
-    +   code = "MDG_0000000001"
-    + )
-    Error: Column 3 must be named
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 36-38 (a-intro.Rmd) 
-    Error: processing vignette 'a-intro.Rmd' failed with diagnostics:
-    Column 3 must be named
-    Execution halted
     ```
 
 # rif
@@ -2968,31 +2792,55 @@ Version: 2.5.9
 
 Version: 0.5.3
 
-## Newly broken
+## In both
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-                 quo_splice(node_car(x), x, warn = warn)
-                 x <- node_cdr(x)
-             }
          })
       9: expr_type_of(.x)
       10: typeof(x)
       11: duplicate(quo)
       
       testthat results ================================================================
-      OK: 174 SKIPPED: 0 FAILED: 2
-      1. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
-      2. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
+      OK: 173 SKIPPED: 0 FAILED: 5
+      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
+      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
+      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
+      4. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
+      5. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-## In both
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '999 Unknown Error'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+    
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '999 Unknown Error'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing AAPL.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '999 Unknown Error'
+    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing FB.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '999 Unknown Error'
+    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing GOOG.
+    Warning in value[[3L]](cond) : Returning as nested data frame.
+    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
+    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
+    object 'Ask' not found
+    Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
