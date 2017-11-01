@@ -109,7 +109,7 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ..., rownames = NULL) {
-  as_tibble(matrixToDataFrame(x), ..., rownames = rownames)
+  as_tibble(repair_names(matrixToDataFrame(x)), ..., rownames = rownames)
 }
 
 #' @export
