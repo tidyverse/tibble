@@ -9,7 +9,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |Zulu                         |
-|date     |2017-11-01                   |
+|date     |2017-11-02                   |
 
 # Dependencies
 
@@ -26,22 +26,19 @@
 |Rcpp       |0.12.13 |NA         |*  |
 |rlang      |0.1.2   |0.1.2      |   |
 |testthat   |NA      |1.0.2.9000 |*  |
-|withr      |NA      |2.0.0      |*  |
+|withr      |NA      |2.1.0      |*  |
 
 # Revdeps
 
-## Broken (8)
+## Broken (5)
 
-|package                                            |version |error  |warning |note |
-|:--------------------------------------------------|:-------|:------|:-------|:----|
-|[batchtools](problems.md#batchtools)               |0.9.6   |__+1__ |        |1    |
-|[dbplyr](problems.md#dbplyr)                       |1.1.0   |__+1__ |        |1    |
-|[GSODR](problems.md#gsodr)                         |1.1.0   |__+1__ |        |     |
-|[oai](problems.md#oai)                             |0.2.2   |__+1__ |        |     |
-|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |       |__+1__  |     |
-|[RxODE](problems.md#rxode)                         |0.6-1   |__+1__ |        |1    |
-|[sjlabelled](problems.md#sjlabelled)               |1.0.4   |__+1__ |        |3    |
-|[sjmisc](problems.md#sjmisc)                       |2.6.2   |__+1__ |        |1    |
+|package                              |version |error  |warning |note |
+|:------------------------------------|:-------|:------|:-------|:----|
+|[batchtools](problems.md#batchtools) |0.9.6   |__+1__ |        |1    |
+|[dbplyr](problems.md#dbplyr)         |1.1.0   |__+1__ |        |1    |
+|[RxODE](problems.md#rxode)           |0.6-1   |__+1__ |        |1    |
+|[sjlabelled](problems.md#sjlabelled) |1.0.4   |__+1__ |        |3    |
+|[sjmisc](problems.md#sjmisc)         |2.6.2   |__+1__ |        |1    |
 
 ## All (263)
 
@@ -153,7 +150,7 @@
 |gitlabr                                            |0.9     |       |        |     |
 |googledrive                                        |0.1.1   |       |        |     |
 |[googleLanguageR](problems.md#googlelanguager)     |0.1.0   |1      |        |     |
-|[GSODR](problems.md#gsodr)                         |1.1.0   |__+1__ |        |     |
+|GSODR                                              |1.1.0   |-1     |        |     |
 |hansard                                            |0.5.5   |       |        |     |
 |haploR                                             |1.6.2   |       |        |     |
 |[haven](problems.md#haven)                         |1.1.0   |       |        |2    |
@@ -195,7 +192,7 @@
 |[nneo](problems.md#nneo)                           |0.1.0   |1      |        |     |
 |[noaastormevents](problems.md#noaastormevents)     |0.1.0   |       |        |2    |
 |[nycflights13](problems.md#nycflights13)           |0.2.2   |       |        |1    |
-|[oai](problems.md#oai)                             |0.2.2   |__+1__ |        |     |
+|oai                                                |0.2.2   |-1     |        |     |
 |[observer](problems.md#observer)                   |0.1.2   |       |        |1    |
 |[odbc](problems.md#odbc)                           |1.1.3   |1      |        |1    |
 |[officer](problems.md#officer)                     |0.1.8   |2      |1       |     |
@@ -207,7 +204,7 @@
 |[perccalc](problems.md#perccalc)                   |1.0.0   |       |        |1    |
 |[petro.One](problems.md#petroone)                  |0.1.0   |1      |        |1    |
 |photobiology                                       |0.9.17  |       |        |     |
-|[photobiologyInOut](problems.md#photobiologyinout) |0.4.13  |       |__+1__  |     |
+|photobiologyInOut                                  |0.4.13  |       |        |     |
 |phylopath                                          |0.3.1   |       |        |     |
 |pinnacle.data                                      |0.1.4   |       |        |     |
 |pkggraph                                           |0.2.2   |       |        |     |

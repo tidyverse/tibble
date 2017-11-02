@@ -945,34 +945,6 @@ Version: 0.1.0
       Execution halted
     ```
 
-# GSODR
-
-Version: 1.1.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      testthat results ================================================================
-      OK: 50 SKIPPED: 0 FAILED: 4
-      1. Error: .download_files properly works, subsetting for country and
-                  agroclimatology works and .process_gz returns a data table (@test-process_gz.R#23) 
-      2. Error: reformat_GSOD file_list parameter reformats data properly (@test-reformat_GSOD.R#15) 
-      3. Error: Timeout options are reset on update_station_list() exit (@test-update_station_list.R#6) 
-      4. Error: update_station_list() downloads and imports proper file (@test-update_station_list.R#13) 
-      
-      Error: testthat unit tests failed
-      In addition: Warning messages:
-      1: In .Internal(gc(verbose, reset)) :
-        closing unused connection 4 (ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-history.csv)
-      2: In .Internal(gc(verbose, reset)) :
-        closing unused connection 3 (ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-history.csv)
-      Execution halted
-    ```
-
 # haven
 
 Version: 1.1.0
@@ -1491,32 +1463,6 @@ Version: 0.2.2
         data   6.9Mb
     ```
 
-# oai
-
-Version: 0.2.2
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library("oai")
-      > 
-      > test_check("oai")
-      1. Failure: badArgument is triggered (@test-handle_errors.R#28) ----------------
-      `handle_errors(xml)` did not throw an error.
-      
-      testthat results ================================================================
-      OK: 137 SKIPPED: 1 FAILED: 1
-      1. Failure: badArgument is triggered (@test-handle_errors.R#28) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # observer
 
 Version: 0.1.2
@@ -1743,38 +1689,6 @@ Version: 0.1.0
     Namespaces in Imports field not imported from:
       ‘Rgraphviz’ ‘cluster’ ‘graph’
       All declared Imports should be used.
-    ```
-
-# photobiologyInOut
-
-Version: 0.4.13
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    ! Package inputenc Error: Unicode char ⁵ (U+2075)
-    (inputenc)                not set up for use with LaTeX.
-    
-    See the inputenc package documentation for explanation.
-    Type  H <return>  for immediate help.
-    ! Package inputenc Error: Unicode char ⁻ (U+207B)
-    (inputenc)                not set up for use with LaTeX.
-    
-    See the inputenc package documentation for explanation.
-    Type  H <return>  for immediate help.
-    ! Package inputenc Error: Unicode char ⁻ (U+207B)
-    (inputenc)                not set up for use with LaTeX.
-    
-    See the inputenc package documentation for explanation.
-    Type  H <return>  for immediate help.
-    ! Package inputenc Error: Unicode char ⁻ (U+207B)
-    (inputenc)                not set up for use with LaTeX.
-    
-    See
-    Calls: buildVignettes -> texi2pdf -> texi2dvi
-    Execution halted
     ```
 
 # PKPDmisc
