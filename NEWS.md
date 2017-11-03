@@ -1,3 +1,19 @@
+### tibble 1.3.4.9002 (2017-11-03)
+
+- In `glimpse()`, compute `type_sum()` from data frame for dbplyr compatibility (#328).
+- `as_tibble.matrix()` repairs column names.
+- Compatible with R 3.1 (#323).
+- Make add_case() and alias for add_row() (#324, @LaDilettante).
+- `add_column()` to an empty zero-row tibble with a variable of nonzero length now produces a correct error message (#319).
+- Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (#318).
+- Tibbles now support character subsetting (#312).
+- `as_tibble()` gains `rownames` argument (#288, #289).
+- Remove Rcpp dependency (#313, @patperry).
+- ``` `[.tbl_df`() ``` supports `drop = TRUE` and omits the warning if `j` is passed. The calls `df[i, j, drop = TRUE]` and `df[i, drop = TRUE]` are now compatible with data frames again (#307, #311).
+- Prevent `add_column()` from dropping classes and attributes by removing the use of `cbind()`. Additionally this ensures that `add_column()` can be used with grouped data frames (#303, @DavisVaughan).
+- Fixed width for word wrapping of the extra information (#301).
+
+
 ### tibble 1.3.4.9001 (2017-08-25)
 
 - Prevent `add_column()` from dropping classes and attributes by removing the use of `cbind()`. Additionally this ensures that `add_column()` can be used with grouped data frames (#303, @DavisVaughan).
