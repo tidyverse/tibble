@@ -2,7 +2,7 @@
 
 data.frame [32 x 11]
 
-<body of 13 row(s) created by colformat>
+<body created by pillar>
 
 (with 22 more rows, and 2 more variables: gear <dbl>,
   carb <dbl>)

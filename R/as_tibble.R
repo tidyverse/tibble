@@ -19,6 +19,10 @@
 #'   want to suppress this when you know that you already have a valid data
 #'   frame and you want to save some time, or to explicitly enable it
 #'   if you have a tibble that you want to re-check.
+#' @param rownames If `NULL`, remove row names (default for matrices, may become
+#'   default for data frames in the future). If `NA`, keep row names (current
+#'   default for data frames). Otherwise, the name of the new column that will
+#'   contain the existing row names.
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)
@@ -57,15 +61,22 @@ as_tibble <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.tbl_df <- function(x, ..., validate = FALSE) {
+as_tibble.tbl_df <- function(x, ..., validate = FALSE, rownames = NULL) {
   if (validate) return(NextMethod())
   x
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = TRUE, ...) {
-  list_to_tibble(x, validate, raw_rownames(x))
+as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
+  result <- list_to_tibble(x, validate, raw_rownames(x))
+  if (is.null(rownames)) {
+    remove_rownames(result)
+  } else if (is.na(rownames)) {
+    result
+  } else {
+    rownames_to_column(result, var = rownames)
+  }
 }
 
 #' @export
@@ -91,16 +102,14 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
     rownames <- .set_row_names(NROW(x[[1L]]))
   }
 
-  class(x) <- c("tbl_df", "tbl", "data.frame")
   attr(x, "row.names") <- rownames
-
-  x
+  new_tibble(x)
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ...) {
-  matrixToDataFrame(x)
+as_tibble.matrix <- function(x, ..., rownames = NULL) {
+  as_tibble(repair_names(matrixToDataFrame(x)), ..., rownames = rownames)
 }
 
 #' @export

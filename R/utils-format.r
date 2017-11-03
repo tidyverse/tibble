@@ -73,7 +73,7 @@ shrink_mat <- function(df, width, rows, n, star) {
     rows_missing <- 0L
   }
 
-  mcf <- colformat::multicolformat(
+  mcf <- pillar::colonnade(
     df,
     has_row_id = if (star) "*" else TRUE,
     needs_dots = needs_dots
@@ -82,6 +82,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   list(mcf = mcf, rows_missing = rows_missing)
 }
 
+#' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
   if (is.null(width)) {
@@ -104,16 +105,18 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   }
 
   comment <- format_comment(header, width = width)
-  squeezed <- colformat::squeeze(x$mcf, width = width)
+  squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
-  c(comment, mcf, footer)
+  c(style_subtle(comment), mcf, style_subtle(footer))
 }
 
 # Needs to be defined in package code: r-lib/pkgload#85
 print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_body = function(x, ...) { paste0("<body of ", length(format(x)), " row(s) created by colformat>") },
+    format_body = function(x, ...) {
+      paste0("<body created by pillar>")
+    },
     print(x, ...)
   )
 }
@@ -132,9 +135,9 @@ format_body <- function(x) {
   format(x)
 }
 
-format_footer <- function(x, mcf_squeezed) {
+format_footer <- function(x, squeezed_colonnade) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, colformat::extra_cols(mcf_squeezed))
+  extra_cols <- format_footer_cols(x, pillar::extra_cols(squeezed_colonnade))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
@@ -218,7 +221,7 @@ knit_print.trunc_mat <- function(x, options) {
     summary <- character()
   }
 
-  squeezed <- colformat::squeeze(x$mcf, x$width)
+  squeezed <- pillar::squeeze(x$mcf, x$width)
 
   kable <- format_knitr_body(squeezed)
   extra <- format_footer(x, squeezed)
@@ -229,8 +232,8 @@ knit_print.trunc_mat <- function(x, options) {
     extra <- "\n"
   }
 
-  res <- paste(c('', '', summary, '', kable, '', extra), collapse = '\n')
-  knitr::asis_output(res, cacheable = TRUE)
+  res <- paste(c("", "", summary, "", kable, "", extra), collapse = "\n")
+  knitr::asis_output(crayon::strip_style(res), cacheable = TRUE)
 }
 
 format_knitr_body <- function(x) {
@@ -240,24 +243,12 @@ format_knitr_body <- function(x) {
 # Needs to be defined in package code: r-lib/pkgload#85
 knit_print_without_body <- function(x, ...) {
   mockr::with_mock(
-    format_knitr_body = function(x, ...) { paste0("<body of ", length(knitr::knit_print(x)), " row(s) created by colformat>") },
+    format_knitr_body = function(x, ...) {
+      paste0("<body created by pillar>")
+    },
     knitr::knit_print(x, ...)
   )
 }
-
-NBSP <- "\U00A0"
-
-wrap <- function(..., indent = 0, prefix = "", width) {
-  x <- paste0(..., collapse = "")
-  wrapped <- strwrap(x, indent = indent, exdent = indent + 2,
-    width = max(width - nchar_width(prefix), 0))
-  wrapped <- paste0(prefix, wrapped)
-  wrapped <- gsub(NBSP, " ", wrapped)
-
-  paste0(wrapped, collapse = "\n")
-}
-
-
 
 format_factor <- function(x) {
   format_character(as.character(x))
@@ -314,7 +305,7 @@ pluralise <- function(message, objects) {
 }
 
 pluralise_n <- function(message, n) {
-  stopifnot(n > 0)
+  stopifnot(n >= 0)
   if (n == 1) {
     # strip [, unless there is space in between
     message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)

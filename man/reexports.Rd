@@ -15,6 +15,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{colformat}{\code{\link[colformat]{obj_sum}}, \code{\link[colformat]{type_sum}}, \code{\link[colformat]{is_vector_s3}}}
+  \item{pillar}{\code{\link[pillar]{obj_sum}}, \code{\link[pillar]{type_sum}}, \code{\link[pillar]{is_vector_s3}}}
 }}
 

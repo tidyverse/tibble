@@ -2,8 +2,8 @@
 #'
 #' `tbl_sum()` gives a brief textual description of a table-like object,
 #' which should include the dimensions, the data source, and possible grouping
-#' (for `dplyr`).  The default implementation forwards to [colformat::obj_sum()].
-#' @seealso [colformat::type_sum()], [colformat::is_vector_s3()]
+#' (for `dplyr`).  The default implementation forwards to [pillar::obj_sum()].
+#' @seealso [pillar::type_sum()], [pillar::is_vector_s3()]
 #' @param x Object to summarise
 #' @export
 tbl_sum <- function(x) UseMethod("tbl_sum", x)
@@ -26,17 +26,17 @@ dim_desc <- function(x) {
 size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
-  paste0(" [", dim_desc(x), "]" )
+  paste0(" [", dim_desc(x), "]")
 }
 
-#' @importFrom colformat obj_sum
+#' @importFrom pillar obj_sum
 #' @export
-colformat::obj_sum
+pillar::obj_sum
 
-#' @importFrom colformat type_sum
+#' @importFrom pillar type_sum
 #' @export
-colformat::type_sum
+pillar::type_sum
 
-#' @importFrom colformat is_vector_s3
+#' @importFrom pillar is_vector_s3
 #' @export
-colformat::is_vector_s3
+pillar::is_vector_s3

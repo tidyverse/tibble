@@ -15,13 +15,13 @@
 \usage{
 as_tibble(x, ...)
 
-\method{as_tibble}{tbl_df}(x, ..., validate = FALSE)
+\method{as_tibble}{tbl_df}(x, ..., validate = FALSE, rownames = NULL)
 
-\method{as_tibble}{data.frame}(x, validate = TRUE, ...)
+\method{as_tibble}{data.frame}(x, validate = TRUE, ..., rownames = NA)
 
 \method{as_tibble}{list}(x, validate = TRUE, ...)
 
-\method{as_tibble}{matrix}(x, ...)
+\method{as_tibble}{matrix}(x, ..., rownames = NULL)
 
 \method{as_tibble}{table}(x, n = "n", ...)
 
@@ -39,6 +39,11 @@ frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
 frame and you want to save some time, or to explicitly enable it
 if you have a tibble that you want to re-check.}
+
+\item{rownames}{If \code{NULL}, remove row names (default for matrices, may become
+default for data frames in the future). If \code{NA}, keep row names (current
+default for data frames). Otherwise, the name of the new column that will
+contain the existing row names.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
 }

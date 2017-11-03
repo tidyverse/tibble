@@ -19,7 +19,9 @@ tibble_(xs)
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created variables.}
+so you can refer to previously created variables.  These arguments are
+processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{!!} and
+unquote-splice via \code{!!!}.}
 
 \item{xs}{A list of unevaluated expressions created with \code{~},
 \code{\link[=quote]{quote()}}, or (deprecated) \code{\link[lazyeval:lazy]{lazyeval::lazy()}}.}

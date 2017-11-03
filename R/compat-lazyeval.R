@@ -24,7 +24,8 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
     return(quo())
   }
 
-  coerce_type(lazy, "quosure",
+  coerce_type(
+    lazy, "quosure",
     formula = as_quosure(lazy, env),
     symbol = ,
     language = new_quosure(lazy, env),
@@ -43,7 +44,8 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
       new_quosure(lazy, env)
     },
     list =
-      coerce_class(lazy, "quosure",
+      coerce_class(
+        lazy, "quosure",
         lazy = new_quosure(lazy$expr, lazy$env)
       )
   )
