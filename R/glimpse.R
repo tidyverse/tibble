@@ -45,8 +45,8 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
 
-  var_types <- map_chr(x, type_sum)
-  ticked_names <- tick_non_syntactic(names(x))
+  var_types <- map_chr(df, type_sum)
+  ticked_names <- tick_non_syntactic(names(df))
   var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
