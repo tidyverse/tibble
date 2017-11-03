@@ -3,7 +3,7 @@
 - In `glimpse()`, compute `type_sum()` from data frame for dbplyr compatibility (#328).
 - `as_tibble.matrix()` repairs column names.
 - Compatible with R 3.1 (#323).
-- Make add_case() and alias for add_row() (#324, @LaDilettante).
+- Make `add_case()` an alias for `add_row()` (#324, @LaDilettante).
 - `add_column()` to an empty zero-row tibble with a variable of nonzero length now produces a correct error message (#319).
 - Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (#318).
 - Tibbles now support character subsetting (#312).
