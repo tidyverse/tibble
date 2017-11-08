@@ -23,6 +23,10 @@ new_tibble <- function(x, ..., subclass = NULL) {
     }
   )
 
+  set_tibble_class(x, subclass = subclass)
+}
+
+set_tibble_class <- function(x, subclass = NULL) {
   class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
   x
 }
