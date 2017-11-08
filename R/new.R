@@ -11,7 +11,7 @@ new_tibble <- function(x, ..., subclass = NULL) {
   attribs <- list(...)
 
   # reduce2() is not in the purrr compat layer
-  nested_attribs <- map2(names(attribs), attribs, function(name, value) list(name = value))
+  nested_attribs <- map2(names(attribs), attribs, function(name, value) set_names(list(value), name))
   x <- reduce(
     .init = x,
     nested_attribs,
