@@ -295,3 +295,27 @@ test_that("is.tibble", {
 test_that("is_tibble", {
   expect_identical(is.tibble, is_tibble)
 })
+
+# new_tibble --------------------------------------------------------------
+
+test_that("new_tibble", {
+  tbl <- new_tibble(
+    data.frame(a = 1),
+    attr1 = "val1",
+    attr2 = "val2",
+    subclass = "nt"
+  )
+
+  # Can't compare directly due to dplyr:::all.equal.tbl_df()
+  expect_identical(class(tbl), c("nt", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    unclass(tbl),
+    structure(
+      list(a = 1),
+      .Names = "a",
+      row.names = c(NA, -1L),
+      attr1 = "val1",
+      attr2 = "val2"
+    )
+  )
+})
