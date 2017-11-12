@@ -1,6 +1,6 @@
 # A tibble: 32 x 11
 <body created by pillar>
-# ... with 24 more rows, and
+# ... with 32 rows total, and
 #   7 more variables:
 #   drat <dbl>, wt <dbl>,
 #   qsec <dbl>, vs <dbl>,
