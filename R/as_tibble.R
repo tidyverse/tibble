@@ -97,6 +97,8 @@ list_to_tibble <- function(x, validate) {
 
   if (validate) {
     x <- check_tibble(x)
+  } else if (has_null_names(x)) {
+    x <- set_names(x, rep_along(x, ""))
   }
   x <- recycle_columns(x)
 

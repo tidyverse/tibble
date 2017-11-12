@@ -8,7 +8,7 @@
 #' @export
 new_tibble <- function(x, nrow = NULL, subclass = NULL) {
   stopifnot(is.list(x))
-  stopifnot(is_named(x))
+  stopifnot(has_nonnull_names(x))
 
   x <- set_tibble_class(x, subclass = subclass)
   if (is.null(nrow)) nrow <- guess_nrow(x)
