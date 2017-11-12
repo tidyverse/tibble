@@ -8,6 +8,7 @@
 #' @export
 new_tibble <- function(x, nrow = NULL, subclass = NULL) {
   stopifnot(is.list(x))
+  stopifnot(is_named(x))
 
   x <- set_tibble_class(x, subclass = subclass)
   if (is.null(nrow)) nrow <- guess_nrow(x)
@@ -30,7 +31,7 @@ validate_nrow <- function(x) {
   bad_len <- lengths != first
   if (any(bad_len)) {
     invalid_df_msg(
-      paste0("must be length ", max, ", not "), x, bad_len, lengths[bad_len]
+      paste0("must be length ", first, ", not "), x, bad_len, lengths[bad_len]
     )
   }
 
