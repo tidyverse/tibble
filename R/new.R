@@ -7,6 +7,8 @@
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
 new_tibble <- function(x, ..., subclass = NULL) {
+  stopifnot(is.list(x))
+
   x <- update_tibble_attrs(x, ...)
   x <- set_tibble_class(x, subclass = subclass)
   x
