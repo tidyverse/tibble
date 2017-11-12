@@ -301,6 +301,8 @@ test_that("is_tibble", {
 test_that("new_tibble", {
   tbl <- new_tibble(
     data.frame(a = 1:3),
+    attr1 = "value1",
+    attr2 = 2,
     subclass = "nt"
   )
 
@@ -310,6 +312,8 @@ test_that("new_tibble", {
     unclass(tbl),
     structure(
       list(a = 1:3),
+      attr1 = "value1",
+      attr2 = 2,
       .Names = "a",
       row.names = .set_row_names(3L)
     )
