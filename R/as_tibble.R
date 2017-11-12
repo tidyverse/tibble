@@ -69,13 +69,15 @@ as_tibble.tbl_df <- function(x, ..., validate = FALSE, rownames = NULL) {
 #' @export
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
-  result <- list_to_tibble(x, validate, raw_rownames(x))
+  old_rownames <- raw_rownames(x)
+  result <- list_to_tibble(x, validate)
   if (is.null(rownames)) {
-    remove_rownames(result)
+    result
   } else if (is.na(rownames)) {
+    attr(result, "row.names") <- old_rownames
     result
   } else {
-    rownames_to_column(result, var = rownames)
+    add_column(result, !! rownames := old_rownames, .before = 1L)
   }
 }
 
@@ -83,13 +85,13 @@ as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
-    list_to_tibble(repair_names(list()), validate = FALSE, .set_row_names(0L))
+    list_to_tibble(repair_names(list()), validate = FALSE)
   } else {
     list_to_tibble(x, validate)
   }
 }
 
-list_to_tibble <- function(x, validate, rownames = NULL) {
+list_to_tibble <- function(x, validate) {
   # this is to avoid any method dispatch that may happen when processing x
   x <- unclass(x)
 
@@ -98,12 +100,7 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
   }
   x <- recycle_columns(x)
 
-  if (is.null(rownames)) {
-    rownames <- .set_row_names(NROW(x[[1L]]))
-  }
-
-  attr(x, "row.names") <- rownames
-  set_tibble_class(x)
+  new_tibble(x)
 }
 
 #' @export
