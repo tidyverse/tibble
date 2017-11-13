@@ -4,5 +4,5 @@ data.frame [32 x 11]
 
 <body created by pillar>
 
-(with 32 rows total, and 2 more variables: gear <dbl>,
+(with 22 more rows, and 2 more variables: gear <dbl>,
   carb <dbl>)

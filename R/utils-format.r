@@ -154,7 +154,7 @@ format_footer_rows <- function(x) {
     if (is.na(x$rows_missing)) {
       "more rows"
     } else if (x$rows_missing > 0) {
-      paste0(big_mark(x$rows_total), pluralise_n(" row(s) total", x$rows_total))
+      paste0(big_mark(x$rows_missing), pluralise_n(" more row(s)", x$rows_missing))
     }
   } else if (is.na(x$rows_total) && x$rows_min > 0) {
     paste0("at least ", big_mark(x$rows_min), pluralise_n(" row(s) total", x$rows_min))

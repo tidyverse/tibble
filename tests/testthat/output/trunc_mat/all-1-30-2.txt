@@ -1,5 +1,5 @@
 # A tibble: 3 x 9
 <body created by pillar>
-# ... with 3 rows total, and
-#   5 more variables:
-#   e <fctr>, f <date>, ...
+# ... with 2 more rows, and 5
+#   more variables: e <fctr>,
+#   f <date>, ...
