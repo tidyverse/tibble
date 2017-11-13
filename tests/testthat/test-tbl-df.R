@@ -323,7 +323,7 @@ test_that("new_tibble", {
 test_that("new_tibble checks", {
   expect_identical(new_tibble(list()), tibble())
   expect_identical(new_tibble(list(a = 1:3, b = 4:6)), tibble(a = 1:3, b = 4:6))
-  expect_error(new_tibble(list()), "names", fixed = TRUE)
+  expect_error(new_tibble(list(1)), "names", fixed = TRUE)
   expect_error(new_tibble(list(a = 1, b = 2:3)), "length", fixed = TRUE)
   expect_error(
     new_tibble(
