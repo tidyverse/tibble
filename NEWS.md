@@ -1,3 +1,11 @@
+### tibble 1.3.4.9003 (2017-11-13)
+
+- Cleanly define responsibilities of `new_tibble()` (#332).
+- Reexporting `has_name()` from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.
+- Fix copying of attributes in `new_tibble()` (#330).
+- Adapt vignette to new pillar methods.
+
+
 ### tibble 1.3.4.9002 (2017-11-03)
 
 - In `glimpse()`, compute `type_sum()` from data frame for dbplyr compatibility (#328).
