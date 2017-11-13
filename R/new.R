@@ -35,13 +35,13 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' @details
   #' The `row.names` attribute will be computed from the `nrow` argument,
   #' overriding any existing attribute of this name in `x` or in the `...`
-  #' argument.
+  #' arguments.
   #' If `nrow` is `NULL`, the number of rows will be guessed from the data.
   if (is.null(nrow)) nrow <- guess_nrow(x)
   attr(x, "row.names") <- .set_row_names(nrow)
 
-  #' The constructor makes sure that the `row.names` attribute is consistent
-  #' with the data before returning.
+  #' The `new_tibble()` constructor makes sure that the `row.names` attribute
+  #' is consistent with the data before returning.
   validate_nrow(x)
 
   #' @details

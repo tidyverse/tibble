@@ -28,10 +28,10 @@ The \code{...} argument allows adding more attributes to the subclass.
 
 The \code{row.names} attribute will be computed from the \code{nrow} argument,
 overriding any existing attribute of this name in \code{x} or in the \code{...}
-argument.
+arguments.
 If \code{nrow} is \code{NULL}, the number of rows will be guessed from the data.
-The constructor makes sure that the \code{row.names} attribute is consistent
-with the data before returning.
+The \code{new_tibble()} constructor makes sure that the \code{row.names} attribute
+is consistent with the data before returning.
 
 The \code{class} attribute of the returned object always consists of
 \code{c("tbl_df", "tbl", "data.frame")}. If the \code{subclass} argument is set,
