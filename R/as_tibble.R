@@ -103,7 +103,7 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
   }
 
   attr(x, "row.names") <- rownames
-  new_tibble(x)
+  set_tibble_class(x)
 }
 
 #' @export

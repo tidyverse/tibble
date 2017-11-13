@@ -47,7 +47,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
   df <- as.data.frame(head(x, n))
 
-  shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
+  shrunk <- shrink_mat(df, rows, n, star = has_rownames(x))
   trunc_info <- list(
     width = width, rows_total = rows, rows_min = nrow(df),
     n_extra = n_extra, summary = tbl_sum(x)
@@ -59,7 +59,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   )
 }
 
-shrink_mat <- function(df, width, rows, n, star) {
+shrink_mat <- function(df, rows, n, star) {
   df <- remove_rownames(df)
   if (is.na(rows)) {
     needs_dots <- (nrow(df) >= n)

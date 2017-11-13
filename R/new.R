@@ -7,11 +7,17 @@
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
 new_tibble <- function(x, ..., subclass = NULL) {
+  x <- update_tibble_attrs(x, ...)
+  x <- set_tibble_class(x, subclass = subclass)
+  x
+}
+
+update_tibble_attrs <- function(x, ...) {
   # Can't use structure() here because it breaks the row.names attribute
   attribs <- list(...)
 
   # reduce2() is not in the purrr compat layer
-  nested_attribs <- map2(names(attribs), attribs, function(name, value) list(name = value))
+  nested_attribs <- map2(names(attribs), attribs, function(name, value) set_names(list(value), name))
   x <- reduce(
     .init = x,
     nested_attribs,
@@ -23,6 +29,10 @@ new_tibble <- function(x, ..., subclass = NULL) {
     }
   )
 
+  x
+}
+
+set_tibble_class <- function(x, subclass = NULL) {
   class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
   x
 }
