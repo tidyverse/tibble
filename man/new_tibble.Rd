@@ -4,12 +4,14 @@
 \alias{new_tibble}
 \title{Constructor}
 \usage{
-new_tibble(x, ..., subclass = NULL)
+new_tibble(x, ..., nrow = NULL, subclass = NULL)
 }
 \arguments{
 \item{x}{A tibble-like object}
 
 \item{...}{Passed on to \code{\link[=structure]{structure()}}}
+
+\item{nrow}{The number of rows, guessed from the data by default}
 
 \item{subclass}{Subclasses to assign to the new object, default: none}
 }

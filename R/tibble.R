@@ -118,7 +118,7 @@ recycle_columns <- function(x) {
     return(x)
   }
 
-  # Validate column lengths
+  # Validate column lengths, allow recycling
   lengths <- map_int(x, NROW)
   max <- max(c(lengths[lengths != 1L], 0L))
 
