@@ -17,4 +17,35 @@ new_tibble(x, ..., nrow = NULL, subclass = NULL)
 }
 \description{
 Creates a subclass of a tibble.
+This function is mostly useful for package authors that implement subclasses
+of a tibble, like \pkg{sf} or \pkg{tibbletime}.
+}
+\details{
+\code{x} must be a named (or empty) list, but the names are not currently
+checked for correctness.
+
+The \code{...} argument allows adding more attributes to the subclass.
+
+The \code{row.names} attribute will be computed from the \code{nrow} argument,
+overriding any existing attribute of this name in \code{x} or in the \code{...}
+arguments.
+If \code{nrow} is \code{NULL}, the number of rows will be guessed from the data.
+The \code{new_tibble()} constructor makes sure that the \code{row.names} attribute
+is consistent with the data before returning.
+
+The \code{class} attribute of the returned object always consists of
+\code{c("tbl_df", "tbl", "data.frame")}. If the \code{subclass} argument is set,
+it will be prepended to that list of classes.
+}
+\examples{
+new_tibble(list(a = 1:3, b = 4:6))
+new_tibble(list(), nrow = 150, subclass = "my_tibble")
+
+\dontrun{
+# All columns must be the same length:
+new_tibble(list(a = 1:3, b = 4.6))
+
+# The length must be consistent with the nrow argument if available:
+new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
+}
 }
