@@ -11,7 +11,12 @@
 #' @export
 #' @examples
 #' new_tibble(list(a = 1:3, b = 4:6))
+#'
+#' # One particular situation where the nrow argument is essential:
 #' new_tibble(list(), nrow = 150, subclass = "my_tibble")
+#'
+#' # It's safest to always pass it along:
+#' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
 #' \dontrun{
 #' # All columns must be the same length:
@@ -39,7 +44,6 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' If `nrow` is `NULL`, the number of rows will be guessed from the data.
   if (is.null(nrow)) nrow <- guess_nrow(x)
   attr(x, "row.names") <- .set_row_names(nrow)
-
   #' The `new_tibble()` constructor makes sure that the `row.names` attribute
   #' is consistent with the data before returning.
   validate_nrow(x)

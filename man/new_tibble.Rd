@@ -39,7 +39,12 @@ it will be prepended to that list of classes.
 }
 \examples{
 new_tibble(list(a = 1:3, b = 4:6))
+
+# One particular situation where the nrow argument is essential:
 new_tibble(list(), nrow = 150, subclass = "my_tibble")
+
+# It's safest to always pass it along:
+new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
 \dontrun{
 # All columns must be the same length:
