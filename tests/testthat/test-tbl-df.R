@@ -300,9 +300,9 @@ test_that("is_tibble", {
 
 test_that("new_tibble", {
   tbl <- new_tibble(
-    data.frame(a = 1),
-    attr1 = "val1",
-    attr2 = "val2",
+    data.frame(a = 1:3),
+    attr1 = "value1",
+    attr2 = 2,
     subclass = "nt"
   )
 
@@ -311,11 +311,25 @@ test_that("new_tibble", {
   expect_equal(
     unclass(tbl),
     structure(
-      list(a = 1),
+      list(a = 1:3),
+      attr1 = "value1",
+      attr2 = 2,
       .Names = "a",
-      row.names = c(NA, -1L),
-      attr1 = "val1",
-      attr2 = "val2"
+      row.names = .set_row_names(3L)
     )
+  )
+})
+
+test_that("new_tibble checks", {
+  expect_identical(new_tibble(list()), tibble())
+  expect_identical(new_tibble(list(a = 1:3, b = 4:6)), tibble(a = 1:3, b = 4:6))
+  expect_error(new_tibble(list(1)), "names", fixed = TRUE)
+  expect_error(new_tibble(list(a = 1, b = 2:3)), "length", fixed = TRUE)
+  expect_error(
+    new_tibble(
+      structure(list(a = 1, b = 2), row.names = .set_row_names(2))
+    ),
+    "length",
+    fixed = TRUE
   )
 })
