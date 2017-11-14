@@ -1,10 +1,18 @@
 
 has_dim <- function(x) {
-  length(dim(x)) > 0L || is_named(x)
+  length(dim(x)) > 0L || has_nonnull_names(x)
 }
 
 needs_dim <- function(x) {
   length(dim(x)) > 1L
+}
+
+has_null_names <- function(x) {
+  is.null(names(x))
+}
+
+has_nonnull_names <- function(x) {
+  !has_null_names(x)
 }
 
 set_class <- `class<-`

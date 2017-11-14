@@ -228,6 +228,14 @@ test_that("as_tibble() can validate (#278)", {
 })
 
 
+test_that("as_tibble() adds empty names if not validating", {
+  invalid_df <- as_tibble(list(3, 4, 5), validate = FALSE)
+  expect_equal(length(invalid_df), 3)
+  expect_equal(nrow(invalid_df), 1)
+  expect_equal(names(invalid_df), rep("", 3))
+})
+
+
 test_that("as_tibble() can convert row names", {
   df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
   expect_identical(
