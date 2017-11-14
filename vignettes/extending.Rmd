@@ -405,3 +405,8 @@ readLines("latlon-bw.txt")
 ```
 
 Learn more about the tidyeval framework in the [dplyr vignette](http://dplyr.tidyverse.org/articles/programming.html).
+
+```{r include = FALSE}
+unlink("latlon.txt")
+unlink("latlon-bw.txt")
+```
