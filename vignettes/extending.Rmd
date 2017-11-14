@@ -323,3 +323,85 @@ obj_sum.POSIXlt <- function(x) {
   rep("POSIXlt", length(x))
 }
 ```
+
+## Testing
+
+If you want to test the output of your code, you can compare it with a known state recorded in a text file. For this, pillar offers the `expect_known_display()` expectation which requires and works best with the testthat package. Make sure that the output is generated only by your package to avoid inconsistencies when external code is updated. Here, this means that you test only the shaft portion of the pillar, and not the entire pillar or even a tibble that contains a column with your data type!
+
+```{r include = FALSE}
+unlink("latlon.txt")
+unlink("latlon-bw.txt")
+```
+
+The code below will compare the output of `pillar_shaft(data$loc)` with known output stored in the `latlon.txt` file. The first run warns because the file doesn't exist yet. 
+
+```{r error = TRUE, warning = TRUE}
+library(testthat)
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+})
+```
+
+From the second run on, the printing will be compared with the file:
+
+```{r}
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+})
+```
+
+However, if we look at the file we'll notice strange things: The output contains ANSI escapes!
+
+```{r}
+readLines("latlon.txt")
+```
+
+We can turn them off by passing `crayon = FALSE` to the expectation, but we need to run twice again:
+
+```{r error = TRUE, warning = TRUE}
+library(testthat)
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+})
+```
+
+```{r}
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+})
+
+readLines("latlon.txt")
+```
+
+You may want to create a series of output files for different scenarios:
+
+- Colored vs. plain (to simplify viewing differences)
+- With or without special Unicode characters (if your output uses them)
+- Different widths
+
+For this it is helpful to create your own expectation function.  Use the tidy evaluation framework to make sure that construction and printing happens at the right time:
+
+```{r}
+expect_known_latlon_display <- function(x, file_base) {
+  quo <- rlang::quo(pillar_shaft(x))
+  expect_known_display(
+    !! quo, file = paste0(file_base, ".txt")
+  )
+  expect_known_display(
+    !! quo, file = paste0(file_base, "-bw.txt"), crayon = FALSE
+  )
+}
+```
+
+```{r error = TRUE, warning = TRUE}
+test_that("latlon pillar matches known output", {
+  expect_known_latlon_display(data$loc, file_base = "latlon")
+})
+```
+
+```{r}
+readLines("latlon.txt")
+readLines("latlon-bw.txt")
+```
+
+Learn more about the tidyeval framework in the [dplyr vignette](http://dplyr.tidyverse.org/articles/programming.html).
