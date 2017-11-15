@@ -31,7 +31,7 @@ library(pillar)
 
 ## Prerequisites
 
-We define a class `"latlon"` that encodes geographic coordinates in a complex number. For simplicity, the values are printed as hours and minutes only.
+We define a class `"latlon"` that encodes geographic coordinates in a complex number. For simplicity, the values are printed as degrees and minutes only.
 
 ```{r}
 #' @export
@@ -55,7 +55,7 @@ c.latlon <- function(x, ...) {
 }
 
 #' @export
-format.latlon <- function(x, ..., formatter = deg_rad) {
+format.latlon <- function(x, ..., formatter = deg_min) {
   x_valid <- which(!is.na(x))
 
   lat <- unclass(Im(x[x_valid]))
@@ -69,13 +69,15 @@ format.latlon <- function(x, ..., formatter = deg_rad) {
   format(ret, justify = "right")
 }
 
-deg_rad <- function(x, pm) {
+deg_min <- function(x, pm) {
   sign <- sign(x)
   x <- abs(x)
   deg <- trunc(x)
   x <- x - deg
-  rad <- round(x * 60)
-  sprintf("%3d°%.2d'%s", deg, rad, pm[ifelse(sign >= 0, 1, 2)])
+  min <- round(x * 60)
+
+  ret <- sprintf("%d°%.2d'%s", deg, min, pm[ifelse(sign >= 0, 1, 2)])
+  format(ret, justify = "right")
 }
 
 #' @export
@@ -126,7 +128,7 @@ In the remainder I'll show how to fix these problems, and also how to implement 
 
 ## Fixing the data type
 
-To display `<geo>` as data type, we need to override the `type_sum()` method.  This method should return a length-1 character vector that can be used in a column header.  For your own classes, strive for an evocative abbreviation that's under 6 characters.
+To display `<geo>` as data type, we need to override the `type_sum()` method.  This method should return a string that can be used in a column header.  For your own classes, strive for an evocative abbreviation that's under 6 characters.
 
 
 ```{r}
@@ -152,11 +154,11 @@ To use our format method for rendering, we implement the `pillar_shaft()` method
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft(out, align = "right")
+  new_pillar_shaft_simple(out, align = "right")
 }
 ```
 
-The simplest variant calls our `format()` method, everything else is handled by pillar, in particular by the `new_pillar_shaft()` helper. Note how the `align` argument affects the alignment of NA values and of the column name and type.
+The simplest variant calls our `format()` method, everything else is handled by pillar, in particular by the `new_pillar_shaft_simple()` helper. Note how the `align` argument affects the alignment of NA values and of the column name and type.
 
 ```{r}
 data
@@ -169,7 +171,7 @@ We could also use left alignment and indent only the `NA` values:
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft(out, align = "left", na_indent = 5)
+  new_pillar_shaft_simple(out, align = "left", na_indent = 5)
 }
 
 data
@@ -191,7 +193,7 @@ If we specify a minimum width when constructing the shaft, the `loc` column will
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft(out, align = "right", min_width = 10)
+  new_pillar_shaft_simple(out, align = "right", min_width = 10)
 }
 
 print(data, width = 35)
@@ -204,19 +206,18 @@ This may be useful for character data, but for lat-lon data we may prefer to sho
 pillar_shaft.latlon <- function(x, ...) {
   deg <- format(x, formatter = deg)
   deg[is.na(x)] <- style_na("NA")
-  deg_rad <- format(x)
-  deg_rad[is.na(x)] <- style_na("NA")
-  ret <- structure(
-    list(deg = deg, deg_rad = deg_rad),
-    class = c("pillar_shaft_latlon", "pillar_shaft")
+  deg_min <- format(x)
+  deg_min[is.na(x)] <- style_na("NA")
+  new_pillar_shaft(
+    list(deg = deg, deg_min = deg_min),
+    width = get_max_extent(deg_min),
+    min_width = get_max_extent(deg),
+    subclass = "pillar_shaft_latlon"
   )
-  ret <- set_width(ret, max(crayon::col_nchar(deg_rad), 0))
-  ret <- set_min_width(ret, max(crayon::col_nchar(deg), 0))
-  ret
 }
 ```
 
-Here, `pillar_shaft()` returns an object of the `"pillar_shaft_latlon"` class (which is also a `"pillar_shaft"`) that contains the necessary information to render the values, and also minimum and maximum width values. For simplicity, both formattings are pre-rendered, and the minimum and maximum widths are computed from there. Note that we also need to take care of `NA` values explicitly. (`crayon::col_nchar()` is like `nchar()` but strips the formatting added by `style_na()`.)
+Here, `pillar_shaft()` returns an object of the `"pillar_shaft_latlon"` class created by the generic `new_pillar_shaft()` constructor. This object contains the necessary information to render the values, and also minimum and maximum width values. For simplicity, both formattings are pre-rendered, and the minimum and maximum widths are computed from there. Note that we also need to take care of `NA` values explicitly. (`get_max_extent()` is a helper that computes the maximum display width occupied by the values in a character vector.)
 
 For completeness, the code that implements the degree-only formatting looks like this:
 
@@ -225,7 +226,9 @@ deg <- function(x, pm) {
   sign <- sign(x)
   x <- abs(x)
   deg <- round(x)
-  sprintf("%d°%s", deg, pm[ifelse(sign >= 0, 1, 2)])
+
+  ret <- sprintf("%d°%s", deg, pm[ifelse(sign >= 0, 1, 2)])
+  format(ret, justify = "right")
 }
 ```
 
@@ -234,8 +237,8 @@ All that's left to do is to implement a `format()` method for our new `"pillar_s
 ```{r}
 #' @export
 format.pillar_shaft_latlon <- function(x, width, ...) {
-  if (all(crayon::col_nchar(x$deg_rad) <= width)) {
-    ornament <- x$deg_rad
+  if (all(crayon::col_nchar(x$deg_min) <= width)) {
+    ornament <- x$deg_min
   } else {
     ornament <- x$deg
   }
@@ -250,17 +253,17 @@ print(data, width = 35)
 
 ## Adding color
 
-Both `new_pillar_shaft()` and `new_ornament()` accept escape codes for coloring, emphasis, or other ways of highlighting text on terminals that support it. Some formattings are predefined, e.g. `style_subtle()` displays text in a light gray. For default data types, this style is used for insignificant digits. We'll be formatting the degree and minute signs in a subtle style, because they serve only as separators. You can also use the [crayon](https://cran.r-project.org/package=crayon) package to add custom formattings to your text.
+Both `new_pillar_shaft_simple()` and `new_ornament()` accept ANSI escape codes for coloring, emphasis, or other ways of highlighting text on terminals that support it. Some formattings are predefined, e.g. `style_subtle()` displays text in a light gray. For default data types, this style is used for insignificant digits. We'll be formatting the degree and minute signs in a subtle style, because they serve only as separators. You can also use the [crayon](https://cran.r-project.org/package=crayon) package to add custom formattings to your output.
 
 ```{r}
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
-  out <- format(x, formatter = deg_rad_color)
+  out <- format(x, formatter = deg_min_color)
   out[is.na(x)] <- NA
-  new_pillar_shaft(out, align = "left", na_indent = 5)
+  new_pillar_shaft_simple(out, align = "left", na_indent = 5)
 }
 
-deg_rad_color <- function(x, pm) {
+deg_min_color <- function(x, pm) {
   sign <- sign(x)
   x <- abs(x)
   deg <- trunc(x)
@@ -319,4 +322,91 @@ So we need to define a method that returns a character vector the same length as
 obj_sum.POSIXlt <- function(x) {
   rep("POSIXlt", length(x))
 }
+```
+
+## Testing
+
+If you want to test the output of your code, you can compare it with a known state recorded in a text file. For this, pillar offers the `expect_known_display()` expectation which requires and works best with the testthat package. Make sure that the output is generated only by your package to avoid inconsistencies when external code is updated. Here, this means that you test only the shaft portion of the pillar, and not the entire pillar or even a tibble that contains a column with your data type!
+
+```{r include = FALSE}
+unlink("latlon.txt")
+unlink("latlon-bw.txt")
+```
+
+The code below will compare the output of `pillar_shaft(data$loc)` with known output stored in the `latlon.txt` file. The first run warns because the file doesn't exist yet. 
+
+```{r error = TRUE, warning = TRUE}
+library(testthat)
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+})
+```
+
+From the second run on, the printing will be compared with the file:
+
+```{r}
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+})
+```
+
+However, if we look at the file we'll notice strange things: The output contains ANSI escapes!
+
+```{r}
+readLines("latlon.txt")
+```
+
+We can turn them off by passing `crayon = FALSE` to the expectation, but we need to run twice again:
+
+```{r error = TRUE, warning = TRUE}
+library(testthat)
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+})
+```
+
+```{r}
+test_that("latlon pillar matches known output", {
+  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+})
+
+readLines("latlon.txt")
+```
+
+You may want to create a series of output files for different scenarios:
+
+- Colored vs. plain (to simplify viewing differences)
+- With or without special Unicode characters (if your output uses them)
+- Different widths
+
+For this it is helpful to create your own expectation function.  Use the tidy evaluation framework to make sure that construction and printing happens at the right time:
+
+```{r}
+expect_known_latlon_display <- function(x, file_base) {
+  quo <- rlang::quo(pillar_shaft(x))
+  expect_known_display(
+    !! quo, file = paste0(file_base, ".txt")
+  )
+  expect_known_display(
+    !! quo, file = paste0(file_base, "-bw.txt"), crayon = FALSE
+  )
+}
+```
+
+```{r error = TRUE, warning = TRUE}
+test_that("latlon pillar matches known output", {
+  expect_known_latlon_display(data$loc, file_base = "latlon")
+})
+```
+
+```{r}
+readLines("latlon.txt")
+readLines("latlon-bw.txt")
+```
+
+Learn more about the tidyeval framework in the [dplyr vignette](http://dplyr.tidyverse.org/articles/programming.html).
+
+```{r include = FALSE}
+unlink("latlon.txt")
+unlink("latlon-bw.txt")
 ```

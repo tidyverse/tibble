@@ -240,16 +240,6 @@ format_knitr_body <- function(x) {
   knitr::knit_print(x)
 }
 
-# Needs to be defined in package code: r-lib/pkgload#85
-knit_print_without_body <- function(x, ...) {
-  mockr::with_mock(
-    format_knitr_body = function(x, ...) {
-      paste0("<body created by pillar>")
-    },
-    knitr::knit_print(x, ...)
-  )
-}
-
 format_factor <- function(x) {
   format_character(as.character(x))
 }
