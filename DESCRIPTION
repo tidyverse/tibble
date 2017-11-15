@@ -36,4 +36,4 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Remotes:
-    r-lib/pillar@402f887
+    r-lib/pillar@47c5724
