@@ -80,3 +80,10 @@ quote_n.default(x)
 row.names<-.tbl_df(x, value)
 tbl_sum.default(x)
 tbl_sum.tbl(x)
+
+## Reexported objects
+
+rlang::has_name
+pillar::is_vector_s3
+pillar::obj_sum
+pillar::type_sum
