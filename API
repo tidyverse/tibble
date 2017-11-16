@@ -58,6 +58,7 @@ glimpse.default(x, width = NULL, max.level = 3, ...)
 glimpse.tbl(x, width = NULL, ...)
 tbl_sum.default(x)
 tbl_sum.tbl(x)
+type_sum.tbl_df(x)
 
 ## Foreign S3 methods
 

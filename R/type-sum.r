@@ -37,6 +37,9 @@ pillar::obj_sum
 #' @export
 pillar::type_sum
 
+#' @export
+type_sum.tbl_df <- function(x) "tibble"
+
 #' @importFrom pillar is_vector_s3
 #' @export
 pillar::is_vector_s3
