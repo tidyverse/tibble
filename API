@@ -35,12 +35,8 @@ tidy_names(name, syntactic = FALSE, quiet = FALSE)
 tribble(...)
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 
-## S3 methods
+## Own S3 methods
 
-$.tbl_df(x, i)
-[.tbl_df(x, i, j, drop = FALSE)
-[[.tbl_df(x, i, j, ..., exact = TRUE)
-as.data.frame.tbl_df(x, row.names = NULL, optional = FALSE, ...)
 as_data_frame.NULL(x, ...)
 as_data_frame.data.frame(x, validate = TRUE, ..., rownames = NA)
 as_data_frame.default(x, ...)
@@ -57,6 +53,18 @@ as_tibble.poly(x, ...)
 as_tibble.table(x, n = "n", ...)
 as_tibble.tbl_df(x, ..., validate = FALSE, rownames = NULL)
 as_tibble.ts(x, ...)
+glimpse.data.frame(x, width = NULL, ...)
+glimpse.default(x, width = NULL, max.level = 3, ...)
+glimpse.tbl(x, width = NULL, ...)
+tbl_sum.default(x)
+tbl_sum.tbl(x)
+
+## Foreign S3 methods
+
+$.tbl_df(x, i)
+[.tbl_df(x, i, j, drop = FALSE)
+[[.tbl_df(x, i, j, ..., exact = TRUE)
+as.data.frame.tbl_df(x, row.names = NULL, optional = FALSE, ...)
 check_names_before_after.character(j, names)
 check_names_before_after.default(j, ...)
 check_names_df.character(j, x)
@@ -69,17 +77,12 @@ format.trunc_mat(x, width = NULL, ...)
 format_v.character(x)
 format_v.default(x)
 format_v.list(x)
-glimpse.data.frame(x, width = NULL, ...)
-glimpse.default(x, width = NULL, max.level = 3, ...)
-glimpse.tbl(x, width = NULL, ...)
 print.tbl(x, ..., n = NULL, width = NULL, n_extra = NULL)
 print.tbl_df(x, ..., n = NULL, width = NULL, n_extra = NULL)
 print.trunc_mat(x, ...)
 quote_n.character(x)
 quote_n.default(x)
 row.names<-.tbl_df(x, value)
-tbl_sum.default(x)
-tbl_sum.tbl(x)
 
 ## Reexported objects
 
