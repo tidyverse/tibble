@@ -1,3 +1,5 @@
+Resubmission on CRAN's request after acceptance of pillar.
+
 ## Test environments
 * local install, R 3.4.2
 * ubuntu 12.04 (on travis-ci), R 3.1, R 3.2, R-oldrel, R-release and R-devel
@@ -5,9 +7,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* Now imports the pillar package which I have submitted just beforehand.
+0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies
