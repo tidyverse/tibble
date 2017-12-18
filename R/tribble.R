@@ -59,7 +59,15 @@ frame_matrix <- function(...) {
 }
 
 extract_frame_data_from_dots <- function(...) {
-  dots <- list(...)
+  dots <- as.list(sys.call(which = sys.parent())[-1L])
+  len <- length(dots)
+  if (len > 1) {
+    last <- dots[[len]]
+    if (missing(last)) {
+      dots <- dots[-len]
+    }
+  }
+  dots <- lapply(dots, eval, parent.frame())
 
   # Extract the names.
   frame_names <- extract_frame_names_from_dots(dots)
