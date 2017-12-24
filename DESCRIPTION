@@ -23,6 +23,7 @@ Imports:
 Suggests:
     covr,
     dplyr,
+    import,
     knitr (>= 1.5.32),
     microbenchmark,
     mockr,
