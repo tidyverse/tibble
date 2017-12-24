@@ -1,4 +1,4 @@
-## tibble 1.4.0 (2017-11-16)
+## tibble 1.4.1 (2017-12-24)
 
 ### New formatting
 
