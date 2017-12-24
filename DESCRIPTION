@@ -35,3 +35,26 @@ License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Collate: 
+    'add.R'
+    'as_tibble.R'
+    'check-names.R'
+    'compat-lazyeval.R'
+    'compat-purrr.R'
+    'enframe.R'
+    'exports.R'
+    'glimpse.R'
+    'has-name.R'
+    'tibble.R'
+    'lst.R'
+    'new.R'
+    'repair-names.R'
+    'rownames.R'
+    'strrep.R'
+    'tbl-df.r'
+    'tibble-pkg.R'
+    'tribble.R'
+    'type-sum.r'
+    'utils-format.r'
+    'utils.r'
+    'wrap.R'
