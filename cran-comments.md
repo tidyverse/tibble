@@ -1,7 +1,7 @@
-Resubmission on CRAN's request after acceptance of pillar.
+Resubmission with slightly improved documentation.
 
 ## Test environments
-* local install, R 3.4.2
+* local install, R 3.4.3
 * ubuntu 12.04 (on travis-ci), R 3.1, R 3.2, R-oldrel, R-release and R-devel
 * win-builder (devel and release)
 
