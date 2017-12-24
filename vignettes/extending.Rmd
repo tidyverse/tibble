@@ -23,11 +23,6 @@ usethis::use_package("pillar")
 
 This short vignette assumes a package that implements an S3 class `"latlon"` and uses `roxygen2` to create documentation and the `NAMESPACE` file.  For this vignette to work we need to attach pillar:
 
-```{r}
-library(pillar)
-```
-
-
 
 ## Prerequisites
 
@@ -131,7 +126,12 @@ In the remainder I'll show how to fix these problems, and also how to implement 
 To display `<geo>` as data type, we need to override the `type_sum()` method.  This method should return a string that can be used in a column header.  For your own classes, strive for an evocative abbreviation that's under 6 characters.
 
 
+```{r include=FALSE}
+import::from(pillar, type_sum)
+```
+
 ```{r}
+#' @importFrom pillar type_sum
 #' @export
 type_sum.latlon <- function(x) {
   "geo"
@@ -149,12 +149,17 @@ data
 
 To use our format method for rendering, we implement the `pillar_shaft()` method for our class. (A [*pillar*](https://en.wikipedia.org/wiki/Column#Nomenclature) is mainly a *shaft* (decorated with an *ornament*), with a *capital* above and a *base* below. Multiple pillars form a *colonnade*, which can be stacked in multiple *tiers*. This is the motivation behind the names in our API.)
 
+```{r include=FALSE}
+import::from(pillar, pillar_shaft)
+```
+
 ```{r}
+#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft_simple(out, align = "right")
+  pillar::new_pillar_shaft_simple(out, align = "right")
 }
 ```
 
@@ -167,11 +172,12 @@ data
 We could also use left alignment and indent only the `NA` values:
 
 ```{r}
+#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft_simple(out, align = "left", na_indent = 5)
+  pillar::new_pillar_shaft_simple(out, align = "left", na_indent = 5)
 }
 
 data
@@ -189,11 +195,12 @@ print(data, width = 35)
 If we specify a minimum width when constructing the shaft, the `loc` column will be truncated:
 
 ```{r}
+#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
-  new_pillar_shaft_simple(out, align = "right", min_width = 10)
+  pillar::new_pillar_shaft_simple(out, align = "right", min_width = 10)
 }
 
 print(data, width = 35)
@@ -202,16 +209,17 @@ print(data, width = 35)
 This may be useful for character data, but for lat-lon data we may prefer to show full degrees and remove the minutes if the available space is not enough to show accurate values. A more sophisticated implementation of the `pillar_shaft()` method is required to achieve this:
 
 ```{r}
+#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
   deg <- format(x, formatter = deg)
-  deg[is.na(x)] <- style_na("NA")
+  deg[is.na(x)] <- pillar::style_na("NA")
   deg_min <- format(x)
-  deg_min[is.na(x)] <- style_na("NA")
-  new_pillar_shaft(
+  deg_min[is.na(x)] <- pillar::style_na("NA")
+  pillar::new_pillar_shaft(
     list(deg = deg, deg_min = deg_min),
-    width = get_max_extent(deg_min),
-    min_width = get_max_extent(deg),
+    width = pillar::get_max_extent(deg_min),
+    min_width = pillar::get_max_extent(deg),
     subclass = "pillar_shaft_latlon"
   )
 }
@@ -243,7 +251,7 @@ format.pillar_shaft_latlon <- function(x, width, ...) {
     ornament <- x$deg
   }
 
-  new_ornament(ornament)
+  pillar::new_ornament(ornament)
 }
 
 data
@@ -256,11 +264,12 @@ print(data, width = 35)
 Both `new_pillar_shaft_simple()` and `new_ornament()` accept ANSI escape codes for coloring, emphasis, or other ways of highlighting text on terminals that support it. Some formattings are predefined, e.g. `style_subtle()` displays text in a light gray. For default data types, this style is used for insignificant digits. We'll be formatting the degree and minute signs in a subtle style, because they serve only as separators. You can also use the [crayon](https://cran.r-project.org/package=crayon) package to add custom formattings to your output.
 
 ```{r}
+#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.latlon <- function(x, ...) {
   out <- format(x, formatter = deg_min_color)
   out[is.na(x)] <- NA
-  new_pillar_shaft_simple(out, align = "left", na_indent = 5)
+  pillar::new_pillar_shaft_simple(out, align = "left", na_indent = 5)
 }
 
 deg_min_color <- function(x, pm) {
@@ -272,9 +281,9 @@ deg_min_color <- function(x, pm) {
   ret <- sprintf(
     "%d%s%.2d%s%s",
     deg,
-    style_subtle("°"),
+    pillar::style_subtle("°"),
     rad,
-    style_subtle("'"),
+    pillar::style_subtle("'"),
     pm[ifelse(sign >= 0, 1, 2)]
   )
   ret[is.na(x)] <- ""
@@ -291,7 +300,12 @@ Currently, ANSI escapes are not rendered in vignettes, so the display here isn't
 
 To tweak the output in the `paths` column, we simply need to indicate that our class is an S3 vector:
 
+```{r include=FALSE}
+import::from(pillar, is_vector_s3)
+```
+
 ```{r}
+#' @importFrom pillar is_vector_s3
 #' @export
 is_vector_s3.latlon <- function(x) TRUE
 
@@ -317,7 +331,12 @@ str(x)
 
 So we need to define a method that returns a character vector the same length as `x`:
 
+```{r include=FALSE}
+import::from(pillar, obj_sum)
+```
+
 ```{r}
+#' @importFrom pillar obj_sum
 #' @export
 obj_sum.POSIXlt <- function(x) {
   rep("POSIXlt", length(x))
@@ -328,6 +347,12 @@ obj_sum.POSIXlt <- function(x) {
 
 If you want to test the output of your code, you can compare it with a known state recorded in a text file. For this, pillar offers the `expect_known_display()` expectation which requires and works best with the testthat package. Make sure that the output is generated only by your package to avoid inconsistencies when external code is updated. Here, this means that you test only the shaft portion of the pillar, and not the entire pillar or even a tibble that contains a column with your data type!
 
+The tests work best with the testthat package:
+
+```{r}
+library(testthat)
+```
+
 ```{r include = FALSE}
 unlink("latlon.txt")
 unlink("latlon-bw.txt")
@@ -336,9 +361,11 @@ unlink("latlon-bw.txt")
 The code below will compare the output of `pillar_shaft(data$loc)` with known output stored in the `latlon.txt` file. The first run warns because the file doesn't exist yet. 
 
 ```{r error = TRUE, warning = TRUE}
-library(testthat)
 test_that("latlon pillar matches known output", {
-  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+  pillar::expect_known_display(
+    pillar_shaft(data$loc),
+    file = "latlon.txt"
+  )
 })
 ```
 
@@ -346,7 +373,10 @@ From the second run on, the printing will be compared with the file:
 
 ```{r}
 test_that("latlon pillar matches known output", {
-  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt")
+  pillar::expect_known_display(
+    pillar_shaft(data$loc),
+    file = "latlon.txt"
+  )
 })
 ```
 
@@ -361,13 +391,21 @@ We can turn them off by passing `crayon = FALSE` to the expectation, but we need
 ```{r error = TRUE, warning = TRUE}
 library(testthat)
 test_that("latlon pillar matches known output", {
-  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+  pillar::expect_known_display(
+    pillar_shaft(data$loc),
+    file = "latlon.txt",
+    crayon = FALSE
+  )
 })
 ```
 
 ```{r}
 test_that("latlon pillar matches known output", {
-  expect_known_display(pillar_shaft(data$loc), file = "latlon.txt", crayon = FALSE)
+  pillar::expect_known_display(
+    pillar_shaft(data$loc),
+    file = "latlon.txt",
+    crayon = FALSE
+  )
 })
 
 readLines("latlon.txt")
@@ -383,12 +421,15 @@ For this it is helpful to create your own expectation function.  Use the tidy ev
 
 ```{r}
 expect_known_latlon_display <- function(x, file_base) {
-  quo <- rlang::quo(pillar_shaft(x))
-  expect_known_display(
-    !! quo, file = paste0(file_base, ".txt")
+  quo <- rlang::quo(pillar::pillar_shaft(x))
+  pillar::expect_known_display(
+    !! quo,
+    file = paste0(file_base, ".txt")
   )
-  expect_known_display(
-    !! quo, file = paste0(file_base, "-bw.txt"), crayon = FALSE
+  pillar::expect_known_display(
+    !! quo,
+    file = paste0(file_base, "-bw.txt"),
+    crayon = FALSE
   )
 }
 ```
