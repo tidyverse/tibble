@@ -1,6 +1,6 @@
-#' Build a list
+#' @include tibble.R
 #'
-#' `lst()` is similar to [list()], but like `tibble()`, it
+#' @description `lst()` is similar to [list()], but like `tibble()`, it
 #' evaluates its arguments lazily and in order, and automatically adds names.
 #'
 #' @export

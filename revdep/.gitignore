@@ -1,2 +1,4 @@
-/checks
-!/libraries.csv
+*
+!.gitignore
+!*.md
+
