@@ -101,21 +101,6 @@ test_that("trunc_mat output matches known output", {
     print_without_body(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
     "trunc_mat/non-syntactic.txt"
   )
-
-  expect_output_knit(
-    knit_print_without_body(trunc_mat(df_all, width = 60L)),
-    "trunc_mat/all-knit-60.txt"
-  )
-
-  expect_output_knit(
-    knit_print_without_body(trunc_mat(df_all, width = 120L)),
-    "trunc_mat/all-knit-120.txt"
-  )
-
-  expect_output_knit(
-    knit_print_without_body(trunc_mat(mtcars, width = 60L)),
-    "trunc_mat/mtcars-knit-60.txt"
-  )
 })
 
 test_that("trunc_mat for POSIXlt columns (#86)", {

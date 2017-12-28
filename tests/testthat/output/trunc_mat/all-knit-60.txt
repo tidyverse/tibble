@@ -1,7 +1,0 @@
-
-
-A tibble: 3 x 9
-
-<body created by pillar>
-
-(with 3 more variables: g <dttm>, h <list>, i <list>)
