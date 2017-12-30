@@ -71,7 +71,7 @@ print.tbl_df <- print.tbl
       result <- x
     }
     attr(result, "row.names") <- .set_row_names(nr)
-    return(as_tibble.data.frame(result, validate = FALSE))
+    return(set_tibble_class(result))
   }
 
   # First, subset columns
@@ -112,6 +112,6 @@ print.tbl_df <- print.tbl
   if (drop && length(result) == 1L) {
     result[[1L]]
   } else {
-    as_tibble.data.frame(result, validate = FALSE)
+    set_tibble_class(result)
   }
 }
