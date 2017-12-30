@@ -33,13 +33,11 @@ print.tbl_df <- print.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
-  if (missing(j)) {
-    colname <- i
-  } else {
-    colname <- j
-  }
   if (!exact) {
     warningc("exact ignored")
+  }
+  if (missing(j)) {
+    return(unclass(x)[[i]])
   }
 
   NextMethod()
@@ -47,8 +45,10 @@ print.tbl_df <- print.tbl
 
 #' @export
 `$.tbl_df` <- function(x, i) {
-  if (is.character(i) && !has_name(x, i)) {
-    warningc("Unknown or uninitialised column: '", i, "'.")
+  if (is.character(i)) {
+    ret <- unclass(x)[[i]]
+    if (is.null(ret)) warningc("Unknown or uninitialised column: '", i, "'.")
+    return(ret)
   }
   .subset2(x, i)
 }
