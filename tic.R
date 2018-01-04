@@ -1,6 +1,9 @@
 add_package_checks()
 
 if (Sys.getenv("BUILD_PKGDOWN") != "") {
+  get_stage("install") %>%
+    add_code_step(remotes::install_github("tidyverse/tidytemplate"))
+
   get_stage("deploy") %>%
     add_step(step_build_pkgdown())
 

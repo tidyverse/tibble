@@ -13,7 +13,6 @@ reference:
   contents:
   - ends_with("ibble")
   - enframe
-  - all_equal
   - has_name
 
 - title: Manipulation
