@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converting atomic vectors to data frames, and vice versa — enframe • tibble</title>
+<title>Constructor — new_tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,58 +89,84 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converting atomic vectors to data frames, and vice versa</h1>
+    <h1>Constructor</h1>
     </div>
 
     
-    <p><code>enframe()</code> converts named atomic vectors or lists to two-column
-data frames.
-For unnamed vectors, the natural sequence is used as name column.
-
-    <code>deframe()</code> converts two-column data frames to a named vector or list,
-using the first column as name and the second column as value.</p>
+    <p>Creates a subclass of a tibble.
+This function is mostly useful for package authors that implement subclasses
+of a tibble, like <span class="pkg">sf</span> or <span class="pkg">tibbletime</span>.</p>
     
 
-    <pre class="usage"><span class='fu'>enframe</span>(<span class='no'>x</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"value"</span>)
-
-<span class='fu'>deframe</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>new_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subclass</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An atomic vector (for <code>enframe()</code>) or a data frame (for <code>deframe()</code>)</p></td>
+      <td><p>A tibble-like object</p></td>
     </tr>
     <tr>
-      <th>name, value</th>
-      <td><p>Names of the columns that store the names and values</p></td>
+      <th>...</th>
+      <td><p>Passed on to <code>structure()</code></p></td>
+    </tr>
+    <tr>
+      <th>nrow</th>
+      <td><p>The number of rows, guessed from the data by default</p></td>
+    </tr>
+    <tr>
+      <th>subclass</th>
+      <td><p>Subclasses to assign to the new object, default: none</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <a href='tibble.html'>tibble</a></p>
+    <p><code>x</code> must be a named (or empty) list, but the names are not currently
+checked for correctness.</p>
+<p>The <code>...</code> argument allows adding more attributes to the subclass.</p>
+<p>The <code>row.names</code> attribute will be computed from the <code>nrow</code> argument,
+overriding any existing attribute of this name in <code>x</code> or in the <code>...</code>
+arguments.
+If <code>nrow</code> is <code>NULL</code>, the number of rows will be guessed from the data.
+The <code>new_tibble()</code> constructor makes sure that the <code>row.names</code> attribute
+is consistent with the data before returning.</p>
+<p>The <code>class</code> attribute of the returned object always consists of
+<code>c("tbl_df", "tbl", "data.frame")</code>. If the <code>subclass</code> argument is set,
+it will be prepended to that list of classes.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>enframe</span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
-#&gt;    name value
+    <pre class="examples"><div class='input'><span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;       a     b
 #&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     1
-#&gt; 2     2     2
-#&gt; 3     3     3</div><div class='input'><span class='fu'>enframe</span>(<span class='fu'>c</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>7</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 2
-#&gt;   name  value
-#&gt;   &lt;chr&gt; &lt;dbl&gt;
-#&gt; 1 a      5.00
-#&gt; 2 b      7.00</div></pre>
+#&gt; 1     1     4
+#&gt; 2     2     5
+#&gt; 3     3     6</div><div class='input'>
+<span class='co'># One particular situation where the nrow argument is essential:</span>
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>150</span>, <span class='kw'>subclass</span> <span class='kw'>=</span> <span class='st'>"my_tibble"</span>)</div><div class='output co'>#&gt; # A tibble: 150 x 0</div><div class='input'>
+<span class='co'># It's safest to always pass it along:</span>
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;       a     b
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4
+#&gt; 2     2     5
+#&gt; 3     3     6</div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='co'># All columns must be the same length:</span>
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4.6</span>))
+
+<span class='co'># The length must be consistent with the nrow argument if available:</span>
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tools for working with row names — rownames • tibble</title>
+<title>Repair object names. — set_tidy_names • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,78 +89,84 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tools for working with row names</h1>
+    <h1>Repair object names.</h1>
     </div>
 
     
-    <p>While a tibble can have row names (e.g., when converting from a regular data
-frame), they are removed when subsetting with the <code>[</code> operator.
-A warning will be raised when attempting to assign non-<code>NULL</code> row names
-to a tibble.
-Generally, it is best to avoid row names, because they are basically a
-character column with different semantics to every other column. These
-functions allow to you detect if a data frame has row names
-(<code>has_rownames()</code>), remove them (<code>remove_rownames()</code>), or convert
-them back-and-forth between an explicit column (<code>rownames_to_column()</code>
-and <code>column_to_rownames()</code>).
-Also included is <code>rowid_to_column()</code> which
-adds a column at the start of the dataframe of ascending sequential row
-ids starting at 1. Note that this will remove any existing row names.</p>
+    <p><code>set_tidy_names()</code> ensures its input has non-missing and
+unique names (duplicated names get a suffix of the format <code>..#</code>
+where <code>#</code> is the position in the vector).
+Valid names are left unchanged, with the exception that existing suffixes
+are reorganized.
+
+    <code>tidy_names()</code> is the workhorse behind <code>set_tidy_names()</code>, it treats the
+argument as a string to be used to name a data frame or a vector.
+
+    <code>repair_names()</code> is an older version with different renaming heuristics,
+kept for backward compatibility.  New code should prefer <code>tidy_names()</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>has_rownames</span>(<span class='no'>df</span>)
+    <pre class="usage"><span class='fu'>set_tidy_names</span>(<span class='no'>x</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>remove_rownames</span>(<span class='no'>df</span>)
+<span class='fu'>tidy_names</span>(<span class='no'>name</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rownames_to_column</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)
-
-<span class='fu'>rowid_to_column</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowid"</span>)
-
-<span class='fu'>column_to_rownames</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)</pre>
+<span class='fu'>repair_names</span>(<span class='no'>x</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>"V"</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>A data frame</p></td>
+      <th>x</th>
+      <td><p>A named vector.</p></td>
     </tr>
     <tr>
-      <th>var</th>
-      <td><p>Name of column to use for rownames.</p></td>
+      <th>syntactic</th>
+      <td><p>Should all names be made syntactically valid via <code>make.names()</code>?</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>If <code>TRUE</code> suppresses output from this function</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>A character vector representing names.</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>A string, the prefix to use for new column names.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>A string inserted between the column name and de-duplicating
+number.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>In the printed output, the presence of row names is indicated by a star just
-above the row numbers.</p>
+    <p><code>x</code> with valid names.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='fu'>remove_rownames</span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fu'>head</span>(<span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt;             rowname  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'>
-<span class='no'>mtcars_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>))
-<span class='no'>mtcars_tbl</span></div><div class='output co'>#&gt; # A tibble: 32 x 12
-#&gt;    rowname      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 Mazda RX4   21.0  6.00   160 110    3.90  2.62  16.5  0     1.00  4.00  4.00
-#&gt;  2 Mazda RX4…  21.0  6.00   160 110    3.90  2.88  17.0  0     1.00  4.00  4.00
-#&gt;  3 Datsun 710  22.8  4.00   108  93.0  3.85  2.32  18.6  1.00  1.00  4.00  1.00
-#&gt;  4 Hornet 4 …  21.4  6.00   258 110    3.08  3.22  19.4  1.00  0     3.00  1.00
-#&gt;  5 Hornet Sp…  18.7  8.00   360 175    3.15  3.44  17.0  0     0     3.00  2.00
-#&gt;  6 Valiant     18.1  6.00   225 105    2.76  3.46  20.2  1.00  0     3.00  1.00
-#&gt;  7 Duster 360  14.3  8.00   360 245    3.21  3.57  15.8  0     0     3.00  4.00
-#&gt;  8 Merc 240D   24.4  4.00   147  62.0  3.69  3.19  20.0  1.00  0     4.00  2.00
-#&gt;  9 Merc 230    22.8  4.00   141  95.0  3.92  3.15  22.9  1.00  0     4.00  2.00
-#&gt; 10 Merc 280    19.2  6.00   168 123    3.92  3.44  18.3  1.00  0     4.00  4.00
-#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'>column_to_rownames</span>(<span class='fu'>as.data.frame</span>(<span class='no'>mtcars_tbl</span>))</div><div class='output co'>#&gt;                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+    <pre class="examples"><div class='input'><span class='co'># Works for lists and vectors, too:</span>
+<span class='fu'>set_tidy_names</span>(<span class='fl'>3</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'> -&gt; ..1</span>
+#&gt; <span class='message'> -&gt; ..2</span>
+#&gt; <span class='message'> -&gt; ..3</span></div><div class='output co'>#&gt; ..1 ..2 ..3 
+#&gt;   3   4   5 </div><div class='input'><span class='fu'>set_tidy_names</span>(<span class='fu'>list</span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'> -&gt; ..1</span>
+#&gt; <span class='message'> -&gt; ..2</span>
+#&gt; <span class='message'> -&gt; ..3</span></div><div class='output co'>#&gt; $..1
+#&gt; [1] 3
+#&gt; 
+#&gt; $..2
+#&gt; [1] 4
+#&gt; 
+#&gt; $..3
+#&gt; [1] 5
+#&gt; </div><div class='input'>
+<span class='co'># Clean data frames are left unchanged:</span>
+<span class='fu'>set_tidy_names</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt;                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 #&gt; Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
 #&gt; Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
@@ -170,14 +176,25 @@ above the row numbers.</p>
 #&gt; Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
 #&gt; Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
 #&gt; Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-#&gt;  [ reached getOption("max.print") -- omitted 23 rows ]</div></pre>
+#&gt;  [ reached getOption("max.print") -- omitted 23 rows ]</div><div class='input'>
+<span class='co'># By default, all rename operations are printed to the console:</span>
+<span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>structure</span>(<span class='fu'>list</span>(<span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>), <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>),
+                 <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>set_tidy_names</span>(<span class='no'>tbl</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'> -&gt; ..1</span>
+#&gt; <span class='message'> -&gt; ..2</span>
+#&gt; <span class='message'> -&gt; ..3</span></div><div class='output co'>#&gt; # A tibble: 0 x 3
+#&gt; # ... with 3 variables: ..1 &lt;dbl&gt;, ..2 &lt;dbl&gt;, ..3 &lt;dbl&gt;</div><div class='input'>
+<span class='co'># Optionally, names can be made syntactic:</span>
+<span class='fu'>tidy_names</span>(<span class='st'>"a b"</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>a b -&gt; a.b</span></div><div class='output co'>#&gt; [1] "a.b"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
