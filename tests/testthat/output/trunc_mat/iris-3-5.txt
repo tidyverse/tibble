@@ -17,4 +17,4 @@
 #   Sepal.Width <dbl>,
 #   Petal.Length <dbl>,
 #   Petal.Width <dbl>,
-#   Species <fctr>
+#   Species <fct>
