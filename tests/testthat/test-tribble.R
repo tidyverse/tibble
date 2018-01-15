@@ -1,7 +1,6 @@
 context("tribble()")
 
 test_that("tribble() constructs 'tibble' as expected", {
-
   result <- tribble(
     ~colA, ~colB,
     "a", 1,
@@ -44,6 +43,17 @@ test_that("tribble() constructs 'tibble' as expected", {
 
   expect_equal(long, long_expectation)
 
+})
+
+test_that("tribble() tolerates a trailing comma", {
+  result <- tribble(
+    ~colA, ~colB,
+    "a", 1,
+    "b", 2,
+  )
+
+  compared <- tibble(colA = c("a", "b"), colB = c(1, 2))
+  expect_equal(result, compared)
 })
 
 test_that("tribble() handles columns with a class (#161)", {

@@ -59,7 +59,7 @@ frame_matrix <- function(...) {
 }
 
 extract_frame_data_from_dots <- function(...) {
-  dots <- list(...)
+  dots <- dots_list(...)
 
   # Extract the names.
   frame_names <- extract_frame_names_from_dots(dots)
