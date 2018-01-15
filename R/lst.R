@@ -32,7 +32,7 @@ lst_quos <- function(xs, expand = FALSE) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
-      output[[i]] <-  res
+      output[[i]] <- res
       if (expand) output <- expand_lst(output, i)
     }
     names(output)[i] <- col_names[[i]]

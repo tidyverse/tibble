@@ -76,9 +76,13 @@ update_tibble_attrs <- function(x, ...) {
 }
 
 guess_nrow <- function(x) {
-  if (!is.null(.row_names_info(x, 0L))) .row_names_info(x, 2L)
-  else if (length(x) == 0) 0L
-  else NROW(x[[1L]])
+  if (!is.null(.row_names_info(x, 0L))) {
+    .row_names_info(x, 2L)
+  } else if (length(x) == 0) {
+    0L
+  } else {
+    NROW(x[[1L]])
+  }
 }
 
 validate_nrow <- function(x) {

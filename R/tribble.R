@@ -85,11 +85,13 @@ extract_frame_names_from_dots <- function(dots) {
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
-    if (!is.call(el))
+    if (!is.call(el)) {
       break
+    }
 
-    if (!identical(el[[1]], as.name("~")))
+    if (!identical(el[[1]], as.name("~"))) {
       break
+    }
 
     if (length(el) != 2) {
       stopc("Expected a column name with a single argument; e.g. `~name`")
