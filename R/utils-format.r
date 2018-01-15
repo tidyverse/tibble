@@ -175,7 +175,7 @@ format_footer_cols <- function(x, extra_cols) {
 format_extra_vars <- function(extra_cols, n_extra) {
   if (n_extra > 0) {
     if (n_extra < length(extra_cols)) {
-      extra_cols <- c(extra_cols[seq_len(n_extra)], "...")
+      extra_cols <- c(extra_cols[seq_len(n_extra)], cli::symbol$ellipsis)
     }
     paste0(": ", collapse(extra_cols))
   } else {

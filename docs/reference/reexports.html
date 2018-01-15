@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tibble: Simple Data Frames — tibble-package • tibble</title>
+<title>Objects exported from other packages — reexports • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,95 +89,25 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tibble: Simple Data Frames</h1>
+    <h1>Objects exported from other packages</h1>
     </div>
 
     
-    <p>Provides a 'tbl_df' class (the 'tibble') that provides
-stricter checking and better formatting than the traditional data frame.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p><dl class='dl-horizontal'>
+  <dt>pillar</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>obj_sum</a></code>, <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>type_sum</a></code>, <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>is_vector_s3</a></code></p></dd>
+
+    <dt>rlang</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/rlang/topics/has_name'>has_name</a></code></p></dd>
+</dl>
     
 
         
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The S3 class <code>tbl_df</code> wraps a local data frame. The main
-advantage to using a <code>tbl_df</code> over a regular data frame is the printing:
-tbl objects only print a few rows and all the columns that fit on one screen,
-describing the rest of it as text.</p>
-    
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-    <p><code>tbl_df</code> implements four important base methods:</p><dl class='dl-horizontal'>
-<dt>print</dt><dd><p>By default only prints the first 10 rows (at most 20), and the
-columns that fit on screen; see <code><a href='formatting.html'>print.tbl()</a></code></p></dd>
-<dt><code>[</code></dt><dd><p>Never simplifies (drops), so always returns data.frame</p></dd>
-<dt><code>[[</code>, <code>$</code></dt><dd><p>Calls <code>.subset2()</code> directly,
-so is considerably faster. Returns <code>NULL</code> if column does not exist,
-<code>$</code> warns.</p></dd>
-</dl>
-    
-    <h2 class="hasAnchor" id="important-functions"><a class="anchor" href="#important-functions"></a>Important functions</h2>
-
-    <p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='tribble.html'>tribble()</a></code> for construction,
-<code><a href='as_tibble.html'>as_tibble()</a></code> for coercion,
-and <code><a href='formatting.html'>print.tbl()</a></code> and <code><a href='glimpse.html'>glimpse()</a></code> for display.</p>
-    
-    <h2 class="hasAnchor" id="package-options"><a class="anchor" href="#package-options"></a>Package options</h2>
-
-    
-    <p>Display options for <code>tbl_df</code>, used by <code><a href='formatting.html'>trunc_mat()</a></code> and
-(indirectly) by <code><a href='formatting.html'>print.tbl()</a></code>.</p><dl class='dl-horizontal'>
-<dt><code>tibble.print_max</code></dt><dd><p>Row number threshold: Maximum number of rows
-printed. Set to <code>Inf</code> to always print all rows.  Default: 20.</p></dd>
-<dt><code>tibble.print_min</code></dt><dd><p>Number of rows printed if row number
-threshold is exceeded. Default: 10.</p></dd>
-<dt><code>tibble.width</code></dt><dd><p>Output width. Default: <code>NULL</code> (use
-<code>width</code> option).</p></dd>
-<dt><code>tibble.max_extra_cols</code></dt><dd><p>Number of extra columns
-printed in reduced form. Default: 100.</p></dd>
-</dl>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Useful links:</p><ul>
-<li><p><a href='http://tibble.tidyverse.org/'>http://tibble.tidyverse.org/</a></p></li>
-<li><p><a href='https://github.com/tidyverse/tibble'>https://github.com/tidyverse/tibble</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/tidyverse/tibble/issues'>https://github.com/tidyverse/tibble/issues</a></p></li>
-</ul>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#methods">Methods</a></li>
-
-      <li><a href="#important-functions">Important functions</a></li>
-
-      <li><a href="#package-options">Package options</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-<strong>Maintainer</strong>: Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a>
-
-Authors:
-<ul>
-<li><p>Hadley Wickham <a href='mailto:hadley@rstudio.com'>hadley@rstudio.com</a></p></li>
-</ul>
-
-Other contributors:
-<ul>
-<li><p>Romain Francois <a href='mailto:romain@r-enthusiasts.com'>romain@r-enthusiasts.com</a> [contributor]</p></li>
-<li><p>RStudio [copyright holder]</p></li>
-</ul>
-
+                </ul>
 
   </div>
 </div>
