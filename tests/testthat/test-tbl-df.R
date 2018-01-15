@@ -129,12 +129,12 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    "Length of logical index vector must be 1 or 3 (the number of rows), not 2",
+    "Length of logical index vector must be 1 or 3 (the number of columns), not 2",
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "Length of logical index vector must be 1 or 3 (the number of rows), not 4",
+    "Length of logical index vector must be 1 or 3 (the number of columns), not 4",
     fixed = TRUE
   )
   expect_error(
