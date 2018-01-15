@@ -15,12 +15,12 @@
 #' enframe(c(a = 5, b = 7))
 enframe <- function(x, name = "name", value = "value") {
   if (is_null(names(x))) {
-    df <- tibble(seq_along(x), x)
+    df <- list(seq_along(x), x)
   } else {
-    df <- tibble(names(x), unname(x))
+    df <- list(names(x), unname(x))
   }
   names(df) <- c(name, value)
-  df
+  new_tibble(df)
 }
 
 #' @rdname enframe

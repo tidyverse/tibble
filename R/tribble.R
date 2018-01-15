@@ -132,7 +132,7 @@ turn_frame_data_into_tibble <- function(names, rest) {
 
   # Create a tbl_df and return it
   names(frame_col) <- names
-  as_tibble(frame_col)
+  new_tibble(frame_col)
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {
