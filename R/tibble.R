@@ -120,7 +120,7 @@ recycle_columns <- function(x) {
   # Shortcut if all columns have the same length (including zero length!)
   if (all(lengths == lengths[1L])) return(x)
 
-  max <- max(c(lengths[lengths != 1L], 0L))
+  max <- max(lengths[lengths != 1L], 0L)
 
   bad_len <- lengths != 1L & lengths != max
   if (any(bad_len)) {
