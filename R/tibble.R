@@ -114,13 +114,13 @@ check_tibble <- function(x) {
 }
 
 recycle_columns <- function(x) {
-  if (length(x) == 0) {
-    return(x)
-  }
-
   # Validate column lengths, allow recycling
   lengths <- map_int(x, NROW)
-  max <- max(c(lengths[lengths != 1L], 0L))
+
+  # Shortcut if all columns have the same length (including zero length!)
+  if (all(lengths == lengths[1L])) return(x)
+
+  max <- max(lengths[lengths != 1L], 0L)
 
   bad_len <- lengths != 1L & lengths != max
   if (any(bad_len)) {

@@ -52,9 +52,7 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
-  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
-
-  x
+  set_tibble_class(x, subclass)
 }
 
 update_tibble_attrs <- function(x, ...) {
@@ -96,4 +94,9 @@ validate_nrow <- function(x) {
   }
 
   invisible(x)
+}
+
+set_tibble_class <- function(x, subclass = NULL) {
+  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
+  x
 }

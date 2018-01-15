@@ -33,13 +33,11 @@ print.tbl_df <- print.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
-  if (missing(j)) {
-    colname <- i
-  } else {
-    colname <- j
-  }
   if (!exact) {
     warningc("exact ignored")
+  }
+  if (missing(j)) {
+    return(.subset2(x, i))
   }
 
   NextMethod()
@@ -47,8 +45,10 @@ print.tbl_df <- print.tbl
 
 #' @export
 `$.tbl_df` <- function(x, i) {
-  if (is.character(i) && !has_name(x, i)) {
-    warningc("Unknown or uninitialised column: '", i, "'.")
+  if (is.character(i)) {
+    ret <- .subset2(x, i)
+    if (is.null(ret)) warningc("Unknown or uninitialised column: '", i, "'.")
+    return(ret)
   }
   .subset2(x, i)
 }
@@ -71,7 +71,7 @@ print.tbl_df <- print.tbl
       result <- x
     }
     attr(result, "row.names") <- .set_row_names(nr)
-    return(as_tibble.data.frame(result, validate = FALSE))
+    return(set_tibble_class(result))
   }
 
   # First, subset columns
@@ -112,6 +112,6 @@ print.tbl_df <- print.tbl
   if (drop && length(result) == 1L) {
     result[[1L]]
   } else {
-    as_tibble.data.frame(result, validate = FALSE)
+    set_tibble_class(result)
   }
 }
