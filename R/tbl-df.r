@@ -37,7 +37,7 @@ print.tbl_df <- print.tbl
     warningc("exact ignored")
   }
   if (missing(j)) {
-    return(unclass(x)[[i]])
+    return(.subset2(x, i))
   }
 
   NextMethod()
@@ -46,7 +46,7 @@ print.tbl_df <- print.tbl
 #' @export
 `$.tbl_df` <- function(x, i) {
   if (is.character(i)) {
-    ret <- unclass(x)[[i]]
+    ret <- .subset2(x, i)
     if (is.null(ret)) warningc("Unknown or uninitialised column: '", i, "'.")
     return(ret)
   }
