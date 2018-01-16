@@ -36,14 +36,14 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   }
 
   cat_line("Observations: ", big_mark(nrow(x)))
-  if (ncol(x) == 0) return(invisible())
-
-  cat_line("Variables: ", big_mark(ncol(x)))
 
   # this is an overestimate, but shouldn't be too expensive.
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
+
+  cat_line("Variables: ", big_mark(ncol(df)))
+  if (ncol(df) == 0) return(invisible(x))
 
   var_types <- map_chr(df, type_sum)
   ticked_names <- tick_non_syntactic(names(df))
