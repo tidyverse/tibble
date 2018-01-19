@@ -261,7 +261,9 @@ quote_escaped <- function(x) {
 # returns "," unless it's used for the decimal point, in which case returns "."
 big_mark <- function(x, ...) {
   mark <- if (identical(getOption("OutDec"), ",")) "." else ","
-  formatC(x, big.mark = mark, ...)
+  ret <- formatC(x, big.mark = mark, ...)
+  ret[is.na(x)] <- "??"
+  ret
 }
 
 tibble_width <- function(width) {
