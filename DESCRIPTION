@@ -18,7 +18,7 @@ Imports:
     cli,
     crayon,
     methods,
-    pillar,
+    pillar (>= 1.1.0),
     rlang,
     utils
 Suggests: 
@@ -35,7 +35,6 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
-Remotes: r-lib/pillar
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
 Collate: 

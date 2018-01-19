@@ -137,7 +137,7 @@ format_body <- function(x) {
 
 format_footer <- function(x, squeezed_colonnade) {
   extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, pillar::extra_cols(squeezed_colonnade))
+  extra_cols <- format_footer_cols(x, pillar::extra_cols(squeezed_colonnade, n = x$n_extra))
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
@@ -164,7 +164,7 @@ format_footer_rows <- function(x) {
 format_footer_cols <- function(x, extra_cols) {
   if (length(extra_cols) == 0) return(NULL)
 
-  vars <- format_extra_vars(extra_cols, x$n_extra)
+  vars <- format_extra_vars(extra_cols)
   paste0(
     big_mark(length(extra_cols)), " ",
     if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
@@ -172,15 +172,15 @@ format_footer_cols <- function(x, extra_cols) {
   )
 }
 
-format_extra_vars <- function(extra_cols, n_extra) {
-  if (n_extra > 0) {
-    if (n_extra < length(extra_cols)) {
-      extra_cols <- c(extra_cols[seq_len(n_extra)], cli::symbol$ellipsis)
-    }
-    paste0(": ", collapse(extra_cols))
-  } else {
-    ""
+format_extra_vars <- function(extra_cols) {
+  # Also covers empty extra_cols vector!
+  if (is.na(extra_cols[1])) return("")
+
+  if (anyNA(extra_cols)) {
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
   }
+
+  paste0(": ", collapse(extra_cols))
 }
 
 format_comment <- function(x, width) {
