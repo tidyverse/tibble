@@ -40,16 +40,35 @@ and \code{\link[=print.tbl]{print.tbl()}} and \code{\link[=glimpse]{glimpse()}} 
 
 Display options for \code{tbl_df}, used by \code{\link[=trunc_mat]{trunc_mat()}} and
 (indirectly) by \code{\link[=print.tbl]{print.tbl()}}.
-\describe{
-\item{\code{tibble.print_max}}{Row number threshold: Maximum number of rows
-printed. Set to \code{Inf} to always print all rows.  Default: 20.}
-\item{\code{tibble.print_min}}{Number of rows printed if row number
-threshold is exceeded. Default: 10.}
-\item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
-\code{width} option).}
-\item{\code{tibble.max_extra_cols}}{Number of extra columns
-printed in reduced form. Default: 100.}
+\itemize{
+\item \code{tibble.print_max}: Row number threshold: Maximum number of rows
+printed. Set to \code{Inf} to always print all rows.  Default: 20.
+\item \code{tibble.print_min}: Number of rows printed if row number
+threshold is exceeded. Default: 10.
+\item \code{tibble.width}: Output width. Default: \code{NULL} (use
+\code{width} option).
+\item \code{tibble.max_extra_cols}: Number of extra columns
+printed in reduced form. Default: 100.
 }
+
+
+
+\itemize{
+\item \code{pillar.bold}: Use bold font, e.g. for column headers? This currently
+defaults to \code{FALSE}, because many terminal fonts have poor support for
+bold fonts.
+\item \code{pillar.subtle}: Use subtle style, e.g. for insignificant digits? Default:
+\code{TRUE}.
+\item \code{pillar.neg}: Highlight negative numbers? Default: \code{TRUE}.
+\item \code{pillar.sigfig}: The number of significant digits that will be printed and
+highlighted, default: \code{3}. Set the \code{pillar.subtle} option to \code{FALSE} to
+turn off highlighting of significant digits.
+\item \code{pillar.min_title_chars}: The minimum number of characters for the column
+title, default: \code{15}.  Column titles may be truncated up to that width to
+save horizontal space. Set to \code{Inf} to turn off truncation of column
+titles.
+}
+
 }
 
 \seealso{
