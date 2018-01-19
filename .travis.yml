@@ -38,6 +38,7 @@ jobs:
     env:
     - BUILD_PKGDOWN=true
   - r: devel
+  - os: osx
 
 #env
 env:
