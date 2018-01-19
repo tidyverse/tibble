@@ -89,7 +89,6 @@ test_that("glimpse works for structures with unknown rows", {
 
   expect_output_file(
     glimpse(iris2, width = 70L),
-    output_file("glimpse/iris-70-na-nrow.txt"),
-    update = FALSE
+    output_file("glimpse/iris-70-na-nrow.txt")
   )
 })
