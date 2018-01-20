@@ -14,6 +14,7 @@
 #' enframe(1:3)
 #' enframe(c(a = 5, b = 7))
 enframe <- function(x, name = "name", value = "value") {
+  if (is.null(x)) x <- logical()
   if (is_null(names(x))) {
     df <- list(seq_along(x), x)
   } else {
