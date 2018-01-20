@@ -1,6 +1,16 @@
-### tibble 1.4.1.9000 (2017-12-29)
+# tibble 1.4.1.9001 (2018-01-20)
 
-
+- `enframe(NULL)` now returns the same as `enframe(logical())` (#352).
+- `tbl[1, , drop = TRUE]` now behaves identically to data frames (#367).
+- The `tibble.width` option is honored again (#369).
+- Faster printing of very wide tibbles (#360).
+- Update vignette to match changes in 1.4.1 (#368, @bgreenwell).
+- Don't rely on `ncol()` for `glimpse()`, only query `nrow()` and `head()`.
+- Return input for zero-column data frames.
+- Add test for `glimpse()` with unknown rows (#366, @kevinykuo).
+- Faster construction and subsetting for tibbles (#353).
+- `tribble()` now ignores trailing commas (#342, @LaDilettante).
+- Fix error message when accessing columns using a logical index vector (#337, @mundl).
 
 # tibble 1.4.1 (2017-12-24)
 

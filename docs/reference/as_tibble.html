@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Coerce lists and matrices to data frames. — as_tibble • tibble</title>
+<title>Coerce lists and matrices to data frames — as_tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,7 +89,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Coerce lists and matrices to data frames.</h1>
+    <h1>Coerce lists and matrices to data frames</h1>
     </div>
 
     
@@ -102,16 +102,16 @@ with more efficient methods for matrices and data frames.</p>
     <pre class="usage"><span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tbl_df</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='co'># S3 method for list</span>
 <span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for table</span>
 <span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='st'>"n"</span>, <span class='no'>...</span>)
@@ -138,7 +138,15 @@ with more efficient methods for matrices and data frames.</p>
       <td><p>When <code>TRUE</code>, verifies that the input is a valid data
 frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
-frame and you want to save some time.</p></td>
+frame and you want to save some time, or to explicitly enable it
+if you have a tibble that you want to re-check.</p></td>
+    </tr>
+    <tr>
+      <th>rownames</th>
+      <td><p>If <code>NULL</code>, remove row names (default for matrices, may become
+default for data frames in the future). If <code>NA</code>, keep row names (current
+default for data frames). Otherwise, the name of the new column that will
+contain the existing row names.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -165,23 +173,26 @@ Other types are first coerced via <code>as.data.frame()</code> with
 
 <span class='co'># as_tibble is considerably simpler than as.data.frame</span>
 <span class='co'># making it more suitable for use when you have things that are</span>
-<span class='co'># lists</span>
-<span class='fu'>not_run</span>({
+<span class='co'># lists</span></div><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"microbenchmark"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>l2</span> <span class='kw'>&lt;-</span> <span class='fu'>replicate</span>(<span class='fl'>26</span>, <span class='fu'>sample</span>(<span class='no'>letters</span>), <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
   <span class='fu'>names</span>(<span class='no'>l2</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
-  <span class='kw'>microbenchmark</span><span class='kw'>::</span><span class='fu'>microbenchmark</span>(
+  <span class='kw pkg'>microbenchmark</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark'>microbenchmark</a></span>(
     <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>),
     <span class='fu'>as_tibble</span>(<span class='no'>l2</span>),
     <span class='fu'>as.data.frame</span>(<span class='no'>l2</span>)
   )
+}
 
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"microbenchmark"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>runif</span>(<span class='fl'>26</span> * <span class='fl'>100</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>26</span>)
   <span class='fu'>colnames</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
-  <span class='kw'>microbenchmark</span><span class='kw'>::</span><span class='fu'>microbenchmark</span>(
+  <span class='kw pkg'>microbenchmark</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark'>microbenchmark</a></span>(
     <span class='fu'>as_tibble</span>(<span class='no'>m</span>),
     <span class='fu'>as.data.frame</span>(<span class='no'>m</span>)
   )
-})</div></pre>
+}
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -202,7 +213,7 @@ Other types are first coerced via <code>as.data.frame()</code> with
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

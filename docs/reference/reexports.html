@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a list — lst • tibble</title>
+<title>Objects exported from other packages — reexports • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,39 +89,24 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a list</h1>
+    <h1>Objects exported from other packages</h1>
     </div>
 
     
-    <p><code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
-evaluates its arguments lazily and in order, and automatically adds names.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p><dl class='dl-horizontal'>
+  <dt>pillar</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>obj_sum</a></code>, <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>type_sum</a></code>, <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>is_vector_s3</a></code></p></dd>
+
+    <dt>rlang</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/rlang/topics/has_name'>has_name</a></code></p></dd>
+</dl>
     
 
-    <pre class="usage"><span class='fu'>lst</span>(<span class='no'>...</span>)
-
-<span class='fu'>lst_</span>(<span class='no'>xs</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created variables.</p></td>
-    </tr>
-    <tr>
-      <th>xs</th>
-      <td><p>A list of unevaluated expressions created with <code>~</code>,
-<code>quote()</code>, or <code><a href='http://www.rdocumentation.org/packages/lazyeval/topics/lazy_'>lazyeval::lazy()</a></code>.</p></td>
-    </tr>
-    </table>
-    
+        
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>
@@ -133,7 +118,7 @@ so you can refer to previously created variables.</p></td>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

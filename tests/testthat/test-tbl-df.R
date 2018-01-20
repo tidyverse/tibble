@@ -129,12 +129,12 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    "Length of logical index vector must be 1 or 3 (the number of rows), not 2",
+    "Length of logical index vector must be 1 or 3 (the number of columns), not 2",
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "Length of logical index vector must be 1 or 3 (the number of rows), not 4",
+    "Length of logical index vector must be 1 or 3 (the number of columns), not 4",
     fixed = TRUE
   )
   expect_error(
@@ -221,6 +221,7 @@ test_that("[.tbl_df is no-op if args missing", {
 
 test_that("[.tbl_df supports drop argument (#311)", {
   expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][1])
+  expect_identical(df_all[1, , drop = TRUE], as.data.frame(df_all)[1, , drop = TRUE])
 })
 
 test_that("[.tbl_df ignores drop argument (with warning) without j argument (#307)", {

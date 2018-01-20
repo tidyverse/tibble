@@ -24,6 +24,13 @@ test_that("can convert zero-length vector", {
   )
 })
 
+test_that("can convert NULL (#352)", {
+  expect_identical(
+    enframe(NULL),
+    tibble(name = integer(), value = logical())
+  )
+})
+
 test_that("can use custom names", {
   expect_identical(
     enframe(letters, name = "index", value = "letter"),

@@ -1,6 +1,6 @@
-#' Repair object names.
+#' Repair object names
 #'
-#' `tidy_names()` ensures its input has non-missing and
+#' `set_tidy_names()` ensures its input has non-missing and
 #' unique names (duplicated names get a suffix of the format `..#`
 #' where `#` is the position in the vector).
 #' Valid names are left unchanged, with the exception that existing suffixes

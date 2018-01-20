@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test if the object is a tibble. — is.tibble • tibble</title>
+<title>Package options — tibble-options • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,38 +89,51 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test if the object is a tibble.</h1>
+    <h1>Package options</h1>
     </div>
 
     
-    <p>Test if the object is a tibble.</p>
+    <p>Display options for <code>tbl_df</code>, used by <code><a href='formatting.html'>trunc_mat()</a></code> and
+(indirectly) by <code><a href='formatting.html'>print.tbl()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>is.tibble</span>(<span class='no'>x</span>)
+        
+    <h2 class="hasAnchor" id="package-options"><a class="anchor" href="#package-options"></a>Package options</h2>
 
-<span class='fu'>is_tibble</span>(<span class='no'>x</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An object</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>TRUE</code> if the object inherits from the <code>tbl_df</code> class.</p>
+    <ul>
+<li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows
+printed. Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
+<li><p><code>tibble.print_min</code>: Number of rows printed if row number
+threshold is exceeded. Default: 10.</p></li>
+<li><p><code>tibble.width</code>: Output width. Default: <code>NULL</code> (use
+<code>width</code> option).</p></li>
+<li><p><code>tibble.max_extra_cols</code>: Number of extra columns
+printed in reduced form. Default: 100.</p></li>
+</ul>
+    <ul>
+<li><p><code>pillar.bold</code>: Use bold font, e.g. for column headers? This currently
+defaults to <code>FALSE</code>, because many terminal fonts have poor support for
+bold fonts.</p></li>
+<li><p><code>pillar.subtle</code>: Use subtle style, e.g. for insignificant digits? Default:
+<code>TRUE</code>.</p></li>
+<li><p><code>pillar.neg</code>: Highlight negative numbers? Default: <code>TRUE</code>.</p></li>
+<li><p><code>pillar.sigfig</code>: The number of significant digits that will be printed and
+highlighted, default: <code>3</code>. Set the <code>pillar.subtle</code> option to <code>FALSE</code> to
+turn off highlighting of significant digits.</p></li>
+<li><p><code>pillar.min_title_chars</code>: The minimum number of characters for the column
+title, default: <code>15</code>.  Column titles may be truncated up to that width to
+save horizontal space. Set to <code>Inf</code> to turn off truncation of column
+titles.</p></li>
+</ul>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#package-options">Package options</a></li>
           </ul>
 
   </div>
@@ -132,7 +145,7 @@
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

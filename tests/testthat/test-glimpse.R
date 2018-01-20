@@ -83,3 +83,12 @@ test_that("glimpse(width = Inf) raises legible error", {
     fixed = TRUE
   )
 })
+
+test_that("glimpse works for structures with unknown rows", {
+  iris2 <- as_unknown_rows(iris)
+
+  expect_output_file(
+    glimpse(iris2, width = 70L),
+    output_file("glimpse/iris-70-na-nrow.txt")
+  )
+})

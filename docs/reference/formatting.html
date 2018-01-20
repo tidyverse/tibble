@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tools for describing matrices — print.tbl_df • tibble</title>
+<title>Tools for describing matrices — format.tbl • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -96,7 +96,16 @@
     <p>Tools for describing matrices</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for tbl_df</span>
+    <pre class="usage"><span class='co'># S3 method for tbl</span>
+<span class='fu'>format</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for tbl_df</span>
+<span class='fu'>format</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for tbl</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for tbl_df</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>trunc_mat</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -139,129 +148,129 @@ extra columns.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>trunc_mat</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; # data.frame [32 × 11]
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt; *  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1   21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4
-#&gt; 2   21.0     6 160.0   110  3.90 2.875 17.02     0     1     4     4
-#&gt; 3   22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1
-#&gt; 4   21.4     6 258.0   110  3.08 3.215 19.44     1     0     3     1
-#&gt; 5   18.7     8 360.0   175  3.15 3.440 17.02     0     0     3     2
-#&gt; 6   18.1     6 225.0   105  2.76 3.460 20.22     1     0     3     1
-#&gt; 7   14.3     8 360.0   245  3.21 3.570 15.84     0     0     3     4
-#&gt; 8   24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2
-#&gt; 9   22.8     4 140.8    95  3.92 3.150 22.90     1     0     4     2
-#&gt; 10  19.2     6 167.6   123  3.92 3.440 18.30     1     0     4     4
+#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1  21.0  6.00   160 110    3.90  2.62  16.5  0     1.00  4.00  4.00
+#&gt;  2  21.0  6.00   160 110    3.90  2.88  17.0  0     1.00  4.00  4.00
+#&gt;  3  22.8  4.00   108  93.0  3.85  2.32  18.6  1.00  1.00  4.00  1.00
+#&gt;  4  21.4  6.00   258 110    3.08  3.22  19.4  1.00  0     3.00  1.00
+#&gt;  5  18.7  8.00   360 175    3.15  3.44  17.0  0     0     3.00  2.00
+#&gt;  6  18.1  6.00   225 105    2.76  3.46  20.2  1.00  0     3.00  1.00
+#&gt;  7  14.3  8.00   360 245    3.21  3.57  15.8  0     0     3.00  4.00
+#&gt;  8  24.4  4.00   147  62.0  3.69  3.19  20.0  1.00  0     4.00  2.00
+#&gt;  9  22.8  4.00   141  95.0  3.92  3.15  22.9  1.00  0     4.00  2.00
+#&gt; 10  19.2  6.00   168 123    3.92  3.44  18.3  1.00  0     4.00  4.00
 #&gt; # ... with 22 more rows</div><div class='input'>
-<span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 32 × 11
+<span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 32 x 11
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt; *  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1   21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4
-#&gt; 2   21.0     6 160.0   110  3.90 2.875 17.02     0     1     4     4
-#&gt; 3   22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1
-#&gt; 4   21.4     6 258.0   110  3.08 3.215 19.44     1     0     3     1
-#&gt; 5   18.7     8 360.0   175  3.15 3.440 17.02     0     0     3     2
-#&gt; 6   18.1     6 225.0   105  2.76 3.460 20.22     1     0     3     1
-#&gt; 7   14.3     8 360.0   245  3.21 3.570 15.84     0     0     3     4
-#&gt; 8   24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2
-#&gt; 9   22.8     4 140.8    95  3.92 3.150 22.90     1     0     4     2
-#&gt; 10  19.2     6 167.6   123  3.92 3.440 18.30     1     0     4     4
-#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 32 × 11
+#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1  21.0  6.00   160 110    3.90  2.62  16.5  0     1.00  4.00  4.00
+#&gt;  2  21.0  6.00   160 110    3.90  2.88  17.0  0     1.00  4.00  4.00
+#&gt;  3  22.8  4.00   108  93.0  3.85  2.32  18.6  1.00  1.00  4.00  1.00
+#&gt;  4  21.4  6.00   258 110    3.08  3.22  19.4  1.00  0     3.00  1.00
+#&gt;  5  18.7  8.00   360 175    3.15  3.44  17.0  0     0     3.00  2.00
+#&gt;  6  18.1  6.00   225 105    2.76  3.46  20.2  1.00  0     3.00  1.00
+#&gt;  7  14.3  8.00   360 245    3.21  3.57  15.8  0     0     3.00  4.00
+#&gt;  8  24.4  4.00   147  62.0  3.69  3.19  20.0  1.00  0     4.00  2.00
+#&gt;  9  22.8  4.00   141  95.0  3.92  3.15  22.9  1.00  0     4.00  2.00
+#&gt; 10  19.2  6.00   168 123    3.92  3.44  18.3  1.00  0     4.00  4.00
+#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 11
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1    21     6   160   110   3.9  2.62 16.46     0     1     4     4
-#&gt; # ... with 31 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 × 11
+#&gt; 1  21.0  6.00   160   110  3.90  2.62  16.5     0  1.00  4.00  4.00
+#&gt; # ... with 31 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 11
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1  21.0     6   160   110  3.90 2.620 16.46     0     1     4     4
-#&gt; 2  21.0     6   160   110  3.90 2.875 17.02     0     1     4     4
-#&gt; 3  22.8     4   108    93  3.85 2.320 18.61     1     1     4     1
-#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; # A tibble: 32 × 11
+#&gt; 1  21.0  6.00   160 110    3.90  2.62  16.5  0     1.00  4.00  4.00
+#&gt; 2  21.0  6.00   160 110    3.90  2.88  17.0  0     1.00  4.00  4.00
+#&gt; 3  22.8  4.00   108  93.0  3.85  2.32  18.6  1.00  1.00  4.00  1.00
+#&gt; # ... with 29 more rows</div><div class='input'><span class='fu'>print</span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 11
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt; *  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1   21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4
-#&gt; 2   21.0     6 160.0   110  3.90 2.875 17.02     0     1     4     4
-#&gt; 3   22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1
-#&gt; 4   21.4     6 258.0   110  3.08 3.215 19.44     1     0     3     1
-#&gt; 5   18.7     8 360.0   175  3.15 3.440 17.02     0     0     3     2
-#&gt; 6   18.1     6 225.0   105  2.76 3.460 20.22     1     0     3     1
-#&gt; 7   14.3     8 360.0   245  3.21 3.570 15.84     0     0     3     4
-#&gt; 8   24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2
-#&gt; 9   22.8     4 140.8    95  3.92 3.150 22.90     1     0     4     2
-#&gt; 10  19.2     6 167.6   123  3.92 3.440 18.30     1     0     4     4
-#&gt; 11  17.8     6 167.6   123  3.92 3.440 18.90     1     0     4     4
-#&gt; 12  16.4     8 275.8   180  3.07 4.070 17.40     0     0     3     3
-#&gt; 13  17.3     8 275.8   180  3.07 3.730 17.60     0     0     3     3
-#&gt; 14  15.2     8 275.8   180  3.07 3.780 18.00     0     0     3     3
-#&gt; 15  10.4     8 472.0   205  2.93 5.250 17.98     0     0     3     4
-#&gt; 16  10.4     8 460.0   215  3.00 5.424 17.82     0     0     3     4
-#&gt; 17  14.7     8 440.0   230  3.23 5.345 17.42     0     0     3     4
-#&gt; 18  32.4     4  78.7    66  4.08 2.200 19.47     1     1     4     1
-#&gt; 19  30.4     4  75.7    52  4.93 1.615 18.52     1     1     4     2
-#&gt; 20  33.9     4  71.1    65  4.22 1.835 19.90     1     1     4     1
-#&gt; 21  21.5     4 120.1    97  3.70 2.465 20.01     1     0     3     1
-#&gt; 22  15.5     8 318.0   150  2.76 3.520 16.87     0     0     3     2
-#&gt; 23  15.2     8 304.0   150  3.15 3.435 17.30     0     0     3     2
-#&gt; 24  13.3     8 350.0   245  3.73 3.840 15.41     0     0     3     4
-#&gt; 25  19.2     8 400.0   175  3.08 3.845 17.05     0     0     3     2
-#&gt; 26  27.3     4  79.0    66  4.08 1.935 18.90     1     1     4     1
-#&gt; 27  26.0     4 120.3    91  4.43 2.140 16.70     0     1     5     2
-#&gt; 28  30.4     4  95.1   113  3.77 1.513 16.90     1     1     5     2
-#&gt; 29  15.8     8 351.0   264  4.22 3.170 14.50     0     1     5     4
-#&gt; 30  19.7     6 145.0   175  3.62 2.770 15.50     0     1     5     6
-#&gt; 31  15.0     8 301.0   335  3.54 3.570 14.60     0     1     5     8
-#&gt; 32  21.4     4 121.0   109  4.11 2.780 18.60     1     1     4     2</div><div class='input'>
+#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1  21.0  6.00 160   110    3.90  2.62  16.5  0     1.00  4.00  4.00
+#&gt;  2  21.0  6.00 160   110    3.90  2.88  17.0  0     1.00  4.00  4.00
+#&gt;  3  22.8  4.00 108    93.0  3.85  2.32  18.6  1.00  1.00  4.00  1.00
+#&gt;  4  21.4  6.00 258   110    3.08  3.22  19.4  1.00  0     3.00  1.00
+#&gt;  5  18.7  8.00 360   175    3.15  3.44  17.0  0     0     3.00  2.00
+#&gt;  6  18.1  6.00 225   105    2.76  3.46  20.2  1.00  0     3.00  1.00
+#&gt;  7  14.3  8.00 360   245    3.21  3.57  15.8  0     0     3.00  4.00
+#&gt;  8  24.4  4.00 147    62.0  3.69  3.19  20.0  1.00  0     4.00  2.00
+#&gt;  9  22.8  4.00 141    95.0  3.92  3.15  22.9  1.00  0     4.00  2.00
+#&gt; 10  19.2  6.00 168   123    3.92  3.44  18.3  1.00  0     4.00  4.00
+#&gt; 11  17.8  6.00 168   123    3.92  3.44  18.9  1.00  0     4.00  4.00
+#&gt; 12  16.4  8.00 276   180    3.07  4.07  17.4  0     0     3.00  3.00
+#&gt; 13  17.3  8.00 276   180    3.07  3.73  17.6  0     0     3.00  3.00
+#&gt; 14  15.2  8.00 276   180    3.07  3.78  18.0  0     0     3.00  3.00
+#&gt; 15  10.4  8.00 472   205    2.93  5.25  18.0  0     0     3.00  4.00
+#&gt; 16  10.4  8.00 460   215    3.00  5.42  17.8  0     0     3.00  4.00
+#&gt; 17  14.7  8.00 440   230    3.23  5.34  17.4  0     0     3.00  4.00
+#&gt; 18  32.4  4.00  78.7  66.0  4.08  2.20  19.5  1.00  1.00  4.00  1.00
+#&gt; 19  30.4  4.00  75.7  52.0  4.93  1.62  18.5  1.00  1.00  4.00  2.00
+#&gt; 20  33.9  4.00  71.1  65.0  4.22  1.84  19.9  1.00  1.00  4.00  1.00
+#&gt; 21  21.5  4.00 120    97.0  3.70  2.46  20.0  1.00  0     3.00  1.00
+#&gt; 22  15.5  8.00 318   150    2.76  3.52  16.9  0     0     3.00  2.00
+#&gt; 23  15.2  8.00 304   150    3.15  3.44  17.3  0     0     3.00  2.00
+#&gt; 24  13.3  8.00 350   245    3.73  3.84  15.4  0     0     3.00  4.00
+#&gt; 25  19.2  8.00 400   175    3.08  3.84  17.0  0     0     3.00  2.00
+#&gt; 26  27.3  4.00  79.0  66.0  4.08  1.94  18.9  1.00  1.00  4.00  1.00
+#&gt; 27  26.0  4.00 120    91.0  4.43  2.14  16.7  0     1.00  5.00  2.00
+#&gt; 28  30.4  4.00  95.1 113    3.77  1.51  16.9  1.00  1.00  5.00  2.00
+#&gt; 29  15.8  8.00 351   264    4.22  3.17  14.5  0     1.00  5.00  4.00
+#&gt; 30  19.7  6.00 145   175    3.62  2.77  15.5  0     1.00  5.00  6.00
+#&gt; 31  15.0  8.00 301   335    3.54  3.57  14.6  0     1.00  5.00  8.00
+#&gt; 32  21.4  4.00 121   109    4.11  2.78  18.6  1.00  1.00  4.00  2.00</div><div class='input'>
 <span class='kw'>if</span> (!<span class='fu'>requireNamespace</span>(<span class='st'>"nycflights13"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
   <span class='fu'>stop</span>(<span class='st'>"Please install the nycflights13 package to run the rest of this example"</span>)
 
-<span class='fu'>print</span>(<span class='kw'>nycflights13</span><span class='kw'>::</span><span class='no'>flights</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 × 19
+<span class='fu'>print</span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/nycflights13/topics/flights'>flights</a></span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 x 19
 #&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 #&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-#&gt; 1   2013     1     1      517            515         2      830            819
-#&gt; 2   2013     1     1      533            529         4      850            830
-#&gt; 3   2013     1     1      542            540         2      923            850
-#&gt; 4   2013     1     1      544            545        -1     1004           1022
-#&gt; 5   2013     1     1      554            600        -6      812            837
-#&gt; 6   2013     1     1      554            558        -4      740            728
-#&gt; 7   2013     1     1      555            600        -5      913            854
-#&gt; 8   2013     1     1      557            600        -3      709            723
-#&gt; 9   2013     1     1      557            600        -3      838            846
-#&gt; 10  2013     1     1      558            600        -2      753            745
+#&gt;  1  2013     1     1      517            515      2.00      830            819
+#&gt;  2  2013     1     1      533            529      4.00      850            830
+#&gt;  3  2013     1     1      542            540      2.00      923            850
+#&gt;  4  2013     1     1      544            545     -1.00     1004           1022
+#&gt;  5  2013     1     1      554            600     -6.00      812            837
+#&gt;  6  2013     1     1      554            558     -4.00      740            728
+#&gt;  7  2013     1     1      555            600     -5.00      913            854
+#&gt;  8  2013     1     1      557            600     -3.00      709            723
+#&gt;  9  2013     1     1      557            600     -3.00      838            846
+#&gt; 10  2013     1     1      558            600     -2.00      753            745
 #&gt; # ... with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
-#&gt; #   carrier &lt;chr&gt;, ...</div><div class='input'><span class='fu'>print</span>(<span class='kw'>nycflights13</span><span class='kw'>::</span><span class='no'>flights</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 × 19
+#&gt; #   carrier &lt;chr&gt;, …</div><div class='input'><span class='fu'>print</span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/nycflights13/topics/flights'>flights</a></span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 x 19
 #&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 #&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-#&gt; 1   2013     1     1      517            515         2      830            819
-#&gt; 2   2013     1     1      533            529         4      850            830
-#&gt; 3   2013     1     1      542            540         2      923            850
-#&gt; 4   2013     1     1      544            545        -1     1004           1022
-#&gt; 5   2013     1     1      554            600        -6      812            837
-#&gt; 6   2013     1     1      554            558        -4      740            728
-#&gt; 7   2013     1     1      555            600        -5      913            854
-#&gt; 8   2013     1     1      557            600        -3      709            723
-#&gt; 9   2013     1     1      557            600        -3      838            846
-#&gt; 10  2013     1     1      558            600        -2      753            745
-#&gt;    arr_delay carrier flight tailnum origin  dest air_time distance  hour minute
-#&gt;        &lt;dbl&gt;   &lt;chr&gt;  &lt;int&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1         11      UA   1545  N14228    EWR   IAH      227     1400     5     15
-#&gt; 2         20      UA   1714  N24211    LGA   IAH      227     1416     5     29
-#&gt; 3         33      AA   1141  N619AA    JFK   MIA      160     1089     5     40
-#&gt; 4        -18      B6    725  N804JB    JFK   BQN      183     1576     5     45
-#&gt; 5        -25      DL    461  N668DN    LGA   ATL      116      762     6      0
-#&gt; 6         12      UA   1696  N39463    EWR   ORD      150      719     5     58
-#&gt; 7         19      B6    507  N516JB    EWR   FLL      158     1065     6      0
-#&gt; 8        -14      EV   5708  N829AS    LGA   IAD       53      229     6      0
-#&gt; 9         -8      B6     79  N593JB    JFK   MCO      140      944     6      0
-#&gt; 10         8      AA    301  N3ALAA    LGA   ORD      138      733     6      0
-#&gt;              time_hour
-#&gt;                 &lt;dttm&gt;
-#&gt; 1  2013-01-01 05:00:00
-#&gt; 2  2013-01-01 05:00:00
-#&gt; 3  2013-01-01 05:00:00
-#&gt; 4  2013-01-01 05:00:00
-#&gt; 5  2013-01-01 06:00:00
-#&gt; 6  2013-01-01 05:00:00
-#&gt; 7  2013-01-01 06:00:00
-#&gt; 8  2013-01-01 06:00:00
-#&gt; 9  2013-01-01 06:00:00
+#&gt;  1  2013     1     1      517            515      2.00      830            819
+#&gt;  2  2013     1     1      533            529      4.00      850            830
+#&gt;  3  2013     1     1      542            540      2.00      923            850
+#&gt;  4  2013     1     1      544            545     -1.00     1004           1022
+#&gt;  5  2013     1     1      554            600     -6.00      812            837
+#&gt;  6  2013     1     1      554            558     -4.00      740            728
+#&gt;  7  2013     1     1      555            600     -5.00      913            854
+#&gt;  8  2013     1     1      557            600     -3.00      709            723
+#&gt;  9  2013     1     1      557            600     -3.00      838            846
+#&gt; 10  2013     1     1      558            600     -2.00      753            745
+#&gt;    arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+#&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1     11.0  UA        1545 N14228  EWR    IAH      227       1400  5.00   15.0
+#&gt;  2     20.0  UA        1714 N24211  LGA    IAH      227       1416  5.00   29.0
+#&gt;  3     33.0  AA        1141 N619AA  JFK    MIA      160       1089  5.00   40.0
+#&gt;  4    -18.0  B6         725 N804JB  JFK    BQN      183       1576  5.00   45.0
+#&gt;  5    -25.0  DL         461 N668DN  LGA    ATL      116        762  6.00    0  
+#&gt;  6     12.0  UA        1696 N39463  EWR    ORD      150        719  5.00   58.0
+#&gt;  7     19.0  B6         507 N516JB  EWR    FLL      158       1065  6.00    0  
+#&gt;  8    -14.0  EV        5708 N829AS  LGA    IAD       53.0      229  6.00    0  
+#&gt;  9    - 8.00 B6          79 N593JB  JFK    MCO      140        944  6.00    0  
+#&gt; 10      8.00 AA         301 N3ALAA  LGA    ORD      138        733  6.00    0  
+#&gt;    time_hour          
+#&gt;    &lt;dttm&gt;             
+#&gt;  1 2013-01-01 05:00:00
+#&gt;  2 2013-01-01 05:00:00
+#&gt;  3 2013-01-01 05:00:00
+#&gt;  4 2013-01-01 05:00:00
+#&gt;  5 2013-01-01 06:00:00
+#&gt;  6 2013-01-01 05:00:00
+#&gt;  7 2013-01-01 06:00:00
+#&gt;  8 2013-01-01 06:00:00
+#&gt;  9 2013-01-01 06:00:00
 #&gt; 10 2013-01-01 06:00:00
 #&gt; # ... with 336,766 more rows</div></pre>
   </div>
@@ -284,7 +293,7 @@ extra columns.</p></td>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 
