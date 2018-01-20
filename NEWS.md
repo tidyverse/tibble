@@ -12,6 +12,7 @@
 - `tribble()` now ignores trailing commas (#342, @LaDilettante).
 - Fix error message when accessing columns using a logical index vector (#337, @mundl).
 
+
 # tibble 1.4.1 (2017-12-24)
 
 ## New formatting
