@@ -1,18 +1,13 @@
 ## revdepcheck results
 
-We checked 292 reverse dependencies (289 from CRAN + 3 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 12 reverse dependencies (11 from CRAN + 1 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 2 new problems
- * We failed to check 0 packages
+ * We saw 0 new problems
+ * We failed to check 2 packages
 
 Issues with CRAN packages are summarised below.
 
-### New problems
-(This reports the first line of each new failure)
+### Failed to check
 
-* dbplyr
-  checking tests ...
-
-* xpose
-  checking tests ...
-
+* alfred           (failed to install)
+* anomalyDetection (failed to install)
