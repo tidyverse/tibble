@@ -11,10 +11,13 @@ home:
 reference:
 - title: Tibbles
   contents:
+  - tibble-package
+  - tibble
   - ends_with("ibble")
   - enframe
   - has_name
-  - tibble-package
+  - tibble-options
+  - -reexports
 
 - title: Manipulation
   contents:
@@ -27,6 +30,7 @@ reference:
   - glimpse
   - rownames
   - tbl_sum
+  - reexports
 
 - title: Vectors, matrices, and lists
   contents:

@@ -54,7 +54,7 @@ Collate:
     'rownames.R'
     'strrep.R'
     'tbl-df.r'
-    'tibble-pkg.R'
+    'tibble-package.R'
     'tribble.R'
     'type-sum.r'
     'utils-format.r'

@@ -1,7 +1,7 @@
 #' @useDynLib tibble, .registration = TRUE
 #' @importFrom utils head tail
 #' @import rlang
-#' @aliases NULL
+#' @aliases NULL tibble-package
 #' @details The S3 class `tbl_df` wraps a local data frame. The main
 #' advantage to using a `tbl_df` over a regular data frame is the printing:
 #' tbl objects only print a few rows and all the columns that fit on one screen,
@@ -14,7 +14,7 @@
 #' \describe{
 #' \item{print}{By default only prints the first 10 rows (at most 20), and the
 #'   columns that fit on screen; see [print.tbl()]}
-#' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
+#' \item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
 #' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
 #'   so is considerably faster. Returns `NULL` if column does not exist,
 #'   `$` warns.}
@@ -23,13 +23,19 @@
 #' [tibble()] and [tribble()] for construction,
 #' [as_tibble()] for coercion,
 #' and [print.tbl()] and [glimpse()] for display.
+#' @examples
+#' tibble(a = 1:26, b = letters)
+#' as_tibble(iris)
 "_PACKAGE"
 
-#' @name tibble-package
-#' @inheritSection pillar::`pillar-package` Package options
-#' @section Package options:
+#' Package options
+#'
 #' Display options for `tbl_df`, used by [trunc_mat()] and
 #' (indirectly) by [print.tbl()].
+#'
+#' @name tibble-options
+#' @inheritSection pillar::`pillar-package` Package options
+#' @section Package options:
 (op.tibble <- list(
   #' - `tibble.print_max`: Row number threshold: Maximum number of rows
   #'     printed. Set to `Inf` to always print all rows.  Default: 20.

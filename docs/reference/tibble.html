@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a data frame or list. — tibble • tibble</title>
+<title>Build a data frame or list — tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,7 +89,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a data frame or list.</h1>
+    <h1>Build a data frame or list</h1>
     </div>
 
     
@@ -101,17 +101,24 @@
 <li><p>Evaluates its arguments lazily and in order.</p></li>
 <li><p>Adds <code>tbl_df</code> class to output.</p></li>
 <li><p>Automatically adds column names.</p></li>
-</ul><p><code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
-evaluates its arguments lazily and in order, and automatically adds names.</p>
+</ul><p><code>data_frame()</code> is an alias to <code>tibble()</code>.
+
+    <code>tibble_()</code> and its alias <code>data_frame_()</code> use lazy evaluation and are
+deprecated. New code should use <code>tibble()</code> or <code>data_frame()</code> with
+quasiquotation.
+
+    <code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
+evaluates its arguments lazily and in order, and automatically adds names.
+
+    <code>lst_()</code> uses lazy evaluation and is deprecated. New code should use <code>lst()</code>
+with quasiquotation.</p>
     
 
     <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>)
 
-<span class='fu'>tibble_</span>(<span class='no'>xs</span>)
+<span class='fu'>data_frame</span>(<span class='no'>...</span>)
 
-<span class='fu'>lst</span>(<span class='no'>...</span>)
-
-<span class='fu'>lst_</span>(<span class='no'>xs</span>)</pre>
+<span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">

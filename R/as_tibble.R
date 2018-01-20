@@ -1,4 +1,4 @@
-#' Coerce lists and matrices to data frames.
+#' Coerce lists and matrices to data frames
 #'
 #' [as.data.frame()] is effectively a thin wrapper around `data.frame`,
 #' and hence is rather slow (because it calls [data.frame()] on each element
