@@ -107,11 +107,14 @@ print.tbl_df <- print.tbl
     }
   }
 
-  attr(result, "row.names") <- .set_row_names(nr)
-
-  if (drop && length(result) == 1L) {
-    result[[1L]]
-  } else {
-    set_tibble_class(result)
+  if (drop) {
+    if (length(result) == 1L) {
+      return(result[[1L]])
+    } else if (nr == 1L) {
+      return(result)
+    }
   }
+
+  attr(result, "row.names") <- .set_row_names(nr)
+  set_tibble_class(result)
 }
