@@ -89,6 +89,8 @@ format.trunc_mat <- function(x, width = NULL, ...) {
     width <- x$width
   }
 
+  width <- tibble_width(width)
+
   named_header <- format_header(x)
   if (all(names2(named_header) == "")) {
     header <- named_header
