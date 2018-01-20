@@ -1,4 +1,4 @@
-### tibble 1.4.1.9001 (2018-01-20)
+# tibble 1.4.1.9001 (2018-01-20)
 
 - `enframe(NULL)` now returns the same as `enframe(logical())` (#352).
 - `tbl[1, , drop = TRUE]` now behaves identically to data frames (#367).
@@ -11,11 +11,6 @@
 - Faster construction and subsetting for tibbles (#353).
 - `tribble()` now ignores trailing commas (#342, @LaDilettante).
 - Fix error message when accessing columns using a logical index vector (#337, @mundl).
-
-
-# tibble 1.4.1.9000 (2017-12-29)
-
-
 
 # tibble 1.4.1 (2017-12-24)
 
