@@ -1,4 +1,4 @@
-#' Repair object names.
+#' Repair object names
 #'
 #' `set_tidy_names()` ensures its input has non-missing and
 #' unique names (duplicated names get a suffix of the format `..#`

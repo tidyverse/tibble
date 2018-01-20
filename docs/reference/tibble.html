@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a data frame or list. — tibble • tibble</title>
+<title>Build a data frame or list — tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,7 +89,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a data frame or list.</h1>
+    <h1>Build a data frame or list</h1>
     </div>
 
     
@@ -101,17 +101,24 @@
 <li><p>Evaluates its arguments lazily and in order.</p></li>
 <li><p>Adds <code>tbl_df</code> class to output.</p></li>
 <li><p>Automatically adds column names.</p></li>
-</ul><p><code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
-evaluates its arguments lazily and in order, and automatically adds names.</p>
+</ul><p><code>data_frame()</code> is an alias to <code>tibble()</code>.
+
+    <code>tibble_()</code> and its alias <code>data_frame_()</code> use lazy evaluation and are
+deprecated. New code should use <code>tibble()</code> or <code>data_frame()</code> with
+quasiquotation.
+
+    <code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
+evaluates its arguments lazily and in order, and automatically adds names.
+
+    <code>lst_()</code> uses lazy evaluation and is deprecated. New code should use <code>lst()</code>
+with quasiquotation.</p>
     
 
     <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>)
 
-<span class='fu'>tibble_</span>(<span class='no'>xs</span>)
+<span class='fu'>data_frame</span>(<span class='no'>...</span>)
 
-<span class='fu'>lst</span>(<span class='no'>...</span>)
-
-<span class='fu'>lst_</span>(<span class='no'>xs</span>)</pre>
+<span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,7 +127,7 @@ evaluates its arguments lazily and in order, and automatically adds names.</p>
       <th>...</th>
       <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created variables.  These arguments are
-processed with <code><a href='http://www.rdocumentation.org/packages/rlang/topics/quosures'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
+processed with <code><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
 unquote-splice via <code>!!!</code>.</p></td>
     </tr>
     <tr>
@@ -187,7 +194,7 @@ a data frame.</p>
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quotes and formulas</span>
-<span class='fu'>tibble</span>(!!! <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quosure'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'>tibble</span>(!!! <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
 #&gt;  1     1  2.00
@@ -212,7 +219,7 @@ a data frame.</p>
 #&gt; [1] 0.11304750 0.97026228 0.64808278 0.05607304 0.47313710
 #&gt; </div><div class='input'>
 <span class='co'># You can splice-unquote a list of quotes and formulas</span>
-<span class='fu'>lst</span>(!!! <span class='fu'>list</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quosure'>quo</a></span>(<span class='fl'>2</span> + <span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='fu'>runif</span>(<span class='no'>n</span>))))</div><div class='output co'>#&gt; $n
+<span class='fu'>lst</span>(!!! <span class='fu'>list</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>2</span> + <span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='fu'>runif</span>(<span class='no'>n</span>))))</div><div class='output co'>#&gt; $n
 #&gt; [1] 5
 #&gt; 
 #&gt; $y

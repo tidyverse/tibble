@@ -1,6 +1,6 @@
-#' Get a glimpse of your data.
+#' Get a glimpse of your data
 #'
-#' This is like a transposed version of print: columns run down the page,
+#' This is like a transposed version of `print()`: columns run down the page,
 #' and data runs across. This makes it possible to see every column in
 #' a data frame. It's a little like [str()] applied to a data frame
 #' but it tries to show you as much data as possible. (And it always shows

@@ -74,7 +74,7 @@
       <h1>Extending tibble</h1>
                         <h4 class="author">Kirill Müller, Hadley Wickham</h4>
             
-            <h4 class="date">2018-01-04</h4>
+            <h4 class="date">2018-01-20</h4>
           </div>
 
     
@@ -381,26 +381,26 @@ data</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>() <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>)) 
 <span class="kw">str</span>(<span class="kw">unclass</span>(x))</code></pre></div>
 <pre><code>## List of 11
-##  $ sec   : num [1:3] 58.9 58.9 58.9
-##  $ min   : int [1:3] 24 25 24
-##  $ hour  : int [1:3] 9 9 10
-##  $ mday  : int [1:3] 4 4 4
+##  $ sec   : num [1:3] 43.5 43.5 43.5
+##  $ min   : int [1:3] 12 13 12
+##  $ hour  : int [1:3] 12 12 13
+##  $ mday  : int [1:3] 20 20 20
 ##  $ mon   : int [1:3] 0 0 0
 ##  $ year  : int [1:3] 118 118 118
-##  $ wday  : int [1:3] 4 4 4
-##  $ yday  : int [1:3] 3 3 3
+##  $ wday  : int [1:3] 6 6 6
+##  $ yday  : int [1:3] 19 19 19
 ##  $ isdst : int [1:3] 0 0 0
 ##  $ zone  : chr [1:3] "CET" "CET" "CET"
 ##  $ gmtoff: int [1:3] 3600 3600 3600
 ##  - attr(*, "tzone")= chr [1:3] "" "CET" "CEST"</code></pre>
 <p>But it pretends to be a vector with 3 elements:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
-<pre><code>## [1] "2018-01-04 09:24:58 CET" "2018-01-04 09:25:58 CET"
-## [3] "2018-01-04 10:24:58 CET"</code></pre>
+<pre><code>## [1] "2018-01-20 12:12:43 CET" "2018-01-20 12:13:43 CET"
+## [3] "2018-01-20 13:12:43 CET"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)</code></pre></div>
-<pre><code>##  POSIXlt[1:3], format: "2018-01-04 09:24:58" "2018-01-04 09:25:58" ...</code></pre>
+<pre><code>##  POSIXlt[1:3], format: "2018-01-20 12:12:43" "2018-01-20 12:13:43" ...</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#' @importFrom pillar obj_sum</span>
 <span class="co">#' @export</span>
@@ -432,7 +432,7 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="st">"latlon.txt"</span>)</code></pre></div>
 <pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
 ## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
-## [3] "     \033[43m\033[30mNA\033[39m\033[49m         "</code></pre>
+## [3] "     \033[31mNA\033[39m         "</code></pre>
 <p>We can turn them off by passing <code>crayon = FALSE</code> to the expectation, but we need to run twice again:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(testthat)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {
@@ -446,15 +446,15 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
 ## x[1]: "28°20'N  81°33'W"
-## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
-## y[1]: 33[39mW"
+## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\03
+## y[1]: 3[39mW"
 ## 
 ## x[2]: "32°43'N 117°10'W"
-## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
-## y[2]: 33[39mW"
+## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\03
+## y[2]: 3[39mW"
 ## 
 ## x[3]: "     NA         "
-## y[3]: "     \033[43m\033[30mNA\033[39m\033[49m         "</code></pre>
+## y[3]: "     \033[31mNA\033[39m         "</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {
   pillar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(
     <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),
@@ -473,7 +473,7 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 </ul>
 <p>For this it is helpful to create your own expectation function. Use the tidy evaluation framework to make sure that construction and printing happens at the right time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expect_known_latlon_display &lt;-<span class="st"> </span><span class="cf">function</span>(x, file_base) {
-  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/quosure">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))
+  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/quotation">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))
   pillar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(
     <span class="op">!!</span><span class="st"> </span>quo,
     <span class="dt">file =</span> <span class="kw">paste0</span>(file_base, <span class="st">".txt"</span>)
@@ -490,20 +490,20 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
-## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
-## x[1]: 33[39mW"
+## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\03
+## x[1]: 3[39mW"
 ## y[1]: "28°20'N  81°33'W"
 ## 
-## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
-## x[2]: 33[39mW"
+## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\03
+## x[2]: 3[39mW"
 ## y[2]: "32°43'N 117°10'W"
 ## 
-## x[3]: "     \033[43m\033[30mNA\033[39m\033[49m         "
+## x[3]: "     \033[31mNA\033[39m         "
 ## y[3]: "     NA         "</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="st">"latlon.txt"</span>)</code></pre></div>
 <pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
 ## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
-## [3] "     \033[43m\033[30mNA\033[39m\033[49m         "</code></pre>
+## [3] "     \033[31mNA\033[39m         "</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="st">"latlon-bw.txt"</span>)</code></pre></div>
 <pre><code>## [1] "28°20'N  81°33'W" "32°43'N 117°10'W" "     NA         "</code></pre>
 <p>Learn more about the tidyeval framework in the <a href="http://dplyr.tidyverse.org/articles/programming.html">dplyr vignette</a>.</p>

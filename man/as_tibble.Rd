@@ -11,7 +11,7 @@
 \alias{as_tibble.default}
 \alias{as.tibble}
 \alias{as_data_frame}
-\title{Coerce lists and matrices to data frames.}
+\title{Coerce lists and matrices to data frames}
 \usage{
 as_tibble(x, ...)
 

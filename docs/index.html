@@ -82,8 +82,8 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <code>print method()</code> which makes them easier to use with large datasets containing complex objects.</p>
-<p>If you are new to tibbles, the best place to start is the <a href="http://r4ds.had.co.nz/tibbles.html">tibbles</a> in R for data science.</p>
+<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <code>print()</code> method which makes them easier to use with large datasets containing complex objects.</p>
+<p>If you are new to tibbles, the best place to start is the <a href="http://r4ds.had.co.nz/tibbles.html">tibbles chapter</a> in <em>R for data science</em>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -106,7 +106,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw"><a href="reference/as_tibble.html">as_tibble</a></span>(iris)
 <span class="co">#&gt; # A tibble: 150 x 5</span>
 <span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
-<span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fctr&gt; </span>
+<span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span>
 <span class="co">#&gt;  1         5.10        3.50         1.40       0.200 setosa </span>
 <span class="co">#&gt;  2         4.90        3.00         1.40       0.200 setosa </span>
 <span class="co">#&gt;  3         4.70        3.20         1.30       0.200 setosa </span>
