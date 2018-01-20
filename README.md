@@ -37,7 +37,7 @@ library(tibble)
 as_tibble(iris)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           <dbl>       <dbl>        <dbl>       <dbl> <fctr> 
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>  
 #>  1         5.10        3.50         1.40       0.200 setosa 
 #>  2         4.90        3.00         1.40       0.200 setosa 
 #>  3         4.70        3.20         1.30       0.200 setosa 

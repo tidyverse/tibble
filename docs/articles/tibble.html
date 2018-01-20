@@ -197,8 +197,10 @@ df2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.
 df2<span class="op">$</span>a
 <span class="co">#&gt; Warning: Unknown or uninitialised column: 'a'.</span>
 <span class="co">#&gt; NULL</span></code></pre></div>
-<p>tibbles also ignore the <code>drop</code> argument:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]
+<p>As of version 1.4.1, tibbles no longer ignore the <code>drop</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]
+<span class="co">#&gt; [1] 1 2 3</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]
 <span class="co">#&gt; [1] 1 2 3</span></code></pre></div>
 </div>
 <div id="recycling" class="section level3">
