@@ -10,7 +10,9 @@ add_column(.data, ..., .before = NULL, .after = NULL)
 \item{.data}{Data frame to append to.}
 
 \item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
-one element for each row in the data frame, or be of length 1.}
+one element for each row in the data frame, or be of length 1.
+These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
+unquote via \code{!!} and unquote-splice via \code{!!!}.}
 
 \item{.before, .after}{One-based column index or column name where to add the
 new columns, default: after last column.}
