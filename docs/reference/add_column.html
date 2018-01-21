@@ -109,7 +109,9 @@ frame.</p>
     <tr>
       <th>...</th>
       <td><p>Name-value pairs, passed on to <code><a href='tibble.html'>tibble()</a></code>. All values must have
-one element for each row in the data frame, or be of length 1.</p></td>
+one element for each row in the data frame, or be of length 1.
+These arguments are passed on to <code><a href='tibble.html'>tibble()</a></code>, and therefore also support
+unquote via <code>!!</code> and unquote-splice via <code>!!!</code>.</p></td>
     </tr>
     <tr>
       <th>.before, .after</th>
