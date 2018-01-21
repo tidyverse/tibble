@@ -1,4 +1,4 @@
-Resubmission with slightly improved documentation.
+Bugfix submission.
 
 ## Test environments
 * local install, R 3.4.3
@@ -12,7 +12,7 @@ Resubmission with slightly improved documentation.
 
 ## Reverse dependencies
 
-Checked all 292 downstream packages on CRAN and BioConductor. Two of them (dbplyr and xpose) now have failing tests, because these packages compare tibble output verbatim, and the output has changed. The maintainers have been notified and/or the development versions of these packages already include these fixes, which will be pushed to CRAN at the maintainers' earliest.
+We checked 303 reverse dependencies (300 from CRAN + 3 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
-- dbplyr: https://github.com/tidyverse/dbplyr/pull/52
-- xpose: https://github.com/UUPharmacometrics/xpose/issues/80
+* We saw 0 new problems
+* We failed to check 0 packages
