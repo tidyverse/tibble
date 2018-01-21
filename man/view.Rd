@@ -6,6 +6,13 @@
 \usage{
 view(x, title = NULL, ...)
 }
+\arguments{
+\item{x}{The object to view}
+
+\item{title}{The title to display, by default the unquoted expression}
+
+\item{...}{Unused, for extensibility}
+}
 \description{
 The default method of this generic calls \code{\link[=View]{View()}} (only in interactive
 sessions) and returns the input.

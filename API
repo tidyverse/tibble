@@ -34,6 +34,7 @@ tibble_(xs)
 tidy_names(name, syntactic = FALSE, quiet = FALSE)
 tribble(...)
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
+view(x, title = NULL, ...)
 
 ## Own S3 methods
 
@@ -59,6 +60,7 @@ glimpse.tbl(x, width = NULL, ...)
 tbl_sum.default(x)
 tbl_sum.tbl(x)
 type_sum.tbl_df(x)
+view.default(x, title = NULL, ...)
 
 ## Foreign S3 methods
 
