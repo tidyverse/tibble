@@ -1,5 +1,8 @@
 if (Sys.getenv("DISPLAY") == "") stop("Run with xvfb-run")
 
+free <- system(paste0("df --output=avail ", tempdir(), " | tail -n 1"), intern = TRUE)
+if (as.numeric(free) < 1e8) stop("Set TMPDIR to a location with at least 100 GB free space")
+
 package <- basename(getwd())
 
 library(revdepcheck)
