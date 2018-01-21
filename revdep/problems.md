@@ -48,48 +48,6 @@ Version: 0.2.1
       All declared Imports should be used.
     ```
 
-# alfred
-
-Version: 0.1.4
-
-## In both
-
-*   checking whether package ‘alfred’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/new/alfred.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘alfred’ ...
-** package ‘alfred’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** preparing package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘Rcpp’
-ERROR: lazy loading failed for package ‘alfred’
-* removing ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/new/alfred.Rcheck/alfred’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘alfred’ ...
-** package ‘alfred’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** preparing package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘Rcpp’
-ERROR: lazy loading failed for package ‘alfred’
-* removing ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/old/alfred.Rcheck/alfred’
-
-```
 # alphavantager
 
 Version: 0.1.0
@@ -115,15 +73,7 @@ Version: 0.1.0
 
 Version: 0.2.4
 
-## Newly broken
-
-*   checking whether package ‘anomalyDetection’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/new/anomalyDetection.Rcheck/00install.out’ for details.
-    ```
-
-## Newly fixed
+## In both
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -131,50 +81,6 @@ Version: 0.2.4
       All declared Imports should be used.
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘anomalyDetection’ ...
-** package ‘anomalyDetection’ successfully unpacked and MD5 sums checked
-** libs
-g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-RcppExports.cpp:69:1: fatal error: error writing to /tmp/ccB9OR6Z.s: No space left on device
- }
- ^
-compilation terminated.
-/usr/lib/R/etc/Makeconf:168: recipe for target 'RcppExports.o' failed
-make: *** [RcppExports.o] Error 1
-make: *** Waiting for unfinished jobs....
-g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c bottlenecks.cpp -o bottlenecks.o
-ERROR: compilation failed for package ‘anomalyDetection’
-* removing ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/new/anomalyDetection.Rcheck/anomalyDetection’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘anomalyDetection’ ...
-** package ‘anomalyDetection’ successfully unpacked and MD5 sums checked
-** libs
-g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c bottlenecks.cpp -o bottlenecks.o
-g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o anomalyDetection.so RcppExports.o bottlenecks.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib/R/lib -lR
-installing to /home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/old/anomalyDetection.Rcheck/anomalyDetection/libs
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** preparing package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded
-* DONE (anomalyDetection)
-
-```
 # available
 
 Version: 1.0.0
@@ -318,32 +224,37 @@ Version: 0.1.0
       Note: found 660 marked UTF-8 strings
     ```
 
-# biomartr
+# bioCancer
 
-Version: 0.7.0
+Version: 1.4.0
 
-## Newly broken
+## In both
 
-*   checking tests ...
+*   checking re-building of vignette outputs ... WARNING
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             "' currently available?", call. = FALSE)
-      
-      trying URL 'ftp://ftp.ncbi.nlm.nih.gov/genomes/GENOME_REPORTS/overview.txt'
-      Content type 'unknown' length 3157199 bytes (3.0 MB)
-      ==================================================
-      trying URL 'ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/metagenomes/assembly_summary.txt'
-      Content type 'unknown' length 917374 bytes (895 KB)
-      ==================================================
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 6 SKIPPED: 61 FAILED: 1
-      1. Error: The getAssemblyStats() throws error when undefined 'organism' is selected
-                .. (@test-getAssemblyStats.R#85) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Error in re-building vignettes:
+      ...
+    Error: processing vignette 'bioCancer.Rmd' failed with diagnostics:
+    path for html_dependency not found: 
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Depends: includes the non-default packages:
+      ‘magrittr’ ‘ggplot2’ ‘lubridate’ ‘tidyr’ ‘cgdsr’ ‘RCurl’ ‘XML’
+    Adding so many packages to the search path is excessive and importing
+    selectively is preferable.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 22.3Mb
+      sub-directories of 1Mb or more:
+        base        6.9Mb
+        bioCancer   3.1Mb
+        doc         2.8Mb
+        quant       7.7Mb
     ```
 
 # blkbox
@@ -976,38 +887,6 @@ Version: 1.0
       ‘lazyeval’ ‘magrittr’ ‘miniUI’ ‘munsell’ ‘plyr’ ‘reshape’ ‘rprojroot’
       ‘scales’ ‘stringi’ ‘stringr’ ‘svglite’ ‘tibble’ ‘xtable’ ‘yaml’
       All declared Imports should be used.
-    ```
-
-# GSODR
-
-Version: 1.1.2
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-    Attaching package: 'gridExtra'
-    
-    The following object is masked from 'package:dplyr':
-    
-        combine
-    
-    trying URL 'http://biogeo.ucdavis.edu/data/gadm2.8/rds/PHL_adm0.rds'
-    Content type 'text/html; charset=iso-8859-1' length 3439625 bytes (3.3 MB)
-    ==================================================
-    downloaded 3.3 MB
-    
-    trying URL 'http://biogeo.ucdavis.edu/data/gadm2.8/rds/PHL_adm1.rds'
-    Content type 'text/html; charset=iso-8859-1' length 3687395 bytes (3.5 MB)
-    ==================================================
-    downloaded 3.5 MB
-    
-    Quitting from lines 145-167 (Specified_stations_for_a_range_of_years.Rmd) 
-    Error: processing vignette 'Specified_stations_for_a_range_of_years.Rmd' failed with diagnostics:
-    Got a 530 ftp-server response when 220 was expected
-    Execution halted
     ```
 
 # haven
@@ -1952,6 +1831,23 @@ Version: 2.6.3
     Package suggested but not available for checking: ‘sjPlot’
     ```
 
+# sjPlot
+
+Version: 2.4.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘prediction’
+      All declared Imports should be used.
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘plm’
+    ```
+
 # sjstats
 
 Version: 0.14.0
@@ -2094,6 +1990,126 @@ Version: 0.2.0
       All declared Imports should be used.
     ```
 
+# TCGAbiolinks
+
+Version: 2.5.9
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    |NA                          |NA                             |NA                   |NA                           |
+    |Thymic Epithelial Neoplasms |Neuroepitheliomatous Neoplasms |Basal Cell Neoplasms |Ductal and Lobular Neoplasms |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    |NA                          |NA                             |NA                   |NA                           |
+    Error in checkProjectInput(project) : 
+      Please set a valid project argument from the column id above. Project TCGA-ACC was not found.
+    Calls: GDCquery -> checkProjectInput
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 113 SKIPPED: 0 FAILED: 16
+      1. Error: TCGAanalyze_survival creates pdf (@test-analyse.R#4) 
+      2. Error: Results from TCGAanalyze_DEA and DMR in starburst plot are correct (@test-analyse.R#182) 
+      3. Error: GDCdownload API method for two files is working  (@test-prepare-download.R#4) 
+      4. Error: GDCdownload API method for one files is working  (@test-prepare-download.R#20) 
+      5. Error: GDCprepare accepts more than one project (@test-prepare-download.R#50) 
+      6. Error: Accecpts more than one platform (@test-prepare-download.R#68) 
+      7. Error: GDCquery can filter by data.category (@test-query.R#5) 
+      8. Error: GDCquery accepts more than one project (@test-query.R#11) 
+      9. Error: GDCquery can filter by sample.type (@test-query.R#23) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    
+    The following objects are masked from 'package:S4Vectors':
+    
+        first, intersect, rename, setdiff, setequal, union
+    
+    The following objects are masked from 'package:BiocGenerics':
+    
+        combine, intersect, setdiff, union
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 16-20 (clinical.Rmd) 
+    Error: processing vignette 'clinical.Rmd' failed with diagnostics:
+    there is no package called 'DT'
+    Execution halted
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 61.0Mb
+      sub-directories of 1Mb or more:
+        R      1.1Mb
+        data   2.3Mb
+        doc   57.4Mb
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    ...
+      ‘limmacontrasts.fit’
+    TCGAanalyze_analyseGRN: no visible global function definition for
+      ‘knnmi.cross’
+    TCGAanalyze_networkInference: no visible global function definition for
+      ‘c3net’
+    TCGAanalyze_networkInference: no visible global function definition for
+      ‘minet’
+    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
+      ‘dNetInduce’
+    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
+      ‘dNetPipeline’
+    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
+      ‘dCommSignif’
+    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
+      ‘visNet’
+    TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
+    getTSS: no visible global function definition for ‘promoters’
+    Undefined global functions or variables:
+      c3net dCommSignif dNetInduce dNetPipeline knnmi.cross
+      limmacontrasts.fit limmamakeContrasts minet portions promoters value
+      visNet
+    ```
+
+*   checking for unstated dependencies in vignettes ... NOTE
+    ```
+    'library' or 'require' call not declared from: ‘DT’
+    ```
+
 # tibbletime
 
 Version: 0.1.0
@@ -2116,6 +2132,67 @@ Version: 0.2.1
     ```
     Namespaces in Imports field not imported from:
       ‘tibble’ ‘tidyverse’
+      All declared Imports should be used.
+    ```
+
+# tidyquant
+
+Version: 0.5.3
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+         })
+      9: expr_type_of(.x)
+      10: typeof(x)
+      11: duplicate(quo)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 149 SKIPPED: 2 FAILED: 5
+      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
+      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
+      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
+      4. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
+      5. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+    
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing AAPL.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
+    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing FB.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
+    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing GOOG.
+    Warning in value[[3L]](cond) : Returning as nested data frame.
+    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
+    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
+    object 'Ask' not found
+    Execution halted
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘broom’ ‘curl’ ‘devtools’ ‘rvest’ ‘timeSeries’ ‘tseries’ ‘zoo’
       All declared Imports should be used.
     ```
 
@@ -2142,6 +2219,45 @@ Version: 1.2.2
       All declared Imports should be used.
     ```
 
+# tidyverse
+
+Version: 1.2.1
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘dbplyr’ ‘reprex’ ‘rlang’
+      All declared Imports should be used.
+    ```
+
+# timekit
+
+Version: 0.3.1
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘forecast’
+      All declared Imports should be used.
+    ```
+
+# timetk
+
+Version: 0.1.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘forecast’
+      All declared Imports should be used.
+    ```
+
 # tipr
 
 Version: 0.1.1
@@ -2152,6 +2268,125 @@ Version: 0.1.1
     ```
     Namespaces in Imports field not imported from:
       ‘broom’ ‘tibble’
+      All declared Imports should be used.
+    ```
+
+# tsibble
+
+Version: 0.1.0
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ── 1. Error: (unknown) (@test-tsibble.R#74)  ───────────────────────────────────
+      'to' must be a finite number
+      1: seq.POSIXt(ymd_h("2017-01-01 0"), ymd_h("2017-01-01 12"), by = "3 hour") at testthat/test-tsibble.R:74
+      
+      ── 2. Failure: From seconds to higher date (@test-tsummarise.R#35)  ────────────
+      as_tibble(res3) not equal to tibble(date_min = ymd_h("2017-01-01 0"), value = 5).
+      Rows in x but not y: 1. Rows in y but not x: 1. 
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 179 SKIPPED: 0 FAILED: 2
+      1. Error: (unknown) (@test-tsibble.R#74) 
+      2. Failure: From seconds to higher date (@test-tsummarise.R#35) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# ukbtools
+
+Version: 0.10.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘plyr’
+      All declared Imports should be used.
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 5 marked UTF-8 strings
+    ```
+
+# valr
+
+Version: 0.3.1
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 15.7Mb
+      sub-directories of 1Mb or more:
+        libs  14.2Mb
+    ```
+
+# waccR
+
+Version: 0.1.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘lubridate’ ‘tibble’
+      All declared Imports should be used.
+    ```
+
+# wikitaxa
+
+Version: 0.2.0
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 166 marked UTF-8 strings
+    ```
+
+# XKCDdata
+
+Version: 0.1.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘tibble’
+      All declared Imports should be used.
+    ```
+
+# zeligverse
+
+Version: 0.1.1
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Amelia’ ‘MatchIt’ ‘WhatIf’
+      All declared Imports should be used.
+    ```
+
+# zFactor
+
+Version: 0.1.7
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘rootSolve’
       All declared Imports should be used.
     ```
 
