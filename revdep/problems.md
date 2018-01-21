@@ -1,26 +1,50 @@
 # abjutils
 
-Version: 0.0.1
+Version: 0.2.1
 
 ## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > 
+    > {
+    + #sampling the parameters
+    + sample_cnj(3, foros = "0000",
+    + anos = "2015", orgao = 8, tr = 26,
+    + first_dig = "0",sample_pars = TRUE, return_df = FALSE)
+    + 
+    + sample_cnj(10, foros = c("0000","0001"),
+    + anos = c("2014","2015"), orgao = 8, tr = 26,
+    + first_dig = "0",sample_pars = TRUE, return_df = FALSE)
+    + 
+    + #not sampling the parameters
+    + 
+    + sample_cnj(3, foros = c("0000","0001","0002"),
+    + anos = c("2014","2015","2016"), orgao = rep(8,3), tr = rep(26,3),
+    + first_dig = "0",sample_pars = FALSE, return_df = FALSE)
+    + }
+    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+      there is no package called ‘R6’
+    Calls: sample_cnj ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      Error: package or namespace load failed for 'testthat' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+       there is no package called 'R6'
+      Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘devtools’ ‘httr’
-      All declared Imports should be used.
-    ```
-
-# afmToolkit
-
-Version: 0.0.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘DBI’ ‘assertthat’ ‘tibble’
+      ‘httr’ ‘progress’
       All declared Imports should be used.
     ```
 
@@ -30,64 +54,54 @@ Version: 0.1.4
 
 ## In both
 
-*   checking examples ... ERROR
+*   checking whether package ‘alfred’ can be installed ... ERROR
     ```
-    Running examples in ‘alfred-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_alfred_series
-    > ### Title: Accessing ALFRED
-    > ### Aliases: get_alfred_series
-    > ### Keywords: alfred
-    > 
-    > ### ** Examples
-    > 
-    > ## Not run: 
-    > ##D     get_alfred_series("INDPRO", "indpro")
-    > ##D     
-    > ## End(Not run)
-    > 
-    > get_alfred_series("INDPRO", "indpro", realtime_start = "2008-10-31", realtime_end = "2009-10-31")
-    Error in get_alfred_series("INDPRO", "indpro", realtime_start = "2008-10-31",  : 
-      Download of specified time-series failed - did you misspell the identifier?
-    Execution halted
+    Installation failed.
+    See ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/new/alfred.Rcheck/00install.out’ for details.
     ```
 
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             observation_end = "2013-03-01", realtime_start = "2015-02-02", realtime_end = "2015-02-02"), 
-             data.frame(date = as.Date("2013-03-01"), realtime_period = as.Date("2015-02-02"), 
-                 test = 99.488)) at testthat/test_download.R:2
-      2: quasi_label(enquo(object), label)
-      3: eval_bare(get_expr(quo), get_env(quo))
-      4: get_alfred_series("INDPRO", "test", observation_start = "2013-03-01", observation_end = "2013-03-01", 
-             realtime_start = "2015-02-02", realtime_end = "2015-02-02")
-      5: stop("Download of specified time-series failed - did you misspell the identifier?")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 0 SKIPPED: 0 FAILED: 1
-      1. Error: Downloaded data is as expected (@test_download.R#2) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
+## Installation
 
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 30-32 (alfred.Rmd) 
-    Error: processing vignette 'alfred.Rmd' failed with diagnostics:
-    Download of specified time-series failed - did you misspell the identifier?
-    Execution halted
-    ```
+### Devel
 
+```
+* installing *source* package ‘alfred’ ...
+** package ‘alfred’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** preparing package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘Rcpp’
+ERROR: lazy loading failed for package ‘alfred’
+* removing ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/new/alfred.Rcheck/alfred’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘alfred’ ...
+** package ‘alfred’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** preparing package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘Rcpp’
+ERROR: lazy loading failed for package ‘alfred’
+* removing ‘/home/muelleki/git/R/tibble/revdep/checks/alfred/old/alfred.Rcheck/alfred’
+
+```
 # alphavantager
 
 Version: 0.1.0
+
+## Newly fixed
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    LaTeX errors found:
+    ```
 
 ## In both
 
@@ -101,7 +115,15 @@ Version: 0.1.0
 
 Version: 0.2.4
 
-## In both
+## Newly broken
+
+*   checking whether package ‘anomalyDetection’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/new/anomalyDetection.Rcheck/00install.out’ for details.
+    ```
+
+## Newly fixed
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -109,11 +131,103 @@ Version: 0.2.4
       All declared Imports should be used.
     ```
 
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘anomalyDetection’ ...
+** package ‘anomalyDetection’ successfully unpacked and MD5 sums checked
+** libs
+g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
+RcppExports.cpp:69:1: fatal error: error writing to /tmp/ccB9OR6Z.s: No space left on device
+ }
+ ^
+compilation terminated.
+/usr/lib/R/etc/Makeconf:168: recipe for target 'RcppExports.o' failed
+make: *** [RcppExports.o] Error 1
+make: *** Waiting for unfinished jobs....
+g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c bottlenecks.cpp -o bottlenecks.o
+ERROR: compilation failed for package ‘anomalyDetection’
+* removing ‘/home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/new/anomalyDetection.Rcheck/anomalyDetection’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘anomalyDetection’ ...
+** package ‘anomalyDetection’ successfully unpacked and MD5 sums checked
+** libs
+g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
+g++  -I/usr/share/R/include -DNDEBUG  -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/Rcpp/include" -I"/home/muelleki/git/R/tibble/revdep/library/anomalyDetection/RcppArmadillo/include"   -fopenmp  -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c bottlenecks.cpp -o bottlenecks.o
+g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o anomalyDetection.so RcppExports.o bottlenecks.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib/R/lib -lR
+installing to /home/muelleki/git/R/tibble/revdep/checks/anomalyDetection/old/anomalyDetection.Rcheck/anomalyDetection/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (anomalyDetection)
+
+```
 # available
 
 Version: 1.0.0
 
 ## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### Title: Suggest a package name based on a development package title or
+    > ###   description
+    > ### Aliases: suggest
+    > 
+    > ### ** Examples
+    > 
+    > ## Not run: 
+    > ##D # Default will use the title from the current path.
+    > ##D suggest()
+    > ##D 
+    > ##D # Can also suggest based on the description
+    > ##D suggest(field = "Description")
+    > ## End(Not run)
+    > 
+    > # Or by explictly using the text argument
+    > suggest(text =
+    +   "A Package for Displaying Visual Scenes as They May Appear to an Animal with Lower Acuity")
+    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+      there is no package called ‘bindr’
+    Calls: suggest ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      7: getExportedValue(pkg, name)
+      8: asNamespace(ns)
+      9: getNamespace(ns)
+      10: tryCatch(loadNamespace(name), error = function(e) stop(e))
+      11: tryCatchList(expr, classes, parentenv, handlers)
+      12: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      13: value[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 14 SKIPPED: 0 FAILED: 2
+      1. Error: pick_word_from_title: ignores common words (@test-namr.R#5) 
+      2. Error: namr: works on real examples (@test-namr.R#33) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -124,6 +238,31 @@ Version: 1.0.0
 # babynames
 
 Version: 0.3.0
+
+## Newly fixed
+
+*   checking replacement functions ... WARNING
+    ```
+    Fatal error: cannot create 'R_TempDir'
+    The argument of a replacement function which corresponds to the right
+    hand side must be named ‘value’.
+    ```
+
+*   checking foreign function calls ... NOTE
+    ```
+    Fatal error: cannot create 'R_TempDir'
+    See chapter ‘System and foreign language interfaces’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking Rd \usage sections ... NOTE
+    ```
+    Fatal error: cannot create 'R_TempDir'
+    The \usage entries for S3 methods should use the \method markup and not
+    their full name.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
 
 ## In both
 
@@ -140,10 +279,12 @@ Version: 0.2.0
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking package dependencies ... ERROR
     ```
-    Namespace in Imports field not imported from: ‘stringr’
-      All declared Imports should be used.
+    Package required but not available: ‘httr’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # bikedata
@@ -152,12 +293,12 @@ Version: 0.1.0
 
 ## In both
 
-*   checking installed package size ... NOTE
+*   checking package dependencies ... ERROR
     ```
-      installed size is  9.1Mb
-      sub-directories of 1Mb or more:
-        doc    2.6Mb
-        libs   5.8Mb
+    Packages required but not available: ‘DBI’ ‘BH’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # billboard
@@ -177,51 +318,32 @@ Version: 0.1.0
       Note: found 660 marked UTF-8 strings
     ```
 
-# bioCancer
-
-Version: 1.4.0
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Error: processing vignette 'bioCancer.Rmd' failed with diagnostics:
-    path for html_dependency not found: 
-    Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      ‘magrittr’ ‘ggplot2’ ‘lubridate’ ‘tidyr’ ‘cgdsr’ ‘RCurl’ ‘XML’
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 22.3Mb
-      sub-directories of 1Mb or more:
-        base        6.9Mb
-        bioCancer   3.1Mb
-        doc         2.8Mb
-        quant       7.7Mb
-    ```
-
 # biomartr
 
-Version: 0.5.2
+Version: 0.7.0
 
-## In both
+## Newly broken
 
-*   checking package dependencies ... ERROR
+*   checking tests ...
     ```
-    Package required but not available: ‘curl’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+             "' currently available?", call. = FALSE)
+      
+      trying URL 'ftp://ftp.ncbi.nlm.nih.gov/genomes/GENOME_REPORTS/overview.txt'
+      Content type 'unknown' length 3157199 bytes (3.0 MB)
+      ==================================================
+      trying URL 'ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/metagenomes/assembly_summary.txt'
+      Content type 'unknown' length 917374 bytes (895 KB)
+      ==================================================
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 6 SKIPPED: 61 FAILED: 1
+      1. Error: The getAssemblyStats() throws error when undefined 'organism' is selected
+                .. (@test-getAssemblyStats.R#85) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # blkbox
@@ -263,47 +385,9 @@ Version: 0.4.0
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 28.8Mb
+      installed size is 28.9Mb
       sub-directories of 1Mb or more:
         libs  28.7Mb
-    ```
-
-# broom
-
-Version: 0.4.3
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      > test_check("broom")
-      Loading required package: broom
-      ── 1. Error: (unknown) (@test-rstanarm.R#4)  ───────────────────────────────────
-      there is no package called 'rstanarm'
-      1: suppressPackageStartupMessages(library(rstanarm)) at testthat/test-rstanarm.R:4
-      2: withCallingHandlers(expr, packageStartupMessage = function(c) invokeRestart("muffleMessage"))
-      3: library(rstanarm)
-      4: stop(txt, domain = NA)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 673 SKIPPED: 14 FAILED: 1
-      1. Error: (unknown) (@test-rstanarm.R#4) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: ‘rstanarm’ ‘brms’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘brms’, ‘rstanarm’
     ```
 
 # bsam
@@ -407,31 +491,7 @@ Version: 0.3.0
 
 # dbplyr
 
-Version: 1.1.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      x[10]: "4         4.40        3.20         1.30       0.200 setosa "
-      y[10]: "4          4.4         3.2          1.3         0.2  setosa"
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 382 SKIPPED: 10 FAILED: 5
-      1. Failure: ungrouped output (@test-output.R#14) 
-      2. Failure: ungrouped output (@test-output.R#14) 
-      3. Failure: ungrouped output (@test-output.R#14) 
-      4. Failure: ungrouped output (@test-output.R#14) 
-      5. Failure: ungrouped output (@test-output.R#14) 
-      
-      Error: testthat unit tests failed
-      In addition: Warning message:
-      call dbDisconnect() when finished working with a connection 
-      Execution halted
-    ```
+Version: 1.2.0
 
 ## In both
 
@@ -524,20 +584,15 @@ Version: 0.2.1
       All declared Imports should be used.
     ```
 
-# foghorn
+# filesstrings
 
-Version: 1.0.0
+Version: 2.0.2
 
 ## In both
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking Rd cross-references ... NOTE
     ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 38-47 (quick_start.Rmd) 
-    Error: processing vignette 'quick_start.Rmd' failed with diagnostics:
-    Invalid package name(s): dplyr
-    Execution halted
+    Package unavailable to check Rd xrefs: ‘dplyr’
     ```
 
 # FSelectorRcpp
@@ -548,7 +603,7 @@ Version: 0.1.8
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.4Mb
+      installed size is 11.5Mb
       sub-directories of 1Mb or more:
         doc    2.2Mb
         libs   9.1Mb
@@ -605,6 +660,86 @@ Version: 1.2
       All declared Imports should be used.
     ```
 
+# getTBinR
+
+Version: 0.5.0
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### Title: Generic Get Data Function
+    > ### Aliases: get_data
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > tb_burden <- get_data(url = "https://extranet.who.int/tme/generateCSV.asp?ds=estimates",
+    + save_name = "TB_burden",
+    + save = TRUE, 
+    + download_data = TRUE)
+    Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    
+      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    100  1951    0  1951    0     0   1905      0 --:--:--  0:00:01 --:--:--  1907
+    100  272k    0  272k    0     0   249k      0 --:--:--  0:00:01 --:--:--  249k
+    Error in curl::curl_download(input, tt, mode = "wb", quiet = !showProgress) : 
+      GnuTLS recv error (-110): The TLS connection was non-properly terminated.
+    Calls: get_data -> <Anonymous> -> <Anonymous> -> .Call
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 0 SKIPPED: 0 FAILED: 12
+      1. Error: (unknown) (@test-get_data.R#11) 
+      2. Error: (unknown) (@test-get_data_dict.R#4) 
+      3. Error: (unknown) (@test-get_tb_burden.R#4) 
+      4. Error: map_tb_burden produces a plot (@test-map_tb_burden.R#6) 
+      5. Error: map_tb_burden produces a plot when a log transform is used (@test-map_tb_burden.R#14) 
+      6. Error: map_tb_burden produces an interactive plot (@test-map_tb_burden.R#22) 
+      7. Error: plot_tb_burden produces a plot (@test-plot_tb_burden.R#4) 
+      8. Error: plot_tb_burden produces an interactive plot (@test-plot_tb_burden.R#11) 
+      9. Error: plot_tb_burden_overview produces a plot (@test-plot_tb_burden_overview.R#5) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    
+    Attaching package: 'dplyr'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    
+      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    100   116    0   116    0     0    253      0 --:--:-- --:--:-- --:--:--   253
+    100  272k    0  272k    0     0   236k      0 --:--:--  0:00:01 --:--:--  236k
+    Quitting from lines 38-41 (intro.Rmd) 
+    Error: processing vignette 'intro.Rmd' failed with diagnostics:
+    GnuTLS recv error (-110): The TLS connection was non-properly terminated.
+    Execution halted
+    ```
+
 # ggalt
 
 Version: 0.4.0
@@ -631,7 +766,7 @@ Version: 0.1
 
 # ggeffects
 
-Version: 0.3.0
+Version: 0.3.1
 
 ## In both
 
@@ -672,13 +807,23 @@ Version: 0.1.1
 
 # ggformula
 
-Version: 0.6
+Version: 0.6.1
 
 ## In both
 
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 180-186 (ggformula.Rmd) 
+    Error: processing vignette 'ggformula.Rmd' failed with diagnostics:
+    there is no package called 'mosaicModel'
+    Execution halted
+    ```
+
 *   checking package dependencies ... NOTE
     ```
-    Package suggested but not available for checking: ‘mosaic’
+    Package suggested but not available for checking: ‘mosaicModel’
     ```
 
 # ggfortify
@@ -689,17 +834,27 @@ Version: 0.4.1
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘ggfortify-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: gglagplot
-    > ### Title: Plot time series against lagged versions of themselves
-    > ### Aliases: gglagplot
-    > 
+    ...
     > ### ** Examples
     > 
-    > gglagplot(AirPassengers)
-    Error: `x` must be a vector, not a ts object, do you want `stats::lag()`?
+    > data(Canada, package = 'vars')
+    > autoplot(AirPassengers)
+    > autoplot(UKgas, ts.geom = 'bar')
+    > autoplot(Canada)
+    > autoplot(Canada, facets = FALSE)
+    > 
+    > library(zoo)
+    
+    Attaching package: ‘zoo’
+    
+    The following objects are masked from ‘package:base’:
+    
+        as.Date, as.Date.numeric
+    
+    > autoplot(xts::as.xts(AirPassengers))
+    Error in data.frame(index(model), ...) : 
+      arguments imply differing number of rows: 144, 1, 0
+    Calls: autoplot ... autoplot.xts -> <Anonymous> -> fortify.zoo -> cbind -> data.frame
     Execution halted
     ```
 
@@ -708,8 +863,6 @@ Version: 0.4.1
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
-      8: eval_bare(dot$expr, dot$env)
-      9: lapply(seq(1:lags), .lag)
       10: FUN(X[[i]], ...)
       11: as.vector(lag(ts, k))
       12: lag(ts, k)
@@ -718,11 +871,37 @@ Version: 0.4.1
       15: .abort(text)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 1442 SKIPPED: 9 FAILED: 1
-      1. Error: gglagplot (@test-tslib.R#103) 
+      OK: 1435 SKIPPED: 9 FAILED: 3
+      1. Error: fortify.ts works for timeserieses (@test-base_ts.R#13) 
+      2. Error: autoplot works for xts (@test-ts.R#122) 
+      3. Error: gglagplot (@test-tslib.R#103) 
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Loading required package: ggplot2
+    Loading required package: MASS
+    Loading required package: strucchange
+    Loading required package: zoo
+    
+    Attaching package: 'zoo'
+    
+    The following objects are masked from 'package:base':
+    
+        as.Date, as.Date.numeric
+    
+    Loading required package: sandwich
+    Loading required package: urca
+    Loading required package: lmtest
+    Quitting from lines 169-174 (intro_Chinese.Rmd) 
+    Error: processing vignette 'intro_Chinese.Rmd' failed with diagnostics:
+    arguments imply differing number of rows: 144, 1, 0
+    Execution halted
     ```
 
 *   checking installed package size ... NOTE
@@ -799,9 +978,41 @@ Version: 1.0
       All declared Imports should be used.
     ```
 
+# GSODR
+
+Version: 1.1.2
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    
+    Attaching package: 'gridExtra'
+    
+    The following object is masked from 'package:dplyr':
+    
+        combine
+    
+    trying URL 'http://biogeo.ucdavis.edu/data/gadm2.8/rds/PHL_adm0.rds'
+    Content type 'text/html; charset=iso-8859-1' length 3439625 bytes (3.3 MB)
+    ==================================================
+    downloaded 3.3 MB
+    
+    trying URL 'http://biogeo.ucdavis.edu/data/gadm2.8/rds/PHL_adm1.rds'
+    Content type 'text/html; charset=iso-8859-1' length 3687395 bytes (3.5 MB)
+    ==================================================
+    downloaded 3.5 MB
+    
+    Quitting from lines 145-167 (Specified_stations_for_a_range_of_years.Rmd) 
+    Error: processing vignette 'Specified_stations_for_a_range_of_years.Rmd' failed with diagnostics:
+    Got a 530 ftp-server response when 220 was expected
+    Execution halted
+    ```
+
 # haven
 
-Version: 1.1.0
+Version: 1.1.1
 
 ## In both
 
@@ -860,7 +1071,7 @@ Version: 0.5.0
 
 # htmlTable
 
-Version: 1.11.0
+Version: 1.11.2
 
 ## In both
 
@@ -871,7 +1082,7 @@ Version: 1.11.0
 
 # huxtable
 
-Version: 1.2.0
+Version: 2.0.0
 
 ## In both
 
@@ -880,8 +1091,6 @@ Version: 1.2.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      7: withVisible(code)
-      8: eval_bare(get_expr(quo), get_env(quo))
       9: rmarkdown::render("table-tester-2.Rmd", quiet = TRUE, output_format = "pdf_document")
       10: convert(output_file, run_citeproc)
       11: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
@@ -889,12 +1098,35 @@ Version: 1.2.0
       12: stop("pandoc document conversion failed with error ", result, call. = FALSE)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 292 SKIPPED: 48 FAILED: 2
-      1. Error: Row heights do not screw up LaTeX multicol (@test-with-pandoc.R#20) 
-      2. Error: table-tester-2.Rmd renders without errors in LaTeX (@test-with-pandoc.R#27) 
+      OK: 298 SKIPPED: 48 FAILED: 4
+      1. Failure: Quick output functions work (@test-output.R#135) 
+      2. Failure: Quick output functions work (@test-output.R#136) 
+      3. Error: Row heights do not screw up LaTeX multicol (@test-with-pandoc.R#20) 
+      4. Error: table-tester-2.Rmd renders without errors in LaTeX (@test-with-pandoc.R#27) 
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    ! LaTeX Error: File `siunitx.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    
+    Enter file name: 
+    ! Emergency stop.
+    <read *> 
+             
+    l.132 \usepackage
+    
+    pandoc: Error producing PDF
+    Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
+    pandoc document conversion failed with error 43
+    Execution halted
     ```
 
 *   checking Rd cross-references ... NOTE
@@ -908,10 +1140,12 @@ Version: 1.0.1
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking package dependencies ... ERROR
     ```
-    Namespace in Imports field not imported from: ‘testthat’
-      All declared Imports should be used.
+    Package required but not available: ‘orca’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # IONiseR
@@ -1196,7 +1430,7 @@ Version: 0.1.2
 
 # odbc
 
-Version: 1.1.3
+Version: 1.1.4
 
 ## In both
 
@@ -1333,9 +1567,41 @@ Version: 0.1.0
       Note: found 2 marked UTF-8 strings
     ```
 
+# profile
+
+Version: 1.0
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘profile-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: read_rprof
+    > ### Title: File I/O for profiler data
+    > ### Aliases: read_rprof read_pprof write_rprof write_pprof
+    > 
+    > ### ** Examples
+    > 
+    > rprof_file <- system.file("samples/rprof/1.out", package = "profile")
+    > ds <- read_rprof(rprof_file)
+    > ds
+    Profile data: 22 samples
+    > pprof_file <- tempfile("profile", fileext = ".pb.gz")
+    > write_pprof(ds, pprof_file)
+    Error: Package RProtoBuf is required to read pprof files.
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘RProtoBuf’
+    ```
+
 # psychmeta
 
-Version: 0.1.3
+Version: 0.2.0
 
 ## In both
 
@@ -1353,6 +1619,17 @@ Version: 0.0.1
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 4483 marked UTF-8 strings
+    ```
+
+# rclimateca
+
+Version: 1.0.0
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 24 marked UTF-8 strings
     ```
 
 # rcv
@@ -1455,6 +1732,18 @@ Version: 0.4.2
     Package which this enhances but not available for checking: ‘taxize’
     ```
 
+# rFSA
+
+Version: 0.9.1
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘methods’
+      All declared Imports should be used.
+    ```
+
 # rmapzen
 
 Version: 0.3.3
@@ -1480,6 +1769,17 @@ Version: 1.8
       installed size is  6.6Mb
       sub-directories of 1Mb or more:
         rmd   6.1Mb
+    ```
+
+# rnoaa
+
+Version: 0.7.0
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘ncdf4’
     ```
 
 # rodham
@@ -1566,42 +1866,68 @@ Version: 1.0.0
 
 # sf
 
-Version: 0.5-5
+Version: 0.6-0
 
 ## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    Running examples in ‘sf-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: geos_measures
+    > ### Title: Compute geometric measurements
+    > ### Aliases: geos_measures st_area geos_measures st_length geos_measures
+    > ###   st_distance
+    > 
+    > ### ** Examples
+    > 
+    > b0 = st_polygon(list(rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))))
+    > b1 = b0 + 2
+    > b2 = b0 + c(-0.2, 2)
+    > x = st_sfc(b0, b1, b2)
+    > st_area(x)
+    [1] 4 4 4
+    > line = st_sfc(st_linestring(rbind(c(30,30), c(40,40))), crs = 4326)
+    > st_length(line)
+    Error in st_length(line) : 
+      package lwgeom required, please install it first
+    Execution halted
+    ```
 
 *   checking re-building of vignette outputs ... WARNING
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Quitting from lines 194-197 (sf5.Rmd) 
-    Error: processing vignette 'sf5.Rmd' failed with diagnostics:
-    cannot open the connection
+    Quitting from lines 795-797 (sf1.Rmd) 
+    Error: processing vignette 'sf1.Rmd' failed with diagnostics:
+    package lwgeom required, please install it first
     Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘lwgeom’
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 20.2Mb
+      installed size is 20.1Mb
       sub-directories of 1Mb or more:
-        doc     10.7Mb
-        libs     5.7Mb
+        doc     10.1Mb
+        libs     6.1Mb
         sqlite   1.5Mb
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘lwgeom’
     ```
 
 # sjlabelled
 
-Version: 1.0.5
+Version: 1.0.6
 
 ## In both
 
@@ -1626,47 +1952,17 @@ Version: 2.6.3
     Package suggested but not available for checking: ‘sjPlot’
     ```
 
-# sjPlot
+# sjstats
 
-Version: 2.4.0
+Version: 0.14.0
 
 ## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Loading required package: Rcpp
-    Warning: S3 methods 'VarCorr.stanreg', 'as.array.stanreg', 'as.data.frame.stanreg', 'as.data.frame.summary.stanreg', 'as.matrix.stanreg', 'bayes_R2.stanreg', 'coef.stanmvreg', 'coef.stanreg', 'confint.stanreg', 'family.stanmvreg', 'family.stanreg', 'fitted.stanmvreg', 'fitted.stanreg', 'fixef.stanmvreg', 'fixef.stanreg', 'formula.stanmvreg', 'formula.stanreg', 'get_x.default', 'get_x.gamm4', 'get_x.lmerMod', 'get_x.stanmvreg', 'get_y.default', 'get_y.stanmvreg', 'get_z.lmerMod', 'get_z.stanmvreg', 'launch_shinystan.stanreg', 'log_lik.stanjm', 'log_lik.stanmvreg', 'log_lik.stanreg', 'loo.stanreg', 'loo_linpred.stanreg', 'loo_predict.stanreg', 'loo_predictive_interval.stanreg', 'model.frame.stanmvreg', 'model.frame.stanreg', 'model.matrix.stanreg', 'ngrps.stanmvreg', 'ngrps.stanreg', 'nobs.stanreg', 'pairs.stanreg', 'plot.predict.stanjm', 'plot.stanreg', 'plot.survfit.stanjm', 'posterior_interval.stanreg', 'posterior_linpred.stanreg', 'posterior_predict.stanmvreg', 'posterior_predict.stanreg', 'p [... truncated]
-    Quitting from lines 151-166 (plot_model_estimates.Rmd) 
-    Error: processing vignette 'plot_model_estimates.Rmd' failed with diagnostics:
-    package or namespace load failed for 'rstanarm' in library.dynam(lib, package, package.lib):
-     shared object 'rstanarm.so' not found
-    Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘prediction’
+    Namespace in Imports field not imported from: ‘knitr’
       All declared Imports should be used.
     ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘plm’
-    ```
-
-# sjstats
-
-Version: 0.13.0
-
-## In both
 
 *   checking Rd cross-references ... NOTE
     ```
@@ -1675,9 +1971,59 @@ Version: 0.13.0
 
 # skimr
 
-Version: 1.0
+Version: 1.0.1
 
 ## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘skimr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: skim
+    > ### Title: Get useful summary statistic from a data frame
+    > ### Aliases: skim
+    > 
+    > ### ** Examples
+    > 
+    > skim(iris)
+    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+      there is no package called ‘bindr’
+    Calls: skim ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 125 SKIPPED: 1 FAILED: 29
+      1. Error: Formatting options change printed output (@test-formats.R#30) 
+      2. Failure: Skimming functions can be changed. (@test-functions.R#146) 
+      3. Failure: Skimming functions for new types can be added (@test-functions.R#233) 
+      4. Failure: Set skimming functions for multiple types (@test-functions.R#251) 
+      5. Error: Skimming a data frame works as expected (@test-skim.R#4) 
+      6. Error: Using skim_tee returns the object (@test-skim.R#36) 
+      7. Error: Using skim_tee prints out the object (@test-skim.R#41) 
+      8. Error: Skimming a grouped data frame works as expected (@test-skim.R#48) 
+      9. Error: skim_to_wide works as expected. (@test-skim.R#78) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 48-50 (Using_skimr.Rmd) 
+    Error: processing vignette 'Using_skimr.Rmd' failed with diagnostics:
+    there is no package called 'bindr'
+    Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -1748,135 +2094,16 @@ Version: 0.2.0
       All declared Imports should be used.
     ```
 
-# TCGAbiolinks
+# tibbletime
 
-Version: 2.5.9
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    |NA                          |NA                             |NA                   |NA                           |
-    |Thymic Epithelial Neoplasms |Neuroepitheliomatous Neoplasms |Basal Cell Neoplasms |Ductal and Lobular Neoplasms |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    Error in checkProjectInput(project) : 
-      Please set a valid project argument from the column id above. Project TCGA-ACC was not found.
-    Calls: GDCquery -> checkProjectInput
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 123 SKIPPED: 0 FAILED: 15
-      1. Error: TCGAanalyze_survival creates pdf (@test-analyse.R#4) 
-      2. Error: GDCdownload API method for two files is working  (@test-prepare-download.R#4) 
-      3. Error: GDCdownload API method for one files is working  (@test-prepare-download.R#20) 
-      4. Error: GDCprepare accepts more than one project (@test-prepare-download.R#50) 
-      5. Error: Accecpts more than one platform (@test-prepare-download.R#68) 
-      6. Error: GDCquery can filter by data.category (@test-query.R#5) 
-      7. Error: GDCquery accepts more than one project (@test-query.R#11) 
-      8. Error: GDCquery can filter by sample.type (@test-query.R#23) 
-      9. Error: GDCquery can filter by barcode (@test-query.R#46) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-    The following objects are masked from 'package:S4Vectors':
-    
-        first, intersect, rename, setdiff, setequal, union
-    
-    The following objects are masked from 'package:BiocGenerics':
-    
-        combine, intersect, setdiff, union
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 16-20 (clinical.Rmd) 
-    Error: processing vignette 'clinical.Rmd' failed with diagnostics:
-    there is no package called 'DT'
-    Execution halted
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 61.0Mb
-      sub-directories of 1Mb or more:
-        R      1.1Mb
-        data   2.3Mb
-        doc   57.4Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      ‘limmacontrasts.fit’
-    TCGAanalyze_analyseGRN: no visible global function definition for
-      ‘knnmi.cross’
-    TCGAanalyze_networkInference: no visible global function definition for
-      ‘c3net’
-    TCGAanalyze_networkInference: no visible global function definition for
-      ‘minet’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dNetInduce’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dNetPipeline’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dCommSignif’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘visNet’
-    TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
-    getTSS: no visible global function definition for ‘promoters’
-    Undefined global functions or variables:
-      c3net dCommSignif dNetInduce dNetPipeline knnmi.cross
-      limmacontrasts.fit limmamakeContrasts minet portions promoters value
-      visNet
-    ```
-
-*   checking for unstated dependencies in vignettes ... NOTE
-    ```
-    'library' or 'require' call not declared from: ‘DT’
-    ```
-
-# tidyhydat
-
-Version: 0.3.1
+Version: 0.1.0
 
 ## In both
 
-*   checking data for non-ASCII characters ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
-      Note: found 7 marked UTF-8 strings
+    Namespace in Imports field not imported from: ‘tidyselect’
+      All declared Imports should be used.
     ```
 
 # tidyinftheo
@@ -1889,67 +2116,6 @@ Version: 0.2.1
     ```
     Namespaces in Imports field not imported from:
       ‘tibble’ ‘tidyverse’
-      All declared Imports should be used.
-    ```
-
-# tidyquant
-
-Version: 0.5.3
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-         })
-      9: expr_type_of(.x)
-      10: typeof(x)
-      11: duplicate(quo)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 149 SKIPPED: 2 FAILED: 5
-      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
-      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
-      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
-      4. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
-      5. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-    
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing AAPL.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing FB.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing GOOG.
-    Warning in value[[3L]](cond) : Returning as nested data frame.
-    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
-    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-    object 'Ask' not found
-    Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘broom’ ‘curl’ ‘devtools’ ‘rvest’ ‘timeSeries’ ‘tseries’ ‘zoo’
       All declared Imports should be used.
     ```
 
@@ -1976,45 +2142,6 @@ Version: 1.2.2
       All declared Imports should be used.
     ```
 
-# tidyverse
-
-Version: 1.2.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘dbplyr’ ‘reprex’ ‘rlang’
-      All declared Imports should be used.
-    ```
-
-# timekit
-
-Version: 0.3.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘forecast’
-      All declared Imports should be used.
-    ```
-
-# timetk
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘forecast’
-      All declared Imports should be used.
-    ```
-
 # tipr
 
 Version: 0.1.1
@@ -2025,133 +2152,6 @@ Version: 0.1.1
     ```
     Namespaces in Imports field not imported from:
       ‘broom’ ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# ukbtools
-
-Version: 0.10.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘plyr’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 5 marked UTF-8 strings
-    ```
-
-# valr
-
-Version: 0.3.1
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 15.6Mb
-      sub-directories of 1Mb or more:
-        libs  14.1Mb
-    ```
-
-# waccR
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘lubridate’ ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# wikitaxa
-
-Version: 0.2.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 166 marked UTF-8 strings
-    ```
-
-# XKCDdata
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# xpose
-
-Version: 0.4.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      x[1]: "Specials:\n  problem method type       data        modified\n    <dbl> <c
-      x[1]: hr>  <chr>      <list>      <lgl>   \n1    3.00 vpc    continuous <list [2
-      x[1]: 0]> F       "
-      y[1]: "Specials:\n  problem method       type        data modified\n    <dbl>  <
-      y[1]: chr>      <chr>      <list>    <lgl>\n1       3    vpc continuous <list [2
-      y[1]: 0]>    FALSE"
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 526 SKIPPED: 0 FAILED: 3
-      1. Failure: Check list_data returns a proper message (@test-console_outputs.R#43) 
-      2. Failure: Check list_files returns a proper message (@test-console_outputs.R#47) 
-      3. Failure: Check list_special returns a proper message (@test-console_outputs.R#51) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘gridExtra’
-      All declared Imports should be used.
-    ```
-
-# zeligverse
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘Amelia’ ‘MatchIt’ ‘WhatIf’
-      All declared Imports should be used.
-    ```
-
-# zFactor
-
-Version: 0.1.7
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rootSolve’
       All declared Imports should be used.
     ```
 
