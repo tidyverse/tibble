@@ -18,7 +18,7 @@ if (length(revdep_todo()) == 0) {
   import_revdeps <- setdiff(import_revdeps, package)
   todo_import_revdeps <- import_revdeps
 
-  while (length(todo_import_revdeps) > 0) {
+  while (FALSE && length(todo_import_revdeps) > 0) {
     print(length(todo_import_revdeps))
     print(todo_import_revdeps)
     print(Sys.time())
