@@ -4,7 +4,7 @@
 \alias{set_tidy_names}
 \alias{tidy_names}
 \alias{repair_names}
-\title{Repair object names.}
+\title{Repair object names}
 \usage{
 set_tidy_names(x, syntactic = FALSE, quiet = FALSE)
 
