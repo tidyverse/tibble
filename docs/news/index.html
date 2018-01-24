@@ -94,25 +94,42 @@
     </div>
 
     <div class="contents">
-    <div id="tibble-1-4-1-9001-2018-01-20" class="section level1">
+    <div id="tibble-1-4-2-2018-01-22" class="section level1">
 <h1 class="hasAnchor">
-<a href="#tibble-1-4-1-9001-2018-01-20" class="anchor"></a>tibble 1.4.1.9001 (2018-01-20)</h1>
+<a href="#tibble-1-4-2-2018-01-22" class="anchor"></a>tibble 1.4.2 (2018-01-22)</h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fix OS X builds.</li>
+<li>The <code>tibble.width</code> option is honored again (#369).</li>
+<li>
+<code>tbl[1, , drop = TRUE]</code> now behaves identically to data frames (#367).</li>
+<li>Fix error message when accessing columns using a logical index vector (#337, @mundl).</li>
+<li>
+<code><a href="../reference/glimpse.html">glimpse()</a></code> returns its input for zero-column data frames.</li>
+</ul>
+</div>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
 <ul>
 <li>
 <code><a href="../reference/enframe.html">enframe(NULL)</a></code> now returns the same as <code><a href="../reference/enframe.html">enframe(logical())</a></code> (#352).</li>
 <li>
-<code>tbl[1, , drop = TRUE]</code> now behaves identically to data frames (#367).</li>
-<li>The <code>tibble.width</code> option is honored again (#369).</li>
-<li>Faster printing of very wide tibbles (#360).</li>
-<li>Update vignette to match changes in 1.4.1 (#368, @bgreenwell).</li>
-<li>Don’t rely on <code>ncol()</code> for <code><a href="../reference/glimpse.html">glimpse()</a></code>, only query <code>nrow()</code> and <code>head()</code>.</li>
-<li>Return input for zero-column data frames.</li>
-<li>Add test for <code><a href="../reference/glimpse.html">glimpse()</a></code> with unknown rows (#366, @kevinykuo).</li>
-<li>Faster construction and subsetting for tibbles (#353).</li>
-<li>
 <code><a href="../reference/tribble.html">tribble()</a></code> now ignores trailing commas (#342, @LaDilettante).</li>
-<li>Fix error message when accessing columns using a logical index vector (#337, @mundl).</li>
+<li>Updated vignettes and website documentation.</li>
 </ul>
+</div>
+<div id="performance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performance" class="anchor"></a>Performance</h2>
+<ul>
+<li>Faster printing of very wide tibbles (#360).</li>
+<li>Faster construction and subsetting for tibbles (#353).</li>
+<li>Only call <code>nrow()</code> and <code>head()</code> in <code><a href="../reference/glimpse.html">glimpse()</a></code>, not <code>ncol()</code>.</li>
+</ul>
+</div>
 </div>
     <div id="tibble-1-4-1-2017-12-24" class="section level1">
 <h1 class="hasAnchor">
@@ -136,9 +153,9 @@
 <code>`[.tbl_df`()</code> supports <code>drop = TRUE</code> and omits the warning if <code>j</code> is passed. The calls <code>df[i, j, drop = TRUE]</code> and <code>df[j, drop = TRUE]</code> are now compatible with data frames again (#307, #311).</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Improved compatibility with remote data sources for <code><a href="../reference/glimpse.html">glimpse()</a></code> (#328).</li>
 <li>Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (#318).</li>
@@ -161,9 +178,9 @@
     <div id="tibble-1-3-4-2017-08-21" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tibble-1-3-4-2017-08-21" class="anchor"></a>tibble 1.3.4 (2017-08-21)</h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call are recycled prior to evaluating subsequent arguments, improving consistency with <code>mutate()</code> (#213).</li>
 <li>Recycling of values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call maintains their class (#284).</li>
@@ -191,9 +208,9 @@
     <div id="tibble-1-3-3-2017-05-27" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tibble-1-3-3-2017-05-27" class="anchor"></a>tibble 1.3.3 (2017-05-27)</h1>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Added <code>format()</code> and <code>print()</code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code>ungroup()</code> in dplyr 0.5.0 and earlier (#256, #263).</li>
 <li>The column width for non-syntactic columns is computed correctly again (#258).</li>
@@ -206,9 +223,9 @@
     <div id="tibble-1-3-1-2017-05-16" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tibble-1-3-1-2017-05-16" class="anchor"></a>tibble 1.3.1 (2017-05-16)</h1>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Subsetting zero columns no longer returns wrong number of rows (#241, @echasnovski).</li>
 </ul>
@@ -250,9 +267,9 @@
     <div id="tibble-1-3-0-2017-01-10" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tibble-1-3-0-2017-01-10" class="anchor"></a>tibble 1.3.0 (2017-01-10)</h1>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Time series matrices (objects of class <code>mts</code> and <code>ts</code>) are now supported in <code><a href="../reference/as_tibble.html">as_tibble()</a></code> (#184).</li>
 <li>The <code>all_equal()</code> function (called by <code>all.equal.tbl_df()</code>) now forwards to <code>dplyr</code> and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (<code>data.frame</code> vs. <code>tbl_df</code>) are ignored. The <code>all.equal.tbl_df()</code> method gives a warning and forwards to <code>NextMethod()</code> if <code>dplyr</code> is not installed; call <code>all.equal(as.data.frame(...), ...)</code> to avoid the warning. This ensures consistent behavior of this function, regardless if <code>dplyr</code> is loaded or not (#198).</li>
@@ -269,9 +286,9 @@
 <li>Removed unused dependency on <code>assertthat</code>.</li>
 </ul>
 </div>
-<div id="features" class="section level2">
+<div id="features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
+<a href="#features-1" class="anchor"></a>Features</h2>
 <div id="general" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general" class="anchor"></a>General</h3>
@@ -322,9 +339,9 @@
     <div id="tibble-1-2-2016-08-26" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tibble-1-2-2016-08-26" class="anchor"></a>tibble 1.2 (2016-08-26)</h1>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>The <code>tibble.width</code> option is used for <code><a href="../reference/glimpse.html">glimpse()</a></code> only if it is finite (#153, @kwstat).</li>
 <li>New <code>as_tibble.poly()</code> to support conversion of a <code>poly</code> object to a tibble (#110).</li>
@@ -346,9 +363,9 @@
 <li>Rename <code><a href="../reference/tribble.html">frame_data()</a></code> to <code><a href="../reference/tribble.html">tribble()</a></code>, stands for “transposed tibble”. The former is still available as alias (#132, #143).</li>
 </ul>
 </div>
-<div id="features-1" class="section level2">
+<div id="features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-1" class="anchor"></a>Features</h2>
+<a href="#features-2" class="anchor"></a>Features</h2>
 <ul>
 <li>
 <code><a href="../reference/add_row.html">add_row()</a></code> now can add multiple rows, with recycling (#142, @jennybc).</li>
@@ -439,9 +456,9 @@
 <code><a href="../reference/rownames.html">has_rownames()</a></code> supports arguments that are not data frames.</li>
 </ul>
 </div>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Two-dimensional indexing with <code>[[</code> works (#58, #63).</li>
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
@@ -556,7 +573,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tibble-1-4-1-9001-2018-01-20">1.4.1.9001</a></li>
+        <li><a href="#tibble-1-4-2-2018-01-22">1.4.2</a></li>
         <li><a href="#tibble-1-4-1-2017-12-24">1.4.1</a></li>
         <li><a href="#tibble-1-3-4-2017-08-21">1.3.4</a></li>
         <li><a href="#tibble-1-3-3-2017-05-27">1.3.3</a></li>
@@ -578,7 +595,7 @@
 
 <div class="author">
   <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>
