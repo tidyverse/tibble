@@ -13,7 +13,7 @@ Features
 --------
 
 - `enframe(NULL)` now returns the same as `enframe(logical())` (#352).
-- `tribble()` now ignores trailing commas (#342, @LaDilettante).
+- `tribble()` now ignores trailing commas (#342, @anhqle).
 - Updated vignettes and website documentation.
 
 Performance
