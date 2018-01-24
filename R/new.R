@@ -7,7 +7,6 @@
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
 #' @param nrow The number of rows, guessed from the data by default
-#' @param validate Whether to validate that columns have matching \code{nrow}, or are recyclable
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
 #' @examples
@@ -21,12 +20,12 @@
 #'
 #' \dontrun{
 #' # All columns must be the same length:
-#' new_tibble(list(a = 1:3, b = 4:6))
+#' new_tibble(list(a = 1:3, b = 4.6))
 #'
 #' # The length must be consistent with the nrow argument if available:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
 #' }
-new_tibble <- function(x, ..., nrow = NULL, subclass = NULL, validate = TRUE) {
+new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' @details
   #' `x` must be a named (or empty) list, but the names are not currently
   #' checked for correctness.
@@ -84,11 +83,11 @@ update_tibble_attrs <- function(x, ...) {
 
 guess_nrow <- function(x) {
   if (!is.null(.row_names_info(x, 0L))) {
-    list("nrow" = .row_names_info(x, 2L), "method" = "attribute")
+    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
   } else if (length(x) == 0) {
-    list("nrow" = 0L, "method" = "detected empty list")
+    list(nrow = 0L, method = "detected empty list")
   } else {
-    list("nrow" = NROW(x[[1L]]), "method" = "first column length")
+    list(nrow = NROW(x[[1L]]), method = "length of first column")
   }
 }
 
