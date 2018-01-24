@@ -25,7 +25,7 @@
 #' # The length must be consistent with the nrow argument if available:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
 #' }
-new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
+new_tibble <- function(x, ..., nrow = NULL, subclass = NULL, validate = TRUE) {
   #' @details
   #' `x` must be a named (or empty) list, but the names are not currently
   #' checked for correctness.
@@ -46,7 +46,7 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   attr(x, "row.names") <- .set_row_names(nrow)
   #' The `new_tibble()` constructor makes sure that the `row.names` attribute
   #' is consistent with the data before returning.
-  validate_nrow(x)
+  if (validate) validate_nrow(x)
 
   #' @details
   #' The `class` attribute of the returned object always consists of
