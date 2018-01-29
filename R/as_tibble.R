@@ -102,7 +102,7 @@ list_to_tibble <- function(x, validate) {
   }
   x <- recycle_columns(x)
 
-  new_tibble(x, validate = FALSE)
+  new_tibble(x)
 }
 
 #' @export

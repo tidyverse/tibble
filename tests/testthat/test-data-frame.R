@@ -58,7 +58,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_error(
     tibble(x = 1:10, y = 1:2),
-    "Column `y` must be length 1 or 10, not 2",
+    "Error: Columns must have consistent lengths:\n* Column `x` has length 10\n* Column `y` has length 2",
     fixed = TRUE
   )
 })
