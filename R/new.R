@@ -19,13 +19,11 @@
 #' # It's safest to always pass it along:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
-#' \dontrun{
 #' # All columns must be the same length:
-#' new_tibble(list(a = 1:3, b = 4.6))
+#' try(new_tibble(list(a = 1:3, b = 4:5)))
 #'
 #' # The length must be consistent with the nrow argument if available:
-#' new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
-#' }
+#' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' @details
   #' `x` must be a named (or empty) list, but the names are not currently
@@ -101,6 +99,11 @@ validate_nrow <- function(x, nrow_set_method) {
     vars <- names(x)[bad_len]
     vars_len <- lengths[bad_len]
     msg <- paste0("* Column `", vars, "` has length ", vars_len, "\n")
+    if (length(bad_len) > 5) {
+      msg <- c(msg[1:5],
+               paste0("... and ", length(bad_len) - 5, " more inconsistent ",
+                      pluralise_n("column(s)", length(bad_len) - 5)))
+    }
     stopc(
       pluralise("Column(s) ", vars), "must have consistent lengths:\n",
       "* Expected column length is ", expected_nrow, " based on ", nrow_set_method, "\n",

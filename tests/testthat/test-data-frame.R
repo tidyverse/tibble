@@ -58,7 +58,11 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_error(
     tibble(x = 1:10, y = 1:2),
-    "Error: Columns must have consistent lengths:\n* Column `x` has length 10\n* Column `y` has length 2",
+    paste0(
+      "Column must have consistent lengths:\n",
+      "* Expected column length is 10 based on length of first column\n",
+      "* Column `y` has length 2"
+    ),
     fixed = TRUE
   )
 })
@@ -113,17 +117,31 @@ test_that("tibble aliases", {
 test_that("columns must be same length", {
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    "Column `x` must be length 1 or 3, not 2",
+    paste0(
+      "Column must have consistent lengths:\n",
+      "* Expected column length is 2 based on length of first column\n",
+      "* Column `y` has length 3"
+    ),
     fixed = TRUE
   )
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
-    "Columns `x`, `y` must be length 1 or 4, not 2, 3",
+    paste0(
+      "Columns must have consistent lengths:\n",
+      "* Expected column length is 2 based on length of first column\n",
+      "* Column `y` has length 3\n",
+      "* Column `z` has length 4"
+    ),
     fixed = TRUE
   )
   expect_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
-    "Columns `y`, `z` must be length 1 or 4, not 2, 2",
+    paste0(
+      "Columns must have consistent lengths:\n",
+      "* Expected column length is 4 based on length of first column\n",
+      "* Column `y` has length 2\n",
+      "* Column `z` has length 2"
+    ),
     fixed = TRUE
   )
 })
