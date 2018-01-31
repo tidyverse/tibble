@@ -128,13 +128,6 @@ recycle_columns <- function(x) {
 
   max <- max(lengths[lengths != 1L], 0L)
 
-  bad_len <- lengths != 1L & lengths != max
-  if (any(bad_len)) {
-    invalid_df_msg(
-      paste0("must be length 1 or ", max, ", not "), x, bad_len, lengths[bad_len]
-    )
-  }
-
   short <- lengths == 1
   if (max > 1L && any(short)) {
     x[short] <- map(x[short], rep, max)
@@ -150,15 +143,5 @@ invalid_df <- function(problem, df, vars) {
   stopc(
     pluralise_msg("Column(s) ", vars), " ",
     pluralise(problem, vars)
-  )
-}
-
-invalid_df_msg <- function(problem, df, vars, extra) {
-  if (is.logical(vars)) {
-    vars <- names(df)[vars]
-  }
-  stopc(
-    pluralise_msg("Column(s) ", vars), " ",
-    pluralise_msg(problem, extra)
   )
 }

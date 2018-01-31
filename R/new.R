@@ -18,13 +18,11 @@
 #' # It's safest to always pass it along:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
-#' \dontrun{
 #' # All columns must be the same length:
-#' new_tibble(list(a = 1:3, b = 4.6))
+#' try(new_tibble(list(a = 1:3, b = 4:5)))
 #'
 #' # The length must be consistent with the nrow argument if available:
-#' new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
-#' }
+#' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' @details
   #' `x` must be a named (or empty) list, but the names are not currently
@@ -42,11 +40,17 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' overriding any existing attribute of this name in `x` or in the `...`
   #' arguments.
   #' If `nrow` is `NULL`, the number of rows will be guessed from the data.
-  if (is.null(nrow)) nrow <- guess_nrow(x)
+  if (is.null(nrow)) {
+    guess <- guess_nrow(x)
+    nrow <- guess$nrow
+    nrow_set_method <- guess$method
+  } else {
+    nrow_set_method <- "value of nrow argument"
+  }
   attr(x, "row.names") <- .set_row_names(nrow)
   #' The `new_tibble()` constructor makes sure that the `row.names` attribute
   #' is consistent with the data before returning.
-  validate_nrow(x)
+  validate_nrow(x, nrow_set_method)
 
   #' @details
   #' The `class` attribute of the returned object always consists of
@@ -77,23 +81,36 @@ update_tibble_attrs <- function(x, ...) {
 
 guess_nrow <- function(x) {
   if (!is.null(.row_names_info(x, 0L))) {
-    .row_names_info(x, 2L)
+    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
   } else if (length(x) == 0) {
-    0L
+    list(nrow = 0L, method = "detected empty list")
   } else {
-    NROW(x[[1L]])
+    list(nrow = NROW(x[[1L]]), method = "length of first column")
   }
 }
 
-validate_nrow <- function(x) {
+validate_nrow <- function(x, nrow_set_method) {
   # Validate column lengths, don't recycle
   lengths <- map_int(x, NROW)
-  first <- .row_names_info(x, 2L)
-
-  bad_len <- lengths != first
+  expected_nrow <- .row_names_info(x, 2L)
+  bad_len <- lengths != expected_nrow
   if (any(bad_len)) {
-    invalid_df_msg(
-      paste0("must be length ", first, ", not "), x, bad_len, lengths[bad_len]
+    vars <- names(x)[bad_len]
+    vars_len <- lengths[bad_len]
+    msg <- paste0("* Column ", tick(vars), " has length ", vars_len, "\n")
+    if (sum(bad_len) > 5) {
+      msg <- c(
+        msg[1:5],
+        paste0(
+          pre_dots("with "), sum(bad_len) - 5, " more inconsistent",
+          pluralise_n(" column(s)", sum(bad_len) - 5)
+        )
+      )
+    }
+    stopc(
+      pluralise("Column(s) ", vars), "must have consistent lengths:\n",
+      "* Expected column length is ", expected_nrow, " based on ", nrow_set_method, "\n",
+      invoke(paste0, as.list(msg))
     )
   }
 
