@@ -102,7 +102,7 @@ validate_nrow <- function(x, nrow_set_method) {
       msg <- c(
         msg[1:5],
         paste0(
-          "... with ", length(bad_len) - 5, " more inconsistent",
+          pre_dots("with"), length(bad_len) - 5, " more inconsistent",
           pluralise_n(" column(s): ", length(bad_len) - 5),
           collapse(tick(vars[6:length(vars)]))
         )
