@@ -7,7 +7,6 @@
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
 #' @param nrow The number of rows, guessed from the data by default
-#' @param validate Whether to validate that columns have matching \code{nrow}, or are recyclable
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
 #' @examples
