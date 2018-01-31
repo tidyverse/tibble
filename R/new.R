@@ -98,13 +98,12 @@ validate_nrow <- function(x, nrow_set_method) {
     vars <- names(x)[bad_len]
     vars_len <- lengths[bad_len]
     msg <- paste0("* Column ", tick(vars), " has length ", vars_len, "\n")
-    if (length(bad_len) > 5) {
+    if (sum(bad_len) > 5) {
       msg <- c(
         msg[1:5],
         paste0(
-          pre_dots("with"), length(bad_len) - 5, " more inconsistent",
-          pluralise_n(" column(s): ", length(bad_len) - 5),
-          collapse(tick(vars[6:length(vars)]))
+          pre_dots("with "), sum(bad_len) - 5, " more inconsistent",
+          pluralise_n(" column(s)", sum(bad_len) - 5)
         )
       )
     }
