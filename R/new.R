@@ -97,16 +97,21 @@ validate_nrow <- function(x, nrow_set_method) {
   if (any(bad_len)) {
     vars <- names(x)[bad_len]
     vars_len <- lengths[bad_len]
-    msg <- paste0("* Column `", vars, "` has length ", vars_len, "\n")
+    msg <- paste0("* Column ", tick(vars), " has length ", vars_len, "\n")
     if (length(bad_len) > 5) {
-      msg <- c(msg[1:5],
-               paste0("... and ", length(bad_len) - 5, " more inconsistent ",
-                      pluralise_n("column(s)", length(bad_len) - 5)))
+      msg <- c(
+        msg[1:5],
+        paste0(
+          "... with ", length(bad_len) - 5, " more inconsistent",
+          pluralise_n(" column(s): ", length(bad_len) - 5),
+          collapse(tick(vars[6:length(vars)]))
+        )
+      )
     }
     stopc(
       pluralise("Column(s) ", vars), "must have consistent lengths:\n",
       "* Expected column length is ", expected_nrow, " based on ", nrow_set_method, "\n",
-      do.call(paste0, as.list(msg))
+      invoke(paste0, as.list(msg))
     )
   }
 
