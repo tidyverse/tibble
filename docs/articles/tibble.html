@@ -222,7 +222,9 @@ df2<span class="op">$</span>a
 <span class="co">#&gt; 2     2  1.00</span>
 <span class="co">#&gt; 3     3  1.00</span>
 <span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
-<span class="co">#&gt; Error: Column `c` must be length 1 or 3, not 2</span>
+<span class="co">#&gt; Error: Column must have consistent lengths:</span>
+<span class="co">#&gt; * Expected column length is 3 based on length of first column</span>
+<span class="co">#&gt; * Column `c` has length 2</span>
 <span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="kw">integer</span>())
 <span class="co">#&gt; # A tibble: 0 x 2</span>
 <span class="co">#&gt; # ... with 2 variables: a &lt;dbl&gt;, b &lt;int&gt;</span>
