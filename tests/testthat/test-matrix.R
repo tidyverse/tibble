@@ -105,3 +105,10 @@ test_that("converting from matrix supports storing row names in a column", {
   out <- as_tibble(x, rownames = "id")
   expect_identical(out, df)
 })
+
+test_that("converting from matrix throws an error if user turns missing row names into column", {
+  x <- matrix(1:30, 6, 5)
+  expect_error(as_tibble(x, rownames = "id"),
+               "Object does not have existing row names to be turned into a column",
+               fixed = TRUE)
+})
