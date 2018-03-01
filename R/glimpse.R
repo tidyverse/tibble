@@ -43,7 +43,6 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
-
   cat_line("Variables: ", big_mark(ncol(df)))
   if (ncol(df) == 0) return(invisible(x))
 
@@ -98,3 +97,6 @@ format_v.list <- function(x) {
 
 #' @export
 format_v.character <- function(x) encodeString(x, quote = '"')
+
+#' @export
+format_v.factor <- function(x) encodeString(as.character(x), quote = '"')
