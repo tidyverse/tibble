@@ -8,7 +8,8 @@
 #' be phased out.
 #'
 #' @param ... Arguments specifying the structure of a `tibble`.
-#'   Variable names should be formulas, and may only appear before the data.
+#'   Variable names should be formulas, and may only appear before the
+#'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [tibble].
 #' @export
 #' @examples
@@ -44,7 +45,8 @@ frame_data <- tribble
 #' is important. The syntax is inspired by [tribble()].
 #'
 #' @param ... Arguments specifying the structure of a `frame_matrix`.
-#'   Column names should be formulas, and may only appear before the data.
+#'   Column names should be formulas, and may only appear before the
+#'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [matrix].
 #' @export
 #' @examples

@@ -9,7 +9,8 @@ tribble(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{tibble}.
-Variable names should be formulas, and may only appear before the data.}
+Variable names should be formulas, and may only appear before the
+data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
 }
 \value{
 A \link{tibble}.
