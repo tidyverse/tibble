@@ -8,10 +8,10 @@
 #'
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
-#'   only for columns that already exists in .data, unset columns will get an
+#'   only for columns that already exist in `.data` and unset columns will get an
 #'   `NA` value. These arguments are passed on to [tibble()], and therefore also
 #'   support unquote via `!!` and unquote-splice via `!!!`. However, unlike in
-#'   \pkg{dplyr} verbs, columns in`.data` are not available for the expressions.
+#'   \pkg{dplyr} verbs, columns in `.data` are not available for the expressions.
 #'
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
