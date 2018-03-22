@@ -7,10 +7,12 @@
 #' `add_case()` is an alias of `add_row()`.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
-#'   in `.data` can be used, unset columns will get an `NA` value.
-#'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`.
+#' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
+#'   only for columns that already exist in `.data` and unset columns will get an
+#'   `NA` value. These arguments are passed on to [tibble()], and therefore also
+#'   support unquote via `!!` and unquote-splice via `!!!`. However, unlike in
+#'   \pkg{dplyr} verbs, columns in `.data` are not available for the expressions.
+#'
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -99,7 +101,10 @@ rbind_at <- function(old, new, pos) {
 #' @param ... Name-value pairs, passed on to [tibble()]. All values must have
 #'   one element for each row in the data frame, or be of length 1.
 #'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`.
+#'   unquote via `!!` and unquote-splice via `!!!`. However, unlike in
+#'   \pkg{dplyr} verbs, columns in `.data` are not available for the
+#'   expressions. Use [dplyr::mutate()] if you need to add a column based on
+#'   existing data.
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
 #' @family addition
