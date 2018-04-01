@@ -11,10 +11,10 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \item{.data}{Data frame to append to.}
 
 \item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
-only for columns that already exists in .data, unset columns will get an
+only for columns that already exist in \code{.data} and unset columns will get an
 \code{NA} value. These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also
 support unquote via \code{!!} and unquote-splice via \code{!!!}. However, unlike in
-\pkg{dplyr} verbs, columns in\code{.data} are not available for the expressions.}
+\pkg{dplyr} verbs, columns in \code{.data} are not available for the expressions.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
