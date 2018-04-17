@@ -1,3 +1,8 @@
+# tibble 1.4.2.9001 (2018-04-17)
+
+- Column names and types are now formatted identically with `glimpse()` and `print.tbl_df()`.
+
+
 # tibble 1.4.2.9000 (2018-04-02)
 
 - Improve documentation for `...` in `bind_rows()` and `bind_cols()` (#400).
