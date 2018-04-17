@@ -29,6 +29,8 @@ glimpse <- function(x, width = NULL, ...) {
 }
 
 #' @export
+#' @importFrom pillar new_pillar_title
+#' @importFrom pillar new_pillar_type
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
@@ -45,9 +47,9 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   cat_line("Variables: ", big_mark(ncol(df)))
   if (ncol(df) == 0) return(invisible(x))
 
-  var_types <- map_chr(df, type_sum)
-  ticked_names <- tick_non_syntactic(names(df))
-  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " <", var_types, "> ")
+  var_types <- map_chr(map(df, new_pillar_type), format)
+  ticked_names <- format(new_pillar_title(names(df)))
+  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " ", var_types, " ")
 
   data_width <- width - nchar(var_names) - 2
 
