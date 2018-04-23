@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 1.4.2
+Version: 1.4.2.9001
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
@@ -18,8 +18,8 @@ Imports:
     cli,
     crayon,
     methods,
-    pillar (>= 1.1.0),
-    rlang,
+    pillar (>= 1.2.1.9001),
+    rlang (>= 0.2.0),
     utils
 Suggests: 
     covr,
@@ -33,10 +33,12 @@ Suggests:
     testthat,
     withr
 VignetteBuilder: knitr
+Remotes: 
+    r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Collate: 
     'add.R'
     'as_tibble.R'

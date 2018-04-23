@@ -83,7 +83,7 @@ column_to_rownames <- function(df, var = "rowname") {
   }
 
   if (!has_name(df, var)) {
-    stopc("Column `num2` not found")
+    stopc(paste0("Column `", var, "` not found"))
   }
 
   rownames(df) <- df[[var]]

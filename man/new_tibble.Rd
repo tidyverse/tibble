@@ -46,11 +46,9 @@ new_tibble(list(), nrow = 150, subclass = "my_tibble")
 # It's safest to always pass it along:
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
-\dontrun{
 # All columns must be the same length:
-new_tibble(list(a = 1:3, b = 4.6))
+try(new_tibble(list(a = 1:3, b = 4:5)))
 
 # The length must be consistent with the nrow argument if available:
-new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
-}
+try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 }
