@@ -14,3 +14,4 @@
 ^_pkgdown\.yml$
 ^docs$
 ^tic\.R$
+^\.github$
