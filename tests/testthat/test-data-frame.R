@@ -268,6 +268,14 @@ test_that("as_tibble() can convert row names", {
   expect_identical(unclass(as_tibble(df)), unclass(df))
 })
 
+test_that("as_tibble() throws an error when user turns missing row names into column", {
+  df <- data.frame(a = 1:3, b = 2:4)
+  expect_error(
+    as_tibble(df, rownames = "id"),
+    "Object does not have existing row names to be turned into a column",
+    fixed = TRUE
+  )
+})
 
 test_that("as_data_frame is an alias of as_tibble", {
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
