@@ -46,8 +46,8 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
   extra_vars <- setdiff(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    stopc(pluralise_msg("Can't add row with new variable(s) ", extra_vars))
+  if (has_length(extra_vars)) {
+    stopc(error_inconsistent_new_rows(extra_vars))
   }
 
   missing_vars <- setdiff(names(.data), names(df))

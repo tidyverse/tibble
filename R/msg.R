@@ -68,3 +68,10 @@ error_inconsistent_new_cols <- function(n, df) {
     )
   )
 }
+
+error_inconsistent_new_rows <- function(names) {
+  bullets(
+    "New rows in `add_row()` must use columns that already exist:",
+    error_unknown_names(names)
+  )
+}

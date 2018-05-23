@@ -43,13 +43,13 @@ test_that("adds empty row if no arguments", {
 test_that("error if adding row with unknown variables", {
   expect_error(
     add_row(tibble(a = 3), xxyzy = "err"),
-    "Can't add row with new variable `xxyzy`",
+    error_inconsistent_new_rows("xxyzy"),
     fixed = TRUE
   )
 
   expect_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    "Can't add row with new variables `b`, `c`",
+    error_inconsistent_new_rows(c("b", "c")),
     fixed = TRUE
   )
 })

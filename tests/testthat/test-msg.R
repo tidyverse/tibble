@@ -101,3 +101,29 @@ test_that("error_inconsistent_new_cols())", {
     )
   )
 })
+
+test_that("error_inconsistent_new_rows())", {
+  expect_equal(
+    error_inconsistent_new_rows("a"),
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      "Can't find column `a` in `.data`."
+    )
+  )
+
+  expect_equal(
+    error_inconsistent_new_rows(letters[2:3]),
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      "Can't find columns `b`, `c` in `.data`."
+    )
+  )
+
+  expect_equal(
+    error_inconsistent_new_rows(LETTERS),
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      "Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`."
+    )
+  )
+})
