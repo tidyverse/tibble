@@ -272,7 +272,7 @@ test_that("as_tibble() throws an error when user turns missing row names into co
   df <- data.frame(a = 1:3, b = 2:4)
   expect_error(
     as_tibble(df, rownames = "id"),
-    "Object does not have existing row names to be turned into a column",
+    error_as_tibble_needs_rownames(),
     fixed = TRUE
   )
 })

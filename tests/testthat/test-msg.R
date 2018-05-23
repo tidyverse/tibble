@@ -166,3 +166,10 @@ test_that("error_already_has_rownames())", {
     "`df` must be a data frame without row names in `column_to_rownames()`."
   )
 })
+
+test_that("error_already_has_rownames())", {
+  expect_equal(
+    error_as_tibble_needs_rownames(),
+    "Object passed to `as_tibble()` must have row names if the `rownames` argument is set."
+  )
+})

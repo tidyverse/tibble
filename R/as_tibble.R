@@ -78,7 +78,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
     result
   } else {
     if (is.na(old_rownames[1])) {
-      stopc("Object does not have existing row names to be turned into a column")
+      stopc(error_as_tibble_needs_rownames())
     }
     add_column(result, !! rownames := old_rownames, .before = 1L)
   }

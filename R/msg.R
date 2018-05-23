@@ -94,3 +94,7 @@ error_both_before_after <- function() {
 error_already_has_rownames <- function() {
   "`df` must be a data frame without row names in `column_to_rownames()`."
 }
+
+error_as_tibble_needs_rownames <- function() {
+  "Object passed to `as_tibble()` must have row names if the `rownames` argument is set."
+}
