@@ -73,6 +73,25 @@ test_that("error_unknown_names()", {
     error_unknown_names(c("b", "c")),
     "Can't find columns `b`, `c` in `.data`."
   )
+  expect_equal(
+    error_unknown_names(LETTERS),
+    "Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`."
+  )
+})
+
+test_that("error_existing_names()", {
+  expect_equal(
+    error_existing_names("a"),
+    "Column `a` already exists in `.data`."
+  )
+  expect_equal(
+    error_existing_names(c("b", "c")),
+    "Columns `b`, `c` already exist in `.data`."
+  )
+  expect_equal(
+    error_existing_names(LETTERS),
+    "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`."
+  )
 })
 
 test_that("error_add_rows_to_grouped_df()", {

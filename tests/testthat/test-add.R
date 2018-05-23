@@ -175,7 +175,7 @@ test_that("add_column() keeps unchanged if no arguments", {
 test_that("error if adding existing columns", {
   expect_error(
     add_column(tibble(a = 3), a = 5),
-    "Column `a` already exists",
+    error_duplicate_new_cols("a"),
     fixed = TRUE
   )
 })

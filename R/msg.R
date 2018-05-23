@@ -53,6 +53,10 @@ error_unknown_names <- function(names) {
   pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
 
+error_existing_names <- function(names) {
+  pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`.")
+}
+
 error_add_rows_to_grouped_df <- function() {
   "Can't add rows to grouped data frames"
 }
@@ -79,7 +83,7 @@ error_inconsistent_new_cols <- function(n, df) {
 error_duplicate_new_cols <- function(names) {
   bullets(
     "Can't add duplicate columns with `add_column()`:",
-    pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`.")
+    error_existing_names(names)
   )
 }
 
