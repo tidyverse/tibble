@@ -39,10 +39,7 @@ check_names_df.logical <- function(j, x) {
   check_needs_no_dim(j)
 
   if (!(length(j) %in% c(1L, length(x)))) {
-    stopc(
-      "Length of logical index vector must be 1 or ", length(x),
-      " (the number of columns), not ", length(j)
-    )
+    stopc(error_mismatch_column_flag(length(x), length(j)))
   }
   if (anyNA(j)) {
     stopc(error_na_column_flag())

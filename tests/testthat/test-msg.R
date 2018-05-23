@@ -46,6 +46,17 @@ test_that("error_large_column_index()", {
   )
 })
 
+test_that("error_mismatch_column_flag()", {
+  expect_equal(
+    error_mismatch_column_flag(5, 3),
+    bullets(
+      "Length of logical index vector must equal number of columns (or 1):",
+      "`.data` has 5 columns",
+      "Index vector has length 3"
+    )
+  )
+})
+
 test_that("error_na_column_flag()", {
   expect_equal(
     error_na_column_flag(),

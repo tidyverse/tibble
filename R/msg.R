@@ -1,3 +1,7 @@
+data_has_n_cols <- function(n) {
+  paste0("`.data` has ", n, " columns")
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an index of class ", class(j)[[1L]], ".")
 }
@@ -16,7 +20,7 @@ error_nonint_column_index <- function(pos, value) {
 error_small_column_index <- function(n, pos, value) {
   bullets(
     "Negative column indexes must match number of columns:",
-    paste0("`.data` has ", n, " columns"),
+    data_has_n_cols(n),
     paste0("Position ", pos, " equals ", value)
   )
 }
@@ -24,8 +28,16 @@ error_small_column_index <- function(n, pos, value) {
 error_large_column_index <- function(n, pos, value) {
   bullets(
     "Positive column indexes must match number of columns:",
-    paste0("`.data` has ", n, " columns"),
+    data_has_n_cols(n),
     paste0("Position ", pos, " equals ", value)
+  )
+}
+
+error_mismatch_column_flag <- function(n, j) {
+  bullets(
+    "Length of logical index vector must equal number of columns (or 1):",
+    data_has_n_cols(n),
+    paste0("Index vector has length ", j)
   )
 }
 
