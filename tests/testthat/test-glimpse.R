@@ -89,7 +89,7 @@ test_that("glimpse output matches known output", {
 test_that("glimpse(width = Inf) raises legible error", {
   expect_error(
     glimpse(mtcars, width = Inf),
-    "`width` must be finite",
+    error_glimpse_infinite_width(),
     fixed = TRUE
   )
 })

@@ -101,7 +101,7 @@ test_that("error_add_rows_to_grouped_df()", {
   )
 })
 
-test_that("error_inconsistent_new_rows())", {
+test_that("error_inconsistent_new_rows()", {
   expect_equal(
     error_inconsistent_new_rows("a"),
     bullets(
@@ -127,7 +127,7 @@ test_that("error_inconsistent_new_rows())", {
   )
 })
 
-test_that("error_column_must_be_named())", {
+test_that("error_column_must_be_named()", {
   expect_equal(
     error_column_must_be_named(1),
     "Column 1 must be named."
@@ -142,7 +142,7 @@ test_that("error_column_must_be_named())", {
   )
 })
 
-test_that("error_column_must_have_unique_name())", {
+test_that("error_column_must_have_unique_name()", {
   expect_equal(
     error_column_must_have_unique_name("a"),
     "Column `a` must have a unique name."
@@ -157,7 +157,7 @@ test_that("error_column_must_have_unique_name())", {
   )
 })
 
-test_that("error_column_must_be_vector())", {
+test_that("error_column_must_be_vector()", {
   expect_equal(
     error_column_must_be_vector("a", "environment"),
     bullets(
@@ -184,7 +184,7 @@ test_that("error_column_must_be_vector())", {
   )
 })
 
-test_that("error_time_column_must_be_posixct())", {
+test_that("error_time_column_must_be_posixct()", {
   expect_equal(
     error_time_column_must_be_posixct("a"),
     "Column `a` is a date/time and must be stored as POSIXct, not POSIXlt."
@@ -199,7 +199,7 @@ test_that("error_time_column_must_be_posixct())", {
   )
 })
 
-test_that("error_inconsistent_cols())", {
+test_that("error_inconsistent_cols()", {
   expect_equal(
     error_inconsistent_cols(
       10,
@@ -225,7 +225,7 @@ test_that("error_inconsistent_cols())", {
   )
 })
 
-test_that("error_inconsistent_new_cols())", {
+test_that("error_inconsistent_new_cols()", {
   expect_equal(
     error_inconsistent_new_cols(10, data.frame(a = 1:2)),
     bullets(
@@ -245,7 +245,7 @@ test_that("error_inconsistent_new_cols())", {
   )
 })
 
-test_that("error_duplicate_new_cols())", {
+test_that("error_duplicate_new_cols()", {
   expect_equal(
     error_duplicate_new_cols("a"),
     bullets(
@@ -271,23 +271,30 @@ test_that("error_duplicate_new_cols())", {
   )
 })
 
-test_that("error_both_before_after())", {
+test_that("error_both_before_after()", {
   expect_equal(
     error_both_before_after(),
     "Can't specify both `.before` and `.after`."
   )
 })
 
-test_that("error_already_has_rownames())", {
+test_that("error_already_has_rownames()", {
   expect_equal(
     error_already_has_rownames(),
     "`df` must be a data frame without row names in `column_to_rownames()`."
   )
 })
 
-test_that("error_already_has_rownames())", {
+test_that("error_already_has_rownames()", {
   expect_equal(
     error_as_tibble_needs_rownames(),
     "Object passed to `as_tibble()` must have row names if the `rownames` argument is set."
+  )
+})
+
+test_that("error_glimpse_infinite_width()", {
+  expect_equal(
+    error_glimpse_infinite_width(),
+    "`glimpse()` requires a finite value for the `width` argument."
   )
 })

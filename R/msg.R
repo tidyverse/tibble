@@ -137,3 +137,7 @@ error_already_has_rownames <- function() {
 error_as_tibble_needs_rownames <- function() {
   "Object passed to `as_tibble()` must have row names if the `rownames` argument is set."
 }
+
+error_glimpse_infinite_width <- function() {
+  "`glimpse()` requires a finite value for the `width` argument."
+}
