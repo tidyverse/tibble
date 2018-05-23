@@ -69,7 +69,7 @@ check_names_before_after.character <- function(j, names) {
   pos <- safe_match(j, names)
   if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
-    stopc(pluralise_msg("Column(s) ", unknown_names), " not found")
+    stopc(error_unknown_names(unknown_names))
   }
   pos
 }

@@ -63,3 +63,14 @@ test_that("error_na_column_flag()", {
     "Can't use logical NA when selecting columns with `[`."
   )
 })
+
+test_that("error_unknown_names()", {
+  expect_equal(
+    error_unknown_names("a"),
+    "Can't find column `a` in `.data`."
+  )
+  expect_equal(
+    error_unknown_names(c("b", "c")),
+    "Can't find columns `b`, `c` in `.data`."
+  )
+})

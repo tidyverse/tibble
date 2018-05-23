@@ -57,14 +57,28 @@ test_that("[ with 0 cols returns correct number of rows", {
 })
 
 test_that("[.tbl_df is careful about names (#1245)", {
-  z_msg <- "Column `z` not found"
-
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo["z"], z_msg, fixed = TRUE)
-  expect_error(foo[ c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo["z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
-  expect_error(foo[, "z"], z_msg, fixed = TRUE)
-  expect_error(foo[, c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo[, "z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[, c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
   expect_error(
     foo[as.matrix("x")],

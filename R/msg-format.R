@@ -5,6 +5,14 @@ pluralise_msg <- function(message, objects) {
   )
 }
 
+pluralise_commas <- function(message, objects, message_tail = "") {
+  paste0(
+    pluralise_n(message, length(objects)),
+    commas(objects),
+    message_tail
+  )
+}
+
 pluralise <- function(message, objects) {
   pluralise_n(message, length(objects))
 }
@@ -40,4 +48,16 @@ bullets <- function(header, ...) {
     header, "\n",
     paste0("* ", problems, collapse = "\n")
   )
+}
+
+commas <- function(problems) {
+  MAX_BULLETS <- 6L
+  if (length(problems) >= MAX_BULLETS) {
+    n_more <- length(problems) - MAX_BULLETS + 1L
+    problems[[MAX_BULLETS]] <-
+      pluralise_n(paste0("... (and ", n_more, " more)"), n_more)
+    length(problems) <- MAX_BULLETS
+  }
+
+  paste0(problems, collapse = ", ")
 }

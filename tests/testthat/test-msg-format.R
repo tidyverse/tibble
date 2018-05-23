@@ -14,3 +14,18 @@ test_that("bullets", {
     "header\n* 1\n* 2\n* 3\n* 4\n* 5\n* ... and 1 more problem"
   )
 })
+
+test_that("commas", {
+  expect_equal(
+    commas("1"),
+    "1"
+  )
+  expect_equal(
+    commas(letters[2:4]),
+    "b, c, d"
+  )
+  expect_equal(
+    commas(LETTERS),
+    "A, B, C, D, E, ... (and 21 more)"
+  )
+})

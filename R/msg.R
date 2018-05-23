@@ -48,3 +48,7 @@ error_mismatch_column_flag <- function(n, j) {
 error_na_column_flag <- function() {
   "Can't use logical NA when selecting columns with `[`."
 }
+
+error_unknown_names <- function(names) {
+  pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
+}
