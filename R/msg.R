@@ -52,3 +52,7 @@ error_na_column_flag <- function() {
 error_unknown_names <- function(names) {
   pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
+
+error_add_rows_to_grouped_df <- function() {
+  "Can't add rows to grouped data frames"
+}

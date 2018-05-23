@@ -74,3 +74,10 @@ test_that("error_unknown_names()", {
     "Can't find columns `b`, `c` in `.data`."
   )
 })
+
+test_that("error_add_rows_to_grouped_df()", {
+  expect_equal(
+    error_add_rows_to_grouped_df(),
+    "Can't add rows to grouped data frames"
+  )
+})
