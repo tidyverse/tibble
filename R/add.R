@@ -39,7 +39,7 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    stop("Can't add rows to grouped data frames", call. = FALSE)
+    stopc("Can't add rows to grouped data frames")
   }
 
   df <- tibble(...)
