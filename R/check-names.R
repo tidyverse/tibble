@@ -49,7 +49,7 @@ check_names_df.logical <- function(j, x) {
 
 check_needs_no_dim <- function(j) {
   if (needs_dim(j)) {
-    stopc("Can't use matrix or array for column indexing")
+    stopc(error_dim_column_index(j))
   }
 }
 

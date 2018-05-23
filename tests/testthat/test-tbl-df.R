@@ -68,12 +68,12 @@ test_that("[.tbl_df is careful about names (#1245)", {
 
   expect_error(
     foo[as.matrix("x")],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array("x", dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -110,12 +110,12 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[as.matrix(1)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(1, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -145,12 +145,12 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[as.matrix(TRUE)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
