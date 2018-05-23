@@ -3,5 +3,9 @@ error_unsupported_index <- function(j) {
 }
 
 error_na_column_index <- function() {
-  "Can't use NA as column index with `[`."
+  "Can't use numeric NA as column index with `[`."
+}
+
+error_na_column_flag <- function() {
+  "Can't use logical NA when selecting columns with `[`."
 }

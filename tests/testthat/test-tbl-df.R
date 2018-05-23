@@ -104,7 +104,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   )
   expect_error(
     foo[c(1:3, NA)],
-    "NA column indexes not supported",
+    error_na_column_index(),
     fixed = TRUE
   )
 
@@ -139,7 +139,7 @@ test_that("[.tbl_df is careful about column flags (#83)", {
   )
   expect_error(
     foo[c(TRUE, TRUE, NA)],
-    "NA column indexes not supported",
+    error_na_column_flag(),
     fixed = TRUE
   )
 

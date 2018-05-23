@@ -15,7 +15,7 @@ check_names_df.numeric <- function(j, x) {
   check_needs_no_dim(j)
 
   if (anyNA(j)) {
-    stopc("NA column indexes not supported")
+    stopc(error_na_column_index())
   }
 
   non_integer <- (j != trunc(j))
@@ -51,7 +51,7 @@ check_names_df.logical <- function(j, x) {
     )
   }
   if (anyNA(j)) {
-    stopc("NA column indexes not supported")
+    stopc(error_na_column_flag())
   }
   seq_along(x)[j]
 }
