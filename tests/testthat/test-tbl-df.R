@@ -84,7 +84,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[0.5],
-    "Column index must be integer, not 0.5",
+    error_nonint_column_index(1, 0.5),
     fixed = TRUE
   )
   expect_error(

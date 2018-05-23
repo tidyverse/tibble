@@ -18,9 +18,9 @@ check_names_df.numeric <- function(j, x) {
     stopc(error_na_column_index())
   }
 
-  non_integer <- (j != trunc(j))
-  if (any(non_integer)) {
-    stopc(pluralise_msg("Column index(es) must be integer, not ", j[non_integer]))
+  non_integer <- which(j != trunc(j))
+  if (!is_empty(non_integer)) {
+    stopc(error_nonint_column_index(non_integer, j[non_integer]))
   }
   neg_too_small <- (j < -length(x))
   if (any(neg_too_small)) {

@@ -6,6 +6,13 @@ error_na_column_index <- function() {
   "Can't use numeric NA as column index with `[`."
 }
 
+error_nonint_column_index <- function(pos, value) {
+  bullets(
+    "Must use integers to index columns:",
+    paste0("Position ", pos, " equals ", value)
+  )
+}
+
 error_na_column_flag <- function() {
   "Can't use logical NA when selecting columns with `[`."
 }

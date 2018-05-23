@@ -47,7 +47,7 @@ safe_match <- function(x, table) {
 }
 
 stopc <- function(...) {
-  abort(paste0(...))
+  abort(paste0(..., collapse = "\n"))
 }
 
 warningc <- function(...) {

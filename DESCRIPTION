@@ -51,6 +51,7 @@ Collate:
     'has-name.R'
     'tibble.R'
     'lst.R'
+    'msg-format.R'
     'msg.R'
     'new.R'
     'repair-names.R'
