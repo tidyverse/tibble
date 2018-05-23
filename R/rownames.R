@@ -79,7 +79,7 @@ column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (has_rownames(df)) {
-    stopc("`df` already has row names")
+    stopc(error_already_has_rownames())
   }
 
   if (!has_name(df, var)) {

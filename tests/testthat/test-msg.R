@@ -159,3 +159,10 @@ test_that("error_both_before_after())", {
     "Can't specify both `.before` and `.after`."
   )
 })
+
+test_that("error_already_has_rownames())", {
+  expect_equal(
+    error_already_has_rownames(),
+    "`df` must be a data frame without row names in `column_to_rownames()`."
+  )
+})

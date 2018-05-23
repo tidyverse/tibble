@@ -90,3 +90,7 @@ error_duplicate_new_cols <- function(names) {
 error_both_before_after <- function() {
   "Can't specify both `.before` and `.after`."
 }
+
+error_already_has_rownames <- function() {
+  "`df` must be a data frame without row names in `column_to_rownames()`."
+}
