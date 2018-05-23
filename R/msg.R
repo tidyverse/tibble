@@ -68,6 +68,14 @@ error_inconsistent_new_rows <- function(names) {
   )
 }
 
+error_inconsistent_cols <- function(expected_nrow, nrow_set_method, vars, vars_len) {
+  bullets(
+    "All columns in a tibble must have consistent lengths:",
+    paste0("Expected column length is ", expected_nrow, " based on ", nrow_set_method),
+    paste0("Column ", tick(vars), " has length ", vars_len)
+  )
+}
+
 error_inconsistent_new_cols <- function(n, df) {
   bullets(
     "New columns in `add_column()` must be consistent with `.data`:",

@@ -45,7 +45,7 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
     nrow <- guess$nrow
     nrow_set_method <- guess$method
   } else {
-    nrow_set_method <- "value of nrow argument"
+    nrow_set_method <- "value of `nrow` argument"
   }
   attr(x, "row.names") <- .set_row_names(nrow)
   #' The `new_tibble()` constructor makes sure that the `row.names` attribute
@@ -95,23 +95,9 @@ validate_nrow <- function(x, nrow_set_method) {
   expected_nrow <- .row_names_info(x, 2L)
   bad_len <- which(lengths != expected_nrow)
   if (has_length(bad_len)) {
-    vars <- names(x)[bad_len]
-    vars_len <- lengths[bad_len]
-    msg <- paste0("* Column ", tick(vars), " has length ", vars_len, "\n")
-    if (length(bad_len) > 5) {
-      msg <- c(
-        msg[1:5],
-        paste0(
-          pre_dots("with "), length(bad_len) - 5, " more inconsistent",
-          pluralise_n(" column(s)", length(bad_len) - 5)
-        )
-      )
-    }
-    stopc(
-      pluralise("Column(s) ", vars), "must have consistent lengths:\n",
-      "* Expected column length is ", expected_nrow, " based on ", nrow_set_method, "\n",
-      invoke(paste0, as.list(msg))
-    )
+    stopc(error_inconsistent_cols(
+      expected_nrow, nrow_set_method, names(x)[bad_len], lengths[bad_len]
+    ))
   }
 
   invisible(x)
