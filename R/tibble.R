@@ -100,20 +100,20 @@ check_tibble <- function(x) {
 
   dups <- duplicated(names_x)
   if (any(dups)) {
-    invalid_df("must have [a] unique name(s)", x, dups)
+    invalid_df("must have [a ]unique name(s)", x, dups)
   }
 
   # Types
   is_1d <- map_lgl(x, is_1d)
   if (any(!is_1d)) {
-    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
+    invalid_df("must be [a ]1d atomic vector(s) or [a ]list(s)", x, !is_1d)
   }
 
   x[] <- map(x, strip_dim)
 
   posixlt <- map_lgl(x, inherits, "POSIXlt")
   if (any(posixlt)) {
-    invalid_df("[is](are) [a] date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
+    invalid_df("[is](are) [a ]date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
   }
 
   x

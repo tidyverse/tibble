@@ -141,10 +141,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stopc(
-      pluralise_msg("Column(s) ", extra_vars),
-      pluralise(" already exist[s]", extra_vars)
-    )
+    stopc(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))

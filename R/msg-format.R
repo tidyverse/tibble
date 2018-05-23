@@ -1,3 +1,8 @@
+tick <- function(x) {
+  x[is.na(x)] <- "NA"
+  encodeString(x, quote = "`")
+}
+
 pluralise_msg <- function(message, objects) {
   paste0(
     pluralise(message, objects),
@@ -9,7 +14,7 @@ pluralise_commas <- function(message, objects, message_tail = "") {
   paste0(
     pluralise_n(message, length(objects)),
     commas(objects),
-    message_tail
+    pluralise_n(message_tail, length(objects))
   )
 }
 
@@ -27,16 +32,21 @@ pluralise <- function(message, objects) {
 
 pluralise_n <- function(message, n) {
   stopifnot(n >= 0)
+
+
+  # Don't strip parens if they have a space in between
+  # (but not if the space comes before the closing paren)
+
   if (n == 1) {
-    # strip [, unless there is space in between
-    message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)
-    # remove ( and its content, unless there is space in between
-    message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
+    # strip [
+    message <- gsub("\\[([^\\] ]* *)\\]", "\\1", message, perl = TRUE)
+    # remove ( and its content
+    message <- gsub("\\([^\\) ]* *\\)", "", message, perl = TRUE)
   } else {
-    # strip (, unless there is space in between
-    message <- gsub("\\(([^\\) ]+)\\)", "\\1", message, perl = TRUE)
-    # remove [ and its content, unless there is space in between
-    message <- gsub("\\[[^\\] ]+\\]\\s*", "", message, perl = TRUE)
+    # strip (
+    message <- gsub("\\(([^\\) ]* *)\\)", "\\1", message, perl = TRUE)
+    # remove [ and its content
+    message <- gsub("\\[[^\\] ]* *\\]", "", message, perl = TRUE)
   }
 
   message

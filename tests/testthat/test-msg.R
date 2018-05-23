@@ -82,26 +82,6 @@ test_that("error_add_rows_to_grouped_df()", {
   )
 })
 
-test_that("error_inconsistent_new_cols())", {
-  expect_equal(
-    error_inconsistent_new_cols(10, data.frame(a = 1:2)),
-    bullets(
-      "New columns in `add_column()` must be consistent with `.data`:",
-      "`.data` has 10 rows",
-      "New column contributes 2 rows"
-    )
-  )
-
-  expect_equal(
-    error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4)),
-    bullets(
-      "New columns in `add_column()` must be consistent with `.data`:",
-      "`.data` has 1 row",
-      "New columns contribute 3 rows"
-    )
-  )
-})
-
 test_that("error_inconsistent_new_rows())", {
   expect_equal(
     error_inconsistent_new_rows("a"),
@@ -124,6 +104,32 @@ test_that("error_inconsistent_new_rows())", {
     bullets(
       "New rows in `add_row()` must use columns that already exist:",
       "Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`."
+    )
+  )
+})
+
+test_that("error_duplicate_new_cols())", {
+  expect_equal(
+    error_duplicate_new_cols("a"),
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      "Column `a` already exists in `.data`."
+    )
+  )
+
+  expect_equal(
+    error_duplicate_new_cols(letters[2:3]),
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      "Columns `b`, `c` already exist in `.data`."
+    )
+  )
+
+  expect_equal(
+    error_duplicate_new_cols(LETTERS),
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`."
     )
   )
 })

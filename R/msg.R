@@ -57,6 +57,13 @@ error_add_rows_to_grouped_df <- function() {
   "Can't add rows to grouped data frames"
 }
 
+error_inconsistent_new_rows <- function(names) {
+  bullets(
+    "New rows in `add_row()` must use columns that already exist:",
+    error_unknown_names(names)
+  )
+}
+
 error_inconsistent_new_cols <- function(n, df) {
   bullets(
     "New columns in `add_column()` must be consistent with `.data`:",
@@ -69,9 +76,9 @@ error_inconsistent_new_cols <- function(n, df) {
   )
 }
 
-error_inconsistent_new_rows <- function(names) {
+error_duplicate_new_cols <- function(names) {
   bullets(
-    "New rows in `add_row()` must use columns that already exist:",
-    error_unknown_names(names)
+    "Can't add duplicate columns with `add_column()`:",
+    pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`.")
   )
 }

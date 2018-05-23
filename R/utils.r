@@ -73,8 +73,3 @@ tick_non_syntactic <- function(x) {
   x[needs_ticks] <- tick(x[needs_ticks])
   x
 }
-
-tick <- function(x) {
-  x[is.na(x)] <- "NA"
-  encodeString(x, quote = "`")
-}
