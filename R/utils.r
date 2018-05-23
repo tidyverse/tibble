@@ -46,10 +46,6 @@ safe_match <- function(x, table) {
   # nocov end
 }
 
-stopc <- function(...) {
-  abort(paste0(..., collapse = "\n"))
-}
-
 warningc <- function(...) {
   warn(paste0(...))
 }

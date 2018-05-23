@@ -39,7 +39,7 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    stopc(error_add_rows_to_grouped_df())
+    abort(error_add_rows_to_grouped_df())
   }
 
   df <- tibble(...)
@@ -47,7 +47,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
-    stopc(error_inconsistent_new_rows(extra_vars))
+    abort(error_inconsistent_new_rows(extra_vars))
   }
 
   missing_vars <- setdiff(names(.data), names(df))
@@ -135,13 +135,13 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      stopc(error_inconsistent_new_cols(nrow(.data), df))
+      abort(error_inconsistent_new_cols(nrow(.data), df))
     }
   }
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stopc(error_duplicate_new_cols(extra_vars))
+    abort(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
@@ -177,7 +177,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      stopc(error_both_before_after())
+      abort(error_both_before_after())
     }
   }
 }

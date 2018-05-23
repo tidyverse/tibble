@@ -34,7 +34,7 @@ glimpse <- function(x, width = NULL, ...) {
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
-    stopc("`width` must be finite")
+    abort("`width` must be finite")
   }
 
   cat_line("Observations: ", big_mark(nrow(x)))

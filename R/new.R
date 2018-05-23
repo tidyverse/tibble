@@ -95,7 +95,7 @@ validate_nrow <- function(x, nrow_set_method) {
   expected_nrow <- .row_names_info(x, 2L)
   bad_len <- which(lengths != expected_nrow)
   if (has_length(bad_len)) {
-    stopc(error_inconsistent_cols(
+    abort(error_inconsistent_cols(
       expected_nrow, nrow_set_method, names(x)[bad_len], lengths[bad_len]
     ))
   }

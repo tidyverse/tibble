@@ -95,26 +95,26 @@ check_tibble <- function(x) {
   names_x <- names2(x)
   bad_name <- which(is.na(names_x) | names_x == "")
   if (has_length(bad_name)) {
-    stopc(error_column_must_be_named(bad_name))
+    abort(error_column_must_be_named(bad_name))
   }
 
   dups <- which(duplicated(names_x))
   if (has_length(dups)) {
-    stopc(error_column_must_have_unique_name(names_x[dups]))
+    abort(error_column_must_have_unique_name(names_x[dups]))
   }
 
   # Types
   is_xd <- which(!map_lgl(x, is_1d))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    stopc(error_column_must_be_vector(names_x[is_xd], classes))
+    abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
   x[] <- map(x, strip_dim)
 
   posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
   if (has_length(posixlt)) {
-    stopc(error_time_column_must_be_posixct(names_x[posixlt]))
+    abort(error_time_column_must_be_posixct(names_x[posixlt]))
   }
 
   x
