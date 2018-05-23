@@ -133,3 +133,10 @@ test_that("error_duplicate_new_cols())", {
     )
   )
 })
+
+test_that("error_both_before_after())", {
+  expect_equal(
+    error_both_before_after(),
+    "Can't specify both `.before` and `.after`."
+  )
+})

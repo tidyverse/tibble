@@ -82,3 +82,7 @@ error_duplicate_new_cols <- function(names) {
     pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`.")
   )
 }
+
+error_both_before_after <- function() {
+  "Can't specify both `.before` and `.after`."
+}

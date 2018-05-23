@@ -177,7 +177,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      stopc("Can't specify both `.before` and `.after`")
+      stopc(error_both_before_after())
     }
   }
 }
