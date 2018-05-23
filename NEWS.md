@@ -12,7 +12,7 @@
 
 # tibble 1.4.2.9000 (2018-04-02)
 
-- Improve documentation for `...` in `bind_rows()` and `bind_cols()` (#400).
+- Improve documentation for `...` in `add_row()` and `add_column()` (#400).
 - Use real variable name in error message for `column_to_rownames()` (#399, @alexwhan).
 - Use `rlang::list2()` (#391, @lionel-).
 - `as_tibble()` checks column length only once (#365, @anhqle).
