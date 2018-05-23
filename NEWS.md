@@ -1,3 +1,10 @@
+# tibble 1.4.2.9002 (2018-05-24)
+
+- `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
+- `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
+- `as_tibble()` prints an informative error message when using the `rownames` argument and the input data frame or matrix does not have row names (#388, @anhqle).
+
+
 # tibble 1.4.2.9001 (2018-04-17)
 
 - Column names and types are now formatted identically with `glimpse()` and `print.tbl_df()`.
