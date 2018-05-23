@@ -19,15 +19,12 @@ check_names_df.numeric <- function(j, x) {
   }
 
   non_integer <- which(j != trunc(j))
-  if (!is_empty(non_integer)) {
+  if (has_length(non_integer)) {
     stopc(error_nonint_column_index(non_integer, j[non_integer]))
   }
-  neg_too_small <- (j < -length(x))
-  if (any(neg_too_small)) {
-    stopc(pluralise_msg(
-      paste0("Column index(es) must be at least ", -length(x), " if negative, not "),
-      j[neg_too_small]
-    ))
+  neg_too_small <- which(j < -length(x))
+  if (has_length(neg_too_small)) {
+    stopc(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
   }
   pos_too_large <- (j > length(x))
   if (any(pos_too_large)) {

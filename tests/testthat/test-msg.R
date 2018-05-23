@@ -24,6 +24,17 @@ test_that("error_nonint_column_index()", {
   )
 })
 
+test_that("error_small_column_index()", {
+  expect_equal(
+    error_small_column_index(3, 2, -4),
+    bullets(
+      "Negative column indexes must match number of columns:",
+      "`.data` has 3 columns",
+      "Position 2 equals -4"
+    )
+  )
+})
+
 test_that("error_na_column_flag()", {
   expect_equal(
     error_na_column_flag(),

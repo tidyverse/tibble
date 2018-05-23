@@ -26,7 +26,8 @@ pluralise_n <- function(message, n) {
   message
 }
 
-bullets <- function(header, problems) {
+bullets <- function(header, ...) {
+  problems <- c(...)
   MAX_BULLETS <- 6L
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
