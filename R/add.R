@@ -135,11 +135,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      stopc(
-        "`.data` must have ", nrow(.data),
-        pluralise_n(" row(s)", nrow(.data)),
-        ", not ", nrow(df)
-      )
+      stopc(error_inconsistent_new_cols(nrow(.data), df))
     }
   }
 

@@ -56,3 +56,15 @@ error_unknown_names <- function(names) {
 error_add_rows_to_grouped_df <- function() {
   "Can't add rows to grouped data frames"
 }
+
+error_inconsistent_new_cols <- function(n, df) {
+  bullets(
+    "New columns in `add_column()` must be consistent with `.data`:",
+    pluralise_count("`.data` has ", n, " row(s)"),
+    paste0(
+      pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+      nrow(df),
+      " rows"
+    )
+  )
+}

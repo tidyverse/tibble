@@ -183,7 +183,7 @@ test_that("error if adding existing columns", {
 test_that("error if adding wrong number of rows with add_column()", {
   expect_error(
     add_column(tibble(a = 3), b = 4:5),
-    "`.data` must have 1 row, not 2",
+    error_inconsistent_new_cols(1, data.frame(b = 4:5)),
     fixed = TRUE
   )
 })

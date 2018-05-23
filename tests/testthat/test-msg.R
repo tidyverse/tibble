@@ -81,3 +81,23 @@ test_that("error_add_rows_to_grouped_df()", {
     "Can't add rows to grouped data frames"
   )
 })
+
+test_that("error_inconsistent_new_cols())", {
+  expect_equal(
+    error_inconsistent_new_cols(10, data.frame(a = 1:2)),
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      "`.data` has 10 rows",
+      "New column contributes 2 rows"
+    )
+  )
+
+  expect_equal(
+    error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4)),
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      "`.data` has 1 row",
+      "New columns contribute 3 rows"
+    )
+  )
+})

@@ -13,6 +13,14 @@ pluralise_commas <- function(message, objects, message_tail = "") {
   )
 }
 
+pluralise_count <- function(message, count, message_tail = "") {
+  paste0(
+    pluralise_n(message, count),
+    count,
+    pluralise_n(message_tail, count)
+  )
+}
+
 pluralise <- function(message, objects) {
   pluralise_n(message, length(objects))
 }
