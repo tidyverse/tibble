@@ -93,17 +93,17 @@ validate_nrow <- function(x, nrow_set_method) {
   # Validate column lengths, don't recycle
   lengths <- map_int(x, NROW)
   expected_nrow <- .row_names_info(x, 2L)
-  bad_len <- lengths != expected_nrow
-  if (any(bad_len)) {
+  bad_len <- which(lengths != expected_nrow)
+  if (has_length(bad_len)) {
     vars <- names(x)[bad_len]
     vars_len <- lengths[bad_len]
     msg <- paste0("* Column ", tick(vars), " has length ", vars_len, "\n")
-    if (sum(bad_len) > 5) {
+    if (length(bad_len) > 5) {
       msg <- c(
         msg[1:5],
         paste0(
-          pre_dots("with "), sum(bad_len) - 5, " more inconsistent",
-          pluralise_n(" column(s)", sum(bad_len) - 5)
+          pre_dots("with "), length(bad_len) - 5, " more inconsistent",
+          pluralise_n(" column(s)", length(bad_len) - 5)
         )
       )
     }
