@@ -13,10 +13,18 @@ error_nonint_column_index <- function(pos, value) {
   )
 }
 
-error_small_column_index <- function(min, pos, value) {
+error_small_column_index <- function(n, pos, value) {
   bullets(
     "Negative column indexes must match number of columns:",
-    paste0("`.data` has ", min, " columns"),
+    paste0("`.data` has ", n, " columns"),
+    paste0("Position ", pos, " equals ", value)
+  )
+}
+
+error_large_column_index <- function(n, pos, value) {
+  bullets(
+    "Positive column indexes must match number of columns:",
+    paste0("`.data` has ", n, " columns"),
     paste0("Position ", pos, " equals ", value)
   )
 }

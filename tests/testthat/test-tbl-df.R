@@ -89,7 +89,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   )
   expect_error(
     foo[1:5],
-    "Column indexes must be at most 3 if positive, not 4, 5",
+    error_large_column_index(3, 4:5, 4:5),
     fixed = TRUE
   )
 

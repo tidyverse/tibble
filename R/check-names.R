@@ -26,12 +26,9 @@ check_names_df.numeric <- function(j, x) {
   if (has_length(neg_too_small)) {
     stopc(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
   }
-  pos_too_large <- (j > length(x))
-  if (any(pos_too_large)) {
-    stopc(pluralise_msg(
-      paste0("Column index(es) must be at most ", length(x), " if positive, not "),
-      j[pos_too_large]
-    ))
+  pos_too_large <- which(j > length(x))
+  if (has_length(pos_too_large)) {
+    stopc(error_large_column_index(length(x), pos_too_large, j[pos_too_large]))
   }
 
   seq_along(x)[j]

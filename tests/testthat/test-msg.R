@@ -35,6 +35,17 @@ test_that("error_small_column_index()", {
   )
 })
 
+test_that("error_large_column_index()", {
+  expect_equal(
+    error_large_column_index(3, 2, 5),
+    bullets(
+      "Positive column indexes must match number of columns:",
+      "`.data` has 3 columns",
+      "Position 2 equals 5"
+    )
+  )
+})
+
 test_that("error_na_column_flag()", {
   expect_equal(
     error_na_column_flag(),
