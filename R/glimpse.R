@@ -43,7 +43,6 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
-
   cat_line("Variables: ", big_mark(ncol(df)))
   if (ncol(df) == 0) return(invisible(x))
 
@@ -52,7 +51,6 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " ", var_types, " ")
 
   data_width <- width - nchar(var_names) - 2
-
   formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
@@ -98,3 +96,12 @@ format_v.list <- function(x) {
 
 #' @export
 format_v.character <- function(x) encodeString(x, quote = '"')
+
+#' @export
+format_v.factor <- function(x) {
+  if (any(grepl(",", x, fixed = TRUE))) {
+    encodeString(as.character(x), quote = '"')
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}

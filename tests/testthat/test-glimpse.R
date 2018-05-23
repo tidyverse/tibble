@@ -15,6 +15,16 @@ test_that("format_v for character", {
   expect_equal(format_v(character()), character())
 })
 
+test_that("format_v for factor", {
+  expect_equal(format_v(factor(c("1", "a"))), c("1", "a"))
+  expect_equal(format_v(factor(c("foo", '"bar"'))), c("foo", "\"bar\""))
+  expect_equal(format_v(factor()), character())
+  # Add quotes around factor levels with comma
+  # so they don't appear as if they were two observations (GH 384)
+  expect_equal(format_v(factor(c("foo, bar", "foo", '"bar"'))),
+               paste0('"', c("foo, bar", "foo", "\\\"bar\\\""), '"'))
+})
+
 test_that("format_v for list", {
   expect_equal(format_v(list(1:3)), "[<1, 2, 3>]")
   expect_equal(format_v(as.list(1:3)), "[1, 2, 3]")
