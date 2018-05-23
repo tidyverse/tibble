@@ -2,7 +2,7 @@ check_names_df <- function(j, ...) UseMethod("check_names_df")
 
 #' @export
 check_names_df.default <- function(j, ...) {
-  stopc("Unsupported index type: ", class(j)[[1L]])
+  stopc(error_unsupported_index(j))
 }
 
 #' @export

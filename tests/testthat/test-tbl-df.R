@@ -159,27 +159,27 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(
     foo[list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[as.list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(as.list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[factor(1:3)],
-    "Unsupported index type: factor",
+    error_unsupported_index(factor(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.Date()],
-    "Unsupported index type: Date",
+    error_unsupported_index(Sys.Date()),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.time()],
-    "Unsupported index type: POSIXct",
+    error_unsupported_index(Sys.time()),
     fixed = TRUE
   )
 })
