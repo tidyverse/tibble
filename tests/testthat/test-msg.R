@@ -127,6 +127,78 @@ test_that("error_inconsistent_new_rows())", {
   )
 })
 
+test_that("error_column_must_be_named())", {
+  expect_equal(
+    error_column_must_be_named(1),
+    "Column 1 must be named."
+  )
+  expect_equal(
+    error_column_must_be_named(2:3),
+    "Columns 2, 3 must be named."
+  )
+  expect_equal(
+    error_column_must_be_named(seq_along(letters)),
+    "Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named."
+  )
+})
+
+test_that("error_column_must_have_unique_name())", {
+  expect_equal(
+    error_column_must_have_unique_name("a"),
+    "Column `a` must have a unique name."
+  )
+  expect_equal(
+    error_column_must_have_unique_name(letters[2:3]),
+    "Columns `b`, `c` must have unique names."
+  )
+  expect_equal(
+    error_column_must_have_unique_name(LETTERS),
+    "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must have unique names."
+  )
+})
+
+test_that("error_column_must_be_vector())", {
+  expect_equal(
+    error_column_must_be_vector("a", "environment"),
+    bullets(
+      "All columns in a tibble must be a 1d vector or a list:",
+      "Column `a` is environment"
+    )
+  )
+
+  expect_equal(
+    error_column_must_be_vector(letters[2:3], c("name", "NULL")),
+    bullets(
+      "All columns in a tibble must be a 1d vector or a list:",
+      "Column `b` is name",
+      "Column `c` is NULL"
+    )
+  )
+
+  expect_equal(
+    error_column_must_be_vector(LETTERS, letters),
+    bullets(
+      "All columns in a tibble must be a 1d vector or a list:",
+      paste0("Column `", LETTERS, "` is ", letters)
+    )
+  )
+})
+
+test_that("error_time_column_must_be_posixct())", {
+  expect_equal(
+    error_time_column_must_be_posixct("a"),
+    "Column `a` is a date/time and must be stored as POSIXct, not POSIXlt."
+  )
+  expect_equal(
+    error_time_column_must_be_posixct(letters[2:3]),
+    "Columns `b`, `c` are dates/times and must be stored as POSIXct, not POSIXlt."
+  )
+  expect_equal(
+    error_time_column_must_be_posixct(LETTERS),
+    "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) are dates/times and must be stored as POSIXct, not POSIXlt."
+  )
+})
+
 test_that("error_inconsistent_cols())", {
   expect_equal(
     error_inconsistent_cols(

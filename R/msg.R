@@ -2,6 +2,18 @@ data_has_n_cols <- function(n) {
   paste0("`.data` has ", n, " columns")
 }
 
+invalid_df <- function(problem, vars) {
+  if (is.character(vars)) {
+    vars <- tick(vars)
+  }
+
+  pluralise_commas(
+    "Column(s) ",
+    vars,
+    paste0(" ", problem, ".")
+  )
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
 }
@@ -66,6 +78,25 @@ error_inconsistent_new_rows <- function(names) {
     "New rows in `add_row()` must use columns that already exist:",
     error_unknown_names(names)
   )
+}
+
+error_column_must_be_named <- function(names) {
+  invalid_df("must be named", names)
+}
+
+error_column_must_have_unique_name <- function(names) {
+  invalid_df("must have [a ]unique name(s)", names)
+}
+
+error_column_must_be_vector <- function(names, classes) {
+  bullets(
+    "All columns in a tibble must be a 1d vector or a list:",
+    paste0("Column ", tick(names), " is ", classes)
+  )
+}
+
+error_time_column_must_be_posixct <- function(names) {
+  invalid_df("[is](are) [a ]date(s)/time(s) and must be stored as POSIXct, not POSIXlt", names)
 }
 
 error_inconsistent_cols <- function(expected_nrow, nrow_set_method, vars, vars_len) {
