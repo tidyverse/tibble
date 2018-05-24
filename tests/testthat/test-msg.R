@@ -315,3 +315,13 @@ test_that("error_tribble_lhs_column_syntax()", {
     )
   )
 })
+
+test_that("error_tribble_rhs_column_syntax()", {
+  expect_equal(
+    error_tribble_rhs_column_syntax(quote(a + b)),
+    bullets(
+      'All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.',
+      "Found `a + b` on the right-hand side of `~`."
+    )
+  )
+})

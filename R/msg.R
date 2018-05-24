@@ -152,3 +152,10 @@ error_tribble_lhs_column_syntax <- function(lhs) {
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   )
 }
+
+error_tribble_rhs_column_syntax <- function(rhs) {
+  bullets(
+    'All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.',
+    paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
+  )
+}

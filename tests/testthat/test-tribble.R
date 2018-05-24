@@ -103,7 +103,7 @@ test_that("tribble() errs appropriately on bad calls", {
   # invalid colname syntax
   expect_error(
     tribble(~a + b),
-    "Expected a symbol or string denoting a column name, not a call",
+    error_tribble_rhs_column_syntax(quote(a + b)),
     fixed = TRUE
   )
 

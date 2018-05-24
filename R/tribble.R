@@ -101,13 +101,10 @@ extract_frame_names_from_dots <- function(dots) {
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      abort(paste0(
-        "Expected a symbol or string denoting a column name, not ",
-        friendly_type(type_of(candidate))
-      ))
+      abort(error_tribble_rhs_column_syntax(candidate))
     }
 
-    frame_names <- c(frame_names, as.character(el[[2]]))
+    frame_names <- c(frame_names, as.character(candidate))
   }
 
   frame_names
