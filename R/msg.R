@@ -141,3 +141,7 @@ error_as_tibble_needs_rownames <- function() {
 error_glimpse_infinite_width <- function() {
   "`glimpse()` requires a finite value for the `width` argument."
 }
+
+error_tribble_needs_columns <- function() {
+  "`tribble()` needs to specify at least one column using the `~name` syntax."
+}

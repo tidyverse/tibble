@@ -86,6 +86,13 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 
 test_that("tribble() errs appropriately on bad calls", {
 
+  # no colname
+  expect_error(
+    tribble(1, 2, 3),
+    error_tribble_needs_columns(),
+    fixed = TRUE
+  )
+
   # invalid colname syntax
   expect_error(
     tribble(a~b),

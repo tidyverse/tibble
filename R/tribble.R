@@ -68,7 +68,7 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    abort("Expected at least one column name; e.g. `~name`")
+    abort(error_tribble_needs_columns())
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (length(frame_rest) == 0L) {

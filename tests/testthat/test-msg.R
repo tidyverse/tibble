@@ -298,3 +298,10 @@ test_that("error_glimpse_infinite_width()", {
     "`glimpse()` requires a finite value for the `width` argument."
   )
 })
+
+test_that("error_tribble_needs_columns()", {
+  expect_equal(
+    error_tribble_needs_columns(),
+    "`tribble()` needs to specify at least one column using the `~name` syntax."
+  )
+})
