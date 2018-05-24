@@ -337,3 +337,13 @@ test_that("error_tribble_non_rectangular()", {
     )
   )
 })
+
+test_that("error_frame_matrix_list()", {
+  expect_equal(
+    error_frame_matrix_list(2:4),
+    bullets(
+      "All values in `frame_matrix()` must be atomic:",
+      "Found list-valued elements at positions 2, 3, 4."
+    )
+  )
+})

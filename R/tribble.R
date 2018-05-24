@@ -148,8 +148,9 @@ turn_matrix_into_column_list <- function(frame_mat) {
 }
 
 turn_frame_data_into_frame_matrix <- function(names, rest) {
-  if (some(rest, needs_list_col)) {
-    abort("Can't use list columns in `frame_matrix()`")
+  list_cols <- which(map_lgl(rest, needs_list_col))
+  if (has_length(list_cols)) {
+    abort(error_frame_matrix_list(list_cols))
   }
 
   frame_ncol <- length(names)

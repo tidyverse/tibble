@@ -168,3 +168,10 @@ error_tribble_non_rectangular <- function(cols, cells) {
     paste0(cells, " is not an integer multiple of ", cols, ".")
   )
 }
+
+error_frame_matrix_list <- function(pos) {
+  bullets(
+    "All values in `frame_matrix()` must be atomic:",
+    pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
+  )
+}

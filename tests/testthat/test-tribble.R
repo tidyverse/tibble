@@ -196,7 +196,7 @@ test_that("frame_matrix cannot have list columns", {
       "a", 1:3,
       "b", 4:6
     ),
-    "Can't use list columns in `frame_matrix()`",
+    error_frame_matrix_list(c(2, 4)),
     fixed = TRUE
   )
 })
