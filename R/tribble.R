@@ -96,7 +96,7 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      abort("Expected a column name with a single argument; e.g. `~name`")
+      abort(error_tribble_lhs_column_syntax(el[[2]]))
     }
 
     candidate <- el[[2]]

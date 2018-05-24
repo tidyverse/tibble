@@ -95,8 +95,8 @@ test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
   expect_error(
-    tribble(a~b),
-    "Expected a column name with a single argument; e.g. `~name`",
+    tribble(a ~ b),
+    error_tribble_lhs_column_syntax(quote(a)),
     fixed = TRUE
   )
 

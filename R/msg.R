@@ -145,3 +145,10 @@ error_glimpse_infinite_width <- function() {
 error_tribble_needs_columns <- function() {
   "`tribble()` needs to specify at least one column using the `~name` syntax."
 }
+
+error_tribble_lhs_column_syntax <- function(lhs) {
+  bullets(
+    "All column specifications in `tribble()` must use the `~name` syntax.",
+    paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
+  )
+}

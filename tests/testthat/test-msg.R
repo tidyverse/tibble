@@ -305,3 +305,13 @@ test_that("error_tribble_needs_columns()", {
     "`tribble()` needs to specify at least one column using the `~name` syntax."
   )
 })
+
+test_that("error_tribble_lhs_column_syntax()", {
+  expect_equal(
+    error_tribble_lhs_column_syntax(quote(lhs)),
+    bullets(
+      "All column specifications in `tribble()` must use the `~name` syntax.",
+      "Found `lhs` on the left-hand side of `~`."
+    )
+  )
+})
