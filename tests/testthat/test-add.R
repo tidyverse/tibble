@@ -43,13 +43,13 @@ test_that("adds empty row if no arguments", {
 test_that("error if adding row with unknown variables", {
   expect_error(
     add_row(tibble(a = 3), xxyzy = "err"),
-    "Can't add row with new variable `xxyzy`",
+    error_inconsistent_new_rows("xxyzy"),
     fixed = TRUE
   )
 
   expect_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    "Can't add row with new variables `b`, `c`",
+    error_inconsistent_new_rows(c("b", "c")),
     fixed = TRUE
   )
 })
@@ -102,7 +102,7 @@ test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
   expect_error(
     add_row(df, a = 4:5, .after = 2, .before = 3),
-    "Can't specify both `.before` and `.after`",
+    error_both_before_after(),
     fixed = TRUE
   )
 })
@@ -129,7 +129,7 @@ test_that("add_row() keeps the class of empty columns", {
 test_that("add_row() fails nicely for grouped data frames (#179)", {
   expect_error(
     add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
-    "Can't add rows to grouped data frames",
+    error_add_rows_to_grouped_df(),
     fixed = TRUE
   )
 })
@@ -175,7 +175,7 @@ test_that("add_column() keeps unchanged if no arguments", {
 test_that("error if adding existing columns", {
   expect_error(
     add_column(tibble(a = 3), a = 5),
-    "Column `a` already exists",
+    error_duplicate_new_cols("a"),
     fixed = TRUE
   )
 })
@@ -183,7 +183,7 @@ test_that("error if adding existing columns", {
 test_that("error if adding wrong number of rows with add_column()", {
   expect_error(
     add_column(tibble(a = 3), b = 4:5),
-    "`.data` must have 1 row, not 2",
+    error_inconsistent_new_cols(1, data.frame(b = 4:5)),
     fixed = TRUE
   )
 })
@@ -246,7 +246,7 @@ test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
   expect_error(
     add_column(df, b = 4:6, .after = 2, .before = 3),
-    "Can't specify both `.before` and `.after`",
+    error_both_before_after(),
     fixed = TRUE
   )
 })
@@ -255,12 +255,12 @@ test_that("error if column named by .before or .after not found", {
   df <- tibble(a = 1:3)
   expect_error(
     add_column(df, b = 4:6, .after = "x"),
-    "Column `x` not found",
+    error_unknown_names("x"),
     fixed = TRUE
   )
   expect_error(
     add_column(df, b = 4:6, .before = "x"),
-    "Column `x` not found",
+    error_unknown_names("x"),
     fixed = TRUE
   )
 })

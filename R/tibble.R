@@ -93,27 +93,28 @@ is.tibble <- is_tibble
 check_tibble <- function(x) {
   # Names
   names_x <- names2(x)
-  bad_name <- is.na(names_x) | names_x == ""
-  if (any(bad_name)) {
-    invalid_df("must be named", x, which(bad_name))
+  bad_name <- which(is.na(names_x) | names_x == "")
+  if (has_length(bad_name)) {
+    abort(error_column_must_be_named(bad_name))
   }
 
-  dups <- duplicated(names_x)
-  if (any(dups)) {
-    invalid_df("must have [a] unique name(s)", x, dups)
+  dups <- which(duplicated(names_x))
+  if (has_length(dups)) {
+    abort(error_column_must_have_unique_name(names_x[dups]))
   }
 
   # Types
-  is_1d <- map_lgl(x, is_1d)
-  if (any(!is_1d)) {
-    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
+  is_xd <- which(!map_lgl(x, is_1d))
+  if (has_length(is_xd)) {
+    classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
+    abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
   x[] <- map(x, strip_dim)
 
-  posixlt <- map_lgl(x, inherits, "POSIXlt")
-  if (any(posixlt)) {
-    invalid_df("[is](are) [a] date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
+  posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
+  if (has_length(posixlt)) {
+    abort(error_time_column_must_be_posixct(names_x[posixlt]))
   }
 
   x
@@ -134,14 +135,4 @@ recycle_columns <- function(x) {
   }
 
   x
-}
-
-invalid_df <- function(problem, df, vars) {
-  if (is.logical(vars)) {
-    vars <- names(df)[vars]
-  }
-  stopc(
-    pluralise_msg("Column(s) ", vars), " ",
-    pluralise(problem, vars)
-  )
 }

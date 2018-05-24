@@ -39,15 +39,15 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    stop("Can't add rows to grouped data frames", call. = FALSE)
+    abort(error_add_rows_to_grouped_df())
   }
 
   df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
   extra_vars <- setdiff(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    stopc(pluralise_msg("Can't add row with new variable(s) ", extra_vars))
+  if (has_length(extra_vars)) {
+    abort(error_inconsistent_new_rows(extra_vars))
   }
 
   missing_vars <- setdiff(names(.data), names(df))
@@ -135,20 +135,13 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      stopc(
-        "`.data` must have ", nrow(.data),
-        pluralise_n(" row(s)", nrow(.data)),
-        ", not ", nrow(df)
-      )
+      abort(error_inconsistent_new_cols(nrow(.data), df))
     }
   }
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stopc(
-      pluralise_msg("Column(s) ", extra_vars),
-      pluralise(" already exist[s]", extra_vars)
-    )
+    abort(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
@@ -184,7 +177,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      stopc("Can't specify both `.before` and `.after`")
+      abort(error_both_before_after())
     }
   }
 }

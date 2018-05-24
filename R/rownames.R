@@ -53,7 +53,7 @@ rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (has_name(df, var)) {
-    stopc("Column `", var, "` already exists")
+    abort(error_existing_names(var))
   }
 
   new_df <- add_column(df, !! var := rownames(df), .before = 1)
@@ -66,7 +66,7 @@ rowid_to_column <- function(df, var = "rowid") {
   stopifnot(is.data.frame(df))
 
   if (has_name(df, var)) {
-    stopc("Column `", var, "` already exists")
+    abort(error_existing_names(var))
   }
 
   new_df <- add_column(df, !! var := seq_len(nrow(df)), .before = 1)
@@ -79,11 +79,11 @@ column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   if (has_rownames(df)) {
-    stopc("`df` already has row names")
+    abort(error_already_has_rownames())
   }
 
   if (!has_name(df, var)) {
-    stopc(paste0("Column `", var, "` not found"))
+    abort(error_unknown_names(var))
   }
 
   rownames(df) <- df[[var]]

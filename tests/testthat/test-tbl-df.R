@@ -57,23 +57,37 @@ test_that("[ with 0 cols returns correct number of rows", {
 })
 
 test_that("[.tbl_df is careful about names (#1245)", {
-  z_msg <- "Column `z` not found"
-
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo["z"], z_msg, fixed = TRUE)
-  expect_error(foo[ c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo["z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
-  expect_error(foo[, "z"], z_msg, fixed = TRUE)
-  expect_error(foo[, c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo[, "z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[, c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
   expect_error(
     foo[as.matrix("x")],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array("x", dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -84,12 +98,12 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[0.5],
-    "Column index must be integer, not 0.5",
+    error_nonint_column_index(1, 0.5),
     fixed = TRUE
   )
   expect_error(
     foo[1:5],
-    "Column indexes must be at most 3 if positive, not 4, 5",
+    error_large_column_index(3, 4:5, 4:5),
     fixed = TRUE
   )
 
@@ -99,23 +113,23 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[-4],
-    "Column index must be at least -3 if negative, not -4",
+    error_small_column_index(3, 1, -4),
     fixed = TRUE
   )
   expect_error(
     foo[c(1:3, NA)],
-    "NA column indexes not supported",
+    error_na_column_index(),
     fixed = TRUE
   )
 
   expect_error(
     foo[as.matrix(1)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(1, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -129,28 +143,28 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    "Length of logical index vector must be 1 or 3 (the number of columns), not 2",
+    error_mismatch_column_flag(3, 2),
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "Length of logical index vector must be 1 or 3 (the number of columns), not 4",
+    error_mismatch_column_flag(3, 4),
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, NA)],
-    "NA column indexes not supported",
+    error_na_column_flag(),
     fixed = TRUE
   )
 
   expect_error(
     foo[as.matrix(TRUE)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -159,27 +173,27 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(
     foo[list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[as.list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(as.list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[factor(1:3)],
-    "Unsupported index type: factor",
+    error_unsupported_index(factor(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.Date()],
-    "Unsupported index type: Date",
+    error_unsupported_index(Sys.Date()),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.time()],
-    "Unsupported index type: POSIXct",
+    error_unsupported_index(Sys.time()),
     fixed = TRUE
   )
 })

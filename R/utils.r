@@ -46,10 +46,6 @@ safe_match <- function(x, table) {
   # nocov end
 }
 
-stopc <- function(...) {
-  abort(paste0(...))
-}
-
 warningc <- function(...) {
   warn(paste0(...))
 }
@@ -72,9 +68,4 @@ tick_non_syntactic <- function(x) {
   needs_ticks <- !is_syntactic(x)
   x[needs_ticks] <- tick(x[needs_ticks])
   x
-}
-
-tick <- function(x) {
-  x[is.na(x)] <- "NA"
-  encodeString(x, quote = "`")
 }

@@ -2,7 +2,7 @@ check_names_df <- function(j, ...) UseMethod("check_names_df")
 
 #' @export
 check_names_df.default <- function(j, ...) {
-  stopc("Unsupported index type: ", class(j)[[1L]])
+  abort(error_unsupported_index(j))
 }
 
 #' @export
@@ -15,26 +15,20 @@ check_names_df.numeric <- function(j, x) {
   check_needs_no_dim(j)
 
   if (anyNA(j)) {
-    stopc("NA column indexes not supported")
+    abort(error_na_column_index())
   }
 
-  non_integer <- (j != trunc(j))
-  if (any(non_integer)) {
-    stopc(pluralise_msg("Column index(es) must be integer, not ", j[non_integer]))
+  non_integer <- which(j != trunc(j))
+  if (has_length(non_integer)) {
+    abort(error_nonint_column_index(non_integer, j[non_integer]))
   }
-  neg_too_small <- (j < -length(x))
-  if (any(neg_too_small)) {
-    stopc(pluralise_msg(
-      paste0("Column index(es) must be at least ", -length(x), " if negative, not "),
-      j[neg_too_small]
-    ))
+  neg_too_small <- which(j < -length(x))
+  if (has_length(neg_too_small)) {
+    abort(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
   }
-  pos_too_large <- (j > length(x))
-  if (any(pos_too_large)) {
-    stopc(pluralise_msg(
-      paste0("Column index(es) must be at most ", length(x), " if positive, not "),
-      j[pos_too_large]
-    ))
+  pos_too_large <- which(j > length(x))
+  if (has_length(pos_too_large)) {
+    abort(error_large_column_index(length(x), pos_too_large, j[pos_too_large]))
   }
 
   seq_along(x)[j]
@@ -45,20 +39,17 @@ check_names_df.logical <- function(j, x) {
   check_needs_no_dim(j)
 
   if (!(length(j) %in% c(1L, length(x)))) {
-    stopc(
-      "Length of logical index vector must be 1 or ", length(x),
-      " (the number of columns), not ", length(j)
-    )
+    abort(error_mismatch_column_flag(length(x), length(j)))
   }
   if (anyNA(j)) {
-    stopc("NA column indexes not supported")
+    abort(error_na_column_flag())
   }
   seq_along(x)[j]
 }
 
 check_needs_no_dim <- function(j) {
   if (needs_dim(j)) {
-    stopc("Can't use matrix or array for column indexing")
+    abort(error_dim_column_index(j))
   }
 }
 
@@ -78,7 +69,7 @@ check_names_before_after.character <- function(j, names) {
   pos <- safe_match(j, names)
   if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
-    stopc(pluralise_msg("Column(s) ", unknown_names), " not found")
+    abort(error_unknown_names(unknown_names))
   }
   pos
 }
