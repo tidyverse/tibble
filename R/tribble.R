@@ -117,13 +117,10 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    abort(
-      sprintf(
-        "invalid specification: had %s elements and %s columns",
-        length(frame_rest),
-        length(frame_names)
-      )
-    )
+    abort(error_tribble_non_rectangular(
+      length(frame_names),
+      length(frame_rest)
+    ))
   }
 }
 

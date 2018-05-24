@@ -123,6 +123,17 @@ test_that("tribble() errs appropriately on bad calls", {
       1, 2,
       3, 4, 5
     ),
+    error_tribble_non_rectangular(3, 5),
+    fixed = TRUE
+  )
+
+  expect_error(
+    tribble(
+      ~a, ~b, ~c, ~d,
+      1, 2, 3, 4, 5,
+      6, 7, 8, 9,
+    ),
+    error_tribble_non_rectangular(4, 9),
     fixed = TRUE
   )
 })

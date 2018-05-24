@@ -325,3 +325,15 @@ test_that("error_tribble_rhs_column_syntax()", {
     )
   )
 })
+
+test_that("error_tribble_non_rectangular()", {
+  expect_equal(
+    error_tribble_non_rectangular(5, 17),
+    bullets(
+      "`tribble()` must be used with rectangular data:",
+      "Found 5 columns.",
+      "Found 17 cells.",
+      "17 is not an integer multiple of 5."
+    )
+  )
+})

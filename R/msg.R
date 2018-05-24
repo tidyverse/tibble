@@ -159,3 +159,12 @@ error_tribble_rhs_column_syntax <- function(rhs) {
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   )
 }
+
+error_tribble_non_rectangular <- function(cols, cells) {
+  bullets(
+    "`tribble()` must be used with rectangular data:",
+    paste0("Found ", cols, " columns."),
+    paste0("Found ", cells, " cells."),
+    paste0(cells, " is not an integer multiple of ", cols, ".")
+  )
+}
