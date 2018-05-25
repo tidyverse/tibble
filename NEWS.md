@@ -1,16 +1,16 @@
-# tibble 1.4.2.9002 (2018-05-24)
+# tibble 1.4.2.9002
 
 - `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
 - `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
 - `as_tibble()` prints an informative error message when using the `rownames` argument and the input data frame or matrix does not have row names (#388, @anhqle).
 
 
-# tibble 1.4.2.9001 (2018-04-17)
+# tibble 1.4.2.9001
 
 - Column names and types are now formatted identically with `glimpse()` and `print.tbl_df()`.
 
 
-# tibble 1.4.2.9000 (2018-04-02)
+# tibble 1.4.2.9000
 
 - Improve documentation for `...` in `add_row()` and `add_column()` (#400).
 - Use real variable name in error message for `column_to_rownames()` (#399, @alexwhan).
@@ -18,7 +18,7 @@
 - `as_tibble()` checks column length only once (#365, @anhqle).
 
 
-# tibble 1.4.2 (2018-01-22)
+# tibble 1.4.2
 
 Bug fixes
 ---------
@@ -44,7 +44,7 @@ Performance
 - Only call `nrow()` and `head()` in `glimpse()`, not `ncol()`.
 
 
-# tibble 1.4.1 (2017-12-24)
+# tibble 1.4.1
 
 ## New formatting
 
@@ -73,7 +73,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - Remove Rcpp dependency (#313, @patperry).
 
 
-# tibble 1.3.4 (2017-08-21)
+# tibble 1.3.4
 
 ## Bug fixes
 
@@ -92,7 +92,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - `tibble()` gives a consistent error message in the case of duplicate column names (#291).
 
 
-# tibble 1.3.3 (2017-05-27)
+# tibble 1.3.3
 
 ## Bug fixes
 
@@ -103,7 +103,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - Remove unused import declaration for assertthat.
 
 
-# tibble 1.3.1 (2017-05-16)
+# tibble 1.3.1
 
 ## Bug fixes
 
@@ -135,7 +135,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - `pkgdown` website.
 
 
-# tibble 1.3.0 (2017-01-10)
+# tibble 1.3.0
 
 ## Bug fixes
 
@@ -181,7 +181,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - Using registration of native routines.
 
 
-# tibble 1.2 (2016-08-26)
+# tibble 1.2
 
 ## Bug fixes
 
@@ -212,7 +212,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - Minor changes in vignette (#115, @helix123).
 
 
-# tibble 1.1 (2016-07-01)
+# tibble 1.1
 
 Follow-up release.
 
@@ -288,7 +288,7 @@ Follow-up release.
 - Use new `expect_output_file()` from `testthat`.
 
 
-# Version 1.0 (2016-03-21)
+# Version 1.0
 
 - Initial CRAN release
 
