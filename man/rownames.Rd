@@ -9,18 +9,18 @@
 \alias{column_to_rownames}
 \title{Tools for working with row names}
 \usage{
-has_rownames(df)
+has_rownames(.data)
 
-remove_rownames(df)
+remove_rownames(.data)
 
-rownames_to_column(df, var = "rowname")
+rownames_to_column(.data, var = "rowname")
 
-rowid_to_column(df, var = "rowid")
+rowid_to_column(.data, var = "rowid")
 
-column_to_rownames(df, var = "rowname")
+column_to_rownames(.data, var = "rowname")
 }
 \arguments{
-\item{df}{A data frame}
+\item{.data}{A data frame.}
 
 \item{var}{Name of column to use for rownames.}
 }
@@ -52,5 +52,5 @@ head(rownames_to_column(mtcars))
 
 mtcars_tbl <- as_tibble(rownames_to_column(mtcars))
 mtcars_tbl
-column_to_rownames(as.data.frame(mtcars_tbl))
+head(column_to_rownames(as.data.frame(mtcars_tbl)))
 }

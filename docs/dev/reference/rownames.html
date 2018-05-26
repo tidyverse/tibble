@@ -113,22 +113,22 @@ ids starting at 1. Note that this will remove any existing row names.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>has_rownames</span>(<span class='no'>df</span>)
+    <pre class="usage"><span class='fu'>has_rownames</span>(<span class='no'>.data</span>)
 
-<span class='fu'>remove_rownames</span>(<span class='no'>df</span>)
+<span class='fu'>remove_rownames</span>(<span class='no'>.data</span>)
 
-<span class='fu'>rownames_to_column</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)
+<span class='fu'>rownames_to_column</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)
 
-<span class='fu'>rowid_to_column</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowid"</span>)
+<span class='fu'>rowid_to_column</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowid"</span>)
 
-<span class='fu'>column_to_rownames</span>(<span class='no'>df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)</pre>
+<span class='fu'>column_to_rownames</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>A data frame</p></td>
+      <th>.data</th>
+      <td><p>A data frame.</p></td>
     </tr>
     <tr>
       <th>var</th>
@@ -165,17 +165,13 @@ above the row numbers.</p>
 #&gt;  8 Merc 240D   24.4     4  147.    62  3.69  3.19  20       1     0     4     2
 #&gt;  9 Merc 230    22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
 #&gt; 10 Merc 280    19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'>column_to_rownames</span>(<span class='fu'>as.data.frame</span>(<span class='no'>mtcars_tbl</span>))</div><div class='output co'>#&gt;                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-#&gt; Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-#&gt; Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-#&gt; Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-#&gt; Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-#&gt; Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-#&gt; Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-#&gt; Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-#&gt; Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-#&gt; Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-#&gt;  [ reached getOption("max.print") -- omitted 23 rows ]</div></pre>
+#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'>head</span>(<span class='fu'>column_to_rownames</span>(<span class='fu'>as.data.frame</span>(<span class='no'>mtcars_tbl</span>)))</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+#&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+#&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+#&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

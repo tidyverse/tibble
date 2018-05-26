@@ -17,7 +17,7 @@
 #' In the printed output, the presence of row names is indicated by a star just
 #' above the row numbers.
 #'
-#' @param df A data frame
+#' @param .data A data frame.
 #' @param var Name of column to use for rownames.
 #' @examples
 #' has_rownames(mtcars)
@@ -28,41 +28,47 @@
 #'
 #' mtcars_tbl <- as_tibble(rownames_to_column(mtcars))
 #' mtcars_tbl
-#' column_to_rownames(as.data.frame(mtcars_tbl))
+#' head(column_to_rownames(as.data.frame(mtcars_tbl)))
 #' @name rownames
 NULL
 
 
 #' @export
 #' @rdname rownames
-has_rownames <- function(df) {
-  .row_names_info(df) > 0L
+has_rownames <- function(.data) {
+  .row_names_info(.data) > 0L
 }
 
 #' @export
 #' @rdname rownames
-remove_rownames <- function(df) {
-  stopifnot(is.data.frame(df))
-  rownames(df) <- NULL
-  df
+remove_rownames <- function(.data) {
+  stopifnot(is.data.frame(.data))
+  rownames(.data) <- NULL
+  .data
 }
 
 #' @export
 #' @rdname rownames
-rownames_to_column <- function(df, var = "rowname") {
+rownames_to_column <- function(.data, var = "rowname") {
+  # rename, because .data has special semantics in tidy evaluation
+  df <- .data
+
   stopifnot(is.data.frame(df))
 
   if (has_name(df, var)) {
     abort(error_existing_names(var))
   }
 
-  new_df <- add_column(df, !! var := rownames(df), .before = 1)
+  new_df <- add_column(df, !!var := rownames(df), .before = 1)
   remove_rownames(new_df)
 }
 
 #' @export
 #' @rdname rownames
-rowid_to_column <- function(df, var = "rowid") {
+rowid_to_column <- function(.data, var = "rowid") {
+  # rename, because .data has special semantics in tidy evaluation
+  df <- .data
+
   stopifnot(is.data.frame(df))
 
   if (has_name(df, var)) {
@@ -75,20 +81,20 @@ rowid_to_column <- function(df, var = "rowid") {
 
 #' @rdname rownames
 #' @export
-column_to_rownames <- function(df, var = "rowname") {
-  stopifnot(is.data.frame(df))
+column_to_rownames <- function(.data, var = "rowname") {
+  stopifnot(is.data.frame(.data))
 
-  if (has_rownames(df)) {
+  if (has_rownames(.data)) {
     abort(error_already_has_rownames())
   }
 
-  if (!has_name(df, var)) {
+  if (!has_name(.data, var)) {
     abort(error_unknown_names(var))
   }
 
-  rownames(df) <- df[[var]]
-  df[[var]] <- NULL
-  df
+  rownames(.data) <- .data[[var]]
+  .data[[var]] <- NULL
+  .data
 }
 
 #' @export
