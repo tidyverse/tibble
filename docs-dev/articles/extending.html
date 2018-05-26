@@ -74,7 +74,7 @@
       <h1>Extending tibble</h1>
                         <h4 class="author">Kirill Müller, Hadley Wickham</h4>
             
-            <h4 class="date">2018-05-25</h4>
+            <h4 class="date">2018-05-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/extending.Rmd"><code>vignettes/extending.Rmd</code></a></small>
       <div class="hidden name"><code>extending.Rmd</code></div>
@@ -384,26 +384,26 @@ data</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>() <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>)) 
 <span class="kw">str</span>(<span class="kw">unclass</span>(x))</code></pre></div>
 <pre><code>## List of 11
-##  $ sec   : num [1:3] 28 28 28
-##  $ min   : int [1:3] 59 0 59
-##  $ hour  : int [1:3] 10 11 11
-##  $ mday  : int [1:3] 25 25 25
+##  $ sec   : num [1:3] 56.5 56.5 56.5
+##  $ min   : int [1:3] 58 59 58
+##  $ hour  : int [1:3] 11 11 12
+##  $ mday  : int [1:3] 26 26 26
 ##  $ mon   : int [1:3] 4 4 4
 ##  $ year  : int [1:3] 118 118 118
-##  $ wday  : int [1:3] 5 5 5
-##  $ yday  : int [1:3] 144 144 144
+##  $ wday  : int [1:3] 6 6 6
+##  $ yday  : int [1:3] 145 145 145
 ##  $ isdst : int [1:3] 1 1 1
 ##  $ zone  : chr [1:3] "CEST" "CEST" "CEST"
 ##  $ gmtoff: int [1:3] 7200 7200 7200
 ##  - attr(*, "tzone")= chr [1:3] "" "CET" "CEST"</code></pre>
 <p>But it pretends to be a vector with 3 elements:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
-<pre><code>## [1] "2018-05-25 10:59:28 CEST" "2018-05-25 11:00:28 CEST"
-## [3] "2018-05-25 11:59:28 CEST"</code></pre>
+<pre><code>## [1] "2018-05-26 11:58:56 CEST" "2018-05-26 11:59:56 CEST"
+## [3] "2018-05-26 12:58:56 CEST"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)</code></pre></div>
-<pre><code>##  POSIXlt[1:3], format: "2018-05-25 10:59:28" "2018-05-25 11:00:28" ...</code></pre>
+<pre><code>##  POSIXlt[1:3], format: "2018-05-26 11:58:56" "2018-05-26 11:59:56" ...</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#' @importFrom pillar obj_sum</span>
 <span class="co">#' @export</span>
@@ -449,12 +449,12 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
 ## x[1]: "28°20'N  81°33'W"
-## y[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  
-## y[1]: 81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
+## y[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\0
+## y[1]: 33[39m33\033[38;5;246m'\033[39mW"
 ## 
 ## x[2]: "32°43'N 117°10'W"
-## y[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 1
-## y[2]: 17\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+## y[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\0
+## y[2]: 33[39m10\033[38;5;246m'\033[39mW"
 ## 
 ## x[3]: "     NA         "
 ## y[3]: "     \033[31mNA\033[39m         "</code></pre>
@@ -493,12 +493,12 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
-## x[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  
-## x[1]: 81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
+## x[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\0
+## x[1]: 33[39m33\033[38;5;246m'\033[39mW"
 ## y[1]: "28°20'N  81°33'W"
 ## 
-## x[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 1
-## x[2]: 17\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+## x[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\0
+## x[2]: 33[39m10\033[38;5;246m'\033[39mW"
 ## y[2]: "32°43'N 117°10'W"
 ## 
 ## x[3]: "     \033[31mNA\033[39m         "

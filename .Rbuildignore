@@ -13,5 +13,6 @@
 ^API$
 ^_pkgdown\.yml$
 ^docs$
+^docs-dev$
 ^tic\.R$
 ^\.github$
