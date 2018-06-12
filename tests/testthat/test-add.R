@@ -127,6 +127,7 @@ test_that("add_row() keeps the class of empty columns", {
 })
 
 test_that("add_row() fails nicely for grouped data frames (#179)", {
+  skip_if_not_installed("dplyr")
   expect_error(
     add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
     error_add_rows_to_grouped_df(),
