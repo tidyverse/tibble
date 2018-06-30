@@ -8,16 +8,14 @@ test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
 })
 
-test_that("can't make tibble containing data.frame or array", {
-  expect_error(
+test_that("can make tibble containing data.frame or array (#416)", {
+  expect_identical(
     tibble(mtcars),
-    error_column_must_be_vector("mtcars", "data.frame"),
-    fixed = TRUE
+    new_tibble(list(mtcars = remove_rownames(mtcars)))
   )
-  expect_error(
+  expect_identical(
     tibble(diag(5)),
-    error_column_must_be_vector("diag(5)", "matrix"),
-    fixed = TRUE
+    new_tibble(list(`diag(5)` = diag(5)))
   )
 })
 
@@ -149,16 +147,14 @@ test_that("columns must be named", {
   )
 })
 
-test_that("can't coerce list data.frame or array", {
-  expect_error(
+test_that("can coerce list data.frame or array (#416)", {
+  expect_identical(
     as_tibble(list(x = mtcars)),
-    error_column_must_be_vector("x", "data.frame"),
-    fixed = TRUE
+    new_tibble(list(x = remove_rownames(mtcars)))
   )
-  expect_error(
+  expect_identical(
     as_tibble(list(x = diag(5))),
-    error_column_must_be_vector("x", "matrix"),
-    fixed = TRUE
+    new_tibble(list(x = diag(5)))
   )
 })
 
@@ -269,14 +265,6 @@ test_that("as.tibble is an alias of as_tibble", {
 
 
 # Validation --------------------------------------------------------------
-
-test_that("2d object isn't a valid column", {
-  expect_error(
-    check_tibble(list(x = mtcars)),
-    error_column_must_be_vector("x", "data.frame"),
-    fixed = TRUE
-  )
-})
 
 test_that("POSIXlt isn't a valid column", {
   expect_error(

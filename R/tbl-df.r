@@ -102,7 +102,7 @@ print.tbl_df <- print.tbl
           i <- string_to_indices(i)
         }
       }
-      result <- map(result, `[`, i)
+      result <- map(result, subset_rows, i)
       nr <- length(result[[1]])
     }
   }
@@ -117,4 +117,12 @@ print.tbl_df <- print.tbl
 
   attr(result, "row.names") <- .set_row_names(nr)
   set_tibble_class(result)
+}
+
+subset_rows <- function(x, i) {
+  if (is.data.frame(x) || is.matrix(x)) {
+    x[i, ]
+  } else {
+    x[i]
+  }
 }

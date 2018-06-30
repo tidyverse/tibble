@@ -47,7 +47,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   if (ncol(df) == 0) return(invisible(x))
 
   var_types <- map_chr(map(df, new_pillar_type), format)
-  ticked_names <- format(new_pillar_title(names(df)))
+  ticked_names <- format(new_pillar_title(tick_if_needed(names(df))))
   var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " ", var_types, " ")
 
   data_width <- width - crayon::col_nchar(var_names) - 2
@@ -104,4 +104,22 @@ format_v.factor <- function(x) {
   } else {
     format(x, trim = TRUE, justify = "none")
   }
+}
+
+# Copied from pillar, maybe need an interface for ticking names?
+tick_if_needed <- function(x) {
+  needs_ticks <- !is_syntactic(x)
+  x[needs_ticks] <- tick(x[needs_ticks])
+  x
+}
+
+is_syntactic <- function(x) {
+  ret <- make.names(x) == x
+  ret[is.na(x)] <- FALSE
+  ret
+}
+
+tick <- function(x) {
+  x[is.na(x)] <- "NA"
+  encodeString(x, quote = "`")
 }

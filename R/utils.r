@@ -19,13 +19,17 @@ set_class <- `class<-`
 
 is_1d <- function(x) {
   # dimension check is for matrices and data.frames
-  is_vector(x) && !needs_dim(x)
+  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
 }
 
 strip_dim <- function(x) {
-  # Careful update only if necessary, to avoid copying which is checked by
-  # the "copying" test in dplyr
-  if (is_atomic(x) && has_dim(x)) {
+  if (is.matrix(x)) {
+    rownames(x) <- NULL
+  } else if (is.data.frame(x)) {
+    x <- remove_rownames(x)
+  } else if (is_atomic(x) && has_dim(x)) {
+    # Careful update only if necessary, to avoid copying which is checked by
+    # the "copying" test in dplyr
     dim(x) <- NULL
   }
   x
