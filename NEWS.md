@@ -1,3 +1,12 @@
+# tibble 1.4.2.9003
+
+- `tibble()` supports data frame and matrix columns (#416).
+- Skip dplyr in tests if unavailable (#420, @QuLogic).
+- Breaking change: Renamed first argument to `.data` in all `*_rownames()` functions (#412).
+- Fix consistency problems in intro vignette (#414), add colored output.
+- All error messages now follow the tidyverse style guide (#223).
+
+
 # tibble 1.4.2.9002
 
 - `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
