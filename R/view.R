@@ -8,6 +8,7 @@
 #' @param x The object to display.
 #' @param title The title to use for the display, by default
 #'   the deparsed expression is used.
+#' @param ... Unused, for extensibility.
 #'
 #' @export
 view <- function(x, title = NULL, ...) {

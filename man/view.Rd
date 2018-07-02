@@ -11,6 +11,8 @@ view(x, title = NULL, ...)
 
 \item{title}{The title to use for the display, by default
 the deparsed expression is used.}
+
+\item{...}{Unused, for extensibility.}
 }
 \description{
 By default, calls \code{\link[utils:View]{utils::View()}} on the input and returns it,
