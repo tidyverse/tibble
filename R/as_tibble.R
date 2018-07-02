@@ -36,7 +36,7 @@
 #' # making it more suitable for use when you have things that are
 #' # lists
 #' \dontrun{
-#' if (requireNamespace("microbenchmark", quiet = TRUE)) {
+#' if (requireNamespace("microbenchmark", quietly = TRUE)) {
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
 #'   microbenchmark::microbenchmark(
@@ -46,7 +46,7 @@
 #'   )
 #' }
 #'
-#' if (requireNamespace("microbenchmark", quiet = TRUE)) {
+#' if (requireNamespace("microbenchmark", quietly = TRUE)) {
 #'   m <- matrix(runif(26 * 100), ncol = 26)
 #'   colnames(m) <- letters
 #'   microbenchmark::microbenchmark(
