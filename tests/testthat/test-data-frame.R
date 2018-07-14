@@ -359,3 +359,10 @@ test_that("susbsetting returns the correct number of rows", {
     tibble(y = diag(5)[1:3, ])
   )
 })
+
+test_that("subsetting one row retains columns", {
+  expect_identical(
+    tibble(y = diag(5))[1, ],
+    tibble(y = diag(5)[1, , drop = FALSE])
+  )
+})

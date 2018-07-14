@@ -121,7 +121,7 @@ print.tbl_df <- print.tbl
 
 subset_rows <- function(x, i) {
   if (is.data.frame(x) || is.matrix(x)) {
-    x[i, ]
+    x[i, , drop = FALSE]
   } else {
     x[i]
   }
