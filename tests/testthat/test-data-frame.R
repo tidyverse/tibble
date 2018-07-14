@@ -8,17 +8,6 @@ test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
 })
 
-test_that("can make tibble containing data.frame or array (#416)", {
-  expect_identical(
-    tibble(mtcars),
-    new_tibble(list(mtcars = remove_rownames(mtcars)))
-  )
-  expect_identical(
-    tibble(diag(5)),
-    new_tibble(list(`diag(5)` = diag(5)))
-  )
-})
-
 test_that("dim attribute is stripped of 1D array (#84)", {
   expect_null(dim(tibble(x = array(1:3))$x))
 })
@@ -144,17 +133,6 @@ test_that("columns must be named", {
     as_tibble(l2),
     error_column_must_be_named(2),
     fixed = TRUE
-  )
-})
-
-test_that("can coerce list data.frame or array (#416)", {
-  expect_identical(
-    as_tibble(list(x = mtcars)),
-    new_tibble(list(x = remove_rownames(mtcars)))
-  )
-  expect_identical(
-    as_tibble(list(x = diag(5))),
-    new_tibble(list(x = diag(5)))
   )
 })
 
@@ -343,5 +321,41 @@ test_that("types preserved when recycling in tibble() (#284)", {
   expect_equal(
     tibble(b = as.difftime(1, units = "hours"), a = 1:2),
     tibble(b = as.difftime(c(1, 1), units = "hours"), a = 1:2)
+  )
+})
+
+
+# Data frame and matrix columns -------------------------------------------
+
+test_that("can make tibble containing data.frame or array (#416)", {
+  expect_identical(
+    tibble(mtcars),
+    new_tibble(list(mtcars = remove_rownames(mtcars)))
+  )
+  expect_identical(
+    tibble(diag(5)),
+    new_tibble(list(`diag(5)` = diag(5)))
+  )
+})
+
+test_that("can coerce list data.frame or array (#416)", {
+  expect_identical(
+    as_tibble(list(x = mtcars)),
+    new_tibble(list(x = remove_rownames(mtcars)))
+  )
+  expect_identical(
+    as_tibble(list(x = diag(5))),
+    new_tibble(list(x = diag(5)))
+  )
+})
+
+test_that("susbsetting returns the correct number of rows", {
+  expect_identical(
+    tibble(x = mtcars)[1:3, ],
+    tibble(x = mtcars[1:3, ])
+  )
+  expect_identical(
+    tibble(y = diag(5))[1:3, ],
+    tibble(y = diag(5)[1:3, ])
   )
 })

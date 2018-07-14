@@ -103,7 +103,7 @@ print.tbl_df <- print.tbl
         }
       }
       result <- map(result, subset_rows, i)
-      nr <- length(result[[1]])
+      nr <- NROW(result[[1]])
     }
   }
 
