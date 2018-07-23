@@ -8,7 +8,7 @@
 \if{html}{\figure{logo.png}{options: align='right'}}
 
 Provides a 'tbl_df' class (the 'tibble') that provides
-stricter checking and better formatting than the traditional data frame.
+    stricter checking and better formatting than the traditional data frame.
 }
 \details{
 The S3 class \code{tbl_df} wraps a local data frame. The main
