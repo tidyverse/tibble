@@ -1,3 +1,7 @@
+# tibble 1.4.2.9005
+
+- Export `tbl_df` as an S4 class (#436, @jeffreyhanson and @javierfajnolla).
+
 # tibble 1.4.2.9004
 
 - Subsetting one row retains columns for a matrix column.
