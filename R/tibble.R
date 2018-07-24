@@ -48,6 +48,7 @@
 #' tibble(x = tibble(1, 2, 3))
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
+#' @aliases tbl_df-class
 tibble <- function(...) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE))
