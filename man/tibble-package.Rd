@@ -8,13 +8,15 @@
 \if{html}{\figure{logo.png}{options: align='right'}}
 
 Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame.
+stricter checking and better formatting than the traditional data frame.
 }
 \details{
 The S3 class \code{tbl_df} wraps a local data frame. The main
 advantage to using a \code{tbl_df} over a regular data frame is the printing:
 tbl objects only print a few rows and all the columns that fit on one screen,
 describing the rest of it as text.
+
+See \link{tibble-options} for a list of package options.
 }
 \section{Methods}{
 
