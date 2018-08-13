@@ -23,11 +23,10 @@
 #' print(as_tibble(mtcars), n = 3)
 #' print(as_tibble(mtcars), n = 100)
 #'
-#' if (!requireNamespace("nycflights13", quietly = TRUE))
-#'   stop("Please install the nycflights13 package to run the rest of this example")
-#'
-#' print(nycflights13::flights, n_extra = 2)
-#' print(nycflights13::flights, width = Inf)
+#' if (requireNamespace("nycflights13", quietly = TRUE)) {
+#'   print(nycflights13::flights, n_extra = 2)
+#'   print(nycflights13::flights, width = Inf)
+#' }
 #' @name formatting
 NULL
 
