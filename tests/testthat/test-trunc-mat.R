@@ -17,6 +17,7 @@ test_that("print() returns output invisibly", {
 
 test_that("trunc_mat output matches known output", {
   skip_on_os("windows")
+  skip_if_not_installed("mockr")
 
   expect_output_file_rel(
     print_without_body(as_tibble(mtcars), n = 8L, width = 30L),
