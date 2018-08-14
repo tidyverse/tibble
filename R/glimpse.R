@@ -20,8 +20,9 @@
 #' @examples
 #' glimpse(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE))
+#' if (requireNamespace("nycflights13", quietly = TRUE)) {
 #'   glimpse(nycflights13::flights)
+#' }
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
 }
