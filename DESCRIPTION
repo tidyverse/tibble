@@ -19,7 +19,7 @@ Imports:
     crayon,
     methods,
     pillar (>= 1.2.3.9002),
-    rlang (>= 0.2.1.9000),
+    rlang (>= 0.2.2),
     utils
 Suggests: 
     covr,
@@ -35,7 +35,7 @@ Suggests:
 VignetteBuilder: knitr
 Remotes: 
     r-lib/pillar,
-    r-lib/rlang
+    r-lib/rlang@release-0.2.2
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
