@@ -208,8 +208,8 @@ test_that("error_inconsistent_cols()", {
       2:3
     ),
     bullets(
-      "All columns in a tibble must have consistent lengths:",
-      "Expected column length is 10 based on detection method",
+      "Tibble columns must have consistent lengths:",
+      "The required length is 10 (from detection method)",
       "Column `a` has length 2",
       "Column `b` has length 3"
     )
