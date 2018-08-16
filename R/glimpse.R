@@ -104,21 +104,3 @@ format_v.factor <- function(x) {
     format(x, trim = TRUE, justify = "none")
   }
 }
-
-# Copied from pillar, maybe need an interface for ticking names?
-tick_if_needed <- function(x) {
-  needs_ticks <- !is_syntactic(x)
-  x[needs_ticks] <- tick(x[needs_ticks])
-  x
-}
-
-is_syntactic <- function(x) {
-  ret <- make.names(x) == x
-  ret[is.na(x)] <- FALSE
-  ret
-}
-
-tick <- function(x) {
-  x[is.na(x)] <- "NA"
-  encodeString(x, quote = "`")
-}

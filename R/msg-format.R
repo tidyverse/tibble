@@ -1,8 +1,3 @@
-tick <- function(x) {
-  x[is.na(x)] <- "NA"
-  encodeString(x, quote = "`")
-}
-
 pluralise_msg <- function(message, objects) {
   paste0(
     pluralise(message, objects),
