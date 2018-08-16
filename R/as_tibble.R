@@ -205,37 +205,20 @@ as_tibble.default <- function(x, ...) {
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE, ...))
 }
 
+#' Deprecated coercion functions
+#'
+#' Use [as_tibble()] instead, but mind the new signature and semantics.
+#'
 #' @export
-#' @rdname as_tibble
-#' @usage NULL
-as.tibble <- function(x, ...) {
-  UseMethod("as_tibble")
-}
-
-#' @export
-#' @rdname as_tibble
-#' @usage NULL
+#' @keywords internal
 as_data_frame <- function(x, ...) {
-  UseMethod("as_data_frame")
+  .Deprecated("as_tibble")
+  as_tibble(x, ...)
 }
 
 #' @export
-as_data_frame.tbl_df <- as_tibble.tbl_df
-
-#' @export
-as_data_frame.data.frame <- as_tibble.data.frame
-
-#' @export
-as_data_frame.list <- as_tibble.list
-
-#' @export
-as_data_frame.matrix <- as_tibble.matrix
-
-#' @export
-as_data_frame.table <- as_tibble.table
-
-#' @export
-as_data_frame.NULL <- as_tibble.NULL
-
-#' @export
-as_data_frame.default <- as_tibble.default
+#' @rdname as_data_frame
+as.tibble <- function(x, ...) {
+  .Deprecated("as_tibble")
+  as_tibble(x, ...)
+}
