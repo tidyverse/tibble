@@ -1,3 +1,14 @@
+# tibble 1.4.2.9005
+
+- Export `tbl_df` as an S4 class (#436, @jeffreyhanson and @javierfajnolla).
+
+# tibble 1.4.2.9004
+
+- Subsetting one row retains columns for a matrix column.
+- Fix subsetting when the first column is a data frame or matrix column.
+- Fix `as_tibble()` examples by using correct argument names in `requireNamespace()` call (#424, @michaelweylandt).
+
+
 # tibble 1.4.2.9003
 
 - `tibble()` supports data frame and matrix columns (#416).

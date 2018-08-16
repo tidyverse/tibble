@@ -1,4 +1,5 @@
 #' @importFrom methods setOldClass
+#' @exportClass tbl_df
 setOldClass(c("tbl_df", "tbl", "data.frame"))
 
 # Standard data frame methods --------------------------------------------------
@@ -103,7 +104,7 @@ print.tbl_df <- print.tbl
         }
       }
       result <- map(result, subset_rows, i)
-      nr <- length(result[[1]])
+      nr <- NROW(result[[1]])
     }
   }
 
@@ -121,7 +122,7 @@ print.tbl_df <- print.tbl
 
 subset_rows <- function(x, i) {
   if (is.data.frame(x) || is.matrix(x)) {
-    x[i, ]
+    x[i, , drop = FALSE]
   } else {
     x[i]
   }

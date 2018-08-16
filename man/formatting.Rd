@@ -11,11 +11,13 @@
 \usage{
 \method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
-\method{format}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{format}{tbl_df}(x, ..., n = NULL, width = NULL,
+  n_extra = NULL)
 
 \method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
-\method{print}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{print}{tbl_df}(x, ..., n = NULL, width = NULL,
+  n_extra = NULL)
 
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
@@ -48,11 +50,10 @@ print(as_tibble(mtcars), n = 1)
 print(as_tibble(mtcars), n = 3)
 print(as_tibble(mtcars), n = 100)
 
-if (!requireNamespace("nycflights13", quietly = TRUE))
-  stop("Please install the nycflights13 package to run the rest of this example")
-
-print(nycflights13::flights, n_extra = 2)
-print(nycflights13::flights, width = Inf)
+if (requireNamespace("nycflights13", quietly = TRUE)) {
+  print(nycflights13::flights, n_extra = 2)
+  print(nycflights13::flights, width = Inf)
+}
 }
 \seealso{
 \link{tibble-package}

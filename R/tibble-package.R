@@ -7,6 +7,8 @@
 #' tbl objects only print a few rows and all the columns that fit on one screen,
 #' describing the rest of it as text.
 #'
+#' See [tibble-options] for a list of package options.
+#'
 #' @section Methods:
 #'
 #' `tbl_df` implements four important base methods:
