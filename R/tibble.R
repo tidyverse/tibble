@@ -59,7 +59,7 @@ tibble <- function(...) {
 #' @rdname tibble
 tibble_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())
-  tibble(!!! xs)
+  tibble(!!!xs)
 }
 
 #' @export

@@ -71,5 +71,5 @@ expand_lst <- function(output, i) {
 #' @rdname tibble
 lst_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!! xs)
+  lst(!!!xs)
 }

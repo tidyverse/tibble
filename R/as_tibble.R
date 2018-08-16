@@ -80,7 +80,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
     if (is.na(old_rownames[1])) {
       abort(error_as_tibble_needs_rownames())
     }
-    add_column(result, !! rownames := old_rownames, .before = 1L)
+    add_column(result, !!rownames := old_rownames, .before = 1L)
   }
 }
 

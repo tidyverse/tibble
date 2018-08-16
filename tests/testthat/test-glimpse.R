@@ -21,8 +21,10 @@ test_that("format_v for factor", {
   expect_equal(format_v(factor()), character())
   # Add quotes around factor levels with comma
   # so they don't appear as if they were two observations (GH 384)
-  expect_equal(format_v(factor(c("foo, bar", "foo", '"bar"'))),
-               paste0('"', c("foo, bar", "foo", "\\\"bar\\\""), '"'))
+  expect_equal(
+    format_v(factor(c("foo, bar", "foo", '"bar"'))),
+    paste0('"', c("foo, bar", "foo", "\\\"bar\\\""), '"')
+  )
 })
 
 test_that("format_v for list", {

@@ -75,7 +75,7 @@ rowid_to_column <- function(.data, var = "rowid") {
     abort(error_existing_names(var))
   }
 
-  new_df <- add_column(df, !! var := seq_len(nrow(df)), .before = 1)
+  new_df <- add_column(df, !!var := seq_len(nrow(df)), .before = 1)
   remove_rownames(new_df)
 }
 
