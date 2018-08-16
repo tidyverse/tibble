@@ -37,14 +37,17 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @param name A character vector representing names.
 #' @export
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
-  name[is.na(name)] <- ""
-  orig_name <- name
+  new_name <- na_to_empty(name)
+  new_name <- make_syntactic(new_name, syntactic)
+  new_name <- append_pos(new_name)
 
-  name <- make_syntactic(name, syntactic)
-  name <- append_pos(name)
+  describe_tidying(name, new_name, quiet)
+  new_name
+}
 
-  describe_tidying(orig_name, name, quiet)
-  name
+na_to_empty <- function(x) {
+  x[is.na(x)] <- ""
+  x
 }
 
 make_syntactic <- function(name, syntactic) {
@@ -73,11 +76,11 @@ append_pos <- function(name) {
 describe_tidying <- function(orig_name, name, quiet) {
   stopifnot(length(orig_name) == length(name))
   if (quiet) return()
-  new_names <- name != orig_name
+  new_names <- name != na_to_empty(orig_name)
   if (any(new_names)) {
     message(
       "New names:\n",
-      paste0(orig_name[new_names], " -> ", name[new_names], collapse = "\n")
+      paste0(tick_if_needed(orig_name[new_names]), " -> ", tick_if_needed(name[new_names]), collapse = "\n")
     )
   }
 }
