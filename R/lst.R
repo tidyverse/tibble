@@ -32,18 +32,20 @@ lst_quos <- function(xs, expand = FALSE) {
   col_names <- names2(xs)
   output <- list_len(n)
   names(output) <- character(n)
+  result <- output
 
   for (i in seq_len(n)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
+      result[[i]] <- res
       output[[i]] <- res
       if (expand) output <- expand_lst(output, i)
     }
     names(output)[i] <- col_names[[i]]
   }
 
-  output
+  set_names(result, names(output))
 }
 
 expand_lst <- function(output, i) {
@@ -59,11 +61,15 @@ expand_lst <- function(output, i) {
   }
 
   if (length(idx_to_fix) > 0L) {
-    ones <- rep(1L, length(output[[idx_boilerplate]]))
-    output[idx_to_fix] <- map(output[idx_to_fix], `[`, ones)
+    output[idx_to_fix] <- expand_vecs(output[idx_to_fix], length(output[[idx_boilerplate]]))
   }
 
   output
+}
+
+expand_vecs <- function(x, length) {
+  ones <- rep(1L, length)
+  map(x, `[`, ones)
 }
 
 #' @export

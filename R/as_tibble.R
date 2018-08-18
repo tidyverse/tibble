@@ -147,9 +147,9 @@ recycle_columns <- function(x) {
 
   max <- max(lengths[lengths != 1L], 0L)
 
-  short <- lengths == 1
-  if (max > 1L && any(short)) {
-    x[short] <- map(x[short], rep, max)
+  short <- which(lengths == 1)
+  if (has_length(short)) {
+    x[short] <- expand_vecs(x[short], max)
   }
 
   x
