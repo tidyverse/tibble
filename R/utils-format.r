@@ -96,7 +96,8 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   } else {
     header <- paste0(
       justify(
-        paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
+        paste0(names2(named_header), ":"),
+        right = FALSE, space = "\u00a0"
       ),
       # We add a space after the NBSP inserted by justify()
       # so that wrapping occurs at the right location for very narrow outputs
@@ -191,7 +192,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0("... ", x)
+    paste0(cli::symbol$ellipsis, " ", x)
   } else {
     character()
   }

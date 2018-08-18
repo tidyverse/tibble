@@ -53,7 +53,7 @@ bullets <- function(header, ...) {
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
     problems[[MAX_BULLETS]] <-
-      pluralise_n(paste0("... and ", n_more, " more problem(s)"), n_more)
+      pluralise_n(paste0(pre_dots("and "), n_more, " more problem(s)"), n_more)
     length(problems) <- MAX_BULLETS
   }
 
@@ -68,7 +68,7 @@ commas <- function(problems) {
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
     problems[[MAX_BULLETS]] <-
-      pluralise_n(paste0("... (and ", n_more, " more)"), n_more)
+      pluralise_n(paste0(pre_dots("(and "), n_more, " more)"), n_more)
     length(problems) <- MAX_BULLETS
   }
 

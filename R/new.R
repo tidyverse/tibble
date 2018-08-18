@@ -45,12 +45,19 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
     nrow <- guess$nrow
     nrow_set_method <- guess$method
   } else {
-    nrow_set_method <- "value of `nrow` argument"
+    nrow_set_method <- "`nrow`"
   }
   attr(x, "row.names") <- .set_row_names(nrow)
   #' The `new_tibble()` constructor makes sure that the `row.names` attribute
   #' is consistent with the data before returning.
-  validate_nrow(x, nrow_set_method)
+  # Validate column lengths, don't recycle
+  lengths <- map_int(x, NROW)
+  bad_len <- which(lengths != nrow)
+  if (has_length(bad_len)) {
+    abort(error_inconsistent_cols(
+      nrow, nrow_set_method, names(x)[bad_len], lengths[bad_len]
+    ))
+  }
 
   #' @details
   #' The `class` attribute of the returned object always consists of
@@ -77,30 +84,6 @@ update_tibble_attrs <- function(x, ...) {
   )
 
   x
-}
-
-guess_nrow <- function(x) {
-  if (!is.null(.row_names_info(x, 0L))) {
-    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
-  } else if (length(x) == 0) {
-    list(nrow = 0L, method = "detected empty list")
-  } else {
-    list(nrow = NROW(x[[1L]]), method = "length of first column")
-  }
-}
-
-validate_nrow <- function(x, nrow_set_method) {
-  # Validate column lengths, don't recycle
-  lengths <- map_int(x, NROW)
-  expected_nrow <- .row_names_info(x, 2L)
-  bad_len <- which(lengths != expected_nrow)
-  if (has_length(bad_len)) {
-    abort(error_inconsistent_cols(
-      expected_nrow, nrow_set_method, names(x)[bad_len], lengths[bad_len]
-    ))
-  }
-
-  invisible(x)
 }
 
 set_tibble_class <- function(x, subclass = NULL) {

@@ -101,8 +101,8 @@ error_time_column_must_be_posixct <- function(names) {
 
 error_inconsistent_cols <- function(expected_nrow, nrow_set_method, vars, vars_len) {
   bullets(
-    "All columns in a tibble must have consistent lengths:",
-    paste0("Expected column length is ", expected_nrow, " based on ", nrow_set_method),
+    "Tibble columns must have consistent lengths:",
+    paste0("The required length is ", expected_nrow, " (from ", nrow_set_method, ")"),
     paste0("Column ", tick(vars), " has length ", vars_len)
   )
 }

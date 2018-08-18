@@ -80,7 +80,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
     if (is.na(old_rownames[1])) {
       abort(error_as_tibble_needs_rownames())
     }
-    add_column(result, !! rownames := old_rownames, .before = 1L)
+    add_column(result, !!rownames := old_rownames, .before = 1L)
   }
 }
 
@@ -106,6 +106,67 @@ list_to_tibble <- function(x, validate) {
   x <- recycle_columns(x)
 
   new_tibble(x)
+}
+
+check_tibble <- function(x) {
+  # Names
+  names_x <- names2(x)
+  bad_name <- which(is.na(names_x) | names_x == "")
+  if (has_length(bad_name)) {
+    abort(error_column_must_be_named(bad_name))
+  }
+
+  dups <- which(duplicated(names_x))
+  if (has_length(dups)) {
+    abort(error_column_must_have_unique_name(names_x[dups]))
+  }
+
+  # Types
+  is_xd <- which(!map_lgl(x, is_1d))
+  if (has_length(is_xd)) {
+    classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
+    abort(error_column_must_be_vector(names_x[is_xd], classes))
+  }
+
+  x[] <- map(x, strip_dim)
+
+  posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
+  if (has_length(posixlt)) {
+    abort(error_time_column_must_be_posixct(names_x[posixlt]))
+  }
+
+  x
+}
+
+recycle_columns <- function(x) {
+  # Validate column lengths, allow recycling
+  lengths <- map_int(x, NROW)
+
+  # Shortcut if all columns have the same length (including zero length!)
+  if (all(lengths == lengths[1L])) return(x)
+
+  max <- max(lengths[lengths != 1L], 0L)
+
+  short <- which(lengths == 1)
+  if (has_length(short)) {
+    x[short] <- expand_vecs(x[short], max)
+  }
+
+  x
+}
+
+guess_nrow <- function(x) {
+  if (!is.null(.row_names_info(x, 0L))) {
+    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
+  } else if (length(x) == 0) {
+    list(nrow = 0L, method = "detected empty list")
+  } else {
+    col_lens <- map_int(x, NROW)
+    longest_cols <- names(col_lens)[col_lens == max(col_lens)]
+    list(nrow = max(map_int(x, NROW)),
+         method = paste("the longest", pluralise("column(s)", longest_cols),
+                        paste(tick(longest_cols), collapse = ",")))
+  }
 }
 
 #' @export
