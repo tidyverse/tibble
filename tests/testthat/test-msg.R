@@ -74,7 +74,7 @@ test_that("error_unknown_names()", {
     "Can't find columns `b`, `c` in `.data`."
   )
   expect_equal(
-    error_unknown_names(LETTERS),
+    unell(error_unknown_names(LETTERS)),
     "Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`."
   )
 })
@@ -89,7 +89,7 @@ test_that("error_existing_names()", {
     "Columns `b`, `c` already exist in `.data`."
   )
   expect_equal(
-    error_existing_names(LETTERS),
+    unell(error_existing_names(LETTERS)),
     "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`."
   )
 })
@@ -119,7 +119,7 @@ test_that("error_inconsistent_new_rows()", {
   )
 
   expect_equal(
-    error_inconsistent_new_rows(LETTERS),
+    unell(error_inconsistent_new_rows(LETTERS)),
     bullets(
       "New rows in `add_row()` must use columns that already exist:",
       "Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`."
@@ -137,7 +137,7 @@ test_that("error_column_must_be_named()", {
     "Columns 2, 3 must be named."
   )
   expect_equal(
-    error_column_must_be_named(seq_along(letters)),
+    unell(error_column_must_be_named(seq_along(letters))),
     "Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named."
   )
 })
@@ -152,7 +152,7 @@ test_that("error_column_must_have_unique_name()", {
     "Columns `b`, `c` must have unique names."
   )
   expect_equal(
-    error_column_must_have_unique_name(LETTERS),
+    unell(error_column_must_have_unique_name(LETTERS)),
     "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must have unique names."
   )
 })
@@ -194,7 +194,7 @@ test_that("error_time_column_must_be_posixct()", {
     "Columns `b`, `c` are dates/times and must be stored as POSIXct, not POSIXlt."
   )
   expect_equal(
-    error_time_column_must_be_posixct(LETTERS),
+    unell(error_time_column_must_be_posixct(LETTERS)),
     "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) are dates/times and must be stored as POSIXct, not POSIXlt."
   )
 })
@@ -263,7 +263,7 @@ test_that("error_duplicate_new_cols()", {
   )
 
   expect_equal(
-    error_duplicate_new_cols(LETTERS),
+    unell(error_duplicate_new_cols(LETTERS)),
     bullets(
       "Can't add duplicate columns with `add_column()`:",
       "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`."

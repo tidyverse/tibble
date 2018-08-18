@@ -1,6 +1,6 @@
 # A tibble: ?? x 5
 <body created by pillar>
-# ... with 5 variables:
+# … with 5 variables:
 #   Sepal.Length <dbl>,
 #   Sepal.Width <dbl>,
 #   Petal.Length <dbl>,

@@ -192,7 +192,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0("... ", x)
+    paste0(cli::symbol$ellipsis, " ", x)
   } else {
     character()
   }
