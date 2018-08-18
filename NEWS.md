@@ -1,3 +1,10 @@
+# tibble 1.4.2.9007
+
+- tibble() uses recycled values during construction but unrecycled values for validation.
+- tibble() is now faster for very wide tibbles.
+- Use `cli::symbol$ellipsis` instead of `"..."`, this affects `glimpse()` output (#403).
+
+
 # tibble 1.4.2.9006
 
 - Improve error message in column length checking logic (#456, @anhqle).
