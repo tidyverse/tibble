@@ -1,6 +1,9 @@
-# tibble 1.4.2.9005
+# tibble 1.4.2.9006
 
-- Export `tbl_df` as an S4 class (#436, @jeffreyhanson and @javierfajnolla).
+- Improve error message in column length checking logic (#456, @anhqle).
+- `tidy_names()` quotes variable names when reporting on repair (#407).
+- Avoid use of `stop()` in examples if packages are not installed (#453, @Enchufa2).
+- Add `exportClass(tbl_df)` to `NAMESPACE` for better S4 support (#436, @jeffreyhanson and @javierfajnolla).
 
 # tibble 1.4.2.9004
 
