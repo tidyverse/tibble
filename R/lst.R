@@ -52,7 +52,7 @@ expand_lst <- function(output, i) {
     if (NROW(output[[i]]) == 1L && NROW(output[[1L]]) != 1L) {
       idx_to_fix <- i
       idx_boilerplate <- 1L
-    } else if (NROW(output[[i]]) != 1L && all(map(output[seq2(1L, i - 1L)], NROW) == 1L)) {
+    } else if (NROW(output[[i]]) != 1L && NROW(output[[1L]]) == 1L) {
       idx_to_fix <- seq2(1L, i - 1L)
       idx_boilerplate <- i
     }
