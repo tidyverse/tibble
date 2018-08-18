@@ -128,9 +128,13 @@ turn_frame_data_into_tibble <- function(names, rest) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
 
+  if (length(frame_col) == 0) {
+    return(new_tibble(list(), nrow = 0))
+  }
+
   # Create a tbl_df and return it
   names(frame_col) <- names
-  new_tibble(frame_col)
+  new_tibble(frame_col, nrow = NROW(frame_col[[1]]))
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {

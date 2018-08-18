@@ -21,7 +21,7 @@ enframe <- function(x, name = "name", value = "value") {
     df <- list(names(x), unname(x))
   }
   names(df) <- c(name, value)
-  new_tibble(df)
+  new_tibble(df, nrow = length(x))
 }
 
 #' @rdname enframe
