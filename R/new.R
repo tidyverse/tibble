@@ -86,20 +86,6 @@ update_tibble_attrs <- function(x, ...) {
   x
 }
 
-guess_nrow <- function(x) {
-  if (!is.null(.row_names_info(x, 0L))) {
-    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
-  } else if (length(x) == 0) {
-    list(nrow = 0L, method = "detected empty list")
-  } else {
-    col_lens <- map_int(x, NROW)
-    longest_cols <- names(col_lens)[col_lens == max(col_lens)]
-    list(nrow = max(map_int(x, NROW)),
-         method = paste("the longest", pluralise("column(s)", longest_cols),
-                        paste(tick(longest_cols), collapse = ",")))
-  }
-}
-
 set_tibble_class <- function(x, subclass = NULL) {
   class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
   x
