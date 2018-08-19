@@ -10,6 +10,13 @@ test_that("can convert unnamed vector", {
   )
 })
 
+test_that("can convert unnamed list", {
+  expect_identical(
+    enframe(as.list(3:1)),
+    tibble(name = 1:3, value = as.list(3:1))
+  )
+})
+
 test_that("can convert named vector", {
   expect_identical(
     enframe(c(a = 2, b = 1)),
@@ -62,6 +69,13 @@ test_that("can deframe one-column data frame", {
   expect_identical(
     deframe(tibble(value = 3:1)),
     3:1
+  )
+})
+
+test_that("can deframe tibble with list column", {
+  expect_identical(
+    deframe(tibble(name = letters[1:3], value = as.list(3:1))),
+    setNames(as.list(3:1), nm = letters[1:3])
   )
 })
 
