@@ -41,6 +41,13 @@ test_that("can use custom names", {
   )
 })
 
+test_that("can enframe without names", {
+  expect_identical(
+    enframe(letters, name = NULL, value = "letter"),
+    tibble(letter = letters)
+  )
+})
+
 
 # deframe -----------------------------------------------------------------
 
@@ -48,5 +55,23 @@ test_that("can deframe two-column data frame", {
   expect_identical(
     deframe(tibble(name = letters[1:3], value = 3:1)),
     c(a = 3L, b = 2L, c = 1L)
+  )
+})
+
+test_that("can deframe one-column data frame", {
+  expect_identical(
+    deframe(tibble(value = 3:1)),
+    3:1
+  )
+})
+
+test_that("can deframe three-column data frame with warning", {
+  expect_warning(
+    expect_identical(
+      deframe(tibble(name = letters[1:3], value = 3:1, oops = 1:3)),
+      c(a = 3L, b = 2L, c = 1L)
+    ),
+    "one- or two-column",
+    fixed = TRUE
   )
 })

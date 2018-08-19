@@ -1,5 +1,12 @@
 context("msg")
 
+test_that("error_enframe_value_null()", {
+  expect_equal(
+    error_enframe_value_null(),
+    "The `value` argument to `enframe()` cannot be NULL."
+  )
+})
+
 test_that("error_unsupported_index()", {
   expect_equal(
     error_unsupported_index(raw()),

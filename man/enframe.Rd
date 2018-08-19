@@ -10,20 +10,24 @@ enframe(x, name = "name", value = "value")
 deframe(x)
 }
 \arguments{
-\item{x}{An atomic vector (for \code{enframe()}) or a data frame (for \code{deframe()})}
+\item{x}{An atomic vector (for \code{enframe()}) or a data frame with one or two columns
+(for \code{deframe()}).}
 
-\item{name, value}{Names of the columns that store the names and values}
+\item{name, value}{Names of the columns that store the names and values.
+If \code{name} is \code{NULL}, a one-column tibble is returned; \code{value} cannot be \code{NULL}.}
 }
 \value{
-A \link{tibble}
+A \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
+or one column (otherwise).
 }
 \description{
-\code{enframe()} converts named atomic vectors or lists to two-column
+\code{enframe()} converts named atomic vectors or lists to one- or two-column
 data frames.
 For unnamed vectors, the natural sequence is used as name column.
 
 \code{deframe()} converts two-column data frames to a named vector or list,
 using the first column as name and the second column as value.
+If the input has only one column, an unnamed vector is returned.
 }
 \examples{
 enframe(1:3)

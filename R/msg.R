@@ -14,6 +14,10 @@ invalid_df <- function(problem, vars) {
   )
 }
 
+error_enframe_value_null <- function() {
+  "The `value` argument to `enframe()` cannot be NULL."
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
 }
