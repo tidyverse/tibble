@@ -34,8 +34,7 @@ Suggests:
     withr
 VignetteBuilder: knitr
 Remotes: 
-    r-lib/pillar,
-    r-lib/rlang@release-0.2.2
+    r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
