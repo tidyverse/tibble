@@ -1,3 +1,10 @@
+# tibble 1.4.99.9001
+
+- Improve documentation and tests for `enframe()` to mention lists (#219).
+- Support one-column tibbles in `enframe()` and `deframe()` (#449).
+- Deprecate `as.tibble()` and `as_data_frame()`.
+
+
 # tibble 1.4.2.9007
 
 - tibble() uses recycled values during construction but unrecycled values for validation.
