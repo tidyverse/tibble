@@ -27,8 +27,10 @@
 #' @export
 #' @rdname tidy_names
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
-  new_names <- tidy_names(names2(x), syntactic, quiet)
-  set_names(x, new_names)
+  repair_info <- tidy_names(names2(x), syntactic, quiet)
+  x <- set_names(x, repair_info)
+  attr(x, "repair_info") <- repair_info
+  x
 }
 
 #' @description
@@ -41,8 +43,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   new_name <- make_syntactic(new_name, syntactic)
   new_name <- append_pos(new_name)
 
-  describe_tidying(name, new_name, quiet)
-  new_name
+  new_repair_info(name, new_name)
 }
 
 na_to_empty <- function(x) {
@@ -72,16 +73,43 @@ append_pos <- function(name) {
   name
 }
 
-describe_tidying <- function(orig_name, name, quiet) {
-  stopifnot(length(orig_name) == length(name))
-  if (quiet) return()
-  new_names <- name != na_to_empty(orig_name)
-  if (any(new_names)) {
-    message(
-      "New names:\n",
-      paste0(tick_if_needed(orig_name[new_names]), " -> ", tick_if_needed(name[new_names]), collapse = "\n")
-    )
+new_repair_info <- function(orig_name, name) {
+  info <- set_names(name, orig_name)
+  structure(info, class = "tibble_repair_info")
+}
+
+#' @export
+print.tibble_repair_info <- function(x, ..., n = 6, full = FALSE) {
+  cat(format(x, ..., n = n, full = full), sep = "\n")
+  invisible(x)
+}
+
+#' @export
+format.tibble_repair_info <- function(x, ..., n = 6, full = FALSE) {
+  changed <- is.na(names(x)) | names(x) != x
+  if (full) {
+    report <- rep_along(changed, TRUE)
+  } else {
+    report <- changed
   }
+
+  report <- which(report)
+  if (length(report) > n) {
+    arrows <- report[seq_len(n - 1)]
+  } else {
+    arrows <- report
+  }
+
+  if (length(report) == 0) {
+    return(pluralise(paste0("<", length(x), " name(s) unchanged>"), x))
+  }
+
+  ret <- paste0(tick_if_needed(names(x)[arrows]), " -> ", tick_if_needed(x[arrows]))
+  missing <- length(report) - length(arrows)
+  if (missing > 0) {
+    ret <- c(ret, paste0(cli::symbol$ellipsis, " and ", missing, " more"))
+  }
+  ret
 }
 
 #' @rdname tidy_names
