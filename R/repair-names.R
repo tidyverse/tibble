@@ -53,7 +53,6 @@ na_to_empty <- function(x) {
 make_syntactic <- function(name, syntactic) {
   if (!syntactic) return(name)
 
-  blank <- name == ""
   fix_syntactic <- (name != "") & !is_syntactic(name)
   name[fix_syntactic] <- make.names(name[fix_syntactic])
   name
