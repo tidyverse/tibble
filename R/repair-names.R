@@ -18,9 +18,12 @@
 #' set_tidy_names(mtcars)
 #'
 #' # By default, all rename operations are printed to the console:
-#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
-#'                  validate = FALSE)
+#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"), .tidy_names = FALSE)
 #' set_tidy_names(tbl)
+#'
+#' # Alternatively, use tidy_names() to assign the result manually:
+#' new_names <- tidy_names(names(tbl))
+#' rlang::set_names(tbl, new_names)
 #'
 #' # Optionally, names can be made syntactic:
 #' tidy_names("a b", syntactic = TRUE)
@@ -34,6 +37,9 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @description
 #' `tidy_names()` is the workhorse behind `set_tidy_names()`, it treats the
 #' argument as a string to be used to name a data frame or a vector.
+#' To make the rename information available to callers, call `tidy_names()`
+#' and assign the result via [names()] or [rlang::set_names()].
+#'
 #' @param name A character vector representing names.
 #' @export
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
@@ -41,7 +47,10 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   new_name <- make_syntactic(new_name, syntactic)
   new_name <- append_pos(new_name)
 
-  describe_tidying(name, new_name, quiet)
+  if (!quiet) {
+    describe_tidying(name, new_name)
+  }
+
   new_name
 }
 
@@ -72,15 +81,17 @@ append_pos <- function(name) {
   name
 }
 
-describe_tidying <- function(orig_name, name, quiet) {
+describe_tidying <- function(orig_name, name) {
   stopifnot(length(orig_name) == length(name))
-  if (quiet) return()
+
   new_names <- name != na_to_empty(orig_name)
   if (any(new_names)) {
-    message(
-      "New names:\n",
-      paste0(tick_if_needed(orig_name[new_names]), " -> ", tick_if_needed(name[new_names]), collapse = "\n")
+    msg <- bullets(
+      "New names:",
+      paste0(tick_if_needed(orig_name[new_names]), " -> ", tick_if_needed(name[new_names])),
+      .problem = ""
     )
+    message(msg)
   }
 }
 

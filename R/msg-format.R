@@ -47,13 +47,13 @@ pluralise_n <- function(message, n) {
   message
 }
 
-bullets <- function(header, ...) {
+bullets <- function(header, ..., .problem = " problem(s)") {
   problems <- c(...)
   MAX_BULLETS <- 6L
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
     problems[[MAX_BULLETS]] <-
-      pluralise_n(paste0(pre_dots("and "), n_more, " more problem(s)"), n_more)
+      pluralise_n(paste0(pre_dots("and "), n_more, " more", .problem), n_more)
     length(problems) <- MAX_BULLETS
   }
 

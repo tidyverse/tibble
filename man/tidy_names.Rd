@@ -38,6 +38,8 @@ are reorganized.
 
 \code{tidy_names()} is the workhorse behind \code{set_tidy_names()}, it treats the
 argument as a string to be used to name a data frame or a vector.
+To make the rename information available to callers, call \code{tidy_names()}
+and assign the result via \code{\link[=names]{names()}} or \code{\link[rlang:set_names]{rlang::set_names()}}.
 
 \code{repair_names()} is an older version with different renaming heuristics,
 kept for backward compatibility.  New code should prefer \code{tidy_names()}.
@@ -51,9 +53,12 @@ set_tidy_names(list(3, 4, 5))
 set_tidy_names(mtcars)
 
 # By default, all rename operations are printed to the console:
-tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
-                 validate = FALSE)
+tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"), .tidy_names = FALSE)
 set_tidy_names(tbl)
+
+# Alternatively, use tidy_names() to assign the result manually:
+new_names <- tidy_names(names(tbl))
+rlang::set_names(tbl, new_names)
 
 # Optionally, names can be made syntactic:
 tidy_names("a b", syntactic = TRUE)
