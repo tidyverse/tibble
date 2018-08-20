@@ -4,9 +4,23 @@
 
 The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` constructor, have undergone a major overhaul to improve consistency.  We suspect that package code will be affected more than analysis code.
 
-- All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`.
+- All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`, passing `n` unnamed still works (with a warning).
 
-- The new `.rows` argument to `tibble()` and `as_tibble()` allows specifying the expected number of rows explicitly, even if it's evident from the data.  This allows writing more defensive code.  The `nrow` argument to `new_tibble()` is now mandatory.
+- The `nrow` argument to `new_tibble()` is now mandatory.
+
+- Checking names in `as_tibble()` is enabled by default, even for tibbles. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+
+- Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
+
+- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and forward to `as_tibble()`, with a warning.
+
+- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.     Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
+
+
+
+## New features
+
+- The new `.rows` argument to `tibble()` and `as_tibble()` allows specifying the expected number of rows explicitly, even if it's evident from the data.  This allows writing more defensive code.
 
 - Tibbles are now allowed to carry duplicate, empty or `NA` names, but checking is enabled by default, even when passing tibbles to `as_tibble()`. The new `.tidy_names` argument to `tibble()` and `as_tibble()` controls renaming:
 
@@ -29,15 +43,9 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
     
     The old default can be restored by calling `pkgconfig::set_config("tibble::rownames", NA)`, this also works for packages that import _tibble_.
     
-- Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
-
-- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and forward to `as_tibble()`, with a warning.
-
 - `new_tibble()` and `as_tibble()` now also strip the `"dim"` attribute from columns that are one-dimensional arrays. (`tibble()` already did this before.)
 
 - Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.tidy_names` can be used for all inputs.  We suggest that your implementations of this method do the same.
-
-- The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.
 
 
 # tibble 1.4.99.9002
