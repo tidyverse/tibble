@@ -17,6 +17,7 @@ test_that("print() returns output invisibly", {
 
 test_that("trunc_mat output matches known output", {
   skip_on_os("windows")
+  skip_if_not_installed("mockr")
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
 
