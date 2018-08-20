@@ -1,3 +1,8 @@
+# tibble 1.4.99.9002
+
+- Use `fansi::strwrap_ctl()` instead of own string wrapping routine.
+
+
 # tibble 1.4.99.9001
 
 - Improve documentation and tests for `enframe()` to mention lists (#219).
