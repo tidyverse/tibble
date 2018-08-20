@@ -79,7 +79,6 @@
   </a>
 </li>
       </ul>
-      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -118,9 +117,9 @@ with quasiquotation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.tidy_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>data_frame</span>(<span class='no'>...</span>)
+<span class='fu'>data_frame</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.tidy_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
@@ -133,6 +132,21 @@ with quasiquotation.</p>
 so you can refer to previously created variables.  These arguments are
 processed with <code><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
 unquote-splice via <code>!!!</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.rows</th>
+      <td><p>The number of rows, useful to create a 0-column tibble or
+just as an additional check.</p></td>
+    </tr>
+    <tr>
+      <th>.tidy_names</th>
+      <td><p>Treatment of invalid or duplicate column names:</p><ul>
+<li><p><code>NULL</code>: default, throw an error if there are any missing or duplicated names,</p></li>
+<li><p><code>FALSE</code>: deliberately request a tibble with invalid names,</p></li>
+<li><p><code>TRUE</code>: apply <code><a href='tidy_names.html'>tidy_names()</a></code> to the names,</p></li>
+<li><p>a function: apply custom name repair (e.g., <code>.tidy_names = make.names</code>
+to get base R equivalence).</p></li>
+</ul></td>
     </tr>
     </table>
     
@@ -193,7 +207,7 @@ a data frame.</p></div>
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quotes and formulas</span>
-<span class='fu'>tibble</span>(!!! <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'>tibble</span>(!!!<span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
 #&gt;  1     1     2

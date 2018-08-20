@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Row-wise tibble creation — tribble • tibble</title>
+<title>Deprecated coercion functions — as_data_frame • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,77 +89,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Row-wise tibble creation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tribble.R'><code>R/tribble.R</code></a></small>
-    <div class="hidden name"><code>tribble.Rd</code></div>
+    <h1>Deprecated coercion functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/as_tibble.R'><code>R/as_tibble.R</code></a></small>
+    <div class="hidden name"><code>as_data_frame.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create <a href='tibble.html'>tibble</a>s using an easier to read row-by-row layout.
-This is useful for small tables of data where readability is
-important.  Please see <a href='tibble-package.html'>tibble-package</a> for a general introduction.</p>
+    <p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> instead, but mind the new signature and semantics.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tribble</span>(<span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments specifying the structure of a <code>tibble</code>.
-Variable names should be formulas, and may only appear before the
-data. These arguments support <a href='http://www.rdocumentation.org/packages/rlang/topics/tidy-dots'>tidy dots</a>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='fu'>as_data_frame</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-    <p>A <a href='tibble.html'>tibble</a>.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+<span class='fu'>as.tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+        
 
-    <p><code>frame_data()</code> is an older name for <code>tribble()</code>. It will eventually
-be phased out.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>tribble</span>(
-  ~<span class='no'>colA</span>, ~<span class='no'>colB</span>,
-  <span class='st'>"a"</span>,   <span class='fl'>1</span>,
-  <span class='st'>"b"</span>,   <span class='fl'>2</span>,
-  <span class='st'>"c"</span>,   <span class='fl'>3</span>
-)</div><div class='output co'>#&gt; # A tibble: 3 x 2
-#&gt;   colA   colB
-#&gt;   &lt;chr&gt; &lt;dbl&gt;
-#&gt; 1 a         1
-#&gt; 2 b         2
-#&gt; 3 c         3</div><div class='input'>
-<span class='co'># tribble will create a list column if the value in any cell is</span>
-<span class='co'># not a scalar</span>
-<span class='fu'>tribble</span>(
-  ~<span class='no'>x</span>,  ~<span class='no'>y</span>,
-  <span class='st'>"a"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>,
-  <span class='st'>"b"</span>, <span class='fl'>4</span>:<span class='fl'>6</span>
-)</div><div class='output co'>#&gt; # A tibble: 2 x 2
-#&gt;   x     y        
-#&gt;   &lt;chr&gt; &lt;list&gt;   
-#&gt; 1 a     &lt;int [3]&gt;
-#&gt; 2 b     &lt;int [3]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
