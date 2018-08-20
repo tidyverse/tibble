@@ -66,4 +66,5 @@ Collate:
     'type-sum.r'
     'utils-format.r'
     'utils.r'
+    'view.R'
     'wrap.R'
