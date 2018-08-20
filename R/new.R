@@ -6,64 +6,75 @@
 #'
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
-#' @param nrow The number of rows, guessed from the data by default
+#' @param nrow The number of rows, required
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
 #' @examples
-#' new_tibble(list(a = 1:3, b = 4:6))
-#'
-#' # One particular situation where the nrow argument is essential:
-#' new_tibble(list(), nrow = 150, subclass = "my_tibble")
-#'
-#' # It's safest to always pass it along:
+#' # The nrow argument is always required:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
-#' # All columns must be the same length:
-#' try(new_tibble(list(a = 1:3, b = 4:5)))
+#' # Existing row.names attributes are ignored:
+#' try(new_tibble(iris, nrow = 3))
 #'
-#' # The length must be consistent with the nrow argument if available:
+#' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' @details
-  #' `x` must be a named (or empty) list, but the names are not currently
-  #' checked for correctness.
+  #' `x` must be a list.
   stopifnot(is.list(x))
-  if (length(x) == 0) names(x) <- character()
-  stopifnot(has_nonnull_names(x))
 
   #' @details
   #' The `...` argument allows adding more attributes to the subclass.
   x <- update_tibble_attrs(x, ...)
 
   #' @details
-  #' The `row.names` attribute will be computed from the `nrow` argument,
+  #' The `new_tibble()` constructor requires an `nrow` argument.
+  if (is.null(nrow)) {
+    abort(error_new_tibble_needs_nrow())
+  }
+  #' It makes sure that the `row.names` attribute
+  #' is consistent with the data before returning.
+  validate_nrow(names(x), col_lengths(x), nrow)
+
+  new_valid_tibble(x, nrow, subclass)
+}
+
+#' @rdname new_tibble
+#' @usage NULL
+new_valid_tibble <- function(x, nrow, subclass = NULL) {
+  #' @details
+  #' `x` must have names (or be empty),
+  #' but the names are not checked for correctness.
+  if (length(x) == 0) names(x) <- character()
+  stopifnot(has_nonnull_names(x))
+
+  #' @details
+  #' 1d arrays are always converted to vectors.
+  x[] <- map(x, strip_dim)
+
+  #' @details
+  #' The `row.names` attribute will be created from the `nrow` argument,
   #' overriding any existing attribute of this name in `x` or in the `...`
   #' arguments.
-  #' If `nrow` is `NULL`, the number of rows will be guessed from the data.
-  if (is.null(nrow)) {
-    guess <- guess_nrow(x)
-    nrow <- guess$nrow
-    nrow_set_method <- guess$method
-  } else {
-    nrow_set_method <- "`nrow`"
-  }
   attr(x, "row.names") <- .set_row_names(nrow)
-  #' The `new_tibble()` constructor makes sure that the `row.names` attribute
-  #' is consistent with the data before returning.
-  # Validate column lengths, don't recycle
-  lengths <- map_int(x, NROW)
-  bad_len <- which(lengths != nrow)
-  if (has_length(bad_len)) {
-    abort(error_inconsistent_cols(
-      nrow, nrow_set_method, names(x)[bad_len], lengths[bad_len]
-    ))
-  }
 
   #' @details
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
   set_tibble_class(x, subclass)
+}
+
+col_lengths <- function(x) {
+  map_int(x, NROW)
+}
+
+validate_nrow <- function(names, lengths, nrow) {
+  # Validate column lengths, don't recycle
+  bad_len <- which(lengths != nrow)
+  if (has_length(bad_len)) {
+    abort(error_inconsistent_cols(nrow, names, lengths))
+  }
 }
 
 update_tibble_attrs <- function(x, ...) {

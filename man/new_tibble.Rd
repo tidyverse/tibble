@@ -2,6 +2,7 @@
 % Please edit documentation in R/new.R
 \name{new_tibble}
 \alias{new_tibble}
+\alias{new_valid_tibble}
 \title{Constructor}
 \usage{
 new_tibble(x, ..., nrow = NULL, subclass = NULL)
@@ -11,7 +12,7 @@ new_tibble(x, ..., nrow = NULL, subclass = NULL)
 
 \item{...}{Passed on to \code{\link[=structure]{structure()}}}
 
-\item{nrow}{The number of rows, guessed from the data by default}
+\item{nrow}{The number of rows, required}
 
 \item{subclass}{Subclasses to assign to the new object, default: none}
 }
@@ -21,34 +22,34 @@ This function is mostly useful for package authors that implement subclasses
 of a tibble, like \pkg{sf} or \pkg{tibbletime}.
 }
 \details{
-\code{x} must be a named (or empty) list, but the names are not currently
-checked for correctness.
+\code{x} must be a list.
 
 The \code{...} argument allows adding more attributes to the subclass.
 
-The \code{row.names} attribute will be computed from the \code{nrow} argument,
+The \code{new_tibble()} constructor requires an \code{nrow} argument.
+It makes sure that the \code{row.names} attribute
+is consistent with the data before returning.
+
+\code{x} must have names (or be empty),
+but the names are not checked for correctness.
+
+1d arrays are always converted to vectors.
+
+The \code{row.names} attribute will be created from the \code{nrow} argument,
 overriding any existing attribute of this name in \code{x} or in the \code{...}
 arguments.
-If \code{nrow} is \code{NULL}, the number of rows will be guessed from the data.
-The \code{new_tibble()} constructor makes sure that the \code{row.names} attribute
-is consistent with the data before returning.
 
 The \code{class} attribute of the returned object always consists of
 \code{c("tbl_df", "tbl", "data.frame")}. If the \code{subclass} argument is set,
 it will be prepended to that list of classes.
 }
 \examples{
-new_tibble(list(a = 1:3, b = 4:6))
-
-# One particular situation where the nrow argument is essential:
-new_tibble(list(), nrow = 150, subclass = "my_tibble")
-
-# It's safest to always pass it along:
+# The nrow argument is always required:
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
-# All columns must be the same length:
-try(new_tibble(list(a = 1:3, b = 4:5)))
+# Existing row.names attributes are ignored:
+try(new_tibble(iris, nrow = 3))
 
-# The length must be consistent with the nrow argument if available:
+# The length of all columns must be consistent with the nrow argument:
 try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 }

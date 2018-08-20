@@ -10,9 +10,9 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(...)
+tibble(..., .rows = NULL, .tidy_names = NULL)
 
-data_frame(...)
+data_frame(..., .rows = NULL, .tidy_names = NULL)
 
 lst(...)
 }
@@ -20,7 +20,19 @@ lst(...)
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created variables.  These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{!!} and
-unquote-splice via \code{!!!}.}
+unquote-splice via \code{\link{!!!}}.}
+
+\item{.rows}{The number of rows, useful to create a 0-column tibble or
+just as an additional check.}
+
+\item{.tidy_names}{Treatment of invalid or duplicate column names:
+\itemize{
+\item \code{NULL}: default, throw an error if there are any missing or duplicated names,
+\item \code{FALSE}: deliberately request a tibble with invalid names,
+\item \code{TRUE}: apply \code{\link[=tidy_names]{tidy_names()}} to the names,
+\item a function: apply custom name repair (e.g., \code{.tidy_names = make.names}
+to get base R equivalence).
+}}
 }
 \description{
 \code{tibble()} is a trimmed down version of \code{\link[=data.frame]{data.frame()}} that:
@@ -62,7 +74,7 @@ str(tibble(x = list(diag(1), diag(2))))
 tibble(`a + b` = 1:5)
 
 # You can splice-unquote a list of quotes and formulas
-tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
 # data frames can only contain 1d atomic vectors and lists
 # and can not contain POSIXlt

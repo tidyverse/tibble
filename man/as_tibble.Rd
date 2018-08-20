@@ -2,62 +2,87 @@
 % Please edit documentation in R/as_tibble.R
 \name{as_tibble}
 \alias{as_tibble}
-\alias{as_tibble.tbl_df}
 \alias{as_tibble.data.frame}
 \alias{as_tibble.list}
 \alias{as_tibble.matrix}
 \alias{as_tibble.table}
 \alias{as_tibble.NULL}
 \alias{as_tibble.default}
-\title{Coerce lists and matrices to data frames}
+\title{Coerce vectors, lists, and matrices to data frames}
 \usage{
-as_tibble(x, ...)
+as_tibble(x, ..., .rows = NULL, .tidy_names = NULL,
+  rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{tbl_df}(x, ..., validate = FALSE, rownames = NULL)
+\method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
+  .tidy_names = if (validate) NULL else FALSE,
+  rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{data.frame}(x, validate = TRUE, ..., rownames = NA)
+\method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
+  .tidy_names = if (validate) NULL else FALSE)
 
-\method{as_tibble}{list}(x, validate = TRUE, ...)
+\method{as_tibble}{matrix}(x, ...)
 
-\method{as_tibble}{matrix}(x, ..., rownames = NULL)
-
-\method{as_tibble}{table}(x, n = "n", ...)
+\method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`)
 
 \method{as_tibble}{NULL}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
 }
 \arguments{
-\item{x}{A list. Each element of the list must have the same length.}
+\item{x}{A vector, list, or matrix. If a list, each element must have the same length.}
 
 \item{...}{Other arguments passed on to individual methods.}
 
-\item{validate}{When \code{TRUE}, verifies that the input is a valid data
-frame (i.e. all columns are named, and are 1d vectors or lists). You may
-want to suppress this when you know that you already have a valid data
-frame and you want to save some time, or to explicitly enable it
-if you have a tibble that you want to re-check.}
+\item{.rows}{The number of rows, useful to create a 0-column tibble or
+just as an additional check.}
 
-\item{rownames}{If \code{NULL}, remove row names (default for matrices, may become
-default for data frames in the future). If \code{NA}, keep row names (current
-default for data frames). Otherwise, the name of the new column that will
-contain the existing row names.}
+\item{.tidy_names}{Treatment of invalid or duplicate column names:
+\itemize{
+\item \code{NULL}: default, throw an error if there are any missing or duplicated names,
+\item \code{FALSE}: deliberately request a tibble with invalid names,
+\item \code{TRUE}: apply \code{\link[=tidy_names]{tidy_names()}} to the names,
+\item a function: apply custom name repair (e.g., \code{.tidy_names = make.names}
+to get base R equivalence).
+}}
+
+\item{rownames}{Treatment of existing row names (for data frames and matrices):
+\itemize{
+\item \code{NULL}: remove row names
+\item \code{NA}: keep row names (default, for compatibility; will issue a warning if row names
+are present in the input).
+\item A string: the name of the new column that will contain the existing row names,
+which are no longer present in the result.
+}}
 
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
+This is an S3 generic. Methods are included for:
+\itemize{
+\item data frames (adds \code{"tbl_df"} classes)
+\item tibbles (returns unchanged input)
+\item lists and vectors (treats each element as a column)
+\item matrices
+\item tables
+\item default (coerces to a list)
+}
+}
+\details{
+Vectors and unknown input is coerced to a list (unlike \code{as.data.frame()}):
+for vectors, the returned tibble has as many columns as the vector has
+elements.
+
 \code{\link[=as.data.frame]{as.data.frame()}} is effectively a thin wrapper around \code{data.frame},
 and hence is rather slow (because it calls \code{\link[=data.frame]{data.frame()}} on each element
 before \link{cbind}ing together). \code{as_tibble} is a new S3 generic
 with more efficient methods for matrices and data frames.
-}
-\details{
-This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-classes), tibbles (returns unchanged input), lists, matrices, and tables.
-Other types are first coerced via \code{as.data.frame()} with
-\code{stringsAsFactors = FALSE}.
 
-\code{as_data_frame} and \code{as.tibble} are aliases.
+The default behavior is to silently remove row names.
+New code should explicitly convert row names to a new column using the \code{rownames}
+argument.
+For existing code that relies on row names remaining, call
+\code{pkgconfig::set_config("tibble::rownames" = NA)} in your script or in your package's
+\code{\link[=.onLoad]{.onLoad()}}  function.
 }
 \examples{
 l <- list(x = 1:500, y = runif(500), z = 500:1)
@@ -66,6 +91,8 @@ df <- as_tibble(l)
 m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
+
+as_tibble(1:3, .tidy_names = TRUE)
 
 # as_tibble is considerably simpler than as.data.frame
 # making it more suitable for use when you have things that are
@@ -90,4 +117,9 @@ if (requireNamespace("microbenchmark", quietly = TRUE)) {
   )
 }
 }
+}
+\seealso{
+\code{\link[=enframe]{enframe()}} converts a vector to a data frame with values in rows.
+
+\code{\link[pkgconfig:set_config]{pkgconfig::set_config()}}
 }

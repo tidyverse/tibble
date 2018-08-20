@@ -20,7 +20,15 @@
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.  These arguments are
 #'   processed with [rlang::quos()] and support unquote via `!!` and
-#'   unquote-splice via `!!!`.
+#'   unquote-splice via [`!!!`].
+#' @param .rows The number of rows, useful to create a 0-column tibble or
+#'   just as an additional check.
+#' @param .tidy_names Treatment of invalid or duplicate column names:
+#'   - `NULL`: default, throw an error if there are any missing or duplicated names,
+#'   - `FALSE`: deliberately request a tibble with invalid names,
+#'   - `TRUE`: apply [tidy_names()] to the names,
+#'   - a function: apply custom name repair (e.g., `.tidy_names = make.names`
+#'     to get base R equivalence).
 #' @seealso [as_tibble()] to turn an existing list into
 #'   a data frame.
 #' @export
@@ -40,7 +48,7 @@
 #' tibble(`a + b` = 1:5)
 #'
 #' # You can splice-unquote a list of quotes and formulas
-#' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+#' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
 #' # data frames can only contain 1d atomic vectors and lists
 #' # and can not contain POSIXlt
@@ -49,9 +57,9 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 #' @aliases tbl_df-class
-tibble <- function(...) {
+tibble <- function(..., .rows = NULL, .tidy_names = NULL) {
   xs <- quos(..., .named = TRUE)
-  as_tibble(lst_quos(xs, expand = TRUE))
+  as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .tidy_names = .tidy_names)
 }
 
 #' @export

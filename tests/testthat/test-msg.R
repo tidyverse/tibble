@@ -207,27 +207,33 @@ test_that("error_time_column_must_be_posixct()", {
 })
 
 test_that("error_inconsistent_cols()", {
+  skip("msg")
+
   expect_equal(
     error_inconsistent_cols(
       10,
-      "detection method",
-      c("a", "b"),
-      2:3
+      letters[1:3],
+      c(4, 4, 3)
     ),
     bullets(
       "Tibble columns must have consistent lengths:",
-      "The required length is 10 (from detection method)",
-      "Column `a` has length 2",
-      "Column `b` has length 3"
+      "Required length: 10",
+      "Length 4: Columns `a`, `b`",
+      "Length 3: Column `c`"
     )
   )
 
   expect_equal(
-    error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4)),
+    error_inconsistent_cols(
+      10,
+      letters[1:3],
+      c(2, 2, 3)
+    ),
     bullets(
-      "New columns in `add_column()` must be consistent with `.data`:",
-      "`.data` has 1 row",
-      "New columns contribute 3 rows"
+      "Tibble columns must have consistent lengths:",
+      "Requi",
+      "Column `a` has length 2",
+      "Column `b` has length 3"
     )
   )
 })
@@ -352,5 +358,19 @@ test_that("error_frame_matrix_list()", {
       "All values in `frame_matrix()` must be atomic:",
       "Found list-valued elements at positions 2, 3, 4."
     )
+  )
+})
+
+test_that("error_tidy_names_arg()", {
+  expect_equal(
+    error_tidy_names_arg(),
+    "The `.tidy_names` argument must be NULL, TRUE, FALSE, or a function."
+  )
+})
+
+test_that("error_new_tibble_needs_nrow()", {
+  expect_equal(
+    error_new_tibble_needs_nrow(),
+    "Must pass a non-NULL `nrow` argument to `new_tibble()`."
   )
 })

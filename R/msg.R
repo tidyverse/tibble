@@ -103,11 +103,18 @@ error_time_column_must_be_posixct <- function(names) {
   invalid_df("[is](are) [a ]date(s)/time(s) and must be stored as POSIXct, not POSIXlt", names)
 }
 
-error_inconsistent_cols <- function(expected_nrow, nrow_set_method, vars, vars_len) {
+error_inconsistent_cols <- function(.rows, vars, vars_len) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
   bullets(
     "Tibble columns must have consistent lengths:",
-    paste0("The required length is ", expected_nrow, " (from ", nrow_set_method, ")"),
-    paste0("Column ", tick(vars), " has length ", vars_len)
+    if (!is.null(.rows)) paste0("Requested length: ", .rows),
+    map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
   )
 }
 
@@ -178,4 +185,12 @@ error_frame_matrix_list <- function(pos) {
     "All values in `frame_matrix()` must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   )
+}
+
+error_tidy_names_arg <- function() {
+  "The `.tidy_names` argument must be NULL, TRUE, FALSE, or a function."
+}
+
+error_new_tibble_needs_nrow <- function() {
+  "Must pass a non-NULL `nrow` argument to `new_tibble()`."
 }

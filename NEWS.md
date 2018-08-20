@@ -1,3 +1,45 @@
+# tibble 1.4.99.9003
+
+## Breaking changes
+
+The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` constructor, have undergone a major overhaul to improve consistency.  We suspect that package code will be affected more than analysis code.
+
+- All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`.
+
+- The new `.rows` argument to `tibble()` and `as_tibble()` allows specifying the expected number of rows explicitly, even if it's evident from the data.  This allows writing more defensive code.  The `nrow` argument to `new_tibble()` is now mandatory.
+
+- Tibbles are now allowed to carry duplicate, empty or `NA` names, but checking is enabled by default, even when passing tibbles to `as_tibble()`. The new `.tidy_names` argument to `tibble()` and `as_tibble()` controls renaming:
+
+    - `NULL`: default, throw an error if there are any missing or duplicated names,
+    - `FALSE`: deliberately request a tibble with invalid names,
+    - `TRUE`: apply `tidy_names()` to the names,
+    - a function: apply custom name repair (e.g., `.tidy_names = make.names`
+      to get base R equivalence).
+    
+    Non-syntactic names will not be changed even with `.tidy_names = TRUE`, but might be when using a custom name repair such as `make.names`.
+    
+    The `validate` argument is deprecated but supported (with a warning).
+
+- Row name handling is stricter.  Row names are never (and never were) supported in `tibble()` and `new_tibble()`, and are now stripped by default in `as_tibble()`. The `rownames` argument to `as_tibble()` supports:
+
+    - `NULL`: remove row names (default),
+    - `NA`: keep row names,
+    - A string: the name of the new column that will contain the existing row names,
+      which are no longer present in the result.
+    
+    The old default can be restored by calling `pkgconfig::set_config("tibble::rownames", NA)`, this also works for packages that import _tibble_.
+    
+- Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
+
+- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and forward to `as_tibble()`, with a warning.
+
+- `new_tibble()` and `as_tibble()` now also strip the `"dim"` attribute from columns that are one-dimensional arrays. (`tibble()` already did this before.)
+
+- Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.tidy_names` can be used for all inputs.  We suggest that your implementations of this method do the same.
+
+- The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.
+
+
 # tibble 1.4.99.9002
 
 - Use `fansi::strwrap_ctl()` instead of own string wrapping routine.

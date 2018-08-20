@@ -1,28 +1,43 @@
-#' Coerce lists and matrices to data frames
+#' Coerce vectors, lists, and matrices to data frames
+#'
+#' This is an S3 generic. Methods are included for:
+#' - data frames (adds `"tbl_df"` classes)
+#' - tibbles (returns unchanged input)
+#' - lists and vectors (treats each element as a column)
+#' - matrices
+#' - tables
+#' - default (coerces to a list)
+#'
+#' Vectors and unknown input is coerced to a list (unlike `as.data.frame()`):
+#' for vectors, the returned tibble has as many columns as the vector has
+#' elements.
 #'
 #' [as.data.frame()] is effectively a thin wrapper around `data.frame`,
 #' and hence is rather slow (because it calls [data.frame()] on each element
 #' before [cbind]ing together). `as_tibble` is a new S3 generic
 #' with more efficient methods for matrices and data frames.
 #'
-#' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-#' classes), tibbles (returns unchanged input), lists, matrices, and tables.
-#' Other types are first coerced via `as.data.frame()` with
-#' `stringsAsFactors = FALSE`.
+#' The default behavior is to silently remove row names.
+#' New code should explicitly convert row names to a new column using the `rownames`
+#' argument.
+#' For existing code that relies on row names remaining, call
+#' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your package's
+#' [.onLoad()]  function.
 #'
-#' `as_data_frame` and `as.tibble` are aliases.
+#' @seealso
+#' [enframe()] converts a vector to a data frame with values in rows.
 #'
-#' @param x A list. Each element of the list must have the same length.
+#' [pkgconfig::set_config()]
+#'
+#' @param x A vector, list, or matrix. If a list, each element must have the same length.
 #' @param ... Other arguments passed on to individual methods.
-#' @param validate When `TRUE`, verifies that the input is a valid data
-#'   frame (i.e. all columns are named, and are 1d vectors or lists). You may
-#'   want to suppress this when you know that you already have a valid data
-#'   frame and you want to save some time, or to explicitly enable it
-#'   if you have a tibble that you want to re-check.
-#' @param rownames If `NULL`, remove row names (default for matrices, may become
-#'   default for data frames in the future). If `NA`, keep row names (current
-#'   default for data frames). Otherwise, the name of the new column that will
-#'   contain the existing row names.
+#' @inheritParams tibble
+#' @param rownames Treatment of existing row names (for data frames and matrices):
+#'   - `NULL`: remove row names
+#'   - `NA`: keep row names (default, for compatibility; will issue a warning if row names
+#'     are present in the input).
+#'   - A string: the name of the new column that will contain the existing row names,
+#'     which are no longer present in the result.
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)
@@ -31,6 +46,8 @@
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
+#'
+#' as_tibble(1:3, .tidy_names = TRUE)
 #'
 #' # as_tibble is considerably simpler than as.data.frame
 #' # making it more suitable for use when you have things that are
@@ -55,29 +72,34 @@
 #'   )
 #' }
 #' }
-as_tibble <- function(x, ...) {
+as_tibble <- function(x, ..., .rows = NULL, .tidy_names = NULL,
+                      rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.tbl_df <- function(x, ..., validate = FALSE, rownames = NULL) {
-  if (validate) return(NextMethod())
-  x
-}
+as_tibble.data.frame <- function(x, validate = TRUE, ...,
+                                 .rows = NULL,
+                                 .tidy_names = if (validate) NULL else FALSE,
+                                 rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
+  if (!missing(validate)) {
+    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.tidy_names` to control column names.")
+  }
 
-#' @export
-#' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
   old_rownames <- raw_rownames(x)
-  result <- list_to_tibble(x, validate)
+  if (is.null(.rows)) {
+    .rows <- nrow(x)
+  }
+  result <- as_tibble(unclass(x), ..., .rows = .rows, .tidy_names = .tidy_names)
+
   if (is.null(rownames)) {
     result
   } else if (is.na(rownames)) {
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (is.na(old_rownames[1])) {
+    if (is.na(old_rownames[[1]])) {
       abort(error_as_tibble_needs_rownames())
     }
     add_column(result, !!rownames := old_rownames, .before = 1L)
@@ -86,26 +108,31 @@ as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.list <- function(x, validate = TRUE, ...) {
-  if (length(x) == 0) {
-    list_to_tibble(repair_names(list()), validate = FALSE)
-  } else {
-    list_to_tibble(x, validate)
+as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
+                           .tidy_names = if (validate) NULL else FALSE) {
+  if (!missing(validate)) {
+    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.tidy_names` to control column names.")
   }
+
+  x <- auto_tidy_names(x, .tidy_names)
+  recycle_columns(x, .rows)
 }
 
-list_to_tibble <- function(x, validate) {
-  # this is to avoid any method dispatch that may happen when processing x
-  x <- unclass(x)
-
-  if (validate) {
+auto_tidy_names <- function(x, .tidy_names) {
+  if (is.null(.tidy_names)) {
     x <- check_tibble(x)
-  } else if (has_null_names(x)) {
-    names(x) <- rep_along(x, "")
+  } else if (isTRUE(.tidy_names)) {
+    names(x) <- tidy_names(names2(x))
+  } else if (is_function(.tidy_names)) {
+    names(x) <- .tidy_names(names2(x))
+  } else if (identical(.tidy_names, FALSE)) {
+    if (has_null_names(x)) {
+      names(x) <- rlang::rep_along(x, "")
+    }
+  } else {
+    abort(error_tidy_names_arg())
   }
-  x <- recycle_columns(x)
-
-  new_tibble(x)
+  x
 }
 
 check_tibble <- function(x) {
@@ -128,8 +155,6 @@ check_tibble <- function(x) {
     abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
-  x[] <- map(x, strip_dim)
-
   posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
   if (has_length(posixlt)) {
     abort(error_time_column_must_be_posixct(names_x[posixlt]))
@@ -138,71 +163,82 @@ check_tibble <- function(x) {
   x
 }
 
-recycle_columns <- function(x) {
-  # Validate column lengths, allow recycling
-  lengths <- map_int(x, NROW)
+recycle_columns <- function(x, .rows) {
+  lengths <- col_lengths(x)
+  nrow <- guess_nrow(lengths, .rows)
 
-  # Shortcut if all columns have the same length (including zero length!)
-  if (all(lengths == lengths[1L])) return(x)
+  # Shortcut if all columns have the requested or implied length
+  different_len <- which(lengths != nrow)
+  if (is_empty(different_len)) return(new_valid_tibble(x, nrow))
 
-  max <- max(lengths[lengths != 1L], 0L)
+  if (any(lengths[different_len] != 1)) {
+    abort(error_inconsistent_cols(.rows, names(x), lengths))
+  }
 
   short <- which(lengths == 1)
   if (has_length(short)) {
-    x[short] <- expand_vecs(x[short], max)
+    x[short] <- expand_vecs(x[short], nrow)
   }
 
-  x
+  new_valid_tibble(x, nrow)
 }
 
-guess_nrow <- function(x) {
-  if (!is.null(.row_names_info(x, 0L))) {
-    list(nrow = .row_names_info(x, 2L), method = "row.names attribute")
-  } else if (length(x) == 0) {
-    list(nrow = 0L, method = "detected empty list")
-  } else {
-    col_lens <- map_int(x, NROW)
-    longest_cols <- names(col_lens)[col_lens == max(col_lens)]
-    list(nrow = max(map_int(x, NROW)),
-         method = paste("the longest", pluralise("column(s)", longest_cols),
-                        paste(tick(longest_cols), collapse = ",")))
+guess_nrow <- function(lengths, .rows) {
+  if (!is.null(.rows)) {
+    return(.rows)
   }
+  if (is_empty(lengths)) {
+    return(0)
+  }
+
+  nontrivial_lengths <- lengths[lengths != 1L]
+  if (is_empty(nontrivial_lengths)) {
+    return(1)
+  }
+
+  max(nontrivial_lengths)
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ..., rownames = NULL) {
-  as_tibble(repair_names(matrixToDataFrame(x)), ..., rownames = rownames)
+as_tibble.matrix <- function(x, ...) {
+  as_tibble(matrixToDataFrame(x), ...)
 }
 
 #' @export
 as_tibble.poly <- function(x, ...) {
-  as_tibble(unclass(x))
+  as_tibble(unclass(x), ...)
 }
 
 #' @export
 as_tibble.ts <- function(x, ...) {
-  as_tibble(as.data.frame(x, ...))
+  as_tibble(as.data.frame(x), ...)
 }
 
 #' @export
 #' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
-as_tibble.table <- function(x, n = "n", ...) {
-  as_tibble(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
+as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
+  if (!missing(`_n`)) {
+    warn("Please pass `n` as a named argument to `as_tibble.table()`.")
+  }
+  as_tibble(as.data.frame(x, responseName = n, stringsAsFactors = FALSE), ...)
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
-  as_tibble(list())
+  as_tibble(list(), ...)
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.default <- function(x, ...) {
-  value <- x
-  as_tibble(as.data.frame(value, stringsAsFactors = FALSE, ...))
+  if (is_atomic(x)) {
+    as_tibble(as.list(x), ...)
+  } else {
+    as_tibble(as.data.frame(x), ...)
+  }
 }
 
 #' Deprecated coercion functions

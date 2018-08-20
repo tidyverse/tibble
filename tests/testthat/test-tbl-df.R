@@ -5,6 +5,7 @@ context("tbl_df")
 
 test_that("[ never drops", {
   mtcars2 <- as_tibble(mtcars)
+
   expect_is(mtcars2[, 1], "data.frame")
   expect_is(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
@@ -12,6 +13,7 @@ test_that("[ never drops", {
 
 test_that("[ retains class", {
   mtcars2 <- as_tibble(mtcars)
+
   expect_identical(class(mtcars2), class(mtcars2[1:5, ]))
   expect_identical(class(mtcars2), class(mtcars2[, 1:5]))
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
@@ -203,17 +205,17 @@ test_that("[.tbl_df supports character subsetting (#312)", {
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
   expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
   expect_identical(foo[as.character(9:12), ], foo[9:12, ])
-  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
 test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
-  foo <- as_tibble(mtcars)
+  foo <- as_tibble(mtcars, rownames = NA)
   idx <- function(x) rownames(mtcars)[x]
   expect_identical(foo[idx(2:4), ], foo[2:4, ])
   expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
   expect_identical(foo[idx(29:34), ], foo[29:34, ])
-  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
@@ -318,6 +320,7 @@ test_that("new_tibble", {
     data.frame(a = 1:3),
     attr1 = "value1",
     attr2 = 2,
+    nrow = 3,
     subclass = "nt"
   )
 
@@ -336,15 +339,16 @@ test_that("new_tibble", {
 })
 
 test_that("new_tibble checks", {
-  expect_identical(new_tibble(list()), tibble())
-  expect_identical(new_tibble(list(a = 1:3, b = 4:6)), tibble(a = 1:3, b = 4:6))
-  expect_error(new_tibble(list(1)), "names", fixed = TRUE)
-  expect_error(new_tibble(list(a = 1, b = 2:3)), "length", fixed = TRUE)
+  expect_identical(new_tibble(list(), nrow = 0), tibble())
+  expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
+  expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
+  expect_error(new_tibble(list(1), nrow = 1), "names", fixed = TRUE)
+  expect_error(new_tibble(list(a = 1, b = 2:3), nrow = 1), "length", fixed = TRUE)
   expect_error(
     new_tibble(
-      structure(list(a = 1, b = 2), row.names = .set_row_names(2))
+      structure(list(a = 1, b = 2), row.names = .set_row_names(2)),
+      nrow = 1
     ),
-    "length",
-    fixed = TRUE
+    NA
   )
 })

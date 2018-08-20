@@ -94,9 +94,10 @@ test_that("converting from matrix keeps row names if argument has them, with row
     A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30,
     row.names = letters[1:6]
   )
+
   out <- as_tibble(x, rownames = NA)
   expect_identical(rownames(out), rownames(x))
-  expect_identical(out, as_tibble(df))
+  expect_identical(remove_rownames(out), as_tibble(df))
 })
 
 test_that("converting from matrix supports storing row names in a column", {

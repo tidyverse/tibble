@@ -40,7 +40,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(10, "the longest column `x`", "y", 2),
+    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2)),
     fixed = TRUE
   )
 })
@@ -95,26 +95,24 @@ test_that("tibble aliases", {
 test_that("columns must be same length", {
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_inconsistent_cols(3, "the longest column `y`", "x", 2),
+    error_inconsistent_cols(NULL,  c("x", "y"), 2:3),
     fixed = TRUE
   )
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
     error_inconsistent_cols(
-      4,
-      "the longest column `z`",
-      c("x", "y"),
-      2:3
+      NULL,
+      c("x", "y", "z"),
+      2:4
     ),
     fixed = TRUE
   )
   expect_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
     error_inconsistent_cols(
-      4,
-      "the longest column `x`",
-      c("y", "z"),
-      c(2, 2)
+      NULL,
+      c("x", "y", "z"),
+      c(4, 2, 2)
     ),
     fixed = TRUE
   )
@@ -166,52 +164,105 @@ test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
 test_that("Can convert tables to data frame", {
   mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
 
-  mtcars_tbl <- as_tibble(mtcars_table)
-  expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "n"))
+  mtcars2 <- as_tibble(mtcars_table)
+  expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "n"))
 
-  mtcars_tbl <- as_tibble(mtcars_table, "Freq")
-  expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "Freq"))
+  expect_warning(
+    mtcars2 <- as_tibble(mtcars_table, "Freq"),
+    "named argument",
+    fixed = TRUE
+  )
+  expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "Freq"))
+
+  mtcars2 <- as_tibble(mtcars_table, n = "Freq")
+  expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "Freq"))
 })
 
 
-test_that("Can convert atomic vectors to data frame", {
-  expect_equal(as_tibble(1:3), tibble(value = 1:3))
-  expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA)))
-  expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5))
-  expect_equal(as_tibble(letters), tibble(value = letters))
-})
-
-
-test_that("Can convert named atomic vectors to data frame", {
-  expect_equal(as_tibble(setNames(nm = 1:3)), tibble(value = 1:3))
-  expect_equal(as_tibble(setNames(nm = c(TRUE, FALSE, NA))), tibble(value = c(TRUE, FALSE, NA)))
-  expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(value = 1.5:3.5))
-  expect_equal(as_tibble(setNames(nm = letters)), tibble(value = letters))
-})
-
-
-test_that("as_tibble() can validate (#278)", {
-  df <- tibble(a = 1, b = 2)
-  names(df) <- c("", NA)
-  expect_error(as_tibble(df), NA)
+test_that("Can't convert unnamed atomic vectors to tibble by default", {
   expect_error(
-    as_tibble(df, validate = TRUE),
-    error_column_must_be_named(1:2),
+    expect_equal(as_tibble(1:3), tibble(value = 1:3)),
+    invalid_df("must be named", 1:3),
+    fixed = TRUE
+  )
+
+  expect_error(
+    expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA))),
+    invalid_df("must be named", 1:3),
+    fixed = TRUE
+  )
+
+  expect_error(
+    expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5)),
+    invalid_df("must be named", 1:3),
+    fixed = TRUE
+  )
+
+  expect_error(
+    expect_equal(as_tibble(letters), tibble(value = letters)),
+    invalid_df("must be named", 1:26),
     fixed = TRUE
   )
 })
 
 
+test_that("Can convert named atomic vectors to data frame", {
+  expect_equal(as_tibble(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
+  expect_equal(as_tibble(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
+  expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
+  expect_equal(as_tibble(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
+
+  expect_error(
+    as_tibble(setNames(nm = c(TRUE, FALSE, NA))),
+    invalid_df("must be named", 3),
+    fixed = TRUE
+  )
+})
+
+
+test_that("as_tibble() validates by default (#278)", {
+  df <- tibble(a = 1, b = 2)
+  names(df) <- c("", NA)
+  expect_error(
+    as_tibble(df),
+    error_column_must_be_named(1:2),
+    fixed = TRUE
+  )
+
+  expect_error(as_tibble(df, .tidy_names = TRUE), NA)
+})
+
+
 test_that("as_tibble() adds empty names if not validating", {
-  invalid_df <- as_tibble(list(3, 4, 5), validate = FALSE)
+  invalid_df <- as_tibble(list(3, 4, 5), .tidy_names = FALSE)
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), rep("", 3))
 })
 
 
+test_that("as_tibble() adds tidy names if validating", {
+  invalid_df <- as_tibble(list(3, 4, 5), .tidy_names = TRUE)
+  expect_equal(length(invalid_df), 3)
+  expect_equal(nrow(invalid_df), 1)
+  expect_equal(names(invalid_df), tidy_names(rep("", 3)))
+})
+
+
+test_that("as_tibble() adds custom names if validating", {
+  invalid_df <- as_tibble(
+    list(3, 4, 5),
+    .tidy_names = function(x) make.names(x, unique = TRUE)
+  )
+  expect_equal(length(invalid_df), 3)
+  expect_equal(nrow(invalid_df), 1)
+  expect_equal(names(invalid_df), make.names(rep("", 3), unique = TRUE))
+})
+
+
 test_that("as_tibble() can convert row names", {
   df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
+
   expect_identical(
     as_tibble(df, rownames = NULL),
     tibble(a = 1:3, b = 2:4)
@@ -220,8 +271,9 @@ test_that("as_tibble() can convert row names", {
     as_tibble(df, rownames = "id"),
     tibble(id = letters[5:7], a = 1:3, b = 2:4)
   )
-  expect_identical(rownames(as_tibble(df)), rownames(df))
-  expect_identical(unclass(as_tibble(df)), unclass(df))
+  tbl_df <- as_tibble(df, rownames = NA)
+  expect_identical(rownames(tbl_df), rownames(df))
+  expect_identical(unclass(tbl_df), unclass(df))
 })
 
 test_that("as_tibble() throws an error when user turns missing row names into column", {
@@ -252,7 +304,7 @@ test_that("as.tibble is an alias of as_tibble", {
 test_that("new_tibble can specify nrow,", {
   expect_error(
     new_tibble(list(x = 1:2, y = 1:3), nrow = 4),
-    error_inconsistent_cols(4, "`nrow`", c("x", "y"), c(2, 3)),
+    error_inconsistent_cols(4, c("x", "y"), c(2, 3)),
     fixed = TRUE
   )
 })
@@ -346,22 +398,22 @@ test_that("types preserved when recycling in tibble() (#284)", {
 test_that("can make tibble containing data.frame or array (#416)", {
   expect_identical(
     tibble(mtcars),
-    new_tibble(list(mtcars = remove_rownames(mtcars)))
+    new_tibble(list(mtcars = remove_rownames(mtcars)), nrow = nrow(mtcars))
   )
   expect_identical(
     tibble(diag(5)),
-    new_tibble(list(`diag(5)` = diag(5)))
+    new_tibble(list(`diag(5)` = diag(5)), nrow = 5)
   )
 })
 
 test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
     as_tibble(list(x = mtcars)),
-    new_tibble(list(x = remove_rownames(mtcars)))
+    new_tibble(list(x = remove_rownames(mtcars)), nrow = nrow(mtcars))
   )
   expect_identical(
     as_tibble(list(x = diag(5))),
-    new_tibble(list(x = diag(5)))
+    new_tibble(list(x = diag(5)), nrow = 5)
   )
 })
 

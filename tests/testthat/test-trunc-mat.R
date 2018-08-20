@@ -10,16 +10,18 @@ test_that("interface of print() identical to trunc_mat()", {
 })
 
 test_that("print() returns output invisibly", {
-  expect_output(ret <- withVisible(print(as_tibble(mtcars))))
+  expect_output(ret <- withVisible(print(as_tibble(iris))))
   expect_false(ret$visible)
-  expect_identical(ret$value, as_tibble(mtcars))
+  expect_identical(ret$value, as_tibble(iris))
 })
 
 test_that("trunc_mat output matches known output", {
   skip_on_os("windows")
 
+  mtcars2 <- as_tibble(mtcars, rownames = NA)
+
   expect_output_file_rel(
-    print_without_body(as_tibble(mtcars), n = 8L, width = 30L),
+    print_without_body(mtcars2, n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt"
   )
 
@@ -110,7 +112,7 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
   df$y <- as.POSIXlt(df$x)
 
   expect_output_file_rel(
-    print(as_tibble(df), n = 8L, width = 60L),
+    print(df, n = 8L, width = 60L),
     "trunc_mat/POSIXlt-8-60.txt"
   )
 })
