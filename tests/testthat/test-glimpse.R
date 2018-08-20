@@ -41,6 +41,8 @@ test_that("format_v for list", {
 })
 
 test_that("glimpse output matches known output", {
+  skip_on_os("windows")
+
   expect_output_file_rel(
     glimpse(as_tibble(mtcars), width = 70L),
     "glimpse/mtcars-70.txt"

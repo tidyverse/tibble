@@ -1,5 +1,6 @@
 #' @useDynLib tibble, .registration = TRUE
 #' @importFrom utils head tail
+#' @importFrom pkgconfig set_config
 #' @import rlang
 #' @aliases NULL tibble-package
 #' @details The S3 class `tbl_df` wraps a local data frame. The main

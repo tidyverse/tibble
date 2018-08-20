@@ -17,6 +17,7 @@ Depends:
 Imports: 
     cli,
     crayon,
+    fansi,
     methods,
     pillar (>= 1.2.3.9002),
     pkgconfig,
@@ -25,6 +26,7 @@ Imports:
 Suggests: 
     covr,
     dplyr,
+    htmltools,
     import,
     knitr (>= 1.5.32),
     microbenchmark,
