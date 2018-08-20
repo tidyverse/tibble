@@ -12,7 +12,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
-- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and forward to `as_tibble()`, with a warning.
+- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and silently forward to `as_tibble()`.
 
 - `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.     Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
 

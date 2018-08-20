@@ -248,13 +248,11 @@ as_tibble.default <- function(x, ...) {
 #' @export
 #' @keywords internal
 as_data_frame <- function(x, ...) {
-  .Deprecated("as_tibble")
   as_tibble(x, ...)
 }
 
 #' @export
 #' @rdname as_data_frame
 as.tibble <- function(x, ...) {
-  .Deprecated("as_tibble")
   as_tibble(x, ...)
 }
