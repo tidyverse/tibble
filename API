@@ -34,6 +34,7 @@ tibble_(xs)
 tidy_names(name, syntactic = FALSE, quiet = FALSE)
 tribble(...)
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
+view(x, title = NULL, ...)
 
 ## Own S3 methods
 
@@ -43,7 +44,7 @@ as_tibble.default(x, ...)
 as_tibble.list(x, validate = TRUE, ..., .rows = NULL, .tidy_names = if (validate) NULL else FALSE)
 as_tibble.matrix(x, ...)
 as_tibble.poly(x, ...)
-as_tibble.table(x, _n = "n", ..., n = _n)
+as_tibble.table(x, `_n` = "n", ..., n = `_n`)
 as_tibble.ts(x, ...)
 glimpse.data.frame(x, width = NULL, ...)
 glimpse.default(x, width = NULL, max.level = 3, ...)
