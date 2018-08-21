@@ -286,17 +286,11 @@ test_that("as_tibble() throws an error when user turns missing row names into co
 })
 
 test_that("as_data_frame is an alias of as_tibble", {
-  expect_warning(
-    expect_identical(as_data_frame(NULL), as_tibble(NULL)),
-    "is deprecated"
-  )
+  expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })
 
 test_that("as.tibble is an alias of as_tibble", {
-  expect_warning(
-    expect_identical(as.tibble(NULL), as_tibble(NULL)),
-    "is deprecated"
-  )
+  expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
 
 # new_tibble -------------------------------------------------------------

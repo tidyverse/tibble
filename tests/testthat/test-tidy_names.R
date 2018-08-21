@@ -13,7 +13,7 @@ test_that("unnamed input gives uniquely named output", {
 test_that("messages by default", {
   expect_message(
     set_tidy_names(set_names(1, "")),
-    "New names:\n`` -> ..1\n",
+    "New names:\n* `` -> ..1\n",
     fixed = TRUE
   )
 })
@@ -72,8 +72,8 @@ test_that("some syntactic + message (#260)", {
 
 test_that("message", {
   expect_message(
-    tidy_names(""),
-    "New names:\n`` -> ..1\n",
+    tidy_names(c("", "")),
+    "New names:\n* `` -> ..1\n* `` -> ..2\n",
     fixed = TRUE
   )
 })

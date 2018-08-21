@@ -14,7 +14,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and silently forward to `as_tibble()`.
 
-- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.     Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
+- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
 
 
 
