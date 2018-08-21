@@ -102,8 +102,19 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <p>The <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> functions, and the low-level <code><a href="../reference/new_tibble.html">new_tibble()</a></code> constructor, have undergone a major overhaul to improve consistency. We suspect that package code will be affected more than analysis code.</p>
 <ul>
-<li><p>All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the <code>n</code> argument to <code><a href="../reference/as_tibble.html">as_tibble.table()</a></code>.</p></li>
-<li><p>The new <code>.rows</code> argument to <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> allows specifying the expected number of rows explicitly, even if it’s evident from the data. This allows writing more defensive code. The <code>nrow</code> argument to <code><a href="../reference/new_tibble.html">new_tibble()</a></code> is now mandatory.</p></li>
+<li><p>All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the <code>n</code> argument to <code><a href="../reference/as_tibble.html">as_tibble.table()</a></code>, passing <code>n</code> unnamed still works (with a warning).</p></li>
+<li><p>The <code>nrow</code> argument to <code><a href="../reference/new_tibble.html">new_tibble()</a></code> is now mandatory.</p></li>
+<li><p>Checking names in <code><a href="../reference/as_tibble.html">as_tibble()</a></code> is enabled by default, even for tibbles. (The <code>as_tibble.tbl_df()</code> method has been removed, the <code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> method will be used for tibbles.)</p></li>
+<li><p>Calling <code><a href="../reference/as_tibble.html">as_tibble()</a></code> on a vector now returns a one-row tibble, for consistency with <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>. Use <code><a href="../reference/enframe.html">enframe(name = NULL)</a></code> for converting a vector to a one-column tibble.</p></li>
+<li><p>The deprecated <code><a href="../reference/as_data_frame.html">as.tibble()</a></code> and <code><a href="../reference/as_data_frame.html">as_data_frame()</a></code> functions are no longer generic and silently forward to <code><a href="../reference/as_tibble.html">as_tibble()</a></code>.</p></li>
+<li><p><code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> (and also <code><a href="../reference/as_tibble.html">as_tibble.matrix()</a></code>) strip row names by default. Call <code><a href="http://www.rdocumentation.org/packages/pkgconfig/topics/set_config">pkgconfig::set_config("tibble::rownames", NA)</a></code> to revert to the old behavior of keeping row names, this also works for packages that import <em>tibble</em>.</p></li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p>The new <code>.rows</code> argument to <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> allows specifying the expected number of rows explicitly, even if it’s evident from the data. This allows writing more defensive code.</p></li>
 <li>
 <p>Tibbles are now allowed to carry duplicate, empty or <code>NA</code> names, but checking is enabled by default, even when passing tibbles to <code><a href="../reference/as_tibble.html">as_tibble()</a></code>. The new <code>.tidy_names</code> argument to <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> controls renaming:</p>
 <ul>
@@ -129,11 +140,8 @@
 </ul>
 <p>The old default can be restored by calling <code><a href="http://www.rdocumentation.org/packages/pkgconfig/topics/set_config">pkgconfig::set_config("tibble::rownames", NA)</a></code>, this also works for packages that import <em>tibble</em>.</p>
 </li>
-<li><p>Calling <code><a href="../reference/as_tibble.html">as_tibble()</a></code> on a vector now returns a one-row tibble, for consistency with <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>. Use <code><a href="../reference/enframe.html">enframe(name = NULL)</a></code> for converting a vector to a one-column tibble.</p></li>
-<li><p>The deprecated <code><a href="../reference/as_data_frame.html">as.tibble()</a></code> and <code><a href="../reference/as_data_frame.html">as_data_frame()</a></code> functions are no longer generic and forward to <code><a href="../reference/as_tibble.html">as_tibble()</a></code>, with a warning.</p></li>
 <li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> now also strip the <code>"dim"</code> attribute from columns that are one-dimensional arrays. (<code><a href="../reference/tibble.html">tibble()</a></code> already did this before.)</p></li>
 <li><p>Internally, all <code><a href="../reference/as_tibble.html">as_tibble()</a></code> implementation forward all extra arguments and <code>...</code> to <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code> where they are handled. This means that the common <code>.rows</code> and <code>.tidy_names</code> can be used for all inputs. We suggest that your implementations of this method do the same.</p></li>
-<li><p>The <code>as_tibble.tbl_df()</code> method has been removed, the <code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> method will be used for tibbles.</p></li>
 </ul>
 </div>
 </div>
@@ -280,9 +288,9 @@
 <a href="#new-formatting" class="anchor"></a>New formatting</h2>
 <p>The new pillar package is now responsible for formatting tibbles. Pillar will try to display as many columns as possible, if necessary truncating or shortening the output. Colored output highlights important information and guides the eye. The vignette in the tibble package describes how to adapt custom data types for optimal display in a tibble.</p>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Make <code><a href="../reference/add_row.html">add_case()</a></code> an alias for <code><a href="../reference/add_row.html">add_row()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/324'>#324</a>, <a href='http://github.com/LaDilettante'>@LaDilettante</a>).</li>
 <li>
@@ -586,9 +594,9 @@
 <code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> preserves attributes, and uses <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code> to calling overriden methods which may lead to endless recursion.</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>New <code><a href="http://www.rdocumentation.org/packages/rlang/topics/has_name">has_name()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/102'>#102</a>).</li>
 <li>Prefer <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> over <code><a href="../reference/tibble.html">data_frame()</a></code> and <code><a href="../reference/as_data_frame.html">as_data_frame()</a></code> in code and documentation (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
@@ -707,8 +715,7 @@
 </li>
 <li>Code quality
 <ul>
-<li>Test using new-style Travis-CI and AppVeyor. Full test coverage (<a href='https://github.com/tidyverse/tibble/issues/24'>#24</a>,
-<a href='https://github.com/tidyverse/tibble/issues/53'>#53</a>). Regression tests load known output from file (<a href='https://github.com/tidyverse/tibble/issues/49'>#49</a>).</li>
+<li>Test using new-style Travis-CI and AppVeyor. Full test coverage (<a href='https://github.com/tidyverse/tibble/issues/24'>#24</a>, <a href='https://github.com/tidyverse/tibble/issues/53'>#53</a>). Regression tests load known output from file (<a href='https://github.com/tidyverse/tibble/issues/49'>#49</a>).</li>
 <li>Renamed <code>obj_type()</code> to <code><a href="http://www.rdocumentation.org/packages/pillar/topics/type_sum">obj_sum()</a></code>, improvements, better integration with <code><a href="http://www.rdocumentation.org/packages/pillar/topics/type_sum">type_sum()</a></code>.</li>
 <li>Internal cleanup.</li>
 </ul>

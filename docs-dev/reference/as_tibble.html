@@ -168,6 +168,10 @@ which are no longer present in the result.</p></li>
 </ul></td>
     </tr>
     <tr>
+      <th>_n, validate</th>
+      <td><p>For compatibility only, do not use for new code.</p></td>
+    </tr>
+    <tr>
       <th>n</th>
       <td><p>Name for count column, default: <code>"n"</code>.</p></td>
     </tr>
@@ -204,9 +208,9 @@ For existing code that relies on row names remaining, call
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
 <span class='fu'>as_tibble</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>.tidy_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>`` -&gt; ..1</span>
-#&gt; <span class='message'>`` -&gt; ..2</span>
-#&gt; <span class='message'>`` -&gt; ..3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt; <span class='message'>* `` -&gt; ..1</span>
+#&gt; <span class='message'>* `` -&gt; ..2</span>
+#&gt; <span class='message'>* `` -&gt; ..3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
 #&gt;     ..1   ..2   ..3
 #&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
 #&gt; 1     1     2     3</div><div class='input'>
