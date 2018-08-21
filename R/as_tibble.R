@@ -38,6 +38,7 @@
 #'     are present in the input).
 #'   - A string: the name of the new column that will contain the existing row names,
 #'     which are no longer present in the result.
+#' @param _n,validate For compatibility only, do not use for new code.
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)

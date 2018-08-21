@@ -54,6 +54,8 @@ are present in the input).
 which are no longer present in the result.
 }}
 
+\item{_n, validate}{For compatibility only, do not use for new code.}
+
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
