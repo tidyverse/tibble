@@ -168,7 +168,7 @@ test_that("error_column_must_be_vector()", {
   expect_equal(
     error_column_must_be_vector("a", "environment"),
     bullets(
-      "All columns in a tibble must be a 1d vector or a list:",
+      "All columns in a tibble must be a 1d vector, a list or a matrix:",
       "Column `a` is environment"
     )
   )
@@ -176,7 +176,7 @@ test_that("error_column_must_be_vector()", {
   expect_equal(
     error_column_must_be_vector(letters[2:3], c("name", "NULL")),
     bullets(
-      "All columns in a tibble must be a 1d vector or a list:",
+      "All columns in a tibble must be a 1d vector, a list or a matrix:",
       "Column `b` is name",
       "Column `c` is NULL"
     )
@@ -185,7 +185,7 @@ test_that("error_column_must_be_vector()", {
   expect_equal(
     error_column_must_be_vector(LETTERS, letters),
     bullets(
-      "All columns in a tibble must be a 1d vector or a list:",
+      "All columns in a tibble must be a 1d vector, a list or a matrix:",
       paste0("Column `", LETTERS, "` is ", letters)
     )
   )

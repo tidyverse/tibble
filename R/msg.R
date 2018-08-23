@@ -94,7 +94,7 @@ error_column_must_have_unique_name <- function(names) {
 
 error_column_must_be_vector <- function(names, classes) {
   bullets(
-    "All columns in a tibble must be a 1d vector or a list:",
+    "All columns in a tibble must be a 1d vector, a list or a matrix:",
     paste0("Column ", tick(names), " is ", classes)
   )
 }
