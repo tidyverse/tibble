@@ -25,7 +25,8 @@
 #' [.onLoad()]  function.
 #'
 #' @seealso
-#' [enframe()] converts a vector to a data frame with values in rows.
+#' [enframe()] converts a vector to a data frame with values in rows,
+#' [name-repair] documents the functions that enact name repair.
 #'
 #' [pkgconfig::set_config()]
 #'
@@ -48,7 +49,7 @@
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
 #'
-#' as_tibble(1:3, .tidy_names = TRUE)
+#' as_tibble(1:3, .name_repair = "valid")
 #'
 #' # as_tibble is considerably simpler than as.data.frame
 #' # making it more suitable for use when you have things that are
@@ -58,7 +59,7 @@
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
 #'   microbenchmark::microbenchmark(
-#'     as_tibble(l2, validate = FALSE),
+#'     as_tibble(l2, .name_repair = "none"),
 #'     as_tibble(l2),
 #'     as.data.frame(l2)
 #'   )
@@ -73,7 +74,7 @@
 #'   )
 #' }
 #' }
-as_tibble <- function(x, ..., .rows = NULL, .tidy_names = NULL,
+as_tibble <- function(x, ..., .rows = NULL, .name_repair = NULL,
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
@@ -82,17 +83,18 @@ as_tibble <- function(x, ..., .rows = NULL, .tidy_names = NULL,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
-                                 .tidy_names = if (validate) NULL else FALSE,
+                                 .name_repair = NULL,
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!missing(validate)) {
-    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.tidy_names` to control column names.")
+    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    .name_repair <- if (isTRUE(validate)) "none_passive" else "none"
   }
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
-  result <- as_tibble(unclass(x), ..., .rows = .rows, .tidy_names = .tidy_names)
+  result <- as_tibble(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
 
   if (is.null(rownames)) {
     result
@@ -110,46 +112,40 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
-                           .tidy_names = if (validate) NULL else FALSE) {
+                           .name_repair = NULL) {
   if (!missing(validate)) {
-    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.tidy_names` to control column names.")
+    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    .name_repair <- if (isTRUE(validate)) "none_passive" else "none"
   }
 
-  x <- auto_tidy_names(x, .tidy_names)
+  .name_repair <- .name_repair %||% "none_passive"
+
+  x <- set_minimal_names(x)
+
+  if (is_function(.name_repair)) {
+    custom_fixer <- .name_repair
+    .name_repair <- "custom"
+  }
+
+  name_fixer <- switch(
+    .name_repair,
+    none         = ,
+    none_passive = identity,
+    valid        = valid_names,
+    tidy         = tidy_names,
+    custom       = custom_fixer,
+    abort(error_name_repair_arg())
+  )
+  names(x) <- name_fixer(names(x))
+  if (! .name_repair %in% c("none", "custom")) {
+    x <- check_valid_names(x)
+  }
+  x <- check_valid_cols(x)
   recycle_columns(x, .rows)
 }
 
-auto_tidy_names <- function(x, .tidy_names) {
-  if (is.null(.tidy_names)) {
-    x <- check_tibble(x)
-  } else if (isTRUE(.tidy_names)) {
-    names(x) <- tidy_names(names2(x))
-  } else if (is_function(.tidy_names)) {
-    names(x) <- .tidy_names(names2(x))
-  } else if (identical(.tidy_names, FALSE)) {
-    if (has_null_names(x)) {
-      names(x) <- rlang::rep_along(x, "")
-    }
-  } else {
-    abort(error_tidy_names_arg())
-  }
-  x
-}
-
-check_tibble <- function(x) {
-  # Names
+check_valid_cols <- function(x) {
   names_x <- names2(x)
-  bad_name <- which(is.na(names_x) | names_x == "")
-  if (has_length(bad_name)) {
-    abort(error_column_must_be_named(bad_name))
-  }
-
-  dups <- which(duplicated(names_x))
-  if (has_length(dups)) {
-    abort(error_column_must_have_unique_name(names_x[dups]))
-  }
-
-  # Types
   is_xd <- which(!map_lgl(x, is_1d))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])

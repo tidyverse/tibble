@@ -220,7 +220,7 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 
-test_that("as_tibble() validates by default (#278)", {
+test_that("as_tibble() checks names by default (#278)", {
   df <- tibble(a = 1, b = 2)
   names(df) <- c("", NA)
   expect_error(
@@ -228,31 +228,36 @@ test_that("as_tibble() validates by default (#278)", {
     error_column_must_be_named(1:2),
     fixed = TRUE
   )
-
-  expect_error(as_tibble(df, .tidy_names = TRUE), NA)
 })
 
 
-test_that("as_tibble() adds empty names if not validating", {
-  invalid_df <- as_tibble(list(3, 4, 5), .tidy_names = FALSE)
+test_that("as_tibble() adds empty names, even if not fixing names", {
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "none")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), rep("", 3))
 })
 
 
-test_that("as_tibble() adds tidy names if validating", {
-  invalid_df <- as_tibble(list(3, 4, 5), .tidy_names = TRUE)
+test_that("as_tibble() implements valid names", {
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "valid")
+  expect_equal(length(invalid_df), 3)
+  expect_equal(nrow(invalid_df), 1)
+  expect_equal(names(invalid_df), valid_names(rep("", 3)))
+})
+
+test_that("as_tibble() implements tidy names", {
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "tidy")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), tidy_names(rep("", 3)))
 })
 
 
-test_that("as_tibble() adds custom names if validating", {
+test_that("as_tibble() implements custom name repair", {
   invalid_df <- as_tibble(
     list(3, 4, 5),
-    .tidy_names = function(x) make.names(x, unique = TRUE)
+    .name_repair = function(x) make.names(x, unique = TRUE)
   )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
@@ -308,7 +313,7 @@ test_that("new_tibble can specify nrow,", {
 
 test_that("POSIXlt isn't a valid column", {
   expect_error(
-    check_tibble(list(x = as.POSIXlt(Sys.time()))),
+    check_valid_cols(list(x = as.POSIXlt(Sys.time()))),
     error_time_column_must_be_posixct("x"),
     fixed = TRUE
   )
@@ -316,7 +321,7 @@ test_that("POSIXlt isn't a valid column", {
 
 test_that("NULL isn't a valid column", {
   expect_error(
-    check_tibble(list(a = NULL)),
+    check_valid_cols(list(a = NULL)),
     error_column_must_be_vector("a", "NULL"),
     fixed = TRUE
   )
@@ -326,19 +331,19 @@ test_that("columns must be named (#1101)", {
   l <- list(1:10, 1:10)
 
   expect_error(
-    check_tibble(l),
-    error_column_must_be_named(1:2),
+    check_valid_names(l),
+    error_names_must_be_non_null(),
     fixed = TRUE
   )
 
   expect_error(
-    check_tibble(setNames(l, c("x", ""))),
+    check_valid_names(setNames(l, c("x", ""))),
     error_column_must_be_named(2),
     fixed = TRUE
   )
 
   expect_error(
-    check_tibble(setNames(l, c("x", NA))),
+    check_valid_names(setNames(l, c("x", NA))),
     error_column_must_be_named(2),
     fixed = TRUE
   )
@@ -346,12 +351,12 @@ test_that("columns must be named (#1101)", {
 
 test_that("names must be unique (#820)", {
   expect_error(
-    check_tibble(list(x = 1, x = 2, y = 3)),
+    check_valid_names(list(x = 1, x = 2, y = 3)),
     error_column_must_have_unique_name("x"),
     fixed = TRUE
   )
   expect_error(
-    check_tibble(list(x = 1, x = 2, y = 3, y = 4)),
+    check_valid_names(list(x = 1, x = 2, y = 3, y = 4)),
     error_column_must_have_unique_name(c("x", "y")),
     fixed = TRUE
   )

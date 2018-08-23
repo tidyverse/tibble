@@ -361,10 +361,10 @@ test_that("error_frame_matrix_list()", {
   )
 })
 
-test_that("error_tidy_names_arg()", {
+test_that("error_name_repair_arg()", {
   expect_equal(
-    error_tidy_names_arg(),
-    "The `.tidy_names` argument must be NULL, TRUE, FALSE, or a function."
+    error_name_repair_arg(),
+    "The `.name_repair` argument must be NULL, \"none\", \"valid\", \"tidy\", or a function."
   )
 })
 

@@ -84,6 +84,10 @@ error_inconsistent_new_rows <- function(names) {
   )
 }
 
+error_names_must_be_non_null <- function() {
+  "The `names` must not be NULL"
+}
+
 error_column_must_be_named <- function(names) {
   invalid_df("must be named", names)
 }
@@ -180,6 +184,10 @@ error_tribble_non_rectangular <- function(cols, cells) {
   )
 }
 
+error_name_length_required <- function() {
+  "`n` must be specified, when the `names` attribute is `NULL`"
+}
+
 error_frame_matrix_list <- function(pos) {
   bullets(
     "All values in `frame_matrix()` must be atomic:",
@@ -187,8 +195,8 @@ error_frame_matrix_list <- function(pos) {
   )
 }
 
-error_tidy_names_arg <- function() {
-  "The `.tidy_names` argument must be NULL, TRUE, FALSE, or a function."
+error_name_repair_arg <- function() {
+  "The `.name_repair` argument must be NULL, \"none\", \"valid\", \"tidy\", or a function."
 }
 
 error_new_tibble_needs_nrow <- function() {

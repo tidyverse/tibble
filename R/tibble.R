@@ -23,14 +23,18 @@
 #'   unquote-splice via [`!!!`].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
-#' @param .tidy_names Treatment of invalid or duplicate column names:
-#'   - `NULL`: default, throw an error if there are any missing or duplicated names,
-#'   - `FALSE`: deliberately request a tibble with invalid names,
-#'   - `TRUE`: apply [tidy_names()] to the names,
-#'   - a function: apply custom name repair (e.g., `.tidy_names = make.names`
-#'     to get base R equivalence).
-#' @seealso [as_tibble()] to turn an existing list into
-#'   a data frame.
+#' @param .name_repair Treatment of problematic column names:
+#'   - `"none"`: Do nothing: no name repair, no name checking,
+#'   - `"valid"`: use [set_valid_names()] to eliminate missing or duplicated
+#'    names,
+#'   - `NULL`: default, do not repair the names, but call [check_valid_names()]
+#'   to see if a `.name_repair` strategy is needed,
+#'   - `"tidy"`: use [set_tidy_names()] to create `valid` and syntactic names
+#'   following tidyverse conventions
+#'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
+#'   for names in the style of base R).
+#' @seealso [as_tibble()] to turn an existing list into a data frame,
+#'   [name-repair] for more detail on the functions that enact name repair.
 #' @export
 #' @examples
 #' a <- 1:5
@@ -57,9 +61,9 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 #' @aliases tbl_df-class
-tibble <- function(..., .rows = NULL, .tidy_names = NULL) {
+tibble <- function(..., .rows = NULL, .name_repair = NULL) {
   xs <- quos(..., .named = TRUE)
-  as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .tidy_names = .tidy_names)
+  as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }
 
 #' @export

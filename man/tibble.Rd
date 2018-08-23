@@ -10,9 +10,9 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .tidy_names = NULL)
+tibble(..., .rows = NULL, .name_repair = NULL)
 
-data_frame(..., .rows = NULL, .tidy_names = NULL)
+data_frame(..., .rows = NULL, .name_repair = NULL)
 
 lst(...)
 }
@@ -25,13 +25,17 @@ unquote-splice via \code{\link{!!!}}.}
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
 
-\item{.tidy_names}{Treatment of invalid or duplicate column names:
+\item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{NULL}: default, throw an error if there are any missing or duplicated names,
-\item \code{FALSE}: deliberately request a tibble with invalid names,
-\item \code{TRUE}: apply \code{\link[=tidy_names]{tidy_names()}} to the names,
-\item a function: apply custom name repair (e.g., \code{.tidy_names = make.names}
-to get base R equivalence).
+\item \code{"none"}: Do nothing: no name repair, no name checking,
+\item \code{"valid"}: use \code{\link[=set_valid_names]{set_valid_names()}} to eliminate missing or duplicated
+names,
+\item \code{NULL}: default, do not repair the names, but call \code{\link[=check_valid_names]{check_valid_names()}}
+to see if a \code{.name_repair} strategy is needed,
+\item \code{"tidy"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic names
+following tidyverse conventions
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
 }}
 }
 \description{
@@ -89,6 +93,6 @@ lst(!!! list(n = rlang::quo(2 + 3), y = quote(runif(n))))
 
 }
 \seealso{
-\code{\link[=as_tibble]{as_tibble()}} to turn an existing list into
-a data frame.
+\code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame,
+\link{name-repair} for more detail on the functions that enact name repair.
 }

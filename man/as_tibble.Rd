@@ -10,15 +10,15 @@
 \alias{as_tibble.default}
 \title{Coerce vectors, lists, and matrices to data frames}
 \usage{
-as_tibble(x, ..., .rows = NULL, .tidy_names = NULL,
+as_tibble(x, ..., .rows = NULL, .name_repair = NULL,
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
-  .tidy_names = if (validate) NULL else FALSE,
+  .name_repair = NULL,
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
-  .tidy_names = if (validate) NULL else FALSE)
+  .name_repair = NULL)
 
 \method{as_tibble}{matrix}(x, ...)
 
@@ -36,13 +36,17 @@ as_tibble(x, ..., .rows = NULL, .tidy_names = NULL,
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
 
-\item{.tidy_names}{Treatment of invalid or duplicate column names:
+\item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{NULL}: default, throw an error if there are any missing or duplicated names,
-\item \code{FALSE}: deliberately request a tibble with invalid names,
-\item \code{TRUE}: apply \code{\link[=tidy_names]{tidy_names()}} to the names,
-\item a function: apply custom name repair (e.g., \code{.tidy_names = make.names}
-to get base R equivalence).
+\item \code{"none"}: Do nothing: no name repair, no name checking,
+\item \code{"valid"}: use \code{\link[=set_valid_names]{set_valid_names()}} to eliminate missing or duplicated
+names,
+\item \code{NULL}: default, do not repair the names, but call \code{\link[=check_valid_names]{check_valid_names()}}
+to see if a \code{.name_repair} strategy is needed,
+\item \code{"tidy"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic names
+following tidyverse conventions
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
 }}
 
 \item{rownames}{Treatment of existing row names (for data frames and matrices):
@@ -94,7 +98,7 @@ m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-as_tibble(1:3, .tidy_names = TRUE)
+as_tibble(1:3, .name_repair = "valid")
 
 # as_tibble is considerably simpler than as.data.frame
 # making it more suitable for use when you have things that are
@@ -104,7 +108,7 @@ if (requireNamespace("microbenchmark", quietly = TRUE)) {
   l2 <- replicate(26, sample(letters), simplify = FALSE)
   names(l2) <- letters
   microbenchmark::microbenchmark(
-    as_tibble(l2, validate = FALSE),
+    as_tibble(l2, .name_repair = "none"),
     as_tibble(l2),
     as.data.frame(l2)
   )
@@ -121,7 +125,8 @@ if (requireNamespace("microbenchmark", quietly = TRUE)) {
 }
 }
 \seealso{
-\code{\link[=enframe]{enframe()}} converts a vector to a data frame with values in rows.
+\code{\link[=enframe]{enframe()}} converts a vector to a data frame with values in rows,
+\link{name-repair} documents the functions that enact name repair.
 
 \code{\link[pkgconfig:set_config]{pkgconfig::set_config()}}
 }
