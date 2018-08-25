@@ -102,8 +102,8 @@ Each family has 2 * 2 = 4 functions, for all combinations of "repairs vs.
 checks" and "works on names vs. on named vector".
 
 \code{repair_names()} is an older function with different renaming
-heuristics, kept for backward compatibility. Use \code{set_valid_names()} or
-\code{set_tidy_names()} in new code.
+heuristics and is being deprecated. In new code, use \code{as_tibble()} and
+specify a \code{.name_repair} strategy.
 }
 \examples{
 # Works for lists and vectors, too:

@@ -211,14 +211,24 @@ describe_tidying <- function(orig_name, name) {
 
 #' @rdname name-repair
 #' @description `repair_names()` is an older function with different renaming
-#'   heuristics, kept for backward compatibility. Use `set_valid_names()` or
-#'   `set_tidy_names()` in new code.
+#'   heuristics and is being deprecated. In new code, use `as_tibble()` and
+#'   specify a `.name_repair` strategy.
 #'
 #' @param prefix A string, the prefix to use for new column names.
 #' @param sep A string inserted between the column name and de-duplicating
 #'   number.
 #' @export
+# for possible inclusion in NEWS or blog post
+# library(tibble)
+# df <- setNames(tibble(1, 2), c("x", "x"))
+# df
+# repair_names(df)
+# as_tibble(df, .name_repair = "valid")
 repair_names <- function(x, prefix = "V", sep = "") {
+
+  ## TODO: confront the fact that `dplyr::bind_cols()` calls this function
+  message("`repair_names()` is soft-deprecated. Please switch to `as_tibble() and specify `.name_repair`.")
+
   if (length(x) == 0) {
     names(x) <- character()
     return(x)
