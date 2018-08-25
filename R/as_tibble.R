@@ -86,7 +86,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .name_repair = NULL,
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!missing(validate)) {
-    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
     .name_repair <- if (isTRUE(validate)) "none_passive" else "none"
   }
 
@@ -114,7 +114,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
                            .name_repair = NULL) {
   if (!missing(validate)) {
-    warn("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
     .name_repair <- if (isTRUE(validate)) "none_passive" else "none"
   }
 
