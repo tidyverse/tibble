@@ -1,4 +1,4 @@
-# tibble 1.4.99.9003
+# tibble 1.4.99.9004
 
 ## Breaking changes
 
@@ -12,13 +12,18 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
-- The deprecated `as.tibble()` and `as_data_frame()` functions are no longer generic and silently forward to `as_tibble()`.
+- `as.tibble()` and `as_data_frame()` are soft-deprecated and not generic anymore, please use/implement `as_tibble()`.
 
 - `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
 
+- The `print()` method prints a message if a tibble is missing the `"tbl"` class (#264).
+
+- In all `*_rownames()` functions, the first argument has been renamed to `.data` for consistency (#412).
 
 
 ## New features
+
+- `tibble()` supports columns that are matrices or data frames (#416).
 
 - The new `.rows` argument to `tibble()` and `as_tibble()` allows specifying the expected number of rows explicitly, even if it's evident from the data.  This allows writing more defensive code.
 
@@ -47,67 +52,63 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.tidy_names` can be used for all inputs.  We suggest that your implementations of this method do the same.
 
+- `enframe()` (with `name = NULL`) and `deframe()` now support one-column tibbles (#449).
 
-# tibble 1.4.99.9002
+- Improved S4 support by adding `exportClass(tbl_df)` to `NAMESPACE` (#436, @jeffreyhanson and @javierfajnolla).
 
-- Use `fansi::strwrap_ctl()` instead of own string wrapping routine.
-
-
-# tibble 1.4.99.9001
-
-- Improve documentation and tests for `enframe()` to mention lists (#219).
-- Support one-column tibbles in `enframe()` and `deframe()` (#449).
-- Deprecate `as.tibble()` and `as_data_frame()`.
+- Bring error message for invalid column type in line with allowed matrix/df cols (#465, @maxheld83).
 
 
-# tibble 1.4.2.9007
+## New functions
 
-- tibble() uses recycled values during construction but unrecycled values for validation.
-- tibble() is now faster for very wide tibbles.
-- Use `cli::symbol$ellipsis` instead of `"..."`, this affects `glimpse()` output (#403).
+- Added `view()` function that always returns its input invisibly and calls `utils::View()` only in interactive mode (#373).
 
 
-# tibble 1.4.2.9006
+## Output
 
-- Improve error message in column length checking logic (#456, @anhqle).
-- `tidy_names()` quotes variable names when reporting on repair (#407).
-- Avoid use of `stop()` in examples if packages are not installed (#453, @Enchufa2).
-- Add `exportClass(tbl_df)` to `NAMESPACE` for better S4 support (#436, @jeffreyhanson and @javierfajnolla).
+- The `set_tidy_names()` and `tidy_names()` helpers the list of new names using a bullet list with at most six items (#406).
 
-# tibble 1.4.2.9004
-
-- Subsetting one row retains columns for a matrix column.
-- Fix subsetting when the first column is a data frame or matrix column.
-- Fix `as_tibble()` examples by using correct argument names in `requireNamespace()` call (#424, @michaelweylandt).
-
-
-# tibble 1.4.2.9003
-
-- `tibble()` supports data frame and matrix columns (#416).
-- Skip dplyr in tests if unavailable (#420, @QuLogic).
-- Breaking change: Renamed first argument to `.data` in all `*_rownames()` functions (#412).
-- Fix consistency problems in intro vignette (#414), add colored output.
-- All error messages now follow the tidyverse style guide (#223).
-
-
-# tibble 1.4.2.9002
-
-- `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
-- `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
-- `as_tibble()` prints an informative error message when using the `rownames` argument and the input data frame or matrix does not have row names (#388, @anhqle).
-
-
-# tibble 1.4.2.9001
+- A one-character ellipse (`cli::symbol$ellipsis`) is printed instead of `"..."` where available, this affects `glimpse()` output and truncated lists (#403).
 
 - Column names and types are now formatted identically with `glimpse()` and `print.tbl_df()`.
 
+- `tidy_names()` quotes variable names when reporting on repair (#407).
 
-# tibble 1.4.2.9000
+- All error messages now follow the tidyverse style guide (#223).
 
-- Improve documentation for `...` in `add_row()` and `add_column()` (#400).
-- Use real variable name in error message for `column_to_rownames()` (#399, @alexwhan).
-- Use `rlang::list2()` (#391, @lionel-).
+- `as_tibble()` prints an informative error message when using the `rownames` argument and the input data frame or matrix does not have row names (#388, @anhqle).
+
+- `column_to_rownames()` uses the real variable name in its error message (#399, @alexwhan).
+
+## Bug fixes
+
+- `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
+
+- `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
+
+
+
+
+## Internal
+
+- Skip dplyr in tests if unavailable (#420, @QuLogic).
+
+- Skip mockr in tests if unavailable (#454, @Enchufa2).
+
+- Use `fansi::strwrap_ctl()` instead of own string wrapping routine.
+
+- `tibble()` uses recycled values during construction but unrecycled values for validation.
+
+- `tibble()` is now faster for very wide tibbles.
+
+- Avoid use of `stop()` in examples if packages are not installed (#453, @Enchufa2).
+
+- Fix `as_tibble()` examples by using correct argument names in `requireNamespace()` call (#424, @michaelweylandt).
+
 - `as_tibble()` checks column length only once (#365, @anhqle).
+
+- Using `rlang::list2()`  (#391, @lionel-).
+
 
 
 # tibble 1.4.2
