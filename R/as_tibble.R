@@ -51,26 +51,16 @@
 #'
 #' as_tibble(1:3, .name_repair = "valid")
 #'
-#' # as_tibble is considerably simpler than as.data.frame
-#' # making it more suitable for use when you have things that are
-#' # lists
+#' # For list-like inputs, as_tibble() is considerably simpler than as.data.frame()
 #' \dontrun{
-#' if (requireNamespace("microbenchmark", quietly = TRUE)) {
+#' if (requireNamespace("bench", quietly = TRUE)) {
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
-#'   microbenchmark::microbenchmark(
-#'     as_tibble(l2, .name_repair = "none"),
+#'   bench::mark(
+#'     as_tibble(l2, .name_repair = "tidy"),
 #'     as_tibble(l2),
-#'     as.data.frame(l2)
-#'   )
-#' }
-#'
-#' if (requireNamespace("microbenchmark", quietly = TRUE)) {
-#'   m <- matrix(runif(26 * 100), ncol = 26)
-#'   colnames(m) <- letters
-#'   microbenchmark::microbenchmark(
-#'     as_tibble(m),
-#'     as.data.frame(m)
+#'     as.data.frame(l2),
+#'     check = FALSE
 #'   )
 #' }
 #' }

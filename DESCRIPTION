@@ -24,12 +24,12 @@ Imports:
     rlang (>= 0.2.2),
     utils
 Suggests: 
+    bench,
     covr,
     dplyr,
     htmltools,
     import,
     knitr (>= 1.5.32),
-    microbenchmark,
     mockr,
     nycflights13,
     rmarkdown,
