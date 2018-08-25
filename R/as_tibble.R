@@ -125,7 +125,7 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
 
 check_valid_cols <- function(x) {
   names_x <- names2(x)
-  is_xd <- which(!map_lgl(x, is_1d))
+  is_xd <- which(!map_lgl(x, is_1d_or_2d))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
     abort(error_column_must_be_vector(names_x[is_xd], classes))
@@ -137,6 +137,11 @@ check_valid_cols <- function(x) {
   }
 
   x
+}
+
+is_1d_or_2d <- function(x) {
+  # dimension check is for matrices and data.frames
+  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
 }
 
 recycle_columns <- function(x, .rows) {
