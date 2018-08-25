@@ -97,9 +97,10 @@ To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into t
 l <- replicate(26, sample(100), simplify = FALSE)
 names(l) <- letters
 
-timing <- microbenchmark::microbenchmark(
+timing <- bench::mark(
   as_tibble(l),
-  as.data.frame(l)
+  as.data.frame(l),
+  check = FALSE
 )
 
 as_tibble(summary(timing, unit = "us"))
