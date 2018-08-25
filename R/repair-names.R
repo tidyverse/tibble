@@ -87,7 +87,7 @@ rationalize_names <- function(x, .name_repair) {
   names(x) <- repair_fun(names(x))
   if (is.character(.name_repair) &&
       .name_repair %in% c("none_passive", "valid", "tidy")) {
-    x <- check_valid_names(x)
+    check_valid_names(x)
   }
   ## TODO: check minimal names?
   x
@@ -162,14 +162,14 @@ check_minimal <- function(name) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
   }
-  name
+  invisible(name)
 }
 
 #' @export
 #' @rdname name-repair
 check_minimal_names <- function(x) {
   check_minimal(names(x))
-  x
+  invisible(x)
 }
 
 #' @export
@@ -187,14 +187,14 @@ check_valid <- function(name) {
     abort(error_column_must_have_unique_name(name[dups]))
   }
 
-  name
+  invisible(name)
 }
 
 #' @export
 #' @rdname name-repair
 check_valid_names <- function(x) {
   check_valid(names(x))
-  x
+  invisible(x)
 }
 
 
