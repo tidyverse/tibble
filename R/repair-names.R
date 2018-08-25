@@ -73,23 +73,23 @@ rationalize_names <- function(x, .name_repair) {
   x <- set_minimal_names(x)
 
   if (is_function(.name_repair)) {
-    custom_fixer <- .name_repair
-    .name_repair <- "custom"
+    repair_fun <- .name_repair
+  } else {
+    repair_fun <- switch(
+      .name_repair,
+      none         = ,
+      none_passive = identity,
+      valid        = valid_names,
+      tidy         = tidy_names,
+      abort(error_name_repair_arg())
+    )
   }
-
-  name_fixer <- switch(
-    .name_repair,
-    none         = ,
-    none_passive = identity,
-    valid        = valid_names,
-    tidy         = tidy_names,
-    custom       = custom_fixer,
-    abort(error_name_repair_arg())
-  )
-  names(x) <- name_fixer(names(x))
-  if (! .name_repair %in% c("none", "custom")) {
+  names(x) <- repair_fun(names(x))
+  if (is.character(.name_repair) &&
+      .name_repair %in% c("none_passive", "valid", "tidy")) {
     x <- check_valid_names(x)
   }
+  ## TODO: check minimal names?
   x
 }
 
