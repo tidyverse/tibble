@@ -118,28 +118,7 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
     .name_repair <- if (isTRUE(validate)) "none_passive" else "none"
   }
 
-  .name_repair <- .name_repair %||% "none_passive"
-
-  x <- set_minimal_names(x)
-
-  if (is_function(.name_repair)) {
-    custom_fixer <- .name_repair
-    .name_repair <- "custom"
-  }
-
-  name_fixer <- switch(
-    .name_repair,
-    none         = ,
-    none_passive = identity,
-    valid        = valid_names,
-    tidy         = tidy_names,
-    custom       = custom_fixer,
-    abort(error_name_repair_arg())
-  )
-  names(x) <- name_fixer(names(x))
-  if (! .name_repair %in% c("none", "custom")) {
-    x <- check_valid_names(x)
-  }
+  x <- rationalize_names(x, .name_repair)
   x <- check_valid_cols(x)
   recycle_columns(x, .rows)
 }

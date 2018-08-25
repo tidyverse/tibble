@@ -65,6 +65,34 @@
 #' @name name-repair
 NULL
 
+#' @export
+#' @rdname name-repair
+rationalize_names <- function(x, .name_repair) {
+  .name_repair <- .name_repair %||% "none_passive"
+
+  x <- set_minimal_names(x)
+
+  if (is_function(.name_repair)) {
+    custom_fixer <- .name_repair
+    .name_repair <- "custom"
+  }
+
+  name_fixer <- switch(
+    .name_repair,
+    none         = ,
+    none_passive = identity,
+    valid        = valid_names,
+    tidy         = tidy_names,
+    custom       = custom_fixer,
+    abort(error_name_repair_arg())
+  )
+  names(x) <- name_fixer(names(x))
+  if (! .name_repair %in% c("none", "custom")) {
+    x <- check_valid_names(x)
+  }
+  x
+}
+
 #' @param n Specifies output length; consulted only when `name` is `NULL`.
 #' @export
 #' @rdname name-repair

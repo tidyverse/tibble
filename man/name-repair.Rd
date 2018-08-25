@@ -2,6 +2,7 @@
 % Please edit documentation in R/repair-names.R
 \name{name-repair}
 \alias{name-repair}
+\alias{rationalize_names}
 \alias{minimal_names}
 \alias{valid_names}
 \alias{tidy_names}
@@ -15,6 +16,8 @@
 \alias{repair_names}
 \title{Repair the names of a vector}
 \usage{
+rationalize_names(x, .name_repair)
+
 minimal_names(name, n)
 
 valid_names(name, quiet = FALSE)
@@ -38,13 +41,13 @@ check_valid_names(x)
 repair_names(x, prefix = "V", sep = "")
 }
 \arguments{
+\item{x}{A vector.}
+
 \item{name}{A \code{names} attribute, usually a character vector.}
 
 \item{n}{Specifies output length; consulted only when \code{name} is \code{NULL}.}
 
 \item{quiet}{Whether to suppress messages about name repair.}
-
-\item{x}{A vector.}
 
 \item{prefix}{A string, the prefix to use for new column names.}
 
