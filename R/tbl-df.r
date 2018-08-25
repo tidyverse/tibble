@@ -30,7 +30,15 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @rdname formatting
 #' @export
-print.tbl_df <- print.tbl
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
+
+  if (!inherits(x, "class")) {
+    message("The tibble must inherit from tbl_df and tbl, use tibble(), as_tibble() or new_tibble() for construction.")
+  }
+
+  invisible(x)
+}
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
