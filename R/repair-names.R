@@ -57,7 +57,7 @@
 NULL
 
 rationalize_names <- function(x, .name_repair) {
-  .name_repair <- .name_repair %||% "none_passive"
+  .name_repair <- .name_repair %||% "assert_valid"
 
   x <- set_minimal_names(x)
 
@@ -67,7 +67,7 @@ rationalize_names <- function(x, .name_repair) {
     repair_fun <- switch(
       .name_repair,
       none         = ,
-      none_passive = identity,
+      assert_valid = identity,
       valid        = valid_names,
       tidy         = tidy_names,
       abort(error_name_repair_arg())
@@ -75,7 +75,7 @@ rationalize_names <- function(x, .name_repair) {
   }
   names(x) <- repair_fun(names(x))
   if (is.character(.name_repair) &&
-      .name_repair %in% c("none_passive", "valid", "tidy")) {
+      .name_repair %in% c("assert_valid", "valid", "tidy")) {
     check_valid_names(x)
   }
   ## TODO: check minimal names?
