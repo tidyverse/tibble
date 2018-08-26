@@ -43,7 +43,7 @@ knitr::knit_hooks$set(
 
 # Fallback if fansi is missing
 sgr_to_html <- identity
-sgr_to_html <- fansi::sgr_to_html
+#sgr_to_html <- fansi::sgr_to_html
 ```
 
 Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).
