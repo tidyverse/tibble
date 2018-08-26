@@ -20,7 +20,7 @@
 #'     start with a letter or the dot not followed by a number.
 #'     - Not a reserved word.
 #'
-#'   `tidy`` names are easy to use "as is" in code. They do not require quoting
+#'   `tidy` names are easy to use "as is" in code. They do not require quoting
 #'   and they play well with nonstandard evaluation, such as list indexing via
 #'   `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
 #'   conventions more consistent with `valid` names and the tidyverse. TODO:

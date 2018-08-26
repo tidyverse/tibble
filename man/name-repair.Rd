@@ -52,7 +52,10 @@ start with a letter or the dot not followed by a number.
 }
 }
 
-\code{tidy`` names are easy to use "as is" in code. They do not require quoting and they play well with nonstandard evaluation, such as list indexing via}$\code{. TODO: highlight how munging differs from}make.names()\code{, i.e. uses conventions more consistent with}valid` names and the tidyverse. TODO:
+\code{tidy} names are easy to use "as is" in code. They do not require quoting
+and they play well with nonstandard evaluation, such as list indexing via
+\code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
+conventions more consistent with \code{valid} names and the tidyverse. TODO:
 something about suffix reorganization.
 \itemize{
 \item Functions that offer a \code{.name_repair} argument accept a user-supplied
