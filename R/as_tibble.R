@@ -26,7 +26,7 @@
 #'
 #' @seealso
 #' [enframe()] converts a vector to a data frame with values in rows,
-#' [name-repair] documents the functions that enact name repair.
+#' [name-repair] documents the details of name repair.
 #'
 #' [pkgconfig::set_config()]
 #'
@@ -73,7 +73,7 @@ as_tibble <- function(x, ..., .rows = NULL, .name_repair = NULL,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
-                                 .name_repair = NULL,
+                                 .name_repair = c("assert_valid", "valid", "syntactic", "none"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
@@ -102,7 +102,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
-                           .name_repair = NULL) {
+                           .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
     .name_repair <- if (isTRUE(validate)) "assert_valid" else "none"

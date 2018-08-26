@@ -14,11 +14,11 @@ as_tibble(x, ..., .rows = NULL, .name_repair = NULL,
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = NULL,
+  .name_repair = c("assert_valid", "valid", "syntactic", "none"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = NULL)
+  .name_repair = c("assert_valid", "valid", "syntactic", "none"))
 
 \method{as_tibble}{matrix}(x, ...)
 
@@ -40,9 +40,9 @@ just as an additional check.}
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
 \item \code{"valid"}: Eliminate missing or duplicated names,
-\item \code{NULL}: default, do not repair the names, but check that the names are \code{valid}
-\item \code{"tidy"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic names
-following tidyverse conventions
+\item \code{assert_valid}: default, do not repair the names, but check they are \code{valid},
+\item \code{"syntactic"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic
+names following tidyverse conventions
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 }}
@@ -114,7 +114,7 @@ if (requireNamespace("bench", quietly = TRUE)) {
 }
 \seealso{
 \code{\link[=enframe]{enframe()}} converts a vector to a data frame with values in rows,
-\link{name-repair} documents the functions that enact name repair.
+\link{name-repair} documents the details of name repair.
 
 \code{\link[pkgconfig:set_config]{pkgconfig::set_config()}}
 }

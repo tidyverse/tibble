@@ -26,9 +26,9 @@
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"none"`: Do nothing: no name repair, no name checking,
 #'   - `"valid"`: Eliminate missing or duplicated names,
-#'   - `NULL`: default, do not repair the names, but check that the names are `valid`
-#'   - `"tidy"`: use [set_tidy_names()] to create `valid` and syntactic names
-#'   following tidyverse conventions
+#'   - `assert_valid`: default, do not repair the names, but check they are `valid`,
+#'   - `"syntactic"`: use [set_tidy_names()] to create `valid` and syntactic
+#'   names following tidyverse conventions
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
 #' @seealso [as_tibble()] to turn an existing list into a data frame,

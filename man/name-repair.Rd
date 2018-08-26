@@ -43,7 +43,7 @@ this should include replacing \code{NA} names with \code{""}
 duplicate names. Accomplished by appending a suffix of the form \code{..j} where
 \code{j} is the position. The objective is to ensure that any variable in a
 data.frame can be identified, uniquely, by its name.
-\item \code{tidy} names are \code{valid} and syntactic, meaning they fulfill these
+\item \code{syntactic} names are \code{valid} and syntactic, meaning they fulfill these
 criteria laid out in \code{\link[=make.names]{make.names()}}:
 \itemize{
 \item Consist of letters, numbers and the dot or underline characters and
@@ -52,9 +52,9 @@ start with a letter or the dot not followed by a number.
 }
 }
 
-\code{tidy} names are easy to use "as is" in code. They do not require quoting
-and they play well with nonstandard evaluation, such as list indexing via
-\code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
+\code{syntactic} names are easy to use "as is" in code. They do not require
+quoting and work well with nonstandard evaluation, such as list indexing
+via \code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
 conventions more consistent with \code{valid} names and the tidyverse. TODO:
 something about suffix reorganization.
 \itemize{
@@ -62,7 +62,7 @@ something about suffix reorganization.
 function for name repair.
 }
 
-All \code{tidy} names are \code{valid}, all \code{valid} names are \code{minimal}.
+All \code{syntactic} names are \code{valid}, all \code{valid} names are \code{minimal}.
 
 \code{repair_names()} is an older function with different renaming
 heuristics and is being deprecated. In new code, use \code{as_tibble()} and

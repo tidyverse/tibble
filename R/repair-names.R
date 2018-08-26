@@ -14,21 +14,22 @@
 #'   duplicate names. Accomplished by appending a suffix of the form `..j` where
 #'   `j` is the position. The objective is to ensure that any variable in a
 #'   data.frame can be identified, uniquely, by its name.
-#'   * `tidy` names are `valid` and syntactic, meaning they fulfill these
+#'   * `syntactic` names are `valid` and syntactic, meaning they fulfill these
 #'   criteria laid out in [make.names()]:
 #'     - Consist of letters, numbers and the dot or underline characters and
 #'     start with a letter or the dot not followed by a number.
 #'     - Not a reserved word.
 #'
-#'   `tidy` names are easy to use "as is" in code. They do not require quoting
-#'   and they play well with nonstandard evaluation, such as list indexing via
-#'   `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
+#'   `syntactic` names are easy to use "as is" in code. They do not require
+#'   quoting and work well with nonstandard evaluation, such as list indexing
+#'   via `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
 #'   conventions more consistent with `valid` names and the tidyverse. TODO:
 #'   something about suffix reorganization.
+#'
 #'   * Functions that offer a `.name_repair` argument accept a user-supplied
 #'   function for name repair.
 #'
-#' All `tidy` names are `valid`, all `valid` names are `minimal`.
+#' All `syntactic` names are `valid`, all `valid` names are `minimal`.
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
@@ -56,29 +57,32 @@
 #' @name name-repair
 NULL
 
-rationalize_names <- function(x, .name_repair) {
-  .name_repair <- .name_repair %||% "assert_valid"
-
+rationalize_names <- function(x,
+                              .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
   x <- set_minimal_names(x)
 
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
+    .name_repair <- match.arg(.name_repair)
     repair_fun <- switch(
       .name_repair,
       none         = ,
       assert_valid = identity,
       valid        = valid_names,
-      tidy         = tidy_names,
+      syntactic    = tidy_names,
       abort(error_name_repair_arg())
     )
   }
   names(x) <- repair_fun(names(x))
+
   if (is.character(.name_repair) &&
       .name_repair %in% c("assert_valid", "valid", "tidy")) {
     check_valid_names(x)
+  } else {
+    check_minimal_names(x)
   }
-  ## TODO: check minimal names?
+
   x
 }
 
