@@ -25,10 +25,8 @@
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"none"`: Do nothing: no name repair, no name checking,
-#'   - `"valid"`: use [set_valid_names()] to eliminate missing or duplicated
-#'    names,
-#'   - `NULL`: default, do not repair the names, but call [check_valid_names()]
-#'   to see if a `.name_repair` strategy is needed,
+#'   - `"valid"`: Eliminate missing or duplicated names,
+#'   - `NULL`: default, do not repair the names, but check that the names are `valid`
 #'   - `"tidy"`: use [set_tidy_names()] to create `valid` and syntactic names
 #'   following tidyverse conventions
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`

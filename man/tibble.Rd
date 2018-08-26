@@ -28,10 +28,8 @@ just as an additional check.}
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
-\item \code{"valid"}: use \code{\link[=set_valid_names]{set_valid_names()}} to eliminate missing or duplicated
-names,
-\item \code{NULL}: default, do not repair the names, but call \code{\link[=check_valid_names]{check_valid_names()}}
-to see if a \code{.name_repair} strategy is needed,
+\item \code{"valid"}: Eliminate missing or duplicated names,
+\item \code{NULL}: default, do not repair the names, but check that the names are \code{valid}
 \item \code{"tidy"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic names
 following tidyverse conventions
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}

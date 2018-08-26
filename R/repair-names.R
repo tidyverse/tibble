@@ -1,49 +1,40 @@
 #' Repair the names of a vector
 #'
 #' @description
-#' tibble implements several, increasing levels of name repair for vectors
-#' (TODO: re-visit all this thinking about tibble's support for lists and not
-#' just tibbles):
-#'   * `minimal` names exist, i.e. the `names` attribute is not `NULL`.
-#'   Accomplished by setting all names to `""`. Enforced internally by
-#'   [tibble()] and [as_tibble()] and there is no opt-out. The objective is to
-#'   produce a substrate of the correct length for other name repair strategies.
-#'   TODO: decide if this should include replacing `NA` names with `""`
-#'   * `valid` names contain no empty names (no `NA`s, no `""`s) and no
+#' tibble implements several, increasing levels of name repair for vectors,
+#' exposed via the `.name_repair` argument (TODO: re-visit all this thinking
+#' about tibble's support for lists and not just tibbles):
+#'   * `minimal` names exist, i.e. the `names` attribute is not `NULL` and no
+#'   individual name is `NA`. The name of an unnamed element is `""`. Enforced
+#'   internally by [tibble()] and [as_tibble()] and there is no opt-out. A
+#'   convenient consequence is that `names(x)` returns a character vector of the
+#'   correct length, suitable for other name repair strategies. TODO: decide if
+#'   this should include replacing `NA` names with `""`
+#'   * `valid` names contain no empty names (literally, no `""`s) and no
 #'   duplicate names. Accomplished by appending a suffix of the form `..j` where
 #'   `j` is the position. The objective is to ensure that any variable in a
 #'   data.frame can be identified, uniquely, by its name.
-#'   * `tidy` names are `valid` and also fulfill these criteria laid out in
-#'   [make.names()]:
+#'   * `tidy` names are `valid` and syntactic, meaning they fulfill these
+#'   criteria laid out in [make.names()]:
 #'     - Consist of letters, numbers and the dot or underline characters and
-#'     starts with a letter or the dot not followed by a number.
+#'     start with a letter or the dot not followed by a number.
 #'     - Not a reserved word.
 #'
-#'   The objective is to produce variable names that users can handle in the
-#'   "usual" way, e.g. that do not require backticks. TODO: highlight how
-#'   munging differs from `make.names()`, i.e. uses conventions more consistent
-#'   with `valid_names()` and the tidyverse. TODO: something about suffix
-#'   reorganization.
+#'   `tidy`` names are easy to use "as is" in code. They do not require quoting
+#'   and they play well with nonstandard evaluation, such as list indexing via
+#'   `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
+#'   conventions more consistent with `valid` names and the tidyverse. TODO:
+#'   something about suffix reorganization.
 #'   * Functions that offer a `.name_repair` argument accept a user-supplied
 #'   function for name repair.
 #'
 #' All `tidy` names are `valid`, all `valid` names are `minimal`.
 #'
-#' For each LEVEL in ("minimal", "valid", "tidy"), there is a family of utility
-#' functions:
-#'   * `LEVEL_names()` repairs a vector of names
-#'   * `set_LEVEL_names()` repairs the names of the input
-#'   * `check_LEVEL()` checks a vector of names
-#'   * `check_LEVEL_names()` checks the names of the input
-#'
-#' Each family has 2 * 2 = 4 functions, for all combinations of "repairs vs.
-#' checks" and "works on names vs. on named vector".
-#'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
 #' @param quiet Whether to suppress messages about name repair.
 #'
-#' @return `x` with repaired names.
+#' @return `x` with repaired names or a repaired version of `name`.
 #' @examples
 #' # Works for lists and vectors, too:
 #' set_tidy_names(3:5)
@@ -54,10 +45,10 @@
 #'
 #' # By default, all rename operations are printed to the console:
 #' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"), .name_repair = "none")
-#' set_valid_names(tbl)
+#' set_tidy_names(tbl)
 #'
-#' # Alternatively, use valid_names() to assign the result manually:
-#' new_names <- valid_names(names(tbl))
+#' # Alternatively, use tidy_names() to assign the result manually:
+#' new_names <- tidy_names(names(tbl))
 #' rlang::set_names(tbl, new_names)
 #'
 #' # Optionally, names can be made syntactic:
@@ -65,8 +56,6 @@
 #' @name name-repair
 NULL
 
-#' @export
-#' @rdname name-repair
 rationalize_names <- function(x, .name_repair) {
   .name_repair <- .name_repair %||% "none_passive"
 
@@ -93,24 +82,18 @@ rationalize_names <- function(x, .name_repair) {
   x
 }
 
-#' @param n Specifies output length; consulted only when `name` is `NULL`.
-#' @export
-#' @rdname name-repair
 minimal_names <- function(name, n) {
   if (is.null(name) && missing(n)) {
     error_name_length_required()
   }
   ## TODO: address scenarios where name is not NULL and n != length(name)?
-  ## TODO: replace NAs with "" here?
-  name %||% rep_len("", n)
+  name <- name %||% rep_len("", n)
+  name %|% ""
 }
 
-#' @export
-#' @rdname name-repair
 valid_names <- function(name, quiet = FALSE) {
   check_minimal(name)
-  new_name <- name %|% ""
-  new_name <- append_pos(new_name)
+  new_name <- append_pos(name)
 
   if (!quiet) {
     describe_tidying(name, new_name)
@@ -122,7 +105,9 @@ valid_names <- function(name, quiet = FALSE) {
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, quiet = FALSE) {
-  new_name <- valid_names(name, quiet = TRUE)
+  ## TODO: make compatible with set_tidy_names() in CRAN version
+  new_name <- minimal_names(name)
+  new_name <- valid_names(new_name, quiet = TRUE)
   new_name <- make_syntactic(new_name)
   new_name <- append_pos(new_name)
 
@@ -133,15 +118,11 @@ tidy_names <- function(name, quiet = FALSE) {
   new_name
 }
 
-#' @export
-#' @rdname name-repair
 set_minimal_names <- function(x) {
   new_names <- minimal_names(names(x), n = length(x))
   set_names(x, new_names)
 }
 
-#' @export
-#' @rdname name-repair
 set_valid_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
   new_names <- valid_names(names(x), quiet = quiet)
@@ -151,13 +132,12 @@ set_valid_names <- function(x, quiet = FALSE) {
 #' @export
 #' @rdname name-repair
 set_tidy_names <- function(x, quiet = FALSE) {
+  ## TODO: make compatible with set_tidy_names() in CRAN version
   x <- set_minimal_names(x)
   new_names <- tidy_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
-#' @export
-#' @rdname name-repair
 check_minimal <- function(name) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
@@ -165,15 +145,11 @@ check_minimal <- function(name) {
   invisible(name)
 }
 
-#' @export
-#' @rdname name-repair
 check_minimal_names <- function(x) {
   check_minimal(names(x))
   invisible(x)
 }
 
-#' @export
-#' @rdname name-repair
 check_valid <- function(name) {
   check_minimal(name)
 
@@ -190,8 +166,6 @@ check_valid <- function(name) {
   invisible(name)
 }
 
-#' @export
-#' @rdname name-repair
 check_valid_names <- function(x) {
   check_valid(names(x))
   invisible(x)
