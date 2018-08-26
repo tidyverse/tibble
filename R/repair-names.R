@@ -1,35 +1,52 @@
 #' Repair the names of a vector
 #'
 #' @description
-#' tibble implements several, increasing levels of name repair for vectors,
-#' exposed via the `.name_repair` argument (TODO: re-visit all this thinking
-#' about tibble's support for lists and not just tibbles):
-#'   * `minimal` names exist, i.e. the `names` attribute is not `NULL` and no
-#'   individual name is `NA`. The name of an unnamed element is `""`. Enforced
-#'   internally by [tibble()] and [as_tibble()] and there is no opt-out. A
-#'   convenient consequence is that `names(x)` returns a character vector of the
-#'   correct length, suitable for other name repair strategies. TODO: decide if
-#'   this should include replacing `NA` names with `""`
-#'   * `valid` names contain no empty names (literally, no `""`s) and no
-#'   duplicate names. Accomplished by appending a suffix of the form `..j` where
-#'   `j` is the position. The objective is to ensure that any variable in a
-#'   data.frame can be identified, uniquely, by its name.
+#' tibble deals with a few levels of name repair:
+#'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
+#'   an unnamed element is `""` (never `NA`). Enforced internally by [tibble()]
+#'   and [as_tibble()] and there is no opt-out.
+#'   * `valid` names exist, are never empty (literally, no `""`s), and have no
+#'   duplicates.
 #'   * `syntactic` names are `valid` and syntactic, meaning they fulfill these
-#'   criteria laid out in [make.names()]:
+#'   criteria (quoting from [make.names()]):
 #'     - Consist of letters, numbers and the dot or underline characters and
 #'     start with a letter or the dot not followed by a number.
 #'     - Not a reserved word.
 #'
-#'   `syntactic` names are easy to use "as is" in code. They do not require
-#'   quoting and work well with nonstandard evaluation, such as list indexing
-#'   via `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
-#'   conventions more consistent with `valid` names and the tidyverse. TODO:
-#'   something about suffix reorganization.
+#' `syntactic` implies `valid`, `valid` implies `minimal`.
 #'
-#'   * Functions that offer a `.name_repair` argument accept a user-supplied
-#'   function for name repair.
+#' These are the levels referred to by the `.name_repair` argument of, e.g.,
+#' [tibble()] and [as_tibble()]. Alternatively, the user can pass their own name
+#' repair function. It can assume `minimal` names as input and should, likewise,
+#' return names that are at least `minimal`.
 #'
-#' All `syntactic` names are `valid`, all `valid` names are `minimal`.
+#' @section `minimal` names:
+#'
+#' `tbl_df` objects created by tibble will have names that are, at the very
+#' least, `minimal`. A convenient consequence is that `names(x)` returns a
+#' character vector of the correct length, suitable for other name repair
+#' strategies.
+#'
+#' @section `valid` names:
+#'
+#' `valid` names are created by appending a suffix of the form `..j` to any name
+#' that is `""` or a duplicate, where `j` is the position. This is advantageous
+#' for tibbles, because it ensures that any variable can be identified,
+#' uniquely, by its name. The absolute position `j` is helpful when
+#' troubleshooting data import with lots of columns and dysfunctional names.
+#'
+#' Example:
+#' ```
+#' Original names:    ""    "x"    "" "y"    "x"
+#'  `valid` names: "..1" "x..2" "..3" "y" "x..5"
+#' ```
+#' @section `syntactic` names:
+#'
+#' `syntactic` names are easy to use "as is" in code. They do not require
+#' quoting and work well with nonstandard evaluation, such as list indexing via
+#' `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
+#' conventions more consistent with `valid` names and the tidyverse. TODO:
+#' something about suffix reorganization.
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
@@ -68,22 +85,22 @@ rationalize_names <- function(x,
     repair_fun <- switch(
       .name_repair,
       none         = ,
-      assert_valid = identity,
+      assert_valid = NULL,
       valid        = valid_names,
       syntactic    = tidy_names,
       abort(error_name_repair_arg())
     )
   }
-  names(x) <- repair_fun(names(x))
+  if (is_function(repair_fun)) {
+    names(x) <- repair_fun(names(x))
+  }
 
   if (is.character(.name_repair) &&
-      .name_repair %in% c("assert_valid", "valid", "tidy")) {
+      .name_repair %in% c("assert_valid", "valid", "syntactic")) {
     check_valid_names(x)
   } else {
     check_minimal_names(x)
   }
-
-  x
 }
 
 minimal_names <- function(name, n) {
@@ -91,8 +108,8 @@ minimal_names <- function(name, n) {
     error_name_length_required()
   }
   ## TODO: address scenarios where name is not NULL and n != length(name)?
-  name <- name %||% rep_len("", n)
-  name %|% ""
+  new_name <- name %||% rep_len("", n)
+  new_name %|% ""
 }
 
 valid_names <- function(name, quiet = FALSE) {

@@ -29,22 +29,15 @@ number.}
 \code{x} with repaired names or a repaired version of \code{name}.
 }
 \description{
-tibble implements several, increasing levels of name repair for vectors,
-exposed via the \code{.name_repair} argument (TODO: re-visit all this thinking
-about tibble's support for lists and not just tibbles):
+tibble deals with a few levels of name repair:
 \itemize{
-\item \code{minimal} names exist, i.e. the \code{names} attribute is not \code{NULL} and no
-individual name is \code{NA}. The name of an unnamed element is \code{""}. Enforced
-internally by \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} and there is no opt-out. A
-convenient consequence is that \code{names(x)} returns a character vector of the
-correct length, suitable for other name repair strategies. TODO: decide if
-this should include replacing \code{NA} names with \code{""}
-\item \code{valid} names contain no empty names (literally, no \code{""}s) and no
-duplicate names. Accomplished by appending a suffix of the form \code{..j} where
-\code{j} is the position. The objective is to ensure that any variable in a
-data.frame can be identified, uniquely, by its name.
+\item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
+an unnamed element is \code{""} (never \code{NA}). Enforced internally by \code{\link[=tibble]{tibble()}}
+and \code{\link[=as_tibble]{as_tibble()}} and there is no opt-out.
+\item \code{valid} names exist, are never empty (literally, no \code{""}s), and have no
+duplicates.
 \item \code{syntactic} names are \code{valid} and syntactic, meaning they fulfill these
-criteria laid out in \code{\link[=make.names]{make.names()}}:
+criteria (quoting from \code{\link[=make.names]{make.names()}}):
 \itemize{
 \item Consist of letters, numbers and the dot or underline characters and
 start with a letter or the dot not followed by a number.
@@ -52,22 +45,50 @@ start with a letter or the dot not followed by a number.
 }
 }
 
-\code{syntactic} names are easy to use "as is" in code. They do not require
-quoting and work well with nonstandard evaluation, such as list indexing
-via \code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
-conventions more consistent with \code{valid} names and the tidyverse. TODO:
-something about suffix reorganization.
-\itemize{
-\item Functions that offer a \code{.name_repair} argument accept a user-supplied
-function for name repair.
-}
+\code{syntactic} implies \code{valid}, \code{valid} implies \code{minimal}.
 
-All \code{syntactic} names are \code{valid}, all \code{valid} names are \code{minimal}.
+These are the levels referred to by the \code{.name_repair} argument of, e.g.,
+\code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}}. Alternatively, the user can pass their own name
+repair function. It can assume \code{minimal} names as input and should, likewise,
+return names that are at least \code{minimal}.
 
 \code{repair_names()} is an older function with different renaming
 heuristics and is being deprecated. In new code, use \code{as_tibble()} and
 specify a \code{.name_repair} strategy.
 }
+\section{\code{minimal} names}{
+
+
+\code{tbl_df} objects created by tibble will have names that are, at the very
+least, \code{minimal}. A convenient consequence is that \code{names(x)} returns a
+character vector of the correct length, suitable for other name repair
+strategies.
+}
+
+\section{\code{valid} names}{
+
+
+\code{valid} names are created by appending a suffix of the form \code{..j} to any name
+that is \code{""} or a duplicate, where \code{j} is the position. This is advantageous
+for tibbles, because it ensures that any variable can be identified,
+uniquely, by its name. The absolute position \code{j} is helpful when
+troubleshooting data import with lots of columns and dysfunctional names.
+
+Example:\preformatted{Original names:    ""    "x"    "" "y"    "x"
+ `valid` names: "..1" "x..2" "..3" "y" "x..5"
+}
+}
+
+\section{\code{syntactic} names}{
+
+
+\code{syntactic} names are easy to use "as is" in code. They do not require
+quoting and work well with nonstandard evaluation, such as list indexing via
+\code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
+conventions more consistent with \code{valid} names and the tidyverse. TODO:
+something about suffix reorganization.
+}
+
 \examples{
 # Works for lists and vectors, too:
 set_tidy_names(3:5)
