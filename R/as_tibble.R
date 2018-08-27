@@ -57,14 +57,18 @@
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
 #'   bench::mark(
-#'     as_tibble(l2, .name_repair = "tidy"),
+#'     as_tibble(l2, .name_repair = "syntactic"),
+#'     as_tibble(l2, .name_repair = "valid"),
+#'     as_tibble(l2, .name_repair = "none"),
 #'     as_tibble(l2),
 #'     as.data.frame(l2),
 #'     check = FALSE
 #'   )
 #' }
 #' }
-as_tibble <- function(x, ..., .rows = NULL, .name_repair = NULL,
+as_tibble <- function(x, ...,
+                      .rows = NULL,
+                      .name_repair = c("assert_valid", "valid", "syntactic", "none"),
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }

@@ -10,9 +10,11 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .name_repair = NULL)
+tibble(..., .rows = NULL, .name_repair = c("assert_valid", "valid",
+  "syntactic", "none"))
 
-data_frame(..., .rows = NULL, .name_repair = NULL)
+data_frame(..., .rows = NULL, .name_repair = c("assert_valid", "valid",
+  "syntactic", "none"))
 
 lst(...)
 }
@@ -29,12 +31,14 @@ just as an additional check.}
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
 \item \code{"valid"}: Eliminate missing or duplicated names,
-\item \code{assert_valid}: default, do not repair the names, but check they are \code{valid},
-\item \code{"syntactic"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic
-names following tidyverse conventions
+\item \code{"assert_valid"}: (default value), do not repair the names, but check they are \code{valid},
+\item \code{"syntactic"}: Use \code{TODO: fill this in} to create \code{valid} and syntactic
+names
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
-}}
+}
+
+See \link{name-repair} for more details on these terms and the strategies used to enforce them.}
 }
 \description{
 \code{tibble()} is a trimmed down version of \code{\link[=data.frame]{data.frame()}} that:
@@ -75,6 +79,13 @@ str(tibble(x = list(diag(1), diag(2))))
 # or munges column names
 tibble(`a + b` = 1:5)
 
+# but it forces you to take charge of names, if they need repair
+\dontrun{
+tibble(x = 1, x = 2)
+}
+tibble(x = 1, x = 2, .name_repair = "valid")
+tibble(x = 1, x = 2, .name_repair = "none")
+
 # You can splice-unquote a list of quotes and formulas
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
@@ -92,5 +103,5 @@ lst(!!! list(n = rlang::quo(2 + 3), y = quote(runif(n))))
 }
 \seealso{
 \code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame,
-\link{name-repair} for more detail on the functions that enact name repair.
+\link{name-repair} for more detail on name repair.
 }

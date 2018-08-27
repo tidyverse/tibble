@@ -26,13 +26,16 @@
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"none"`: Do nothing: no name repair, no name checking,
 #'   - `"valid"`: Eliminate missing or duplicated names,
-#'   - `assert_valid`: default, do not repair the names, but check they are `valid`,
-#'   - `"syntactic"`: use [set_tidy_names()] to create `valid` and syntactic
-#'   names following tidyverse conventions
+#'   - `"assert_valid"`: (default value), do not repair the names, but check they are `valid`,
+#'   - `"syntactic"`: Use `TODO: fill this in` to create `valid` and syntactic
+#'   names
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
+#'
+#'   See [name-repair] for more details on these terms and the strategies used to enforce them.
+#'
 #' @seealso [as_tibble()] to turn an existing list into a data frame,
-#'   [name-repair] for more detail on the functions that enact name repair.
+#'   [name-repair] for more detail on name repair.
 #' @export
 #' @examples
 #' a <- 1:5
@@ -49,6 +52,13 @@
 #' # or munges column names
 #' tibble(`a + b` = 1:5)
 #'
+#' # but it forces you to take charge of names, if they need repair
+#' \dontrun{
+#' tibble(x = 1, x = 2)
+#' }
+#' tibble(x = 1, x = 2, .name_repair = "valid")
+#' tibble(x = 1, x = 2, .name_repair = "none")
+#'
 #' # You can splice-unquote a list of quotes and formulas
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
@@ -59,7 +69,9 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 #' @aliases tbl_df-class
-tibble <- function(..., .rows = NULL, .name_repair = NULL) {
+tibble <- function(...,
+                   .rows = NULL,
+                   .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }

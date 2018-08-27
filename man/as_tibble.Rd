@@ -10,7 +10,8 @@
 \alias{as_tibble.default}
 \title{Coerce vectors, lists, and matrices to data frames}
 \usage{
-as_tibble(x, ..., .rows = NULL, .name_repair = NULL,
+as_tibble(x, ..., .rows = NULL, .name_repair = c("assert_valid",
+  "valid", "syntactic", "none"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
@@ -40,12 +41,14 @@ just as an additional check.}
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
 \item \code{"valid"}: Eliminate missing or duplicated names,
-\item \code{assert_valid}: default, do not repair the names, but check they are \code{valid},
-\item \code{"syntactic"}: use \code{\link[=set_tidy_names]{set_tidy_names()}} to create \code{valid} and syntactic
-names following tidyverse conventions
+\item \code{"assert_valid"}: (default value), do not repair the names, but check they are \code{valid},
+\item \code{"syntactic"}: Use \code{TODO: fill this in} to create \code{valid} and syntactic
+names
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
-}}
+}
+
+See \link{name-repair} for more details on these terms and the strategies used to enforce them.}
 
 \item{rownames}{Treatment of existing row names (for data frames and matrices):
 \itemize{
@@ -104,7 +107,9 @@ if (requireNamespace("bench", quietly = TRUE)) {
   l2 <- replicate(26, sample(letters), simplify = FALSE)
   names(l2) <- letters
   bench::mark(
-    as_tibble(l2, .name_repair = "tidy"),
+    as_tibble(l2, .name_repair = "syntactic"),
+    as_tibble(l2, .name_repair = "valid"),
+    as_tibble(l2, .name_repair = "none"),
     as_tibble(l2),
     as.data.frame(l2),
     check = FALSE
