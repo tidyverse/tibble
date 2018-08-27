@@ -246,11 +246,11 @@ test_that("as_tibble() implements valid names", {
   expect_equal(names(invalid_df), valid_names(rep("", 3)))
 })
 
-test_that("as_tibble() implements tidy names", {
+test_that("as_tibble() implements syntactic names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "syntactic")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), tidy_names(rep("", 3)))
+  expect_equal(names(invalid_df), syntactic_names(rep("", 3)))
 })
 
 

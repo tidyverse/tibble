@@ -60,12 +60,12 @@ test_that("corner case", {
 })
 
 test_that("syntactic", {
-  expect_equal(tidy_names("a b"), make.names("a b"))
+  expect_equal(tidy_names("a b", syntactic = TRUE), make.names("a b"))
 })
 
 test_that("some syntactic + message (#260)", {
   expect_equal(
-    tidy_names(c("a b", "c")),
+    tidy_names(c("a b", "c"), syntactic = TRUE),
     c(make.names("a b"), "c")
   )
 })

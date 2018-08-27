@@ -7,7 +7,7 @@
 \alias{repair_names}
 \title{Repair the names of a vector}
 \usage{
-tidy_names(name, quiet = FALSE)
+tidy_names(name, syntactic = FALSE, quiet = FALSE)
 
 set_tidy_names(x, quiet = FALSE)
 
@@ -15,6 +15,8 @@ repair_names(x, prefix = "V", sep = "")
 }
 \arguments{
 \item{name}{A \code{names} attribute, usually a character vector.}
+
+\item{syntactic}{Should all names be made syntactically valid via \code{\link[=make.names]{make.names()}}?}
 
 \item{quiet}{Whether to suppress messages about name repair.}
 

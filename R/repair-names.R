@@ -87,7 +87,7 @@ rationalize_names <- function(x,
       none         = ,
       assert_valid = NULL,
       valid        = valid_names,
-      syntactic    = tidy_names,
+      syntactic    = syntactic_names,
       abort(error_name_repair_arg())
     )
   }
@@ -112,6 +112,12 @@ minimal_names <- function(name, n) {
   new_name %|% ""
 }
 
+
+set_minimal_names <- function(x) {
+  new_names <- minimal_names(names(x), n = length(x))
+  set_names(x, new_names)
+}
+
 valid_names <- function(name, quiet = FALSE) {
   check_minimal(name)
   new_name <- append_pos(name)
@@ -123,10 +129,13 @@ valid_names <- function(name, quiet = FALSE) {
   new_name
 }
 
-#' @export
-#' @rdname name-repair
-tidy_names <- function(name, quiet = FALSE) {
-  ## TODO: make compatible with set_tidy_names() in CRAN version
+set_valid_names <- function(x, quiet = FALSE) {
+  x <- set_minimal_names(x)
+  new_names <- valid_names(names(x), quiet = quiet)
+  set_names(x, new_names)
+}
+
+syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- valid_names(new_name, quiet = TRUE)
   new_name <- make_syntactic(new_name)
@@ -139,23 +148,9 @@ tidy_names <- function(name, quiet = FALSE) {
   new_name
 }
 
-set_minimal_names <- function(x) {
-  new_names <- minimal_names(names(x), n = length(x))
-  set_names(x, new_names)
-}
-
-set_valid_names <- function(x, quiet = FALSE) {
+set_syntactic_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- valid_names(names(x), quiet = quiet)
-  set_names(x, new_names)
-}
-
-#' @export
-#' @rdname name-repair
-set_tidy_names <- function(x, quiet = FALSE) {
-  ## TODO: make compatible with set_tidy_names() in CRAN version
-  x <- set_minimal_names(x)
-  new_names <- tidy_names(names(x), quiet = quiet)
+  new_names <- syntactic_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
@@ -230,6 +225,35 @@ describe_tidying <- function(orig_name, name) {
     )
     message(msg)
   }
+}
+
+#' @param syntactic Should all names be made syntactically valid via [make.names()]?
+#' @export
+#' @rdname name-repair
+tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
+  new_name <- na_to_empty(name)
+  if (syntactic) {
+    ## TODO: make this call into a new function
+    new_name <- make_syntactic(new_name)
+    new_name <- append_pos(new_name)
+  } else {
+    ## TODO: emit a message here
+    new_name <- valid_names(new_name, quiet = TRUE)
+  }
+
+  if (!quiet) {
+    describe_tidying(name, new_name)
+  }
+
+  new_name
+}
+
+#' @export
+#' @rdname name-repair
+set_tidy_names <- function(x, quiet = FALSE) {
+  x <- set_minimal_names(x)
+  new_names <- tidy_names(names(x), quiet = quiet)
+  set_names(x, new_names)
 }
 
 #' @rdname name-repair
