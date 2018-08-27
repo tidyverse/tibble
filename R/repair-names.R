@@ -112,7 +112,6 @@ minimal_names <- function(name, n) {
   new_name %|% ""
 }
 
-
 set_minimal_names <- function(x) {
   new_names <- minimal_names(names(x), n = length(x))
   set_names(x, new_names)
@@ -123,7 +122,7 @@ valid_names <- function(name, quiet = FALSE) {
   new_name <- append_pos(name)
 
   if (!quiet) {
-    describe_tidying(name, new_name)
+    describe_repair(name, new_name)
   }
 
   new_name
@@ -135,14 +134,18 @@ set_valid_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
+## TODO: this is just a placeholder = near copy of tidy_names()
+##       but may see more refactoring
 syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- valid_names(new_name, quiet = TRUE)
+  ## TODO: here, for example, is where I think I'd prefer to see explicit
+  ##       stripping of `..j` suffixes, make syntactic, re-apply suffixes
   new_name <- make_syntactic(new_name)
   new_name <- append_pos(new_name)
 
   if (!quiet) {
-    describe_tidying(name, new_name)
+    describe_repair(name, new_name)
   }
 
   new_name
@@ -187,12 +190,15 @@ check_valid_names <- function(x) {
   invisible(x)
 }
 
+## TODO: do we need checks around "syntactic"-ness?
 
 na_to_empty <- function(x) {
   x[is.na(x)] <- ""
   x
 }
 
+## TODO: revisit with something more consistent with `..j` and general tidyverse
+## naming conventions
 make_syntactic <- function(name) {
   fix_syntactic <- (name != "") & !is_syntactic(name)
   name[fix_syntactic] <- make.names(name[fix_syntactic])
@@ -213,7 +219,7 @@ append_pos <- function(name) {
   name
 }
 
-describe_tidying <- function(orig_name, name) {
+describe_repair <- function(orig_name, name) {
   stopifnot(length(orig_name) == length(name))
 
   new_names <- name != na_to_empty(orig_name)
@@ -227,7 +233,15 @@ describe_tidying <- function(orig_name, name) {
   }
 }
 
-#' @param syntactic Should all names be made syntactically valid via [make.names()]?
+#' @description `tidy_names()` and `set_tidy_names()` ... WHAT I WANT TO SAY:
+#'   they were our first pass as providing access to our name repair strategies,
+#'   which we still want to do. That is, we'd like to export utilities around
+#'   `minimal` and (our take on) `valid` and `syntactic` names. But ... not yet
+#'   and probably not here. The old "tidy with `syntactic = FALSE`" is the new
+#'   `valid` and the old "tidy with `syntactic = TRUE` is new `syntactic`.
+#'
+#' @param syntactic Should all names be made syntactically valid via
+#'   [make.names()]?
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
@@ -242,7 +256,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   }
 
   if (!quiet) {
-    describe_tidying(name, new_name)
+    describe_repair(name, new_name)
   }
 
   new_name

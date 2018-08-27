@@ -16,7 +16,8 @@ repair_names(x, prefix = "V", sep = "")
 \arguments{
 \item{name}{A \code{names} attribute, usually a character vector.}
 
-\item{syntactic}{Should all names be made syntactically valid via \code{\link[=make.names]{make.names()}}?}
+\item{syntactic}{Should all names be made syntactically valid via
+\code{\link[=make.names]{make.names()}}?}
 
 \item{quiet}{Whether to suppress messages about name repair.}
 
@@ -53,6 +54,13 @@ These are the levels referred to by the \code{.name_repair} argument of, e.g.,
 \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}}. Alternatively, the user can pass their own name
 repair function. It can assume \code{minimal} names as input and should, likewise,
 return names that are at least \code{minimal}.
+
+\code{tidy_names()} and \code{set_tidy_names()} ... WHAT I WANT TO SAY:
+they were our first pass as providing access to our name repair strategies,
+which we still want to do. That is, we'd like to export utilities around
+\code{minimal} and (our take on) \code{valid} and \code{syntactic} names. But ... not yet
+and probably not here. The old "tidy with \code{syntactic = FALSE}" is the new
+\code{valid} and the old "tidy with \code{syntactic = TRUE} is new \code{syntactic}.
 
 \code{repair_names()} is an older function with different renaming
 heuristics and is being deprecated. In new code, use \code{as_tibble()} and
