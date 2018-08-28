@@ -112,7 +112,7 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
     .name_repair <- if (isTRUE(validate)) "assert_valid" else "none"
   }
 
-  x <- rationalize_names(x, .name_repair)
+  x <- set_repaired_names(x, .name_repair)
   x <- check_valid_cols(x)
   recycle_columns(x, .rows)
 }

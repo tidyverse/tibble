@@ -74,10 +74,15 @@
 #' @name name-repair
 NULL
 
-rationalize_names <- function(x,
+set_repaired_names <- function(x,
                               .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
   x <- set_minimal_names(x)
+  names(x) <- repaired_names(names(x), .name_repair = .name_repair)
+  x
+}
 
+repaired_names <- function(name,
+                           .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -91,15 +96,13 @@ rationalize_names <- function(x,
       abort(error_name_repair_arg())
     )
   }
-  if (is_function(repair_fun)) {
-    names(x) <- repair_fun(names(x))
-  }
+  new_name <- if (is_function(repair_fun)) repair_fun(name) else name
 
   if (is.character(.name_repair) &&
       .name_repair %in% c("assert_valid", "valid", "syntactic")) {
-    check_valid_names(x)
+    check_valid(new_name)
   } else {
-    check_minimal_names(x)
+    check_minimal(new_name)
   }
 }
 
