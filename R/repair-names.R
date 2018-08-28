@@ -68,6 +68,9 @@
 #' e.g., `tidyr::gather()`. In this case, it is better to not munge the names at
 #' import.
 #'
+#' Pre-existing suffixes of the form `..j` are always stripped, prior to making
+#' names `valid`, i.e. reconstructing the suffixes.
+#'
 #' @section `syntactic` names:
 #'
 #' `syntactic` names are `valid` and syntactic (quoting from [make.names()]),
@@ -86,16 +89,6 @@
 #' define `syntactic` names as an extension of `valid`, i.e. `syntactic` implies
 #' unique. Why? Because the need for syntactic names is strongly associated with
 #' the need for uniqueness and this makes things simpler.
-#'
-#' TODO: explain how and why our munging differs from `make.names()`, i.e. uses
-#' conventions more consistent with how we make `valid` names and the tidyverse
-#' generally
-#'
-#' TODO: something about suffix reorganization.
-#'
-#' TODO: consider supporting two strategies for forming `syntactic` names: a
-#' very basic one (`.name_repair = "syntactic"`) and a much more opinionated
-#' one (`.name_repair = "tidy"`)
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.

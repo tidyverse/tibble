@@ -112,6 +112,9 @@ ones? Sometimes the first row of a data source -- allegedly variable names --
 actually contains \strong{data} and the resulting tibble will be reshaped with,
 e.g., \code{tidyr::gather()}. In this case, it is better to not munge the names at
 import.
+
+Pre-existing suffixes of the form \code{..j} are always stripped, prior to making
+names \code{valid}, i.e. reconstructing the suffixes.
 }
 
 \section{\code{syntactic} names}{
@@ -135,16 +138,6 @@ There are many ways to make names \code{syntactic}. For example, we choose to
 define \code{syntactic} names as an extension of \code{valid}, i.e. \code{syntactic} implies
 unique. Why? Because the need for syntactic names is strongly associated with
 the need for uniqueness and this makes things simpler.
-
-TODO: explain how and why our munging differs from \code{make.names()}, i.e. uses
-conventions more consistent with how we make \code{valid} names and the tidyverse
-generally
-
-TODO: something about suffix reorganization.
-
-TODO: consider supporting two strategies for forming \code{syntactic} names: a
-very basic one (\code{.name_repair = "syntactic"}) and a much more opinionated
-one (\code{.name_repair = "tidy"})
 }
 
 \examples{
