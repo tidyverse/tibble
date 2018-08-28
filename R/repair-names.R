@@ -253,8 +253,6 @@ check_valid_names <- function(x) {
 
 ## TODO: do we need checks around "syntactic"-ness?
 
-na_to_empty <- function(x) x %|% ""
-
 ## TODO: revisit with something more consistent with `..j` and general tidyverse
 ## naming conventions
 make_syntactic <- function(name) {
@@ -264,7 +262,9 @@ make_syntactic <- function(name) {
 }
 
 append_pos <- function(name) {
-  need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
+  need_append_pos <- duplicated(name) |
+    duplicated(name, fromLast = TRUE) |
+    name == ""
   need_append_pos <- which(need_append_pos)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
@@ -278,12 +278,15 @@ strip_pos <- function(name) {
 describe_repair <- function(orig_name, name) {
   stopifnot(length(orig_name) == length(name))
 
-  new_names <- name != na_to_empty(orig_name)
+  new_names <- name != minimal_names(orig_name)
   if (any(new_names)) {
     msg <- bullets(
       "New names:",
-      paste0(tick_if_needed(orig_name[new_names]), " -> ", tick_if_needed(name[new_names])),
-      .problem = ""
+      paste0(
+        tick_if_needed(orig_name[new_names]),
+        " -> ",
+        tick_if_needed(name[new_names])
+      ), .problem = ""
     )
     message(msg)
   }
@@ -340,8 +343,9 @@ set_tidy_names <- function(x, quiet = FALSE) {
 # as_tibble(df, .name_repair = "valid")
 repair_names <- function(x, prefix = "V", sep = "") {
 
-  ## TODO: confront the fact that `dplyr::bind_cols()` calls this function
-  message("`repair_names()` is soft-deprecated. Please switch to `as_tibble() and specify `.name_repair`.")
+  ## TODO: `dplyr::bind_cols()` calls this function, so this might just
+  ## irritate people who have no way to switch over
+  message("`tibble::repair_names()` is soft-deprecated. Please switch to `as_tibble() and specify `.name_repair`.")
 
   if (length(x) == 0) {
     names(x) <- character()
@@ -352,15 +356,15 @@ repair_names <- function(x, prefix = "V", sep = "") {
   set_names(x, new_names)
 }
 
-make_unique <- function(x, prefix = "V", sep = "") {
-  blank <- x == ""
+make_unique <- function(name, prefix = "V", sep = "") {
+  blank <- name == ""
 
   # Ensure existing names are unique
-  x[!blank] <- make.unique(x[!blank], sep = sep)
+  name[!blank] <- make.unique(name[!blank], sep = sep)
 
   # Replace blank names
-  new_vars <- setdiff(paste(prefix, seq_along(x), sep = sep), x)
-  x[blank] <- new_vars[seq_len(sum(blank))]
+  new_vars <- setdiff(paste(prefix, seq_along(name), sep = sep), name)
+  name[blank] <- new_vars[seq_len(sum(blank))]
 
-  x
+  name
 }
