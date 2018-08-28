@@ -135,6 +135,9 @@ repaired_names <- function(name,
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
+    if (!is.character(.name_repair)) {
+      abort(error_name_repair_arg())
+    }
     .name_repair <- match.arg(.name_repair)
     repair_fun <- switch(
       .name_repair,

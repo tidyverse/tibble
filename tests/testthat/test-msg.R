@@ -364,7 +364,7 @@ test_that("error_frame_matrix_list()", {
 test_that("error_name_repair_arg()", {
   expect_equal(
     error_name_repair_arg(),
-    "The `.name_repair` argument must be NULL, \"none\", \"valid\", \"tidy\", or a function."
+    "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
   )
 })
 

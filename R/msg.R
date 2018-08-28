@@ -85,7 +85,7 @@ error_inconsistent_new_rows <- function(names) {
 }
 
 error_names_must_be_non_null <- function() {
-  "The `names` must not be NULL."
+  "The `names` must not be `NULL`."
 }
 
 error_column_must_be_named <- function(names) {
@@ -196,7 +196,7 @@ error_frame_matrix_list <- function(pos) {
 }
 
 error_name_repair_arg <- function() {
-  "The `.name_repair` argument must be NULL, \"none\", \"valid\", \"tidy\", or a function."
+  "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
 }
 
 error_new_tibble_needs_nrow <- function() {
