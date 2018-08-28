@@ -7,46 +7,95 @@
 #'   and [as_tibble()] and there is no opt-out.
 #'   * `valid` names exist, are never empty (literally, no `""`s), and have no
 #'   duplicates.
-#'   * `syntactic` names are `valid` and syntactic, meaning they fulfill these
-#'   criteria (quoting from [make.names()]):
-#'     - Consist of letters, numbers and the dot or underline characters and
-#'     start with a letter or the dot not followed by a number.
-#'     - Not a reserved word.
+#'   * `syntactic` names are `valid` and syntactic (see Details for more).
 #'
 #' `syntactic` implies `valid`, `valid` implies `minimal`.
 #'
-#' These are the levels referred to by the `.name_repair` argument of, e.g.,
-#' [tibble()] and [as_tibble()]. Alternatively, the user can pass their own name
-#' repair function. It can assume `minimal` names as input and should, likewise,
-#' return names that are at least `minimal`.
+#' The `.name_repair` argument of [tibble()] and [as_tibble()] refers to these
+#' levels. Alternatively, the user can pass their own name repair function. It
+#' should anticipate `minimal` names as input and should, likewise, return names
+#' that are at least `minimal`.
 #'
 #' @section `minimal` names:
 #'
-#' `tbl_df` objects created by tibble will have names that are, at the very
-#' least, `minimal`. A convenient consequence is that `names(x)` returns a
-#' character vector of the correct length, suitable for other name repair
-#' strategies.
+#' `minimal` names exist. The `names` attribute is not `NULL`. The name of an
+#' unnamed element is `""` (never `NA`).
+#'
+#' `tbl_df` objects created by tibble will have variable names that are
+#' `minimal`, at the very least, Why? General name repair can be be implemented
+#' more simply if the baseline strategy ensures that `names(x)` returns a
+#' character vector of the correct length.
+#'
+#' Examples:
+#' ```
+#' Original names of a vector with length 3: NULL
+#'                          `minimal` names: "" "" ""
+#'
+#'                           Original names: "x" NA
+#'                          `minimal` names: "x" ""
+#' ```
+#'
+#' Related: [rlang::names2()] returns the names of an object, after making them
+#' `minimal`.
 #'
 #' @section `valid` names:
 #'
-#' `valid` names are created by appending a suffix of the form `..j` to any name
-#' that is `""` or a duplicate, where `j` is the position. This is advantageous
-#' for tibbles, because it ensures that any variable can be identified,
-#' uniquely, by its name. The absolute position `j` is helpful when
-#' troubleshooting data import with lots of columns and dysfunctional names.
+#' `valid` names exist, are never empty (literally, no `""`s), and have no
+#' duplicates.
+#'
+#' You usually want `valid` variable names in a tibble, because they ensure that
+#' any variable can be identified, uniquely, by its name.
+#'
+#' There are many ways to make names `valid`. We do so by appending a suffix of
+#' the form `..j` to any name that is `""` or a duplicate, where `j` is the
+#' position. Why?
+#' * An absolute position `j` is more helpful than numbering within the columns
+#' that share a name. Context: troubleshooting data import with lots of columns
+#' and dysfunctional names.
+#' * We hypothesize that it's better to make the repair of individual names as
+#' independent as possible. But, of course, detecting duplication requires
+#' inspection of the names as a group.
 #'
 #' Example:
 #' ```
 #' Original names:    ""    "x"    "" "y"    "x"
 #'  `valid` names: "..1" "x..2" "..3" "y" "x..5"
 #' ```
+#'
+#' Why would you ever want `minimal` names, instead of `valid` or `syntactic`
+#' ones? Sometimes the first row of a data source -- allegedly variable names --
+#' actually contains **data** and the resulting tibble will be reshaped with,
+#' e.g., `tidyr::gather()`. In this case, it is better to not munge the names at
+#' import.
+#'
 #' @section `syntactic` names:
+#'
+#' `syntactic` names are `valid` and syntactic (quoting from [make.names()]),
+#' meaning they:
+#'   - Have no duplicates (inherited from `valid`).
+#'   - Consist of letters, numbers, and the dot `.` or underscore `_`
+#'     characters.
+#'   - Start with a letter or the dot `.`, not followed by a number.
+#'   - Not a reserved word.
 #'
 #' `syntactic` names are easy to use "as is" in code. They do not require
 #' quoting and work well with nonstandard evaluation, such as list indexing via
-#' `$`. TODO: highlight how munging differs from `make.names()`, i.e. uses
-#' conventions more consistent with `valid` names and the tidyverse. TODO:
-#' something about suffix reorganization.
+#' `$` or in packages like dplyr and ggplot2.
+#'
+#' There are many ways to make names `syntactic`. For example, we choose to
+#' define `syntactic` names as an extension of `valid`, i.e. `syntactic` implies
+#' unique. Why? Because the need for syntactic names is strongly associated with
+#' the need for uniqueness and this makes things simpler.
+#'
+#' TODO: explain how and why our munging differs from `make.names()`, i.e. uses
+#' conventions more consistent with how we make `valid` names and the tidyverse
+#' generally
+#'
+#' TODO: something about suffix reorganization.
+#'
+#' TODO: consider supporting two strategies for forming `syntactic` names: a
+#' very basic one (`.name_repair = "syntactic"`) and a much more opinionated
+#' one (`.name_repair = "tidy"`)
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.

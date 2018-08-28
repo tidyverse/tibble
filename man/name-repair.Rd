@@ -39,21 +39,15 @@ an unnamed element is \code{""} (never \code{NA}). Enforced internally by \code{
 and \code{\link[=as_tibble]{as_tibble()}} and there is no opt-out.
 \item \code{valid} names exist, are never empty (literally, no \code{""}s), and have no
 duplicates.
-\item \code{syntactic} names are \code{valid} and syntactic, meaning they fulfill these
-criteria (quoting from \code{\link[=make.names]{make.names()}}):
-\itemize{
-\item Consist of letters, numbers and the dot or underline characters and
-start with a letter or the dot not followed by a number.
-\item Not a reserved word.
-}
+\item \code{syntactic} names are \code{valid} and syntactic (see Details for more).
 }
 
 \code{syntactic} implies \code{valid}, \code{valid} implies \code{minimal}.
 
-These are the levels referred to by the \code{.name_repair} argument of, e.g.,
-\code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}}. Alternatively, the user can pass their own name
-repair function. It can assume \code{minimal} names as input and should, likewise,
-return names that are at least \code{minimal}.
+The \code{.name_repair} argument of \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} refers to these
+levels. Alternatively, the user can pass their own name repair function. It
+should anticipate \code{minimal} names as input and should, likewise, return names
+that are at least \code{minimal}.
 
 \code{tidy_names()} and \code{set_tidy_names()} ... WHAT I WANT TO SAY:
 they were our first pass as providing access to our name repair strategies,
@@ -69,34 +63,88 @@ specify a \code{.name_repair} strategy.
 \section{\code{minimal} names}{
 
 
-\code{tbl_df} objects created by tibble will have names that are, at the very
-least, \code{minimal}. A convenient consequence is that \code{names(x)} returns a
-character vector of the correct length, suitable for other name repair
-strategies.
+\code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of an
+unnamed element is \code{""} (never \code{NA}).
+
+\code{tbl_df} objects created by tibble will have variable names that are
+\code{minimal}, at the very least, Why? General name repair can be be implemented
+more simply if the baseline strategy ensures that \code{names(x)} returns a
+character vector of the correct length.
+
+Examples:\preformatted{Original names of a vector with length 3: NULL
+                         `minimal` names: "" "" ""
+
+                          Original names: "x" NA
+                         `minimal` names: "x" ""
+}
+
+Related: \code{\link[rlang:names2]{rlang::names2()}} returns the names of an object, after making them
+\code{minimal}.
 }
 
 \section{\code{valid} names}{
 
 
-\code{valid} names are created by appending a suffix of the form \code{..j} to any name
-that is \code{""} or a duplicate, where \code{j} is the position. This is advantageous
-for tibbles, because it ensures that any variable can be identified,
-uniquely, by its name. The absolute position \code{j} is helpful when
-troubleshooting data import with lots of columns and dysfunctional names.
+\code{valid} names exist, are never empty (literally, no \code{""}s), and have no
+duplicates.
+
+You usually want \code{valid} variable names in a tibble, because they ensure that
+any variable can be identified, uniquely, by its name.
+
+There are many ways to make names \code{valid}. We do so by appending a suffix of
+the form \code{..j} to any name that is \code{""} or a duplicate, where \code{j} is the
+position. Why?
+\itemize{
+\item An absolute position \code{j} is more helpful than numbering within the columns
+that share a name. Context: troubleshooting data import with lots of columns
+and dysfunctional names.
+\item We hypothesize that it's better to make the repair of individual names as
+independent as possible. But, of course, detecting duplication requires
+inspection of the names as a group.
+}
 
 Example:\preformatted{Original names:    ""    "x"    "" "y"    "x"
  `valid` names: "..1" "x..2" "..3" "y" "x..5"
 }
+
+Why would you ever want \code{minimal} names, instead of \code{valid} or \code{syntactic}
+ones? Sometimes the first row of a data source -- allegedly variable names --
+actually contains \strong{data} and the resulting tibble will be reshaped with,
+e.g., \code{tidyr::gather()}. In this case, it is better to not munge the names at
+import.
 }
 
 \section{\code{syntactic} names}{
 
 
+\code{syntactic} names are \code{valid} and syntactic (quoting from \code{\link[=make.names]{make.names()}}),
+meaning they:
+\itemize{
+\item Have no duplicates (inherited from \code{valid}).
+\item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
+characters.
+\item Start with a letter or the dot \code{.}, not followed by a number.
+\item Not a reserved word.
+}
+
 \code{syntactic} names are easy to use "as is" in code. They do not require
 quoting and work well with nonstandard evaluation, such as list indexing via
-\code{$}. TODO: highlight how munging differs from \code{make.names()}, i.e. uses
-conventions more consistent with \code{valid} names and the tidyverse. TODO:
-something about suffix reorganization.
+\code{$} or in packages like dplyr and ggplot2.
+
+There are many ways to make names \code{syntactic}. For example, we choose to
+define \code{syntactic} names as an extension of \code{valid}, i.e. \code{syntactic} implies
+unique. Why? Because the need for syntactic names is strongly associated with
+the need for uniqueness and this makes things simpler.
+
+TODO: explain how and why our munging differs from \code{make.names()}, i.e. uses
+conventions more consistent with how we make \code{valid} names and the tidyverse
+generally
+
+TODO: something about suffix reorganization.
+
+TODO: consider supporting two strategies for forming \code{syntactic} names: a
+very basic one (\code{.name_repair = "syntactic"}) and a much more opinionated
+one (\code{.name_repair = "tidy"})
 }
 
 \examples{
