@@ -211,6 +211,16 @@ check_minimal <- function(name) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
   }
+
+  bad_name <- which(is.na(name))
+  if (has_length(bad_name)) {
+    msg <- paste0(
+      error_column_must_be_named(bad_name), "\n",
+      "Use `.name_repair` to specify repair."
+    )
+    abort(msg)
+  }
+
   invisible(name)
 }
 
@@ -222,7 +232,7 @@ check_minimal_names <- function(x) {
 check_valid <- function(name) {
   check_minimal(name)
 
-  bad_name <- which(is.na(name) | name == "")
+  bad_name <- which(name == "")
   if (has_length(bad_name)) {
     abort(error_column_must_be_named(bad_name))
   }
