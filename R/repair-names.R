@@ -190,11 +190,9 @@ set_valid_names <- function(x, quiet = FALSE) {
 ##       but may see more refactoring
 syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
-  new_name <- valid_names(new_name, quiet = TRUE)
-  ## TODO: here, for example, is where I think I'd prefer to see explicit
-  ##       stripping of `..j` suffixes, make syntactic, re-apply suffixes
+  new_name <- strip_pos(name)
   new_name <- make_syntactic(new_name)
-  new_name <- append_pos(new_name)
+  new_name <- valid_names(new_name, quiet = TRUE)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -244,10 +242,7 @@ check_valid_names <- function(x) {
 
 ## TODO: do we need checks around "syntactic"-ness?
 
-na_to_empty <- function(x) {
-  x[is.na(x)] <- ""
-  x
-}
+na_to_empty <- function(x) x %|% ""
 
 ## TODO: revisit with something more consistent with `..j` and general tidyverse
 ## naming conventions
@@ -259,16 +254,14 @@ make_syntactic <- function(name) {
 
 append_pos <- function(name) {
   need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
-  if (any(need_append_pos)) {
-    rx <- "[.][.][1-9][0-9]*$"
-    has_suffix <- grepl(rx, name)
-    name[has_suffix] <- gsub(rx, "", name[has_suffix])
-    need_append_pos <- need_append_pos | has_suffix
-  }
-
   need_append_pos <- which(need_append_pos)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
+}
+
+strip_pos <- function(name) {
+  rx <- "[.][.][0-9]+$"
+  gsub(rx, "", name) %|% ""
 }
 
 describe_repair <- function(orig_name, name) {
@@ -297,15 +290,12 @@ describe_repair <- function(orig_name, name) {
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
-  new_name <- na_to_empty(name)
+  new_name <- minimal_names(name)
+  new_name <- strip_pos(new_name)
   if (syntactic) {
-    ## TODO: make this call into a new function
     new_name <- make_syntactic(new_name)
-    new_name <- append_pos(new_name)
-  } else {
-    ## TODO: emit a message here
-    new_name <- valid_names(new_name, quiet = TRUE)
   }
+  new_name <- valid_names(new_name, quiet = TRUE)
 
   if (!quiet) {
     describe_repair(name, new_name)
