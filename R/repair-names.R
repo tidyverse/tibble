@@ -170,8 +170,9 @@ set_minimal_names <- function(x) {
 }
 
 valid_names <- function(name, quiet = FALSE) {
-  check_minimal(name)
-  new_name <- append_pos(name)
+  new_name <- minimal_names(name)
+  new_name <- strip_pos(name)
+  new_name <- append_pos(new_name)
 
   if (!quiet) {
     describe_repair(name, new_name)
