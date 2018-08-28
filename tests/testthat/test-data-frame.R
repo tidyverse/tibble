@@ -14,11 +14,6 @@ test_that("dim attribute is stripped of 1D array (#84)", {
 
 test_that("bogus columns raise an error", {
   expect_error(
-    as_tibble(list(1)),
-    error_column_must_be_named(1),
-    fixed = TRUE
-  )
-  expect_error(
     tibble(a = NULL),
     error_column_must_be_vector("a", "NULL"),
     fixed = TRUE
@@ -118,22 +113,6 @@ test_that("columns must be same length", {
   )
 })
 
-test_that("columns must be named", {
-  l1 <- list(1:10)
-  l2 <- list(x = 1, 2)
-
-  expect_error(
-    as_tibble(l1),
-    error_column_must_be_named(1),
-    fixed = TRUE
-  )
-  expect_error(
-    as_tibble(l2),
-    error_column_must_be_named(2),
-    fixed = TRUE
-  )
-})
-
 test_that("empty list() makes 0 x 0 tbl_df", {
   zero <- as_tibble(list())
   expect_is(zero, "tbl_df")
@@ -219,10 +198,23 @@ test_that("Can convert named atomic vectors to data frame", {
   )
 })
 
+test_that("as_tibble() checks for `valid` names by default (#278)", {
+  l1 <- list(1:10)
+  l2 <- list(x = 1, 2)
 
-test_that("as_tibble() checks names by default (#278)", {
   df <- tibble(a = 1, b = 2)
   names(df) <- c("", NA)
+
+  expect_error(
+    as_tibble(l1),
+    error_column_must_be_named(1),
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(l2),
+    error_column_must_be_named(2),
+    fixed = TRUE
+  )
   expect_error(
     as_tibble(df),
     error_column_must_be_named(1:2),
@@ -231,7 +223,7 @@ test_that("as_tibble() checks names by default (#278)", {
 })
 
 
-test_that("as_tibble() adds empty names, even if not fixing names", {
+test_that("as_tibble() makes names `minimal`, even if not fixing names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "none")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
@@ -323,41 +315,6 @@ test_that("NULL isn't a valid column", {
   expect_error(
     check_valid_cols(list(a = NULL)),
     error_column_must_be_vector("a", "NULL"),
-    fixed = TRUE
-  )
-})
-
-test_that("columns must be named (#1101)", {
-  l <- list(1:10, 1:10)
-
-  expect_error(
-    check_valid_names(l),
-    error_names_must_be_non_null(),
-    fixed = TRUE
-  )
-
-  expect_error(
-    check_valid_names(setNames(l, c("x", ""))),
-    error_column_must_be_named(2),
-    fixed = TRUE
-  )
-
-  expect_error(
-    check_valid_names(setNames(l, c("x", NA))),
-    error_column_must_be_named(2),
-    fixed = TRUE
-  )
-})
-
-test_that("names must be unique (#820)", {
-  expect_error(
-    check_valid_names(list(x = 1, x = 2, y = 3)),
-    error_column_names_must_be_unique("x"),
-    fixed = TRUE
-  )
-  expect_error(
-    check_valid_names(list(x = 1, x = 2, y = 3, y = 4)),
-    error_column_names_must_be_unique(c("x", "y")),
     fixed = TRUE
   )
 })
