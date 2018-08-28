@@ -149,18 +149,18 @@ test_that("error_column_must_be_named()", {
   )
 })
 
-test_that("error_column_must_have_unique_name()", {
+test_that("error_column_names_must_be_unique()", {
   expect_equal(
-    error_column_must_have_unique_name("a"),
-    "Column `a` must have a unique name."
+    error_column_names_must_be_unique("a"),
+    "Column name `a` must not be duplicated."
   )
   expect_equal(
-    error_column_must_have_unique_name(letters[2:3]),
-    "Columns `b`, `c` must have unique names."
+    error_column_names_must_be_unique(letters[2:3]),
+    "Column names `b`, `c` must not be duplicated."
   )
   expect_equal(
-    unell(error_column_must_have_unique_name(LETTERS)),
-    "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must have unique names."
+    unell(error_column_names_must_be_unique(LETTERS)),
+    "Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated."
   )
 })
 

@@ -92,8 +92,8 @@ error_column_must_be_named <- function(names) {
   invalid_df("must be named", names)
 }
 
-error_column_must_have_unique_name <- function(names) {
-  invalid_df("must have [a ]unique name(s)", names)
+error_column_names_must_be_unique <- function(names) {
+  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.")
 }
 
 error_column_must_be_vector <- function(names, classes) {

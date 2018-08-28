@@ -235,12 +235,20 @@ check_valid <- function(name) {
 
   bad_name <- which(name == "")
   if (has_length(bad_name)) {
-    abort(error_column_must_be_named(bad_name))
+    msg <- paste0(
+      error_column_must_be_named(bad_name), "\n",
+      "Use `.name_repair` to specify a fix."
+    )
+    abort(msg)
   }
 
   dups <- which(duplicated(name))
   if (has_length(dups)) {
-    abort(error_column_must_have_unique_name(name[dups]))
+    msg <- paste0(
+      error_column_names_must_be_unique(name[dups]), "\n",
+      "Use `.name_repair` to specify a fix."
+    )
+    abort(msg)
   }
 
   invisible(name)

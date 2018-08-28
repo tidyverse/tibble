@@ -352,12 +352,12 @@ test_that("columns must be named (#1101)", {
 test_that("names must be unique (#820)", {
   expect_error(
     check_valid_names(list(x = 1, x = 2, y = 3)),
-    error_column_must_have_unique_name("x"),
+    error_column_names_must_be_unique("x"),
     fixed = TRUE
   )
   expect_error(
     check_valid_names(list(x = 1, x = 2, y = 3, y = 4)),
-    error_column_must_have_unique_name(c("x", "y")),
+    error_column_names_must_be_unique(c("x", "y")),
     fixed = TRUE
   )
 })
