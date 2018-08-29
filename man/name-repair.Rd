@@ -37,12 +37,12 @@ tibble deals with a few levels of name repair:
 \item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
 an unnamed element is \code{""} (never \code{NA}). Enforced internally by \code{\link[=tibble]{tibble()}}
 and \code{\link[=as_tibble]{as_tibble()}} and there is no opt-out.
-\item \code{valid} names exist, are never empty (literally, no \code{""}s), and have no
+\item \code{unique} names exist, are never empty (literally, no \code{""}s), and have no
 duplicates.
-\item \code{syntactic} names are \code{valid} and syntactic (see Details for more).
+\item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
 }
 
-\code{syntactic} implies \code{valid}, \code{valid} implies \code{minimal}.
+\code{syntactic} implies \code{unique}, \code{unique} implies \code{minimal}.
 
 The \code{.name_repair} argument of \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} refers to these
 levels. Alternatively, the user can pass their own name repair function. It
@@ -52,9 +52,9 @@ that are at least \code{minimal}.
 \code{tidy_names()} and \code{set_tidy_names()} ... WHAT I WANT TO SAY:
 they were our first pass as providing access to our name repair strategies,
 which we still want to do. That is, we'd like to export utilities around
-\code{minimal} and (our take on) \code{valid} and \code{syntactic} names. But ... not yet
+\code{minimal} and (our take on) \code{unique} and \code{syntactic} names. But ... not yet
 and probably not here. The old "tidy with \code{syntactic = FALSE}" is the new
-\code{valid} and the old "tidy with \code{syntactic = TRUE} is new \code{syntactic}.
+\code{unique} and the old "tidy with \code{syntactic = TRUE} is new \code{syntactic}.
 
 \code{repair_names()} is an older function with different renaming
 heuristics and is being deprecated. In new code, use \code{as_tibble()} and
@@ -82,16 +82,16 @@ Related: \code{\link[rlang:names2]{rlang::names2()}} returns the names of an obj
 \code{minimal}.
 }
 
-\section{\code{valid} names}{
+\section{\code{unique} names}{
 
 
-\code{valid} names exist, are never empty (literally, no \code{""}s), and have no
+\code{unique} names exist, are never empty (literally, no \code{""}s), and have no
 duplicates.
 
-You usually want \code{valid} variable names in a tibble, because they ensure that
+You usually want \code{unique} variable names in a tibble, because they ensure that
 any variable can be identified, uniquely, by its name.
 
-There are many ways to make names \code{valid}. We do so by appending a suffix of
+There are many ways to make names \code{unique}. We do so by appending a suffix of
 the form \code{..j} to any name that is \code{""} or a duplicate, where \code{j} is the
 position. Why?
 \itemize{
@@ -104,26 +104,26 @@ inspection of the names as a group.
 }
 
 Example:\preformatted{Original names:    ""    "x"    "" "y"    "x"
- `valid` names: "..1" "x..2" "..3" "y" "x..5"
+ `unique` names: "..1" "x..2" "..3" "y" "x..5"
 }
 
-Why would you ever want \code{minimal} names, instead of \code{valid} or \code{syntactic}
+Why would you ever want \code{minimal} names, instead of \code{unique} or \code{syntactic}
 ones? Sometimes the first row of a data source -- allegedly variable names --
 actually contains \strong{data} and the resulting tibble will be reshaped with,
 e.g., \code{tidyr::gather()}. In this case, it is better to not munge the names at
 import.
 
 Pre-existing suffixes of the form \code{..j} are always stripped, prior to making
-names \code{valid}, i.e. reconstructing the suffixes.
+names \code{unique}, i.e. reconstructing the suffixes.
 }
 
 \section{\code{syntactic} names}{
 
 
-\code{syntactic} names are \code{valid} and syntactic (quoting from \code{\link[=make.names]{make.names()}}),
+\code{syntactic} names are \code{unique} and syntactic (quoting from \code{\link[=make.names]{make.names()}}),
 meaning they:
 \itemize{
-\item Have no duplicates (inherited from \code{valid}).
+\item Have no duplicates (inherited from \code{unique}).
 \item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
 characters.
 \item Start with a letter or the dot \code{.}, not followed by a number.
@@ -135,7 +135,7 @@ quoting and work well with nonstandard evaluation, such as list indexing via
 \code{$} or in packages like dplyr and ggplot2.
 
 There are many ways to make names \code{syntactic}. For example, we choose to
-define \code{syntactic} names as an extension of \code{valid}, i.e. \code{syntactic} implies
+define \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic} implies
 unique. Why? Because the need for syntactic names is strongly associated with
 the need for uniqueness and this makes things simpler.
 }

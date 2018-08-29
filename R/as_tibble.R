@@ -49,7 +49,7 @@
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
 #'
-#' as_tibble(1:3, .name_repair = "valid")
+#' as_tibble(1:3, .name_repair = "unique")
 #'
 #' # For list-like inputs, as_tibble() is considerably simpler than as.data.frame()
 #' \dontrun{
@@ -58,7 +58,7 @@
 #'   names(l2) <- letters
 #'   bench::mark(
 #'     as_tibble(l2, .name_repair = "syntactic"),
-#'     as_tibble(l2, .name_repair = "valid"),
+#'     as_tibble(l2, .name_repair = "unique"),
 #'     as_tibble(l2, .name_repair = "none"),
 #'     as_tibble(l2),
 #'     as.data.frame(l2),
@@ -68,7 +68,7 @@
 #' }
 as_tibble <- function(x, ...,
                       .rows = NULL,
-                      .name_repair = c("assert_valid", "valid", "syntactic", "none"),
+                      .name_repair = c("assert_unique", "unique", "syntactic", "none"),
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
@@ -77,11 +77,11 @@ as_tibble <- function(x, ...,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
-                                 .name_repair = c("assert_valid", "valid", "syntactic", "none"),
+                                 .name_repair = c("assert_unique", "unique", "syntactic", "none"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "assert_valid" else "none"
+    .name_repair <- if (isTRUE(validate)) "assert_unique" else "none"
   }
 
   old_rownames <- raw_rownames(x)
@@ -106,10 +106,10 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
-                           .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
+                           .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "assert_valid" else "none"
+    .name_repair <- if (isTRUE(validate)) "assert_unique" else "none"
   }
 
   x <- set_repaired_names(x, .name_repair)

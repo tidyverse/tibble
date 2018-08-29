@@ -25,9 +25,9 @@
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"none"`: Do nothing: no name repair, no name checking,
-#'   - `"valid"`: Eliminate missing or duplicated names,
-#'   - `"assert_valid"`: (default value), do not repair the names, but check they are `valid`,
-#'   - `"syntactic"`: Make the names `valid` and syntactic
+#'   - `"unique"`: Eliminate missing or duplicated names,
+#'   - `"assert_unique"`: (default value), do not repair the names, but check they are `unique`,
+#'   - `"syntactic"`: Make the names `unique` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
 #'
@@ -56,7 +56,7 @@
 #' \dontrun{
 #' tibble(x = 1, x = 2)
 #' }
-#' tibble(x = 1, x = 2, .name_repair = "valid")
+#' tibble(x = 1, x = 2, .name_repair = "unique")
 #' tibble(x = 1, x = 2, .name_repair = "none")
 #'
 #' # You can splice-unquote a list of quotes and formulas
@@ -71,7 +71,7 @@
 #' @aliases tbl_df-class
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
+                   .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }

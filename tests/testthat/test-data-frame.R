@@ -198,7 +198,7 @@ test_that("Can convert named atomic vectors to data frame", {
   )
 })
 
-test_that("as_tibble() checks for `valid` names by default (#278)", {
+test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
   l2 <- list(x = 1, 2)
 
@@ -231,11 +231,11 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 
-test_that("as_tibble() implements valid names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "valid")
+test_that("as_tibble() implements unique names", {
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), valid_names(rep("", 3)))
+  expect_equal(names(invalid_df), unique_names(rep("", 3)))
 })
 
 test_that("as_tibble() implements syntactic names", {

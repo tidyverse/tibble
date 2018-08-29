@@ -10,11 +10,11 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("assert_valid", "valid",
+tibble(..., .rows = NULL, .name_repair = c("assert_unique", "unique",
   "syntactic", "none"))
 
-data_frame(..., .rows = NULL, .name_repair = c("assert_valid", "valid",
-  "syntactic", "none"))
+data_frame(..., .rows = NULL, .name_repair = c("assert_unique",
+  "unique", "syntactic", "none"))
 
 lst(...)
 }
@@ -30,9 +30,9 @@ just as an additional check.}
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
-\item \code{"valid"}: Eliminate missing or duplicated names,
-\item \code{"assert_valid"}: (default value), do not repair the names, but check they are \code{valid},
-\item \code{"syntactic"}: Make the names \code{valid} and syntactic
+\item \code{"unique"}: Eliminate missing or duplicated names,
+\item \code{"assert_unique"}: (default value), do not repair the names, but check they are \code{unique},
+\item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 }
@@ -83,7 +83,7 @@ tibble(`a + b` = 1:5)
 \dontrun{
 tibble(x = 1, x = 2)
 }
-tibble(x = 1, x = 2, .name_repair = "valid")
+tibble(x = 1, x = 2, .name_repair = "unique")
 tibble(x = 1, x = 2, .name_repair = "none")
 
 # You can splice-unquote a list of quotes and formulas

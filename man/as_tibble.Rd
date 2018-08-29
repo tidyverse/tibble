@@ -10,16 +10,16 @@
 \alias{as_tibble.default}
 \title{Coerce vectors, lists, and matrices to data frames}
 \usage{
-as_tibble(x, ..., .rows = NULL, .name_repair = c("assert_valid",
-  "valid", "syntactic", "none"),
+as_tibble(x, ..., .rows = NULL, .name_repair = c("assert_unique",
+  "unique", "syntactic", "none"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("assert_valid", "valid", "syntactic", "none"),
+  .name_repair = c("assert_unique", "unique", "syntactic", "none"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("assert_valid", "valid", "syntactic", "none"))
+  .name_repair = c("assert_unique", "unique", "syntactic", "none"))
 
 \method{as_tibble}{matrix}(x, ...)
 
@@ -40,9 +40,9 @@ just as an additional check.}
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
-\item \code{"valid"}: Eliminate missing or duplicated names,
-\item \code{"assert_valid"}: (default value), do not repair the names, but check they are \code{valid},
-\item \code{"syntactic"}: Make the names \code{valid} and syntactic
+\item \code{"unique"}: Eliminate missing or duplicated names,
+\item \code{"assert_unique"}: (default value), do not repair the names, but check they are \code{unique},
+\item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 }
@@ -99,7 +99,7 @@ m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-as_tibble(1:3, .name_repair = "valid")
+as_tibble(1:3, .name_repair = "unique")
 
 # For list-like inputs, as_tibble() is considerably simpler than as.data.frame()
 \dontrun{
@@ -108,7 +108,7 @@ if (requireNamespace("bench", quietly = TRUE)) {
   names(l2) <- letters
   bench::mark(
     as_tibble(l2, .name_repair = "syntactic"),
-    as_tibble(l2, .name_repair = "valid"),
+    as_tibble(l2, .name_repair = "unique"),
     as_tibble(l2, .name_repair = "none"),
     as_tibble(l2),
     as.data.frame(l2),

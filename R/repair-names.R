@@ -5,11 +5,11 @@
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
 #'   an unnamed element is `""` (never `NA`). Enforced internally by [tibble()]
 #'   and [as_tibble()] and there is no opt-out.
-#'   * `valid` names exist, are never empty (literally, no `""`s), and have no
+#'   * `unique` names exist, are never empty (literally, no `""`s), and have no
 #'   duplicates.
-#'   * `syntactic` names are `valid` and syntactic (see Details for more).
+#'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'
-#' `syntactic` implies `valid`, `valid` implies `minimal`.
+#' `syntactic` implies `unique`, `unique` implies `minimal`.
 #'
 #' The `.name_repair` argument of [tibble()] and [as_tibble()] refers to these
 #' levels. Alternatively, the user can pass their own name repair function. It
@@ -38,15 +38,15 @@
 #' Related: [rlang::names2()] returns the names of an object, after making them
 #' `minimal`.
 #'
-#' @section `valid` names:
+#' @section `unique` names:
 #'
-#' `valid` names exist, are never empty (literally, no `""`s), and have no
+#' `unique` names exist, are never empty (literally, no `""`s), and have no
 #' duplicates.
 #'
-#' You usually want `valid` variable names in a tibble, because they ensure that
+#' You usually want `unique` variable names in a tibble, because they ensure that
 #' any variable can be identified, uniquely, by its name.
 #'
-#' There are many ways to make names `valid`. We do so by appending a suffix of
+#' There are many ways to make names `unique`. We do so by appending a suffix of
 #' the form `..j` to any name that is `""` or a duplicate, where `j` is the
 #' position. Why?
 #' * An absolute position `j` is more helpful than numbering within the columns
@@ -59,23 +59,23 @@
 #' Example:
 #' ```
 #' Original names:    ""    "x"    "" "y"    "x"
-#'  `valid` names: "..1" "x..2" "..3" "y" "x..5"
+#'  `unique` names: "..1" "x..2" "..3" "y" "x..5"
 #' ```
 #'
-#' Why would you ever want `minimal` names, instead of `valid` or `syntactic`
+#' Why would you ever want `minimal` names, instead of `unique` or `syntactic`
 #' ones? Sometimes the first row of a data source -- allegedly variable names --
 #' actually contains **data** and the resulting tibble will be reshaped with,
 #' e.g., `tidyr::gather()`. In this case, it is better to not munge the names at
 #' import.
 #'
 #' Pre-existing suffixes of the form `..j` are always stripped, prior to making
-#' names `valid`, i.e. reconstructing the suffixes.
+#' names `unique`, i.e. reconstructing the suffixes.
 #'
 #' @section `syntactic` names:
 #'
-#' `syntactic` names are `valid` and syntactic (quoting from [make.names()]),
+#' `syntactic` names are `unique` and syntactic (quoting from [make.names()]),
 #' meaning they:
-#'   - Have no duplicates (inherited from `valid`).
+#'   - Have no duplicates (inherited from `unique`).
 #'   - Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
 #'   - Start with a letter or the dot `.`, not followed by a number.
@@ -86,7 +86,7 @@
 #' `$` or in packages like dplyr and ggplot2.
 #'
 #' There are many ways to make names `syntactic`. For example, we choose to
-#' define `syntactic` names as an extension of `valid`, i.e. `syntactic` implies
+#' define `syntactic` names as an extension of `unique`, i.e. `syntactic` implies
 #' unique. Why? Because the need for syntactic names is strongly associated with
 #' the need for uniqueness and this makes things simpler.
 #'
@@ -117,14 +117,14 @@
 NULL
 
 set_repaired_names <- function(x,
-                              .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
+                              .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
   x <- set_minimal_names(x)
   names(x) <- repaired_names(names(x), .name_repair = .name_repair)
   x
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("assert_valid", "valid", "syntactic", "none")) {
+                           .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -135,8 +135,8 @@ repaired_names <- function(name,
     repair_fun <- switch(
       .name_repair,
       none         = ,
-      assert_valid = NULL,
-      valid        = valid_names,
+      assert_unique = NULL,
+      unique        = unique_names,
       syntactic    = syntactic_names,
       abort(error_name_repair_arg())
     )
@@ -144,8 +144,8 @@ repaired_names <- function(name,
   new_name <- if (is_function(repair_fun)) repair_fun(name) else name
 
   if (is.character(.name_repair) &&
-      .name_repair %in% c("assert_valid", "valid", "syntactic")) {
-    check_valid(new_name)
+      .name_repair %in% c("assert_unique", "unique", "syntactic")) {
+    check_unique(new_name)
   } else {
     check_minimal(new_name)
   }
@@ -165,7 +165,7 @@ set_minimal_names <- function(x) {
   set_names(x, new_names)
 }
 
-valid_names <- function(name, quiet = FALSE) {
+unique_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- strip_pos(name)
   new_name <- append_pos(new_name)
@@ -177,9 +177,9 @@ valid_names <- function(name, quiet = FALSE) {
   new_name
 }
 
-set_valid_names <- function(x, quiet = FALSE) {
+set_unique_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- valid_names(names(x), quiet = quiet)
+  new_names <- unique_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
@@ -189,7 +189,7 @@ syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- strip_pos(name)
   new_name <- make_syntactic(new_name)
-  new_name <- valid_names(new_name, quiet = TRUE)
+  new_name <- unique_names(new_name, quiet = TRUE)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -226,7 +226,7 @@ check_minimal_names <- function(x) {
   invisible(x)
 }
 
-check_valid <- function(name) {
+check_unique <- function(name) {
   check_minimal(name)
 
   bad_name <- which(name == "")
@@ -250,8 +250,8 @@ check_valid <- function(name) {
   invisible(name)
 }
 
-check_valid_names <- function(x) {
-  check_valid(names(x))
+check_unique_names <- function(x) {
+  check_unique(names(x))
   invisible(x)
 }
 
@@ -297,9 +297,9 @@ describe_repair <- function(orig_name, name) {
 #' @description `tidy_names()` and `set_tidy_names()` ... WHAT I WANT TO SAY:
 #'   they were our first pass as providing access to our name repair strategies,
 #'   which we still want to do. That is, we'd like to export utilities around
-#'   `minimal` and (our take on) `valid` and `syntactic` names. But ... not yet
+#'   `minimal` and (our take on) `unique` and `syntactic` names. But ... not yet
 #'   and probably not here. The old "tidy with `syntactic = FALSE`" is the new
-#'   `valid` and the old "tidy with `syntactic = TRUE` is new `syntactic`.
+#'   `unique` and the old "tidy with `syntactic = TRUE` is new `syntactic`.
 #'
 #' @param syntactic Should all names be made syntactically valid via
 #'   [make.names()]?
@@ -311,7 +311,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   if (syntactic) {
     new_name <- make_syntactic(new_name)
   }
-  new_name <- valid_names(new_name, quiet = TRUE)
+  new_name <- unique_names(new_name, quiet = TRUE)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -342,7 +342,7 @@ set_tidy_names <- function(x, quiet = FALSE) {
 # df <- setNames(tibble(1, 2), c("x", "x"))
 # df
 # repair_names(df)
-# as_tibble(df, .name_repair = "valid")
+# as_tibble(df, .name_repair = "unique")
 repair_names <- function(x, prefix = "V", sep = "") {
 
   ## TODO: `dplyr::bind_cols()` calls this function, so this might just
