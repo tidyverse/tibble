@@ -10,7 +10,7 @@ test_that("minimal names are made from `n` when `name = NULL`", {
 })
 
 test_that("minimal names have '' instead of NAs", {
-  expect_identical(minimal_names(c("", NA)), c("", ""))
+  expect_identical(minimal_names(c("", NA, "", NA)), c("", "", "", ""))
 })
 
 test_that("set_minimal_names() copes with NULL input names", {
@@ -36,8 +36,8 @@ test_that("valid_names() eliminates emptiness and duplication", {
 })
 
 test_that("valid_names() strips positional suffixes, re-applies as needed", {
-  x <- c("..20", "a..1", "b")
-  expect_identical(valid_names(x), c("..1", "a", "b"))
+  x <- c("..20", "a..1", "b", "", "a..2")
+  expect_identical(valid_names(x), c("..1", "a..2", "b", "..4", "a..5"))
 })
 
 test_that("check_valid() imposes check_minimal()", {
@@ -77,11 +77,66 @@ test_that("check_valid() errors for empty or duplicated names", {
   )
 })
 
-test_that("syntactic_names() pass checks minimal, valid, and syntactic", {
+test_that("syntactic_names() pass checks for minimal, valid, and syntactic", {
   x <- c(NA, "", "x", "x", "a1:", "_x_y}")
   x_syn <- syntactic_names(x)
   expect_error(check_minimal(x_syn), NA)
   expect_error(check_valid(x_syn), NA)
   expect_true(all(is_syntactic(x_syn)))
   expect_identical(x_syn, c("..1", "..2", "x..3", "x..4", "a1.", "X_x_y."))
+})
+
+test_that("name fixers are idempotent", {
+  x <- c("", "", NA)
+  expect_identical(minimal_names(x), minimal_names(minimal_names(x)))
+
+  x <- c("..20", "a..1", "b", "", "a..2")
+  expect_identical(valid_names(x), valid_names(valid_names(x)))
+
+  x <- c(NA, "", "x", "x", "a1:", "_x_y}")
+  expect_identical(syntactic_names(x), syntactic_names(syntactic_names(x)))
+})
+
+test_that("valid-ification has an 'algebraic'-y property", {
+  ## inspired by, but different from, this guarantee about base::make_unique()
+  ## make.unique(c(A, B)) == make.unique(c(make.unique(A), B))
+  ## If A is already unique, then make.unique(c(A, B)) preserves A.
+
+  ## I haven't formulated what we guarantee very well yet, but it's probably
+  ## implicit in this test (?)
+
+  x <- c("..20", "a..1", "b", "", "a..2", "d")
+  y <- c("", "a..3", "b", "..3", "e")
+
+  ## fix names on each, catenate, fix the whole
+  z1 <- valid_names(
+    c(
+      valid_names(x), valid_names(y)
+    )
+  )
+
+  ## fix names on x, catenate, fix the whole
+  z2 <- valid_names(
+    c(
+      valid_names(x), y
+    )
+  )
+
+  ## fix names on y, catenate, fix the whole
+  z3 <- valid_names(
+    c(
+      x, valid_names(y)
+    )
+  )
+
+  ## catenate, fix the whole
+  z4 <- valid_names(
+    c(
+      x, y
+    )
+  )
+
+  expect_identical(z1, z2)
+  expect_identical(z1, z3)
+  expect_identical(z1, z4)
 })
