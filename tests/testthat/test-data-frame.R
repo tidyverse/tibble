@@ -348,6 +348,22 @@ test_that("types preserved when recycling in tibble() (#284)", {
   )
 })
 
+test_that("`validate` triggers deprecation message, but then works", {
+  expect_error(
+    expect_message(
+      as_tibble(list(a = 1, "hi"), validate = TRUE),
+      "deprecated"
+    ),
+    error_column_must_be_named(2)
+  )
+
+  expect_message(
+    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
+    "deprecated"
+  )
+  expect_identical(names(df), c("a", "", "a"))
+})
+
 
 # Data frame and matrix columns -------------------------------------------
 
