@@ -27,12 +27,12 @@
 #'   - `"none"`: Do nothing: no name repair, no name checking,
 #'   - `"valid"`: Eliminate missing or duplicated names,
 #'   - `"assert_valid"`: (default value), do not repair the names, but check they are `valid`,
-#'   - `"syntactic"`: Use `TODO: fill this in` to create `valid` and syntactic
-#'   names
+#'   - `"syntactic"`: Make the names `valid` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
 #'
-#'   See [name-repair] for more details on these terms and the strategies used to enforce them.
+#'   See [name-repair] for more details on these terms and the strategies used
+#'   to enforce them.
 #'
 #' @seealso [as_tibble()] to turn an existing list into a data frame,
 #'   [name-repair] for more detail on name repair.

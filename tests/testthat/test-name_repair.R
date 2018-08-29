@@ -98,7 +98,7 @@ test_that("name fixers are idempotent", {
 })
 
 test_that("valid-ification has an 'algebraic'-y property", {
-  ## inspired by, but different from, this guarantee about base::make_unique()
+  ## inspired by, but different from, this guarantee about base::make.unique()
   ## make.unique(c(A, B)) == make.unique(c(make.unique(A), B))
   ## If A is already unique, then make.unique(c(A, B)) preserves A.
 

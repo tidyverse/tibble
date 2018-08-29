@@ -42,13 +42,13 @@ just as an additional check.}
 \item \code{"none"}: Do nothing: no name repair, no name checking,
 \item \code{"valid"}: Eliminate missing or duplicated names,
 \item \code{"assert_valid"}: (default value), do not repair the names, but check they are \code{valid},
-\item \code{"syntactic"}: Use \code{TODO: fill this in} to create \code{valid} and syntactic
-names
+\item \code{"syntactic"}: Make the names \code{valid} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 }
 
-See \link{name-repair} for more details on these terms and the strategies used to enforce them.}
+See \link{name-repair} for more details on these terms and the strategies used
+to enforce them.}
 
 \item{rownames}{Treatment of existing row names (for data frames and matrices):
 \itemize{
