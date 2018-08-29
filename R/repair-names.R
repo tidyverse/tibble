@@ -153,7 +153,7 @@ repaired_names <- function(name,
 
 minimal_names <- function(name, n) {
   if (is.null(name) && missing(n)) {
-    error_name_length_required()
+    abort(error_name_length_required())
   }
   ## TODO: address scenarios where name is not NULL and n != length(name)?
   new_name <- name %||% rep_len("", n)
@@ -255,15 +255,13 @@ check_valid_names <- function(x) {
   invisible(x)
 }
 
-## TODO: do we need checks around "syntactic"-ness?
-
-## TODO: revisit with something more consistent with `..j` and general tidyverse
-## naming conventions
 make_syntactic <- function(name) {
   fix_syntactic <- (name != "") & !is_syntactic(name)
   name[fix_syntactic] <- make.names(name[fix_syntactic])
   name
 }
+
+## TODO: do we need checks around "syntactic"-ness?
 
 append_pos <- function(name) {
   need_append_pos <- duplicated(name) |
@@ -275,7 +273,7 @@ append_pos <- function(name) {
 }
 
 strip_pos <- function(name) {
-  rx <- "[.][.][0-9]+$"
+  rx <- "[.][.][1-9][0-9]*$"
   gsub(rx, "", name) %|% ""
 }
 
