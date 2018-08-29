@@ -99,6 +99,7 @@ test_that("glimpse(width = Inf) raises legible error", {
 })
 
 test_that("glimpse works for structures with unknown rows", {
+  skip_on_os("windows") # capture_output_lines() forces native encoding
   iris2 <- as_unknown_rows(iris)
 
   expect_output_file(
