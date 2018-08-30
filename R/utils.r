@@ -17,11 +17,6 @@ has_nonnull_names <- function(x) {
 
 set_class <- `class<-`
 
-is_1d <- function(x) {
-  # dimension check is for matrices and data.frames
-  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
-}
-
 strip_dim <- function(x) {
   if (is.matrix(x)) {
     rownames(x) <- NULL

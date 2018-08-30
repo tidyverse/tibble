@@ -10,9 +10,11 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .tidy_names = NULL)
+tibble(..., .rows = NULL, .name_repair = c("assert_unique", "unique",
+  "syntactic", "none", "minimal"))
 
-data_frame(..., .rows = NULL, .tidy_names = NULL)
+data_frame(..., .rows = NULL, .name_repair = c("assert_unique",
+  "unique", "syntactic", "none", "minimal"))
 
 lst(...)
 }
@@ -25,25 +27,30 @@ unquote-splice via \code{\link{!!!}}.}
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
 
-\item{.tidy_names}{Treatment of invalid or duplicate column names:
+\item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{NULL}: default, throw an error if there are any missing or duplicated names,
-\item \code{FALSE}: deliberately request a tibble with invalid names,
-\item \code{TRUE}: apply \code{\link[=tidy_names]{tidy_names()}} to the names,
-\item a function: apply custom name repair (e.g., \code{.tidy_names = make.names}
-to get base R equivalence).
-}}
+\item \code{"none"}: No name repair or checks, beyond basic existence,
+\item \code{"minimal"}: Same as \code{"none"},
+\item \code{"unique"}: Make sure names are unique and not empty,
+\item \code{"assert_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"syntactic"}: Make the names \code{unique} and syntactic
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
+}
+
+See \link{name-repair} for more details on these terms and the strategies used
+to enforce them.}
 }
 \description{
 \code{tibble()} is a trimmed down version of \code{\link[=data.frame]{data.frame()}} that:
 \itemize{
 \item Never coerces inputs (i.e. strings stay as strings!).
 \item Never adds \code{row.names}.
-\item Never munges column names.
 \item Only recycles length 1 inputs.
+\item Automatically adds column names.
+\item Doesn't munge column names.
 \item Evaluates its arguments lazily and in order.
 \item Adds \code{tbl_df} class to output.
-\item Automatically adds column names.
 }
 
 \code{data_frame()} is an alias to \code{tibble()}.
@@ -70,8 +77,31 @@ lst(n = 5, x = runif(n))
 str(tibble(letters))
 str(tibble(x = list(diag(1), diag(2))))
 
-# or munges column names
+# or munges column names (unless requested)
 tibble(`a + b` = 1:5)
+
+# but it forces you to take charge of names, if they need repair
+\dontrun{
+tibble(x = 1, x = 2)
+}
+tibble(x = 1, x = 2, .name_repair = "unique")
+tibble(x = 1, x = 2, .name_repair = "none")
+
+## by default, non-syntactic names are allowed
+df <- tibble(`a 1` = 1, `a 2` = 2)
+## because you can still index by name
+df[["a 1"]]
+df$`a 1`
+
+## syntactic names are easier to work with, though, and you can request them
+df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+df$a.1
+
+## you can specify your own name repair function
+tibble(x = 1, x = 2, .name_repair = make.unique)
+
+fix_names <- function(x) gsub("\\\\s+", "_", x)
+tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 
 # You can splice-unquote a list of quotes and formulas
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
@@ -89,6 +119,6 @@ lst(!!! list(n = rlang::quo(2 + 3), y = quote(runif(n))))
 
 }
 \seealso{
-\code{\link[=as_tibble]{as_tibble()}} to turn an existing list into
-a data frame.
+\code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame,
+\link{name-repair} for more detail on name repair.
 }

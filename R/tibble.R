@@ -5,11 +5,11 @@
 #'
 #' * Never coerces inputs (i.e. strings stay as strings!).
 #' * Never adds `row.names`.
-#' * Never munges column names.
 #' * Only recycles length 1 inputs.
+#' * Automatically adds column names.
+#' * Doesn't munge column names.
 #' * Evaluates its arguments lazily and in order.
 #' * Adds `tbl_df` class to output.
-#' * Automatically adds column names.
 #'
 #' `data_frame()` is an alias to `tibble()`.
 #'
@@ -23,14 +23,20 @@
 #'   unquote-splice via [`!!!`].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
-#' @param .tidy_names Treatment of invalid or duplicate column names:
-#'   - `NULL`: default, throw an error if there are any missing or duplicated names,
-#'   - `FALSE`: deliberately request a tibble with invalid names,
-#'   - `TRUE`: apply [tidy_names()] to the names,
-#'   - a function: apply custom name repair (e.g., `.tidy_names = make.names`
-#'     to get base R equivalence).
-#' @seealso [as_tibble()] to turn an existing list into
-#'   a data frame.
+#' @param .name_repair Treatment of problematic column names:
+#'   - `"none"`: No name repair or checks, beyond basic existence,
+#'   - `"minimal"`: Same as `"none"`,
+#'   - `"unique"`: Make sure names are unique and not empty,
+#'   - `"assert_unique"`: (default value), no name repair, but check they are `unique`,
+#'   - `"syntactic"`: Make the names `unique` and syntactic
+#'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
+#'   for names in the style of base R).
+#'
+#'   See [name-repair] for more details on these terms and the strategies used
+#'   to enforce them.
+#'
+#' @seealso [as_tibble()] to turn an existing list into a data frame,
+#'   [name-repair] for more detail on name repair.
 #' @export
 #' @examples
 #' a <- 1:5
@@ -44,8 +50,31 @@
 #' str(tibble(letters))
 #' str(tibble(x = list(diag(1), diag(2))))
 #'
-#' # or munges column names
+#' # or munges column names (unless requested)
 #' tibble(`a + b` = 1:5)
+#'
+#' # but it forces you to take charge of names, if they need repair
+#' \dontrun{
+#' tibble(x = 1, x = 2)
+#' }
+#' tibble(x = 1, x = 2, .name_repair = "unique")
+#' tibble(x = 1, x = 2, .name_repair = "none")
+#'
+#' ## by default, non-syntactic names are allowed
+#' df <- tibble(`a 1` = 1, `a 2` = 2)
+#' ## because you can still index by name
+#' df[["a 1"]]
+#' df$`a 1`
+#'
+#' ## syntactic names are easier to work with, though, and you can request them
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+#' df$a.1
+#'
+#' ## you can specify your own name repair function
+#' tibble(x = 1, x = 2, .name_repair = make.unique)
+#'
+#' fix_names <- function(x) gsub("\\s+", "_", x)
+#' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 #'
 #' # You can splice-unquote a list of quotes and formulas
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
@@ -57,9 +86,11 @@
 #' tibble(y = strptime("2000/01/01", "%x"))
 #' }
 #' @aliases tbl_df-class
-tibble <- function(..., .rows = NULL, .tidy_names = NULL) {
+tibble <- function(...,
+                   .rows = NULL,
+                   .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
   xs <- quos(..., .named = TRUE)
-  as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .tidy_names = .tidy_names)
+  as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }
 
 #' @export
