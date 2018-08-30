@@ -9,7 +9,7 @@
 \usage{
 tidy_names(name, syntactic = FALSE, quiet = FALSE)
 
-set_tidy_names(x, quiet = FALSE)
+set_tidy_names(x, syntactic = FALSE, quiet = FALSE)
 
 repair_names(x, prefix = "V", sep = "")
 }

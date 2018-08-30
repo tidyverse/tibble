@@ -362,9 +362,9 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
 
 #' @export
 #' @rdname name-repair
-set_tidy_names <- function(x, quiet = FALSE) {
+set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- tidy_names(names(x), quiet = quiet)
+  new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
   set_names(x, new_names)
 }
 
