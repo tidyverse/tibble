@@ -230,6 +230,11 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
   expect_equal(names(invalid_df), rep("", 3))
 })
 
+test_that("'minimal' is a synonym for 'none'", {
+  minimal_df <- as_tibble(list(3, 4, 5), .name_repair = "minimal")
+  none_df <- as_tibble(list(3, 4, 5), .name_repair = "none")
+  expect_identical(minimal_df, none_df)
+})
 
 test_that("as_tibble() implements unique names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
