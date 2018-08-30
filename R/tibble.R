@@ -5,11 +5,11 @@
 #'
 #' * Never coerces inputs (i.e. strings stay as strings!).
 #' * Never adds `row.names`.
-#' * Never munges column names.
 #' * Only recycles length 1 inputs.
+#' * Automatically adds column names.
+#' * Doesn't munge column names by default.
 #' * Evaluates its arguments lazily and in order.
 #' * Adds `tbl_df` class to output.
-#' * Automatically adds column names.
 #'
 #' `data_frame()` is an alias to `tibble()`.
 #'
@@ -25,7 +25,7 @@
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"none"`: Do nothing: no name repair, no name checking,
-#'   - `"unique"`: Eliminate missing or duplicated names,
+#'   - `"unique"`: Make sure names are unique and not empty,
 #'   - `"assert_unique"`: (default value), do not repair the names, but check they are `unique`,
 #'   - `"syntactic"`: Make the names `unique` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`

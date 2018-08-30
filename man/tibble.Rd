@@ -30,7 +30,7 @@ just as an additional check.}
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
-\item \code{"unique"}: Eliminate missing or duplicated names,
+\item \code{"unique"}: Make sure names are unique and not empty,
 \item \code{"assert_unique"}: (default value), do not repair the names, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
@@ -45,11 +45,11 @@ to enforce them.}
 \itemize{
 \item Never coerces inputs (i.e. strings stay as strings!).
 \item Never adds \code{row.names}.
-\item Never munges column names.
 \item Only recycles length 1 inputs.
+\item Automatically adds column names.
+\item Doesn't munge column names by default.
 \item Evaluates its arguments lazily and in order.
 \item Adds \code{tbl_df} class to output.
-\item Automatically adds column names.
 }
 
 \code{data_frame()} is an alias to \code{tibble()}.

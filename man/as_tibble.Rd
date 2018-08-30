@@ -40,7 +40,7 @@ just as an additional check.}
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"none"}: Do nothing: no name repair, no name checking,
-\item \code{"unique"}: Eliminate missing or duplicated names,
+\item \code{"unique"}: Make sure names are unique and not empty,
 \item \code{"assert_unique"}: (default value), do not repair the names, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}

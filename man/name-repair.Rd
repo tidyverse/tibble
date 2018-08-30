@@ -35,10 +35,11 @@ number.}
 tibble deals with a few levels of name repair:
 \itemize{
 \item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
-an unnamed element is \code{""} (never \code{NA}). Enforced internally by \code{\link[=tibble]{tibble()}}
-and \code{\link[=as_tibble]{as_tibble()}} and there is no opt-out.
-\item \code{unique} names exist, are never empty (literally, no \code{""}s), and have no
-duplicates.
+an unnamed element is \code{""} and never \code{NA}. Enforced internally by
+\code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}}, even when \code{.name_repair = "none"}, and there
+is no opt-out.
+\item \code{unique} names are \code{minimal}, have no duplicates, and are never empty
+(literally, no \code{""}s).
 \item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
 }
 
@@ -64,7 +65,7 @@ specify a \code{.name_repair} strategy.
 
 
 \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of an
-unnamed element is \code{""} (never \code{NA}).
+unnamed element is \code{""} and never \code{NA}.
 
 \code{tbl_df} objects created by tibble will have variable names that are
 \code{minimal}, at the very least, Why? General name repair can be be implemented
@@ -85,11 +86,11 @@ Related: \code{\link[rlang:names2]{rlang::names2()}} returns the names of an obj
 \section{\code{unique} names}{
 
 
-\code{unique} names exist, are never empty (literally, no \code{""}s), and have no
-duplicates.
+\code{unique} names are \code{minimal}, have no duplicates, and are never empty
+(literally, no \code{""}s).
 
-You usually want \code{unique} variable names in a tibble, because they ensure that
-any variable can be identified, uniquely, by its name.
+You usually want \code{unique} variable names in a tibble, because they ensure
+that any variable can be identified, uniquely, by its name.
 
 There are many ways to make names \code{unique}. We do so by appending a suffix of
 the form \code{..j} to any name that is \code{""} or a duplicate, where \code{j} is the
@@ -98,13 +99,13 @@ position. Why?
 \item An absolute position \code{j} is more helpful than numbering within the columns
 that share a name. Context: troubleshooting data import with lots of columns
 and dysfunctional names.
-\item We hypothesize that it's better to make the repair of individual names as
-independent as possible. But, of course, detecting duplication requires
-inspection of the names as a group.
+\item We hypothesize that it's better have a "level playing field" when repairing
+names, i.e. if \code{foo} appears twice, they both get repaired, not just the
+second occurence.
 }
 
 Example:\preformatted{Original names:    ""    "x"    "" "y"    "x"
- `unique` names: "..1" "x..2" "..3" "y" "x..5"
+`unique` names: "..1" "x..2" "..3" "y" "x..5"
 }
 
 Why would you ever want \code{minimal} names, instead of \code{unique} or \code{syntactic}
@@ -114,7 +115,8 @@ e.g., \code{tidyr::gather()}. In this case, it is better to not munge the names 
 import.
 
 Pre-existing suffixes of the form \code{..j} are always stripped, prior to making
-names \code{unique}, i.e. reconstructing the suffixes.
+names \code{unique}, i.e. reconstructing the suffixes. If this interacts poorly
+with your names, you should take control of name repair.
 }
 
 \section{\code{syntactic} names}{
@@ -135,9 +137,10 @@ quoting and work well with nonstandard evaluation, such as list indexing via
 \code{$} or in packages like dplyr and ggplot2.
 
 There are many ways to make names \code{syntactic}. For example, we choose to
-define \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic} implies
-unique. Why? Because the need for syntactic names is strongly associated with
-the need for uniqueness and this makes things simpler.
+define \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic}
+implies unique. Why? Because the need for syntactic names is strongly
+associated with the need for uniqueness and this makes the name repair system
+simpler.
 }
 
 \examples{

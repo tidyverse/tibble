@@ -3,10 +3,11 @@
 #' @description
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
-#'   an unnamed element is `""` (never `NA`). Enforced internally by [tibble()]
-#'   and [as_tibble()] and there is no opt-out.
-#'   * `unique` names exist, are never empty (literally, no `""`s), and have no
-#'   duplicates.
+#'   an unnamed element is `""` and never `NA`. Enforced internally by
+#'   [tibble()] and [as_tibble()], even when `.name_repair = "none"`, and there
+#'   is no opt-out.
+#'   * `unique` names are `minimal`, have no duplicates, and are never empty
+#'   (literally, no `""`s).
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'
 #' `syntactic` implies `unique`, `unique` implies `minimal`.
@@ -19,7 +20,7 @@
 #' @section `minimal` names:
 #'
 #' `minimal` names exist. The `names` attribute is not `NULL`. The name of an
-#' unnamed element is `""` (never `NA`).
+#' unnamed element is `""` and never `NA`.
 #'
 #' `tbl_df` objects created by tibble will have variable names that are
 #' `minimal`, at the very least, Why? General name repair can be be implemented
@@ -40,11 +41,11 @@
 #'
 #' @section `unique` names:
 #'
-#' `unique` names exist, are never empty (literally, no `""`s), and have no
-#' duplicates.
+#' `unique` names are `minimal`, have no duplicates, and are never empty
+#'  (literally, no `""`s).
 #'
-#' You usually want `unique` variable names in a tibble, because they ensure that
-#' any variable can be identified, uniquely, by its name.
+#' You usually want `unique` variable names in a tibble, because they ensure
+#' that any variable can be identified, uniquely, by its name.
 #'
 #' There are many ways to make names `unique`. We do so by appending a suffix of
 #' the form `..j` to any name that is `""` or a duplicate, where `j` is the
@@ -52,14 +53,14 @@
 #' * An absolute position `j` is more helpful than numbering within the columns
 #' that share a name. Context: troubleshooting data import with lots of columns
 #' and dysfunctional names.
-#' * We hypothesize that it's better to make the repair of individual names as
-#' independent as possible. But, of course, detecting duplication requires
-#' inspection of the names as a group.
+#' * We hypothesize that it's better have a "level playing field" when repairing
+#' names, i.e. if `foo` appears twice, they both get repaired, not just the
+#' second occurence.
 #'
 #' Example:
 #' ```
 #' Original names:    ""    "x"    "" "y"    "x"
-#'  `unique` names: "..1" "x..2" "..3" "y" "x..5"
+#' `unique` names: "..1" "x..2" "..3" "y" "x..5"
 #' ```
 #'
 #' Why would you ever want `minimal` names, instead of `unique` or `syntactic`
@@ -69,7 +70,8 @@
 #' import.
 #'
 #' Pre-existing suffixes of the form `..j` are always stripped, prior to making
-#' names `unique`, i.e. reconstructing the suffixes.
+#' names `unique`, i.e. reconstructing the suffixes. If this interacts poorly
+#' with your names, you should take control of name repair.
 #'
 #' @section `syntactic` names:
 #'
@@ -86,9 +88,10 @@
 #' `$` or in packages like dplyr and ggplot2.
 #'
 #' There are many ways to make names `syntactic`. For example, we choose to
-#' define `syntactic` names as an extension of `unique`, i.e. `syntactic` implies
-#' unique. Why? Because the need for syntactic names is strongly associated with
-#' the need for uniqueness and this makes things simpler.
+#' define `syntactic` names as an extension of `unique`, i.e. `syntactic`
+#' implies unique. Why? Because the need for syntactic names is strongly
+#' associated with the need for uniqueness and this makes the name repair system
+#' simpler.
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
@@ -117,7 +120,7 @@
 NULL
 
 set_repaired_names <- function(x,
-                              .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
+                               .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
   x <- set_minimal_names(x)
   names(x) <- repaired_names(names(x), .name_repair = .name_repair)
   x
@@ -134,17 +137,17 @@ repaired_names <- function(name,
     .name_repair <- match.arg(.name_repair)
     repair_fun <- switch(
       .name_repair,
-      none         = ,
+      none          =     ,
       assert_unique = NULL,
       unique        = unique_names,
-      syntactic    = syntactic_names,
+      syntactic     = syntactic_names,
       abort(error_name_repair_arg())
     )
   }
   new_name <- if (is_function(repair_fun)) repair_fun(name) else name
 
   if (is.character(.name_repair) &&
-      .name_repair %in% c("assert_unique", "unique", "syntactic")) {
+    .name_repair %in% c("assert_unique", "unique", "syntactic")) {
     check_unique(new_name)
   } else {
     check_minimal(new_name)
@@ -288,7 +291,8 @@ describe_repair <- function(orig_name, name) {
         tick_if_needed(orig_name[new_names]),
         " -> ",
         tick_if_needed(name[new_names])
-      ), .problem = ""
+      ),
+      .problem = ""
     )
     message(msg)
   }
