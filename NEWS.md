@@ -22,17 +22,16 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - The new `.rows` argument to `tibble()` and `as_tibble()` allows specifying the expected number of rows explicitly, even if it's evident from the data.  This allows writing more defensive code.
 
-- Tibbles are now allowed to carry duplicate, empty or `NA` names, but checking is enabled by default, even when passing tibbles to `as_tibble()`. The new `.tidy_names` argument to `tibble()` and `as_tibble()` controls renaming:
+- Column name repair has more direct support, via the new `.name_repair` argument to `tibble()` and `as_tibble()`. It takes the following values:
 
-    - `NULL`: default, throw an error if there are any missing or duplicated names,
-    - `FALSE`: deliberately request a tibble with invalid names,
-    - `TRUE`: apply `tidy_names()` to the names,
-    - a function: apply custom name repair (e.g., `.tidy_names = make.names`
-      to get base R equivalence).
-    
-    Non-syntactic names will not be changed even with `.tidy_names = TRUE`, but might be when using a custom name repair such as `make.names`.
-    
-    The `validate` argument is deprecated but supported (with a warning).
+  - `"none"`: No name repair or checks, beyond basic existence.
+  - `"minimal"`: Same as `"none"`.
+  - `"unique"`: Make sure names are unique and not empty.
+  - `"assert_unique"`: (default value), no name repair, but check they are `unique`.
+  - `"syntactic"`: Make the names `unique` and syntactic.
+  - a function: apply custom name repair (e.g., `.name_repair = make.names` for names in the style of base R).
+  
+  The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "none"` instead of `validate = FALSE` and `.name_repair = "assert_unique"` instead of `validate = TRUE` (#469, @jennybc).
 
 - Row name handling is stricter.  Row names are never (and never were) supported in `tibble()` and `new_tibble()`, and are now stripped by default in `as_tibble()`. The `rownames` argument to `as_tibble()` supports:
 
@@ -45,7 +44,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
     
 - `new_tibble()` and `as_tibble()` now also strip the `"dim"` attribute from columns that are one-dimensional arrays. (`tibble()` already did this before.)
 
-- Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.tidy_names` can be used for all inputs.  We suggest that your implementations of this method do the same.
+- Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.name_repair` can be used for all inputs.  We suggest that your implementations of this method do the same.
 
 
 # tibble 1.4.99.9002
