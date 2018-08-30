@@ -3,37 +3,40 @@
 #' @description
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
-#'   an unnamed element is `""` and never `NA`. Enforced internally by
-#'   [tibble()] and [as_tibble()], even when `.name_repair = "none"`, and there
-#'   is no opt-out.
+#'   an unnamed element is `""` and never `NA`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
 #'   (literally, no `""`s).
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'
-#' `syntactic` implies `unique`, `unique` implies `minimal`.
+#' `syntactic` implies `unique`, `unique` implies `minimal`. These levels are
+#' nested.
 #'
 #' The `.name_repair` argument of [tibble()] and [as_tibble()] refers to these
 #' levels. Alternatively, the user can pass their own name repair function. It
 #' should anticipate `minimal` names as input and should, likewise, return names
 #' that are at least `minimal`.
 #'
+#' The "Life cycle" section explains the status of the existing functions
+#' `tidy_names()`, `set_tidy_names()`, and `repair_names()`.
+#'
 #' @section `minimal` names:
 #'
 #' `minimal` names exist. The `names` attribute is not `NULL`. The name of an
 #' unnamed element is `""` and never `NA`.
 #'
-#' `tbl_df` objects created by tibble will have variable names that are
-#' `minimal`, at the very least, Why? General name repair can be be implemented
-#' more simply if the baseline strategy ensures that `names(x)` returns a
-#' character vector of the correct length.
+#' `tbl_df` objects created by [tibble()] and [as_tibble()] have variable names
+#' that are `minimal`, at the very least, even when `.name_repair = "none"`.
+#' Why? General name repair can be be implemented more simply if the baseline
+#' strategy ensures that `names(x)` returns a character vector of the correct
+#' length.
 #'
 #' Examples:
 #' ```
 #' Original names of a vector with length 3: NULL
-#'                          `minimal` names: "" "" ""
+#'                            minimal names: "" "" ""
 #'
 #'                           Original names: "x" NA
-#'                          `minimal` names: "x" ""
+#'                            minimal names: "x" ""
 #' ```
 #'
 #' Related: [rlang::names2()] returns the names of an object, after making them
@@ -44,12 +47,13 @@
 #' `unique` names are `minimal`, have no duplicates, and are never empty
 #'  (literally, no `""`s).
 #'
-#' You usually want `unique` variable names in a tibble, because they ensure
-#' that any variable can be identified, uniquely, by its name.
+#' You usually want `unique` variable names in a data.frame, because they ensure
+#' that any variable can be identified, uniquely, by its name. Indexing by name
+#' works.
 #'
-#' There are many ways to make names `unique`. We do so by appending a suffix of
-#' the form `..j` to any name that is `""` or a duplicate, where `j` is the
-#' position. Why?
+#' There are many ways to make names `unique`. We append a suffix of the form
+#' `..j` to any name that is `""` or a duplicate, where `j` is the position.
+#' Why?
 #' * An absolute position `j` is more helpful than numbering within the columns
 #' that share a name. Context: troubleshooting data import with lots of columns
 #' and dysfunctional names.
@@ -60,7 +64,7 @@
 #' Example:
 #' ```
 #' Original names:    ""    "x"    "" "y"    "x"
-#' `unique` names: "..1" "x..2" "..3" "y" "x..5"
+#'   unique names: "..1" "x..2" "..3" "y" "x..5"
 #' ```
 #'
 #' Why would you ever want `minimal` names, instead of `unique` or `syntactic`
@@ -75,8 +79,8 @@
 #'
 #' @section `syntactic` names:
 #'
-#' `syntactic` names are `unique` and syntactic (quoting from [make.names()]),
-#' meaning they:
+#' `syntactic` names are `unique` and syntactic (see [make.names()]), meaning
+#' they:
 #'   - Have no duplicates (inherited from `unique`).
 #'   - Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
@@ -99,35 +103,49 @@
 #'
 #' @return `x` with repaired names or a repaired version of `name`.
 #' @examples
-#' # Works for lists and vectors, too:
-#' set_tidy_names(3:5)
-#' set_tidy_names(list(3, 4, 5))
+#' \dontrun{
+#' ## by default, duplicate names are not allowed
+#' tibble(x = 1, x = 2)
+#' }
+#' ## you can authorize duplicate names
+#' tibble(x = 1, x = 2, .name_repair = "none")
+#' ## or request that the names be made unique
+#' tibble(x = 1, x = 2, .name_repair = "unique")
 #'
-#' # Clean data frames are left unchanged:
-#' set_tidy_names(mtcars)
+#' ## by default, non-syntactic names are allowed
+#' df <- tibble(`a 1` = 1, `a 2` = 2)
+#' ## because you can still index by name
+#' df[["a 1"]]
+#' df$`a 1`
 #'
-#' # By default, all rename operations are printed to the console:
-#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"), .name_repair = "none")
-#' set_tidy_names(tbl)
+#' ## syntactic names are easier to work with, though, and you can request them
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+#' df$a.1
 #'
-#' # Alternatively, use tidy_names() to assign the result manually:
-#' new_names <- tidy_names(names(tbl))
-#' rlang::set_names(tbl, new_names)
+#' ## you can specify your own name repair function
+#' tibble(x = 1, x = 2, .name_repair = make.unique)
 #'
-#' # Optionally, names can be made syntactic:
-#' tidy_names("a b")
+#' fix_names <- function(x) gsub("%", " percent", x)
+#' tibble(`25%` = 1, `75%` = 2, .name_repair = fix_names)
+#'
+#' fix_names <- function(x) gsub("\\s+", "_", x)
+#' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
+#'
+#' ## the names attibute will be non-NULL, with "" as the default element
+#' df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "none")
+#' names(df)
 #' @name name-repair
 NULL
 
 set_repaired_names <- function(x,
-                               .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
+                               .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
   x <- set_minimal_names(x)
   names(x) <- repaired_names(names(x), .name_repair = .name_repair)
   x
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("assert_unique", "unique", "syntactic", "none")) {
+                           .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -138,6 +156,7 @@ repaired_names <- function(name,
     repair_fun <- switch(
       .name_repair,
       none          =     ,
+      minimal       =     ,
       assert_unique = NULL,
       unique        = unique_names,
       syntactic     = syntactic_names,
@@ -298,15 +317,32 @@ describe_repair <- function(orig_name, name) {
   }
 }
 
-#' @description `tidy_names()` and `set_tidy_names()` ... WHAT I WANT TO SAY:
-#'   they were our first pass as providing access to our name repair strategies,
-#'   which we still want to do. That is, we'd like to export utilities around
-#'   `minimal` and (our take on) `unique` and `syntactic` names. But ... not yet
-#'   and probably not here. The old "tidy with `syntactic = FALSE`" is the new
-#'   `unique` and the old "tidy with `syntactic = TRUE` is new `syntactic`.
+#' @section Life cycle:
+#' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
+#' to facilitate *post hoc* name repair in tibble, given that `tibble()` and
+#' `as_tibble()` did not do this.
 #'
-#' @param syntactic Should all names be made syntactically valid via
-#'   [make.names()]?
+#' From tibble v1.5.0, the `.name_repair` argument gives direct access to three
+#' specific levels of name repair: `minimal`, `unique`, and `syntactic`. We
+#' recommend that new code use this instead of `tidy_names()`,
+#' `set_tidy_names()`, or `repair_names()`. After a period of use, the repair
+#' stategies behind `minimal`, `unique`, and `syntactic` are likely to be
+#' exposed in standalone functions and this could affect the behaviour of
+#' `tidy_names()`. `repair_names()` should be considered deprecated.
+#'
+#' ```
+#' tibble(..., `.name_repair = "unique"`)
+#' ## is preferred to
+#' df <- tibble(...)
+#' set_tidy_names(df, syntactic = FALSE)
+#'
+#' tibble(..., `.name_repair = "syntactic"`)
+#' ## is preferred to
+#' df <- tibble(...)
+#' set_tidy_names(df, syntactic = TRUE)
+#' ```
+#'
+#' @param syntactic Should names be made syntactically valid via [make.names()]?
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
@@ -332,26 +368,14 @@ set_tidy_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-#' @rdname name-repair
-#' @description `repair_names()` is an older function with different renaming
-#'   heuristics and is being deprecated. In new code, use `as_tibble()` and
-#'   specify a `.name_repair` strategy.
-#'
 #' @param prefix A string, the prefix to use for new column names.
 #' @param sep A string inserted between the column name and de-duplicating
 #'   number.
 #' @export
-# for possible inclusion in NEWS or blog post
-# library(tibble)
-# df <- setNames(tibble(1, 2), c("x", "x"))
-# df
-# repair_names(df)
-# as_tibble(df, .name_repair = "unique")
+#' @rdname name-repair
 repair_names <- function(x, prefix = "V", sep = "") {
-
-  ## TODO: `dplyr::bind_cols()` calls this function, so this might just
-  ## irritate people who have no way to switch over
-  message("`tibble::repair_names()` is soft-deprecated. Please switch to `as_tibble() and specify `.name_repair`.")
+  ## TODO: plot a deprecation strategy once we deal with the fact that
+  ## `dplyr::bind_cols()` calls this function
 
   if (length(x) == 0) {
     names(x) <- character()

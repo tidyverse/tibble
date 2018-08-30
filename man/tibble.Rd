@@ -11,10 +11,10 @@
 \title{Build a data frame or list}
 \usage{
 tibble(..., .rows = NULL, .name_repair = c("assert_unique", "unique",
-  "syntactic", "none"))
+  "syntactic", "none", "minimal"))
 
 data_frame(..., .rows = NULL, .name_repair = c("assert_unique",
-  "unique", "syntactic", "none"))
+  "unique", "syntactic", "none", "minimal"))
 
 lst(...)
 }
@@ -29,9 +29,10 @@ just as an additional check.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{"none"}: Do nothing: no name repair, no name checking,
+\item \code{"none"}: No name repair or checks, beyond basic existence,
+\item \code{"minimal"}: Same as \code{"none"},
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"assert_unique"}: (default value), do not repair the names, but check they are \code{unique},
+\item \code{"assert_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
@@ -47,7 +48,7 @@ to enforce them.}
 \item Never adds \code{row.names}.
 \item Only recycles length 1 inputs.
 \item Automatically adds column names.
-\item Doesn't munge column names by default.
+\item Doesn't munge column names.
 \item Evaluates its arguments lazily and in order.
 \item Adds \code{tbl_df} class to output.
 }
@@ -76,7 +77,7 @@ lst(n = 5, x = runif(n))
 str(tibble(letters))
 str(tibble(x = list(diag(1), diag(2))))
 
-# or munges column names
+# or munges column names (unless requested)
 tibble(`a + b` = 1:5)
 
 # but it forces you to take charge of names, if they need repair
@@ -85,6 +86,22 @@ tibble(x = 1, x = 2)
 }
 tibble(x = 1, x = 2, .name_repair = "unique")
 tibble(x = 1, x = 2, .name_repair = "none")
+
+## by default, non-syntactic names are allowed
+df <- tibble(`a 1` = 1, `a 2` = 2)
+## because you can still index by name
+df[["a 1"]]
+df$`a 1`
+
+## syntactic names are easier to work with, though, and you can request them
+df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+df$a.1
+
+## you can specify your own name repair function
+tibble(x = 1, x = 2, .name_repair = make.unique)
+
+fix_names <- function(x) gsub("\\\\s+", "_", x)
+tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 
 # You can splice-unquote a list of quotes and formulas
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
