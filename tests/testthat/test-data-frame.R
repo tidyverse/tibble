@@ -367,6 +367,24 @@ test_that("`validate` triggers deprecation message, but then works", {
     "deprecated"
   )
   expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi", a = 2)
+  names(df) <- c("a", "", "a")
+  expect_message(
+    df <- as_tibble(df, validate = FALSE),
+    "deprecated"
+  )
+  expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi")
+  names(df) <- c("a", "")
+  expect_error(
+    expect_message(
+      as_tibble(df, validate = TRUE),
+      "deprecated"
+    ),
+    error_column_must_be_named(2)
+  )
 })
 
 
