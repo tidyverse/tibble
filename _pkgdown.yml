@@ -30,6 +30,7 @@ reference:
   - glimpse
   - rownames
   - tbl_sum
+  - view
   - reexports
 
 - title: Vectors, matrices, and lists
