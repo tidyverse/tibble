@@ -18,18 +18,60 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
-<!-- tidyverse -->
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
+<!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+<link href="../tidyverse-2.css" rel="stylesheet">
+
+<meta property="og:title" content="Build a data frame or list — tibble" />
+
+<meta property="og:description" content="tibble() is a trimmed down version of data.frame() that:
+Never coerces inputs (i.e. strings stay as strings!).
+Never adds row.names.
+Only recycles length 1 inputs.
+Automatically adds column names.
+Doesn't munge column names.
+Evaluates its arguments lazily and in order.
+Adds tbl_df class to output.
+" />
+
+<meta property="og:description" content="data_frame() is an alias to tibble().
+tibble_() and its alias data_frame_() use lazy evaluation and are
+deprecated. New code should use tibble() or data_frame() with
+quasiquotation.
+lst() is similar to list(), but like tibble(), it
+evaluates its arguments lazily and in order, and automatically adds names.
+lst_() uses lazy evaluation and is deprecated. New code should use lst()
+with quasiquotation." />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- google analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-115082821-1');
+</script>
   </head>
 
   <body>
@@ -38,7 +80,8 @@
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -46,7 +89,10 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">tibble</a>
-        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
+        <div class="info">
+          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development package">1.4.99.9004</span>
+        </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -79,6 +125,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -99,11 +146,11 @@
     <p><code>tibble()</code> is a trimmed down version of <code>data.frame()</code> that:</p><ul>
 <li><p>Never coerces inputs (i.e. strings stay as strings!).</p></li>
 <li><p>Never adds <code>row.names</code>.</p></li>
-<li><p>Never munges column names.</p></li>
 <li><p>Only recycles length 1 inputs.</p></li>
+<li><p>Automatically adds column names.</p></li>
+<li><p>Doesn't munge column names.</p></li>
 <li><p>Evaluates its arguments lazily and in order.</p></li>
 <li><p>Adds <code>tbl_df</code> class to output.</p></li>
-<li><p>Automatically adds column names.</p></li>
 </ul>
 
     <p><code>data_frame()</code> is an alias to <code>tibble()</code>.</p>
@@ -117,9 +164,11 @@ with quasiquotation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.tidy_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"assert_unique"</span>, <span class='st'>"unique"</span>,
+  <span class='st'>"syntactic"</span>, <span class='st'>"none"</span>, <span class='st'>"minimal"</span>))
 
-<span class='fu'>data_frame</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.tidy_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>data_frame</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"assert_unique"</span>,
+  <span class='st'>"unique"</span>, <span class='st'>"syntactic"</span>, <span class='st'>"none"</span>, <span class='st'>"minimal"</span>))
 
 <span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
@@ -139,21 +188,26 @@ unquote-splice via <code>!!!</code>.</p></td>
 just as an additional check.</p></td>
     </tr>
     <tr>
-      <th>.tidy_names</th>
-      <td><p>Treatment of invalid or duplicate column names:</p><ul>
-<li><p><code>NULL</code>: default, throw an error if there are any missing or duplicated names,</p></li>
-<li><p><code>FALSE</code>: deliberately request a tibble with invalid names,</p></li>
-<li><p><code>TRUE</code>: apply <code><a href='tidy_names.html'>tidy_names()</a></code> to the names,</p></li>
-<li><p>a function: apply custom name repair (e.g., <code>.tidy_names = make.names</code>
-to get base R equivalence).</p></li>
-</ul></td>
+      <th>.name_repair</th>
+      <td><p>Treatment of problematic column names:</p><ul>
+<li><p><code>"none"</code>: No name repair or checks, beyond basic existence,</p></li>
+<li><p><code>"minimal"</code>: Same as <code>"none"</code>,</p></li>
+<li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
+<li><p><code>"assert_unique"</code>: (default value), no name repair, but check they are <code>unique</code>,</p></li>
+<li><p><code>"syntactic"</code>: Make the names <code>unique</code> and syntactic</p></li>
+<li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
+for names in the style of base R).</p></li>
+</ul>
+
+<p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
+to enforce them.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing list into
-a data frame.</p></div>
+    <div class='dont-index'><p><code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing list into a data frame,
+<a href='name-repair.html'>name-repair</a> for more detail on name repair.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -197,7 +251,7 @@ a data frame.</p></div>
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
-<span class='co'># or munges column names</span>
+<span class='co'># or munges column names (unless requested)</span>
 <span class='fu'>tibble</span>(<span class='kw'>`a + b`</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 1
 #&gt;   `a + b`
 #&gt;     &lt;int&gt;
@@ -206,6 +260,36 @@ a data frame.</p></div>
 #&gt; 3       3
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
+# but it forces you to take charge of names, if they need repair
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='co'># }</span><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; x..1</span>
+#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;    x..1  x..2
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     1     2</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;       x     x
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     1     2</div><div class='input'>
+<span class='co'>## by default, non-syntactic names are allowed</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='co'>## because you can still index by name</span>
+<span class='no'>df</span><span class='kw'>[[</span><span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>df</span>$<span class='no'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='co'>## syntactic names are easier to work with, though, and you can request them</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"syntactic"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `a 1` -&gt; a.1</span>
+#&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='co'>## you can specify your own name repair function</span>
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;       x   x.1
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     1     2</div><div class='input'>
+<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>gsub</span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
+<span class='fu'>tibble</span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   year_1 year_2
+#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1      1      2</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quotes and formulas</span>
 <span class='fu'>tibble</span>(!!!<span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
@@ -259,18 +343,11 @@ a data frame.</p></div>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
-  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>
+    Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+  </p>
 </div>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
-
- gtag('config', 'UA-115082821-1');
-</script>
       </footer>
    </div>
 

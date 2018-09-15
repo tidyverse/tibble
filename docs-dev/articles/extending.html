@@ -8,18 +8,31 @@
 <title>Extending tibble • tibble</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- tidyverse --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
+<meta property="og:title" content="Extending tibble">
+<meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="noindex">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- google analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-115082821-1');
+</script>
 </head>
 <body>
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -27,7 +40,10 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">tibble</a>
-        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
+        <div class="info">
+          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development package">1.4.99.9004</span>
+        </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -74,7 +90,7 @@
       <h1>Extending tibble</h1>
                         <h4 class="author">Kirill Müller, Hadley Wickham</h4>
             
-            <h4 class="date">2018-08-21</h4>
+            <h4 class="date">2018-09-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/extending.Rmd"><code>vignettes/extending.Rmd</code></a></small>
       <div class="hidden name"><code>extending.Rmd</code></div>
@@ -176,11 +192,11 @@ data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble
 
 data</code></pre></div>
 <pre><code>## # A tibble: 3 x 4
-##   venue          year loc              paths       
-##   &lt;chr&gt;         &lt;int&gt; &lt;S3: latlon&gt;     &lt;list&gt;      
-## 1 rstudio::conf  2017 28°20'N  81°33'W &lt;S3: latlon&gt;
-## 2 rstudio::conf  2018 32°43'N 117°10'W &lt;S3: latlon&gt;
-## 3 rstudio::conf  2019             &lt;NA&gt; &lt;S3: latlon&gt;</code></pre>
+##   venue          year loc                paths       
+##   &lt;chr&gt;         &lt;int&gt; &lt;S3: latlon&gt;       &lt;list&gt;      
+## 1 rstudio::conf  2017 28°20'N  81°33'W   &lt;S3: latlon&gt;
+## 2 rstudio::conf  2018 32°43'N 117°10'W   &lt;S3: latlon&gt;
+## 3 rstudio::conf  2019 "            &lt;NA&gt;" &lt;S3: latlon&gt;</code></pre>
 <p>(The <code>paths</code> column is a list that contains arbitrary data, in our case <code>latlon</code> vectors. A list column is a powerful way to attach hierarchical or unstructured data to an observation in a data frame.)</p>
 <p>The output has three main problems:</p>
 <ol style="list-style-type: decimal">
@@ -202,11 +218,11 @@ type_sum.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <p>Because the value shown there doesn’t depend on the data, we just return a constant. (For date-times, the column info will eventually contain information about the timezone, see <a href="https://github.com/r-lib/pillar/pull/53">#53</a>.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data</code></pre></div>
 <pre><code>## # A tibble: 3 x 4
-##   venue          year loc              paths 
-##   &lt;chr&gt;         &lt;int&gt; &lt;geo&gt;            &lt;list&gt;
-## 1 rstudio::conf  2017 28°20'N  81°33'W &lt;geo&gt; 
-## 2 rstudio::conf  2018 32°43'N 117°10'W &lt;geo&gt; 
-## 3 rstudio::conf  2019             &lt;NA&gt; &lt;geo&gt;</code></pre>
+##   venue          year loc                paths 
+##   &lt;chr&gt;         &lt;int&gt; &lt;geo&gt;              &lt;list&gt;
+## 1 rstudio::conf  2017 28°20'N  81°33'W   &lt;geo&gt; 
+## 2 rstudio::conf  2018 32°43'N 117°10'W   &lt;geo&gt; 
+## 3 rstudio::conf  2019 "            &lt;NA&gt;" &lt;geo&gt;</code></pre>
 </div>
 <div id="rendering-the-value" class="section level2">
 <h2 class="hasAnchor">
@@ -255,7 +271,7 @@ data</code></pre></div>
 ## 1 rstu…  2017 28°20'N  81°33'W
 ## 2 rstu…  2018 32°43'N 117°10'W
 ## 3 rstu…  2019      NA         
-## # … with 1 more variable:
+## # ... with 1 more variable:
 ## #   paths &lt;list&gt;</code></pre>
 <p>If we specify a minimum width when constructing the shaft, the <code>loc</code> column will be truncated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#' @importFrom pillar pillar_shaft</span>
@@ -384,26 +400,26 @@ data</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>() <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>)) 
 <span class="kw">str</span>(<span class="kw">unclass</span>(x))</code></pre></div>
 <pre><code>## List of 11
-##  $ sec   : num [1:3] 27.4 27.4 27.4
-##  $ min   : int [1:3] 58 59 58
-##  $ hour  : int [1:3] 15 15 16
-##  $ mday  : int [1:3] 21 21 21
-##  $ mon   : int [1:3] 7 7 7
+##  $ sec   : num [1:3] 17.2 17.2 17.2
+##  $ min   : int [1:3] 54 55 54
+##  $ hour  : int [1:3] 11 11 12
+##  $ mday  : int [1:3] 15 15 15
+##  $ mon   : int [1:3] 8 8 8
 ##  $ year  : int [1:3] 118 118 118
-##  $ wday  : int [1:3] 2 2 2
-##  $ yday  : int [1:3] 232 232 232
+##  $ wday  : int [1:3] 6 6 6
+##  $ yday  : int [1:3] 257 257 257
 ##  $ isdst : int [1:3] 1 1 1
 ##  $ zone  : chr [1:3] "CEST" "CEST" "CEST"
 ##  $ gmtoff: int [1:3] 7200 7200 7200
 ##  - attr(*, "tzone")= chr [1:3] "" "CET" "CEST"</code></pre>
 <p>But it pretends to be a vector with 3 elements:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
-<pre><code>## [1] "2018-08-21 15:58:27 CEST" "2018-08-21 15:59:27 CEST"
-## [3] "2018-08-21 16:58:27 CEST"</code></pre>
+<pre><code>## [1] "2018-09-15 11:54:17 CEST" "2018-09-15 11:55:17 CEST"
+## [3] "2018-09-15 12:54:17 CEST"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)</code></pre></div>
-<pre><code>##  POSIXlt[1:3], format: "2018-08-21 15:58:27" "2018-08-21 15:59:27" ...</code></pre>
+<pre><code>##  POSIXlt[1:3], format: "2018-09-15 11:54:17" "2018-09-15 11:55:17" ...</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#' @importFrom pillar obj_sum</span>
 <span class="co">#' @export</span>
@@ -538,17 +554,12 @@ obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href="http://hadley.nz">Hadley Wickham</a>.</p>
-  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>
+    Developed by Kirill Müller, <a href="http://hadley.nz">Hadley Wickham</a>.
+    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+  </p>
 </div>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
-
- gtag('config', 'UA-115082821-1');
-</script></footer>
+      </footer>
 </div>
 
   

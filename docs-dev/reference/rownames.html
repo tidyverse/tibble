@@ -18,18 +18,55 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
-<!-- tidyverse -->
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
+<!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+<link href="../tidyverse-2.css" rel="stylesheet">
+
+<meta property="og:title" content="Tools for working with row names — rownames" />
+
+<meta property="og:description" content="While a tibble can have row names (e.g., when converting from a regular data
+frame), they are removed when subsetting with the [ operator.
+A warning will be raised when attempting to assign non-NULL row names
+to a tibble.
+Generally, it is best to avoid row names, because they are basically a
+character column with different semantics to every other column. These
+functions allow to you detect if a data frame has row names
+(has_rownames()), remove them (remove_rownames()), or convert
+them back-and-forth between an explicit column (rownames_to_column()
+and column_to_rownames()).
+Also included is rowid_to_column() which
+adds a column at the start of the dataframe of ascending sequential row
+ids starting at 1. Note that this will remove any existing row names." />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- google analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-115082821-1');
+</script>
   </head>
 
   <body>
@@ -38,7 +75,8 @@
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -46,7 +84,10 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">tibble</a>
-        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
+        <div class="info">
+          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development package">1.4.99.9004</span>
+        </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -79,6 +120,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -191,18 +233,11 @@ above the row numbers.</p>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
-  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>
+    Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+  </p>
 </div>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
-
- gtag('config', 'UA-115082821-1');
-</script>
       </footer>
    </div>
 
