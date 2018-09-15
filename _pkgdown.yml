@@ -59,4 +59,3 @@ navbar:
 
 development:
   mode: auto
-  destination: ../docs-dev
