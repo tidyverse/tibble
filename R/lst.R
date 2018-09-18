@@ -30,7 +30,7 @@ lst_quos <- function(xs, expand = FALSE) {
 
   # Evaluate each column in turn
   col_names <- names2(xs)
-  output <- list_len(n)
+  output <- new_list(n)
   names(output) <- character(n)
   result <- output
 
