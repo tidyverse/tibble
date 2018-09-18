@@ -56,4 +56,5 @@ navbar:
   - icon: fa-github fa-lg
     href: https://github.com/tidyverse/tibble
 
-
+development:
+  mode: auto
