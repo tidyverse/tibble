@@ -255,10 +255,10 @@ For existing code that relies on row names remaining, call
 <span class='fu'>as_tibble</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ..1</span>
 #&gt; <span class='message'>* `` -&gt; ..2</span>
-#&gt; <span class='message'>* `` -&gt; ..3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt; <span class='message'>* `` -&gt; ..3</span></div><div class='output co'>#&gt; [90m# A tibble: 1 x 3[39m
 #&gt;     ..1   ..2   ..3
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2     3</div><div class='input'>
+#&gt;   [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m
+#&gt; [90m1[39m     1     2     3</div><div class='input'>
 # For list-like inputs, as_tibble() is considerably simpler than as.data.frame()
 </div><span class='co'># NOT RUN {</span>
 <span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"bench"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
@@ -297,7 +297,7 @@ For existing code that relies on row names remaining, call
 
 <div class="author">
   <p>
-    Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='http://hadley.nz'>Hadley Wickham</a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

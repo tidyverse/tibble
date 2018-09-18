@@ -59,3 +59,7 @@ navbar:
 
 development:
   mode: auto
+
+authors:
+  Kirill Müller:
+    href: http://krlmlr.info

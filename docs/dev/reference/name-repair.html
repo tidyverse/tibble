@@ -296,16 +296,16 @@ set_tidy_names(df, syntactic = TRUE)
 <span class='co'>## by default, duplicate names are not allowed</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'># }</span><div class='input'><span class='co'>## you can authorize duplicate names</span>
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; [90m# A tibble: 1 x 2[39m
 #&gt;       x     x
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
+#&gt;   [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x..1</span>
-#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; [90m# A tibble: 1 x 2[39m
 #&gt;    x..1  x..2
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
+#&gt;   [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m     1     2</div><div class='input'>
 <span class='co'>## by default, non-syntactic names are allowed</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'>## because you can still index by name</span>
@@ -315,20 +315,20 @@ set_tidy_names(df, syntactic = TRUE)
 #&gt; <span class='message'>* `a 1` -&gt; a.1</span>
 #&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## you can specify your own name repair function</span>
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; [90m# A tibble: 1 x 2[39m
 #&gt;       x   x.1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
+#&gt;   [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m     1     2</div><div class='input'>
 <span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>gsub</span>(<span class='st'>"%"</span>, <span class='st'>" percent"</span>, <span class='no'>x</span>)
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`25%`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`75%`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`25%`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`75%`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; [90m# A tibble: 1 x 2[39m
 #&gt;   `25 percent` `75 percent`
-#&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-#&gt; 1            1            2</div><div class='input'>
+#&gt;          [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m            1            2</div><div class='input'>
 <span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>gsub</span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; [90m# A tibble: 1 x 2[39m
 #&gt;   year_1 year_2
-#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1      1      2</div><div class='input'>
+#&gt;    [3m[90m&lt;dbl&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m      1      2</div><div class='input'>
 <span class='co'>## the names attibute will be non-NULL, with "" as the default element</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>list</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)
 <span class='fu'>names</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] "" ""</div></pre>
@@ -361,7 +361,7 @@ set_tidy_names(df, syntactic = TRUE)
 
 <div class="author">
   <p>
-    Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='http://hadley.nz'>Hadley Wickham</a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

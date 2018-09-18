@@ -193,20 +193,20 @@ above the row numbers.</p>
 #&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 #&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'>
 <span class='no'>mtcars_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>))
-<span class='no'>mtcars_tbl</span></div><div class='output co'>#&gt; # A tibble: 32 x 12
+<span class='no'>mtcars_tbl</span></div><div class='output co'>#&gt; [90m# A tibble: 32 x 12[39m
 #&gt;    rowname      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 Mazda RX4   21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt;  2 Mazda RX4…  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt;  3 Datsun 710  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt;  4 Hornet 4 …  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt;  5 Hornet Sp…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt;  6 Valiant     18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt;  7 Duster 360  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt;  8 Merc 240D   24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt;  9 Merc 230    22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; 10 Merc 280    19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows</div><div class='input'><span class='fu'>head</span>(<span class='fu'>column_to_rownames</span>(<span class='fu'>as.data.frame</span>(<span class='no'>mtcars_tbl</span>)))</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt;    [3m[90m&lt;chr&gt;[39m[23m      [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m 1[39m Mazda RX4   21       6  160    110  3.9   2.62  16.5     0     1     4     4
+#&gt; [90m 2[39m Mazda RX4…  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+#&gt; [90m 3[39m Datsun 710  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+#&gt; [90m 4[39m Hornet 4 …  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+#&gt; [90m 5[39m Hornet Sp…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+#&gt; [90m 6[39m Valiant     18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+#&gt; [90m 7[39m Duster 360  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+#&gt; [90m 8[39m Merc 240D   24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+#&gt; [90m 9[39m Merc 230    22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+#&gt; [90m10[39m Merc 280    19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+#&gt; [90m# … with 22 more rows[39m</div><div class='input'><span class='fu'>head</span>(<span class='fu'>column_to_rownames</span>(<span class='fu'>as.data.frame</span>(<span class='no'>mtcars_tbl</span>)))</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 #&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
 #&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
@@ -234,7 +234,7 @@ above the row numbers.</p>
 
 <div class="author">
   <p>
-    Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='http://hadley.nz'>Hadley Wickham</a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
