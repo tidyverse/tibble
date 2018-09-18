@@ -1,0 +1,7 @@
+pandoc: 2.2.1
+pkgdown: 1.1.0.9000
+pkgdown_sha: ~
+articles:
+  extending: extending.html
+  tibble: tibble.html
+
