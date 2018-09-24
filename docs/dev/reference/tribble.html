@@ -163,23 +163,23 @@ be phased out.</p>
   <span class='st'>"a"</span>,   <span class='fl'>1</span>,
   <span class='st'>"b"</span>,   <span class='fl'>2</span>,
   <span class='st'>"c"</span>,   <span class='fl'>3</span>
-)</div><div class='output co'>#&gt; [90m# A tibble: 3 x 2[39m
+)</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;   colA   colB
-#&gt;   [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
-#&gt; [90m1[39m a         1
-#&gt; [90m2[39m b         2
-#&gt; [90m3[39m c         3</div><div class='input'>
+#&gt;   &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1 a         1
+#&gt; 2 b         2
+#&gt; 3 c         3</div><div class='input'>
 <span class='co'># tribble will create a list column if the value in any cell is</span>
 <span class='co'># not a scalar</span>
 <span class='fu'>tribble</span>(
   ~<span class='no'>x</span>,  ~<span class='no'>y</span>,
   <span class='st'>"a"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>,
   <span class='st'>"b"</span>, <span class='fl'>4</span>:<span class='fl'>6</span>
-)</div><div class='output co'>#&gt; [90m# A tibble: 2 x 2[39m
+)</div><div class='output co'>#&gt; # A tibble: 2 x 2
 #&gt;   x     y        
-#&gt;   [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m   
-#&gt; [90m1[39m a     [90m&lt;int [3]&gt;[39m
-#&gt; [90m2[39m b     [90m&lt;int [3]&gt;[39m</div></pre>
+#&gt;   &lt;chr&gt; &lt;list&gt;   
+#&gt; 1 a     &lt;int [3]&gt;
+#&gt; 2 b     &lt;int [3]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

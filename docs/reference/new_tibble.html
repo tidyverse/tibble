@@ -174,21 +174,21 @@ it will be prepended to that list of classes.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; [90m# A tibble: 3 x 2[39m
+    <pre class="examples"><div class='input'><span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;       a     b
-#&gt;   [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m
-#&gt; [90m1[39m     1     4
-#&gt; [90m2[39m     2     5
-#&gt; [90m3[39m     3     6</div><div class='input'>
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4
+#&gt; 2     2     5
+#&gt; 3     3     6</div><div class='input'>
 <span class='co'># One particular situation where the nrow argument is essential:</span>
-<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>150</span>, <span class='kw'>subclass</span> <span class='kw'>=</span> <span class='st'>"my_tibble"</span>)</div><div class='output co'>#&gt; [90m# A tibble: 150 x 0[39m</div><div class='input'>
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>150</span>, <span class='kw'>subclass</span> <span class='kw'>=</span> <span class='st'>"my_tibble"</span>)</div><div class='output co'>#&gt; # A tibble: 150 x 0</div><div class='input'>
 <span class='co'># It's safest to always pass it along:</span>
-<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [90m# A tibble: 3 x 2[39m
+<span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;       a     b
-#&gt;   [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m
-#&gt; [90m1[39m     1     4
-#&gt; [90m2[39m     2     5
-#&gt; [90m3[39m     3     6</div><div class='input'>
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4
+#&gt; 2     2     5
+#&gt; 3     3     6</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'># All columns must be the same length:</span>
 <span class='fu'>new_tibble</span>(<span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4.6</span>))
