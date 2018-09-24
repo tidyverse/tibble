@@ -50,3 +50,4 @@ add_row(df, z = 10)
 \seealso{
 Other addition: \code{\link{add_column}}
 }
+\concept{addition}

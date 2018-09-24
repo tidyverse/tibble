@@ -26,8 +26,10 @@ printed in reduced form. Default: 100.
 \item \code{pillar.bold}: Use bold font, e.g. for column headers? This currently
 defaults to \code{FALSE}, because many terminal fonts have poor support for
 bold fonts.
-\item \code{pillar.subtle}: Use subtle style, e.g. for insignificant digits? Default:
-\code{TRUE}.
+\item \code{pillar.subtle}: Use subtle style, e.g. for row numbers and data types?
+Default: \code{TRUE}.
+\item \code{pillar.subtle_num}: Use subtle style for insignificant digits? Default:
+\code{FALSE}, is also affected by the \code{pillar.subtle} option.
 \item \code{pillar.neg}: Highlight negative numbers? Default: \code{TRUE}.
 \item \code{pillar.sigfig}: The number of significant digits that will be printed and
 highlighted, default: \code{3}. Set the \code{pillar.subtle} option to \code{FALSE} to
