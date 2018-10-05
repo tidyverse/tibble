@@ -1,5 +1,20 @@
 context("test-name_repair")
 
+# make_names --------------------------------------------------------------
+
+test_that("make_names()", {
+  expect_equal(
+    make_names(c("", ".", "..", "...", "....", "..1", "..13", "..2.", ".2fa")),
+    c(".", ".", "..", "....", "....", "...1", "...13", "..2.", "..2fa")
+  )
+  expect_equal(
+    make_names(c("if", "TRUE", "Inf", "NA_real_", "normal")),
+    c(".if", ".TRUE", ".Inf", ".NA_real_", "normal")
+  )
+})
+
+# minimal -----------------------------------------------------------------
+
 test_that("minimal names are made from `n` when `name = NULL`", {
   expect_identical(minimal_names(NULL, 2), c("", ""))
   expect_error(
@@ -82,8 +97,8 @@ test_that("syntactic_names() pass checks for minimal, unique, and syntactic", {
   x_syn <- syntactic_names(x)
   expect_error(check_minimal(x_syn), NA)
   expect_error(check_unique(x_syn), NA)
-  expect_true(all(is_syntactic(x_syn)))
-  expect_identical(x_syn, c("..1", "..2", "x..3", "x..4", "a1.", "X_x_y."))
+  expect_true(all(!!is_syntactic(x_syn)))
+  expect_identical(x_syn, c("...1", "...2", "x..3", "x..4", "a1.", "X_x_y."))
 })
 
 test_that("name fixers are idempotent", {

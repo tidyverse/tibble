@@ -13,7 +13,7 @@ test_that("unnamed input gives uniquely named output", {
 test_that("messages by default", {
   expect_message(
     set_tidy_names(set_names(1, "")),
-    "New names:\n* `` -> ..1\n",
+    "New names:\n* `` -> `..1`\n",
     fixed = TRUE
   )
 })
@@ -23,8 +23,8 @@ test_that("quiet = TRUE", {
 })
 
 test_that("syntactic = TRUE", {
-  out <- set_tidy_names(set_names(1, "a b"))
-  expect_equal(names(out), tidy_names("a b"))
+  out <- set_tidy_names(set_names(1, "a b"), syntactic = TRUE)
+  expect_equal(names(out), "a.b")
 })
 
 # tidy_names ---------------------------------------------------------------
@@ -53,6 +53,10 @@ test_that("NA", {
 })
 
 test_that("corner case", {
+  expect_equal(tidy_names("..1"), "..1")
+  expect_equal(tidy_names("..13"), "..1")
+  expect_equal(tidy_names("..."), "...")
+
   expect_equal(tidy_names(c("a..2", "a")), c("a..1", "a..2"))
   expect_equal(tidy_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
   expect_equal(tidy_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
@@ -73,7 +77,7 @@ test_that("some syntactic + message (#260)", {
 test_that("message", {
   expect_message(
     tidy_names(c("", "")),
-    "New names:\n* `` -> ..1\n* `` -> ..2\n",
+    "New names:\n* `` -> `..1`\n* `` -> `..2`\n",
     fixed = TRUE
   )
 })

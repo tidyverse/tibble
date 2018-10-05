@@ -258,9 +258,19 @@ check_unique_names <- function(x) {
   invisible(x)
 }
 
+make_names <- function(name) {
+  name <- gsub("^(|[.][.][.]|[.][.][1-9][0-9]*|[.][0-9].*)$", ".\\1", name)
+  new_name <- make.names(name)
+  different <- which(new_name != name)
+  reserved_in_different <- grep("^[a-zA-Z][a-zA-Z_]*$", name[different])
+  reserved <- different[reserved_in_different]
+  new_name[reserved] <- paste0(".", name[reserved])
+  new_name
+}
+
 make_syntactic <- function(name) {
-  fix_syntactic <- (name != "") & !is_syntactic(name)
-  name[fix_syntactic] <- make.names(name[fix_syntactic])
+  fix_syntactic <- !is_syntactic(name)
+  name[fix_syntactic] <- make_names(name[fix_syntactic])
   name
 }
 
