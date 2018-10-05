@@ -277,9 +277,12 @@ make_syntactic <- function(name) {
 ## TODO: do we need checks around "syntactic"-ness?
 
 append_pos <- function(name) {
+  name[name == ""] <- "."
+
   need_append_pos <- duplicated(name) |
     duplicated(name, fromLast = TRUE) |
-    name == ""
+    (name == ".")
+
   need_append_pos <- which(need_append_pos)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
