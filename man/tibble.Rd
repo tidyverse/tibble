@@ -10,10 +10,10 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("assert_unique", "unique",
+tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
   "syntactic", "none", "minimal"))
 
-data_frame(..., .rows = NULL, .name_repair = c("assert_unique",
+data_frame(..., .rows = NULL, .name_repair = c("check_unique",
   "unique", "syntactic", "none", "minimal"))
 
 lst(...)
@@ -32,7 +32,7 @@ just as an additional check.}
 \item \code{"none"}: No name repair or checks, beyond basic existence,
 \item \code{"minimal"}: Same as \code{"none"},
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"assert_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).

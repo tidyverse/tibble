@@ -27,7 +27,7 @@
 #'   - `"none"`: No name repair or checks, beyond basic existence,
 #'   - `"minimal"`: Same as `"none"`,
 #'   - `"unique"`: Make sure names are unique and not empty,
-#'   - `"assert_unique"`: (default value), no name repair, but check they are `unique`,
+#'   - `"check_unique"`: (default value), no name repair, but check they are `unique`,
 #'   - `"syntactic"`: Make the names `unique` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
@@ -88,7 +88,7 @@
 #' @aliases tbl_df-class
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }

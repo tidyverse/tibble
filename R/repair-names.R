@@ -138,14 +138,14 @@
 NULL
 
 set_repaired_names <- function(x,
-                               .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
+                               .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
   x <- set_minimal_names(x)
   names(x) <- repaired_names(names(x), .name_repair = .name_repair)
   x
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("assert_unique", "unique", "syntactic", "none", "minimal")) {
+                           .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -157,7 +157,7 @@ repaired_names <- function(name,
       .name_repair,
       none          =     ,
       minimal       =     ,
-      assert_unique = NULL,
+      check_unique  = NULL,
       unique        = unique_names,
       syntactic     = syntactic_names,
       abort(error_name_repair_arg())
@@ -166,7 +166,7 @@ repaired_names <- function(name,
   new_name <- if (is_function(repair_fun)) repair_fun(name) else name
 
   if (is.character(.name_repair) &&
-    .name_repair %in% c("assert_unique", "unique", "syntactic")) {
+    .name_repair %in% c("check_unique", "unique", "syntactic")) {
     check_unique(new_name)
   } else {
     check_minimal(new_name)
