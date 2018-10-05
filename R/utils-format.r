@@ -35,7 +35,7 @@ NULL
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n)) {
+  if (is_null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -44,7 +44,16 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   }
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
-  df <- as.data.frame(head(x, n))
+  if (is.na(rows)) {
+    df <- as.data.frame(head(x, n + 1))
+    if (nrow(df) <= n) {
+      rows <- nrow(df)
+    } else {
+      df <- df[seq_len(n), , drop = FALSE]
+    }
+  } else {
+    df <- as.data.frame(head(x, n))
+  }
 
   shrunk <- shrink_mat(df, rows, n, star = has_rownames(x))
   trunc_info <- list(

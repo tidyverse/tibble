@@ -33,6 +33,16 @@ test_that("trunc_mat output matches known output", {
   )
 
   expect_output_file_rel(
+    print_without_body(as_tibble(iris), n = -1L, width = 30L),
+    "trunc_mat/iris-neg-30.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_tibble(iris), n = Inf, width = 30L),
+    "trunc_mat/iris-inf-30.txt"
+  )
+
+  expect_output_file_rel(
     print_without_body(as_tibble(iris), n = 3L, width = 5L),
     "trunc_mat/iris-3-5.txt"
   )
@@ -45,6 +55,21 @@ test_that("trunc_mat output matches known output", {
   expect_output_file_rel(
     print_without_body(as_unknown_rows(iris), n = 10, width = 70L),
     "trunc_mat/iris_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:9, ]), n = 10, width = 70L),
+    "trunc_mat/iris_9_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:10, ]), n = 10, width = 70L),
+    "trunc_mat/iris_10_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:11, ]), n = 10, width = 70L),
+    "trunc_mat/iris_11_unk-10-70.txt"
   )
 
   expect_output_file_rel(
