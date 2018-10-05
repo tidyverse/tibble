@@ -164,11 +164,11 @@ with quasiquotation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"assert_unique"</span>, <span class='st'>"unique"</span>,
-  <span class='st'>"syntactic"</span>, <span class='st'>"none"</span>, <span class='st'>"minimal"</span>))
+    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>,
+  <span class='st'>"syntactic"</span>, <span class='st'>"minimal"</span>))
 
-<span class='fu'>data_frame</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"assert_unique"</span>,
-  <span class='st'>"unique"</span>, <span class='st'>"syntactic"</span>, <span class='st'>"none"</span>, <span class='st'>"minimal"</span>))
+<span class='fu'>data_frame</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"check_unique"</span>,
+  <span class='st'>"unique"</span>, <span class='st'>"syntactic"</span>, <span class='st'>"minimal"</span>))
 
 <span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
@@ -190,10 +190,9 @@ just as an additional check.</p></td>
     <tr>
       <th>.name_repair</th>
       <td><p>Treatment of problematic column names:</p><ul>
-<li><p><code>"none"</code>: No name repair or checks, beyond basic existence,</p></li>
-<li><p><code>"minimal"</code>: Same as <code>"none"</code>,</p></li>
+<li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
 <li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
-<li><p><code>"assert_unique"</code>: (default value), no name repair, but check they are <code>unique</code>,</p></li>
+<li><p><code>"check_unique"</code>: (default value), no name repair, but check they are <code>unique</code>,</p></li>
 <li><p><code>"syntactic"</code>: Make the names <code>unique</code> and syntactic</p></li>
 <li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
 for names in the style of base R).</p></li>
@@ -268,7 +267,7 @@ to enforce them.</p></td>
 #&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;    x..1  x..2
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; 1     1     2</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x     x
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>

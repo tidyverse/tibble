@@ -150,18 +150,16 @@
 <p>Column name repair has more direct support, via the new <code>.name_repair</code> argument to <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code>. It takes the following values:</p>
 <ul>
 <li>
-<code>"none"</code>: No name repair or checks, beyond basic existence.</li>
-<li>
-<code>"minimal"</code>: Same as <code>"none"</code>.</li>
+<code>"minimal"</code>: No name repair or checks, beyond basic existence.</li>
 <li>
 <code>"unique"</code>: Make sure names are unique and not empty.</li>
 <li>
-<code>"assert_unique"</code>: (default value), no name repair, but check they are <code>unique</code>.</li>
+<code>"check_unique"</code>: (default value), no name repair, but check they are <code>unique</code>.</li>
 <li>
 <code>"syntactic"</code>: Make the names <code>unique</code> and syntactic.</li>
 <li>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code> for names in the style of base R).</li>
 </ul>
-<p>The <code>validate</code> argument of <code><a href="../reference/as_tibble.html">as_tibble()</a></code> is deprecated but supported (emits a message). Use <code>.name_repair = "none"</code> instead of <code>validate = FALSE</code> and <code>.name_repair = "assert_unique"</code> instead of <code>validate = TRUE</code> (<a href='https://github.com/tidyverse/tibble/issues/469'>#469</a>, <a href='http://github.com/jennybc'>@jennybc</a>).</p>
+<p>The <code>validate</code> argument of <code><a href="../reference/as_tibble.html">as_tibble()</a></code> is deprecated but supported (emits a message). Use <code>.name_repair = "minimal"</code> instead of <code>validate = FALSE</code> and <code>.name_repair = "check_unique"</code> instead of <code>validate = TRUE</code> (<a href='https://github.com/tidyverse/tibble/issues/469'>#469</a>, <a href='http://github.com/jennybc'>@jennybc</a>).</p>
 </li>
 <li>
 <p>Row name handling is stricter. Row names are never (and never were) supported in <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/new_tibble.html">new_tibble()</a></code>, and are now stripped by default in <code><a href="../reference/as_tibble.html">as_tibble()</a></code>. The <code>rownames</code> argument to <code><a href="../reference/as_tibble.html">as_tibble()</a></code> supports:</p>
