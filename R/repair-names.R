@@ -188,15 +188,7 @@ set_minimal_names <- function(x) {
 }
 
 unique_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
-  new_name <- append_pos(new_name)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
+  tidy_names(name, syntactic = FALSE, quiet = quiet)
 }
 
 set_unique_names <- function(x, quiet = FALSE) {
@@ -205,19 +197,8 @@ set_unique_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-## TODO: this is just a placeholder = near copy of tidy_names()
-##       but may see more refactoring
 syntactic_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
-  new_name <- make_syntactic(new_name)
-  new_name <- unique_names(new_name, quiet = TRUE)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
+  tidy_names(name, syntactic = TRUE, quiet = quiet)
 }
 
 set_syntactic_names <- function(x, quiet = FALSE) {
@@ -351,7 +332,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   if (syntactic) {
     new_name <- make_syntactic(new_name)
   }
-  new_name <- unique_names(new_name, quiet = TRUE)
+  new_name <- append_pos(new_name)
 
   if (!quiet) {
     describe_repair(name, new_name)
