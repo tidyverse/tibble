@@ -24,8 +24,7 @@
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
-#'   - `"none"`: No name repair or checks, beyond basic existence,
-#'   - `"minimal"`: Same as `"none"`,
+#'   - `"minimal"`: No name repair or checks, beyond basic existence,
 #'   - `"unique"`: Make sure names are unique and not empty,
 #'   - `"check_unique"`: (default value), no name repair, but check they are `unique`,
 #'   - `"syntactic"`: Make the names `unique` and syntactic
@@ -58,7 +57,7 @@
 #' tibble(x = 1, x = 2)
 #' }
 #' tibble(x = 1, x = 2, .name_repair = "unique")
-#' tibble(x = 1, x = 2, .name_repair = "none")
+#' tibble(x = 1, x = 2, .name_repair = "minimal")
 #'
 #' ## by default, non-syntactic names are allowed
 #' df <- tibble(`a 1` = 1, `a 2` = 2)
@@ -88,7 +87,7 @@
 #' @aliases tbl_df-class
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }

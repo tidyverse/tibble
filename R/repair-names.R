@@ -25,7 +25,7 @@
 #' unnamed element is `""` and never `NA`.
 #'
 #' `tbl_df` objects created by [tibble()] and [as_tibble()] have variable names
-#' that are `minimal`, at the very least, even when `.name_repair = "none"`.
+#' that are `minimal`, at the very least.
 #' Why? General name repair can be be implemented more simply if the baseline
 #' strategy ensures that `names(x)` returns a character vector of the correct
 #' length.
@@ -108,7 +108,7 @@
 #' tibble(x = 1, x = 2)
 #' }
 #' ## you can authorize duplicate names
-#' tibble(x = 1, x = 2, .name_repair = "none")
+#' tibble(x = 1, x = 2, .name_repair = "minimal")
 #' ## or request that the names be made unique
 #' tibble(x = 1, x = 2, .name_repair = "unique")
 #'
@@ -132,20 +132,20 @@
 #' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 #'
 #' ## the names attibute will be non-NULL, with "" as the default element
-#' df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "none")
+#' df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 #' names(df)
 #' @name name-repair
 NULL
 
 set_repaired_names <- function(x,
-                               .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
+                               .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
   x <- set_minimal_names(x)
   names(x) <- repaired_names(names(x), .name_repair = .name_repair)
   x
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("check_unique", "unique", "syntactic", "none", "minimal")) {
+                           .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -155,7 +155,6 @@ repaired_names <- function(name,
     .name_repair <- match.arg(.name_repair)
     repair_fun <- switch(
       .name_repair,
-      none          =     ,
       minimal       =     ,
       check_unique  = NULL,
       unique        = unique_names,

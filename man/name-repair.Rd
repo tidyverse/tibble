@@ -58,7 +58,7 @@ The "Life cycle" section explains the status of the existing functions
 unnamed element is \code{""} and never \code{NA}.
 
 \code{tbl_df} objects created by \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} have variable names
-that are \code{minimal}, at the very least, even when \code{.name_repair = "none"}.
+that are \code{minimal}, at the very least.
 Why? General name repair can be be implemented more simply if the baseline
 strategy ensures that \code{names(x)} returns a character vector of the correct
 length.
@@ -165,7 +165,7 @@ set_tidy_names(df, syntactic = TRUE)
 tibble(x = 1, x = 2)
 }
 ## you can authorize duplicate names
-tibble(x = 1, x = 2, .name_repair = "none")
+tibble(x = 1, x = 2, .name_repair = "minimal")
 ## or request that the names be made unique
 tibble(x = 1, x = 2, .name_repair = "unique")
 
@@ -189,6 +189,6 @@ fix_names <- function(x) gsub("\\\\s+", "_", x)
 tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 
 ## the names attibute will be non-NULL, with "" as the default element
-df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "none")
+df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 names(df)
 }
