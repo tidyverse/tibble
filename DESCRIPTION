@@ -17,7 +17,7 @@ Depends:
 Imports: 
     cli,
     crayon,
-    fansi,
+    fansi (>= 0.4.0),
     methods,
     pillar (>= 1.2.3.9002),
     pkgconfig,
@@ -37,6 +37,7 @@ Suggests:
     withr
 VignetteBuilder: knitr
 Remotes: 
+    brodieG/fansi@rc,
     r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
