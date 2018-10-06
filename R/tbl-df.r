@@ -119,8 +119,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   if (drop) {
     if (length(result) == 1L) {
       return(result[[1L]])
-    } else if (nr == 1L) {
-      return(result)
     }
   }
 

@@ -20,6 +20,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - In all `*_rownames()` functions, the first argument has been renamed to `.data` for consistency (#412).
 
+- Subsetting one row with `[..., , drop = TRUE]` returns a tibble (#442).
+
 
 ## New features
 
