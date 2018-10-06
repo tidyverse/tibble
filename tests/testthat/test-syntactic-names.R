@@ -68,6 +68,7 @@ test_that("corner case", {
   expect_equal(syntactic_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
   expect_equal(syntactic_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
   expect_equal(syntactic_names(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
+  expect_equal(syntactic_names("if..2"), ".if")
 })
 
 test_that("message", {
