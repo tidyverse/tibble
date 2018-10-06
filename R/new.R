@@ -73,7 +73,7 @@ validate_nrow <- function(names, lengths, nrow) {
   # Validate column lengths, don't recycle
   bad_len <- which(lengths != nrow)
   if (has_length(bad_len)) {
-    abort(error_inconsistent_cols(nrow, names, lengths))
+    abort(error_inconsistent_cols(nrow, names, lengths, "`nrow` argument"))
   }
 }
 

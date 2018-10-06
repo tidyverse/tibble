@@ -147,7 +147,7 @@ recycle_columns <- function(x, .rows) {
   if (is_empty(different_len)) return(new_valid_tibble(x, nrow))
 
   if (any(lengths[different_len] != 1)) {
-    abort(error_inconsistent_cols(.rows, names(x), lengths))
+    abort(error_inconsistent_cols(.rows, names(x), lengths, "`.rows` argument"))
   }
 
   short <- which(lengths == 1)

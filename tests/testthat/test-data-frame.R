@@ -35,7 +35,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2)),
+    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
     fixed = TRUE
   )
 })
@@ -90,7 +90,7 @@ test_that("tibble aliases", {
 test_that("columns must be same length", {
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_inconsistent_cols(NULL,  c("x", "y"), 2:3),
+    error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA),
     fixed = TRUE
   )
   expect_error(
@@ -98,7 +98,8 @@ test_that("columns must be same length", {
     error_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
-      2:4
+      2:4,
+      NA
     ),
     fixed = TRUE
   )
@@ -107,7 +108,8 @@ test_that("columns must be same length", {
     error_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
-      c(4, 2, 2)
+      c(4, 2, 2),
+      NA
     ),
     fixed = TRUE
   )
@@ -294,7 +296,7 @@ test_that("as.tibble is an alias of as_tibble", {
 test_that("new_tibble can specify nrow,", {
   expect_error(
     new_tibble(list(x = 1:2, y = 1:3), nrow = 4),
-    error_inconsistent_cols(4, c("x", "y"), c(2, 3)),
+    error_inconsistent_cols(4, c("x", "y"), c(2, 3), "`nrow` argument"),
     fixed = TRUE
   )
 })
