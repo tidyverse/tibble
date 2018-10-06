@@ -206,7 +206,7 @@ number.</p></td>
     <p><code>minimal</code> names exist. The <code>names</code> attribute is not <code>NULL</code>. The name of an
 unnamed element is <code>""</code> and never <code>NA</code>.</p>
 <p><code>tbl_df</code> objects created by <code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> have variable names
-that are <code>minimal</code>, at the very least, even when <code>.name_repair = "none"</code>.
+that are <code>minimal</code>, at the very least.
 Why? General name repair can be be implemented more simply if the baseline
 strategy ensures that <code>names(x)</code> returns a character vector of the correct
 length.</p>
@@ -296,7 +296,7 @@ set_tidy_names(df, syntactic = TRUE)
 <span class='co'>## by default, duplicate names are not allowed</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'># }</span><div class='input'><span class='co'>## you can authorize duplicate names</span>
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x     x
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
@@ -330,7 +330,7 @@ set_tidy_names(df, syntactic = TRUE)
 #&gt;    &lt;dbl&gt;  &lt;dbl&gt;
 #&gt; 1      1      2</div><div class='input'>
 <span class='co'>## the names attibute will be non-NULL, with "" as the default element</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>list</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"none"</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>list</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)
 <span class='fu'>names</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] "" ""</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

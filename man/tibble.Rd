@@ -10,11 +10,11 @@
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("assert_unique", "unique",
-  "syntactic", "none", "minimal"))
+tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
+  "syntactic", "minimal"))
 
-data_frame(..., .rows = NULL, .name_repair = c("assert_unique",
-  "unique", "syntactic", "none", "minimal"))
+data_frame(..., .rows = NULL, .name_repair = c("check_unique",
+  "unique", "syntactic", "minimal"))
 
 lst(...)
 }
@@ -29,10 +29,9 @@ just as an additional check.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{"none"}: No name repair or checks, beyond basic existence,
-\item \code{"minimal"}: Same as \code{"none"},
+\item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"assert_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
@@ -85,7 +84,7 @@ tibble(`a + b` = 1:5)
 tibble(x = 1, x = 2)
 }
 tibble(x = 1, x = 2, .name_repair = "unique")
-tibble(x = 1, x = 2, .name_repair = "none")
+tibble(x = 1, x = 2, .name_repair = "minimal")
 
 ## by default, non-syntactic names are allowed
 df <- tibble(`a 1` = 1, `a 2` = 2)

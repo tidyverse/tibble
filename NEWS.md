@@ -29,14 +29,13 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Column name repair has more direct support, via the new `.name_repair` argument to `tibble()` and `as_tibble()`. It takes the following values:
 
-  - `"none"`: No name repair or checks, beyond basic existence.
-  - `"minimal"`: Same as `"none"`.
+  - `"minimal"`: No name repair or checks, beyond basic existence.
   - `"unique"`: Make sure names are unique and not empty.
-  - `"assert_unique"`: (default value), no name repair, but check they are `unique`.
+  - `"check_unique"`: (default value), no name repair, but check they are `unique`.
   - `"syntactic"`: Make the names `unique` and syntactic.
   - a function: apply custom name repair (e.g., `.name_repair = make.names` for names in the style of base R).
   
-  The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "none"` instead of `validate = FALSE` and `.name_repair = "assert_unique"` instead of `validate = TRUE` (#469, @jennybc).
+  The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "minimal"` instead of `validate = FALSE` and `.name_repair = "check_unique"` instead of `validate = TRUE` (#469, @jennybc).
 
 - Row name handling is stricter.  Row names are never (and never were) supported in `tibble()` and `new_tibble()`, and are now stripped by default in `as_tibble()`. The `rownames` argument to `as_tibble()` supports:
 

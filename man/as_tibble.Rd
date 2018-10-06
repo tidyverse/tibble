@@ -10,17 +10,16 @@
 \alias{as_tibble.default}
 \title{Coerce vectors, lists, and matrices to data frames}
 \usage{
-as_tibble(x, ..., .rows = NULL, .name_repair = c("assert_unique",
-  "unique", "syntactic", "none", "minimal"),
+as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
+  "unique", "syntactic", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("assert_unique", "unique", "syntactic", "none",
-  "minimal"), rownames = pkgconfig::get_config("tibble::rownames", NULL))
+  .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+  rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("assert_unique", "unique", "syntactic", "none",
-  "minimal"))
+  .name_repair = c("check_unique", "unique", "syntactic", "minimal"))
 
 \method{as_tibble}{matrix}(x, ...)
 
@@ -40,10 +39,9 @@ just as an additional check.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
-\item \code{"none"}: No name repair or checks, beyond basic existence,
-\item \code{"minimal"}: Same as \code{"none"},
+\item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"assert_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
@@ -111,7 +109,7 @@ if (requireNamespace("bench", quietly = TRUE)) {
   bench::mark(
     as_tibble(l2, .name_repair = "syntactic"),
     as_tibble(l2, .name_repair = "unique"),
-    as_tibble(l2, .name_repair = "none"),
+    as_tibble(l2, .name_repair = "minimal"),
     as_tibble(l2),
     as.data.frame(l2),
     check = FALSE

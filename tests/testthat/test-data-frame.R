@@ -224,16 +224,10 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
 
 
 test_that("as_tibble() makes names `minimal`, even if not fixing names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "none")
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "minimal")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), rep("", 3))
-})
-
-test_that("'minimal' is a synonym for 'none'", {
-  minimal_df <- as_tibble(list(3, 4, 5), .name_repair = "minimal")
-  none_df <- as_tibble(list(3, 4, 5), .name_repair = "none")
-  expect_identical(minimal_df, none_df)
 })
 
 test_that("as_tibble() implements unique names", {
