@@ -138,6 +138,7 @@
 <li><p><code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> (and also <code><a href="../reference/as_tibble.html">as_tibble.matrix()</a></code>) strip row names by default. Call <code><a href="http://www.rdocumentation.org/packages/pkgconfig/topics/set_config">pkgconfig::set_config("tibble::rownames", NA)</a></code> to revert to the old behavior of keeping row names, this also works for packages that import <em>tibble</em>.</p></li>
 <li><p>The <code>print()</code> method prints a message if a tibble is missing the <code>"tbl"</code> class (<a href='https://github.com/tidyverse/tibble/issues/264'>#264</a>).</p></li>
 <li><p>In all <code>*_rownames()</code> functions, the first argument has been renamed to <code>.data</code> for consistency (<a href='https://github.com/tidyverse/tibble/issues/412'>#412</a>).</p></li>
+<li><p>Subsetting one row with <code>[..., , drop = TRUE]</code> returns a tibble (<a href='https://github.com/tidyverse/tibble/issues/442'>#442</a>).</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
