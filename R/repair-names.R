@@ -187,15 +187,7 @@ set_minimal_names <- function(x) {
 }
 
 unique_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
-  new_name <- append_pos(new_name)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
+  tidy_names(name, syntactic = FALSE, quiet = quiet)
 }
 
 set_unique_names <- function(x, quiet = FALSE) {
@@ -204,19 +196,8 @@ set_unique_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-## TODO: this is just a placeholder = near copy of tidy_names()
-##       but may see more refactoring
 syntactic_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
-  new_name <- make_syntactic(new_name)
-  new_name <- unique_names(new_name, quiet = TRUE)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
+  tidy_names(name, syntactic = TRUE, quiet = quiet)
 }
 
 set_syntactic_names <- function(x, quiet = FALSE) {
@@ -276,18 +257,31 @@ check_unique_names <- function(x) {
   invisible(x)
 }
 
+make_names <- function(name) {
+  name <- gsub("^(|[.][.][.]|[.][.][1-9][0-9]*|[.][0-9].*)$", ".\\1", name)
+  new_name <- make.names(name)
+  different <- which(new_name != name)
+  reserved_in_different <- grep("^[a-zA-Z][a-zA-Z_]*$", name[different])
+  reserved <- different[reserved_in_different]
+  new_name[reserved] <- paste0(".", name[reserved])
+  new_name
+}
+
 make_syntactic <- function(name) {
-  fix_syntactic <- (name != "") & !is_syntactic(name)
-  name[fix_syntactic] <- make.names(name[fix_syntactic])
+  fix_syntactic <- !is_syntactic(name)
+  name[fix_syntactic] <- make_names(name[fix_syntactic])
   name
 }
 
 ## TODO: do we need checks around "syntactic"-ness?
 
 append_pos <- function(name) {
+  name[name == ""] <- "."
+
   need_append_pos <- duplicated(name) |
     duplicated(name, fromLast = TRUE) |
-    name == ""
+    (name == ".")
+
   need_append_pos <- which(need_append_pos)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
@@ -350,7 +344,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   if (syntactic) {
     new_name <- make_syntactic(new_name)
   }
-  new_name <- unique_names(new_name, quiet = TRUE)
+  new_name <- append_pos(new_name)
 
   if (!quiet) {
     describe_repair(name, new_name)
