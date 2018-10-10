@@ -216,8 +216,6 @@ set_unique_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-## TODO: this is just a placeholder = near copy of tidy_names()
-##       but may see more refactoring
 syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- strip_pos(name)
@@ -377,22 +375,17 @@ describe_repair <- function(orig_name, name) {
 #' set_tidy_names(df, syntactic = TRUE)
 #' ```
 #'
-#' @param syntactic Should names be made syntactically valid?
+#' @param syntactic Should names be made syntactically valid? If `FALSE`, uses
+#'   same logic as `.name_repair = "unique"`. If `TRUE`, uses same logic as
+#'   `.name_repair = "syntactic"`.
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(new_name)
   if (syntactic) {
-    new_name <- make_syntactic(new_name)
+    syntactic_names(name, quiet = quiet)
+  } else {
+    unique_names(name, quiet = quiet)
   }
-  new_name <- unique_names(new_name, quiet = TRUE)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
 }
 
 #' @export

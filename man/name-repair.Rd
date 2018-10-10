@@ -16,7 +16,9 @@ repair_names(x, prefix = "V", sep = "")
 \arguments{
 \item{name}{A \code{names} attribute, usually a character vector.}
 
-\item{syntactic}{Should names be made syntactically valid?}
+\item{syntactic}{Should names be made syntactically valid? If \code{FALSE}, uses
+same logic as \code{.name_repair = "unique"}. If \code{TRUE}, uses same logic as
+\code{.name_repair = "syntactic"}.}
 
 \item{quiet}{Whether to suppress messages about name repair.}
 
