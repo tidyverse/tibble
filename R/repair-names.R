@@ -79,20 +79,32 @@
 #'
 #' @section `syntactic` names:
 #'
-#' `syntactic` names are `unique` and syntactic (see [make.names()]), meaning
-#' they:
+#' `syntactic` names are `unique` and syntactic, meaning they:
 #'   - Have no duplicates (inherited from `unique`).
 #'   - Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
-#'   - Start with a letter or the dot `.`, not followed by a number.
-#'   - Not a reserved word.
+#'   - Start with a letter or start with the dot `.` not followed by a number.
+#'   - Are not a reserved word, e.g., `if` or `function` or `TRUE`.
+#'   - Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
 #' `syntactic` names are easy to use "as is" in code. They do not require
 #' quoting and work well with nonstandard evaluation, such as list indexing via
 #' `$` or in packages like dplyr and ggplot2.
 #'
-#' There are many ways to make names `syntactic`. For example, we choose to
-#' define `syntactic` names as an extension of `unique`, i.e. `syntactic`
+#' There are many ways to fix a non-syntactic name. Here's how our logic
+#' compares to [base::make.names()] for a single name:
+#'   - Same: Definition of what is syntactically valid.
+#'   - Same: Invalid characters are replaced with `.`.
+#'   - Different: We always fix a name by prepending a `.`. [base::make.names()]
+#'     sometimes prefixes with `X` and at other times appends a `.`.
+#'   - Different: We treat `NA` and `""` the same: both become `.`.
+#'     [base::make.names()] turns `NA` in `"NA."` and `""` into `"X"`.
+#'   - Different: We turn `...` into `....` and `..i` into `...i` (`i` is a
+#'     number). [base::make.names()] does not modify `...` or `..i`, which could
+#'     be regarded as a bug (?).
+#'
+#' Additionally, when dealing with the vector of names for a tibble, we choose
+#' to implement `syntactic` names as an extension of `unique`, i.e. `syntactic`
 #' implies unique. Why? Because the need for syntactic names is strongly
 #' associated with the need for uniqueness and this makes the name repair system
 #' simpler.
@@ -276,10 +288,34 @@ check_unique_names <- function(x) {
   invisible(x)
 }
 
+## makes *each* name syntactic
+## does not enforce unique-ness
 make_syntactic <- function(name) {
-  fix_syntactic <- (name != "") & !is_syntactic(name)
-  name[fix_syntactic] <- make.names(name[fix_syntactic])
-  name
+  name[is.na(name)] <- ""
+  new_name <- make.names(name)
+
+  X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
+  new_name[X_prefix] <- gsub("^X", "", new_name[X_prefix])
+
+  dot_suffix <- nchar(new_name) == (nchar(name) + 1) &
+    grepl("[.]$", new_name) & !grepl("[.]$", name)
+  new_name[dot_suffix] <- gsub("[.]$", "", new_name[dot_suffix])
+  new_name[dot_suffix] <- paste0(".", new_name[dot_suffix])
+  ## illegal characters have been replaced with '.' via make.names()
+  ## however, we have:
+  ##   * declined its addition of 'X' prefixes
+  ##   * turned its '.' suffixes to '.' prefixes
+
+  ## ".i" --> "..i", so it's caught in next step
+  new_name <- gsub("^([.][1-9][0-9]*)$", ".\\1", new_name)
+
+  new_name <- gsub(
+    "^(|[_].*|[.][.][.]|[.][.][1-9][0-9]*|[.][1-9].*)$",
+    ".\\1",
+    new_name
+  )
+
+  new_name
 }
 
 ## TODO: do we need checks around "syntactic"-ness?
@@ -341,7 +377,7 @@ describe_repair <- function(orig_name, name) {
 #' set_tidy_names(df, syntactic = TRUE)
 #' ```
 #'
-#' @param syntactic Should names be made syntactically valid via [make.names()]?
+#' @param syntactic Should names be made syntactically valid?
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
