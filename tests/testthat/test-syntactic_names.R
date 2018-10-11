@@ -169,3 +169,28 @@ test_that("non-syntactic names", {
 
   expect_equal(syntactic_names("a b"), "a.b")
 })
+
+# check syntactic
+test_that("check_syntactic() imposes check_minimal()", {
+  expect_error(
+    check_syntactic(NULL),
+    capture_error(check_minimal(NULL))$message,
+    fixed = TRUE
+  )
+})
+
+test_that("check_syntactic() imposes check_unique()", {
+  expect_error(
+    check_syntactic(c("x", "x", "y")),
+    capture_error(check_unique(c("x", "x", "y")))$message,
+    fixed = TRUE
+  )
+})
+
+test_that("check_syntactic() errors for non-syntactic names", {
+  expect_error(
+    check_syntactic(c("x", "a:b", "break")),
+    error_column_names_must_be_syntactic(c("a:b", "break")),
+    fixed = TRUE
+  )
+})

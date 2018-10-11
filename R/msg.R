@@ -96,6 +96,10 @@ error_column_names_must_be_unique <- function(names) {
   pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.")
 }
 
+error_column_names_must_be_syntactic <- function(names) {
+  pluralise_commas("Column name(s) ", tick(names), " are not syntactic.")
+}
+
 error_column_must_be_vector <- function(names, classes) {
   bullets(
     "All columns in a tibble must be 1d or 2d objects:",

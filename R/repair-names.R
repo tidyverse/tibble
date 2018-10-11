@@ -295,6 +295,27 @@ check_unique_names <- function(x) {
   invisible(x)
 }
 
+check_syntactic <- function(name) {
+  check_minimal(name)
+  check_unique(name)
+
+  bad_name <- !is_syntactic(name)
+  if (has_length(bad_name)) {
+    msg <- paste0(
+      error_column_names_must_be_syntactic(name[bad_name]), "\n",
+      "Use `.name_repair` to specify a fix."
+    )
+    abort(msg)
+  }
+
+  invisible(name)
+}
+
+check_syntactic_names <- function(x) {
+  check_syntactic(names(x))
+  invisible(x)
+}
+
 ## makes each individual name syntactic
 ## does not enforce unique-ness
 make_syntactic <- function(name) {
