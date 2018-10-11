@@ -116,13 +116,24 @@ test_that("dot, dot, empty becomes suffix, suffix, suffix", {
   expect_equal(syntactic_names(c(".", ".", "")), c("...1", "...2", "...3"))
 })
 
+test_that("dot, empty, dot becomes suffix, suffix, suffix", {
+  expect_equal(syntactic_names(c(".", "", ".")), c("...1", "...2", "...3"))
+})
+
+test_that("empty, dot, empty becomes suffix, dot, suffix", {
+  expect_equal(syntactic_names(c("", ".", "")), c("...1", ".", "...3"))
+})
+
 test_that("'..j' gets stripped then names are modified", {
   expect_equal(syntactic_names(c("..6", "..1")), c("...1", "...2"))
   expect_equal(syntactic_names("if..2"), ".if")
 })
 
 test_that("complicated inputs", {
-  syntactic_names(c("", ".", NA, "if..4", "if", "if..8", "for", "if){1"))
+  expect_equal(
+    syntactic_names(c("", ".", NA, "if..4", "if", "if..8", "for", "if){1")),
+    c("...1", ".", "...3", ".if..4", ".if..5", ".if..6", ".for", "if..1")
+  )
 })
 
 test_that("message", {
