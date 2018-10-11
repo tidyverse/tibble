@@ -210,22 +210,27 @@ to enforce them.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
-<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
-#&gt;       a     b
-#&gt;   &lt;int&gt; &lt;dbl&gt;
-#&gt; 1     1     2
-#&gt; 2     2     4
-#&gt; 3     3     6
-#&gt; 4     4     8
-#&gt; 5     5    10</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 3
+    <pre class="examples"><div class='input'><span class='co'># Unnamed arguments are named with their expression:</span>
+<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
+<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='no'>a</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
+#&gt;       a `a * 2`
+#&gt;   &lt;int&gt;   &lt;dbl&gt;
+#&gt; 1     1       2
+#&gt; 2     2       4
+#&gt; 3     3       6
+#&gt; 4     4       8
+#&gt; 5     5      10</div><div class='input'>
+<span class='co'># Scalars (vectors of length one) are recycled:</span>
+<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 3
 #&gt;       a     b     c
 #&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2     1
 #&gt; 2     2     4     1
 #&gt; 3     3     6     1
 #&gt; 4     4     8     1
-#&gt; 5     5    10     1</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
+#&gt; 5     5    10     1</div><div class='input'>
+<span class='co'># Columns are available in subsequent expressions:</span>
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1 0.361 0.722
@@ -238,19 +243,13 @@ to enforce them.</p></td>
 #&gt;  8 0.238 0.475
 #&gt;  9 0.579 1.16 
 #&gt; 10 0.898 1.80 </div><div class='input'>
-<span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
-#&gt; [1] 5
-#&gt; 
-#&gt; $x
-#&gt; [1] 0.3444290 0.7608582 0.7311036 0.8524324 0.9758180
-#&gt; </div><div class='input'>
-<span class='co'># tibble never coerces its inputs</span>
+<span class='co'># tibble() never coerces its inputs,</span>
 <span class='fu'>str</span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	26 obs. of  1 variable:
 #&gt;  $ letters: chr  "a" "b" "c" "d" ...</div><div class='input'><span class='fu'>str</span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>diag</span>(<span class='fl'>1</span>), <span class='fu'>diag</span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	2 obs. of  1 variable:
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
-<span class='co'># or munges column names (unless requested)</span>
+<span class='co'># or munges column names (unless requested),</span>
 <span class='fu'>tibble</span>(<span class='kw'>`a + b`</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 1
 #&gt;   `a + b`
 #&gt;     &lt;int&gt;
@@ -259,10 +258,9 @@ to enforce them.</p></td>
 #&gt; 3       3
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
-# but it forces you to take charge of names, if they need repair
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='co'># }</span><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='co'># but it forces you to take charge of names, if they need repair:</span>
+<span class='fu'>try</span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x..1</span>
 #&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;    x..1  x..2
@@ -271,15 +269,15 @@ to enforce them.</p></td>
 #&gt;       x     x
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
-<span class='co'>## by default, non-syntactic names are allowed</span>
+<span class='co'>## By default, non-syntactic names are allowed,</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='co'>## because you can still index by name</span>
-<span class='no'>df</span><span class='kw'>[[</span><span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>df</span>$<span class='no'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
-<span class='co'>## syntactic names are easier to work with, though, and you can request them</span>
+<span class='co'>## because you can still index by name:</span>
+<span class='no'>df</span><span class='kw'>[[</span><span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>df</span>$<span class='no'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>with</span>(<span class='no'>df</span>, <span class='no'>`a 1`</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='co'>## Syntactic names are easier to work with, though, and you can request them:</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"syntactic"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `a 1` -&gt; a.1</span>
 #&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
-<span class='co'>## you can specify your own name repair function</span>
+<span class='co'>## You can specify your own name repair function:</span>
 <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x   x.1
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -289,7 +287,42 @@ to enforce them.</p></td>
 #&gt;   year_1 year_2
 #&gt;    &lt;dbl&gt;  &lt;dbl&gt;
 #&gt; 1      1      2</div><div class='input'>
-<span class='co'># You can splice-unquote a list of quotes and formulas</span>
+<span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
+<span class='co'># if the number of rows is consistent:</span>
+<span class='fu'>tibble</span>(
+  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
+    <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
+  ),
+  <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+    <span class='kw'>f</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+      <span class='kw'>g</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+    )
+  )
+)</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;       a   b$c    $d e$f$g
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
+#&gt; 1     1     4     7 a    
+#&gt; 2     2     5     8 b    
+#&gt; 3     3     6     9 c    </div><div class='input'><span class='fu'>tibble</span>(
+  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>,
+  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>diag</span>(<span class='fl'>4</span>),
+  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'>cov</span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
+)</div><div class='output co'>#&gt; # A tibble: 4 x 3
+#&gt;       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Lengt… [,"Sepal.Width"]
+#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+#&gt; 1     1     1     0     0     0           0.686           -0.0424
+#&gt; 2     2     0     1     0     0          -0.0424           0.190 
+#&gt; 3     3     0     0     1     0           1.27            -0.330 
+#&gt; 4     4     0     0     0     1           0.516           -0.122 
+#&gt; # … with 2 more variables: [,"Petal.Length"] &lt;dbl&gt;, [,"Petal.Width"] &lt;dbl&gt;</div><div class='input'>
+<span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
+<span class='co'># with inconsistent number of rows:</span>
+<span class='fu'>try</span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>strptime</span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))
+<span class='fu'>try</span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))
+
+<span class='co'># You can splice-unquote a list of quosures and expressions:</span>
 <span class='fu'>tibble</span>(!!!<span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -303,23 +336,19 @@ to enforce them.</p></td>
 #&gt;  8     8    16
 #&gt;  9     9    18
 #&gt; 10    10    20</div><div class='input'>
-# data frames can only contain 1d atomic vectors and lists
-# and can not contain POSIXlt
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>strptime</span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>))
-<span class='co'># }</span><div class='input'><span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
+<span class='co'># lst() behaves very similarly, without restriction on the length</span>
+<span class='co'># of the individual elements:</span>
+<span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
 #&gt; [1] 5
 #&gt; 
 #&gt; $x
-#&gt; [1] 0.11304750 0.97026228 0.64808278 0.05607304 0.47313710
+#&gt; [1] 0.3444290 0.7608582 0.7311036 0.8524324 0.9758180
 #&gt; </div><div class='input'>
-<span class='co'># You can splice-unquote a list of quotes and formulas</span>
-<span class='fu'>lst</span>(!!! <span class='fu'>list</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>2</span> + <span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='fu'>runif</span>(<span class='no'>n</span>))))</div><div class='output co'>#&gt; $n
+<span class='fu'>lst</span>(!!!<span class='fu'>list</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>2</span> + <span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='fu'>runif</span>(<span class='no'>n</span>))))</div><div class='output co'>#&gt; $n
 #&gt; [1] 5
 #&gt; 
 #&gt; $y
-#&gt; [1] 0.2946250 0.6102996 0.1211089 0.6294165 0.7119553
+#&gt; [1] 0.11304750 0.97026228 0.64808278 0.05607304 0.47313710
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
