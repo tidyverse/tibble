@@ -111,7 +111,7 @@ error_time_column_must_be_posixct <- function(names) {
   invalid_df("[is](are) [a ]date(s)/time(s) and must be stored as POSIXct, not POSIXlt", names)
 }
 
-error_inconsistent_cols <- function(.rows, vars, vars_len) {
+error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -120,8 +120,8 @@ error_inconsistent_cols <- function(.rows, vars, vars_len) {
   }
 
   bullets(
-    "Tibble columns must have consistent lengths:",
-    if (!is.null(.rows)) paste0("Requested length: ", .rows),
+    "Tibble columns must have consistent lengths, only values of length one are recycled:",
+    if (!is.null(.rows)) paste0("Length ", .rows, ": Requested with ", rows_source),
     map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
   )
 }

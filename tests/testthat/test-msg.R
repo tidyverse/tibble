@@ -207,19 +207,18 @@ test_that("error_time_column_must_be_posixct()", {
 })
 
 test_that("error_inconsistent_cols()", {
-  skip("msg")
-
   expect_equal(
     error_inconsistent_cols(
       10,
       letters[1:3],
-      c(4, 4, 3)
+      c(4, 4, 3),
+      "`uvw` argument"
     ),
     bullets(
-      "Tibble columns must have consistent lengths:",
-      "Required length: 10",
-      "Length 4: Columns `a`, `b`",
-      "Length 3: Column `c`"
+      "Tibble columns must have consistent lengths, only values of length one are recycled:",
+      "Length 10: Requested with `uvw` argument",
+      "Length 3: Column `c`",
+      "Length 4: Columns `a`, `b`"
     )
   )
 
@@ -227,13 +226,28 @@ test_that("error_inconsistent_cols()", {
     error_inconsistent_cols(
       10,
       letters[1:3],
-      c(2, 2, 3)
+      c(2, 2, 3),
+      "`xyz` argument"
     ),
     bullets(
-      "Tibble columns must have consistent lengths:",
-      "Requi",
-      "Column `a` has length 2",
-      "Column `b` has length 3"
+      "Tibble columns must have consistent lengths, only values of length one are recycled:",
+      "Length 10: Requested with `xyz` argument",
+      "Length 2: Columns `a`, `b`",
+      "Length 3: Column `c`"
+    )
+  )
+
+  expect_equal(
+    error_inconsistent_cols(
+      NULL,
+      letters[1:3],
+      c(2, 2, 3),
+      "`xyz` argument"
+    ),
+    bullets(
+      "Tibble columns must have consistent lengths, only values of length one are recycled:",
+      "Length 2: Columns `a`, `b`",
+      "Length 3: Column `c`"
     )
   )
 })
