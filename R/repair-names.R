@@ -200,8 +200,11 @@ set_minimal_names <- function(x) {
 
 unique_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
-  new_name <- append_pos(new_name)
+  new_name <- strip_pos(new_name)
+  needs_suffix <- duplicated(new_name) |
+    duplicated(new_name, fromLast = TRUE) |
+    new_name == ""
+  new_name <- append_pos(new_name, needs_suffix)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -318,11 +321,8 @@ make_syntactic <- function(name) {
 
 ## TODO: do we need checks around "syntactic"-ness?
 
-append_pos <- function(name) {
-  need_append_pos <- duplicated(name) |
-    duplicated(name, fromLast = TRUE) |
-    name == ""
-  need_append_pos <- which(need_append_pos)
+append_pos <- function(name, needs_suffix) {
+  need_append_pos <- which(needs_suffix)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
 }
