@@ -201,6 +201,7 @@ set_minimal_names <- function(x) {
 unique_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
   new_name <- strip_pos(new_name)
+
   needs_suffix <- duplicated(new_name) |
     duplicated(new_name, fromLast = TRUE) |
     new_name == ""
@@ -221,9 +222,14 @@ set_unique_names <- function(x, quiet = FALSE) {
 
 syntactic_names <- function(name, quiet = FALSE) {
   new_name <- minimal_names(name)
-  new_name <- strip_pos(name)
+  new_name <- strip_pos(new_name)
+
+  empty_before <- new_name == ""
   new_name <- make_syntactic(new_name)
-  new_name <- unique_names(new_name, quiet = TRUE)
+  new_name <- append_pos(new_name, needs_suffix = empty_before)
+
+  duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
+  new_name <- append_pos(new_name, duped_after)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -289,7 +295,7 @@ check_unique_names <- function(x) {
   invisible(x)
 }
 
-## makes *each* name syntactic
+## makes each individual name syntactic
 ## does not enforce unique-ness
 make_syntactic <- function(name) {
   name[is.na(name)] <- ""
@@ -318,8 +324,6 @@ make_syntactic <- function(name) {
 
   new_name
 }
-
-## TODO: do we need checks around "syntactic"-ness?
 
 append_pos <- function(name, needs_suffix) {
   need_append_pos <- which(needs_suffix)

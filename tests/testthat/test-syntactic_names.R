@@ -62,6 +62,14 @@ test_that("make_syntactic(): underscore", {
 })
 
 # syntactic_names() -----------------------------------------------------------
+test_that("zero-length input", {
+  expect_equal(syntactic_names(character()), character())
+})
+
+test_that("syntactic names are not changed", {
+  expect_equal(syntactic_names(letters), letters)
+})
+
 test_that("syntactic_names() pass checks for minimal, unique, and syntactic", {
   x <- c(NA, "", "x", "x", "a1:", "_x_y}")
   x_syn <- syntactic_names(x)
@@ -76,60 +84,51 @@ test_that("syntactic_names() is idempotent", {
   expect_identical(syntactic_names(x), syntactic_names(syntactic_names(x)))
 })
 
-test_that("zero-length input", {
-  expect_equal(syntactic_names(character()), character())
-})
-
-test_that("syntactic names", {
-  expect_equal(syntactic_names(letters), letters)
-})
-
-test_that("dupes", {
+test_that("dupes get a suffix", {
   expect_equal(
     syntactic_names(c("a", "b", "a", "c", "b")),
     c("a..1", "b..2", "a..3", "c", "b..5")
   )
 })
 
-## TODO: figure this out
-test_that("solo empty or NA", {
+test_that("solo empty or NA gets suffix", {
   expect_equal(syntactic_names(""), "...1")
   expect_equal(syntactic_names(NA_character_), "...1")
 })
 
-test_that("dot", {
+test_that("solo dot is unchanged", {
   expect_equal(syntactic_names("."), ".")
 })
 
-test_that("dot, dot", {
+test_that("dot, dot gets suffix", {
   expect_equal(syntactic_names(c(".", ".")), c("...1", "...2"))
 })
 
-## TODO: figure this out
-test_that("empty, dot", {
+test_that("empty, dot becomes suffix, dot", {
   expect_equal(syntactic_names(c("", ".")), c("...1", "."))
 })
 
-## TODO: figure this out
-test_that("empty, empty, dot", {
+test_that("empty, empty, dot becomes suffix, suffix, dot", {
   expect_equal(syntactic_names(c("", "", ".")), c("...1", "...2", "."))
 })
 
-test_that("dot, empty, dot", {
-  expect_equal(syntactic_names(c(".", "", ".")), c("...1", "...2", "...3"))
+test_that("dot, dot, empty becomes suffix, suffix, suffix", {
+  expect_equal(syntactic_names(c(".", ".", "")), c("...1", "...2", "...3"))
 })
 
-## TODO: figure this out
-test_that("stripping '..j' gets interesting", {
-  expect_equal(syntactic_names("..1"), "...1")
-  expect_equal(syntactic_names("..13"), "...13")
+test_that("'..j' gets stripped then names are modified", {
+  expect_equal(syntactic_names(c("..6", "..1")), c("...1", "...2"))
   expect_equal(syntactic_names("if..2"), ".if")
+})
+
+test_that("complicated inputs", {
+  syntactic_names(c("", ".", NA, "if..4", "if", "if..8", "for", "if){1"))
 })
 
 test_that("message", {
   expect_message(
-    syntactic_names(c("", "")),
-    "New names:\n* `` -> ...1\n* `` -> ...2\n",
+    syntactic_names(c("a b", "b c")),
+    "New names:\n* `a b` -> a.b\n* `b c` -> b.c\n",
     fixed = TRUE
   )
 })
