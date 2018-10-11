@@ -16,7 +16,9 @@ repair_names(x, prefix = "V", sep = "")
 \arguments{
 \item{name}{A \code{names} attribute, usually a character vector.}
 
-\item{syntactic}{Should names be made syntactically valid via \code{\link[=make.names]{make.names()}}?}
+\item{syntactic}{Should names be made syntactically valid? If \code{FALSE}, uses
+same logic as \code{.name_repair = "unique"}. If \code{TRUE}, uses same logic as
+\code{.name_repair = "syntactic"}.}
 
 \item{quiet}{Whether to suppress messages about name repair.}
 
@@ -114,25 +116,46 @@ with your names, you should take control of name repair.
 \section{\code{syntactic} names}{
 
 
-\code{syntactic} names are \code{unique} and syntactic (see \code{\link[=make.names]{make.names()}}), meaning
-they:
+\code{syntactic} names are \code{unique} and syntactic, meaning they:
 \itemize{
 \item Have no duplicates (inherited from \code{unique}).
 \item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
 characters.
-\item Start with a letter or the dot \code{.}, not followed by a number.
-\item Not a reserved word.
+\item Start with a letter or start with the dot \code{.} not followed by a number.
+\item Are not a reserved word, e.g., \code{if} or \code{function} or \code{TRUE}.
+\item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number.
 }
 
 \code{syntactic} names are easy to use "as is" in code. They do not require
 quoting and work well with nonstandard evaluation, such as list indexing via
 \code{$} or in packages like dplyr and ggplot2.
 
-There are many ways to make names \code{syntactic}. For example, we choose to
-define \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic}
+There are many ways to fix a non-syntactic name. Here's how our logic
+compares to \code{\link[base:make.names]{base::make.names()}} for a single name:
+\itemize{
+\item Same: Definition of what is syntactically valid.
+\item Same: Invalid characters are replaced with \code{.}.
+\item Different: We always fix a name by prepending a \code{.}. \code{\link[base:make.names]{base::make.names()}}
+sometimes prefixes with \code{X} and at other times appends a \code{.}.
+\item Different: We treat \code{NA} and \code{""} the same: both become \code{.}.
+\code{\link[base:make.names]{base::make.names()}} turns \code{NA} in \code{"NA."} and \code{""} into \code{"X"}.
+\item Different: We turn \code{...} into \code{....} and \code{..i} into \code{...i} (\code{i} is a
+number). \code{\link[base:make.names]{base::make.names()}} does not modify \code{...} or \code{..i}, which could
+be regarded as a bug (?).
+}
+
+Additionally, when dealing with the vector of names for a tibble, we choose
+to implement \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic}
 implies unique. Why? Because the need for syntactic names is strongly
 associated with the need for uniqueness and this makes the name repair system
 simpler.
+
+Examples:\preformatted{ Original names:     ""    "x"    NA     "x"
+syntactic names: "...1" "x..2" "...3" "x..4"
+
+  Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
+ syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+}
 }
 
 \section{Life cycle}{

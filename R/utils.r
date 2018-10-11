@@ -63,7 +63,7 @@ tick <- function(x) {
 }
 
 is_syntactic <- function(x) {
-  ret <- make.names(x) == x
+  ret <- make_syntactic(x) == x
   ret[is.na(x)] <- FALSE
   ret
 }
