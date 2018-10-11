@@ -11,7 +11,7 @@
 #' @export
 #' @rdname tibble
 lst <- function(...) {
-  xs <- quos(..., .named = 500L)
+  xs <- quos(..., .named = TRUE)
   lst_quos(xs)
 }
 
