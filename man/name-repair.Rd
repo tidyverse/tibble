@@ -149,6 +149,13 @@ to implement \code{syntactic} names as an extension of \code{unique}, i.e. \code
 implies unique. Why? Because the need for syntactic names is strongly
 associated with the need for uniqueness and this makes the name repair system
 simpler.
+
+Examples:\preformatted{ Original names:     ""    "x"    NA     "x"
+syntactic names: "...1" "x..2" "...3" "x..4"
+
+  Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
+ syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+}
 }
 
 \section{Life cycle}{

@@ -109,6 +109,15 @@
 #' associated with the need for uniqueness and this makes the name repair system
 #' simpler.
 #'
+#' Examples:
+#' ```
+#'  Original names:     ""    "x"    NA     "x"
+#' syntactic names: "...1" "x..2" "...3" "x..4"
+#'
+#'   Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
+#'  syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+#' ```
+#'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
 #' @param quiet Whether to suppress messages about name repair.
