@@ -10,6 +10,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Checking names in `as_tibble()` is enabled by default, even for tibbles. The `validate` argument has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
+- `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
+
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
 - `as.tibble()` and `as_data_frame()` are soft-deprecated and not generic anymore, please use/implement `as_tibble()`.
