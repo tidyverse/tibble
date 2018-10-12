@@ -8,7 +8,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - The `nrow` argument to `new_tibble()` is now mandatory.
 
-- Checking names in `as_tibble()` is enabled by default, even for tibbles. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- Checking names in `as_tibble()` is enabled by default, even for tibbles. The `validate` argument has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
