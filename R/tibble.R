@@ -30,6 +30,7 @@
 #'   - `"syntactic"`: Make the names `unique` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
+#'   - A purrr-style anonymous function, see [as_function()]
 #'
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
@@ -73,6 +74,8 @@
 #'
 #' ## You can specify your own name repair function:
 #' tibble(x = 1, x = 2, .name_repair = make.unique)
+#'
+#' tibble(x = 1, x = 2, .name_repair = ~make.names(., unique = TRUE))
 #'
 #' fix_names <- function(x) gsub("\\s+", "_", x)
 #' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
