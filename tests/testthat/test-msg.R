@@ -7,6 +7,13 @@ test_that("error_enframe_value_null()", {
   )
 })
 
+test_that("error_enframe_value_null()", {
+  expect_equal(
+    error_enframe_has_dim(),
+    "Cannot use objects with dimensions in `enframe()`."
+  )
+})
+
 test_that("error_unsupported_index()", {
   expect_equal(
     error_unsupported_index(raw()),

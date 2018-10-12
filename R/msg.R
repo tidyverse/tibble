@@ -18,6 +18,10 @@ error_enframe_value_null <- function() {
   "The `value` argument to `enframe()` cannot be NULL."
 }
 
+error_enframe_has_dim <- function() {
+  "Cannot use objects with dimensions in `enframe()`."
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
 }
