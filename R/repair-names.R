@@ -360,10 +360,13 @@ prepend_syntactic_dot_rx <- rex(
     group(escape("."), range("0", "9"), anything)
   )),
 
-  # We capture the entire string and prepend a dot and a second dot if needed.
-
   end
 )
+
+# We capture the entire string and prepend a dot and a second dot if needed.
+prepend_syntactic_dot_sub <- ".\\2\\1"
+
+
 
 ## makes each individual name syntactic
 ## does not enforce unique-ness
@@ -381,11 +384,7 @@ make_syntactic <- function(name) {
   ##   * declined its addition of 'X' prefixes
   ##   * turned its '.' suffixes to '.' prefixes
 
-  new_name <- gsub(
-    "^(|[_].*|[.][.][.]|(?:([.])|[.][.])[1-9][0-9]*|[.][0-9].*)$",
-    ".\\2\\1",
-    new_name
-  )
+  new_name <- gsub(prepend_syntactic_dot_rx, prepend_syntactic_dot_sub, new_name)
 
   new_name
 }

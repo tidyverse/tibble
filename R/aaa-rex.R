@@ -11,11 +11,11 @@ capture <- function(x) {
 }
 
 or <- function(...) {
-  paste0(map_chr(c(...), group), collapse = "|")
+  group(paste0(c(...), collapse = "|"))
 }
 
 zero_or_more <- function(x) {
-  paste0(group(x), "*")
+  paste0(x, "*")
 }
 
 escape <- function(x) {
@@ -34,7 +34,7 @@ any <- "."
 
 nothing <- ""
 
-anything <- zero_or_more(any)
+anything <- ".*"
 
 start <- "^"
 
