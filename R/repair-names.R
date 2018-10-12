@@ -325,30 +325,65 @@ check_syntactic_names <- function(x) {
   invisible(x)
 }
 
+# In make_syntactic, we'll prepend a dot if
+prepend_syntactic_dot_rx <- rex(
+  start,
+
+  # the entire string satisfies one of the following:
+  capture(or(
+    # - is blank
+    nothing,
+
+    # - starts with an underscore
+    group(escape("_"), anything),
+
+    # - is the ellipsis
+    group(escape("."), escape("."), escape(".")),
+
+    group(
+      # - starts with one or two dots
+      or(
+        # (if one dot, we add a second dot, capture #2)
+        capture(escape(".")),
+        group(escape("."), escape("."))
+      ),
+
+      # and follows by an integer,
+      range("1", "9"),
+      zero_or_more(range("0", "9"))
+
+      # (this results in three dots if the rest of the name is a proper integer,
+      # see http://r.789695.n4.nabble.com/Dots-are-not-fixed-by-make-names-td4752920.html)
+    ),
+
+    # - starts with a dot followed by a digit.
+    group(escape("."), range("0", "9"), anything)
+  )),
+
+  # We capture the entire string and prepend a dot and a second dot if needed.
+
+  end
+)
+
 ## makes each individual name syntactic
 ## does not enforce unique-ness
 make_syntactic <- function(name) {
   name[is.na(name)] <- ""
   new_name <- make.names(name)
 
-  X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
+  X_prefix <- which(grepl("^X", new_name) & !grepl("^X", name))
   new_name[X_prefix] <- gsub("^X", "", new_name[X_prefix])
 
-  dot_suffix <- nchar(new_name) == (nchar(name) + 1) &
-    grepl("[.]$", new_name) & !grepl("[.]$", name)
-  new_name[dot_suffix] <- gsub("[.]$", "", new_name[dot_suffix])
-  new_name[dot_suffix] <- paste0(".", new_name[dot_suffix])
+  dot_suffix <- which(new_name == paste0(name, "."))
+  new_name[dot_suffix] <- gsub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
   ## illegal characters have been replaced with '.' via make.names()
   ## however, we have:
   ##   * declined its addition of 'X' prefixes
   ##   * turned its '.' suffixes to '.' prefixes
 
-  ## ".i" --> "..i", so it's caught in next step
-  new_name <- gsub("^([.][1-9][0-9]*)$", ".\\1", new_name)
-
   new_name <- gsub(
-    "^(|[_].*|[.][.][.]|[.][.][1-9][0-9]*|[.][0-9].*)$",
-    ".\\1",
+    "^(|[_].*|[.][.][.]|(?:([.])|[.][.])[1-9][0-9]*|[.][0-9].*)$",
+    ".\\2\\1",
     new_name
   )
 

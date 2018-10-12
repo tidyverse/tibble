@@ -44,6 +44,7 @@ LazyData: yes
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.1.0.9000
 Collate: 
+    'aaa-rex.R'
     'add.R'
     'as_tibble.R'
     'check-names.R'
