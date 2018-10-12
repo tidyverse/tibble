@@ -449,7 +449,7 @@ repair_names <- function(x, prefix = "V", sep = "") {
 }
 
 make_unique <- function(name, prefix = "V", sep = "") {
-  blank <- name == ""
+  blank <- (name == "")
 
   # Ensure existing names are unique
   name[!blank] <- make.unique(name[!blank], sep = sep)
