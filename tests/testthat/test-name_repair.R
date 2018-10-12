@@ -92,7 +92,7 @@ test_that("check_unique() errors for empty or duplicated names", {
 
 test_that("unique_names() is idempotent", {
   x <- c("..20", "a..1", "b", "", "a..2")
-  expect_identical(unique_names(x), unique_names(unique_names(x)))
+  expect_identical(unique_names(!!x), unique_names(unique_names(!!x)))
 })
 
 test_that("unique-ification has an 'algebraic'-y property", {
