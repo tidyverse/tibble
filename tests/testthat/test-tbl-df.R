@@ -342,8 +342,25 @@ test_that("new_tibble checks", {
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
-  expect_error(new_tibble(list(1), nrow = 1), "names", fixed = TRUE)
-  expect_error(new_tibble(list(a = 1, b = 2:3), nrow = 1), "length", fixed = TRUE)
+  expect_error(
+    new_tibble(list(1), nrow = 1),
+    error_names_must_be_non_null(repair = FALSE),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(set_names(list(1), NA_character_), nrow = 1),
+    error_column_must_be_named(1, repair = FALSE),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(set_names(list(1), ""), nrow = 1),
+    NA
+  )
+  expect_error(
+    new_tibble(list(a = 1, b = 2:3), nrow = 1),
+    error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
+    fixed = TRUE
+  )
   expect_error(
     new_tibble(
       structure(list(a = 1, b = 2), row.names = .set_row_names(2)),

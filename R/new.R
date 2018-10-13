@@ -46,7 +46,7 @@ new_valid_tibble <- function(x, nrow, subclass = NULL) {
   #' `x` must have names (or be empty),
   #' but the names are not checked for correctness.
   if (length(x) == 0) names(x) <- character()
-  stopifnot(has_nonnull_names(x))
+  check_minimal_names(x)
 
   #' @details
   #' 1d arrays are always converted to vectors.

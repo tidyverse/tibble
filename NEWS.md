@@ -8,7 +8,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - The `nrow` argument to `new_tibble()` is now mandatory.
 
-- Checking names in `as_tibble()` is enabled by default, even for tibbles. The `validate` argument has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- Checking names in `new_tibble()` is enabled by default: names must exist (except for zero-length input), `NA` names are not allowed. (This corresponds to the `"minimal"` checks described below.) Consequently, checking names in `as_tibble()` is also enabled by default, even for tibbles. The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
