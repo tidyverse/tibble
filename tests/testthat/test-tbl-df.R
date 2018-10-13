@@ -318,6 +318,7 @@ test_that("is_tibble", {
 test_that("new_tibble", {
   tbl <- new_tibble(
     data.frame(a = 1:3),
+    names = "b",
     attr1 = "value1",
     attr2 = 2,
     nrow = 3,
@@ -329,10 +330,10 @@ test_that("new_tibble", {
   expect_equal(
     unclass(tbl),
     structure(
-      list(a = 1:3),
+      list(b = 1:3),
       attr1 = "value1",
       attr2 = 2,
-      .Names = "a",
+      .Names = "b",
       row.names = .set_row_names(3L)
     )
   )
