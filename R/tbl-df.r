@@ -80,7 +80,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
       result <- x
     }
 
-    return(set_tibble_class(result, nr, subclass = NULL))
+    return(set_tibble_class(result, .nrow = nr, .subclass = NULL))
   }
 
   # First, subset columns
@@ -122,7 +122,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     }
   }
 
-  set_tibble_class(result, nr, subclass = NULL)
+  set_tibble_class(result, .nrow = nr, .subclass = NULL)
 }
 
 subset_rows <- function(x, i) {

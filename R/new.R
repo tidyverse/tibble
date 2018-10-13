@@ -34,12 +34,12 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
 
   #' @details
   #' The `...` argument allows adding more attributes to the subclass.
-  new_valid_tibble(x, nrow, subclass, ...)
+  new_valid_tibble(x, ..., .nrow = nrow, .subclass = subclass)
 }
 
 #' @rdname new_tibble
 #' @usage NULL
-new_valid_tibble <- function(x, nrow, subclass, ...) {
+new_valid_tibble <- function(x, ..., .nrow, .subclass) {
   #' @details
   #' `x` must have names (or be empty),
   #' but the names are not checked for correctness.
@@ -49,16 +49,27 @@ new_valid_tibble <- function(x, nrow, subclass, ...) {
   #' @details
   #' 1d arrays are always converted to vectors.
   x[] <- map(x, strip_dim)
+  set_tibble_class(x, ..., .nrow = .nrow, .subclass = .subclass)
+}
+
+#' @rdname new_tibble
+#' @usage NULL
+set_tibble_class <- function(x, ..., .nrow, .subclass) {
+  attribs <- list(...)
 
   #' @details
   #' The `row.names` attribute will be created from the `nrow` argument,
   #' overriding any existing attribute of this name in `x` or in the `...`
   #' arguments.
+  attribs[["row.names"]] <- .set_row_names(.nrow)
   #'
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
-  set_tibble_class(x, nrow, subclass, ...)
+  attribs[["class"]] <- c(.subclass, "tbl_df", "tbl", "data.frame")
+
+  attributes(x)[names(attribs)] <- attribs
+  x
 }
 
 col_lengths <- function(x) {
@@ -71,13 +82,4 @@ validate_nrow <- function(names, lengths, nrow) {
   if (has_length(bad_len)) {
     abort(error_inconsistent_cols(nrow, names, lengths, "`nrow` argument"))
   }
-}
-
-set_tibble_class <- function(x, nrow, subclass, ...) {
-  attribs <- list(...)
-  attribs[["row.names"]] <- .set_row_names(nrow)
-  attribs[["class"]] <- c(subclass, "tbl_df", "tbl", "data.frame")
-
-  attributes(x)[names(attribs)] <- attribs
-  x
 }

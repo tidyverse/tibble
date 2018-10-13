@@ -144,7 +144,7 @@ recycle_columns <- function(x, .rows) {
 
   # Shortcut if all columns have the requested or implied length
   different_len <- which(lengths != nrow)
-  if (is_empty(different_len)) return(new_valid_tibble(x, nrow, subclass = NULL))
+  if (is_empty(different_len)) return(new_valid_tibble(x, .nrow = nrow, .subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
     abort(error_inconsistent_cols(.rows, names(x), lengths, "`.rows` argument"))
@@ -155,7 +155,7 @@ recycle_columns <- function(x, .rows) {
     x[short] <- expand_vecs(x[short], nrow)
   }
 
-  new_valid_tibble(x, nrow, subclass = NULL)
+  new_valid_tibble(x, .nrow = nrow, .subclass = NULL)
 }
 
 guess_nrow <- function(lengths, .rows) {
