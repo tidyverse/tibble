@@ -6,6 +6,7 @@
 #'
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
+#' @param names If non-`NULL`, override the names of `x`
 #' @param nrow The number of rows, required
 #' @param subclass Subclasses to assign to the new object, default: none
 #' @export
@@ -18,7 +19,7 @@
 #'
 #' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
-new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
+new_tibble <- function(x, ..., names = NULL, nrow = NULL, subclass = NULL) {
   #' @details
   #' `x` must be a list.
   stopifnot(is.list(x))
@@ -32,7 +33,13 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' is consistent with the data before returning.
   validate_nrow(names(x), col_lengths(x), nrow)
 
-  #' @details
+  #'
+  #' If provided, the `names` argument is used to override the names of `x`.
+  if (!is.null(names)) {
+    names(x) <- names
+  }
+
+  #'
   #' The `...` argument allows adding more attributes to the subclass.
   new_valid_tibble(x, ..., .nrow = nrow, .subclass = subclass)
 }
@@ -52,10 +59,16 @@ new_valid_tibble <- function(x, ..., .nrow, .subclass) {
   set_tibble_class(x, ..., .nrow = .nrow, .subclass = .subclass)
 }
 
+tibble_classes <- c("tbl_df", "tbl", "data.frame")
+
 #' @rdname new_tibble
 #' @usage NULL
 set_tibble_class <- function(x, ..., .nrow, .subclass) {
-  attribs <- list(...)
+  attribs <- list2(...)
+
+  # x must be named here, any additional names will be ignored at this stage
+  # (to simplify [.tbl_df())
+  attribs[["names"]] <- NULL
 
   #' @details
   #' The `row.names` attribute will be created from the `nrow` argument,
@@ -66,7 +79,7 @@ set_tibble_class <- function(x, ..., .nrow, .subclass) {
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
-  attribs[["class"]] <- c(.subclass, "tbl_df", "tbl", "data.frame")
+  attribs[["class"]] <- c(.subclass, tibble_classes)
 
   attributes(x)[names(attribs)] <- attribs
   x
