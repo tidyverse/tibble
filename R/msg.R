@@ -1,3 +1,17 @@
+# Looks into top-level tibble function,
+# returns TRUE if that function has a given argument.
+has_tibble_arg <- function(arg_name) {
+  frames <- sys.frames()
+  frame_env <- map(frames, parent.env)
+  frame_is_namespace <- which(map_lgl(frame_env, identical, ns_env()))
+
+  if (is_empty(frame_is_namespace)) return(FALSE)
+
+  my_vars <- names(formals(sys.function(frame_is_namespace[[1]])))
+
+  arg_name %in% my_vars
+}
+
 data_has_n_cols <- function(n) {
   paste0("`.data` has ", n, " columns")
 }
@@ -92,20 +106,20 @@ error_inconsistent_new_rows <- function(names) {
   )
 }
 
-error_names_must_be_non_null <- function() {
-  "The `names` must not be `NULL`."
+error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
+  paste0("The `names` must not be `NULL`.", use_repair(repair))
 }
 
-error_column_must_be_named <- function(names, repair = TRUE) {
+error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
   invalid_df("must be named", names, use_repair(repair))
 }
 
-error_column_names_must_be_unique <- function(names) {
-  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair = TRUE))
+error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair")) {
+  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair))
 }
 
-error_column_names_must_be_syntactic <- function(names) {
-  pluralise_commas("Column name(s) ", tick(names), " are not syntactic.", use_repair(repair = TRUE))
+error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(".name_repair")) {
+  pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair))
 }
 
 error_column_must_be_vector <- function(names, classes) {

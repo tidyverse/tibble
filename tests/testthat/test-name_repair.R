@@ -23,7 +23,8 @@ test_that("set_minimal_names() copes with NULL input names", {
 test_that("check_minimal() errors when names aren't minimal", {
   expect_error(
     check_minimal(NULL),
-    error_names_must_be_non_null()
+    error_names_must_be_non_null(repair = TRUE),
+    fixed = TRUE
   )
   expect_error(
     check_minimal(c("a", NA)),
@@ -57,13 +58,13 @@ test_that("unique_names() strips positional suffixes, re-applies as needed", {
 test_that("check_unique() imposes check_minimal()", {
   expect_error(
     check_unique(NULL),
-    error_names_must_be_non_null(),
+    error_names_must_be_non_null(repair = TRUE),
     fixed = TRUE
   )
 
   expect_error(
     check_unique(c("x", NA)),
-    error_column_must_be_named(2),
+    error_column_must_be_named(2, repair = TRUE),
     fixed = TRUE
   )
 })

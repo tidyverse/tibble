@@ -141,17 +141,28 @@ test_that("error_inconsistent_new_rows()", {
   )
 })
 
+test_that("error_names_must_not_be_null()", {
+  expect_equal(
+    error_names_must_be_non_null(repair = TRUE),
+    "The `names` must not be `NULL`.\nUse .name_repair to specify repair."
+  )
+  expect_equal(
+    error_names_must_be_non_null(repair = FALSE),
+    "The `names` must not be `NULL`."
+  )
+})
+
 test_that("error_column_must_be_named()", {
   expect_equal(
-    error_column_must_be_named(1),
+    error_column_must_be_named(1, repair = TRUE),
     "Column 1 must be named.\nUse .name_repair to specify repair."
   )
   expect_equal(
-    error_column_must_be_named(2:3),
+    error_column_must_be_named(2:3, repair = TRUE),
     "Columns 2, 3 must be named.\nUse .name_repair to specify repair."
   )
   expect_equal(
-    unell(error_column_must_be_named(seq_along(letters))),
+    unell(error_column_must_be_named(seq_along(letters), repair = TRUE)),
     "Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named.\nUse .name_repair to specify repair."
   )
   expect_equal(
@@ -162,16 +173,31 @@ test_that("error_column_must_be_named()", {
 
 test_that("error_column_names_must_be_unique()", {
   expect_equal(
-    error_column_names_must_be_unique("a"),
-    "Column name `a` must not be duplicated.\nUse .name_repair to specify repair."
+    error_column_names_must_be_unique("a", repair = FALSE),
+    "Column name `a` must not be duplicated."
   )
   expect_equal(
-    error_column_names_must_be_unique(letters[2:3]),
+    error_column_names_must_be_unique(letters[2:3], repair = TRUE),
     "Column names `b`, `c` must not be duplicated.\nUse .name_repair to specify repair."
   )
   expect_equal(
-    unell(error_column_names_must_be_unique(LETTERS)),
+    unell(error_column_names_must_be_unique(LETTERS, repair = TRUE)),
     "Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.\nUse .name_repair to specify repair."
+  )
+})
+
+test_that("error_column_names_must_be_syntactic()", {
+  expect_equal(
+    error_column_names_must_be_syntactic("a", repair = FALSE),
+    "Column name `a` must be syntactic."
+  )
+  expect_equal(
+    error_column_names_must_be_syntactic(letters[2:3], repair = TRUE),
+    "Column names `b`, `c` must be syntactic.\nUse .name_repair to specify repair."
+  )
+  expect_equal(
+    unell(error_column_names_must_be_syntactic(LETTERS, repair = TRUE)),
+    "Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must be syntactic.\nUse .name_repair to specify repair."
   )
 })
 

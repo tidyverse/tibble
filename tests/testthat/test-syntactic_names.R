@@ -186,7 +186,7 @@ test_that("non-syntactic names", {
 test_that("check_syntactic() imposes check_minimal()", {
   expect_error(
     check_syntactic(NULL),
-    error_names_must_be_non_null(),
+    error_names_must_be_non_null(repair = TRUE),
     fixed = TRUE
   )
 })

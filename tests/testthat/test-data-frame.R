@@ -209,17 +209,17 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
 
   expect_error(
     as_tibble(l1),
-    error_column_must_be_named(1),
+    error_column_must_be_named(1, repair = TRUE),
     fixed = TRUE
   )
   expect_error(
     as_tibble(l2),
-    error_column_must_be_named(2),
+    error_column_must_be_named(2, repair = TRUE),
     fixed = TRUE
   )
   expect_error(
     as_tibble(df),
-    error_column_must_be_named(1:2),
+    error_column_must_be_named(1:2, repair = TRUE),
     fixed = TRUE
   )
 })
@@ -355,7 +355,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       as_tibble(list(a = 1, "hi"), validate = TRUE),
       "deprecated"
     ),
-    error_column_must_be_named(2)
+    error_column_must_be_named(2, repair = TRUE)
   )
 
   expect_message(
@@ -379,7 +379,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       as_tibble(df, validate = TRUE),
       "deprecated"
     ),
-    error_column_must_be_named(2)
+    error_column_must_be_named(2, repair = TRUE)
   )
 })
 
