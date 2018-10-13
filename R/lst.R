@@ -69,23 +69,23 @@ lst_quos <- function(xs, transform = function(x, i) x) {
   set_names(result, names(output))
 }
 
-expand_lst <- function(output, i) {
+expand_lst <- function(x, i) {
   idx_to_fix <- integer()
   if (i > 1L) {
-    if (NROW(output[[i]]) == 1L && NROW(output[[1L]]) != 1L) {
+    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
       idx_to_fix <- i
       idx_boilerplate <- 1L
-    } else if (NROW(output[[i]]) != 1L && NROW(output[[1L]]) == 1L) {
+    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
       idx_to_fix <- seq2(1L, i - 1L)
       idx_boilerplate <- i
     }
   }
 
   if (length(idx_to_fix) > 0L) {
-    output[idx_to_fix] <- expand_vecs(output[idx_to_fix], length(output[[idx_boilerplate]]))
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], length(x[[idx_boilerplate]]))
   }
 
-  output
+  x
 }
 
 expand_vecs <- function(x, length) {
