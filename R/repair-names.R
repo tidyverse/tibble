@@ -207,14 +207,17 @@ set_minimal_names <- function(x) {
   set_names(x, new_names)
 }
 
-unique_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(new_name)
+unique_names <- function(name, quiet = FALSE, transform = identity) {
+  min_name <- minimal_names(name)
+  naked_name <- strip_pos(min_name)
+  naked_is_empty <- (naked_name == "")
 
-  needs_suffix <- duplicated(new_name) |
-    duplicated(new_name, fromLast = TRUE) |
-    new_name == ""
-  new_name <- append_pos(new_name, needs_suffix)
+  new_name <- transform(naked_name)
+
+  new_name <- append_pos(new_name, needs_suffix = naked_is_empty)
+
+  duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
+  new_name <- append_pos(new_name, duped_after)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -230,21 +233,7 @@ set_unique_names <- function(x, quiet = FALSE) {
 }
 
 syntactic_names <- function(name, quiet = FALSE) {
-  new_name <- minimal_names(name)
-  new_name <- strip_pos(new_name)
-
-  empty_before <- new_name == ""
-  new_name <- make_syntactic(new_name)
-  new_name <- append_pos(new_name, needs_suffix = empty_before)
-
-  duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
-  new_name <- append_pos(new_name, duped_after)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
+  unique_names(name, quiet = quiet, transform = make_syntactic)
 }
 
 set_syntactic_names <- function(x, quiet = FALSE) {
