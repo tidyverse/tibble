@@ -4,9 +4,6 @@
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' `frame_data()` is an older name for `tribble()`. It will eventually
-#' be phased out.
-#'
 #' @param ... Arguments specifying the structure of a `tibble`.
 #'   Variable names should be formulas, and may only appear before the
 #'   data. These arguments support [tidy dots][rlang::tidy-dots].
@@ -31,11 +28,6 @@ tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
   turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
 }
-
-#' @export
-#' @rdname tribble
-#' @usage NULL
-frame_data <- tribble
 
 #' Row-wise matrix creation
 #'

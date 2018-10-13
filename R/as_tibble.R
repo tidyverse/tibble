@@ -215,19 +215,3 @@ as_tibble.default <- function(x, ...) {
     as_tibble(as.data.frame(x), ...)
   }
 }
-
-#' Deprecated coercion functions
-#'
-#' Use [as_tibble()] instead, but mind the new signature and semantics.
-#'
-#' @export
-#' @keywords internal
-as_data_frame <- function(x, ...) {
-  as_tibble(x, ...)
-}
-
-#' @export
-#' @rdname as_data_frame
-as.tibble <- function(x, ...) {
-  as_tibble(x, ...)
-}
