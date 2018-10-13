@@ -249,11 +249,7 @@ check_minimal <- function(name) {
 
   bad_name <- which(is.na(name))
   if (has_length(bad_name)) {
-    msg <- paste0(
-      error_column_must_be_named(bad_name), "\n",
-      "Use `.name_repair` to specify repair."
-    )
-    abort(msg)
+    abort(error_column_must_be_named(bad_name))
   }
 
   invisible(name)
@@ -269,20 +265,12 @@ check_unique <- function(name) {
 
   bad_name <- which(name == "")
   if (has_length(bad_name)) {
-    msg <- paste0(
-      error_column_must_be_named(bad_name), "\n",
-      "Use `.name_repair` to specify a fix."
-    )
-    abort(msg)
+    abort(error_column_must_be_named(bad_name))
   }
 
   dups <- which(duplicated(name))
   if (has_length(dups)) {
-    msg <- paste0(
-      error_column_names_must_be_unique(name[dups]), "\n",
-      "Use `.name_repair` to specify a fix."
-    )
-    abort(msg)
+    abort(error_column_names_must_be_unique(name[dups]))
   }
 
   invisible(name)
@@ -299,11 +287,7 @@ check_syntactic <- function(name) {
 
   bad_name <- !is_syntactic(name)
   if (has_length(bad_name)) {
-    msg <- paste0(
-      error_column_names_must_be_syntactic(name[bad_name]), "\n",
-      "Use `.name_repair` to specify a fix."
-    )
-    abort(msg)
+    abort(error_column_names_must_be_syntactic(name[bad_name]))
   }
 
   invisible(name)

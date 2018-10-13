@@ -5,19 +5,19 @@ pluralise_msg <- function(message, objects) {
   )
 }
 
-pluralise_commas <- function(message, objects, message_tail = "") {
+pluralise_commas <- function(message, objects, ...) {
   paste0(
     pluralise_n(message, length(objects)),
     commas(objects),
-    pluralise_n(message_tail, length(objects))
+    pluralise_n(paste0(...), length(objects))
   )
 }
 
-pluralise_count <- function(message, count, message_tail = "") {
+pluralise_count <- function(message, count, ...) {
   paste0(
     pluralise_n(message, count),
     count,
-    pluralise_n(message_tail, count)
+    pluralise_n(paste0(...), count)
   )
 }
 

@@ -2,7 +2,7 @@ data_has_n_cols <- function(n) {
   paste0("`.data` has ", n, " columns")
 }
 
-invalid_df <- function(problem, vars) {
+invalid_df <- function(problem, vars, ...) {
   if (is.character(vars)) {
     vars <- tick(vars)
   }
@@ -10,8 +10,12 @@ invalid_df <- function(problem, vars) {
   pluralise_commas(
     "Column(s) ",
     vars,
-    paste0(" ", problem, ".")
+    paste0(" ", problem, ".", ...)
   )
+}
+
+use_repair <- function(repair) {
+  if (repair) "\nUse .name_repair to specify repair."
 }
 
 error_enframe_value_null <- function() {
@@ -92,16 +96,16 @@ error_names_must_be_non_null <- function() {
   "The `names` must not be `NULL`."
 }
 
-error_column_must_be_named <- function(names) {
-  invalid_df("must be named", names)
+error_column_must_be_named <- function(names, repair = TRUE) {
+  invalid_df("must be named", names, use_repair(repair))
 }
 
 error_column_names_must_be_unique <- function(names) {
-  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.")
+  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair = TRUE))
 }
 
 error_column_names_must_be_syntactic <- function(names) {
-  pluralise_commas("Column name(s) ", tick(names), " are not syntactic.")
+  pluralise_commas("Column name(s) ", tick(names), " are not syntactic.", use_repair(repair = TRUE))
 }
 
 error_column_must_be_vector <- function(names, classes) {
