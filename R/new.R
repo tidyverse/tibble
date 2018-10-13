@@ -24,10 +24,6 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   stopifnot(is.list(x))
 
   #' @details
-  #' The `...` argument allows adding more attributes to the subclass.
-  x <- update_tibble_attrs(x, ...)
-
-  #' @details
   #' The `new_tibble()` constructor requires an `nrow` argument.
   if (is.null(nrow)) {
     abort(error_new_tibble_needs_nrow())
@@ -36,12 +32,14 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   #' is consistent with the data before returning.
   validate_nrow(names(x), col_lengths(x), nrow)
 
-  new_valid_tibble(x, nrow, subclass)
+  #' @details
+  #' The `...` argument allows adding more attributes to the subclass.
+  new_valid_tibble(x, nrow, subclass, ...)
 }
 
 #' @rdname new_tibble
 #' @usage NULL
-new_valid_tibble <- function(x, nrow, subclass = NULL) {
+new_valid_tibble <- function(x, nrow, subclass, ...) {
   #' @details
   #' `x` must have names (or be empty),
   #' but the names are not checked for correctness.
@@ -56,13 +54,11 @@ new_valid_tibble <- function(x, nrow, subclass = NULL) {
   #' The `row.names` attribute will be created from the `nrow` argument,
   #' overriding any existing attribute of this name in `x` or in the `...`
   #' arguments.
-  attr(x, "row.names") <- .set_row_names(nrow)
-
-  #' @details
+  #'
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
-  set_tibble_class(x, subclass)
+  set_tibble_class(x, nrow, subclass, ...)
 }
 
 col_lengths <- function(x) {
@@ -77,27 +73,11 @@ validate_nrow <- function(names, lengths, nrow) {
   }
 }
 
-update_tibble_attrs <- function(x, ...) {
-  # Can't use structure() here because it breaks the row.names attribute
+set_tibble_class <- function(x, nrow, subclass, ...) {
   attribs <- list(...)
+  attribs[["row.names"]] <- .set_row_names(nrow)
+  attribs[["class"]] <- c(subclass, "tbl_df", "tbl", "data.frame")
 
-  # reduce2() is not in the purrr compat layer
-  nested_attribs <- map2(names(attribs), attribs, function(name, value) set_names(list(value), name))
-  x <- reduce(
-    .init = x,
-    nested_attribs,
-    function(x, attr) {
-      if (!is.null(attr[[1]])) {
-        attr(x, names(attr)) <- attr[[1]]
-      }
-      x
-    }
-  )
-
-  x
-}
-
-set_tibble_class <- function(x, subclass = NULL) {
-  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
+  attributes(x)[names(attribs)] <- attribs
   x
 }

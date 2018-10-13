@@ -79,8 +79,8 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     } else {
       result <- x
     }
-    attr(result, "row.names") <- .set_row_names(nr)
-    return(set_tibble_class(result))
+
+    return(set_tibble_class(result, nr, subclass = NULL))
   }
 
   # First, subset columns
@@ -122,8 +122,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     }
   }
 
-  attr(result, "row.names") <- .set_row_names(nr)
-  set_tibble_class(result)
+  set_tibble_class(result, nr, subclass = NULL)
 }
 
 subset_rows <- function(x, i) {
