@@ -24,7 +24,7 @@ enframe <- function(x, name = "name", value = "value") {
   }
 
   if (length(dim(x)) > 1) {
-    abort(error_enframe_has_dim())
+    abort(error_enframe_has_dim(x))
   }
 
   if (is_null(x)) x <- logical()

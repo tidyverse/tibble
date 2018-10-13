@@ -9,8 +9,8 @@ test_that("error_enframe_value_null()", {
 
 test_that("error_enframe_value_null()", {
   expect_equal(
-    error_enframe_has_dim(),
-    "Cannot use objects with dimensions in `enframe()`."
+    error_enframe_has_dim(Titanic),
+    "`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4."
   )
 })
 

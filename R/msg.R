@@ -36,8 +36,8 @@ error_enframe_value_null <- function() {
   "The `value` argument to `enframe()` cannot be NULL."
 }
 
-error_enframe_has_dim <- function() {
-  "Cannot use objects with dimensions in `enframe()`."
+error_enframe_has_dim <- function(x) {
+  paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), ".")
 }
 
 error_unsupported_index <- function(j) {
