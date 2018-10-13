@@ -141,8 +141,8 @@ format.tbl_df <- format.tbl
     } else {
       result <- x
     }
-    attr(result, "row.names") <- .set_row_names(nr)
-    return(vec_restore_tbl_df(set_tibble_class(result), x))
+
+    return(vec_restore_tbl_df(set_tibble_class(result, nr), x))
   }
 
   # First, subset columns
@@ -184,8 +184,7 @@ format.tbl_df <- format.tbl
     }
   }
 
-  attr(result, "row.names") <- .set_row_names(nr)
-  vec_restore_tbl_df(set_tibble_class(result), x)
+  vec_restore_tbl_df(set_tibble_class(result, nr), x)
 }
 
 subset_rows <- function(x, i) {

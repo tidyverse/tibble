@@ -56,13 +56,11 @@ new_valid_tibble <- function(x, nrow, subclass = NULL) {
   #' The `row.names` attribute will be created from the `nrow` argument,
   #' overriding any existing attribute of this name in `x` or in the `...`
   #' arguments.
-  attr(x, "row.names") <- .set_row_names(nrow)
 
-  #' @details
   #' The `class` attribute of the returned object always consists of
   #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
   #' it will be prepended to that list of classes.
-  set_tibble_class(x, subclass)
+  set_tibble_class(x, nrow, subclass)
 }
 
 col_lengths <- function(x) {
@@ -85,7 +83,8 @@ update_tibble_attrs <- function(x, ...) {
   x
 }
 
-set_tibble_class <- function(x, subclass = NULL) {
+set_tibble_class <- function(x, nrow, subclass = NULL) {
+  attr(x, "row.names") <- .set_row_names(nrow)
   class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
   x
 }
