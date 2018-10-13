@@ -11,12 +11,6 @@
 #' * Evaluates its arguments lazily and in order.
 #' * Adds `tbl_df` class to output.
 #'
-#' `data_frame()` is an alias to `tibble()`.
-#'
-#' `tibble_()` and its alias `data_frame_()` use lazy evaluation and are
-#' deprecated. New code should use `tibble()` or `data_frame()` with
-#' [quasiquotation].
-#'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.  These arguments are
 #'   processed with [rlang::quos()] and support unquote via `!!` and
@@ -118,24 +112,6 @@ tibble <- function(...,
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }
-
-#' @export
-#' @usage NULL
-#' @rdname tibble
-tibble_ <- function(xs) {
-  xs <- compat_lazy_dots(xs, caller_env())
-  tibble(!!!xs)
-}
-
-#' @export
-#' @rdname tibble
-data_frame <- tibble
-
-#' @export
-#' @rdname tibble
-#' @usage NULL
-data_frame_ <- tibble_
-
 
 #' Test if the object is a tibble
 #'

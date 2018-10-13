@@ -1,10 +1,33 @@
 #' Deprecated functions
 #'
-#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`, but mind the new signature and semantics.
+#' Use [tibble()] instead of `data_frame()`.
 #'
 #' @export
 #' @keywords internal
 #' @name deprecated
+data_frame <- function(...) {
+  # Unquote-splice to avoid argument matching
+  tibble(!!!quos(...))
+}
+
+#' Use [quasiquotation] instead of `tibble_()` and `data_frame_()`.
+#'
+#' @export
+#' @rdname deprecated
+tibble_ <- function(xs) {
+  xs <- compat_lazy_dots(xs, caller_env())
+  tibble(!!!xs)
+}
+
+#' @export
+#' @rdname deprecated
+data_frame_ <- tibble_
+
+#' @description
+#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`, but mind the new signature and semantics.
+#'
+#' @export
+#' @rdname deprecated
 as_data_frame <- function(x, ...) {
   as_tibble(x, ...)
 }

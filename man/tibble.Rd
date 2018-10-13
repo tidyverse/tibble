@@ -3,18 +3,12 @@
 \name{tibble}
 \alias{tibble}
 \alias{tbl_df-class}
-\alias{tibble_}
-\alias{data_frame}
-\alias{data_frame_}
 \alias{lst}
 \alias{lst_}
 \title{Build a data frame or list}
 \usage{
 tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
   "syntactic", "minimal"))
-
-data_frame(..., .rows = NULL, .name_repair = c("check_unique",
-  "unique", "syntactic", "minimal"))
 
 lst(...)
 }
@@ -51,12 +45,6 @@ to enforce them.}
 \item Evaluates its arguments lazily and in order.
 \item Adds \code{tbl_df} class to output.
 }
-
-\code{data_frame()} is an alias to \code{tibble()}.
-
-\code{tibble_()} and its alias \code{data_frame_()} use lazy evaluation and are
-deprecated. New code should use \code{tibble()} or \code{data_frame()} with
-\link{quasiquotation}.
 
 \code{lst()} is similar to \code{\link[=list]{list()}}, but like \code{tibble()}, it
 evaluates its arguments lazily and in order, and automatically adds names.
