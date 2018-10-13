@@ -80,7 +80,7 @@ test_that("attributes are preserved", {
 })
 
 test_that("tibble aliases", {
-  expect_identical(data_frame, tibble)
+  expect_identical(data_frame(a = 1), tibble(a = 1))
   expect_identical(data_frame_, tibble_)
 })
 
