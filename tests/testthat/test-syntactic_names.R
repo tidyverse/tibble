@@ -33,11 +33,11 @@ test_that("make_syntactic(): dot(s) followed by a number", {
 
 test_that("make_syntactic(): dot(s) followed by a number then a non-number", {
   syn_name <- make_syntactic(
-    c( ".1)",  ".13)", "..1)", "..13)", "...1)", "...13)", ".0", ".0x")
+    c( ".1)",  ".13)", "..1)", "..13)", "...1)", "...13)", ".0", ".0x", "1", "13", "0")
   )
   expect_identical(
     syn_name,
-    c("..1.", "..13.", "..1.", "..13.", "...1.", "...13.", "..0", "..0x")
+    c("..1.", "..13.", "..1.", "..13.", "...1.", "...13.", "..0", "..0x", "...1", "...13", "..0")
   )
   expect_identical(syn_name, make.names(syn_name))
 })

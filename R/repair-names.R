@@ -325,7 +325,32 @@ check_syntactic_names <- function(x) {
   invisible(x)
 }
 
-# In make_syntactic, we'll prepend a dot if
+
+# In make_syntactic(), we'll
+strip_x_rx <- rex(
+  # strip the leading
+  start,
+
+  # X added by make.names() and
+  "X",
+
+  group(or(
+    # keep the following letter only if it's an underscore or a digit (capture #1),
+    capture(one_of("_", "0-9")),
+
+    # the dot we strip,
+    escape("."),
+
+    # and we also allow the string to end there.
+    end
+  ))
+)
+
+# We replace with a dot and the underscore/digit if appropriate.
+strip_x_sub <- ".\\1"
+
+
+# In make_syntactic(), we'll prepend a dot if
 prepend_syntactic_dot_rx <- rex(
   start,
 
@@ -333,9 +358,6 @@ prepend_syntactic_dot_rx <- rex(
   capture(or(
     # - is blank
     nothing,
-
-    # - starts with an underscore
-    group(escape("_"), anything),
 
     # - is the ellipsis
     group(escape("."), escape("."), escape(".")),
@@ -375,7 +397,7 @@ make_syntactic <- function(name) {
   new_name <- make.names(name)
 
   X_prefix <- which(grepl("^X", new_name) & !grepl("^X", name))
-  new_name[X_prefix] <- gsub("^X", "", new_name[X_prefix])
+  new_name[X_prefix] <- gsub(strip_x_rx, strip_x_sub, new_name[X_prefix])
 
   dot_suffix <- which(new_name == paste0(name, "."))
   new_name[dot_suffix] <- gsub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
