@@ -121,7 +121,7 @@ tibble <- function(...,
 #' @return `TRUE` if the object inherits from the `tbl_df` class.
 #' @export
 is_tibble <- function(x) {
-  "tbl_df" %in% class(x)
+  inherits(x, "tbl_df")
 }
 
 #' @rdname is_tibble
