@@ -66,6 +66,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.name_repair` can be used for all inputs.  We suggest that your implementations of this method do the same.
 
+- New `tibble_row()` that helps constructing one-row tibbles (#205).
+
 - `enframe()` (with `name = NULL`) and `deframe()` now support one-column tibbles (#449).
 
 - Improved S4 support by adding `exportClass(tbl_df)` to `NAMESPACE` (#436, @jeffreyhanson and @javierfajnolla).
