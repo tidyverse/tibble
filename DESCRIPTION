@@ -60,6 +60,7 @@ Collate:
     'msg.R'
     'new.R'
     'repair-names.R'
+    'row.R'
     'rownames.R'
     'strrep.R'
     'utils-format.r'
