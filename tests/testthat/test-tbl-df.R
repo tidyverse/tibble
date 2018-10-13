@@ -245,6 +245,33 @@ test_that("[.tbl_df ignores drop argument (with warning) without j argument (#30
 })
 
 
+test_that("[.tbl_df is careful about attributes (#155)", {
+  df <- tibble(x = 1:2, y = x)
+  attr(df, "along for the ride") <- "still here"
+
+  expect_identical(attr(df[names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df["x"], "along for the ride"), "still here")
+  expect_identical(attr(df[1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[2], "along for the ride"), "still here")
+  expect_identical(attr(df[c(TRUE, FALSE)], "along for the ride"), "still here")
+  expect_identical(attr(df[, names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df[, "x"], "along for the ride"), "still here")
+  expect_identical(attr(df[, 1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[, 2], "along for the ride"), "still here")
+  expect_identical(attr(df[, c(TRUE, FALSE)], "along for the ride"), "still here")
+  expect_identical(attr(df[1, names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df[1, "x"], "along for the ride"), "still here")
+  expect_identical(attr(df[1, 1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[1, 2], "along for the ride"), "still here")
+  expect_identical(attr(df[1, c(TRUE, FALSE)], "along for the ride"), "still here")
+
+  expect_identical(attr(df[1:2, ], "along for the ride"), "still here")
+  expect_identical(attr(df[-1, ], "along for the ride"), "still here")
+
+  expect_identical(attr(df[, ], "along for the ride"), "still here")
+  expect_identical(attr(df[], "along for the ride"), "still here")
+})
+
 # [[ ----------------------------------------------------------------------
 
 test_that("[[.tbl_df ignores exact argument", {
