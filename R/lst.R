@@ -43,7 +43,7 @@ lst <- function(...) {
   lst_quos(xs)
 }
 
-lst_quos <- function(xs, expand = FALSE) {
+lst_quos <- function(xs, transform = function(x, i) x) {
   n <- length(xs)
   if (n == 0) {
     return(list())
@@ -61,7 +61,7 @@ lst_quos <- function(xs, expand = FALSE) {
     if (!is_null(res)) {
       result[[i]] <- res
       output[[i]] <- res
-      if (expand) output <- expand_lst(output, i)
+      output <- transform(output, i)
     }
     names(output)[i] <- col_names[[i]]
   }
