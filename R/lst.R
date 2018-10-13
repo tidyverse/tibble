@@ -76,7 +76,7 @@ expand_lst <- function(x, i) {
   }
 
   if (length(idx_to_fix) > 0L) {
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], length(x[[idx_boilerplate]]))
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
   }
 
   x
