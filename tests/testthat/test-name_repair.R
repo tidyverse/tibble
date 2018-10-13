@@ -23,12 +23,12 @@ test_that("set_minimal_names() copes with NULL input names", {
 test_that("check_minimal() errors when names aren't minimal", {
   expect_error(
     check_minimal(NULL),
-    error_names_must_be_non_null(repair = TRUE),
+    error_names_must_be_non_null(repair = FALSE),
     fixed = TRUE
   )
   expect_error(
     check_minimal(c("a", NA)),
-    error_column_must_be_named(2, repair = TRUE),
+    error_column_must_be_named(2, repair = FALSE),
     fixed = TRUE
   )
 })
@@ -58,13 +58,13 @@ test_that("unique_names() strips positional suffixes, re-applies as needed", {
 test_that("check_unique() imposes check_minimal()", {
   expect_error(
     check_unique(NULL),
-    error_names_must_be_non_null(repair = TRUE),
+    error_names_must_be_non_null(repair = FALSE),
     fixed = TRUE
   )
 
   expect_error(
     check_unique(c("x", NA)),
-    error_column_must_be_named(2, repair = TRUE),
+    error_column_must_be_named(2, repair = FALSE),
     fixed = TRUE
   )
 })
@@ -72,22 +72,22 @@ test_that("check_unique() imposes check_minimal()", {
 test_that("check_unique() errors for empty or duplicated names", {
   expect_error(
     check_unique(c("x", "")),
-    error_column_must_be_named(2),
+    error_column_must_be_named(2, repair = FALSE),
     fixed = TRUE
   )
   expect_error(
     check_unique(c("", "x", "")),
-    error_column_must_be_named(c(1, 3)),
+    error_column_must_be_named(c(1, 3), repair = FALSE),
     fixed = TRUE
   )
   expect_error(
     check_unique(c("x", "x", "y")),
-    error_column_names_must_be_unique("x"),
+    error_column_names_must_be_unique("x", repair = FALSE),
     fixed = TRUE
   )
   expect_error(
     check_unique(c("x", "y", "x", "y")),
-    error_column_names_must_be_unique(c("x", "y")),
+    error_column_names_must_be_unique(c("x", "y"), repair = FALSE),
     fixed = TRUE
   )
 })

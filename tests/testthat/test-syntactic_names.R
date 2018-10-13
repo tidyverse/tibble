@@ -186,7 +186,7 @@ test_that("non-syntactic names", {
 test_that("check_syntactic() imposes check_minimal()", {
   expect_error(
     check_syntactic(NULL),
-    error_names_must_be_non_null(repair = TRUE),
+    error_names_must_be_non_null(repair = FALSE),
     fixed = TRUE
   )
 })
@@ -202,7 +202,7 @@ test_that("check_syntactic() imposes check_unique()", {
 test_that("check_syntactic() errors for non-syntactic names", {
   expect_error(
     check_syntactic(c("x", "a:b", "break")),
-    error_column_names_must_be_syntactic(c("a:b", "break")),
+    error_column_names_must_be_syntactic(c("a:b", "break"), repair = FALSE),
     fixed = TRUE
   )
 })
