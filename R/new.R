@@ -81,19 +81,7 @@ update_tibble_attrs <- function(x, ...) {
   # Can't use structure() here because it breaks the row.names attribute
   attribs <- list(...)
 
-  # reduce2() is not in the purrr compat layer
-  nested_attribs <- map2(names(attribs), attribs, function(name, value) set_names(list(value), name))
-  x <- reduce(
-    .init = x,
-    nested_attribs,
-    function(x, attr) {
-      if (!is.null(attr[[1]])) {
-        attr(x, names(attr)) <- attr[[1]]
-      }
-      x
-    }
-  )
-
+  attributes(x)[names(attribs)] <- attribs
   x
 }
 
