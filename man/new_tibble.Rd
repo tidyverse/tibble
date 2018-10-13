@@ -3,14 +3,17 @@
 \name{new_tibble}
 \alias{new_tibble}
 \alias{new_valid_tibble}
+\alias{set_tibble_class}
 \title{Constructor}
 \usage{
-new_tibble(x, ..., nrow = NULL, subclass = NULL)
+new_tibble(x, ..., names = NULL, nrow = NULL, subclass = NULL)
 }
 \arguments{
 \item{x}{A tibble-like object}
 
 \item{...}{Passed on to \code{\link[=structure]{structure()}}}
+
+\item{names}{If non-\code{NULL}, override the names of \code{x}}
 
 \item{nrow}{The number of rows, required}
 
@@ -24,11 +27,13 @@ of a tibble, like \pkg{sf} or \pkg{tibbletime}.
 \details{
 \code{x} must be a list.
 
-The \code{...} argument allows adding more attributes to the subclass.
-
 The \code{new_tibble()} constructor requires an \code{nrow} argument.
 It makes sure that the \code{row.names} attribute
 is consistent with the data before returning.
+
+If provided, the \code{names} argument is used to override the names of \code{x}.
+
+The \code{...} argument allows adding more attributes to the subclass.
 
 \code{x} must have names (or be empty),
 but the names are not checked for correctness.
