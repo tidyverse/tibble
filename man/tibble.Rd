@@ -127,4 +127,9 @@ Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibb
 \code{enframe()} to convert a named vector into tibble. Name repair is detailed
 in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides more details on tidy dots
 semantics, i.e. exactly how \link{quasiquotation} works for the \code{...} argument.
+
+Other constructors: \code{\link{as_tibble}},
+  \code{\link{frame_matrix}}, \code{\link{new_tibble}},
+  \code{\link{tibble_row}}, \code{\link{tribble}}
 }
+\concept{constructors}

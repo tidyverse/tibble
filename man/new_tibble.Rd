@@ -64,4 +64,9 @@ try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 \seealso{
 \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} for ways to construct a tibble
 with recycling of scalars and automatic name repair.
+
+Other constructors: \code{\link{as_tibble}},
+  \code{\link{frame_matrix}}, \code{\link{tibble_row}},
+  \code{\link{tibble}}, \code{\link{tribble}}
 }
+\concept{constructors}

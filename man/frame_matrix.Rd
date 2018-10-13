@@ -27,3 +27,9 @@ frame_matrix(
   5,     2
 )
 }
+\seealso{
+Other constructors: \code{\link{as_tibble}},
+  \code{\link{new_tibble}}, \code{\link{tibble_row}},
+  \code{\link{tibble}}, \code{\link{tribble}}
+}
+\concept{constructors}

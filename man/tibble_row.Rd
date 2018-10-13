@@ -10,18 +10,20 @@ tibble_row(..., .name_repair = c("check_unique", "unique", "syntactic",
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created variables.  These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{!!} and
+so you can refer to previously created elements. These arguments are
+processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are
+\code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
+\item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
 See \link{name-repair} for more details on these terms and the strategies used
@@ -38,3 +40,9 @@ If the test fails, it is wrapped in a list.
 \examples{
 tibble_row(a = 1, b = 2:3, c = lm(hp ~ cyl, mtcars), d = list(1))
 }
+\seealso{
+Other constructors: \code{\link{as_tibble}},
+  \code{\link{frame_matrix}}, \code{\link{new_tibble}},
+  \code{\link{tibble}}, \code{\link{tribble}}
+}
+\concept{constructors}

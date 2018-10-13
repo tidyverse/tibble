@@ -8,6 +8,9 @@
 #'   Variable names should be formulas, and may only appear before the
 #'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [tibble].
+#'
+#' @family constructors
+#'
 #' @export
 #' @examples
 #' tribble(
@@ -40,6 +43,9 @@ tribble <- function(...) {
 #'   Column names should be formulas, and may only appear before the
 #'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [matrix].
+#'
+#' @family constructors
+#'
 #' @export
 #' @examples
 #' frame_matrix(

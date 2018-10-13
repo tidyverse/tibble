@@ -17,6 +17,8 @@
 #' [tibble()] and [as_tibble()] for ways to construct a tibble
 #' with recycling of scalars and automatic name repair.
 #'
+#' @family constructors
+#'
 #' @export
 #' @examples
 #' # The nrow argument is always required:

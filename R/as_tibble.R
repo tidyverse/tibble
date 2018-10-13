@@ -42,6 +42,9 @@
 #'  Read more in [rownames].
 
 #' @param _n,validate For compatibility only, do not use for new code.
+#'
+#' @family constructors
+#'
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)

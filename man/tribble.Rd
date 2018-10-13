@@ -35,3 +35,9 @@ tribble(
   "b", 4:6
 )
 }
+\seealso{
+Other constructors: \code{\link{as_tibble}},
+  \code{\link{frame_matrix}}, \code{\link{new_tibble}},
+  \code{\link{tibble_row}}, \code{\link{tibble}}
+}
+\concept{constructors}

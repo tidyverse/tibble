@@ -3,6 +3,8 @@
 #' Constructs a tibble that is guaranteed to have only one row.
 #' Complex objects are always wrapped in a list.
 #'
+#' @family constructors
+#'
 #' @inheritParams tibble
 #' @export
 #' @examples

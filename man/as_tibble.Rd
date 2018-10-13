@@ -129,4 +129,9 @@ if (requireNamespace("bench", quietly = TRUE)) {
 \code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
 converts a named vector to a tibble with a column of names and column of
 values. \link{name-repair} documents the details of name repair.
+
+Other constructors: \code{\link{frame_matrix}},
+  \code{\link{new_tibble}}, \code{\link{tibble_row}},
+  \code{\link{tibble}}, \code{\link{tribble}}
 }
+\concept{constructors}

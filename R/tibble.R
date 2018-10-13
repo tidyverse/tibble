@@ -41,6 +41,9 @@
 #'   `enframe()` to convert a named vector into tibble. Name repair is detailed
 #'   in [name-repair]. [rlang::list2()] provides more details on tidy dots
 #'   semantics, i.e. exactly how [quasiquotation] works for the `...` argument.
+#'
+#' @family constructors
+#'
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:
