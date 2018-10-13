@@ -116,8 +116,8 @@ tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
   xs <- quos(..., .named = TRUE)
-  xl <- lst_quos(xs, transform = expand_lst)
-  as_tibble(xl, .rows = .rows, .name_repair = .name_repair)
+  xlq <- lst_quos(xs, transform = expand_lst)
+  lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
 }
 
 #' Test if the object is a tibble

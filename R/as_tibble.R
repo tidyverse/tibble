@@ -115,10 +115,14 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
     .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
   }
 
+  lst_to_tibble(x, .rows, .name_repair)
+}
+
+lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   x <- set_repaired_names(x, .name_repair)
   check_valid_cols(x)
   x[] <- map(x, strip_dim)
-  recycle_columns(x, .rows)
+  recycle_columns(x, .rows, lengths)
 }
 
 # TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
@@ -143,8 +147,14 @@ is_1d_or_2d <- function(x) {
   (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
 }
 
-recycle_columns <- function(x, .rows) {
-  lengths <- col_lengths(x)
+recycle_columns <- function(x, .rows, lengths) {
+  if (is.null(lengths)) {
+    lengths <- col_lengths(x)
+    need_recycle <- FALSE
+  } else {
+    need_recycle <- TRUE
+  }
+
   nrow <- guess_nrow(lengths, .rows)
 
   # Shortcut if all columns have the requested or implied length
@@ -155,9 +165,11 @@ recycle_columns <- function(x, .rows) {
     abort(error_inconsistent_cols(.rows, names(x), lengths, "`.rows` argument"))
   }
 
-  short <- which(lengths == 1)
-  if (has_length(short)) {
-    x[short] <- expand_vecs(x[short], nrow)
+  if (need_recycle && nrow != 1L) {
+    short <- which(lengths == 1L)
+    if (has_length(short)) {
+      x[short] <- expand_vecs(x[short], nrow)
+    }
   }
 
   new_tibble(x, nrow = nrow, subclass = NULL)

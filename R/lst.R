@@ -40,33 +40,27 @@
 #' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
-  lst_quos(xs)
+  lst_quos(xs)$output
 }
 
 lst_quos <- function(xs, transform = function(x, i) x) {
-  n <- length(xs)
-  if (n == 0) {
-    return(list())
-  }
-
   # Evaluate each column in turn
   col_names <- names2(xs)
-  output <- new_list(n)
-  names(output) <- character(n)
-  result <- output
+  output <- new_list_along(xs, names = rep_along(xs, ""))
+  lengths <- rep_along(xs, 0L)
 
-  for (i in seq_len(n)) {
+  for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
-      result[[i]] <- res
+      lengths[[i]] <- NROW(res)
       output[[i]] <- res
       output <- transform(output, i)
     }
-    names(output)[i] <- col_names[[i]]
+    names(output)[[i]] <- col_names[[i]]
   }
 
-  set_names(result, names(output))
+  list(output = output, lengths = lengths)
 }
 
 expand_lst <- function(x, i) {
