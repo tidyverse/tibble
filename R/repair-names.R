@@ -371,7 +371,7 @@ prepend_syntactic_dot_rx <- rex(
       ),
 
       # and follows by an integer,
-      range("1", "9"),
+      range("0", "9"),
       zero_or_more(range("0", "9"))
 
       # (this results in three dots if the rest of the name is a proper integer,
