@@ -316,11 +316,14 @@ make_syntactic <- function(name) {
   ##   * declined its addition of 'X' prefixes
   ##   * turned its '.' suffixes to '.' prefixes
 
+  ## "i" --> ".i", so it's caught in next step
+  new_name <- gsub("^([0-9].*)$", ".\\1", new_name)
+
   ## ".i" --> "..i", so it's caught in next step
-  new_name <- gsub("^([.][1-9][0-9]*)$", ".\\1", new_name)
+  new_name <- gsub("^([.][0-9][0-9]*)$", ".\\1", new_name)
 
   new_name <- gsub(
-    "^(|[_].*|[.][.][.]|[.][.][1-9][0-9]*|[.][0-9].*)$",
+    "^(|[_].*|[.][.][.]|[.][.][0-9][0-9]*|[.][0-9].*)$",
     ".\\1",
     new_name
   )
