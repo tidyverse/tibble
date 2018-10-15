@@ -301,7 +301,11 @@ check_syntactic_names <- function(x) {
 ## makes each individual name syntactic
 ## does not enforce unique-ness
 make_syntactic <- function(name) {
-  name[is.na(name)] <- ""
+  name[is.na(name)]       <- ""
+  name[name == ""]        <- "."
+  name[name == "..."]     <- "...."
+  name <- sub("^_", "._", name)
+
   new_name <- make.names(name)
 
   X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
@@ -314,17 +318,18 @@ make_syntactic <- function(name) {
   ##   * declined its addition of 'X' prefixes
   ##   * turned its '.' suffixes to '.' prefixes
 
-  ## "i" --> ".i", so it's caught in next step
-  new_name <- gsub("^([0-9].*)$", ".\\1", new_name)
-
-  ## ".i" --> "..i", so it's caught in next step
-  new_name <- gsub("^([.][0-9][0-9]*)$", ".\\1", new_name)
-
-  new_name <- gsub(
-    "^(|[_].*|[.][.][.]|[.][.][0-9][0-9]*|[.][0-9].*)$",
-    ".\\1",
-    new_name
+  regex <- paste0(
+    "^(?<leading_dots>[.]*)",
+    "(?<numbers>[0-9]*)",
+    "(?<leftovers>[^0-9]??.*?$)"
   )
+
+  re <- re_match(new_name, pattern = regex)
+  needs_three_dots <- nchar(re$numbers) > 0 & nchar(re$leftovers) == 0
+  needs_two_dots   <- nchar(re$numbers) > 0 & nchar(re$leftovers) > 0
+  re$leading_dots[needs_three_dots] <- "..."
+  re$leading_dots[needs_two_dots]   <- ".."
+  new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
 
   new_name
 }
