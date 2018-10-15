@@ -74,7 +74,7 @@ tick_if_needed <- function(x) {
   x
 }
 
-## from rematch2
+## from rematch2, except we don't add tbl_df or tbl classes to the return value
 re_match <- function(text, pattern, perl = TRUE, ...) {
 
   stopifnot(is.character(pattern), length(pattern) == 1, !is.na(pattern))
