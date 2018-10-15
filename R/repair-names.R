@@ -307,10 +307,8 @@ make_syntactic <- function(name) {
   X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
   new_name[X_prefix] <- gsub("^X", "", new_name[X_prefix])
 
-  dot_suffix <- nchar(new_name) == (nchar(name) + 1) &
-    grepl("[.]$", new_name) & !grepl("[.]$", name)
-  new_name[dot_suffix] <- gsub("[.]$", "", new_name[dot_suffix])
-  new_name[dot_suffix] <- paste0(".", new_name[dot_suffix])
+  dot_suffix <- which(new_name == paste0(name, "."))
+  new_name[dot_suffix] <- gsub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
   ## illegal characters have been replaced with '.' via make.names()
   ## however, we have:
   ##   * declined its addition of 'X' prefixes
