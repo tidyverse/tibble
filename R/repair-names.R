@@ -167,6 +167,11 @@ set_repaired_names <- function(x,
 
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+
+  if (is_formula(.name_repair, lhs = FALSE)) {
+    .name_repair <- as_function(.name_repair)
+  }
+
   if (is_function(.name_repair)) {
     repair_fun <- .name_repair
   } else {
@@ -191,6 +196,8 @@ repaired_names <- function(name,
   } else {
     check_minimal(new_name)
   }
+
+  new_name
 }
 
 minimal_names <- function(name, n) {

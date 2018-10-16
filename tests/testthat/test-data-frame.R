@@ -255,6 +255,12 @@ test_that("as_tibble() implements custom name repair", {
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), make.names(rep("", 3), unique = TRUE))
+
+  invalid_df_purrr <- as_tibble(
+    list(3, 4, 5),
+    .name_repair = ~make.names(., unique = TRUE)
+  )
+  expect_identical(invalid_df_purrr, invalid_df)
 })
 
 
