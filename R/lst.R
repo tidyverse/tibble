@@ -1,15 +1,39 @@
-#' @include tibble.R
+#' Build a list
 #'
 #' @description
 #'
-#' `lst()` is similar to [list()], but like `tibble()`, it
-#' evaluates its arguments lazily and in order, and automatically adds names.
+#' `lst()` constructs a list, similar to [base::list()], but with some of the
+#' same features as [tibble()]. `lst()` evaluates its arguments lazily and in
+#' order. It also generates missing names automatically.
 #'
-#' `lst_()` uses lazy evaluation and is deprecated. New code should use `lst()`
-#' with [quasiquotation].
+#' @section Life cycle:
 #'
+#'   `lst()` is stable.
+#'
+#'   `lst_()` uses an older approach to lazy evaluation that predates the tidy
+#'   eval framework. It is deprecated. New code should use `lst()` with
+#'   [quasiquotation].
+#'
+#' @inheritParams tibble
+#' @return A named list.
 #' @export
-#' @rdname tibble
+#' @examples
+#' # the value of n can be used immediately in the definition of x
+#' lst(n = 5, x = runif(n))
+#'
+#' # missing names are constructed from user's input
+#' lst(1:3, z = letters[4:6], runif(3))
+#'
+#' # pre-formed quoted expressions can be used with lst() and then
+#' # unquoted (with !!) or unquoted and spliced (with !!!)
+#' n1 <- 2
+#' n2 <- 3
+#' n_stuff <- quote(n1 + n2)
+#' x_stuff <- quote(seq_len(n))
+#' lst(!!!list(n = n_stuff, x = x_stuff))
+#' lst(n = !!n_stuff, x = !!x_stuff)
+#' lst(n = 4, x = !!x_stuff)
+#' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
   lst_quos(xs)
@@ -67,7 +91,7 @@ expand_vecs <- function(x, length) {
 
 #' @export
 #' @usage NULL
-#' @rdname tibble
+#' @rdname lst
 lst_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())
   lst(!!!xs)

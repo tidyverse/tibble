@@ -1,4 +1,4 @@
-#' Build a data frame or list
+#' Build a data frame
 #'
 #' @description
 #' `tibble()` is a trimmed down version of [data.frame()] that:
@@ -12,7 +12,7 @@
 #' * Adds `tbl_df` class to output.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.  These arguments are
+#'   so you can refer to previously created elements. These arguments are
 #'   processed with [rlang::quos()] and support unquote via `!!` and
 #'   unquote-splice via [`!!!`].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
@@ -101,12 +101,6 @@
 #'
 #' # You can splice-unquote a list of quosures and expressions:
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
-#'
-#' # lst() behaves very similarly, without restriction on the length
-#' # of the individual elements:
-#' lst(n = 5, x = runif(n))
-#'
-#' lst(!!!list(n = rlang::quo(2 + 3), y = quote(runif(n))))
 #'
 #' @aliases tbl_df-class
 tibble <- function(...,
