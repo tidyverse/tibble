@@ -7,7 +7,10 @@
 #'   package will have names that are, at least, `minimal`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
 #'   (literally, no `""`s).
+#'     - Indexing by name works: `df[["name"]]` extracts exactly one element.
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
+#'     - Names work everywhere, without quoting: `df$name` and
+#'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.
 #'
 #' `syntactic` implies `unique`, `unique` implies `minimal`. These levels are
 #' nested.
@@ -36,8 +39,8 @@
 #'
 #' Request `.name_repair = "minimal"` to suppress almost all name munging. This
 #' is useful when the first row of a data source -- allegedly variable names --
-#' actually contains *data* and the resulting tibble is destined for reshaping with,
-#' e.g., `tidyr::gather()`.
+#' actually contains *data* and the resulting tibble is destined for reshaping
+#' with, e.g., `tidyr::gather()`.
 #'
 #' @section `unique` names:
 #'
@@ -71,7 +74,6 @@
 #' If a data frame has `syntactic` names, variable names can be used "as is" in
 #' code. They work well with nonstandard evaluation, e.g., `df$name` works.
 #'
-
 #' Tibble has a different method of making names syntactic than
 #' [base::make.names()]. In general, tibble prepends one or more dots `.` until
 #' the name is syntactic.

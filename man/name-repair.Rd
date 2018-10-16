@@ -40,7 +40,14 @@ an unnamed element is \code{""} and never \code{NA}. Tibbles created by the tibb
 package will have names that are, at least, \code{minimal}.
 \item \code{unique} names are \code{minimal}, have no duplicates, and are never empty
 (literally, no \code{""}s).
+\itemize{
+\item Indexing by name works: \code{df[["name"]]} extracts exactly one element.
+}
 \item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
+\itemize{
+\item Names work everywhere, without quoting: \code{df$name} and
+\code{lm(name1 ~ name2, data = df)} and \code{dplyr::select(df, name)} all work.
+}
 }
 
 \code{syntactic} implies \code{unique}, \code{unique} implies \code{minimal}. These levels are
@@ -69,8 +76,8 @@ Examples:\preformatted{Original names of a vector with length 3: NULL
 
 Request \code{.name_repair = "minimal"} to suppress almost all name munging. This
 is useful when the first row of a data source -- allegedly variable names --
-actually contains \emph{data} and the resulting tibble is destined for reshaping with,
-e.g., \code{tidyr::gather()}.
+actually contains \emph{data} and the resulting tibble is destined for reshaping
+with, e.g., \code{tidyr::gather()}.
 }
 
 \section{\code{unique} names}{
