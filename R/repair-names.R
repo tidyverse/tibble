@@ -3,10 +3,14 @@
 #' @description
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
-#'   an unnamed element is `""` and never `NA`.
+#'   an unnamed element is `""` and never `NA`. Tibbles created by the tibble
+#'   package will have names that are, at least, `minimal`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
 #'   (literally, no `""`s).
+#'     - Indexing by name works: `df[["name"]]` extracts exactly one element.
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
+#'     - Names work everywhere, without quoting: `df$name` and
+#'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.
 #'
 #' `syntactic` implies `unique`, `unique` implies `minimal`. These levels are
 #' nested.
@@ -24,12 +28,6 @@
 #' `minimal` names exist. The `names` attribute is not `NULL`. The name of an
 #' unnamed element is `""` and never `NA`.
 #'
-#' `tbl_df` objects created by [tibble()] and [as_tibble()] have variable names
-#' that are `minimal`, at the very least.
-#' Why? General name repair can be be implemented more simply if the baseline
-#' strategy ensures that `names(x)` returns a character vector of the correct
-#' length.
-#'
 #' Examples:
 #' ```
 #' Original names of a vector with length 3: NULL
@@ -39,39 +37,25 @@
 #'                            minimal names: "x" ""
 #' ```
 #'
-#' Related: [rlang::names2()] returns the names of an object, after making them
-#' `minimal`.
+#' Request `.name_repair = "minimal"` to suppress almost all name munging. This
+#' is useful when the first row of a data source -- allegedly variable names --
+#' actually contains *data* and the resulting tibble is destined for reshaping
+#' with, e.g., `tidyr::gather()`.
 #'
 #' @section `unique` names:
 #'
 #' `unique` names are `minimal`, have no duplicates, and are never empty
-#'  (literally, no `""`s).
-#'
-#' You usually want `unique` variable names in a data.frame, because they ensure
-#' that any variable can be identified, uniquely, by its name. Indexing by name
-#' works.
+#'  (literally, no `""`s). If a data frame has `unique` names, you can index it
+#'  by name, e.g., `df[["name"]]` works.
 #'
 #' There are many ways to make names `unique`. We append a suffix of the form
 #' `..j` to any name that is `""` or a duplicate, where `j` is the position.
-#' Why?
-#' * An absolute position `j` is more helpful than numbering within the columns
-#' that share a name. Context: troubleshooting data import with lots of columns
-#' and dysfunctional names.
-#' * We hypothesize that it's better have a "level playing field" when repairing
-#' names, i.e. if `foo` appears twice, they both get repaired, not just the
-#' second occurence.
 #'
 #' Example:
 #' ```
 #' Original names:    ""    "x"    "" "y"    "x"
 #'   unique names: "..1" "x..2" "..3" "y" "x..5"
 #' ```
-#'
-#' Why would you ever want `minimal` names, instead of `unique` or `syntactic`
-#' ones? Sometimes the first row of a data source -- allegedly variable names --
-#' actually contains **data** and the resulting tibble will be reshaped with,
-#' e.g., `tidyr::gather()`. In this case, it is better to not munge the names at
-#' import.
 #'
 #' Pre-existing suffixes of the form `..j` are always stripped, prior to making
 #' names `unique`, i.e. reconstructing the suffixes. If this interacts poorly
@@ -87,27 +71,12 @@
 #'   - Are not a reserved word, e.g., `if` or `function` or `TRUE`.
 #'   - Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
-#' `syntactic` names are easy to use "as is" in code. They do not require
-#' quoting and work well with nonstandard evaluation, such as list indexing via
-#' `$` or in packages like dplyr and ggplot2.
+#' If a data frame has `syntactic` names, variable names can be used "as is" in
+#' code. They work well with nonstandard evaluation, e.g., `df$name` works.
 #'
-#' There are many ways to fix a non-syntactic name. Here's how our logic
-#' compares to [base::make.names()] for a single name:
-#'   - Same: Definition of what is syntactically valid.
-#'   - Same: Invalid characters are replaced with `.`.
-#'   - Different: We always fix a name by prepending a `.`. [base::make.names()]
-#'     sometimes prefixes with `X` and at other times appends a `.`.
-#'   - Different: We treat `NA` and `""` the same: both become `.`.
-#'     [base::make.names()] turns `NA` in `"NA."` and `""` into `"X"`.
-#'   - Different: We turn `...` into `....` and `..i` into `...i` (`i` is a
-#'     number). [base::make.names()] does not modify `...` or `..i`, which could
-#'     be regarded as a bug (?).
-#'
-#' Additionally, when dealing with the vector of names for a tibble, we choose
-#' to implement `syntactic` names as an extension of `unique`, i.e. `syntactic`
-#' implies unique. Why? Because the need for syntactic names is strongly
-#' associated with the need for uniqueness and this makes the name repair system
-#' simpler.
+#' Tibble has a different method of making names syntactic than
+#' [base::make.names()]. In general, tibble prepends one or more dots `.` until
+#' the name is syntactic.
 #'
 #' Examples:
 #' ```
@@ -121,6 +90,9 @@
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
 #' @param quiet Whether to suppress messages about name repair.
+#'
+#' @seealso [rlang::names2()] returns the names of an object, after making them
+#'   `minimal`.
 #'
 #' @return `x` with repaired names or a repaired version of `name`.
 #' @examples
