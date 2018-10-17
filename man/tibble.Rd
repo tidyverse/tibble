@@ -33,7 +33,23 @@ See \link{name-repair} for more details on these terms and the strategies used
 to enforce them.}
 }
 \description{
-\code{tibble()} is a trimmed down version of \code{\link[=data.frame]{data.frame()}} that:
+\code{tibble()} constructs a data frame. It is used like \code{\link[base:data.frame]{base::data.frame()}}, but
+with a couple notable differences:
+\itemize{
+\item The returned data frame has the class \code{tbl_df}, in addition to
+\code{data.frame}. This allows so-called "tibbles" to exhibit some special
+behaviour, such as enhanced printing. Details below.
+\item \code{tibble()} is much more passive than \code{\link[base:data.frame]{base::data.frame()}} in terms of
+transforming the user's input. Character vectors are not coerced to factor.
+Variable names are not modified.
+\item \code{tibble()} builds variables sequentially. When defining a variable,
+you can refer to variables created earlier in the call.
+}
+}
+\section{tibbles vs. data frames}{
+
+
+Text is currently just taken from old description
 \itemize{
 \item Never coerces inputs (i.e. strings stay as strings!).
 \item Never adds \code{row.names}.
@@ -44,6 +60,7 @@ to enforce them.}
 \item Adds \code{tbl_df} class to output.
 }
 }
+
 \examples{
 # Unnamed arguments are named with their expression:
 a <- 1:5

@@ -1,7 +1,23 @@
 #' Build a data frame
 #'
 #' @description
-#' `tibble()` is a trimmed down version of [data.frame()] that:
+#'
+#' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
+#' with a couple notable differences:
+#'
+#'   * The returned data frame has the class `tbl_df`, in addition to
+#'   `data.frame`. This allows so-called "tibbles" to exhibit some special
+#'   behaviour, such as enhanced printing. Details below.
+#'   * `tibble()` is much more passive than [base::data.frame()] in terms of
+#'   transforming the user's input. Character vectors are not coerced to factor.
+#'   Variable names are not modified.
+#'
+#'   * `tibble()` builds variables sequentially. When defining a variable,
+#'   you can refer to variables created earlier in the call.
+#'
+#' @section tibbles vs. data frames:
+#'
+#' Text is currently just taken from old description
 #'
 #' * Never coerces inputs (i.e. strings stay as strings!).
 #' * Never adds `row.names`.
