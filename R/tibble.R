@@ -46,8 +46,10 @@
 #'   to enforce them.
 #'
 #' @aliases tbl_df tbl_df-class
-#' @seealso [as_tibble()] to turn an existing list into a data frame,
-#'   [name-repair] for more detail on name repair.
+#' @seealso Use [as_tibble()] to turn an existing list into a data frame. Name
+#'   repair is described more fully in [name-repair]. [rlang::list2()] provides
+#'   more details on tidy dots semantics, i.e. exactly how [quasiquotation]
+#'   works for the `...` argument.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:

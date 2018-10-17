@@ -133,6 +133,8 @@ tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
 }
 \seealso{
-\code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame,
-\link{name-repair} for more detail on name repair.
+Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame. Name
+repair is described more fully in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides
+more details on tidy dots semantics, i.e. exactly how \link{quasiquotation}
+works for the \code{...} argument.
 }
