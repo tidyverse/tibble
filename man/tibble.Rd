@@ -2,6 +2,7 @@
 % Please edit documentation in R/tibble.R
 \name{tibble}
 \alias{tibble}
+\alias{tbl_df}
 \alias{tbl_df-class}
 \title{Build a data frame}
 \usage{

@@ -29,6 +29,7 @@
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
 #'
+#' @aliases tbl_df tbl_df-class
 #' @seealso [as_tibble()] to turn an existing list into a data frame,
 #'   [name-repair] for more detail on name repair.
 #' @export
@@ -102,7 +103,6 @@
 #' # You can splice-unquote a list of quosures and expressions:
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
-#' @aliases tbl_df-class
 tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
