@@ -32,6 +32,10 @@ for names in the style of base R).
 See \link{name-repair} for more details on these terms and the strategies used
 to enforce them.}
 }
+\value{
+A tibble, which is a colloquial term for an object of class \code{tbl_df}.
+A \code{tbl_df} object is also a data frame, i.e. it has class \code{data.frame}.
+}
 \description{
 \code{tibble()} constructs a data frame. It is used like \code{\link[base:data.frame]{base::data.frame()}}, but
 with a couple notable differences:

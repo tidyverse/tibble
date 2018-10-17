@@ -45,6 +45,8 @@
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
 #'
+#' @return A tibble, which is a colloquial term for an object of class `tbl_df`.
+#'   A `tbl_df` object is also a data frame, i.e. it has class `data.frame`.
 #' @aliases tbl_df tbl_df-class
 #' @seealso Use [as_tibble()] to turn an existing list into a data frame. Name
 #'   repair is described more fully in [name-repair]. [rlang::list2()] provides
