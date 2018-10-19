@@ -202,21 +202,22 @@ test_that("Can convert named atomic vectors to data frame", {
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
-  l2 <- list(x = 1, 2)
-
-  df <- tibble(a = 1, b = 2)
-  names(df) <- c("", NA)
-
   expect_error(
     as_tibble(l1),
     error_column_must_be_named(1, repair = TRUE),
     fixed = TRUE
   )
+
+  l2 <- list(x = 1, 2)
   expect_error(
     as_tibble(l2),
     error_column_must_be_named(2, repair = TRUE),
     fixed = TRUE
   )
+
+  df <- list(a = 1, b = 2)
+  names(df) <- c("", NA)
+  df <- new_tibble(df, nrow = 1)
   expect_error(
     as_tibble(df),
     error_column_must_be_named(1:2, repair = TRUE),

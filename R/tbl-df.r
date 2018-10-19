@@ -205,3 +205,17 @@ vec_restore_tbl_df <- function(x, to) {
 
   x
 }
+
+#' @export
+`names<-.tbl_df` <- function(x, value) {
+  check_names_non_null(value)
+
+  if (!has_length(value, length(x))) {
+    abort(error_names_must_have_length(length(value), length(x)))
+  }
+
+  check_names_non_na(value)
+
+  attr(x, "names") <- as.character(value)
+  x
+}

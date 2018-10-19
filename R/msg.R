@@ -110,6 +110,10 @@ error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")
   paste0("The `names` must not be `NULL`.", use_repair(repair))
 }
 
+error_names_must_have_length <- function(length, n) {
+  paste0("The `names` must have length ", n, ", not ", length, ".")
+}
+
 error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
   invalid_df("must be named", names, use_repair(repair))
 }

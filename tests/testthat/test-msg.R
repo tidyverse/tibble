@@ -152,6 +152,13 @@ test_that("error_names_must_not_be_null()", {
   )
 })
 
+test_that("error_names_must_have_length()", {
+  expect_equal(
+    error_names_must_have_length(length = 5, n = 3),
+    "The `names` must have length 3, not 5."
+  )
+})
+
 test_that("error_column_must_be_named()", {
   expect_equal(
     error_column_must_be_named(1, repair = TRUE),
