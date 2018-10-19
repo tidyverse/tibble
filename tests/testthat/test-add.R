@@ -173,6 +173,10 @@ test_that("add_column() keeps unchanged if no arguments", {
   expect_identical(iris, add_column(iris))
 })
 
+test_that("add_column() can add to empty tibble", {
+  expect_identical(add_column(tibble(.rows = 3), a = 1:3), tibble(a = 1:3))
+})
+
 test_that("error if adding existing columns", {
   expect_error(
     add_column(tibble(a = 3), a = 5),
