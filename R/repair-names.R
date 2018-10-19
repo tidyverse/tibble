@@ -172,12 +172,14 @@ repaired_names <- function(name,
   new_name
 }
 
-minimal_names <- function(name, n) {
+minimal_names <- function(name, n = NULL) {
   if (is.null(name) && missing(n)) {
     abort(error_name_length_required())
   }
-  ## TODO: address scenarios where name is not NULL and n != length(name)?
   new_name <- name %||% rep_len("", n)
+  if (!is.null(n)) {
+    length(new_name) <- n
+  }
   new_name %|% ""
 }
 

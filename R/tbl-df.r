@@ -133,3 +133,10 @@ subset_rows <- function(x, i) {
     x[i]
   }
 }
+
+#' @export
+`names<-.tbl_df` <- function(x, value) {
+  names <- minimal_names(as.character(value), length(x))
+  attr(x, "names") <- names
+  x
+}

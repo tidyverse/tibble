@@ -141,6 +141,36 @@ test_that("unique-ification has an 'algebraic'-y property", {
   expect_identical(z1, z4)
 })
 
+# names<-() -------------------------------------------------------------------
+test_that("names<-() and set_names() apply minimal names", {
+  df <- tibble(a = 1:3, b = 4:6, c = 7:9)
+
+  expect_identical(
+    set_names(df, NULL),
+    as_tibble(list(1:3, 4:6, 7:9), .name_repair = "minimal")
+  )
+  expect_identical(
+    `names<-`(df, NA),
+    as_tibble(list(1:3, 4:6, 7:9), .name_repair = "minimal")
+  )
+  expect_identical(
+    `names<-`(df, ""),
+    as_tibble(list(1:3, 4:6, 7:9), .name_repair = "minimal")
+  )
+  expect_identical(
+    `names<-`(df, 1),
+    as_tibble(list("1" = 1:3, 4:6, 7:9), .name_repair = "minimal")
+  )
+  expect_identical(
+    `names<-`(df, 1:2),
+    as_tibble(list("1" = 1:3, "2" = 4:6, 7:9), .name_repair = "minimal")
+  )
+  expect_identical(
+    set_names(df, letters[1:3]),
+    tibble(a = 1:3, b = 4:6, c = 7:9)
+  )
+})
+
 # repair_names (deprecated) ---------------------------------------------------
 test_that("zero-length inputs given character names", {
   out <- repair_names(character())
