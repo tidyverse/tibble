@@ -133,3 +133,9 @@ subset_rows <- function(x, i) {
     x[i]
   }
 }
+
+#' @export
+`names<-.tbl_df` <- function(x, value, .name_repair = "minimal") {
+  value <- repaired_names(value, .name_repair)
+  set_names(x, value)
+}
