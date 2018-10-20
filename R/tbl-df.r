@@ -5,40 +5,39 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' `tbl_df` class
 #'
 #' @description
-#' Lorem ipsum
+#' Objects of class `tbl_df` have a class attribute consisting of `tbl_df`,
+#' `tbl`, and `data.frame`. So-called tibbles are a special flavor of
+#' [`data.frame`][base::data.frame()], created in order to have different
+#' default behaviour, detailed below.
 #'
-#' @section tibbles vs. data frames:
+#' @section tibbles vs. `data.frame`s:
 #'
-#' Text is currently just taken from old description
+#' How default behaviour of tibbles differs from that of data frames, during
+#' creation, access, and modification:
 #'
-#' * Never coerces inputs (i.e. strings stay as strings!).
-#' * Never adds `row.names`.
-#' * Only recycles length 1 inputs.
-#' * Automatically adds column names.
-#' * Doesn't munge column names.
-#' * Evaluates its arguments lazily and in order.
-#' * Adds `tbl_df` class to output.
+#' * Column data is not coerced. A character vector is not turned into a factor.
+#' * Column names are not munged, although missing names are auto-populated.
+#' Duplicated column names are strongly discouraged. Read about [name-repair].
+#' * Row names are not added and are strongly discouraged, in favor of storing
+#' that info as a column. Read about [rownames].
+#' * Recycling only happens for a length 1 input.
+#' * When a single column is extracted from a tibble, it's returned as a
+#' one-column tibble, not as a vector: `df[ , j, drop = FALSE]` is the default.
+#' * List-columns are expressly anticipated and do not require special tricks.
+#' * There is no partial matching when `$` is used to index by name. `df$name`
+#' for a nonexistent name generates a warning.
+#' * Printing and inspection are a very high priority. The goal is to convey as
+#' much information as possible, in a concise way, even for large and complex
+#' tibbles. Read about [formatting].
 #'
-#' @section Methods:
-#'
-#' `tbl_df` implements four important base methods:
-#'
-#' \describe{
-#' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see [print.tbl()]}
-#' \item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
-#'   so is considerably faster. Returns `NULL` if column does not exist,
-#'   `$` warns.}
-#' }
-#' @section Important functions:
-#' [tibble()] and [tribble()] for construction,
-#' [as_tibble()] for coercion,
-#' and [print.tbl()] and [glimpse()] for display.
-#'
+#' The general ethos is that tibbles are lazy and surly: they do less and
+#' complain more than base [`data.frame`s][base::data.frame()]. This forces
+#' problems to be tackled earlier and more explicitly, typically leading to code
+#' that is more expressive and robust.
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class
-#' @seealso [tibble()], [as_tribble()], [tribble()]
+#' @seealso [tibble()], [as_tribble()], [tribble()], [print.tbl_df()],
+#'   [glimpse()]
 NULL
 
 # Standard data frame methods --------------------------------------------------

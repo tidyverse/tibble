@@ -11,9 +11,9 @@
 #'   fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much more passive than [base::data.frame()] in terms of
 #'   transforming the user's input. Character vectors are not coerced to factor.
-#'   Variable names are not modified.
-#'   * `tibble()` builds variables sequentially. When defining a variable,
-#'   you can refer to variables created earlier in the call.
+#'   Column names are not modified.
+#'   * `tibble()` builds columns sequentially. When defining a column, you can
+#'   refer to columns created earlier in the call.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created elements. These arguments are
@@ -24,7 +24,8 @@
 #' @param .name_repair Treatment of problematic column names:
 #'   - `"minimal"`: No name repair or checks, beyond basic existence,
 #'   - `"unique"`: Make sure names are unique and not empty,
-#'   - `"check_unique"`: (default value), no name repair, but check they are `unique`,
+#'   - `"check_unique"`: (default value), no name repair, but check they are
+#'     `unique`,
 #'   - `"syntactic"`: Make the names `unique` and syntactic
 #'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'   for names in the style of base R).
@@ -36,10 +37,10 @@
 #' @return A tibble, which is a colloquial term for an object of class
 #'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
 #'   frame, i.e. it has class `data.frame`.
-#' @seealso Use [as_tibble()] to turn an existing list into a data frame. Name
-#'   repair is described more fully in [name-repair]. [rlang::list2()] provides
-#'   more details on tidy dots semantics, i.e. exactly how [quasiquotation]
-#'   works for the `...` argument.
+#' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
+#'   `enframe()` to convert a named vector into tibble. Name repair is detailed
+#'   in [name-repair]. [rlang::list2()] provides more details on tidy dots
+#'   semantics, i.e. exactly how [quasiquotation] works for the `...` argument.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:

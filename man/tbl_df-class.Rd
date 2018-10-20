@@ -5,45 +5,40 @@
 \alias{tbl_df}
 \title{\code{tbl_df} class}
 \description{
-Lorem ipsum
+Objects of class \code{tbl_df} have a class attribute consisting of \code{tbl_df},
+\code{tbl}, and \code{data.frame}. So-called tibbles are a special flavor of
+\code{\link[base:data.frame]{data.frame}}, created in order to have different
+default behaviour, detailed below.
 }
-\section{tibbles vs. data frames}{
+\section{tibbles vs. \code{data.frame}s}{
 
 
-Text is currently just taken from old description
+How default behaviour of tibbles differs from that of data frames, during
+creation, access, and modification:
 \itemize{
-\item Never coerces inputs (i.e. strings stay as strings!).
-\item Never adds \code{row.names}.
-\item Only recycles length 1 inputs.
-\item Automatically adds column names.
-\item Doesn't munge column names.
-\item Evaluates its arguments lazily and in order.
-\item Adds \code{tbl_df} class to output.
-}
-}
-
-\section{Methods}{
-
-
-\code{tbl_df} implements four important base methods:
-
-\describe{
-\item{print}{By default only prints the first 10 rows (at most 20), and the
-columns that fit on screen; see \code{\link[=print.tbl]{print.tbl()}}}
-\item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-\item{\code{[[}, \code{$}}{Calls \code{\link[=.subset2]{.subset2()}} directly,
-so is considerably faster. Returns \code{NULL} if column does not exist,
-\code{$} warns.}
-}
+\item Column data is not coerced. A character vector is not turned into a factor.
+\item Column names are not munged, although missing names are auto-populated.
+Duplicated column names are strongly discouraged. Read about \link{name-repair}.
+\item Row names are not added and are strongly discouraged, in favor of storing
+that info as a column. Read about \link{rownames}.
+\item Recycling only happens for a length 1 input.
+\item When a single column is extracted from a tibble, it's returned as a
+one-column tibble, not as a vector: \code{df[ , j, drop = FALSE]} is the default.
+\item List-columns are expressly anticipated and do not require special tricks.
+\item There is no partial matching when \code{$} is used to index by name. \code{df$name}
+for a nonexistent name generates a warning.
+\item Printing and inspection are a very high priority. The goal is to convey as
+much information as possible, in a concise way, even for large and complex
+tibbles. Read about \link{formatting}.
 }
 
-\section{Important functions}{
-
-\code{\link[=tibble]{tibble()}} and \code{\link[=tribble]{tribble()}} for construction,
-\code{\link[=as_tibble]{as_tibble()}} for coercion,
-and \code{\link[=print.tbl]{print.tbl()}} and \code{\link[=glimpse]{glimpse()}} for display.
+The general ethos is that tibbles are lazy and surly: they do less and
+complain more than base \link[base:data.frame]{data.frames}. This forces
+problems to be tackled earlier and more explicitly, typically leading to code
+that is more expressive and robust.
 }
 
 \seealso{
-\code{\link[=tibble]{tibble()}}, \code{\link[=as_tribble]{as_tribble()}}, \code{\link[=tribble]{tribble()}}
+\code{\link[=tibble]{tibble()}}, \code{\link[=as_tribble]{as_tribble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl_df]{print.tbl_df()}},
+\code{\link[=glimpse]{glimpse()}}
 }

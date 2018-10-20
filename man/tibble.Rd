@@ -20,7 +20,8 @@ just as an additional check.}
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are
+\code{unique},
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
@@ -45,9 +46,9 @@ special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
 fully described in \code{\link[=tbl_df-class]{tbl_df}}.
 \item \code{tibble()} is much more passive than \code{\link[base:data.frame]{base::data.frame()}} in terms of
 transforming the user's input. Character vectors are not coerced to factor.
-Variable names are not modified.
-\item \code{tibble()} builds variables sequentially. When defining a variable,
-you can refer to variables created earlier in the call.
+Column names are not modified.
+\item \code{tibble()} builds columns sequentially. When defining a column, you can
+refer to columns created earlier in the call.
 }
 }
 \examples{
@@ -122,8 +123,8 @@ tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
 }
 \seealso{
-Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing list into a data frame. Name
-repair is described more fully in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides
-more details on tidy dots semantics, i.e. exactly how \link{quasiquotation}
-works for the \code{...} argument.
+Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
+\code{enframe()} to convert a named vector into tibble. Name repair is detailed
+in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides more details on tidy dots
+semantics, i.e. exactly how \link{quasiquotation} works for the \code{...} argument.
 }

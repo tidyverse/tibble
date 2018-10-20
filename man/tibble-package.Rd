@@ -26,7 +26,7 @@ science}
 
 Resources on specific topics:
 \itemize{
-\item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}
+\item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=enframe]{enframe()}}
 \item Inspect a tibble: \code{\link[=print.tbl_df]{print.tbl_df()}}, \code{\link[=glimpse]{glimpse()}}
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }

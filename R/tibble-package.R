@@ -16,7 +16,7 @@
 #'   science*
 #'
 #' Resources on specific topics:
-#'   * Create a tibble: [tibble()], [as_tibble()], [tribble()]
+#'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]
 #'   * Inspect a tibble: [print.tbl_df()], [glimpse()]
 #'   * Details on the S3 `tbl_df` class: [`tbl_df-class`]
 "_PACKAGE"
