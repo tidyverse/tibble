@@ -49,13 +49,16 @@ supplemented by a summary of the remaining rows and columns.
 whether a variable is, e.g., \code{<chr>} or \code{<fct>} (character versus factor).
 }
 
-Printing can be customized via options, described below.
+Printing can be tweaked for a one-off call by calling \code{print()} explicitly
+and setting arguments like \code{n} and \code{width}. More persistent control is
+available by setting the options described below.
 }
 \section{Package options}{
 
 
 Options used by the tibble and pillar packages to format and print \code{tbl_df}
-objects. Used by \code{trunc_mat()} and (indirectly) by \code{print.tbl()}.
+objects. Used by the formatting workhorse \code{trunc_mat()} and, therefore,
+indirectly, by \code{print.tbl_df()} and \code{print.tbl()}.
 \itemize{
 \item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
 Set to \code{Inf} to always print all rows.  Default: 20.
@@ -89,12 +92,18 @@ titles.
 }
 
 \examples{
-trunc_mat(mtcars)
-
 print(as_tibble(mtcars))
 print(as_tibble(mtcars), n = 1)
 print(as_tibble(mtcars), n = 3)
-print(as_tibble(mtcars), n = 100)
+
+print(as_tibble(iris), n = 100)
+
+print(mtcars, width = 10)
+
+mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
+print(mtcars2, n = 25, n_extra = 3)
+
+trunc_mat(mtcars)
 
 if (requireNamespace("nycflights13", quietly = TRUE)) {
   print(nycflights13::flights, n_extra = 2)

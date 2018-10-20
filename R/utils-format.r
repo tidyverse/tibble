@@ -8,13 +8,16 @@
 #' * Tibble reveals the type of each column, which keeps the user informed about
 #' whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
 #'
-#' Printing can be customized via options, described below.
+#' Printing can be tweaked for a one-off call by calling `print()` explicitly
+#' and setting arguments like `n` and `width`. More persistent control is
+#' available by setting the options described below.
 #'
 #' @inheritSection pillar::`pillar-package` Package options
 #' @section Package options:
 #'
 #' Options used by the tibble and pillar packages to format and print `tbl_df`
-#' objects. Used by `trunc_mat()` and (indirectly) by `print.tbl()`.
+#' objects. Used by the formatting workhorse `trunc_mat()` and, therefore,
+#' indirectly, by `print.tbl_df()` and `print.tbl()`.
 #'
 #' - `tibble.print_max`: Row number threshold: Maximum number of rows printed.
 #' Set to `Inf` to always print all rows.  Default: 20.
@@ -38,12 +41,18 @@
 #'   if the width is too small for the entire tibble. If `NULL`, the default,
 #'   will print information about at most `tibble.max_extra_cols` extra columns.
 #' @examples
-#' trunc_mat(mtcars)
-#'
 #' print(as_tibble(mtcars))
 #' print(as_tibble(mtcars), n = 1)
 #' print(as_tibble(mtcars), n = 3)
-#' print(as_tibble(mtcars), n = 100)
+#'
+#' print(as_tibble(iris), n = 100)
+#'
+#' print(mtcars, width = 10)
+#'
+#' mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
+#' print(mtcars2, n = 25, n_extra = 3)
+#'
+#' trunc_mat(mtcars)
 #'
 #' if (requireNamespace("nycflights13", quietly = TRUE)) {
 #'   print(nycflights13::flights, n_extra = 2)
