@@ -2,7 +2,6 @@
 % Please edit documentation in R/lst.R
 \name{lst}
 \alias{lst}
-\alias{lst_}
 \title{Build a list}
 \usage{
 lst(...)
@@ -18,25 +17,20 @@ A named list.
 }
 \description{
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
-same features as \code{\link[=tibble]{tibble()}}. \code{lst()} evaluates its arguments lazily and in
-order. It also generates missing names automatically.
+same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When
+defining a component, you can refer to components created earlier in the
+call. \code{lst()} also generates missing names automatically.
 }
-\section{Life cycle}{
-
-
-\code{lst()} is stable.
-
-\code{lst_()} uses an older approach to lazy evaluation that predates the tidy
-eval framework. It is deprecated. New code should use \code{lst()} with
-\link{quasiquotation}.
-}
-
 \examples{
 # the value of n can be used immediately in the definition of x
 lst(n = 5, x = runif(n))
 
 # missing names are constructed from user's input
 lst(1:3, z = letters[4:6], runif(3))
+
+a <- 1:3
+b <- letters[4:6]
+lst(a, b)
 
 # pre-formed quoted expressions can be used with lst() and then
 # unquoted (with !!) or unquoted and spliced (with !!!)

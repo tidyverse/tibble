@@ -3,16 +3,9 @@
 #' @description
 #'
 #' `lst()` constructs a list, similar to [base::list()], but with some of the
-#' same features as [tibble()]. `lst()` evaluates its arguments lazily and in
-#' order. It also generates missing names automatically.
-#'
-#' @section Life cycle:
-#'
-#'   `lst()` is stable.
-#'
-#'   `lst_()` uses an older approach to lazy evaluation that predates the tidy
-#'   eval framework. It is deprecated. New code should use `lst()` with
-#'   [quasiquotation].
+#' same features as [tibble()]. `lst()` builds components sequentially. When
+#' defining a component, you can refer to components created earlier in the
+#' call. `lst()` also generates missing names automatically.
 #'
 #' @inheritParams tibble
 #' @return A named list.
@@ -23,6 +16,10 @@
 #'
 #' # missing names are constructed from user's input
 #' lst(1:3, z = letters[4:6], runif(3))
+#'
+#' a <- 1:3
+#' b <- letters[4:6]
+#' lst(a, b)
 #'
 #' # pre-formed quoted expressions can be used with lst() and then
 #' # unquoted (with !!) or unquoted and spliced (with !!!)
@@ -87,12 +84,4 @@ expand_lst <- function(output, i) {
 expand_vecs <- function(x, length) {
   ones <- rep(1L, length)
   map(x, `[`, ones)
-}
-
-#' @export
-#' @usage NULL
-#' @rdname lst
-lst_ <- function(xs) {
-  xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!!xs)
 }

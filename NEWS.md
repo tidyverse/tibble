@@ -14,7 +14,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
-- `data_frame()`, `tibble_()`, `data_frame_()` and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
+- `data_frame()`, `tibble_()`, `data_frame_()`, `lst_()`, and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
 
 - `as.tibble()` and `as_data_frame()` are officially deprecated and not generic anymore, please use/implement `as_tibble()` (#111).
 
