@@ -48,6 +48,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   x
 }
 
+#' @include utils-format.r
 #' @rdname formatting
 #' @export
 print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
@@ -60,6 +61,7 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
+#' @include utils-format.r
 #' @rdname formatting
 #' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
@@ -67,6 +69,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
+#' @include utils-format.r
 #' @rdname formatting
 #' @export
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
@@ -74,6 +77,7 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   format(mat)
 }
 
+#' @include utils-format.r
 #' @rdname formatting
 #' @export
 format.tbl_df <- format.tbl
