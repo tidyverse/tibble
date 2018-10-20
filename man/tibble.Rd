@@ -2,8 +2,6 @@
 % Please edit documentation in R/tibble.R
 \name{tibble}
 \alias{tibble}
-\alias{tbl_df}
-\alias{tbl_df-class}
 \title{Build a data frame}
 \usage{
 tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
@@ -12,7 +10,7 @@ tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created elements. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{!!} and
+processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
@@ -33,16 +31,18 @@ See \link{name-repair} for more details on these terms and the strategies used
 to enforce them.}
 }
 \value{
-A tibble, which is a colloquial term for an object of class \code{tbl_df}.
-A \code{tbl_df} object is also a data frame, i.e. it has class \code{data.frame}.
+A tibble, which is a colloquial term for an object of class
+\code{\link[=tbl_df-class]{tbl_df}}. A \code{\link[=tbl_df-class]{tbl_df}} object is also a data
+frame, i.e. it has class \code{data.frame}.
 }
 \description{
 \code{tibble()} constructs a data frame. It is used like \code{\link[base:data.frame]{base::data.frame()}}, but
 with a couple notable differences:
 \itemize{
-\item The returned data frame has the class \code{tbl_df}, in addition to
-\code{data.frame}. This allows so-called "tibbles" to exhibit some special
-behaviour, such as enhanced printing. Details below.
+\item The returned data frame has the class \code{\link[=tbl_df-class]{tbl_df}}, in
+addition to \code{data.frame}. This allows so-called "tibbles" to exhibit some
+special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
+fully described in \code{\link[=tbl_df-class]{tbl_df}}.
 \item \code{tibble()} is much more passive than \code{\link[base:data.frame]{base::data.frame()}} in terms of
 transforming the user's input. Character vectors are not coerced to factor.
 Variable names are not modified.
@@ -50,21 +50,6 @@ Variable names are not modified.
 you can refer to variables created earlier in the call.
 }
 }
-\section{tibbles vs. data frames}{
-
-
-Text is currently just taken from old description
-\itemize{
-\item Never coerces inputs (i.e. strings stay as strings!).
-\item Never adds \code{row.names}.
-\item Only recycles length 1 inputs.
-\item Automatically adds column names.
-\item Doesn't munge column names.
-\item Evaluates its arguments lazily and in order.
-\item Adds \code{tbl_df} class to output.
-}
-}
-
 \examples{
 # Unnamed arguments are named with their expression:
 a <- 1:5

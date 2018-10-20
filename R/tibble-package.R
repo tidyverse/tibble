@@ -3,27 +3,22 @@
 #' @importFrom pkgconfig set_config
 #' @import rlang
 #' @aliases NULL tibble-package
-#' @details The S3 class `tbl_df` wraps a local data frame.
+#' @details
+#' The tibble package provides utilities for handling __tibbles__, where
+#' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
+#' class is a special case of the base [`data.frame`][base::data.frame()].
+#' class, developed in response to lessons learned over many years of data
+#' analysis with data frames.
 #'
-#' @section Methods:
+#' General resources:
+#'   * Website for the tibble package: <https://tibble.tidyverse.org>
+#'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for data
+#'   science*
 #'
-#' `tbl_df` implements four important base methods:
-#'
-#' \describe{
-#' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see [print.tbl()]}
-#' \item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
-#'   so is considerably faster. Returns `NULL` if column does not exist,
-#'   `$` warns.}
-#' }
-#' @section Important functions:
-#' [tibble()] and [tribble()] for construction,
-#' [as_tibble()] for coercion,
-#' and [print.tbl()] and [glimpse()] for display.
-#' @examples
-#' tibble(a = 1:26, b = letters)
-#' as_tibble(iris)
+#' Resources on specific topics:
+#'   * Create a tibble: [tibble()], [as_tibble()], [tribble()]
+#'   * Inspect a tibble: [print.tbl_df()], [glimpse()]
+#'   * Details on the S3 `tbl_df` class: [`tbl_df-class`]
 "_PACKAGE"
 
 ## user-facing docs kept in `formatting` topic; see utils-format.r

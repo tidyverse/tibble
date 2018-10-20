@@ -5,31 +5,19 @@
 #' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
 #' with a couple notable differences:
 #'
-#'   * The returned data frame has the class `tbl_df`, in addition to
-#'   `data.frame`. This allows so-called "tibbles" to exhibit some special
-#'   behaviour, such as enhanced printing. Details below.
+#'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in
+#'   addition to `data.frame`. This allows so-called "tibbles" to exhibit some
+#'   special behaviour, such as [enhanced printing][formatting]. Tibbles are
+#'   fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much more passive than [base::data.frame()] in terms of
 #'   transforming the user's input. Character vectors are not coerced to factor.
 #'   Variable names are not modified.
-#'
 #'   * `tibble()` builds variables sequentially. When defining a variable,
 #'   you can refer to variables created earlier in the call.
 #'
-#' @section tibbles vs. data frames:
-#'
-#' Text is currently just taken from old description
-#'
-#' * Never coerces inputs (i.e. strings stay as strings!).
-#' * Never adds `row.names`.
-#' * Only recycles length 1 inputs.
-#' * Automatically adds column names.
-#' * Doesn't munge column names.
-#' * Evaluates its arguments lazily and in order.
-#' * Adds `tbl_df` class to output.
-#'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created elements. These arguments are
-#'   processed with [rlang::quos()] and support unquote via `!!` and
+#'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
@@ -45,9 +33,9 @@
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
 #'
-#' @return A tibble, which is a colloquial term for an object of class `tbl_df`.
-#'   A `tbl_df` object is also a data frame, i.e. it has class `data.frame`.
-#' @aliases tbl_df tbl_df-class
+#' @return A tibble, which is a colloquial term for an object of class
+#'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
+#'   frame, i.e. it has class `data.frame`.
 #' @seealso Use [as_tibble()] to turn an existing list into a data frame. Name
 #'   repair is described more fully in [name-repair]. [rlang::list2()] provides
 #'   more details on tidy dots semantics, i.e. exactly how [quasiquotation]

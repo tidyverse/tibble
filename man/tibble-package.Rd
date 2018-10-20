@@ -11,33 +11,25 @@ Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.
 }
 \details{
-The S3 class \code{tbl_df} wraps a local data frame.
-}
-\section{Methods}{
+The tibble package provides utilities for handling \strong{tibbles}, where
+"tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
+class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
+class, developed in response to lessons learned over many years of data
+analysis with data frames.
 
-
-\code{tbl_df} implements four important base methods:
-
-\describe{
-\item{print}{By default only prints the first 10 rows (at most 20), and the
-columns that fit on screen; see \code{\link[=print.tbl]{print.tbl()}}}
-\item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-\item{\code{[[}, \code{$}}{Calls \code{\link[=.subset2]{.subset2()}} directly,
-so is considerably faster. Returns \code{NULL} if column does not exist,
-\code{$} warns.}
-}
+General resources:
+\itemize{
+\item Website for the tibble package: \url{https://tibble.tidyverse.org}
+\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for data
+science}
 }
 
-\section{Important functions}{
-
-\code{\link[=tibble]{tibble()}} and \code{\link[=tribble]{tribble()}} for construction,
-\code{\link[=as_tibble]{as_tibble()}} for coercion,
-and \code{\link[=print.tbl]{print.tbl()}} and \code{\link[=glimpse]{glimpse()}} for display.
+Resources on specific topics:
+\itemize{
+\item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}
+\item Inspect a tibble: \code{\link[=print.tbl_df]{print.tbl_df()}}, \code{\link[=glimpse]{glimpse()}}
+\item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
-
-\examples{
-tibble(a = 1:26, b = letters)
-as_tibble(iris)
 }
 \seealso{
 Useful links:

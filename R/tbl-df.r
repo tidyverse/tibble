@@ -2,6 +2,45 @@
 #' @exportClass tbl_df
 setOldClass(c("tbl_df", "tbl", "data.frame"))
 
+#' `tbl_df` class
+#'
+#' @description
+#' Lorem ipsum
+#'
+#' @section tibbles vs. data frames:
+#'
+#' Text is currently just taken from old description
+#'
+#' * Never coerces inputs (i.e. strings stay as strings!).
+#' * Never adds `row.names`.
+#' * Only recycles length 1 inputs.
+#' * Automatically adds column names.
+#' * Doesn't munge column names.
+#' * Evaluates its arguments lazily and in order.
+#' * Adds `tbl_df` class to output.
+#'
+#' @section Methods:
+#'
+#' `tbl_df` implements four important base methods:
+#'
+#' \describe{
+#' \item{print}{By default only prints the first 10 rows (at most 20), and the
+#'   columns that fit on screen; see [print.tbl()]}
+#' \item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
+#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
+#'   so is considerably faster. Returns `NULL` if column does not exist,
+#'   `$` warns.}
+#' }
+#' @section Important functions:
+#' [tibble()] and [tribble()] for construction,
+#' [as_tibble()] for coercion,
+#' and [print.tbl()] and [glimpse()] for display.
+#'
+#' @name tbl_df-class
+#' @aliases tbl_df tbl_df-class
+#' @seealso [tibble()], [as_tribble()], [tribble()]
+NULL
+
 # Standard data frame methods --------------------------------------------------
 
 #' @export
