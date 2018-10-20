@@ -1,20 +1,42 @@
-#' Tools for describing matrices
+#' Printing tibbles
 #'
-#' @param x Object to show.
-#' @param n Number of rows to show. If `NULL`, the default, will print
-#'   all rows if less than option `tibble.print_max`. Otherwise, will
-#'   print `tibble.print_min` rows.
-#' @param width Width of text output to generate. This defaults to NULL, which
-#'   means use `getOption("tibble.width")` or (if also NULL)
-#'   `getOption("width")`; the latter displays only the columns that
-#'   fit on one screen. You can also set `options(tibble.width = Inf)` to
-#'   override this default and always print all columns.
+#' @description
+#' One of the main features of the `tbl_df` class is the printing:
+#'
+#' * Tibbles only print as many rows and columns as fit on one screen,
+#' supplemented by a summary of the remaining rows and columns.
+#' * Tibble reveals the type of each column, which keeps the user informed about
+#' whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
+#'
+#' Printing can be customized via options, described below.
+#'
+#' @inheritSection pillar::`pillar-package` Package options
+#' @section Package options:
+#'
+#' Options used by the tibble and pillar packages to format and print `tbl_df`
+#' objects. Used by `trunc_mat()` and (indirectly) by `print.tbl()`.
+#'
+#' - `tibble.print_max`: Row number threshold: Maximum number of rows printed.
+#' Set to `Inf` to always print all rows.  Default: 20.
+#' - `tibble.print_min`: Number of rows printed if row number threshold is
+#' exceeded. Default: 10.
+#' - `tibble.width`: Output width. Default: `NULL` (use `width` option).
+#' - `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
+#' Default: 100.
+#'
+#' @param x Object to format or print.
+#' @param ... Other arguments passed down to methods.
+#' @param n Number of rows to show. If `NULL`, the default, will print all rows
+#'   if less than option `tibble.print_max`. Otherwise, will print
+#'   `tibble.print_min` rows.
+#' @param width Width of text output to generate. This defaults to `NULL`, which
+#'   means use `getOption("tibble.width")` or (if also `NULL`)
+#'   `getOption("width")`; the latter displays only the columns that fit on one
+#'   screen. You can also set `options(tibble.width = Inf)` to override this
+#'   default and always print all columns.
 #' @param n_extra Number of extra columns to print abbreviated information for,
-#'   if the width is too small for the entire tibble. If `NULL`, the
-#'   default, will print information about at most `tibble.max_extra_cols`
-#'   extra columns.
-#' @seealso \link{tibble-package}
-#' @keywords internal
+#'   if the width is too small for the entire tibble. If `NULL`, the default,
+#'   will print information about at most `tibble.max_extra_cols` extra columns.
 #' @examples
 #' trunc_mat(mtcars)
 #'

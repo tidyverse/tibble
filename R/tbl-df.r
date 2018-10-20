@@ -12,14 +12,15 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @rdname formatting
 #' @export
-format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
-  format(mat)
-}
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
 
-#' @rdname formatting
-#' @export
-format.tbl_df <- format.tbl
+  if (!inherits(x, "tbl")) {
+    message("The tibble must inherit from tbl_df and tbl, use tibble(), as_tibble() or new_tibble() for construction.")
+  }
+
+  invisible(x)
+}
 
 #' @rdname formatting
 #' @export
@@ -30,15 +31,14 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @rdname formatting
 #' @export
-print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  NextMethod()
-
-  if (!inherits(x, "tbl")) {
-    message("The tibble must inherit from tbl_df and tbl, use tibble(), as_tibble() or new_tibble() for construction.")
-  }
-
-  invisible(x)
+format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
+  format(mat)
 }
+
+#' @rdname formatting
+#' @export
+format.tbl_df <- format.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {

@@ -3,12 +3,7 @@
 #' @importFrom pkgconfig set_config
 #' @import rlang
 #' @aliases NULL tibble-package
-#' @details The S3 class `tbl_df` wraps a local data frame. The main
-#' advantage to using a `tbl_df` over a regular data frame is the printing:
-#' tbl objects only print a few rows and all the columns that fit on one screen,
-#' describing the rest of it as text.
-#'
-#' See [tibble-options] for a list of package options.
+#' @details The S3 class `tbl_df` wraps a local data frame.
 #'
 #' @section Methods:
 #'
@@ -31,31 +26,13 @@
 #' as_tibble(iris)
 "_PACKAGE"
 
-#' Package options
-#'
-#' Display options for `tbl_df`, used by [trunc_mat()] and
-#' (indirectly) by [print.tbl()].
-#'
-#' @name tibble-options
-#' @inheritSection pillar::`pillar-package` Package options
-#' @section Package options:
-(op.tibble <- list(
-  #' - `tibble.print_max`: Row number threshold: Maximum number of rows
-  #'     printed. Set to `Inf` to always print all rows.  Default: 20.
+## user-facing docs kept in `formatting` topic; see utils-format.r
+op.tibble <- list(
   tibble.print_max = 20L,
-
-  #' - `tibble.print_min`: Number of rows printed if row number
-  #'     threshold is exceeded. Default: 10.
   tibble.print_min = 10L,
-
-  #' - `tibble.width`: Output width. Default: `NULL` (use
-  #'     `width` option).
   tibble.width = NULL,
-
-  #' - `tibble.max_extra_cols`: Number of extra columns
-  #'     printed in reduced form. Default: 100.
   tibble.max_extra_cols = 100L
-))
+)
 
 tibble_opt <- function(x) {
   x_tibble <- paste0("tibble.", x)
