@@ -34,6 +34,7 @@ tibble_(xs)
 tidy_names(name, syntactic = FALSE, quiet = FALSE)
 tribble(...)
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
+validate_tibble(x)
 view(x, title = NULL, ...)
 
 ## Own S3 methods

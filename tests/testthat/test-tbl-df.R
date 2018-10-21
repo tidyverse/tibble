@@ -377,8 +377,7 @@ test_that("new_tibble checks", {
   )
   expect_error(
     new_tibble(set_names(list(1), NA_character_), nrow = 1),
-    error_column_must_be_named(1, repair = FALSE),
-    fixed = TRUE
+    NA
   )
   expect_error(
     new_tibble(set_names(list(1), ""), nrow = 1),
@@ -386,8 +385,7 @@ test_that("new_tibble checks", {
   )
   expect_error(
     new_tibble(list(a = 1, b = 2:3), nrow = 1),
-    error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
-    fixed = TRUE
+    NA
   )
   expect_error(
     new_tibble(
@@ -395,5 +393,14 @@ test_that("new_tibble checks", {
       nrow = 1
     ),
     NA
+  )
+})
+
+
+test_that("validate_tibble() checks", {
+  expect_error(
+    validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
+    error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
+    fixed = TRUE
   )
 })

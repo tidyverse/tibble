@@ -17,11 +17,19 @@ has_nonnull_names <- function(x) {
 
 set_class <- `class<-`
 
+check_no_dim <- function(x) {
+  if (is_atomic(x) && has_dim(x)) {
+    abort(error_1d_array_column())
+  }
+  invisible(x)
+}
+
 strip_dim <- function(x) {
   if (is.matrix(x)) {
     rownames(x) <- NULL
   } else if (is.data.frame(x)) {
     x <- remove_rownames(x)
+    x[] <- map(x, strip_dim)
   } else if (is_atomic(x) && has_dim(x)) {
     # Careful update only if necessary, to avoid copying which is checked by
     # the "copying" test in dplyr

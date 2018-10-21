@@ -2,10 +2,12 @@
 % Please edit documentation in R/new.R
 \name{new_tibble}
 \alias{new_tibble}
-\alias{new_valid_tibble}
-\title{Constructor}
+\alias{validate_tibble}
+\title{Constructor and validator}
 \usage{
 new_tibble(x, ..., nrow = NULL, subclass = NULL)
+
+validate_tibble(x)
 }
 \arguments{
 \item{x}{A tibble-like object}
@@ -17,32 +19,36 @@ new_tibble(x, ..., nrow = NULL, subclass = NULL)
 \item{subclass}{Subclasses to assign to the new object, default: none}
 }
 \description{
-Creates a subclass of a tibble.
-This function is mostly useful for package authors that implement subclasses
+Creates or validates a subclass of a tibble.
+These function is mostly useful for package authors that implement subclasses
 of a tibble, like \pkg{sf} or \pkg{tibbletime}.
+
+\code{new_tibble()} creates a new object as a subclass of \code{tbl_df}, \code{tbl} and \code{data.frame}.
+This function is optimized for performance, checks are reduced to a minimum.
+
+\code{validate_tibble()} checks a tibble for internal consistency.
+Correct behavior can be guaranteed only if this function
+runs without raising an error.
 }
-\details{
-\code{x} must be a list.
+\section{Construction}{
 
+
+For \code{new_tibble()}, \code{x} must be a list.
 The \code{...} argument allows adding more attributes to the subclass.
-
-The \code{new_tibble()} constructor requires an \code{nrow} argument.
-It makes sure that the \code{row.names} attribute
-is consistent with the data before returning.
-
+An \code{nrow} argument is required.
 \code{x} must have names (or be empty),
 but the names are not checked for correctness.
-
-1d arrays are always converted to vectors.
-
-The \code{row.names} attribute will be created from the \code{nrow} argument,
-overriding any existing attribute of this name in \code{x} or in the \code{...}
-arguments.
-
-The \code{class} attribute of the returned object always consists of
-\code{c("tbl_df", "tbl", "data.frame")}. If the \code{subclass} argument is set,
-it will be prepended to that list of classes.
 }
+
+\section{Validation}{
+
+\code{validate_tibble()} checks for "minimal" names
+and that all columns are vectors, data frames or matrices.
+It also makes sure that all columns have the same length,
+and that the \code{row.names} attribute is consistent with the data.
+1d arrays are not supported.
+}
+
 \examples{
 # The nrow argument is always required:
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
@@ -52,4 +58,8 @@ try(new_tibble(iris, nrow = 3))
 
 # The length of all columns must be consistent with the nrow argument:
 try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
+}
+\seealso{
+\code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} for ways to construct a tibble
+with recycling of scalars and automatic name repair.
 }

@@ -297,17 +297,6 @@ test_that("as.tibble is an alias of as_tibble", {
   expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
 
-# new_tibble -------------------------------------------------------------
-
-test_that("new_tibble can specify nrow,", {
-  expect_error(
-    new_tibble(list(x = 1:2, y = 1:3), nrow = 4),
-    error_inconsistent_cols(4, c("x", "y"), c(2, 3), "`nrow` argument"),
-    fixed = TRUE
-  )
-})
-
-
 # Validation --------------------------------------------------------------
 
 test_that("POSIXlt isn't a valid column", {

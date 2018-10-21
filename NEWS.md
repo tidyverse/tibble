@@ -6,6 +6,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`, passing `n` unnamed still works (with a warning).
 
+- `new_tibble()` has been optimized for performance, the function no longer strips dimensions from 1d arrays and no longer checks correctness of names or column lengths. Use the new `validate_tibble()` if you need these checks (#471).
+
 - The `nrow` argument to `new_tibble()` is now mandatory.
 
 - Checking names in `new_tibble()` is enabled by default: names must exist (except for zero-length input), `NA` names are not allowed. (This corresponds to the `"minimal"` checks described below.) Consequently, checking names in `as_tibble()` is also enabled by default, even for tibbles. The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
@@ -67,6 +69,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 - `enframe()` (with `name = NULL`) and `deframe()` now support one-column tibbles (#449).
 
 - Improved S4 support by adding `exportClass(tbl_df)` to `NAMESPACE` (#436, @jeffreyhanson and @javierfajnolla).
+
+- New `validate_tibble()` checks a tibble for internal consistency (#471).
 
 - Bring error message for invalid column type in line with allowed matrix/df cols (#465, @maxheld83).
 
