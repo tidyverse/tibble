@@ -5,7 +5,6 @@
 #' in contrast with [tibble()], which builds a tibble from individual columns.
 #' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
 #' [base::data.frame()].
-
 #'
 #' `as_tibble()` is an S3 generic, with methods for:
 #' - [`tbl_df`]: Just passes input through.
@@ -55,7 +54,7 @@
 #' as_tibble(1:3, .name_repair = "unique")
 #'
 #' # For list-like inputs, as_tibble() is considerably simpler than
-#' as.data.frame()
+#' as.data.frame() and hence faster
 #' \dontrun{
 #' if (requireNamespace("bench", quietly = TRUE)) {
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
