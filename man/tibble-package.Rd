@@ -17,6 +17,13 @@ class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
 class, developed in response to lessons learned over many years of data
 analysis with data frames.
 
+Tibble is the central data structure for the set of packages known as the
+\href{https://www.tidyverse.org/packages/}{tidyverse}, including
+\href{http://dplyr.tidyverse.org/}{dplyr},
+\href{http://ggplot2.tidyverse.org/}{ggplot2},
+\href{http://tidyr.tidyverse.org/}{tidyr}, and
+\href{http://readr.tidyverse.org/}{readr}.
+
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}

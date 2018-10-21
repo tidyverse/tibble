@@ -10,6 +10,13 @@
 #' class, developed in response to lessons learned over many years of data
 #' analysis with data frames.
 #'
+#' Tibble is the central data structure for the set of packages known as the
+#' [tidyverse](https://www.tidyverse.org/packages/), including
+#' [dplyr](http://dplyr.tidyverse.org/),
+#' [ggplot2](http://ggplot2.tidyverse.org/),
+#' [tidyr](http://tidyr.tidyverse.org/), and
+#' [readr](http://readr.tidyverse.org/).
+#'
 #' General resources:
 #'   * Website for the tibble package: <https://tibble.tidyverse.org>
 #'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for data
