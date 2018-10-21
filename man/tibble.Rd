@@ -44,7 +44,7 @@ with a couple notable differences:
 addition to \code{data.frame}. This allows so-called "tibbles" to exhibit some
 special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
 fully described in \code{\link[=tbl_df-class]{tbl_df}}.
-\item \code{tibble()} is much more passive than \code{\link[base:data.frame]{base::data.frame()}} in terms of
+\item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of
 transforming the user's input. Character vectors are not coerced to factor.
 Column names are not modified.
 \item \code{tibble()} builds columns sequentially. When defining a column, you can

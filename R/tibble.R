@@ -9,7 +9,7 @@
 #'   addition to `data.frame`. This allows so-called "tibbles" to exhibit some
 #'   special behaviour, such as [enhanced printing][formatting]. Tibbles are
 #'   fully described in [`tbl_df`][tbl_df-class].
-#'   * `tibble()` is much more passive than [base::data.frame()] in terms of
+#'   * `tibble()` is much lazier than [base::data.frame()] in terms of
 #'   transforming the user's input. Character vectors are not coerced to factor.
 #'   Column names are not modified.
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
