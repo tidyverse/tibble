@@ -1,10 +1,11 @@
 #' Coerce lists, matrices, and more to data frames
 #'
-#' `as_tibble()` is a function, like [tibble()], that is used to make a data
-#' frame with class [`tbl_df`], i.e., a so-called tibble. Use `as_tibble()`
-#' instead of [tibble()] when you need to turn an existing object, such as a
-#' data frame, list, or matrix, into a tibble, as opposed to building from
-#' individual columns.
+#' `as_tibble()` turns an existing object, such as a data frame, list, or
+#' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
+#' in contrast with [tibble()], which builds a tibble from individual columns.
+#' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
+#' [base::data.frame()].
+
 #'
 #' `as_tibble()` is an S3 generic, with methods for:
 #' - [`tbl_df`]: Just passes input through.

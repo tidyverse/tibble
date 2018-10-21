@@ -67,11 +67,11 @@ into this column and the \code{row.names} attribute is deleted.
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
-\code{as_tibble()} is a function, like \code{\link[=tibble]{tibble()}}, that is used to make a data
-frame with class \code{\link{tbl_df}}, i.e., a so-called tibble. Use \code{as_tibble()}
-instead of \code{\link[=tibble]{tibble()}} when you need to turn an existing object, such as a
-data frame, list, or matrix, into a tibble, as opposed to building from
-individual columns.
+\code{as_tibble()} turns an existing object, such as a data frame, list, or
+matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
+in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
+\code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to
+\code{\link[base:data.frame]{base::data.frame()}}.
 }
 \details{
 \code{as_tibble()} is an S3 generic, with methods for:
