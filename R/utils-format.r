@@ -28,7 +28,7 @@
 #' Default: 100.
 #'
 #' @param x Object to format or print.
-#' @param ... Other arguments passed down to methods.
+#' @param ... Other arguments passed on to individual methods.
 #' @param n Number of rows to show. If `NULL`, the default, will print all rows
 #'   if less than option `tibble.print_max`. Otherwise, will print
 #'   `tibble.print_min` rows.

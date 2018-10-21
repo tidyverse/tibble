@@ -1,44 +1,46 @@
-#' Coerce vectors, lists, and matrices to data frames
+#' Coerce lists, matrices, and more to data frames
 #'
-#' This is an S3 generic. Methods are included for:
-#' - data frames (adds `"tbl_df"` classes)
-#' - tibbles (returns unchanged input)
-#' - lists and vectors (treats each element as a column)
-#' - matrices
-#' - tables
-#' - default (coerces to a list)
+#' `as_tibble()` is a function, like [tibble()], that is used to make a data
+#' frame with class [`tbl_df`], i.e., a so-called tibble. Use `as_tibble()`
+#' instead of [tibble()] when you need to turn an existing object, such as a
+#' data frame, list, or matrix, into a tibble, as opposed to building from
+#' individual columns.
 #'
-#' Vectors and unknown input is coerced to a list (unlike `as.data.frame()`):
-#' for vectors, the returned tibble has as many columns as the vector has
-#' elements.
+#' `as_tibble()` is an S3 generic, with methods for:
+#' - [`tbl_df`]: Just passes input through.
+#' - [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method.
+#' - list
+#' - [`matrix`][methods::`matrix-class`], [`poly`][stats::poly()],
+#'   [`ts`][stats::ts()], [`table`][base::table()]
+#' - Default: An atomic vector is first coerced to a list and, unlike
+#' [base::as.data.frame()], the returned tibble has one column per element.
+#' Other inputs are first coerced with [base::as.data.frame()].
 #'
-#' [as.data.frame()] is effectively a thin wrapper around `data.frame`,
-#' and hence is rather slow (because it calls [data.frame()] on each element
-#' before [cbind]ing together). `as_tibble` is a new S3 generic
-#' with more efficient methods for matrices and data frames.
-#'
+#' @section Row names:
 #' The default behavior is to silently remove row names.
-#' New code should explicitly convert row names to a new column using the `rownames`
-#' argument.
-#' For existing code that relies on row names remaining, call
-#' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your package's
-#' [.onLoad()]  function.
 #'
-#' @seealso
-#' [enframe()] converts a vector to a data frame with values in rows,
-#' [name-repair] documents the details of name repair.
+#' New code should explicitly convert row names to a new column using the
+#' `rownames` argument.
 #'
-#' [pkgconfig::set_config()]
+#' For existing code that relies on the retention of row names, call
+#' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your
+#' package's [.onLoad()]  function.
 #'
-#' @param x A vector, list, or matrix. If a list, each element must have the same length.
+#' @seealso [tibble()] constructs a tibble from individual columnns. [enframe()]
+#'   converts a named vector to a tibble with a column of names and column of
+#'   values. [name-repair] documents the details of name repair.
+#'
+#' @param x A data frame, list, matrix, or other object that could reasonably be
+#'   coerced to a tibble.
 #' @param ... Other arguments passed on to individual methods.
 #' @inheritParams tibble
-#' @param rownames Treatment of existing row names (for data frames and matrices):
-#'   - `NULL`: remove row names
-#'   - `NA`: keep row names (default, for compatibility; will issue a warning if row names
-#'     are present in the input).
-#'   - A string: the name of the new column that will contain the existing row names,
-#'     which are no longer present in the result.
+#' @param rownames How to treat existing row names of a data frame or matrix:
+#'   - `NULL`: remove row names.
+#'   - `NA`: keep row names. This the default, for compatibility, but a warning
+#'   is given if the input has row names.
+#'   - A string: the name of a new column. Existing rownames are transferred
+#'   into this column and the `row.names` attribute is deleted.
+
 #' @param _n,validate For compatibility only, do not use for new code.
 #' @export
 #' @examples
@@ -51,7 +53,8 @@
 #'
 #' as_tibble(1:3, .name_repair = "unique")
 #'
-#' # For list-like inputs, as_tibble() is considerably simpler than as.data.frame()
+#' # For list-like inputs, as_tibble() is considerably simpler than
+#' as.data.frame()
 #' \dontrun{
 #' if (requireNamespace("bench", quietly = TRUE)) {
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
