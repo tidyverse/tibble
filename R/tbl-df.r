@@ -45,7 +45,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' * Row names are not added and are strongly discouraged, in favor of storing
 #'   that info as a column. Read about in [rownames].
 #' * Recycling only happens for a length 1 input.
-#' * `df[j]` returns a tibble; it does not automatically extract the column
+#' * `df[, j]` returns a tibble; it does not automatically extract the column
 #'   inside. `df[ , j, drop = FALSE]` is the default.
 #' * List-columns are expressly anticipated and do not require special tricks.
 #' * There is no partial matching when `$` is used to index by name. `df$name`
