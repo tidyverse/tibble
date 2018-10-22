@@ -263,6 +263,129 @@ test_that("as_tibble() implements custom name repair", {
   expect_identical(invalid_df_purrr, invalid_df)
 })
 
+test_that("as_tibble.matrix() supports .name_repair", {
+  x <- matrix(1:6, nrow = 3)
+
+  expect_error(
+    as_tibble(x),
+    error_column_must_be_named(1:2)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    rep("", 2)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    paste0("...", 1:2)
+  )
+
+  x <- matrix(1:6, nrow = 3, dimnames = list(x = LETTERS[1:3], y = c("if", "when")))
+
+  expect_identical(
+    names(as_tibble(x)),
+    c("if", "when")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    c("if", "when")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    c(".if", "when")
+  )
+})
+
+test_that("as_tibble.poly() supports .name_repair", {
+  x <- poly(1:6, 3)
+
+  expect_identical(
+    names(as_tibble(x)),
+    as.character(1:3)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    as.character(1:3)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    paste0("...", 1:3)
+  )
+})
+
+test_that("as_tibble.table() supports .name_repair", {
+  x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
+
+  expect_error(
+    as_tibble(x),
+    error_column_names_must_be_unique("a")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    c("a", "a", "n")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    c("a..1", "a..2", "n")
+  )
+
+  x <- table("if" = c(1, 1, 1, 2, 2, 2), "when" = c(3, 4, 5, 3, 4, 5))
+
+  expect_identical(
+    names(as_tibble(x)),
+    c("if", "when", "n")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    c("if", "when", "n")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    c(".if", "when", "n")
+  )
+
+  x <- table("m" = c(1, 1, 1, 2, 2, 2), "n" = c(3, 4, 5, 3, 4, 5))
+
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    c("m", "n", "n")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    c("m", "n..2", "n..3")
+  )
+})
+
+test_that("as_tibble.ts() supports .name_repair", {
+  x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
+
+  expect_error(
+    names(as_tibble(x)),
+    error_column_must_be_named(1:2)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    rep("", 2)
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    paste0("...", 1:2)
+  )
+
+  x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = c("if", "when"))
+
+  expect_identical(
+    names(as_tibble(x)),
+    c("if", "when")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "minimal")),
+    c("if", "when")
+  )
+  expect_identical(
+    names(as_tibble(x, .name_repair = "syntactic")),
+    c(".if", "when")
+  )
+})
 
 test_that("as_tibble() can convert row names", {
   df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
