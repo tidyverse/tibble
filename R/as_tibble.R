@@ -35,11 +35,11 @@
 #' @param ... Other arguments passed on to individual methods.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
-#'   * `NULL`: remove row names.
-#'   * `NA`: keep row names. This the default, for compatibility, but a warning
-#'     is given if the input has row names.
+#'   * `NULL`: remove row names. This is the default.
+#'   * `NA`: keep row names.
 #'   * A string: the name of a new column. Existing rownames are transferred
 #'     into this column and the `row.names` attribute is deleted.
+#'  Read more in [rownames].
 
 #' @param _n,validate For compatibility only, do not use for new code.
 #' @export
