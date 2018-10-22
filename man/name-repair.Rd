@@ -104,11 +104,12 @@ with your names, you should take control of name repair.
 
 \code{syntactic} names are \code{unique} and syntactic, meaning they:
 \itemize{
+\item Are never empty (inherited from \code{unique}).
 \item Have no duplicates (inherited from \code{unique}).
 \item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
 characters.
 \item Start with a letter or start with the dot \code{.} not followed by a number.
-\item Are not a reserved word, e.g., \code{if} or \code{function} or \code{TRUE}.
+\item Are not a \link{reserved} word, e.g., \code{if} or \code{function} or \code{TRUE}.
 \item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number.
 }
 
