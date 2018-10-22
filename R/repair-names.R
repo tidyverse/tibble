@@ -7,7 +7,7 @@
 #'     package have names that are, at least, `minimal`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
 #'     (literally, no `""`s).
-#'     - Indexing by name works: `df[["name"]]` extracts exactly one element.
+#'     - All columns can be accessed by name via `df[["name"]]`.
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'     - Names work everywhere, without quoting: `df$name` and
 #'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.

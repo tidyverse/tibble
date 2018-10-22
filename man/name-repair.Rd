@@ -41,7 +41,7 @@ package have names that are, at least, \code{minimal}.
 \item \code{unique} names are \code{minimal}, have no duplicates, and are never empty
 (literally, no \code{""}s).
 \itemize{
-\item Indexing by name works: \code{df[["name"]]} extracts exactly one element.
+\item All columns can be accessed by name via \code{df[["name"]]}.
 }
 \item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
 \itemize{
