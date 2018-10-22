@@ -92,6 +92,7 @@ column_to_rownames <- function(.data, var = "rowname") {
     abort(error_unknown_names(var))
   }
 
+  .data <- as.data.frame(.data)
   rownames(.data) <- .data[[var]]
   .data[[var]] <- NULL
   .data

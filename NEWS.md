@@ -18,7 +18,13 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - `as.tibble()` and `as_data_frame()` are officially deprecated and not generic anymore, please use/implement `as_tibble()` (#111).
 
-- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
+- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Code that relies on tibbles keeping row names now will see:
+    - a different result when calling `rownames()` or `row.names()`,
+    - rows full of `NA` values when subsetting rows with with a character vector, e.g. `as_tibble(mtcars)["Mazda RX4", ]`.
+    
+    Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names. Packages that import _tibble_ can call `set_config()` in their `.onLoad()` function (#114).
+
+- `column_to_rownames()` now always coerces to a data frame, because row names are no longer supported in tibbles (#114).
 
 - The `print()` method prints a message if a tibble is missing the `"tbl"` class (#264).
 
