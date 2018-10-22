@@ -29,7 +29,7 @@
 #'   * `"syntactic"`: Make the names `unique` and syntactic
 #'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'     for names in the style of base R).
-#'   * A purrr-style anonymous function, see [as_function()]
+#'   * A purrr-style anonymous function, see [rlang::as_function()]
 #'
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
