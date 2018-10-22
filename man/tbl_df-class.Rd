@@ -27,7 +27,7 @@ Objects of class \code{tbl_df} have:
 \itemize{
 \item A \code{class} attribute of \code{c("tbl_df", "tbl", "data.frame")}.
 \item A base type of \code{"list"}, where each element of the list has the same
-\code{NROW()}.
+\code{\link[=NROW]{NROW()}}.
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
 \item A \code{row.names} attribute, included for compatibility with the base
@@ -50,8 +50,8 @@ must indicate how to resolve. Read more in \link{name-repair}.
 \item Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in \link{rownames}.
 \item Recycling only happens for a length 1 input.
-\item \code{df[j]} returns a tibble; it does not automatically extract the column
-inside. \code{df[ , j, drop = FALSE]} is the default.
+\item \code{df[, j]} returns a tibble; it does not automatically extract the column
+inside. \code{df[, j, drop = FALSE]} is the default.
 \item List-columns are expressly anticipated and do not require special tricks.
 \item There is no partial matching when \code{$} is used to index by name. \code{df$name}
 for a nonexistent name generates a warning.

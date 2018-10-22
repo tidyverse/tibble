@@ -25,7 +25,7 @@ just as an additional check.}
 \item \code{"syntactic"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
-\item A purrr-style anonymous function, see \code{\link[=as_function]{as_function()}}
+\item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
 See \link{name-repair} for more details on these terms and the strategies used
