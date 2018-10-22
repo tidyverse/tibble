@@ -116,17 +116,3 @@ format_v.tbl <- function(x){
 
 #' @export
 format_v.data.frame <- format_v.tbl
-
-test_df <- function(){
-  tidyr::nest(as_tibble(mtcars), -disp)
-}
-
-test_df_2 <- function(){
-  df <- tidyr::nest(as_tibble(mtcars), -cyl)
-  mods <- map(df$data, function(d){
-    lm(disp ~ drat, data = d)
-  })
-  df$mods <- mods
-  df
-}
-
