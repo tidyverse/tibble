@@ -100,7 +100,7 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  atomic <- (map_int(out, length) == 1L)
+  atomic <- map_lgl(x, is.atomic)
   out <- map_chr(out, collapse)
   out[!atomic] <- paste0("<", out[!atomic], ">")
   paste0("[", collapse(out), "]")
@@ -117,3 +117,26 @@ format_v.factor <- function(x) {
     format(x, trim = TRUE, justify = "none")
   }
 }
+
+#' @export
+format_v.tbl <- function(x){
+  type_out <- paste0('A ', new_pillar_type(x), ' ', nrow(x), ' x ', ncol(x))
+  vars <- collapse(names(x))
+  out <- paste0(type_out, ' vars: ', vars)
+}
+
+#' @export
+format_v.data.frame <- format_v.tbl
+
+test_df <- function(){
+  tidyr::nest(as_tibble(mtcars), -disp)
+}
+
+test_df_2 <- function(){
+  df <- tidyr::nest(as_tibble(mtcars), -cyl)
+  mods <- map(df$data, function(d){
+    lm(disp ~ drat, data = d)
+  })
+  df$mods <- mods
+}
+
