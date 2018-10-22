@@ -319,7 +319,7 @@ make_syntactic <- function(name) {
   ##   * turned its '.' suffixes to '.' prefixes
 
   regex <- paste0(
-    "^(?<leading_dots>[.]*)",
+    "^(?<leading_dots>[.]{0,2})",
     "(?<numbers>[0-9]*)",
     "(?<leftovers>[^0-9]??.*?$)"
   )
