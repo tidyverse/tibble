@@ -100,7 +100,6 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  #atomic <- map_lgl(x, rlang::is_atomic)
   is_df <- map_lgl(x, function(x){inherits(x, 'data.frame')})
   atomic <- (map_int(out, length) == 1L) & !is_df
   out <- map_chr(out, collapse)
