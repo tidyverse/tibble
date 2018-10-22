@@ -126,7 +126,7 @@ if (requireNamespace("bench", quietly = TRUE)) {
 }
 }
 \seealso{
-\code{\link[=tibble]{tibble()}} constructs a tibble from individual columnns. \code{\link[=enframe]{enframe()}}
+\code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
 converts a named vector to a tibble with a column of names and column of
 values. \link{name-repair} documents the details of name repair.
 }

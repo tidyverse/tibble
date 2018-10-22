@@ -26,7 +26,7 @@
 #' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your
 #' package's [.onLoad()]  function.
 #'
-#' @seealso [tibble()] constructs a tibble from individual columnns. [enframe()]
+#' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
 #'   converts a named vector to a tibble with a column of names and column of
 #'   values. [name-repair] documents the details of name repair.
 #'
