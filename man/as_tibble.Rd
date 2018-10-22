@@ -76,8 +76,8 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \details{
 \code{as_tibble()} is an S3 generic, with methods for:
 \itemize{
-\item \code{\link{tbl_df}}: Just passes input through.
-\item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method.
+\item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
+that implements tibble's treatment of \link{rownames}.
 \item list
 \item \code{\link[methods:`matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
