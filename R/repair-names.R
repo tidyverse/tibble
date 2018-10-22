@@ -69,7 +69,7 @@
 #'   * Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
 #'   * Start with a letter or start with the dot `.` not followed by a number.
-#'   * Are not a reserved word, e.g., `if` or `function` or `TRUE`.
+#'   * Are not a [reserved] word, e.g., `if` or `function` or `TRUE`.
 #'   * Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
 #' If a data frame has `syntactic` names, variable names can be used "as is" in
