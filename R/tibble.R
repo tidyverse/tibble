@@ -6,14 +6,14 @@
 #' with a couple notable differences:
 #'
 #'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in
-#'   addition to `data.frame`. This allows so-called "tibbles" to exhibit some
-#'   special behaviour, such as [enhanced printing][formatting]. Tibbles are
-#'   fully described in [`tbl_df`][tbl_df-class].
+#'     addition to `data.frame`. This allows so-called "tibbles" to exhibit some
+#'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
+#'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'   transforming the user's input. Character vectors are not coerced to factor.
-#'   Column names are not modified.
+#'     transforming the user's input. Character vectors are not coerced to
+#'     factor. Column names are not modified.
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
-#'   refer to columns created earlier in the call.
+#'     refer to columns created earlier in the call.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created elements. These arguments are
@@ -22,14 +22,14 @@
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
-#'   - `"minimal"`: No name repair or checks, beyond basic existence,
-#'   - `"unique"`: Make sure names are unique and not empty,
-#'   - `"check_unique"`: (default value), no name repair, but check they are
+#'   * `"minimal"`: No name repair or checks, beyond basic existence,
+#'   * `"unique"`: Make sure names are unique and not empty,
+#'   * `"check_unique"`: (default value), no name repair, but check they are
 #'     `unique`,
-#'   - `"syntactic"`: Make the names `unique` and syntactic
-#'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
-#'   for names in the style of base R).
-#'   - A purrr-style anonymous function, see [as_function()]
+#'   * `"syntactic"`: Make the names `unique` and syntactic
+#'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
+#'     for names in the style of base R).
+#'   * A purrr-style anonymous function, see [as_function()]
 #'
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.

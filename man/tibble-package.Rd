@@ -27,8 +27,8 @@ Tibble is the central data structure for the set of packages known as the
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for data
-science}
+\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+Science}
 }
 
 Resources on specific topics:

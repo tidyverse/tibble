@@ -7,14 +7,14 @@
 #' [base::data.frame()].
 #'
 #' `as_tibble()` is an S3 generic, with methods for:
-#' - [`tbl_df`]: Just passes input through.
-#' - [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method.
-#' - list
-#' - [`matrix`][methods::`matrix-class`], [`poly`][stats::poly()],
+#' * [`tbl_df`]: Just passes input through.
+#' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method.
+#' * list
+#' * [`matrix`][methods::`matrix-class`], [`poly`][stats::poly()],
 #'   [`ts`][stats::ts()], [`table`][base::table()]
-#' - Default: An atomic vector is first coerced to a list and, unlike
-#' [base::as.data.frame()], the returned tibble has one column per element.
-#' Other inputs are first coerced with [base::as.data.frame()].
+#' * Default: An atomic vector is first coerced to a list and, unlike
+#'   [base::as.data.frame()], the returned tibble has one column per element.
+#'   Other inputs are first coerced with [base::as.data.frame()].
 #'
 #' @section Row names:
 #' The default behavior is to silently remove row names.
@@ -35,11 +35,11 @@
 #' @param ... Other arguments passed on to individual methods.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
-#'   - `NULL`: remove row names.
-#'   - `NA`: keep row names. This the default, for compatibility, but a warning
-#'   is given if the input has row names.
-#'   - A string: the name of a new column. Existing rownames are transferred
-#'   into this column and the `row.names` attribute is deleted.
+#'   * `NULL`: remove row names.
+#'   * `NA`: keep row names. This the default, for compatibility, but a warning
+#'     is given if the input has row names.
+#'   * A string: the name of a new column. Existing rownames are transferred
+#'     into this column and the `row.names` attribute is deleted.
 
 #' @param _n,validate For compatibility only, do not use for new code.
 #' @export

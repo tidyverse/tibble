@@ -19,8 +19,8 @@
 #'
 #' General resources:
 #'   * Website for the tibble package: <https://tibble.tidyverse.org>
-#'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for data
-#'   science*
+#'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for Data
+#'     Science*
 #'
 #' Resources on specific topics:
 #'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]

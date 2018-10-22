@@ -3,9 +3,9 @@
 #' @description
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
-#'   an unnamed element is `""` and never `NA`.
+#'     an unnamed element is `""` and never `NA`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
-#'   (literally, no `""`s).
+#'     (literally, no `""`s).
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'
 #' `syntactic` implies `unique`, `unique` implies `minimal`. These levels are
@@ -55,11 +55,11 @@
 #' `..j` to any name that is `""` or a duplicate, where `j` is the position.
 #' Why?
 #' * An absolute position `j` is more helpful than numbering within the columns
-#' that share a name. Context: troubleshooting data import with lots of columns
-#' and dysfunctional names.
+#'   that share a name. Context: troubleshooting data import with lots of
+#'   columns and dysfunctional names.
 #' * We hypothesize that it's better have a "level playing field" when repairing
-#' names, i.e. if `foo` appears twice, they both get repaired, not just the
-#' second occurence.
+#'   names, i.e. if `foo` appears twice, they both get repaired, not just the
+#'   second occurence.
 #'
 #' Example:
 #' ```
@@ -80,12 +80,12 @@
 #' @section `syntactic` names:
 #'
 #' `syntactic` names are `unique` and syntactic, meaning they:
-#'   - Have no duplicates (inherited from `unique`).
-#'   - Consist of letters, numbers, and the dot `.` or underscore `_`
+#'   * Have no duplicates (inherited from `unique`).
+#'   * Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
-#'   - Start with a letter or start with the dot `.` not followed by a number.
-#'   - Are not a reserved word, e.g., `if` or `function` or `TRUE`.
-#'   - Are not `...`. Do not have the form `..i`, where `i` is a number.
+#'   * Start with a letter or start with the dot `.` not followed by a number.
+#'   * Are not a reserved word, e.g., `if` or `function` or `TRUE`.
+#'   * Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
 #' `syntactic` names are easy to use "as is" in code. They do not require
 #' quoting and work well with nonstandard evaluation, such as list indexing via
@@ -93,13 +93,13 @@
 #'
 #' There are many ways to fix a non-syntactic name. Here's how our logic
 #' compares to [base::make.names()] for a single name:
-#'   - Same: Definition of what is syntactically valid.
-#'   - Same: Invalid characters are replaced with `.`.
-#'   - Different: We always fix a name by prepending a `.`. [base::make.names()]
+#'   * Same: Definition of what is syntactically valid.
+#'   * Same: Invalid characters are replaced with `.`.
+#'   * Different: We always fix a name by prepending a `.`. [base::make.names()]
 #'     sometimes prefixes with `X` and at other times appends a `.`.
-#'   - Different: We treat `NA` and `""` the same: both become `.`.
+#'   * Different: We treat `NA` and `""` the same: both become `.`.
 #'     [base::make.names()] turns `NA` in `"NA."` and `""` into `"X"`.
-#'   - Different: We turn `...` into `....` and `..i` into `...i` (`i` is a
+#'   * Different: We turn `...` into `....` and `..i` into `...i` (`i` is a
 #'     number). [base::make.names()] does not modify `...` or `..i`, which could
 #'     be regarded as a bug (?).
 #'

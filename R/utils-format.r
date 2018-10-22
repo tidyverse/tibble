@@ -4,9 +4,9 @@
 #' One of the main features of the `tbl_df` class is the printing:
 #'
 #' * Tibbles only print as many rows and columns as fit on one screen,
-#' supplemented by a summary of the remaining rows and columns.
+#'   supplemented by a summary of the remaining rows and columns.
 #' * Tibble reveals the type of each column, which keeps the user informed about
-#' whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
+#'   whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
 #'
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly
 #' and setting arguments like `n` and `width`. More persistent control is
@@ -19,13 +19,13 @@
 #' objects. Used by the formatting workhorse `trunc_mat()` and, therefore,
 #' indirectly, by `print.tbl_df()` and `print.tbl()`.
 #'
-#' - `tibble.print_max`: Row number threshold: Maximum number of rows printed.
-#' Set to `Inf` to always print all rows.  Default: 20.
-#' - `tibble.print_min`: Number of rows printed if row number threshold is
-#' exceeded. Default: 10.
-#' - `tibble.width`: Output width. Default: `NULL` (use `width` option).
-#' - `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
-#' Default: 100.
+#' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
+#'   Set to `Inf` to always print all rows.  Default: 20.
+#' * `tibble.print_min`: Number of rows printed if row number threshold is
+#'   exceeded. Default: 10.
+#' * `tibble.width`: Output width. Default: `NULL` (use `width` option).
+#' * `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
+#'   Default: 100.
 #'
 #' @param x Object to format or print.
 #' @param ... Other arguments passed on to individual methods.

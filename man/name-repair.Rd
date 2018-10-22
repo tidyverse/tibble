@@ -91,8 +91,8 @@ There are many ways to make names \code{unique}. We append a suffix of the form
 Why?
 \itemize{
 \item An absolute position \code{j} is more helpful than numbering within the columns
-that share a name. Context: troubleshooting data import with lots of columns
-and dysfunctional names.
+that share a name. Context: troubleshooting data import with lots of
+columns and dysfunctional names.
 \item We hypothesize that it's better have a "level playing field" when repairing
 names, i.e. if \code{foo} appears twice, they both get repaired, not just the
 second occurence.

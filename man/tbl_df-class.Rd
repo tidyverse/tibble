@@ -31,8 +31,8 @@ Objects of class \code{tbl_df} have:
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
 \item A \code{row.names} attribute, included for compatibility with the base
-\link[base:data.frame]{data.frame class}. However, \code{row.names} are ignored by
-most tibble methods.
+\link[base:data.frame]{data.frame class}. However, \code{row.names} are ignored
+by most tibble methods.
 }
 }
 
@@ -45,8 +45,8 @@ modification:
 \itemize{
 \item Column data is not coerced. A character vector is not turned into a factor.
 \item Column names are not munged, although missing names are auto-populated.
-Empty and duplicated column names are strongly discouraged, but the user must
-indicate how to resolve. Read more in \link{name-repair}.
+Empty and duplicated column names are strongly discouraged, but the user
+must indicate how to resolve. Read more in \link{name-repair}.
 \item Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in \link{rownames}.
 \item Recycling only happens for a length 1 input.

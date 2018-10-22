@@ -25,12 +25,12 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' Objects of class `tbl_df` have:
 #' * A `class` attribute of `c("tbl_df", "tbl", "data.frame")`.
 #' * A base type of `"list"`, where each element of the list has the same
-#' `NROW()`.
+#'   `NROW()`.
 #' * A `names` attribute that is a character vector the same length as the
-#' underlying list.
+#'   underlying list.
 #' * A `row.names` attribute, included for compatibility with the base
-#' [`data.frame` class][base::data.frame()]. However, `row.names` are ignored by
-#' most tibble methods.
+#'   [`data.frame` class][base::data.frame()]. However, `row.names` are ignored
+#'   by most tibble methods.
 #'
 #' @section Behavior of `tbl_df`:
 #'
@@ -40,19 +40,19 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'
 #' * Column data is not coerced. A character vector is not turned into a factor.
 #' * Column names are not munged, although missing names are auto-populated.
-#' Empty and duplicated column names are strongly discouraged, but the user must
-#' indicate how to resolve. Read more in [name-repair].
+#'   Empty and duplicated column names are strongly discouraged, but the user
+#'   must indicate how to resolve. Read more in [name-repair].
 #' * Row names are not added and are strongly discouraged, in favor of storing
-#' that info as a column. Read about in [rownames].
+#'   that info as a column. Read about in [rownames].
 #' * Recycling only happens for a length 1 input.
 #' * `df[j]` returns a tibble; it does not automatically extract the column
-#' inside. `df[ , j, drop = FALSE]` is the default.
+#'   inside. `df[ , j, drop = FALSE]` is the default.
 #' * List-columns are expressly anticipated and do not require special tricks.
 #' * There is no partial matching when `$` is used to index by name. `df$name`
-#' for a nonexistent name generates a warning.
+#'   for a nonexistent name generates a warning.
 #' * Printing and inspection are a very high priority. The goal is to convey as
-#' much information as possible, in a concise way, even for large and complex
-#' tibbles. Read more in [formatting].
+#'   much information as possible, in a concise way, even for large and complex
+#'   tibbles. Read more in [formatting].
 #'
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class
