@@ -54,7 +54,7 @@
 #' as_tibble(1:3, .name_repair = "unique")
 #'
 #' # For list-like inputs, `as_tibble()` is considerably simpler than
-#' as.data.frame() and hence faster
+#' `as.data.frame()` and hence faster
 #' \dontrun{
 #' if (requireNamespace("bench", quietly = TRUE)) {
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
