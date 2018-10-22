@@ -309,10 +309,10 @@ make_syntactic <- function(name) {
   new_name <- make.names(name)
 
   X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
-  new_name[X_prefix] <- gsub("^X", "", new_name[X_prefix])
+  new_name[X_prefix] <- sub("^X", "", new_name[X_prefix])
 
   dot_suffix <- which(new_name == paste0(name, "."))
-  new_name[dot_suffix] <- gsub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
+  new_name[dot_suffix] <- sub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
   ## illegal characters have been replaced with '.' via make.names()
   ## however, we have:
   ##   * declined its addition of 'X' prefixes
@@ -321,14 +321,13 @@ make_syntactic <- function(name) {
   regex <- paste0(
     "^(?<leading_dots>[.]{0,2})",
     "(?<numbers>[0-9]*)",
-    "(?<leftovers>[^0-9]??.*?$)"
+    "(?<leftovers>[^0-9]?.*$)"
   )
 
   re <- re_match(new_name, pattern = regex)
-  needs_three_dots <- nchar(re$numbers) > 0 & nchar(re$leftovers) == 0
-  needs_two_dots   <- nchar(re$numbers) > 0 & nchar(re$leftovers) > 0
-  re$leading_dots[needs_three_dots] <- "..."
-  re$leading_dots[needs_two_dots]   <- ".."
+  needs_dots <- which(re$numbers != "")
+  needs_third_dot <- (re$leftovers[needs_dots] == "")
+  re$leading_dots[needs_dots] <- ifelse(needs_third_dot, "...", "..")
   new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
 
   new_name
