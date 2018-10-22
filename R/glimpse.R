@@ -100,7 +100,7 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  atomic <- map_lgl(x, is.atomic)
+  atomic <- map_lgl(x, rlang::is_atomic)
   out <- map_chr(out, collapse)
   out[!atomic] <- paste0("<", out[!atomic], ">")
   paste0("[", collapse(out), "]")
@@ -120,7 +120,7 @@ format_v.factor <- function(x) {
 
 #' @export
 format_v.tbl <- function(x){
-  type_out <- paste0('A ', new_pillar_type(x), ' ', nrow(x), ' x ', ncol(x))
+  type_out <- paste0('A ', new_pillar_type(x), ' [', nrow(x), ' x ', ncol(x), ']')
   vars <- collapse(names(x))
   out <- paste0(type_out, ' vars: ', vars)
 }
@@ -138,5 +138,6 @@ test_df_2 <- function(){
     lm(disp ~ drat, data = d)
   })
   df$mods <- mods
+  df
 }
 
