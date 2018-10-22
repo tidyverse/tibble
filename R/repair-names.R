@@ -64,6 +64,7 @@
 #' @section `syntactic` names:
 #'
 #' `syntactic` names are `unique` and syntactic, meaning they:
+#'   * Are never empty (inherited from `unique`).
 #'   * Have no duplicates (inherited from `unique`).
 #'   * Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
