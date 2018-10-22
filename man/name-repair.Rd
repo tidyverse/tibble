@@ -36,10 +36,18 @@ number.}
 tibble deals with a few levels of name repair:
 \itemize{
 \item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
-an unnamed element is \code{""} and never \code{NA}.
+an unnamed element is \code{""} and never \code{NA}. Tibbles created by the tibble
+package have names that are, at least, \code{minimal}.
 \item \code{unique} names are \code{minimal}, have no duplicates, and are never empty
 (literally, no \code{""}s).
+\itemize{
+\item Indexing by name works: \code{df[["name"]]} extracts exactly one element.
+}
 \item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
+\itemize{
+\item Names work everywhere, without quoting: \code{df$name} and
+\code{lm(name1 ~ name2, data = df)} and \code{dplyr::select(df, name)} all work.
+}
 }
 
 \code{syntactic} implies \code{unique}, \code{unique} implies \code{minimal}. These levels are
@@ -59,12 +67,6 @@ The "Life cycle" section explains the status of the existing functions
 \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of an
 unnamed element is \code{""} and never \code{NA}.
 
-\code{tbl_df} objects created by \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} have variable names
-that are \code{minimal}, at the very least.
-Why? General name repair can be be implemented more simply if the baseline
-strategy ensures that \code{names(x)} returns a character vector of the correct
-length.
-
 Examples:\preformatted{Original names of a vector with length 3: NULL
                            minimal names: "" "" ""
 
@@ -72,41 +74,25 @@ Examples:\preformatted{Original names of a vector with length 3: NULL
                            minimal names: "x" ""
 }
 
-Related: \code{\link[rlang:names2]{rlang::names2()}} returns the names of an object, after making them
-\code{minimal}.
+Request \code{.name_repair = "minimal"} to suppress almost all name munging. This
+is useful when the first row of a data source -- allegedly variable names --
+actually contains \emph{data} and the resulting tibble is destined for reshaping
+with, e.g., \code{tidyr::gather()}.
 }
 
 \section{\code{unique} names}{
 
 
 \code{unique} names are \code{minimal}, have no duplicates, and are never empty
-(literally, no \code{""}s).
-
-You usually want \code{unique} variable names in a data.frame, because they ensure
-that any variable can be identified, uniquely, by its name. Indexing by name
-works.
+(literally, no \code{""}s). If a data frame has \code{unique} names, you can index it
+by name, e.g., \code{df[["name"]]} works.
 
 There are many ways to make names \code{unique}. We append a suffix of the form
 \code{..j} to any name that is \code{""} or a duplicate, where \code{j} is the position.
-Why?
-\itemize{
-\item An absolute position \code{j} is more helpful than numbering within the columns
-that share a name. Context: troubleshooting data import with lots of
-columns and dysfunctional names.
-\item We hypothesize that it's better have a "level playing field" when repairing
-names, i.e. if \code{foo} appears twice, they both get repaired, not just the
-second occurence.
-}
 
 Example:\preformatted{Original names:    ""    "x"    "" "y"    "x"
   unique names: "..1" "x..2" "..3" "y" "x..5"
 }
-
-Why would you ever want \code{minimal} names, instead of \code{unique} or \code{syntactic}
-ones? Sometimes the first row of a data source -- allegedly variable names --
-actually contains \strong{data} and the resulting tibble will be reshaped with,
-e.g., \code{tidyr::gather()}. In this case, it is better to not munge the names at
-import.
 
 Pre-existing suffixes of the form \code{..j} are always stripped, prior to making
 names \code{unique}, i.e. reconstructing the suffixes. If this interacts poorly
@@ -126,29 +112,12 @@ characters.
 \item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number.
 }
 
-\code{syntactic} names are easy to use "as is" in code. They do not require
-quoting and work well with nonstandard evaluation, such as list indexing via
-\code{$} or in packages like dplyr and ggplot2.
+If a data frame has \code{syntactic} names, variable names can be used "as is" in
+code. They work well with nonstandard evaluation, e.g., \code{df$name} works.
 
-There are many ways to fix a non-syntactic name. Here's how our logic
-compares to \code{\link[base:make.names]{base::make.names()}} for a single name:
-\itemize{
-\item Same: Definition of what is syntactically valid.
-\item Same: Invalid characters are replaced with \code{.}.
-\item Different: We always fix a name by prepending a \code{.}. \code{\link[base:make.names]{base::make.names()}}
-sometimes prefixes with \code{X} and at other times appends a \code{.}.
-\item Different: We treat \code{NA} and \code{""} the same: both become \code{.}.
-\code{\link[base:make.names]{base::make.names()}} turns \code{NA} in \code{"NA."} and \code{""} into \code{"X"}.
-\item Different: We turn \code{...} into \code{....} and \code{..i} into \code{...i} (\code{i} is a
-number). \code{\link[base:make.names]{base::make.names()}} does not modify \code{...} or \code{..i}, which could
-be regarded as a bug (?).
-}
-
-Additionally, when dealing with the vector of names for a tibble, we choose
-to implement \code{syntactic} names as an extension of \code{unique}, i.e. \code{syntactic}
-implies unique. Why? Because the need for syntactic names is strongly
-associated with the need for uniqueness and this makes the name repair system
-simpler.
+Tibble has a different method of making names syntactic than
+\code{\link[base:make.names]{base::make.names()}}. In general, tibble prepends one or more dots \code{.} until
+the name is syntactic.
 
 Examples:\preformatted{ Original names:     ""    "x"    NA     "x"
 syntactic names: "...1" "x..2" "...3" "x..4"
@@ -214,4 +183,8 @@ tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 ## the names attibute will be non-NULL, with "" as the default element
 df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 names(df)
+}
+\seealso{
+\code{\link[rlang:names2]{rlang::names2()}} returns the names of an object, after making them
+\code{minimal}.
 }
