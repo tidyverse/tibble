@@ -21,6 +21,14 @@ same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components
 defining a component, you can refer to components created earlier in the
 call. \code{lst()} also generates missing names automatically.
 }
+\section{Life cycle}{
+
+The \code{lst()} function is in the \href{https://www.tidyverse.org/lifecycle/#questioning}{questioning stage}. It is essentially
+\code{\link[rlang:list2]{rlang::list2()}}, but with a couple features copied from \code{\link[=tibble]{tibble()}}. It's not
+clear that a function for creating lists belongs in the tibble package.
+Consider using \code{\link[rlang:list2]{rlang::list2()}} instead.
+}
+
 \examples{
 # the value of n can be used immediately in the definition of x
 lst(n = 5, x = runif(n))

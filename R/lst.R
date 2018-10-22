@@ -7,6 +7,13 @@
 #' defining a component, you can refer to components created earlier in the
 #' call. `lst()` also generates missing names automatically.
 #'
+#' @section Life cycle:
+#' The `lst()` function is in the [questioning
+#' stage](https://www.tidyverse.org/lifecycle/#questioning). It is essentially
+#' [rlang::list2()], but with a couple features copied from [tibble()]. It's not
+#' clear that a function for creating lists belongs in the tibble package.
+#' Consider using [rlang::list2()] instead.
+#'
 #' @inheritParams tibble
 #' @return A named list.
 #' @export
