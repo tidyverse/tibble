@@ -79,7 +79,7 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
 \item list
-\item \code{\link[methods:`matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
+\item \code{\link[methods:matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: An atomic vector is first coerced to a list and, unlike
 \code{\link[base:as.data.frame]{base::as.data.frame()}}, the returned tibble has one column per element.

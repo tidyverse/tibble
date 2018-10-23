@@ -10,7 +10,7 @@
 #' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
 #'   that implements tibble's treatment of [rownames].
 #' * list
-#' * [`matrix`][methods::`matrix-class`], [`poly`][stats::poly()],
+#' * [`matrix`][methods::matrix-class], [`poly`][stats::poly()],
 #'   [`ts`][stats::ts()], [`table`][base::table()]
 #' * Default: An atomic vector is first coerced to a list and, unlike
 #'   [base::as.data.frame()], the returned tibble has one column per element.
