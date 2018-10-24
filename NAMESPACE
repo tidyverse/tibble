@@ -3,6 +3,7 @@
 S3method("$",tbl_df)
 S3method("[",tbl_df)
 S3method("[[",tbl_df)
+S3method("names<-",tbl_df)
 S3method("row.names<-",tbl_df)
 S3method(as.data.frame,tbl_df)
 S3method(as_tibble,"NULL")
