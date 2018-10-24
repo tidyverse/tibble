@@ -33,10 +33,16 @@
 
 <meta property="og:description" content="tibble deals with a few levels of name repair:
 minimal names exist. The names attribute is not NULL. The name of
-an unnamed element is &quot;&quot; and never NA.
+an unnamed element is &quot;&quot; and never NA. Tibbles created by the tibble
+package have names that are, at least, minimal.
 unique names are minimal, have no duplicates, and are never empty
 (literally, no &quot;&quot;s).
+All columns can be accessed by name via df[[&quot;name&quot;]].
+
 syntactic names are unique and syntactic (see Details for more).
+Names work everywhere, without quoting: df$name and
+lm(name1 ~ name2, data = df) and dplyr::select(df, name) all work.
+
 " />
 
 <meta property="og:description" content="syntactic implies unique, unique implies minimal. These levels are
@@ -143,10 +149,16 @@ tidy_names(), set_tidy_names(), and repair_names()." />
     
     <p>tibble deals with a few levels of name repair:</p><ul>
 <li><p><code>minimal</code> names exist. The <code>names</code> attribute is not <code>NULL</code>. The name of
-an unnamed element is <code>""</code> and never <code>NA</code>.</p></li>
+an unnamed element is <code>""</code> and never <code>NA</code>. Tibbles created by the tibble
+package have names that are, at least, <code>minimal</code>.</p></li>
 <li><p><code>unique</code> names are <code>minimal</code>, have no duplicates, and are never empty
-(literally, no <code>""</code>s).</p></li>
-<li><p><code>syntactic</code> names are <code>unique</code> and syntactic (see Details for more).</p></li>
+(literally, no <code>""</code>s).</p><ul>
+<li><p>All columns can be accessed by name via <code>df[["name"]]</code>.</p></li>
+</ul></li>
+<li><p><code>syntactic</code> names are <code>unique</code> and syntactic (see Details for more).</p><ul>
+<li><p>Names work everywhere, without quoting: <code>df$name</code> and
+<code>lm(name1 ~ name2, data = df)</code> and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select(df, name)</a></code> all work.</p></li>
+</ul></li>
 </ul>
 
     <p><code>syntactic</code> implies <code>unique</code>, <code>unique</code> implies <code>minimal</code>. These levels are
@@ -175,7 +187,9 @@ that are at least <code>minimal</code>.</p>
     </tr>
     <tr>
       <th>syntactic</th>
-      <td><p>Should names be made syntactically valid via <code>make.names()</code>?</p></td>
+      <td><p>Should names be made syntactically valid? If <code>FALSE</code>, uses
+same logic as <code>.name_repair = "unique"</code>. If <code>TRUE</code>, uses same logic as
+<code>.name_repair = "syntactic"</code>.</p></td>
     </tr>
     <tr>
       <th>quiet</th>
@@ -205,68 +219,53 @@ number.</p></td>
     
     <p><code>minimal</code> names exist. The <code>names</code> attribute is not <code>NULL</code>. The name of an
 unnamed element is <code>""</code> and never <code>NA</code>.</p>
-<p><code>tbl_df</code> objects created by <code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> have variable names
-that are <code>minimal</code>, at the very least.
-Why? General name repair can be be implemented more simply if the baseline
-strategy ensures that <code>names(x)</code> returns a character vector of the correct
-length.</p>
 <p>Examples:</p><pre>Original names of a vector with length 3: NULL
                            minimal names: "" "" ""
     Original names: "x" NA
                            minimal names: "x" ""
 </pre>
-    <p>Related: <code><a href='http://www.rdocumentation.org/packages/rlang/topics/names2'>rlang::names2()</a></code> returns the names of an object, after making them
-<code>minimal</code>.</p>
+    <p>Request <code>.name_repair = "minimal"</code> to suppress almost all name munging. This
+is useful when the first row of a data source -- allegedly variable names --
+actually contains <em>data</em> and the resulting tibble is destined for reshaping
+with, e.g., <code><a href='http://www.rdocumentation.org/packages/tidyr/topics/gather'>tidyr::gather()</a></code>.</p>
     
     <h2 class="hasAnchor" id="unique-names"><a class="anchor" href="#unique-names"></a><code>unique</code> names</h2>
 
     
     <p><code>unique</code> names are <code>minimal</code>, have no duplicates, and are never empty
-(literally, no <code>""</code>s).</p>
-<p>You usually want <code>unique</code> variable names in a data.frame, because they ensure
-that any variable can be identified, uniquely, by its name. Indexing by name
-works.</p>
+(literally, no <code>""</code>s). If a data frame has <code>unique</code> names, you can index it
+by name, e.g., <code>df[["name"]]</code> works.</p>
 <p>There are many ways to make names <code>unique</code>. We append a suffix of the form
-<code>..j</code> to any name that is <code>""</code> or a duplicate, where <code>j</code> is the position.
-Why?</p><ul>
-<li><p>An absolute position <code>j</code> is more helpful than numbering within the columns
-that share a name. Context: troubleshooting data import with lots of columns
-and dysfunctional names.</p></li>
-<li><p>We hypothesize that it's better have a "level playing field" when repairing
-names, i.e. if <code>foo</code> appears twice, they both get repaired, not just the
-second occurence.</p></li>
-</ul>
-    <p>Example:</p><pre>Original names:    ""    "x"    "" "y"    "x"
+<code>..j</code> to any name that is <code>""</code> or a duplicate, where <code>j</code> is the position.</p>
+<p>Example:</p><pre>Original names:    ""    "x"    "" "y"    "x"
   unique names: "..1" "x..2" "..3" "y" "x..5"
 </pre>
-    <p>Why would you ever want <code>minimal</code> names, instead of <code>unique</code> or <code>syntactic</code>
-ones? Sometimes the first row of a data source -- allegedly variable names --
-actually contains <strong>data</strong> and the resulting tibble will be reshaped with,
-e.g., <code><a href='http://www.rdocumentation.org/packages/tidyr/topics/gather'>tidyr::gather()</a></code>. In this case, it is better to not munge the names at
-import.</p>
-<p>Pre-existing suffixes of the form <code>..j</code> are always stripped, prior to making
+    <p>Pre-existing suffixes of the form <code>..j</code> are always stripped, prior to making
 names <code>unique</code>, i.e. reconstructing the suffixes. If this interacts poorly
 with your names, you should take control of name repair.</p>
     
     <h2 class="hasAnchor" id="syntactic-names"><a class="anchor" href="#syntactic-names"></a><code>syntactic</code> names</h2>
 
     
-    <p><code>syntactic</code> names are <code>unique</code> and syntactic (see <code>make.names()</code>), meaning
-they:</p><ul>
+    <p><code>syntactic</code> names are <code>unique</code> and syntactic, meaning they:</p><ul>
+<li><p>Are never empty (inherited from <code>unique</code>).</p></li>
 <li><p>Have no duplicates (inherited from <code>unique</code>).</p></li>
 <li><p>Consist of letters, numbers, and the dot <code>.</code> or underscore <code>_</code>
 characters.</p></li>
-<li><p>Start with a letter or the dot <code>.</code>, not followed by a number.</p></li>
-<li><p>Not a reserved word.</p></li>
+<li><p>Start with a letter or start with the dot <code>.</code> not followed by a number.</p></li>
+<li><p>Are not a reserved word, e.g., <code>if</code> or <code>function</code> or <code>TRUE</code>.</p></li>
+<li><p>Are not <code>...</code>. Do not have the form <code>..i</code>, where <code>i</code> is a number.</p></li>
 </ul>
-    <p><code>syntactic</code> names are easy to use "as is" in code. They do not require
-quoting and work well with nonstandard evaluation, such as list indexing via
-<code>$</code> or in packages like dplyr and ggplot2.</p>
-<p>There are many ways to make names <code>syntactic</code>. For example, we choose to
-define <code>syntactic</code> names as an extension of <code>unique</code>, i.e. <code>syntactic</code>
-implies unique. Why? Because the need for syntactic names is strongly
-associated with the need for uniqueness and this makes the name repair system
-simpler.</p>
+    <p>If a data frame has <code>syntactic</code> names, variable names can be used "as is" in
+code. They work well with nonstandard evaluation, e.g., <code>df$name</code> works.</p>
+<p>Tibble has a different method of making names syntactic than
+<code><a href='http://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code>. In general, tibble prepends one or more dots <code>.</code> until
+the name is syntactic.</p>
+<p>Examples:</p><pre> Original names:     ""    "x"    NA     "x"
+syntactic names: "...1" "x..2" "...3" "x..4"
+    Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
+ syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+</pre>
     
     <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
 
@@ -289,6 +288,11 @@ set_tidy_names(df, syntactic = FALSE)
 df &lt;- tibble(...)
 set_tidy_names(df, syntactic = TRUE)
 </pre>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/names2.html'>rlang::names2()</a></code> returns the names of an object, after making them
+<code>minimal</code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -347,6 +351,8 @@ set_tidy_names(df, syntactic = TRUE)
       <li><a href="#syntactic-names"><code>syntactic</code> names</a></li>
 
       <li><a href="#life-cycle">Life cycle</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
