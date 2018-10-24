@@ -15,11 +15,14 @@ test_that("preserves col names", {
   expect_equal(names(out), c("a", "b"))
 })
 
-test_that("creates col names", {
+test_that("creates col names with name repair", {
   x <- matrix(1:4, nrow = 2)
 
-  out <- as_tibble(x)
-  expect_equal(names(out), c("V1", "V2"))
+  out <- as_tibble(x, .name_repair = "unique")
+  expect_equal(names(out), c("..1", "..2"))
+
+  out <- as_tibble(x, .name_repair = "syntactic")
+  expect_equal(names(out), c("...1", "...2"))
 })
 
 test_that("preserves attributes except dim and names", {
@@ -103,7 +106,7 @@ test_that("converting from matrix supports storing row names in a column", {
 test_that("converting from matrix throws an error if user turns missing row names into column", {
   x <- matrix(1:30, 6, 5)
   expect_error(
-    as_tibble(x, rownames = "id"),
+    as_tibble(x, rownames = "id", .name_repair = "minimal"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
   )

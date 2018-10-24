@@ -189,7 +189,7 @@ as_tibble.matrix <- function(x, ...) {
 
 #' @export
 as_tibble.poly <- function(x, ...) {
-  m <- matrixToDataFrame(x)
+  m <- matrixToDataFrame(unclass(x))
   colnames(m) <- colnames(x)
   as_tibble(m, ...)
 }
