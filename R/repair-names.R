@@ -222,17 +222,25 @@ set_syntactic_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-check_minimal <- function(name) {
+check_names_non_null <- function(name) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
   }
+  invisible(name)
+}
 
+check_names_non_na <- function(name) {
   bad_name <- which(is.na(name))
   if (has_length(bad_name)) {
     abort(error_column_must_be_named(bad_name))
   }
 
   invisible(name)
+}
+
+check_minimal <- function(name) {
+  check_names_non_null(name)
+  check_names_non_na(name)
 }
 
 check_minimal_names <- function(x) {
