@@ -141,8 +141,8 @@ format.tbl_df <- format.tbl
     } else {
       result <- x
     }
-    attr(result, "row.names") <- .set_row_names(nr)
-    return(set_tibble_class(result))
+
+    return(vec_restore_tbl_df(set_tibble_class(result, nr), x))
   }
 
   # First, subset columns
@@ -184,8 +184,7 @@ format.tbl_df <- format.tbl
     }
   }
 
-  attr(result, "row.names") <- .set_row_names(nr)
-  set_tibble_class(result)
+  vec_restore_tbl_df(set_tibble_class(result, nr), x)
 }
 
 subset_rows <- function(x, i) {
@@ -194,4 +193,15 @@ subset_rows <- function(x, i) {
   } else {
     x[i]
   }
+}
+
+# TODO: Change to vec_restore.tbl_df() when vctrs is available
+vec_restore_tbl_df <- function(x, to) {
+  # Copy attribute, preserving existing names & recreating rownames
+  attr_to <- attributes(to)
+  attr_to[["names"]] <- names(x)
+  attr_to[["row.names"]] <- .set_row_names(NROW(x))
+  attributes(x) <- attr_to
+
+  x
 }

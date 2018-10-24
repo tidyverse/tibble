@@ -116,10 +116,12 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
   }
 
   x <- set_repaired_names(x, .name_repair)
-  x <- check_valid_cols(x)
+  check_valid_cols(x)
+  x[] <- map(x, strip_dim)
   recycle_columns(x, .rows)
 }
 
+# TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
 check_valid_cols <- function(x) {
   names_x <- names2(x)
   is_xd <- which(!map_lgl(x, is_1d_or_2d))
@@ -133,7 +135,7 @@ check_valid_cols <- function(x) {
     abort(error_time_column_must_be_posixct(names_x[posixlt]))
   }
 
-  x
+  invisible(x)
 }
 
 is_1d_or_2d <- function(x) {
@@ -147,7 +149,7 @@ recycle_columns <- function(x, .rows) {
 
   # Shortcut if all columns have the requested or implied length
   different_len <- which(lengths != nrow)
-  if (is_empty(different_len)) return(new_valid_tibble(x, nrow))
+  if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
     abort(error_inconsistent_cols(.rows, names(x), lengths, "`.rows` argument"))
@@ -158,7 +160,7 @@ recycle_columns <- function(x, .rows) {
     x[short] <- expand_vecs(x[short], nrow)
   }
 
-  new_valid_tibble(x, nrow)
+  new_tibble(x, nrow = nrow, subclass = NULL)
 }
 
 guess_nrow <- function(lengths, .rows) {
