@@ -37,11 +37,11 @@ tibble deals with a few levels of name repair:
 \itemize{
 \item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
 an unnamed element is \code{""} and never \code{NA}. Tibbles created by the tibble
-package will have names that are, at least, \code{minimal}.
+package have names that are, at least, \code{minimal}.
 \item \code{unique} names are \code{minimal}, have no duplicates, and are never empty
 (literally, no \code{""}s).
 \itemize{
-\item Indexing by name works: \code{df[["name"]]} extracts exactly one element.
+\item All columns can be accessed by name via \code{df[["name"]]}.
 }
 \item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
 \itemize{
@@ -104,11 +104,12 @@ with your names, you should take control of name repair.
 
 \code{syntactic} names are \code{unique} and syntactic, meaning they:
 \itemize{
+\item Are never empty (inherited from \code{unique}).
 \item Have no duplicates (inherited from \code{unique}).
 \item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
 characters.
 \item Start with a letter or start with the dot \code{.} not followed by a number.
-\item Are not a reserved word, e.g., \code{if} or \code{function} or \code{TRUE}.
+\item Are not a \link{reserved} word, e.g., \code{if} or \code{function} or \code{TRUE}.
 \item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number.
 }
 

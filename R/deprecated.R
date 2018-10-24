@@ -10,9 +10,11 @@ data_frame <- function(...) {
   tibble(!!!quos(...))
 }
 
-#' Use [quasiquotation] instead of `tibble_()` and `data_frame_()`.
+#' @description
+#' Use [quasiquotation] instead of `tibble_()`, `data_frame_()`, and `lst_()`.
 #'
 #' @export
+#' @keywords internal
 #' @rdname deprecated
 tibble_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())
@@ -23,8 +25,16 @@ tibble_ <- function(xs) {
 #' @rdname deprecated
 data_frame_ <- tibble_
 
+#' @export
+#' @rdname deprecated
+lst_ <- function(xs) {
+  xs <- compat_lazy_dots(xs, caller_env())
+  lst(!!!xs)
+}
+
 #' @description
-#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`, but mind the new signature and semantics.
+#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`, but mind the
+#' new signature and semantics.
 #'
 #' @export
 #' @rdname deprecated

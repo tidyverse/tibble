@@ -3,11 +3,11 @@
 #' @description
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
-#'   an unnamed element is `""` and never `NA`. Tibbles created by the tibble
-#'   package will have names that are, at least, `minimal`.
+#'     an unnamed element is `""` and never `NA`. Tibbles created by the tibble
+#'     package have names that are, at least, `minimal`.
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
-#'   (literally, no `""`s).
-#'     - Indexing by name works: `df[["name"]]` extracts exactly one element.
+#'     (literally, no `""`s).
+#'     - All columns can be accessed by name via `df[["name"]]`.
 #'   * `syntactic` names are `unique` and syntactic (see Details for more).
 #'     - Names work everywhere, without quoting: `df$name` and
 #'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.
@@ -64,12 +64,13 @@
 #' @section `syntactic` names:
 #'
 #' `syntactic` names are `unique` and syntactic, meaning they:
-#'   - Have no duplicates (inherited from `unique`).
-#'   - Consist of letters, numbers, and the dot `.` or underscore `_`
+#'   * Are never empty (inherited from `unique`).
+#'   * Have no duplicates (inherited from `unique`).
+#'   * Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
-#'   - Start with a letter or start with the dot `.` not followed by a number.
-#'   - Are not a reserved word, e.g., `if` or `function` or `TRUE`.
-#'   - Are not `...`. Do not have the form `..i`, where `i` is a number.
+#'   * Start with a letter or start with the dot `.` not followed by a number.
+#'   * Are not a [reserved] word, e.g., `if` or `function` or `TRUE`.
+#'   * Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
 #' If a data frame has `syntactic` names, variable names can be used "as is" in
 #' code. They work well with nonstandard evaluation, e.g., `df$name` works.

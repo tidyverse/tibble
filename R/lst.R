@@ -1,15 +1,43 @@
-#' @include tibble.R
+#' Build a list
 #'
 #' @description
 #'
-#' `lst()` is similar to [list()], but like `tibble()`, it
-#' evaluates its arguments lazily and in order, and automatically adds names.
+#' `lst()` constructs a list, similar to [base::list()], but with some of the
+#' same features as [tibble()]. `lst()` builds components sequentially. When
+#' defining a component, you can refer to components created earlier in the
+#' call. `lst()` also generates missing names automatically.
 #'
-#' `lst_()` uses lazy evaluation and is deprecated. New code should use `lst()`
-#' with [quasiquotation].
+#' @section Life cycle:
+#' The `lst()` function is in the [questioning
+#' stage](https://www.tidyverse.org/lifecycle/#questioning). It is essentially
+#' [rlang::list2()], but with a couple features copied from [tibble()]. It's not
+#' clear that a function for creating lists belongs in the tibble package.
+#' Consider using [rlang::list2()] instead.
 #'
+#' @inheritParams tibble
+#' @return A named list.
 #' @export
-#' @rdname tibble
+#' @examples
+#' # the value of n can be used immediately in the definition of x
+#' lst(n = 5, x = runif(n))
+#'
+#' # missing names are constructed from user's input
+#' lst(1:3, z = letters[4:6], runif(3))
+#'
+#' a <- 1:3
+#' b <- letters[4:6]
+#' lst(a, b)
+#'
+#' # pre-formed quoted expressions can be used with lst() and then
+#' # unquoted (with !!) or unquoted and spliced (with !!!)
+#' n1 <- 2
+#' n2 <- 3
+#' n_stuff <- quote(n1 + n2)
+#' x_stuff <- quote(seq_len(n))
+#' lst(!!!list(n = n_stuff, x = x_stuff))
+#' lst(n = !!n_stuff, x = !!x_stuff)
+#' lst(n = 4, x = !!x_stuff)
+#' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
   lst_quos(xs)
@@ -63,12 +91,4 @@ expand_lst <- function(output, i) {
 expand_vecs <- function(x, length) {
   ones <- rep(1L, length)
   map(x, `[`, ones)
-}
-
-#' @export
-#' @usage NULL
-#' @rdname tibble
-lst_ <- function(xs) {
-  xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!!xs)
 }

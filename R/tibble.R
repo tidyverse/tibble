@@ -1,36 +1,46 @@
-#' Build a data frame or list
+#' Build a data frame
 #'
 #' @description
-#' `tibble()` is a trimmed down version of [data.frame()] that:
 #'
-#' * Never coerces inputs (i.e. strings stay as strings!).
-#' * Never adds `row.names`.
-#' * Only recycles length 1 inputs.
-#' * Automatically adds column names.
-#' * Doesn't munge column names.
-#' * Evaluates its arguments lazily and in order.
-#' * Adds `tbl_df` class to output.
+#' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
+#' with a couple notable differences:
+#'
+#'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in
+#'     addition to `data.frame`. This allows so-called "tibbles" to exhibit some
+#'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
+#'     fully described in [`tbl_df`][tbl_df-class].
+#'   * `tibble()` is much lazier than [base::data.frame()] in terms of
+#'     transforming the user's input. Character vectors are not coerced to
+#'     factor. Column names are not modified.
+#'   * `tibble()` builds columns sequentially. When defining a column, you can
+#'     refer to columns created earlier in the call.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.  These arguments are
-#'   processed with [rlang::quos()] and support unquote via `!!` and
+#'   so you can refer to previously created elements. These arguments are
+#'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
-#'   - `"minimal"`: No name repair or checks, beyond basic existence,
-#'   - `"unique"`: Make sure names are unique and not empty,
-#'   - `"check_unique"`: (default value), no name repair, but check they are `unique`,
-#'   - `"syntactic"`: Make the names `unique` and syntactic
-#'   - a function: apply custom name repair (e.g., `.name_repair = make.names`
-#'   for names in the style of base R).
-#'   - A purrr-style anonymous function, see [as_function()]
+#'   * `"minimal"`: No name repair or checks, beyond basic existence,
+#'   * `"unique"`: Make sure names are unique and not empty,
+#'   * `"check_unique"`: (default value), no name repair, but check they are
+#'     `unique`,
+#'   * `"syntactic"`: Make the names `unique` and syntactic
+#'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
+#'     for names in the style of base R).
+#'   * A purrr-style anonymous function, see [rlang::as_function()]
 #'
 #'   See [name-repair] for more details on these terms and the strategies used
 #'   to enforce them.
 #'
-#' @seealso [as_tibble()] to turn an existing list into a data frame,
-#'   [name-repair] for more detail on name repair.
+#' @return A tibble, which is a colloquial term for an object of class
+#'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
+#'   frame, i.e. it has class `data.frame`.
+#' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
+#'   `enframe()` to convert a named vector into tibble. Name repair is detailed
+#'   in [name-repair]. [rlang::list2()] provides more details on tidy dots
+#'   semantics, i.e. exactly how [quasiquotation] works for the `...` argument.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:
@@ -102,13 +112,6 @@
 #' # You can splice-unquote a list of quosures and expressions:
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
-#' # lst() behaves very similarly, without restriction on the length
-#' # of the individual elements:
-#' lst(n = 5, x = runif(n))
-#'
-#' lst(!!!list(n = rlang::quo(2 + 3), y = quote(runif(n))))
-#'
-#' @aliases tbl_df-class
 tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
