@@ -14,8 +14,9 @@
 #' adds a column at the start of the dataframe of ascending sequential row
 #' ids starting at 1. Note that this will remove any existing row names.
 #'
-#' In the printed output, the presence of row names is indicated by a star just
-#' above the row numbers.
+#' @return `column_to_rownames()` always returns a data frame.
+#'   `has_rownames()` returns a scalar logical.
+#'   All other functions return an object of the same class as the input.
 #'
 #' @param .data A data frame.
 #' @param var Name of column to use for rownames.
@@ -28,7 +29,7 @@
 #'
 #' mtcars_tbl <- as_tibble(rownames_to_column(mtcars))
 #' mtcars_tbl
-#' head(column_to_rownames(as.data.frame(mtcars_tbl)))
+#' head(column_to_rownames(mtcars_tbl))
 #' @name rownames
 NULL
 
