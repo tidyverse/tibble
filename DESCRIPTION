@@ -21,7 +21,7 @@ Imports:
     methods,
     pillar (>= 1.2.3.9002),
     pkgconfig,
-    rlang (>= 0.2.2),
+    rlang (>= 0.3.0),
     utils
 Suggests: 
     bench,
