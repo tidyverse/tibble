@@ -91,7 +91,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
-  result <- as_tibble(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
+  result <- as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
 
   if (is.null(rownames)) {
     result
@@ -182,17 +182,23 @@ guess_nrow <- function(lengths, .rows) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ...) {
-  as_tibble(matrixToDataFrame(x), ...)
+  m <- matrixToDataFrame(x)
+  colnames(m) <- colnames(x)
+  as_tibble(m, ...)
 }
 
 #' @export
 as_tibble.poly <- function(x, ...) {
-  as_tibble(unclass(x), ...)
+  m <- matrixToDataFrame(x)
+  colnames(m) <- colnames(x)
+  as_tibble(m, ...)
 }
 
 #' @export
 as_tibble.ts <- function(x, ...) {
-  as_tibble(as.data.frame(x), ...)
+  df <- as.data.frame(x)
+  colnames(df) <- colnames(x)
+  as_tibble(df, ...)
 }
 
 #' @export
@@ -202,7 +208,11 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
   if (!missing(`_n`)) {
     warn("Please pass `n` as a named argument to `as_tibble.table()`.")
   }
-  as_tibble(as.data.frame(x, responseName = n, stringsAsFactors = FALSE), ...)
+
+  df <- as.data.frame(x, stringsAsFactors = FALSE)
+  names(df) <- c(names2(dimnames(x)), n)
+
+  as_tibble(df, ...)
 }
 
 #' @export
