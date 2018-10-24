@@ -3,9 +3,9 @@
 \name{new_tibble}
 \alias{new_tibble}
 \alias{validate_tibble}
-\title{Constructor and validator}
+\title{Tibble constructor and validator}
 \usage{
-new_tibble(x, ..., nrow = NULL, subclass = NULL)
+new_tibble(x, ..., nrow, subclass = NULL)
 
 validate_tibble(x)
 }
@@ -36,6 +36,8 @@ runs without raising an error.
 For \code{new_tibble()}, \code{x} must be a list.
 The \code{...} argument allows adding more attributes to the subclass.
 An \code{nrow} argument is required.
+This should be an integer of length 1, and every element of the list \code{x} should have \code{\link[=NROW]{NROW()}} equal to this value.
+(But this is not checked by the constructor). This takes the place of the "row.names" attribute in a data frame.
 \code{x} must have names (or be empty),
 but the names are not checked for correctness.
 }

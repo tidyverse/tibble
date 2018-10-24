@@ -195,6 +195,7 @@ subset_rows <- function(x, i) {
   }
 }
 
+# TODO: Change to vec_restore.tbl_df() when vctrs is available
 vec_restore_tbl_df <- function(x, to) {
   # Copy attribute, preserving existing names & recreating rownames
   attr_to <- attributes(to)

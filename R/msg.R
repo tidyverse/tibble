@@ -226,5 +226,5 @@ error_name_repair_arg <- function() {
 }
 
 error_new_tibble_needs_nrow <- function() {
-  "Must pass a non-NULL `nrow` argument to `new_tibble()`."
+  "Must pass a scalar integer as `nrow` argument to `new_tibble()`."
 }

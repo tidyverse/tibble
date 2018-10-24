@@ -422,6 +422,6 @@ test_that("error_name_repair_arg()", {
 test_that("error_new_tibble_needs_nrow()", {
   expect_equal(
     error_new_tibble_needs_nrow(),
-    "Must pass a non-NULL `nrow` argument to `new_tibble()`."
+    "Must pass a scalar integer as `nrow` argument to `new_tibble()`."
   )
 })

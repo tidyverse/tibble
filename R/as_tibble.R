@@ -121,6 +121,7 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
   recycle_columns(x, .rows)
 }
 
+# TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
 check_valid_cols <- function(x) {
   names_x <- names2(x)
   is_xd <- which(!map_lgl(x, is_1d_or_2d))

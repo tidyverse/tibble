@@ -1,4 +1,4 @@
-#' Constructor and validator
+#' Tibble constructor and validator
 #'
 #' @description
 #' Creates or validates a subclass of a tibble.
@@ -27,7 +27,7 @@
 #'
 #' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
-new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
+new_tibble <- function(x, ..., nrow, subclass = NULL) {
   #' @section Construction:
   #'
   #' For `new_tibble()`, `x` must be a list.
@@ -41,7 +41,12 @@ new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
   x <- update_tibble_attrs(x, ...)
 
   #' An `nrow` argument is required.
-  if (is.null(nrow)) {
+  if (missing(nrow)) {
+    abort(error_new_tibble_needs_nrow())
+  }
+  #' This should be an integer of length 1, and every element of the list `x` should have [NROW()] equal to this value.
+  #' (But this is not checked by the constructor). This takes the place of the "row.names" attribute in a data frame.
+  if (!is_integerish(nrow, 1)) {
     abort(error_new_tibble_needs_nrow())
   }
 
