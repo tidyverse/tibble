@@ -3,9 +3,13 @@
 \name{tibble_row}
 \alias{tibble_row}
 \alias{wrap_non_atomic}
+\alias{as_tibble_row}
 \title{Construct a tibble row}
 \usage{
 tibble_row(..., .name_repair = c("check_unique", "unique", "syntactic",
+  "minimal"))
+
+as_tibble_row(x, .name_repair = c("check_unique", "unique", "syntactic",
   "minimal"))
 }
 \arguments{
@@ -28,10 +32,16 @@ for names in the style of base R).
 
 See \link{name-repair} for more details on these terms and the strategies used
 to enforce them.}
+
+\item{x}{A named list.}
 }
 \description{
 Constructs a tibble that is guaranteed to have only one row.
 Complex objects are always wrapped in a list.
+
+\code{as_tibble_row()} expects a list and coerces it to a one-row tibble
+following the same rules.
+It is to \code{tibble_row()} what \code{\link[=as_tibble]{as_tibble()}} is to \code{\link[=tibble]{tibble()}}.
 }
 \details{
 The function tests each column with \code{\link[=is_atomic]{is_atomic()}} and \code{n = 1}.

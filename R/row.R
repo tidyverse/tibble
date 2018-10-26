@@ -34,3 +34,18 @@ wrap_non_atomic <- function(x) {
     x
   }
 }
+
+#' @description
+#' `as_tibble_row()` expects a list and coerces it to a one-row tibble
+#' following the same rules.
+#' It is to `tibble_row()` what [as_tibble()] is to [tibble()].
+#'
+#' @param x A named list.
+#' @inheritParams as_tibble
+#'
+#' @rdname tibble_row
+as_tibble_row <- function(x,
+                          .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+  xl <- map(x, wrap_non_atomic)
+  lst_to_tibble(xl, .rows = 1L, .name_repair)
+}
