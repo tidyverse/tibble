@@ -381,11 +381,56 @@ describe_repair <- function(orig_name, name) {
 #' @export
 #' @rdname name-repair
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
-  if (syntactic) {
-    syntactic_names(name, quiet = quiet)
-  } else {
-    unique_names(name, quiet = quiet)
+  # Local functions to preserve behavior in v1.4.2
+  is_syntactic <- function(x) {
+    ret <- make.names(x) == x
+    ret[is.na(x)] <- FALSE
+    ret
   }
+
+  make_syntactic <- function(name, syntactic) {
+    if (!syntactic) return(name)
+
+    blank <- name == ""
+    fix_syntactic <- (name != "") & !is_syntactic(name)
+    name[fix_syntactic] <- make.names(name[fix_syntactic])
+    name
+  }
+
+  append_pos <- function(name) {
+    need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
+    if (any(need_append_pos)) {
+      rx <- "[.][.][1-9][0-9]*$"
+      has_suffix <- grepl(rx, name)
+      name[has_suffix] <- gsub(rx, "", name[has_suffix])
+      need_append_pos <- need_append_pos | has_suffix
+    }
+
+    need_append_pos <- which(need_append_pos)
+    name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
+    name
+  }
+
+  describe_tidying <- function(orig_name, name, quiet) {
+    stopifnot(length(orig_name) == length(name))
+    if (quiet) return()
+    new_names <- name != orig_name
+    if (any(new_names)) {
+      message(
+        "New names:\n",
+        paste0(orig_name[new_names], " -> ", name[new_names], collapse = "\n")
+      )
+    }
+  }
+
+  name[is.na(name)] <- ""
+  orig_name <- name
+
+  name <- make_syntactic(name, syntactic)
+  name <- append_pos(name)
+
+  describe_tidying(orig_name, name, quiet)
+  name
 }
 
 #' @export
