@@ -3,23 +3,15 @@
 \name{formatting}
 \alias{formatting}
 \alias{trunc_mat}
-\alias{print.tbl_df}
 \alias{print.tbl}
 \alias{format.tbl}
-\alias{format.tbl_df}
 \title{Printing tibbles}
 \usage{
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 
-\method{print}{tbl_df}(x, ..., n = NULL, width = NULL,
-  n_extra = NULL)
-
 \method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 \method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
-
-\method{format}{tbl_df}(x, ..., n = NULL, width = NULL,
-  n_extra = NULL)
 }
 \arguments{
 \item{x}{Object to format or print.}

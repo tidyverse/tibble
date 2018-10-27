@@ -38,6 +38,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Subsetting one row with `[..., , drop = TRUE]` returns a tibble (#442).
 
+- The `print.tbl_df()` method has been removed, the `print.tbl()` method handles printing (#519).
+
 
 ## New features
 

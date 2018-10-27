@@ -71,19 +71,6 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' @include utils-format.r
 #' @rdname formatting
 #' @export
-print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  NextMethod()
-
-  if (!inherits(x, "tbl")) {
-    message("The tibble must inherit from tbl_df and tbl, use tibble(), as_tibble() or new_tibble() for construction.")
-  }
-
-  invisible(x)
-}
-
-#' @include utils-format.r
-#' @rdname formatting
-#' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
@@ -96,11 +83,6 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
   format(mat)
 }
-
-#' @include utils-format.r
-#' @rdname formatting
-#' @export
-format.tbl_df <- format.tbl
 
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
