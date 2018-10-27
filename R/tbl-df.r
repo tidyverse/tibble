@@ -35,19 +35,19 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' @section Behavior of `tbl_df`:
 #'
 #' How default behaviour of tibbles differs from that of
-#' [`data.frame`s][base::data.frame()], during creation, access, and
-#' modification:
+#' [`data.frame`s][base::data.frame()], during creation and access:
 #'
 #' * Column data is not coerced. A character vector is not turned into a factor.
+#'   List-columns are expressly anticipated and do not require special tricks.
+#'   Read more in [tibble()].
+#' * Recycling only happens for a length 1 input.
 #' * Column names are not munged, although missing names are auto-populated.
 #'   Empty and duplicated column names are strongly discouraged, but the user
 #'   must indicate how to resolve. Read more in [name-repair].
 #' * Row names are not added and are strongly discouraged, in favor of storing
 #'   that info as a column. Read about in [rownames].
-#' * Recycling only happens for a length 1 input.
 #' * `df[, j]` returns a tibble; it does not automatically extract the column
 #'   inside. `df[, j, drop = FALSE]` is the default.
-#' * List-columns are expressly anticipated and do not require special tricks.
 #' * There is no partial matching when `$` is used to index by name. `df$name`
 #'   for a nonexistent name generates a warning.
 #' * Printing and inspection are a very high priority. The goal is to convey as
