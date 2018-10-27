@@ -8,7 +8,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - `new_tibble()` has been optimized for performance, the function no longer strips dimensions from 1d arrays and no longer checks correctness of names or column lengths. (It still checks if the object is named, except for zero-length input.) Use the new `validate_tibble()` if you need these checks (#471).
 
-- The `nrow` argument to `new_tibble()` is now mandatory.
+- The `nrow` argument to `new_tibble()` is now mandatory. The `class` argument replaces the now deprecated `subclass` argument, the latter will be supported quietly for some time (#518).
 
 - Setting names on a tibble via `names(df) <- ...` now also requires minimal names (#466).
 

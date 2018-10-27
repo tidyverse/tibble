@@ -5,7 +5,7 @@
 \alias{validate_tibble}
 \title{Tibble constructor and validator}
 \usage{
-new_tibble(x, ..., nrow, subclass = NULL)
+new_tibble(x, ..., nrow, class = NULL, subclass = NULL)
 
 validate_tibble(x)
 }
@@ -16,7 +16,9 @@ validate_tibble(x)
 
 \item{nrow}{The number of rows, required}
 
-\item{subclass}{Subclasses to assign to the new object, default: none}
+\item{class}{Subclasses to assign to the new object, default: none}
+
+\item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
 \description{
 Creates or validates a subclass of a tibble.
