@@ -61,6 +61,20 @@
 #' @name formatting
 NULL
 
+#' @rdname formatting
+#' @export
+print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+  invisible(x)
+}
+
+#' @rdname formatting
+#' @export
+format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
+  format(mat)
+}
+
 #' @export
 #' @rdname formatting
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
