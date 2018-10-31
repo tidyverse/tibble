@@ -56,7 +56,7 @@ type_sum.tbl_df(x)
 
 ## Foreign S3 methods
 
-$.tbl_df(x, i)
+$.tbl_df(x, name)
 [.tbl_df(x, i, j, drop = FALSE)
 [[.tbl_df(x, i, j, ..., exact = TRUE)
 as.data.frame.tbl_df(x, row.names = NULL, optional = FALSE, ...)
