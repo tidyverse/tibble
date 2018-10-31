@@ -240,11 +240,11 @@ test_that("as_tibble() implements unique names", {
   expect_equal(names(invalid_df), unique_names(rep("", 3)))
 })
 
-test_that("as_tibble() implements syntactic names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "syntactic")
+test_that("as_tibble() implements universal names", {
+  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), syntactic_names(rep("", 3)))
+  expect_equal(names(invalid_df), universal_names(rep("", 3)))
 })
 
 
@@ -276,7 +276,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
     rep("", 2)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     paste0("...", 1:2)
   )
 
@@ -291,7 +291,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
     c("if", "when")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     c(".if", "when")
   )
 })
@@ -308,7 +308,7 @@ test_that("as_tibble.poly() supports .name_repair", {
     as.character(1:3)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     paste0("...", 1:3)
   )
 })
@@ -325,7 +325,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("a", "a", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     c("a..1", "a..2", "n")
   )
 
@@ -340,7 +340,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("if", "when", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     c(".if", "when", "n")
   )
 
@@ -351,7 +351,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("m", "n", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     c("m", "n..2", "n..3")
   )
 })
@@ -368,7 +368,7 @@ test_that("as_tibble.ts() supports .name_repair", {
     rep("", 2)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     paste0("...", 1:2)
   )
 
@@ -383,7 +383,7 @@ test_that("as_tibble.ts() supports .name_repair", {
     c("if", "when")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "syntactic")),
+    names(as_tibble(x, .name_repair = "universal")),
     c(".if", "when")
   )
 })

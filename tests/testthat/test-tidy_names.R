@@ -22,13 +22,13 @@ test_that("default is to forward unique_names()", {
 })
 
 test_that("syntactic = TRUE forwards to syntactic_names()", {
-  expect_identical(tidy_names("a b", syntactic = TRUE), syntactic_names("a b"))
+  expect_identical(tidy_names("a b", syntactic = TRUE), universal_names("a b"))
 
   name <- c(NA, "", "x", "x", "a1:", "_x_y}")
-  expect_identical(tidy_names(name, syntactic = TRUE), syntactic_names(name))
+  expect_identical(tidy_names(name, syntactic = TRUE), universal_names(name))
 
   name <- c("", ".", NA, "if..4", "if", "if..8", "for", "if){1")
-  expect_identical(tidy_names(name, syntactic = TRUE), syntactic_names(name))
+  expect_identical(tidy_names(name, syntactic = TRUE), universal_names(name))
 })
 
 test_that("message", {
@@ -77,5 +77,5 @@ test_that("syntactic = FALSE is the default, forwards to unique_names()", {
 
 test_that("syntactic = TRUE works, forwards to syntactic_names()", {
   out <- set_tidy_names(set_names(1, "a b"), syntactic = TRUE)
-  expect_identical(names(out), syntactic_names("a b"))
+  expect_identical(names(out), universal_names("a b"))
 })
