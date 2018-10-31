@@ -28,7 +28,7 @@
 #'   * `"unique"`: Make sure names are unique and not empty,
 #'   * `"check_unique"`: (default value), no name repair, but check they are
 #'     `unique`,
-#'   * `"syntactic"`: Make the names `unique` and syntactic
+#'   * `"universal"`: Make the names `unique` and syntactic
 #'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'     for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
@@ -75,7 +75,7 @@
 #' with(df, `a 1`)
 #'
 #' ## Syntactic names are easier to work with, though, and you can request them:
-#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
 #' df$a.1
 #'
 #' ## You can specify your own name repair function:
@@ -125,7 +125,7 @@
 #'
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }

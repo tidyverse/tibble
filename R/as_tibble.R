@@ -60,7 +60,7 @@
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
 #'   bench::mark(
-#'     as_tibble(l2, .name_repair = "syntactic"),
+#'     as_tibble(l2, .name_repair = "universal"),
 #'     as_tibble(l2, .name_repair = "unique"),
 #'     as_tibble(l2, .name_repair = "minimal"),
 #'     as_tibble(l2),
@@ -71,7 +71,7 @@
 #' }
 as_tibble <- function(x, ...,
                       .rows = NULL,
-                      .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+                      .name_repair = c("check_unique", "unique", "universal", "minimal"),
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
@@ -80,7 +80,7 @@ as_tibble <- function(x, ...,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
-                                 .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+                                 .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
@@ -109,7 +109,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
-                           .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   if (!missing(validate)) {
     message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
     .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
