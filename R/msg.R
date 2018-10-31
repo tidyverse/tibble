@@ -40,6 +40,10 @@ error_enframe_has_dim <- function(x) {
   paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), ".")
 }
 
+error_1d_array_column <- function() {
+  "1d arrays are not supported in a tibble column."
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
 }
@@ -227,6 +231,10 @@ error_frame_matrix_list <- function(pos) {
 
 error_name_repair_arg <- function() {
   "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
+}
+
+error_new_tibble_must_be_list <- function() {
+  "Must pass a list as `x` argument to `new_tibble()`."
 }
 
 error_new_tibble_needs_nrow <- function() {

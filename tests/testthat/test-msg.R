@@ -7,10 +7,17 @@ test_that("error_enframe_value_null()", {
   )
 })
 
-test_that("error_enframe_value_null()", {
+test_that("error_enframe_has_dim()", {
   expect_equal(
     error_enframe_has_dim(Titanic),
     "`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4."
+  )
+})
+
+test_that("error_1d_array_column()", {
+  expect_equal(
+    error_1d_array_column(),
+    "1d arrays are not supported in a tibble column."
   )
 })
 
@@ -423,6 +430,13 @@ test_that("error_name_repair_arg()", {
   expect_equal(
     error_name_repair_arg(),
     "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
+  )
+})
+
+test_that("error_new_tibble_must_be_list()", {
+  expect_equal(
+    error_new_tibble_must_be_list(),
+    "Must pass a list as `x` argument to `new_tibble()`."
   )
 })
 
