@@ -30,13 +30,12 @@
 Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 }
 \description{
-Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} works very much like
-\link[base:Extract.data.frame]{with regular data frames}. However, the
+Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
+\link[base:Extract.data.frame]{regular data frames}. However, the
 behavior is different for tibbles and data frames in some cases:
 \itemize{
 \item \code{[} always returns a tibble by default, even if
-only one column is accessed.  The \code{drop} argument is supported, but you
-have to request it explicitly.
+only one column is accessed.
 \item Partial matching of column names with \code{$} and \code{[[} is not supported, a
 warning is given and \code{NULL} is returned.
 }
@@ -45,29 +44,27 @@ Unstable return type and implicit partial matching can lead to surprises and
 bugs that are hard to catch. If you rely on code that requires the original
 data frame behavior, coerce to a data frame via \code{\link[=as.data.frame]{as.data.frame()}}.
 }
+\details{
+For better compatibility with older code written for regular data frames,
+\code{[} supports a \code{drop} argument which defaults to \code{FALSE}.
+New code should use \code{[[} to turn a column into a vector.
+}
 \examples{
 df <- data.frame(a = 1:3, bc = 4:6)
 tbl <- tibble(a = 1:3, bc = 4:6)
 
-# Same behavior:
-tbl[1, ]
-tbl[1, c("bc", "a")]
-tbl[, c("bc", "a")]
-tbl[c("bc", "a")]
-tbl["a"]
-tbl$a
-tbl[["a"]]
-
-# Different behavior:
+# Subsetting single columns:
 df[, "a"]
 tbl[, "a"]
 tbl[, "a", drop = TRUE]
 as.data.frame(tbl)[, "a"]
 
+# Subsetting single rows with the drop argument:
 df[1, , drop = TRUE]
 tbl[1, , drop = TRUE]
 as.list(tbl[1, ])
 
+# Accessing non-existent columns:
 df$b
 tbl$b
 
@@ -83,4 +80,13 @@ df$b <- 7:9
 tbl$b <- 7:9
 df$b
 tbl$b
+
+# Identical behavior:
+tbl[1, ]
+tbl[1, c("bc", "a")]
+tbl[, c("bc", "a")]
+tbl[c("bc", "a")]
+tbl["a"]
+tbl$a
+tbl[["a"]]
 }

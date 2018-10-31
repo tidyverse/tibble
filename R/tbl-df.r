@@ -49,9 +49,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' * `df[, j]` returns a tibble; it does not automatically extract the column
 #'   inside. `df[, j, drop = FALSE]` is the default. Read more in [subsetting].
 #' * There is no partial matching when `$` is used to index by name. `df$name`
-#'   for a nonexistent name generates a warning. The `exact` argument to `[[`
-#'   is ignored, `df[["name", exact = FALSE]]` is not supported. Read more in
-#'   [subsetting].
+#'   for a nonexistent name generates a warning. Read more in [subsetting].
 #' * Printing and inspection are a very high priority. The goal is to convey as
 #'   much information as possible, in a concise way, even for large and complex
 #'   tibbles. Read more in [formatting].
