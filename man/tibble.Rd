@@ -11,7 +11,7 @@ tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created elements. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}.}
+unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start with a dot.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
@@ -119,6 +119,15 @@ tibble(
 # with inconsistent number of rows:
 try(tibble(y = strptime("2000/01/01", "\%x")))
 try(tibble(a = 1:3, b = tibble(c = 4:7)))
+
+# Use := to create columns with names that start with a dot:
+tibble(.rows = 3)
+tibble(.rows := 3)
+
+# You can unquote an expression:
+x <- 3
+tibble(x = 1, y = x)
+tibble(x = 1, y = !!x)
 
 # You can splice-unquote a list of quosures and expressions:
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
