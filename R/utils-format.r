@@ -17,7 +17,7 @@
 #'
 #' Options used by the tibble and pillar packages to format and print `tbl_df`
 #' objects. Used by the formatting workhorse `trunc_mat()` and, therefore,
-#' indirectly, by `print.tbl_df()` and `print.tbl()`.
+#' indirectly, by `print.tbl()`.
 #'
 #' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
 #'   Set to `Inf` to always print all rows.  Default: 20.

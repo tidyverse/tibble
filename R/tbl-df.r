@@ -56,7 +56,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class
-#' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl_df()],
+#' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()],
 #'   [glimpse()]
 NULL
 

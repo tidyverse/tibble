@@ -62,6 +62,6 @@ tibbles. Read more in \link{formatting}.
 }
 
 \seealso{
-\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl_df]{print.tbl_df()}},
+\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl]{print.tbl()}},
 \code{\link[=glimpse]{glimpse()}}
 }
