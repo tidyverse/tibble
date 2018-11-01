@@ -52,7 +52,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
   - `"minimal"`: No name repair or checks, beyond basic existence.
   - `"unique"`: Make sure names are unique and not empty.
   - `"check_unique"`: (default value), no name repair, but check they are `unique`.
-  - `"syntactic"`: Make the names `unique` and syntactic.
+  - `"universal"`: Make the names `unique` and syntactic.
   - a function: apply custom name repair (e.g., `.name_repair = make.names` or `.name_repair = ~make.names(., unique = TRUE)` for names in the style of base R).
 
   The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "minimal"` instead of `validate = FALSE` and `.name_repair = "check_unique"` instead of `validate = TRUE` (#469, @jennybc).

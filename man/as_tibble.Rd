@@ -11,15 +11,15 @@
 \title{Coerce lists, matrices, and more to data frames}
 \usage{
 as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
-  "unique", "syntactic", "minimal"),
+  "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+  .name_repair = c("check_unique", "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
-  .name_repair = c("check_unique", "unique", "syntactic", "minimal"))
+  .name_repair = c("check_unique", "unique", "universal", "minimal"))
 
 \method{as_tibble}{matrix}(x, ...)
 
@@ -44,7 +44,7 @@ just as an additional check.}
 \item \code{"unique"}: Make sure names are unique and not empty,
 \item \code{"check_unique"}: (default value), no name repair, but check they are
 \code{unique},
-\item \code{"syntactic"}: Make the names \code{unique} and syntactic
+\item \code{"universal"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
@@ -115,7 +115,7 @@ if (requireNamespace("bench", quietly = TRUE)) {
   l2 <- replicate(26, sample(letters), simplify = FALSE)
   names(l2) <- letters
   bench::mark(
-    as_tibble(l2, .name_repair = "syntactic"),
+    as_tibble(l2, .name_repair = "universal"),
     as_tibble(l2, .name_repair = "unique"),
     as_tibble(l2, .name_repair = "minimal"),
     as_tibble(l2),

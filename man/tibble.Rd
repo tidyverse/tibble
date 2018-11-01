@@ -5,7 +5,7 @@
 \title{Build a data frame}
 \usage{
 tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
-  "syntactic", "minimal"))
+  "universal", "minimal"))
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
@@ -22,7 +22,7 @@ just as an additional check.}
 \item \code{"unique"}: Make sure names are unique and not empty,
 \item \code{"check_unique"}: (default value), no name repair, but check they are
 \code{unique},
-\item \code{"syntactic"}: Make the names \code{unique} and syntactic
+\item \code{"universal"}: Make the names \code{unique} and syntactic
 \item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
 for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
@@ -84,7 +84,7 @@ df$`a 1`
 with(df, `a 1`)
 
 ## Syntactic names are easier to work with, though, and you can request them:
-df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
 df$a.1
 
 ## You can specify your own name repair function:
