@@ -41,7 +41,7 @@ Remotes:
     r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd"))
 RoxygenNote: 6.1.0.9000
 Collate: 
     'add.R'
@@ -62,11 +62,12 @@ Collate:
     'repair-names.R'
     'rownames.R'
     'strrep.R'
-    'utils-format.r'
+    'subsetting.R'
     'tbl-df.r'
     'tibble-package.R'
     'tibble.R'
     'type-sum.r'
+    'utils-format.r'
     'utils.r'
     'view.R'
     'wrap.R'

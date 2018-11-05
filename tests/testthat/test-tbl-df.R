@@ -342,7 +342,7 @@ test_that("is_tibble", {
 
 # new_tibble --------------------------------------------------------------
 
-test_that("new_tibble", {
+test_that("new_tibble() with deprecated subclass argument", {
   tbl <- new_tibble(
     data.frame(a = 1:3),
     names = "b",
@@ -366,10 +366,39 @@ test_that("new_tibble", {
   )
 })
 
+test_that("new_tibble() with new class argument", {
+  tbl <- new_tibble(
+    data.frame(a = 1:3),
+    names = "b",
+    attr1 = "value1",
+    attr2 = 2,
+    nrow = 3,
+    class = "nt"
+  )
+
+  # Can't compare directly due to dplyr:::all.equal.tbl_df()
+  expect_identical(class(tbl), c("nt", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    unclass(tbl),
+    structure(
+      list(b = 1:3),
+      attr1 = "value1",
+      attr2 = 2,
+      .Names = "b",
+      row.names = .set_row_names(3L)
+    )
+  )
+})
+
 test_that("new_tibble checks", {
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
+  expect_error(
+    new_tibble(1:3, nrow = 1),
+    error_new_tibble_must_be_list(),
+    fixed = TRUE
+  )
   expect_error(
     new_tibble(list(1)),
     error_new_tibble_needs_nrow(),
@@ -411,6 +440,12 @@ test_that("validate_tibble() checks", {
   expect_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
     error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
+    fixed = TRUE
+  )
+
+  expect_error(
+    validate_tibble(new_tibble(list(a = array(1:3)), nrow = 3)),
+    error_1d_array_column(),
     fixed = TRUE
   )
 })

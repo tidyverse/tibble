@@ -8,7 +8,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - `new_tibble()` has been optimized for performance, the function no longer strips dimensions from 1d arrays and no longer checks correctness of names or column lengths. (It still checks if the object is named, except for zero-length input.) Use the new `validate_tibble()` if you need these checks (#471).
 
-- The `nrow` argument to `new_tibble()` is now mandatory.
+- The `nrow` argument to `new_tibble()` is now mandatory. The `class` argument replaces the now deprecated `subclass` argument, the latter will be supported quietly for some time (#518).
 
 - Setting names on a tibble via `names(df) <- ...` now also requires minimal names (#466).
 
@@ -38,6 +38,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Subsetting one row with `[..., , drop = TRUE]` returns a tibble (#442).
 
+- The `print.tbl_df()` method has been removed, the `print.tbl()` method handles printing (#519).
+
 
 ## New features
 
@@ -50,7 +52,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
   - `"minimal"`: No name repair or checks, beyond basic existence.
   - `"unique"`: Make sure names are unique and not empty.
   - `"check_unique"`: (default value), no name repair, but check they are `unique`.
-  - `"syntactic"`: Make the names `unique` and syntactic.
+  - `"universal"`: Make the names `unique` and syntactic.
   - a function: apply custom name repair (e.g., `.name_repair = make.names` or `.name_repair = ~make.names(., unique = TRUE)` for names in the style of base R).
 
   The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "minimal"` instead of `validate = FALSE` and `.name_repair = "check_unique"` instead of `validate = TRUE` (#469, @jennybc).

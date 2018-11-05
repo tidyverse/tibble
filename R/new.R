@@ -11,7 +11,8 @@
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
 #' @param nrow The number of rows, required
-#' @param subclass Subclasses to assign to the new object, default: none
+#' @param class Subclasses to assign to the new object, default: none
+#' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
 #'
 #' @seealso
 #' [tibble()] and [as_tibble()] for ways to construct a tibble
@@ -27,7 +28,12 @@
 #'
 #' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
-new_tibble <- function(x, ..., nrow, subclass = NULL) {
+new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
+  # For compatibility with tibble < 1.5.0
+  if (is.null(class)) {
+    class <- subclass
+  }
+
   #' @section Construction:
   #'
   #' For `new_tibble()`, `x` must be a list.
@@ -59,7 +65,7 @@ new_tibble <- function(x, ..., nrow, subclass = NULL) {
     abort(error_names_must_be_non_null())
   }
 
-  set_tibble_class(x, nrow, subclass)
+  set_tibble_class(x, nrow, class)
 }
 
 #' @description

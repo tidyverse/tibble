@@ -11,14 +11,16 @@
 #'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
 #'     transforming the user's input. Character vectors are not coerced to
-#'     factor. Column names are not modified.
+#'     factor. List-columns are expressly anticipated and do not require special
+#'     tricks. Column names are not modified.
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
-#'     refer to columns created earlier in the call.
+#'     refer to columns created earlier in the call. Only columns of length one
+#'     are recycled.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created elements. These arguments are
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
-#'   unquote-splice via [`!!!`].
+#'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
@@ -26,7 +28,7 @@
 #'   * `"unique"`: Make sure names are unique and not empty,
 #'   * `"check_unique"`: (default value), no name repair, but check they are
 #'     `unique`,
-#'   * `"syntactic"`: Make the names `unique` and syntactic
+#'   * `"universal"`: Make the names `unique` and syntactic
 #'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'     for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
@@ -73,7 +75,7 @@
 #' with(df, `a 1`)
 #'
 #' ## Syntactic names are easier to work with, though, and you can request them:
-#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
 #' df$a.1
 #'
 #' ## You can specify your own name repair function:
@@ -109,12 +111,21 @@
 #' try(tibble(y = strptime("2000/01/01", "%x")))
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
+#' # Use := to create columns with names that start with a dot:
+#' tibble(.rows = 3)
+#' tibble(.rows := 3)
+#'
+#' # You can unquote an expression:
+#' x <- 3
+#' tibble(x = 1, y = x)
+#' tibble(x = 1, y = !!x)
+#'
 #' # You can splice-unquote a list of quosures and expressions:
 #' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(..., .named = TRUE)
   as_tibble(lst_quos(xs, expand = TRUE), .rows = .rows, .name_repair = .name_repair)
 }
