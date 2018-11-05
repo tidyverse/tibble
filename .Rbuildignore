@@ -17,3 +17,4 @@
 ^docs-dev$
 ^tic\.R$
 ^\.github$
+^\.drake$
