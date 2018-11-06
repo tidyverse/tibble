@@ -101,6 +101,10 @@ get_plan <- function() {
 
   plan_deps <- get_plan_deps()
   config_deps <- drake_config(plan_deps)
+  if (!isTRUE(unname(cached(list = "deps", no_imported_objects = TRUE)))) {
+    warning("Making dependencies first, rerun.", call. = FALSE)
+    return(plan_deps)
+  }
 
 
 # Avoid expensive and flaky check for build tools from pkgbuild
