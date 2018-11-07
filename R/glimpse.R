@@ -84,13 +84,23 @@ str_trunc <- function(x, max_width) {
 format_v <- function(x) UseMethod("format_v")
 
 #' @export
-format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+format_v.default <- function(x) {
+  dims <- dim(x)
+
+  if (!is.null(dims)){
+    dims_out <- paste0(dims, collapse = " x ")
+    out <- paste0(class(x)[1], "[", dims_out, "]")
+    out
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}
 
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  is_df <- map_lgl(x, function(x){inherits(x, 'data.frame')})
-  atomic <- (map_int(out, length) == 1L) & !is_df
+  has_dimensions <- map_lgl(x, function(x){!is.null(dim(x))})
+  atomic <- (map_int(out, length) == 1L) & !has_dimensions
   out <- map_chr(out, collapse)
   out[!atomic] <- paste0("<", out[!atomic], ">")
   paste0("[", collapse(out), "]")
@@ -107,13 +117,3 @@ format_v.factor <- function(x) {
     format(x, trim = TRUE, justify = "none")
   }
 }
-
-#' @export
-format_v.tbl <- function(x){
-  type_out <- paste0('A ', new_pillar_type(x), ' [', nrow(x), ' x ', ncol(x), ']')
-  vars <- collapse(names(x))
-  out <- paste0(type_out, ' vars: ', vars)
-}
-
-#' @export
-format_v.data.frame <- format_v.tbl
