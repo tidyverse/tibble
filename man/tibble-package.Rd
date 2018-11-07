@@ -11,38 +11,32 @@ Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.
 }
 \details{
-The S3 class \code{tbl_df} wraps a local data frame. The main
-advantage to using a \code{tbl_df} over a regular data frame is the printing:
-tbl objects only print a few rows and all the columns that fit on one screen,
-describing the rest of it as text.
+The tibble package provides utilities for handling \strong{tibbles}, where
+"tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
+class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
+class, developed in response to lessons learned over many years of data
+analysis with data frames.
 
-See \link{tibble-options} for a list of package options.
-}
-\section{Methods}{
+Tibble is the central data structure for the set of packages known as the
+\href{https://www.tidyverse.org/packages/}{tidyverse}, including
+\href{http://dplyr.tidyverse.org/}{dplyr},
+\href{http://ggplot2.tidyverse.org/}{ggplot2},
+\href{http://tidyr.tidyverse.org/}{tidyr}, and
+\href{http://readr.tidyverse.org/}{readr}.
 
-
-\code{tbl_df} implements four important base methods:
-
-\describe{
-\item{print}{By default only prints the first 10 rows (at most 20), and the
-columns that fit on screen; see \code{\link[=print.tbl]{print.tbl()}}}
-\item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-\item{\code{[[}, \code{$}}{Calls \code{\link[=.subset2]{.subset2()}} directly,
-so is considerably faster. Returns \code{NULL} if column does not exist,
-\code{$} warns.}
-}
+General resources:
+\itemize{
+\item Website for the tibble package: \url{https://tibble.tidyverse.org}
+\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+Science}
 }
 
-\section{Important functions}{
-
-\code{\link[=tibble]{tibble()}} and \code{\link[=tribble]{tribble()}} for construction,
-\code{\link[=as_tibble]{as_tibble()}} for coercion,
-and \code{\link[=print.tbl]{print.tbl()}} and \code{\link[=glimpse]{glimpse()}} for display.
+Resources on specific topics:
+\itemize{
+\item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=enframe]{enframe()}}
+\item Inspect a tibble: \code{\link[=print.tbl]{print.tbl()}}, \code{\link[=glimpse]{glimpse()}}
+\item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
-
-\examples{
-tibble(a = 1:26, b = letters)
-as_tibble(iris)
 }
 \seealso{
 Useful links:

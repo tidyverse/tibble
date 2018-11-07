@@ -73,16 +73,16 @@ test_that("column_to_rownames returns tbl", {
 
   expect_true(has_rownames(mtcars1))
   res0 <- rownames_to_column(mtcars1, var)
-  expect_warning(res <- column_to_rownames(res0, var))
+  expect_warning(res <- column_to_rownames(res0, var), NA)
   expect_true(has_rownames(res))
-  expect_equal(class(res), class(mtcars1))
+  expect_equal(class(res), class(mtcars))
   expect_equal(rownames(res), rownames(mtcars1))
-  expect_equal(res, mtcars1)
+  expect_equal(res, mtcars)
   expect_false(has_name(res, var))
 
   mtcars1$num <- rev(seq_len(nrow(mtcars)))
   res0 <- rownames_to_column(mtcars1)
-  expect_warning(res <- column_to_rownames(res0, var = "num"))
+  expect_warning(res <- column_to_rownames(res0, var = "num"), NA)
   expect_true(has_rownames(res))
   expect_equal(rownames(res), as.character(mtcars1$num))
   expect_error(

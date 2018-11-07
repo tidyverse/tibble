@@ -6,25 +6,39 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`, passing `n` unnamed still works (with a warning).
 
-- The `nrow` argument to `new_tibble()` is now mandatory.
+- `new_tibble()` has been optimized for performance, the function no longer strips dimensions from 1d arrays and no longer checks correctness of names or column lengths. (It still checks if the object is named, except for zero-length input.) Use the new `validate_tibble()` if you need these checks (#471).
 
-- Checking names in `new_tibble()` is enabled by default: names must exist (except for zero-length input), `NA` names are not allowed. (This corresponds to the `"minimal"` checks described below.) Consequently, checking names in `as_tibble()` is also enabled by default, even for tibbles. The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- The `nrow` argument to `new_tibble()` is now mandatory. The `class` argument replaces the now deprecated `subclass` argument, the latter will be supported quietly for some time (#518).
+
+- Setting names on a tibble via `names(df) <- ...` now also requires minimal names (#466).
+
+- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
 - Calling `as_tibble()` on a vector now returns a one-row tibble, for consistency with `as_tibble.list()`.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
 
-- `data_frame()`, `tibble_()`, `data_frame_()` and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
+- `data_frame()` and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
+
+- `tibble_()`, `data_frame_()`, and `lst_()` are soft-deprecated. Please use `tibble()` or `lst()` (#111, #509).
 
 - `as.tibble()` and `as_data_frame()` are officially deprecated and not generic anymore, please use/implement `as_tibble()` (#111).
 
-- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names, this also works for packages that import _tibble_.
+- `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Code that relies on tibbles keeping row names now will see:
+    - a different result when calling `rownames()` or `row.names()`,
+    - rows full of `NA` values when subsetting rows with with a character vector, e.g. `as_tibble(mtcars)["Mazda RX4", ]`.
+    
+    Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names. Packages that import _tibble_ can call `set_config()` in their `.onLoad()` function (#114).
+
+- `column_to_rownames()` now always coerces to a data frame, because row names are no longer supported in tibbles (#114).
 
 - The `print()` method prints a message if a tibble is missing the `"tbl"` class (#264).
 
 - In all `*_rownames()` functions, the first argument has been renamed to `.data` for consistency (#412).
 
 - Subsetting one row with `[..., , drop = TRUE]` returns a tibble (#442).
+
+- The `print.tbl_df()` method has been removed, the `print.tbl()` method handles printing (#519).
 
 
 ## New features
@@ -38,7 +52,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
   - `"minimal"`: No name repair or checks, beyond basic existence.
   - `"unique"`: Make sure names are unique and not empty.
   - `"check_unique"`: (default value), no name repair, but check they are `unique`.
-  - `"syntactic"`: Make the names `unique` and syntactic.
+  - `"universal"`: Make the names `unique` and syntactic.
   - a function: apply custom name repair (e.g., `.name_repair = make.names` or `.name_repair = ~make.names(., unique = TRUE)` for names in the style of base R).
 
   The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "minimal"` instead of `validate = FALSE` and `.name_repair = "check_unique"` instead of `validate = TRUE` (#469, @jennybc).
@@ -59,6 +73,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 - `enframe()` (with `name = NULL`) and `deframe()` now support one-column tibbles (#449).
 
 - Improved S4 support by adding `exportClass(tbl_df)` to `NAMESPACE` (#436, @jeffreyhanson and @javierfajnolla).
+
+- New `validate_tibble()` checks a tibble for internal consistency (#471).
 
 - Bring error message for invalid column type in line with allowed matrix/df cols (#465, @maxheld83).
 

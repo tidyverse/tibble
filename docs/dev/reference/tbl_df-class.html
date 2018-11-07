@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tibble: Simple Data Frames — tibble-package • tibble</title>
+<title><code>tbl_df</code> class — tbl_df-class • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -29,11 +29,21 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
-<meta property="og:title" content="tibble: Simple Data Frames — tibble-package" />
+<meta property="og:title" content="<code>tbl_df</code> class — tbl_df-class" />
 
-<meta property="og:description" content="
-Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame." />
+<meta property="og:description" content="The tbl_df class is a subclass of data.frame,
+created in order to have different default behaviour. The colloquial term
+&quot;tibble&quot; refers to a data frame that has the tbl_df class. Tibble is the
+central data structure for the set of packages known as the
+tidyverse, including
+dplyr,
+ggplot2,
+tidyr, and
+readr.
+The general ethos is that tibbles are lazy and surly: they do less and
+complain more than base data.frames. This forces
+problems to be tackled earlier and more explicitly, typically leading to code
+that is more expressive and robust." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -121,51 +131,71 @@ Provides a 'tbl_df' class (the 'tibble') that provides
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tibble: Simple Data Frames</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tibble-package.R'><code>R/tibble-package.R</code></a></small>
-    <div class="hidden name"><code>tibble-package.Rd</code></div>
+    <h1><code>tbl_df</code> class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tbl-df.r'><code>R/tbl-df.r</code></a></small>
+    <div class="hidden name"><code>tbl_df-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><img src='figures/logo.png' align='right' /></p>
-<p>Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame.</p>
-    
-    </div>
-
-        
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The tibble package provides utilities for handling <strong>tibbles</strong>, where
-"tibble" is a colloquial term for the S3 <code><a href='tbl_df-class.html'>tbl_df</a></code> class. The <code><a href='tbl_df-class.html'>tbl_df</a></code>
-class is a special case of the base <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>.
-class, developed in response to lessons learned over many years of data
-analysis with data frames.</p>
-<p>Tibble is the central data structure for the set of packages known as the
+    <p>The <code>tbl_df</code> class is a subclass of <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>,
+created in order to have different default behaviour. The colloquial term
+"tibble" refers to a data frame that has the <code>tbl_df</code> class. Tibble is the
+central data structure for the set of packages known as the
 <a href='https://www.tidyverse.org/packages/'>tidyverse</a>, including
 <a href='http://dplyr.tidyverse.org/'>dplyr</a>,
 <a href='http://ggplot2.tidyverse.org/'>ggplot2</a>,
 <a href='http://tidyr.tidyverse.org/'>tidyr</a>, and
 <a href='http://readr.tidyverse.org/'>readr</a>.</p>
-<p>General resources:</p><ul>
-<li><p>Website for the tibble package: <a href='https://tibble.tidyverse.org'>https://tibble.tidyverse.org</a></p></li>
-<li><p><a href='http://r4ds.had.co.nz/tibbles.html'>Tibbles chapter</a> in <em>R for Data
-Science</em></p></li>
+<p>The general ethos is that tibbles are lazy and surly: they do less and
+complain more than base <a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>. This forces
+problems to be tackled earlier and more explicitly, typically leading to code
+that is more expressive and robust.</p>
+    
+    </div>
+
+        
+    <h2 class="hasAnchor" id="properties-of-tbl-df"><a class="anchor" href="#properties-of-tbl-df"></a>Properties of <code>tbl_df</code></h2>
+
+    
+    <p>Objects of class <code>tbl_df</code> have:</p><ul>
+<li><p>A <code>class</code> attribute of <code>c("tbl_df", "tbl", "data.frame")</code>.</p></li>
+<li><p>A base type of <code>"list"</code>, where each element of the list has the same
+<code>NROW()</code>.</p></li>
+<li><p>A <code>names</code> attribute that is a character vector the same length as the
+underlying list.</p></li>
+<li><p>A <code>row.names</code> attribute, included for compatibility with the base
+<a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame class</a>. However, <code>row.names</code> are ignored
+by most tibble methods.</p></li>
 </ul>
-    <p>Resources on specific topics:</p><ul>
-<li><p>Create a tibble: <code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='enframe.html'>enframe()</a></code></p></li>
-<li><p>Inspect a tibble: <code><a href='formatting.html'>print.tbl_df()</a></code>, <code><a href='glimpse.html'>glimpse()</a></code></p></li>
-<li><p>Details on the S3 <code>tbl_df</code> class: <code><a href='tbl_df-class.html'>tbl_df</a></code></p></li>
+    
+    <h2 class="hasAnchor" id="behavior-of-tbl-df"><a class="anchor" href="#behavior-of-tbl-df"></a>Behavior of <code>tbl_df</code></h2>
+
+    
+    <p>How default behaviour of tibbles differs from that of
+<a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>, during creation, access, and
+modification:</p><ul>
+<li><p>Column data is not coerced. A character vector is not turned into a factor.</p></li>
+<li><p>Column names are not munged, although missing names are auto-populated.
+Empty and duplicated column names are strongly discouraged, but the user
+must indicate how to resolve. Read more in <a href='name-repair.html'>name-repair</a>.</p></li>
+<li><p>Row names are not added and are strongly discouraged, in favor of storing
+that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></li>
+<li><p>Recycling only happens for a length 1 input.</p></li>
+<li><p><code>df[, j]</code> returns a tibble; it does not automatically extract the column
+inside. <code>df[, j, drop = FALSE]</code> is the default.</p></li>
+<li><p>List-columns are expressly anticipated and do not require special tricks.</p></li>
+<li><p>There is no partial matching when <code>$</code> is used to index by name. <code>df$name</code>
+for a nonexistent name generates a warning.</p></li>
+<li><p>Printing and inspection are a very high priority. The goal is to convey as
+much information as possible, in a concise way, even for large and complex
+tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='http://tibble.tidyverse.org/'>http://tibble.tidyverse.org/</a></p></li>
-<li><p><a href='https://github.com/tidyverse/tibble'>https://github.com/tidyverse/tibble</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/tidyverse/tibble/issues'>https://github.com/tidyverse/tibble/issues</a></p></li>
-</ul></div>
+    <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='formatting.html'>print.tbl_df()</a></code>,
+<code><a href='glimpse.html'>glimpse()</a></code></p></div>
     
 
   </div>
@@ -173,26 +203,12 @@ Science</em></p></li>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#properties-of-tbl-df">Properties of <code>tbl_df</code></a></li>
+
+      <li><a href="#behavior-of-tbl-df">Behavior of <code>tbl_df</code></a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
-
-    <h2>Author</h2>
-    
-<strong>Maintainer</strong>: Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a>
-
-Authors:
-<ul>
-<li><p>Hadley Wickham <a href='mailto:hadley@rstudio.com'>hadley@rstudio.com</a></p></li>
-</ul>
-
-Other contributors:
-<ul>
-<li><p>Romain Francois <a href='mailto:romain@r-enthusiasts.com'>romain@r-enthusiasts.com</a> [contributor]</p></li>
-<li><p>RStudio [copyright holder]</p></li>
-</ul>
-
 
   </div>
 </div>

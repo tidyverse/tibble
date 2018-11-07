@@ -5,6 +5,7 @@
 \alias{data_frame}
 \alias{tibble_}
 \alias{data_frame_}
+\alias{lst_}
 \alias{as_data_frame}
 \alias{as.tibble}
 \alias{frame_data}
@@ -16,6 +17,8 @@ tibble_(xs)
 
 data_frame_(xs)
 
+lst_(xs)
+
 as_data_frame(x, ...)
 
 as.tibble(x, ...)
@@ -25,7 +28,10 @@ frame_data(...)
 \description{
 Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 
-Use \code{\link[=as_tibble]{as_tibble()}} instead of \code{as_data_frame()} or \code{as.tibble()}, but mind the new signature and semantics.
+Use \link{quasiquotation} instead of \code{tibble_()}, \code{data_frame_()}, and \code{lst_()}.
+
+Use \code{\link[=as_tibble]{as_tibble()}} instead of \code{as_data_frame()} or \code{as.tibble()}, but mind the
+new signature and semantics.
 
 Use \code{\link[=tribble]{tribble()}} instead of \code{frame_data()}.
 }

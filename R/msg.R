@@ -40,6 +40,10 @@ error_enframe_has_dim <- function(x) {
   paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), ".")
 }
 
+error_1d_array_column <- function() {
+  "1d arrays are not supported in a tibble column."
+}
+
 error_unsupported_index <- function(j) {
   paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
 }
@@ -108,6 +112,10 @@ error_inconsistent_new_rows <- function(names) {
 
 error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
   paste0("The `names` must not be `NULL`.", use_repair(repair))
+}
+
+error_names_must_have_length <- function(length, n) {
+  paste0("The `names` must have length ", n, ", not ", length, ".")
 }
 
 error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
@@ -225,6 +233,10 @@ error_name_repair_arg <- function() {
   "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
 }
 
+error_new_tibble_must_be_list <- function() {
+  "Must pass a list as `x` argument to `new_tibble()`."
+}
+
 error_new_tibble_needs_nrow <- function() {
-  "Must pass a non-NULL `nrow` argument to `new_tibble()`."
+  "Must pass a scalar integer as `nrow` argument to `new_tibble()`."
 }

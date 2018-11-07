@@ -21,7 +21,7 @@ Imports:
     methods,
     pillar (>= 1.2.3.9002),
     pkgconfig,
-    rlang (>= 0.2.2),
+    rlang (>= 0.3.0),
     utils
 Suggests: 
     bench,
@@ -41,7 +41,7 @@ Remotes:
     r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd"))
 RoxygenNote: 6.1.0.9000
 Collate: 
     'add.R'
@@ -55,7 +55,6 @@ Collate:
     'exports.R'
     'glimpse.R'
     'has-name.R'
-    'tibble.R'
     'lst.R'
     'msg-format.R'
     'msg.R'
@@ -63,8 +62,10 @@ Collate:
     'repair-names.R'
     'rownames.R'
     'strrep.R'
+    'subsetting.R'
     'tbl-df.r'
     'tibble-package.R'
+    'tibble.R'
     'type-sum.r'
     'utils-format.r'
     'utils.r'
