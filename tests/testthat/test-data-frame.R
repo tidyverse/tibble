@@ -361,12 +361,12 @@ test_that("as_tibble.table() supports .name_repair", {
   )
 })
 
-test_that("as_tibble.ts() supports .name_repair", {
+test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
   x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
 
-  expect_error(
+  expect_identical(
     names(as_tibble(x)),
-    error_column_must_be_named(1:2)
+    rep("", 2)
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),

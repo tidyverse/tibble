@@ -10,7 +10,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - The `nrow` argument to `new_tibble()` is now mandatory. The `class` argument replaces the now deprecated `subclass` argument, the latter will be supported quietly for some time (#518).
 
-- Setting names on a tibble via `names(df) <- ...` now also requires minimal names (#466).
+- Setting names on a tibble via `names(df) <- ...` now also requires minimal names, otherwise a warning is issued once per session (#466).
 
 - In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 

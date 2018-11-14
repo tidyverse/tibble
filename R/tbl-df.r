@@ -70,13 +70,18 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @export
 `names<-.tbl_df` <- function(x, value) {
-  check_names_non_null(value)
+  check_names_non_null(value, warn_once)
 
   if (!has_length(value, length(x))) {
-    abort(error_names_must_have_length(length(value), length(x)))
+    warn_once(error_names_must_have_length(length(value), length(x)))
   }
 
-  check_names_non_na(value)
+  check_names_non_na(value, warn_once)
+
+  if (!is_character(value)) {
+    warn_once("Must use a character vector as names.")
+    value <- as.character(value)
+  }
 
   attr(x, "names") <- as.character(value)
   x

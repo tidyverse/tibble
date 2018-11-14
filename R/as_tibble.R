@@ -195,10 +195,12 @@ as_tibble.poly <- function(x, ...) {
 }
 
 #' @export
-as_tibble.ts <- function(x, ...) {
+as_tibble.ts <- function(x, ..., .name_repair = "minimal") {
   df <- as.data.frame(x)
-  colnames(df) <- colnames(x)
-  as_tibble(df, ...)
+  if (length(dim(x)) == 2) {
+    colnames(df) <- colnames(x)
+  }
+  as_tibble(df, ..., .name_repair = .name_repair)
 }
 
 #' @export

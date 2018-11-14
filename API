@@ -46,7 +46,7 @@ as_tibble.list(x, validate = TRUE, ..., .rows = NULL, .name_repair = c("check_un
 as_tibble.matrix(x, ...)
 as_tibble.poly(x, ...)
 as_tibble.table(x, `_n` = "n", ..., n = `_n`)
-as_tibble.ts(x, ...)
+as_tibble.ts(x, ..., .name_repair = "minimal")
 glimpse.data.frame(x, width = NULL, ...)
 glimpse.default(x, width = NULL, max.level = 3, ...)
 glimpse.tbl(x, width = NULL, ...)
