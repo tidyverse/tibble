@@ -160,34 +160,39 @@ test_that("Can convert tables to data frame", {
 })
 
 
-test_that("Can't convert unnamed atomic vectors to tibble by default", {
-  expect_error(
+test_that("Can convert unnamed atomic vectors to tibble by default", {
+  forget_warn_once()
+  expect_warning(
     expect_equal(as_tibble(1:3), tibble(value = 1:3)),
-    invalid_df("must be named", 1:3),
+    "discouraged",
     fixed = TRUE
   )
 
-  expect_error(
+  forget_warn_once()
+  expect_warning(
     expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA))),
-    invalid_df("must be named", 1:3),
+    "discouraged",
     fixed = TRUE
   )
 
-  expect_error(
+  forget_warn_once()
+  expect_warning(
     expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5)),
-    invalid_df("must be named", 1:3),
+    "discouraged",
     fixed = TRUE
   )
 
-  expect_error(
+  forget_warn_once()
+  expect_warning(
     expect_equal(as_tibble(letters), tibble(value = letters)),
-    invalid_df("must be named", 1:26),
+    "discouraged",
     fixed = TRUE
   )
 })
 
 
 test_that("Can convert named atomic vectors to data frame", {
+  skip("Do we want an .as_row argument?")
   expect_equal(as_tibble(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
   expect_equal(as_tibble(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
   expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))

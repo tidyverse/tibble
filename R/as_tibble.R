@@ -224,9 +224,9 @@ as_tibble.NULL <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as_tibble.default <- function(x, ...) {
-  if (is_atomic(x)) {
-    as_tibble(as.list(x), ...)
-  } else {
-    as_tibble(as.data.frame(x), ...)
+  value <- x
+  if (is_atomic(value)) {
+    warn_once("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
   }
+  as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }
