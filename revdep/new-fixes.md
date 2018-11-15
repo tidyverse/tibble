@@ -79,3 +79,9 @@ TL;DR: if DiagrammeR gets updated for dev tibble, I believe that fixes xgboost.
 All failures are due to the fact that `new_tibble()` requires an `nrow` argument. Luckily, this can be derived from the data.
 
 Submitted PR: <https://github.com/njtierney/naniar/pull/220>. R CMD check runs fine locally.
+
+# tidygraph
+
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#tidygraph>
+
+Tests fail. A lot of `as_tibble()` calls in the code...
