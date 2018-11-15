@@ -1,12 +1,12 @@
 # curl
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#curl>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#curl>
 
 Why is curl even in the revdep set for tibble? In any case, this look like flaky internet failure, which Jeroen has confirmed (I asked him to take a quick look at the ERROR).
 
 # DiagrammeR
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#diagrammer>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#diagrammer>
 
 Uses tidyverse extensively internally for data manipulation. No API implications and AFAICT no changes that would be user-visible.
 
@@ -16,7 +16,7 @@ JB fixed in <https://github.com/rich-iannone/DiagrammeR/pull/319>, which Rich sh
 
 # nullabor
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#nullabor>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#nullabor>
 
 An example was failing. There are no tests.
 
@@ -28,7 +28,7 @@ Makes me wonder if `as_tibble.ts()` should be like `as.data.frame.ts()` and just
 
 # prophet
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#prophet>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#prophet>
 
 The revdep report shows 15 test failures and a failure with the vignette. I believe all come from a single place where `dplyr::as_data_frame.matrix()` is used *just prior* to providing nice, unduplicated column names.
 
@@ -38,13 +38,13 @@ The PR: <https://github.com/facebook/prophet/pull/739>
 
 # rdefra
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#rdefra>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#rdefra>
 
 Looks like an intermittent internet thing. I see no likely connection to tibble.
 
 # readxl
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#readxl>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#readxl>
 
 CRAN v1.1.0 applies `tibble::as_tibble(validate = FALSE)` and `tibble::repair_names()` on the list emitted by the C/C++ code. Sole point of tibble contact.
 
@@ -66,8 +66,16 @@ This PR is where I am working things out: <https://github.com/tidyverse/readxl/p
 
 # xgboost
 
-<https://github.com/krlmlr/tibble/blob/f-revdep-2/revdep/new-problems.md#xgboost>
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#xgboost>
 
 There is one example and one test failure. Both are related to `xgb.plot.multi.trees()` which calls DiagrammeR. If I install DiagrammeR from my PR (see elsewhere), examples run cleanly and tests pass cleanly. I can't run `check()` due to the somewhat non-standard way this package is setup.
 
 TL;DR: if DiagrammeR gets updated for dev tibble, I believe that fixes xgboost.
+
+# naniar
+
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#naniar>
+
+All failures are due to the fact that `new_tibble()` requires an `nrow` argument. Luckily, this can be derived from the data.
+
+Submitted PR: <https://github.com/njtierney/naniar/pull/220>. R CMD check runs fine locally.
