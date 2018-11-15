@@ -56,11 +56,37 @@ Version: 0.1.1
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 72-81 (anomalize_methods.Rmd) 
     Error: processing vignette 'anomalize_methods.Rmd' failed with diagnostics:
     Must pass a scalar integer as `nrow` argument to `new_tibble()`.
+    Execution halted
+    ```
+
+# anomalyDetection
+
+Version: 0.2.5
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    
+    Attaching package: 'dplyr'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 159-164 (Introduction.Rmd) 
+    Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
+    Columns 1, 2, 3, 4, 5, … (and 19 more) must be named.
+    Use .name_repair to specify repair.
     Execution halted
     ```
 
@@ -75,14 +101,14 @@ Version: 0.4.3
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-             1)), .)))) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      7: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      8: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      9: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      10: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      11: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      12: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      13: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+             1)), .)))) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      7: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      8: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      9: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      10: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      11: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      12: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      13: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 195 SKIPPED: 1 FAILED: 1
@@ -120,6 +146,75 @@ Version: 0.1.0
     +    , .nIter = 20
     +   )
     Error: Column 1 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+# BayesMallows
+
+Version: 0.1.1
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘BayesMallows-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: generate_constraints
+    > ### Title: Generate Constraint Set from Pairwise Comparisons
+    > ### Aliases: generate_constraints
+    > 
+    > ### ** Examples
+    > 
+    > # Here is an example with the beach preference data.
+    > # First, generate the transitive closure.
+    > beach_tc <- generate_transitive_closure(beach_preferences)
+    Error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      9: as_tibble.matrix(.generate_transitive_closure(cbind(.data$bottom_item, .data$top_item))) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      10: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      11: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      12: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      13: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      14: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      15: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      16: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 75 SKIPPED: 1 FAILED: 1
+      1. Error: transitive closure generation works (@test_pairwise_functions.R#36) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    
+    Attaching package: 'dplyr'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 448-449 (BayesMallowsPackage.Rmd) 
+    Error: processing vignette 'BayesMallowsPackage.Rmd' failed with diagnostics:
+    Columns 1, 2 must be named.
     Use .name_repair to specify repair.
     Execution halted
     ```
@@ -193,14 +288,14 @@ Version: 0.1.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      15: as_tibble.matrix(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      16: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      17: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      18: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      19: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      20: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      21: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      22: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      15: as_tibble.matrix(x, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      16: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      17: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      18: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      19: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      20: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      21: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      22: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 4574 SKIPPED: 1 FAILED: 1
@@ -214,14 +309,1499 @@ Version: 0.1.0
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 140-146 (cba_macsplex_example.Rmd) 
     Error: processing vignette 'cba_macsplex_example.Rmd' failed with diagnostics:
     Columns 1, 2, 3, 4, 5, … (and 249 more) must be named.
     Execution halted
     ```
 
+# blorr
+
+Version: 0.1.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘blorr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: blr_multi_model_fit_stats
+    > ### Title: Multi model fit statistics
+    > ### Aliases: blr_multi_model_fit_stats blr_multi_model_fit_stats.default
+    > 
+    > ### ** Examples
+    > 
+    > model <- glm(honcomp ~ female + read + science, data = hsb2,
+    + family = binomial(link = 'logit'))
+    > 
+    > model2 <- glm(honcomp ~ female + read + math, data = hsb2,
+    + family = binomial(link = 'logit'))
+    > 
+    > blr_multi_model_fit_stats(model, model2)
+    Error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+                           Added/                                                  
+      Step    Variable    Removed        AIC           BIC           C(p)       
+      ----------------------------------------------------------------------
+         1       x6       addition     18869.627     18885.434    18865.6270    
+         2       x1       addition     18571.376     18595.087    18565.3760    
+         3       x3       addition     18016.724     18048.338    18008.7240    
+         4       x2       addition     16642.374     16681.891    16632.3740    
+         5       x5       addition     16640.883     16688.304    16628.8830    
+         6       x6       removal      16639.219     16678.736    16629.2190    
+      ----------------------------------------------------------------------══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 76 SKIPPED: 28 FAILED: 1
+      1. Error: blr_multi_model_fit_stats prints the correct output (@test-model-fit-stats.R#154) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# BMSC
+
+Version: 0.1.1
+
+## Newly broken
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /tmp/Rtmpz3yA2h/Rd2pdfddd8428b7803'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 65.6Mb
+      sub-directories of 1Mb or more:
+        libs  65.1Mb
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘BMSC’ ...
+** package ‘BMSC’ successfully unpacked and MD5 sums checked
+** libs
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoeUnConstr.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegHorseHoeUnConstr.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegUnConstr.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegUnConstr.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linReg.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linReg.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoe.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegHorseHoe.cc"
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegUnConstr.cc -o stan_files/linRegUnConstr.o
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linReg.cc -o stan_files/linReg.o
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoeUnConstr.cc -o stan_files/linRegHorseHoeUnConstr.o
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
+                 from stan_files/linRegHorseHoeUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoeUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib33243cddafed/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoe.cc -o stan_files/linRegHorseHoe.o
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib33243cddafed/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib33243cddafed/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o BMSC.so stan_files/linReg.o stan_files/linRegHorseHoe.o stan_files/linRegHorseHoeUnConstr.o stan_files/linRegUnConstr.o init.o -L/usr/lib/R/lib -lR
+rm stan_files/linRegUnConstr.cc stan_files/linRegHorseHoe.cc stan_files/linRegHorseHoeUnConstr.cc stan_files/linReg.cc
+installing to /tmp/RtmpSwdSvf/file332429d7ad5d/BMSC.Rcheck/BMSC/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (BMSC)
+
+```
+### CRAN
+
+```
+* installing *source* package ‘BMSC’ ...
+** package ‘BMSC’ successfully unpacked and MD5 sums checked
+** libs
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoe.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegHorseHoe.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linReg.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linReg.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegUnConstr.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegUnConstr.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoeUnConstr.stan
+Compiling with: 
+STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/linRegHorseHoeUnConstr.cc"
+Error in readRDS("/tmp/RtmpSwdSvf/file334024fd2f35") : 
+  error reading from connection
+Calls: .Last -> readRDS
+3: traceback(1)
+2: readRDS("/tmp/RtmpSwdSvf/file334024fd2f35")
+1: .Last()
+Makevars:18: recipe for target 'stan_files/linRegHorseHoeUnConstr.cc' failed
+make: *** [stan_files/linRegHorseHoeUnConstr.cc] Error 1
+make: *** Waiting for unfinished jobs....
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linReg.cc -o stan_files/linReg.o
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linReg.hpp:18,
+                 from stan_files/linReg.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linReg.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegUnConstr.cc -o stan_files/linRegUnConstr.o
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegUnConstr.hpp:18,
+                 from stan_files/linRegUnConstr.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegUnConstr.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib334012465a7b/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoe.cc -o stan_files/linRegHorseHoe.o
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/linRegHorseHoe.hpp:18,
+                 from stan_files/linRegHorseHoe.cc:3:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib334012465a7b/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib334012465a7b/Rcpp/include/Rcpp.h:27,
+                 from stan_files/linRegHorseHoe.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+rm stan_files/linRegUnConstr.cc stan_files/linRegHorseHoe.cc stan_files/linRegHorseHoeUnConstr.cc stan_files/linReg.cc
+ERROR: compilation failed for package ‘BMSC’
+* removing ‘/tmp/RtmpSwdSvf/file334042035138/BMSC.Rcheck/BMSC’
+
+```
 # breathtestcore
 
 Version: 0.4.5
@@ -233,7 +1813,8 @@ Version: 0.4.5
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
-      ── 3. Failure: A list of data frames is concatenated, comments are concatenated 
+      
+      ── 2. Failure: A list of data frames is concatenated, comments are concatenated 
       comment(d) not identical to "A".
       1/1 mismatches
       x[1]: "A\n2 records,  m = 40±10, k =  0.010±0.003, beta = 2.00±0.40,\nGaussian n
@@ -241,10 +1822,63 @@ Version: 0.4.5
       y[1]: "A"
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 351 SKIPPED: 5 FAILED: 3
-      1. Error: Columns without names are renamed (@test_cleanup_data.R#70) 
-      2. Failure: A list of data frames is concatenated, comments are concatenated (@test_cleanup_data.R#136) 
-      3. Failure: A list of data frames is concatenated, comments are concatenated (@test_cleanup_data.R#145) 
+      OK: 356 SKIPPED: 5 FAILED: 2
+      1. Failure: A list of data frames is concatenated, comments are concatenated (@test_cleanup_data.R#136) 
+      2. Failure: A list of data frames is concatenated, comments are concatenated (@test_cleanup_data.R#145) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# broom
+
+Version: 0.5.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > if (require("lavaan", quietly = TRUE)) {
+    + 
+    +  library(lavaan)
+    + 
+    +  cfa.fit <- cfa(
+    +    'F =~ x1 + x2 + x3 + x4 + x5',
+    +    data = HolzingerSwineford1939, group = "school"
+    +  )
+    +  glance(cfa.fit)
+    + 
+    + }
+    This is lavaan 0.6-3
+    lavaan is BETA software! Please report any bugs.
+    Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
+    Error in .f(.x[[i]], ...) : object 'rmsea.ci.upper' not found
+    Calls: glance ... <Anonymous> -> vars_rename_eval -> map_if -> map -> .f
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/test-all.R’ failed.
+    Last 13 lines of output:
+      7: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      8: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      9: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      10: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      11: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 872 SKIPPED: 2 FAILED: 4
+      1. Error: tidy.table (@test-base.R#34) 
+      2. Error: glance.lavaan (@test-lavaan.R#45) 
+      3. Error: polygon tidiers work (@test-sp.R#20) 
+      4. Error: line tidiers work (@test-sp.R#73) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -327,8 +1961,6 @@ Version: 0.2.0
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 26-31 (intermediate-ssm-analysis.Rmd) 
     Error: processing vignette 'intermediate-ssm-analysis.Rmd' failed with diagnostics:
     Columns 1, 2, 3, 4, 5, … (and 1 more) must be named.
@@ -336,34 +1968,1169 @@ Version: 0.2.0
     Execution halted
     ```
 
-# classyfireR
+# clustree
 
-Version: 0.1.1
+Version: 0.2.2
 
 ## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘clustree-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: clustree
+    > ### Title: Plot a clustering tree
+    > ### Aliases: clustree clustree.matrix clustree.data.frame
+    > ###   clustree.SingleCellExperiment clustree.seurat
+    > 
+    > ### ** Examples
+    > 
+    > data(iris_clusts)
+    > clustree(iris_clusts, prefix = "K")
+    Error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      3: eval_bare(get_expr(quo), get_env(quo)) at /tmp/RtmprUj4Zw/R.INSTALL86c769d3e964/testthat/R/expectation.R:90
-      4: dplyr::is.tbl(retrieve_classification(inchi_sub$query_id)) at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval.R:99
-      5: retrieve_classification(inchi_sub$query_id) at /tmp/RtmpPSeHMW/R.INSTALLe5f7f454083/dplyr/R/tbl.r:34
-      6: jsonlite::fromJSON(text_content) at /tmp/RtmpD0aMxw/filea54b75e5591f/classyfireR.Rcheck/00_pkg_src/classyfireR/R/retrieve_classification.R:27
-      7: fromJSON_string(txt = txt, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame, 
-             simplifyMatrix = simplifyMatrix, flatten = flatten, ...) at /tmp/Rtmpejdz8t/R.INSTALL5d4d5780e00e/jsonlite/R/fromJSON.R:99
-      8: parseJSON(txt, bigint_as_char) at /tmp/Rtmpejdz8t/R.INSTALL5d4d5780e00e/jsonlite/R/fromJSON.R:115
-      9: parse_string(txt, bigint_as_char) at /tmp/Rtmpejdz8t/R.INSTALL5d4d5780e00e/jsonlite/R/parseJSON.R:5
-      
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 10 SKIPPED: 0 FAILED: 1
-      1. Error: submit-classification (@test-submission.R#16) 
+      OK: 11 SKIPPED: 0 FAILED: 20
+      1. Error: node_colour aesthetic works (@test-aesthetics.R#6) 
+      2. Error: static node_colour works (@test-aesthetics.R#19) 
+      3. Error: node_size aesthetic works (@test-aesthetics.R#30) 
+      4. Error: static node_size works (@test-aesthetics.R#43) 
+      5. Error: node_alpha aesthetic works (@test-aesthetics.R#52) 
+      6. Error: static node_size works (@test-aesthetics.R#65) 
+      7. Error: all static works (@test-aesthetics.R#76) 
+      8. Error: layout argument works (@test-aesthetics.R#82) 
+      9. Error: data.frame interface works (@test-clustree-overlay.R#23) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 77-78 (clustree.Rmd) 
+    Error: processing vignette 'clustree.Rmd' failed with diagnostics:
+    Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+# colorednoise
+
+Version: 1.0.3
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘colorednoise-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: matrix_model
+    > ### Title: Temporally Autocorrelated Matrix Population Models
+    > ### Aliases: matrix_model
+    > 
+    > ### ** Examples
+    > 
+    > meanMat <- matrix(c(0.55, 0.6, 0.24, 0.4), byrow = TRUE, ncol = 2)
+    > sdMat <- matrix(c(0.3, 0.35, 0.05, 0.1), byrow = TRUE, ncol = 2)
+    > phiMat <- matrix(c(-0.2, -0.2, 0, 0), byrow = TRUE, ncol = 2)
+    > initialPop <- c(100, 100)
+    > sim <- matrix_model(list(meanMat, sdMat, phiMat), initialPop, 50)
+    Error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      13: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      14: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      15: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      16: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      17: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      18: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 6 SKIPPED: 0 FAILED: 3
+      1. Error: colored_multi_rnorm can produce red noise (@test_noise.R#29) 
+      2. Error: colored_multi_rnorm can produce blue noise (@test_noise.R#37) 
+      3. Error: matrix_model can produce cross-correlated autocorrelated populations with demographic stochasticity (@test_simulations.R#31) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# conStruct
+
+Version: 1.0.2
+
+## Newly broken
+
+*   checking whether package ‘conStruct’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/RtmpSwdSvf/file33551532d723/conStruct.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘conStruct’ ...
+** package ‘conStruct’ successfully unpacked and MD5 sums checked
+** libs
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/rstan/include" -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/BH/include" -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib3355649d8cd9/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/multiK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/multiK.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/space_oneK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/space_oneK.cc"
+Error in readRDS("/tmp/RtmpSwdSvf/file33556e37ce59") : 
+  error reading from connection
+Calls: .Last -> readRDS
+3: traceback(1)
+2: readRDS("/tmp/RtmpSwdSvf/file33556e37ce59")
+1: .Last()
+Makevars:18: recipe for target 'stan_files/space_oneK.cc' failed
+make: *** [stan_files/space_oneK.cc] Error 1
+make: *** Waiting for unfinished jobs....
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/oneK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/oneK.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/space_multiK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/space_multiK.cc"
+rm stan_files/space_oneK.cc stan_files/multiK.cc stan_files/oneK.cc stan_files/space_multiK.cc
+ERROR: compilation failed for package ‘conStruct’
+* removing ‘/tmp/RtmpSwdSvf/file33551532d723/conStruct.Rcheck/conStruct’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘conStruct’ ...
+** package ‘conStruct’ successfully unpacked and MD5 sums checked
+** libs
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/space_multiK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/space_multiK.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/space_oneK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/space_oneK.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/multiK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/multiK.cc"
+"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/oneK.stan
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+Wrote C++ file "stan_files/oneK.cc"
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/space_multiK.cc -o stan_files/space_multiK.o
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_multiK.hpp:18,
+                 from stan_files/space_multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/oneK.cc -o stan_files/oneK.o
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/oneK.hpp:18,
+                 from stan_files/oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/space_oneK.cc -o stan_files/space_oneK.o
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/space_oneK.hpp:18,
+                 from stan_files/space_oneK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/space_oneK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+Compiling with: 
+STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "message()" -e "cat(system.file('include', 'src', package = 'StanHeaders', mustWork = TRUE))" -e "message()" | grep "StanHeaders")
+PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
+
+CXX_STD = CXX14
+SOURCES = $(wildcard stan_files/*.stan)
+OBJECTS = $(SOURCES:.stan=.o) init.o
+
+all: $(SHLIB)
+		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
+
+clean:
+		rm -rf stan_files/*.o
+		rm -rf *.so *.o
+		rm -rf stan_files/*.cc
+		rm -rf stan_files/*.hpp
+
+%.cc: %.stan
+		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
+
+.phony: all clean
+
+
+g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include" -I"/tmp/RtmpSwdSvf/checklib333c78e6594c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/multiK.cc -o stan_files/multiK.o
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
+                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
+                                                                 ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
+                               ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
+                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> & r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+     shared_ptr & operator=( std::auto_ptr<Y> && r )
+                                  ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/shared_ptr.hpp:17:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/time_clock.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
+                                      ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+In file included from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/fusion/include/make_fused.hpp:11,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/numeric/odeint.hpp:25,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/arr.hpp:44,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/prim/mat.hpp:325,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/stan/math/rev/mat.hpp:12,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/stan_fit.hpp:34,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/rstan/include/rstan/rstaninc.hpp:3,
+                 from stan_files/multiK.hpp:18,
+                 from stan_files/multiK.cc:3:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp: At global scope:
+/tmp/RtmpSwdSvf/checklib333c78e6594c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
+ template<class T> T * get_pointer(std::auto_ptr<T> const& p)
+                                        ^
+In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/5/locale:43,
+                 from /usr/include/c++/5/iomanip:43,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/RcppCommon.h:52,
+                 from /tmp/RtmpSwdSvf/checklib333c78e6594c/Rcpp/include/Rcpp.h:27,
+                 from stan_files/multiK.cc:1:
+/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^
+g++ -std=gnu++14 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o conStruct.so stan_files/space_oneK.o stan_files/multiK.o stan_files/oneK.o stan_files/space_multiK.o init.o -L/usr/lib/R/lib -lR
+rm stan_files/space_oneK.cc stan_files/multiK.cc stan_files/oneK.cc stan_files/space_multiK.cc
+installing to /tmp/RtmpSwdSvf/file333c1b017d2f/conStruct.Rcheck/conStruct/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (conStruct)
+
+```
 # corrr
 
 Version: 0.3.0
@@ -375,12 +3142,12 @@ Version: 0.3.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      22: vars_select_eval(.vars, quos) at /tmp/RtmpGRBPQr/R.INSTALL9e601832037c/tidyselect/R/vars-select.R:123
-      23: map_if(quos, !is_helper, eval_tidy, mask) at /tmp/RtmpGRBPQr/R.INSTALL9e601832037c/tidyselect/R/vars-select.R:239
-      24: map(.x[sel], .f, ...) at /tmp/Rtmptt2trN/R.INSTALLba2c7b3c10a5/purrr/R/map.R:112
-      25: .f(.x[[i]], ...) at /tmp/Rtmptt2trN/R.INSTALLba2c7b3c10a5/purrr/R/map.R:104
-      26: -rowname at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:87
-      27: is_character(x) at /tmp/RtmpGRBPQr/R.INSTALL9e601832037c/tidyselect/R/vars-select.R:266
+      22: vars_select_eval(.vars, quos) at /tmp/RtmpCghJ5z/R.INSTALLbb0d15584d20/tidyselect/R/vars-select.R:123
+      23: map_if(quos, !is_helper, eval_tidy, mask) at /tmp/RtmpCghJ5z/R.INSTALLbb0d15584d20/tidyselect/R/vars-select.R:239
+      24: map(.x[sel], .f, ...) at /tmp/RtmpJuVtR0/R.INSTALL897d18389bd1/purrr/R/map.R:112
+      25: .f(.x[[i]], ...) at /tmp/RtmpJuVtR0/R.INSTALL897d18389bd1/purrr/R/map.R:104
+      26: -rowname at /tmp/Rtmpalrjoj/R.INSTALL392a7b7c7568/rlang/R/eval-tidy.R:87
+      27: is_character(x) at /tmp/RtmpCghJ5z/R.INSTALLbb0d15584d20/tidyselect/R/vars-select.R:266
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 71 SKIPPED: 0 FAILED: 3
@@ -392,173 +3159,32 @@ Version: 0.3.0
       Execution halted
     ```
 
-# descriptr
+# dexter
 
-Version: 0.4.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > ds_freq_cont(mtcarz, mpg, 4)
-                                    Variable: mpg                                 
-    |---------------------------------------------------------------------------|
-    |      Bins       | Frequency | Cum Frequency |   Percent    | Cum Percent  |
-    |---------------------------------------------------------------------------|
-    |  10.4  -  16.3  |    10     |      10       |    31.25     |    31.25     |
-    |---------------------------------------------------------------------------|
-    |  16.3  -  22.1  |    13     |      23       |    40.62     |    71.88     |
-    |---------------------------------------------------------------------------|
-    |  22.1  -   28   |     5     |      28       |    15.62     |     87.5     |
-    |---------------------------------------------------------------------------|
-    |   28   -  33.9  |     4     |      32       |     12.5     |     100      |
-    |---------------------------------------------------------------------------|
-    |      Total      |    32     |       -       |    100.00    |      -       |
-    |---------------------------------------------------------------------------|> 
-    > # histogram
-    > k <- ds_freq_cont(mtcarz, mpg, 4)
-    > plot(k)
-    Error: Columns 1, 2, 3, 4 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 135-137 (descriptive-stats.Rmd) 
-    Error: processing vignette 'descriptive-stats.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# DiagrammeR
-
-Version: 1.0.0
+Version: 0.8.3
 
 ## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > # which several columns have
-    > # values designated as graph nodes
-    > df <-
-    +   data.frame(
-    +     col_1 = c("f", "p", "q"),
-    +     col_2 = c("q", "x", "f"),
-    +     col_3 = c(1, 5, 3),
-    +     col_4 = c("a", "v", "h"),
-    +     stringsAsFactors = FALSE)
-    > 
-    > # Add nodes from columns `col_1`
-    > # and `col_2` from the data frame
-    > # to the graph object
-    > graph <-
-    +   graph %>%
-    +   add_nodes_from_df_cols(
-    +     df = df,
-    +     columns = c("col_1", "col_2"))
-    Error: Columns 1, 2, 3 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      19: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      20: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      21: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      22: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      23: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      24: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      25: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      26: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
       
+      ==
+      ==
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 2020 SKIPPED: 0 FAILED: 7
-      1. Error: adding nodes from several table columns to a graph is possible (@test-add_nodes_edges_from_table.R#786) 
-      2. Error: the display of the metagraph works (@test-metagraph.R#51) 
-      3. Error: rendering a graph is indeed possible (@test-render_graph_series.R#35) 
-      4. Error: rendering a graph from a series is also possible (@test-render_graph_series.R#74) 
-      5. Error: simple traversals are possible (@test-traversals.R#49) 
-      6. Error: selective traversals with `trav_both()` are possible (@test-traversals.R#1224) 
-      7. Error: copying values with `trav_both()` works (@test-traversals_copying_attr_vals.R#249) 
+      OK: 56 SKIPPED: 5 FAILED: 1
+      1. Error: calibration of verbal aggression dataset matches oplm results, with fixed and unfixed (@test_enorm.R#31) 
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# diffdf
-
-Version: 1.0.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘diffdf-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: diffdf
-    > ### Title: diffdf
-    > ### Aliases: diffdf
-    > 
-    > ### ** Examples
-    > 
-    > x <- subset( iris,  -Species)
-    Warning in Ops.factor(Species) : ‘-’ not meaningful for factors
-    > x[1,2] <- 5
-    > COMPARE <- diffdf( iris, x)
-    Error: The `names` must have length 6, not 2.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 398 SKIPPED: 0 FAILED: 17
-      1. Error: Check comparision of equal objects (@test-core.R#113) 
-      2. Error: Unequal objects raise warnings (@test-core.R#141) 
-      3. Error: Unequal object, checking numbers correct (@test-core.R#186) 
-      4. Error: Differing modes error (@test-core.R#198) 
-      5. Error: Differing classes error (@test-core.R#210) 
-      6. Error: Illegal columns error (@test-core.R#242) 
-      7. Error: Additional columns error (@test-core.R#262) 
-      8. Error: Additional rows error (@test-core.R#278) 
-      9. Error: Objets with differing attributes produce the correct warning (@test-core.R#312) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 29-50 (diffdf-basic.Rmd) 
-    Error: processing vignette 'diffdf-basic.Rmd' failed with diagnostics:
-    The `names` must have length 12, not 2.
-    Execution halted
     ```
 
 # docxtractr
@@ -570,12 +3196,12 @@ Version: 0.5.0
 *   checking examples ... ERROR
     ```
     ...
-    > ### Aliases: docx_extract_tbl
     > 
     > ### ** Examples
     > 
     > doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
     > docx_extract_tbl(doc3, 3)
+    Warning: Must use a character vector as names.
     # A tibble: 6 x 2
       Foo   Bar  
       <chr> <chr>
@@ -622,7 +3248,29 @@ Version: 6.1.0
     Execution halted
     ```
 
-# echarts4r
+# epidata
+
+Version: 0.2.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘epidata-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: get_annual_wages_and_work_hours
+    > ### Title: Retreive CPS ASEC Annual Wages and Work Hours
+    > ### Aliases: get_annual_wages_and_work_hours
+    > 
+    > ### ** Examples
+    > 
+    > get_annual_wages_and_work_hours()
+    Error: Columns 1, 2, 3, 4, 5, … (and 2 more) must be named.
+    Execution halted
+    ```
+
+# frequencies
 
 Version: 0.1.1
 
@@ -631,92 +3279,74 @@ Version: 0.1.1
 *   checking examples ... ERROR
     ```
     ...
-    > ### Aliases: e_heatmap e_heatmap_
+    Running examples in ‘frequencies-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: freq_two_vects
+    > ### Title: freq_two_vects
+    > ### Aliases: freq_two_vects
     > 
     > ### ** Examples
     > 
-    > v <- LETTERS[1:10]
-    > matrix <- data.frame(
-    +   x = sample(v, 300, replace = TRUE), 
-    +   y = sample(v, 300, replace = TRUE), 
-    +   z = rnorm(300, 10, 1),
-    +   stringsAsFactors = FALSE
-    + ) %>% 
-    +   dplyr::group_by(x, y) %>% 
-    +   dplyr::summarise(z = sum(z)) %>% 
-    +   dplyr::ungroup()
+    > # Sample data frame to demo the freq_two_vects function.
+    > df <- data.frame(gender = sample(c('m','f'), 200, replace = TRUE),
+    +                  ethnicity = sample(c('african american', 'asian', 'caucasian',
+    +                                    'hispanic', 'other'),
+    +                                    200, replace = TRUE),
+    +                  stringsAsFactors = FALSE)
     > 
-    > matrix %>% 
-    +   e_charts(x) %>% 
-    +   e_heatmap(y, z) %>% 
-    +   e_visual_map(z)
-    Error: The `names` must not be `NULL`.
+    > freq_two_vects(df, gender, ethnicity, FALSE)
+    Error in grouped_df_impl(data, unname(vars), drop) : 
+      Column `get.col1.` is unknown
+    Calls: freq_two_vects ... group_by.data.frame -> grouped_df -> grouped_df_impl
     Execution halted
     ```
-
-# fastDummies
-
-Version: 1.2.0
-
-## Newly broken
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      8: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:48
-      9: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      10: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      11: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      12: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      13: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      14: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      15: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      9: `_fseq`(`_lhs`)
+      10: freduce(value, `_function_list`) at /tmp/RtmpzT4itO/R.INSTALL53fc1dade66f/magrittr/R/pipe.R:28
+      11: function_list[[i]](value) at /tmp/RtmpzT4itO/R.INSTALL53fc1dade66f/magrittr/R/freduce.R:17
+      12: dplyr::group_by(., get.col1.)
+      13: group_by.data.frame(., get.col1.) at /tmp/RtmpVNfmtz/R.INSTALLaf254ddc6f91/dplyr/R/group-by.r:76
+      14: grouped_df(groups$data, groups$group_names) at /tmp/RtmpVNfmtz/R.INSTALLaf254ddc6f91/dplyr/R/dataframe.R:34
+      15: grouped_df_impl(data, unname(vars), drop) at /tmp/RtmpVNfmtz/R.INSTALLaf254ddc6f91/dplyr/R/grouped-df.r:25
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 398 SKIPPED: 0 FAILED: 1
-      1. Error: tibble input returns tibble (@test-return-type.R#8) 
+      OK: 24 SKIPPED: 0 FAILED: 2
+      1. Error: numbers and letters aggregations are correct (@test_freq_two_vects.R#44) 
+      2. Error: dates and logicals aggregations are correct (@test_freq_two_vects.R#77) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-# feather
+# genBaRcode
 
-Version: 0.3.1
+Version: 1.1.0
 
 ## Newly broken
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘feather-Ex.R’ failed
+    Running examples in ‘genBaRcode-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: read_feather
-    > ### Title: Read and write feather files.
-    > ### Aliases: read_feather write_feather
+    > ### Name: plotClusterGgTree
+    > ### Title: Plotting a Cluster ggTree
+    > ### Aliases: plotClusterGgTree
     > 
     > ### ** Examples
     > 
-    > mtcars2 <- read_feather(feather_example("mtcars.feather"))
-    Error: C stack usage  7970244 is too close to the limit
+    > data(BC_dat)
+    > plotClusterGgTree(BC_dat, tree_est = "UPGMA", type = "circular")
+    Error in as.data.frame.default(value, stringsAsFactors = FALSE) : 
+      cannot coerce class ‘"phylo"’ to a data.frame
+    Calls: plotClusterGgTree ... as_tibble -> as.data.frame -> as.data.frame.default
     Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(feather)
-      > 
-      > test_check("feather")
-      Error: C stack usage  7969380 is too close to the limit
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 15 SKIPPED: 0 FAILED: 0
-      Execution halted
     ```
 
 # ggfan
@@ -729,13 +3359,41 @@ Version: 0.1.2
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 117-125 (ggfan_stan.Rmd) 
     Error: processing vignette 'ggfan_stan.Rmd' failed with diagnostics:
     Columns 1, 2, 3, 4, 5, … (and 995 more) must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+# ggsn
+
+Version: 0.4.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    Loading required package: sp
+    rgdal: version: 1.3-6, (SVN revision 773)
+     Geospatial Data Abstraction Library extensions to R successfully loaded
+     Loaded GDAL runtime: GDAL 2.1.3, released 2017/20/01
+     Path to GDAL shared files: /usr/share/gdal/2.1
+     GDAL binary built with GEOS: TRUE 
+     Loaded PROJ.4 runtime: Rel. 4.9.2, 08 September 2015, [PJ_VERSION: 492]
+     Path to PROJ.4 shared files: (autodetected)
+     Linking to sp version: 1.3-1 
+    > library(broom)
+    > dsn <- system.file('extdata', package = 'ggsn')
+    > map <- readOGR(dsn, 'sp')
+    OGR data source with driver: ESRI Shapefile 
+    Source: "/tmp/RtmpSwdSvf/file33512e2cd56d/ggsn.Rcheck/ggsn/extdata", layer: "sp"
+    with 96 features
+    It has 2 fields
+    > map@data$id <- 0:(nrow(map@data) - 1)
+    > map.df <- merge(tidy(map), map, by = 'id')
+    Error: Columns 1, 2 must be named.
     Use .name_repair to specify repair.
     Execution halted
     ```
@@ -770,12 +3428,12 @@ Version: 1.0.2
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      20: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      21: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      22: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      23: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      24: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      25: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      20: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      21: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      22: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      23: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      24: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      25: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 62 SKIPPED: 0 FAILED: 3
@@ -787,87 +3445,79 @@ Version: 1.0.2
       Execution halted
     ```
 
-# HURDAT
+# ggtree
 
-Version: 0.2.0
+Version: 1.12.7
 
 ## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘ggtree-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: facet_plot
+    > ### Title: facet_plot
+    > ### Aliases: facet_plot
+    > 
+    > ### ** Examples
+    > 
+    > tr <- rtree(10)
+    > dd = data.frame(id=tr$tip.label, value=abs(rnorm(10)))
+    > p <- ggtree(tr)
+    Error in as.data.frame.default(value, stringsAsFactors = FALSE) : 
+      cannot coerce class ‘"phylo"’ to a data.frame
+    Calls: ggtree ... as_tibble -> as.data.frame -> as.data.frame.default
+    Execution halted
+    ```
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      14: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:42
-      15: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      16: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      17: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      18: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      19: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      20: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      21: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      15: stop(gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L])), 
+             domain = NA)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 0 SKIPPED: 0 FAILED: 1
-      1. Error: (unknown) (@test-hurdat.R#4) 
+      OK: 0 SKIPPED: 0 FAILED: 7
+      1. Error: collapse tree to polytomy (@test-conversion.R#7) 
+      2. Error: geom_balance gives proper errors if called on non-binary node (@test-geom_balance.R#12) 
+      3. Error: geom_cladelabel support parsing expression (@test-geom_cladelabel.R#5) 
+      4. Error: groupOTU (@test-group.R#7) 
+      5. Error: groupClade (@test-group.R#28) 
+      6. Error: dummy layer to set x axis limits of Tree panel (@test-xlim_expand.R#7) 
+      7. Error: dummy layer to set x axis limits of data panel (@test-xlim_expand.R#22) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-# jpmesh
+# haploR
 
-Version: 1.1.1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      9: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:42
-      10: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      11: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      12: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      13: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      14: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      15: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      16: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 130 SKIPPED: 0 FAILED: 1
-      1. Error: fine mesh (@test-meshcode_to_latlon.R#87) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# jpndistrict
-
-Version: 0.3.2
+Version: 2.0.6
 
 ## Newly broken
 
 *   checking tests ...
     ```
      ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
+    Running the tests in ‘tests/runTests.R’ failed.
     Last 13 lines of output:
+      Number of errors: 0 
+      Number of failures: 1 
       
-      options:        ENCODING=cp932 
-      Reading layer `P34-14_47' from data source `/tmp/RtmpgubdRD/P34-14_47_GML/P34-14_47.shp' using driver `ESRI Shapefile'
-      Simple feature collection with 65 features and 4 fields
-      geometry type:  POINT
-      dimension:      XY
-      bbox:           xmin: 123.0045 ymin: 24.06092 xmax: 131.2989 ymax: 27.03917
-      epsg (SRID):    NA
-      proj4string:    +proj=longlat +ellps=GRS80 +no_defs
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 62 SKIPPED: 1 FAILED: 1
-      1. Error: (unknown) (@test-export.R#3) 
+       
+      1 Test Suite : 
+      haploR unit testing - 3 test functions, 0 errors, 1 failure
+      FAILURE in test_queryRegulome: Error in checkEqualsNumeric(dim(x$res.table)[1], 2) : 
+        Mean relative difference: 0.9974684
       
-      Error: testthat unit tests failed
+      Error: 
+      
+      Unit testing failed (#test failures: 1, 
+                       #R errors: 0)
+      
       Execution halted
     ```
 
@@ -920,8 +3570,6 @@ Version: 0.3.4
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     
     Attaching package: 'dplyr'
     
@@ -936,6 +3584,161 @@ Version: 0.3.4
     Quitting from lines 142-144 (Introduction.Rmd) 
     Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
     Must pass a scalar integer as `nrow` argument to `new_tibble()`.
+    Execution halted
+    ```
+
+# keyholder
+
+Version: 0.1.2
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 295 SKIPPED: 0 FAILED: 15
+      1. Failure: restore_keys.default works (@test-keys-manip.R#44) 
+      2. Failure: restore_keys.default works (@test-keys-manip.R#54) 
+      3. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#65) 
+      4. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#72) 
+      5. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#80) 
+      6. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#85) 
+      7. Failure: restore_keys_all works (@test-scoped.R#94) 
+      8. Failure: restore_keys_all works (@test-scoped.R#101) 
+      9. Failure: restore_keys_all works (@test-scoped.R#108) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# LymphoSeq
+
+Version: 1.8.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+      |                                                                            
+      |============================                                          |  40%
+      |                                                                            
+      |===================================                                   |  50%
+      |                                                                            
+      |==========================================                            |  60%
+      |                                                                            
+      |=================================================                     |  70%
+      |                                                                            
+      |========================================================              |  80%
+      |                                                                            
+      |===============================================================       |  90%
+      |                                                                            
+      |======================================================================| 100%
+    > 
+    > phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
+    +          layout = "rectangular")
+    Error in as.data.frame.default(value, stringsAsFactors = FALSE) : 
+      cannot coerce class ‘"phylo"’ to a data.frame
+    Calls: phyloTree ... as_tibble -> as.data.frame -> as.data.frame.default
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 140-142 (LymphoSeq.Rmd) 
+    Error: processing vignette 'LymphoSeq.Rmd' failed with diagnostics:
+    cannot coerce class '"phylo"' to a data.frame
+    Execution halted
+    ```
+
+# metacoder
+
+Version: 0.3.0
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+                 stop(call. = FALSE, paste0("The following taxon IDs do not exist:\n", limited_print(invalid_ids, 
+                     type = "silent")))
+             }
+             return(result)
+         }) at /tmp/RtmpbsTLjG/R.INSTALL721f4c05a9b5/taxa/R/taxonomy--class.R:1256
+      13: FUN(X[[i]], ...)
+      14: stop(call. = FALSE, paste0("The following taxon IDs do not exist:\n", limited_print(invalid_ids, 
+             type = "silent"))) at /tmp/RtmpbsTLjG/R.INSTALL721f4c05a9b5/taxa/R/taxonomy--class.R:1261
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 94 SKIPPED: 1 FAILED: 1
+      1. Error: Converting to phyloseq (@test--parsers_and_writers.R#204) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# metagenomeFeatures
+
+Version: 2.0.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    ✔ readr   1.1.1           ✔ forcats 0.3.0      
+    ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+    ✖ ggplot2::Position() masks BiocGenerics::Position(), base::Position()
+    ✖ dplyr::combine()    masks Biobase::combine(), BiocGenerics::combine()
+    ✖ dplyr::filter()     masks stats::filter()
+    ✖ dplyr::lag()        masks stats::lag()
+    ggtree v1.12.7  For help: https://guangchuangyu.github.io/software/ggtree
+    
+    If you use ggtree in published research, please cite:
+    Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36, doi:10.1111/2041-210X.12628
+    
+    Attaching package: 'ggtree'
+    
+    The following object is masked from 'package:tidyr':
+    
+        expand
+    
+    Quitting from lines 106-120 (database-explore.Rmd) 
+    Error: processing vignette 'database-explore.Rmd' failed with diagnostics:
+    cannot coerce class '"phylo"' to a data.frame
+    Execution halted
+    ```
+
+# mfa
+
+Version: 1.2.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘mfa-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: summary.mfa
+    > ### Title: Summarise an mfa fit
+    > ### Aliases: summary.mfa
+    > 
+    > ### ** Examples
+    > 
+    > synth <- create_synthetic(C = 20, G = 5)
+    > m <- mfa(synth$X)
+    Sampling for 20 cells and 5 genes
+    > ms <- summary(m)
+    Error: Columns 1, 2 must be named.
     Execution halted
     ```
 
@@ -1020,37 +3823,113 @@ Version: 0.4.0.0
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 78-87 (exploring-imputed-values.Rmd) 
     Error: processing vignette 'exploring-imputed-values.Rmd' failed with diagnostics:
     Must pass a scalar integer as `nrow` argument to `new_tibble()`.
     Execution halted
     ```
 
-# NLMR
+# parsnip
 
-Version: 0.3.2
+Version: 0.0.1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      14: as_tibble.matrix(.) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      15: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      16: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      17: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      18: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      19: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      20: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      21: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 440 SKIPPED: 82 FAILED: 1
+      1. Error: survival prediction (@test_surv_reg_survreg.R#67) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# particles
+
+Version: 0.2.1
 
 ## Newly broken
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘NLMR-Ex.R’ failed
+    Running examples in ‘particles-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: nlm_curds
-    > ### Title: nlm_curds
-    > ### Aliases: nlm_curds
+    > ### Name: evolve
+    > ### Title: Move the simulation forward one or more steps
+    > ### Aliases: evolve
     > 
     > ### ** Examples
     > 
-    > 
-    > # simulate random curdling
-    > (random_curdling <- nlm_curds(curds = c(0.5, 0.3, 0.6),
-    +                               recursion_steps = c(32, 6, 2)))
-    Error: Columns 1, 2, 3, 4, 5, … (and 1019 more) must be named.
+    > graph <- tidygraph::create_notable('folkman')
+    > sim <- graph %>%
+    +   simulate() %>%
+    +   wield(link_force) %>%
+    +   wield(manybody_force)
+    Error in is.force(force) : Columns 1, 2 must be named.
     Use .name_repair to specify repair.
+    Calls: %>% ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Error in re-building vignettes:
+      ...
+    
+    Attaching package: 'particles'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, simulate
+    
+    
+    Attaching package: 'tidygraph'
+    
+    The following object is masked from 'package:stats':
+    
+        filter
+    
+    Quitting from lines 61-71 (intro.Rmd) 
+    Error: processing vignette 'intro.Rmd' failed with diagnostics:
+    Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+# phenopath
+
+Version: 1.4.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘phenopath-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: clvm
+    > ### Title: Fit a CLVM Model
+    > ### Aliases: clvm
+    > 
+    > ### ** Examples
+    > 
+    > sim <- simulate_phenopath()
+    Error: Columns 1, 2, 3 must be named.
     Execution halted
     ```
 
@@ -1058,81 +3937,64 @@ Version: 0.3.2
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      3: as_tibble.default(vl) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      4: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      5: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      6: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      7: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      8: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      9: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 76 SKIPPED: 0 FAILED: 2
-      1. Error: nlm_curds is a good boy (@test_curds.R#5) 
-      2. Error: nlm_curds with wheyed option is functional (@test_curds.R#12) 
-      
-      Error: testthat unit tests failed
+    Complete output:
+      > library(testthat)
+      > library(phenopath)
+      > 
+      > test_check("phenopath")
+      Error: Columns 1, 2, 3 must be named.
       Execution halted
     ```
 
-# Nmisc
+# philr
 
-Version: 0.3.3
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      22: as_tibble.default(.) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      23: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      24: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      25: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      26: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      27: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      28: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 128 SKIPPED: 0 FAILED: 2
-      1. Error: get_packages works (@test_project_packages.R#143) 
-      2. Error: generate_install_file works (@test_project_packages.R#156) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# nullabor
-
-Version: 0.3.5
+Version: 1.6.0
 
 ## Newly broken
 
 *   checking examples ... ERROR
     ```
-    ...
-    > ### Aliases: null_ts
+    Running examples in ‘philr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: annotate_balance
+    > ### Title: annotate_balance
+    > ### Aliases: annotate_balance
     > 
     > ### ** Examples
     > 
-    > require(forecast)
-    Loading required package: forecast
-    > require(tidyverse)
-    Loading required package: tidyverse
-    ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
-    ✔ ggplot2 3.1.0           ✔ purrr   0.2.5      
-    ✔ tibble  1.4.99.9005     ✔ dplyr   0.7.7      
-    ✔ tidyr   0.8.2           ✔ stringr 1.3.1      
-    ✔ readr   1.1.1           ✔ forcats 0.3.0      
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ✖ dplyr::filter() masks stats::filter()
-    ✖ dplyr::lag()    masks stats::lag()
-    > data(aud)
-    > l <- lineup(null_ts("rate", auto.arima), aud)
-    Error: Column 1 must be named.
-    Use .name_repair to specify repair.
+    > tr <- named_rtree(10)
+    > 
+    > annotate_balance(tr, 'n4', size=7)
+    Error in as.data.frame.default(value, stringsAsFactors = FALSE) : 
+      cannot coerce class ‘"phylo"’ to a data.frame
+    Calls: annotate_balance ... as_tibble -> as.data.frame -> as.data.frame.default
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+        expand
+    
+    The following object is masked from 'package:ape':
+    
+        rotate
+    
+    
+    Attaching package: 'dplyr'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 218-230 (philr-intro.Rmd) 
+    Error: processing vignette 'philr-intro.Rmd' failed with diagnostics:
+    cannot coerce class '"phylo"' to a data.frame
     Execution halted
     ```
 
@@ -1146,13 +4008,37 @@ Version: 0.9.24
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 365-368 (userguide2-radiation.Rmd) 
     Error: processing vignette 'userguide2-radiation.Rmd' failed with diagnostics:
     Columns 2, 3 must be named.
+    Execution halted
+    ```
+
+# plotly
+
+Version: 4.8.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘plotly-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: plot_dendro
+    > ### Title: Plot an interactive dendrogram
+    > ### Aliases: plot_dendro
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > hc <- hclust(dist(USArrests), "ave")
+    > dend1 <- as.dendrogram(hc)
+    > plot_dendro(dend1, height = 600) %>% 
+    +   hide_legend() %>% 
+    +   highlight(persistent = TRUE, dynamic = TRUE)
+    Error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair.
     Execution halted
     ```
 
@@ -1169,6 +4055,88 @@ Version: 0.0-3
       ‘[tibble]{print.tbl_df}’
     
     See section 'Cross-references' in the 'Writing R Extensions' manual.
+    ```
+
+# portalr
+
+Version: 0.1.4
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      
+      ── 3. Failure: data generated by level = Plot, type = Annuals, plots = longterm 
+      digest::digest(data) not identical to "3a482a2016888521ef72498e8c36936f".
+      1/1 mismatches
+      x[1]: "96eb7db63ea38928dece20d6cda66949"
+      y[1]: "3a482a2016888521ef72498e8c36936f"
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 130 SKIPPED: 14 FAILED: 3
+      1. Failure: data generated by default setting is same (plants) (@test-99-regression.R#72) 
+      2. Failure: data generated by type = Shrubs, unknowns = T, correct_sp = F is same (plants) (@test-99-regression.R#82) 
+      3. Failure: data generated by level = Plot, type = Annuals, plots = longterm is same (plants) (@test-99-regression.R#92) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# prophet
+
+Version: 0.3.0.1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 286 SKIPPED: 0 FAILED: 15
+      1. Error: cross_validation (@test_diagnostics.R#20) 
+      2. Error: cross_validation_logistic (@test_diagnostics.R#46) 
+      3. Error: cross_validation_extra_regressors (@test_diagnostics.R#62) 
+      4. Error: cross_validation_default_value_check (@test_diagnostics.R#77) 
+      5. Error: performance_metrics (@test_diagnostics.R#87) 
+      6. Failure: fit_predict (@test_prophet.R#17) 
+      7. Failure: fit_predict_no_seasons (@test_prophet.R#23) 
+      8. Failure: fit_predict_no_changepoints (@test_prophet.R#28) 
+      9. Failure: fit_predict_changepoint_not_in_history (@test_prophet.R#42) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+      ...
+    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
+    Loading required package: Rcpp
+    code for methods in class "Rcpp_stan_fit4modelcd475a0e34c9_prophet" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
+    code for methods in class "Rcpp_stan_fit4modelcd475a0e34c9_prophet" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
+    
+    Attaching package: 'dplyr'
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 44-46 (quick_start.Rmd) 
+    Error: processing vignette 'quick_start.Rmd' failed with diagnostics:
+    Column names `10%`, `90%` must not be duplicated.
+    Execution halted
     ```
 
 # psychmeta
@@ -1207,8 +4175,6 @@ Version: 2.2.1
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 478-486 (overview.Rmd) 
     Error: processing vignette 'overview.Rmd' failed with diagnostics:
     Columns 1, 2, 3 must be named.
@@ -1216,6 +4182,224 @@ Version: 2.2.1
     Execution halted
     ```
 
+# Rchemcpp
+
+Version: 2.18.0
+
+## Newly broken
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /tmp/Rtmp3o67mA/Rd2pdf3a491f109499'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 15.8Mb
+      sub-directories of 1Mb or more:
+        extdata   2.3Mb
+        libs     12.2Mb
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    ...
+    0 molecules pairs were orthogonal
+    0 of them had a different biological activity
+    0 of them had unknown biological activity
+    
+    Attaching package: ‘apcluster’
+    
+    The following object is masked from ‘package:stats’:
+    
+        heatmap
+    
+    Error in (function (x)  : attempt to apply non-function
+    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
+      error in running command
+    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
+      error in running command
+    Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+      Running 'texi2dvi' on 'Rchemcpp.tex' failed.
+    Messages:
+    sh: 1: /usr/bin/texi2dvi: not found
+    Calls: buildVignettes -> texi2pdf -> texi2dvi
+    Execution halted
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘Rchemcpp’ ...
+** libs
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o constant.o constant.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o descriptor.o descriptor.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o chemcpp.o chemcpp.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o jlpioutils.o jlpioutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o elements.o elements.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o atom.o atom.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o datacontainer.o datacontainer.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeutils.o moleculeutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o molecule.o molecule.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeset.o moleculeset.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.dll -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib33204de60605/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
+g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
+installing to /tmp/RtmpSwdSvf/file33207b4ea46d/Rchemcpp.Rcheck/Rchemcpp/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+in method for ‘length’ with signature ‘"Rcpp_Rmoleculeset"’: no definition for class “Rcpp_Rmoleculeset”
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+code for methods in class “Rcpp_Rmolecule” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
+code for methods in class “Rcpp_Rmolecule” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
+code for methods in class “Rcpp_Rmoleculeset” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
+code for methods in class “Rcpp_Rmoleculeset” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
+* DONE (Rchemcpp)
+
+```
+### CRAN
+
+```
+* installing *source* package ‘Rchemcpp’ ...
+** libs
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o constant.o constant.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o chemcpp.o chemcpp.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o descriptor.o descriptor.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o jlpioutils.o jlpioutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o elements.o elements.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o atom.o atom.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o datacontainer.o datacontainer.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeutils.o moleculeutils.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o molecule.o molecule.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpSwdSvf/checklib335856153b64/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
+g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
+/usr/bin/ld: cannot find -lchemcpp
+collect2: error: ld returned 1 exit status
+/usr/share/R/share/make/shlib.mk:6: recipe for target 'Rchemcpp.so' failed
+make: *** [Rchemcpp.so] Error 1
+make: *** Waiting for unfinished jobs....
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeset.o moleculeset.cpp
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.dll -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+ERROR: compilation failed for package ‘Rchemcpp’
+* removing ‘/tmp/RtmpSwdSvf/file33586d2c7ec7/Rchemcpp.Rcheck/Rchemcpp’
+
+```
 # rcrtan
 
 Version: 0.1.0
@@ -1236,46 +4420,6 @@ Version: 0.1.0
     > crt_iteman(bh_depend, 2:31, 21, scale = 'raw')
     Error: Column 1 must be named.
     Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 105-114 (rcrtan-vignette.Rmd) 
-    Error: processing vignette 'rcrtan-vignette.Rmd' failed with diagnostics:
-    Column 1 must be named.
-    Execution halted
-    ```
-
-# rdefra
-
-Version: 0.3.5
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      6: httr::http_error(myURL) at /tmp/RtmprUj4Zw/R.INSTALL86c769d3e964/testthat/R/expect-that.R:22
-      7: http_error.character(myURL) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/response-status.r:162
-      8: http_error(HEAD(x, ...)) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/response-status.r:166
-      9: HEAD(x, ...) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/response-status.r:166
-      10: request_perform(req, hu$handle$handle) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/http-head.r:28
-      11: request_fetch(req$output, req$url, handle) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/request.R:137
-      12: request_fetch.write_memory(req$output, req$url, handle) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/write-function.R:74
-      13: curl::curl_fetch_memory(url, handle = handle) at /tmp/Rtmp6CO8z7/R.INSTALL86d63e789f1c/httr/R/write-function.R:76
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 20 SKIPPED: 1 FAILED: 1
-      1. Error: Hourly data for station ABD/2014 should be available (@test-data.R#11) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # readxl
@@ -1339,12 +4483,42 @@ Version: 1.0.1
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 30-31 (a-intro.Rmd) 
     Error: processing vignette 'a-intro.Rmd' failed with diagnostics:
     Columns 1, 2, 3 must be named.
     Use .name_repair to specify repair.
+    Execution halted
+    ```
+
+# rhierbaps
+
+Version: 1.1.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Warning in block_exec(params) :
+      failed to tidy R code in chunk <unnamed-chunk-5>
+    reason: Error in loadNamespace(name) : there is no package called 'formatR'
+    
+    Warning in block_exec(params) :
+      failed to tidy R code in chunk <unnamed-chunk-6>
+    reason: Error in loadNamespace(name) : there is no package called 'formatR'
+    
+    Warning in block_exec(params) :
+      failed to tidy R code in chunk <unnamed-chunk-7>
+    reason: Error in loadNamespace(name) : there is no package called 'formatR'
+    
+    Read 1 item
+    Warning in block_exec(params) :
+      failed to tidy R code in chunk <unnamed-chunk-8>
+    reason: Error in loadNamespace(name) : there is no package called 'formatR'
+    
+    Quitting from lines 106-110 (introduction.Rmd) 
+    Error: processing vignette 'introduction.Rmd' failed with diagnostics:
+    cannot coerce class '"phylo"' to a data.frame
     Execution halted
     ```
 
@@ -1359,14 +4533,14 @@ Version: 0.7.2
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
-      20: as_tibble.matrix(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      21: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      22: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      23: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      24: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      25: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      26: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      27: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
+      20: as_tibble.matrix(x, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      21: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      22: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      23: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      24: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      25: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      26: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      27: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 114 SKIPPED: 4 FAILED: 1
@@ -1376,9 +4550,72 @@ Version: 0.7.2
       Execution halted
     ```
 
-# segregation
+# rplos
 
-Version: 0.1.0
+Version: 0.8.4
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/test-all.R’ failed.
+    Last 13 lines of output:
+      17: as_tibble.matrix(x, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      18: as_tibble(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:187
+      19: as_tibble.data.frame(m, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      20: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      21: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      22: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      23: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      24: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 100 SKIPPED: 7 FAILED: 1
+      1. Error: facetplos (@test-facetplos.R#5) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# rrr
+
+Version: 1.0.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘rrr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: pairwise_plot
+    > ### Title: Pairwise Plots
+    > ### Aliases: pairwise_plot
+    > 
+    > ### ** Examples
+    > 
+    > data(pendigits)
+    > digits_features <- pendigits[,1:34]
+    > digits_class <- pendigits[,35]
+    > pairwise_plot(digits_features, digits_class, type = "pca", pair_x = 1, pair_y = 3)
+    Error: Columns 1, 2, 3, 4, 5, … (and 29 more) must be named.
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 337-338 (rrr.Rmd) 
+    Error: processing vignette 'rrr.Rmd' failed with diagnostics:
+    Columns 1, 2, 3, 4, 5, … (and 29 more) must be named.
+    Execution halted
+    ```
+
+# rsample
+
+Version: 0.0.2
 
 ## Newly broken
 
@@ -1387,21 +4624,146 @@ Version: 0.1.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      5: `[[.tbl_df`(total, "M", "est") at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval.R:99
-      6: NextMethod() at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/subsetting.R:77
-      7: `[[.data.frame`(total, "M", "est")
+      
+          fill
+      
+      > 
+      > test_check(package = "rsample")
+      ── 1. Failure: simple rset (@test_rset.R#42)  ──────────────────────────────────
+      sort(names(attributes(res2))) not equal to c("class", "names", "row.names").
+      Lengths differ: 6 is not 3
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 157 SKIPPED: 0 FAILED: 6
-      1. Error: between + within = total (@test_mutual_total.R#53) 
-      2. Error: within estimations are correct (@test_mutual_total.R#68) 
-      3. Error: H is correct (@test_mutual_total.R#78) 
-      4. Error: zero weights no problem (@test_mutual_total.R#101) 
-      5. Error: between + within = total (@test_mutual_within.R#24) 
-      6. Error: option wide works (@test_mutual_within.R#63) 
+      OK: 486 SKIPPED: 0 FAILED: 1
+      1. Failure: simple rset (@test_rset.R#42) 
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+# ruler
+
+Version: 0.1.3
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+             use.names = use.names, ...)
+      9: equal_data_frame(target, current, ignore_col_order = ignore_col_order, ignore_row_order = ignore_row_order, 
+             convert = convert) at /tmp/RtmpVNfmtz/R.INSTALLaf254ddc6f91/dplyr/R/all-equal.r:35
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 301 SKIPPED: 0 FAILED: 6
+      1. Error: add_pack_names works (@test-expose-helpers.R#73) 
+      2. Failure: expose works (@test-expose.R#159) 
+      3. Error: expose works (@test-expose.R#188) 
+      4. Error: expose removes obeyers (@test-expose.R#202) 
+      5. Error: expose preserves pack names (@test-expose.R#246) 
+      6. Error: expose accounts for rule separator (@test-expose.R#264) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# scholar
+
+Version: 0.1.7
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 131-132 (scholar.Rmd) 
+    Error: processing vignette 'scholar.Rmd' failed with diagnostics:
+    Evaluation error: Columns 1, 2 must be named.
+    Use .name_repair to specify repair..
+    Execution halted
+    ```
+
+# Sconify
+
+Version: 1.0.4
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘Sconify-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: QuantNormalizeElements
+    > ### Title: Takes a list of tibbles as input, and performs per-column
+    > ###   quantile normalization, then outputs the quantile normalized list
+    > ### Aliases: QuantNormalizeElements
+    > 
+    > ### ** Examples
+    > 
+    > basal <- wand.combined[wand.combined$condition == "basal",][,1:10]
+    > il7 <- wand.combined[wand.combined$condition == "IL7",][,1:10]
+    > QuantNormalizeElements(list(basal, il7))
+    Error: Columns 1, 2, 3, 4, 5, … (and 5 more) must be named.
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      16: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:94
+      17: set_repaired_names(x, .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:118
+      18: repaired_names(names(x), .name_repair = .name_repair) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:137
+      19: check_unique(new_name) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:168
+      20: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/repair-names.R:256
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 40 SKIPPED: 0 FAILED: 4
+      1. Error: Simple quantile normalization case (@test.file.processing.R#116) 
+      2. Error: (unknown) (@test.knn.and.statistics.R#10) 
+      3. Error: Subsampling and tSNE functionality works (@test.post.processing.R#9) 
+      4. Error: Basic post-processing functionality (@test.post.processing.R#21) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking whether package ‘Sconify’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
+    See ‘/tmp/RtmpSwdSvf/file334c45702858/Sconify.Rcheck/00install.out’ for details.
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+      functional = col_character()
+    )
+    finding k-nearest neighbors
+    k-nearest neighbors complete
+    running per-knn statistics
+    10 percent complete
+    20 percent complete
+    30 percent complete
+    40 percent complete
+    50 percent complete
+    60 percent complete
+    70 percent complete
+    80 percent complete
+    Warning in wilcox.test.default(basal[[j]], stim[[j]]) :
+      cannot compute exact p-value with ties
+    90 percent complete
+    100 percent complete
+    Quitting from lines 85-91 (Step2.TheSconeWorkflow.Rmd) 
+    Error: processing vignette 'Step2.TheSconeWorkflow.Rmd' failed with diagnostics:
+    Columns 1, 2, 3, 4, 5, … (and 11 more) must be named.
+    Execution halted
     ```
 
 # simTool
@@ -1427,9 +4789,9 @@ Version: 1.1.0
     Number of data generating functions: 2
     Number of analyzing procedures: 3
     Number of replications: 2
-    Estimated replications per hour: 6926373
-    Start of the simulation: 2018-11-08 02:46:07
-    End of the simulation: 2018-11-08 02:46:07
+    Estimated replications per hour: 5121076
+    Start of the simulation: 2018-11-15 01:36:40
+    End of the simulation: 2018-11-15 01:36:40
     > eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t))
     Error: Column 1 must be named.
     Use .name_repair to specify repair.
@@ -1441,77 +4803,21 @@ Version: 1.1.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 37 SKIPPED: 0 FAILED: 9
-      1. Error: Unnamed vector combined to one column (@test_bind_or_combine.R#4) 
-      2. Error: Matrix is converted to tibble (@test_bind_or_combine.R#15) 
-      3. Error: Tibbles for data generating functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#55) 
-      4. Error: Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#138) 
-      5. Error: One analyzing function. Results were created and stored in simulation (@test_eval_tibbles.R#189) 
-      6. Failure: Simplify the simulation results (@test_eval_tibbles.R#219) 
-      7. Failure: Post analyze function works (@test_eval_tibbles.R#239) 
-      8. Error: Three analyzing functions. Results were created and stored in simulation (@test_eval_tibbles.R#284) 
-      9. Error: (unknown) (@test_eval_tibbles.R#300) 
+      OK: 46 SKIPPED: 0 FAILED: 12
+      1. Error: Matrix is converted to tibble (@test_bind_or_combine.R#15) 
+      2. Error: Tibbles for data generating functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#55) 
+      3. Error: Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#138) 
+      4. Error: One analyzing function. Results were created and stored in simulation (@test_eval_tibbles.R#189) 
+      5. Failure: Simplify the simulation results (@test_eval_tibbles.R#219) 
+      6. Failure: Post analyze function works (@test_eval_tibbles.R#239) 
+      7. Error: Three analyzing functions. Results were created and stored in simulation (@test_eval_tibbles.R#284) 
+      8. Error: Three analyzing functions and one summary function. Results were created and stored in simulation (@test_eval_tibbles.R#360) 
+      9. Error: Three analyzing functions and three summary function. Results were created and stored in simulation (@test_eval_tibbles.R#504) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 179-189 (simTool.Rmd) 
-    Error: processing vignette 'simTool.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 995 more) must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# staRdom
-
-Version: 1.0.8
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Scale for 'fill' is already present. Adding another scale for 'fill',
-    which will replace the existing scale.
-    Scale for 'fill' is already present. Adding another scale for 'fill',
-    which will replace the existing scale.
-    Scale for 'fill' is already present. Adding another scale for 'fill',
-    which will replace the existing scale.
-    Scale for 'fill' is already present. Adding another scale for 'fill',
-    which will replace the existing scale.
-    Scale for 'fill' is already present. Adding another scale for 'fill',
-    which will replace the existing scale.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Warning: This metric uses either excitation or emission wavelengths that were not present in the data. Data has been interpolated to fit the requested wavelengths.
-    Quitting from lines 267-269 (PARAFAC_analysis_of_EEM.Rmd) 
-    Error: processing vignette 'PARAFAC_analysis_of_EEM.Rmd' failed with diagnostics:
-    task 1 failed - "Column 1 must be named.
-    Use .name_repair to specify repair."
-    Execution halted
     ```
 
 # stminsights
@@ -1543,159 +4849,6 @@ Version: 0.2.2
       Evaluation error: Columns 1, 2 must be named.
     Use .name_repair to specify repair..
     Calls: get_network ... mutate_as_tbl -> mutate -> mutate.tbl_df -> mutate_impl
-    Execution halted
-    ```
-
-# sweep
-
-Version: 0.2.1.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sweep-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: sw_sweep
-    > ### Title: Tidy forecast objects
-    > ### Aliases: sw_sweep
-    > 
-    > ### ** Examples
-    > 
-    > library(forecast)
-    > library(sweep)
-    > 
-    > # ETS forecasts
-    > USAccDeaths %>%
-    +     ets() %>%
-    +     forecast(level = c(80, 95, 99)) %>%
-    +     sw_sweep()
-    Error: Column 1 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      18: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      19: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      20: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 128 SKIPPED: 0 FAILED: 6
-      1. Error: sw_sweep test returns tibble with correct rows and columns. (@test_sw_sweep.R#11) 
-      2. Error: sw_*.Arima test returns tibble with correct rows and columns. (@test_tidiers_arima.R#57) 
-      3. Error: sw_*.bats test returns tibble with correct rows and columns. (@test_tidiers_bats_tbats.R#106) 
-      4. Error: sw_*.decomposed.ts test returns tibble with correct rows and columns. (@test_tidiers_decomposed_ts.R#23) 
-      5. Error: sw_*.HoltWinters test returns tibble with correct rows and columns. (@test_tidiers_hw.R#34) 
-      6. Error: sw_*.nnetar test returns tibble with correct rows and columns. (@test_tidiers_nnetar.R#38) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Version 0.4-0 included new data defaults. See ?getSymbols.
-    Loading required package: tidyverse
-    ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
-    ✔ ggplot2 3.1.0           ✔ purrr   0.2.5      
-    ✔ tibble  1.4.99.9005     ✔ dplyr   0.7.7      
-    ✔ tidyr   0.8.2           ✔ stringr 1.3.1      
-    ✔ readr   1.1.1           ✔ forcats 0.3.0      
-    ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-    ✖ lubridate::as.difftime() masks base::as.difftime()
-    ✖ lubridate::date()        masks base::date()
-    ✖ dplyr::filter()          masks stats::filter()
-    ✖ dplyr::first()           masks xts::first()
-    ✖ lubridate::intersect()   masks base::intersect()
-    ✖ dplyr::lag()             masks stats::lag()
-    ✖ dplyr::last()            masks xts::last()
-    ✖ lubridate::setdiff()     masks base::setdiff()
-    ✖ lubridate::union()       masks base::union()
-    Quitting from lines 206-217 (SW00_Introduction_to_sweep.Rmd) 
-    Error: processing vignette 'SW00_Introduction_to_sweep.Rmd' failed with diagnostics:
-    series cannot be merged with non-unique index entries in a series
-    Execution halted
-    ```
-
-# swmmr
-
-Version: 0.8.1
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Linking to GEOS 3.5.1, GDAL 2.1.3, PROJ 4.9.2
-    Quitting from lines 57-74 (How_to_convert_between_GIS_data_and_SWMM_with_swmmr.Rmd) 
-    Error: processing vignette 'How_to_convert_between_GIS_data_and_SWMM_with_swmmr.Rmd' failed with diagnostics:
-    Column 1 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# tabularaster
-
-Version: 0.5.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      15: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      16: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      17: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      18: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      19: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      20: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 17 SKIPPED: 1 FAILED: 3
-      1. Error: cellnumber extraction is available (@test-all-major-funs.R#11) 
-      2. Error: extract of sf works (@test-all-major-funs.R#57) 
-      3. Error: cell numbers for points works (@test-cellnumbers.R#34) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 45-49 (tabularaster-usage.Rmd) 
-    Error: processing vignette 'tabularaster-usage.Rmd' failed with diagnostics:
-    Column 1 must be named.
-    Use .name_repair to specify repair.
     Execution halted
     ```
 
@@ -1860,8 +5013,6 @@ Version: 0.2.0
 *   checking examples ... ERROR
     ```
     ...
-    > ### Aliases: parse_model
-    > 
     > ### ** Examples
     > 
     > library(dplyr)
@@ -1879,7 +5030,9 @@ Version: 0.2.0
     > df <- mutate(mtcars, cyl = paste0("cyl", cyl))
     > model <- lm(mpg ~ wt + cyl * disp, offset = am, data = df)
     > parse_model(model)
-    Error: Column `value` not found in `.data`
+    Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
+    Error in parse_model_lm(model) : There was a parsing error
+    Calls: parse_model -> parse_model.lm -> parse_model_lm
     Execution halted
     ```
 
@@ -1888,14 +5041,14 @@ Version: 0.2.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      41: .data$value at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:87
-      42: `$.rlang_data_pronoun`(.data, value) at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:87
-      43: data_pronoun_get(x, nm) at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:375
-      44: rlang:::abort_data_pronoun(x) at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:386
-      45: abort(msg, "rlang_data_pronoun_not_found") at /tmp/RtmpMlC5Oo/R.INSTALL1a344ee67e36/rlang/R/eval-tidy.R:390
+      23: tidypredict_fit.lm(model) at /tmp/RtmpSwdSvf/file33575b361bdf/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:18
+      24: parse_model(model) at /tmp/RtmpSwdSvf/file33575b361bdf/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:23
+      25: parse_model.lm(model) at /tmp/RtmpSwdSvf/file33575b361bdf/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:20
+      26: parse_model_lm(model) at /tmp/RtmpSwdSvf/file33575b361bdf/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:26
+      27: stop("There was a parsing error") at /tmp/RtmpSwdSvf/file33575b361bdf/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:120
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 11 SKIPPED: 0 FAILED: 4
+      OK: 12 SKIPPED: 0 FAILED: 4
       1. Error: Returns a data frame (@test-parsemodel.R#9) 
       2. Error: (unknown) (@test-parsemodel.R#13) 
       3. Error: Individual prediction difference is never above 1e-12 (@test_glm.R#13) 
@@ -1909,65 +5062,9 @@ Version: 0.2.0
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     Quitting from lines 47-50 (glm.Rmd) 
     Error: processing vignette 'glm.Rmd' failed with diagnostics:
-    Column `value` not found in `.data`
-    Execution halted
-    ```
-
-# tidyquant
-
-Version: 0.5.5
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             ... = ...) at /tmp/RtmpD0aMxw/filea5265e360d2/tidyquant.Rcheck/00_pkg_src/tidyquant/R/tq_mutate.R:228
-      13: tq_transmute_xy_.tbl_df(data = data, x = x, y = y, mutate_fun = mutate_fun, col_rename = col_rename, 
-             ... = ...) at /tmp/RtmpD0aMxw/filea5265e360d2/tidyquant.Rcheck/00_pkg_src/tidyquant/R/tq_transmute.R:163
-      14: check_x_y_valid(data, x, y) at /tmp/RtmpD0aMxw/filea5265e360d2/tidyquant.Rcheck/00_pkg_src/tidyquant/R/tq_transmute.R:182
-      15: stop(paste0("x = ", x, " not a valid name.")) at /tmp/RtmpD0aMxw/filea5265e360d2/tidyquant.Rcheck/00_pkg_src/tidyquant/R/tq_transmute.R:334
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 184 SKIPPED: 1 FAILED: 4
-      1. Error: (unknown) (@test_tq_get_compound_getters.R#10) 
-      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_ratios.R#16) 
-      3. Failure: Test unnest returns correct rows. (@test_tq_get_key_ratios.R#23) 
-      4. Error: (unknown) (@test_tq_mutate.R#53) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning: Computation failed in `stat_segment_left_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_left_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_right_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_right_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_right_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_right_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    additional arguments ignored in warning()
-    Warning in bind_rows_(x, .id) :
-      Vectorizing 'zoo' elements may not preserve their attributes
-    Quitting from lines 183-193 (TQ01-core-functions-in-tidyquant.Rmd) 
-    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-    object 'value' not found
+    There was a parsing error
     Execution halted
     ```
 
@@ -1991,7 +5088,7 @@ Version: 0.1.9
     > library(ape)
     > tree <- rtree(4)
     > x <- as_data_frame(tree)
-    Error in as.data.frame.default(x) : 
+    Error in as.data.frame.default(value, stringsAsFactors = FALSE) : 
       cannot coerce class ‘"phylo"’ to a data.frame
     Calls: as_data_frame ... as_tibble -> as.data.frame -> as.data.frame.default
     Execution halted
@@ -2023,8 +5120,6 @@ Version: 0.1.9
     ```
     Error in re-building vignettes:
       ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
     
     Attaching package: 'tidytree'
     
@@ -2035,358 +5130,6 @@ Version: 0.1.9
     Quitting from lines 58-64 (tidytree.Rmd) 
     Error: processing vignette 'tidytree.Rmd' failed with diagnostics:
     cannot coerce class '"phylo"' to a data.frame
-    Execution halted
-    ```
-
-# timetk
-
-Version: 0.1.1.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > ### zooreg to tibble: Comparison between as.data.frame() and tk_tbl()
-    > data_zooreg <- tk_zooreg(1:8, start = zoo::yearqtr(2000), frequency = 4)
-    > 
-    > # Dates are character class stored in row names
-    > as.data.frame(data_zooreg)
-            data_zooreg
-    2000 Q1           1
-    2000 Q2           2
-    2000 Q3           3
-    2000 Q4           4
-    2001 Q1           5
-    2001 Q2           6
-    2001 Q3           7
-    2001 Q4           8
-    > 
-    > # Dates are appropriate zoo yearqtr class within the data frame
-    > tk_tbl(data_zooreg)
-    Error: Column 1 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      14: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      15: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      16: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      17: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 262 SKIPPED: 0 FAILED: 5
-      1. Error: tk_index(decomposed.ts) test returns correct format. (@test_tk_index.R#324) 
-      2. Error: zooreg to tbl test returns tibble with correct rows and columns. (@test_tk_tbl.R#58) 
-      3. Error: mts to tbl test returns tibble with correct rows and columns. (@test_tk_tbl.R#83) 
-      4. Error: tseries to tbl test returns tibble with correct rows and columns. (@test_tk_tbl.R#123) 
-      5. Error: forecast::msts to tbl test returns tibble with correct rows and columns. (@test_tk_tbl.R#132) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# understandBPMN
-
-Version: 1.1.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > ### ** Examples
-    > 
-    > ## Don't show: 
-    > file_path <- system.file("extdata", "doc.txt", package="understandBPMN")
-    > repetition_and_path_log <- create_path_and_repetition_log(file_path)
-    Joining, by = "start"
-    Joining, by = "start"
-    > ## End(Don't show)
-    > calculate_metrics(file_path, generate_new_path_log = TRUE)
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Joining, by = "start"
-    Error: Columns 1, 2, 3, 4, 5, … (and 1 more) must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      6: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:48
-      7: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      8: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      9: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      10: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      11: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      12: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      13: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 289 SKIPPED: 0 FAILED: 1
-      1. Error: separability (@testMetrics.R#157) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# xpose
-
-Version: 0.4.3
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Can't join on 'data' x 'data' because of incompatible types (list / list)
-      1: expect_identical(xpdb_vpc_test$special, ctrl_special$special) at testthat/test-vpc.R:43
-      2: compare(act$val, exp$val) at /tmp/RtmprUj4Zw/R.INSTALL86c769d3e964/testthat/R/expect-equality.R:138
-      3: compare.default(act$val, exp$val) at /tmp/RtmprUj4Zw/R.INSTALL86c769d3e964/testthat/R/compare.R:13
-      4: all.equal(x, y, ...) at /tmp/RtmprUj4Zw/R.INSTALL86c769d3e964/testthat/R/compare.R:48
-      5: all.equal.tbl_df(x, y, ...)
-      6: equal_data_frame(target, current, ignore_col_order = ignore_col_order, ignore_row_order = ignore_row_order, 
-             convert = convert) at /tmp/RtmpPSeHMW/R.INSTALLe5f7f454083/dplyr/R/all-equal.r:35
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 523 SKIPPED: 6 FAILED: 1
-      1. Error: vpc_data works properly with xpdb tables (@test-vpc.R#43) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# zbank
-
-Version: 0.1.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      11: as_tibble.matrix(tmp$data) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      12: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      13: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      14: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      15: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      16: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      17: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      18: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 44 SKIPPED: 22 FAILED: 1
-      1. Error: high level works (@test-zb_stats.R#4) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# ggtree
-
-Version: 1.12.7
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ggtree-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: facet_plot
-    > ### Title: facet_plot
-    > ### Aliases: facet_plot
-    > 
-    > ### ** Examples
-    > 
-    > tr <- rtree(10)
-    > dd = data.frame(id=tr$tip.label, value=abs(rnorm(10)))
-    > p <- ggtree(tr)
-    Error in as.data.frame.default(x) : 
-      cannot coerce class ‘"phylo"’ to a data.frame
-    Calls: ggtree ... as_tibble -> as.data.frame -> as.data.frame.default
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      15: stop(gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L])), 
-             domain = NA)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 0 SKIPPED: 0 FAILED: 7
-      1. Error: collapse tree to polytomy (@test-conversion.R#7) 
-      2. Error: geom_balance gives proper errors if called on non-binary node (@test-geom_balance.R#12) 
-      3. Error: geom_cladelabel support parsing expression (@test-geom_cladelabel.R#5) 
-      4. Error: groupOTU (@test-group.R#7) 
-      5. Error: groupClade (@test-group.R#28) 
-      6. Error: dummy layer to set x axis limits of Tree panel (@test-xlim_expand.R#7) 
-      7. Error: dummy layer to set x axis limits of data panel (@test-xlim_expand.R#22) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# mfa
-
-Version: 1.2.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘mfa-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: summary.mfa
-    > ### Title: Summarise an mfa fit
-    > ### Aliases: summary.mfa
-    > 
-    > ### ** Examples
-    > 
-    > synth <- create_synthetic(C = 20, G = 5)
-    > m <- mfa(synth$X)
-    Sampling for 20 cells and 5 genes
-    > ms <- summary(m)
-    Error: Columns 1, 2 must be named.
-    Execution halted
-    ```
-
-# phenopath
-
-Version: 1.4.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘phenopath-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: clvm
-    > ### Title: Fit a CLVM Model
-    > ### Aliases: clvm
-    > 
-    > ### ** Examples
-    > 
-    > sim <- simulate_phenopath()
-    Error: Columns 1, 2, 3 must be named.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(phenopath)
-      > 
-      > test_check("phenopath")
-      Error: Columns 1, 2, 3 must be named.
-      Execution halted
-    ```
-
-# Sconify
-
-Version: 1.0.4
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘Sconify-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: QuantNormalizeElements
-    > ### Title: Takes a list of tibbles as input, and performs per-column
-    > ###   quantile normalization, then outputs the quantile normalized list
-    > ### Aliases: QuantNormalizeElements
-    > 
-    > ### ** Examples
-    > 
-    > basal <- wand.combined[wand.combined$condition == "basal",][,1:10]
-    > il7 <- wand.combined[wand.combined$condition == "IL7",][,1:10]
-    > QuantNormalizeElements(list(basal, il7))
-    Error: Columns 1, 2, 3, 4, 5, … (and 5 more) must be named.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      16: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      17: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      18: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      19: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      20: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 40 SKIPPED: 0 FAILED: 4
-      1. Error: Simple quantile normalization case (@test.file.processing.R#116) 
-      2. Error: (unknown) (@test.knn.and.statistics.R#10) 
-      3. Error: Subsampling and tSNE functionality works (@test.post.processing.R#9) 
-      4. Error: Basic post-processing functionality (@test.post.processing.R#21) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking whether package ‘Sconify’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
-    See ‘/tmp/RtmpD0aMxw/filea55410ffb38f/Sconify.Rcheck/00install.out’ for details.
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    finding k-nearest neighbors
-    k-nearest neighbors complete
-    running per-knn statistics
-    10 percent complete
-    20 percent complete
-    Warning in wilcox.test.default(basal[[j]], stim[[j]]) :
-      cannot compute exact p-value with ties
-    30 percent complete
-    40 percent complete
-    Warning in wilcox.test.default(basal[[j]], stim[[j]]) :
-      cannot compute exact p-value with ties
-    50 percent complete
-    60 percent complete
-    70 percent complete
-    80 percent complete
-    90 percent complete
-    100 percent complete
-    Quitting from lines 85-91 (Step2.TheSconeWorkflow.Rmd) 
-    Error: processing vignette 'Step2.TheSconeWorkflow.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 11 more) must be named.
     Execution halted
     ```
 
@@ -2401,11 +5144,11 @@ Version: 1.4.3
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      11: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:42
-      12: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      13: as_tibble(as.data.frame(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:230
-      14: as.data.frame(x) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:230
-      15: as.data.frame.default(x)
+      11: as_tibble(x, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/deprecated.R:42
+      12: as_tibble.default(x, ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:76
+      13: as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:233
+      14: as.data.frame(value, stringsAsFactors = FALSE) at /tmp/RtmpDor6pK/R.INSTALL3b6c53b5ddaf/tibble/R/as_tibble.R:233
+      15: as.data.frame.default(value, stringsAsFactors = FALSE)
       16: stop(gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L])), 
              domain = NA)
       
@@ -2444,1937 +5187,9 @@ Version: 1.4.3
     Execution halted
     ```
 
-# ggsn
+# xpose
 
-Version: 0.4.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    Loading required package: sp
-    rgdal: version: 1.3-6, (SVN revision 773)
-     Geospatial Data Abstraction Library extensions to R successfully loaded
-     Loaded GDAL runtime: GDAL 2.1.3, released 2017/20/01
-     Path to GDAL shared files: /usr/share/gdal/2.1
-     GDAL binary built with GEOS: TRUE 
-     Loaded PROJ.4 runtime: Rel. 4.9.2, 08 September 2015, [PJ_VERSION: 492]
-     Path to PROJ.4 shared files: (autodetected)
-     Linking to sp version: 1.3-1 
-    > library(broom)
-    > dsn <- system.file('extdata', package = 'ggsn')
-    > map <- readOGR(dsn, 'sp')
-    OGR data source with driver: ESRI Shapefile 
-    Source: "/tmp/RtmpD0aMxw/filea53e5ca04511/ggsn.Rcheck/ggsn/extdata", layer: "sp"
-    with 96 features
-    It has 2 fields
-    > map@data$id <- 0:(nrow(map@data) - 1)
-    > map.df <- merge(tidy(map), map, by = 'id')
-    Error: Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# clustree
-
-Version: 0.2.2
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘clustree-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: clustree
-    > ### Title: Plot a clustering tree
-    > ### Aliases: clustree clustree.matrix clustree.data.frame
-    > ###   clustree.SingleCellExperiment clustree.seurat
-    > 
-    > ### ** Examples
-    > 
-    > data(iris_clusts)
-    > clustree(iris_clusts, prefix = "K")
-    Error: Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 11 SKIPPED: 0 FAILED: 20
-      1. Error: node_colour aesthetic works (@test-aesthetics.R#6) 
-      2. Error: static node_colour works (@test-aesthetics.R#19) 
-      3. Error: node_size aesthetic works (@test-aesthetics.R#30) 
-      4. Error: static node_size works (@test-aesthetics.R#43) 
-      5. Error: node_alpha aesthetic works (@test-aesthetics.R#52) 
-      6. Error: static node_size works (@test-aesthetics.R#65) 
-      7. Error: all static works (@test-aesthetics.R#76) 
-      8. Error: layout argument works (@test-aesthetics.R#82) 
-      9. Error: data.frame interface works (@test-clustree-overlay.R#23) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 77-78 (clustree.Rmd) 
-    Error: processing vignette 'clustree.Rmd' failed with diagnostics:
-    Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# metagenomeFeatures
-
-Version: 2.0.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    ✔ readr   1.1.1           ✔ forcats 0.3.0      
-    ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-    ✖ ggplot2::Position() masks BiocGenerics::Position(), base::Position()
-    ✖ dplyr::combine()    masks Biobase::combine(), BiocGenerics::combine()
-    ✖ dplyr::filter()     masks stats::filter()
-    ✖ dplyr::lag()        masks stats::lag()
-    ggtree v1.12.7  For help: https://guangchuangyu.github.io/software/ggtree
-    
-    If you use ggtree in published research, please cite:
-    Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36, doi:10.1111/2041-210X.12628
-    
-    Attaching package: 'ggtree'
-    
-    The following object is masked from 'package:tidyr':
-    
-        expand
-    
-    Quitting from lines 106-120 (database-explore.Rmd) 
-    Error: processing vignette 'database-explore.Rmd' failed with diagnostics:
-    cannot coerce class '"phylo"' to a data.frame
-    Execution halted
-    ```
-
-# data.tree
-
-Version: 0.7.8
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    +              color = function(node) {
-    +                paste0("grey", 
-    +                       100 - as.integer( 100 * nrow(node$data)/nrow(node$root$data))
-    +                       )
-    +              }
-    +              )
-    > Do(tree$leaves, 
-    +    function(node) {
-    +      SetNodeStyle(node, 
-    +                   shape = "box", 
-    +                   color = ifelse(node$splitname == "yes", "darkolivegreen4", "lightsalmon4"),
-    +                   fillcolor = ifelse(node$splitname == "yes", "darkolivegreen1", "lightsalmon"),
-    +                   style = "filled,rounded",
-    +                   penwidth = 2
-    +                   )
-    +    }
-    +    )
-    > 
-    > plot(tree)
-    Error: Columns 1, 2, 3, 4, 5, … (and 3 more) must be named.
-    Execution halted
-    ```
-
-# petrinetR
-
-Version: 0.2.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    The error most likely occurred in:
-    
-    > ### Name: create_PN
-    > ### Title: Create Petri Net
-    > ### Aliases: create_PN
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > create_PN("place_1",
-    + 			"transition_1",
-    + 			data.frame(from = "place_1",to = "transition_1"),
-    + 			marking = "place_1")
-    Marking:  place_1 
-    Enabled transition
-                id enabled
-    1 transition_1    TRUE
-    Warning: Column `from`/`id` joining factor and character vector, coercing into character vector
-    Warning: Column `to`/`id` joining factor and character vector, coercing into character vector
-    Error: Columns 1, 2 must be named.
-    Execution halted
-    ```
-
-# xgboost
-
-Version: 0.71.2
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘xgboost-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: xgb.plot.multi.trees
-    > ### Title: Project all trees on one tree and plot it
-    > ### Aliases: xgb.plot.multi.trees
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > data(agaricus.train, package='xgboost')
-    > 
-    > bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, max_depth = 15,
-    +                eta = 1, nthread = 2, nrounds = 30, objective = "binary:logistic",
-    +                min_child_weight = 50, verbose = 0)
-    > 
-    > p <- xgb.plot.multi.trees(model = bst, features_keep = 3)
-    Error: Columns 1, 2, 3, 4, 5, … (and 14 more) must be named.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      11: as_tibble(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/deprecated.R:42
-      12: as_tibble.default(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      13: as_tibble(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:228
-      14: as_tibble.list(as.list(x), ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      15: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      16: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      17: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      18: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 542 SKIPPED: 3 FAILED: 1
-      1. Error: xgb.plot.multi.trees works with and without feature names (@test_helpers.R#295) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# BayesMallows
-
-Version: 0.1.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘BayesMallows-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: generate_constraints
-    > ### Title: Generate Constraint Set from Pairwise Comparisons
-    > ### Aliases: generate_constraints
-    > 
-    > ### ** Examples
-    > 
-    > # Here is an example with the beach preference data.
-    > # First, generate the transitive closure.
-    > beach_tc <- generate_transitive_closure(beach_preferences)
-    Error: Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      9: as_tibble.matrix(.generate_transitive_closure(cbind(.data$bottom_item, .data$top_item))) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      10: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      11: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      12: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      13: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      14: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      15: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      16: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 75 SKIPPED: 1 FAILED: 1
-      1. Error: transitive closure generation works (@test_pairwise_functions.R#36) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 448-449 (BayesMallowsPackage.Rmd) 
-    Error: processing vignette 'BayesMallowsPackage.Rmd' failed with diagnostics:
-    Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# BMSC
-
-Version: 0.1.1
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/Rtmpj7Legb/Rd2pdf91416e35c35b'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 65.6Mb
-      sub-directories of 1Mb or more:
-        libs  65.1Mb
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘BMSC’ ...
-** package ‘BMSC’ successfully unpacked and MD5 sums checked
-** libs
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linReg.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linReg.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoeUnConstr.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegHorseHoeUnConstr.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoe.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegHorseHoe.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegUnConstr.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegUnConstr.cc"
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linReg.cc -o stan_files/linReg.o
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegUnConstr.cc -o stan_files/linRegUnConstr.o
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegUnConstr.hpp:18,
-                 from stan_files/linRegUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoeUnConstr.cc -o stan_files/linRegHorseHoeUnConstr.o
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include" -I"/tmp/RtmpD0aMxw/checkliba521157ec90c/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoe.cc -o stan_files/linRegHorseHoe.o
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpD0aMxw/checkliba521157ec90c/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpD0aMxw/checkliba521157ec90c/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o BMSC.so stan_files/linReg.o stan_files/linRegHorseHoe.o stan_files/linRegHorseHoeUnConstr.o stan_files/linRegUnConstr.o init.o -L/usr/lib/R/lib -lR
-rm stan_files/linRegUnConstr.cc stan_files/linRegHorseHoe.cc stan_files/linRegHorseHoeUnConstr.cc stan_files/linReg.cc
-installing to /tmp/RtmpD0aMxw/filea521598fadbc/BMSC.Rcheck/BMSC/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (BMSC)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘BMSC’ ...
-** package ‘BMSC’ successfully unpacked and MD5 sums checked
-** libs
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c init.cpp -o init.o
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linReg.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linReg.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoe.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegHorseHoe.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegHorseHoeUnConstr.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegHorseHoeUnConstr.cc"
-"/usr/lib/R/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/linRegUnConstr.stan
-Compiling with: 
-STANHEADERS_SRC = `"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`
-PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error
-
-CXX_STD = CXX14
-SOURCES = stan_files/linReg.stan stan_files/linRegHorseHoe.stan stan_files/linRegHorseHoeUnConstr.stan stan_files/linRegUnConstr.stan
-OBJECTS = $(SOURCES:.stan=.o) init.o
-
-all: $(SHLIB)
-		@if test -e "/usr/bin/install_name_tool" && test -e "/usr/local/clang4/lib/libc++.1.dylib" && test -e "/usr/lib/libc++.1.dylib"; then /usr/bin/install_name_tool -change /usr/local/clang4/lib/libc++.1.dylib /usr/lib/libc++.1.dylib $(SHLIB); fi
-
-clean:
-		rm -rf stan_files/*.o
-		rm -rf *.so *.o
-		rm -rf stan_files/*.cc
-		rm -rf stan_files/*.hpp
-
-%.cc: %.stan
-		"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
-
-.phony: all clean
-Wrote C++ file "stan_files/linRegUnConstr.cc"
-Error in readRDS("/tmp/RtmpcwuZam/filefdea8e329fd") : 
-  error reading from connection
-Calls: .Last -> readRDS
-3: traceback(1)
-2: readRDS("/tmp/RtmpcwuZam/filefdea8e329fd")
-1: .Last()
-Makevars:18: recipe for target 'stan_files/linRegUnConstr.cc' failed
-make: *** [stan_files/linRegUnConstr.cc] Error 1
-make: *** Waiting for unfinished jobs....
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linReg.cc -o stan_files/linReg.o
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linReg.hpp:18,
-                 from stan_files/linReg.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linReg.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoe.cc -o stan_files/linRegHorseHoe.o
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoe.hpp:18,
-                 from stan_files/linRegHorseHoe.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoe.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG -I"../inst/include" -I"`"/usr/lib/R/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_RESULT_OF_USE_TR1 -DBOOST_NO_DECLTYPE -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include" -I"/tmp/RtmpcwuZam/checklibfdea629b8f68/RcppEigen/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c stan_files/linRegHorseHoeUnConstr.cc -o stan_files/linRegHorseHoeUnConstr.o
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/time_clock.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/date_time/posix_time/posix_time_types.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/detail/that_ptr.hpp:13:0,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/invocation/invoke.hpp:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/adapter/fused.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/functional/generation/make_fused.hpp:13,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/fusion/include/make_fused.hpp:11,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/resize.hpp:28,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/state_wrapper.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint/util/ublas_wrapper.hpp:33,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/numeric/odeint.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr/functor/integrate_ode_rk45.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/arr.hpp:44,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/prim/mat.hpp:325,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/stan/math/rev/mat.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/model/test_gradients.hpp:7,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/stan_fit.hpp:34,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/rstan/include/rstan/rstaninc.hpp:3,
-                 from stan_files/linRegHorseHoeUnConstr.hpp:18,
-                 from stan_files/linRegHorseHoeUnConstr.cc:3:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp: At global scope:
-/tmp/RtmpcwuZam/checklibfdea629b8f68/BH/include/boost/get_pointer.hpp:48:40: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template<class T> T * get_pointer(std::auto_ptr<T> const& p)
-                                        ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/RcppCommon.h:52,
-                 from /tmp/RtmpcwuZam/checklibfdea629b8f68/Rcpp/include/Rcpp.h:27,
-                 from stan_files/linRegHorseHoeUnConstr.cc:1:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-rm stan_files/linRegUnConstr.cc stan_files/linRegHorseHoe.cc stan_files/linRegHorseHoeUnConstr.cc stan_files/linReg.cc
-ERROR: compilation failed for package ‘BMSC’
-* removing ‘/tmp/RtmpcwuZam/filefdea2d2318f7/BMSC.Rcheck/BMSC’
-
-```
-# colorednoise
-
-Version: 1.0.3
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘colorednoise-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: matrix_model
-    > ### Title: Temporally Autocorrelated Matrix Population Models
-    > ### Aliases: matrix_model
-    > 
-    > ### ** Examples
-    > 
-    > meanMat <- matrix(c(0.55, 0.6, 0.24, 0.4), byrow = TRUE, ncol = 2)
-    > sdMat <- matrix(c(0.3, 0.35, 0.05, 0.1), byrow = TRUE, ncol = 2)
-    > phiMat <- matrix(c(-0.2, -0.2, 0, 0), byrow = TRUE, ncol = 2)
-    > initialPop <- c(100, 100)
-    > sim <- matrix_model(list(meanMat, sdMat, phiMat), initialPop, 50)
-    Error: Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      14: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      15: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      16: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      17: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      18: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 6 SKIPPED: 0 FAILED: 3
-      1. Error: colored_multi_rnorm can produce red noise (@test_noise.R#29) 
-      2. Error: colored_multi_rnorm can produce blue noise (@test_noise.R#37) 
-      3. Error: matrix_model can produce cross-correlated autocorrelated populations with demographic stochasticity (@test_simulations.R#31) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# eesim
-
-Version: 0.1.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    
-    Attaching package: 'gridExtra'
-    
-    The following object is masked from 'package:dplyr':
-    
-        combine
-    
-    This is dlnm 2.3.6. For details: help(dlnm) and vignette('dlnmOverview').
-    This function may take a minute or two to run, especially if you
-    are creating lots of replications (`n_reps`).
-    Quitting from lines 683-690 (eesim.Rmd) 
-    Error: processing vignette 'eesim.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 1821 more) must be named.
-    Execution halted
-    ```
-
-# epidata
-
-Version: 0.2.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘epidata-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_annual_wages_and_work_hours
-    > ### Title: Retreive CPS ASEC Annual Wages and Work Hours
-    > ### Aliases: get_annual_wages_and_work_hours
-    > 
-    > ### ** Examples
-    > 
-    > get_annual_wages_and_work_hours()
-    Error: Columns 1, 2, 3, 4, 5, … (and 2 more) must be named.
-    Execution halted
-    ```
-
-# frequencies
-
-Version: 0.1.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    Running examples in ‘frequencies-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: freq_two_vects
-    > ### Title: freq_two_vects
-    > ### Aliases: freq_two_vects
-    > 
-    > ### ** Examples
-    > 
-    > # Sample data frame to demo the freq_two_vects function.
-    > df <- data.frame(gender = sample(c('m','f'), 200, replace = TRUE),
-    +                  ethnicity = sample(c('african american', 'asian', 'caucasian',
-    +                                    'hispanic', 'other'),
-    +                                    200, replace = TRUE),
-    +                  stringsAsFactors = FALSE)
-    > 
-    > freq_two_vects(df, gender, ethnicity, FALSE)
-    Error in grouped_df_impl(data, unname(vars), drop) : 
-      Column `get.col1.` is unknown
-    Calls: freq_two_vects ... group_by.data.frame -> grouped_df -> grouped_df_impl
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      9: `_fseq`(`_lhs`)
-      10: freduce(value, `_function_list`) at /tmp/RtmpgVFdE2/R.INSTALL778e5edf4faf/magrittr/R/pipe.R:28
-      11: function_list[[i]](value) at /tmp/RtmpgVFdE2/R.INSTALL778e5edf4faf/magrittr/R/freduce.R:17
-      12: dplyr::group_by(., get.col1.)
-      13: group_by.data.frame(., get.col1.) at /tmp/RtmpPSeHMW/R.INSTALLe5f7f454083/dplyr/R/group-by.r:76
-      14: grouped_df(groups$data, groups$group_names) at /tmp/RtmpPSeHMW/R.INSTALLe5f7f454083/dplyr/R/dataframe.R:34
-      15: grouped_df_impl(data, unname(vars), drop) at /tmp/RtmpPSeHMW/R.INSTALLe5f7f454083/dplyr/R/grouped-df.r:25
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 24 SKIPPED: 0 FAILED: 2
-      1. Error: numbers and letters aggregations are correct (@test_freq_two_vects.R#44) 
-      2. Error: dates and logicals aggregations are correct (@test_freq_two_vects.R#77) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# genBaRcode
-
-Version: 1.1.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘genBaRcode-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plotClusterGgTree
-    > ### Title: Plotting a Cluster ggTree
-    > ### Aliases: plotClusterGgTree
-    > 
-    > ### ** Examples
-    > 
-    > data(BC_dat)
-    > plotClusterGgTree(BC_dat, tree_est = "UPGMA", type = "circular")
-    Error in as.data.frame.default(x) : 
-      cannot coerce class ‘"phylo"’ to a data.frame
-    Calls: plotClusterGgTree ... as_tibble -> as.data.frame -> as.data.frame.default
-    Execution halted
-    ```
-
-# janitor
-
-Version: 1.1.1
+Version: 0.4.3
 
 ## Newly broken
 
@@ -4383,4429 +5198,20 @@ Version: 1.1.1
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      11: freduce(value, `_function_list`) at /tmp/RtmpgVFdE2/R.INSTALL778e5edf4faf/magrittr/R/pipe.R:28
-      12: withVisible(function_list[[k]](value)) at /tmp/RtmpgVFdE2/R.INSTALL778e5edf4faf/magrittr/R/freduce.R:20
-      13: function_list[[k]](value) at /tmp/RtmpgVFdE2/R.INSTALL778e5edf4faf/magrittr/R/freduce.R:20
-      14: row_to_names(., row_number = 1)
-      15: `names<-`(`*tmp*`, value = new_names) at /tmp/RtmpD0aMxw/filea53742ddd9a4/janitor.Rcheck/00_pkg_src/janitor/R/row_to_names.R:24
-      16: `names<-.tbl_df`(`*tmp*`, value = new_names) at /tmp/RtmpD0aMxw/filea53742ddd9a4/janitor.Rcheck/00_pkg_src/janitor/R/row_to_names.R:24
-      17: check_names_non_na(value) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/tbl-df.r:79
-      18: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:235
+      Can't join on 'data' x 'data' because of incompatible types (list / list)
+      1: expect_identical(xpdb_vpc_test$special, ctrl_special$special) at testthat/test-vpc.R:43
+      2: compare(act$val, exp$val) at /tmp/Rtmp6bATMU/R.INSTALL89e91142811d/testthat/R/expect-equality.R:138
+      3: compare.default(act$val, exp$val) at /tmp/Rtmp6bATMU/R.INSTALL89e91142811d/testthat/R/compare.R:13
+      4: all.equal(x, y, ...) at /tmp/Rtmp6bATMU/R.INSTALL89e91142811d/testthat/R/compare.R:48
+      5: all.equal.tbl_df(x, y, ...)
+      6: equal_data_frame(target, current, ignore_col_order = ignore_col_order, ignore_row_order = ignore_row_order, 
+             convert = convert) at /tmp/RtmpVNfmtz/R.INSTALLaf254ddc6f91/dplyr/R/all-equal.r:35
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 423 SKIPPED: 0 FAILED: 1
-      1. Error: row_to_names invalid and semi-valid input checking (@test-row-to-names.R#25) 
+      OK: 523 SKIPPED: 6 FAILED: 1
+      1. Error: vpc_data works properly with xpdb tables (@test-vpc.R#43) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-# keyholder
-
-Version: 0.1.2
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘keyholder-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: keys-set
-    > ### Title: Set keys
-    > ### Aliases: keys-set keys<- assign_keys key_by unkey
-    > 
-    > ### ** Examples
-    > 
-    > df <- dplyr::as_tibble(mtcars)
-    > 
-    > # Value is converted to tibble
-    > keys(df) <- 1:nrow(df)
-    Error: Columns 1, 2, 3, 4, 5, … (and 27 more) must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 302 SKIPPED: 0 FAILED: 18
-      1. Error: has_keys works (@test-keys-get.R#39) 
-      2. Failure: restore_keys.default works (@test-keys-manip.R#44) 
-      3. Failure: restore_keys.default works (@test-keys-manip.R#54) 
-      4. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#65) 
-      5. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#72) 
-      6. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#80) 
-      7. Failure: restore_keys.default handles .remove and .unkey arguments (@test-keys-manip.R#85) 
-      8. Error: `keys<-` converts value to tibble (@test-keys-set.R#19) 
-      9. Failure: `keys<-` throws an error (@test-keys-set.R#33) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# metacoder
-
-Version: 0.3.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-                 stop(call. = FALSE, paste0("The following taxon IDs do not exist:\n", limited_print(invalid_ids, 
-                     type = "silent")))
-             }
-             return(result)
-         }) at /tmp/RtmpCv6Hba/R.INSTALLbb9a7e4db9b8/taxa/R/taxonomy--class.R:1256
-      13: FUN(X[[i]], ...)
-      14: stop(call. = FALSE, paste0("The following taxon IDs do not exist:\n", limited_print(invalid_ids, 
-             type = "silent"))) at /tmp/RtmpCv6Hba/R.INSTALLbb9a7e4db9b8/taxa/R/taxonomy--class.R:1261
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 94 SKIPPED: 1 FAILED: 1
-      1. Error: Converting to phyloseq (@test--parsers_and_writers.R#204) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# mixpack
-
-Version: 0.3.6
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Package 'mclust' version 5.4.1
-    Type 'citation("mclust")' for citing this R package in publications.
-    mixpack: a package for mixture components analysis
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 50-51 (mixture_components.Rmd) 
-    Error: processing vignette 'mixture_components.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 1 more) must be named.
-    Execution halted
-    ```
-
-# Momocs
-
-Version: 1.2.9
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    3 AN   
-    4 AN   
-    5 AN   
-    6 AN   
-    # … with 121 more rows
-     - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, cuts, links.
-    > plot(wpp, 1)
-    > 
-    > # "foreign prcomp"
-    > head(iris)
-      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-    1          5.1         3.5          1.4         0.2  setosa
-    2          4.9         3.0          1.4         0.2  setosa
-    3          4.7         3.2          1.3         0.2  setosa
-    4          4.6         3.1          1.5         0.2  setosa
-    5          5.0         3.6          1.4         0.2  setosa
-    6          5.4         3.9          1.7         0.4  setosa
-    > iris.p <- prcomp(iris[, 1:4])
-    > iris.p <- as_PCA(iris.p, iris[, 5])
-    Error: Columns 1, 2, 3, 4, 5, … (and 145 more) must be named.
-    Execution halted
-    ```
-
-# particles
-
-Version: 0.2.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘particles-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: evolve
-    > ### Title: Move the simulation forward one or more steps
-    > ### Aliases: evolve
-    > 
-    > ### ** Examples
-    > 
-    > graph <- tidygraph::create_notable('folkman')
-    > sim <- graph %>%
-    +   simulate() %>%
-    +   wield(link_force) %>%
-    +   wield(manybody_force)
-    Error in is.force(force) : Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Calls: %>% ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    
-    Attaching package: 'particles'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, simulate
-    
-    
-    Attaching package: 'tidygraph'
-    
-    The following object is masked from 'package:stats':
-    
-        filter
-    
-    Quitting from lines 61-71 (intro.Rmd) 
-    Error: processing vignette 'intro.Rmd' failed with diagnostics:
-    Columns 1, 2 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# prophet
-
-Version: 0.3.0.1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 286 SKIPPED: 0 FAILED: 15
-      1. Error: cross_validation (@test_diagnostics.R#20) 
-      2. Error: cross_validation_logistic (@test_diagnostics.R#46) 
-      3. Error: cross_validation_extra_regressors (@test_diagnostics.R#62) 
-      4. Error: cross_validation_default_value_check (@test_diagnostics.R#77) 
-      5. Error: performance_metrics (@test_diagnostics.R#87) 
-      6. Failure: fit_predict (@test_prophet.R#17) 
-      7. Failure: fit_predict_no_seasons (@test_prophet.R#23) 
-      8. Failure: fit_predict_no_changepoints (@test_prophet.R#28) 
-      9. Failure: fit_predict_changepoint_not_in_history (@test_prophet.R#42) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Loading required package: Rcpp
-    code for methods in class "Rcpp_stan_fit4model574a249a4f_prophet" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-    code for methods in class "Rcpp_stan_fit4model574a249a4f_prophet" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 44-46 (quick_start.Rmd) 
-    Error: processing vignette 'quick_start.Rmd' failed with diagnostics:
-    Column names `10%`, `90%` must not be duplicated.
-    Execution halted
-    ```
-
-# purrrlyr
-
-Version: 0.0.3
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      [4] 258 - 358 ==  -99.62
-      [5] 360 - 358 ==    2.38
-      [6] 225 - 358 == -132.62
-      [7] 360 - 358 ==    2.38
-      [8] 147 - 358 == -210.92
-      [9] 141 - 358 == -216.82
-      ...
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 81 SKIPPED: 0 FAILED: 2
-      1. Failure: conditional sliced mapping recycles within groups (@test-dmap.R#32) 
-      2. Failure: conditional sliced mapping recycles within groups (@test-dmap.R#33) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# qwraps2
-
-Version: 0.3.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > # white noise
-    > Z.1 <- rnorm(n, 0, 1)
-    > Z.2 <- rnorm(n, 0, 2)
-    > Z.3 <- rnorm(n, 0, 5)
-    > 
-    > for(i in 2:n)
-    + {
-    + 	x1[i] <- x1[i-1] + Z.1[i] - Z.1[i-1] + x4[i-1] - x2[i-1]
-    + 	x2[i] <- x2[i-1] - 2 * Z.2[i] + Z.2[i-1] - x4[i-1]
-    + 	x3[i] <- x3[i-1] + x2[i-1] + 0.2 * Z.3[i] + Z.3[i-1]
-    + 	x4[i] <- x4[i-1] + runif(1, 0.5, 1.5) * x4[i-1]
-    + }
-    > testdf <- data.frame(x1, x2, x3, x4)
-    > 
-    > # Base acf plot for one variable
-    > acf(testdf$x1)
-    > 
-    > # qacf plot for one variable
-    > qacf(testdf$x1)
-    Error: Columns 1, 2, 3, 4, 5, … (and 19 more) must be named.
-    Execution halted
-    ```
-
-# rplos
-
-Version: 0.8.4
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      17: as_tibble.matrix(x, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      18: as_tibble(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:187
-      19: as_tibble.data.frame(m, ...) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:76
-      20: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:94
-      21: set_repaired_names(x, .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/as_tibble.R:118
-      22: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      23: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      24: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 100 SKIPPED: 7 FAILED: 1
-      1. Error: facetplos (@test-facetplos.R#5) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# rrr
-
-Version: 1.0.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘rrr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: pairwise_plot
-    > ### Title: Pairwise Plots
-    > ### Aliases: pairwise_plot
-    > 
-    > ### ** Examples
-    > 
-    > data(pendigits)
-    > digits_features <- pendigits[,1:34]
-    > digits_class <- pendigits[,35]
-    > pairwise_plot(digits_features, digits_class, type = "pca", pair_x = 1, pair_y = 3)
-    Error: Columns 1, 2, 3, 4, 5, … (and 29 more) must be named.
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 241-242 (rrr.Rmd) 
-    Error: processing vignette 'rrr.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 20 more) must be named.
-    Execution halted
-    ```
-
-# ruler
-
-Version: 0.1.3
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      2: `names<-.tbl_df`(`*tmp*`, value = "vs...rule..1") at testthat/test-expose.R:585
-      3: abort(error_names_must_have_length(length(value), length(x))) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/tbl-df.r:76
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 305 SKIPPED: 0 FAILED: 7
-      1. Error: add_pack_names works (@test-expose-helpers.R#73) 
-      2. Failure: expose works (@test-expose.R#159) 
-      3. Error: expose works (@test-expose.R#188) 
-      4. Error: expose removes obeyers (@test-expose.R#202) 
-      5. Error: expose preserves pack names (@test-expose.R#246) 
-      6. Error: expose accounts for rule separator (@test-expose.R#264) 
-      7. Error: interp_col_pack_out works (@test-expose.R#585) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# scholar
-
-Version: 0.1.7
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 131-132 (scholar.Rmd) 
-    Error: processing vignette 'scholar.Rmd' failed with diagnostics:
-    Evaluation error: Columns 1, 2 must be named.
-    Use .name_repair to specify repair..
-    Execution halted
-    ```
-
-# vqtl
-
-Version: 2.0.4
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘vqtl-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plot.scanonevar
-    > ### Title: plot.scanonevar
-    > ### Aliases: plot.scanonevar
-    > 
-    > ### ** Examples
-    > 
-    > set.seed(27599)
-    > test.cross <- qtl::sim.cross(map = qtl::sim.map(len = rep(20, 3), n.mar = 5), n.ind = 50)
-    > test.sov <- scanonevar(cross = test.cross)
-    calculating genoprobs with stepwidth = 5, off.end = 0, error.prob = 1e-4, map.function = 'haldane'
-    Error: Columns 1, 2, 3, 4, 5, … (and 45 more) must be named.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: repaired_names(names(x), .name_repair = .name_repair) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:137
-      14: check_unique(new_name) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:168
-      15: abort(error_column_must_be_named(bad_name)) at /tmp/Rtmp8wuu7e/R.INSTALL1db573dd5d93/tibble/R/repair-names.R:256
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 58 SKIPPED: 2 FAILED: 6
-      1. Error: testing scanonevar with dglm with gaussian model (@test-2-scanonevar.R#23) 
-      2. Error: testing conditional scanonevar with dglm with gaussian model (@test-2-scanonevar.R#61) 
-      3. Error: testing scanonevar with dglm with poisson model (@test-2-scanonevar.R#95) 
-      4. Error: testing conditional scanonevar with dglm with poisson model (@test-2-scanonevar.R#129) 
-      5. Error: testing scanonevar with hglm (@test-2-scanonevar.R#164) 
-      6. Error: (unknown) (@test-4-plots.R#53) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# wakefield
-
-Version: 0.3.3
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    The following objects are masked from ‘package:stats’:
-    
-        filter, lag
-    
-    The following objects are masked from ‘package:base’:
-    
-        intersect, setdiff, setequal, union
-    
-    > 
-    > dat <- r_data_frame(12,
-    +     name,
-    +     r_series(likert, 10, relate = "+1_.5")
-    + )
-    > 
-    > # Suggested use of tidyr or reshape2 package here instead
-    > dat <- data.frame(
-    +     ID = rep(dat[[1]], ncol(dat[-1])),
-    +     stack(dat[-1])
-    + )
-    Error: The `names` must not be `NULL`.
-    Execution halted
-    ```
-
-# LymphoSeq
-
-Version: 1.8.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-      |                                                                            
-      |============================                                          |  40%
-      |                                                                            
-      |===================================                                   |  50%
-      |                                                                            
-      |==========================================                            |  60%
-      |                                                                            
-      |=================================================                     |  70%
-      |                                                                            
-      |========================================================              |  80%
-      |                                                                            
-      |===============================================================       |  90%
-      |                                                                            
-      |======================================================================| 100%
-    > 
-    > phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
-    +          layout = "rectangular")
-    Error in as.data.frame.default(x) : 
-      cannot coerce class ‘"phylo"’ to a data.frame
-    Calls: phyloTree ... as_tibble -> as.data.frame -> as.data.frame.default
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
-    Quitting from lines 140-142 (LymphoSeq.Rmd) 
-    Error: processing vignette 'LymphoSeq.Rmd' failed with diagnostics:
-    cannot coerce class '"phylo"' to a data.frame
-    Execution halted
-    ```
-
-# philr
-
-Version: 1.6.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘philr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: annotate_balance
-    > ### Title: annotate_balance
-    > ### Aliases: annotate_balance
-    > 
-    > ### ** Examples
-    > 
-    > tr <- named_rtree(10)
-    > 
-    > annotate_balance(tr, 'n4', size=7)
-    Error in as.data.frame.default(x) : 
-      cannot coerce class ‘"phylo"’ to a data.frame
-    Calls: annotate_balance ... as_tibble -> as.data.frame -> as.data.frame.default
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-        expand
-    
-    The following object is masked from 'package:ape':
-    
-        rotate
-    
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 218-230 (philr-intro.Rmd) 
-    Error: processing vignette 'philr-intro.Rmd' failed with diagnostics:
-    cannot coerce class '"phylo"' to a data.frame
-    Execution halted
-    ```
-
-# rhierbaps
-
-Version: 1.1.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in block_exec(params) :
-      failed to tidy R code in chunk <unnamed-chunk-5>
-    reason: Error in loadNamespace(name) : there is no package called 'formatR'
-    
-    Warning in block_exec(params) :
-      failed to tidy R code in chunk <unnamed-chunk-6>
-    reason: Error in loadNamespace(name) : there is no package called 'formatR'
-    
-    Warning in block_exec(params) :
-      failed to tidy R code in chunk <unnamed-chunk-7>
-    reason: Error in loadNamespace(name) : there is no package called 'formatR'
-    
-    Read 1 item
-    Warning in block_exec(params) :
-      failed to tidy R code in chunk <unnamed-chunk-8>
-    reason: Error in loadNamespace(name) : there is no package called 'formatR'
-    
-    Quitting from lines 106-110 (introduction.Rmd) 
-    Error: processing vignette 'introduction.Rmd' failed with diagnostics:
-    cannot coerce class '"phylo"' to a data.frame
-    Execution halted
-    ```
-
-# curl
-
-Version: 3.2
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      This is libcurl version 7.47.0 with GnuTLS/3.4.10 
-      Using test server: http://hb.opencpu.org 
-      ── 1. Failure: host_con works via and multi_fdset (@test-multi.R#165)  ─────────
-      multi_fdset(pool = pool)$reads has length 1, not length 2.
-      
-      ── 2. Failure: host_con works via and multi_fdset (@test-multi.R#165)  ─────────
-      multi_fdset(pool = pool)$reads has length 0, not length 1.
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 174 SKIPPED: 1 FAILED: 2
-      1. Failure: host_con works via and multi_fdset (@test-multi.R#165) 
-      2. Failure: host_con works via and multi_fdset (@test-multi.R#165) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# protViz
-
-Version: 0.3.1
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmpYaayRW/Rd2pdf892747a4ec7d'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.5Mb
-      sub-directories of 1Mb or more:
-        data   2.1Mb
-        libs   3.4Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘XML’
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error in re-building vignettes:
-      ...
-    code for methods in class "Rcpp_Fasta" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-    code for methods in class "Rcpp_Fasta" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
-      error in running command
-    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
-      error in running command
-    Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
-      Running 'texi2dvi' on 'PTM_MarkerFinder.tex' failed.
-    Messages:
-    sh: 1: /usr/bin/texi2dvi: not found
-    Calls: buildVignettes -> texi2pdf -> texi2dvi
-    Execution halted
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘protViz’ ...
-** package ‘protViz’ successfully unpacked and MD5 sums checked
-** libs
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c findNN.c -o findNN.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c protViz_init.c -o protViz_init.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c computeParentIonMass.c -o computeParentIonMass.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c computeFragmentIons.c -o computeFragmentIons.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c findNN_.cpp -o findNN_.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c RcppExports.cpp -o RcppExports.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c aa2mass.cpp -o aa2mass.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c fasta.cpp -o fasta.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpD0aMxw/checkliba53332281371/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c deisotoper.cpp -o deisotoper.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o protViz.so protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o -L/usr/lib/R/lib -lR
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-installing to /tmp/RtmpD0aMxw/filea533170077af/protViz.Rcheck/protViz/libs
-** R
-** data
-*** moving datasets to lazyload DB
-** demo
-** exec
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded
-code for methods in class “Rcpp_Fasta” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
-code for methods in class “Rcpp_Fasta” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
-* DONE (protViz)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘protViz’ ...
-** package ‘protViz’ successfully unpacked and MD5 sums checked
-** libs
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c findNN.c -o findNN.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c protViz_init.c -o protViz_init.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c computeParentIonMass.c -o computeParentIonMass.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c computeFragmentIons.c -o computeFragmentIons.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c fasta.cpp -o fasta.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-Error in readRDS("/tmp/RtmpcwuZam/filefdcc1bfdeb30") : 
-  error reading from connection
-Calls: .Last -> readRDS
-g++: error: traceback(1): No such file or directory
-g++: error: 2:: No such file or directory
-g++: error: readRDS("/tmp/RtmpcwuZam/filefdcc1bfdeb30"): No such file or directory
-g++: error: 1:: No such file or directory
-g++: error: .Last(): No such file or directory
-/usr/lib/R/etc/Makeconf:168: recipe for target 'fasta.o' failed
-make: *** [fasta.o] Error 1
-make: *** Waiting for unfinished jobs....
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c findNN_.cpp -o findNN_.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c RcppExports.cpp -o RcppExports.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c aa2mass.cpp -o aa2mass.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/tmp/RtmpcwuZam/checklibfdcc1727ff4e/Rcpp/include"   `/usr/lib/R/bin/Rscript -e "Rcpp:::CxxFlags()"` -I. -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c deisotoper.cpp -o deisotoper.o
-Compiling with: 
-
-# $HeadURL: $
-# $Id: $
-
-
-OBJECTS=protViz_init.o deisotoper.o aa2mass.o findNN_.o computeFragmentIons.o computeParentIonMass.o findNN.o RcppExports.o fasta.o
-PKG_CXXFLAGS=`$(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()"` -I.
-PKG_LIBS=`$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` 
-ERROR: compilation failed for package ‘protViz’
-* removing ‘/tmp/RtmpcwuZam/filefdcc26c00807/protViz.Rcheck/protViz’
-
-```
-# bsts
-
-Version: 0.8.0
-
-## Newly broken
-
-*   checking whether package ‘bsts’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/RtmpD0aMxw/filea552a17dc7e/bsts.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘bsts’ ...
-** package ‘bsts’ successfully unpacked and MD5 sums checked
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c bsts_init.cc -o bsts_init.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_regression_model_manager.cc -o state_space_regression_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-Error in readRDS("/tmp/RtmpD0aMxw/filea55256389e3a") : 
-  error reading from connection
-Calls: .Last -> readRDS
-g++: error: traceback(1): No such file or directory
-g++: error: 2:: No such file or directory
-g++: error: readRDS("/tmp/RtmpD0aMxw/filea55256389e3a"): No such file or directory
-g++: error: 1:: No such file or directory
-g++: error: .Last()/include: No such file or directory
-/usr/lib/R/etc/Makeconf:166: recipe for target 'state_space_regression_model_manager.o' failed
-make: *** [state_space_regression_model_manager.o] Error 1
-make: *** Waiting for unfinished jobs....
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c aggregate_time_series.cc -o aggregate_time_series.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c get_date_ranges.cc -o get_date_ranges.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c utils.cc -o utils.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c mixed_frequency.cc -o mixed_frequency.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_gaussian_model_manager.cc -o state_space_gaussian_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c model_manager.cc -o model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_poisson_model_manager.cc -o state_space_poisson_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_logit_model_manager.cc -o state_space_logit_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c bsts.cc -o bsts.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include" -I"/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_student_model_manager.cc -o state_space_student_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpD0aMxw/checkliba55234e5c8b2/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-ERROR: compilation failed for package ‘bsts’
-* removing ‘/tmp/RtmpD0aMxw/filea552a17dc7e/bsts.Rcheck/bsts’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘bsts’ ...
-** package ‘bsts’ successfully unpacked and MD5 sums checked
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c bsts_init.cc -o bsts_init.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c aggregate_time_series.cc -o aggregate_time_series.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c get_date_ranges.cc -o get_date_ranges.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from get_date_ranges.cc:24:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from get_date_ranges.cc:23:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c utils.cc -o utils.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from utils.h:23,
-                 from utils.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from utils.h:20,
-                 from utils.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_poisson_model_manager.cc -o state_space_poisson_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_poisson_model_manager.h:20,
-                 from state_space_poisson_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_logit_model_manager.cc -o state_space_logit_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_logit_model_manager.h:20,
-                 from state_space_logit_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_gaussian_model_manager.cc -o state_space_gaussian_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_gaussian_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c model_manager.cc -o model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from model_manager.cc:19:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from model_manager.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c bsts.cc -o bsts.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from bsts.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from bsts.cc:20:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c mixed_frequency.cc -o mixed_frequency.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/create_state_model.hpp:24,
-                 from mixed_frequency.cc:20:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from mixed_frequency.cc:19:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_student_model_manager.cc -o state_space_student_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_student_model_manager.h:20,
-                 from state_space_student_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -I`/usr/lib/R/bin/Rscript -e "cat(system.file(package='Boom'))"`/include -DADD_ -DR_NO_REMAP -DRLANGUAGE  -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include" -I"/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -c state_space_regression_model_manager.cc -o state_space_regression_model_manager.o
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:28:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/detail/shared_count.hpp:355:33: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_count( std::auto_ptr<Y> & r ): pi_( new sp_counted_impl_p<Y>( r.get() ) )
-                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:256:65: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
- template< class T, class R > struct sp_enable_if_auto_ptr< std::auto_ptr< T >, R >
-                                                                 ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:471:31: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
-                               ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:484:22: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
-                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:567:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> & r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:576:34: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-     shared_ptr & operator=( std::auto_ptr<Y> && r )
-                                  ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-In file included from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/shared_ptr.hpp:17:0,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/Filters/SparseMatrix.hpp:23,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/Models/StateSpace/StateSpaceModelBase.hpp:26,
-                 from model_manager.h:22,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp: In member function ‘boost::shared_ptr<T>& boost::shared_ptr<T>::operator=(std::auto_ptr<_Up>&&)’:
-/tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/smart_ptr/shared_ptr.hpp:578:38: warning: ‘template<class> class std::auto_ptr’ is deprecated [-Wdeprecated-declarations]
-         this_type( static_cast< std::auto_ptr<Y> && >( r ) ).swap( *this );
-                                      ^
-In file included from /usr/include/c++/5/bits/locale_conv.h:41:0,
-                 from /usr/include/c++/5/locale:43,
-                 from /usr/include/c++/5/iomanip:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/policies/error_handling.hpp:12,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/BH/include/boost/math/special_functions/round.hpp:14,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/portable_math.hpp:43,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/cpputil/math_utils.hpp:25,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/LinAlg/Vector.hpp:31,
-                 from /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/include/r_interface/boom_r_tools.hpp:24,
-                 from model_manager.h:20,
-                 from state_space_gaussian_model_manager.h:20,
-                 from state_space_regression_model_manager.h:20,
-                 from state_space_regression_model_manager.cc:17:
-/usr/include/c++/5/bits/unique_ptr.h:49:28: note: declared here
-   template<typename> class auto_ptr;
-                            ^
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o bsts.so aggregate_time_series.o bsts.o bsts_init.o get_date_ranges.o mixed_frequency.o model_manager.o state_space_gaussian_model_manager.o state_space_logit_model_manager.o state_space_poisson_model_manager.o state_space_regression_model_manager.o state_space_student_model_manager.o utils.o /tmp/RtmpcwuZam/checklibfdec1e278f50/Boom/lib/libboom.a -L/usr/lib/R/lib -lR
-Compiling with: 
-BOOM_DIR = `$(R_HOME)/bin/Rscript -e "cat(system.file(package='Boom'))"`
-BOOM_LIB = ${BOOM_DIR}/lib${R_ARCH}/libboom.a
-PKG_LIBS = ${BOOM_LIB}
-PKG_CPPFLAGS = -I${BOOM_DIR}/include -DADD_ -DR_NO_REMAP -DRLANGUAGE 
-CXX_STD = CXX11
-installing to /tmp/RtmpcwuZam/filefdecf907f28/bsts.Rcheck/bsts/libs
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (bsts)
-
-```
-# MeSH.Ani.FGSC.eg.db
-
-Version: 1.10.0
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmppmNt3o/Rd2pdf21786d6f05cc'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-# MeSH.Mml.eg.db
-
-Version: 1.10.0
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmpKxgKOC/Rd2pdfc33f5b68278a'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 411.7Mb
-      sub-directories of 1Mb or more:
-        extdata  411.6Mb
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘MeSH.Mml.eg.db’ ...
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (MeSH.Mml.eg.db)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘MeSH.Mml.eg.db’ ...
-** R
-** inst
-Warning in file.append(to[okay], from[okay]) :
-  write error during file append
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-Warning in close.connection(file) :
-  Problem closing connection:  No space left on device
-Warning in file(file.path(outman, "00Index.html"), "wt") :
-  cannot open file '/tmp/RtmpcwuZam/filefdee2bde2e88/MeSH.Mml.eg.db.Rcheck/MeSH.Mml.eg.db/html/00Index.html': No such file or directory
-Error in file(file.path(outman, "00Index.html"), "wt") : 
-  cannot open the connection
-6: traceback(1)
-5: file(file.path(outman, "00Index.html"), "wt")
-4: .writePkgIndices(pkg_dir, instdir)
-3: do_install_source(pkg_name, instdir, pkg, desc)
-2: do_install(pkg)
-1: tools:::.install_packages()
-
-```
-# MeSH.Vvi.eg.db
-
-Version: 1.10.0
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmpfrELsl/Rd2pdf9d2d7eb2856c'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 376.7Mb
-      sub-directories of 1Mb or more:
-        extdata  376.6Mb
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘MeSH.Vvi.eg.db’ ...
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (MeSH.Vvi.eg.db)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘MeSH.Vvi.eg.db’ ...
-** R
-** inst
-Warning in file.append(to[okay], from[okay]) :
-  write error during file append
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-Warning in close.connection(file) :
-  Problem closing connection:  No space left on device
-Warning in file(file.path(outman, "00Index.html"), "wt") :
-  cannot open file '/tmp/RtmpcwuZam/filefdc67f7b3b37/MeSH.Vvi.eg.db.Rcheck/MeSH.Vvi.eg.db/html/00Index.html': No such file or directory
-Error in file(file.path(outman, "00Index.html"), "wt") : 
-  cannot open the connection
-6: traceback(1)
-5: file(file.path(outman, "00Index.html"), "wt")
-4: .writePkgIndices(pkg_dir, instdir)
-3: do_install_source(pkg_name, instdir, pkg, desc)
-2: do_install(pkg)
-1: tools:::.install_packages()
-
-```
-# BSgenome.Mfuro.UCSC.musFur1
-
-Version: 1.4.1
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmpKF1RAp/Rd2pdfcf03370d030e'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 602.8Mb
-      sub-directories of 1Mb or more:
-        extdata  602.7Mb
-    ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-    Package listed in more than one of Depends, Imports, Suggests, Enhances:
-      ‘BSgenome’
-    A package should be listed in only one of these fields.
-    ```
-
-*   checking Rd files ... NOTE
-    ```
-    prepare_Rd: package.Rd:14-16: Dropping empty section \details
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘BSgenome.Mfuro.UCSC.musFur1’ ...
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (BSgenome.Mfuro.UCSC.musFur1)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘BSgenome.Mfuro.UCSC.musFur1’ ...
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-Error : /tmp/RtmpcwuZam/filefdbe1fbcdfad/BSgenome.Mfuro.UCSC.musFur1.Rcheck/00_pkg_src/BSgenome.Mfuro.UCSC.musFur1/man/package.Rd: Sections \title, and \name must exist and be unique in Rd files
-ERROR: installing Rd objects failed for package ‘BSgenome.Mfuro.UCSC.musFur1’
-* removing ‘/tmp/RtmpcwuZam/filefdbe1fbcdfad/BSgenome.Mfuro.UCSC.musFur1.Rcheck/BSgenome.Mfuro.UCSC.musFur1’
-
-```
