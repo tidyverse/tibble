@@ -75,13 +75,15 @@ problems %>%
     nrow  = grepl("`nrow` argument", output),
     phylo = grepl("coerce.*phylo", output)
   ) %>%
-  count(names, nrow, phylo)
+  count(names, nrow, phylo) %>%
+  arrange(desc(n)) %>%
+  mutate(
+    prop = n / sum(n),
+    cum_prop = cumsum(prop)
+  )
 
 library(cranlogs)
 dl <- cran_downloads(when = "last-week", packages = pkg)
-## curl shouldn't be here
-dl <- dl %>%
-  filter(package != "curl")
 
 dl %>%
   count(package, wt = count) %>%
