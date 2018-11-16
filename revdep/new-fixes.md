@@ -84,4 +84,6 @@ Submitted PR: <https://github.com/njtierney/naniar/pull/220>. R CMD check runs f
 
 <https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#tidygraph>
 
-Tests fail. A lot of `as_tibble()` calls in the code...
+Switched `as_tibble()` and manual name repair in a conversion from matrix to tibble.
+
+PR: <https://github.com/thomasp85/tidygraph/pull/79>. Tests run fine locally, haven't run `R CMD check` yet.
