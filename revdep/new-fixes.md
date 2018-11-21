@@ -34,7 +34,7 @@ The revdep report shows 15 test failures and a failure with the vignette. I beli
 
 JB proposed a fix in a PR. I now see no test failures and the vignette renders. There are other notes and warnings from `R CMD check` but I don't think they have anything to do with tibble.
 
-The PR: <https://github.com/facebook/prophet/pull/739>
+The PR: <https://github.com/facebook/prophet/pull/739> **now merged: they plan to submit to CRAN before end of November**
 
 # rdefra
 
