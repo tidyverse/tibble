@@ -110,4 +110,15 @@ Switched `as_tibble()` and manual name repair in a conversion from matrix to tib
 
 PR: <https://github.com/ropensci/drake/pull/586>. Tests run fine locally, haven't run `R CMD check` yet.
 
+# broom
 
+<https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#broom>
+
+  * One test warning and one test failure fixed by switching an application of `as_tibble()` to a vector to an application of `enframe()` in the lavaan tidiers.
+  * One test failure in `tidy_xyz()` (has something to do with lists), fixed by moving the application of colnames to just before `as_tibble()` instead of just after.
+  * One test failure re: `tidy.Polygon()` and another re: `tidy.Line()`. Each fixed by applying names just before `as.tibble()` instead of just after.
+  * No test failures remain. 31 test warnings remain, but seem to have nothing to do with tibble.
+  * I see 1 warning and 1 note with `R CMD check`, neither of which have anything to do with tibble.
+
+
+The PR: <https://github.com/tidymodels/broom/pull/534>
