@@ -115,10 +115,12 @@ PR: <https://github.com/ropensci/drake/pull/586>. Tests run fine locally, haven'
 <https://github.com/tidyverse/tibble/blob/f-revdep-2/revdep/new-problems.md#broom>
 
   * One test warning and one test failure fixed by switching an application of `as_tibble()` to a vector to an application of `enframe()` in the lavaan tidiers.
-  * One test failure in `tidy_xyz()` (has something to do with lists), fixed by moving the application of colnames to just before `as_tibble()` instead of just after.
   * One test failure re: `tidy.Polygon()` and another re: `tidy.Line()`. Each fixed by applying names just before `as.tibble()` instead of just after.
-  * No test failures remain. 31 test warnings remain, but seem to have nothing to do with tibble.
+  * ~~One test failure in `tidy_xyz()` (has something to do with lists), fixed by moving the application of colnames to just before `as_tibble()` instead of just after.~~ *applied to the first PR, which is now closed*
+  * Although slated to be deprecated / removed, broom currently has lots of "base" tidiers which just call `as_tibble()`. I changed some tests and examples to *not* test edge cases for us. Also applied `as.table()` to `ftable` objects, so that those hit the same code path. Otherwise `ftable` objects route through `as_tibble.default()` and generate a warning because `rlang::is_atomic()` returns `TRUE`.
+  * No test failures remain. 24 test warnings remain, but seem to have nothing to do with tibble.
   * I see 1 warning and 1 note with `R CMD check`, neither of which have anything to do with tibble.
 
+The first PR: ~~<https://github.com/tidymodels/broom/pull/534>~~ *`master` is not going to CRAN soon, but there will be a patch release ... hence the 2nd PR*
 
-The PR: <https://github.com/tidymodels/broom/pull/534>
+The second PR: <https://github.com/tidymodels/broom/pull/536>
