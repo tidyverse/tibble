@@ -134,8 +134,7 @@ NULL
 set_repaired_names <- function(x,
                                .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   x <- set_minimal_names(x)
-  names(x) <- repaired_names(names(x), .name_repair = .name_repair)
-  x
+  set_names(x, repaired_names(names(x), .name_repair = .name_repair))
 }
 
 repaired_names <- function(name,
