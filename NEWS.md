@@ -32,8 +32,6 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - `column_to_rownames()` now always coerces to a data frame, because row names are no longer supported in tibbles (#114).
 
-- The `print()` method prints a message if a tibble is missing the `"tbl"` class (#264).
-
 - In all `*_rownames()` functions, the first argument has been renamed to `.data` for consistency (#412).
 
 - Subsetting one row with `[..., , drop = TRUE]` returns a tibble (#442).
