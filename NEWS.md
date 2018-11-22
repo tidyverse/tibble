@@ -12,7 +12,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Setting names on a tibble via `names(df) <- ...` now also requires minimal names, otherwise a warning is issued once per session (#466).
 
-- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated, see below for alternatives. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
@@ -53,7 +53,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
   - `"universal"`: Make the names `unique` and syntactic.
   - a function: apply custom name repair (e.g., `.name_repair = make.names` or `.name_repair = ~make.names(., unique = TRUE)` for names in the style of base R).
 
-  The `validate` argument of `as_tibble()` is deprecated but supported (emits a message). Use `.name_repair = "minimal"` instead of `validate = FALSE` and `.name_repair = "check_unique"` instead of `validate = TRUE` (#469, @jennybc).
+  The `validate` argument of `as_tibble()` is deprecated but supported (emits a message once per session). Use `.name_repair = "minimal"` instead of `validate = FALSE`, and `.name_repair = "check_unique"` instead of `validate = TRUE`. If you need to support older versions of tibble, pass both `.name_repair` and `validate` arguments in a consistent way, no message will be emitted in this case (#469, @jennybc).
 
 - Row name handling is stricter.  Row names are never (and never were) supported in `tibble()` and `new_tibble()`, and are now stripped by default in `as_tibble()`. The `rownames` argument to `as_tibble()` supports:
 
