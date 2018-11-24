@@ -123,4 +123,4 @@ PR: <https://github.com/ropensci/drake/pull/586>. Tests run fine locally, haven'
 
 The first PR: ~~<https://github.com/tidymodels/broom/pull/534>~~ *`master` is not going to CRAN soon, but there will be a patch release ... hence the 2nd PR*
 
-The second PR: <https://github.com/tidymodels/broom/pull/536>
+The second PR: <https://github.com/tidymodels/broom/pull/536> **now merged: they plan to submit to CRAN fairly soon because of this and the recent release or generics**
