@@ -30,6 +30,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
     
     Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names. Packages that import _tibble_ can call `set_config()` in their `.onLoad()` function (#114).
 
+- `as_tibble()` drops extra classes, in particular `as_tibble.grouped_df()` now removes grouping (#535).
+
 - `column_to_rownames()` now always coerces to a data frame, because row names are no longer supported in tibbles (#114).
 
 - In all `*_rownames()` functions, the first argument has been renamed to `.data` for consistency (#412).
