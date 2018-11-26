@@ -141,4 +141,7 @@ names(df)
 \seealso{
 \code{\link[rlang:names2]{rlang::names2()}} returns the names of an object, after making them
 \code{minimal}.
+
+The \href{https://principles.tidyverse.org/names-attribute.html}{Names attribute}
+section in the "tidyverse package development principles".
 }

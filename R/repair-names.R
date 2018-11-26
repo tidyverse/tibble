@@ -88,8 +88,13 @@
 #'  universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
 #' ```
 #'
-#' @seealso [rlang::names2()] returns the names of an object, after making them
+#' @seealso
+#' [rlang::names2()] returns the names of an object, after making them
 #'   `minimal`.
+#'
+#'
+#' The [Names attribute](https://principles.tidyverse.org/names-attribute.html)
+#' section in the "tidyverse package development principles".
 #'
 #' @examples
 #' \dontrun{
