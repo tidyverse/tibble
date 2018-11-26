@@ -134,7 +134,7 @@ universal names: "...1" "x..2" "...3" "x..4"
 to facilitate \emph{post hoc} name repair in tibble, given that \code{tibble()} and
 \code{as_tibble()} did not do this.
 
-From tibble v1.5.0, the \code{.name_repair} argument gives direct access to three
+From tibble v2.0.0, the \code{.name_repair} argument gives direct access to three
 specific levels of name repair: \code{minimal}, \code{unique}, and \code{universal}. We
 recommend that new code use this instead of \code{tidy_names()},
 \code{set_tidy_names()}, or \code{repair_names()}. After a period of use, the repair

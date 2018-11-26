@@ -29,7 +29,7 @@
 #' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
-  # For compatibility with tibble < 1.5.0
+  # For compatibility with tibble < 2.0.0
   if (is.null(class)) {
     class <- subclass
   }
