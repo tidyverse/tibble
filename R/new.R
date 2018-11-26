@@ -50,8 +50,11 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   if (missing(nrow)) {
     abort(error_new_tibble_needs_nrow())
   }
-  #' This should be an integer of length 1, and every element of the list `x` should have [NROW()] equal to this value.
-  #' (But this is not checked by the constructor). This takes the place of the "row.names" attribute in a data frame.
+  #' This should be an integer of length 1,
+  #' and every element of the list `x` should have [NROW()]
+  #' equal to this value.
+  #' (But this is not checked by the constructor).
+  #' This takes the place of the "row.names" attribute in a data frame.
   if (!is_integerish(nrow, 1)) {
     abort(error_new_tibble_needs_nrow())
   }
@@ -84,7 +87,7 @@ validate_tibble <- function(x) {
   check_valid_cols(x)
 
   #' It also makes sure that all columns have the same length,
-  #' and that the `row.names` attribute is consistent with the data.
+  #' and that [NROW()] is consistent with the data.
   validate_nrow(names(x), col_lengths(x), NROW(x))
 
   #' 1d arrays are not supported.

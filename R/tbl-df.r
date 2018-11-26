@@ -29,7 +29,9 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' * A `names` attribute that is a character vector the same length as the
 #'   underlying list.
 #' * A `row.names` attribute, included for compatibility with the base
-#'   [`data.frame` class][base::data.frame()]. However, `row.names` are ignored
+#'   [`data.frame` class][base::data.frame()].
+#'   This attribute is only consulted to query the number of rows,
+#'   any row names that might be stored there are ignored
 #'   by most tibble methods.
 #'
 #' @section Behavior of `tbl_df`:

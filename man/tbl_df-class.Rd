@@ -31,7 +31,9 @@ Objects of class \code{tbl_df} have:
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
 \item A \code{row.names} attribute, included for compatibility with the base
-\link[base:data.frame]{data.frame class}. However, \code{row.names} are ignored
+\link[base:data.frame]{data.frame class}.
+This attribute is only consulted to query the number of rows,
+any row names that might be stored there are ignored
 by most tibble methods.
 }
 }
