@@ -23,7 +23,6 @@ reference:
   contents:
   - add_row
   - add_column
-  - repair_names
 
 - title: Helpers
   contents:

@@ -20,8 +20,8 @@
 #' should anticipate `minimal` names as input and should, likewise, return names
 #' that are at least `minimal`.
 #'
-#' The "Life cycle" section explains the status of the existing functions
-#' `tidy_names()`, `set_tidy_names()`, and `repair_names()`.
+#' The existing functions [tidy_names()], [set_tidy_names()],
+#' and [repair_names()] are soft-deprecated.
 #'
 #' @section `minimal` names:
 #'
@@ -88,14 +88,9 @@
 #'  universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
 #' ```
 #'
-#' @param x A vector.
-#' @param name A `names` attribute, usually a character vector.
-#' @param quiet Whether to suppress messages about name repair.
-#'
 #' @seealso [rlang::names2()] returns the names of an object, after making them
 #'   `minimal`.
 #'
-#' @return `x` with repaired names or a repaired version of `name`.
 #' @examples
 #' \dontrun{
 #' ## by default, duplicate names are not allowed
@@ -355,10 +350,12 @@ describe_repair <- function(orig_name, name) {
   }
 }
 
-#' @section Life cycle:
+#' Retired functions for name repair
+#'
+#' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
-#' to facilitate *post hoc* name repair in tibble, given that `tibble()` and
-#' `as_tibble()` did not do this.
+#' to facilitate *post hoc* name repair in tibble, given that [tibble()] and
+#' [as_tibble()] did not do this.
 #'
 #' From tibble v2.0.0, the `.name_repair` argument gives direct access to three
 #' specific levels of name repair: `minimal`, `unique`, and `universal`. We
@@ -380,11 +377,18 @@ describe_repair <- function(orig_name, name) {
 #' set_tidy_names(df, syntactic = TRUE)
 #' ```
 #'
+#' @param x A vector.
+#' @param name A `names` attribute, usually a character vector.
 #' @param syntactic Should names be made syntactically valid? If `FALSE`, uses
 #'   same logic as `.name_repair = "unique"`. If `TRUE`, uses same logic as
 #'   `.name_repair = "universal"`.
+#' @param quiet Whether to suppress messages about name repair.
+#'
+#' @return `x` with repaired names or a repaired version of `name`.
+#'
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
+#' @keywords internal
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   # Local functions to preserve behavior in v1.4.2
   is_syntactic <- function(x) {
@@ -439,7 +443,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
 }
 
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   x <- set_minimal_names(x)
   new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
@@ -450,7 +454,7 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @param sep A string inserted between the column name and de-duplicating
 #'   number.
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
 repair_names <- function(x, prefix = "V", sep = "") {
   ## TODO: plot a deprecation strategy once we deal with the fact that
   ## `dplyr::bind_cols()` calls this function
