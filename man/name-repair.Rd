@@ -181,6 +181,12 @@ tibble(`25\%` = 1, `75\%` = 2, .name_repair = fix_names)
 fix_names <- function(x) gsub("\\\\s+", "_", x)
 tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 
+## purrr-style anonymous functions and constants
+## are also supported
+tibble(x = 1, x = 2, .name_repair = ~make.names(., unique = TRUE))
+
+tibble(x = 1, x = 2, .name_repair = ~c("a", "b"))
+
 ## the names attibute will be non-NULL, with "" as the default element
 df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 names(df)

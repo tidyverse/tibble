@@ -90,10 +90,14 @@ df$a.1
 ## You can specify your own name repair function:
 tibble(x = 1, x = 2, .name_repair = make.unique)
 
-tibble(x = 1, x = 2, .name_repair = ~make.names(., unique = TRUE))
-
 fix_names <- function(x) gsub("\\\\s+", "_", x)
 tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
+
+## purrr-style anonymous functions and constants
+## are also supported
+tibble(x = 1, x = 2, .name_repair = ~make.names(., unique = TRUE))
+
+tibble(x = 1, x = 2, .name_repair = ~c("a", "b"))
 
 # Tibbles can contain columns that are tibbles or matrices
 # if the number of rows is consistent:
