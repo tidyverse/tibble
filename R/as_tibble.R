@@ -82,10 +82,8 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
-  if (!missing(validate)) {
-    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
-  }
+
+  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -110,15 +108,28 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  if (!missing(validate)) {
-    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
-  }
+
+  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
 
   x <- set_repaired_names(x, .name_repair)
   check_valid_cols(x)
   x[] <- map(x, strip_dim)
   recycle_columns(x, .rows)
+}
+
+compat_name_repair <- function(.name_repair, missing_validate, validate) {
+  if (missing_validate) return(.name_repair)
+
+  name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
+
+  if (!has_length(.name_repair, 1)) {
+    inform_once("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+  } else if (.name_repair != name_repair) {
+    warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
+    return(.name_repair)
+  }
+
+  name_repair
 }
 
 # TODO: Still necessary with vctrs (because vctrs_size() already checks this)?

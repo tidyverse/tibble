@@ -474,6 +474,7 @@ test_that("types preserved when recycling in tibble() (#284)", {
 })
 
 test_that("`validate` triggers deprecation message, but then works", {
+  forget_inform_once()
   expect_error(
     expect_message(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
@@ -482,6 +483,7 @@ test_that("`validate` triggers deprecation message, but then works", {
     error_column_must_be_named(2, repair = TRUE)
   )
 
+  forget_inform_once()
   expect_message(
     df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
     "deprecated"
@@ -490,6 +492,7 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
+  forget_inform_once()
   expect_message(
     df <- as_tibble(df, validate = FALSE),
     "deprecated"
@@ -498,10 +501,83 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
+  forget_inform_once()
   expect_error(
     expect_message(
       as_tibble(df, validate = TRUE),
       "deprecated"
+    ),
+    error_column_must_be_named(2, repair = TRUE)
+  )
+})
+
+test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
+  forget_inform_once()
+  expect_error(
+    expect_message(
+      as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
+      NA
+    ),
+    error_column_must_be_named(2, repair = TRUE)
+  )
+
+  forget_inform_once()
+  expect_message(
+    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal"),
+    NA
+  )
+  expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi", a = 2)
+  names(df) <- c("a", "", "a")
+  forget_inform_once()
+  expect_message(
+    df <- as_tibble(df, validate = FALSE, .name_repair = "minimal"),
+    NA
+  )
+  expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi")
+  names(df) <- c("a", "")
+  forget_inform_once()
+  expect_error(
+    expect_message(
+      as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
+      NA
+    ),
+    error_column_must_be_named(2, repair = TRUE)
+  )
+})
+
+test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
+  expect_error(
+    expect_warning(
+      as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
+      "precedence"
+    ),
+    error_column_must_be_named(2, repair = TRUE)
+  )
+
+  expect_warning(
+    df <- as_tibble(list(a = 1, "hi", a = 2), validate = TRUE, .name_repair = "minimal"),
+    "precedence"
+  )
+  expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi", a = 2)
+  names(df) <- c("a", "", "a")
+  expect_warning(
+    df <- as_tibble(df, validate = TRUE, .name_repair = "minimal"),
+    "precedence"
+  )
+  expect_identical(names(df), c("a", "", "a"))
+
+  df <- data.frame(a = 1, "hi")
+  names(df) <- c("a", "")
+  expect_error(
+    expect_warning(
+      as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
+      "precedence"
     ),
     error_column_must_be_named(2, repair = TRUE)
   )
