@@ -5,6 +5,7 @@ Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", "ctb"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", "ctb"),
     person("RStudio", role = "cph")
     )
 Description: Provides a 'tbl_df' class (the 'tibble') that provides
