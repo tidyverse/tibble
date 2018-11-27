@@ -1,4 +1,4 @@
-# tibble 1.4.99.9005
+# tibble 2.0.0
 
 ## Breaking changes
 
