@@ -86,9 +86,9 @@
 #'
 #' ## purrr-style anonymous functions and constants
 #' ## are also supported
-#' tibble(x = 1, x = 2, .name_repair = ~make.names(., unique = TRUE))
+#' tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
 #'
-#' tibble(x = 1, x = 2, .name_repair = ~c("a", "b"))
+#' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 #'
 #' # Tibbles can contain columns that are tibbles or matrices
 #' # if the number of rows is consistent:
