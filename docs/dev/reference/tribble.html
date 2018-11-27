@@ -76,7 +76,7 @@ important.  Please see tibble-package for a general introduction." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -158,23 +158,23 @@ data. These arguments support <a href='https://rlang.r-lib.org/reference/tidy-do
   <span class='st'>"a"</span>,   <span class='fl'>1</span>,
   <span class='st'>"b"</span>,   <span class='fl'>2</span>,
   <span class='st'>"c"</span>,   <span class='fl'>3</span>
-)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;   colA   colB
-#&gt;   &lt;chr&gt; &lt;dbl&gt;
-#&gt; 1 a         1
-#&gt; 2 b         2
-#&gt; 3 c         3</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> c         3</div><div class='input'>
 <span class='co'># tribble will create a list column if the value in any cell is</span>
 <span class='co'># not a scalar</span>
 <span class='fu'>tribble</span>(
   ~<span class='no'>x</span>,  ~<span class='no'>y</span>,
   <span class='st'>"a"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>,
   <span class='st'>"b"</span>, <span class='fl'>4</span>:<span class='fl'>6</span>
-)</div><div class='output co'>#&gt; # A tibble: 2 x 2
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 2</span><span>
 #&gt;   x     y        
-#&gt;   &lt;chr&gt; &lt;list&gt;   
-#&gt; 1 a     &lt;int [3]&gt;
-#&gt; 2 b     &lt;int [3]&gt;</div></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

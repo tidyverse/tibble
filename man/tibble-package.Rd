@@ -58,6 +58,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Romain Francois \email{romain@r-enthusiasts.com} [contributor]
+  \item Jennifer Bryan \email{jenny@rstudio.com} [contributor]
   \item RStudio [copyright holder]
 }
 

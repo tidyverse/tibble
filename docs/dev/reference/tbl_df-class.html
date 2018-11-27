@@ -86,7 +86,7 @@ that is more expressive and robust." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@ that is more expressive and robust." />
 
     <div class="ref-description">
     
-    <p>The <code>tbl_df</code> class is a subclass of <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>,
+    <p>The <code>tbl_df</code> class is a subclass of <code><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>,
 created in order to have different default behaviour. The colloquial term
 "tibble" refers to a data frame that has the <code>tbl_df</code> class. Tibble is the
 central data structure for the set of packages known as the
@@ -148,7 +148,7 @@ central data structure for the set of packages known as the
 <a href='http://tidyr.tidyverse.org/'>tidyr</a>, and
 <a href='http://readr.tidyverse.org/'>readr</a>.</p>
 <p>The general ethos is that tibbles are lazy and surly: they do less and
-complain more than base <a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>. This forces
+complain more than base <a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust.</p>
     
@@ -159,13 +159,15 @@ that is more expressive and robust.</p>
 
     
     <p>Objects of class <code>tbl_df</code> have:</p><ul>
-<li><p>A <code>class</code> attribute of <code>c("tbl_df", "tbl", "data.frame")</code>.</p></li>
+<li><p>A <code>class</code> attribute of <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("tbl_df", "tbl", "data.frame")</a></code>.</p></li>
 <li><p>A base type of <code>"list"</code>, where each element of the list has the same
-<code>NROW()</code>.</p></li>
+<code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>NROW()</a></code>.</p></li>
 <li><p>A <code>names</code> attribute that is a character vector the same length as the
 underlying list.</p></li>
 <li><p>A <code>row.names</code> attribute, included for compatibility with the base
-<a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame class</a>. However, <code>row.names</code> are ignored
+<a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame class</a>.
+This attribute is only consulted to query the number of rows,
+any row names that might be stored there are ignored
 by most tibble methods.</p></li>
 </ul>
     
@@ -173,20 +175,20 @@ by most tibble methods.</p></li>
 
     
     <p>How default behaviour of tibbles differs from that of
-<a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>, during creation, access, and
-modification:</p><ul>
-<li><p>Column data is not coerced. A character vector is not turned into a factor.</p></li>
+<a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frames</a>, during creation and access:</p><ul>
+<li><p>Column data is not coerced. A character vector is not turned into a factor.
+List-columns are expressly anticipated and do not require special tricks.
+Read more in <code><a href='tibble.html'>tibble()</a></code>.</p></li>
+<li><p>Recycling only happens for a length 1 input.</p></li>
 <li><p>Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
 must indicate how to resolve. Read more in <a href='name-repair.html'>name-repair</a>.</p></li>
 <li><p>Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></li>
-<li><p>Recycling only happens for a length 1 input.</p></li>
 <li><p><code>df[, j]</code> returns a tibble; it does not automatically extract the column
-inside. <code>df[, j, drop = FALSE]</code> is the default.</p></li>
-<li><p>List-columns are expressly anticipated and do not require special tricks.</p></li>
+inside. <code>df[, j, drop = FALSE]</code> is the default. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
 <li><p>There is no partial matching when <code>$</code> is used to index by name. <code>df$name</code>
-for a nonexistent name generates a warning.</p></li>
+for a nonexistent name generates a warning. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
 <li><p>Printing and inspection are a very high priority. The goal is to convey as
 much information as possible, in a concise way, even for large and complex
 tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
@@ -194,7 +196,7 @@ tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='formatting.html'>print.tbl_df()</a></code>,
+    <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='formatting.html'>print.tbl()</a></code>,
 <code><a href='glimpse.html'>glimpse()</a></code></p></div>
     
 

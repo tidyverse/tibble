@@ -39,20 +39,20 @@ unique names are minimal, have no duplicates, and are never empty
 (literally, no &quot;&quot;s).
 All columns can be accessed by name via df[[&quot;name&quot;]].
 
-syntactic names are unique and syntactic (see Details for more).
+universal names are unique and syntactic (see Details for more).
 Names work everywhere, without quoting: df$name and
 lm(name1 ~ name2, data = df) and dplyr::select(df, name) all work.
 
 " />
 
-<meta property="og:description" content="syntactic implies unique, unique implies minimal. These levels are
+<meta property="og:description" content="universal implies unique, unique implies minimal. These levels are
 nested.
 The .name_repair argument of tibble() and as_tibble() refers to these
 levels. Alternatively, the user can pass their own name repair function. It
 should anticipate minimal names as input and should, likewise, return names
 that are at least minimal.
-The &quot;Life cycle&quot; section explains the status of the existing functions
-tidy_names(), set_tidy_names(), and repair_names()." />
+The existing functions tidy_names(), set_tidy_names(),
+and repair_names() are soft-deprecated." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -95,7 +95,7 @@ tidy_names(), set_tidy_names(), and repair_names()." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -155,65 +155,24 @@ package have names that are, at least, <code>minimal</code>.</p></li>
 (literally, no <code>""</code>s).</p><ul>
 <li><p>All columns can be accessed by name via <code>df[["name"]]</code>.</p></li>
 </ul></li>
-<li><p><code>syntactic</code> names are <code>unique</code> and syntactic (see Details for more).</p><ul>
+<li><p><code>universal</code> names are <code>unique</code> and syntactic (see Details for more).</p><ul>
 <li><p>Names work everywhere, without quoting: <code>df$name</code> and
-<code>lm(name1 ~ name2, data = df)</code> and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select(df, name)</a></code> all work.</p></li>
+<code><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm(name1 ~ name2, data = df)</a></code> and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select(df, name)</a></code> all work.</p></li>
 </ul></li>
 </ul>
 
-    <p><code>syntactic</code> implies <code>unique</code>, <code>unique</code> implies <code>minimal</code>. These levels are
+    <p><code>universal</code> implies <code>unique</code>, <code>unique</code> implies <code>minimal</code>. These levels are
 nested.</p>
 <p>The <code>.name_repair</code> argument of <code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> refers to these
 levels. Alternatively, the user can pass their own name repair function. It
 should anticipate <code>minimal</code> names as input and should, likewise, return names
 that are at least <code>minimal</code>.</p>
-<p>The "Life cycle" section explains the status of the existing functions
-<code>tidy_names()</code>, <code>set_tidy_names()</code>, and <code>repair_names()</code>.</p>
+<p>The existing functions <code><a href='name-repair-retired.html'>tidy_names()</a></code>, <code><a href='name-repair-retired.html'>set_tidy_names()</a></code>,
+and <code><a href='name-repair-retired.html'>repair_names()</a></code> are soft-deprecated.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_names</span>(<span class='no'>name</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>set_tidy_names</span>(<span class='no'>x</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>repair_names</span>(<span class='no'>x</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>"V"</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>name</th>
-      <td><p>A <code>names</code> attribute, usually a character vector.</p></td>
-    </tr>
-    <tr>
-      <th>syntactic</th>
-      <td><p>Should names be made syntactically valid? If <code>FALSE</code>, uses
-same logic as <code>.name_repair = "unique"</code>. If <code>TRUE</code>, uses same logic as
-<code>.name_repair = "syntactic"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>quiet</th>
-      <td><p>Whether to suppress messages about name repair.</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>A vector.</p></td>
-    </tr>
-    <tr>
-      <th>prefix</th>
-      <td><p>A string, the prefix to use for new column names.</p></td>
-    </tr>
-    <tr>
-      <th>sep</th>
-      <td><p>A string inserted between the column name and de-duplicating
-number.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>x</code> with repaired names or a repaired version of <code>name</code>.</p>
-    
+        
     <h2 class="hasAnchor" id="minimal-names"><a class="anchor" href="#minimal-names"></a><code>minimal</code> names</h2>
 
     
@@ -227,7 +186,7 @@ unnamed element is <code>""</code> and never <code>NA</code>.</p>
     <p>Request <code>.name_repair = "minimal"</code> to suppress almost all name munging. This
 is useful when the first row of a data source -- allegedly variable names --
 actually contains <em>data</em> and the resulting tibble is destined for reshaping
-with, e.g., <code><a href='http://www.rdocumentation.org/packages/tidyr/topics/gather'>tidyr::gather()</a></code>.</p>
+with, e.g., <code><a href='https://tidyr.tidyverse.org/reference/gather.html'>tidyr::gather()</a></code>.</p>
     
     <h2 class="hasAnchor" id="unique-names"><a class="anchor" href="#unique-names"></a><code>unique</code> names</h2>
 
@@ -244,55 +203,35 @@ by name, e.g., <code>df[["name"]]</code> works.</p>
 names <code>unique</code>, i.e. reconstructing the suffixes. If this interacts poorly
 with your names, you should take control of name repair.</p>
     
-    <h2 class="hasAnchor" id="syntactic-names"><a class="anchor" href="#syntactic-names"></a><code>syntactic</code> names</h2>
+    <h2 class="hasAnchor" id="universal-names"><a class="anchor" href="#universal-names"></a><code>universal</code> names</h2>
 
     
-    <p><code>syntactic</code> names are <code>unique</code> and syntactic, meaning they:</p><ul>
+    <p><code>universal</code> names are <code>unique</code> and syntactic, meaning they:</p><ul>
 <li><p>Are never empty (inherited from <code>unique</code>).</p></li>
 <li><p>Have no duplicates (inherited from <code>unique</code>).</p></li>
 <li><p>Consist of letters, numbers, and the dot <code>.</code> or underscore <code>_</code>
 characters.</p></li>
 <li><p>Start with a letter or start with the dot <code>.</code> not followed by a number.</p></li>
-<li><p>Are not a reserved word, e.g., <code>if</code> or <code>function</code> or <code>TRUE</code>.</p></li>
+<li><p>Are not a <a href='https://www.rdocumentation.org/packages/base/topics/Reserved'>reserved</a> word, e.g., <code>if</code> or <code>function</code> or <code>TRUE</code>.</p></li>
 <li><p>Are not <code>...</code>. Do not have the form <code>..i</code>, where <code>i</code> is a number.</p></li>
 </ul>
-    <p>If a data frame has <code>syntactic</code> names, variable names can be used "as is" in
+    <p>If a data frame has <code>universal</code> names, variable names can be used "as is" in
 code. They work well with nonstandard evaluation, e.g., <code>df$name</code> works.</p>
 <p>Tibble has a different method of making names syntactic than
-<code><a href='http://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code>. In general, tibble prepends one or more dots <code>.</code> until
+<code><a href='https://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code>. In general, tibble prepends one or more dots <code>.</code> until
 the name is syntactic.</p>
 <p>Examples:</p><pre> Original names:     ""    "x"    NA     "x"
-syntactic names: "...1" "x..2" "...3" "x..4"
+universal names: "...1" "x..2" "...3" "x..4"
     Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
- syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
-</pre>
-    
-    <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
-
-    
-    <p><code>tidy_names()</code>, <code>set_tidy_names()</code>, and <code>repair_names()</code> were early efforts
-to facilitate <em>post hoc</em> name repair in tibble, given that <code><a href='tibble.html'>tibble()</a></code> and
-<code><a href='as_tibble.html'>as_tibble()</a></code> did not do this.</p>
-<p>From tibble v1.5.0, the <code>.name_repair</code> argument gives direct access to three
-specific levels of name repair: <code>minimal</code>, <code>unique</code>, and <code>syntactic</code>. We
-recommend that new code use this instead of <code>tidy_names()</code>,
-<code>set_tidy_names()</code>, or <code>repair_names()</code>. After a period of use, the repair
-stategies behind <code>minimal</code>, <code>unique</code>, and <code>syntactic</code> are likely to be
-exposed in standalone functions and this could affect the behaviour of
-<code>tidy_names()</code>. <code>repair_names()</code> should be considered deprecated.</p><pre>tibble(..., `.name_repair = "unique"`)
-## is preferred to
-df &lt;- tibble(...)
-set_tidy_names(df, syntactic = FALSE)
-    tibble(..., `.name_repair = "syntactic"`)
-## is preferred to
-df &lt;- tibble(...)
-set_tidy_names(df, syntactic = TRUE)
+ universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
 </pre>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/names2.html'>rlang::names2()</a></code> returns the names of an object, after making them
-<code>minimal</code>.</p></div>
+<code>minimal</code>.</p>
+<p>The <a href='https://principles.tidyverse.org/names-attribute.html'>Names attribute</a>
+section in the "tidyverse package development principles".</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -300,57 +239,62 @@ set_tidy_names(df, syntactic = TRUE)
 <span class='co'>## by default, duplicate names are not allowed</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'># }</span><div class='input'><span class='co'>## you can authorize duplicate names</span>
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x     x
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x..1</span>
-#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;    x..1  x..2
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'>## by default, non-syntactic names are allowed</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'>## because you can still index by name</span>
 <span class='no'>df</span><span class='kw'>[[</span><span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>df</span>$<span class='no'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## syntactic names are easier to work with, though, and you can request them</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"syntactic"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `a 1` -&gt; a.1</span>
 #&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## you can specify your own name repair function</span>
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x   x.1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
-<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>gsub</span>(<span class='st'>"%"</span>, <span class='st'>" percent"</span>, <span class='no'>x</span>)
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`25%`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`75%`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
+<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>gsub</a></span>(<span class='st'>"%"</span>, <span class='st'>" percent"</span>, <span class='no'>x</span>)
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`25%`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`75%`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;   `25 percent` `75 percent`
-#&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-#&gt; 1            1            2</div><div class='input'>
-<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>gsub</span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>            1            2</div><div class='input'>
+<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>gsub</a></span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;   year_1 year_2
-#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1      1      2</div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      1      2</div><div class='input'>
+<span class='co'>## purrr-style anonymous functions and constants</span>
+<span class='co'>## are also supported</span>
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/make.names'>make.names</a></span>(<span class='no'>.</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;       x   x.1
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
+<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;       a     b
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'>## the names attibute will be non-NULL, with "" as the default element</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>list</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)
-<span class='fu'>names</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] "" ""</div></pre>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] "" ""</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#minimal-names"><code>minimal</code> names</a></li>
 
       <li><a href="#unique-names"><code>unique</code> names</a></li>
 
-      <li><a href="#syntactic-names"><code>syntactic</code> names</a></li>
-
-      <li><a href="#life-cycle">Life cycle</a></li>
+      <li><a href="#universal-names"><code>universal</code> names</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
