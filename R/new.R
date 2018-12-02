@@ -3,7 +3,7 @@
 #' @description
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses
-#' of a tibble, like \pkg{sf} or \pkg{tibbletime}.
+#' of a tibble, like \pkg{sf} or \pkg{tsibble}.
 #'
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
