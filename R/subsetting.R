@@ -94,7 +94,7 @@ NULL
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE) {
-  nr <- nrow(x)
+  nr <- fast_nrow(x)
 
   # Ignore drop as an argument
   n_real_args <- nargs() - !missing(drop)
@@ -123,10 +123,10 @@ NULL
 
   # Next, subset rows
   if (!missing(i)) {
-    if (is.logical(i) && !(length(i) %in% c(1, nrow(x)))) {
+    if (is.logical(i) && !(length(i) %in% c(1L, fast_nrow(x)))) {
       warningc(
         "Length of logical index must be 1",
-        if (nrow(x) != 1) paste0(" or ", nrow(x)),
+        if (fast_nrow(x) != 1) paste0(" or ", fast_nrow(x)),
         ", not ", length(i)
       )
     }
@@ -152,7 +152,12 @@ NULL
     }
   }
 
-  vec_restore_tbl_df(set_tibble_class(result, nr), x)
+  out <- set_tibble_class(result, nr)
+  vec_restore_tbl_df(out, x)
+}
+
+fast_nrow <- function(x) {
+  .row_names_info(x, 2L)
 }
 
 subset_rows <- function(x, i) {
