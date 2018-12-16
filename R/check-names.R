@@ -1,14 +1,14 @@
 check_names_df <- function(j, x) {
   if (is.object(j)) {
     abort(error_unsupported_index(j))
-  } else if (is_character(j)) {
-    check_names_before_after_character(j, names(x))
-  } else if (is_integer(j) || is_double(j)) {
-    check_names_df_numeric(j, x)
-  } else if (is_logical(j)) {
-    check_names_df_logical(j, x)
   } else {
-    abort(error_unsupported_index(j))
+    switch(typeof(j),
+      integer = ,
+      double = check_names_df_numeric(j, x),
+      character = check_names_before_after_character(j, names(unclass(x))),
+      logical = check_names_df_logical(j, x),
+      abort(error_unsupported_index(j))
+    )
   }
 }
 
@@ -19,18 +19,20 @@ check_names_df_numeric <- function(j, x) {
     abort(error_na_column_index())
   }
 
-  if (any(j != trunc(j) | abs(j) > length(x))) {
+  n <- length(unclass(x))
+
+  if (any(j != trunc(j)) || any(abs(j) > n)) {
     non_integer <- which(j != trunc(j))
     if (has_length(non_integer)) {
       abort(error_nonint_column_index(non_integer, j[non_integer]))
     }
-    neg_too_small <- which(j < -length(x))
+    neg_too_small <- which(j < -n)
     if (has_length(neg_too_small)) {
-      abort(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
+      abort(error_small_column_index(n, neg_too_small, j[neg_too_small]))
     }
-    pos_too_large <- which(j > length(x))
+    pos_too_large <- which(j > n)
     if (has_length(pos_too_large)) {
-      abort(error_large_column_index(length(x), pos_too_large, j[pos_too_large]))
+      abort(error_large_column_index(n, pos_too_large, j[pos_too_large]))
     }
   }
 

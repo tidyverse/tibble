@@ -68,7 +68,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     abort(error_names_must_be_non_null())
   }
 
-  set_tibble_class(x, nrow, class)
+  set_tibble_subclass(x, nrow, class)
 }
 
 #' @description
@@ -118,8 +118,17 @@ update_tibble_attrs <- function(x, ...) {
   x
 }
 
-set_tibble_class <- function(x, nrow, subclass = NULL) {
+tibble_class <- c("tbl_df", "tbl", "data.frame")
+
+# Two dedicated functions for faster subsetting
+set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
+  class(x) <- tibble_class
+  x
+}
+
+set_tibble_subclass <- function(x, nrow, subclass) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- c(subclass, tibble_class)
   x
 }
