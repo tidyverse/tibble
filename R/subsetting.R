@@ -172,9 +172,9 @@ subset_rows <- function(x, i) {
 vec_restore_tbl_df <- function(x, to) {
   # Copy attribute, preserving existing names & recreating rownames
   attr_to <- attributes(to)
-  attr_to[["names"]] <- names(x)
-  attr_to[["row.names"]] <- .set_row_names(NROW(x))
-  attributes(x) <- attr_to
+  attr_to[["names"]] <- NULL
+  attr_to[["row.names"]] <- NULL
+  attributes(x)[names(attr_to)] <- attr_to
 
   x
 }
