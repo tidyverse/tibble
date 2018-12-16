@@ -1,17 +1,18 @@
-check_names_df <- function(j, ...) UseMethod("check_names_df")
-
-#' @export
-check_names_df.default <- function(j, ...) {
-  abort(error_unsupported_index(j))
+check_names_df <- function(j, x) {
+  if (is.object(j)) {
+    abort(error_unsupported_index(j))
+  } else if (is_character(j)) {
+    check_names_before_after_character(j, names(x))
+  } else if (is_integer(j) || is_double(j)) {
+    check_names_df_numeric(j, x)
+  } else if (is_logical(j)) {
+    check_names_df_logical(j, x)
+  } else {
+    abort(error_unsupported_index(j))
+  }
 }
 
-#' @export
-check_names_df.character <- function(j, x) {
-  check_names_before_after.character(j, names(x))
-}
-
-#' @export
-check_names_df.numeric <- function(j, x) {
+check_names_df_numeric <- function(j, x) {
   check_needs_no_dim(j)
 
   if (anyNA(j)) {
@@ -34,8 +35,7 @@ check_names_df.numeric <- function(j, x) {
   seq_along(x)[j]
 }
 
-#' @export
-check_names_df.logical <- function(j, x) {
+check_names_df_logical <- function(j, x) {
   check_needs_no_dim(j)
 
   if (!(length(j) %in% c(1L, length(x)))) {
@@ -55,15 +55,15 @@ check_needs_no_dim <- function(j) {
 
 # check_names_before_after ------------------------------------------------
 
-check_names_before_after <- function(j, ...) UseMethod("check_names_before_after")
+check_names_before_after <- function(j, names) {
+  if (!is_bare_character(j)) {
+    return(j)
+  }
 
-#' @export
-check_names_before_after.default <- function(j, ...) {
-  j
+  check_names_before_after_character(j, names)
 }
 
-#' @export
-check_names_before_after.character <- function(j, names) {
+check_names_before_after_character <- function(j, names) {
   check_needs_no_dim(j)
 
   pos <- safe_match(j, names)
