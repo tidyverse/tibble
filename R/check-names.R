@@ -19,20 +19,22 @@ check_names_df_numeric <- function(j, x) {
     abort(error_na_column_index())
   }
 
-  non_integer <- which(j != trunc(j))
-  if (has_length(non_integer)) {
-    abort(error_nonint_column_index(non_integer, j[non_integer]))
-  }
-  neg_too_small <- which(j < -length(x))
-  if (has_length(neg_too_small)) {
-    abort(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
-  }
-  pos_too_large <- which(j > length(x))
-  if (has_length(pos_too_large)) {
-    abort(error_large_column_index(length(x), pos_too_large, j[pos_too_large]))
+  if (any(j != trunc(j) | abs(j) > length(x))) {
+    non_integer <- which(j != trunc(j))
+    if (has_length(non_integer)) {
+      abort(error_nonint_column_index(non_integer, j[non_integer]))
+    }
+    neg_too_small <- which(j < -length(x))
+    if (has_length(neg_too_small)) {
+      abort(error_small_column_index(length(x), neg_too_small, j[neg_too_small]))
+    }
+    pos_too_large <- which(j > length(x))
+    if (has_length(pos_too_large)) {
+      abort(error_large_column_index(length(x), pos_too_large, j[pos_too_large]))
+    }
   }
 
-  seq_along(x)[j]
+  j
 }
 
 check_names_df_logical <- function(j, x) {
