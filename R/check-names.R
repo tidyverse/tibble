@@ -6,20 +6,13 @@ check_names_df <- function(j, x) {
       abort(error_dim_column_index(j))
     }
 
-    x <- unclass(x)
-    jx <- seq_along(x)
-    names(jx) <- names(x)
-    jx <- jx[j]
-    if (anyNA(jx)) {
-      switch(typeof(j),
-        integer = ,
-        double = check_names_df_numeric(j, x),
-        character = check_names_before_after_character(j, names(unclass(x))),
-        logical = check_names_df_logical(j, x),
-        abort(error_unsupported_index(j))
-      )
-    }
-    jx
+    switch(typeof(j),
+      integer = ,
+      double = check_names_df_numeric(j, x),
+      character = check_names_before_after_character(j, names(unclass(x))),
+      logical = check_names_df_logical(j, x),
+      abort(error_unsupported_index(j))
+    )
   }
 }
 
