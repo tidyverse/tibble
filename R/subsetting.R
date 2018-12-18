@@ -113,15 +113,17 @@ NULL
   }
 
   # First, subset columns
-  if (!missing(j)) {
+  if (missing(j)) {
+    result <- x
+  } else {
     j <- check_names_df(j, x)
     result <- .subset(x, j)
-  } else {
-    result <- x
   }
 
   # Next, subset rows
-  if (!missing(i)) {
+  if (missing(i)) {
+    nr <- fast_nrow(x)
+  } else {
     if (is.logical(i) && !(length(i) %in% c(1L, fast_nrow(x)))) {
       warningc(
         "Length of logical index must be 1",
@@ -143,8 +145,6 @@ NULL
       result <- map(result, subset_rows, i)
       nr <- NROW(result[[1]])
     }
-  } else {
-    nr <- fast_nrow(x)
   }
 
   if (drop) {
@@ -173,8 +173,10 @@ subset_rows <- function(x, i) {
 vec_restore_tbl_df_with_nr <- function(x, to, nr) {
   # Copy attribute, preserving existing names and rownames
   attr_to <- attributes(to)
-  attr_to[["names"]] <- names(unclass(x))
-  attr_to[["row.names"]] <- .set_row_names(nr)
+  new_names <- names(unclass(x))
+  new_nr <- .set_row_names(nr)
+  attr_to[["names"]] <- new_names
+  attr_to[["row.names"]] <- new_nr
   attributes(x) <- attr_to
 
   x

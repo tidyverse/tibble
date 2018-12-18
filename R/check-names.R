@@ -2,19 +2,28 @@ check_names_df <- function(j, x) {
   if (is.object(j)) {
     abort(error_unsupported_index(j))
   } else {
-    switch(typeof(j),
-      integer = ,
-      double = check_names_df_numeric(j, x),
-      character = check_names_before_after_character(j, names(unclass(x))),
-      logical = check_names_df_logical(j, x),
-      abort(error_unsupported_index(j))
-    )
+    if (length(dim(j)) > 1) {
+      abort(error_dim_column_index(j))
+    }
+
+    x <- unclass(x)
+    jx <- seq_along(x)
+    names(jx) <- names(x)
+    jx <- jx[j]
+    if (anyNA(jx)) {
+      switch(typeof(j),
+        integer = ,
+        double = check_names_df_numeric(j, x),
+        character = check_names_before_after_character(j, names(unclass(x))),
+        logical = check_names_df_logical(j, x),
+        abort(error_unsupported_index(j))
+      )
+    }
+    jx
   }
 }
 
 check_names_df_numeric <- function(j, x) {
-  check_needs_no_dim(j)
-
   if (anyNA(j)) {
     abort(error_na_column_index())
   }
@@ -40,8 +49,6 @@ check_names_df_numeric <- function(j, x) {
 }
 
 check_names_df_logical <- function(j, x) {
-  check_needs_no_dim(j)
-
   if (!(length(j) %in% c(1L, length(x)))) {
     abort(error_mismatch_column_flag(length(x), length(j)))
   }
@@ -59,17 +66,16 @@ check_needs_no_dim <- function(j) {
 
 # check_names_before_after ------------------------------------------------
 
-check_names_before_after <- function(j, names) {
+check_names_before_after <- function(j, x) {
   if (!is_bare_character(j)) {
     return(j)
   }
 
-  check_names_before_after_character(j, names)
+  check_needs_no_dim(j)
+  check_names_before_after_character(j, x)
 }
 
 check_names_before_after_character <- function(j, names) {
-  check_needs_no_dim(j)
-
   pos <- safe_match(j, names)
   if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
