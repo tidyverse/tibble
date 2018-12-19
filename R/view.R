@@ -11,7 +11,7 @@
 #'
 #' @export
 view <- function(x, title = NULL, ...) {
-  if (interactive()) return(invisible(x))
+  if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
     title <- expr_deparse(enexpr(x))
