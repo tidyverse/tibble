@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>View an object — view • tibble</title>
+<title>Deprecated test for tibble-ness — is.tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -29,12 +29,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
-<meta property="og:title" content="View an object — view" />
+<meta property="og:title" content="Deprecated test for tibble-ness — is.tibble" />
 
 <meta property="og:description" content="
-Calls utils::View() on the input and returns it, invisibly.
-The RStudio IDE overrides utils::View(), this is picked up
-correctly." />
+Please use is_tibble() instead." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -122,37 +120,26 @@ correctly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>View an object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/view.R'><code>R/view.R</code></a></small>
-    <div class="hidden name"><code>view.Rd</code></div>
+    <h1>Deprecated test for tibble-ness</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tibble.R'><code>R/tibble.R</code></a></small>
+    <div class="hidden name"><code>is.tibble.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
-<p>Calls <code><a href='https://www.rdocumentation.org/packages/utils/topics/View'>utils::View()</a></code> on the input and returns it, invisibly.
-The RStudio IDE overrides <code><a href='https://www.rdocumentation.org/packages/utils/topics/View'>utils::View()</a></code>, this is picked up
-correctly.</p>
+    <p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
+<p>Please use <code><a href='is_tibble.html'>is_tibble()</a></code> instead.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>view</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>is.tibble</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The object to display.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>The title to use for the display, by default
-the deparsed expression is used.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Unused, for extensibility.</p></td>
+      <td><p>An object</p></td>
     </tr>
     </table>
     
