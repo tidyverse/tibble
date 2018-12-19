@@ -5,6 +5,8 @@
 \alias{tbl_df}
 \title{\code{tbl_df} class}
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+
 The \code{tbl_df} class is a subclass of \code{\link[base:data.frame]{data.frame}},
 created in order to have different default behaviour. The colloquial term
 "tibble" refers to a data frame that has the \code{tbl_df} class. Tibble is the

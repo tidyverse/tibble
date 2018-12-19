@@ -1,6 +1,8 @@
 #' Printing tibbles
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
 #' * Tibbles only print as many rows and columns as fit on one screen,

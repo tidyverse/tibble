@@ -67,13 +67,14 @@ Read more in \link{rownames}.
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 \code{as_tibble()} turns an existing object, such as a data frame, list, or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
 in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
 \code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to
 \code{\link[base:data.frame]{base::data.frame()}}.
-}
-\details{
+
 \code{as_tibble()} is an S3 generic, with methods for:
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method

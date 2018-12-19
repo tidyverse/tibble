@@ -19,6 +19,8 @@ x original x is (invisibly) returned, allowing \code{glimpse()} to be
 used within a data pipe line.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 This is like a transposed version of \code{print()}: columns run down the page,
 and data runs across. This makes it possible to see every column in
 a data frame. It's a little like \code{\link[=str]{str()}} applied to a data frame

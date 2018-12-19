@@ -16,6 +16,8 @@ unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start
 A named list.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
 same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When
 defining a component, you can refer to components created earlier in the

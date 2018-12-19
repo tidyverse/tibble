@@ -358,6 +358,9 @@ describe_repair <- function(orig_name, name) {
 #' Retired functions for name repair
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#'
+#' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
 #' to facilitate *post hoc* name repair in tibble, given that [tibble()] and
 #' [as_tibble()] did not do this.
