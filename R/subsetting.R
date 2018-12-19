@@ -94,8 +94,6 @@ NULL
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE) {
-  nr <- nrow(x)
-
   # Ignore drop as an argument
   n_real_args <- nargs() - !missing(drop)
 
@@ -103,30 +101,33 @@ NULL
   if (n_real_args <= 2L) {
     if (!missing(drop)) warningc("drop ignored")
 
-    if (!missing(i)) {
-      i <- check_names_df(i, x)
-      result <- .subset(x, i)
-    } else {
-      result <- x
+    if (missing(i)) {
+      return(x)
     }
 
-    return(vec_restore_tbl_df(set_tibble_class(result, nr), x))
+    i <- check_names_df(i, x)
+    result <- .subset(x, i)
+
+    nr <- fast_nrow(x)
+    return(vec_restore_tbl_df_with_nr(result, x, nr))
   }
 
   # First, subset columns
-  if (!missing(j)) {
+  if (missing(j)) {
+    result <- x
+  } else {
     j <- check_names_df(j, x)
     result <- .subset(x, j)
-  } else {
-    result <- x
   }
 
   # Next, subset rows
-  if (!missing(i)) {
-    if (is.logical(i) && !(length(i) %in% c(1, nrow(x)))) {
+  if (missing(i)) {
+    nr <- fast_nrow(x)
+  } else {
+    if (is.logical(i) && !(length(i) %in% c(1L, fast_nrow(x)))) {
       warningc(
         "Length of logical index must be 1",
-        if (nrow(x) != 1) paste0(" or ", nrow(x)),
+        if (fast_nrow(x) != 1) paste0(" or ", fast_nrow(x)),
         ", not ", length(i)
       )
     }
@@ -152,7 +153,11 @@ NULL
     }
   }
 
-  vec_restore_tbl_df(set_tibble_class(result, nr), x)
+  vec_restore_tbl_df_with_nr(result, x, nr)
+}
+
+fast_nrow <- function(x) {
+  .row_names_info(x, 2L)
 }
 
 subset_rows <- function(x, i) {
@@ -163,12 +168,15 @@ subset_rows <- function(x, i) {
   }
 }
 
-# TODO: Change to vec_restore.tbl_df() when vctrs is available
-vec_restore_tbl_df <- function(x, to) {
-  # Copy attribute, preserving existing names & recreating rownames
+# TODO: Consider changing to vec_restore.tbl_df() when vctrs is available,
+# but this will impact performance of subsetting!
+vec_restore_tbl_df_with_nr <- function(x, to, nr) {
+  # Copy attribute, preserving existing names and rownames
   attr_to <- attributes(to)
-  attr_to[["names"]] <- names(x)
-  attr_to[["row.names"]] <- .set_row_names(NROW(x))
+  new_names <- names(unclass(x))
+  new_nr <- .set_row_names(nr)
+  attr_to[["names"]] <- new_names
+  attr_to[["row.names"]] <- new_nr
   attributes(x) <- attr_to
 
   x
