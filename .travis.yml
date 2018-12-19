@@ -31,10 +31,12 @@ latex: false
 
 jobs:
   include:
-  - r: release
+  - r: devel
   - stage: full
     os: osx
-  - r: devel
+  - r: release
+    env:
+    - BUILD_PKGDOWN=true
   - r: 3.4
   - r: 3.3
   - r: 3.2
