@@ -157,5 +157,8 @@ is_tibble <- function(x) {
 #'
 #' Please use [is_tibble()] instead.
 #'
+#' @inheritParams is_tibble
 #' @export
-is.tibble <- is_tibble
+is.tibble <- function(x) {
+  is_tibble(x)
+}

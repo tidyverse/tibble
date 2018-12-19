@@ -6,6 +6,9 @@
 \usage{
 is.tibble(x)
 }
+\arguments{
+\item{x}{An object}
+}
 \description{
 \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
 
