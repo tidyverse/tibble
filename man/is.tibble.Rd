@@ -14,3 +14,4 @@ is.tibble(x)
 
 Please use \code{\link[=is_tibble]{is_tibble()}} instead.
 }
+\keyword{internal}

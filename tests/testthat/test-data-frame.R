@@ -54,6 +54,7 @@ test_that("empty input makes 0 x 0 tbl_df", {
 })
 
 test_that("SE version", {
+  scoped_lifecycle_silence()
   expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
@@ -80,6 +81,7 @@ test_that("attributes are preserved", {
 })
 
 test_that("tibble aliases", {
+  scoped_lifecycle_silence()
   expect_identical(data_frame(a = 1), tibble(a = 1))
   expect_identical(data_frame_, tibble_)
 })
@@ -161,28 +163,25 @@ test_that("Can convert tables to data frame", {
 
 
 test_that("Can convert unnamed atomic vectors to tibble by default", {
-  forget_warn_once()
+  scoped_lifecycle_warnings()
   expect_warning(
     expect_equal(as_tibble(1:3), tibble(value = 1:3)),
     "discouraged",
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA))),
     "discouraged",
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5)),
     "discouraged",
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     expect_equal(as_tibble(letters), tibble(value = letters)),
     "discouraged",
@@ -419,10 +418,12 @@ test_that("as_tibble() throws an error when user turns missing row names into co
 })
 
 test_that("as_data_frame is an alias of as_tibble", {
+  scoped_lifecycle_silence()
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })
 
 test_that("as.tibble is an alias of as_tibble", {
+  scoped_lifecycle_silence()
   expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
 
@@ -474,55 +475,57 @@ test_that("types preserved when recycling in tibble() (#284)", {
 })
 
 test_that("`validate` triggers deprecation message, but then works", {
-  forget_inform_once()
+  scoped_lifecycle_warnings()
+
   expect_error(
-    expect_message(
+    expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
-      "deprecated"
+      "deprecated",
+      fixed = TRUE
     ),
     error_column_must_be_named(2, repair = TRUE)
   )
 
-  forget_inform_once()
-  expect_message(
+  expect_warning(
     df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
-    "deprecated"
+    "deprecated",
+    fixed = TRUE
   )
   expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
-  forget_inform_once()
-  expect_message(
+  expect_warning(
     df <- as_tibble(df, validate = FALSE),
-    "deprecated"
+    "deprecated",
+    fixed = TRUE
   )
   expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  forget_inform_once()
   expect_error(
-    expect_message(
+    expect_warning(
       as_tibble(df, validate = TRUE),
-      "deprecated"
+      "deprecated",
+      fixed = TRUE
     ),
     error_column_must_be_named(2, repair = TRUE)
   )
 })
 
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
-  forget_inform_once()
+  scoped_lifecycle_warnings()
+
   expect_error(
-    expect_message(
+    expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
     error_column_must_be_named(2, repair = TRUE)
   )
 
-  forget_inform_once()
-  expect_message(
+  expect_warning(
     df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal"),
     NA
   )
@@ -530,8 +533,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
-  forget_inform_once()
-  expect_message(
+  expect_warning(
     df <- as_tibble(df, validate = FALSE, .name_repair = "minimal"),
     NA
   )
@@ -539,9 +541,8 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  forget_inform_once()
   expect_error(
-    expect_message(
+    expect_warning(
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),

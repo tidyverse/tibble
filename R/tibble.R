@@ -159,6 +159,9 @@ is_tibble <- function(x) {
 #'
 #' @inheritParams is_tibble
 #' @export
+#' @keywords internal
 is.tibble <- function(x) {
+  signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
+
   is_tibble(x)
 }

@@ -337,6 +337,7 @@ test_that("is_tibble", {
 })
 
 test_that("is_tibble", {
+  scoped_lifecycle_silence()
   expect_identical(is.tibble(iris), is_tibble(iris))
 })
 

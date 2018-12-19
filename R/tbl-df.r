@@ -74,16 +74,16 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @export
 `names<-.tbl_df` <- function(x, value) {
-  check_names_non_null(value, warn_once)
+  check_names_non_null(value, signal_soft_deprecated)
 
   if (!has_length(value, length(x))) {
-    warn_once(error_names_must_have_length(length(value), length(x)))
+    signal_soft_deprecated(error_names_must_have_length(length(value), length(x)), "error_names_must_have_length")
   }
 
-  check_names_non_na(value, warn_once)
+  check_names_non_na(value, signal_soft_deprecated)
 
   if (!is_character(value)) {
-    warn_once("Must use a character vector as names.")
+    signal_soft_deprecated("Must use a character vector as names.")
     value <- as.character(value)
   }
 

@@ -51,28 +51,6 @@ warningc <- function(...) {
   warn(paste0(...))
 }
 
-inform_once_env <- new.env(parent = emptyenv())
-inform_once <- function(msg) {
-  if (exists(msg, inform_once_env)) return(invisible())
-  inform(msg)
-  inform_once_env[[msg]] <- TRUE
-  invisible()
-}
-forget_inform_once <- function() {
-  rm(list = ls(inform_once_env), pos = inform_once_env)
-}
-
-warn_once_env <- new.env(parent = emptyenv())
-warn_once <- function(msg) {
-  if (exists(msg, warn_once_env)) return(invisible())
-  warn(msg)
-  warn_once_env[[msg]] <- TRUE
-  invisible()
-}
-forget_warn_once <- function() {
-  rm(list = ls(warn_once_env), pos = warn_once_env)
-}
-
 nchar_width <- function(x) {
   nchar(x, type = "width")
 }
