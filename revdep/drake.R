@@ -72,7 +72,7 @@ create_lib <- function(pkg, lib) {
 create_new_lib <- function(old_lib, new_lib) {
   lib <- c(new_lib, old_lib)
   withr::with_libpaths(lib, action = "replace", {
-    remotes::install_local(".")
+    remotes::install_local(".", force = TRUE)
   })
 
   lib
