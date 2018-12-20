@@ -14,7 +14,9 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - Setting names on a tibble via `names(df) <- ...` now also requires minimal names, otherwise a warning is issued once per session (#466).
 
-- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated, see below for alternatives. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. Coercing a matrix without column names will trigger a warning once per session. (This corresponds to the `"minimal"` checks described below.).
+
+- The `validate` argument to `as_tibble()` has been deprecated, see below for alternatives. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
@@ -83,7 +85,7 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 ## New functions
 
-- Added `view()` function that always returns its input invisibly and calls `utils::View()` only in interactive mode (#373).
+- Added experimental `view()` function that always returns its input invisibly and calls `utils::View()` only in interactive mode (#373).
 
 
 ## Output
@@ -102,12 +104,15 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - `column_to_rownames()` uses the real variable name in its error message (#399, @alexwhan).
 
+- Lazy tibbles with exactly 10 rows no longer show "...with more rows" (#371).
+
 ## Bug fixes
 
 - `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
 
 - `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
 
+- `print.tbl_df()` with a negative value for `n` behaves as if `n` was omitted (#371).
 
 
 
@@ -122,6 +127,8 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 - `tibble()` uses recycled values during construction but unrecycled values for validation.
 
 - `tibble()` is now faster for very wide tibbles.
+
+- Subsetting with the `[` operator is faster (#544).
 
 - Avoid use of `stop()` in examples if packages are not installed (#453, @Enchufa2).
 
