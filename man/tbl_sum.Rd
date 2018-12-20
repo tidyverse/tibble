@@ -10,8 +10,6 @@ tbl_sum(x)
 \item{x}{Object to summarise}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-
 \code{tbl_sum()} gives a brief textual description of a table-like object,
 which should include the dimensions, the data source, and possible grouping
 (for \code{dplyr}).  The default implementation forwards to \code{\link[pillar:obj_sum]{pillar::obj_sum()}}.

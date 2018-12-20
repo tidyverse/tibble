@@ -103,9 +103,6 @@ rbind_at <- function(old, new, pos) {
 
 #' Add columns to a data frame
 #'
-#' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-#'
 #' This is a convenient way to add one or more columns to an existing data
 #' frame.
 #'

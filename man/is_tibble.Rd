@@ -13,8 +13,6 @@ is_tibble(x)
 \code{TRUE} if the object inherits from the \code{tbl_df} class.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-
 This function returns \code{TRUE} for tibbles or subclasses thereof,
 and \code{FALSE} for all other objects, including regular data frames.
 }

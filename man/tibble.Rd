@@ -37,8 +37,6 @@ A tibble, which is a colloquial term for an object of class
 frame, i.e. it has class \code{data.frame}.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-
 \code{tibble()} constructs a data frame. It is used like \code{\link[base:data.frame]{base::data.frame()}}, but
 with a couple notable differences:
 \itemize{
