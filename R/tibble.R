@@ -1,6 +1,7 @@
 #' Build a data frame
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
 #'
 #' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
 #' with a couple notable differences:
@@ -136,7 +137,11 @@ tibble <- function(...,
 
 #' Test if the object is a tibble
 #'
-#' This function returns `FALSE` for regular data frames and `TRUE` for tibbles.
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+#'
+#' This function returns `TRUE` for tibbles or subclasses thereof,
+#' and `FALSE` for all other objects, including regular data frames.
 #'
 #' @param x An object
 #' @return `TRUE` if the object inherits from the `tbl_df` class.
@@ -145,7 +150,18 @@ is_tibble <- function(x) {
   inherits(x, "tbl_df")
 }
 
-#' @rdname is_tibble
-#' @usage NULL
+#' Deprecated test for tibble-ness
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#'
+#' Please use [is_tibble()] instead.
+#'
+#' @inheritParams is_tibble
 #' @export
-is.tibble <- is_tibble
+#' @keywords internal
+is.tibble <- function(x) {
+  signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
+
+  is_tibble(x)
+}

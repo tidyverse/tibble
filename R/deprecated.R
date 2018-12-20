@@ -1,11 +1,16 @@
 #' Deprecated functions
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("deprecated")}
+#'
 #' Use [tibble()] instead of `data_frame()`.
 #'
 #' @export
 #' @keywords internal
 #' @name deprecated
 data_frame <- function(...) {
+  signal_soft_deprecated("`data_frame()` is deprecated, use `tibble()`.")
+
   # Unquote-splice to avoid argument matching
   tibble(!!!quos(...))
 }
@@ -17,6 +22,8 @@ data_frame <- function(...) {
 #' @keywords internal
 #' @rdname deprecated
 tibble_ <- function(xs) {
+  signal_soft_deprecated("`tibble_()` and `data_frame_()` are deprecated, use `tibble()` with quasiquotation.")
+
   xs <- compat_lazy_dots(xs, caller_env())
   tibble(!!!xs)
 }
@@ -28,6 +35,8 @@ data_frame_ <- tibble_
 #' @export
 #' @rdname deprecated
 lst_ <- function(xs) {
+  signal_soft_deprecated("`lst_()` is deprecated, use `lst()` with quasiquotation.")
+
   xs <- compat_lazy_dots(xs, caller_env())
   lst(!!!xs)
 }
@@ -39,12 +48,16 @@ lst_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
+  signal_soft_deprecated("`as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).")
+
   as_tibble(x, ...)
 }
 
 #' @export
 #' @rdname deprecated
 as.tibble <- function(x, ...) {
+  signal_soft_deprecated("`as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).")
+
   as_tibble(x, ...)
 }
 
@@ -53,4 +66,8 @@ as.tibble <- function(x, ...) {
 #' Use [tribble()] instead of `frame_data()`.
 #' @export
 #' @rdname deprecated
-frame_data <- tribble
+frame_data <- function(...) {
+  signal_soft_deprecated("`frame_data()` is deprecated, use `tribble()`.")
+
+  tribble(...)
+}

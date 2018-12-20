@@ -31,7 +31,8 @@
 
 <meta property="og:title" content="Subsetting tibbles — subsetting" />
 
-<meta property="og:description" content="Accessing columns, rows, or cells via $, [[, or [ is mostly similar to
+<meta property="og:description" content="
+Accessing columns, rows, or cells via $, [[, or [ is mostly similar to
 regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:
 [ always returns a tibble by default, even if
@@ -85,7 +86,7 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9006</span>
         </div>
       </div>
     </div>
@@ -137,7 +138,8 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
 
     <div class="ref-description">
     
-    <p>Accessing columns, rows, or cells via <code>$</code>, <code>[[</code>, or <code>[</code> is mostly similar to
+    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
+<p>Accessing columns, rows, or cells via <code>$</code>, <code>[[</code>, or <code>[</code> is mostly similar to
 regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:</p><ul>
 <li><p><code>[</code> always returns a tibble by default, even if
@@ -204,22 +206,22 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
 
 <span class='co'># Subsetting single columns:</span>
-<span class='no'>df</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 1</span><span>
+<span class='no'>df</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;       a
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
+#&gt;   &lt;int&gt;
+#&gt; 1     1
+#&gt; 2     2
+#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
 <span class='co'># Subsetting single rows with the drop argument:</span>
 <span class='no'>df</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
 #&gt; $bc
 #&gt; [1] 4
-#&gt; </div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt; </div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       a    bc
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
 #&gt; $bc
@@ -235,28 +237,28 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='no'>tbl</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
 <span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'>
 <span class='co'># Identical behavior:</span>
-<span class='no'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 4</span><span>
+<span class='no'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;       a    bc bd        b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+#&gt; 1     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;      bc     a
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 2</span><span>
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 2</span><span>
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     4     1
+#&gt; 2     5     2
+#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='st'>"a"</span>]</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 1</span><span>
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     4     1
+#&gt; 2     5     2
+#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;       a
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='no'>tbl</span>$<span class='no'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"a"</span>]]</div><div class='output co'>#&gt; [1] 1 2 3</div></span></pre>
+#&gt;   &lt;int&gt;
+#&gt; 1     1
+#&gt; 2     2
+#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>$<span class='no'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"a"</span>]]</div><div class='output co'>#&gt; [1] 1 2 3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

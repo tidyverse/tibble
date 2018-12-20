@@ -33,6 +33,8 @@ if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 One of the main features of the \code{tbl_df} class is the printing:
 \itemize{
 \item Tibbles only print as many rows and columns as fit on one screen,

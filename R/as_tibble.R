@@ -1,5 +1,8 @@
 #' Coerce lists, matrices, and more to data frames
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' `as_tibble()` turns an existing object, such as a data frame, list, or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
@@ -123,7 +126,7 @@ compat_name_repair <- function(.name_repair, missing_validate, validate) {
   name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
   if (!has_length(.name_repair, 1)) {
-    inform_once("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    signal_soft_deprecated("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
   } else if (.name_repair != name_repair) {
     warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
     return(.name_repair)
@@ -239,7 +242,7 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
-    warn_once("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
+    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }

@@ -42,7 +42,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9006</span>
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@
       <h1>Extending tibble</h1>
                         <h4 class="author">Kirill Müller, Hadley Wickham</h4>
             
-            <h4 class="date">2018-11-28</h4>
+            <h4 class="date">2018-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/extending.Rmd"><code>vignettes/extending.Rmd</code></a></small>
       <div class="hidden name"><code>extending.Rmd</code></div>
@@ -109,7 +109,7 @@
 <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">is_vector_s3()</a></code> and <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">obj_sum()</a></code> are used when rendering list columns.</li>
 </ul>
 <p>If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the <code>pillar</code> package that powers the printing of tibbles. Either add <code>pillar</code> to the <code>Imports:</code> section of your <code>DESCRIPTION</code>, or simply call:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/use_package">use_package</a></span>(<span class="st">"pillar"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">"pillar"</span>)</a></code></pre></div>
 <p>This short vignette assumes a package that implements an S3 class <code>"latlon"</code> and uses <code>roxygen2</code> to create documentation and the <code>NAMESPACE</code> file. For this vignette to work we need to attach pillar:</p>
 <div id="prerequisites" class="section level2">
 <h2 class="hasAnchor">
@@ -399,27 +399,25 @@
 <p>An example of an object of this type in base R is <code>POSIXlt</code>: it is a list with 9 components.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.POSIXlt">as.POSIXlt</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.time">Sys.time</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>)) </a>
 <a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">unclass</a></span>(x))</a></code></pre></div>
-<pre><code>## List of 11
-##  $ sec   : num [1:3] 35.4 35.4 35.4
-##  $ min   : int [1:3] 47 48 47
-##  $ hour  : int [1:3] 0 0 1
-##  $ mday  : int [1:3] 28 28 28
-##  $ mon   : int [1:3] 10 10 10
-##  $ year  : int [1:3] 118 118 118
-##  $ wday  : int [1:3] 3 3 3
-##  $ yday  : int [1:3] 331 331 331
-##  $ isdst : int [1:3] 0 0 0
-##  $ zone  : chr [1:3] "CET" "CET" "CET"
-##  $ gmtoff: int [1:3] 3600 3600 3600
-##  - attr(*, "tzone")= chr [1:3] "" "CET" "CEST"</code></pre>
+<pre><code>## List of 9
+##  $ sec  : num [1:3] 4.99 4.99 4.99
+##  $ min  : int [1:3] 23 24 23
+##  $ hour : int [1:3] 23 23 0
+##  $ mday : int [1:3] 19 19 20
+##  $ mon  : int [1:3] 11 11 11
+##  $ year : int [1:3] 118 118 118
+##  $ wday : int [1:3] 3 3 4
+##  $ yday : int [1:3] 352 352 353
+##  $ isdst: int [1:3] 0 0 0
+##  - attr(*, "tzone")= chr "UTC"</code></pre>
 <p>But it pretends to be a vector with 3 elements:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">x</a></code></pre></div>
-<pre><code>## [1] "2018-11-28 00:47:35 CET" "2018-11-28 00:48:35 CET"
-## [3] "2018-11-28 01:47:35 CET"</code></pre>
+<pre><code>## [1] "2018-12-19 23:23:04 UTC" "2018-12-19 23:24:04 UTC"
+## [3] "2018-12-20 00:23:04 UTC"</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(x)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(x)</a></code></pre></div>
-<pre><code>##  POSIXlt[1:3], format: "2018-11-28 00:47:35" "2018-11-28 00:48:35" ...</code></pre>
+<pre><code>##  POSIXlt[1:3], format: "2018-12-19 23:23:04" "2018-12-19 23:24:04" ...</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co">#' @importFrom pillar obj_sum</span></a>
 <a class="sourceLine" id="cb36-2" data-line-number="2"><span class="co">#' @export</span></a>
@@ -449,8 +447,8 @@
 <a class="sourceLine" id="cb39-6" data-line-number="6">})</a></code></pre></div>
 <p>However, if we look at the file we’ll notice strange things: The output contains ANSI escapes!</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
-<pre><code>## [1] "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
-## [2] "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+<pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
+## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
 ## [3] "     \033[31mNA\033[39m         "</code></pre>
 <p>We can turn them off by passing <code>crayon = FALSE</code> to the expectation, but we need to run twice again:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(testthat)</a>
@@ -465,10 +463,12 @@
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
 ## x[1]: "28°20'N  81°33'W"
-## y[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
+## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
+## y[1]: 33[39mW"
 ## 
 ## x[2]: "32°43'N 117°10'W"
-## y[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
+## y[2]: 33[39mW"
 ## 
 ## x[3]: "     NA         "
 ## y[3]: "     \033[31mNA\033[39m         "</code></pre>
@@ -507,17 +507,19 @@
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
-## x[1]: "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
+## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
+## x[1]: 33[39mW"
 ## y[1]: "28°20'N  81°33'W"
 ## 
-## x[2]: "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
+## x[2]: 33[39mW"
 ## y[2]: "32°43'N 117°10'W"
 ## 
 ## x[3]: "     \033[31mNA\033[39m         "
 ## y[3]: "     NA         "</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
-<pre><code>## [1] "28\033[38;5;246m°\033[39m20\033[38;5;246m'\033[39mN  81\033[38;5;246m°\033[39m33\033[38;5;246m'\033[39mW"
-## [2] "32\033[38;5;246m°\033[39m43\033[38;5;246m'\033[39mN 117\033[38;5;246m°\033[39m10\033[38;5;246m'\033[39mW"
+<pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
+## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
 ## [3] "     \033[31mNA\033[39m         "</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon-bw.txt"</span>)</a></code></pre></div>
 <pre><code>## [1] "28°20'N  81°33'W" "32°43'N 117°10'W" "     NA         "</code></pre>

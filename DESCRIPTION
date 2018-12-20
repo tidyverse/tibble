@@ -49,6 +49,7 @@ Collate:
     'as_tibble.R'
     'check-names.R'
     'compat-lazyeval.R'
+    'compat-lifecycle.R'
     'compat-purrr.R'
     'tribble.R'
     'deprecated.R'

@@ -21,6 +21,8 @@ existing data.}
 new columns, default: after last column.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+
 This is a convenient way to add one or more columns to an existing data
 frame.
 }

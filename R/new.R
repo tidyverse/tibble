@@ -1,6 +1,8 @@
 #' Tibble constructor and validator
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses
 #' of a tibble, like \pkg{sf} or \pkg{tsibble}.
@@ -72,6 +74,8 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 }
 
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' `validate_tibble()` checks a tibble for internal consistency.
 #' Correct behavior can be guaranteed only if this function
 #' runs without raising an error.

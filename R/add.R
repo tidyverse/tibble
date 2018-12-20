@@ -1,10 +1,19 @@
 #' Add rows to a data frame
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+#'
 #' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See [tribble()] for an easy way to create an complete
 #' data frame row-by-row.
 #'
 #' `add_case()` is an alias of `add_row()`.
+#'
+#' @section Life cycle:
+#' It is unclear if `add_row()` and its alias `add_cases()` should ensure
+#' that all columns have length one by wrapping in a list if necessary.
+#' See https://github.com/tidyverse/tibble/pull/503 and
+#' https://github.com/tidyverse/tibble/issues/205 for details.
 #'
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
@@ -93,6 +102,9 @@ rbind_at <- function(old, new, pos) {
 }
 
 #' Add columns to a data frame
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
 #'
 #' This is a convenient way to add one or more columns to an existing data
 #' frame.

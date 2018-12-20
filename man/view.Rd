@@ -15,6 +15,8 @@ the deparsed expression is used.}
 \item{...}{Unused, for extensibility.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("experimental")}
+
 Calls \code{\link[utils:View]{utils::View()}} on the input and returns it, invisibly.
 The RStudio IDE overrides \code{utils::View()}, this is picked up
 correctly.

@@ -21,12 +21,16 @@ validate_tibble(x)
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like \pkg{sf} or \pkg{tsibble}.
 
 \code{new_tibble()} creates a new object as a subclass of \code{tbl_df}, \code{tbl} and \code{data.frame}.
 This function is optimized for performance, checks are reduced to a minimum.
+
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
 
 \code{validate_tibble()} checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function

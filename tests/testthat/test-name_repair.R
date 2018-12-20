@@ -145,35 +145,32 @@ test_that("unique-ification has an 'algebraic'-y property", {
 test_that("names<-() and set_names() reject non-minimal names", {
   df <- tibble(a = 1:3, b = 4:6, c = 7:9)
 
-  forget_warn_once()
+  scoped_lifecycle_warnings()
+
   expect_warning(
     set_names(df, NULL),
     error_names_must_be_non_null(),
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     `names<-`(df, NA),
     error_names_must_have_length(1, 3),
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     `names<-`(df, ""),
     error_names_must_have_length(1, 3),
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     `names<-`(df, 1),
     error_names_must_have_length(1, 3),
     fixed = TRUE
   )
 
-  forget_warn_once()
   expect_warning(
     `names<-`(df, 1:2),
     error_names_must_have_length(2, 3),

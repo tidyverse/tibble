@@ -115,10 +115,10 @@ test_that("missing row names stay missing when adding row", {
 })
 
 test_that("adding to a list column adds a NULL value (#148)", {
-  expect_null(add_row(data_frame(a = as.list(1:3)))$a[[4]])
-  expect_null(add_row(data_frame(a = as.list(1:3)), .before = 1)$a[[1]])
-  expect_null(add_row(data_frame(a = as.list(1:3)), .after = 1)$a[[2]])
-  expect_null(add_row(data_frame(a = as.list(1:3), b = 1:3), b = 4:6)$a[[5]])
+  expect_null(add_row(tibble(a = as.list(1:3)))$a[[4]])
+  expect_null(add_row(tibble(a = as.list(1:3)), .before = 1)$a[[1]])
+  expect_null(add_row(tibble(a = as.list(1:3)), .after = 1)$a[[2]])
+  expect_null(add_row(tibble(a = as.list(1:3), b = 1:3), b = 4:6)$a[[5]])
 })
 
 test_that("add_row() keeps the class of empty columns", {
