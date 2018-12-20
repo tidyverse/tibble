@@ -46,6 +46,14 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
   cat_line("Variables: ", big_mark(ncol(df)))
+
+  summary <- tbl_sum(x)
+  brief_summary <- summary[names(summary) != "A tibble"]
+
+  if (has_length(brief_summary)) {
+    cat_line(names(brief_summary), ": ", brief_summary)
+  }
+
   if (ncol(df) == 0) return(invisible(x))
 
   var_types <- map_chr(map(df, new_pillar_type), format)
