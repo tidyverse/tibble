@@ -203,7 +203,7 @@ as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
       signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using `.name_repair = "unique"`.')
       .name_repair = "unique"
     } else {
-      .name_repair = "minimal"
+      .name_repair = "check_unique"
     }
   }
   colnames(m) <- names
