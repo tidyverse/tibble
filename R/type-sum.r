@@ -1,8 +1,5 @@
 #' Provide a succinct summary of an object
 #'
-#' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-#'
 #' `tbl_sum()` gives a brief textual description of a table-like object,
 #' which should include the dimensions, the data source, and possible grouping
 #' (for `dplyr`).  The default implementation forwards to [pillar::obj_sum()].

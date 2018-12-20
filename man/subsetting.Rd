@@ -30,8 +30,6 @@
 Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-
 Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
 \link[base:Extract.data.frame]{regular data frames}. However, the
 behavior is different for tibbles and data frames in some cases:

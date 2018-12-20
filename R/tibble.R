@@ -1,7 +1,6 @@
 #' Build a data frame
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
 #'
 #' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
 #' with a couple notable differences:
@@ -136,9 +135,6 @@ tibble <- function(...,
 }
 
 #' Test if the object is a tibble
-#'
-#' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
 #'
 #' This function returns `TRUE` for tibbles or subclasses thereof,
 #' and `FALSE` for all other objects, including regular data frames.

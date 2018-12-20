@@ -4,6 +4,8 @@
 #' @import rlang
 #' @aliases NULL tibble-package
 #' @details
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+#'
 #' The tibble package provides utilities for handling __tibbles__, where
 #' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
 #' class is a special case of the base [`data.frame`][base::data.frame()].

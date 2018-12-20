@@ -11,6 +11,8 @@ Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.
 }
 \details{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
 class is a special case of the base \code{\link[base:data.frame]{data.frame}}.

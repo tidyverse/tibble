@@ -1,8 +1,5 @@
 #' Tools for working with row names
 #'
-#' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-#'
 #' While a tibble can have row names (e.g., when converting from a regular data
 #' frame), they are removed when subsetting with the `[` operator.
 #' A warning will be raised when attempting to assign non-`NULL` row names

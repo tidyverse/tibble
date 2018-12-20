@@ -30,8 +30,6 @@ column_to_rownames(.data, var = "rowname")
 All other functions return an object of the same class as the input.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-
 While a tibble can have row names (e.g., when converting from a regular data
 frame), they are removed when subsetting with the \code{[} operator.
 A warning will be raised when attempting to assign non-\code{NULL} row names

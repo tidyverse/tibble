@@ -1,8 +1,6 @@
 #' Subsetting tibbles
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
-#'
 #' Accessing columns, rows, or cells via `$`, `[[`, or `[` is mostly similar to
 #' [regular data frames][base::Extract.data.frame]. However, the
 #' behavior is different for tibbles and data frames in some cases:
