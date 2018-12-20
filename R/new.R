@@ -50,7 +50,12 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 
   #' An `nrow` argument is required.
   if (missing(nrow)) {
-    abort(error_new_tibble_needs_nrow())
+    if (length(x) >= 1) {
+      signal_soft_deprecated(error_new_tibble_needs_nrow())
+      nrow <- NROW(x[[1]])
+    } else {
+      abort(error_new_tibble_needs_nrow())
+    }
   }
   #' This should be an integer of length 1,
   #' and every element of the list `x` should have [NROW()]

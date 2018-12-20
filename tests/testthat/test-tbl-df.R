@@ -392,6 +392,8 @@ test_that("new_tibble() with new class argument", {
 })
 
 test_that("new_tibble checks", {
+  scoped_lifecycle_errors()
+
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
@@ -401,7 +403,7 @@ test_that("new_tibble checks", {
     fixed = TRUE
   )
   expect_error(
-    new_tibble(list(1)),
+    new_tibble(list(a = 1)),
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )

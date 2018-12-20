@@ -4,6 +4,8 @@
 
 The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` constructor, have undergone a major overhaul to improve consistency.  We suspect that package code will be affected more than analysis code.
 
+To improve compatibility with existing code, breaking changes were reduced to a minimum and in some cases replaced with a warning that appears once per session. Call `tibble:::scoped_lifecycle_errors()` when updating your packages or scripts to the new semantics API to turn these warnings into errors. The compatibility code will be removed in tibble 3.0.0.
+
 - All optional arguments have moved past the ellipsis, and must be specified as named arguments. This affects mostly the `n` argument to `as_tibble.table()`, passing `n` unnamed still works (with a warning).
 
 - `new_tibble()` has been optimized for performance, the function no longer strips dimensions from 1d arrays and no longer checks correctness of names or column lengths. (It still checks if the object is named, except for zero-length input.) Use the new `validate_tibble()` if you need these checks (#471).
@@ -12,7 +14,9 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - Setting names on a tibble via `names(df) <- ...` now also requires minimal names, otherwise a warning is issued once per session (#466).
 
-- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. In particular, coercing a matrix without column names will trigger an error. (This corresponds to the `"minimal"` checks described below.). The `validate` argument to `as_tibble()` has been deprecated, see below for alternatives. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
+- In `as_tibble()`, checking names is also enabled by default, even for tibbles, matrices and other matrix-like objects: names must exist, `NA` names are not allowed. Coercing a matrix without column names will trigger a warning once per session. (This corresponds to the `"minimal"` checks described below.).
+
+- The `validate` argument to `as_tibble()` has been deprecated, see below for alternatives. (The `as_tibble.tbl_df()` method has been removed, the `as_tibble.data.frame()` method will be used for tibbles.)
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
@@ -81,7 +85,7 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 ## New functions
 
-- Added `view()` function that always returns its input invisibly and calls `utils::View()` only in interactive mode (#373).
+- Added experimental `view()` function that always returns its input invisibly and calls `utils::View()` only in interactive mode (#373).
 
 
 ## Output
@@ -100,12 +104,15 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 
 - `column_to_rownames()` uses the real variable name in its error message (#399, @alexwhan).
 
+- Lazy tibbles with exactly 10 rows no longer show "...with more rows" (#371).
+
 ## Bug fixes
 
 - `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.
 
 - `glimpse()` disambiguates outputs for factors if the levels contain commas (#384, @anhqle).
 
+- `print.tbl_df()` with a negative value for `n` behaves as if `n` was omitted (#371).
 
 
 
@@ -120,6 +127,8 @@ The `tibble()` and `as_tibble()` functions, and the low-level `new_tibble()` con
 - `tibble()` uses recycled values during construction but unrecycled values for validation.
 
 - `tibble()` is now faster for very wide tibbles.
+
+- Subsetting with the `[` operator is faster (#544).
 
 - Avoid use of `stop()` in examples if packages are not installed (#453, @Enchufa2).
 

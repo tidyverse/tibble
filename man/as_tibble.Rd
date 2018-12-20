@@ -21,7 +21,7 @@ as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
 \method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"))
 
-\method{as_tibble}{matrix}(x, ...)
+\method{as_tibble}{matrix}(x, ..., .name_repair = NULL)
 
 \method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`)
 

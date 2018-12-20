@@ -70,6 +70,17 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
+#' Legacy help page for compatibility with existing packages
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("archived")}
+#'
+#' Please see [print.tbl()] for the print method for tibbles.
+#'
+#' @name print.tbl_df
+#' @keywords internal
+NULL
+
 #' @rdname formatting
 #' @export
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
