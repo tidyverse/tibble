@@ -95,7 +95,17 @@ str_trunc <- function(x, max_width) {
 format_v <- function(x) UseMethod("format_v")
 
 #' @export
-format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+format_v.default <- function(x) {
+  dims <- dim(x)
+
+  if (!is.null(dims)){
+    dims_out <- paste0(dims, collapse = " x ")
+    out <- paste0("<", class(x)[1], "[", dims_out, "]>")
+    out
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}
 
 #' @export
 format_v.list <- function(x) {
