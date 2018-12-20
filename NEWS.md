@@ -106,6 +106,8 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - Lazy tibbles with exactly 10 rows no longer show "...with more rows" (#371).
 
+- `glimpse()` shows information obtained from `tbl_sum()`, e.g. grouping information for `grouped_df` from dplyr (#550).
+
 ## Bug fixes
 
 - `glimpse()` takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.

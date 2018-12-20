@@ -107,3 +107,14 @@ test_that("glimpse works for structures with unknown rows", {
     output_file("glimpse/iris-70-na-nrow.txt")
   )
 })
+
+test_that("glimpse calls tbl_sum() (#550)", {
+  skip_on_os("windows") # capture_output_lines() forces native encoding
+  iris2 <- as_override_tbl_sum(iris)
+
+  expect_output(
+    glimpse(iris2),
+    "Overridden: tbl_sum",
+    fixed = TRUE
+  )
+})
