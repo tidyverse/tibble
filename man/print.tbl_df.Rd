@@ -2,8 +2,10 @@
 % Please edit documentation in R/utils-format.r
 \name{print.tbl_df}
 \alias{print.tbl_df}
-\title{Legacy help page for compatibility with packages linking here}
+\title{Legacy help page for compatibility with existing packages}
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("retired")}
+
 Please see \code{\link[=print.tbl]{print.tbl()}} for the print method for tibbles.
 }
 \keyword{internal}

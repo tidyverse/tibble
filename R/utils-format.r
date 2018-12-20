@@ -70,7 +70,10 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
-#' Legacy help page for compatibility with packages linking here
+#' Legacy help page for compatibility with existing packages
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("retired")}
 #'
 #' Please see [print.tbl()] for the print method for tibbles.
 #'
