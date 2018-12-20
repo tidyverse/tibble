@@ -85,7 +85,7 @@ Version: 0.2.5
     
     Quitting from lines 159-164 (Introduction.Rmd) 
     Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
-    Columns 1, 2, 3, 4, 5, … (and 19 more) must be named.
+    Columns 1, 2, 3, 4, 5, … (and 20 more) must be named.
     Use .name_repair to specify repair.
     Execution halted
     ```
@@ -340,7 +340,7 @@ Version: 0.3.1
     > ### ** Examples
     > 
     > mtcars2 <- read_feather(feather_example("mtcars.feather"))
-    Error: C stack usage  7970068 is too close to the limit
+    Error: C stack usage  7970516 is too close to the limit
     Execution halted
     ```
 
@@ -353,7 +353,7 @@ Version: 0.3.1
       > library(feather)
       > 
       > test_check("feather")
-      Error: C stack usage  7970900 is too close to the limit
+      Error: C stack usage  7969412 is too close to the limit
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 15 SKIPPED: 0 FAILED: 0
       Execution halted
@@ -373,35 +373,6 @@ Version: 0.1.2
     Error: processing vignette 'ggfan_stan.Rmd' failed with diagnostics:
     Columns 1, 2, 3, 4, 5, … (and 995 more) must be named.
     Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-# LexisNexisTools
-
-Version: 0.2.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    LexisNexisTools Version 0.2.0
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    pandoc: Could not fetch https://image.ibb.co/gjXa7J/diff.png
-    TlsExceptionHostPort (HandshakeFailed (Error_Packet_unexpected "Alert [(AlertLevel_Fatal,BadRecordMac)]" " expected: change cipher")) "image.ibb.co" 443
-    Error: processing vignette 'demo.Rmd' failed with diagnostics:
-    pandoc document conversion failed with error 67
     Execution halted
     ```
 
@@ -795,7 +766,7 @@ Version: 1.0.4
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
-    See ‘/tmp/Rtmp0MWEzP/file8bd040119a51/Sconify.Rcheck/00install.out’ for details.
+    See ‘/tmp/RtmpEz7NkN/filed6541b96ee4e/Sconify.Rcheck/00install.out’ for details.
     ```
 
 *   checking re-building of vignette outputs ... WARNING
@@ -875,9 +846,9 @@ Version: 1.1.0
     Number of data generating functions: 2
     Number of analyzing procedures: 3
     Number of replications: 2
-    Estimated replications per hour: 10789206
-    Start of the simulation: 2018-12-20 01:03:46
-    End of the simulation: 2018-12-20 01:03:46
+    Estimated replications per hour: 6974362
+    Start of the simulation: 2018-12-20 10:12:17
+    End of the simulation: 2018-12-20 10:12:17
     > eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t))
     Error: Column 1 must be named.
     Use .name_repair to specify repair.
@@ -1070,11 +1041,11 @@ Version: 0.2.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      23: tidypredict_fit.lm(model) at /tmp/Rtmp0MWEzP/file8bf04acb1d68/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:18
-      24: parse_model(model) at /tmp/Rtmp0MWEzP/file8bf04acb1d68/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:23
-      25: parse_model.lm(model) at /tmp/Rtmp0MWEzP/file8bf04acb1d68/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:20
-      26: parse_model_lm(model) at /tmp/Rtmp0MWEzP/file8bf04acb1d68/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:26
-      27: stop("There was a parsing error") at /tmp/Rtmp0MWEzP/file8bf04acb1d68/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:120
+      23: tidypredict_fit.lm(model) at /tmp/RtmpEz7NkN/filed6521b96ee4e/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:18
+      24: parse_model(model) at /tmp/RtmpEz7NkN/filed6521b96ee4e/tidypredict.Rcheck/00_pkg_src/tidypredict/R/predict-fit.R:23
+      25: parse_model.lm(model) at /tmp/RtmpEz7NkN/filed6521b96ee4e/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:20
+      26: parse_model_lm(model) at /tmp/RtmpEz7NkN/filed6521b96ee4e/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:26
+      27: stop("There was a parsing error") at /tmp/RtmpEz7NkN/filed6521b96ee4e/tidypredict.Rcheck/00_pkg_src/tidypredict/R/parsemodel.R:120
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 11 SKIPPED: 0 FAILED: 4
@@ -1094,38 +1065,6 @@ Version: 0.2.0
     Quitting from lines 47-50 (glm.Rmd) 
     Error: processing vignette 'glm.Rmd' failed with diagnostics:
     There was a parsing error
-    Execution halted
-    ```
-
-# tidyquant
-
-Version: 0.5.5
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: Computation failed in `stat_segment_right_bc()`:
-    Evaluation error: argument "color_up" is missing, with no default.
-    Warning: x = 'DCOILWTICO', get = 'economic.data': Error: Failed to download file. Error message:
-    cannot open URL 'https://fred.stlouisfed.org/series/DCOILWTICO/downloaddata/DCOILWTICO.csv'
-    If this is related to https, possible solutions are:
-    1. Explicitly pass method= via the getSymbols call (or via setDefaults)
-    2. Install downloader, which may be able to automagically determine a method
-    3. Set the download.file.method global option
-    
-    Warning: x = 'DCOILWTICO', get = 'economic.data': Error: Failed to download file. Error message:
-    cannot open URL 'https://fred.stlouisfed.org/series/DCOILWTICO/downloaddata/DCOILWTICO.csv'
-    If this is related to https, possible solutions are:
-    1. Explicitly pass method= via the getSymbols call (or via setDefaults)
-    2. Install downloader, which may be able to automagically determine a method
-    3. Set the download.file.method global option
-    
-    Quitting from lines 396-401 (TQ01-core-functions-in-tidyquant.Rmd) 
-    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-    data must be a tibble or data.frame object
     Execution halted
     ```
 
