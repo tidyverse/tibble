@@ -40,6 +40,25 @@ test_that("length 1 vectors are recycled", {
   )
 })
 
+test_that("length 1 vectors in hierarchical data frames are recycled (#502)", {
+  expect_identical(
+    tibble(x = 1:10, y = tibble(z = 1)),
+    tibble(x = 1:10, y = tibble(z = rep(1, 10)))
+  )
+  expect_identical(
+    tibble(y = tibble(z = 1), x = 1:10),
+    tibble(y = tibble(z = rep(1, 10)), x = 1:10)
+  )
+  expect_identical(
+    tibble(x = 1, y = tibble(z = 1:10)),
+    tibble(x = rep(1, 10), y = tibble(z = 1:10))
+  )
+  expect_identical(
+    tibble(y = tibble(z = 1:10), x = 1),
+    tibble(y = tibble(z = 1:10), x = rep(1, 10))
+  )
+})
+
 test_that("missing names are imputed from call", {
   x <- 1:10
   df <- tibble(x, y = x)
