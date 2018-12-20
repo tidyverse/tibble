@@ -100,7 +100,7 @@ format_v.default <- function(x) {
 
   if (!is.null(dims)){
     dims_out <- paste0(dims, collapse = " x ")
-    out <- paste0(class(x)[1], "[", dims_out, "]")
+    out <- paste0("<", class(x)[1], "[", dims_out, "]>")
     out
   } else {
     format(x, trim = TRUE, justify = "none")
@@ -110,8 +110,7 @@ format_v.default <- function(x) {
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  has_dimensions <- map_lgl(x, function(x){!is.null(dim(x))})
-  atomic <- (map_int(out, length) == 1L) & !has_dimensions
+  atomic <- (map_int(out, length) == 1L)
   out <- map_chr(out, collapse)
   out[!atomic] <- paste0("<", out[!atomic], ">")
   paste0("[", collapse(out), "]")
