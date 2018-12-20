@@ -64,12 +64,19 @@
 NULL
 
 #' @rdname formatting
-#' @aliases print.tbl_df
 #' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
 }
+
+#' Legacy help page for compatibility with packages linking here
+#'
+#' Please see [print.tbl()] for the print method for tibbles.
+#'
+#' @name print.tbl_df
+#' @keywords internal
+NULL
 
 #' @rdname formatting
 #' @export
