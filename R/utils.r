@@ -43,15 +43,9 @@ needs_list_col <- function(x) {
 }
 
 # Work around bug in R 3.3.0
-safe_match <- function(x, table) {
-  # nocov start
-  if (getRversion() == "3.3.0") {
-    match(x, table, incomparables = character())
-  } else {
-    match(x, table)
-  }
-  # nocov end
-}
+# Can be ressigned during loading (#544)
+safe_match <- match
+
 
 warningc <- function(...) {
   warn(paste0(...))

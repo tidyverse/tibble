@@ -2,7 +2,6 @@
 % Please edit documentation in R/tibble.R
 \name{is_tibble}
 \alias{is_tibble}
-\alias{is.tibble}
 \title{Test if the object is a tibble}
 \usage{
 is_tibble(x)
@@ -14,5 +13,6 @@ is_tibble(x)
 \code{TRUE} if the object inherits from the \code{tbl_df} class.
 }
 \description{
-This function returns \code{FALSE} for regular data frames and \code{TRUE} for tibbles.
+This function returns \code{TRUE} for tibbles or subclasses thereof,
+and \code{FALSE} for all other objects, including regular data frames.
 }

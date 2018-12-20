@@ -2,36 +2,7 @@
 % Please edit documentation in R/repair-names.R
 \name{name-repair}
 \alias{name-repair}
-\alias{tidy_names}
-\alias{set_tidy_names}
-\alias{repair_names}
 \title{Repair the names of a vector}
-\usage{
-tidy_names(name, syntactic = FALSE, quiet = FALSE)
-
-set_tidy_names(x, syntactic = FALSE, quiet = FALSE)
-
-repair_names(x, prefix = "V", sep = "")
-}
-\arguments{
-\item{name}{A \code{names} attribute, usually a character vector.}
-
-\item{syntactic}{Should names be made syntactically valid? If \code{FALSE}, uses
-same logic as \code{.name_repair = "unique"}. If \code{TRUE}, uses same logic as
-\code{.name_repair = "syntactic"}.}
-
-\item{quiet}{Whether to suppress messages about name repair.}
-
-\item{x}{A vector.}
-
-\item{prefix}{A string, the prefix to use for new column names.}
-
-\item{sep}{A string inserted between the column name and de-duplicating
-number.}
-}
-\value{
-\code{x} with repaired names or a repaired version of \code{name}.
-}
 \description{
 tibble deals with a few levels of name repair:
 \itemize{
@@ -43,14 +14,14 @@ package have names that are, at least, \code{minimal}.
 \itemize{
 \item All columns can be accessed by name via \code{df[["name"]]}.
 }
-\item \code{syntactic} names are \code{unique} and syntactic (see Details for more).
+\item \code{universal} names are \code{unique} and syntactic (see Details for more).
 \itemize{
 \item Names work everywhere, without quoting: \code{df$name} and
 \code{lm(name1 ~ name2, data = df)} and \code{dplyr::select(df, name)} all work.
 }
 }
 
-\code{syntactic} implies \code{unique}, \code{unique} implies \code{minimal}. These levels are
+\code{universal} implies \code{unique}, \code{unique} implies \code{minimal}. These levels are
 nested.
 
 The \code{.name_repair} argument of \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} refers to these
@@ -58,8 +29,8 @@ levels. Alternatively, the user can pass their own name repair function. It
 should anticipate \code{minimal} names as input and should, likewise, return names
 that are at least \code{minimal}.
 
-The "Life cycle" section explains the status of the existing functions
-\code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()}.
+The existing functions \code{\link[=tidy_names]{tidy_names()}}, \code{\link[=set_tidy_names]{set_tidy_names()}},
+and \code{\link[=repair_names]{repair_names()}} are soft-deprecated.
 }
 \section{\code{minimal} names}{
 
@@ -99,10 +70,10 @@ names \code{unique}, i.e. reconstructing the suffixes. If this interacts poorly
 with your names, you should take control of name repair.
 }
 
-\section{\code{syntactic} names}{
+\section{\code{universal} names}{
 
 
-\code{syntactic} names are \code{unique} and syntactic, meaning they:
+\code{universal} names are \code{unique} and syntactic, meaning they:
 \itemize{
 \item Are never empty (inherited from \code{unique}).
 \item Have no duplicates (inherited from \code{unique}).
@@ -113,7 +84,7 @@ characters.
 \item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number.
 }
 
-If a data frame has \code{syntactic} names, variable names can be used "as is" in
+If a data frame has \code{universal} names, variable names can be used "as is" in
 code. They work well with nonstandard evaluation, e.g., \code{df$name} works.
 
 Tibble has a different method of making names syntactic than
@@ -121,34 +92,10 @@ Tibble has a different method of making names syntactic than
 the name is syntactic.
 
 Examples:\preformatted{ Original names:     ""    "x"    NA     "x"
-syntactic names: "...1" "x..2" "...3" "x..4"
+universal names: "...1" "x..2" "...3" "x..4"
 
   Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
- syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
-}
-}
-
-\section{Life cycle}{
-
-\code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()} were early efforts
-to facilitate \emph{post hoc} name repair in tibble, given that \code{tibble()} and
-\code{as_tibble()} did not do this.
-
-From tibble v1.5.0, the \code{.name_repair} argument gives direct access to three
-specific levels of name repair: \code{minimal}, \code{unique}, and \code{syntactic}. We
-recommend that new code use this instead of \code{tidy_names()},
-\code{set_tidy_names()}, or \code{repair_names()}. After a period of use, the repair
-stategies behind \code{minimal}, \code{unique}, and \code{syntactic} are likely to be
-exposed in standalone functions and this could affect the behaviour of
-\code{tidy_names()}. \code{repair_names()} should be considered deprecated.\preformatted{tibble(..., `.name_repair = "unique"`)
-## is preferred to
-df <- tibble(...)
-set_tidy_names(df, syntactic = FALSE)
-
-tibble(..., `.name_repair = "syntactic"`)
-## is preferred to
-df <- tibble(...)
-set_tidy_names(df, syntactic = TRUE)
+ universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
 }
 }
 
@@ -169,7 +116,7 @@ df[["a 1"]]
 df$`a 1`
 
 ## syntactic names are easier to work with, though, and you can request them
-df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
 df$a.1
 
 ## you can specify your own name repair function
@@ -181,6 +128,12 @@ tibble(`25\%` = 1, `75\%` = 2, .name_repair = fix_names)
 fix_names <- function(x) gsub("\\\\s+", "_", x)
 tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 
+## purrr-style anonymous functions and constants
+## are also supported
+tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
+
+tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
+
 ## the names attibute will be non-NULL, with "" as the default element
 df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 names(df)
@@ -188,4 +141,7 @@ names(df)
 \seealso{
 \code{\link[rlang:names2]{rlang::names2()}} returns the names of an object, after making them
 \code{minimal}.
+
+The \href{https://principles.tidyverse.org/names-attribute.html}{Names attribute}
+section in the "tidyverse package development principles".
 }

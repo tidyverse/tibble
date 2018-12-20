@@ -1,9 +1,11 @@
 #' Tibble constructor and validator
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses
-#' of a tibble, like \pkg{sf} or \pkg{tibbletime}.
+#' of a tibble, like \pkg{sf} or \pkg{tsibble}.
 #'
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
@@ -11,7 +13,8 @@
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
 #' @param nrow The number of rows, required
-#' @param subclass Subclasses to assign to the new object, default: none
+#' @param class Subclasses to assign to the new object, default: none
+#' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
 #'
 #' @seealso
 #' [tibble()] and [as_tibble()] for ways to construct a tibble
@@ -29,7 +32,12 @@
 #'
 #' # The length of all columns must be consistent with the nrow argument:
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
-new_tibble <- function(x, ..., nrow, subclass = NULL) {
+new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
+  # For compatibility with tibble < 2.0.0
+  if (is.null(class)) {
+    class <- subclass
+  }
+
   #' @section Construction:
   #'
   #' For `new_tibble()`, `x` must be a list.
@@ -44,10 +52,18 @@ new_tibble <- function(x, ..., nrow, subclass = NULL) {
 
   #' An `nrow` argument is required.
   if (missing(nrow)) {
-    abort(error_new_tibble_needs_nrow())
+    if (length(x) >= 1) {
+      signal_soft_deprecated(error_new_tibble_needs_nrow())
+      nrow <- NROW(x[[1]])
+    } else {
+      abort(error_new_tibble_needs_nrow())
+    }
   }
-  #' This should be an integer of length 1, and every element of the list `x` should have [NROW()] equal to this value.
-  #' (But this is not checked by the constructor). This takes the place of the "row.names" attribute in a data frame.
+  #' This should be an integer of length 1,
+  #' and every element of the list `x` should have [NROW()]
+  #' equal to this value.
+  #' (But this is not checked by the constructor).
+  #' This takes the place of the "row.names" attribute in a data frame.
   if (!is_integerish(nrow, 1)) {
     abort(error_new_tibble_needs_nrow())
   }
@@ -61,7 +77,7 @@ new_tibble <- function(x, ..., nrow, subclass = NULL) {
     abort(error_names_must_be_non_null())
   }
 
-  set_tibble_class(x, nrow, subclass)
+  set_tibble_subclass(x, nrow, class)
 }
 
 #' @description
@@ -80,7 +96,7 @@ validate_tibble <- function(x) {
   check_valid_cols(x)
 
   #' It also makes sure that all columns have the same length,
-  #' and that the `row.names` attribute is consistent with the data.
+  #' and that [NROW()] is consistent with the data.
   validate_nrow(names(x), col_lengths(x), NROW(x))
 
   #' 1d arrays are not supported.
@@ -111,8 +127,17 @@ update_tibble_attrs <- function(x, ...) {
   x
 }
 
-set_tibble_class <- function(x, nrow, subclass = NULL) {
+tibble_class <- c("tbl_df", "tbl", "data.frame")
+
+# Two dedicated functions for faster subsetting
+set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
+  class(x) <- tibble_class
+  x
+}
+
+set_tibble_subclass <- function(x, nrow, subclass) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- c(subclass, tibble_class)
   x
 }

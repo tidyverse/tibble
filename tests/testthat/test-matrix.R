@@ -21,7 +21,7 @@ test_that("creates col names with name repair", {
   out <- as_tibble(x, .name_repair = "unique")
   expect_equal(names(out), c("..1", "..2"))
 
-  out <- as_tibble(x, .name_repair = "syntactic")
+  out <- as_tibble(x, .name_repair = "universal")
   expect_equal(names(out), c("...1", "...2"))
 })
 

@@ -76,7 +76,7 @@ Provides a 'tbl_df' class (the 'tibble') that provides
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9006</span>
         </div>
       </div>
     </div>
@@ -137,31 +137,28 @@ Provides a 'tbl_df' class (the 'tibble') that provides
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The S3 class <code>tbl_df</code> wraps a local data frame. The main
-advantage to using a <code>tbl_df</code> over a regular data frame is the printing:
-tbl objects only print a few rows and all the columns that fit on one screen,
-describing the rest of it as text.</p>
-<p>See <a href='tibble-options.html'>tibble-options</a> for a list of package options.</p>
-    
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-    <p><code>tbl_df</code> implements four important base methods:</p>
-<dl class='dl-horizontal'>
-<dt>print</dt><dd><p>By default only prints the first 10 rows (at most 20), and the
-columns that fit on screen; see <code><a href='formatting.html'>print.tbl()</a></code></p></dd>
-<dt><code>[</code></dt><dd><p>Does not simplify (drop) by default, returns a data frame</p></dd>
-<dt><code>[[</code>, <code>$</code></dt><dd><p>Calls <code>.subset2()</code> directly,
-so is considerably faster. Returns <code>NULL</code> if column does not exist,
-<code>$</code> warns.</p></dd>
-</dl>
-    
-    <h2 class="hasAnchor" id="important-functions"><a class="anchor" href="#important-functions"></a>Important functions</h2>
-
-    
-    <p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='tribble.html'>tribble()</a></code> for construction,
-<code><a href='as_tibble.html'>as_tibble()</a></code> for coercion,
-and <code><a href='formatting.html'>print.tbl()</a></code> and <code><a href='glimpse.html'>glimpse()</a></code> for display.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
+<p>The tibble package provides utilities for handling <strong>tibbles</strong>, where
+"tibble" is a colloquial term for the S3 <code><a href='tbl_df-class.html'>tbl_df</a></code> class. The <code><a href='tbl_df-class.html'>tbl_df</a></code>
+class is a special case of the base <code><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>.
+class, developed in response to lessons learned over many years of data
+analysis with data frames.</p>
+<p>Tibble is the central data structure for the set of packages known as the
+<a href='https://www.tidyverse.org/packages/'>tidyverse</a>, including
+<a href='http://dplyr.tidyverse.org/'>dplyr</a>,
+<a href='http://ggplot2.tidyverse.org/'>ggplot2</a>,
+<a href='http://tidyr.tidyverse.org/'>tidyr</a>, and
+<a href='http://readr.tidyverse.org/'>readr</a>.</p>
+<p>General resources:</p><ul>
+<li><p>Website for the tibble package: <a href='https://tibble.tidyverse.org'>https://tibble.tidyverse.org</a></p></li>
+<li><p><a href='http://r4ds.had.co.nz/tibbles.html'>Tibbles chapter</a> in <em>R for Data
+Science</em></p></li>
+</ul>
+    <p>Resources on specific topics:</p><ul>
+<li><p>Create a tibble: <code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='enframe.html'>enframe()</a></code></p></li>
+<li><p>Inspect a tibble: <code><a href='formatting.html'>print.tbl()</a></code>, <code><a href='glimpse.html'>glimpse()</a></code></p></li>
+<li><p>Details on the S3 <code>tbl_df</code> class: <code><a href='tbl_df-class.html'>tbl_df</a></code></p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -172,34 +169,6 @@ and <code><a href='formatting.html'>print.tbl()</a></code> and <code><a href='gl
 </ul></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>26</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>)</div><div class='output co'>#&gt; # A tibble: 26 x 2
-#&gt;        a b    
-#&gt;    &lt;int&gt; &lt;chr&gt;
-#&gt;  1     1 a    
-#&gt;  2     2 b    
-#&gt;  3     3 c    
-#&gt;  4     4 d    
-#&gt;  5     5 e    
-#&gt;  6     6 f    
-#&gt;  7     7 g    
-#&gt;  8     8 h    
-#&gt;  9     9 i    
-#&gt; 10    10 j    
-#&gt; # … with 16 more rows</div><div class='input'><span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; # A tibble: 150 x 5
-#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-#&gt;  1          5.1         3.5          1.4         0.2 setosa 
-#&gt;  2          4.9         3            1.4         0.2 setosa 
-#&gt;  3          4.7         3.2          1.3         0.2 setosa 
-#&gt;  4          4.6         3.1          1.5         0.2 setosa 
-#&gt;  5          5           3.6          1.4         0.2 setosa 
-#&gt;  6          5.4         3.9          1.7         0.4 setosa 
-#&gt;  7          4.6         3.4          1.4         0.3 setosa 
-#&gt;  8          5           3.4          1.5         0.2 setosa 
-#&gt;  9          4.4         2.9          1.4         0.2 setosa 
-#&gt; 10          4.9         3.1          1.5         0.1 setosa 
-#&gt; # … with 140 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -207,27 +176,18 @@ and <code><a href='formatting.html'>print.tbl()</a></code> and <code><a href='gl
       
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#methods">Methods</a></li>
-
-      <li><a href="#important-functions">Important functions</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
-    
-<strong>Maintainer</strong>: Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a>
-
-Authors:
-<ul>
+    <p><strong>Maintainer</strong>: Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a></p>
+<p>Authors:</p><ul>
 <li><p>Hadley Wickham <a href='mailto:hadley@rstudio.com'>hadley@rstudio.com</a></p></li>
 </ul>
 
-Other contributors:
-<ul>
+<p>Other contributors:</p><ul>
 <li><p>Romain Francois <a href='mailto:romain@r-enthusiasts.com'>romain@r-enthusiasts.com</a> [contributor]</p></li>
+<li><p>Jennifer Bryan <a href='mailto:jenny@rstudio.com'>jenny@rstudio.com</a> [contributor]</p></li>
 <li><p>RStudio [copyright holder]</p></li>
 </ul>
 

@@ -31,7 +31,8 @@
 
 <meta property="og:title" content="Get a glimpse of your data — glimpse" />
 
-<meta property="og:description" content="This is like a transposed version of print(): columns run down the page,
+<meta property="og:description" content="
+This is like a transposed version of print(): columns run down the page,
 and data runs across. This makes it possible to see every column in
 a data frame. It's a little like str() applied to a data frame
 but it tries to show you as much data as possible. (And it always shows
@@ -78,7 +79,7 @@ the underlying data, even when applied to a remote data source.)" />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9006</span>
         </div>
       </div>
     </div>
@@ -130,9 +131,10 @@ the underlying data, even when applied to a remote data source.)" />
 
     <div class="ref-description">
     
-    <p>This is like a transposed version of <code>print()</code>: columns run down the page,
+    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
+<p>This is like a transposed version of <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code>: columns run down the page,
 and data runs across. This makes it possible to see every column in
-a data frame. It's a little like <code>str()</code> applied to a data frame
+a data frame. It's a little like <code><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str()</a></code> applied to a data frame
 but it tries to show you as much data as possible. (And it always shows
 the underlying data, even when applied to a remote data source.)</p>
     
@@ -167,7 +169,7 @@ used within a data pipe line.</p>
 
     
     <p><code>glimpse</code> is an S3 generic with a customised method for <code>tbl</code>s and
-<code>data.frames</code>, and a default method that calls <code>str()</code>.</p>
+<code>data.frames</code>, and a default method that calls <code><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str()</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -184,8 +186,8 @@ used within a data pipe line.</p>
 #&gt; $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0…
 #&gt; $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3…
 #&gt; $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2…</div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"nycflights13"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='fu'>glimpse</span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/nycflights13/topics/flights'>flights</a></span>)
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"nycflights13"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='fu'>glimpse</span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/nycflights13/topics/flights'>flights</a></span>)
 }</div><div class='output co'>#&gt; Observations: 336,776
 #&gt; Variables: 19
 #&gt; $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …

@@ -31,9 +31,11 @@
 
 <meta property="og:title" content="Add rows to a data frame — add_row" />
 
-<meta property="og:description" content="This is a convenient way to add one or more rows of data to an existing data
+<meta property="og:description" content="
+This is a convenient way to add one or more rows of data to an existing data
 frame. See tribble() for an easy way to create an complete
-data frame row-by-row." />
+data frame row-by-row.
+add_case() is an alias of add_row()." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -76,7 +78,7 @@ data frame row-by-row." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9005</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.99.9006</span>
         </div>
       </div>
     </div>
@@ -128,9 +130,11 @@ data frame row-by-row." />
 
     <div class="ref-description">
     
-    <p>This is a convenient way to add one or more rows of data to an existing data
+    <p><a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a></p>
+<p>This is a convenient way to add one or more rows of data to an existing data
 frame. See <code><a href='tribble.html'>tribble()</a></code> for an easy way to create an complete
 data frame row-by-row.</p>
+<p><code>add_case()</code> is an alias of <code>add_row()</code>.</p>
     
     </div>
 
@@ -158,9 +162,13 @@ default: after last row.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
 
-    <p><code>add_case()</code> is an alias of <code>add_row()</code>.</p>
+    
+    <p>It is unclear if <code>add_row()</code> and its alias <code>add_cases()</code> should ensure
+that all columns have length one by wrapping in a list if necessary.
+See <a href='https://github.com/tidyverse/tibble/pull/503'>https://github.com/tidyverse/tibble/pull/503</a> and
+<a href='https://github.com/tidyverse/tibble/issues/205'>https://github.com/tidyverse/tibble/issues/205</a> for details.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -214,7 +222,7 @@ default: after last row.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#life-cycle">Life cycle</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

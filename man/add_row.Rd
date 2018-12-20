@@ -20,13 +20,22 @@ support unquote via \code{!!} and unquote-splice via \code{!!!}. However, unlike
 default: after last row.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+
 This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
 data frame row-by-row.
-}
-\details{
+
 \code{add_case()} is an alias of \code{add_row()}.
 }
+\section{Life cycle}{
+
+It is unclear if \code{add_row()} and its alias \code{add_cases()} should ensure
+that all columns have length one by wrapping in a list if necessary.
+See \url{https://github.com/tidyverse/tibble/pull/503} and
+\url{https://github.com/tidyverse/tibble/issues/205} for details.
+}
+
 \examples{
 # add_row ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)

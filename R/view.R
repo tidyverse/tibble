@@ -1,5 +1,8 @@
 #' View an object
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("experimental")}
+#'
 #' Calls [utils::View()] on the input and returns it, invisibly.
 #' The RStudio IDE overrides `utils::View()`, this is picked up
 #' correctly.
@@ -11,7 +14,7 @@
 #'
 #' @export
 view <- function(x, title = NULL, ...) {
-  if (interactive()) return(invisible(x))
+  if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
     title <- expr_deparse(enexpr(x))

@@ -11,6 +11,8 @@ Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.
 }
 \details{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
 class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
@@ -34,7 +36,7 @@ Science}
 Resources on specific topics:
 \itemize{
 \item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=enframe]{enframe()}}
-\item Inspect a tibble: \code{\link[=print.tbl_df]{print.tbl_df()}}, \code{\link[=glimpse]{glimpse()}}
+\item Inspect a tibble: \code{\link[=print.tbl]{print.tbl()}}, \code{\link[=glimpse]{glimpse()}}
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
 }
@@ -58,6 +60,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Romain Francois \email{romain@r-enthusiasts.com} [contributor]
+  \item Jennifer Bryan \email{jenny@rstudio.com} [contributor]
   \item RStudio [copyright holder]
 }
 

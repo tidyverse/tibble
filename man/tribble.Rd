@@ -15,6 +15,8 @@ data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
 A \link{tibble}.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.

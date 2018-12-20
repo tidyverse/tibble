@@ -1,5 +1,8 @@
 #' Get a glimpse of your data
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' This is like a transposed version of `print()`: columns run down the page,
 #' and data runs across. This makes it possible to see every column in
 #' a data frame. It's a little like [str()] applied to a data frame
@@ -43,6 +46,14 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
   cat_line("Variables: ", big_mark(ncol(df)))
+
+  summary <- tbl_sum(x)
+  brief_summary <- summary[names(summary) != "A tibble"]
+
+  if (has_length(brief_summary)) {
+    cat_line(names(brief_summary), ": ", brief_summary)
+  }
+
   if (ncol(df) == 0) return(invisible(x))
 
   var_types <- map_chr(map(df, new_pillar_type), format)
@@ -84,7 +95,17 @@ str_trunc <- function(x, max_width) {
 format_v <- function(x) UseMethod("format_v")
 
 #' @export
-format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+format_v.default <- function(x) {
+  dims <- dim(x)
+
+  if (!is.null(dims)){
+    dims_out <- paste0(dims, collapse = " x ")
+    out <- paste0("<", class(x)[1], "[", dims_out, "]>")
+    out
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}
 
 #' @export
 format_v.list <- function(x) {

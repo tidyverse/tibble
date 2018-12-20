@@ -8,11 +8,11 @@
 #'   * `unique` names are `minimal`, have no duplicates, and are never empty
 #'     (literally, no `""`s).
 #'     - All columns can be accessed by name via `df[["name"]]`.
-#'   * `syntactic` names are `unique` and syntactic (see Details for more).
+#'   * `universal` names are `unique` and syntactic (see Details for more).
 #'     - Names work everywhere, without quoting: `df$name` and
 #'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.
 #'
-#' `syntactic` implies `unique`, `unique` implies `minimal`. These levels are
+#' `universal` implies `unique`, `unique` implies `minimal`. These levels are
 #' nested.
 #'
 #' The `.name_repair` argument of [tibble()] and [as_tibble()] refers to these
@@ -20,8 +20,8 @@
 #' should anticipate `minimal` names as input and should, likewise, return names
 #' that are at least `minimal`.
 #'
-#' The "Life cycle" section explains the status of the existing functions
-#' `tidy_names()`, `set_tidy_names()`, and `repair_names()`.
+#' The existing functions [tidy_names()], [set_tidy_names()],
+#' and [repair_names()] are soft-deprecated.
 #'
 #' @section `minimal` names:
 #'
@@ -61,9 +61,9 @@
 #' names `unique`, i.e. reconstructing the suffixes. If this interacts poorly
 #' with your names, you should take control of name repair.
 #'
-#' @section `syntactic` names:
+#' @section `universal` names:
 #'
-#' `syntactic` names are `unique` and syntactic, meaning they:
+#' `universal` names are `unique` and syntactic, meaning they:
 #'   * Are never empty (inherited from `unique`).
 #'   * Have no duplicates (inherited from `unique`).
 #'   * Consist of letters, numbers, and the dot `.` or underscore `_`
@@ -72,7 +72,7 @@
 #'   * Are not a [reserved] word, e.g., `if` or `function` or `TRUE`.
 #'   * Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
-#' If a data frame has `syntactic` names, variable names can be used "as is" in
+#' If a data frame has `universal` names, variable names can be used "as is" in
 #' code. They work well with nonstandard evaluation, e.g., `df$name` works.
 #'
 #' Tibble has a different method of making names syntactic than
@@ -82,20 +82,20 @@
 #' Examples:
 #' ```
 #'  Original names:     ""    "x"    NA     "x"
-#' syntactic names: "...1" "x..2" "...3" "x..4"
+#' universal names: "...1" "x..2" "...3" "x..4"
 #'
 #'   Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
-#'  syntactic names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+#'  universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
 #' ```
 #'
-#' @param x A vector.
-#' @param name A `names` attribute, usually a character vector.
-#' @param quiet Whether to suppress messages about name repair.
-#'
-#' @seealso [rlang::names2()] returns the names of an object, after making them
+#' @seealso
+#' [rlang::names2()] returns the names of an object, after making them
 #'   `minimal`.
 #'
-#' @return `x` with repaired names or a repaired version of `name`.
+#'
+#' The [Names attribute](https://principles.tidyverse.org/names-attribute.html)
+#' section in the "tidyverse package development principles".
+#'
 #' @examples
 #' \dontrun{
 #' ## by default, duplicate names are not allowed
@@ -113,7 +113,7 @@
 #' df$`a 1`
 #'
 #' ## syntactic names are easier to work with, though, and you can request them
-#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "syntactic")
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
 #' df$a.1
 #'
 #' ## you can specify your own name repair function
@@ -125,6 +125,12 @@
 #' fix_names <- function(x) gsub("\\s+", "_", x)
 #' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
 #'
+#' ## purrr-style anonymous functions and constants
+#' ## are also supported
+#' tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
+#'
+#' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
+#'
 #' ## the names attibute will be non-NULL, with "" as the default element
 #' df <- as_tibble(list(1:3, letters[1:3]), .name_repair = "minimal")
 #' names(df)
@@ -132,14 +138,13 @@
 NULL
 
 set_repaired_names <- function(x,
-                               .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+                               .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   x <- set_minimal_names(x)
-  names(x) <- repaired_names(names(x), .name_repair = .name_repair)
-  x
+  set_names(x, repaired_names(names(x), .name_repair = .name_repair))
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
+                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
   if (is_formula(.name_repair, lhs = FALSE)) {
     .name_repair <- as_function(.name_repair)
@@ -157,14 +162,14 @@ repaired_names <- function(name,
       minimal       =     ,
       check_unique  = NULL,
       unique        = unique_names,
-      syntactic     = syntactic_names,
+      universal     = universal_names,
       abort(error_name_repair_arg())
     )
   }
   new_name <- if (is_function(repair_fun)) repair_fun(name) else name
 
   if (is.character(.name_repair) &&
-    .name_repair %in% c("check_unique", "unique", "syntactic")) {
+    .name_repair %in% c("check_unique", "unique", "universal")) {
     check_unique(new_name)
   } else {
     check_minimal(new_name)
@@ -212,27 +217,35 @@ set_unique_names <- function(x, quiet = FALSE) {
   set_names(x, new_names)
 }
 
-syntactic_names <- function(name, quiet = FALSE) {
+universal_names <- function(name, quiet = FALSE) {
   unique_names(name, quiet = quiet, transform = make_syntactic)
 }
 
-set_syntactic_names <- function(x, quiet = FALSE) {
+set_universal_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- syntactic_names(names(x), quiet = quiet)
+  new_names <- universal_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
-check_minimal <- function(name) {
+check_names_non_null <- function(name, abort = rlang::abort) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
   }
+  invisible(name)
+}
 
+check_names_non_na <- function(name, abort = rlang::abort) {
   bad_name <- which(is.na(name))
   if (has_length(bad_name)) {
     abort(error_column_must_be_named(bad_name))
   }
 
   invisible(name)
+}
+
+check_minimal <- function(name) {
+  check_names_non_null(name)
+  check_names_non_na(name)
 }
 
 check_minimal_names <- function(x) {
@@ -342,16 +355,21 @@ describe_repair <- function(orig_name, name) {
   }
 }
 
-#' @section Life cycle:
-#' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
-#' to facilitate *post hoc* name repair in tibble, given that `tibble()` and
-#' `as_tibble()` did not do this.
+#' Retired functions for name repair
 #'
-#' From tibble v1.5.0, the `.name_repair` argument gives direct access to three
-#' specific levels of name repair: `minimal`, `unique`, and `syntactic`. We
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#'
+#' @description
+#' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
+#' to facilitate *post hoc* name repair in tibble, given that [tibble()] and
+#' [as_tibble()] did not do this.
+#'
+#' From tibble v2.0.0, the `.name_repair` argument gives direct access to three
+#' specific levels of name repair: `minimal`, `unique`, and `universal`. We
 #' recommend that new code use this instead of `tidy_names()`,
 #' `set_tidy_names()`, or `repair_names()`. After a period of use, the repair
-#' stategies behind `minimal`, `unique`, and `syntactic` are likely to be
+#' stategies behind `minimal`, `unique`, and `universal` are likely to be
 #' exposed in standalone functions and this could affect the behaviour of
 #' `tidy_names()`. `repair_names()` should be considered deprecated.
 #'
@@ -361,27 +379,79 @@ describe_repair <- function(orig_name, name) {
 #' df <- tibble(...)
 #' set_tidy_names(df, syntactic = FALSE)
 #'
-#' tibble(..., `.name_repair = "syntactic"`)
+#' tibble(..., `.name_repair = "universal"`)
 #' ## is preferred to
 #' df <- tibble(...)
 #' set_tidy_names(df, syntactic = TRUE)
 #' ```
 #'
+#' @param x A vector.
+#' @param name A `names` attribute, usually a character vector.
 #' @param syntactic Should names be made syntactically valid? If `FALSE`, uses
 #'   same logic as `.name_repair = "unique"`. If `TRUE`, uses same logic as
-#'   `.name_repair = "syntactic"`.
+#'   `.name_repair = "universal"`.
+#' @param quiet Whether to suppress messages about name repair.
+#'
+#' @return `x` with repaired names or a repaired version of `name`.
+#'
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
+#' @keywords internal
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
-  if (syntactic) {
-    syntactic_names(name, quiet = quiet)
-  } else {
-    unique_names(name, quiet = quiet)
+  # Local functions to preserve behavior in v1.4.2
+  is_syntactic <- function(x) {
+    ret <- make.names(x) == x
+    ret[is.na(x)] <- FALSE
+    ret
   }
+
+  make_syntactic <- function(name, syntactic) {
+    if (!syntactic) return(name)
+
+    blank <- name == ""
+    fix_syntactic <- (name != "") & !is_syntactic(name)
+    name[fix_syntactic] <- make.names(name[fix_syntactic])
+    name
+  }
+
+  append_pos <- function(name) {
+    need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
+    if (any(need_append_pos)) {
+      rx <- "[.][.][1-9][0-9]*$"
+      has_suffix <- grepl(rx, name)
+      name[has_suffix] <- gsub(rx, "", name[has_suffix])
+      need_append_pos <- need_append_pos | has_suffix
+    }
+
+    need_append_pos <- which(need_append_pos)
+    name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
+    name
+  }
+
+  describe_tidying <- function(orig_name, name, quiet) {
+    stopifnot(length(orig_name) == length(name))
+    if (quiet) return()
+    new_names <- name != orig_name
+    if (any(new_names)) {
+      message(
+        "New names:\n",
+        paste0(orig_name[new_names], " -> ", name[new_names], collapse = "\n")
+      )
+    }
+  }
+
+  name[is.na(name)] <- ""
+  orig_name <- name
+
+  name <- make_syntactic(name, syntactic)
+  name <- append_pos(name)
+
+  describe_tidying(orig_name, name, quiet)
+  name
 }
 
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   x <- set_minimal_names(x)
   new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
@@ -392,7 +462,7 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @param sep A string inserted between the column name and de-duplicating
 #'   number.
 #' @export
-#' @rdname name-repair
+#' @rdname name-repair-retired
 repair_names <- function(x, prefix = "V", sep = "") {
   ## TODO: plot a deprecation strategy once we deal with the fact that
   ## `dplyr::bind_cols()` calls this function

@@ -107,3 +107,38 @@ test_that("glimpse works for structures with unknown rows", {
     output_file("glimpse/iris-70-na-nrow.txt")
   )
 })
+
+test_that("glimpse calls tbl_sum() (#550)", {
+  skip_on_os("windows") # capture_output_lines() forces native encoding
+  iris2 <- as_override_tbl_sum(iris)
+
+  expect_output(
+    glimpse(iris2),
+    "Overridden: tbl_sum",
+    fixed = TRUE
+  )
+})
+
+test_that("glimpse works on nested data (#486)", {
+  skip_on_os("windows")
+
+  nested_iris_df <- tibble(
+    Species = unique(iris$Species),
+    data = unname(split(iris, iris$Species))
+  )
+
+  nested_iris_tbl <- tibble(
+    Species = unique(iris$Species),
+    data = map(unname(split(iris, iris$Species)), as_tibble)
+  )
+
+  expect_output_file_rel(
+    glimpse(nested_iris_df, width = 70L),
+    "glimpse/iris-nested-df-70.txt"
+  )
+
+  expect_output_file_rel(
+    glimpse(nested_iris_tbl, width = 70L),
+    "glimpse/iris-nested-tbl-70.txt"
+  )
+})

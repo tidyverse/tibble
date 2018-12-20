@@ -26,6 +26,8 @@ as.tibble(x, ...)
 frame_data(...)
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("deprecated")}
+
 Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 
 Use \link{quasiquotation} instead of \code{tibble_()}, \code{data_frame_()}, and \code{lst_()}.

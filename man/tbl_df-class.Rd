@@ -31,7 +31,9 @@ Objects of class \code{tbl_df} have:
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
 \item A \code{row.names} attribute, included for compatibility with the base
-\link[base:data.frame]{data.frame class}. However, \code{row.names} are ignored
+\link[base:data.frame]{data.frame class}.
+This attribute is only consulted to query the number of rows,
+any row names that might be stored there are ignored
 by most tibble methods.
 }
 }
@@ -40,21 +42,21 @@ by most tibble methods.
 
 
 How default behaviour of tibbles differs from that of
-\link[base:data.frame]{data.frames}, during creation, access, and
-modification:
+\link[base:data.frame]{data.frames}, during creation and access:
 \itemize{
 \item Column data is not coerced. A character vector is not turned into a factor.
+List-columns are expressly anticipated and do not require special tricks.
+Read more in \code{\link[=tibble]{tibble()}}.
+\item Recycling only happens for a length 1 input.
 \item Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
 must indicate how to resolve. Read more in \link{name-repair}.
 \item Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in \link{rownames}.
-\item Recycling only happens for a length 1 input.
 \item \code{df[, j]} returns a tibble; it does not automatically extract the column
-inside. \code{df[, j, drop = FALSE]} is the default.
-\item List-columns are expressly anticipated and do not require special tricks.
+inside. \code{df[, j, drop = FALSE]} is the default. Read more in \link{subsetting}.
 \item There is no partial matching when \code{$} is used to index by name. \code{df$name}
-for a nonexistent name generates a warning.
+for a nonexistent name generates a warning. Read more in \link{subsetting}.
 \item Printing and inspection are a very high priority. The goal is to convey as
 much information as possible, in a concise way, even for large and complex
 tibbles. Read more in \link{formatting}.
@@ -62,6 +64,6 @@ tibbles. Read more in \link{formatting}.
 }
 
 \seealso{
-\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl_df]{print.tbl_df()}},
+\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl]{print.tbl()}},
 \code{\link[=glimpse]{glimpse()}}
 }

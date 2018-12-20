@@ -1,5 +1,8 @@
 #' Converting vectors to data frames, and vice versa
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' `enframe()` converts named atomic vectors or lists to one- or two-column
 #' data frames.
 #' For a list, the result will be a nested tibble with a column of type `list`.

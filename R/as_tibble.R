@@ -1,5 +1,8 @@
 #' Coerce lists, matrices, and more to data frames
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' `as_tibble()` turns an existing object, such as a data frame, list, or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
@@ -63,7 +66,7 @@
 #'   l2 <- replicate(26, sample(letters), simplify = FALSE)
 #'   names(l2) <- letters
 #'   bench::mark(
-#'     as_tibble(l2, .name_repair = "syntactic"),
+#'     as_tibble(l2, .name_repair = "universal"),
 #'     as_tibble(l2, .name_repair = "unique"),
 #'     as_tibble(l2, .name_repair = "minimal"),
 #'     as_tibble(l2),
@@ -74,7 +77,7 @@
 #' }
 as_tibble <- function(x, ...,
                       .rows = NULL,
-                      .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+                      .name_repair = c("check_unique", "unique", "universal", "minimal"),
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
@@ -83,12 +86,10 @@ as_tibble <- function(x, ...,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = TRUE, ...,
                                  .rows = NULL,
-                                 .name_repair = c("check_unique", "unique", "syntactic", "minimal"),
+                                 .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
-  if (!missing(validate)) {
-    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
-  }
+
+  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -112,11 +113,9 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
-                           .name_repair = c("check_unique", "unique", "syntactic", "minimal")) {
-  if (!missing(validate)) {
-    message("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
-    .name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
-  }
+                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
+  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
 
   lst_to_tibble(x, .rows, .name_repair)
 }
@@ -126,6 +125,21 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   check_valid_cols(x)
   x[] <- map(x, strip_dim)
   recycle_columns(x, .rows, lengths)
+}
+
+compat_name_repair <- function(.name_repair, missing_validate, validate) {
+  if (missing_validate) return(.name_repair)
+
+  name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
+
+  if (!has_length(.name_repair, 1)) {
+    signal_soft_deprecated("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+  } else if (.name_repair != name_repair) {
+    warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
+    return(.name_repair)
+  }
+
+  name_repair
 }
 
 # TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
@@ -196,10 +210,19 @@ guess_nrow <- function(lengths, .rows) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ...) {
+as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
   m <- matrixToDataFrame(x)
-  colnames(m) <- colnames(x)
-  as_tibble(m, ...)
+  names <- colnames(x)
+  if (is.null(.name_repair)) {
+    if (is.null(names)) {
+      signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
+      .name_repair = paste0("V", seq_along(m))
+    } else {
+      .name_repair = "check_unique"
+    }
+  }
+  colnames(m) <- names
+  as_tibble(m, ..., .name_repair = .name_repair)
 }
 
 #' @export
@@ -210,10 +233,12 @@ as_tibble.poly <- function(x, ...) {
 }
 
 #' @export
-as_tibble.ts <- function(x, ...) {
+as_tibble.ts <- function(x, ..., .name_repair = "minimal") {
   df <- as.data.frame(x)
-  colnames(df) <- colnames(x)
-  as_tibble(df, ...)
+  if (length(dim(x)) == 2) {
+    colnames(df) <- colnames(x)
+  }
+  as_tibble(df, ..., .name_repair = .name_repair)
 }
 
 #' @export
@@ -239,9 +264,9 @@ as_tibble.NULL <- function(x, ...) {
 #' @export
 #' @rdname as_tibble
 as_tibble.default <- function(x, ...) {
-  if (is_atomic(x)) {
-    as_tibble(as.list(x), ...)
-  } else {
-    as_tibble(as.data.frame(x), ...)
+  value <- x
+  if (is_atomic(value)) {
+    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
   }
+  as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }

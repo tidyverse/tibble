@@ -15,6 +15,8 @@ data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
 A \link{matrix}.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
 This is useful for small matrices, e.g. covariance matrices, where readability
