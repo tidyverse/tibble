@@ -195,10 +195,19 @@ guess_nrow <- function(lengths, .rows) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ...) {
+as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
   m <- matrixToDataFrame(x)
-  colnames(m) <- colnames(x)
-  as_tibble(m, ...)
+  names <- colnames(x)
+  if (is.null(.name_repair)) {
+    if (is.null(names)) {
+      signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using `.name_repair = "unique"`.')
+      .name_repair = "unique"
+    } else {
+      .name_repair = "minimal"
+    }
+  }
+  colnames(m) <- names
+  as_tibble(m, ..., .name_repair = .name_repair)
 }
 
 #' @export

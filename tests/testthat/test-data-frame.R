@@ -269,11 +269,14 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
+  scoped_lifecycle_errors() # When removing this, double-check error messages below.
+
   x <- matrix(1:6, nrow = 3)
 
   expect_error(
     as_tibble(x),
-    error_column_must_be_named(1:2)
+    "name",
+    fixed = TRUE
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
