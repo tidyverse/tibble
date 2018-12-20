@@ -22,19 +22,10 @@
 - FAILED TO NOTIFY.
 - Infinite recursion because `as_data_frame()` is no longer generic.
 
-# poio
-
-- Documentation reference to print.tbl_df.
-
 # postal
 
 - FAILED TO NOTIFY.
 - Unlikely to be related to _tibble_ update.
-
-# rcosmo
-
-- FAILED TO NOTIFY.
-- Documentation reference to print.tbl_df.
 
 # rsample
 

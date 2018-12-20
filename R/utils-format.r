@@ -64,6 +64,7 @@
 NULL
 
 #' @rdname formatting
+#' @aliases print.tbl_df
 #' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))

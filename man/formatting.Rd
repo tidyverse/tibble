@@ -3,6 +3,7 @@
 \name{formatting}
 \alias{formatting}
 \alias{print.tbl}
+\alias{print.tbl_df}
 \alias{format.tbl}
 \alias{trunc_mat}
 \title{Printing tibbles}
