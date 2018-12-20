@@ -44,27 +44,30 @@ lst <- function(...) {
   lst_quos(xs)$output
 }
 
-lst_quos <- function(xs, transform = function(x, i) x) {
+lst_quos <- function(xs, transform = function(x, i, mask) x) {
   # Evaluate each column in turn
-  col_names <- names2(xs)
-  output <- new_list_along(xs, names = rep_along(xs, ""))
+  col_names <- names(xs)
+  output <- rep_along(xs, list(NULL))
+  names(output) <- rep_along(xs, "")
   lengths <- rep_along(xs, 0L)
+  mask <- as_data_mask(list())
 
   for (i in seq_along(xs)) {
-    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
-    res <- eval_tidy(xs[[i]], unique_output)
+    res <- eval_tidy(xs[[i]], mask)
+    name <- col_names[[i]]
+    names(output)[[i]] <- name
+    mask[[name]] <- res
     if (!is_null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      output <- transform(output, i)
+      output <- transform(output, i, mask)
     }
-    names(output)[[i]] <- col_names[[i]]
   }
 
   list(output = output, lengths = lengths)
 }
 
-expand_lst <- function(x, i) {
+expand_lst <- function(x, i, mask) {
   idx_to_fix <- integer()
   if (i > 1L) {
     if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
@@ -77,7 +80,9 @@ expand_lst <- function(x, i) {
   }
 
   if (length(idx_to_fix) > 0L) {
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
+    new_x <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
+    x[idx_to_fix] <- new_x
+    map2(names(new_x), new_x, function(name, value) mask[[name]] <- value)
   }
 
   x
