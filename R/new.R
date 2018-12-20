@@ -74,8 +74,6 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 }
 
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
-#'
 #' `validate_tibble()` checks a tibble for internal consistency.
 #' Correct behavior can be guaranteed only if this function
 #' runs without raising an error.

@@ -12,8 +12,8 @@
 #' @section Life cycle:
 #' It is unclear if `add_row()` and its alias `add_cases()` should ensure
 #' that all columns have length one by wrapping in a list if necessary.
-#' See https://github.com/tidyverse/tibble/pull/503 and
-#' https://github.com/tidyverse/tibble/issues/205 for details.
+#' See <https://github.com/tidyverse/tibble/pull/503> and
+#' <https://github.com/tidyverse/tibble/issues/205> for details.
 #'
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined

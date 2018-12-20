@@ -32,8 +32,8 @@ data frame row-by-row.
 
 It is unclear if \code{add_row()} and its alias \code{add_cases()} should ensure
 that all columns have length one by wrapping in a list if necessary.
-See https://github.com/tidyverse/tibble/pull/503 and
-https://github.com/tidyverse/tibble/issues/205 for details.
+See \url{https://github.com/tidyverse/tibble/pull/503} and
+\url{https://github.com/tidyverse/tibble/issues/205} for details.
 }
 
 \examples{
