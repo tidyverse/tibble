@@ -4,7 +4,7 @@
 \alias{print.tbl_df}
 \title{Legacy help page for compatibility with existing packages}
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("retired")}
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("archived")}
 
 Please see \code{\link[=print.tbl]{print.tbl()}} for the print method for tibbles.
 }
