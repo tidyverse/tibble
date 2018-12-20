@@ -32,6 +32,7 @@ latex: false
 jobs:
   include:
   - r: devel
+  - r: 3.1
   - stage: full
     os: osx
   - r: release
@@ -40,7 +41,6 @@ jobs:
   - r: 3.4
   - r: 3.3
   - r: 3.2
-  - r: 3.1
   fast_finish: true
 
 #env
