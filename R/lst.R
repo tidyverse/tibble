@@ -41,52 +41,46 @@
 #' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
-  lst_quos(xs)
+  lst_quos(xs)$output
 }
 
-lst_quos <- function(xs, expand = FALSE) {
-  n <- length(xs)
-  if (n == 0) {
-    return(list())
-  }
-
+lst_quos <- function(xs, transform = function(x, i) x) {
   # Evaluate each column in turn
   col_names <- names2(xs)
-  output <- new_list(n)
-  names(output) <- character(n)
-  result <- output
+  output <- new_list_along(xs, names = rep_along(xs, ""))
+  lengths <- rep_along(xs, 0L)
 
-  for (i in seq_len(n)) {
+  for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
-      result[[i]] <- res
+      lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      if (expand) output <- expand_lst(output, i)
+      output <- transform(output, i)
     }
-    names(output)[i] <- col_names[[i]]
+    names(output)[[i]] <- col_names[[i]]
   }
 
-  set_names(result, names(output))
+  list(output = output, lengths = lengths)
 }
 
-expand_lst <- function(output, i) {
+expand_lst <- function(x, i) {
   idx_to_fix <- integer()
   if (i > 1L) {
-    if (NROW(output[[i]]) == 1L && NROW(output[[1L]]) != 1L) {
+    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
       idx_to_fix <- i
       idx_boilerplate <- 1L
-    } else if (NROW(output[[i]]) != 1L && NROW(output[[1L]]) == 1L) {
+    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
       idx_to_fix <- seq2(1L, i - 1L)
       idx_boilerplate <- i
     }
   }
 
   if (length(idx_to_fix) > 0L) {
-    output[idx_to_fix] <- expand_vecs(output[idx_to_fix], length(output[[idx_boilerplate]]))
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
   }
 
-  output
+  x
 }
 
 expand_vecs <- function(x, length) {

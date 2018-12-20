@@ -134,6 +134,26 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
+  expect_error(
+    as_tibble(list(x = 1, y = 1:4, z = 1:2)),
+    error_inconsistent_cols(
+      NULL,
+      c("y", "z"),
+      c(4, 2),
+      NA
+    ),
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(list(x = 1:2, y = 1:4, z = 1)),
+    error_inconsistent_cols(
+      NULL,
+      c("x", "y"),
+      c(2, 4),
+      NA
+    ),
+    fixed = TRUE
+  )
 })
 
 test_that("empty list() makes 0 x 0 tbl_df", {
