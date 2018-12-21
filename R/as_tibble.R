@@ -114,7 +114,7 @@ as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
 
   .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
 
-  lst_to_tibble(x, .rows, .name_repair, lengths(x))
+  lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
