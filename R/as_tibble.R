@@ -215,9 +215,15 @@ as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
   m <- matrixToDataFrame(x)
   names <- colnames(x)
   if (is.null(.name_repair)) {
-    if ((is.null(names) || all(names == "")) && has_length(x)) {
+    if ((is.null(names) || any(names == "")) && has_length(x)) {
       signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
-      .name_repair <- function(x) paste0("V", seq_along(m))
+      compat_names <- paste0("V", seq_along(m))
+      if (is.null(names)) {
+        names <- compat_names
+      } else {
+        names[names == ""] <- compat_names[names == ""]
+      }
+      .name_repair <- function(x) names
     } else {
       .name_repair <- "check_unique"
     }
