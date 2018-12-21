@@ -1,16 +1,6 @@
-# baystability
-
-- NOTIFIED: on Nov 28 via e-mail
-- FIXED here
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-
 # corrr
 
 Version: 0.3.0
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/drsimonj/corrr/issues/68.
-- Funny stuff around `rowname` column
 
 ## Newly broken
 
@@ -40,9 +30,6 @@ Version: 0.3.0
 
 Version: 1.0.1
 
-- NOTIFIED: https://github.com/gowerc/diffdf/issues/16.
-- Diverging results and output in tests.
-
 ## Newly broken
 
 *   checking tests ...
@@ -70,9 +57,6 @@ Version: 1.0.1
 # docxtractr
 
 Version: 0.5.0
-
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- coercing tibble with invalid column name via `as_tibble()`
 
 ## Newly broken
 
@@ -106,10 +90,6 @@ Version: 0.5.0
 
 Version: 0.3.1
 
-- NOTIFIED: https://github.com/wesm/feather/pull/365.
-- PATCH RELEASE INCOMING.
-- Infinite recursion because `as_data_frame()` is no longer generic.
-
 ## Newly broken
 
 *   checking examples ... ERROR
@@ -124,7 +104,7 @@ Version: 0.3.1
     > ### ** Examples
     > 
     > mtcars2 <- read_feather(feather_example("mtcars.feather"))
-    Error: C stack usage  7969860 is too close to the limit
+    Error: C stack usage  7970852 is too close to the limit
     Execution halted
     ```
 
@@ -137,107 +117,15 @@ Version: 0.3.1
       > library(feather)
       > 
       > test_check("feather")
-      Error: C stack usage  7971060 is too close to the limit
+      Error: C stack usage  7970868 is too close to the limit
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 15 SKIPPED: 0 FAILED: 0
       Execution halted
     ```
 
-# rcongresso
-
-Version: 0.4.6
-
-- TODO
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘rcongresso-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: fetch_despesas_deputado
-    > ### Title: Fetches expenditures from deputy
-    > ### Aliases: fetch_despesas_deputado
-    > 
-    > ### ** Examples
-    > 
-    > gastos_abel_mesquita <- fetch_despesas_deputado(id = 178957)
-    > gastos_abel_junho2017 <- fetch_despesas_deputado(id = 178957, ano = 2017, mes = 06, itens = -1)
-    Error in strsplit(., "/") : non-character argument
-    Calls: fetch_despesas_deputado ... eval -> _fseq -> freduce -> <Anonymous> -> strsplit
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(rcongresso)
-      > 
-      > test_check("rcongresso")
-      ── 1. Failure: Not Empty (@test_deputados.R#44)  ───────────────────────────────
-      nrow(dep_gastos) != 0 isn't true.
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 73 SKIPPED: 0 FAILED: 1
-      1. Failure: Not Empty (@test_deputados.R#44) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# rgho
-
-Version: 1.0.1
-
-- TODO
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘rgho-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_gho_data
-    > ### Title: Returns GHO Data
-    > ### Aliases: get_gho_data
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > result <- get_gho_data(
-    +   dimension = "GHO",
-    +   code = "MDG_0000000001"
-    + )
-    Error in code %in% get_gho_codes(dimension = dimension) : 
-      Column 3 must be named.
-    Use .name_repair to specify repair.
-    Calls: get_gho_data ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 36-38 (a-intro.Rmd) 
-    Error: processing vignette 'a-intro.Rmd' failed with diagnostics:
-    Column 3 must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
 # rsample
 
 Version: 0.0.3
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tidymodels/rsample/issues/74.
-- Testing internal attributes.
 
 ## Newly broken
 
@@ -267,26 +155,18 @@ Version: 0.0.3
 
 Version: 1.0.4
 
-- BIOCONDUCTOR.
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tjburns08/Sconify/issues/1.
-- Colliding imports.
-
 ## Newly broken
 
 *   checking whether package ‘Sconify’ can be installed ... WARNING
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
-    See ‘/tmp/Rtmp15iWMP/fileb7514ca5c2cd/Sconify.Rcheck/00install.out’ for details.
+    See ‘/tmp/Rtmp7dWsme/file66cd81498cd/Sconify.Rcheck/00install.out’ for details.
     ```
 
 # segregation
 
 Version: 0.1.0
-
-- NOTIFIED: https://github.com/elbersb/segregation/issues/1.
-- Relying on row names which are no longer available.
 
 ## Newly broken
 
@@ -296,7 +176,7 @@ Version: 0.1.0
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       5: `[[.tbl_df`(total, "M", "est") at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/eval.R:99
-      6: NextMethod() at /tmp/RtmplV6a17/R.INSTALLb86758a9f289/tibble/R/subsetting.R:77
+      6: NextMethod() at /tmp/Rtmpb5LbVY/R.INSTALL679ed90d563/tibble/R/subsetting.R:77
       7: `[[.data.frame`(total, "M", "est")
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
@@ -315,11 +195,6 @@ Version: 0.1.0
 # simTool
 
 Version: 1.1.0
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/MarselScheer/simTool/issues/1
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-- Other problems
 
 ## Newly broken
 
@@ -345,46 +220,9 @@ Version: 1.1.0
       Execution halted
     ```
 
-# suropt
-
-- TODO
-
-Version: 0.1.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-      |                          
-      |===========         |  55%
-      |                          
-      |============        |  60%
-      |                          
-      |=============       |  65%
-      |                          
-      |==============      |  70%
-      |                          
-      |===============     |  75%
-      |                          
-      |================    |  80%
-      |                          
-      |=================   |  85%
-      |                          
-      |==================  |  90%
-      |                          
-      |=================== |  95%
-      |                          
-      |====================| 100%Error: Column name `X` must not be duplicated.
-    Execution halted
-    ```
-
 # taxa
 
 Version: 0.3.1
-
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- More permissive `as_tibble()` implementation in a corner case
 
 ## Newly broken
 
@@ -410,8 +248,3 @@ Version: 0.3.1
       Execution halted
     ```
 
-# tidypredict
-
-- NOTIFIED: on Nov 28 via e-mail
-- UPDATED: on Dec 20
-- `as_tibble()` loses row names.
