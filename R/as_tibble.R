@@ -54,7 +54,11 @@
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
 #'
-#' as_tibble(1:3, .name_repair = "unique")
+#' as_tibble(as.list(1:3), .name_repair = "unique")
+#'
+#' # Prefer enframe() for vectors
+#' enframe(1:3)
+#' enframe(1:3, name = NULL)
 #'
 #' # For list-like inputs, `as_tibble()` is considerably simpler than
 #' # `as.data.frame()` and hence faster
