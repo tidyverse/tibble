@@ -1,6 +1,16 @@
+# baystability
+
+- NOTIFIED: on Nov 28 via e-mail
+- FIXED here
+- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
+
 # corrr
 
 Version: 0.3.0
+
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/drsimonj/corrr/issues/68.
+- Funny stuff around `rowname` column
 
 ## Newly broken
 
@@ -30,6 +40,10 @@ Version: 0.3.0
 
 Version: 1.0.1
 
+- NOTIFIED: https://github.com/gowerc/diffdf/issues/16.
+- RESPONDED
+- Diverging results and output in tests.
+
 ## Newly broken
 
 *   checking tests ...
@@ -57,6 +71,9 @@ Version: 1.0.1
 # docxtractr
 
 Version: 0.5.0
+
+- NOTIFIED: on Nov 28 via e-mail, and in private
+- coercing tibble with invalid column name via `as_tibble()`
 
 ## Newly broken
 
@@ -89,6 +106,10 @@ Version: 0.5.0
 # feather
 
 Version: 0.3.1
+
+- NOTIFIED: https://github.com/wesm/feather/pull/365.
+- PATCH RELEASE INCOMING.
+- Infinite recursion because `as_data_frame()` is no longer generic.
 
 ## Newly broken
 
@@ -123,9 +144,26 @@ Version: 0.3.1
       Execution halted
     ```
 
+# rcongresso
+
+Version: 0.4.6
+
+- FIXED here
+
+# rgho
+
+Version: 1.0.1
+
+- FIXED here
+
 # rsample
 
 Version: 0.0.3
+
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/tidymodels/rsample/issues/74.
+- RESPONDED
+- Testing internal attributes.
 
 ## Newly broken
 
@@ -155,6 +193,11 @@ Version: 0.0.3
 
 Version: 1.0.4
 
+- BIOCONDUCTOR.
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/tjburns08/Sconify/issues/1.
+- Colliding imports.
+
 ## Newly broken
 
 *   checking whether package ‘Sconify’ can be installed ... WARNING
@@ -167,6 +210,10 @@ Version: 1.0.4
 # segregation
 
 Version: 0.1.0
+
+- NOTIFIED: https://github.com/elbersb/segregation/issues/1.
+- RESPONDED
+- Relying on row names which are no longer available.
 
 ## Newly broken
 
@@ -196,6 +243,11 @@ Version: 0.1.0
 
 Version: 1.1.0
 
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/MarselScheer/simTool/issues/1
+- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
+- Other problems
+
 ## Newly broken
 
 *   checking tests ...
@@ -220,9 +272,13 @@ Version: 1.1.0
       Execution halted
     ```
 
-# taxa
+# suropt
 
-Version: 0.3.1
+- NOTIFIED: on Dec 21 via e-mail
+- RESPONDED
+- FIXED here
+
+Version: 0.1.0
 
 ## Newly broken
 
@@ -248,3 +304,8 @@ Version: 0.3.1
       Execution halted
     ```
 
+# tidypredict
+
+- NOTIFIED: on Nov 28 via e-mail
+- UPDATED: on Dec 20
+- `as_tibble()` loses row names.
