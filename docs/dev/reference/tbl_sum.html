@@ -32,8 +32,9 @@
 <meta property="og:title" content="Provide a succinct summary of an object — tbl_sum" />
 
 <meta property="og:description" content="tbl_sum() gives a brief textual description of a table-like object,
-which should include the dimensions, the data source, and possible grouping
-(for dplyr).  The default implementation forwards to pillar::obj_sum()." />
+which should include the dimensions and the data source in the first element,
+and additional information in the other elements (such as grouping for dplyr).
+The default implementation forwards to pillar::obj_sum()." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,8 +130,9 @@ which should include the dimensions, the data source, and possible grouping
     <div class="ref-description">
     
     <p><code>tbl_sum()</code> gives a brief textual description of a table-like object,
-which should include the dimensions, the data source, and possible grouping
-(for <code>dplyr</code>).  The default implementation forwards to <code><a href='https://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::obj_sum()</a></code>.</p>
+which should include the dimensions and the data source in the first element,
+and additional information in the other elements (such as grouping for <span class="pkg">dplyr</span>).
+The default implementation forwards to <code><a href='https://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::obj_sum()</a></code>.</p>
     
     </div>
 
@@ -145,6 +147,11 @@ which should include the dimensions, the data source, and possible grouping
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A named character vector, describing the dimensions in the first element
+and the data source in the name of the first element.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::type_sum()</a></code>, <code><a href='https://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::is_vector_s3()</a></code></p></div>
@@ -156,6 +163,8 @@ which should include the dimensions, the data source, and possible grouping
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

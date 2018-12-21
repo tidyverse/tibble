@@ -264,7 +264,8 @@ values. <a href='name-repair.html'>name-repair</a> documents the details of name
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
 <span class='fu'>as_tibble</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.</span>
-#&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt; <span class='warning'>This warning is displayed once per session.</span>
+#&gt; <span class='warning'>Use tibble:::scoped_lifecycle_warnings() to temporarily display this warning on each occurrence.</span></div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;   value
 #&gt;   &lt;int&gt;
 #&gt; 1     1
