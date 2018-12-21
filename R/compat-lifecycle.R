@@ -106,7 +106,7 @@ warn_deprecated <- function(msg, id = msg) {
   signal(msg = paste0(
     msg,
     "\n",
-    silver("This warning is displayed once per session.")
+    silver("This warning is displayed once per session.\nUse tibble:::scoped_lifecycle_warnings() to temporarily display this warning on each occurrence.")
   ))
 }
 deprecation_env <- new.env(parent = emptyenv())
