@@ -263,9 +263,20 @@ values. <a href='name-repair.html'>name-repair</a> documents the details of name
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
-<span class='fu'>as_tibble</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.</span>
-#&gt; <span class='warning'>This warning is displayed once per session.</span>
-#&gt; <span class='warning'>Use tibble:::scoped_lifecycle_warnings() to temporarily display this warning on each occurrence.</span></div><div class='output co'>#&gt; # A tibble: 3 x 1
+<span class='fu'>as_tibble</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; `..1`</span>
+#&gt; <span class='message'>* `` -&gt; `..2`</span>
+#&gt; <span class='message'>* `` -&gt; `..3`</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;     ..1   ..2   ..3
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     2     3</div><div class='input'>
+<span class='co'># Prefer enframe() for vectors</span>
+<span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;    name value
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     1
+#&gt; 2     2     2
+#&gt; 3     3     3</div><div class='input'><span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;   value
 #&gt;   &lt;int&gt;
 #&gt; 1     1
