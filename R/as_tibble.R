@@ -213,7 +213,7 @@ as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
   if (is.null(.name_repair)) {
     if (is.null(names)) {
       signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
-      .name_repair = paste0("V", seq_along(m))
+      .name_repair = function(x) paste0("V", seq_along(m))
     } else {
       .name_repair = "check_unique"
     }
