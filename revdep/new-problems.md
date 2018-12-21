@@ -1,6 +1,16 @@
+# baystability
+
+- NOTIFIED: on Nov 28 via e-mail
+- FIXED here
+- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
+
 # corrr
 
 Version: 0.3.0
+
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/drsimonj/corrr/issues/68.
+- Funny stuff around `rowname` column
 
 ## Newly broken
 
@@ -30,6 +40,9 @@ Version: 0.3.0
 
 Version: 1.0.1
 
+- NOTIFIED: https://github.com/gowerc/diffdf/issues/16.
+- Diverging results and output in tests.
+
 ## Newly broken
 
 *   checking tests ...
@@ -57,6 +70,9 @@ Version: 1.0.1
 # docxtractr
 
 Version: 0.5.0
+
+- NOTIFIED: on Nov 28 via e-mail, and in private
+- coercing tibble with invalid column name via `as_tibble()`
 
 ## Newly broken
 
@@ -89,6 +105,10 @@ Version: 0.5.0
 # feather
 
 Version: 0.3.1
+
+- NOTIFIED: https://github.com/wesm/feather/pull/365.
+- PATCH RELEASE INCOMING.
+- Infinite recursion because `as_data_frame()` is no longer generic.
 
 ## Newly broken
 
@@ -127,6 +147,8 @@ Version: 0.3.1
 
 Version: 1.0.1
 
+- TODO
+
 ## Newly broken
 
 *   checking re-building of vignette outputs ... WARNING
@@ -158,6 +180,8 @@ Version: 1.0.1
 # rcongresso
 
 Version: 0.4.6
+
+- TODO
 
 ## Newly broken
 
@@ -202,6 +226,8 @@ Version: 0.4.6
 # recipes
 
 Version: 0.1.4
+
+- TODO
 
 ## Newly broken
 
@@ -257,6 +283,8 @@ Version: 0.1.4
 
 Version: 1.0.1
 
+- TODO
+
 ## Newly broken
 
 *   checking examples ... ERROR
@@ -293,75 +321,13 @@ Version: 1.0.1
     Execution halted
     ```
 
-# rrd
-
-Version: 0.2.1
-
-## Newly broken
-
-*   checking PDF version of manual without hyperrefs or index ... ERROR
-    ```
-    Re-running with no redirection of stdout/stderr.
-    Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /tmp/RtmpQ9VG6U/Rd2pdfb9303ce5bee2'
-    ```
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 13.1Mb
-      sub-directories of 1Mb or more:
-        extdata  12.8Mb
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘rrd’ ...
-** package ‘rrd’ successfully unpacked and MD5 sums checked
-** libs
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c rrd.c -o rrd.o
-gcc -std=gnu99 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o rrd.so registerDynamicSymbol.o rrd.o -lrrd -L/usr/lib/R/lib -lR
-installing to /tmp/Rtmp15iWMP/fileb758476b2d23/rrd.Rcheck/rrd/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded
-* DONE (rrd)
-
-```
-### CRAN
-
-```
-* installing *source* package ‘rrd’ ...
-** package ‘rrd’ successfully unpacked and MD5 sums checked
-** libs
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c rrd.c -o rrd.o
-rrd.c:1:17: fatal error: rrd.h: No such file or directory
-compilation terminated.
-/usr/lib/R/etc/Makeconf:159: recipe for target 'rrd.o' failed
-make: *** [rrd.o] Error 1
-make: *** Waiting for unfinished jobs....
-gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
-ERROR: compilation failed for package ‘rrd’
-* removing ‘/tmp/Rtmp0MWEzP/file8bd45e30623b/rrd.Rcheck/rrd’
-
-```
 # rsample
 
 Version: 0.0.3
+
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/tidymodels/rsample/issues/74.
+- Testing internal attributes.
 
 ## Newly broken
 
@@ -391,6 +357,11 @@ Version: 0.0.3
 
 Version: 1.0.4
 
+- BIOCONDUCTOR.
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/tjburns08/Sconify/issues/1.
+- Colliding imports.
+
 ## Newly broken
 
 *   checking whether package ‘Sconify’ can be installed ... WARNING
@@ -403,6 +374,9 @@ Version: 1.0.4
 # segregation
 
 Version: 0.1.0
+
+- NOTIFIED: https://github.com/elbersb/segregation/issues/1.
+- Relying on row names which are no longer available.
 
 ## Newly broken
 
@@ -432,6 +406,11 @@ Version: 0.1.0
 
 Version: 1.1.0
 
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/MarselScheer/simTool/issues/1
+- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
+- Other problems
+
 ## Newly broken
 
 *   checking tests ...
@@ -457,6 +436,8 @@ Version: 1.1.0
     ```
 
 # suropt
+
+- TODO
 
 Version: 0.1.0
 
@@ -492,6 +473,9 @@ Version: 0.1.0
 
 Version: 0.3.1
 
+- NOTIFIED: on Nov 28 via e-mail, and in private
+- More permissive `as_tibble()` implementation in a corner case
+
 ## Newly broken
 
 *   checking tests ...
@@ -516,3 +500,8 @@ Version: 0.3.1
       Execution halted
     ```
 
+# tidypredict
+
+- NOTIFIED: on Nov 28 via e-mail
+- UPDATED: on Dec 20
+- `as_tibble()` loses row names.
