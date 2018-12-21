@@ -1,36 +1,203 @@
-# baystability
-
-- NOTIFIED: on Nov 28 via e-mail
-- FIXED here
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-
 # corrr
 
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/drsimonj/corrr/issues/68.
-- Funny stuff around `rowname` column
+Version: 0.3.0
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      22: vars_select_eval(.vars, quos) at /tmp/RtmpE9k1HZ/R.INSTALLdd085933591b/tidyselect/R/vars-select.R:123
+      23: map_if(quos, !is_helper, eval_tidy, mask) at /tmp/RtmpE9k1HZ/R.INSTALLdd085933591b/tidyselect/R/vars-select.R:239
+      24: map(.x[sel], .f, ...) at /tmp/Rtmp7QYXYD/R.INSTALL593cec9d40f/purrr/R/map.R:112
+      25: .f(.x[[i]], ...) at /tmp/Rtmp7QYXYD/R.INSTALL593cec9d40f/purrr/R/map.R:104
+      26: -rowname at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/eval-tidy.R:87
+      27: is_character(x) at /tmp/RtmpE9k1HZ/R.INSTALLdd085933591b/tidyselect/R/vars-select.R:266
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 71 SKIPPED: 0 FAILED: 3
+      1. Error: Diagonal sets correctly (@test-as_cordf.R#18) 
+      2. Error: Converts values accurately (@test-as_matrix.R#11) 
+      3. Error: Diagonal sets correctly (@test-correlate.R#18) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 # diffdf
 
-- NOTIFIED: https://github.com/gowerc/diffdf/issues/16.
-- Diverging results and output in tests.
+Version: 1.0.1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 551 SKIPPED: 0 FAILED: 17
+      1. Failure: Unequal object, checking numbers correct (@test-core.R#186) 
+      2. Failure: Unequal object, checking numbers correct (@test-core.R#187) 
+      3. Failure: Unequal object, checking numbers correct (@test-core.R#188) 
+      4. Failure: Unequal object, checking numbers correct (@test-core.R#189) 
+      5. Failure: Unequal object, checking numbers correct (@test-core.R#190) 
+      6. Failure: Unequal object, checking numbers correct (@test-core.R#191) 
+      7. Failure: Unequal object, checking numbers correct (@test-core.R#192) 
+      8. Failure: Unequal object, checking numbers correct (@test-core.R#193) 
+      9. Failure: (unknown) (@test-print_output.R#51) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 # docxtractr
 
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- coercing tibble with invalid column name via `as_tibble()`
+Version: 0.5.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### Aliases: docx_extract_tbl
+    > 
+    > ### ** Examples
+    > 
+    > doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
+    > docx_extract_tbl(doc3, 3)
+    # A tibble: 6 x 2
+      Foo   Bar  
+      <chr> <chr>
+    1 Aa    Bb   
+    2 Dd    Ee   
+    3 Gg    Hh   
+    4 1     2    
+    5 Zz    Jj   
+    6 Tt    ii   
+    > 
+    > intracell_whitespace <- read_docx(system.file("examples/preserve.docx", package="docxtractr"))
+    > docx_extract_tbl(intracell_whitespace, 2, preserve=FALSE)
+    Error: Column 1 must be named.
+    Use .name_repair to specify repair.
+    Execution halted
+    ```
 
 # feather
 
-- NOTIFIED: https://github.com/wesm/feather/pull/365.
-- PATCH RELEASE INCOMING.
-- Infinite recursion because `as_data_frame()` is no longer generic.
+Version: 0.3.1
 
-# postal
+## Newly broken
 
-- NOTIFIED: https://github.com/aedobbyn/postal/issues/35.
-- Error disappeared on December 21.
-- Unlikely to be related to _tibble_ update?
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘feather-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: read_feather
+    > ### Title: Read and write feather files.
+    > ### Aliases: read_feather write_feather
+    > 
+    > ### ** Examples
+    > 
+    > mtcars2 <- read_feather(feather_example("mtcars.feather"))
+    Error: C stack usage  7969860 is too close to the limit
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(feather)
+      > 
+      > test_check("feather")
+      Error: C stack usage  7971060 is too close to the limit
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 15 SKIPPED: 0 FAILED: 0
+      Execution halted
+    ```
+
+# HMP16SData
+
+Version: 1.0.1
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    snapshotDate(): 2018-04-27
+    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
+    downloading 0 resources
+    loading from cache 
+        '/home/kirill//.ExperimentHub/1118'
+    snapshotDate(): 2018-04-27
+    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
+    downloading 0 resources
+    loading from cache 
+        '/home/kirill//.ExperimentHub/1117'
+    snapshotDate(): 2018-04-27
+    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
+    downloading 0 resources
+    loading from cache 
+        '/home/kirill//.ExperimentHub/1117'
+    Warning in has_utility("convert", "ImageMagick") :
+      ImageMagick not installed or not in PATH
+    Quitting from lines 445-449 (HMP16SData.Rmd) 
+    Error: processing vignette 'HMP16SData.Rmd' failed with diagnostics:
+    length(rows) == 1 is not TRUE
+    Execution halted
+    ```
+
+# rcongresso
+
+Version: 0.4.6
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘rcongresso-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: fetch_despesas_deputado
+    > ### Title: Fetches expenditures from deputy
+    > ### Aliases: fetch_despesas_deputado
+    > 
+    > ### ** Examples
+    > 
+    > gastos_abel_mesquita <- fetch_despesas_deputado(id = 178957)
+    > gastos_abel_junho2017 <- fetch_despesas_deputado(id = 178957, ano = 2017, mes = 06, itens = -1)
+    Error in strsplit(., "/") : non-character argument
+    Calls: fetch_despesas_deputado ... eval -> _fseq -> freduce -> <Anonymous> -> strsplit
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(rcongresso)
+      > 
+      > test_check("rcongresso")
+      ── 1. Failure: Not Empty (@test_deputados.R#44)  ───────────────────────────────
+      nrow(dep_gastos) != 0 isn't true.
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 73 SKIPPED: 0 FAILED: 1
+      1. Failure: Not Empty (@test_deputados.R#44) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 # recipes
 
@@ -69,7 +236,7 @@ Version: 0.1.4
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      23: abort(error_column_must_be_named(bad_name)) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/repair-names.R:261
+      23: abort(error_column_must_be_named(bad_name)) at /tmp/RtmplV6a17/R.INSTALLb86758a9f289/tibble/R/repair-names.R:261
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 1119 SKIPPED: 4 FAILED: 8
@@ -126,44 +293,75 @@ Version: 1.0.1
     Execution halted
     ```
 
+# rrd
+
+Version: 0.2.1
+
+## Newly broken
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /tmp/RtmpQ9VG6U/Rd2pdfb9303ce5bee2'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 13.1Mb
+      sub-directories of 1Mb or more:
+        extdata  12.8Mb
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘rrd’ ...
+** package ‘rrd’ successfully unpacked and MD5 sums checked
+** libs
+gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
+gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c rrd.c -o rrd.o
+gcc -std=gnu99 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o rrd.so registerDynamicSymbol.o rrd.o -lrrd -L/usr/lib/R/lib -lR
+installing to /tmp/Rtmp15iWMP/fileb758476b2d23/rrd.Rcheck/rrd/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded
+* DONE (rrd)
+
+```
+### CRAN
+
+```
+* installing *source* package ‘rrd’ ...
+** package ‘rrd’ successfully unpacked and MD5 sums checked
+** libs
+gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c rrd.c -o rrd.o
+rrd.c:1:17: fatal error: rrd.h: No such file or directory
+compilation terminated.
+/usr/lib/R/etc/Makeconf:159: recipe for target 'rrd.o' failed
+make: *** [rrd.o] Error 1
+make: *** Waiting for unfinished jobs....
+gcc -std=gnu99 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
+ERROR: compilation failed for package ‘rrd’
+* removing ‘/tmp/Rtmp0MWEzP/file8bd45e30623b/rrd.Rcheck/rrd’
+
+```
 # rsample
 
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tidymodels/rsample/issues/74.
-- Testing internal attributes.
-
-# Sconify
-
-- BIOCONDUCTOR.
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tjburns08/Sconify/issues/1.
-- Colliding imports.
-
-# segregation
-
-- NOTIFIED: https://github.com/elbersb/segregation/issues/1.
-- Relying on row names which are no longer available.
-
-# simTool
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/MarselScheer/simTool/issues/1
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-
-# taxa
-
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- More permissive `as_tibble()` implementation in a corner case
-
-# tidypredict
-
-- NOTIFIED: on Nov 28 via e-mail
-- UPDATED: on Dec 20
-- `as_tibble()` loses row names.
-
-# tidyr
-
-Version: 0.8.2
+Version: 0.0.3
 
 ## Newly broken
 
@@ -172,18 +370,147 @@ Version: 0.8.2
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      5: as_tibble(m, ..., .name_repair = .name_repair) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/as_tibble.R:222
-      6: as_tibble.data.frame(m, ..., .name_repair = .name_repair) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/as_tibble.R:79
-      7: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/as_tibble.R:95
-      8: lst_to_tibble(x, .rows, .name_repair, lengths(x)) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/as_tibble.R:117
-      9: set_repaired_names(x, .name_repair) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/as_tibble.R:121
-      10: set_names(x, repaired_names(names(x), .name_repair = .name_repair)) at /tmp/RtmpXACe3n/R.INSTALLe4d559ebfbb/tibble/R/repair-names.R:143
-      11: set_names_impl(x, x, nm, ...) at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/attr.R:163
-      12: abort("`nm` must be `NULL` or a character vector the same length as `x`") at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/attr.R:182
+      
+          fill
+      
+      > 
+      > test_check(package = "rsample")
+      ── 1. Failure: simple rset (@test_rset.R#44)  ──────────────────────────────────
+      sort(names(attributes(res2))) not equal to c("class", "names", "row.names").
+      Lengths differ: 6 is not 3
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 320 SKIPPED: 0 FAILED: 1
-      1. Error: spreading empty data frame gives empty data frame (@test-spread.R#179) 
+      OK: 492 SKIPPED: 0 FAILED: 1
+      1. Failure: simple rset (@test_rset.R#44) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# Sconify
+
+Version: 1.0.4
+
+## Newly broken
+
+*   checking whether package ‘Sconify’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
+    See ‘/tmp/Rtmp15iWMP/fileb7514ca5c2cd/Sconify.Rcheck/00install.out’ for details.
+    ```
+
+# segregation
+
+Version: 0.1.0
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      5: `[[.tbl_df`(total, "M", "est") at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/eval.R:99
+      6: NextMethod() at /tmp/RtmplV6a17/R.INSTALLb86758a9f289/tibble/R/subsetting.R:77
+      7: `[[.data.frame`(total, "M", "est")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 157 SKIPPED: 0 FAILED: 6
+      1. Error: between + within = total (@test_mutual_total.R#53) 
+      2. Error: within estimations are correct (@test_mutual_total.R#68) 
+      3. Error: H is correct (@test_mutual_total.R#78) 
+      4. Error: zero weights no problem (@test_mutual_total.R#101) 
+      5. Error: between + within = total (@test_mutual_within.R#24) 
+      6. Error: option wide works (@test_mutual_within.R#63) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# simTool
+
+Version: 1.1.0
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 46 SKIPPED: 0 FAILED: 11
+      1. Error: Tibbles for data generating functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#55) 
+      2. Error: Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation (@test_eval_tibbles.R#138) 
+      3. Error: One analyzing function. Results were created and stored in simulation (@test_eval_tibbles.R#189) 
+      4. Failure: Simplify the simulation results (@test_eval_tibbles.R#219) 
+      5. Failure: Post analyze function works (@test_eval_tibbles.R#239) 
+      6. Error: Three analyzing functions. Results were created and stored in simulation (@test_eval_tibbles.R#284) 
+      7. Error: Three analyzing functions and one summary function. Results were created and stored in simulation (@test_eval_tibbles.R#360) 
+      8. Error: Three analyzing functions and three summary function. Results were created and stored in simulation (@test_eval_tibbles.R#504) 
+      9. Error: Three analyzing functions and one summary function over 2 cpus. Results were created and stored in simulation (@test_eval_tibbles.R#570) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# suropt
+
+Version: 0.1.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+      |                          
+      |===========         |  55%
+      |                          
+      |============        |  60%
+      |                          
+      |=============       |  65%
+      |                          
+      |==============      |  70%
+      |                          
+      |===============     |  75%
+      |                          
+      |================    |  80%
+      |                          
+      |=================   |  85%
+      |                          
+      |==================  |  90%
+      |                          
+      |=================== |  95%
+      |                          
+      |====================| 100%Error: Column name `X` must not be duplicated.
+    Execution halted
+    ```
+
+# taxa
+
+Version: 0.3.1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      test_obj$data$my_data$taxon_id not equal to c("j", "i").
+      2/2 mismatches
+      x[1]: NA
+      y[1]: "j"
+      
+      x[2]: NA
+      y[2]: "i"
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 598 SKIPPED: 2 FAILED: 2
+      1. Failure: New tables and vectors can be made (@test--taxmap.R#684) 
+      2. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#56) 
       
       Error: testthat unit tests failed
       Execution halted
