@@ -1,16 +1,6 @@
-# baystability
-
-- NOTIFIED: on Nov 28 via e-mail
-- FIXED here
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-
 # corrr
 
 Version: 0.3.0
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/drsimonj/corrr/issues/68.
-- Funny stuff around `rowname` column
 
 ## Newly broken
 
@@ -40,9 +30,6 @@ Version: 0.3.0
 
 Version: 1.0.1
 
-- NOTIFIED: https://github.com/gowerc/diffdf/issues/16.
-- Diverging results and output in tests.
-
 ## Newly broken
 
 *   checking tests ...
@@ -70,9 +57,6 @@ Version: 1.0.1
 # docxtractr
 
 Version: 0.5.0
-
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- coercing tibble with invalid column name via `as_tibble()`
 
 ## Newly broken
 
@@ -106,10 +90,6 @@ Version: 0.5.0
 
 Version: 0.3.1
 
-- NOTIFIED: https://github.com/wesm/feather/pull/365.
-- PATCH RELEASE INCOMING.
-- Infinite recursion because `as_data_frame()` is no longer generic.
-
 ## Newly broken
 
 *   checking examples ... ERROR
@@ -124,7 +104,7 @@ Version: 0.3.1
     > ### ** Examples
     > 
     > mtcars2 <- read_feather(feather_example("mtcars.feather"))
-    Error: C stack usage  7969860 is too close to the limit
+    Error: C stack usage  7969364 is too close to the limit
     Execution halted
     ```
 
@@ -137,51 +117,15 @@ Version: 0.3.1
       > library(feather)
       > 
       > test_check("feather")
-      Error: C stack usage  7971060 is too close to the limit
+      Error: C stack usage  7971172 is too close to the limit
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 15 SKIPPED: 0 FAILED: 0
       Execution halted
     ```
 
-# HMP16SData
-
-Version: 1.0.1
-
-- TODO
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    snapshotDate(): 2018-04-27
-    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
-    downloading 0 resources
-    loading from cache 
-        '/home/kirill//.ExperimentHub/1118'
-    snapshotDate(): 2018-04-27
-    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
-    downloading 0 resources
-    loading from cache 
-        '/home/kirill//.ExperimentHub/1117'
-    snapshotDate(): 2018-04-27
-    see ?HMP16SData and browseVignettes('HMP16SData') for documentation
-    downloading 0 resources
-    loading from cache 
-        '/home/kirill//.ExperimentHub/1117'
-    Warning in has_utility("convert", "ImageMagick") :
-      ImageMagick not installed or not in PATH
-    Quitting from lines 445-449 (HMP16SData.Rmd) 
-    Error: processing vignette 'HMP16SData.Rmd' failed with diagnostics:
-    length(rows) == 1 is not TRUE
-    Execution halted
-    ```
-
 # rcongresso
 
 Version: 0.4.6
-
-- TODO
 
 ## Newly broken
 
@@ -223,67 +167,9 @@ Version: 0.4.6
       Execution halted
     ```
 
-# recipes
-
-Version: 0.1.4
-
-- TODO
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    
-        date
-    
-    > 
-    > examples <- data.frame(Dan = ymd("2002-03-04") + days(1:10),
-    +                        Stefan = ymd("2006-01-13") + days(1:10))
-    > date_rec <- recipe(~ Dan + Stefan, examples) %>%
-    +    step_date(all_predictors())
-    > 
-    > tidy(date_rec, number = 1)
-    # A tibble: 3 x 4
-      terms            value ordinal id        
-      <fct>            <fct> <lgl>   <chr>     
-    1 all_predictors() dow   FALSE   date_qxJ4m
-    2 all_predictors() month FALSE   date_qxJ4m
-    3 all_predictors() year  FALSE   date_qxJ4m
-    > 
-    > date_rec <- prep(date_rec, training = examples)
-    Error: Columns 1, 2, 3, 4, 5, … (and 1 more) must be named.
-    Use .name_repair to specify repair.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      23: abort(error_column_must_be_named(bad_name)) at /tmp/RtmplV6a17/R.INSTALLb86758a9f289/tibble/R/repair-names.R:261
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 1119 SKIPPED: 4 FAILED: 8
-      1. Error: default option (@test_date.R#23) 
-      2. Error: nondefault options (@test_date.R#59) 
-      3. Error: ordinal values (@test_date.R#79) 
-      4. Error: printing (@test_date.R#99) 
-      5. Error: Date class (@test_holiday.R#17) 
-      6. Error: POSIXct class (@test_holiday.R#39) 
-      7. Error: printing (@test_holiday.R#58) 
-      8. Error: trained (@test_tidy.R#39) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # rgho
 
 Version: 1.0.1
-
-- TODO
 
 ## Newly broken
 
@@ -325,10 +211,6 @@ Version: 1.0.1
 
 Version: 0.0.3
 
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tidymodels/rsample/issues/74.
-- Testing internal attributes.
-
 ## Newly broken
 
 *   checking tests ...
@@ -357,26 +239,18 @@ Version: 0.0.3
 
 Version: 1.0.4
 
-- BIOCONDUCTOR.
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/tjburns08/Sconify/issues/1.
-- Colliding imports.
-
 ## Newly broken
 
 *   checking whether package ‘Sconify’ can be installed ... WARNING
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
-    See ‘/tmp/Rtmp15iWMP/fileb7514ca5c2cd/Sconify.Rcheck/00install.out’ for details.
+    See ‘/tmp/RtmpQ4EgGc/fileee5c65e085a4/Sconify.Rcheck/00install.out’ for details.
     ```
 
 # segregation
 
 Version: 0.1.0
-
-- NOTIFIED: https://github.com/elbersb/segregation/issues/1.
-- Relying on row names which are no longer available.
 
 ## Newly broken
 
@@ -386,7 +260,7 @@ Version: 0.1.0
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       5: `[[.tbl_df`(total, "M", "est") at /tmp/RtmpQd7eDE/R.INSTALL8ca31dfbdc57/rlang/R/eval.R:99
-      6: NextMethod() at /tmp/RtmplV6a17/R.INSTALLb86758a9f289/tibble/R/subsetting.R:77
+      6: NextMethod() at /tmp/Rtmp5iU9Wg/R.INSTALLf0356c80429c/tibble/R/subsetting.R:77
       7: `[[.data.frame`(total, "M", "est")
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
@@ -405,11 +279,6 @@ Version: 0.1.0
 # simTool
 
 Version: 1.1.0
-
-- NOTIFIED: on Nov 28 via e-mail
-- NOTIFIED: https://github.com/MarselScheer/simTool/issues/1
-- Requires column names `V1`, `V2`, ... in `as_tibble.matrix()`
-- Other problems
 
 ## Newly broken
 
@@ -436,8 +305,6 @@ Version: 1.1.0
     ```
 
 # suropt
-
-- TODO
 
 Version: 0.1.0
 
@@ -473,9 +340,6 @@ Version: 0.1.0
 
 Version: 0.3.1
 
-- NOTIFIED: on Nov 28 via e-mail, and in private
-- More permissive `as_tibble()` implementation in a corner case
-
 ## Newly broken
 
 *   checking tests ...
@@ -500,8 +364,3 @@ Version: 0.3.1
       Execution halted
     ```
 
-# tidypredict
-
-- NOTIFIED: on Nov 28 via e-mail
-- UPDATED: on Dec 20
-- `as_tibble()` loses row names.
