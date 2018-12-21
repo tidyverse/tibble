@@ -87,12 +87,19 @@ warn_deprecated <- function(msg, id = msg) {
     return(invisible(NULL))
   }
 
-  if (!rlang::is_true(rlang::peek_option("lifecycle_repeat_warnings")) &&
-        rlang::env_has(deprecation_env, id)) {
-    return(invisible(NULL))
+  if (!rlang::is_true(rlang::peek_option("lifecycle_repeat_warnings"))) {
+    if (rlang::env_has(deprecation_env, id)) {
+      return(invisible(NULL))
+    }
+
+    msg <- paste0(
+      msg,
+      "\n",
+      silver("This warning is displayed once per session.")
+    )
   }
 
-  rlang::env_poke(deprecation_env, id, TRUE);
+  rlang::env_poke(deprecation_env, id, TRUE)
 
   has_colour <- function() rlang::is_installed("crayon") && crayon::has_color()
   silver <- function(x) if (has_colour()) crayon::silver(x) else x
@@ -103,11 +110,7 @@ warn_deprecated <- function(msg, id = msg) {
     signal <- .Deprecated
   }
 
-  signal(msg = paste0(
-    msg,
-    "\n",
-    silver("This warning is displayed once per session.\nUse tibble:::scoped_lifecycle_warnings() to temporarily display this warning on each occurrence.")
-  ))
+  signal(msg = msg)
 }
 deprecation_env <- new.env(parent = emptyenv())
 
