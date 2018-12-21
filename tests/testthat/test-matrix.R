@@ -7,6 +7,29 @@ test_that("correct rows and cols", {
   expect_equal(dim(out), c(2, 3))
 })
 
+test_that("correct rows and cols for 0 cols", {
+  x <- matrix(integer(), nrow = 2)
+  out <- as_tibble(x, .name_repair = "minimal")
+
+  expect_equal(dim(out), c(2, 0))
+})
+
+test_that("correct rows and cols for 0 cols and legacy naming", {
+  scoped_lifecycle_silence()
+
+  x <- matrix(integer(), nrow = 2)
+  out <- as_tibble(x)
+
+  expect_equal(dim(out), c(2, 0))
+})
+
+test_that("correct rows and cols for 0 rows", {
+  x <- matrix(integer(), ncol = 3)
+  out <- as_tibble(x, .name_repair = "minimal")
+
+  expect_equal(dim(out), c(0, 3))
+})
+
 test_that("preserves col names", {
   x <- matrix(1:4, nrow = 2)
   colnames(x) <- c("a", "b")

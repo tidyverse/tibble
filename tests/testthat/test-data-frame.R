@@ -108,6 +108,21 @@ test_that("tibble aliases", {
 
 # as_tibble -----------------------------------------------------------
 
+test_that("columns are recycled to common length", {
+  expect_identical(
+    as_tibble(list(x = 1, y = 1:3)),
+    tibble(x = rep(1, 3), y = 1:3)
+  )
+  expect_identical(
+    as_tibble(list(x = 1:3, y = 1)),
+    tibble(x = 1:3, y = rep(1, 3))
+  )
+  expect_identical(
+    as_tibble(list(x = character(), y = 1)),
+    tibble(x = character(), y = numeric())
+  )
+})
+
 test_that("columns must be same length", {
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3)),
