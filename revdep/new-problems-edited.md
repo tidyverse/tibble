@@ -91,6 +91,10 @@ Version: 0.3.1
 
 # frequencies
 
+- NOTIFIED: on Nov 28 via e-mail
+- NOTIFIED: https://github.com/DataInsightPartners/frequencies/issues/4.
+- Assumptions on column names.
+
 Version: 0.1.1
 
 ## Newly broken
@@ -145,6 +149,9 @@ Version: 0.1.1
 
 # MEIGOR
 
+- FAILED TO NOTIFY.
+- Unclear error.
+
 Version: 1.14.0
 
 ## Newly broken
@@ -169,6 +176,8 @@ Version: 1.14.0
     ```
 
 # metacoder
+
+- NOTIFIED: on Nov 28 via e-mail, and in private
 
 Version: 0.3.0.1
 
@@ -198,6 +207,8 @@ Version: 0.3.0.1
 
 # portalr
 
+- NOTIFIED: on Nov 28 via e-mail
+
 Version: 0.1.4
 
 ## Newly broken
@@ -225,6 +236,9 @@ Version: 0.1.4
     ```
 
 # Rchemcpp
+
+- FAILED TO NOTIFY.
+- Unclear error.
 
 Version: 2.18.0
 
@@ -313,6 +327,7 @@ ERROR: compilation failed for package ‘Rchemcpp’
 * removing ‘/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/Rchemcpp’
 
 ```
+
 ### CRAN
 
 ```
@@ -405,6 +420,9 @@ Version: 0.4.6
 
 # RCzechia
 
+- FAILED TO NOTIFY.
+- Unclear error.
+
 Version: 1.3.1
 
 ## Newly broken
@@ -431,6 +449,9 @@ Version: 1.3.1
     ```
 
 # readabs
+
+- NOTIFIED: https://github.com/zmeers/readabs/issues/1.
+- Assumption on column names.
 
 Version: 0.2.1
 
