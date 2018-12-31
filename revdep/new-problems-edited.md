@@ -151,6 +151,7 @@ Version: 0.1.1
 
 - FAILED TO NOTIFY.
 - Unclear error.
+- Error disappeared.
 
 Version: 1.14.0
 
@@ -238,7 +239,8 @@ Version: 0.1.4
 # Rchemcpp
 
 - FAILED TO NOTIFY.
-- Unclear error.
+- BIOCONDUCTOR.
+- Unclear error (installation problem with parallel builds?).
 
 Version: 2.18.0
 
@@ -421,6 +423,7 @@ Version: 0.4.6
 # RCzechia
 
 - FAILED TO NOTIFY.
+- NOTIFIED: https://github.com/jlacko/RCzechia/issues/10
 - Unclear error.
 
 Version: 1.3.1
