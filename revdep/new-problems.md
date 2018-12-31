@@ -112,31 +112,6 @@ Version: 0.1.1
       Execution halted
     ```
 
-# MEIGOR
-
-Version: 1.14.0
-
-## Newly broken
-
-*   checking running R code from vignettes ...
-    ```
-       ‘MEIGOR-vignette.Rnw’ using ‘UTF-8’ ... failed
-     ERROR
-    Errors in running code in vignettes:
-    when running code in ‘MEIGOR-vignette.Rnw’
-      ...
-    Number of diverse solutions automatically calculated: 50 
-    Initial Pop: NFunEvals: 57 Bestf: 42760.3 CPUTime: 0.352 Mean: 59271.55 
-    Iteration: 1 NFunEvals: 127 Bestf: 42757 CPUTime: 0.779 Mean: 42924.56 
-    Call local solver: NL2SOL 
-    Initial point function value: 42757 
-    fitting parameter ‘x’ without any variables
-    
-      When sourcing ‘MEIGOR-vignette.R’:
-    Error: singular gradient matrix at initial parameter estimates
-    Execution halted
-    ```
-
 # metacoder
 
 Version: 0.3.0.1
@@ -199,10 +174,56 @@ Version: 2.18.0
 
 ## Newly broken
 
-*   checking whether package ‘Rchemcpp’ can be installed ... ERROR
+*   checking PDF version of manual without hyperrefs or index ... ERROR
     ```
-    Installation failed.
-    See ‘/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00install.out’ for details.
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /tmp/RtmpIOQmiB/Rd2pdfce2f406f3d1a'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 15.8Mb
+      sub-directories of 1Mb or more:
+        extdata   2.3Mb
+        libs     12.2Mb
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    ...
+    
+    0 molecules pairs were orthogonal
+    0 of them had a different biological activity
+    0 of them had unknown biological activity
+    
+    Attaching package: ‘apcluster’
+    
+    The following object is masked from ‘package:stats’:
+    
+        heatmap
+    
+    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
+      error in running command
+    Warning in system2(command, args, env = env, stdout = outfile, stderr = errfile,  :
+      error in running command
+    Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+      Running 'texi2dvi' on 'Rchemcpp.tex' failed.
+    Messages:
+    sh: 1: /usr/bin/texi2dvi: not found
+    Calls: buildVignettes -> texi2pdf -> texi2dvi
+    Execution halted
     ```
 
 ## Installation
@@ -212,143 +233,68 @@ Version: 2.18.0
 ```
 * installing *source* package ‘Rchemcpp’ ...
 ** libs
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o constant.o constant.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o descriptor.o descriptor.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o chemcpp.o chemcpp.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o jlpioutils.o jlpioutils.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o elements.o elements.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o atom.o atom.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o datacontainer.o datacontainer.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeutils.o moleculeutils.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o molecule.o molecule.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeset.o moleculeset.cpp
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpFPDR03/checklib57cf544072e5/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
-g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
-.//libchemcpp.so: file not recognized: File truncated
-collect2: error: ld returned 1 exit status
-/usr/share/R/share/make/shlib.mk:6: recipe for target 'Rchemcpp.so' failed
-make: *** [Rchemcpp.so] Error 1
-make: *** Waiting for unfinished jobs....
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -shared -o ../../libchemcpp.dll -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
-make[1]: Leaving directory '/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-ERROR: compilation failed for package ‘Rchemcpp’
-* removing ‘/tmp/RtmpFPDR03/file57cf25032e72/Rchemcpp.Rcheck/Rchemcpp’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘Rchemcpp’ ...
-** libs
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o constant.o constant.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o chemcpp.o chemcpp.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o descriptor.o descriptor.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o jlpioutils.o jlpioutils.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o elements.o elements.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o atom.o atom.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o datacontainer.o datacontainer.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeutils.o moleculeutils.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o molecule.o molecule.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeset.o moleculeset.cpp
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-make[1]: Entering directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
 g++  -shared -o ../../libchemcpp.dll -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
-make[1]: Leaving directory '/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
-g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpXYSGd2/checklib375b401ab61b/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
-g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
-installing to /tmp/RtmpXYSGd2/file375b7cd781a4/Rchemcpp.Rcheck/Rchemcpp/libs
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc84b12c7475d/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
+g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
+installing to /tmp/RtmpTTQeks/filec84b47603712/Rchemcpp.Rcheck/Rchemcpp/libs
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
@@ -363,6 +309,81 @@ code for methods in class “Rcpp_Rmolecule” was not checked for suspicious fi
 code for methods in class “Rcpp_Rmoleculeset” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
 code for methods in class “Rcpp_Rmoleculeset” was not checked for suspicious field assignments (recommended package ‘codetools’ not available?)
 * DONE (Rchemcpp)
+
+```
+### CRAN
+
+```
+* installing *source* package ‘Rchemcpp’ ...
+** libs
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o constant.o constant.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o descriptor.o descriptor.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o chemcpp.o chemcpp.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o cerror.o cerror.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o node.o node.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o kcfmolecule.o kcfmolecule.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o ring.o ring.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o jlpioutils.o jlpioutils.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o bond.o bond.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o stringutils.o stringutils.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o elements.o elements.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o atom.o atom.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o datacontainer.o datacontainer.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeutils.o moleculeutils.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Relements.cpp -o Relements.o
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o molecule.o molecule.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrumhelper.cpp -o spectrumhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c subtreehelper.cpp -o subtreehelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c spectrum3Dhelper.cpp -o spectrum3Dhelper.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmolecule.cpp -o Rmolecule.o
+g++  -I"/usr/share/R/include" -DNDEBUG -I./chemcpp/src -I"/tmp/RtmpTTQeks/checklibc8315e2f6e8f/Rcpp/include"    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rmoleculeset.cpp -o Rmoleculeset.o
+g++ -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o Rchemcpp.so Relements.o Rmolecule.o Rmoleculeset.o spectrum3Dhelper.o spectrumhelper.o subtreehelper.o -L./ -lchemcpp -Wl,-rpath,/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/Rchemcpp/libs -L/usr/lib/R/lib -lR
+/usr/bin/ld: cannot find -lchemcpp
+collect2: error: ld returned 1 exit status
+/usr/share/R/share/make/shlib.mk:6: recipe for target 'Rchemcpp.so' failed
+make: *** [Rchemcpp.so] Error 1
+make: *** Waiting for unfinished jobs....
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/   -c -o moleculeset.o moleculeset.cpp
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.so -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+make[1]: Entering directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+g++  -shared -o ../../libchemcpp.dll -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -w -fPIC -I../src/ constant.o node.o atom.o bond.o cerror.o chemcpp.o datacontainer.o descriptor.o elements.o jlpioutils.o kcfmolecule.o molecule.o moleculeset.o moleculeutils.o ring.o stringutils.o
+make[1]: Leaving directory '/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/00_pkg_src/Rchemcpp/src/chemcpp/src'
+ERROR: compilation failed for package ‘Rchemcpp’
+* removing ‘/tmp/RtmpTTQeks/filec8317c7048fa/Rchemcpp.Rcheck/Rchemcpp’
 
 ```
 # RCzechia
@@ -458,7 +479,7 @@ Version: 1.0.4
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘flowCore::view’ by ‘tibble::view’ when loading ‘Sconify’
-    See ‘/tmp/RtmpFPDR03/file57f97feb9f60/Sconify.Rcheck/00install.out’ for details.
+    See ‘/tmp/RtmpTTQeks/filec8416703927f/Sconify.Rcheck/00install.out’ for details.
     ```
 
 # simTool
