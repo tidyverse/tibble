@@ -37,9 +37,6 @@ Suggests:
     testthat (>= 2.0.1),
     withr (>= 2.1.2)
 VignetteBuilder: knitr
-Remotes: 
-    brodieG/fansi@rc,
-    r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd"))
