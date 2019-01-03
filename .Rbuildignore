@@ -18,3 +18,4 @@
 ^tic\.R$
 ^\.github$
 ^\.drake$
+^adhoc$
