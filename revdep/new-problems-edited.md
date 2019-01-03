@@ -424,6 +424,7 @@ Version: 0.4.6
 
 - FAILED TO NOTIFY.
 - NOTIFIED: https://github.com/jlacko/RCzechia/issues/10
+- PATCH RELEASE INCOMING.
 - Unclear error.
 
 Version: 1.3.1
@@ -619,6 +620,7 @@ Version: 0.3.1
 
 - NOTIFIED: on Nov 28 via e-mail, and in private
 - More permissive `as_tibble()` implementation in a corner case
+- UPDATED: on Jan 2, now 0.3.2.
 
 ## Newly broken
 
