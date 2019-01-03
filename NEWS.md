@@ -20,7 +20,7 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
-- Calling `as_tibble()` on a vector now warns once per session.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
+- Calling `as_tibble()` on a vector now warns once per session.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble, or `enframe()` for converting a named vector to a two-column tibble.
 
 - `data_frame()` and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
 
