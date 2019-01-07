@@ -56,7 +56,7 @@ navbar:
     href: https://github.com/tidyverse/tibble
 
 development:
-  mode: devel
+  mode: auto
 
 authors:
   Kirill Müller:
