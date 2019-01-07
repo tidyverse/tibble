@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Coerce lists and matrices to data frames — as_tibble • tibble</title>
+<title>Coerce lists, matrices, and more to data frames — as_tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -29,12 +29,24 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
-<meta property="og:title" content="Coerce lists and matrices to data frames — as_tibble" />
+<meta property="og:title" content="Coerce lists, matrices, and more to data frames — as_tibble" />
 
-<meta property="og:description" content="as.data.frame() is effectively a thin wrapper around data.frame,
-and hence is rather slow (because it calls data.frame() on each element
-before cbinding together). as_tibble is a new S3 generic
-with more efficient methods for matrices and data frames." />
+<meta property="og:description" content="
+as_tibble() turns an existing object, such as a data frame, list, or
+matrix, into a so-called tibble, a data frame with class tbl_df. This is
+in contrast with tibble(), which builds a tibble from individual columns.
+as_tibble() is to tibble() as base::as.data.frame() is to
+base::data.frame().
+as_tibble() is an S3 generic, with methods for:
+data.frame: Thin wrapper around the list method
+that implements tibble's treatment of rownames.
+list
+matrix, poly,
+ts, table
+Default: An atomic vector is first coerced to a list and, unlike
+base::as.data.frame(), the returned tibble has one column per element.
+Other inputs are first coerced with base::as.data.frame().
+" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -77,7 +89,7 @@ with more efficient methods for matrices and data frames." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -122,36 +134,50 @@ with more efficient methods for matrices and data frames." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Coerce lists and matrices to data frames</h1>
+    <h1>Coerce lists, matrices, and more to data frames</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/as_tibble.R'><code>R/as_tibble.R</code></a></small>
     <div class="hidden name"><code>as_tibble.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>as.data.frame()</code> is effectively a thin wrapper around <code>data.frame</code>,
-and hence is rather slow (because it calls <code>data.frame()</code> on each element
-before cbinding together). <code>as_tibble</code> is a new S3 generic
-with more efficient methods for matrices and data frames.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
+<p><code>as_tibble()</code> turns an existing object, such as a data frame, list, or
+matrix, into a so-called tibble, a data frame with class <code><a href='tbl_df-class.html'>tbl_df</a></code>. This is
+in contrast with <code><a href='tibble.html'>tibble()</a></code>, which builds a tibble from individual columns.
+<code>as_tibble()</code> is to <code><a href='tibble.html'>tibble()</a></code> as <code><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>base::as.data.frame()</a></code> is to
+<code><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code>.</p>
+<p><code>as_tibble()</code> is an S3 generic, with methods for:</p><ul>
+<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></code>: Thin wrapper around the <code>list</code> method
+that implements tibble's treatment of <a href='rownames.html'>rownames</a>.</p></li>
+<li><p>list</p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/methods/topics/StructureClasses'>matrix</a></code>, <code><a href='https://www.rdocumentation.org/packages/stats/topics/poly'>poly</a></code>,
+<code><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/table'>table</a></code></p></li>
+<li><p>Default: An atomic vector is first coerced to a list and, unlike
+<code><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>base::as.data.frame()</a></code>, the returned tibble has one column per element.
+Other inputs are first coerced with <code><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>base::as.data.frame()</a></code>.</p></li>
+</ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for tbl_df</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"check_unique"</span>,
+  <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>),
+  <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw pkg'>pkgconfig</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/pkgconfig/topics/get_config'>get_config</a></span>(<span class='st'>"tibble::rownames"</span>, <span class='kw'>NULL</span>))
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>),
+  <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw pkg'>pkgconfig</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/pkgconfig/topics/get_config'>get_config</a></span>(<span class='st'>"tibble::rownames"</span>, <span class='kw'>NULL</span>))
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>))
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for table</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='st'>"n"</span>, <span class='no'>...</span>)
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>`_n`</span> <span class='kw'>=</span> <span class='st'>"n"</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>`_n`</span>)
 
 <span class='co'># S3 method for NULL</span>
 <span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -164,26 +190,47 @@ with more efficient methods for matrices and data frames.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A list. Each element of the list must have the same length.</p></td>
+      <td><p>A data frame, list, matrix, or other object that could reasonably be
+coerced to a tibble.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Other arguments passed on to individual methods.</p></td>
     </tr>
     <tr>
-      <th>validate</th>
-      <td><p>When <code>TRUE</code>, verifies that the input is a valid data
-frame (i.e. all columns are named, and are 1d vectors or lists). You may
-want to suppress this when you know that you already have a valid data
-frame and you want to save some time, or to explicitly enable it
-if you have a tibble that you want to re-check.</p></td>
+      <th>.rows</th>
+      <td><p>The number of rows, useful to create a 0-column tibble or
+just as an additional check.</p></td>
+    </tr>
+    <tr>
+      <th>.name_repair</th>
+      <td><p>Treatment of problematic column names:</p><ul>
+<li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
+<li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
+<li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
+<code>unique</code>,</p></li>
+<li><p><code>"universal"</code>: Make the names <code>unique</code> and syntactic</p></li>
+<li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
+for names in the style of base R).</p></li>
+<li><p>A purrr-style anonymous function, see <code><a href='https://www.rdocumentation.org/packages/rlang/topics/as_function'>rlang::as_function()</a></code></p></li>
+</ul>
+
+<p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
+to enforce them.</p></td>
     </tr>
     <tr>
       <th>rownames</th>
-      <td><p>If <code>NULL</code>, remove row names (default for matrices, may become
-default for data frames in the future). If <code>NA</code>, keep row names (current
-default for data frames). Otherwise, the name of the new column that will
-contain the existing row names.</p></td>
+      <td><p>How to treat existing row names of a data frame or matrix:</p><ul>
+<li><p><code>NULL</code>: remove row names. This is the default.</p></li>
+<li><p><code>NA</code>: keep row names.</p></li>
+<li><p>A string: the name of a new column. Existing rownames are transferred
+into this column and the <code>row.names</code> attribute is deleted.
+Read more in <a href='rownames.html'>rownames</a>.</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>_n, validate</th>
+      <td><p>For compatibility only, do not use for new code.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -191,42 +238,63 @@ contain the existing row names.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="row-names"><a class="anchor" href="#row-names"></a>Row names</h2>
 
-    <p>This is an S3 generic. tibble includes methods for data frames (adds tbl_df
-classes), tibbles (returns unchanged input), lists, matrices, and tables.
-Other types are first coerced via <code>as.data.frame()</code> with
-<code>stringsAsFactors = FALSE</code>.</p>
-<p><code>as_data_frame</code> and <code>as.tibble</code> are aliases.</p>
+    
+    <p>The default behavior is to silently remove row names.</p>
+<p>New code should explicitly convert row names to a new column using the
+<code>rownames</code> argument.</p>
+<p>For existing code that relies on the retention of row names, call
+<code><a href='https://www.rdocumentation.org/packages/pkgconfig/topics/set_config'>pkgconfig::set_config("tibble::rownames" = NA)</a></code> in your script or in your
+package's <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-hooks'>.onLoad()</a></code>  function.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> constructs a tibble from individual columns. <code><a href='enframe.html'>enframe()</a></code>
+converts a named vector to a tibble with a column of names and column of
+values. <a href='name-repair.html'>name-repair</a> documents the details of name repair.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>500</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>500</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>500</span>:<span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>500</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>500</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>500</span>:<span class='fl'>1</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>l</span>)
 
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>50</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-<span class='fu'>colnames</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>50</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
-<span class='co'># as_tibble is considerably simpler than as.data.frame</span>
-<span class='co'># making it more suitable for use when you have things that are</span>
-<span class='co'># lists</span></div><span class='co'># NOT RUN {</span>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"microbenchmark"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>l2</span> <span class='kw'>&lt;-</span> <span class='fu'>replicate</span>(<span class='fl'>26</span>, <span class='fu'>sample</span>(<span class='no'>letters</span>), <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  <span class='fu'>names</span>(<span class='no'>l2</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
-  <span class='kw pkg'>microbenchmark</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark'>microbenchmark</a></span>(
-    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>),
+<span class='fu'>as_tibble</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; `..1`</span>
+#&gt; <span class='message'>* `` -&gt; `..2`</span>
+#&gt; <span class='message'>* `` -&gt; `..3`</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;     ..1   ..2   ..3
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     2     3</div><div class='input'>
+<span class='co'># Prefer enframe() for vectors</span>
+<span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;    name value
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     1
+#&gt; 2     2     2
+#&gt; 3     3     3</div><div class='input'><span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt;   value
+#&gt;   &lt;int&gt;
+#&gt; 1     1
+#&gt; 2     2
+#&gt; 3     3</div><div class='input'>
+# For list-like inputs, `as_tibble()` is considerably simpler than
+# `as.data.frame()` and hence faster
+</div><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"bench"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='no'>l2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>replicate</a></span>(<span class='fl'>26</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(<span class='no'>letters</span>), <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>l2</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
+  <span class='kw pkg'>bench</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/bench/topics/mark'>mark</a></span>(
+    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>),
+    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>),
+    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>),
     <span class='fu'>as_tibble</span>(<span class='no'>l2</span>),
-    <span class='fu'>as.data.frame</span>(<span class='no'>l2</span>)
-  )
-}
-
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"microbenchmark"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>runif</span>(<span class='fl'>26</span> * <span class='fl'>100</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>26</span>)
-  <span class='fu'>colnames</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
-  <span class='kw pkg'>microbenchmark</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark'>microbenchmark</a></span>(
-    <span class='fu'>as_tibble</span>(<span class='no'>m</span>),
-    <span class='fu'>as.data.frame</span>(<span class='no'>m</span>)
+    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>l2</span>),
+    <span class='kw'>check</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
   )
 }
 <span class='co'># }</span></pre>
@@ -236,7 +304,9 @@ Other types are first coerced via <code>as.data.frame()</code> with
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#row-names">Row names</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

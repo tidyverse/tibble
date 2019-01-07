@@ -42,7 +42,7 @@
         <a class="navbar-brand" href="index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -97,27 +97,27 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <code>print()</code> method which makes them easier to use with large datasets containing complex objects.</p>
+<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <code><a href="https://www.rdocumentation.org/packages/base/topics/print">print()</a></code> method which makes them easier to use with large datasets containing complex objects.</p>
 <p>If you are new to tibbles, the best place to start is the <a href="http://r4ds.had.co.nz/tibbles.html">tibbles chapter</a> in <em>R for data science</em>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># The easiest way to get tibble is to install the whole tidyverse:</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"tidyverse"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Alternatively, install just tibble:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">install.packages</span>(<span class="st">"tibble"</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"tibble"</span>)</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># Or the the development version from GitHub:</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidyverse/tibble"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-9" data-line-number="9">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"tidyverse/tibble"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Create a tibble from an existing object with <code><a href="reference/as_tibble.html">as_tibble()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/as_tibble.html">as_tibble</a></span>(iris)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
@@ -132,7 +132,7 @@
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa </span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa </span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa </span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; # ... with 140 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; # … with 140 more rows</span></a></code></pre></div>
 <p>This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.</p>
 <p>You can also create a new tibble from column vectors with <code><a href="reference/tibble.html">tibble()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">1</span>, <span class="dt">z =</span> x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y)</a>
@@ -144,7 +144,7 @@
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 3     3     1    10</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 4     4     1    17</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 5     5     1    26</span></a></code></pre></div>
-<p><code><a href="reference/tibble.html">tibble()</a></code> does much less than <code>data.frame()</code>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <code>row.names()</code>. You can read more about these features in the vignette, <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
+<p><code><a href="reference/tibble.html">tibble()</a></code> does much less than <code><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame()</a></code>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <code><a href="https://www.rdocumentation.org/packages/base/topics/row.names">row.names()</a></code>. You can read more about these features in the vignette, <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
 <p>You can define a tibble row-by-row with <code><a href="reference/tribble.html">tribble()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/tribble.html">tribble</a></span>(</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="op">~</span>x, <span class="op">~</span>y,  <span class="op">~</span>z,</a>
@@ -200,6 +200,7 @@
 <li><a href="https://ci.appveyor.com/project/tidyverse/tibble"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/gh/tidyverse/tibble"><img src="https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://cran.r-project.org/package=tibble"><img src="https://www.r-pkg.org/badges/version/tibble" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a></li>
 </ul>
 </div>
 </div>

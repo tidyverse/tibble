@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test if the object is a tibble — is_tibble • tibble</title>
+<title>Deprecated functions — deprecated • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -29,10 +29,14 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
-<meta property="og:title" content="Test if the object is a tibble — is_tibble" />
+<meta property="og:title" content="Deprecated functions — deprecated" />
 
-<meta property="og:description" content="This function returns TRUE for tibbles or subclasses thereof,
-and FALSE for all other objects, including regular data frames." />
+<meta property="og:description" content="
+Use tibble() instead of data_frame().
+Use quasiquotation instead of tibble_(), data_frame_(), and lst_().
+Use as_tibble() instead of as_data_frame() or as.tibble(), but mind the
+new signature and semantics.
+Use tribble() instead of frame_data()." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -120,42 +124,42 @@ and FALSE for all other objects, including regular data frames." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test if the object is a tibble</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tibble.R'><code>R/tibble.R</code></a></small>
-    <div class="hidden name"><code>is_tibble.Rd</code></div>
+    <h1>Deprecated functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function returns <code>TRUE</code> for tibbles or subclasses thereof,
-and <code>FALSE</code> for all other objects, including regular data frames.</p>
+    <p><img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></p>
+<p>Use <code><a href='tibble.html'>tibble()</a></code> instead of <code>data_frame()</code>.</p>
+<p>Use quasiquotation instead of <code>tibble_()</code>, <code>data_frame_()</code>, and <code>lst_()</code>.</p>
+<p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> instead of <code>as_data_frame()</code> or <code>as.tibble()</code>, but mind the
+new signature and semantics.</p>
+<p>Use <code><a href='tribble.html'>tribble()</a></code> instead of <code>frame_data()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is_tibble</span>(<span class='no'>x</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An object</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='fu'>data_frame</span>(<span class='no'>...</span>)
 
-    <p><code>TRUE</code> if the object inherits from the <code>tbl_df</code> class.</p>
-    
+<span class='fu'>tibble_</span>(<span class='no'>xs</span>)
+
+<span class='fu'>data_frame_</span>(<span class='no'>xs</span>)
+
+<span class='fu'>lst_</span>(<span class='no'>xs</span>)
+
+<span class='fu'>as_data_frame</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>as.tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>frame_data</span>(<span class='no'>...</span>)</pre>
+        
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
