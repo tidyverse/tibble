@@ -166,7 +166,7 @@ are recycled.</p></li>
       <th>...</th>
       <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created elements. These arguments are
-processed with <code><a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
+processed with <code><a href='https://www.rdocumentation.org/packages/rlang/topics/quotation'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
 unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p></td>
     </tr>
     <tr>
@@ -184,7 +184,7 @@ just as an additional check.</p></td>
 <li><p><code>"universal"</code>: Make the names <code>unique</code> and syntactic</p></li>
 <li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
 for names in the style of base R).</p></li>
-<li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
+<li><p>A purrr-style anonymous function, see <code><a href='https://www.rdocumentation.org/packages/rlang/topics/as_function'>rlang::as_function()</a></code></p></li>
 </ul>
 
 <p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
@@ -202,7 +202,7 @@ frame, i.e. it has class <code>data.frame</code>.</p>
 
     <div class='dont-index'><p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
 <code><a href='enframe.html'>enframe()</a></code> to convert a named vector into tibble. Name repair is detailed
-in <a href='name-repair.html'>name-repair</a>. <code><a href='https://rlang.r-lib.org/reference/tidy-dots.html'>rlang::list2()</a></code> provides more details on tidy dots
+in <a href='name-repair.html'>name-repair</a>. <code><a href='https://www.rdocumentation.org/packages/rlang/topics/tidy-dots'>rlang::list2()</a></code> provides more details on tidy dots
 semantics, i.e. exactly how quasiquotation works for the <code>...</code> argument.</p></div>
     
 
@@ -344,7 +344,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     3</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quosures and expressions:</span>
-<span class='fu'>tibble</span>(!!!<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/quotation.html'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'>tibble</span>(!!!<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
 #&gt;  1     1     2
