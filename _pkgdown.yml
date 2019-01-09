@@ -12,16 +12,24 @@ home:
 reference:
 - title: Tibbles
   contents:
-  - tibble-package
+  - `tibble-package`
   - tibble
-  - ends_with("ibble")
-  - enframe
-  - has_name
-  - tibble-options
+  - formatting
+  - `tibble-options`
+  - tribble
   - -reexports
+
+- title: Coercion
+  - as_tibble
+  - `name-repair`
+  - new_tibble
+  - validate_tibble
+  - enframe
+  - deframe
 
 - title: Manipulation
   contents:
+  - subsetting
   - add_row
   - add_column
 
