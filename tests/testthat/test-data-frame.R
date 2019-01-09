@@ -322,6 +322,19 @@ test_that("as_tibble() implements custom name repair", {
   expect_identical(invalid_df_purrr, invalid_df)
 })
 
+test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
+  scoped_lifecycle_silence()
+
+  expect_identical(
+    as_tibble(diag(3), validate = TRUE),
+    tibble(
+      V1 = c(1, 0, 0),
+      V2 = c(0, 1, 0),
+      V3 = c(0, 0, 1)
+    )
+  )
+})
+
 test_that("as_tibble.matrix() supports .name_repair", {
   scoped_lifecycle_errors() # When removing this, double-check error messages below.
 
