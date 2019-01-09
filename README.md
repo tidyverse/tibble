@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tibble <img src="man/figures/logo.png" align="right" />
+# tibble <img src="man/figures/logo.svg" align="right" />
 
 [![Build
 Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble)
