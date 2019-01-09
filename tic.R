@@ -1,6 +1,6 @@
 add_package_checks()
 
-if (Sys.getenv("BUILD_PKGDOWN") != "") {
+if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
   # - `ci()$is_tag()`: Only for tags, not for branches
