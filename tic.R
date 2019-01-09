@@ -13,6 +13,7 @@ if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() == "master") {
     add_step(step_setup_ssh())
 
   get_stage("deploy") %>%
+    add_step(step_setup_push_deploy(path = "docs", branch = "gh-pages")) %>%
     add_step(step_build_pkgdown()) %>%
-    add_step(step_push_deploy(path = "docs", branch = "gh-pages"))
+    add_step(step_do_push_deploy(path = "docs"))
 }
