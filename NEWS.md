@@ -1,3 +1,10 @@
+# tibble 2.0.0.9000
+
+- `as_tibble.matrix(validate = TRUE)` works again, with a lifecycle warning (#558).
+
+- Replace `new_list_along()` by `rep_along()` to support rlang 0.3.1 (#557, @lionel-).
+
+
 # tibble 2.0.0
 
 ## Breaking changes
