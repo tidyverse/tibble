@@ -31,7 +31,7 @@
 
 <meta property="og:title" content="Changelog" />
 
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -72,7 +72,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -121,6 +121,15 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-2-0-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#tibble-2-0-0-9000" class="anchor"></a>tibble 2.0.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li><p><code><a href="../reference/as_tibble.html">as_tibble.matrix(validate = TRUE)</a></code> works again, with a lifecycle warning (<a href='https://github.com/tidyverse/tibble/issues/558'>#558</a>).</p></li>
+<li><p>Replace <code>new_list_along()</code> by <code>rep_along()</code> to support rlang 0.3.1 (<a href='https://github.com/tidyverse/tibble/issues/557'>#557</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
+</ul>
+</div>
     <div id="tibble-2-0-0" class="section level1">
 <h1 class="page-header">
 <a href="#tibble-2-0-0" class="anchor"></a>tibble 2.0.0<small> 2019-01-04 </small>
@@ -241,7 +250,7 @@
 <li><p>Avoid use of <code><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop()</a></code> in examples if packages are not installed (<a href='https://github.com/tidyverse/tibble/issues/453'>#453</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
 <li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace()</a></code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> checks column length only once (<a href='https://github.com/tidyverse/tibble/issues/365'>#365</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
-<li><p>Using <code><a href="https://www.rdocumentation.org/packages/rlang/topics/tidy-dots">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
+<li><p>Using <code><a href="https://rlang.r-lib.org/reference/tidy-dots.html">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
 </ul>
 </div>
 </div>
@@ -322,7 +331,7 @@
 <h2 class="hasAnchor">
 <a href="#internal-changes" class="anchor"></a>Internal changes</h2>
 <ul>
-<li>Reexporting <code><a href="https://www.rdocumentation.org/packages/rlang/topics/has_name">has_name()</a></code> from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.</li>
+<li>Reexporting <code><a href="https://rlang.r-lib.org/reference/has_name.html">has_name()</a></code> from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.</li>
 <li>Compatible with R 3.1 (<a href='https://github.com/tidyverse/tibble/issues/323'>#323</a>).</li>
 <li>Remove Rcpp dependency (<a href='https://github.com/tidyverse/tibble/issues/313'>#313</a>, <a href='https://github.com/patperry'>@patperry</a>).</li>
 </ul>
@@ -602,7 +611,7 @@
 <h2 class="hasAnchor">
 <a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
-<li>New <code><a href="https://www.rdocumentation.org/packages/rlang/topics/has_name">has_name()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/102'>#102</a>).</li>
+<li>New <code><a href="https://rlang.r-lib.org/reference/has_name.html">has_name()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/102'>#102</a>).</li>
 <li>Prefer <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> over <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">as_data_frame()</a></code> in code and documentation (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
 <li>New <code><a href="../reference/is.tibble.html">is.tibble()</a></code> and <code><a href="../reference/is_tibble.html">is_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/79'>#79</a>).</li>
 <li>New <code><a href="../reference/enframe.html">enframe()</a></code> that converts vectors to two-column tibbles (<a href='https://github.com/tidyverse/tibble/issues/31'>#31</a>, <a href='https://github.com/tidyverse/tibble/issues/74'>#74</a>).</li>
@@ -733,6 +742,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tibble-2-0-0-9000">2.0.0.9000</a></li>
         <li><a href="#tibble-2-0-0">2.0.0</a></li>
         <li><a href="#tibble-1-4-2">1.4.2</a></li>
         <li><a href="#tibble-1-4-1">1.4.1</a></li>

@@ -12,7 +12,7 @@
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Extending tibble">
 <meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -42,7 +42,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -492,7 +492,7 @@
 </ul>
 <p>For this it is helpful to create your own expectation function. Use the tidy evaluation framework to make sure that construction and printing happens at the right time:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">expect_known_latlon_display &lt;-<span class="st"> </span><span class="cf">function</span>(x, file_base) {</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rlang/topics/quotation">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))</a>
 <a class="sourceLine" id="cb46-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
 <a class="sourceLine" id="cb46-4" data-line-number="4">    <span class="op">!!</span><span class="st"> </span>quo,</a>
 <a class="sourceLine" id="cb46-5" data-line-number="5">    <span class="dt">file =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(file_base, <span class="st">".txt"</span>)</a>
