@@ -4,4 +4,7 @@ pkgdown_sha: ~
 articles:
   extending: extending.html
   tibble: tibble.html
+urls:
+  reference: https://tibble.tidyverse.org/reference
+  article: https://tibble.tidyverse.org/articles
 
