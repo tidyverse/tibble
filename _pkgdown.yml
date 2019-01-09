@@ -12,16 +12,16 @@ home:
 reference:
 - title: Tibbles
   contents:
-  - `tibble-package`
+  - "tibble-package"
   - tibble
   - formatting
-  - `tibble-options`
+  - "tibble-options"
   - tribble
   - -reexports
 
 - title: Coercion
   - as_tibble
-  - `name-repair`
+  - "name-repair"
   - new_tibble
   - validate_tibble
   - enframe
