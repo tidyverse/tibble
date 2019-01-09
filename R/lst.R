@@ -49,8 +49,7 @@ lst_quos <- function(xs, transform = function(x, i) x) {
   col_names <- names2(xs)
   lengths <- rep_along(xs, 0L)
 
-  output <- rep_along(xs, list(NULL))
-  names(output) <- names2(output)
+  output <- rep_named(rep_along(xs, ""), list(NULL))
 
   for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
