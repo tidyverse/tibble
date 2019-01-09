@@ -14,14 +14,15 @@ as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
   "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
+\method{as_tibble}{data.frame}(x, validate = NULL, ..., .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
+\method{as_tibble}{list}(x, validate = NULL, ..., .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"))
 
-\method{as_tibble}{matrix}(x, ..., .name_repair = NULL)
+\method{as_tibble}{matrix}(x, ..., validate = NULL,
+  .name_repair = NULL)
 
 \method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`)
 
