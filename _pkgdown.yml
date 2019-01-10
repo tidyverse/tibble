@@ -20,6 +20,7 @@ reference:
   - -reexports
 
 - title: Coercion
+  contents:
   - as_tibble
   - "name-repair"
   - new_tibble
