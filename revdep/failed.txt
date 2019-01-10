@@ -12,8 +12,6 @@ c_noaastormevents_new
 c_prioritizr
 c_prioritizr_new
 c_prioritizr_old
-c_STRMPS
-c_STRMPS_old
 d_bigrf
 d_glmmADMB
 d_gurobi
