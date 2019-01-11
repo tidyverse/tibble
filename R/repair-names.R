@@ -1,6 +1,8 @@
 #' Repair the names of a vector
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' tibble deals with a few levels of name repair:
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
 #'     an unnamed element is `""` and never `NA`. Tibbles created by the tibble
