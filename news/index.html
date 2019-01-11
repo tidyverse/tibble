@@ -72,7 +72,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
         </div>
       </div>
     </div>
@@ -121,6 +121,16 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-2-0-1" class="section level1">
+<h1 class="page-header">
+<a href="#tibble-2-0-1" class="anchor"></a>tibble 2.0.1<small> Unreleased </small>
+</h1>
+<ul>
+<li><p>tibble names can again be set to <code>NULL</code> within RStudio, as some R routines within RStudio relied on this behaviour (<a href='https://github.com/tidyverse/tibble/issues/563'>#563</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>).</p></li>
+<li><p><code><a href="../reference/as_tibble.html">as_tibble.matrix(validate = TRUE)</a></code> works again, with a lifecycle warning (<a href='https://github.com/tidyverse/tibble/issues/558'>#558</a>).</p></li>
+<li><p>Replace <code>new_list_along()</code> by <code>rep_along()</code> to support rlang 0.3.1 (<a href='https://github.com/tidyverse/tibble/issues/557'>#557</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
+</ul>
+</div>
     <div id="tibble-2-0-0" class="section level1">
 <h1 class="page-header">
 <a href="#tibble-2-0-0" class="anchor"></a>tibble 2.0.0<small> 2019-01-04 </small>
@@ -733,6 +743,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tibble-2-0-1">2.0.1</a></li>
         <li><a href="#tibble-2-0-0">2.0.0</a></li>
         <li><a href="#tibble-1-4-2">1.4.2</a></li>
         <li><a href="#tibble-1-4-1">1.4.1</a></li>
