@@ -1,3 +1,8 @@
+# tibble 2.0.0.9001
+
+- tibble names can again be set to `NULL` within RStudio, as some R routines within RStudio relied on this behaviour (#563, @kevinushey).
+
+
 # tibble 2.0.0.9000
 
 - `as_tibble.matrix(validate = TRUE)` works again, with a lifecycle warning (#558).
