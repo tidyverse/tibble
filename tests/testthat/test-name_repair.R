@@ -147,11 +147,14 @@ test_that("names<-() and set_names() reject non-minimal names", {
 
   scoped_lifecycle_warnings()
 
-  expect_warning(
-    set_names(df, NULL),
-    error_names_must_be_non_null(),
-    fixed = TRUE
-  )
+  # https://github.com/tidyverse/tibble/issues/562
+  if (!is_rstudio()) {
+    expect_warning(
+      set_names(df, NULL),
+      error_names_must_be_non_null(),
+      fixed = TRUE
+    )
+  }
 
   expect_warning(
     `names<-`(df, NA),
