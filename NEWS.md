@@ -1,6 +1,6 @@
 # tibble 2.0.99.9000
 
-- Development of the 2.0.x series continues in the `r-2.0` branch.
+- Development of the 2.0.x series continues in the `r-2.0` branch. Documentation auto-generated from that branch is available at https://tibble.tidyverse.org/patch/.
 
 
 # tibble 2.0.1
