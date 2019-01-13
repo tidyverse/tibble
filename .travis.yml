@@ -29,6 +29,13 @@ dist: trusty
 cache: packages
 latex: false
 
+#stages: test, full
+stages:
+- name: test
+- name: full
+  if: branch = r-2.0
+
+#jobs
 jobs:
   include:
   - r: devel
