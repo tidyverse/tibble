@@ -1,3 +1,8 @@
+# tibble 2.0.99.9000
+
+- Development of the 2.0.x series continues in the `r-2.0` branch.
+
+
 # tibble 2.0.1
 
 - tibble names can again be set to `NULL` within RStudio, as some R routines within RStudio relied on this behaviour (#563, @kevinushey).
