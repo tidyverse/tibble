@@ -67,6 +67,7 @@ navbar:
     href: https://github.com/tidyverse/tibble
 
 development:
+  destination: patch
   mode: auto
 
 authors:
