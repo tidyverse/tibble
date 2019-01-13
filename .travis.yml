@@ -32,6 +32,8 @@ latex: false
 jobs:
   include:
   - r: devel
+    env:
+    - DEV_VERSIONS=TRUE
   - r: 3.1
   - stage: full
     os: osx
