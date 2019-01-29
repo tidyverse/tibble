@@ -180,55 +180,6 @@ repaired_names <- function(name,
   new_name
 }
 
-minimal_names <- function(name, n) {
-  if (is.null(name) && missing(n)) {
-    abort(error_name_length_required())
-  }
-  ## TODO: address scenarios where name is not NULL and n != length(name)?
-  new_name <- name %||% rep_len("", n)
-  new_name %|% ""
-}
-
-set_minimal_names <- function(x) {
-  new_names <- minimal_names(names(x), n = length(x))
-  set_names(x, new_names)
-}
-
-unique_names <- function(name, quiet = FALSE, transform = identity) {
-  min_name <- minimal_names(name)
-  naked_name <- strip_pos(min_name)
-  naked_is_empty <- (naked_name == "")
-
-  new_name <- transform(naked_name)
-
-  new_name <- append_pos(new_name, needs_suffix = naked_is_empty)
-
-  duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
-  new_name <- append_pos(new_name, duped_after)
-
-  if (!quiet) {
-    describe_repair(name, new_name)
-  }
-
-  new_name
-}
-
-set_unique_names <- function(x, quiet = FALSE) {
-  x <- set_minimal_names(x)
-  new_names <- unique_names(names(x), quiet = quiet)
-  set_names(x, new_names)
-}
-
-universal_names <- function(name, quiet = FALSE) {
-  unique_names(name, quiet = quiet, transform = make_syntactic)
-}
-
-set_universal_names <- function(x, quiet = FALSE) {
-  x <- set_minimal_names(x)
-  new_names <- universal_names(names(x), quiet = quiet)
-  set_names(x, new_names)
-}
-
 check_names_non_null <- function(name, abort = rlang::abort) {
   if (is.null(name)) {
     abort(error_names_must_be_non_null())
@@ -286,75 +237,6 @@ check_syntactic <- function(name) {
   }
 
   invisible(name)
-}
-
-check_syntactic_names <- function(x) {
-  check_syntactic(names(x))
-  invisible(x)
-}
-
-## makes each individual name syntactic
-## does not enforce unique-ness
-make_syntactic <- function(name) {
-  name[is.na(name)]       <- ""
-  name[name == ""]        <- "."
-  name[name == "..."]     <- "...."
-  name <- sub("^_", "._", name)
-
-  new_name <- make.names(name)
-
-  X_prefix <- grepl("^X", new_name) & !grepl("^X", name)
-  new_name[X_prefix] <- sub("^X", "", new_name[X_prefix])
-
-  dot_suffix <- which(new_name == paste0(name, "."))
-  new_name[dot_suffix] <- sub("^(.*)[.]$", ".\\1", new_name[dot_suffix])
-  ## illegal characters have been replaced with '.' via make.names()
-  ## however, we have:
-  ##   * declined its addition of 'X' prefixes
-  ##   * turned its '.' suffixes to '.' prefixes
-
-  regex <- paste0(
-    "^(?<leading_dots>[.]{0,2})",
-    "(?<numbers>[0-9]*)",
-    "(?<leftovers>[^0-9]?.*$)"
-  )
-
-  re <- re_match(new_name, pattern = regex)
-  needs_dots <- which(re$numbers != "")
-  needs_third_dot <- (re$leftovers[needs_dots] == "")
-  re$leading_dots[needs_dots] <- ifelse(needs_third_dot, "...", "..")
-  new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
-
-  new_name
-}
-
-append_pos <- function(name, needs_suffix) {
-  need_append_pos <- which(needs_suffix)
-  name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
-  name
-}
-
-strip_pos <- function(name) {
-  rx <- "[.][.][1-9][0-9]*$"
-  gsub(rx, "", name) %|% ""
-}
-
-describe_repair <- function(orig_name, name) {
-  stopifnot(length(orig_name) == length(name))
-
-  new_names <- name != minimal_names(orig_name)
-  if (any(new_names)) {
-    msg <- bullets(
-      "New names:",
-      paste0(
-        tick_if_needed(orig_name[new_names]),
-        " -> ",
-        tick_if_needed(name[new_names])
-      ),
-      .problem = ""
-    )
-    message(msg)
-  }
 }
 
 #' Retired functions for name repair
