@@ -91,8 +91,8 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
   .name_repair <- compat_name_repair(.name_repair, validate)
-
   old_rownames <- raw_rownames(x)
+
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
@@ -105,7 +105,16 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     result
   } else {
     if (is.na(old_rownames[[1]])) {
-      abort(error_as_tibble_needs_rownames())
+      #abort(error_as_tibble_needs_rownames())   # rm prior to merge #567
+      signal(paste0("Implicit rownames detected, moving to column: ", rownames),
+             "warning")
+      # clean up prior to merging #567
+      # alternatively, borrow this warning dispatch
+      # this ensures warning issued once per session
+      #signal_soft_deprecated(
+      #  paste0("Implicit rownames detected, moving to column: ", rownames)
+      #)
+      old_rownames <- rownames(result)
     }
     add_column(result, !!rownames := old_rownames, .before = 1L)
   }
@@ -212,6 +221,12 @@ guess_nrow <- function(lengths, .rows) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
+  # a matrix should throw an error if implicit rownames
+  # yet the `rownames` arg is passed via `...`
+  # clear comments prior to #567 merge
+  if (is.null(rownames(x)) && "rownames" %in% names(list(...))) {
+    abort(error_as_tibble_needs_rownames())
+  }
   m <- matrixToDataFrame(x)
   names <- colnames(x)
   if (is.null(.name_repair)) {
@@ -230,7 +245,7 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
     validate <- NULL
   }
   colnames(m) <- names
-  as_tibble(m, ..., validate = validate, .name_repair = .name_repair)
+  as_tibble.data.frame(m, ..., validate = validate, .name_repair = .name_repair)
 }
 
 #' @export

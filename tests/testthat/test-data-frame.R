@@ -478,11 +478,13 @@ test_that("as_tibble() can convert row names", {
   expect_identical(unclass(tbl_df), unclass(df))
 })
 
-test_that("as_tibble() throws an error when user turns missing row names into column", {
+#test_that("as_tibble() throws an error when user turns missing row names into column", {
+test_that("as_tibble() throws a warning when user turns implicit row names into column", {
   df <- data.frame(a = 1:3, b = 2:4)
-  expect_error(
+  expect_warning(
     as_tibble(df, rownames = "id"),
-    error_as_tibble_needs_rownames(),
+    #error_as_tibble_needs_rownames(),
+    "Implicit rownames detected, moving to column: id",
     fixed = TRUE
   )
 })
