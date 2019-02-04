@@ -218,10 +218,6 @@ error_tribble_non_rectangular <- function(cols, cells) {
   )
 }
 
-error_name_length_required <- function() {
-  "`n` must be specified, when the `names` attribute is `NULL`."
-}
-
 error_frame_matrix_list <- function(pos) {
   bullets(
     "All values in `frame_matrix()` must be atomic:",
