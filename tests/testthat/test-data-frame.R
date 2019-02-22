@@ -478,10 +478,31 @@ test_that("as_tibble() can convert row names", {
   expect_identical(unclass(tbl_df), unclass(df))
 })
 
+test_that("as_tibble() can convert row names for zero-row tibbles", {
+  df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])[0, ]
+
+  expect_identical(
+    as_tibble(df, rownames = NULL),
+    tibble(a = integer(), b = integer())
+  )
+  expect_identical(
+    as_tibble(df, rownames = "id"),
+    tibble(id = character(), a = integer(), b = integer())
+  )
+  tbl_df <- as_tibble(df, rownames = NA)
+  expect_identical(rownames(tbl_df), rownames(df))
+  expect_identical(unclass(tbl_df), unclass(df))
+})
+
 test_that("as_tibble() throws an error when user turns missing row names into column", {
   df <- data.frame(a = 1:3, b = 2:4)
   expect_error(
     as_tibble(df, rownames = "id"),
+    error_as_tibble_needs_rownames(),
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(df[0, ], rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
   )

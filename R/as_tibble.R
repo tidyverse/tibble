@@ -104,7 +104,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (is.na(old_rownames[[1]])) {
+    if (is.integer(old_rownames)) {
       abort(error_as_tibble_needs_rownames())
     }
     add_column(result, !!rownames := old_rownames, .before = 1L)
