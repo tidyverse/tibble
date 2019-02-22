@@ -33,7 +33,7 @@ latex: false
 stages:
 - name: test
 - name: full
-  if: branch = r-2.0
+  if: branch = master
 
 #jobs
 jobs:
@@ -56,6 +56,7 @@ jobs:
 env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
+  - _R_CHECK_SYSTEM_CLOCK_=false
   - MAKEFLAGS="-j 2"
 
 #services
