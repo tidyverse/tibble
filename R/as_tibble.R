@@ -274,7 +274,7 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
-    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
+    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.")
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }
