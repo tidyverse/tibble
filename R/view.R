@@ -17,7 +17,7 @@ view <- function(x, title = NULL, ...) {
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
-    title <- expr_deparse(enexpr(x))
+    title <- expr_deparse(enquo(x))
   }
 
   view_fun <- get("View", envir = as.environment("package:utils"))
