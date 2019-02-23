@@ -295,14 +295,14 @@ test_that("as_tibble() implements unique names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), unique2_names(rep("", 3)))
+  expect_equal(names(invalid_df), unique3_names(rep("", 3)))
 })
 
 test_that("as_tibble() implements universal names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), universal2_names(rep("", 3)))
+  expect_equal(names(invalid_df), universal3_names(rep("", 3)))
 })
 
 
@@ -400,7 +400,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("a..1", "a..2", "n")
+    c("a...1", "a...2", "n")
   )
 
   x <- table("if" = c(1, 1, 1, 2, 2, 2), "when" = c(3, 4, 5, 3, 4, 5))
@@ -426,7 +426,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("m", "n..2", "n..3")
+    c("m", "n...2", "n...3")
   )
 })
 

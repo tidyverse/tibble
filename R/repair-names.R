@@ -163,8 +163,8 @@ repaired_names <- function(name,
       .name_repair,
       minimal       =     ,
       check_unique  = NULL,
-      unique        = unique2_names,
-      universal     = universal2_names,
+      unique        = unique3_names,
+      universal     = universal3_names,
       abort(error_name_repair_arg())
     )
   }
