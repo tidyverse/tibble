@@ -48,6 +48,7 @@ Collate:
     'compat-lazyeval.R'
     'compat-lifecycle.R'
     'compat-name-repair-2.R'
+    'compat-name-repair-3.R'
     'compat-purrr.R'
     'tribble.R'
     'deprecated.R'
