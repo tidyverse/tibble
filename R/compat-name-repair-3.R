@@ -28,11 +28,12 @@ set_minimal_names <- function(x) {
 unique3_names <- function(name, quiet = FALSE, transform = identity) {
   min_name <- minimal_names(name)
   naked_name <- strip_pos3(min_name)
-  naked_is_empty <- (naked_name == "")
+  naked_needs_suffix <- (naked_name %in% c("", "..."))
 
-  new_name <- transform(naked_name)
+  new_name <- naked_name
+  new_name[!naked_needs_suffix] <- transform(naked_name[!naked_needs_suffix])
 
-  new_name <- append_pos2(new_name, needs_suffix = naked_is_empty)
+  new_name <- append_pos3(new_name, needs_suffix = naked_needs_suffix)
 
   duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
   new_name <- append_pos3(new_name, duped_after)
@@ -81,15 +82,14 @@ make_syntactic3 <- function(name) {
   ##   * turned its '.' suffixes to '.' prefixes
 
   regex <- paste0(
-    "^(?<leading_dots>[.]{0,2})",
+    "^(?<leading_dots>[.]{0,3})",
     "(?<numbers>[0-9]*)",
     "(?<leftovers>[^0-9]?.*$)"
   )
 
   re <- re_match(new_name, pattern = regex)
   needs_dots <- which(re$numbers != "")
-  needs_third_dot <- (re$leftovers[needs_dots] == "")
-  re$leading_dots[needs_dots] <- ifelse(needs_third_dot, "...", "..")
+  re$leading_dots[needs_dots] <- "..."
   new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
 
   new_name
@@ -97,12 +97,12 @@ make_syntactic3 <- function(name) {
 
 append_pos3 <- function(name, needs_suffix) {
   need_append_pos <- which(needs_suffix)
-  name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
+  name[need_append_pos] <- paste0(name[need_append_pos], "...", need_append_pos)
   name
 }
 
 strip_pos3 <- function(name) {
-  rx <- "[.][.][1-9][0-9]*$"
+  rx <- "[.][.][.][1-9][0-9]*$"
   gsub(rx, "", name) %|% ""
 }
 

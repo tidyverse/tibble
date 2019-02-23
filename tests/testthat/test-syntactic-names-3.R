@@ -11,7 +11,7 @@ expect_syntactic <- function(name, exp_syn_name) {
 
 test_that("make_syntactic3(): empty or NA", {
   expect_syntactic(
-      c( "", NA_character_),
+      c("", NA_character_),
       c(".", ".")
   )
 })
@@ -46,36 +46,36 @@ test_that("make_syntactic3(): number", {
 
 test_that("make_syntactic3(): number then character", {
   expect_syntactic(
-    c(  "0a",   "1b",   "22c",   "333d"),
-    c("..0a", "..1b", "..22c", "..333d")
+    c(   "0a",    "1b",    "22c",    "333d"),
+    c("...0a", "...1b", "...22c", "...333d")
   )
 })
 
 test_that("make_syntactic3(): number then non-character", {
   expect_syntactic(
-    c(  "0)",   "1&",   "22*",   "333@"),
-    c("..0.", "..1.", "..22.", "..333.")
+    c(   "0)",    "1&",    "22*",    "333@"),
+    c("...0.", "...1.", "...22.", "...333.")
   )
 })
 
 test_that("make_syntactic3(): dot then number", {
   expect_syntactic(
-    c(  ".0",   ".1",   ".22",   ".333"),
+    c(   ".0",   ".1",   ".22",   ".333"),
     c("...0", "...1", "...22", "...333")
   )
 })
 
 test_that("make_syntactic3(): dot then number then character", {
   expect_syntactic(
-    c( ".0a",  ".1b",  ".22c",  ".333d"),
-    c("..0a", "..1b", "..22c", "..333d")
+    c(  ".0a",   ".1b",   ".22c",   ".333d"),
+    c("...0a", "...1b", "...22c", "...333d")
   )
 })
 
 test_that("make_syntactic3(): dot then number then non-character", {
   expect_syntactic(
-    c( ".0)",  ".1&",  ".22*",  ".333@"),
-    c("..0.", "..1.", "..22.", "..333.")
+    c(  ".0)",   ".1&",   ".22*",   ".333@"),
+    c("...0.", "...1.", "...22.", "...333.")
   )
 })
 
@@ -109,15 +109,15 @@ test_that("make_syntactic3(): dot dot dot dot dot then number", {
 
 test_that("make_syntactic3(): dot dot then number then character", {
   expect_syntactic(
-    c("..0a", "..1b", "..22c", "..333d"),
-    c("..0a", "..1b", "..22c", "..333d")
+    c( "..0a",  "..1b",  "..22c",  "..333d"),
+    c("...0a", "...1b", "...22c", "...333d")
   )
 })
 
 test_that("make_syntactic3(): dot dot then number then non-character", {
   expect_syntactic(
-    c("..0)",  "..1&",  "..22*",  "..333@"),
-    c("..0.", "..1.", "..22.", "..333.")
+    c( "..0)",  "..1&",  "..22*",  "..333@"),
+    c("...0.", "...1.", "...22.", "...333.")
   )
 })
 
@@ -136,7 +136,7 @@ test_that("universal3_names() pass checks for minimal, unique, and universal", {
   expect_error(check_minimal(x_syn), NA)
   expect_error(check_unique(x_syn), NA)
   expect_true(all(is_syntactic(x_syn)))
-  expect_identical(x_syn, c("...1", "...2", "x..3", "x..4", "a1.", "._x_y."))
+  expect_identical(x_syn, c("...1", "...2", "x...3", "x...4", "a1.", "._x_y."))
 })
 
 test_that("universal3_names() is idempotent", {
@@ -147,13 +147,14 @@ test_that("universal3_names() is idempotent", {
 test_that("dupes get a suffix", {
   expect_equal(
     universal3_names(c("a", "b", "a", "c", "b")),
-    c("a..1", "b..2", "a..3", "c", "b..5")
+    c("a...1", "b...2", "a...3", "c", "b...5")
   )
 })
 
-test_that("solo empty or NA gets suffix", {
+test_that("solo empty, NA or ellipsis get suffix", {
   expect_equal(universal3_names(""), "...1")
   expect_equal(universal3_names(NA_character_), "...1")
+  expect_equal(universal3_names("..."), "......1")
 })
 
 test_that("solo dot is unchanged", {
@@ -161,7 +162,11 @@ test_that("solo dot is unchanged", {
 })
 
 test_that("dot, dot gets suffix", {
-  expect_equal(universal3_names(c(".", ".")), c("...1", "...2"))
+  expect_equal(universal3_names(c(".", ".")), c("....1", "....2"))
+})
+
+test_that("dot-dot, dot-dot gets suffix", {
+  expect_equal(universal3_names(c("..", "..")), c(".....1", ".....2"))
 })
 
 test_that("empty, dot becomes suffix, dot", {
@@ -173,26 +178,26 @@ test_that("empty, empty, dot becomes suffix, suffix, dot", {
 })
 
 test_that("dot, dot, empty becomes suffix, suffix, suffix", {
-  expect_equal(universal3_names(c(".", ".", "")), c("...1", "...2", "...3"))
+  expect_equal(universal3_names(c(".", ".", "")), c("....1", "....2", "...3"))
 })
 
 test_that("dot, empty, dot becomes suffix, suffix, suffix", {
-  expect_equal(universal3_names(c(".", "", ".")), c("...1", "...2", "...3"))
+  expect_equal(universal3_names(c(".", "", ".")), c("....1", "...2", "....3"))
 })
 
 test_that("empty, dot, empty becomes suffix, dot, suffix", {
   expect_equal(universal3_names(c("", ".", "")), c("...1", ".", "...3"))
 })
 
-test_that("'..j' gets stripped then names are modified", {
-  expect_equal(universal3_names(c("..6", "..1")), c("...1", "...2"))
-  expect_equal(universal3_names("if..2"), ".if")
+test_that("'...j' gets stripped then names are modified", {
+  expect_equal(universal3_names(c("...6", "...1")), c("...1", "...2"))
+  expect_equal(universal3_names("if...2"), ".if")
 })
 
 test_that("complicated inputs", {
   expect_equal(
-    universal3_names(c("", ".", NA, "if..4", "if", "if..8", "for", "if){1")),
-    c("...1", ".", "...3", ".if..4", ".if..5", ".if..6", ".for", "if..1")
+    universal3_names(c("", ".", NA, "if...4", "if", "if...8", "for", "if){]1")),
+    c("...1", ".", "...3", ".if...4", ".if...5", ".if...6", ".for", "if...1")
   )
 })
 

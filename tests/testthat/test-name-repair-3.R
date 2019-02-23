@@ -41,18 +41,24 @@ test_that("minimal_names() is idempotent", {
 # unique names -------------------------------------------------------------
 test_that("unique3_names() eliminates emptiness and duplication", {
   x <- c("", "x", "y", "x")
-  expect_identical(unique3_names(x), c("..1", "x..2", "y", "x..4"))
+  expect_identical(unique3_names(x), c("...1", "x...2", "y", "x...4"))
+})
+
+test_that("solo empty, NA or ellipsis get suffix", {
+  expect_equal(unique3_names(""), "...1")
+  expect_equal(unique3_names(NA_character_), "...1")
+  expect_equal(unique3_names("..."), "......1")
 })
 
 test_that("unique3_names() strips positional suffixes, re-applies as needed", {
-  x <- c("..20", "a..1", "b", "", "a..2")
-  expect_identical(unique3_names(x), c("..1", "a..2", "b", "..4", "a..5"))
+  x <- c("...20", "a...1", "b", "", "a...2")
+  expect_identical(unique3_names(x), c("...1", "a...2", "b", "...4", "a...5"))
 
-  expect_identical(unique3_names("a..1"), "a")
-  expect_identical(unique3_names(c("a..2", "a")), c("a..1", "a..2"))
-  expect_identical(unique3_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
-  expect_identical(unique3_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
-  expect_identical(unique3_names(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
+  expect_identical(unique3_names("a...1"), "a")
+  expect_identical(unique3_names(c("a...2", "a")), c("a...1", "a...2"))
+  expect_identical(unique3_names(c("a...3", "a", "a")), c("a...1", "a...2", "a...3"))
+  expect_identical(unique3_names(c("a...2", "a", "a")), c("a...1", "a...2", "a...3"))
+  expect_identical(unique3_names(c("a...2", "a...2", "a...2")), c("a...1", "a...2", "a...3"))
 })
 
 test_that("check_unique() imposes check_minimal()", {
@@ -93,7 +99,7 @@ test_that("check_unique() errors for empty or duplicated names", {
 })
 
 test_that("unique3_names() is idempotent", {
-  x <- c("..20", "a..1", "b", "", "a..2")
+  x <- c("...20", "a...1", "b", "", "a...2")
   expect_identical(unique3_names(!!x), unique3_names(unique3_names(!!x)))
 })
 
@@ -105,8 +111,8 @@ test_that("unique-ification has an 'algebraic'-y property", {
   ## I haven't formulated what we guarantee very well yet, but it's probably
   ## implicit in this test (?)
 
-  x <- c("..20", "a..1", "b", "", "a..2", "d")
-  y <- c("", "a..3", "b", "..3", "e")
+  x <- c("...20", "a...1", "b", "", "a...2", "d")
+  y <- c("", "a...3", "b", "...3", "e")
 
   ## fix names on each, catenate, fix the whole
   z1 <- unique3_names(

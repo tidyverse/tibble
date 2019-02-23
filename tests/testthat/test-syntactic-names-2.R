@@ -151,9 +151,10 @@ test_that("dupes get a suffix", {
   )
 })
 
-test_that("solo empty or NA gets suffix", {
+test_that("solo empty or NA gets suffix, ellipsis gets dot", {
   expect_equal(universal2_names(""), "...1")
   expect_equal(universal2_names(NA_character_), "...1")
+  expect_equal(universal2_names("..."), "....")
 })
 
 test_that("solo dot is unchanged", {
@@ -162,6 +163,10 @@ test_that("solo dot is unchanged", {
 
 test_that("dot, dot gets suffix", {
   expect_equal(universal2_names(c(".", ".")), c("...1", "...2"))
+})
+
+test_that("dot-dot, dot-dot gets suffix", {
+  expect_equal(universal2_names(c("..", "..")), c("....1", "....2"))
 })
 
 test_that("empty, dot becomes suffix, dot", {

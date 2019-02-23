@@ -44,6 +44,12 @@ test_that("unique2_names() eliminates emptiness and duplication", {
   expect_identical(unique2_names(x), c("..1", "x..2", "y", "x..4"))
 })
 
+test_that("solo empty or NA get suffix, ellipsis unchanged", {
+  expect_equal(unique2_names(""), "..1")
+  expect_equal(unique2_names(NA_character_), "..1")
+  expect_equal(unique2_names("..."), "...")
+})
+
 test_that("unique2_names() strips positional suffixes, re-applies as needed", {
   x <- c("..20", "a..1", "b", "", "a..2")
   expect_identical(unique2_names(x), c("..1", "a..2", "b", "..4", "a..5"))
