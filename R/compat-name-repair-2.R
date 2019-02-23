@@ -1,4 +1,4 @@
-# compat-name-repair (last updated: tibble 2.0.1.9000)
+# compat-name-repair-2 (last updated: tibble 2.0.1.9001)
 
 # This file serves as a reference for compatibility functions for
 # name repair in tibble, until name repair is available in rlang.
@@ -25,17 +25,17 @@ set_minimal_names <- function(x) {
   set_names(x, new_names)
 }
 
-unique_names <- function(name, quiet = FALSE, transform = identity) {
+unique2_names <- function(name, quiet = FALSE, transform = identity) {
   min_name <- minimal_names(name)
-  naked_name <- strip_pos(min_name)
+  naked_name <- strip_pos2(min_name)
   naked_is_empty <- (naked_name == "")
 
   new_name <- transform(naked_name)
 
-  new_name <- append_pos(new_name, needs_suffix = naked_is_empty)
+  new_name <- append_pos2(new_name, needs_suffix = naked_is_empty)
 
   duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
-  new_name <- append_pos(new_name, duped_after)
+  new_name <- append_pos2(new_name, duped_after)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -44,25 +44,25 @@ unique_names <- function(name, quiet = FALSE, transform = identity) {
   new_name
 }
 
-set_unique_names <- function(x, quiet = FALSE) {
+set_unique2_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- unique_names(names(x), quiet = quiet)
+  new_names <- unique2_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
-universal_names <- function(name, quiet = FALSE) {
-  unique_names(name, quiet = quiet, transform = make_syntactic)
+universal2_names <- function(name, quiet = FALSE) {
+  unique2_names(name, quiet = quiet, transform = make_syntactic2)
 }
 
-set_universal_names <- function(x, quiet = FALSE) {
+set_universal2_names <- function(x, quiet = FALSE) {
   x <- set_minimal_names(x)
-  new_names <- universal_names(names(x), quiet = quiet)
+  new_names <- universal2_names(names(x), quiet = quiet)
   set_names(x, new_names)
 }
 
 ## makes each individual name syntactic
 ## does not enforce unique-ness
-make_syntactic <- function(name) {
+make_syntactic2 <- function(name) {
   name[is.na(name)]       <- ""
   name[name == ""]        <- "."
   name[name == "..."]     <- "...."
@@ -95,13 +95,13 @@ make_syntactic <- function(name) {
   new_name
 }
 
-append_pos <- function(name, needs_suffix) {
+append_pos2 <- function(name, needs_suffix) {
   need_append_pos <- which(needs_suffix)
   name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
   name
 }
 
-strip_pos <- function(name) {
+strip_pos2 <- function(name) {
   rx <- "[.][.][1-9][0-9]*$"
   gsub(rx, "", name) %|% ""
 }
@@ -184,7 +184,7 @@ tick <- function(x) {
 }
 
 is_syntactic <- function(x) {
-  ret <- (make_syntactic(x) == x)
+  ret <- (make_syntactic2(x) == x)
   ret[is.na(x)] <- FALSE
   ret
 }
