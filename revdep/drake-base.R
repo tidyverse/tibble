@@ -28,7 +28,7 @@ retry <- function(code, N = 1) {
 
 get_plan_deps <- function() {
   plan_deps <- drake_plan(
-    available = available.packages(),
+    available = available.packages(repos = revdepcheck:::get_repos(bioc = TRUE)),
     this_pkg = get_this_pkg(),
     first_level_revdeps = tools::package_dependencies(this_pkg, available, 'most', reverse = TRUE) %>% flatten(),
     revdeps = first_level_revdeps,
