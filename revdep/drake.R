@@ -19,9 +19,13 @@ download <- function(pkg, available, ...) {
 }
 
 get_i_lib <- function() {
-  path <- "revdep/libs/cran"
-  fs::dir_create(path)
-  fs::path_real(path)
+  # In a private library
+  # path <- "revdep/libs/cran"
+  # fs::dir_create(path)
+  # fs::path_real(path)
+
+  # In a Rocker-based setup (private library doesn't work there?)
+  .libPaths()[[1]]
 }
 
 install <- function(pkg, path, ...) {
