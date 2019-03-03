@@ -93,10 +93,18 @@ get_deps <- function(i_pkg) {
 }
 
 check <- function(tarball, lib, ...) {
-  pkgs <- c(...)
+  pkgs <- list(...)
+  is_error <- map_lgl(pkgs, inherits, "try_error")
+
   check_lib <- fs::file_temp("checklib")
-  create_lib(pkgs, check_lib)
-  withr::with_libpaths(c(lib, check_lib), rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(3600)))
+  create_lib(pkgs[!is_error], check_lib)
+  withr::with_envvar(
+    c("_R_CHECK_FORCE_SUGGESTS_" = "0"),
+    withr::with_libpaths(
+      c(lib, check_lib),
+      rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(3600))
+    )
+  )
 }
 
 compare <- function(old, new) {
@@ -160,7 +168,7 @@ get_plan <- function() {
 
   create_dep_list <- function(deps, base_pkgs) {
     valid_deps <- setdiff(deps, base_pkgs)
-    syms(glue("i_{valid_deps}"))
+    map(syms(glue("i_{valid_deps}")), ~ expr(try(!!.)))
   }
 
   plan_install <-
