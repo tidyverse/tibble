@@ -102,7 +102,7 @@ check <- function(tarball, lib, ...) {
     c("_R_CHECK_FORCE_SUGGESTS_" = "0"),
     withr::with_libpaths(
       c(lib, check_lib),
-      rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(3600))
+      rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(600))
     )
   )
 }
