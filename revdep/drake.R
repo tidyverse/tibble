@@ -37,11 +37,13 @@ install <- function(pkg, path, ...) {
 
   lib <- get_i_lib()
 
-  withr::with_envvar(
-    c(R_LIBS_USER = lib),
-    # Suppress warnings about loaded packages
-    retry(system(paste0("R CMD INSTALL ", path)))
-  )
+  if (!dir.exists(file.path(lib, pkg))) {
+    withr::with_envvar(
+      c(R_LIBS_USER = lib),
+      # Suppress warnings about loaded packages
+      retry(system(paste0("R CMD INSTALL ", path)))
+    )
+  }
   stopifnot(dir.exists(file.path(lib, pkg)))
 
   structure(
