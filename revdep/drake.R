@@ -268,7 +268,7 @@ get_plan <- function() {
 
 plan <- get_plan()
 
-clean("compare_all")
+#clean("compare_all")
 
 #trace(conditionCall.condition, recover)
 make(
