@@ -1,4 +1,4 @@
-context("universal3_names")
+context("universal_names")
 
 # make_syntactic3 -------------------------------------------------------------
 expect_syntactic <- function(name, exp_syn_name) {
@@ -121,89 +121,89 @@ test_that("make_syntactic3(): dot dot then number then non-character", {
   )
 })
 
-# universal3_names() -----------------------------------------------------------
+# universal_names() -----------------------------------------------------------
 test_that("zero-length input", {
-  expect_equal(universal3_names(character()), character())
+  expect_equal(universal_names(character()), character())
 })
 
 test_that("universal names are not changed", {
-  expect_equal(universal3_names(letters), letters)
+  expect_equal(universal_names(letters), letters)
 })
 
-test_that("universal3_names() pass checks for minimal, unique, and universal", {
+test_that("universal_names() pass checks for minimal, unique, and universal", {
   x <- c(NA, "", "x", "x", "a1:", "_x_y}")
-  x_syn <- universal3_names(x)
+  x_syn <- universal_names(x)
   expect_error(check_minimal(x_syn), NA)
   expect_error(check_unique(x_syn), NA)
   expect_true(all(is_syntactic(x_syn)))
   expect_identical(x_syn, c("...1", "...2", "x...3", "x...4", "a1.", "._x_y."))
 })
 
-test_that("universal3_names() is idempotent", {
+test_that("universal_names() is idempotent", {
   x <- c(NA, "", "x", "x", "a1:", "_x_y}")
-  expect_identical(universal3_names(x), universal3_names(universal3_names(x)))
+  expect_identical(universal_names(x), universal_names(universal_names(x)))
 })
 
 test_that("dupes get a suffix", {
   expect_equal(
-    universal3_names(c("a", "b", "a", "c", "b")),
+    universal_names(c("a", "b", "a", "c", "b")),
     c("a...1", "b...2", "a...3", "c", "b...5")
   )
 })
 
 test_that("solo empty, NA or ellipsis get suffix", {
-  expect_equal(universal3_names(""), "...1")
-  expect_equal(universal3_names(NA_character_), "...1")
-  expect_equal(universal3_names("..."), "......1")
+  expect_equal(universal_names(""), "...1")
+  expect_equal(universal_names(NA_character_), "...1")
+  expect_equal(universal_names("..."), "......1")
 })
 
 test_that("solo dot is unchanged", {
-  expect_equal(universal3_names("."), ".")
+  expect_equal(universal_names("."), ".")
 })
 
 test_that("dot, dot gets suffix", {
-  expect_equal(universal3_names(c(".", ".")), c("....1", "....2"))
+  expect_equal(universal_names(c(".", ".")), c("....1", "....2"))
 })
 
 test_that("dot-dot, dot-dot gets suffix", {
-  expect_equal(universal3_names(c("..", "..")), c(".....1", ".....2"))
+  expect_equal(universal_names(c("..", "..")), c(".....1", ".....2"))
 })
 
 test_that("empty, dot becomes suffix, dot", {
-  expect_equal(universal3_names(c("", ".")), c("...1", "."))
+  expect_equal(universal_names(c("", ".")), c("...1", "."))
 })
 
 test_that("empty, empty, dot becomes suffix, suffix, dot", {
-  expect_equal(universal3_names(c("", "", ".")), c("...1", "...2", "."))
+  expect_equal(universal_names(c("", "", ".")), c("...1", "...2", "."))
 })
 
 test_that("dot, dot, empty becomes suffix, suffix, suffix", {
-  expect_equal(universal3_names(c(".", ".", "")), c("....1", "....2", "...3"))
+  expect_equal(universal_names(c(".", ".", "")), c("....1", "....2", "...3"))
 })
 
 test_that("dot, empty, dot becomes suffix, suffix, suffix", {
-  expect_equal(universal3_names(c(".", "", ".")), c("....1", "...2", "....3"))
+  expect_equal(universal_names(c(".", "", ".")), c("....1", "...2", "....3"))
 })
 
 test_that("empty, dot, empty becomes suffix, dot, suffix", {
-  expect_equal(universal3_names(c("", ".", "")), c("...1", ".", "...3"))
+  expect_equal(universal_names(c("", ".", "")), c("...1", ".", "...3"))
 })
 
 test_that("'...j' gets stripped then names are modified", {
-  expect_equal(universal3_names(c("...6", "...1")), c("...1", "...2"))
-  expect_equal(universal3_names("if...2"), ".if")
+  expect_equal(universal_names(c("...6", "...1")), c("...1", "...2"))
+  expect_equal(universal_names("if...2"), ".if")
 })
 
 test_that("complicated inputs", {
   expect_equal(
-    universal3_names(c("", ".", NA, "if...4", "if", "if...8", "for", "if){]1")),
+    universal_names(c("", ".", NA, "if...4", "if", "if...8", "for", "if){]1")),
     c("...1", ".", "...3", ".if...4", ".if...5", ".if...6", ".for", "if...1")
   )
 })
 
 test_that("message", {
   expect_message(
-    universal3_names(c("a b", "b c")),
+    universal_names(c("a b", "b c")),
     "New names:\n* `a b` -> a.b\n* `b c` -> b.c\n",
     fixed = TRUE
   )
@@ -211,39 +211,39 @@ test_that("message", {
 
 test_that("quiet", {
   expect_message(
-    universal3_names("", quiet = TRUE),
+    universal_names("", quiet = TRUE),
     NA
   )
 })
 
-# set_universal3_names ---------------------------------------------------------
+# set_universal_names ---------------------------------------------------------
 test_that("zero-length inputs given character names", {
-  out <- set_universal3_names(character())
+  out <- set_universal_names(character())
   expect_equal(names(out), character())
 })
 
 test_that("unnamed input gives uniquely named output", {
-  out <- set_universal3_names(1:3)
+  out <- set_universal_names(1:3)
   expect_equal(names(out), c("...1", "...2", "...3"))
 })
 
 test_that("messages by default", {
   expect_message(
-    set_universal3_names(set_names(1, "a:b")),
+    set_universal_names(set_names(1, "a:b")),
     "New names:\n* `a:b` -> a.b\n",
     fixed = TRUE
   )
 })
 
 test_that("quiet = TRUE", {
-  expect_message(set_universal3_names(set_names(1, ""), quiet = TRUE), NA)
+  expect_message(set_universal_names(set_names(1, ""), quiet = TRUE), NA)
 })
 
 test_that("non-universal names", {
-  out <- set_universal3_names(set_names(1, "a b"))
+  out <- set_universal_names(set_names(1, "a b"))
   expect_equal(names(out), "a.b")
 
-  expect_equal(universal3_names("a b"), "a.b")
+  expect_equal(universal_names("a b"), "a.b")
 })
 
 # check syntactic

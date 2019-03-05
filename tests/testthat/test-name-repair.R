@@ -39,26 +39,26 @@ test_that("minimal_names() is idempotent", {
 })
 
 # unique names -------------------------------------------------------------
-test_that("unique3_names() eliminates emptiness and duplication", {
+test_that("unique_names() eliminates emptiness and duplication", {
   x <- c("", "x", "y", "x")
-  expect_identical(unique3_names(x), c("...1", "x...2", "y", "x...4"))
+  expect_identical(unique_names(x), c("...1", "x...2", "y", "x...4"))
 })
 
 test_that("solo empty, NA or ellipsis get suffix", {
-  expect_equal(unique3_names(""), "...1")
-  expect_equal(unique3_names(NA_character_), "...1")
-  expect_equal(unique3_names("..."), "......1")
+  expect_equal(unique_names(""), "...1")
+  expect_equal(unique_names(NA_character_), "...1")
+  expect_equal(unique_names("..."), "......1")
 })
 
-test_that("unique3_names() strips positional suffixes, re-applies as needed", {
+test_that("unique_names() strips positional suffixes, re-applies as needed", {
   x <- c("...20", "a...1", "b", "", "a...2")
-  expect_identical(unique3_names(x), c("...1", "a...2", "b", "...4", "a...5"))
+  expect_identical(unique_names(x), c("...1", "a...2", "b", "...4", "a...5"))
 
-  expect_identical(unique3_names("a...1"), "a")
-  expect_identical(unique3_names(c("a...2", "a")), c("a...1", "a...2"))
-  expect_identical(unique3_names(c("a...3", "a", "a")), c("a...1", "a...2", "a...3"))
-  expect_identical(unique3_names(c("a...2", "a", "a")), c("a...1", "a...2", "a...3"))
-  expect_identical(unique3_names(c("a...2", "a...2", "a...2")), c("a...1", "a...2", "a...3"))
+  expect_identical(unique_names("a...1"), "a")
+  expect_identical(unique_names(c("a...2", "a")), c("a...1", "a...2"))
+  expect_identical(unique_names(c("a...3", "a", "a")), c("a...1", "a...2", "a...3"))
+  expect_identical(unique_names(c("a...2", "a", "a")), c("a...1", "a...2", "a...3"))
+  expect_identical(unique_names(c("a...2", "a...2", "a...2")), c("a...1", "a...2", "a...3"))
 })
 
 test_that("check_unique() imposes check_minimal()", {
@@ -98,9 +98,9 @@ test_that("check_unique() errors for empty or duplicated names", {
   )
 })
 
-test_that("unique3_names() is idempotent", {
+test_that("unique_names() is idempotent", {
   x <- c("...20", "a...1", "b", "", "a...2")
-  expect_identical(unique3_names(!!x), unique3_names(unique3_names(!!x)))
+  expect_identical(unique_names(!!x), unique_names(unique_names(!!x)))
 })
 
 test_that("unique-ification has an 'algebraic'-y property", {
@@ -115,28 +115,28 @@ test_that("unique-ification has an 'algebraic'-y property", {
   y <- c("", "a...3", "b", "...3", "e")
 
   ## fix names on each, catenate, fix the whole
-  z1 <- unique3_names(
+  z1 <- unique_names(
     c(
-      unique3_names(x), unique3_names(y)
+      unique_names(x), unique_names(y)
     )
   )
 
   ## fix names on x, catenate, fix the whole
-  z2 <- unique3_names(
+  z2 <- unique_names(
     c(
-      unique3_names(x), y
+      unique_names(x), y
     )
   )
 
   ## fix names on y, catenate, fix the whole
-  z3 <- unique3_names(
+  z3 <- unique_names(
     c(
-      x, unique3_names(y)
+      x, unique_names(y)
     )
   )
 
   ## catenate, fix the whole
-  z4 <- unique3_names(
+  z4 <- unique_names(
     c(
       x, y
     )
