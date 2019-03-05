@@ -27,16 +27,16 @@ set_minimal_names <- function(x) {
 
 unique_names <- function(name, quiet = FALSE, transform = identity) {
   min_name <- minimal_names(name)
-  naked_name <- strip_pos3(min_name)
+  naked_name <- strip_pos(min_name)
   naked_needs_suffix <- (naked_name %in% c("", "..."))
 
   new_name <- naked_name
   new_name[!naked_needs_suffix] <- transform(naked_name[!naked_needs_suffix])
 
-  new_name <- append_pos3(new_name, needs_suffix = naked_needs_suffix)
+  new_name <- append_pos(new_name, needs_suffix = naked_needs_suffix)
 
   duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
-  new_name <- append_pos3(new_name, duped_after)
+  new_name <- append_pos(new_name, duped_after)
 
   if (!quiet) {
     describe_repair(name, new_name)
@@ -52,7 +52,7 @@ set_unique_names <- function(x, quiet = FALSE) {
 }
 
 universal_names <- function(name, quiet = FALSE) {
-  unique_names(name, quiet = quiet, transform = make_syntactic3)
+  unique_names(name, quiet = quiet, transform = make_syntactic)
 }
 
 set_universal_names <- function(x, quiet = FALSE) {
@@ -63,7 +63,7 @@ set_universal_names <- function(x, quiet = FALSE) {
 
 ## makes each individual name syntactic
 ## does not enforce unique-ness
-make_syntactic3 <- function(name) {
+make_syntactic <- function(name) {
   name[is.na(name)]       <- ""
   name[name == ""]        <- "."
   name[name == "..."]     <- "...."
@@ -95,13 +95,13 @@ make_syntactic3 <- function(name) {
   new_name
 }
 
-append_pos3 <- function(name, needs_suffix) {
+append_pos <- function(name, needs_suffix) {
   need_append_pos <- which(needs_suffix)
   name[need_append_pos] <- paste0(name[need_append_pos], "...", need_append_pos)
   name
 }
 
-strip_pos3 <- function(name) {
+strip_pos <- function(name) {
   rx <- "[.][.][.][1-9][0-9]*$"
   gsub(rx, "", name) %|% ""
 }
@@ -184,7 +184,7 @@ tick <- function(x) {
 }
 
 is_syntactic <- function(x) {
-  ret <- (make_syntactic3(x) == x)
+  ret <- (make_syntactic(x) == x)
   ret[is.na(x)] <- FALSE
   ret
 }
