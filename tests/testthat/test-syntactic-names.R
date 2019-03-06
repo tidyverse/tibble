@@ -46,15 +46,15 @@ test_that("make_syntactic(): number", {
 
 test_that("make_syntactic(): number then character", {
   expect_syntactic(
-    c(   "0a",    "1b",    "22c",    "333d"),
-    c("...0a", "...1b", "...22c", "...333d")
+    c(  "0a",   "1b",   "22c",   "333d"),
+    c("..0a", "..1b", "..22c", "..333d")
   )
 })
 
 test_that("make_syntactic(): number then non-character", {
   expect_syntactic(
-    c(   "0)",    "1&",    "22*",    "333@"),
-    c("...0.", "...1.", "...22.", "...333.")
+    c(  "0)",   "1&",   "22*",   "333@"),
+    c("..0.", "..1.", "..22.", "..333.")
   )
 })
 
@@ -67,15 +67,15 @@ test_that("make_syntactic(): dot then number", {
 
 test_that("make_syntactic(): dot then number then character", {
   expect_syntactic(
-    c(  ".0a",   ".1b",   ".22c",   ".333d"),
-    c("...0a", "...1b", "...22c", "...333d")
+    c( ".0a",  ".1b",  ".22c",  ".333d"),
+    c("..0a", "..1b", "..22c", "..333d")
   )
 })
 
 test_that("make_syntactic(): dot then number then non-character", {
   expect_syntactic(
-    c(  ".0)",   ".1&",   ".22*",   ".333@"),
-    c("...0.", "...1.", "...22.", "...333.")
+    c( ".0)",  ".1&",  ".22*",  ".333@"),
+    c("..0.", "..1.", "..22.", "..333.")
   )
 })
 
@@ -109,15 +109,15 @@ test_that("make_syntactic(): dot dot dot dot dot then number", {
 
 test_that("make_syntactic(): dot dot then number then character", {
   expect_syntactic(
-    c( "..0a",  "..1b",  "..22c",  "..333d"),
-    c("...0a", "...1b", "...22c", "...333d")
+    c("..0a", "..1b", "..22c", "..333d"),
+    c("..0a", "..1b", "..22c", "..333d")
   )
 })
 
 test_that("make_syntactic(): dot dot then number then non-character", {
   expect_syntactic(
-    c( "..0)",  "..1&",  "..22*",  "..333@"),
-    c("...0.", "...1.", "...22.", "...333.")
+    c("..0)", "..1&", "..22*", "..333@"),
+    c("..0.", "..1.", "..22.", "..333.")
   )
 })
 

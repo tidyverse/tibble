@@ -1,4 +1,4 @@
-# compat-name-repair-3 (last updated: tibble 2.0.1.9001)
+# compat-name-repair (last updated: tibble 2.0.1.9000)
 
 # This file serves as a reference for compatibility functions for
 # name repair in tibble, until name repair is available in rlang.
@@ -82,14 +82,15 @@ make_syntactic <- function(name) {
   ##   * turned its '.' suffixes to '.' prefixes
 
   regex <- paste0(
-    "^(?<leading_dots>[.]{0,3})",
+    "^(?<leading_dots>[.]{0,2})",
     "(?<numbers>[0-9]*)",
     "(?<leftovers>[^0-9]?.*$)"
   )
 
   re <- re_match(new_name, pattern = regex)
   needs_dots <- which(re$numbers != "")
-  re$leading_dots[needs_dots] <- "..."
+  needs_third_dot <- (re$leftovers[needs_dots] == "")
+  re$leading_dots[needs_dots] <- ifelse(needs_third_dot, "...", "..")
   new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
 
   new_name
