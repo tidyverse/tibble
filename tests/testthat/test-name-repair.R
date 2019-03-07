@@ -51,7 +51,7 @@ test_that("solo empty, NA or ellipsis get suffix", {
 })
 
 test_that("unique_names() strips positional suffixes, re-applies as needed", {
-  x <- c("...20", "a...1", "b", "", "a...2")
+  x <- c("...20", "a...1", "b", "", "a...2...34")
   expect_identical(unique_names(x), c("...1", "a...2", "b", "...4", "a...5"))
 
   expect_identical(unique_names("a...1"), "a")

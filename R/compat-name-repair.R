@@ -103,7 +103,7 @@ append_pos <- function(name, needs_suffix) {
 }
 
 strip_pos <- function(name) {
-  rx <- "[.][.][.][1-9][0-9]*$"
+  rx <- "([.][.][.][1-9][0-9]*)+$"
   gsub(rx, "", name) %|% ""
 }
 

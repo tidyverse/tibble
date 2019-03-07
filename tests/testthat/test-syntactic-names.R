@@ -190,7 +190,7 @@ test_that("empty, dot, empty becomes suffix, dot, suffix", {
 })
 
 test_that("'...j' gets stripped then names are modified", {
-  expect_equal(universal_names(c("...6", "...1")), c("...1", "...2"))
+  expect_equal(universal_names(c("...6", "...1...2")), c("...1", "...2"))
   expect_equal(universal_names("if...2"), ".if")
 })
 
