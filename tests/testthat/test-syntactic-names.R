@@ -154,7 +154,7 @@ test_that("dupes get a suffix", {
 test_that("solo empty, NA or ellipsis get suffix", {
   expect_equal(universal_names(""), "...1")
   expect_equal(universal_names(NA_character_), "...1")
-  expect_equal(universal_names("..."), "......1")
+  expect_equal(universal_names("..."), "...1")
 })
 
 test_that("solo dot is unchanged", {

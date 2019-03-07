@@ -47,7 +47,7 @@ test_that("unique_names() eliminates emptiness and duplication", {
 test_that("solo empty, NA or ellipsis get suffix", {
   expect_equal(unique_names(""), "...1")
   expect_equal(unique_names(NA_character_), "...1")
-  expect_equal(unique_names("..."), "......1")
+  expect_equal(unique_names("..."), "...1")
 })
 
 test_that("unique_names() strips positional suffixes, re-applies as needed", {

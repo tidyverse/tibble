@@ -31,6 +31,7 @@ unique_names <- function(name, quiet = FALSE, transform = identity) {
   naked_needs_suffix <- (naked_name %in% c("", "..."))
 
   new_name <- naked_name
+  new_name[naked_needs_suffix] <- ""
   new_name[!naked_needs_suffix] <- transform(naked_name[!naked_needs_suffix])
 
   new_name <- append_pos(new_name, needs_suffix = naked_needs_suffix)
