@@ -219,6 +219,17 @@ test_that("quiet", {
   )
 })
 
+test_that("unique then universal is universal, with shuffling", {
+  x <- c("", ".2", "..3", "...4", "....5", ".....6", "......7", "...")
+  expect_identical(universal_names(unique_names(x)), universal_names(x))
+
+  x2 <- x[c(7L, 4L, 3L, 6L, 5L, 1L, 2L, 8L)]
+  expect_identical(universal_names(unique_names(x2)), universal_names(x2))
+
+  x3 <- x[c(3L, 2L, 4L, 6L, 8L, 1L, 5L, 7L)]
+  expect_identical(universal_names(unique_names(x3)), universal_names(x3))
+})
+
 # set_universal_names ---------------------------------------------------------
 test_that("zero-length inputs given character names", {
   out <- set_universal_names(character())
