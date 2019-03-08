@@ -60,7 +60,7 @@ test_that("make_syntactic(): number then non-character", {
 
 test_that("make_syntactic(): dot then number", {
   expect_syntactic(
-    c(   ".0",   ".1",   ".22",   ".333"),
+    c(  ".0",   ".1",   ".22",   ".333"),
     c("...0", "...1", "...22", "...333")
   )
 })
