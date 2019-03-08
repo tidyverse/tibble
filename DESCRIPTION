@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 2.0.1.9001
+Version: 2.0.1.9002
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),

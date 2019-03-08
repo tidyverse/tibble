@@ -1,3 +1,8 @@
+# tibble 2.0.1.9002
+
+- Three dots are used even for `"unique"` name repair (#566).
+
+
 # tibble 2.0.1.9001
 
 - `add_row()`, `add_case()` and `add_column()` now signal a warning once per session if the input is not a data frame (#575).
