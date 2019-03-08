@@ -83,7 +83,7 @@ with your names, you should take control of name repair.
 \itemize{
 \item Are never empty (inherited from \code{unique}).
 \item Have no duplicates (inherited from \code{unique}).
-\item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number (inherited from \code{unique})..
+\item Are not \code{...}. Do not have the form \code{..i}, where \code{i} is a number (inherited from \code{unique}).
 \item Consist of letters, numbers, and the dot \code{.} or underscore \code{_}
 characters.
 \item Start with a letter or start with the dot \code{.} not followed by a number.
@@ -97,8 +97,8 @@ Tibble has a different method of making names syntactic than
 \code{\link[base:make.names]{base::make.names()}}. In general, tibble prepends one or more dots \code{.} until
 the name is syntactic.
 
-Examples:\preformatted{ Original names:     ""    "x"    NA     "x"
-universal names: "...1" "x..2" "...3" "x..4"
+Examples:\preformatted{ Original names:     ""     "x"    NA      "x"
+universal names: "...1" "x...2" "...3" "x...4"
 
   Original names: "(y)"  "_z"  ".2fa"  "FALSE"
  universal names: ".y." "._z" "..2fa" ".FALSE"
