@@ -44,10 +44,24 @@ test_that("unique_names() eliminates emptiness and duplication", {
   expect_identical(unique_names(x), c("...1", "x...2", "y", "x...4"))
 })
 
-test_that("solo empty, NA or ellipsis get suffix", {
-  expect_equal(unique_names(""), "...1")
-  expect_equal(unique_names(NA_character_), "...1")
-  expect_equal(unique_names("..."), "...1")
+test_that("solo empty or NA gets suffix", {
+  expect_identical(unique_names(""), "...1")
+  expect_identical(unique_names(NA_character_), "...1")
+})
+
+test_that("ellipsis treated like empty string", {
+  expect_identical(unique_names("..."), unique_names(""))
+})
+
+test_that("two_three_dots() does its job and no more", {
+  x <- c(".", ".1", "...1", "..1a")
+  expect_identical(two_to_three_dots(x), x)
+
+  expect_identical(two_to_three_dots(c("..1", "..22")), c("...1", "...22"))
+})
+
+test_that("two dots then number treated like three dots then number", {
+  expect_identical(unique_names("..2"), unique_names("...5"))
 })
 
 test_that("unique_names() strips positional suffixes, re-applies as needed", {

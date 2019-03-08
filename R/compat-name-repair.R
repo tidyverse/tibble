@@ -28,6 +28,8 @@ set_minimal_names <- function(x) {
 unique_names <- function(name, quiet = FALSE, transform = identity) {
   min_name <- minimal_names(name)
   naked_name <- strip_pos(min_name)
+  naked_name <- two_to_three_dots(naked_name)
+  naked_name <- strip_pos(naked_name)
   naked_needs_suffix <- (naked_name %in% c("", "..."))
 
   new_name <- rep_along(naked_name, "")
@@ -94,6 +96,10 @@ make_syntactic <- function(name) {
   new_name <- paste0(re$leading_dots, re$numbers, re$leftovers)
 
   new_name
+}
+
+two_to_three_dots <- function(name) {
+  sub("(^[.][.][1-9][0-9]*$)", ".\\1", name)
 }
 
 append_pos <- function(name, needs_suffix) {
