@@ -260,9 +260,9 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 <span class='co'># but it forces you to take charge of names, if they need repair:</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.
 #&gt; Use .name_repair to specify repair.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* x -&gt; x..1</span>
-#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
-#&gt;    x..1  x..2
+#&gt; <span class='message'>* x -&gt; x...1</span>
+#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   x...1 x...2
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x     x

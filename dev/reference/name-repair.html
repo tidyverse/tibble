@@ -38,12 +38,12 @@ tibble deals with a few levels of name repair:
 minimal names exist. The names attribute is not NULL. The name of
 an unnamed element is &quot;&quot; and never NA. Tibbles created by the tibble
 package have names that are, at least, minimal.
-unique names are minimal, have no duplicates, and are never empty
-(literally, no &quot;&quot;s).
-All columns can be accessed by name via df[[&quot;name&quot;]].
+unique names are minimal, have no duplicates, and can be used where a variable name is expected.
+Empty names, and ... or .. followed by a sequence of digits are banned.
+All columns can be accessed by name via df[[&quot;name&quot;]] and df$`name` and with(df, `name`).
 
 universal names are unique and syntactic (see Details for more).
-Names work everywhere, without quoting: df$name and
+Names work everywhere, without quoting: df$name and with(df, name) and
 lm(name1 ~ name2, data = df) and dplyr::select(df, name) all work.
 
 " />
@@ -155,12 +155,12 @@ and repair_names() are soft-deprecated." />
 <li><p><code>minimal</code> names exist. The <code>names</code> attribute is not <code>NULL</code>. The name of
 an unnamed element is <code>""</code> and never <code>NA</code>. Tibbles created by the tibble
 package have names that are, at least, <code>minimal</code>.</p></li>
-<li><p><code>unique</code> names are <code>minimal</code>, have no duplicates, and are never empty
-(literally, no <code>""</code>s).</p><ul>
-<li><p>All columns can be accessed by name via <code>df[["name"]]</code>.</p></li>
+<li><p><code>unique</code> names are <code>minimal</code>, have no duplicates, and can be used where a variable name is expected.
+Empty names, and <code>...</code> or <code>..</code> followed by a sequence of digits are banned.</p><ul>
+<li><p>All columns can be accessed by name via <code>df[["name"]]</code> and <code>df$`name`</code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/with'>with(df, `name`)</a></code>.</p></li>
 </ul></li>
 <li><p><code>universal</code> names are <code>unique</code> and syntactic (see Details for more).</p><ul>
-<li><p>Names work everywhere, without quoting: <code>df$name</code> and
+<li><p>Names work everywhere, without quoting: <code>df$name</code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/with'>with(df, name)</a></code> and
 <code><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm(name1 ~ name2, data = df)</a></code> and <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select(df, name)</a></code> all work.</p></li>
 </ul></li>
 </ul>
@@ -195,15 +195,19 @@ with, e.g., <code>tidyr::gather()</code>.</p>
     <h2 class="hasAnchor" id="unique-names"><a class="anchor" href="#unique-names"></a><code>unique</code> names</h2>
 
     
-    <p><code>unique</code> names are <code>minimal</code>, have no duplicates, and are never empty
-(literally, no <code>""</code>s). If a data frame has <code>unique</code> names, you can index it
-by name, e.g., <code>df[["name"]]</code> works.</p>
+    <p><code>unique</code> names are <code>minimal</code>, have no duplicates, and can be used (possibly with backticks)
+in contexts where a variable is expected. Empty names, and <code>...</code> or <code>..</code> followed by a
+sequence of digits are banned
+If a data frame has <code>unique</code> names, you can index it by name, and also access the columns
+by name.
+In particular, <code>df[["name"]]</code> and <code>df$`name`</code> and also <code><a href='https://www.rdocumentation.org/packages/base/topics/with'>with(df, `name`)</a></code> always work.</p>
 <p>There are many ways to make names <code>unique</code>. We append a suffix of the form
-<code>..j</code> to any name that is <code>""</code> or a duplicate, where <code>j</code> is the position.</p>
-<p>Example:</p><pre>Original names:    ""    "x"    "" "y"    "x"
-  unique names: "..1" "x..2" "..3" "y" "x..5"
+<code>...j</code> to any name that is <code>""</code> or a duplicate, where <code>j</code> is the position.
+We also change <code>..#</code> and <code>...</code> to <code>...#</code>.</p>
+<p>Example:</p><pre>Original names:     ""     "x"     "" "y"     "x"  "..2"  "..."
+  unique names: "...1" "x...2" "...3" "y" "x...5" "...6" "...7"
 </pre>
-    <p>Pre-existing suffixes of the form <code>..j</code> are always stripped, prior to making
+    <p>Pre-existing suffixes of the form <code>...j</code> are always stripped, prior to making
 names <code>unique</code>, i.e. reconstructing the suffixes. If this interacts poorly
 with your names, you should take control of name repair.</p>
     
@@ -213,11 +217,11 @@ with your names, you should take control of name repair.</p>
     <p><code>universal</code> names are <code>unique</code> and syntactic, meaning they:</p><ul>
 <li><p>Are never empty (inherited from <code>unique</code>).</p></li>
 <li><p>Have no duplicates (inherited from <code>unique</code>).</p></li>
+<li><p>Are not <code>...</code>. Do not have the form <code>..i</code>, where <code>i</code> is a number (inherited from <code>unique</code>)..</p></li>
 <li><p>Consist of letters, numbers, and the dot <code>.</code> or underscore <code>_</code>
 characters.</p></li>
 <li><p>Start with a letter or start with the dot <code>.</code> not followed by a number.</p></li>
 <li><p>Are not a <a href='https://www.rdocumentation.org/packages/base/topics/Reserved'>reserved</a> word, e.g., <code>if</code> or <code>function</code> or <code>TRUE</code>.</p></li>
-<li><p>Are not <code>...</code>. Do not have the form <code>..i</code>, where <code>i</code> is a number.</p></li>
 </ul>
     <p>If a data frame has <code>universal</code> names, variable names can be used "as is" in
 code. They work well with nonstandard evaluation, e.g., <code>df$name</code> works.</p>
@@ -226,8 +230,8 @@ code. They work well with nonstandard evaluation, e.g., <code>df$name</code> wor
 the name is syntactic.</p>
 <p>Examples:</p><pre> Original names:     ""    "x"    NA     "x"
 universal names: "...1" "x..2" "...3" "x..4"
-    Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
- universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+    Original names: "(y)"  "_z"  ".2fa"  "FALSE"
+ universal names: ".y." "._z" "..2fa" ".FALSE"
 </pre>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -248,9 +252,9 @@ section in the "tidyverse package development principles".</p></div>
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'><span class='co'>## or request that the names be made unique</span>
 <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* x -&gt; x..1</span>
-#&gt; <span class='message'>* x -&gt; x..2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
-#&gt;    x..1  x..2
+#&gt; <span class='message'>* x -&gt; x...1</span>
+#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   x...1 x...2
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
 <span class='co'>## by default, non-syntactic names are allowed</span>

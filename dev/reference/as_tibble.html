@@ -267,10 +267,10 @@ values. <a href='name-repair.html'>name-repair</a> documents the details of name
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
 <span class='fu'>as_tibble</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* `` -&gt; `..1`</span>
-#&gt; <span class='message'>* `` -&gt; `..2`</span>
-#&gt; <span class='message'>* `` -&gt; `..3`</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
-#&gt;     ..1   ..2   ..3
+#&gt; <span class='message'>* `` -&gt; ...1</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;    ...1  ...2  ...3
 #&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
 #&gt; 1     1     2     3</div><div class='input'>
 <span class='co'># Prefer enframe() for vectors</span>
