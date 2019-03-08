@@ -7,11 +7,11 @@
 #'   * `minimal` names exist. The `names` attribute is not `NULL`. The name of
 #'     an unnamed element is `""` and never `NA`. Tibbles created by the tibble
 #'     package have names that are, at least, `minimal`.
-#'   * `unique` names are `minimal`, have no duplicates, and are never empty
-#'     (literally, no `""`s).
-#'     - All columns can be accessed by name via `df[["name"]]`.
+#'   * `unique` names are `minimal`, have no duplicates, and can be used where a variable name is expected.
+#'     Empty names, and `...` or `..` followed by a sequence of digits are banned.
+#'     - All columns can be accessed by name via `df[["name"]]` and `` df$`name` `` and ``with(df, `name`)``.
 #'   * `universal` names are `unique` and syntactic (see Details for more).
-#'     - Names work everywhere, without quoting: `df$name` and
+#'     - Names work everywhere, without quoting: `df$name` and `with(df, name)` and
 #'     `lm(name1 ~ name2, data = df)` and `dplyr::select(df, name)` all work.
 #'
 #' `universal` implies `unique`, `unique` implies `minimal`. These levels are
@@ -46,20 +46,24 @@
 #'
 #' @section `unique` names:
 #'
-#' `unique` names are `minimal`, have no duplicates, and are never empty
-#'  (literally, no `""`s). If a data frame has `unique` names, you can index it
-#'  by name, e.g., `df[["name"]]` works.
+#' `unique` names are `minimal`, have no duplicates, and can be used (possibly with backticks)
+#'  in contexts where a variable is expected. Empty names, and `...` or `..` followed by a
+#'  sequence of digits are banned
+#'  If a data frame has `unique` names, you can index it by name, and also access the columns
+#'  by name.
+#'  In particular, `df[["name"]]` and `` df$`name` `` and also ``with(df, `name`)`` always work.
 #'
 #' There are many ways to make names `unique`. We append a suffix of the form
-#' `..j` to any name that is `""` or a duplicate, where `j` is the position.
+#' `...j` to any name that is `""` or a duplicate, where `j` is the position.
+#' We also change `..#` and `...` to `...#`.
 #'
 #' Example:
 #' ```
-#' Original names:    ""    "x"    "" "y"    "x"
-#'   unique names: "..1" "x..2" "..3" "y" "x..5"
+#' Original names:     ""     "x"     "" "y"     "x"  "..2"  "..."
+#'   unique names: "...1" "x...2" "...3" "y" "x...5" "...6" "...7"
 #' ```
 #'
-#' Pre-existing suffixes of the form `..j` are always stripped, prior to making
+#' Pre-existing suffixes of the form `...j` are always stripped, prior to making
 #' names `unique`, i.e. reconstructing the suffixes. If this interacts poorly
 #' with your names, you should take control of name repair.
 #'
@@ -68,11 +72,11 @@
 #' `universal` names are `unique` and syntactic, meaning they:
 #'   * Are never empty (inherited from `unique`).
 #'   * Have no duplicates (inherited from `unique`).
+#'   * Are not `...`. Do not have the form `..i`, where `i` is a number (inherited from `unique`).
 #'   * Consist of letters, numbers, and the dot `.` or underscore `_`
 #'     characters.
 #'   * Start with a letter or start with the dot `.` not followed by a number.
 #'   * Are not a [reserved] word, e.g., `if` or `function` or `TRUE`.
-#'   * Are not `...`. Do not have the form `..i`, where `i` is a number.
 #'
 #' If a data frame has `universal` names, variable names can be used "as is" in
 #' code. They work well with nonstandard evaluation, e.g., `df$name` works.
@@ -86,8 +90,8 @@
 #'  Original names:     ""    "x"    NA     "x"
 #' universal names: "...1" "x..2" "...3" "x..4"
 #'
-#'   Original names: "(y)"  "_z"  ".2fa"  "FALSE"  "..."  "..3"
-#'  universal names: ".y." "._z" "..2fa" ".FALSE" "...." "...6"
+#'   Original names: "(y)"  "_z"  ".2fa"  "FALSE"
+#'  universal names: ".y." "._z" "..2fa" ".FALSE"
 #' ```
 #'
 #' @seealso

@@ -400,7 +400,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("a..1", "a..2", "n")
+    c("a...1", "a...2", "n")
   )
 
   x <- table("if" = c(1, 1, 1, 2, 2, 2), "when" = c(3, 4, 5, 3, 4, 5))
@@ -426,7 +426,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("m", "n..2", "n..3")
+    c("m", "n...2", "n...3")
   )
 })
 
