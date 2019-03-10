@@ -27,18 +27,16 @@ set_minimal_names <- function(x) {
 
 unique_names <- function(name, quiet = FALSE, transform = identity) {
   min_name <- minimal_names(name)
-  naked_name <- strip_pos(min_name)
-  naked_name <- two_to_three_dots(naked_name)
+  naked_name <- two_to_three_dots(min_name)
   naked_name <- strip_pos(naked_name)
   naked_needs_suffix <- (naked_name %in% c("", "..."))
 
   new_name <- rep_along(naked_name, "")
   new_name[!naked_needs_suffix] <- transform(naked_name[!naked_needs_suffix])
 
-  new_name <- append_pos(new_name, needs_suffix = naked_needs_suffix)
-
   duped_after <- duplicated(new_name) | duplicated(new_name, fromLast = TRUE)
-  new_name <- append_pos(new_name, duped_after)
+
+  new_name <- append_pos(new_name, needs_suffix = naked_needs_suffix | duped_after)
 
   if (!quiet) {
     describe_repair(name, new_name)
