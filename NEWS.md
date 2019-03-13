@@ -1,3 +1,8 @@
+# tibble 2.1.0
+
+- Internal changes only.
+
+
 # tibble 2.0.1.9002
 
 - Three dots are used even for `"unique"` name repair (#566).
