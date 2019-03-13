@@ -19,7 +19,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- sticky kit -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
@@ -28,6 +28,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
+
+
 
 <meta property="og:title" content="Printing tibbles — formatting" />
 
@@ -84,7 +86,7 @@ available by setting the options described below." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
         </div>
       </div>
     </div>
@@ -387,41 +389,41 @@ titles.</p></li>
 #&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 #&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</div><div class='input'>
 <span class='no'>mtcars2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='no'>mtcars</span>, <span class='no'>mtcars</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* mpg -&gt; mpg..1</span>
-#&gt; <span class='message'>* cyl -&gt; cyl..2</span>
-#&gt; <span class='message'>* disp -&gt; disp..3</span>
-#&gt; <span class='message'>* hp -&gt; hp..4</span>
-#&gt; <span class='message'>* drat -&gt; drat..5</span>
-#&gt; <span class='message'>* … and 17 more</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>mtcars2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 22
-#&gt;    mpg..1 cyl..2 disp..3 hp..4 drat..5 wt..6 qsec..7 vs..8 am..9 gear..10
-#&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1   21        6   160     110    3.9   2.62    16.5     0     1        4
-#&gt;  2   21        6   160     110    3.9   2.88    17.0     0     1        4
-#&gt;  3   22.8      4   108      93    3.85  2.32    18.6     1     1        4
-#&gt;  4   21.4      6   258     110    3.08  3.22    19.4     1     0        3
-#&gt;  5   18.7      8   360     175    3.15  3.44    17.0     0     0        3
-#&gt;  6   18.1      6   225     105    2.76  3.46    20.2     1     0        3
-#&gt;  7   14.3      8   360     245    3.21  3.57    15.8     0     0        3
-#&gt;  8   24.4      4   147.     62    3.69  3.19    20       1     0        4
-#&gt;  9   22.8      4   141.     95    3.92  3.15    22.9     1     0        4
-#&gt; 10   19.2      6   168.    123    3.92  3.44    18.3     1     0        4
-#&gt; 11   17.8      6   168.    123    3.92  3.44    18.9     1     0        4
-#&gt; 12   16.4      8   276.    180    3.07  4.07    17.4     0     0        3
-#&gt; 13   17.3      8   276.    180    3.07  3.73    17.6     0     0        3
-#&gt; 14   15.2      8   276.    180    3.07  3.78    18       0     0        3
-#&gt; 15   10.4      8   472     205    2.93  5.25    18.0     0     0        3
-#&gt; 16   10.4      8   460     215    3     5.42    17.8     0     0        3
-#&gt; 17   14.7      8   440     230    3.23  5.34    17.4     0     0        3
-#&gt; 18   32.4      4    78.7    66    4.08  2.2     19.5     1     1        4
-#&gt; 19   30.4      4    75.7    52    4.93  1.62    18.5     1     1        4
-#&gt; 20   33.9      4    71.1    65    4.22  1.84    19.9     1     1        4
-#&gt; 21   21.5      4   120.     97    3.7   2.46    20.0     1     0        3
-#&gt; 22   15.5      8   318     150    2.76  3.52    16.9     0     0        3
-#&gt; 23   15.2      8   304     150    3.15  3.44    17.3     0     0        3
-#&gt; 24   13.3      8   350     245    3.73  3.84    15.4     0     0        3
-#&gt; 25   19.2      8   400     175    3.08  3.84    17.0     0     0        3
-#&gt; # … with 7 more rows, and 12 more variables: carb..11 &lt;dbl&gt;, mpg..12 &lt;dbl&gt;,
-#&gt; #   cyl..13 &lt;dbl&gt;, …</div><div class='input'>
+#&gt; <span class='message'>* mpg -&gt; mpg...1</span>
+#&gt; <span class='message'>* cyl -&gt; cyl...2</span>
+#&gt; <span class='message'>* disp -&gt; disp...3</span>
+#&gt; <span class='message'>* hp -&gt; hp...4</span>
+#&gt; <span class='message'>* drat -&gt; drat...5</span>
+#&gt; <span class='message'>* … and 17 more problems</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>mtcars2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 22
+#&gt;    mpg...1 cyl...2 disp...3 hp...4 drat...5 wt...6 qsec...7 vs...8 am...9
+#&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1    21         6    160      110     3.9    2.62     16.5      0      1
+#&gt;  2    21         6    160      110     3.9    2.88     17.0      0      1
+#&gt;  3    22.8       4    108       93     3.85   2.32     18.6      1      1
+#&gt;  4    21.4       6    258      110     3.08   3.22     19.4      1      0
+#&gt;  5    18.7       8    360      175     3.15   3.44     17.0      0      0
+#&gt;  6    18.1       6    225      105     2.76   3.46     20.2      1      0
+#&gt;  7    14.3       8    360      245     3.21   3.57     15.8      0      0
+#&gt;  8    24.4       4    147.      62     3.69   3.19     20        1      0
+#&gt;  9    22.8       4    141.      95     3.92   3.15     22.9      1      0
+#&gt; 10    19.2       6    168.     123     3.92   3.44     18.3      1      0
+#&gt; 11    17.8       6    168.     123     3.92   3.44     18.9      1      0
+#&gt; 12    16.4       8    276.     180     3.07   4.07     17.4      0      0
+#&gt; 13    17.3       8    276.     180     3.07   3.73     17.6      0      0
+#&gt; 14    15.2       8    276.     180     3.07   3.78     18        0      0
+#&gt; 15    10.4       8    472      205     2.93   5.25     18.0      0      0
+#&gt; 16    10.4       8    460      215     3      5.42     17.8      0      0
+#&gt; 17    14.7       8    440      230     3.23   5.34     17.4      0      0
+#&gt; 18    32.4       4     78.7     66     4.08   2.2      19.5      1      1
+#&gt; 19    30.4       4     75.7     52     4.93   1.62     18.5      1      1
+#&gt; 20    33.9       4     71.1     65     4.22   1.84     19.9      1      1
+#&gt; 21    21.5       4    120.      97     3.7    2.46     20.0      1      0
+#&gt; 22    15.5       8    318      150     2.76   3.52     16.9      0      0
+#&gt; 23    15.2       8    304      150     3.15   3.44     17.3      0      0
+#&gt; 24    13.3       8    350      245     3.73   3.84     15.4      0      0
+#&gt; 25    19.2       8    400      175     3.08   3.84     17.0      0      0
+#&gt; # … with 7 more rows, and 13 more variables: gear...10 &lt;dbl&gt;, carb...11 &lt;dbl&gt;,
+#&gt; #   mpg...12 &lt;dbl&gt;, …</div><div class='input'>
 <span class='fu'>trunc_mat</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; # Description: data.frame [32 × 11]
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
