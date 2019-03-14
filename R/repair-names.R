@@ -218,6 +218,11 @@ check_unique <- function(name) {
     abort(error_column_must_be_named(bad_name))
   }
 
+  dot_dot_name <- grep("^[.][.](?:[.]|[1-9][0-9]*)$", name)
+  if (has_length(dot_dot_name)) {
+    abort(error_column_must_not_be_dot_dot(dot_dot_name))
+  }
+
   dups <- which(duplicated(name))
   if (has_length(dups)) {
     abort(error_column_names_must_be_unique(name[dups]))

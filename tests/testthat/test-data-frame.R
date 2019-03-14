@@ -273,6 +273,20 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
     fixed = TRUE
   )
 
+  l3 <- list(x = 1, ... = 2)
+  expect_error(
+    as_tibble(l3),
+    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    fixed = TRUE
+  )
+
+  l4 <- list(x = 1, ..1 = 2)
+  expect_error(
+    as_tibble(l4),
+    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    fixed = TRUE
+  )
+
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)

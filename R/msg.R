@@ -122,6 +122,10 @@ error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_rep
   invalid_df("must be named", names, use_repair(repair))
 }
 
+error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair")) {
+  invalid_df("must not have names of the form ... or ..j", names, use_repair(repair))
+}
+
 error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair")) {
   pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair))
 }
