@@ -1,4 +1,4 @@
-# tibble 2.1.0
+# tibble 2.1.1
 
 - Three dots are used even for `"unique"` name repair (#566).
 
