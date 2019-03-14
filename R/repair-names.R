@@ -87,8 +87,8 @@
 #'
 #' Examples:
 #' ```
-#'  Original names:     ""    "x"    NA     "x"
-#' universal names: "...1" "x..2" "...3" "x..4"
+#'  Original names:     ""     "x"    NA      "x"
+#' universal names: "...1" "x...2" "...3" "x...4"
 #'
 #'   Original names: "(y)"  "_z"  ".2fa"  "FALSE"
 #'  universal names: ".y." "._z" "..2fa" ".FALSE"
