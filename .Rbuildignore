@@ -21,3 +21,4 @@
 ^\.github$
 ^\.drake$
 ^adhoc$
+^man/figures/logo.svg$
