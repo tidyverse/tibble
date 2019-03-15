@@ -1,5 +1,7 @@
 # tibble 2.1.1
 
+- Columns can now be added of any class for which there exists all typical vector manipulation methods: `[`, `[<-`, `[[`, `[[<-`, `c`, `length` (@zachary-foster).
+
 - Three dots are used even for `"unique"` name repair (#566).
 
 - `add_row()`, `add_case()` and `add_column()` now signal a warning once per session if the input is not a data frame (#575).

@@ -162,7 +162,15 @@ check_valid_cols <- function(x) {
 
 is_1d_or_2d <- function(x) {
   # dimension check is for matrices and data.frames
-  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
+  ((is_vector(x) || is_like_vector(x)) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
+}
+
+is_like_vector <- function(x) {
+  needed_funcs <- c("[", "[[", "[<-", "[[<-", "length", "c")
+  has_funcs <- map_lgl(needed_funcs, function(func) {
+    any(paste0(func, ".", class(x)) %in% methods(func))
+  })
+  all(has_funcs)
 }
 
 recycle_columns <- function(x, .rows, lengths) {
