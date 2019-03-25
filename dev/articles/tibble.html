@@ -66,8 +66,33 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">News</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Release notes</li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/">Version 2.1.1</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/">Version 2.0.1</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/">Version 2.0.0 pre-announcement</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/">Version 1.4.2</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/">Version 1.4.1</a>
+    </li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/tibble">
@@ -324,6 +349,46 @@
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error: Tibble columns must have consistent lengths, only values of length one are recycled:
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> * Length 2: Column `c`
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> * Length 3: Column `a`
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Backtrace:
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">     </span><span style="color: #BB0000;">█
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  1. </span><span style="color: #BB0000;">├─base::tryCatch(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  2. </span><span style="color: #BB0000;">│ └─base:::tryCatchList(expr, classes, parentenv, handlers)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  3. </span><span style="color: #BB0000;">│   ├─base:::tryCatchOne(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  4. </span><span style="color: #BB0000;">│   │ └─base:::doTryCatch(return(expr), name, parentenv, handler)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  5. </span><span style="color: #BB0000;">│   └─base:::tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  6. </span><span style="color: #BB0000;">│     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  7. </span><span style="color: #BB0000;">│       └─base:::doTryCatch(return(expr), name, parentenv, handler)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  8. </span><span style="color: #BB0000;">├─base::withCallingHandlers(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;">  9. </span><span style="color: #BB0000;">├─base::saveRDS(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 10. </span><span style="color: #BB0000;">├─base::do.call(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 11. </span><span style="color: #BB0000;">├─(function (what, args, quote = FALSE, envir = parent.frame()) ...
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 12. </span><span style="color: #BB0000;">├─(function (...) ...
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 13. </span><span style="color: #BB0000;">│ └─rmarkdown::render(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 14. </span><span style="color: #BB0000;">│   └─knitr::knit(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 15. </span><span style="color: #BB0000;">│     └─knitr:::process_file(text, output)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 16. </span><span style="color: #BB0000;">│       ├─base::withCallingHandlers(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 17. </span><span style="color: #BB0000;">│       ├─knitr:::process_group(group)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 18. </span><span style="color: #BB0000;">│       └─knitr:::process_group.block(group)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 19. </span><span style="color: #BB0000;">│         └─knitr:::call_block(x)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 20. </span><span style="color: #BB0000;">│           └─knitr:::block_exec(params)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 21. </span><span style="color: #BB0000;">│             ├─knitr:::in_dir(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 22. </span><span style="color: #BB0000;">│             └─knitr:::evaluate(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 23. </span><span style="color: #BB0000;">│               └─evaluate::evaluate(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 24. </span><span style="color: #BB0000;">│                 └─evaluate:::evaluate_call(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 25. </span><span style="color: #BB0000;">│                   ├─evaluate:::timing_fn(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 26. </span><span style="color: #BB0000;">│                   ├─evaluate:::handle(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 27. </span><span style="color: #BB0000;">│                   │ └─base::try(f, silent = TRUE)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 28. </span><span style="color: #BB0000;">│                   │   └─base::tryCatch(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 29. </span><span style="color: #BB0000;">│                   │     └─base:::tryCatchList(expr, classes, parentenv, handlers)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 30. </span><span style="color: #BB0000;">│                   │       └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 31. </span><span style="color: #BB0000;">│                   │         └─base:::doTryCatch(return(expr), name, parentenv, handler)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 32. </span><span style="color: #BB0000;">│                   ├─base::withCallingHandlers(...)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 33. </span><span style="color: #BB0000;">│                   ├─base::withVisible(eval(expr, envir, enclos))
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 34. </span><span style="color: #BB0000;">│                   └─base::eval(expr, envir, enclos)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 35. </span><span style="color: #BB0000;">│                     └─base::eval(expr, envir, enclos)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 36. </span><span style="color: #BB0000;">└─tibble::tibble(a = 1:3, c = 1:2)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 37. </span><span style="color: #BB0000;">  └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #555555;"> 38. </span><span style="color: #BB0000;">    └─tibble:::recycle_columns(x, .rows, lengths)
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">integer</a></span>())</a></code></pre></div>
