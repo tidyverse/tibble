@@ -1,3 +1,5 @@
+url: https://tibble.tidyverse.org
+
 template:
   package: tidytemplate
 
@@ -10,16 +12,25 @@ home:
 reference:
 - title: Tibbles
   contents:
-  - tibble-package
+  - "tibble-package"
   - tibble
-  - ends_with("ibble")
-  - enframe
-  - has_name
-  - tibble-options
+  - formatting
+  - "tibble-options"
+  - tribble
   - -reexports
+
+- title: Coercion
+  contents:
+  - as_tibble
+  - "name-repair"
+  - new_tibble
+  - validate_tibble
+  - enframe
+  - deframe
 
 - title: Manipulation
   contents:
+  - subsetting
   - add_row
   - add_column
 
@@ -50,13 +61,26 @@ navbar:
     - text: Extending tibble
       href: articles/extending.html
   - text: News
-    href: news/index.html
+    menu:
+    - text: "Release notes"
+    - text: "Version 2.1.1"
+      href: https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/
+    - text: "Version 2.0.1"
+      href: https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/
+    - text: "Version 2.0.0 pre-announcement"
+      href: https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/
+    - text: "Version 1.4.2"
+      href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/
+    - text: "Version 1.4.1"
+      href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/
+    - text: "Change log"
+      href: news/index.html
   right:
   - icon: fa-github fa-lg
     href: https://github.com/tidyverse/tibble
 
 development:
-  mode: devel
+  mode: auto
 
 authors:
   Kirill Müller:

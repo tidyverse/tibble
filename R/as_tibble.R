@@ -57,7 +57,11 @@
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
 #'
-#' as_tibble(1:3, .name_repair = "unique")
+#' as_tibble(as.list(1:3), .name_repair = "unique")
+#'
+#' # Prefer enframe() for vectors
+#' enframe(1:3)
+#' enframe(1:3, name = NULL)
 #'
 #' # For list-like inputs, `as_tibble()` is considerably simpler than
 #' # `as.data.frame()` and hence faster
@@ -84,12 +88,12 @@ as_tibble <- function(x, ...,
 
 #' @export
 #' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = TRUE, ...,
+as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
-  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
+  .name_repair <- compat_name_repair(.name_repair, validate)
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -103,7 +107,7 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (is.na(old_rownames[[1]])) {
+    if (is.integer(old_rownames)) {
       abort(error_as_tibble_needs_rownames())
     }
     add_column(result, !!rownames := old_rownames, .before = 1L)
@@ -112,12 +116,12 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 
 #' @export
 #' @rdname as_tibble
-as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
+as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
+  .name_repair <- compat_name_repair(.name_repair, validate)
 
-  lst_to_tibble(x, .rows, .name_repair)
+  lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
@@ -127,8 +131,8 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   recycle_columns(x, .rows, lengths)
 }
 
-compat_name_repair <- function(.name_repair, missing_validate, validate) {
-  if (missing_validate) return(.name_repair)
+compat_name_repair <- function(.name_repair, validate) {
+  if (is.null(validate)) return(.name_repair)
 
   name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
@@ -210,19 +214,26 @@ guess_nrow <- function(lengths, .rows) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
+as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   m <- matrixToDataFrame(x)
   names <- colnames(x)
   if (is.null(.name_repair)) {
-    if (is.null(names)) {
+    if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
       signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
-      .name_repair = paste0("V", seq_along(m))
+      compat_names <- paste0("V", seq_along(m))
+      if (is.null(names)) {
+        names <- compat_names
+      } else {
+        names[bad_names] <- compat_names[bad_names]
+      }
+      .name_repair <- function(x) names
     } else {
-      .name_repair = "check_unique"
+      .name_repair <- "check_unique"
     }
+    validate <- NULL
   }
   colnames(m) <- names
-  as_tibble(m, ..., .name_repair = .name_repair)
+  as_tibble(m, ..., validate = validate, .name_repair = .name_repair)
 }
 
 #' @export
@@ -266,7 +277,7 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
-    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.")
+    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.")
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }

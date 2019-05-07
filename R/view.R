@@ -21,7 +21,7 @@ view <- function(x, title = NULL, ...) {
   }
 
   view_fun <- get("View", envir = as.environment("package:utils"))
-  view_fun(x, title)
+  eval_tidy(quo(view_fun(!!x, "title")))
 
   invisible(x)
 }

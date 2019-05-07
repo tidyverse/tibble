@@ -108,6 +108,21 @@ test_that("tibble aliases", {
 
 # as_tibble -----------------------------------------------------------
 
+test_that("columns are recycled to common length", {
+  expect_identical(
+    as_tibble(list(x = 1, y = 1:3)),
+    tibble(x = rep(1, 3), y = 1:3)
+  )
+  expect_identical(
+    as_tibble(list(x = 1:3, y = 1)),
+    tibble(x = 1:3, y = rep(1, 3))
+  )
+  expect_identical(
+    as_tibble(list(x = character(), y = 1)),
+    tibble(x = character(), y = numeric())
+  )
+})
+
 test_that("columns must be same length", {
   expect_error(
     as_tibble(list(x = 1:2, y = 1:3)),
@@ -258,6 +273,20 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
     fixed = TRUE
   )
 
+  l3 <- list(x = 1, ... = 2)
+  expect_error(
+    as_tibble(l3),
+    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    fixed = TRUE
+  )
+
+  l4 <- list(x = 1, ..1 = 2)
+  expect_error(
+    as_tibble(l4),
+    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    fixed = TRUE
+  )
+
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)
@@ -305,6 +334,19 @@ test_that("as_tibble() implements custom name repair", {
     .name_repair = ~make.names(., unique = TRUE)
   )
   expect_identical(invalid_df_purrr, invalid_df)
+})
+
+test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
+  scoped_lifecycle_silence()
+
+  expect_identical(
+    as_tibble(diag(3), validate = TRUE),
+    tibble(
+      V1 = c(1, 0, 0),
+      V2 = c(0, 1, 0),
+      V3 = c(0, 0, 1)
+    )
+  )
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
@@ -372,7 +414,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("a..1", "a..2", "n")
+    c("a...1", "a...2", "n")
   )
 
   x <- table("if" = c(1, 1, 1, 2, 2, 2), "when" = c(3, 4, 5, 3, 4, 5))
@@ -398,7 +440,7 @@ test_that("as_tibble.table() supports .name_repair", {
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "universal")),
-    c("m", "n..2", "n..3")
+    c("m", "n...2", "n...3")
   )
 })
 
@@ -450,10 +492,31 @@ test_that("as_tibble() can convert row names", {
   expect_identical(unclass(tbl_df), unclass(df))
 })
 
+test_that("as_tibble() can convert row names for zero-row tibbles", {
+  df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])[0, ]
+
+  expect_identical(
+    as_tibble(df, rownames = NULL),
+    tibble(a = integer(), b = integer())
+  )
+  expect_identical(
+    as_tibble(df, rownames = "id"),
+    tibble(id = character(), a = integer(), b = integer())
+  )
+  tbl_df <- as_tibble(df, rownames = NA)
+  expect_identical(rownames(tbl_df), rownames(df))
+  expect_identical(unclass(tbl_df), unclass(df))
+})
+
 test_that("as_tibble() throws an error when user turns missing row names into column", {
   df <- data.frame(a = 1:3, b = 2:4)
   expect_error(
     as_tibble(df, rownames = "id"),
+    error_as_tibble_needs_rownames(),
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(df[0, ], rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
   )

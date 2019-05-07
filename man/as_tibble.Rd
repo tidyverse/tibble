@@ -14,14 +14,15 @@ as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
   "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{data.frame}(x, validate = TRUE, ..., .rows = NULL,
+\method{as_tibble}{data.frame}(x, validate = NULL, ..., .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL))
 
-\method{as_tibble}{list}(x, validate = TRUE, ..., .rows = NULL,
+\method{as_tibble}{list}(x, validate = NULL, ..., .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"))
 
-\method{as_tibble}{matrix}(x, ..., .name_repair = NULL)
+\method{as_tibble}{matrix}(x, ..., validate = NULL,
+  .name_repair = NULL)
 
 \method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`)
 
@@ -107,7 +108,11 @@ m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-as_tibble(1:3, .name_repair = "unique")
+as_tibble(as.list(1:3), .name_repair = "unique")
+
+# Prefer enframe() for vectors
+enframe(1:3)
+enframe(1:3, name = NULL)
 
 # For list-like inputs, `as_tibble()` is considerably simpler than
 # `as.data.frame()` and hence faster

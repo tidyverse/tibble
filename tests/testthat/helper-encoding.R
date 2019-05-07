@@ -51,3 +51,9 @@ set_locale <- function(locale) {
   Sys.setlocale("LC_CTYPE", locale)
   locale
 }
+
+skip_on_non_utf8_locale <- function() {
+  if (!l10n_info()$"UTF-8") {
+    skip("Non-UTF-8 locale")
+  }
+}

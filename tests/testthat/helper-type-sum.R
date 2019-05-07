@@ -19,7 +19,7 @@ as_override_tbl_sum <- function(x) {
 }
 
 tbl_sum.override_tbl_sum <- function(x, ...) {
-  c("Overridden" = "tbl_sum", NextMethod())
+  c(NextMethod(), "Overridden" = "tbl_sum")
 }
 
 registerS3method("tbl_sum", "override_tbl_sum", tbl_sum.override_tbl_sum, envir = asNamespace("tibble"))

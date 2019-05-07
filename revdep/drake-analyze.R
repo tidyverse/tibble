@@ -8,3 +8,6 @@ succeeded <- all[!error]
 succeeded <- succeeded[sort(names(succeeded))]
 
 withr::with_output_sink("revdep/new-problems.md", revdepcheck::revdep_report_problems(results = succeeded))
+
+failed <- drake::failed()
+cat(failed, sep = "\n", file = "revdep/failed.txt")

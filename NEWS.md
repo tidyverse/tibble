@@ -1,3 +1,26 @@
+# tibble 2.1.1.9000
+
+- Same as previous version.
+
+
+# tibble 2.1.1
+
+- Three dots are used even for `"unique"` name repair (#566).
+
+- `add_row()`, `add_case()` and `add_column()` now signal a warning once per session if the input is not a data frame (#575).
+
+- Fix `view()` for the case when an object named `x` exists in the global environment (#579).
+
+
+# tibble 2.0.1
+
+- tibble names can again be set to `NULL` within RStudio, as some R routines within RStudio relied on this behaviour (#563, @kevinushey).
+
+- `as_tibble.matrix(validate = TRUE)` works again, with a lifecycle warning (#558).
+
+- Replace `new_list_along()` by `rep_along()` to support rlang 0.3.1 (#557, @lionel-).
+
+
 # tibble 2.0.0
 
 ## Breaking changes
@@ -20,7 +43,7 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - `as_tibble()` always checks that all columns are 1D or 2D vectors and not of type `POSIXlt`, even with `validate = FALSE` (which is now deprecated).
 
-- Calling `as_tibble()` on a vector now warns once per session.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble.
+- Calling `as_tibble()` on a vector now warns once per session.  Use `enframe(name = NULL)` for converting a vector to a one-column tibble, or `enframe()` for converting a named vector to a two-column tibble.
 
 - `data_frame()` and `frame_data()` are soft-deprecated, please use `tibble()` or `tribble()` (#111).
 

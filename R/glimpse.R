@@ -48,7 +48,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   cat_line("Variables: ", big_mark(ncol(df)))
 
   summary <- tbl_sum(x)
-  brief_summary <- summary[names(summary) != "A tibble"]
+  brief_summary <- summary[-1]
 
   if (has_length(brief_summary)) {
     cat_line(names(brief_summary), ": ", brief_summary)

@@ -1,3 +1,5 @@
+^pkgdown$
+^CRAN-RELEASE$
 ^codecov\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -18,3 +20,5 @@
 ^tic\.R$
 ^\.github$
 ^\.drake$
+^adhoc$
+^man/figures/logo.svg$

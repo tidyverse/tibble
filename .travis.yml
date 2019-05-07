@@ -29,9 +29,18 @@ dist: trusty
 cache: packages
 latex: false
 
+#stages: test, full
+stages:
+- name: test
+- name: full
+  if: branch = master
+
+#jobs
 jobs:
   include:
   - r: devel
+    env:
+    - DEV_VERSIONS=TRUE
   - r: 3.1
   - stage: full
     os: osx
@@ -47,6 +56,7 @@ jobs:
 env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
+  - _R_CHECK_SYSTEM_CLOCK_=false
   - MAKEFLAGS="-j 2"
 
 #services

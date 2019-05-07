@@ -1,7 +1,6 @@
 ---
 title: "Extending tibble"
 author: "Kirill Müller, Hadley Wickham"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Extending tibble}
