@@ -22,3 +22,4 @@
 ^\.drake$
 ^adhoc$
 ^man/figures/logo.svg$
+^minver$
