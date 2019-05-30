@@ -356,7 +356,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   expect_error(
     as_tibble(x),
-    class = "defunctError",
+    class = get_defunct_error_class(),
     "name",
     fixed = TRUE
   )
