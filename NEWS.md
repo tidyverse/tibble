@@ -1,6 +1,7 @@
-# tibble 2.1.1.9000
+# tibble 2.1.2
 
-- Same as previous version.
+- Relax version requirements.
+- Fix test failing after pillar upgrade.
 
 
 # tibble 2.1.1
