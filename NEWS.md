@@ -1,3 +1,8 @@
+# tibble 2.1.2.9000
+
+- No changes.
+
+
 # tibble 2.1.2
 
 - Relax version requirements.
