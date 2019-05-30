@@ -42,7 +42,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.2.9000</span>
         </div>
       </div>
     </div>
@@ -216,11 +216,11 @@
 <a class="sourceLine" id="cb4-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16">data</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
-##   venue          year loc              paths       
-##   &lt;chr&gt;         &lt;int&gt; &lt;S3: latlon&gt;     &lt;list&gt;      
-## 1 rstudio::conf  2017 28°20'N  81°33'W &lt;S3: latlon&gt;
-## 2 rstudio::conf  2018 32°43'N 117°10'W &lt;S3: latlon&gt;
-## 3 rstudio::conf  2019             &lt;NA&gt; &lt;S3: latlon&gt;</code></pre>
+##   venue          year loc              paths   
+##   &lt;chr&gt;         &lt;int&gt; &lt;latlon&gt;         &lt;list&gt;  
+## 1 rstudio::conf  2017 28°20'N  81°33'W &lt;latlon&gt;
+## 2 rstudio::conf  2018 32°43'N 117°10'W &lt;latlon&gt;
+## 3 rstudio::conf  2019             &lt;NA&gt; &lt;latlon&gt;</code></pre>
 <p>(The <code>paths</code> column is a list that contains arbitrary data, in our case <code>latlon</code> vectors. A list column is a powerful way to attach hierarchical or unstructured data to an observation in a data frame.)</p>
 <p>The output has three main problems:</p>
 <ol style="list-style-type: decimal">
@@ -351,13 +351,15 @@
 <a class="sourceLine" id="cb20-10" data-line-number="10">}</a>
 <a class="sourceLine" id="cb20-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb20-12" data-line-number="12">data</a></code></pre></div>
+<pre><code>## Warning: The `subclass` argument to `new_pillar_shaft()` is deprecated, please use the `class` argument.
+## This warning is displayed once per session.</code></pre>
 <pre><code>## # A tibble: 3 x 4
 ##   venue          year loc              paths 
 ##   &lt;chr&gt;         &lt;int&gt; &lt;geo&gt;            &lt;list&gt;
 ## 1 rstudio::conf  2017 28°20'N  81°33'W &lt;geo&gt; 
 ## 2 rstudio::conf  2018 32°43'N 117°10'W &lt;geo&gt; 
 ## 3 rstudio::conf  2019 NA               &lt;geo&gt;</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(data, <span class="dt">width =</span> <span class="dv">35</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(data, <span class="dt">width =</span> <span class="dv">35</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   venue     year loc          paths
 ##   &lt;chr&gt;    &lt;int&gt; &lt;geo&gt;        &lt;lis&gt;
@@ -369,33 +371,33 @@
 <h2 class="hasAnchor">
 <a href="#adding-color" class="anchor"></a>Adding color</h2>
 <p>Both <code>new_pillar_shaft_simple()</code> and <code>new_ornament()</code> accept ANSI escape codes for coloring, emphasis, or other ways of highlighting text on terminals that support it. Some formattings are predefined, e.g. <code>style_subtle()</code> displays text in a light gray. For default data types, this style is used for insignificant digits. We’ll be formatting the degree and minute signs in a subtle style, because they serve only as separators. You can also use the <a href="https://cran.r-project.org/package=crayon">crayon</a> package to add custom formattings to your output.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">#' @importFrom pillar pillar_shaft</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">#' @export</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">pillar_shaft.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">  out &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">formatter =</span> deg_min_color)</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">  out[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(x)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/new_pillar_shaft">new_pillar_shaft_simple</a></span>(out, <span class="dt">align =</span> <span class="st">"left"</span>, <span class="dt">na_indent =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb24-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">deg_min_color &lt;-<span class="st"> </span><span class="cf">function</span>(x, pm) {</a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">  sign &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sign">sign</a></span>(x)</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(x)</a>
-<a class="sourceLine" id="cb24-12" data-line-number="12">  deg &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">trunc</a></span>(x)</a>
-<a class="sourceLine" id="cb24-13" data-line-number="13">  x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span>deg</a>
-<a class="sourceLine" id="cb24-14" data-line-number="14">  rad &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(x <span class="op">*</span><span class="st"> </span><span class="dv">60</span>)</a>
-<a class="sourceLine" id="cb24-15" data-line-number="15">  ret &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sprintf">sprintf</a></span>(</a>
-<a class="sourceLine" id="cb24-16" data-line-number="16">    <span class="st">"%d%s%.2d%s%s"</span>,</a>
-<a class="sourceLine" id="cb24-17" data-line-number="17">    deg,</a>
-<a class="sourceLine" id="cb24-18" data-line-number="18">    pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/style_subtle">style_subtle</a></span>(<span class="st">"°"</span>),</a>
-<a class="sourceLine" id="cb24-19" data-line-number="19">    rad,</a>
-<a class="sourceLine" id="cb24-20" data-line-number="20">    pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/style_subtle">style_subtle</a></span>(<span class="st">"'"</span>),</a>
-<a class="sourceLine" id="cb24-21" data-line-number="21">    pm[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(sign <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb24-22" data-line-number="22">  )</a>
-<a class="sourceLine" id="cb24-23" data-line-number="23">  ret[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(x)] &lt;-<span class="st"> ""</span></a>
-<a class="sourceLine" id="cb24-24" data-line-number="24">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(ret, <span class="dt">justify =</span> <span class="st">"right"</span>)</a>
-<a class="sourceLine" id="cb24-25" data-line-number="25">}</a>
-<a class="sourceLine" id="cb24-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb24-27" data-line-number="27">data</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">#' @importFrom pillar pillar_shaft</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#' @export</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">pillar_shaft.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">  out &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">formatter =</span> deg_min_color)</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">  out[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(x)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/new_pillar_shaft">new_pillar_shaft_simple</a></span>(out, <span class="dt">align =</span> <span class="st">"left"</span>, <span class="dt">na_indent =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">deg_min_color &lt;-<span class="st"> </span><span class="cf">function</span>(x, pm) {</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">  sign &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sign">sign</a></span>(x)</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(x)</a>
+<a class="sourceLine" id="cb25-12" data-line-number="12">  deg &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">trunc</a></span>(x)</a>
+<a class="sourceLine" id="cb25-13" data-line-number="13">  x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span>deg</a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">  rad &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(x <span class="op">*</span><span class="st"> </span><span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb25-15" data-line-number="15">  ret &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sprintf">sprintf</a></span>(</a>
+<a class="sourceLine" id="cb25-16" data-line-number="16">    <span class="st">"%d%s%.2d%s%s"</span>,</a>
+<a class="sourceLine" id="cb25-17" data-line-number="17">    deg,</a>
+<a class="sourceLine" id="cb25-18" data-line-number="18">    pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/style_subtle">style_subtle</a></span>(<span class="st">"°"</span>),</a>
+<a class="sourceLine" id="cb25-19" data-line-number="19">    rad,</a>
+<a class="sourceLine" id="cb25-20" data-line-number="20">    pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/style_subtle">style_subtle</a></span>(<span class="st">"'"</span>),</a>
+<a class="sourceLine" id="cb25-21" data-line-number="21">    pm[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(sign <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb25-22" data-line-number="22">  )</a>
+<a class="sourceLine" id="cb25-23" data-line-number="23">  ret[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(x)] &lt;-<span class="st"> ""</span></a>
+<a class="sourceLine" id="cb25-24" data-line-number="24">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(ret, <span class="dt">justify =</span> <span class="st">"right"</span>)</a>
+<a class="sourceLine" id="cb25-25" data-line-number="25">}</a>
+<a class="sourceLine" id="cb25-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb25-27" data-line-number="27">data</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   venue          year loc              paths 
 ##   &lt;chr&gt;         &lt;int&gt; &lt;geo&gt;            &lt;list&gt;
@@ -408,11 +410,11 @@
 <h2 class="hasAnchor">
 <a href="#fixing-list-columns" class="anchor"></a>Fixing list columns</h2>
 <p>To tweak the output in the <code>paths</code> column, we simply need to indicate that our class is an S3 vector:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co">#' @importFrom pillar is_vector_s3</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="co">#' @export</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">is_vector_s3.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">data</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">#' @importFrom pillar is_vector_s3</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co">#' @export</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">is_vector_s3.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">data</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   venue          year loc              paths    
 ##   &lt;chr&gt;         &lt;int&gt; &lt;geo&gt;            &lt;list&gt;   
@@ -421,9 +423,9 @@
 ## 3 rstudio::conf  2019      NA          &lt;geo [1]&gt;</code></pre>
 <p>This is picked up by the default implementation of <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">obj_sum()</a></code>, which then shows the type and the length in brackets. If your object is built on top of an atomic vector the default will be adequate. You, will, however, need to provide an <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">obj_sum()</a></code> method for your class if your object is vectorised and built on top of a list.</p>
 <p>An example of an object of this type in base R is <code>POSIXlt</code>: it is a list with 9 components.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">time &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.POSIXlt">as.POSIXlt</a></span>(<span class="st">"2018-12-20 23:29:51"</span>, <span class="dt">tz =</span> <span class="st">"CET"</span>)</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.POSIXlt">as.POSIXlt</a></span>(time <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>))</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">unclass</a></span>(x))</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">time &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.POSIXlt">as.POSIXlt</a></span>(<span class="st">"2018-12-20 23:29:51"</span>, <span class="dt">tz =</span> <span class="st">"CET"</span>)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.POSIXlt">as.POSIXlt</a></span>(time <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">3600</span>))</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">unclass</a></span>(x))</a></code></pre></div>
 <pre><code>## List of 11
 ##  $ sec   : num [1:3] 51 51 51
 ##  $ min   : int [1:3] 29 30 29
@@ -438,54 +440,54 @@
 ##  $ gmtoff: int [1:3] 3600 3600 3600
 ##  - attr(*, "tzone")= chr [1:3] "CET" "CET" "CEST"</code></pre>
 <p>But it pretends to be a vector with 3 elements:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">x</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">x</a></code></pre></div>
 <pre><code>## [1] "2018-12-20 23:29:51 CET" "2018-12-20 23:30:51 CET"
 ## [3] "2018-12-21 00:29:51 CET"</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(x)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(x)</a></code></pre></div>
 <pre><code>##  POSIXlt[1:3], format: "2018-12-20 23:29:51" "2018-12-20 23:30:51" ...</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co">#' @importFrom pillar obj_sum</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="co">#' @export</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"POSIXlt"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(x))</a>
-<a class="sourceLine" id="cb36-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co">#' @importFrom pillar obj_sum</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co">#' @export</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">obj_sum.POSIXlt &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"POSIXlt"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(x))</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">}</a></code></pre></div>
 </div>
 <div id="testing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#testing" class="anchor"></a>Testing</h2>
 <p>If you want to test the output of your code, you can compare it with a known state recorded in a text file. For this, pillar offers the <code>expect_known_display()</code> expectation which requires and works best with the testthat package. Make sure that the output is generated only by your package to avoid inconsistencies when external code is updated. Here, this means that you test only the shaft portion of the pillar, and not the entire pillar or even a tibble that contains a column with your data type!</p>
 <p>The tests work best with the testthat package:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(testthat)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(testthat)</a></code></pre></div>
 <p>The code below will compare the output of <code>pillar_shaft(data$loc)</code> with known output stored in the <code>latlon.txt</code> file. The first run warns because the file doesn’t exist yet.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5">  )</a>
-<a class="sourceLine" id="cb38-6" data-line-number="6">})</a></code></pre></div>
-<p>From the second run on, the printing will be compared with the file:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
 <a class="sourceLine" id="cb39-2" data-line-number="2">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
 <a class="sourceLine" id="cb39-3" data-line-number="3">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
 <a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span></a>
 <a class="sourceLine" id="cb39-5" data-line-number="5">  )</a>
 <a class="sourceLine" id="cb39-6" data-line-number="6">})</a></code></pre></div>
+<p>From the second run on, the printing will be compared with the file:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">  )</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">})</a></code></pre></div>
 <p>However, if we look at the file we’ll notice strange things: The output contains ANSI escapes!</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
 <pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
 ## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
 ## [3] "     \033[31mNA\033[39m         "</code></pre>
 <p>We can turn them off by passing <code>crayon = FALSE</code> to the expectation, but we need to run twice again:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(testthat)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span>,</a>
-<a class="sourceLine" id="cb42-6" data-line-number="6">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">  )</a>
-<a class="sourceLine" id="cb42-8" data-line-number="8">})</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(testthat)</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span>,</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">  )</a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">})</a></code></pre></div>
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
@@ -499,15 +501,15 @@
 ## 
 ## x[3]: "     NA         "
 ## y[3]: "     \033[31mNA\033[39m         "</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span>,</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7">})</a>
-<a class="sourceLine" id="cb44-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb44-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">    <span class="kw">pillar_shaft</span>(data<span class="op">$</span>loc),</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">    <span class="dt">file =</span> <span class="st">"latlon.txt"</span>,</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">})</a>
+<a class="sourceLine" id="cb45-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb45-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
 <pre><code>## [1] "28°20'N  81°33'W" "32°43'N 117°10'W" "     NA         "</code></pre>
 <p>You may want to create a series of output files for different scenarios:</p>
 <ul>
@@ -516,21 +518,21 @@
 <li>Different widths</li>
 </ul>
 <p>For this it is helpful to create your own expectation function. Use the tidy evaluation framework to make sure that construction and printing happens at the right time:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">expect_known_latlon_display &lt;-<span class="st"> </span><span class="cf">function</span>(x, file_base) {</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">    <span class="op">!!</span><span class="st"> </span>quo,</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5">    <span class="dt">file =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(file_base, <span class="st">".txt"</span>)</a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">    <span class="op">!!</span><span class="st"> </span>quo,</a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">    <span class="dt">file =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(file_base, <span class="st">"-bw.txt"</span>),</a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">  )</a>
-<a class="sourceLine" id="cb46-12" data-line-number="12">}</a></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">  <span class="kw">expect_known_latlon_display</span>(data<span class="op">$</span>loc, <span class="dt">file_base =</span> <span class="st">"latlon"</span>)</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">})</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">expect_known_latlon_display &lt;-<span class="st"> </span><span class="cf">function</span>(x, file_base) {</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/pillar_shaft">pillar_shaft</a></span>(x))</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">    <span class="op">!!</span><span class="st"> </span>quo,</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">file =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(file_base, <span class="st">".txt"</span>)</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">  pillar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/pillar/topics/expect_known_display">expect_known_display</a></span>(</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">    <span class="op">!!</span><span class="st"> </span>quo,</a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">    <span class="dt">file =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(file_base, <span class="st">"-bw.txt"</span>),</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">    <span class="dt">crayon =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb47-11" data-line-number="11">  )</a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/test_that">test_that</a></span>(<span class="st">"latlon pillar matches known output"</span>, {</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">  <span class="kw">expect_known_latlon_display</span>(data<span class="op">$</span>loc, <span class="dt">file_base =</span> <span class="st">"latlon"</span>)</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">})</a></code></pre></div>
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * `print(eval_tidy(object))` has changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
@@ -544,11 +546,11 @@
 ## 
 ## x[3]: "     \033[31mNA\033[39m         "
 ## y[3]: "     NA         "</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon.txt"</span>)</a></code></pre></div>
 <pre><code>## [1] "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\033[39mW"
 ## [2] "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\033[39mW"
 ## [3] "     \033[31mNA\033[39m         "</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon-bw.txt"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">"latlon-bw.txt"</span>)</a></code></pre></div>
 <pre><code>## [1] "28°20'N  81°33'W" "32°43'N 117°10'W" "     NA         "</code></pre>
 <p>Learn more about the tidyeval framework in the <a href="http://dplyr.tidyverse.org/articles/programming.html">dplyr vignette</a>.</p>
 </div>
