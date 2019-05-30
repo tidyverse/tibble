@@ -42,7 +42,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   x <- unclass(x)
 
   if (!is.list(x)) {
-    stop(error_new_tibble_must_be_list())
+    abort(error_new_tibble_must_be_list())
   }
 
   #' The `...` argument allows adding more attributes to the subclass.
