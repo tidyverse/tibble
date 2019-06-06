@@ -1,3 +1,8 @@
+# tibble 2.1.3
+
+- Fix compatibility with R 3.5 and earlier, regression introduced in tibble 2.1.2.
+
+
 # tibble 2.1.2.9000
 
 - No changes.
