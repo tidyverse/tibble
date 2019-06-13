@@ -1,4 +1,4 @@
-add_package_checks()
+do_package_checks()
 
 if (Sys.getenv("DEV_VERSIONS") != "") {
   get_stage("install") %>%
