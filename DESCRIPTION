@@ -23,7 +23,8 @@ Imports:
     pillar (>= 1.3.1),
     pkgconfig,
     rlang (>= 0.3.0),
-    utils
+    utils,
+    vctrs (>= 0.1.0.9004)
 Suggests: 
     bench,
     covr,
@@ -36,6 +37,8 @@ Suggests:
     rmarkdown,
     testthat,
     withr
+Remotes: 
+    r-lib/vctrs
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
