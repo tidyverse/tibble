@@ -25,7 +25,7 @@ test_that("[ and as_tibble commute", {
   expect_identical(mtcars2[], remove_rownames(as_tibble(mtcars[])))
   expect_identical(mtcars2[1:5, ], remove_rownames(as_tibble(mtcars[1:5, ])))
   expect_identical(mtcars2[, 1:5], remove_rownames(as_tibble(mtcars[, 1:5])))
-  expect_identical(mtcars2[1:5, 1:5], remove_rownames(as_tibble(mtcars[1:5, 1:5])))
+  expect_equal(mtcars2[1:5, 1:5], remove_rownames(as_tibble(mtcars[1:5, 1:5])))
   expect_identical(mtcars2[1:5], remove_rownames(as_tibble(mtcars[1:5])))
 })
 
