@@ -221,6 +221,25 @@ test_that("[.tbl_df emits lifecycle warnings with invalid character subsetting",
   expect_error(foo["9a", ])
 })
 
+test_that("[.tbl_df supports integer subsetting (#312)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[2:4, ], as_tibble(as.data.frame(foo)[2:4, ]))
+  expect_identical(foo[-3:-5, ], foo[c(1:2, 6:10), ])
+
+  scoped_lifecycle_silence()
+
+  expect_identical(foo[9:12, ], foo[c(9:10, NA, NA), ])
+  expect_identical(foo[-(9:12), ], foo[1:8, ])
+})
+
+test_that("[.tbl_df emits lifecycle warnings with invalid integer subsetting", {
+  scoped_lifecycle_errors()
+
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_error(foo[9:12, ])
+  expect_error(foo[-(9:12), ])
+})
+
 test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
   foo <- as_tibble(mtcars, rownames = NA)
   idx <- function(x) rownames(mtcars)[x]

@@ -189,22 +189,39 @@ fast_nrow <- function(x) {
 
 fix_oob <- function(i, n, warn = TRUE) {
   if (all(i >= 0, na.rm = TRUE)) {
-    oob <- which(i > n)
+    fix_oob_positive(i, n, warn)
   } else if (all(i <= 0, na.rm = TRUE)) {
-    oob <- which(i < -n)
+    fix_oob_negative(i, n, warn)
   } else {
     # Will throw error in vec_as_index()
-    oob <- integer()
+    i
+  }
+}
+
+fix_oob_positive <- function(i, n, warn = TRUE) {
+  oob <- which(i > n)
+  if (warn) {
+    warn_oob(oob)
   }
 
-  if (has_length(oob)) {
-    if (warn) {
-      warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
-    }
-    i[oob] <- NA_integer_
-  }
-
+  i[oob] <- NA_integer_
   i
+}
+
+fix_oob_negative <- function(i, n, warn = TRUE) {
+  oob <- which(i < -n)
+  if (warn) {
+    warn_oob(oob)
+  }
+
+  i[oob] <- 0L
+  i
+}
+
+warn_oob <- function(oob) {
+  if (has_length(oob)) {
+    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+  }
 }
 
 vec_restore_tbl_df_with_nr <- function(x, to, nr) {
