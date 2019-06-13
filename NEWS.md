@@ -3,14 +3,10 @@
 - Fix compatibility with R 3.5 and earlier, regression introduced in tibble 2.1.2.
 
 
-# tibble 2.1.2.9000
-
-- No changes.
-
-
 # tibble 2.1.2
 
 - Relax version requirements.
+
 - Fix test failing after pillar upgrade.
 
 
