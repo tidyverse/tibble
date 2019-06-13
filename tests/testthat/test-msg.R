@@ -185,6 +185,21 @@ test_that("error_column_must_be_named()", {
   )
 })
 
+test_that("error_column_names_must_not_be_dot_dot()", {
+  expect_equal(
+    error_column_must_not_be_dot_dot("a", repair = FALSE),
+    "Column `a` must not have names of the form ... or ..j."
+  )
+  expect_equal(
+    error_column_must_not_be_dot_dot(letters[2:3], repair = TRUE),
+    "Columns `b`, `c` must not have names of the form ... or ..j.\nUse .name_repair to specify repair."
+  )
+  expect_equal(
+    error_column_must_not_be_dot_dot(LETTERS, repair = TRUE),
+    "Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not have names of the form ... or ..j.\nUse .name_repair to specify repair."
+  )
+})
+
 test_that("error_column_names_must_be_unique()", {
   expect_equal(
     error_column_names_must_be_unique("a", repair = FALSE),
