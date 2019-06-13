@@ -11,6 +11,7 @@ install:
   - ps: Bootstrap
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
+  - cmd: mkdir "C:\R-library"
   - cmd: mkdir "C:\tic-library"
   - cmd: Rscript -e ".libPaths(c('C:/tic-library', .libPaths())); install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
 
