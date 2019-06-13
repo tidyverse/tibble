@@ -168,16 +168,6 @@ subset_rows <- function(x, i) {
   }
 }
 
-# TODO: Consider changing to vec_restore.tbl_df() when vctrs is available,
-# but this will impact performance of subsetting!
 vec_restore_tbl_df_with_nr <- function(x, to, nr) {
-  # Copy attribute, preserving existing names and rownames
-  attr_to <- attributes(to)
-  new_names <- names(unclass(x))
-  new_nr <- .set_row_names(nr)
-  attr_to[["names"]] <- new_names
-  attr_to[["row.names"]] <- new_nr
-  attributes(x) <- attr_to
-
-  x
+  vec_restore(x, to, i = seq_len(nr))
 }
