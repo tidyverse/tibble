@@ -11,19 +11,21 @@ install:
   - ps: Bootstrap
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
-  - cmd: Rscript -e "install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
+  - cmd: mkdir "C:\tic-library"
+  - cmd: Rscript -e ".libPaths(c('C:/tic-library', .libPaths()); install.packages('remotes');  remotes::install_github('ropenscilabs/tic')"
+  - cmd: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); prepare_all_stages()"
 
-before_build: Rscript -e "tic::before_install()"
-build_script: Rscript -e "tic::install()"
-after_build: Rscript -e "tic::after_install()"
-before_test: Rscript -e "tic::before_script()"
-test_script: Rscript -e "tic::script()"
-on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
-on_failure: Rscript -e "tic::after_failure()"
-before_deploy: Rscript -e "tic::before_deploy()"
-deploy_script: Rscript -e "tic::deploy()"
-after_deploy: Rscript -e "tic::after_deploy()"
-on_finish: Rscript -e "tic::after_script()"
+before_build: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); before_install()"
+build_script: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); install()"
+after_build: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); after_install()"
+before_test: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); before_script()"
+test_script: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); script()"
+on_success: Rscript -e "try(library(tic, lib.loc = 'C:/tic-library'); after_success(), silent = TRUE)"
+on_failure: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); after_failure()"
+before_deploy: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); before_deploy()"
+deploy_script: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); deploy()"
+after_deploy: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); after_deploy()"
+on_finish: Rscript -e "library(tic, lib.loc = 'C:/tic-library'); after_script()"
 
 # Adapt as necessary starting from here
 
