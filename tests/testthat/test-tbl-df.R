@@ -204,9 +204,21 @@ test_that("[.tbl_df supports character subsetting (#312)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
   expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
-  expect_identical(foo[as.character(9:12), ], foo[9:12, ])
+
+  scoped_lifecycle_silence()
+
+  expect_identical(foo[as.character(9:12), ], foo[c(9:10, NA, NA), ])
   expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
+test_that("[.tbl_df emits lifecycle warnings with invalid character subsetting", {
+  scoped_lifecycle_errors()
+
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_error(foo[as.character(9:12), ])
+  expect_error(foo[letters, ])
+  expect_error(foo["9a", ])
 })
 
 test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
@@ -214,9 +226,22 @@ test_that("[.tbl_df supports character subsetting if row names are present (#312
   idx <- function(x) rownames(mtcars)[x]
   expect_identical(foo[idx(2:4), ], foo[2:4, ])
   expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
-  expect_identical(foo[idx(29:34), ], foo[29:34, ])
+  expect_identical(foo[idx(29:34), ], foo[c(29:32, NA, NA), ])
+
+  scoped_lifecycle_silence()
+
   expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
+test_that("[.tbl_df emits lifecycle warnings with invalid character subsetting", {
+  scoped_lifecycle_errors()
+
+  foo <- as_tibble(mtcars, rownames = NA)
+  idx <- function(x) rownames(mtcars)[x]
+
+  expect_error(foo[letters, ])
+  expect_error(foo["9a", ])
 })
 
 test_that("[.tbl_df supports logical subsetting (#318)", {

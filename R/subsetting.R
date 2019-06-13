@@ -136,23 +136,23 @@ NULL
     nr <- fast_nrow(x)
 
     if (is.character(i)) {
+      is_na_orig <- is.na(i)
+
       if (has_rownames(x)) {
-        is_na_orig <- is.na(i)
         i <- match(i, rownames(x))
-
-        oob <- which(is.na(i) & !is_na_orig)
-
-        if (has_length(oob)) {
-          warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
-          i[oob] <- NA_integer_
-        }
-
-        i <- fix_oob(i, nr)
       } else {
         i <- string_to_indices(i)
-        i <- fix_oob(i, nr)
-        i <- vec_as_index(i, nr)
+        i <- fix_oob(i, nr, warn = FALSE)
       }
+
+      oob <- which(is.na(i) & !is_na_orig)
+
+      if (has_length(oob)) {
+        warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
+        i[oob] <- NA_integer_
+      }
+
+      i <- vec_as_index(i, nr)
     } else {
       if (is.numeric(i)) {
         i <- fix_oob(i, nr)
@@ -187,7 +187,7 @@ fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
-fix_oob <- function(i, n) {
+fix_oob <- function(i, n, warn = TRUE) {
   if (all(i >= 0, na.rm = TRUE)) {
     oob <- which(i > n)
   } else if (all(i <= 0, na.rm = TRUE)) {
@@ -198,7 +198,9 @@ fix_oob <- function(i, n) {
   }
 
   if (has_length(oob)) {
-    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+    if (warn) {
+      warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+    }
     i[oob] <- NA_integer_
   }
 
