@@ -99,9 +99,9 @@ test_that("can safely add to factor columns everywhere (#296)", {
   expect_identical(add_row(df), tibble(a = factor(c(letters[1:3], NA))))
   expect_identical(add_row(df, .before = 1), tibble(a = factor(c(NA, letters[1:3]))))
   expect_identical(add_row(df, .before = 2), tibble(a = factor(c("a", NA, letters[2:3]))))
-  expect_identical(add_row(df, a = "d"), tibble(a = factor(c(letters[1:4]))))
-  expect_identical(add_row(df, a = "d", .before = 1), tibble(a = factor(c("d", letters[1:3]))))
-  expect_identical(add_row(df, a = "d", .before = 2), tibble(a = factor(c("a", "d", letters[2:3]))))
+  expect_identical(add_row(df, a = "d"), tibble(a = c(letters[1:4])))
+  expect_identical(add_row(df, a = "d", .before = 1), tibble(a = c("d", letters[1:3])))
+  expect_identical(add_row(df, a = "d", .before = 2), tibble(a = c("a", "d", letters[2:3])))
 })
 
 test_that("error if both .before and .after are given", {
