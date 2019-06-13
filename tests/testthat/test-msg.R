@@ -169,49 +169,49 @@ test_that("error_names_must_have_length()", {
 test_that("error_column_must_be_named()", {
   expect_equal(
     error_column_must_be_named(1, repair = TRUE),
-    "Column 1 must be named.\nUse .name_repair to specify repair."
+    "Names must not be empty."
   )
   expect_equal(
     error_column_must_be_named(2:3, repair = TRUE),
-    "Columns 2, 3 must be named.\nUse .name_repair to specify repair."
+    "Names must not be empty."
   )
   expect_equal(
     unell(error_column_must_be_named(seq_along(letters), repair = TRUE)),
-    "Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named.\nUse .name_repair to specify repair."
+    "Names must not be empty."
   )
   expect_equal(
     error_column_must_be_named(4:6, repair = FALSE),
-    "Columns 4, 5, 6 must be named."
+    "Names must not be empty."
   )
 })
 
 test_that("error_column_names_must_not_be_dot_dot()", {
   expect_equal(
     error_column_must_not_be_dot_dot("a", repair = FALSE),
-    "Column `a` must not have names of the form ... or ..j."
+    "Names must not be of the form `...` or `..j`."
   )
   expect_equal(
     error_column_must_not_be_dot_dot(letters[2:3], repair = TRUE),
-    "Columns `b`, `c` must not have names of the form ... or ..j.\nUse .name_repair to specify repair."
+    "Names must not be of the form `...` or `..j`."
   )
   expect_equal(
     error_column_must_not_be_dot_dot(LETTERS, repair = TRUE),
-    "Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not have names of the form ... or ..j.\nUse .name_repair to specify repair."
+    "Names must not be of the form `...` or `..j`."
   )
 })
 
 test_that("error_column_names_must_be_unique()", {
   expect_equal(
     error_column_names_must_be_unique("a", repair = FALSE),
-    "Column name `a` must not be duplicated."
+    "Names must be unique."
   )
   expect_equal(
     error_column_names_must_be_unique(letters[2:3], repair = TRUE),
-    "Column names `b`, `c` must not be duplicated.\nUse .name_repair to specify repair."
+    "Names must be unique."
   )
   expect_equal(
     unell(error_column_names_must_be_unique(LETTERS, repair = TRUE)),
-    "Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.\nUse .name_repair to specify repair."
+    "Names must be unique."
   )
 })
 

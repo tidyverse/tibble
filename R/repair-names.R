@@ -145,43 +145,12 @@ NULL
 
 set_repaired_names <- function(x,
                                .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  x <- set_minimal_names(x)
-  set_names(x, repaired_names(names(x), .name_repair = .name_repair))
+  set_names(x, repaired_names(names2(x), .name_repair = .name_repair))
 }
 
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-
-  if (is_formula(.name_repair, lhs = FALSE)) {
-    .name_repair <- as_function(.name_repair)
-  }
-
-  if (is_function(.name_repair)) {
-    repair_fun <- .name_repair
-  } else {
-    if (!is.character(.name_repair)) {
-      abort(error_name_repair_arg())
-    }
-    .name_repair <- match.arg(.name_repair)
-    repair_fun <- switch(
-      .name_repair,
-      minimal       =     ,
-      check_unique  = NULL,
-      unique        = unique_names,
-      universal     = universal_names,
-      abort(error_name_repair_arg())
-    )
-  }
-  new_name <- if (is_function(repair_fun)) repair_fun(name) else name
-
-  if (is.character(.name_repair) &&
-    .name_repair %in% c("check_unique", "unique", "universal")) {
-    check_unique(new_name)
-  } else {
-    check_minimal(new_name)
-  }
-
-  new_name
+  vec_as_names(name, repair = .name_repair)
 }
 
 check_names_non_null <- function(name, abort = rlang::abort) {

@@ -119,15 +119,15 @@ error_names_must_have_length <- function(length, n) {
 }
 
 error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
-  invalid_df("must be named", names, use_repair(repair))
+  "Names must not be empty."
 }
 
 error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair")) {
-  invalid_df("must not have names of the form ... or ..j", names, use_repair(repair))
+  "Names must not be of the form `...` or `..j`."
 }
 
 error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair")) {
-  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair))
+  "Names must be unique."
 }
 
 error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(".name_repair")) {
