@@ -93,11 +93,11 @@ NULL
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
-`[.tbl_df` <- function(x, i, j, drop = FALSE) {
+`[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
   # Ignore drop as an argument
   n_real_args <- nargs() - !missing(drop)
 
-  # Escape early if nargs() == 2L; ie, column subsetting
+  # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
       warningc("drop ignored")
@@ -109,13 +109,6 @@ NULL
 
     slice_df(x, i = NULL, j = i, drop = FALSE)
   } else {
-    if (missing(i)) {
-      i <- NULL
-    }
-    if (missing(j)) {
-      j <- NULL
-    }
-
     slice_df(x, i, j, drop = drop)
   }
 }
