@@ -20,7 +20,7 @@ build_script: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPath
 after_build: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::after_install()"
 before_test: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::before_script()"
 test_script: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::script()"
-on_success: Rscript -e "try(.libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::after_success(), silent = TRUE)"
+on_success: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); try(tic::after_success(), silent = TRUE)"
 on_failure: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::after_failure()"
 before_deploy: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::before_deploy()"
 deploy_script: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::deploy()"
