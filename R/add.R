@@ -63,10 +63,6 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
     abort(error_inconsistent_new_rows(extra_vars))
   }
 
-  missing_vars <- setdiff(names(.data), names(df))
-  df[missing_vars] <- map(.data[missing_vars], na_value)
-  df <- df[names(.data)]
-
   pos <- pos_from_before_after(.before, .after, nrow(.data))
   out <- rbind_at(.data, df, pos)
 
@@ -87,22 +83,21 @@ na_value <- function(boilerplate) {
 }
 
 rbind_at <- function(old, new, pos) {
-  if (nrow(old) == 0) {
-    old <- old[1, ]
-    out <- rbind(old, new)[-1, ]
-  } else {
-    out <- rbind(old, new)
-    if (pos < nrow(old)) {
-      pos <- max(pos, 0L)
-      idx <- c(
-        seq2(1L, pos),
-        seq2(nrow(old) + 1L, nrow(old) + nrow(new)),
-        seq2(pos + 1L, nrow(old))
-      )
-      out <- out[idx, ]
-    }
+  out <- vec_rbind(old, new)
+
+  # Append at end: Nothing more to do.
+  if (pos >= nrow(old)) {
+    return(out)
   }
-  out
+
+  # Splice: Construct index vector
+  pos <- max(pos, 0L)
+  idx <- c(
+    seq2(1L, pos),
+    seq2(nrow(old) + 1L, nrow(old) + nrow(new)),
+    seq2(pos + 1L, nrow(old))
+  )
+  vec_slice(out, idx)
 }
 
 #' Add columns to a data frame

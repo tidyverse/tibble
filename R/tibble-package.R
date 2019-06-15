@@ -2,6 +2,7 @@
 #' @importFrom utils head tail
 #' @importFrom pkgconfig set_config
 #' @import rlang
+#' @import vctrs
 #' @aliases NULL tibble-package
 #' @details
 #' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
