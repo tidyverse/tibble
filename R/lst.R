@@ -86,5 +86,5 @@ expand_lst <- function(x, i) {
 
 expand_vecs <- function(x, length) {
   ones <- rep(1L, length)
-  map(x, subset_rows, ones)
+  map(x, vec_slice, ones)
 }
