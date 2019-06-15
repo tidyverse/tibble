@@ -97,28 +97,32 @@ NULL
   # Ignore drop as an argument
   n_real_args <- nargs() - !missing(drop)
 
-  missing_i <- missing(i)
-  missing_j <- missing(j)
-
   # Escape early if nargs() == 2L; ie, column subsetting
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
       warningc("drop ignored")
-      drop <- FALSE
     }
 
-    if (missing_i) {
+    if (missing(i)) {
       return(x)
     }
 
-    j <- i
-    i <- NULL
-    missing_i <- TRUE
-    missing_j <- FALSE
-  }
+    slice_df(x, i = NULL, j = i, drop = FALSE)
+  } else {
+    if (missing(i)) {
+      i <- NULL
+    }
+    if (missing(j)) {
+      j <- NULL
+    }
 
+    slice_df(x, i, j, drop = drop)
+  }
+}
+
+slice_df <- function(x, i, j, drop) {
   # First, subset columns
-  if (missing_j) {
+  if (is.null(j)) {
     result <- x
   } else {
     j <- check_names_df(j, x)
@@ -126,7 +130,7 @@ NULL
   }
 
   # Next, subset rows
-  if (missing_i) {
+  if (is.null(i)) {
     if (has_length(result)) {
       i <- NULL
     } else {
