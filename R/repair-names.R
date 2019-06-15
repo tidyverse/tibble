@@ -150,7 +150,19 @@ set_repaired_names <- function(x,
 
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  vec_as_names(name, repair = .name_repair)
+  tryCatch(
+    vec_as_names(name, repair = .name_repair),
+
+    vctrs_error_names_cannot_be_empty = function(cnd) {
+      abort(error_column_must_be_named(cnd$location))
+    },
+    vctrs_error_names_cannot_be_dot_dot = function(cnd) {
+      abort(error_column_must_not_be_dot_dot(cnd$location))
+    },
+    vctrs_error_names_must_be_unique = function(cnd) {
+      abort(error_column_names_must_be_unique(name[cnd$location]))
+    }
+  )
 }
 
 check_names_non_null <- function(name, abort = rlang::abort) {
