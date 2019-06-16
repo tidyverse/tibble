@@ -93,58 +93,82 @@ NULL
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
-`[.tbl_df` <- function(x, i, j, drop = FALSE) {
+`[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
   # Ignore drop as an argument
   n_real_args <- nargs() - !missing(drop)
 
-  # Escape early if nargs() == 2L; ie, column subsetting
+  # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    if (!missing(drop)) warningc("drop ignored")
+    if (!missing(drop)) {
+      warningc("drop ignored")
+    }
 
     if (missing(i)) {
       return(x)
     }
 
-    i <- check_names_df(i, x)
-    result <- .subset(x, i)
-
-    nr <- fast_nrow(x)
-    return(vec_restore_tbl_df_with_nr(result, x, nr))
+    slice_df(x, i = NULL, j = i, drop = FALSE)
+  } else {
+    slice_df(x, i, j, drop = drop)
   }
+}
 
+slice_df <- function(x, i, j, drop) {
   # First, subset columns
-  if (missing(j)) {
+  if (is.null(j)) {
     result <- x
   } else {
     j <- check_names_df(j, x)
-    result <- .subset(x, j)
+    result <- new_data_frame(.subset(x, j), n = fast_nrow(x))
   }
 
   # Next, subset rows
-  if (missing(i)) {
-    nr <- fast_nrow(x)
-  } else {
-    if (is.logical(i) && !(length(i) %in% c(1L, fast_nrow(x)))) {
-      warningc(
-        "Length of logical index must be 1",
-        if (fast_nrow(x) != 1) paste0(" or ", fast_nrow(x)),
-        ", not ", length(i)
-      )
-    }
-
-    if (length(result) == 0) {
-      nr <- length(attr(x, "row.names")[i])
+  if (is.null(i)) {
+    if (has_length(result)) {
+      i <- NULL
     } else {
-      if (is.character(i)) {
-        if (has_rownames(x)) {
-          i <- match(i, rownames(x))
+      i <- seq_len(fast_nrow(x))
+    }
+  } else {
+    nr <- fast_nrow(x)
+
+    if (is.character(i)) {
+      is_na_orig <- is.na(i)
+
+      if (has_rownames(x)) {
+        i <- match(i, rownames(x))
+      } else {
+        i <- string_to_indices(i)
+        i <- fix_oob(i, nr, warn = FALSE)
+      }
+
+      oob <- which(is.na(i) & !is_na_orig)
+
+      if (has_length(oob)) {
+        warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
+        i[oob] <- NA_integer_
+      }
+
+      i <- vec_as_index(i, nr)
+    } else {
+      if (is.numeric(i)) {
+        i <- fix_oob(i, nr)
+        i <- vec_as_index(i, nr)
+      } else if (is.logical(i)) {
+        if (length(i) != 1L && length(i) != nr) {
+          warn_deprecated(paste0(
+            "Length of logical index must be 1",
+            if (nr != 1) paste0(" or ", nr),
+            ", not ", length(i)
+          ))
+          i <- seq_len(nr)[i]
         } else {
-          i <- string_to_indices(i)
+          i <- vec_as_index(i, nr)
         }
       }
-      result <- map(result, subset_rows, i)
-      nr <- NROW(result[[1]])
     }
+
+    result <- vec_slice(result, i)
   }
 
   if (drop) {
@@ -153,31 +177,54 @@ NULL
     }
   }
 
-  vec_restore_tbl_df_with_nr(result, x, nr)
+  vec_restore_tbl_df_with_i(result, x, i)
 }
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
-subset_rows <- function(x, i) {
-  if (is.data.frame(x) || is.matrix(x)) {
-    x[i, , drop = FALSE]
+fix_oob <- function(i, n, warn = TRUE) {
+  if (all(i >= 0, na.rm = TRUE)) {
+    fix_oob_positive(i, n, warn)
+  } else if (all(i <= 0, na.rm = TRUE)) {
+    fix_oob_negative(i, n, warn)
   } else {
-    x[i]
+    # Will throw error in vec_as_index()
+    i
   }
 }
 
-# TODO: Consider changing to vec_restore.tbl_df() when vctrs is available,
-# but this will impact performance of subsetting!
-vec_restore_tbl_df_with_nr <- function(x, to, nr) {
-  # Copy attribute, preserving existing names and rownames
-  attr_to <- attributes(to)
-  new_names <- names(unclass(x))
-  new_nr <- .set_row_names(nr)
-  attr_to[["names"]] <- new_names
-  attr_to[["row.names"]] <- new_nr
-  attributes(x) <- attr_to
+fix_oob_positive <- function(i, n, warn = TRUE) {
+  oob <- which(i > n)
+  if (warn) {
+    warn_oob(oob)
+  }
 
-  x
+  i[oob] <- NA_integer_
+  i
+}
+
+fix_oob_negative <- function(i, n, warn = TRUE) {
+  oob <- which(i < -n)
+  if (warn) {
+    warn_oob(oob)
+  }
+
+  i[oob] <- 0L
+  i
+}
+
+warn_oob <- function(oob) {
+  if (has_length(oob)) {
+    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+  }
+}
+
+vec_restore_tbl_df_with_nr <- function(x, to, nr) {
+  vec_restore_tbl_df_with_i(x, to, i = seq_len(nr))
+}
+
+vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
+  vec_restore(x, to, i = i)
 }
