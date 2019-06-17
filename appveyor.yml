@@ -13,7 +13,7 @@ install:
   - cmd: Rscript -e "getOption('repos')"
   - cmd: mkdir "C:\R-library"
   - cmd: mkdir "C:\tic-library"
-  - cmd: Rscript -e ".libPaths(c('C:/tic-library', .libPaths())); install.packages('remotes'); remotes::install_github('ropenscilabs/tic@f-no-build'); tic::prepare_all_stages()"
+  - cmd: Rscript -e ".libPaths(c('C:/tic-library', .libPaths())); install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
 
 before_build: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::before_install()"
 build_script: Rscript -e ".libPaths(c('C:/R-library', 'C:/tic-library', .libPaths())); tic::install()"
