@@ -260,40 +260,40 @@ test_that("Can convert named atomic vectors to data frame", {
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
-  expect_error(
+  expect_error_cnd(
     as_tibble(l1),
-    error_column_must_be_named(1, repair = TRUE),
-    fixed = TRUE
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 1L
   )
 
   l2 <- list(x = 1, 2)
-  expect_error(
+  expect_error_cnd(
     as_tibble(l2),
-    error_column_must_be_named(2, repair = TRUE),
-    fixed = TRUE
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 
   l3 <- list(x = 1, ... = 2)
-  expect_error(
+  expect_error_cnd(
     as_tibble(l3),
-    error_column_must_not_be_dot_dot(2, repair = TRUE),
-    fixed = TRUE
+    class = "vctrs_error_names_cannot_be_dot_dot",
+    locations = 2L
   )
 
   l4 <- list(x = 1, ..1 = 2)
-  expect_error(
+  expect_error_cnd(
     as_tibble(l4),
-    error_column_must_not_be_dot_dot(2, repair = TRUE),
-    fixed = TRUE
+    class = "vctrs_error_names_cannot_be_dot_dot",
+    locations = 2L
   )
 
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)
-  expect_error(
+  expect_error_cnd(
     as_tibble(df),
-    error_column_must_be_named(1:2, repair = TRUE),
-    fixed = TRUE
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 1:2
   )
 })
 
@@ -354,11 +354,10 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   x <- matrix(1:6, nrow = 3)
 
-  expect_error(
+  expect_error_cnd(
     as_tibble(x),
     class = get_defunct_error_class(),
-    "name",
-    fixed = TRUE
+    "name"
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
@@ -405,9 +404,10 @@ test_that("as_tibble.poly() supports .name_repair", {
 test_that("as_tibble.table() supports .name_repair", {
   x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
 
-  expect_error(
+  expect_error_cnd(
     as_tibble(x),
-    error_column_names_must_be_unique("a")
+    class = "vctrs_error_names_must_be_unique",
+    locations = 2L
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
@@ -583,13 +583,14 @@ test_that("types preserved when recycling in tibble() (#284)", {
 test_that("`validate` triggers deprecation message, but then works", {
   scoped_lifecycle_warnings()
 
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 
   expect_warning(
@@ -610,25 +611,27 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(df, validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 })
 
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
   scoped_lifecycle_warnings()
 
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 
   expect_warning(
@@ -647,22 +650,24 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 
   expect_warning(
@@ -681,12 +686,13 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_error_cnd(
     expect_warning(
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    class = "vctrs_error_names_cannot_be_empty",
+    locations = 2L
   )
 })
 
