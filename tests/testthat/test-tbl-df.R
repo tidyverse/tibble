@@ -446,11 +446,10 @@ test_that("new_tibble checks", {
     error_new_tibble_must_be_list(),
     fixed = TRUE
   )
-  expect_error(
+  expect_error_cnd(
     new_tibble(list(a = 1)),
     class = get_defunct_error_class(),
-    error_new_tibble_needs_nrow(),
-    fixed = TRUE
+    error_new_tibble_needs_nrow()
   )
   expect_error(
     new_tibble(list(1), nrow = NULL),
