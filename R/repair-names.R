@@ -341,27 +341,11 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @export
 #' @rdname name-repair-retired
 repair_names <- function(x, prefix = "V", sep = "") {
-  ## TODO: plot a deprecation strategy once we deal with the fact that
-  ## `dplyr::bind_cols()` calls this function
-
   if (length(x) == 0) {
     names(x) <- character()
     return(x)
   }
 
-  new_names <- make_unique(names2(x), prefix = prefix, sep = sep)
+  new_names <- vec_as_names_legacy(names2(x), prefix = prefix, sep = sep)
   set_names(x, new_names)
-}
-
-make_unique <- function(name, prefix = "V", sep = "") {
-  blank <- (name == "")
-
-  # Ensure existing names are unique
-  name[!blank] <- make.unique(name[!blank], sep = sep)
-
-  # Replace blank names
-  new_vars <- setdiff(paste(prefix, seq_along(name), sep = sep), name)
-  name[blank] <- new_vars[seq_len(sum(blank))]
-
-  name
 }

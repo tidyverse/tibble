@@ -38,7 +38,7 @@ Suggests:
     testthat,
     withr
 Remotes: 
-    r-lib/vctrs
+    r-lib/vctrs#430
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
