@@ -221,10 +221,11 @@ warn_oob <- function(oob) {
   }
 }
 
-vec_restore_tbl_df_with_nr <- function(x, to, nr) {
-  vec_restore_tbl_df_with_i(x, to, i = seq_len(nr))
-}
-
 vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
-  vec_restore(x, to, i = i)
+  if (is.null(i)) {
+    n <- nrow(x)
+  } else {
+    n <- length(i)
+  }
+  vec_restore(x, to, n = n)
 }
