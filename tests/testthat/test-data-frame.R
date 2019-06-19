@@ -309,7 +309,7 @@ test_that("as_tibble() implements unique names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), unique_names(rep("", 3)))
+  expect_equal(names(invalid_df), vec_as_names(rep("", 3), repair = "unique"))
 })
 
 test_that("as_tibble() implements universal names", {
