@@ -50,7 +50,7 @@ Read more in \code{\link[=tibble]{tibble()}}.
 \item Recycling only happens for a length 1 input.
 \item Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
-must indicate how to resolve. Read more in \link{name-repair}.
+must indicate how to resolve. Read more in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 \item Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in \link{rownames}.
 \item \code{df[, j]} returns a tibble; it does not automatically extract the column

@@ -31,7 +31,7 @@
 #'
 #' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
 #'   converts a named vector to a tibble with a column of names and column of
-#'   values. [name-repair] documents the details of name repair.
+#'   values. Name repair is implemented using [vctrs::vec_as_names()].
 #'
 #' @param x A data frame, list, matrix, or other object that could reasonably be
 #'   coerced to a tibble.

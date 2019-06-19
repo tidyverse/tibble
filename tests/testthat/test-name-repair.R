@@ -1,23 +1,9 @@
 context("test-name_repair")
 
 # minimal names -------------------------------------------------------------
-test_that("minimal names are made from `n` when `name = NULL`", {
-  expect_identical(minimal_names(NULL, 2), c("", ""))
-  expect_error(
-    minimal_names(NULL),
-    error_name_length_required(),
-    fixed = TRUE
-  )
-})
 
 test_that("minimal names have '' instead of NAs", {
   expect_identical(minimal_names(c("", NA, "", NA)), c("", "", "", ""))
-})
-
-test_that("set_minimal_names() copes with NULL input names", {
-  x <- 1:3
-  x_named <- set_minimal_names(x)
-  expect_equal(names(x_named), rep("", 3))
 })
 
 test_that("check_minimal() errors when names aren't minimal", {
@@ -53,13 +39,6 @@ test_that("ellipsis treated like empty string", {
   expect_identical(unique_names("..."), unique_names(""))
 })
 
-test_that("two_three_dots() does its job and no more", {
-  x <- c(".", ".1", "...1", "..1a")
-  expect_identical(two_to_three_dots(x), x)
-
-  expect_identical(two_to_three_dots(c("..1", "..22")), c("...1", "...22"))
-})
-
 test_that("two dots then number treated like three dots then number", {
   expect_identical(unique_names("..2"), unique_names("...5"))
 })
@@ -73,43 +52,6 @@ test_that("unique_names() strips positional suffixes, re-applies as needed", {
   expect_identical(unique_names(c("a...3", "a", "a")), c("a...1", "a...2", "a...3"))
   expect_identical(unique_names(c("a...2", "a", "a")), c("a...1", "a...2", "a...3"))
   expect_identical(unique_names(c("a...2", "a...2", "a...2")), c("a...1", "a...2", "a...3"))
-})
-
-test_that("check_unique() imposes check_minimal()", {
-  expect_error(
-    check_unique(NULL),
-    error_names_must_be_non_null(repair = FALSE),
-    fixed = TRUE
-  )
-
-  expect_error(
-    check_unique(c("x", NA)),
-    error_column_must_be_named(2, repair = FALSE),
-    fixed = TRUE
-  )
-})
-
-test_that("check_unique() errors for empty or duplicated names", {
-  expect_error(
-    check_unique(c("x", "")),
-    error_column_must_be_named(2, repair = FALSE),
-    fixed = TRUE
-  )
-  expect_error(
-    check_unique(c("", "x", "")),
-    error_column_must_be_named(c(1, 3), repair = FALSE),
-    fixed = TRUE
-  )
-  expect_error(
-    check_unique(c("x", "x", "y")),
-    error_column_names_must_be_unique("x", repair = FALSE),
-    fixed = TRUE
-  )
-  expect_error(
-    check_unique(c("x", "y", "x", "y")),
-    error_column_names_must_be_unique(c("x", "y"), repair = FALSE),
-    fixed = TRUE
-  )
 })
 
 test_that("unique_names() is idempotent", {

@@ -26,7 +26,6 @@ reference:
 - title: Coercion
   contents:
   - as_tibble
-  - "name-repair"
   - new_tibble
   - validate_tibble
   - enframe

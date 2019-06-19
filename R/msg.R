@@ -229,10 +229,6 @@ error_frame_matrix_list <- function(pos) {
   )
 }
 
-error_name_repair_arg <- function() {
-  "The `.name_repair` argument must be a string or a function that specifies the name repair strategy."
-}
-
 error_new_tibble_must_be_list <- function() {
   "Must pass a list as `x` argument to `new_tibble()`."
 }

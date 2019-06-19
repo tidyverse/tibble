@@ -69,6 +69,7 @@ Collate:
     'tbl-df.r'
     'tibble-package.R'
     'tibble.R'
+    'tick.R'
     'type-sum.r'
     'utils-format.r'
     'utils.r'
