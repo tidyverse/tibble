@@ -130,15 +130,6 @@ test_that("universal names are not changed", {
   expect_equal(universal_names(letters), letters)
 })
 
-test_that("universal_names() pass checks for minimal, unique, and universal", {
-  x <- c(NA, "", "x", "x", "a1:", "_x_y}")
-  x_syn <- universal_names(x)
-  expect_error(check_minimal(x_syn), NA)
-  expect_error(check_unique(x_syn), NA)
-  expect_true(all(is_syntactic(x_syn)))
-  expect_identical(x_syn, c("...1", "...2", "x...3", "x...4", "a1.", "._x_y."))
-})
-
 test_that("universal_names() is idempotent", {
   x <- c(NA, "", "x", "x", "a1:", "_x_y}")
   expect_identical(universal_names(x), universal_names(universal_names(x)))
