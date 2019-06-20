@@ -255,7 +255,8 @@ for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
 </ul>
 
-<p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
+<p>This argument is passed on as <code>repair</code> to <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names'>vctrs::vec_as_names()</a></code>.
+See there for more details on these terms and the strategies used
 to enforce them.</p></td>
     </tr>
     <tr>
@@ -292,7 +293,7 @@ package's <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> constructs a tibble from individual columns. <code><a href='enframe.html'>enframe()</a></code>
 converts a named vector to a tibble with a column of names and column of
-values. <a href='name-repair.html'>name-repair</a> documents the details of name repair.</p></div>
+values. Name repair is implemented using <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names'>vctrs::vec_as_names()</a></code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

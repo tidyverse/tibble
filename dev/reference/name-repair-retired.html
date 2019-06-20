@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retired functions for name repair — tidy_names • tibble</title>
+<title>Retired functions for name repair — name-repair-retired • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,19 +37,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Retired functions for name repair — tidy_names" />
+<meta property="og:title" content="Retired functions for name repair — name-repair-retired" />
 
 <meta property="og:description" content="
 tidy_names(), set_tidy_names(), and repair_names() were early efforts
 to facilitate post hoc name repair in tibble, given that tibble() and
 as_tibble() did not do this.
 From tibble v2.0.0, the .name_repair argument gives direct access to three
-specific levels of name repair: minimal, unique, and universal. We
-recommend that new code use this instead of tidy_names(),
-set_tidy_names(), or repair_names(). After a period of use, the repair
-stategies behind minimal, unique, and universal are likely to be
-exposed in standalone functions and this could affect the behaviour of
-tidy_names(). repair_names() should be considered deprecated.tibble(..., `.name_repair = &quot;unique&quot;`)
+specific levels of name repair: minimal, unique, and universal.
+See vctrs::vec_as_names() for the implementation of the underlying logic.
+repair_names() should be considered retired, the underlying functionality
+will also remain available in vctrs::vec_as_names_legacy().tibble(..., `.name_repair = &quot;unique&quot;`)
 ## is preferred to
 df &amp;lt;- tibble(...)
 set_tidy_names(df, syntactic = FALSE)" />
@@ -189,12 +187,10 @@ set_tidy_names(df, syntactic = TRUE)
 to facilitate <em>post hoc</em> name repair in tibble, given that <code><a href='tibble.html'>tibble()</a></code> and
 <code><a href='as_tibble.html'>as_tibble()</a></code> did not do this.</p>
 <p>From tibble v2.0.0, the <code>.name_repair</code> argument gives direct access to three
-specific levels of name repair: <code>minimal</code>, <code>unique</code>, and <code>universal</code>. We
-recommend that new code use this instead of <code>tidy_names()</code>,
-<code>set_tidy_names()</code>, or <code>repair_names()</code>. After a period of use, the repair
-stategies behind <code>minimal</code>, <code>unique</code>, and <code>universal</code> are likely to be
-exposed in standalone functions and this could affect the behaviour of
-<code>tidy_names()</code>. <code>repair_names()</code> should be considered deprecated.</p><pre>tibble(..., `.name_repair = "unique"`)
+specific levels of name repair: <code>minimal</code>, <code>unique</code>, and <code>universal</code>.
+See <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names'>vctrs::vec_as_names()</a></code> for the implementation of the underlying logic.</p>
+<p><code>repair_names()</code> should be considered retired, the underlying functionality
+will also remain available in <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names_legacy'>vctrs::vec_as_names_legacy()</a></code>.</p><pre>tibble(..., `.name_repair = "unique"`)
 ## is preferred to
 df &lt;- tibble(...)
 set_tidy_names(df, syntactic = FALSE)

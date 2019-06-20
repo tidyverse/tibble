@@ -226,7 +226,8 @@ for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
 </ul>
 
-<p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
+<p>This argument is passed on as <code>repair</code> to <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names'>vctrs::vec_as_names()</a></code>.
+See there for more details on these terms and the strategies used
 to enforce them.</p></td>
     </tr>
     </table>
@@ -240,9 +241,10 @@ frame, i.e. it has class <code>data.frame</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
-<code><a href='enframe.html'>enframe()</a></code> to convert a named vector into tibble. Name repair is detailed
-in <a href='name-repair.html'>name-repair</a>. <code><a href='https://rlang.r-lib.org/reference/tidy-dots.html'>rlang::list2()</a></code> provides more details on tidy dots
-semantics, i.e. exactly how quasiquotation works for the <code>...</code> argument.</p></div>
+<code><a href='enframe.html'>enframe()</a></code> to convert a named vector into a tibble. Name repair is
+detailed in <code><a href='https://www.rdocumentation.org/packages/vctrs/topics/vec_as_names'>vctrs::vec_as_names()</a></code>. <code><a href='https://rlang.r-lib.org/reference/tidy-dots.html'>rlang::list2()</a></code> provides more details
+on tidy dots semantics, i.e. exactly how quasiquotation works for the
+<code>...</code> argument.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -342,14 +344,14 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;  41.                             │     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
 #&gt;  42.                             │       └─base:::doTryCatch(return(expr), name, parentenv, handler)
 #&gt;  43.                             └─tibble::tibble(x = 1, x = 2)
-#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:135:2
+#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:137:2
 #&gt;  45.                                 └─tibble:::set_repaired_names(x, .name_repair) /home/travis/build/tidyverse/tibble/R/as_tibble.R:125:2
-#&gt;  46.                                   ├─rlang::set_names(x, repaired_names(names2(x), .name_repair = .name_repair)) /home/travis/build/tidyverse/tibble/R/repair-names.R:148:2
+#&gt;  46.                                   ├─rlang::set_names(...) /home/travis/build/tidyverse/tibble/R/repair-names.R:4:2
 #&gt;  47.                                   │ └─rlang:::set_names_impl(x, x, nm, ...)
 #&gt;  48.                                   │   └─rlang::is_function(nm)
 #&gt;  49.                                   │     └─rlang::is_closure(x)
-#&gt;  50.                                   └─tibble:::repaired_names(names2(x), .name_repair = .name_repair)
-#&gt;  51.                                     ├─base::tryCatch(...) /home/travis/build/tidyverse/tibble/R/repair-names.R:153:2
+#&gt;  50.                                   └─tibble:::repaired_names(...)
+#&gt;  51.                                     ├─base::tryCatch(...) /home/travis/build/tidyverse/tibble/R/repair-names.R:10:2
 #&gt;  52.                                     │ └─base:::tryCatchList(expr, classes, parentenv, handlers)
 #&gt;  53.                                     │   ├─base:::tryCatchOne(...)
 #&gt;  54.                                     │   │ └─base:::doTryCatch(return(expr), name, parentenv, handler)
@@ -359,7 +361,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;  58.                                     │     └─base:::tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
 #&gt;  59.                                     │       └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
 #&gt;  60.                                     │         └─base:::doTryCatch(return(expr), name, parentenv, handler)
-#&gt;  61.                                     └─vctrs::vec_as_names(name, repair = .name_repair)
+#&gt;  61.                                     └─vctrs::vec_as_names(name, repair = .name_repair, quiet = quiet) /home/travis/build/tidyverse/tibble/R/repair-names.R:10:2
 #&gt;  62.                                       └─vctrs:::validate_unique(names)
 #&gt;  63.                                         └─vctrs:::stop_names_must_be_unique(which(duplicated(names)))
 #&gt;  64.                                           └─vctrs:::stop_names(...)
@@ -484,7 +486,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;  41.                             │     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
 #&gt;  42.                             │       └─base:::doTryCatch(return(expr), name, parentenv, handler)
 #&gt;  43.                             └─tibble::tibble(y = strptime("2000/01/01", "%x"))
-#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:135:2
+#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:137:2
 #&gt;  45.                                 └─tibble:::check_valid_cols(x) /home/travis/build/tidyverse/tibble/R/as_tibble.R:126:2</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent lengths, only values of length one are recycled:
 #&gt; * Length 3: Column `a`
 #&gt; * Length 4: Column `b`
@@ -533,7 +535,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;  41.                             │     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
 #&gt;  42.                             │       └─base:::doTryCatch(return(expr), name, parentenv, handler)
 #&gt;  43.                             └─tibble::tibble(a = 1:3, b = tibble(c = 4:7))
-#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:135:2
+#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:137:2
 #&gt;  45.                                 └─tibble:::recycle_columns(x, .rows, lengths) /home/travis/build/tidyverse/tibble/R/as_tibble.R:128:2</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
 <span class='fu'>tibble</span>(<span class='kw'>.rows</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 0</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.rows</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
