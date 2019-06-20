@@ -45,7 +45,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' * Recycling only happens for a length 1 input.
 #' * Column names are not munged, although missing names are auto-populated.
 #'   Empty and duplicated column names are strongly discouraged, but the user
-#'   must indicate how to resolve. Read more in [name-repair].
+#'   must indicate how to resolve. Read more in [vctrs::vec_as_names()].
 #' * Row names are not added and are strongly discouraged, in favor of storing
 #'   that info as a column. Read about in [rownames].
 #' * `df[, j]` returns a tibble; it does not automatically extract the column

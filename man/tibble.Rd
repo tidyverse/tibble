@@ -28,7 +28,8 @@ for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
-See \link{name-repair} for more details on these terms and the strategies used
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
 to enforce them.}
 }
 \value{
@@ -139,7 +140,8 @@ tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
-\code{enframe()} to convert a named vector into tibble. Name repair is detailed
-in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides more details on tidy dots
-semantics, i.e. exactly how \link{quasiquotation} works for the \code{...} argument.
+\code{enframe()} to convert a named vector into a tibble. Name repair is
+detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}. \code{\link[rlang:list2]{rlang::list2()}} provides more details
+on tidy dots semantics, i.e. exactly how \link{quasiquotation} works for the
+\code{...} argument.
 }

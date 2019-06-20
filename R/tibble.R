@@ -33,16 +33,18 @@
 #'     for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
 #'
-#'   See [name-repair] for more details on these terms and the strategies used
+#'   This argument is passed on as `repair` to [vctrs::vec_as_names()].
+#'   See there for more details on these terms and the strategies used
 #'   to enforce them.
 #'
 #' @return A tibble, which is a colloquial term for an object of class
 #'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
 #'   frame, i.e. it has class `data.frame`.
 #' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
-#'   `enframe()` to convert a named vector into tibble. Name repair is detailed
-#'   in [name-repair]. [rlang::list2()] provides more details on tidy dots
-#'   semantics, i.e. exactly how [quasiquotation] works for the `...` argument.
+#'   `enframe()` to convert a named vector into a tibble. Name repair is
+#'   detailed in [vctrs::vec_as_names()]. [rlang::list2()] provides more details
+#'   on tidy dots semantics, i.e. exactly how [quasiquotation] works for the
+#'   `...` argument.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:

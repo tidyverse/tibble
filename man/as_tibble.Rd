@@ -51,7 +51,8 @@ for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
-See \link{name-repair} for more details on these terms and the strategies used
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
 to enforce them.}
 
 \item{rownames}{How to treat existing row names of a data frame or matrix:
@@ -134,5 +135,5 @@ if (requireNamespace("bench", quietly = TRUE)) {
 \seealso{
 \code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
 converts a named vector to a tibble with a column of names and column of
-values. \link{name-repair} documents the details of name repair.
+values. Name repair is implemented using \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 }

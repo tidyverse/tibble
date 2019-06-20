@@ -11,7 +11,7 @@
 
 \method{$}{tbl_df}(x, name)
 
-\method{[}{tbl_df}(x, i, j, drop = FALSE)
+\method{[}{tbl_df}(x, i = NULL, j = NULL, drop = FALSE)
 }
 \arguments{
 \item{x}{data frame.}
