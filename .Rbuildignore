@@ -22,4 +22,5 @@
 ^\.drake$
 ^adhoc$
 ^man/figures/logo.svg$
+^man/figures/logo-og-1280x640.png$
 ^minver$
