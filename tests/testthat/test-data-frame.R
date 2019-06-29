@@ -8,12 +8,14 @@ test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
 })
 
+test_that("NULL is ignored (#580)", {
+  expect_identical(tibble(a = NULL), tibble())
+  expect_identical(tibble(a = NULL, a = 1), tibble(a = 1))
+  expect_identical(tibble(a = NULL, b = 1, c = 2:3), tibble(b = 1, c = 2:3))
+  expect_identical(tibble(b = 1, NULL, c = 2:3), tibble(b = 1, c = 2:3))
+})
+
 test_that("bogus columns raise an error", {
-  expect_error(
-    tibble(a = NULL),
-    error_column_must_be_vector("a", "NULL"),
-    fixed = TRUE
-  )
   expect_error(
     tibble(a = new.env()),
     error_column_must_be_vector("a", "environment"),

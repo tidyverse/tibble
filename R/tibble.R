@@ -133,7 +133,10 @@ tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(..., .named = TRUE)
-  xlq <- lst_quos(xs, transform = expand_lst)
+
+  is_null <- map_lgl(xs, quo_is_null)
+
+  xlq <- lst_quos(xs[!is_null], transform = expand_lst)
   lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
 }
 
