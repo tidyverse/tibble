@@ -97,9 +97,6 @@ validate_tibble <- function(x) {
   #' and that [NROW()] is consistent with the data.
   validate_nrow(names(x), col_lengths(x), NROW(x))
 
-  #' 1d arrays are not supported.
-  map(x, check_no_dim)
-
   x
 }
 

@@ -14,13 +14,6 @@ test_that("error_enframe_has_dim()", {
   )
 })
 
-test_that("error_1d_array_column()", {
-  expect_equal(
-    error_1d_array_column(),
-    "1d arrays are not supported in a tibble column."
-  )
-})
-
 test_that("error_unsupported_index()", {
   expect_equal(
     error_unsupported_index(raw()),

@@ -8,10 +8,6 @@ test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
 })
 
-test_that("dim attribute is stripped of 1D array (#84)", {
-  expect_null(dim(tibble(x = array(1:3))$x))
-})
-
 test_that("bogus columns raise an error", {
   expect_error(
     tibble(a = NULL),
@@ -83,10 +79,10 @@ test_that("names are stripped from vectors", {
   expect_null(names(foo$x))
 })
 
-test_that("names in list columns are preserved", {
+test_that("names in list columns are stripped", {
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(names(foo), "x")
-  expect_equal(names(foo$x), c("y", "z"))
+  expect_null(names(foo$x))
 })
 
 test_that("attributes are preserved", {
@@ -701,7 +697,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
 
 test_that("can make tibble containing data.frame or array (#416)", {
   expect_identical(
-    tibble(mtcars),
+    tibble(mtcars = remove_rownames(mtcars)),
     new_tibble(list(mtcars = remove_rownames(mtcars)), nrow = nrow(mtcars))
   )
   expect_identical(
@@ -712,8 +708,8 @@ test_that("can make tibble containing data.frame or array (#416)", {
 
 test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
-    as_tibble(list(x = mtcars)),
-    new_tibble(list(x = remove_rownames(mtcars)), nrow = nrow(mtcars))
+    as_tibble(list(x = iris)),
+    new_tibble(list(x = iris), nrow = nrow(iris))
   )
   expect_identical(
     as_tibble(list(x = diag(5))),

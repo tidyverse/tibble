@@ -328,7 +328,6 @@ test_that("[[.tbl_df ignores exact argument", {
 test_that("can use recursive indexing with [[", {
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(foo[[c(1, 1)]], 1:3)
-  expect_equal(foo[[c("x", "y")]], 1:3)
 })
 
 test_that("[[ returns NULL if name doesn't exist", {
@@ -487,12 +486,6 @@ test_that("validate_tibble() checks", {
   expect_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
     error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
-    fixed = TRUE
-  )
-
-  expect_error(
-    validate_tibble(new_tibble(list(a = array(1:3)), nrow = 3)),
-    error_1d_array_column(),
     fixed = TRUE
   )
 })
