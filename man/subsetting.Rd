@@ -38,6 +38,8 @@ behavior is different for tibbles and data frames in some cases:
 only one column is accessed.
 \item Partial matching of column names with \code{$} and \code{[[} is not supported, a
 warning is given and \code{NULL} is returned.
+\item Only scalars (vectors of length one) or vectors with the
+same length as the number of rows can be used for assignment.
 }
 
 Unstable return type and implicit partial matching can lead to surprises and

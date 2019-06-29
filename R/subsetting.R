@@ -8,6 +8,8 @@
 #'   only one column is accessed.
 #' * Partial matching of column names with `$` and `[[` is not supported, a
 #'   warning is given and `NULL` is returned.
+#' * Only scalars (vectors of length one) or vectors with the
+#'   same length as the number of rows can be used for assignment.
 #'
 #' Unstable return type and implicit partial matching can lead to surprises and
 #' bugs that are hard to catch. If you rely on code that requires the original
@@ -228,4 +230,16 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
     n <- length(i)
   }
   vec_restore(x, to, n = n)
+}
+
+#' @export
+`$<-.tbl_df` <- function(x, name, value) {
+  tryCatch(
+    value <- vec_recycle_common(value, x)[[1]],
+    vctrs_error_incompatible_size = function(e) {
+      abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
+    }
+  )
+
+  NextMethod()
 }
