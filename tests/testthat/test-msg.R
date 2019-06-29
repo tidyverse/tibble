@@ -271,7 +271,7 @@ test_that("error_inconsistent_cols()", {
       10,
       letters[1:3],
       c(4, 4, 3),
-      "`uvw` argument"
+      "Requested with `uvw` argument"
     ),
     bullets(
       "Tibble columns must have consistent lengths, only values of length one are recycled:",
@@ -286,7 +286,7 @@ test_that("error_inconsistent_cols()", {
       10,
       letters[1:3],
       c(2, 2, 3),
-      "`xyz` argument"
+      "Requested with `xyz` argument"
     ),
     bullets(
       "Tibble columns must have consistent lengths, only values of length one are recycled:",
@@ -301,7 +301,7 @@ test_that("error_inconsistent_cols()", {
       NULL,
       letters[1:3],
       c(2, 2, 3),
-      "`xyz` argument"
+      "Requested with `xyz` argument"
     ),
     bullets(
       "Tibble columns must have consistent lengths, only values of length one are recycled:",

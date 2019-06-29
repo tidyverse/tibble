@@ -151,7 +151,7 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
 
   bullets(
     "Tibble columns must have consistent lengths, only values of length one are recycled:",
-    if (!is.null(.rows)) paste0("Length ", .rows, ": Requested with ", rows_source),
+    if (!is.null(.rows)) paste0("Length ", .rows, ": ", rows_source),
     map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
   )
 }
