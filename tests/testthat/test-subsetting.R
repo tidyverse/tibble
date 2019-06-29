@@ -349,11 +349,6 @@ test_that("$ throws warning if name doesn't exist", {
   )
 })
 
-test_that("$ throws different warning if attempting a partial initialization (#199)", {
-  df <- tibble(x = 1)
-  expect_warning(df$y[1] <- 2, "Unknown or uninitialised column: 'y'")
-})
-
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
   expect_warning(
@@ -365,4 +360,42 @@ test_that("$ doesn't do partial matching", {
     "Unknown or uninitialised column: 'part'"
   )
   expect_error(df$partial, NA)
+})
+
+# $<- ---------------------------------------------------------------------
+
+test_that("$<- doesn't throw warning if name doesn't exist", {
+  df <- tibble(x = 1)
+  expect_warning(
+    df$y <- 2,
+    NA
+  )
+  expect_identical(df, tibble(x = 1, y = 2))
+})
+
+test_that("$<- throws different warning if attempting a partial initialization (#199)", {
+  df <- tibble(x = 1)
+  expect_warning(df$y[1] <- 2, "Unknown or uninitialised column: 'y'")
+})
+
+test_that("$<- recycles only values of length one", {
+  df <- tibble(x = 1:3)
+
+  df$y <- 4
+  expect_identical(df, tibble(x = 1:3, y = 4))
+
+  df$z <- 5:7
+  expect_identical(df, tibble(x = 1:3, y = 4, z = 5:7))
+
+  expect_error(
+    df$w <- 8:9,
+    error_inconsistent_cols(3, "w", 2, "Existing data"),
+    fixed = TRUE
+  )
+
+  expect_error(
+    df$a <- character(),
+    error_inconsistent_cols(3, "a", 0, "Existing data"),
+    fixed = TRUE
+  )
 })
