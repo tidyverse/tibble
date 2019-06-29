@@ -143,26 +143,21 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair
 }
 
-# TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
 check_valid_cols <- function(x) {
   names_x <- names2(x)
-  is_xd <- which(!map_lgl(x, is_1d_or_2d))
+  is_xd <- which(!map_lgl(x, vec_is))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
     abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
+  # TODO: Remove with dplyr 0.9.0 (vctrs support)
   posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
   if (has_length(posixlt)) {
     abort(error_time_column_must_be_posixct(names_x[posixlt]))
   }
 
   invisible(x)
-}
-
-is_1d_or_2d <- function(x) {
-  # dimension check is for matrices and data.frames
-  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
 }
 
 recycle_columns <- function(x, .rows, lengths) {
