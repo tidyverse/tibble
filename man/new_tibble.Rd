@@ -55,7 +55,6 @@ but the names are not checked for correctness.
 and that all columns are vectors, data frames or matrices.
 It also makes sure that all columns have the same length,
 and that \code{\link[=NROW]{NROW()}} is consistent with the data.
-1d arrays are not supported.
 }
 
 \examples{
