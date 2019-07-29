@@ -533,14 +533,6 @@ test_that("as.tibble is an alias of as_tibble", {
 
 # Validation --------------------------------------------------------------
 
-test_that("POSIXlt isn't a valid column", {
-  expect_error(
-    check_valid_cols(list(x = as.POSIXlt(Sys.time()))),
-    error_time_column_must_be_posixct("x"),
-    fixed = TRUE
-  )
-})
-
 test_that("NULL isn't a valid column", {
   expect_error(
     check_valid_cols(list(a = NULL)),

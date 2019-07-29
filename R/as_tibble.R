@@ -151,12 +151,6 @@ check_valid_cols <- function(x) {
     abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
-  # TODO: Remove with dplyr 0.9.0 (vctrs support)
-  posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
-  if (has_length(posixlt)) {
-    abort(error_time_column_must_be_posixct(names_x[posixlt]))
-  }
-
   invisible(x)
 }
 
