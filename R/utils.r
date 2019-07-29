@@ -18,7 +18,10 @@ has_nonnull_names <- function(x) {
 set_class <- `class<-`
 
 strip_names <- function(x) {
-  vctrs:::set_names2(x, NULL)
+  if (!is.null(names(x))) {
+    x <- vctrs:::set_names2(x, NULL)
+  }
+  x
 }
 
 needs_list_col <- function(x) {

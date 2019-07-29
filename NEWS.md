@@ -2,6 +2,7 @@
 
 - Internal changes only.
 
+- strip_names() calling vctrs::set_names2() only when the names is not NULL
 
 # tibble 2.1.3
 
