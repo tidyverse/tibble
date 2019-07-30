@@ -250,21 +250,6 @@ test_that("error_column_must_be_vector()", {
   )
 })
 
-test_that("error_time_column_must_be_posixct()", {
-  expect_equal(
-    error_time_column_must_be_posixct("a"),
-    "Column `a` is a date/time and must be stored as POSIXct, not POSIXlt."
-  )
-  expect_equal(
-    error_time_column_must_be_posixct(letters[2:3]),
-    "Columns `b`, `c` are dates/times and must be stored as POSIXct, not POSIXlt."
-  )
-  expect_equal(
-    unell(error_time_column_must_be_posixct(LETTERS)),
-    "Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) are dates/times and must be stored as POSIXct, not POSIXlt."
-  )
-})
-
 test_that("error_inconsistent_cols()", {
   expect_equal(
     error_inconsistent_cols(

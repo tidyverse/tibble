@@ -137,10 +137,6 @@ error_column_must_be_vector <- function(names, classes) {
   )
 }
 
-error_time_column_must_be_posixct <- function(names) {
-  invalid_df("[is](are) [a ]date(s)/time(s) and must be stored as POSIXct, not POSIXlt", names)
-}
-
 error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
