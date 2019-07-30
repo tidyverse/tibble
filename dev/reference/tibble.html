@@ -440,54 +440,10 @@ on tidy dots semantics, i.e. exactly how quasiquotation works for the
 #&gt; # … with 2 more variables: [,"Petal.Length"] &lt;dbl&gt;, [,"Petal.Width"] &lt;dbl&gt;</div><div class='input'>
 <span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
 <span class='co'># with inconsistent number of rows:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strptime'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; Error : Column `y` is a date/time and must be stored as POSIXct, not POSIXlt.
-#&gt; Backtrace:
-#&gt;      █
-#&gt;   1. ├─base::tryCatch(...)
-#&gt;   2. │ └─base:::tryCatchList(expr, classes, parentenv, handlers)
-#&gt;   3. │   ├─base:::tryCatchOne(...)
-#&gt;   4. │   │ └─base:::doTryCatch(return(expr), name, parentenv, handler)
-#&gt;   5. │   └─base:::tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
-#&gt;   6. │     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
-#&gt;   7. │       └─base:::doTryCatch(return(expr), name, parentenv, handler)
-#&gt;   8. ├─base::withCallingHandlers(...)
-#&gt;   9. ├─base::saveRDS(...)
-#&gt;  10. ├─base::do.call(...)
-#&gt;  11. ├─(function (what, args, quote = FALSE, envir = parent.frame()) ...
-#&gt;  12. └─(function (..., crayon_enabled, crayon_colors, pkgdown_internet) ...
-#&gt;  13.   └─pkgdown::build_site(...)
-#&gt;  14.     └─pkgdown:::build_site_local(...)
-#&gt;  15.       └─pkgdown::build_reference(...)
-#&gt;  16.         └─purrr::map(...)
-#&gt;  17.           └─pkgdown:::.f(.x[[i]], ...)
-#&gt;  18.             └─pkgdown:::data_reference_topic(...)
-#&gt;  19.               ├─pkgdown:::as_data(...)
-#&gt;  20.               └─pkgdown:::as_data.tag_examples(...)
-#&gt;  21.                 └─purrr::pmap_chr(...)
-#&gt;  22.                   └─pkgdown:::.f(...)
-#&gt;  23.                     ├─withr::with_options(...)
-#&gt;  24.                     │ └─base::force(code)
-#&gt;  25.                     └─evaluate::evaluate(code, env, new_device = TRUE)
-#&gt;  26.                       └─evaluate:::evaluate_call(...)
-#&gt;  27.                         ├─evaluate:::timing_fn(...)
-#&gt;  28.                         ├─evaluate:::handle(...)
-#&gt;  29.                         │ └─base::try(f, silent = TRUE)
-#&gt;  30.                         │   └─base::tryCatch(...)
-#&gt;  31.                         │     └─base:::tryCatchList(expr, classes, parentenv, handlers)
-#&gt;  32.                         │       └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
-#&gt;  33.                         │         └─base:::doTryCatch(return(expr), name, parentenv, handler)
-#&gt;  34.                         ├─base::withCallingHandlers(...)
-#&gt;  35.                         ├─base::withVisible(eval(expr, envir, enclos))
-#&gt;  36.                         └─base::eval(expr, envir, enclos)
-#&gt;  37.                           └─base::eval(expr, envir, enclos)
-#&gt;  38.                             ├─base::try(tibble(y = strptime("2000/01/01", "%x")))
-#&gt;  39.                             │ └─base::tryCatch(...)
-#&gt;  40.                             │   └─base:::tryCatchList(expr, classes, parentenv, handlers)
-#&gt;  41.                             │     └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
-#&gt;  42.                             │       └─base:::doTryCatch(return(expr), name, parentenv, handler)
-#&gt;  43.                             └─tibble::tibble(y = strptime("2000/01/01", "%x"))
-#&gt;  44.                               └─tibble:::lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths) /home/travis/build/tidyverse/tibble/R/tibble.R:140:2
-#&gt;  45.                                 └─tibble:::check_valid_cols(x) /home/travis/build/tidyverse/tibble/R/as_tibble.R:126:2</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent lengths, only values of length one are recycled:
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strptime'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 1
+#&gt;   y                  
+#&gt;   &lt;dttm&gt;             
+#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent lengths, only values of length one are recycled:
 #&gt; * Length 3: Column `a`
 #&gt; * Length 4: Column `b`
 #&gt; Backtrace:
