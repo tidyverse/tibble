@@ -1,2 +1,2 @@
-Observations: 150
-Variables: 0
+Rows: 150
+Columns: 0

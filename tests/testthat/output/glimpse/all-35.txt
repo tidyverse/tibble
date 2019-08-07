@@ -1,5 +1,5 @@
-Observations: 3
-Variables: 9
+Rows: 3
+Columns: 9
 $ a <dbl> 1.0, 2.5, NA
 $ b <int> 1, 2, NA
 $ c <lgl> TRUE, FALSE, NA

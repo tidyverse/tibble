@@ -39,13 +39,13 @@ glimpse.tbl <- function(x, width = NULL, ...) {
     abort(error_glimpse_infinite_width())
   }
 
-  cat_line("Observations: ", big_mark(nrow(x)))
+  cat_line("Rows: ", big_mark(nrow(x)))
 
   # this is an overestimate, but shouldn't be too expensive.
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
-  cat_line("Variables: ", big_mark(ncol(df)))
+  cat_line("Columns: ", big_mark(ncol(df)))
 
   summary <- tbl_sum(x)
   brief_summary <- summary[-1]
