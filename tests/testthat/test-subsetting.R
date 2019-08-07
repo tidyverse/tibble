@@ -323,11 +323,17 @@ test_that("[[.tbl_df ignores exact argument", {
 })
 
 test_that("can use recursive indexing with [[", {
+  scoped_lifecycle_silence()
+
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(foo[[c(1, 1)]], 1:3)
+
+  # [[ with a matrix seems broken, despite an implementation in [[.data.frame
 })
 
 test_that("[[ returns NULL if name doesn't exist", {
+  scoped_lifecycle_silence()
+
   df <- tibble(x = 1)
   expect_null(df[["y"]])
   expect_null(df[[1, "y"]])
@@ -337,6 +343,17 @@ test_that("can use two-dimensional indexing with [[", {
   iris2 <- as_tibble(iris)
   expect_equal(iris2[[1, 2]], iris[[1, 2]])
   expect_equal(iris2[[2, 3]], iris[[2, 3]])
+})
+
+test_that("can use two-dimensional indexing with matrix and data frame columns (#440)", {
+  df <- tibble::tibble(
+    x = 1:3,
+    y = matrix(9:1, ncol = 3),
+    z = tibble::tibble(a = 1:3, b = 3:1)
+  )
+
+  expect_identical(df[[1, "y"]], df[1, ]$y)
+  expect_identical(df[[1, "z"]], df[1, ]$z)
 })
 
 # $ -----------------------------------------------------------------------

@@ -73,10 +73,52 @@ NULL
     warningc("exact ignored")
   }
   if (missing(j)) {
-    return(.subset2(x, i))
+    tbl_extract2(x, i = NULL, j = i)
+  } else {
+    tbl_extract2(x, i, j)
+  }
+}
+
+tbl_extract2 <- function(x, i, j) {
+  if (is.null(i)) {
+    if (is.matrix(j)) {
+      signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
+      return(as.matrix(x)[[j]])
+    } else if (has_length(j, 2)) {
+      signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
+      return(.subset2(x, j))
+    }
   }
 
-  NextMethod()
+  vec_assert(j, size = 1)
+  j <- vec_as_index_extract2_compat(j, ncol(x), names = names(x))
+
+  if (is.null(i)) {
+    .subset2(x, j)
+  } else if (is.na(j)) {
+    # Lifecycle warning already given
+    NULL
+  } else {
+    i <- vec_as_index(i, vec_size(x))
+    vec_assert(i, size = 1)
+
+    x[i, j][[1L]]
+  }
+}
+
+vec_as_index_extract2_compat <- function(j, n, names) {
+  if (is.character(j)) {
+    vec_assert(j, size = 1)
+    j <- match(j, names)
+    if (is.na(j)) {
+      signal_soft_deprecated("Calling `[[` with an unknown column name is deprecated and will eventually be converted to an error.")
+    }
+    j
+  } else {
+    j <- vec_as_index(j, n)
+    vec_assert(j, size = 1)
+  }
+  j
 }
 
 #' @rdname subsetting
