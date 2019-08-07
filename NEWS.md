@@ -1,3 +1,9 @@
+# tibble 2.99.99.9002
+
+- `[[` subsetting with two arguments works as intended also for matrix and data frame columns (#440).
+- `glimpse()` uses "Rows" and "Columns" instead of "Variables" and "Observations", because we're not sure if the data is tidy here (#614).
+
+
 # tibble 2.99.99.9001
 
 - The magrittr pipe `%>%` is reexported.
