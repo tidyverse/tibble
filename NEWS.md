@@ -1,3 +1,16 @@
+# tibble 2.99.99.9001
+
+- The magrittr pipe `%>%` is reexported.
+- Allow `POSIXlt` columns, they are now better supported by dplyr and other tools thanks to vctrs (#626).
+- `view()` now uses the created (or passed) title argument (#610, @xvrdm).
+- `$<-` recycles only length 1 (#438).
+- `tibble()` ignores NULL arguments, named or unnamed (#580).
+- Don't strip `"dim"` attribute, but still strip names.
+- Delegate legacy name repair to vctrs (#611).
+- Removed tests and other helper code for name repair, this is now the responsibility of vctrs (#609).
+- Delegate name repair to vctrs (#464).
+
+
 # tibble 2.1.3.9000
 
 - Internal changes only.
