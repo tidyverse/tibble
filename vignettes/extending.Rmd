@@ -14,7 +14,7 @@ To extend the tibble package for new types of columnar data, you need to underst
 * `pillar_shaft()` determines what goes into the body of the column.
 * `is_vector_s3()` and `obj_sum()` are used when rendering list columns.
 
-If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the `pillar` package that powers the printing of tibbles. Either add `pillar` to the `Imports:` section of your `DESCRIPTION`, or simply call:
+If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the `pillar` package that powers the printing of tibbles. Either add `pillar` to the `Imports:` section of your `DESCRIPTION`, or call:
 
 ```{r, eval = FALSE}
 usethis::use_package("pillar")
@@ -297,7 +297,7 @@ Currently, ANSI escapes are not rendered in vignettes, so the display here isn't
 
 ## Fixing list columns
 
-To tweak the output in the `paths` column, we simply need to indicate that our class is an S3 vector:
+To tweak the output in the `paths` column, we need to indicate that our class is an S3 vector:
 
 ```{r include=FALSE}
 import::from(pillar, is_vector_s3)
