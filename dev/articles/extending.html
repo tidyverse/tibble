@@ -44,7 +44,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.3.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9002</span>
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@
 <li>
 <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">is_vector_s3()</a></code> and <code><a href="https://www.rdocumentation.org/packages/pillar/topics/type_sum">obj_sum()</a></code> are used when rendering list columns.</li>
 </ul>
-<p>If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the <code>pillar</code> package that powers the printing of tibbles. Either add <code>pillar</code> to the <code>Imports:</code> section of your <code>DESCRIPTION</code>, or simply call:</p>
+<p>If you have written an S3 or S4 class that can be used as a column, you can override these generics to make sure your data prints well in a tibble. To start, you must import the <code>pillar</code> package that powers the printing of tibbles. Either add <code>pillar</code> to the <code>Imports:</code> section of your <code>DESCRIPTION</code>, or call:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">"pillar"</span>)</a></code></pre></div>
 <p>This short vignette assumes a package that implements an S3 class <code>"latlon"</code> and uses <code>roxygen2</code> to create documentation and the <code>NAMESPACE</code> file. For this vignette to work we need to attach pillar:</p>
 <div id="prerequisites" class="section level2">
@@ -417,7 +417,7 @@
 <div id="fixing-list-columns" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fixing-list-columns" class="anchor"></a>Fixing list columns</h2>
-<p>To tweak the output in the <code>paths</code> column, we simply need to indicate that our class is an S3 vector:</p>
+<p>To tweak the output in the <code>paths</code> column, we need to indicate that our class is an S3 vector:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">#' @importFrom pillar is_vector_s3</span></a>
 <a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co">#' @export</span></a>
 <a class="sourceLine" id="cb27-3" data-line-number="3">is_vector_s3.latlon &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="ot">TRUE</span></a>
