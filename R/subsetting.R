@@ -277,8 +277,8 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
   tryCatch(
-    value <- vec_recycle_common(value, x)[[1]],
-    vctrs_error_incompatible_size = function(e) {
+    value <- vec_recycle(value, vec_size(x)),
+    vctrs_error_recycle_incompatible_size = function(e) {
       abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
     }
   )
