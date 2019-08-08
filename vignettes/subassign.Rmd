@@ -1,0 +1,97 @@
+---
+title: "Subsetting and subassignment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{subassign}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+dftbl_opts_hook <- function(options) {
+  df_code <- options$code
+  tibble_code <- gsub("new_df[(][)]", "new_df(tibble)", df_code)
+  new_code <- c(df_code, "", tibble_code)
+  options$code <- new_code
+  options
+}
+
+knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
+
+# FIXME: side-by-side display using source and output hooks, and perhaps
+# reshuffling the code
+```
+
+```{r setup}
+library(tibble)
+```
+
+This vignette is an attempt to provide a comprehensive overview over all subsetting and subassignment operations, highlighting where the tibble implementation differs from the data frame implementation.
+
+```{r}
+new_df <- function(constructor = data.frame) {
+  df <- constructor(a = 1:3, b = letters[4:6])
+  df$c <- list(7, 8:9, 10:12)
+  df
+}
+```
+
+```{r dftbl = TRUE}
+new_df()
+```
+
+
+## Subsetting
+
+### $
+
+No differences with `$` subsetting:
+
+```{r dftbl = TRUE}
+df <- new_df()
+df$a
+df$"a"
+df$a[2:3]
+df$d
+```
+
+### [
+
+With `[` subsetting, tibbles always return a tibble. The `drop` argument is supported but has different defaults:
+
+```{r dftbl = TRUE}
+df <- new_df()
+df["a"]
+df["a", drop = FALSE]
+df["a", drop = TRUE]
+df[, "a"]
+df[, "a", drop = FALSE]
+df[, "a", drop = TRUE]
+df[c("a", "b")]
+df[, c("a", "b")]
+
+df[1, ]
+df[1:2, ]
+
+df[1, "a"]
+df[1, "a", drop = FALSE]
+df[1:2, "a"]
+df[1:2, "a", drop = FALSE]
+df[1, c("a", "b")]
+df[1:2, c("a", "b")]
+```
+
+### [[
+
+## Subassignment
+
+### $
+
+### [
+
+### [[
