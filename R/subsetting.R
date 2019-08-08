@@ -276,6 +276,8 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
 
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
+  value <- (vctrs:::vec_coercible_cast)(value, x[[name]])
+
   tryCatch(
     value <- vec_recycle(value, vec_size(x)),
     vctrs_error_recycle_incompatible_size = function(e) {
