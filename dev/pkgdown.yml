@@ -3,6 +3,7 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   extending: extending.html
+  subassign: subassign.html
   tibble: tibble.html
 urls:
   reference: https://tibble.tidyverse.org/reference
