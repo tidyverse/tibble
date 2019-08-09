@@ -9,6 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  error = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -75,8 +76,11 @@ dftbl_chunk_hook <- function(x, options) {
 
 knitr::knit_hooks$set(chunk = dftbl_chunk_hook)
 
-# FIXME: side-by-side display using source and output hooks, and perhaps
-# reshuffling the code
+options(
+  lifecycle_disable_warnings = FALSE,
+  lifecycle_verbose_soft_deprecation = TRUE,
+  lifecycle_repeat_warnings = TRUE
+)
 ```
 
 ```{r setup}
@@ -87,13 +91,14 @@ This vignette is an attempt to provide a comprehensive overview over all subsett
 
 ```{r def}
 new_df <- function() {
-  df <- data.frame(a = 1:3, b = letters[4:6])
-  df$c <- list(7, 8:9, 10:12)
+  df <- data.frame(a = 1:4)
+  df$b = letters[5:8]
+  df$cd <- list(9, 10:11, 12:14, "text")
   df
 }
 
 new_tbl <- function() {
-  tibble(a = 1:3, b = letters[4:6], c = list(7, 8:9, 10:12))
+  as_tibble(new_df())
 }
 ```
 
@@ -104,24 +109,54 @@ new_df()
 
 ## Subsetting
 
+Subsetting operations are read-only.
+
+```{r ro, dftbl = TRUE}
+df <- new_df()
+```
+
 ### $
 
-With `$` subsetting, accessing a missing column gives a warning:
+With `$` subsetting, accessing a missing column gives a warning.
+Inexact matching is not supported:
 
 ```{r dollar, dftbl = TRUE}
-df <- new_df()
 df$a
 df$"a"
 df$a[2:3]
+df$cd
+df$c
 df$d
+```
+
+### [[
+
+The `exact` argument is not supported by tibbles.
+With two indexes, a single element is returned.
+Exotic variants like recursive indexing are deprecated for tibbles.
+
+```{r double-bracket, dftbl = TRUE}
+df[["a"]]
+df[["cd", exact = TRUE]]
+df[["cd", exact = FALSE]]
+df[["c", exact = TRUE]]
+df[["c", exact = FALSE]]
+
+df[[2, "a"]]
+df[[2, "cd"]]
+df[[1:2, "cd"]]
+df[[2, "c"]]
+df[[1:2, "c"]]
+
+df[[c(1, 2)]]
 ```
 
 ### [
 
-With `[` subsetting, tibbles always return a tibble. The `drop` argument is supported but has different defaults:
+With `[` subsetting, tibbles always return a tibble.
+The `drop` argument is supported but has different defaults:
 
 ```{r bracket, dftbl = TRUE}
-df <- new_df()
 df["a"]
 df["a", drop = FALSE]
 df["a", drop = TRUE]
@@ -136,18 +171,220 @@ df[1:2, ]
 
 df[1, "a"]
 df[1, "a", drop = FALSE]
+df[1, "a", drop = TRUE]
 df[1:2, "a"]
 df[1:2, "a", drop = FALSE]
+df[1:2, "a", drop = TRUE]
 df[1, c("a", "b")]
 df[1:2, c("a", "b")]
-```
 
-### [[
+df[]
+df[,]
+```
 
 ## Subassignment
 
-### $
+For subassignment, we need a fresh copy of the data for each test.
+The `with_*()` functions allow for a more concise notation
+(`with_tbl()` omitted here for brevity):
 
-### [
+```{r with-df-def}
+with_df <- function(code, verbose = FALSE) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    df <- new_df()
+    !!code
+    df
+  })
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
+  rlang::eval_tidy(full_code)
+}
+```
 
-### [[
+
+```{r with-tbl-def, include = FALSE}
+with_tbl <- function(code, verbose = FALSE) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    tbl <- new_tbl()
+    !!code
+    tbl
+  })
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
+  rlang::eval_tidy(full_code)
+}
+```
+
+This function takes an assignment expression and executes it on a fresh copy of the data.
+The first example prints what's really executed, further examples omit this output.
+
+```{r with-demo, dftbl = TRUE}
+with_df(df$a <- rev(df$a), verbose = TRUE)
+```
+
+
+### $<-
+
+#### Scalars and full length
+
+Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn't happen:
+
+```{r dollar-assign-scalar, dftbl = TRUE}
+with_df(df$a <- 1)
+with_df(df$b <- 1)
+with_df(df$c <- 1)
+with_df(df$cd <- 1)
+```
+
+```{r dollar-assign-full, dftbl = TRUE}
+with_df(df$a <- 4:1)
+with_df(df$b <- 4:1)
+with_df(df$c <- 4:1)
+with_df(df$cd <- 4:1)
+```
+
+#### Recycling
+
+Tibbles allow recycling only for vectors of length 1 or of the same length as the data.
+
+```{r dollar-assign-recycle, dftbl = TRUE}
+with_df(df$a <- 1:2)
+with_df(df$a <- 1:3)
+with_df(df$a <- 1:5)
+with_df(df$c <- 1:2)
+```
+
+
+
+#### Subset assignment
+
+Updating parts of a column extracted by `$` is the responsibility of the column vector.
+Tibbles can't control what happens after `$` has returned.
+
+```{r dollar-assign-subset, dftbl = TRUE}
+with_df(df$a[1:2] <- 4:3)
+with_df(df$b[1:2] <- 4:3)
+with_df(df$c[1:2] <- 4:3)
+with_df(df$cd[1:2] <- 4:3)
+with_df(df$a[1:3] <- 4:3)
+with_df(df$a[1:4] <- 4:3)
+```
+
+For columns of the stricter `"vctrs_vctr"` class, this class implements the check, which then works identically for data frames and tibbles:
+
+```{r vctrs}
+with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
+with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])})
+```
+
+### [[<-
+
+```{r double-bracket-assign, dftbl = TRUE}
+with_df(df[["a"]] <- 1)
+with_df(df[["a"]] <- "x")
+with_df(df[["b"]] <- "x")
+
+with_df(df[[2, "a"]] <- 1)
+with_df(df[[2, "a"]] <- "x")
+with_df(df[[2, "b"]] <- "x")
+with_df(df[[2, "cd"]] <- "x")
+with_df(df[[1:2, "cd"]] <- "x")
+with_df(df[[2, "c"]] <- "x")
+with_df(df[[1:2, "c"]] <- "x")
+
+with_df(df[[c(2, 1)]] <- 1)
+with_df(df[[c(2, 1)]] <- "x")
+with_df(df[[c(1, 2)]] <- "x")
+```
+
+### [<-
+
+#### Scalars
+
+```{r bracket-assign-scalar-col, dftbl = TRUE}
+with_df(df[1, "a"] <- 1)
+with_df(df[1, "b"] <- 1)
+with_df(df[1, "c"] <- 1)
+with_df(df[1, "cd"] <- 1)
+```
+
+#### Full length columns
+
+```{r bracket-assign-full-col, dftbl = TRUE}
+with_df(df[, "a"] <- 4:1)
+with_df(df[, "b"] <- 4:1)
+with_df(df[, "c"] <- 4:1)
+with_df(df[, "cd"] <- 4:1)
+with_df(df[, "a"] <- 1)
+with_df(df[, "b"] <- 1)
+with_df(df[, "c"] <- 1)
+with_df(df[, "cd"] <- 1)
+```
+
+#### Multiple full length columns
+
+```{r bracket-assign-full-multicol, dftbl = TRUE}
+with_df(df[, c("a", "b")] <- 4:1)
+with_df(df[, c("a", "b")] <- 1)
+with_df(df[, c("a", "b")] <- list(4:1, letters[4:1]))
+with_df(df[, c("a", "b")] <- list(4:1, 1))
+with_df(df[, c("a", "b", "c")] <- list(4:1, letters[4:1]))
+with_df(df[, c("a", "b", "cd")] <- list(4:1, letters[4:1]))
+```
+
+#### Full length rows
+
+```{r bracket-assign-full-row, dftbl = TRUE}
+with_df(df[2, ] <- 1)
+with_df(df[2, ] <- "x")
+with_df(df[2, ] <- list(1, "x"))
+with_df(df[2, ] <- list(1, "x", 2))
+with_df(df[2, ] <- list(1, "x", 2, 3))
+```
+
+#### Multiple full length rows
+
+```{r bracket-assign-full-multirow, dftbl = TRUE}
+with_df(df[2:3, ] <- 1)
+with_df(df[2:3, ] <- 1:2)
+with_df(df[2:3, ] <- c("x", "y"))
+with_df(df[2:3, ] <- list(1:2, c("x", "y")))
+with_df(df[2:3, ] <- list(1:2, "x"))
+with_df(df[2:3, ] <- list(1, "x", 2))
+with_df(df[2:3, ] <- list(1, "x", 2, 3))
+```
+
+#### Unspecified
+
+```{r bracket-assign-unspecified, dftbl = TRUE}
+with_df(df[] <- 1)
+with_df(df[] <- 4:1)
+with_df(df[] <- 3:1)
+with_df(df[] <- 5:1)
+with_df(df[] <- list(1, "x"))
+with_df(df[] <- list(4:1, "x", 2))
+with_df(df[] <- list(1, "x", 2))
+with_df(df[] <- list(1, "x", 2, 3))
+with_df(df[] <- df)
+with_df(df[,] <- 1)
+with_df(df[,] <- 4:1)
+with_df(df[,] <- 3:1)
+with_df(df[,] <- 5:1)
+with_df(df[,] <- list(1, "x"))
+with_df(df[,] <- list(4:1, "x", 2))
+with_df(df[,] <- list(1, "x", 2))
+with_df(df[,] <- list(1, "x", 2, 3))
+with_df(df[,] <- df)
+```
+
+#### Subset assignment
+
+Due to tibble's default of `drop = FALSE`, updating a portion of a `[` subset is still safe, because tibble is still in control.
+Only one example is given here.
+(FIXME: It's not safe yet.)
+
+```{r bracket-assign-subset, dftbl = TRUE}
+with_df(df["a"][1, ] <- "b")
+```
