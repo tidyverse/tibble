@@ -129,6 +129,28 @@ df$c
 df$d
 ```
 
+### [[
+
+The `exact` argument is not supported by tibbles.
+With two indexes, a single element is returned.
+Exotic variants like recursive indexing are deprecated for tibbles.
+
+```{r double-bracket, dftbl = TRUE}
+df[["a"]]
+df[["cd", exact = TRUE]]
+df[["cd", exact = FALSE]]
+df[["c", exact = TRUE]]
+df[["c", exact = FALSE]]
+
+df[[2, "a"]]
+df[[2, "cd"]]
+df[[1:2, "cd"]]
+df[[2, "c"]]
+df[[1:2, "c"]]
+
+df[[c(1, 2)]]
+```
+
 ### [
 
 With `[` subsetting, tibbles always return a tibble.
@@ -158,28 +180,6 @@ df[1:2, c("a", "b")]
 
 df[]
 df[,]
-```
-
-### [[
-
-The `exact` argument is not supported by tibbles.
-With two indexes, a single element is returned.
-Exotic variants like recursive indexing are deprecated for tibbles.
-
-```{r double-bracket, dftbl = TRUE}
-df[["a"]]
-df[["cd", exact = TRUE]]
-df[["cd", exact = FALSE]]
-df[["c", exact = TRUE]]
-df[["c", exact = FALSE]]
-
-df[[2, "a"]]
-df[[2, "cd"]]
-df[[1:2, "cd"]]
-df[[2, "c"]]
-df[[1:2, "c"]]
-
-df[[c(1, 2)]]
 ```
 
 ## Subassignment
@@ -279,6 +279,7 @@ with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
 with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])})
 ```
 
+### [[<-
 
 ### [<-
 
@@ -369,5 +370,3 @@ Only one example is given here.
 ```{r bracket-assign-subset, dftbl = TRUE}
 with_df(df["a"][1, ] <- "b")
 ```
-
-### [[
