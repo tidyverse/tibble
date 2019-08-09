@@ -92,12 +92,12 @@ This vignette is an attempt to provide a comprehensive overview over all subsett
 ```{r def}
 new_df <- function() {
   df <- data.frame(a = 1:3, b = letters[4:6])
-  df$c <- list(7, 8:9, 10:12)
+  df$cd <- list(7, 8:9, 10:12)
   df
 }
 
 new_tbl <- function() {
-  tibble(a = 1:3, b = letters[4:6], c = list(7, 8:9, 10:12))
+  as_tibble(new_df())
 }
 ```
 
@@ -110,13 +110,16 @@ new_df()
 
 ### $
 
-With `$` subsetting, accessing a missing column gives a warning:
+With `$` subsetting, accessing a missing column gives a warning.
+Inexact matching is not supported:
 
 ```{r dollar, dftbl = TRUE}
 df <- new_df()
 df$a
 df$"a"
 df$a[2:3]
+df$cd
+df$c
 df$d
 ```
 
