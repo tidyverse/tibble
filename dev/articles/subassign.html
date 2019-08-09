@@ -142,7 +142,7 @@
 <a class="sourceLine" id="cb2-8" data-line-number="8">new_tbl &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(<span class="kw">new_df</span>())</a>
 <a class="sourceLine" id="cb2-10" data-line-number="10">}</a></code></pre></div>
-<table class="table"><tbody><tr style="vertical-align:top">
+<table class="table table"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">new_df</span>()</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
@@ -174,7 +174,7 @@
 <h2 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h2>
 <p>Subsetting operations are read-only.</p>
-<table class="table"><tbody><tr style="vertical-align:top">
+<table class="table table"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">new_df</span>()</a></code></pre></div>
 </td>
@@ -186,7 +186,7 @@
 <h3 class="hasAnchor">
 <a href="#section" class="anchor"></a>$</h3>
 <p>With <code>$</code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">df<span class="op">$</span>a</a>
@@ -287,7 +287,7 @@
 <h3 class="hasAnchor">
 <a href="#section-1" class="anchor"></a>[[</h3>
 <p>The <code>exact</code> argument is not supported by tibbles. With two indexes, a single element is returned. Exotic variants like recursive indexing are deprecated for tibbles.</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">df[[<span class="st">"a"</span>]]</a>
@@ -489,7 +489,7 @@
 <h3 class="hasAnchor">
 <a href="#section-2" class="anchor"></a>[</h3>
 <p>With <code>[</code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">df[<span class="st">"a"</span>]</a>
@@ -935,7 +935,7 @@
 <a class="sourceLine" id="cb91-10" data-line-number="10">  rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/eval_tidy.html">eval_tidy</a></span>(full_code)</a>
 <a class="sourceLine" id="cb91-11" data-line-number="11">}</a></code></pre></div>
 <p>This function takes an assignment expression and executes it on a fresh copy of the data. The first example prints what’s really executed, further examples omit this output.</p>
-<table class="table"><tbody><tr style="vertical-align:top">
+<table class="table table"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>a &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(df<span class="op">$</span>a), <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb92-2" data-line-number="2"><span class="co">#&gt; {</span></a>
@@ -980,7 +980,7 @@
 <h4 class="hasAnchor">
 <a href="#scalars-and-full-length" class="anchor"></a>Scalars and full length</h4>
 <p>Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn’t happen:</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -1097,7 +1097,7 @@
 </td>
 </tr>
 </tbody></table>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
@@ -1219,7 +1219,7 @@
 <h4 class="hasAnchor">
 <a href="#recycling" class="anchor"></a>Recycling</h4>
 <p>Tibbles allow recycling only for vectors of length 1 or of the same length as the data.</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
@@ -1282,7 +1282,7 @@
 <h4 class="hasAnchor">
 <a href="#subset-assignment" class="anchor"></a>Subset assignment</h4>
 <p>Updating parts of a column extracted by <code>$</code> is the responsibility of the column vector. Tibbles can’t control what happens after <code>$</code> has returned.</p>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>a[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">3</span>)</a>
@@ -1461,7 +1461,7 @@
 <div id="section-4" class="section level3">
 <h3 class="hasAnchor">
 <a href="#section-4" class="anchor"></a>[[&lt;-</h3>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">with_df</span>(df[[<span class="st">"a"</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -1742,7 +1742,7 @@
 <div id="scalars" class="section level4">
 <h4 class="hasAnchor">
 <a href="#scalars" class="anchor"></a>Scalars</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>, <span class="st">"a"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -1863,7 +1863,7 @@
 <div id="full-length-columns" class="section level4">
 <h4 class="hasAnchor">
 <a href="#full-length-columns" class="anchor"></a>Full length columns</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="st">"a"</span>] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
@@ -2099,7 +2099,7 @@
 <div id="multiple-full-length-columns" class="section level4">
 <h4 class="hasAnchor">
 <a href="#multiple-full-length-columns" class="anchor"></a>Multiple full length columns</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
@@ -2276,7 +2276,7 @@
 <div id="full-length-rows" class="section level4">
 <h4 class="hasAnchor">
 <a href="#full-length-rows" class="anchor"></a>Full length rows</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -2428,7 +2428,7 @@
 <div id="multiple-full-length-rows" class="section level4">
 <h4 class="hasAnchor">
 <a href="#multiple-full-length-rows" class="anchor"></a>Multiple full length rows</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -2636,7 +2636,7 @@
 <div id="unspecified" class="section level4">
 <h4 class="hasAnchor">
 <a href="#unspecified" class="anchor"></a>Unspecified</h4>
-<table class="table"><tbody>
+<table class="table table"><tbody>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
@@ -3121,7 +3121,7 @@
 <h4 class="hasAnchor">
 <a href="#subset-assignment-1" class="anchor"></a>Subset assignment</h4>
 <p>Due to tibble’s default of <code>drop = FALSE</code>, updating a portion of a <code>[</code> subset is still safe, because tibble is still in control. Only one example is given here. (FIXME: It’s not safe yet.)</p>
-<table class="table"><tbody><tr style="vertical-align:top">
+<table class="table table"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a>
 <a class="sourceLine" id="cb257-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
