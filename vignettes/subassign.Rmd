@@ -1,13 +1,18 @@
 ---
 title: "Subsetting and subassignment"
-output: 
-  rmarkdown::html_vignette:
-    css: table.css
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{subassign}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+<style type="text/css">
+.dftbl {
+    width: 100%;
+    table-layout: fixed;
+}
+</style>
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -70,7 +75,7 @@ old_chunk_hook <- knitr::knit_hooks$get("chunk")
 dftbl_chunk_hook <- function(x, options) {
   x <- old_chunk_hook(x, options)
   if (isTRUE(options$dftbl)) {
-    x <- paste0('<table class="table"><tbody><tr><td>\n\n', x, "\n\n</td></tr></tbody></table>")
+    x <- paste0('<table class="dftbl"><tbody><tr><td>\n\n', x, "\n\n</td></tr></tbody></table>")
     x <- gsub("<tr><td>\n\n</td></tr>", "", x, fixed = TRUE)
   }
   x
