@@ -67,7 +67,7 @@ old_chunk_hook <- knitr::knit_hooks$get("chunk")
 dftbl_chunk_hook <- function(x, options) {
   x <- old_chunk_hook(x, options)
   if (isTRUE(options$dftbl)) {
-    x <- paste0('<table style="width: 100%; table-layout: fixed; "><tr><td>\n\n', x, "\n\n</td></tr></table>")
+    x <- paste0('<table style="width: 100%; table-layout: fixed; "><tbody><tr><td>\n\n', x, "\n\n</td></tr></tbody></table>")
     x <- gsub("<tr><td>\n\n</td></tr>", "", x, fixed = TRUE)
   }
   x
