@@ -181,10 +181,11 @@ df[[c(1, 2)]]
 ## Subassignment
 
 For subassignment, we need a fresh copy of the data for each test.
-The `with_*()` functions allow for a more concise notation:
+The `with_*()` functions allow for a more concise notation
+(`with_tbl()` omitted here for brevity):
 
-```{r with-def}
-with_df <- function(code) {
+```{r with-df-def}
+with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
   
   full_code <- rlang::quo({
@@ -192,11 +193,14 @@ with_df <- function(code) {
     !!code
     df
   })
-  rlang::expr_print(full_code)
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
   rlang::eval_tidy(full_code)
 }
+```
 
-with_tbl <- function(code) {
+
+```{r with-tbl-def, include = FALSE}
+with_tbl <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
   
   full_code <- rlang::quo({
@@ -204,16 +208,16 @@ with_tbl <- function(code) {
     !!code
     tbl
   })
-  rlang::expr_print(full_code)
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
   rlang::eval_tidy(full_code)
 }
 ```
 
-This function takes an assignment expression and executes it on a fresh copy of the data, printing what's executed.
+This function takes an assignment expression and executes it on a fresh copy of the data.
+The first example prints what's really executed, further examples omit this output.
 
-```{r}
-with_df({})
-with_df(df$a <- rev(df$a))
+```{r with-demo, dftbl = TRUE}
+with_df(df$a <- rev(df$a), verbose = TRUE)
 ```
 
 
