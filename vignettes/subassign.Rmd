@@ -180,7 +180,50 @@ df[[c(1, 2)]]
 
 ## Subassignment
 
+For subassignment, we need a fresh copy of the data for each test.
+The `with_*()` functions allow for a more concise notation:
+
+```{r with-def}
+with_df <- function(code) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    df <- new_df()
+    !!code
+    df
+  })
+  rlang::expr_print(full_code)
+  rlang::eval_tidy(full_code)
+}
+
+with_tbl <- function(code) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    tbl <- new_tbl()
+    !!code
+    tbl
+  })
+  rlang::expr_print(full_code)
+  rlang::eval_tidy(full_code)
+}
+```
+
+This function takes an assignment expression and executes it on a fresh copy of the data, printing what's executed.
+
+```{r}
+with_df({})
+with_df(df$a <- rev(df$a))
+```
+
+
 ### $
+
+```{r dollar-assign}
+with_df(df$a <- 1)
+with_df(df$b <- 1)
+```
+
 
 ### [
 
