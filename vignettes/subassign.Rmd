@@ -91,8 +91,8 @@ This vignette is an attempt to provide a comprehensive overview over all subsett
 
 ```{r def}
 new_df <- function() {
-  df <- data.frame(a = 1:3, b = letters[4:6])
-  df$cd <- list(7, 8:9, 10:12)
+  df <- data.frame(a = 1:4, b = letters[5:8])
+  df$cd <- list(9, 10:11, 12:14, "text")
   df
 }
 
@@ -223,9 +223,29 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 
 ### $
 
-```{r dollar-assign}
+#### Scalars
+
+```{r dollar-assign-scalar, dftbl = TRUE}
 with_df(df$a <- 1)
 with_df(df$b <- 1)
+with_df(df$c <- 1)
+with_df(df$cd <- 1)
+```
+
+#### Full length
+
+```{r dollar-assign-full, dftbl = TRUE}
+with_df(df$a <- 4:1)
+with_df(df$b <- 4:1)
+with_df(df$c <- 4:1)
+with_df(df$cd <- 4:1)
+```
+
+#### Recycling
+
+```{r dollar-assign-recycle, dftbl = TRUE}
+with_df(df$a <- 1:2)
+with_df(df$c <- 1:2)
 ```
 
 
