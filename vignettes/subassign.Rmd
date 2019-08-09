@@ -76,8 +76,11 @@ dftbl_chunk_hook <- function(x, options) {
 
 knitr::knit_hooks$set(chunk = dftbl_chunk_hook)
 
-# FIXME: side-by-side display using source and output hooks, and perhaps
-# reshuffling the code
+options(
+  lifecycle_disable_warnings = FALSE,
+  lifecycle_verbose_soft_deprecation = TRUE,
+  lifecycle_repeat_warnings = TRUE
+)
 ```
 
 ```{r setup}
