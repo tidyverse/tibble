@@ -91,8 +91,10 @@ This vignette is an attempt to provide a comprehensive overview over all subsett
 
 ```{r def}
 new_df <- function() {
-  df <- data.frame(a = 1:4, b = letters[5:8])
+  df <- data.frame(a = 1:4)
+  df$b = letters[5:8]
   df$cd <- list(9, 10:11, 12:14, "text")
+  df$v <- vctrs::new_vctr(15:18)
   df
 }
 
@@ -246,6 +248,19 @@ with_df(df$cd <- 4:1)
 ```{r dollar-assign-recycle, dftbl = TRUE}
 with_df(df$a <- 1:2)
 with_df(df$c <- 1:2)
+```
+
+
+
+#### Subset assignment
+
+```{r dollar-assign-subset, dftbl = TRUE}
+with_df(df$a[1:2] <- 4:3)
+with_df(df$b[1:2] <- 4:3)
+with_df(df$c[1:2] <- 4:3)
+with_df(df$cd[1:2] <- 4:3)
+with_df(df$v[1:2] <- vctrs::new_vctr(4:3))
+with_df(df$v[1:2] <- vctrs::new_vctr(letters[4:3]))
 ```
 
 
