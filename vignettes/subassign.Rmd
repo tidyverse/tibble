@@ -225,7 +225,9 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 
 ### $
 
-#### Scalars
+#### Scalars and full length
+
+Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn't happen:
 
 ```{r dollar-assign-scalar, dftbl = TRUE}
 with_df(df$a <- 1)
@@ -233,8 +235,6 @@ with_df(df$b <- 1)
 with_df(df$c <- 1)
 with_df(df$cd <- 1)
 ```
-
-#### Full length
 
 ```{r dollar-assign-full, dftbl = TRUE}
 with_df(df$a <- 4:1)
@@ -245,6 +245,8 @@ with_df(df$cd <- 4:1)
 
 #### Recycling
 
+Tibbles allow recycling only for vectors of length 1 or of the same length as the data.
+
 ```{r dollar-assign-recycle, dftbl = TRUE}
 with_df(df$a <- 1:2)
 with_df(df$c <- 1:2)
@@ -254,11 +256,15 @@ with_df(df$c <- 1:2)
 
 #### Subset assignment
 
+Updating parts of a column extracted by `$` is responsibility of the column vector. Tibbles can't control what happens after `$` has returned.
+For columns of the stricter `"vctrs_vctr"` class, this class implements the check.
+
 ```{r dollar-assign-subset, dftbl = TRUE}
 with_df(df$a[1:2] <- 4:3)
 with_df(df$b[1:2] <- 4:3)
 with_df(df$c[1:2] <- 4:3)
 with_df(df$cd[1:2] <- 4:3)
+with_df(df$a[1:2] <- 4:3)
 with_df(df$v[1:2] <- vctrs::new_vctr(4:3))
 with_df(df$v[1:2] <- vctrs::new_vctr(letters[4:3]))
 ```
