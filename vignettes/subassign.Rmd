@@ -144,13 +144,36 @@ df[1:2, ]
 
 df[1, "a"]
 df[1, "a", drop = FALSE]
+df[1, "a", drop = TRUE]
 df[1:2, "a"]
 df[1:2, "a", drop = FALSE]
+df[1:2, "a", drop = TRUE]
 df[1, c("a", "b")]
 df[1:2, c("a", "b")]
 ```
 
 ### [[
+
+The `exact` argument is not supported by tibbles.
+With two indexes, a single element is returned.
+Exotic variants like recursive indexing are deprecated for tibbles.
+
+```{r double-bracket, dftbl = TRUE}
+df <- new_df()
+df[["a"]]
+df[["cd", exact = TRUE]]
+df[["cd", exact = FALSE]]
+df[["c", exact = TRUE]]
+df[["c", exact = FALSE]]
+
+df[[2, "a"]]
+df[[2, "cd"]]
+df[[1:2, "cd"]]
+df[[2, "c"]]
+df[[1:2, "c"]]
+
+df[[c(1, 2)]]
+```
 
 ## Subassignment
 
