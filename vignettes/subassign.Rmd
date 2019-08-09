@@ -125,7 +125,8 @@ df$d
 
 ### [
 
-With `[` subsetting, tibbles always return a tibble. The `drop` argument is supported but has different defaults:
+With `[` subsetting, tibbles always return a tibble.
+The `drop` argument is supported but has different defaults:
 
 ```{r bracket, dftbl = TRUE}
 df <- new_df()
