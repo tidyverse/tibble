@@ -272,14 +272,32 @@ with_df(df$a[1:3] <- 4:3)
 with_df(df$a[1:4] <- 4:3)
 ```
 
-For columns of the stricter `"vctrs_vctr"` class, this class implements the check.
+For columns of the stricter `"vctrs_vctr"` class, this class implements the check, which then works identically for data frames and tibbles:
 
-```
+```{r vctrs}
 with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
 with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])})
 ```
 
 ### [[<-
+
+```{r double-bracket-assign, dftbl = TRUE}
+with_df(df[["a"]] <- 1)
+with_df(df[["a"]] <- "x")
+with_df(df[["b"]] <- "x")
+
+with_df(df[[2, "a"]] <- 1)
+with_df(df[[2, "a"]] <- "x")
+with_df(df[[2, "b"]] <- "x")
+with_df(df[[2, "cd"]] <- "x")
+with_df(df[[1:2, "cd"]] <- "x")
+with_df(df[[2, "c"]] <- "x")
+with_df(df[[1:2, "c"]] <- "x")
+
+with_df(df[[c(2, 1)]] <- 1)
+with_df(df[[c(2, 1)]] <- "x")
+with_df(df[[c(1, 2)]] <- "x")
+```
 
 ### [<-
 
