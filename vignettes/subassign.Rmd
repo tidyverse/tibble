@@ -108,13 +108,18 @@ new_df()
 
 ## Subsetting
 
+Subsetting operations are read-only.
+
+```{r ro, dftbl = TRUE}
+df <- new_df()
+```
+
 ### $
 
 With `$` subsetting, accessing a missing column gives a warning.
 Inexact matching is not supported:
 
 ```{r dollar, dftbl = TRUE}
-df <- new_df()
 df$a
 df$"a"
 df$a[2:3]
@@ -129,7 +134,6 @@ With `[` subsetting, tibbles always return a tibble.
 The `drop` argument is supported but has different defaults:
 
 ```{r bracket, dftbl = TRUE}
-df <- new_df()
 df["a"]
 df["a", drop = FALSE]
 df["a", drop = TRUE]
@@ -159,7 +163,6 @@ With two indexes, a single element is returned.
 Exotic variants like recursive indexing are deprecated for tibbles.
 
 ```{r double-bracket, dftbl = TRUE}
-df <- new_df()
 df[["a"]]
 df[["cd", exact = TRUE]]
 df[["cd", exact = FALSE]]
