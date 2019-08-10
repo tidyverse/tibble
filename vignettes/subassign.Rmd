@@ -23,11 +23,45 @@ knitr::opts_chunk$set(
 
 dftbl_opts_hook <- function(options) {
   df_code <- options$code
-  tibble_code <- gsub("df", "tbl", df_code)
-  new_code <- as.vector(t(matrix(c(df_code, tibble_code), ncol = 2)))
+  tbl_code <- gsub("df", "tbl", df_code)
+
+  if (!isTRUE(options$dftbl_always)) {
+    same <- purrr::map2_lgl(df_code, tbl_code, same_as_tbl_code)
+    df_code[same] <- ""
+  }
+
+  new_code <- as.vector(t(matrix(c(df_code, tbl_code), ncol = 2)))
   options$code <- new_code
   options$width <- 36
   options
+}
+
+same_as_tbl_code <- function(df_code, tbl_code) {
+  df <- new_df()
+  tbl <- new_tbl()
+  same_as_tbl(
+    rlang::eval_bare(rlang::parse_expr(df_code)),
+    rlang::eval_bare(rlang::parse_expr(tbl_code))
+  )
+}
+
+same_as_tbl <- function(df, tbl) {
+  df <- try(df, silent = TRUE)
+  tbl <- try(tbl, silent = TRUE)
+  
+  if (is.data.frame(df)) {
+    if (is.data.frame(tbl)) {
+      identical(df, as.data.frame(tbl))
+    } else {
+      FALSE
+    }
+  } else {
+    if (is.data.frame(tbl)) {
+      FALSE
+    } else {
+      identical(df, tbl)
+    }
+  }
 }
 
 knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
@@ -109,7 +143,16 @@ new_tbl <- function() {
 }
 ```
 
-```{r show, dftbl = TRUE}
+Results of the same code for data frames and tibbles are presented side by side:
+
+```{r show, dftbl = TRUE, dftbl_always = TRUE}
+new_df()
+```
+
+In the following, if the results are identical, only the tibble result is shown, as in the example below.
+This allows to spot differences easier.
+
+```{r show-compare, dftbl = TRUE}
 new_df()
 ```
 
@@ -117,9 +160,11 @@ new_df()
 ## Subsetting
 
 Subsetting operations are read-only.
+The same objects are reused in all examples:
 
-```{r ro, dftbl = TRUE}
+```{r ro}
 df <- new_df()
+tbl <- new_tbl()
 ```
 
 ### $
