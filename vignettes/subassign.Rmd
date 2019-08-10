@@ -193,19 +193,25 @@ The `exact` argument is not supported by tibbles.
 With two indexes, a single element is returned.
 Exotic variants like recursive indexing are deprecated for tibbles.
 
-```{r double-bracket, dftbl = TRUE}
+```{r double-bracket-col, dftbl = TRUE}
 df[["a"]]
 df[["cd", exact = TRUE]]
 df[["cd", exact = FALSE]]
 df[["c", exact = TRUE]]
 df[["c", exact = FALSE]]
+```
 
+
+```{r double-bracket-both, dftbl = TRUE}
 df[[2, "a"]]
 df[[2, "cd"]]
 df[[1:2, "cd"]]
 df[[2, "c"]]
 df[[1:2, "c"]]
+```
 
+
+```{r double-bracket-exotic, dftbl = TRUE}
 df[[c(1, 2)]]
 ```
 
@@ -214,7 +220,7 @@ df[[c(1, 2)]]
 With `[` subsetting, tibbles always return a tibble.
 The `drop` argument is supported but has different defaults:
 
-```{r bracket, dftbl = TRUE}
+```{r bracket-col, dftbl = TRUE}
 df["a"]
 df["a", drop = FALSE]
 df["a", drop = TRUE]
@@ -223,10 +229,16 @@ df[, "a", drop = FALSE]
 df[, "a", drop = TRUE]
 df[c("a", "b")]
 df[, c("a", "b")]
+```
 
+
+```{r bracket-row, dftbl = TRUE}
 df[1, ]
 df[1:2, ]
+```
 
+
+```{r bracket-both, dftbl = TRUE}
 df[1, "a"]
 df[1, "a", drop = FALSE]
 df[1, "a", drop = TRUE]
@@ -235,7 +247,10 @@ df[1:2, "a", drop = FALSE]
 df[1:2, "a", drop = TRUE]
 df[1, c("a", "b")]
 df[1:2, c("a", "b")]
+```
 
+
+```{r bracket-empty, dftbl = TRUE}
 df[]
 df[,]
 ```
