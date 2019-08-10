@@ -23,11 +23,52 @@ knitr::opts_chunk$set(
 
 dftbl_opts_hook <- function(options) {
   df_code <- options$code
-  tibble_code <- gsub("df", "tbl", df_code)
-  new_code <- as.vector(t(matrix(c(df_code, tibble_code), ncol = 2)))
+  tbl_code <- gsub("df", "tbl", df_code)
+
+  # FIXME: Evaluate, but surround in <details> element
+  if (!isTRUE(options$dftbl_always)) {
+    same <- purrr::map2_lgl(df_code, tbl_code, same_as_tbl_code)
+    df_code[same] <- ""
+  }
+
+  new_code <- as.vector(t(matrix(c(df_code, tbl_code), ncol = 2)))
   options$code <- new_code
   options$width <- 36
   options
+}
+
+same_as_tbl_code <- function(df_code, tbl_code) {
+  df <- new_df()
+  tbl <- new_tbl()
+  
+  handler <- evaluate::new_output_handler(
+    value = function(x, visible) {
+      if (visible) x else NULL
+    }
+  )
+  
+  same_as_tbl(
+    evaluate::evaluate(df_code, output_handler = handler),
+    evaluate::evaluate(tbl_code, output_handler = handler)
+  )
+}
+
+same_as_tbl <- function(df, tbl) {
+  if (length(df) != length(tbl)) return(FALSE)
+  if (length(df) < 2) return(FALSE)
+  df <- df[-1]
+  tbl <- tbl[-1]
+
+  df_obj <- df[[length(df)]]
+  tbl_obj <- tbl[[length(tbl)]]
+
+  if (is.data.frame(df_obj) != is.data.frame(tbl_obj)) return(FALSE)
+
+  if (is.data.frame(tbl_obj)) {
+    tbl[[length(tbl)]] <- as.data.frame(tbl_obj)
+  }
+
+  identical(df, tbl)
 }
 
 knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
@@ -61,7 +102,8 @@ dftbl_source_hook_one <- function(x) {
 }
 
 dftbl_source_hook <- function(x, options) {
-  x <- vapply(x, old_source_hook, options, FUN.VALUE = character(1))
+  nonempty <- which(x != "")
+  x[nonempty] <- vapply(x[nonempty], old_source_hook, options, FUN.VALUE = character(1))
   if (isTRUE(options$dftbl)) {
     x <- vapply(x, dftbl_source_hook_one, FUN.VALUE = character(1))
   }
@@ -109,7 +151,16 @@ new_tbl <- function() {
 }
 ```
 
-```{r show, dftbl = TRUE}
+Results of the same code for data frames and tibbles are presented side by side:
+
+```{r show, dftbl = TRUE, dftbl_always = TRUE}
+new_df()
+```
+
+In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below.
+This allows to spot differences easier.
+
+```{r show-compare, dftbl = TRUE}
 new_df()
 ```
 
@@ -117,9 +168,11 @@ new_df()
 ## Subsetting
 
 Subsetting operations are read-only.
+The same objects are reused in all examples:
 
-```{r ro, dftbl = TRUE}
+```{r ro}
 df <- new_df()
+tbl <- new_tbl()
 ```
 
 ### $
@@ -139,22 +192,28 @@ df$d
 ### [[
 
 The `exact` argument is not supported by tibbles.
-With two indexes, a single element is returned.
-Exotic variants like recursive indexing are deprecated for tibbles.
 
-```{r double-bracket, dftbl = TRUE}
+```{r double-bracket-col, dftbl = TRUE}
 df[["a"]]
 df[["cd", exact = TRUE]]
 df[["cd", exact = FALSE]]
 df[["c", exact = TRUE]]
 df[["c", exact = FALSE]]
+```
 
+With two indexes, a single element is returned.
+
+```{r double-bracket-both, dftbl = TRUE}
 df[[2, "a"]]
 df[[2, "cd"]]
 df[[1:2, "cd"]]
 df[[2, "c"]]
 df[[1:2, "c"]]
+```
 
+Exotic variants like recursive indexing are deprecated for tibbles.
+
+```{r double-bracket-exotic, dftbl = TRUE}
 df[[c(1, 2)]]
 ```
 
@@ -163,19 +222,86 @@ df[[c(1, 2)]]
 With `[` subsetting, tibbles always return a tibble.
 The `drop` argument is supported but has different defaults:
 
-```{r bracket, dftbl = TRUE}
+```{r bracket-col-one, dftbl = TRUE}
 df["a"]
 df["a", drop = FALSE]
 df["a", drop = TRUE]
+df[1]
+df[0]
+df[4]
+df[NA]
+df[NA_character_]
+df[NA_integer_]
+```
+
+The same examples are repeated for two-dimensional indexing when omitting the row index:
+
+
+```{r bracket-col-two, dftbl = TRUE}
 df[, "a"]
 df[, "a", drop = FALSE]
 df[, "a", drop = TRUE]
-df[c("a", "b")]
-df[, c("a", "b")]
+df[, 1]
+df[, 0]
+df[, 4]
+df[, NA]
+df[, NA_character_]
+df[, NA_integer_]
+```
 
+Multiple columns can be queried by passing a vector of column indexes (names, positions, or even a logical vector).
+With the latter option, tibbles are a tad stricter:
+
+```{r bracket-col-multi-one, dftbl = TRUE}
+df[c("a", "b")]
+df[1:2]
+df[1:3]
+df[1:4]
+df[0:2]
+df[-1:2]
+df[-1]
+df[-(1:2)]
+df[c(TRUE, TRUE, FALSE)]
+df[c(FALSE, TRUE, FALSE)]
+df[c(FALSE, TRUE)]
+df[c(FALSE, TRUE, FALSE, TRUE)]
+```
+
+The same examples are repeated for two-dimensional indexing when omitting the row index:
+
+```{r bracket-col-multi-two, dftbl = TRUE}
+df[, c("a", "b")]
+df[, 1:2]
+df[, 1:3]
+df[, 1:4]
+df[, 0:2]
+df[, -1:2]
+df[, -1]
+df[, -(1:2)]
+df[, c(TRUE, TRUE, FALSE)]
+df[, c(FALSE, TRUE, FALSE)]
+df[, c(FALSE, TRUE)]
+df[, c(FALSE, TRUE, FALSE, TRUE)]
+```
+
+Row subsetting works almost identical, but out-of-bounds subsetting is not recommended and may lead to an error in future versions.
+
+```{r bracket-row, dftbl = TRUE}
 df[1, ]
 df[1:2, ]
+df[0, ]
+df[5, ]
+df[4:5, ]
+df[-1, ]
+df[-1:2, ]
+df[NA, ]
+df[NA_integer_, ]
+df[c(NA, 1), ]
+```
 
+Indexing both row and column works more or less the same, except for `drop`:
+
+```{r bracket-both, dftbl = TRUE}
 df[1, "a"]
 df[1, "a", drop = FALSE]
 df[1, "a", drop = TRUE]
@@ -184,7 +310,11 @@ df[1:2, "a", drop = FALSE]
 df[1:2, "a", drop = TRUE]
 df[1, c("a", "b")]
 df[1:2, c("a", "b")]
+```
 
+Indexes can be omitted altogether, no differences here:
+
+```{r bracket-empty, dftbl = TRUE}
 df[]
 df[,]
 ```
