@@ -66,6 +66,9 @@
 <li>
       <a href="../articles/extending.html">Extending tibble</a>
     </li>
+    <li>
+      <a href="../articles/subassign.html">Subsetting and subassignment</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -500,12 +503,12 @@
 ## * Results have changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
 ## x[1]: "28°20'N  81°33'W"
-## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
-## y[1]: 33[39mW"
+## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[9
+## y[1]: 0m'\033[39mW"
 ## 
 ## x[2]: "32°43'N 117°10'W"
-## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
-## y[2]: 33[39mW"
+## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[9
+## y[2]: 0m'\033[39mW"
 ## 
 ## x[3]: "     NA         "
 ## y[3]: "     \033[31mNA\033[39m         "</code></pre>
@@ -544,12 +547,12 @@
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * Results have changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
-## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
-## x[1]: 33[39mW"
+## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[9
+## x[1]: 0m'\033[39mW"
 ## y[1]: "28°20'N  81°33'W"
 ## 
-## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
-## x[2]: 33[39mW"
+## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[9
+## x[2]: 0m'\033[39mW"
 ## y[2]: "32°43'N 117°10'W"
 ## 
 ## x[3]: "     \033[31mNA\033[39m         "
