@@ -99,7 +99,7 @@ This vignette is an attempt to provide a comprehensive overview over all subsett
 ```{r def}
 new_df <- function() {
   df <- data.frame(a = 1:4)
-  df$b = letters[5:8]
+  df$b <- letters[5:8]
   df$cd <- list(9, 10:11, 12:14, "text")
   df
 }
