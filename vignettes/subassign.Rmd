@@ -39,29 +39,35 @@ dftbl_opts_hook <- function(options) {
 same_as_tbl_code <- function(df_code, tbl_code) {
   df <- new_df()
   tbl <- new_tbl()
+  
+  handler <- evaluate::new_output_handler(
+    value = function(x, visible) {
+      if (visible) x else NULL
+    }
+  )
+  
   same_as_tbl(
-    rlang::eval_bare(rlang::parse_expr(df_code)),
-    rlang::eval_bare(rlang::parse_expr(tbl_code))
+    evaluate::evaluate(df_code, output_handler = handler),
+    evaluate::evaluate(tbl_code, output_handler = handler)
   )
 }
 
 same_as_tbl <- function(df, tbl) {
-  df <- try(df, silent = TRUE)
-  tbl <- try(tbl, silent = TRUE)
-  
-  if (is.data.frame(df)) {
-    if (is.data.frame(tbl)) {
-      identical(df, as.data.frame(tbl))
-    } else {
-      FALSE
-    }
-  } else {
-    if (is.data.frame(tbl)) {
-      FALSE
-    } else {
-      identical(df, tbl)
-    }
+  if (length(df) != length(tbl)) return(FALSE)
+  if (length(df) < 2) return(FALSE)
+  df <- df[-1]
+  tbl <- tbl[-1]
+
+  df_obj <- df[[length(df)]]
+  tbl_obj <- tbl[[length(tbl)]]
+
+  if (is.data.frame(df_obj) != is.data.frame(tbl_obj)) return(FALSE)
+
+  if (is.data.frame(tbl_obj)) {
+    tbl[[length(tbl)]] <- as.data.frame(tbl_obj)
   }
+
+  identical(df, tbl)
 }
 
 knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
@@ -149,7 +155,7 @@ Results of the same code for data frames and tibbles are presented side by side:
 new_df()
 ```
 
-In the following, if the results are identical, only the tibble result is shown, as in the example below.
+In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below.
 This allows to spot differences easier.
 
 ```{r show-compare, dftbl = TRUE}
