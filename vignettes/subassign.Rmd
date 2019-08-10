@@ -192,8 +192,6 @@ df$d
 ### [[
 
 The `exact` argument is not supported by tibbles.
-With two indexes, a single element is returned.
-Exotic variants like recursive indexing are deprecated for tibbles.
 
 ```{r double-bracket-col, dftbl = TRUE}
 df[["a"]]
@@ -203,6 +201,7 @@ df[["c", exact = TRUE]]
 df[["c", exact = FALSE]]
 ```
 
+With two indexes, a single element is returned.
 
 ```{r double-bracket-both, dftbl = TRUE}
 df[[2, "a"]]
@@ -212,6 +211,7 @@ df[[2, "c"]]
 df[[1:2, "c"]]
 ```
 
+Exotic variants like recursive indexing are deprecated for tibbles.
 
 ```{r double-bracket-exotic, dftbl = TRUE}
 df[[c(1, 2)]]
@@ -222,23 +222,84 @@ df[[c(1, 2)]]
 With `[` subsetting, tibbles always return a tibble.
 The `drop` argument is supported but has different defaults:
 
-```{r bracket-col, dftbl = TRUE}
+```{r bracket-col-one, dftbl = TRUE}
 df["a"]
 df["a", drop = FALSE]
 df["a", drop = TRUE]
+df[1]
+df[0]
+df[4]
+df[NA]
+df[NA_character_]
+df[NA_integer_]
+```
+
+The same examples are repeated for two-dimensional indexing when omitting the row index:
+
+
+```{r bracket-col-two, dftbl = TRUE}
 df[, "a"]
 df[, "a", drop = FALSE]
 df[, "a", drop = TRUE]
-df[c("a", "b")]
-df[, c("a", "b")]
+df[, 1]
+df[, 0]
+df[, 4]
+df[, NA]
+df[, NA_character_]
+df[, NA_integer_]
 ```
 
+Multiple columns can be queried by passing a vector of column indexes (names, positions, or even a logical vector).
+With the latter option, tibbles are a tad stricter:
+
+```{r bracket-col-multi-one, dftbl = TRUE}
+df[c("a", "b")]
+df[1:2]
+df[1:3]
+df[1:4]
+df[0:2]
+df[-1:2]
+df[-1]
+df[-(1:2)]
+df[c(TRUE, TRUE, FALSE)]
+df[c(FALSE, TRUE, FALSE)]
+df[c(FALSE, TRUE)]
+df[c(FALSE, TRUE, FALSE, TRUE)]
+```
+
+The same examples are repeated for two-dimensional indexing when omitting the row index:
+
+```{r bracket-col-multi-two, dftbl = TRUE}
+df[, c("a", "b")]
+df[, 1:2]
+df[, 1:3]
+df[, 1:4]
+df[, 0:2]
+df[, -1:2]
+df[, -1]
+df[, -(1:2)]
+df[, c(TRUE, TRUE, FALSE)]
+df[, c(FALSE, TRUE, FALSE)]
+df[, c(FALSE, TRUE)]
+df[, c(FALSE, TRUE, FALSE, TRUE)]
+```
+
+Row subsetting works almost identical, but out-of-bounds subsetting is not recommended and may lead to an error in future versions.
 
 ```{r bracket-row, dftbl = TRUE}
 df[1, ]
 df[1:2, ]
+df[0, ]
+df[5, ]
+df[4:5, ]
+df[-1, ]
+df[-1:2, ]
+df[NA, ]
+df[NA_integer_, ]
+df[c(NA, 1), ]
 ```
 
+Indexing both row and column works more or less the same, except for `drop`:
 
 ```{r bracket-both, dftbl = TRUE}
 df[1, "a"]
@@ -251,6 +312,7 @@ df[1, c("a", "b")]
 df[1:2, c("a", "b")]
 ```
 
+Indexes can be omitted altogether, no differences here:
 
 ```{r bracket-empty, dftbl = TRUE}
 df[]
