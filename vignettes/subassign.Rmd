@@ -25,6 +25,7 @@ dftbl_opts_hook <- function(options) {
   df_code <- options$code
   tbl_code <- gsub("df", "tbl", df_code)
 
+  # FIXME: Evaluate, but surround in <details> element
   if (!isTRUE(options$dftbl_always)) {
     same <- purrr::map2_lgl(df_code, tbl_code, same_as_tbl_code)
     df_code[same] <- ""
@@ -101,7 +102,8 @@ dftbl_source_hook_one <- function(x) {
 }
 
 dftbl_source_hook <- function(x, options) {
-  x <- vapply(x, old_source_hook, options, FUN.VALUE = character(1))
+  nonempty <- which(x != "")
+  x[nonempty] <- vapply(x[nonempty], old_source_hook, options, FUN.VALUE = character(1))
   if (isTRUE(options$dftbl)) {
     x <- vapply(x, dftbl_source_hook_one, FUN.VALUE = character(1))
   }
