@@ -143,7 +143,7 @@
 <p>This vignette is an attempt to provide a comprehensive overview over all subsetting and subassignment operations, highlighting where the tibble implementation differs from the data frame implementation.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">new_df &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  df<span class="op">$</span>b =<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  df<span class="op">$</span>b &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  df<span class="op">$</span>cd &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">9</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">14</span>, <span class="st">"text"</span>)</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">  df</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">}</a>
