@@ -30,13 +30,11 @@ options(
 )
 ```
 
-```{r setup}
-library(tibble)
-```
-
 This vignette is an attempt to provide a comprehensive overview over all subassignment operations, highlighting where the tibble implementation differs from the data frame implementation.
 
-```{r def}
+```{r setup}
+library(tibble)
+
 new_df <- function() {
   df <- data.frame(a = 1:4)
   df$b <- letters[5:8]
