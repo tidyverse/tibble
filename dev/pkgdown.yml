@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   extending: extending.html
   subassign: subassign.html
+  subset: subset.html
   tibble: tibble.html
 urls:
   reference: https://tibble.tidyverse.org/reference
