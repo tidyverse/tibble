@@ -112,6 +112,18 @@ dftbl_source_hook <- function(x, options) {
 
 knitr::knit_hooks$set(source = dftbl_source_hook)
 
+old_error_hook <- knitr::knit_hooks$get("error")
+
+dftbl_error_hook <- function(x, options) {
+  if (isTRUE(options$dftbl)) {
+    x <- paste0(strwrap(x, getOption("width"), prefix = "#> ", initial = ""), "\n")
+  }
+  ret <- purrr::map_chr(x, old_error_hook, options)
+  paste(ret, collapse = "\n")
+}
+
+knitr::knit_hooks$set(error = dftbl_error_hook)
+
 old_chunk_hook <- knitr::knit_hooks$get("chunk")
 
 dftbl_chunk_hook <- function(x, options) {
