@@ -2,7 +2,7 @@
 title: "Subsetting"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{subassign}
+  %\VignetteIndexEntry{subset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

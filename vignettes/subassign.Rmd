@@ -1,5 +1,5 @@
 ---
-title: "Subsetting and subassignment"
+title: "Subassignment"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{subassign}
