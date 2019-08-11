@@ -32,6 +32,8 @@ dftbl_opts_hook <- function(options) {
   options
 }
 
+utils::globalVariables(c("new_df", "new_tbl"))
+
 same_as_tbl_code <- function(df_code, tbl_code) {
   df <- new_df()
   tbl <- new_tbl()
