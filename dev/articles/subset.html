@@ -142,26 +142,43 @@
     table-layout: fixed;
 }
 </style>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a></code></pre></div>
-<p>This vignette is an attempt to provide a comprehensive overview over all subsetting operations, highlighting where the tibble implementation differs from the data frame implementation.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">new_df &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  df<span class="op">$</span>b &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  df<span class="op">$</span>cd &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">9</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">14</span>, <span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  df</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">new_tbl &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(<span class="kw">new_df</span>())</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">}</a></code></pre></div>
+<p>There are many, many ways to subset data frames and tibbles.</p>
+<p><a href="https://twitter.com/skyetetra/status/1160012260456062977"><img src="alignment.png" title="Drawing by Jacqueline Nolis" alt="Alignment" style="width:100.0%"></a></p>
+<p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code>$</code>, <code>[[</code> and <code>[</code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">new_df &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  df<span class="op">$</span>b &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  df<span class="op">$</span>cd &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">9</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">14</span>, <span class="st">"text"</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  df</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">new_tbl &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(<span class="kw">new_df</span>())</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">}</a></code></pre></div>
 <p>Results of the same code for data frames and tibbles are presented side by side:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">new_df</span>()</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">new_df</span>()</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">new_tbl</span>()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr></tbody></table>
+<p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
+<table class="table dftbl"><tbody><tr style="vertical-align:top">
+<td>
 </td>
 <td>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">new_tbl</span>()</a>
@@ -174,24 +191,9 @@
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
-<p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
-<table class="table dftbl"><tbody><tr style="vertical-align:top">
-<td>
-</td>
-<td>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">new_tbl</span>()</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
-</td>
-</tr></tbody></table>
 <p>Subsetting operations are read-only. The same objects are reused in all examples:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">new_df</span>()</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">tbl &lt;-<span class="st"> </span><span class="kw">new_tbl</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">new_df</span>()</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">tbl &lt;-<span class="st"> </span><span class="kw">new_tbl</span>()</a></code></pre></div>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
 <a href="#section" class="anchor"></a>$</h2>
@@ -201,7 +203,15 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tbl<span class="op">$</span>a</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">tbl<span class="op">$</span>a</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tbl<span class="op">$</span><span class="st">"a"</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
 </td>
 </tr>
@@ -209,23 +219,31 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">tbl<span class="op">$</span><span class="st">"a"</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">tbl<span class="op">$</span>a[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1] 2 3</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">tbl<span class="op">$</span>a[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 2 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">tbl<span class="op">$</span>cd</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">tbl<span class="op">$</span>cd</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">df<span class="op">$</span>c</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -238,39 +256,23 @@
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">df<span class="op">$</span>c</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">tbl<span class="op">$</span>c</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Warning: Unknown or uninitialised</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; column: 'c'.</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">tbl<span class="op">$</span>c</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Warning: Unknown or uninitialised</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; column: 'c'.</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">df<span class="op">$</span>d</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">df<span class="op">$</span>d</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">tbl<span class="op">$</span>d</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; Warning: Unknown or uninitialised</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; column: 'd'.</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">tbl<span class="op">$</span>d</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Warning: Unknown or uninitialised</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; column: 'd'.</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -284,15 +286,31 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">tbl[[<span class="st">"a"</span>]]</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">tbl[[<span class="st">"a"</span>]]</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">tbl[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">tbl[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">df[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -305,73 +323,57 @@
 <a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
 <a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">df[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">tbl[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; Warning: exact ignored</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; [1] 9</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; [1] 10 11</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt; [1] 12 13 14</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">tbl[[<span class="st">"cd"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; Warning: exact ignored</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; [1] 10 11</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; [1] 12 13 14</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; [[4]]</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">df[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">df[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">tbl[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">tbl[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">TRUE</span>]]</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">df[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">df[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">tbl[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; Warning: exact ignored</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt; column name is deprecated and will</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">#&gt; eventually be converted to an error.</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">tbl[[<span class="st">"c"</span>, exact =<span class="st"> </span><span class="ot">FALSE</span>]]</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; Warning: exact ignored</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; column name is deprecated and will</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; eventually be converted to an error.</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -381,72 +383,72 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"a"</span>]]</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"a"</span>]]</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">df[[<span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">#&gt; [1] 10 11</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">df[[<span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">#&gt; [1] 10 11</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; [1] 10 11</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">df[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="co">#&gt; Error in col[[i, exact = exact]]:</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="co">#&gt; subscript out of bounds</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co">#&gt; `i` must have size 1, not size 2.</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">#&gt; [1] 10 11</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">df[[<span class="dv">2</span>, <span class="st">"c"</span>]]</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">df[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt; Error in col[[i, exact = exact]]:</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; subscript out of bounds</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"c"</span>]]</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
-<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
-<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="co">#&gt; `i` must have size 1, not size 2.</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">df[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">df[[<span class="dv">2</span>, <span class="st">"c"</span>]]</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">tbl[[<span class="dv">2</span>, <span class="st">"c"</span>]]</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">df[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with an unknown</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="co">#&gt; column name is deprecated and will</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="co">#&gt; eventually be converted to an error.</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 <p>Exotic variants like recursive indexing are deprecated for tibbles.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">df[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">df[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">tbl[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with a vector</span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="co">#&gt; of length 2 (recursive subsetting)</span></a>
-<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="co">#&gt; is deprecated and will eventually be</span></a>
-<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="co">#&gt; converted to an error.</span></a>
-<a class="sourceLine" id="cb33-6" data-line-number="6"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">tbl[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `[[` with a vector</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="co">#&gt; of length 2 (recursive subsetting)</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co">#&gt; is deprecated and will eventually be</span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="co">#&gt; converted to an error.</span></a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -459,134 +461,134 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">tbl[<span class="st">"a"</span>]</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb34-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">tbl[<span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb33-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb33-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb33-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">df[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co">#&gt; drop = FALSE): 'drop' argument will be</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co">#&gt; ignored</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="co">#&gt;   a</span></a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="co">#&gt; 1 1</span></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="co">#&gt; 2 2</span></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co">#&gt; 3 3</span></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co">#&gt; 4 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">df[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">#&gt; drop = FALSE): 'drop' argument will be</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co">#&gt; ignored</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="co">#&gt;   a</span></a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="co">#&gt; 1 1</span></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="co">#&gt; 2 2</span></a>
+<a class="sourceLine" id="cb34-8" data-line-number="8"><span class="co">#&gt; 3 3</span></a>
+<a class="sourceLine" id="cb34-9" data-line-number="9"><span class="co">#&gt; 4 4</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="co">#&gt; Warning: drop ignored</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb36-7" data-line-number="7"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb36-9" data-line-number="9"><span class="co">#&gt; 4     4</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">df[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co">#&gt;   a</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co">#&gt; 1 1</span></a>
-<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="co">#&gt; 2 2</span></a>
-<a class="sourceLine" id="cb37-7" data-line-number="7"><span class="co">#&gt; 3 3</span></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8"><span class="co">#&gt; 4 4</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co">#&gt; Warning: drop ignored</span></a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb38-9" data-line-number="9"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co">#&gt; Warning: drop ignored</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co">#&gt; 4     4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">df[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="co">#&gt;   a</span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="co">#&gt; 1 1</span></a>
+<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="co">#&gt; 2 2</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7"><span class="co">#&gt; 3 3</span></a>
+<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="co">#&gt; 4 4</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">tbl[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co">#&gt; Warning: drop ignored</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb37-7" data-line-number="7"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb37-8" data-line-number="8"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb37-9" data-line-number="9"><span class="co">#&gt; 4     4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">tbl[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">tbl[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">df[<span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, 4):</span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">tbl[<span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
-<a class="sourceLine" id="cb42-5" data-line-number="5"><span class="co">#&gt; 1 equals 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">tbl[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">df[<span class="ot">NA</span>]</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, NA):</span></a>
-<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">df[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, 4):</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">tbl[<span class="ot">NA</span>]</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="co">#&gt; Can't use logical NA when selecting</span></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="co">#&gt; #&gt; columns with `[`.</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">df[<span class="ot">NA_character_</span>]</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df,</span></a>
-<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="co">#&gt; NA_character_): undefined columns</span></a>
-<a class="sourceLine" id="cb45-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">tbl[<span class="ot">NA_character_</span>]</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="co">#&gt; Can't find column NA in `.data`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">tbl[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="co">#&gt; 1 equals 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">df[<span class="ot">NA_integer_</span>]</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df,</span></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="co">#&gt; NA_integer_): undefined columns</span></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">df[<span class="ot">NA</span>]</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, NA):</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">tbl[<span class="ot">NA_integer_</span>]</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="co">#&gt; Can't use numeric NA as column index</span></a>
-<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="co">#&gt; #&gt; with `[`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">tbl[<span class="ot">NA</span>]</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="co">#&gt; Can't use logical NA when selecting</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co">#&gt; #&gt; columns with `[`.</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">df[<span class="ot">NA_character_</span>]</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df,</span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="co">#&gt; NA_character_): undefined columns</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">tbl[<span class="ot">NA_character_</span>]</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co">#&gt; Can't find column NA in `.data`.</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">df[<span class="ot">NA_integer_</span>]</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df,</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="co">#&gt; NA_integer_): undefined columns</span></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tbl[<span class="ot">NA_integer_</span>]</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="co">#&gt; Can't use numeric NA as column index</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="co">#&gt; #&gt; with `[`.</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -594,11 +596,25 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">df[, <span class="st">"a"</span>]</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">df[, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">tbl[, <span class="st">"a"</span>]</a>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">tbl[, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb49-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb49-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb49-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb49-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb49-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">tbl[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
 <a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
@@ -612,97 +628,83 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">tbl[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb51-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb51-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb51-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb51-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">tbl[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">tbl[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">df[, <span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">df[, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">tbl[, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb54-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb54-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb54-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
-<a class="sourceLine" id="cb54-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
-<a class="sourceLine" id="cb54-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">tbl[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb53-8" data-line-number="8"><span class="co">#&gt; 4     4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">tbl[, <span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">tbl[, <span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">df[, <span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , 4):</span></a>
-<a class="sourceLine" id="cb56-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">df[, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , 4):</span></a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">tbl[, <span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
-<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
-<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
-<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="co">#&gt; 1 equals 4</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">df[, <span class="ot">NA</span>]</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , NA):</span></a>
-<a class="sourceLine" id="cb58-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">tbl[, <span class="ot">NA</span>]</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="co">#&gt; Can't use logical NA when selecting</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="co">#&gt; #&gt; columns with `[`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">tbl[, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
+<a class="sourceLine" id="cb56-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
+<a class="sourceLine" id="cb56-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
+<a class="sourceLine" id="cb56-5" data-line-number="5"><span class="co">#&gt; 1 equals 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">df[, <span class="ot">NA_character_</span>]</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
-<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="co">#&gt; NA_character_): undefined columns</span></a>
-<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">df[, <span class="ot">NA</span>]</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , NA):</span></a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tbl[, <span class="ot">NA_character_</span>]</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="co">#&gt; Can't find column NA in `.data`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">tbl[, <span class="ot">NA</span>]</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="co">#&gt; Can't use logical NA when selecting</span></a>
+<a class="sourceLine" id="cb58-3" data-line-number="3"><span class="co">#&gt; #&gt; columns with `[`.</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">df[, <span class="ot">NA_integer_</span>]</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"><span class="co">#&gt; NA_integer_): undefined columns</span></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">df[, <span class="ot">NA_character_</span>]</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="co">#&gt; NA_character_): undefined columns</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">tbl[, <span class="ot">NA_integer_</span>]</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="co">#&gt; Can't use numeric NA as column index</span></a>
-<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="co">#&gt; #&gt; with `[`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">tbl[, <span class="ot">NA_character_</span>]</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="co">#&gt; Can't find column NA in `.data`.</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">df[, <span class="ot">NA_integer_</span>]</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="co">#&gt; NA_integer_): undefined columns</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="co">#&gt; selected</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">tbl[, <span class="ot">NA_integer_</span>]</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="co">#&gt; Can't use numeric NA as column index</span></a>
+<a class="sourceLine" id="cb62-3" data-line-number="3"><span class="co">#&gt; #&gt; with `[`.</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -712,7 +714,21 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb63-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb64-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb64-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb64-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
@@ -726,157 +742,143 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb65-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb65-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb65-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb65-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb65-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb65-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">df[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, 1:4):</span></a>
+<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
+<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
+<a class="sourceLine" id="cb67-5" data-line-number="5"><span class="co">#&gt; 4 equals 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb66-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb66-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb66-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb66-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb66-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb68-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb68-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb68-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">df[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, 1:4):</span></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="co">#&gt; Error in `[.default`(df, -1:2): only</span></a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="co">#&gt; 0's may be mixed with negative</span></a>
+<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="co">#&gt; subscripts</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
-<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
-<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="co">#&gt; 4 equals 4</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb69-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb69-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb69-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="co">#&gt; Error in `[.default`(df, -1:2): only</span></a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="co">#&gt; 0's may be mixed with negative</span></a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="co">#&gt; subscripts</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="co">#&gt; Error in .subset(x, j): only 0's may</span></a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="co">#&gt; be mixed with negative subscripts</span></a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="co">#&gt; Error in .subset(x, j): only 0's may</span></a>
+<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="co">#&gt; be mixed with negative subscripts</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="co">#&gt;   b     cd       </span></a>
-<a class="sourceLine" id="cb72-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="co">#&gt; 2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="co">#&gt; 3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="co">#&gt;   b     cd       </span></a>
+<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="co">#&gt; 2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="co">#&gt; 3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">tbl[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3"><span class="co">#&gt;   cd       </span></a>
-<a class="sourceLine" id="cb73-4" data-line-number="4"><span class="co">#&gt; * &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="co">#&gt; 1 &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="co">#&gt; 2 &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="co">#&gt; 3 &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb73-8" data-line-number="8"><span class="co">#&gt; 4 &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">tbl[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="co">#&gt;   cd       </span></a>
+<a class="sourceLine" id="cb72-4" data-line-number="4"><span class="co">#&gt; * &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="co">#&gt; 1 &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="co">#&gt; 2 &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="co">#&gt; 3 &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="co">#&gt; 4 &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb74-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb73-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb73-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb73-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb75-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
-<a class="sourceLine" id="cb75-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb75-5" data-line-number="5"><span class="co">#&gt; 1 e    </span></a>
-<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="co">#&gt; 2 f    </span></a>
-<a class="sourceLine" id="cb75-7" data-line-number="7"><span class="co">#&gt; 3 g    </span></a>
-<a class="sourceLine" id="cb75-8" data-line-number="8"><span class="co">#&gt; 4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="co">#&gt; 1 e    </span></a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="co">#&gt; 2 f    </span></a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="co">#&gt; 3 g    </span></a>
+<a class="sourceLine" id="cb74-8" data-line-number="8"><span class="co">#&gt; 4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="co">#&gt;   b</span></a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="co">#&gt; 1 e</span></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="co">#&gt; 2 f</span></a>
-<a class="sourceLine" id="cb76-5" data-line-number="5"><span class="co">#&gt; 3 g</span></a>
-<a class="sourceLine" id="cb76-6" data-line-number="6"><span class="co">#&gt; 4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="co">#&gt;   b</span></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3"><span class="co">#&gt; 1 e</span></a>
+<a class="sourceLine" id="cb75-4" data-line-number="4"><span class="co">#&gt; 2 f</span></a>
+<a class="sourceLine" id="cb75-5" data-line-number="5"><span class="co">#&gt; 3 g</span></a>
+<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="co">#&gt; 4 h</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
-<a class="sourceLine" id="cb77-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
-<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
-<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="co">#&gt; Index vector has length 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
+<a class="sourceLine" id="cb76-5" data-line-number="5"><span class="co">#&gt; Index vector has length 2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE,</span></a>
-<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="co">#&gt; TRUE, FALSE, TRUE)): undefined</span></a>
-<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="co">#&gt; columns selected</span></a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE,</span></a>
+<a class="sourceLine" id="cb77-3" data-line-number="3"><span class="co">#&gt; TRUE, FALSE, TRUE)): undefined</span></a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="co">#&gt; columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
-<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
-<a class="sourceLine" id="cb79-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
-<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="co">#&gt; Index vector has length 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
+<a class="sourceLine" id="cb78-5" data-line-number="5"><span class="co">#&gt; Index vector has length 4</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -886,7 +888,21 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb79-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb79-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb79-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb80-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb80-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb80-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
@@ -900,163 +916,149 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb81-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb81-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb81-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">df[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4):</span></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"><span class="co">#&gt; 4 equals 4</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb82-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb82-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb82-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb82-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb82-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">df[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4):</span></a>
-<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="co">#&gt; Positive column indexes in `[` must</span></a>
-<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="co">#&gt; match number of columns: #&gt; *</span></a>
-<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="co">#&gt; `.data` has 3 columns #&gt; * Position</span></a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="co">#&gt; 4 equals 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">tbl[, <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb84-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb84-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">tbl[, <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb85-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb85-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb85-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb85-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">tbl[, <span class="dv">-1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="co">#&gt; Error in .subset(x, j): only 0's may</span></a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="co">#&gt; be mixed with negative subscripts</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">tbl[, <span class="dv">-1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="co">#&gt; Error in .subset(x, j): only 0's may</span></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="co">#&gt; be mixed with negative subscripts</span></a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">tbl[, <span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="co">#&gt;   b     cd       </span></a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"><span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb86-6" data-line-number="6"><span class="co">#&gt; 2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb86-7" data-line-number="7"><span class="co">#&gt; 3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb86-8" data-line-number="8"><span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">df[, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb87-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb87-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
+<a class="sourceLine" id="cb87-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb87-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb87-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
+<a class="sourceLine" id="cb87-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb87-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
+<a class="sourceLine" id="cb87-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">tbl[, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb88-3" data-line-number="3"><span class="co">#&gt;   cd       </span></a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="co">#&gt; * &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb88-5" data-line-number="5"><span class="co">#&gt; 1 &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb88-6" data-line-number="6"><span class="co">#&gt; 2 &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb88-7" data-line-number="7"><span class="co">#&gt; 3 &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb88-8" data-line-number="8"><span class="co">#&gt; 4 &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">tbl[, <span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="co">#&gt;   b     cd       </span></a>
-<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb87-5" data-line-number="5"><span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb87-6" data-line-number="6"><span class="co">#&gt; 2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb87-7" data-line-number="7"><span class="co">#&gt; 3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb87-8" data-line-number="8"><span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb89-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb89-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
+<a class="sourceLine" id="cb89-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
+<a class="sourceLine" id="cb89-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">df[, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb88-3" data-line-number="3"><span class="co">#&gt; [1] 9</span></a>
-<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb88-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb88-6" data-line-number="6"><span class="co">#&gt; [1] 10 11</span></a>
-<a class="sourceLine" id="cb88-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb88-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb88-9" data-line-number="9"><span class="co">#&gt; [1] 12 13 14</span></a>
-<a class="sourceLine" id="cb88-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb88-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb88-12" data-line-number="12"><span class="co">#&gt; [1] "text"</span></a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">tbl[, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="co">#&gt;   cd       </span></a>
-<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="co">#&gt; * &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb89-5" data-line-number="5"><span class="co">#&gt; 1 &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb89-6" data-line-number="6"><span class="co">#&gt; 2 &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb89-7" data-line-number="7"><span class="co">#&gt; 3 &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb89-8" data-line-number="8"><span class="co">#&gt; 4 &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb91-5" data-line-number="5"><span class="co">#&gt; 1 e    </span></a>
+<a class="sourceLine" id="cb91-6" data-line-number="6"><span class="co">#&gt; 2 f    </span></a>
+<a class="sourceLine" id="cb91-7" data-line-number="7"><span class="co">#&gt; 3 g    </span></a>
+<a class="sourceLine" id="cb91-8" data-line-number="8"><span class="co">#&gt; 4 h</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb90-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb90-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb90-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb90-6" data-line-number="6"><span class="co">#&gt; 2     2 f    </span></a>
-<a class="sourceLine" id="cb90-7" data-line-number="7"><span class="co">#&gt; 3     3 g    </span></a>
-<a class="sourceLine" id="cb90-8" data-line-number="8"><span class="co">#&gt; 4     4 h</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
-<a class="sourceLine" id="cb92-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb92-5" data-line-number="5"><span class="co">#&gt; 1 e    </span></a>
-<a class="sourceLine" id="cb92-6" data-line-number="6"><span class="co">#&gt; 2 f    </span></a>
-<a class="sourceLine" id="cb92-7" data-line-number="7"><span class="co">#&gt; 3 g    </span></a>
-<a class="sourceLine" id="cb92-8" data-line-number="8"><span class="co">#&gt; 4 h</span></a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"><span class="co">#&gt; Index vector has length 2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
+<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="co">#&gt; c(FALSE, TRUE, FALSE, TRUE)):</span></a>
+<a class="sourceLine" id="cb94-4" data-line-number="4"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
-<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
-<a class="sourceLine" id="cb94-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
-<a class="sourceLine" id="cb94-5" data-line-number="5"><span class="co">#&gt; Index vector has length 2</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></a>
-<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="co">#&gt; c(FALSE, TRUE, FALSE, TRUE)):</span></a>
-<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="co">#&gt; undefined columns selected</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
-<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
-<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
-<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
-<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="co">#&gt; Index vector has length 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="co">#&gt; Length of logical index vector for</span></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="co">#&gt; `[` must equal number of columns (or</span></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="co">#&gt; 1): #&gt; * `.data` has 3 columns #&gt; *</span></a>
+<a class="sourceLine" id="cb95-5" data-line-number="5"><span class="co">#&gt; Index vector has length 4</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1066,172 +1068,172 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">tbl[<span class="dv">1</span>, ]</a>
-<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb97-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb97-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb97-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">tbl[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">df[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
-<a class="sourceLine" id="cb98-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb98-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb98-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
-<a class="sourceLine" id="cb98-6" data-line-number="6"><span class="co">#&gt; [1] "e"</span></a>
-<a class="sourceLine" id="cb98-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb98-8" data-line-number="8"><span class="co">#&gt; $cd</span></a>
-<a class="sourceLine" id="cb98-9" data-line-number="9"><span class="co">#&gt; $cd[[1]]</span></a>
-<a class="sourceLine" id="cb98-10" data-line-number="10"><span class="co">#&gt; [1] 9</span></a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">df[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb97-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb97-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
+<a class="sourceLine" id="cb97-6" data-line-number="6"><span class="co">#&gt; [1] "e"</span></a>
+<a class="sourceLine" id="cb97-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb97-8" data-line-number="8"><span class="co">#&gt; $cd</span></a>
+<a class="sourceLine" id="cb97-9" data-line-number="9"><span class="co">#&gt; $cd[[1]]</span></a>
+<a class="sourceLine" id="cb97-10" data-line-number="10"><span class="co">#&gt; [1] 9</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">tbl[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">tbl[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb98-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb98-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb98-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb99-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
 <a class="sourceLine" id="cb99-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb99-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb99-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb99-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">tbl[<span class="dv">0</span>, ]</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="co">#&gt; # A tibble: 0 x 3</span></a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co">#&gt; #   cd &lt;list&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">df[<span class="dv">5</span>, ]</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">tbl[<span class="dv">0</span>, ]</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="co">#&gt; # A tibble: 0 x 3</span></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="co">#&gt; #   cd &lt;list&gt;</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">df[<span class="dv">5</span>, ]</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">tbl[<span class="dv">5</span>, ]</a>
-<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="co">#&gt; Warning: Row indexes must be between</span></a>
-<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="co">#&gt; 0 and the number of rows. Use `NA` as</span></a>
-<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="co">#&gt; row index to obtain a row full of `NA`</span></a>
-<a class="sourceLine" id="cb103-5" data-line-number="5"><span class="co">#&gt; values.</span></a>
-<a class="sourceLine" id="cb103-6" data-line-number="6"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb103-7" data-line-number="7"><span class="co">#&gt;       a b     cd    </span></a>
-<a class="sourceLine" id="cb103-8" data-line-number="8"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
-<a class="sourceLine" id="cb103-9" data-line-number="9"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">tbl[<span class="dv">5</span>, ]</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="co">#&gt; Warning: Row indexes must be between</span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co">#&gt; 0 and the number of rows. Use `NA` as</span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="co">#&gt; row index to obtain a row full of `NA`</span></a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="co">#&gt; values.</span></a>
+<a class="sourceLine" id="cb102-6" data-line-number="6"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb102-7" data-line-number="7"><span class="co">#&gt;       a b     cd    </span></a>
+<a class="sourceLine" id="cb102-8" data-line-number="8"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
+<a class="sourceLine" id="cb102-9" data-line-number="9"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">df[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ]</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
-<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="co">#&gt; 4   4    h text</span></a>
-<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">df[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ]</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="co">#&gt; 4   4    h text</span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">tbl[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ]</a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="co">#&gt; Warning: Row indexes must be between</span></a>
-<a class="sourceLine" id="cb105-3" data-line-number="3"><span class="co">#&gt; 0 and the number of rows. Use `NA` as</span></a>
-<a class="sourceLine" id="cb105-4" data-line-number="4"><span class="co">#&gt; row index to obtain a row full of `NA`</span></a>
-<a class="sourceLine" id="cb105-5" data-line-number="5"><span class="co">#&gt; values.</span></a>
-<a class="sourceLine" id="cb105-6" data-line-number="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb105-7" data-line-number="7"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb105-8" data-line-number="8"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb105-9" data-line-number="9"><span class="co">#&gt; 1     4 h     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb105-10" data-line-number="10"><span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span>, ]</a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb106-3" data-line-number="3"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb106-4" data-line-number="4"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb106-5" data-line-number="5"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span>, ]</a>
-<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
-<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb107-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb107-5" data-line-number="5"><span class="co">#&gt; 1     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb107-6" data-line-number="6"><span class="co">#&gt; 2     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb107-7" data-line-number="7"><span class="co">#&gt; 3     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">tbl[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ]</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="co">#&gt; Warning: Row indexes must be between</span></a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="co">#&gt; 0 and the number of rows. Use `NA` as</span></a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co">#&gt; row index to obtain a row full of `NA`</span></a>
+<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="co">#&gt; values.</span></a>
+<a class="sourceLine" id="cb104-6" data-line-number="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
+<a class="sourceLine" id="cb104-7" data-line-number="7"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb104-8" data-line-number="8"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb104-9" data-line-number="9"><span class="co">#&gt; 1     4 h     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb104-10" data-line-number="10"><span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="co">#&gt; Error in xj[i]: only 0's may be</span></a>
-<a class="sourceLine" id="cb108-3" data-line-number="3"><span class="co">#&gt; mixed with negative subscripts</span></a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb105-3" data-line-number="3"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb105-4" data-line-number="4"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb105-5" data-line-number="5"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="co">#&gt; Error: Can't subset with a mix of</span></a>
-<a class="sourceLine" id="cb109-3" data-line-number="3"><span class="co">#&gt; negative and positive indices</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">df[<span class="ot">NA</span>, ]</a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="co">#&gt;       a    b   cd</span></a>
-<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="co">#&gt; NA   NA &lt;NA&gt; NULL</span></a>
-<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="co">#&gt; NA.1 NA &lt;NA&gt; NULL</span></a>
-<a class="sourceLine" id="cb110-5" data-line-number="5"><span class="co">#&gt; NA.2 NA &lt;NA&gt; NULL</span></a>
-<a class="sourceLine" id="cb110-6" data-line-number="6"><span class="co">#&gt; NA.3 NA &lt;NA&gt; NULL</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">tbl[<span class="ot">NA</span>, ]</a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="co">#&gt;       a b     cd    </span></a>
-<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
-<a class="sourceLine" id="cb111-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb111-6" data-line-number="6"><span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb111-7" data-line-number="7"><span class="co">#&gt; 3    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb111-8" data-line-number="8"><span class="co">#&gt; 4    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
+<a class="sourceLine" id="cb106-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb106-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb106-5" data-line-number="5"><span class="co">#&gt; 1     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb106-6" data-line-number="6"><span class="co">#&gt; 2     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb106-7" data-line-number="7"><span class="co">#&gt; 3     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">df[<span class="ot">NA_integer_</span>, ]</a>
-<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
-<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">df[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
+<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="co">#&gt; Error in xj[i]: only 0's may be</span></a>
+<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="co">#&gt; mixed with negative subscripts</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">tbl[<span class="ot">NA_integer_</span>, ]</a>
-<a class="sourceLine" id="cb113-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb113-3" data-line-number="3"><span class="co">#&gt;       a b     cd    </span></a>
-<a class="sourceLine" id="cb113-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
-<a class="sourceLine" id="cb113-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="co">#&gt; Error: Can't subset with a mix of</span></a>
+<a class="sourceLine" id="cb108-3" data-line-number="3"><span class="co">#&gt; negative and positive indices</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
-<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
-<a class="sourceLine" id="cb114-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a>
-<a class="sourceLine" id="cb114-4" data-line-number="4"><span class="co">#&gt; 1   1    e    9</span></a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">df[<span class="ot">NA</span>, ]</a>
+<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="co">#&gt;       a    b   cd</span></a>
+<a class="sourceLine" id="cb109-3" data-line-number="3"><span class="co">#&gt; NA   NA &lt;NA&gt; NULL</span></a>
+<a class="sourceLine" id="cb109-4" data-line-number="4"><span class="co">#&gt; NA.1 NA &lt;NA&gt; NULL</span></a>
+<a class="sourceLine" id="cb109-5" data-line-number="5"><span class="co">#&gt; NA.2 NA &lt;NA&gt; NULL</span></a>
+<a class="sourceLine" id="cb109-6" data-line-number="6"><span class="co">#&gt; NA.3 NA &lt;NA&gt; NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
-<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb115-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb115-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb115-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;   </span></a>
-<a class="sourceLine" id="cb115-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">tbl[<span class="ot">NA</span>, ]</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="co">#&gt;       a b     cd    </span></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
+<a class="sourceLine" id="cb110-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"><span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="co">#&gt; 3    NA &lt;NA&gt;  &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="co">#&gt; 4    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">df[<span class="ot">NA_integer_</span>, ]</a>
+<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
+<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">tbl[<span class="ot">NA_integer_</span>, ]</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="co">#&gt;       a b     cd    </span></a>
+<a class="sourceLine" id="cb112-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span></a>
+<a class="sourceLine" id="cb112-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
+<a class="sourceLine" id="cb113-2" data-line-number="2"><span class="co">#&gt;     a    b   cd</span></a>
+<a class="sourceLine" id="cb113-3" data-line-number="3"><span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></a>
+<a class="sourceLine" id="cb113-4" data-line-number="4"><span class="co">#&gt; 1   1    e    9</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
+<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
+<a class="sourceLine" id="cb114-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb114-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb114-5" data-line-number="5"><span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;   </span></a>
+<a class="sourceLine" id="cb114-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1239,11 +1241,22 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">df[<span class="dv">1</span>, <span class="st">"a"</span>]</a>
-<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">df[<span class="dv">1</span>, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>]</a>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 1</span></a>
+<a class="sourceLine" id="cb116-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb116-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb116-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
 <a class="sourceLine" id="cb117-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 1</span></a>
 <a class="sourceLine" id="cb117-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
 <a class="sourceLine" id="cb117-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
@@ -1254,28 +1267,29 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 1</span></a>
-<a class="sourceLine" id="cb118-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb118-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb118-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb118-2" data-line-number="2"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="co">#&gt; [1] 1 2</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>]</a>
+<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 1</span></a>
+<a class="sourceLine" id="cb120-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
+<a class="sourceLine" id="cb120-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb120-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb120-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>]</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="co">#&gt; [1] 1 2</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>]</a>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
 <a class="sourceLine" id="cb121-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 1</span></a>
 <a class="sourceLine" id="cb121-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
 <a class="sourceLine" id="cb121-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
@@ -1287,27 +1301,26 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 1</span></a>
-<a class="sourceLine" id="cb122-3" data-line-number="3"><span class="co">#&gt;       a</span></a>
-<a class="sourceLine" id="cb122-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb122-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
-<a class="sourceLine" id="cb122-6" data-line-number="6"><span class="co">#&gt; 2     2</span></a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="co">#&gt; [1] 1 2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="co">#&gt; [1] 1 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb123-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb123-5" data-line-number="5"><span class="co">#&gt; 1     1 e</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
 <a class="sourceLine" id="cb124-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb124-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb124-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1316,42 +1329,31 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">df[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
+<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb125-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
+<a class="sourceLine" id="cb125-6" data-line-number="6"><span class="co">#&gt; [1] "e"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
-<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb125-5" data-line-number="5"><span class="co">#&gt; 1     1 e</span></a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
+<a class="sourceLine" id="cb126-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb126-5" data-line-number="5"><span class="co">#&gt; 1     1 e</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">df[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb126-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb126-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
-<a class="sourceLine" id="cb126-6" data-line-number="6"><span class="co">#&gt; [1] "e"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
 <a class="sourceLine" id="cb127-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb127-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb127-5" data-line-number="5"><span class="co">#&gt; 1     1 e</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
-<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
-<a class="sourceLine" id="cb128-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb128-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
-<a class="sourceLine" id="cb128-6" data-line-number="6"><span class="co">#&gt; 2     2 f</span></a></code></pre></div>
+<a class="sourceLine" id="cb127-5" data-line-number="5"><span class="co">#&gt; 1     1 e    </span></a>
+<a class="sourceLine" id="cb127-6" data-line-number="6"><span class="co">#&gt; 2     2 f</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1361,28 +1363,28 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">tbl[]</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb129-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb129-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb129-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb129-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">tbl[]</a>
+<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb128-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb128-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb128-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb128-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb128-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">tbl[,]</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb130-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb130-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">tbl[,]</a>
+<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb129-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb129-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb129-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb129-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
