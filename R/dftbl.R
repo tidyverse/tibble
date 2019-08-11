@@ -22,7 +22,7 @@ dftbl_opts_hook <- function(options) {
 
   # FIXME: Evaluate, but surround in <details> element
   if (!isTRUE(options$dftbl_always)) {
-    same <- purrr::map2_lgl(df_code, tbl_code, same_as_tbl_code)
+    same <- map2_lgl(df_code, tbl_code, same_as_tbl_code)
     df_code[same] <- ""
   }
 
@@ -147,7 +147,7 @@ set_dftbl_error_hook <- function() {
     if (isTRUE(options$dftbl)) {
       x <- paste0(strwrap(x, getOption("width"), prefix = "#> ", initial = ""), "\n")
     }
-    ret <- purrr::map_chr(x, old_error_hook, options)
+    ret <- map_chr(x, old_error_hook, options)
     paste(ret, collapse = "\n")
   }
 

@@ -30,6 +30,7 @@ Suggests:
     bench,
     covr,
     dplyr,
+    evaluate,
     htmltools,
     import,
     knitr,
