@@ -55,6 +55,7 @@ Collate:
     'compat-purrr.R'
     'tribble.R'
     'deprecated.R'
+    'dftbl.R'
     'enframe.R'
     'exports.R'
     'glimpse.R'
