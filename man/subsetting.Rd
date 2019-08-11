@@ -2,29 +2,38 @@
 % Please edit documentation in R/subsetting.R
 \name{subsetting}
 \alias{subsetting}
-\alias{[[.tbl_df}
 \alias{$.tbl_df}
+\alias{$<-.tbl_df}
+\alias{[[.tbl_df}
+\alias{[[<-.tbl_df}
 \alias{[.tbl_df}
 \title{Subsetting tibbles}
 \usage{
+\method{$}{tbl_df}(x, name)
+
+\method{$}{tbl_df}(x, name) <- value
+
 \method{[[}{tbl_df}(x, i, j, ..., exact = TRUE)
 
-\method{$}{tbl_df}(x, name)
+\method{[[}{tbl_df}(x, i, j) <- value
 
 \method{[}{tbl_df}(x, i = NULL, j = NULL, drop = FALSE)
 }
 \arguments{
 \item{x}{data frame.}
 
+\item{name}{
+    A literal character string or a \link{name} (possibly \link{backtick}
+    quoted).}
+
+\item{value}{A value to store in a row, column, range or cell.
+Tibbles are stricter than data frames in what is accepted here.}
+
 \item{i, j}{Row and column indices. If \code{j} is omitted, \code{i} is used as column index.}
 
 \item{...}{Ignored.}
 
 \item{exact}{Ignored, with a warning.}
-
-\item{name}{
-    A literal character string or a \link{name} (possibly \link{backtick}
-    quoted).}
 
 \item{drop}{Coerce to a vector if fetching one column via \code{tbl[, j]} .
 Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
@@ -40,6 +49,11 @@ only one column is accessed.
 warning is given and \code{NULL} is returned.
 \item Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
+\item Rows outside of the tibble's boundaries cannot be accessed.
+\item When updating with \code{[[<-} and \code{[<-}, type changes of entire columns are
+supported, but updating a part of a column requires that the new value is
+coercible to the existing type.
+See \code{\link[=vec_slice]{vec_slice()}} for the underlying implementation.
 }
 
 Unstable return type and implicit partial matching can lead to surprises and

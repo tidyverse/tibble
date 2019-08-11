@@ -159,22 +159,47 @@ with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3]
 
 ## [[<-
 
-```{r double-bracket-assign, dftbl = TRUE}
+### Scalars and full length
+
+As with `$` subsetting, columns are consistently overwritten, and partial matching doesn't occur.
+Numeric indexing is supported, but tibbles don't support creation of new numbered columns for a good reason.
+
+```{r double-bracket-assign-col-scalar, dftbl = TRUE}
 with_df(df[["a"]] <- 1)
 with_df(df[["a"]] <- "x")
 with_df(df[["b"]] <- "x")
+with_df(df[["c"]] <- "x")
+with_df(df[["cd"]] <- "x")
+with_df(df[[1]] <- "x")
+with_df(df[[2]] <- "x")
+with_df(df[[4]] <- "x")
+with_df(df[[5]] <- "x")
+```
 
+```{r double-bracket-assign-col-full, dftbl = TRUE}
+with_df(df[["a"]] <- 4:1)
+with_df(df[["a"]] <- letters[4:1])
+with_df(df[["b"]] <- letters[4:1])
+with_df(df[["c"]] <- letters[4:1])
+with_df(df[["cd"]] <- letters[4:1])
+```
+
+### Cells
+
+Tibbles are stricter when updating single cells, the value must be coercible to the existing contents.
+Updating a list column requires the contents to be wrapped in a list, consistently with `[[` subsetting which returns a list if a cell in a list column is accessed:
+
+```{r double-bracket-assign-cell, dftbl = TRUE}
 with_df(df[[2, "a"]] <- 1)
 with_df(df[[2, "a"]] <- "x")
 with_df(df[[2, "b"]] <- "x")
+with_df(df[[2, 1]] <- "x")
+with_df(df[[2, 2]] <- "x")
 with_df(df[[2, "cd"]] <- "x")
+with_df(df[[2, "cd"]] <- list("x"))
 with_df(df[[1:2, "cd"]] <- "x")
 with_df(df[[2, "c"]] <- "x")
 with_df(df[[1:2, "c"]] <- "x")
-
-with_df(df[[c(2, 1)]] <- 1)
-with_df(df[[c(2, 1)]] <- "x")
-with_df(df[[c(1, 2)]] <- "x")
 ```
 
 ## [<-
@@ -266,3 +291,7 @@ Only one example is given here.
 ```{r bracket-assign-subset, dftbl = TRUE}
 with_df(df["a"][1, ] <- "b")
 ```
+
+## Design questions
+
+1. Should we respond to `drop = TRUE` requests for subsetting rows, and return a list?

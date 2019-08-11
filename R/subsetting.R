@@ -10,6 +10,11 @@
 #'   warning is given and `NULL` is returned.
 #' * Only scalars (vectors of length one) or vectors with the
 #'   same length as the number of rows can be used for assignment.
+#' * Rows outside of the tibble's boundaries cannot be accessed.
+#' * When updating with `[[<-` and `[<-`, type changes of entire columns are
+#'   supported, but updating a part of a column requires that the new value is
+#'   coercible to the existing type.
+#'   See [vec_slice()] for the underlying implementation.
 #'
 #' Unstable return type and implicit partial matching can lead to surprises and
 #' bugs that are hard to catch. If you rely on code that requires the original
@@ -19,6 +24,9 @@
 #' For better compatibility with older code written for regular data frames,
 #' `[` supports a `drop` argument which defaults to `FALSE`.
 #' New code should use `[[` to turn a column into a vector.
+#'
+#' @param value A value to store in a row, column, range or cell.
+#'   Tibbles are stricter than data frames in what is accepted here.
 #'
 #' @name subsetting
 #' @examples
@@ -64,6 +72,28 @@
 NULL
 
 #' @rdname subsetting
+#' @inheritParams base::`[.data.frame`
+#' @export
+`$.tbl_df` <- function(x, name) {
+  if (is.character(name)) {
+    ret <- .subset2(x, name)
+    if (is.null(ret)) warningc("Unknown or uninitialised column: '", name, "'.")
+    return(ret)
+  }
+  .subset2(x, name)
+}
+
+
+#' @rdname subsetting
+#' @export
+`$<-.tbl_df` <- function(x, name, value) {
+  name <- as_string(name)
+  value <- col_recycle(value, x, name)
+
+  tbl_extract2_assign_do(x, name, value)
+}
+
+#' @rdname subsetting
 #' @param i,j Row and column indices. If `j` is omitted, `i` is used as column index.
 #' @param ... Ignored.
 #' @param exact Ignored, with a warning.
@@ -106,12 +136,14 @@ tbl_extract2 <- function(x, i, j) {
   }
 }
 
-vec_as_index_extract2_compat <- function(j, n, names) {
+vec_as_index_extract2_compat <- function(j, n, names, match = TRUE) {
   if (is.character(j)) {
     vec_assert(j, size = 1)
-    j <- match(j, names)
-    if (is.na(j)) {
-      signal_soft_deprecated("Calling `[[` with an unknown column name is deprecated and will eventually be converted to an error.")
+    if (match) {
+      j <- match(j, names)
+      if (is.na(j)) {
+        signal_soft_deprecated("Calling `[[` with an unknown column name is deprecated and will eventually be converted to an error.")
+      }
     }
     j
   } else {
@@ -122,15 +154,52 @@ vec_as_index_extract2_compat <- function(j, n, names) {
 }
 
 #' @rdname subsetting
-#' @inheritParams base::`[.data.frame`
+#' @inheritParams base::`[[<-.data.frame`
 #' @export
-`$.tbl_df` <- function(x, name) {
-  if (is.character(name)) {
-    ret <- .subset2(x, name)
-    if (is.null(ret)) warningc("Unknown or uninitialised column: '", name, "'.")
-    return(ret)
+`[[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(j)) {
+    tbl_extract2_assign(x, j = i, value)
+  } else {
+    tbl_extract2_assign2(x, i, j, value)
   }
-  .subset2(x, name)
+}
+
+tbl_extract2_assign2 <- function(x, i, j, value) {
+  vec_assert(value, size = 1)
+
+  i <- vec_as_index(i, vec_size(x))
+  vec_assert(i, size = 1)
+
+  # Strict matching!
+  j <- vec_as_index(j, ncol(x), names = names(x))
+
+  column <- tbl_extract2(x, i = NULL, j)
+  vec_slice(column, i) <- value
+  tbl_extract2_assign_do(x, j, column)
+}
+
+tbl_extract2_assign <- function(x, j, value) {
+  vec_assert(j, size = 1)
+  j <- vec_as_index_extract2_compat(j, ncol(x), names = names(x), match = FALSE)
+
+  value <- vec_recycle(value, vec_size(x))
+  tbl_extract2_assign_do(x, j, value)
+}
+
+tbl_extract2_assign_do <- function(x, j, value) {
+  old_class <- class(x)
+  xx <- unclass(x)
+  xx[[j]] <- value
+  vec_restore(structure(xx, class = old_class), x)
+}
+
+col_recycle <- function(value, x, name) {
+  tryCatch(
+    vec_recycle(value, vec_size(x)),
+    vctrs_error_recycle_incompatible_size = function(e) {
+      abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
+    }
+  )
 }
 
 #' @rdname subsetting
@@ -272,16 +341,4 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
     n <- length(i)
   }
   vec_restore(x, to, n = n)
-}
-
-#' @export
-`$<-.tbl_df` <- function(x, name, value) {
-  tryCatch(
-    value <- vec_recycle(value, vec_size(x)),
-    vctrs_error_recycle_incompatible_size = function(e) {
-      abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
-    }
-  )
-
-  NextMethod()
 }

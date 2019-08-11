@@ -97,6 +97,7 @@ df[["c", exact = FALSE]]
 ```
 
 With two indexes, a single element is returned.
+List columns are not unpacked by tibbles, the `[[` only unpacks columns.
 
 ```{r double-bracket-both, dftbl = TRUE}
 df[[2, "a"]]
