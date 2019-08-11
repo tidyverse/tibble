@@ -103,9 +103,9 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 ```
 
 
-### $<-
+## $<-
 
-#### Scalars and full length
+### Scalars and full length
 
 Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn't happen:
 
@@ -123,7 +123,7 @@ with_df(df$c <- 4:1)
 with_df(df$cd <- 4:1)
 ```
 
-#### Recycling
+### Recycling
 
 Tibbles allow recycling only for vectors of length 1 or of the same length as the data.
 
@@ -136,7 +136,7 @@ with_df(df$c <- 1:2)
 
 
 
-#### Subset assignment
+### Subset assignment
 
 Updating parts of a column extracted by `$` is the responsibility of the column vector.
 Tibbles can't control what happens after `$` has returned.
@@ -157,7 +157,7 @@ with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
 with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])})
 ```
 
-### [[<-
+## [[<-
 
 ```{r double-bracket-assign, dftbl = TRUE}
 with_df(df[["a"]] <- 1)
@@ -177,9 +177,9 @@ with_df(df[[c(2, 1)]] <- "x")
 with_df(df[[c(1, 2)]] <- "x")
 ```
 
-### [<-
+## [<-
 
-#### Scalars
+### Scalars
 
 ```{r bracket-assign-scalar-col, dftbl = TRUE}
 with_df(df[1, "a"] <- 1)
@@ -188,7 +188,7 @@ with_df(df[1, "c"] <- 1)
 with_df(df[1, "cd"] <- 1)
 ```
 
-#### Full length columns
+### Full length columns
 
 ```{r bracket-assign-full-col, dftbl = TRUE}
 with_df(df[, "a"] <- 4:1)
@@ -201,7 +201,7 @@ with_df(df[, "c"] <- 1)
 with_df(df[, "cd"] <- 1)
 ```
 
-#### Multiple full length columns
+### Multiple full length columns
 
 ```{r bracket-assign-full-multicol, dftbl = TRUE}
 with_df(df[, c("a", "b")] <- 4:1)
@@ -212,7 +212,7 @@ with_df(df[, c("a", "b", "c")] <- list(4:1, letters[4:1]))
 with_df(df[, c("a", "b", "cd")] <- list(4:1, letters[4:1]))
 ```
 
-#### Full length rows
+### Full length rows
 
 ```{r bracket-assign-full-row, dftbl = TRUE}
 with_df(df[2, ] <- 1)
@@ -222,7 +222,7 @@ with_df(df[2, ] <- list(1, "x", 2))
 with_df(df[2, ] <- list(1, "x", 2, 3))
 ```
 
-#### Multiple full length rows
+### Multiple full length rows
 
 ```{r bracket-assign-full-multirow, dftbl = TRUE}
 with_df(df[2:3, ] <- 1)
@@ -234,7 +234,7 @@ with_df(df[2:3, ] <- list(1, "x", 2))
 with_df(df[2:3, ] <- list(1, "x", 2, 3))
 ```
 
-#### Unspecified
+### Unspecified
 
 ```{r bracket-assign-unspecified, dftbl = TRUE}
 with_df(df[] <- 1)
@@ -257,7 +257,7 @@ with_df(df[,] <- list(1, "x", 2, 3))
 with_df(df[,] <- df)
 ```
 
-#### Subset assignment
+### Subset assignment
 
 Due to tibble's default of `drop = FALSE`, updating a portion of a `[` subset is still safe, because tibble is still in control.
 Only one example is given here.
