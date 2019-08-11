@@ -7,6 +7,7 @@
 \alias{[[.tbl_df}
 \alias{[[<-.tbl_df}
 \alias{[.tbl_df}
+\alias{[<-.tbl_df}
 \title{Subsetting tibbles}
 \usage{
 \method{$}{tbl_df}(x, name)
@@ -18,6 +19,8 @@
 \method{[[}{tbl_df}(x, i, j) <- value
 
 \method{[}{tbl_df}(x, i = NULL, j = NULL, drop = FALSE)
+
+\method{[}{tbl_df}(x, i, j) <- value
 }
 \arguments{
 \item{x}{data frame.}

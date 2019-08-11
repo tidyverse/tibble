@@ -189,6 +189,7 @@ Updating a list column requires the contents to be wrapped in a list, consistent
 
 ```{r double-bracket-assign-cell, dftbl = TRUE}
 with_df(df[[2, "a"]] <- 1)
+with_df(df[[2, "a"]] <- 1.5)
 with_df(df[[2, "a"]] <- "x")
 with_df(df[[2, "b"]] <- "x")
 with_df(df[[2, 1]] <- "x")
@@ -205,10 +206,17 @@ with_df(df[[1:2, "c"]] <- "x")
 ### Scalars
 
 ```{r bracket-assign-scalar-col, dftbl = TRUE}
-with_df(df[1, "a"] <- 1)
-with_df(df[1, "b"] <- 1)
-with_df(df[1, "c"] <- 1)
-with_df(df[1, "cd"] <- 1)
+with_df(df[2, "a"] <- 1)
+with_df(df[2, "a"] <- 1.5)
+with_df(df[2, "a"] <- "x")
+with_df(df[2, "b"] <- "x")
+with_df(df[2, "cd"] <- "x")
+with_df(df[2, "cd"] <- list("x"))
+with_df(df[2, "c"] <- "x")
+with_df(df[2, 1] <- "x")
+with_df(df[2, 2] <- "x")
+with_df(df[2, 3] <- "x")
+with_df(df[2, 4] <- "x")
 ```
 
 ### Full length columns
@@ -218,10 +226,18 @@ with_df(df[, "a"] <- 4:1)
 with_df(df[, "b"] <- 4:1)
 with_df(df[, "c"] <- 4:1)
 with_df(df[, "cd"] <- 4:1)
+with_df(df[, 1] <- 4:1)
+with_df(df[, 2] <- 4:1)
+with_df(df[, 3] <- 4:1)
+with_df(df[, 4] <- 4:1)
 with_df(df[, "a"] <- 1)
 with_df(df[, "b"] <- 1)
 with_df(df[, "c"] <- 1)
 with_df(df[, "cd"] <- 1)
+with_df(df[, 1] <- 1)
+with_df(df[, 2] <- 1)
+with_df(df[, 3] <- 1)
+with_df(df[, 4] <- 1)
 ```
 
 ### Multiple full length columns
@@ -229,10 +245,14 @@ with_df(df[, "cd"] <- 1)
 ```{r bracket-assign-full-multicol, dftbl = TRUE}
 with_df(df[, c("a", "b")] <- 4:1)
 with_df(df[, c("a", "b")] <- 1)
-with_df(df[, c("a", "b")] <- list(4:1, letters[4:1]))
-with_df(df[, c("a", "b")] <- list(4:1, 1))
-with_df(df[, c("a", "b", "c")] <- list(4:1, letters[4:1]))
-with_df(df[, c("a", "b", "cd")] <- list(4:1, letters[4:1]))
+with_df(df[, c("a", "b")] <- data.frame(a = 4:1, b = letters[4:1]))
+with_df(df[, c("a", "b")] <- data.frame(b = 4:1, a = letters[4:1]))
+with_df(df[, c("a", "b")] <- data.frame(c = 4:1, d = letters[4:1]))
+with_df(df[, c("a", "b")] <- data.frame(a = 4:1))
+with_df(df[, c("a", "b")] <- data.frame(a = 4:1, b = letters[4:1], c = 1:4))
+with_df(df[, c("a", "b")] <- data.frame(4:1, 1))
+with_df(df[, c("a", "b", "c")] <- data.frame(4:1, letters[4:1]))
+with_df(df[, c("a", "b", "cd")] <- data.frame(4:1, letters[4:1]))
 ```
 
 ### Full length rows
@@ -240,9 +260,11 @@ with_df(df[, c("a", "b", "cd")] <- list(4:1, letters[4:1]))
 ```{r bracket-assign-full-row, dftbl = TRUE}
 with_df(df[2, ] <- 1)
 with_df(df[2, ] <- "x")
-with_df(df[2, ] <- list(1, "x"))
-with_df(df[2, ] <- list(1, "x", 2))
-with_df(df[2, ] <- list(1, "x", 2, 3))
+with_df(df[2, ] <- tibble(a = 1, b = "x"))
+with_df(df[2, ] <- tibble(a = 1, b = "x", c = list("y")))
+with_df(df[2, ] <- tibble(a = 1, b = "x", c = list("y"), d = "z"))
+with_df(df[0, ] <- tibble(a = 1, b = "x", c = list("y")))
+with_df(df[5, ] <- tibble(a = 1, b = "x", c = list("y")))
 ```
 
 ### Multiple full length rows
@@ -251,10 +273,13 @@ with_df(df[2, ] <- list(1, "x", 2, 3))
 with_df(df[2:3, ] <- 1)
 with_df(df[2:3, ] <- 1:2)
 with_df(df[2:3, ] <- c("x", "y"))
-with_df(df[2:3, ] <- list(1:2, c("x", "y")))
-with_df(df[2:3, ] <- list(1:2, "x"))
-with_df(df[2:3, ] <- list(1, "x", 2))
-with_df(df[2:3, ] <- list(1, "x", 2, 3))
+with_df(df[2:3, ] <- tibble(a = 1:2, b = c("x", "y")))
+with_df(df[2:3, ] <- tibble(a = 1, b = "x", c = list("y")))
+with_df(df[2:3, ] <- tibble(a = 1:2, b = "x", c = list("y")))
+with_df(df[2:3, ] <- tibble(a = 1, b = "x", c = list("y"), d = "z"))
+with_df(df[-(1:2), ] <- tibble(a = 1:2, b = "x", c = list("y")))
+with_df(df[0:1, ] <- tibble(a = 1:2, b = "x", c = list("y")))
+with_df(df[4:5, ] <- tibble(a = 1:2, b = "x", c = list("y")))
 ```
 
 ### Unspecified
@@ -264,19 +289,19 @@ with_df(df[] <- 1)
 with_df(df[] <- 4:1)
 with_df(df[] <- 3:1)
 with_df(df[] <- 5:1)
-with_df(df[] <- list(1, "x"))
-with_df(df[] <- list(4:1, "x", 2))
-with_df(df[] <- list(1, "x", 2))
-with_df(df[] <- list(1, "x", 2, 3))
+with_df(df[] <- data.frame(1, "x"))
+with_df(df[] <- data.frame(4:1, "x", 2))
+with_df(df[] <- data.frame(1, "x", 2))
+with_df(df[] <- data.frame(1, "x", 2, 3))
 with_df(df[] <- df)
 with_df(df[,] <- 1)
 with_df(df[,] <- 4:1)
 with_df(df[,] <- 3:1)
 with_df(df[,] <- 5:1)
-with_df(df[,] <- list(1, "x"))
-with_df(df[,] <- list(4:1, "x", 2))
-with_df(df[,] <- list(1, "x", 2))
-with_df(df[,] <- list(1, "x", 2, 3))
+with_df(df[,] <- data.frame(1, "x"))
+with_df(df[,] <- data.frame(4:1, "x", 2))
+with_df(df[,] <- data.frame(1, "x", 2))
+with_df(df[,] <- data.frame(1, "x", 2, 3))
 with_df(df[,] <- df)
 ```
 
@@ -284,7 +309,6 @@ with_df(df[,] <- df)
 
 Due to tibble's default of `drop = FALSE`, updating a portion of a `[` subset is still safe, because tibble is still in control.
 Only one example is given here.
-(FIXME: It's not safe yet.)
 
 ```{r bracket-assign-subset, dftbl = TRUE}
 with_df(df["a"][1, ] <- "b")

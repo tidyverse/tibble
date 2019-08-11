@@ -3,6 +3,7 @@
 S3method("$",tbl_df)
 S3method("$<-",tbl_df)
 S3method("[",tbl_df)
+S3method("[<-",tbl_df)
 S3method("[[",tbl_df)
 S3method("[[<-",tbl_df)
 S3method("names<-",tbl_df)

@@ -342,3 +342,113 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
   }
   vec_restore(x, to, n = n)
 }
+
+#' @rdname subsetting
+#' @inheritParams base::`[<-.data.frame`
+#' @export
+`[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(j)) {
+    if (nargs() < 4) {
+      j <- i
+      i <- NULL
+    } else {
+      j <- names(x)
+    }
+  } else {
+    if (missing(i)) i <- NULL
+  }
+
+  if (is.null(i)) {
+    tbl_extract_assign(x, j, value)
+  } else {
+    tbl_extract_assign2(x, i, j, value)
+  }
+}
+
+tbl_extract_assign2 <- function(x, i, j, value) {
+  i <- vec_as_index(i, vec_size(x))
+  value <- col_recycle(value, i, "RHS")
+
+  vec_assert(value, size = vec_size(i))
+
+  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), match = TRUE)
+
+  if (is.data.frame(value)) {
+    new_columns <- map2(.subset(x, j), value, function(column, value) {
+      vec_slice(column, i) <- value
+      column
+    })
+    names(new_columns) <- names(value)
+  } else {
+    new_columns <- map(unname(.subset(x, j)), function(column) {
+      vec_slice(column, i) <- value
+      column
+    })
+  }
+
+  tbl_extract_assign_do(x, j, new_tibble(new_columns, nrow = nrow(x)))
+}
+
+tbl_extract_assign <- function(x, j, value) {
+  value <- vec_recycle(value, vec_size(x))
+
+  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), match = FALSE)
+
+  if (!is.data.frame(value)) {
+    value <- rep_along(j, list(value))
+    if (is.character(j)) {
+      names(value) <- j
+    } else if (any(j > ncol(x))) {
+      error_new_column_needs_name()
+    }
+  }
+
+  tbl_extract_assign_do(x, j, value)
+}
+
+vec_as_index_extract_compat <- function(j, n, names, match) {
+  # Strict matching, but allowing for extension!
+  if (is.numeric(j)) {
+    beyond <- which(j > n)
+
+    if (has_length(beyond)) {
+      if (any(j < 0)) {
+        error_no_negative_indexes_with_new_columns()
+      }
+
+      # Check new columns are gapless
+      new_cols <- seq2(n + 1L, max(j))
+      if (has_length(setdiff(new_cols, j))) {
+        error_append_column_needs_all_columns()
+      }
+
+      # Use j unchanged
+    } else {
+      j <- vec_as_index(j, n)
+    }
+  } else if (is.character(j)) {
+    if (match) {
+      j <- match(j, names)
+      if (any(is.na(j))) {
+        error_unknown_column_for_subsetting()
+      }
+    }
+    j
+  } else {
+    j <- vec_as_index(j, n)
+  }
+
+  j
+}
+
+tbl_extract_assign_do <- function(x, j, value) {
+  old_class <- class(x)
+  xx <- unclass(x)
+
+  xx[j] <- unclass(value)
+  if (!is.character(j) && !is.null(names(value))) {
+    names(xx)[j] <- names(value)
+  }
+
+  vec_restore(structure(xx, class = old_class), x)
+}
