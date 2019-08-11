@@ -182,10 +182,13 @@ df[, c(FALSE, TRUE)]
 df[, c(FALSE, TRUE, FALSE, TRUE)]
 ```
 
-Row subsetting works almost identical, but out-of-bounds subsetting is not recommended and may lead to an error in future versions.
+Row subsetting works almost identical.
+Out-of-bounds subsetting is not recommended and may lead to an error in future versions.
+Another special case is subsetting with `[1, , drop = TRUE]` where the data frame implementation returns a list.
 
 ```{r bracket-row, dftbl = TRUE}
 df[1, ]
+df[1, , drop = TRUE]
 df[1:2, ]
 df[0, ]
 df[5, ]
@@ -207,6 +210,8 @@ df[1:2, "a"]
 df[1:2, "a", drop = FALSE]
 df[1:2, "a", drop = TRUE]
 df[1, c("a", "b")]
+df[1, c("a", "b"), drop = FALSE]
+df[1, c("a", "b"), drop = TRUE]
 df[1:2, c("a", "b")]
 ```
 
