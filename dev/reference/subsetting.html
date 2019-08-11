@@ -48,6 +48,11 @@ Partial matching of column names with $ and [[ is not supported, a
 warning is given and NULL is returned.
 Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
+Rows outside of the tibble's boundaries cannot be accessed.
+When updating with [[&amp;lt;- and [&amp;lt;-, type changes of entire columns are
+supported, but updating a part of a column requires that the new value is
+coercible to the existing type.
+See vec_slice() for the underlying implementation.
 " />
 
 <meta property="og:description" content="Unstable return type and implicit partial matching can lead to surprises and
@@ -193,6 +198,11 @@ only one column is accessed.</p></li>
 warning is given and <code>NULL</code> is returned.</p></li>
 <li><p>Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.</p></li>
+<li><p>Rows outside of the tibble's boundaries cannot be accessed.</p></li>
+<li><p>When updating with <code>[[&lt;-</code> and <code>[&lt;-</code>, type changes of entire columns are
+supported, but updating a part of a column requires that the new value is
+coercible to the existing type.
+See <code>vec_slice()</code> for the underlying implementation.</p></li>
 </ul>
 
     <p>Unstable return type and implicit partial matching can lead to surprises and
@@ -202,10 +212,16 @@ data frame behavior, coerce to a data frame via <code><a href='https://www.rdocu
     </div>
 
     <pre class="usage"># S3 method for tbl_df
+$(x, name)
+
+# S3 method for tbl_df
+$(x, name) <- value
+
+# S3 method for tbl_df
 [[(x, i, j, ..., exact = TRUE)
 
 # S3 method for tbl_df
-$(x, name)
+[[(x, i, j) <- value
 
 # S3 method for tbl_df
 [(x, i = NULL, j = NULL, drop = FALSE)</pre>
@@ -218,6 +234,16 @@ $(x, name)
       <td><p>data frame.</p></td>
     </tr>
     <tr>
+      <th>name</th>
+      <td><p>A literal character string or a <a href='https://www.rdocumentation.org/packages/base/topics/name'>name</a> (possibly <a href='https://www.rdocumentation.org/packages/base/topics/Quotes'>backtick</a>
+    quoted).</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>A value to store in a row, column, range or cell.
+Tibbles are stricter than data frames in what is accepted here.</p></td>
+    </tr>
+    <tr>
       <th>i, j</th>
       <td><p>Row and column indices. If <code>j</code> is omitted, <code>i</code> is used as column index.</p></td>
     </tr>
@@ -228,11 +254,6 @@ $(x, name)
     <tr>
       <th>exact</th>
       <td><p>Ignored, with a warning.</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>A literal character string or a <a href='https://www.rdocumentation.org/packages/base/topics/name'>name</a> (possibly <a href='https://www.rdocumentation.org/packages/base/topics/Quotes'>backtick</a>
-    quoted).</p></td>
     </tr>
     <tr>
       <th>drop</th>
