@@ -11,6 +11,7 @@ vignette: >
 .dftbl {
     width: 100%;
     table-layout: fixed;
+    display: inline-table;
 }
 </style>
 
