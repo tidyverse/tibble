@@ -13,6 +13,14 @@ vignette: >
     table-layout: fixed;
     display: inline-table;
 }
+
+.error pre code {
+    color: red;
+}
+
+.warning pre code {
+    color: violet;
+}
 </style>
 
 ```{r, include = FALSE}

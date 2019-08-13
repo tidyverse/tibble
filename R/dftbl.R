@@ -2,8 +2,9 @@ set_dftbl_hooks <- function() {
   set_dftbl_opts_hook()
   set_dftbl_knit_hook()
   set_dftbl_source_hook()
-  set_dftbl_error_hook()
   set_dftbl_chunk_hook()
+  set_dftbl_error_hook()
+  set_dftbl_warning_hook()
 }
 
 # Defines a `dftbl` knitr option. If this chunk option is set, code is duplicated
@@ -151,8 +152,22 @@ set_dftbl_error_hook <- function() {
       x <- unlist(map(x, strwrap, getOption("width"), prefix = "#> ", initial = ""))
       x <- paste(paste0(x, "\n"), collapse = "")
     }
-    old_error_hook(x, options)
+    x <- old_error_hook(x, options)
+    paste0('<div class="error">', x, '</div>')
   }
 
   knitr::knit_hooks$set(error = dftbl_error_hook)
+}
+
+set_dftbl_warning_hook <- function() {
+  # Need to use a closure here to daisy-chain hooks
+
+  old_warning_hook <- knitr::knit_hooks$get("warning")
+
+  dftbl_warning_hook <- function(x, options) {
+    x <- old_warning_hook(x, options)
+    paste0('<div class="warning">', x, '</div>')
+  }
+
+  knitr::knit_hooks$set(warning = dftbl_warning_hook)
 }
