@@ -347,6 +347,7 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
 #' @inheritParams base::`[<-.data.frame`
 #' @export
 `[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(i)) i <- NULL
   if (missing(j)) {
     if (nargs() < 4) {
       j <- i
@@ -354,8 +355,6 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
     } else {
       j <- names(x)
     }
-  } else {
-    if (missing(i)) i <- NULL
   }
 
   if (is.null(i)) {
