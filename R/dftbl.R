@@ -147,10 +147,11 @@ set_dftbl_error_hook <- function() {
 
   dftbl_error_hook <- function(x, options) {
     if (isTRUE(options$dftbl)) {
-      x <- paste0(strwrap(x, getOption("width"), prefix = "#> ", initial = ""), "\n")
+      x <- strsplit(x, "\n", fixed = TRUE)[[1]]
+      x <- unlist(map(x, strwrap, getOption("width"), prefix = "#> ", initial = ""))
+      x <- paste(paste0(x, "\n"), collapse = "")
     }
-    ret <- map_chr(x, old_error_hook, options)
-    paste(ret, collapse = "\n")
+    old_error_hook(x, options)
   }
 
   knitr::knit_hooks$set(error = dftbl_error_hook)
