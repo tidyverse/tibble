@@ -279,7 +279,7 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='co'># Subsetting single columns:</span>
 <span class='no'>df</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;       a
-#&gt; * &lt;int&gt;
+#&gt;   &lt;int&gt;
 #&gt; 1     1
 #&gt; 2     2
 #&gt; 3     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
@@ -291,7 +291,7 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 #&gt; [1] 4
 #&gt; </div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       a    bc
-#&gt; * &lt;int&gt; &lt;int&gt;
+#&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     1     4</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
@@ -310,23 +310,23 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='co'># Identical behavior:</span>
 <span class='no'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;       a    bc bd        b
-#&gt; * &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;
 #&gt; 1     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;      bc     a
-#&gt; * &lt;int&gt; &lt;int&gt;
+#&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
-#&gt; * &lt;int&gt; &lt;int&gt;
+#&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     4     1
 #&gt; 2     5     2
 #&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
-#&gt; * &lt;int&gt; &lt;int&gt;
+#&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     4     1
 #&gt; 2     5     2
 #&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;       a
-#&gt; * &lt;int&gt;
+#&gt;   &lt;int&gt;
 #&gt; 1     1
 #&gt; 2     2
 #&gt; 3     3</div><div class='input'><span class='no'>tbl</span>$<span class='no'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"a"</span>]]</div><div class='output co'>#&gt; [1] 1 2 3</div></pre>
