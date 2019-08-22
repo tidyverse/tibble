@@ -349,7 +349,7 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
 `[<-.tbl_df` <- function(x, i, j, value) {
   if (missing(i)) i <- NULL
   if (missing(j)) {
-    if (nargs() < 4) {
+    if (nargs() < 4 && !is.null(i)) {
       j <- i
       i <- NULL
     } else {
