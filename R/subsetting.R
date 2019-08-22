@@ -370,7 +370,7 @@ tbl_extract_assign2 <- function(x, i, j, value) {
 
   vec_assert(value, size = vec_size(i))
 
-  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), match = TRUE)
+  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), full_column = FALSE)
 
   if (is.data.frame(value)) {
     new_columns <- map2(.subset(x, j), value, function(column, value) {
@@ -391,7 +391,7 @@ tbl_extract_assign2 <- function(x, i, j, value) {
 tbl_extract_assign <- function(x, j, value) {
   value <- vec_recycle(value, vec_size(x))
 
-  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), match = FALSE)
+  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), full_column = TRUE)
 
   if (!is.data.frame(value)) {
     value <- rep_along(j, list(value))
@@ -405,12 +405,10 @@ tbl_extract_assign <- function(x, j, value) {
   tbl_extract_assign_do(x, j, value)
 }
 
-vec_as_index_extract_compat <- function(j, n, names, match) {
+vec_as_index_extract_compat <- function(j, n, names, full_column) {
   # Strict matching, but allowing for extension!
   if (is.numeric(j)) {
-    beyond <- which(j > n)
-
-    if (has_length(beyond)) {
+    if (full_column && any(j > n)) {
       if (any(j < 0)) {
         error_no_negative_indexes_with_new_columns()
       }
@@ -426,12 +424,14 @@ vec_as_index_extract_compat <- function(j, n, names, match) {
       j <- vec_as_index(j, n)
     }
   } else if (is.character(j)) {
-    if (match) {
+    if (!full_column) {
       j <- match(j, names)
       if (any(is.na(j))) {
         error_unknown_column_for_subsetting()
       }
     }
+
+    # Allow new column names if assigning full columns
     j
   } else {
     j <- vec_as_index(j, n)
