@@ -205,9 +205,10 @@ with_df(df[[2, 1]] <- "x")
 with_df(df[[2, 2]] <- "x")
 with_df(df[[2, "cd"]] <- "x")
 with_df(df[[2, "cd"]] <- list("x"))
-with_df(df[[1:2, "cd"]] <- "x")
 with_df(df[[2, "c"]] <- "x")
+with_df(df[[1:2, "cd"]] <- "x")
 with_df(df[[1:2, "c"]] <- "x")
+with_df(df[[2, c("cd", "d")]] <- "x")
 ```
 
 ## [<-
