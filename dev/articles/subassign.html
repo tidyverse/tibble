@@ -1210,9 +1210,10 @@
 <td>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="dv">4</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in vec_slice(result, i):
-#&gt; Internal error: Unexpected `NULL` in
-#&gt; `vec_slice_impl()`.</code></pre>
+<pre><code>#&gt; Error: Can't index beyond the end of
+#&gt; a vector.
+#&gt; The vector has length 3 and you've
+#&gt; tried to subset element 4.</code></pre>
 </div>
 </td>
 </tr>
