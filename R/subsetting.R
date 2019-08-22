@@ -385,7 +385,7 @@ tbl_extract_assign2 <- function(x, i, j, value) {
     })
   }
 
-  tbl_extract_assign_do(x, j, new_tibble(new_columns, nrow = nrow(x)))
+  tbl_extract_assign_do(x, j, new_columns)
 }
 
 tbl_extract_assign <- function(x, j, value) {
