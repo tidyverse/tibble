@@ -1,3 +1,11 @@
+# tibble 2.99.99.9003
+
+- New `` `[<-.tbl_df`() ``.
+- New `` `[[<-.tbl_df`()``.
+- New vignette for comparing assignment and subassignment between data frames and tibbles.
+- Use `vec_recycle()` instead of `vec_recycle_common()` (#628).
+
+
 # tibble 2.99.99.9002
 
 - `[[` subsetting with two arguments works as intended also for matrix and data frame columns (#440).
