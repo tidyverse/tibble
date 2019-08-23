@@ -77,7 +77,9 @@ NULL
 `$.tbl_df` <- function(x, name) {
   if (is.character(name)) {
     ret <- .subset2(x, name)
-    if (is.null(ret)) warningc("Unknown or uninitialised column: '", name, "'.")
+    if (is.null(ret)) {
+      warn(paste0("Unknown or uninitialised column: `", name, "`."))
+    }
     return(ret)
   }
   .subset2(x, name)
@@ -100,7 +102,7 @@ NULL
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (!exact) {
-    warningc("exact ignored")
+    warn("`exact` ignored")
   }
   if (missing(j)) {
     tbl_extract2(x, i = NULL, j = i)
@@ -142,7 +144,7 @@ vec_as_index_extract2_compat <- function(j, n, names, match = TRUE) {
     if (match) {
       j <- match(j, names)
       if (is.na(j)) {
-        signal_soft_deprecated("Calling `[[` with an unknown column name is deprecated and will eventually be converted to an error.")
+        signal_soft_deprecated(paste0("Unknown or uninitialised column: `", name, "`."))
       }
     }
     j
@@ -213,7 +215,7 @@ col_recycle <- function(value, x, name) {
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
-      warningc("drop ignored")
+      warn("`drop` ignored")
     }
 
     if (missing(i)) {
