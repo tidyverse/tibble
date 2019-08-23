@@ -77,7 +77,11 @@ error_dim_column_index <- function(j) {
 
 error_mismatch_column_flag <- function(n, j) {
   bullets(
-    "Length of logical index vector for `[` must equal number of columns (or 1):",
+    paste0(
+      "When subsetting tibble with a logical vector, ",
+      "the vector must have length 1 or ",
+      n, " ", "(the number of columns), not ", j, ":"
+    ),
     data_has_n_cols(n),
     paste0("Index vector has length ", j)
   )

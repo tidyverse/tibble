@@ -64,7 +64,7 @@ test_that("error_mismatch_column_flag()", {
   expect_equal(
     error_mismatch_column_flag(5, 3),
     bullets(
-      "Length of logical index vector for `[` must equal number of columns (or 1):",
+      "When subsetting tibble with a logical vector, the vector must have length 1 or 5 (the number of columns), not 3:",
       "`.data` has 5 columns",
       "Index vector has length 3"
     )
