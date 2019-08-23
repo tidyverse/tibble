@@ -204,11 +204,11 @@ df[, c(FALSE, TRUE)]
 df[, c(FALSE, TRUE, FALSE, TRUE)]
 ```
 
-Row subsetting works almost identical.
+Row subsetting with integer indexes works almost identical.
 Out-of-bounds subsetting is not recommended and may lead to an error in future versions.
 Another special case is subsetting with `[1, , drop = TRUE]` where the data frame implementation returns a list.
 
-```{r bracket-row, dftbl = TRUE}
+```{r bracket-row-integer, dftbl = TRUE}
 df[1, ]
 df[1, , drop = TRUE]
 df[1:2, ]
@@ -221,6 +221,17 @@ df[-1:2, ]
 df[NA, ]
 df[NA_integer_, ]
 df[c(NA, 1), ]
+```
+
+Row subsetting with logical indexes also works almost identical, the index vector must have length one or the number of rows with tibbles.
+
+```{r bracket-row-logical, dftbl = TRUE}
+df[TRUE, ]
+df[FALSE, ]
+df[c(TRUE, FALSE), ]
+df[c(TRUE, FALSE, TRUE), ]
+df[c(TRUE, FALSE, TRUE, FALSE), ]
+df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ]
 ```
 
 Indexing both row and column works more or less the same, except for `drop`:
