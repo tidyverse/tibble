@@ -142,10 +142,11 @@ vec_as_index_extract2_compat <- function(j, n, names, match = TRUE) {
   if (is.character(j)) {
     vec_assert(j, size = 1)
     if (match) {
-      j <- match(j, names)
-      if (is.na(j)) {
-        signal_soft_deprecated(paste0("Unknown or uninitialised column: `", name, "`."))
+      jm <- match(j, names)
+      if (is.na(jm)) {
+        signal_soft_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
       }
+      j <- jm
     }
     j
   } else {
