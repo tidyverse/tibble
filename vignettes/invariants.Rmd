@@ -100,6 +100,10 @@ df2 <- new_df2()
 tbl2 <- new_tbl2()
 ```
 
+```{r show-compare-2, dftbl = TRUE}
+new_df()
+```
+
 For subassignment, we need a fresh copy of the data for each test.
 The `with_*()` functions allow for a more concise notation
 (`with_tbl()` and `with_*2()` omitted here for brevity):
@@ -189,17 +193,24 @@ with_df(df[[1, 1:2]] <- 0)
 with_df(df[[1:2, 1:2]] <- 0)
 ```
 
-### `x[[j]]` is equivalent to `unlist(x[j])`.
+### `x[[j]]` is equivalent to `unwrap(x[j])`.
 
-```{r double-bracket-equivalent-to-unlist-single-bracket, dftbl = TRUE}
+```{r unwrap}
+unwrap <- function(x) {
+  unclass(x)[[1]]
+}
+```
+
+
+```{r double-bracket-equivalent-to-unwrap-single-bracket, dftbl = TRUE}
 df[[1]]
-unlist(df[1])
+unwrap(df[1])
 df[[3]]
-unlist(df[3])
+unwrap(df[3])
 df2[[1]]
-unlist(df2[1])
+unwrap(df2[1])
 df2[[2]]
-unlist(df2[2])
+unwrap(df2[2])
 ```
 
 Corollary: `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
@@ -209,7 +220,7 @@ Corollary: `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of 
 - data frame: `df2[[1]]`
 - matrix: `df2[[2]]`
 
-```{r double-bracket-equivalent-to-unlist-single-bracket-update, dftbl = TRUE}
+```{r double-bracket-equivalent-to-unwrap-single-bracket-update, dftbl = TRUE}
 with_df(df[[1]] <- df[[3]])
 with_df(df[[1]] <- df2[[1]])
 with_df(df[[1]] <- df2[[2]])
