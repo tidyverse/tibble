@@ -63,10 +63,17 @@ same_as_tbl <- function(df, tbl) {
   if (is.data.frame(df_obj) != is.data.frame(tbl_obj)) return(FALSE)
 
   if (is.data.frame(tbl_obj)) {
-    tbl[[length(tbl)]] <- as.data.frame(tbl_obj)
+    df[[length(df)]] <- as_tibble_deep(df_obj)
+
   }
 
   identical(df, tbl)
+}
+
+as_tibble_deep <- function(x) {
+  is_tibble <- which(map_lgl(x, is.data.frame))
+  x[is_tibble] <- map(x[is_tibble], as_tibble)
+  as_tibble(x)
 }
 
 # dftbl chunks have a reduced width

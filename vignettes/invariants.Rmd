@@ -1,0 +1,385 @@
+---
+title: "Invariants for subsetting and subassignment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{invariants}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style type="text/css">
+.dftbl {
+    width: 100%;
+    table-layout: fixed;
+    display: inline-table;
+}
+
+.error pre code {
+    color: red;
+}
+
+.warning pre code {
+    color: violet;
+}
+</style>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+tibble:::set_dftbl_hooks()
+
+options(
+  lifecycle_disable_warnings = FALSE,
+  lifecycle_verbose_soft_deprecation = TRUE,
+  lifecycle_repeat_warnings = TRUE
+)
+```
+
+This vignette is an attempt to define invariants in the behavior of `$`, `[[` and `[`, and their assignment counterparts `$<-`, `[[<-` and `[<-`.
+For each invariant an example is given.
+The [subsetting](articles/subset.html) and [subassignment](articles/subassign.html) articles give a comprehensive overview.
+
+```{r setup}
+library(tibble)
+
+new_df <- function() {
+  df <- data.frame(a = 1:4)
+  df$b <- letters[5:8]
+  df$cd <- list(9, 10:11, 12:14, "text")
+  df
+}
+
+new_tbl <- function() {
+  as_tibble(new_df())
+}
+```
+
+Results of the same code for data frames and tibbles are presented side by side:
+
+```{r show, dftbl = TRUE, dftbl_always = TRUE}
+new_df()
+```
+
+In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below.
+This allows to spot differences easier.
+
+```{r show-compare, dftbl = TRUE}
+new_df()
+```
+
+Subsetting operations are read-only.
+The same objects are reused in all examples:
+
+```{r ro}
+df <- new_df()
+tbl <- new_tbl()
+```
+
+We're also showing examples with hierarchical columns containting a data frame or a matrix where appropriate:
+
+```{r setup2}
+new_tbl2 <- function() {
+  tibble(
+    e = tbl,
+    f = diag(4)
+  )
+}
+
+new_df2 <- function() {
+  df2 <- new_tbl2()
+  class(df2) <- "data.frame"
+  class(df2$e) <- "data.frame"
+  df2
+}
+
+df2 <- new_df2()
+tbl2 <- new_tbl2()
+```
+
+For subassignment, we need a fresh copy of the data for each test.
+The `with_*()` functions allow for a more concise notation
+(`with_tbl()` and `with_*2()` omitted here for brevity):
+
+```{r with-df-def}
+with_df <- function(code, verbose = FALSE) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    df <- new_df()
+    !!code
+    df
+  })
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
+  rlang::eval_tidy(full_code)
+}
+```
+
+
+```{r with-tbl-def, include = FALSE}
+with_tbl <- function(code, verbose = FALSE) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    tbl <- new_tbl()
+    !!code
+    tbl
+  })
+  if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
+  rlang::eval_tidy(full_code)
+}
+```
+
+```{r with-df2-def, include = FALSE}
+with_df2 <- function(code) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    df2 <- new_df2()
+    !!code
+    df2
+  })
+  rlang::eval_tidy(full_code)
+}
+```
+
+
+```{r with-tbl2-def, include = FALSE}
+with_tbl2 <- function(code) {
+  code <- rlang::enexpr(code)
+  
+  full_code <- rlang::quo({
+    tbl2 <- new_tbl2()
+    !!code
+    tbl2
+  })
+  rlang::eval_tidy(full_code)
+}
+```
+
+This function takes an assignment expression and executes it on a fresh copy of the data.
+The first example prints what's really executed, further examples omit this output.
+
+```{r with-demo, dftbl = TRUE}
+with_df(df$a <- rev(df$a), verbose = TRUE)
+```
+
+
+## Subsetting and subassignment
+
+### `[[` requires scalar indexes
+
+```{r double-bracket-requires-scalar-indexes, dftbl = TRUE}
+df[[1]]
+df[[1:2]]
+df[[1:3]]
+df[[1, 1]]
+df[[1:2, 1]]
+df[[1, 1:2]]
+df[[1:2, 1:2]]
+with_df(df[[1]] <- 0)
+with_df(df[[1:2]] <- 0)
+with_df(df[[1:3]] <- 0)
+with_df(df[[1, 1]] <- 0)
+with_df(df[[1:2, 1]] <- 0)
+with_df(df[[1, 1:2]] <- 0)
+with_df(df[[1:2, 1:2]] <- 0)
+```
+
+### `x[[j]]` is equivalent to `unlist(x[j])`.
+
+```{r double-bracket-equivalent-to-unlist-single-bracket, dftbl = TRUE}
+df[[1]]
+unlist(df[1])
+df[[3]]
+unlist(df[3])
+df2[[1]]
+unlist(df2[1])
+df2[[2]]
+unlist(df2[2])
+```
+
+Corollary: `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+
+- atomic: `df[[1]]`
+- list: `df[[3]]`
+- data frame: `df2[[1]]`
+- matrix: `df2[[2]]`
+
+```{r double-bracket-equivalent-to-unlist-single-bracket-update, dftbl = TRUE}
+with_df(df[[1]] <- df[[3]])
+with_df(df[[1]] <- df2[[1]])
+with_df(df[[1]] <- df2[[2]])
+with_df(df[1] <- list(df[[3]]))
+with_df(df[1] <- list(df2[[1]]))
+with_df(df[1] <- list(df2[[2]]))
+with_df(df[[3]] <- df[[1]])
+with_df(df[[3]] <- df2[[1]])
+with_df(df[[3]] <- df2[[2]])
+with_df(df[3] <- list(df[[1]]))
+with_df(df[3] <- list(df2[[1]]))
+with_df(df[3] <- list(df2[[2]]))
+with_df2(df2[[1]] <- df[[1]])
+with_df2(df2[[1]] <- df[[3]])
+with_df2(df2[[1]] <- df2[[2]])
+with_df2(df2[1] <- list(df[[1]]))
+with_df2(df2[1] <- list(df[[3]]))
+with_df2(df2[1] <- list(df2[[2]]))
+with_df2(df2[[2]] <- df[[1]])
+with_df2(df2[[2]] <- df[[3]])
+with_df2(df2[[2]] <- df2[[1]])
+with_df2(df2[2] <- list(df[[1]]))
+with_df2(df2[2] <- list(df[[3]]))
+with_df2(df2[2] <- list(df2[[1]]))
+```
+
+### `x[[i, j]]` is equivalent to `x[i, ][[j]]`.
+
+```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
+df[[1, 1]]
+df[1, ][[1]]
+df[[1, 3]]
+df[1, ][[3]]
+df2[[1, 1]]
+df2[1, ][[1]]
+df2[[1, 2]]
+df2[1, ][[2]]
+```
+
+
+Corollary: `x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+
+- atomic: `df[[1]]`
+- list: `df[[3]]`
+- data frame: `df2[[1]]`
+- matrix: `df2[[2]]`
+
+```{r double-bracket-i-j-equivalent-to-row-subset-then-j-update, dftbl = TRUE}
+with_df(df[[1, 1]] <- df[[2, 1]])
+with_df(df[1, ][[1]] <- df[2, ][[1]])
+with_df(df[[1, 3]] <- df[[2, 3]])
+with_df(df[1, ][[3]] <- df[2, ][[3]])
+with_df2(df2[[1, 1]] <- df2[[2, 1]])
+with_df2(df2[1, ][[1]] <- df2[2, ][[1]])
+with_df2(df2[[1, 2]] <- df2[[2, 2]])
+with_df2(df2[1, ][[2]] <- df2[2, ][[2]])
+```
+
+### `x$name` is equivalent to `x[["name"]]`.
+
+```{r dollar-equivalent-to-subset, dftbl = TRUE}
+df$a
+df[["a"]]
+df$cd
+df[["cd"]]
+df2$e
+df2[["e"]]
+df2$f
+df2[["f"]]
+```
+
+Corollary: `$` does not implement partial matching.
+
+```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
+df$c
+df[["c"]]
+df$c <- 0
+df[["c"]] <- 0
+```
+
+
+## Subsetting
+
+### `x[[j]]` always returns an object of length `nrow(x)`.
+
+FIXME.
+
+Corollary: `x[[i, j]]` always returns an object of length 1 (by definition of `x[[1, j]]`).
+
+### `[` always returns a tibble.
+
+```{r bracket-always-returns-tibble, dftbl = TRUE}
+df[, 1]
+df[1, ]
+df[1, 1]
+df[, 1, drop = FALSE]
+df[1, , drop = FALSE]
+df[1, 1, drop = FALSE]
+```
+
+Exception: `drop = TRUE` returns a vector when subsetting a single column with two-dimensional indexing, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
+
+```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
+df[, 1, drop = TRUE]
+df[1, , drop = TRUE]
+df[1, 1, drop = TRUE]
+```
+
+### Dimensions are defined by i and j.
+
+The dimensions after `[` and `[[` are given by the length of `vec_as_index(i)` and `vec_as_index(j)`.
+
+```{r dimensions-are-defined-by-i-and-j, dftbl = TRUE}
+dim(df[1, 1])
+dim(df[1:3, 1:2])
+dim(df[TRUE, c("b", "cd")])
+dim(df[-3, -2])
+```
+
+
+Corollary: Missing dimensions are extended to an index vector along the rows or columns, respectively (with [rlib/vctrs#547](https://github.com/r-lib/vctrs/issues/547)).
+
+```{r dimensions-are-defined-by-i-and-j-missing, dftbl = TRUE}
+dim(df[])
+dim(df[,])
+dim(df[1, ])
+dim(df[, 1])
+```
+
+Corollary: Out-of-bounds indexing is not supported (but for compatibility reasons only a warning is issued for indexing beyond the number of rows).
+
+```{r dimensions-are-defined-by-i-and-j-oob, dftbl = TRUE}
+dim(df[5, ])
+dim(df[, 4])
+```
+
+Exception: `NA` indexing is supported for rows only.
+
+```{r dimensions-are-defined-by-i-and-j-na, dftbl = TRUE}
+df[NA_integer_, ]
+df[, NA_integer_]
+```
+
+
+## Subassignment
+
+### Only sizes 1 are recycled.
+
+```{r only-size-1-recycled, dftbl = TRUE}
+```
+
+### Columns don't have inner names.
+
+```{r columns-dont-have-names, dftbl = TRUE}
+with_df(df$x <- c(a = 4, b = 3, c = 2, d = 1))$x
+with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
+```
+
+### FIXME
+
+- [<-, [[<- and $<- can create new columns
+   - only if using named column index or if the rhs is a data frame specifying the names of the new columns
+   - only if updating entire columns (i is missing)
+- [<- can create new rows
+   - only right at the end of the existing data
+- [<-, [[<- and $<- can change the type of an existing column
+   - only if updating entire columns (i is missing), otherwise the data must be of the same type
+- For updating a subset of rows, only updating existing columns is supported
+- For updating more than one column, the rhs must be either
+   - a scalar (recycled)
+   - a vector sized same as the number of rows (new value for all columns)
+   - a data frame with the same column names as the target names
+- Multiple columns require a data frame at the rhs

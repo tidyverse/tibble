@@ -396,15 +396,6 @@ tbl_extract_assign <- function(x, j, value) {
 
   j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), full_column = TRUE)
 
-  if (!is.data.frame(value)) {
-    value <- rep_along(j, list(value))
-    if (is.character(j)) {
-      names(value) <- j
-    } else if (any(j > ncol(x))) {
-      error_new_column_needs_name()
-    }
-  }
-
   tbl_extract_assign_do(x, j, value)
 }
 
@@ -447,7 +438,17 @@ tbl_extract_assign_do <- function(x, j, value) {
   old_class <- class(x)
   xx <- unclass(x)
 
-  xx[j] <- unclass(value)
+  if (!is.list(value)) {
+    value <- rep_along(j, list(value))
+    if (is.character(j)) {
+      names(value) <- j
+    } else if (any(j > ncol(x))) {
+      error_new_column_needs_name()
+    }
+  }
+
+  for (jj in seq_along(j)) xx[[ j[[jj]] ]] <- value[[jj]]
+
   if (!is.character(j) && !is.null(names(value))) {
     names(xx)[j] <- names(value)
   }
