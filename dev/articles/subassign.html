@@ -1535,21 +1535,24 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb151-3" data-line-number="3"><span class="co">#&gt; 1 4 4          9</span></a>
+<a class="sourceLine" id="cb151-4" data-line-number="4"><span class="co">#&gt; 2 3 3     10, 11</span></a>
+<a class="sourceLine" id="cb151-5" data-line-number="5"><span class="co">#&gt; 3 2 2 12, 13, 14</span></a>
+<a class="sourceLine" id="cb151-6" data-line-number="6"><span class="co">#&gt; 4 1 1       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb151-3" data-line-number="3"><span class="co">#&gt;       a     b cd       </span></a>
-<a class="sourceLine" id="cb151-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb151-5" data-line-number="5"><span class="co">#&gt; 1     4     4 &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb151-6" data-line-number="6"><span class="co">#&gt; 2     3     3 &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb151-7" data-line-number="7"><span class="co">#&gt; 3     2     2 &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb151-8" data-line-number="8"><span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in .subset2(x, i, exact =
+#&gt; exact): subscript out of bounds</code></pre>
+</div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, ,
 #&gt; c("a", "b"), value = structure(list(:
@@ -1563,19 +1566,14 @@
 #&gt; 4 1 a       text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
-</div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b     cd       
-#&gt; * &lt;int&gt; &lt;fct&gt; &lt;list&gt;   
-#&gt; 1     4 d     &lt;dbl [1]&gt;
-#&gt; 2     3 c     &lt;int [2]&gt;
-#&gt; 3     2 b     &lt;int [3]&gt;
-#&gt; 4     1 a     &lt;chr [1]&gt;</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;fct&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb157-5" data-line-number="5"><span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb157-6" data-line-number="6"><span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb157-7" data-line-number="7"><span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb157-8" data-line-number="8"><span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1603,43 +1601,27 @@
 </td>
 <td>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
+<div class="error">
+<pre><code>#&gt; Error in .subset2(x, i, exact =
+#&gt; exact): subscript out of bounds</code></pre>
 </div>
-<pre><code>#&gt; # A tibble: 4 x 4
-#&gt;       a b     cd            c
-#&gt; * &lt;int&gt; &lt;fct&gt; &lt;list&gt;    &lt;int&gt;
-#&gt; 1     4 d     &lt;dbl [1]&gt;     4
-#&gt; 2     3 c     &lt;int [2]&gt;     3
-#&gt; 3     2 b     &lt;int [3]&gt;     2
-#&gt; 4     1 a     &lt;chr [1]&gt;     1</code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
-<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="co">#&gt; 1 4 d  4</span></a>
-<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="co">#&gt; 2 3 c  3</span></a>
-<a class="sourceLine" id="cb163-5" data-line-number="5"><span class="co">#&gt; 3 2 b  2</span></a>
-<a class="sourceLine" id="cb163-6" data-line-number="6"><span class="co">#&gt; 4 1 a  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb162-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
+<a class="sourceLine" id="cb162-3" data-line-number="3"><span class="co">#&gt; 1 4 d  4</span></a>
+<a class="sourceLine" id="cb162-4" data-line-number="4"><span class="co">#&gt; 2 3 c  3</span></a>
+<a class="sourceLine" id="cb162-5" data-line-number="5"><span class="co">#&gt; 3 2 b  2</span></a>
+<a class="sourceLine" id="cb162-6" data-line-number="6"><span class="co">#&gt; 4 1 a  1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in .subset2(x, i, exact =
+#&gt; exact): subscript out of bounds</code></pre>
 </div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b        cd
-#&gt; * &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-#&gt; 1     4 d         4
-#&gt; 2     3 c         3
-#&gt; 3     2 b         2
-#&gt; 4     1 a         1</code></pre>
 </td>
 </tr>
 </tbody></table>
@@ -1650,15 +1632,15 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb167-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="co">#&gt; 2 1 1          1</span></a>
-<a class="sourceLine" id="cb167-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb167-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb165-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb165-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb165-4" data-line-number="4"><span class="co">#&gt; 2 1 1          1</span></a>
+<a class="sourceLine" id="cb165-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb165-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value` &lt;double&gt;
 #&gt; and
@@ -1668,15 +1650,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> "x"</span>)</a>
-<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb170-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb170-4" data-line-number="4"><span class="co">#&gt; 2 x x          x</span></a>
-<a class="sourceLine" id="cb170-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb170-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> "x"</span>)</a>
+<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb168-4" data-line-number="4"><span class="co">#&gt; 2 x x          x</span></a>
+<a class="sourceLine" id="cb168-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb168-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value`
 #&gt; &lt;character&gt;
@@ -1686,15 +1668,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a>
-<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="co">#&gt; 2 1 x          1</span></a>
-<a class="sourceLine" id="cb173-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb173-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a>
+<a class="sourceLine" id="cb171-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb171-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb171-4" data-line-number="4"><span class="co">#&gt; 2 1 x          1</span></a>
+<a class="sourceLine" id="cb171-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb171-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value` &lt;double&gt;
 #&gt; and
@@ -1704,27 +1686,27 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="co">#&gt; 2 1 x          y</span></a>
-<a class="sourceLine" id="cb176-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb176-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb174-4" data-line-number="4"><span class="co">#&gt; 2 1 x          y</span></a>
+<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb174-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb177-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb177-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
-<a class="sourceLine" id="cb177-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb177-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb177-6" data-line-number="6"><span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb177-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb177-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
+<a class="sourceLine" id="cb175-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb175-6" data-line-number="6"><span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb175-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb175-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2, , value = structure(list(a = 1, :
@@ -1738,7 +1720,7 @@
 #&gt; 4 4 h       text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value`
 #&gt; &lt;character&gt;
@@ -1748,36 +1730,36 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">0</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb183-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb183-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">0</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb184-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb184-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
-<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb184-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb184-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb184-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb184-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb182-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
+<a class="sourceLine" id="cb182-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb182-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb182-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb182-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb182-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb185-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb185-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb185-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb185-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a>
-<a class="sourceLine" id="cb185-7" data-line-number="7"><span class="co">#&gt; 5 1 x          y</span></a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb183-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb183-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a>
+<a class="sourceLine" id="cb183-7" data-line-number="7"><span class="co">#&gt; 5 1 x          y</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't index beyond the end of
 #&gt; a vector.
@@ -1794,15 +1776,15 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
-<a class="sourceLine" id="cb188-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
-<a class="sourceLine" id="cb188-4" data-line-number="4"><span class="co">#&gt; 2 1 1    1</span></a>
-<a class="sourceLine" id="cb188-5" data-line-number="5"><span class="co">#&gt; 3 1 1    1</span></a>
-<a class="sourceLine" id="cb188-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
+<a class="sourceLine" id="cb186-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
+<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="co">#&gt; 2 1 1    1</span></a>
+<a class="sourceLine" id="cb186-5" data-line-number="5"><span class="co">#&gt; 3 1 1    1</span></a>
+<a class="sourceLine" id="cb186-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value` &lt;double&gt;
 #&gt; and
@@ -1812,15 +1794,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb191-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
-<a class="sourceLine" id="cb191-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
-<a class="sourceLine" id="cb191-4" data-line-number="4"><span class="co">#&gt; 2 1 1    1</span></a>
-<a class="sourceLine" id="cb191-5" data-line-number="5"><span class="co">#&gt; 3 2 2    2</span></a>
-<a class="sourceLine" id="cb191-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
+<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
+<a class="sourceLine" id="cb189-4" data-line-number="4"><span class="co">#&gt; 2 1 1    1</span></a>
+<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="co">#&gt; 3 2 2    2</span></a>
+<a class="sourceLine" id="cb189-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value` &lt;integer&gt;
 #&gt; and
@@ -1830,15 +1812,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
-<a class="sourceLine" id="cb194-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
-<a class="sourceLine" id="cb194-4" data-line-number="4"><span class="co">#&gt; 2 x x    x</span></a>
-<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="co">#&gt; 3 y y    y</span></a>
-<a class="sourceLine" id="cb194-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a>
+<a class="sourceLine" id="cb192-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
+<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
+<a class="sourceLine" id="cb192-4" data-line-number="4"><span class="co">#&gt; 2 x x    x</span></a>
+<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="co">#&gt; 3 y y    y</span></a>
+<a class="sourceLine" id="cb192-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value`
 #&gt; &lt;character&gt;
@@ -1848,15 +1830,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
-<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
-<a class="sourceLine" id="cb197-4" data-line-number="4"><span class="co">#&gt; 2 1 x    1</span></a>
-<a class="sourceLine" id="cb197-5" data-line-number="5"><span class="co">#&gt; 3 2 y    2</span></a>
-<a class="sourceLine" id="cb197-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
+<a class="sourceLine" id="cb195-4" data-line-number="4"><span class="co">#&gt; 2 1 x    1</span></a>
+<a class="sourceLine" id="cb195-5" data-line-number="5"><span class="co">#&gt; 3 2 y    2</span></a>
+<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value` &lt;integer&gt;
 #&gt; and
@@ -1866,47 +1848,47 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
+<a class="sourceLine" id="cb198-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
+<a class="sourceLine" id="cb198-4" data-line-number="4"><span class="co">#&gt; 2 1 x    y</span></a>
+<a class="sourceLine" id="cb198-5" data-line-number="5"><span class="co">#&gt; 3 1 x    y</span></a>
+<a class="sourceLine" id="cb198-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb199-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
+<a class="sourceLine" id="cb199-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb199-7" data-line-number="7"><span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb199-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
 <a class="sourceLine" id="cb200-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
 <a class="sourceLine" id="cb200-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
 <a class="sourceLine" id="cb200-4" data-line-number="4"><span class="co">#&gt; 2 1 x    y</span></a>
-<a class="sourceLine" id="cb200-5" data-line-number="5"><span class="co">#&gt; 3 1 x    y</span></a>
+<a class="sourceLine" id="cb200-5" data-line-number="5"><span class="co">#&gt; 3 2 x    y</span></a>
 <a class="sourceLine" id="cb200-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
 <a class="sourceLine" id="cb201-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb201-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
 <a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
 <a class="sourceLine" id="cb201-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
 <a class="sourceLine" id="cb201-6" data-line-number="6"><span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb201-7" data-line-number="7"><span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb201-7" data-line-number="7"><span class="co">#&gt; 3     2 x     &lt;chr [1]&gt;</span></a>
 <a class="sourceLine" id="cb201-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="co">#&gt;   a b   cd</span></a>
-<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="co">#&gt; 1 1 e    9</span></a>
-<a class="sourceLine" id="cb202-4" data-line-number="4"><span class="co">#&gt; 2 1 x    y</span></a>
-<a class="sourceLine" id="cb202-5" data-line-number="5"><span class="co">#&gt; 3 2 x    y</span></a>
-<a class="sourceLine" id="cb202-6" data-line-number="6"><span class="co">#&gt; 4 4 h text</span></a></code></pre></div>
-</td>
-<td>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
-<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb203-7" data-line-number="7"><span class="co">#&gt; 3     2 x     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb203-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2:3, , value = structure(list(a =
@@ -1920,7 +1902,7 @@
 #&gt; 4 4 h text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value`
 #&gt; &lt;character&gt;
@@ -1930,27 +1912,27 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="co">#&gt;   a b     cd</span></a>
-<a class="sourceLine" id="cb209-3" data-line-number="3"><span class="co">#&gt; 1 1 e      9</span></a>
-<a class="sourceLine" id="cb209-4" data-line-number="4"><span class="co">#&gt; 2 2 f 10, 11</span></a>
-<a class="sourceLine" id="cb209-5" data-line-number="5"><span class="co">#&gt; 3 1 x      y</span></a>
-<a class="sourceLine" id="cb209-6" data-line-number="6"><span class="co">#&gt; 4 2 x      y</span></a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="co">#&gt;   a b     cd</span></a>
+<a class="sourceLine" id="cb207-3" data-line-number="3"><span class="co">#&gt; 1 1 e      9</span></a>
+<a class="sourceLine" id="cb207-4" data-line-number="4"><span class="co">#&gt; 2 2 f 10, 11</span></a>
+<a class="sourceLine" id="cb207-5" data-line-number="5"><span class="co">#&gt; 3 1 x      y</span></a>
+<a class="sourceLine" id="cb207-6" data-line-number="6"><span class="co">#&gt; 4 2 x      y</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb210-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb210-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
-<a class="sourceLine" id="cb210-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb210-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb210-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb210-7" data-line-number="7"><span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb210-8" data-line-number="8"><span class="co">#&gt; 4     2 x     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb208-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb208-3" data-line-number="3"><span class="co">#&gt;       a b     c        </span></a>
+<a class="sourceLine" id="cb208-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb208-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb208-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb208-8" data-line-number="8"><span class="co">#&gt; 4     2 x     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 0:1, , value = structure(list(a = 1:2, :
@@ -1976,7 +1958,7 @@
 #&gt; 4 4 h       text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Tibble columns must have consistent
 #&gt; lengths, only values of length one
@@ -1987,16 +1969,16 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
-<a class="sourceLine" id="cb218-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
-<a class="sourceLine" id="cb218-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb218-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb218-6" data-line-number="6"><span class="co">#&gt; 4 1 x          y</span></a>
-<a class="sourceLine" id="cb218-7" data-line-number="7"><span class="co">#&gt; 5 2 x          y</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a>
+<a class="sourceLine" id="cb216-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb216-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
+<a class="sourceLine" id="cb216-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb216-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb216-6" data-line-number="6"><span class="co">#&gt; 4 1 x          y</span></a>
+<a class="sourceLine" id="cb216-7" data-line-number="7"><span class="co">#&gt; 5 2 x          y</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't index beyond the end of
 #&gt; a vector.
@@ -2015,41 +1997,41 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
-<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb221-5" data-line-number="5"><span class="co">#&gt; 1     1     1     1</span></a>
-<a class="sourceLine" id="cb221-6" data-line-number="6"><span class="co">#&gt; 2     1     1     1</span></a>
-<a class="sourceLine" id="cb221-7" data-line-number="7"><span class="co">#&gt; 3     1     1     1</span></a>
-<a class="sourceLine" id="cb221-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
+<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb219-5" data-line-number="5"><span class="co">#&gt; 1     1     1     1</span></a>
+<a class="sourceLine" id="cb219-6" data-line-number="6"><span class="co">#&gt; 2     1     1     1</span></a>
+<a class="sourceLine" id="cb219-7" data-line-number="7"><span class="co">#&gt; 3     1     1     1</span></a>
+<a class="sourceLine" id="cb219-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb222-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb222-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
-<a class="sourceLine" id="cb222-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb222-5" data-line-number="5"><span class="co">#&gt; 1     4     4     4</span></a>
-<a class="sourceLine" id="cb222-6" data-line-number="6"><span class="co">#&gt; 2     3     3     3</span></a>
-<a class="sourceLine" id="cb222-7" data-line-number="7"><span class="co">#&gt; 3     2     2     2</span></a>
-<a class="sourceLine" id="cb222-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb220-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
+<a class="sourceLine" id="cb220-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb220-5" data-line-number="5"><span class="co">#&gt; 1     4     4     4</span></a>
+<a class="sourceLine" id="cb220-6" data-line-number="6"><span class="co">#&gt; 2     3     3     3</span></a>
+<a class="sourceLine" id="cb220-7" data-line-number="7"><span class="co">#&gt; 3     2     2     2</span></a>
+<a class="sourceLine" id="cb220-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
-<a class="sourceLine" id="cb223-3" data-line-number="3"><span class="co">#&gt; 1 3 2  1</span></a>
-<a class="sourceLine" id="cb223-4" data-line-number="4"><span class="co">#&gt; 2 2 1  3</span></a>
-<a class="sourceLine" id="cb223-5" data-line-number="5"><span class="co">#&gt; 3 1 3  2</span></a>
-<a class="sourceLine" id="cb223-6" data-line-number="6"><span class="co">#&gt; 4 3 2  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="co">#&gt; 1 3 2  1</span></a>
+<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="co">#&gt; 2 2 1  3</span></a>
+<a class="sourceLine" id="cb221-5" data-line-number="5"><span class="co">#&gt; 3 1 3  2</span></a>
+<a class="sourceLine" id="cb221-6" data-line-number="6"><span class="co">#&gt; 4 3 2  1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Vector of length 3 cannot be
 #&gt; recycled to
@@ -2061,7 +2043,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, ,
 #&gt; value = 5:1): replacement has 5
@@ -2069,7 +2051,7 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Vector of length 5 cannot be
 #&gt; recycled to
@@ -2081,60 +2063,52 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a>
-<a class="sourceLine" id="cb230-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
-<a class="sourceLine" id="cb230-3" data-line-number="3"><span class="co">#&gt; 1 1 x  1</span></a>
-<a class="sourceLine" id="cb230-4" data-line-number="4"><span class="co">#&gt; 2 1 x  1</span></a>
-<a class="sourceLine" id="cb230-5" data-line-number="5"><span class="co">#&gt; 3 1 x  1</span></a>
-<a class="sourceLine" id="cb230-6" data-line-number="6"><span class="co">#&gt; 4 1 x  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
+<a class="sourceLine" id="cb228-3" data-line-number="3"><span class="co">#&gt; 1 1 x  1</span></a>
+<a class="sourceLine" id="cb228-4" data-line-number="4"><span class="co">#&gt; 2 1 x  1</span></a>
+<a class="sourceLine" id="cb228-5" data-line-number="5"><span class="co">#&gt; 3 1 x  1</span></a>
+<a class="sourceLine" id="cb228-6" data-line-number="6"><span class="co">#&gt; 4 1 x  1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in .subset2(x, i, exact =
+#&gt; exact): subscript out of bounds</code></pre>
 </div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b        cd
-#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
-#&gt; 1     1 x         1
-#&gt; 2     1 x         1
-#&gt; 3     1 x         1
-#&gt; 4     1 x         1</code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb234-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb234-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
-<a class="sourceLine" id="cb234-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb234-5" data-line-number="5"><span class="co">#&gt; 1     4 x         2</span></a>
-<a class="sourceLine" id="cb234-6" data-line-number="6"><span class="co">#&gt; 2     3 x         2</span></a>
-<a class="sourceLine" id="cb234-7" data-line-number="7"><span class="co">#&gt; 3     2 x         2</span></a>
-<a class="sourceLine" id="cb234-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb231-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb231-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb231-5" data-line-number="5"><span class="co">#&gt; 1     4 x         2</span></a>
+<a class="sourceLine" id="cb231-6" data-line-number="6"><span class="co">#&gt; 2     3 x         2</span></a>
+<a class="sourceLine" id="cb231-7" data-line-number="7"><span class="co">#&gt; 3     2 x         2</span></a>
+<a class="sourceLine" id="cb231-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb235-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb235-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
-<a class="sourceLine" id="cb235-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb235-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
-<a class="sourceLine" id="cb235-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
-<a class="sourceLine" id="cb235-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
-<a class="sourceLine" id="cb235-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb232-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb232-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb232-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb232-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
+<a class="sourceLine" id="cb232-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
+<a class="sourceLine" id="cb232-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
+<a class="sourceLine" id="cb232-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">with_df</span>(df[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, ,
 #&gt; value = structure(list(X1 = 1, X.x.
@@ -2149,74 +2123,69 @@
 #&gt; 4 1 x  2</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
-</div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b        cd
-#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
-#&gt; 1     1 x         2
-#&gt; 2     1 x         2
-#&gt; 3     1 x         2
-#&gt; 4     1 x         2</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb236-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb236-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb236-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb236-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
+<a class="sourceLine" id="cb236-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
+<a class="sourceLine" id="cb236-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
+<a class="sourceLine" id="cb236-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span>tbl)</a>
-<a class="sourceLine" id="cb242-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb242-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb242-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb242-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb242-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb242-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb242-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span>tbl)</a>
+<a class="sourceLine" id="cb237-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb237-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb237-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb237-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb237-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb237-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb237-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb243-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb243-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
-<a class="sourceLine" id="cb243-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb243-5" data-line-number="5"><span class="co">#&gt; 1     1     1     1</span></a>
-<a class="sourceLine" id="cb243-6" data-line-number="6"><span class="co">#&gt; 2     1     1     1</span></a>
-<a class="sourceLine" id="cb243-7" data-line-number="7"><span class="co">#&gt; 3     1     1     1</span></a>
-<a class="sourceLine" id="cb243-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb238-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb238-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
+<a class="sourceLine" id="cb238-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb238-5" data-line-number="5"><span class="co">#&gt; 1     1     1     1</span></a>
+<a class="sourceLine" id="cb238-6" data-line-number="6"><span class="co">#&gt; 2     1     1     1</span></a>
+<a class="sourceLine" id="cb238-7" data-line-number="7"><span class="co">#&gt; 3     1     1     1</span></a>
+<a class="sourceLine" id="cb238-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb244-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb244-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
-<a class="sourceLine" id="cb244-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb244-5" data-line-number="5"><span class="co">#&gt; 1     4     4     4</span></a>
-<a class="sourceLine" id="cb244-6" data-line-number="6"><span class="co">#&gt; 2     3     3     3</span></a>
-<a class="sourceLine" id="cb244-7" data-line-number="7"><span class="co">#&gt; 3     2     2     2</span></a>
-<a class="sourceLine" id="cb244-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="co">#&gt;       a     b    cd</span></a>
+<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb239-5" data-line-number="5"><span class="co">#&gt; 1     4     4     4</span></a>
+<a class="sourceLine" id="cb239-6" data-line-number="6"><span class="co">#&gt; 2     3     3     3</span></a>
+<a class="sourceLine" id="cb239-7" data-line-number="7"><span class="co">#&gt; 3     2     2     2</span></a>
+<a class="sourceLine" id="cb239-8" data-line-number="8"><span class="co">#&gt; 4     1     1     1</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb245-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
-<a class="sourceLine" id="cb245-3" data-line-number="3"><span class="co">#&gt; 1 3 2  1</span></a>
-<a class="sourceLine" id="cb245-4" data-line-number="4"><span class="co">#&gt; 2 2 1  3</span></a>
-<a class="sourceLine" id="cb245-5" data-line-number="5"><span class="co">#&gt; 3 1 3  2</span></a>
-<a class="sourceLine" id="cb245-6" data-line-number="6"><span class="co">#&gt; 4 3 2  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb240-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
+<a class="sourceLine" id="cb240-3" data-line-number="3"><span class="co">#&gt; 1 3 2  1</span></a>
+<a class="sourceLine" id="cb240-4" data-line-number="4"><span class="co">#&gt; 2 2 1  3</span></a>
+<a class="sourceLine" id="cb240-5" data-line-number="5"><span class="co">#&gt; 3 1 3  2</span></a>
+<a class="sourceLine" id="cb240-6" data-line-number="6"><span class="co">#&gt; 4 3 2  1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Vector of length 3 cannot be
 #&gt; recycled to
@@ -2228,7 +2197,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, ,
 #&gt; , value = 5:1): replacement has 5
@@ -2236,7 +2205,7 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Vector of length 5 cannot be
 #&gt; recycled to
@@ -2248,60 +2217,52 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a>
-<a class="sourceLine" id="cb252-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
-<a class="sourceLine" id="cb252-3" data-line-number="3"><span class="co">#&gt; 1 1 x  1</span></a>
-<a class="sourceLine" id="cb252-4" data-line-number="4"><span class="co">#&gt; 2 1 x  1</span></a>
-<a class="sourceLine" id="cb252-5" data-line-number="5"><span class="co">#&gt; 3 1 x  1</span></a>
-<a class="sourceLine" id="cb252-6" data-line-number="6"><span class="co">#&gt; 4 1 x  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a>
+<a class="sourceLine" id="cb247-2" data-line-number="2"><span class="co">#&gt;   a b cd</span></a>
+<a class="sourceLine" id="cb247-3" data-line-number="3"><span class="co">#&gt; 1 1 x  1</span></a>
+<a class="sourceLine" id="cb247-4" data-line-number="4"><span class="co">#&gt; 2 1 x  1</span></a>
+<a class="sourceLine" id="cb247-5" data-line-number="5"><span class="co">#&gt; 3 1 x  1</span></a>
+<a class="sourceLine" id="cb247-6" data-line-number="6"><span class="co">#&gt; 4 1 x  1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in .subset2(x, i, exact =
+#&gt; exact): subscript out of bounds</code></pre>
 </div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b        cd
-#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
-#&gt; 1     1 x         1
-#&gt; 2     1 x         1
-#&gt; 3     1 x         1
-#&gt; 4     1 x         1</code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb256-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb256-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
-<a class="sourceLine" id="cb256-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb256-5" data-line-number="5"><span class="co">#&gt; 1     4 x         2</span></a>
-<a class="sourceLine" id="cb256-6" data-line-number="6"><span class="co">#&gt; 2     3 x         2</span></a>
-<a class="sourceLine" id="cb256-7" data-line-number="7"><span class="co">#&gt; 3     2 x         2</span></a>
-<a class="sourceLine" id="cb256-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb250-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb250-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb250-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb250-5" data-line-number="5"><span class="co">#&gt; 1     4 x         2</span></a>
+<a class="sourceLine" id="cb250-6" data-line-number="6"><span class="co">#&gt; 2     3 x         2</span></a>
+<a class="sourceLine" id="cb250-7" data-line-number="7"><span class="co">#&gt; 3     2 x         2</span></a>
+<a class="sourceLine" id="cb250-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb257-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb257-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
-<a class="sourceLine" id="cb257-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb257-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
-<a class="sourceLine" id="cb257-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
-<a class="sourceLine" id="cb257-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
-<a class="sourceLine" id="cb257-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb251-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb251-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb251-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
+<a class="sourceLine" id="cb251-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
+<a class="sourceLine" id="cb251-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
+<a class="sourceLine" id="cb251-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">with_df</span>(df[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, , ,
 #&gt; value = structure(list(X1 = 1, :
@@ -2315,33 +2276,28 @@
 #&gt; 4 1 x  2</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
-<div class="warning">
-<pre><code>#&gt; Warning in xx[j] &lt;- unclass(value):
-#&gt; number of items to replace is not a
-#&gt; multiple of replacement length</code></pre>
-</div>
-<pre><code>#&gt; # A tibble: 4 x 3
-#&gt;       a b        cd
-#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
-#&gt; 1     1 x         2
-#&gt; 2     1 x         2
-#&gt; 3     1 x         2
-#&gt; 4     1 x         2</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb255-3" data-line-number="3"><span class="co">#&gt;       a b        cd</span></a>
+<a class="sourceLine" id="cb255-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb255-5" data-line-number="5"><span class="co">#&gt; 1     1 x         2</span></a>
+<a class="sourceLine" id="cb255-6" data-line-number="6"><span class="co">#&gt; 2     1 x         2</span></a>
+<a class="sourceLine" id="cb255-7" data-line-number="7"><span class="co">#&gt; 3     1 x         2</span></a>
+<a class="sourceLine" id="cb255-8" data-line-number="8"><span class="co">#&gt; 4     1 x         2</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span>tbl)</a>
-<a class="sourceLine" id="cb264-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb264-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
-<a class="sourceLine" id="cb264-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb264-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb264-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb264-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb264-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span>tbl)</a>
+<a class="sourceLine" id="cb256-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb256-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb256-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb256-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb256-6" data-line-number="6"><span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb256-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb256-8" data-line-number="8"><span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2352,15 +2308,15 @@
 <p>Due to tibble’s default of <code>drop = FALSE</code>, updating a portion of a <code>[</code> subset is still safe, because tibble is still in control. Only one example is given here.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a>
-<a class="sourceLine" id="cb265-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
-<a class="sourceLine" id="cb265-3" data-line-number="3"><span class="co">#&gt; 1 b e          9</span></a>
-<a class="sourceLine" id="cb265-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
-<a class="sourceLine" id="cb265-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb265-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a>
+<a class="sourceLine" id="cb257-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb257-3" data-line-number="3"><span class="co">#&gt; 1 b e          9</span></a>
+<a class="sourceLine" id="cb257-4" data-line-number="4"><span class="co">#&gt; 2 2 f     10, 11</span></a>
+<a class="sourceLine" id="cb257-5" data-line-number="5"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb257-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; No common type for `value`
 #&gt; &lt;character&gt;
