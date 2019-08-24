@@ -323,7 +323,3 @@ Only one example is given here.
 ```{r bracket-assign-subset, dftbl = TRUE}
 with_df(df["a"][1, ] <- "b")
 ```
-
-## Design questions
-
-1. Should we respond to `drop = TRUE` requests for subsetting rows, and return a list?
