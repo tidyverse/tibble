@@ -172,9 +172,9 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 ```
 
 
-## Subsetting and subassignment
+# Subsetting and subassignment
 
-### `[[` requires scalar indexes
+## `[[` requires scalar indexes
 
 ```{r double-bracket-requires-scalar-indexes, dftbl = TRUE}
 df[[1]]
@@ -193,7 +193,7 @@ with_df(df[[1, 1:2]] <- 0)
 with_df(df[[1:2, 1:2]] <- 0)
 ```
 
-### `x[[j]]` is equivalent to `unwrap(x[j])`.
+## `x[[j]]` is equivalent to `unwrap(x[j])`.
 
 ```{r unwrap}
 unwrap <- function(x) {
@@ -247,7 +247,7 @@ with_df2(df2[2] <- list(df[[3]]))
 with_df2(df2[2] <- list(df2[[1]]))
 ```
 
-### `x[[i, j]]` is equivalent to `x[i, ][[j]]`.
+## `x[[i, j]]` is equivalent to `x[i, ][[j]]`.
 
 ```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
 df[[1, 1]]
@@ -279,7 +279,7 @@ with_df2(df2[[1, 2]] <- df2[[2, 2]])
 with_df2(df2[1, ][[2]] <- df2[2, ][[2]])
 ```
 
-### `x$name` is equivalent to `x[["name"]]`.
+## `x$name` is equivalent to `x[["name"]]`.
 
 ```{r dollar-equivalent-to-subset, dftbl = TRUE}
 df$a
@@ -302,15 +302,15 @@ df[["c"]] <- 0
 ```
 
 
-## Subsetting
+# Subsetting
 
-### `x[[j]]` always returns an object of length `nrow(x)`.
+## `x[[j]]` always returns an object of length `nrow(x)`.
 
 FIXME.
 
 Corollary: `x[[i, j]]` always returns an object of length 1 (by definition of `x[[1, j]]`).
 
-### `[` always returns a tibble.
+## `[` always returns a tibble.
 
 ```{r bracket-always-returns-tibble, dftbl = TRUE}
 df[, 1]
@@ -329,7 +329,7 @@ df[1, , drop = TRUE]
 df[1, 1, drop = TRUE]
 ```
 
-### Dimensions are defined by i and j.
+## Dimensions are defined by i and j.
 
 The dimensions after `[` and `[[` are given by the length of `vec_as_index(i)` and `vec_as_index(j)`.
 
@@ -365,21 +365,21 @@ df[, NA_integer_]
 ```
 
 
-## Subassignment
+# Subassignment
 
-### Only sizes 1 are recycled.
+## Only sizes 1 are recycled.
 
 ```{r only-size-1-recycled, dftbl = TRUE}
 ```
 
-### Columns don't have inner names.
+## Columns don't have inner names.
 
 ```{r columns-dont-have-names, dftbl = TRUE}
 with_df(df$x <- c(a = 4, b = 3, c = 2, d = 1))$x
 with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
 ```
 
-### FIXME
+## FIXME
 
 - [<-, [[<- and $<- can create new columns
    - only if using named column index or if the rhs is a data frame specifying the names of the new columns
