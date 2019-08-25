@@ -41,7 +41,7 @@ options(
 
 This vignette is an attempt to define invariants in the behavior of `$`, `[[` and `[`, and their assignment counterparts `$<-`, `[[<-` and `[<-`.
 For each invariant an example is given.
-The [subsetting](articles/subset.html) and [subassignment](articles/subassign.html) articles give a comprehensive overview.
+Currently, the `vignette("subset")` and `vignette("subassign")` articles give a more comprehensive overview, but will be merged into this article at some point.
 
 ```{r setup}
 library(tibble)
