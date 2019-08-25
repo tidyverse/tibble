@@ -151,7 +151,7 @@
     color: violet;
 }
 </style>
-<p>This vignette is an attempt to define invariants in the behavior of <code>$</code>, <code>[[</code> and <code>[</code>, and their assignment counterparts <code>$&lt;-</code>, <code>[[&lt;-</code> and <code>[&lt;-</code>. For each invariant an example is given. The <a href="articles/subset.html">subsetting</a> and <a href="articles/subassign.html">subassignment</a> articles give a comprehensive overview.</p>
+<p>This vignette is an attempt to define invariants in the behavior of <code>$</code>, <code>[[</code> and <code>[</code>, and their assignment counterparts <code>$&lt;-</code>, <code>[[&lt;-</code> and <code>[&lt;-</code>. For each invariant an example is given. Currently, the <code><a href="../articles/subset.html">vignette("subset")</a></code> and <code><a href="../articles/subassign.html">vignette("subassign")</a></code> articles give a more comprehensive overview, but will be merged into this article at some point.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">new_df &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
@@ -273,12 +273,12 @@
 <a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
-<div id="subsetting-and-subassignment" class="section level2">
+<div id="subsetting-and-subassignment" class="section level1">
+<h1 class="hasAnchor">
+<a href="#subsetting-and-subassignment" class="anchor"></a>Subsetting and subassignment</h1>
+<div id="requires-scalar-indexes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subsetting-and-subassignment" class="anchor"></a>Subsetting and subassignment</h2>
-<div id="requires-scalar-indexes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#requires-scalar-indexes" class="anchor"></a><code>[[</code> requires scalar indexes</h3>
+<a href="#requires-scalar-indexes" class="anchor"></a><code>[[</code> requires scalar indexes</h2>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -498,9 +498,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="xj-is-equivalent-to-unwrapxj-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#xj-is-equivalent-to-unwrapxj-" class="anchor"></a><code>x[[j]]</code> is equivalent to <code>unwrap(x[j])</code>.</h3>
+<div id="xj-is-equivalent-to-unwrapxj-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xj-is-equivalent-to-unwrapxj-" class="anchor"></a><code>x[[j]]</code> is equivalent to <code>unwrap(x[j])</code>.</h2>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">unwrap &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb56-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">unclass</a></span>(x)[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb56-3" data-line-number="3">}</a></code></pre></div>
@@ -964,9 +964,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="xi-j-is-equivalent-to-xi-j-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#xi-j-is-equivalent-to-xi-j-" class="anchor"></a><code>x[[i, j]]</code> is equivalent to <code>x[i, ][[j]]</code>.</h3>
+<div id="xi-j-is-equivalent-to-xi-j-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xi-j-is-equivalent-to-xi-j-" class="anchor"></a><code>x[[i, j]]</code> is equivalent to <code>x[i, ][[j]]</code>.</h2>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1191,9 +1191,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="xname-is-equivalent-to-xname-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#xname-is-equivalent-to-xname-" class="anchor"></a><code>x$name</code> is equivalent to <code>x[["name"]]</code>.</h3>
+<div id="xname-is-equivalent-to-xname-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xname-is-equivalent-to-xname-" class="anchor"></a><code>x$name</code> is equivalent to <code>x[["name"]]</code>.</h2>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1357,18 +1357,18 @@
 </tbody></table>
 </div>
 </div>
-<div id="subsetting" class="section level2">
+<div id="subsetting" class="section level1">
+<h1 class="hasAnchor">
+<a href="#subsetting" class="anchor"></a>Subsetting</h1>
+<div id="xj-always-returns-an-object-of-length-nrowx-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subsetting" class="anchor"></a>Subsetting</h2>
-<div id="xj-always-returns-an-object-of-length-nrowx-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#xj-always-returns-an-object-of-length-nrowx-" class="anchor"></a><code>x[[j]]</code> always returns an object of length <code><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow(x)</a></code>.</h3>
+<a href="#xj-always-returns-an-object-of-length-nrowx-" class="anchor"></a><code>x[[j]]</code> always returns an object of length <code><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow(x)</a></code>.</h2>
 <p>FIXME.</p>
 <p>Corollary: <code>x[[i, j]]</code> always returns an object of length 1 (by definition of <code>x[[1, j]]</code>).</p>
 </div>
-<div id="always-returns-a-tibble-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#always-returns-a-tibble-" class="anchor"></a><code>[</code> always returns a tibble.</h3>
+<div id="always-returns-a-tibble-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#always-returns-a-tibble-" class="anchor"></a><code>[</code> always returns a tibble.</h2>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1488,9 +1488,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="dimensions-are-defined-by-i-and-j-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dimensions-are-defined-by-i-and-j-" class="anchor"></a>Dimensions are defined by i and j.</h3>
+<div id="dimensions-are-defined-by-i-and-j-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dimensions-are-defined-by-i-and-j-" class="anchor"></a>Dimensions are defined by i and j.</h2>
 <p>The dimensions after <code>[</code> and <code>[[</code> are given by the length of <code>vec_as_index(i)</code> and <code>vec_as_index(j)</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -1630,20 +1630,20 @@
 </tbody></table>
 </div>
 </div>
-<div id="subassignment" class="section level2">
+<div id="subassignment" class="section level1">
+<h1 class="hasAnchor">
+<a href="#subassignment" class="anchor"></a>Subassignment</h1>
+<div id="only-sizes-1-are-recycled-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subassignment" class="anchor"></a>Subassignment</h2>
-<div id="only-sizes-1-are-recycled-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#only-sizes-1-are-recycled-" class="anchor"></a>Only sizes 1 are recycled.</h3>
+<a href="#only-sizes-1-are-recycled-" class="anchor"></a>Only sizes 1 are recycled.</h2>
 <table class="table dftbl"><tbody><tr>
 <td>
 </td>
 </tr></tbody></table>
 </div>
-<div id="columns-dont-have-inner-names-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#columns-dont-have-inner-names-" class="anchor"></a>Columns don’t have inner names.</h3>
+<div id="columns-dont-have-inner-names-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#columns-dont-have-inner-names-" class="anchor"></a>Columns don’t have inner names.</h2>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1676,9 +1676,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="fixme" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fixme" class="anchor"></a>FIXME</h3>
+<div id="fixme" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fixme" class="anchor"></a>FIXME</h2>
 <ul>
 <li>[&lt;-, [[&lt;- and $&lt;- can create new columns
 <ul>
@@ -1715,9 +1715,28 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#subsetting-and-subassignment">Subsetting and subassignment</a></li>
-      <li><a href="#subsetting">Subsetting</a></li>
-      <li><a href="#subassignment">Subassignment</a></li>
+<li>
+<a href="#subsetting-and-subassignment">Subsetting and subassignment</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#requires-scalar-indexes"><code>[[</code> requires scalar indexes</a></li>
+      <li><a href="#xj-is-equivalent-to-unwrapxj-"><code>x[[j]]</code> is equivalent to <code>unwrap(x[j])</code>.</a></li>
+      <li><a href="#xi-j-is-equivalent-to-xi-j-"><code>x[[i, j]]</code> is equivalent to <code>x[i, ][[j]]</code>.</a></li>
+      <li><a href="#xname-is-equivalent-to-xname-"><code>x$name</code> is equivalent to <code>x[["name"]]</code>.</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#subsetting">Subsetting</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#xj-always-returns-an-object-of-length-nrowx-"><code>x[[j]]</code> always returns an object of length <code><a href="https://www-rdocumentation-org/packages/base/topics/nrow">nrow(x)</a></code>.</a></li>
+      <li><a href="#always-returns-a-tibble-"><code>[</code> always returns a tibble.</a></li>
+      <li><a href="#dimensions-are-defined-by-i-and-j-">Dimensions are defined by i and j.</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#subassignment">Subassignment</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#only-sizes-1-are-recycled-">Only sizes 1 are recycled.</a></li>
+      <li><a href="#columns-dont-have-inner-names-">Columns don’t have inner names.</a></li>
+      <li><a href="#fixme">FIXME</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>
