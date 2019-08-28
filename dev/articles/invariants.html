@@ -1908,13 +1908,237 @@
 <div id="subassignment" class="section level1">
 <h1 class="hasAnchor">
 <a href="#subassignment" class="anchor"></a>Subassignment</h1>
-<div id="only-sizes-1-are-recycled-" class="section level2">
+<div id="xi-j---a-is-equivalent-to-xi-j---lista-if-is_atomica-or-is_nulla-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#only-sizes-1-are-recycled-" class="anchor"></a>Only sizes 1 are recycled.</h2>
-<table class="table dftbl"><tbody><tr>
+<a href="#xi-j---a-is-equivalent-to-xi-j---lista-if-is_atomica-or-is_nulla-" class="anchor"></a><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, j] &lt;- list(a)</code> if <code>is_atomic(a)</code> or <code>is_null(a)</code>.</h2>
+</div>
+<div id="xi-j---a-is-equivalent-to-xi-j---rep_alongj-a-if-is_lista-1-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xi-j---a-is-equivalent-to-xi-j---rep_alongj-a-if-is_lista-1-" class="anchor"></a><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, j] &lt;- rep_along(j, a)</code> if <code>is_list(a, 1)</code>.</h2>
+</div>
+<div id="xi-j---a-is-equivalent-to-xjji-------in-a-loop-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xi-j---a-is-equivalent-to-xjji-------in-a-loop-" class="anchor"></a><code>x[i, j] &lt;- a</code> is equivalent to <code>x[[jj]][i] &lt;- ...</code> in a loop.</h2>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Special handling for new columns defined below</span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">j &lt;-<span class="st"> </span><span class="kw">vec_as_index</span>(j)</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co"># General case, type of x[[jj]] never changed:</span></a>
+<a class="sourceLine" id="cb201-5" data-line-number="5">i &lt;-<span class="st"> </span><span class="kw">vec_as_index</span>(i)</a>
+<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]][i] &lt;-<span class="st"> </span><span class="kw">rep_along</span>(i, a[[jj]])</a>
+<a class="sourceLine" id="cb201-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb201-8" data-line-number="8"><span class="co"># If i missing (special handling if `a[[jj]]` is NULL defined below):</span></a>
+<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep_len</a></span>(a[[jj]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x))</a></code></pre></div>
+<div id="corollaries-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#corollaries-1" class="anchor"></a>Corollaries</h3>
+<p>Only sizes 1 are recycled.</p>
+<table class="table dftbl"><tbody>
+<tr style="vertical-align:top">
 <td>
 </td>
-</tr></tbody></table>
+<td>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb202-4" data-line-number="4"><span class="co">#&gt; * &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb202-5" data-line-number="5"><span class="co">#&gt; 1     0 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb202-6" data-line-number="6"><span class="co">#&gt; 2     0 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb202-7" data-line-number="7"><span class="co">#&gt; 3     0 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb202-8" data-line-number="8"><span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="co">#&gt; 1 2 e          9</span></a>
+<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="co">#&gt; 2 1 f     10, 11</span></a>
+<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="co">#&gt; 3 2 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="co">#&gt; 4 1 h       text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Vector of length 2 cannot be
+#&gt; recycled to
+#&gt; length 4. Only vectors of length one
+#&gt; or
+#&gt; of the same length can be recycled.</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, ,
+#&gt; 1, value = 3:1): replacement has 3
+#&gt; rows, data has 4</code></pre>
+</div>
+</td>
+<td>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Vector of length 3 cannot be
+#&gt; recycled to
+#&gt; length 4. Only vectors of length one
+#&gt; or
+#&gt; of the same length can be recycled.</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb210-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb210-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
+<a class="sourceLine" id="cb210-4" data-line-number="4"><span class="co">#&gt; * &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb210-5" data-line-number="5"><span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb210-6" data-line-number="6"><span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb210-7" data-line-number="7"><span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb210-8" data-line-number="8"><span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">with_df</span>(df[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, ,
+#&gt; 1, value = 5:1): replacement has 5
+#&gt; rows, data has 4</code></pre>
+</div>
+</td>
+<td>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Vector of length 5 cannot be
+#&gt; recycled to
+#&gt; length 4. Only vectors of length one
+#&gt; or
+#&gt; of the same length can be recycled.</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="co">#&gt;    a    b         cd</span></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="co">#&gt; 1  1    e          9</span></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="co">#&gt; 2 NA &lt;NA&gt;         NA</span></a>
+<a class="sourceLine" id="cb215-5" data-line-number="5"><span class="co">#&gt; 3  3    g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="co">#&gt; 4  4    h       text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="ot">NA</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; No common type for `value` &lt;logical&gt;
+#&gt; and
+#&gt; `x` &lt;list&gt;.</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb218-2" data-line-number="2"><span class="co">#&gt;    a    b         cd</span></a>
+<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="co">#&gt; 1  1    e          9</span></a>
+<a class="sourceLine" id="cb218-4" data-line-number="4"><span class="co">#&gt; 2 NA &lt;NA&gt;         NA</span></a>
+<a class="sourceLine" id="cb218-5" data-line-number="5"><span class="co">#&gt; 3  3    g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb218-6" data-line-number="6"><span class="co">#&gt; 4  4    h       text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; No common type for `value` &lt;list&gt;
+#&gt; and
+#&gt; `x` &lt;integer&gt;.</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>, <span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="co">#&gt;    a    b         cd</span></a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="co">#&gt; 1  1    e          9</span></a>
+<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="co">#&gt; 2 NA &lt;NA&gt;         NA</span></a>
+<a class="sourceLine" id="cb221-5" data-line-number="5"><span class="co">#&gt; 3  3    g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb221-6" data-line-number="6"><span class="co">#&gt; 4  4    h       text</span></a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>, <span class="ot">NA</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Tibble columns must have consistent
+#&gt; lengths, only values of length one
+#&gt; are recycled:
+#&gt; * Length 2: Column `RHS`</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">0</span>, <span class="st">"x"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
+#&gt; replacement has length zero</code></pre>
+</div>
+</td>
+<td>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">0</span>, <span class="st">"x"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Tibble columns must have consistent
+#&gt; lengths, only values of length one
+#&gt; are recycled:
+#&gt; * Length 3: Column `RHS`</code></pre>
+</div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>))</a></code></pre></div>
+<div class="warning">
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
+#&gt; 2, , value = list(NA, NA, NA, NA)):
+#&gt; provided 4 variables to replace 3
+#&gt; variables</code></pre>
+</div>
+<pre><code>#&gt;    a    b         cd
+#&gt; 1  1    e          9
+#&gt; 2 NA &lt;NA&gt;         NA
+#&gt; 3  3    g 12, 13, 14
+#&gt; 4  4    h       text</code></pre>
+</td>
+<td>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>))</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Tibble columns must have consistent
+#&gt; lengths, only values of length one
+#&gt; are recycled:
+#&gt; * Length 4: Column `RHS`</code></pre>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p>For creating new columns, all rows must be specified explicitly.</p>
+<p>The data type of existing columns can be changed only if <code>i</code> is missing.</p>
+</div>
+</div>
+<div id="the-name-of-new-columns-is-determined-by-the-lhs-the-rhs-or-by-name-repair-in-that-order-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-name-of-new-columns-is-determined-by-the-lhs-the-rhs-or-by-name-repair-in-that-order-" class="anchor"></a>The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).</h2>
+</div>
+<div id="new-rows-can-only-be-appended-at-the-end-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-rows-can-only-be-appended-at-the-end-" class="anchor"></a>New rows can only be appended at the end.</h2>
+</div>
+<div id="xj---listnull-removes-column-j-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#xj---listnull-removes-column-j-" class="anchor"></a><code>x[[j]] &lt;- list(NULL)</code> removes column <code>j</code>.</h2>
+<div id="corollaries-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#corollaries-2" class="anchor"></a>Corollaries</h3>
+</div>
 </div>
 <div id="columns-dont-have-inner-names-" class="section level2">
 <h2 class="hasAnchor">
@@ -1922,80 +2146,60 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb201-2" data-line-number="2"><span class="co">#&gt; [1] 4 3 2 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">with_df</span>(df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb233-2" data-line-number="2"><span class="co">#&gt; [1] 4 3 2 1</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="co">#&gt; a b c d </span></a>
-<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="co">#&gt; 4 3 2 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb234-2" data-line-number="2"><span class="co">#&gt; a b c d </span></a>
+<a class="sourceLine" id="cb234-3" data-line-number="3"><span class="co">#&gt; 4 3 2 1</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
-<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="co">#&gt; [1] 4</span></a>
-<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
-<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="co">#&gt; [1] 3</span></a>
-<a class="sourceLine" id="cb203-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb203-8" data-line-number="8"><span class="co">#&gt; $c</span></a>
-<a class="sourceLine" id="cb203-9" data-line-number="9"><span class="co">#&gt; [1] 2</span></a>
-<a class="sourceLine" id="cb203-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb203-11" data-line-number="11"><span class="co">#&gt; $d</span></a>
-<a class="sourceLine" id="cb203-12" data-line-number="12"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw">set_names</span>(letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))<span class="op">$</span>x</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in set_names(letters[4:1]):
+#&gt; could not find function "set_names"</code></pre>
+</div>
 </td>
 </tr>
 </tbody></table>
-</div>
-<div id="fixme" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fixme" class="anchor"></a>FIXME</h2>
-<ul>
-<li>[&lt;-, [[&lt;- and $&lt;- can create new columns
-<ul>
-<li>only if using named column index or if the rhs is a data frame specifying the names of the new columns</li>
-<li>only if updating entire columns (i is missing)</li>
-</ul>
-</li>
-<li>[&lt;- can create new rows
-<ul>
-<li>only right at the end of the existing data</li>
-</ul>
-</li>
-<li>[&lt;-, [[&lt;- and $&lt;- can change the type of an existing column
-<ul>
-<li>only if updating entire columns (i is missing), otherwise the data must be of the same type</li>
-</ul>
-</li>
-<li>For updating a subset of rows, only updating existing columns is supported</li>
-<li>For updating more than one column, the rhs must be either
-<ul>
-<li>a scalar (recycled)</li>
-<li>a vector sized same as the number of rows (new value for all columns)</li>
-<li>a data frame with the same column names as the target names</li>
-</ul>
-</li>
-<li>Multiple columns require a list or a data frame at the rhs</li>
-<li>[&lt;-, [[&lt;- and $&lt;- can remove existing columns
-<ul>
-<li>by assignment with NULL</li>
-</ul>
-</li>
-</ul>
+<div id="exception-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#exception-1" class="anchor"></a>Exception</h3>
+<p>List columns can have inner names:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot</a></span>(identical, tbl, <span class="kw">new_tbl</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">a =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">2</span>, <span class="dt">d =</span> <span class="dv">1</span>))<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb237-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
+<a class="sourceLine" id="cb237-3" data-line-number="3"><span class="co">#&gt; [1] 4</span></a>
+<a class="sourceLine" id="cb237-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb237-5" data-line-number="5"><span class="co">#&gt; $b</span></a>
+<a class="sourceLine" id="cb237-6" data-line-number="6"><span class="co">#&gt; [1] 3</span></a>
+<a class="sourceLine" id="cb237-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb237-8" data-line-number="8"><span class="co">#&gt; $c</span></a>
+<a class="sourceLine" id="cb237-9" data-line-number="9"><span class="co">#&gt; [1] 2</span></a>
+<a class="sourceLine" id="cb237-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb237-11" data-line-number="11"><span class="co">#&gt; $d</span></a>
+<a class="sourceLine" id="cb237-12" data-line-number="12"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+</td>
+</tr></tbody></table>
+<table class="table dftbl"><tbody><tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot</a></span>(identical, tbl, <span class="kw">new_tbl</span>())</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: identical is not TRUE</code></pre>
 </div>
 </td>
 </tr></tbody></table>
+</div>
 </div>
 </div>
   </div>
@@ -2020,9 +2224,13 @@
 </li>
       <li>
 <a href="#subassignment">Subassignment</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#only-sizes-1-are-recycled-">Only sizes 1 are recycled.</a></li>
+<li><a href="#xi-j---a-is-equivalent-to-xi-j---lista-if-is_atomica-or-is_nulla-"><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, j] &lt;- list(a)</code> if <code>is_atomic(a)</code> or <code>is_null(a)</code>.</a></li>
+      <li><a href="#xi-j---a-is-equivalent-to-xi-j---rep_alongj-a-if-is_lista-1-"><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, j] &lt;- rep_along(j, a)</code> if <code>is_list(a, 1)</code>.</a></li>
+      <li><a href="#xi-j---a-is-equivalent-to-xjji-------in-a-loop-"><code>x[i, j] &lt;- a</code> is equivalent to <code>x[[jj]][i] &lt;- ...</code> in a loop.</a></li>
+      <li><a href="#the-name-of-new-columns-is-determined-by-the-lhs-the-rhs-or-by-name-repair-in-that-order-">The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).</a></li>
+      <li><a href="#new-rows-can-only-be-appended-at-the-end-">New rows can only be appended at the end.</a></li>
+      <li><a href="#xj---listnull-removes-column-j-"><code>x[[j]] &lt;- list(NULL)</code> removes column <code>j</code>.</a></li>
       <li><a href="#columns-dont-have-inner-names-">Columns don’t have inner names.</a></li>
-      <li><a href="#fixme">FIXME</a></li>
       </ul>
 </li>
       </ul>
