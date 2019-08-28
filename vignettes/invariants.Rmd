@@ -474,7 +474,7 @@ with_df(df[c("a", "b", "c")] <- list(NULL, letters[4:1], "x"))
 
 ## Recycling columnwise?
 
-```{r simul-cud}
+```{r recycle-colwise}
 with_df(df[c("a", "b")] <- list(4:1, "x"))
 ```
 
