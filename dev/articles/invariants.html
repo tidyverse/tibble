@@ -2189,17 +2189,37 @@
 <a class="sourceLine" id="cb237-12" data-line-number="12"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
+</div>
+</div>
+<div id="simultaneously-creating-updating-and-removing-columns" class="section level2">
+<h2 class="hasAnchor">
+<a href="#simultaneously-creating-updating-and-removing-columns" class="anchor"></a>Simultaneously creating, updating and removing columns?</h2>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="ot">NULL</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="st">"x"</span>))</a>
+<a class="sourceLine" id="cb238-2" data-line-number="2"><span class="co">#&gt;   b         cd c</span></a>
+<a class="sourceLine" id="cb238-3" data-line-number="3"><span class="co">#&gt; 1 d          9 x</span></a>
+<a class="sourceLine" id="cb238-4" data-line-number="4"><span class="co">#&gt; 2 c     10, 11 x</span></a>
+<a class="sourceLine" id="cb238-5" data-line-number="5"><span class="co">#&gt; 3 b 12, 13, 14 x</span></a>
+<a class="sourceLine" id="cb238-6" data-line-number="6"><span class="co">#&gt; 4 a       text x</span></a></code></pre></div>
+</div>
+<div id="recycling-columnwise" class="section level2">
+<h2 class="hasAnchor">
+<a href="#recycling-columnwise" class="anchor"></a>Recycling columnwise?</h2>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="st">"x"</span>))</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="co">#&gt; 1 4 x          9</span></a>
+<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="co">#&gt; 2 3 x     10, 11</span></a>
+<a class="sourceLine" id="cb239-5" data-line-number="5"><span class="co">#&gt; 3 2 x 12, 13, 14</span></a>
+<a class="sourceLine" id="cb239-6" data-line-number="6"><span class="co">#&gt; 4 1 x       text</span></a></code></pre></div>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot</a></span>(identical, tbl, <span class="kw">new_tbl</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot</a></span>(identical, tbl, <span class="kw">new_tbl</span>())</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: identical is not TRUE</code></pre>
 </div>
 </td>
 </tr></tbody></table>
-</div>
 </div>
 </div>
   </div>
@@ -2231,6 +2251,8 @@
       <li><a href="#new-rows-can-only-be-appended-at-the-end-">New rows can only be appended at the end.</a></li>
       <li><a href="#xj---listnull-removes-column-j-"><code>x[[j]] &lt;- list(NULL)</code> removes column <code>j</code>.</a></li>
       <li><a href="#columns-dont-have-inner-names-">Columns don’t have inner names.</a></li>
+      <li><a href="#simultaneously-creating-updating-and-removing-columns">Simultaneously creating, updating and removing columns?</a></li>
+      <li><a href="#recycling-columnwise">Recycling columnwise?</a></li>
       </ul>
 </li>
       </ul>
