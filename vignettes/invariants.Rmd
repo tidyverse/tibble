@@ -398,35 +398,72 @@ df[, NA_integer_]
 
 # Subassignment
 
-## Only sizes 1 are recycled.
+## `x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
+
+## `x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
+
+## `x[i, j] <- a` is equivalent to `x[[jj]][i] <- ...` in a loop.
+
+```r
+# Special handling for new columns defined below
+j <- vec_as_index(j)
+
+# General case, type of x[[jj]] never changed:
+i <- vec_as_index(i)
+for (jj in j) x[[jj]][i] <- rep_along(i, a[[jj]])
+
+# If i missing (special handling if `a[[jj]]` is NULL defined below):
+for (jj in j) x[[jj]] <- rep_len(a[[jj]], nrow(x))
+```
+
+### Corollaries
+
+Only sizes 1 are recycled.
 
 ```{r only-size-1-recycled, dftbl = TRUE}
+with_df(df[, 1] <- 0)
+with_df(df[, 1] <- 2:1)
+with_df(df[, 1] <- 3:1)
+with_df(df[, 1] <- 4:1)
+with_df(df[, 1] <- 5:1)
+with_df(df[2, ] <- NA)
+with_df(df[2, ] <- list(NA))
+with_df(df[2, ] <- list(NA, NA))
+with_df(df[2, ] <- list(0, "x", list()))
+with_df(df[2, ] <- list(NA, NA, NA, NA))
 ```
+
+For creating new columns, all rows must be specified explicitly.
+
+The data type of existing columns can be changed only if `i` is missing.
+
+
+## The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).
+
+
+## New rows can only be appended at the end.
+
+
+## `x[[j]] <- list(NULL)` removes column `j`.
+
+### Corollaries
+
+
 
 ## Columns don't have inner names.
 
 ```{r columns-dont-have-names, dftbl = TRUE}
 with_df(df$x <- c(a = 4, b = 3, c = 2, d = 1))$x
-with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
+with_df(df$x <- set_names(letters[4:1]))$x
 ```
 
-## FIXME
+### Exception
 
-- [<-, [[<- and $<- can create new columns
-   - only if using named column index or if the rhs is a data frame specifying the names of the new columns
-   - only if updating entire columns (i is missing)
-- [<- can create new rows
-   - only right at the end of the existing data
-- [<-, [[<- and $<- can change the type of an existing column
-   - only if updating entire columns (i is missing), otherwise the data must be of the same type
-- For updating a subset of rows, only updating existing columns is supported
-- For updating more than one column, the rhs must be either
-   - a scalar (recycled)
-   - a vector sized same as the number of rows (new value for all columns)
-   - a data frame with the same column names as the target names
-- Multiple columns require a list or a data frame at the rhs
-- [<-, [[<- and $<- can remove existing columns
-   - by assignment with NULL
+List columns can have inner names:
+
+```{r list-columns-can-have-names, dftbl = TRUE}
+with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
+```
 
 ```{r check, dftbl = TRUE}
 stopifnot(identical, df, new_df())
