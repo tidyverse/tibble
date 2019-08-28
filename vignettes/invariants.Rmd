@@ -293,12 +293,13 @@ df2[["f"]]
 ```
 
 Corollary: `$` does not implement partial matching.
+For compatibility with code that probes columns and compares with `NULL`, only a warning is raised.
 
 ```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
 df$c
 df[["c"]]
-df$c <- 0
-df[["c"]] <- 0
+with_df(df$c <- 0)
+with_df(df[["c"]] <- 0)
 ```
 
 
@@ -423,3 +424,7 @@ with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
 - Multiple columns require a list or a data frame at the rhs
 - [<-, [[<- and $<- can remove existing columns
    - by assignment with NULL
+
+```{r check, dftbl = TRUE}
+stopifnot(identical, df, new_df())
+```
