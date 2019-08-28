@@ -104,7 +104,7 @@ tbl2 <- new_tbl2()
 new_df()
 ```
 
-For subassignment, we need a fresh copy of the data for each test.
+For subset assignment (short: subassignment), we need a fresh copy of the data for each test.
 The `with_*()` functions allow for a more concise notation
 (`with_tbl()` and `with_*2()` omitted here for brevity):
 
@@ -174,26 +174,9 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 
 # Subsetting and subassignment
 
-## `[[` requires scalar indexes
+## Definition of `x[[j]]`.
 
-```{r double-bracket-requires-scalar-indexes, dftbl = TRUE}
-df[[1]]
-df[[1:2]]
-df[[1:3]]
-df[[1, 1]]
-df[[1:2, 1]]
-df[[1, 1:2]]
-df[[1:2, 1:2]]
-with_df(df[[1]] <- 0)
-with_df(df[[1:2]] <- 0)
-with_df(df[[1:3]] <- 0)
-with_df(df[[1, 1]] <- 0)
-with_df(df[[1:2, 1]] <- 0)
-with_df(df[[1, 1:2]] <- 0)
-with_df(df[[1:2, 1:2]] <- 0)
-```
-
-## `x[[j]]` is equivalent to `.subset2(x, j)`.
+`x[[j]]` is equivalent to `.subset2(x, j)`.
 
 ```{r double-bracket-equivalent-to-unwrap-single-bracket, dftbl = TRUE}
 df[[1]]
@@ -206,7 +189,24 @@ df2[[2]]
 .subset2(df2, 2)
 ```
 
-Corollary: `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+### Corollary
+
+`[[` requires a scalar `j` index.
+
+```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
+df[[1]]
+df[[1:2]]
+df[[1:3]]
+df[[1, 1]]
+df[[1, 1:2]]
+with_df(df[[1]] <- 0)
+with_df(df[[1:2]] <- 0)
+with_df(df[[1:3]] <- 0)
+with_df(df[[1, 1]] <- 0)
+with_df(df[[1, 1:2]] <- 0)
+```
+
+`x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
 
 - atomic: `df[[1]]`
 - list: `df[[3]]`
@@ -240,7 +240,9 @@ with_df2(df2[2] <- list(df[[3]]))
 with_df2(df2[2] <- list(df2[[1]]))
 ```
 
-## `x[[i, j]]` is equivalent to `x[i, ][[j]]`.
+## Definition of `x[[i, j]]`.
+
+`x[[i, j]]` is equivalent to `x[i, ][[j]]`.
 
 ```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
 df[[1, 1]]
@@ -254,7 +256,9 @@ df2[1, ][[2]]
 ```
 
 
-Corollary: `x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+### Corollary
+
+`x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
 
 - atomic: `df[[1]]`
 - list: `df[[3]]`
@@ -272,7 +276,16 @@ with_df2(df2[[1, 2]] <- df2[[2, 2]])
 with_df2(df2[1, ][[2]] <- df2[2, ][[2]])
 ```
 
-## `x$name` is equivalent to `x[["name"]]`.
+## `[[` requires a scalar `i` index?
+
+```{r double-bracket-requires-scalar-i-index, dftbl = TRUE}
+df[[1:2, 1]]
+with_df(df[[1:2, 1]] <- 0)
+```
+
+## Definition of `x$name`.
+
+`x$name` is equivalent to `x[["name"]]`.
 
 ```{r dollar-equivalent-to-subset, dftbl = TRUE}
 df$a
@@ -285,7 +298,9 @@ df2$f
 df2[["f"]]
 ```
 
-Corollary: `$` does not implement partial matching.
+### Corollary
+
+`$` does not implement partial matching.
 For compatibility with code that probes columns and compares with `NULL`, only a warning is raised.
 
 ```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
@@ -298,7 +313,9 @@ with_df(df[["c"]] <- 0)
 
 # Subsetting
 
-## Dimensions of `x[i, j]` are defined by `vec_as_index(i)` and `vec_as_index(j)`.
+## Dimensions of `x[i, j]`.
+
+The dimensions of `x[i, j]` are defined by `vec_as_index(i)` and `vec_as_index(j)`.
 
 ```{r dimensions-are-defined-by-i-and-j, dftbl = TRUE}
 dim(df[1, 1])
