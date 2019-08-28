@@ -301,86 +301,9 @@ with_df(df[6, ] <- list(0, "x", list()))
 ```
 
 
-## Definition of `x[[j]]`.
-
-`x[[j]]` is equivalent to `.subset2(x, j)` (and to `[[<-` for uncl.
-
-```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
-df[[1]]
-.subset2(df, 1)
-df[[3]]
-.subset2(df, 3)
-df2[[1]]
-.subset2(df2, 1)
-df2[[2]]
-.subset2(df2, 2)
-```
-
-### Corollary
-
-`x[[j]]` always returns and requires an object of size `nrow(x)`.
-
-```{r double-bracket-retains-size, dftbl = TRUE}
-vctrs::vec_size(df[[1]])
-vctrs::vec_size(df[[3]])
-vctrs::vec_size(df2[[1]])
-vctrs::vec_size(df2[[2]])
-with_df(df[[1]] <- 4:1)
-with_df(df[[1]] <- 3:1)
-```
-
-`[[` requires a scalar `j` index.
-
-```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
-df[[1]]
-df[[1:2]]
-df[[1:3]]
-df[[1, 1]]
-df[[1, 1:2]]
-with_df(df[[1]] <- 0)
-with_df(df[[1:2]] <- 0)
-with_df(df[[1:3]] <- 0)
-with_df(df[[1, 1]] <- 0)
-with_df(df[[1, 1:2]] <- 0)
-```
-
-`x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
-
-- atomic: `df[[1]]`
-- list: `df[[3]]`
-- data frame: `df2[[1]]`
-- matrix: `df2[[2]]`
-
-```{r double-bracket-equivalent-to-unwrap-single-bracket-update, dftbl = TRUE}
-with_df(df[[1]] <- df[[3]])
-with_df(df[[1]] <- df2[[1]])
-with_df(df[[1]] <- df2[[2]])
-with_df(df[1] <- list(df[[3]]))
-with_df(df[1] <- list(df2[[1]]))
-with_df(df[1] <- list(df2[[2]]))
-with_df(df[[3]] <- df[[1]])
-with_df(df[[3]] <- df2[[1]])
-with_df(df[[3]] <- df2[[2]])
-with_df(df[3] <- list(df[[1]]))
-with_df(df[3] <- list(df2[[1]]))
-with_df(df[3] <- list(df2[[2]]))
-with_df2(df2[[1]] <- df[[1]])
-with_df2(df2[[1]] <- df[[3]])
-with_df2(df2[[1]] <- df2[[2]])
-with_df2(df2[1] <- list(df[[1]]))
-with_df2(df2[1] <- list(df[[3]]))
-with_df2(df2[1] <- list(df2[[2]]))
-with_df2(df2[[2]] <- df[[1]])
-with_df2(df2[[2]] <- df[[3]])
-with_df2(df2[[2]] <- df2[[1]])
-with_df2(df2[2] <- list(df[[1]]))
-with_df2(df2[2] <- list(df[[3]]))
-with_df2(df2[2] <- list(df2[[1]]))
-```
-
 ## Definition of `x[[i, j]]`.
 
-`x[[i, j]]` is equivalent to `x[i, j][[1]]`.
+`x[[i, j]]` is equivalent to `x[i, ][[j]]`.
 
 ```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
 df[[1, 1]]
@@ -394,7 +317,7 @@ df2[1, 2][[1]]
 ```
 
 
-### Corollary
+### Corollaries
 
 `x[[i, j]]` and `x[i, j][[1]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
 
@@ -403,17 +326,26 @@ df2[1, 2][[1]]
 - data frame: `df2[[1]]`
 - matrix: `df2[[2]]`
 
-```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
-with_df(df[[1, 1]] <- df[2, 1][[1]])
+```{r double-bracket-i-j-assign, dftbl = TRUE}
+with_df(df[[1, 1]] <- df[2, ][[1]])
 with_df(df[1, 1] <- list(df[[2, 1]]))
-with_df(df[[1, 3]] <- df[2, 3][[1]])
+with_df(df[[1, 3]] <- df[2, ][[3]])
 with_df(df[1, 3] <- list(df[2, 3]))
-with_df2(df2[[1, 1]] <- df2[2, 1][[1]])
+with_df2(df2[[1, 1]] <- df2[2, ][[1]])
 with_df2(df2[1, 1] <- list(df2[[2, 1]]))
-with_df2(df2[[1, 2]] <- df2[2, 2][[1]])
+with_df2(df2[[1, 2]] <- df2[2, ][[2]])
 with_df2(df2[1, 2] <- list(df2[[2, 2]]))
 ```
 
+`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(j)` scalar.
+ 
+```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
+df[[1, 2]]
+df[1, 2][[1]]
+with_df(df[[1, 2]] <- "x")
+with_df(df[1, 2] <- list("x"))
+```
+ 
 ## `[[` requires a scalar `i` index?
 
 ```{r double-bracket-requires-scalar-i-index, dftbl = TRUE}
@@ -521,54 +453,157 @@ df[NA_character_]
 ```
 
 
+## Definition of `x[[j]]`.
+
+`x[[j]]` is equivalent to `.subset2(x, j)`.
+
+```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
+df[[1]]
+.subset2(df, 1)
+df[[3]]
+.subset2(df, 3)
+df2[[1]]
+.subset2(df2, 1)
+df2[[2]]
+.subset2(df2, 2)
+```
+
+### Corollary
+
+`[[` requires a scalar `j` index.
+
+```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
+df[[1]]
+df[[1:2]]
+df[[1:3]]
+```
+
+`x[[j]]` always returns and requires an object of size `nrow(x)`.
+
+```{r double-bracket-retains-size, dftbl = TRUE}
+vctrs::vec_size(df[[1]])
+vctrs::vec_size(df[[3]])
+vctrs::vec_size(df2[[1]])
+vctrs::vec_size(df2[[2]])
+```
+
 # Subassignment
 
-## `x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
+## Treatment of atomic or `NULL` on the RHS.
 
-## `x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
+`x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
 
-## `x[i, j] <- a` is equivalent to `x[[jj]][i] <- ...` in a loop.
+## Treatment of list of length 1 on the RHS.
+
+`x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
+
+### Corollary
+
+Only lists of length one are recycled.
+
+## Definition of `x[j] <- list(...)`.
+
+`x[j] <- a` is equivalent to `x[[jj]] <- ...` in a loop, keeping only columns that are assigned non-NULL values.
 
 ```r
-# Special handling for new columns defined below
-j <- vec_as_index(j)
+# With logic for defining names of new columns, see below
+j <- vec_as_index_or_name(j, ncol(x), a)
 
-# General case, type of x[[jj]] never changed:
-i <- vec_as_index(i)
-for (jj in j) x[[jj]][i] <- vec_recycle(a[[jj]], length(i))
+is_data <- !map_lgl(a, is_null)
 
-# If i missing (special handling if `a[[jj]]` is NULL defined below):
-for (jj in j) x[[jj]] <- vec_recycle(a[[jj]], nrow(x))
+# Create or update
+for (jj in which(is_data)]) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
+
+# Remove
+x <- x[is_data]
 ```
 
-### Corollaries
+### Corollary
 
-Only sizes 1 are recycled.
+When adding or removing columns, `i` cannot be given (by definition of `x[i, j]`).
 
-```{r only-size-1-recycled, dftbl = TRUE}
-with_df(df[, 1] <- 0)
-with_df(df[, 1] <- 2:1)
-with_df(df[, 1] <- 3:1)
-with_df(df[, 1] <- 4:1)
-with_df(df[, 1] <- 5:1)
-with_df(df[2, ] <- NA)
-with_df(df[2, ] <- list(NA))
-with_df(df[2, ] <- list(NA, NA))
-with_df(df[2, ] <- list(0, "x", list()))
-with_df(df[2, ] <- list(NA, NA, NA, NA))
+```{r change-shape-only-all-rows, dftbl = TRUE}
+with_df(df[2:3, "c"] <- list(0))
+with_df(df[2:3, "b"] <- NULL)
 ```
 
-For creating new columns, all rows must be specified explicitly.
+When appending rows, `j` cannot be given (by definition of `x[i, j]`).
 
-The data type of existing columns can be changed only if `i` is missing.
+```{r append-rows-only-all-columns, dftbl = TRUE}
+with_df(df[5, "a"] <- list(0))
+```
+
 
 
 ## The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).
 
 
+## Definition of `x[[j]] <- a`.
 
+`x[[j]] <- a` is equivalent to `x[j] <- list(a)`.
 
-## `x[[j]] <- NULL` removes column `j`.
+```{r double-bracket-assign-equivalent-to-bracket-assign-list, dftbl = TRUE}
+with_df(df[[1]] <- 0)
+with_df(df[1] <- list(0))
+with_df(df[[3]] <- 0)
+with_df(df[3] <- list(0))
+with_df2(df2[[1]] <- 0)
+with_df2(df2[1] <- list(0))
+with_df2(df2[[2]] <- 0)
+with_df2(df2[2] <- list(0))
+```
+
+`[[<-` requires a scalar `j` index.
+
+```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE}
+with_df(df[[1]] <- 0)
+with_df(df[[1:2]] <- 0)
+with_df(df[[1:3]] <- 0)
+```
+
+### Corollary
+
+`x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
+
+```{r double-bracket-requires-size, dftbl = TRUE}
+with_df(df[[1]] <- 1)
+with_df(df[[1]] <- 4:1)
+with_df(df[[1]] <- 3:1)
+```
+
+`x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+
+- atomic: `df[[1]]`
+- list: `df[[3]]`
+- data frame: `df2[[1]]`
+- matrix: `df2[[2]]`
+
+```{r double-bracket-equivalent-to-unwrap-single-bracket-update, dftbl = TRUE}
+with_df(df[[1]] <- df[[3]])
+with_df(df[[1]] <- df2[[1]])
+with_df(df[[1]] <- df2[[2]])
+with_df(df[1] <- list(df[[3]]))
+with_df(df[1] <- list(df2[[1]]))
+with_df(df[1] <- list(df2[[2]]))
+with_df(df[[3]] <- df[[1]])
+with_df(df[[3]] <- df2[[1]])
+with_df(df[[3]] <- df2[[2]])
+with_df(df[3] <- list(df[[1]]))
+with_df(df[3] <- list(df2[[1]]))
+with_df(df[3] <- list(df2[[2]]))
+with_df2(df2[[1]] <- df[[1]])
+with_df2(df2[[1]] <- df[[3]])
+with_df2(df2[[1]] <- df2[[2]])
+with_df2(df2[1] <- list(df[[1]]))
+with_df2(df2[1] <- list(df[[3]]))
+with_df2(df2[1] <- list(df2[[2]]))
+with_df2(df2[[2]] <- df[[1]])
+with_df2(df2[[2]] <- df[[3]])
+with_df2(df2[[2]] <- df2[[1]])
+with_df2(df2[2] <- list(df[[1]]))
+with_df2(df2[2] <- list(df[[3]]))
+with_df2(df2[2] <- list(df2[[1]]))
+```
 
 
 ## Columns don't have inner names.
