@@ -357,7 +357,7 @@ nrow(df2[2])
 
 Corollary: `x[[j]]` always returns an object of size `nrow(x)`.
 
-```{r bracket-retains-nrow, dftbl = TRUE}
+```{r double-bracket-retains-size, dftbl = TRUE}
 vctrs::vec_size(df[[1]])
 vctrs::vec_size(df[[3]])
 vctrs::vec_size(df2[[1]])
@@ -366,7 +366,7 @@ vctrs::vec_size(df2[[2]])
 
 Corollary: `x[[i, j]]` always returns an object of size 1 (by definition of `x[[1, j]]`).
 
-```{r bracket-retains-nrow, dftbl = TRUE}
+```{r double-bracket-double-index-size-one, dftbl = TRUE}
 vctrs::vec_size(df[[2, 1]])
 vctrs::vec_size(df[[2, 3]])
 vctrs::vec_size(df2[[2, 1]])
