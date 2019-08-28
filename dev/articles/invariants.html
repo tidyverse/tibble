@@ -1924,10 +1924,10 @@
 <a class="sourceLine" id="cb201-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co"># General case, type of x[[jj]] never changed:</span></a>
 <a class="sourceLine" id="cb201-5" data-line-number="5">i &lt;-<span class="st"> </span><span class="kw">vec_as_index</span>(i)</a>
-<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]][i] &lt;-<span class="st"> </span><span class="kw">rep_along</span>(i, a[[jj]])</a>
+<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]][i] &lt;-<span class="st"> </span><span class="kw">vec_recycle</span>(a[[jj]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(i))</a>
 <a class="sourceLine" id="cb201-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb201-8" data-line-number="8"><span class="co"># If i missing (special handling if `a[[jj]]` is NULL defined below):</span></a>
-<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep_len</a></span>(a[[jj]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x))</a></code></pre></div>
+<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="cf">for</span> (jj <span class="cf">in</span> j) x[[jj]] &lt;-<span class="st"> </span><span class="kw">vec_recycle</span>(a[[jj]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x))</a></code></pre></div>
 <div id="corollaries-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#corollaries-1" class="anchor"></a>Corollaries</h3>
