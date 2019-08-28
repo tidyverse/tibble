@@ -487,13 +487,34 @@ vctrs::vec_size(df2[[2]])
 
 `x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
 
+```{r bracket-assign-wraps, dftbl = TRUE}
+with_df(df[1] <- 0)
+with_df(df[1] <- list(0))
+with_df(df[1] <- 4:1)
+with_df(df[1] <- list(4:1))
+with_df(df[1] <- NULL)
+with_df(df[1] <- list(NULL))
+```
+
 ## Treatment of list of length 1 on the RHS.
 
 `x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
 
+```{r bracket-assign-recycles, dftbl = TRUE}
+with_df(df[1:2] <- list(0))
+with_df(df[1:2] <- list(0, 0))
+with_df(df[1:3] <- list(0))
+with_df(df[1:3] <- list(0, 0, 0))
+```
+
 ### Corollary
 
 Only lists of length one are recycled.
+
+```{r bracket-assign-recycles-one, dftbl = TRUE}
+with_df(df[1:2] <- list(0, 0, 0))
+with_df(df[1:3] <- list(0, 0))
+```
 
 ## Definition of `x[j] <- list(...)`.
 
@@ -512,6 +533,28 @@ for (jj in which(is_data)]) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
 x <- x[is_data]
 ```
 
+```{r bracket-assign-def, dftbl = TRUE}
+with_df(df[1:2] <- list("x", 4:1))
+with_df(df[c("cd", "c", "b")] <- list("x", 4:1, NULL))
+```
+
+`NA` indexes are not supported.
+
+```{r bracket-assign-na, dftbl = TRUE, eval = FALSE}
+with_df(df[NA] <- list("x"))
+with_df(df[NA_integer_] <- list("x"))
+with_df(df[NA_character_] <- list("x"))
+```
+
+The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of preference).
+
+```{r bracket-assign-names, dftbl = TRUE}
+with_df(df[c("d", "c")] <- tibble("x", d = 4:1))
+with_df(df[3:4] <- list("x", c = 4:1))
+with_df(df[4] <- list(4:1))
+```
+
+
 ### Corollary
 
 When adding or removing columns, `i` cannot be given (by definition of `x[i, j]`).
@@ -527,9 +570,6 @@ When appending rows, `j` cannot be given (by definition of `x[i, j]`).
 with_df(df[5, "a"] <- list(0))
 ```
 
-
-
-## The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).
 
 
 ## Definition of `x[[j]] <- a`.
