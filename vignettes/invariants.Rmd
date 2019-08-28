@@ -586,18 +586,7 @@ List columns can have inner names:
 with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
 ```
 
-## Simultaneously creating, updating and removing columns?
 
-```{r simul-cud}
-with_df(df[c("a", "b", "c")] <- list(NULL, letters[4:1], "x"))
-```
-
-
-## Recycling columnwise?
-
-```{r recycle-colwise}
-with_df(df[c("a", "b")] <- list(4:1, "x"))
-```
 
 
 
