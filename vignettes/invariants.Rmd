@@ -174,6 +174,17 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 
 # Subsetting and subassignment
 
+## Missing indexes.
+
+`x[]` and `x[,]` are equivalent to `x`.
+
+```{r bracket-empty, dftbl = TRUE}
+df[]
+df[,]
+with_df(df[] <- df)
+with_df(df[,] <- df)
+```
+
 ## Definition of `x[i, j]`.
 
 `x[i, j]` is equivalent to `x[j][i, ]` (`i` and/or `j` may be missing).
@@ -224,11 +235,77 @@ df[, 1, drop = TRUE]
 df[1, , drop = TRUE]
 ```
 
+## Definition of `x[i, ]`.
+
+Applies `vec_slice(, i)` to all columns.
+
+```{r bracket-i, dftbl = TRUE}
+df[2:3, ]
+df[0:2, ]
+df[-2, ]
+df[-1:2, ]
+df[NA_integer_, ]
+df[c(FALSE, TRUE, TRUE, FALSE), ]
+df[TRUE, ]
+df[NA, ]
+```
+
+### Corollary
+
+Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not supported.
+
+```{r bracket-i-oob-lgl, dftbl = TRUE}
+df[c(TRUE, FALSE), ]
+df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ]
+with_df(df[c(TRUE, FALSE), ] <- df[1, ])
+with_df(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ] <- df[1, ])
+```
+
+
+### Subassignment corollary
+
+The data type of existing columns can be changed only if `i` is missing.
+
+```{r bracket-i-data-type, dftbl = TRUE}
+with_df(df[2:3, 1] <- "x")
+with_df(df[2:3, 2] <- 0)
+with_df(df[2:3, 3] <- 0)
+with_df2(df2[2:3, 1] <- 0)
+with_df2(df2[2:3, 2] <- 0)
+```
+
+
+Only values of size one can be recycled.
+
+```{r bracket-i-recycle, dftbl = TRUE}
+with_df(df[2:3, ] <- list(0, "x", list(NULL)))
+with_df(df[2:3, ] <- list(0:1, c("x", "y"), list(NULL, "")))
+with_df(df[2:4, ] <- list(0:1, "x", list(NULL)))
+with_df2(df2[2:4, ] <- list(df[1, ]))
+with_df2(df2[2:4, ] <- list(df[2:3, ]))
+```
+
+
+### Exception
+
+For compatibility reasons only a warning is issued for indexing beyond the number of rows.
+Appending rows right at the end of the existing data is supported, without warning.
+
+```{r bracket-i-oob-num, dftbl = TRUE}
+df[5, ]
+df[5:7, ]
+df[6, ]
+with_df(df[5, ] <- list(0, "x", list()))
+with_df(df[5:7, ] <- list(0, "x", list()))
+with_df(df[6, ] <- list(0, "x", list()))
+```
+
+
 ## Definition of `x[[j]]`.
 
-`x[[j]]` is equivalent to `.subset2(x, j)`.
+`x[[j]]` is equivalent to `.subset2(x, j)` (and to `[[<-` for uncl.
 
-```{r double-bracket-equivalent-to-unwrap-single-bracket, dftbl = TRUE}
+```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
 df[[1]]
 .subset2(df, 1)
 df[[3]]
@@ -326,15 +403,15 @@ df2[1, 2][[1]]
 - data frame: `df2[[1]]`
 - matrix: `df2[[2]]`
 
-```{r double-bracket-i-j-equivalent-to-row-subset-then-j-update, dftbl = TRUE}
-with_df(df[[1, 1]] <- df[[2, 1]])
-with_df(df[1, 1][[1]] <- df[2, 1][[1]])
-with_df(df[[1, 3]] <- df[[2, 3]])
-with_df(df[1, 3][[1]] <- df[2, 3][[1]])
-with_df2(df2[[1, 1]] <- df2[[2, 1]])
-with_df2(df2[1, 1][[1]] <- df2[2, 1][[1]])
-with_df2(df2[[1, 2]] <- df2[[2, 2]])
-with_df2(df2[1, 2][[1]] <- df2[2, 2][[1]])
+```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
+with_df(df[[1, 1]] <- df[2, 1][[1]])
+with_df(df[1, 1] <- list(df[[2, 1]]))
+with_df(df[[1, 3]] <- df[2, 3][[1]])
+with_df(df[1, 3] <- list(df[2, 3]))
+with_df2(df2[[1, 1]] <- df2[2, 1][[1]])
+with_df2(df2[1, 1] <- list(df2[[2, 1]]))
+with_df2(df2[[1, 2]] <- df2[2, 2][[1]])
+with_df2(df2[1, 2] <- list(df2[[2, 2]]))
 ```
 
 ## `[[` requires a scalar `i` index?
@@ -444,38 +521,6 @@ df[NA_character_]
 ```
 
 
-## Definition of `x[i, ]`.
-
-Keeps elements given by `vec_as_index(i)` for all columns.
-
-```{r bracket-i, dftbl = TRUE}
-df[2:3, ]
-df[0:2, ]
-df[-2, ]
-df[-1:2, ]
-df[NA_integer_, ]
-df[c(FALSE, TRUE, TRUE, FALSE), ]
-df[TRUE, ]
-df[NA, ]
-```
-
-### Corollaries
-
-`x[,]` is equivalent to `x` (with [rlib/vctrs#547](https://github.com/r-lib/vctrs/issues/547)).
-
-```{r bracket-i-empty, dftbl = TRUE}
-df[,]
-```
-
-Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not supported, but for compatibility reasons only a warning is issued for indexing beyond the number of rows.
-
-```{r bracket-i-oob, dftbl = TRUE}
-dim(df[c(TRUE, FALSE), ])
-dim(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ])
-dim(df[5, ])
-```
-
-
 # Subassignment
 
 ## `x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
@@ -521,7 +566,6 @@ The data type of existing columns can be changed only if `i` is missing.
 ## The name of new columns is determined by the LHS, the RHS, or by name repair (in that order).
 
 
-## New rows can only be appended at the end.
 
 
 ## `x[[j]] <- NULL` removes column `j`.
