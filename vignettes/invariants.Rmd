@@ -193,24 +193,17 @@ with_df(df[[1, 1:2]] <- 0)
 with_df(df[[1:2, 1:2]] <- 0)
 ```
 
-## `x[[j]]` is equivalent to `unwrap(x[j])`.
-
-```{r unwrap}
-unwrap <- function(x) {
-  unclass(x)[[1]]
-}
-```
-
+## `x[[j]]` is equivalent to `.subset2(x, j)`.
 
 ```{r double-bracket-equivalent-to-unwrap-single-bracket, dftbl = TRUE}
 df[[1]]
-unwrap(df[1])
+.subset2(df, 1)
 df[[3]]
-unwrap(df[3])
+.subset2(df, 3)
 df2[[1]]
-unwrap(df2[1])
+.subset2(df2, 1)
 df2[[2]]
-unwrap(df2[2])
+.subset2(df2, 2)
 ```
 
 Corollary: `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
@@ -444,10 +437,7 @@ The data type of existing columns can be changed only if `i` is missing.
 ## New rows can only be appended at the end.
 
 
-## `x[[j]] <- list(NULL)` removes column `j`.
-
-### Corollaries
-
+## `x[[j]] <- NULL` removes column `j`.
 
 
 ## Columns don't have inner names.
@@ -481,5 +471,5 @@ with_df(df[c("a", "b")] <- list(4:1, "x"))
 
 
 ```{r check, dftbl = TRUE}
-stopifnot(identical, df, new_df())
+stopifnot(identical(df, new_df()))
 ```
