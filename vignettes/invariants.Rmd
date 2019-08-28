@@ -410,10 +410,10 @@ j <- vec_as_index(j)
 
 # General case, type of x[[jj]] never changed:
 i <- vec_as_index(i)
-for (jj in j) x[[jj]][i] <- rep_along(i, a[[jj]])
+for (jj in j) x[[jj]][i] <- vec_recycle(a[[jj]], length(i))
 
 # If i missing (special handling if `a[[jj]]` is NULL defined below):
-for (jj in j) x[[jj]] <- rep_len(a[[jj]], nrow(x))
+for (jj in j) x[[jj]] <- vec_recycle(a[[jj]], nrow(x))
 ```
 
 ### Corollaries
