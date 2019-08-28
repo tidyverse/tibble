@@ -304,34 +304,31 @@ df[["c"]] <- 0
 
 # Subsetting
 
-## `x[[j]]` always returns an object of length `nrow(x)`.
+## `x[, j]` is equivalent to `x[j]`.
 
-FIXME.
-
-Corollary: `x[[i, j]]` always returns an object of length 1 (by definition of `x[[1, j]]`).
-
-## `[` always returns a tibble.
-
-```{r bracket-always-returns-tibble, dftbl = TRUE}
+```{r bracket-missing-i, dftbl = TRUE}
 df[, 1]
-df[1, ]
-df[1, 1]
+df[1]
+df[, 3]
+df[3]
+df2[, 1]
+df2[1]
+df2[, 2]
+df2[2]
 df[, 1, drop = FALSE]
-df[1, , drop = FALSE]
-df[1, 1, drop = FALSE]
+df[1, drop = FALSE]
 ```
+
+Corollary: `[` always returns a tibble.
 
 Exception: `drop = TRUE` returns a vector when subsetting a single column with two-dimensional indexing, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
 
 ```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
 df[, 1, drop = TRUE]
 df[1, , drop = TRUE]
-df[1, 1, drop = TRUE]
 ```
 
-## Dimensions are defined by i and j.
-
-The dimensions after `[` and `[[` are given by the length of `vec_as_index(i)` and `vec_as_index(j)`.
+## Dimensions of `x[i, j]` are defined by `vec_as_index(i)` and `vec_as_index(j)`.
 
 ```{r dimensions-are-defined-by-i-and-j, dftbl = TRUE}
 dim(df[1, 1])
@@ -340,7 +337,6 @@ dim(df[TRUE, c("b", "cd")])
 dim(df[-3, -2])
 ```
 
-
 Corollary: Missing dimensions are extended to an index vector along the rows or columns, respectively (with [rlib/vctrs#547](https://github.com/r-lib/vctrs/issues/547)).
 
 ```{r dimensions-are-defined-by-i-and-j-missing, dftbl = TRUE}
@@ -348,6 +344,37 @@ dim(df[])
 dim(df[,])
 dim(df[1, ])
 dim(df[, 1])
+```
+
+Corollary: `x[j]` retains the number of rows in the input.
+
+```{r bracket-retains-nrow, dftbl = TRUE}
+nrow(df[1])
+nrow(df[3])
+nrow(df2[1])
+nrow(df2[2])
+```
+
+Corollary: `x[[j]]` always returns an object of size `nrow(x)`.
+
+```{r bracket-retains-nrow, dftbl = TRUE}
+vctrs::vec_size(df[[1]])
+vctrs::vec_size(df[[3]])
+vctrs::vec_size(df2[[1]])
+vctrs::vec_size(df2[[2]])
+```
+
+Corollary: `x[[i, j]]` always returns an object of size 1 (by definition of `x[[1, j]]`).
+
+```{r bracket-retains-nrow, dftbl = TRUE}
+vctrs::vec_size(df[[2, 1]])
+vctrs::vec_size(df[[2, 3]])
+vctrs::vec_size(df2[[2, 1]])
+vctrs::vec_size(df2[[2, 2]])
+vctrs::vec_size(df[[NA, 1]])
+vctrs::vec_size(df[[NA, 3]])
+vctrs::vec_size(df2[[NA, 1]])
+vctrs::vec_size(df2[[NA, 2]])
 ```
 
 Corollary: Out-of-bounds indexing is not supported (but for compatibility reasons only a warning is issued for indexing beyond the number of rows).
@@ -393,4 +420,6 @@ with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
    - a scalar (recycled)
    - a vector sized same as the number of rows (new value for all columns)
    - a data frame with the same column names as the target names
-- Multiple columns require a data frame at the rhs
+- Multiple columns require a list or a data frame at the rhs
+- [<-, [[<- and $<- can remove existing columns
+   - by assignment with NULL
