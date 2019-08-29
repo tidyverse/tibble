@@ -183,6 +183,10 @@ df[]
 df[,]
 with_df(df[] <- df)
 with_df(df[,] <- df)
+df2[]
+df2[,]
+with_df2(df2[] <- df2)
+with_df2(df2[,] <- df2)
 ```
 
 ## Definition of `x[i, j]`.
