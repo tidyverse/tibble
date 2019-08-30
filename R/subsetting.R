@@ -75,24 +75,14 @@ NULL
 #' @inheritParams base::`[.data.frame`
 #' @export
 `$.tbl_df` <- function(x, name) {
-  if (is.character(name)) {
-    ret <- .subset2(x, name)
-    if (is.null(ret)) {
-      warn(paste0("Unknown or uninitialised column: `", name, "`."))
-    }
-    return(ret)
-  }
-  .subset2(x, name)
+  tbl_subset2(x, as_string(name))
 }
 
 
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
-  name <- as_string(name)
-  value <- col_recycle(value, x, name)
-
-  tbl_extract2_assign_do(x, name, value)
+  tbl_subassign(x, i = NULL, as_string(name), list(value))
 }
 
 #' @rdname subsetting
@@ -105,22 +95,32 @@ NULL
     warn("`exact` ignored")
   }
   if (missing(j)) {
-    tbl_extract2(x, i = NULL, j = i)
+    tbl_subset2(x, j = i)
   } else {
-    tbl_extract2(x, i, j)
+    i <- vec_as_index(i, nrow(x))
+    stopifnot(is_integer(i, 1))
+
+    j <- vec_as_index(j, nrow(x))
+    stopifnot(is_integer(j, 1))
+
+    x <- tbl_subset_col(x, j = j)
+    x <- tbl_subset_row(x, i = i)
+    tbl_subset2(x, j = 1)
   }
 }
 
 #' @rdname subsetting
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
-`[[<-.tbl_df` <- function(x, i, j, value) {
-  if (missing(j)) {
-    tbl_extract2_assign(x, j = i, value)
-  } else {
-    tbl_extract2_assign2(x, i, j, value)
+`[[<-.tbl_df` <- function(x, i = NULL, j = NULL, value) {
+  if (is.null(j) && nargs() < 4) {
+    j <- i
+    i <- NULL
   }
+
+  tbl_subassign(x, i, j, list(value))
 }
+
 
 #' @rdname subsetting
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
@@ -132,39 +132,138 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    if (!missing(drop)) {
-      warn("`drop` ignored")
-    }
+    if (!missing(drop)) warn("`drop` ignored")
 
-    if (missing(i)) {
-      return(x)
-    }
-
-    slice_df(x, i = NULL, j = i, drop = FALSE)
+    xo <- tbl_subset_col(x, j = i)
+    vec_restore(xo, x)
   } else {
-    slice_df(x, i, j, drop = drop)
+    xo <- x
+    xo <- tbl_subset_col(xo, j = j)
+    xo <- tbl_subset_row(xo, i = i)
+
+    if (drop && length(xo) == 1L) {
+      tbl_subset2(xo, 1L)
+    } else {
+      vec_restore(xo, x, n = nrow(xo))
+    }
   }
 }
 
 #' @rdname subsetting
 #' @inheritParams base::`[<-.data.frame`
 #' @export
-`[<-.tbl_df` <- function(x, i, j, value) {
-  if (missing(i)) i <- NULL
-  if (missing(j)) {
-    if (nargs() < 4 && !is.null(i)) {
-      j <- i
-      i <- NULL
-    } else {
-      j <- names(x)
-    }
+`[<-.tbl_df` <- function(x, i = NULL, j = NULL, value) {
+  if (is.null(j) && nargs() < 4) {
+    j <- i
+    i <- NULL
   }
 
+  tbl_subassign(x, i, j, value)
+}
+
+vec_as_row_index <- function(i, x) {
+  stopifnot(!is.null(i))
+  vec_as_index(i, nrow(x))
+}
+
+vec_as_col_index <- function(j, x) {
+  stopifnot(!is.null(j))
+  vec_as_index(j, ncol(x), names(x))
+}
+
+tbl_subset2 <- function(x, j) {
+  .subset2(x, j)
+}
+
+tbl_subset_col <- function(x, j) {
+  if (is_null(j)) return(x)
+  j <- vec_as_col_index(j, x)
+  xo <- .subset(x, j)
+  set_tibble_class(xo, nrow = nrow(x))
+}
+
+tbl_subset_row <- function(x, i) {
+  if (is_null(i)) return(x)
+  i <- vec_as_row_index(i, x)
+  xo <- lapply(unclass(x), vec_slice, i = i)
+  set_tibble_class(xo, nrow = length(i))
+}
+
+tbl_subassign <- function(x, i, j, value) {
+  if (is_null(value) || is_atomic(value)) value <- list(value)
+
   if (is.null(i)) {
-    tbl_extract_assign(x, j, value)
+    xo <- tbl_subassign_col(x, j, value)
+  } else if (is.null(j)) {
+    value <- vec_recycle(value, ncol(x))
+    xo <- tbl_subassign_row(x, i, value)
   } else {
-    tbl_extract_assign2(x, i, j, value)
+    # Optimization: match only once
+    # (Invariant: x[[j]] is equivalent to x[[vec_as_index(j)]],
+    # allowed by corollary that only existing columns can be updated)
+    j <- vec_as_col_index(j, x)
+
+    xj <- tbl_subset_col(x, j)
+    xj <- tbl_subassign_row(xj, i, value)
+    xo <- tbl_subassign_col(x, j, xj)
   }
+
+  vec_restore(xo, x)
+}
+
+vec_as_new_row_index <- function(i, x) {
+  # FIXME
+  vec_as_row_index(i, x)
+}
+
+vec_as_new_col_index <- function(j, x, value) {
+  # FIXME: creation of new columns
+  vec_as_col_index(j, x)
+}
+
+tbl_subassign_col <- function(x, j, value) {
+  j <- vec_as_new_col_index(j, x, value)
+
+  value <- vec_recycle(value, length(j))
+
+  is_data <- !map_lgl(value, is_null)
+  nrow <- nrow(x)
+
+  x <- unclass(x)
+
+  # Create or update
+  for (jj in which(is_data)) {
+    ji <- coalesce2(j[[jj]], names(j)[[jj]])
+    x[[ji]] <- vec_recycle(value[[jj]], nrow)
+  }
+
+  # Remove
+  x <- x[is_data]
+
+  # Restore
+  set_tibble_class(x, nrow)
+}
+
+coalesce2 <- function(x, y) {
+  if (is.na(x)) y else x
+}
+
+tbl_subassign_row <- function(x, i, value) {
+  nrow <- nrow(x)
+  i <- vec_as_new_row_index(i, x)
+
+  # FIXME
+  new_nrow <- nrow
+
+  x <- unclass(x)
+
+  for (j in seq_along(x)) {
+    xj <- x[[j]]
+    vec_slice(xj, i) <- value[[j]]
+    x[[j]] <- xj
+  }
+
+  set_tibble_class(x, nrow)
 }
 
 tbl_extract2 <- function(x, i, j) {

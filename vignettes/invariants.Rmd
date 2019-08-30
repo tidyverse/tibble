@@ -401,7 +401,7 @@ with_df(df[["c"]] <- 0)
 
 ## Definition of `x[j]`.
 
-Selects all rows from the columns given by `vec_as_index(j)`.
+Equivalent to restoring `.subset(x, vec_as_index(j))` to the original class.
 
 ```{r bracket-j-definition, dftbl = TRUE}
 df[1:2]
