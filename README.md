@@ -106,6 +106,6 @@ tribble(
 
 The tibble print method draws inspiration from
 [data.table](http://r-datatable.com/), and
-[r-frame](https://github.com/patperry/frame). Like `data.table()`,
+[r-frame](https://github.com/patperry/r-frame). Like `data.table()`,
 `tibble()` doesn’t coerce strings to factors by default, doesn’t change
 column names, and doesn’t use rownames.
