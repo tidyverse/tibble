@@ -111,6 +111,62 @@ NULL
   }
 }
 
+#' @rdname subsetting
+#' @inheritParams base::`[[<-.data.frame`
+#' @export
+`[[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(j)) {
+    tbl_extract2_assign(x, j = i, value)
+  } else {
+    tbl_extract2_assign2(x, i, j, value)
+  }
+}
+
+#' @rdname subsetting
+#' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
+#'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
+#' @export
+`[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
+  # Ignore drop as an argument
+  n_real_args <- nargs() - !missing(drop)
+
+  # Column subsetting if nargs() == 2L
+  if (n_real_args <= 2L) {
+    if (!missing(drop)) {
+      warn("`drop` ignored")
+    }
+
+    if (missing(i)) {
+      return(x)
+    }
+
+    slice_df(x, i = NULL, j = i, drop = FALSE)
+  } else {
+    slice_df(x, i, j, drop = drop)
+  }
+}
+
+#' @rdname subsetting
+#' @inheritParams base::`[<-.data.frame`
+#' @export
+`[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(i)) i <- NULL
+  if (missing(j)) {
+    if (nargs() < 4 && !is.null(i)) {
+      j <- i
+      i <- NULL
+    } else {
+      j <- names(x)
+    }
+  }
+
+  if (is.null(i)) {
+    tbl_extract_assign(x, j, value)
+  } else {
+    tbl_extract_assign2(x, i, j, value)
+  }
+}
+
 tbl_extract2 <- function(x, i, j) {
   if (is.null(i)) {
     if (is.matrix(j)) {
@@ -156,17 +212,6 @@ vec_as_index_extract2_compat <- function(j, n, names, match = TRUE) {
   j
 }
 
-#' @rdname subsetting
-#' @inheritParams base::`[[<-.data.frame`
-#' @export
-`[[<-.tbl_df` <- function(x, i, j, value) {
-  if (missing(j)) {
-    tbl_extract2_assign(x, j = i, value)
-  } else {
-    tbl_extract2_assign2(x, i, j, value)
-  }
-}
-
 tbl_extract2_assign2 <- function(x, i, j, value) {
   vec_assert(value, size = 1)
 
@@ -203,30 +248,6 @@ col_recycle <- function(value, x, name) {
       abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
     }
   )
-}
-
-#' @rdname subsetting
-#' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
-#'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
-#' @export
-`[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
-  # Ignore drop as an argument
-  n_real_args <- nargs() - !missing(drop)
-
-  # Column subsetting if nargs() == 2L
-  if (n_real_args <= 2L) {
-    if (!missing(drop)) {
-      warn("`drop` ignored")
-    }
-
-    if (missing(i)) {
-      return(x)
-    }
-
-    slice_df(x, i = NULL, j = i, drop = FALSE)
-  } else {
-    slice_df(x, i, j, drop = drop)
-  }
 }
 
 slice_df <- function(x, i, j, drop) {
@@ -344,27 +365,6 @@ vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
     n <- length(i)
   }
   vec_restore(x, to, n = n)
-}
-
-#' @rdname subsetting
-#' @inheritParams base::`[<-.data.frame`
-#' @export
-`[<-.tbl_df` <- function(x, i, j, value) {
-  if (missing(i)) i <- NULL
-  if (missing(j)) {
-    if (nargs() < 4 && !is.null(i)) {
-      j <- i
-      i <- NULL
-    } else {
-      j <- names(x)
-    }
-  }
-
-  if (is.null(i)) {
-    tbl_extract_assign(x, j, value)
-  } else {
-    tbl_extract_assign2(x, i, j, value)
-  }
 }
 
 tbl_extract_assign2 <- function(x, i, j, value) {
