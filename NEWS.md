@@ -1,3 +1,8 @@
+# tibble 2.99.99.9004
+
+- Formatting numbers with thousand separators never uses scientific notation.
+
+
 # tibble 2.99.99.9003
 
 - New `` `[<-.tbl_df`() ``.
