@@ -37,7 +37,7 @@ Suggests:
     mockr,
     nycflights13,
     rmarkdown,
-    testthat,
+    testthat (>= 2.1.0),
     withr
 Remotes: 
     r-lib/pillar,
