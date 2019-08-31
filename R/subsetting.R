@@ -190,7 +190,11 @@ tbl_subset_row <- function(x, i) {
 }
 
 tbl_subassign <- function(x, i, j, value) {
-  if (is_null(value) || is_atomic(value)) value <- list(value)
+  if (is_null(value) || is_atomic(value)) {
+    value <- list(value)
+  } else if (is.data.frame(value)) {
+    value <- unclass(value)
+  }
 
   if (is.null(i)) {
     xo <- tbl_subassign_col(x, j, value)
@@ -217,8 +221,37 @@ vec_as_new_row_index <- function(i, x) {
 }
 
 vec_as_new_col_index <- function(j, x, value) {
-  # FIXME: creation of new columns
-  vec_as_col_index(j, x)
+  # Creates a named index vector
+  # Values: index,
+  # Name: column name (for new columns)
+
+  if (is.character(j)) {
+    set_names(match(j, names(x)), j)
+  } else if (is.numeric(j)) {
+    names <- names2(value)
+
+    new <- which(j > ncol(x))
+    j_new <- j[new]
+    j[new] <- NA
+    j <- vec_as_index(j, ncol(x))
+
+    stopifnot(length(j) == length(value))
+
+    if (!is_tight_sequence_at_end(j_new, ncol(x))) {
+      error_new_columns_at_end_only()
+    }
+
+    # FIXME: Hard-coded name repair
+    names[new][names == ""] <- paste0("...", j_new)
+
+    set_names(j, names)
+  } else {
+    vec_as_col_index(j, x)
+  }
+}
+
+is_tight_sequence_at_end <- function(i_new, n) {
+  all(sort(i_new) == seq2(n + 1, n + length(i_new)))
 }
 
 tbl_subassign_col <- function(x, j, value) {
