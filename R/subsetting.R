@@ -115,6 +115,16 @@ NULL
     i <- NULL
   }
 
+  if (!is_null(i)) {
+    i <- vec_as_row_index(i, x)
+    stopifnot(is_integerish(i, 1))
+  }
+
+  if (!is_null(j)) {
+    j <- vec_as_col_index(j, x)
+    stopifnot(is_integerish(j, 1))
+  }
+
   tbl_subassign(x, i, j, list(value))
 }
 
@@ -315,23 +325,21 @@ vec_as_new_col_index <- function(j, x, value) {
   # Values: index,
   # Name: column name (for new columns)
 
-  if (is.character(j)) {
+  if (is_bare_character(j)) {
     set_names(match(j, names(x)), j)
-  } else if (is.numeric(j)) {
-    names <- names2(value)
-
+  } else if (is_bare_numeric(j)) {
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
     j <- vec_as_index(j, ncol(x))
 
-    stopifnot(length(j) == length(value))
-
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       error_new_columns_at_end_only()
     }
 
+    # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
+    names <- vec_recycle(names2(value), length(j))
     names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
