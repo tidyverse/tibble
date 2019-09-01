@@ -79,6 +79,8 @@ test_that("[.tbl_df is careful about names (#1245)", {
     fixed = TRUE
   )
 
+  skip("r-lib/vctrs#557")
+
   expect_error_relax(
     foo[as.matrix("x")],
     error_dim_column_index(as.matrix("x")),
@@ -155,6 +157,8 @@ test_that("[.tbl_df is careful about column flags (#83)", {
     fixed = TRUE
   )
 
+  skip("r-lib/vctrs#557")
+
   expect_error_relax(
     foo[as.matrix(TRUE)],
     error_dim_column_index(as.matrix("x")),
@@ -174,6 +178,9 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
     error_unsupported_index(list(1:3)),
     fixed = TRUE
   )
+
+  skip("r-lib/vctrs#557")
+
   expect_error_relax(
     foo[as.list(1:3)],
     error_unsupported_index(as.list(1:3)),
