@@ -97,15 +97,12 @@ NULL
   if (missing(j)) {
     tbl_subset2(x, j = i)
   } else {
-    i <- vec_as_index(i, nrow(x))
-    stopifnot(is_integer(i, 1))
+    i <- vec_as_row_index(i, x)
+    stopifnot(is_integerish(i, 1))
 
-    j <- vec_as_index(j, nrow(x))
-    stopifnot(is_integer(j, 1))
-
-    x <- tbl_subset_col(x, j = j)
-    x <- tbl_subset_row(x, i = i)
-    tbl_subset2(x, j = 1)
+    x <- tbl_subset2(x, j = j)
+    if (is.null(x)) return(x)
+    vec_slice(x, i)
   }
 }
 
@@ -144,7 +141,7 @@ NULL
     if (drop && length(xo) == 1L) {
       tbl_subset2(xo, 1L)
     } else {
-      vec_restore(xo, x, n = nrow(xo))
+      vec_restore(xo, x, n = fast_nrow(xo))
     }
   }
 }
@@ -163,16 +160,107 @@ NULL
 
 vec_as_row_index <- function(i, x) {
   stopifnot(!is.null(i))
-  vec_as_index(i, nrow(x))
+
+  nr <- fast_nrow(x)
+
+  if (is.character(i)) {
+    is_na_orig <- is.na(i)
+
+    if (has_rownames(x)) {
+      i <- match(i, rownames(x))
+    } else {
+      i <- string_to_indices(i)
+      i <- fix_oob(i, nr, warn = FALSE)
+    }
+
+    oob <- which(is.na(i) & !is_na_orig)
+
+    if (has_length(oob)) {
+      warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
+      i[oob] <- NA_integer_
+    }
+  } else if (is.numeric(i)) {
+    i <- fix_oob(i, nr)
+    i <- vec_as_index(i, nr)
+  } else if (is.logical(i)) {
+    if (length(i) != 1L && length(i) != nr) {
+      warn_deprecated(paste0(
+        "Length of logical index must be 1",
+        if (nr != 1) paste0(" or ", nr),
+        ", not ", length(i)
+      ))
+      return(seq_len(nr)[i])
+    }
+  }
+
+  vec_as_index(i, nr)
+}
+
+fix_oob <- function(i, n, warn = TRUE) {
+  if (all(i >= 0, na.rm = TRUE)) {
+    fix_oob_positive(i, n, warn)
+  } else if (all(i <= 0, na.rm = TRUE)) {
+    fix_oob_negative(i, n, warn)
+  } else {
+    # Will throw error in vec_as_index()
+    i
+  }
+}
+
+fix_oob_positive <- function(i, n, warn = TRUE) {
+  oob <- which(i > n)
+  if (warn) {
+    warn_oob(oob)
+  }
+
+  i[oob] <- NA_integer_
+  i
+}
+
+fix_oob_negative <- function(i, n, warn = TRUE) {
+  oob <- which(i < -n)
+  if (warn) {
+    warn_oob(oob)
+  }
+
+  i[oob] <- 0L
+  i
+}
+
+warn_oob <- function(oob) {
+  if (has_length(oob)) {
+    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+  }
 }
 
 vec_as_col_index <- function(j, x) {
   stopifnot(!is.null(j))
-  vec_as_index(j, ncol(x), names(x))
+
+  j <- vec_as_index(j, length(x), names(x))
+  if (anyNA(j)) {
+    abort(error_na_column_index(which(is.na(j))))
+  }
+  j
 }
 
 tbl_subset2 <- function(x, j) {
-  .subset2(x, j)
+  if (is.matrix(j)) {
+    signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
+    return(as.matrix(x)[[j]])
+  } else if (has_length(j, 2)) {
+    signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
+    return(.subset2(x, j))
+  } else if (!is.character(j)) {
+    j <- vec_as_index(j, length(x))
+    stopifnot(length(j) == 1)
+    .subset2(x, j)
+  } else {
+    ret <- .subset2(x, j)
+    if (is.null(ret)) {
+      warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
+    }
+    ret
+  }
 }
 
 tbl_subset_col <- function(x, j) {
@@ -197,6 +285,8 @@ tbl_subassign <- function(x, i, j, value) {
   }
 
   if (is.null(i)) {
+    if (is.null(j)) j <- seq_along(x)
+
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(j)) {
     value <- vec_recycle(value, ncol(x))
@@ -242,7 +332,7 @@ vec_as_new_col_index <- function(j, x, value) {
     }
 
     # FIXME: Hard-coded name repair
-    names[new][names == ""] <- paste0("...", j_new)
+    names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
   } else {
@@ -271,7 +361,8 @@ tbl_subassign_col <- function(x, j, value) {
   }
 
   # Remove
-  x <- x[is_data]
+  j_remove <- j[!is_data]
+  if (has_length(j_remove)) x <- x[-j_remove]
 
   # Restore
   set_tibble_class(x, nrow)
@@ -299,291 +390,6 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
-tbl_extract2 <- function(x, i, j) {
-  if (is.null(i)) {
-    if (is.matrix(j)) {
-      signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
-      return(as.matrix(x)[[j]])
-    } else if (has_length(j, 2)) {
-      signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
-      return(.subset2(x, j))
-    }
-  }
-
-  vec_assert(j, size = 1)
-  j <- vec_as_index_extract2_compat(j, ncol(x), names = names(x))
-
-  if (is.null(i)) {
-    .subset2(x, j)
-  } else if (is.na(j)) {
-    # Lifecycle warning already given
-    NULL
-  } else {
-    i <- vec_as_index(i, vec_size(x))
-    vec_assert(i, size = 1)
-
-    x[i, j][[1L]]
-  }
-}
-
-vec_as_index_extract2_compat <- function(j, n, names, match = TRUE) {
-  if (is.character(j)) {
-    vec_assert(j, size = 1)
-    if (match) {
-      jm <- match(j, names)
-      if (is.na(jm)) {
-        signal_soft_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
-      }
-      j <- jm
-    }
-    j
-  } else {
-    j <- vec_as_index(j, n)
-    vec_assert(j, size = 1)
-  }
-  j
-}
-
-tbl_extract2_assign2 <- function(x, i, j, value) {
-  vec_assert(value, size = 1)
-
-  i <- vec_as_index(i, vec_size(x))
-  vec_assert(i, size = 1)
-
-  # Strict matching!
-  j <- vec_as_index(j, ncol(x), names = names(x))
-
-  column <- tbl_extract2(x, i = NULL, j)
-  vec_slice(column, i) <- value
-  tbl_extract2_assign_do(x, j, column)
-}
-
-tbl_extract2_assign <- function(x, j, value) {
-  vec_assert(j, size = 1)
-  j <- vec_as_index_extract2_compat(j, ncol(x), names = names(x), match = FALSE)
-
-  value <- vec_recycle(value, vec_size(x))
-  tbl_extract2_assign_do(x, j, value)
-}
-
-tbl_extract2_assign_do <- function(x, j, value) {
-  old_class <- class(x)
-  xx <- unclass(x)
-  xx[[j]] <- value
-  vec_restore(structure(xx, class = old_class), x)
-}
-
-col_recycle <- function(value, x, name) {
-  tryCatch(
-    vec_recycle(value, vec_size(x)),
-    vctrs_error_recycle_incompatible_size = function(e) {
-      abort(error_inconsistent_cols(nrow(x), name, vec_size(value), "Existing data"))
-    }
-  )
-}
-
-slice_df <- function(x, i, j, drop) {
-  # First, subset columns
-  if (is.null(j)) {
-    result <- x
-  } else {
-    j <- check_names_df(j, x)
-    result <- new_data_frame(.subset(x, j), n = fast_nrow(x))
-  }
-
-  # Next, subset rows
-  if (is.null(i)) {
-    if (has_length(result)) {
-      i <- NULL
-    } else {
-      i <- seq_len(fast_nrow(x))
-    }
-  } else {
-    nr <- fast_nrow(x)
-
-    if (is.character(i)) {
-      is_na_orig <- is.na(i)
-
-      if (has_rownames(x)) {
-        i <- match(i, rownames(x))
-      } else {
-        i <- string_to_indices(i)
-        i <- fix_oob(i, nr, warn = FALSE)
-      }
-
-      oob <- which(is.na(i) & !is_na_orig)
-
-      if (has_length(oob)) {
-        warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
-        i[oob] <- NA_integer_
-      }
-
-      i <- vec_as_index(i, nr)
-    } else {
-      if (is.numeric(i)) {
-        i <- fix_oob(i, nr)
-        i <- vec_as_index(i, nr)
-      } else if (is.logical(i)) {
-        if (length(i) != 1L && length(i) != nr) {
-          warn_deprecated(paste0(
-            "Length of logical index must be 1",
-            if (nr != 1) paste0(" or ", nr),
-            ", not ", length(i)
-          ))
-          i <- seq_len(nr)[i]
-        } else {
-          i <- vec_as_index(i, nr)
-        }
-      }
-    }
-
-    result <- vec_slice(result, i)
-  }
-
-  if (drop) {
-    if (length(result) == 1L) {
-      return(result[[1L]])
-    }
-  }
-
-  vec_restore_tbl_df_with_i(result, x, i)
-}
-
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
-}
-
-fix_oob <- function(i, n, warn = TRUE) {
-  if (all(i >= 0, na.rm = TRUE)) {
-    fix_oob_positive(i, n, warn)
-  } else if (all(i <= 0, na.rm = TRUE)) {
-    fix_oob_negative(i, n, warn)
-  } else {
-    # Will throw error in vec_as_index()
-    i
-  }
-}
-
-fix_oob_positive <- function(i, n, warn = TRUE) {
-  oob <- which(i > n)
-  if (warn) {
-    warn_oob(oob)
-  }
-
-  i[oob] <- NA_integer_
-  i
-}
-
-fix_oob_negative <- function(i, n, warn = TRUE) {
-  oob <- which(i < -n)
-  if (warn) {
-    warn_oob(oob)
-  }
-
-  i[oob] <- 0L
-  i
-}
-
-warn_oob <- function(oob) {
-  if (has_length(oob)) {
-    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
-  }
-}
-
-vec_restore_tbl_df_with_i <- function(x, to, i = NULL) {
-  if (is.null(i)) {
-    n <- nrow(x)
-  } else {
-    n <- length(i)
-  }
-  vec_restore(x, to, n = n)
-}
-
-tbl_extract_assign2 <- function(x, i, j, value) {
-  i <- vec_as_index(i, vec_size(x))
-  value <- col_recycle(value, i, "RHS")
-
-  vec_assert(value, size = vec_size(i))
-
-  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), full_column = FALSE)
-
-  if (is.data.frame(value)) {
-    new_columns <- map2(.subset(x, j), value, function(column, value) {
-      vec_slice(column, i) <- value
-      column
-    })
-    names(new_columns) <- names(value)
-  } else {
-    new_columns <- map(unname(.subset(x, j)), function(column) {
-      vec_slice(column, i) <- value
-      column
-    })
-  }
-
-  tbl_extract_assign_do(x, j, new_columns)
-}
-
-tbl_extract_assign <- function(x, j, value) {
-  value <- vec_recycle(value, vec_size(x))
-
-  j <- vec_as_index_extract_compat(j, ncol(x), names = names(x), full_column = TRUE)
-
-  tbl_extract_assign_do(x, j, value)
-}
-
-vec_as_index_extract_compat <- function(j, n, names, full_column) {
-  # Strict matching, but allowing for extension!
-  if (is.numeric(j)) {
-    if (full_column && any(j > n)) {
-      if (any(j < 0)) {
-        error_no_negative_indexes_with_new_columns()
-      }
-
-      # Check new columns are gapless
-      new_cols <- seq2(n + 1L, max(j))
-      if (has_length(setdiff(new_cols, j))) {
-        error_append_column_needs_all_columns()
-      }
-
-      # Use j unchanged
-    } else {
-      j <- vec_as_index(j, n)
-    }
-  } else if (is.character(j)) {
-    if (!full_column) {
-      j <- match(j, names)
-      if (any(is.na(j))) {
-        error_unknown_column_for_subsetting()
-      }
-    }
-
-    # Allow new column names if assigning full columns
-    j
-  } else {
-    j <- vec_as_index(j, n)
-  }
-
-  j
-}
-
-tbl_extract_assign_do <- function(x, j, value) {
-  old_class <- class(x)
-  xx <- unclass(x)
-
-  if (!is.list(value)) {
-    value <- rep_along(j, list(value))
-    if (is.character(j)) {
-      names(value) <- j
-    } else if (any(j > ncol(x))) {
-      error_new_column_needs_name()
-    }
-  }
-
-  for (jj in seq_along(j)) xx[[ j[[jj]] ]] <- value[[jj]]
-
-  if (!is.character(j) && !is.null(names(value))) {
-    names(xx)[j] <- names(value)
-  }
-
-  vec_restore(structure(xx, class = old_class), x)
 }

@@ -219,7 +219,7 @@ df2[1:2]
 
 If `i` is given in subassignment, only existing columns can be updated.
 
-```{r}
+```{r bracket-ij-update-existing-only, dftbl = TRUE}
 with_df(df["c"] <- 1)
 with_df(df[2:3, "c"] <- 1)
 ```
@@ -528,10 +528,11 @@ j <- vec_as_index_or_name(j, ncol(x), a)
 is_data <- !map_lgl(a, is_null)
 
 # Create or update
-for (jj in which(is_data)]) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
+for (jj in which(is_data)) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
 
 # Remove
-x <- x[is_data]
+j_remove <- j[!is_data]
+if (has_length(j_remove)) x <- x[-j_remove]
 ```
 
 ```{r bracket-assign-def, dftbl = TRUE}
