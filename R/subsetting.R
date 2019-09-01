@@ -277,7 +277,7 @@ tbl_subset_col <- function(x, j) {
   if (is_null(j)) return(x)
   j <- vec_as_col_index(j, x)
   xo <- .subset(x, j)
-  set_tibble_class(xo, nrow = nrow(x))
+  set_tibble_class(xo, nrow = fast_nrow(x))
 }
 
 tbl_subset_row <- function(x, i) {
@@ -316,8 +316,24 @@ tbl_subassign <- function(x, i, j, value) {
 }
 
 vec_as_new_row_index <- function(i, x) {
-  # FIXME
-  vec_as_row_index(i, x)
+  if (is_bare_numeric(i)) {
+    nr <- fast_nrow(x)
+
+    new <- which(i > nr)
+    i_new <- i[new]
+    i[new] <- NA
+    i <- vec_as_index(i, nr)
+
+    if (!is_tight_sequence_at_end(i_new, nr)) {
+      abort(error_new_rows_at_end_only())
+    }
+
+    # Restore, caller knows how to deal
+    i[new] <- i_new
+    i
+  } else {
+    vec_as_row_index(i, x)
+  }
 }
 
 vec_as_new_col_index <- function(j, x, value) {
@@ -334,7 +350,7 @@ vec_as_new_col_index <- function(j, x, value) {
     j <- vec_as_index(j, ncol(x))
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      error_new_columns_at_end_only()
+      abort(error_new_columns_at_end_only())
     }
 
     # FIXME: Recycled names are not repaired
@@ -358,7 +374,7 @@ tbl_subassign_col <- function(x, j, value) {
   value <- vec_recycle(value, length(j))
 
   is_data <- !map_lgl(value, is_null)
-  nrow <- nrow(x)
+  nrow <- fast_nrow(x)
 
   x <- unclass(x)
 
@@ -381,11 +397,15 @@ coalesce2 <- function(x, y) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  nrow <- nrow(x)
+  nrow <- fast_nrow(x)
   i <- vec_as_new_row_index(i, x)
 
-  # FIXME
-  new_nrow <- nrow
+  new_nrow <- max(i, nrow)
+
+  if (new_nrow != nrow) {
+    i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
+    x <- vec_slice(x, i_expand)
+  }
 
   x <- unclass(x)
 
@@ -395,7 +415,7 @@ tbl_subassign_row <- function(x, i, value) {
     x[[j]] <- xj
   }
 
-  set_tibble_class(x, nrow)
+  set_tibble_class(x, new_nrow)
 }
 
 check_scalar <- function(ij) {

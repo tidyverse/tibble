@@ -296,9 +296,9 @@ Appending rows right at the end of the existing data is supported, without warni
 df[5, ]
 df[5:7, ]
 df[6, ]
-with_df(df[5, ] <- list(0, "x", list()))
-with_df(df[5:7, ] <- list(0, "x", list()))
-with_df(df[6, ] <- list(0, "x", list()))
+with_df(df[5, ] <- list(0, "x", list(NULL)))
+with_df(df[5:7, ] <- list(0, "x", list(NULL)))
+with_df(df[6, ] <- list(0, "x", list(NULL)))
 ```
 
 
