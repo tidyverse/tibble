@@ -221,13 +221,13 @@ $(x, name) <- value
 [[(x, i, j, ..., exact = TRUE)
 
 # S3 method for tbl_df
-[[(x, i, j) <- value
+[[(x, i = NULL, j = NULL) <- value
 
 # S3 method for tbl_df
 [(x, i = NULL, j = NULL, drop = FALSE)
 
 # S3 method for tbl_df
-[(x, i, j) <- value</pre>
+[(x, i = NULL, j = NULL) <- value</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -299,11 +299,12 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 #&gt; [1] 4
 #&gt; </div><div class='input'>
 <span class='co'># Accessing non-existent columns:</span>
-<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
+<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span>
+#&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>df</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: `exact` ignored</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>df</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
 <span class='no'>tbl</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
-<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
+<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>df</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
 <span class='no'>tbl</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
 <span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'>
