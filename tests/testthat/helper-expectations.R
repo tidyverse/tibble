@@ -8,3 +8,7 @@ expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) 
     expect_equal(cnd[names(exp_fields)], exp_fields)
   }
 }
+
+expect_error_relax <- function(object, ...) {
+  expect_error(object)
+}

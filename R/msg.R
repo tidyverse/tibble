@@ -40,55 +40,12 @@ error_enframe_has_dim <- function(x) {
   paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), ".")
 }
 
-error_unsupported_index <- function(j) {
-  paste0("Can't subset with `[` using an object of class ", class(j)[[1L]], ".")
-}
-
-error_na_column_index <- function() {
-  "Can't use numeric NA as column index with `[`."
-}
-
-error_nonint_column_index <- function(pos, value) {
-  bullets(
-    "Must use integers to index columns with `[`:",
-    paste0("Position ", pos, " equals ", value)
-  )
-}
-
-error_small_column_index <- function(n, pos, value) {
-  bullets(
-    "Negative column indexes in `[` must match number of columns:",
-    data_has_n_cols(n),
-    paste0("Position ", pos, " equals ", value)
-  )
-}
-
-error_large_column_index <- function(n, pos, value) {
-  bullets(
-    "Positive column indexes in `[` must match number of columns:",
-    data_has_n_cols(n),
-    paste0("Position ", pos, " equals ", value)
-  )
+error_na_column_index <- function(j) {
+  pluralise_commas("Can't use numeric NA as column index with `[` at position(s) ", j, ".")
 }
 
 error_dim_column_index <- function(j) {
   paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], ".")
-}
-
-error_mismatch_column_flag <- function(n, j) {
-  bullets(
-    paste0(
-      "When subsetting tibble with a logical vector, ",
-      "the vector must have length 1 or ",
-      n, " ", "(the number of columns), not ", j, ":"
-    ),
-    data_has_n_cols(n),
-    paste0("Index vector has length ", j)
-  )
-}
-
-error_na_column_flag <- function() {
-  "Can't use logical NA when selecting columns with `[`."
 }
 
 error_unknown_names <- function(names) {

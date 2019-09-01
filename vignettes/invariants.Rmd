@@ -219,7 +219,7 @@ df2[1:2]
 
 If `i` is given in subassignment, only existing columns can be updated.
 
-```{r}
+```{r bracket-ij-update-existing-only, dftbl = TRUE}
 with_df(df["c"] <- 1)
 with_df(df[2:3, "c"] <- 1)
 ```
@@ -296,9 +296,9 @@ Appending rows right at the end of the existing data is supported, without warni
 df[5, ]
 df[5:7, ]
 df[6, ]
-with_df(df[5, ] <- list(0, "x", list()))
-with_df(df[5:7, ] <- list(0, "x", list()))
-with_df(df[6, ] <- list(0, "x", list()))
+with_df(df[5, ] <- list(0, "x", list(NULL)))
+with_df(df[5:7, ] <- list(0, "x", list(NULL)))
+with_df(df[6, ] <- list(0, "x", list(NULL)))
 ```
 
 
@@ -331,7 +331,7 @@ df2[1, ][[2]]
 with_df(df[[1, 1]] <- df[2, ][[1]])
 with_df(df[1, 1] <- list(df[[2, 1]]))
 with_df(df[[1, 3]] <- df[2, ][[3]])
-with_df(df[1, 3] <- list(df[2, 3]))
+with_df(df[1, 3] <- list(df[[2, 3]]))
 with_df2(df2[[1, 1]] <- df2[2, ][[1]])
 with_df2(df2[1, 1] <- list(df2[[2, 1]]))
 with_df2(df2[[1, 2]] <- df2[2, ][[2]])
@@ -401,7 +401,7 @@ with_df(df[["c"]] <- 0)
 
 ## Definition of `x[j]`.
 
-Selects all rows from the columns given by `vec_as_index(j)`.
+Equivalent to restoring `.subset(x, vec_as_index(j))` to the original class.
 
 ```{r bracket-j-definition, dftbl = TRUE}
 df[1:2]
@@ -523,15 +523,16 @@ with_df(df[1:3] <- list(0, 0))
 
 ```r
 # With logic for defining names of new columns, see below
-j <- vec_as_index_or_name(j, ncol(x), a)
+j <- vec_as_new_col_index(j, x, a)
 
 is_data <- !map_lgl(a, is_null)
 
 # Create or update
-for (jj in which(is_data)]) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
+for (jj in which(is_data)) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
 
 # Remove
-x <- x[is_data]
+j_remove <- j[!is_data]
+if (has_length(j_remove)) x <- x[-j_remove]
 ```
 
 ```{r bracket-assign-def, dftbl = TRUE}
@@ -541,7 +542,7 @@ with_df(df[c("cd", "c", "b")] <- list("x", 4:1, NULL))
 
 `NA` indexes are not supported.
 
-```{r bracket-assign-na, dftbl = TRUE, eval = FALSE}
+```{r bracket-assign-na, dftbl = TRUE}
 with_df(df[NA] <- list("x"))
 with_df(df[NA_integer_] <- list("x"))
 with_df(df[NA_character_] <- list("x"))
