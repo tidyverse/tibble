@@ -98,7 +98,7 @@ NULL
     tbl_subset2(x, j = i)
   } else {
     i <- vec_as_row_index(i, x)
-    stopifnot(is_integerish(i, 1))
+    check_scalar(i)
 
     x <- tbl_subset2(x, j = j)
     if (is.null(x)) return(x)
@@ -117,12 +117,12 @@ NULL
 
   if (!is_null(i)) {
     i <- vec_as_row_index(i, x)
-    stopifnot(is_integerish(i, 1))
+    check_scalar(i)
   }
 
   if (!is_null(j)) {
     j <- vec_as_col_index(j, x)
-    stopifnot(is_integerish(j, 1))
+    check_scalar(j)
   }
 
   tbl_subassign(x, i, j, list(value))
@@ -260,16 +260,16 @@ tbl_subset2 <- function(x, j) {
   } else if (has_length(j, 2)) {
     signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(.subset2(x, j))
-  } else if (!is.character(j)) {
-    j <- vec_as_index(j, length(x))
-    stopifnot(length(j) == 1)
-    .subset2(x, j)
-  } else {
+  } else if (is.character(j)) {
     ret <- .subset2(x, j)
     if (is.null(ret)) {
       warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
     }
     ret
+  } else {
+    j <- vec_as_index(j, length(x))
+    check_scalar(j)
+    .subset2(x, j)
   }
 }
 
@@ -396,6 +396,12 @@ tbl_subassign_row <- function(x, i, value) {
   }
 
   set_tibble_class(x, nrow)
+}
+
+check_scalar <- function(ij) {
+  if (!has_length(ij, 1)) {
+    abort(error_need_scalar())
+  }
 }
 
 fast_nrow <- function(x) {
