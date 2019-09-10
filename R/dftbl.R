@@ -22,7 +22,7 @@ dftbl_opts_hook <- function(options) {
   tbl_code <- gsub("df", "tbl", df_code)
 
   # FIXME: Evaluate, but surround in <details> element
-  if (!isTRUE(options$dftbl_always)) {
+  if (!isTRUE(options$dftbl_always) && isTRUE(options$eval)) {
     same <- map2_lgl(df_code, tbl_code, same_as_tbl_code)
     df_code[same] <- ""
   }

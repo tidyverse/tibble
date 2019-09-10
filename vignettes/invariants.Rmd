@@ -1,5 +1,6 @@
 ---
 title: "Invariants for subsetting and subassignment"
+#output: rmarkdown::word_document
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{invariants}
@@ -27,6 +28,7 @@ vignette: >
 knitr::opts_chunk$set(
   error = TRUE,
   collapse = TRUE,
+  #eval = FALSE, echo = FALSE,
   comment = "#>"
 )
 
