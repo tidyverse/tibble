@@ -380,10 +380,16 @@ df$a
 df[["a"]]
 df$cd
 df[["cd"]]
+with_df(df$a <- 0)
+with_df(df[["a"]] <- 0)
 df2$e
 df2[["e"]]
 df2$f
 df2[["f"]]
+with_df2(df2$e <- df[1, ])
+with_df2(df2[["e"]] <- df[1, ])
+with_df2(df2$f <- df2$f[1, , drop = FALSE])
+with_df2(df2[["f"]] <- df2[["f"]][1, , drop = FALSE])
 ```
 
 ### Corollary

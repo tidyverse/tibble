@@ -120,12 +120,15 @@ NULL
     check_scalar(i)
   }
 
-  if (!is_null(j)) {
-    j <- vec_as_col_index(j, x)
-    check_scalar(j)
-  }
+  value <- list(value)
 
-  tbl_subassign(x, i, j, list(value))
+  j <- vec_as_new_col_index(j, x, value)
+  check_scalar(j)
+
+  # Copy over new column names
+  names(value) <- names(j)
+
+  tbl_subassign(x, i, unname(j), value)
 }
 
 
