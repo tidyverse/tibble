@@ -293,8 +293,6 @@ tbl_subset_row <- function(x, i) {
 tbl_subassign <- function(x, i, j, value) {
   if (is_null(value) || is_atomic(value)) {
     value <- list(value)
-  } else if (is.data.frame(value)) {
-    value <- unclass(value)
   }
 
   if (is.null(i)) {
@@ -372,6 +370,9 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  value <- unclass(value)
+  stopifnot(is_bare_list(value))
+
   j <- vec_as_new_col_index(j, x, value)
 
   value <- vec_recycle(value, length(j))
@@ -400,6 +401,9 @@ coalesce2 <- function(x, y) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
+  value <- unclass(value)
+  stopifnot(is_bare_list(value))
+
   nrow <- fast_nrow(x)
   i <- vec_as_new_row_index(i, x)
 
