@@ -8,21 +8,31 @@
 
 <title>Subsetting tibbles — subsetting • tibble</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -38,7 +48,6 @@
 
 
 <meta property="og:title" content="Subsetting tibbles — subsetting" />
-
 <meta property="og:description" content="Accessing columns, rows, or cells via $, [[, or [ is mostly similar to
 regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:
@@ -53,34 +62,28 @@ When updating with [[&amp;lt;- and [&amp;lt;-, type changes of entire columns ar
 supported, but updating a part of a column requires that the new value is
 coercible to the existing type.
 See vec_slice() for the underlying implementation.
-" />
 
-<meta property="og:description" content="Unstable return type and implicit partial matching can lead to surprises and
+
+Unstable return type and implicit partial matching can lead to surprises and
 bugs that are hard to catch. If you rely on code that requires the original
 data frame behavior, coerce to a data frame via as.data.frame()." />
-
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 <meta name="robots" content="noindex">
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- google analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
 
- gtag('config', 'UA-115082821-1');
-</script>
+
   </head>
 
   <body>
@@ -177,6 +180,7 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -188,7 +192,6 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
     </div>
 
     <div class="ref-description">
-    
     <p>Accessing columns, rows, or cells via <code>$</code>, <code>[[</code>, or <code>[</code> is mostly similar to
 regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:</p><ul>
@@ -205,10 +208,9 @@ coercible to the existing type.
 See <code>vec_slice()</code> for the underlying implementation.</p></li>
 </ul>
 
-    <p>Unstable return type and implicit partial matching can lead to surprises and
+<p>Unstable return type and implicit partial matching can lead to surprises and
 bugs that are hard to catch. If you rely on code that requires the original
-data frame behavior, coerce to a data frame via <code><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame()</a></code>.</p>
-    
+data frame behavior, coerce to a data frame via <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>.</p>
     </div>
 
     <pre class="usage"># S3 method for tbl_df
@@ -228,7 +230,7 @@ $(x, name) <- value
 
 # S3 method for tbl_df
 [(x, i = NULL, j = NULL) <- value</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -238,7 +240,7 @@ $(x, name) <- value
     </tr>
     <tr>
       <th>name</th>
-      <td><p>A literal character string or a <a href='https://www.rdocumentation.org/packages/base/topics/name'>name</a> (possibly <a href='https://www.rdocumentation.org/packages/base/topics/Quotes'>backtick</a>
+      <td><p>A literal character string or a <a href='https://rdrr.io/r/base/name.html'>name</a> (possibly <a href='https://rdrr.io/r/base/Quotes.html'>backtick</a>
     quoted).</p></td>
     </tr>
     <tr>
@@ -264,16 +266,15 @@ Tibbles are stricter than data frames in what is accepted here.</p></td>
 Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</code> .</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For better compatibility with older code written for regular data frames,
 <code>[</code> supports a <code>drop</code> argument which defaults to <code>FALSE</code>.
 New code should use <code>[[</code> to turn a column into a vector.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
+    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
 <span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
 
 <span class='co'># Subsetting single columns:</span>
@@ -282,7 +283,7 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 #&gt;   &lt;int&gt;
 #&gt; 1     1
 #&gt; 2     2
-#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
+#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
 <span class='co'># Subsetting single rows with the drop argument:</span>
 <span class='no'>df</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
@@ -292,7 +293,7 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 #&gt; </div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       a    bc
 #&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     4</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
+#&gt; 1     1     4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
 #&gt; $bc
@@ -302,8 +303,8 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span>
 #&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>df</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: `exact` ignored</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='no'>df</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
-<span class='no'>tbl</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
+<span class='no'>df</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
+<span class='no'>tbl</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
 <span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>df</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
 <span class='no'>tbl</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
@@ -312,15 +313,15 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 <span class='no'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;       a    bc bd        b
 #&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;
-#&gt; 1     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; 1     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;      bc     a
 #&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt; 1     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
 #&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     4     1
 #&gt; 2     5     2
-#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;      bc     a
 #&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     4     1
@@ -336,14 +337,13 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="tidyverse">
@@ -356,6 +356,7 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
    </div>
 
@@ -378,6 +379,8 @@ New code should use <code>[[</code> to turn a column into a vector.</p>
 </script>
 
 
+
   </body>
 </html>
+
 

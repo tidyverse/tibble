@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Subsetting • tibble</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
 <!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
@@ -17,16 +24,10 @@
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="robots" content="noindex">
-<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- google analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
-
- gtag('config', 'UA-115082821-1');
-</script>
+<![endif]-->
 </head>
 <body>
     <div class="container template-article">
@@ -123,6 +124,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -155,12 +157,12 @@
 <figure><a href="https://twitter.com/skyetetra/status/1160012260456062977"><img src="alignment.png" title="Alignment chart" alt="Alignment" style="width:100.0%"></a>
 <figcaption>
 Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Jacqueline Nolis</a>
-</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code>$</code>, <code>[[</code> and <code>[</code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a>
+</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">new_df &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">  df<span class="op">$</span>b &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>]</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  df<span class="op">$</span>cd &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">9</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">14</span>, <span class="st">"text"</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  df<span class="op">$</span>cd &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">9</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">14</span>, <span class="st">"text"</span>)</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">  df</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">new_tbl &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
@@ -208,7 +210,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
 <a href="#section" class="anchor"></a>$</h2>
-<p>With <code>$</code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
+<p>With <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -398,7 +400,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </td>
 </tr>
 </tbody></table>
-<p>With two indexes, a single element is returned. List columns are not unpacked by tibbles, the <code>[[</code> only unpacks columns.</p>
+<p>With two indexes, a single element is returned. List columns are not unpacked by tibbles, the <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> only unpacks columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -468,11 +470,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <p>Exotic variants like recursive indexing are deprecated for tibbles.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">df[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">df[[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a>
 <a class="sourceLine" id="cb47-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">tbl[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">tbl[[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)]]</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Calling `[[` with a vector
 #&gt; of length 2 (recursive subsetting)
@@ -486,7 +488,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div id="section-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#section-2" class="anchor"></a>[</h2>
-<p>With <code>[</code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
+<p>With <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -787,7 +789,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
 <a class="sourceLine" id="cb105-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb105-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb105-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -801,7 +803,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">character</a></span>()]</a>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]</a>
 <a class="sourceLine" id="cb106-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
@@ -914,7 +916,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">integer</a></span>()]</a>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]</a>
 <a class="sourceLine" id="cb120-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
@@ -944,7 +946,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
 <a class="sourceLine" id="cb123-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb123-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb123-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -958,7 +960,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
 <a class="sourceLine" id="cb124-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
 <a class="sourceLine" id="cb124-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
 <a class="sourceLine" id="cb124-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;</span></a>
@@ -970,7 +972,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
 <a class="sourceLine" id="cb125-2" data-line-number="2"><span class="co">#&gt;   b</span></a>
 <a class="sourceLine" id="cb125-3" data-line-number="3"><span class="co">#&gt; 1 e</span></a>
 <a class="sourceLine" id="cb125-4" data-line-number="4"><span class="co">#&gt; 2 f</span></a>
@@ -978,7 +980,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <a class="sourceLine" id="cb125-6" data-line-number="6"><span class="co">#&gt; 4 h</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Logical indices must have
 #&gt; length 1 or be as long as the
@@ -990,7 +992,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, c(FALSE,
 #&gt; TRUE, FALSE, TRUE)): undefined
@@ -998,7 +1000,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Logical indices must have
 #&gt; length 1 or be as long as the
@@ -1015,7 +1017,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
 <a class="sourceLine" id="cb132-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb132-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb132-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1029,7 +1031,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">character</a></span>()]</a>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]</a>
 <a class="sourceLine" id="cb133-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
@@ -1153,7 +1155,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">integer</a></span>()]</a>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]</a>
 <a class="sourceLine" id="cb148-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 0</span></a></code></pre></div>
 </td>
 </tr>
@@ -1183,7 +1185,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
 <a class="sourceLine" id="cb151-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
 <a class="sourceLine" id="cb151-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb151-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1195,11 +1197,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">df[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
 <a class="sourceLine" id="cb152-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</a>
 <a class="sourceLine" id="cb153-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
 <a class="sourceLine" id="cb153-3" data-line-number="3"><span class="co">#&gt;   b    </span></a>
 <a class="sourceLine" id="cb153-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;</span></a>
@@ -1211,11 +1213,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">df[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
 <a class="sourceLine" id="cb154-2" data-line-number="2"><span class="co">#&gt; [1] "e" "f" "g" "h"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Logical indices must have
 #&gt; length 1 or be as long as the
@@ -1227,7 +1229,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">df[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, ,
 #&gt; c(FALSE, TRUE, FALSE, TRUE)):
@@ -1235,7 +1237,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">tbl[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Logical indices must have
 #&gt; length 1 or be as long as the
@@ -1306,7 +1308,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">integer</a></span>(), ]</a>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>(), ]</a>
 <a class="sourceLine" id="cb166-2" data-line-number="2"><span class="co">#&gt; # A tibble: 0 x 3</span></a>
 <a class="sourceLine" id="cb166-3" data-line-number="3"><span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb166-4" data-line-number="4"><span class="co">#&gt; #   cd &lt;list&gt;</span></a></code></pre></div>
@@ -1412,7 +1414,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">NA</span>, <span class="dv">1</span>), ]</a>
 <a class="sourceLine" id="cb182-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb182-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
 <a class="sourceLine" id="cb182-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
@@ -1449,13 +1451,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a>
 <a class="sourceLine" id="cb185-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
 <a class="sourceLine" id="cb185-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
 <a class="sourceLine" id="cb185-4" data-line-number="4"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Length of logical index must be
 #&gt; 1 or 4, not 2</code></pre>
@@ -1469,14 +1471,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a>
 <a class="sourceLine" id="cb189-2" data-line-number="2"><span class="co">#&gt;   a b         cd</span></a>
 <a class="sourceLine" id="cb189-3" data-line-number="3"><span class="co">#&gt; 1 1 e          9</span></a>
 <a class="sourceLine" id="cb189-4" data-line-number="4"><span class="co">#&gt; 3 3 g 12, 13, 14</span></a>
 <a class="sourceLine" id="cb189-5" data-line-number="5"><span class="co">#&gt; 4 4 h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Length of logical index must be
 #&gt; 1 or 4, not 3</code></pre>
@@ -1493,7 +1495,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a>
 <a class="sourceLine" id="cb193-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb193-3" data-line-number="3"><span class="co">#&gt;       a b     cd       </span></a>
 <a class="sourceLine" id="cb193-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
@@ -1503,14 +1505,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a>
 <a class="sourceLine" id="cb194-2" data-line-number="2"><span class="co">#&gt;     a    b         cd</span></a>
 <a class="sourceLine" id="cb194-3" data-line-number="3"><span class="co">#&gt; 1   1    e          9</span></a>
 <a class="sourceLine" id="cb194-4" data-line-number="4"><span class="co">#&gt; 3   3    g 12, 13, 14</span></a>
 <a class="sourceLine" id="cb194-5" data-line-number="5"><span class="co">#&gt; NA NA &lt;NA&gt;       NULL</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">tbl[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Length of logical index must be
 #&gt; 1 or 4, not 5</code></pre>
@@ -1596,7 +1598,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
 <a class="sourceLine" id="cb206-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb206-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb206-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1607,7 +1609,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
 <a class="sourceLine" id="cb207-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb207-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb207-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1616,7 +1618,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">df[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">df[<span class="dv">1</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
 <a class="sourceLine" id="cb208-2" data-line-number="2"><span class="co">#&gt; $a</span></a>
 <a class="sourceLine" id="cb208-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
 <a class="sourceLine" id="cb208-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -1624,7 +1626,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <a class="sourceLine" id="cb208-6" data-line-number="6"><span class="co">#&gt; [1] "e"</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1">tbl[<span class="dv">1</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</a>
 <a class="sourceLine" id="cb209-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb209-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb209-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1635,7 +1637,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]</a>
 <a class="sourceLine" id="cb210-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
 <a class="sourceLine" id="cb210-3" data-line-number="3"><span class="co">#&gt;       a b    </span></a>
 <a class="sourceLine" id="cb210-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
@@ -1679,6 +1681,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -1693,6 +1696,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 
 
+
       <footer><div class="tidyverse">
   <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
@@ -1703,6 +1707,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
