@@ -223,26 +223,39 @@ fix_oob <- function(i, n, warn = TRUE) {
 fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
   if (warn) {
-    warn_oob(oob)
+    warn_oob(oob, n)
   }
 
   i[oob] <- NA_integer_
   i
 }
 
+warn_oob <- function(oob, n) {
+  if (has_length(oob)) {
+    warn_deprecated(paste0(
+      "Row indexes must be between 0 and the number of rows (", n, "). ",
+      "Use `NA` as row index to obtain a row full of `NA` values."
+    ))
+  }
+}
+
 fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- which(i < -n)
   if (warn) {
-    warn_oob(oob)
+    warn_oob_negative(oob, n)
   }
 
-  i[oob] <- 0L
+  i <- i[-oob]
+  if (is_empty(i)) i <- seq_len(n)
   i
 }
 
-warn_oob <- function(oob) {
+warn_oob_negative <- function(oob, n) {
   if (has_length(oob)) {
-    warn_deprecated("Row indexes must be between 0 and the number of rows. Use `NA` as row index to obtain a row full of `NA` values.")
+    warn_deprecated(paste0(
+      "Negative row indexes must be between 0 and the number of rows negated (", -n, "). ",
+      "Use `NA` as row index to obtain a row full of `NA` values."
+    ))
   }
 }
 
@@ -332,6 +345,9 @@ vec_as_new_row_index <- function(i, x) {
     # Restore, caller knows how to deal
     i[new] <- i_new
     i
+  } else if (is_logical(i)) {
+    # Don't allow OOB logical
+    vec_as_index(i, fast_nrow(x))
   } else {
     vec_as_row_index(i, x)
   }

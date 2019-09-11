@@ -41,7 +41,8 @@ options(
 )
 ```
 
-This vignette is an attempt to define invariants in the behavior of `$`, `[[` and `[`, and their assignment counterparts `$<-`, `[[<-` and `[<-`.
+This vignette defines invariants in the behavior of `$`, `[[` and `[`, and their assignment counterparts `$<-`, `[[<-` and `[<-`, for tibbles, and illustrates where these differ from data frames.
+The goal is to determine a small set of invariants that consistently define how behaviors interact.
 For each invariant an example is given.
 Currently, the `vignette("subset")` and `vignette("subassign")` articles give a more comprehensive overview, but will be merged into this article at some point.
 
@@ -49,9 +50,9 @@ Currently, the `vignette("subset")` and `vignette("subassign")` articles give a 
 library(tibble)
 
 new_df <- function() {
-  df <- data.frame(a = 1:4)
-  df$b <- letters[5:8]
-  df$cd <- list(9, 10:11, 12:14, "text")
+  df <- data.frame(n = 1:4)
+  df$c <- letters[5:8]
+  df$li <- list(9, 10:11, 12:14, "text")
   df
 }
 
@@ -67,7 +68,7 @@ new_df()
 ```
 
 In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below.
-This allows to spot differences easier.
+This makes it easier to spot differences.
 
 ```{r show-compare, dftbl = TRUE}
 new_df()
@@ -81,20 +82,20 @@ df <- new_df()
 tbl <- new_tbl()
 ```
 
-We're also showing examples with hierarchical columns containting a data frame or a matrix where appropriate:
+We also show examples with hierarchical columns containting a data frame or a matrix where needed:
 
 ```{r setup2}
 new_tbl2 <- function() {
   tibble(
-    e = tbl,
-    f = diag(4)
+    df = tbl,
+    m = diag(4)
   )
 }
 
 new_df2 <- function() {
   df2 <- new_tbl2()
   class(df2) <- "data.frame"
-  class(df2$e) <- "data.frame"
+  class(df2$df) <- "data.frame"
   df2
 }
 
@@ -106,11 +107,13 @@ tbl2 <- new_tbl2()
 new_df()
 ```
 
-For subset assignment (short: subassignment), we need a fresh copy of the data for each test.
-The `with_*()` functions allow for a more concise notation
-(`with_tbl()` and `with_*2()` omitted here for brevity):
+For subset assignment (subassignment, for short), we need a fresh copy of the data for each test.
+The `with_*()` functions (omitted here for brevity) allow for a more concise notation.
+These function take an assignment expression, execute it on a fresh copy of the data, and return the data for printing.
+The first example prints what's really executed, further examples omit this output.
 
-```{r with-df-def}
+
+```{r with-def, include = FALSE}
 with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
   
@@ -122,10 +125,7 @@ with_df <- function(code, verbose = FALSE) {
   if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
   rlang::eval_tidy(full_code)
 }
-```
 
-
-```{r with-tbl-def, include = FALSE}
 with_tbl <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
   
@@ -137,9 +137,7 @@ with_tbl <- function(code, verbose = FALSE) {
   if (verbose) rlang::expr_print(rlang::quo_get_expr(full_code))
   rlang::eval_tidy(full_code)
 }
-```
 
-```{r with-df2-def, include = FALSE}
 with_df2 <- function(code) {
   code <- rlang::enexpr(code)
   
@@ -150,10 +148,7 @@ with_df2 <- function(code) {
   })
   rlang::eval_tidy(full_code)
 }
-```
 
-
-```{r with-tbl2-def, include = FALSE}
 with_tbl2 <- function(code) {
   code <- rlang::enexpr(code)
   
@@ -166,11 +161,8 @@ with_tbl2 <- function(code) {
 }
 ```
 
-This function takes an assignment expression and executes it on a fresh copy of the data.
-The first example prints what's really executed, further examples omit this output.
-
 ```{r with-demo, dftbl = TRUE}
-with_df(df$a <- rev(df$a), verbose = TRUE)
+with_df(df$n <- rev(df$n), verbose = TRUE)
 ```
 
 
@@ -178,17 +170,13 @@ with_df(df$a <- rev(df$a), verbose = TRUE)
 
 ## Missing indexes.
 
-`x[]` and `x[,]` are equivalent to `x`.
+`x[]` is equivalent to `x`.
 
 ```{r bracket-empty, dftbl = TRUE}
 df[]
-df[,]
 with_df(df[] <- df)
-with_df(df[,] <- df)
 df2[]
-df2[,]
 with_df2(df2[] <- df2)
-with_df2(df2[,] <- df2)
 ```
 
 ## Definition of `x[i, j]`.
@@ -222,8 +210,8 @@ df2[1:2]
 If `i` is given in subassignment, only existing columns can be updated.
 
 ```{r bracket-ij-update-existing-only, dftbl = TRUE}
-with_df(df["c"] <- 1)
-with_df(df[2:3, "c"] <- 1)
+with_df(df[, "x"] <- 1)
+with_df(df[2:3, "x"] <- 1)
 ```
 
 
@@ -301,6 +289,12 @@ df[6, ]
 with_df(df[5, ] <- list(0, "x", list(NULL)))
 with_df(df[5:7, ] <- list(0, "x", list(NULL)))
 with_df(df[6, ] <- list(0, "x", list(NULL)))
+df[-5, ]
+df[-(5:7), ]
+df[-6, ]
+with_df(df[-5, ] <- list(0, "x", list(NULL)))
+with_df(df[-(5:7), ] <- list(0, "x", list(NULL)))
+with_df(df[-6, ] <- list(0, "x", list(NULL)))
 ```
 
 
@@ -376,20 +370,20 @@ vctrs::vec_size(df2[[NA, 2]])
 `x$name` is equivalent to `x[["name"]]`.
 
 ```{r dollar-equivalent-to-subset, dftbl = TRUE}
-df$a
-df[["a"]]
-df$cd
-df[["cd"]]
-with_df(df$a <- 0)
-with_df(df[["a"]] <- 0)
-df2$e
-df2[["e"]]
-df2$f
-df2[["f"]]
-with_df2(df2$e <- df[1, ])
-with_df2(df2[["e"]] <- df[1, ])
-with_df2(df2$f <- df2$f[1, , drop = FALSE])
-with_df2(df2[["f"]] <- df2[["f"]][1, , drop = FALSE])
+df$n
+df[["n"]]
+df$li
+df[["li"]]
+with_df(df$n <- 0)
+with_df(df[["n"]] <- 0)
+df2$df
+df2[["df"]]
+df2$m
+df2[["m"]]
+with_df2(df2$df <- df[1, ])
+with_df2(df2[["df"]] <- df[1, ])
+with_df2(df2$m <- df2$m[1, , drop = FALSE])
+with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
 ```
 
 ### Corollary
@@ -398,10 +392,10 @@ with_df2(df2[["f"]] <- df2[["f"]][1, , drop = FALSE])
 For compatibility with code that probes columns and compares with `NULL`, only a warning is raised.
 
 ```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
-df$c
-df[["c"]]
-with_df(df$c <- 0)
-with_df(df[["c"]] <- 0)
+df$l
+df[["l"]]
+with_df(df$l <- 0)
+with_df(df[["l"]] <- 0)
 ```
 
 
@@ -416,7 +410,7 @@ df[1:2]
 df[0:2]
 df[-2]
 df[-1:2]
-df["b"]
+df["c"]
 df[c(TRUE, FALSE, TRUE)]
 df[TRUE]
 ```
@@ -428,7 +422,7 @@ Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not sup
 ```{r bracket-j-oob, dftbl = TRUE}
 df[4]
 df[-4]
-df["c"]
+df["x"]
 df[c(TRUE, FALSE, TRUE, FALSE)]
 df[c(TRUE, FALSE)]
 ```
@@ -494,7 +488,7 @@ vctrs::vec_size(df2[[2]])
 
 ## Treatment of atomic or `NULL` on the RHS.
 
-`x[i, j] <- a` is equivalent to `x[i, j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
+`x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
 
 ```{r bracket-assign-wraps, dftbl = TRUE}
 with_df(df[1] <- 0)
@@ -527,7 +521,7 @@ with_df(df[1:3] <- list(0, 0))
 
 ## Definition of `x[j] <- list(...)`.
 
-`x[j] <- a` is equivalent to `x[[jj]] <- ...` in a loop, keeping only columns that are assigned non-NULL values.
+`x[j] <- a` is equivalent to `x[[jj]] <- ...` in a loop (indexed by position), keeping only columns that are assigned non-NULL values.
 
 ```r
 # With logic for defining names of new columns, see below
@@ -545,7 +539,7 @@ if (has_length(j_remove)) x <- x[-j_remove]
 
 ```{r bracket-assign-def, dftbl = TRUE}
 with_df(df[1:2] <- list("x", 4:1))
-with_df(df[c("cd", "c", "b")] <- list("x", 4:1, NULL))
+with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
 ```
 
 `NA` indexes are not supported.
@@ -559,8 +553,8 @@ with_df(df[NA_character_] <- list("x"))
 The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of preference).
 
 ```{r bracket-assign-names, dftbl = TRUE}
-with_df(df[c("d", "c")] <- tibble("x", d = 4:1))
-with_df(df[3:4] <- list("x", c = 4:1))
+with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
+with_df(df[3:4] <- list("x", x = 4:1))
 with_df(df[4] <- list(4:1))
 ```
 
@@ -570,14 +564,14 @@ with_df(df[4] <- list(4:1))
 When adding or removing columns, `i` cannot be given (by definition of `x[i, j]`).
 
 ```{r change-shape-only-all-rows, dftbl = TRUE}
-with_df(df[2:3, "c"] <- list(0))
-with_df(df[2:3, "b"] <- NULL)
+with_df(df[2:3, "x"] <- list(0))
+with_df(df[2:3, "c"] <- NULL)
 ```
 
 When appending rows, `j` cannot be given (by definition of `x[i, j]`).
 
 ```{r append-rows-only-all-columns, dftbl = TRUE}
-with_df(df[5, "a"] <- list(0))
+with_df(df[5, "n"] <- list(0))
 ```
 
 
