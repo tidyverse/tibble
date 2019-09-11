@@ -165,10 +165,280 @@ with_tbl2 <- function(code) {
 with_df(df$n <- rev(df$n), verbose = TRUE)
 ```
 
+# Operations on columns
 
-# Subsetting and subassignment
+## Definition of `x[[j]]`.
 
-## Missing indexes.
+`x[[j]]` is equivalent to `.subset2(x, j)`.
+
+```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
+df[[1]]
+.subset2(df, 1)
+df[[3]]
+.subset2(df, 3)
+df2[[1]]
+.subset2(df2, 1)
+df2[[2]]
+.subset2(df2, 2)
+```
+
+### Corollary
+
+`[[` requires a scalar `j` index.
+
+```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
+df[[1]]
+df[[1:2]]
+df[[1:3]]
+```
+
+`x[[j]]` always returns an object of size `nrow(x)`.
+
+```{r double-bracket-retains-size, dftbl = TRUE}
+vctrs::vec_size(df[[1]])
+vctrs::vec_size(df[[3]])
+vctrs::vec_size(df2[[1]])
+vctrs::vec_size(df2[[2]])
+```
+
+## Definition of `x[[j]] <- a`.
+
+`x[[j]] <- a` is equivalent to restoring to the original class after assigning to `unclass(x)`:
+
+```r
+xl <- unclass(x)
+xl[[j]] <- a
+vec_restore(xl, x)
+```
+
+
+```{r double-bracket-assign-definition, dftbl = TRUE}
+with_df(df[[1]] <- 0)
+with_df(df[[3]] <- 4:1)
+with_df2(df2[[1]] <- 0)
+with_df2(df2[[2]] <- 4:1)
+```
+
+### Corollary
+
+`[[<-` requires a scalar `j` index.
+
+```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE}
+with_df(df[[1]] <- 0)
+with_df(df[[1:2]] <- 0)
+with_df(df[[1:3]] <- 0)
+```
+
+`x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
+
+```{r double-bracket-requires-size, dftbl = TRUE}
+with_df(df[[1]] <- 1)
+with_df(df[[1]] <- 4:1)
+with_df(df[[1]] <- 3:1)
+with_df(df[[1]] <- 2:1)
+```
+
+`[[<-` supports changing the type of a column.
+
+```{r double-bracket-assign-supports-null, dftbl = TRUE}
+with_df(df[[1]] <- LETTERS[4:1])
+with_df(df[[2]] <- 4:1)
+with_df(df[[3]] <- 4:1)
+with_df2(df2[[1]] <- 4:1)
+with_df2(df2[[2]] <- 4:1)
+```
+
+`[[<-` supports removing a column by assigning `NULL` to it.
+
+```{r double-bracket-assign-supports-null, dftbl = TRUE}
+with_df(df[[1]] <- NULL)
+with_df2(df2[[2]] <- NULL)
+```
+
+## Columns don't have inner names.
+
+```{r columns-dont-have-names, dftbl = TRUE}
+with_df(df$x <- c(a = 4, b = 3, c = 2, d = 1))$x
+with_df(df$x <- rlang::set_names(letters[4:1]))$x
+```
+
+### Exception
+
+List columns can have inner names:
+
+```{r list-columns-can-have-names, dftbl = TRUE}
+with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
+```
+
+## Definition of `x$name`.
+
+`x$name` is equivalent to `x[["name"]]`.
+
+```{r dollar-equivalent-to-subset, dftbl = TRUE}
+df$n
+df[["n"]]
+df$li
+df[["li"]]
+with_df(df$n <- 0)
+with_df(df[["n"]] <- 0)
+df2$df
+df2[["df"]]
+df2$m
+df2[["m"]]
+with_df2(df2$df <- df[1, ])
+with_df2(df2[["df"]] <- df[1, ])
+with_df2(df2$m <- df2$m[1, , drop = FALSE])
+with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
+```
+
+### Corollary
+
+`$` does not implement partial matching.
+For compatibility with code that probes columns and compares with `NULL`, only a warning is raised.
+
+```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
+df$l
+df[["l"]]
+with_df(df$l <- 0)
+with_df(df[["l"]] <- 0)
+```
+
+## Definition of `x[j]`.
+
+Equivalent to restoring `.subset(x, vec_as_index(j))` to the original class.
+
+```{r bracket-j-definition, dftbl = TRUE}
+df[1:2]
+df[0:2]
+df[-2]
+df[-1:2]
+df["c"]
+df[c(TRUE, FALSE, TRUE)]
+df[TRUE]
+```
+
+### Corollaries
+
+Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not supported.
+
+```{r bracket-j-oob, dftbl = TRUE}
+df[4]
+df[-4]
+df["x"]
+df[c(TRUE, FALSE, TRUE, FALSE)]
+df[c(TRUE, FALSE)]
+```
+
+
+`x[j]` retains the number of rows in the input.
+
+```{r bracket-retains-nrow, dftbl = TRUE}
+nrow(df[])
+nrow(df[1])
+nrow(df[3])
+nrow(df2[1])
+nrow(df2[2])
+```
+
+
+### Exception
+
+`NA` columns are not supported.
+
+```{r bracket-j-na, dftbl = TRUE}
+df[NA]
+df[NA_integer_]
+df[NA_character_]
+```
+
+
+## Definition of `x[j] <- list(...)`.
+
+`x[j] <- a` is equivalent to `x[[jj]] <- ...` in a loop (indexed by position), keeping only columns that are assigned non-NULL values.
+
+```r
+# With logic for defining names of new columns, see below
+j <- vec_as_new_col_index(j, x, a)
+
+# Create, update or remove, indexed by position
+for (jj in seq_along(j)) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
+```
+
+Adding, updating and removing columns may occur in arbitrary order.
+To avoid index mismatches, an actual implementation might look more like this:
+
+```r
+# With logic for defining names of new columns, see below
+j <- vec_as_new_col_index(j, x, a)
+
+is_data <- !map_lgl(a, is_null)
+
+# Create or update, indexed by position
+for (jj in which(is_data)) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
+
+# Remove
+j_remove <- j[!is_data]
+if (has_length(j_remove)) x <- x[-j_remove]
+```
+
+```{r bracket-assign-def, dftbl = TRUE}
+with_df(df[1:2] <- list("x", 4:1))
+with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
+```
+
+### Corollaries
+
+`NA` indexes are not supported.
+
+```{r bracket-assign-na, dftbl = TRUE}
+with_df(df[NA] <- list("x"))
+with_df(df[NA_integer_] <- list("x"))
+with_df(df[NA_character_] <- list("x"))
+```
+
+The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of preference).
+
+```{r bracket-assign-names, dftbl = TRUE}
+with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
+with_df(df[3:4] <- list("x", x = 4:1))
+with_df(df[4] <- list(4:1))
+```
+
+
+## Definition of `x[j] <- list(a)`.
+
+`x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
+
+```{r bracket-assign-recycles, dftbl = TRUE}
+with_df(df[1:2] <- list(0))
+with_df(df[1:2] <- list(0, 0))
+with_df(df[1:3] <- list(0))
+with_df(df[1:3] <- list(0, 0, 0))
+```
+
+### Corollary
+
+Only lists of length one are recycled.
+
+```{r bracket-assign-recycles-one, dftbl = TRUE}
+with_df(df[1:2] <- list(0, 0, 0))
+with_df(df[1:3] <- list(0, 0))
+```
+
+## Definition of `x[j] <- a`.
+
+`x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
+
+```{r bracket-assign-wraps, dftbl = TRUE}
+with_df(df[1] <- 0)
+with_df(df[1] <- list(0))
+with_df(df[1] <- 4:1)
+with_df(df[1] <- list(4:1))
+with_df(df[1] <- NULL)
+with_df(df[1] <- list(NULL))
+```
+
+## Missing index.
 
 `x[]` is equivalent to `x`.
 
@@ -178,6 +448,19 @@ with_df(df[] <- df)
 df2[]
 with_df2(df2[] <- df2)
 ```
+
+
+
+
+# Operations on rows
+
+
+FIXME FIXME FIXME
+
+
+
+
+# Subsetting and subassignment
 
 ## Definition of `x[i, j]`.
 
@@ -365,199 +648,11 @@ vctrs::vec_size(df2[[NA, 1]])
 vctrs::vec_size(df2[[NA, 2]])
 ```
 
-## Definition of `x$name`.
-
-`x$name` is equivalent to `x[["name"]]`.
-
-```{r dollar-equivalent-to-subset, dftbl = TRUE}
-df$n
-df[["n"]]
-df$li
-df[["li"]]
-with_df(df$n <- 0)
-with_df(df[["n"]] <- 0)
-df2$df
-df2[["df"]]
-df2$m
-df2[["m"]]
-with_df2(df2$df <- df[1, ])
-with_df2(df2[["df"]] <- df[1, ])
-with_df2(df2$m <- df2$m[1, , drop = FALSE])
-with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
-```
-
-### Corollary
-
-`$` does not implement partial matching.
-For compatibility with code that probes columns and compares with `NULL`, only a warning is raised.
-
-```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
-df$l
-df[["l"]]
-with_df(df$l <- 0)
-with_df(df[["l"]] <- 0)
-```
-
-
-# Subsetting
-
-## Definition of `x[j]`.
-
-Equivalent to restoring `.subset(x, vec_as_index(j))` to the original class.
-
-```{r bracket-j-definition, dftbl = TRUE}
-df[1:2]
-df[0:2]
-df[-2]
-df[-1:2]
-df["c"]
-df[c(TRUE, FALSE, TRUE)]
-df[TRUE]
-```
-
-### Corollaries
-
-Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not supported.
-
-```{r bracket-j-oob, dftbl = TRUE}
-df[4]
-df[-4]
-df["x"]
-df[c(TRUE, FALSE, TRUE, FALSE)]
-df[c(TRUE, FALSE)]
-```
-
-
-`x[j]` retains the number of rows in the input.
-
-```{r bracket-retains-nrow, dftbl = TRUE}
-nrow(df[])
-nrow(df[1])
-nrow(df[3])
-nrow(df2[1])
-nrow(df2[2])
-```
-
-
-### Exception
-
-`NA` columns are not supported.
-
-```{r bracket-j-na, dftbl = TRUE}
-df[NA]
-df[NA_integer_]
-df[NA_character_]
-```
-
-
-## Definition of `x[[j]]`.
-
-`x[[j]]` is equivalent to `.subset2(x, j)`.
-
-```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
-df[[1]]
-.subset2(df, 1)
-df[[3]]
-.subset2(df, 3)
-df2[[1]]
-.subset2(df2, 1)
-df2[[2]]
-.subset2(df2, 2)
-```
-
-### Corollary
-
-`[[` requires a scalar `j` index.
-
-```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
-df[[1]]
-df[[1:2]]
-df[[1:3]]
-```
-
-`x[[j]]` always returns an object of size `nrow(x)`.
-
-```{r double-bracket-retains-size, dftbl = TRUE}
-vctrs::vec_size(df[[1]])
-vctrs::vec_size(df[[3]])
-vctrs::vec_size(df2[[1]])
-vctrs::vec_size(df2[[2]])
-```
-
 # Subassignment
-
-## Treatment of atomic or `NULL` on the RHS.
-
-`x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
-
-```{r bracket-assign-wraps, dftbl = TRUE}
-with_df(df[1] <- 0)
-with_df(df[1] <- list(0))
-with_df(df[1] <- 4:1)
-with_df(df[1] <- list(4:1))
-with_df(df[1] <- NULL)
-with_df(df[1] <- list(NULL))
-```
-
-## Treatment of list of length 1 on the RHS.
-
-`x[i, j] <- a` is equivalent to `x[i, j] <- rep_along(j, a)` if `is_list(a, 1)`.
-
-```{r bracket-assign-recycles, dftbl = TRUE}
-with_df(df[1:2] <- list(0))
-with_df(df[1:2] <- list(0, 0))
-with_df(df[1:3] <- list(0))
-with_df(df[1:3] <- list(0, 0, 0))
-```
-
-### Corollary
-
-Only lists of length one are recycled.
-
-```{r bracket-assign-recycles-one, dftbl = TRUE}
-with_df(df[1:2] <- list(0, 0, 0))
-with_df(df[1:3] <- list(0, 0))
-```
 
 ## Definition of `x[j] <- list(...)`.
 
 `x[j] <- a` is equivalent to `x[[jj]] <- ...` in a loop (indexed by position), keeping only columns that are assigned non-NULL values.
-
-```r
-# With logic for defining names of new columns, see below
-j <- vec_as_new_col_index(j, x, a)
-
-is_data <- !map_lgl(a, is_null)
-
-# Create or update
-for (jj in which(is_data)) x[[ j[[jj]] ]] <- vec_recycle(a[[jj]], nrow(x))
-
-# Remove
-j_remove <- j[!is_data]
-if (has_length(j_remove)) x <- x[-j_remove]
-```
-
-```{r bracket-assign-def, dftbl = TRUE}
-with_df(df[1:2] <- list("x", 4:1))
-with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
-```
-
-`NA` indexes are not supported.
-
-```{r bracket-assign-na, dftbl = TRUE}
-with_df(df[NA] <- list("x"))
-with_df(df[NA_integer_] <- list("x"))
-with_df(df[NA_character_] <- list("x"))
-```
-
-The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of preference).
-
-```{r bracket-assign-names, dftbl = TRUE}
-with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
-with_df(df[3:4] <- list("x", x = 4:1))
-with_df(df[4] <- list(4:1))
-```
-
 
 ### Corollary
 
@@ -579,36 +674,9 @@ with_df(df[5, "n"] <- list(0))
 ## Definition of `x[[j]] <- a`.
 
 `x[[j]] <- a` is equivalent to `x[j] <- list(a)`.
-
-```{r double-bracket-assign-equivalent-to-bracket-assign-list, dftbl = TRUE}
-with_df(df[[1]] <- 0)
-with_df(df[1] <- list(0))
-with_df(df[[3]] <- 0)
-with_df(df[3] <- list(0))
-with_df2(df2[[1]] <- 0)
-with_df2(df2[1] <- list(0))
-with_df2(df2[[2]] <- 0)
-with_df2(df2[2] <- list(0))
-```
-
 `[[<-` requires a scalar `j` index.
 
-```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE}
-with_df(df[[1]] <- 0)
-with_df(df[[1:2]] <- 0)
-with_df(df[[1:3]] <- 0)
-```
-
 ### Corollary
-
-`x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
-
-```{r double-bracket-requires-size, dftbl = TRUE}
-with_df(df[[1]] <- 1)
-with_df(df[[1]] <- 4:1)
-with_df(df[[1]] <- 3:1)
-with_df(df[[1]] <- 2:1)
-```
 
 `x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
 
@@ -644,21 +712,6 @@ with_df2(df2[2] <- list(df[[3]]))
 with_df2(df2[2] <- list(df2[[1]]))
 ```
 
-
-## Columns don't have inner names.
-
-```{r columns-dont-have-names, dftbl = TRUE}
-with_df(df$x <- c(a = 4, b = 3, c = 2, d = 1))$x
-with_df(df$x <- rlang::set_names(letters[4:1]))$x
-```
-
-### Exception
-
-List columns can have inner names:
-
-```{r list-columns-can-have-names, dftbl = TRUE}
-with_df(df$x <- list(a = 4, b = 3, c = 2, d = 1))$x
-```
 
 
 
