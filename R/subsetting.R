@@ -240,12 +240,12 @@ warn_oob <- function(oob, n) {
 }
 
 fix_oob_negative <- function(i, n, warn = TRUE) {
-  oob <- which(i < -n)
+  oob <- (i < -n)
   if (warn) {
-    warn_oob_negative(oob, n)
+    warn_oob_negative(which(oob), n)
   }
 
-  i <- i[-oob]
+  i <- i[!oob]
   if (is_empty(i)) i <- seq_len(n)
   i
 }
