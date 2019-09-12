@@ -113,7 +113,7 @@ new_df()
 
 For subset assignment (subassignment, for short), we need a fresh copy of the data for each test.
 The `with_*()` functions (omitted here for brevity) allow for a more concise notation.
-These function take an assignment expression, execute it on a fresh copy of the data, and return the data for printing.
+These functions take an assignment expression, execute it on a fresh copy of the data, and return the data for printing.
 The first example prints what's really executed, further examples omit this output.
 
 
@@ -576,7 +576,7 @@ with_df(df[NA, ] <- df[1, ])
 ### Corollary
 
 For logical vectors, out-of-bounds indexing and recycling of size > 1 are not supported.
-(Charecter and numeric vectors are exceptions that are discussed below.)
+(Character and numeric vectors are exceptions that are discussed below.)
 
 ```{r bracket-i-oob-lgl, dftbl = TRUE}
 df[c(TRUE, FALSE), ]
