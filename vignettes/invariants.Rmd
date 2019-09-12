@@ -91,7 +91,7 @@ Where needed, we also show examples with hierarchical columns containing a data 
 ```{r setup2}
 new_tbl2 <- function() {
   tibble(
-    tb = df,
+    tb = tbl,
     m = diag(4)
   )
 }
@@ -191,12 +191,15 @@ df2[[2]]
 
 ### Corollary
 
-Accessing `NA` columns returns `NULL`.
+Accessing `NA` or missing columns returns `NULL`.
+Out-of-bounds indexing throws an error.
 
 ```{r double-bracket-j-na, dftbl = TRUE}
 df[[NA]]
 df[[NA_integer_]]
 df[[NA_character_]]
+df[["x"]]
+df[[4]]
 ```
 
 `[[` requires scalar `vec_as_index(j)`.
@@ -211,7 +214,7 @@ df[[TRUE]]
 df[[FALSE]]
 ```
 
-`x[[j]]` always returns an object of size `nrow(x)`.
+`x[[j]]` always returns an object of size `nrow(x)` if the column exists.
 
 ```{r double-bracket-retains-size, dftbl = TRUE}
 vec_size(df[[1]])
@@ -240,7 +243,7 @@ with_df2(df2[[2]] <- 4:1)
 
 ### Corollary
 
-`[[<-` requires scalar `vec_as_index(j)` (with the exception of new names, see below).
+`[[<-` requires scalar `vec_as_index(j)` (with the exception of new columns, see below).
 
 ```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE}
 with_df(df[[1]] <- 0)
@@ -430,7 +433,7 @@ Below is a simple version of the update loop:
 # Create, update or remove, indexed by position
 for (ja in seq_along(j)) {
   jx <- index_or_name(j, ja)
-  x[[jx]] <- vec_recycle(a[[ja]], nrow(x))
+  x[[jx]] <- a[[ja]] # with implicit recycling
 }
 ```
 
@@ -443,7 +446,7 @@ a_null <- map_lgl(a, is_null)
 # Create or update, indexed by position
 for (ja in which(!a_null)) {
   jx <- index_or_name(j, ja)
-  x[[jx]] <- vec_recycle(a[[ja]], nrow(x))
+  x[[jx]] <- a[[ja]] # with implicit recycling
 }
 
 # Remove
@@ -548,22 +551,26 @@ Applies `vec_slice(, i)` to all columns, for both subsetting and subassignment.
 ```{r bracket-i, dftbl = TRUE}
 df[2:3, ]
 df[0:2, ]
+df[0, ]
 df[-2, ]
 df[-1:2, ]
 df[NA_integer_, ]
 df2[NA_integer_, ]
 df[c(FALSE, TRUE, TRUE, FALSE), ]
 df[TRUE, ]
+df[FALSE, ]
 df[NA, ]
-with_df(df[2:3, ] <- list(0, "x", list(NULL)))
-with_df(df[0:2, ] <- list(0, "x", list(NULL)))
-with_df(df[-2, ] <- list(0, "x", list(NULL)))
-with_df(df[-1:2, ] <- list(0, "x", list(NULL)))
-with_df(df[NA_integer_, ] <- list(0, "x", list(NULL)))
-with_df2(df2[NA_integer_, ] <- list(0, "x", list(NULL)))
-with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- list(0, "x", list(NULL)))
-with_df(df[TRUE, ] <- list(0, "x", list(NULL)))
-with_df(df[NA, ] <- list(0, "x", list(NULL)))
+with_df(df[2:3, ] <- df[1, ])
+with_df(df[0:2, ] <- df[1, ])
+with_df(df[0, ] <- df[1, ])
+with_df(df[-2, ] <- df[1, ])
+with_df(df[-1:2, ] <- df[1, ])
+with_df(df[NA_integer_, ] <- df[1, ])
+with_df2(df2[NA_integer_, ] <- df2[1, ])
+with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
+with_df(df[TRUE, ] <- df[1, ])
+with_df(df[FALSE, ] <- df[1, ])
+with_df(df[NA, ] <- df[1, ])
 ```
 
 ### Corollary
@@ -601,15 +608,15 @@ Appending rows right at the end of the existing data is supported, without warni
 df[5, ]
 df[5:7, ]
 df[6, ]
-with_df(df[5, ] <- 0)
-with_df(df[5:7, ] <- 0)
-with_df(df[6, ] <- 0)
+with_df(df[5, ] <- df[1, ])
+with_df(df[5:7, ] <- df[1, ])
+with_df(df[6, ] <- df[1, ])
 df[-5, ]
 df[-(5:7), ]
 df[-6, ]
-with_df(df[-5, ] <- 0)
-with_df(df[-(5:7), ] <- 0)
-with_df(df[-6, ] <- 0)
+with_df(df[-5, ] <- df[1, ])
+with_df(df[-(5:7), ] <- df[1, ])
+with_df(df[-6, ] <- df[1, ])
 ```
 
 For compatibility reasons, character vectors that represent numbers are supported.
