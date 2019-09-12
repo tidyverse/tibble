@@ -47,6 +47,7 @@ For each invariant an example is given.
 Currently, the `vignette("subset")` and `vignette("subassign")` articles give a more comprehensive overview, but will be merged into this article at some point.
 
 Some behaviors are defined using functions of the vctrs package, in particular `vec_slice()`, `vec_recycle()` and `vec_as_index()`.
+In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent.
 
 ```{r setup}
 library(vctrs)
@@ -85,12 +86,12 @@ df <- new_df()
 tbl <- new_tbl()
 ```
 
-We also show examples with hierarchical columns containting a data frame or a matrix where needed:
+Where needed, we also show examples with hierarchical columns containing a data frame or a matrix:
 
 ```{r setup2}
 new_tbl2 <- function() {
   tibble(
-    df = tbl,
+    tb = df,
     m = diag(4)
   )
 }
@@ -98,7 +99,7 @@ new_tbl2 <- function() {
 new_df2 <- function() {
   df2 <- new_tbl2()
   class(df2) <- "data.frame"
-  class(df2$df) <- "data.frame"
+  class(df2$tb) <- "data.frame"
   df2
 }
 
@@ -171,7 +172,7 @@ with_df(df$n <- rev(df$n), verbose = TRUE)
 # Operations on columns
 
 The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing.
-We resolve this by first defining column-wise subsetting, then row-wise subsetting and the composition of both.
+We resolve this by first defining column-wise subsetting, then row-wise subsetting and the composition of both, then missing indexes.
 
 ## Definition of `x[[j]]`.
 
@@ -190,7 +191,7 @@ df2[[2]]
 
 ### Corollary
 
-`NA` columns are not supported.
+Accessing `NA` columns returns `NULL`.
 
 ```{r double-bracket-j-na, dftbl = TRUE}
 df[[NA]]
@@ -317,8 +318,8 @@ df$li
 df[["li"]]
 with_df(df$n <- 0)
 with_df(df[["n"]] <- 0)
-df2$df
-df2[["df"]]
+df2$tb
+df2[["tb"]]
 df2$m
 df2[["m"]]
 with_df2(df2$df <- df[1, ])
@@ -355,7 +356,7 @@ df[TRUE]
 
 ### Corollaries
 
-Accessing `NA` columns returns `NULL`.
+`NA` columns are not supported.
 
 ```{r bracket-j-na, dftbl = TRUE}
 df[NA]
@@ -403,9 +404,14 @@ tibble:::vec_as_new_col_index(-3, df, list(2, 3))
 tibble:::vec_as_new_col_index(c(TRUE, FALSE, TRUE), df, list(2, 3))
 
 # New columns
-tibble:::vec_as_new_col_index("x", df, list(0))
+tibble:::vec_as_new_col_index("x", df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(0))
+
+# Errors
+tibble:::vec_as_new_col_index(NA, df, list(0))
+tibble:::vec_as_new_col_index(NA_integer_, df, list(0))
+tibble:::vec_as_new_col_index(NA_character_, df, list(0))
 tibble:::vec_as_new_col_index(5, df, list(0))
 ```
 
@@ -533,20 +539,6 @@ with_df(df[1] <- NULL)
 with_df(df[1] <- list(NULL))
 ```
 
-## Missing index.
-
-`x[]` is equivalent to `x`.
-
-```{r bracket-empty, dftbl = TRUE}
-df[]
-with_df(df[] <- df)
-df2[]
-with_df2(df2[] <- df2)
-```
-
-
-
-
 # Operations on rows
 
 ## Definition of `x[i, ]`.
@@ -637,7 +629,7 @@ with_df(df[NA_character_, ] <- 0)
 
 ## Definition of `x[i, j]`.
 
-`x[i, j]` is equivalent to `x[j][i, ]` (`i` and/or `j` may be missing).
+`x[i, j]` is equivalent to `x[j][i, ]`.
 
 ```{r bracket-i-j-equivalent-to-j-subset-then-i, dftbl = TRUE}
 df[1, 1]
@@ -652,59 +644,30 @@ df2[1:2][2:3, ]
 
 ### Corollaries
 
-`x[, j]` is equivalent to `x[j]`; `[` always returns a tibble.
-
-```{r bracket-missing-i, dftbl = TRUE}
-df[, 1]
-df[1]
-df[, 1, drop = FALSE]
-df[1, drop = FALSE]
-df[, 2:3]
-df[2:3]
-df2[, 1:2]
-df2[1:2]
-```
-
-If `i` is given in subassignment, only existing columns can be updated.
+`x[i, j] <-` can update only existing columns, it cannot create or remove columns.
 
 ```{r bracket-ij-update-existing-only, dftbl = TRUE}
-with_df(df[, "x"] <- 1)
+with_df(df[2:3, "n"] <- 1)
 with_df(df[2:3, "x"] <- 1)
+with_df(df[2:3, "n"] <- NULL)
 ```
 
-The data type of existing columns can be changed only if `i` is missing.
+`x[i, j] <-` can't change the data type of existing columns.
 
 ```{r bracket-i-data-type, dftbl = TRUE}
-with_df(df[2:3, 1] <- "x")
-with_df(df[2:3, 2] <- 0)
-with_df(df[2:3, 3] <- 0)
-with_df2(df2[2:3, 1] <- 0)
-with_df2(df2[2:3, 2] <- 0)
+with_df(df[2:3, 1] <- df[1:2, 2])
+with_df(df[2:3, 2] <- df[1:2, 3])
+with_df(df[2:3, 3] <- df2[1:2, 1])
+with_df2(df2[2:3, 1] <- df2[1:2, 2])
+with_df2(df2[2:3, 2] <- df[1:2, 1])
 ```
 
-
-When adding or removing columns, `i` cannot be given (by definition of `x[i, j]`).
-
-```{r change-shape-only-all-rows, dftbl = TRUE}
-with_df(df[2:3, "x"] <- list(0))
-with_df(df[2:3, "c"] <- NULL)
-```
-
-When appending rows, `j` cannot be given (by definition of `x[i, j]`).
+`x[i, j] <-` can't append rows.
 
 ```{r append-rows-only-all-columns, dftbl = TRUE}
 with_df(df[5, "n"] <- list(0))
 ```
 
-
-### Exception
-
-`drop = TRUE` returns a vector when subsetting a single column with two-dimensional indexing, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
-
-```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
-df[, 1, drop = TRUE]
-df[1, , drop = TRUE]
-```
 
 ## Definition of `x[[i, j]]`.
 
@@ -779,6 +742,68 @@ with_df(df[[1, 2]] <- "x")
 with_df(df[1, 2] <- list("x"))
 ```
 
+
+# Missing `j` indexes
+
+## Definition of `x[]`.
+
+`x[]` is equivalent to `x[seq_len(ncol(x))]`.
+
+```{r bracket-empty, dftbl = TRUE}
+df[]
+with_df(df[] <- df)
+with_df(df[] <- df[1, ])
+with_df(df[] <- df[1:2, ])
+with_df(df[] <- df2)
+df2[]
+with_df2(df2[] <- df2)
+with_df2(df2[] <- df2[1, ])
+with_df2(df2[] <- df2[1:2, ])
+with_df2(df2[] <- df)
+```
+
+
+## Definition of `x[, j]`.
+
+`x[, j]` is equivalent to `x[j]`.
+
+```{r bracket-missing-i, dftbl = TRUE}
+df[, 2:3]
+df[2:3]
+df2[, 1:2]
+df2[1:2]
+with_df(df[, 2:3] <- df[1:2])
+with_df(df[2:3] <- df[1:2])
+with_df2(df2[, 1:2] <- df2[2:1])
+with_df2(df2[1:2] <- df2[2:1])
+```
+
+### Corollaries
+
+`[` always returns a tibble.
+
+```{r bracket-drop, dftbl = TRUE}
+df[, 1]
+df[1]
+df[, 1, drop = FALSE]
+df[1, drop = FALSE]
+```
+
+`x[,]` is equivalent to `x[]`.
+
+```{r bracket-comma, dftbl = TRUE}
+df[,]
+df2[,]
+```
+
+### Exception
+
+`drop = TRUE` returns a vector when subsetting a single column with `x[, j]`, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
+
+```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
+df[, 1, drop = TRUE]
+df[1, , drop = TRUE]
+```
 
 
 ```{r check, dftbl = TRUE}
