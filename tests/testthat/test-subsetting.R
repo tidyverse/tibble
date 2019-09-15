@@ -206,7 +206,6 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
 test_that("[.tbl_df supports character subsetting (#312)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
-  expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
 
   scoped_lifecycle_silence()
 

@@ -19,7 +19,7 @@ set_dftbl_opts_hook <- function() {
 
 dftbl_opts_hook <- function(options) {
   df_code <- options$code
-  tbl_code <- gsub("df", "tbl", df_code)
+  tbl_code <- gsub("df", "tbl", df_code, fixed = TRUE)
 
   # FIXME: Evaluate, but surround in <details> element
   if (!isTRUE(options$dftbl_always) && isTRUE(options$eval)) {

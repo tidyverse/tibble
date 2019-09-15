@@ -92,10 +92,22 @@ NULL
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (!exact) {
-    warn("`exact` ignored")
+    warn("`exact` ignored.")
   }
-  if (missing(j)) {
+
+  n_dots <- dots_n(...)
+  if (n_dots > 0) {
+    warn("Extra arguments ignored.")
+  }
+
+  # Ignore exact as an argument for counting
+  n_real_args <- nargs() - !missing(exact) - n_dots
+
+  # Column subsetting if nargs() == 2L
+  if (n_real_args <= 2L) {
     tbl_subset2(x, j = i)
+  } else if (missing(j)) {
+    error_missing_column_index()
   } else {
     i <- vec_as_row_index(i, x)
     check_scalar(i)
@@ -120,15 +132,21 @@ NULL
     check_scalar(i)
   }
 
+  if (is_null(j)) {
+    error_missing_column_index()
+  }
+
   value <- list(value)
 
   j <- vec_as_new_col_index(j, x, value)
   check_scalar(j)
 
-  # Copy over new column names
+  # New columns are added to the end, provide index to avoid matching column
+  # names again
   names(value) <- names(j)
+  j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, unname(j), value)
+  tbl_subassign(x, i, j, value)
 }
 
 
@@ -137,7 +155,7 @@ NULL
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
 `[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
-  # Ignore drop as an argument
+  # Ignore drop as an argument for counting
   n_real_args <- nargs() - !missing(drop)
 
   # Column subsetting if nargs() == 2L
@@ -262,31 +280,37 @@ warn_oob_negative <- function(oob, n) {
 vec_as_col_index <- function(j, x) {
   stopifnot(!is.null(j))
 
-  j <- vec_as_index(j, length(x), names(x))
   if (anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
-  j
+
+  vec_as_index(j, length(x), names(x))
 }
 
 tbl_subset2 <- function(x, j) {
   if (is.matrix(j)) {
     signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(as.matrix(x)[[j]])
-  } else if (has_length(j, 2)) {
+  } else if (has_length(j, 2) && is.numeric(j)) {
     signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(.subset2(x, j))
-  } else if (is.character(j)) {
-    ret <- .subset2(x, j)
-    if (is.null(ret)) {
-      warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
-    }
-    ret
-  } else {
+  } else if (is.numeric(j)) {
+    # Always an error or a warning
     j <- vec_as_index(j, length(x))
-    check_scalar(j)
-    .subset2(x, j)
   }
+
+  check_scalar(j)
+  if (is.logical(j) && !is.na(j)) {
+    # Special case: scalar TRUE or FALSE
+    error_double_bracket_logical()
+  }
+
+  # Let .subset2() handle character indexes
+  ret <- .subset2(x, j)
+  if (is.null(ret)) {
+    warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
+  }
+  ret
 }
 
 tbl_subset_col <- function(x, j) {
@@ -306,14 +330,16 @@ tbl_subset_row <- function(x, i) {
 tbl_subassign <- function(x, i, j, value) {
   if (is_null(value) || is_atomic(value)) {
     value <- list(value)
+  } else {
+    value <- unclass(value)
   }
+  stopifnot(is_bare_list(value))
 
   if (is.null(i)) {
     if (is.null(j)) j <- seq_along(x)
 
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(j)) {
-    value <- vec_recycle(value, ncol(x))
     xo <- tbl_subassign_row(x, i, value)
   } else {
     # Optimization: match only once
@@ -323,7 +349,7 @@ tbl_subassign <- function(x, i, j, value) {
 
     xj <- tbl_subset_col(x, j)
     xj <- tbl_subassign_row(xj, i, value)
-    xo <- tbl_subassign_col(x, j, xj)
+    xo <- tbl_subassign_col(x, j, unclass(xj))
   }
 
   vec_restore(xo, x)
@@ -390,9 +416,6 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  value <- unclass(value)
-  stopifnot(is_bare_list(value))
-
   j <- vec_as_new_col_index(j, x, value)
 
   value <- vec_recycle(value, length(j))
@@ -421,15 +444,19 @@ coalesce2 <- function(x, y) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  value <- unclass(value)
-  stopifnot(is_bare_list(value))
+  value <- vec_recycle(value, ncol(x))
 
   nrow <- fast_nrow(x)
   i <- vec_as_new_row_index(i, x)
 
   new_nrow <- max(i, nrow)
 
+  if (is.na(new_nrow)) {
+    error_na_new_row()
+  }
+
   if (new_nrow != nrow) {
+    # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
     x <- vec_slice(x, i_expand)
   }

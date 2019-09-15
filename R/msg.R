@@ -41,7 +41,7 @@ error_enframe_has_dim <- function(x) {
 }
 
 error_na_column_index <- function(j) {
-  pluralise_commas("Can't use numeric NA as column index with `[` at position(s) ", j, ".")
+  pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, ".")
 }
 
 error_dim_column_index <- function(j) {
