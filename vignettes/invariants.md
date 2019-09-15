@@ -333,17 +333,25 @@ throws an error.
 <td>
     tbl[[NA]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Warning: Unknown or uninitialised
+    #> column: `NA`.
+
+    #> NULL
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+    df[[NA_integer_]]
+    #> NULL
+
 </td>
 <td>
     tbl[[NA_integer_]]
+
+    #> Warning: Unknown or uninitialised
+    #> column: `NA`.
+
     #> NULL
 
 </td>
@@ -469,13 +477,9 @@ throws an error.
 <td>
     tbl[[c("n", "c")]]
 
-    #> Warning: Calling `[[` with a vector
-    #> of length 2 (recursive subsetting)
-    #> is deprecated and will eventually be
-    #> converted to an error.
-
-    #> Error in .subset2(x, j): subscript
-    #> out of bounds
+    #> Error in error_need_scalar(): could
+    #> not find function
+    #> "error_need_scalar"
 
 </td>
 </tr>
@@ -488,9 +492,10 @@ throws an error.
 <td>
     tbl[[TRUE]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error in
+    #> error_double_bracket_logical():
+    #> could not find function
+    #> "error_double_bracket_logical"
 
 </td>
 </tr>
@@ -506,9 +511,10 @@ throws an error.
 <td>
     tbl[[FALSE]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error in
+    #> error_double_bracket_logical():
+    #> could not find function
+    #> "error_double_bracket_logical"
 
 </td>
 </tr>

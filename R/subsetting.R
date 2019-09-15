@@ -273,20 +273,26 @@ tbl_subset2 <- function(x, j) {
   if (is.matrix(j)) {
     signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(as.matrix(x)[[j]])
-  } else if (has_length(j, 2)) {
+  } else if (has_length(j, 2) && is.numeric(j)) {
     signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(.subset2(x, j))
-  } else if (is.character(j)) {
-    ret <- .subset2(x, j)
-    if (is.null(ret)) {
-      warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
-    }
-    ret
-  } else {
+  } else if (is.numeric(j)) {
+    # Always an error or a warning
     j <- vec_as_index(j, length(x))
-    check_scalar(j)
-    .subset2(x, j)
   }
+
+  check_scalar(j)
+  if (is.logical(j) && !is.na(j)) {
+    # Special case: scalar TRUE or FALSE
+    error_double_bracket_logical()
+  }
+
+  # Let .subset2() handle character indexes
+  ret <- .subset2(x, j)
+  if (is.null(ret)) {
+    warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
+  }
+  ret
 }
 
 tbl_subset_col <- function(x, j) {
