@@ -597,11 +597,11 @@ with_df(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ] <- df[1, ])
 Only values of size one can be recycled.
 
 ```{r bracket-i-recycle, dftbl = TRUE}
-with_df(df[2:3, ] <- 0)
-with_df(df[2:3, ] <- 0:1)
-with_df(df[2:4, ] <- 0:1)
-with_df2(df2[2:4, ] <- list(df[1, ]))
-with_df2(df2[2:4, ] <- list(df[2:3, ]))
+with_df(df[2:3, ] <- df[1, ])
+with_df(df[2:3, ] <- df[1:2, ])
+with_df(df[2:4, ] <- df[1:2, ])
+with_df2(df2[2:4, ] <- df2[1, ])
+with_df2(df2[2:4, ] <- df2[2:3, ])
 ```
 
 
