@@ -528,7 +528,7 @@ with_df(df[1:3] <- list(0, 0, 0))
 
 ### Corollary
 
-Only lists of length one are recycled.
+Only lists of length one on the RHS are recycled.
 
 ```{r bracket-assign-recycles-one, dftbl = TRUE}
 with_df(df[1:2] <- list(0, 0, 0))
