@@ -254,6 +254,9 @@ with_df(df[["n"]] <- 0)
 with_df(df[[c("n", "c")]] <- 0)
 with_df(df[[TRUE]] <- 0)
 with_df(df[[FALSE]] <- 0)
+with_df(df[[NA]] <- 0)
+with_df(df[[NA_character_]] <- 0)
+with_df(df[[NA_integer_]] <- 0)
 ```
 
 `x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
