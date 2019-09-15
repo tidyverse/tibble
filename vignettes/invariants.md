@@ -908,21 +908,16 @@ columns, see below).
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[["x"]] <- 0)
-    #>   n c         li x
-    #> 1 1 e          9 0
-    #> 2 2 f     10, 11 0
-    #> 3 3 g 12, 13, 14 0
-    #> 4 4 h       text 0
-
 </td>
 <td>
     with_tbl(tbl[["x"]] <- 0)
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> # A tibble: 4 x 4
+    #>       n c     li            x
+    #>   <int> <chr> <list>    <dbl>
+    #> 1     1 e     <dbl [1]>     0
+    #> 2     2 f     <int [2]>     0
+    #> 3     3 g     <int [3]>     0
+    #> 4     4 h     <chr [1]>     0
 
 </td>
 </tr>
@@ -938,11 +933,13 @@ columns, see below).
 </td>
 <td>
     with_tbl(tbl[[4]] <- 0)
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> # A tibble: 4 x 4
+    #>       n c     li         ...4
+    #>   <int> <chr> <list>    <dbl>
+    #> 1     1 e     <dbl [1]>     0
+    #> 2     2 f     <int [2]>     0
+    #> 3     3 g     <int [3]>     0
+    #> 4     4 h     <chr [1]>     0
 
 </td>
 </tr>
@@ -1112,11 +1109,8 @@ Columns don’t have inner names.
 </td>
 <td>
     with_tbl(tbl[["x"]] <- c(a = 4, b = 3, c = 2, d = 1))[["x"]]
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> a b c d 
+    #> 4 3 2 1
 
 </td>
 </tr>
@@ -1128,11 +1122,8 @@ Columns don’t have inner names.
 </td>
 <td>
     with_tbl(tbl[["x"]] <- rlang::set_names(letters[4:1]))[["x"]]
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #>   d   c   b   a 
+    #> "d" "c" "b" "a"
 
 </td>
 </tr>
@@ -1146,7 +1137,9 @@ List columns can have inner names:
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
+</td>
+<td>
+    with_tbl(tbl[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
     #> $a
     #> [1] 4
     #> 
@@ -1158,15 +1151,6 @@ List columns can have inner names:
     #> 
     #> $d
     #> [1] 1
-
-</td>
-<td>
-    with_tbl(tbl[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
 
 </td>
 </tr>
@@ -1355,11 +1339,15 @@ Definition of `x$name`.
 </td>
 <td>
     with_tbl2(tbl2[["tbl"]] <- tbl[1, ])
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> # A tibble: 4 x 3
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     0     0
+    #> 2     2 f     <int [2…     0     1     0
+    #> 3     3 g     <int [3…     0     0     1
+    #> 4     4 h     <chr [1…     0     0     0
+    #> # … with 4 more variables: [,4] <dbl>,
+    #> #   tbl$n <int>, $c <chr>, $li <list>
 
 </td>
 </tr>
@@ -1480,21 +1468,16 @@ that probes columns and compares with `NULL`, only a warning is raised.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[["l"]] <- 0)
-    #>   n c         li l
-    #> 1 1 e          9 0
-    #> 2 2 f     10, 11 0
-    #> 3 3 g 12, 13, 14 0
-    #> 4 4 h       text 0
-
 </td>
 <td>
     with_tbl(tbl[["l"]] <- 0)
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> # A tibble: 4 x 4
+    #>       n c     li            l
+    #>   <int> <chr> <list>    <dbl>
+    #> 1     1 e     <dbl [1]>     0
+    #> 2     2 f     <int [2]>     0
+    #> 3     3 g     <int [3]>     0
+    #> 4     4 h     <chr [1]>     0
 
 </td>
 </tr>

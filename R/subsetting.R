@@ -125,10 +125,12 @@ NULL
   j <- vec_as_new_col_index(j, x, value)
   check_scalar(j)
 
-  # Copy over new column names
+  # New columns are added to the end, provide index to avoid matching column
+  # names again
   names(value) <- names(j)
+  j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, unname(j), value)
+  tbl_subassign(x, i, j, value)
 }
 
 
