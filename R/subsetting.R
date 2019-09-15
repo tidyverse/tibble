@@ -314,14 +314,16 @@ tbl_subset_row <- function(x, i) {
 tbl_subassign <- function(x, i, j, value) {
   if (is_null(value) || is_atomic(value)) {
     value <- list(value)
+  } else {
+    value <- unclass(value)
   }
+  stopifnot(is_bare_list(value))
 
   if (is.null(i)) {
     if (is.null(j)) j <- seq_along(x)
 
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(j)) {
-    value <- vec_recycle(value, ncol(x))
     xo <- tbl_subassign_row(x, i, value)
   } else {
     # Optimization: match only once
@@ -331,7 +333,7 @@ tbl_subassign <- function(x, i, j, value) {
 
     xj <- tbl_subset_col(x, j)
     xj <- tbl_subassign_row(xj, i, value)
-    xo <- tbl_subassign_col(x, j, xj)
+    xo <- tbl_subassign_col(x, j, unclass(xj))
   }
 
   vec_restore(xo, x)
@@ -398,9 +400,6 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  value <- unclass(value)
-  stopifnot(is_bare_list(value))
-
   j <- vec_as_new_col_index(j, x, value)
 
   value <- vec_recycle(value, length(j))
@@ -429,8 +428,7 @@ coalesce2 <- function(x, y) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  value <- unclass(value)
-  stopifnot(is_bare_list(value))
+  value <- vec_recycle(value, ncol(x))
 
   nrow <- fast_nrow(x)
   i <- vec_as_new_row_index(i, x)
@@ -438,6 +436,7 @@ tbl_subassign_row <- function(x, i, value) {
   new_nrow <- max(i, nrow)
 
   if (new_nrow != nrow) {
+    # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
     x <- vec_slice(x, i_expand)
   }

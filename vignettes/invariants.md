@@ -2698,64 +2698,46 @@ subassignment.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[2:3, ] <- df[1, ])
-    #>   n c   li
-    #> 1 1 e    9
-    #> 2 1 e    9
-    #> 3 1 e    9
-    #> 4 4 h text
-
 </td>
 <td>
     with_tbl(tbl[2:3, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 2. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     1 e     <dbl [1]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[0:2, ] <- df[1, ])
-    #>   n c         li
-    #> 1 1 e          9
-    #> 2 1 e          9
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
 </td>
 <td>
     with_tbl(tbl[0:2, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 2. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[0, ] <- df[1, ])
-    #>   n c         li
-    #> 1 1 e          9
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
 </td>
 <td>
     with_tbl(tbl[0, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 0. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -2833,64 +2815,46 @@ subassignment.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
-    #>   n c   li
-    #> 1 1 e    9
-    #> 2 1 e    9
-    #> 3 1 e    9
-    #> 4 4 h text
-
 </td>
 <td>
     with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 2. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     1 e     <dbl [1]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[TRUE, ] <- df[1, ])
-    #>   n c li
-    #> 1 1 e  9
-    #> 2 1 e  9
-    #> 3 1 e  9
-    #> 4 1 e  9
-
 </td>
 <td>
     with_tbl(tbl[TRUE, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 4. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     1 e     <dbl [1]>
+    #> 4     1 e     <dbl [1]>
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[FALSE, ] <- df[1, ])
-    #>   n c         li
-    #> 1 1 e          9
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
 </td>
 <td>
     with_tbl(tbl[FALSE, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 0. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -3021,43 +2985,31 @@ Only values of size one can be recycled.
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[2:3, ] <- df[1, ])
-    #>   n c   li
-    #> 1 1 e    9
-    #> 2 1 e    9
-    #> 3 1 e    9
-    #> 4 4 h text
-
 </td>
 <td>
     with_tbl(tbl[2:3, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 2. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     1 e     <dbl [1]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[2:3, ] <- df[1:2, ])
-    #>   n c     li
-    #> 1 1 e      9
-    #> 2 1 e      9
-    #> 3 2 f 10, 11
-    #> 4 4 h   text
-
 </td>
 <td>
     with_tbl(tbl[2:3, ] <- tbl[1:2, ])
-
-    #> Vector of length 2 cannot be
-    #> recycled to
-    #> length 3. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     2 f     <int [2]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -3095,12 +3047,14 @@ Only values of size one can be recycled.
 </td>
 <td>
     with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
-
-    #> Vector of length 2 cannot be
-    #> recycled to
-    #> length 3. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 2
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     0     0
+    #> 2     1 e     <dbl [1…     1     0     0
+    #> 3     1 e     <dbl [1…     1     0     0
+    #> 4     1 e     <dbl [1…     1     0     0
+    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3208,23 +3162,17 @@ is supported, without warning.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[5, ] <- df[1, ])
-    #>   n c         li
-    #> 1 1 e          9
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-    #> 5 1 e          9
-
 </td>
 <td>
     with_tbl(tbl[5, ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 5 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
+    #> 5     1 e     <dbl [1]>
 
 </td>
 </tr>
@@ -3542,12 +3490,13 @@ supported.
 </td>
 <td>
     with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     1 e     <dbl [1]>
 
 </td>
 </tr>
@@ -3595,11 +3544,13 @@ supported.
     #> longer object length is not a multiple
     #> of shorter object length
 
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 2. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -4092,12 +4043,13 @@ Definition of `x[[i, j]]`.
 </td>
 <td>
     with_tbl(tbl[1, ][[1]] <- 0)
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     0 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -4125,22 +4077,16 @@ Definition of `x[[i, j]]`.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[1, ][[3]] <- list(NULL))
-    #>   n c         li
-    #> 1 1 e       NULL
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
 </td>
 <td>
     with_tbl(tbl[1, ][[3]] <- list(NULL))
-
-    #> Vector of length 3 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <NULL>   
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
 </td>
 </tr>
@@ -4168,22 +4114,17 @@ Definition of `x[[i, j]]`.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df2(df2[1, ][[1]] <- df[1, ])
-    #>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
-    #> 1    1    e          9   1   0   0   0
-    #> 2    2    f     10, 11   0   1   0   0
-    #> 3    3    g 12, 13, 14   0   0   1   0
-    #> 4    4    h       text   0   0   0   1
-
 </td>
 <td>
     with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
-
-    #> Vector of length 2 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 2
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     0     0
+    #> 2     2 f     <int [2…     0     1     0
+    #> 3     3 g     <int [3…     0     0     1
+    #> 4     4 h     <chr [1…     0     0     0
+    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -4211,22 +4152,17 @@ Definition of `x[[i, j]]`.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df2(df2[1, ][[2]] <- t(1:4))
-    #>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
-    #> 1    1    e          9   1   2   3   4
-    #> 2    2    f     10, 11   0   1   0   0
-    #> 3    3    g 12, 13, 14   0   0   1   0
-    #> 4    4    h       text   0   0   0   1
-
 </td>
 <td>
     with_tbl2(tbl2[1, ][[2]] <- t(1:4))
-
-    #> Vector of length 2 cannot be
-    #> recycled to
-    #> length 1. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> # A tibble: 4 x 2
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     2     3
+    #> 2     2 f     <int [2…     0     1     0
+    #> 3     3 g     <int [3…     0     0     1
+    #> 4     4 h     <chr [1…     0     0     0
+    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
