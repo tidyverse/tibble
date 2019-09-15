@@ -435,6 +435,10 @@ tbl_subassign_row <- function(x, i, value) {
 
   new_nrow <- max(i, nrow)
 
+  if (is.na(new_nrow)) {
+    error_na_new_row()
+  }
+
   if (new_nrow != nrow) {
     # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))

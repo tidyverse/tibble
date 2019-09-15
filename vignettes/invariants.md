@@ -2787,9 +2787,8 @@ subassignment.
 <td>
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -2807,9 +2806,8 @@ subassignment.
 <td>
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -2872,9 +2870,8 @@ subassignment.
 <td>
     with_tbl(tbl[NA, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -3392,10 +3389,17 @@ supported.
 </td>
 <td>
     tbl[as.character(-(1:3)), ]
-    #> # A tibble: 1 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     4 h     <chr [1]>
+
+    #> Warning: Only valid row names can be
+    #> used for indexing. Use `NA` as row index
+    #> to obtain a row full of `NA` values.
+
+    #> # A tibble: 3 x 3
+    #>       n c     li    
+    #>   <int> <chr> <list>
+    #> 1    NA <NA>  <NULL>
+    #> 2    NA <NA>  <NULL>
+    #> 3    NA <NA>  <NULL>
 
 </td>
 </tr>
@@ -3436,15 +3440,16 @@ supported.
 <td>
     tbl[as.character(-(3:5)), ]
 
-    #> Warning in is.na(i) & !is_na_orig:
-    #> longer object length is not a multiple
-    #> of shorter object length
+    #> Warning: Only valid row names can be
+    #> used for indexing. Use `NA` as row index
+    #> to obtain a row full of `NA` values.
 
-    #> # A tibble: 2 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> # A tibble: 3 x 3
+    #>       n c     li    
+    #>   <int> <chr> <list>
+    #> 1    NA <NA>  <NULL>
+    #> 2    NA <NA>  <NULL>
+    #> 3    NA <NA>  <NULL>
 
 </td>
 </tr>
@@ -3490,13 +3495,13 @@ supported.
 </td>
 <td>
     with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4     1 e     <dbl [1]>
+
+    #> Warning: Only valid row names can be
+    #> used for indexing. Use `NA` as row index
+    #> to obtain a row full of `NA` values.
+
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -3518,9 +3523,8 @@ supported.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -3540,17 +3544,12 @@ supported.
 <td>
     with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 
-    #> Warning in is.na(i) & !is_na_orig:
-    #> longer object length is not a multiple
-    #> of shorter object length
+    #> Warning: Only valid row names can be
+    #> used for indexing. Use `NA` as row index
+    #> to obtain a row full of `NA` values.
 
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     3 g     <int [3]>
-    #> 4     4 h     <chr [1]>
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
@@ -3568,9 +3567,8 @@ supported.
 <td>
     with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error in error_na_new_row(): could
+    #> not find function "error_na_new_row"
 
 </td>
 </tr>
