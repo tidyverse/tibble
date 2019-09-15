@@ -405,16 +405,18 @@ j <- vec_as_new_col_index(j, x, a)
 ```
 
 ```{r vec-as-new-col-index}
-# Existing columns indexes
+# Existing columns
 tibble:::vec_as_new_col_index(2:3, df, list(2, 3))
 tibble:::vec_as_new_col_index(-3, df, list(2, 3))
 tibble:::vec_as_new_col_index(c(TRUE, FALSE, TRUE), df, list(2, 3))
-
+#
+#
 # New columns
 tibble:::vec_as_new_col_index("x", df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(0))
-
+#
+#
 # Errors
 tibble:::vec_as_new_col_index(NA, df, list(0))
 tibble:::vec_as_new_col_index(NA_integer_, df, list(0))
