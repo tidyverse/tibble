@@ -1,3 +1,9 @@
+# tibble 2.99.99.9005
+
+- Correct behavior for subsetting and subassignment.
+- Reimplement subsetting and subassignment from invariants.
+
+
 # tibble 2.99.99.9004
 
 - Formatting numbers with thousand separators never uses scientific notation.
