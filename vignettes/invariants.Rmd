@@ -744,13 +744,20 @@ with_df2(df2[[1, 2]] <- df2[2, ][[2]])
 with_df2(df2[1, 2] <- list(df2[[2, 2]]))
 ```
 
-`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(j)` scalar.
+`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
  
 ```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
 df[[1, 2]]
 df[1, 2][[1]]
 with_df(df[[1, 2]] <- "x")
 with_df(df[1, 2] <- list("x"))
+```
+
+`x[[i, ]]` is not supported.
+
+```{r double-bracket-j-missing-not-supported, dftbl = TRUE}
+df[[1, ]]
+with_df(df[[1, ]] <- 0)
 ```
 
 
