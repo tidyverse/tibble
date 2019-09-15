@@ -4579,7 +4579,11 @@ requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
 </td>
 <td>
     tbl[[1, ]]
-    #> [1] 1 2 3 4
+
+    #> Error in
+    #> error_missing_column_index(): could
+    #> not find function
+    #> "error_missing_column_index"
 
 </td>
 </tr>
@@ -4596,8 +4600,10 @@ requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
 <td>
     with_tbl(tbl[[1, ]] <- 0)
 
-    #> Error in vec_as_col_index(j, x):
-    #> !is.null(j) is not TRUE
+    #> Error in
+    #> error_missing_column_index(): could
+    #> not find function
+    #> "error_missing_column_index"
 
 </td>
 </tr>

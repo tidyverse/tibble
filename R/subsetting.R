@@ -92,10 +92,22 @@ NULL
 #' @export
 `[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (!exact) {
-    warn("`exact` ignored")
+    warn("`exact` ignored.")
   }
-  if (missing(j)) {
+
+  n_dots <- dots_n(...)
+  if (n_dots > 0) {
+    warn("Extra arguments ignored.")
+  }
+
+  # Ignore exact as an argument for counting
+  n_real_args <- nargs() - !missing(exact) - n_dots
+
+  # Column subsetting if nargs() == 2L
+  if (n_real_args <= 2L) {
     tbl_subset2(x, j = i)
+  } else if (missing(j)) {
+    error_missing_column_index()
   } else {
     i <- vec_as_row_index(i, x)
     check_scalar(i)
@@ -120,6 +132,10 @@ NULL
     check_scalar(i)
   }
 
+  if (is_null(j)) {
+    error_missing_column_index()
+  }
+
   value <- list(value)
 
   j <- vec_as_new_col_index(j, x, value)
@@ -139,7 +155,7 @@ NULL
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
 `[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
-  # Ignore drop as an argument
+  # Ignore drop as an argument for counting
   n_real_args <- nargs() - !missing(drop)
 
   # Column subsetting if nargs() == 2L
