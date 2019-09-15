@@ -17,7 +17,7 @@ test_that("error_enframe_has_dim()", {
 test_that("error_na_column_index()", {
   expect_equal(
     error_na_column_index(1:3),
-    "Can't use numeric NA as column index with `[` at positions 1, 2, 3."
+    "Can't use NA as column index with `[` at positions 1, 2, 3."
   )
 })
 

@@ -1617,8 +1617,9 @@ class.
 <td>
     tbl[NA]
 
-    #> Can't use numeric NA as column index
-    #> with `[` at positions 1, 2, 3.
+    #> Can't use NA as column index with
+    #> `[` at
+    #> position 1.
 
 </td>
 </tr>
@@ -1634,8 +1635,9 @@ class.
 <td>
     tbl[NA_integer_]
 
-    #> Can't use numeric NA as column index
-    #> with `[` at position 1.
+    #> Can't use NA as column index with
+    #> `[` at
+    #> position 1.
 
 </td>
 </tr>
@@ -1651,8 +1653,9 @@ class.
 <td>
     tbl[NA_character_]
 
-    #> Can't use numeric NA as column index
-    #> with `[` at position 1.
+    #> Can't use NA as column index with
+    #> `[` at
+    #> position 1.
 
 </td>
 </tr>

@@ -264,11 +264,11 @@ warn_oob_negative <- function(oob, n) {
 vec_as_col_index <- function(j, x) {
   stopifnot(!is.null(j))
 
-  j <- vec_as_index(j, length(x), names(x))
   if (anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
-  j
+
+  vec_as_index(j, length(x), names(x))
 }
 
 tbl_subset2 <- function(x, j) {
