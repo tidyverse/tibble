@@ -254,6 +254,9 @@ with_df(df[["n"]] <- 0)
 with_df(df[[c("n", "c")]] <- 0)
 with_df(df[[TRUE]] <- 0)
 with_df(df[[FALSE]] <- 0)
+with_df(df[[NA]] <- 0)
+with_df(df[[NA_character_]] <- 0)
+with_df(df[[NA_integer_]] <- 0)
 ```
 
 `x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
@@ -402,16 +405,18 @@ j <- vec_as_new_col_index(j, x, a)
 ```
 
 ```{r vec-as-new-col-index}
-# Existing columns indexes
+# Existing columns
 tibble:::vec_as_new_col_index(2:3, df, list(2, 3))
 tibble:::vec_as_new_col_index(-3, df, list(2, 3))
 tibble:::vec_as_new_col_index(c(TRUE, FALSE, TRUE), df, list(2, 3))
-
+#
+#
 # New columns
 tibble:::vec_as_new_col_index("x", df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(y = 0))
 tibble:::vec_as_new_col_index(4, df, list(0))
-
+#
+#
 # Errors
 tibble:::vec_as_new_col_index(NA, df, list(0))
 tibble:::vec_as_new_col_index(NA_integer_, df, list(0))
@@ -523,7 +528,7 @@ with_df(df[1:3] <- list(0, 0, 0))
 
 ### Corollary
 
-Only lists of length one are recycled.
+Only lists of length one on the RHS are recycled.
 
 ```{r bracket-assign-recycles-one, dftbl = TRUE}
 with_df(df[1:2] <- list(0, 0, 0))
@@ -592,11 +597,11 @@ with_df(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ] <- df[1, ])
 Only values of size one can be recycled.
 
 ```{r bracket-i-recycle, dftbl = TRUE}
-with_df(df[2:3, ] <- 0)
-with_df(df[2:3, ] <- 0:1)
-with_df(df[2:4, ] <- 0:1)
-with_df2(df2[2:4, ] <- list(df[1, ]))
-with_df2(df2[2:4, ] <- list(df[2:3, ]))
+with_df(df[2:3, ] <- df[1, ])
+with_df(df[2:3, ] <- df[1:2, ])
+with_df(df[2:4, ] <- df[1:2, ])
+with_df2(df2[2:4, ] <- df2[1, ])
+with_df2(df2[2:4, ] <- df2[2:3, ])
 ```
 
 
@@ -741,13 +746,20 @@ with_df2(df2[[1, 2]] <- df2[2, ][[2]])
 with_df2(df2[1, 2] <- list(df2[[2, 2]]))
 ```
 
-`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(j)` scalar.
+`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
  
 ```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
 df[[1, 2]]
 df[1, 2][[1]]
 with_df(df[[1, 2]] <- "x")
 with_df(df[1, 2] <- list("x"))
+```
+
+`x[[i, ]]` is not supported.
+
+```{r double-bracket-j-missing-not-supported, dftbl = TRUE}
+df[[1, ]]
+with_df(df[[1, ]] <- 0)
 ```
 
 
