@@ -229,8 +229,6 @@ df$l
 
 `j` is first converted to an integer vector by `vectrs::vec_as_index()`. This ensures that `j` is a logical, numeric, or character, and recycles scalar logicals.
 
-
-
 Then `x[c(j_1, j_2, ..., j_n)]` is equvalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])` with names set to `names(x)[j]`.
 
 ```{r bracket-j-definition, dftbl = TRUE}
@@ -250,8 +248,288 @@ df[c(1, 1)]
 df[integer()]
 ```
 
+### Definition of `x[, j]`.
 
-## Definition of `x[[j]] <- a`.
+`x[, j]` is equal to `x[j]`.
+
+
+`[` always returns a tibble.
+
+```{r bracket-drop, dftbl = TRUE}
+df[, 1]
+df[1]
+df[, 1, drop = FALSE]
+df[1, drop = FALSE]
+```
+
+
+```{r bracket-comma, dftbl = TRUE}
+df[,]
+with_df(df[,] <- df)
+with_df(df[,] <- df[1, ])
+with_df(df[,] <- df[1:2, ])
+with_df(df[,] <- df2)
+df2[,]
+with_df2(df2[,] <- df2)
+with_df2(df2[,] <- df2[1, ])
+with_df2(df2[,] <- df2[1:2, ])
+with_df2(df2[,] <- df)
+```
+
+### Exception
+
+`drop = TRUE` returns a vector when subsetting a single column with `x[, j]`, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
+
+```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
+df[, 1, drop = TRUE]
+df[1, , drop = TRUE]
+```
+
+
+```{r check, dftbl = TRUE}
+stopifnot(identical(df, new_df()))
+```
+
+
+
+## Row subsetting
+
+### Definition of `x[i, ]`.
+
+Applies `vec_slice(, i)` to all columns, for both subsetting and subassignment.
+
+```{r bracket-i, dftbl = TRUE}
+df[2:3, ]
+df[0:2, ]
+df[0, ]
+df[-2, ]
+df[-1:2, ]
+df[NA_integer_, ]
+df2[NA_integer_, ]
+df[c(FALSE, TRUE, TRUE, FALSE), ]
+df[TRUE, ]
+df[FALSE, ]
+df[NA, ]
+with_df(df[2:3, ] <- df[1, ])
+with_df(df[0:2, ] <- df[1, ])
+with_df(df[0, ] <- df[1, ])
+with_df(df[-2, ] <- df[1, ])
+with_df(df[-1:2, ] <- df[1, ])
+with_df(df[NA_integer_, ] <- df[1, ])
+with_df2(df2[NA_integer_, ] <- df2[1, ])
+with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
+with_df(df[TRUE, ] <- df[1, ])
+with_df(df[FALSE, ] <- df[1, ])
+with_df(df[NA, ] <- df[1, ])
+```
+
+### Corollary
+
+For logical vectors, out-of-bounds indexing and recycling of size > 1 are not supported.
+(Character and numeric vectors are exceptions that are discussed below.)
+
+```{r bracket-i-oob-lgl, dftbl = TRUE}
+df[c(TRUE, FALSE), ]
+df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ]
+with_df(df[c(TRUE, FALSE), ] <- df[1, ])
+with_df(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ] <- df[1, ])
+```
+
+
+### Subassignment corollary
+
+Only values of size one can be recycled.
+
+```{r bracket-i-recycle, dftbl = TRUE}
+with_df(df[2:3, ] <- df[1, ])
+with_df(df[2:3, ] <- df[1:2, ])
+with_df(df[2:4, ] <- df[1:2, ])
+with_df2(df2[2:4, ] <- df2[1, ])
+with_df2(df2[2:4, ] <- df2[2:3, ])
+```
+
+
+### Exception
+
+For compatibility reasons only a warning is issued for indexing beyond the number of rows.
+Appending rows right at the end of the existing data is supported, without warning.
+
+```{r bracket-i-oob-num, dftbl = TRUE}
+df[5, ]
+df[5:7, ]
+df[6, ]
+with_df(df[5, ] <- df[1, ])
+with_df(df[5:7, ] <- df[1, ])
+with_df(df[6, ] <- df[1, ])
+df[-5, ]
+df[-(5:7), ]
+df[-6, ]
+with_df(df[-5, ] <- df[1, ])
+with_df(df[-(5:7), ] <- df[1, ])
+with_df(df[-6, ] <- df[1, ])
+```
+
+For compatibility reasons, character vectors that represent numbers are supported.
+
+```{r bracket-i-character, dftbl = TRUE}
+df[as.character(1:3), ]
+df[as.character(-(1:3)), ]
+df[as.character(3:5), ]
+df[as.character(-(3:5)), ]
+df[NA_character_, ]
+with_df(df[as.character(1:3), ] <- df[1, ])
+with_df(df[as.character(-(1:3)), ] <- df[1, ])
+with_df(df[as.character(3:5), ] <- df[1, ])
+with_df(df[as.character(-(3:5)), ] <- df[1, ])
+with_df(df[NA_character_, ] <- df[1, ])
+```
+
+## Row and column subsetting
+
+### Definition of `x[]`.
+
+`x[]` is equivalent to `x[seq_len(ncol(x))]`.
+
+```{r bracket-empty, dftbl = TRUE}
+df[]
+with_df(df[] <- df)
+with_df(df[] <- df[1, ])
+with_df(df[] <- df[1:2, ])
+with_df(df[] <- df2)
+df2[]
+with_df2(df2[] <- df2)
+with_df2(df2[] <- df2[1, ])
+with_df2(df2[] <- df2[1:2, ])
+with_df2(df2[] <- df)
+```
+
+### Definition of `x[,]`.
+
+`x[,]` is equivalent to `x[]`.
+
+### Definition of `x[i, j]`.
+
+`x[i, j]` is equivalent to `x[j][i, ]`.
+
+```{r bracket-i-j-equivalent-to-j-subset-then-i, dftbl = TRUE}
+df[1, 1]
+df[1][1, ]
+df[1, 2:3]
+df[2:3][1, ]
+df[2:3, 1]
+df[1][2:3, ]
+df2[2:3, 1:2]
+df2[1:2][2:3, ]
+```
+
+### Corollaries
+
+`x[i, j] <-` can update only existing columns, it cannot create or remove columns.
+
+```{r bracket-ij-update-existing-only, dftbl = TRUE}
+with_df(df[2:3, "n"] <- 1)
+with_df(df[2:3, "x"] <- 1)
+with_df(df[2:3, "n"] <- NULL)
+```
+
+`x[i, j] <-` can't change the data type of existing columns.
+
+```{r bracket-i-data-type, dftbl = TRUE}
+with_df(df[2:3, 1] <- df[1:2, 2])
+with_df(df[2:3, 2] <- df[1:2, 3])
+with_df(df[2:3, 3] <- df2[1:2, 1])
+with_df2(df2[2:3, 1] <- df2[1:2, 2])
+with_df2(df2[2:3, 2] <- df[1:2, 1])
+```
+
+`x[i, j] <-` can't append rows.
+
+```{r append-rows-only-all-columns, dftbl = TRUE}
+with_df(df[5, "n"] <- list(0))
+```
+
+### Definition of `x[[i, j]]`.
+
+`x[[i, j]]` is equivalent to `x[i, ][[j]]`.
+
+```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
+df[[1, 1]]
+df[1, ][[1]]
+df[[1, 3]]
+df[1, ][[3]]
+df2[[1, 1]]
+df2[1, ][[1]]
+df2[[1, 2]]
+df2[1, ][[2]]
+with_df(df[[1, 1]] <- 0)
+with_df(df[1, ][[1]] <- 0)
+with_df(df[[1, 3]] <- list(NULL))
+with_df(df[1, ][[3]] <- list(NULL))
+with_df2(df2[[1, 1]] <- df[1, ])
+with_df2(df2[1, ][[1]] <- df[1, ])
+with_df2(df2[[1, 2]] <- t(1:4))
+with_df2(df2[1, ][[2]] <- t(1:4))
+```
+
+`vec_as_index(i)` must be scalar.
+
+```{r double-bracket-requires-scalar-i-index, dftbl = TRUE}
+df[[1:2, 1]]
+with_df(df[[1:2, 1]] <- 0)
+```
+
+### Corollaries
+
+`x[[i, j]]` always returns an object of size 1.
+
+```{r double-bracket-double-index-size-one, dftbl = TRUE}
+vec_size(df[[2, 1]])
+vec_size(df[[2, 3]])
+vec_size(df2[[2, 1]])
+vec_size(df2[[2, 2]])
+vec_size(df[[NA, 1]])
+vec_size(df[[NA, 3]])
+vec_size(df2[[NA, 1]])
+vec_size(df2[[NA, 2]])
+```
+
+`x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
+
+- atomic: `df[[1]]`
+- list: `df[[3]]`
+- data frame: `df2[[1]]`
+- matrix: `df2[[2]]`
+
+```{r double-bracket-i-j-assign, dftbl = TRUE}
+with_df(df[[1, 1]] <- df[2, ][[1]])
+with_df(df[1, 1] <- list(df[[2, 1]]))
+with_df(df[[1, 3]] <- df[2, ][[3]])
+with_df(df[1, 3] <- list(df[[2, 3]]))
+with_df2(df2[[1, 1]] <- df2[2, ][[1]])
+with_df2(df2[1, 1] <- list(df2[[2, 1]]))
+with_df2(df2[[1, 2]] <- df2[2, ][[2]])
+with_df2(df2[1, 2] <- list(df2[[2, 2]]))
+```
+
+`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
+ 
+```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
+df[[1, 2]]
+df[1, 2][[1]]
+with_df(df[[1, 2]] <- "x")
+with_df(df[1, 2] <- list("x"))
+```
+
+`x[[i, ]]` is not supported.
+
+```{r double-bracket-j-missing-not-supported, dftbl = TRUE}
+df[[1, ]]
+with_df(df[[1, ]] <- 0)
+```
+
+## Assignment
+
+### Definition of `x[[j]] <- a`.
 
 `x[[j]] <- a` is equivalent to restoring to the original class after assigning the (potentially recycled) value to `unclass(x)`:
 
@@ -325,7 +603,7 @@ with_df(df[[1]] <- NULL)
 with_df2(df2[[2]] <- NULL)
 ```
 
-## Columns don't have inner names.
+### Columns don't have inner names.
 
 ```{r columns-dont-have-names, dftbl = TRUE}
 with_df(df[["x"]] <- c(a = 4, b = 3, c = 2, d = 1))[["x"]]
@@ -340,7 +618,7 @@ List columns can have inner names:
 with_df(df[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
 ```
 
-## Definition of `x[j] <- list(...)`.
+### Definition of `x[j] <- list(...)`.
 
 `x[j] <- a` is equivalent to converting `j` to column indexes or column names and performing `x[[jj]] <- ...` in a loop.
 
@@ -462,7 +740,7 @@ with_df2(df2[[2]] <- df[[3]])
 with_df2(df2[2] <- list(df[[3]]))
 ```
 
-## Definition of `x[j] <- list(a)`.
+### Definition of `x[j] <- list(a)`.
 
 `x[j] <- a` is equivalent to `x[j] <- rep_along(j, a)` if `is_list(a, 1)`.
 
@@ -482,7 +760,7 @@ with_df(df[1:2] <- list(0, 0, 0))
 with_df(df[1:3] <- list(0, 0))
 ```
 
-## Definition of `x[j] <- a`.
+### Definition of `x[j] <- a`.
 
 `x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
 
@@ -495,292 +773,3 @@ with_df(df[1] <- NULL)
 with_df(df[1] <- list(NULL))
 ```
 
-# Rows
-
-## Definition of `x[i, ]`.
-
-Applies `vec_slice(, i)` to all columns, for both subsetting and subassignment.
-
-```{r bracket-i, dftbl = TRUE}
-df[2:3, ]
-df[0:2, ]
-df[0, ]
-df[-2, ]
-df[-1:2, ]
-df[NA_integer_, ]
-df2[NA_integer_, ]
-df[c(FALSE, TRUE, TRUE, FALSE), ]
-df[TRUE, ]
-df[FALSE, ]
-df[NA, ]
-with_df(df[2:3, ] <- df[1, ])
-with_df(df[0:2, ] <- df[1, ])
-with_df(df[0, ] <- df[1, ])
-with_df(df[-2, ] <- df[1, ])
-with_df(df[-1:2, ] <- df[1, ])
-with_df(df[NA_integer_, ] <- df[1, ])
-with_df2(df2[NA_integer_, ] <- df2[1, ])
-with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
-with_df(df[TRUE, ] <- df[1, ])
-with_df(df[FALSE, ] <- df[1, ])
-with_df(df[NA, ] <- df[1, ])
-```
-
-### Corollary
-
-For logical vectors, out-of-bounds indexing and recycling of size > 1 are not supported.
-(Character and numeric vectors are exceptions that are discussed below.)
-
-```{r bracket-i-oob-lgl, dftbl = TRUE}
-df[c(TRUE, FALSE), ]
-df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ]
-with_df(df[c(TRUE, FALSE), ] <- df[1, ])
-with_df(df[c(TRUE, FALSE, TRUE, FALSE, TRUE), ] <- df[1, ])
-```
-
-
-### Subassignment corollary
-
-Only values of size one can be recycled.
-
-```{r bracket-i-recycle, dftbl = TRUE}
-with_df(df[2:3, ] <- df[1, ])
-with_df(df[2:3, ] <- df[1:2, ])
-with_df(df[2:4, ] <- df[1:2, ])
-with_df2(df2[2:4, ] <- df2[1, ])
-with_df2(df2[2:4, ] <- df2[2:3, ])
-```
-
-
-### Exception
-
-For compatibility reasons only a warning is issued for indexing beyond the number of rows.
-Appending rows right at the end of the existing data is supported, without warning.
-
-```{r bracket-i-oob-num, dftbl = TRUE}
-df[5, ]
-df[5:7, ]
-df[6, ]
-with_df(df[5, ] <- df[1, ])
-with_df(df[5:7, ] <- df[1, ])
-with_df(df[6, ] <- df[1, ])
-df[-5, ]
-df[-(5:7), ]
-df[-6, ]
-with_df(df[-5, ] <- df[1, ])
-with_df(df[-(5:7), ] <- df[1, ])
-with_df(df[-6, ] <- df[1, ])
-```
-
-For compatibility reasons, character vectors that represent numbers are supported.
-
-```{r bracket-i-character, dftbl = TRUE}
-df[as.character(1:3), ]
-df[as.character(-(1:3)), ]
-df[as.character(3:5), ]
-df[as.character(-(3:5)), ]
-df[NA_character_, ]
-with_df(df[as.character(1:3), ] <- df[1, ])
-with_df(df[as.character(-(1:3)), ] <- df[1, ])
-with_df(df[as.character(3:5), ] <- df[1, ])
-with_df(df[as.character(-(3:5)), ] <- df[1, ])
-with_df(df[NA_character_, ] <- df[1, ])
-```
-
-## Definition of `x[i, j]`.
-
-`x[i, j]` is equivalent to `x[j][i, ]`.
-
-```{r bracket-i-j-equivalent-to-j-subset-then-i, dftbl = TRUE}
-df[1, 1]
-df[1][1, ]
-df[1, 2:3]
-df[2:3][1, ]
-df[2:3, 1]
-df[1][2:3, ]
-df2[2:3, 1:2]
-df2[1:2][2:3, ]
-```
-
-### Corollaries
-
-`x[i, j] <-` can update only existing columns, it cannot create or remove columns.
-
-```{r bracket-ij-update-existing-only, dftbl = TRUE}
-with_df(df[2:3, "n"] <- 1)
-with_df(df[2:3, "x"] <- 1)
-with_df(df[2:3, "n"] <- NULL)
-```
-
-`x[i, j] <-` can't change the data type of existing columns.
-
-```{r bracket-i-data-type, dftbl = TRUE}
-with_df(df[2:3, 1] <- df[1:2, 2])
-with_df(df[2:3, 2] <- df[1:2, 3])
-with_df(df[2:3, 3] <- df2[1:2, 1])
-with_df2(df2[2:3, 1] <- df2[1:2, 2])
-with_df2(df2[2:3, 2] <- df[1:2, 1])
-```
-
-`x[i, j] <-` can't append rows.
-
-```{r append-rows-only-all-columns, dftbl = TRUE}
-with_df(df[5, "n"] <- list(0))
-```
-
-
-## Definition of `x[[i, j]]`.
-
-`x[[i, j]]` is equivalent to `x[i, ][[j]]`.
-
-```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE}
-df[[1, 1]]
-df[1, ][[1]]
-df[[1, 3]]
-df[1, ][[3]]
-df2[[1, 1]]
-df2[1, ][[1]]
-df2[[1, 2]]
-df2[1, ][[2]]
-with_df(df[[1, 1]] <- 0)
-with_df(df[1, ][[1]] <- 0)
-with_df(df[[1, 3]] <- list(NULL))
-with_df(df[1, ][[3]] <- list(NULL))
-with_df2(df2[[1, 1]] <- df[1, ])
-with_df2(df2[1, ][[1]] <- df[1, ])
-with_df2(df2[[1, 2]] <- t(1:4))
-with_df2(df2[1, ][[2]] <- t(1:4))
-```
-
-`vec_as_index(i)` must be scalar.
-
-```{r double-bracket-requires-scalar-i-index, dftbl = TRUE}
-df[[1:2, 1]]
-with_df(df[[1:2, 1]] <- 0)
-```
-
-
-### Corollaries
-
-`x[[i, j]]` always returns an object of size 1.
-
-```{r double-bracket-double-index-size-one, dftbl = TRUE}
-vec_size(df[[2, 1]])
-vec_size(df[[2, 3]])
-vec_size(df2[[2, 1]])
-vec_size(df2[[2, 2]])
-vec_size(df[[NA, 1]])
-vec_size(df[[NA, 3]])
-vec_size(df2[[NA, 1]])
-vec_size(df2[[NA, 2]])
-```
-
-`x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or RHS of an assignment for the four principal column types:
-
-- atomic: `df[[1]]`
-- list: `df[[3]]`
-- data frame: `df2[[1]]`
-- matrix: `df2[[2]]`
-
-```{r double-bracket-i-j-assign, dftbl = TRUE}
-with_df(df[[1, 1]] <- df[2, ][[1]])
-with_df(df[1, 1] <- list(df[[2, 1]]))
-with_df(df[[1, 3]] <- df[2, ][[3]])
-with_df(df[1, 3] <- list(df[[2, 3]]))
-with_df2(df2[[1, 1]] <- df2[2, ][[1]])
-with_df2(df2[1, 1] <- list(df2[[2, 1]]))
-with_df2(df2[[1, 2]] <- df2[2, ][[2]])
-with_df2(df2[1, 2] <- list(df2[[2, 2]]))
-```
-
-`x[[i, j]]` is equivalent to `x[i, j][[1]]` with the additional requirement `vec_as_index(i)` and `vec_as_index(j)` scalar.
- 
-```{r double-bracket-i-j-equivalent-to-bracket-then-subset2-1, dftbl = TRUE}
-df[[1, 2]]
-df[1, 2][[1]]
-with_df(df[[1, 2]] <- "x")
-with_df(df[1, 2] <- list("x"))
-```
-
-`x[[i, ]]` is not supported.
-
-```{r double-bracket-j-missing-not-supported, dftbl = TRUE}
-df[[1, ]]
-with_df(df[[1, ]] <- 0)
-```
-
-
-# Missing `j` indexes
-
-## Definition of `x[]`.
-
-`x[]` is equivalent to `x[seq_len(ncol(x))]`.
-
-```{r bracket-empty, dftbl = TRUE}
-df[]
-with_df(df[] <- df)
-with_df(df[] <- df[1, ])
-with_df(df[] <- df[1:2, ])
-with_df(df[] <- df2)
-df2[]
-with_df2(df2[] <- df2)
-with_df2(df2[] <- df2[1, ])
-with_df2(df2[] <- df2[1:2, ])
-with_df2(df2[] <- df)
-```
-
-
-## Definition of `x[, j]`.
-
-`x[, j]` is equivalent to `x[j]`.
-
-```{r bracket-missing-i, dftbl = TRUE}
-df[, 2:3]
-df[2:3]
-df2[, 1:2]
-df2[1:2]
-with_df(df[, 2:3] <- df[1:2])
-with_df(df[2:3] <- df[1:2])
-with_df2(df2[, 1:2] <- df2[2:1])
-with_df2(df2[1:2] <- df2[2:1])
-```
-
-### Corollaries
-
-`[` always returns a tibble.
-
-```{r bracket-drop, dftbl = TRUE}
-df[, 1]
-df[1]
-df[, 1, drop = FALSE]
-df[1, drop = FALSE]
-```
-
-`x[,]` is equivalent to `x[]`.
-
-```{r bracket-comma, dftbl = TRUE}
-df[,]
-with_df(df[,] <- df)
-with_df(df[,] <- df[1, ])
-with_df(df[,] <- df[1:2, ])
-with_df(df[,] <- df2)
-df2[,]
-with_df2(df2[,] <- df2)
-with_df2(df2[,] <- df2[1, ])
-with_df2(df2[,] <- df2[1:2, ])
-with_df2(df2[,] <- df)
-```
-
-### Exception
-
-`drop = TRUE` returns a vector when subsetting a single column with `x[, j]`, this is for backward compatibility with code that uses an explicit `drop = TRUE` to access columns as vectors.
-
-```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
-df[, 1, drop = TRUE]
-df[1, , drop = TRUE]
-```
-
-
-```{r check, dftbl = TRUE}
-stopifnot(identical(df, new_df()))
-```
