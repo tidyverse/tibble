@@ -48,7 +48,7 @@ Some behaviors are defined using functions of the vctrs package, e.g. `vctrs::ve
 Refer to their documentation for more details about the invariants that they follow.
 
 The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing.
-We resolve this by first defining with `[[`, then colum-wise subsetting with `[`, then row-wise subsetting, then the composition of both.
+We resolve this by first defining column access with `[[` and `$`, then column-wise subsetting with `[`, then row-wise subsetting, then the composition of both.
 
 ## Conventions
 
@@ -213,7 +213,7 @@ df[[4]]
 
 <!-- HW: why is x[[NA]] an OOB error and not a type error? -->
 
-OOB access only generate a warning because a common existing idioms is to check for the absense of a column with `is.null(df$x)`.
+OOB access only generates a warning because a common existing idiom is to check for the absence of a column with `is.null(df$x)`.
 
 Non-integer numeric values produce an error:
 
