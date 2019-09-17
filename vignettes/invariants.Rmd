@@ -168,9 +168,9 @@ with_tbl2 <- function(code) {
 with_df(df$n <- rev(df$n), verbose = TRUE)
 ```
 
-# Column subsetting
+## Column subsetting
 
-## Definition of `x[[j]]`
+### Definition of `x[[j]]`
 
 `x[[j]]` is equal to `.subset2(x, j)`. 
 
@@ -179,12 +179,8 @@ with_df(df$n <- rev(df$n), verbose = TRUE)
 ```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
 df[[1]]
 .subset2(df, 1)
-df[[3]]
-.subset2(df, 3)
-df2[[1]]
-.subset2(df2, 1)
-df2[[2]]
-.subset2(df2, 2)
+identical(df[[2]], .subset2(df, 2))
+identical(df[[3]], .subset2(df, 3))
 ```
 
 NB: `x[[j]]` always returns an object of size `nrow(x)` if the column exists.
@@ -198,40 +194,62 @@ df[[TRUE]]
 df[[mean]]
 ```
 
-<!-- HW: the failure with mean needs a better error. -->
+<!-- TODO: x[[NA]] should be a type error -->
+<!-- TOOD: failure with mean needs a better error. -->
 
-Missing and out-of-bounds (OOB) values of `j` return `NULL` with a warning or error:
+Numeric NA, numeric out-of-bounds (OOB) values, and non-integers throw an error:
 
-```{r double-bracket-j-na, dftbl = TRUE}
-df[[NA_character_]]
-df[["x"]]
-
+```{r double-bracket-j-oob-numeric, dftbl = TRUE}
 df[[NA_integer_]]
 df[[-1]]
 df[[4]]
-```
-
-<!-- HW: why is x[[NA]] an OOB error and not a type error? -->
-
-OOB access only generates a warning because a common existing idiom is to check for the absence of a column with `is.null(df$x)`.
-
-Non-integer numeric values produce an error:
-
-```{r, double-bracket-numeric, dftbl = TRUE}
 df[[1.5]]
+df[[Inf]]
 ```
 
-## Definition of `x$name`
+Character OOB access generates a warning rather than an error because a common existing idiom is to check for the absence of a column with `is.null(df$x)`.
+
+```{r double-bracket-j-oob-character, dftbl = TRUE}
+df[[NA_character_]]
+df[["x"]]
+```
+
+<!-- TODO: should x[[NA_character_]] error? -->
+
+### Definition of `x$name`
 
 `x$name` is equal to `x[["name"]]`.
-
-<!-- I removed the examples here because I think the principle is so simple -->
-
 Unlike data frames, tibbles do not partially match.
 
 ```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
 df$l
 ```
+
+### Definition of `x[j]`.
+
+`j` is first converted to an integer vector by `vectrs::vec_as_index()`. This ensures that `j` is a logical, numeric, or character, and recycles scalar logicals.
+
+
+
+Then `x[c(j_1, j_2, ..., j_n)]` is equvalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])` with names set to `names(x)[j]`.
+
+```{r bracket-j-definition, dftbl = TRUE}
+df[1:2]
+```
+
+<!-- TODO: what should happen here? -->
+If values of `j` are repeated, then ???
+
+```{r backet-j-duplication, dftbl = TRUE}
+df[c(1, 1)]
+```
+
+`nrow(df[j])` equals `nrow(df)`. 
+
+```{r backet-j-empty, dftbl = TRUE}
+df[integer()]
+```
+
 
 ## Definition of `x[[j]] <- a`.
 
@@ -321,52 +339,6 @@ List columns can have inner names:
 ```{r list-columns-can-have-names, dftbl = TRUE}
 with_df(df[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
 ```
-
-## Definition of `x[j]`.
-
-Equivalent to restoring `.subset(x, vec_as_index(j))` to the original class.
-
-```{r bracket-j-definition, dftbl = TRUE}
-df[1:2]
-df[0:2]
-df[-2]
-df[-1:2]
-df["c"]
-df[c(TRUE, FALSE, TRUE)]
-df[TRUE]
-```
-
-### Corollaries
-
-`NA` columns are not supported.
-
-```{r bracket-j-na, dftbl = TRUE}
-df[NA]
-df[NA_integer_]
-df[NA_character_]
-```
-
-Out-of-bounds indexing (and recycling of logical vectors of size > 1) is not supported.
-
-```{r bracket-j-oob, dftbl = TRUE}
-df[4]
-df[-4]
-df["x"]
-df[c(TRUE, FALSE, TRUE, FALSE)]
-df[c(TRUE, FALSE)]
-```
-
-
-`x[j]` retains the number of rows in the input.
-
-```{r bracket-retains-nrow, dftbl = TRUE}
-nrow(df[])
-nrow(df[1])
-nrow(df[3])
-nrow(df2[1])
-nrow(df2[2])
-```
-
 
 ## Definition of `x[j] <- list(...)`.
 
