@@ -304,7 +304,7 @@ df[NA_integer_, ]
 
 ### Definition of `x[i, , drop = TRUE]`
 
-`drop = TRUE` has no effect when not selecting a single column:
+`drop = TRUE` has no effect when not selecting a single row:
 
 ```{r backet-i-drop, dftbl = TRUE}
 df[1, , drop = TRUE]
