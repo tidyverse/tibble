@@ -227,7 +227,7 @@ df$not_present
 
 ### Definition of `x[j]`.
 
-`j` is converted to an integer vector by `vectrs::vec_as_index(j, nrow(x), names = names(x))`. Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])``.
+`j` is converted to an integer vector by `vctrs::vec_as_index(j, nrow(x), names = names(x))`. Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])``.
 This implies that `j` must be a numeric or character vector, or a logical vector with length 1 or `nrow(x)`.
 
 ```{r bracket-j-definition, dftbl = TRUE}
@@ -284,7 +284,7 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 df[c(TRUE, FALSE), ]
 ```
 
-`i` is converted to an integer vector by `vectrs::vec_as_index(i, nrow(x))`.
+`i` is converted to an integer vector by `vctrs::vec_as_index(i, nrow(x))`.
 This implies that OOB values generate warnings:
 
 ```{r bracket-i-oob, dftbl = TRUE}
