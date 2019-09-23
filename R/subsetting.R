@@ -301,6 +301,8 @@ tbl_subset2 <- function(x, j) {
 
   check_scalar(j)
   if (is.logical(j) && !is.na(j)) {
+    # FIXME: #647, https://github.com/tidyverse/tibble/issues/647
+
     # Special case: scalar TRUE or FALSE
     error_double_bracket_logical()
   }
