@@ -306,16 +306,9 @@ an error:
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    df[[NA_integer_]]
-    #> NULL
-
 </td>
 <td>
     tbl[[NA_integer_]]
-
-    #> Warning: Unknown or uninitialised
-    #> column: `NA`.
-
     #> NULL
 
 </td>
@@ -395,16 +388,9 @@ check for the absence of a column with `is.null(df[[var]])`.
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    df[["x"]]
-    #> NULL
-
 </td>
 <td>
     tbl[["x"]]
-
-    #> Warning: Unknown or uninitialised
-    #> column: `x`.
-
     #> NULL
 
 </td>
