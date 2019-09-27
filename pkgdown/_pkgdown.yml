@@ -67,6 +67,8 @@ navbar:
       href: articles/subset.html
     - text: Subassignment
       href: articles/subassign.html
+    - text: Invariants
+      href: articles/invariants.html
   - text: News
     menu:
     - text: "Release notes"
