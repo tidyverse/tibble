@@ -498,8 +498,9 @@ with_df(df[["l"]] <- 0)
 
 ### Definition of `x[j] <- list(...)`.
 
-`x[j] <- a` is equivalent to performing `x[[j_1]] <- a[[1]]`, `x[[j_2]] <- a[[2]]` etc.
+First, if `j` is not a character vector, it is converted to numeric indices. Then, `x[j] <- a` is equivalent to performing `x[[j_1]] <- a[[1]]`, `x[[j_2]] <- a[[2]]` etc.
 If `a` contains `NULL` values, the corresponding columns are removed after updating.
+
 ```{r bracket-assign-def, dftbl = TRUE}
 with_df(df[1:2] <- list("x", 4:1))
 with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
