@@ -706,6 +706,6 @@ with_df(df[[1:2, 1]] <- 0)
 NB: `vctrs::vec_size(a)` must equal 1.
 Unlike `x[i, ] <-`, `x[[i, ]] <-` is not valid.
 
-```{r check, dftbl = TRUE}
+```{r check, dftbl = TRUE, include = FALSE}
 stopifnot(identical(df, new_df()))
 ```
