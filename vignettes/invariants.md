@@ -1757,6 +1757,9 @@ column types:
 </tr>
 </tbody>
 </table>
+Column subassignment
+--------------------
+
 ### Definition of `x[j] <- list(...)`.
 
 `x[j] <- a` is equivalent to performing `x[[j_1]] <- a[[1]]`,
