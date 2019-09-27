@@ -613,7 +613,7 @@ Only values of size one can be recycled.
 
 ```{r bracket-i-recycle-assign, dftbl = TRUE}
 with_df(df[2:3, ] <- df[1, ])
-with_df(df[2:3, ] <- list(df$n[1], df$c[1:2], df$li[1])
+with_df(df[2:3, ] <- list(df$n[1], df$c[1:2], df$li[1]))
 with_df(df[2:4, ] <- df[1:2, ])
 ```
 
