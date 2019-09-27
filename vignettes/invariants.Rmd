@@ -40,6 +40,9 @@ options(
   lifecycle_verbose_soft_deprecation = TRUE,
   lifecycle_repeat_warnings = TRUE
 )
+
+# Set to FALSE for production
+eval_details <- TRUE
 ```
 
 This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. 
@@ -183,7 +186,7 @@ identical(df2[["df"]], .subset2(df2, "df"))
 
 NB: `x[[j]]` always returns an object of size `nrow(x)` if the column exists.
 
-```{r double-bracket-retains-size, dftbl = TRUE, include = FALSE}
+```{r double-bracket-retains-size, dftbl = TRUE, include = eval_details, eval = eval_details}
 vec_size(df[[1]])
 vec_size(df[[3]])
 vec_size(df2[[1]])
@@ -227,7 +230,7 @@ df$"n"
 df[["n"]]
 ```
 
-```{r dollar-equivalent-to-subset-detail, dftbl = TRUE, include = FALSE}
+```{r dollar-equivalent-to-subset-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
 identical(df$li, df[["li"]])
 identical(df2$tb, df2[["tb"]])
 identical(df2$m, df2[["m"]])
@@ -284,7 +287,7 @@ df[, 1]
 df[, 1:2]
 ```
 
-```{r bracket-missing-i-detail, dftbl = TRUE, include = FALSE}
+```{r bracket-missing-i-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
 identical(df[, 2:3], df[2:3])
 identical(df2[, 1:2], df2[1:2])
 ```
@@ -297,7 +300,7 @@ For backward compatiblity, `x[, j, drop = TRUE]` performs column __extraction__,
 df[, 1, drop = TRUE]
 ```
 
-```{r bracket-always-returns-tibble-drop-detail, dftbl = TRUE, include = FALSE}
+```{r bracket-always-returns-tibble-drop-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
 identical(df[, 3, drop = TRUE], df[[3]])
 identical(df2[, 1, drop = TRUE], df2[[1]])
 identical(df2[, 2, drop = TRUE], df2[[2]])

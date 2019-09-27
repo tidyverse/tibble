@@ -224,6 +224,46 @@ Column extraction
 NB: `x[[j]]` always returns an object of size `nrow(x)` if the column
 exists.
 
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    vec_size(tbl[[1]])
+    #> [1] 4
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    vec_size(tbl[[3]])
+    #> [1] 4
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    vec_size(tbl2[[1]])
+    #> [1] 4
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    vec_size(tbl2[[2]])
+    #> [1] 4
+
+</td>
+</tr>
+</tbody>
+</table>
 `j` must be a single number or a string, as enforced by
 `.subset2(x, j)`.
 
@@ -450,6 +490,37 @@ check for the absence of a column with `is.null(df[[var]])`.
 </tr>
 </tbody>
 </table>
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl$li, tbl[["li"]])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2$tb, tbl2[["tb"]])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2$m, tbl2[["m"]])
+    #> [1] TRUE
+
+</td>
+</tr>
+</tbody>
+</table>
 Unlike data frames, tibbles do not partially match names.
 
 <table class="dftbl">
@@ -628,6 +699,28 @@ first matching column.
 </tr>
 </tbody>
 </table>
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl[, 2:3], tbl[2:3])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2[, 1:2], tbl2[1:2])
+    #> [1] TRUE
+
+</td>
+</tr>
+</tbody>
+</table>
 ### Definition of `x[, j, drop = TRUE]`
 
 For backward compatiblity, `x[, j, drop = TRUE]` performs column
@@ -641,6 +734,37 @@ For backward compatiblity, `x[, j, drop = TRUE]` performs column
 <td>
     tbl[, 1, drop = TRUE]
     #> [1] 1 2 3 4
+
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl[, 3, drop = TRUE], tbl[[3]])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2[, 1, drop = TRUE], tbl2[[1]])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2[, 2, drop = TRUE], tbl2[[2]])
+    #> [1] TRUE
 
 </td>
 </tr>
