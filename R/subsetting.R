@@ -75,7 +75,13 @@ NULL
 #' @inheritParams base::`[.data.frame`
 #' @export
 `$.tbl_df` <- function(x, name) {
-  tbl_subset2(x, as_string(name))
+  j <- match(as_string(name), names2(x))
+  if (is.na(j)) {
+    warn(paste0("Unknown or uninitialised column: `", name, "`."))
+    NULL
+  } else {
+    .subset2(x, j)
+  }
 }
 
 
@@ -308,11 +314,7 @@ tbl_subset2 <- function(x, j) {
   }
 
   # Let .subset2() handle character indexes
-  ret <- .subset2(x, j)
-  if (is.null(ret)) {
-    warn_deprecated(paste0("Unknown or uninitialised column: `", j, "`."))
-  }
-  ret
+  .subset2(x, j)
 }
 
 tbl_subset_col <- function(x, j) {
