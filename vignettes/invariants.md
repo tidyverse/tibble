@@ -1003,6 +1003,64 @@ Row and column subsetting
 
 `x[i, j]` is equal to `x[i, ][j]`.[4]
 
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+    df[1, 1]
+    #> [1] 1
+
+</td>
+<td>
+    tbl[1, 1]
+    #> # A tibble: 1 x 1
+    #>       n
+    #>   <int>
+    #> 1     1
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    tbl[1, ][1]
+    #> # A tibble: 1 x 1
+    #>       n
+    #>   <int>
+    #> 1     1
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl[1, 2:3], tbl[2:3][1, ])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl[2:3, 1], tbl[1][2:3, ])
+    #> [1] TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    identical(tbl2[2:3, 1:2], tbl2[1:2][2:3, ])
+    #> [1] TRUE
+
+</td>
+</tr>
+</tbody>
+</table>
 ### Definition of `x[[i, j]]`
 
 `i` must be a numeric vector of length 1. `x[[i, j]]` is equal to
@@ -1013,17 +1071,13 @@ This implies that `j` must be a numeric or character vector of length 1.
 NB: `vctrs::vec_size(x[[i, j]])` always equals 1. Unlike `x[i, ]`,
 `x[[i, ]]` is not valid.
 
-Assignment
-----------
+Column update
+-------------
 
 ### Definition of `x[[j]] <- a`.
 
-`x[[j]] <- a` is equivalent to restoring to the original class after
-assigning the (potentially recycled) value to `unclass(x)`:
-
-    xl <- unclass(x)
-    xl[[j]] <- vec_recycle(a, nrow(x))
-    vec_restore(xl, x)
+`x[[j]] <- a` corresponds to
+`x <- tibble(x[[j_1]], x[[j_2]], ..., a, ..., x[[j_n]])`.
 
 <table class="dftbl">
 <tbody>
@@ -1089,10 +1143,7 @@ assigning the (potentially recycled) value to `unclass(x)`:
 </tr>
 </tbody>
 </table>
-### Corollary
-
-`[[<-` requires scalar `vec_as_index(j)` (with the exception of new
-columns, see below).
+For this, `j` must be a scalar numeric or a string, and cannot be `NA`.
 
 <table class="dftbl">
 <tbody>
@@ -1113,15 +1164,35 @@ columns, see below).
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[[1:2]] <- 0)
+</td>
+<td>
+    with_tbl(tbl[["c"]] <- 0)
+    #> # A tibble: 4 x 3
+    #>       n     c li       
+    #>   <int> <dbl> <list>   
+    #> 1     1     0 <dbl [1]>
+    #> 2     2     0 <int [2]>
+    #> 3     3     0 <int [3]>
+    #> 4     4     0 <chr [1]>
 
-    #> Error in x[[i]] <- value: more
-    #> elements supplied than there are to
-    #> replace
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[[TRUE]] <- 0)
+    #>   n c         li
+    #> 1 0 e          9
+    #> 2 0 f     10, 11
+    #> 3 0 g 12, 13, 14
+    #> 4 0 h       text
 
 </td>
 <td>
-    with_tbl(tbl[[1:2]] <- 0)
+    with_tbl(tbl[[TRUE]] <- 0)
 
     #> Error in error_need_scalar(): could
     #> not find function
@@ -1149,21 +1220,6 @@ columns, see below).
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
-    with_tbl(tbl[["n"]] <- 0)
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <dbl> <chr> <list>   
-    #> 1     0 e     <dbl [1]>
-    #> 2     0 f     <int [2]>
-    #> 3     0 g     <int [3]>
-    #> 4     0 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
     with_df(df[[c("n", "c")]] <- 0)
 
     #> Error in x[[i]] <- value: more
@@ -1173,25 +1229,6 @@ columns, see below).
 </td>
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
-
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[[TRUE]] <- 0)
-    #>   n c         li
-    #> 1 0 e          9
-    #> 2 0 f     10, 11
-    #> 3 0 g 12, 13, 14
-    #> 4 0 h       text
-
-</td>
-<td>
-    with_tbl(tbl[[TRUE]] <- 0)
 
     #> Error in error_need_scalar(): could
     #> not find function
@@ -1214,6 +1251,43 @@ columns, see below).
     #> Error in error_need_scalar(): could
     #> not find function
     #> "error_need_scalar"
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[[1:2]] <- 0)
+
+    #> Error in x[[i]] <- value: more
+    #> elements supplied than there are to
+    #> replace
+
+</td>
+<td>
+    with_tbl(tbl[[1:2]] <- 0)
+
+    #> Error in error_need_scalar(): could
+    #> not find function
+    #> "error_need_scalar"
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[[NA_integer_]] <- 0)
+
+    #> Error in x[[i]] <- value: attempt to
+    #> select more than one element in
+    #> integerOneIndex
+
+</td>
+<td>
+    with_tbl(tbl[[NA_integer_]] <- 0)
+
+    #> Error in
+    #> error_new_columns_non_na_only():
+    #> could not find function
+    #> "error_new_columns_non_na_only"
 
 </td>
 </tr>
@@ -1256,28 +1330,10 @@ columns, see below).
 
 </td>
 </tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[[NA_integer_]] <- 0)
-
-    #> Error in x[[i]] <- value: attempt to
-    #> select more than one element in
-    #> integerOneIndex
-
-</td>
-<td>
-    with_tbl(tbl[[NA_integer_]] <- 0)
-
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
-
-</td>
-</tr>
 </tbody>
 </table>
-`x[[j]] <- a` requires `vec_size(a) == nrow(x)` or `vec_size(a) == 1`.
+`vec_size(a)` must be `nrow(x)` or 1. Recycling also works for list,
+data frame, and matrix columns.
 
 <table class="dftbl">
 <tbody>
@@ -1354,7 +1410,70 @@ columns, see below).
 </tr>
 </tbody>
 </table>
-`[[<-` supports appending a new column at the end.
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[["li"]] <- list(0))
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <dbl [1]>
+    #> 3     3 g     <dbl [1]>
+    #> 4     4 h     <dbl [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df2(df2[["tb"]] <- df[1, ])
+
+    #> Error in `[[<-.data.frame`(`*tmp*`,
+    #> "tb", value = structure(list(n = 1L,
+    #> : replacement has 1 row, data has 4
+
+</td>
+<td>
+    with_tbl2(tbl2[["tb"]] <- tbl[1, ])
+    #> # A tibble: 4 x 2
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     0     0
+    #> 2     1 e     <dbl [1…     0     1     0
+    #> 3     1 e     <dbl [1…     0     0     1
+    #> 4     1 e     <dbl [1…     0     0     0
+    #> # … with 1 more variable: [,4] <dbl>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
+
+    #> Error in `[[<-.data.frame`(`*tmp*`,
+    #> "m", value = structure(c(1, 0, 0, :
+    #> replacement has 1 row, data has 4
+
+</td>
+<td>
+    with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
+    #> # A tibble: 4 x 2
+    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
+    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+    #> 1     1 e     <dbl [1…     1     0     0
+    #> 2     2 f     <int [2…     1     0     0
+    #> 3     3 g     <int [3…     1     0     0
+    #> 4     4 h     <chr [1…     1     0     0
+    #> # … with 1 more variable: [,4] <dbl>
+
+</td>
+</tr>
+</tbody>
+</table>
+New columns are appended at the end, with name repair if needed.
 
 <table class="dftbl">
 <tbody>
@@ -1423,8 +1542,8 @@ columns, see below).
 </tr>
 </tbody>
 </table>
-`[[<-` supports changing the type of an existing column, also across the
-principal column types:
+The type of an existing column can be changed, also across the principal
+column types:
 
 -   atomic: `df[[1]]` and `df[[2]]`
 -   list: `df[[3]]`
@@ -1548,67 +1667,7 @@ principal column types:
 </tr>
 </tbody>
 </table>
-### Columns don’t have inner names.
-
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[["x"]] <- c(a = 4, b = 3, c = 2, d = 1))[["x"]]
-    #> [1] 4 3 2 1
-
-</td>
-<td>
-    with_tbl(tbl[["x"]] <- c(a = 4, b = 3, c = 2, d = 1))[["x"]]
-    #> a b c d 
-    #> 4 3 2 1
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[["x"]] <- rlang::set_names(letters[4:1]))[["x"]]
-    #> [1] "d" "c" "b" "a"
-
-</td>
-<td>
-    with_tbl(tbl[["x"]] <- rlang::set_names(letters[4:1]))[["x"]]
-    #>   d   c   b   a 
-    #> "d" "c" "b" "a"
-
-</td>
-</tr>
-</tbody>
-</table>
-### Exception
-
-List columns can have inner names:
-
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[["x"]] <- list(a = 4, b = 3, c = 2, d = 1))[["x"]]
-    #> $a
-    #> [1] 4
-    #> 
-    #> $b
-    #> [1] 3
-    #> 
-    #> $c
-    #> [1] 2
-    #> 
-    #> $d
-    #> [1] 1
-
-</td>
-</tr>
-</tbody>
-</table>
-Definition of `x$name <- a`.
-----------------------------
+### Definition of `x$name <- a`.
 
 `x$name <- a` and `x$"name" <- a` are equivalent to
 `x[["name"]] <- a`.[6]
@@ -1662,105 +1721,7 @@ Definition of `x$name <- a`.
 </tr>
 </tbody>
 </table>
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2$df <- df[1, ])
-
-    #> Error in `$<-.data.frame`(`*tmp*`,
-    #> df, value = structure(list(n = 1L, :
-    #> replacement has 1 row, data has 4
-
-</td>
-<td>
-    with_tbl2(tbl2$tbl <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 4 more variables: [,4] <dbl>,
-    #> #   tbl$n <int>, $c <chr>, $li <list>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[["df"]] <- df[1, ])
-
-    #> Error in `[[<-.data.frame`(`*tmp*`,
-    #> "df", value = structure(list(n = 1L,
-    #> : replacement has 1 row, data has 4
-
-</td>
-<td>
-    with_tbl2(tbl2[["tbl"]] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 4 more variables: [,4] <dbl>,
-    #> #   tbl$n <int>, $c <chr>, $li <list>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2$m <- df2$m[1, , drop = FALSE])
-
-    #> Error in `$<-.data.frame`(`*tmp*`,
-    #> m, value = structure(c(1, 0, 0, 0),
-    #> .Dim = c(1L, : replacement has 1
-    #> row, data has 4
-
-</td>
-<td>
-    with_tbl2(tbl2$m <- tbl2$m[1, , drop = FALSE])
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     1     0     0
-    #> 3     3 g     <int [3…     1     0     0
-    #> 4     4 h     <chr [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
-
-    #> Error in `[[<-.data.frame`(`*tmp*`,
-    #> "m", value = structure(c(1, 0, 0, :
-    #> replacement has 1 row, data has 4
-
-</td>
-<td>
-    with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     1     0     0
-    #> 3     3 g     <int [3…     1     0     0
-    #> 4     4 h     <chr [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-</tbody>
-</table>
-### Corollary
-
-`$` does not implement partial matching. For compatibility with code
-that probes columns and compares with `NULL`, only a warning is raised.
+`$` does not implement partial matching but creates a new column.
 
 <table class="dftbl">
 <tbody>
@@ -1796,89 +1757,11 @@ that probes columns and compares with `NULL`, only a warning is raised.
 </tr>
 </tbody>
 </table>
-Definition of `x[j] <- list(...)`.
-----------------------------------
+### Definition of `x[j] <- list(...)`.
 
-`x[j] <- a` is equivalent to converting `j` to column indexes or column
-names and performing `x[[jj]] <- ...` in a loop.
-
-For converting indexes, the following (internal) function is used.
-
-    # With logic for defining names of new columns, see below
-    j <- vec_as_new_col_index(j, x, a)
-
-    # Existing columns
-    tibble:::vec_as_new_col_index(2:3, df, list(2, 3))
-    #>     
-    #> 2 3
-    tibble:::vec_as_new_col_index(-3, df, list(2, 3))
-    #>     
-    #> 1 2
-    tibble:::vec_as_new_col_index(c(TRUE, FALSE, TRUE), df, list(2, 3))
-    #> [1] 1 3
-    #
-    #
-    # New columns
-    tibble:::vec_as_new_col_index("x", df, list(y = 0))
-    #>  x 
-    #> NA
-    tibble:::vec_as_new_col_index(4, df, list(y = 0))
-    #>  y 
-    #> NA
-    tibble:::vec_as_new_col_index(4, df, list(0))
-    #> ...4 
-    #>   NA
-    #
-    #
-    # Errors
-    tibble:::vec_as_new_col_index(NA, df, list(0))
-
-    #> Error in error_new_columns_non_na_only(): could not find function "error_new_columns_non_na_only"
-
-    tibble:::vec_as_new_col_index(NA_integer_, df, list(0))
-
-    #> Error in error_new_columns_non_na_only(): could not find function "error_new_columns_non_na_only"
-
-    tibble:::vec_as_new_col_index(NA_character_, df, list(0))
-
-    #> Error in error_new_columns_non_na_only(): could not find function "error_new_columns_non_na_only"
-
-    tibble:::vec_as_new_col_index(5, df, list(0))
-
-    #> Error in error_new_columns_at_end_only(): could not find function "error_new_columns_at_end_only"
-
-For accessing the name or index of a target column, the following helper
-is used:
-
-    index_or_name <- function(j, ja) {
-      index <- j[[ja]]
-      if (!is.na(index)) index else names(j)[[ja]]
-    }
-
-Below is a simple version of the update loop:
-
-    # Create, update or remove, indexed by position
-    for (ja in seq_along(j)) {
-      jx <- index_or_name(j, ja)
-      x[[jx]] <- a[[ja]] # with implicit recycling
-    }
-
-Adding, updating and removing columns may occur in arbitrary order. A
-robust implementation that avoids index mismatches might look more like
-this:
-
-    a_null <- map_lgl(a, is_null)
-
-    # Create or update, indexed by position
-    for (ja in which(!a_null)) {
-      jx <- index_or_name(j, ja)
-      x[[jx]] <- a[[ja]] # with implicit recycling
-    }
-
-    # Remove
-    j_remove <- j[a_null]
-    if (has_length(j_remove)) x <- x[-j_remove]
-
+`x[j] <- a` is equivalent to performing `x[[j_1]] <- a[[1]]`,
+`x[[j_2]] <- a[[2]]` etc. If `a` contains `NULL` values, the
+corresponding columns are removed after updating.
 <table class="dftbl">
 <tbody>
 <tr style="vertical-align:top">
@@ -1928,8 +1811,6 @@ this:
 </tr>
 </tbody>
 </table>
-### Corollaries
-
 `NA` indexes are not supported.
 
 <table class="dftbl">
@@ -1999,8 +1880,8 @@ this:
 </tr>
 </tbody>
 </table>
-`[<-` supports changing the type of an existing column, also across the
-principal column types:
+Just like column updates, `[<-` supports changing the type of an
+existing column, also across the principal column types:
 
 -   atomic: `df[[1]]` and `df[[2]]`
 -   list: `df[[3]]`
@@ -2168,135 +2049,7 @@ that order of precedence).
 </tr>
 </tbody>
 </table>
-`x[j]` and `x[[j]]` can be used interchangeably on the LHS or RHS of an
-assignment:
-
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[[1]] <- tbl[[3]])
-    #> # A tibble: 4 x 3
-    #>   n         c     li       
-    #>   <list>    <chr> <list>   
-    #> 1 <dbl [1]> e     <dbl [1]>
-    #> 2 <int [2]> f     <int [2]>
-    #> 3 <int [3]> g     <int [3]>
-    #> 4 <chr [1]> h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[1] <- list(tbl[[3]]))
-    #> # A tibble: 4 x 3
-    #>   n         c     li       
-    #>   <list>    <chr> <list>   
-    #> 1 <dbl [1]> e     <dbl [1]>
-    #> 2 <int [2]> f     <int [2]>
-    #> 3 <int [3]> g     <int [3]>
-    #> 4 <chr [1]> h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[[3]] <- tbl[[1]])
-    #> # A tibble: 4 x 3
-    #>       n c        li
-    #>   <int> <chr> <int>
-    #> 1     1 e         1
-    #> 2     2 f         2
-    #> 3     3 g         3
-    #> 4     4 h         4
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[3] <- list(tbl[[1]]))
-    #> # A tibble: 4 x 3
-    #>       n c        li
-    #>   <int> <chr> <int>
-    #> 1     1 e         1
-    #> 2     2 f         2
-    #> 3     3 g         3
-    #> 4     4 h         4
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl2(tbl2[[1]] <- tbl[[1]])
-    #> # A tibble: 4 x 2
-    #>      tb m[,1]  [,2]  [,3]  [,4]
-    #>   <int> <dbl> <dbl> <dbl> <dbl>
-    #> 1     1     1     0     0     0
-    #> 2     2     0     1     0     0
-    #> 3     3     0     0     1     0
-    #> 4     4     0     0     0     1
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl2(tbl2[1] <- list(tbl[[1]]))
-    #> # A tibble: 4 x 2
-    #>      tb m[,1]  [,2]  [,3]  [,4]
-    #>   <int> <dbl> <dbl> <dbl> <dbl>
-    #> 1     1     1     0     0     0
-    #> 2     2     0     1     0     0
-    #> 3     3     0     0     1     0
-    #> 4     4     0     0     0     1
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl2(tbl2[[2]] <- tbl[[3]])
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li       m        
-    #>   <int> <chr> <list>    <list>   
-    #> 1     1 e     <dbl [1]> <dbl [1]>
-    #> 2     2 f     <int [2]> <int [2]>
-    #> 3     3 g     <int [3]> <int [3]>
-    #> 4     4 h     <chr [1]> <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl2(tbl2[2] <- list(tbl[[3]]))
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li       m        
-    #>   <int> <chr> <list>    <list>   
-    #> 1     1 e     <dbl [1]> <dbl [1]>
-    #> 2     2 f     <int [2]> <int [2]>
-    #> 3     3 g     <int [3]> <int [3]>
-    #> 4     4 h     <chr [1]> <chr [1]>
-
-</td>
-</tr>
-</tbody>
-</table>
-Definition of `x[j] <- list(a)`.
---------------------------------
+### Definition of `x[j] <- list(a)`.
 
 `x[j] <- a` is equivalent to `x[j] <- rep_along(j, a)` if
 `is_list(a, 1)`.
@@ -2365,9 +2118,7 @@ Definition of `x[j] <- list(a)`.
 </tr>
 </tbody>
 </table>
-### Corollary
-
-Only lists of length one on the RHS are recycled.
+This means that only lists of length one on the RHS are recycled.
 
 <table class="dftbl">
 <tbody>
@@ -2420,8 +2171,7 @@ Only lists of length one on the RHS are recycled.
 </tr>
 </tbody>
 </table>
-Definition of `x[j] <- a`.
---------------------------
+### Definition of `x[j] <- a`.
 
 `x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or
 `is_null(a)`.
@@ -2462,59 +2212,14 @@ Definition of `x[j] <- a`.
 <td>
 </td>
 <td>
-    with_tbl(tbl[1] <- 4:1)
+    with_tbl(tbl[1] <- list(list(0)))
     #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     4 e     <dbl [1]>
-    #> 2     3 f     <int [2]>
-    #> 3     2 g     <int [3]>
-    #> 4     1 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[1] <- list(4:1))
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     4 e     <dbl [1]>
-    #> 2     3 f     <int [2]>
-    #> 3     2 g     <int [3]>
-    #> 4     1 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[1] <- NULL)
-    #> # A tibble: 4 x 2
-    #>   c     li       
-    #>   <chr> <list>   
-    #> 1 e     <dbl [1]>
-    #> 2 f     <int [2]>
-    #> 3 g     <int [3]>
-    #> 4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[1] <- list(NULL))
-    #> # A tibble: 4 x 2
-    #>   c     li       
-    #>   <chr> <list>   
-    #> 1 e     <dbl [1]>
-    #> 2 f     <int [2]>
-    #> 3 g     <int [3]>
-    #> 4 h     <chr [1]>
+    #>   n         c     li       
+    #>   <list>    <chr> <list>   
+    #> 1 <dbl [1]> e     <dbl [1]>
+    #> 2 <dbl [1]> f     <int [2]>
+    #> 3 <dbl [1]> g     <int [3]>
+    #> 4 <dbl [1]> h     <chr [1]>
 
 </td>
 </tr>
@@ -2694,10 +2399,13 @@ Definition of `x[j] <- a`.
 </tr>
 </tbody>
 </table>
-Definition of `x[i, ] <-`.
---------------------------
+Row subassignment
+-----------------
 
-Applies `vec_slice(x[[j_1]], i) <-` to all columns.[7]
+### Definition of `x[i, ] <- list(...)`.
+
+`x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,
+`vec_slice(x[[j_2]], i) <- a[[2]]`, … .[7]
 
 <table class="dftbl">
 <tbody>
@@ -2716,6 +2424,25 @@ Applies `vec_slice(x[[j_1]], i) <-` to all columns.[7]
 
 </td>
 </tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 e     <dbl [1]>
+    #> 3     1 e     <dbl [1]>
+    #> 4     4 h     <chr [1]>
+
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dftbl">
+<tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
@@ -2820,21 +2547,6 @@ Applies `vec_slice(x[[j_1]], i) <-` to all columns.[7]
 <td>
 </td>
 <td>
-    with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     1 e     <dbl [1]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
     with_tbl(tbl[TRUE, ] <- tbl[1, ])
     #> # A tibble: 4 x 3
     #>       n c     li       
@@ -2882,64 +2594,34 @@ Applies `vec_slice(x[[j_1]], i) <-` to all columns.[7]
 </tr>
 </tbody>
 </table>
-### Subassignment corollary
-
 Only values of size one can be recycled.
 
 <table class="dftbl">
 <tbody>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
+
     with_tbl(tbl[2:3, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     1 e     <dbl [1]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[2:3, ] <- tbl[1:2, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     2 f     <int [2]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
+    with_df(df[2:3, ] <- list(df$n[1], df$c[1:2], df$li[1])
+    with_tbl(tbl[2:3, ] <- list(tbl$n[1], tbl$c[1:2], tbl$li[1])
     with_df(df[2:4, ] <- df[1:2, ])
-
-    #> Error in `[<-.data.frame`(`*tmp*`,
-    #> 2:4, , value = structure(list(n =
-    #> 1:2, : replacement element 1 has 2
-    #> rows, need 3
-
-</td>
-<td>
     with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
-    #> Vector of length 2 cannot be
-    #> recycled to
-    #> length 3. Only vectors of length one
-    #> or
-    #> of the same length can be recycled.
+    #> Error: <text>:4:1: unexpected symbol
+    #> 3: with_df(df[2:3, ] <-
+    #> list(df$n[1], df$c[1:2], df$li[1])
+    #> 4: with_tbl
+    #> ^
 
 </td>
 </tr>
-<tr style="vertical-align:top">
+</tbody>
+</table>
+<table class="dftbl">
+<tbody>
+<tr>
+<td>
+</td>
 <td>
     with_df2(df2[2:4, ] <- df2[1, ])
 
@@ -2950,6 +2632,8 @@ Only values of size one can be recycled.
     #> need 3
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
     #> # A tibble: 4 x 2
@@ -2962,8 +2646,6 @@ Only values of size one can be recycled.
     #> # … with 1 more variable: [,4] <dbl>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df2(df2[2:4, ] <- df2[2:3, ])
 
@@ -2974,6 +2656,8 @@ Only values of size one can be recycled.
     #> need 3
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
 
@@ -2987,17 +2671,19 @@ Only values of size one can be recycled.
 </tr>
 </tbody>
 </table>
-### Exception
-
 For compatibility reasons only a warning is issued for indexing beyond
 the number of rows. Appending rows right at the end of the existing data
 is supported, without warning.
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
+<td>
+</td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[5, ] <- tbl[1, ])
     #> # A tibble: 5 x 3
@@ -3010,10 +2696,10 @@ is supported, without warning.
     #> 5     1 e     <dbl [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[5:7, ] <- tbl[1, ])
     #> # A tibble: 7 x 3
@@ -3028,8 +2714,6 @@ is supported, without warning.
     #> 7     1 e     <dbl [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[6, ] <- df[1, ])
     #>    n    c         li
@@ -3041,6 +2725,8 @@ is supported, without warning.
     #> 6  1    e          9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[6, ] <- tbl[1, ])
 
@@ -3050,8 +2736,6 @@ is supported, without warning.
     #> "error_new_rows_at_end_only"
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[-5, ] <- df[1, ])
     #>   n c li
@@ -3061,6 +2745,8 @@ is supported, without warning.
     #> 4 1 e  9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[-5, ] <- tbl[1, ])
 
@@ -3070,8 +2756,6 @@ is supported, without warning.
     #> tried to subset element 5.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[-(5:7), ] <- df[1, ])
     #>   n c li
@@ -3081,6 +2765,8 @@ is supported, without warning.
     #> 4 1 e  9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[-(5:7), ] <- tbl[1, ])
 
@@ -3090,8 +2776,6 @@ is supported, without warning.
     #> tried to subset element 5.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[-6, ] <- df[1, ])
     #>   n c li
@@ -3101,6 +2785,8 @@ is supported, without warning.
     #> 4 1 e  9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[-6, ] <- tbl[1, ])
 
@@ -3113,14 +2799,18 @@ is supported, without warning.
 </tr>
 </tbody>
 </table>
-For compatibility reasons, character vectors that represent numbers are
-supported.
+For compatibility, `i` can also be a character vector containing
+positive numbers.
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
+<td>
+</td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[as.character(1:3), ] <- tbl[1, ])
     #> # A tibble: 4 x 3
@@ -3133,7 +2823,13 @@ supported.
 
 </td>
 </tr>
-<tr style="vertical-align:top">
+</tbody>
+</table>
+<table class="dftbl">
+<tbody>
+<tr>
+<td>
+</td>
 <td>
     with_df(df[as.character(-(1:3)), ] <- df[1, ])
     #>    n c         li
@@ -3146,6 +2842,8 @@ supported.
     #> -3 1 e          9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 
@@ -3157,8 +2855,6 @@ supported.
     #> not find function "error_na_new_row"
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[as.character(3:5), ] <- df[1, ])
     #>   n c     li
@@ -3169,6 +2865,8 @@ supported.
     #> 5 1 e      9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 
@@ -3180,8 +2878,6 @@ supported.
     #> not find function "error_na_new_row"
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[as.character(-(3:5)), ] <- df[1, ])
     #>    n c         li
@@ -3194,6 +2890,8 @@ supported.
     #> -5 1 e          9
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 
@@ -3205,8 +2903,6 @@ supported.
     #> not find function "error_na_new_row"
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[NA_character_, ] <- df[1, ])
 
@@ -3217,6 +2913,8 @@ supported.
     #> assignments of data frames
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
@@ -3227,137 +2925,22 @@ supported.
 </tr>
 </tbody>
 </table>
-Definition of `x[i, j]`.
-------------------------
+Row and column subassignment
+----------------------------
 
-`x[i, j]` is equivalent to `x[j][i, ]`.
+### Definition of `x[i, j] <- a`.
 
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-    df[1, 1]
-    #> [1] 1
+`x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[8]
 
-</td>
-<td>
-    tbl[1, 1]
-    #> # A tibble: 1 x 1
-    #>       n
-    #>   <int>
-    #> 1     1
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    df[1][1, ]
-    #> [1] 1
-
-</td>
-<td>
-    tbl[1][1, ]
-    #> # A tibble: 1 x 1
-    #>       n
-    #>   <int>
-    #> 1     1
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    tbl[1, 2:3]
-    #> # A tibble: 1 x 2
-    #>   c     li       
-    #>   <chr> <list>   
-    #> 1 e     <dbl [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    tbl[2:3][1, ]
-    #> # A tibble: 1 x 2
-    #>   c     li       
-    #>   <chr> <list>   
-    #> 1 e     <dbl [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    df[2:3, 1]
-    #> [1] 2 3
-
-</td>
-<td>
-    tbl[2:3, 1]
-    #> # A tibble: 2 x 1
-    #>       n
-    #>   <int>
-    #> 1     2
-    #> 2     3
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    df[1][2:3, ]
-    #> [1] 2 3
-
-</td>
-<td>
-    tbl[1][2:3, ]
-    #> # A tibble: 2 x 1
-    #>       n
-    #>   <int>
-    #> 1     2
-    #> 2     3
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    tbl2[2:3, 1:2]
-    #> # A tibble: 2 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     2 f     <int [2…     0     1     0
-    #> 2     3 g     <int [3…     0     0     1
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    tbl2[1:2][2:3, ]
-    #> # A tibble: 2 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     2 f     <int [2…     0     1     0
-    #> 2     3 g     <int [3…     0     0     1
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-</tbody>
-</table>
-### Corollaries
-
-`x[i, j] <-` can update only existing columns, it cannot create or
-remove columns.
+Subassignment to `x[i, j]` is much stricter for tibbles than for data
+frames. `x[i, j] <- a` can update only existing columns, it cannot
+create or remove columns.
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
     with_df(df[2:3, "n"] <- 1)
     #>   n c         li
@@ -3367,6 +2950,8 @@ remove columns.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, "n"] <- 1)
     #> # A tibble: 4 x 3
@@ -3378,8 +2963,6 @@ remove columns.
     #> 4     4 h     <chr [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[2:3, "x"] <- 1)
     #>   n c         li  x
@@ -3389,6 +2972,8 @@ remove columns.
     #> 4 4 h       text NA
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, "x"] <- 1)
 
@@ -3396,8 +2981,6 @@ remove columns.
     #> elements.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[2:3, "n"] <- NULL)
 
@@ -3405,6 +2988,8 @@ remove columns.
     #> replacement has length zero
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, "n"] <- NULL)
 
@@ -3414,11 +2999,13 @@ remove columns.
 </tr>
 </tbody>
 </table>
-`x[i, j] <-` can’t change the data type of existing columns.
+`x[i, j] <- a` can’t change the data type of existing columns.
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
     with_df(df[2:3, 1] <- df[1:2, 2])
     #>   n c         li
@@ -3428,6 +3015,8 @@ remove columns.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
 
@@ -3436,8 +3025,6 @@ remove columns.
     #> and `x` <integer>.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[2:3, 2] <- df[1:2, 3])
 
@@ -3453,6 +3040,8 @@ remove columns.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
 
@@ -3461,8 +3050,6 @@ remove columns.
     #> `x` <character>.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[2:3, 3] <- df2[1:2, 1])
 
@@ -3478,6 +3065,8 @@ remove columns.
     #> 4 4 h text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
@@ -3488,8 +3077,6 @@ remove columns.
     #> >> and `y` <list>.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df2(df2[2:3, 1] <- df2[1:2, 2])
 
@@ -3504,6 +3091,8 @@ remove columns.
     #> 4    4    h  text   0   0   0   1
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
 
@@ -3515,10 +3104,10 @@ remove columns.
     #> >>.
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[2:3, 2] <- tbl[1:2, 1])
     #> # A tibble: 4 x 2
@@ -3538,7 +3127,9 @@ remove columns.
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
     with_df(df[5, "n"] <- list(0))
     #>   n    c         li
@@ -3549,6 +3140,8 @@ remove columns.
     #> 5 0 <NA>       NULL
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[5, "n"] <- list(0))
 
@@ -3562,14 +3155,16 @@ remove columns.
 </tr>
 </tbody>
 </table>
-Definition of `x[[i, j]] <- a`.
--------------------------------
+### Definition of `x[[i, j]] <- a`.
 
-`x[[i, j]] <- a` is equivalent to `x[i, ][[j]] <- a`.[8]
+`i` must be a numeric vector of length 1. `x[[i, j]] <- a` is equivalent
+to `x[i, ][[j]] <- a`.[9]
 
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
     with_df(df[[1, 1]] <- 0)
     #>   n c         li
@@ -3579,6 +3174,8 @@ Definition of `x[[i, j]] <- a`.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[[1, 1]] <- 0)
     #> # A tibble: 4 x 3
@@ -3590,8 +3187,6 @@ Definition of `x[[i, j]] <- a`.
     #> 4     4 h     <chr [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[1, ][[1]] <- 0)
     #>   n c         li
@@ -3601,6 +3196,8 @@ Definition of `x[[i, j]] <- a`.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[1, ][[1]] <- 0)
     #> # A tibble: 4 x 3
@@ -3612,8 +3209,6 @@ Definition of `x[[i, j]] <- a`.
     #> 4     4 h     <chr [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[[1, 3]] <- list(NULL))
     #>   n c         li
@@ -3623,6 +3218,8 @@ Definition of `x[[i, j]] <- a`.
     #> 4 4 h       text
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[[1, 3]] <- list(NULL))
     #> # A tibble: 4 x 3
@@ -3634,10 +3231,10 @@ Definition of `x[[i, j]] <- a`.
     #> 4     4 h     <chr [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[1, ][[3]] <- list(NULL))
     #> # A tibble: 4 x 3
@@ -3649,8 +3246,6 @@ Definition of `x[[i, j]] <- a`.
     #> 4     4 h     <chr [1]>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df2(df2[[1, 1]] <- df[1, ])
 
@@ -3659,6 +3254,8 @@ Definition of `x[[i, j]] <- a`.
     #> : replacement has 1 row, data has 4
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[[1, 1]] <- tbl[1, ])
     #> # A tibble: 4 x 2
@@ -3671,10 +3268,10 @@ Definition of `x[[i, j]] <- a`.
     #> # … with 1 more variable: [,4] <dbl>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
     #> # A tibble: 4 x 2
@@ -3687,8 +3284,6 @@ Definition of `x[[i, j]] <- a`.
     #> # … with 1 more variable: [,4] <dbl>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df2(df2[[1, 2]] <- t(1:4))
 
@@ -3697,6 +3292,8 @@ Definition of `x[[i, j]] <- a`.
     #> are to replace
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[[1, 2]] <- t(1:4))
     #> # A tibble: 4 x 2
@@ -3709,10 +3306,10 @@ Definition of `x[[i, j]] <- a`.
     #> # … with 1 more variable: [,4] <dbl>
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl2(tbl2[1, ][[2]] <- t(1:4))
     #> # A tibble: 4 x 2
@@ -3725,14 +3322,6 @@ Definition of `x[[i, j]] <- a`.
     #> # … with 1 more variable: [,4] <dbl>
 
 </td>
-</tr>
-</tbody>
-</table>
-`vctrs::vec_as_index(i)` must be scalar.
-
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
 <td>
     df[[1:2, 1]]
 
@@ -3741,6 +3330,8 @@ Definition of `x[[i, j]] <- a`.
     #> element in vectorIndex
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     tbl[[1:2, 1]]
 
@@ -3749,8 +3340,6 @@ Definition of `x[[i, j]] <- a`.
     #> "error_need_scalar"
 
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
     with_df(df[[1:2, 1]] <- 0)
 
@@ -3759,6 +3348,8 @@ Definition of `x[[i, j]] <- a`.
     #> element should be replaced
 
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
@@ -3773,200 +3364,15 @@ Definition of `x[[i, j]] <- a`.
 NB: `vctrs::vec_size(a)` must equal 1. Unlike `x[i, ] <-`, `x[[i, ]] <-`
 is not valid.
 
-### Corollaries
-
-`x[[i, j]]` and `x[i, ][[j]]` can be used interchangeably on the LHS or
-RHS of an assignment for the four principal column types:
-
--   atomic: `df[[1]]`
--   list: `df[[3]]`
--   data frame: `df2[[1]]`
--   matrix: `df2[[2]]`
-
 <table class="dftbl">
 <tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
 <td>
-    with_tbl(tbl[[1, 1]] <- tbl[2, ][[1]])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     2 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4     4 h     <chr [1]>
-
 </td>
 </tr>
 <tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[1, 1] <- list(tbl[[2, 1]]))
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     2 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[[1, 3]] <- df[2, ][[3]])
-    #>   n c         li
-    #> 1 1 e     10, 11
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
-</td>
-<td>
-    with_tbl(tbl[[1, 3]] <- tbl[2, ][[3]])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <int [2]>
-    #> 2     2 f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[1, 3] <- list(df[[2, 3]]))
-
-    #> Warning in `[<-.data.frame`(`*tmp*`,
-    #> 1, 3, value = list(10:11)): replacement
-    #> element 1 has 2 rows to replace 1 rows
-
-    #>   n c         li
-    #> 1 1 e         10
-    #> 2 2 f     10, 11
-    #> 3 3 g 12, 13, 14
-    #> 4 4 h       text
-
-</td>
-<td>
-    with_tbl(tbl[1, 3] <- list(tbl[[2, 3]]))
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <int [2]>
-    #> 2     2 f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[[1, 1]] <- df2[2, ][[1]])
-
-    #> Error in `[[<-.data.frame`(`*tmp*`,
-    #> iseq, value = structure(list(n = 2L,
-    #> : replacement has 1 row, data has 4
-
-</td>
-<td>
-    with_tbl2(tbl2[[1, 1]] <- tbl2[2, ][[1]])
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     2 f     <int [2…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[1, 1] <- list(df2[[2, 1]]))
-
-    #> Warning in `[<-.data.frame`(`*tmp*`,
-    #> 1, 1, value = list(c("e", "f", "g", :
-    #> replacement element 1 has 4 rows to
-    #> replace 1 rows
-
-    #>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
-    #> 1    e    e          e   1   0   0   0
-    #> 2    2    f     10, 11   0   1   0   0
-    #> 3    3    g 12, 13, 14   0   0   1   0
-    #> 4    4    h       text   0   0   0   1
-
-</td>
-<td>
-    with_tbl2(tbl2[1, 1] <- list(tbl2[[2, 1]]))
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     2 f     <int [2…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[[1, 2]] <- df2[2, ][[2]])
-
-    #> Error in x[[jseq]][[iseq]] <- value:
-    #> more elements supplied than there
-    #> are to replace
-
-</td>
-<td>
-    with_tbl2(tbl2[[1, 2]] <- tbl2[2, ][[2]])
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     0     1     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df2(df2[1, 2] <- list(df2[[2, 2]]))
-    #>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
-    #> 1    1    e          9   0   0   0   0
-    #> 2    2    f     10, 11   0   1   0   0
-    #> 3    3    g 12, 13, 14   0   0   1   0
-    #> 4    4    h       text   0   0   0   1
-
-</td>
-<td>
-    with_tbl2(tbl2[1, 2] <- list(tbl2[[2, 2]]))
-    #> # A tibble: 4 x 2
-    #>    tb$n $c    $li      m[,1]  [,2]  [,3]
-    #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
-    #> 1     1 e     <dbl [1…     0     1     0
-    #> 2     2 f     <int [2…     0     1     0
-    #> 3     3 g     <int [3…     0     0     1
-    #> 4     4 h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
-
-</td>
-</tr>
-</tbody>
-</table>
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-</td>
 <td>
     stopifnot(identical(tbl, new_tbl()))
 
@@ -3999,6 +3405,10 @@ subsetting and subassignment.
 
 [7] `x[i, ]` are symmetrical for subset and subassignment.
 
-[8] `x[[i, j]]` is symmetrical for subsetting and subassignment. An
+[8] `x[i, j]` is symmetrical for subsetting and subassignment. A more
+efficient implementation of `x[i, j] <- a` would forward to
+`x[j][i, ] <- a`.
+
+[9] `x[[i, j]]` is symmetrical for subsetting and subassignment. An
 efficient implementation would check that `i` and `j` are scalar and
 forward to `x[i, j][[1]] <- a`.
