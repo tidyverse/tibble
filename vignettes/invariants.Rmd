@@ -180,6 +180,10 @@ with_df(df$n <- rev(df$n), verbose = TRUE)
 ```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
 df[[1]]
 .subset2(df, 1)
+```
+
+
+```{r double-bracket-equivalent-to-subset2-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
 identical(df[[3]], .subset2(df, 3))
 identical(df2[["df"]], .subset2(df2, "df"))
 ```
@@ -237,14 +241,10 @@ identical(df2$m, df2[["m"]])
 ```
 
 Unlike data frames, tibbles do not partially match names.
+Because `df$x` is rarely used in packages, it can raise a warning:
 
 ```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
 df$l
-```
-
-Because `df$x` is rarely used in packages, it can raise a warning:
-
-```{r dollar-j-oob-character, dftbl = TRUE}
 df$not_present
 ```
 
