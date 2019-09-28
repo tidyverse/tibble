@@ -1,3 +1,9 @@
+# tibble 2.99.99.9006
+
+- Adapt style for subassignment in "invariants" article.
+- `$` warns unconditionally if column not found, `[[` doesn't warn.
+
+
 # tibble 2.99.99.9005
 
 - Correct behavior for subsetting and subassignment.
