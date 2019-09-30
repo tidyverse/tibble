@@ -250,7 +250,7 @@ df$not_present
 
 ## Column subsetting
 
-### Definition of `x[j]`.
+### Definition of `x[j]`
 
 `j` is converted to an integer vector by `vec_as_index(j, ncol(x), names = names(x))`.
 Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])`, keeping the corresponding column names.
@@ -398,7 +398,7 @@ Unlike `x[i, ]`, `x[[i, ]]` is not valid.
 
 ## Column update
 
-### Definition of `x[[j]] <- a`.
+### Definition of `x[[j]] <- a`
 
 If `a` is a vector then `x[[j]] <- a` replaces the `j`th column with value `a`.
 
@@ -470,7 +470,7 @@ with_df(df[[1]] <- NULL)
 with_df2(df2[[2]] <- NULL)
 ```
 
-### Definition of `x$name <- a`.
+### Definition of `x$name <- a`
 
 `x$name <- a` and `x$"name" <- a` are equivalent to `x[["name"]] <- a`.[^column-assign-symmetry]
 
@@ -572,9 +572,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 <!-- HW: we need better error messages for these cases -->
 
-## Row subassignment
-
-### Definition of `x[i, ] <- list(...)`.
+## Row subassignment: `x[i, ] <- list(...)`
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,  `vec_slice(x[[j_2]], i) <- a[[2]]`, ... .[^row-assign-symmetry]
 
@@ -637,7 +635,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 
 ## Row and column subassignment
 
-### Definition of `x[i, j] <- a`.
+### Definition of `x[i, j] <- a`
 
 `x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[^bracket-assign-flip]
 
@@ -670,7 +668,7 @@ with_df(df[5, "n"] <- list(0))
 ```
 
 
-### Definition of `x[[i, j]] <- a`.
+### Definition of `x[[i, j]] <- a`
 
 `i` must be a numeric vector of length 1.
 `x[[i, j]] <- a` is equivalent to `x[i, ][[j]] <- a`.[^double-bracket-ij-symmetry]
