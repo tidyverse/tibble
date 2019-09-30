@@ -400,7 +400,7 @@ Unlike `x[i, ]`, `x[[i, ]]` is not valid.
 
 ### Definition of `x[[j]] <- a`.
 
-`x[[j]] <- a` corresponds to `x <- tibble(x[[j_1]], x[[j_2]], ..., a, ..., x[[j_n]])`.
+If `a` is a vector then `x[[j]] <- a` replaces the `j`th column with value `a`.
 
 ```{r double-bracket-assign-definition, dftbl = TRUE, include = eval_details, eval = eval_details}
 with_df(df[[1]] <- 0)
@@ -408,8 +408,6 @@ with_df(df[[3]] <- 4:1)
 with_df2(df2[[1]] <- 0)
 with_df2(df2[[2]] <- 4:1)
 ```
-
-For this, `j` must be a scalar numeric or a string, and cannot be `NA`.
 
 ```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE, include = eval_details, eval = eval_details}
 with_df(df[[1]] <- 0)
@@ -427,7 +425,8 @@ with_df(df[[NA]] <- 0)
 with_df(df[[NA_character_]] <- 0)
 ```
 
-`vec_size(a)` must be `nrow(x)` or 1.
+`a` is recycled to the same size as `df` so must have size `nrow(x)` or 1.
+(The only exception is when `a` is `NULL`, as described below.)
 Recycling also works for list, data frame, and matrix columns.
 
 ```{r double-bracket-requires-size, dftbl = TRUE, include = eval_details, eval = eval_details}
@@ -443,8 +442,8 @@ with_df2(df2[["tb"]] <- df[1, ])
 with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
 ```
 
-
-New columns are appended at the end, with name repair if needed.
+`j` must be a scalar numeric or a string, and cannot be `NA`.
+If `j` is OOB, a new column is added on the right hand side, with name repair if needed.
 
 ```{r double-bracket-assign-supports-new, dftbl = TRUE}
 with_df(df[["x"]] <- 0)
@@ -452,13 +451,9 @@ with_df(df[[4]] <- 0)
 with_df(df[[5]] <- 0)
 ```
 
-The type of an existing column can be changed, also across the principal column types:
+<!-- HW: should we permitted oob assignment with numeric j? It's a bit weird to create a column with unknonw column -->
 
-- atomic: `df[[1]]` and `df[[2]]`
-- list: `df[[3]]`
-- data frame: `df2[[1]]`
-- matrix: `df2[[2]]`
-
+`df[[j]] <- a` replaces the complete column so can change the type.
 
 ```{r double-bracket-assign-supports-type-change, dftbl = TRUE, include = eval_details, eval = eval_details}
 with_df(df[[1]] <- df[[2]])
@@ -479,28 +474,44 @@ with_df2(df2[[2]] <- NULL)
 
 `x$name <- a` and `x$"name" <- a` are equivalent to `x[["name"]] <- a`.[^column-assign-symmetry]
 
-[^column-assign-symmetry]: `$` behaves almost completely symmetrical to `[[` when comparing subsetting and subassignment.
+[^column-assign-symmetry]: `$` behaves almost completely symmetrically to `[[` when comparing subsetting and subassignment.
 
 ```{r dollar-equivalent-to-subset-assign, dftbl = TRUE}
 with_df(df$n <- 0)
-with_df(df$"n" <- 0)
 with_df(df[["n"]] <- 0)
 ```
 
-`$` does not implement partial matching but creates a new column.
+`$<-` does not perform partial matching.
 
 ```{r dollar-equivalent-to-subset-assign-pmatch, dftbl = TRUE}
 with_df(df$l <- 0)
 with_df(df[["l"]] <- 0)
 ```
 
-## Column subassignment
+## Column subassignment: `x[j] <- a`
 
-### Definition of `x[j] <- list(...)`.
+* If `j` is missing, it's replaced with `seq_along(x)`
+* If `j` is logical, it's converted to numeric with `seq_along(x)[j]`.
 
-First, if `j` is not a character vector, it is converted to numeric indices. Then, `x[j] <- a` is equivalent to performing `x[[j_1]] <- a[[1]]`, `x[[j_2]] <- a[[2]]` etc.
+### `a` is a list
+
+`x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ....
+`a` is recycled to the same length as `j`.
+
+```{r, dftbl = TRUE}
+with_df(df[1:2] <- list(1))
+with_df(df[1:2] <- list(1, 2))
+```
+
+Only lists of length one on the RHS are recycled.
+
+```{r bracket-assign-recycles-one, dftbl = TRUE}
+with_df(df[1:2] <- list(0, 0, 0))
+with_df(df[1:3] <- list(0, 0))
+```
+
 When the same column is updated/removed several times, the last update wins.
-If `a` contains `NULL` values, the corresponding columns are removed *after* updating.
+If `a` contains `NULL` values, the corresponding columns are removed *after* updating. <!-- HW: why is _after_ signficant? -->
 
 ```{r bracket-assign-def, dftbl = TRUE}
 with_df(df[1:2] <- list("x", 4:1))
@@ -516,13 +527,7 @@ with_df(df[NA_integer_] <- list("x"))
 with_df(df[NA_character_] <- list("x"))
 ```
 
-Just like column updates, `[<-` supports changing the type of an existing column, also across the principal column types:
-
-- atomic: `df[[1]]` and `df[[2]]`
-- list: `df[[3]]`
-- data frame: `df2[[1]]`
-- matrix: `df2[[2]]`
-
+Just like column updates, `[<-` supports changing the type of an existing column.
 
 ```{r bracket-assign-supports-type-change, dftbl = TRUE, include = eval_details, eval = eval_details}
 with_df(df[1] <- df[2])
@@ -542,47 +547,14 @@ with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```
 
-### Definition of `x[j] <- list(a)`.
+### `a` is a non-list vector 
 
-`x[j] <- a` is equivalent to `x[j] <- rep_along(j, a)` if `is_list(a, 1)`.
-
-```{r bracket-assign-recycles, dftbl = TRUE, include = eval_details, eval = eval_details}
-with_df(df[1:2] <- list(0))
-with_df(df[1:2] <- list(0, 0))
-with_df(df[1:3] <- list(0))
-with_df(df[1:3] <- list(0, 0, 0))
-```
-
-This means that only lists of length one on the RHS are recycled.
-
-```{r bracket-assign-recycles-one, dftbl = TRUE}
-with_df(df[1:2] <- list(0, 0, 0))
-with_df(df[1:3] <- list(0, 0))
-```
-
-### Definition of `x[j] <- a`.
-
-`x[j] <- a` is equivalent to `x[j] <- list(a)` if `is_atomic(a)` or `is_null(a)`.
+`x[j] <- a` is equivalent to `x[j] <- list(a)`
 
 ```{r bracket-assign-wraps, dftbl = TRUE}
 with_df(df[1] <- 0)
 with_df(df[1] <- list(0))
 with_df(df[1] <- list(list(0)))
-```
-
-### Definition of `x[] <- ...`.
-
-`x[] <- ...` is equivalent to `x[seq_len(ncol(x))] <- ...`.
-
-```{r bracket-empty, dftbl = TRUE, include = eval_details, eval = eval_details}
-with_df(df[] <- df)
-with_df(df[] <- df[1, ])
-with_df(df[] <- df[1:2, ])
-with_df(df[] <- df2)
-with_df2(df2[] <- df2)
-with_df2(df2[] <- df2[1, ])
-with_df2(df2[] <- df2[1:2, ])
-with_df2(df2[] <- df)
 ```
 
 ## Row subassignment
