@@ -493,29 +493,32 @@ with_df(df[["l"]] <- 0)
 * If `j` is missing, it's replaced with `seq_along(x)`
 * If `j` is logical, it's converted to numeric with `seq_along(x)[j]`.
 
-### `a` is a list
+### `a` is a list or data frame
 
-`x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ....
-`a` is recycled to the same length as `j`.
-
-```{r, dftbl = TRUE}
-with_df(df[1:2] <- list(1))
-with_df(df[1:2] <- list(1, 2))
-```
-
-Only lists of length one on the RHS are recycled.
-
-```{r bracket-assign-recycles-one, dftbl = TRUE}
-with_df(df[1:2] <- list(0, 0, 0))
-with_df(df[1:3] <- list(0, 0))
-```
-
-When the same column is updated/removed several times, the last update wins.
-If `a` contains `NULL` values, the corresponding columns are removed *after* updating. <!-- HW: why is _after_ signficant? -->
+If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then `x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ...
 
 ```{r bracket-assign-def, dftbl = TRUE}
 with_df(df[1:2] <- list("x", 4:1))
 with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
+```
+
+If `length(a)` equals 1, then it is recycled to the same length as `j`.
+
+```{r bracket-assign-recycles, dftbl = TRUE}
+with_df(df[1:2] <- list(1))
+with_df(df[1:2] <- list(0, 0, 0))
+with_df(df[1:3] <- list(0, 0))
+```
+
+If the same column is updated/removed several times, the last update wins.
+
+```{r, bracket-assign-multiple, dftbl = TRUE}
+with_df(df[c(1, 1)] <- list(1, 2))
+```
+
+If `a` contains `NULL` values, the corresponding columns are removed *after* updating (i.e. position indexes refer to columns before any modifications).
+
+```{r bracket-assign-remove, dftbl = TRUE}
 with_df(df[1:2] <- list(NULL, 4:1))
 ```
 
@@ -547,15 +550,27 @@ with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```
 
-### `a` is a non-list vector 
+### `a` is another type of vector 
 
-`x[j] <- a` is equivalent to `x[j] <- list(a)`
+`x[j] <- a` is equivalent to `x[j] <- list(a)`.
+This is primarily provided for backward compatbility.
 
 ```{r bracket-assign-wraps, dftbl = TRUE}
 with_df(df[1] <- 0)
 with_df(df[1] <- list(0))
-with_df(df[1] <- list(list(0)))
 ```
+
+### `a` is not a vector
+
+Any other type for `a` is an error.
+Note that `is.list(a)` is `TRUE`, but `inherits(a, "list")` is `FALSE`, then `a` is considered to be a scalar.
+
+```{r bracket-assign-non-vector, dftbl = TRUE}
+with_df(df[1] <- mean)
+with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
+```
+
+<!-- HW: we need better error messages for these cases -->
 
 ## Row subassignment
 
