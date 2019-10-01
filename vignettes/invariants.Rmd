@@ -429,17 +429,17 @@ with_df(df[[NA_character_]] <- 0)
 (The only exception is when `a` is `NULL`, as described below.)
 Recycling also works for list, data frame, and matrix columns.
 
+```{r double-bracket-assign-recycle, dftbl = TRUE}
+with_df(df[["li"]] <- list(0))
+with_df2(df2[["tb"]] <- df[1, ])
+with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
+```
+
 ```{r double-bracket-requires-size, dftbl = TRUE, include = eval_details, eval = eval_details}
 with_df(df[[1]] <- 1)
 with_df(df[[1]] <- 4:1)
 with_df(df[[1]] <- 3:1)
 with_df(df[[1]] <- 2:1)
-```
-
-```{r dollar-equivalent-to-subset-assign-detail, dftbl = TRUE}
-with_df(df[["li"]] <- list(0))
-with_df2(df2[["tb"]] <- df[1, ])
-with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
 ```
 
 `j` must be a scalar numeric or a string, and cannot be `NA`.
