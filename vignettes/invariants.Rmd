@@ -481,6 +481,10 @@ with_df(df$n <- 0)
 with_df(df[["n"]] <- 0)
 ```
 
+```{r dollar-equivalent-to-subset-assign-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+with_df(df$"n" <- 0)
+```
+
 `$<-` does not perform partial matching.
 
 ```{r dollar-equivalent-to-subset-assign-pmatch, dftbl = TRUE}
