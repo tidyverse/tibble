@@ -1807,9 +1807,9 @@
 <li id="fn4"><p>A more efficient implementation of <code>x[i, j]</code> would forward to <code>x[j][i, ]</code>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Cell subsetting <code>x[[i, j]]</code> is not defined in terms of <code>x[[j]][[i]]</code> because that definition does not generalise to list, matrix and data frame columns. A more efficient implementation of <code>x[[i, j]]</code> would check that <code>j</code> is a scalar and forward to <code>x[i, j][[1]]</code>.<a href="#fnref5" class="footnote-back">↩</a></p></li>
 <li id="fn6"><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> behaves almost completely symmetrically to <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> when comparing subsetting and subassignment.<a href="#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p><code>x[i, ]</code> is symmetrical for subset and subassignment.<a href="#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p><code>x[i, j]</code> is symmetrical for subsetting and subassignment. A more efficient implementation of <code>x[i, j] &lt;- a</code> would forward to <code>x[j][i, ] &lt;- a</code>.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p><code>x[[i, j]]</code> is symmetrical for subsetting and subassignment. An efficient implementation would check that <code>i</code> and <code>j</code> are scalar and forward to <code>x[i, j][[1]] &lt;- a</code>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p><code>x[i, ]</code> is symmetrically for subset and subassignment.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p><code>x[i, j]</code> is symmetrically for subsetting and subassignment. A more efficient implementation of <code>x[i, j] &lt;- a</code> would forward to <code>x[j][i, ] &lt;- a</code>.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p><code>x[[i, j]]</code> is symmetrically for subsetting and subassignment. An efficient implementation would check that <code>i</code> and <code>j</code> are scalar and forward to <code>x[i, j][[1]] &lt;- a</code>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
   </div>
