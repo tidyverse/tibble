@@ -361,6 +361,10 @@ tbl_subassign <- function(x, i, j, value) {
 
 vec_as_new_row_index <- function(i, x) {
   if (is_bare_numeric(i)) {
+    if (anyDuplicated(i)) {
+      abort(error_duplicate_subscript_for_assignment())
+    }
+
     nr <- fast_nrow(x)
 
     new <- which(i > nr)
@@ -379,7 +383,11 @@ vec_as_new_row_index <- function(i, x) {
     # Don't allow OOB logical
     vec_as_index(i, fast_nrow(x))
   } else {
-    vec_as_row_index(i, x)
+    i <- vec_as_row_index(i, x)
+    if (anyDuplicated(i)) {
+      abort(error_duplicate_subscript_for_assignment())
+    }
+    i
   }
 }
 
@@ -395,6 +403,10 @@ vec_as_new_col_index <- function(j, x, value) {
   if (is_bare_character(j)) {
     set_names(match(j, names(x)), j)
   } else if (is_bare_numeric(j)) {
+    if (anyDuplicated(j)) {
+      abort(error_duplicate_subscript_for_assignment())
+    }
+
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
@@ -411,7 +423,11 @@ vec_as_new_col_index <- function(j, x, value) {
 
     set_names(j, names)
   } else {
-    vec_as_col_index(j, x)
+    j <- vec_as_col_index(j, x)
+    if (anyDuplicated(j)) {
+      abort(error_duplicate_subscript_for_assignment())
+    }
+    j
   }
 }
 

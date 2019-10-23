@@ -389,6 +389,15 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$partial, NA)
 })
 
+# [<- ---------------------------------------------------------------------
+
+test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
+  df <- tibble(x = 1:2, y = x)
+  expect_error(df[c(1, 1)] <- 3, ".")
+  expect_error(df[, c(1, 1)] <- 3, ".")
+  expect_error(df[c(1, 1), ] <- 3, ".")
+})
+
 # $<- ---------------------------------------------------------------------
 
 test_that("$<- doesn't throw warning if name doesn't exist", {
