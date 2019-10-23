@@ -6,6 +6,10 @@ if (Sys.getenv("DEV_VERSIONS") != "") {
 }
 
 if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() == "master") {
+  # https://github.com/rstudio/rmarkdown/pull/1672
+  get_stage("install") %>%
+    add_step(step_install_github("rstudio/rmarkdown"))
+
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
   # - `ci()$is_tag()`: Only for tags, not for branches
