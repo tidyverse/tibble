@@ -99,7 +99,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[0.5],
-    class = "vctrs_error_cast_lossy"
+    class = "vctrs_error_index"
   )
   expect_error_relax(
     foo[1:5],
