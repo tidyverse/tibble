@@ -66,7 +66,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   pos <- pos_from_before_after(.before, .after, nrow(.data))
   out <- rbind_at(.data, df, pos)
 
-  set_class(remove_rownames(out), class(.data))
+  vec_restore(out, .data)
 }
 
 #' @export
@@ -164,8 +164,10 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   indexes_after <- rlang::seq2(pos + 1L, ncol(.data))
   indexes <- c(indexes_before, end_pos, indexes_after)
 
-  .data[end_pos] <- df
-  .data[indexes]
+  new_data <- .data
+
+  new_data[end_pos] <- df
+  vec_restore(new_data[indexes], .data)
 }
 
 
