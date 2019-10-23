@@ -579,10 +579,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tbl[<span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>
@@ -597,9 +596,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">tbl[<span class="ot">NA</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -615,9 +613,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">tbl[<span class="ot">NA_character_</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -633,9 +630,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">tbl[<span class="ot">NA_integer_</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -715,10 +711,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">tbl[, <span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>
@@ -733,9 +728,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">tbl[, <span class="ot">NA</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -751,9 +745,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">tbl[, <span class="ot">NA_character_</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -769,9 +762,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">tbl[, <span class="ot">NA_integer_</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Can't use NA as column index with
-#&gt; `[` at
-#&gt; position 1.</code></pre>
+<pre><code>#&gt; Error: Can't use NA as column index
+#&gt; with `[` at position 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -839,10 +831,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>
@@ -1067,10 +1058,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>

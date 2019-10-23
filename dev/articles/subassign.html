@@ -387,11 +387,9 @@
 <td>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -407,11 +405,9 @@
 <td>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 3 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 3 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -427,11 +423,9 @@
 <td>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 5 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 5 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -447,11 +441,9 @@
 <td>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>c &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -506,11 +498,9 @@
 #&gt; column: `c`.</code></pre>
 </div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -582,7 +572,7 @@
 <a class="sourceLine" id="cb44-6" data-line-number="6"><span class="co">#&gt; 4 4 h       text 4</span></a>
 <a class="sourceLine" id="cb44-7" data-line-number="7"><span class="kw">with_df</span>({ df<span class="op">$</span>v =<span class="st"> </span>vctrs<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>); df<span class="op">$</span>v[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] &lt;-<span class="st"> </span>vctrs<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(letters[<span class="dv">4</span><span class="op">:</span><span class="dv">3</span>])})</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `x` &lt;vctrs_vctr&gt; and `value` &lt;vctrs_vctr&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `x` &lt;vctrs_vctr&gt; and `value` &lt;vctrs_vctr&gt;.</code></pre>
 </div>
 </div>
 </div>
@@ -848,9 +838,9 @@
 <td>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="st">"a"</span>]] &lt;-<span class="st"> </span><span class="fl">1.5</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Lossy cast from `value` &lt;double&gt; to
-#&gt; `x` &lt;integer&gt;.
-#&gt; Locations: 1</code></pre>
+<pre><code>#&gt; Error: Lossy cast from `value`
+#&gt; &lt;double&gt; to `x` &lt;integer&gt;.
+#&gt; * Locations: 1</code></pre>
 </div>
 </td>
 </tr>
@@ -866,9 +856,8 @@
 <td>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="st">"a"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -898,9 +887,8 @@
 <td>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="dv">1</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -930,9 +918,8 @@
 <td>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="st">"cd"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -968,10 +955,9 @@
 <td>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="st">"c"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>
@@ -1072,9 +1058,9 @@
 <td>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="st">"a"</span>] &lt;-<span class="st"> </span><span class="fl">1.5</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Lossy cast from `value` &lt;double&gt; to
-#&gt; `x` &lt;integer&gt;.
-#&gt; Locations: 1</code></pre>
+<pre><code>#&gt; Error: Lossy cast from `value`
+#&gt; &lt;double&gt; to `x` &lt;integer&gt;.
+#&gt; * Locations: 1</code></pre>
 </div>
 </td>
 </tr>
@@ -1090,9 +1076,8 @@
 <td>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="st">"a"</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1122,9 +1107,8 @@
 <td>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="st">"cd"</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1140,9 +1124,8 @@
 <td>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="st">"cd"</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1158,8 +1141,9 @@
 <td>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="st">"c"</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index non-existing
-#&gt; elements.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset element with unknown
+#&gt; name `c`.</code></pre>
 </div>
 </td>
 </tr>
@@ -1175,9 +1159,8 @@
 <td>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="dv">1</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1207,9 +1190,8 @@
 <td>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="dv">3</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1225,10 +1207,9 @@
 <td>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, <span class="dv">4</span>] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't index beyond the end of
-#&gt; a vector.
-#&gt; The vector has length 3 and you've
-#&gt; tried to subset element 4.</code></pre>
+<pre><code>#&gt; Error: Must index existing elements.
+#&gt; ✖ Can't subset position 4.
+#&gt; ℹ There are only 3 elements.</code></pre>
 </div>
 </td>
 </tr>
@@ -1582,11 +1563,9 @@
 <td>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 3 cannot be
-#&gt; recycled to
-#&gt; length 2. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 3 cannot be
+#&gt; recycled to length 2. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1616,11 +1595,9 @@
 <td>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1636,11 +1613,9 @@
 <td>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1662,9 +1637,8 @@
 <td>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value` &lt;double&gt;
-#&gt; and
-#&gt; `x` &lt;character&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;double&gt; and `x` &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1680,9 +1654,8 @@
 <td>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1698,11 +1671,9 @@
 <td>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1744,11 +1715,9 @@
 <td>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 4 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 4 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1806,9 +1775,8 @@
 <td>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value` &lt;double&gt;
-#&gt; and
-#&gt; `x` &lt;character&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;double&gt; and `x` &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1824,9 +1792,8 @@
 <td>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value` &lt;integer&gt;
-#&gt; and
-#&gt; `x` &lt;character&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;integer&gt; and `x` &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1842,9 +1809,8 @@
 <td>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1860,11 +1826,9 @@
 <td>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1920,11 +1884,9 @@
 <td>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 4 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 4 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -1972,11 +1934,9 @@
 <td>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 1. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 1. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2041,11 +2001,9 @@
 <td>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 3 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 3 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2061,11 +2019,9 @@
 <td>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 5 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 5 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2081,11 +2037,9 @@
 <td>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2136,11 +2090,9 @@
 <td>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 4 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 4 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2198,11 +2150,9 @@
 <td>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 3 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 3 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2218,11 +2168,9 @@
 <td>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 5 cannot be
-#&gt; recycled to
-#&gt; length 4. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 5 cannot be
+#&gt; recycled to length 4. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2238,11 +2186,9 @@
 <td>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 2 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 2 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2292,11 +2238,9 @@
 <td>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Vector of length 4 cannot be
-#&gt; recycled to
-#&gt; length 3. Only vectors of length one
-#&gt; can
-#&gt; be recycled.</code></pre>
+<pre><code>#&gt; Error: Vector of length 4 cannot be
+#&gt; recycled to length 3. Only vectors
+#&gt; of length one can be recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2332,9 +2276,8 @@
 <td>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="st">"a"</span>][<span class="dv">1</span>, ] &lt;-<span class="st"> "b"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; No common type for `value`
-#&gt; &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+<pre><code>#&gt; Error: No common type for `value`
+#&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr></tbody></table>
