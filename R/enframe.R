@@ -51,7 +51,7 @@ enframe <- function(x, name = "name", value = "value") {
 #' If the input has only one column, an unnamed vector is returned.
 #' @export
 #' @examples
-#' deframe(enframe(1:3))
+#' deframe(enframe(3:1))
 #' deframe(tibble(a = 1:3))
 #' deframe(tibble(a = as.list(1:3)))
 deframe <- function(x) {
