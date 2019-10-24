@@ -44,7 +44,7 @@ lst <- function(...) {
   lst_quos(xs)$output
 }
 
-lst_quos <- function(xs, transform = function(x, i) x) {
+lst_quos <- function(xs, transform = FALSE) {
   # Evaluate each column in turn
   col_names <- names2(xs)
   lengths <- rep_along(xs, 0L)
@@ -57,7 +57,9 @@ lst_quos <- function(xs, transform = function(x, i) x) {
     if (!is_null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      output <- transform(output, i)
+      if (transform) {
+        output <- expand_lst(output, i)
+      }
     }
     names(output)[[i]] <- col_names[[i]]
   }
