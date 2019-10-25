@@ -343,17 +343,22 @@ tbl_subassign <- function(x, i, j, value) {
     if (is.null(j)) j <- seq_along(x)
 
     xo <- tbl_subassign_col(x, j, value)
-  } else if (is.null(j)) {
-    xo <- tbl_subassign_row(x, i, value)
   } else {
-    # Optimization: match only once
-    # (Invariant: x[[j]] is equivalent to x[[vec_as_index(j)]],
-    # allowed by corollary that only existing columns can be updated)
-    j <- vec_as_col_index(j, x)
+    i <- vec_as_new_row_index(i, x)
+    x <- tbl_expand_to_nrow(x, i)
 
-    xj <- tbl_subset_col(x, j)
-    xj <- tbl_subassign_row(xj, i, value)
-    xo <- tbl_subassign_col(x, j, unclass(xj))
+    if (is.null(j)) {
+      xo <- tbl_subassign_row(x, i, value)
+    } else {
+      # Optimization: match only once
+      # (Invariant: x[[j]] is equivalent to x[[vec_as_index(j)]],
+      # allowed by corollary that only existing columns can be updated)
+      j <- vec_as_col_index(j, x)
+
+      xj <- tbl_subset_col(x, j)
+      xj <- tbl_subassign_row(xj, i, value)
+      xo <- tbl_subassign_col(x, j, unclass(xj))
+    }
   }
 
   vec_restore(xo, x)
@@ -463,11 +468,8 @@ coalesce2 <- function(x, y) {
   if (is.na(x)) y else x
 }
 
-tbl_subassign_row <- function(x, i, value) {
-  value <- vec_recycle(value, ncol(x))
-
+tbl_expand_to_nrow <- function(x, i) {
   nrow <- fast_nrow(x)
-  i <- vec_as_new_row_index(i, x)
 
   new_nrow <- max(i, nrow)
 
@@ -481,6 +483,14 @@ tbl_subassign_row <- function(x, i, value) {
     x <- vec_slice(x, i_expand)
   }
 
+  x
+}
+
+tbl_subassign_row <- function(x, i, value) {
+  value <- vec_recycle(value, ncol(x))
+
+  nrow <- fast_nrow(x)
+
   x <- unclass(x)
 
   for (j in seq_along(x)) {
@@ -489,7 +499,7 @@ tbl_subassign_row <- function(x, i, value) {
     x[[j]] <- xj
   }
 
-  set_tibble_class(x, new_nrow)
+  set_tibble_class(x, nrow)
 }
 
 check_scalar <- function(ij) {

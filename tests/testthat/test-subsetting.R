@@ -398,6 +398,12 @@ test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
   expect_error(df[c(1, 1), ] <- 3, ".")
 })
 
+test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {
+  df <- tibble(x = 1:2, y = x)
+  df[3, "x"] <- 3
+  expect_identical(df, tibble(x = 1:3, y = c(1:2, NA)))
+})
+
 # $<- ---------------------------------------------------------------------
 
 test_that("$<- doesn't throw warning if name doesn't exist", {

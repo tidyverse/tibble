@@ -3011,10 +3011,14 @@ create or remove columns.
 </td>
 <td>
     with_tbl(tbl[5, "n"] <- list(0))
-
-    #> Error: Vector of length 5 cannot be
-    #> recycled to length 4. Only vectors
-    #> of length one can be recycled.
+    #> # A tibble: 5 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
+    #> 5     0 <NA>  <NULL>
 
 </td>
 </tr>
