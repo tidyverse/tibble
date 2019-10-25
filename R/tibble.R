@@ -168,9 +168,6 @@ is.tibble <- function(x) {
 }
 
 tibble_quos <- function(xs, .rows, .name_repair) {
-  # TODO:
-  # - auto-splice, flatten output at last
-
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
@@ -197,7 +194,8 @@ tibble_quos <- function(xs, .rows, .name_repair) {
             map(output[idx_to_fix], vec_recycle, current_size)
 
           # Rebuild entire data mask
-          mask <- new_data_mask(new_environment(fixed_output))
+          mask <- new_data_mask(new_environment())
+          map2(output[idx_to_fix], col_names[idx_to_fix], add_to_mask2, mask = mask)
 
           first_size <- current_size
         }
@@ -206,11 +204,33 @@ tibble_quos <- function(xs, .rows, .name_repair) {
       }
 
       output[[i]] <- res
-      names(output)[[i]] <- current_col_name <- col_names[[i]]
-      mask[[current_col_name]] <- res
+      col_names[[i]] <- add_to_mask2(res, given_col_names[[i]], col_names[[i]], mask)
     }
   }
 
   names(output) <- col_names
+
+  output <- splice_dfs(output)
+
   lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
+}
+
+add_to_mask2 <- function(x, given_name, name = given_name, mask) {
+  if (is.data.frame(x) && given_name == "") {
+    imap(x, add_to_mask, mask)
+    ""
+  } else {
+    add_to_mask(x, name, mask)
+    name
+  }
+}
+
+add_to_mask <- function(x, name, mask) {
+  mask[[name]] <- x
+  invisible()
+}
+
+splice_dfs <- function(x) {
+  x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
+  vec_c(!!!x, .ptype = list(), .name_spec = "{inner}")
 }
