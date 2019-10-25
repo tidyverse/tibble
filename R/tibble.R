@@ -132,12 +132,11 @@
 tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  xs <- quos(..., .named = TRUE)
+  xs <- quos(...)
 
   is_null <- map_lgl(xs, quo_is_null)
 
-  xlq <- lst_quos(xs[!is_null], transform = expand_lst)
-  lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
+  tibble_quos(xs[!is_null], .rows, .name_repair)
 }
 
 #' Test if the object is a tibble
@@ -166,4 +165,72 @@ is.tibble <- function(x) {
   signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
 
   is_tibble(x)
+}
+
+tibble_quos <- function(xs, .rows, .name_repair) {
+  # Evaluate each column in turn
+  col_names <- given_col_names <- names2(xs)
+  empty_col_names <- which(col_names == "")
+  col_names[empty_col_names] <- names(quos_auto_name(xs[empty_col_names]))
+  lengths <- rep_along(xs, 0L)
+
+  output <- rep_along(xs, list(NULL))
+
+  mask <- new_data_mask(new_environment())
+
+  for (i in seq_along(xs)) {
+    res <- eval_tidy(xs[[i]], mask)
+
+    if (!is_null(res)) {
+      check_valid_col(res, col_names[[i]], i)
+
+      lengths[[i]] <- current_size <- vec_size(res)
+      if (i > 1) {
+        if (current_size == 1) {
+          res <- vec_recycle(res, first_size)
+        } else if (first_size == 1L) {
+          idx_to_fix <- seq2(1L, i - 1L)
+          output[idx_to_fix] <- fixed_output <-
+            map(output[idx_to_fix], vec_recycle, current_size)
+
+          # Rebuild entire data mask
+          mask <- new_data_mask(new_environment())
+          map2(output[idx_to_fix], col_names[idx_to_fix], add_to_mask2, mask = mask)
+
+          first_size <- current_size
+        }
+      } else {
+        first_size <- current_size
+      }
+
+      output[[i]] <- res
+      col_names[[i]] <- add_to_mask2(res, given_col_names[[i]], col_names[[i]], mask)
+    }
+  }
+
+  names(output) <- col_names
+
+  output <- splice_dfs(output)
+
+  lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
+}
+
+add_to_mask2 <- function(x, given_name, name = given_name, mask) {
+  if (is.data.frame(x) && given_name == "") {
+    imap(x, add_to_mask, mask)
+    ""
+  } else {
+    add_to_mask(x, name, mask)
+    name
+  }
+}
+
+add_to_mask <- function(x, name, mask) {
+  mask[[name]] <- x
+  invisible()
+}
+
+splice_dfs <- function(x) {
+  x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
+  vec_c(!!!x, .ptype = list(), .name_spec = "{inner}")
 }

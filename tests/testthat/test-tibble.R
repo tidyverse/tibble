@@ -700,6 +700,18 @@ test_that("can make tibble containing data.frame or array (#416)", {
   )
 })
 
+test_that("auto-splicing anonymous tibbles (#581)", {
+  df <- tibble(a = 1, b = 2)
+  expect_identical(
+    tibble(df),
+    df
+  )
+  expect_identical(
+    tibble(df, c = b),
+    add_column(df, c = 2)
+  )
+})
+
 test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
     as_tibble(list(x = iris)),
