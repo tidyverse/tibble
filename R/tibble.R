@@ -183,38 +183,34 @@ tibble_quos <- function(xs, .rows, .name_repair) {
 
   for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
-    res <- eval_tidy(xs[[i]], unique_output)
-    if (!is_null(res)) {
-      lengths[[i]] <- NROW(res)
-      output[[i]] <- res
-      output <- expand_lst(output, i)
-    }
+    output[[i]] <- res <- eval_tidy(xs[[i]], unique_output)
     names(output)[[i]] <- col_names[[i]]
+
+    if (!is_null(res)) {
+      check_valid_cols(output[i], i)
+
+      lengths[[i]] <- current_size <- vec_size(res)
+      if (i > 1 && current_size == 1) {
+        res <- vec_recycle(res, first_size)
+      }
+
+      output <- expand_lst(output, i)
+      first_size <- vec_size(output[[1]])
+    }
   }
 
   lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
 }
 
 expand_lst <- function(x, i) {
-  idx_to_fix <- integer()
-  if (i > 1L) {
-    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
-      idx_to_fix <- i
-      idx_boilerplate <- 1L
-    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
-      idx_to_fix <- seq2(1L, i - 1L)
-      idx_boilerplate <- i
-    }
-  }
-
-  if (length(idx_to_fix) > 0L) {
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
+  if (vec_size(x[[i]]) != 1L && vec_size(x[[1L]]) == 1L) {
+    idx_to_fix <- seq2(1L, i - 1L)
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[i]]))
   }
 
   x
 }
 
 expand_vecs <- function(x, length) {
-  ones <- rep(1L, length)
-  map(x, vec_slice, ones)
+  map(x, vec_recycle, length)
 }

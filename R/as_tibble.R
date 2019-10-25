@@ -143,8 +143,9 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair
 }
 
-check_valid_cols <- function(x) {
+check_valid_cols <- function(x, i = "") {
   names_x <- names2(x)
+  names_x[names_x == ""] <- i
   is_xd <- which(!map_lgl(x, vec_is))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
