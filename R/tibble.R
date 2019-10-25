@@ -169,9 +169,6 @@ is.tibble <- function(x) {
 
 tibble_quos <- function(xs, .rows, .name_repair) {
   # TODO:
-  # - inline expand_lst()
-  # - as soon as recycling happens, update .rows and adjust
-  # - early check for bad recycling
   # - use data mask
   # - auto-splice, flatten output at last
 
@@ -183,34 +180,28 @@ tibble_quos <- function(xs, .rows, .name_repair) {
 
   for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
-    output[[i]] <- res <- eval_tidy(xs[[i]], unique_output)
-    names(output)[[i]] <- col_names[[i]]
+    res <- eval_tidy(xs[[i]], unique_output)
 
     if (!is_null(res)) {
-      check_valid_cols(output[i], i)
+      check_valid_col(res, col_names[[i]], i)
 
       lengths[[i]] <- current_size <- vec_size(res)
-      if (i > 1 && current_size == 1) {
-        res <- vec_recycle(res, first_size)
+      if (i > 1) {
+        if (current_size == 1) {
+          res <- vec_recycle(res, first_size)
+        } else if (first_size == 1L) {
+          idx_to_fix <- seq2(1L, i - 1L)
+          output[idx_to_fix] <- map(output[idx_to_fix], vec_recycle, current_size)
+          first_size <- current_size
+        }
+      } else {
+        first_size <- current_size
       }
 
-      output <- expand_lst(output, i)
-      first_size <- vec_size(output[[1]])
+      output[[i]] <- res
+      names(output)[[i]] <- col_names[[i]]
     }
   }
 
   lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
-}
-
-expand_lst <- function(x, i) {
-  if (vec_size(x[[i]]) != 1L && vec_size(x[[1L]]) == 1L) {
-    idx_to_fix <- seq2(1L, i - 1L)
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[i]]))
-  }
-
-  x
-}
-
-expand_vecs <- function(x, length) {
-  map(x, vec_recycle, length)
 }

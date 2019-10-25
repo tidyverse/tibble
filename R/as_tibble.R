@@ -143,16 +143,30 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair
 }
 
-check_valid_cols <- function(x, i = "") {
+check_valid_cols <- function(x) {
   names_x <- names2(x)
-  names_x[names_x == ""] <- i
-  is_xd <- which(!map_lgl(x, vec_is))
+
+  is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
     abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
   invisible(x)
+}
+
+check_valid_col <- function(x, name, pos) {
+  if (!is_valid_col(x)) {
+    classes <- class(x)[[1]]
+    if (name == "") name <- pos
+    abort(error_column_must_be_vector(name, classes))
+  }
+
+  invisible(x)
+}
+
+is_valid_col <- function(x) {
+  vec_is(x)
 }
 
 recycle_columns <- function(x, .rows, lengths) {
@@ -176,7 +190,7 @@ recycle_columns <- function(x, .rows, lengths) {
   if (need_recycle && nrow != 1L) {
     short <- which(lengths == 1L)
     if (has_length(short)) {
-      x[short] <- expand_vecs(x[short], nrow)
+      x[short] <- map(x[short], vec_recycle, nrow)
     }
   }
 
