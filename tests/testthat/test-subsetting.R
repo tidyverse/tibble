@@ -404,6 +404,18 @@ test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {
   expect_identical(df, tibble(x = 1:3, y = c(1:2, NA)))
 })
 
+test_that("[<-.tbl_df supports adding new columns with [i, j] (#651)", {
+  df <- tibble(x = 1:2, y = x)
+  df[2, "z"] <- 3
+  expect_identical(df, tibble(x = 1:2, y = x, z = c(NA, 3)))
+})
+
+test_that("[<-.tbl_df supports adding new rows and columns with [i, j] (#651)", {
+  df <- tibble(x = 1:2, y = x)
+  df[3, "z"] <- 3
+  expect_identical(df, tibble(x = c(1:2, NA), y = x, z = c(NA, NA, 3)))
+})
+
 # $<- ---------------------------------------------------------------------
 
 test_that("$<- doesn't throw warning if name doesn't exist", {

@@ -2840,20 +2840,16 @@ create or remove columns.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[2:3, "x"] <- 1)
-    #>   n c         li  x
-    #> 1 1 e          9 NA
-    #> 2 2 f     10, 11  1
-    #> 3 3 g 12, 13, 14  1
-    #> 4 4 h       text NA
-
 </td>
 <td>
     with_tbl(tbl[2:3, "x"] <- 1)
-
-    #> Error: Must index existing elements.
-    #> [31m✖[39m Can't subset element
-    #> with unknown name `x`.
+    #> # A tibble: 4 x 4
+    #>       n c     li            x
+    #>   <int> <chr> <list>    <dbl>
+    #> 1     1 e     <dbl [1]>    NA
+    #> 2     2 f     <int [2]>     1
+    #> 3     3 g     <int [3]>     1
+    #> 4     4 h     <chr [1]>    NA
 
 </td>
 </tr>

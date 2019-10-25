@@ -340,10 +340,16 @@ tbl_subassign <- function(x, i, j, value) {
   stopifnot(is_bare_list(value))
 
   if (is.null(i)) {
-    if (is.null(j)) j <- seq_along(x)
+    if (is.null(j)) {
+      j <- seq_along(x)
+    } else {
+      j <- vec_as_new_col_index(j, x, value)
+    }
 
+    value <- vec_recycle(value, length(j))
     xo <- tbl_subassign_col(x, j, value)
   } else {
+    # Fill up rows first if necessary
     i <- vec_as_new_row_index(i, x)
     x <- tbl_expand_to_nrow(x, i)
 
@@ -353,7 +359,18 @@ tbl_subassign <- function(x, i, j, value) {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_index(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vec_as_col_index(j, x)
+      j <- vec_as_new_col_index(j, x, value)
+      new_cols <- which(is.na(j))
+      value <- vec_recycle(value, length(j))
+
+      # Fill up columns if necessary
+      if (any(new_cols)) {
+        x <- tbl_subassign_col(
+          x, j[new_cols],
+          map(value[new_cols], vec_slice, NA_integer_)
+        )
+        j <- match(names(j), names(x))
+      }
 
       xj <- tbl_subset_col(x, j)
       xj <- tbl_subassign_row(xj, i, value)
@@ -441,10 +458,6 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  j <- vec_as_new_col_index(j, x, value)
-
-  value <- vec_recycle(value, length(j))
-
   is_data <- !map_lgl(value, is_null)
   nrow <- fast_nrow(x)
 
