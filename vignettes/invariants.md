@@ -1885,13 +1885,11 @@ An attempt to update the same column twice gives an error.
 </td>
 <td>
     with_tbl(tbl[c(1, 1)] <- list(1, 2))
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <dbl> <chr> <list>   
-    #> 1     2 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
-    #> 3     2 g     <int [3]>
-    #> 4     2 h     <chr [1]>
+
+    #> Error in
+    #> error_duplicate_subscript_for_assignment():
+    #> could not find function
+    #> "error_duplicate_subscript_for_assignment"
 
 </td>
 </tr>
@@ -2942,12 +2940,12 @@ create or remove columns.
 <td>
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: No common type for `value`
+    #> Error: No common type for `x`
     #> <tbl_df<
     #> n : integer
     #> c : character
     #> li: list
-    #> >> and `x` <list>.
+    #> >> and `y` <list>.
 
 </td>
 </tr>

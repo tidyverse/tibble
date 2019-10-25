@@ -384,7 +384,7 @@ vec_as_new_row_index <- function(i, x) {
     vec_as_index(i, fast_nrow(x))
   } else {
     i <- vec_as_row_index(i, x)
-    if (anyDuplicated(i)) {
+    if (anyDuplicated(i, incomparables = NA)) {
       abort(error_duplicate_subscript_for_assignment())
     }
     i
