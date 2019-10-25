@@ -1,3 +1,11 @@
+# tibble 2.99.99.9007
+
+- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)` (#581).
+- Soft-deprecate `subclass` argument to `new_tibble()`.
+- `add_row()` and `add_column()` now use `vec_restore()` to avoid errors when appending to sf objects or other tibble subclasses (#662).
+- Subassignment throws an error with duplicate row or column indexes (#658).
+
+
 # tibble 2.99.99.9006
 
 - Adapt style for subassignment in "invariants" article.
