@@ -136,7 +136,7 @@ tibble <- function(...,
 
   is_null <- map_lgl(xs, quo_is_null)
 
-  lst_quos(xs[!is_null], tibble = TRUE, .rows, .name_repair)
+  tibble_quos(xs[!is_null], .rows, .name_repair)
 }
 
 #' Test if the object is a tibble
@@ -165,4 +165,56 @@ is.tibble <- function(x) {
   signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
 
   is_tibble(x)
+}
+
+tibble_quos <- function(xs, .rows, .name_repair) {
+  # TODO:
+  # - inline expand_lst()
+  # - as soon as recycling happens, update .rows and adjust
+  # - early check for bad recycling
+  # - use data mask
+  # - auto-splice, flatten output at last
+
+  # Evaluate each column in turn
+  col_names <- names2(xs)
+  lengths <- rep_along(xs, 0L)
+
+  output <- rep_named(rep_along(xs, ""), list(NULL))
+
+  for (i in seq_along(xs)) {
+    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
+    res <- eval_tidy(xs[[i]], unique_output)
+    if (!is_null(res)) {
+      lengths[[i]] <- NROW(res)
+      output[[i]] <- res
+      output <- expand_lst(output, i)
+    }
+    names(output)[[i]] <- col_names[[i]]
+  }
+
+  lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
+}
+
+expand_lst <- function(x, i) {
+  idx_to_fix <- integer()
+  if (i > 1L) {
+    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
+      idx_to_fix <- i
+      idx_boilerplate <- 1L
+    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
+      idx_to_fix <- seq2(1L, i - 1L)
+      idx_boilerplate <- i
+    }
+  }
+
+  if (length(idx_to_fix) > 0L) {
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
+  }
+
+  x
+}
+
+expand_vecs <- function(x, length) {
+  ones <- rep(1L, length)
+  map(x, vec_slice, ones)
 }

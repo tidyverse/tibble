@@ -44,15 +44,9 @@ lst <- function(...) {
   lst_quos(xs)
 }
 
-lst_quos <- function(xs, tibble = FALSE, .rows, .name_repair) {
+lst_quos <- function(xs) {
   # TODO:
-  # - use a copy of lst_quos(tibble = TRUE) in tibble()
   # - soft-deprecate lst()
-  # - inline expand_lst()
-  # - as soon as recycling happens, update .rows and adjust
-  # - early check for bad recycling
-  # - use data mask
-  # - auto-splice, flatten output at last
 
   # Evaluate each column in turn
   col_names <- names2(xs)
@@ -66,40 +60,9 @@ lst_quos <- function(xs, tibble = FALSE, .rows, .name_repair) {
     if (!is_null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      if (tibble) {
-        output <- expand_lst(output, i)
-      }
     }
     names(output)[[i]] <- col_names[[i]]
   }
 
-  if (tibble) {
-    lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
-  } else {
-    output
-  }
-}
-
-expand_lst <- function(x, i) {
-  idx_to_fix <- integer()
-  if (i > 1L) {
-    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
-      idx_to_fix <- i
-      idx_boilerplate <- 1L
-    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
-      idx_to_fix <- seq2(1L, i - 1L)
-      idx_boilerplate <- i
-    }
-  }
-
-  if (length(idx_to_fix) > 0L) {
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
-  }
-
-  x
-}
-
-expand_vecs <- function(x, length) {
-  ones <- rep(1L, length)
-  map(x, vec_slice, ones)
+  output
 }
