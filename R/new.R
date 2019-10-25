@@ -32,7 +32,8 @@
 #' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
 new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
-  if (is.null(class)) {
+  if (is.null(class) && !is.null(subclass)) {
+    signal_soft_deprecated(error_new_tibble_needs_class())
     class <- subclass
   }
 

@@ -189,3 +189,7 @@ error_new_tibble_must_be_list <- function() {
 error_new_tibble_needs_nrow <- function() {
   "Must pass a scalar integer as `nrow` argument to `new_tibble()`."
 }
+
+error_new_tibble_needs_class <- function() {
+  "Must pass a `class` argument instead of `subclass` to `new_tibble()`."
+}

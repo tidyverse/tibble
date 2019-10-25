@@ -15,6 +15,8 @@ test_that("is_tibble", {
 # new_tibble --------------------------------------------------------------
 
 test_that("new_tibble() with deprecated subclass argument", {
+  scoped_lifecycle_silence()
+
   tbl <- new_tibble(
     data.frame(a = 1:3),
     names = "b",
