@@ -169,7 +169,6 @@ is.tibble <- function(x) {
 
 tibble_quos <- function(xs, .rows, .name_repair) {
   # TODO:
-  # - use data mask
   # - auto-splice, flatten output at last
 
   # Evaluate each column in turn
@@ -178,9 +177,10 @@ tibble_quos <- function(xs, .rows, .name_repair) {
 
   output <- rep_named(rep_along(xs, ""), list(NULL))
 
+  mask <- new_data_mask(new_environment())
+
   for (i in seq_along(xs)) {
-    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
-    res <- eval_tidy(xs[[i]], unique_output)
+    res <- eval_tidy(xs[[i]], mask)
 
     if (!is_null(res)) {
       check_valid_col(res, col_names[[i]], i)
@@ -191,7 +191,12 @@ tibble_quos <- function(xs, .rows, .name_repair) {
           res <- vec_recycle(res, first_size)
         } else if (first_size == 1L) {
           idx_to_fix <- seq2(1L, i - 1L)
-          output[idx_to_fix] <- map(output[idx_to_fix], vec_recycle, current_size)
+          output[idx_to_fix] <- fixed_output <-
+            map(output[idx_to_fix], vec_recycle, current_size)
+
+          # Rebuild entire data mask
+          mask <- new_data_mask(new_environment(fixed_output))
+
           first_size <- current_size
         }
       } else {
@@ -199,7 +204,8 @@ tibble_quos <- function(xs, .rows, .name_repair) {
       }
 
       output[[i]] <- res
-      names(output)[[i]] <- col_names[[i]]
+      names(output)[[i]] <- current_col_name <- col_names[[i]]
+      mask[[current_col_name]] <- res
     }
   }
 
