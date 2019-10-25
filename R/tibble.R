@@ -132,7 +132,7 @@
 tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  xs <- quos(..., .named = TRUE)
+  xs <- quos(...)
 
   is_null <- map_lgl(xs, quo_is_null)
 
@@ -172,10 +172,12 @@ tibble_quos <- function(xs, .rows, .name_repair) {
   # - auto-splice, flatten output at last
 
   # Evaluate each column in turn
-  col_names <- names2(xs)
+  col_names <- given_col_names <- names2(xs)
+  empty_col_names <- which(col_names == "")
+  col_names[empty_col_names] <- names(quos_auto_name(xs[empty_col_names]))
   lengths <- rep_along(xs, 0L)
 
-  output <- rep_named(rep_along(xs, ""), list(NULL))
+  output <- rep_along(xs, list(NULL))
 
   mask <- new_data_mask(new_environment())
 
@@ -209,5 +211,6 @@ tibble_quos <- function(xs, .rows, .name_repair) {
     }
   }
 
+  names(output) <- col_names
   lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
 }
