@@ -647,15 +647,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 [^bracket-assign-flip]: `x[i, j]` is symmetrically for subsetting and subassignment.
 A more efficient implementation of `x[i, j] <- a` would forward to `x[j][i, ] <- a`.
 
-Subassignment to `x[i, j]` is much stricter for tibbles than for data frames.
-`x[i, j] <- a` can update only existing columns, it cannot create or remove columns.
-
-```{r bracket-ij-update-existing-only, dftbl = TRUE}
-with_df(df[2:3, "n"] <- 1)
-with_df(df[2:3, "x"] <- 1)
-with_df(df[2:3, "n"] <- NULL)
-```
-
+Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 `x[i, j] <- a` can't change the data type of existing columns.
 
 ```{r bracket-i-data-type, dftbl = TRUE}
@@ -666,10 +658,18 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 with_df2(df2[2:3, 2] <- df[1:2, 1])
 ```
 
-`x[i, j] <-` can't append rows.
+For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
+
+```{r subassign-ij-new-column, dftbl = TRUE}
+with_df(df[2:3, "n"] <- 1)
+with_df(df[2:3, "x"] <- 1)
+with_df(df[2:3, "n"] <- NULL)
+```
+
+Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with `NA`.
 
 ```{r append-rows-only-all-columns, dftbl = TRUE}
-with_df(df[5, "n"] <- list(0))
+with_df(df[5, "n"] <- list(0L))
 ```
 
 

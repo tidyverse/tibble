@@ -2810,67 +2810,7 @@ Row and column subassignment
 
 `x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[8]
 
-Subassignment to `x[i, j]` is much stricter for tibbles than for data
-frames. `x[i, j] <- a` can update only existing columns, it cannot
-create or remove columns.
-
-<table class="dftbl">
-<tbody>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[2:3, "n"] <- 1)
-    #>   n c         li
-    #> 1 1 e          9
-    #> 2 1 f     10, 11
-    #> 3 1 g 12, 13, 14
-    #> 4 4 h       text
-
-</td>
-<td>
-    with_tbl(tbl[2:3, "n"] <- 1)
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 f     <int [2]>
-    #> 3     1 g     <int [3]>
-    #> 4     4 h     <chr [1]>
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-    with_tbl(tbl[2:3, "x"] <- 1)
-    #> # A tibble: 4 x 4
-    #>       n c     li            x
-    #>   <int> <chr> <list>    <dbl>
-    #> 1     1 e     <dbl [1]>    NA
-    #> 2     2 f     <int [2]>     1
-    #> 3     3 g     <int [3]>     1
-    #> 4     4 h     <chr [1]>    NA
-
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-    with_df(df[2:3, "n"] <- NULL)
-
-    #> Error in x[[jj]][iseq] <- vjj:
-    #> replacement has length zero
-
-</td>
-<td>
-    with_tbl(tbl[2:3, "n"] <- NULL)
-
-    #> Error: `value` must be a vector, not
-    #> NULL
-
-</td>
-</tr>
-</tbody>
-</table>
+Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 `x[i, j] <- a` can’t change the data type of existing columns.
 
 <table class="dftbl">
@@ -2990,23 +2930,75 @@ create or remove columns.
 </tr>
 </tbody>
 </table>
-`x[i, j] <-` can’t append rows.
+For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 
 <table class="dftbl">
 <tbody>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[5, "n"] <- list(0))
-    #>   n    c         li
-    #> 1 1    e          9
-    #> 2 2    f     10, 11
-    #> 3 3    g 12, 13, 14
-    #> 4 4    h       text
-    #> 5 0 <NA>       NULL
+    with_df(df[2:3, "n"] <- 1)
+    #>   n c         li
+    #> 1 1 e          9
+    #> 2 1 f     10, 11
+    #> 3 1 g 12, 13, 14
+    #> 4 4 h       text
 
 </td>
 <td>
-    with_tbl(tbl[5, "n"] <- list(0))
+    with_tbl(tbl[2:3, "n"] <- 1)
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     1 f     <int [2]>
+    #> 3     1 g     <int [3]>
+    #> 4     4 h     <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[2:3, "x"] <- 1)
+    #> # A tibble: 4 x 4
+    #>       n c     li            x
+    #>   <int> <chr> <list>    <dbl>
+    #> 1     1 e     <dbl [1]>    NA
+    #> 2     2 f     <int [2]>     1
+    #> 3     3 g     <int [3]>     1
+    #> 4     4 h     <chr [1]>    NA
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[2:3, "n"] <- NULL)
+
+    #> Error in x[[jj]][iseq] <- vjj:
+    #> replacement has length zero
+
+</td>
+<td>
+    with_tbl(tbl[2:3, "n"] <- NULL)
+
+    #> Error: `value` must be a vector, not
+    #> NULL
+
+</td>
+</tr>
+</tbody>
+</table>
+Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with
+`NA`.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[5, "n"] <- list(0L))
     #> # A tibble: 5 x 3
     #>       n c     li       
     #>   <int> <chr> <list>   
