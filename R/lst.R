@@ -41,10 +41,19 @@
 #' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
-  lst_quos(xs)$output
+  lst_quos(xs)
 }
 
-lst_quos <- function(xs, transform = FALSE) {
+lst_quos <- function(xs, tibble = FALSE, .rows, .name_repair) {
+  # TODO:
+  # - use a copy of lst_quos(tibble = TRUE) in tibble()
+  # - soft-deprecate lst()
+  # - inline expand_lst()
+  # - as soon as recycling happens, update .rows and adjust
+  # - early check for bad recycling
+  # - use data mask
+  # - auto-splice, flatten output at last
+
   # Evaluate each column in turn
   col_names <- names2(xs)
   lengths <- rep_along(xs, 0L)
@@ -57,14 +66,18 @@ lst_quos <- function(xs, transform = FALSE) {
     if (!is_null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      if (transform) {
+      if (tibble) {
         output <- expand_lst(output, i)
       }
     }
     names(output)[[i]] <- col_names[[i]]
   }
 
-  list(output = output, lengths = lengths)
+  if (tibble) {
+    lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
+  } else {
+    output
+  }
 }
 
 expand_lst <- function(x, i) {

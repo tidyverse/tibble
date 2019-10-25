@@ -136,8 +136,7 @@ tibble <- function(...,
 
   is_null <- map_lgl(xs, quo_is_null)
 
-  xlq <- lst_quos(xs[!is_null], transform = TRUE)
-  lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
+  lst_quos(xs[!is_null], tibble = TRUE, .rows, .name_repair)
 }
 
 #' Test if the object is a tibble
