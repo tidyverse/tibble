@@ -72,7 +72,7 @@ extract_frame_data_from_dots <- function(...) {
   if (length(frame_rest) == 0L) {
     # Can't decide on type in absence of data -- use logical which is
     # coercible to all types
-    frame_rest <- logical()
+    frame_rest <- unspecified()
   }
 
   validate_rectangular_shape(frame_names, frame_rest)
@@ -123,28 +123,32 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
 }
 
 turn_frame_data_into_tibble <- function(names, rest) {
-  frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
+  if (is_empty(names)) return(new_tibble(list(), nrow = 0))
+
+  nrow <- length(rest) / length(names)
+  dim(rest) <- c(length(names), nrow)
+  dimnames(rest) <- list(names, NULL)
+  frame_mat <- t(rest)
   frame_col <- turn_matrix_into_column_list(frame_mat)
 
-  if (length(frame_col) == 0) {
-    return(new_tibble(list(), nrow = 0))
-  }
-
-  # Create a tbl_df and return it
-  names(frame_col) <- names
-  new_tibble(frame_col, nrow = NROW(frame_col[[1]]))
+  new_tibble(frame_col, nrow = nrow)
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {
   frame_col <- vector("list", length = ncol(frame_mat))
+  names(frame_col) <- colnames(frame_mat)
+
   # if a frame_mat's col is a list column, keep it unchanged (does not unlist)
   for (i in seq_len(ncol(frame_mat))) {
     col <- frame_mat[, i]
-    if (some(col, needs_list_col) || !inherits(col, "list")) {
-      frame_col[[i]] <- col
-    } else {
-      frame_col[[i]] <- exec(c, !!!col)
+
+    if (!some(col, needs_list_col) && inherits(col, "list")) {
+      # Assign names for somewhat nice error message, remove later
+      names(col) <- rep_along(col, names(frame_col)[[i]])
+      col <- unname(vec_c(!!! col))
     }
+
+    frame_col[[i]] <- unname(col)
   }
   return(frame_col)
 }

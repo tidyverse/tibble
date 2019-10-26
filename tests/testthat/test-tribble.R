@@ -65,8 +65,8 @@ test_that("tribble() handles columns with a class (#161)", {
   )
 
   date_time_col_expectation <- tibble(
-    dt = c(sys_date, as.Date("2003-01-02")),
-    dttm = c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
+    dt = vec_c(sys_date, as.Date("2003-01-02")),
+    dttm = vec_c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
   )
 
   expect_equal(date_time_col, date_time_col_expectation)
@@ -150,7 +150,7 @@ test_that("tribble can have list columns", {
 
 test_that("tribble creates n-col empty data frame", {
   df <- tribble(~x, ~y)
-  expect_equal(df, tibble(x = logical(), y = logical()))
+  expect_equal(df, tibble(x = unspecified(), y = unspecified()))
 })
 
 test_that("tribble recognizes quoted non-formula call", {
