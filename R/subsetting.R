@@ -321,6 +321,7 @@ tbl_subset_col <- function(x, j) {
   if (is_null(j)) return(x)
   j <- vec_as_col_index(j, x)
   xo <- .subset(x, j)
+  xo <- set_repaired_names(xo, .name_repair = "unique")
   set_tibble_class(xo, nrow = fast_nrow(x))
 }
 
