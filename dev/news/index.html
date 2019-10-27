@@ -84,7 +84,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9007</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9008</span>
         </div>
       </div>
     </div>
@@ -174,6 +174,25 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-2-99-99-9008" class="section level1">
+<h1 class="page-header">
+<a href="#tibble-2-99-99-9008" class="anchor"></a>tibble 2.99.99.9008<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>x[[NA]]</code> now throws an error (<a href='https://github.com/tidyverse/tibble/issues/647'>#647</a>).</li>
+<li>Using <code>vec_as_position()</code> internally.</li>
+<li>Recycling of logical indexes now throws an error (<a href='https://github.com/tidyverse/tibble/issues/648'>#648</a>).</li>
+<li>
+<code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> repairs names with the <code>"unique"</code> strategy (<a href='https://github.com/tidyverse/tibble/issues/656'>#656</a>).</li>
+<li>
+<code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>).</li>
+<li>
+<code><a href="../reference/tribble.html">tribble()</a></code> now returns columns with <code>"unspecified"</code> type for 0-row tibbles.</li>
+<li>
+<code>x[i, j] &lt;- value</code> supports the creation of new columns and rows (<a href='https://github.com/tidyverse/tibble/issues/651'>#651</a>).</li>
+</ul>
+</div>
     <div id="tibble-2-99-99-9007" class="section level1">
 <h1 class="page-header">
 <a href="#tibble-2-99-99-9007" class="anchor"></a>tibble 2.99.99.9007<small> Unreleased </small>
@@ -912,6 +931,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tibble-2-99-99-9008">2.99.99.9008</a></li>
         <li><a href="#tibble-2-99-99-9007">2.99.99.9007</a></li>
         <li><a href="#tibble-2-99-99-9006">2.99.99.9006</a></li>
         <li><a href="#tibble-2-99-99-9005">2.99.99.9005</a></li>
