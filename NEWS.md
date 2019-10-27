@@ -1,3 +1,14 @@
+# tibble 2.99.99.9008
+
+- `x[[NA]]` now throws an error (#647).
+- Using `vec_as_position()` internally.
+- Recycling of logical indexes now throws an error (#648).
+- `[` repairs names with the `"unique"` strategy (#656).
+- `tribble()` is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (#204).
+- `tribble()` now returns columns with `"unspecified"` type for 0-row tibbles.
+- `x[i, j] <- value` supports the creation of new columns and rows (#651).
+
+
 # tibble 2.99.99.9007
 
 - `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)` (#581).
