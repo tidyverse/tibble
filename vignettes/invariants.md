@@ -317,10 +317,12 @@ exists.
 <td>
     tbl[[TRUE]]
 
-    #> Error in
-    #> error_double_bracket_logical():
-    #> could not find function
-    #> "error_double_bracket_logical"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `j` has the wrong type
+    #> `logical`.
+    #> [34mℹ[39m This index must be a
+    #> position or a name.
 
 </td>
 </tr>
@@ -336,8 +338,12 @@ exists.
 <td>
     tbl[[mean]]
 
-    #> Error in .subset2(x, j): invalid
-    #> subscript type 'closure'
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `j` has the wrong type
+    #> `closure`.
+    #> [34mℹ[39m This index must be a
+    #> position or a name.
 
 </td>
 </tr>
@@ -350,10 +356,18 @@ an error:
 <tbody>
 <tr style="vertical-align:top">
 <td>
+    df[[NA]]
+    #> NULL
+
 </td>
 <td>
     tbl[[NA]]
-    #> NULL
+
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `j` can't be `NA`.
+    #> [34mℹ[39m This index can't be
+    #> missing.
 
 </td>
 </tr>
@@ -361,17 +375,25 @@ an error:
 <td>
 </td>
 <td>
-    tbl[[NA_character_]] # FIXME
+    tbl[[NA_character_]]
     #> NULL
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+    df[[NA_integer_]]
+    #> NULL
+
 </td>
 <td>
-    tbl[[NA_integer_]] # FIXME
-    #> NULL
+    tbl[[NA_integer_]]
+
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `j` can't be `NA`.
+    #> [34mℹ[39m This index can't be
+    #> missing.
 
 </td>
 </tr>
@@ -387,9 +409,12 @@ an error:
 <td>
     tbl[[-1]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `j` (with value -1) has
+    #> the wrong sign.
+    #> [34mℹ[39m This index must be a
+    #> positive integer.
 
 </td>
 </tr>
@@ -420,9 +445,9 @@ an error:
 <td>
     tbl[[1.5]]
 
-    #> Error: Must subset with an index
-    #> vector.
-    #> [31m✖[39m Lossy cast from `i`
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m Lossy cast from `j`
     #> <double> to <integer>.
 
 </td>
@@ -436,9 +461,9 @@ an error:
 <td>
     tbl[[Inf]]
 
-    #> Error: Must subset with an index
-    #> vector.
-    #> [31m✖[39m Lossy cast from `i`
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m Lossy cast from `j`
     #> <double> to <integer>.
 
 </td>

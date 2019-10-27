@@ -292,17 +292,10 @@ tbl_subset2 <- function(x, j) {
   } else if (has_length(j, 2) && is.numeric(j)) {
     signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
     return(.subset2(x, j))
-  } else if (is.numeric(j)) {
-    # Always an error or a warning
-    j <- vec_as_index(j, length(x))
-  }
-
-  check_scalar(j)
-  if (is.logical(j) && !is.na(j)) {
-    # FIXME: #647, https://github.com/tidyverse/tibble/issues/647
-
-    # Special case: scalar TRUE or FALSE
-    error_double_bracket_logical()
+  } else if (is.character(j)) {
+    check_scalar(j)
+  } else {
+    j <- vec_as_position(j, length(x), names(x), arg = "j")
   }
 
   # Let .subset2() handle character indexes

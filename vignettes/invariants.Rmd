@@ -210,8 +210,8 @@ df[[mean]]
 
 ```{r double-bracket-j-oob-numeric, dftbl = TRUE}
 df[[NA]]
-df[[NA_character_]] # FIXME
-df[[NA_integer_]] # FIXME
+df[[NA_character_]]
+df[[NA_integer_]]
 df[[-1]]
 df[[4]]
 df[[1.5]]
