@@ -282,7 +282,7 @@ vec_as_col_index <- function(j, x) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  vec_as_index(j, length(x), names(x))
+  vec_as_index(j, length(x), names(x), arg = "j")
 }
 
 tbl_subset2 <- function(x, j) {
@@ -418,7 +418,7 @@ vec_as_new_col_index <- function(j, x, value) {
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
-    j <- vec_as_index(j, ncol(x))
+    j <- vec_as_index(j, ncol(x), arg = "j")
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       abort(error_new_columns_at_end_only())
