@@ -272,11 +272,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
 
-  expect_warning(
-    foo[c(TRUE, FALSE), ],
-    "Length of logical index must be 1 or 10, not 2",
-    fixed = TRUE
-  )
+  expect_error(foo[c(TRUE, FALSE), ], ".")
 })
 
 test_that("[.tbl_df is no-op if args missing", {

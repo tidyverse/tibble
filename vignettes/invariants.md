@@ -923,14 +923,11 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 <td>
     tbl[c(TRUE, FALSE), ]
 
-    #> Warning: Length of logical index must be
-    #> 1 or 4, not 2
-
-    #> # A tibble: 2 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     3 g     <int [3]>
+    #> Error: Logical indices must have
+    #> length 1 or be as long as the
+    #> indexed vector.
+    #> The vector has size 4 whereas the
+    #> index has size 2.
 
 </td>
 </tr>

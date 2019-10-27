@@ -216,21 +216,13 @@ vec_as_row_index <- function(i, x) {
       warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
       i[oob] <- NA_integer_
     }
+    i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
-    i <- vec_as_index(i, nr)
-  } else if (is.logical(i)) {
-    if (length(i) != 1L && length(i) != nr) {
-      warn_deprecated(paste0(
-        "Length of logical index must be 1",
-        if (nr != 1) paste0(" or ", nr),
-        ", not ", length(i)
-      ))
-      return(seq_len(nr)[i])
-    }
+    vec_as_index(i, nr)
+  } else {
+    vec_as_index(i, nr)
   }
-
-  vec_as_index(i, nr)
 }
 
 fix_oob <- function(i, n, warn = TRUE) {
