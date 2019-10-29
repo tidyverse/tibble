@@ -2,10 +2,14 @@
 % Please edit documentation in R/tibble.R
 \name{tibble}
 \alias{tibble}
+\alias{tibble_row}
 \title{Build a data frame}
 \usage{
 tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
   "universal", "minimal"))
+
+tibble_row(..., .rows = NULL, .name_repair = c("check_unique",
+  "unique", "universal", "minimal"))
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
@@ -55,6 +59,11 @@ are recycled.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
 See examples.
 }
+
+\code{tibble_row()} constructs a data frame that is guaranteed to occupy one row.
+This is achieved by wrapping every column in a list.
+Unnamed tibbles are never wrapped but checked for size one, this allows
+creating columns with values.
 }
 \examples{
 # Unnamed arguments are named with their expression:
@@ -141,6 +150,9 @@ tibble(x = 1, y = !!x)
 # You can splice-unquote a list of quosures and expressions:
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
+
+# Use tibble_row() to construct a one-row tibble:
+tibble_row(a = 1, b = 2:3, tibble(c = "x"))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use

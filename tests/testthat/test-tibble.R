@@ -721,3 +721,17 @@ test_that("subsetting one row retains columns", {
     tibble(y = diag(5)[1, , drop = FALSE])
   )
 })
+
+
+# tibble_row() ------------------------------------------------------------
+
+test_that("returns a single row (#416)", {
+  expect_identical(
+    tibble_row(a = 1, b = 2:3, tibble(c = "x"), d = iris),
+    tibble(a = list_of(1), b = list_of(2:3), c = "x", d = list_of(iris))
+  )
+  expect_tibble_error(
+    tibble_row(a = 1, b = 2:3, tibble(c = 4:7)),
+    error_tibble_row_inner_size_one(3, 4)
+  )
+})

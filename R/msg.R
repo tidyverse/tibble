@@ -279,6 +279,13 @@ error_frame_matrix_list <- function(pos) {
   ))
 }
 
+error_tibble_row_inner_size_one <- function(i, size) {
+  tibble_error(bullets(
+    "Inner data frames must have one row in `tibble_row()`.",
+    paste0("Column at position ", i, " is a data frame of ", size, " rows.")
+  ))
+}
+
 error_new_tibble_must_be_list <- function() {
   tibble_error("Must pass a list as `x` argument to `new_tibble()`.")
 }

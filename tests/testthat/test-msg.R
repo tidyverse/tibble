@@ -136,6 +136,8 @@ test_that("error messages", {
 
     error_frame_matrix_list(2:4),
 
+    error_tibble_row_inner_size_one(3, 7),
+
     error_new_tibble_must_be_list(),
 
     error_new_tibble_needs_nrow()

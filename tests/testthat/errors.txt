@@ -302,6 +302,12 @@ All values in `frame_matrix()` must be atomic:
 * Found list-valued elements at positions 2, 3, 4.
 
 
+## error_tibble_row_inner_size_one()
+
+Inner data frames must have one row in `tibble_row()`.
+* Column at position 3 is a data frame of 7 rows.
+
+
 ## error_new_tibble_must_be_list()
 
 Must pass a list as `x` argument to `new_tibble()`.

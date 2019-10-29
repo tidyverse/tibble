@@ -143,6 +143,30 @@ tibble <- function(...,
   tibble_quos(xs[!is_null], .rows, .name_repair)
 }
 
+#' tibble_row()
+#'
+#' @description
+#' `tibble_row()` constructs a data frame that is guaranteed to occupy one row.
+#' This is achieved by wrapping every column in a list.
+#' Unnamed tibbles are never wrapped but checked for size one, this allows
+#' creating columns with values.
+#'
+#' @rdname tibble
+#' @export
+#' @examples
+#'
+#' # Use tibble_row() to construct a one-row tibble:
+#' tibble_row(a = 1, b = 2:3, tibble(c = "x"))
+tibble_row <- function(...,
+                       .rows = NULL,
+                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+  xs <- quos(...)
+
+  is_null <- map_lgl(xs, quo_is_null)
+
+  tibble_quos(xs[!is_null], .rows, .name_repair, single_row = TRUE)
+}
+
 #' Test if the object is a tibble
 #'
 #' This function returns `TRUE` for tibbles or subclasses thereof,
@@ -171,7 +195,7 @@ is.tibble <- function(x) {
   is_tibble(x)
 }
 
-tibble_quos <- function(xs, .rows, .name_repair) {
+tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
@@ -186,6 +210,17 @@ tibble_quos <- function(xs, .rows, .name_repair) {
     res <- eval_tidy(xs[[j]], mask)
 
     if (!is_null(res)) {
+      # Single-row mode:
+      if (single_row) {
+        if (given_col_names[[j]] == "" && is.data.frame(res)) {
+          if (vec_size(res) != 1) {
+            abort(error_tibble_row_inner_size_one(j, vec_size(res)))
+          }
+        } else {
+          res <- list_of(res)
+        }
+      }
+
       # 657
       res <- check_valid_col(res, col_names[[j]], j)
 
