@@ -61,6 +61,8 @@ tricks. Column names are not modified.
 tibble() builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
+If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.
 
 " />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
@@ -204,6 +206,8 @@ tricks. Column names are not modified.</p></li>
 <li><p><code>tibble()</code> builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.</p></li>
+<li><p>If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.</p></li>
 </ul>
 
     </div>
@@ -353,24 +357,26 @@ on tidy dots semantics, i.e. exactly how quasiquotation works for the
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
 <span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
-<span class='co'># if the number of rows is consistent:</span>
+<span class='co'># if the number of rows is consistent. Unnamed tibbled are</span>
+<span class='co'># spliced, i.e. the inner columns are inserted into the</span>
+<span class='co'># tibble under construction.</span>
 <span class='fu'>tibble</span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
-    <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
+  <span class='fu'>tibble</span>(
+    <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
+    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
   ),
-  <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-    <span class='kw'>f</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-      <span class='kw'>g</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+    <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+      <span class='kw'>f</span> <span class='kw'>=</span> <span class='no'>b</span>
     )
   )
-)</div><div class='output co'>#&gt; # A tibble: 3 x 3
-#&gt;       a   b$c    $d e$f$g
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1     1     4     7 a    
-#&gt; 2     2     5     8 b    
-#&gt; 3     3     6     9 c    </div><div class='input'><span class='fu'>tibble</span>(
+)</div><div class='output co'>#&gt; # A tibble: 3 x 4
+#&gt;       a     b     c d$e$f
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4     7     4
+#&gt; 2     2     5     8     5
+#&gt; 3     3     6     9     6</div><div class='input'><span class='fu'>tibble</span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>,
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>4</span>),
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
