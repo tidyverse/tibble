@@ -52,6 +52,8 @@ tricks. Column names are not modified.
 \item \code{tibble()} builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
+\item If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.
 }
 }
 \examples{
@@ -101,16 +103,18 @@ tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
 tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 
 # Tibbles can contain columns that are tibbles or matrices
-# if the number of rows is consistent:
+# if the number of rows is consistent. Unnamed tibbled are
+# spliced, i.e. the inner columns are inserted into the
+# tibble under construction.
 tibble(
   a = 1:3,
-  b = tibble(
-    c = 4:6,
-    d = 7:9
+  tibble(
+    b = 4:6,
+    c = 7:9
   ),
-  e = tibble(
-    f = tibble(
-      g = letters[1:3]
+  d = tibble(
+    e = tibble(
+      f = b
     )
   )
 )
