@@ -385,6 +385,16 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$partial, NA)
 })
 
+# [[<- --------------------------------------------------------------------
+
+test_that("[[<-.tbl_df can remove columns (#666)", {
+  df <- tibble(x = 1:2, y = x)
+  df[["x"]] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+  df[["z"]] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+})
+
 # [<- ---------------------------------------------------------------------
 
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {

@@ -470,6 +470,12 @@ with_df(df[[1]] <- NULL)
 with_df2(df2[[2]] <- NULL)
 ```
 
+Removing a nonexistent column is a no-op.
+
+```{r double-bracket-assign-supports-null-unknown, dftbl = TRUE, include = eval_details, eval = eval_details}
+with_df(df[["q"]] <- NULL)
+```
+
 ### Definition of `x$name <- a`
 
 `x$name <- a` and `x$"name" <- a` are equivalent to `x[["name"]] <- a`.[^column-assign-symmetry]

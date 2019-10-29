@@ -1691,6 +1691,27 @@ needed.
 </tr>
 </tbody>
 </table>
+Removing a nonexistent column is a no-op.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[["q"]] <- NULL)
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     2 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
+
+</td>
+</tr>
+</tbody>
+</table>
 ### Definition of `x$name <- a`
 
 `x$name <- a` and `x$"name" <- a` are equivalent to
@@ -2901,12 +2922,12 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: No common type for `x`
+    #> Error: No common type for `value`
     #> <tbl_df<
     #> n : integer
     #> c : character
     #> li: list
-    #> >> and `y` <list>.
+    #> >> and `x` <list>.
 
 </td>
 </tr>
