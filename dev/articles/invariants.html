@@ -1006,6 +1006,7 @@
 </tbody></table>
 <!-- HW: should we permitted oob assignment with numeric j? It's a bit weird to create a column with unknonw column --><p><code>df[[j]] &lt;- a</code> replaces the complete column so can change the type.</p>
 <p><code>[[&lt;-</code> supports removing a column by assigning <code>NULL</code> to it.</p>
+<p>Removing a nonexistent column is a no-op.</p>
 </div>
 <div id="definition-of-xname---a" class="section level3">
 <h3 class="hasAnchor">
