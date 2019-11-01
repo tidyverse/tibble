@@ -62,7 +62,7 @@ library(vctrs)
 library(tibble)
 
 new_df <- function() {
-  df <- data.frame(n = 1:4)
+  df <- data.frame(n = c(1:3, NA))
   df$c <- letters[5:8]
   df$li <- list(9, 10:11, 12:14, "text")
   df
