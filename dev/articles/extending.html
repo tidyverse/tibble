@@ -538,7 +538,7 @@
 </ul>
 <p>For this it is helpful to create your own expectation function. Use the tidy evaluation framework to make sure that construction and printing happens at the right time:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">expect_known_latlon_display &lt;-<span class="st"> </span><span class="cf">function</span>(x, file_base) {</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/pillar/man/pillar_shaft.html">pillar_shaft</a></span>(x))</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">  quo &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">quo</a></span>(pillar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/pillar/man/pillar_shaft.html">pillar_shaft</a></span>(x))</a>
 <a class="sourceLine" id="cb47-3" data-line-number="3">  pillar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/pillar/man/expect_known_display.html">expect_known_display</a></span>(</a>
 <a class="sourceLine" id="cb47-4" data-line-number="4">    <span class="op">!!</span><span class="st"> </span>quo,</a>
 <a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">file =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(file_base, <span class="st">".txt"</span>)</a>

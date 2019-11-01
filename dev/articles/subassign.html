@@ -205,9 +205,9 @@
 </tr></tbody></table>
 <p>For subassignment, we need a fresh copy of the data for each test. The <code>with_*()</code> functions allow for a more concise notation (<code>with_tbl()</code> omitted here for brevity):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">with_df &lt;-<span class="st"> </span><span class="cf">function</span>(code, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  code &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">enexpr</a></span>(code)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  code &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr</a></span>(code)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">  full_code &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/quotation.html">quo</a></span>({</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  full_code &lt;-<span class="st"> </span>rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">quo</a></span>({</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">    df &lt;-<span class="st"> </span><span class="kw">new_df</span>()</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="op">!!</span>code</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">    df</a>
