@@ -68,6 +68,7 @@ Collate:
     'pipe.R'
     'repair-names.R'
     'rownames.R'
+    'str.R'
     'strrep.R'
     'subsetting.R'
     'tbl-df.R'
