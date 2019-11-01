@@ -686,6 +686,27 @@ first matching column.
 </tr>
 </tbody>
 </table>
+Unlike data frames, tibbles don’t support indexing by a logical matrix.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+    df[is.na(df)]
+    #> [[1]]
+    #> [1] NA
+
+</td>
+<td>
+    tbl[is.na(tbl)]
+
+    #> Error: `i` must have one dimension,
+    #> not 2.
+
+</td>
+</tr>
+</tbody>
+</table>
 ### Definition of `x[, j]`
 
 `x[, j]` is equal to `x[j]`. Tibbles do not perform column extraction if
@@ -1810,7 +1831,8 @@ Column subassignment: `x[j] <- a`
 ---------------------------------
 
 -   If `j` is missing, it’s replaced with `seq_along(x)`
--   If `j` is logical, it’s converted to numeric with `seq_along(x)[j]`.
+-   If `j` is logical vector, it’s converted to numeric with
+    `seq_along(x)[j]`.
 
 ### `a` is a list or data frame
 
@@ -2192,6 +2214,30 @@ that order of precedence).
     #> error_new_columns_at_end_only():
     #> could not find function
     #> "error_new_columns_at_end_only"
+
+</td>
+</tr>
+</tbody>
+</table>
+Unlike data frames, tibbles don’t support indexing by a logical matrix.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[is.na(df)] <- 4)
+    #>   n c         li
+    #> 1 1 e          9
+    #> 2 2 f     10, 11
+    #> 3 3 g 12, 13, 14
+    #> 4 4 h       text
+
+</td>
+<td>
+    with_tbl(tbl[is.na(tbl)] <- 4)
+
+    #> Error: `i` must have one dimension,
+    #> not 2.
 
 </td>
 </tr>

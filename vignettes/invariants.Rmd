@@ -277,6 +277,12 @@ For tibbles with repeated column names, subsetting by name uses the first matchi
 df[integer()]
 ```
 
+Unlike data frames, tibbles don't support indexing by a logical matrix.
+
+```{r bracket-j-logical-matrix, dftbl = TRUE}
+df[is.na(df)]
+```
+
 ### Definition of `x[, j]`
 
 `x[, j]` is equal to `x[j]`.
@@ -501,7 +507,7 @@ with_df(df[["l"]] <- 0)
 ## Column subassignment: `x[j] <- a`
 
 * If `j` is missing, it's replaced with `seq_along(x)`
-* If `j` is logical, it's converted to numeric with `seq_along(x)[j]`.
+* If `j` is logical vector, it's converted to numeric with `seq_along(x)[j]`.
 
 ### `a` is a list or data frame
 
@@ -560,7 +566,13 @@ with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```
 
-### `a` is another type of vector 
+Unlike data frames, tibbles don't support indexing by a logical matrix.
+
+```{r bracket-j-assign-logical-matrix, dftbl = TRUE}
+with_df(df[is.na(df)] <- 4)
+```
+
+### `a` is another type of vector
 
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
 This is primarily provided for backward compatbility.
