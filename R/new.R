@@ -92,7 +92,7 @@ validate_tibble <- function(x) {
   check_minimal_names(x)
 
   #' and that all columns are vectors, data frames or matrices.
-  check_valid_cols(x)
+  check_valid_cols(unclass(x))
 
   #' It also makes sure that all columns have the same length,
   #' and that [NROW()] is consistent with the data.

@@ -122,8 +122,9 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 }
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
+  x <- unclass(x)
   x <- set_repaired_names(x, .name_repair)
-  check_valid_cols(x)
+  x <- check_valid_cols(x)
   recycle_columns(x, .rows, lengths)
 }
 
