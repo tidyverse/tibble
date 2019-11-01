@@ -75,16 +75,16 @@ test_that("SE version", {
   expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
-test_that("names are stripped from vectors", {
+test_that("names are maintained vectors (#630)", {
   foo <- tibble(x = c(y = 1, z = 2))
   expect_equal(names(foo), "x")
-  expect_null(names(foo$x))
+  expect_equal(names(foo$x), c("y", "z"))
 })
 
-test_that("names in list columns are stripped", {
+test_that("names in list columns are maintained (#630)", {
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(names(foo), "x")
-  expect_null(names(foo$x))
+  expect_equal(names(foo$x), c("y", "z"))
 })
 
 test_that("attributes are preserved", {
