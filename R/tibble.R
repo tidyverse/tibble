@@ -186,7 +186,8 @@ tibble_quos <- function(xs, .rows, .name_repair) {
     res <- eval_tidy(xs[[i]], mask)
 
     if (!is_null(res)) {
-      check_valid_col(res, col_names[[i]], i)
+      # 657
+      res <- check_valid_col(res, col_names[[i]], i)
 
       lengths[[i]] <- current_size <- vec_size(res)
       if (i > 1) {

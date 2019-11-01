@@ -151,7 +151,16 @@ check_valid_cols <- function(x) {
     abort(error_column_must_be_vector(names_x[is_xd], classes))
   }
 
+  # 657
+  x[] <- map(x, make_valid_col)
   invisible(x)
+}
+
+make_valid_col <- function(x) {
+  if (is.expression(x)) {
+    x <- as.list(x)
+  }
+  x
 }
 
 check_valid_col <- function(x, name, pos) {
@@ -161,11 +170,12 @@ check_valid_col <- function(x, name, pos) {
     abort(error_column_must_be_vector(name, classes))
   }
 
-  invisible(x)
+  invisible(make_valid_col(x))
 }
 
 is_valid_col <- function(x) {
-  vec_is(x)
+  # 657
+  vec_is(x) || is.expression(x)
 }
 
 recycle_columns <- function(x, .rows, lengths) {

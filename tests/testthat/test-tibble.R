@@ -87,6 +87,11 @@ test_that("names in list columns are maintained (#630)", {
   expect_equal(names(foo$x), c("y", "z"))
 })
 
+test_that("can create a tibble with an expression column (#657)", {
+  foo <- tibble(x = expression(1 + 2))
+  expect_equal(as.list(foo$x), as.list(expression(1 + 2)))
+})
+
 test_that("attributes are preserved", {
   df <- structure(
     data.frame(x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2)),
