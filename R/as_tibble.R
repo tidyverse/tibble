@@ -96,7 +96,8 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
-  result <- as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
+
+  result <- lst_to_tibble(unclass(x), .rows, .name_repair, col_lengths(x))
 
   if (is.null(rownames)) {
     result
@@ -115,6 +116,8 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
+  signal_soft_deprecated("`as_tibble.list()` is deprecated, use `tibble()` or `new_tibble()` instead.")
 
   .name_repair <- compat_name_repair(.name_repair, validate)
 
@@ -269,7 +272,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
 #' @export
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
-  as_tibble(list(), ...)
+  new_tibble(list(), nrow = 0)
 }
 
 #' @export

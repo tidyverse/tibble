@@ -108,27 +108,27 @@ test_that("tibble aliases", {
 
 test_that("columns are recycled to common length", {
   expect_identical(
-    as_tibble(list(x = 1, y = 1:3)),
+    tibble(!!! list(x = 1, y = 1:3)),
     tibble(x = rep(1, 3), y = 1:3)
   )
   expect_identical(
-    as_tibble(list(x = 1:3, y = 1)),
+    tibble(!!! list(x = 1:3, y = 1)),
     tibble(x = 1:3, y = rep(1, 3))
   )
   expect_identical(
-    as_tibble(list(x = character(), y = 1)),
+    tibble(!!! list(x = character(), y = 1)),
     tibble(x = character(), y = numeric())
   )
 })
 
 test_that("columns must be same length", {
   expect_error(
-    as_tibble(list(x = 1:2, y = 1:3)),
+    tibble(!!! list(x = 1:2, y = 1:3)),
     error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA),
     fixed = TRUE
   )
   expect_error(
-    as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
+    tibble(!!! list(x = 1:2, y = 1:3, z = 1:4)),
     error_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
@@ -138,7 +138,7 @@ test_that("columns must be same length", {
     fixed = TRUE
   )
   expect_error(
-    as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
+    tibble(!!! list(x = 1:4, y = 1:2, z = 1:2)),
     error_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
@@ -148,7 +148,7 @@ test_that("columns must be same length", {
     fixed = TRUE
   )
   expect_error(
-    as_tibble(list(x = 1, y = 1:4, z = 1:2)),
+    tibble(!!! list(x = 1, y = 1:4, z = 1:2)),
     error_inconsistent_cols(
       NULL,
       c("y", "z"),
@@ -158,7 +158,7 @@ test_that("columns must be same length", {
     fixed = TRUE
   )
   expect_error(
-    as_tibble(list(x = 1:2, y = 1:4, z = 1)),
+    tibble(!!! list(x = 1:2, y = 1:4, z = 1)),
     error_inconsistent_cols(
       NULL,
       c("x", "y"),
@@ -170,7 +170,7 @@ test_that("columns must be same length", {
 })
 
 test_that("empty list() makes 0 x 0 tbl_df", {
-  zero <- as_tibble(list())
+  zero <- tibble(!!! list())
   expect_is(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
 })
@@ -257,6 +257,8 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
+  scoped_lifecycle_silence()
+
   l1 <- list(1:10)
   expect_error_cnd(
     as_tibble(l1),
@@ -297,6 +299,8 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
 
 
 test_that("as_tibble() makes names `minimal`, even if not fixing names", {
+  scoped_lifecycle_silence()
+
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "minimal")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
@@ -304,6 +308,8 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
+  scoped_lifecycle_silence()
+
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
@@ -311,6 +317,8 @@ test_that("as_tibble() implements unique names", {
 })
 
 test_that("as_tibble() implements universal names", {
+  scoped_lifecycle_silence()
+
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
@@ -319,6 +327,8 @@ test_that("as_tibble() implements universal names", {
 
 
 test_that("as_tibble() implements custom name repair", {
+  scoped_lifecycle_silence()
+
   invalid_df <- as_tibble(
     list(3, 4, 5),
     .name_repair = function(x) make.names(x, unique = TRUE)
@@ -626,7 +636,8 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   expect_warning(
     df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal"),
-    NA
+    "new_tibble()",
+    fixed = TRUE
   )
   expect_identical(names(df), c("a", "", "a"))
 
@@ -651,6 +662,8 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
+  scoped_lifecycle_silence()
+
   expect_error_cnd(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
@@ -714,11 +727,11 @@ test_that("auto-splicing anonymous tibbles (#581)", {
 
 test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
-    as_tibble(list(x = iris)),
+    tibble(!!! list(x = iris)),
     new_tibble(list(x = iris), nrow = nrow(iris))
   )
   expect_identical(
-    as_tibble(list(x = diag(5))),
+    tibble(!!! list(x = diag(5))),
     new_tibble(list(x = diag(5)), nrow = 5)
   )
 })
