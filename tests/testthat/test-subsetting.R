@@ -57,31 +57,31 @@ test_that("[ with 0 cols returns correct number of rows", {
 
 test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error_relax(
+  expect_tibble_error(
     foo["z"],
     error_unknown_names("z")
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[c("x", "y", "z")],
     error_unknown_names("z")
   )
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[, "z"],
     error_unknown_names("z")
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[, c("x", "y", "z")],
     error_unknown_names("z")
   )
 
   skip("r-lib/vctrs#557")
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[as.matrix("x")],
     error_dim_column_index(as.matrix("x"))
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[array("x", dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
@@ -95,18 +95,18 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     foo[0.5],
     class = "vctrs_error_index"
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[1:5],
-    error_large_column_index(3, 4:5, 4:5)
+    error_large_column_index(3, 4:5)
   )
 
   # Message from base R
   expect_error(foo[-1:1])
   expect_error(foo[c(-1, 1)])
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[-4],
-    error_small_column_index(3, 1, -4)
+    error_small_column_index(3, -4)
   )
   expect_tibble_error(
     foo[c(1:3, NA)],

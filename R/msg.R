@@ -65,8 +65,26 @@ error_dim_column_index <- function(j) {
   tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
 }
 
-error_unknown_names <- function(names) {
-  tibble_error(pluralise_commas("Can't find column(s) ", tick(names), " in `.data`."), names = names)
+error_unknown_names <- function(j, parent = NULL) {
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+}
+
+error_large_column_index <- function(ncol, j, parent = NULL) {
+  tibble_error(
+    pluralise_commas(
+      "Cannot subset column(s) ", j, " in tibble with ",
+      ncol, pluralise_n(" column(s)", ncol), "."),
+    ncol = ncol, j = j, parent = parent
+  )
+}
+
+error_small_column_index <- function(ncol, j, parent = NULL) {
+  tibble_error(
+    pluralise_commas(
+      "Cannot exclude column(s) ", abs(j), " in tibble with ",
+      ncol, pluralise_n(" column(s)", ncol), "."),
+    ncol = ncol, j = j, parent = parent
+  )
 }
 
 error_existing_names <- function(names) {
@@ -244,6 +262,28 @@ subclass_name_repair_errors <- function(expr, name) {
     },
     vctrs_error_names_must_be_unique = function(cnd) {
       cnd <- error_column_names_must_be_unique(name[cnd$locations], parent = cnd)
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_col_index_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_index_oob_names = function(cnd) {
+      cnd <- error_unknown_names(setdiff(cnd$i, cnd$names), parent = cnd)
+      cnd_signal(cnd)
+    },
+
+    vctrs_error_index_oob_positions = function(cnd) {
+      i <- cnd$i
+      size <- cnd$size
+      if (any(i < 0)) {
+        cnd <- error_small_column_index(cnd$size, i[i < -size], parent = cnd)
+      } else {
+        cnd <- error_large_column_index(cnd$size, i[i > size], parent = cnd)
+      }
       cnd_signal(cnd)
     }
   )

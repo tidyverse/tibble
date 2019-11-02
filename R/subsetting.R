@@ -282,7 +282,9 @@ vec_as_col_index <- function(j, x) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  vec_as_index(j, length(x), names(x), arg = "j")
+  subclass_col_index_errors(
+    vec_as_index(j, length(x), names(x), arg = "j")
+  )
 }
 
 tbl_subset2 <- function(x, j) {
