@@ -58,11 +58,15 @@ error_enframe_has_dim <- function(x) {
 }
 
 error_na_column_index <- function(j) {
-  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), locations = j)
+  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
 }
 
 error_dim_column_index <- function(j) {
   tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
+}
+
+error_unsupported_column_index <- function(parent = NULL) {
+  tibble_error("Must subset columns with an index vector.", cnd_bullets = parent$cnd_bullets, parent = parent)
 }
 
 error_unknown_names <- function(j, parent = NULL) {
@@ -284,6 +288,13 @@ subclass_col_index_errors <- function(expr) {
       } else {
         cnd <- error_large_column_index(cnd$size, i[i > size], parent = cnd)
       }
+      cnd_signal(cnd)
+    },
+
+    vctrs_error_index_bad_type = function(cnd) {
+      cnd_bullets <- cnd_bullets(cnd)
+      cnd$cnd_bullets <- function(...) cnd_bullets
+      cnd <- error_unsupported_column_index(cnd)
       cnd_signal(cnd)
     }
   )
