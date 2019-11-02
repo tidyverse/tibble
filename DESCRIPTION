@@ -65,6 +65,7 @@ Collate:
     'msg-format.R'
     'msg.R'
     'new.R'
+    'ops.R'
     'pipe.R'
     'repair-names.R'
     'rownames.R'
