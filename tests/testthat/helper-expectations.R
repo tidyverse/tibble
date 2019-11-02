@@ -1,3 +1,7 @@
+expect_tibble_error <- function(object, cnd, fixed = NULL) {
+  expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
+}
+
 expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) {
   cnd <- expect_error(object, regexp = message, class = class, fixed = .fixed)
   expect_true(inherits_all(cnd, class))
@@ -11,4 +15,26 @@ expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) 
 
 expect_error_relax <- function(object, ...) {
   expect_error(object)
+}
+
+expect_known_tibble_error_output <- function(...) {
+  quos <- enquos(...)
+
+  vals <- map(quos, eval_tidy)
+
+  functions <- map_chr(pluck(map(map(quos, quo_get_expr), as.list), 1), as_name)
+
+  skip_on_non_utf8_locale()
+  skip_on_cran()
+
+  headers <- paste0("\n## ", functions, "()\n\n")
+  header_same <- c(FALSE, headers[-1] == headers[-length(headers)])
+  headers[header_same] <- ""
+
+  output <- paste0(
+    "# Errors\n",
+    paste0(headers, map_chr(vals, cnd_message), collapse = "\n\n")
+  )
+
+  expect_known_output(cat(output), "errors.txt")
 }

@@ -87,54 +87,49 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # no colname
-  expect_error(
+  expect_tibble_error(
     tribble(1, 2, 3),
-    error_tribble_needs_columns(),
-    fixed = TRUE
+    error_tribble_needs_columns()
   )
 
   # invalid colname syntax
-  expect_error(
+  expect_tibble_error(
     tribble(a ~ b),
-    error_tribble_lhs_column_syntax(quote(a)),
-    fixed = TRUE
+    error_tribble_lhs_column_syntax(quote(a))
   )
 
   # invalid colname syntax
-  expect_error(
+  expect_tibble_error(
     tribble(~a + b),
-    error_tribble_rhs_column_syntax(quote(a + b)),
-    fixed = TRUE
+    error_tribble_rhs_column_syntax(quote(a + b))
   )
 
   # tribble() must be passed colnames
-  expect_error(
+  expect_tibble_error(
     tribble(
       "a", "b",
       1, 2
     ),
-    fixed = TRUE
+    error_tribble_needs_columns()
   )
 
   # tribble() must produce rectangular structure (no filling)
-  expect_error(
+  expect_tibble_error(
     tribble(
       ~a, ~b, ~c,
       1, 2,
       3, 4, 5
     ),
-    error_tribble_non_rectangular(3, 5),
-    fixed = TRUE
+    error_tribble_non_rectangular(3, 5)
   )
 
-  expect_error(
+  expect_tibble_error(
     tribble(
       ~a, ~b, ~c, ~d,
       1, 2, 3, 4, 5,
       6, 7, 8, 9,
     ),
-    error_tribble_non_rectangular(4, 9),
-    fixed = TRUE
+    error_tribble_non_rectangular(4, 9)
   )
 })
 
@@ -190,13 +185,12 @@ test_that("frame_matrix constructs empty matrix as expected", {
 })
 
 test_that("frame_matrix cannot have list columns", {
-  expect_error(
+  expect_tibble_error(
     frame_matrix(
       ~x,   ~y,
       "a", 1:3,
       "b", 4:6
     ),
-    error_frame_matrix_list(c(2, 4)),
-    fixed = TRUE
+    error_frame_matrix_list(c(2, 4))
   )
 })

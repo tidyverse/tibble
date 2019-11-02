@@ -56,18 +56,16 @@ test_that("can enframe without names", {
 })
 
 test_that("can't use value = NULL", {
-  expect_error(
+  expect_tibble_error(
     enframe(letters, value = NULL),
-    error_enframe_value_null(),
-    fixed = TRUE
+    error_enframe_value_null()
   )
 })
 
 test_that("can't pass objects with dimensions", {
-  expect_error(
+  expect_tibble_error(
     enframe(iris),
-    error_enframe_has_dim(iris),
-    fixed = TRUE
+    error_enframe_has_dim(iris)
   )
 })
 

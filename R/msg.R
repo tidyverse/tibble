@@ -12,10 +12,6 @@ has_tibble_arg <- function(arg_name) {
   arg_name %in% my_vars
 }
 
-data_has_n_cols <- function(n) {
-  paste0("`.data` has ", n, " columns")
-}
-
 invalid_df <- function(problem, vars, ...) {
   if (is.character(vars)) {
     vars <- tick(vars)
@@ -32,70 +28,91 @@ use_repair <- function(repair) {
   if (repair) "\nUse .name_repair to specify repair."
 }
 
+# https://github.com/r-lib/rlang/issues/861
+# Can't wrap properly because otherwise tibble::abort() appears in the traceback
+abort <- cnd_signal
+old_signal_soft_deprecated <- signal_soft_deprecated
+signal_soft_deprecated <- function(message, ...) {
+  if (is_condition(message)) old_signal_soft_deprecated(cnd_message(message), ...)
+  else old_signal_soft_deprecated(message, ...)
+}
+
+tibble_error_class <- function(class) {
+  c(paste0("tibble_error_", class), "tibble_error")
+}
+
+# Errors get a class name derived from the name of the calling function
+tibble_error <- function(x, parent = NULL) {
+  call <- sys.call(-1)
+  fn_name <- as_name(call[[1]])
+  class <- tibble_error_class(gsub("^error_", "", fn_name))
+  error_cnd(.subclass = class, message = x, parent = parent)
+}
+
 error_enframe_value_null <- function() {
-  "The `value` argument to `enframe()` cannot be NULL."
+  tibble_error("The `value` argument to `enframe()` cannot be NULL.")
 }
 
 error_enframe_has_dim <- function(x) {
-  paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), ".")
+  tibble_error(paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), "."))
 }
 
 error_na_column_index <- function(j) {
-  pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, ".")
+  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."))
 }
 
 error_dim_column_index <- function(j) {
-  paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], ".")
+  tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
 }
 
 error_unknown_names <- function(names) {
-  pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(names), " in `.data`."))
 }
 
 error_existing_names <- function(names) {
-  pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`.")
+  tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."))
 }
 
 error_add_rows_to_grouped_df <- function() {
-  "Can't add rows to grouped data frames"
+  tibble_error("Can't add rows to grouped data frames")
 }
 
 error_inconsistent_new_rows <- function(names) {
-  bullets(
+  tibble_error(bullets(
     "New rows in `add_row()` must use columns that already exist:",
-    error_unknown_names(names)
-  )
+    cnd_message(error_unknown_names(names))
+  ))
 }
 
 error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
-  paste0("The `names` must not be `NULL`.", use_repair(repair))
+  tibble_error(paste0("The `names` must not be `NULL`.", use_repair(repair)))
 }
 
 error_names_must_have_length <- function(length, n) {
-  paste0("The `names` must have length ", n, ", not ", length, ".")
+  tibble_error(paste0("The `names` must have length ", n, ", not ", length, "."))
 }
 
-error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
-  invalid_df("must be named", names, use_repair(repair))
+error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must be named", names, use_repair(repair)), parent = parent)
 }
 
-error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair")) {
-  invalid_df("must not have names of the form ... or ..j", names, use_repair(repair))
+error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), parent = parent)
 }
 
-error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair")) {
-  pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair))
+error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), parent = parent)
 }
 
 error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(".name_repair")) {
-  pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair))
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)))
 }
 
 error_column_must_be_vector <- function(names, classes) {
-  bullets(
+  tibble_error(bullets(
     "All columns in a tibble must be 1d or 2d objects:",
     paste0("Column ", tick(names), " is ", classes)
-  )
+  ))
 }
 
 error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
@@ -106,15 +123,15 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
     vars_split[[as.character(.rows)]] <- NULL
   }
 
-  bullets(
+  tibble_error(bullets(
     "Tibble columns must have consistent lengths, only values of length one are recycled:",
     if (!is.null(.rows)) paste0("Length ", .rows, ": ", rows_source),
     map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
-  )
+  ))
 }
 
 error_inconsistent_new_cols <- function(n, df) {
-  bullets(
+  tibble_error(bullets(
     "New columns in `add_column()` must be consistent with `.data`:",
     pluralise_count("`.data` has ", n, " row(s)"),
     paste0(
@@ -122,74 +139,74 @@ error_inconsistent_new_cols <- function(n, df) {
       nrow(df),
       " rows"
     )
-  )
+  ))
 }
 
 error_duplicate_new_cols <- function(names) {
-  bullets(
+  tibble_error(bullets(
     "Can't add duplicate columns with `add_column()`:",
-    error_existing_names(names)
-  )
+    cnd_message(error_existing_names(names))
+  ))
 }
 
 error_both_before_after <- function() {
-  "Can't specify both `.before` and `.after`."
+  tibble_error("Can't specify both `.before` and `.after`.")
 }
 
 error_already_has_rownames <- function() {
-  "`df` must be a data frame without row names in `column_to_rownames()`."
+  tibble_error("`df` must be a data frame without row names in `column_to_rownames()`.")
 }
 
 error_as_tibble_needs_rownames <- function() {
-  "Object passed to `as_tibble()` must have row names if the `rownames` argument is set."
+  tibble_error("Object passed to `as_tibble()` must have row names if the `rownames` argument is set.")
 }
 
 error_glimpse_infinite_width <- function() {
-  "`glimpse()` requires a finite value for the `width` argument."
+  tibble_error("`glimpse()` requires a finite value for the `width` argument.")
 }
 
 error_tribble_needs_columns <- function() {
-  "`tribble()` needs to specify at least one column using the `~name` syntax."
+  tibble_error("`tribble()` needs to specify at least one column using the `~name` syntax.")
 }
 
 error_tribble_lhs_column_syntax <- function(lhs) {
-  bullets(
+  tibble_error(bullets(
     "All column specifications in `tribble()` must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
-  )
+  ))
 }
 
 error_tribble_rhs_column_syntax <- function(rhs) {
-  bullets(
+  tibble_error(bullets(
     'All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
-  )
+  ))
 }
 
 error_tribble_non_rectangular <- function(cols, cells) {
-  bullets(
+  tibble_error(bullets(
     "`tribble()` must be used with rectangular data:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
     paste0(cells, " is not an integer multiple of ", cols, ".")
-  )
+  ))
 }
 
 error_frame_matrix_list <- function(pos) {
-  bullets(
+  tibble_error(bullets(
     "All values in `frame_matrix()` must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
-  )
+  ))
 }
 
 error_new_tibble_must_be_list <- function() {
-  "Must pass a list as `x` argument to `new_tibble()`."
+  tibble_error("Must pass a list as `x` argument to `new_tibble()`.")
 }
 
 error_new_tibble_needs_nrow <- function() {
-  "Must pass a scalar integer as `nrow` argument to `new_tibble()`."
+  tibble_error("Must pass a scalar integer as `nrow` argument to `new_tibble()`.")
 }
 
 error_new_tibble_needs_class <- function() {
-  "Must pass a `class` argument instead of `subclass` to `new_tibble()`."
+  tibble_error("Must pass a `class` argument instead of `subclass` to `new_tibble()`.")
 }
