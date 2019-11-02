@@ -1,0 +1,94 @@
+The `value` argument to `enframe()` cannot be NULL.
+`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+Can't use NA as column index with `[` at positions 1, 2, 3.
+Can't find column `a` in `.data`.
+Can't find columns `b`, `c` in `.data`.
+Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
+Column `a` already exists in `.data`.
+Columns `b`, `c` already exist in `.data`.
+Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
+Can't add rows to grouped data frames
+New rows in `add_row()` must use columns that already exist:
+* Can't find column `a` in `.data`.
+New rows in `add_row()` must use columns that already exist:
+* Can't find columns `b`, `c` in `.data`.
+New rows in `add_row()` must use columns that already exist:
+* Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
+The `names` must not be `NULL`.
+Use .name_repair to specify repair.
+The `names` must not be `NULL`.
+The `names` must have length 3, not 5.
+Column 1 must be named.
+Use .name_repair to specify repair.
+Columns 2, 3 must be named.
+Use .name_repair to specify repair.
+Columns 1, 2, 3, 4, 5, … (and 21 more) must be named.
+Use .name_repair to specify repair.
+Columns 4, 5, 6 must be named.
+Column `a` must not have names of the form ... or ..j.
+Columns `b`, `c` must not have names of the form ... or ..j.
+Use .name_repair to specify repair.
+Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not have names of the form ... or ..j.
+Use .name_repair to specify repair.
+Column name `a` must not be duplicated.
+Column names `b`, `c` must not be duplicated.
+Use .name_repair to specify repair.
+Column names `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not be duplicated.
+Use .name_repair to specify repair.
+Column name `a` must be syntactic.
+Column names `b`, `c` must be syntactic.
+Use .name_repair to specify repair.
+Column names `A`, `B`, `C`, `D`, `E`, … (and 21 more) must be syntactic.
+Use .name_repair to specify repair.
+All columns in a tibble must be 1d or 2d objects:
+* Column `a` is environment
+All columns in a tibble must be 1d or 2d objects:
+* Column `b` is name
+* Column `c` is NULL
+All columns in a tibble must be 1d or 2d objects:
+* Column `A` is a
+* Column `B` is b
+* Column `C` is c
+* Column `D` is d
+* Column `E` is e
+* … and 21 more problems
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 10: Requested with `uvw` argument
+* Length 3: Column `c`
+* Length 4: Columns `a`, `b`
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 10: Requested with `xyz` argument
+* Length 2: Columns `a`, `b`
+* Length 3: Column `c`
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 2: Columns `a`, `b`
+* Length 3: Column `c`
+New columns in `add_column()` must be consistent with `.data`:
+* `.data` has 10 rows
+* New column contributes 2 rows
+New columns in `add_column()` must be consistent with `.data`:
+* `.data` has 1 row
+* New columns contribute 3 rows
+Can't add duplicate columns with `add_column()`:
+* Column `a` already exists in `.data`.
+Can't add duplicate columns with `add_column()`:
+* Columns `b`, `c` already exist in `.data`.
+Can't add duplicate columns with `add_column()`:
+* Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
+Can't specify both `.before` and `.after`.
+`df` must be a data frame without row names in `column_to_rownames()`.
+Object passed to `as_tibble()` must have row names if the `rownames` argument is set.
+`glimpse()` requires a finite value for the `width` argument.
+`tribble()` needs to specify at least one column using the `~name` syntax.
+All column specifications in `tribble()` must use the `~name` syntax.
+* Found `lhs` on the left-hand side of `~`.
+All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.
+* Found `a + b` on the right-hand side of `~`.
+`tribble()` must be used with rectangular data:
+* Found 5 columns.
+* Found 17 cells.
+* 17 is not an integer multiple of 5.
+All values in `frame_matrix()` must be atomic:
+* Found list-valued elements at positions 2, 3, 4.
+Must pass a list as `x` argument to `new_tibble()`.
+Must pass a scalar integer as `nrow` argument to `new_tibble()`.

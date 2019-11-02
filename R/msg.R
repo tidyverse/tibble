@@ -12,10 +12,6 @@ has_tibble_arg <- function(arg_name) {
   arg_name %in% my_vars
 }
 
-data_has_n_cols <- function(n) {
-  paste0("`.data` has ", n, " columns")
-}
-
 invalid_df <- function(problem, vars, ...) {
   if (is.character(vars)) {
     vars <- tick(vars)

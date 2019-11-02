@@ -12,3 +12,12 @@ expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) 
 expect_error_relax <- function(object, ...) {
   expect_error(object)
 }
+
+expect_known_tibble_error_output <- function(...) {
+  quos <- enquos(...)
+
+  vals <- map(quos, eval_tidy)
+
+  skip_on_non_utf8_locale()
+  expect_known_output(cat_line(vals), "errors.txt")
+}
