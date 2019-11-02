@@ -1494,9 +1494,11 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 3:1)
 
-    #> Error: Vector of length 3 cannot be
-    #> recycled to length 4. Only vectors
-    #> of length one can be recycled.
+    #> Error: Tibble columns must have
+    #> consistent lengths, only values of
+    #> length one are recycled:
+    #> * Length 4: Existing data
+    #> * Length 3: Column ``
 
 </td>
 </tr>
@@ -1513,9 +1515,11 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 2:1)
 
-    #> Error: Vector of length 2 cannot be
-    #> recycled to length 4. Only vectors
-    #> of length one can be recycled.
+    #> Error: Tibble columns must have
+    #> consistent lengths, only values of
+    #> length one are recycled:
+    #> * Length 4: Existing data
+    #> * Length 2: Column ``
 
 </td>
 </tr>
