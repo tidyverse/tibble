@@ -40,6 +40,8 @@ test_that("error messages", {
 
     error_assign_columns_non_na_only(),
 
+    error_assign_columns_non_missing_only(),
+
     error_new_columns_at_end_only(5, 7:8),
     error_new_columns_at_end_only(5, 7),
     error_new_columns_at_end_only(1, 7:8),

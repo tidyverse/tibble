@@ -70,6 +70,11 @@ Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
 Can't use NA as column index in a tibble for assignment.
 
 
+## error_assign_columns_non_missing_only()
+
+Column index is required for tibbles in `[[`.
+
+
 ## error_new_columns_at_end_only()
 
 Can't assign columns 7, 8 in a tibble with 5 columns.
@@ -83,7 +88,7 @@ Can't assign column 7 in a tibble with 1 column.
 
 ## error_duplicate_column_subscript_for_assignment()
 
-Column index 1 are used more than once for assignment.
+Column index 1 is used more than once for assignment.
 
 Column indexes 1, 2 are used more than once for assignment.
 
@@ -106,7 +111,7 @@ Can't assign row 7 in a tibble with 1 row.
 
 ## error_duplicate_row_subscript_for_assignment()
 
-Row index 1 are used more than once for assignment.
+Row index 1 is used more than once for assignment.
 
 Row indexes 1, 2 are used more than once for assignment.
 

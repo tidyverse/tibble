@@ -103,6 +103,10 @@ error_assign_columns_non_na_only <- function() {
   tibble_error("Can't use NA as column index in a tibble for assignment.")
 }
 
+error_assign_columns_non_missing_only <- function() {
+  tibble_error("Column index is required for tibbles in `[[`.")
+}
+
 error_new_columns_at_end_only <- function(ncol, j) {
   j <- j[j > ncol + 1]
   tibble_error(

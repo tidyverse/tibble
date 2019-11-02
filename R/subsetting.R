@@ -113,7 +113,7 @@ NULL
   if (n_real_args <= 2L) {
     tbl_subset2(x, j = i)
   } else if (missing(j)) {
-    error_missing_column_index()
+    error_assign_columns_non_missing_only()
   } else {
     i <- vec_as_position(i, fast_nrow(x))
 
@@ -137,7 +137,7 @@ NULL
   }
 
   if (is_null(j)) {
-    error_missing_column_index()
+    error_assign_columns_non_missing_only()
   }
 
   value <- list(value)
