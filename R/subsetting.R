@@ -452,7 +452,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, names(j)[[jj]])
+    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
   }
 
   # Remove
@@ -467,13 +467,17 @@ coalesce2 <- function(x, y) {
   if (is.na(x)) y else x
 }
 
+coalesce2empty <- function(x, y) {
+  if (x == "") y else x
+}
+
 tbl_expand_to_nrow <- function(x, i) {
   nrow <- fast_nrow(x)
 
   new_nrow <- max(i, nrow)
 
   if (is.na(new_nrow)) {
-    error_assign_rows_non_na_only()
+    abort(error_assign_rows_non_na_only())
   }
 
   if (new_nrow != nrow) {

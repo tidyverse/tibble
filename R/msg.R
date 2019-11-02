@@ -113,7 +113,7 @@ error_new_columns_at_end_only <- function(ncol, j) {
 
 error_duplicate_column_subscript_for_assignment <- function(j) {
   j <- unique(j[duplicated(j)])
-  tibble_error(pluralise_commas("Column index(es) ", j, " are used more than once for assignment."), j = j)
+  tibble_error(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
 }
 
 error_assign_rows_non_na_only <- function() {
@@ -130,7 +130,7 @@ error_new_rows_at_end_only <- function(nrow, i) {
 
 error_duplicate_row_subscript_for_assignment <- function(i) {
   i <- unique(i[duplicated(i)])
-  tibble_error(pluralise_commas("Row index(es) ", i, " are used more than once for assignment."), i = i)
+  tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
 error_add_rows_to_grouped_df <- function() {

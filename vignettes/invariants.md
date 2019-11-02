@@ -1480,7 +1480,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent lengths, only values of
     #> length one are recycled:
     #> * Length 4: Existing data
-    #> * Length 3: Column ``
+    #> * Length 3: Column `n`
 
 </td>
 </tr>
@@ -1501,7 +1501,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent lengths, only values of
     #> length one are recycled:
     #> * Length 4: Existing data
-    #> * Length 2: Column ``
+    #> * Length 2: Column `n`
 
 </td>
 </tr>
@@ -1938,9 +1938,8 @@ An attempt to update the same column twice gives an error.
 <td>
     with_tbl(tbl[c(1, 1)] <- list(1, 2))
 
-    #> Error: Column indexes FALSE, TRUE
-    #> are used more than once for
-    #> assignment.
+    #> Error: Column index 1 is used more
+    #> than once for assignment.
 
 </td>
 </tr>
@@ -2449,9 +2448,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2469,9 +2467,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2519,9 +2516,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2797,9 +2793,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2821,9 +2816,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2847,9 +2841,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2867,9 +2860,8 @@ positive numbers.
 <td>
     with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
-    #> Error in if (new_nrow != nrow) {:
-    #> missing value where TRUE/FALSE
-    #> needed
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
