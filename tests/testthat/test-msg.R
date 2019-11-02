@@ -1,5 +1,9 @@
 context("msg")
 
+test_that("error class", {
+  expect_equal(tibble_error_class("boo"), c("tibble_error_boo", "tibble_error"))
+})
+
 test_that("error messages", {
   expect_known_tibble_error_output(
     error_enframe_value_null(),
