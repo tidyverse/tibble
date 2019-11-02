@@ -18,6 +18,15 @@ expect_known_tibble_error_output <- function(...) {
 
   vals <- map(quos, eval_tidy)
 
+  functions <- map_chr(pluck(map(map(quos, quo_get_expr), as.list), 1), as_name)
+
   skip_on_non_utf8_locale()
-  expect_known_output(cat_line(vals), "errors.txt")
+
+  headers <- paste0("\n## ", functions, "()\n\n")
+  header_same <- c(FALSE, headers[-1] == headers[-length(headers)])
+  headers[header_same] <- ""
+
+  output <- paste0("# Errors\n", paste0(headers, vals, collapse = "\n\n"))
+
+  expect_known_output(cat(output), "errors.txt")
 }

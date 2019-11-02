@@ -1,50 +1,124 @@
+# Errors
+
+## error_enframe_value_null()
+
 The `value` argument to `enframe()` cannot be NULL.
+
+
+## error_enframe_has_dim()
+
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+
+
+## error_na_column_index()
+
 Can't use NA as column index with `[` at positions 1, 2, 3.
+
+
+## error_unknown_names()
+
 Can't find column `a` in `.data`.
+
 Can't find columns `b`, `c` in `.data`.
+
 Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
+
+
+## error_existing_names()
+
 Column `a` already exists in `.data`.
+
 Columns `b`, `c` already exist in `.data`.
+
 Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
+
+
+## error_add_rows_to_grouped_df()
+
 Can't add rows to grouped data frames
+
+
+## error_inconsistent_new_rows()
+
 New rows in `add_row()` must use columns that already exist:
 * Can't find column `a` in `.data`.
+
 New rows in `add_row()` must use columns that already exist:
 * Can't find columns `b`, `c` in `.data`.
+
 New rows in `add_row()` must use columns that already exist:
 * Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
+
+
+## error_names_must_be_non_null()
+
 The `names` must not be `NULL`.
 Use .name_repair to specify repair.
+
 The `names` must not be `NULL`.
+
+
+## error_names_must_have_length()
+
 The `names` must have length 3, not 5.
+
+
+## error_column_must_be_named()
+
 Column 1 must be named.
 Use .name_repair to specify repair.
+
 Columns 2, 3 must be named.
 Use .name_repair to specify repair.
+
 Columns 1, 2, 3, 4, 5, … (and 21 more) must be named.
 Use .name_repair to specify repair.
+
 Columns 4, 5, 6 must be named.
+
+
+## error_column_must_not_be_dot_dot()
+
 Column `a` must not have names of the form ... or ..j.
+
 Columns `b`, `c` must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
+
 Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
+
+
+## error_column_names_must_be_unique()
+
 Column name `a` must not be duplicated.
+
 Column names `b`, `c` must not be duplicated.
 Use .name_repair to specify repair.
+
 Column names `A`, `B`, `C`, `D`, `E`, … (and 21 more) must not be duplicated.
 Use .name_repair to specify repair.
+
+
+## error_column_names_must_be_syntactic()
+
 Column name `a` must be syntactic.
+
 Column names `b`, `c` must be syntactic.
 Use .name_repair to specify repair.
+
 Column names `A`, `B`, `C`, `D`, `E`, … (and 21 more) must be syntactic.
 Use .name_repair to specify repair.
+
+
+## error_column_must_be_vector()
+
 All columns in a tibble must be 1d or 2d objects:
 * Column `a` is environment
+
 All columns in a tibble must be 1d or 2d objects:
 * Column `b` is name
 * Column `c` is NULL
+
 All columns in a tibble must be 1d or 2d objects:
 * Column `A` is a
 * Column `B` is b
@@ -52,43 +126,104 @@ All columns in a tibble must be 1d or 2d objects:
 * Column `D` is d
 * Column `E` is e
 * … and 21 more problems
+
+
+## error_inconsistent_cols()
+
 Tibble columns must have consistent lengths, only values of length one are recycled:
 * Length 10: Requested with `uvw` argument
 * Length 3: Column `c`
 * Length 4: Columns `a`, `b`
+
 Tibble columns must have consistent lengths, only values of length one are recycled:
 * Length 10: Requested with `xyz` argument
 * Length 2: Columns `a`, `b`
 * Length 3: Column `c`
+
 Tibble columns must have consistent lengths, only values of length one are recycled:
 * Length 2: Columns `a`, `b`
 * Length 3: Column `c`
+
+
+## error_inconsistent_new_cols()
+
 New columns in `add_column()` must be consistent with `.data`:
 * `.data` has 10 rows
 * New column contributes 2 rows
+
 New columns in `add_column()` must be consistent with `.data`:
 * `.data` has 1 row
 * New columns contribute 3 rows
+
+
+## error_duplicate_new_cols()
+
 Can't add duplicate columns with `add_column()`:
 * Column `a` already exists in `.data`.
+
 Can't add duplicate columns with `add_column()`:
 * Columns `b`, `c` already exist in `.data`.
+
 Can't add duplicate columns with `add_column()`:
 * Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
+
+
+## error_both_before_after()
+
 Can't specify both `.before` and `.after`.
+
+
+## error_already_has_rownames()
+
 `df` must be a data frame without row names in `column_to_rownames()`.
+
+
+## error_as_tibble_needs_rownames()
+
 Object passed to `as_tibble()` must have row names if the `rownames` argument is set.
+
+
+## error_glimpse_infinite_width()
+
 `glimpse()` requires a finite value for the `width` argument.
+
+
+## error_tribble_needs_columns()
+
 `tribble()` needs to specify at least one column using the `~name` syntax.
+
+
+## error_tribble_lhs_column_syntax()
+
 All column specifications in `tribble()` must use the `~name` syntax.
 * Found `lhs` on the left-hand side of `~`.
+
+
+## error_tribble_rhs_column_syntax()
+
 All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.
 * Found `a + b` on the right-hand side of `~`.
+
+
+## error_tribble_non_rectangular()
+
 `tribble()` must be used with rectangular data:
 * Found 5 columns.
 * Found 17 cells.
 * 17 is not an integer multiple of 5.
+
+
+## error_frame_matrix_list()
+
 All values in `frame_matrix()` must be atomic:
 * Found list-valued elements at positions 2, 3, 4.
+
+
+## error_new_tibble_must_be_list()
+
 Must pass a list as `x` argument to `new_tibble()`.
+
+
+## error_new_tibble_needs_nrow()
+
 Must pass a scalar integer as `nrow` argument to `new_tibble()`.
