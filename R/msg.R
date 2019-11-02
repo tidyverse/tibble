@@ -299,3 +299,13 @@ subclass_col_index_errors <- function(expr) {
     }
   )
 }
+
+subclass_col_recycle_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_recycle_incompatible_size = function(cnd) {
+      cnd_signal(cnd)
+    }
+  )
+}

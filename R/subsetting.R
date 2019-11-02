@@ -334,7 +334,7 @@ tbl_subassign <- function(x, i, j, value) {
       j <- vec_as_new_col_index(j, x, value)
     }
 
-    value <- vec_recycle(value, length(j))
+    value <- vec_recycle_cols(value, length(j))
     xo <- tbl_subassign_col(x, j, value)
   } else {
     # Fill up rows first if necessary
@@ -349,7 +349,7 @@ tbl_subassign <- function(x, i, j, value) {
       # allowed by corollary that only existing columns can be updated)
       j <- vec_as_new_col_index(j, x, value)
       new_cols <- which(is.na(j))
-      value <- vec_recycle(value, length(j))
+      value <- vec_recycle_cols(value, length(j))
 
       # Fill up columns if necessary
       if (any(new_cols)) {
@@ -428,7 +428,7 @@ vec_as_new_col_index <- function(j, x, value) {
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    names <- vec_recycle(names2(value), length(j))
+    names <- vec_recycle_cols(names2(value), length(j))
     names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
@@ -454,7 +454,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vec_recycle(value[[jj]], nrow)
+    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, names(j)[[jj]])
   }
 
   # Remove
@@ -488,7 +488,7 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  value <- vec_recycle(value, ncol(x))
+  value <- vec_recycle_cols(value, ncol(x))
 
   nrow <- fast_nrow(x)
 
@@ -511,4 +511,18 @@ check_scalar <- function(ij) {
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
+}
+
+vec_recycle_cols <- function(x, n) {
+  subclass_col_recycle_errors(
+    vec_recycle(x, n)
+  )
+}
+
+vec_recycle_rows <- function(x, n, col) {
+  size <- vec_size(x)
+  if (size == n) return(x)
+  if (size == 1) return(vec_recycle(x, n))
+
+  abort(error_inconsistent_cols(n, col, size, "Existing data"))
 }

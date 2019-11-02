@@ -413,20 +413,20 @@ test_that("$<- doesn't throw warning if name doesn't exist", {
 })
 
 test_that("$<- throws different warning if attempting a partial initialization (#199)", {
-  scoped_lifecycle_warnings()
-
   df <- tibble(x = 1:3)
   expect_warning(
     df$y[1] <- 2,
     "Unknown or uninitialised column: `y`",
     fixed = TRUE
   )
-  expect_error_relax(
+
+  expect_tibble_error(
     expect_warning(
       df$z[1:2] <- 2,
       "Unknown or uninitialised column: `z`",
       fixed = TRUE
-    )
+    ),
+    error_inconsistent_cols(3, "z", 2, "Existing data")
   )
 })
 
@@ -439,12 +439,12 @@ test_that("$<- recycles only values of length one", {
   df$z <- 5:7
   expect_identical(df, tibble(x = 1:3, y = 4, z = 5:7))
 
-  expect_error_relax(
+  expect_tibble_error(
     df$w <- 8:9,
     error_inconsistent_cols(3, "w", 2, "Existing data")
   )
 
-  expect_error_relax(
+  expect_tibble_error(
     df$a <- character(),
     error_inconsistent_cols(3, "a", 0, "Existing data")
   )

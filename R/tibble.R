@@ -192,7 +192,7 @@ tibble_quos <- function(xs, .rows, .name_repair) {
       lengths[[j]] <- current_size <- vec_size(res)
       if (j > 1) {
         if (current_size == 1) {
-          res <- vec_recycle(res, first_size)
+          res <- vec_recycle_rows(res, first_size, j)
         } else if (first_size == 1L) {
           idx_to_fix <- seq2(1L, j - 1L)
           output[idx_to_fix] <- fixed_output <-
