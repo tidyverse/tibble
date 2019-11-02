@@ -100,7 +100,37 @@ error_existing_column_names <- function(names) {
 }
 
 error_assign_columns_non_na_only <- function() {
-  tibble_error("Can't assign to a column indexed with NA.")
+  tibble_error("Can't use NA as column index in a tibble for assignment.")
+}
+
+error_new_columns_at_end_only <- function(ncol, j) {
+  j <- j[j > ncol + 1]
+  tibble_error(
+    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
+    ncol = ncol, j = j
+  )
+}
+
+error_duplicate_column_subscript_for_assignment <- function(j) {
+  j <- unique(j[duplicated(j)])
+  tibble_error(pluralise_commas("Column index(es) ", j, " are used more than once for assignment."), j = j)
+}
+
+error_assign_rows_non_na_only <- function() {
+  tibble_error("Can't use NA as row index in a tibble for assignment.")
+}
+
+error_new_rows_at_end_only <- function(nrow, i) {
+  i <- i[i > nrow + 1]
+  tibble_error(
+    pluralise_commas("Can't assign row(s) ", i, " in a tibble with ", nrow, pluralise_n(" row(s).", nrow)),
+    nrow = nrow, i = i
+  )
+}
+
+error_duplicate_row_subscript_for_assignment <- function(i) {
+  i <- unique(i[duplicated(i)])
+  tibble_error(pluralise_commas("Row index(es) ", i, " are used more than once for assignment."), i = i)
 }
 
 error_add_rows_to_grouped_df <- function() {

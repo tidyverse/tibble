@@ -370,7 +370,7 @@ tbl_subassign <- function(x, i, j, value) {
 vec_as_new_row_index <- function(i, x) {
   if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_row_subscript_for_assignment(i))
     }
 
     nr <- fast_nrow(x)
@@ -381,7 +381,7 @@ vec_as_new_row_index <- function(i, x) {
     i <- vec_as_index(i, nr)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
-      abort(error_new_rows_at_end_only())
+      abort(error_new_rows_at_end_only(nr, i_new))
     }
 
     # Restore, caller knows how to deal
@@ -393,7 +393,7 @@ vec_as_new_row_index <- function(i, x) {
   } else {
     i <- vec_as_row_index(i, x)
     if (anyDuplicated(i, incomparables = NA)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_row_subscript_for_assignment(i))
     }
     i
   }
@@ -412,7 +412,7 @@ vec_as_new_col_index <- function(j, x, value) {
     set_names(match(j, names(x)), j)
   } else if (is_bare_numeric(j)) {
     if (anyDuplicated(j)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_column_subscript_for_assignment(j))
     }
 
     new <- which(j > ncol(x))
@@ -421,7 +421,7 @@ vec_as_new_col_index <- function(j, x, value) {
     j <- vec_as_index(j, ncol(x), arg = "j")
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      abort(error_new_columns_at_end_only())
+      abort(error_new_columns_at_end_only(ncol(x), j_new))
     }
 
     # FIXME: Recycled names are not repaired
@@ -433,7 +433,7 @@ vec_as_new_col_index <- function(j, x, value) {
   } else {
     j <- vec_as_col_index(j, x)
     if (anyDuplicated(j)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_column_subscript_for_assignment(j))
     }
     j
   }
@@ -473,7 +473,7 @@ tbl_expand_to_nrow <- function(x, i) {
   new_nrow <- max(i, nrow)
 
   if (is.na(new_nrow)) {
-    error_na_new_row()
+    error_assign_rows_non_na_only()
   }
 
   if (new_nrow != nrow) {

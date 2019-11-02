@@ -1323,8 +1323,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1340,8 +1340,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA]] <- 0)
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1358,8 +1358,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_character_]] <- 0)
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1569,10 +1569,8 @@ needed.
 <td>
     with_tbl(tbl[[5]] <- 0)
 
-    #> Error in
-    #> error_new_columns_at_end_only():
-    #> could not find function
-    #> "error_new_columns_at_end_only"
+    #> Error: Can't assign column 5 in a
+    #> tibble with 3 columns.
 
 </td>
 </tr>
@@ -1940,10 +1938,9 @@ An attempt to update the same column twice gives an error.
 <td>
     with_tbl(tbl[c(1, 1)] <- list(1, 2))
 
-    #> Error in
-    #> error_duplicate_subscript_for_assignment():
-    #> could not find function
-    #> "error_duplicate_subscript_for_assignment"
+    #> Error: Column indexes FALSE, TRUE
+    #> are used more than once for
+    #> assignment.
 
 </td>
 </tr>
@@ -1990,8 +1987,8 @@ modifications).
 <td>
     with_tbl(tbl[NA] <- list("x"))
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2009,8 +2006,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_integer_] <- list("x"))
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2028,8 +2025,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_character_] <- list("x"))
 
-    #> Error: Can't assign to a column
-    #> indexed with NA.
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2190,10 +2187,8 @@ that order of precedence).
 <td>
     with_tbl(tbl[5] <- list(4:1))
 
-    #> Error in
-    #> error_new_columns_at_end_only():
-    #> could not find function
-    #> "error_new_columns_at_end_only"
+    #> Error: Can't assign column 5 in a
+    #> tibble with 3 columns.
 
 </td>
 </tr>
@@ -2454,8 +2449,9 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2473,8 +2469,9 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2522,8 +2519,9 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2687,10 +2685,8 @@ supported, without warning.
 <td>
     with_tbl(tbl[6, ] <- tbl[1, ])
 
-    #> Error in
-    #> error_new_rows_at_end_only(): could
-    #> not find function
-    #> "error_new_rows_at_end_only"
+    #> Error: Can't assign row 6 in a
+    #> tibble with 4 rows.
 
 </td>
 </tr>
@@ -2801,8 +2797,9 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2824,8 +2821,9 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2849,8 +2847,9 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>
@@ -2868,8 +2867,9 @@ positive numbers.
 <td>
     with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error in if (new_nrow != nrow) {:
+    #> missing value where TRUE/FALSE
+    #> needed
 
 </td>
 </tr>

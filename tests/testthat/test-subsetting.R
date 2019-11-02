@@ -378,9 +378,18 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
 
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
   df <- tibble(x = 1:2, y = x)
-  expect_error(df[c(1, 1)] <- 3, ".")
-  expect_error(df[, c(1, 1)] <- 3, ".")
-  expect_error(df[c(1, 1), ] <- 3, ".")
+  expect_tibble_error(
+    df[c(1, 1)] <- 3,
+    error_duplicate_column_subscript_for_assignment(c(1, 1))
+  )
+  expect_tibble_error(
+    df[, c(1, 1)] <- 3,
+    error_duplicate_column_subscript_for_assignment(c(1, 1))
+  )
+  expect_tibble_error(
+    df[c(1, 1), ] <- 3,
+    error_duplicate_row_subscript_for_assignment(c(1, 1))
+  )
 })
 
 test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {

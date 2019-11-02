@@ -40,6 +40,24 @@ test_that("error messages", {
 
     error_assign_columns_non_na_only(),
 
+    error_new_columns_at_end_only(5, 7:8),
+    error_new_columns_at_end_only(5, 7),
+    error_new_columns_at_end_only(1, 7:8),
+    error_new_columns_at_end_only(1, 7),
+
+    error_duplicate_column_subscript_for_assignment(c(1, 1)),
+    error_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)),
+
+    error_assign_rows_non_na_only(),
+
+    error_new_rows_at_end_only(5, 7:8),
+    error_new_rows_at_end_only(5, 7),
+    error_new_rows_at_end_only(1, 7:8),
+    error_new_rows_at_end_only(1, 7),
+
+    error_duplicate_row_subscript_for_assignment(c(1, 1)),
+    error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2)),
+
     error_add_rows_to_grouped_df(),
 
     error_inconsistent_new_rows("a"),
