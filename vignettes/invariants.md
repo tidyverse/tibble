@@ -2,7 +2,7 @@
 title: "Invariants for subsetting and subassignment"
 #output: rmarkdown::word_document
 output: rmarkdown::html_vignette
-# devtools::load_all(); rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
+# devtools::load_all(); eval_details <- TRUE; rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
 vignette: >
   %\VignetteIndexEntry{invariants}
   %\VignetteEngine{knitr::rmarkdown}
