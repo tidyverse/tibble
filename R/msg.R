@@ -226,3 +226,25 @@ error_new_tibble_needs_nrow <- function() {
 error_new_tibble_needs_class <- function() {
   tibble_error("Must pass a `class` argument instead of `subclass` to `new_tibble()`.")
 }
+
+
+# Subclassing errors ------------------------------------------------------
+
+subclass_name_repair_errors <- function(expr, name) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_names_cannot_be_empty = function(cnd) {
+      cnd <- error_column_must_be_named(cnd$locations, parent = cnd)
+      cnd_signal(cnd)
+    },
+    vctrs_error_names_cannot_be_dot_dot = function(cnd) {
+      cnd <- error_column_must_not_be_dot_dot(cnd$locations, parent = cnd)
+      cnd_signal(cnd)
+    },
+    vctrs_error_names_must_be_unique = function(cnd) {
+      cnd <- error_column_names_must_be_unique(name[cnd$locations], parent = cnd)
+      cnd_signal(cnd)
+    }
+  )
+}
