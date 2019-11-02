@@ -297,8 +297,8 @@ on tidy dots semantics, i.e. exactly how quasiquotation works for the
 #&gt;  9 0.970 1.94 
 #&gt; 10 0.648 1.30 </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	26 obs. of  1 variable:
-#&gt;  $ letters: chr  "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	2 obs. of  1 variable:
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
+#&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
