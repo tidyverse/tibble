@@ -69,7 +69,7 @@ error_unsupported_column_index <- function(parent = NULL) {
   tibble_error("Must subset columns with an index vector.", cnd_bullets = parent$cnd_bullets, parent = parent)
 }
 
-error_unknown_names <- function(j, parent = NULL) {
+error_unknown_column_names <- function(j, parent = NULL) {
   tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
@@ -91,7 +91,7 @@ error_small_column_index <- function(ncol, j, parent = NULL) {
   )
 }
 
-error_existing_names <- function(names) {
+error_existing_column_names <- function(names) {
   tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."), names = names)
 }
 
@@ -103,7 +103,7 @@ error_inconsistent_new_rows <- function(names) {
   tibble_error(
     bullets(
       "New rows in `add_row()` must use columns that already exist:",
-      cnd_message(error_unknown_names(names))
+      cnd_message(error_unknown_column_names(names))
     ),
     names = names
   )
@@ -181,7 +181,7 @@ error_duplicate_new_cols <- function(names) {
   tibble_error(
     bullets(
       "Can't add duplicate columns with `add_column()`:",
-      cnd_message(error_existing_names(names))
+      cnd_message(error_existing_column_names(names))
     ),
     names = names
   )
@@ -276,7 +276,7 @@ subclass_col_index_errors <- function(expr) {
     force(expr),
 
     vctrs_error_index_oob_names = function(cnd) {
-      cnd <- error_unknown_names(setdiff(cnd$i, cnd$names), parent = cnd)
+      cnd <- error_unknown_column_names(setdiff(cnd$i, cnd$names), parent = cnd)
       cnd_signal(cnd)
     },
 

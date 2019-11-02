@@ -12,13 +12,13 @@ test_that("error messages", {
 
     error_na_column_index(1:3),
 
-    error_unknown_names("a"),
-    error_unknown_names(c("b", "c")),
-    error_unknown_names(LETTERS),
+    error_unknown_column_names("a"),
+    error_unknown_column_names(c("b", "c")),
+    error_unknown_column_names(LETTERS),
 
-    error_existing_names("a"),
-    error_existing_names(c("b", "c")),
-    error_existing_names(LETTERS),
+    error_existing_column_names("a"),
+    error_existing_column_names(c("b", "c")),
+    error_existing_column_names(LETTERS),
 
     error_add_rows_to_grouped_df(),
 

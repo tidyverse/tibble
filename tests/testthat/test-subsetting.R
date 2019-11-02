@@ -59,20 +59,20 @@ test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_tibble_error(
     foo["z"],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
   expect_tibble_error(
     foo[c("x", "y", "z")],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
 
   expect_tibble_error(
     foo[, "z"],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
   expect_tibble_error(
     foo[, c("x", "y", "z")],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
 
   skip("r-lib/vctrs#557")
@@ -170,7 +170,7 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   )
   expect_tibble_error(
     foo[factor(1:3)],
-    error_unknown_names(as.character(1:3))
+    error_unknown_column_names(as.character(1:3))
   )
   expect_tibble_error(
     foo[Sys.Date()],

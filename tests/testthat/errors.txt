@@ -15,7 +15,7 @@ The `value` argument to `enframe()` cannot be NULL.
 Can't use NA as column index with `[` at positions 1, 2, 3.
 
 
-## error_unknown_names()
+## error_unknown_column_names()
 
 Can't find column `a` in `.data`.
 
@@ -24,7 +24,7 @@ Can't find columns `b`, `c` in `.data`.
 Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
 
 
-## error_existing_names()
+## error_existing_column_names()
 
 Column `a` already exists in `.data`.
 
