@@ -101,7 +101,7 @@ See examples.
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9009</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9010</span>
         </div>
       </div>
     </div>
@@ -312,8 +312,7 @@ on tidy dots semantics, i.e. exactly how quasiquotation works for the
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
 <span class='co'># but it forces you to take charge of names, if they need repair:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.
-#&gt; Use .name_repair to specify repair.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x...1</span>
 #&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   x...1 x...2

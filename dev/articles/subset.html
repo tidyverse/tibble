@@ -45,7 +45,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9009</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9010</span>
         </div>
       </div>
     </div>
@@ -425,9 +425,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in error_need_scalar(): could
-#&gt; not find function
-#&gt; "error_need_scalar"</code></pre>
+<pre><code>#&gt; Error: Must extract with a single
+#&gt; index.
+#&gt; ✖ `i` has the wrong size 2.
+#&gt; ℹ This index must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -447,9 +448,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in error_need_scalar(): could
-#&gt; not find function
-#&gt; "error_need_scalar"</code></pre>
+<pre><code>#&gt; Error: Must extract with a single
+#&gt; index.
+#&gt; ✖ `i` has the wrong size 2.
+#&gt; ℹ This index must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -579,9 +581,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tbl[<span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset position 4.
-#&gt; ℹ There are only 3 elements.</code></pre>
+<pre><code>#&gt; Error: Cannot subset column 4 in
+#&gt; tibble with 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -711,9 +712,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">tbl[, <span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset position 4.
-#&gt; ℹ There are only 3 elements.</code></pre>
+<pre><code>#&gt; Error: Cannot subset column 4 in
+#&gt; tibble with 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -831,9 +831,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset position 4.
-#&gt; ℹ There are only 3 elements.</code></pre>
+<pre><code>#&gt; Error: Cannot subset column 4 in
+#&gt; tibble with 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -1058,9 +1057,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset position 4.
-#&gt; ℹ There are only 3 elements.</code></pre>
+<pre><code>#&gt; Error: Cannot subset column 4 in
+#&gt; tibble with 3 columns.</code></pre>
 </div>
 </td>
 </tr>

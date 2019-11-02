@@ -45,7 +45,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9009</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9010</span>
         </div>
       </div>
     </div>
@@ -387,9 +387,11 @@
 <td>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent lengths, only values of
+#&gt; length one are recycled:
+#&gt; * Length 4: Existing data
+#&gt; * Length 2: Column `a`</code></pre>
 </div>
 </td>
 </tr>
@@ -405,9 +407,11 @@
 <td>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 3 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent lengths, only values of
+#&gt; length one are recycled:
+#&gt; * Length 4: Existing data
+#&gt; * Length 3: Column `a`</code></pre>
 </div>
 </td>
 </tr>
@@ -423,9 +427,11 @@
 <td>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 5 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent lengths, only values of
+#&gt; length one are recycled:
+#&gt; * Length 4: Existing data
+#&gt; * Length 5: Column `a`</code></pre>
 </div>
 </td>
 </tr>
@@ -441,9 +447,11 @@
 <td>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl<span class="op">$</span>c &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent lengths, only values of
+#&gt; length one are recycled:
+#&gt; * Length 4: Existing data
+#&gt; * Length 2: Column `c`</code></pre>
 </div>
 </td>
 </tr>
@@ -498,9 +506,11 @@
 #&gt; column: `c`.</code></pre>
 </div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent lengths, only values of
+#&gt; length one are recycled:
+#&gt; * Length 4: Existing data
+#&gt; * Length 2: Column `c`</code></pre>
 </div>
 </td>
 </tr>
@@ -720,10 +730,8 @@
 <td>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">5</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in
-#&gt; error_new_columns_at_end_only():
-#&gt; could not find function
-#&gt; "error_new_columns_at_end_only"</code></pre>
+<pre><code>#&gt; Error: Can't assign column 5 in a
+#&gt; tibble with 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -975,9 +983,10 @@
 <td>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in error_need_scalar(): could
-#&gt; not find function
-#&gt; "error_need_scalar"</code></pre>
+<pre><code>#&gt; Error: Must extract with a single
+#&gt; index.
+#&gt; ✖ `i` has the wrong size 2.
+#&gt; ℹ This index must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -993,9 +1002,10 @@
 <td>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in error_need_scalar(): could
-#&gt; not find function
-#&gt; "error_need_scalar"</code></pre>
+<pre><code>#&gt; Error: Must extract with a single
+#&gt; index.
+#&gt; ✖ `i` has the wrong size 2.
+#&gt; ℹ This index must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1012,9 +1022,7 @@
 <td>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">2</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cd"</span>, <span class="st">"d"</span>)]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in error_need_scalar(): could
-#&gt; not find function
-#&gt; "error_need_scalar"</code></pre>
+<pre><code>#&gt; Error: Must use a scalar in `[[`.</code></pre>
 </div>
 </td>
 </tr>
@@ -2003,9 +2011,8 @@
 <td>
 <div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 3 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error in if (x == "") y else x:
+#&gt; argument is of length zero</code></pre>
 </div>
 </td>
 </tr>
@@ -2021,9 +2028,8 @@
 <td>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 5 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error in if (x == "") y else x:
+#&gt; argument is of length zero</code></pre>
 </div>
 </td>
 </tr>
@@ -2152,9 +2158,8 @@
 <td>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 3 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error in if (x == "") y else x:
+#&gt; argument is of length zero</code></pre>
 </div>
 </td>
 </tr>
@@ -2170,9 +2175,8 @@
 <td>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 5 cannot be
-#&gt; recycled to length 4. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error in if (x == "") y else x:
+#&gt; argument is of length zero</code></pre>
 </div>
 </td>
 </tr>
