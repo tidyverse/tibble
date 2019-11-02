@@ -99,8 +99,12 @@ error_existing_column_names <- function(names) {
   tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."), names = names)
 }
 
+error_assign_columns_non_na_only <- function() {
+  tibble_error("Can't assign to a column indexed with NA.")
+}
+
 error_add_rows_to_grouped_df <- function() {
-  tibble_error("Can't add rows to grouped data frames")
+  tibble_error("Can't add rows to grouped data frames.")
 }
 
 error_inconsistent_new_rows <- function(names) {

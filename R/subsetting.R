@@ -405,7 +405,7 @@ vec_as_new_col_index <- function(j, x, value) {
   # Name: column name (for new columns)
 
   if (anyNA(j)) {
-    abort(error_new_columns_non_na_only())
+    abort(error_assign_columns_non_na_only())
   }
 
   if (is_bare_character(j)) {

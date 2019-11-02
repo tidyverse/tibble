@@ -38,6 +38,8 @@ test_that("error messages", {
     error_existing_column_names(c("b", "c")),
     error_existing_column_names(LETTERS),
 
+    error_assign_columns_non_na_only(),
+
     error_add_rows_to_grouped_df(),
 
     error_inconsistent_new_rows("a"),

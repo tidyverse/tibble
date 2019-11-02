@@ -1323,10 +1323,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
@@ -1342,10 +1340,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
@@ -1362,10 +1358,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_character_]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
@@ -1996,10 +1990,8 @@ modifications).
 <td>
     with_tbl(tbl[NA] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
@@ -2017,10 +2009,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_integer_] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
@@ -2038,10 +2028,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_character_] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't assign to a column
+    #> indexed with NA.
 
 </td>
 </tr>
