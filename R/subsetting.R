@@ -501,9 +501,9 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
-check_scalar <- function(ij) {
-  if (!has_length(ij, 1)) {
-    abort(error_need_scalar())
+check_scalar <- function(j) {
+  if (!has_length(j, 1)) {
+    abort(error_need_scalar_column_index())
   }
 }
 

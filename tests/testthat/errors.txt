@@ -10,6 +10,11 @@ The `value` argument to `enframe()` cannot be NULL.
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
 
 
+## error_need_scalar_column_index()
+
+Must use a scalar in `[[`.
+
+
 ## error_na_column_index()
 
 Can't use NA as column index with `[` at positions 1, 2, 3.

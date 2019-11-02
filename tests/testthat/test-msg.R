@@ -14,6 +14,8 @@ test_that("error messages", {
 
     error_enframe_has_dim(Titanic),
 
+    error_need_scalar_column_index(),
+
     error_na_column_index(1:3),
 
     error_unsupported_column_index(),

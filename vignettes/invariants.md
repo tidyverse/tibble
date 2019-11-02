@@ -302,9 +302,7 @@ exists.
 <td>
     tbl[[c("n", "c")]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1245,9 +1243,7 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1263,9 +1259,7 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1281,9 +1275,7 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1299,9 +1291,7 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1317,9 +1307,7 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
