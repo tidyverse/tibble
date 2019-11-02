@@ -1,3 +1,8 @@
+# tibble 2.99.99.9010
+
+- Add proper error messages everywhere, avoid "could not find function error_xxx()" errors (#659).
+
+
 # tibble 2.99.99.9009
 
 - Using classed conditions. All classes start with `"tibble_error_"` and also contain `"tibble_error"` (#659).
