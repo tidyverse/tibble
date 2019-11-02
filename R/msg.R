@@ -28,8 +28,25 @@ use_repair <- function(repair) {
   if (repair) "\nUse .name_repair to specify repair."
 }
 
-tibble_error <- function(x) {
-  x
+# https://github.com/r-lib/rlang/issues/861
+# Can't wrap properly because otherwise tibble::abort() appears in the traceback
+abort <- cnd_signal
+old_signal_soft_deprecated <- signal_soft_deprecated
+signal_soft_deprecated <- function(message, ...) {
+  if (is_condition(message)) old_signal_soft_deprecated(cnd_message(message), ...)
+  else old_signal_soft_deprecated(message, ...)
+}
+
+tibble_error_class <- function(class) {
+  c(paste0("tibble_error_", class), "tibble_error")
+}
+
+# Errors get a class name derived from the name of the calling function
+tibble_error <- function(x, parent = NULL) {
+  call <- sys.call(-1)
+  fn_name <- as_name(call[[1]])
+  class <- tibble_error_class(gsub("^error_", "", fn_name))
+  error_cnd(.subclass = class, message = x, parent = parent)
 }
 
 error_enframe_value_null <- function() {
@@ -63,7 +80,7 @@ error_add_rows_to_grouped_df <- function() {
 error_inconsistent_new_rows <- function(names) {
   tibble_error(bullets(
     "New rows in `add_row()` must use columns that already exist:",
-    error_unknown_names(names)
+    cnd_message(error_unknown_names(names))
   ))
 }
 
@@ -75,16 +92,16 @@ error_names_must_have_length <- function(length, n) {
   tibble_error(paste0("The `names` must have length ", n, ", not ", length, "."))
 }
 
-error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair")) {
-  tibble_error(invalid_df("must be named", names, use_repair(repair)))
+error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must be named", names, use_repair(repair)), parent = parent)
 }
 
-error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair")) {
-  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)))
+error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), parent = parent)
 }
 
-error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair")) {
-  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)))
+error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), parent = parent)
 }
 
 error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(".name_repair")) {
@@ -128,7 +145,7 @@ error_inconsistent_new_cols <- function(n, df) {
 error_duplicate_new_cols <- function(names) {
   tibble_error(bullets(
     "Can't add duplicate columns with `add_column()`:",
-    error_existing_names(names)
+    cnd_message(error_existing_names(names))
   ))
 }
 

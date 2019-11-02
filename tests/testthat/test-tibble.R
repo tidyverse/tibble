@@ -16,12 +16,12 @@ test_that("NULL is ignored (#580)", {
 })
 
 test_that("bogus columns raise an error", {
-  expect_error(
+  expect_tibble_error(
     tibble(a = new.env()),
     error_column_must_be_vector("a", "environment"),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     tibble(a = quote(a)),
     error_column_must_be_vector("a", "name"),
     fixed = TRUE
@@ -31,7 +31,7 @@ test_that("bogus columns raise an error", {
 test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10)), 10)
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
-  expect_error(
+  expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
     error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
     fixed = TRUE
@@ -127,12 +127,12 @@ test_that("columns are recycled to common length", {
 })
 
 test_that("columns must be same length", {
-  expect_error(
+  expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3)),
     error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
     error_inconsistent_cols(
       NULL,
@@ -142,7 +142,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
     error_inconsistent_cols(
       NULL,
@@ -152,7 +152,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
     error_inconsistent_cols(
       NULL,
@@ -162,7 +162,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
     error_inconsistent_cols(
       NULL,
@@ -254,7 +254,7 @@ test_that("Can convert named atomic vectors to data frame", {
   expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
   expect_equal(as_tibble(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
 
-  expect_error(
+  expect_tibble_error(
     as_tibble(setNames(nm = c(TRUE, FALSE, NA))),
     invalid_df("must be named", 3),
     fixed = TRUE
@@ -263,40 +263,35 @@ test_that("Can convert named atomic vectors to data frame", {
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(l1),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 1L
+    error_column_must_be_named(1)
   )
 
   l2 <- list(x = 1, 2)
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(l2),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 
   l3 <- list(x = 1, ... = 2)
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(l3),
-    class = "vctrs_error_names_cannot_be_dot_dot",
-    locations = 2L
+    error_column_must_not_be_dot_dot(2)
   )
 
   l4 <- list(x = 1, ..1 = 2)
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(l4),
-    class = "vctrs_error_names_cannot_be_dot_dot",
-    locations = 2L
+    error_column_must_not_be_dot_dot(2)
   )
 
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(df),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 1:2
+    error_column_must_be_named(1:2)
   )
 })
 
@@ -407,10 +402,9 @@ test_that("as_tibble.poly() supports .name_repair", {
 test_that("as_tibble.table() supports .name_repair", {
   x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
 
-  expect_error_cnd(
+  expect_tibble_error(
     as_tibble(x),
-    class = "vctrs_error_names_must_be_unique",
-    locations = 2L
+    error_column_names_must_be_unique("a")
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
@@ -514,12 +508,12 @@ test_that("as_tibble() can convert row names for zero-row tibbles", {
 
 test_that("as_tibble() throws an error when user turns missing row names into column", {
   df <- data.frame(a = 1:3, b = 2:4)
-  expect_error(
+  expect_tibble_error(
     as_tibble(df, rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     as_tibble(df[0, ], rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
@@ -539,7 +533,7 @@ test_that("as.tibble is an alias of as_tibble", {
 # Validation --------------------------------------------------------------
 
 test_that("NULL isn't a valid column", {
-  expect_error(
+  expect_tibble_error(
     check_valid_cols(list(a = NULL)),
     error_column_must_be_vector("a", "NULL"),
     fixed = TRUE
@@ -578,14 +572,13 @@ test_that("types preserved when recycling in tibble() (#284)", {
 test_that("`validate` triggers deprecation message, but then works", {
   scoped_lifecycle_warnings()
 
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 
   expect_warning(
@@ -606,27 +599,25 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(df, validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 })
 
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
   scoped_lifecycle_warnings()
 
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 
   expect_warning(
@@ -645,24 +636,22 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 
   expect_warning(
@@ -681,13 +670,12 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error_cnd(
+  expect_tibble_error(
     expect_warning(
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    class = "vctrs_error_names_cannot_be_empty",
-    locations = 2L
+    error_column_must_be_named(2)
   )
 })
 

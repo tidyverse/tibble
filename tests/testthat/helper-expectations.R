@@ -1,3 +1,9 @@
+expect_tibble_error <- function(object, cnd, fixed = NULL) {
+  #if (!is.null(fixed)) warn("fixed obsolete")
+
+  expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
+}
+
 expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) {
   cnd <- expect_error(object, regexp = message, class = class, fixed = .fixed)
   expect_true(inherits_all(cnd, class))
@@ -26,7 +32,10 @@ expect_known_tibble_error_output <- function(...) {
   header_same <- c(FALSE, headers[-1] == headers[-length(headers)])
   headers[header_same] <- ""
 
-  output <- paste0("# Errors\n", paste0(headers, vals, collapse = "\n\n"))
+  output <- paste0(
+    "# Errors\n",
+    paste0(headers, map_chr(vals, cnd_message), collapse = "\n\n")
+  )
 
   expect_known_output(cat(output), "errors.txt")
 }

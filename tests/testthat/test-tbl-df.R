@@ -70,22 +70,21 @@ test_that("new_tibble checks", {
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
-  expect_error(
+  expect_tibble_error(
     new_tibble(1:3, nrow = 1),
     error_new_tibble_must_be_list(),
     fixed = TRUE
   )
-  expect_error_cnd(
-    new_tibble(list(a = 1)),
-    class = get_defunct_error_class(),
-    error_new_tibble_needs_nrow()
-  )
   expect_error(
+    new_tibble(list(a = 1)),
+    class = get_defunct_error_class()
+  )
+  expect_tibble_error(
     new_tibble(list(1), nrow = NULL),
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     new_tibble(list(1), nrow = 1),
     error_names_must_be_non_null(repair = FALSE),
     fixed = TRUE
@@ -113,7 +112,7 @@ test_that("new_tibble checks", {
 
 
 test_that("validate_tibble() checks", {
-  expect_error(
+  expect_tibble_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
     error_inconsistent_cols(1, c("a", "b"), 1:2, "Requested with `nrow` argument"),
     fixed = TRUE

@@ -116,7 +116,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     error_small_column_index(3, 1, -4),
     fixed = TRUE
   )
-  expect_error(
+  expect_tibble_error(
     foo[c(1:3, NA)],
     error_na_column_index(4),
     fixed = TRUE
