@@ -84,7 +84,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9008</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9009</span>
         </div>
       </div>
     </div>
@@ -174,6 +174,20 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-2-99-99-9009" class="section level1">
+<h1 class="page-header">
+<a href="#tibble-2-99-99-9009" class="anchor"></a>tibble 2.99.99.9009<small> Unreleased </small>
+</h1>
+<ul>
+<li>Using classed conditions. All classes start with <code>"tibble_error_"</code> and also contain <code>"tibble_error"</code> (<a href='https://github.com/tidyverse/tibble/issues/659'>#659</a>).</li>
+<li>Implement <code>str.tbl_df()</code> (<a href='https://github.com/tidyverse/tibble/issues/480'>#480</a>).</li>
+<li>
+<code><a href="https://rdrr.io/r/base/expression.html">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</li>
+<li>Tibbles now unconditionally allow inner names for all columns (<a href='https://github.com/tidyverse/tibble/issues/630'>#630</a>).</li>
+<li>
+<code>x[["unknown_column"]] &lt;- NULL</code> works as expected (<a href='https://github.com/tidyverse/tibble/issues/666'>#666</a>).</li>
+</ul>
+</div>
     <div id="tibble-2-99-99-9008" class="section level1">
 <h1 class="page-header">
 <a href="#tibble-2-99-99-9008" class="anchor"></a>tibble 2.99.99.9008<small> Unreleased </small>
@@ -931,6 +945,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tibble-2-99-99-9009">2.99.99.9009</a></li>
         <li><a href="#tibble-2-99-99-9008">2.99.99.9008</a></li>
         <li><a href="#tibble-2-99-99-9007">2.99.99.9007</a></li>
         <li><a href="#tibble-2-99-99-9006">2.99.99.9006</a></li>
