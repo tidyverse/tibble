@@ -1,3 +1,12 @@
+# tibble 2.99.99.9009
+
+- Using classed conditions. All classes start with `"tibble_error_"` and also contain `"tibble_error"` (#659).
+- Implement `str.tbl_df()` (#480).
+- `expression()` columns are converted to lists as a workaround for lacking support in vctrs (#657).
+- Tibbles now unconditionally allow inner names for all columns (#630).
+- `x[["unknown_column"]] <- NULL` works as expected (#666).
+
+
 # tibble 2.99.99.9008
 
 - `x[[NA]]` now throws an error (#647).
