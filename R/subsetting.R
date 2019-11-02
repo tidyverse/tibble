@@ -115,8 +115,7 @@ NULL
   } else if (missing(j)) {
     error_missing_column_index()
   } else {
-    i <- vec_as_row_index(i, x)
-    check_scalar(i)
+    i <- vec_as_position(i, fast_nrow(x))
 
     x <- tbl_subset2(x, j = j)
     if (is.null(x)) return(x)
@@ -134,8 +133,7 @@ NULL
   }
 
   if (!is_null(i)) {
-    i <- vec_as_row_index(i, x)
-    check_scalar(i)
+    i <- vec_as_position(i, fast_nrow(x))
   }
 
   if (is_null(j)) {
@@ -282,7 +280,9 @@ vec_as_col_index <- function(j, x) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  vec_as_index(j, length(x), names(x), arg = "j")
+  subclass_col_index_errors(
+    vec_as_index(j, length(x), names(x), arg = "j")
+  )
 }
 
 tbl_subset2 <- function(x, j) {
@@ -332,7 +332,7 @@ tbl_subassign <- function(x, i, j, value) {
       j <- vec_as_new_col_index(j, x, value)
     }
 
-    value <- vec_recycle(value, length(j))
+    value <- vec_recycle_cols(value, length(j))
     xo <- tbl_subassign_col(x, j, value)
   } else {
     # Fill up rows first if necessary
@@ -347,7 +347,7 @@ tbl_subassign <- function(x, i, j, value) {
       # allowed by corollary that only existing columns can be updated)
       j <- vec_as_new_col_index(j, x, value)
       new_cols <- which(is.na(j))
-      value <- vec_recycle(value, length(j))
+      value <- vec_recycle_cols(value, length(j))
 
       # Fill up columns if necessary
       if (any(new_cols)) {
@@ -370,7 +370,7 @@ tbl_subassign <- function(x, i, j, value) {
 vec_as_new_row_index <- function(i, x) {
   if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_row_subscript_for_assignment(i))
     }
 
     nr <- fast_nrow(x)
@@ -381,7 +381,7 @@ vec_as_new_row_index <- function(i, x) {
     i <- vec_as_index(i, nr)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
-      abort(error_new_rows_at_end_only())
+      abort(error_new_rows_at_end_only(nr, i_new))
     }
 
     # Restore, caller knows how to deal
@@ -393,7 +393,7 @@ vec_as_new_row_index <- function(i, x) {
   } else {
     i <- vec_as_row_index(i, x)
     if (anyDuplicated(i, incomparables = NA)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_row_subscript_for_assignment(i))
     }
     i
   }
@@ -405,14 +405,14 @@ vec_as_new_col_index <- function(j, x, value) {
   # Name: column name (for new columns)
 
   if (anyNA(j)) {
-    abort(error_new_columns_non_na_only())
+    abort(error_assign_columns_non_na_only())
   }
 
   if (is_bare_character(j)) {
     set_names(match(j, names(x)), j)
   } else if (is_bare_numeric(j)) {
     if (anyDuplicated(j)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_column_subscript_for_assignment(j))
     }
 
     new <- which(j > ncol(x))
@@ -421,19 +421,19 @@ vec_as_new_col_index <- function(j, x, value) {
     j <- vec_as_index(j, ncol(x), arg = "j")
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      abort(error_new_columns_at_end_only())
+      abort(error_new_columns_at_end_only(ncol(x), j_new))
     }
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    names <- vec_recycle(names2(value), length(j))
+    names <- vec_recycle_cols(names2(value), length(j))
     names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
   } else {
     j <- vec_as_col_index(j, x)
     if (anyDuplicated(j)) {
-      abort(error_duplicate_subscript_for_assignment())
+      abort(error_duplicate_column_subscript_for_assignment(j))
     }
     j
   }
@@ -452,7 +452,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vec_recycle(value[[jj]], nrow)
+    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
   }
 
   # Remove
@@ -467,13 +467,17 @@ coalesce2 <- function(x, y) {
   if (is.na(x)) y else x
 }
 
+coalesce2empty <- function(x, y) {
+  if (x == "") y else x
+}
+
 tbl_expand_to_nrow <- function(x, i) {
   nrow <- fast_nrow(x)
 
   new_nrow <- max(i, nrow)
 
   if (is.na(new_nrow)) {
-    error_na_new_row()
+    abort(error_assign_rows_non_na_only())
   }
 
   if (new_nrow != nrow) {
@@ -486,7 +490,7 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  value <- vec_recycle(value, ncol(x))
+  value <- vec_recycle_cols(value, ncol(x))
 
   nrow <- fast_nrow(x)
 
@@ -501,12 +505,26 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
-check_scalar <- function(ij) {
-  if (!has_length(ij, 1)) {
-    abort(error_need_scalar())
+check_scalar <- function(j) {
+  if (!has_length(j, 1)) {
+    abort(error_need_scalar_column_index())
   }
 }
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
+}
+
+vec_recycle_cols <- function(x, n) {
+  subclass_col_recycle_errors(
+    vec_recycle(x, n)
+  )
+}
+
+vec_recycle_rows <- function(x, n, col) {
+  size <- vec_size(x)
+  if (size == n) return(x)
+  if (size == 1) return(vec_recycle(x, n))
+
+  abort(error_inconsistent_cols(n, col, size, "Existing data"))
 }

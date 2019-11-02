@@ -1,20 +1,62 @@
 context("msg")
 
+test_that("error class", {
+  expect_equal(tibble_error_class("boo"), c("tibble_error_boo", "tibble_error"))
+})
+
+test_that("aborting with class", {
+  expect_error(abort(error_enframe_value_null()), class = tibble_error_class("enframe_value_null"))
+})
+
 test_that("error messages", {
   expect_known_tibble_error_output(
     error_enframe_value_null(),
 
     error_enframe_has_dim(Titanic),
 
+    error_need_scalar_column_index(),
+
     error_na_column_index(1:3),
 
-    error_unknown_names("a"),
-    error_unknown_names(c("b", "c")),
-    error_unknown_names(LETTERS),
+    error_unsupported_column_index(),
 
-    error_existing_names("a"),
-    error_existing_names(c("b", "c")),
-    error_existing_names(LETTERS),
+    error_large_column_index(3, 4:5),
+    error_large_column_index(3, 5),
+    error_large_column_index(1, 4:5),
+    error_large_column_index(1, 5),
+
+    error_small_column_index(3, -(4:5)),
+    error_small_column_index(3, -5),
+    error_small_column_index(1, -(4:5)),
+    error_small_column_index(1, -5),
+
+    error_unknown_column_names("a"),
+    error_unknown_column_names(c("b", "c")),
+    error_unknown_column_names(LETTERS),
+
+    error_existing_column_names("a"),
+    error_existing_column_names(c("b", "c")),
+    error_existing_column_names(LETTERS),
+
+    error_assign_columns_non_na_only(),
+
+    error_new_columns_at_end_only(5, 7:8),
+    error_new_columns_at_end_only(5, 7),
+    error_new_columns_at_end_only(1, 7:8),
+    error_new_columns_at_end_only(1, 7),
+
+    error_duplicate_column_subscript_for_assignment(c(1, 1)),
+    error_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)),
+
+    error_assign_rows_non_na_only(),
+
+    error_new_rows_at_end_only(5, 7:8),
+    error_new_rows_at_end_only(5, 7),
+    error_new_rows_at_end_only(1, 7:8),
+    error_new_rows_at_end_only(1, 7),
+
+    error_duplicate_row_subscript_for_assignment(c(1, 1)),
+    error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2)),
 
     error_add_rows_to_grouped_df(),
 

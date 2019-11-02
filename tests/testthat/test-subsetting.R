@@ -57,31 +57,31 @@ test_that("[ with 0 cols returns correct number of rows", {
 
 test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error_relax(
+  expect_tibble_error(
     foo["z"],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[c("x", "y", "z")],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[, "z"],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[, c("x", "y", "z")],
-    error_unknown_names("z")
+    error_unknown_column_names("z")
   )
 
   skip("r-lib/vctrs#557")
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[as.matrix("x")],
     error_dim_column_index(as.matrix("x"))
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[array("x", dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
@@ -91,33 +91,36 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
 
-  expect_error(
+  expect_tibble_error(
     foo[0.5],
-    class = "vctrs_error_index"
+    error_unsupported_column_index()
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[1:5],
-    error_large_column_index(3, 4:5, 4:5)
+    error_large_column_index(3, 4:5)
   )
 
   # Message from base R
   expect_error(foo[-1:1])
   expect_error(foo[c(-1, 1)])
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[-4],
-    error_small_column_index(3, 1, -4)
+    error_small_column_index(3, -4)
   )
+  expect_error(foo[c(-1, 2)], ".")
   expect_tibble_error(
     foo[c(1:3, NA)],
     error_na_column_index(4)
   )
 
-  expect_error_relax(
+  skip("r-lib/vctrs#557")
+
+  expect_tibble_error(
     foo[as.matrix(1)],
     error_dim_column_index(as.matrix("x"))
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[array(1, dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
@@ -130,26 +133,26 @@ test_that("[.tbl_df is careful about column flags (#83)", {
   expect_identical(foo[FALSE], foo[integer()])
   expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error_relax(
+  expect_error(
     foo[c(TRUE, TRUE)],
-    error_mismatch_column_flag(3, 2)
+    "."
   )
-  expect_error_relax(
+  expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    error_mismatch_column_flag(3, 4)
+    "."
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[c(TRUE, TRUE, NA)],
-    error_na_column_flag()
+    error_na_column_index(3)
   )
 
   skip("r-lib/vctrs#557")
 
-  expect_error_relax(
+  expect_tibble_error(
     foo[as.matrix(TRUE)],
     error_dim_column_index(as.matrix("x"))
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
@@ -157,28 +160,25 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
 test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_error_relax(
+  expect_tibble_error(
     foo[list(1:3)],
-    error_unsupported_index(list(1:3))
+    error_unsupported_column_index()
   )
-
-  skip("r-lib/vctrs#557")
-
-  expect_error_relax(
+  expect_tibble_error(
     foo[as.list(1:3)],
-    error_unsupported_index(as.list(1:3))
+    error_unsupported_column_index()
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[factor(1:3)],
-    error_unsupported_index(factor(1:3))
+    error_unknown_column_names(as.character(1:3))
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[Sys.Date()],
-    error_unsupported_index(Sys.Date())
+    error_unsupported_column_index()
   )
-  expect_error_relax(
+  expect_tibble_error(
     foo[Sys.time()],
-    error_unsupported_index(Sys.time())
+    error_unsupported_column_index()
   )
 })
 
@@ -378,9 +378,18 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
 
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
   df <- tibble(x = 1:2, y = x)
-  expect_error(df[c(1, 1)] <- 3, ".")
-  expect_error(df[, c(1, 1)] <- 3, ".")
-  expect_error(df[c(1, 1), ] <- 3, ".")
+  expect_tibble_error(
+    df[c(1, 1)] <- 3,
+    error_duplicate_column_subscript_for_assignment(c(1, 1))
+  )
+  expect_tibble_error(
+    df[, c(1, 1)] <- 3,
+    error_duplicate_column_subscript_for_assignment(c(1, 1))
+  )
+  expect_tibble_error(
+    df[c(1, 1), ] <- 3,
+    error_duplicate_row_subscript_for_assignment(c(1, 1))
+  )
 })
 
 test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {
@@ -413,20 +422,20 @@ test_that("$<- doesn't throw warning if name doesn't exist", {
 })
 
 test_that("$<- throws different warning if attempting a partial initialization (#199)", {
-  scoped_lifecycle_warnings()
-
   df <- tibble(x = 1:3)
   expect_warning(
     df$y[1] <- 2,
     "Unknown or uninitialised column: `y`",
     fixed = TRUE
   )
-  expect_error_relax(
+
+  expect_tibble_error(
     expect_warning(
       df$z[1:2] <- 2,
       "Unknown or uninitialised column: `z`",
       fixed = TRUE
-    )
+    ),
+    error_inconsistent_cols(3, "z", 2, "Existing data")
   )
 })
 
@@ -439,12 +448,12 @@ test_that("$<- recycles only values of length one", {
   df$z <- 5:7
   expect_identical(df, tibble(x = 1:3, y = 4, z = 5:7))
 
-  expect_error_relax(
+  expect_tibble_error(
     df$w <- 8:9,
     error_inconsistent_cols(3, "w", 2, "Existing data")
   )
 
-  expect_error_relax(
+  expect_tibble_error(
     df$a <- character(),
     error_inconsistent_cols(3, "a", 0, "Existing data")
   )

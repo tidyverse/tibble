@@ -2,7 +2,7 @@
 title: "Invariants for subsetting and subassignment"
 #output: rmarkdown::word_document
 output: rmarkdown::html_vignette
-# devtools::load_all(); rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
+# devtools::load_all(); eval_details <- TRUE; rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
 vignette: >
   %\VignetteIndexEntry{invariants}
   %\VignetteEngine{knitr::rmarkdown}
@@ -302,9 +302,7 @@ exists.
 <td>
     tbl[[c("n", "c")]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1245,9 +1243,7 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1263,9 +1259,7 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1281,9 +1275,7 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1299,9 +1291,7 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1317,9 +1307,7 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must use a scalar in `[[`.
 
 </td>
 </tr>
@@ -1335,10 +1323,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1354,10 +1340,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1374,10 +1358,8 @@ value `a`.
 <td>
     with_tbl(tbl[[NA_character_]] <- 0)
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -1494,9 +1476,11 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 3:1)
 
-    #> Error: Vector of length 3 cannot be
-    #> recycled to length 4. Only vectors
-    #> of length one can be recycled.
+    #> Error: Tibble columns must have
+    #> consistent lengths, only values of
+    #> length one are recycled:
+    #> * Length 4: Existing data
+    #> * Length 3: Column `n`
 
 </td>
 </tr>
@@ -1513,9 +1497,11 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 2:1)
 
-    #> Error: Vector of length 2 cannot be
-    #> recycled to length 4. Only vectors
-    #> of length one can be recycled.
+    #> Error: Tibble columns must have
+    #> consistent lengths, only values of
+    #> length one are recycled:
+    #> * Length 4: Existing data
+    #> * Length 2: Column `n`
 
 </td>
 </tr>
@@ -1583,10 +1569,8 @@ needed.
 <td>
     with_tbl(tbl[[5]] <- 0)
 
-    #> Error in
-    #> error_new_columns_at_end_only():
-    #> could not find function
-    #> "error_new_columns_at_end_only"
+    #> Error: Can't assign column 5 in a
+    #> tibble with 3 columns.
 
 </td>
 </tr>
@@ -1954,10 +1938,8 @@ An attempt to update the same column twice gives an error.
 <td>
     with_tbl(tbl[c(1, 1)] <- list(1, 2))
 
-    #> Error in
-    #> error_duplicate_subscript_for_assignment():
-    #> could not find function
-    #> "error_duplicate_subscript_for_assignment"
+    #> Error: Column index 1 is used more
+    #> than once for assignment.
 
 </td>
 </tr>
@@ -2004,10 +1986,8 @@ modifications).
 <td>
     with_tbl(tbl[NA] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2025,10 +2005,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_integer_] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2046,10 +2024,8 @@ modifications).
 <td>
     with_tbl(tbl[NA_character_] <- list("x"))
 
-    #> Error in
-    #> error_new_columns_non_na_only():
-    #> could not find function
-    #> "error_new_columns_non_na_only"
+    #> Error: Can't use NA as column index
+    #> in a tibble for assignment.
 
 </td>
 </tr>
@@ -2210,10 +2186,8 @@ that order of precedence).
 <td>
     with_tbl(tbl[5] <- list(4:1))
 
-    #> Error in
-    #> error_new_columns_at_end_only():
-    #> could not find function
-    #> "error_new_columns_at_end_only"
+    #> Error: Can't assign column 5 in a
+    #> tibble with 3 columns.
 
 </td>
 </tr>
@@ -2474,8 +2448,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2493,8 +2467,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2542,8 +2516,8 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[NA, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2707,10 +2681,8 @@ supported, without warning.
 <td>
     with_tbl(tbl[6, ] <- tbl[1, ])
 
-    #> Error in
-    #> error_new_rows_at_end_only(): could
-    #> not find function
-    #> "error_new_rows_at_end_only"
+    #> Error: Can't assign row 6 in a
+    #> tibble with 4 rows.
 
 </td>
 </tr>
@@ -2821,8 +2793,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2844,8 +2816,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2869,8 +2841,8 @@ positive numbers.
     #> used for indexing. Use `NA` as row index
     #> to obtain a row full of `NA` values.
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -2888,8 +2860,8 @@ positive numbers.
 <td>
     with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
-    #> Error in error_na_new_row(): could
-    #> not find function "error_na_new_row"
+    #> Error: Can't use NA as row index in
+    #> a tibble for assignment.
 
 </td>
 </tr>
@@ -3280,9 +3252,12 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     tbl[[1:2, 1]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `i` has the wrong size
+    #> 2.
+    #> [34mℹ[39m This index must be size
+    #> 1.
 
 </td>
 </tr>
@@ -3298,9 +3273,12 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `i` has the wrong size
+    #> 2.
+    #> [34mℹ[39m This index must be size
+    #> 1.
 
 </td>
 </tr>

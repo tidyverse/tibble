@@ -10,12 +10,44 @@ The `value` argument to `enframe()` cannot be NULL.
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
 
 
+## error_need_scalar_column_index()
+
+Must use a scalar in `[[`.
+
+
 ## error_na_column_index()
 
 Can't use NA as column index with `[` at positions 1, 2, 3.
 
 
-## error_unknown_names()
+## error_unsupported_column_index()
+
+Must subset columns with an index vector.
+
+
+## error_large_column_index()
+
+Cannot subset columns 4, 5 in tibble with 3 columns.
+
+Cannot subset column 5 in tibble with 3 columns.
+
+Cannot subset columns 4, 5 in tibble with 1 column.
+
+Cannot subset column 5 in tibble with 1 column.
+
+
+## error_small_column_index()
+
+Cannot exclude columns 4, 5 in tibble with 3 columns.
+
+Cannot exclude column 5 in tibble with 3 columns.
+
+Cannot exclude columns 4, 5 in tibble with 1 column.
+
+Cannot exclude column 5 in tibble with 1 column.
+
+
+## error_unknown_column_names()
 
 Can't find column `a` in `.data`.
 
@@ -24,7 +56,7 @@ Can't find columns `b`, `c` in `.data`.
 Can't find columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) in `.data`.
 
 
-## error_existing_names()
+## error_existing_column_names()
 
 Column `a` already exists in `.data`.
 
@@ -33,9 +65,55 @@ Columns `b`, `c` already exist in `.data`.
 Columns `A`, `B`, `C`, `D`, `E`, … (and 21 more) already exist in `.data`.
 
 
+## error_assign_columns_non_na_only()
+
+Can't use NA as column index in a tibble for assignment.
+
+
+## error_new_columns_at_end_only()
+
+Can't assign columns 7, 8 in a tibble with 5 columns.
+
+Can't assign column 7 in a tibble with 5 columns.
+
+Can't assign columns 7, 8 in a tibble with 1 column.
+
+Can't assign column 7 in a tibble with 1 column.
+
+
+## error_duplicate_column_subscript_for_assignment()
+
+Column index 1 are used more than once for assignment.
+
+Column indexes 1, 2 are used more than once for assignment.
+
+
+## error_assign_rows_non_na_only()
+
+Can't use NA as row index in a tibble for assignment.
+
+
+## error_new_rows_at_end_only()
+
+Can't assign rows 7, 8 in a tibble with 5 rows.
+
+Can't assign row 7 in a tibble with 5 rows.
+
+Can't assign rows 7, 8 in a tibble with 1 row.
+
+Can't assign row 7 in a tibble with 1 row.
+
+
+## error_duplicate_row_subscript_for_assignment()
+
+Row index 1 are used more than once for assignment.
+
+Row indexes 1, 2 are used more than once for assignment.
+
+
 ## error_add_rows_to_grouped_df()
 
-Can't add rows to grouped data frames
+Can't add rows to grouped data frames.
 
 
 ## error_inconsistent_new_rows()

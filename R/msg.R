@@ -42,11 +42,11 @@ tibble_error_class <- function(class) {
 }
 
 # Errors get a class name derived from the name of the calling function
-tibble_error <- function(x, parent = NULL) {
+tibble_error <- function(x, ..., parent = NULL) {
   call <- sys.call(-1)
   fn_name <- as_name(call[[1]])
   class <- tibble_error_class(gsub("^error_", "", fn_name))
-  error_cnd(.subclass = class, message = x, parent = parent)
+  error_cnd(.subclass = class, ..., message = x, parent = parent)
 }
 
 error_enframe_value_null <- function() {
@@ -57,31 +57,94 @@ error_enframe_has_dim <- function(x) {
   tibble_error(paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), "."))
 }
 
+error_need_scalar_column_index <- function(j) {
+  tibble_error("Must use a scalar in `[[`.")
+}
+
 error_na_column_index <- function(j) {
-  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."))
+  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
 }
 
 error_dim_column_index <- function(j) {
   tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
 }
 
-error_unknown_names <- function(names) {
-  tibble_error(pluralise_commas("Can't find column(s) ", tick(names), " in `.data`."))
+error_unsupported_column_index <- function(parent = NULL) {
+  tibble_error("Must subset columns with an index vector.", cnd_bullets = parent$cnd_bullets, parent = parent)
 }
 
-error_existing_names <- function(names) {
-  tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."))
+error_unknown_column_names <- function(j, parent = NULL) {
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+}
+
+error_large_column_index <- function(ncol, j, parent = NULL) {
+  tibble_error(
+    pluralise_commas(
+      "Cannot subset column(s) ", j, " in tibble with ",
+      ncol, pluralise_n(" column(s)", ncol), "."),
+    ncol = ncol, j = j, parent = parent
+  )
+}
+
+error_small_column_index <- function(ncol, j, parent = NULL) {
+  tibble_error(
+    pluralise_commas(
+      "Cannot exclude column(s) ", abs(j), " in tibble with ",
+      ncol, pluralise_n(" column(s)", ncol), "."),
+    ncol = ncol, j = j, parent = parent
+  )
+}
+
+error_existing_column_names <- function(names) {
+  tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."), names = names)
+}
+
+error_assign_columns_non_na_only <- function() {
+  tibble_error("Can't use NA as column index in a tibble for assignment.")
+}
+
+error_new_columns_at_end_only <- function(ncol, j) {
+  j <- j[j > ncol + 1]
+  tibble_error(
+    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
+    ncol = ncol, j = j
+  )
+}
+
+error_duplicate_column_subscript_for_assignment <- function(j) {
+  j <- unique(j[duplicated(j)])
+  tibble_error(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
+}
+
+error_assign_rows_non_na_only <- function() {
+  tibble_error("Can't use NA as row index in a tibble for assignment.")
+}
+
+error_new_rows_at_end_only <- function(nrow, i) {
+  i <- i[i > nrow + 1]
+  tibble_error(
+    pluralise_commas("Can't assign row(s) ", i, " in a tibble with ", nrow, pluralise_n(" row(s).", nrow)),
+    nrow = nrow, i = i
+  )
+}
+
+error_duplicate_row_subscript_for_assignment <- function(i) {
+  i <- unique(i[duplicated(i)])
+  tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
 error_add_rows_to_grouped_df <- function() {
-  tibble_error("Can't add rows to grouped data frames")
+  tibble_error("Can't add rows to grouped data frames.")
 }
 
 error_inconsistent_new_rows <- function(names) {
-  tibble_error(bullets(
-    "New rows in `add_row()` must use columns that already exist:",
-    cnd_message(error_unknown_names(names))
-  ))
+  tibble_error(
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      cnd_message(error_unknown_column_names(names))
+    ),
+    names = names
+  )
 }
 
 error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
@@ -89,30 +152,37 @@ error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")
 }
 
 error_names_must_have_length <- function(length, n) {
-  tibble_error(paste0("The `names` must have length ", n, ", not ", length, "."))
+  tibble_error(
+    paste0("The `names` must have length ", n, ", not ", length, "."),
+    expected = n,
+    actual = length
+  )
 }
 
 error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(invalid_df("must be named", names, use_repair(repair)), parent = parent)
+  tibble_error(invalid_df("must be named", names, use_repair(repair)), names = names, parent = parent)
 }
 
 error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), parent = parent)
+  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), names = names, parent = parent)
 }
 
 error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), parent = parent)
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), names = names, parent = parent)
 }
 
 error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(".name_repair")) {
-  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)))
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)), names = names)
 }
 
 error_column_must_be_vector <- function(names, classes) {
-  tibble_error(bullets(
-    "All columns in a tibble must be 1d or 2d objects:",
-    paste0("Column ", tick(names), " is ", classes)
-  ))
+  tibble_error(
+    bullets(
+      "All columns in a tibble must be 1d or 2d objects:",
+      paste0("Column ", tick(names), " is ", classes)
+    ),
+    names = names
+  )
 }
 
 error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
@@ -131,22 +201,28 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
 }
 
 error_inconsistent_new_cols <- function(n, df) {
-  tibble_error(bullets(
-    "New columns in `add_column()` must be consistent with `.data`:",
-    pluralise_count("`.data` has ", n, " row(s)"),
-    paste0(
-      pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
-      nrow(df),
-      " rows"
-    )
-  ))
+  tibble_error(
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      pluralise_count("`.data` has ", n, " row(s)"),
+      paste0(
+        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+        nrow(df), " rows"
+      )
+    ),
+    expected = n,
+    actual = nrow(df)
+  )
 }
 
 error_duplicate_new_cols <- function(names) {
-  tibble_error(bullets(
-    "Can't add duplicate columns with `add_column()`:",
-    cnd_message(error_existing_names(names))
-  ))
+  tibble_error(
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      cnd_message(error_existing_column_names(names))
+    ),
+    names = names
+  )
 }
 
 error_both_before_after <- function() {
@@ -209,4 +285,65 @@ error_new_tibble_needs_nrow <- function() {
 
 error_new_tibble_needs_class <- function() {
   tibble_error("Must pass a `class` argument instead of `subclass` to `new_tibble()`.")
+}
+
+
+# Subclassing errors ------------------------------------------------------
+
+subclass_name_repair_errors <- function(expr, name) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_names_cannot_be_empty = function(cnd) {
+      cnd <- error_column_must_be_named(cnd$locations, parent = cnd)
+      cnd_signal(cnd)
+    },
+    vctrs_error_names_cannot_be_dot_dot = function(cnd) {
+      cnd <- error_column_must_not_be_dot_dot(cnd$locations, parent = cnd)
+      cnd_signal(cnd)
+    },
+    vctrs_error_names_must_be_unique = function(cnd) {
+      cnd <- error_column_names_must_be_unique(name[cnd$locations], parent = cnd)
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_col_index_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_index_oob_names = function(cnd) {
+      cnd <- error_unknown_column_names(setdiff(cnd$i, cnd$names), parent = cnd)
+      cnd_signal(cnd)
+    },
+
+    vctrs_error_index_oob_positions = function(cnd) {
+      i <- cnd$i
+      size <- cnd$size
+      if (any(i < 0)) {
+        cnd <- error_small_column_index(cnd$size, i[i < -size], parent = cnd)
+      } else {
+        cnd <- error_large_column_index(cnd$size, i[i > size], parent = cnd)
+      }
+      cnd_signal(cnd)
+    },
+
+    vctrs_error_index_bad_type = function(cnd) {
+      cnd_bullets <- cnd_bullets(cnd)
+      cnd$cnd_bullets <- function(...) cnd_bullets
+      cnd <- error_unsupported_column_index(cnd)
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_col_recycle_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_recycle_incompatible_size = function(cnd) {
+      cnd_signal(cnd)
+    }
+  )
 }

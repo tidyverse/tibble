@@ -260,11 +260,11 @@ test_that("error if column named by .before or .after not found", {
   df <- tibble(a = 1:3)
   expect_tibble_error(
     add_column(df, b = 4:6, .after = "x"),
-    error_unknown_names("x")
+    error_unknown_column_names("x")
   )
   expect_tibble_error(
     add_column(df, b = 4:6, .before = "x"),
-    error_unknown_names("x")
+    error_unknown_column_names("x")
   )
 })
 

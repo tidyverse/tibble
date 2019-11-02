@@ -182,19 +182,19 @@ tibble_quos <- function(xs, .rows, .name_repair) {
 
   mask <- new_data_mask(new_environment())
 
-  for (i in seq_along(xs)) {
-    res <- eval_tidy(xs[[i]], mask)
+  for (j in seq_along(xs)) {
+    res <- eval_tidy(xs[[j]], mask)
 
     if (!is_null(res)) {
       # 657
-      res <- check_valid_col(res, col_names[[i]], i)
+      res <- check_valid_col(res, col_names[[j]], j)
 
-      lengths[[i]] <- current_size <- vec_size(res)
-      if (i > 1) {
+      lengths[[j]] <- current_size <- vec_size(res)
+      if (j > 1) {
         if (current_size == 1) {
-          res <- vec_recycle(res, first_size)
+          res <- vec_recycle_rows(res, first_size, j)
         } else if (first_size == 1L) {
-          idx_to_fix <- seq2(1L, i - 1L)
+          idx_to_fix <- seq2(1L, j - 1L)
           output[idx_to_fix] <- fixed_output <-
             map(output[idx_to_fix], vec_recycle, current_size)
 
@@ -208,8 +208,8 @@ tibble_quos <- function(xs, .rows, .name_repair) {
         first_size <- current_size
       }
 
-      output[[i]] <- res
-      col_names[[i]] <- add_to_mask2(res, given_col_names[[i]], col_names[[i]], mask)
+      output[[j]] <- res
+      col_names[[j]] <- add_to_mask2(res, given_col_names[[j]], col_names[[j]], mask)
     }
   }
 

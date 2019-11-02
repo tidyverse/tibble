@@ -7,22 +7,11 @@ set_repaired_names <- function(x,
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
                            quiet = FALSE) {
-  tryCatch(
-    vec_as_names(name, repair = .name_repair, quiet = quiet),
 
-    vctrs_error_names_cannot_be_empty = function(cnd) {
-      cnd <- error_column_must_be_named(cnd$locations, parent = cnd)
-      cnd_signal(cnd)
-    },
-    vctrs_error_names_cannot_be_dot_dot = function(cnd) {
-      cnd <- error_column_must_not_be_dot_dot(cnd$locations, parent = cnd)
-      cnd_signal(cnd)
-    },
-    vctrs_error_names_must_be_unique = function(cnd) {
-      cnd <- error_column_names_must_be_unique(name[cnd$locations], parent = cnd)
-      cnd_signal(cnd)
-    }
+  subclass_name_repair_errors(name = name,
+    vec_as_names(name, repair = .name_repair, quiet = quiet)
   )
+
 }
 
 check_names_non_null <- function(name, abort = rlang::abort) {

@@ -1,5 +1,17 @@
 expect_tibble_error <- function(object, cnd, fixed = NULL) {
-  expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
+  cnd_actual <- expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
+  expect_cnd_equivalent(cnd_actual, cnd)
+  expect_s3_class(cnd_actual, class(cnd), exact = TRUE)
+}
+
+expect_cnd_equivalent <- function(actual, expected) {
+  actual$trace <- NULL
+  actual$parent <- NULL
+  actual$cnd_bullets <- NULL
+  expected$trace <- NULL
+  expected$parent <- NULL
+  expected$cnd_bullets <- NULL
+  expect_equivalent(actual, expected)
 }
 
 expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) {
