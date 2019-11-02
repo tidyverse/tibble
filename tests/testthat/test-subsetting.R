@@ -59,37 +59,31 @@ test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_error_relax(
     foo["z"],
-    error_unknown_names("z"),
-    fixed = TRUE
+    error_unknown_names("z")
   )
   expect_error_relax(
     foo[c("x", "y", "z")],
-    error_unknown_names("z"),
-    fixed = TRUE
+    error_unknown_names("z")
   )
 
   expect_error_relax(
     foo[, "z"],
-    error_unknown_names("z"),
-    fixed = TRUE
+    error_unknown_names("z")
   )
   expect_error_relax(
     foo[, c("x", "y", "z")],
-    error_unknown_names("z"),
-    fixed = TRUE
+    error_unknown_names("z")
   )
 
   skip("r-lib/vctrs#557")
 
   expect_error_relax(
     foo[as.matrix("x")],
-    error_dim_column_index(as.matrix("x")),
-    fixed = TRUE
+    error_dim_column_index(as.matrix("x"))
   )
   expect_error_relax(
     foo[array("x", dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
-    fixed = TRUE
+    error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
 })
 
@@ -103,8 +97,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   )
   expect_error_relax(
     foo[1:5],
-    error_large_column_index(3, 4:5, 4:5),
-    fixed = TRUE
+    error_large_column_index(3, 4:5, 4:5)
   )
 
   # Message from base R
@@ -113,24 +106,20 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error_relax(
     foo[-4],
-    error_small_column_index(3, 1, -4),
-    fixed = TRUE
+    error_small_column_index(3, 1, -4)
   )
   expect_tibble_error(
     foo[c(1:3, NA)],
-    error_na_column_index(4),
-    fixed = TRUE
+    error_na_column_index(4)
   )
 
   expect_error_relax(
     foo[as.matrix(1)],
-    error_dim_column_index(as.matrix("x")),
-    fixed = TRUE
+    error_dim_column_index(as.matrix("x"))
   )
   expect_error_relax(
     foo[array(1, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
-    fixed = TRUE
+    error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
 })
 
@@ -143,31 +132,26 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error_relax(
     foo[c(TRUE, TRUE)],
-    error_mismatch_column_flag(3, 2),
-    fixed = TRUE
+    error_mismatch_column_flag(3, 2)
   )
   expect_error_relax(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    error_mismatch_column_flag(3, 4),
-    fixed = TRUE
+    error_mismatch_column_flag(3, 4)
   )
   expect_error_relax(
     foo[c(TRUE, TRUE, NA)],
-    error_na_column_flag(),
-    fixed = TRUE
+    error_na_column_flag()
   )
 
   skip("r-lib/vctrs#557")
 
   expect_error_relax(
     foo[as.matrix(TRUE)],
-    error_dim_column_index(as.matrix("x")),
-    fixed = TRUE
+    error_dim_column_index(as.matrix("x"))
   )
   expect_error_relax(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
-    fixed = TRUE
+    error_dim_column_index(array("x", dim = c(1, 1, 1)))
   )
 })
 
@@ -175,31 +159,26 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error_relax(
     foo[list(1:3)],
-    error_unsupported_index(list(1:3)),
-    fixed = TRUE
+    error_unsupported_index(list(1:3))
   )
 
   skip("r-lib/vctrs#557")
 
   expect_error_relax(
     foo[as.list(1:3)],
-    error_unsupported_index(as.list(1:3)),
-    fixed = TRUE
+    error_unsupported_index(as.list(1:3))
   )
   expect_error_relax(
     foo[factor(1:3)],
-    error_unsupported_index(factor(1:3)),
-    fixed = TRUE
+    error_unsupported_index(factor(1:3))
   )
   expect_error_relax(
     foo[Sys.Date()],
-    error_unsupported_index(Sys.Date()),
-    fixed = TRUE
+    error_unsupported_index(Sys.Date())
   )
   expect_error_relax(
     foo[Sys.time()],
-    error_unsupported_index(Sys.time()),
-    fixed = TRUE
+    error_unsupported_index(Sys.time())
   )
 })
 
@@ -462,13 +441,11 @@ test_that("$<- recycles only values of length one", {
 
   expect_error_relax(
     df$w <- 8:9,
-    error_inconsistent_cols(3, "w", 2, "Existing data"),
-    fixed = TRUE
+    error_inconsistent_cols(3, "w", 2, "Existing data")
   )
 
   expect_error_relax(
     df$a <- character(),
-    error_inconsistent_cols(3, "a", 0, "Existing data"),
-    fixed = TRUE
+    error_inconsistent_cols(3, "a", 0, "Existing data")
   )
 })

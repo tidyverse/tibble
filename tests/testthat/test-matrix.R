@@ -139,7 +139,6 @@ test_that("converting from matrix throws an error if user turns missing row name
   x <- matrix(1:30, 6, 5)
   expect_tibble_error(
     as_tibble(x, rownames = "id", .name_repair = "minimal"),
-    error_as_tibble_needs_rownames(),
-    fixed = TRUE
+    error_as_tibble_needs_rownames()
   )
 })

@@ -1,6 +1,4 @@
 expect_tibble_error <- function(object, cnd, fixed = NULL) {
-  #if (!is.null(fixed)) warn("fixed obsolete")
-
   expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
 }
 

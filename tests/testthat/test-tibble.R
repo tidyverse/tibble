@@ -18,13 +18,11 @@ test_that("NULL is ignored (#580)", {
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment"),
-    fixed = TRUE
+    error_column_must_be_vector("a", "environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name"),
-    fixed = TRUE
+    error_column_must_be_vector("a", "name")
   )
 })
 
@@ -33,8 +31,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
-    fixed = TRUE
+    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA)
   )
 })
 
@@ -129,8 +126,7 @@ test_that("columns are recycled to common length", {
 test_that("columns must be same length", {
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA),
-    fixed = TRUE
+    error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA)
   )
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
@@ -139,8 +135,7 @@ test_that("columns must be same length", {
       c("x", "y", "z"),
       2:4,
       NA
-    ),
-    fixed = TRUE
+    )
   )
   expect_tibble_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
@@ -149,8 +144,7 @@ test_that("columns must be same length", {
       c("x", "y", "z"),
       c(4, 2, 2),
       NA
-    ),
-    fixed = TRUE
+    )
   )
   expect_tibble_error(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
@@ -159,8 +153,7 @@ test_that("columns must be same length", {
       c("y", "z"),
       c(4, 2),
       NA
-    ),
-    fixed = TRUE
+    )
   )
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
@@ -169,8 +162,7 @@ test_that("columns must be same length", {
       c("x", "y"),
       c(2, 4),
       NA
-    ),
-    fixed = TRUE
+    )
   )
 })
 
@@ -256,8 +248,7 @@ test_that("Can convert named atomic vectors to data frame", {
 
   expect_tibble_error(
     as_tibble(setNames(nm = c(TRUE, FALSE, NA))),
-    invalid_df("must be named", 3),
-    fixed = TRUE
+    invalid_df("must be named", 3)
   )
 })
 
@@ -510,13 +501,11 @@ test_that("as_tibble() throws an error when user turns missing row names into co
   df <- data.frame(a = 1:3, b = 2:4)
   expect_tibble_error(
     as_tibble(df, rownames = "id"),
-    error_as_tibble_needs_rownames(),
-    fixed = TRUE
+    error_as_tibble_needs_rownames()
   )
   expect_tibble_error(
     as_tibble(df[0, ], rownames = "id"),
-    error_as_tibble_needs_rownames(),
-    fixed = TRUE
+    error_as_tibble_needs_rownames()
   )
 })
 
@@ -535,8 +524,7 @@ test_that("as.tibble is an alias of as_tibble", {
 test_that("NULL isn't a valid column", {
   expect_tibble_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", "NULL"),
-    fixed = TRUE
+    error_column_must_be_vector("a", "NULL")
   )
 })
 
