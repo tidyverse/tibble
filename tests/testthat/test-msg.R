@@ -4,6 +4,10 @@ test_that("error class", {
   expect_equal(tibble_error_class("boo"), c("tibble_error_boo", "tibble_error"))
 })
 
+test_that("aborting with class", {
+  expect_error(abort(error_enframe_value_null()), class = tibble_error_class("enframe_value_null"))
+})
+
 test_that("error messages", {
   expect_known_tibble_error_output(
     error_enframe_value_null(),
@@ -11,6 +15,18 @@ test_that("error messages", {
     error_enframe_has_dim(Titanic),
 
     error_na_column_index(1:3),
+
+    error_unsupported_column_index(),
+
+    error_large_column_index(3, 4:5),
+    error_large_column_index(3, 5),
+    error_large_column_index(1, 4:5),
+    error_large_column_index(1, 5),
+
+    error_small_column_index(3, -(4:5)),
+    error_small_column_index(3, -5),
+    error_small_column_index(1, -(4:5)),
+    error_small_column_index(1, -5),
 
     error_unknown_column_names("a"),
     error_unknown_column_names(c("b", "c")),

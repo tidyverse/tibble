@@ -15,6 +15,33 @@ The `value` argument to `enframe()` cannot be NULL.
 Can't use NA as column index with `[` at positions 1, 2, 3.
 
 
+## error_unsupported_column_index()
+
+Must subset columns with an index vector.
+
+
+## error_large_column_index()
+
+Cannot subset columns 4, 5 in tibble with 3 columns.
+
+Cannot subset column 5 in tibble with 3 columns.
+
+Cannot subset columns 4, 5 in tibble with 1 column.
+
+Cannot subset column 5 in tibble with 1 column.
+
+
+## error_small_column_index()
+
+Cannot exclude columns 4, 5 in tibble with 3 columns.
+
+Cannot exclude column 5 in tibble with 3 columns.
+
+Cannot exclude columns 4, 5 in tibble with 1 column.
+
+Cannot exclude column 5 in tibble with 1 column.
+
+
 ## error_unknown_column_names()
 
 Can't find column `a` in `.data`.
