@@ -1,7 +1,7 @@
 # Looks into top-level tibble function,
 # returns TRUE if that function has a given argument.
 has_tibble_arg <- function(arg_name) {
-  frames <- sys.frames()
+  frames <- utils::tail(sys.frames(), 5)
   frame_env <- map(frames, parent.env)
   frame_is_namespace <- which(map_lgl(frame_env, identical, ns_env()))
 
