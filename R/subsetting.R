@@ -115,8 +115,7 @@ NULL
   } else if (missing(j)) {
     error_missing_column_index()
   } else {
-    i <- vec_as_row_index(i, x)
-    check_scalar(i)
+    i <- vec_as_position(i, fast_nrow(x))
 
     x <- tbl_subset2(x, j = j)
     if (is.null(x)) return(x)
@@ -134,8 +133,7 @@ NULL
   }
 
   if (!is_null(i)) {
-    i <- vec_as_row_index(i, x)
-    check_scalar(i)
+    i <- vec_as_position(i, fast_nrow(x))
   }
 
   if (is_null(j)) {

@@ -3284,9 +3284,12 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     tbl[[1:2, 1]]
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `i` has the wrong size
+    #> 2.
+    #> [34mℹ[39m This index must be size
+    #> 1.
 
 </td>
 </tr>
@@ -3302,9 +3305,12 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
-    #> Error in error_need_scalar(): could
-    #> not find function
-    #> "error_need_scalar"
+    #> Error: Must extract with a single
+    #> index.
+    #> [31m✖[39m `i` has the wrong size
+    #> 2.
+    #> [34mℹ[39m This index must be size
+    #> 1.
 
 </td>
 </tr>
