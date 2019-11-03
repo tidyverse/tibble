@@ -1,42 +1,3 @@
-# alfred
-
-<details>
-
-* Version: 0.1.7
-* Source code: https://github.com/cran/alfred
-* URL: https://github.com/onnokleen/alfred/
-* BugReports: https://github.com/onnokleen/alfred/issues
-* Date/Publication: 2019-04-01 09:20:03 UTC
-* Number of recursive dependencies: 66
-
-Run `revdep_details(,"alfred")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘alfred-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_alfred_series
-    > ### Title: Accessing ALFRED
-    > ### Aliases: get_alfred_series
-    > ### Keywords: alfred
-    > 
-    > ### ** Examples
-    > 
-    > ## Not run: 
-    > ##D     get_alfred_series("INDPRO", "indpro")
-    > ##D     
-    > ## End(Not run)
-    > get_alfred_series("INDPRO", "indpro", realtime_start = "2008-10-31", realtime_end = "2009-10-31")
-    Error in get_alfred_series("INDPRO", "indpro", realtime_start = "2008-10-31",  : 
-      Download of specified time-series failed - did you misspell the identifier?
-    Execution halted
-    ```
-
 # amt
 
 <details>
@@ -161,10 +122,10 @@ Run `revdep_details(,"basket")` for more info
     Last 13 lines of output:
       11: `$<-`(`*tmp*`, "p0", value = c(0.15, 0.15, 0.15, 0.2, 0.15, 0.15)) at /home/rstudio/tibble/revdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:68
       12: `$<-.tbl_df`(`*tmp*`, "p0", value = c(0.15, 0.15, 0.15, 0.2, 0.15, 0.15)) at /home/rstudio/tibble/revdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:68
-      13: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:91
-      14: tbl_subassign_col(x, j, value) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:336
-      15: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:455
-      16: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:529
+      13: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:91
+      14: tbl_subassign_col(x, j, value) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:336
+      15: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:455
+      16: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:529
       17: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
@@ -201,10 +162,10 @@ Run `revdep_details(,"beadplexr")` for more info
       * Length 2: Column `BeadID`
       1: `$<-`(`*tmp*`, BeadID, value = c("A", "B")) at testthat/test_identify_assay_analyte.R:39
       2: `$<-.tbl_df`(`*tmp*`, BeadID, value = c("A", "B")) at testthat/test_identify_assay_analyte.R:39
-      3: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:91
-      4: tbl_subassign_col(x, j, value) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:336
-      5: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:455
-      6: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:529
+      3: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:91
+      4: tbl_subassign_col(x, j, value) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:336
+      5: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:455
+      6: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:529
       7: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
@@ -377,7 +338,7 @@ Run `revdep_details(,"corrr")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      25: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      25: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 75 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 8 ]
@@ -622,8 +583,8 @@ Run `revdep_details(,"dplyr")` for more info
       14: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
       15: tryCatchOne(expr, names, parentenv, handlers[[1L]])
       16: doTryCatch(return(expr), name, parentenv, handler)
-      17: force(expr) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/msg.R:313
-      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      17: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
+      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 3404 | SKIPPED: 14 | WARNINGS: 6 | FAILED: 1 ]
@@ -904,13 +865,13 @@ Run `revdep_details(,"feasts")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      15: as_tibble.mdl_df(data) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:83
+      15: as_tibble.mdl_df(data) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:83
       16: as_tibble(x, ...)
-      17: as_tibble.data.frame(x, ...) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:83
-      18: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:99
-      19: lst_to_tibble(x, .rows, .name_repair, col_lengths(x)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:121
-      20: check_valid_cols(x) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:127
-      21: abort(error_column_must_be_vector(names_x[is_xd], classes)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:152
+      17: as_tibble.data.frame(x, ...) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:83
+      18: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:99
+      19: lst_to_tibble(x, .rows, .name_repair, col_lengths(x)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:121
+      20: check_valid_cols(x) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:127
+      21: abort(error_column_must_be_vector(names_x[is_xd], classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:152
       22: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
@@ -1010,8 +971,8 @@ Run `revdep_details(,"fgdr")` for more info
       3: `[.sf`(res, , names(res)[!names(res) %in% attr(res, "sf_column")]) at /home/rstudio/tibble/revdep/checks/fgdr/new/fgdr.Rcheck/00_pkg_src/fgdr/R/read_fdg.R:303
       4: x[i, j, drop = drop]
       5: `[.tbl_df`(x, i, j, drop = drop)
-      6: tbl_subset_row(xo, i = i) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:174
-      7: is_null(i) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:314
+      6: tbl_subset_row(xo, i = i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:174
+      7: is_null(i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:314
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 39 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
@@ -1367,7 +1328,7 @@ Run `revdep_details(,"heatwaveR")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      22: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      22: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 167 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 8 ]
@@ -1689,10 +1650,10 @@ Run `revdep_details(,"ipumsr")` for more info
     Last 13 lines of output:
              new_val = pred_f(.val = .data$old_val, .lbl = .data$old_label), vals_equal = .data$old_val == 
                  .data$new_val) at /home/rstudio/tibble/revdep/checks/ipumsr/new/ipumsr.Rcheck/00_pkg_src/ipumsr/R/lbl_helpers.r:97
-      6: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:143
-      7: lst_to_tibble(output, .rows, .name_repair, lengths = lengths) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:220
-      8: recycle_columns(x, .rows, lengths) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:128
-      9: abort(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument")) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:197
+      6: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
+      7: lst_to_tibble(output, .rows, .name_repair, lengths = lengths) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:220
+      8: recycle_columns(x, .rows, lengths) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:128
+      9: abort(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:197
       10: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
@@ -1971,7 +1932,7 @@ Run `revdep_details(,"metacoder")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      21: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      21: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       [31m──[39m [31m4. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R#119[39m
       result$data$tax_data$unite_seq[5] not equal to "CCAAATCATGTCTCCCGGCCGCAAGGCAGGTGCAGGCGTTTAACCCTTTGTGAACCAAAAAACCTTTCGCTTCGGCAGCAGCTCGGTTGGAGACAGCCTCTGTGTCAGCCTGCCGCTAGCACCAATTATCAAAACTTGCGGTTAGCAACATTGTCTGATTACCAAATTTTCGAATGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCCCGCATCGATGAAGAACGCAGCGAAACGCGATAGTTAATGTGAATTGCAGAATTCAGTGAATCATCGAGTCTTTGAACGCACATTGCGCCCATTGGTATTCCATTGGGCATGTCTGTTTGAGCGTCATTACAACCCTCGGTCACCACCGGTTTTGAGCGAGCAGGGTCTTCGGATCCAGCTGGCTTTAAAGTTGTAAGCTCTGCTGGCTGCTCGGCCCAACCAGAACATAGTAAAATCATGCTTGTTCAAGGTTCGCGGTCGAAGCGGTACGGCCTGAACAATACCTACCACCTCTTAGG".
@@ -2085,7 +2046,7 @@ Run `revdep_details(,"MPTmultiverse")` for more info
       
       Error: testthat unit tests failed
       In addition: Warning message:
-      closing unused connection 4 (<-localhost:11881) 
+      closing unused connection 4 (<-localhost:11462) 
       Execution halted
     ```
 
@@ -2113,9 +2074,9 @@ Run `revdep_details(,"mudata2")` for more info
     Last 13 lines of output:
              c6 = as.POSIXct(c5), c7 = structure(list(list(1), list(2), list(3)), class = c("json_column", 
                  "list")), c8 = sf::st_as_sfc(c("POINT(0 0)", "POINT(1 1)", "POINT(2 2)")), c9 = hms::as.hms(1:3)) at testthat/test_types.R:327
-      2: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:143
-      3: check_valid_col(res, col_names[[j]], j) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:190
-      4: abort(error_column_must_be_vector(name, classes)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:171
+      2: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
+      3: check_valid_col(res, col_names[[j]], j) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:190
+      4: abort(error_column_must_be_vector(name, classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:171
       5: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
@@ -2343,8 +2304,8 @@ Run `revdep_details(,"oppr")` for more info
             The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
             The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
             The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.040 seconds, presolve used 0.000 seconds,
-             ... 0.001 seconds in simplex solver, in total 0.041 seconds.
+            Time to load data was 0.036 seconds, presolve used 0.001 seconds,
+             ... 0.000 seconds in simplex solver, in total 0.037 seconds.
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
@@ -2572,8 +2533,8 @@ Run `revdep_details(,"PopED")` for more info
       15: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
       16: tryCatchOne(expr, names, parentenv, handlers[[1L]])
       17: doTryCatch(return(expr), name, parentenv, handler)
-      18: force(expr) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/msg.R:313
-      19: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      18: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
+      19: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 181 | SKIPPED: 1 | WARNINGS: 13 | FAILED: 1 ]
@@ -2618,8 +2579,8 @@ Run `revdep_details(,"portalr")` for more info
       14: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
       15: tryCatchOne(expr, names, parentenv, handlers[[1L]])
       16: doTryCatch(return(expr), name, parentenv, handler)
-      17: force(expr) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/msg.R:313
-      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:283
+      17: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
+      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 174 | SKIPPED: 10 | WARNINGS: 0 | FAILED: 4 ]
@@ -3058,7 +3019,7 @@ Run `revdep_details(,"rubias")` for more info
     > 
     > # print that
     > prefix
-    [1] "/tmp/RtmpbMP7xs/mixfile"
+    [1] "/tmp/RtmpPR2BHc/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
@@ -3106,7 +3067,7 @@ Run `revdep_details(,"ruler")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      6: vec_size(x) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:525
+      6: vec_size(x) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:525
       7: stop_scalar_type(.Primitive("quote")(function (x, ...) 
          UseMethod("mean")), "x") at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/size.R:72
       8: stop_vctrs(msg, "vctrs_error_scalar_type", actual = x) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:398
@@ -3523,8 +3484,8 @@ Run `revdep_details(,"spbabel")` for more info
       6: `[.sf`(nc, , 1:4) at /home/rstudio/tibble/revdep/checks/spbabel/new/spbabel.Rcheck/00_pkg_src/spbabel/R/sptable.r:58
       7: x[i, j, drop = drop]
       8: `[.tbl_df`(x, i, j, drop = drop)
-      9: tbl_subset_row(xo, i = i) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:174
-      10: is_null(i) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/subsetting.R:314
+      9: tbl_subset_row(xo, i = i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:174
+      10: is_null(i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:314
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════
       [ OK: 86 | SKIPPED: 4 | WARNINGS: 5 | FAILED: 1 ]
@@ -3934,9 +3895,9 @@ Run `revdep_details(,"units")` for more info
       * Column `m` is mixed_units
       1: print(tibble::tibble(m)) at testthat/test_mixed.R:46
       2: tibble::tibble(m)
-      3: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:143
-      4: check_valid_col(res, col_names[[j]], j) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/tibble.R:190
-      5: abort(error_column_must_be_vector(name, classes)) at /tmp/RtmpaNUBS6/R.INSTALL1f42269d87774/tibble/R/as_tibble.R:171
+      3: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
+      4: check_valid_col(res, col_names[[j]], j) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:190
+      5: abort(error_column_must_be_vector(name, classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:171
       6: signal_abort(cnd)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════════

@@ -34,11 +34,10 @@
 |psychmeta  |2.3.3   |1     |        |     |
 |zeligverse |0.1.1   |1     |        |     |
 
-## New problems (77)
+## New problems (76)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
-|[alfred](problems.md#alfred)                     |0.1.7   |__+1__ |        |     |
 |[amt](problems.md#amt)                           |0.0.7   |__+1__ |        |1    |
 |[banter](problems.md#banter)                     |0.9.3   |__+1__ |        |1    |
 |[basket](problems.md#basket)                     |0.9.10  |__+1__ |        |     |
