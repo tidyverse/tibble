@@ -66,6 +66,7 @@ Collate:
     'msg.R'
     'new.R'
     'pipe.R'
+    'proxy.R'
     'repair-names.R'
     'rownames.R'
     'str.R'
