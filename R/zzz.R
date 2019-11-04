@@ -4,6 +4,9 @@
   } else {
     safe_match <<- safe_match_default
   }
+
+  vctrs::s3_register("vctrs::vec_proxy", "rematch_records")
+  vctrs::s3_register("vctrs::vec_proxy", "rematch_allrecords")
 }
 
 safe_match_3_0 <- function(x, table) {

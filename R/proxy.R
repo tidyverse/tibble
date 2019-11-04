@@ -1,5 +1,3 @@
-#' @export
 vec_proxy.rematch_records <- function(x, ...) x
 
-#' @export
 vec_proxy.rematch_allrecords <- function(x, ...) x
