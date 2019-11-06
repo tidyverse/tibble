@@ -510,7 +510,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `drop` ignored</code></pre>
+<pre><code>#&gt; Warning: `drop` argument ignored for
+#&gt; subsetting a tibble with `x[j]`, it has
+#&gt; an effect only for `x[i, j]`.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 4 x 1
 #&gt;       a
@@ -537,7 +539,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">tbl[<span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</a></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `drop` ignored</code></pre>
+<pre><code>#&gt; Warning: `drop` argument ignored for
+#&gt; subsetting a tibble with `x[j]`, it has
+#&gt; an effect only for `x[i, j]`.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 4 x 1
 #&gt;       a
