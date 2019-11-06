@@ -164,7 +164,9 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    if (!missing(drop)) warn("`drop` ignored")
+    if (!missing(drop)) {
+      warn("`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`.")
+    }
 
     xo <- tbl_subset_col(x, j = i)
     vec_restore(xo, x)
