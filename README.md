@@ -110,6 +110,7 @@ The tibble print method draws inspiration from
 `tibble()` doesn’t coerce strings to factors by default, doesn’t change
 column names, and doesn’t use rownames.
 
+---
 ## Code of Conduct
 
 Please note that the tibble project is released with a [Contributor Code
