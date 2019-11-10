@@ -147,24 +147,22 @@ tibble <- function(...,
 #'
 #' @description
 #' `tibble_row()` constructs a data frame that is guaranteed to occupy one row.
-#' This is achieved by wrapping every column in a list.
-#' Unnamed tibbles are never wrapped but checked for size one, this allows
-#' creating columns with values.
+#' Vector columns are required to have size one, non-vector columns are wrapped
+#' in a list.
 #'
 #' @rdname tibble
 #' @export
 #' @examples
 #'
 #' # Use tibble_row() to construct a one-row tibble:
-#' tibble_row(a = 1, b = 2:3, tibble(c = "x"))
+#' tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
 tibble_row <- function(...,
-                       .rows = NULL,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
   is_null <- map_lgl(xs, quo_is_null)
 
-  tibble_quos(xs[!is_null], .rows, .name_repair, single_row = TRUE)
+  tibble_quos(xs[!is_null], .rows = 1, .name_repair, single_row = TRUE)
 }
 
 #' Test if the object is a tibble
@@ -206,29 +204,30 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
   mask <- new_data_mask(new_environment())
 
+  first_size <- .rows
+
   for (j in seq_along(xs)) {
     res <- eval_tidy(xs[[j]], mask)
 
     if (!is_null(res)) {
-      # Single-row mode:
+      # Single-row mode: Vectors must be length one, non-vectors are wrapped
+      # in a list (which is length one by definition)
       if (single_row) {
-        if (given_col_names[[j]] == "" && is.data.frame(res)) {
-          if (vec_size(res) != 1) {
-            abort(error_tibble_row_inner_size_one(j, vec_size(res)))
+        if (vec_is(res)) {
+          if (!vec_is(res, size = 1)) {
+            abort(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
           }
         } else {
-          res <- list_of(res)
+          res <- list(res)
         }
-      }
+      } else {
+        # 657
+        res <- check_valid_col(res, col_names[[j]], j)
 
-      # 657
-      res <- check_valid_col(res, col_names[[j]], j)
-
-      lengths[[j]] <- current_size <- vec_size(res)
-      if (j > 1) {
-        if (current_size == 1) {
-          res <- vec_recycle_rows(res, first_size, j)
-        } else if (first_size == 1L) {
+        lengths[[j]] <- current_size <- vec_size(res)
+        if (is.null(first_size)) {
+          first_size <- current_size
+        } else if (first_size == 1L && current_size != 1L) {
           idx_to_fix <- seq2(1L, j - 1L)
           output[idx_to_fix] <- fixed_output <-
             map(output[idx_to_fix], vec_recycle, current_size)
@@ -238,9 +237,9 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
           map2(output[idx_to_fix], col_names[idx_to_fix], add_to_mask2, mask = mask)
 
           first_size <- current_size
+        } else {
+          res <- vec_recycle_rows(res, first_size, j, given_col_names[[j]])
         }
-      } else {
-        first_size <- current_size
       }
 
       output[[j]] <- res
@@ -249,10 +248,10 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   }
 
   names(output) <- col_names
-
   output <- splice_dfs(output)
+  output <- set_repaired_names(output, .name_repair = .name_repair)
 
-  lst_to_tibble(output, .rows, .name_repair, lengths = lengths)
+  new_tibble(output, nrow = first_size %||% 0L)
 }
 
 add_to_mask2 <- function(x, given_name, name = given_name, mask) {

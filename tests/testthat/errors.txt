@@ -227,6 +227,20 @@ Tibble columns must have consistent lengths, only values of length one are recyc
 * Length 2: Columns `a`, `b`
 * Length 3: Column `c`
 
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 10: Requested with `uvw` argument
+* Length 3: Column at position 3
+* Length 4: Columns at positions 1, 2
+
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 10: Requested with `xyz` argument
+* Length 2: Columns at positions 1, 2
+* Length 3: Column at position 3
+
+Tibble columns must have consistent lengths, only values of length one are recycled:
+* Length 2: Columns at positions 1, 2
+* Length 3: Column at position 3
+
 
 ## error_inconsistent_new_cols()
 
@@ -302,10 +316,10 @@ All values in `frame_matrix()` must be atomic:
 * Found list-valued elements at positions 2, 3, 4.
 
 
-## error_tibble_row_inner_size_one()
+## error_tibble_row_size_one()
 
-Inner data frames must have one row in `tibble_row()`.
-* Column at position 3 is a data frame of 7 rows.
+All vectors in `tibble_row()` must be size one, use `list()` or `list_of()` to wrap.
+* Column `foo` is of size 7.
 
 
 ## error_new_tibble_must_be_list()

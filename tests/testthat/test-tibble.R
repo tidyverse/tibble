@@ -31,7 +31,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA)
+    error_inconsistent_cols(10, "y", 2, "Existing data")
   )
 })
 
@@ -726,12 +726,21 @@ test_that("subsetting one row retains columns", {
 # tibble_row() ------------------------------------------------------------
 
 test_that("returns a single row (#416)", {
+  model <- lm(Petal.Width ~ Petal.Length + Species, data = iris)
   expect_identical(
-    tibble_row(a = 1, b = 2:3, tibble(c = "x"), d = iris),
-    tibble(a = list_of(1), b = list_of(2:3), c = "x", d = list_of(iris))
+    tibble_row(a = 1, b = list_of(2:3), lm = model),
+    tibble(a = 1, b = list_of(2:3), lm = list(model))
+  )
+  expect_equal(
+    tibble_row(iris[1, ]),
+    tibble(iris[1, ])
   )
   expect_tibble_error(
-    tibble_row(a = 1, b = 2:3, tibble(c = 4:7)),
-    error_tibble_row_inner_size_one(3, 4)
+    tibble_row(a = 1, b = 2:3),
+    error_tibble_row_size_one(2, "b", 2)
+  )
+  expect_tibble_error(
+    tibble_row(iris[2:3, ]),
+    error_tibble_row_size_one(1, "", 2)
   )
 })

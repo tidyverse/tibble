@@ -200,7 +200,16 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   tibble_error(bullets(
     "Tibble columns must have consistent lengths, only values of length one are recycled:",
     if (!is.null(.rows)) paste0("Length ", .rows, ": ", rows_source),
-    map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Length ", x, ": ", pluralise_commas(text, y))
+    })
   ))
 }
 
@@ -279,10 +288,16 @@ error_frame_matrix_list <- function(pos) {
   ))
 }
 
-error_tibble_row_inner_size_one <- function(i, size) {
+error_tibble_row_size_one <- function(j, name, size) {
+  if (name != "") {
+    desc <- tick(name)
+  } else {
+    desc <- paste0("at position ", j)
+  }
+
   tibble_error(bullets(
-    "Inner data frames must have one row in `tibble_row()`.",
-    paste0("Column at position ", i, " is a data frame of ", size, " rows.")
+    "All vectors in `tibble_row()` must be size one, use `list()` or `list_of()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 

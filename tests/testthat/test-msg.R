@@ -110,6 +110,24 @@ test_that("error messages", {
       c(2, 2, 3),
       "Requested with `xyz` argument"
     ),
+    error_inconsistent_cols(
+      10,
+      1:3,
+      c(4, 4, 3),
+      "Requested with `uvw` argument"
+    ),
+    error_inconsistent_cols(
+      10,
+      1:3,
+      c(2, 2, 3),
+      "Requested with `xyz` argument"
+    ),
+    error_inconsistent_cols(
+      NULL,
+      1:3,
+      c(2, 2, 3),
+      "Requested with `xyz` argument"
+    ),
 
     error_inconsistent_new_cols(10, data.frame(a = 1:2)),
     error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4)),
@@ -136,7 +154,7 @@ test_that("error messages", {
 
     error_frame_matrix_list(2:4),
 
-    error_tibble_row_inner_size_one(3, 7),
+    error_tibble_row_size_one(3, "foo", 7),
 
     error_new_tibble_must_be_list(),
 

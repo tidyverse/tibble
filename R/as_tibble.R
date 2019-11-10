@@ -118,10 +118,10 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 
   .name_repair <- compat_name_repair(.name_repair, validate)
 
-  lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
+  lst_to_tibble_with_recycle(x, .rows, .name_repair, col_lengths(x))
 }
 
-lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
+lst_to_tibble_with_recycle <- function(x, .rows, .name_repair, lengths) {
   x <- unclass(x)
   x <- set_repaired_names(x, .name_repair)
   x <- check_valid_cols(x)
