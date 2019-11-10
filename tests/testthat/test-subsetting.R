@@ -75,15 +75,13 @@ test_that("[.tbl_df is careful about names (#1245)", {
     error_unknown_column_names("z")
   )
 
-  skip("r-lib/vctrs#557")
-
-  expect_tibble_error(
+  expect_error(
     foo[as.matrix("x")],
-    error_dim_column_index(as.matrix("x"))
+    "."
   )
-  expect_tibble_error(
+  expect_error(
     foo[array("x", dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1)))
+    "."
   )
 })
 
@@ -114,15 +112,13 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     error_na_column_index(4)
   )
 
-  skip("r-lib/vctrs#557")
-
-  expect_tibble_error(
+  expect_error(
     foo[as.matrix(1)],
-    error_dim_column_index(as.matrix("x"))
+    class = "vctrs_error_incompatible_cast"
   )
-  expect_tibble_error(
+  expect_error(
     foo[array(1, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1)))
+    class = "vctrs_error_incompatible_cast"
   )
 })
 
@@ -146,15 +142,13 @@ test_that("[.tbl_df is careful about column flags (#83)", {
     error_na_column_index(3)
   )
 
-  skip("r-lib/vctrs#557")
-
-  expect_tibble_error(
+  expect_error(
     foo[as.matrix(TRUE)],
-    error_dim_column_index(as.matrix("x"))
+    "."
   )
-  expect_tibble_error(
+  expect_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1)))
+    "."
   )
 })
 
