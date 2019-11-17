@@ -30,8 +30,7 @@ Objects of class \code{tbl_df} have:
 \code{\link[=NROW]{NROW()}}.
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
-\item A \code{row.names} attribute, included for compatibility with the base
-\link[base:data.frame]{\code{data.frame} class}.
+\item A \code{row.names} attribute, included for compatibility with \link{data.frame}.
 This attribute is only consulted to query the number of rows,
 any row names that might be stored there are ignored
 by most tibble methods.
