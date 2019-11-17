@@ -31,7 +31,7 @@ test_that("new_tibble() with new class argument", {
     attr1 = "value1",
     attr2 = 2,
     nrow = 3,
-    class = "nt"
+    class = c("nt", "data.frame")
   )
 
   # Can't compare directly due to dplyr:::all.equal.tbl_df()

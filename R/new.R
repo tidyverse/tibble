@@ -128,6 +128,6 @@ set_tibble_class <- function(x, nrow) {
 
 set_tibble_subclass <- function(x, nrow, subclass) {
   attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(subclass, tibble_class)
+  class(x) <- c(setdiff(subclass, tibble_class), tibble_class)
   x
 }
