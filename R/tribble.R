@@ -8,9 +8,13 @@
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
 #' @param ... Arguments specifying the structure of a `tibble`.
-#'   Variable names should be formulas, and may only appear before the
-#'   data. These arguments support [tidy dots][rlang::tidy-dots].
+#'   Variable names should be formulas, and may only appear before the data.
+#'   These arguments are processed with [rlang::list2()]
+#'   and support unquote via [`!!`] and unquote-splice via [`!!!`].
 #' @return A [tibble].
+#' @seealso
+#'   See [quasiquotation] for more details on tidy dots semantics,
+#'   i.e. exactly how  the `...` argument is processed.
 #' @export
 #' @examples
 #' tribble(
@@ -43,9 +47,13 @@ tribble <- function(...) {
 #' is important. The syntax is inspired by [tribble()].
 #'
 #' @param ... Arguments specifying the structure of a `frame_matrix`.
-#'   Column names should be formulas, and may only appear before the
-#'   data. These arguments support [tidy dots][rlang::tidy-dots].
+#'   Column names should be formulas, and may only appear before the data.
+#'   These arguments are processed with [rlang::list2()]
+#'   and support unquote via [`!!`] and unquote-splice via [`!!!`].
 #' @return A [matrix].
+#' @seealso
+#'   See [quasiquotation] for more details on tidy dots semantics,
+#'   i.e. exactly how  the `...` argument is processed.
 #' @export
 #' @examples
 #' frame_matrix(

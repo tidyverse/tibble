@@ -148,7 +148,7 @@ tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
 \code{enframe()} to convert a named vector into a tibble. Name repair is
-detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}. \code{\link[rlang:list2]{rlang::list2()}} provides more details
-on tidy dots semantics, i.e. exactly how \link{quasiquotation} works for the
-\code{...} argument.
+detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See \link{quasiquotation} for more details on tidy dots semantics,
+i.e. exactly how  the \code{...} argument is processed.
 }

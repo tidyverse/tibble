@@ -44,9 +44,9 @@
 #'   frame, i.e. it has class `data.frame`.
 #' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
 #'   `enframe()` to convert a named vector into a tibble. Name repair is
-#'   detailed in [vctrs::vec_as_names()]. [rlang::list2()] provides more details
-#'   on tidy dots semantics, i.e. exactly how [quasiquotation] works for the
-#'   `...` argument.
+#'   detailed in [vctrs::vec_as_names()].
+#'   See [quasiquotation] for more details on tidy dots semantics,
+#'   i.e. exactly how  the `...` argument is processed.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:
