@@ -162,7 +162,7 @@ tibble_row <- function(...,
 
   is_null <- map_lgl(xs, quo_is_null)
 
-  tibble_quos(xs[!is_null], .rows = 1, .name_repair, single_row = TRUE)
+  tibble_quos(xs[!is_null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }
 
 #' Test if the object is a tibble
