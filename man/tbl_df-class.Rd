@@ -16,7 +16,7 @@ central data structure for the set of packages known as the
 \href{http://readr.tidyverse.org/}{readr}.
 
 The general ethos is that tibbles are lazy and surly: they do less and
-complain more than base \link[base:data.frame]{\code{data.frame}s}. This forces
+complain more than base \link{data.frame}s. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust.
 }
@@ -42,7 +42,7 @@ by most tibble methods.
 
 
 How default behaviour of tibbles differs from that of
-\link[base:data.frame]{\code{data.frame}s}, during creation and access:
+\link{data.frame}s, during creation and access:
 \itemize{
 \item Column data is not coerced. A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.

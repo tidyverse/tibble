@@ -16,7 +16,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' [readr](http://readr.tidyverse.org/).
 #'
 #' The general ethos is that tibbles are lazy and surly: they do less and
-#' complain more than base [`data.frame`s][base::data.frame()]. This forces
+#' complain more than base [data.frame]s. This forces
 #' problems to be tackled earlier and more explicitly, typically leading to code
 #' that is more expressive and robust.
 #'
@@ -37,7 +37,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' @section Behavior of `tbl_df`:
 #'
 #' How default behaviour of tibbles differs from that of
-#' [`data.frame`s][base::data.frame()], during creation and access:
+#' [data.frame]s, during creation and access:
 #'
 #' * Column data is not coerced. A character vector is not turned into a factor.
 #'   List-columns are expressly anticipated and do not require special tricks.
