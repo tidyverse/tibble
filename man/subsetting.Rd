@@ -26,7 +26,7 @@
 \item{x}{data frame.}
 
 \item{name}{
-    A literal character string or a \link{name} (possibly \link{backtick}
+    A literal character string or a \link[base]{name} (possibly \link[base]{backtick}
     quoted).}
 
 \item{value}{A value to store in a row, column, range or cell.
@@ -42,18 +42,18 @@ Tibbles are stricter than data frames in what is accepted here.}
 Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 }
 \description{
-Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
+Accessing columns, rows, or cells via \verb{$}, \verb{[[}, or \verb{[} is mostly similar to
 \link[base:Extract.data.frame]{regular data frames}. However, the
 behavior is different for tibbles and data frames in some cases:
 \itemize{
-\item \code{[} always returns a tibble by default, even if
+\item \verb{[} always returns a tibble by default, even if
 only one column is accessed.
-\item Partial matching of column names with \code{$} and \code{[[} is not supported, a
+\item Partial matching of column names with \verb{$} and \verb{[[} is not supported, a
 warning is given and \code{NULL} is returned.
 \item Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
 \item Rows outside of the tibble's boundaries cannot be accessed.
-\item When updating with \code{[[<-} and \code{[<-}, type changes of entire columns are
+\item When updating with \verb{[[<-} and \verb{[<-}, type changes of entire columns are
 supported, but updating a part of a column requires that the new value is
 coercible to the existing type.
 See \code{\link[=vec_slice]{vec_slice()}} for the underlying implementation.
@@ -65,8 +65,8 @@ data frame behavior, coerce to a data frame via \code{\link[=as.data.frame]{as.d
 }
 \details{
 For better compatibility with older code written for regular data frames,
-\code{[} supports a \code{drop} argument which defaults to \code{FALSE}.
-New code should use \code{[[} to turn a column into a vector.
+\verb{[} supports a \code{drop} argument which defaults to \code{FALSE}.
+New code should use \verb{[[} to turn a column into a vector.
 }
 \examples{
 df <- data.frame(a = 1:3, bc = 4:6)

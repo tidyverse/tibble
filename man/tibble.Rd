@@ -4,14 +4,17 @@
 \alias{tibble}
 \title{Build a data frame}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
-  "universal", "minimal"))
+tibble(
+  ...,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created elements. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start with a dot.}
+unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
