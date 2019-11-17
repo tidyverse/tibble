@@ -465,7 +465,7 @@
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(x)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(x)</a></code></pre></div>
-<pre><code>##  POSIXlt[1:3], format: "2018-12-20 23:29:51" "2018-12-20 23:30:51" ...</code></pre>
+<pre><code>##  POSIXlt[1:3], format: "2018-12-20 23:29:51" "2018-12-20 23:30:51" "2018-12-21 00:29:51"</code></pre>
 <p>So we need to define a method that returns a character vector the same length as <code>x</code>:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co">#' @importFrom pillar obj_sum</span></a>
 <a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co">#' @export</span></a>
@@ -511,12 +511,12 @@
 ## * &lt;text&gt;:3: Results have changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
 ## x[1]: "28°20'N  81°33'W"
-## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[9
-## y[1]: 0m'\033[39mW"
+## y[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
+## y[1]: 33[39mW"
 ## 
 ## x[2]: "32°43'N 117°10'W"
-## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[9
-## y[2]: 0m'\033[39mW"
+## y[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
+## y[2]: 33[39mW"
 ## 
 ## x[3]: "     NA         "
 ## y[3]: "     \033[31mNA\033[39m         "</code></pre>
@@ -555,12 +555,12 @@
 <pre><code>## Error: Test failed: 'latlon pillar matches known output'
 ## * &lt;text&gt;:2: Results have changed from known value recorded in 'latlon.txt'.
 ## 3/3 mismatches
-## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[9
-## x[1]: 0m'\033[39mW"
+## x[1]: "28\033[90m°\033[39m20\033[90m'\033[39mN  81\033[90m°\033[39m33\033[90m'\0
+## x[1]: 33[39mW"
 ## y[1]: "28°20'N  81°33'W"
 ## 
-## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[9
-## x[2]: 0m'\033[39mW"
+## x[2]: "32\033[90m°\033[39m43\033[90m'\033[39mN 117\033[90m°\033[39m10\033[90m'\0
+## x[2]: 33[39mW"
 ## y[2]: "32°43'N 117°10'W"
 ## 
 ## x[3]: "     \033[31mNA\033[39m         "
