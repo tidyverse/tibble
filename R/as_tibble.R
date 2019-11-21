@@ -105,7 +105,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     result
   } else {
     if (length(old_rownames) > 0 && is.na(old_rownames[1L])) {  # if implicit
-      old_rownames <- as.character(1:abs(old_rownames[2L]))
+      old_rownames <- as.character(seq_len(abs(old_rownames[2L])))
     }
     add_column(result, !!rownames := old_rownames, .before = 1L)
   }
