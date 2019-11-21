@@ -505,7 +505,7 @@ test_that("as_tibble() converts implicit row names when `rownames =` is passed",
   )
   expect_equal(
     as_tibble(df[0, ], rownames = "id"),
-    tibble(id = integer(0), a = integer(0), b = integer(0))
+    tibble(id = character(0), a = integer(0), b = integer(0))
   )
 })
 
