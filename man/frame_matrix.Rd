@@ -8,8 +8,9 @@ frame_matrix(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{frame_matrix}.
-Column names should be formulas, and may only appear before the
-data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
+Column names should be formulas, and may only appear before the data.
+These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
+and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}}.}
 }
 \value{
 A \link{matrix}.
@@ -28,4 +29,8 @@ frame_matrix(
   1,     3,
   5,     2
 )
+}
+\seealso{
+See \link{quasiquotation} for more details on tidy dots semantics,
+i.e. exactly how  the \code{...} argument is processed.
 }

@@ -16,7 +16,7 @@ central data structure for the set of packages known as the
 \href{http://readr.tidyverse.org/}{readr}.
 
 The general ethos is that tibbles are lazy and surly: they do less and
-complain more than base \link[base:data.frame]{data.frames}. This forces
+complain more than base \link{data.frame}s. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust.
 }
@@ -30,8 +30,7 @@ Objects of class \code{tbl_df} have:
 \code{\link[=NROW]{NROW()}}.
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
-\item A \code{row.names} attribute, included for compatibility with the base
-\link[base:data.frame]{data.frame class}.
+\item A \code{row.names} attribute, included for compatibility with \link{data.frame}.
 This attribute is only consulted to query the number of rows,
 any row names that might be stored there are ignored
 by most tibble methods.
@@ -42,7 +41,7 @@ by most tibble methods.
 
 
 How default behaviour of tibbles differs from that of
-\link[base:data.frame]{data.frames}, during creation and access:
+\link{data.frame}s, during creation and access:
 \itemize{
 \item Column data is not coerced. A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.
@@ -55,7 +54,7 @@ must indicate how to resolve. Read more in \code{\link[vctrs:vec_as_names]{vctrs
 that info as a column. Read about in \link{rownames}.
 \item \code{df[, j]} returns a tibble; it does not automatically extract the column
 inside. \code{df[, j, drop = FALSE]} is the default. Read more in \link{subsetting}.
-\item There is no partial matching when \code{$} is used to index by name. \code{df$name}
+\item There is no partial matching when \verb{$} is used to index by name. \code{df$name}
 for a nonexistent name generates a warning. Read more in \link{subsetting}.
 \item Printing and inspection are a very high priority. The goal is to convey as
 much information as possible, in a concise way, even for large and complex

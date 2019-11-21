@@ -12,7 +12,7 @@ add_column(.data, ..., .before = NULL, .after = NULL)
 \item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
 one element for each row in the data frame, or be of length 1.
 These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
-unquote via \code{!!} and unquote-splice via \code{!!!}. However, unlike in
+unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in
 \pkg{dplyr} verbs, columns in \code{.data} are not available for the
 expressions. Use \code{\link[dplyr:mutate]{dplyr::mutate()}} if you need to add a column based on
 existing data.}
@@ -40,6 +40,7 @@ add_column(df, z = 1:5)
 }
 }
 \seealso{
-Other addition: \code{\link{add_row}}
+Other addition: 
+\code{\link{add_row}()}
 }
 \concept{addition}

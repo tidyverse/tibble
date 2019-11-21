@@ -5,17 +5,22 @@
 \alias{tibble_row}
 \title{Build a data frame}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
-  "universal", "minimal"))
+tibble(
+  ...,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 
-tibble_row(..., .name_repair = c("check_unique", "unique", "universal",
-  "minimal"))
+tibble_row(
+  ...,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created elements. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start with a dot.}
+unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
@@ -156,7 +161,7 @@ tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
 \code{enframe()} to convert a named vector into a tibble. Name repair is
-detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}. \code{\link[rlang:list2]{rlang::list2()}} provides more details
-on tidy dots semantics, i.e. exactly how \link{quasiquotation} works for the
-\code{...} argument.
+detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See \link{quasiquotation} for more details on tidy dots semantics,
+i.e. exactly how  the \code{...} argument is processed.
 }

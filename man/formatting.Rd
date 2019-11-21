@@ -40,7 +40,7 @@ One of the main features of the \code{tbl_df} class is the printing:
 \item Tibbles only print as many rows and columns as fit on one screen,
 supplemented by a summary of the remaining rows and columns.
 \item Tibble reveals the type of each column, which keeps the user informed about
-whether a variable is, e.g., \code{<chr>} or \code{<fct>} (character versus factor).
+whether a variable is, e.g., \verb{<chr>} or \verb{<fct>} (character versus factor).
 }
 
 Printing can be tweaked for a one-off call by calling \code{print()} explicitly

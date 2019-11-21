@@ -63,10 +63,6 @@ navbar:
     menu:
     - text: Extending tibble
       href: articles/extending.html
-    - text: Subsetting
-      href: articles/subset.html
-    - text: Subassignment
-      href: articles/subassign.html
     - text: Invariants
       href: articles/invariants.html
   - text: News
