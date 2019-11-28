@@ -7,10 +7,10 @@ expect_tibble_error <- function(object, cnd, fixed = NULL) {
 expect_cnd_equivalent <- function(actual, expected) {
   actual$trace <- NULL
   actual$parent <- NULL
-  actual$cnd_bullets <- NULL
+  actual$body <- NULL
   expected$trace <- NULL
   expected$parent <- NULL
-  expected$cnd_bullets <- NULL
+  expected$body <- NULL
   expect_equivalent(actual, expected)
 }
 

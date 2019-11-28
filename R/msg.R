@@ -70,7 +70,7 @@ error_dim_column_index <- function(j) {
 }
 
 error_unsupported_column_index <- function(parent = NULL) {
-  tibble_error("Must subset columns with an index vector.", cnd_bullets = parent$cnd_bullets, parent = parent)
+  tibble_error("Must subset columns with an index vector.", body = parent$body, parent = parent)
 }
 
 error_unknown_column_names <- function(j, parent = NULL) {
@@ -334,8 +334,8 @@ subclass_col_index_errors <- function(expr) {
     },
 
     vctrs_error_index_bad_type = function(cnd) {
-      cnd_bullets <- cnd_bullets(cnd)
-      cnd$cnd_bullets <- function(...) cnd_bullets
+      body <- cnd_body(cnd)
+      cnd$body <- function(...) body
       cnd <- error_unsupported_column_index(cnd)
       cnd_signal(cnd)
     }
