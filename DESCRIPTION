@@ -23,7 +23,7 @@ Imports:
     methods,
     pillar (>= 1.4.2.9001),
     pkgconfig,
-    rlang (>= 0.3.0),
+    rlang (>= 0.4.2),
     utils,
     vctrs (>= 0.2.0.9001)
 Suggests: 
