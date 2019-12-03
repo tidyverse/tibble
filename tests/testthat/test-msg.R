@@ -122,8 +122,6 @@ test_that("error messages", {
 
     error_already_has_rownames(),
 
-    error_as_tibble_needs_rownames(),
-
     error_glimpse_infinite_width(),
 
     error_tribble_needs_columns(),

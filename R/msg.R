@@ -237,10 +237,6 @@ error_already_has_rownames <- function() {
   tibble_error("`df` must be a data frame without row names in `column_to_rownames()`.")
 }
 
-error_as_tibble_needs_rownames <- function() {
-  tibble_error("Object passed to `as_tibble()` must have row names if the `rownames` argument is set.")
-}
-
 error_glimpse_infinite_width <- function() {
   tibble_error("`glimpse()` requires a finite value for the `width` argument.")
 }

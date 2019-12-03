@@ -261,11 +261,6 @@ Can't specify both `.before` and `.after`.
 `df` must be a data frame without row names in `column_to_rownames()`.
 
 
-## error_as_tibble_needs_rownames()
-
-Object passed to `as_tibble()` must have row names if the `rownames` argument is set.
-
-
 ## error_glimpse_infinite_width()
 
 `glimpse()` requires a finite value for the `width` argument.
