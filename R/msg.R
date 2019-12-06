@@ -198,9 +198,9 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   }
 
   tibble_error(bullets(
-    "Tibble columns must have consistent lengths, only values of length one are recycled:",
-    if (!is.null(.rows)) paste0("Length ", .rows, ": ", rows_source),
-    map2_chr(names(vars_split), vars_split, function(x, y) paste0("Length ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    map2_chr(names(vars_split), vars_split, function(x, y) paste0("Size ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
   ))
 }
 
