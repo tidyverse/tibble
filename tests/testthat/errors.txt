@@ -213,19 +213,19 @@ All columns in a tibble must be 1d or 2d objects:
 
 ## error_inconsistent_cols()
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `uvw` argument
-* Length 3: Column `c`
-* Length 4: Columns `a`, `b`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `uvw` argument
+* Size 3: Column `c`
+* Size 4: Columns `a`, `b`
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `xyz` argument
-* Length 2: Columns `a`, `b`
-* Length 3: Column `c`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `xyz` argument
+* Size 2: Columns `a`, `b`
+* Size 3: Column `c`
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 2: Columns `a`, `b`
-* Length 3: Column `c`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 2: Columns `a`, `b`
+* Size 3: Column `c`
 
 
 ## error_inconsistent_new_cols()
