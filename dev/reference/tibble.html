@@ -397,9 +397,9 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 1
 #&gt;   y                  
 #&gt;   &lt;dttm&gt;             
-#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent lengths, only values of length one are recycled:
-#&gt; * Length 3: Column `a`
-#&gt; * Length 4: Column `b`</div><div class='input'>
+#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent sizes, only values of size one are recycled:
+#&gt; * Size 3: Column `a`
+#&gt; * Size 4: Column `b`</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
 <span class='fu'>tibble</span>(<span class='kw'>.rows</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 0</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.rows</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
 #&gt;   .rows
