@@ -281,6 +281,10 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
 #' @export
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
+  if (missing(x)) {
+    abort(error_as_tibble_needs_argument())
+  }
+
   as_tibble(list(), ...)
 }
 

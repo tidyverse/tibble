@@ -180,6 +180,11 @@ test_that("NULL makes 0 x 0 tbl_df", {
 })
 
 
+test_that("as_tibble() without arguments raises an error", {
+  expect_tibble_error(as_tibble(), error_as_tibble_needs_argument())
+})
+
+
 test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
   df <- tibble()
   expect_equal(

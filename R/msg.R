@@ -275,6 +275,10 @@ error_frame_matrix_list <- function(pos) {
   ))
 }
 
+error_as_tibble_needs_argument <- function() {
+  tibble_error("Must pass an argument to `as_tibble()`.")
+}
+
 error_new_tibble_must_be_list <- function() {
   tibble_error("Must pass a list as `x` argument to `new_tibble()`.")
 }

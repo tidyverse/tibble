@@ -297,9 +297,19 @@ All values in `frame_matrix()` must be atomic:
 * Found list-valued elements at positions 2, 3, 4.
 
 
+## error_as_tibble_needs_argument()
+
+Must pass an argument to `as_tibble()`.
+
+
 ## error_new_tibble_must_be_list()
 
 Must pass a list as `x` argument to `new_tibble()`.
+
+
+## error_new_tibble_needs_class()
+
+Must pass a `class` argument instead of `subclass` to `new_tibble()`.
 
 
 ## error_new_tibble_needs_nrow()
