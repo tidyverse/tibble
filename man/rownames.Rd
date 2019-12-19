@@ -31,7 +31,7 @@ All other functions return an object of the same class as the input.
 }
 \description{
 While a tibble can have row names (e.g., when converting from a regular data
-frame), they are removed when subsetting with the \verb{[} operator.
+frame), they are removed when subsetting with the \code{[} operator.
 A warning will be raised when attempting to assign non-\code{NULL} row names
 to a tibble.
 Generally, it is best to avoid row names, because they are basically a

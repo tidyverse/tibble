@@ -54,7 +54,7 @@ must indicate how to resolve. Read more in \code{\link[vctrs:vec_as_names]{vctrs
 that info as a column. Read about in \link{rownames}.
 \item \code{df[, j]} returns a tibble; it does not automatically extract the column
 inside. \code{df[, j, drop = FALSE]} is the default. Read more in \link{subsetting}.
-\item There is no partial matching when \verb{$} is used to index by name. \code{df$name}
+\item There is no partial matching when \code{$} is used to index by name. \code{df$name}
 for a nonexistent name generates a warning. Read more in \link{subsetting}.
 \item Printing and inspection are a very high priority. The goal is to convey as
 much information as possible, in a concise way, even for large and complex
