@@ -7,8 +7,9 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame.
+Provides a 'tbl_df' class (the 'tibble') that
+    provides stricter checking and better formatting than the traditional
+    data frame.
 }
 \details{
 \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
@@ -43,7 +44,7 @@ Resources on specific topics:
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://tibble.tidyverse.org/}
+  \item \url{https://tibble.tidyverse.org/}
   \item \url{https://github.com/tidyverse/tibble}
   \item Report bugs at \url{https://github.com/tidyverse/tibble/issues}
 }
