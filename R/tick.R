@@ -1,3 +1,10 @@
+name_or_pos <- function(names, positions) {
+  empty <- (names == "")
+  names[!empty] <- tick(names[!empty])
+  names[empty] <- positions[empty]
+  names
+}
+
 # FIXME: Also exists in pillar, do we need to export?
 tick <- function(x) {
   ifelse(is.na(x), "NA", encodeString(x, quote = "`"))

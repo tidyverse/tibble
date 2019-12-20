@@ -195,51 +195,54 @@ Use .name_repair to specify repair.
 
 ## error_column_must_be_vector()
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
 * Column `a` is environment
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 3 is environment
+
+All columns in a tibble must be vectors:
 * Column `b` is name
 * Column `c` is NULL
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 1 is QQ
+* Column 2 is VV
 * Column `A` is a
 * Column `B` is b
 * Column `C` is c
-* Column `D` is d
-* Column `E` is e
-* … and 21 more problems
+* … and 23 more problems
 
 
 ## error_inconsistent_cols()
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `uvw` argument
-* Length 3: Column `c`
-* Length 4: Columns `a`, `b`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `uvw` argument
+* Size 3: Column `c`
+* Size 4: Columns `a`, `b`
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `xyz` argument
-* Length 2: Columns `a`, `b`
-* Length 3: Column `c`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `xyz` argument
+* Size 2: Columns `a`, `b`
+* Size 3: Column `c`
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 2: Columns `a`, `b`
-* Length 3: Column `c`
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 2: Columns `a`, `b`
+* Size 3: Column `c`
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `uvw` argument
-* Length 3: Column at position 3
-* Length 4: Columns at positions 1, 2
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `uvw` argument
+* Size 3: Column at position 3
+* Size 4: Columns at positions 1, 2
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 10: Requested with `xyz` argument
-* Length 2: Columns at positions 1, 2
-* Length 3: Column at position 3
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `xyz` argument
+* Size 2: Columns at positions 1, 2
+* Size 3: Column at position 3
 
-Tibble columns must have consistent lengths, only values of length one are recycled:
-* Length 2: Columns at positions 1, 2
-* Length 3: Column at position 3
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 2: Columns at positions 1, 2
+* Size 3: Column at position 3
 
 
 ## error_inconsistent_new_cols()
@@ -273,11 +276,6 @@ Can't specify both `.before` and `.after`.
 ## error_already_has_rownames()
 
 `df` must be a data frame without row names in `column_to_rownames()`.
-
-
-## error_as_tibble_needs_rownames()
-
-Object passed to `as_tibble()` must have row names if the `rownames` argument is set.
 
 
 ## error_glimpse_infinite_width()
@@ -322,9 +320,19 @@ All vectors in `tibble_row()` must be size one, use `list()` or `list_of()` to w
 * Column `foo` is of size 7.
 
 
+## error_as_tibble_needs_argument()
+
+Must pass an argument to `as_tibble()`.
+
+
 ## error_new_tibble_must_be_list()
 
 Must pass a list as `x` argument to `new_tibble()`.
+
+
+## error_new_tibble_needs_class()
+
+Must pass a `class` argument instead of `subclass` to `new_tibble()`.
 
 
 ## error_new_tibble_needs_nrow()

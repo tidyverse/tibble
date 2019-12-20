@@ -104,9 +104,10 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (is.integer(old_rownames)) {
-      abort(error_as_tibble_needs_rownames())
+    if (length(old_rownames) > 0 && is.na(old_rownames[1L])) {  # if implicit rownames
+      old_rownames <- seq_len(abs(old_rownames[2L]))
     }
+    old_rownames <- as.character(old_rownames)
     add_column(result, !!rownames := old_rownames, .before = 1L)
   }
 }
@@ -149,7 +150,7 @@ check_valid_cols <- function(x) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    abort(error_column_must_be_vector(names_x[is_xd], classes))
+    abort(error_column_must_be_vector(names_x[is_xd], attr(x, "pos")[is_xd], classes))
   }
 
   # 657
@@ -165,13 +166,12 @@ make_valid_col <- function(x) {
 }
 
 check_valid_col <- function(x, name, pos) {
-  if (!is_valid_col(x)) {
-    classes <- class(x)[[1]]
-    if (name == "") name <- pos
-    abort(error_column_must_be_vector(name, classes))
+  if (name == "") {
+    ret <- check_valid_cols(structure(list(x), pos = pos))
+  } else {
+    ret <- check_valid_cols(list2(!!name := x))
   }
-
-  invisible(make_valid_col(x))
+  invisible(ret[[1]])
 }
 
 is_valid_col <- function(x) {
@@ -280,6 +280,10 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
 #' @export
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
+  if (missing(x)) {
+    abort(error_as_tibble_needs_argument())
+  }
+
   as_tibble(list(), ...)
 }
 

@@ -23,7 +23,7 @@ Imports:
     methods,
     pillar (>= 1.4.2.9001),
     pkgconfig,
-    rlang (>= 0.3.0),
+    rlang (>= 0.4.2),
     utils,
     vctrs (>= 0.2.0.9001)
 Suggests: 
@@ -46,7 +46,7 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 Collate: 
     'add.R'
     'as_tibble.R'

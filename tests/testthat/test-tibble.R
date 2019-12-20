@@ -18,11 +18,11 @@ test_that("NULL is ignored (#580)", {
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment")
+    error_column_must_be_vector("a", 1, "environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name")
+    error_column_must_be_vector("a", 1, "name")
   )
 })
 
@@ -177,6 +177,11 @@ test_that("NULL makes 0 x 0 tbl_df", {
   nnnull <- as_tibble(NULL)
   expect_is(nnnull, "tbl_df")
   expect_equal(dim(nnnull), c(0L, 0L))
+})
+
+
+test_that("as_tibble() without arguments raises an error", {
+  expect_tibble_error(as_tibble(), error_as_tibble_needs_argument())
 })
 
 
@@ -497,15 +502,15 @@ test_that("as_tibble() can convert row names for zero-row tibbles", {
   expect_identical(unclass(tbl_df), unclass(df))
 })
 
-test_that("as_tibble() throws an error when user turns missing row names into column", {
+test_that("as_tibble() converts implicit row names when `rownames =` is passed", {
   df <- data.frame(a = 1:3, b = 2:4)
-  expect_tibble_error(
+  expect_equal(
     as_tibble(df, rownames = "id"),
-    error_as_tibble_needs_rownames()
+    tibble(id = as.character(1:3), a = 1:3, b = 2:4)
   )
-  expect_tibble_error(
+  expect_equal(
     as_tibble(df[0, ], rownames = "id"),
-    error_as_tibble_needs_rownames()
+    tibble(id = character(0), a = integer(0), b = integer(0))
   )
 })
 

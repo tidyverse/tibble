@@ -70,7 +70,7 @@ error_dim_column_index <- function(j) {
 }
 
 error_unsupported_column_index <- function(parent = NULL) {
-  tibble_error("Must subset columns with an index vector.", cnd_bullets = parent$cnd_bullets, parent = parent)
+  tibble_error("Must subset columns with an index vector.", body = parent$body, parent = parent)
 }
 
 error_unknown_column_names <- function(j, parent = NULL) {
@@ -179,11 +179,11 @@ error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(
   tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)), names = names)
 }
 
-error_column_must_be_vector <- function(names, classes) {
+error_column_must_be_vector <- function(names, positions, classes) {
   tibble_error(
     bullets(
-      "All columns in a tibble must be 1d or 2d objects:",
-      paste0("Column ", tick(names), " is ", classes)
+      "All columns in a tibble must be vectors:",
+      paste0("Column ", name_or_pos(names, positions), " is ", classes)
     ),
     names = names
   )
@@ -198,8 +198,8 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   }
 
   tibble_error(bullets(
-    "Tibble columns must have consistent lengths, only values of length one are recycled:",
-    if (!is.null(.rows)) paste0("Length ", .rows, ": ", rows_source),
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     map2_chr(names(vars_split), vars_split, function(x, y) {
       if (is.numeric(y)) {
         text <- "Column(s) at position(s) "
@@ -208,7 +208,7 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
         y <- tick(y)
       }
 
-      paste0("Length ", x, ": ", pluralise_commas(text, y))
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
     })
   ))
 }
@@ -244,10 +244,6 @@ error_both_before_after <- function() {
 
 error_already_has_rownames <- function() {
   tibble_error("`df` must be a data frame without row names in `column_to_rownames()`.")
-}
-
-error_as_tibble_needs_rownames <- function() {
-  tibble_error("Object passed to `as_tibble()` must have row names if the `rownames` argument is set.")
 }
 
 error_glimpse_infinite_width <- function() {
@@ -299,6 +295,10 @@ error_tibble_row_size_one <- function(j, name, size) {
     "All vectors in `tibble_row()` must be size one, use `list()` or `list_of()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
+}
+
+error_as_tibble_needs_argument <- function() {
+  tibble_error("Must pass an argument to `as_tibble()`.")
 }
 
 error_new_tibble_must_be_list <- function() {
@@ -356,8 +356,8 @@ subclass_col_index_errors <- function(expr) {
     },
 
     vctrs_error_index_bad_type = function(cnd) {
-      cnd_bullets <- cnd_bullets(cnd)
-      cnd$cnd_bullets <- function(...) cnd_bullets
+      body <- cnd_body(cnd)
+      cnd$body <- function(...) body
       cnd <- error_unsupported_column_index(cnd)
       cnd_signal(cnd)
     }

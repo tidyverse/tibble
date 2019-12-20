@@ -88,9 +88,10 @@ test_that("error messages", {
     error_column_names_must_be_syntactic(letters[2:3], repair = TRUE),
     error_column_names_must_be_syntactic(LETTERS, repair = TRUE),
 
-    error_column_must_be_vector("a", "environment"),
-    error_column_must_be_vector(letters[2:3], c("name", "NULL")),
-    error_column_must_be_vector(LETTERS, letters),
+    error_column_must_be_vector("a", 3, "environment"),
+    error_column_must_be_vector("", 3, "environment"),
+    error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL")),
+    error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters)),
 
     error_inconsistent_cols(
       10,
@@ -140,8 +141,6 @@ test_that("error messages", {
 
     error_already_has_rownames(),
 
-    error_as_tibble_needs_rownames(),
-
     error_glimpse_infinite_width(),
 
     error_tribble_needs_columns(),
@@ -156,7 +155,11 @@ test_that("error messages", {
 
     error_tibble_row_size_one(3, "foo", 7),
 
+    error_as_tibble_needs_argument(),
+
     error_new_tibble_must_be_list(),
+
+    error_new_tibble_needs_class(),
 
     error_new_tibble_needs_nrow()
   )
