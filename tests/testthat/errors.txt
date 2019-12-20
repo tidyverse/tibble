@@ -316,7 +316,7 @@ All values in `frame_matrix()` must be atomic:
 
 ## error_tibble_row_size_one()
 
-All vectors in `tibble_row()` must be size one, use `list()` or `list_of()` to wrap.
+All vectors in `tibble_row()` must be size one, use `list()` to wrap.
 * Column `foo` is of size 7.
 
 
