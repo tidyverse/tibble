@@ -73,7 +73,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     .rows <- nrow(x)
   }
 
-  result <- lst_to_tibble(unclass(x), .rows, .name_repair, col_lengths(x))
+  result <- lst_to_tibble(unclass(x), .rows, .name_repair)
 
   if (is.null(rownames)) {
     result
@@ -96,10 +96,10 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 
   .name_repair <- compat_name_repair(.name_repair, validate)
 
-  lst_to_tibble_with_recycle(x, .rows, .name_repair, col_lengths(x))
+  lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
-lst_to_tibble_with_recycle <- function(x, .rows, .name_repair, lengths) {
+lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   x <- unclass(x)
   x <- set_repaired_names(x, .name_repair)
   x <- check_valid_cols(x)
@@ -157,13 +157,6 @@ is_valid_col <- function(x) {
 }
 
 recycle_columns <- function(x, .rows, lengths) {
-  if (is.null(lengths)) {
-    lengths <- col_lengths(x)
-    need_recycle <- FALSE
-  } else {
-    need_recycle <- TRUE
-  }
-
   nrow <- guess_nrow(lengths, .rows)
 
   # Shortcut if all columns have the requested or implied length
@@ -174,7 +167,7 @@ recycle_columns <- function(x, .rows, lengths) {
     abort(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
   }
 
-  if (need_recycle && nrow != 1L) {
+  if (nrow != 1L) {
     short <- which(lengths == 1L)
     if (has_length(short)) {
       x[short] <- map(x[short], vec_recycle, nrow)
