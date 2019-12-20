@@ -195,20 +195,23 @@ Use .name_repair to specify repair.
 
 ## error_column_must_be_vector()
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
 * Column `a` is environment
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 3 is environment
+
+All columns in a tibble must be vectors:
 * Column `b` is name
 * Column `c` is NULL
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 1 is QQ
+* Column 2 is VV
 * Column `A` is a
 * Column `B` is b
 * Column `C` is c
-* Column `D` is d
-* Column `E` is e
-* … and 21 more problems
+* … and 23 more problems
 
 
 ## error_inconsistent_cols()

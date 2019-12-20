@@ -88,9 +88,10 @@ test_that("error messages", {
     error_column_names_must_be_syntactic(letters[2:3], repair = TRUE),
     error_column_names_must_be_syntactic(LETTERS, repair = TRUE),
 
-    error_column_must_be_vector("a", "environment"),
-    error_column_must_be_vector(letters[2:3], c("name", "NULL")),
-    error_column_must_be_vector(LETTERS, letters),
+    error_column_must_be_vector("a", 3, "environment"),
+    error_column_must_be_vector("", 3, "environment"),
+    error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL")),
+    error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters)),
 
     error_inconsistent_cols(
       10,

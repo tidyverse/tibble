@@ -179,11 +179,11 @@ error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(
   tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)), names = names)
 }
 
-error_column_must_be_vector <- function(names, classes) {
+error_column_must_be_vector <- function(names, positions, classes) {
   tibble_error(
     bullets(
-      "All columns in a tibble must be 1d or 2d objects:",
-      paste0("Column ", tick(names), " is ", classes)
+      "All columns in a tibble must be vectors:",
+      paste0("Column ", name_or_pos(names, positions), " is ", classes)
     ),
     names = names
   )

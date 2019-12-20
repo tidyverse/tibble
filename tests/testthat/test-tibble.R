@@ -18,11 +18,11 @@ test_that("NULL is ignored (#580)", {
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment")
+    error_column_must_be_vector("a", 1, "environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name")
+    error_column_must_be_vector("a", 1, "name")
   )
 })
 
