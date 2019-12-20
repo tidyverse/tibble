@@ -49,7 +49,7 @@
 
 <meta property="og:title" content="Coerce lists, matrices, and more to data frames — as_tibble" />
 <meta property="og:description" content="
-as_tibble() turns an existing object, such as a data frame, list, or
+as_tibble() turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class tbl_df. This is
 in contrast with tibble(), which builds a tibble from individual columns.
 as_tibble() is to tibble() as base::as.data.frame() is to
@@ -57,12 +57,9 @@ base::data.frame().
 as_tibble() is an S3 generic, with methods for:
 data.frame: Thin wrapper around the list method
 that implements tibble's treatment of rownames.
-list
 matrix, poly,
 ts, table
-Default: An atomic vector is first coerced to a list and, unlike
-base::as.data.frame(), the returned tibble has one column per element.
-Other inputs are first coerced with base::as.data.frame().
+Default: Other inputs are first coerced with base::as.data.frame().
 
 " />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
@@ -196,7 +193,7 @@ Other inputs are first coerced with base::as.data.frame().
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
-<p><code>as_tibble()</code> turns an existing object, such as a data frame, list, or
+<p><code>as_tibble()</code> turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class <code><a href='tbl_df-class.html'>tbl_df</a></code>. This is
 in contrast with <code><a href='tibble.html'>tibble()</a></code>, which builds a tibble from individual columns.
 <code>as_tibble()</code> is to <code><a href='tibble.html'>tibble()</a></code> as <code><a href='https://rdrr.io/r/base/as.data.frame.html'>base::as.data.frame()</a></code> is to
@@ -204,12 +201,9 @@ in contrast with <code><a href='tibble.html'>tibble()</a></code>, which builds a
 <p><code>as_tibble()</code> is an S3 generic, with methods for:</p><ul>
 <li><p><code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>: Thin wrapper around the <code>list</code> method
 that implements tibble's treatment of <a href='rownames.html'>rownames</a>.</p></li>
-<li><p>list</p></li>
 <li><p><code><a href='https://rdrr.io/r/methods/StructureClasses.html'>matrix</a></code>, <code><a href='https://rdrr.io/r/stats/poly.html'>poly</a></code>,
 <code><a href='https://rdrr.io/r/stats/ts.html'>ts</a></code>, <code><a href='https://rdrr.io/r/base/table.html'>table</a></code></p></li>
-<li><p>Default: An atomic vector is first coerced to a list and, unlike
-<code><a href='https://rdrr.io/r/base/as.data.frame.html'>base::as.data.frame()</a></code>, the returned tibble has one column per element.
-Other inputs are first coerced with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>base::as.data.frame()</a></code>.</p></li>
+<li><p>Default: Other inputs are first coerced with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>base::as.data.frame()</a></code>.</p></li>
 </ul>
 
     </div>
