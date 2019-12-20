@@ -179,11 +179,11 @@ error_column_names_must_be_syntactic <- function(names, repair = has_tibble_arg(
   tibble_error(pluralise_commas("Column name(s) ", tick(names), " must be syntactic.", use_repair(repair)), names = names)
 }
 
-error_column_must_be_vector <- function(names, classes) {
+error_column_must_be_vector <- function(names, positions, classes) {
   tibble_error(
     bullets(
-      "All columns in a tibble must be 1d or 2d objects:",
-      paste0("Column ", tick(names), " is ", classes)
+      "All columns in a tibble must be vectors:",
+      paste0("Column ", name_or_pos(names, positions), " is ", classes)
     ),
     names = names
   )
@@ -200,7 +200,16 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   tibble_error(bullets(
     "Tibble columns must have consistent sizes, only values of size one are recycled:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
-    map2_chr(names(vars_split), vars_split, function(x, y) paste0("Size ", x, ": ", pluralise_commas("Column(s) ", tick(y))))
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
+    })
   ))
 }
 
@@ -272,6 +281,19 @@ error_frame_matrix_list <- function(pos) {
   tibble_error(bullets(
     "All values in `frame_matrix()` must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
+  ))
+}
+
+error_tibble_row_size_one <- function(j, name, size) {
+  if (name != "") {
+    desc <- tick(name)
+  } else {
+    desc <- paste0("at position ", j)
+  }
+
+  tibble_error(bullets(
+    "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 

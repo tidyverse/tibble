@@ -18,11 +18,11 @@ test_that("NULL is ignored (#580)", {
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment")
+    error_column_must_be_vector("a", 1, "environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name")
+    error_column_must_be_vector("a", 1, "name")
   )
 })
 
@@ -31,7 +31,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA)
+    error_inconsistent_cols(10, "y", 2, "Existing data")
   )
 })
 
@@ -724,5 +724,28 @@ test_that("subsetting one row retains columns", {
   expect_identical(
     tibble(y = diag(5))[1, ],
     tibble(y = diag(5)[1, , drop = FALSE])
+  )
+})
+
+
+# tibble_row() ------------------------------------------------------------
+
+test_that("returns a single row (#416)", {
+  model <- lm(Petal.Width ~ Petal.Length + Species, data = iris)
+  expect_identical(
+    tibble_row(a = 1, b = list_of(2:3), lm = model),
+    tibble(a = 1, b = list_of(2:3), lm = list(model))
+  )
+  expect_equal(
+    tibble_row(iris[1, ]),
+    tibble(iris[1, ])
+  )
+  expect_tibble_error(
+    tibble_row(a = 1, b = 2:3),
+    error_tibble_row_size_one(2, "b", 2)
+  )
+  expect_tibble_error(
+    tibble_row(iris[2:3, ]),
+    error_tibble_row_size_one(1, "", 2)
   )
 })

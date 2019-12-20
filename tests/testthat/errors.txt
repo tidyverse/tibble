@@ -195,20 +195,23 @@ Use .name_repair to specify repair.
 
 ## error_column_must_be_vector()
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
 * Column `a` is environment
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 3 is environment
+
+All columns in a tibble must be vectors:
 * Column `b` is name
 * Column `c` is NULL
 
-All columns in a tibble must be 1d or 2d objects:
+All columns in a tibble must be vectors:
+* Column 1 is QQ
+* Column 2 is VV
 * Column `A` is a
 * Column `B` is b
 * Column `C` is c
-* Column `D` is d
-* Column `E` is e
-* … and 21 more problems
+* … and 23 more problems
 
 
 ## error_inconsistent_cols()
@@ -226,6 +229,20 @@ Tibble columns must have consistent sizes, only values of size one are recycled:
 Tibble columns must have consistent sizes, only values of size one are recycled:
 * Size 2: Columns `a`, `b`
 * Size 3: Column `c`
+
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `uvw` argument
+* Size 3: Column at position 3
+* Size 4: Columns at positions 1, 2
+
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 10: Requested with `xyz` argument
+* Size 2: Columns at positions 1, 2
+* Size 3: Column at position 3
+
+Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 2: Columns at positions 1, 2
+* Size 3: Column at position 3
 
 
 ## error_inconsistent_new_cols()
@@ -295,6 +312,12 @@ All column specifications in `tribble()` must use the `~name` or `~"name"` synta
 
 All values in `frame_matrix()` must be atomic:
 * Found list-valued elements at positions 2, 3, 4.
+
+
+## error_tibble_row_size_one()
+
+All vectors in `tibble_row()` must be size one, use `list()` to wrap.
+* Column `foo` is of size 7.
 
 
 ## error_as_tibble_needs_argument()

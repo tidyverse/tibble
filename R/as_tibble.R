@@ -119,10 +119,10 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 
   .name_repair <- compat_name_repair(.name_repair, validate)
 
-  lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
+  lst_to_tibble_with_recycle(x, .rows, .name_repair, col_lengths(x))
 }
 
-lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
+lst_to_tibble_with_recycle <- function(x, .rows, .name_repair, lengths) {
   x <- unclass(x)
   x <- set_repaired_names(x, .name_repair)
   x <- check_valid_cols(x)
@@ -150,7 +150,7 @@ check_valid_cols <- function(x) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    abort(error_column_must_be_vector(names_x[is_xd], classes))
+    abort(error_column_must_be_vector(names_x[is_xd], attr(x, "pos")[is_xd], classes))
   }
 
   # 657
@@ -166,13 +166,12 @@ make_valid_col <- function(x) {
 }
 
 check_valid_col <- function(x, name, pos) {
-  if (!is_valid_col(x)) {
-    classes <- class(x)[[1]]
-    if (name == "") name <- pos
-    abort(error_column_must_be_vector(name, classes))
+  if (name == "") {
+    ret <- check_valid_cols(structure(list(x), pos = pos))
+  } else {
+    ret <- check_valid_cols(list2(!!name := x))
   }
-
-  invisible(make_valid_col(x))
+  invisible(ret[[1]])
 }
 
 is_valid_col <- function(x) {

@@ -2,11 +2,17 @@
 % Please edit documentation in R/tibble.R
 \name{tibble}
 \alias{tibble}
+\alias{tibble_row}
 \title{Build a data frame}
 \usage{
 tibble(
   ...,
   .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
+
+tibble_row(
+  ...,
   .name_repair = c("check_unique", "unique", "universal", "minimal")
 )
 }
@@ -58,6 +64,10 @@ are recycled.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
 See examples.
 }
+
+\code{tibble_row()} constructs a data frame that is guaranteed to occupy one row.
+Vector columns are required to have size one, non-vector columns are wrapped
+in a list.
 }
 \examples{
 # Unnamed arguments are named with their expression:
@@ -144,6 +154,9 @@ tibble(x = 1, y = !!x)
 # You can splice-unquote a list of quosures and expressions:
 tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
+
+# Use tibble_row() to construct a one-row tibble:
+tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use

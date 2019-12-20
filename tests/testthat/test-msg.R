@@ -88,9 +88,10 @@ test_that("error messages", {
     error_column_names_must_be_syntactic(letters[2:3], repair = TRUE),
     error_column_names_must_be_syntactic(LETTERS, repair = TRUE),
 
-    error_column_must_be_vector("a", "environment"),
-    error_column_must_be_vector(letters[2:3], c("name", "NULL")),
-    error_column_must_be_vector(LETTERS, letters),
+    error_column_must_be_vector("a", 3, "environment"),
+    error_column_must_be_vector("", 3, "environment"),
+    error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL")),
+    error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters)),
 
     error_inconsistent_cols(
       10,
@@ -107,6 +108,24 @@ test_that("error messages", {
     error_inconsistent_cols(
       NULL,
       letters[1:3],
+      c(2, 2, 3),
+      "Requested with `xyz` argument"
+    ),
+    error_inconsistent_cols(
+      10,
+      1:3,
+      c(4, 4, 3),
+      "Requested with `uvw` argument"
+    ),
+    error_inconsistent_cols(
+      10,
+      1:3,
+      c(2, 2, 3),
+      "Requested with `xyz` argument"
+    ),
+    error_inconsistent_cols(
+      NULL,
+      1:3,
       c(2, 2, 3),
       "Requested with `xyz` argument"
     ),
@@ -133,6 +152,8 @@ test_that("error messages", {
     error_tribble_non_rectangular(5, 17),
 
     error_frame_matrix_list(2:4),
+
+    error_tibble_row_size_one(3, "foo", 7),
 
     error_as_tibble_needs_argument(),
 

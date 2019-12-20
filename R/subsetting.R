@@ -454,7 +454,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
+    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, jj, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
   }
 
   # Remove
@@ -523,10 +523,14 @@ vec_recycle_cols <- function(x, n) {
   )
 }
 
-vec_recycle_rows <- function(x, n, col) {
+vec_recycle_rows <- function(x, n, j, name) {
   size <- vec_size(x)
   if (size == n) return(x)
   if (size == 1) return(vec_recycle(x, n))
 
-  abort(error_inconsistent_cols(n, col, size, "Existing data"))
+  if (name == "") {
+    name <- j
+  }
+
+  abort(error_inconsistent_cols(n, name, size, "Existing data"))
 }
