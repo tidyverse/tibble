@@ -3,7 +3,7 @@
 #' @description
 #' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
 #'
-#' `as_tibble()` turns an existing object, such as a data frame, list, or
+#' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
 #' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
@@ -12,12 +12,9 @@
 #' `as_tibble()` is an S3 generic, with methods for:
 #' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
 #'   that implements tibble's treatment of [rownames].
-#' * list
 #' * [`matrix`][methods::matrix-class], [`poly`][stats::poly()],
 #'   [`ts`][stats::ts()], [`table`][base::table()]
-#' * Default: An atomic vector is first coerced to a list and, unlike
-#'   [base::as.data.frame()], the returned tibble has one column per element.
-#'   Other inputs are first coerced with [base::as.data.frame()].
+#' * Default: Other inputs are first coerced with [base::as.data.frame()].
 #'
 #' @section Row names:
 #' The default behavior is to silently remove row names.
@@ -96,7 +93,8 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
-  result <- as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
+
+  result <- lst_to_tibble(unclass(x), .rows, .name_repair, col_lengths(x))
 
   if (is.null(rownames)) {
     result
@@ -284,7 +282,7 @@ as_tibble.NULL <- function(x, ...) {
     abort(error_as_tibble_needs_argument())
   }
 
-  as_tibble(list(), ...)
+  new_tibble(list(), nrow = 0)
 }
 
 #' @export

@@ -84,7 +84,7 @@ Read more in \link{rownames}.
 \description{
 \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
 
-\code{as_tibble()} turns an existing object, such as a data frame, list, or
+\code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
 in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
 \code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to
@@ -94,12 +94,9 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
-\item list
 \item \code{\link[methods:matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
-\item Default: An atomic vector is first coerced to a list and, unlike
-\code{\link[base:as.data.frame]{base::as.data.frame()}}, the returned tibble has one column per element.
-Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
+\item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
 }
 \section{Row names}{
