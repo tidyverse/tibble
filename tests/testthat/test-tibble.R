@@ -529,7 +529,7 @@ test_that("as.tibble is an alias of as_tibble", {
 test_that("NULL isn't a valid column", {
   expect_tibble_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", "NULL")
+    error_column_must_be_vector("a", 1, "NULL")
   )
 })
 
