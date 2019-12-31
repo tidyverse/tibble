@@ -112,35 +112,13 @@ package's \code{\link[=.onLoad]{.onLoad()}}  function.
 }
 
 \examples{
-l <- list(x = 1:500, y = runif(500), z = 500:1)
-df <- as_tibble(l)
-
 m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-as_tibble(as.list(1:3), .name_repair = "unique")
-
 # Prefer enframe() for vectors
 enframe(1:3)
 enframe(1:3, name = NULL)
-
-# For list-like inputs, `as_tibble()` is considerably simpler than
-# `as.data.frame()` and hence faster
-\dontrun{
-if (requireNamespace("bench", quietly = TRUE)) {
-  l2 <- replicate(26, sample(letters), simplify = FALSE)
-  names(l2) <- letters
-  bench::mark(
-    as_tibble(l2, .name_repair = "universal"),
-    as_tibble(l2, .name_repair = "unique"),
-    as_tibble(l2, .name_repair = "minimal"),
-    as_tibble(l2),
-    as.data.frame(l2),
-    check = FALSE
-  )
-}
-}
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}

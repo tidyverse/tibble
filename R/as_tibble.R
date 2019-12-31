@@ -51,7 +51,6 @@
 #' # Prefer enframe() for vectors
 #' enframe(1:3)
 #' enframe(1:3, name = NULL)
-#' }
 as_tibble <- function(x, ...,
                       .rows = NULL,
                       .name_repair = c("check_unique", "unique", "universal", "minimal"),
