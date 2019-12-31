@@ -77,7 +77,9 @@ into this column and the \code{row.names} attribute is deleted.
 Read more in \link{rownames}.
 }}
 
-\item{_n, validate}{For compatibility only, do not use for new code.}
+\item{_n, validate}{\lifecycle{soft-deprecated}
+
+For compatibility only, do not use for new code.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
 }

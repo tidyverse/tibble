@@ -41,7 +41,10 @@
 #'     into this column and the `row.names` attribute is deleted.
 #'  Read more in [rownames].
 
-#' @param _n,validate For compatibility only, do not use for new code.
+#' @param _n,validate
+#'   \lifecycle{soft-deprecated}
+#'
+#'   For compatibility only, do not use for new code.
 #' @export
 #' @examples
 #' m <- matrix(rnorm(50), ncol = 5)
