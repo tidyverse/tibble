@@ -1,3 +1,15 @@
+# tibble 2.99.99.9011
+
+- Using `[[` with `NA` throws an error (#647).
+- Import lifecycle package (#669).
+- Use `missing()` instead of `NULL` default value for `[` and `[[` methods (#685).
+- New `tibble_row()` (#205).
+- Mention "size" instead of "length" in error message (#682, @lionel-).
+- `as_tibble()` without arguments raises an error (#683).
+- `as_tibble.data.frame()` uses implicit row names if asked to create a column from row names. This allows lossless direct conversion of matrices with row names to tibbles (#567, @stufield).
+- `new_tibble()` removes redundant subclasses from the `"class"` attribute.
+
+
 # tibble 2.99.99.9010
 
 - Add proper error messages everywhere, avoid "could not find function error_xxx()" errors (#659).
