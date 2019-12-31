@@ -1,6 +1,6 @@
 pandoc: '2.2'
 pkgdown: 1.4.1.9000
-pkgdown_sha: 24ef1bbdec0de44fe11eb1d58b40dba961525d43
+pkgdown_sha: 03fa5022ff360a6f87586145e45f71fe090c64a2
 articles:
   extending: extending.html
   invariants: invariants.html

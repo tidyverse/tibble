@@ -300,18 +300,18 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt; 5     5    10     1</div><div class='input'>
 <span class='co'># Columns are available in subsequent expressions:</span>
 <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
-#&gt;        x     y
-#&gt;    &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 0.579 1.16 
-#&gt;  2 0.898 1.80 
-#&gt;  3 0.344 0.689
-#&gt;  4 0.761 1.52 
-#&gt;  5 0.731 1.46 
-#&gt;  6 0.852 1.70 
-#&gt;  7 0.976 1.95 
-#&gt;  8 0.113 0.226
-#&gt;  9 0.970 1.94 
-#&gt; 10 0.648 1.30 </div><div class='input'>
+#&gt;         x      y
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1 0.512  1.02  
+#&gt;  2 0.836  1.67  
+#&gt;  3 0.709  1.42  
+#&gt;  4 0.874  1.75  
+#&gt;  5 0.0115 0.0230
+#&gt;  6 0.888  1.78  
+#&gt;  7 0.996  1.99  
+#&gt;  8 0.500  1.00  
+#&gt;  9 0.359  0.718 
+#&gt; 10 0.775  1.55  </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)

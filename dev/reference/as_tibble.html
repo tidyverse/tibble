@@ -318,20 +318,10 @@ converts a named vector to a tibble with a column of names and column of
 values. Name repair is implemented using <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>500</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>500</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>500</span>:<span class='fl'>1</span>)
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>l</span>)
-
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
-<span class='fu'>as_tibble</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* `` -&gt; ...1</span>
-#&gt; <span class='message'>* `` -&gt; ...2</span>
-#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
-#&gt;    ...1  ...2  ...3
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2     3</div><div class='input'>
 <span class='co'># Prefer enframe() for vectors</span>
 <span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
 #&gt;    name value
@@ -343,23 +333,7 @@ values. Name repair is implemented using <code><a href='https://rdrr.io/pkg/vctr
 #&gt;   &lt;int&gt;
 #&gt; 1     1
 #&gt; 2     2
-#&gt; 3     3</div><div class='input'>
-<span class='co'># For list-like inputs, `as_tibble()` is considerably simpler than</span>
-<span class='co'># `as.data.frame()` and hence faster</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"bench"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>l2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>26</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>), <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>l2</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>
-  <span class='kw pkg'>bench</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/bench/man/mark.html'>mark</a></span>(
-    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>),
-    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>),
-    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>),
-    <span class='fu'>as_tibble</span>(<span class='no'>l2</span>),
-    <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>l2</span>),
-    <span class='kw'>check</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-  )
-}
-}</div></pre>
+#&gt; 3     3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
