@@ -320,11 +320,14 @@ tbl_subset2 <- function(x, j) {
     return(.subset2(x, j))
   } else if (is.character(j)) {
     check_scalar(j)
-  } else {
-    j <- vec_as_position(j, length(x), names(x), arg = "j")
+    # NA names should give an error
+    if (!is.na(j)) {
+      # Don't warn when accessing invalid column names
+      return(.subset2(x, j))
+    }
   }
 
-  # Let .subset2() handle character indexes
+  j <- vec_as_position(j, length(x), names(x), arg = "j")
   .subset2(x, j)
 }
 

@@ -298,6 +298,14 @@ test_that("[[.tbl_df ignores exact argument", {
   expect_identical(getElement(foo, "y"), 1:10)
 })
 
+test_that("[[.tbl_df throws error with NA index", {
+  foo <- tibble(x = 1:10, y = 1:10)
+  expect_error(foo[[NA]])
+  expect_error(foo[[NA_integer_]])
+  expect_error(foo[[NA_real_]])
+  expect_error(foo[[NA_character_]])
+})
+
 test_that("can use recursive indexing with [[", {
   scoped_lifecycle_silence()
 
