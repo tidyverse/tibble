@@ -47,6 +47,7 @@ How default behaviour of tibbles differs from that of
 List-columns are expressly anticipated and do not require special tricks.
 Read more in \code{\link[=tibble]{tibble()}}.
 \item Recycling only happens for a length 1 input.
+Read more in \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}.
 \item Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
 must indicate how to resolve. Read more in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.

@@ -42,6 +42,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'   List-columns are expressly anticipated and do not require special tricks.
 #'   Read more in [tibble()].
 #' * Recycling only happens for a length 1 input.
+#'   Read more in [vctrs::vec_recycle()].
 #' * Column names are not munged, although missing names are auto-populated.
 #'   Empty and duplicated column names are strongly discouraged, but the user
 #'   must indicate how to resolve. Read more in [vctrs::vec_as_names()].
