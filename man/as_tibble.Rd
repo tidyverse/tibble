@@ -82,7 +82,7 @@ Read more in \link{rownames}.
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is

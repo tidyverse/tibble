@@ -16,7 +16,7 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{tibble}.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is

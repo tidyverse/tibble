@@ -16,7 +16,7 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{matrix}.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.

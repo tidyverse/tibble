@@ -1,7 +1,7 @@
 #' Tibble constructor and validator
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#' \lifecycle{maturing}
 #'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses

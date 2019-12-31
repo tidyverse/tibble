@@ -33,7 +33,7 @@ number.}
 \code{x} with repaired names or a repaired version of \code{name}.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+\lifecycle{soft-deprecated}
 
 \code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()} were early efforts
 to facilitate \emph{post hoc} name repair in tibble, given that \code{\link[=tibble]{tibble()}} and

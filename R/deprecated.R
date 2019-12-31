@@ -1,7 +1,7 @@
 #' Deprecated functions
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("deprecated")}
+#' \lifecycle{deprecated}
 #'
 #' Use [tibble()] instead of `data_frame()`.
 #'

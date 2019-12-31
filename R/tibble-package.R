@@ -5,7 +5,7 @@
 #' @import vctrs
 #' @aliases NULL tibble-package
 #' @details
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+#' \lifecycle{stable}
 #'
 #' The tibble package provides utilities for handling __tibbles__, where
 #' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]

@@ -1,7 +1,7 @@
 #' View an object
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("experimental")}
+#' \lifecycle{experimental}
 #'
 #' Calls [utils::View()] on the input and returns it, invisibly.
 #' The RStudio IDE overrides `utils::View()`, this is picked up

@@ -1,7 +1,7 @@
 #' Add rows to a data frame
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+#' \lifecycle{questioning}
 #'
 #' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See [tribble()] for an easy way to create an complete

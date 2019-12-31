@@ -1,7 +1,7 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#' \lifecycle{maturing}
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
