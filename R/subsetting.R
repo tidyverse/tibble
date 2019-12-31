@@ -126,7 +126,15 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
-`[[<-.tbl_df` <- function(x, i = NULL, j = NULL, value) {
+`[[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(i)) {
+    i <- NULL
+  }
+
+  if (missing(j)) {
+    j <- NULL
+  }
+
   if (is.null(j) && nargs() < 4) {
     j <- i
     i <- NULL
@@ -158,7 +166,15 @@ NULL
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
-`[.tbl_df` <- function(x, i = NULL, j = NULL, drop = FALSE) {
+`[.tbl_df` <- function(x, i, j, drop = FALSE) {
+  if (missing(i)) {
+    i <- NULL
+  }
+
+  if (missing(j)) {
+    j <- NULL
+  }
+
   # Ignore drop as an argument for counting
   n_real_args <- nargs() - !missing(drop)
 
@@ -186,7 +202,15 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[<-.data.frame`
 #' @export
-`[<-.tbl_df` <- function(x, i = NULL, j = NULL, value) {
+`[<-.tbl_df` <- function(x, i, j, value) {
+  if (missing(i)) {
+    i <- NULL
+  }
+
+  if (missing(j)) {
+    j <- NULL
+  }
+
   if (is.null(j) && nargs() < 4) {
     j <- i
     i <- NULL
