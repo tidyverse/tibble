@@ -1,7 +1,7 @@
 #' Build a list
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+#' \lifecycle{questioning}
 #'
 #' `lst()` constructs a list, similar to [base::list()], but with some of the
 #' same features as [tibble()]. `lst()` builds components sequentially. When

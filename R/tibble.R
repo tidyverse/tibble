@@ -180,7 +180,7 @@ is_tibble <- function(x) {
 #' Deprecated test for tibble-ness
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#' \lifecycle{soft-deprecated}
 #'
 #' Please use [is_tibble()] instead.
 #'

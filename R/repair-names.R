@@ -43,7 +43,7 @@ check_minimal_names <- function(x) {
 #' Retired functions for name repair
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#' \lifecycle{soft-deprecated}
 #'
 #' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts

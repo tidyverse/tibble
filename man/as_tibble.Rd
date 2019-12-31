@@ -77,12 +77,14 @@ into this column and the \code{row.names} attribute is deleted.
 Read more in \link{rownames}.
 }}
 
-\item{_n, validate}{For compatibility only, do not use for new code.}
+\item{_n, validate}{\lifecycle{soft-deprecated}
+
+For compatibility only, do not use for new code.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is

@@ -10,7 +10,7 @@ is.tibble(x)
 \item{x}{An object}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+\lifecycle{soft-deprecated}
 
 Please use \code{\link[=is_tibble]{is_tibble()}} instead.
 }

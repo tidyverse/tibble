@@ -21,7 +21,7 @@ A \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default
 or one column (otherwise).
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 \code{enframe()} converts named atomic vectors or lists to one- or two-column
 data frames.

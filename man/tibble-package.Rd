@@ -12,7 +12,7 @@ Provides a 'tbl_df' class (the 'tibble') that
     data frame.
 }
 \details{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+\lifecycle{stable}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}

@@ -1,7 +1,7 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#' \lifecycle{maturing}
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
@@ -41,7 +41,10 @@
 #'     into this column and the `row.names` attribute is deleted.
 #'  Read more in [rownames].
 
-#' @param _n,validate For compatibility only, do not use for new code.
+#' @param _n,validate
+#'   \lifecycle{soft-deprecated}
+#'
+#'   For compatibility only, do not use for new code.
 #' @export
 #' @examples
 #' m <- matrix(rnorm(50), ncol = 5)

@@ -33,6 +33,7 @@ Imports:
     cli,
     crayon (>= 1.3.4),
     fansi (>= 0.4.0),
+    lifecycle,
     magrittr,
     methods,
     pillar (>= 1.4.2.9001),
@@ -55,6 +56,8 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
+RdMacros: 
+    lifecycle
 Remotes: 
     r-lib/pillar,
     r-lib/vctrs
