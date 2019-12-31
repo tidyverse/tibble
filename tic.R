@@ -1,4 +1,4 @@
-do_package_checks()
+do_package_checks(error_on = if (getRversion() >= "3.3") "note" else "error")
 
 if (Sys.getenv("DEV_VERSIONS") != "") {
   get_stage("install") %>%
