@@ -1,3 +1,115 @@
+# adept
+
+<details>
+
+* Version: 1.1.2
+* Source code: https://github.com/cran/adept
+* URL: https://github.com/martakarass/adept
+* BugReports: https://github.com/martakarass/adept/issues
+* Date/Publication: 2019-06-18 06:50:03 UTC
+* Number of recursive dependencies: 94
+
+Run `revdep_details(,"adept")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [90m  5. [39mfuture:::evaluator(...)
+      [90m  6. [39mfuture:::fun(...)
+      [90m  7. [39mfuture:::ClusterRegistry("start", workers = workers)
+      [90m  8. [39mfuture:::makeCluster(workers, ...)
+      [90m  9. [39mfuture::makeClusterPSOCK(workers, ...)
+      [90m 10. [39mfuture:::makeNode(...)
+      [90m 11. [39m(function() {...
+      [90m 12. [39mbase::tryCatch(...)
+      [90m 13. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 14. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 15. [39mvalue[[3L]](cond)
+      [90m 16. [39m(function() {...
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 106 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
+      1. Error: Example 5(c). Setting: no noise in signal, all pattern occurences of the same
+                length, long signal. We check for the same behaviour with and without parallel
+                computation with (maximum-1) number of workers available. (@test-segmentPattern.R#655) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.6Mb
+      sub-directories of 1Mb or more:
+        doc   4.7Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘tibble’
+      All declared Imports should be used.
+    ```
+
+# alakazam
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/alakazam
+* URL: http://alakazam.readthedocs.org
+* BugReports: https://bitbucket.org/kleinstein/alakazam/issues
+* Date/Publication: 2019-07-18 11:20:13 UTC
+* Number of recursive dependencies: 77
+
+Run `revdep_details(,"alakazam")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups="SAMPLE", mode="family")
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups="SAMPLE", mode="gene")
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups="SAMPLE", mode="allele")
+    > 
+    > # With copy numbers and multiple groups
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups=c("SAMPLE", "ISOTYPE"), 
+    +                     copy="DUPCOUNT", mode="family")
+    > 
+    > # Count by clone
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups=c("SAMPLE", "ISOTYPE"), 
+    +                     clone="CLONE", mode="family")
+    > 
+    > # Count absent genes 
+    > genes <- countGenes(ExampleDb, gene="V_CALL", groups="SAMPLE", 
+    +                     mode="allele", fill=TRUE)
+    Warning: `complete_()` is deprecated as of tidyr 1.0.0.
+    Please use `complete()` instead.
+    [90mThis warning is displayed once per session.[39m
+    [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
+    Error: `i` must have one dimension, not 2.
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  7.2Mb
+      sub-directories of 1Mb or more:
+        R      3.4Mb
+        doc    1.2Mb
+        libs   2.1Mb
+    ```
+
 # amt
 
 <details>
@@ -6,7 +118,7 @@
 * Source code: https://github.com/cran/amt
 * URL: https://github.com/jmsigner/amt
 * Date/Publication: 2019-09-19 10:20:02 UTC
-* Number of recursive dependencies: 171
+* Number of recursive dependencies: 173
 
 Run `revdep_details(,"amt")` for more info
 
@@ -17,13 +129,14 @@ Run `revdep_details(,"amt")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    > 
     > data(amt_fisher)
     > # Add the month
     > amt_fisher %>% mutate(yday = lubridate::yday(t_)) %>%
     + summarize_sampling_rate_many(c("id", "yday"))
-    Error: Can't cast `ts$min` <table> to `ts$min` <table>.
-    Backtrace:
+    Error: No common type for `..1$ts$min` <table> and `..2$ts$min` <table>.
+    [1m<error/vctrs_error_incompatible_type>[22m
+    No common type for `..1$ts$min` <table> and `..2$ts$min` <table>.
+    [1mBacktrace:[22m
     [90m     [39m█
     [90m  1. [39m├─`%>%`(...)
     [90m  2. [39m│ ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
@@ -35,8 +148,7 @@ Run `revdep_details(,"amt")` for more info
     [90m  8. [39m│         └─function_list[[k]](value)
     [90m  9. [39m│           ├─amt::summarize_sampling_rate_many(., c("id", "yday"))
     [90m 10. [39m│           └─amt:::summarize_sampling_rate_many.track_xyt(., c("id", "yday")) [90m00_pkg_src/amt/R/eda_sampling_rate.R:94:2[39m
-    [90m 11. [39m│             └─`%>%`(...) [90m00_pkg_src/amt/R/eda_sampling_rate.R:108:2[39m
-    [90m 12. [39m│               ├─base::withVisible(e
+    [90m 11. [39m│  
     Execution halted
     ```
 
@@ -56,7 +168,7 @@ Run `revdep_details(,"amt")` for more info
 * Version: 0.9.3
 * Source code: https://github.com/cran/banter
 * Date/Publication: 2018-07-10 15:20:06 UTC
-* Number of recursive dependencies: 61
+* Number of recursive dependencies: 62
 
 Run `revdep_details(,"banter")` for more info
 
@@ -67,6 +179,7 @@ Run `revdep_details(,"banter")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    Running examples in ‘banter-Ex.R’ failed
     The error most likely occurred in:
     
     > ### Name: getBanterModel
@@ -85,8 +198,7 @@ Run `revdep_details(,"banter")` for more info
     + )
     > # run BANTER event model
     > bant.mdl <- runBanterModel(bant.mdl, ntree = 1000, sampsize = 1)
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 4 whereas the index has size 68.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -107,7 +219,7 @@ Run `revdep_details(,"banter")` for more info
 * URL: https://github.com/kaneplusplus/basket
 * BugReports: https://github.com/kaneplusplus/basket/issues
 * Date/Publication: 2019-10-23 07:40:02 UTC
-* Number of recursive dependencies: 66
+* Number of recursive dependencies: 76
 
 Run `revdep_details(,"basket")` for more info
 
@@ -117,18 +229,22 @@ Run `revdep_details(,"basket")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      11: `$<-`(`*tmp*`, "p0", value = c(0.15, 0.15, 0.15, 0.2, 0.15, 0.15)) at /home/rstudio/tibble/revdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:68
-      12: `$<-.tbl_df`(`*tmp*`, "p0", value = c(0.15, 0.15, 0.15, 0.2, 0.15, 0.15)) at /home/rstudio/tibble/revdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:68
-      13: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:91
-      14: tbl_subassign_col(x, j, value) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:336
-      15: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:455
-      16: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:529
-      17: signal_abort(cnd)
+    ...
+      Tibble columns must have consistent sizes, only values of size one are recycled:
+      * Size 600000: Existing data
+      * Size 6: Column `p0`
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_true(inherits(plot_density(mh1), "ggplot"))
+      [90m  6. [39mbasket:::plot_density.exchangeability_model(mh1) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:31:2[39m
+      [90m  7. [39mbase::lapply(ps, function(pt) plot_density(x[[pt]])) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:50:2[39m
+      [90m  8. [39mbasket:::FUN(X[[i]], ...)
+      [90m 10. [39mbasket:::plot_density.mem(x[[pt]]) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:31:2[39m
+      [90m 12. [39mtibble:::`$<-.tbl_df`(...) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:68:2[39m
+      [90m 13. [39mtibble:::tbl_subassign(x, i = NULL, as_string(name), list(value))
+      [90m 14. [39mtibble:::tbl_subassign_col(x, j, value)
+      [90m 15. [39mtibble:::vec_recycle_rows(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 32 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
       1. Error: (unknown) (@test-mcmc.r#35) 
       2. Error: (unknown) (@test-plot.r#12) 
@@ -146,7 +262,7 @@ Run `revdep_details(,"basket")` for more info
 * URL: https://gitlab.com/ustervbo/beadplexr
 * BugReports: https://gitlab.com/ustervbo/beadplexr/issues
 * Date/Publication: 2018-12-07 23:40:08 UTC
-* Number of recursive dependencies: 122
+* Number of recursive dependencies: 131
 
 Run `revdep_details(,"beadplexr")` for more info
 
@@ -156,19 +272,23 @@ Run `revdep_details(,"beadplexr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      * Length 2: Column `BeadID`
-      1: `$<-`(`*tmp*`, BeadID, value = c("A", "B")) at testthat/test_identify_assay_analyte.R:39
-      2: `$<-.tbl_df`(`*tmp*`, BeadID, value = c("A", "B")) at testthat/test_identify_assay_analyte.R:39
-      3: tbl_subassign(x, i = NULL, as_string(name), list(value)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:91
-      4: tbl_subassign_col(x, j, value) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:336
-      5: vec_recycle_rows(value[[jj]], nrow, coalesce2empty(names(j)[[jj]], names(x)[[ji]])) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:455
-      6: abort(error_inconsistent_cols(n, col, size, "Existing data")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:529
-      7: signal_abort(cnd)
+    ...
+      > library(testthat)
+      > library(beadplexr)
+      > 
+      > test_check("beadplexr")
+      [31m──[39m [31m1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) [39m [31m───────────[39m
+      Tibble columns must have consistent sizes, only values of size one are recycled:
+      * Size 5126: Existing data
+      * Size 2: Column `BeadID`
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`$<-`(`*tmp*`, BeadID, value = c("A", "B"))
+      [90m 2. [39mtibble:::`$<-.tbl_df`(`*tmp*`, BeadID, value = c("A", "B"))
+      [90m 3. [39mtibble:::tbl_subassign(x, i = NULL, as_string(name), list(value))
+      [90m 4. [39mtibble:::tbl_subassign_col(x, j, value)
+      [90m 5. [39mtibble:::vec_recycle_rows(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 344 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) 
       
@@ -177,15 +297,6 @@ Run `revdep_details(,"beadplexr")` for more info
     ```
 
 ## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error in setClass("attrData", representation(data = "list", defaults = "list")) : 
-      could not find function "setClass"
-    Error in signature("psi_func") : could not find function "signature"
-    ```
 
 *   checking Rd cross-references ... NOTE
     ```
@@ -201,7 +312,7 @@ Run `revdep_details(,"beadplexr")` for more info
 * URL: https://github.com/r-lib/bench
 * BugReports: https://github.com/r-lib/bench/issues
 * Date/Publication: 2019-09-06 08:20:02 UTC
-* Number of recursive dependencies: 64
+* Number of recursive dependencies: 74
 
 Run `revdep_details(,"bench")` for more info
 
@@ -226,15 +337,19 @@ Run `revdep_details(,"bench")` for more info
     +   dat[dat$x > 500, ],
     +   dat[which(dat$x > 500), ],
     +   subset(dat, x > 500))
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      [90m  1. [39mbench::press(...)
+      [90m  5. [39mbench::mark(x)
+      [90m 10. [39mtibble:::as_tibble.list(results, validate = FALSE)
+      [90m 11. [39mtibble:::lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
+      [90m 12. [39mtibble:::check_valid_cols(x)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 146 | SKIPPED: 2 | WARNINGS: 0 | FAILED: 11 ]
       1. Error: mark: Uses all.equal to check results by default (@test-mark.R#36) 
       2. Error: mark: Can use other functions to check results like identical to check results (@test-mark.R#52) 
@@ -251,6 +366,56 @@ Run `revdep_details(,"bench")` for more info
       Execution halted
     ```
 
+# breathtestcore
+
+<details>
+
+* Version: 0.4.6
+* Source code: https://github.com/cran/breathtestcore
+* URL: https://github.com/dmenne/breathtestcore
+* BugReports: https://github.com/dmenne/breathtestcore/issues
+* Date/Publication: 2018-12-18 09:10:03 UTC
+* Number of recursive dependencies: 92
+
+Run `revdep_details(,"breathtestcore")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      > library(testthat)
+      > 
+      > #test_check("breathtestcore", filter = "plot_breathtestfit")
+      > test_check("breathtestcore")
+      Loading required package: breathtestcore
+      [31m──[39m [31m1. Error: Single record give valid result after passing through cleanup_data (@te[39m
+      `i` must have one dimension, not 2.
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_lt(rel_diff(d, cf, "m"), 0.02)
+      [90m 4. [39mbreathtestcore:::rel_diff(d, cf, "m")
+      [90m 6. [39mtibble:::`[.tbl_df`(cf, cf["parameter"] == parameter, "value")
+      [90m 7. [39mtibble:::tbl_subset_row(xo, i = i)
+      [90m 8. [39mtibble:::vec_as_row_index(i, x)
+      [90m 9. [39mvctrs::vec_as_index(i, nr)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 356 | SKIPPED: 5 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: Single record give valid result after passing through cleanup_data (@test_nls_fit.R#46) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘breathteststan’
+    ```
+
 # comperank
 
 <details>
@@ -260,7 +425,7 @@ Run `revdep_details(,"bench")` for more info
 * URL: https://github.com/echasnovski/comperank
 * BugReports: https://github.com/echasnovski/comperank/issues
 * Date/Publication: 2018-05-30 08:27:55 UTC
-* Number of recursive dependencies: 51
+* Number of recursive dependencies: 60
 
 Run `revdep_details(,"comperank")` for more info
 
@@ -270,12 +435,16 @@ Run `revdep_details(,"comperank")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      Component "ranking_def": names for target but not for current
       Component "ranking_od": names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      [31m──[39m [31m8. Failure: rank_od handles numeric `player` (@test-offense-defense.R#168) [39m [31m─────[39m
+      as.data.frame(tbl_1) not equal to as.data.frame(tbl_2).
+      Component "ranking_def": names for target but not for current
+      Component "ranking_od": names for target but not for current
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 176 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 8 ]
       1. Failure: rate_od works (@test-offense-defense.R#26) 
       2. Failure: rate_od works (@test-offense-defense.R#44) 
@@ -290,6 +459,51 @@ Run `revdep_details(,"comperank")` for more info
       Execution halted
     ```
 
+# concurve
+
+<details>
+
+* Version: 2.3.0
+* Source code: https://github.com/cran/concurve
+* URL: https://data.lesslikely.com/concurve/, https://github.com/zadchow/concurve, https://lesslikely.com/
+* BugReports: https://github.com/zadchow/concurve/issues
+* Date/Publication: 2019-12-04 11:20:03 UTC
+* Number of recursive dependencies: 113
+
+Run `revdep_details(,"concurve")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘concurve-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: curve_corr
+    > ### Title: Computes Consonance Intervals for Correlations
+    > ### Aliases: curve_corr
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > GroupA <- rnorm(50)
+    > GroupB <- rnorm(50)
+    > joe <- curve_corr(x = GroupA, y = GroupB, alternative = "two.sided", method = "pearson")
+    > tibble::tibble(joe[[1]])
+    Error: All columns in a tibble must be vectors:
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘MASS’ ‘compiler’ ‘rlang’
+      All declared Imports should be used.
+    ```
+
 # corrr
 
 <details>
@@ -299,7 +513,7 @@ Run `revdep_details(,"comperank")` for more info
 * URL: https://github.com/tidymodels/corrr
 * BugReports: https://github.com/tidymodels/corrr/issues
 * Date/Publication: 2019-07-12 19:00:02 UTC
-* Number of recursive dependencies: 102
+* Number of recursive dependencies: 109
 
 Run `revdep_details(,"corrr")` for more info
 
@@ -310,6 +524,10 @@ Run `revdep_details(,"corrr")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    + }
+    > 
+    > x <- correlate(mtcars)
+    
     Correlation method: 'pearson'
     Missing treated using: 'pairwise.complete.obs'
     
@@ -325,93 +543,46 @@ Run `revdep_details(,"corrr")` for more info
     [38;5;250m5[39m gear     0.480 -[31m0[39m[31m.[39m[31m493[39m -[31m0[39m[31m.[39m[31m556[39m -[31m0[39m[31m.[39m[31m126[39m -[31m0[39m[31m.[39m[31m583[39m
     [38;5;250m6[39m carb    -[31m0[39m[31m.[39m[31m551[39m  0.527  0.395  0.750  0.428
     > x %>% focus_if(any_greater_than, .6, mirror = TRUE) %>% network_plot()
-    Warning in stats::cmdscale(abs(distance)) :
-      only 0 of the first 2 eigenvalues are > 0
-    Error in names(x) <- value : 
-      'names' attribute [2] must be the same length as the vector [0]
-    Calls: %>% ... <Anonymous> -> network_plot -> network_plot.cor_df -> colnames<-
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      25: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
+    ...
+      [90m  9. [39mtibble:::`[<-.tbl_df`(`*tmp*`, upper.tri(x), value = NA) [90mrevdep/checks/corrr/new/corrr.Rcheck/00_pkg_src/corrr/R/cor_df.R:29:4[39m
+      [90m 10. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m 11. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m 12. [39mtibble:::vec_as_col_index(j, x)
+      [90m 25. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 75 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 8 ]
-      1. Error: Network plot works (@test-plots.R#8) 
-      2. Failure: Rearrange return correct order (@test-rearrange.R#8) 
-      3. Failure: Converts to proper structure (@test-rearrange.R#19) 
-      4. Error: Shave upper (@test-shave.R#8) 
-      5. Error: Shave lower (@test-shave.R#15) 
-      6. Error: Shave all (@test-shave.R#22) 
-      7. Failure: Converts to proper structure (@test-stretch.R#12) 
-      8. Error: remove.dups works (@test-stretch.R#40) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# customsteps
-
-<details>
-
-* Version: 0.7.1.0
-* Source code: https://github.com/cran/customsteps
-* URL: https://github.com/smaakage85/customsteps
-* Date/Publication: 2018-12-03 10:12:42 UTC
-* Number of recursive dependencies: 60
-
-Run `revdep_details(,"customsteps")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      > library(customsteps)
-      > 
-      > test_check(package = "customsteps")
-      [31m──[39m [31m1. Failure: end-to-end results for center-scale transformation (@test_custom_transfor[39m
-      juice(rec_center_scale) not identical to juice(rec_custom).
-      Incompatible type for column `a`: x matrix, y numeric
-      Incompatible type for column `b`: x matrix, y numeric
-      Incompatible type for column `c`: x matrix, y numeric
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 16 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
-      1. Failure: end-to-end results for center-scale transformation (@test_custom_transformation.R#58) 
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 72 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 10 ]
+      1.  Error: Diagonal sets correctly (@test-as_matrix.R#23) 
+      2.  Error: Network plot works (@test-plots.R#8) 
+      3.  Error: Rearrange return correct order (@test-rearrange.R#8) 
+      4.  Failure: Converts to proper structure (@test-rearrange.R#19) 
+      5.  Error: Shave upper (@test-shave.R#8) 
+      6.  Error: Shave lower (@test-shave.R#15) 
+      7.  Error: Shave all (@test-shave.R#22) 
+      8.  Failure: Converts to proper structure (@test-stretch.R#12) 
+      9.  Error: retract works (@test-stretch.R#34) 
+      10. Error: remove.dups works (@test-stretch.R#40) 
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘rlang’ ‘tidyselect’
-      All declared Imports should be used.
     ```
 
 # cutpointr
 
 <details>
 
-* Version: 1.0.0
+* Version: 1.0.1
 * Source code: https://github.com/cran/cutpointr
 * URL: https://github.com/thie1e/cutpointr
 * BugReports: https://github.com/thie1e/cutpointr/issues
-* Date/Publication: 2019-09-17 21:30:02 UTC
-* Number of recursive dependencies: 71
+* Date/Publication: 2019-12-18 15:00:08 UTC
+* Number of recursive dependencies: 81
 
 Run `revdep_details(,"cutpointr")` for more info
 
@@ -421,10 +592,14 @@ Run `revdep_details(,"cutpointr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      names for target but not for current
+      
+      [31m──[39m [31m12. Failure: boot_test works correctly (@test-cutpointr.R#1404) [39m [31m────────────────[39m
+      btg$d not equal to bt$d.
+      names for current but not for target
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 378 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 12 ]
       1. Failure: Cutpointr returns a cutpointr without NAs and a certain Nr of rows (@test-cutpointr.R#11) 
       2. Failure: Correct cutpoints with example data (@test-cutpointr.R#239) 
@@ -445,12 +620,12 @@ Run `revdep_details(,"cutpointr")` for more info
 
 <details>
 
-* Version: 0.3.1
+* Version: 0.3.2
 * Source code: https://github.com/cran/cvms
 * URL: https://github.com/ludvigolsen/cvms
 * BugReports: https://github.com/ludvigolsen/cvms/issues
-* Date/Publication: 2019-10-03 10:50:02 UTC
-* Number of recursive dependencies: 104
+* Date/Publication: 2019-12-01 23:10:02 UTC
+* Number of recursive dependencies: 114
 
 Run `revdep_details(,"cvms")` for more info
 
@@ -460,32 +635,28 @@ Run `revdep_details(,"cvms")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 1567 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 14 ]
-      1. Failure: multinomial evaluations are correct in baseline() (@test_baseline.R#470) 
-      2. Failure: multinomial evaluations are correct in baseline() (@test_baseline.R#769) 
-      3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
-      4. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
-      5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
-      6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#948) 
-      7. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
-      8. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
-      9. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
+    ...
+      Lengths differ: 3 is not 2
+      
+      [31m──[39m [31m12. Failure: model_verbose reports the correct model functions in validate() (@te[39m
+      ...$NULL not equal to as.character(...).
+      Lengths differ: 3 is not 2
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 1571 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 12 ]
+      1. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
+      2. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
+      3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
+      4. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#948) 
+      5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
+      6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
+      7. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
+      8. Error: multinomial evaluations are correct in evaluate() (@test_evaluate.R#396) 
+      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
       1. ...
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
     ```
 
 # describedata
@@ -495,7 +666,7 @@ Run `revdep_details(,"cvms")` for more info
 * Version: 0.1.0
 * Source code: https://github.com/cran/describedata
 * Date/Publication: 2019-08-02 11:50:02 UTC
-* Number of recursive dependencies: 56
+* Number of recursive dependencies: 66
 
 Run `revdep_details(,"describedata")` for more info
 
@@ -515,7 +686,91 @@ Run `revdep_details(,"describedata")` for more info
     > ### ** Examples
     > 
     > ladder(iris$Sepal.Length)
-    Error: Tibble columns must have consistent lengths, only values of length one are recycled:
+    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
+    ```
+
+# DiagrammeR
+
+<details>
+
+* Version: 1.0.1
+* Source code: https://github.com/cran/DiagrammeR
+* URL: https://github.com/rich-iannone/DiagrammeR
+* BugReports: https://github.com/rich-iannone/DiagrammeR/issues
+* Date/Publication: 2019-04-22 06:53:42 UTC
+* Number of recursive dependencies: 89
+
+Run `revdep_details(,"DiagrammeR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    +     to =   c(4, 1, 3, 2, 1))
+    > 
+    > # Create a graph with the
+    > # ndf and edf
+    > graph <-
+    +   create_graph(
+    +     nodes_df = ndf,
+    +     edges_df = edf)
+    > 
+    > # Explicitly select the edges
+    > # `1`->`4` and `2`->`3`
+    > graph <-
+    +   graph %>%
+    +   select_edges(
+    +     from = 1,
+    +       to = 4) %>%
+    +   select_edges(
+    +     from = 2,
+    +       to = 3)
+    `select_edges()` INFO: created a new selection of 1 edge
+    `select_edges()` INFO: modified an existing selection of 1 edge:
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      Must pass an argument to `as_tibble()`.
+      [1mBacktrace:[22m
+      [90m  1. [39mgraph %>% trav_reverse_edge(add_to_selection = TRUE)
+      [90m  3. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m  5. [39mDiagrammeR:::`_fseq`(`_lhs`)
+      [90m  6. [39mmagrittr::freduce(value, `_function_list`)
+      [90m  8. [39mfunction_list[[k]](value)
+      [90m  9. [39mDiagrammeR::trav_reverse_edge(., add_to_selection = TRUE)
+      [90m 10. [39m`%>%`(...) [90mrevdep/checks/DiagrammeR/new/DiagrammeR.Rcheck/00_pkg_src/DiagrammeR/R/trav_reverse_edge.R:117:2[39m
+      [90m 12. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m 14. [39mDiagrammeR:::`_fseq`(`_lhs`)
+      [90m 15. [39mmagrittr::freduce(value, `_function_list`)
+      [90m 17. [39mfunction_list[[k]](value)
+      [90m 19. [39mtibble:::as_tibble.NULL()
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 2050 | SKIPPED: 0 | WARNINGS: 5 | FAILED: 1 ]
+      1. Error: traversing to reverse edges with an edge selection is possible (@test-traversals.R#1480) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        R             1.3Mb
+        htmlwidgets   3.1Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 1 marked UTF-8 string
     ```
 
 # diffdf
@@ -527,7 +782,7 @@ Run `revdep_details(,"describedata")` for more info
 * URL: https://github.com/gowerc/diffdf
 * BugReports: https://github.com/gowerc/diffdf/issues
 * Date/Publication: 2019-03-12 12:16:21 UTC
-* Number of recursive dependencies: 102
+* Number of recursive dependencies: 104
 
 Run `revdep_details(,"diffdf")` for more info
 
@@ -537,10 +792,14 @@ Run `revdep_details(,"diffdf")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      
+      [31m──[39m [31m19. Failure: (unknown) (@test-print_output.R#51) [39m [31m───────────────────────────────[39m
+      RES[[i]] not equal to TESTING_print_msg[[i]].
+      Lengths differ: 186 is not 90
+      Reference = 21 - With 2 keys
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 549 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 19 ]
       1. Failure: Unequal object, checking numbers correct (@test-core.R#186) 
       2. Failure: Unequal object, checking numbers correct (@test-core.R#187) 
@@ -566,7 +825,7 @@ Run `revdep_details(,"diffdf")` for more info
 * URL: http://dplyr.tidyverse.org, https://github.com/tidyverse/dplyr
 * BugReports: https://github.com/tidyverse/dplyr/issues
 * Date/Publication: 2019-07-04 15:50:02 UTC
-* Number of recursive dependencies: 88
+* Number of recursive dependencies: 94
 
 Run `revdep_details(,"dplyr")` for more info
 
@@ -576,17 +835,21 @@ Run `revdep_details(,"dplyr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: doTryCatch(return(expr), name, parentenv, handler)
-      14: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
-      15: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      16: doTryCatch(return(expr), name, parentenv, handler)
-      17: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
-      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
+    ...
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      > 
+      > test_check("dplyr")
+      [31m──[39m [31m1. Error: hybrid rank functions handle NA (#4427) (@test-mutate.r#484) [39m [31m─────────[39m
+      `i` must have one dimension, not 2.
+      [1mBacktrace:[22m
+      [90m  1. [39mbase::`[<-`(`*tmp*`, df < 0, value = NA)
+      [90m  2. [39mtibble:::`[<-.tbl_df`(`*tmp*`, df < 0, value = NA)
+      [90m  3. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  4. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  5. [39mtibble:::vec_as_col_index(j, x)
+      [90m 18. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 3404 | SKIPPED: 14 | WARNINGS: 6 | FAILED: 1 ]
       1. Error: hybrid rank functions handle NA (#4427) (@test-mutate.r#484) 
       
@@ -600,9 +863,9 @@ Run `revdep_details(,"dplyr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 30.4Mb
+      installed size is 44.5Mb
       sub-directories of 1Mb or more:
-        libs  27.9Mb
+        libs  41.7Mb
     ```
 
 *   checking data for non-ASCII characters ... NOTE
@@ -614,12 +877,12 @@ Run `revdep_details(,"dplyr")` for more info
 
 <details>
 
-* Version: 7.7.0
+* Version: 7.8.0
 * Source code: https://github.com/cran/drake
-* URL: https://github.com/ropensci/drake, https://docs.ropensci.org/drake, https://github.com/ropenscilabs/drake-manual
+* URL: https://github.com/ropensci/drake, https://docs.ropensci.org/drake, https://books.ropensci.org/drake/
 * BugReports: https://github.com/ropensci/drake/issues
-* Date/Publication: 2019-10-15 07:40:02 UTC
-* Number of recursive dependencies: 137
+* Date/Publication: 2019-12-02 14:40:02 UTC
+* Number of recursive dependencies: 135
 
 Run `revdep_details(,"drake")` for more info
 
@@ -629,19 +892,23 @@ Run `revdep_details(,"drake")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      [ OK: 3908 | SKIPPED: 244 | WARNINGS: 0 | FAILED: 45 ]
-      1. Failure: cache functions work from various working directories (@test-cache.R#240) 
-      2. Failure: cache functions work from various working directories (@test-cache.R#240) 
-      3. Failure: 1 grouping level (@test-dsl.R#64) 
-      4. Failure: all new crossings (@test-dsl.R#264) 
-      5. Failure: 1 new map (@test-dsl.R#278) 
-      6. Failure: 2 new maps (@test-dsl.R#292) 
-      7. Failure: command symbols are for combine() but the plan has them (@test-dsl.R#326) 
-      8. Failure: combine different groups together (@test-dsl.R#357) 
-      9. Failure: multiple groups and multiple splits (@test-dsl.R#393) 
+    ...
+      [31m──[39m [31m45. Failure: basic history (@test-history.R#96) [39m [31m────────────────────────────────[39m
+      is.na(out$hash) not equal to !out$current.
+      names for current but not for target
+      
+      
+      .══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 4950 | SKIPPED: 257 | WARNINGS: 0 | FAILED: 45 ]
+      1. Failure: cache functions work from various working directories (@test-cache.R#241) 
+      2. Failure: cache functions work from various working directories (@test-cache.R#241) 
+      3. Failure: 1 grouping level (@test-dsl.R#53) 
+      4. Failure: all new crossings (@test-dsl.R#253) 
+      5. Failure: 1 new map (@test-dsl.R#267) 
+      6. Failure: 2 new maps (@test-dsl.R#281) 
+      7. Failure: command symbols are for combine() but the plan has them (@test-dsl.R#315) 
+      8. Failure: combine different groups together (@test-dsl.R#346) 
+      9. Failure: multiple groups and multiple splits (@test-dsl.R#382) 
       1. ...
       
       Error: testthat unit tests failed
@@ -649,25 +916,17 @@ Run `revdep_details(,"drake")` for more info
       Error while shutting down parallel: unable to terminate some child processes
     ```
 
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in globalVariables(c("test_group", "cores", "test", "elapsed", "is_past",  : 
-      could not find function "globalVariables"
-    ```
-
-# easyalluvial
+# dssd
 
 <details>
 
-* Version: 0.2.1
-* Source code: https://github.com/cran/easyalluvial
-* URL: https://github.com/erblast/easyalluvial
-* Date/Publication: 2019-09-17 05:50:02 UTC
-* Number of recursive dependencies: 135
+* Version: 0.1.0
+* Source code: https://github.com/cran/dssd
+* BugReports: https://github.com/DistanceDevelopment/dssd/issues
+* Date/Publication: 2019-08-05 13:00:02 UTC
+* Number of recursive dependencies: 54
 
-Run `revdep_details(,"easyalluvial")` for more info
+Run `revdep_details(,"dssd")` for more info
 
 </details>
 
@@ -675,40 +934,206 @@ Run `revdep_details(,"easyalluvial")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘easyalluvial-Ex.R’ failed
+    Running examples in ‘dssd-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: add_marginal_histograms
-    > ### Title: add marginal histograms to alluvial plot
-    > ### Aliases: add_marginal_histograms
+    > ### Name: make.design
+    > ### Title: Creates a Survey.Design object
+    > ### Aliases: make.design
     > 
     > ### ** Examples
     > 
-    > p = alluvial_wide(mtcars2, max_variables = 4)
-    Error: Column `mpg` must be length 32 (the number of rows) or one, not 288
+    > #Point transect example
+    > shapefile.name <- system.file("extdata", "TrackExample.shp", package = "dssd")
+    > region <- make.region(region.name = "study area",
+    +                      shape = shapefile.name)
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: make.region ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
+    Execution halted
+    ```
+
+# easyr
+
+<details>
+
+* Version: 0.1-1
+* Source code: https://github.com/cran/easyr
+* URL: https://github.com/oliver-wyman-actuarial/easyr
+* BugReports: https://github.com/oliver-wyman-actuarial/easyr/issues
+* Date/Publication: 2019-11-27 15:50:02 UTC
+* Number of recursive dependencies: 92
+
+Run `revdep_details(,"easyr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘easyr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: validate.equal
+    > ### Title: Validate Equal
+    > ### Aliases: validate.equal
+    > 
+    > ### ** Examples
+    > 
+    > validate.equal( iris, iris )
+    
+    Row and column counts match. 
+    Column names match. 
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 23 | SKIPPED: 9 | WARNINGS: 3168 | FAILED: 16 ]
-      1. Error: alluvial_long (@test_alluvial_long.R#94) 
-      2. Error: get_data_space (@test_alluvial_model_response.R#12) 
-      3. Error: pdp_methods (@test_alluvial_model_response.R#36) 
-      4. Error: alluvial_model_response (@test_alluvial_model_response.R#58) 
-      5. Error: alluvial_model_response_caret (@test_alluvial_model_response.R#237) 
-      6. Error: params_bin_numeric_pred (@test_alluvial_model_response.R#305) 
-      7. Error: n_feats == degree (@test_alluvial_model_response.R#336) 
-      8. Error: alluvial_wide (@test_alluvial_wide.R#11) 
-      9. Error: manip_bin_numerics (@test_manip.R#27) 
-      1. ...
+    ...
+      easyr::ecopy does not work on unix. 
+      Reading as XML/HTML 
+      Reading as XML/HTML 
+      easyr::tonum: NAs were created. Returning the vector unchanged. 
+        Problematic values include: [ 5'10 ] 
+      ── 1. Error: works as expected (@validateequal.R#110)  ─────────────────────────────
+      `i` must have one dimension, not 2.
+      Backtrace:
+        1. easyr::validate.equal(...)
+        3. tibble:::`[<-.tbl_df`(`*tmp*`, col.types == "ordered", value = "factor") revdep/checks/easyr/new/easyr.Rcheck/00_pkg_src/easyr/R/validateequal.R:110:4
+        4. tibble:::tbl_subassign(x, i, j, value)
+        5. tibble:::vec_as_new_col_index(j, x, value)
+        6. tibble:::vec_as_col_index(j, x)
+       19. vctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 282 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: works as expected (@validateequal.R#110) 
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+# egor
+
+<details>
+
+* Version: 0.19.10
+* Source code: https://github.com/cran/egor
+* URL: https://github.com/tilltnet/egor, https://tilltnet.github.io/egor/
+* BugReports: https://github.com/tilltnet/egor/issues
+* Date/Publication: 2019-10-07 22:10:06 UTC
+* Number of recursive dependencies: 70
+
+Run `revdep_details(,"egor")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘egor-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: clustered_graphs
+    > ### Title: Cluster ego-centered networks by a grouping factor
+    > ### Aliases: clustered_graphs clustered_graphs.list clustered_graphs.egor
+    > ###   clustered_graphs.data.frame
+    > ### Keywords: analysis ego-centered network
+    > 
+    > ### ** Examples
+    > 
+    > data("egor32")
+    > 
+    > # Simplify networks to clustered graphs, stored as igraph objects
+    > graphs <- clustered_graphs(egor32, "country") 
+    Error: `i` must have one dimension, not 2.
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      Ego sampling design:
+        NULL
+      Alter survey design:
+        Maximum nominations: 
+      EI-Index: age
+      EI-Index: sex
+      EI-Index: sex
+      EI-Index: int_var
+      EI-Index: female
+      EI-Index: female
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 69 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 6 ]
+      1. Failure: Methods are working. (@test_clustered_graphs.R#9) 
+      2. Failure: Methods are working with partially missing data. (@test_clustered_graphs.R#23) 
+      3. Failure: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#35) 
+      4. Error: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#38) 
+      5. Failure: Methods work (properly) with grouping variable being completly NA. (@test_clustered_graphs.R#52) 
+      6. Error: Methods work (properly) with grouping variable being completly NA. (@test_clustered_graphs.R#55) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# eph
+
+<details>
+
+* Version: 0.2.0
+* Source code: https://github.com/cran/eph
+* URL: https://github.com/holatam/eph
+* BugReports: https://github.com/rindec/eph/issues
+* Date/Publication: 2019-11-26 22:40:02 UTC
+* Number of recursive dependencies: 122
+
+Run `revdep_details(,"eph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+      binding character and factor vector, coercing into character vector
+    Warning in bind_rows_(x, .id) :
+      binding character and factor vector, coercing into character vector
+    > bases_clasif <- organize_ocupations(base = bases)
+    Error: No common type for `..1$value` <character> and `..2$value` <double>.
+    [1m<error/vctrs_error_incompatible_type>[22m
+    No common type for `..1$value` <character> and `..2$value` <double>.
+    [1mBacktrace:[22m
+    [90m     [39m█
+    [90m  1. [39m├─eph::organize_ocupations(base = bases)
+    [90m  2. [39m│ └─`%>%`(...) [90m00_pkg_src/eph/R/organize_ocupations.R:21:2[39m
+    [90m  3. [39m│   ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+    [90m  4. [39m│   └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+    [90m  5. [39m│     └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+    [90m  6. [39m│       └─eph:::`_fseq`(`_lhs`)
+    [90m  7. [39m│         └─magrittr::freduce(value, `_function_list`)
+    [90m  8. [39m│           ├─base::withVisible(function_list[[k]](value))
+    [90m  9. [39m│           └─function_list[[k]](value)
+    [90m 10. [39m│             └─dplyr::add_row(., value = 99, CATEGORIA = "Ns.Nc")
+    [90m 11. [39m│           
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘readr’ ‘tidyverse’
+      All declared Imports should be used.
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 114 marked UTF-8 strings
     ```
 
 # evaluator
@@ -720,7 +1145,7 @@ Run `revdep_details(,"easyalluvial")` for more info
 * URL: https://evaluator.tidyrisk.org
 * BugReports: https://github.com/davidski/evaluator/issues
 * Date/Publication: 2019-07-22 15:00:03 UTC
-* Number of recursive dependencies: 136
+* Number of recursive dependencies: 137
 
 Run `revdep_details(,"evaluator")` for more info
 
@@ -748,14 +1173,18 @@ Run `revdep_details(,"evaluator")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             "mean_tc_exceedance"]] <- NA)) at testthat/test-summarize.R:17
-      2: eval(code, test_env)
+    ...
+      Expected match: "iteration"
+      Actual message: "All scenarios must be tidyrisk_scenario objects"
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_error(...)
+      [90m 6. [39mevaluator::run_simulations(good_scen, simulation_count = 10L)
+      
+      [31m──[39m [31m6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summarize.[39m
+      [[ ]] improper number of subscripts
       
       # Scenario model: openfair_tef_tc_diff_lm
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 128 | SKIPPED: 4 | WARNINGS: 12 | FAILED: 6 ]
       1. Error: SR model works as expected (@test-openfair.R#220) 
       2. Error: Simulation respects maximum ALE (@test-simulate.R#21) 
@@ -777,7 +1206,7 @@ Run `revdep_details(,"evaluator")` for more info
 * URL: https://github.com/kvasilopoulos/exuber
 * BugReports: https://github.com/kvasilopoulos/exuber/issues
 * Date/Publication: 2019-07-15 09:40:07 UTC
-* Number of recursive dependencies: 79
+* Number of recursive dependencies: 89
 
 Run `revdep_details(,"exuber")` for more info
 
@@ -787,19 +1216,23 @@ Run `revdep_details(,"exuber")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > library(exuber)
+      Registered S3 method overwritten by 'exuber':
         method        from
         index.default zoo 
       > 
       > test_check("exuber")
-      [31m──[39m [31m1. Failure: crit as data (@test-cv.R#4) [39m [31m────────────────────────────────────────────[39m
+      [31m──[39m [31m1. Failure: crit as data (@test-cv.R#4) [39m [31m────────────────────────────────────────[39m
       `capture.output(print(crit))` threw an error.
       Message: Expected a vector, not a `list/crit` object
       Class:   vctrs_error_scalar_type/vctrs_error/rlang_error/error/condition
+      [1mBacktrace:[22m
+      [90m  1. [39mbase::print(crit)
+      [90m 19. [39mvctrs:::stop_scalar_type(...)
+      [90m 20. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 258 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
       1. Failure: crit as data (@test-cv.R#4) 
       
@@ -811,10 +1244,10 @@ Run `revdep_details(,"exuber")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is  5.6Mb
       sub-directories of 1Mb or more:
         data   2.5Mb
-        libs   2.0Mb
+        libs   2.5Mb
     ```
 
 # feasts
@@ -826,7 +1259,7 @@ Run `revdep_details(,"exuber")` for more info
 * URL: http://feasts.tidyverts.org/
 * BugReports: https://github.com/tidyverts/feasts/issues
 * Date/Publication: 2019-09-02 14:10:06 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 90
 
 Run `revdep_details(,"feasts")` for more info
 
@@ -857,24 +1290,28 @@ Run `revdep_details(,"feasts")` for more info
     
         intersect, setdiff, setequal, union
     
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      15: as_tibble.mdl_df(data) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:83
-      16: as_tibble(x, ...)
-      17: as_tibble.data.frame(x, ...) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:83
-      18: as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:99
-      19: lst_to_tibble(x, .rows, .name_repair, col_lengths(x)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:121
-      20: check_valid_cols(x) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:127
-      21: abort(error_column_must_be_vector(names_x[is_xd], classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:152
-      22: signal_abort(cnd)
+    ...
+      * Column `fable::ARIMA(value ~ 0 + pdq(1, 1, 1) + PDQ(1, 1, 2))` is lst_mdl
+      [1mBacktrace:[22m
+      [90m  1. [39mfeasts::gg_arma(mdl)
+      [90m  2. [39m`%>%`(...) [90mrevdep/checks/feasts/new/feasts.Rcheck/00_pkg_src/feasts/R/graphics.R:628:2[39m
+      [90m  4. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m  6. [39mfeasts:::`_fseq`(`_lhs`)
+      [90m  7. [39mmagrittr::freduce(value, `_function_list`)
+      [90m  8. [39mfunction_list[[i]](value)
+      [90m 10. [39mfabletools:::glance.mdl_df(.)
+      [90m 12. [39mfabletools:::gather.mdl_df(...)
+      [90m 15. [39mfabletools:::as_tibble.mdl_df(data)
+      [90m 17. [39mtibble:::as_tibble.data.frame(x, ...)
+      [90m 18. [39mtibble:::lst_to_tibble(unclass(x), .rows, .name_repair)
+      [90m 19. [39mtibble:::check_valid_cols(x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 103 | SKIPPED: 0 | WARNINGS: 11 | FAILED: 1 ]
       1. Error: gg_arma() plots (@test-graphics.R#253) 
       
@@ -882,61 +1319,18 @@ Run `revdep_details(,"feasts")` for more info
       Execution halted
     ```
 
-## In both
-
-*   checking whether the package can be unloaded cleanly ... WARNING
-    ```
-    Error in globalVariables(c(".rows")) : 
-      could not find function "globalVariables"
-    Error: package ‘fabletools’ could not be loaded
-    Execution halted
-    ```
-
-*   checking whether the namespace can be loaded with stated dependencies ... WARNING
-    ```
-    Error in globalVariables(c(".rows")) : 
-      could not find function "globalVariables"
-    Error: unable to load R code in package ‘tsibble’
-    Execution halted
-    
-    A namespace must be able to be loaded with just the base namespace
-    loaded: otherwise if the namespace gets loaded by a saved object, the
-    session will be unable to start.
-    
-    Probably some imports need to be declared in the NAMESPACE file.
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error: package ‘fabletools’ could not be loaded
-    Call sequence:
-    3: stop(gettextf("package %s could not be loaded", sQuote(pkg)), 
-           call. = FALSE, domain = NA)
-    2: .getRequiredPackages2(pkgInfo, quietly = quietly)
-    1: library(package, lib.loc = lib.loc, character.only = TRUE, verbose = FALSE)
-    Execution halted
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    Error in globalVariables(c(".rows")) : 
-      could not find function "globalVariables"
-    Error: unable to load R code in package ‘tsibble’
-    Execution halted
-    ```
-
-# fgdr
+# foghorn
 
 <details>
 
-* Version: 1.0.0
-* Source code: https://github.com/cran/fgdr
-* URL: https://github.com/uribo/fgdr
-* BugReports: https://github.com/uribo/fgdr/issues
-* Date/Publication: 2019-10-11 10:30:03 UTC
-* Number of recursive dependencies: 99
+* Version: 1.1.4
+* Source code: https://github.com/cran/foghorn
+* URL: https://github.com/fmichonneau/foghorn
+* BugReports: https://github.com/fmichonneau/foghorn/issues
+* Date/Publication: 2019-11-28 16:30:03 UTC
+* Number of recursive dependencies: 63
 
-Run `revdep_details(,"fgdr")` for more info
+Run `revdep_details(,"foghorn")` for more info
 
 </details>
 
@@ -944,41 +1338,45 @@ Run `revdep_details(,"fgdr")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘fgdr-Ex.R’ failed
+    Running examples in ‘foghorn-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: read_fgd
-    > ### Title: Read and Parse Fundamental Geospatial Data (FGD) file
-    > ### Aliases: read_fgd
+    > ### Name: cran_results
+    > ### Title: Table of the CRAN check results
+    > ### Aliases: cran_results
     > 
     > ### ** Examples
     > 
-    > # Administrative Area
-    > read_fgd(system.file("extdata/FG-GML-000000-AdmPt-dummy.xml", package = "fgdr"))
-    Error in is_null(i) : argument "i" is missing, with no default
-    Calls: read_fgd ... [ -> [.sf -> [ -> [.tbl_df -> tbl_subset_row -> is_null
+    >   if (curl::has_internet()) {
+    +     cran_results(pkg="MASS")
+    +   }
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      argument "i" is missing, with no default
-      1: read_fgd(file = system.file("extdata/FG-GML-000000-AdmPt-dummy.xml", package = "fgdr")) at testthat/test-read_fgd.R:4
-      2: res[, names(res)[!names(res) %in% attr(res, "sf_column")]] at /home/rstudio/tibble/revdep/checks/fgdr/new/fgdr.Rcheck/00_pkg_src/fgdr/R/read_fdg.R:303
-      3: `[.sf`(res, , names(res)[!names(res) %in% attr(res, "sf_column")]) at /home/rstudio/tibble/revdep/checks/fgdr/new/fgdr.Rcheck/00_pkg_src/fgdr/R/read_fdg.R:303
-      4: x[i, j, drop = drop]
-      5: `[.tbl_df`(x, i, j, drop = drop)
-      6: tbl_subset_row(xo, i = i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:174
-      7: is_null(i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:314
+    ...
+      [90m  4. [39mfoghorn:::cran_checks_table.cran_checks_pkg(res_pkg) [90mrevdep/checks/foghorn/new/foghorn.Rcheck/00_pkg_src/foghorn/R/cran_check_table.R:1:21[39m
+      [90m  5. [39mfoghorn:::process_cran_table(tbl) [90mrevdep/checks/foghorn/new/foghorn.Rcheck/00_pkg_src/foghorn/R/cran_check_table.R:50:2[39m
+      [90m  6. [39mfoghorn:::add_cols(ctbl) [90mrevdep/checks/foghorn/new/foghorn.Rcheck/00_pkg_src/foghorn/R/cran_check_table.R:45:2[39m
+      [90m  7. [39mfoghorn:::convert_nas(tbl) [90mrevdep/checks/foghorn/new/foghorn.Rcheck/00_pkg_src/foghorn/R/utils.R:39:2[39m
+      [90m  9. [39mtibble:::`[<-.tbl_df`(`*tmp*`, is.na(tbl), value = 0L) [90mrevdep/checks/foghorn/new/foghorn.Rcheck/00_pkg_src/foghorn/R/utils.R:12:2[39m
+      [90m 10. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m 11. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m 12. [39mtibble:::vec_as_col_index(j, x)
+      [90m 25. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 39 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: Successd on dummies (@test-read_fgd.R#4) 
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 11 | SKIPPED: 18 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: check output for MASS (@test-foghorn.R#421) 
       
       Error: testthat unit tests failed
+      In addition: Warning messages:
+      1: In .Internal(gc(verbose, reset, full)) :
+        closing unused connection 4 (https://cloud.r-project.org/web/checks/check_results_foobarfoobar.html)
+      2: In .Internal(gc(verbose, reset, full)) :
+        closing unused connection 4 (https://cloud.r-project.org/web/checks/check_results_foo_at_foobarbar.rrrr.html)
       Execution halted
     ```
 
@@ -991,7 +1389,7 @@ Run `revdep_details(,"fgdr")` for more info
 * URL: https://cran.r-project.org/package=foieGras
 * BugReports: https://github.com/ianjonsen/foieGras/issues
 * Date/Publication: 2019-10-07 22:10:03 UTC
-* Number of recursive dependencies: 91
+* Number of recursive dependencies: 101
 
 Run `revdep_details(,"foieGras")` for more info
 
@@ -1003,17 +1401,19 @@ Run `revdep_details(,"foieGras")` for more info
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > library(testthat)
+      > library(foieGras)
       > 
       > test_check("foieGras")
       
       pre-filtering data...
       
       fitting SSM...
-      [31m──[39m [31m1. Failure: plot completes silently (@test-osar.R#22) [39m [31m──────────────────────────────[39m
+      [31m──[39m [31m1. Failure: plot completes silently (@test-osar.R#22) [39m [31m──────────────────────────[39m
       `plot(r, "hist")` produced warnings.
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 37 | SKIPPED: 14 | WARNINGS: 0 | FAILED: 1 ]
       1. Failure: plot completes silently (@test-osar.R#22) 
       
@@ -1025,15 +1425,9 @@ Run `revdep_details(,"foieGras")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 35.3Mb
+      installed size is 43.4Mb
       sub-directories of 1Mb or more:
-        libs  34.0Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass(Class = "spam", slots = c(entries = "numeric", colindices = "numeric",  : 
-      could not find function "setClass"
+        libs  42.1Mb
     ```
 
 # forestmangr
@@ -1045,7 +1439,7 @@ Run `revdep_details(,"foieGras")` for more info
 * URL: https://github.com/sollano/forestmangr#readme
 * BugReports: https://github.com/sollano/forestmangr/issues
 * Date/Publication: 2019-01-02 23:10:27 UTC
-* Number of recursive dependencies: 113
+* Number of recursive dependencies: 114
 
 Run `revdep_details(,"forestmangr")` for more info
 
@@ -1056,49 +1450,384 @@ Run `revdep_details(,"forestmangr")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [38;5;246m# … with 890 more rows, and 3 more variables: AGE [3m[38;5;246m<dbl>[38;5;246m[23m, VWB [3m[38;5;246m<dbl>[38;5;246m[23m, VWOB [3m[38;5;246m<dbl>[38;5;246m[23m[39m
+    2: `.key` is deprecated 
     > 
-    > # Obligatory arguments. Basic informations about the plot.
-    > plot_summarise(exfm21, "PLOT", 810)
-    Error: Can't use NA as column index in a tibble for assignment.
-    Backtrace:
-    [90m     [39m█
-    [90m  1. [39m└─forestmangr::plot_summarise(exfm21, "PLOT", 810)
-    [90m  2. [39m  └─`%>%`(...) [90m00_pkg_src/forestmangr/R/plot_summarise.R:255:2[39m
-    [90m  3. [39m    ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-    [90m  4. [39m    └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  5. [39m      └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  6. [39m        └─forestmangr:::`_fseq`(`_lhs`)
-    [90m  7. [39m          └─magrittr::freduce(value, `_function_list`)
-    [90m  8. [39m            └─function_list[[i]](value)
-    [90m  9. [39m              └─dplyr::na_if(., 0)
-    [90m 10. [39m                ├─base::`[<-`(`*tmp*`, x == y, value = NA)
-    [90m 11. [39m                └─tibble:::`[<-.tbl_df`(`*tmp*`, x == y, value = NA)
-    [90m 12. [39m                  └─tibble:::tbl_subassign(x, i, j, value)
-    [90m 13. [39m             
+    > # This can also be done directly using "merge_est" as output:
+    > nls_table(exfm14,dh ~ b0 * (1 - exp( -b1 * age )  )^b2, 
+    +           mod_start = tab_coef ,
+    +           .groups = "strata", 
+    +           output = "merge_est", 
+    +           est.name = "dh_est" ) %>% 
+    +   mutate(
+    +   bias = bias_per(y = dh, yhat = dh_est),
+    +   rmse = rmse_per(y = dh, yhat = dh_est) ) %>% 
+    +   head(15)
+    Error in -x : invalid argument to unary operator
+    Calls: %>% ... <Anonymous> -> vars_select_eval -> map_if -> map -> .f -> -
+    In addition: Warning messages:
+    1: `.key` is deprecated 
+    2: unnest() has a new interface. See ?unnest for details.
+    Try `df %>% unnest(c(est_n, data_n))`, with `mutate()` if needed 
+    3: unnest() has a new interface. See ?unnest for details.
+    Try `df %>% unnest(c(dat, est))`, with `mutate()` if needed 
     Execution halted
+    ```
+
+# genius
+
+<details>
+
+* Version: 2.2.0
+* Source code: https://github.com/cran/genius
+* URL: https://github.com/josiahparry/genius
+* BugReports: https://github.com/josiahparry/genius/issues
+* Date/Publication: 2019-05-05 21:10:03 UTC
+* Number of recursive dependencies: 74
+
+Run `revdep_details(,"genius")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘genius’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/rstudio/tibble/revdep/checks/genius/new/genius.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘genius’ ...
+** package ‘genius’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error : Must pass an argument to `as_tibble()`.
+Error: unable to load R code in package ‘genius’
+Execution halted
+ERROR: lazy loading failed for package ‘genius’
+* removing ‘/home/rstudio/tibble/revdep/checks/genius/new/genius.Rcheck/genius’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘genius’ ...
+** package ‘genius’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (genius)
+
+```
+# ggplot2
+
+<details>
+
+* Version: 3.2.1
+* Source code: https://github.com/cran/ggplot2
+* URL: http://ggplot2.tidyverse.org, https://github.com/tidyverse/ggplot2
+* BugReports: https://github.com/tidyverse/ggplot2/issues
+* Date/Publication: 2019-08-10 22:30:13 UTC
+* Number of recursive dependencies: 151
+
+Run `revdep_details(,"ggplot2")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [90m 3. [39msf:::st_read.character(...)
+      [90m 4. [39msf:::process_cpl_read_ogr(...)
+      [90m 5. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 6. [39mbase::structure(x, ...)
+      
+      [31m──[39m [31m2. Error: geom_sf_text() and geom_sf_label() draws correctly (@test-geom-sf.R#40)[39m
+      all attributes must have names [3 does not]
+      [1mBacktrace:[22m
+      [90m 1. [39msf::read_sf(f)
+      [90m 3. [39msf:::st_read.character(...)
+      [90m 4. [39msf:::process_cpl_read_ogr(...)
+      [90m 5. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 6. [39mbase::structure(x, ...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 1094 | SKIPPED: 103 | WARNINGS: 1 | FAILED: 2 ]
+      1. Error: geom_sf draws correctly (@test-geom-sf.R#11) 
+      2. Error: geom_sf_text() and geom_sf_label() draws correctly (@test-geom-sf.R#40) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  7.3Mb
+      sub-directories of 1Mb or more:
+        R     1.7Mb
+        doc   3.8Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘mgcv’ ‘reshape2’ ‘viridisLite’
+      All declared Imports should be used.
+    ```
+
+# ggspatial
+
+<details>
+
+* Version: 1.0.3
+* Source code: https://github.com/cran/ggspatial
+* URL: https://github.com/paleolimbot/ggspatial
+* BugReports: https://github.com/paleolimbot/ggspatial/issues
+* Date/Publication: 2018-12-14 21:10:04 UTC
+* Number of recursive dependencies: 96
+
+Run `revdep_details(,"ggspatial")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘ggspatial-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: annotation_map_tile
+    > ### Title: Add background OSM tiles
+    > ### Aliases: annotation_map_tile GeomMapTile
+    > ### Keywords: datasets
+    > 
+    > ### ** Examples
+    > 
+    > load_longlake_data()
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: load_longlake_data ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      [90m 2. [39msf::read_sf(system.file("longlake", package = "ggspatial"), "LongLakeDepthSurvey") [90mrevdep/checks/ggspatial/new/ggspatial.Rcheck/00_pkg_src/ggspatial/R/longlake-data.R:17:2[39m
+      [90m 4. [39msf:::st_read.character(...)
+      [90m 5. [39msf:::process_cpl_read_ogr(...)
+      [90m 6. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 7. [39mbase::structure(x, ...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 24 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 11 ]
+      1. Error: north arrow drawing works (@test-annotation-north-arrow.R#4) 
+      2. Error: true north arrow points in the right direction (@test-annotation-north-arrow.R#52) 
+      3. Error: certain parameters can be passed as aesthetics to show up on different panels (@test-annotation-north-arrow.R#135) 
+      4. Error: scale bar parameters are generated correctly (@test-annotation-scale.R#4) 
+      5. Error: annotation scale works as intended (@test-annotation-scale.R#44) 
+      6. Error: Spatial* objects are fortified correctly (@test-df_spatial.R#29) 
+      7. Error: Raster* objects are converted properly by df_spatial (@test-df_spatial.R#106) 
+      8. Error: polypath works as intended (@test-geom-polypath.R#4) 
+      9. Error: geom_spatial_* geoms work properly (@test-geom_spatial.R#24) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
+    Namespaces in Imports field not imported from:
+      ‘reshape2’ ‘rosm’
+      All declared Imports should be used.
+    ```
+
+# ggstatsplot
+
+<details>
+
+* Version: 0.1.4
+* Source code: https://github.com/cran/ggstatsplot
+* URL: https://indrajeetpatil.github.io/ggstatsplot/, https://github.com/IndrajeetPatil/ggstatsplot
+* BugReports: https://github.com/IndrajeetPatil/ggstatsplot/issues
+* Date/Publication: 2019-12-18 20:00:02 UTC
+* Number of recursive dependencies: 238
+
+Run `revdep_details(,"ggstatsplot")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > 
+    > 
+    > # this internal function may not have much utility outside of the package
+    > set.seed(123)
+    > library(ggplot2)
+    > 
+    > # make a plot
+    > p <- ggplot(data = iris, aes(x = Species, y = Sepal.Length)) +
+    +   geom_boxplot()
+    > 
+    > # get a dataframe with means
+    > mean_dat <- ggstatsplot:::mean_labeller(
+    +   data = iris,
+    +   x = Species,
+    +   y = Sepal.Length,
+    +   mean.ci = TRUE,
+    +   k = 3
+    + )
+    Warning: Factor `Species` contains implicit NA, consider using `forcats::fct_explicit_na`
+    Error: object 'n_missing' not found
+    Execution halted
+    ```
+
+# googlesheets4
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/googlesheets4
+* URL: https://github.com/tidyverse/googlesheets4
+* BugReports: https://github.com/tidyverse/googlesheets4/issues
+* Date/Publication: 2019-11-04 21:50:02 UTC
+* Number of recursive dependencies: 65
+
+Run `revdep_details(,"googlesheets4")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      
+      [31m──[39m [31m5. Error: can shim four sides (@test-utils-sheet-geometry.R#77) [39m [31m────────────────[39m
+      No common type for `..1$cell` <character> and `..2$cell` <list>.
+      [1mBacktrace:[22m
+      [90m  1. [39mgooglesheets4:::expect_shim("A1:E4")
+      [90m 18. [39mvctrs:::vec_ptype2.character.default(...)
+      [90m 19. [39mvctrs::vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 20. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 21. [39mvctrs:::stop_incompatible(...)
+      [90m 22. [39mvctrs:::stop_vctrs(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 187 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 5 ]
+      1. Error: can shim a single side (@test-utils-sheet-geometry.R#38) 
+      2. Error: can shim two opposing sides (@test-utils-sheet-geometry.R#49) 
+      3. Error: can shim on two perpendicular sides (@test-utils-sheet-geometry.R#56) 
+      4. Error: can shim three sides (@test-utils-sheet-geometry.R#67) 
+      5. Error: can shim four sides (@test-utils-sheet-geometry.R#77) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# groupedstats
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/groupedstats
+* URL: https://indrajeetpatil.github.io/groupedstats/, https://github.com/IndrajeetPatil/groupedstats/
+* BugReports: https://github.com/IndrajeetPatil/groupedstats/issues/
+* Date/Publication: 2019-11-21 13:20:02 UTC
+* Number of recursive dependencies: 132
+
+Run `revdep_details(,"groupedstats")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    
+    > ### Name: grouped_summary
+    > ### Title: Descriptive statistics for multiple variables for all grouping
+    > ###   variable levels
+    > ### Aliases: grouped_summary
+    > 
+    > ### ** Examples
+    > 
+    > # for reproducibility
+    > set.seed(123)
+    > 
+    > # another possibility
+    > groupedstats::grouped_summary(
+    +   data = iris,
+    +   grouping.vars = Species,
+    +   measures = Sepal.Length:Petal.Width,
+    +   measures.type = "numeric"
+    + )
+    Warning: Factor `Species` contains implicit NA, consider using `forcats::fct_explicit_na`
+    Error: object 'n_missing' not found
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      [90m 11. [39mdplyr:::mutate_impl(.data, dots, caller_env())
+      
+      [31m──[39m [31m2. Error: grouped_summary with factor measures (@test-grouped_summary.R#77) [39m [31m────[39m
+      object 'n_missing' not found
+      [1mBacktrace:[22m
+      [90m  1. [39mgroupedstats::grouped_summary(...)
+      [90m  2. [39m`%>%`(...) [90mrevdep/checks/groupedstats/new/groupedstats.Rcheck/00_pkg_src/groupedstats/R/grouped_summary.R:130:2[39m
+      [90m  4. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m  6. [39mgroupedstats:::`_fseq`(`_lhs`)
+      [90m  7. [39mmagrittr::freduce(value, `_function_list`)
+      [90m  8. [39mfunction_list[[i]](value)
+      [90m 10. [39mdplyr:::mutate.tbl_df(.data = ., n = n - n_missing)
+      [90m 11. [39mdplyr:::mutate_impl(.data, dots, caller_env())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 88 | SKIPPED: 4 | WARNINGS: 2 | FAILED: 2 ]
+      1. Error: grouped_summary with numeric measures (@test-grouped_summary.R#11) 
+      2. Error: grouped_summary with factor measures (@test-grouped_summary.R#77) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # gtsummary
 
 <details>
 
-* Version: 1.2.1
+* Version: 1.2.4
 * Source code: https://github.com/cran/gtsummary
-* URL: http://www.danieldsjoberg.com/gtsummary/
+* URL: https://github.com/ddsjoberg/gtsummary, http://www.danieldsjoberg.com/gtsummary/
 * BugReports: https://github.com/ddsjoberg/gtsummary/issues
-* Date/Publication: 2019-08-20 21:20:05 UTC
-* Number of recursive dependencies: 128
+* Date/Publication: 2019-12-17 00:20:03 UTC
+* Number of recursive dependencies: 135
 
 Run `revdep_details(,"gtsummary")` for more info
 
@@ -1122,23 +1851,27 @@ Run `revdep_details(,"gtsummary")` for more info
     +   dplyr::select(trt, age, grade, response) %>%
     +   tbl_summary(by = trt) %>%
     +   add_n()
-    Error: Tibble columns must have consistent lengths, only values of length one are recycled:
+    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 150 | SKIPPED: 0 | WARNINGS: 21 | FAILED: 39 ]
+    ...
+      [90m 10. [39mfunction_list[[i]](value)
+      [90m 11. [39mgtsummary::tbl_summary(., by = grade_str)
+      [90m 14. [39mtibble::tibble(...) [90mrevdep/checks/gtsummary/new/gtsummary.Rcheck/00_pkg_src/gtsummary/R/tbl_summary.R:240:2[39m
+      [90m 15. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 16. [39mtibble:::vec_recycle_rows(res, first_size, j, given_col_names[[j]])
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 151 | SKIPPED: 0 | WARNINGS: 20 | FAILED: 46 ]
       1. Error: (unknown) (@test-add_n.R#3) 
       2. Failure: no errors/warnings with standard use (@test-add_overall.R#5) 
       3. Error: no errors/warnings with standard use (@test-add_overall.R#6) 
       4. Failure: no errors/warnings with missing data (@test-add_overall.R#16) 
       5. Error: no errors/warnings with missing data (@test-add_overall.R#17) 
       6. Failure: add_p creates output without error/warning (@test-add_p.R#4) 
-      7. Error: add_p creates output without error/warning (@test-add_p.R#8) 
+      7. Error: add_p creates output without error/warning (@tbl_summary.R#159) 
       8. Failure: add_p works well (@test-add_p.R#30) 
       9. Error: no errors/warnings with standard use after tbl_summary() and add_p() (@test-add_q.R#4) 
       1. ...
@@ -1154,12 +1887,52 @@ Run `revdep_details(,"gtsummary")` for more info
     Package which this enhances but not available for checking: ‘gt’
     ```
 
-*   checking dependencies in R code ... NOTE
+# haven
+
+<details>
+
+* Version: 2.2.0
+* Source code: https://github.com/cran/haven
+* URL: http://haven.tidyverse.org, https://github.com/tidyverse/haven, https://github.com/WizardMac/ReadStat
+* BugReports: https://github.com/tidyverse/haven/issues
+* Date/Publication: 2019-11-08 06:20:22 UTC
+* Number of recursive dependencies: 60
+
+Run `revdep_details(,"haven")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking Rd cross-references ... WARNING
     ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
+    Missing link or links in documentation object 'read_dta.Rd':
+      ‘name-repair’
+    
+    Missing link or links in documentation object 'read_sas.Rd':
+      ‘name-repair’
+    
+    Missing link or links in documentation object 'read_spss.Rd':
+      ‘name-repair’
+    
+    Missing link or links in documentation object 'read_xpt.Rd':
+      ‘name-repair’
+    
+    See section 'Cross-references' in the 'Writing R Extensions' manual.
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.0Mb
+      sub-directories of 1Mb or more:
+        libs   5.5Mb
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
     ```
 
 # healthcareai
@@ -1171,7 +1944,7 @@ Run `revdep_details(,"gtsummary")` for more info
 * URL: http://docs.healthcare.ai
 * BugReports: https://github.com/HealthCatalyst/healthcareai-r/issues
 * Date/Publication: 2018-12-12 23:50:03 UTC
-* Number of recursive dependencies: 116
+* Number of recursive dependencies: 120
 
 Run `revdep_details(,"healthcareai")` for more info
 
@@ -1182,6 +1955,7 @@ Run `revdep_details(,"healthcareai")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    +                 groups = drug,
     +                 outcome = survived,
     +                 n_levels = 3)
     [1] "Epinephrine" "Ibuprofen"   "Paclitaxel" 
@@ -1200,26 +1974,29 @@ Run `revdep_details(,"healthcareai")` for more info
     +                           fill = dose,
     +                           fun = sum,
     +                           missing_fill = 0)
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 4 whereas the index has size 20.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat-5.R’ failed.
-    Last 13 lines of output:
-      17: withOneRestart(expr, restarts[[1L]])
-      18: doWithOneRestart(return(expr), restart)
-      19: stop_lossy_cast(x = x, to = to, result = result, locations = locations, details = details, 
-             ..., x_arg = x_arg, to_arg = to_arg, message = message, .subclass = .subclass) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:235
-      20: stop_vctrs(message, x = x, y = to, to = to, result = result, x_arg = x_arg, to_arg = to_arg, 
-             locations = locations, details = details, ..., .subclass = c(.subclass, "vctrs_error_cast_lossy")) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:259
-      21: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      22: signal_abort(cnd)
+    ...
+      > if (!identical(Sys.getenv("NOT_CRAN"), "true")) {
+      +   library(testthat)
+      +   library(healthcareai)
+      +   Sys.setenv("R_TESTS" = "")
+      +   test_check("healthcareai", filter = "cran_only")
+      + }
+      healthcareai version 2.3.0
+      Please visit https://docs.healthcare.ai for full documentation and vignettes. Join the community at https://healthcare-ai.slack.com
+      [31m──[39m [31m1. Error: the fundamentals work (@test-cran_only.R#4) [39m [31m──────────────────────────[39m
+      `goal` must be a vector, not a primitive function
+      [1mBacktrace:[22m
+      [90m  1. [39mhealthcareai::machine_learn(...)
+      [90m 25. [39mvctrs:::stop_scalar_type(...)
+      [90m 26. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: the fundamentals work (@test-cran_only.R#4) 
       
@@ -1227,75 +2004,16 @@ Run `revdep_details(,"healthcareai")` for more info
       Execution halted
     ```
 
-## In both
-
-*   checking whether the package can be unloaded cleanly ... WARNING
-    ```
-    Error in setMethod("plot", signature(x = "performance", y = "missing"),  : 
-      no existing definition for function ‘plot’
-    Error: package or namespace load failed for ‘healthcareai’:
-     unable to load R code in package ‘ROCR’
-    Execution halted
-    ```
-
-*   checking whether the namespace can be loaded with stated dependencies ... WARNING
-    ```
-    Error in setMethod("plot", signature(x = "performance", y = "missing"),  : 
-      no existing definition for function ‘plot’
-    Error: unable to load R code in package ‘ROCR’
-    Execution halted
-    
-    A namespace must be able to be loaded with just the base namespace
-    loaded: otherwise if the namespace gets loaded by a saved object, the
-    session will be unable to start.
-    
-    Probably some imports need to be declared in the NAMESPACE file.
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    ...
-    Call sequence:
-    6: stop(msg, call. = FALSE, domain = NA)
-    5: value[[3L]](cond)
-    4: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    3: tryCatchList(expr, classes, parentenv, handlers)
-    2: tryCatch({
-           attr(package, "LibPath") <- which.lib.loc
-           ns <- loadNamespace(package, lib.loc)
-           env <- attachNamespace(ns, pos = pos, deps, exclude, include.only)
-       }, error = function(e) {
-           P <- if (!is.null(cc <- conditionCall(e))) 
-               paste(" in", deparse(cc)[1L])
-           else ""
-           msg <- gettextf("package or namespace load failed for %s%s:\n %s", 
-               sQuote(package), P, conditionMessage(e))
-           if (logical.return) 
-               message(paste("Error:", msg), domain = NA)
-           else stop(msg, call. = FALSE, domain = NA)
-       })
-    1: library(package, lib.loc = lib.loc, character.only = TRUE, verbose = FALSE)
-    Execution halted
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    Error in setMethod("plot", signature(x = "performance", y = "missing"),  : 
-      no existing definition for function ‘plot’
-    Error: unable to load R code in package ‘ROCR’
-    Execution halted
-    ```
-
 # heatwaveR
 
 <details>
 
-* Version: 0.4.1
+* Version: 0.4.2
 * Source code: https://github.com/cran/heatwaveR
 * URL: https://robwschlegel.github.io/heatwaveR/index.html, https://github.com/robwschlegel/heatwaveR
 * BugReports: https://github.com/robwschlegel/heatwaveR/issues
-* Date/Publication: 2019-09-09 20:30:03 UTC
-* Number of recursive dependencies: 122
+* Date/Publication: 2019-12-01 21:30:06 UTC
+* Number of recursive dependencies: 107
 
 Run `revdep_details(,"heatwaveR")` for more info
 
@@ -1318,28 +2036,31 @@ Run `revdep_details(,"heatwaveR")` for more info
     +                        climatologyPeriod = c("1983-01-01", "2012-12-31")))
     > # Note that the name argument expects a character vector
     > cat_WA <- category(res_WA, name = "WA")
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 5 whereas the index has size 310.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      22: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
+    ...
+      [90m  4. [39mheatwaveR::category(res, season = "range")
+      [90m  6. [39mtibble:::`[<-.tbl_df`(`*tmp*`, is.na(cat_n), value = 0) [90mrevdep/checks/heatwaveR/new/heatwaveR.Rcheck/00_pkg_src/heatwaveR/R/category.R:281:4[39m
+      [90m  7. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  8. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  9. [39mtibble:::vec_as_col_index(j, x)
+      [90m 22. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 167 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 8 ]
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 169 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 9 ]
       1. Error: category() returns the correct tibbles and columns (@test-category.R#6) 
       2. Error: The seasons by hemisphere come out correctly (@test-category.R#14) 
       3. Error: The name argument works correctly (@test-category.R#23) 
-      4. Error: y = any existing column (@test-category.R#33) 
-      5. Error: season splits work under all circumstances (@test-category.R#42) 
-      6. Error: y = any existing column (@test-category.R#55) 
-      7. Error: climatology = T causes a list output with the time series category data (@test-category.R#60) 
-      8. Error: the different `season` option function as expected (@test-category.R#88) 
+      4. Error: y = any existing column (@test-category.R#35) 
+      5. Error: season splits work under all circumstances (@test-category.R#44) 
+      6. Error: climatology = T causes a list output with the time series category data (@test-category.R#55) 
+      7. Error: climatology intensity values are correct (@test-category.R#65) 
+      8. Error: roundVal works as expected (@test-category.R#74) 
+      9. Error: the different `season` option function as expected (@test-category.R#102) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -1353,7 +2074,7 @@ Run `revdep_details(,"heatwaveR")` for more info
 * Source code: https://github.com/cran/heemod
 * BugReports: https://github.com/pierucci/heemod/issues
 * Date/Publication: 2019-10-22 08:40:05 UTC
-* Number of recursive dependencies: 85
+* Number of recursive dependencies: 94
 
 Run `revdep_details(,"heemod")` for more info
 
@@ -1377,15 +2098,19 @@ Run `revdep_details(,"heemod")` for more info
     +   a, 10, 45,
     +   b, .5, 1.5
     + )
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      [90m  4. [39mheemod:::define_dsa_(...) [90mrevdep/checks/heemod/new/heemod.Rcheck/00_pkg_src/heemod/R/tabular_input.R:639:4[39m
+      [90m 11. [39mtibble::tibble(dots[i])
+      [90m 12. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 14. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 470 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 12 ]
       1. Error: Same results using 1 core or 2. (@test_parallel.R#7) 
       2. Failure: Parameter evaluation (@test_parameters.R#81) 
@@ -1418,7 +2143,7 @@ Run `revdep_details(,"heemod")` for more info
 * URL: https://github.com/saskiaotto/INDperform
 * BugReports: https://github.com/SaskiaAOtto/INDperform/issues
 * Date/Publication: 2019-07-13 23:20:03 UTC
-* Number of recursive dependencies: 76
+* Number of recursive dependencies: 86
 
 Run `revdep_details(,"INDperform")` for more info
 
@@ -1444,19 +2169,22 @@ Run `revdep_details(,"INDperform")` for more info
     > scores_mat <- summary_sc(scores_tbl)$scores_matrix
     Warning: `cols` is now required.
     Please use `cols = c(press_spec_sc)`
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 10 whereas the index has size 120.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: signal_abort(cnd)
+    ...
+      No common type for `value` <logical> and `x` <list>.
+      [1mBacktrace:[22m
+      [90m  1. [39mbase::`[<-`(`*tmp*`, 1, -c(1:4), value = NA)
+      [90m  8. [39mvctrs:::vec_ptype2.logical.list(...)
+      [90m  9. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 10. [39mvctrs:::stop_incompatible(...)
+      [90m 11. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 461 | SKIPPED: 0 | WARNINGS: 24 | FAILED: 8 ]
       1. Error: (unknown) (@test_clust_sc.R#5) 
       2. Error: (unknown) (@test_dist_sc.R#5) 
@@ -1483,12 +2211,12 @@ Run `revdep_details(,"INDperform")` for more info
 
 <details>
 
-* Version: 0.0.6
+* Version: 0.0.7
 * Source code: https://github.com/cran/inspectdf
 * URL: https://alastairrushworth.github.io/inspectdf/
 * BugReports: http://github.com/alastairrushworth/inspectdf/issues
-* Date/Publication: 2019-09-29 17:20:02 UTC
-* Number of recursive dependencies: 52
+* Date/Publication: 2019-11-05 20:10:02 UTC
+* Number of recursive dependencies: 61
 
 Run `revdep_details(,"inspectdf")` for more info
 
@@ -1499,6 +2227,7 @@ Run `revdep_details(,"inspectdf")` for more info
 *   checking examples ... ERROR
     ```
     ...
+        filter, lag
     
     The following objects are masked from ‘package:base’:
     
@@ -1517,8 +2246,7 @@ Run `revdep_details(,"inspectdf")` for more info
     > 
     > # Paired dataframe comparison
     > inspect_types(starwars, starwars[1:20, ])
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 5 whereas the index has size 20.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -1531,7 +2259,7 @@ Run `revdep_details(,"inspectdf")` for more info
 * URL: https://interactions.jacob-long.com
 * BugReports: https://github.com/jacob-long/interactions/issues
 * Date/Publication: 2019-07-05 07:30:23 UTC
-* Number of recursive dependencies: 81
+* Number of recursive dependencies: 91
 
 Run `revdep_details(,"interactions")` for more info
 
@@ -1553,7 +2281,7 @@ Run `revdep_details(,"interactions")` for more info
     > fit <- lm(Income ~ HSGrad + Murder * Illiteracy, data = states)
     > interact_plot(model = fit, pred = Murder, modx = Illiteracy)
     Error: Must extract with a single index.
-    [31m✖[39m `j` has the wrong type `symbol`.
+    [31mx[39m `j` has the wrong type `symbol`.
     [34mℹ[39m This index must be a position or a name.
     Backtrace:
     [90m 1. [39minteractions::interact_plot(model = fit, pred = Murder, modx = Illiteracy)
@@ -1567,10 +2295,14 @@ Run `revdep_details(,"interactions")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      [90m 11. [39mtibble:::tbl_subset2(x, j = i)
+      [90m 12. [39mvctrs::vec_as_position(j, length(x), names(x), arg = "j")
+      [90m 13. [39mvctrs:::maybe_get(...)
+      
+      Failed with error:  'there is no package called 'brms''
+      Failed with error:  'there is no package called 'rstanarm''
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 122 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 13 ]
       1. Error: interact_plot works for lm (@test_interact_plot.R#33) 
       2. Error: interact_plot: robust standard errors work (@test_interact_plot.R#60) 
@@ -1595,12 +2327,6 @@ Run `revdep_details(,"interactions")` for more info
       'brms', 'rstanarm'
     ```
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
-    ```
-
 *   checking Rd cross-references ... NOTE
     ```
     Packages unavailable to check Rd xrefs: ‘quantreg’, ‘brms’, ‘effects’, ‘Hmisc’, ‘rockchalk’, ‘pequod’
@@ -1615,7 +2341,7 @@ Run `revdep_details(,"interactions")` for more info
 * URL: https://www.ipums.org, https://github.com/mnpopcenter/ipumsr
 * BugReports: https://github.com/mnpopcenter/ipumsr/issues
 * Date/Publication: 2019-06-04 17:00:03 UTC
-* Number of recursive dependencies: 99
+* Number of recursive dependencies: 108
 
 Run `revdep_details(,"ipumsr")` for more info
 
@@ -1625,41 +2351,51 @@ Run `revdep_details(,"ipumsr")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘ipumsr-Ex.R’ failed
-    The error most likely occurred in:
+    ...
+    > # but the functions read_nhgis_sf/read_nhgis_sp perform this merge for you.
+    > 
+    > data <- read_nhgis(ipums_example("nhgis0008_csv.zip"))
+    Use of data from NHGIS is subject to conditions including that users should
+    cite the data appropriately. Use command `ipums_conditions()` for more details.
     
-    > ### Name: lbl_collapse
-    > ### Title: Collapse labelled values to labels that already exist
-    > ### Aliases: lbl_collapse
+    
+    Reading data file...
     > 
-    > ### ** Examples
-    > 
-    > x <- haven::labelled(
-    +   c(10, 10, 11, 20, 30, 99, 30, 10),
-    +   c(Yes = 10, `Yes - Logically Assigned` = 11, No = 20, Maybe = 30, NIU = 99)
-    + )
-    > 
-    > lbl_collapse(x, ~(.val %/% 10) * 10)
-    Error: Tibble columns must have consistent lengths, only values of length one are recycled:
+    > if (require(sf)) {
+    +   sf <- read_ipums_sf(ipums_example("nhgis0008_shape_small.zip"))
+    +   data_sf <- ipums_shape_inner_join(data, sf, by = "GISJOIN")
+    + }
+    Loading required package: sf
+    Linking to GEOS 3.7.1, GDAL 2.4.0, PROJ 5.2.0
+    options:        ENCODING=latin1 
+    Reading layer `US_pmsa_1990' from data source `/tmp/RtmpHQ5Rhn/file107831ceb865e/US_pmsa_1990.shp' using driver `ESRI Shapefile'
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: read_ipums_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
+    Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             new_val = pred_f(.val = .data$old_val, .lbl = .data$old_label), vals_equal = .data$old_val == 
-                 .data$new_val) at /home/rstudio/tibble/revdep/checks/ipumsr/new/ipumsr.Rcheck/00_pkg_src/ipumsr/R/lbl_helpers.r:97
-      6: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
-      7: lst_to_tibble(output, .rows, .name_repair, lengths = lengths) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:220
-      8: recycle_columns(x, .rows, lengths) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:128
-      9: abort(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument")) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:197
-      10: signal_abort(cnd)
+    ...
+      [90m 4. [39msf::read_sf(...) [90mrevdep/checks/ipumsr/new/ipumsr.Rcheck/00_pkg_src/ipumsr/R/shape_read.r:70:6[39m
+      [90m 6. [39msf:::st_read.character(...)
+      [90m 7. [39msf:::process_cpl_read_ogr(...)
+      [90m 8. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 9. [39mbase::structure(x, ...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 212 | SKIPPED: 11 | WARNINGS: 3 | FAILED: 2 ]
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 170 | SKIPPED: 11 | WARNINGS: 0 | FAILED: 12 ]
       1. Error: lbl_collapse: basic (@test_lbls.r#70) 
       2. Error: lbl_collapse: if recoding to old value it is maintained (even if it's not first) (@test_lbls.r#83) 
+      3. Error: Can read NHGIS extract (with shape as sf) (@test_nhgis.r#31) 
+      4. Error: Can read NHGIS extract (with shape as sf - 1 layer unzipped) (@test_nhgis.r#54) 
+      5. Error: Can read NHGIS extract (with shape as sf - 2 layers unzipped) (@test_nhgis.r#93) 
+      6. Error: NHGIS - sf and sp polygon-data relationships didn't get scrambled in import (@test_nhgis.r#133) 
+      7. Error: Basic join works (sf) (@test_shape_join.r#6) 
+      8. Error: suffix argument works (sf) (@test_shape_join.r#30) 
+      9. Error: complicated by works (sf) (@test_shape_join.r#44) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
@@ -1674,7 +2410,7 @@ Run `revdep_details(,"ipumsr")` for more info
 * URL: https://github.com/sfirke/janitor
 * BugReports: https://github.com/sfirke/janitor/issues
 * Date/Publication: 2019-04-21 04:20:13 UTC
-* Number of recursive dependencies: 51
+* Number of recursive dependencies: 60
 
 Run `revdep_details(,"janitor")` for more info
 
@@ -1699,17 +2435,20 @@ Run `revdep_details(,"janitor")` for more info
     +   adorn_percentages("col") %>%
     +   adorn_pct_formatting() %>%
     +   adorn_ns(position = "front")
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 1 whereas the index has size 6.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      [90m  5. [39mtibble:::`[<-.tbl_df`(`*tmp*`, is.na(tabl[2]), value = "NA_") [90mrevdep/checks/janitor/new/janitor.Rcheck/00_pkg_src/janitor/R/tabyl.R:212:2[39m
+      [90m  6. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  7. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  8. [39mtibble:::vec_as_col_index(j, x)
+      [90m 21. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 320 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 17 ]
       1. Error: (unknown) (@test-add-totals.R#12) 
       2. Error: (unknown) (@test-adorn-crosstab.R#7) 
@@ -1735,7 +2474,7 @@ Run `revdep_details(,"janitor")` for more info
 * URL: https://github.com/ropensci/jstor, https://ropensci.github.io/jstor/
 * BugReports: https://github.com/ropensci/jstor/issues
 * Date/Publication: 2019-09-05 02:10:11 UTC
-* Number of recursive dependencies: 60
+* Number of recursive dependencies: 69
 
 Run `revdep_details(,"jstor")` for more info
 
@@ -1756,17 +2495,21 @@ Run `revdep_details(,"jstor")` for more info
     > 
     > # articles will be imported via `jst_get_article()` and `jst_get_authors()`
     > jst_define_import(article = c(jst_get_article, jst_get_authors))
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Actual message: "All columns in a tibble must be 1d or 2d objects:\n* Column `bare_funs` is quosures"
+    ...
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_error(...)
+      [90m 10. [39mjstor::jst_define_import(article = jst_get_article)
+      [90m 11. [39mtibble::tibble(...) [90mrevdep/checks/jstor/new/jstor.Rcheck/00_pkg_src/jstor/R/import_spec.R:170:2[39m
+      [90m 12. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 14. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 227 | SKIPPED: 4 | WARNINGS: 3 | FAILED: 8 ]
       1. Failure: authors are correct (@test-books.R#117) 
       2. Error: jst_define_import returns correct class (@test-import-spec.R#4) 
@@ -1790,7 +2533,7 @@ Run `revdep_details(,"jstor")` for more info
 * URL: https://jtools.jacob-long.com
 * BugReports: https://github.com/jacob-long/jtools/issues
 * Date/Publication: 2019-04-08 21:30:11 UTC
-* Number of recursive dependencies: 120
+* Number of recursive dependencies: 128
 
 Run `revdep_details(,"jtools")` for more info
 
@@ -1812,7 +2555,7 @@ Run `revdep_details(,"jtools")` for more info
     +   data = states)
     > effect_plot(model = fit, pred = Murder)
     Error: Must extract with a single index.
-    [31m✖[39m `j` has the wrong type `symbol`.
+    [31mx[39m `j` has the wrong type `symbol`.
     [34mℹ[39m This index must be a position or a name.
     Backtrace:
     [90m 1. [39mjtools::effect_plot(model = fit, pred = Murder)
@@ -1826,10 +2569,14 @@ Run `revdep_details(,"jtools")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+       18. tibble:::`[<-.tbl_df`(`*tmp*`, zeroes, value = 0) revdep/checks/jtools/new/jtools.Rcheck/00_pkg_src/jtools/R/export_summ.R:979:4
+       19. tibble:::tbl_subassign(x, i, j, value)
+       20. tibble:::vec_as_new_col_index(j, x, value)
+       21. tibble:::vec_as_col_index(j, x)
+       34. vctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 240 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 37 ]
       1. Error: effect_plot works for lm (@test-effect-plot.R#25) 
       2. Error: effect_plot: robust intervals works (@test-effect-plot.R#37) 
@@ -1854,18 +2601,6 @@ Run `revdep_details(,"jtools")` for more info
       'brms', 'quantreg', 'rstanarm'
     ```
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
-    Error in globalVariables("naresid.omit") : 
-      could not find function "globalVariables"
-    ```
-
 *   checking Rd cross-references ... NOTE
     ```
     Packages unavailable to check Rd xrefs: ‘wec’, ‘quantreg’, ‘brms’, ‘arm’, ‘interactions’, ‘effects’, ‘piecewiseSEM’
@@ -1880,7 +2615,7 @@ Run `revdep_details(,"jtools")` for more info
 * URL: https://echasnovski.github.io/keyholder/, https://github.com/echasnovski/keyholder/
 * BugReports: https://github.com/echasnovski/keyholder/issues/
 * Date/Publication: 2018-12-01 17:10:03 UTC
-* Number of recursive dependencies: 48
+* Number of recursive dependencies: 57
 
 Run `revdep_details(,"keyholder")` for more info
 
@@ -1890,17 +2625,21 @@ Run `revdep_details(,"keyholder")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check("keyholder")
+      [31m──[39m [31m1. Failure: add_id works on grouped_df (@test-id.R#46) [39m [31m─────────────────────────[39m
       `output_1` not identical to `output_ref_1`.
       Objects equal but not identical
       
-      [31m──[39m [31m3. Failure: key_by_id works on grouped_df (@test-id.R#108) [39m [31m─────────────────────────[39m
+      [31m──[39m [31m2. Failure: key_by_id works on grouped_df (@test-id.R#85) [39m [31m──────────────────────[39m
+      `output_1` not identical to `output_ref_1`.
+      Objects equal but not identical
+      
+      [31m──[39m [31m3. Failure: key_by_id works on grouped_df (@test-id.R#108) [39m [31m─────────────────────[39m
       `output_3` not identical to `output_ref_3`.
       Objects equal but not identical
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 306 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
       1. Failure: add_id works on grouped_df (@test-id.R#46) 
       2. Failure: key_by_id works on grouped_df (@test-id.R#85) 
@@ -1919,7 +2658,7 @@ Run `revdep_details(,"keyholder")` for more info
 * URL: https://grunwaldlab.github.io/metacoder_documentation/
 * BugReports: https://github.com/grunwaldlab/metacoder/issues
 * Date/Publication: 2019-07-18 06:35:33 UTC
-* Number of recursive dependencies: 136
+* Number of recursive dependencies: 145
 
 Run `revdep_details(,"metacoder")` for more info
 
@@ -1929,17 +2668,21 @@ Run `revdep_details(,"metacoder")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      21: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
+    ...
+      [90m  2. [39mmetacoder:::do_calc_on_num_cols(...) [90mrevdep/checks/metacoder/new/metacoder.Rcheck/00_pkg_src/metacoder/R/calculations.R:425:2[39m
+      [90m  3. [39mmetacoder:::func(input[, cols], cols = cols, groups = groups) [90mrevdep/checks/metacoder/new/metacoder.Rcheck/00_pkg_src/metacoder/R/calculations--internal.R:144:4[39m
+      [90m  5. [39mtibble:::`[<-.tbl_df`(`*tmp*`, to_zero, value = 0) [90mrevdep/checks/metacoder/new/metacoder.Rcheck/00_pkg_src/metacoder/R/calculations.R:419:6[39m
+      [90m  6. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  7. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  8. [39mtibble:::vec_as_col_index(j, x)
+      [90m 21. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
       
-      [31m──[39m [31m4. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R#119[39m
+      [31m──[39m [31m4. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R[39m
       result$data$tax_data$unite_seq[5] not equal to "CCAAATCATGTCTCCCGGCCGCAAGGCAGGTGCAGGCGTTTAACCCTTTGTGAACCAAAAAACCTTTCGCTTCGGCAGCAGCTCGGTTGGAGACAGCCTCTGTGTCAGCCTGCCGCTAGCACCAATTATCAAAACTTGCGGTTAGCAACATTGTCTGATTACCAAATTTTCGAATGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCCCGCATCGATGAAGAACGCAGCGAAACGCGATAGTTAATGTGAATTGCAGAATTCAGTGAATCATCGAGTCTTTGAACGCACATTGCGCCCATTGGTATTCCATTGGGCATGTCTGTTTGAGCGTCATTACAACCCTCGGTCACCACCGGTTTTGAGCGAGCAGGGTCTTCGGATCCAGCTGGCTTTAAAGTTGTAAGCTCTGCTGGCTGCTCGGCCCAACCAGAACATAGTAAAATCATGCTTGTTCAAGGTTCGCGGTCGAAGCGGTACGGCCTGAACAATACCTACCACCTCTTAGG".
       names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 89 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 4 ]
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 89 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: Summing counts per taxon (@test--calculations.R#103) 
       2. Failure: Summing counts per taxon (@test--calculations.R#126) 
       3. Error: Converting low counts to zero (@test--calculations.R#186) 
@@ -1958,6 +2701,73 @@ Run `revdep_details(,"metacoder")` for more info
       All declared Imports should be used.
     ```
 
+# MNLpred
+
+<details>
+
+* Version: 0.0.1
+* Source code: https://github.com/cran/MNLpred
+* Date/Publication: 2019-11-05 15:20:09 UTC
+* Number of recursive dependencies: 64
+
+Run `revdep_details(,"MNLpred")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### ** Examples
+    > 
+    > library(nnet)
+    > library(MASS)
+    > 
+    > dataset <- data.frame(y = c(rep("a", 10), rep("b", 10), rep("c", 10)),
+    +                       x1 = rnorm(30),
+    +                       x2 = rnorm(30, mean = 1),
+    +                       x3 = sample(1:10, 30, replace = TRUE))
+    > 
+    > mod <- multinom(y ~ x1 + x2 + x3, data = dataset, Hess = TRUE)
+    # weights:  15 (8 variable)
+    initial  value 32.958369 
+    iter  10 value 30.528006
+    final  value 30.525569 
+    converged
+    > 
+    > fdi1 <- mnl_fd2_ova(model = mod, data = dataset,
+    +                     xvari = "x1",
+    +                     value1 = min(dataset$x1), value2 = max(dataset$x1))
+    Error: Lossy cast from `value` <double> to `x` <logical>.
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      # weights:  21 (12 variable)
+      initial  value 219.722458 
+      iter  10 value 189.686272
+      final  value 168.079235 
+      converged
+      [31m──[39m [31m1. Error: mnl_pred_ova() returns two predictions when by = NULL (@test_inputvaria[39m
+      Lossy cast from `value` <double> to `x` <logical>.
+      * Locations: 1, 2
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_equal(...)
+      [90m 12. [39mvctrs:::vec_cast.logical.double(...)
+      [90m 13. [39mvctrs::maybe_lossy_cast(out, x, to, lossy, x_arg = x_arg, to_arg = to_arg)
+      [90m 17. [39mvctrs:::stop_lossy_cast(...)
+      [90m 18. [39mvctrs:::stop_vctrs(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: mnl_pred_ova() returns two predictions when by = NULL (@test_inputvariants.R#17) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # modelsummary
 
 <details>
@@ -1967,7 +2777,7 @@ Run `revdep_details(,"metacoder")` for more info
 * URL: https://github.com/vincentarelbundock/modelsummary
 * BugReports: https://github.com/vincentarelbundock/modelsummary/issues
 * Date/Publication: 2019-07-15 10:20:03 UTC
-* Number of recursive dependencies: 70
+* Number of recursive dependencies: 79
 
 Run `revdep_details(,"modelsummary")` for more info
 
@@ -1993,8 +2803,7 @@ Run `revdep_details(,"modelsummary")` for more info
     > models[['Bivariate']] <- lm(Girth ~ Height, data = trees)
     > models[['Multivariate']] <- lm(Girth ~ Height + Volume, data = trees)
     > extract(models)
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 5 whereas the index has size 60.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -2003,12 +2812,6 @@ Run `revdep_details(,"modelsummary")` for more info
 *   checking package dependencies ... NOTE
     ```
     Package suggested but not available for checking: ‘gt’
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
     ```
 
 # MPTmultiverse
@@ -2020,7 +2823,7 @@ Run `revdep_details(,"modelsummary")` for more info
 * URL: https://github.com/mpt-network/MPTmultiverse
 * BugReports: https://github.com/mpt-network/MPTmultiverse/issues
 * Date/Publication: 2019-08-27 23:30:29 UTC
-* Number of recursive dependencies: 78
+* Number of recursive dependencies: 88
 
 Run `revdep_details(,"MPTmultiverse")` for more info
 
@@ -2030,9 +2833,15 @@ Run `revdep_details(,"MPTmultiverse")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      target is NULL, current is numeric
+      
+      [31m──[39m [31m16. Failure: No-pooling approaches work (@test-mptinr.R#136) [39m [31m───────────────────[39m
+      only_npb$est_indiv[[1]]$se not equal to c(...).
+      target is NULL, current is numeric
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 19 | SKIPPED: 3 | WARNINGS: 14 | FAILED: 16 ]
       1. Failure: No-pooling approaches work (@test-mptinr.R#61) 
       2. Failure: No-pooling approaches work (@test-mptinr.R#62) 
       3. Failure: No-pooling approaches work (@test-mptinr.R#63) 
@@ -2043,47 +2852,6 @@ Run `revdep_details(,"MPTmultiverse")` for more info
       8. Failure: No-pooling approaches work (@test-mptinr.R#92) 
       9. Failure: No-pooling approaches work (@test-mptinr.R#107) 
       1. ...
-      
-      Error: testthat unit tests failed
-      In addition: Warning message:
-      closing unused connection 4 (<-localhost:11462) 
-      Execution halted
-    ```
-
-# mudata2
-
-<details>
-
-* Version: 1.0.7
-* Source code: https://github.com/cran/mudata2
-* URL: https://github.com/paleolimbot/mudata
-* BugReports: https://github.com/paleolimbot/mudata/issues
-* Date/Publication: 2019-08-29 21:10:02 UTC
-* Number of recursive dependencies: 84
-
-Run `revdep_details(,"mudata2")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-             c6 = as.POSIXct(c5), c7 = structure(list(list(1), list(2), list(3)), class = c("json_column", 
-                 "list")), c8 = sf::st_as_sfc(c("POINT(0 0)", "POINT(1 1)", "POINT(2 2)")), c9 = hms::as.hms(1:3)) at testthat/test_types.R:327
-      2: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
-      3: check_valid_col(res, col_names[[j]], j) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:190
-      4: abort(error_column_must_be_vector(name, classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:171
-      5: signal_abort(cnd)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 952 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 3 ]
-      1. Error: mudata_prepare_column and mudata_parse_column are opposites (@test_mudata.io.R#244) 
-      2. Error: mudata_prepare_tbl and mudata_parse_tbl are opposites (@test_mudata.io.R#344) 
-      3. Error: generate_type_str generates expected output (@test_types.R#327) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2098,7 +2866,7 @@ Run `revdep_details(,"mudata2")` for more info
 * URL: https://github.com/mcanouil/NACHO, https://mcanouil.github.io/NACHO
 * BugReports: https://github.com/mcanouil/NACHO/issues
 * Date/Publication: 2019-10-12 07:30:10 UTC
-* Number of recursive dependencies: 92
+* Number of recursive dependencies: 102
 
 Run `revdep_details(,"NACHO")` for more info
 
@@ -2109,6 +2877,7 @@ Run `revdep_details(,"NACHO")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    
     > ### Name: normalise
     > ### Title: (re)Normalise a dataset read from summarise
     > ### Aliases: normalise normalize
@@ -2127,17 +2896,20 @@ Run `revdep_details(,"NACHO")` for more info
       - normalisation_method = TRUE
       - remove_outliers = TRUE
     [NACHO] Computing normalisation factors using "GEO" method.
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 4 whereas the index has size 20.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      Content type 'application/x-gzip' length 672 bytes
+      ==================================================
+      downloaded 672 bytes
+      
+      
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 67 | SKIPPED: 0 | WARNINGS: 20 | FAILED: 11 ]
       1. Error: No POS_E (@test-normalise.R#22) 
       2. Error: genes not null (@test-normalise.R#43) 
@@ -2154,18 +2926,63 @@ Run `revdep_details(,"NACHO")` for more info
       Execution halted
     ```
 
-# olsrr
+# NipponMap
 
 <details>
 
-* Version: 0.5.2
-* Source code: https://github.com/cran/olsrr
-* URL: https://olsrr.rsquaredacademy.com/, https://github.com/rsquaredacademy/olsrr
-* BugReports: https://github.com/rsquaredacademy/olsrr/issues
-* Date/Publication: 2018-11-22 17:30:03 UTC
-* Number of recursive dependencies: 167
+* Version: 0.2
+* Source code: https://github.com/cran/NipponMap
+* Date/Publication: 2018-05-16 12:30:20 UTC
+* Number of recursive dependencies: 27
 
-Run `revdep_details(,"olsrr")` for more info
+Run `revdep_details(,"NipponMap")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘NipponMap-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: JapanPrefMap
+    > ### Title: A simple choropleth map of Japan
+    > ### Aliases: JapanPrefMap
+    > ### Keywords: Japan Japanese map Japanese Prefecture
+    > 
+    > ### ** Examples
+    > 
+    > JapanPrefMap()
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: JapanPrefMap ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
+    Execution halted
+    ```
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Packages which this enhances but not available for checking:
+      'kokudosuuchi', 'estatapi', 'jpndistrict', 'jpmesh'
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘cshapes’
+    ```
+
+# OncoBayes2
+
+<details>
+
+* Version: 0.5-8
+* Source code: https://github.com/cran/OncoBayes2
+* Date/Publication: 2019-12-12 14:50:02 UTC
+* Number of recursive dependencies: 83
+
+Run `revdep_details(,"OncoBayes2")` for more info
 
 </details>
 
@@ -2174,46 +2991,50 @@ Run `revdep_details(,"olsrr")` for more info
 *   checking examples ... ERROR
     ```
     ...
-             hp    -0.031         0.011       -0.354    -2.724    0.011    -0.055    -0.008 
-             wt    -3.801         1.066       -0.617    -3.565    0.001    -5.985    -1.617 
-    ----------------------------------------------------------------------------------------
+    > ### ** Examples
     > 
-    > # if model includes interaction terms set iterm to TRUE
-    > ols_regress(mpg ~ disp * wt, data = mtcars, iterm = TRUE)
-    Error: No variables or terms were selected.
-    Backtrace:
-    [90m     [39m█
-    [90m  1. [39m├─olsrr::ols_regress(mpg ~ disp * wt, data = mtcars, iterm = TRUE)
-    [90m  2. [39m└─olsrr:::ols_regress.default(mpg ~ disp * wt, data = mtcars, iterm = TRUE) [90m00_pkg_src/olsrr/R/ols-regression.R:68:15[39m
-    [90m  3. [39m  └─olsrr:::reg_comp(object, data, conf.level, iterm, title) [90m00_pkg_src/olsrr/R/ols-regression.R:109:2[39m
-    [90m  4. [39m    ├─recipes::prep(standardized, training = data) [90m00_pkg_src/olsrr/R/ols-regress_compute.R:54:4[39m
-    [90m  5. [39m    └─recipes:::prep.recipe(standardized, training = data)
-    [90m  6. [39m      ├─recipes::prep(x$steps[[i]], training = training, info = x$term_info)
-    [90m  7. [39m      └─recipes:::prep.step_scale(...)
-    [90m  8. [39m        └─recipes::terms_select(x$terms, info = info)
-    [90m  9. [39m          └─rlang::with_handlers(...)
-    [90m 10. [39m            └─base::tryCatch(...)
-    [90m 11. [39m    
+    > ## Setting up dummy sampling for fast execution of example
+    > ## Please use 4 chains and 100x more warmup & iter in practice
+    > .user_mc_options <- options(OncoBayes2.MC.warmup=10, OncoBayes2.MC.iter=20, OncoBayes2.MC.chains=1)
+    > 
+    > library(tibble)
+    > 
+    > dose_info_A <- tibble(
+    +    group_id = "hist_A",
+    +    drug_A = 1
+    +  )
+    > 
+    >  dose_info_B <- tibble(
+    +    group_id = "hist_B",
+    +    drug_B = 100 * (1:2)
+    +  )
+    > 
+    > bind_rows_0(dose_info_A, dose_info_B)
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-                                        Parameter Estimates                                    
-      ----------------------------------------------------------------------------------------
-            model      Beta    Std. Error    Std. Beta      t        Sig      lower     upper 
-      ----------------------------------------------------------------------------------------
-      (Intercept)    52.577         2.286                 22.998    0.000    47.483    57.671 
-               x1     1.468         0.121        0.574    12.105    0.000     1.198     1.739 
-               x2     0.662         0.046        0.685    14.442    0.000     0.560     0.764 
-      ----------------------------------------------------------------------------------------
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 353 | SKIPPED: 24 | WARNINGS: 1 | FAILED: 1 ]
-      1. Error: If model includes interaction terms, ols_regress scales and centers
-                predictors before computing standardized betas (@test-regress.R#20) 
+    ...
+      
+      No interaction model posterior specified.
+      [31m──[39m [31m2. Error: bind_rows_0 sets non-existing columns to 0 and merges tibbles correctly[39m
+      `i` must have one dimension, not 2.
+      [1mBacktrace:[22m
+      [90m  1. [39mOncoBayes2:::check_bind_rows_0()
+      [90m  2. [39mOncoBayes2::bind_rows_0(example_A, example_B, example_A)
+      [90m  4. [39mtibble:::`[<-.tbl_df`(`*tmp*`, is.na(temp), value = 0) [90mrevdep/checks/OncoBayes2/new/OncoBayes2.Rcheck/00_pkg_src/OncoBayes2/R/bind_rows_0.R:36:2[39m
+      [90m  5. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  6. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  7. [39mtibble:::vec_as_col_index(j, x)
+      [90m 20. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      
+      Error in na.fail.default(X[[i]], ...) : missing values in object
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 129 | SKIPPED: 4 | WARNINGS: 162 | FAILED: 2 ]
+      1. Error: update.blrmfit grows the data set (@test-blrm_exnex.R#264) 
+      2. Error: bind_rows_0 sets non-existing columns to 0 and merges tibbles correctly (@test-blrm_trial.R#306) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2221,61 +3042,16 @@ Run `revdep_details(,"olsrr")` for more info
 
 ## In both
 
-*   checking whether the package can be unloaded cleanly ... WARNING
+*   checking installed package size ... NOTE
     ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error: package or namespace load failed for ‘olsrr’:
-     unable to load R code in package ‘car’
-    Execution halted
+      installed size is 48.7Mb
+      sub-directories of 1Mb or more:
+        libs  47.3Mb
     ```
 
-*   checking whether the namespace can be loaded with stated dependencies ... WARNING
+*   checking for GNU extensions in Makefiles ... NOTE
     ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error: unable to load R code in package ‘car’
-    Execution halted
-    
-    A namespace must be able to be loaded with just the base namespace
-    loaded: otherwise if the namespace gets loaded by a saved object, the
-    session will be unable to start.
-    
-    Probably some imports need to be declared in the NAMESPACE file.
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    ...
-    Call sequence:
-    6: stop(msg, call. = FALSE, domain = NA)
-    5: value[[3L]](cond)
-    4: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    3: tryCatchList(expr, classes, parentenv, handlers)
-    2: tryCatch({
-           attr(package, "LibPath") <- which.lib.loc
-           ns <- loadNamespace(package, lib.loc)
-           env <- attachNamespace(ns, pos = pos, deps, exclude, include.only)
-       }, error = function(e) {
-           P <- if (!is.null(cc <- conditionCall(e))) 
-               paste(" in", deparse(cc)[1L])
-           else ""
-           msg <- gettextf("package or namespace load failed for %s%s:\n %s", 
-               sQuote(package), P, conditionMessage(e))
-           if (logical.return) 
-               message(paste("Error:", msg), domain = NA)
-           else stop(msg, call. = FALSE, domain = NA)
-       })
-    1: library(package, lib.loc = lib.loc, character.only = TRUE, verbose = FALSE)
-    Execution halted
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    Error in globalVariables(".groups") : 
-      could not find function "globalVariables"
-    Error: unable to load R code in package ‘car’
-    Execution halted
+    GNU make is a SystemRequirements.
     ```
 
 # oppr
@@ -2287,7 +3063,7 @@ Run `revdep_details(,"olsrr")` for more info
 * URL: https://prioritizr.github.io/oppr, https://github.com/prioritizr/oppr
 * BugReports: https://github.com/prioritizr/oppr/issues
 * Date/Publication: 2019-08-10 22:30:07 UTC
-* Number of recursive dependencies: 94
+* Number of recursive dependencies: 95
 
 Run `revdep_details(,"oppr")` for more info
 
@@ -2297,16 +3073,20 @@ Run `revdep_details(,"oppr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+      Excellent numeric accuracy ||*|| = 1.11022e-16
+      
+       MEMO: lp_solve version 5.5.2.0 for 64 bit OS, with 64 bit LPSREAL variables.
+            In the total iteration count 29, 4 (13.8%) were bound flips.
+            There were 5 refactorizations, 0 triggered by time and 0 by density.
              ... on average 5.0 major pivots per refactorization.
             The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
             The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
             The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.036 seconds, presolve used 0.001 seconds,
-             ... 0.000 seconds in simplex solver, in total 0.037 seconds.
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+            Time to load data was 0.018 seconds, presolve used 0.000 seconds,
+             ... 0.000 seconds in simplex solver, in total 0.018 seconds.
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
       2. Failure: valid arguments (@test_project_cost_effectiveness.R#36) 
@@ -2326,17 +3106,10 @@ Run `revdep_details(,"oppr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.6Mb
+      installed size is 19.3Mb
       sub-directories of 1Mb or more:
-        libs   9.7Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in prototype(data = data_frame(), extraInfo = data_frame(), anc_seq = ape::as.DNAbin(character(0)),  : 
-      could not find function "prototype"
-    Error in prototype(data = data_frame(), extraInfo = data_frame(), anc_seq = ape::as.DNAbin(character(0)),  : 
-      could not find function "prototype"
+        R      3.9Mb
+        libs  14.3Mb
     ```
 
 # palaeoSig
@@ -2348,7 +3121,7 @@ Run `revdep_details(,"oppr")` for more info
 * URL: https://github.com/richardjtelford/palaeoSig
 * BugReports: https://github.com/richardjtelford/palaeoSig/issues
 * Date/Publication: 2019-06-28 08:00:03 UTC
-* Number of recursive dependencies: 106
+* Number of recursive dependencies: 107
 
 Run `revdep_details(,"palaeoSig")` for more info
 
@@ -2375,7 +3148,7 @@ Run `revdep_details(,"palaeoSig")` for more info
     > data(SWAP)
     > data(RLGH)
     > rlgh.obs <- obs.cor(spp = sqrt(SWAP$spec), env = SWAP$pH, fos = sqrt(RLGH$spec))
-    Error: Tibble columns must have consistent lengths, only values of length one are recycled:
+    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
     ```
 
 ## In both
@@ -2383,6 +3156,49 @@ Run `revdep_details(,"palaeoSig")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘analogue’
+    ```
+
+# pkgsearch
+
+<details>
+
+* Version: 3.0.2
+* Source code: https://github.com/cran/pkgsearch
+* URL: https://github.com/r-hub/pkgsearch, https://r-hub.github.io/pkgsearch
+* BugReports: https://github.com/r-hub/pkgsearch/issues
+* Date/Publication: 2019-12-19 18:50:06 UTC
+* Number of recursive dependencies: 67
+
+Run `revdep_details(,"pkgsearch")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+     10  19 vcd        1.4.4    David Meyer      2y Visualizing Categorical Data   
+    > ps()
+    - "visualization" ---------------------------- 1075 packages in 0.008 seconds -
+    
+    Error: Expected a vector, not a `package_version/numeric_version` object
+    [1m<error/vctrs_error_scalar_type>[22m
+    Expected a vector, not a `package_version/numeric_version` object
+    [1mBacktrace:[22m
+    [90m     [39m█
+    [90m  1. [39m├─(if (getRversion() >= "3.4") withAutoprint else force)(...)
+    [90m  2. [39m│ └─base::source(...)
+    [90m  3. [39m│   ├─base::print(yy$value)
+    [90m  4. [39m│   └─pkgsearch:::print.pkg_search_result(yy$value)
+    [90m  5. [39m│     └─pkgsearch:::cat_hit(x, i) [90m00_pkg_src/pkgsearch/R/print.R:57:4[39m
+    [90m  6. [39m│       ├─x[no, ] [90m00_pkg_src/pkgsearch/R/print.R:68:2[39m
+    [90m  7. [39m│       ├─pkgsearch:::`[.pkg_search_result`(x, no, ) [90m00_pkg_src/pkgsearch/R/print.R:68:2[39m
+    [90m  8. [39m│       ├─base::NextMethod("[") [90m00_pkg_src/pkgsearch/R/api.R:296:2[39m
+    [90m  9. [39m│       └─tibble:::`[.tbl_df`(x, no, )
+    [90m 10. [39m│         └─tibble:::tbl_subset_row(xo, i = i)
+    [
+    Execution halted
     ```
 
 # pmdplyr
@@ -2394,7 +3210,7 @@ Run `revdep_details(,"palaeoSig")` for more info
 * URL: https://nickch-k.github.io/pmdplyr, https://github.com/NickCH-K/pmdplyr
 * BugReports: https://github.com/NickCH-K/pmdplyr/issues
 * Date/Publication: 2019-08-26 09:50:02 UTC
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 106
 
 Run `revdep_details(,"pmdplyr")` for more info
 
@@ -2430,15 +3246,19 @@ Run `revdep_details(,"pmdplyr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      inexact_anti_join(...) not equal to last_join %>% dplyr::select(-b) %>% dplyr::filter(FALSE).
+      Incompatible type for column `t2`: x logical, y numeric
       
-      [31m──[39m [31m5. Failure: Different inexact joins work (@test-inexact_join.R#213) [39m [31m────────────────[39m
+      [31m──[39m [31m4. Failure: Different inexact joins work (@test-inexact_join.R#206) [39m [31m────────────[39m
+      inexact_semi_join(left, right, var = t, jvar = t2, method = "last") not equal to last_join %>% dplyr::select(-b).
+      Incompatible type for column `t2`: x logical, y numeric
+      
+      [31m──[39m [31m5. Failure: Different inexact joins work (@test-inexact_join.R#213) [39m [31m────────────[39m
       inexact_anti_join(left, right, var = t, jvar = t2, method = "last") not equal to last_join %>% dplyr::select(-b) %>% dplyr::filter(FALSE).
       Incompatible type for column `t2`: x logical, y numeric
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 296 | SKIPPED: 0 | WARNINGS: 16 | FAILED: 5 ]
       1. Error: inexact_join input failstates (@test-bad_input.R#96) 
       2. Failure: Different inexact joins work (@test-inexact_join.R#162) 
@@ -2450,18 +3270,6 @@ Run `revdep_details(,"pmdplyr")` for more info
       Execution halted
     ```
 
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
-    Error in setOldClass(c("maxLik", "maxim")) : 
-      could not find function "setOldClass"
-    Error in globalVariables(c(".rows")) : 
-      could not find function "globalVariables"
-    ```
-
 # PML
 
 <details>
@@ -2471,7 +3279,7 @@ Run `revdep_details(,"pmdplyr")` for more info
 * URL: https://github.com/xinyue-L/PML
 * BugReports: https://github.com/xinyue-L/PML/issues
 * Date/Publication: 2019-09-17 08:00:02 UTC
-* Number of recursive dependencies: 84
+* Number of recursive dependencies: 85
 
 Run `revdep_details(,"PML")` for more info
 
@@ -2502,7 +3310,7 @@ Run `revdep_details(,"PML")` for more info
     Warning in structure(x, class = unique(c("AsIs", oldClass(x)))) :
       Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
       Consider 'structure(list(), *)' instead.
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 # PopED
@@ -2514,7 +3322,7 @@ Run `revdep_details(,"PML")` for more info
 * URL: http://poped.sourceforge.net
 * BugReports: https://github.com/andrewhooker/PopED/issues
 * Date/Publication: 2018-09-10 09:40:03 UTC
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 108
 
 Run `revdep_details(,"PopED")` for more info
 
@@ -2524,19 +3332,23 @@ Run `revdep_details(,"PopED")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]), names[nh], parentenv, 
-             handlers[[nh]])
-      14: doTryCatch(return(expr), name, parentenv, handler)
-      15: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
-      16: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      17: doTryCatch(return(expr), name, parentenv, handler)
-      18: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
-      19: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
+    ...
+    Complete output:
+      > library(testthat)
+      > library(PopED)
+      > 
+      > test_check("PopED")
+      [31m──[39m [31m1. Error: Shrinkage evaluation works (@test_evaluate_design.R#227) [39m [31m─────────────[39m
+      `i` must have one dimension, not 2.
+      [1mBacktrace:[22m
+      [90m  1. [39mPopED::shrinkage(poped.db)
+      [90m  3. [39mtibble:::`[<-.tbl_df`(`*tmp*`, data_tmp == 1, value = NA) [90mrevdep/checks/PopED/new/PopED.Rcheck/00_pkg_src/PopED/R/shrinkage.R:174:4[39m
+      [90m  4. [39mtibble:::tbl_subassign(x, i, j, value)
+      [90m  5. [39mtibble:::vec_as_new_col_index(j, x, value)
+      [90m  6. [39mtibble:::vec_as_col_index(j, x)
+      [90m 19. [39mvctrs::vec_as_index(j, length(x), names(x), arg = "j")
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 181 | SKIPPED: 1 | WARNINGS: 13 | FAILED: 1 ]
       1. Error: Shrinkage evaluation works (@test_evaluate_design.R#227) 
       
@@ -2548,49 +3360,8 @@ Run `revdep_details(,"PopED")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Error in globalVariables("naresid.omit") : 
-      could not find function "globalVariables"
     Namespace in Imports field not imported from: ‘tidyr’
       All declared Imports should be used.
-    ```
-
-# portalr
-
-<details>
-
-* Version: 0.2.7
-* Source code: https://github.com/cran/portalr
-* URL: https://weecology.github.io/portalr/, https://github.com/weecology/portalr
-* BugReports: https://github.com/weecology/portalr/issues
-* Date/Publication: 2019-10-04 22:00:02 UTC
-* Number of recursive dependencies: 119
-
-Run `revdep_details(,"portalr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      14: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
-      15: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      16: doTryCatch(return(expr), name, parentenv, handler)
-      17: force(expr) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/msg.R:313
-      18: vec_as_index(j, length(x), names(x), arg = "j") at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:283
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 174 | SKIPPED: 10 | WARNINGS: 0 | FAILED: 4 ]
-      1. Error: data generated by default setting is same (shrub_cover) (@test-99-regression.R#115) 
-      2. Error: data generated by default setting is same (ant colony_presence_absence) (@test-99-regression.R#126) 
-      3. Error: data generated by level = 'stake' is same (ant colony_presence_absence) (@test-99-regression.R#144) 
-      4. Error: data generated by level = 'plot' is same (ant colony_presence_absence) (@test-99-regression.R#162) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # projects
@@ -2601,7 +3372,7 @@ Run `revdep_details(,"portalr")` for more info
 * Source code: https://github.com/cran/projects
 * URL: https://www.github.com/NikKrieger/projects
 * Date/Publication: 2019-09-05 16:10:03 UTC
-* Number of recursive dependencies: 94
+* Number of recursive dependencies: 98
 
 Run `revdep_details(,"projects")` for more info
 
@@ -2637,16 +3408,20 @@ Run `revdep_details(,"projects")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             .subclass = c(.subclass, "vctrs_error_incompatible_type")) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:92
-      13: stop_vctrs(message, .subclass = c(.subclass, "vctrs_error_incompatible"), x = x, y = y, details = details, 
-             ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:48
-      14: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      15: signal_abort(cnd)
+    ...
+      [90m 18. [39mprojects:::FUN(X[[i]], ...)
+      [90m 19. [39mprojects:::validate_unique_entry(...) [90mrevdep/checks/projects/new/projects.Rcheck/00_pkg_src/projects/R/class-projects_author.R:115:2[39m
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      [31m──[39m [31m4. Error: Setup works (@test-setup.R#183) [39m [31m──────────────────────────────────────[39m
+      No common type for `current_owner` <projects_author> and `current_owner` <projects_author>.
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_identical(...)
+      [90m 10. [39mvctrs:::vec_ptype2.default(x = x, y = y, x_arg = x_arg, y_arg = y_arg)
+      [90m 11. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 12. [39mvctrs:::stop_incompatible(...)
+      [90m 13. [39mvctrs:::stop_vctrs(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 14 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: Setup works (@test-setup.R#129) 
       2. Failure: Setup works (@test-setup.R#147) 
@@ -2665,6 +3440,115 @@ Run `revdep_details(,"projects")` for more info
       All declared Imports should be used.
     ```
 
+# psychmeta
+
+<details>
+
+* Version: 2.3.4
+* Source code: https://github.com/cran/psychmeta
+* BugReports: https://github.com/psychmeta/psychmeta/issues
+* Date/Publication: 2019-12-19 17:20:02 UTC
+* Number of recursive dependencies: 80
+
+Run `revdep_details(,"psychmeta")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    +               rxxi = c(.8, .7), n_rxxi = c(50, 150),
+    +               ux = c(.9, .8), ni_ux = c(50, 150))
+    Taylor-Series Artifact Distributions
+    ------------------------------------
+              mean   var var_res
+    qxa_irr  0.905 0.001   0.001
+    qxa_drr  0.905 0.001   0.001
+    qxi_irr  0.856 0.002   0.001
+    qxi_drr  0.856 0.002   0.001
+    rxxa_irr 0.819 0.003   0.002
+    rxxa_drr 0.819 0.003   0.002
+    rxxi_irr 0.734 0.006   0.004
+    rxxi_drr 0.734 0.006   0.004
+    ux       0.825 0.004   0.000
+    ut       0.781 0.005   0.000
+    
+    > 
+    > create_ad(ad_type = "int", rxxa = c(.9, .8), n_rxxa = c(50, 150),
+    +               rxxi = c(.8, .7), n_rxxi = c(50, 150),
+    +               ux = c(.9, .8), ni_ux = c(50, 150))
+    Error: All columns in a tibble must be vectors:
+    ```
+
+# rbin
+
+<details>
+
+* Version: 0.1.1
+* Source code: https://github.com/cran/rbin
+* URL: https://github.com/rsquaredacademy/rbin, https://rbin.rsquaredacademy.com
+* BugReports: https://github.com/rsquaredacademy/rbin/issues
+* Date/Publication: 2019-01-04 11:20:04 UTC
+* Number of recursive dependencies: 133
+
+Run `revdep_details(,"rbin")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘rbin-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: rbin_create
+    > ### Title: Create dummy variables
+    > ### Aliases: rbin_create
+    > 
+    > ### ** Examples
+    > 
+    > k <- rbin_manual(mbank, y, age, c(29, 39, 56))
+    > rbin_create(mbank, age, k)
+    New names:
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      Predictor            education 
+      Levels               4 
+      Count                4521 
+      Goods                517 
+      Bads                 4004 
+      Entropy              0.51 
+      Information Value    0.05 
+      
+      
+      # A tibble: 4 x 7
+        level     bin_count  good   bad    woe      iv entropy
+        <fct>         <int> <int> <int>  <dbl>   <dbl>   <dbl>
+      1 tertiary       1299   195  1104 -0.313 0.0318    0.610
+      2 secondary      2352   231  2121  0.170 0.0141    0.463
+      3 unknown         179    25   154 -0.229 0.00227   0.583
+      4 primary         691    66   625  0.201 0.00572   0.455══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 10 | SKIPPED: 5 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: output from rbin_create is as expected as expected (@test-bins.R#30) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘utils’
+      All declared Imports should be used.
+    ```
+
 # readwritesqlite
 
 <details>
@@ -2674,7 +3558,7 @@ Run `revdep_details(,"projects")` for more info
 * URL: https://github.com/poissonconsulting/readwritesqlite
 * BugReports: https://github.com/poissonconsulting/readwritesqlite/issues
 * Date/Publication: 2019-07-23 16:50:02 UTC
-* Number of recursive dependencies: 63
+* Number of recursive dependencies: 71
 
 Run `revdep_details(,"readwritesqlite")` for more info
 
@@ -2684,9 +3568,13 @@ Run `revdep_details(,"readwritesqlite")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > 
+      > test_check("readwritesqlite")
+      [31m──[39m [31m1. Failure: initialized even with no rows of data (@test-write.R#592) [39m [31m──────────[39m
+      `remote` not identical to `local`.
+      Component "geometry": Attributes: < Names: 3 string mismatches >
+      Component "geometry": Attributes: < Length mismatch: comparison on first 5 components >
       Component "geometry": Attributes: < Component "bbox": Attributes: < Length mismatch: comparison on first 1 components > >
       Component "geometry": Attributes: < Component "bbox": 'is.NA' value mismatch: 0 in current 4 in target >
       Component "geometry": Attributes: < Component "class": 1 string mismatch >
@@ -2696,74 +3584,9 @@ Run `revdep_details(,"readwritesqlite")` for more info
       Component "geometry": Attributes: < Component 3: Attributes: < target is NULL, current is list > >
       ...
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 443 | SKIPPED: 0 | WARNINGS: 27 | FAILED: 1 ]
       1. Failure: initialized even with no rows of data (@test-write.R#592) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# recipes
-
-<details>
-
-* Version: 0.1.7
-* Source code: https://github.com/cran/recipes
-* URL: https://github.com/tidymodels/recipes
-* BugReports: https://github.com/tidymodels/recipes/issues
-* Date/Publication: 2019-09-15 15:10:02 UTC
-* Number of recursive dependencies: 106
-
-Run `revdep_details(,"recipes")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-          Status    Seniority         Home         Time          Age      Marital 
-    0.0000000000 0.0000000000 0.0013471037 0.0000000000 0.0000000000 0.0002245173 
-         Records          Job     Expenses       Income       Assets         Debt 
-    0.0000000000 0.0004490346 0.0000000000 0.0855410867 0.0105523125 0.0040413112 
-          Amount        Price 
-    0.0000000000 0.0000000000 
-    > 
-    > set.seed(342)
-    > in_training <- sample(1:nrow(credit_data), 2000)
-    > 
-    > credit_tr <- credit_data[ in_training, ]
-    > credit_te <- credit_data[-in_training, ]
-    > missing_examples <- c(14, 394, 565)
-    > 
-    > rec <- recipe(Price ~ ., data = credit_tr)
-    > 
-    > impute_rec <- rec %>%
-    +   step_bagimpute(Status, Home, Marital, Job, Income, Assets, Debt)
-    > 
-    > imp_models <- prep(impute_rec, training = credit_tr)
-    Error: Lossy cast from `value` <double> to `x` <integer>.
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 1321 | SKIPPED: 7 | WARNINGS: 30 | FAILED: 24 ]
-      1. Error: detect_step function works (@test_basics.R#73) 
-      2. Error: bake without newdata (@test_basics.R#117) 
-      3. Error: no outcomes (@test_basics.R#127) 
-      4. Failure: correct means and std devs (@test_center_scale_norm.R#29) 
-      5. Failure: correct means and std devs (@test_center_scale_norm.R#43) 
-      6. Failure: correct means and std devs (@test_center_scale_norm.R#49) 
-      7. Error: (unknown) (@test_data.frame.R#20) 
-      8. Error: is trained? (@test_formula.R#22) 
-      9. Error: (unknown) (@test_matrix.R#20) 
-      1. ...
       
       Error: testthat unit tests failed
       Execution halted
@@ -2778,7 +3601,7 @@ Run `revdep_details(,"recipes")` for more info
 * URL: https://github.com/OuhscBbmc/REDCapR, http://ouhsc.edu/bbmc/, http://project-redcap.org
 * BugReports: https://github.com/OuhscBbmc/REDCapR/issues
 * Date/Publication: 2019-09-23 04:30:02 UTC
-* Number of recursive dependencies: 115
+* Number of recursive dependencies: 116
 
 Run `revdep_details(,"REDCapR")` for more info
 
@@ -2790,17 +3613,17 @@ Run `revdep_details(,"REDCapR")` for more info
     ```
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
+    Complete output:
       > # Modeled after the R6 testing structure: https://github.com/wch/R6/blob/master/tests/testthat.R
       > library(testthat)
       > library(REDCapR)
       > 
       > testthat::test_check("REDCapR")
-      [31m──[39m [31m1. Failure: validate_no_logical -concern dataset (@test-validate.R#36) [39m [31m─────────────[39m
+      [31m──[39m [31m1. Failure: validate_no_logical -concern dataset (@test-validate.R#36) [39m [31m─────────[39m
       ds$field_index not equal to 2.
       names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 135 | SKIPPED: 79 | WARNINGS: 0 | FAILED: 1 ]
       1. Failure: validate_no_logical -concern dataset (@test-validate.R#36) 
       
@@ -2817,7 +3640,7 @@ Run `revdep_details(,"REDCapR")` for more info
 * URL: https://github.com/r-lib/rematch2#readme
 * BugReports: https://github.com/r-lib/rematch2/issues
 * Date/Publication: 2019-07-11 17:32:41 UTC
-* Number of recursive dependencies: 32
+* Number of recursive dependencies: 41
 
 Run `revdep_details(,"rematch2")` for more info
 
@@ -2828,11 +3651,12 @@ Run `revdep_details(,"rematch2")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    > # Match first occurrence
     > pos <- re_exec(notables, name_rex)
     > pos
     Error: Expected a vector, not a `rematch_records` object
-    Backtrace:
+    [1m<error/vctrs_error_scalar_type>[22m
+    Expected a vector, not a `rematch_records` object
+    [1mBacktrace:[22m
     [90m     [39m█
     [90m  1. [39m├─(function (x, ...) ...
     [90m  2. [39m├─tibble:::print.tbl(x)
@@ -2846,22 +3670,25 @@ Run `revdep_details(,"rematch2")` for more info
     [90m 10. [39m│     ├─utils::head(x, n)
     [90m 11. [39m│     └─utils:::head.data.frame(x, n)
     [90m 12. [39m│       ├─x[seq_len(n), , drop = FALSE]
-    [90m 13. [39m│       └─tibble:::`[.tbl_df`(x, seq_len(n), , drop = FALSE)
-    [90m 14. [39m│      
+    [90m 
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m 8. [39mvctrs:::stop_scalar_type(...)
+      [90m 9. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      [31m──[39m [31m5. Failure: scalar text with capure groups (@test-exec-all.R#92) [39m [31m───────────────────[39m
+      [31m──[39m [31m4. Failure: capture groups (@test-exec-all.R#71) [39m [31m───────────────────────────────[39m
       as.data.frame(res) not equal to asdf(...).
       Names: 1 string mismatch
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      [31m──[39m [31m5. Failure: scalar text with capure groups (@test-exec-all.R#92) [39m [31m───────────────[39m
+      as.data.frame(res) not equal to asdf(...).
+      Names: 1 string mismatch
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 65 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 5 ]
       1. Failure: capture groups (@test-all.R#40) 
       2. Failure: scalar text with capure groups (@test-all.R#55) 
@@ -2873,6 +3700,99 @@ Run `revdep_details(,"rematch2")` for more info
       Execution halted
     ```
 
+# rgbif
+
+<details>
+
+* Version: 1.4.0
+* Source code: https://github.com/cran/rgbif
+* URL: https://github.com/ropensci/rgbif (devel), https://docs.ropensci.org/rgbif (documentation), https://ropenscilabs.github.io/occurrence-manual/ (user manual)
+* BugReports: https://github.com/ropensci/rgbif/issues
+* Date/Publication: 2019-10-30 13:20:02 UTC
+* Number of recursive dependencies: 90
+
+Run `revdep_details(,"rgbif")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      Must pass an argument to `as_tibble()`.
+      [1mBacktrace:[22m
+      [90m 1. [39mrgbif::name_usage(key = 5231190, data = "name")
+      [90m 2. [39mrgbif:::get_meta_nu(out) [90mrevdep/checks/rgbif/new/rgbif.Rcheck/00_pkg_src/rgbif/R/name_usage.r:159:6[39m
+      [90m 4. [39mtibble:::as_tibble.NULL()
+      
+      [31m──[39m [31m3. Error: name_usage parents route works (@test-name_usage.r#94) [39m [31m───────────────[39m
+      Must pass an argument to `as_tibble()`.
+      [1mBacktrace:[22m
+      [90m 1. [39mrgbif::name_usage(key = 5231190, data = "parents")
+      [90m 2. [39mrgbif:::get_meta_nu(out) [90mrevdep/checks/rgbif/new/rgbif.Rcheck/00_pkg_src/rgbif/R/name_usage.r:159:6[39m
+      [90m 4. [39mtibble:::as_tibble.NULL()
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 816 | SKIPPED: 32 | WARNINGS: 0 | FAILED: 3 ]
+      1. Error: name_usage works (@test-name_usage.r#42) 
+      2. Error: name_usage name route works (@test-name_usage.r#81) 
+      3. Error: name_usage parents route works (@test-name_usage.r#94) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# rmapzen
+
+<details>
+
+* Version: 0.4.2
+* Source code: https://github.com/cran/rmapzen
+* URL: https://tarakc02.github.io/rmapzen/
+* BugReports: https://github.com/tarakc02/rmapzen/issues
+* Date/Publication: 2019-08-19 21:10:06 UTC
+* Number of recursive dependencies: 82
+
+Run `revdep_details(,"rmapzen")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [31m──[39m [31m4. Error: mz_bbox works for sf and sp objects (@test-mz-bbox.R#59) [39m [31m─────────────[39m
+      all attributes must have names [3 does not]
+      [1mBacktrace:[22m
+      [90m 1. [39mrmapzen::as_sf(oakland_public)
+      [90m 2. [39mrmapzen:::as_sf.geo_list(oakland_public) [90mrevdep/checks/rmapzen/new/rmapzen.Rcheck/00_pkg_src/rmapzen/R/as-sf.R:11:9[39m
+      [90m 3. [39msf::read_sf(as_json(geo), stringsAsFactors = FALSE) [90mrevdep/checks/rmapzen/new/rmapzen.Rcheck/00_pkg_src/rmapzen/R/as-sf.R:18:4[39m
+      [90m 5. [39msf:::st_read.default(...)
+      [90m 6. [39msf:::st_read.character(dsn, layer, ...)
+      [90m 7. [39msf:::process_cpl_read_ogr(...)
+      [90m 8. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 9. [39mbase::structure(x, ...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 197 | SKIPPED: 2 | WARNINGS: 0 | FAILED: 4 ]
+      1. Error: as_sf converts search results to sf (@test-as-sf.R#4) 
+      2. Error: as_sf converts isochrone results to sf (@test-as-sf.R#9) 
+      3. Error: as_sf converts vector tile layers to sf (@test-as-sf.R#17) 
+      4. Error: mz_bbox works for sf and sp objects (@test-mz-bbox.R#59) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 31 marked UTF-8 strings
+    ```
+
 # RmarineHeatWaves
 
 <details>
@@ -2881,7 +3801,7 @@ Run `revdep_details(,"rematch2")` for more info
 * Source code: https://github.com/cran/RmarineHeatWaves
 * URL: https://github.com/ajsmit/RmarineHeatWaves
 * Date/Publication: 2018-06-04 17:43:40 UTC
-* Number of recursive dependencies: 60
+* Number of recursive dependencies: 61
 
 Run `revdep_details(,"RmarineHeatWaves")` for more info
 
@@ -2892,14 +3812,15 @@ Run `revdep_details(,"RmarineHeatWaves")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    > ### ** Examples
-    > 
     > ts_dat <- make_whole(sst_WA)
     > res <- detect(ts_dat, climatology_start = "1983-01-01",
     +               climatology_end = "2012-12-31")
     Error: Can't cast <double[,31]> to <double>.
     Can not decrease dimensions
-    Backtrace:
+    [1m<error/vctrs_error_incompatible_cast>[22m
+    Can't cast <double[,31]> to <double>.
+    Can not decrease dimensions
+    [1mBacktrace:[22m
     [90m     [39m█
     [90m  1. [39m├─RmarineHeatWaves::detect(...)
     [90m  2. [39m│ ├─base::`[<-`(...) [90m00_pkg_src/RmarineHeatWaves/R/RmarineHeatWaves.R:265:4[39m
@@ -2910,8 +3831,7 @@ Run `revdep_details(,"RmarineHeatWaves")` for more info
     [90m  7. [39m├─vctrs:::vec_cast_dispatch(x = x, to = to, x_arg = x_arg, to_arg = to_arg)
     [90m  8. [39m├─vctrs::vec_cast.double(x = x, to = to, x_arg = x_arg, to_arg = to_arg)
     [90m  9. [39m└─vctrs:::vec_cast.double.double(...)
-    [90m 10. [39m  └─vctrs:::shape_broadcast(x, to)
-    [90m 11. [39m    └─vctrs::stop_incompatible_cast(x, to, details = "Can not decrease dimensions")
+    [90m 10. [39m  └─vctrs:::shap
     Execution halted
     ```
 
@@ -2924,7 +3844,7 @@ Run `revdep_details(,"RmarineHeatWaves")` for more info
 * URL: https://tidymodels.github.io/rsample
 * BugReports: https://github.com/tidymodels/rsample/issues
 * Date/Publication: 2019-07-12 22:20:11 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 90
 
 Run `revdep_details(,"rsample")` for more info
 
@@ -2934,17 +3854,21 @@ Run `revdep_details(,"rsample")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check(package = "rsample")
+      [31m──[39m [31m1. Failure: Bootstrap estimate of mean is close to estimate of mean from normal d[39m
+      ttest$estimate not equal to single_pct_res$.estimate.
+      names for target but not for current
+      
+      [31m──[39m [31m2. Failure: Bootstrap estimate of mean is close to estimate of mean from normal d[39m
       ttest$estimate not equal to single_t_res$.estimate.
       names for target but not for current
       
-      [31m──[39m [31m3. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distr[39m
+      [31m──[39m [31m3. Failure: Bootstrap estimate of mean is close to estimate of mean from normal d[39m
       ttest$estimate not equal to single_bca_res$.estimate.
       names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 529 | SKIPPED: 0 | WARNINGS: 13 | FAILED: 3 ]
       1. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#53) 
       2. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#63) 
@@ -2962,7 +3886,7 @@ Run `revdep_details(,"rsample")` for more info
 * Source code: https://github.com/cran/RSDA
 * URL: http://www.oldemarrodriguez.com
 * Date/Publication: 2019-10-22 05:30:02 UTC
-* Number of recursive dependencies: 115
+* Number of recursive dependencies: 127
 
 Run `revdep_details(,"RSDA")` for more info
 
@@ -2990,6 +3914,32 @@ Run `revdep_details(,"RSDA")` for more info
     Execution halted
     ```
 
+*   checking tests ...
+    ```
+    ...
+      Attaching package: 'RSDA'
+      
+      The following objects are masked from 'package:stats':
+      
+          cor, sd, var
+      
+      > 
+      > test_check("RSDA")
+      [31m──[39m [31m1. Failure: multiplication works (@test-read_sym_table.R#9) [39m [31m────────────────────[39m
+      is.sym.modal(sym.table$F3) isn't true.
+      
+      [31m──[39m [31m2. Failure: multiplication works (@test-read_sym_table.R#11) [39m [31m───────────────────[39m
+      is.sym.set(sym.table$F5) isn't true.
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 24 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
+      1. Failure: multiplication works (@test-read_sym_table.R#9) 
+      2. Failure: multiplication works (@test-read_sym_table.R#11) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # rubias
 
 <details>
@@ -2997,7 +3947,7 @@ Run `revdep_details(,"RSDA")` for more info
 * Version: 0.3.0
 * Source code: https://github.com/cran/rubias
 * Date/Publication: 2019-06-10 15:00:03 UTC
-* Number of recursive dependencies: 61
+* Number of recursive dependencies: 62
 
 Run `revdep_details(,"rubias")` for more info
 
@@ -3008,6 +3958,7 @@ Run `revdep_details(,"rubias")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    > ### Title: Write a mixture data frame to gsi_sim format baseline and
     > ###   repunits file
     > ### Aliases: write_gsi_sim_mixture
     > 
@@ -3019,15 +3970,14 @@ Run `revdep_details(,"rubias")` for more info
     > 
     > # print that
     > prefix
-    [1] "/tmp/RtmpPR2BHc/mixfile"
+    [1] "/tmp/RtmpRc45cC/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
     > 
     > # run the function
     > write_gsi_sim_mixture(chinook_mix, 5, prefix)
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 186 whereas the index has size 419616.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -3035,9 +3985,9 @@ Run `revdep_details(,"rubias")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.8Mb
+      installed size is 10.4Mb
       sub-directories of 1Mb or more:
-        libs   4.9Mb
+        libs   8.5Mb
     ```
 
 *   checking for GNU extensions in Makefiles ... NOTE
@@ -3054,7 +4004,7 @@ Run `revdep_details(,"rubias")` for more info
 * URL: https://echasnovski.github.io/ruler/, https://github.com/echasnovski/ruler
 * BugReports: https://github.com/echasnovski/ruler/issues
 * Date/Publication: 2019-05-16 19:30:03 UTC
-* Number of recursive dependencies: 51
+* Number of recursive dependencies: 60
 
 Run `revdep_details(,"ruler")` for more info
 
@@ -3064,17 +4014,21 @@ Run `revdep_details(,"ruler")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      6: vec_size(x) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:525
-      7: stop_scalar_type(.Primitive("quote")(function (x, ...) 
-         UseMethod("mean")), "x") at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/size.R:72
-      8: stop_vctrs(msg, "vctrs_error_scalar_type", actual = x) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:398
-      9: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      10: signal_abort(cnd)
+    ...
+      [90m 8. [39mdplyr:::all.equal.tbl_df(...)
+      [90m 9. [39mdplyr:::equal_data_frame(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      [31m──[39m [31m2. Failure: new_pack_info removes names inside `.packs` (@test-exposure.R#118) [39m [31m─[39m
+      identical(output, input_packs_info) isn't true.
+      
+      [31m──[39m [31m3. Error: is_exposure works (@test-exposure.R#166) [39m [31m─────────────────────────────[39m
+      `x` must be a vector, not a function
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`[[<-`(...)
+      [90m 7. [39mvctrs:::stop_scalar_type(...)
+      [90m 8. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 299 | SKIPPED: 1 | WARNINGS: 2 | FAILED: 3 ]
       1. Error: bind_exposures works (@test-expose-helpers.R#82) 
       2. Failure: new_pack_info removes names inside `.packs` (@test-exposure.R#118) 
@@ -3091,7 +4045,7 @@ Run `revdep_details(,"ruler")` for more info
 * Version: 0.1.0
 * Source code: https://github.com/cran/SanzCircos
 * Date/Publication: 2018-05-04 10:52:54 UTC
-* Number of recursive dependencies: 43
+* Number of recursive dependencies: 44
 
 Run `revdep_details(,"SanzCircos")` for more info
 
@@ -3134,10 +4088,10 @@ Run `revdep_details(,"SanzCircos")` for more info
 
 <details>
 
-* Version: 0.2.0
+* Version: 0.3.0
 * Source code: https://github.com/cran/sclr
-* Date/Publication: 2019-10-24 21:30:02 UTC
-* Number of recursive dependencies: 48
+* Date/Publication: 2019-11-26 21:40:02 UTC
+* Number of recursive dependencies: 57
 
 Run `revdep_details(,"sclr")` for more info
 
@@ -3147,18 +4101,22 @@ Run `revdep_details(,"sclr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check("sclr")
+      [31m──[39m [31m1. Failure: protective titre is found correctly (@test-protection.R#12) [39m [31m────────[39m
+      predict(fit, prot50_point)$prot_point not equal to 0.5.
+      names for target but not for current
+      
+      [31m──[39m [31m2. Failure: protective titre is found correctly (@test-protection.R#14) [39m [31m────────[39m
       predict(fit, prot50_low)$prot_l not equal to 0.5.
       names for target but not for current
       
-      [31m──[39m [31m3. Failure: protective titre is found correctly (@test-protection.R#16) [39m [31m────────────[39m
+      [31m──[39m [31m3. Failure: protective titre is found correctly (@test-protection.R#16) [39m [31m────────[39m
       predict(fit, prot50_high)$prot_u not equal to 0.5.
       names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 63 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 84 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
       1. Failure: protective titre is found correctly (@test-protection.R#12) 
       2. Failure: protective titre is found correctly (@test-protection.R#14) 
       3. Failure: protective titre is found correctly (@test-protection.R#16) 
@@ -3186,53 +4144,45 @@ Run `revdep_details(,"sf")` for more info
 
 *   checking examples ... ERROR
     ```
-    ...
-    2      10   542     3      12    (0,0.1] MULTIPOLYGON (((-81.23989 3...
-    > nc$area_cl = cut(nc$AREA, c(0, .1, .12, .15, .25))
-    > nc.g <- nc %>% group_by(area_cl)
-    > nc.g %>% summarise(mean(AREA))
-    Simple feature collection with 4 features and 2 fields
-    geometry type:  MULTIPOLYGON
-    dimension:      XY
-    bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-    epsg (SRID):    4267
-    proj4string:    +proj=longlat +datum=NAD27 +no_defs
-    [38;5;246m# A tibble: 4 x 3[39m
-      area_cl    `mean(AREA)`                                               geometry
-      [3m[38;5;246m<fct>[39m[23m             [3m[38;5;246m<dbl>[39m[23m                                     [3m[38;5;246m<MULTIPOLYGON [°]>[39m[23m
-    [38;5;250m1[39m (0,0.1]          0.076[4m0[24m (((-77.96073 34.18924, -77.96587 34.24229, -77.97528 …
-    [38;5;250m2[39m (0.1,0.12]       0.112  (((-84.29104 35.21054, -84.22594 35.2616, -84.17973 3…
-    [38;5;250m3[39m (0.12,0.1…       0.134  (((-76.54427 34.58783, -76.55515 34.61066, -76.53775 …
-    [38;5;250m4[39m (0.15,0.2…       0.190  (((-76.64705 34.90633, -76.62562 34.89065, -76.75021 …
-    > nc.g %>% summarise(mean(AREA)) %>% plot(col = grey(3:6 / 7))
-    Error in is_null(i) : argument "i" is missing, with no default
-    Calls: %>% ... [ -> [.sf -> [ -> [.tbl_df -> tbl_subset_row -> is_null
+    Running examples in ‘sf-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: st_jitter
+    > ### Title: jitter geometries
+    > ### Aliases: st_jitter
+    > 
+    > ### ** Examples
+    > 
+    > nc = read_sf(system.file("gpkg/nc.gpkg", package="sf"))
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: read_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
     Execution halted
     ```
 
 *   checking tests ...
     ```
     ...
-    < MULTIPOINT (505.9977 -7.081155e-10, 1517.993 -7...
-    ---
-    > MULTIPOINT (505.9977 0, 1517.993 0, 2529.988 0,...
-     ERROR
-    Running the tests in ‘tests/dplyr.R’ failed.
-    Last 13 lines of output:
+      bbox:           xmin: 0.1707107 ymin: 0.1707107 xmax: 0.8292893 ymax: 0.8292893
+      epsg (SRID):    NA
+      proj4string:    NA
+      LINESTRING (0.1707107 0.1707107, 0.8292893 0.82...
+      > (ls = try(st_nearest_points(st_sfc(b1), st_sfc(b2), pairwise = TRUE))) # sfc
+      Geometry set for 1 feature 
+      geometry type:  LINESTRING
       dimension:      XY
-      bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-      epsg (SRID):    4267
-      proj4string:    +proj=longlat +datum=NAD27 +no_defs
-      [38;5;246m# A tibble: 4 x 3[39m
-        area_cl    `mean(AREA)`                                               geometry
-        [3m[38;5;246m<fct>[39m[23m             [3m[38;5;246m<dbl>[39m[23m                                     [3m[38;5;246m<MULTIPOLYGON [°]>[39m[23m
-      [38;5;250m1[39m (0,0.1]          0.076[4m0[24m (((-77.96073 34.18924, -77.96587 34.24229, -77.97528 …
-      [38;5;250m2[39m (0.1,0.12]       0.112  (((-84.29104 35.21054, -84.22594 35.2616, -84.17973 3…
-      [38;5;250m3[39m (0.12,0.1…       0.134  (((-76.54427 34.58783, -76.55515 34.61066, -76.53775 …
-      [38;5;250m4[39m (0.15,0.2…       0.190  (((-76.64705 34.90633, -76.62562 34.89065, -76.75021 …
-      > nc.g %>% summarize(mean(AREA)) %>% plot(col = 3:6/7)
-      Error in is_null(i) : argument "i" is missing, with no default
-      Calls: %>% ... [ -> [.sf -> [ -> [.tbl_df -> tbl_subset_row -> is_null
+      bbox:           xmin: 0.1707107 ymin: 0.1707107 xmax: 0.8292893 ymax: 0.8292893
+      epsg (SRID):    NA
+      proj4string:    NA
+      LINESTRING (0.1707107 0.1707107, 0.8292893 0.82...
+      > identical(ls0, ls)
+      [1] TRUE
+      > # plot(ls, add = TRUE, col = 'red')
+      > 
+      > nc = read_sf(system.file("gpkg/nc.gpkg", package="sf"))
+      Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+        all attributes must have names [3 does not]
+      Calls: read_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
       Execution halted
     ```
 
@@ -3240,10 +4190,11 @@ Run `revdep_details(,"sf")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 25.7Mb
+      installed size is 31.0Mb
       sub-directories of 1Mb or more:
+        R        1.1Mb
         doc     12.0Mb
-        libs     9.3Mb
+        libs    14.3Mb
         sqlite   1.5Mb
     ```
 
@@ -3256,7 +4207,7 @@ Run `revdep_details(,"sf")` for more info
 * URL: https://github.com/hypertidy/sfdct
 * BugReports: https://github.com/hypertidy/sfdct/issues
 * Date/Publication: 2018-03-23 14:35:45 UTC
-* Number of recursive dependencies: 61
+* Number of recursive dependencies: 70
 
 Run `revdep_details(,"sfdct")` for more info
 
@@ -3279,12 +4230,38 @@ Run `revdep_details(,"sfdct")` for more info
     > ### ** Examples
     > 
     > library(sf)
-    Linking to GEOS 3.5.1, GDAL 2.1.2, PROJ 4.9.3
+    Linking to GEOS 3.7.1, GDAL 2.4.0, PROJ 5.2.0
     > nc <- read_sf(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
-    > nc_triangles <- ct_triangulate(nc[, c("NAME", "geometry")])
-    Error in is_null(i) : argument "i" is missing, with no default
-    Calls: ct_triangulate ... [ -> [.sf -> [ -> [.tbl_df -> tbl_subset_row -> is_null
+    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
+      all attributes must have names [3 does not]
+    Calls: read_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
     Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(sfdct)
+      > 
+      > test_check("sfdct")
+      [31m──[39m [31m1. Error: (unknown) (@test-basic-ct.R#4) [39m [31m───────────────────────────────────────[39m
+      all attributes must have names [3 does not]
+      [1mBacktrace:[22m
+      [90m 1. [39msf::read_sf(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
+      [90m 3. [39msf:::st_read.character(...)
+      [90m 4. [39msf:::process_cpl_read_ogr(...)
+      [90m 5. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 6. [39mbase::structure(x, ...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 19 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: (unknown) (@test-basic-ct.R#4) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # silicate
@@ -3294,7 +4271,7 @@ Run `revdep_details(,"sfdct")` for more info
 * Version: 0.2.0
 * Source code: https://github.com/cran/silicate
 * Date/Publication: 2019-10-09 11:30:02 UTC
-* Number of recursive dependencies: 137
+* Number of recursive dependencies: 138
 
 Run `revdep_details(,"silicate")` for more info
 
@@ -3302,23 +4279,43 @@ Run `revdep_details(,"silicate")` for more info
 
 ## Newly broken
 
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘silicate-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: TRI0
+    > ### Title: TRI0 model, structural triangulations
+    > ### Aliases: TRI0 TRI0.default TRI0.TRI TRI0.PATH0 TRI0.PATH
+    > 
+    > ### ** Examples
+    > 
+    > tri <- TRI0(minimal_mesh)
+    Error: Argument 5 must be length 12, not 2
+    Execution halted
+    ```
+
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-         0.5, 0.5, 0.3, 0.2, 0.2, 0.2, 0.2, 0.4, 0.6, 0.4, 0.2), .Dim = c(6L, 2L)))), class = c("XY", 
-         "MULTIPOLYGON", "sfg")), structure(list(`1` = list(`1` = structure(c(0.69, 0.8, 1.1, 1.23, 
-         0.69, 0, 0.6, 0.63, 0.3, 0), .Dim = c(5L, 2L)))), class = c("XY", "MULTIPOLYGON", "sfg"))), precision = 0, bbox = c(xmin = 0, 
-         ymin = 0, xmax = 1.23, ymax = 1), crs = structure(list(epsg = NA_integer_, proj4string = NA_character_), class = "crs"), n_empty = 0, class = c("sfc_MULTIPOLYGON", 
-         "sfc"))), "x") at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/size.R:72
-      13: stop_vctrs(msg, "vctrs_error_scalar_type", actual = x) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:398
-      14: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      15: signal_abort(cnd)
+    ...
+        1. testthat::expect_output(print(TRI0(minimal_mesh)))
+       12. silicate:::TRI0.default(minimal_mesh) revdep/checks/silicate/new/silicate.Rcheck/00_pkg_src/silicate/R/TRI0-model.R:17:2
+       14. silicate:::TRI0.PATH0(PATH0(x), ...) revdep/checks/silicate/new/silicate.Rcheck/00_pkg_src/silicate/R/TRI0-model.R:17:2
+       15. silicate:::triangulate_00(x) revdep/checks/silicate/new/silicate.Rcheck/00_pkg_src/silicate/R/TRI0-model.R:47:2
+       16. dplyr::bind_rows(trilist) revdep/checks/silicate/new/silicate.Rcheck/00_pkg_src/silicate/R/TRI0-model.R:97:2
+       17. dplyr:::bind_rows_(x, .id)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 93 | SKIPPED: 7 | WARNINGS: 1 | FAILED: 1 ]
-      1. Error: building sf works (@test-spatial-build.R#6) 
+      [31m──[39m [31m2. Error: building sf works (@test-spatial-build.R#6) [39m [31m──────────────────────────[39m
+      `x` must be a vector, not a `sfc_MULTIPOLYGON/sfc` object
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_s3_class(build_sf(PATH(minimal_mesh)), "sf")
+      [90m 12. [39mvctrs:::stop_scalar_type(...)
+      [90m 13. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 92 | SKIPPED: 7 | WARNINGS: 1 | FAILED: 2 ]
+      1. Error: print works (@test-print.R#11) 
+      2. Error: building sf works (@test-spatial-build.R#6) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -3341,7 +4338,7 @@ Run `revdep_details(,"silicate")` for more info
 * URL: https://simulatr.github.io/simrel/
 * BugReports: https://github.com/simulatr/simrel/issues
 * Date/Publication: 2019-04-01 18:00:09 UTC
-* Number of recursive dependencies: 89
+* Number of recursive dependencies: 98
 
 Run `revdep_details(,"simrel")` for more info
 
@@ -3351,19 +4348,23 @@ Run `revdep_details(,"simrel")` for more info
 
 *   checking tests ...
     ```
+    ...
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > library(testthat)
+      > library(simrel)
+      > 
+      > test_check("simrel")
+      [31m──[39m [31m1. Error: Prepare Design (@test-utils.R#44) [39m [31m────────────────────────────────────[39m
       Can't join on 'q' x 'q' because of incompatible types (list / list)
-      1: expect_identical(prepare_design(opts), dgn) at testthat/test-utils.R:44
-      2: compare(act$val, exp$val)
-      3: compare.default(act$val, exp$val)
-      4: all.equal(x, y, ...)
-      5: all.equal.tbl_df(x, y, ...)
-      6: equal_data_frame(target, current, ignore_col_order = ignore_col_order, ignore_row_order = ignore_row_order, 
-             convert = convert)
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_identical(prepare_design(opts), dgn)
+      [90m 3. [39mtestthat:::compare.default(act$val, exp$val)
+      [90m 5. [39mdplyr:::all.equal.tbl_df(x, y, ...)
+      [90m 6. [39mdplyr:::equal_data_frame(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 169 | SKIPPED: 21 | WARNINGS: 3 | FAILED: 1 ]
       1. Error: Prepare Design (@test-utils.R#44) 
       
@@ -3375,12 +4376,12 @@ Run `revdep_details(,"simrel")` for more info
 
 <details>
 
-* Version: 1.0.7
+* Version: 2.0.2
 * Source code: https://github.com/cran/skimr
-* URL: https://github.com/ropenscilabs/skimr
-* BugReports: https://github.com/ropenscilabs/skimr/issues
-* Date/Publication: 2019-06-20 15:10:03 UTC
-* Number of recursive dependencies: 54
+* URL: https://docs.ropensci.org/skimr (website), https://github.com/ropensci/skimr
+* BugReports: https://github.com/ropensci/skimr/issues
+* Date/Publication: 2019-11-26 14:30:03 UTC
+* Number of recursive dependencies: 71
 
 Run `revdep_details(,"skimr")` for more info
 
@@ -3388,72 +4389,48 @@ Run `revdep_details(,"skimr")` for more info
 
 ## Newly broken
 
-*   checking tests ...
+*   checking examples ... ERROR
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      10: stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/type2.R:63
-      11: stop_incompatible(x, y, x_arg = x_arg, y_arg = y_arg, details = details, ..., message = message, 
-             .subclass = c(.subclass, "vctrs_error_incompatible_type")) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:92
-      12: stop_vctrs(message, .subclass = c(.subclass, "vctrs_error_incompatible"), x = x, y = y, details = details, 
-             ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:48
-      13: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      14: signal_abort(cnd)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 447 | SKIPPED: 2 | WARNINGS: 1 | FAILED: 2 ]
-      1. Error: skim_v returns expected response for logical vectors (@test-skim_v.R#107) 
-      2. Error: skim_v returns expected response for logical vectors (@test-skim_v.R#122) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Running examples in ‘skimr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: focus
+    > ### Title: Only show a subset of summary statistics after skimming
+    > ### Aliases: focus
+    > 
+    > ### ** Examples
+    > 
+    > # Compare
+    > iris %>%
+    +   skim() %>%
+    +   dplyr::select(n_missing)
+    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
     ```
-
-# sociome
-
-<details>
-
-* Version: 1.2.0
-* Source code: https://github.com/cran/sociome
-* BugReports: https://github.com/NikKrieger/sociome/issues
-* Date/Publication: 2019-09-16 15:50:02 UTC
-* Number of recursive dependencies: 96
-
-Run `revdep_details(,"sociome")` for more info
-
-</details>
-
-## Newly broken
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 16 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 12 ]
-      1. Error: call tibble for geoids is correct (@test_arg_tibble_acs.R#61) 
-      2. Error: call tibble for states only is correct (@test_arg_tibble_acs.R#187) 
-      3. Error: call tibble for one state and multiple counties is correct (@test_arg_tibble_acs.R#311) 
-      4. Error: call tibble for geoids is correct (@test_arg_tibble_decennial1990.R#51) 
-      5. Error: call tibble for state only is correct (@test_arg_tibble_decennial1990.R#182) 
-      6. Error: call tibble for one state and multiple counties is correct (@test_arg_tibble_decennial1990.R#309) 
-      7. Error: call tibble for geoids is correct (@test_arg_tibble_decennial2000.R#51) 
-      8. Error: call tibble for state only is correct (@test_arg_tibble_decennial2000.R#182) 
-      9. Error: call tibble for one state and multiple counties is correct (@test_arg_tibble_decennial2000.R#309) 
+    ...
+      [90m  7. [39mfunction_list[[i]](value)
+      [90m  8. [39mskimr::skim(.)
+      [90m  9. [39mtibble::tibble(...) [90mrevdep/checks/skimr/new/skimr.Rcheck/00_pkg_src/skimr/R/skim_with.R:98:4[39m
+      [90m 10. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 11. [39mtibble:::vec_recycle_rows(res, first_size, j, given_col_names[[j]])
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 241 | SKIPPED: 0 | WARNINGS: 130 | FAILED: 249 ]
+      1. Error: (unknown) (@test-dplyr.R#3) 
+      2. Error: You can parition a skim_df (@test-reshape.R#4) 
+      3. Error: Partitioning works in a round trip (@test-reshape.R#42) 
+      4. Error: You can yank a subtable from a skim_df (@test-reshape.R#49) 
+      5. Error: Partition is safe if some skimmers are missing (@test-reshape.R#62) 
+      6. Error: Partition handles new columns (@test-reshape.R#71) 
+      7. Error: focus() matches select(data, skim_type, skim_variable, ...) (@test-reshape.R#86) 
+      8. Error: focus() does not allow dropping skim metadata columns (@test-reshape.R#94) 
+      9. Error: skim_to_wide() returns a deprecation warning (@test-reshape.R#100) 
       1. ...
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Error in setClass("lmList4", representation(call = "call", pool = "logical",  : 
-      could not find function "setClass"
     ```
 
 # spbabel
@@ -3465,7 +4442,7 @@ Run `revdep_details(,"sociome")` for more info
 * URL: https://mdsumner.github.io/spbabel
 * BugReports: https://github.com/mdsumner/spbabel/issues
 * Date/Publication: 2019-01-08 18:10:10 UTC
-* Number of recursive dependencies: 93
+* Number of recursive dependencies: 103
 
 Run `revdep_details(,"spbabel")` for more info
 
@@ -3475,21 +4452,25 @@ Run `revdep_details(,"spbabel")` for more info
 
 *   checking tests ...
     ```
-     ERROR
+    ...
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      3: eval(lhs, parent, parent)
-      4: sptable(nc[, 1:4])
-      5: nc[, 1:4] at /home/rstudio/tibble/revdep/checks/spbabel/new/spbabel.Rcheck/00_pkg_src/spbabel/R/sptable.r:58
-      6: `[.sf`(nc, , 1:4) at /home/rstudio/tibble/revdep/checks/spbabel/new/spbabel.Rcheck/00_pkg_src/spbabel/R/sptable.r:58
-      7: x[i, j, drop = drop]
-      8: `[.tbl_df`(x, i, j, drop = drop)
-      9: tbl_subset_row(xo, i = i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:174
-      10: is_null(i) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/subsetting.R:314
+    Complete output:
+      > library(testthat)
+      > library(spbabel)
+      > 
+      > test_check("spbabel")
+      [31m──[39m [31m1. Error: (unknown) (@test-sf.R#66) [39m [31m────────────────────────────────────────────[39m
+      all attributes must have names [3 does not]
+      [1mBacktrace:[22m
+      [90m 1. [39msf::read_sf(system.file("shape/nc.shp", package = "sf"))
+      [90m 3. [39msf:::st_read.character(...)
+      [90m 4. [39msf:::process_cpl_read_ogr(...)
+      [90m 5. [39mtibble::new_tibble(x, attributes(x), nrow = nrow(x))
+      [90m 6. [39mbase::structure(x, ...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 86 | SKIPPED: 4 | WARNINGS: 5 | FAILED: 1 ]
-      1. Error: recomposition works (@test-sf.R#115) 
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 73 | SKIPPED: 3 | WARNINGS: 3 | FAILED: 1 ]
+      1. Error: (unknown) (@test-sf.R#66) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -3504,7 +4485,7 @@ Run `revdep_details(,"spbabel")` for more info
 * URL: http://gdfe.co/srvyr, https://github.com/gergness/srvyr
 * BugReports: https://github.com/gergness/srvyr/issues
 * Date/Publication: 2019-10-05 21:00:02 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 90
 
 Run `revdep_details(,"srvyr")` for more info
 
@@ -3514,24 +4495,80 @@ Run `revdep_details(,"srvyr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      Incompatible type for column `survey_ratio_low`: x numeric, y matrix
+      Incompatible type for column `survey_ratio_upp`: x numeric, y matrix
+      
+      [31m──[39m [31m2. Failure: deff and df work for grouped survey mean (@expect-equality.R#61) [39m [31m───[39m
+      `x` not equal to `y`.
+      Incompatible type for column `survey_mean_low`: x numeric, y matrix
       Incompatible type for column `survey_mean_upp`: x numeric, y matrix
       
-      [31m──[39m [31m3. Failure: deff and df work for grouped survey total [39m [31m──────────────────────────────[39m
+      [31m──[39m [31m3. Failure: deff and df work for grouped survey total (@expect-equality.R#61) [39m [31m──[39m
       `x` not equal to `y`.
       Incompatible type for column `survey_total_low`: x numeric, y matrix
       Incompatible type for column `survey_total_upp`: x numeric, y matrix
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 201 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
-      1. Failure: deff and df work for grouped survey total 
-      2. Failure: deff and df work for grouped survey mean 
-      3. Failure: deff and df work for grouped survey total 
+      1. Failure: deff and df work for grouped survey total (@expect-equality.R#61) 
+      2. Failure: deff and df work for grouped survey mean (@expect-equality.R#61) 
+      3. Failure: deff and df work for grouped survey total (@expect-equality.R#61) 
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+# stminsights
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/stminsights
+* URL: https://github.com/cschwem2er/stminsights
+* BugReports: https://github.com/cschwem2er/stminsights/issues
+* Date/Publication: 2018-11-24 13:10:03 UTC
+* Number of recursive dependencies: 114
+
+Run `revdep_details(,"stminsights")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    +  coord_flip() + theme_light() + labs(x = 'Treatment', y = 'Topic Proportion')
+    > 
+    > 
+    > # combine estimates for interaction effects
+    > prep_int <- estimateEffect(1:3 ~ treatment * s(pid_rep),
+    +  gadarianFit, gadarian)
+    > 
+    > effects_int <- get_effects(estimates = prep_int,
+    +                           variable = 'pid_rep',
+    +                           type = 'continuous',
+    +                           moderator = 'treatment',
+    +                           modval = 1) %>%
+    +  bind_rows(
+    +    get_effects(estimates = prep_int,
+    +                variable = 'pid_rep',
+    +                type = 'continuous',
+    +                moderator = 'treatment',
+    +                modval = 0)
+    +  )
+    Error: Argument 3 must be length 100, not 2
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘huge’ ‘readr’ ‘scales’ ‘shinyjs’
+      All declared Imports should be used.
     ```
 
 # suddengains
@@ -3543,7 +4580,7 @@ Run `revdep_details(,"srvyr")` for more info
 * URL: https://github.com/milanwiedemann/suddengains
 * BugReports: https://github.com/milanwiedemann/suddengains/issues
 * Date/Publication: 2019-10-27 11:20:02 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 81
 
 Run `revdep_details(,"suddengains")` for more info
 
@@ -3554,6 +4591,7 @@ Run `revdep_details(,"suddengains")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    > ### Title: Create a data set with one gain per person
     > ### Aliases: create_byperson
     > 
     > ### ** Examples
@@ -3572,8 +4610,7 @@ Run `revdep_details(,"suddengains")` for more info
     +                 multiple_sg_select = "largest")
     First, second, and third sudden gains criteria were applied.
     The critical value for the thrid criterion was adjusted for missingness.
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 22 whereas the index has size 946.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -3596,17 +4633,21 @@ Run `revdep_details(,"taxa")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check("taxa")
+      [31m──[39m [31m1. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#5[39m
       test_obj$data$my_data$taxon_id not equal to c("j", "i").
       names for target but not for current
       
-      [31m──[39m [31m3. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#60) [39m 
+      [31m──[39m [31m2. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#5[39m
       test_obj$data$my_data$taxon_id not equal to c("j", "i").
       names for target but not for current
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      [31m──[39m [31m3. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#6[39m
+      test_obj$data$my_data$taxon_id not equal to c("j", "i").
+      names for target but not for current
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 607 | SKIPPED: 2 | WARNINGS: 1 | FAILED: 3 ]
       1. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#52) 
       2. Failure: Taxmap can be intialized from complex data (@test--taxmap_parsers.R#56) 
@@ -3634,7 +4675,7 @@ Run `revdep_details(,"taxa")` for more info
 * URL: https://github.com/tidymodels/textrecipes
 * BugReports: https://github.com/tidymodels/textrecipes/issues
 * Date/Publication: 2019-09-07 11:20:02 UTC
-* Number of recursive dependencies: 88
+* Number of recursive dependencies: 97
 
 Run `revdep_details(,"textrecipes")` for more info
 
@@ -3665,15 +4706,19 @@ Run `revdep_details(,"textrecipes")` for more info
       [3m[38;5;246m<chr>[39m[23m  [3m[38;5;246m<chr>[39m[23m [3m[38;5;246m<chr>[39m[23m     
     [38;5;250m1[39m essay0 [31mNA[39m    stem_8wQnr
     > tidy(okc_obj, number = 2)
-    Error: All columns in a tibble must be 1d or 2d objects:
+    Error: All columns in a tibble must be vectors:
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+    ...
+      [90m  7. [39mtextrecipes:::tidy.step_untokenize(x$steps[[number]], ...)
+      [90m  8. [39mtibble::tibble(terms = x$terms, value = x$sep) [90mrevdep/checks/textrecipes/new/textrecipes.Rcheck/00_pkg_src/textrecipes/R/untokenize.R:147:4[39m
+      [90m  9. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 10. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 11. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 79 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 10 ]
       1.  Error: hashing gives double outputs (@test-hashing.R#31) 
       2.  Error: stemming is done correctly (@test-stem.R#32) 
@@ -3707,7 +4752,7 @@ Run `revdep_details(,"textrecipes")` for more info
 * URL: https://tidyr.tidyverse.org, https://github.com/tidyverse/tidyr
 * BugReports: https://github.com/tidyverse/tidyr/issues
 * Date/Publication: 2019-09-11 23:00:03 UTC
-* Number of recursive dependencies: 53
+* Number of recursive dependencies: 62
 
 Run `revdep_details(,"tidyr")` for more info
 
@@ -3715,49 +4760,27 @@ Run `revdep_details(,"tidyr")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > # Generate all combinations with expand():
-    > formulas <- list(
-    +   formula1 = Sepal.Length ~ Sepal.Width,
-    +   formula2 = Sepal.Length ~ Sepal.Width + Petal.Width,
-    +   formula3 = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length
-    + )
-    > data <- split(iris, iris$Species)
-    > crossing(formula = formulas, data)
-    Error: `x` must be a vector, not a `formula` object
-    Backtrace:
-    [90m    [39m█
-    [90m 1. [39m├─tidyr::crossing(formula = formulas, data)
-    [90m 2. [39m│ └─purrr::map(cols, sorted_unique) [90m00_pkg_src/tidyr/R/expand.R:115:2[39m
-    [90m 3. [39m│   └─tidyr:::.f(.x[[i]], ...)
-    [90m 4. [39m│     └─vctrs::vec_unique(x) [90m00_pkg_src/tidyr/R/expand.R:126:4[39m
-    [90m 5. [39m│       ├─vctrs::vec_slice(x, vec_unique_loc(x))
-    [90m 6. [39m│       └─vctrs::vec_unique_loc(x)
-    [90m 7. [39m└─vctrs:::stop_scalar_type(...)
-    [90m 8. [39m  └─vctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
-    Execution halted
-    ```
-
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      [31m──[39m [31m6. Failure: can drop missing values (@test-pivot-long.R#43) [39m [31m────────────────────────[39m
-      pv$name not equal to c("x", "y").
-      names for target but not for current
+    ...
+      Attributes: < target is NULL, current is list >
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 556 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 6 ]
+      [31m──[39m [31m11. Failure: values_summarize applied even when no-duplicates (@test-pivot-wide.R[39m
+      pv$x not equal to list_of(1L, 2L).
+      Attributes: < target is NULL, current is list >
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 551 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 11 ]
       1. Failure: optionally keep empty rows (@test-chop.R#57) 
       2. Failure: gather throws error for weird objects (@test-gather.R#141) 
       3. Failure: tibble conversion occurs in the `nest.data.frame()` method (@test-nest.R#71) 
-      4. Failure: can control name_repair (@test-pack.R#68) 
-      5. Failure: can pivot all cols to long (@test-pivot-long.R#8) 
-      6. Failure: can drop missing values (@test-pivot-long.R#43) 
+      4. Failure: can nest multiple columns (@test-nest.R#80) 
+      5. Failure: can nest multiple columns (@test-nest.R#81) 
+      6. Failure: can control name_repair (@test-pack.R#68) 
+      7. Failure: can pivot all cols to long (@test-pivot-long.R#8) 
+      8. Failure: can drop missing values (@test-pivot-long.R#43) 
+      9. Failure: duplicated keys produce list column with warning (@test-pivot-wide.R#73) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
@@ -3770,66 +4793,6 @@ Run `revdep_details(,"tidyr")` for more info
       Note: found 24 marked UTF-8 strings
     ```
 
-# tidytransit
-
-<details>
-
-* Version: 0.6
-* Source code: https://github.com/cran/tidytransit
-* URL: https://github.com/r-transit/tidytransit
-* BugReports: https://github.com/r-transit/tidytransit
-* Date/Publication: 2019-10-14 06:50:02 UTC
-* Number of recursive dependencies: 78
-
-Run `revdep_details(,"tidytransit")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘tidytransit-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_stop_geometry
-    > ### Title: Make Stops into Simple Features Points
-    > ### Aliases: get_stop_geometry
-    > 
-    > ### ** Examples
-    > 
-    > data(gtfs_obj)
-    > some_stops <- gtfs_obj$stops[sample(nrow(gtfs_obj$stops), 40),]
-    > some_stops_sf <- get_stop_geometry(some_stops)
-    > plot(some_stops_sf)
-    Warning: plotting the first 10 out of 13 attributes; use max.plot = 13 to plot all
-    Error in is_null(i) : argument "i" is missing, with no default
-    Calls: plot ... [ -> [.sf -> [ -> [.tbl_df -> tbl_subset_row -> is_null
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.3Mb
-      sub-directories of 1Mb or more:
-        doc       1.3Mb
-        extdata   4.4Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘here’ ‘htmltools’ ‘scales’ ‘stringr’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 66 marked UTF-8 strings
-    ```
-
 # timetk
 
 <details>
@@ -3839,7 +4802,7 @@ Run `revdep_details(,"tidytransit")` for more info
 * URL: https://github.com/business-science/timetk
 * BugReports: https://github.com/business-science/timetk/issues
 * Date/Publication: 2019-09-25 13:50:02 UTC
-* Number of recursive dependencies: 109
+* Number of recursive dependencies: 114
 
 Run `revdep_details(,"timetk")` for more info
 
@@ -3854,7 +4817,7 @@ Run `revdep_details(,"timetk")` for more info
     Last 13 lines of output:
       Numeric: lengths (28, 20) differ
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 268 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 8 ]
       1. Failure: tk_make_future_timeseries(date) test returns correct format. (@test_tk_make_future_timeseries.R#62) 
       2. Failure: tk_make_future_timeseries(date) test returns correct format. (@test_tk_make_future_timeseries.R#69) 
@@ -3878,7 +4841,7 @@ Run `revdep_details(,"timetk")` for more info
 * URL: https://github.com/r-quantities/units/
 * BugReports: https://github.com/r-quantities/units/issues/
 * Date/Publication: 2019-10-08 11:40:02 UTC
-* Number of recursive dependencies: 62
+* Number of recursive dependencies: 72
 
 Run `revdep_details(,"units")` for more info
 
@@ -3888,19 +4851,23 @@ Run `revdep_details(,"units")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      All columns in a tibble must be 1d or 2d objects:
+    ...
+        ..$ numerator  : chr "m"
+        ..$ denominator: chr "s"
+        ..- attr(*, "class")= chr "symbolic_units"
+      Mixed units: mg (3), mm (3) 
+      1e+06 [mm], 2e+06 [mm], 3e+06 [mm], 4000 [mg], 5000 [mg], 6000 [mg] 
+      [31m──[39m [31m1. Error: mixed units work (@test_mixed.R#46) [39m [31m──────────────────────────────────[39m
+      All columns in a tibble must be vectors:
       * Column `m` is mixed_units
-      1: print(tibble::tibble(m)) at testthat/test_mixed.R:46
-      2: tibble::tibble(m)
-      3: tibble_quos(xs[!is_null], .rows, .name_repair) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:143
-      4: check_valid_col(res, col_names[[j]], j) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/tibble.R:190
-      5: abort(error_column_must_be_vector(name, classes)) at /tmp/Rtmp1vwEoO/R.INSTALL155cf41d8dc9f/tibble/R/as_tibble.R:171
-      6: signal_abort(cnd)
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::print(tibble::tibble(m))
+      [90m 2. [39mtibble::tibble(m)
+      [90m 3. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 4. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 5. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 416 | SKIPPED: 6 | WARNINGS: 13 | FAILED: 1 ]
       1. Error: mixed units work (@test_mixed.R#46) 
       
@@ -3912,11 +4879,11 @@ Run `revdep_details(,"units")` for more info
 
 <details>
 
-* Version: 0.1.7
+* Version: 0.1.8
 * Source code: https://github.com/cran/utile.tables
 * URL: https://github.com/efinite/utile.tables
 * BugReports: https://github.com/efinite/utile.tables/issues
-* Date/Publication: 2019-10-19 17:20:02 UTC
+* Date/Publication: 2019-12-02 10:20:02 UTC
 * Number of recursive dependencies: 30
 
 Run `revdep_details(,"utile.tables")` for more info
@@ -3928,26 +4895,26 @@ Run `revdep_details(,"utile.tables")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [38;5;250m1[39m Meal calories 181      134 (74%) 1 [1-1]      0.5899
+    
+        filter, lag
+    
+    The following objects are masked from ‘package:base’:
+    
+        intersect, setdiff, setequal, union
+    
     > 
-    > # Build a table row-by-row
+    > data_lung <- lung %>%
+    +   as_tibble() %>%
+    +   mutate_at(vars(inst, status, sex), as.factor) %>%
+    +   mutate(status = case_when(status == 1 ~ 0, status == 2 ~ 1))
+    > 
+    > # Stand-alone row
     > build_event_row(
-    +   label = 'Age, years',
-    +   col = 'age',
-    +   fit = coxph(Surv(time, status) ~ age, data = data_lung)
-    + ) %>%
-    + build_event_row(
-    +   label = 'Sex',
-    +   col = 'sex',
-    +   fit = coxph(Surv(time, status) ~ sex, data = data_lung)
-    + ) %>%
-    + build_event_row(
-    +   label = 'Institution',
-    +   col = 'inst',
-    +   fit = coxph(Surv(time, status) ~ inst, data = data_lung)
+    +    label = 'Meal calories',
+    +    col = 'meal.cal',
+    +    fit = coxph(Surv(time, status) ~ meal.cal, data = data_lung)
     + )
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 5 whereas the index has size 10.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
@@ -3955,11 +4922,11 @@ Run `revdep_details(,"utile.tables")` for more info
 
 <details>
 
-* Version: 0.2.2
+* Version: 0.2.3
 * Source code: https://github.com/cran/utile.tools
 * URL: https://github.com/efinite/utile.tools
 * BugReports: https://github.com/efinite/utile.tools/issues
-* Date/Publication: 2019-10-19 17:30:02 UTC
+* Date/Publication: 2019-12-01 23:00:06 UTC
 * Number of recursive dependencies: 30
 
 Run `revdep_details(,"utile.tools")` for more info
@@ -3971,6 +4938,7 @@ Run `revdep_details(,"utile.tools")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    
     The following objects are masked from ‘package:stats’:
     
         filter, lag
@@ -3989,40 +4957,84 @@ Run `revdep_details(,"utile.tools")` for more info
     > tabulate_model(
     +   fit = coxph(Surv(time, status) ~ sex + meal.cal + inst, data = data_lung)
     +  )
-    Error: Logical indices must have length 1 or be as long as the indexed vector.
-    The vector has size 5 whereas the index has size 105.
+    Error: `i` must have one dimension, not 2.
     Execution halted
     ```
 
-# vctrs
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘rlang’
+      All declared Imports should be used.
+    ```
+
+# wtss
 
 <details>
 
-* Version: 0.2.0
-* Source code: https://github.com/cran/vctrs
-* URL: https://github.com/r-lib/vctrs
-* BugReports: https://github.com/r-lib/vctrs/issues
-* Date/Publication: 2019-07-05 23:00:04 UTC
-* Number of recursive dependencies: 60
+* Version: 2.0.1
+* Source code: https://github.com/cran/wtss
+* URL: https://github.com/e-sensing/wtss/
+* BugReports: https://github.com/e-sensing/wtss/issues
+* Date/Publication: 2019-12-03 17:20:02 UTC
+* Number of recursive dependencies: 94
 
-Run `revdep_details(,"vctrs")` for more info
+Run `revdep_details(,"wtss")` for more info
 
 </details>
 
 ## Newly broken
 
+*   checking examples ... ERROR
+    ```
+    ...
+    +                 longitude = -45.00, latitude  = -12.00,
+    +                 start_date = "2000-02-18", end_date = "2016-12-18")
+    + plot(ts)
+    + }
+    Connected to WTSS server at http://www.esensing.dpi.inpe.br/wtss/
+    Error: No common type for `..1$start_date` <date> and `..2$start_date` <character>.
+    [1m<error/vctrs_error_incompatible_type>[22m
+    No common type for `..1$start_date` <date> and `..2$start_date` <character>.
+    [1mBacktrace:[22m
+    [90m     [39m█
+    [90m  1. [39m├─wtss::time_series(...)
+    [90m  2. [39m│ └─wtss:::.wtss_to_tibble(...) [90m00_pkg_src/wtss/R/wtss_time_series.R:129:4[39m
+    [90m  3. [39m│   └─tibble::add_row(...) [90m00_pkg_src/wtss/R/wtss_tibble.R:73:4[39m
+    [90m  4. [39m│     └─tibble:::rbind_at(.data, df, pos)
+    [90m  5. [39m│       └─vctrs::vec_rbind(old, new)
+    [90m  6. [39m├─vctrs:::vec_type2_dispatch(x = x, y = y, x_arg = x_arg, y_arg = y_arg)
+    [90m  7. [39m├─vctrs:::vec_ptype2.tbl_df(x = x, y = y, x_arg = x_arg, y_arg = y_arg)
+    [90m  8. [39m├─vctrs:::vec_ptype2.tbl_df.data.frame(...)
+    [90m  9. [39m│ └─vctrs:::df_as_tibble(.Call(vctrs_type2_df_df, x, y, x_arg, y_arg))
+    [90m 10. [39m├─vctrs:::vec_type2_dispatch(
+    Execution halted
+    ```
+
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(vctrs)
-      > 
-      > test_check("vctrs")
-      Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
-        namespace 'vctrs' 0.2.0 is already loaded, but >= 0.2.0.9001 is required
-      Calls: test_check ... getNamespace -> loadNamespace -> namespaceImport -> loadNamespace
+    ...
+      [90m 14. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 15. [39mvctrs:::stop_incompatible(...)
+      [90m 16. [39mvctrs:::stop_vctrs(...)
+      
+      [31m──[39m [31m2. Error: Time Series - conversion to ts and zoo (@test_wtss.R#90) [39m [31m─────────────[39m
+      No common type for `..1$start_date` <date> and `..2$start_date` <character>.
+      [1mBacktrace:[22m
+      [90m  1. [39mwtss::time_series(...)
+      [90m 12. [39mvctrs:::vec_ptype2.Date.default(...)
+      [90m 13. [39mvctrs::vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 14. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 15. [39mvctrs:::stop_incompatible(...)
+      [90m 16. [39mvctrs:::stop_vctrs(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 23 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
+      1. Error: Time Series (@test_wtss.R#49) 
+      2. Error: Time Series - conversion to ts and zoo (@test_wtss.R#90) 
+      
+      Error: testthat unit tests failed
       Execution halted
     ```
 
@@ -4035,7 +5047,7 @@ Run `revdep_details(,"vctrs")` for more info
 * URL: https://github.com/UUPharmacometrics/xpose
 * BugReports: https://github.com/UUPharmacometrics/xpose/issues
 * Date/Publication: 2019-10-07 04:50:03 UTC
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 102
 
 Run `revdep_details(,"xpose")` for more info
 
@@ -4043,23 +5055,53 @@ Run `revdep_details(,"xpose")` for more info
 
 ## Newly broken
 
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### ** Examples
+    > 
+    > # Histogram of parameters
+    > prm_distrib(xpdb_ex_pk, type = 'h')
+    Dropped fixed variables ALAG1.
+    Using data from $prob no.1
+    Removing duplicated rows based on: ID
+    Tidying data by ID, SEX, MED1, MED2, DOSE ... and 23 more variables
+    > 
+    > # Density plot of etas with a rug
+    > eta_distrib(xpdb_ex_pk, type = 'dr')
+    Using data from $prob no.1
+    Removing duplicated rows based on: ID
+    Tidying data by ID, SEX, MED1, MED2, DOSE ... and 23 more variables
+    > 
+    > # Histogram of different residuals
+    > res_distrib(xpdb_ex_pk, type = 'hr', res = c('IWRES', 'CWRES'))
+    Using data from $prob no.1
+    Filtering data by EVID == 0
+    Error: `i` must have one dimension, not 2.
+    Execution halted
+    ```
+
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      31: stop_lossy_cast(x = x, to = to, result = result, locations = locations, details = details, 
-             ..., x_arg = x_arg, to_arg = to_arg, message = message, .subclass = .subclass) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:235
-      32: stop_vctrs(message, x = x, y = to, to = to, result = result, x_arg = x_arg, to_arg = to_arg, 
-             locations = locations, details = details, ..., .subclass = c(.subclass, "vctrs_error_cast_lossy")) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:259
-      33: abort(message, .subclass = c(.subclass, "vctrs_error"), ...) at /tmp/RtmpUL25eV/R.INSTALL439506e0d7f/vctrs/R/conditions.R:44
-      34: signal_abort(cnd)
+    ...
+      [90m 4. [39mxpose::filter(data) [90mrevdep/checks/xpose/new/xpose.Rcheck/00_pkg_src/xpose/R/fetch_data.R:204:2[39m
+      [90m 6. [39mtibble:::`[.tbl_df`(x, x[, "EVID"] == 0, )
+      [90m 7. [39mtibble:::tbl_subset_row(xo, i = i)
+      [90m 8. [39mtibble:::vec_as_row_index(i, x)
+      [90m 9. [39mvctrs::vec_as_index(i, nr)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════════
-      [ OK: 519 | SKIPPED: 6 | WARNINGS: 5 | FAILED: 3 ]
-      1. Failure: have proper error check for iteration_plot_function prm_vs_iteration (@test-plots.R#63) 
-      2. Failure: have proper error check for iteration_plot_function grd_vs_iteration (@test-plots.R#63) 
-      3. Error: read_nm_files handles one file with inappropriate format (@test-read_nm_files.R#36) 
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 478 | SKIPPED: 6 | WARNINGS: 4 | FAILED: 29 ]
+      1. Error: only_obs function works properly (@test-fetch_data.R#15) 
+      2. Error: fetch_data can get simple data (@test-fetch_data.R#30) 
+      3. Error: fetch_data can tidy data (@test-fetch_data.R#43) 
+      4. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function dv_vs_pred (@test-directory.R#186) 
+      5. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function dv_vs_ipred (@test-directory.R#186) 
+      6. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function dv_vs_idv (@test-directory.R#186) 
+      7. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function ipred_vs_idv (@test-directory.R#186) 
+      8. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function pred_vs_idv (@test-directory.R#186) 
+      9. Error: xpose plot objects are returned with appropriate xpdb_ex_pk for plot_function dv_preds_vs_idv (@test-directory.R#186) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
