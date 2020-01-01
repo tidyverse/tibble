@@ -202,7 +202,8 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
   output <- rep_along(xs, list(NULL))
 
-  mask <- new_data_mask(new_environment())
+  env <- new_environment()
+  mask <- new_data_mask_with_data(env)
 
   first_size <- .rows
 
@@ -232,9 +233,8 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
           output[idx_to_fix] <- fixed_output <-
             map(output[idx_to_fix], vec_recycle, current_size)
 
-          # Rebuild entire data mask
-          mask <- new_data_mask(new_environment())
-          map2(output[idx_to_fix], col_names[idx_to_fix], add_to_mask2, mask = mask)
+          # Refill entire data mask
+          map2(output[idx_to_fix], col_names[idx_to_fix], add_to_env2, env = env)
 
           first_size <- current_size
         } else {
@@ -243,7 +243,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
       }
 
       output[[j]] <- res
-      col_names[[j]] <- add_to_mask2(res, given_col_names[[j]], col_names[[j]], mask)
+      col_names[[j]] <- add_to_env2(res, given_col_names[[j]], col_names[[j]], env)
     }
   }
 
@@ -254,18 +254,24 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   new_tibble(output, nrow = first_size %||% 0L)
 }
 
-add_to_mask2 <- function(x, given_name, name = given_name, mask) {
+new_data_mask_with_data <- function(env) {
+  mask <- new_data_mask(env)
+  mask$.data <- as_data_pronoun(env)
+  mask
+}
+
+add_to_env2 <- function(x, given_name, name = given_name, env) {
   if (is.data.frame(x) && given_name == "") {
-    imap(x, add_to_mask, mask)
+    imap(x, add_to_env, env)
     ""
   } else {
-    add_to_mask(x, name, mask)
+    add_to_env(x, name, env)
     name
   }
 }
 
-add_to_mask <- function(x, name, mask) {
-  mask[[name]] <- x
+add_to_env <- function(x, name, env) {
+  env[[name]] <- x
   invisible()
 }
 
