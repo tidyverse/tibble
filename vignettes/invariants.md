@@ -47,7 +47,7 @@ frame and its tibble equivalent:
     library(vctrs)
     library(tibble)
     new_df <- function() {
-      df <- data.frame(n = c(1:3, NA))
+      df <- data.frame(n = c(1L, NA, 3L, NA))
       df$c <- letters[5:8]
       df$li <- list(9, 10:11, 12:14, "text")
       df
@@ -66,7 +66,7 @@ by side:
     new_df()
     #>    n c         li
     #> 1  1 e          9
-    #> 2  2 f     10, 11
+    #> 2 NA f     10, 11
     #> 3  3 g 12, 13, 14
     #> 4 NA h       text
 
@@ -77,7 +77,7 @@ by side:
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -123,7 +123,7 @@ a data frame or a matrix:
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -151,7 +151,7 @@ executed, further examples omit this output.
     #>    n c         li
     #> 1 NA e          9
     #> 2  3 f     10, 11
-    #> 3  2 g 12, 13, 14
+    #> 3 NA g 12, 13, 14
     #> 4  1 h       text
 
 </td>
@@ -167,7 +167,7 @@ executed, further examples omit this output.
     #>   <int> <chr> <list>   
     #> 1    NA e     <dbl [1]>
     #> 2     3 f     <int [2]>
-    #> 3     2 g     <int [3]>
+    #> 3    NA g     <int [3]>
     #> 4     1 h     <chr [1]>
 
 </td>
@@ -188,7 +188,7 @@ Column extraction
 </td>
 <td>
     tbl[[1]]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -197,7 +197,7 @@ Column extraction
 </td>
 <td>
     .subset2(tbl, 1)
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -276,7 +276,7 @@ exists.
 <tr style="vertical-align:top">
 <td>
     df[[1:2]]
-    #> [1] 2
+    #> [1] NA
 
 </td>
 <td>
@@ -287,7 +287,7 @@ exists.
     #> is deprecated and will eventually be
     #> converted to an error.
 
-    #> [1] 2
+    #> [1] NA
 
 </td>
 </tr>
@@ -309,7 +309,7 @@ exists.
 <tr style="vertical-align:top">
 <td>
     df[[TRUE]]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 <td>
@@ -445,7 +445,7 @@ an error:
 <tr style="vertical-align:top">
 <td>
     df[[1.5]]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 <td>
@@ -503,7 +503,7 @@ check for the absence of a column with `is.null(df[[var]])`.
 </td>
 <td>
     tbl$n
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -512,7 +512,7 @@ check for the absence of a column with `is.null(df[[var]])`.
 </td>
 <td>
     tbl$"n"
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -521,7 +521,7 @@ check for the absence of a column with `is.null(df[[var]])`.
 </td>
 <td>
     tbl[["n"]]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -634,7 +634,7 @@ vector, or a logical vector with length 1 or `ncol(x)`.[1]
     #>       n c    
     #>   <int> <chr>
     #> 1     1 e    
-    #> 2     2 f    
+    #> 2    NA f    
     #> 3     3 g    
     #> 4    NA h
 
@@ -652,7 +652,7 @@ undefined, do not rely on them.
     df[c(1, 1)]
     #>    n n.1
     #> 1  1   1
-    #> 2  2   2
+    #> 2 NA  NA
     #> 3  3   3
     #> 4 NA  NA
 
@@ -666,7 +666,7 @@ undefined, do not rely on them.
     #>   n...1 n...2
     #>   <int> <int>
     #> 1     1     1
-    #> 2     2     2
+    #> 2    NA    NA
     #> 3     3     3
     #> 4    NA    NA
 
@@ -701,6 +701,9 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
     df[is.na(df)]
     #> [[1]]
     #> [1] NA
+    #> 
+    #> [[2]]
+    #> [1] NA
 
 </td>
 <td>
@@ -723,7 +726,7 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
 <tr style="vertical-align:top">
 <td>
     df[, 1]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 <td>
@@ -732,7 +735,7 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
     #>       n
     #>   <int>
     #> 1     1
-    #> 2     2
+    #> 2    NA
     #> 3     3
     #> 4    NA
 
@@ -747,7 +750,7 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
     #>       n c    
     #>   <int> <chr>
     #> 1     1 e    
-    #> 2     2 f    
+    #> 2    NA f    
     #> 3     3 g    
     #> 4    NA h
 
@@ -789,7 +792,7 @@ For backward compatiblity, `x[, j, drop = TRUE]` performs column
 </td>
 <td>
     tbl[, 1, drop = TRUE]
-    #> [1]  1  2  3 NA
+    #> [1]  1 NA  3 NA
 
 </td>
 </tr>
@@ -1164,7 +1167,7 @@ value `a`.
     #>       n c        li
     #>   <int> <chr> <int>
     #> 1     1 e         4
-    #> 2     2 f         3
+    #> 2    NA f         3
     #> 3     3 g         2
     #> 4    NA h         1
 
@@ -1194,7 +1197,7 @@ value `a`.
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     4
-    #> 2     2 f     <int [2]>     3
+    #> 2    NA f     <int [2]>     3
     #> 3     3 g     <int [3]>     2
     #> 4    NA h     <chr [1]>     1
 
@@ -1228,7 +1231,7 @@ value `a`.
     #>       n     c li       
     #>   <int> <dbl> <list>   
     #> 1     1     0 <dbl [1]>
-    #> 2     2     0 <int [2]>
+    #> 2    NA     0 <int [2]>
     #> 3     3     0 <int [3]>
     #> 4    NA     0 <chr [1]>
 
@@ -1388,7 +1391,7 @@ Recycling also works for list, data frame, and matrix columns.
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <dbl [1]>
+    #> 2    NA f     <dbl [1]>
     #> 3     3 g     <dbl [1]>
     #> 4    NA h     <dbl [1]>
 
@@ -1431,7 +1434,7 @@ Recycling also works for list, data frame, and matrix columns.
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     1     0     0
+    #> 2    NA f     <int [2…     1     0     0
     #> 3     3 g     <int [3…     1     0     0
     #> 4    NA h     <chr [1…     1     0     0
     #> # … with 1 more variable: [,4] <dbl>
@@ -1530,7 +1533,7 @@ needed.
     #>       n c     li            x
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
-    #> 2     2 f     <int [2]>     0
+    #> 2    NA f     <int [2]>     0
     #> 3     3 g     <int [3]>     0
     #> 4    NA h     <chr [1]>     0
 
@@ -1541,7 +1544,7 @@ needed.
     with_df(df[[4]] <- 0)
     #>    n c         li V4
     #> 1  1 e          9  0
-    #> 2  2 f     10, 11  0
+    #> 2 NA f     10, 11  0
     #> 3  3 g 12, 13, 14  0
     #> 4 NA h       text  0
 
@@ -1552,7 +1555,7 @@ needed.
     #>       n c     li         ...4
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
-    #> 2     2 f     <int [2]>     0
+    #> 2    NA f     <int [2]>     0
     #> 3     3 g     <int [3]>     0
     #> 4    NA h     <chr [1]>     0
 
@@ -1569,7 +1572,7 @@ needed.
 
     #>    n c         li      V5
     #> 1  1 e          9 NULL  0
-    #> 2  2 f     10, 11 <NA>  0
+    #> 2 NA f     10, 11 <NA>  0
     #> 3  3 g 12, 13, 14 <NA>  0
     #> 4 NA h       text <NA>  0
 
@@ -1613,7 +1616,7 @@ needed.
     #>       n c         li       
     #>   <int> <list>    <list>   
     #> 1     1 <dbl [1]> <dbl [1]>
-    #> 2     2 <int [2]> <int [2]>
+    #> 2    NA <int [2]> <int [2]>
     #> 3     3 <int [3]> <int [3]>
     #> 4    NA <chr [1]> <chr [1]>
 
@@ -1628,7 +1631,7 @@ needed.
     #>       n c      li$n $c    $li      
     #>   <int> <chr> <int> <chr> <list>   
     #> 1     1 e         1 e     <dbl [1]>
-    #> 2     2 f         2 f     <int [2]>
+    #> 2    NA f        NA f     <int [2]>
     #> 3     3 g         3 g     <int [3]>
     #> 4    NA h        NA h     <chr [1]>
 
@@ -1660,7 +1663,7 @@ needed.
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     1
-    #> 2     2 f     <int [2]>     2
+    #> 2    NA f     <int [2]>    NA
     #> 3     3 g     <int [3]>     3
     #> 4    NA h     <chr [1]>    NA
 
@@ -1696,7 +1699,7 @@ needed.
     #>    tb$n $c    $li      
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -1717,7 +1720,7 @@ Removing a nonexistent column is a no-op.
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -1796,7 +1799,7 @@ Removing a nonexistent column is a no-op.
     #>       n c     li            l
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
-    #> 2     2 f     <int [2]>     0
+    #> 2    NA f     <int [2]>     0
     #> 3     3 g     <int [3]>     0
     #> 4    NA h     <chr [1]>     0
 
@@ -1811,7 +1814,7 @@ Removing a nonexistent column is a no-op.
     #>       n c     li            l
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
-    #> 2     2 f     <int [2]>     0
+    #> 2    NA f     <int [2]>     0
     #> 3     3 g     <int [3]>     0
     #> 4    NA h     <chr [1]>     0
 
@@ -1858,7 +1861,7 @@ If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then
     #>       n li        x
     #>   <int> <chr> <int>
     #> 1     1 x         4
-    #> 2     2 x         3
+    #> 2    NA x         3
     #> 3     3 x         2
     #> 4    NA x         1
 
@@ -2068,7 +2071,7 @@ existing column.
     #>       n c         li       
     #>   <int> <list>    <list>   
     #> 1     1 <dbl [1]> <dbl [1]>
-    #> 2     2 <int [2]> <int [2]>
+    #> 2    NA <int [2]> <int [2]>
     #> 3     3 <int [3]> <int [3]>
     #> 4    NA <chr [1]> <chr [1]>
 
@@ -2083,7 +2086,7 @@ existing column.
     #>       n c      li$n $c    $li      
     #>   <int> <chr> <int> <chr> <list>   
     #> 1     1 e         1 e     <dbl [1]>
-    #> 2     2 f         2 f     <int [2]>
+    #> 2    NA f        NA f     <int [2]>
     #> 3     3 g         3 g     <int [3]>
     #> 4    NA h        NA h     <chr [1]>
 
@@ -2115,7 +2118,7 @@ existing column.
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     1
-    #> 2     2 f     <int [2]>     2
+    #> 2    NA f     <int [2]>    NA
     #> 3     3 g     <int [3]>     3
     #> 4    NA h     <chr [1]>    NA
 
@@ -2138,7 +2141,7 @@ that order of precedence).
     #>       n c     li        x         y
     #>   <int> <chr> <list>    <chr> <int>
     #> 1     1 e     <dbl [1]> x         4
-    #> 2     2 f     <int [2]> x         3
+    #> 2    NA f     <int [2]> x         3
     #> 3     3 g     <int [3]> x         2
     #> 4    NA h     <chr [1]> x         1
 
@@ -2153,7 +2156,7 @@ that order of precedence).
     #>       n c     li        x
     #>   <int> <chr> <chr> <int>
     #> 1     1 e     x         4
-    #> 2     2 f     x         3
+    #> 2    NA f     x         3
     #> 3     3 g     x         2
     #> 4    NA h     x         1
 
@@ -2164,7 +2167,7 @@ that order of precedence).
     with_df(df[4] <- list(4:1))
     #>    n c         li V4
     #> 1  1 e          9  4
-    #> 2  2 f     10, 11  3
+    #> 2 NA f     10, 11  3
     #> 3  3 g 12, 13, 14  2
     #> 4 NA h       text  1
 
@@ -2175,7 +2178,7 @@ that order of precedence).
     #>       n c     li         ...4
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     4
-    #> 2     2 f     <int [2]>     3
+    #> 2    NA f     <int [2]>     3
     #> 3     3 g     <int [3]>     2
     #> 4    NA h     <chr [1]>     1
 
@@ -2210,7 +2213,7 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
     with_df(df[is.na(df)] <- 4)
     #>   n c         li
     #> 1 1 e          9
-    #> 2 2 f     10, 11
+    #> 2 4 f     10, 11
     #> 3 3 g 12, 13, 14
     #> 4 4 h       text
 
@@ -2457,7 +2460,7 @@ Row subassignment: `x[i, ] <- list(...)`
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -2472,7 +2475,7 @@ Row subassignment: `x[i, ] <- list(...)`
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     1 e     <dbl [1]>
     #> 4     1 e     <dbl [1]>
 
@@ -2557,7 +2560,7 @@ Row subassignment: `x[i, ] <- list(...)`
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -2624,7 +2627,7 @@ Only values of size one can be recycled.
 
     #> Error in `[<-.data.frame`(`*tmp*`,
     #> 2:4, , value = structure(list(n =
-    #> 1:2, : replacement element 1 has 2
+    #> c(1L, : replacement element 1 has 2
     #> rows, need 3
 
 </td>
@@ -2702,7 +2705,7 @@ supported, without warning.
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
     #> 5     1 e     <dbl [1]>
@@ -2718,7 +2721,7 @@ supported, without warning.
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
     #> 5     1 e     <dbl [1]>
@@ -2732,7 +2735,7 @@ supported, without warning.
     with_df(df[6, ] <- df[1, ])
     #>    n    c         li
     #> 1  1    e          9
-    #> 2  2    f     10, 11
+    #> 2 NA    f     10, 11
     #> 3  3    g 12, 13, 14
     #> 4 NA    h       text
     #> 5 NA <NA>       NULL
@@ -2839,7 +2842,7 @@ positive numbers.
     with_df(df[as.character(-(1:3)), ] <- df[1, ])
     #>     n c         li
     #> 1   1 e          9
-    #> 2   2 f     10, 11
+    #> 2  NA f     10, 11
     #> 3   3 g 12, 13, 14
     #> 4  NA h       text
     #> -1  1 e          9
@@ -2862,12 +2865,12 @@ positive numbers.
 <tr style="vertical-align:top">
 <td>
     with_df(df[as.character(3:5), ] <- df[1, ])
-    #>   n c     li
-    #> 1 1 e      9
-    #> 2 2 f 10, 11
-    #> 3 1 e      9
-    #> 4 1 e      9
-    #> 5 1 e      9
+    #>    n c     li
+    #> 1  1 e      9
+    #> 2 NA f 10, 11
+    #> 3  1 e      9
+    #> 4  1 e      9
+    #> 5  1 e      9
 
 </td>
 <td>
@@ -2887,7 +2890,7 @@ positive numbers.
     with_df(df[as.character(-(3:5)), ] <- df[1, ])
     #>     n c         li
     #> 1   1 e          9
-    #> 2   2 f     10, 11
+    #> 2  NA f     10, 11
     #> 3   3 g 12, 13, 14
     #> 4  NA h       text
     #> -3  1 e          9
@@ -2969,7 +2972,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #>    n c         li
     #> 1  1 e          9
-    #> 2  2 9     10, 11
+    #> 2 NA 9     10, 11
     #> 3  3 9 12, 13, 14
     #> 4 NA h       text
 
@@ -2988,13 +2991,13 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #> Warning in `[<-.data.frame`(`*tmp*`,
     #> 2:3, 3, value = structure(list(n =
-    #> 1:2, : provided 3 variables to replace 1
-    #> variables
+    #> c(1L, : provided 3 variables to replace
+    #> 1 variables
 
     #>    n c   li
     #> 1  1 e    9
-    #> 2  2 f    1
-    #> 3  3 g    2
+    #> 2 NA f    1
+    #> 3  3 g   NA
     #> 4 NA h text
 
 </td>
@@ -3046,8 +3049,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     1     1     1
-    #> 3     3 g     <int [3…     2     2     2
+    #> 2    NA f     <int [2…     1     1     1
+    #> 3     3 g     <int [3…    NA    NA    NA
     #> 4    NA h     <chr [1…     0     0     0
     #> # … with 1 more variable: [,4] <dbl>
 
@@ -3090,7 +3093,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
     #>       n c     li            x
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>    NA
-    #> 2     2 f     <int [2]>     1
+    #> 2    NA f     <int [2]>     1
     #> 3     3 g     <int [3]>     1
     #> 4    NA h     <chr [1]>    NA
 
@@ -3128,7 +3131,7 @@ Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
     #> 5     0 <NA>  <NULL>
@@ -3149,7 +3152,7 @@ to `x[i, ][[j]] <- a`.[9]
     with_df(df[[1, 1]] <- 0)
     #>    n c         li
     #> 1  0 e          9
-    #> 2  2 f     10, 11
+    #> 2 NA f     10, 11
     #> 3  3 g 12, 13, 14
     #> 4 NA h       text
 
@@ -3160,7 +3163,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     0 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -3171,7 +3174,7 @@ to `x[i, ][[j]] <- a`.[9]
     with_df(df[1, ][[1]] <- 0)
     #>    n c         li
     #> 1  0 e          9
-    #> 2  2 f     10, 11
+    #> 2 NA f     10, 11
     #> 3  3 g 12, 13, 14
     #> 4 NA h       text
 
@@ -3182,7 +3185,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     0 e     <dbl [1]>
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -3193,7 +3196,7 @@ to `x[i, ][[j]] <- a`.[9]
     with_df(df[[1, 3]] <- list(NULL))
     #>    n c         li
     #> 1  1 e       NULL
-    #> 2  2 f     10, 11
+    #> 2 NA f     10, 11
     #> 3  3 g 12, 13, 14
     #> 4 NA h       text
 
@@ -3204,7 +3207,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <NULL>   
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -3219,7 +3222,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <NULL>   
-    #> 2     2 f     <int [2]>
+    #> 2    NA f     <int [2]>
     #> 3     3 g     <int [3]>
     #> 4    NA h     <chr [1]>
 
@@ -3240,7 +3243,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
+    #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
     #> # … with 1 more variable: [,4] <dbl>
@@ -3256,7 +3259,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
-    #> 2     2 f     <int [2…     0     1     0
+    #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
     #> # … with 1 more variable: [,4] <dbl>
@@ -3278,7 +3281,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     2     3
-    #> 2     2 f     <int [2…     0     1     0
+    #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
     #> # … with 1 more variable: [,4] <dbl>
@@ -3294,7 +3297,7 @@ to `x[i, ][[j]] <- a`.[9]
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     2     3
-    #> 2     2 f     <int [2…     0     1     0
+    #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
     #> # … with 1 more variable: [,4] <dbl>
