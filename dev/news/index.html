@@ -180,13 +180,41 @@
 <h1 class="page-header">
 <a href="#tibble-2-99-99-9012" class="anchor"></a>tibble 2.99.99.9012<small> Unreleased </small>
 </h1>
+<div id="known-problems" class="section level2">
+<h2 class="hasAnchor">
+<a href="#known-problems" class="anchor"></a>Known problems</h2>
+<ul>
+<li><p>Subsetting with symbols doesn’t work yet (<a href='https://github.com/tidyverse/tibble/issues/691'>#691</a>).</p></li>
+<li><p>The <code>package_version</code> class isn’t treated as a vector yet (<a href='https://github.com/tidyverse/tibble/issues/690'>#690</a>).</p></li>
+</ul>
+</div>
 <div id="major-breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-breaking-changes" class="anchor"></a>Major breaking changes</h2>
 <ul>
-<li><p>Subset assignment (“subassignment”) and also subsetting has become stricter. The “invariants” article at <a href="https://tibble.tidyverse.org/dev/articles/invariants.html" class="uri">https://tibble.tidyverse.org/dev/articles/invariants.html</a> describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.</p></li>
-<li><p>List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a <code>vec_proxy()</code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code>list_of()</code>.</p></li>
-<li><p>Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don’t expect names in columns (<a href='https://github.com/tidyverse/tibble/issues/630'>#630</a>).</p></li>
+<li>
+<p>Subset assignment (“subassignment”) and also subsetting has become stricter. The “invariants” article at <a href="https://tibble.tidyverse.org/dev/articles/invariants.html" class="uri">https://tibble.tidyverse.org/dev/articles/invariants.html</a> describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible. Symptoms:</p>
+<ul>
+<li><p>Error: No common type for …</p></li>
+<li><p>Tibble columns must have consistent sizes, only values of size one are recycled</p></li>
+<li><p><code>i</code> must have one dimension, not 2</p></li>
+<li><p>Error in matrix_to_cells(j, x) : is_bare_logical(j) is not TRUE</p></li>
+<li><p>Error: Lossy cast from … to …</p></li>
+</ul>
+</li>
+<li>
+<p>List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a <code>vec_proxy()</code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code>list_of()</code>. Symptoms:</p>
+<ul>
+<li><p>Error: All columns in a tibble must be vectors</p></li>
+<li><p>Error: Expected a vector, not a <code>...</code> object</p></li>
+</ul>
+</li>
+<li>
+<p>Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don’t expect names in columns (<a href='https://github.com/tidyverse/tibble/issues/630'>#630</a>). Symptoms:</p>
+<ul>
+<li>“names for target but not for current” when comparing</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="breaking-changes" class="section level2">
@@ -194,7 +222,7 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> now splices anonymous data frames, <code><a href="../reference/tibble.html">tibble(tibble(a = 1), b = a)</a></code> is equivalent to <code><a href="../reference/tibble.html">tibble(a = 1, b = a)</a></code>. This means that <code><a href="../reference/tibble.html">tibble(iris)</a></code> now has five columns, use <code><a href="../reference/tibble.html">tibble(iris = iris)</a></code> if the intention is to create a packed data frame (<a href='https://github.com/tidyverse/tibble/issues/581'>#581</a>).</p></li>
-<li><p>The <code>name-repair</code> help topic is gone.</p></li>
+<li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://rdrr.io/pkg/vctrs/man/vec_as_names.html">?vctrs::vec_as_names</a></code> instead.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/expression.html">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
 <li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> warns unconditionally if column not found, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> doesn’t warn.</p></li>
