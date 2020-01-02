@@ -253,7 +253,8 @@ test_that("[.tbl_df is no-op if args missing", {
 })
 
 test_that("[.tbl_df supports drop argument (#311)", {
-  expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][1])
+  expect_identical(df_all[, 2, drop = TRUE], df_all[[2]])
+  expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][[1]])
   expect_identical(df_all[1, , drop = TRUE], df_all[1, , ])
 })
 

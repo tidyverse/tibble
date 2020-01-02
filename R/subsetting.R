@@ -182,26 +182,24 @@ NULL
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
       warn("`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`.")
+      drop <- FALSE
     }
 
     j <- i
     i <- NULL
   }
 
-  # From here on, i and j contain correct values:
-  if (is.null(i)) {
-    xo <- tbl_subset_col(x, j = j)
-    vec_restore(xo, x)
-  } else {
-    xo <- x
-    xo <- tbl_subset_col(xo, j = j)
-    xo <- tbl_subset_row(xo, i = i)
+  # From here on, i, j and drop contain correct values:
+  xo <- tbl_subset_col(x, j = j)
 
-    if (drop && length(xo) == 1L) {
-      tbl_subset2(xo, 1L)
-    } else {
-      vec_restore(xo, x, n = fast_nrow(xo))
-    }
+  if (!is.null(i)) {
+    xo <- tbl_subset_row(xo, i = i)
+  }
+
+  if (drop && length(xo) == 1L) {
+    tbl_subset2(xo, 1L)
+  } else {
+    vec_restore(xo, x, n = fast_nrow(xo))
   }
 }
 
