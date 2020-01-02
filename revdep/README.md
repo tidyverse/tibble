@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |Etc/UTC                      |
-|date     |2020-01-01                   |
+|date     |2020-01-02                   |
 
 # Dependencies
 
@@ -28,11 +28,10 @@
 |:----------------------------|:-------|:------|:-------|:----|
 |[genius](failures.md#genius) |2.2.0   |__+1__ |        |     |
 
-## New problems (92)
+## New problems (91)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
-|[adept](problems.md#adept)                       |1.1.2   |__+1__ |        |2    |
 |[alakazam](problems.md#alakazam)                 |0.3.0   |__+1__ |        |1    |
 |[amt](problems.md#amt)                           |0.0.7   |__+1__ |        |1    |
 |[banter](problems.md#banter)                     |0.9.3   |__+1__ |        |1    |

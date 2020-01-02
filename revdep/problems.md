@@ -1,61 +1,3 @@
-# adept
-
-<details>
-
-* Version: 1.1.2
-* Source code: https://github.com/cran/adept
-* URL: https://github.com/martakarass/adept
-* BugReports: https://github.com/martakarass/adept/issues
-* Date/Publication: 2019-06-18 06:50:03 UTC
-* Number of recursive dependencies: 94
-
-Run `revdep_details(,"adept")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-    ...
-      [90m  5. [39mfuture:::evaluator(...)
-      [90m  6. [39mfuture:::fun(...)
-      [90m  7. [39mfuture:::ClusterRegistry("start", workers = workers)
-      [90m  8. [39mfuture:::makeCluster(workers, ...)
-      [90m  9. [39mfuture::makeClusterPSOCK(workers, ...)
-      [90m 10. [39mfuture:::makeNode(...)
-      [90m 11. [39m(function() {...
-      [90m 12. [39mbase::tryCatch(...)
-      [90m 13. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
-      [90m 14. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      [90m 15. [39mvalue[[3L]](cond)
-      [90m 16. [39m(function() {...
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 106 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
-      1. Error: Example 5(c). Setting: no noise in signal, all pattern occurences of the same
-                length, long signal. We check for the same behaviour with and without parallel
-                computation with (maximum-1) number of workers available. (@test-segmentPattern.R#655) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.6Mb
-      sub-directories of 1Mb or more:
-        doc   4.7Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
 # alakazam
 
 <details>
@@ -1067,7 +1009,7 @@ Run `revdep_details(,"egor")` for more info
       EI-Index: female
       EI-Index: female
       ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 69 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 6 ]
+      [ OK: 69 | SKIPPED: 0 | WARNINGS: 12 | FAILED: 6 ]
       1. Failure: Methods are working. (@test_clustered_graphs.R#9) 
       2. Failure: Methods are working with partially missing data. (@test_clustered_graphs.R#23) 
       3. Failure: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#35) 
@@ -2368,7 +2310,7 @@ Run `revdep_details(,"ipumsr")` for more info
     Loading required package: sf
     Linking to GEOS 3.7.1, GDAL 2.4.0, PROJ 5.2.0
     options:        ENCODING=latin1 
-    Reading layer `US_pmsa_1990' from data source `/tmp/RtmpHQ5Rhn/file107831ceb865e/US_pmsa_1990.shp' using driver `ESRI Shapefile'
+    Reading layer `US_pmsa_1990' from data source `/tmp/RtmpiHfTHz/file28e13d80c615/US_pmsa_1990.shp' using driver `ESRI Shapefile'
     Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
       all attributes must have names [3 does not]
     Calls: read_ipums_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
@@ -3084,8 +3026,8 @@ Run `revdep_details(,"oppr")` for more info
             The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
             The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
             The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.018 seconds, presolve used 0.000 seconds,
-             ... 0.000 seconds in simplex solver, in total 0.018 seconds.
+            Time to load data was 0.028 seconds, presolve used 0.000 seconds,
+             ... 0.001 seconds in simplex solver, in total 0.029 seconds.
       ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
@@ -3970,7 +3912,7 @@ Run `revdep_details(,"rubias")` for more info
     > 
     > # print that
     > prefix
-    [1] "/tmp/RtmpRc45cC/mixfile"
+    [1] "/tmp/RtmplyL5Xp/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
@@ -4812,12 +4754,16 @@ Run `revdep_details(,"timetk")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [31m──[39m [31m7. Failure: tk_make_future_timeseries(predict_every_four) test returns correct fo[39m
+      `test` not equal to `expect_every_four`.
+      Numeric: lengths (28, 19) differ
+      
+      [31m──[39m [31m8. Failure: tk_make_future_timeseries(predict_random) test returns correct format[39m
+      `test` not equal to `expect_random`.
       Numeric: lengths (28, 20) differ
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 268 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 8 ]
       1. Failure: tk_make_future_timeseries(date) test returns correct format. (@test_tk_make_future_timeseries.R#62) 
       2. Failure: tk_make_future_timeseries(date) test returns correct format. (@test_tk_make_future_timeseries.R#69) 
