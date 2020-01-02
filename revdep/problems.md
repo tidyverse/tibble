@@ -137,7 +137,7 @@ Run `revdep_details(,"basket")` for more info
       [90m 14. [39mtibble:::tbl_subassign_col(x, j, value)
       [90m 15. [39mtibble:::vec_recycle_rows(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 32 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
       1. Error: (unknown) (@test-mcmc.r#35) 
       2. Error: (unknown) (@test-plot.r#12) 
@@ -181,7 +181,7 @@ Run `revdep_details(,"beadplexr")` for more info
       [90m 4. [39mtibble:::tbl_subassign_col(x, j, value)
       [90m 5. [39mtibble:::vec_recycle_rows(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 344 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) 
       
@@ -242,7 +242,7 @@ Run `revdep_details(,"bench")` for more info
       [90m 11. [39mtibble:::lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
       [90m 12. [39mtibble:::check_valid_cols(x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 146 | SKIPPED: 2 | WARNINGS: 0 | FAILED: 11 ]
       1. Error: mark: Uses all.equal to check results by default (@test-mark.R#36) 
       2. Error: mark: Can use other functions to check results like identical to check results (@test-mark.R#52) 
@@ -294,7 +294,7 @@ Run `revdep_details(,"breathtestcore")` for more info
       [90m 8. [39mtibble:::vec_as_row_index(i, x)
       [90m 9. [39mvctrs::vec_as_index(i, nr)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 356 | SKIPPED: 5 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: Single record give valid result after passing through cleanup_data (@test_nls_fit.R#46) 
       
@@ -778,43 +778,6 @@ Run `revdep_details(,"drake")` for more info
       Error while shutting down parallel: unable to terminate some child processes
     ```
 
-# dssd
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/dssd
-* BugReports: https://github.com/DistanceDevelopment/dssd/issues
-* Date/Publication: 2019-08-05 13:00:02 UTC
-* Number of recursive dependencies: 54
-
-Run `revdep_details(,"dssd")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘dssd-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: make.design
-    > ### Title: Creates a Survey.Design object
-    > ### Aliases: make.design
-    > 
-    > ### ** Examples
-    > 
-    > #Point transect example
-    > shapefile.name <- system.file("extdata", "TrackExample.shp", package = "dssd")
-    > region <- make.region(region.name = "study area",
-    +                      shape = shapefile.name)
-    Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
-      all attributes must have names [3 does not]
-    Calls: make.region ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
-    Execution halted
-    ```
-
 # egor
 
 <details>
@@ -866,8 +829,8 @@ Run `revdep_details(,"egor")` for more info
       EI-Index: int_var
       EI-Index: female
       EI-Index: female
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 69 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 6 ]
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 69 | SKIPPED: 0 | WARNINGS: 3 | FAILED: 6 ]
       1. Failure: Methods are working. (@test_clustered_graphs.R#9) 
       2. Failure: Methods are working with partially missing data. (@test_clustered_graphs.R#23) 
       3. Failure: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#35) 
@@ -1032,7 +995,7 @@ Run `revdep_details(,"exuber")` for more info
       [90m 19. [39mvctrs:::stop_scalar_type(...)
       [90m 20. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 258 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
       1. Failure: crit as data (@test-cv.R#4) 
       
@@ -1111,7 +1074,7 @@ Run `revdep_details(,"feasts")` for more info
       [90m 18. [39mtibble:::lst_to_tibble(unclass(x), .rows, .name_repair)
       [90m 19. [39mtibble:::check_valid_cols(x)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 103 | SKIPPED: 0 | WARNINGS: 11 | FAILED: 1 ]
       1. Error: gg_arma() plots (@test-graphics.R#253) 
       
@@ -1494,7 +1457,7 @@ Run `revdep_details(,"googlesheets4")` for more info
       [90m 21. [39mvctrs:::stop_incompatible(...)
       [90m 22. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 187 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 5 ]
       1. Error: can shim a single side (@test-utils-sheet-geometry.R#38) 
       2. Error: can shim two opposing sides (@test-utils-sheet-geometry.R#49) 
@@ -1867,7 +1830,7 @@ Run `revdep_details(,"heemod")` for more info
       [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 14. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 470 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 12 ]
       1. Error: Same results using 1 core or 2. (@test_parallel.R#7) 
       2. Failure: Parameter evaluation (@test_parameters.R#81) 
@@ -1945,7 +1908,7 @@ Run `revdep_details(,"INDperform")` for more info
       [90m 10. [39mvctrs:::stop_incompatible(...)
       [90m 11. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 506 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 3 ]
       1. Error: (unknown) (@test_model_gamm.R#4) 
       2. Error: (unknown) (@test_scoring.R#15) 
@@ -2058,7 +2021,7 @@ Run `revdep_details(,"interactions")` for more info
       
       Failed with error:  'there is no package called 'brms''
       Failed with error:  'there is no package called 'rstanarm''
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 122 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 13 ]
       1. Error: interact_plot works for lm (@test_interact_plot.R#33) 
       2. Error: interact_plot: robust standard errors work (@test_interact_plot.R#60) 
@@ -2265,7 +2228,7 @@ Run `revdep_details(,"jstor")` for more info
       [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 14. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 227 | SKIPPED: 4 | WARNINGS: 3 | FAILED: 8 ]
       1. Failure: authors are correct (@test-books.R#117) 
       2. Error: jst_define_import returns correct class (@test-import-spec.R#4) 
@@ -2332,7 +2295,7 @@ Run `revdep_details(,"jtools")` for more info
       
       Failed with error:  'there is no package called 'brms''
       Failed with error:  'there is no package called 'rstanarm''
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 279 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 11 ]
       1. Error: effect_plot works for lm (@test-effect-plot.R#25) 
       2. Error: effect_plot: robust intervals works (@test-effect-plot.R#37) 
@@ -2516,7 +2479,7 @@ Run `revdep_details(,"MNLpred")` for more info
       [90m 17. [39mvctrs:::stop_lossy_cast(...)
       [90m 18. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: mnl_pred_ova() returns two predictions when by = NULL (@test_inputvariants.R#17) 
       
@@ -2794,9 +2757,9 @@ Run `revdep_details(,"oppr")` for more info
             The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
             The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
             The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.030 seconds, presolve used 0.000 seconds,
-             ... 0.001 seconds in simplex solver, in total 0.031 seconds.
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+            Time to load data was 0.031 seconds, presolve used 0.000 seconds,
+             ... 0.001 seconds in simplex solver, in total 0.032 seconds.
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
       2. Failure: valid arguments (@test_project_cost_effectiveness.R#36) 
@@ -2844,7 +2807,7 @@ Run `revdep_details(,"pkgsearch")` for more info
     ...
      10  19 vcd        1.4.4    David Meyer      2y Visualizing Categorical Data   
     > ps()
-    - "visualization" ---------------------------- 1075 packages in 0.008 seconds -
+    - "visualization" ---------------------------- 1075 packages in 0.007 seconds -
     
     Error: Expected a vector, not a `package_version/numeric_version` object
     [1m<error/vctrs_error_scalar_type>[22m
@@ -3085,7 +3048,7 @@ Run `revdep_details(,"projects")` for more info
       [90m 12. [39mvctrs:::stop_incompatible(...)
       [90m 13. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 14 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: Setup works (@test-setup.R#129) 
       2. Failure: Setup works (@test-setup.R#147) 
@@ -3248,7 +3211,7 @@ Run `revdep_details(,"readwritesqlite")` for more info
       Component "geometry": Attributes: < Component 3: Attributes: < target is NULL, current is list > >
       ...
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 443 | SKIPPED: 0 | WARNINGS: 27 | FAILED: 1 ]
       1. Failure: initialized even with no rows of data (@test-write.R#592) 
       
@@ -4028,7 +3991,7 @@ Run `revdep_details(,"simrel")` for more info
       [90m 5. [39mdplyr:::all.equal.tbl_df(x, y, ...)
       [90m 6. [39mdplyr:::equal_data_frame(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 169 | SKIPPED: 21 | WARNINGS: 3 | FAILED: 1 ]
       1. Error: Prepare Design (@test-utils.R#44) 
       
@@ -4339,7 +4302,7 @@ Run `revdep_details(,"textrecipes")` for more info
       [90m 10. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 11. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 79 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 10 ]
       1.  Error: hashing gives double outputs (@test-hashing.R#31) 
       2.  Error: stemming is done correctly (@test-stem.R#32) 
@@ -4492,7 +4455,7 @@ Run `revdep_details(,"units")` for more info
       [90m 4. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 5. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 416 | SKIPPED: 6 | WARNINGS: 13 | FAILED: 1 ]
       1. Error: mixed units work (@test_mixed.R#46) 
       
@@ -4560,7 +4523,7 @@ Run `revdep_details(,"wtss")` for more info
       [90m 15. [39mvctrs:::stop_incompatible(...)
       [90m 16. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 23 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
       1. Error: Time Series (@test_wtss.R#49) 
       2. Error: Time Series - conversion to ts and zoo (@test_wtss.R#90) 
@@ -4621,7 +4584,7 @@ Run `revdep_details(,"xpose")` for more info
       [90m 8. [39mtibble:::vec_as_row_index(i, x)
       [90m 9. [39mvctrs::vec_as_index(i, nr)
       
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 478 | SKIPPED: 6 | WARNINGS: 4 | FAILED: 29 ]
       1. Error: only_obs function works properly (@test-fetch_data.R#15) 
       2. Error: fetch_data can get simple data (@test-fetch_data.R#30) 
