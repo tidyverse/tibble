@@ -184,7 +184,13 @@ NULL
       warn("`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`.")
     }
 
-    xo <- tbl_subset_col(x, j = i)
+    j <- i
+    i <- NULL
+  }
+
+  # From here on, i and j contain correct values:
+  if (is.null(i)) {
+    xo <- tbl_subset_col(x, j = j)
     vec_restore(xo, x)
   } else {
     xo <- x
