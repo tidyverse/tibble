@@ -1,19 +1,42 @@
 # tibble 2.99.99.9012
 
+## Known problems
+
+- Subsetting with symbols doesn't work yet (#691).
+
+- The `package_version` class isn't treated as a vector yet (#690).
+
+
 ## Major breaking changes
 
-- Subset assignment ("subassignment") and also subsetting has become stricter. The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.
+- Subset assignment ("subassignment") and also subsetting has become stricter. The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible. Symptoms:
 
-- List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`.
+    - Error: No common type for ...
+    
+    - Tibble columns must have consistent sizes, only values of size one are recycled
+    
+    - `i` must have one dimension, not 2
+    
+    - Error in matrix_to_cells(j, x) : is_bare_logical(j) is not TRUE
+    
+    - Error: Lossy cast from ... to ...
 
-- Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don't expect names in columns (#630).
+- List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`. Symptoms:
+
+    - Error: All columns in a tibble must be vectors
+    
+    - Error: Expected a vector, not a `...` object
+
+- Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don't expect names in columns (#630). Symptoms:
+
+    - "names for target but not for current" when comparing
 
 
 ## Breaking changes
 
 - `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(iris)` now has five columns, use `tibble(iris = iris)` if the intention is to create a packed data frame (#581).
 
-- The `name-repair` help topic is gone.
+- The `name-repair` help topic is gone, refer to `?vctrs::vec_as_names` instead.
 
 - `expression()` columns are converted to lists as a workaround for lacking support in vctrs (#657).
 
