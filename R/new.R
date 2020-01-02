@@ -47,7 +47,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   }
 
   #' The `...` argument allows adding more attributes to the subclass.
-  x <- structure(x, ...)
+  x <- update_tibble_attrs(x, ...)
 
   #' An `nrow` argument is required.
   if (missing(nrow)) {
@@ -114,7 +114,13 @@ validate_nrow <- function(names, lengths, nrow) {
 }
 
 update_tibble_attrs <- function(x, ...) {
-  structure(x, ...)
+  # Compat for https://github.com/r-spatial/sf/pull/1232
+  attribs <- list(...)
+  if (has_length(attribs) && is_named(attribs)) {
+    attributes(x)[names(attribs)] <- attribs
+  }
+
+  x
 }
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
