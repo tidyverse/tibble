@@ -1,102 +1,71 @@
 # tibble 2.99.99.9012
 
-- Subsetting via `[` repairs names with the `"minimal"` strategy, not `"unique"`, for compatibility with tidyr (#656).
-- Enable subsetting and subassignment for logical matrices (#687).
-- Fix `.data` pronoun in `tibble()` (#686).
+## Major breaking changes
+
+- Subset assignment ("subassignment") and also subsetting has become stricter. The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.
+
+- List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`.
+
+- Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don't expect names in columns (#630).
 
 
-# tibble 2.99.99.9011
+## Breaking changes
 
-- Using `[[` with `NA` throws an error (#647).
-- Import lifecycle package (#669).
-- Use `missing()` instead of `NULL` default value for `[` and `[[` methods (#685).
-- New `tibble_row()` (#205).
-- Mention "size" instead of "length" in error message (#682, @lionel-).
-- `as_tibble()` without arguments raises an error (#683).
-- `as_tibble.data.frame()` uses implicit row names if asked to create a column from row names. This allows lossless direct conversion of matrices with row names to tibbles (#567, @stufield).
-- `new_tibble()` removes redundant subclasses from the `"class"` attribute.
+- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(iris)` now has five columns, use `tibble(iris = iris)` if the intention is to create a packed data frame (#581).
 
+- The `name-repair` help topic is gone.
 
-# tibble 2.99.99.9010
-
-- Add proper error messages everywhere, avoid "could not find function error_xxx()" errors (#659).
-
-
-# tibble 2.99.99.9009
-
-- Using classed conditions. All classes start with `"tibble_error_"` and also contain `"tibble_error"` (#659).
-- Implement `str.tbl_df()` (#480).
 - `expression()` columns are converted to lists as a workaround for lacking support in vctrs (#657).
-- Tibbles now unconditionally allow inner names for all columns (#630).
-- `x[["unknown_column"]] <- NULL` works as expected (#666).
 
-
-# tibble 2.99.99.9008
-
-- `x[[NA]]` now throws an error (#647).
-- Using `vec_as_position()` internally.
-- Recycling of logical indexes now throws an error (#648).
-- `[` repairs names with the `"unique"` strategy (#656).
 - `tribble()` is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (#204).
-- `tribble()` now returns columns with `"unspecified"` type for 0-row tibbles.
-- `x[i, j] <- value` supports the creation of new columns and rows (#651).
 
-
-# tibble 2.99.99.9007
-
-- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)` (#581).
-- Soft-deprecate `subclass` argument to `new_tibble()`.
-- `add_row()` and `add_column()` now use `vec_restore()` to avoid errors when appending to sf objects or other tibble subclasses (#662).
-- Subassignment throws an error with duplicate row or column indexes (#658).
-
-
-# tibble 2.99.99.9006
-
-- Adapt style for subassignment in "invariants" article.
 - `$` warns unconditionally if column not found, `[[` doesn't warn.
 
 
-# tibble 2.99.99.9005
+## Soft deprecations
 
-- Correct behavior for subsetting and subassignment.
-- Reimplement subsetting and subassignment from invariants.
+- Soft-deprecate `subclass` argument to `new_tibble()`.
 
-
-# tibble 2.99.99.9004
-
-- Formatting numbers with thousand separators never uses scientific notation.
+- Soft-deprecate `as_tibble()` without arguments (#683).
 
 
-# tibble 2.99.99.9003
+## Features
 
-- New `` `[<-.tbl_df`() ``.
-- New `` `[[<-.tbl_df`()``.
-- New vignette for comparing assignment and subassignment between data frames and tibbles.
-- Use `vec_recycle()` instead of `vec_recycle_common()` (#628).
+- Internals now make heavy use of the vctrs package, following most of the invariants defined there. Name repair is the responsibility of vctrs now (#464).
+
+- New `tibble_row()` constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (#205).
+
+- `as_tibble.data.frame()` uses implicit row names if asked to create a column from row names. This allows lossless direct conversion of matrices with row names to tibbles (#567, @stufield).
+
+- Implement `str.tbl_df()` (#480).
+
+- `tribble()` now returns columns with `"unspecified"` type for 0-row tibbles.
+
+- `add_row()` and `add_column()` now use `vec_restore()` to avoid errors when appending to sf objects or other tibble subclasses (#662).
+
+- Allow `POSIXlt` columns, they are now better supported by dplyr and other tools thanks to vctrs (#626).
+
+- `tibble()` ignores NULL arguments, named or unnamed (#580).
 
 
-# tibble 2.99.99.9002
+## Output
 
-- `[[` subsetting with two arguments works as intended also for matrix and data frame columns (#440).
+- Formatting dimensions never uses scientific notation.
+
 - `glimpse()` uses "Rows" and "Columns" instead of "Variables" and "Observations", because we're not sure if the data is tidy here (#614).
 
+- `view()` now uses the created (or passed) title argument (#610, @xvrdm).
 
-# tibble 2.99.99.9001
+
+## Internal
+
+- Import lifecycle package (#669).
+
+- `new_tibble()` removes redundant subclasses from the `"class"` attribute.
+
+- Using classed conditions. All classes start with `"tibble_error_"` and also contain `"tibble_error"` (#659).
 
 - The magrittr pipe `%>%` is reexported.
-- Allow `POSIXlt` columns, they are now better supported by dplyr and other tools thanks to vctrs (#626).
-- `view()` now uses the created (or passed) title argument (#610, @xvrdm).
-- `$<-` recycles only length 1 (#438).
-- `tibble()` ignores NULL arguments, named or unnamed (#580).
-- Don't strip `"dim"` attribute, but still strip names.
-- Delegate legacy name repair to vctrs (#611).
-- Removed tests and other helper code for name repair, this is now the responsibility of vctrs (#609).
-- Delegate name repair to vctrs (#464).
-
-
-# tibble 2.1.3.9000
-
-- Internal changes only.
 
 
 # tibble 2.1.3
