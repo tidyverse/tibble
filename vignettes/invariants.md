@@ -692,7 +692,8 @@ first matching column.
 </tr>
 </tbody>
 </table>
-Unlike data frames, tibbles don’t support indexing by a logical matrix.
+Tibbles support indexing by a logical matrix, but only if all values in
+the returned vector are compatible.
 
 <table class="dftbl">
 <tbody>
@@ -708,9 +709,49 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
 </td>
 <td>
     tbl[is.na(tbl)]
+    #> [1] NA NA
 
-    #> Error: `i` must have one dimension,
-    #> not 2.
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    df[!is.na(df)]
+    #> [[1]]
+    #> [1] 1
+    #> 
+    #> [[2]]
+    #> [1] 3
+    #> 
+    #> [[3]]
+    #> [1] "e"
+    #> 
+    #> [[4]]
+    #> [1] "f"
+    #> 
+    #> [[5]]
+    #> [1] "g"
+    #> 
+    #> [[6]]
+    #> [1] "h"
+    #> 
+    #> [[7]]
+    #> [1] 9
+    #> 
+    #> [[8]]
+    #> [1] 10 11
+    #> 
+    #> [[9]]
+    #> [1] 12 13 14
+    #> 
+    #> [[10]]
+    #> [1] "text"
+
+</td>
+<td>
+    tbl[!is.na(tbl)]
+
+    #> Error: No common type for `n`
+    #> <integer> and `c` <character>.
 
 </td>
 </tr>
@@ -2204,7 +2245,8 @@ that order of precedence).
 </tr>
 </tbody>
 </table>
-Unlike data frames, tibbles don’t support indexing by a logical matrix.
+Tibbles support indexing by a logical matrix, but only for a scalar RHS,
+and if all columns updated are compatible with the value assigned.
 
 <table class="dftbl">
 <tbody>
@@ -2220,9 +2262,50 @@ Unlike data frames, tibbles don’t support indexing by a logical matrix.
 </td>
 <td>
     with_tbl(tbl[is.na(tbl)] <- 4)
+    #> # A tibble: 4 x 3
+    #>       n c     li       
+    #>   <int> <chr> <list>   
+    #> 1     1 e     <dbl [1]>
+    #> 2     4 f     <int [2]>
+    #> 3     3 g     <int [3]>
+    #> 4     4 h     <chr [1]>
 
-    #> Error: `i` must have one dimension,
-    #> not 2.
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[is.na(df)] <- 1:2)
+    #>   n c         li
+    #> 1 1 e          9
+    #> 2 1 f     10, 11
+    #> 3 3 g 12, 13, 14
+    #> 4 2 h       text
+
+</td>
+<td>
+    with_tbl(tbl[is.na(tbl)] <- 1:2)
+
+    #> Error in tbl_subassign_matrix(x, j,
+    #> value): vec_is(value, size = 1) is
+    #> not TRUE
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
+    #>   n c         li
+    #> 1 4 4          9
+    #> 2 4 f     10, 11
+    #> 3 4 g 12, 13, 14
+    #> 4 4 h       text
+
+</td>
+<td>
+    with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
+
+    #> Error: No common type for `value`
+    #> <double> and `x` <character>.
 
 </td>
 </tr>

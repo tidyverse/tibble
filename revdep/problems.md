@@ -103,55 +103,6 @@ Run `revdep_details(,"amt")` for more info
       All declared Imports should be used.
     ```
 
-# banter
-
-<details>
-
-* Version: 0.9.3
-* Source code: https://github.com/cran/banter
-* Date/Publication: 2018-07-10 15:20:06 UTC
-* Number of recursive dependencies: 62
-
-Run `revdep_details(,"banter")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    Running examples in ‘banter-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: getBanterModel
-    > ### Title: Extract Random Forest Model
-    > ### Aliases: getBanterModel
-    > 
-    > ### ** Examples
-    > 
-    > data(train.data)
-    > # initialize BANTER model with event data
-    > bant.mdl <- initBanterModel(train.data$events)
-    > # add all detector models
-    > bant.mdl <- addBanterDetector(
-    +   bant.mdl, train.data$detectors, 
-    +   ntree = 50, sampsize = 1, num.cores = 1
-    + )
-    > # run BANTER event model
-    > bant.mdl <- runBanterModel(bant.mdl, ntree = 1000, sampsize = 1)
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘ranger’
-      All declared Imports should be used.
-    ```
-
 # basket
 
 <details>
@@ -466,7 +417,6 @@ Run `revdep_details(,"corrr")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    + }
     > 
     > x <- correlate(mtcars)
     
@@ -593,42 +543,12 @@ Run `revdep_details(,"cvms")` for more info
       5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
       6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
       7. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
-      8. Error: multinomial evaluations are correct in evaluate() (@test_evaluate.R#396) 
-      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
+      8. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
+      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#523) 
       1. ...
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# describedata
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/describedata
-* Date/Publication: 2019-08-02 11:50:02 UTC
-* Number of recursive dependencies: 66
-
-Run `revdep_details(,"describedata")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘describedata-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: ladder
-    > ### Title: Replica of Stata's ladder function
-    > ### Aliases: ladder
-    > 
-    > ### ** Examples
-    > 
-    > ladder(iris$Sepal.Length)
-    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
     ```
 
 # DiagrammeR
@@ -895,68 +815,6 @@ Run `revdep_details(,"dssd")` for more info
     Execution halted
     ```
 
-# easyr
-
-<details>
-
-* Version: 0.1-1
-* Source code: https://github.com/cran/easyr
-* URL: https://github.com/oliver-wyman-actuarial/easyr
-* BugReports: https://github.com/oliver-wyman-actuarial/easyr/issues
-* Date/Publication: 2019-11-27 15:50:02 UTC
-* Number of recursive dependencies: 92
-
-Run `revdep_details(,"easyr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘easyr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: validate.equal
-    > ### Title: Validate Equal
-    > ### Aliases: validate.equal
-    > 
-    > ### ** Examples
-    > 
-    > validate.equal( iris, iris )
-    
-    Row and column counts match. 
-    Column names match. 
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-    ...
-      easyr::ecopy does not work on unix. 
-      Reading as XML/HTML 
-      Reading as XML/HTML 
-      easyr::tonum: NAs were created. Returning the vector unchanged. 
-        Problematic values include: [ 5'10 ] 
-      ── 1. Error: works as expected (@validateequal.R#110)  ─────────────────────────────
-      `i` must have one dimension, not 2.
-      Backtrace:
-        1. easyr::validate.equal(...)
-        3. tibble:::`[<-.tbl_df`(`*tmp*`, col.types == "ordered", value = "factor") revdep/checks/easyr/new/easyr.Rcheck/00_pkg_src/easyr/R/validateequal.R:110:4
-        4. tibble:::tbl_subassign(x, i, j, value)
-        5. tibble:::vec_as_new_col_index(j, x, value)
-        6. tibble:::vec_as_col_index(j, x)
-       19. vctrs::vec_as_index(j, length(x), names(x), arg = "j")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 282 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: works as expected (@validateequal.R#110) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # egor
 
 <details>
@@ -1009,7 +867,7 @@ Run `revdep_details(,"egor")` for more info
       EI-Index: female
       EI-Index: female
       ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 69 | SKIPPED: 0 | WARNINGS: 12 | FAILED: 6 ]
+      [ OK: 69 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 6 ]
       1. Failure: Methods are working. (@test_clustered_graphs.R#9) 
       2. Failure: Methods are working with partially missing data. (@test_clustered_graphs.R#23) 
       3. Failure: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#35) 
@@ -1605,49 +1463,6 @@ Run `revdep_details(,"ggspatial")` for more info
       All declared Imports should be used.
     ```
 
-# ggstatsplot
-
-<details>
-
-* Version: 0.1.4
-* Source code: https://github.com/cran/ggstatsplot
-* URL: https://indrajeetpatil.github.io/ggstatsplot/, https://github.com/IndrajeetPatil/ggstatsplot
-* BugReports: https://github.com/IndrajeetPatil/ggstatsplot/issues
-* Date/Publication: 2019-12-18 20:00:02 UTC
-* Number of recursive dependencies: 238
-
-Run `revdep_details(,"ggstatsplot")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > 
-    > # this internal function may not have much utility outside of the package
-    > set.seed(123)
-    > library(ggplot2)
-    > 
-    > # make a plot
-    > p <- ggplot(data = iris, aes(x = Species, y = Sepal.Length)) +
-    +   geom_boxplot()
-    > 
-    > # get a dataframe with means
-    > mean_dat <- ggstatsplot:::mean_labeller(
-    +   data = iris,
-    +   x = Species,
-    +   y = Sepal.Length,
-    +   mean.ci = TRUE,
-    +   k = 3
-    + )
-    Warning: Factor `Species` contains implicit NA, consider using `forcats::fct_explicit_na`
-    Error: object 'n_missing' not found
-    Execution halted
-    ```
-
 # googlesheets4
 
 <details>
@@ -1897,27 +1712,27 @@ Run `revdep_details(,"healthcareai")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    +                 groups = drug,
-    +                 outcome = survived,
-    +                 n_levels = 3)
-    [1] "Epinephrine" "Ibuprofen"   "Paclitaxel" 
     > 
-    > # Identify four drugs likely to make good features and add them to df.
-    > # The "fill", "fun", and "missing_fill" arguments are passed to
-    > # `pivot`, which allows us to use the total doses of each drug given to the
-    > # patient as our new features
+    > ### ** Examples
     > 
-    > new_df <- add_best_levels(d = df,
-    +                           longsheet = meds,
-    +                           id = patient,
-    +                           groups = drug,
-    +                           outcome = survived,
-    +                           n_levels = 4,
-    +                           fill = dose,
-    +                           fun = sum,
-    +                           missing_fill = 0)
-    Error: `i` must have one dimension, not 2.
-    Execution halted
+    > models <- machine_learn(pima_diabetes[1:40, ],
+    +                        patient_id,
+    +                        outcome = diabetes,
+    +                        models = c("XGB", "RF"),
+    +                        tune = FALSE,
+    +                        n_folds = 3)
+    Training new data prep recipe...
+    
+    The argument `options` is deprecated in favor of `freq_cut` and `unique_cut`. options` will be removed in next version.
+    Variable(s) ignored in prep_data won't be used to tune models: patient_id
+    
+    diabetes looks categorical, so training classification algorithms.
+    
+    After data processing, models are being trained on 12 features with 40 observations.
+    Based on n_folds = 3 and hyperparameter settings, the following number of models will be trained: 3 xgb's and 3 rf's 
+    
+    Training at fixed values: eXtreme Gradient Boosting
+    Training at fixed values: Random Forest
     ```
 
 *   checking tests ...
@@ -2098,26 +1913,30 @@ Run `revdep_details(,"INDperform")` for more info
     Running examples in ‘INDperform-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: clust_sc
-    > ### Title: Score-based cluster analysis
-    > ### Aliases: clust_sc
+    > ### Name: merge_models
+    > ### Title: Merging two model output tibbles.
+    > ### Aliases: merge_models
     > 
     > ### ** Examples
     > 
-    > # Using the Baltic Sea demo data
-    > scores_tbl <- scoring(trend_tbl = model_trend_ex,
-    +   mod_tbl = all_results_ex, press_type = press_type_ex)
-    Warning: `.key` is deprecated
-    > scores_mat <- summary_sc(scores_tbl)$scores_matrix
-    Warning: `cols` is now required.
-    Please use `cols = c(press_spec_sc)`
-    Error: `i` must have one dimension, not 2.
+    > # Using some models of the Baltic Sea demo data:
+    > # Merging GAM and GAMM tibbles
+    > test_ids <- 47:50 # choose subset
+    > gam_tbl <- model_gam_ex[test_ids,]
+    > gamm_tbl <- model_gamm(ind_init_ex[test_ids,], filter= gam_tbl$tac)
+    Error in model_gamm(ind_init_ex[test_ids, ], filter = gam_tbl$tac) : 
+      No IND~pressure GAMM could be fitted! Check if you chose the correct error distribution (default is gaussian()).
     Execution halted
     ```
 
 *   checking tests ...
     ```
     ...
+      [90m 10. [39mvctrs::stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+      [90m 11. [39mvctrs:::stop_incompatible(...)
+      [90m 12. [39mvctrs:::stop_vctrs(...)
+      
+      [31m──[39m [31m3. Error: (unknown) (@test_test_interaction.R#27) [39m [31m─────────────────────────────[39m
       No common type for `value` <logical> and `x` <list>.
       [1mBacktrace:[22m
       [90m  1. [39mbase::`[<-`(`*tmp*`, 1, -c(1:4), value = NA)
@@ -2127,15 +1946,10 @@ Run `revdep_details(,"INDperform")` for more info
       [90m 11. [39mvctrs:::stop_vctrs(...)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 461 | SKIPPED: 0 | WARNINGS: 24 | FAILED: 8 ]
-      1. Error: (unknown) (@test_clust_sc.R#5) 
-      2. Error: (unknown) (@test_dist_sc.R#5) 
-      3. Error: (unknown) (@test_dist_sc_group.R#5) 
-      4. Error: (unknown) (@test_model_gamm.R#4) 
-      5. Error: (unknown) (@test_plot_spiechart.R#5) 
-      6. Error: (unknown) (@test_scoring.R#15) 
-      7. Error: (unknown) (@test_summary_sc.R#6) 
-      8. Error: (unknown) (@test_test_interaction.R#27) 
+      [ OK: 506 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 3 ]
+      1. Error: (unknown) (@test_model_gamm.R#4) 
+      2. Error: (unknown) (@test_scoring.R#15) 
+      3. Error: (unknown) (@test_test_interaction.R#27) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2310,7 +2124,7 @@ Run `revdep_details(,"ipumsr")` for more info
     Loading required package: sf
     Linking to GEOS 3.7.1, GDAL 2.4.0, PROJ 5.2.0
     options:        ENCODING=latin1 
-    Reading layer `US_pmsa_1990' from data source `/tmp/RtmpiHfTHz/file28e13d80c615/US_pmsa_1990.shp' using driver `ESRI Shapefile'
+    Reading layer `US_pmsa_1990' from data source `/tmp/RtmpC5B1Oa/file1bfe41bff78a2/US_pmsa_1990.shp' using driver `ESRI Shapefile'
     Error in attributes(.Data) <- c(attributes(.Data), attrib) : 
       all attributes must have names [3 does not]
     Calls: read_ipums_sf ... st_read.character -> process_cpl_read_ogr -> <Anonymous> -> structure
@@ -2327,17 +2141,17 @@ Run `revdep_details(,"ipumsr")` for more info
       [90m 9. [39mbase::structure(x, ...)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 170 | SKIPPED: 11 | WARNINGS: 0 | FAILED: 12 ]
-      1. Error: lbl_collapse: basic (@test_lbls.r#70) 
-      2. Error: lbl_collapse: if recoding to old value it is maintained (even if it's not first) (@test_lbls.r#83) 
-      3. Error: Can read NHGIS extract (with shape as sf) (@test_nhgis.r#31) 
-      4. Error: Can read NHGIS extract (with shape as sf - 1 layer unzipped) (@test_nhgis.r#54) 
-      5. Error: Can read NHGIS extract (with shape as sf - 2 layers unzipped) (@test_nhgis.r#93) 
-      6. Error: NHGIS - sf and sp polygon-data relationships didn't get scrambled in import (@test_nhgis.r#133) 
-      7. Error: Basic join works (sf) (@test_shape_join.r#6) 
-      8. Error: suffix argument works (sf) (@test_shape_join.r#30) 
-      9. Error: complicated by works (sf) (@test_shape_join.r#44) 
-      1. ...
+      [ OK: 172 | SKIPPED: 11 | WARNINGS: 0 | FAILED: 10 ]
+      1.  Error: Can read NHGIS extract (with shape as sf) (@test_nhgis.r#31) 
+      2.  Error: Can read NHGIS extract (with shape as sf - 1 layer unzipped) (@test_nhgis.r#54) 
+      3.  Error: Can read NHGIS extract (with shape as sf - 2 layers unzipped) (@test_nhgis.r#93) 
+      4.  Error: NHGIS - sf and sp polygon-data relationships didn't get scrambled in import (@test_nhgis.r#133) 
+      5.  Error: Basic join works (sf) (@test_shape_join.r#6) 
+      6.  Error: suffix argument works (sf) (@test_shape_join.r#30) 
+      7.  Error: complicated by works (sf) (@test_shape_join.r#44) 
+      8.  Error: error for missing a by variable (sf) (@test_shape_join.r#66) 
+      9.  Error: Join failures are mentioned (@test_shape_join.r#75) 
+      10. Error: Character -> Integer conversion works (#16) (@test_shape_join.r#104) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2512,14 +2326,14 @@ Run `revdep_details(,"jtools")` for more info
 *   checking tests ...
     ```
     ...
-       18. tibble:::`[<-.tbl_df`(`*tmp*`, zeroes, value = 0) revdep/checks/jtools/new/jtools.Rcheck/00_pkg_src/jtools/R/export_summ.R:979:4
-       19. tibble:::tbl_subassign(x, i, j, value)
-       20. tibble:::vec_as_new_col_index(j, x, value)
-       21. tibble:::vec_as_col_index(j, x)
-       34. vctrs::vec_as_index(j, length(x), names(x), arg = "j")
+      [90m 11. [39mtibble:::tbl_subset2(x, j = i)
+      [90m 12. [39mvctrs::vec_as_position(j, length(x), names(x), arg = "j")
+      [90m 13. [39mvctrs:::maybe_get(...)
       
+      Failed with error:  'there is no package called 'brms''
+      Failed with error:  'there is no package called 'rstanarm''
       ══ testthat results  ═══════════════════════════════════════════════════════════════
-      [ OK: 240 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 37 ]
+      [ OK: 279 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 11 ]
       1. Error: effect_plot works for lm (@test-effect-plot.R#25) 
       2. Error: effect_plot: robust intervals works (@test-effect-plot.R#37) 
       3. Error: effect_plot: rug plots work (@test-effect-plot.R#45) 
@@ -2708,52 +2522,6 @@ Run `revdep_details(,"MNLpred")` for more info
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# modelsummary
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/modelsummary
-* URL: https://github.com/vincentarelbundock/modelsummary
-* BugReports: https://github.com/vincentarelbundock/modelsummary/issues
-* Date/Publication: 2019-07-15 10:20:03 UTC
-* Number of recursive dependencies: 79
-
-Run `revdep_details(,"modelsummary")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘modelsummary-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: extract
-    > ### Title: Extract and combine estimates and goodness-of-fit statistics
-    > ###   from several statistical models.
-    > ### Aliases: extract
-    > 
-    > ### ** Examples
-    > 
-    > library(modelsummary)
-    > data(trees)
-    > models <- list()
-    > models[['Bivariate']] <- lm(Girth ~ Height, data = trees)
-    > models[['Multivariate']] <- lm(Girth ~ Height + Volume, data = trees)
-    > extract(models)
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘gt’
     ```
 
 # MPTmultiverse
@@ -3026,8 +2794,8 @@ Run `revdep_details(,"oppr")` for more info
             The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
             The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
             The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.028 seconds, presolve used 0.000 seconds,
-             ... 0.001 seconds in simplex solver, in total 0.029 seconds.
+            Time to load data was 0.030 seconds, presolve used 0.000 seconds,
+             ... 0.001 seconds in simplex solver, in total 0.031 seconds.
       ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
@@ -3052,52 +2820,6 @@ Run `revdep_details(,"oppr")` for more info
       sub-directories of 1Mb or more:
         R      3.9Mb
         libs  14.3Mb
-    ```
-
-# palaeoSig
-
-<details>
-
-* Version: 2.0-3
-* Source code: https://github.com/cran/palaeoSig
-* URL: https://github.com/richardjtelford/palaeoSig
-* BugReports: https://github.com/richardjtelford/palaeoSig/issues
-* Date/Publication: 2019-06-28 08:00:03 UTC
-* Number of recursive dependencies: 107
-
-Run `revdep_details(,"palaeoSig")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘palaeoSig-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: obs.cor
-    > ### Title: Weighted correlation between weighted averaging optima and
-    > ###   constrained ordination species scores.
-    > ### Aliases: obs.cor plot.obscor identify.obscor autoplot.obscor
-    > ### Keywords: hplot htest multivariate
-    > 
-    > ### ** Examples
-    > 
-    > require(rioja)
-    Loading required package: rioja
-    This is rioja 0.9-21
-    > data(SWAP)
-    > data(RLGH)
-    > rlgh.obs <- obs.cor(spp = sqrt(SWAP$spec), env = SWAP$pH, fos = sqrt(RLGH$spec))
-    Error: Tibble columns must have consistent sizes, only values of size one are recycled:
-    ```
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘analogue’
     ```
 
 # pkgsearch
@@ -3475,7 +3197,7 @@ Run `revdep_details(,"rbin")` for more info
       1 tertiary       1299   195  1104 -0.313 0.0318    0.610
       2 secondary      2352   231  2121  0.170 0.0141    0.463
       3 unknown         179    25   154 -0.229 0.00227   0.583
-      4 primary         691    66   625  0.201 0.00572   0.455══ testthat results  ═══════════════════════════════════════════════════════════════
+      4 primary         691    66   625  0.201 0.00572   0.455══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 10 | SKIPPED: 5 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: output from rbin_create is as expected as expected (@test-bins.R#30) 
       
@@ -3900,26 +3622,26 @@ Run `revdep_details(,"rubias")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    > ### Title: Write a mixture data frame to gsi_sim format baseline and
-    > ###   repunits file
-    > ### Aliases: write_gsi_sim_mixture
-    > 
-    > ### ** Examples
-    > 
-    > # this writes to file prefix "mixfile" in a temporary directory
-    > dd <- tempdir()
-    > prefix <- file.path(dd, "mixfile")
-    > 
-    > # print that
-    > prefix
-    [1] "/tmp/RtmplyL5Xp/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
     > 
     > # run the function
     > write_gsi_sim_mixture(chinook_mix, 5, prefix)
-    Error: `i` must have one dimension, not 2.
+    Error: No common type for `value` <double> and `x` <character>.
+    [1m<error/vctrs_error_incompatible_type>[22m
+    No common type for `value` <double> and `x` <character>.
+    [1mBacktrace:[22m
+    [90m     [39m█
+    [90m  1. [39m├─rubias::write_gsi_sim_mixture(chinook_mix, 5, prefix)
+    [90m  2. [39m│ ├─base::`[<-`(`*tmp*`, is.na(mix), value = 0) [90m00_pkg_src/rubias/R/write_gsi_sim_mixture.R:36:2[39m
+    [90m  3. [39m│ └─tibble:::`[<-.tbl_df`(`*tmp*`, is.na(mix), value = 0) [90m00_pkg_src/rubias/R/write_gsi_sim_mixture.R:36:2[39m
+    [90m  4. [39m│   └─tibble:::tbl_subassign_matrix(x, j, value)
+    [90m  5. [39m│     └─tibble:::map2(x[col_idx], cells[col_idx], `vec_slice<-`, value)
+    [90m  6. [39m│       └─base::mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
+    [90m  7. [39m│         └─(function (x, i, value) ...
+    [90m  8. [39m├─vctrs:::vec_type2_dispatch(x = x, y = y, x_arg = x_arg, y_arg = y_arg)
+    [90m  9. [39m├─vctrs::vec_ptype2.
     Execution halted
     ```
 
@@ -4513,49 +4235,6 @@ Run `revdep_details(,"stminsights")` for more info
       All declared Imports should be used.
     ```
 
-# suddengains
-
-<details>
-
-* Version: 0.4.0
-* Source code: https://github.com/cran/suddengains
-* URL: https://github.com/milanwiedemann/suddengains
-* BugReports: https://github.com/milanwiedemann/suddengains/issues
-* Date/Publication: 2019-10-27 11:20:02 UTC
-* Number of recursive dependencies: 81
-
-Run `revdep_details(,"suddengains")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > ### Title: Create a data set with one gain per person
-    > ### Aliases: create_byperson
-    > 
-    > ### ** Examples
-    > 
-    > # Create byperson data set, selecting the largest gain in case of muliple gains
-    > create_byperson(data = sgdata,
-    +                 sg_crit1_cutoff = 7,
-    +                 id_var_name = "id",
-    +                 tx_start_var_name = "bdi_s1",
-    +                 tx_end_var_name = "bdi_s12",
-    +                 sg_var_list = c("bdi_s1", "bdi_s2", "bdi_s3",
-    +                                 "bdi_s4", "bdi_s5", "bdi_s6",
-    +                                 "bdi_s7", "bdi_s8", "bdi_s9",
-    +                                 "bdi_s10", "bdi_s11", "bdi_s12"),
-    +                 sg_measure_name = "bdi",
-    +                 multiple_sg_select = "largest")
-    First, second, and third sudden gains criteria were applied.
-    The critical value for the thrid criterion was adjusted for missingness.
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
 # taxa
 
 <details>
@@ -4819,100 +4498,6 @@ Run `revdep_details(,"units")` for more info
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# utile.tables
-
-<details>
-
-* Version: 0.1.8
-* Source code: https://github.com/cran/utile.tables
-* URL: https://github.com/efinite/utile.tables
-* BugReports: https://github.com/efinite/utile.tables/issues
-* Date/Publication: 2019-12-02 10:20:02 UTC
-* Number of recursive dependencies: 30
-
-Run `revdep_details(,"utile.tables")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    
-        filter, lag
-    
-    The following objects are masked from ‘package:base’:
-    
-        intersect, setdiff, setequal, union
-    
-    > 
-    > data_lung <- lung %>%
-    +   as_tibble() %>%
-    +   mutate_at(vars(inst, status, sex), as.factor) %>%
-    +   mutate(status = case_when(status == 1 ~ 0, status == 2 ~ 1))
-    > 
-    > # Stand-alone row
-    > build_event_row(
-    +    label = 'Meal calories',
-    +    col = 'meal.cal',
-    +    fit = coxph(Surv(time, status) ~ meal.cal, data = data_lung)
-    + )
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
-# utile.tools
-
-<details>
-
-* Version: 0.2.3
-* Source code: https://github.com/cran/utile.tools
-* URL: https://github.com/efinite/utile.tools
-* BugReports: https://github.com/efinite/utile.tools/issues
-* Date/Publication: 2019-12-01 23:00:06 UTC
-* Number of recursive dependencies: 30
-
-Run `revdep_details(,"utile.tools")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    
-    The following objects are masked from ‘package:stats’:
-    
-        filter, lag
-    
-    The following objects are masked from ‘package:base’:
-    
-        intersect, setdiff, setequal, union
-    
-    > 
-    > # Survival data
-    > data_lung <- lung %>%
-    +   as_tibble() %>%
-    +   mutate_at(vars(inst, status, sex), as.factor) %>%
-    +   mutate(status = case_when(status == 1 ~ 0, status == 2 ~ 1))
-    > 
-    > tabulate_model(
-    +   fit = coxph(Surv(time, status) ~ sex + meal.cal + inst, data = data_lung)
-    +  )
-    Error: `i` must have one dimension, not 2.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rlang’
-      All declared Imports should be used.
     ```
 
 # wtss

@@ -178,7 +178,7 @@ NULL
   # Ignore drop as an argument for counting
   n_real_args <- nargs() - !missing(drop)
 
-  # Column subsetting if nargs() == 2L
+  # Column or matrix subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
       warn("`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`.")
@@ -187,6 +187,11 @@ NULL
 
     j <- i
     i <- NULL
+
+    # Special case, returns a vector:
+    if (is.matrix(j)) {
+      return(tbl_subset_matrix(x, j))
+    }
   }
 
   # From here on, i, j and drop contain correct values:
@@ -218,6 +223,11 @@ NULL
   if (is.null(j) && nargs() < 4) {
     j <- i
     i <- NULL
+
+    # Special case:
+    if (is.matrix(j)) {
+      return(tbl_subassign_matrix(x, j, value))
+    }
   }
 
   tbl_subassign(x, i, j, value)

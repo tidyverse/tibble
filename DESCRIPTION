@@ -88,6 +88,7 @@ Collate:
     'rownames.R'
     'str.R'
     'strrep.R'
+    'subsetting-matrix.R'
     'subsetting.R'
     'tbl-df.R'
     'tibble-package.R'
