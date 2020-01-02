@@ -253,7 +253,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
   if (missing(x)) {
-    abort(error_as_tibble_needs_argument())
+    signal_soft_deprecated(error_as_tibble_needs_argument())
   }
 
   new_tibble(list(), nrow = 0)
