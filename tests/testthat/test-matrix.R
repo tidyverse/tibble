@@ -138,12 +138,16 @@ test_that("converting from matrix supports storing row names in a column", {
 test_that("converting from matrix uses implicit row names when `rownames =` is passed", {
   x <- matrix(1:30, 6, 5)
   y <- as_tibble(x, rownames = "id", .name_repair = "minimal")
-  z <- tibble(id = c("1", "2", "3", "4", "5", "6"),
-              ...2 = c(1L, 2L, 3L, 4L, 5L, 6L),
-              ...3 = c(7L, 8L, 9L, 10L, 11L, 12L),
-              ...4 = c(13L, 14L, 15L, 16L, 17L, 18L),
-              ...5 = c(19L, 20L, 21L, 22L, 23L, 24L),
-              ...6 = c(25L, 26L, 27L, 28L, 29L, 30L)
-            )
+  z <- new_tibble(
+    list(
+      id = c("1", "2", "3", "4", "5", "6"),
+      c(1L, 2L, 3L, 4L, 5L, 6L),
+      c(7L, 8L, 9L, 10L, 11L, 12L),
+      c(13L, 14L, 15L, 16L, 17L, 18L),
+      c(19L, 20L, 21L, 22L, 23L, 24L),
+      c(25L, 26L, 27L, 28L, 29L, 30L)
+    ),
+    nrow = 6
+  )
   expect_equal(y, z)
 })

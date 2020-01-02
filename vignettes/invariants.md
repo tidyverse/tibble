@@ -659,11 +659,8 @@ undefined, do not rely on them.
 </td>
 <td>
     tbl[c(1, 1)]
-    #> New names:
-    #> * n -> n...1
-    #> * n -> n...2
     #> # A tibble: 4 x 2
-    #>   n...1 n...2
+    #>       n     n
     #>   <int> <int>
     #> 1     1     1
     #> 2    NA    NA
