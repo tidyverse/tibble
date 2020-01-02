@@ -317,7 +317,7 @@ exists.
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `j` has the wrong type
+    #> [31mx[39m `j` has the wrong type
     #> `logical`.
     #> [34mℹ[39m This index must be a
     #> position or a name.
@@ -338,7 +338,7 @@ exists.
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `j` has the wrong type
+    #> [31mx[39m `j` has the wrong type
     #> `closure`.
     #> [34mℹ[39m This index must be a
     #> position or a name.
@@ -363,7 +363,7 @@ an error:
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `j` can't be `NA`.
+    #> [31mx[39m `j` can't be `NA`.
     #> [34mℹ[39m This index can't be
     #> missing.
 
@@ -371,10 +371,18 @@ an error:
 </tr>
 <tr style="vertical-align:top">
 <td>
+    df[[NA_character_]]
+    #> NULL
+
 </td>
 <td>
     tbl[[NA_character_]]
-    #> NULL
+
+    #> Error: Must extract with a single
+    #> index.
+    #> [31mx[39m `j` can't be `NA`.
+    #> [34mℹ[39m This index can't be
+    #> missing.
 
 </td>
 </tr>
@@ -389,7 +397,7 @@ an error:
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `j` can't be `NA`.
+    #> [31mx[39m `j` can't be `NA`.
     #> [34mℹ[39m This index can't be
     #> missing.
 
@@ -409,7 +417,7 @@ an error:
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `j` (with value -1) has
+    #> [31mx[39m `j` (with value -1) has
     #> the wrong sign.
     #> [34mℹ[39m This index must be a
     #> positive integer.
@@ -428,7 +436,7 @@ an error:
     tbl[[4]]
 
     #> Error: Must index existing elements.
-    #> [31m✖[39m Can't subset position 4.
+    #> [31mx[39m Can't subset position 4.
     #> [34mℹ[39m There are only 3
     #> elements.
 
@@ -445,7 +453,7 @@ an error:
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m Lossy cast from `j`
+    #> [31mx[39m Lossy cast from `j`
     #> <double> to <integer>.
 
 </td>
@@ -461,7 +469,7 @@ an error:
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m Lossy cast from `j`
+    #> [31mx[39m Lossy cast from `j`
     #> <double> to <integer>.
 
 </td>
@@ -861,7 +869,7 @@ vector containing positive numbers.
 
     #> Error: Must subset with an index
     #> vector.
-    #> [31m✖[39m `i` has the wrong type
+    #> [31mx[39m `i` has the wrong type
     #> `closure`.
     #> [34mℹ[39m These indices must be
     #> indicators, positions or names.
@@ -881,7 +889,7 @@ vector containing positive numbers.
 
     #> Error: Must subset with an index
     #> vector.
-    #> [31m✖[39m `i` has the wrong type
+    #> [31mx[39m `i` has the wrong type
     #> `list`.
     #> [34mℹ[39m These indices must be
     #> indicators, positions or names.
@@ -1477,10 +1485,10 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 3:1)
 
     #> Error: Tibble columns must have
-    #> consistent lengths, only values of
-    #> length one are recycled:
-    #> * Length 4: Existing data
-    #> * Length 3: Column `n`
+    #> consistent sizes, only values of
+    #> size one are recycled:
+    #> * Size 4: Existing data
+    #> * Size 3: Column `n`
 
 </td>
 </tr>
@@ -1498,10 +1506,10 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 2:1)
 
     #> Error: Tibble columns must have
-    #> consistent lengths, only values of
-    #> length one are recycled:
-    #> * Length 4: Existing data
-    #> * Length 2: Column `n`
+    #> consistent sizes, only values of
+    #> size one are recycled:
+    #> * Size 4: Existing data
+    #> * Size 2: Column `n`
 
 </td>
 </tr>
@@ -2256,6 +2264,59 @@ This is primarily provided for backward compatbility.
 </tr>
 </tbody>
 </table>
+Matrices are vectors, so they are also wrapped in `list()` before
+assignment. This consistently creates matrix columns, unlike data
+frames, which creates matrix columns when assigning to one column, but
+treats the matrix like a data frame when assigning to more than one
+column.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[1] <- matrix(1:8, ncol = 2))
+    #> # A tibble: 4 x 3
+    #>   n[,1]  [,2] c     li       
+    #>   <int> <int> <chr> <list>   
+    #> 1     1     5 e     <dbl [1]>
+    #> 2     2     6 f     <int [2]>
+    #> 3     3     7 g     <int [3]>
+    #> 4     4     8 h     <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[c(1, 2)] <- matrix(1:8, ncol = 2))
+    #>   n c         li
+    #> 1 1 5          9
+    #> 2 2 6     10, 11
+    #> 3 3 7 12, 13, 14
+    #> 4 4 8       text
+
+</td>
+<td>
+    with_tbl(tbl[c(1, 2)] <- matrix(1:8, ncol = 2))
+    #> # A tibble: 4 x 3
+    #>   n[,1]  [,2] c[,1]  [,2] li       
+    #>   <int> <int> <int> <int> <list>   
+    #> 1     1     5     1     5 <dbl [1]>
+    #> 2     2     6     2     6 <int [2]>
+    #> 3     3     7     3     7 <int [3]>
+    #> 4     4     8     4     8 <chr [1]>
+
+</td>
+</tr>
+</tbody>
+</table>
 ### `a` is not a vector
 
 Any other type for `a` is an error. Note that if `is.list(a)` is `TRUE`,
@@ -2700,7 +2761,7 @@ supported, without warning.
     with_tbl(tbl[-5, ] <- tbl[1, ])
 
     #> Error: Must index existing elements.
-    #> [31m✖[39m Can't subset position 5.
+    #> [31mx[39m Can't subset position 5.
     #> [34mℹ[39m There are only 4
     #> elements.
 
@@ -2720,7 +2781,7 @@ supported, without warning.
     with_tbl(tbl[-(5:7), ] <- tbl[1, ])
 
     #> Error: Must index existing elements.
-    #> [31m✖[39m Can't subset positions
+    #> [31mx[39m Can't subset positions
     #> 5, 6 and 7.
     #> [34mℹ[39m There are only 4
     #> elements.
@@ -2741,7 +2802,7 @@ supported, without warning.
     with_tbl(tbl[-6, ] <- tbl[1, ])
 
     #> Error: Must index existing elements.
-    #> [31m✖[39m Can't subset position 6.
+    #> [31mx[39m Can't subset position 6.
     #> [34mℹ[39m There are only 4
     #> elements.
 
@@ -2940,12 +3001,12 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: No common type for `x`
+    #> Error: No common type for `value`
     #> <tbl_df<
     #> n : integer
     #> c : character
     #> li: list
-    #> >> and `y` <list>.
+    #> >> and `x` <list>.
 
 </td>
 </tr>
@@ -3254,7 +3315,7 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `i` has the wrong size
+    #> [31mx[39m `i` has the wrong size
     #> 2.
     #> [34mℹ[39m This index must be size
     #> 1.
@@ -3275,7 +3336,7 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must extract with a single
     #> index.
-    #> [31m✖[39m `i` has the wrong size
+    #> [31mx[39m `i` has the wrong size
     #> 2.
     #> [34mℹ[39m This index must be size
     #> 1.
