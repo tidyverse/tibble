@@ -1,3 +1,10 @@
+# tibble 2.99.99.9012
+
+- Subsetting via `[` repairs names with the `"minimal"` strategy, not `"unique"`, for compatibility with tidyr (#656).
+- Enable subsetting and subassignment for logical matrices (#687).
+- Fix `.data` pronoun in `tibble()` (#686).
+
+
 # tibble 2.99.99.9011
 
 - Using `[[` with `NA` throws an error (#647).
