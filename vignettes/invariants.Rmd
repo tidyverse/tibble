@@ -277,10 +277,11 @@ For tibbles with repeated column names, subsetting by name uses the first matchi
 df[integer()]
 ```
 
-Unlike data frames, tibbles don't support indexing by a logical matrix.
+Tibbles support indexing by a logical matrix, but only if all values in the returned vector are compatible.
 
 ```{r bracket-j-logical-matrix, dftbl = TRUE}
 df[is.na(df)]
+df[!is.na(df)]
 ```
 
 ### Definition of `x[, j]`
@@ -566,10 +567,12 @@ with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```
 
-Unlike data frames, tibbles don't support indexing by a logical matrix.
+Tibbles support indexing by a logical matrix, but only for a scalar RHS, and if all columns updated are compatible with the value assigned.
 
 ```{r bracket-j-assign-logical-matrix, dftbl = TRUE}
 with_df(df[is.na(df)] <- 4)
+with_df(df[is.na(df)] <- 1:2)
+with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 ```
 
 ### `a` is another type of vector
