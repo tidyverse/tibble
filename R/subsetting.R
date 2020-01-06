@@ -115,7 +115,7 @@ NULL
   } else if (missing(j)) {
     error_assign_columns_non_missing_only()
   } else {
-    i <- vec_as_position(i, fast_nrow(x))
+    i <- vec_as_location2(i, fast_nrow(x))
 
     x <- tbl_subset2(x, j = j)
     if (is.null(x)) return(x)
@@ -141,7 +141,7 @@ NULL
   }
 
   if (!is_null(i)) {
-    i <- vec_as_position(i, fast_nrow(x))
+    i <- vec_as_location2(i, fast_nrow(x))
   }
 
   if (is_null(j)) {
@@ -257,9 +257,9 @@ vec_as_row_index <- function(i, x) {
     i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
-    vec_as_index(i, nr)
+    vec_as_location(i, nr)
   } else {
-    vec_as_index(i, nr)
+    vec_as_location(i, nr)
   }
 }
 
@@ -269,7 +269,7 @@ fix_oob <- function(i, n, warn = TRUE) {
   } else if (all(i <= 0, na.rm = TRUE)) {
     fix_oob_negative(i, n, warn)
   } else {
-    # Will throw error in vec_as_index()
+    # Will throw error in vec_as_location()
     i
   }
 }
@@ -321,7 +321,7 @@ vec_as_col_index <- function(j, x) {
   }
 
   subclass_col_index_errors(
-    vec_as_index(j, length(x), names(x), arg = "j")
+    vec_as_location(j, length(x), names(x), arg = "j")
   )
 }
 
@@ -341,7 +341,7 @@ tbl_subset2 <- function(x, j) {
     }
   }
 
-  j <- vec_as_position(j, length(x), names(x), arg = "j")
+  j <- vec_as_location2(j, length(x), names(x), arg = "j")
   .subset2(x, j)
 }
 
@@ -386,7 +386,7 @@ tbl_subassign <- function(x, i, j, value) {
       xo <- tbl_subassign_row(x, i, value)
     } else {
       # Optimization: match only once
-      # (Invariant: x[[j]] is equivalent to x[[vec_as_index(j)]],
+      # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       j <- vec_as_new_col_index(j, x, value)
       new_cols <- which(is.na(j))
@@ -421,7 +421,7 @@ vec_as_new_row_index <- function(i, x) {
     new <- which(i > nr)
     i_new <- i[new]
     i[new] <- NA
-    i <- vec_as_index(i, nr)
+    i <- vec_as_location(i, nr)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
       abort(error_new_rows_at_end_only(nr, i_new))
@@ -432,7 +432,7 @@ vec_as_new_row_index <- function(i, x) {
     i
   } else if (is_logical(i)) {
     # Don't allow OOB logical
-    vec_as_index(i, fast_nrow(x))
+    vec_as_location(i, fast_nrow(x))
   } else {
     i <- vec_as_row_index(i, x)
     if (anyDuplicated(i, incomparables = NA)) {
@@ -461,7 +461,7 @@ vec_as_new_col_index <- function(j, x, value) {
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
-    j <- vec_as_index(j, ncol(x), arg = "j")
+    j <- vec_as_location(j, ncol(x), arg = "j")
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       abort(error_new_columns_at_end_only(ncol(x), j_new))

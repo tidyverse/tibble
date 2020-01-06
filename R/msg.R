@@ -339,12 +339,12 @@ subclass_col_index_errors <- function(expr) {
   tryCatch(
     force(expr),
 
-    vctrs_error_index_oob_names = function(cnd) {
+    vctrs_error_subscript_oob_name = function(cnd) {
       cnd <- error_unknown_column_names(setdiff(cnd$i, cnd$names), parent = cnd)
       cnd_signal(cnd)
     },
 
-    vctrs_error_index_oob_positions = function(cnd) {
+    vctrs_error_subscript_oob_location = function(cnd) {
       i <- cnd$i
       size <- cnd$size
       if (any(i < 0)) {
@@ -355,7 +355,7 @@ subclass_col_index_errors <- function(expr) {
       cnd_signal(cnd)
     },
 
-    vctrs_error_index_bad_type = function(cnd) {
+    vctrs_error_subscript_bad_type = function(cnd) {
       body <- cnd_body(cnd)
       cnd$body <- function(...) body
       cnd <- error_unsupported_column_index(cnd)
