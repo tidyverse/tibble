@@ -984,9 +984,9 @@
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract with a single
-#&gt; index.
+#&gt; subscript.
 #&gt; ✖ `i` has the wrong size 2.
-#&gt; ℹ This index must be size 1.</code></pre>
+#&gt; ℹ This subscript must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1003,9 +1003,9 @@
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]] &lt;-<span class="st"> "x"</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract with a single
-#&gt; index.
+#&gt; subscript.
 #&gt; ✖ `i` has the wrong size 2.
-#&gt; ℹ This index must be size 1.</code></pre>
+#&gt; ℹ This subscript must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1571,9 +1571,9 @@
 <td>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>], <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 3 cannot be
-#&gt; recycled to length 2. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 2.
+#&gt; ✖ It must be size 2 or 1, not 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1603,9 +1603,9 @@
 <td>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1621,9 +1621,9 @@
 <td>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>]))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1679,9 +1679,9 @@
 <td>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1723,9 +1723,9 @@
 <td>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 4 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1834,9 +1834,9 @@
 <td>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1892,9 +1892,9 @@
 <td>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="dt">d =</span> <span class="st">"z"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 4 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1942,9 +1942,9 @@
 <td>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">b =</span> <span class="st">"x"</span>, <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>)))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 1. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `value` can't be recycled to
+#&gt; size 1.
+#&gt; ✖ It must be size 1 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -2043,9 +2043,9 @@
 <td>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -2096,9 +2096,9 @@
 <td>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 4 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -2190,9 +2190,9 @@
 <td>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 2 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -2242,9 +2242,9 @@
 <td>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">1</span>, <span class="st">"x"</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Vector of length 4 cannot be
-#&gt; recycled to length 3. Only vectors
-#&gt; of length one can be recycled.</code></pre>
+<pre><code>#&gt; Error: `x` can't be recycled to size
+#&gt; 3.
+#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
 </div>
 </td>
 </tr>
