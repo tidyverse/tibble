@@ -126,7 +126,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
-`[[<-.tbl_df` <- function(x, i, j, value) {
+`[[<-.tbl_df` <- function(x, i, j, value, ...) {
   if (missing(i)) {
     i <- NULL
   }
@@ -166,7 +166,7 @@ NULL
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
-`[.tbl_df` <- function(x, i, j, drop = FALSE) {
+`[.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
   if (missing(i)) {
     i <- NULL
   }
@@ -211,7 +211,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[<-.data.frame`
 #' @export
-`[<-.tbl_df` <- function(x, i, j, value) {
+`[<-.tbl_df` <- function(x, i, j, value, ...) {
   if (missing(i)) {
     i <- NULL
   }

@@ -16,11 +16,11 @@
 
 \method{[[}{tbl_df}(x, i, j, ..., exact = TRUE)
 
-\method{[[}{tbl_df}(x, i, j) <- value
+\method{[[}{tbl_df}(x, i, j, ...) <- value
 
-\method{[}{tbl_df}(x, i, j, drop = FALSE)
+\method{[}{tbl_df}(x, i, j, drop = FALSE, ...)
 
-\method{[}{tbl_df}(x, i, j) <- value
+\method{[}{tbl_df}(x, i, j, ...) <- value
 }
 \arguments{
 \item{x}{data frame.}
