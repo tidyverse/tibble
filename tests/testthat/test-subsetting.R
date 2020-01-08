@@ -55,6 +55,15 @@ test_that("[ with 0 cols returns correct number of rows", {
   expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
 })
 
+test_that("[ with explicit NULL works as expected (#696)", {
+  iris_tbl <- as_tibble(iris)
+
+  expect_identical(iris_tbl[NULL], iris_tbl[0])
+  expect_identical(iris_tbl[, NULL], iris_tbl[, 0])
+  expect_identical(iris_tbl[NULL, ], iris_tbl[0, ])
+  expect_identical(iris_tbl[NULL, NULL], tibble())
+})
+
 test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_tibble_error(
@@ -408,6 +417,26 @@ test_that("[<-.tbl_df supports adding new rows and columns with [i, j] (#651)", 
   df <- tibble(x = 1:2, y = x)
   df[3, "z"] <- 3
   expect_identical(df, tibble(x = c(1:2, NA), y = x, z = c(NA, NA, 3)))
+})
+
+test_that("[<- with explicit NULL doesn't change anything (#696)", {
+  iris_tbl_orig <- as_tibble(iris)
+
+  iris_tbl <- iris_tbl_orig
+  iris_tbl[NULL] <- NA
+  expect_identical(iris_tbl, iris_tbl_orig)
+
+  iris_tbl <- iris_tbl_orig
+  iris_tbl[, NULL] <- NA
+  expect_identical(iris_tbl, iris_tbl_orig)
+
+  iris_tbl <- iris_tbl_orig
+  iris_tbl[NULL, ] <- NA
+  expect_identical(iris_tbl, iris_tbl_orig)
+
+  iris_tbl <- iris_tbl_orig
+  iris_tbl[NULL, NULL] <- NA
+  expect_identical(iris_tbl, iris_tbl_orig)
 })
 
 # $<- ---------------------------------------------------------------------

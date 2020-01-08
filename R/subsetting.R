@@ -169,10 +169,14 @@ NULL
 `[.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
   if (missing(i)) {
     i <- NULL
+  } else if (is.null(i)) {
+    i <- integer()
   }
 
   if (missing(j)) {
     j <- NULL
+  } else if (is.null(j)) {
+    j <- integer()
   }
 
   # Ignore drop as an argument for counting
@@ -214,10 +218,14 @@ NULL
 `[<-.tbl_df` <- function(x, i, j, value, ...) {
   if (missing(i)) {
     i <- NULL
+  } else if (is.null(i)) {
+    i <- integer()
   }
 
   if (missing(j)) {
     j <- NULL
+  } else if (is.null(j)) {
+    j <- integer()
   }
 
   if (is.null(j) && nargs() < 4) {
