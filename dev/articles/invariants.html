@@ -51,7 +51,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9012</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9013</span>
         </div>
       </div>
     </div>
@@ -1374,8 +1374,8 @@
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(tbl)] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in tbl_subassign_matrix(x, j,
-#&gt; value): vec_is(value, size = 1) is
-#&gt; not TRUE</code></pre>
+#&gt; value): vec_size(value) == 1 is not
+#&gt; TRUE</code></pre>
 </div>
 </td>
 </tr>
