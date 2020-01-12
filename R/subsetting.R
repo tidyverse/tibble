@@ -126,7 +126,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
-`[[<-.tbl_df` <- function(x, i, j, value, ...) {
+`[[<-.tbl_df` <- function(x, i, j, ..., value) {
   if (missing(i)) {
     i <- NULL
   }
@@ -215,7 +215,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[<-.data.frame`
 #' @export
-`[<-.tbl_df` <- function(x, i, j, value, ...) {
+`[<-.tbl_df` <- function(x, i, j, ..., value) {
   if (missing(i)) {
     i <- NULL
   } else if (is.null(i)) {
