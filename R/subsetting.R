@@ -611,7 +611,11 @@ vectbl_unname <- function(x) {
       dimnames(x)[1] <- list(NULL)
     }
     x
-  } else {
+  } else if (is.list(x)) {
+    # Change from CRAN
     unname(x)
+  } else {
+    # Change from CRAN
+    x
   }
 }
