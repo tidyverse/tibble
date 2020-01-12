@@ -215,7 +215,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
       # in a list (which is length one by definition)
       if (single_row) {
         if (vec_is(res)) {
-          if (!vec_is(res, size = 1)) {
+          if (!vec_is(res) || vec_size(res) != 1) {
             abort(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
           }
         } else {
