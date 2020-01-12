@@ -405,18 +405,21 @@ test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {
   df <- tibble(x = 1:2, y = x)
   df[3, "x"] <- 3
   expect_identical(df, tibble(x = 1:3, y = c(1:2, NA)))
+  expect_false(has_rownames(df))
 })
 
 test_that("[<-.tbl_df supports adding new columns with [i, j] (#651)", {
   df <- tibble(x = 1:2, y = x)
   df[2, "z"] <- 3
   expect_identical(df, tibble(x = 1:2, y = x, z = c(NA, 3)))
+  expect_false(has_rownames(df))
 })
 
 test_that("[<-.tbl_df supports adding new rows and columns with [i, j] (#651)", {
   df <- tibble(x = 1:2, y = x)
   df[3, "z"] <- 3
   expect_identical(df, tibble(x = c(1:2, NA), y = x, z = c(NA, NA, 3)))
+  expect_false(has_rownames(df))
 })
 
 test_that("[<- with explicit NULL doesn't change anything (#696)", {
@@ -445,46 +448,65 @@ test_that("[<-.tbl_df is careful about attributes (#155)", {
 
   df[names(df)] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df["x"] <- 3:4
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1:2] <- 5:6
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[2] <- 7:8
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[c(TRUE, FALSE)] <- 9:10
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
 
   df[, names(df)] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[, "x"] <- 3:4
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[, 1:2] <- 5:6
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[, 2] <- 7:8
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[, c(TRUE, FALSE)] <- 9:10
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
 
   df[1, names(df)] <- df[1, ]
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1, "x"] <- 3
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1, 1:2] <- 5
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1, 2] <- 7
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1, c(TRUE, FALSE)] <- 9
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
 
   df[1:2, ] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[1:2, ] <- df[1, ]
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
 
   df[, ] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
   df[] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
+  expect_false(has_rownames(df))
 })
 
 # $<- ---------------------------------------------------------------------
@@ -496,6 +518,7 @@ test_that("$<- doesn't throw warning if name doesn't exist", {
     NA
   )
   expect_identical(df, tibble(x = 1, y = 2))
+  expect_false(has_rownames(df))
 })
 
 test_that("$<- throws different warning if attempting a partial initialization (#199)", {
@@ -521,9 +544,11 @@ test_that("$<- recycles only values of length one", {
 
   df$y <- 4
   expect_identical(df, tibble(x = 1:3, y = 4))
+  expect_false(has_rownames(df))
 
   df$z <- 5:7
   expect_identical(df, tibble(x = 1:3, y = 4, z = 5:7))
+  expect_false(has_rownames(df))
 
   expect_tibble_error(
     df$w <- 8:9,
