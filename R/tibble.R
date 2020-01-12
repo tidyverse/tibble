@@ -242,6 +242,8 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
         }
       }
 
+      res <- vectbl_unname(res)
+
       output[[j]] <- res
       col_names[[j]] <- add_to_env2(res, given_col_names[[j]], col_names[[j]], env)
     }

@@ -375,6 +375,7 @@ tbl_subassign <- function(x, i, j, value) {
     value <- unclass(value)
   }
   stopifnot(is_bare_list(value))
+  value <- map(value, vectbl_unname)
 
   if (is.null(i)) {
     if (is.null(j)) {
@@ -600,4 +601,17 @@ vectbl_restore <- function(xo, x, forbidden = attrs_names_and_class) {
   attr(xo, "row.names") <- .set_row_names(n)
 
   xo
+}
+
+vectbl_unname <- function(x) {
+  if (is.data.frame(x)) {
+    remove_rownames(x)
+  } else if (is.array(x)) {
+    if (!is.null(dimnames(x))) {
+      dimnames(x)[1] <- list(NULL)
+    }
+    x
+  } else {
+    unname(x)
+  }
 }

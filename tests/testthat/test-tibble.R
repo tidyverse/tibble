@@ -73,12 +73,16 @@ test_that("SE version", {
 })
 
 test_that("names are maintained vectors (#630)", {
+  skip("not in this branch")
+
   foo <- tibble(x = c(y = 1, z = 2))
   expect_equal(names(foo), "x")
   expect_equal(names(foo$x), c("y", "z"))
 })
 
 test_that("names in list columns are maintained (#630)", {
+  skip("not in this branch")
+
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(names(foo), "x")
   expect_equal(names(foo$x), c("y", "z"))
