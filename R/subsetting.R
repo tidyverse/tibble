@@ -150,7 +150,7 @@ NULL
 
   value <- list(value)
 
-  j <- vec_as_new_col_index(j, x, value)
+  j <- vectbl_as_new_col_index(j, x, value)
   check_scalar(j)
 
   # New columns are added to the end, provide index to avoid matching column
@@ -241,7 +241,7 @@ NULL
   tbl_subassign(x, i, j, value)
 }
 
-vec_as_row_index <- function(i, x) {
+vectbl_as_row_index <- function(i, x) {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -321,7 +321,7 @@ warn_oob_negative <- function(oob, n) {
   }
 }
 
-vec_as_col_index <- function(j, x) {
+vectbl_as_col_index <- function(j, x) {
   stopifnot(!is.null(j))
 
   if (anyNA(j)) {
@@ -355,7 +355,7 @@ tbl_subset2 <- function(x, j) {
 
 tbl_subset_col <- function(x, j) {
   if (is_null(j)) return(x)
-  j <- vec_as_col_index(j, x)
+  j <- vectbl_as_col_index(j, x)
   xo <- .subset(x, j)
   xo <- set_repaired_names(xo, .name_repair = "minimal")
   set_tibble_class(xo, nrow = fast_nrow(x))
@@ -363,7 +363,7 @@ tbl_subset_col <- function(x, j) {
 
 tbl_subset_row <- function(x, i) {
   if (is_null(i)) return(x)
-  i <- vec_as_row_index(i, x)
+  i <- vectbl_as_row_index(i, x)
   xo <- lapply(unclass(x), vec_slice, i = i)
   set_tibble_class(xo, nrow = length(i))
 }
@@ -380,14 +380,14 @@ tbl_subassign <- function(x, i, j, value) {
     if (is.null(j)) {
       j <- seq_along(x)
     } else {
-      j <- vec_as_new_col_index(j, x, value)
+      j <- vectbl_as_new_col_index(j, x, value)
     }
 
-    value <- vec_recycle_cols(value, length(j))
+    value <- vectbl_recycle_cols(value, length(j))
     xo <- tbl_subassign_col(x, j, value)
   } else {
     # Fill up rows first if necessary
-    i <- vec_as_new_row_index(i, x)
+    i <- vectbl_as_new_row_index(i, x)
     x <- tbl_expand_to_nrow(x, i)
 
     if (is.null(j)) {
@@ -396,9 +396,9 @@ tbl_subassign <- function(x, i, j, value) {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vec_as_new_col_index(j, x, value)
+      j <- vectbl_as_new_col_index(j, x, value)
       new_cols <- which(is.na(j))
-      value <- vec_recycle_cols(value, length(j))
+      value <- vectbl_recycle_cols(value, length(j))
 
       # Fill up columns if necessary
       if (any(new_cols)) {
@@ -418,7 +418,7 @@ tbl_subassign <- function(x, i, j, value) {
   vectbl_restore(xo, x)
 }
 
-vec_as_new_row_index <- function(i, x) {
+vectbl_as_new_row_index <- function(i, x) {
   if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
@@ -442,7 +442,7 @@ vec_as_new_row_index <- function(i, x) {
     # Don't allow OOB logical
     vec_as_location(i, fast_nrow(x))
   } else {
-    i <- vec_as_row_index(i, x)
+    i <- vectbl_as_row_index(i, x)
     if (anyDuplicated(i, incomparables = NA)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
     }
@@ -450,7 +450,7 @@ vec_as_new_row_index <- function(i, x) {
   }
 }
 
-vec_as_new_col_index <- function(j, x, value) {
+vectbl_as_new_col_index <- function(j, x, value) {
   # Creates a named index vector
   # Values: index,
   # Name: column name (for new columns)
@@ -477,12 +477,12 @@ vec_as_new_col_index <- function(j, x, value) {
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    names <- vec_recycle_cols(names2(value), length(j))
+    names <- vectbl_recycle_cols(names2(value), length(j))
     names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
   } else {
-    j <- vec_as_col_index(j, x)
+    j <- vectbl_as_col_index(j, x)
     if (anyDuplicated(j)) {
       abort(error_duplicate_column_subscript_for_assignment(j))
     }
@@ -503,7 +503,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vec_recycle_rows(value[[jj]], nrow, jj, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
+    x[[ji]] <- vectbl_recycle_rows(value[[jj]], nrow, jj, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
   }
 
   # Remove
@@ -541,7 +541,7 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value) {
-  value <- vec_recycle_cols(value, ncol(x))
+  value <- vectbl_recycle_cols(value, ncol(x))
 
   nrow <- fast_nrow(x)
 
@@ -566,13 +566,13 @@ fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
-vec_recycle_cols <- function(x, n) {
+vectbl_recycle_cols <- function(x, n) {
   subclass_col_recycle_errors(
     vec_recycle(x, n)
   )
 }
 
-vec_recycle_rows <- function(x, n, j, name) {
+vectbl_recycle_rows <- function(x, n, j, name) {
   size <- vec_size(x)
   if (size == n) return(x)
   if (size == 1) return(vec_recycle(x, n))

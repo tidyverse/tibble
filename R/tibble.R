@@ -238,7 +238,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
           first_size <- current_size
         } else {
-          res <- vec_recycle_rows(res, first_size, j, given_col_names[[j]])
+          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]])
         }
       }
 

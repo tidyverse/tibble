@@ -194,9 +194,9 @@ index <- function(x, right = FALSE) {
 }
 
 imap <- function(.x, .f, ...) {
-  map2(.x, vec_index(.x), .f, ...)
+  map2(.x, vecpurrr_index(.x), .f, ...)
 }
-vec_index <- function(x) {
+vecpurrr_index <- function(x) {
   names(x) %||% seq_along(x)
 }
 
