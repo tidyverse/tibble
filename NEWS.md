@@ -1,4 +1,4 @@
-# tibble 2.99.99.9012
+# tibble 2.99.99.9013
 
 ## Known problems
 
@@ -63,8 +63,6 @@
 - Implement `str.tbl_df()` (#480).
 
 - `tribble()` now returns columns with `"unspecified"` type for 0-row tibbles.
-
-- `add_row()` and `add_column()` now use `vec_restore()` to avoid errors when appending to sf objects or other tibble subclasses (#662).
 
 - Allow `POSIXlt` columns, they are now better supported by dplyr and other tools thanks to vctrs (#626).
 
