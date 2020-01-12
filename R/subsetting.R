@@ -208,7 +208,7 @@ NULL
   if (drop && length(xo) == 1L) {
     tbl_subset2(xo, 1L)
   } else {
-    vec_restore(xo, x, n = fast_nrow(xo))
+    vectbl_restore(xo, x)
   }
 }
 
@@ -415,7 +415,7 @@ tbl_subassign <- function(x, i, j, value) {
     }
   }
 
-  vec_restore(xo, x)
+  vectbl_restore(xo, x)
 }
 
 vec_as_new_row_index <- function(i, x) {
@@ -582,4 +582,22 @@ vec_recycle_rows <- function(x, n, j, name) {
   }
 
   abort(error_inconsistent_cols(n, name, size, "Existing data"))
+}
+
+attrs_names_and_class <- c("names", "row.names", "class")
+attrs_names_only <- c("names", "row.names")
+
+vectbl_restore <- function(xo, x, forbidden = attrs_names_and_class) {
+  n <- fast_nrow(xo)
+
+  # FIXME: Use new_tibble()?
+  attrs <- attributes(x)
+  attrs <- attrs[!(names(attrs) %in% forbidden)]
+
+  attributes(xo)[names(attrs)] <- attrs
+
+  # Need to patch manually
+  attr(xo, "row.names") <- .set_row_names(n)
+
+  xo
 }
