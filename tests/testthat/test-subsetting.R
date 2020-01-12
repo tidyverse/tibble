@@ -439,6 +439,54 @@ test_that("[<- with explicit NULL doesn't change anything (#696)", {
   expect_identical(iris_tbl, iris_tbl_orig)
 })
 
+test_that("[<-.tbl_df is careful about attributes (#155)", {
+  df <- tibble(x = 1:2, y = x)
+  attr(df, "along for the ride") <- "still here"
+
+  df[names(df)] <- df
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df["x"] <- 3:4
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1:2] <- 5:6
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[2] <- 7:8
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[c(TRUE, FALSE)] <- 9:10
+  expect_identical(attr(df, "along for the ride"), "still here")
+
+  df[, names(df)] <- df
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[, "x"] <- 3:4
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[, 1:2] <- 5:6
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[, 2] <- 7:8
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[, c(TRUE, FALSE)] <- 9:10
+  expect_identical(attr(df, "along for the ride"), "still here")
+
+  df[1, names(df)] <- df[1, ]
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1, "x"] <- 3
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1, 1:2] <- 5
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1, 2] <- 7
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1, c(TRUE, FALSE)] <- 9
+  expect_identical(attr(df, "along for the ride"), "still here")
+
+  df[1:2, ] <- df
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[1:2, ] <- df[1, ]
+  expect_identical(attr(df, "along for the ride"), "still here")
+
+  df[, ] <- df
+  expect_identical(attr(df, "along for the ride"), "still here")
+  df[] <- df
+  expect_identical(attr(df, "along for the ride"), "still here")
+})
+
 # $<- ---------------------------------------------------------------------
 
 test_that("$<- doesn't throw warning if name doesn't exist", {
