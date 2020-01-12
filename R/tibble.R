@@ -276,6 +276,11 @@ add_to_env <- function(x, name, env) {
 }
 
 splice_dfs <- function(x) {
+  # Avoiding .ptype argument to vec_c()
+  if (is_empty(x)) {
+    return(list())
+  }
+
   x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
-  vec_c(!!!x, .ptype = list(), .name_spec = "{inner}")
+  vec_c(!!!x, .name_spec = "{inner}")
 }
