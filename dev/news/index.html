@@ -92,7 +92,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9013</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
         </div>
       </div>
     </div>
@@ -176,9 +176,9 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tibble-2-99-99-9013" class="section level1">
+    <div id="tibble-2-99-99-9014" class="section level1">
 <h1 class="page-header">
-<a href="#tibble-2-99-99-9013" class="anchor"></a>tibble 2.99.99.9013<small> Unreleased </small>
+<a href="#tibble-2-99-99-9014" class="anchor"></a>tibble 2.99.99.9014<small> Unreleased </small>
 </h1>
 <div id="known-problems" class="section level2">
 <h2 class="hasAnchor">
@@ -245,6 +245,7 @@
 <li><p><code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> uses implicit row names if asked to create a column from row names. This allows lossless direct conversion of matrices with row names to tibbles (<a href='https://github.com/tidyverse/tibble/issues/567'>#567</a>, <a href='https://github.com/stufield'>@stufield</a>).</p></li>
 <li><p>Implement <code>str.tbl_df()</code> (<a href='https://github.com/tidyverse/tibble/issues/480'>#480</a>).</p></li>
 <li><p><code><a href="../reference/tribble.html">tribble()</a></code> now returns columns with <code>"unspecified"</code> type for 0-row tibbles.</p></li>
+<li><p><code><a href="../reference/add_row.html">add_row()</a></code> and <code><a href="../reference/add_column.html">add_column()</a></code> now use <code>vec_restore()</code> to avoid errors when appending to sf objects or other tibble subclasses (<a href='https://github.com/tidyverse/tibble/issues/662'>#662</a>).</p></li>
 <li><p>Allow <code>POSIXlt</code> columns, they are now better supported by dplyr and other tools thanks to vctrs (<a href='https://github.com/tidyverse/tibble/issues/626'>#626</a>).</p></li>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> ignores NULL arguments, named or unnamed (<a href='https://github.com/tidyverse/tibble/issues/580'>#580</a>).</p></li>
 </ul>
@@ -918,7 +919,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tibble-2-99-99-9013">2.99.99.9013</a></li>
+        <li><a href="#tibble-2-99-99-9014">2.99.99.9014</a></li>
         <li><a href="#tibble-2-1-3">2.1.3</a></li>
         <li><a href="#tibble-2-1-2">2.1.2</a></li>
         <li><a href="#tibble-2-1-1">2.1.1</a></li>
