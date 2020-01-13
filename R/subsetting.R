@@ -612,8 +612,8 @@ vectbl_unname <- function(x) {
     }
     x
   } else if (is.list(x)) {
-    unname(x) # Different from CRAN
-    # x # As on CRAN
+    # unname(x) # Different from CRAN
+    x # As on CRAN
   } else {
     unname(x) # As on CRAN
     # x # Different from CRAN
