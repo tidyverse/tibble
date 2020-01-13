@@ -221,7 +221,7 @@ Run `revdep_details(,"dmdScheme")` for more info
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/Rtmp2yzQXm/dmdScheme_13d4522db7696
+   /tmp/RtmpjxiwZW/dmdScheme_15c8c7f457ade
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -234,7 +234,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/Rtmp2yzQXm/file13d4525c57209/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpjxiwZW/file15c8c7c1c9d0f/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Error: package or namespace load failed for ‘dmdScheme’:
@@ -265,7 +265,7 @@ ERROR: loading failed
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/Rtmpq5XsZz/dmdScheme_135b15b9b787
+   /tmp/RtmpO4A3OW/dmdScheme_15b1161dc76bf
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -278,7 +278,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/Rtmpq5XsZz/file135b1ca968f6/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpO4A3OW/file15b1178d36364/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -287,7 +287,7 @@ Theme switched to dmdScheme_0.9.5
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpGapgRS/dmdScheme_137871c718913
+   /tmp/RtmpEzN9ZI/dmdScheme_15dc811d22d3a
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -300,7 +300,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpGapgRS/file137877b1a1386/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpEzN9ZI/file15dc88f7ae23/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
