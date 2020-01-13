@@ -22,15 +22,13 @@
 
 # Revdeps
 
-## Failed to check (13)
+## Failed to check (11)
 
 |package                            |version |error  |warning |note |
 |:----------------------------------|:-------|:------|:-------|:----|
-|apaTables                          |?       |       |        |     |
 |broom                              |?       |       |        |     |
 |broom.mixed                        |?       |       |        |     |
 |CNVScope                           |?       |       |        |     |
-|codebook                           |?       |       |        |     |
 |[dmdScheme](failures.md#dmdscheme) |1.0.0   |__+1__ |        |     |
 |embed                              |?       |       |        |     |
 |ggstatsplot                        |?       |       |        |     |
@@ -40,7 +38,7 @@
 |tidymodels                         |?       |       |        |     |
 |tidyposterior                      |?       |       |        |     |
 
-## New problems (58)
+## New problems (53)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
@@ -52,7 +50,6 @@
 |[cutpointr](problems.md#cutpointr)               |1.0.1   |__+1__ |        |     |
 |[cvms](problems.md#cvms)                         |0.3.2   |__+1__ |        |     |
 |[diffdf](problems.md#diffdf)                     |1.0.3   |__+1__ |        |     |
-|[dplyr](problems.md#dplyr)                       |0.8.3   |__+1__ |        |2    |
 |[egor](problems.md#egor)                         |0.19.10 |__+2__ |        |     |
 |[eph](problems.md#eph)                           |0.2.0   |__+1__ |        |2    |
 |[evaluator](problems.md#evaluator)               |0.4.1   |__+2__ |        |     |
@@ -92,14 +89,10 @@
 |[SanzCircos](problems.md#sanzcircos)             |0.1.0   |__+1__ |        |1    |
 |[silicate](problems.md#silicate)                 |0.2.0   |__+2__ |        |1    |
 |[simrel](problems.md#simrel)                     |2.0     |__+1__ |        |     |
-|[simTool](problems.md#simtool)                   |1.1.4   |__+1__ |        |     |
-|[sociome](problems.md#sociome)                   |1.3.0   |__+1__ |        |     |
 |[srvyr](problems.md#srvyr)                       |0.3.6   |__+1__ |        |     |
 |[stminsights](problems.md#stminsights)           |0.3.0   |__+1__ |        |1    |
-|[survminer](problems.md#survminer)               |0.4.6   |__+1__ |        |1    |
 |[textrecipes](problems.md#textrecipes)           |0.0.2   |__+2__ |        |1    |
 |[tidyr](problems.md#tidyr)                       |1.0.0   |__+1__ |        |1    |
 |[units](problems.md#units)                       |0.6-5   |__+1__ |        |     |
-|[unpivotr](problems.md#unpivotr)                 |0.5.1   |__+2__ |        |     |
 |[vctrs](problems.md#vctrs)                       |0.2.1   |__+1__ |        |     |
 

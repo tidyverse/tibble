@@ -1,39 +1,3 @@
-# apaTables
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # broom
 
 <details>
@@ -142,42 +106,6 @@ Run `revdep_details(,"")` for more info
 
 
 ```
-# codebook
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # dmdScheme
 
 <details>
@@ -221,7 +149,7 @@ Run `revdep_details(,"dmdScheme")` for more info
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpfacFD5/dmdScheme_17136106afb8e
+   /tmp/Rtmp7vtjsK/dmdScheme_1c1041ae67cad
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -234,7 +162,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpfacFD5/file1713660a43a6e/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/Rtmp7vtjsK/file1c1045a482699/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Error: package or namespace load failed for ‘dmdScheme’:
@@ -265,7 +193,7 @@ ERROR: loading failed
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpKG2NkL/dmdScheme_16f4455a39a77
+   /tmp/RtmpXKtI5J/dmdScheme_1bfb720168ea7
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -278,7 +206,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpKG2NkL/file16f442beb17de/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpXKtI5J/file1bfb72ff441da/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -287,7 +215,7 @@ Theme switched to dmdScheme_0.9.5
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpcMOUzn/dmdScheme_1720c116193a5
+   /tmp/RtmpzLXC6N/dmdScheme_1c26945bbc393
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -300,7 +228,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpcMOUzn/file1720c2c9bb2e9/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpzLXC6N/file1c2695119f62e/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
