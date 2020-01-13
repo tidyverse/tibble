@@ -612,10 +612,10 @@ vectbl_unname <- function(x) {
     }
     x
   } else if (is.list(x)) {
-    # Change from CRAN
-    unname(x)
+    unname(x) # Different from CRAN
+    # x # As on CRAN
   } else {
-    # Change from CRAN
-    x
+    unname(x) # As on CRAN
+    # x # Different from CRAN
   }
 }
