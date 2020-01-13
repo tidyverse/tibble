@@ -66,7 +66,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   pos <- pos_from_before_after(.before, .after, nrow(.data))
   out <- rbind_at(.data, df, pos)
 
-  vectbl_restore(out, .data, forbidden = attrs_names_only)
+  vectbl_restore(out, .data)
 }
 
 #' @export
@@ -167,7 +167,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   new_data <- .data
 
   new_data[end_pos] <- df
-  vectbl_restore(new_data[indexes], .data, forbidden = attrs_names_only)
+  vectbl_restore(new_data[indexes], .data)
 }
 
 
