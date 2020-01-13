@@ -126,7 +126,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
-`[[<-.tbl_df` <- function(x, i, j, value, ...) {
+`[[<-.tbl_df` <- function(x, i, j, ..., value) {
   if (missing(i)) {
     i <- NULL
   }
@@ -215,7 +215,7 @@ NULL
 #' @rdname subsetting
 #' @inheritParams base::`[<-.data.frame`
 #' @export
-`[<-.tbl_df` <- function(x, i, j, value, ...) {
+`[<-.tbl_df` <- function(x, i, j, ..., value) {
   if (missing(i)) {
     i <- NULL
   } else if (is.null(i)) {
@@ -585,13 +585,13 @@ vectbl_recycle_rows <- function(x, n, j, name) {
   abort(error_inconsistent_cols(n, name, size, "Existing data"))
 }
 
-attrs_names_and_class <- c("names", "row.names", "class")
 attrs_names_only <- c("names", "row.names")
 
-vectbl_restore <- function(xo, x, forbidden = attrs_names_and_class) {
+vectbl_restore <- function(xo, x) {
   n <- fast_nrow(xo)
 
   # FIXME: Use new_tibble()?
+  forbidden <- attrs_names_only
   attrs <- attributes(x)
   attrs <- attrs[!(names(attrs) %in% forbidden)]
 
