@@ -739,8 +739,8 @@ test_that("subsetting one row retains columns", {
 test_that("returns a single row (#416)", {
   model <- lm(Petal.Width ~ Petal.Length + Species, data = iris)
   expect_identical(
-    tibble_row(a = 1, b = list_of(2:3), lm = model),
-    tibble(a = 1, b = list_of(2:3), lm = list(model))
+    tibble_row(a = 1, b = vctrs::list_of(2:3), lm = model),
+    tibble(a = 1, b = vctrs::list_of(2:3), lm = list(model))
   )
   expect_equal(
     tibble_row(iris[1, ]),

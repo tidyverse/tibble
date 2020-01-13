@@ -4,7 +4,7 @@
 #' @import rlang
 #' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_slice<-
-#' @importFrom vctrs list_of unspecified
+#' @importFrom vctrs unspecified
 #' @aliases NULL tibble-package
 #' @details
 #' \lifecycle{stable}
