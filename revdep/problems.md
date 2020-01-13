@@ -1,54 +1,3 @@
-# amt
-
-<details>
-
-* Version: 0.0.7
-* Source code: https://github.com/cran/amt
-* URL: https://github.com/jmsigner/amt
-* Date/Publication: 2019-09-19 10:20:02 UTC
-* Number of recursive dependencies: 173
-
-Run `revdep_details(,"amt")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > data(amt_fisher)
-    > # Add the month
-    > amt_fisher %>% mutate(yday = lubridate::yday(t_)) %>%
-    + summarize_sampling_rate_many(c("id", "yday"))
-    Error: No common type for `..1$ts$min` <table> and `..2$ts$min` <table>.
-    [1m<error/vctrs_error_incompatible_type>[22m
-    No common type for `..1$ts$min` <table> and `..2$ts$min` <table>.
-    [1mBacktrace:[22m
-    [90m     [39m█
-    [90m  1. [39m├─`%>%`(...)
-    [90m  2. [39m│ ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-    [90m  3. [39m│ └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  4. [39m│   └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  5. [39m│     └─`_fseq`(`_lhs`)
-    [90m  6. [39m│       └─magrittr::freduce(value, `_function_list`)
-    [90m  7. [39m│         ├─base::withVisible(function_list[[k]](value))
-    [90m  8. [39m│         └─function_list[[k]](value)
-    [90m  9. [39m│           ├─amt::summarize_sampling_rate_many(., c("id", "yday"))
-    [90m 10. [39m│           └─amt:::summarize_sampling_rate_many.track_xyt(., c("id", "yday")) [90m00_pkg_src/amt/R/eda_sampling_rate.R:94:2[39m
-    [90m 11. [39m│  
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘Rcpp’ ‘magrittr’
-      All declared Imports should be used.
-    ```
-
 # basket
 
 <details>
@@ -79,7 +28,7 @@ Run `revdep_details(,"basket")` for more info
       [90m 14. [39mtibble:::tbl_subassign_col(x, j, value)
       [90m 15. [39mtibble:::vectbl_recycle_rows(...)
       
-      ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 32 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
       1. Error: (unknown) (@test-mcmc.r#35) 
       2. Error: (unknown) (@test-plot.r#12) 
@@ -119,7 +68,7 @@ Run `revdep_details(,"beadplexr")` for more info
       [90m 4. [39mtibble:::tbl_subassign_col(x, j, value)
       [90m 5. [39mtibble:::vectbl_recycle_rows(...)
       
-      ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 344 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) 
       
@@ -165,7 +114,7 @@ Run `revdep_details(,"breathtestcore")` for more info
       [90m 8. [39mtibble:::vectbl_as_row_index(i, x)
       [90m 9. [39mvctrs::vec_as_location(i, nr)
       
-      ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 356 | SKIPPED: 5 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: Single record give valid result after passing through cleanup_data (@test_nls_fit.R#46) 
       
@@ -277,7 +226,7 @@ Run `revdep_details(,"corrr")` for more info
       [90m 11. [39mtibble:::vectbl_as_row_index(i, x)
       [90m 12. [39mvctrs::vec_as_location(i, nr)
       
-      ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 76 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 6 ]
       1. Error: Diagonal sets correctly (@test-as_matrix.R#23) 
       2. Error: Network plot works (@test-plots.R#8) 
@@ -311,19 +260,17 @@ Run `revdep_details(,"cutpointr")` for more info
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-      [ OK: 378 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 12 ]
+    Complete output:
+      > library(testthat)
+      > library(cutpointr)
+      > 
+      > test_check("cutpointr")
+      [31m──[39m [31m1. Failure: Cutpointr returns a cutpointr without NAs and a certain Nr of rows ([39m
+      `plot(opt_cut)` produced warnings.
+      
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 389 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Failure: Cutpointr returns a cutpointr without NAs and a certain Nr of rows (@test-cutpointr.R#11) 
-      2. Failure: Correct cutpoints with example data (@test-cutpointr.R#239) 
-      3. Failure: Correct cutpoints with example data (@test-cutpointr.R#240) 
-      4. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#563) 
-      5. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#564) 
-      6. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#570) 
-      7. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#571) 
-      8. Failure: Main metric gets replaced correctly when ties are broken (@test-cutpointr.R#1023) 
-      9. Failure: boot_ci works correctly (@test-cutpointr.R#1378) 
-      1. ...
       
       Error: testthat unit tests failed
       Execution halted
@@ -351,8 +298,8 @@ Run `revdep_details(,"cvms")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 1617 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 11 ]
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 1617 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 11 ]
       1. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
       2. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
       3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
@@ -390,16 +337,16 @@ Run `revdep_details(,"diffdf")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 549 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 19 ]
-      1. Failure: Unequal object, checking numbers correct (@test-core.R#186) 
-      2. Failure: Unequal object, checking numbers correct (@test-core.R#187) 
-      3. Failure: Unequal object, checking numbers correct (@test-core.R#188) 
-      4. Failure: Unequal object, checking numbers correct (@test-core.R#189) 
-      5. Failure: Unequal object, checking numbers correct (@test-core.R#190) 
-      6. Failure: Unequal object, checking numbers correct (@test-core.R#191) 
-      7. Failure: Unequal object, checking numbers correct (@test-core.R#192) 
-      8. Failure: Unequal object, checking numbers correct (@test-core.R#193) 
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 557 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 11 ]
+      1. Failure: (unknown) (@test-print_output.R#51) 
+      2. Failure: (unknown) (@test-print_output.R#51) 
+      3. Failure: (unknown) (@test-print_output.R#51) 
+      4. Failure: (unknown) (@test-print_output.R#51) 
+      5. Failure: (unknown) (@test-print_output.R#51) 
+      6. Failure: (unknown) (@test-print_output.R#51) 
+      7. Failure: (unknown) (@test-print_output.R#51) 
+      8. Failure: (unknown) (@test-print_output.R#51) 
       9. Failure: (unknown) (@test-print_output.R#51) 
       1. ...
       
@@ -450,7 +397,7 @@ Run `revdep_details(,"dmdScheme")` for more info
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpjxiwZW/dmdScheme_15c8c7f457ade
+   /tmp/RtmpfacFD5/dmdScheme_17136106afb8e
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -463,7 +410,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpjxiwZW/file15c8c7c1c9d0f/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpfacFD5/file1713660a43a6e/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Error: package or namespace load failed for ‘dmdScheme’:
@@ -494,7 +441,7 @@ ERROR: loading failed
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpO4A3OW/dmdScheme_15b1161dc76bf
+   /tmp/RtmpKG2NkL/dmdScheme_16f4455a39a77
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -507,7 +454,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpO4A3OW/file15b1178d36364/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpKG2NkL/file16f442beb17de/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -516,7 +463,7 @@ Theme switched to dmdScheme_0.9.5
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpEzN9ZI/dmdScheme_15dc811d22d3a
+   /tmp/RtmpcMOUzn/dmdScheme_1720c116193a5
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -529,7 +476,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpEzN9ZI/file15dc88f7ae23/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpcMOUzn/file1720c2c9bb2e9/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -562,11 +509,11 @@ Run `revdep_details(,"dplyr")` for more info
       
       > 
       > test_check("dplyr")
-      [31m──[39m [31m1. Failure: mutate does not strip names of list-columns (#2675) (@test-mutate.r#297)[39m
+      [31m──[39m [31m1. Failure: mutate does not strip names of list-columns (#2675) (@test-mutate.r#[39m
       names(data$x) not identical to c("a", "b").
       target is NULL, current is character
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 3405 | SKIPPED: 14 | WARNINGS: 6 | FAILED: 1 ]
       1. Failure: mutate does not strip names of list-columns (#2675) (@test-mutate.r#297) 
       
@@ -637,8 +584,8 @@ Run `revdep_details(,"egor")` for more info
       EI-Index: int_var
       EI-Index: female
       EI-Index: female
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 69 | SKIPPED: 0 | WARNINGS: 3 | FAILED: 6 ]
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 69 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 6 ]
       1. Failure: Methods are working. (@test_clustered_graphs.R#9) 
       2. Failure: Methods are working with partially missing data. (@test_clustered_graphs.R#23) 
       3. Failure: Methods work (properly) with NAs in grouping variable. (@test_clustered_graphs.R#35) 
@@ -747,11 +694,11 @@ Run `revdep_details(,"evaluator")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [31m──[39m [31m6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summarize.R#1[39m
+      [31m──[39m [31m6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summarize[39m
       [[ ]] improper number of subscripts
       
       # Scenario model: openfair_tef_tc_diff_lm
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 128 | SKIPPED: 4 | WARNINGS: 12 | FAILED: 6 ]
       1. Error: SR model works as expected (@test-openfair.R#220) 
       2. Error: Simulation respects maximum ALE (@test-simulate.R#21) 
@@ -786,7 +733,7 @@ Run `revdep_details(,"exuber")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [31m──[39m [31m1. Failure: crit as data (@test-cv.R#4) [39m [31m───────────────────────────────────────────[39m
+      [31m──[39m [31m1. Failure: crit as data (@test-cv.R#4) [39m [31m───────────────────────────────────────[39m
       `capture.output(print(crit))` threw an error.
       Message: Expected a vector, not a `list/crit` object
       Class:   vctrs_error_scalar_type/vctrs_error/rlang_error/error/condition
@@ -795,7 +742,7 @@ Run `revdep_details(,"exuber")` for more info
       [90m 19. [39mvctrs:::stop_scalar_type(...)
       [90m 20. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 258 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
       1. Failure: crit as data (@test-cv.R#4) 
       
@@ -935,7 +882,7 @@ Run `revdep_details(,"feasts")` for more info
       [90m 18. [39mtibble:::lst_to_tibble(unclass(x), .rows, .name_repair)
       [90m 19. [39mtibble:::check_valid_cols(x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 103 | SKIPPED: 0 | WARNINGS: 11 | FAILED: 1 ]
       1. Error: gg_arma() plots (@test-graphics.R#253) 
       
@@ -971,10 +918,10 @@ Run `revdep_details(,"foieGras")` for more info
       pre-filtering data...
       
       fitting SSM...
-      [31m──[39m [31m1. Failure: plot completes silently (@test-osar.R#22) [39m [31m─────────────────────────────[39m
+      [31m──[39m [31m1. Failure: plot completes silently (@test-osar.R#22) [39m [31m─────────────────────────[39m
       `plot(r, "hist")` produced warnings.
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 37 | SKIPPED: 14 | WARNINGS: 0 | FAILED: 1 ]
       1. Failure: plot completes silently (@test-osar.R#22) 
       
@@ -1061,7 +1008,7 @@ Run `revdep_details(,"googlesheets4")` for more info
       [90m 21. [39mvctrs:::stop_incompatible(...)
       [90m 22. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 187 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 5 ]
       1. Error: can shim a single side (@test-utils-sheet-geometry.R#38) 
       2. Error: can shim two opposing sides (@test-utils-sheet-geometry.R#49) 
@@ -1096,12 +1043,12 @@ Run `revdep_details(,"hardhat")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       [33mℹ[39m Writing skeleton files
-      [32m✔[39m Setting active project to [34m'/tmp/RtmpgrWHLk/model'[39m
+      [32m✔[39m Setting active project to [34m'/tmp/RtmpzICc4y/model'[39m
       [32m✔[39m Writing [34m'R/random_forest-constructor.R'[39m
       [32m✔[39m Writing [34m'R/random_forest-fit.R'[39m
       [32m✔[39m Writing [34m'R/random_forest-predict.R'[39m
       [31m●[39m Run [90m`devtools::document()`[39m
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 400 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: novel predictor levels are caught (@test-forge-formula.R#177) 
       2. Failure: novel predictor levels can be ignored (@test-forge-formula.R#204) 
@@ -1210,14 +1157,14 @@ Run `revdep_details(,"healthcareai")` for more info
     Last 13 lines of output:
       healthcareai version 2.3.0
       Please visit https://docs.healthcare.ai for full documentation and vignettes. Join the community at https://healthcare-ai.slack.com
-      [31m──[39m [31m1. Error: the fundamentals work (@test-cran_only.R#4) [39m [31m─────────────────────────────[39m
+      [31m──[39m [31m1. Error: the fundamentals work (@test-cran_only.R#4) [39m [31m─────────────────────────[39m
       `goal` must be a vector, not a primitive function
       [1mBacktrace:[22m
       [90m  1. [39mhealthcareai::machine_learn(...)
       [90m 25. [39mvctrs:::stop_scalar_type(...)
       [90m 26. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: the fundamentals work (@test-cran_only.R#4) 
       
@@ -1265,7 +1212,7 @@ Run `revdep_details(,"heemod")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 470 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 12 ]
       1. Error: Same results using 1 core or 2. (@test_parallel.R#7) 
       2. Failure: Parameter evaluation (@test_parameters.R#81) 
@@ -1339,7 +1286,7 @@ Run `revdep_details(,"INDperform")` for more info
       [90m 10. [39mvctrs:::stop_incompatible(...)
       [90m 11. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 517 | SKIPPED: 0 | WARNINGS: 8 | FAILED: 3 ]
       1. Error: (unknown) (@test_model_gamm.R#4) 
       2. Error: (unknown) (@test_scoring.R#15) 
@@ -1407,7 +1354,7 @@ Run `revdep_details(,"interactions")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 122 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 13 ]
       1. Error: interact_plot works for lm (@test_interact_plot.R#33) 
       2. Error: interact_plot: robust standard errors work (@test_interact_plot.R#60) 
@@ -1485,7 +1432,7 @@ Run `revdep_details(,"janitor")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 522 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 12 ]
       1. Error: grouped_df gets ungrouped and succeeds (@test-add-totals.R#122) 
       2. Error: na.rm value works correctly (@test-add-totals.R#129) 
@@ -1542,7 +1489,7 @@ Run `revdep_details(,"jstor")` for more info
     Last 13 lines of output:
       [90m 14. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 227 | SKIPPED: 4 | WARNINGS: 3 | FAILED: 8 ]
       1. Failure: authors are correct (@test-books.R#117) 
       2. Error: jst_define_import returns correct class (@test-import-spec.R#4) 
@@ -1605,7 +1552,7 @@ Run `revdep_details(,"jtools")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 279 | SKIPPED: 0 | WARNINGS: 29 | FAILED: 11 ]
       1. Error: effect_plot works for lm (@test-effect-plot.R#25) 
       2. Error: effect_plot: robust intervals works (@test-effect-plot.R#37) 
@@ -1660,11 +1607,11 @@ Run `revdep_details(,"keyholder")` for more info
       `output_1` not identical to `output_ref_1`.
       Objects equal but not identical
       
-      [31m──[39m [31m3. Failure: key_by_id works on grouped_df (@test-id.R#108) [39m [31m────────────────────────[39m
+      [31m──[39m [31m3. Failure: key_by_id works on grouped_df (@test-id.R#108) [39m [31m────────────────────[39m
       `output_3` not identical to `output_ref_3`.
       Objects equal but not identical
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 306 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
       1. Failure: add_id works on grouped_df (@test-id.R#46) 
       2. Failure: key_by_id works on grouped_df (@test-id.R#85) 
@@ -1696,18 +1643,18 @@ Run `revdep_details(,"metacoder")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
+      [31m──[39m [31m1. Failure: Summing counts per taxon (@test--calculations.R#103) [39m [31m──────────────[39m
+      sum(x$data$tax_data$`700035949`) not equal to result$`700035949`[1].
+      names for current but not for target
+      
+      [31m──[39m [31m2. Failure: Summing counts per taxon (@test--calculations.R#126) [39m [31m──────────────[39m
       `total_counts` not equal to result$total[1].
       names for current but not for target
       
-      [31m──[39m [31m3. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R#11[39m
-      result$data$tax_data$unite_seq[5] not equal to "CCAAATCATGTCTCCCGGCCGCAAGGCAGGTGCAGGCGTTTAACCCTTTGTGAACCAAAAAACCTTTCGCTTCGGCAGCAGCTCGGTTGGAGACAGCCTCTGTGTCAGCCTGCCGCTAGCACCAATTATCAAAACTTGCGGTTAGCAACATTGTCTGATTACCAAATTTTCGAATGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCCCGCATCGATGAAGAACGCAGCGAAACGCGATAGTTAATGTGAATTGCAGAATTCAGTGAATCATCGAGTCTTTGAACGCACATTGCGCCCATTGGTATTCCATTGGGCATGTCTGTTTGAGCGTCATTACAACCCTCGGTCACCACCGGTTTTGAGCGAGCAGGGTCTTCGGATCCAGCTGGCTTTAAAGTTGTAAGCTCTGCTGGCTGCTCGGCCCAACCAGAACATAGTAAAATCATGCTTGTTCAAGGTTCGCGGTCGAAGCGGTACGGCCTGAACAATACCTACCACCTCTTAGG".
-      names for target but not for current
-      
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 93 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 3 ]
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 94 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 2 ]
       1. Failure: Summing counts per taxon (@test--calculations.R#103) 
       2. Failure: Summing counts per taxon (@test--calculations.R#126) 
-      3. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R#119) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -1777,7 +1724,7 @@ Run `revdep_details(,"MNLpred")` for more info
       [90m 17. [39mvctrs:::stop_lossy_cast(...)
       [90m 18. [39mvctrs:::stop_vctrs(...)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: mnl_pred_ova() returns two predictions when by = NULL (@test_inputvariants.R#17) 
       
@@ -1807,7 +1754,7 @@ Run `revdep_details(,"MPTmultiverse")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 19 | SKIPPED: 3 | WARNINGS: 14 | FAILED: 16 ]
       1. Failure: No-pooling approaches work (@test-mptinr.R#61) 
       2. Failure: No-pooling approaches work (@test-mptinr.R#62) 
@@ -1853,7 +1800,7 @@ Run `revdep_details(,"mudata2")` for more info
       [90m 3. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 4. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 912 | SKIPPED: 2 | WARNINGS: 0 | FAILED: 3 ]
       1. Error: mudata_prepare_column and mudata_parse_column are opposites (@test-mudata-io.R#267) 
       2. Error: mudata_prepare_tbl and mudata_parse_tbl are opposites (@test-mudata-io.R#367) 
@@ -1900,7 +1847,7 @@ Run `revdep_details(,"OncoBayes2")` for more info
       
       No interaction model posterior specified.
       Error in na.fail.default(X[[i]], ...) : missing values in object
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 130 | SKIPPED: 4 | WARNINGS: 162 | FAILED: 1 ]
       1. Error: update.blrmfit grows the data set (@test-blrm_exnex.R#264) 
       
@@ -1920,60 +1867,6 @@ Run `revdep_details(,"OncoBayes2")` for more info
 *   checking for GNU extensions in Makefiles ... NOTE
     ```
     GNU make is a SystemRequirements.
-    ```
-
-# oppr
-
-<details>
-
-* Version: 0.0.4
-* Source code: https://github.com/cran/oppr
-* URL: https://prioritizr.github.io/oppr, https://github.com/prioritizr/oppr
-* BugReports: https://github.com/prioritizr/oppr/issues
-* Date/Publication: 2019-08-10 22:30:07 UTC
-* Number of recursive dependencies: 95
-
-Run `revdep_details(,"oppr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             ... on average 5.0 major pivots per refactorization.
-            The largest [LUSOL v2.2.1.0] fact(B) had 58 NZ entries, 1.1x largest basis.
-            The maximum B&B level was 4, 0.1x MIP order, 3 at the optimal solution.
-            The constraint matrix inf-norm is 1, with a dynamic range of 10.
-            Time to load data was 0.044 seconds, presolve used 0.001 seconds,
-             ... 0.000 seconds in simplex solver, in total 0.045 seconds.
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 1479 | SKIPPED: 35 | WARNINGS: 0 | FAILED: 4 ]
-      1. Failure: valid arguments (@test_project_cost_effectiveness.R#27) 
-      2. Failure: valid arguments (@test_project_cost_effectiveness.R#36) 
-      3. Failure: valid arguments (different number of actions/projects (@test_project_cost_effectiveness.R#63) 
-      4. Failure: valid arguments (different number of actions/projects (@test_project_cost_effectiveness.R#69) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘gurobi’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 19.3Mb
-      sub-directories of 1Mb or more:
-        R      3.9Mb
-        libs  14.3Mb
     ```
 
 # pkgsearch
@@ -1998,7 +1891,7 @@ Run `revdep_details(,"pkgsearch")` for more info
     ...
      10  18 ggmap      3.0.0    ORPHANED         1y Spatial Visualization with g...
     > ps()
-    - "visualization" ---------------------------- 1081 packages in 0.006 seconds -
+    - "visualization" ---------------------------- 1081 packages in 0.009 seconds -
     
     Error: Expected a vector, not a `package_version/numeric_version` object
     [1m<error/vctrs_error_scalar_type>[22m
@@ -2068,11 +1961,11 @@ Run `revdep_details(,"pmdplyr")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       
-      [31m──[39m [31m5. Failure: Different inexact joins work (@test-inexact_join.R#213) [39m [31m───────────────[39m
+      [31m──[39m [31m5. Failure: Different inexact joins work (@test-inexact_join.R#213) [39m [31m───────────[39m
       inexact_anti_join(left, right, var = t, jvar = t2, method = "last") not equal to last_join %>% dplyr::select(-b) %>% dplyr::filter(FALSE).
       Incompatible type for column `t2`: x logical, y numeric
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 296 | SKIPPED: 0 | WARNINGS: 16 | FAILED: 5 ]
       1. Error: inexact_join input failstates (@test-bad_input.R#96) 
       2. Failure: Different inexact joins work (@test-inexact_join.R#162) 
@@ -2149,13 +2042,13 @@ Run `revdep_details(,"portalr")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [31m──[39m [31m3. Failure: data generated by level = 'stake' is same (ant colony_presence_absence) [39m
+      [31m──[39m [31m3. Failure: data generated by level = 'stake' is same (ant colony_presence_absen[39m
       Value hashes to 2194929e3e, not 4639dbfbf3
       
-      [31m──[39m [31m4. Failure: data generated by level = 'plot' is same (ant colony_presence_absence) ([39m
+      [31m──[39m [31m4. Failure: data generated by level = 'plot' is same (ant colony_presence_absenc[39m
       Value hashes to 255aef31fb, not 60e9306bfc
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 193 | SKIPPED: 10 | WARNINGS: 0 | FAILED: 4 ]
       1. Failure: data generated by default setting is same (shrub_cover) (@test-99-regression.R#164) 
       2. Failure: data generated by default setting is same (ant colony_presence_absence) (@test-99-regression.R#175) 
@@ -2239,7 +2132,7 @@ Run `revdep_details(,"readwritesqlite")` for more info
       Component "geometry": Attributes: < Component 3: Attributes: < target is NULL, current is list > >
       ...
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 443 | SKIPPED: 0 | WARNINGS: 27 | FAILED: 1 ]
       1. Failure: initialized even with no rows of data (@test-write.R#592) 
       
@@ -2297,14 +2190,14 @@ Run `revdep_details(,"rematch2")` for more info
     Last 13 lines of output:
       + }
       Loading required package: testthat
-      [31m──[39m [31m1. Error: corner cases (@test-exec-all.R#46) [39m [31m──────────────────────────────────────[39m
+      [31m──[39m [31m1. Error: corner cases (@test-exec-all.R#46) [39m [31m──────────────────────────────────[39m
       `x` must be a vector, not a `rematch_allrecords` object
       [1mBacktrace:[22m
       [90m 1. [39mrematch2::re_exec_all(.text <- character(), "")
       [90m 8. [39mvctrs:::stop_scalar_type(...)
       [90m 9. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 69 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: corner cases (@test-exec-all.R#46) 
       
@@ -2379,11 +2272,11 @@ Run `revdep_details(,"rsample")` for more info
       ttest$estimate not equal to single_t_res$.estimate.
       names for target but not for current
       
-      [31m──[39m [31m3. Failure: Bootstrap estimate of mean is close to estimate of mean from normal dist[39m
+      [31m──[39m [31m3. Failure: Bootstrap estimate of mean is close to estimate of mean from normal [39m
       ttest$estimate not equal to single_bca_res$.estimate.
       names for target but not for current
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 529 | SKIPPED: 0 | WARNINGS: 13 | FAILED: 3 ]
       1. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#53) 
       2. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#63) 
@@ -2436,13 +2329,13 @@ Run `revdep_details(,"RSDA")` for more info
     Last 13 lines of output:
       > 
       > test_check("RSDA")
-      [31m──[39m [31m1. Failure: multiplication works (@test-read_sym_table.R#9) [39m [31m───────────────────────[39m
+      [31m──[39m [31m1. Failure: multiplication works (@test-read_sym_table.R#9) [39m [31m───────────────────[39m
       is.sym.modal(sym.table$F3) isn't true.
       
-      [31m──[39m [31m2. Failure: multiplication works (@test-read_sym_table.R#11) [39m [31m──────────────────────[39m
+      [31m──[39m [31m2. Failure: multiplication works (@test-read_sym_table.R#11) [39m [31m──────────────────[39m
       is.sym.set(sym.table$F5) isn't true.
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 24 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
       1. Failure: multiplication works (@test-read_sym_table.R#9) 
       2. Failure: multiplication works (@test-read_sym_table.R#11) 
@@ -2528,18 +2421,18 @@ Run `revdep_details(,"ruler")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [31m──[39m [31m3. Error: is_exposure works (@test-exposure.R#166) [39m [31m────────────────────────────────[39m
+      > 
+      > test_check("ruler")
+      [31m──[39m [31m1. Error: is_exposure works (@test-exposure.R#166) [39m [31m────────────────────────────[39m
       `x` must be a vector, not a function
       [1mBacktrace:[22m
       [90m 1. [39mbase::`[[<-`(...)
       [90m 7. [39mvctrs:::stop_scalar_type(...)
       [90m 8. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 299 | SKIPPED: 1 | WARNINGS: 2 | FAILED: 3 ]
-      1. Error: bind_exposures works (@test-expose-helpers.R#82) 
-      2. Failure: new_pack_info removes names inside `.packs` (@test-exposure.R#118) 
-      3. Error: is_exposure works (@test-exposure.R#166) 
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 304 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 1 ]
+      1. Error: is_exposure works (@test-exposure.R#166) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2628,14 +2521,14 @@ Run `revdep_details(,"silicate")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       
-      [31m──[39m [31m2. Error: building sf works (@test-spatial-build.R#6) [39m [31m─────────────────────────────[39m
+      [31m──[39m [31m2. Error: building sf works (@test-spatial-build.R#6) [39m [31m─────────────────────────[39m
       `x` must be a vector, not a `sfc_MULTIPOLYGON/sfc` object
       [1mBacktrace:[22m
       [90m  1. [39mtestthat::expect_s3_class(build_sf(PATH(minimal_mesh)), "sf")
       [90m 12. [39mvctrs:::stop_scalar_type(...)
       [90m 13. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 92 | SKIPPED: 7 | WARNINGS: 1 | FAILED: 2 ]
       1. Error: print works (@test-print.R#11) 
       2. Error: building sf works (@test-spatial-build.R#6) 
@@ -2675,7 +2568,7 @@ Run `revdep_details(,"simrel")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       > test_check("simrel")
-      [31m──[39m [31m1. Error: Prepare Design (@test-utils.R#44) [39m [31m───────────────────────────────────────[39m
+      [31m──[39m [31m1. Error: Prepare Design (@test-utils.R#44) [39m [31m───────────────────────────────────[39m
       Can't join on 'q' x 'q' because of incompatible types (list / list)
       [1mBacktrace:[22m
       [90m 1. [39mtestthat::expect_identical(prepare_design(opts), dgn)
@@ -2683,8 +2576,8 @@ Run `revdep_details(,"simrel")` for more info
       [90m 5. [39mdplyr:::all.equal.tbl_df(x, y, ...)
       [90m 6. [39mdplyr:::equal_data_frame(...)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 169 | SKIPPED: 21 | WARNINGS: 3 | FAILED: 1 ]
+      ══ testthat results  ══════════════════════════════════════════════════════════════
+      [ OK: 169 | SKIPPED: 21 | WARNINGS: 1 | FAILED: 1 ]
       1. Error: Prepare Design (@test-utils.R#44) 
       
       Error: testthat unit tests failed
@@ -2713,57 +2606,18 @@ Run `revdep_details(,"simTool")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [1] "Estimated replications per hour:  27844"
-      [1] "Estimated replications per hour:  1483600"
-      [1] "Estimated replications per hour:  133051"
-      [1] "Estimated replications per hour:  2898787"
-      [1] "Estimated replications per hour:  204311"
-      [31m──[39m [31m1. Failure: One group for summary_fun. Results were created and stored in simulation[39m
+      [1] "Estimated replications per hour:  32135"
+      [1] "Estimated replications per hour:  1675915"
+      [1] "Estimated replications per hour:  206425"
+      [1] "Estimated replications per hour:  509923"
+      [1] "Estimated replications per hour:  145061"
+      [31m──[39m [31m1. Failure: One group for summary_fun. Results were created and stored in simula[39m
       eg$simulation[[col]] not identical to expected_df[[col]].
       names for current but not for target
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════
       [ OK: 120 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Failure: One group for summary_fun. Results were created and stored in simulation (@test_eval_tibbles.R#791) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# skimr
-
-<details>
-
-* Version: 2.0.2
-* Source code: https://github.com/cran/skimr
-* URL: https://docs.ropensci.org/skimr (website), https://github.com/ropensci/skimr
-* BugReports: https://github.com/ropensci/skimr/issues
-* Date/Publication: 2019-11-26 14:30:03 UTC
-* Number of recursive dependencies: 71
-
-Run `revdep_details(,"skimr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      input$skim_variable not identical to c("Sepal.Length", "Sepal.Width").
-      names for target but not for current
-      
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 564 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 7 ]
-      1. Failure: skim returns expected response for numeric vectors (@test-skim.R#34) 
-      2. Failure: skim returns expected response for factor vectors (@test-skim.R#178) 
-      3. Failure: skim returns expected response for logical vectors (@test-skim.R#267) 
-      4. Failure: skim returns expected response for complex vectors (@test-skim.R#319) 
-      5. Failure: skim returns expected response for ts vectors (@test-skim.R#398) 
-      6. Failure: You can use tidyselect negation (@test-skim.R#795) 
-      7. Failure: Tidyselect helpers work as expected (@test-skim.R#804) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2794,7 +2648,7 @@ Run `revdep_details(,"sociome")` for more info
       [90m 7. [39mdplyr:::all.equal.tbl_df(x, y, ...)
       [90m 8. [39mdplyr:::equal_data_frame(...)
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 32 | SKIPPED: 4 | WARNINGS: 6 | FAILED: 6 ]
       1. Error: call tibble for geoids is correct (@test_arg_tibble_decennial1990.R#52) 
       2. Error: call tibble for state only is correct (@test_arg_tibble_decennial1990.R#179) 
@@ -2831,12 +2685,12 @@ Run `revdep_details(,"srvyr")` for more info
     Last 13 lines of output:
       Incompatible type for column `survey_mean_upp`: x numeric, y matrix
       
-      [31m──[39m [31m3. Failure: deff and df work for grouped survey total (@expect-equality.R#61) [39m [31m─────[39m
+      [31m──[39m [31m3. Failure: deff and df work for grouped survey total (@expect-equality.R#61) [39m [31m──[39m
       `x` not equal to `y`.
       Incompatible type for column `survey_total_low`: x numeric, y matrix
       Incompatible type for column `survey_total_upp`: x numeric, y matrix
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 201 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 3 ]
       1. Failure: deff and df work for grouped survey total (@expect-equality.R#61) 
       2. Failure: deff and df work for grouped survey mean (@expect-equality.R#61) 
@@ -2998,7 +2852,7 @@ Run `revdep_details(,"textrecipes")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 79 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 10 ]
       1.  Error: hashing gives double outputs (@test-hashing.R#31) 
       2.  Error: stemming is done correctly (@test-stem.R#32) 
@@ -3045,8 +2899,8 @@ Run `revdep_details(,"tidyr")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════════
-      [ OK: 546 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 16 ]
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
+      [ OK: 548 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 14 ]
       1. Failure: optionally keep empty rows (@test-chop.R#57) 
       2. Failure: gather throws error for weird objects (@test-gather.R#141) 
       3. Failure: .id creates vector of names for vector unnest (@test-nest-legacy.R#177) 
@@ -3100,7 +2954,7 @@ Run `revdep_details(,"units")` for more info
       [90m 4. [39mtibble:::check_valid_col(res, col_names[[j]], j)
       [90m 5. [39mtibble:::check_valid_cols(list2(`:=`(!!name, x)))
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 416 | SKIPPED: 6 | WARNINGS: 13 | FAILED: 1 ]
       1. Error: mixed units work (@test_mixed.R#46) 
       
@@ -3156,7 +3010,7 @@ Run `revdep_details(,"unpivotr")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ══ testthat results  ══════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════
       [ OK: 158 | SKIPPED: 0 | WARNINGS: 128 | FAILED: 19 ]
       1. Error: behead() works (@test-behead.R#8) 
       2. Error: the `drop_na` argument of behead() works (@test-behead.R#23) 

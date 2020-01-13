@@ -221,7 +221,7 @@ Run `revdep_details(,"dmdScheme")` for more info
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpjxiwZW/dmdScheme_15c8c7f457ade
+   /tmp/RtmpfacFD5/dmdScheme_17136106afb8e
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -234,7 +234,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpjxiwZW/file15c8c7c1c9d0f/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpfacFD5/file1713660a43a6e/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Error: package or namespace load failed for ‘dmdScheme’:
@@ -265,7 +265,7 @@ ERROR: loading failed
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpO4A3OW/dmdScheme_15b1161dc76bf
+   /tmp/RtmpKG2NkL/dmdScheme_16f4455a39a77
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -278,7 +278,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpO4A3OW/file15b1178d36364/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpKG2NkL/file16f442beb17de/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -287,7 +287,7 @@ Theme switched to dmdScheme_0.9.5
 #############################################
 The cache will be in a temporary location and be deleted when you quit R.
 It is located at
-   /tmp/RtmpEzN9ZI/dmdScheme_15dc811d22d3a
+   /tmp/RtmpcMOUzn/dmdScheme_1720c116193a5
 To make it permanent, call
    cache(createPermanent = TRUE)
 and restart R
@@ -300,7 +300,7 @@ Content type 'application/octet-stream' length 27511 bytes (26 KB)
 ==================================================
 downloaded 26 KB
 
-Scheme definition `/tmp/RtmpEzN9ZI/file15dc88f7ae23/dmdScheme_0.9.5.tar.gz, installed with
+Scheme definition `/tmp/RtmpcMOUzn/file1720c2c9bb2e9/dmdScheme_0.9.5.tar.gz, installed with
 name:    dmdScheme
 version: 0.9.5
 Theme switched to dmdScheme_0.9.5
@@ -453,42 +453,6 @@ Run `revdep_details(,"")` for more info
 
 ```
 # tidybayes
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# tidycomm
 
 <details>
 

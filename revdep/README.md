@@ -22,7 +22,7 @@
 
 # Revdeps
 
-## Failed to check (14)
+## Failed to check (13)
 
 |package                            |version |error  |warning |note |
 |:----------------------------------|:-------|:------|:-------|:----|
@@ -37,15 +37,13 @@
 |psycho                             |?       |       |        |     |
 |STRMPS                             |?       |       |        |     |
 |tidybayes                          |?       |       |        |     |
-|tidycomm                           |?       |       |        |     |
 |tidymodels                         |?       |       |        |     |
 |tidyposterior                      |?       |       |        |     |
 
-## New problems (61)
+## New problems (58)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
-|[amt](problems.md#amt)                           |0.0.7   |__+1__ |        |1    |
 |[basket](problems.md#basket)                     |0.9.10  |__+1__ |        |     |
 |[beadplexr](problems.md#beadplexr)               |0.2.0   |__+1__ |        |1    |
 |[breathtestcore](problems.md#breathtestcore)     |0.4.6   |__+1__ |        |1    |
@@ -79,7 +77,6 @@
 |[MPTmultiverse](problems.md#mptmultiverse)       |0.3-3   |__+1__ |        |     |
 |[mudata2](problems.md#mudata2)                   |1.1.0   |__+1__ |        |1    |
 |[OncoBayes2](problems.md#oncobayes2)             |0.5-8   |__+1__ |        |2    |
-|[oppr](problems.md#oppr)                         |0.0.4   |__+1__ |        |2    |
 |[pkgsearch](problems.md#pkgsearch)               |3.0.2   |__+1__ |        |     |
 |[pmdplyr](problems.md#pmdplyr)                   |0.3.0   |__+2__ |        |     |
 |[PML](problems.md#pml)                           |1.1     |__+1__ |        |     |
@@ -96,7 +93,6 @@
 |[silicate](problems.md#silicate)                 |0.2.0   |__+2__ |        |1    |
 |[simrel](problems.md#simrel)                     |2.0     |__+1__ |        |     |
 |[simTool](problems.md#simtool)                   |1.1.4   |__+1__ |        |     |
-|[skimr](problems.md#skimr)                       |2.0.2   |__+1__ |        |     |
 |[sociome](problems.md#sociome)                   |1.3.0   |__+1__ |        |     |
 |[srvyr](problems.md#srvyr)                       |0.3.6   |__+1__ |        |     |
 |[stminsights](problems.md#stminsights)           |0.3.0   |__+1__ |        |1    |
