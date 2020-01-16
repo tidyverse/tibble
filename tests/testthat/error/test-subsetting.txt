@@ -25,7 +25,7 @@ Error: Cannot exclude column 4 in tibble with 3 columns.
 Error: Can't use NA as column index with `[` at position 4.
 
 > foo[as.matrix(1)]
-Error in matrix_to_cells(j, x): is_bare_logical(j) is not TRUE
+Error: `j` must be a logical vector.
 
 > foo[array(1, dim = c(1, 1, 1))]
 Error: Can't cast <integer[,1,1]> to <integer>.
@@ -50,7 +50,7 @@ x The subscript has size 4.
 Error: Can't use NA as column index with `[` at position 3.
 
 > foo[as.matrix(TRUE)]
-Error in matrix_to_cells(j, x): identical(dim(j), dim(x)) is not TRUE
+Error: `j` and `x` must have identical dimensions.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
