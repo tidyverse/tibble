@@ -84,14 +84,25 @@ test_that("[.tbl_df is careful about names (#1245)", {
     error_unknown_column_names("z")
   )
 
-  expect_error(
-    foo[as.matrix("x")],
-    "."
-  )
-  expect_error(
-    foo[array("x", dim = c(1, 1, 1))],
-    "."
-  )
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10)
+    expect_tibble_error(
+      foo[c("x", "y", "z")],
+      error_unknown_column_names("z")
+    )
+    expect_tibble_error(
+      foo[c("w", "x", "y", "z")],
+      error_unknown_column_names(c("w", "z"))
+    )
+    expect_error(
+      foo[as.matrix("x")],
+      "."
+    )
+    expect_error(
+      foo[array("x", dim = c(1, 1, 1))],
+      "."
+    )
+  })
 })
 
 test_that("[.tbl_df is careful about column indexes (#83)", {
@@ -580,6 +591,13 @@ test_that("$<- recycles only values of length one", {
 
 test_that("subsetting has informative errors", {
   verify_output(test_path("error", "test-subsetting.txt"), {
+    "# [.tbl_df is careful about names (#1245)"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[c("x", "y", "z")]
+    foo[c("w", "x", "y", "z")]
+    foo[as.matrix("x")]
+    foo[array("x", dim = c(1, 1, 1))]
+
     "# [.tbl_df is careful about column indexes (#83)"
     foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
     foo[0.5]

@@ -1,4 +1,21 @@
 
+[.tbl_df is careful about names (#1245)
+=======================================
+
+> foo <- tibble(x = 1:10, y = 1:10)
+> foo[c("x", "y", "z")]
+Error: Can't find column `z` in `.data`.
+
+> foo[c("w", "x", "y", "z")]
+Error: Can't find columns `w`, `z` in `.data`.
+
+> foo[as.matrix("x")]
+Error: `j` must be a logical vector.
+
+> foo[array("x", dim = c(1, 1, 1))]
+Error: `i` must have one dimension, not 3.
+
+
 [.tbl_df is careful about column indexes (#83)
 ==============================================
 
