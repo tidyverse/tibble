@@ -107,15 +107,23 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     error_large_column_index(3, 4:5)
   )
 
-  # Message from base R
-  expect_error(foo[-1:1])
-  expect_error(foo[c(-1, 1)])
+  expect_error(
+    foo[-1:1],
+    class = "tibble_error_unsupported_column_index"
+  )
+  expect_error(
+    foo[c(-1, 1)],
+    class = "tibble_error_unsupported_column_index"
+  )
 
   expect_tibble_error(
     foo[-4],
     error_small_column_index(3, -4)
   )
-  expect_error(foo[c(-1, 2)], ".")
+  expect_error(
+    foo[c(-1, 2)],
+    class = "tibble_error_unsupported_column_index"
+  )
   expect_tibble_error(
     foo[c(1:3, NA)],
     error_na_column_index(4)
@@ -137,11 +145,11 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    "."
+    class = "vctrs_error_indicator_bad_size"
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "."
+    class = "vctrs_error_indicator_bad_size"
   )
   expect_tibble_error(
     foo[c(TRUE, TRUE, NA)],
@@ -251,7 +259,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
 
-  expect_error(foo[c(TRUE, FALSE), ], ".")
+  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_indicator_bad_size")
 })
 
 test_that("[.tbl_df is no-op if args missing", {
