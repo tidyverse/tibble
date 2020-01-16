@@ -335,7 +335,7 @@ subclass_name_repair_errors <- function(expr, name) {
   )
 }
 
-subclass_col_index_errors <- function(expr) {
+subclass_col_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
 
@@ -347,7 +347,7 @@ subclass_col_index_errors <- function(expr) {
     },
 
     vctrs_error_subscript = function(cnd) {
-      cnd$arg <- quote(tbl[i])
+      cnd$arg <- arg
       cnd$subscript_elt <- c("column", "columns")
       cnd$subscript_input <- "tibble"
       cnd_signal(cnd)
