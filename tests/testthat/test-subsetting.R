@@ -179,27 +179,29 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 })
 
 test_that("[.tbl_df rejects unknown column indexes (#83)", {
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_tibble_error(
-    foo[list(1:3)],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[as.list(1:3)],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[factor(1:3)],
-    error_unknown_column_names(as.character(1:3))
-  )
-  expect_tibble_error(
-    foo[Sys.Date()],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[Sys.time()],
-    error_unsupported_column_index()
-  )
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    expect_tibble_error(
+      foo[list(1:3)],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[as.list(1:3)],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[factor(1:3)],
+      error_unknown_column_names(as.character(1:3))
+    )
+    expect_tibble_error(
+      foo[Sys.Date()],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[Sys.time()],
+      error_unsupported_column_index()
+    )
+  })
 })
 
 test_that("[.tbl_df supports character subsetting (#312)", {
@@ -616,6 +618,14 @@ test_that("subsetting has informative errors", {
     foo[c(TRUE, TRUE, NA)]
     foo[as.matrix(TRUE)]
     foo[array(TRUE, dim = c(1, 1, 1))]
+
+    "# [.tbl_df rejects unknown column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3)]
+    foo[as.list(1:3)]
+    foo[factor(1:3)]
+    foo[Sys.Date()]
+    foo[Sys.time()]
 
     "# [[.tbl_df throws error with NA index"
     foo <- tibble(x = 1:10, y = 1:10)
