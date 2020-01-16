@@ -37,13 +37,13 @@ Can not decrease dimensions
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[c(TRUE, TRUE)]
-Error: Logical subscripts must match the size of the indexed vector.
-i The indexed vector has size 3.
+Error: Logical subscripts must match the size of the indexed input.
+i The input has size 3.
 x The subscript has size 2.
 
 > foo[c(TRUE, TRUE, FALSE, FALSE)]
-Error: Logical subscripts must match the size of the indexed vector.
-i The indexed vector has size 3.
+Error: Logical subscripts must match the size of the indexed input.
+i The input has size 3.
 x The subscript has size 4.
 
 > foo[c(TRUE, TRUE, NA)]
