@@ -4,11 +4,11 @@
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[c("x", "y", "z")]
-Error: Must subset existing columns in `tbl[i]`.
+Error: Must subset existing columns in `foo`.
 x Can't subset column with unknown name `z`.
 
 > foo[c("w", "x", "y", "z")]
-Error: Must subset existing columns in `tbl[i]`.
+Error: Must subset existing columns in `foo`.
 x Can't subset columns with unknown names `w` and `z`.
 
 > foo[as.matrix("x")]
@@ -27,7 +27,7 @@ Error: Must subset columns with an index vector.
 x Lossy cast from `j` <double> to <integer>.
 
 > foo[1:5]
-Error: Must subset existing columns in `tbl[i]`.
+Error: Must subset existing columns in `foo`.
 x Can't subset locations 4 and 5.
 i There are only 3 columns.
 
@@ -40,7 +40,7 @@ Error: Must subset columns with an index vector.
 i The subscript has a positive value at location 2.
 
 > foo[-4]
-Error: Must remove existing columns in `tbl[i]`.
+Error: Must remove existing columns in `foo`.
 x Can't remove location 4.
 i There are only 3 columns.
 
@@ -94,7 +94,7 @@ x `j` has the wrong type `list`.
 i These indices must be indicators, locations or names.
 
 > foo[factor(1:3)]
-Error: Must subset existing columns in `tbl[i]`.
+Error: Must subset existing columns in `foo`.
 x Can't subset columns with unknown names `1`, `2`, and `3`.
 
 > foo[Sys.Date()]
