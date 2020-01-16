@@ -66,33 +66,34 @@ test_that("[ with explicit NULL works as expected (#696)", {
 
 test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_tibble_error(
+
+  expect_error(
     foo["z"],
-    error_unknown_column_names("z")
+    class = "vctrs_error_subscript_oob"
   )
-  expect_tibble_error(
+  expect_error(
     foo[c("x", "y", "z")],
-    error_unknown_column_names("z")
+    class = "vctrs_error_subscript_oob"
   )
 
-  expect_tibble_error(
+  expect_error(
     foo[, "z"],
-    error_unknown_column_names("z")
+    class = "vctrs_error_subscript_oob"
   )
-  expect_tibble_error(
+  expect_error(
     foo[, c("x", "y", "z")],
-    error_unknown_column_names("z")
+    class = "vctrs_error_subscript_oob"
   )
 
   verify_errors({
     foo <- tibble(x = 1:10, y = 1:10)
-    expect_tibble_error(
+    expect_error(
       foo[c("x", "y", "z")],
-      error_unknown_column_names("z")
+      class = "vctrs_error_subscript_oob"
     )
-    expect_tibble_error(
+    expect_error(
       foo[c("w", "x", "y", "z")],
-      error_unknown_column_names(c("w", "z"))
+      class = "vctrs_error_subscript_oob"
     )
     expect_error(
       foo[as.matrix("x")],
@@ -114,9 +115,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
       foo[0.5],
       error_unsupported_column_index()
     )
-    expect_tibble_error(
+    expect_error(
       foo[1:5],
-      error_large_column_index(3, 4:5)
+      class = "vctrs_error_subscript_oob"
     )
 
     expect_error(
@@ -128,9 +129,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
       class = "tibble_error_unsupported_column_index"
     )
 
-    expect_tibble_error(
+    expect_error(
       foo[-4],
-      error_small_column_index(3, -4)
+      class = "vctrs_error_subscript_oob"
     )
     expect_tibble_error(
       foo[c(1:3, NA)],
@@ -189,9 +190,9 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
       foo[as.list(1:3)],
       error_unsupported_column_index()
     )
-    expect_tibble_error(
+    expect_error(
       foo[factor(1:3)],
-      error_unknown_column_names(as.character(1:3))
+      class = "vctrs_error_subscript_oob"
     )
     expect_tibble_error(
       foo[Sys.Date()],
