@@ -315,11 +315,13 @@ test_that("[[.tbl_df ignores exact argument", {
 })
 
 test_that("[[.tbl_df throws error with NA index", {
-  foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo[[NA]])
-  expect_error(foo[[NA_integer_]])
-  expect_error(foo[[NA_real_]])
-  expect_error(foo[[NA_character_]])
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10)
+    expect_error(foo[[NA]])
+    expect_error(foo[[NA_integer_]])
+    expect_error(foo[[NA_real_]])
+    expect_error(foo[[NA_character_]])
+  })
 })
 
 test_that("can use recursive indexing with [[", {
@@ -596,6 +598,13 @@ test_that("subsetting has informative errors", {
     foo[c(TRUE, TRUE, NA)]
     foo[as.matrix(TRUE)]
     foo[array(TRUE, dim = c(1, 1, 1))]
+
+    "# [[.tbl_df throws error with NA index"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[[NA]]
+    foo[[NA_integer_]]
+    foo[[NA_real_]]
+    foo[[NA_character_]]
 
     "# [<-.tbl_df throws an error with duplicate indexes (#658)"
     df <- tibble(x = 1:2, y = x)

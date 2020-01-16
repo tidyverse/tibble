@@ -37,13 +37,13 @@ Can not decrease dimensions
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[c(TRUE, TRUE)]
-Error: Logical subscripts must match the size of the indexed input.
-i The input has size 3.
+Error: Logical subscripts must match the size of the indexed vector.
+i The indexed vector has size 3.
 x The subscript has size 2.
 
 > foo[c(TRUE, TRUE, FALSE, FALSE)]
-Error: Logical subscripts must match the size of the indexed input.
-i The input has size 3.
+Error: Logical subscripts must match the size of the indexed vector.
+i The indexed vector has size 3.
 x The subscript has size 4.
 
 > foo[c(TRUE, TRUE, NA)]
@@ -54,6 +54,31 @@ Error in matrix_to_cells(j, x): identical(dim(j), dim(x)) is not TRUE
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
+
+
+[[.tbl_df throws error with NA index
+====================================
+
+> foo <- tibble(x = 1:10, y = 1:10)
+> foo[[NA]]
+Error: Must extract with a single subscript.
+x `j` can't be `NA`.
+i This subscript can't be missing.
+
+> foo[[NA_integer_]]
+Error: Must extract with a single subscript.
+x `j` can't be `NA`.
+i This subscript can't be missing.
+
+> foo[[NA_real_]]
+Error: Must extract with a single subscript.
+x `j` can't be `NA`.
+i This subscript can't be missing.
+
+> foo[[NA_character_]]
+Error: Must extract with a single subscript.
+x `j` can't be `NA`.
+i This subscript can't be missing.
 
 
 [<-.tbl_df throws an error with duplicate indexes (#658)
