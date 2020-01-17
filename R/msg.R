@@ -348,8 +348,7 @@ subclass_col_index_errors <- function(expr, arg = NULL) {
 
     vctrs_error_subscript = function(cnd) {
       cnd$arg <- arg
-      cnd$subscript_elt <- c("column", "columns")
-      cnd$subscript_input <- "tibble"
+      cnd$subscript_elt <- "column"
       cnd_signal(cnd)
     }
   )
