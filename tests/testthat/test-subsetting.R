@@ -84,102 +84,124 @@ test_that("[.tbl_df is careful about names (#1245)", {
     error_unknown_column_names("z")
   )
 
-  expect_error(
-    foo[as.matrix("x")],
-    "."
-  )
-  expect_error(
-    foo[array("x", dim = c(1, 1, 1))],
-    "."
-  )
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10)
+    expect_tibble_error(
+      foo[c("x", "y", "z")],
+      error_unknown_column_names("z")
+    )
+    expect_tibble_error(
+      foo[c("w", "x", "y", "z")],
+      error_unknown_column_names(c("w", "z"))
+    )
+    expect_error(
+      foo[as.matrix("x")],
+      "."
+    )
+    expect_error(
+      foo[array("x", dim = c(1, 1, 1))],
+      "."
+    )
+  })
 })
 
 test_that("[.tbl_df is careful about column indexes (#83)", {
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_identical(foo[1:3], foo)
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    expect_identical(foo[1:3], foo)
 
-  expect_tibble_error(
-    foo[0.5],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[1:5],
-    error_large_column_index(3, 4:5)
-  )
+    expect_tibble_error(
+      foo[0.5],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[1:5],
+      error_large_column_index(3, 4:5)
+    )
 
-  # Message from base R
-  expect_error(foo[-1:1])
-  expect_error(foo[c(-1, 1)])
+    expect_error(
+      foo[-1:1],
+      class = "tibble_error_unsupported_column_index"
+    )
+    expect_error(
+      foo[c(-1, 1)],
+      class = "tibble_error_unsupported_column_index"
+    )
 
-  expect_tibble_error(
-    foo[-4],
-    error_small_column_index(3, -4)
-  )
-  expect_error(foo[c(-1, 2)], ".")
-  expect_tibble_error(
-    foo[c(1:3, NA)],
-    error_na_column_index(4)
-  )
+    expect_tibble_error(
+      foo[-4],
+      error_small_column_index(3, -4)
+    )
+    expect_tibble_error(
+      foo[c(1:3, NA)],
+      error_na_column_index(4)
+    )
 
-  expect_error(foo[as.matrix(1)])
-  expect_error(
-    foo[array(1, dim = c(1, 1, 1))],
-    class = "vctrs_error_incompatible_cast"
-  )
+    expect_error(foo[as.matrix(1)])
+
+    expect_error(
+      foo[array(1, dim = c(1, 1, 1))],
+      class = "vctrs_error_incompatible_cast"
+    )
+  })
 })
 
 test_that("[.tbl_df is careful about column flags (#83)", {
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_identical(foo[TRUE], foo)
-  expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
-  expect_identical(foo[FALSE], foo[integer()])
-  expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    expect_identical(foo[TRUE], foo)
+    expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
+    expect_identical(foo[FALSE], foo[integer()])
+    expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error(
-    foo[c(TRUE, TRUE)],
-    "."
-  )
-  expect_error(
-    foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "."
-  )
-  expect_tibble_error(
-    foo[c(TRUE, TRUE, NA)],
-    error_na_column_index(3)
-  )
+    expect_error(
+      foo[c(TRUE, TRUE)],
+      class = "vctrs_error_indicator_bad_size"
+    )
+    expect_error(
+      foo[c(TRUE, TRUE, FALSE, FALSE)],
+      class = "vctrs_error_indicator_bad_size"
+    )
+    expect_tibble_error(
+      foo[c(TRUE, TRUE, NA)],
+      error_na_column_index(3)
+    )
 
-  expect_error(
-    foo[as.matrix(TRUE)],
-    "."
-  )
-  expect_error(
-    foo[array(TRUE, dim = c(1, 1, 1))],
-    "."
-  )
+    expect_error(
+      foo[as.matrix(TRUE)],
+      "."
+    )
+    expect_error(
+      foo[array(TRUE, dim = c(1, 1, 1))],
+      "."
+    )
+  })
 })
 
 test_that("[.tbl_df rejects unknown column indexes (#83)", {
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_tibble_error(
-    foo[list(1:3)],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[as.list(1:3)],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[factor(1:3)],
-    error_unknown_column_names(as.character(1:3))
-  )
-  expect_tibble_error(
-    foo[Sys.Date()],
-    error_unsupported_column_index()
-  )
-  expect_tibble_error(
-    foo[Sys.time()],
-    error_unsupported_column_index()
-  )
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    expect_tibble_error(
+      foo[list(1:3)],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[as.list(1:3)],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[factor(1:3)],
+      error_unknown_column_names(as.character(1:3))
+    )
+    expect_tibble_error(
+      foo[Sys.Date()],
+      error_unsupported_column_index()
+    )
+    expect_tibble_error(
+      foo[Sys.time()],
+      error_unsupported_column_index()
+    )
+  })
 })
 
 test_that("[.tbl_df supports character subsetting (#312)", {
@@ -251,7 +273,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
 
-  expect_error(foo[c(TRUE, FALSE), ], ".")
+  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_indicator_bad_size")
 })
 
 test_that("[.tbl_df is no-op if args missing", {
@@ -306,11 +328,13 @@ test_that("[[.tbl_df ignores exact argument", {
 })
 
 test_that("[[.tbl_df throws error with NA index", {
-  foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo[[NA]])
-  expect_error(foo[[NA_integer_]])
-  expect_error(foo[[NA_real_]])
-  expect_error(foo[[NA_character_]])
+  verify_errors({
+    foo <- tibble(x = 1:10, y = 1:10)
+    expect_error(foo[[NA]])
+    expect_error(foo[[NA_integer_]])
+    expect_error(foo[[NA_real_]])
+    expect_error(foo[[NA_character_]])
+  })
 })
 
 test_that("can use recursive indexing with [[", {
@@ -386,19 +410,21 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
 # [<- ---------------------------------------------------------------------
 
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
-  df <- tibble(x = 1:2, y = x)
-  expect_tibble_error(
-    df[c(1, 1)] <- 3,
-    error_duplicate_column_subscript_for_assignment(c(1, 1))
-  )
-  expect_tibble_error(
-    df[, c(1, 1)] <- 3,
-    error_duplicate_column_subscript_for_assignment(c(1, 1))
-  )
-  expect_tibble_error(
-    df[c(1, 1), ] <- 3,
-    error_duplicate_row_subscript_for_assignment(c(1, 1))
-  )
+  verify_errors({
+    df <- tibble(x = 1:2, y = x)
+    expect_tibble_error(
+      df[c(1, 1)] <- 3,
+      error_duplicate_column_subscript_for_assignment(c(1, 1))
+    )
+    expect_tibble_error(
+      df[, c(1, 1)] <- 3,
+      error_duplicate_column_subscript_for_assignment(c(1, 1))
+    )
+    expect_tibble_error(
+      df[c(1, 1), ] <- 3,
+      error_duplicate_row_subscript_for_assignment(c(1, 1))
+    )
+  })
 })
 
 test_that("[<-.tbl_df supports adding new rows with [i, j] (#651)", {
@@ -550,13 +576,73 @@ test_that("$<- recycles only values of length one", {
   expect_identical(df, tibble(x = 1:3, y = 4, z = 5:7))
   expect_false(has_rownames(df))
 
-  expect_tibble_error(
-    df$w <- 8:9,
-    error_inconsistent_cols(3, "w", 2, "Existing data")
-  )
+  verify_errors({
+    df <- tibble(x = 1:3)
 
-  expect_tibble_error(
-    df$a <- character(),
-    error_inconsistent_cols(3, "a", 0, "Existing data")
-  )
+    expect_tibble_error(
+      df$w <- 8:9,
+      error_inconsistent_cols(3, "w", 2, "Existing data")
+    )
+
+    expect_tibble_error(
+      df$a <- character(),
+      error_inconsistent_cols(3, "a", 0, "Existing data")
+    )
+  })
+})
+
+test_that("subsetting has informative errors", {
+  verify_output(test_path("error", "test-subsetting.txt"), {
+    "# [.tbl_df is careful about names (#1245)"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[c("x", "y", "z")]
+    foo[c("w", "x", "y", "z")]
+    foo[as.matrix("x")]
+    foo[array("x", dim = c(1, 1, 1))]
+
+    "# [.tbl_df is careful about column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[0.5]
+    foo[1:5]
+    foo[-1:1]
+    foo[c(-1, 1)]
+    foo[-4]
+    foo[c(1:3, NA)]
+    foo[as.matrix(1)]
+    foo[array(1, dim = c(1, 1, 1))]
+
+    "# [.tbl_df is careful about column flags (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[c(TRUE, TRUE)]
+    foo[c(TRUE, TRUE, FALSE, FALSE)]
+    foo[c(TRUE, TRUE, NA)]
+    foo[as.matrix(TRUE)]
+    foo[array(TRUE, dim = c(1, 1, 1))]
+
+    "# [.tbl_df rejects unknown column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3)]
+    foo[as.list(1:3)]
+    foo[factor(1:3)]
+    foo[Sys.Date()]
+    foo[Sys.time()]
+
+    "# [[.tbl_df throws error with NA index"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[[NA]]
+    foo[[NA_integer_]]
+    foo[[NA_real_]]
+    foo[[NA_character_]]
+
+    "# [<-.tbl_df throws an error with duplicate indexes (#658)"
+    df <- tibble(x = 1:2, y = x)
+    df[c(1, 1)] <- 3
+    df[, c(1, 1)] <- 3
+    df[c(1, 1), ] <- 3
+
+    "# $<- recycles only values of length one"
+    df <- tibble(x = 1:3)
+    df$w <- 8:9
+    df$a <- character()
+  })
 })

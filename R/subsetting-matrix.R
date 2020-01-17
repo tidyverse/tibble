@@ -23,8 +23,12 @@ tbl_subassign_matrix <- function(x, j, value) {
 }
 
 matrix_to_cells <- function(j, x) {
-  stopifnot(is_bare_logical(j))
-  stopifnot(identical(dim(j), dim(x)))
+  if (!is_bare_logical(j)) {
+    rlang::abort("`j` must be a logical vector.")
+  }
+  if (!identical(dim(j), dim(x))) {
+    rlang::abort("`j` and `x` must have identical dimensions.")
+  }
 
   # Need unlist(list(...)) because apply() isn't type stable if the return
   # has the same length everywhere

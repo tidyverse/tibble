@@ -38,7 +38,7 @@ Imports:
     methods,
     pillar (>= 1.4.2.9001),
     pkgconfig,
-    rlang (>= 0.4.2),
+    rlang (>= 0.4.2.9001),
     utils,
     vctrs (>= 0.2.0.9001)
 Suggests: 
@@ -60,7 +60,8 @@ RdMacros:
     lifecycle
 Remotes: 
     r-lib/pillar,
-    r-lib/vctrs
+    r-lib/vctrs,
+    r-lib/rlang
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
