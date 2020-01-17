@@ -866,8 +866,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset with a mix of
-#&gt; negative and positive indices</code></pre>
+<pre><code>#&gt; Error: Must subset columns with an
+#&gt; index vector.
+#&gt; ℹ The subscript has 2 missing values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -969,11 +971,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 3 whereas the
-#&gt; subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 3.
+#&gt; ✖ The subscript has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -989,11 +990,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 3 whereas the
-#&gt; subscript has size 4.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 3.
+#&gt; ✖ The subscript has size 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1091,8 +1091,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">tbl[, <span class="dv">-1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset with a mix of
-#&gt; negative and positive indices</code></pre>
+<pre><code>#&gt; Error: Must subset columns with an
+#&gt; index vector.
+#&gt; ℹ The subscript has 2 missing values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1204,11 +1206,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 3 whereas the
-#&gt; subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 3.
+#&gt; ✖ The subscript has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1224,11 +1225,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 3 whereas the
-#&gt; subscript has size 4.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 3.
+#&gt; ✖ The subscript has size 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1365,8 +1365,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset with a mix of
-#&gt; negative and positive indices</code></pre>
+<pre><code>#&gt; Error: Negative locations can't be
+#&gt; mixed with positive locations.
+#&gt; ℹ The subscript has 2 missing values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1444,11 +1446,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 4 whereas the
-#&gt; subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 4.
+#&gt; ✖ The subscript has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1463,11 +1464,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 4 whereas the
-#&gt; subscript has size 3.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 4.
+#&gt; ✖ The subscript has size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1494,11 +1494,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical indices must have
-#&gt; length 1 or be as long as the
-#&gt; indexed vector.
-#&gt; The vector has size 4 whereas the
-#&gt; subscript has size 5.</code></pre>
+<pre><code>#&gt; Error: Logical subscripts must match
+#&gt; the size of the indexed input.
+#&gt; ℹ The input has size 4.
+#&gt; ✖ The subscript has size 5.</code></pre>
 </div>
 </td>
 </tr>
