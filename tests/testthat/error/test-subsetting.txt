@@ -23,7 +23,7 @@ Error: `i` must have one dimension, not 3.
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[0.5]
-Error: Must subset columns with an index vector.
+Error: Must subset columns with a proper subscript vector.
 x Lossy cast from `j` <double> to <integer>.
 
 > foo[1:5]
@@ -32,14 +32,17 @@ x Can't subset locations 4 and 5.
 i There are only 3 columns.
 
 > foo[-1:1]
-Error: Must subset columns with an index vector.
+Error: Must subset columns with a proper subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript has a positive value at location 3.
 
 > foo[c(-1, 1)]
-Error: Must subset columns with an index vector.
+Error: Must subset columns with a proper subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript has a positive value at location 2.
+
+> foo[c(-1, NA)]
+Error: Can't use NA as column index with `[` at position 2.
 
 > foo[-4]
 Error: Must negate existing columns in `foo`.
@@ -62,12 +65,12 @@ Can not decrease dimensions
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[c(TRUE, TRUE)]
-Error: Must subset with a proper subscript vector.
+Error: Must subset columns with a proper subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript has size 2.
 
 > foo[c(TRUE, TRUE, FALSE, FALSE)]
-Error: Must subset with a proper subscript vector.
+Error: Must subset columns with a proper subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript has size 4.
 
@@ -86,13 +89,13 @@ Error: `i` must have one dimension, not 3.
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3)]
-Error: Must subset columns with an index vector.
-x `j` has the wrong type `list`.
+Error: Must subset columns with a proper subscript vector.
+x `foo` has the wrong type `list`.
 i The subscript must contain indicators, locations or names.
 
 > foo[as.list(1:3)]
-Error: Must subset columns with an index vector.
-x `j` has the wrong type `list`.
+Error: Must subset columns with a proper subscript vector.
+x `foo` has the wrong type `list`.
 i The subscript must contain indicators, locations or names.
 
 > foo[factor(1:3)]
@@ -100,13 +103,13 @@ Error: Must subset existing columns in `foo`.
 x Can't subset columns with unknown names `1`, `2`, and `3`.
 
 > foo[Sys.Date()]
-Error: Must subset columns with an index vector.
-x `j` has the wrong type `date`.
+Error: Must subset columns with a proper subscript vector.
+x `foo` has the wrong type `date`.
 i The subscript must contain indicators, locations or names.
 
 > foo[Sys.time()]
-Error: Must subset columns with an index vector.
-x `j` has the wrong type `datetime<local>`.
+Error: Must subset columns with a proper subscript vector.
+x `foo` has the wrong type `datetime<local>`.
 i The subscript must contain indicators, locations or names.
 
 

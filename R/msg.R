@@ -339,13 +339,6 @@ subclass_col_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
 
-    vctrs_error_subscript_bad_type = function(cnd) {
-      body <- cnd_body(cnd)
-      cnd$body <- function(...) body
-      cnd <- error_unsupported_column_index(cnd)
-      cnd_signal(cnd)
-    },
-
     vctrs_error_subscript = function(cnd) {
       cnd$arg <- arg
       cnd$subscript_elt <- "column"

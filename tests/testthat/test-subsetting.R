@@ -111,9 +111,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
     expect_identical(foo[1:3], foo)
 
-    expect_tibble_error(
+    expect_error(
       foo[0.5],
-      error_unsupported_column_index()
+      class = "vctrs_error_subscript_bad_type"
     )
     expect_error(
       foo[1:5],
@@ -122,11 +122,15 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
     expect_error(
       foo[-1:1],
-      class = "tibble_error_unsupported_column_index"
+      class = "vctrs_error_subscript_bad_type"
     )
     expect_error(
       foo[c(-1, 1)],
-      class = "tibble_error_unsupported_column_index"
+      class = "vctrs_error_subscript_bad_type"
+    )
+    expect_error(
+      foo[c(-1, NA)],
+      class = "tibble_error_na_column_index"
     )
 
     expect_error(
@@ -182,25 +186,25 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 test_that("[.tbl_df rejects unknown column indexes (#83)", {
   verify_errors({
     foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    expect_tibble_error(
+    expect_error(
       foo[list(1:3)],
-      error_unsupported_column_index()
+      class = "vctrs_error_subscript_bad_type"
     )
-    expect_tibble_error(
+    expect_error(
       foo[as.list(1:3)],
-      error_unsupported_column_index()
+      class = "vctrs_error_subscript_bad_type"
     )
     expect_error(
       foo[factor(1:3)],
       class = "vctrs_error_subscript_oob"
     )
-    expect_tibble_error(
+    expect_error(
       foo[Sys.Date()],
-      error_unsupported_column_index()
+      class = "vctrs_error_subscript_bad_type"
     )
-    expect_tibble_error(
+    expect_error(
       foo[Sys.time()],
-      error_unsupported_column_index()
+      class = "vctrs_error_subscript_bad_type"
     )
   })
 })
@@ -607,6 +611,7 @@ test_that("subsetting has informative errors", {
     foo[1:5]
     foo[-1:1]
     foo[c(-1, 1)]
+    foo[c(-1, NA)]
     foo[-4]
     foo[c(1:3, NA)]
     foo[as.matrix(1)]
