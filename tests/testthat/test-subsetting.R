@@ -157,11 +157,11 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
     expect_error(
       foo[c(TRUE, TRUE)],
-      class = "vctrs_error_indicator_bad_size"
+      class = "vctrs_error_subscript_bad_size"
     )
     expect_error(
       foo[c(TRUE, TRUE, FALSE, FALSE)],
-      class = "vctrs_error_indicator_bad_size"
+      class = "vctrs_error_subscript_bad_size"
     )
     expect_tibble_error(
       foo[c(TRUE, TRUE, NA)],
@@ -274,7 +274,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
 
-  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_indicator_bad_size")
+  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_subscript_bad_size")
 })
 
 test_that("[.tbl_df is no-op if args missing", {
