@@ -111,18 +111,18 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    subclass_col_index_errors(tbl_subset2(x, j = i), substitute(i))
+    with_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j)) {
     error_assign_columns_non_missing_only()
   } else {
-    subclass_col_index_errors(arg = substitute(j), {
+    with_col_index_errors(arg = substitute(j), {
       i <- vec_as_location2(i, fast_nrow(x))
       x <- tbl_subset2(x, j = j)
     })
     if (is.null(x)) {
       x
     } else {
-      subclass_row_index_errors(vec_slice(x, i), arg = substitute(i))
+      with_row_index_errors(vec_slice(x, i), arg = substitute(i))
     }
   }
 }
@@ -332,7 +332,7 @@ vectbl_as_col_index <- function(j, x, arg = NULL) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  subclass_col_index_errors(
+  with_col_index_errors(
     vec_as_location(j, length(x), names(x), arg = "j"),
     arg = arg
   )

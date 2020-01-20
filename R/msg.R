@@ -335,7 +335,7 @@ subclass_name_repair_errors <- function(expr, name) {
   )
 }
 
-subclass_col_index_errors <- function(expr, arg = NULL) {
+with_col_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
@@ -345,7 +345,7 @@ subclass_col_index_errors <- function(expr, arg = NULL) {
     }
   )
 }
-subclass_row_index_errors <- function(expr, arg = NULL) {
+with_row_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
