@@ -113,7 +113,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
     expect_error(
       foo[0.5],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[1:5],
@@ -122,11 +122,11 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
     expect_error(
       foo[-1:1],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[c(-1, 1)],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[c(-1, NA)],
@@ -161,11 +161,11 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
     expect_error(
       foo[c(TRUE, TRUE)],
-      class = "vctrs_error_subscript_bad_size"
+      class = "vctrs_error_subscript_size"
     )
     expect_error(
       foo[c(TRUE, TRUE, FALSE, FALSE)],
-      class = "vctrs_error_subscript_bad_size"
+      class = "vctrs_error_subscript_size"
     )
     expect_tibble_error(
       foo[c(TRUE, TRUE, NA)],
@@ -188,11 +188,11 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
     foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
     expect_error(
       foo[list(1:3)],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[as.list(1:3)],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[factor(1:3)],
@@ -200,11 +200,11 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
     )
     expect_error(
       foo[Sys.Date()],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
     expect_error(
       foo[Sys.time()],
-      class = "vctrs_error_subscript_bad_type"
+      class = "vctrs_error_subscript_type"
     )
   })
 })
@@ -278,7 +278,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
 
-  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_subscript_bad_size")
+  expect_error(foo[c(TRUE, FALSE), ], class = "vctrs_error_subscript_size")
 })
 
 test_that("[.tbl_df is no-op if args missing", {

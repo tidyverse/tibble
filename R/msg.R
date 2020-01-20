@@ -340,7 +340,7 @@ subclass_col_index_errors <- function(expr, arg = NULL) {
     force(expr),
 
     vctrs_error_subscript = function(cnd) {
-      cnd$arg <- arg
+      cnd$subscript_arg <- arg
       cnd$subscript_elt <- "column"
       cnd_signal(cnd)
     }

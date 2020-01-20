@@ -60,7 +60,7 @@ RdMacros:
     lifecycle
 Remotes: 
     r-lib/pillar,
-    r-lib/vctrs#765,
+    r-lib/vctrs#769,
     r-lib/rlang
 Encoding: UTF-8
 LazyData: yes
