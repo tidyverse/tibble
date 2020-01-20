@@ -111,15 +111,19 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    tbl_subset2(x, j = i)
+    subclass_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j)) {
     error_assign_columns_non_missing_only()
   } else {
-    i <- vec_as_location2(i, fast_nrow(x))
-
-    x <- tbl_subset2(x, j = j)
-    if (is.null(x)) return(x)
-    vec_slice(x, i)
+    subclass_col_index_errors(arg = substitute(j), {
+      i <- vec_as_location2(i, fast_nrow(x))
+      x <- tbl_subset2(x, j = j)
+    })
+    if (is.null(x)) {
+      x
+    } else {
+      subclass_row_index_errors(vec_slice(x, i), arg = substitute(i))
+    }
   }
 }
 

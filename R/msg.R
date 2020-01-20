@@ -338,10 +338,19 @@ subclass_name_repair_errors <- function(expr, name) {
 subclass_col_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
-
     vctrs_error_subscript = function(cnd) {
       cnd$subscript_arg <- arg
       cnd$subscript_elt <- "column"
+      cnd_signal(cnd)
+    }
+  )
+}
+subclass_row_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "row"
       cnd_signal(cnd)
     }
   )
