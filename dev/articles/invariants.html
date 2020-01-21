@@ -327,11 +327,11 @@
 <td>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">tbl[[<span class="ot">TRUE</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` has the wrong type `logical`.
-#&gt; ℹ This subscript must be a location
-#&gt; or a name.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `j` has the wrong
+#&gt; type `logical`.
+#&gt; ℹ It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -347,11 +347,11 @@
 <td>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">tbl[[mean]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` has the wrong type `closure`.
-#&gt; ℹ This subscript must be a location
-#&gt; or a name.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `j` has the wrong
+#&gt; type `closure`.
+#&gt; ℹ It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -366,10 +366,9 @@
 <td>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">tbl[[<span class="ot">NA</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` can't be `NA`.
-#&gt; ℹ This subscript can't be missing.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `NA` can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -381,10 +380,10 @@
 <td>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">tbl[[<span class="ot">NA_character_</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` can't be `NA`.
-#&gt; ℹ This subscript can't be missing.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `NA_character_`
+#&gt; can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -396,10 +395,10 @@
 <td>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">tbl[[<span class="ot">NA_integer_</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` can't be `NA`.
-#&gt; ℹ This subscript can't be missing.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `NA_integer_` can't
+#&gt; be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -415,12 +414,10 @@
 <td>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">tbl[[<span class="op">-</span><span class="dv">1</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `j` (with value -1) has the wrong
-#&gt; sign.
-#&gt; ℹ This subscript must be a positive
-#&gt; integer.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `-1` has value -1
+#&gt; but must be a positive location.</code></pre>
 </div>
 </td>
 </tr>
@@ -435,9 +432,10 @@
 <td>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">tbl[[<span class="dv">4</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset location 4.
-#&gt; ℹ There are only 3 elements.</code></pre>
+<pre><code>#&gt; Error: Can't subset columns that
+#&gt; don't exist.
+#&gt; ✖ The location 4 doesn't exist.
+#&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -449,8 +447,8 @@
 <td>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">tbl[[<span class="fl">1.5</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
 #&gt; ✖ Lossy cast from `j` &lt;double&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
@@ -464,8 +462,8 @@
 <td>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tbl[[<span class="ot">Inf</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
 #&gt; ✖ Lossy cast from `j` &lt;double&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
@@ -753,11 +751,12 @@
 <td>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">tbl[mean, ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset with a proper
-#&gt; subscript vector.
-#&gt; ✖ `i` has the wrong type `closure`.
-#&gt; ℹ These indices must be indicators,
-#&gt; locations or names.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ✖ The subscript has the wrong type
+#&gt; `closure`.
+#&gt; ℹ It must be logical, numeric, or
+#&gt; character.</code></pre>
 </div>
 </td>
 </tr>
@@ -772,11 +771,12 @@
 <td>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset with a proper
-#&gt; subscript vector.
-#&gt; ✖ `i` has the wrong type `list`.
-#&gt; ℹ These indices must be indicators,
-#&gt; locations or names.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ✖ The subscript has the wrong type
+#&gt; `list`.
+#&gt; ℹ It must be logical, numeric, or
+#&gt; character.</code></pre>
 </div>
 </td>
 </tr>
@@ -845,10 +845,12 @@
 <td>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 4.
-#&gt; ✖ The subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 4 but the
+#&gt; subscript has size 2.</code></pre>
 </div>
 </td>
 </tr></tbody></table>
@@ -1701,8 +1703,9 @@
 <td>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset location 5.
+<pre><code>#&gt; Error: Can't negate elements that
+#&gt; don't exist.
+#&gt; ✖ The location 5 doesn't exist.
 #&gt; ℹ There are only 4 elements.</code></pre>
 </div>
 </td>
@@ -1719,9 +1722,10 @@
 <td>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset locations 5, 6, and
-#&gt; 7.
+<pre><code>#&gt; Error: Can't negate elements that
+#&gt; don't exist.
+#&gt; ✖ The locations 5, 6, and 7 don't
+#&gt; exist.
 #&gt; ℹ There are only 4 elements.</code></pre>
 </div>
 </td>
@@ -1738,8 +1742,9 @@
 <td>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">6</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must index existing elements.
-#&gt; ✖ Can't subset location 6.
+<pre><code>#&gt; Error: Can't negate elements that
+#&gt; don't exist.
+#&gt; ✖ The location 6 doesn't exist.
 #&gt; ℹ There are only 4 elements.</code></pre>
 </div>
 </td>

@@ -425,10 +425,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"cd"</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `i` has the wrong size 2.
-#&gt; ℹ This subscript must be size 1.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `cd` has size 2 but
+#&gt; must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -448,10 +448,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">"c"</span>]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract with a single
-#&gt; subscript.
-#&gt; ✖ `i` has the wrong size 2.
-#&gt; ℹ This subscript must be size 1.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a
+#&gt; single subscript.
+#&gt; ✖ The subscript `c` has size 2 but
+#&gt; must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -585,8 +585,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tbl[<span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Cannot subset column 4 in
-#&gt; tibble with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't subset columns that
+#&gt; don't exist.
+#&gt; ✖ The location 4 doesn't exist.
+#&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -716,8 +718,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">tbl[, <span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Cannot subset column 4 in
-#&gt; tibble with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't subset columns that
+#&gt; don't exist.
+#&gt; ✖ The location 4 doesn't exist.
+#&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -835,8 +839,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Cannot subset column 4 in
-#&gt; tibble with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't subset columns that
+#&gt; don't exist.
+#&gt; ✖ The location 4 doesn't exist.
+#&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -866,10 +872,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with an
-#&gt; index vector.
-#&gt; ℹ The subscript has 2 missing values
-#&gt; at locations 3 and 4.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ✖ Negative locations can't be mixed
+#&gt; with positive locations.
+#&gt; ℹ The subscript `tbl` has 2 missing
+#&gt; values at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -971,10 +979,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 3.
-#&gt; ✖ The subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 3 but the
+#&gt; subscript `tbl` has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -990,10 +1000,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 3.
-#&gt; ✖ The subscript has size 4.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 3 but the
+#&gt; subscript `tbl` has size 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1061,8 +1073,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">tbl[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Cannot subset column 4 in
-#&gt; tibble with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't subset columns that
+#&gt; don't exist.
+#&gt; ✖ The location 4 doesn't exist.
+#&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -1091,10 +1105,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">tbl[, <span class="dv">-1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with an
-#&gt; index vector.
-#&gt; ℹ The subscript has 2 missing values
-#&gt; at locations 3 and 4.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ✖ Negative locations can't be mixed
+#&gt; with positive locations.
+#&gt; ℹ The subscript `tbl` has 2 missing
+#&gt; values at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1206,10 +1222,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 3.
-#&gt; ✖ The subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 3 but the
+#&gt; subscript `tbl` has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1225,10 +1243,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">tbl[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 3.
-#&gt; ✖ The subscript has size 4.</code></pre>
+<pre><code>#&gt; Error: Must subset columns with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 3 but the
+#&gt; subscript `tbl` has size 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1365,8 +1385,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">tbl[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Negative locations can't be
-#&gt; mixed with positive locations.
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ✖ Negative locations can't be mixed
+#&gt; with positive locations.
 #&gt; ℹ The subscript has 2 missing values
 #&gt; at locations 3 and 4.</code></pre>
 </div>
@@ -1446,10 +1468,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 4.
-#&gt; ✖ The subscript has size 2.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 4 but the
+#&gt; subscript has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1464,10 +1488,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 4.
-#&gt; ✖ The subscript has size 3.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 4 but the
+#&gt; subscript has size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1494,10 +1520,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), ]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Logical subscripts must match
-#&gt; the size of the indexed input.
-#&gt; ℹ The input has size 4.
-#&gt; ✖ The subscript has size 5.</code></pre>
+<pre><code>#&gt; Error: Must subset elements with a
+#&gt; valid subscript vector.
+#&gt; ℹ Logical subscripts must match the
+#&gt; size of the indexed input.
+#&gt; ✖ The input has size 4 but the
+#&gt; subscript has size 5.</code></pre>
 </div>
 </td>
 </tr>
