@@ -335,30 +335,22 @@ subclass_name_repair_errors <- function(expr, name) {
   )
 }
 
-subclass_col_index_errors <- function(expr) {
+with_col_index_errors <- function(expr, arg = NULL) {
   tryCatch(
     force(expr),
-
-    vctrs_error_subscript_oob_name = function(cnd) {
-      cnd <- error_unknown_column_names(setdiff(cnd$i, cnd$names), parent = cnd)
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "column"
       cnd_signal(cnd)
-    },
-
-    vctrs_error_subscript_oob_location = function(cnd) {
-      i <- cnd$i
-      size <- cnd$size
-      if (any(i < 0)) {
-        cnd <- error_small_column_index(cnd$size, i[i < -size], parent = cnd)
-      } else {
-        cnd <- error_large_column_index(cnd$size, i[i > size], parent = cnd)
-      }
-      cnd_signal(cnd)
-    },
-
-    vctrs_error_subscript_bad_type = function(cnd) {
-      body <- cnd_body(cnd)
-      cnd$body <- function(...) body
-      cnd <- error_unsupported_column_index(cnd)
+    }
+  )
+}
+with_row_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "row"
       cnd_signal(cnd)
     }
   )

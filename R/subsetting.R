@@ -111,15 +111,19 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
-    tbl_subset2(x, j = i)
+    with_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j)) {
     error_assign_columns_non_missing_only()
   } else {
-    i <- vec_as_location2(i, fast_nrow(x))
-
-    x <- tbl_subset2(x, j = j)
-    if (is.null(x)) return(x)
-    vec_slice(x, i)
+    with_col_index_errors(arg = substitute(j), {
+      i <- vec_as_location2(i, fast_nrow(x))
+      x <- tbl_subset2(x, j = j)
+    })
+    if (is.null(x)) {
+      x
+    } else {
+      with_row_index_errors(vec_slice(x, i), arg = substitute(i))
+    }
   }
 }
 
@@ -199,7 +203,7 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- tbl_subset_col(x, j = j)
+  xo <- tbl_subset_col(x, j = j, arg = substitute(x))
 
   if (!is.null(i)) {
     xo <- tbl_subset_row(xo, i = i)
@@ -321,15 +325,16 @@ warn_oob_negative <- function(oob, n) {
   }
 }
 
-vectbl_as_col_index <- function(j, x) {
+vectbl_as_col_index <- function(j, x, arg = NULL) {
   stopifnot(!is.null(j))
 
   if (anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  subclass_col_index_errors(
-    vec_as_location(j, length(x), names(x), arg = "j")
+  with_col_index_errors(
+    vec_as_location(j, length(x), names(x), arg = "j"),
+    arg = arg
   )
 }
 
@@ -353,9 +358,9 @@ tbl_subset2 <- function(x, j) {
   .subset2(x, j)
 }
 
-tbl_subset_col <- function(x, j) {
+tbl_subset_col <- function(x, j, arg = NULL) {
   if (is_null(j)) return(x)
-  j <- vectbl_as_col_index(j, x)
+  j <- vectbl_as_col_index(j, x, arg = arg)
   xo <- .subset(x, j)
   xo <- set_repaired_names(xo, .name_repair = "minimal")
   set_tibble_class(xo, nrow = fast_nrow(x))
