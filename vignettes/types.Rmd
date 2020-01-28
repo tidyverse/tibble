@@ -112,7 +112,7 @@ tbl <-
   mutate("Column header" = map_chr(Value, type_sum))
 ```
 
-```{r kable}
+```{r kable, echo = FALSE}
 tbl %>% 
   select(-Value) %>% 
   mutate(Example = paste0("`", Example, "`")) %>% 
