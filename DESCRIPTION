@@ -58,7 +58,6 @@ Suggests:
     rmarkdown,
     testthat (>= 2.1.0),
     tidyr,
-    vctrs,
     withr
 VignetteBuilder: 
     knitr
