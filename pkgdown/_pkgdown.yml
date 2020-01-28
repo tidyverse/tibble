@@ -61,6 +61,8 @@ navbar:
     href: reference/index.html
   - text: Articles
     menu:
+    - text: Data types
+      href: articles/types.html
     - text: Extending tibble
       href: articles/extending.html
     - text: Invariants

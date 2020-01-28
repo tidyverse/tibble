@@ -43,16 +43,22 @@ Imports:
     vctrs (>= 0.2.0.9004)
 Suggests: 
     bench,
+    bit64,
+    blob,
     covr,
     dplyr,
     evaluate,
+    hms,
     htmltools,
     import,
     knitr,
     mockr,
     nycflights13,
+    purrr,
     rmarkdown,
     testthat (>= 2.1.0),
+    tidyr,
+    vctrs,
     withr
 VignetteBuilder: 
     knitr
