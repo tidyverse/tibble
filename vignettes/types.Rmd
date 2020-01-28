@@ -1,8 +1,8 @@
 ---
-title: "types"
+title: "Column data types"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{types}
+  %\VignetteIndexEntry{Column data types}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
