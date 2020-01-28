@@ -26,6 +26,7 @@ Imports:
     utils
 Suggests: 
     bench,
+    bit64,
     covr,
     dplyr,
     htmltools,
@@ -33,8 +34,10 @@ Suggests:
     knitr,
     mockr,
     nycflights13,
+    purrr,
     rmarkdown,
     testthat,
+    tidyr,
     withr
 VignetteBuilder: knitr
 Encoding: UTF-8
