@@ -1,9 +1,10 @@
 pandoc: '2.2'
-pkgdown: 1.3.0
+pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   extending: extending.html
   tibble: tibble.html
+  types: types.html
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles
