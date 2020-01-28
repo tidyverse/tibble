@@ -1,10 +1,11 @@
 pandoc: '2.2'
-pkgdown: 1.4.1.9000
-pkgdown_sha: 134033d9d744c548c6fbe297bc0fbd1a2f498e83
+pkgdown: 1.4.1
+pkgdown_sha: ~
 articles:
   extending: extending.html
   invariants: invariants.html
   tibble: tibble.html
+  types: types.html
   subassign: wip/subassign.html
   subset: wip/subset.html
 urls:
