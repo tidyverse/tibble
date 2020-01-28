@@ -1,11 +1,11 @@
-add_package_checks()
+do_package_checks(error_on = if (getRversion() >= "3.3") "note" else "error")
 
 if (Sys.getenv("DEV_VERSIONS") != "") {
   get_stage("install") %>%
     add_step(step_install_github(c("r-lib/rlang", "r-lib/cli", "r-lib/crayon", "r-lib/pillar", "r-lib/pkgconfig")))
 }
 
-if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() == "master") {
+if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() %in% c("master", "docs")) {
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
   # - `ci()$is_tag()`: Only for tags, not for branches
