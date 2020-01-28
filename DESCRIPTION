@@ -27,8 +27,10 @@ Imports:
 Suggests: 
     bench,
     bit64,
+    blob,
     covr,
     dplyr,
+    hms,
     htmltools,
     import,
     knitr,
