@@ -41,9 +41,9 @@ These functions allow to you detect if a data frame has row names
 (\code{has_rownames()}), remove them (\code{remove_rownames()}), or convert
 them back-and-forth between an explicit column (\code{rownames_to_column()}
 and \code{column_to_rownames()}).
-Also included is \code{rowid_to_column()} which
-adds a column at the start of the dataframe of ascending sequential row
-ids starting at 1. Note that this will remove any existing row names.
+Also included is \code{rowid_to_column()}, which adds a column at the start of the
+dataframe of ascending sequential row ids starting at 1. Note that this will
+remove any existing row names.
 }
 \examples{
 has_rownames(mtcars)

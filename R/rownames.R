@@ -12,9 +12,9 @@
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
 #' and `column_to_rownames()`).
-#' Also included is `rowid_to_column()` which
-#' adds a column at the start of the dataframe of ascending sequential row
-#' ids starting at 1. Note that this will remove any existing row names.
+#' Also included is `rowid_to_column()`, which adds a column at the start of the
+#' dataframe of ascending sequential row ids starting at 1. Note that this will
+#' remove any existing row names.
 #'
 #' @return `column_to_rownames()` always returns a data frame.
 #'   `has_rownames()` returns a scalar logical.
