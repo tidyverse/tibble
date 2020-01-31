@@ -28,15 +28,15 @@ frame.
 # add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
-add_column(df, z = -1:1, w = 0)
+df \%>\% add_column(z = -1:1, w = 0)
 
 # You can't overwrite existing columns
 \dontrun{
-add_column(df, x = 4:6)
+df \%>\% add_column(x = 4:6)
 }
 # You can't create new observations
 \dontrun{
-add_column(df, z = 1:5)
+df \%>\% add_column(z = 1:5)
 }
 }
 \seealso{
