@@ -13,8 +13,7 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
 only for columns that already exist in \code{.data} and unset columns will get an
 \code{NA} value. These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also
-support unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in
-\pkg{dplyr} verbs, columns in \code{.data} are not available for the expressions.}
+support unquote via \verb{!!} and unquote-splice via \verb{!!!}.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
