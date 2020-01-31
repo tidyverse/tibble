@@ -38,9 +38,9 @@ Imports:
     methods,
     pillar (>= 1.4.2.9001),
     pkgconfig,
-    rlang (>= 0.4.2.9001),
+    rlang (>= 0.4.3),
     utils,
-    vctrs (>= 0.2.0.9004)
+    vctrs (>= 0.2.2)
 Suggests: 
     bench,
     bit64,
@@ -64,9 +64,7 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
-    r-lib/pillar,
-    r-lib/vctrs,
-    r-lib/rlang
+    r-lib/pillar
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
