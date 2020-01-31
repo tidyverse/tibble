@@ -19,9 +19,7 @@
 #' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
 #'   only for columns that already exist in `.data` and unset columns will get an
 #'   `NA` value. These arguments are passed on to [tibble()], and therefore also
-#'   support unquote via `!!` and unquote-splice via `!!!`. However, unlike in
-#'   \pkg{dplyr} verbs, columns in `.data` are not available for the expressions.
-#'
+#'   support unquote via `!!` and unquote-splice via `!!!`.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
