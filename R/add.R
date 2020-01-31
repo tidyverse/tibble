@@ -102,8 +102,20 @@ rbind_at <- function(old, new, pos) {
 
 #' Add columns to a data frame
 #'
+#' @description
+#' \lifecycle{questioning}
+#'
 #' This is a convenient way to add one or more columns to an existing data
 #' frame.
+#'
+#'@section Life cycle:
+#' It is unclear we should have an `add_column()` function.
+#' `dplyr::mutate()` just added the arguments `.before` and `.after`.
+#' See <https://github.com/tidyverse/dplyr/pull/4774> and
+#' <https://github.com/tidyverse/dplyr/issues/2047> for details.
+#'
+#'
+#'
 #'
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. All values must have
@@ -121,6 +133,7 @@ rbind_at <- function(old, new, pos) {
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
 #' df %>% add_column(z = -1:1, w = 0)
+#' df %>% add_column(z = -1:1, .before = "y")
 #'
 #' # You can't overwrite existing columns
 #' \dontrun{

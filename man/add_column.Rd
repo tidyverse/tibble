@@ -21,14 +21,25 @@ existing data.}
 new columns, default: after last column.}
 }
 \description{
+\lifecycle{questioning}
+
 This is a convenient way to add one or more columns to an existing data
 frame.
 }
+\section{Life cycle}{
+
+It is unclear we should have an \code{add_column()} function.
+\code{dplyr::mutate()} just added the arguments \code{.before} and \code{.after}.
+See \url{https://github.com/tidyverse/dplyr/pull/4774} and
+\url{https://github.com/tidyverse/dplyr/issues/2047} for details.
+}
+
 \examples{
 # add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
 df \%>\% add_column(z = -1:1, w = 0)
+df \%>\% add_column(z = -1:1, .before = "y")
 
 # You can't overwrite existing columns
 \dontrun{
