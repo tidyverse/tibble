@@ -42,13 +42,11 @@ df \%>\% add_column(z = -1:1, w = 0)
 df \%>\% add_column(z = -1:1, .before = "y")
 
 # You can't overwrite existing columns
-\dontrun{
-df \%>\% add_column(x = 4:6)
-}
+try(df \%>\% add_column(x = 4:6))
+
 # You can't create new observations
-\dontrun{
-df \%>\% add_column(z = 1:5)
-}
+try(df \%>\% add_column(z = 1:5))
+
 }
 \seealso{
 Other addition: 

@@ -136,14 +136,12 @@ rbind_at <- function(old, new, pos) {
 #' df %>% add_column(z = -1:1, .before = "y")
 #'
 #' # You can't overwrite existing columns
-#' \dontrun{
-#' df %>% add_column(x = 4:6)
-#' }
+#' try(df %>% add_column(x = 4:6))
+#'
 
 #' # You can't create new observations
-#' \dontrun{
-#' df %>% add_column(z = 1:5)
-#' }
+#' try(df %>% add_column(z = 1:5))
+#'
 #' @export
 add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   if (!is.data.frame(.data)) {
