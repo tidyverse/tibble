@@ -23,15 +23,21 @@
 #' @param .data A data frame.
 #' @param var Name of column to use for rownames.
 #' @examples
+#' # Detect row names ----------------------------------------------------
 #' has_rownames(mtcars)
 #' has_rownames(iris)
-#' has_rownames(remove_rownames(mtcars))
 #'
-#' head(rownames_to_column(mtcars))
+#' # Remove row names ----------------------------------------------------
+#' remove_rownames(mtcars) %>% has_rownames()
 #'
-#' mtcars_tbl <- as_tibble(rownames_to_column(mtcars))
+#' # Convert between row names and column --------------------------------
+#' mtcars_tbl <- rownames_to_column(mtcars, var = "car") %>% as_tibble()
 #' mtcars_tbl
-#' head(column_to_rownames(mtcars_tbl))
+#' column_to_rownames(mtcars_tbl, var = "car") %>% head()
+#'
+#' # Adding rowid as a column --------------------------------------------
+#' rowid_to_column(iris) %>% head()
+#'
 #' @name rownames
 NULL
 
