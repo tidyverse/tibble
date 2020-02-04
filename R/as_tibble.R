@@ -69,6 +69,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
   .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- validate_name_repair(.name_repair)
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -97,6 +98,7 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
   .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- validate_name_repair(.name_repair)
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }

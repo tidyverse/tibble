@@ -140,6 +140,8 @@ tibble <- function(...,
 
   is_null <- map_lgl(xs, quo_is_null)
 
+  .name_repair <- validate_name_repair(.name_repair)
+
   tibble_quos(xs[!is_null], .rows, .name_repair)
 }
 
@@ -161,6 +163,8 @@ tibble_row <- function(...,
   xs <- quos(...)
 
   is_null <- map_lgl(xs, quo_is_null)
+
+  .name_repair <- validate_name_repair(.name_repair)
 
   tibble_quos(xs[!is_null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }

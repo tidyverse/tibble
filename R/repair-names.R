@@ -1,17 +1,29 @@
 set_repaired_names <- function(x,
-                               .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                               .name_repair,
                                quiet = FALSE) {
   set_names(x, repaired_names(names2(x), .name_repair = .name_repair, quiet = quiet))
 }
 
 repaired_names <- function(name,
-                           .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                           .name_repair,
                            quiet = FALSE) {
-
   subclass_name_repair_errors(name = name,
     vec_as_names(name, repair = .name_repair, quiet = quiet)
   )
 
+}
+
+# vctrs:::validate_repair()
+validate_name_repair <- function(.name_repair) {
+  if (is_formula(.name_repair, scoped = TRUE, lhs = FALSE)) {
+    .name_repair <- as_function(.name_repair)
+  }
+
+  if (is_function(.name_repair)) {
+    .name_repair
+  } else {
+    arg_match(.name_repair, c("check_unique", "unique", "universal", "minimal"))
+  }
 }
 
 check_names_non_null <- function(name, abort = rlang::abort) {
