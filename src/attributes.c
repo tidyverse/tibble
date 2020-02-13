@@ -3,9 +3,9 @@
 SEXP tibble_update_attrs(SEXP x, SEXP dots) {
   x = PROTECT(Rf_shallow_duplicate(x));
 
-  while(!Rf_isNull(dots)) {
+  while(dots != R_NilValue) {
     SEXP tag = TAG(dots);
-    if (!Rf_isNull(tag)) {
+    if (tag != R_NilValue) {
       Rf_setAttrib(x, tag, CAR(dots));
     }
     dots = CDR(dots);
