@@ -118,19 +118,19 @@ i It must be logical, numeric, or character.
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[[NA]]
-Error: Must extract column with a single subscript.
+Error: Must extract column with a single valid subscript.
 x The subscript `NA` can't be `NA`.
 
 > foo[[NA_integer_]]
-Error: Must extract column with a single subscript.
+Error: Must extract column with a single valid subscript.
 x The subscript `NA_integer_` can't be `NA`.
 
 > foo[[NA_real_]]
-Error: Must extract column with a single subscript.
+Error: Must extract column with a single valid subscript.
 x The subscript `NA_real_` can't be `NA`.
 
 > foo[[NA_character_]]
-Error: Must extract column with a single subscript.
+Error: Must extract column with a single valid subscript.
 x The subscript `NA_character_` can't be `NA`.
 
 
