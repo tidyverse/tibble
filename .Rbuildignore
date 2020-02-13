@@ -25,3 +25,5 @@
 ^man/figures/logo-og-1280x640.png$
 ^minver$
 ^LICENSE\.md$
+^\.github/workflows/R-CMD-check\.yaml$
+^\.github/workflows/pr-commands\.yaml$
