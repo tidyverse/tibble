@@ -48,7 +48,8 @@
 
 
 <meta property="og:title" content="Add columns to a data frame — add_column" />
-<meta property="og:description" content="This is a convenient way to add one or more columns to an existing data
+<meta property="og:description" content="
+This is a convenient way to add one or more columns to an existing data
 frame." />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -183,7 +184,8 @@ frame." />
     </div>
 
     <div class="ref-description">
-    <p>This is a convenient way to add one or more columns to an existing data
+    <p><a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a></p>
+<p>This is a convenient way to add one or more columns to an existing data
 frame.</p>
     </div>
 
@@ -213,6 +215,14 @@ new columns, default: after last column.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
+
+    
+
+<p>It is unclear we should have an <code>add_column()</code> function.
+<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> just added the arguments <code>.before</code> and <code>.after</code>.
+See <a href='https://github.com/tidyverse/dplyr/pull/4774'>https://github.com/tidyverse/dplyr/pull/4774</a> and
+<a href='https://github.com/tidyverse/dplyr/issues/2047'>https://github.com/tidyverse/dplyr/issues/2047</a> for details.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other addition: 
@@ -222,25 +232,31 @@ new columns, default: after last column.</p></td>
     <pre class="examples"><div class='input'><span class='co'># add_column ---------------------------------</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)
 
-<span class='fu'>add_column</span>(<span class='no'>df</span>, <span class='kw'>z</span> <span class='kw'>=</span> -<span class='fl'>1</span>:<span class='fl'>1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 4
+<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>z</span> <span class='kw'>=</span> -<span class='fl'>1</span>:<span class='fl'>1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 4
 #&gt;       x     y     z     w
 #&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
 #&gt; 1     1     3    -1     0
 #&gt; 2     2     2     0     0
-#&gt; 3     3     1     1     0</div><div class='input'>
+#&gt; 3     3     1     1     0</div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>z</span> <span class='kw'>=</span> -<span class='fl'>1</span>:<span class='fl'>1</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='st'>"y"</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;       x     z     y
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1    -1     3
+#&gt; 2     2     0     2
+#&gt; 3     3     1     1</div><div class='input'>
 <span class='co'># You can't overwrite existing columns</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>add_column</span>(<span class='no'>df</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
-}
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; Error : Can't add duplicate columns with `add_column()`:
+#&gt; * Column `x` already exists in `.data`.</div><div class='input'>
 <span class='co'># You can't create new observations</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>add_column</span>(<span class='no'>df</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>))</div><div class='output co'>#&gt; Error : New columns in `add_column()` must be consistent with `.data`:
+#&gt; * `.data` has 3 rows
+#&gt; * New column contributes 5 rows</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#life-cycle">Life cycle</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
