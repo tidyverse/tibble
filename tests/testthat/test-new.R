@@ -48,6 +48,16 @@ test_that("new_tibble() with new class argument", {
   )
 })
 
+test_that("new_tibble() with additional attributes", {
+  df <- data.frame(a = 1:3)
+  foo <- df
+  attr(foo, "foo") <- "bar"
+
+  tbl_df <- new_tibble(df, nrow = 3, foo = "baz")
+  tbl_foo <- new_tibble(foo, nrow = 3, foo = "baz")
+  expect_identical(tbl_df, tbl_foo)
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
