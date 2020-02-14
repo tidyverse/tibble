@@ -114,13 +114,7 @@ validate_nrow <- function(names, lengths, nrow) {
 }
 
 update_tibble_attrs <- function(x, ...) {
-  # Compat for https://github.com/r-spatial/sf/pull/1232
-  attribs <- list(...)
-  if (has_length(attribs) && is_named(attribs)) {
-    attributes(x)[names(attribs)] <- attribs
-  }
-
-  x
+  structure(x, ...)
 }
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
