@@ -331,7 +331,7 @@
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">tbl[[<span class="ot">TRUE</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `j` has the wrong
 #&gt; type `logical`.
 #&gt; ℹ It must be numeric or character.</code></pre>
@@ -351,7 +351,7 @@
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">tbl[[mean]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `j` has the wrong
 #&gt; type `closure`.
 #&gt; ℹ It must be numeric or character.</code></pre>
@@ -370,7 +370,7 @@
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">tbl[[<span class="ot">NA</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `NA` can't be `NA`.</code></pre>
 </div>
 </td>
@@ -384,7 +384,7 @@
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">tbl[[<span class="ot">NA_character_</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `NA_character_`
 #&gt; can't be `NA`.</code></pre>
 </div>
@@ -399,7 +399,7 @@
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">tbl[[<span class="ot">NA_integer_</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `NA_integer_` can't
 #&gt; be `NA`.</code></pre>
 </div>
@@ -418,7 +418,7 @@
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">tbl[[<span class="op">-</span><span class="dv">1</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ The subscript `-1` has value -1
 #&gt; but must be a positive location.</code></pre>
 </div>
@@ -451,7 +451,7 @@
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">tbl[[<span class="fl">1.5</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ Lossy cast from `j` &lt;double&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
@@ -466,7 +466,7 @@
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tbl[[<span class="ot">Inf</span>]]</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a
-#&gt; single subscript.
+#&gt; single valid subscript.
 #&gt; ✖ Lossy cast from `j` &lt;double&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
