@@ -17,7 +17,7 @@ SEXP tibble_update_attrs(SEXP x, SEXP dots) {
 SEXP tibble_restore_impl(SEXP xo, SEXP x) {
   xo = PROTECT(Rf_shallow_duplicate(xo));
 
-  // copy over all alltributes except `names` and `row.names`
+  // copy over all attributes except `names` and `row.names`
   SEXP attr_x = ATTRIB(x);
   while(attr_x != R_NilValue) {
     SEXP tag = TAG(attr_x);
