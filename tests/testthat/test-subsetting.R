@@ -332,6 +332,11 @@ test_that("[[.tbl_df ignores exact argument", {
   expect_identical(getElement(foo, "y"), 1:10)
 })
 
+test_that("[[.tbl_df supports symbols (#691)", {
+  foo <- tibble(x = 1:10, y = 1:10)
+  expect_identical(foo[[quote(x)]], 1:10)
+})
+
 test_that("[[.tbl_df throws error with NA index", {
   verify_errors({
     foo <- tibble(x = 1:10, y = 1:10)
