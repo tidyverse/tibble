@@ -447,8 +447,13 @@ titles.</p></li>
 #&gt; Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 #&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 #&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</div><div class='input'>
-<span class='no'>mtcars2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>mtcars</span>, <span class='no'>mtcars</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mtcars2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 22
+<span class='no'>mtcars2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>mtcars</span>, <span class='no'>mtcars</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* mpg -&gt; mpg...1</span>
+#&gt; <span class='message'>* cyl -&gt; cyl...2</span>
+#&gt; <span class='message'>* disp -&gt; disp...3</span>
+#&gt; <span class='message'>* hp -&gt; hp...4</span>
+#&gt; <span class='message'>* drat -&gt; drat...5</span>
+#&gt; <span class='message'>* ...</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mtcars2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 22
 #&gt;    mpg...1 cyl...2 disp...3 hp...4 drat...5 wt...6 qsec...7 vs...8 am...9
 #&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 #&gt;  1    21         6    160      110     3.9    2.62     16.5      0      1
