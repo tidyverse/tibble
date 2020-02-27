@@ -36,7 +36,7 @@ Imports:
     lifecycle,
     magrittr,
     methods,
-    pillar (>= 1.4.2.9001),
+    pillar (>= 1.4.3),
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
@@ -64,7 +64,6 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
-    r-lib/pillar,
     krlmlr/vctrs@add-numeric-version,
     r-lib/rlang
 Encoding: UTF-8
