@@ -40,7 +40,7 @@ Imports:
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
-    vctrs (>= 0.2.2)
+    vctrs (>= 0.2.99.9005)
 Suggests: 
     bench,
     bit64,
@@ -65,7 +65,7 @@ RdMacros:
     lifecycle
 Remotes: 
     r-lib/pillar,
-    r-lib/vctrs,
+    krlmlr/vctrs@add-numeric-version,
     r-lib/rlang
 Encoding: UTF-8
 LazyData: yes
