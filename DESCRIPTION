@@ -64,7 +64,8 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
-    r-lib/pillar, 
+    r-lib/pillar,
+    r-lib/vctrs,
     r-lib/rlang
 Encoding: UTF-8
 LazyData: yes
