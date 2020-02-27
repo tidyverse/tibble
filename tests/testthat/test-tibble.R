@@ -733,6 +733,12 @@ test_that("subsetting one row retains columns", {
   )
 })
 
+test_that("package_version is a vector (#690)", {
+  ver <- utils::packageVersion("tibble")
+
+  expect_identical(tibble(x = ver)$x, ver)
+})
+
 
 # tibble_row() ------------------------------------------------------------
 
