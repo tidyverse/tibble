@@ -1,15 +1,8 @@
 # tibble 2.99.99.9014
 
-## Known problems
-
-- Subsetting with symbols doesn't work yet (#691).
-
-- The `package_version` class isn't treated as a vector yet (#690).
-
-
 ## Major breaking changes
 
-- Subset assignment ("subassignment") and also subsetting has become stricter. The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible. Symptoms:
+- Subset assignment ("subassignment") and also subsetting has become stricter. Symptoms:
 
     - Error: No common type for ...
     
@@ -21,11 +14,21 @@
     
     - Error: Lossy cast from ... to ...
 
-- List classes are no longer automatically treated as vectors. If you implement a class that wraps a list as S3 vector, you need to implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`. Symptoms:
+    The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.
+
+- List classes are no longer automatically treated as vectors. Symptoms:
 
     - Error: All columns in a tibble must be vectors
     
     - Error: Expected a vector, not a `...` object
+
+    If you implement a class that wraps a list as S3 vector, you need to include `"list"` in the class:
+
+    ```r
+    structure(x, class = c("your_s3_class", "list"))
+    ```
+
+    Alternatively, implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`.
 
 - Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don't expect names in columns (#630). Symptoms:
 
