@@ -64,8 +64,8 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
-    krlmlr/vctrs@add-numeric-version,
-    r-lib/rlang
+    r-lib/rlang,
+    r-lib/vctrs
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
