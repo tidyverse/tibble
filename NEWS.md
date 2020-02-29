@@ -83,6 +83,11 @@
 - `view()` now uses the created (or passed) title argument (#610, @xvrdm).
 
 
+## Performance
+
+- Construction and subsetting of large data frames is faster now (#717, @romainfrancois).
+
+
 ## Internal
 
 - Import lifecycle package (#669).
