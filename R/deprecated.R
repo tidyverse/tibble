@@ -71,3 +71,11 @@ frame_data <- function(...) {
 
   tribble(...)
 }
+
+#' Name repair
+#'
+#' Please review [vctrs::vec_as_names()].
+#'
+#' @name name-repair
+#' @keywords internal
+NULL
