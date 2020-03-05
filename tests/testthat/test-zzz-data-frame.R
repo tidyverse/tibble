@@ -9,21 +9,26 @@ test_that("tibble returns correct number of rows with all combinatinos", {
 })
 
 test_that("dim attribute is stripped of 1D array (#84)", {
+  skip_brk_inner_dim_not_stripped()
   expect_null(dim(tibble(x = array(1:3))$x))
 })
 
 test_that("bogus columns raise an error", {
+  skip_enh_tibble_null()
   expect_error(
     tibble(a = NULL),
     error_column_must_be_vector("a", "NULL"),
     fixed = TRUE
   )
-  expect_error(
+})
+
+test_that("bogus columns raise an error", {
+  expect_legacy_error(
     tibble(a = new.env()),
     error_column_must_be_vector("a", "environment"),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     tibble(a = quote(a)),
     error_column_must_be_vector("a", "name"),
     fixed = TRUE
@@ -33,7 +38,7 @@ test_that("bogus columns raise an error", {
 test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10)), 10)
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
-  expect_error(
+  expect_legacy_error(
     tibble(x = 1:10, y = 1:2),
     error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
     fixed = TRUE
@@ -78,6 +83,7 @@ test_that("SE version", {
 })
 
 test_that("names are stripped from vectors", {
+  skip_brk_inner_names_not_stripped()
   foo <- tibble(x = c(y = 1, z = 2))
   expect_equal(names(foo), "x")
   expect_null(names(foo$x))
@@ -124,12 +130,12 @@ test_that("columns are recycled to common length", {
 })
 
 test_that("columns must be same length", {
-  expect_error(
+  expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:3)),
     error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
     error_inconsistent_cols(
       NULL,
@@ -139,7 +145,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
     error_inconsistent_cols(
       NULL,
@@ -149,7 +155,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
     error_inconsistent_cols(
       NULL,
@@ -159,7 +165,7 @@ test_that("columns must be same length", {
     ),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
     error_inconsistent_cols(
       NULL,
@@ -260,28 +266,28 @@ test_that("Can convert named atomic vectors to data frame", {
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
-  expect_error(
+  expect_legacy_error(
     as_tibble(l1),
     error_column_must_be_named(1, repair = TRUE),
     fixed = TRUE
   )
 
   l2 <- list(x = 1, 2)
-  expect_error(
+  expect_legacy_error(
     as_tibble(l2),
     error_column_must_be_named(2, repair = TRUE),
     fixed = TRUE
   )
 
   l3 <- list(x = 1, ... = 2)
-  expect_error(
+  expect_legacy_error(
     as_tibble(l3),
     error_column_must_not_be_dot_dot(2, repair = TRUE),
     fixed = TRUE
   )
 
   l4 <- list(x = 1, ..1 = 2)
-  expect_error(
+  expect_legacy_error(
     as_tibble(l4),
     error_column_must_not_be_dot_dot(2, repair = TRUE),
     fixed = TRUE
@@ -290,13 +296,12 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)
-  expect_error(
+  expect_legacy_error(
     as_tibble(df),
     error_column_must_be_named(1:2, repair = TRUE),
     fixed = TRUE
   )
 })
-
 
 test_that("as_tibble() makes names `minimal`, even if not fixing names", {
   invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "minimal")
@@ -405,7 +410,7 @@ test_that("as_tibble.poly() supports .name_repair", {
 test_that("as_tibble.table() supports .name_repair", {
   x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
 
-  expect_error(
+  expect_legacy_error(
     as_tibble(x),
     error_column_names_must_be_unique("a")
   )
@@ -510,13 +515,15 @@ test_that("as_tibble() can convert row names for zero-row tibbles", {
 })
 
 test_that("as_tibble() throws an error when user turns missing row names into column", {
+  skip_enh_as_tibble_rownames()
+
   df <- data.frame(a = 1:3, b = 2:4)
-  expect_error(
+  expect_legacy_error(
     as_tibble(df, rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     as_tibble(df[0, ], rownames = "id"),
     error_as_tibble_needs_rownames(),
     fixed = TRUE
@@ -536,7 +543,8 @@ test_that("as.tibble is an alias of as_tibble", {
 # Validation --------------------------------------------------------------
 
 test_that("POSIXlt isn't a valid column", {
-  expect_error(
+  skip_enh_posixlt_supported()
+  expect_legacy_error(
     check_valid_cols(list(x = as.POSIXlt(Sys.time()))),
     error_time_column_must_be_posixct("x"),
     fixed = TRUE
@@ -544,7 +552,7 @@ test_that("POSIXlt isn't a valid column", {
 })
 
 test_that("NULL isn't a valid column", {
-  expect_error(
+  expect_legacy_error(
     check_valid_cols(list(a = NULL)),
     error_column_must_be_vector("a", "NULL"),
     fixed = TRUE
@@ -583,7 +591,7 @@ test_that("types preserved when recycling in tibble() (#284)", {
 test_that("`validate` triggers deprecation message, but then works", {
   scoped_lifecycle_warnings()
 
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
       "deprecated",
@@ -610,7 +618,7 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(df, validate = TRUE),
       "deprecated",
@@ -623,7 +631,7 @@ test_that("`validate` triggers deprecation message, but then works", {
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
   scoped_lifecycle_warnings()
 
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
@@ -647,7 +655,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
@@ -657,7 +665,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
       "precedence"
@@ -681,7 +689,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_error(
+  expect_legacy_error(
     expect_warning(
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
       "precedence"
@@ -694,10 +702,14 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
 # Data frame and matrix columns -------------------------------------------
 
 test_that("can make tibble containing data.frame or array (#416)", {
+  skip_brk_auto_splice_anonymous()
   expect_identical(
     tibble(mtcars),
     new_tibble(list(mtcars = remove_rownames(mtcars)), nrow = nrow(mtcars))
   )
+})
+
+test_that("can make tibble containing data.frame or array (#416)", {
   expect_identical(
     tibble(diag(5)),
     new_tibble(list(`diag(5)` = diag(5)), nrow = 5)
@@ -705,10 +717,14 @@ test_that("can make tibble containing data.frame or array (#416)", {
 })
 
 test_that("can coerce list data.frame or array (#416)", {
+  skip_brk_inner_data_frames()
   expect_identical(
     as_tibble(list(x = mtcars)),
     new_tibble(list(x = remove_rownames(mtcars)), nrow = nrow(mtcars))
   )
+})
+
+test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
     as_tibble(list(x = diag(5))),
     new_tibble(list(x = diag(5)), nrow = 5)

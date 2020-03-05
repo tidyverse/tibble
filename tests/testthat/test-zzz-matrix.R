@@ -136,6 +136,8 @@ test_that("converting from matrix supports storing row names in a column", {
 })
 
 test_that("converting from matrix throws an error if user turns missing row names into column", {
+  skip_enh_as_tibble_rownames()
+
   x <- matrix(1:30, 6, 5)
   expect_error(
     as_tibble(x, rownames = "id", .name_repair = "minimal"),

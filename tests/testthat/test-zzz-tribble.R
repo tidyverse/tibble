@@ -87,21 +87,21 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # no colname
-  expect_error(
+  expect_legacy_error(
     tribble(1, 2, 3),
     error_tribble_needs_columns(),
     fixed = TRUE
   )
 
   # invalid colname syntax
-  expect_error(
+  expect_legacy_error(
     tribble(a ~ b),
     error_tribble_lhs_column_syntax(quote(a)),
     fixed = TRUE
   )
 
   # invalid colname syntax
-  expect_error(
+  expect_legacy_error(
     tribble(~a + b),
     error_tribble_rhs_column_syntax(quote(a + b)),
     fixed = TRUE
@@ -117,7 +117,7 @@ test_that("tribble() errs appropriately on bad calls", {
   )
 
   # tribble() must produce rectangular structure (no filling)
-  expect_error(
+  expect_legacy_error(
     tribble(
       ~a, ~b, ~c,
       1, 2,
@@ -127,7 +127,7 @@ test_that("tribble() errs appropriately on bad calls", {
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     tribble(
       ~a, ~b, ~c, ~d,
       1, 2, 3, 4, 5,
@@ -149,6 +149,7 @@ test_that("tribble can have list columns", {
 })
 
 test_that("tribble creates n-col empty data frame", {
+  skip_enh_empty_tribble_unspecified()
   df <- tribble(~x, ~y)
   expect_equal(df, tibble(x = logical(), y = logical()))
 })
@@ -190,7 +191,7 @@ test_that("frame_matrix constructs empty matrix as expected", {
 })
 
 test_that("frame_matrix cannot have list columns", {
-  expect_error(
+  expect_legacy_error(
     frame_matrix(
       ~x,   ~y,
       "a", 1:3,

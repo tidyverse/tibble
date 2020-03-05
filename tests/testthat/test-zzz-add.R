@@ -41,13 +41,13 @@ test_that("adds empty row if no arguments", {
 })
 
 test_that("error if adding row with unknown variables", {
-  expect_error(
+  expect_legacy_error(
     add_row(tibble(a = 3), xxyzy = "err"),
     error_inconsistent_new_rows("xxyzy"),
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
     error_inconsistent_new_rows(c("b", "c")),
     fixed = TRUE
@@ -99,6 +99,7 @@ test_that("can safely add to factor columns everywhere (#296)", {
   expect_identical(add_row(df), tibble(a = factor(c(letters[1:3], NA))))
   expect_identical(add_row(df, .before = 1), tibble(a = factor(c(NA, letters[1:3]))))
   expect_identical(add_row(df, .before = 2), tibble(a = factor(c("a", NA, letters[2:3]))))
+  skip_brk_add_row_vctrs()
   expect_identical(add_row(df, a = "d"), tibble(a = factor(c(letters[1:4]))))
   expect_identical(add_row(df, a = "d", .before = 1), tibble(a = factor(c("d", letters[1:3]))))
   expect_identical(add_row(df, a = "d", .before = 2), tibble(a = factor(c("a", "d", letters[2:3]))))
@@ -106,7 +107,7 @@ test_that("can safely add to factor columns everywhere (#296)", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_error(
+  expect_legacy_error(
     add_row(df, a = 4:5, .after = 2, .before = 3),
     error_both_before_after(),
     fixed = TRUE
@@ -134,7 +135,7 @@ test_that("add_row() keeps the class of empty columns", {
 
 test_that("add_row() fails nicely for grouped data frames (#179)", {
   skip_if_not_installed("dplyr")
-  expect_error(
+  expect_legacy_error(
     add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
     error_add_rows_to_grouped_df(),
     fixed = TRUE
@@ -185,7 +186,7 @@ test_that("add_column() can add to empty tibble or data frame", {
 })
 
 test_that("error if adding existing columns", {
-  expect_error(
+  expect_legacy_error(
     add_column(tibble(a = 3), a = 5),
     error_duplicate_new_cols("a"),
     fixed = TRUE
@@ -193,7 +194,7 @@ test_that("error if adding existing columns", {
 })
 
 test_that("error if adding wrong number of rows with add_column()", {
-  expect_error(
+  expect_legacy_error(
     add_column(tibble(a = 3), b = 4:5),
     error_inconsistent_new_cols(1, data.frame(b = 4:5)),
     fixed = TRUE
@@ -256,7 +257,7 @@ test_that("can add column relative to named column", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_error(
+  expect_legacy_error(
     add_column(df, b = 4:6, .after = 2, .before = 3),
     error_both_before_after(),
     fixed = TRUE
@@ -264,6 +265,8 @@ test_that("error if both .before and .after are given", {
 })
 
 test_that("error if column named by .before or .after not found", {
+  skip_int_error_unknown_names()
+
   df <- tibble(a = 1:3)
   expect_error(
     add_column(df, b = 4:6, .after = "x"),

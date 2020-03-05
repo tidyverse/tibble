@@ -1,5 +1,6 @@
 context("tbl_df")
 
+local_options(lifecycle_verbosity = "quiet")
 
 # [ -----------------------------------------------------------------------
 
@@ -60,34 +61,34 @@ test_that("[ with 0 cols returns correct number of rows", {
 
 test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(
+  expect_legacy_error(
     foo["z"],
     error_unknown_names("z"),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[c("x", "y", "z")],
     error_unknown_names("z"),
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     foo[, "z"],
     error_unknown_names("z"),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[, c("x", "y", "z")],
     error_unknown_names("z"),
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     foo[as.matrix("x")],
     error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[array("x", dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
@@ -98,12 +99,12 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
 
-  expect_error(
+  expect_legacy_error(
     foo[0.5],
     error_nonint_column_index(1, 0.5),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[1:5],
     error_large_column_index(3, 4:5, 4:5),
     fixed = TRUE
@@ -113,23 +114,23 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
   expect_error(foo[-1:1])
   expect_error(foo[c(-1, 1)])
 
-  expect_error(
+  expect_legacy_error(
     foo[-4],
     error_small_column_index(3, 1, -4),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[c(1:3, NA)],
     error_na_column_index(),
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     foo[as.matrix(1)],
     error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[array(1, dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
@@ -143,28 +144,28 @@ test_that("[.tbl_df is careful about column flags (#83)", {
   expect_identical(foo[FALSE], foo[integer()])
   expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error(
+  expect_legacy_error(
     foo[c(TRUE, TRUE)],
     error_mismatch_column_flag(3, 2),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
     error_mismatch_column_flag(3, 4),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[c(TRUE, TRUE, NA)],
     error_na_column_flag(),
     fixed = TRUE
   )
 
-  expect_error(
+  expect_legacy_error(
     foo[as.matrix(TRUE)],
     error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
     error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
@@ -173,27 +174,27 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
 test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_error(
+  expect_legacy_error(
     foo[list(1:3)],
     error_unsupported_index(list(1:3)),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[as.list(1:3)],
     error_unsupported_index(as.list(1:3)),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[factor(1:3)],
     error_unsupported_index(factor(1:3)),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[Sys.Date()],
     error_unsupported_index(Sys.Date()),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     foo[Sys.time()],
     error_unsupported_index(Sys.time()),
     fixed = TRUE
@@ -203,8 +204,19 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
 test_that("[.tbl_df supports character subsetting (#312)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
+  skip_brk_character_subsetting_no_negative()
   expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
+})
+
+test_that("[.tbl_df supports character subsetting (#312)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  skip_dep_rowname_subsetting_warning()
   expect_identical(foo[as.character(9:12), ], foo[9:12, ])
+})
+
+test_that("[.tbl_df supports character subsetting (#312)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  skip_dep_rowname_subsetting_warning()
   expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
@@ -214,7 +226,13 @@ test_that("[.tbl_df supports character subsetting if row names are present (#312
   idx <- function(x) rownames(mtcars)[x]
   expect_identical(foo[idx(2:4), ], foo[2:4, ])
   expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
+  skip_dep_oob_subsetting_warning()
   expect_identical(foo[idx(29:34), ], foo[29:34, ])
+})
+
+test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
+  foo <- as_tibble(mtcars, rownames = NA)
+  skip_dep_rowname_subsetting_warning()
   expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
@@ -224,6 +242,7 @@ test_that("[.tbl_df supports logical subsetting (#318)", {
   expect_identical(foo[c(FALSE, rep(TRUE, 3), rep(F, 6)), ], foo[2:4, ])
   expect_identical(foo[TRUE, ], foo)
   expect_identical(foo[FALSE, ], foo[0L, ])
+  skip_brk_logical_subsetting_no_base_recycling()
   expect_warning(
     foo[c(TRUE, FALSE), ],
     "Length of logical index must be 1 or 10, not 2",
@@ -284,6 +303,7 @@ test_that("[[.tbl_df ignores exact argument", {
 test_that("can use recursive indexing with [[", {
   foo <- tibble(x = list(y = 1:3, z = 4:5))
   expect_equal(foo[[c(1, 1)]], 1:3)
+  skip_brk_no_recursive_indexing()
   expect_equal(foo[[c("x", "y")]], 1:3)
 })
 
@@ -303,7 +323,7 @@ test_that("can use two-dimensional indexing with [[", {
 
 test_that("$ throws warning if name doesn't exist", {
   df <- tibble(x = 1)
-  expect_warning(
+  expect_legacy_warning(
     expect_null(df$y),
     "Unknown or uninitialised column: 'y'"
   )
@@ -311,16 +331,16 @@ test_that("$ throws warning if name doesn't exist", {
 
 test_that("$ throws different warning if attempting a partial initialization (#199)", {
   df <- tibble(x = 1)
-  expect_warning(df$y[1] <- 2, "Unknown or uninitialised column: 'y'")
+  expect_legacy_warning(df$y[1] <- 2, "Unknown or uninitialised column: 'y'")
 })
 
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
-  expect_warning(
+  expect_legacy_warning(
     expect_null(df$p),
     "Unknown or uninitialised column: 'p'"
   )
-  expect_warning(
+  expect_legacy_warning(
     expect_null(df$part),
     "Unknown or uninitialised column: 'part'"
   )
@@ -397,23 +417,23 @@ test_that("new_tibble checks", {
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
-  expect_error(
+  expect_legacy_error(
     new_tibble(1:3, nrow = 1),
     error_new_tibble_must_be_list(),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     new_tibble(list(a = 1)),
     class = get_defunct_error_class(),
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     new_tibble(list(1), nrow = NULL),
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )
-  expect_error(
+  expect_legacy_error(
     new_tibble(list(1), nrow = 1),
     error_names_must_be_non_null(repair = FALSE),
     fixed = TRUE
@@ -441,12 +461,13 @@ test_that("new_tibble checks", {
 
 
 test_that("validate_tibble() checks", {
-  expect_error(
+  expect_legacy_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
     error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
     fixed = TRUE
   )
 
+  skip_brk_inner_dim_not_stripped()
   expect_error(
     validate_tibble(new_tibble(list(a = array(1:3)), nrow = 3)),
     error_1d_array_column(),
