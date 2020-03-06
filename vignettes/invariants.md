@@ -315,12 +315,12 @@ exists.
 <td>
     tbl[[TRUE]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` has the wrong type
-    #> `logical`.
-    #> [34mℹ[39m This index must be a
-    #> position or a name.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has
+    #> the wrong type `logical`.
+    #> [34mℹ[39m It must be numeric or
+    #> character.
 
 </td>
 </tr>
@@ -336,12 +336,12 @@ exists.
 <td>
     tbl[[mean]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` has the wrong type
-    #> `closure`.
-    #> [34mℹ[39m This index must be a
-    #> position or a name.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has
+    #> the wrong type `closure`.
+    #> [34mℹ[39m It must be numeric or
+    #> character.
 
 </td>
 </tr>
@@ -361,11 +361,10 @@ an error:
 <td>
     tbl[[NA]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` can't be `NA`.
-    #> [34mℹ[39m This index can't be
-    #> missing.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `NA` can't
+    #> be `NA`.
 
 </td>
 </tr>
@@ -378,11 +377,10 @@ an error:
 <td>
     tbl[[NA_character_]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` can't be `NA`.
-    #> [34mℹ[39m This index can't be
-    #> missing.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript
+    #> `NA_character_` can't be `NA`.
 
 </td>
 </tr>
@@ -395,11 +393,10 @@ an error:
 <td>
     tbl[[NA_integer_]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` can't be `NA`.
-    #> [34mℹ[39m This index can't be
-    #> missing.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript
+    #> `NA_integer_` can't be `NA`.
 
 </td>
 </tr>
@@ -415,12 +412,11 @@ an error:
 <td>
     tbl[[-1]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `j` (with value -1) has
-    #> the wrong sign.
-    #> [34mℹ[39m This index must be a
-    #> positive integer.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `-1` has
+    #> value -1 but must be a positive
+    #> location.
 
 </td>
 </tr>
@@ -435,10 +431,12 @@ an error:
 <td>
     tbl[[4]]
 
-    #> Error: Must index existing elements.
-    #> [31mx[39m Can't subset position 4.
+    #> Error: Can't subset columns that
+    #> don't exist.
+    #> [31mx[39m The location 4 doesn't
+    #> exist.
     #> [34mℹ[39m There are only 3
-    #> elements.
+    #> columns.
 
 </td>
 </tr>
@@ -451,8 +449,8 @@ an error:
 <td>
     tbl[[1.5]]
 
-    #> Error: Must extract with a single
-    #> index.
+    #> Error: Must extract column with a
+    #> single valid subscript.
     #> [31mx[39m Lossy cast from `j`
     #> <double> to <integer>.
 
@@ -467,8 +465,8 @@ an error:
 <td>
     tbl[[Inf]]
 
-    #> Error: Must extract with a single
-    #> index.
+    #> Error: Must extract column with a
+    #> single valid subscript.
     #> [31mx[39m Lossy cast from `j`
     #> <double> to <integer>.
 
@@ -566,10 +564,6 @@ is rarely used in packages, it can raise a warning:
 <tr style="vertical-align:top">
 <td>
     df$l
-
-    #> Warning in df$l: partial match of 'l' to
-    #> 'li'
-
     #> [[1]]
     #> [1] 9
     #> 
@@ -908,12 +902,12 @@ vector containing positive numbers.
 <td>
     tbl[mean, ]
 
-    #> Error: Must subset with an index
-    #> vector.
-    #> [31mx[39m `i` has the wrong type
-    #> `closure`.
-    #> [34mℹ[39m These indices must be
-    #> indicators, positions or names.
+    #> Error: Must subset elements with a
+    #> valid subscript vector.
+    #> [31mx[39m The subscript has the
+    #> wrong type `closure`.
+    #> [34mℹ[39m It must be logical,
+    #> numeric, or character.
 
 </td>
 </tr>
@@ -928,12 +922,12 @@ vector containing positive numbers.
 <td>
     tbl[list(1), ]
 
-    #> Error: Must subset with an index
-    #> vector.
-    #> [31mx[39m `i` has the wrong type
-    #> `list`.
-    #> [34mℹ[39m These indices must be
-    #> indicators, positions or names.
+    #> Error: Must subset elements with a
+    #> valid subscript vector.
+    #> [31mx[39m The subscript has the
+    #> wrong type `list`.
+    #> [34mℹ[39m It must be logical,
+    #> numeric, or character.
 
 </td>
 </tr>
@@ -1016,11 +1010,12 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 <td>
     tbl[c(TRUE, FALSE), ]
 
-    #> Error: Logical indices must have
-    #> length 1 or be as long as the
-    #> indexed vector.
-    #> The vector has size 4 whereas the
-    #> index has size 2.
+    #> Error: Must subset elements with a
+    #> valid subscript vector.
+    #> [34mℹ[39m Logical subscripts must
+    #> match the size of the indexed input.
+    #> [31mx[39m The input has size 4 but
+    #> the subscript has size 2.
 
 </td>
 </tr>
@@ -1944,9 +1939,10 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:2] <- list(0, 0, 0))
 
-    #> Error: Vector of length 3 cannot be
-    #> recycled to length 2. Only vectors
-    #> of length one can be recycled.
+    #> Error: `x` can't be recycled to size
+    #> 2.
+    #> [31mx[39m It must be size 2 or 1,
+    #> not 3.
 
 </td>
 </tr>
@@ -1963,9 +1959,10 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:3] <- list(0, 0))
 
-    #> Error: Vector of length 2 cannot be
-    #> recycled to length 3. Only vectors
-    #> of length one can be recycled.
+    #> Error: `x` can't be recycled to size
+    #> 3.
+    #> [31mx[39m It must be size 3 or 1,
+    #> not 2.
 
 </td>
 </tr>
@@ -2283,8 +2280,8 @@ and if all columns updated are compatible with the value assigned.
     with_tbl(tbl[is.na(tbl)] <- 1:2)
 
     #> Error in tbl_subassign_matrix(x, j,
-    #> value): vec_is(value, size = 1) is
-    #> not TRUE
+    #> value): vec_size(value) == 1 is not
+    #> TRUE
 
 </td>
 </tr>
@@ -2465,9 +2462,10 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
-    #> Error: Vector of length 12 cannot be
-    #> recycled to length 1. Only vectors
-    #> of length one can be recycled.
+    #> Error: `x` can't be recycled to size
+    #> 1.
+    #> [31mx[39m It must be size 1, not
+    #> 12.
 
 </td>
 </tr>
@@ -2573,8 +2571,12 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[-1:2, ] <- tbl[1, ])
 
-    #> Error: Can't subset with a mix of
-    #> negative and positive indices
+    #> Error: Must subset elements with a
+    #> valid subscript vector.
+    #> [31mx[39m Negative locations can't
+    #> be mixed with positive locations.
+    #> [34mℹ[39m The subscript has 2
+    #> missing values at locations 3 and 4.
 
 </td>
 </tr>
@@ -2714,9 +2716,10 @@ Only values of size one can be recycled.
 <td>
     with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
-    #> Error: Vector of length 2 cannot be
-    #> recycled to length 3. Only vectors
-    #> of length one can be recycled.
+    #> Error: `value` can't be recycled to
+    #> size 3.
+    #> [31mx[39m It must be size 3 or 1,
+    #> not 2.
 
 </td>
 </tr>
@@ -2762,9 +2765,10 @@ Only values of size one can be recycled.
 <td>
     with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
 
-    #> Error: Vector of length 2 cannot be
-    #> recycled to length 3. Only vectors
-    #> of length one can be recycled.
+    #> Error: `value` can't be recycled to
+    #> size 3.
+    #> [31mx[39m It must be size 3 or 1,
+    #> not 2.
 
 </td>
 </tr>
@@ -2843,8 +2847,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-5, ] <- tbl[1, ])
 
-    #> Error: Must index existing elements.
-    #> [31mx[39m Can't subset position 5.
+    #> Error: Can't negate elements that
+    #> don't exist.
+    #> [31mx[39m The location 5 doesn't
+    #> exist.
     #> [34mℹ[39m There are only 4
     #> elements.
 
@@ -2863,9 +2869,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-(5:7), ] <- tbl[1, ])
 
-    #> Error: Must index existing elements.
-    #> [31mx[39m Can't subset positions
-    #> 5, 6 and 7.
+    #> Error: Can't negate elements that
+    #> don't exist.
+    #> [31mx[39m The locations 5, 6, and
+    #> 7 don't exist.
     #> [34mℹ[39m There are only 4
     #> elements.
 
@@ -2884,8 +2891,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-6, ] <- tbl[1, ])
 
-    #> Error: Must index existing elements.
-    #> [31mx[39m Can't subset position 6.
+    #> Error: Can't negate elements that
+    #> don't exist.
+    #> [31mx[39m The location 6 doesn't
+    #> exist.
     #> [34mℹ[39m There are only 4
     #> elements.
 
@@ -3191,7 +3200,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
     with_tbl(tbl[2:3, "n"] <- NULL)
 
     #> Error: `value` must be a vector, not
-    #> NULL
+    #> NULL.
 
 </td>
 </tr>
@@ -3396,12 +3405,10 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     tbl[[1:2, 1]]
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `i` has the wrong size
-    #> 2.
-    #> [34mℹ[39m This index must be size
-    #> 1.
+    #> Error: Must extract column with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `1` has
+    #> size 2 but must be size 1.
 
 </td>
 </tr>
@@ -3417,12 +3424,10 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
-    #> Error: Must extract with a single
-    #> index.
-    #> [31mx[39m `i` has the wrong size
-    #> 2.
-    #> [34mℹ[39m This index must be size
-    #> 1.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript has size 2
+    #> but must be size 1.
 
 </td>
 </tr>
