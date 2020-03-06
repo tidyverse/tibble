@@ -302,8 +302,8 @@ test_that("[[.tbl_df ignores exact argument", {
 
 test_that("can use recursive indexing with [[", {
   foo <- tibble(x = list(y = 1:3, z = 4:5))
-  expect_equal(foo[[c(1, 1)]], 1:3)
   skip_brk_no_recursive_indexing()
+  expect_equal(foo[[c(1, 1)]], 1:3)
   expect_equal(foo[[c("x", "y")]], 1:3)
 })
 
@@ -364,6 +364,8 @@ test_that("is_tibble", {
 # new_tibble --------------------------------------------------------------
 
 test_that("new_tibble() with deprecated subclass argument", {
+  skip_dep_new_tibble_subclass()
+
   tbl <- new_tibble(
     data.frame(a = 1:3),
     names = "b",

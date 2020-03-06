@@ -144,10 +144,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
     expect_error(foo[as.matrix(1)])
 
-    expect_error(
-      foo[array(1, dim = c(1, 1, 1))],
-      class = "vctrs_error_incompatible_cast"
-    )
+    expect_error(foo[array(1, dim = c(1, 1, 1))])
   })
 })
 

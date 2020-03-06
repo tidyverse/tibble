@@ -60,6 +60,11 @@ skip_dep_rowname_subsetting_warning <- function() {
   skip_legacy()
 }
 
+skip_dep_new_tibble_subclass <- function() {
+  # DEP: new_tibble() warns with subclass argument
+  skip_legacy()
+}
+
 skip_enh_posixlt_supported <- function() {
   # ENH: POSIXlt supported
   skip_legacy()

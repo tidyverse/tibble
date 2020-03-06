@@ -12,7 +12,7 @@ Error: Can't subset columns that don't exist.
 x The columns `w` and `z` don't exist.
 
 > foo[as.matrix("x")]
-Error: `j` must be a logical vector.
+Error: Invalid `j`: if a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -53,11 +53,10 @@ i There are only 3 columns.
 Error: Can't use NA as column index with `[` at position 4.
 
 > foo[as.matrix(1)]
-Error: `j` must be a logical vector.
+Error: Invalid `j`: if a matrix, it must be of type logical.
 
 > foo[array(1, dim = c(1, 1, 1))]
-Error: Can't cast <integer[,1,1]> to <integer>.
-Can not decrease dimensions
+Error: `i` must have one dimension, not 3.
 
 
 [.tbl_df is careful about column flags (#83)
@@ -78,7 +77,7 @@ x The input has size 3 but the subscript `foo` has size 4.
 Error: Can't use NA as column index with `[` at position 3.
 
 > foo[as.matrix(TRUE)]
-Error: `j` and `x` must have identical dimensions.
+Error: Invalid `j`: if a matrix, it must have the same dimensions as `x`.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
