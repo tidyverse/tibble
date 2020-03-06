@@ -24,10 +24,10 @@ tbl_subassign_matrix <- function(x, j, value) {
 
 matrix_to_cells <- function(j, x) {
   if (!is_bare_logical(j)) {
-    rlang::abort("`j` must be a logical vector.")
+    rlang::abort("Invalid `j`: if a matrix, it must be of type logical.")
   }
   if (!identical(dim(j), dim(x))) {
-    rlang::abort("`j` and `x` must have identical dimensions.")
+    rlang::abort("Invalid `j`: if a matrix, it must have the same dimensions as `x`.")
   }
 
   # Need unlist(list(...)) because apply() isn't type stable if the return
