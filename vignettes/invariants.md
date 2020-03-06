@@ -3147,6 +3147,48 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 </tr>
 </tbody>
 </table>
+This means that columns initialized with `NA` (which is a logical)
+cannot be later filled with values of a different type. Use the correct
+type of `NA` to initialize columns.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+    with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
+    #>    n c         li  x
+    #> 1  1 e          9 NA
+    #> 2 NA f     10, 11  3
+    #> 3  3 g 12, 13, 14  2
+    #> 4 NA h       text NA
+
+</td>
+<td>
+    with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
+
+    #> Error: Lossy cast from `value`
+    #> <integer> to `x` <logical>.
+    #> * Locations: 1, 2
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
+    #> # A tibble: 4 x 4
+    #>       n c     li            x
+    #>   <int> <chr> <list>    <int>
+    #> 1     1 e     <dbl [1]>    NA
+    #> 2    NA f     <int [2]>     3
+    #> 3     3 g     <int [3]>     2
+    #> 4    NA h     <chr [1]>    NA
+
+</td>
+</tr>
+</tbody>
+</table>
 For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 
 <table class="dftbl">
