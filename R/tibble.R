@@ -19,10 +19,15 @@
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
 #'     See examples.
 #'
-#' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created elements. These arguments are
+#' @param ... A set of name-value pairs. These arguments are
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
+#'
+#'   Arguments are evaluated sequentially.
+#'   You can refer to previously created elements directly or using the [.data]
+#'   pronoun.
+#'   An existing `.data` pronoun, provided e.g. inside [dplyr::mutate()],
+#'   is not available.
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
