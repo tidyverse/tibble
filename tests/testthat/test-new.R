@@ -58,6 +58,13 @@ test_that("new_tibble() with additional attributes", {
   expect_identical(tbl_df, tbl_foo)
 })
 
+test_that("new_tibble() allows setting names through `...`", {
+  expect_identical(
+    new_tibble(list(1), names = "x", nrow = 1),
+    new_tibble(list(x = 1), nrow = 1)
+  )
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
