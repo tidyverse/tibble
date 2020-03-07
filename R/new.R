@@ -133,10 +133,6 @@ validate_nrow <- function(names, lengths, nrow) {
   }
 }
 
-update_tibble_attrs <- function(x, ...) {
-  .Call(`tibble_update_attrs`, x, pairlist2(...))
-}
-
 tibble_class <- c("tbl_df", "tbl", "data.frame")
 tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
@@ -144,11 +140,5 @@ tibble_class_no_data_frame <- c("tbl_df", "tbl")
 set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
   class(x) <- tibble_class
-  x
-}
-
-set_tibble_subclass <- function(x, nrow, subclass) {
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(setdiff(subclass, tibble_class), tibble_class)
   x
 }
