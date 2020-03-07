@@ -76,7 +76,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   }
 
   attrs <- attributes(x)
-  new_attrs <- list2(...)
+  new_attrs <- pairlist2(...)
   nms <- names(new_attrs)
 
   for (i in seq_along(nms)) {
