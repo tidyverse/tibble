@@ -135,10 +135,3 @@ validate_nrow <- function(names, lengths, nrow) {
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
 tibble_class_no_data_frame <- c("tbl_df", "tbl")
-
-# Two dedicated functions for faster subsetting
-set_tibble_class <- function(x, nrow) {
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- tibble_class
-  x
-}
