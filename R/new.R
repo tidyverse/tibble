@@ -72,6 +72,11 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 
   for (i in seq_along(nms)) {
     nm <- nms[[i]]
+
+    if (nm == "") {
+      next
+    }
+
     args[[nm]] <- new_attrs[[i]]
   }
 
