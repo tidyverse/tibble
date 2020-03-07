@@ -58,6 +58,13 @@ test_that("new_tibble() with additional attributes", {
   expect_identical(tbl_df, tbl_foo)
 })
 
+test_that("new_tibble() can add attributes on zero column tibbles with no attributes", {
+  expect_identical(
+    attr(new_tibble(list(), nrow = 0L, foo = 10), "foo"),
+    10
+  )
+})
+
 test_that("new_tibble() ignores unnamed additional attributes", {
   expect_identical(
     new_tibble(list(x = 1), "foo", nrow = 1),
