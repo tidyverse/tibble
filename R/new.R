@@ -46,9 +46,6 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     abort(error_new_tibble_must_be_list())
   }
 
-  #' The `...` argument allows adding more attributes to the subclass.
-  x <- update_tibble_attrs(x, ...)
-
   #' An `nrow` argument is required.
   if (missing(nrow)) {
     if (length(x) >= 1) {
@@ -63,7 +60,9 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (!is_integerish(nrow, 1)) {
+  if (is_integerish(nrow, 1)) {
+    nrow <- as.integer(nrow)
+  } else {
     abort(error_new_tibble_needs_nrow())
   }
 
@@ -76,7 +75,21 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     abort(error_names_must_be_non_null())
   }
 
-  set_tibble_subclass(x, nrow, class)
+  attrs <- attributes(x)
+  new_attrs <- list2(...)
+  nms <- names(new_attrs)
+
+  for (i in seq_along(nms)) {
+    nm <- nms[[i]]
+    attrs[[nm]] <- new_attrs[[i]]
+  }
+
+  # `new_data_frame()` restores compact row names
+  attrs[["row.names"]] <- NULL
+
+  class <- c(setdiff(class, tibble_class), tibble_class_no_data_frame)
+
+  exec(new_data_frame, x = x, n = nrow, class = class, !!!attrs)
 }
 
 #' @description
@@ -118,6 +131,7 @@ update_tibble_attrs <- function(x, ...) {
 }
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
+tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Two dedicated functions for faster subsetting
 set_tibble_class <- function(x, nrow) {
