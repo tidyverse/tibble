@@ -6,9 +6,10 @@ set_repaired_names <- function(x,
 
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
-                           quiet = FALSE) {
+                           quiet = FALSE,
+                           details = NULL) {
 
-  subclass_name_repair_errors(name = name,
+  subclass_name_repair_errors(name = name, details = details,
     vec_as_names(name, repair = .name_repair, quiet = quiet)
   )
 
