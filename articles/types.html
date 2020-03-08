@@ -176,7 +176,7 @@
 <td align="left"></td>
 <td align="left">raw</td>
 <td align="left"><code><a href="https://rdrr.io/r/base/raw.html">as.raw(1)</a></code></td>
-<td align="left"></td>
+<td align="left">raw</td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
@@ -259,54 +259,60 @@
 </tr>
 <tr class="even">
 <td align="left">vctrs types</td>
+<td align="left">unspecified</td>
+<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/unspecified.html">vctrs::unspecified(1L)</a></code></td>
+<td align="left">???</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
 <td align="left">vctrs_list_of</td>
 <td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/list_of.html">vctrs::list_of(c(1L))</a></code></td>
 <td align="left">list<int></int>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">vctrs_vctr</td>
 <td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">vctrs::new_vctr(1L)</a></code></td>
 <td align="left">vctrs_vc</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left">vctrs_unspecified</td>
 <td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/unspecified.html">vctrs::unspecified(1)</a></code></td>
 <td align="left">???</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">vctrs_partial_factor</td>
 <td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/partial_factor.html">vctrs::partial_factor(letters)</a></code></td>
 <td align="left">prtl_fctr</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left">vctrs_partial_frame</td>
 <td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/partial_frame.html">vctrs::partial_frame(a = 1)</a></code></td>
 <td align="left">prtl</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Language objects</td>
 <td align="left">function</td>
 <td align="left"><code>function() NULL</code></td>
 <td align="left">fn</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left">symbol</td>
 <td align="left"><code><a href="https://rdrr.io/r/base/substitute.html">quote(a)</a></code></td>
 <td align="left">sym</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">expression</td>
 <td align="left"><code><a href="https://rdrr.io/r/base/parse.html">parse(text = "a &lt;- 1\nb&lt;- 2")</a></code></td>
 <td align="left">expression</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left">quosures</td>
 <td align="left"><code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">rlang::quos(a = 1)</a></code></td>
@@ -316,19 +322,19 @@
 </table>
 <p>The following overview contains example values for each type:</p>
 <pre><code>#&gt; Observations: 1
-#&gt; Variables: 22
+#&gt; Variables: 24
 #&gt; $ logical           &lt;lgl&gt; TRUE
 #&gt; $ integer           &lt;int&gt; 1
 #&gt; $ double            &lt;dbl&gt; 1.5
 #&gt; $ character         &lt;chr&gt; "A"
 #&gt; $ complex           &lt;cpl&gt; 0+1i
-#&gt; $ raw               &lt;&gt; 01
+#&gt; $ raw               &lt;raw&gt; 01
 #&gt; $ list              &lt;list&gt; [1]
 #&gt; $ `named list`      &lt;named list&gt; [1]
 #&gt; $ factor            &lt;fct&gt; A
 #&gt; $ ordered           &lt;ord&gt; a
-#&gt; $ Date              &lt;date&gt; 2020-01-28
-#&gt; $ POSIXt            &lt;dttm&gt; 2020-01-28 19:42:56
+#&gt; $ Date              &lt;date&gt; 2020-03-08
+#&gt; $ POSIXt            &lt;dttm&gt; 2020-03-08 16:17:22
 #&gt; $ difftime          &lt;drtn&gt; 1 secs
 #&gt; $ hms               &lt;time&gt; 00:00:01
 #&gt; $ integer64         &lt;int64&gt; 10000000000
@@ -336,9 +342,11 @@
 #&gt; $ data.frame        &lt;df[,1]&gt; &lt;data.frame[1 x 1]&gt;
 #&gt; $ tbl_df            &lt;tibble&gt; &lt;tbl_df[1 x 1]&gt;
 #&gt; $ AsIs              &lt;I&lt;int&gt;&gt; 1
+#&gt; $ unspecified       &lt;???&gt; NA
 #&gt; $ vctrs_list_of     &lt;list&lt;int&gt;&gt; 1
 #&gt; $ vctrs_vctr        &lt;vctrs_vc&gt; 1
-#&gt; $ vctrs_unspecified &lt;???&gt; NA</code></pre>
+#&gt; $ vctrs_unspecified &lt;???&gt; NA
+#&gt; $ quosures          &lt;quos&gt; [~1]</code></pre>
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
@@ -359,7 +367,7 @@
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;             "sym"</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;         }, typeof(x))</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; &lt;bytecode: 0x540ba40&gt;</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; &lt;bytecode: 0x653fb10&gt;</span></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></a></code></pre></div>
 </div>
   </div>
