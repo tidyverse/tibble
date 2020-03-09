@@ -10,7 +10,8 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
 only for columns that already exist in \code{.data} and unset columns will get an
 \code{NA} value. These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also
 support unquote via \verb{!!} and unquote-splice via \verb{!!!}.}

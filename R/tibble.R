@@ -19,7 +19,8 @@
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
 #'     See examples.
 #'
-#' @param ... A set of name-value pairs. These arguments are
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   A set of name-value pairs. These arguments are
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
 #'

@@ -16,7 +16,8 @@
 #' <https://github.com/tidyverse/tibble/issues/205> for details.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Name-value pairs, passed on to [tibble()]. Values can be defined
 #'   only for columns that already exist in `.data` and unset columns will get an
 #'   `NA` value. These arguments are passed on to [tibble()], and therefore also
 #'   support unquote via `!!` and unquote-splice via `!!!`.
@@ -116,7 +117,8 @@ rbind_at <- function(old, new, pos) {
 #'
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. All values must have
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Name-value pairs, passed on to [tibble()]. All values must have
 #'   one element for each row in the data frame, or be of length 1.
 #'   These arguments are passed on to [tibble()], and therefore also support
 #'   unquote via `!!` and unquote-splice via `!!!`. However, unlike in

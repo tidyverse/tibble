@@ -47,7 +47,7 @@ as_tibble(
 \item{x}{A data frame, list, matrix, or other object that could reasonably be
 coerced to a tibble.}
 
-\item{...}{Other arguments passed on to individual methods.}
+\item{...}{Unused, for extensibility.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}

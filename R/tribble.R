@@ -7,7 +7,8 @@
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' @param ... Arguments specifying the structure of a `tibble`.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Arguments specifying the structure of a `tibble`.
 #'   Variable names should be formulas, and may only appear before the data.
 #'   These arguments are processed with [rlang::list2()]
 #'   and support unquote via [`!!`] and unquote-splice via [`!!!`].
@@ -46,7 +47,8 @@ tribble <- function(...) {
 #' This is useful for small matrices, e.g. covariance matrices, where readability
 #' is important. The syntax is inspired by [tribble()].
 #'
-#' @param ... Arguments specifying the structure of a `frame_matrix`.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Arguments specifying the structure of a `frame_matrix`.
 #'   Column names should be formulas, and may only appear before the data.
 #'   These arguments are processed with [rlang::list2()]
 #'   and support unquote via [`!!`] and unquote-splice via [`!!!`].

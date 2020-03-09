@@ -7,7 +7,8 @@
 tribble(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{tibble}.
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Arguments specifying the structure of a \code{tibble}.
 Variable names should be formulas, and may only appear before the data.
 These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
 and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}}.}

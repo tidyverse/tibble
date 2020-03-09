@@ -32,7 +32,7 @@
 #'
 #' @param x A data frame, list, matrix, or other object that could reasonably be
 #'   coerced to a tibble.
-#' @param ... Other arguments passed on to individual methods.
+#' @param ... Unused, for extensibility.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
 #'   * `NULL`: remove row names. This is the default.
