@@ -259,7 +259,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
   if (missing(x)) {
-    signal_soft_deprecated(error_as_tibble_needs_argument())
+    deprecate_soft("3.0.0", "as_tibble(x = 'can\\'t be missing')")
   }
 
   new_tibble(list(), nrow = 0)

@@ -133,7 +133,8 @@ scoped_lifecycle_warnings <- function(frame = rlang::caller_env()) {
   rlang::scoped_options(.frame = frame,
     lifecycle_disable_warnings = FALSE,
     lifecycle_verbose_soft_deprecation = TRUE,
-    lifecycle_repeat_warnings = TRUE
+    lifecycle_repeat_warnings = TRUE,
+    lifecycle_verbosity = "warning"
   )
 }
 with_lifecycle_warnings <- function(expr) {

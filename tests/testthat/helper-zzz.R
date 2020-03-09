@@ -100,6 +100,11 @@ skip_int_error_names_must_be_null <- function() {
   skip_legacy()
 }
 
+skip_int_data_frame_tibble_diff <- function() {
+  # INT: changed data_frame_() implementation to support custom deprecation warning
+  skip_legacy()
+}
+
 universal_names <- function(...) {
   # INT: universal_names() no longer implemented
   skip_legacy()

@@ -108,6 +108,8 @@ test_that("attributes are preserved", {
 test_that("tibble aliases", {
   scoped_lifecycle_silence()
   expect_identical(data_frame(a = 1), tibble(a = 1))
+
+  skip_int_data_frame_tibble_diff()
   expect_identical(data_frame_, tibble_)
 })
 
