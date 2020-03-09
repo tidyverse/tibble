@@ -2576,7 +2576,8 @@ Row subassignment: `x[i, ] <- list(...)`
     #> [31mx[39m Negative locations can't
     #> be mixed with positive locations.
     #> [34mℹ[39m The subscript has 2
-    #> missing values at locations 3 and 4.
+    #> positive values at locations 3 and
+    #> 4.
 
 </td>
 </tr>
