@@ -239,10 +239,12 @@ in a list.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created elements. These arguments are
+      <td><p>A set of name-value pairs. These arguments are
 processed with <code><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
-unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p></td>
+unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
+<p>Arguments are evaluated sequentially, however the .data pronoun is not
+available to prevent masking usage in a higher level function, like
+<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>.</p></td>
     </tr>
     <tr>
       <th>.rows</th>

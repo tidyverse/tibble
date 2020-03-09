@@ -258,6 +258,13 @@
 <li><p><code><a href="../reference/view.html">view()</a></code> now uses the created (or passed) title argument (<a href='https://github.com/tidyverse/tibble/issues/610'>#610</a>, <a href='https://github.com/xvrdm'>@xvrdm</a>).</p></li>
 </ul>
 </div>
+<div id="performance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performance" class="anchor"></a>Performance</h2>
+<ul>
+<li>Construction and subsetting of large data frames is faster now (<a href='https://github.com/tidyverse/tibble/issues/717'>#717</a>, <a href='https://github.com/romainfrancois'>@romainfrancois</a>).</li>
+</ul>
+</div>
 <div id="internal" class="section level2">
 <h2 class="hasAnchor">
 <a href="#internal" class="anchor"></a>Internal</h2>
@@ -393,10 +400,10 @@
 <h2 class="hasAnchor">
 <a href="#output-1" class="anchor"></a>Output</h2>
 <ul>
-<li><p>The <code><a href="../reference/name-repair-retired.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-retired.html">tidy_names()</a></code> helpers the list of new names using a bullet list with at most six items (<a href='https://github.com/tidyverse/tibble/issues/406'>#406</a>).</p></li>
+<li><p>The <code><a href="../reference/name-repair-superseded.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> helpers the list of new names using a bullet list with at most six items (<a href='https://github.com/tidyverse/tibble/issues/406'>#406</a>).</p></li>
 <li><p>A one-character ellipse (<code>cli::symbol$ellipsis</code>) is printed instead of <code>"..."</code> where available, this affects <code><a href="../reference/glimpse.html">glimpse()</a></code> output and truncated lists (<a href='https://github.com/tidyverse/tibble/issues/403'>#403</a>).</p></li>
 <li><p>Column names and types are now formatted identically with <code><a href="../reference/glimpse.html">glimpse()</a></code> and <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code>.</p></li>
-<li><p><code><a href="../reference/name-repair-retired.html">tidy_names()</a></code> quotes variable names when reporting on repair (<a href='https://github.com/tidyverse/tibble/issues/407'>#407</a>).</p></li>
+<li><p><code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> quotes variable names when reporting on repair (<a href='https://github.com/tidyverse/tibble/issues/407'>#407</a>).</p></li>
 <li><p>All error messages now follow the tidyverse style guide (<a href='https://github.com/tidyverse/tibble/issues/223'>#223</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> prints an informative error message when using the <code>rownames</code> argument and the input data frame or matrix does not have row names (<a href='https://github.com/tidyverse/tibble/issues/388'>#388</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
 <li><p><code><a href="../reference/rownames.html">column_to_rownames()</a></code> uses the real variable name in its error message (<a href='https://github.com/tidyverse/tibble/issues/399'>#399</a>, <a href='https://github.com/alexwhan'>@alexwhan</a>).</p></li>
@@ -458,9 +465,9 @@
 <li>Updated vignettes and website documentation.</li>
 </ul>
 </div>
-<div id="performance" class="section level2">
+<div id="performance-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance" class="anchor"></a>Performance</h2>
+<a href="#performance-1" class="anchor"></a>Performance</h2>
 <ul>
 <li>Faster printing of very wide tibbles (<a href='https://github.com/tidyverse/tibble/issues/360'>#360</a>).</li>
 <li>Faster construction and subsetting for tibbles (<a href='https://github.com/tidyverse/tibble/issues/353'>#353</a>).</li>
@@ -555,7 +562,7 @@
 <li>Added <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code>ungroup()</code> in dplyr 0.5.0 and earlier (<a href='https://github.com/tidyverse/tibble/issues/256'>#256</a>, <a href='https://github.com/tidyverse/tibble/issues/263'>#263</a>).</li>
 <li>The column width for non-syntactic columns is computed correctly again (<a href='https://github.com/tidyverse/tibble/issues/258'>#258</a>).</li>
 <li>Printing a tibble doesn’t apply quote escaping to list columns.</li>
-<li>Fix error in <code><a href="../reference/name-repair-retired.html">tidy_names(syntactic = TRUE, quiet = FALSE)</a></code> if not all names are fixed (<a href='https://github.com/tidyverse/tibble/issues/260'>#260</a>, <a href='https://github.com/imanuelcostigan'>@imanuelcostigan</a>).</li>
+<li>Fix error in <code><a href="../reference/name-repair-superseded.html">tidy_names(syntactic = TRUE, quiet = FALSE)</a></code> if not all names are fixed (<a href='https://github.com/tidyverse/tibble/issues/260'>#260</a>, <a href='https://github.com/imanuelcostigan'>@imanuelcostigan</a>).</li>
 <li>Remove unused import declaration for assertthat.</li>
 </ul>
 </div>
@@ -575,7 +582,7 @@
 <h2 class="hasAnchor">
 <a href="#interface-changes" class="anchor"></a>Interface changes</h2>
 <ul>
-<li>New <code><a href="../reference/name-repair-retired.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-retired.html">tidy_names()</a></code>, a simpler version of <code><a href="../reference/name-repair-retired.html">repair_names()</a></code> which works unchanged for now (<a href='https://github.com/tidyverse/tibble/issues/217'>#217</a>).</li>
+<li>New <code><a href="../reference/name-repair-superseded.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code>, a simpler version of <code><a href="../reference/name-repair-superseded.html">repair_names()</a></code> which works unchanged for now (<a href='https://github.com/tidyverse/tibble/issues/217'>#217</a>).</li>
 <li>New <code><a href="../reference/rownames.html">rowid_to_column()</a></code> that adds a <code>rowid</code> column as first column and removes row names (<a href='https://github.com/tidyverse/tibble/issues/243'>#243</a>, <a href='https://github.com/barnettjacob'>@barnettjacob</a>).</li>
 <li>The <code>all.equal.tbl_df()</code> method has been removed, calling <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> now forwards to <code>base::all.equal.data.frame()</code>. To compare tibbles ignoring row and column order, please use <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html">dplyr::all_equal()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/247'>#247</a>).</li>
 </ul>
@@ -858,7 +865,7 @@
 <li>New <code><a href="../reference/add_row.html">add_row()</a></code> makes it easy to add a new row to data frame (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1021'>#1021</a>).</li>
 <li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/11'>#11</a>, <a href='https://github.com/zhilongjia'>@zhilongjia</a>).</li>
 <li>New <code><a href="../reference/rownames.html">has_rownames()</a></code> and <code><a href="../reference/rownames.html">remove_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/44'>#44</a>).</li>
-<li>New <code><a href="../reference/name-repair-retired.html">repair_names()</a></code> fixes missing and duplicate names (<a href='https://github.com/tidyverse/tibble/issues/10'>#10</a>, <a href='https://github.com/tidyverse/tibble/issues/15'>#15</a>, <a href='https://github.com/r2evans'>@r2evans</a>).</li>
+<li>New <code><a href="../reference/name-repair-superseded.html">repair_names()</a></code> fixes missing and duplicate names (<a href='https://github.com/tidyverse/tibble/issues/10'>#10</a>, <a href='https://github.com/tidyverse/tibble/issues/15'>#15</a>, <a href='https://github.com/r2evans'>@r2evans</a>).</li>
 <li>New <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">is_vector_s3()</a></code>.</li>
 </ul>
 </li>
