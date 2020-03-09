@@ -370,10 +370,6 @@ All vectors in `tibble_row()` must be size one, use `list()` to wrap.
 <error/tibble_error_new_tibble_must_be_list>
 Must pass a list as `x` argument to `new_tibble()`.
 
-> error_new_tibble_needs_class()
-<error/tibble_error_new_tibble_needs_class>
-Must pass a `class` argument instead of `subclass` to `new_tibble()`.
-
 > error_new_tibble_needs_nrow()
 <error/tibble_error_new_tibble_needs_nrow>
 Must pass a scalar integer as `nrow` argument to `new_tibble()`.

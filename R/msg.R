@@ -31,11 +31,6 @@ use_repair <- function(repair) {
 # https://github.com/r-lib/rlang/issues/861
 # Can't wrap properly because otherwise tibble::abort() appears in the traceback
 abort <- cnd_signal
-old_signal_soft_deprecated <- signal_soft_deprecated
-signal_soft_deprecated <- function(message, ...) {
-  if (is_condition(message)) old_signal_soft_deprecated(cnd_message(message), ...)
-  else old_signal_soft_deprecated(message, ...)
-}
 
 tibble_error_class <- function(class) {
   c(paste0("tibble_error_", class), "tibble_error")
@@ -295,10 +290,6 @@ error_tibble_row_size_one <- function(j, name, size) {
     "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
-}
-
-error_as_tibble_needs_argument <- function() {
-  tibble_error("Must pass an argument to `as_tibble()`.")
 }
 
 error_new_tibble_must_be_list <- function() {

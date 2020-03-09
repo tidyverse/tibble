@@ -58,30 +58,6 @@
 #' @seealso [lifecycle()]
 NULL
 
-signal_soft_deprecated <- function(msg, id = msg, env = caller_env(2)) {
-  if (rlang::is_true(rlang::peek_option("lifecycle_disable_warnings"))) {
-    return(invisible(NULL))
-  }
-
-  if (rlang::is_true(rlang::peek_option("lifecycle_verbose_soft_deprecation")) ||
-      rlang::is_reference(topenv(env), rlang::global_env())) {
-    warn_deprecated(msg, id)
-    return(invisible(NULL))
-  }
-
-  # Test for environment names rather than reference/contents because
-  # testthat clones the namespace
-  tested_package <- Sys.getenv("TESTTHAT_PKG")
-  if (nzchar(tested_package) &&
-        identical(Sys.getenv("NOT_CRAN"), "true") &&
-        rlang::env_name(topenv(env)) == rlang::env_name(ns_env(tested_package))) {
-    warn_deprecated(msg, id)
-    return(invisible(NULL))
-  }
-
-  rlang::signal(msg, "lifecycle_soft_deprecated")
-}
-
 warn_deprecated <- function(msg, id = msg) {
   if (rlang::is_true(rlang::peek_option("lifecycle_disable_warnings"))) {
     return(invisible(NULL))

@@ -157,8 +157,6 @@ test_that("error messages", {
 
     error_new_tibble_must_be_list()
 
-    error_new_tibble_needs_class()
-
     error_new_tibble_needs_nrow()
   })
 })
