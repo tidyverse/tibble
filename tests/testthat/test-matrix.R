@@ -39,11 +39,9 @@ test_that("preserves col names", {
 })
 
 test_that("supports compat col names", {
-  scoped_lifecycle_silence()
-
   x <- matrix(1:4, nrow = 2)
 
-  out <- as_tibble(x)
+  expect_warning(out <- as_tibble(x))
   expect_equal(names(out), c("V1", "V2"))
 })
 

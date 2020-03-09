@@ -120,7 +120,8 @@ stop_defunct <- function(msg) {
 
 scoped_lifecycle_silence <- function(frame = rlang::caller_env()) {
   rlang::scoped_options(.frame = frame,
-    lifecycle_disable_warnings = TRUE
+    lifecycle_disable_warnings = TRUE,
+    lifecycle_verbosity = "quiet"
   )
 }
 with_lifecycle_silence <- function(expr) {
@@ -143,7 +144,8 @@ with_lifecycle_warnings <- function(expr) {
 scoped_lifecycle_errors <- function(frame = rlang::caller_env()) {
   scoped_lifecycle_warnings(frame = frame)
   rlang::scoped_options(.frame = frame,
-    lifecycle_warnings_as_errors = TRUE
+    lifecycle_warnings_as_errors = TRUE,
+    lifecycle_verbosity = "error"
   )
 }
 with_lifecycle_errors <- function(expr) {

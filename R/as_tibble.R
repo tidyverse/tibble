@@ -114,7 +114,7 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
   if (!has_length(.name_repair, 1)) {
-    signal_soft_deprecated("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   } else if (.name_repair != name_repair) {
     warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
     return(.name_repair)
@@ -202,7 +202,8 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   names <- colnames(x)
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
+      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have column names if `.name_repair` is omitted')",
+        details = "Using compatibility `.name_repair`.")
       compat_names <- paste0("V", seq_along(m))
       if (is.null(names)) {
         names <- compat_names
@@ -268,8 +269,5 @@ as_tibble.NULL <- function(x, ...) {
 #' @rdname as_tibble
 as_tibble.default <- function(x, ...) {
   value <- x
-  if (is_atomic(value)) {
-    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.")
-  }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }

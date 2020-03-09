@@ -223,6 +223,8 @@ test_that("Can convert tables to data frame", {
 
 
 test_that("Can convert unnamed atomic vectors to tibble by default", {
+  skip_enh_as_tibble_retired()
+
   scoped_lifecycle_warnings()
   expect_warning(
     expect_equal(as_tibble(1:3), tibble(value = 1:3)),
