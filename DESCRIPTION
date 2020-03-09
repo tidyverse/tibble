@@ -64,6 +64,7 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
+    r-lib/lifecycle,
     r-lib/rlang,
     r-lib/vctrs
 Encoding: UTF-8
