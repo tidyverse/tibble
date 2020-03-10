@@ -156,7 +156,7 @@ set_dftbl_error_hook <- function() {
   dftbl_error_hook <- function(x, options) {
     if (isTRUE(options$dftbl)) {
       x <- strsplit(x, "\n", fixed = TRUE)[[1]]
-      x <- unlist(map(x, strwrap, getOption("width"), prefix = "#> ", initial = ""))
+      x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
       x <- paste(paste0(x, "\n"), collapse = "")
     }
     x <- old_error_hook(x, options)
