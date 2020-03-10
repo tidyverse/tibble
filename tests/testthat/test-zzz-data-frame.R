@@ -363,12 +363,21 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   x <- matrix(1:6, nrow = 3)
 
+  skip_int_lifecycle()
+
   expect_error(
     as_tibble(x),
     class = get_defunct_error_class(),
     "name",
     fixed = TRUE
   )
+})
+
+test_that("as_tibble.matrix() supports .name_repair", {
+  scoped_lifecycle_errors() # When removing this, double-check error messages below.
+
+  x <- matrix(1:6, nrow = 3)
+
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
     rep("", 2)

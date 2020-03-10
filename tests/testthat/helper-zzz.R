@@ -105,6 +105,11 @@ skip_int_data_frame_tibble_diff <- function() {
   skip_legacy()
 }
 
+skip_int_lifecycle <- function() {
+  # INT: lifecycle changes classes for deprecation messages in R < 3.6
+  skip_legacy()
+}
+
 universal_names <- function(...) {
   # INT: universal_names() no longer implemented
   skip_legacy()
