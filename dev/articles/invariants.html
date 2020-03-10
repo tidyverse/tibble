@@ -299,10 +299,11 @@
 <td>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">tbl[[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]]</a></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: Calling `[[` with a vector
-#&gt; of length 2 (recursive subsetting)
-#&gt; is deprecated and will eventually be
-#&gt; converted to an error.</code></pre>
+<pre><code>#&gt; Warning: The `j` argument of
+#&gt; ``[[.tbl_df`()` can't be a vector of
+#&gt; length 2 as of lifecycle 3.0.0.
+#&gt; Recursive subsetting is deprecated for
+#&gt; tibbles.</code></pre>
 </div>
 <pre><code>#&gt; [1] NA</code></pre>
 </td>
@@ -805,10 +806,12 @@
 <td>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">tbl[<span class="dv">10</span>, ]</a></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: Row indexes must be between 0
-#&gt; and the number of rows (4). Use `NA` as
-#&gt; row index to obtain a row full of `NA`
-#&gt; values.</code></pre>
+<pre><code>#&gt; Warning: The `i` argument of
+#&gt; ``[.tbl_df`()` if integer must be
+#&gt; between 0 and the number of rows as of
+#&gt; tibble 3.0.0.
+#&gt; Use `NA` as row index to obtain a row
+#&gt; full of `NA` values.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;       n c     li    
@@ -825,9 +828,11 @@
 <td>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">tbl[<span class="st">"x"</span>, ]</a></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: Only valid row names can be
-#&gt; used for indexing. Use `NA` as row index
-#&gt; to obtain a row full of `NA` values.</code></pre>
+<pre><code>#&gt; Warning: The `i` argument of
+#&gt; ``[.tbl_df`()` must use valid row names
+#&gt; as of tibble 3.0.0.
+#&gt; Use `NA` as row index to obtain a row
+#&gt; full of `NA` values.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;       n c     li    
