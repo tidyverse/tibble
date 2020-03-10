@@ -179,7 +179,6 @@ set_dftbl_warning_hook <- function() {
   old_warning_hook <- knitr::knit_hooks$get("warning")
 
   dftbl_warning_hook <- function(x, options) {
-    if (FALSE)
     if (isTRUE(options$dftbl)) {
       x <- strsplit(x, "\n", fixed = TRUE)[[1]]
       x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
