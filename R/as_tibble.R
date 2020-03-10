@@ -269,5 +269,9 @@ as_tibble.NULL <- function(x, ...) {
 #' @rdname as_tibble
 as_tibble.default <- function(x, ...) {
   value <- x
+  if (is_atomic(value)) {
+    signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
+      "enframe()")
+  }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }

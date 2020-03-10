@@ -31,4 +31,7 @@ with_lifecycle_errors <- function(expr) {
   expr
 }
 
+# Enable once signal_superseded() reaches stable state
+signal_superseded <- function(...) {}
+
 # nocov end
