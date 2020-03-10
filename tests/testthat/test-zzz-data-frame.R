@@ -108,6 +108,8 @@ test_that("attributes are preserved", {
 test_that("tibble aliases", {
   scoped_lifecycle_silence()
   expect_identical(data_frame(a = 1), tibble(a = 1))
+
+  skip_int_data_frame_tibble_diff()
   expect_identical(data_frame_, tibble_)
 })
 
@@ -223,6 +225,8 @@ test_that("Can convert tables to data frame", {
 
 
 test_that("Can convert unnamed atomic vectors to tibble by default", {
+  skip_enh_as_tibble_retired()
+
   scoped_lifecycle_warnings()
   expect_warning(
     expect_equal(as_tibble(1:3), tibble(value = 1:3)),
@@ -359,12 +363,21 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   x <- matrix(1:6, nrow = 3)
 
+  skip_int_lifecycle()
+
   expect_error(
     as_tibble(x),
     class = get_defunct_error_class(),
     "name",
     fixed = TRUE
   )
+})
+
+test_that("as_tibble.matrix() supports .name_repair", {
+  scoped_lifecycle_errors() # When removing this, double-check error messages below.
+
+  x <- matrix(1:6, nrow = 3)
+
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
     rep("", 2)

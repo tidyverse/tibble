@@ -282,10 +282,11 @@ exists.
 <td>
     tbl[[1:2]]
 
-    #> Warning: Calling `[[` with a vector
-    #> of length 2 (recursive subsetting)
-    #> is deprecated and will eventually be
-    #> converted to an error.
+    #> Warning: The `j` argument of
+    #> ``[[.tbl_df`()` can't be a vector of
+    #> length 2 as of lifecycle 3.0.0.
+    #> Recursive subsetting is deprecated for
+    #> tibbles.
 
     #> [1] NA
 
@@ -952,10 +953,12 @@ Exception: OOB values generate warnings instead of errors:
 <td>
     tbl[10, ]
 
-    #> Warning: Row indexes must be between 0
-    #> and the number of rows (4). Use `NA` as
-    #> row index to obtain a row full of `NA`
-    #> values.
+    #> Warning: The `i` argument of
+    #> ``[.tbl_df`()` if integer must be
+    #> between 0 and the number of rows as of
+    #> tibble 3.0.0.
+    #> Use `NA` as row index to obtain a row
+    #> full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -974,9 +977,11 @@ Exception: OOB values generate warnings instead of errors:
 <td>
     tbl["x", ]
 
-    #> Warning: Only valid row names can be
-    #> used for indexing. Use `NA` as row index
-    #> to obtain a row full of `NA` values.
+    #> Warning: The `i` argument of
+    #> ``[.tbl_df`()` must use valid row names
+    #> as of tibble 3.0.0.
+    #> Use `NA` as row index to obtain a row
+    #> full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -2904,9 +2909,11 @@ positive numbers.
 <td>
     with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 
-    #> Warning: Only valid row names can be
-    #> used for indexing. Use `NA` as row index
-    #> to obtain a row full of `NA` values.
+    #> Warning: The `i` argument of
+    #> ``[.tbl_df`()` must use valid row names
+    #> as of tibble 3.0.0.
+    #> Use `NA` as row index to obtain a row
+    #> full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -2927,9 +2934,11 @@ positive numbers.
 <td>
     with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 
-    #> Warning: Only valid row names can be
-    #> used for indexing. Use `NA` as row index
-    #> to obtain a row full of `NA` values.
+    #> Warning: The `i` argument of
+    #> ``[.tbl_df`()` must use valid row names
+    #> as of tibble 3.0.0.
+    #> Use `NA` as row index to obtain a row
+    #> full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -2952,9 +2961,11 @@ positive numbers.
 <td>
     with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 
-    #> Warning: Only valid row names can be
-    #> used for indexing. Use `NA` as row index
-    #> to obtain a row full of `NA` values.
+    #> Warning: The `i` argument of
+    #> ``[.tbl_df`()` must use valid row names
+    #> as of tibble 3.0.0.
+    #> Use `NA` as row index to obtain a row
+    #> full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.

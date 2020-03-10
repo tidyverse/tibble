@@ -51,7 +51,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   if (!is.data.frame(.data)) {
-    signal_soft_deprecated("`.data` must be a data frame in `add_row()` and `add_case()`.")
+    deprecate_warn("2.1.1", "add_row(.data = 'must be a data frame')")
   }
 
   df <- tibble(...)
@@ -145,7 +145,7 @@ rbind_at <- function(old, new, pos) {
 #' @export
 add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   if (!is.data.frame(.data)) {
-    signal_soft_deprecated("`.data` must be a data frame in `add_column()`.")
+    deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
   df <- tibble(...)

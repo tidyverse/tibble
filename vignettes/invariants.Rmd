@@ -36,6 +36,7 @@ knitr::opts_chunk$set(
 tibble:::set_dftbl_hooks()
 
 options(
+  lifecycle_verbosity = "warning",
   lifecycle_disable_warnings = FALSE,
   lifecycle_verbose_soft_deprecation = TRUE,
   lifecycle_repeat_warnings = TRUE

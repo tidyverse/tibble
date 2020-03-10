@@ -33,7 +33,7 @@
 new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
-    signal_soft_deprecated(error_new_tibble_needs_class())
+    deprecate_soft("2.0.0", "new_tibble(subclass = )", "new_tibble(class = )")
     class <- subclass
   }
 
@@ -51,11 +51,13 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 
   #' An `nrow` argument is required.
   if (missing(nrow)) {
+    cnd <- error_new_tibble_needs_nrow()
     if (length(x) >= 1) {
-      signal_soft_deprecated(error_new_tibble_needs_nrow())
+      deprecate_soft("2.0.0", "new_tibble(nrow = 'can\\'t be missing')",
+        details = cnd$message)
       nrow <- NROW(x[[1]])
     } else {
-      abort(error_new_tibble_needs_nrow())
+      cnd_signal(cnd)
     }
   }
   #' This should be an integer of length 1,
