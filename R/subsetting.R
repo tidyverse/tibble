@@ -343,12 +343,12 @@ vectbl_as_col_index <- function(j, x, arg = NULL) {
 
 tbl_subset2 <- function(x, j) {
   if (is.matrix(j)) {
-    deprecate_soft("3.0.0", "`[[.tbl_df`(j = 'can\\'t be a matrix",
+    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.")
 
     return(as.matrix(x)[[j]])
   } else if (has_length(j, 2) && is.numeric(j)) {
-    deprecate_soft("3.0.0", "`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
       details = "Recursive subsetting is deprecated for tibbles.")
 
     return(.subset2(x, j))

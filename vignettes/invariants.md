@@ -284,7 +284,7 @@ exists.
 
     #> Warning: The `j` argument of
     #> ``[[.tbl_df`()` can't be a vector of
-    #> length 2 as of lifecycle 3.0.0.
+    #> length 2 as of tibble 3.0.0.
     #> Recursive subsetting is deprecated for
     #> tibbles.
 
