@@ -118,19 +118,6 @@ test_that("Superseded: Can convert unnamed atomic vectors to tibble by default",
 })
 
 
-test_that("Can convert named atomic vectors to data frame", {
-  skip("Do we want an .as_row argument?")
-  expect_equal(as_tibble(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
-  expect_equal(as_tibble(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
-  expect_equal(as_tibble(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
-  expect_equal(as_tibble(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
-
-  expect_tibble_error(
-    as_tibble(setNames(nm = c(TRUE, FALSE, NA))),
-    invalid_df("must be named", 3)
-  )
-})
-
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
   expect_tibble_error(
@@ -394,11 +381,19 @@ test_that("as.tibble is an alias of as_tibble", {
 # as_tibble_row -----------------------------------------------------------
 
 test_that("as_tibbe_row() can convert named atomic vectors to data frame", {
-  expect_equal(as_tibble_row(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
-  expect_equal(as_tibble_row(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
-  expect_equal(as_tibble_row(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
-  expect_equal(as_tibble_row(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
+  expect_identical(as_tibble_row(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
+  expect_identical(as_tibble_row(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
+  expect_identical(as_tibble_row(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
+  expect_identical(as_tibble_row(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
+  expect_identical(
+    as_tibble_row(list(a = 1, b = list(2:3))),
+    tibble(a = 1, b = list(2:3))
+  )
 
+  expect_tibble_error(
+    as_tibble_row(list(a = 1, b = 2:3)),
+    error_as_tibble_row_size_one(2, "b", 2)
+  )
   expect_tibble_error(
     as_tibble_row(setNames(nm = c(TRUE, FALSE, NA))),
     error_column_must_be_named(3)
@@ -409,8 +404,8 @@ test_that("as_tibbe_row() can convert named atomic vectors to data frame", {
 # as_tibble_col -----------------------------------------------------------
 
 test_that("as_tibbe_col() can convert atomic vectors to data frame", {
-  expect_equal(as_tibble_col(1:3), tibble(value = 1:3))
-  expect_equal(as_tibble_col(list(4, 5:6), column_name = "data"), tibble(data = list(4, 5:6)))
+  expect_identical(as_tibble_col(1:3), tibble(value = 1:3))
+  expect_identical(as_tibble_col(list(4, 5:6), column_name = "data"), tibble(data = list(4, 5:6)))
 
   expect_tibble_error(
     as_tibble_col(lm(y ~ x, data.frame(x = 1:3, y = 2:4))),
