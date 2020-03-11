@@ -295,7 +295,7 @@ error_as_tibble_row_size_one <- function(j, name, size, caller = "tibble_row") {
 
   tibble_error(bullets(
     "All elements must be size one, use `list()` to wrap.",
-    paste0("Column ", desc, " is of size ", size, ".")
+    paste0("Element ", desc, " is of size ", size, ".")
   ))
 }
 

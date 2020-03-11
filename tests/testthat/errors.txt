@@ -366,6 +366,11 @@ All values in `frame_matrix()` must be atomic:
 All vectors in `tibble_row()` must be size one, use `list()` to wrap.
 * Column `foo` is of size 7.
 
+> error_as_tibble_row_size_one(3, "foo", 7)
+<error/tibble_error_as_tibble_row_size_one>
+All elements must be size one, use `list()` to wrap.
+* Element `foo` is of size 7.
+
 > error_new_tibble_must_be_list()
 <error/tibble_error_new_tibble_must_be_list>
 Must pass a list as `x` argument to `new_tibble()`.
