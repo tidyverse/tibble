@@ -61,6 +61,8 @@
 
 - New `tibble_row()` constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (#205).
 
+- New `as_tibble_row()` and `as_tibble_col()` convert a vector to a one-row or one-column tibble, respectively. Using `as_tibble()` for vectors is superseded (#447).
+
 - `as_tibble.data.frame()` uses implicit row names if asked to create a column from row names. This allows lossless direct conversion of matrices with row names to tibbles (#567, @stufield).
 
 - Implement `str.tbl_df()` (#480).

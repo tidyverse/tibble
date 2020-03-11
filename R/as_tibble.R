@@ -2,6 +2,7 @@
 #'
 #' @description
 #' \lifecycle{maturing}
+#' \lifecycle{superseded}
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
@@ -25,6 +26,11 @@
 #' For existing code that relies on the retention of row names, call
 #' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your
 #' package's [.onLoad()]  function.
+#'
+#' @section Life cycle:
+#' Using `as_tibble()` for vectors is superseded as of version 3.0.0,
+#' prefer the more expressive maturing `as_tibble_row()` and
+#' `as_tibble_col()` variants for new code.
 #'
 #' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
 #'   converts a named vector to a tibble with a column of names and column of

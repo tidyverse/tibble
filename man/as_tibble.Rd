@@ -96,6 +96,7 @@ For compatibility only, do not use for new code.}
 }
 \description{
 \lifecycle{maturing}
+\lifecycle{superseded}
 
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
@@ -127,6 +128,13 @@ New code should explicitly convert row names to a new column using the
 For existing code that relies on the retention of row names, call
 \code{pkgconfig::set_config("tibble::rownames" = NA)} in your script or in your
 package's \code{\link[=.onLoad]{.onLoad()}}  function.
+}
+
+\section{Life cycle}{
+
+Using \code{as_tibble()} for vectors is superseded as of version 3.0.0,
+prefer the more expressive maturing \code{as_tibble_row()} and
+\code{as_tibble_col()} variants for new code.
 }
 
 \examples{
