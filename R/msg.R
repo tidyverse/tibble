@@ -279,15 +279,22 @@ error_frame_matrix_list <- function(pos) {
   ))
 }
 
-error_tibble_row_size_one <- function(j, name, size) {
-  if (name != "") {
-    desc <- tick(name)
-  } else {
-    desc <- paste0("at position ", j)
-  }
+error_tibble_row_size_one <- function(j, name, size, caller = "tibble_row") {
+  desc <- tick(name)
+  desc[name == ""] <- paste0("at position ", j[name == ""])
 
   tibble_error(bullets(
     "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
+  ))
+}
+
+error_as_tibble_row_size_one <- function(j, name, size, caller = "tibble_row") {
+  desc <- tick(name)
+  desc[name == ""] <- paste0("at position ", j[name == ""])
+
+  tibble_error(bullets(
+    "All elements must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }

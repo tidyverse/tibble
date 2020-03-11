@@ -50,10 +50,6 @@
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
-#'
-#' # Prefer enframe() for vectors
-#' enframe(1:3)
-#' enframe(1:3, name = NULL)
 as_tibble <- function(x, ...,
                       .rows = NULL,
                       .name_repair = c("check_unique", "unique", "universal", "minimal"),
@@ -271,7 +267,62 @@ as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
     signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
-      "enframe()")
+      "as_tibble_col()")
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
+}
+
+#' Convert a vector to a one-row tibble
+#'
+#' `as_tibble_row()` converts a vector to a tibble with one row.
+#' If the input is a list, all elements must have length one.
+#'
+#' @rdname as_tibble
+#' @export
+#' @examples
+#'
+#' as_tibble_row(c(a = 1, b = 2))
+#' as_tibble_row(list(c = "three", d = list(4:5)))
+#' as_tibble_row(1:3, .name_repair = "unique")
+as_tibble_row <- function(x,
+                          .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
+  x <- set_repaired_names(x, .name_repair)
+
+  check_all_lengths_one(x)
+  new_tibble(as.list(x), nrow = 1)
+}
+
+check_all_lengths_one <- function(x) {
+  sizes <- col_lengths(x)
+
+  bad_lengths <- which(sizes != 1)
+  if (!is_empty(bad_lengths)) {
+    abort(error_as_tibble_row_size_one(
+      seq_along(x)[bad_lengths],
+      names2(x)[bad_lengths],
+      sizes[bad_lengths])
+    )
+  }
+}
+
+
+#' Convert a vector to a one-column tibble
+#'
+#' `as_tibble_column()` converts a vector to a tibble with one column.
+#'
+#' @param column_name Name of the column.
+#'
+#' @rdname as_tibble
+#' @export
+#' @examples
+#'
+#' as_tibble_col(1:3)
+#' as_tibble_col(
+#'   list(c = "three", d = list(4:5)),
+#'   column_name = "data"
+#' )
+as_tibble_col <- function(x, column_name = "value") {
+  # Side effect: checking that x is a vector
+  tibble(!!column_name := x)
 }

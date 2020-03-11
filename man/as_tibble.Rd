@@ -8,6 +8,8 @@
 \alias{as_tibble.table}
 \alias{as_tibble.NULL}
 \alias{as_tibble.default}
+\alias{as_tibble_row}
+\alias{as_tibble_col}
 \title{Coerce lists, matrices, and more to data frames}
 \usage{
 as_tibble(
@@ -42,6 +44,13 @@ as_tibble(
 \method{as_tibble}{`NULL`}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
+
+as_tibble_row(
+  x,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
+
+as_tibble_col(x, column_name = "value")
 }
 \arguments{
 \item{x}{A data frame, list, matrix, or other object that could reasonably be
@@ -82,6 +91,8 @@ Read more in \link{rownames}.
 For compatibility only, do not use for new code.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
+
+\item{column_name}{Name of the column.}
 }
 \description{
 \lifecycle{maturing}
@@ -100,6 +111,11 @@ that implements tibble's treatment of \link{rownames}.
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
+
+\code{as_tibble_row()} converts a vector to a tibble with one row.
+If the input is a list, all elements must have length one.
+
+\code{as_tibble_column()} converts a vector to a tibble with one column.
 }
 \section{Row names}{
 
@@ -118,9 +134,15 @@ m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-# Prefer enframe() for vectors
-enframe(1:3)
-enframe(1:3, name = NULL)
+as_tibble_row(c(a = 1, b = 2))
+as_tibble_row(list(c = "three", d = list(4:5)))
+as_tibble_row(1:3, .name_repair = "unique")
+
+as_tibble_col(1:3)
+as_tibble_col(
+  list(c = "three", d = list(4:5)),
+  column_name = "data"
+)
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
