@@ -104,7 +104,7 @@ validate_tibble <- function(x) {
 }
 
 col_lengths <- function(x) {
-  map_int(x, NROW)
+  map_int(x, vec_size)
 }
 
 validate_nrow <- function(names, lengths, nrow) {
