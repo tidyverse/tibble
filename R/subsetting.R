@@ -599,3 +599,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
 vectbl_restore <- function(xo, x) {
   .Call(`tibble_restore_impl`, xo, x)
 }
+
+string_to_indices <- function(x) {
+  .Call(`tibble_string_to_indices`, as.character(x))
+}

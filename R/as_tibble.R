@@ -275,3 +275,7 @@ as_tibble.default <- function(x, ...) {
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }
+
+matrixToDataFrame <- function(x) {
+  .Call(`tibble_matrixToDataFrame`, x)
+}
