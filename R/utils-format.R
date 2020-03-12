@@ -246,7 +246,7 @@ format_extra_vars <- function(extra_cols) {
   if (is.na(extra_cols[1])) return("")
 
   if (anyNA(extra_cols)) {
-    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], symbol$ellipsis)
   }
 
   paste0(": ", collapse(extra_cols))
@@ -259,7 +259,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0(cli::symbol$ellipsis, " ", x)
+    paste0(symbol$ellipsis, " ", x)
   } else {
     character()
   }

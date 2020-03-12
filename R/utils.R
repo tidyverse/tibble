@@ -1,8 +1,3 @@
-
-has_dim <- function(x) {
-  length(dim(x)) > 0L || has_nonnull_names(x)
-}
-
 needs_dim <- function(x) {
   length(dim(x)) > 1L
 }
@@ -10,12 +5,6 @@ needs_dim <- function(x) {
 has_null_names <- function(x) {
   is.null(names(x))
 }
-
-has_nonnull_names <- function(x) {
-  !has_null_names(x)
-}
-
-set_class <- `class<-`
 
 needs_list_col <- function(x) {
   is_list(x) || length(x) != 1L
@@ -26,16 +15,8 @@ needs_list_col <- function(x) {
 safe_match <- match
 
 
-warningc <- function(...) {
-  warn(paste0(...))
-}
-
 nchar_width <- function(x) {
   nchar(x, type = "width")
-}
-
-cat_line <- function(...) {
-  cat(paste0(..., "\n"), sep = "")
 }
 
 is_rstudio <- function() {

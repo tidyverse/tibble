@@ -81,12 +81,12 @@ glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
 str_trunc <- function(x, max_width) {
   width <- nchar(x)
 
-  nchar_ellipsis <- nchar_width(cli::symbol$ellipsis)
+  nchar_ellipsis <- nchar_width(symbol$ellipsis)
 
   for (i in seq_along(x)) {
     if (width[i] <= max_width[i]) next
 
-    x[i] <- paste0(substr(x[i], 1, max_width[i] - nchar_ellipsis), cli::symbol$ellipsis)
+    x[i] <- paste0(substr(x[i], 1, max_width[i] - nchar_ellipsis), symbol$ellipsis)
   }
 
   x
