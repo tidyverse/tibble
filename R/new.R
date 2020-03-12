@@ -133,3 +133,17 @@ set_tibble_subclass <- function(x, nrow, subclass) {
   class(x) <- c(setdiff(subclass, tibble_class), tibble_class)
   x
 }
+
+# Errors ------------------------------------------------------------------
+
+error_new_tibble_must_be_list <- function() {
+  tibble_error("Must pass a list as `x` argument to `new_tibble()`.")
+}
+
+error_new_tibble_needs_nrow <- function() {
+  tibble_error("Must pass a scalar integer as `nrow` argument to `new_tibble()`.")
+}
+
+error_new_tibble_needs_class <- function() {
+  tibble_error("Must pass a `class` argument instead of `subclass` to `new_tibble()`.")
+}

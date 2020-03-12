@@ -86,6 +86,7 @@ Collate:
     'glimpse.R'
     'has-name.R'
     'lst.R'
+    'names.R'
     'new.R'
     'options.R'
     'pipe.R'

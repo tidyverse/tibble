@@ -23,3 +23,7 @@ check_names_before_after_character <- function(j, names) {
   }
   pos
 }
+
+error_unknown_column_names <- function(j, parent = NULL) {
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+}

@@ -210,3 +210,33 @@ pos_from_before_after <- function(before, after, len) {
 limit_pos_range <- function(pos, len) {
   max(0L, min(len, pos))
 }
+
+# Errors ------------------------------------------------------------------
+
+error_add_rows_to_grouped_df <- function() {
+  tibble_error("Can't add rows to grouped data frames.")
+}
+
+error_inconsistent_new_rows <- function(names) {
+  tibble_error(
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      cnd_message(error_unknown_column_names(names))
+    ),
+    names = names
+  )
+}
+
+error_duplicate_new_cols <- function(names) {
+  tibble_error(
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      cnd_message(error_existing_column_names(names))
+    ),
+    names = names
+  )
+}
+
+error_both_before_after <- function() {
+  tibble_error("Can't specify both `.before` and `.after`.")
+}

@@ -18,18 +18,6 @@ test_that("error messages", {
 
     error_na_column_index(1:3)
 
-    error_unsupported_column_index()
-
-    error_large_column_index(3, 4:5)
-    error_large_column_index(3, 5)
-    error_large_column_index(1, 4:5)
-    error_large_column_index(1, 5)
-
-    error_small_column_index(3, -(4:5))
-    error_small_column_index(3, -5)
-    error_small_column_index(1, -(4:5))
-    error_small_column_index(1, -5)
-
     error_unknown_column_names("a")
     error_unknown_column_names(c("b", "c"))
     error_unknown_column_names(LETTERS)
@@ -83,10 +71,6 @@ test_that("error messages", {
     error_column_names_must_be_unique("a", repair = FALSE)
     error_column_names_must_be_unique(letters[2:3], repair = TRUE)
     error_column_names_must_be_unique(LETTERS, repair = TRUE)
-
-    error_column_names_must_be_syntactic("a", repair = FALSE)
-    error_column_names_must_be_syntactic(letters[2:3], repair = TRUE)
-    error_column_names_must_be_syntactic(LETTERS, repair = TRUE)
 
     error_column_must_be_vector("a", 3, "environment")
     error_column_must_be_vector("", 3, "environment")

@@ -66,3 +66,11 @@ deframe <- function(x) {
   names(value) <- name
   value
 }
+
+error_enframe_value_null <- function() {
+  tibble_error("The `value` argument to `enframe()` cannot be NULL.")
+}
+
+error_enframe_has_dim <- function(x) {
+  tibble_error(paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), "."))
+}

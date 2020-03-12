@@ -603,3 +603,128 @@ vectbl_restore <- function(xo, x) {
 string_to_indices <- function(x) {
   .Call(`tibble_string_to_indices`, as.character(x))
 }
+
+# Errors ------------------------------------------------------------------
+
+error_need_scalar_column_index <- function(j) {
+  tibble_error("Must use a scalar in `[[`.")
+}
+
+error_na_column_index <- function(j) {
+  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
+}
+
+error_dim_column_index <- function(j) {
+  tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
+}
+
+error_assign_columns_non_na_only <- function() {
+  tibble_error("Can't use NA as column index in a tibble for assignment.")
+}
+
+error_assign_columns_non_missing_only <- function() {
+  tibble_error("Column index is required for tibbles in `[[`.")
+}
+
+error_new_columns_at_end_only <- function(ncol, j) {
+  j <- j[j > ncol + 1]
+  tibble_error(
+    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
+    ncol = ncol, j = j
+  )
+}
+
+error_duplicate_column_subscript_for_assignment <- function(j) {
+  j <- unique(j[duplicated(j)])
+  tibble_error(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
+}
+
+error_assign_rows_non_na_only <- function() {
+  tibble_error("Can't use NA as row index in a tibble for assignment.")
+}
+
+error_new_rows_at_end_only <- function(nrow, i) {
+  i <- i[i > nrow + 1]
+  tibble_error(
+    pluralise_commas("Can't assign row(s) ", i, " in a tibble with ", nrow, pluralise_n(" row(s).", nrow)),
+    nrow = nrow, i = i
+  )
+}
+
+error_duplicate_row_subscript_for_assignment <- function(i) {
+  i <- unique(i[duplicated(i)])
+  tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
+}
+
+error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
+  tibble_error(bullets(
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
+    })
+  ))
+}
+
+error_inconsistent_new_cols <- function(n, df) {
+  tibble_error(
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      pluralise_count("`.data` has ", n, " row(s)"),
+      paste0(
+        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+        nrow(df), " rows"
+      )
+    ),
+    expected = n,
+    actual = nrow(df)
+  )
+}
+
+
+# Subclassing errors ------------------------------------------------------
+
+with_col_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "column"
+      cnd_signal(cnd)
+    }
+  )
+}
+with_row_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "row"
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_col_recycle_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_recycle_incompatible_size = function(cnd) {
+      cnd_signal(cnd)
+    }
+  )
+}

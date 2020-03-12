@@ -118,3 +118,13 @@ column_to_rownames <- function(.data, var = "rowname") {
 raw_rownames <- function(x) {
   .row_names_info(x, 0L) %||% .set_row_names(.row_names_info(x, 2L))
 }
+
+# Errors ------------------------------------------------------------------
+
+error_existing_column_names <- function(names) {
+  tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."), names = names)
+}
+
+error_already_has_rownames <- function() {
+  tibble_error("`df` must be a data frame without row names in `column_to_rownames()`.")
+}

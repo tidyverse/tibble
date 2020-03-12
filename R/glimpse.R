@@ -127,3 +127,9 @@ format_v.factor <- function(x) {
     format(x, trim = TRUE, justify = "none")
   }
 }
+
+# Errors ------------------------------------------------------------------
+
+error_glimpse_infinite_width <- function() {
+  tibble_error("`glimpse()` requires a finite value for the `width` argument.")
+}

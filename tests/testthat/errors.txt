@@ -14,42 +14,6 @@ Must use a scalar in `[[`.
 <error/tibble_error_na_column_index>
 Can't use NA as column index with `[` at positions 1, 2, 3.
 
-> error_unsupported_column_index()
-<error/tibble_error_unsupported_column_index>
-Must subset columns with an index vector.
-
-> error_large_column_index(3, 4:5)
-<error/tibble_error_large_column_index>
-Cannot subset columns 4, 5 in tibble with 3 columns.
-
-> error_large_column_index(3, 5)
-<error/tibble_error_large_column_index>
-Cannot subset column 5 in tibble with 3 columns.
-
-> error_large_column_index(1, 4:5)
-<error/tibble_error_large_column_index>
-Cannot subset columns 4, 5 in tibble with 1 column.
-
-> error_large_column_index(1, 5)
-<error/tibble_error_large_column_index>
-Cannot subset column 5 in tibble with 1 column.
-
-> error_small_column_index(3, -(4:5))
-<error/tibble_error_small_column_index>
-Cannot exclude columns 4, 5 in tibble with 3 columns.
-
-> error_small_column_index(3, -5)
-<error/tibble_error_small_column_index>
-Cannot exclude column 5 in tibble with 3 columns.
-
-> error_small_column_index(1, -(4:5))
-<error/tibble_error_small_column_index>
-Cannot exclude columns 4, 5 in tibble with 1 column.
-
-> error_small_column_index(1, -5)
-<error/tibble_error_small_column_index>
-Cannot exclude column 5 in tibble with 1 column.
-
 > error_unknown_column_names("a")
 <error/tibble_error_unknown_column_names>
 Can't find column `a` in `.data`.
@@ -211,20 +175,6 @@ Use .name_repair to specify repair.
 > error_column_names_must_be_unique(LETTERS, repair = TRUE)
 <error/tibble_error_column_names_must_be_unique>
 Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_syntactic("a", repair = FALSE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column name `a` must be syntactic.
-
-> error_column_names_must_be_syntactic(letters[2:3], repair = TRUE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column names `b`, `c` must be syntactic.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_syntactic(LETTERS, repair = TRUE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must be syntactic.
 Use .name_repair to specify repair.
 
 > error_column_must_be_vector("a", 3, "environment")

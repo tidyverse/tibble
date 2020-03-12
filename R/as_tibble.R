@@ -279,3 +279,15 @@ as_tibble.default <- function(x, ...) {
 matrixToDataFrame <- function(x) {
   .Call(`tibble_matrixToDataFrame`, x)
 }
+
+# Errors ------------------------------------------------------------------
+
+error_column_must_be_vector <- function(names, positions, classes) {
+  tibble_error(
+    bullets(
+      "All columns in a tibble must be vectors:",
+      paste0("Column ", name_or_pos(names, positions), " is ", classes)
+    ),
+    names = names
+  )
+}

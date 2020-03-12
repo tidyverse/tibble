@@ -282,3 +282,18 @@ splice_dfs <- function(x) {
   x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
   vec_c(!!!x, .name_spec = "{inner}")
 }
+
+# Errors ------------------------------------------------------------------
+
+error_tibble_row_size_one <- function(j, name, size) {
+  if (name != "") {
+    desc <- tick(name)
+  } else {
+    desc <- paste0("at position ", j)
+  }
+
+  tibble_error(bullets(
+    "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
+  ))
+}
