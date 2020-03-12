@@ -7,7 +7,7 @@ has_null_names <- function(x) {
 }
 
 needs_list_col <- function(x) {
-  is_list(x) || length(x) != 1L
+  is_list(x) || !vec_is(x) || vec_size(x) != 1L
 }
 
 # Work around bug in R 3.3.0

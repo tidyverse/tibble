@@ -43,7 +43,7 @@
 
 - `expression()` columns are converted to lists as a workaround for lacking support in vctrs (#657).
 
-- `tribble()` is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (#204).
+- `tribble()` is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (#204). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with `vctrs::vec_size()` unequal 1 are wrapped in lists.
 
 - `$` warns unconditionally if column not found, `[[` doesn't warn.
 
