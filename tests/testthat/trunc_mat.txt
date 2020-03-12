@@ -1,0 +1,148 @@
+> mtcars2 <- as_tibble(mtcars, rownames = NA)
+> print_without_body(mtcars2, n = 8L, width = 30L)
+# A tibble: 32 x 11
+<body created by pillar>
+# … with 24 more rows, and 7
+#   more variables:
+#   drat <dbl>, wt <dbl>,
+#   qsec <dbl>, vs <dbl>,
+#   am <dbl>, gear <dbl>,
+#   carb <dbl>
+
+> print_without_body(as_tibble(iris), n = 5L, width = 30L)
+# A tibble: 150 x 5
+<body created by pillar>
+# … with 145 more rows, and 3
+#   more variables:
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fct>
+
+> print_without_body(as_tibble(iris), n = -1L, width = 30L)
+# A tibble: 150 x 5
+<body created by pillar>
+# … with 140 more rows, and 3
+#   more variables:
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fct>
+
+> print_without_body(as_tibble(iris), n = Inf, width = 30L)
+# A tibble: 150 x 5
+<body created by pillar>
+# … with 3 more variables:
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fct>
+
+> print_without_body(as_tibble(iris), n = 3L, width = 5L)
+# A
+#   tibble:
+#   150
+#   x
+#   5
+<body created by pillar>
+# …
+#   with
+#   147
+#   more
+#   rows,
+#   and
+#   5
+#   more
+#   variables:
+#   Sepal.Length <dbl>,
+#   Sepal.Width <dbl>,
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fct>
+
+> print_without_body(as_tibble(iris), n = NULL, width = 70L)
+# A tibble: 150 x 5
+<body created by pillar>
+# … with 140 more rows
+
+> print_without_body(as_unknown_rows(iris), n = 10, width = 70L)
+# A tibble: ?? x 5
+<body created by pillar>
+# … with more rows
+
+> print_without_body(as_unknown_rows(iris[1:9, ]), n = 10, width = 70L)
+# A tibble: ?? x 5
+<body created by pillar>
+
+> print_without_body(as_unknown_rows(iris[1:10, ]), n = 10, width = 70L)
+# A tibble: ?? x 5
+<body created by pillar>
+
+> print_without_body(as_unknown_rows(iris[1:11, ]), n = 10, width = 70L)
+# A tibble: ?? x 5
+<body created by pillar>
+# … with more rows
+
+> print_without_body(df_all, n = NULL, width = 30L)
+# A tibble: 3 x 9
+<body created by pillar>
+# … with 5 more variables:
+#   e <fct>, f <date>,
+#   g <dttm>, h <list>,
+#   i <list>
+
+> print_without_body(df_all, n = NULL, width = 300L)
+# A tibble: 3 x 9
+<body created by pillar>
+
+> print_without_body(tibble(a = seq.int(10000)), n = 5L, width = 30L)
+# A tibble: 10,000 x 1
+<body created by pillar>
+# … with 9,995 more rows
+
+> print_without_body(tibble(a = character(), b = logical()), width = 30L)
+# A tibble: 0 x 2
+<body created by pillar>
+# … with 2 variables:
+#   a <chr>, b <lgl>
+
+> print_without_body(as_tibble(iris)[character()], n = 5L, width = 30L)
+# A tibble: 150 x 0
+<body created by pillar>
+
+> print_without_body(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L)
+# A tibble: ?? x 5
+<body created by pillar>
+# … with 5 variables:
+#   Sepal.Length <dbl>,
+#   Sepal.Width <dbl>,
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fct>
+
+> print_without_body(as_unknown_rows(iris[, character()]), n = 5L, width = 30L)
+# A tibble: ?? x 0
+<body created by pillar>
+# … with at least 5 rows
+#   total
+
+> print_without_body(as_unknown_rows(tibble(a = seq.int(10000))), n = 5L, width = 30L)
+# A tibble: ?? x 1
+<body created by pillar>
+# … with more rows
+
+> print_without_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
+# A tibble: 3 x 9
+<body created by pillar>
+# … with 2 more rows, and 5
+#   more variables: e <fct>,
+#   f <date>, …
+
+> print_without_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
+# A tibble: 3 x 9
+<body created by pillar>
+# … with 2 more rows, and 5
+#   more variables
+
+> df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
+> print_without_body(trunc_mat(df, width = 28))
+# A tibble: 1 x 2
+<body created by pillar>
+
