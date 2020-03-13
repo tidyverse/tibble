@@ -689,21 +689,6 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   ))
 }
 
-error_inconsistent_new_cols <- function(n, df) {
-  tibble_error(
-    bullets(
-      "New columns in `add_column()` must be consistent with `.data`:",
-      pluralise_count("`.data` has ", n, " row(s)"),
-      paste0(
-        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
-        nrow(df), " rows"
-      )
-    ),
-    expected = n,
-    actual = nrow(df)
-  )
-}
-
 
 # Subclassing errors ------------------------------------------------------
 

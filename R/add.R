@@ -270,3 +270,18 @@ error_both_before_after <- function() {
 error_unknown_column_names <- function(j, parent = NULL) {
   tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
+
+error_inconsistent_new_cols <- function(n, df) {
+  tibble_error(
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      pluralise_count("`.data` has ", n, " row(s)"),
+      paste0(
+        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+        nrow(df), " rows"
+      )
+    ),
+    expected = n,
+    actual = nrow(df)
+  )
+}
