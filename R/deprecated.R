@@ -71,7 +71,6 @@ as.tibble <- function(x, ...) {
   as_tibble(x, ...)
 }
 
-#' @include tribble.R
 #' @description
 #' Use [tribble()] instead of `frame_data()`.
 #' @export
