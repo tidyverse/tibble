@@ -111,9 +111,12 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
+    if (missing(i)) {
+      abort(error_subset_columns_non_missing_only())
+    }
     with_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j)) {
-    error_assign_columns_non_missing_only()
+    abort(error_subset_columns_non_missing_only())
   } else {
     with_col_index_errors(arg = substitute(j), {
       i <- vec_as_location2(i, fast_nrow(x))
@@ -149,7 +152,7 @@ NULL
   }
 
   if (is_null(j)) {
-    error_assign_columns_non_missing_only()
+    abort(error_assign_columns_non_missing_only())
   }
 
   value <- list(value)
@@ -335,7 +338,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
 vectbl_as_col_index <- function(j, x, arg = NULL) {
   stopifnot(!is.null(j))
 
-  if (anyNA(j)) {
+  if (vec_is(j) && anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
@@ -387,13 +390,17 @@ tbl_subset_row <- function(x, i) {
 }
 
 tbl_subassign <- function(x, i, j, value) {
+  if (!vec_is(value)) {
+    abort(error_need_rhs_vector())
+  }
+
   if (is_null(value) || is_atomic(value)) {
     value <- list(value)
   } else {
     value <- unclass(value)
   }
 
-  if (!vec_is(value) || !is_bare_list(value)) {
+  if (!is_bare_list(value)) {
     abort(error_need_rhs_vector())
   }
 
@@ -524,7 +531,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vectbl_recycle_rows(value[[jj]], nrow, jj, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
+    x[[ji]] <- vectbl_recycle_rows(value[[jj]], nrow, jj, names2(j)[[jj]])
   }
 
   # Remove
@@ -537,10 +544,6 @@ tbl_subassign_col <- function(x, j, value) {
 
 coalesce2 <- function(x, y) {
   if (is.na(x)) y else x
-}
-
-coalesce2empty <- function(x, y) {
-  if (x == "") y else x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -634,8 +637,12 @@ error_assign_columns_non_na_only <- function() {
   tibble_error("Can't use NA as column index in a tibble for assignment.")
 }
 
-error_assign_columns_non_missing_only <- function() {
+error_subset_columns_non_missing_only <- function() {
   tibble_error("Column index is required for tibbles in `[[`.")
+}
+
+error_assign_columns_non_missing_only <- function() {
+  tibble_error("Column index is required for tibbles in `[[<-`.")
 }
 
 error_new_columns_at_end_only <- function(ncol, j) {

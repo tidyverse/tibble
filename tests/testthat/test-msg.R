@@ -27,6 +27,7 @@ verify_output("msg.txt", {
 
   error_assign_columns_non_na_only()
 
+  error_subset_columns_non_missing_only()
   error_assign_columns_non_missing_only()
 
   error_new_columns_at_end_only(5, 7:8)

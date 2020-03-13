@@ -42,9 +42,13 @@ Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`.
 <error/tibble_error_assign_columns_non_na_only>
 Can't use NA as column index in a tibble for assignment.
 
+> error_subset_columns_non_missing_only()
+<error/tibble_error_subset_columns_non_missing_only>
+Column index is required for tibbles in `[[`.
+
 > error_assign_columns_non_missing_only()
 <error/tibble_error_assign_columns_non_missing_only>
-Column index is required for tibbles in `[[`.
+Column index is required for tibbles in `[[<-`.
 
 > error_new_columns_at_end_only(5, 7:8)
 <error/tibble_error_new_columns_at_end_only>

@@ -45,11 +45,6 @@ In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
     library(vctrs)
-    #> 
-    #> Attaching package: 'vctrs'
-    #> The following object is masked from 'package:RProtoBuf':
-    #> 
-    #>     field
     library(tibble)
     new_df <- function() {
       df <- data.frame(n = c(1L, NA, 3L, NA))
@@ -1542,7 +1537,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent sizes, only values of size
     #> one are recycled:
     #> * Size 4: Existing data
-    #> * Size 3: Column `n`
+    #> * Size 3: Column at position 1
 
 </td>
 </tr>
@@ -1563,7 +1558,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent sizes, only values of size
     #> one are recycled:
     #> * Size 4: Existing data
-    #> * Size 2: Column `n`
+    #> * Size 2: Column at position 1
 
 </td>
 </tr>
@@ -2471,9 +2466,8 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
-    #> Error: `value` can't be recycled to size
-    #> 1.
-    #> [31mx[39m It must be size 1, not 12.
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>
@@ -3240,8 +3234,8 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 <td>
     with_tbl(tbl[2:3, "n"] <- NULL)
 
-    #> Error: `value` must be a vector, not
-    #> NULL.
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>
