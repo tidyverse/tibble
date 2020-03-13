@@ -123,13 +123,13 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair
 }
 
-check_valid_cols <- function(x) {
+check_valid_cols <- function(x, pos = NULL) {
   names_x <- names2(x)
 
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    abort(error_column_must_be_vector(names_x[is_xd], attr(x, "pos")[is_xd], classes))
+    abort(error_column_must_be_vector(names_x[is_xd], pos[is_xd], classes))
   }
 
   # 657
@@ -142,15 +142,6 @@ make_valid_col <- function(x) {
     x <- as.list(x)
   }
   x
-}
-
-check_valid_col <- function(x, name, pos) {
-  if (name == "") {
-    ret <- check_valid_cols(structure(list(x), pos = pos))
-  } else {
-    ret <- check_valid_cols(list2(!!name := x))
-  }
-  invisible(ret[[1]])
 }
 
 is_valid_col <- function(x) {

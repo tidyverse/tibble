@@ -21,3 +21,29 @@ tibble_opt <- function(x) {
 
   op.tibble[[x_tibble]]
 }
+
+tibble_width <- function(width) {
+  if (!is_null(width)) {
+    return(width)
+  }
+
+  width <- tibble_opt("width")
+  if (!is_null(width)) {
+    return(width)
+  }
+
+  getOption("width")
+}
+
+tibble_glimpse_width <- function(width) {
+  if (!is_null(width)) {
+    return(width)
+  }
+
+  width <- tibble_opt("width")
+  if (!is_null(width) && is.finite(width)) {
+    return(width)
+  }
+
+  getOption("width")
+}

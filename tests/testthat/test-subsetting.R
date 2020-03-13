@@ -590,59 +590,57 @@ test_that("$<- recycles only values of length one", {
   })
 })
 
-test_that("subsetting has informative errors", {
-  verify_output(test_path("error", "test-subsetting.txt"), {
-    "# [.tbl_df is careful about names (#1245)"
-    foo <- tibble(x = 1:10, y = 1:10)
-    foo[c("x", "y", "z")]
-    foo[c("w", "x", "y", "z")]
-    foo[as.matrix("x")]
-    foo[array("x", dim = c(1, 1, 1))]
+verify_output("subsetting.txt", {
+  "# [.tbl_df is careful about names (#1245)"
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[c("x", "y", "z")]
+  foo[c("w", "x", "y", "z")]
+  foo[as.matrix("x")]
+  foo[array("x", dim = c(1, 1, 1))]
 
-    "# [.tbl_df is careful about column indexes (#83)"
-    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    foo[0.5]
-    foo[1:5]
-    foo[-1:1]
-    foo[c(-1, 1)]
-    foo[c(-1, NA)]
-    foo[-4]
-    foo[c(1:3, NA)]
-    foo[as.matrix(1)]
-    foo[array(1, dim = c(1, 1, 1))]
+  "# [.tbl_df is careful about column indexes (#83)"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[0.5]
+  foo[1:5]
+  foo[-1:1]
+  foo[c(-1, 1)]
+  foo[c(-1, NA)]
+  foo[-4]
+  foo[c(1:3, NA)]
+  foo[as.matrix(1)]
+  foo[array(1, dim = c(1, 1, 1))]
 
-    "# [.tbl_df is careful about column flags (#83)"
-    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    foo[c(TRUE, TRUE)]
-    foo[c(TRUE, TRUE, FALSE, FALSE)]
-    foo[c(TRUE, TRUE, NA)]
-    foo[as.matrix(TRUE)]
-    foo[array(TRUE, dim = c(1, 1, 1))]
+  "# [.tbl_df is careful about column flags (#83)"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[c(TRUE, TRUE)]
+  foo[c(TRUE, TRUE, FALSE, FALSE)]
+  foo[c(TRUE, TRUE, NA)]
+  foo[as.matrix(TRUE)]
+  foo[array(TRUE, dim = c(1, 1, 1))]
 
-    "# [.tbl_df rejects unknown column indexes (#83)"
-    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    foo[list(1:3)]
-    foo[as.list(1:3)]
-    foo[factor(1:3)]
-    foo[Sys.Date()]
-    foo[Sys.time()]
+  "# [.tbl_df rejects unknown column indexes (#83)"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[list(1:3)]
+  foo[as.list(1:3)]
+  foo[factor(1:3)]
+  foo[Sys.Date()]
+  foo[Sys.time()]
 
-    "# [[.tbl_df throws error with NA index"
-    foo <- tibble(x = 1:10, y = 1:10)
-    foo[[NA]]
-    foo[[NA_integer_]]
-    foo[[NA_real_]]
-    foo[[NA_character_]]
+  "# [[.tbl_df throws error with NA index"
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[[NA]]
+  foo[[NA_integer_]]
+  foo[[NA_real_]]
+  foo[[NA_character_]]
 
-    "# [<-.tbl_df throws an error with duplicate indexes (#658)"
-    df <- tibble(x = 1:2, y = x)
-    df[c(1, 1)] <- 3
-    df[, c(1, 1)] <- 3
-    df[c(1, 1), ] <- 3
+  "# [<-.tbl_df throws an error with duplicate indexes (#658)"
+  df <- tibble(x = 1:2, y = x)
+  df[c(1, 1)] <- 3
+  df[, c(1, 1)] <- 3
+  df[c(1, 1), ] <- 3
 
-    "# $<- recycles only values of length one"
-    df <- tibble(x = 1:3)
-    df$w <- 8:9
-    df$a <- character()
-  })
+  "# $<- recycles only values of length one"
+  df <- tibble(x = 1:3)
+  df$w <- 8:9
+  df$a <- character()
 })
