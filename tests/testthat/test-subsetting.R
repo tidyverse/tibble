@@ -606,9 +606,12 @@ verify_output("subsetting.txt", {
   foo[c(-1, 1)]
   foo[c(-1, NA)]
   foo[-4]
+  foo[1.5]
   foo[c(1:3, NA)]
   foo[as.matrix(1)]
   foo[array(1, dim = c(1, 1, 1))]
+  foo[mean]
+  foo[foo]
 
   "# [.tbl_df is careful about column flags (#83)"
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -626,6 +629,31 @@ verify_output("subsetting.txt", {
   foo[Sys.Date()]
   foo[Sys.time()]
 
+  "# [.tbl_df and logical subsetting"
+  foo <- tibble(a = 1:3, b = letters[1:3])
+  foo[is.na(foo)]
+  foo[!is.na(foo)]
+  foo[!is.na(foo)] <- "bogus"
+
+  "# [.tbl_df and OOB indexing"
+  foo <- tibble(a = 1:3, b = letters[1:3])
+  foo[3:5, ]
+  foo[-(3:5), ]
+  foo["x", ]
+
+  "# [.tbl_df and logical recycling"
+  foo <- tibble(a = 1:4, b = a)
+  foo[c(TRUE, FALSE), ]
+
+  "# [[.tbl_df rejects invalid column indexes"
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[[]]
+  foo[[1:3]]
+  foo[[ letters[1:3] ]]
+  foo[[TRUE]]
+  foo[[mean]]
+  foo[[foo]]
+
   "# [[.tbl_df throws error with NA index"
   foo <- tibble(x = 1:10, y = 1:10)
   foo[[NA]]
@@ -633,14 +661,65 @@ verify_output("subsetting.txt", {
   foo[[NA_real_]]
   foo[[NA_character_]]
 
+  "# $.tbl_df and partial matching/invalid columns"
+  foo <- tibble(data = 1:10)
+  foo$d
+  foo$e
+
   "# [<-.tbl_df throws an error with duplicate indexes (#658)"
   df <- tibble(x = 1:2, y = x)
   df[c(1, 1)] <- 3
   df[, c(1, 1)] <- 3
   df[c(1, 1), ] <- 3
 
+  "# [<-.tbl_df throws an error with NA indexes"
+  df <- tibble(x = 1:2, y = x)
+  df[NA] <- 3
+  df[NA, ] <- 3
+
+  "# [<-.tbl_df throws an error with bad RHS"
+  df <- tibble(x = 1:2, y = x)
+  df[] <- mean
+  df[] <- lm(y ~ x, df)
+
+  "# [<-.tbl_df throws an error with OOB assignment"
+  df <- tibble(x = 1:2, y = x)
+  df[4:5] <- 3
+  df[4:5, ] <- 3
+  df[-4, ] <- 3
+  df[-(4:5), ] <- 3
+
+  "# [<-.tbl_df and recycling"
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[1:2] <- list(0, 0, 0)
+  df[] <- list(0, 0)
+  df[1:2, ] <- 1:3
+  df[,] <- 1:2
+
+  "# [<-.tbl_df and coercion"
+  df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
+  df[1:3, 1:2] <- df[2:3]
+  df[1:3, 1:2] <- df[1]
+  df[1:3, 1:2] <- df[[1]]
+  df[1:3, 1:3] <- df[3:1]
+  df[1:3, 1:3] <- NULL
+
+  "# [<-.tbl_df and overwriting NA"
+  df <- tibble(x = rep(NA, 3))
+  df[1, "x"] <- 5
+
+  "# [[<-.tbl_df throws an error with OOB assignment"
+  df <- tibble(x = 1:2, y = x)
+  df[[4]] <- 3
+
+  "# [[<-.tbl_df throws an error with bad RHS"
+  df <- tibble(x = 1:2, y = x)
+  df[[1]] <- mean
+  df[[1]] <- lm(y ~ x, df)
+
   "# $<- recycles only values of length one"
   df <- tibble(x = 1:3)
+  df$x <- 8:9
   df$w <- 8:9
   df$a <- character()
 })

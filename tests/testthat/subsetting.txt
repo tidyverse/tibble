@@ -49,6 +49,10 @@ Error: Can't negate columns that don't exist.
 x The location 4 doesn't exist.
 i There are only 3 columns.
 
+> foo[1.5]
+Error: Must subset columns with a valid subscript vector.
+x Lossy cast from `j` <double> to <integer>.
+
 > foo[c(1:3, NA)]
 Error: Can't use NA as column index with `[` at position 4.
 
@@ -57,6 +61,20 @@ Error: Invalid `j`: if a matrix, it must be of type logical.
 
 > foo[array(1, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
+
+> foo[mean]
+Error: Must subset columns with a valid subscript vector.
+x The subscript `foo` has the wrong type `closure`.
+i It must be logical, numeric, or character.
+
+> foo[foo]
+Error: Must subset columns with a valid subscript vector.
+x The subscript `foo` has the wrong type `tbl_df<
+  x: integer
+  y: integer
+  z: integer
+>`.
+i It must be logical, numeric, or character.
 
 
 [.tbl_df is careful about column flags (#83)
@@ -112,6 +130,99 @@ x The subscript `foo` has the wrong type `datetime<local>`.
 i It must be logical, numeric, or character.
 
 
+[.tbl_df and logical subsetting
+===============================
+
+> foo <- tibble(a = 1:3, b = letters[1:3])
+> foo[is.na(foo)]
+<unspecified> [0]
+
+> foo[!is.na(foo)]
+Error: No common type for `a` <integer> and `b` <character>.
+
+> foo[!is.na(foo)] <- "bogus"
+Error: No common type for `value` <character> and `x` <integer>.
+
+
+[.tbl_df and OOB indexing
+=========================
+
+> foo <- tibble(a = 1:3, b = letters[1:3])
+> foo[3:5, ]
+Warning: The `i` argument of ``[.tbl_df`()` if integer must be between 0 and the number of rows as of tibble 3.0.0.
+Use `NA` as row index to obtain a row full of `NA` values.
+
+# A tibble: 3 x 2
+      a b    
+  <int> <chr>
+1     3 c    
+2    NA <NA> 
+3    NA <NA> 
+
+> foo[-(3:5), ]
+Warning: The `i` argument of ``[.tbl_df`()` if negative integer must be between 0 and the number of rows negated as of tibble 3.0.0.
+Use `NA` as row index to obtain a row full of `NA` values.
+
+# A tibble: 2 x 2
+      a b    
+  <int> <chr>
+1     1 a    
+2     2 b    
+
+> foo["x", ]
+Warning: The `i` argument of ``[.tbl_df`()` must use valid row names as of tibble 3.0.0.
+Use `NA` as row index to obtain a row full of `NA` values.
+
+# A tibble: 1 x 2
+      a b    
+  <int> <chr>
+1    NA <NA> 
+
+
+[.tbl_df and logical recycling
+==============================
+
+> foo <- tibble(a = 1:4, b = a)
+> foo[c(TRUE, FALSE), ]
+Error: Must subset elements with a valid subscript vector.
+i Logical subscripts must match the size of the indexed input.
+x The input has size 4 but the subscript has size 2.
+
+
+[[.tbl_df rejects invalid column indexes
+========================================
+
+> foo <- tibble(x = 1:10, y = 1:10)
+> foo[[]]
+Error: Column index is required for tibbles in `[[`.
+
+> foo[[1:3]]
+Error: Must extract column with a single valid subscript.
+x The subscript `1:3` has size 3 but must be size 1.
+
+> foo[[letters[1:3]]]
+Error: Must extract column with a single valid subscript.
+x The subscript `letters[1:3]` has size 3 but must be size 1.
+
+> foo[[TRUE]]
+Error: Must extract column with a single valid subscript.
+x The subscript `j` has the wrong type `logical`.
+i It must be numeric or character.
+
+> foo[[mean]]
+Error: Must extract column with a single valid subscript.
+x The subscript `j` has the wrong type `closure`.
+i It must be numeric or character.
+
+> foo[[foo]]
+Error: Must extract column with a single valid subscript.
+x The subscript `j` has the wrong type `tbl_df<
+  x: integer
+  y: integer
+>`.
+i It must be numeric or character.
+
+
 [[.tbl_df throws error with NA index
 ====================================
 
@@ -133,6 +244,21 @@ Error: Must extract column with a single valid subscript.
 x The subscript `NA_character_` can't be `NA`.
 
 
+$.tbl_df and partial matching/invalid columns
+=============================================
+
+> foo <- tibble(data = 1:10)
+> foo$d
+Warning: Unknown or uninitialised column: `d`.
+
+NULL
+
+> foo$e
+Warning: Unknown or uninitialised column: `e`.
+
+NULL
+
+
 [<-.tbl_df throws an error with duplicate indexes (#658)
 ========================================================
 
@@ -147,10 +273,128 @@ Error: Column index 1 is used more than once for assignment.
 Error: Row index 1 is used more than once for assignment.
 
 
+[<-.tbl_df throws an error with NA indexes
+==========================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[NA] <- 3
+Error: Can't use NA as column index in a tibble for assignment.
+
+> df[NA, ] <- 3
+Error: Can't use NA as row index in a tibble for assignment.
+
+
+[<-.tbl_df throws an error with bad RHS
+=======================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[] <- mean
+Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+
+> df[] <- lm(y ~ x, df)
+Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+
+
+[<-.tbl_df throws an error with OOB assignment
+==============================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[4:5] <- 3
+Error: Can't assign columns 4, 5 in a tibble with 2 columns.
+
+> df[4:5, ] <- 3
+Error: Can't assign rows 4, 5 in a tibble with 2 rows.
+
+> df[-4, ] <- 3
+Error: Can't negate elements that don't exist.
+x The location 4 doesn't exist.
+i There are only 2 elements.
+
+> df[-(4:5), ] <- 3
+Error: Can't negate elements that don't exist.
+x The locations 4 and 5 don't exist.
+i There are only 2 elements.
+
+
+[<-.tbl_df and recycling
+========================
+
+> df <- tibble(x = 1:3, y = x, z = y)
+> df[1:2] <- list(0, 0, 0)
+Error: `value` can't be recycled to size 2.
+x It must be size 2 or 1, not 3.
+
+> df[] <- list(0, 0)
+Error: `value` can't be recycled to size 3.
+x It must be size 3 or 1, not 2.
+
+> df[1:2, ] <- 1:3
+Error: `value` can't be recycled to size 2.
+x It must be size 2 or 1, not 3.
+
+> df[, ] <- 1:2
+Error: Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 3: Existing data
+* Size 2: Column at position 1
+
+
+[<-.tbl_df and coercion
+=======================
+
+> df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
+> df[1:3, 1:2] <- df[2:3]
+Error: No common type for `value` <character> and `x` <integer>.
+
+> df[1:3, 1:2] <- df[1]
+Error: No common type for `value` <integer> and `x` <character>.
+
+> df[1:3, 1:2] <- df[[1]]
+Error: No common type for `value` <integer> and `x` <character>.
+
+> df[1:3, 1:3] <- df[3:1]
+Error: No common type for `value` <list> and `x` <integer>.
+
+> df[1:3, 1:3] <- NULL
+Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+
+
+[<-.tbl_df and overwriting NA
+=============================
+
+> df <- tibble(x = rep(NA, 3))
+> df[1, "x"] <- 5
+Error: Lossy cast from `value` <double> to `x` <logical>.
+* Locations: 1
+
+
+[[<-.tbl_df throws an error with OOB assignment
+===============================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[[4]] <- 3
+Error: Can't assign column 4 in a tibble with 2 columns.
+
+
+[[<-.tbl_df throws an error with bad RHS
+========================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[[1]] <- mean
+Error: `x` must be a vector, not a function.
+
+> df[[1]] <- lm(y ~ x, df)
+Error: `x` must be a vector, not a `lm` object.
+
+
 $<- recycles only values of length one
 ======================================
 
 > df <- tibble(x = 1:3)
+> df$x <- 8:9
+Error: Tibble columns must have consistent sizes, only values of size one are recycled:
+* Size 3: Existing data
+* Size 2: Column `x`
+
 > df$w <- 8:9
 Error: Tibble columns must have consistent sizes, only values of size one are recycled:
 * Size 3: Existing data
