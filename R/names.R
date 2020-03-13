@@ -14,6 +14,22 @@ repaired_names <- function(name,
   )
 }
 
+# Errors ------------------------------------------------------------------
+
+error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must be named", names, use_repair(repair)), names = names, parent = parent)
+}
+
+error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), names = names, parent = parent)
+}
+
+error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), names = names, parent = parent)
+}
+
+# Subclassing errors ------------------------------------------------------
+
 subclass_name_repair_errors <- function(expr, name, details = NULL) {
   tryCatch(
     force(expr),
@@ -43,16 +59,4 @@ detect_dot_dot <- function(names) {
 }
 detect_duplicates <- function(names) {
   names[which(duplicated(names))]
-}
-
-error_column_must_be_named <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(invalid_df("must be named", names, use_repair(repair)), names = names, parent = parent)
-}
-
-error_column_must_not_be_dot_dot <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair)), names = names, parent = parent)
-}
-
-error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
-  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair)), names = names, parent = parent)
 }
