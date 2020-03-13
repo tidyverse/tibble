@@ -80,19 +80,23 @@ i It must be logical, numeric, or character.
 [.tbl_df is careful about row indexes
 =====================================
 
+> foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
 > foo[0.5, ]
 Error: Must subset elements with a valid subscript vector.
 x Lossy cast from <double> to <integer>.
 
 > foo[1:5, ]
+Warning: The `i` argument of ``[.tbl_df`()` if integer must be between 0 and the number of rows as of tibble 3.0.0.
+Use `NA` as row index to obtain a row full of `NA` values.
+
 # A tibble: 5 x 3
       x     y     z
   <int> <int> <int>
 1     1     1     1
 2     2     2     2
 3     3     3     3
-4     4     4     4
-5     5     5     5
+4    NA    NA    NA
+5    NA    NA    NA
 
 > foo[-1:1, ]
 Error: Must subset elements with a valid subscript vector.
@@ -110,18 +114,15 @@ x Negative locations can't have missing values.
 i The subscript has a missing value at location 2.
 
 > foo[-4, ]
-# A tibble: 9 x 3
+Warning: The `i` argument of ``[.tbl_df`()` if negative integer must be between 0 and the number of rows negated as of tibble 3.0.0.
+Use `NA` as row index to obtain a row full of `NA` values.
+
+# A tibble: 3 x 3
       x     y     z
   <int> <int> <int>
 1     1     1     1
 2     2     2     2
 3     3     3     3
-4     5     5     5
-5     6     6     6
-6     7     7     7
-7     8     8     8
-8     9     9     9
-9    10    10    10
 
 > foo[1.5, ]
 Error: Must subset elements with a valid subscript vector.

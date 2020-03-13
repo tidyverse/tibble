@@ -614,6 +614,7 @@ verify_output("subsetting.txt", {
   foo[foo]
 
   "# [.tbl_df is careful about row indexes"
+  foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
   foo[0.5, ]
   foo[1:5, ]
   foo[-1:1, ]
