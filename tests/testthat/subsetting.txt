@@ -77,6 +77,86 @@ x The subscript `foo` has the wrong type `tbl_df<
 i It must be logical, numeric, or character.
 
 
+[.tbl_df is careful about row indexes
+=====================================
+
+> foo[0.5, ]
+Error: Must subset elements with a valid subscript vector.
+x Lossy cast from <double> to <integer>.
+
+> foo[1:5, ]
+# A tibble: 5 x 3
+      x     y     z
+  <int> <int> <int>
+1     1     1     1
+2     2     2     2
+3     3     3     3
+4     4     4     4
+5     5     5     5
+
+> foo[-1:1, ]
+Error: Must subset elements with a valid subscript vector.
+x Negative locations can't be mixed with positive locations.
+i The subscript has a positive value at location 3.
+
+> foo[c(-1, 1), ]
+Error: Must subset elements with a valid subscript vector.
+x Negative locations can't be mixed with positive locations.
+i The subscript has a positive value at location 2.
+
+> foo[c(-1, NA), ]
+Error: Must subset elements with a valid subscript vector.
+x Negative locations can't have missing values.
+i The subscript has a missing value at location 2.
+
+> foo[-4, ]
+# A tibble: 9 x 3
+      x     y     z
+  <int> <int> <int>
+1     1     1     1
+2     2     2     2
+3     3     3     3
+4     5     5     5
+5     6     6     6
+6     7     7     7
+7     8     8     8
+8     9     9     9
+9    10    10    10
+
+> foo[1.5, ]
+Error: Must subset elements with a valid subscript vector.
+x Lossy cast from <double> to <integer>.
+
+> foo[c(1:3, NA), ]
+# A tibble: 4 x 3
+      x     y     z
+  <int> <int> <int>
+1     1     1     1
+2     2     2     2
+3     3     3     3
+4    NA    NA    NA
+
+> foo[as.matrix(1), ]
+Error: `i` must have one dimension, not 2.
+
+> foo[array(1, dim = c(1, 1, 1)), ]
+Error: `i` must have one dimension, not 3.
+
+> foo[mean, ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `closure`.
+i It must be logical, numeric, or character.
+
+> foo[foo, ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `tbl_df<
+  x: integer
+  y: integer
+  z: integer
+>`.
+i It must be logical, numeric, or character.
+
+
 [.tbl_df is careful about column flags (#83)
 ============================================
 
@@ -98,6 +178,35 @@ Error: Can't use NA as column index with `[` at position 3.
 Error: Invalid `j`: if a matrix, it must have the same dimensions as `x`.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
+Error: `i` must have one dimension, not 3.
+
+
+[.tbl_df is careful about row flags
+===================================
+
+> foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
+> foo[c(TRUE, TRUE), ]
+Error: Must subset elements with a valid subscript vector.
+i Logical subscripts must match the size of the indexed input.
+x The input has size 3 but the subscript has size 2.
+
+> foo[c(TRUE, TRUE, FALSE, FALSE), ]
+Error: Must subset elements with a valid subscript vector.
+i Logical subscripts must match the size of the indexed input.
+x The input has size 3 but the subscript has size 4.
+
+> foo[c(TRUE, TRUE, NA), ]
+# A tibble: 3 x 3
+      x     y     z
+  <int> <int> <int>
+1     1     1     1
+2     2     2     2
+3    NA    NA    NA
+
+> foo[as.matrix(TRUE), ]
+Error: `i` must have one dimension, not 2.
+
+> foo[array(TRUE, dim = c(1, 1, 1)), ]
 Error: `i` must have one dimension, not 3.
 
 
@@ -130,6 +239,34 @@ x The subscript `foo` has the wrong type `datetime<local>`.
 i It must be logical, numeric, or character.
 
 
+[.tbl_df rejects unknown row indexes
+====================================
+
+> foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+> foo[list(1:3), ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `list`.
+i It must be logical, numeric, or character.
+
+> foo[as.list(1:3), ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `list`.
+i It must be logical, numeric, or character.
+
+> foo[factor(1:3), ]
+Error: Can't use character names to index an unnamed vector.
+
+> foo[Sys.Date(), ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `date`.
+i It must be logical, numeric, or character.
+
+> foo[Sys.time(), ]
+Error: Must subset elements with a valid subscript vector.
+x The subscript has the wrong type `datetime<local>`.
+i It must be logical, numeric, or character.
+
+
 [.tbl_df and logical subsetting
 ===============================
 
@@ -139,9 +276,6 @@ i It must be logical, numeric, or character.
 
 > foo[!is.na(foo)]
 Error: No common type for `a` <integer> and `b` <character>.
-
-> foo[!is.na(foo)] <- "bogus"
-Error: No common type for `value` <character> and `x` <integer>.
 
 
 [.tbl_df and OOB indexing
@@ -230,18 +364,6 @@ i It must be numeric or character.
 > foo[[NA]]
 Error: Must extract column with a single valid subscript.
 x The subscript `NA` can't be `NA`.
-
-> foo[[NA_integer_]]
-Error: Must extract column with a single valid subscript.
-x The subscript `NA_integer_` can't be `NA`.
-
-> foo[[NA_real_]]
-Error: Must extract column with a single valid subscript.
-x The subscript `NA_real_` can't be `NA`.
-
-> foo[[NA_character_]]
-Error: Must extract column with a single valid subscript.
-x The subscript `NA_character_` can't be `NA`.
 
 
 $.tbl_df and partial matching/invalid columns
@@ -365,6 +487,14 @@ Error: `value` must be a vector, a bare list or a data frame in `[<-`.
 > df[1, "x"] <- 5
 Error: Lossy cast from `value` <double> to `x` <logical>.
 * Locations: 1
+
+
+[<-.tbl_df and logical subsetting
+=================================
+
+> foo <- tibble(a = 1:3, b = letters[1:3])
+> foo[!is.na(foo)] <- "bogus"
+Error: No common type for `value` <character> and `x` <integer>.
 
 
 [[<-.tbl_df throws an error with OOB assignment

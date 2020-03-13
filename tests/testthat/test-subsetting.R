@@ -613,6 +613,20 @@ verify_output("subsetting.txt", {
   foo[mean]
   foo[foo]
 
+  "# [.tbl_df is careful about row indexes"
+  foo[0.5, ]
+  foo[1:5, ]
+  foo[-1:1, ]
+  foo[c(-1, 1), ]
+  foo[c(-1, NA), ]
+  foo[-4, ]
+  foo[1.5, ]
+  foo[c(1:3, NA), ]
+  foo[as.matrix(1), ]
+  foo[array(1, dim = c(1, 1, 1)), ]
+  foo[mean, ]
+  foo[foo, ]
+
   "# [.tbl_df is careful about column flags (#83)"
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   foo[c(TRUE, TRUE)]
@@ -620,6 +634,14 @@ verify_output("subsetting.txt", {
   foo[c(TRUE, TRUE, NA)]
   foo[as.matrix(TRUE)]
   foo[array(TRUE, dim = c(1, 1, 1))]
+
+  "# [.tbl_df is careful about row flags"
+  foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
+  foo[c(TRUE, TRUE), ]
+  foo[c(TRUE, TRUE, FALSE, FALSE), ]
+  foo[c(TRUE, TRUE, NA), ]
+  foo[as.matrix(TRUE), ]
+  foo[array(TRUE, dim = c(1, 1, 1)), ]
 
   "# [.tbl_df rejects unknown column indexes (#83)"
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -629,11 +651,18 @@ verify_output("subsetting.txt", {
   foo[Sys.Date()]
   foo[Sys.time()]
 
+  "# [.tbl_df rejects unknown row indexes"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[list(1:3), ]
+  foo[as.list(1:3), ]
+  foo[factor(1:3), ]
+  foo[Sys.Date(), ]
+  foo[Sys.time(), ]
+
   "# [.tbl_df and logical subsetting"
   foo <- tibble(a = 1:3, b = letters[1:3])
   foo[is.na(foo)]
   foo[!is.na(foo)]
-  foo[!is.na(foo)] <- "bogus"
 
   "# [.tbl_df and OOB indexing"
   foo <- tibble(a = 1:3, b = letters[1:3])
@@ -657,9 +686,6 @@ verify_output("subsetting.txt", {
   "# [[.tbl_df throws error with NA index"
   foo <- tibble(x = 1:10, y = 1:10)
   foo[[NA]]
-  foo[[NA_integer_]]
-  foo[[NA_real_]]
-  foo[[NA_character_]]
 
   "# $.tbl_df and partial matching/invalid columns"
   foo <- tibble(data = 1:10)
@@ -707,6 +733,10 @@ verify_output("subsetting.txt", {
   "# [<-.tbl_df and overwriting NA"
   df <- tibble(x = rep(NA, 3))
   df[1, "x"] <- 5
+
+  "# [<-.tbl_df and logical subsetting"
+  foo <- tibble(a = 1:3, b = letters[1:3])
+  foo[!is.na(foo)] <- "bogus"
 
   "# [[<-.tbl_df throws an error with OOB assignment"
   df <- tibble(x = 1:2, y = x)
