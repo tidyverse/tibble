@@ -1,19 +1,3 @@
-cnd_signal_if <- function(x) {
-  if (!is.null(x)) {
-    cnd_signal(x)
-  }
-}
-
-check_minimal <- function(name) {
-  cnd_signal_if(cnd_names_non_null(name))
-  cnd_signal_if(cnd_names_non_na(name))
-}
-
-check_minimal_names <- function(x) {
-  check_minimal(names(x))
-  invisible(x)
-}
-
 #' Superseded functions for name repair
 #'
 #' @description

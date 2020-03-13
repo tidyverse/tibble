@@ -95,14 +95,6 @@ test_that("[.tbl_df is careful about names (#1245)", {
       foo[c("w", "x", "y", "z")],
       class = "vctrs_error_subscript_oob"
     )
-    expect_error(
-      foo[as.matrix("x")],
-      "."
-    )
-    expect_error(
-      foo[array("x", dim = c(1, 1, 1))],
-      "."
-    )
   })
 })
 

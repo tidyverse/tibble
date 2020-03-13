@@ -596,6 +596,15 @@ vectbl_recycle_rows <- function(x, n, j, name) {
   abort(error_inconsistent_cols(n, name, size, "Existing data"))
 }
 
+# Dedicated functions for faster subsetting
+set_tibble_class <- function(x, nrow) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- tibble_class
+  x
+}
+
+# External ----------------------------------------------------------------
+
 vectbl_restore <- function(xo, x) {
   .Call(`tibble_restore_impl`, xo, x)
 }

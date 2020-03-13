@@ -103,6 +103,22 @@ validate_tibble <- function(x) {
   x
 }
 
+cnd_signal_if <- function(x) {
+  if (!is.null(x)) {
+    cnd_signal(x)
+  }
+}
+
+check_minimal <- function(name) {
+  cnd_signal_if(cnd_names_non_null(name))
+  cnd_signal_if(cnd_names_non_na(name))
+}
+
+check_minimal_names <- function(x) {
+  check_minimal(names(x))
+  invisible(x)
+}
+
 col_lengths <- function(x) {
   map_int(x, vec_size)
 }
@@ -121,13 +137,7 @@ update_tibble_attrs <- function(x, ...) {
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
 
-# Two dedicated functions for faster subsetting
-set_tibble_class <- function(x, nrow) {
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- tibble_class
-  x
-}
-
+# Two dedicated functions for faster creation
 set_tibble_subclass <- function(x, nrow, subclass) {
   attr(x, "row.names") <- .set_row_names(nrow)
   class(x) <- c(setdiff(subclass, tibble_class), tibble_class)
