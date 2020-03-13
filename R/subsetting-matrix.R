@@ -18,7 +18,10 @@ tbl_subassign_matrix <- function(x, j, value) {
   cells <- matrix_to_cells(j, x)
   col_idx <- cells_to_col_idx(cells)
 
-  x[col_idx] <- map2(x[col_idx], cells[col_idx], `vec_slice<-`, value)
+  for (i in col_idx) {
+    vec_slice(x[[i]], cells[[i]]) <- value
+  }
+
   x
 }
 
