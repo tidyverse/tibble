@@ -155,7 +155,11 @@ NULL
   value <- list(value)
 
   j <- vectbl_as_new_col_index(j, x, value)
-  check_scalar(j)
+
+  # Side effect: check scalar, allow OOB position
+  if (!identical(unname(j), NA_integer_)) {
+    vec_as_location2(j, length(x) + 1L, arg = "j")
+  }
 
   # New columns are added to the end, provide index to avoid matching column
   # names again
@@ -353,7 +357,9 @@ tbl_subset2 <- function(x, j) {
 
     return(.subset2(x, j))
   } else if (is.character(j)) {
-    check_scalar(j)
+    # Side effect: check that j is a scalar, allow invalid column names
+    vec_as_location2(j, length(x), c(names(x), j), arg = "j")
+
     # NA names should give an error
     if (!is.na(j)) {
       # Don't warn when accessing invalid column names
@@ -386,7 +392,10 @@ tbl_subassign <- function(x, i, j, value) {
   } else {
     value <- unclass(value)
   }
-  stopifnot(is_bare_list(value))
+
+  if (!vec_is(value) || !is_bare_list(value)) {
+    abort(error_need_rhs_vector())
+  }
 
   if (is.null(i)) {
     if (is.null(j)) {
@@ -568,19 +577,13 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
-check_scalar <- function(j) {
-  if (!has_length(j, 1)) {
-    abort(error_need_scalar_column_index())
-  }
-}
-
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
 vectbl_recycle_cols <- function(x, n) {
   subclass_col_recycle_errors(
-    vec_recycle(x, n)
+    vec_recycle(x, n, x_arg = "value")
   )
 }
 
@@ -615,8 +618,8 @@ string_to_indices <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_need_scalar_column_index <- function(j) {
-  tibble_error("Must use a scalar in `[[`.")
+error_need_rhs_vector <- function(j) {
+  tibble_error("`value` must be a vector, a bare list or a data frame in `[<-`.")
 }
 
 error_na_column_index <- function(j) {

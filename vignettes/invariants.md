@@ -45,6 +45,11 @@ In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
     library(vctrs)
+    #> 
+    #> Attaching package: 'vctrs'
+    #> The following object is masked from 'package:RProtoBuf':
+    #> 
+    #>     field
     library(tibble)
     new_df <- function() {
       df <- data.frame(n = c(1L, NA, 3L, NA))
@@ -303,7 +308,10 @@ exists.
 <td>
     tbl[[c("n", "c")]]
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `c("n", "c")` has size 2
+    #> but must be size 1.
 
 </td>
 </tr>
@@ -1285,7 +1293,10 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 3 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1301,7 +1312,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 3 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1316,7 +1330,10 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 2 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1332,7 +1349,10 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 0 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1347,7 +1367,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 2 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1934,7 +1957,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:2] <- list(0, 0, 0))
 
-    #> Error: `x` can't be recycled to size 2.
+    #> Error: `value` can't be recycled to size
+    #> 2.
     #> [31mx[39m It must be size 2 or 1, not 3.
 
 </td>
@@ -1952,7 +1976,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:3] <- list(0, 0))
 
-    #> Error: `x` can't be recycled to size 3.
+    #> Error: `value` can't be recycled to size
+    #> 3.
     #> [31mx[39m It must be size 3 or 1, not 2.
 
 </td>
@@ -2403,8 +2428,8 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- mean)
 
-    #> Error in tbl_subassign(x, i, j, value):
-    #> is_bare_list(value) is not TRUE
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>
@@ -2446,7 +2471,8 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
-    #> Error: `x` can't be recycled to size 1.
+    #> Error: `value` can't be recycled to size
+    #> 1.
     #> [31mx[39m It must be size 1, not 12.
 
 </td>

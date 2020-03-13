@@ -6,9 +6,9 @@ The `value` argument to `enframe()` cannot be NULL.
 <error/tibble_error_enframe_has_dim>
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
 
-> error_need_scalar_column_index()
-<error/tibble_error_need_scalar_column_index>
-Must use a scalar in `[[`.
+> error_need_rhs_vector()
+<error/tibble_error_need_rhs_vector>
+`value` must be a vector, a bare list or a data frame in `[<-`.
 
 > error_na_column_index(1:3)
 <error/tibble_error_na_column_index>
