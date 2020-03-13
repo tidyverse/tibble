@@ -319,7 +319,10 @@
 <td>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">tbl[[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"n"</span>, <span class="st">"c"</span>)]]</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must use a scalar in `[[`.</code></pre>
+<pre><code>#&gt; Error: Must extract column with a single
+#&gt; valid subscript.
+#&gt; ✖ The subscript `c("n", "c")` has size 2
+#&gt; but must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1218,7 +1221,8 @@
 <td>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 2.
+<pre><code>#&gt; Error: `value` can't be recycled to size
+#&gt; 2.
 #&gt; ✖ It must be size 2 or 1, not 3.</code></pre>
 </div>
 </td>
@@ -1235,7 +1239,8 @@
 <td>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">0</span>, <span class="dv">0</span>))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
+<pre><code>#&gt; Error: `value` can't be recycled to size
+#&gt; 3.
 #&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
 </div>
 </td>
@@ -1497,8 +1502,8 @@
 <td>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span>mean)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in tbl_subassign(x, i, j, value):
-#&gt; is_bare_list(value) is not TRUE</code></pre>
+<pre><code>#&gt; Error: `value` must be a vector, a bare
+#&gt; list or a data frame in `[&lt;-`.</code></pre>
 </div>
 </td>
 </tr>
@@ -1544,7 +1549,8 @@
 <td>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 1.
+<pre><code>#&gt; Error: `value` can't be recycled to size
+#&gt; 1.
 #&gt; ✖ It must be size 1, not 12.</code></pre>
 </div>
 </td>
