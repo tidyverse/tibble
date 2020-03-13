@@ -2014,8 +2014,11 @@
 <td>
 <div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in if (x == "") y else x: argument
-#&gt; is of length zero</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent sizes, only values of size
+#&gt; one are recycled:
+#&gt; * Size 4: Existing data
+#&gt; * Size 3: Column at position 1</code></pre>
 </div>
 </td>
 </tr>
@@ -2031,8 +2034,11 @@
 <td>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in if (x == "") y else x: argument
-#&gt; is of length zero</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent sizes, only values of size
+#&gt; one are recycled:
+#&gt; * Size 4: Existing data
+#&gt; * Size 5: Column at position 1</code></pre>
 </div>
 </td>
 </tr>
@@ -2161,8 +2167,11 @@
 <td>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in if (x == "") y else x: argument
-#&gt; is of length zero</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent sizes, only values of size
+#&gt; one are recycled:
+#&gt; * Size 4: Existing data
+#&gt; * Size 3: Column at position 1</code></pre>
 </div>
 </td>
 </tr>
@@ -2178,8 +2187,11 @@
 <td>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[,] &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in if (x == "") y else x: argument
-#&gt; is of length zero</code></pre>
+<pre><code>#&gt; Error: Tibble columns must have
+#&gt; consistent sizes, only values of size
+#&gt; one are recycled:
+#&gt; * Size 4: Existing data
+#&gt; * Size 5: Column at position 1</code></pre>
 </div>
 </td>
 </tr>

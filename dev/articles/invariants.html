@@ -1549,9 +1549,8 @@
 <td>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: `value` can't be recycled to size
-#&gt; 1.
-#&gt; ✖ It must be size 1, not 12.</code></pre>
+<pre><code>#&gt; Error: `value` must be a vector, a bare
+#&gt; list or a data frame in `[&lt;-`.</code></pre>
 </div>
 </td>
 </tr>
@@ -1971,8 +1970,8 @@
 <td>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: `value` must be a vector, not
-#&gt; NULL.</code></pre>
+<pre><code>#&gt; Error: `value` must be a vector, a bare
+#&gt; list or a data frame in `[&lt;-`.</code></pre>
 </div>
 </td>
 </tr>
