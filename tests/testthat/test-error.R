@@ -1,8 +1,8 @@
 test_that("has_tibble_arg()", {
   # Need to evaluate has_tibble_arg() in the context of an exported function
   # Need to increase the number of frames because running in testthat
-  expect_true(tibble(has = has_tibble_arg(".name_repair", n_frames = 40))$has)
-  expect_false(tibble(has = has_tibble_arg("dont_have_that_argument", n_frames = 40))$has)
+  expect_true(tibble(has = has_tibble_arg(".name_repair", n_frames = 60))$has)
+  expect_false(tibble(has = has_tibble_arg("dont_have_that_argument", n_frames = 60))$has)
 })
 
 test_that("tibble_error()", {
@@ -22,7 +22,7 @@ test_that("tibble_error()", {
 })
 
 verify_output("error.txt", {
-  invalid_df("must be integer", "col", "Fix this.")
+  invalid_df("must be integer", "col", "\nFix this.")
   invalid_df("must be numeric", c("col1", "col2"))
 
   use_repair(TRUE)
