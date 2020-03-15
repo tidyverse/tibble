@@ -61,7 +61,10 @@ matrix, poly,
 ts, table
 Default: Other inputs are first coerced with base::as.data.frame().
 
-" />
+
+as_tibble_row() converts a vector to a tibble with one row.
+If the input is a list, all elements must have length one.
+as_tibble_column() converts a vector to a tibble with one column." />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -209,6 +212,9 @@ that implements tibble's treatment of <a href='rownames.html'>rownames</a>.</p><
 <li><p>Default: Other inputs are first coerced with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>base::as.data.frame()</a></code>.</p></li>
 </ul>
 
+<p><code>as_tibble_row()</code> converts a vector to a tibble with one row.
+If the input is a list, all elements must have length one.</p>
+<p><code>as_tibble_column()</code> converts a vector to a tibble with one column.</p>
     </div>
 
     <pre class="usage"><span class='fu'>as_tibble</span>(
@@ -248,7 +254,14 @@ that implements tibble's treatment of <a href='rownames.html'>rownames</a>.</p><
 <span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>as_tibble_row</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+)
+
+<span class='fu'>as_tibble_col</span>(<span class='no'>x</span>, <span class='kw'>column_name</span> <span class='kw'>=</span> <span class='st'>"value"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -303,6 +316,10 @@ Read more in <a href='rownames.html'>rownames</a>.</p></li>
       <th>n</th>
       <td><p>Name for count column, default: <code>"n"</code>.</p></td>
     </tr>
+    <tr>
+      <th>column_name</th>
+      <td><p>Name of the column.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="row-names"><a class="anchor" href="#row-names"></a>Row names</h2>
@@ -315,6 +332,13 @@ Read more in <a href='rownames.html'>rownames</a>.</p></li>
 <p>For existing code that relies on the retention of row names, call
 <code><a href='https://rdrr.io/pkg/pkgconfig/man/set_config.html'>pkgconfig::set_config("tibble::rownames" = NA)</a></code> in your script or in your
 package's <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onLoad()</a></code>  function.</p>
+    <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
+
+    
+
+<p>Using <code>as_tibble()</code> for vectors is superseded as of version 3.0.0,
+prefer the more expressive maturing <code>as_tibble_row()</code> and
+<code>as_tibble_col()</code> variants for new code.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> constructs a tibble from individual columns. <code><a href='enframe.html'>enframe()</a></code>
@@ -326,24 +350,39 @@ values. Name repair is implemented using <code><a href='https://rdrr.io/pkg/vctr
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>)
 
-<span class='co'># Prefer enframe() for vectors</span>
-<span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
-#&gt;    name value
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     1
-#&gt; 2     2     2
-#&gt; 3     3     3</div><div class='input'><span class='fu'><a href='enframe.html'>enframe</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
+<span class='fu'>as_tibble_row</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;       a     b
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     1     2</div><div class='input'><span class='fu'>as_tibble_row</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='st'>"three"</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>4</span>:<span class='fl'>5</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   c     d        
+#&gt;   &lt;chr&gt; &lt;list&gt;   
+#&gt; 1 three &lt;int [2]&gt;</div><div class='input'><span class='fu'>as_tibble_row</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; ...1</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;    ...1  ...2  ...3
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     2     3</div><div class='input'>
+<span class='fu'>as_tibble_col</span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
 #&gt;   value
 #&gt;   &lt;int&gt;
 #&gt; 1     1
 #&gt; 2     2
-#&gt; 3     3</div></pre>
+#&gt; 3     3</div><div class='input'><span class='fu'>as_tibble_col</span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='st'>"three"</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>4</span>:<span class='fl'>5</span>)),
+  <span class='kw'>column_name</span> <span class='kw'>=</span> <span class='st'>"data"</span>
+)</div><div class='output co'>#&gt; # A tibble: 2 x 1
+#&gt;   data        
+#&gt;   &lt;named list&gt;
+#&gt; 1 &lt;chr [1]&gt;   
+#&gt; 2 &lt;list [1]&gt;  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#row-names">Row names</a></li>
+      <li><a href="#life-cycle">Life cycle</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
