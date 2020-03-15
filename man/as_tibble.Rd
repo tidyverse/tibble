@@ -96,7 +96,6 @@ For compatibility only, do not use for new code.}
 }
 \description{
 \lifecycle{maturing}
-\lifecycle{superseded}
 
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is

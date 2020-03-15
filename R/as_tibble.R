@@ -2,7 +2,6 @@
 #'
 #' @description
 #' \lifecycle{maturing}
-#' \lifecycle{superseded}
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
@@ -269,8 +268,7 @@ as_tibble.default <- function(x, ...) {
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }
 
-#' Convert a vector to a one-row tibble
-#'
+#' @description
 #' `as_tibble_row()` converts a vector to a tibble with one row.
 #' If the input is a list, all elements must have length one.
 #'
@@ -304,8 +302,7 @@ check_all_lengths_one <- function(x) {
 }
 
 
-#' Convert a vector to a one-column tibble
-#'
+#' @description
 #' `as_tibble_column()` converts a vector to a tibble with one column.
 #'
 #' @param column_name Name of the column.
