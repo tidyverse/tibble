@@ -1465,7 +1465,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>))</a>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb153-2" data-line-number="2"><span class="co">#&gt;   n c         li</span></a>
 <a class="sourceLine" id="cb153-3" data-line-number="3"><span class="co">#&gt; 1 1 5          9</span></a>
 <a class="sourceLine" id="cb153-4" data-line-number="4"><span class="co">#&gt; 2 2 6     10, 11</span></a>
@@ -1473,7 +1473,7 @@
 <a class="sourceLine" id="cb153-6" data-line-number="6"><span class="co">#&gt; 4 4 8       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>))</a>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb154-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb154-3" data-line-number="3"><span class="co">#&gt;   n[,1]  [,2] c[,1]  [,2] li       </span></a>
 <a class="sourceLine" id="cb154-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span></a>
@@ -1485,6 +1485,58 @@
 </tr>
 </tbody></table>
 </div>
+<div id="a-is-null" class="section level3">
+<h3 class="hasAnchor">
+<a href="#a-is-null" class="anchor"></a><code>a</code> is <code>NULL</code>
+</h3>
+<p>Entire columns can be removed. Specifying <code>i</code> is an error.</p>
+<table class="table dftbl"><tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb155-3" data-line-number="3"><span class="co">#&gt;   c     li       </span></a>
+<a class="sourceLine" id="cb155-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb155-5" data-line-number="5"><span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb155-6" data-line-number="6"><span class="co">#&gt; 2 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb155-7" data-line-number="7"><span class="co">#&gt; 3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb155-8" data-line-number="8"><span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb156-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 1</span></a>
+<a class="sourceLine" id="cb156-3" data-line-number="3"><span class="co">#&gt;       n</span></a>
+<a class="sourceLine" id="cb156-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb156-5" data-line-number="5"><span class="co">#&gt; 1     1</span></a>
+<a class="sourceLine" id="cb156-6" data-line-number="6"><span class="co">#&gt; 2    NA</span></a>
+<a class="sourceLine" id="cb156-7" data-line-number="7"><span class="co">#&gt; 3     3</span></a>
+<a class="sourceLine" id="cb156-8" data-line-number="8"><span class="co">#&gt; 4    NA</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
+#&gt; replacement has length zero</code></pre>
+</div>
+</td>
+<td>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
+<div class="error">
+<pre><code>#&gt; Error: `value` must be a vector, a bare
+#&gt; list or a data frame in `[&lt;-`.</code></pre>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
 <div id="a-is-not-a-vector" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-not-a-vector" class="anchor"></a><code>a</code> is not a vector</h3>
@@ -1492,7 +1544,7 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>] &lt;-<span class="st"> </span>mean)</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>] &lt;-<span class="st"> </span>mean)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in rep(value, length.out = n):
 #&gt; attempt to replicate an object of type
@@ -1500,16 +1552,16 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span>mean)</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span>mean)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `value` must be a vector, a bare
-#&gt; list or a data frame in `[&lt;-`.</code></pre>
+#&gt; list, a data frame or NULL in `[&lt;-`.</code></pre>
 </div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 1, value = structure(list(coefficients
@@ -1547,10 +1599,10 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `value` must be a vector, a bare
-#&gt; list or a data frame in `[&lt;-`.</code></pre>
+#&gt; list, a data frame or NULL in `[&lt;-`.</code></pre>
 </div>
 </td>
 </tr>
@@ -1568,28 +1620,28 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb167-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb167-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb167-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb167-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb167-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb173-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb173-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb173-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb173-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb168-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb168-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb168-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb168-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb168-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb174-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb174-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb174-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb174-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1599,33 +1651,33 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb169-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb169-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb169-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb169-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb169-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb169-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb169-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb175-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb175-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb175-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb175-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(tbl<span class="op">$</span>n[<span class="dv">1</span>], tbl<span class="op">$</span>c[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], tbl<span class="op">$</span>li[<span class="dv">1</span>]))</a>
-<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb170-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb170-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb170-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb170-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb170-7" data-line-number="7"><span class="co">#&gt; 3     1 f     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb170-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(tbl<span class="op">$</span>n[<span class="dv">1</span>], tbl<span class="op">$</span>c[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], tbl<span class="op">$</span>li[<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb176-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb176-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb176-7" data-line-number="7"><span class="co">#&gt; 3     1 f     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb176-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 2:4,
 #&gt; , value = structure(list(n = c(1L, :
@@ -1633,7 +1685,7 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `value` can't be recycled to size
 #&gt; 3.
@@ -1648,47 +1700,47 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
-<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb175-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb175-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb175-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb175-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb175-9" data-line-number="9"><span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb181-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb181-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb181-9" data-line-number="9"><span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="co">#&gt; # A tibble: 7 x 3</span></a>
-<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb176-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb176-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb176-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb176-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb176-9" data-line-number="9"><span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb176-10" data-line-number="10"><span class="co">#&gt; 6     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb176-11" data-line-number="11"><span class="co">#&gt; 7     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2"><span class="co">#&gt; # A tibble: 7 x 3</span></a>
+<a class="sourceLine" id="cb182-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb182-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb182-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb182-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb182-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb182-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb182-9" data-line-number="9"><span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb182-10" data-line-number="10"><span class="co">#&gt; 6     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb182-11" data-line-number="11"><span class="co">#&gt; 7     1 e     &lt;dbl [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">6</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb177-2" data-line-number="2"><span class="co">#&gt;    n    c         li</span></a>
-<a class="sourceLine" id="cb177-3" data-line-number="3"><span class="co">#&gt; 1  1    e          9</span></a>
-<a class="sourceLine" id="cb177-4" data-line-number="4"><span class="co">#&gt; 2 NA    f     10, 11</span></a>
-<a class="sourceLine" id="cb177-5" data-line-number="5"><span class="co">#&gt; 3  3    g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb177-6" data-line-number="6"><span class="co">#&gt; 4 NA    h       text</span></a>
-<a class="sourceLine" id="cb177-7" data-line-number="7"><span class="co">#&gt; 5 NA &lt;NA&gt;       NULL</span></a>
-<a class="sourceLine" id="cb177-8" data-line-number="8"><span class="co">#&gt; 6  1    e          9</span></a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">6</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="co">#&gt;    n    c         li</span></a>
+<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="co">#&gt; 1  1    e          9</span></a>
+<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="co">#&gt; 2 NA    f     10, 11</span></a>
+<a class="sourceLine" id="cb183-5" data-line-number="5"><span class="co">#&gt; 3  3    g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb183-6" data-line-number="6"><span class="co">#&gt; 4 NA    h       text</span></a>
+<a class="sourceLine" id="cb183-7" data-line-number="7"><span class="co">#&gt; 5 NA &lt;NA&gt;       NULL</span></a>
+<a class="sourceLine" id="cb183-8" data-line-number="8"><span class="co">#&gt; 6  1    e          9</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">6</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">6</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't assign row 6 in a tibble
 #&gt; with 4 rows.</code></pre>
@@ -1697,15 +1749,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb180-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
-<a class="sourceLine" id="cb180-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
-<a class="sourceLine" id="cb180-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
-<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
-<a class="sourceLine" id="cb180-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
+<a class="sourceLine" id="cb186-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
+<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
+<a class="sourceLine" id="cb186-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
+<a class="sourceLine" id="cb186-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">5</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate elements that don't
 #&gt; exist.
@@ -1716,15 +1768,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
-<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
-<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
-<a class="sourceLine" id="cb183-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
-<a class="sourceLine" id="cb183-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
+<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
+<a class="sourceLine" id="cb189-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
+<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
+<a class="sourceLine" id="cb189-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate elements that don't
 #&gt; exist.
@@ -1735,15 +1787,15 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span><span class="dv">6</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
-<a class="sourceLine" id="cb186-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
-<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
-<a class="sourceLine" id="cb186-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
-<a class="sourceLine" id="cb186-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="op">-</span><span class="dv">6</span>, ] &lt;-<span class="st"> </span>df[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb192-2" data-line-number="2"><span class="co">#&gt;   n c li</span></a>
+<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="co">#&gt; 1 1 e  9</span></a>
+<a class="sourceLine" id="cb192-4" data-line-number="4"><span class="co">#&gt; 2 1 e  9</span></a>
+<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="co">#&gt; 3 1 e  9</span></a>
+<a class="sourceLine" id="cb192-6" data-line-number="6"><span class="co">#&gt; 4 1 e  9</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">6</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="op">-</span><span class="dv">6</span>, ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate elements that don't
 #&gt; exist.
@@ -1758,14 +1810,14 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb189-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb189-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb189-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb189-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), ] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span>, ])</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb195-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb195-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb195-7" data-line-number="7"><span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb195-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -1781,15 +1833,15 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="co">#&gt;      n c         li</span></a>
-<a class="sourceLine" id="cb190-3" data-line-number="3"><span class="co">#&gt; 1    1 e          9</span></a>
-<a class="sourceLine" id="cb190-4" data-line-number="4"><span class="co">#&gt; 2    e f     10, 11</span></a>
-<a class="sourceLine" id="cb190-5" data-line-number="5"><span class="co">#&gt; 3    f g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb190-6" data-line-number="6"><span class="co">#&gt; 4 &lt;NA&gt; h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb196-2" data-line-number="2"><span class="co">#&gt;      n c         li</span></a>
+<a class="sourceLine" id="cb196-3" data-line-number="3"><span class="co">#&gt; 1    1 e          9</span></a>
+<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="co">#&gt; 2    e f     10, 11</span></a>
+<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="co">#&gt; 3    f g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="co">#&gt; 4 &lt;NA&gt; h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: No common type for `value`
 #&gt; &lt;character&gt; and `x` &lt;integer&gt;.</code></pre>
@@ -1798,7 +1850,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">3</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">3</span>])</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2:3, 2, value = list(9, 10:11)):
@@ -1812,7 +1864,7 @@
 #&gt; 4 NA h       text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">3</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">3</span>])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: No common type for `value` &lt;list&gt;
 #&gt; and `x` &lt;character&gt;.</code></pre>
@@ -1821,7 +1873,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>df2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>df2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2:3, 3, value = structure(list(n =
@@ -1835,7 +1887,7 @@
 #&gt; 4 NA h text</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>tbl2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>tbl2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: No common type for `value`
 #&gt; &lt;tbl_df&lt;
@@ -1848,7 +1900,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">with_df2</span>(df2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>df2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">with_df2</span>(df2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>df2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in matrix(value, n, p): data
 #&gt; length [8] is not a sub-multiple or
@@ -1861,7 +1913,7 @@
 #&gt; 4   NA    h  text   0   0   0   1</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">with_tbl2</span>(tbl2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>tbl2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">with_tbl2</span>(tbl2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>tbl2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">2</span>])</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: No common type for `value`
 #&gt; &lt;double[,4]&gt; and `x` &lt;tbl_df&lt;
@@ -1876,15 +1928,15 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">with_tbl2</span>(tbl2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb208-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb208-3" data-line-number="3"><span class="co">#&gt;    tb$n $c    $li      m[,1]  [,2]  [,3]</span></a>
-<a class="sourceLine" id="cb208-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb208-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1…     1     0     0</span></a>
-<a class="sourceLine" id="cb208-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2…     1     1     1</span></a>
-<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3…    NA    NA    NA</span></a>
-<a class="sourceLine" id="cb208-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1…     0     0     0</span></a>
-<a class="sourceLine" id="cb208-9" data-line-number="9"><span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl2</span>(tbl2[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>tbl[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb214-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb214-3" data-line-number="3"><span class="co">#&gt;    tb$n $c    $li      m[,1]  [,2]  [,3]</span></a>
+<a class="sourceLine" id="cb214-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb214-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1…     1     0     0</span></a>
+<a class="sourceLine" id="cb214-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2…     1     1     1</span></a>
+<a class="sourceLine" id="cb214-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3…    NA    NA    NA</span></a>
+<a class="sourceLine" id="cb214-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1…     0     0     0</span></a>
+<a class="sourceLine" id="cb214-9" data-line-number="9"><span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1892,15 +1944,15 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">with_df</span>({df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA</span>; df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a>
-<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="co">#&gt;    n c         li  x</span></a>
-<a class="sourceLine" id="cb209-3" data-line-number="3"><span class="co">#&gt; 1  1 e          9 NA</span></a>
-<a class="sourceLine" id="cb209-4" data-line-number="4"><span class="co">#&gt; 2 NA f     10, 11  3</span></a>
-<a class="sourceLine" id="cb209-5" data-line-number="5"><span class="co">#&gt; 3  3 g 12, 13, 14  2</span></a>
-<a class="sourceLine" id="cb209-6" data-line-number="6"><span class="co">#&gt; 4 NA h       text NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">with_df</span>({df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA</span>; df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="co">#&gt;    n c         li  x</span></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="co">#&gt; 1  1 e          9 NA</span></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="co">#&gt; 2 NA f     10, 11  3</span></a>
+<a class="sourceLine" id="cb215-5" data-line-number="5"><span class="co">#&gt; 3  3 g 12, 13, 14  2</span></a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="co">#&gt; 4 NA h       text NA</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">with_tbl</span>({tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA</span>; tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">with_tbl</span>({tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA</span>; tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Lossy cast from `value` &lt;integer&gt;
 #&gt; to `x` &lt;logical&gt;.
@@ -1912,14 +1964,14 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">with_tbl</span>({tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA_integer_</span>; tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a>
-<a class="sourceLine" id="cb212-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
-<a class="sourceLine" id="cb212-3" data-line-number="3"><span class="co">#&gt;       n c     li            x</span></a>
-<a class="sourceLine" id="cb212-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb212-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span></a>
-<a class="sourceLine" id="cb212-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     3</span></a>
-<a class="sourceLine" id="cb212-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span></a>
-<a class="sourceLine" id="cb212-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_tbl</span>({tbl<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NA_integer_</span>; tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span>})</a>
+<a class="sourceLine" id="cb218-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
+<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="co">#&gt;       n c     li            x</span></a>
+<a class="sourceLine" id="cb218-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb218-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span></a>
+<a class="sourceLine" id="cb218-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     3</span></a>
+<a class="sourceLine" id="cb218-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span></a>
+<a class="sourceLine" id="cb218-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></a></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1927,48 +1979,48 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb213-2" data-line-number="2"><span class="co">#&gt;    n c         li</span></a>
-<a class="sourceLine" id="cb213-3" data-line-number="3"><span class="co">#&gt; 1  1 e          9</span></a>
-<a class="sourceLine" id="cb213-4" data-line-number="4"><span class="co">#&gt; 2  1 f     10, 11</span></a>
-<a class="sourceLine" id="cb213-5" data-line-number="5"><span class="co">#&gt; 3  1 g 12, 13, 14</span></a>
-<a class="sourceLine" id="cb213-6" data-line-number="6"><span class="co">#&gt; 4 NA h       text</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="co">#&gt;    n c         li</span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="co">#&gt; 1  1 e          9</span></a>
+<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="co">#&gt; 2  1 f     10, 11</span></a>
+<a class="sourceLine" id="cb219-5" data-line-number="5"><span class="co">#&gt; 3  1 g 12, 13, 14</span></a>
+<a class="sourceLine" id="cb219-6" data-line-number="6"><span class="co">#&gt; 4 NA h       text</span></a></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb214-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb214-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb214-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb214-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb214-6" data-line-number="6"><span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb214-7" data-line-number="7"><span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb214-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
-</td>
-<td>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
-<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="co">#&gt;       n c     li            x</span></a>
-<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb215-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span></a>
-<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     1</span></a>
-<a class="sourceLine" id="cb215-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span></a>
-<a class="sourceLine" id="cb215-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb220-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb220-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb220-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb220-6" data-line-number="6"><span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb220-7" data-line-number="7"><span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb220-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"x"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="co">#&gt;       n c     li            x</span></a>
+<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb221-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span></a>
+<a class="sourceLine" id="cb221-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     1</span></a>
+<a class="sourceLine" id="cb221-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span></a>
+<a class="sourceLine" id="cb221-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></a></code></pre></div>
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="kw">with_df</span>(df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
 #&gt; replacement has length zero</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span>)</a></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `value` must be a vector, a bare
 #&gt; list or a data frame in `[&lt;-`.</code></pre>
@@ -1981,15 +2033,15 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(0L))</a>
-<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
-<a class="sourceLine" id="cb220-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
-<a class="sourceLine" id="cb220-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
-<a class="sourceLine" id="cb220-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
-<a class="sourceLine" id="cb220-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
-<a class="sourceLine" id="cb220-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
-<a class="sourceLine" id="cb220-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
-<a class="sourceLine" id="cb220-9" data-line-number="9"><span class="co">#&gt; 5     0 &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">with_tbl</span>(tbl[<span class="dv">5</span>, <span class="st">"n"</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(0L))</a>
+<a class="sourceLine" id="cb226-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
+<a class="sourceLine" id="cb226-3" data-line-number="3"><span class="co">#&gt;       n c     li       </span></a>
+<a class="sourceLine" id="cb226-4" data-line-number="4"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb226-5" data-line-number="5"><span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></a>
+<a class="sourceLine" id="cb226-6" data-line-number="6"><span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb226-7" data-line-number="7"><span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb226-8" data-line-number="8"><span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></a>
+<a class="sourceLine" id="cb226-9" data-line-number="9"><span class="co">#&gt; 5     0 &lt;NA&gt;  &lt;NULL&gt;</span></a></code></pre></div>
 </td>
 </tr></tbody></table>
 </div>
