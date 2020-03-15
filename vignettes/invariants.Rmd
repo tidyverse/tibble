@@ -593,7 +593,18 @@ This consistently creates matrix columns, unlike data frames, which creates matr
 ```{r bracket-assign-matrix, dftbl = TRUE}
 with_df(df[1] <- matrix(1:8, ncol = 2))
 
-with_df(df[c(1, 2)] <- matrix(1:8, ncol = 2))
+with_df(df[1:2] <- matrix(1:8, ncol = 2))
+```
+
+### `a` is `NULL`
+
+Entire columns can be removed.
+Specifying `i` is an error.
+
+```{r bracket-assign-null, dftbl = TRUE}
+with_df(df[1] <- NULL)
+with_df(df[, 2:3] <- NULL)
+with_df(df[1, 2:3] <- NULL)
 ```
 
 ### `a` is not a vector

@@ -391,7 +391,12 @@ tbl_subset_row <- function(x, i) {
 
 tbl_subassign <- function(x, i, j, value) {
   if (!vec_is(value)) {
-    abort(error_need_rhs_vector())
+    if (!is_null(i)) {
+      abort(error_need_rhs_vector())
+    }
+    if (!is_null(value)) {
+      abort(error_need_rhs_vector_or_null())
+    }
   }
 
   if (is_null(value) || is_atomic(value)) {
@@ -401,7 +406,7 @@ tbl_subassign <- function(x, i, j, value) {
   }
 
   if (!is_bare_list(value)) {
-    abort(error_need_rhs_vector())
+    abort(error_need_rhs_vector_or_null())
   }
 
   if (is.null(i)) {
@@ -623,6 +628,10 @@ string_to_indices <- function(x) {
 
 error_need_rhs_vector <- function(j) {
   tibble_error("`value` must be a vector, a bare list or a data frame in `[<-`.")
+}
+
+error_need_rhs_vector_or_null <- function(j) {
+  tibble_error("`value` must be a vector, a bare list, a data frame or NULL in `[<-`.")
 }
 
 error_na_column_index <- function(j) {
