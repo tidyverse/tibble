@@ -40,70 +40,10 @@ test_that("format_v for list", {
   expect_equal(format_v(list(1:3, list(4:5))), "[<1, 2, 3>, [<4, 5>]]")
 })
 
-test_that("glimpse output matches known output", {
-  skip_on_non_utf8_locale()
-
-  expect_output_file_rel(
-    glimpse(as_tibble(mtcars), width = 70L),
-    "glimpse/mtcars-70.txt"
-  )
-
-  expect_output_file_rel(
-    glimpse(as_tibble(iris), width = 70L),
-    "glimpse/iris-70.txt"
-  )
-
-  expect_output_file_rel(
-    glimpse(as_tibble(iris[integer()]), width = 70L),
-    "glimpse/iris-empty-70.txt"
-  )
-
-  expect_output_file_rel(
-    glimpse(tibble("mean(x)" = 5, "var(x)" = 3), width = 28),
-    "glimpse/non-syntactic.txt"
-  )
-
-  expect_output_file_rel(
-    glimpse(as_tibble(df_all), width = 70L),
-    "glimpse/all-70.txt"
-  )
-
-  withr::with_options(
-    list(tibble.width = 50),
-    expect_output_file_rel(
-      glimpse(as_tibble(df_all)),
-      "glimpse/all-50.txt"
-    )
-  )
-
-  withr::with_options(
-    list(tibble.width = 35),
-    expect_output_file_rel(
-      glimpse(as_tibble(df_all)),
-      "glimpse/all-35.txt"
-    )
-  )
-
-  expect_output_file_rel(
-    glimpse(5),
-    "glimpse/5.txt"
-  )
-})
-
 test_that("glimpse(width = Inf) raises legible error", {
   expect_tibble_error(
     glimpse(mtcars, width = Inf),
     error_glimpse_infinite_width()
-  )
-})
-
-test_that("glimpse works for structures with unknown rows", {
-  skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
-  iris2 <- as_unknown_rows(iris)
-
-  expect_output_file(
-    glimpse(iris2, width = 70L),
-    output_file("glimpse/iris-70-na-nrow.txt")
   )
 })
 
@@ -118,26 +58,53 @@ test_that("glimpse calls tbl_sum() (#550)", {
   )
 })
 
-test_that("glimpse works on nested data (#486)", {
+test_that("glimpse output matches known output", {
   skip_on_non_utf8_locale()
 
-  nested_iris_df <- tibble(
-    Species = unique(iris$Species),
-    data = unname(split(iris, iris$Species))
-  )
+  verify_output("glimpse.txt", unicode = TRUE, {
+    glimpse(as_tibble(mtcars), width = 70L)
 
-  nested_iris_tbl <- tibble(
-    Species = unique(iris$Species),
-    data = map(unname(split(iris, iris$Species)), as_tibble)
-  )
+    glimpse(as_tibble(iris), width = 70L)
 
-  expect_output_file_rel(
-    glimpse(nested_iris_df, width = 70L),
-    "glimpse/iris-nested-df-70.txt"
-  )
+    "No columns"
+    glimpse(as_tibble(iris[integer()]), width = 70L)
 
-  expect_output_file_rel(
-    glimpse(nested_iris_tbl, width = 70L),
-    "glimpse/iris-nested-tbl-70.txt"
-  )
+    "Non-syntactic names"
+    df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
+    glimpse(df, width = 28)
+
+    glimpse(as_tibble(df_all), width = 70L)
+
+    "options(tibble.width = 50)"
+    withr::with_options(
+      list(tibble.width = 50),
+      glimpse(as_tibble(df_all))
+    )
+
+    "options(tibble.width = 35)"
+    withr::with_options(
+      list(tibble.width = 35),
+      glimpse(as_tibble(df_all))
+    )
+
+    "non-tibble"
+    glimpse(5)
+
+    iris2 <- as_unknown_rows(iris)
+    glimpse(iris2, width = 70L)
+
+    nested_iris_df <- tibble(
+      Species = unique(iris$Species),
+      data = unname(split(iris, iris$Species))
+    )
+
+    nested_iris_tbl <- tibble(
+      Species = unique(iris$Species),
+      data = map(unname(split(iris, iris$Species)), as_tibble)
+    )
+
+    glimpse(nested_iris_df, width = 70L)
+
+    glimpse(nested_iris_tbl, width = 70L)
+  })
 })

@@ -246,7 +246,7 @@ format_extra_vars <- function(extra_cols) {
   if (is.na(extra_cols[1])) return("")
 
   if (anyNA(extra_cols)) {
-    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], symbol$ellipsis)
   }
 
   paste0(": ", collapse(extra_cols))
@@ -259,7 +259,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0(cli::symbol$ellipsis, " ", x)
+    paste0(symbol$ellipsis, " ", x)
   } else {
     character()
   }
@@ -309,23 +309,6 @@ format_knitr_body <- function(x) {
   knitr::knit_print(x)
 }
 
-format_factor <- function(x) {
-  format_character(as.character(x))
-}
-
-format_character <- function(x) {
-  res <- quote_escaped(x)
-  res[is.na(x)] <- "<NA>"
-  res
-}
-
-quote_escaped <- function(x) {
-  res <- encodeString(x, quote = '"')
-  plain <- which(res == paste0('"', x, '"'))
-  res[plain] <- x[plain]
-  res
-}
-
 big_mark <- function(x, ...) {
   # The thousand separator,
   # "," unless it's used for the decimal point, in which case "."
@@ -333,32 +316,6 @@ big_mark <- function(x, ...) {
   ret <- formatC(x, big.mark = mark, format = "d", ...)
   ret[is.na(x)] <- "??"
   ret
-}
-
-tibble_width <- function(width) {
-  if (!is_null(width)) {
-    return(width)
-  }
-
-  width <- tibble_opt("width")
-  if (!is_null(width)) {
-    return(width)
-  }
-
-  getOption("width")
-}
-
-tibble_glimpse_width <- function(width) {
-  if (!is_null(width)) {
-    return(width)
-  }
-
-  width <- tibble_opt("width")
-  if (!is_null(width) && is.finite(width)) {
-    return(width)
-  }
-
-  getOption("width")
 }
 
 mult_sign <- function() {
@@ -378,3 +335,20 @@ quote_n.default <- function(x) as.character(x)
 quote_n.character <- function(x) tick(x)
 
 collapse <- function(x) paste(x, collapse = ", ")
+
+# wrap --------------------------------------------------------------------
+
+NBSP <- "\U00A0"
+
+wrap <- function(..., indent = 0, prefix = "", width) {
+  x <- paste0(..., collapse = "")
+  wrapped <- strwrap2(x, width - nchar_width(prefix), indent)
+  wrapped <- paste0(prefix, wrapped)
+  wrapped <- gsub(NBSP, " ", wrapped)
+
+  paste0(wrapped, collapse = "\n")
+}
+
+strwrap2 <- function(x, width, indent) {
+  fansi::strwrap_ctl(x, width = max(width, 0), indent = indent, exdent = indent + 2)
+}

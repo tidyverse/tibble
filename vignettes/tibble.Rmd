@@ -47,11 +47,14 @@ sgr_to_html <- identity
 sgr_to_html <- fansi::sgr_to_html
 ```
 
-Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).
+Tibbles are a modern take on data frames.
+They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e.
+converting character vectors to factors).
 
 ## Creating
 
-`tibble()` is a nice way to create data frames. It encapsulates best practices for data frames:
+`tibble()` is a nice way to create data frames.
+It encapsulates best practices for data frames:
 
   * It never changes an input's type (i.e., no more `stringsAsFactors = FALSE`!).
     
@@ -81,16 +84,17 @@ Tibbles are a modern take on data frames. They keep the features that have stood
     tibble(x = 1:5, y = x ^ 2)
     ```
 
-  * It never uses `row.names()`. The whole point of tidy data is to 
-    store variables in a consistent way. So it never stores a variable as 
-    special attribute.
+  * It never uses `row.names()`.
+    The whole point of tidy data is to store variables in a consistent way.
+    So it never stores a variable as special attribute.
   
-  * It only recycles vectors of length 1. This is because recycling vectors of greater lengths 
-    is a frequent source of bugs.
+  * It only recycles vectors of length 1.
+    This is because recycling vectors of greater lengths is a frequent source of bugs.
 
 ## Coercion
 
-To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into tibbles. Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods, and in fact, it's precisely what `as.data.frame()` does, but it's similar to `do.call(cbind, lapply(x, data.frame))` - i.e. it coerces each component to a data frame and then `cbinds()` them all together. 
+To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into tibbles.
+Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods, and in fact, it's precisely what `as.data.frame()` does, but it's similar to `do.call(cbind, lapply(x, data.frame))` - i.e. it coerces each component to a data frame and then `cbinds()` them all together.
 
 `as_tibble()` has been written with an eye for performance:
 
@@ -119,7 +123,8 @@ There are three key differences between tibbles and data frames: printing, subse
 
 ### Printing
 
-When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
+When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen.
+It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
     
 ```{r}
 tibble(x = -5:1000)
@@ -127,16 +132,16 @@ tibble(x = -5:1000)
 
 You can control the default appearance with options:
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: if there are more 
-  than `n` rows, print only the first `m` rows. Use 
-  `options(tibble.print_max = Inf)` to always show all rows.
+* `options(tibble.print_max = n, tibble.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
+  Use `options(tibble.print_max = Inf)` to always show all rows.
 
-* `options(tibble.width = Inf)` will always print all columns, regardless
-   of the width of the screen.
+* `options(tibble.width = Inf)` will always print all columns, regardless of the width of the screen.
 
 ### Subsetting
 
-Tibbles are quite strict about subsetting. `[` always returns another tibble. Contrast this with a data frame: sometimes `[` returns a data frame and sometimes it just returns a vector:
+Tibbles are quite strict about subsetting.
+`[` always returns another tibble.
+Contrast this with a data frame: sometimes `[` returns a data frame and sometimes it just returns a vector:
     
 ```{r}
 df1 <- data.frame(x = 1:3, y = 3:1)
@@ -155,7 +160,8 @@ class(df2[[1]])
 class(df2$x)
 ```
 
-Tibbles are also stricter with `$`. Tibbles never do partial matching, and will throw a warning and return `NULL` if the column does not exist:
+Tibbles are also stricter with `$`.
+Tibbles never do partial matching, and will throw a warning and return `NULL` if the column does not exist:
 
 ```{r, error = TRUE}
 df <- data.frame(abc = 1)
@@ -175,7 +181,9 @@ tibble(a = 1:3)[, "a", drop = TRUE]
 
 ### Recycling
 
-When constructing a tibble, only values of length 1 are recycled.  The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error.  This also extends to tibbles with *zero* rows, which is sometimes important for programming:
+When constructing a tibble, only values of length 1 are recycled.
+The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error.
+This also extends to tibbles with *zero* rows, which is sometimes important for programming:
 
 ```{r, error = TRUE}
 tibble(a = 1, b = 1:3)

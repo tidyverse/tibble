@@ -6,49 +6,17 @@ The `value` argument to `enframe()` cannot be NULL.
 <error/tibble_error_enframe_has_dim>
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
 
-> error_need_scalar_column_index()
-<error/tibble_error_need_scalar_column_index>
-Must use a scalar in `[[`.
+> error_need_rhs_vector()
+<error/tibble_error_need_rhs_vector>
+`value` must be a vector, a bare list or a data frame in `[<-`.
+
+> error_need_rhs_vector_or_null()
+<error/tibble_error_need_rhs_vector_or_null>
+`value` must be a vector, a bare list, a data frame or NULL in `[<-`.
 
 > error_na_column_index(1:3)
 <error/tibble_error_na_column_index>
 Can't use NA as column index with `[` at positions 1, 2, 3.
-
-> error_unsupported_column_index()
-<error/tibble_error_unsupported_column_index>
-Must subset columns with an index vector.
-
-> error_large_column_index(3, 4:5)
-<error/tibble_error_large_column_index>
-Cannot subset columns 4, 5 in tibble with 3 columns.
-
-> error_large_column_index(3, 5)
-<error/tibble_error_large_column_index>
-Cannot subset column 5 in tibble with 3 columns.
-
-> error_large_column_index(1, 4:5)
-<error/tibble_error_large_column_index>
-Cannot subset columns 4, 5 in tibble with 1 column.
-
-> error_large_column_index(1, 5)
-<error/tibble_error_large_column_index>
-Cannot subset column 5 in tibble with 1 column.
-
-> error_small_column_index(3, -(4:5))
-<error/tibble_error_small_column_index>
-Cannot exclude columns 4, 5 in tibble with 3 columns.
-
-> error_small_column_index(3, -5)
-<error/tibble_error_small_column_index>
-Cannot exclude column 5 in tibble with 3 columns.
-
-> error_small_column_index(1, -(4:5))
-<error/tibble_error_small_column_index>
-Cannot exclude columns 4, 5 in tibble with 1 column.
-
-> error_small_column_index(1, -5)
-<error/tibble_error_small_column_index>
-Cannot exclude column 5 in tibble with 1 column.
 
 > error_unknown_column_names("a")
 <error/tibble_error_unknown_column_names>
@@ -78,9 +46,13 @@ Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`.
 <error/tibble_error_assign_columns_non_na_only>
 Can't use NA as column index in a tibble for assignment.
 
+> error_subset_columns_non_missing_only()
+<error/tibble_error_subset_columns_non_missing_only>
+Column index is required for tibbles in `[[`.
+
 > error_assign_columns_non_missing_only()
 <error/tibble_error_assign_columns_non_missing_only>
-Column index is required for tibbles in `[[`.
+Column index is required for tibbles in `[[<-`.
 
 > error_new_columns_at_end_only(5, 7:8)
 <error/tibble_error_new_columns_at_end_only>
@@ -211,20 +183,6 @@ Use .name_repair to specify repair.
 > error_column_names_must_be_unique(LETTERS, repair = TRUE)
 <error/tibble_error_column_names_must_be_unique>
 Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_syntactic("a", repair = FALSE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column name `a` must be syntactic.
-
-> error_column_names_must_be_syntactic(letters[2:3], repair = TRUE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column names `b`, `c` must be syntactic.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_syntactic(LETTERS, repair = TRUE)
-<error/tibble_error_column_names_must_be_syntactic>
-Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must be syntactic.
 Use .name_repair to specify repair.
 
 > error_column_must_be_vector("a", 3, "environment")

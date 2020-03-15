@@ -117,3 +117,34 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   attr(x, "names") <- as.character(value)
   x
 }
+
+cnd_names_non_null <- function(name) {
+  if (is.null(name)) {
+    error_names_must_be_non_null()
+  } else {
+    invisible()
+  }
+}
+
+cnd_names_non_na <- function(name) {
+  bad_name <- which(is.na(name))
+  if (has_length(bad_name)) {
+    error_column_must_be_named(bad_name)
+  } else {
+    invisible()
+  }
+}
+
+# Errors ------------------------------------------------------------------
+
+error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
+  tibble_error(paste0("The `names` must not be `NULL`.", use_repair(repair)))
+}
+
+error_names_must_have_length <- function(length, n) {
+  tibble_error(
+    paste0("The `names` must have length ", n, ", not ", length, "."),
+    expected = n,
+    actual = length
+  )
+}

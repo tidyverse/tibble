@@ -258,6 +258,15 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   new_tibble(output, nrow = first_size %||% 0L)
 }
 
+check_valid_col <- function(x, name, pos) {
+  if (name == "") {
+    ret <- check_valid_cols(list(x), pos = pos)
+  } else {
+    ret <- check_valid_cols(set_names(list(x), name))
+  }
+  invisible(ret[[1]])
+}
+
 add_to_env2 <- function(x, given_name, name = given_name, env) {
   if (is.data.frame(x) && given_name == "") {
     imap(x, add_to_env, env)
@@ -281,4 +290,19 @@ splice_dfs <- function(x) {
 
   x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
   vec_c(!!!x, .name_spec = "{inner}")
+}
+
+# Errors ------------------------------------------------------------------
+
+error_tibble_row_size_one <- function(j, name, size) {
+  if (name != "") {
+    desc <- tick(name)
+  } else {
+    desc <- paste0("at position ", j)
+  }
+
+  tibble_error(bullets(
+    "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
+  ))
 }

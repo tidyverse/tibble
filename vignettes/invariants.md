@@ -303,7 +303,10 @@ exists.
 <td>
     tbl[[c("n", "c")]]
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `c("n", "c")` has size 2
+    #> but must be size 1.
 
 </td>
 </tr>
@@ -1285,7 +1288,10 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 3 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1301,7 +1307,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 3 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1316,7 +1325,10 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 2 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1332,7 +1344,10 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 0 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1347,7 +1362,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error: Must use a scalar in `[[`.
+    #> Error: Must extract element with a
+    #> single valid subscript.
+    #> [31mx[39m The subscript `j` has size 2 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1519,7 +1537,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent sizes, only values of size
     #> one are recycled:
     #> * Size 4: Existing data
-    #> * Size 3: Column `n`
+    #> * Size 3: Column at position 1
 
 </td>
 </tr>
@@ -1540,7 +1558,7 @@ Recycling also works for list, data frame, and matrix columns.
     #> consistent sizes, only values of size
     #> one are recycled:
     #> * Size 4: Existing data
-    #> * Size 2: Column `n`
+    #> * Size 2: Column at position 1
 
 </td>
 </tr>
@@ -1934,7 +1952,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:2] <- list(0, 0, 0))
 
-    #> Error: `x` can't be recycled to size 2.
+    #> Error: `value` can't be recycled to size
+    #> 2.
     #> [31mx[39m It must be size 2 or 1, not 3.
 
 </td>
@@ -1952,7 +1971,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:3] <- list(0, 0))
 
-    #> Error: `x` can't be recycled to size 3.
+    #> Error: `value` can't be recycled to size
+    #> 3.
     #> [31mx[39m It must be size 3 or 1, not 2.
 
 </td>
@@ -2361,7 +2381,7 @@ column.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[c(1, 2)] <- matrix(1:8, ncol = 2))
+    with_df(df[1:2] <- matrix(1:8, ncol = 2))
     #>   n c         li
     #> 1 1 5          9
     #> 2 2 6     10, 11
@@ -2370,7 +2390,7 @@ column.
 
 </td>
 <td>
-    with_tbl(tbl[c(1, 2)] <- matrix(1:8, ncol = 2))
+    with_tbl(tbl[1:2] <- matrix(1:8, ncol = 2))
     #> # A tibble: 4 x 3
     #>   n[,1]  [,2] c[,1]  [,2] li       
     #>   <int> <int> <int> <int> <list>   
@@ -2378,6 +2398,60 @@ column.
     #> 2     2     6     2     6 <int [2]>
     #> 3     3     7     3     7 <int [3]>
     #> 4     4     8     4     8 <chr [1]>
+
+</td>
+</tr>
+</tbody>
+</table>
+### `a` is `NULL`
+
+Entire columns can be removed. Specifying `i` is an error.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[1] <- NULL)
+    #> # A tibble: 4 x 2
+    #>   c     li       
+    #>   <chr> <list>   
+    #> 1 e     <dbl [1]>
+    #> 2 f     <int [2]>
+    #> 3 g     <int [3]>
+    #> 4 h     <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[, 2:3] <- NULL)
+    #> # A tibble: 4 x 1
+    #>       n
+    #>   <int>
+    #> 1     1
+    #> 2    NA
+    #> 3     3
+    #> 4    NA
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[1, 2:3] <- NULL)
+
+    #> Error in x[[jj]][iseq] <- vjj:
+    #> replacement has length zero
+
+</td>
+<td>
+    with_tbl(tbl[1, 2:3] <- NULL)
+
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>
@@ -2403,8 +2477,8 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- mean)
 
-    #> Error in tbl_subassign(x, i, j, value):
-    #> is_bare_list(value) is not TRUE
+    #> Error: `value` must be a vector, a bare
+    #> list, a data frame or NULL in `[<-`.
 
 </td>
 </tr>
@@ -2446,8 +2520,8 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
-    #> Error: `x` can't be recycled to size 1.
-    #> [31mx[39m It must be size 1, not 12.
+    #> Error: `value` must be a vector, a bare
+    #> list, a data frame or NULL in `[<-`.
 
 </td>
 </tr>
@@ -3214,8 +3288,8 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 <td>
     with_tbl(tbl[2:3, "n"] <- NULL)
 
-    #> Error: `value` must be a vector, not
-    #> NULL.
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>

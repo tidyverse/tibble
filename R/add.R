@@ -210,3 +210,78 @@ pos_from_before_after <- function(before, after, len) {
 limit_pos_range <- function(pos, len) {
   max(0L, min(len, pos))
 }
+
+# check_names_before_after ------------------------------------------------
+
+check_names_before_after <- function(j, x) {
+  if (!is_bare_character(j)) {
+    return(j)
+  }
+
+  check_needs_no_dim(j)
+  check_names_before_after_character(j, x)
+}
+
+check_needs_no_dim <- function(j) {
+  if (needs_dim(j)) {
+    abort(error_dim_column_index(j))
+  }
+}
+
+check_names_before_after_character <- function(j, names) {
+  pos <- safe_match(j, names)
+  if (anyNA(pos)) {
+    unknown_names <- j[is.na(pos)]
+    abort(error_unknown_column_names(unknown_names))
+  }
+  pos
+}
+
+# Errors ------------------------------------------------------------------
+
+error_add_rows_to_grouped_df <- function() {
+  tibble_error("Can't add rows to grouped data frames.")
+}
+
+error_inconsistent_new_rows <- function(names) {
+  tibble_error(
+    bullets(
+      "New rows in `add_row()` must use columns that already exist:",
+      cnd_message(error_unknown_column_names(names))
+    ),
+    names = names
+  )
+}
+
+error_duplicate_new_cols <- function(names) {
+  tibble_error(
+    bullets(
+      "Can't add duplicate columns with `add_column()`:",
+      cnd_message(error_existing_column_names(names))
+    ),
+    names = names
+  )
+}
+
+error_both_before_after <- function() {
+  tibble_error("Can't specify both `.before` and `.after`.")
+}
+
+error_unknown_column_names <- function(j, parent = NULL) {
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+}
+
+error_inconsistent_new_cols <- function(n, df) {
+  tibble_error(
+    bullets(
+      "New columns in `add_column()` must be consistent with `.data`:",
+      pluralise_count("`.data` has ", n, " row(s)"),
+      paste0(
+        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+        nrow(df), " rows"
+      )
+    ),
+    expected = n,
+    actual = nrow(df)
+  )
+}

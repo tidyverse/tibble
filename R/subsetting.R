@@ -111,9 +111,12 @@ NULL
 
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
+    if (missing(i)) {
+      abort(error_subset_columns_non_missing_only())
+    }
     with_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j)) {
-    error_assign_columns_non_missing_only()
+    abort(error_subset_columns_non_missing_only())
   } else {
     with_col_index_errors(arg = substitute(j), {
       i <- vec_as_location2(i, fast_nrow(x))
@@ -149,13 +152,17 @@ NULL
   }
 
   if (is_null(j)) {
-    error_assign_columns_non_missing_only()
+    abort(error_assign_columns_non_missing_only())
   }
 
   value <- list(value)
 
   j <- vectbl_as_new_col_index(j, x, value)
-  check_scalar(j)
+
+  # Side effect: check scalar, allow OOB position
+  if (!identical(unname(j), NA_integer_)) {
+    vec_as_location2(j, length(x) + 1L, arg = "j")
+  }
 
   # New columns are added to the end, provide index to avoid matching column
   # names again
@@ -331,7 +338,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
 vectbl_as_col_index <- function(j, x, arg = NULL) {
   stopifnot(!is.null(j))
 
-  if (anyNA(j)) {
+  if (vec_is(j) && anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
@@ -353,7 +360,9 @@ tbl_subset2 <- function(x, j) {
 
     return(.subset2(x, j))
   } else if (is.character(j)) {
-    check_scalar(j)
+    # Side effect: check that j is a scalar, allow invalid column names
+    vec_as_location2(j, length(x), c(names(x), j), arg = "j")
+
     # NA names should give an error
     if (!is.na(j)) {
       # Don't warn when accessing invalid column names
@@ -381,12 +390,24 @@ tbl_subset_row <- function(x, i) {
 }
 
 tbl_subassign <- function(x, i, j, value) {
+  if (!vec_is(value)) {
+    if (!is_null(i)) {
+      abort(error_need_rhs_vector())
+    }
+    if (!is_null(value)) {
+      abort(error_need_rhs_vector_or_null())
+    }
+  }
+
   if (is_null(value) || is_atomic(value)) {
     value <- list(value)
   } else {
     value <- unclass(value)
   }
-  stopifnot(is_bare_list(value))
+
+  if (!is_bare_list(value)) {
+    abort(error_need_rhs_vector_or_null())
+  }
 
   if (is.null(i)) {
     if (is.null(j)) {
@@ -515,7 +536,7 @@ tbl_subassign_col <- function(x, j, value) {
   # Create or update
   for (jj in which(is_data)) {
     ji <- coalesce2(j[[jj]], names(j)[[jj]])
-    x[[ji]] <- vectbl_recycle_rows(value[[jj]], nrow, jj, coalesce2empty(names(j)[[jj]], names(x)[[ji]]))
+    x[[ji]] <- vectbl_recycle_rows(value[[jj]], nrow, jj, names2(j)[[jj]])
   }
 
   # Remove
@@ -528,10 +549,6 @@ tbl_subassign_col <- function(x, j, value) {
 
 coalesce2 <- function(x, y) {
   if (is.na(x)) y else x
-}
-
-coalesce2empty <- function(x, y) {
-  if (x == "") y else x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -568,19 +585,13 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
-check_scalar <- function(j) {
-  if (!has_length(j, 1)) {
-    abort(error_need_scalar_column_index())
-  }
-}
-
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
 vectbl_recycle_cols <- function(x, n) {
   subclass_col_recycle_errors(
-    vec_recycle(x, n)
+    vec_recycle(x, n, x_arg = "value")
   )
 }
 
@@ -596,6 +607,137 @@ vectbl_recycle_rows <- function(x, n, j, name) {
   abort(error_inconsistent_cols(n, name, size, "Existing data"))
 }
 
+# Dedicated functions for faster subsetting
+set_tibble_class <- function(x, nrow) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- tibble_class
+  x
+}
+
+# External ----------------------------------------------------------------
+
 vectbl_restore <- function(xo, x) {
   .Call(`tibble_restore_impl`, xo, x)
+}
+
+string_to_indices <- function(x) {
+  .Call(`tibble_string_to_indices`, as.character(x))
+}
+
+# Errors ------------------------------------------------------------------
+
+error_need_rhs_vector <- function(j) {
+  tibble_error("`value` must be a vector, a bare list or a data frame in `[<-`.")
+}
+
+error_need_rhs_vector_or_null <- function(j) {
+  tibble_error("`value` must be a vector, a bare list, a data frame or NULL in `[<-`.")
+}
+
+error_na_column_index <- function(j) {
+  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
+}
+
+error_dim_column_index <- function(j) {
+  tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
+}
+
+error_assign_columns_non_na_only <- function() {
+  tibble_error("Can't use NA as column index in a tibble for assignment.")
+}
+
+error_subset_columns_non_missing_only <- function() {
+  tibble_error("Column index is required for tibbles in `[[`.")
+}
+
+error_assign_columns_non_missing_only <- function() {
+  tibble_error("Column index is required for tibbles in `[[<-`.")
+}
+
+error_new_columns_at_end_only <- function(ncol, j) {
+  j <- j[j > ncol + 1]
+  tibble_error(
+    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
+    ncol = ncol, j = j
+  )
+}
+
+error_duplicate_column_subscript_for_assignment <- function(j) {
+  j <- unique(j[duplicated(j)])
+  tibble_error(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
+}
+
+error_assign_rows_non_na_only <- function() {
+  tibble_error("Can't use NA as row index in a tibble for assignment.")
+}
+
+error_new_rows_at_end_only <- function(nrow, i) {
+  i <- i[i > nrow + 1]
+  tibble_error(
+    pluralise_commas("Can't assign row(s) ", i, " in a tibble with ", nrow, pluralise_n(" row(s).", nrow)),
+    nrow = nrow, i = i
+  )
+}
+
+error_duplicate_row_subscript_for_assignment <- function(i) {
+  i <- unique(i[duplicated(i)])
+  tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
+}
+
+error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
+  tibble_error(bullets(
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
+    })
+  ))
+}
+
+
+# Subclassing errors ------------------------------------------------------
+
+with_col_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "column"
+      cnd_signal(cnd)
+    }
+  )
+}
+with_row_index_errors <- function(expr, arg = NULL) {
+  tryCatch(
+    force(expr),
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- arg
+      cnd$subscript_elt <- "row"
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_col_recycle_errors <- function(expr) {
+  tryCatch(
+    force(expr),
+
+    vctrs_error_recycle_incompatible_size = function(cnd) {
+      cnd_signal(cnd)
+    }
+  )
 }

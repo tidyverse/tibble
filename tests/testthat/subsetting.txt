@@ -147,6 +147,17 @@ Error: Column index 1 is used more than once for assignment.
 Error: Row index 1 is used more than once for assignment.
 
 
+[<-.tbl_df throws an error with invalid values
+==============================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[1] <- lm(y ~ x, df)
+Error: `value` must be a vector, a bare list, a data frame or NULL in `[<-`.
+
+> df[1:2, 1] <- NULL
+Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+
+
 $<- recycles only values of length one
 ======================================
 
