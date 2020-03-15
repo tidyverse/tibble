@@ -140,6 +140,8 @@ verify_output("msg.txt", {
 
   error_tibble_row_size_one(3, "foo", 7)
 
+  error_as_tibble_row_size_one(3, "foo", 7)
+
   error_new_tibble_must_be_list()
 
   error_new_tibble_needs_nrow()
