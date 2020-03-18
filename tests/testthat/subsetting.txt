@@ -412,10 +412,10 @@ Error: Can't use NA as row index in a tibble for assignment.
 
 > df <- tibble(x = 1:2, y = x)
 > df[] <- mean
-Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+Error: `value` must be a vector, a bare list, a data frame or NULL in `[<-`.
 
 > df[] <- lm(y ~ x, df)
-Error: `value` must be a vector, a bare list or a data frame in `[<-`.
+Error: `value` must be a vector, a bare list, a data frame or NULL in `[<-`.
 
 
 [<-.tbl_df throws an error with OOB assignment
@@ -515,6 +515,17 @@ Error: `x` must be a vector, not a function.
 
 > df[[1]] <- lm(y ~ x, df)
 Error: `x` must be a vector, not a `lm` object.
+
+
+[<-.tbl_df throws an error with invalid values
+==============================================
+
+> df <- tibble(x = 1:2, y = x)
+> df[1] <- lm(y ~ x, df)
+Error: `value` must be a vector, a bare list, a data frame or NULL in `[<-`.
+
+> df[1:2, 1] <- NULL
+Error: `value` must be a vector, a bare list or a data frame in `[<-`.
 
 
 $<- recycles only values of length one

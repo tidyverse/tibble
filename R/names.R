@@ -34,23 +34,25 @@ subclass_name_repair_errors <- function(expr, name, details = NULL) {
   tryCatch(
     force(expr),
 
+    # FIXME: use cnd$names with vctrs >= 0.3.0
     vctrs_error_names_cannot_be_empty = function(cnd) {
-      cnd <- error_column_must_be_named(detect_empty_names(cnd$names), parent = cnd)
+      cnd <- error_column_must_be_named(detect_empty_names(name), parent = cnd)
       cnd$body <- details
 
       cnd_signal(cnd)
     },
     vctrs_error_names_cannot_be_dot_dot = function(cnd) {
-      cnd <- error_column_must_not_be_dot_dot(detect_dot_dot(cnd$names), parent = cnd)
+      cnd <- error_column_must_not_be_dot_dot(detect_dot_dot(name), parent = cnd)
       cnd_signal(cnd)
     },
     vctrs_error_names_must_be_unique = function(cnd) {
-      cnd <- error_column_names_must_be_unique(detect_duplicates(cnd$names), parent = cnd)
+      cnd <- error_column_names_must_be_unique(detect_duplicates(name), parent = cnd)
       cnd_signal(cnd)
     }
   )
 }
 
+# Anticipate vctrs 0.3.0 release: locations replaced by names
 detect_empty_names <- function(names) {
   which(names == "")
 }

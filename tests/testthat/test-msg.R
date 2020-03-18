@@ -14,6 +14,7 @@ verify_output("msg.txt", {
   error_enframe_has_dim(Titanic)
 
   error_need_rhs_vector()
+  error_need_rhs_vector_or_null()
 
   error_na_column_index(1:3)
 
@@ -138,6 +139,8 @@ verify_output("msg.txt", {
   error_frame_matrix_list(2:4)
 
   error_tibble_row_size_one(3, "foo", 7)
+
+  error_as_tibble_row_size_one(3, "foo", 7)
 
   error_new_tibble_must_be_list()
 

@@ -408,6 +408,23 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
 
 # [<- ---------------------------------------------------------------------
 
+test_that("[<-.tbl_df can remove columns", {
+  df <- tibble(x = 1:2, y = x)
+  df["x"] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+
+  df <- tibble(x = 1:2, y = x)
+  df[, "x"] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+
+  df <- tibble(x = 1:2, y = x, z = y)
+  df[, c("x", "z")] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+
+  df["z"] <- NULL
+  expect_identical(df, tibble(y = 1:2))
+})
+
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
   verify_errors({
     df <- tibble(x = 1:2, y = x)
@@ -747,6 +764,11 @@ verify_output("subsetting.txt", {
   df <- tibble(x = 1:2, y = x)
   df[[1]] <- mean
   df[[1]] <- lm(y ~ x, df)
+
+  "# [<-.tbl_df throws an error with invalid values"
+  df <- tibble(x = 1:2, y = x)
+  df[1] <- lm(y ~ x, df)
+  df[1:2, 1] <- NULL
 
   "# $<- recycles only values of length one"
   df <- tibble(x = 1:3)

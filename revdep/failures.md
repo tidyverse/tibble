@@ -164,6 +164,114 @@ Theme switched to dmdScheme_0.9.5
 * DONE (dmdScheme)
 
 ```
+# MachineShop
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# metacoder
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# OncoBayes2
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # STRMPS
 
 <details>
@@ -263,5 +371,77 @@ Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘textrecipes’
 * removing ‘/home/rstudio/tibble/revdep/checks/textrecipes/old/textrecipes.Rcheck/textrecipes’
+
+```
+# tidybayes
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# vip
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
 
 ```

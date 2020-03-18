@@ -2381,7 +2381,7 @@ column.
 </tr>
 <tr style="vertical-align:top">
 <td>
-    with_df(df[c(1, 2)] <- matrix(1:8, ncol = 2))
+    with_df(df[1:2] <- matrix(1:8, ncol = 2))
     #>   n c         li
     #> 1 1 5          9
     #> 2 2 6     10, 11
@@ -2390,7 +2390,7 @@ column.
 
 </td>
 <td>
-    with_tbl(tbl[c(1, 2)] <- matrix(1:8, ncol = 2))
+    with_tbl(tbl[1:2] <- matrix(1:8, ncol = 2))
     #> # A tibble: 4 x 3
     #>   n[,1]  [,2] c[,1]  [,2] li       
     #>   <int> <int> <int> <int> <list>   
@@ -2398,6 +2398,60 @@ column.
     #> 2     2     6     2     6 <int [2]>
     #> 3     3     7     3     7 <int [3]>
     #> 4     4     8     4     8 <chr [1]>
+
+</td>
+</tr>
+</tbody>
+</table>
+### `a` is `NULL`
+
+Entire columns can be removed. Specifying `i` is an error.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[1] <- NULL)
+    #> # A tibble: 4 x 2
+    #>   c     li       
+    #>   <chr> <list>   
+    #> 1 e     <dbl [1]>
+    #> 2 f     <int [2]>
+    #> 3 g     <int [3]>
+    #> 4 h     <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+    with_tbl(tbl[, 2:3] <- NULL)
+    #> # A tibble: 4 x 1
+    #>       n
+    #>   <int>
+    #> 1     1
+    #> 2    NA
+    #> 3     3
+    #> 4    NA
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+    with_df(df[1, 2:3] <- NULL)
+
+    #> Error in x[[jj]][iseq] <- vjj:
+    #> replacement has length zero
+
+</td>
+<td>
+    with_tbl(tbl[1, 2:3] <- NULL)
+
+    #> Error: `value` must be a vector, a bare
+    #> list or a data frame in `[<-`.
 
 </td>
 </tr>
@@ -2424,7 +2478,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
     with_tbl(tbl[1] <- mean)
 
     #> Error: `value` must be a vector, a bare
-    #> list or a data frame in `[<-`.
+    #> list, a data frame or NULL in `[<-`.
 
 </td>
 </tr>
@@ -2467,7 +2521,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
     #> Error: `value` must be a vector, a bare
-    #> list or a data frame in `[<-`.
+    #> list, a data frame or NULL in `[<-`.
 
 </td>
 </tr>
