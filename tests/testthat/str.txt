@@ -113,10 +113,10 @@ tibble [?? × 5] (S3: unknown_rows/tbl_df/tbl/data.frame)
  $ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 
-> nested_iris_df <- tibble(Species = unique(iris$Species), data = unname(split(
-+   iris, iris$Species)))
-> nested_iris_tbl <- tibble(Species = unique(iris$Species), data = map(unname(
-+   split(iris, iris$Species)), as_tibble))
+> nested_iris_df <- tibble(Species = unique(iris$Species), data = unname(split(iris, 
++     iris$Species)))
+> nested_iris_tbl <- tibble(Species = unique(iris$Species), data = map(unname(split(iris, 
++     iris$Species)), as_tibble))
 > str(nested_iris_df, width = 70L)
 tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
  $ Species: Factor w/ 3 levels "setosa","versicolor",..: 1 2 3
