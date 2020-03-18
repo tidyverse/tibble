@@ -577,9 +577,7 @@ tbl_subassign_row <- function(x, i, value) {
   x <- unclass(x)
 
   for (j in seq_along(x)) {
-    xj <- x[[j]]
-    vec_slice(xj, i) <- value[[j]]
-    x[[j]] <- xj
+    x[[j]] <- vec_assign(x[[j]], i, value[[j]], x_arg = names(x)[[j]])
   }
 
   set_tibble_class(x, nrow)

@@ -19,7 +19,7 @@ tbl_subassign_matrix <- function(x, j, value) {
   col_idx <- cells_to_col_idx(cells)
 
   for (i in col_idx) {
-    vec_slice(x[[i]], cells[[i]]) <- value
+    x[[i]] <- vec_assign(x[[i]], cells[[i]], value, x_arg = names(x)[[i]])
   }
 
   x
