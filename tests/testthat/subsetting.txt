@@ -92,17 +92,17 @@ Use `NA` as row index to obtain a row full of `NA` values.
 > foo[-1:1, ]
 Error: Must subset rows with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
-i The subscript has a positive value at location 3.
+i The subscript `i` has a positive value at location 3.
 
 > foo[c(-1, 1), ]
 Error: Must subset rows with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
-i The subscript has a positive value at location 2.
+i The subscript `i` has a positive value at location 2.
 
 > foo[c(-1, NA), ]
 Error: Must subset rows with a valid subscript vector.
 x Negative locations can't have missing values.
-i The subscript has a missing value at location 2.
+i The subscript `i` has a missing value at location 2.
 
 > foo[-4, ]
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
@@ -136,12 +136,12 @@ Error: `i` must have one dimension, not 3.
 
 > foo[mean, ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript has the wrong type `closure`.
+x The subscript `i` has the wrong type `closure`.
 i It must be logical, numeric, or character.
 
 > foo[foo, ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript has the wrong type `tbl_df<
+x The subscript `i` has the wrong type `tbl_df<
   x: integer
   y: integer
   z: integer
@@ -180,12 +180,12 @@ Error: `i` must have one dimension, not 3.
 > foo[c(TRUE, TRUE), ]
 Error: Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
-x The input has size 3 but the subscript has size 2.
+x The input has size 3 but the subscript `i` has size 2.
 
 > foo[c(TRUE, TRUE, FALSE, FALSE), ]
 Error: Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
-x The input has size 3 but the subscript has size 4.
+x The input has size 3 but the subscript `i` has size 4.
 
 > foo[c(TRUE, TRUE, NA), ]
 # A tibble: 3 x 3
@@ -232,12 +232,12 @@ i It must be logical, numeric, or character.
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3), ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript has the wrong type `list`.
+x The subscript `i` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
 > foo[as.list(1:3), ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript has the wrong type `list`.
+x The subscript `i` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
 > foo[factor(1:3), ]
@@ -245,7 +245,7 @@ Error: Can't use character names to index an unnamed vector.
 
 > foo[Sys.Date(), ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript has the wrong type `date`.
+x The subscript `i` has the wrong type `date`.
 i It must be logical, numeric, or character.
 
 
@@ -302,7 +302,7 @@ Use `NA` as row index to obtain a row full of `NA` values.
 > foo[c(TRUE, FALSE), ]
 Error: Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
-x The input has size 4 but the subscript has size 2.
+x The input has size 4 but the subscript `i` has size 2.
 
 
 [[.tbl_df rejects invalid column indexes

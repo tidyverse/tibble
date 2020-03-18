@@ -519,19 +519,19 @@ vectbl_as_new_col_index <- function(j, x, value) {
   }
 }
 
-vectbl_as_row_location <- function(i, n, names = NULL, arg = NULL) {
+vectbl_as_row_location <- function(i, n, names = NULL, arg = "i") {
   subclass_row_index_errors(vec_as_location(i, n, names), arg = arg)
 }
 
-vectbl_as_row_location2 <- function(i, n, names = NULL, arg = NULL) {
+vectbl_as_row_location2 <- function(i, n, names = NULL, arg = "i") {
   subclass_row_index_errors(vec_as_location2(i, n, names), arg = arg)
 }
 
-vectbl_as_col_location <- function(i, n, names = NULL, arg = NULL) {
+vectbl_as_col_location <- function(i, n, names = NULL, arg = "j") {
   subclass_col_index_errors(vec_as_location(i, n, names), arg = arg)
 }
 
-vectbl_as_col_location2 <- function(i, n, names = NULL, arg = NULL) {
+vectbl_as_col_location2 <- function(i, n, names = NULL, arg = "j") {
   subclass_col_index_errors(vec_as_location2(i, n, names), arg = arg)
 }
 
