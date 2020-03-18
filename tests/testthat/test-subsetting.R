@@ -633,7 +633,7 @@ verify_output("subsetting.txt", {
   "# [.tbl_df is careful about row indexes"
   foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
   foo[0.5, ]
-  foo[1:5, ]
+  invisible(foo[1:5, ])
   foo[-1:1, ]
   foo[c(-1, 1), ]
   foo[c(-1, NA), ]
@@ -667,7 +667,6 @@ verify_output("subsetting.txt", {
   foo[as.list(1:3)]
   foo[factor(1:3)]
   foo[Sys.Date()]
-  foo[Sys.time()]
 
   "# [.tbl_df rejects unknown row indexes"
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -675,7 +674,6 @@ verify_output("subsetting.txt", {
   foo[as.list(1:3), ]
   foo[factor(1:3), ]
   foo[Sys.Date(), ]
-  foo[Sys.time(), ]
 
   "# [.tbl_df and logical subsetting"
   foo <- tibble(a = 1:3, b = letters[1:3])

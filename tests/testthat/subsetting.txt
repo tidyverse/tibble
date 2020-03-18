@@ -85,18 +85,9 @@ i It must be logical, numeric, or character.
 Error: Must subset elements with a valid subscript vector.
 x Lossy cast from <double> to <integer>.
 
-> foo[1:5, ]
+> invisible(foo[1:5, ])
 Warning: The `i` argument of ``[.tbl_df`()` if integer must be between 0 and the number of rows as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
-
-# A tibble: 5 x 3
-      x     y     z
-  <int> <int> <int>
-1     1     1     1
-2     2     2     2
-3     3     3     3
-4    NA    NA    NA
-5    NA    NA    NA
 
 > foo[-1:1, ]
 Error: Must subset elements with a valid subscript vector.
@@ -234,11 +225,6 @@ Error: Must subset columns with a valid subscript vector.
 x The subscript `foo` has the wrong type `date`.
 i It must be logical, numeric, or character.
 
-> foo[Sys.time()]
-Error: Must subset columns with a valid subscript vector.
-x The subscript `foo` has the wrong type `datetime<local>`.
-i It must be logical, numeric, or character.
-
 
 [.tbl_df rejects unknown row indexes
 ====================================
@@ -260,11 +246,6 @@ Error: Can't use character names to index an unnamed vector.
 > foo[Sys.Date(), ]
 Error: Must subset elements with a valid subscript vector.
 x The subscript has the wrong type `date`.
-i It must be logical, numeric, or character.
-
-> foo[Sys.time(), ]
-Error: Must subset elements with a valid subscript vector.
-x The subscript has the wrong type `datetime<local>`.
 i It must be logical, numeric, or character.
 
 
