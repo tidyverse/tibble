@@ -206,7 +206,7 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- tbl_subset_col(x, j = j, arg = substitute(x))
+  xo <- tbl_subset_col(x, j = j)
 
   if (!is.null(i)) {
     xo <- tbl_subset_row(xo, i = i)
@@ -370,7 +370,7 @@ tbl_subset2 <- function(x, j) {
   .subset2(x, j)
 }
 
-tbl_subset_col <- function(x, j, arg = NULL) {
+tbl_subset_col <- function(x, j, arg = "j") {
   if (is_null(j)) return(x)
   j <- vectbl_as_col_index(j, x, arg = arg)
   xo <- .subset(x, j)
