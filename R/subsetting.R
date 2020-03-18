@@ -115,7 +115,7 @@ NULL
       abort(error_subset_columns_non_missing_only())
     }
     with_col_index_errors(tbl_subset2(x, j = i), substitute(i))
-  } else if (missing(j)) {
+  } else if (missing(j) || missing(i)) {
     abort(error_subset_columns_non_missing_only())
   } else {
     with_col_index_errors(arg = substitute(j), {
@@ -135,24 +135,20 @@ NULL
 #' @export
 `[[<-.tbl_df` <- function(x, i, j, ..., value) {
   if (missing(i)) {
-    i <- NULL
+    abort(error_assign_columns_non_missing_only())
   }
 
   if (missing(j)) {
-    j <- NULL
-  }
-
-  if (is.null(j) && nargs() < 4) {
-    j <- i
-    i <- NULL
+    if (nargs() < 4) {
+      j <- i
+      i <- NULL
+    } else {
+      abort(error_assign_columns_non_missing_only())
+    }
   }
 
   if (!is_null(i)) {
     i <- vec_as_location2(i, fast_nrow(x))
-  }
-
-  if (is_null(j)) {
-    abort(error_assign_columns_non_missing_only())
   }
 
   value <- list(value)
@@ -300,7 +296,7 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 
 warn_oob <- function(oob, n) {
   if (has_length(oob)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'if integer must be between 0 and the number of rows')",
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
       details = "Use `NA` as row index to obtain a row full of `NA` values.")
   }
 }
@@ -318,7 +314,7 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 
 warn_oob_negative <- function(oob, n) {
   if (has_length(oob)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'if negative integer must be between 0 and the number of rows negated')",
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
       details = "Use `NA` as row index to obtain a row full of `NA` values.")
   }
 }
@@ -488,7 +484,7 @@ vectbl_as_new_col_index <- function(j, x, value) {
   # Values: index,
   # Name: column name (for new columns)
 
-  if (anyNA(j)) {
+  if (vec_is(j) && anyNA(j)) {
     abort(error_assign_columns_non_na_only())
   }
 
@@ -647,11 +643,11 @@ error_assign_columns_non_na_only <- function() {
 }
 
 error_subset_columns_non_missing_only <- function() {
-  tibble_error("Column index is required for tibbles in `[[`.")
+  tibble_error("Subscript can't be missing for tibbles in `[[`.")
 }
 
 error_assign_columns_non_missing_only <- function() {
-  tibble_error("Column index is required for tibbles in `[[<-`.")
+  tibble_error("Subscript can't be missing for tibbles in `[[<-`.")
 }
 
 error_new_columns_at_end_only <- function(ncol, j) {

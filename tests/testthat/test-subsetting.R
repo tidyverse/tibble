@@ -693,6 +693,9 @@ verify_output("subsetting.txt", {
   "# [[.tbl_df rejects invalid column indexes"
   foo <- tibble(x = 1:10, y = 1:10)
   foo[[]]
+  foo[[, 1]]
+  foo[[1, ]]
+  foo[[, ]]
   foo[[1:3]]
   foo[[ letters[1:3] ]]
   foo[[TRUE]]
@@ -753,6 +756,18 @@ verify_output("subsetting.txt", {
   "# [<-.tbl_df and logical subsetting"
   foo <- tibble(a = 1:3, b = letters[1:3])
   foo[!is.na(foo)] <- "bogus"
+
+  "# [[.tbl_df rejects invalid column indexes"
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[[]] <- 1
+  foo[[, 1]] <- 1
+  foo[[1, ]] <- 1
+  foo[[, ]] <- 1
+  foo[[1:3]] <- 1
+  foo[[ letters[1:3] ]] <- 1
+  foo[[TRUE]] <- 1
+  foo[[mean]] <- 1
+  foo[[foo]] <- 1
 
   "# [[<-.tbl_df throws an error with OOB assignment"
   df <- tibble(x = 1:2, y = x)

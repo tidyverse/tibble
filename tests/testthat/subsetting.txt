@@ -86,7 +86,7 @@ Error: Must subset elements with a valid subscript vector.
 x Lossy cast from <double> to <integer>.
 
 > invisible(foo[1:5, ])
-Warning: The `i` argument of ``[.tbl_df`()` if integer must be between 0 and the number of rows as of tibble 3.0.0.
+Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
 > foo[-1:1, ]
@@ -105,7 +105,7 @@ x Negative locations can't have missing values.
 i The subscript has a missing value at location 2.
 
 > foo[-4, ]
-Warning: The `i` argument of ``[.tbl_df`()` if negative integer must be between 0 and the number of rows negated as of tibble 3.0.0.
+Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
 # A tibble: 3 x 3
@@ -265,7 +265,7 @@ Error: No common type for `a` <integer> and `b` <character>.
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[3:5, ]
-Warning: The `i` argument of ``[.tbl_df`()` if integer must be between 0 and the number of rows as of tibble 3.0.0.
+Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
 # A tibble: 3 x 2
@@ -276,7 +276,7 @@ Use `NA` as row index to obtain a row full of `NA` values.
 3    NA <NA> 
 
 > foo[-(3:5), ]
-Warning: The `i` argument of ``[.tbl_df`()` if negative integer must be between 0 and the number of rows negated as of tibble 3.0.0.
+Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
 # A tibble: 2 x 2
@@ -310,7 +310,16 @@ x The input has size 4 but the subscript has size 2.
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[[]]
-Error: Column index is required for tibbles in `[[`.
+Error: Subscript can't be missing for tibbles in `[[`.
+
+> foo[[, 1]]
+Error: Subscript can't be missing for tibbles in `[[`.
+
+> foo[[1, ]]
+Error: Subscript can't be missing for tibbles in `[[`.
+
+> foo[[, ]]
+Error: Subscript can't be missing for tibbles in `[[`.
 
 > foo[[1:3]]
 Error: Must extract column with a single valid subscript.
@@ -477,6 +486,48 @@ Error: Lossy cast from `value` <double> to `x` <logical>.
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
 Error: No common type for `value` <character> and `x` <integer>.
+
+
+[[.tbl_df rejects invalid column indexes
+========================================
+
+> foo <- tibble(x = 1:10, y = 1:10)
+> foo[[]] <- 1
+Error: Subscript can't be missing for tibbles in `[[<-`.
+
+> foo[[, 1]] <- 1
+Error: Subscript can't be missing for tibbles in `[[<-`.
+
+> foo[[1, ]] <- 1
+Error: Subscript can't be missing for tibbles in `[[<-`.
+
+> foo[[, ]] <- 1
+Error: Subscript can't be missing for tibbles in `[[<-`.
+
+> foo[[1:3]] <- 1
+Error: Must extract element with a single valid subscript.
+x The subscript `j` has size 3 but must be size 1.
+
+> foo[[letters[1:3]]] <- 1
+Error: Must extract element with a single valid subscript.
+x The subscript `j` has size 3 but must be size 1.
+
+> foo[[TRUE]] <- 1
+Error: Must extract element with a single valid subscript.
+x The subscript `j` has size 2 but must be size 1.
+
+> foo[[mean]] <- 1
+Error: Must subset columns with a valid subscript vector.
+x The subscript has the wrong type `closure`.
+i It must be logical, numeric, or character.
+
+> foo[[foo]] <- 1
+Error: Must subset columns with a valid subscript vector.
+x The subscript has the wrong type `tbl_df<
+  x: integer
+  y: integer
+>`.
+i It must be logical, numeric, or character.
 
 
 [[<-.tbl_df throws an error with OOB assignment
