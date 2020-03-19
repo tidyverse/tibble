@@ -623,18 +623,6 @@ vectbl_recycle_cols <- function(value, n, value_arg) {
   )
 }
 
-vectbl_recycle_rows <- function(x, n, j, name) {
-  size <- vec_size(x)
-  if (size == n) return(x)
-  if (size == 1) return(vec_recycle(x, n))
-
-  if (name == "") {
-    name <- j
-  }
-
-  abort(error_inconsistent_cols(n, name, size, "Existing data"))
-}
-
 # Dedicated functions for faster subsetting
 set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
