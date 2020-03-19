@@ -88,7 +88,10 @@ NULL
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
-  tbl_subassign(x, i = NULL, as_string(name), list(value), i_arg = NULL, j_arg = NULL)
+  tbl_subassign(
+    x, i = NULL, as_string(name), list(value),
+    i_arg = NULL, j_arg = NULL, value_arg = substitute(value)
+  )
 }
 
 #' @rdname subsetting
@@ -158,7 +161,7 @@ NULL
 
   value <- list(value)
 
-  j <- vectbl_as_new_col_index(j, x, value, j_arg)
+  j <- vectbl_as_new_col_index(j, x, value, j_arg, substitute(value))
 
   # Side effect: check scalar, allow OOB position
   if (!identical(unname(j), NA_integer_)) {
@@ -170,7 +173,7 @@ NULL
   names(value) <- names(j)
   j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL)
+  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = substitute(value))
 }
 
 
@@ -264,7 +267,7 @@ NULL
     }
   }
 
-  tbl_subassign(x, i, j, value, i_arg, j_arg)
+  tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
 }
 
 vectbl_as_row_index <- function(i, x, i_arg) {
@@ -398,7 +401,7 @@ tbl_subset_row <- function(x, i, i_arg) {
   set_tibble_class(xo, nrow = length(i))
 }
 
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
+tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (!vec_is(value)) {
     if (!is_null(i)) {
       abort(error_need_rhs_vector())
@@ -422,10 +425,10 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
     if (is.null(j)) {
       j <- seq_along(x)
     } else {
-      j <- vectbl_as_new_col_index(j, x, value, j_arg)
+      j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
     }
 
-    value <- vectbl_recycle_cols(value, length(j))
+    value <- vectbl_recycle_cols(value, length(j), value_arg)
     xo <- tbl_subassign_col(x, j, value)
   } else {
     # Fill up rows first if necessary
@@ -433,14 +436,14 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
     x <- tbl_expand_to_nrow(x, i)
 
     if (is.null(j)) {
-      xo <- tbl_subassign_row(x, i, value)
+      xo <- tbl_subassign_row(x, i, value, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vectbl_as_new_col_index(j, x, value, j_arg)
+      j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
       new_cols <- which(is.na(j))
-      value <- vectbl_recycle_cols(value, length(j))
+      value <- vectbl_recycle_cols(value, length(j), value_arg)
 
       # Fill up columns if necessary
       if (any(new_cols)) {
@@ -452,7 +455,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
       }
 
       xj <- tbl_subset_col(x, j)
-      xj <- tbl_subassign_row(xj, i, value)
+      xj <- tbl_subassign_row(xj, i, value, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
   }
@@ -492,7 +495,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   }
 }
 
-vectbl_as_new_col_index <- function(j, x, value, j_arg) {
+vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   # Creates a named index vector
   # Values: index,
   # Name: column name (for new columns)
@@ -519,7 +522,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg) {
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    names <- vectbl_recycle_cols(names2(value), length(j))
+    names <- vectbl_recycle_cols(names2(value), length(j), value_arg)
     names[new][names[new] == ""] <- paste0("...", j_new)
 
     set_names(j, names)
@@ -594,8 +597,8 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value) {
-  value <- vectbl_recycle_cols(value, ncol(x))
+tbl_subassign_row <- function(x, i, value, value_arg) {
+  value <- vectbl_recycle_cols(value, ncol(x), value_arg)
 
   nrow <- fast_nrow(x)
 
@@ -614,9 +617,9 @@ fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
-vectbl_recycle_cols <- function(x, n) {
+vectbl_recycle_cols <- function(value, n, value_arg) {
   subclass_col_recycle_errors(
-    vec_recycle(x, n, x_arg = "value")
+    vec_recycle(value, n, x_arg = as_label(value_arg))
   )
 }
 
