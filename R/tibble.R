@@ -318,3 +318,27 @@ error_tibble_row_size_one <- function(j, name, size) {
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
+
+error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
+  tibble_error(bullets(
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
+    })
+  ))
+}

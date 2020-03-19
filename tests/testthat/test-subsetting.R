@@ -577,7 +577,7 @@ test_that("$<- throws different warning if attempting a partial initialization (
       "Unknown or uninitialised column: `z`",
       fixed = TRUE
     ),
-    error_inconsistent_cols(3, "z", 2, "Existing data")
+    error_inconsistent_new_data(3, list(1:2), 1, NULL, quote(`<dbl>`))
   )
 })
 
@@ -597,12 +597,12 @@ test_that("$<- recycles only values of length one", {
 
     expect_tibble_error(
       df$w <- 8:9,
-      error_inconsistent_cols(3, "w", 2, "Existing data")
+      error_inconsistent_new_data(3, list(8:9), 1, NULL, quote(8:9))
     )
 
     expect_tibble_error(
       df$a <- character(),
-      error_inconsistent_cols(3, "a", 0, "Existing data")
+      error_inconsistent_new_data(3, list(character()), 1, NULL, quote(character()))
     )
   })
 })

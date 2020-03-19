@@ -106,6 +106,21 @@ Row index 1 is used more than once for assignment.
 <error/tibble_error_duplicate_row_subscript_for_assignment>
 Row indexes 1, 2 are used more than once for assignment.
 
+> error_inconsistent_new_data(3, list(1:2), 1, NULL, quote(rhs))
+<error/tibble_error_inconsistent_new_data>
+New data `rhs` must be consistent with existing data:
+* Existing data has 3 rows
+* New data contributes 2 rows
+* Only vectors of size 1 are recycled
+
+> error_inconsistent_new_data(4, list(1:4, 3:4), 2, quote(4:1), 
++     quote(rhs))
+<error/tibble_error_inconsistent_new_data>
+New data `rhs` must be consistent with subscript `4:1`:
+* Subscript has 4 rows
+* Element 2 of new data contributes 2 rows
+* Only vectors of size 1 are recycled
+
 > error_add_rows_to_grouped_df()
 <error/tibble_error_add_rows_to_grouped_df>
 Can't add rows to grouped data frames.
