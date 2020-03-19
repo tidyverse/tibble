@@ -114,17 +114,20 @@ NULL
     if (missing(i)) {
       abort(error_subset_columns_non_missing_only())
     }
+    #tbl_subset2(x, j = i)
+    tbl_subset2(x, j = i, arg = substitute(i))
     subclass_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j) || missing(i)) {
     abort(error_subset_columns_non_missing_only())
   } else {
-    subclass_col_index_errors(arg = substitute(j), {
-      i <- vectbl_as_row_location2(i, fast_nrow(x))
-      x <- tbl_subset2(x, j = j)
-    })
+    i <- vectbl_as_row_location2(i, fast_nrow(x))
+    #x <- tbl_subset2(x, j = j)
+    x <- tbl_subset2(x, j = j, arg = substitute(j))
+
     if (is.null(x)) {
       x
     } else {
+      #subclass_row_index_errors(vec_slice(x, i), arg = "i")
       subclass_row_index_errors(vec_slice(x, i), arg = substitute(i))
     }
   }
@@ -134,6 +137,9 @@ NULL
 #' @inheritParams base::`[[<-.data.frame`
 #' @export
 `[[<-.tbl_df` <- function(x, i, j, ..., value) {
+  i_arg <- substitute(i)
+  j_arg <- substitute(j)
+
   if (missing(i)) {
     abort(error_assign_columns_non_missing_only())
   }
@@ -142,6 +148,8 @@ NULL
     if (nargs() < 4) {
       j <- i
       i <- NULL
+      j_arg <- i_arg
+      i_arg <- NULL
     } else {
       abort(error_assign_columns_non_missing_only())
     }
@@ -153,11 +161,11 @@ NULL
 
   value <- list(value)
 
-  j <- vectbl_as_new_col_index(j, x, value)
+  j <- vectbl_as_new_col_index(j, x, value, j_arg)
 
   # Side effect: check scalar, allow OOB position
   if (!identical(unname(j), NA_integer_)) {
-    vectbl_as_col_location2(j, length(x) + 1L, arg = "j")
+    vectbl_as_col_location2(j, length(x) + 1L, arg = j_arg)
   }
 
   # New columns are added to the end, provide index to avoid matching column
@@ -174,14 +182,19 @@ NULL
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
+  i_arg <- substitute(i)
+  j_arg <- substitute(j)
+
   if (missing(i)) {
     i <- NULL
+    i_arg <- NULL
   } else if (is.null(i)) {
     i <- integer()
   }
 
   if (missing(j)) {
     j <- NULL
+    j_arg <- NULL
   } else if (is.null(j)) {
     j <- integer()
   }
@@ -198,6 +211,8 @@ NULL
 
     j <- i
     i <- NULL
+    j_arg <- i_arg
+    i_arg <- NULL
 
     # Special case, returns a vector:
     if (is.matrix(j)) {
@@ -206,14 +221,14 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- tbl_subset_col(x, j = j)
+  xo <- tbl_subset_col(x, j = j, j_arg)
 
   if (!is.null(i)) {
     xo <- tbl_subset_row(xo, i = i)
   }
 
   if (drop && length(xo) == 1L) {
-    tbl_subset2(xo, 1L)
+    tbl_subset2(xo, 1L, j_arg)
   } else {
     vectbl_restore(xo, x)
   }
@@ -331,20 +346,17 @@ fix_oob_invalid <- function(i, is_na_orig) {
   i
 }
 
-vectbl_as_col_index <- function(j, x, arg = NULL) {
+vectbl_as_col_index <- function(j, x, arg) {
   stopifnot(!is.null(j))
 
   if (vec_is(j) && anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  subclass_col_index_errors(
-    vectbl_as_col_location(j, length(x), names(x), arg = "j"),
-    arg = arg
-  )
+  vectbl_as_col_location(j, length(x), names(x), arg = arg)
 }
 
-tbl_subset2 <- function(x, j) {
+tbl_subset2 <- function(x, j, arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.")
@@ -356,17 +368,14 @@ tbl_subset2 <- function(x, j) {
 
     return(.subset2(x, j))
   } else if (is.character(j)) {
-    # Side effect: check that j is a scalar, allow invalid column names
-    vectbl_as_col_location2(j, length(x), c(names(x), j), arg = "j")
+    # Side effect: check that j is a scalar and not NA, allow invalid column names
+    vectbl_as_col_location2(j, length(x) + 1L, c(names(x), j), arg = arg)
 
-    # NA names should give an error
-    if (!is.na(j)) {
-      # Don't warn when accessing invalid column names
-      return(.subset2(x, j))
-    }
+    # Don't warn when accessing invalid column names
+    return(.subset2(x, j))
   }
 
-  j <- vectbl_as_col_location2(j, length(x), names(x), arg = "j")
+  j <- vectbl_as_col_location2(j, length(x), names(x), arg = arg)
   .subset2(x, j)
 }
 
@@ -385,7 +394,7 @@ tbl_subset_row <- function(x, i) {
   set_tibble_class(xo, nrow = length(i))
 }
 
-tbl_subassign <- function(x, i, j, value) {
+tbl_subassign <- function(x, i, j, value, arg) {
   if (!vec_is(value)) {
     if (!is_null(i)) {
       abort(error_need_rhs_vector())
@@ -409,7 +418,7 @@ tbl_subassign <- function(x, i, j, value) {
     if (is.null(j)) {
       j <- seq_along(x)
     } else {
-      j <- vectbl_as_new_col_index(j, x, value)
+      j <- vectbl_as_new_col_index(j, x, value, arg)
     }
 
     value <- vectbl_recycle_cols(value, length(j))
@@ -425,7 +434,7 @@ tbl_subassign <- function(x, i, j, value) {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vectbl_as_new_col_index(j, x, value)
+      j <- vectbl_as_new_col_index(j, x, value, j_arg)
       new_cols <- which(is.na(j))
       value <- vectbl_recycle_cols(value, length(j))
 
@@ -479,7 +488,7 @@ vectbl_as_new_row_index <- function(i, x) {
   }
 }
 
-vectbl_as_new_col_index <- function(j, x, value) {
+vectbl_as_new_col_index <- function(j, x, value, arg) {
   # Creates a named index vector
   # Values: index,
   # Name: column name (for new columns)
@@ -498,7 +507,7 @@ vectbl_as_new_col_index <- function(j, x, value) {
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
-    j <- vectbl_as_col_location(j, ncol(x), arg = "j")
+    j <- vectbl_as_col_location(j, ncol(x), arg = arg)
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       abort(error_new_columns_at_end_only(ncol(x), j_new))
@@ -511,7 +520,7 @@ vectbl_as_new_col_index <- function(j, x, value) {
 
     set_names(j, names)
   } else {
-    j <- vectbl_as_col_index(j, x)
+    j <- vectbl_as_col_index(j, x, arg)
     if (anyDuplicated(j)) {
       abort(error_duplicate_column_subscript_for_assignment(j))
     }
@@ -527,7 +536,7 @@ vectbl_as_row_location2 <- function(i, n, names = NULL, arg = "i") {
   subclass_row_index_errors(vec_as_location2(i, n, names), arg = arg)
 }
 
-vectbl_as_col_location <- function(i, n, names = NULL, arg = "j") {
+vectbl_as_col_location <- function(i, n, names = NULL, arg) {
   subclass_col_index_errors(vec_as_location(i, n, names), arg = arg)
 }
 
