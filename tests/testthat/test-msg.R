@@ -13,8 +13,8 @@ verify_output("msg.txt", {
 
   error_enframe_has_dim(Titanic)
 
-  error_need_rhs_vector()
-  error_need_rhs_vector_or_null()
+  error_need_rhs_vector(quote(RHS))
+  error_need_rhs_vector_or_null(quote(RHS))
 
   error_na_column_index(1:3)
 

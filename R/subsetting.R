@@ -404,10 +404,10 @@ tbl_subset_row <- function(x, i, i_arg) {
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (!vec_is(value)) {
     if (!is_null(i)) {
-      abort(error_need_rhs_vector())
+      abort(error_need_rhs_vector(value_arg))
     }
     if (!is_null(value)) {
-      abort(error_need_rhs_vector_or_null())
+      abort(error_need_rhs_vector_or_null(value_arg))
     }
   }
 
@@ -418,7 +418,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   }
 
   if (!is_bare_list(value)) {
-    abort(error_need_rhs_vector_or_null())
+    abort(error_need_rhs_vector_or_null(value_arg))
   }
 
   if (is.null(i)) {
@@ -654,12 +654,12 @@ string_to_indices <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_need_rhs_vector <- function(j) {
-  tibble_error("`value` must be a vector, a bare list or a data frame in `[<-`.")
+error_need_rhs_vector <- function(value_arg) {
+  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list or a data frame in `[<-`."))
 }
 
-error_need_rhs_vector_or_null <- function(j) {
-  tibble_error("`value` must be a vector, a bare list, a data frame or NULL in `[<-`.")
+error_need_rhs_vector_or_null <- function(value_arg) {
+  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list, a data frame or NULL in `[<-`."))
 }
 
 error_na_column_index <- function(j) {
