@@ -2285,7 +2285,8 @@ and if all columns updated are compatible with the value assigned.
 <td>
     with_tbl(tbl[is.na(tbl)] <- 1:2)
 
-    #> Error in tbl_subassign_matrix(x, j,
+    #> Error: `1:2` must have size 1, not size
+    #> 2.
 
 </td>
 </tr>
@@ -2302,6 +2303,12 @@ and if all columns updated are compatible with the value assigned.
 <td>
     with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
+    #> Error: New data `4` must be compatible
+    #> with existing data:
+    #> * Target: column `c`
+    #> * Position: 2
+    #> * No common type for `value` <double>
+    #> and `x` <character>.
 
 </td>
 </tr>

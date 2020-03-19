@@ -13,7 +13,7 @@ tbl_subset_matrix <- function(x, j, j_arg) {
 }
 
 tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
-  stopifnot(vec_is(value), vec_size(value) == 1)
+  vec_assert(value, size = 1, arg = as_label(value_arg))
 
   cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)

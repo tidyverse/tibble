@@ -673,10 +673,12 @@ verify_output("subsetting.txt", {
   foo[factor(1:3), ]
   foo[Sys.Date(), ]
 
-  "# [.tbl_df and logical subsetting"
+  "# [.tbl_df and matrix subsetting"
   foo <- tibble(a = 1:3, b = letters[1:3])
   foo[is.na(foo)]
   foo[!is.na(foo)]
+  foo[as.matrix("x")]
+  foo[array("x", dim = c(1, 1, 1))]
 
   "# [.tbl_df and OOB indexing"
   foo <- tibble(a = 1:3, b = letters[1:3])
@@ -765,9 +767,13 @@ verify_output("subsetting.txt", {
   df <- tibble(x = rep(NA, 3))
   df[1, "x"] <- 5
 
-  "# [<-.tbl_df and logical subsetting"
+  "# [<-.tbl_df and matrix subsetting"
   foo <- tibble(a = 1:3, b = letters[1:3])
   foo[!is.na(foo)] <- "bogus"
+  foo[as.matrix("x")] <- NA
+  foo[array("x", dim = c(1, 1, 1))] <- NA
+  foo[is.na(foo)] <- 1:3
+  foo[is.na(foo)] <- lm(a ~ b, foo)
 
   "# [[.tbl_df rejects invalid column indexes"
   foo <- tibble(x = 1:10, y = 1:10)

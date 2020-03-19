@@ -234,8 +234,8 @@ x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
 
 
-[.tbl_df and logical subsetting
-===============================
+[.tbl_df and matrix subsetting
+==============================
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[is.na(foo)]
@@ -243,6 +243,12 @@ i It must be logical, numeric, or character.
 
 > foo[!is.na(foo)]
 Error: No common type for `a` <integer> and `b` <character>.
+
+> foo[as.matrix("x")]
+Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
+
+> foo[array("x", dim = c(1, 1, 1))]
+Error: `i` must have one dimension, not 3.
 
 
 [.tbl_df and OOB indexing
@@ -527,8 +533,8 @@ Error: Lossy cast from `value` <double> to `x` <logical>.
 * Locations: 1
 
 
-[<-.tbl_df and logical subsetting
-=================================
+[<-.tbl_df and matrix subsetting
+================================
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
@@ -536,6 +542,16 @@ Error: New data `"bogus"` must be compatible with existing data:
 * Target: column `a`
 * Position: 1
 * No common type for `value` <character> and `x` <integer>.
+
+> foo[as.matrix("x")] <- NA
+Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
+
+> foo[array("x", dim = c(1, 1, 1))] <- NA
+> foo[is.na(foo)] <- 1:3
+Error: `1:3` must have size 1, not size 3.
+
+> foo[is.na(foo)] <- lm(a ~ b, foo)
+Error: `lm(a ~ b, foo)` must be a vector, not a `lm` object.
 
 
 [[.tbl_df rejects invalid column indexes
