@@ -88,7 +88,7 @@ NULL
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
-  tbl_subassign(x, i = NULL, as_string(name), list(value))
+  tbl_subassign(x, i = NULL, as_string(name), list(value), j_arg = NULL)
 }
 
 #' @rdname subsetting
@@ -169,7 +169,7 @@ NULL
   names(value) <- names(j)
   j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, j, value)
+  tbl_subassign(x, i, j, value, j_arg = NULL)
 }
 
 
@@ -234,14 +234,19 @@ NULL
 #' @inheritParams base::`[<-.data.frame`
 #' @export
 `[<-.tbl_df` <- function(x, i, j, ..., value) {
+  i_arg <- substitute(i)
+  j_arg <- substitute(j)
+
   if (missing(i)) {
     i <- NULL
+    i_arg <- NULL
   } else if (is.null(i)) {
     i <- integer()
   }
 
   if (missing(j)) {
     j <- NULL
+    j_arg <- NULL
   } else if (is.null(j)) {
     j <- integer()
   }
@@ -249,6 +254,8 @@ NULL
   if (is.null(j) && nargs() < 4) {
     j <- i
     i <- NULL
+    j_arg <- i_arg
+    i_arg <- NULL
 
     # Special case:
     if (is.matrix(j)) {
@@ -256,7 +263,7 @@ NULL
     }
   }
 
-  tbl_subassign(x, i, j, value)
+  tbl_subassign(x, i, j, value, j_arg = j_arg)
 }
 
 vectbl_as_row_index <- function(i, x) {

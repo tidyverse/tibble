@@ -711,6 +711,20 @@ verify_output("subsetting.txt", {
   foo$d
   foo$e
 
+  "# [<-.tbl_df rejects unknown column indexes (#83)"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[list(1:3)] <- 1
+  foo[as.list(1:3)] <- 1
+  foo[factor(1:3)] <- 1
+  foo[Sys.Date()] <- 1
+
+  "# [<-.tbl_df rejects unknown row indexes"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  foo[list(1:3), ] <- 1
+  foo[as.list(1:3), ] <- 1
+  foo[factor(1:3), ] <- 1
+  foo[Sys.Date(), ] <- 1
+
   "# [<-.tbl_df throws an error with duplicate indexes (#658)"
   df <- tibble(x = 1:2, y = x)
   df[c(1, 1)] <- 3
@@ -768,6 +782,10 @@ verify_output("subsetting.txt", {
   foo[[TRUE]] <- 1
   foo[[mean]] <- 1
   foo[[foo]] <- 1
+  foo[[1:3, 1]] <- 1
+  foo[[TRUE, 1]] <- 1
+  foo[[mean, 1]] <- 1
+  foo[[foo, 1]] <- 1
 
   "# [[<-.tbl_df throws an error with OOB assignment"
   df <- tibble(x = 1:2, y = x)
