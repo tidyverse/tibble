@@ -26,7 +26,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
     },
 
     vctrs_error_incompatible_type = function(cnd) {
-      cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
+      cnd_signal(error_incompatible_new_data_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
     }
   )
 
