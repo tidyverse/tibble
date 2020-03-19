@@ -623,7 +623,6 @@ verify_output("subsetting.txt", {
   foo[c(-1, 1)]
   foo[c(-1, NA)]
   foo[-4]
-  foo[1.5]
   foo[c(1:3, NA)]
   foo[as.matrix(1)]
   foo[array(1, dim = c(1, 1, 1))]
@@ -637,8 +636,7 @@ verify_output("subsetting.txt", {
   foo[-1:1, ]
   foo[c(-1, 1), ]
   foo[c(-1, NA), ]
-  foo[-4, ]
-  foo[1.5, ]
+  invisible(foo[-4, ])
   foo[c(1:3, NA), ]
   foo[as.matrix(1), ]
   foo[array(1, dim = c(1, 1, 1)), ]

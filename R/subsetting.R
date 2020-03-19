@@ -458,7 +458,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
         j <- match(names(j), names(x))
       }
 
-      xj <- tbl_subset_col(x, j)
+      xj <- tbl_subset_col(x, j, j_arg)
       xj <- tbl_subassign_row(xj, i, value, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
@@ -542,19 +542,19 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 }
 
 vectbl_as_row_location <- function(i, n, i_arg) {
-  subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg)
+  subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg)
 }
 
 vectbl_as_row_location2 <- function(i, n, i_arg) {
-  subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg)
+  subclass_row_index_errors(vec_as_location2(i, n, arg = as_label(i_arg)), i_arg = i_arg)
 }
 
 vectbl_as_col_location <- function(i, n, names = NULL, j_arg) {
-  subclass_col_index_errors(vec_as_location(i, n, names), j_arg = j_arg)
+  subclass_col_index_errors(vec_as_location(i, n, names, arg = as_label(j_arg)), j_arg = j_arg)
 }
 
 vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg) {
-  subclass_col_index_errors(vec_as_location2(i, n, names), j_arg = j_arg)
+  subclass_col_index_errors(vec_as_location2(i, n, names, arg = as_label(j_arg)), j_arg = j_arg)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {

@@ -24,7 +24,7 @@ Error: `i` must have one dimension, not 3.
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[0.5]
 Error: Must subset columns with a valid subscript vector.
-x Lossy cast from <double> to <integer>.
+x Lossy cast from `0.5` <double> to <integer>.
 
 > foo[1:5]
 Error: Can't subset columns that don't exist.
@@ -48,10 +48,6 @@ Error: Can't use NA as column index with `[` at position 2.
 Error: Can't negate columns that don't exist.
 x The location 4 doesn't exist.
 i There are only 3 columns.
-
-> foo[1.5]
-Error: Must subset columns with a valid subscript vector.
-x Lossy cast from <double> to <integer>.
 
 > foo[c(1:3, NA)]
 Error: Can't use NA as column index with `[` at position 4.
@@ -83,7 +79,7 @@ i It must be logical, numeric, or character.
 > foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
 > foo[0.5, ]
 Error: Must subset rows with a valid subscript vector.
-x Lossy cast from <double> to <integer>.
+x Lossy cast from `0.5` <double> to <integer>.
 
 > invisible(foo[1:5, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
@@ -104,20 +100,9 @@ Error: Must subset rows with a valid subscript vector.
 x Negative locations can't have missing values.
 i The subscript `c(-1, NA)` has a missing value at location 2.
 
-> foo[-4, ]
+> invisible(foo[-4, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
-
-# A tibble: 3 x 3
-      x     y     z
-  <int> <int> <int>
-1     1     1     1
-2     2     2     2
-3     3     3     3
-
-> foo[1.5, ]
-Error: Must subset rows with a valid subscript vector.
-x Lossy cast from <double> to <integer>.
 
 > foo[c(1:3, NA), ]
 # A tibble: 4 x 3
@@ -331,17 +316,17 @@ x The subscript `letters[1:3]` has size 3 but must be size 1.
 
 > foo[[TRUE]]
 Error: Must extract column with a single valid subscript.
-x The subscript has the wrong type `logical`.
+x The subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
 
 > foo[[mean]]
 Error: Must extract column with a single valid subscript.
-x The subscript has the wrong type `closure`.
+x The subscript `mean` has the wrong type `closure`.
 i It must be numeric or character.
 
 > foo[[foo]]
 Error: Must extract column with a single valid subscript.
-x The subscript has the wrong type `tbl_df<
+x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
@@ -600,17 +585,17 @@ x The subscript `1:3` has size 3 but must be size 1.
 
 > foo[[TRUE, 1]] <- 1
 Error: Must extract row with a single valid subscript.
-x The subscript has the wrong type `logical`.
+x The subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
 
 > foo[[mean, 1]] <- 1
 Error: Must extract row with a single valid subscript.
-x The subscript has the wrong type `closure`.
+x The subscript `mean` has the wrong type `closure`.
 i It must be numeric or character.
 
 > foo[[foo, 1]] <- 1
 Error: Must extract row with a single valid subscript.
-x The subscript has the wrong type `tbl_df<
+x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
