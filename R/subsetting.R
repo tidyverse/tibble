@@ -157,7 +157,7 @@ NULL
   }
 
   if (!is_null(i)) {
-    i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
+    i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg, assign = TRUE)
   }
 
   value <- list(value)
@@ -166,7 +166,7 @@ NULL
 
   # Side effect: check scalar, allow OOB position
   if (!identical(unname(j), NA_integer_)) {
-    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg)
+    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   }
 
   # New columns are added to the end, provide index to avoid matching column
@@ -271,7 +271,7 @@ NULL
   tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
 }
 
-vectbl_as_row_index <- function(i, x, i_arg) {
+vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -290,9 +290,9 @@ vectbl_as_row_index <- function(i, x, i_arg) {
     i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
-    vectbl_as_row_location(i, nr, i_arg)
+    vectbl_as_row_location(i, nr, i_arg, assign)
   } else {
-    vectbl_as_row_location(i, nr, i_arg)
+    vectbl_as_row_location(i, nr, i_arg, assign)
   }
 }
 
@@ -354,14 +354,14 @@ fix_oob_invalid <- function(i, is_na_orig) {
   i
 }
 
-vectbl_as_col_index <- function(j, x, j_arg) {
+vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
   stopifnot(!is.null(j))
 
   if (vec_is(j) && anyNA(j)) {
     abort(error_na_column_index(which(is.na(j))))
   }
 
-  vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg)
+  vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = assign)
 }
 
 tbl_subset2 <- function(x, j, j_arg) {
@@ -481,7 +481,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     new <- which(i > nr)
     i_new <- i[new]
     i[new] <- NA
-    i <- vectbl_as_row_location(i, nr, i_arg)
+    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
       abort(error_new_rows_at_end_only(nr, i_new))
@@ -492,9 +492,9 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i
   } else if (is_logical(i)) {
     # Don't allow OOB logical
-    vectbl_as_row_location(i, fast_nrow(x), i_arg)
+    vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
   } else {
-    i <- vectbl_as_row_index(i, x, i_arg)
+    i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
     if (anyDuplicated(i, incomparables = NA)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
     }
@@ -521,7 +521,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
     new <- which(j > ncol(x))
     j_new <- j[new]
     j[new] <- NA
-    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg)
+    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       abort(error_new_columns_at_end_only(ncol(x), j_new))
@@ -534,7 +534,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 
     set_names(j, names)
   } else {
-    j <- vectbl_as_col_index(j, x, j_arg)
+    j <- vectbl_as_col_index(j, x, j_arg, assign = TRUE)
     if (anyDuplicated(j)) {
       abort(error_duplicate_column_subscript_for_assignment(j))
     }
@@ -542,20 +542,20 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   }
 }
 
-vectbl_as_row_location <- function(i, n, i_arg) {
-  subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg)
+vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
+  subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_row_location2 <- function(i, n, i_arg) {
-  subclass_row_index_errors(vec_as_location2(i, n, arg = as_label(i_arg)), i_arg = i_arg)
+vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
+  subclass_row_index_errors(vec_as_location2(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_col_location <- function(i, n, names = NULL, j_arg) {
-  subclass_col_index_errors(vec_as_location(i, n, names, arg = as_label(j_arg)), j_arg = j_arg)
+vectbl_as_col_location <- function(i, n, names = NULL, j_arg, assign = FALSE) {
+  subclass_col_index_errors(vec_as_location(i, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
 }
 
-vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg) {
-  subclass_col_index_errors(vec_as_location2(i, n, names, arg = as_label(j_arg)), j_arg = j_arg)
+vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg, assign = FALSE) {
+  subclass_col_index_errors(vec_as_location2(i, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
@@ -773,23 +773,29 @@ error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_col_index_errors <- function(expr, j_arg) {
+subclass_col_index_errors <- function(expr, j_arg, assign) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
       cnd$subscript_arg <- j_arg
       cnd$subscript_elt <- "column"
+      if (isTRUE(assign) && !isTRUE(cnd$subscript_action %in% c("negate"))) {
+        cnd$subscript_action <- "assign"
+      }
       cnd_signal(cnd)
     }
   )
 }
 
-subclass_row_index_errors <- function(expr, i_arg) {
+subclass_row_index_errors <- function(expr, i_arg, assign) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
       cnd$subscript_arg <- i_arg
       cnd$subscript_elt <- "row"
+      if (isTRUE(assign) && !isTRUE(cnd$subscript_action %in% c("negate"))) {
+        cnd$subscript_action <- "assign"
+      }
       cnd_signal(cnd)
     }
   )

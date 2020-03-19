@@ -368,21 +368,21 @@ NULL
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3)] <- 1
-Error: Must subset columns with a valid subscript vector.
+Error: Must assign to columns with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
 > foo[as.list(1:3)] <- 1
-Error: Must subset columns with a valid subscript vector.
+Error: Must assign to columns with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
 > foo[factor(1:3)] <- 1
-Error: Can't subset columns that don't exist.
+Error: Can't assign to columns that don't exist.
 x The columns `1`, `2`, and `3` don't exist.
 
 > foo[Sys.Date()] <- 1
-Error: Must subset columns with a valid subscript vector.
+Error: Must assign to columns with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
 
@@ -392,12 +392,12 @@ i It must be logical, numeric, or character.
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3), ] <- 1
-Error: Must subset rows with a valid subscript vector.
+Error: Must assign to rows with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
 > foo[as.list(1:3), ] <- 1
-Error: Must subset rows with a valid subscript vector.
+Error: Must assign to rows with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
 
@@ -405,7 +405,7 @@ i It must be logical, numeric, or character.
 Error: Can't use character names to index an unnamed vector.
 
 > foo[Sys.Date(), ] <- 1
-Error: Must subset rows with a valid subscript vector.
+Error: Must assign to rows with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
 
@@ -571,24 +571,24 @@ Error: Subscript can't be missing for tibbles in `[[<-`.
 Error: Subscript can't be missing for tibbles in `[[<-`.
 
 > foo[[1:3]] <- 1
-Error: Must extract column with a single valid subscript.
+Error: Must assign to column with a single valid subscript.
 x The subscript `1:3` has size 3 but must be size 1.
 
 > foo[[letters[1:3]]] <- 1
-Error: Must extract column with a single valid subscript.
+Error: Must assign to column with a single valid subscript.
 x The subscript `letters[1:3]` has size 3 but must be size 1.
 
 > foo[[TRUE]] <- 1
-Error: Must extract column with a single valid subscript.
+Error: Must assign to column with a single valid subscript.
 x The subscript `TRUE` has size 2 but must be size 1.
 
 > foo[[mean]] <- 1
-Error: Must subset columns with a valid subscript vector.
+Error: Must assign to columns with a valid subscript vector.
 x The subscript `mean` has the wrong type `closure`.
 i It must be logical, numeric, or character.
 
 > foo[[foo]] <- 1
-Error: Must subset columns with a valid subscript vector.
+Error: Must assign to columns with a valid subscript vector.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
@@ -596,21 +596,21 @@ x The subscript `foo` has the wrong type `tbl_df<
 i It must be logical, numeric, or character.
 
 > foo[[1:3, 1]] <- 1
-Error: Must extract row with a single valid subscript.
+Error: Must assign to row with a single valid subscript.
 x The subscript `1:3` has size 3 but must be size 1.
 
 > foo[[TRUE, 1]] <- 1
-Error: Must extract row with a single valid subscript.
+Error: Must assign to row with a single valid subscript.
 x The subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
 
 > foo[[mean, 1]] <- 1
-Error: Must extract row with a single valid subscript.
+Error: Must assign to row with a single valid subscript.
 x The subscript `mean` has the wrong type `closure`.
 i It must be numeric or character.
 
 > foo[[foo, 1]] <- 1
-Error: Must extract row with a single valid subscript.
+Error: Must assign to row with a single valid subscript.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer

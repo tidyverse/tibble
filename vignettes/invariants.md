@@ -1287,8 +1287,8 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error: Must extract column with a single
-    #> valid subscript.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
     #> [31mx[39m The subscript `TRUE` has size 3 but
     #> must be size 1.
 
@@ -1306,8 +1306,8 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error: Must extract column with a single
-    #> valid subscript.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
     #> [31mx[39m The subscript `1:3` has size 3 but
     #> must be size 1.
 
@@ -1324,8 +1324,8 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error: Must extract column with a single
-    #> valid subscript.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
     #> [31mx[39m The subscript `c("n", "c")` has size 2
     #> but must be size 1.
 
@@ -1343,8 +1343,8 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error: Must extract column with a single
-    #> valid subscript.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
     #> [31mx[39m The subscript `FALSE` has size 0 but
     #> must be size 1.
 
@@ -1361,8 +1361,8 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error: Must extract column with a single
-    #> valid subscript.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
     #> [31mx[39m The subscript `1:2` has size 2 but
     #> must be size 1.
 
@@ -2630,7 +2630,7 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[-1:2, ] <- tbl[1, ])
 
-    #> Error: Must subset rows with a valid
+    #> Error: Must assign to rows with a valid
     #> subscript vector.
     #> [31mx[39m Negative locations can't be mixed with
     #> positive locations.
@@ -3538,6 +3538,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
+    #> Error: Must assign to row with a single
     #> valid subscript.
     #> [31mx[39m The subscript `1:2` has size 2 but
     #> must be size 1.
