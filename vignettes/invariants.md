@@ -321,8 +321,8 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `j` has the wrong type
-    #> `logical`.
+    #> [31mx[39m The subscript `TRUE` has the wrong
+    #> type `logical`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -340,8 +340,8 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `j` has the wrong type
-    #> `closure`.
+    #> [31mx[39m The subscript `mean` has the wrong
+    #> type `closure`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -448,7 +448,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Lossy cast from `j` <double> to
+    #> [31mx[39m Lossy cast from `1.5` <double> to
     #> <integer>.
 
 </td>
@@ -464,7 +464,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Lossy cast from `j` <double> to
+    #> [31mx[39m Lossy cast from `Inf` <double> to
     #> <integer>.
 
 </td>
@@ -899,10 +899,10 @@ vector containing positive numbers.
 <td>
     tbl[mean, ]
 
-    #> Error: Must subset elements with a valid
+    #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m The subscript has the wrong type
-    #> `closure`.
+    #> [31mx[39m The subscript `mean` has the wrong
+    #> type `closure`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -919,10 +919,10 @@ vector containing positive numbers.
 <td>
     tbl[list(1), ]
 
-    #> Error: Must subset elements with a valid
+    #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m The subscript has the wrong type
-    #> `list`.
+    #> [31mx[39m The subscript `list(1)` has the wrong
+    #> type `list`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -957,9 +957,8 @@ Exception: OOB values generate warnings instead of errors:
     tbl[10, ]
 
     #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` if integer must be
-    #> between 0 and the number of rows as of
-    #> tibble 3.0.0.
+    #> ``[.tbl_df`()` must lie in [0, rows] if
+    #> positive, as of tibble 3.0.0.
     #> Use `NA` as row index to obtain a row
     #> full of `NA` values.
 
@@ -1011,12 +1010,12 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 <td>
     tbl[c(TRUE, FALSE), ]
 
-    #> Error: Must subset elements with a valid
+    #> Error: Must subset rows with a valid
     #> subscript vector.
     #> [34mℹ[39m Logical subscripts must match the size
     #> of the indexed input.
     #> [31mx[39m The input has size 4 but the subscript
-    #> has size 2.
+    #> `c(TRUE, FALSE)` has size 2.
 
 </td>
 </tr>
@@ -1288,10 +1287,10 @@ value `a`.
 <td>
     with_tbl(tbl[[TRUE]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript `j` has size 3 but must
-    #> be size 1.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `TRUE` has size 3 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -1307,10 +1306,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:3]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript `j` has size 3 but must
-    #> be size 1.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `1:3` has size 3 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -1325,10 +1324,10 @@ value `a`.
 <td>
     with_tbl(tbl[[c("n", "c")]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript `j` has size 2 but must
-    #> be size 1.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `c("n", "c")` has size 2
+    #> but must be size 1.
 
 </td>
 </tr>
@@ -1344,10 +1343,10 @@ value `a`.
 <td>
     with_tbl(tbl[[FALSE]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript `j` has size 0 but must
-    #> be size 1.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `FALSE` has size 0 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -1362,10 +1361,10 @@ value `a`.
 <td>
     with_tbl(tbl[[1:2]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript `j` has size 2 but must
-    #> be size 1.
+    #> Error: Must extract column with a single
+    #> valid subscript.
+    #> [31mx[39m The subscript `1:2` has size 2 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -1534,10 +1533,10 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 3:1)
 
     #> Error: Tibble columns must have
-    #> consistent sizes, only values of size
-    #> one are recycled:
-    #> * Size 4: Existing data
-    #> * Size 3: Column at position 1
+    #> consistent with existing data:
+    #> * Existing data has 4 rows
+    #> * New data contributes 3 rows
+    #> * Only vectors of size 1 are recycled
 
 </td>
 </tr>
@@ -1555,10 +1554,10 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 2:1)
 
     #> Error: Tibble columns must have
-    #> consistent sizes, only values of size
-    #> one are recycled:
-    #> * Size 4: Existing data
-    #> * Size 2: Column at position 1
+    #> consistent with existing data:
+    #> * Existing data has 4 rows
+    #> * New data contributes 2 rows
+    #> * Only vectors of size 1 are recycled
 
 </td>
 </tr>
@@ -1952,8 +1951,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:2] <- list(0, 0, 0))
 
-    #> Error: `value` can't be recycled to size
-    #> 2.
+    #> Error: `list(0, 0, 0)` can't be recycled
+    #> to size 2.
     #> [31mx[39m It must be size 2 or 1, not 3.
 
 </td>
@@ -1971,8 +1970,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
     with_tbl(tbl[1:3] <- list(0, 0))
 
-    #> Error: `value` can't be recycled to size
-    #> 3.
+    #> Error: `list(0, 0)` can't be recycled to
+    #> size 3.
     #> [31mx[39m It must be size 3 or 1, not 2.
 
 </td>
@@ -2287,7 +2286,6 @@ and if all columns updated are compatible with the value assigned.
     with_tbl(tbl[is.na(tbl)] <- 1:2)
 
     #> Error in tbl_subassign_matrix(x, j,
-    #> value): vec_size(value) == 1 is not TRUE
 
 </td>
 </tr>
@@ -2304,8 +2302,6 @@ and if all columns updated are compatible with the value assigned.
 <td>
     with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
-    #> Error: No common type for `value`
-    #> <double> and `x` <character>.
 
 </td>
 </tr>
@@ -2450,7 +2446,7 @@ Entire columns can be removed. Specifying `i` is an error.
 <td>
     with_tbl(tbl[1, 2:3] <- NULL)
 
-    #> Error: `value` must be a vector, a bare
+    #> Error: `NULL` must be a vector, a bare
     #> list or a data frame in `[<-`.
 
 </td>
@@ -2477,7 +2473,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- mean)
 
-    #> Error: `value` must be a vector, a bare
+    #> Error: `mean` must be a vector, a bare
     #> list, a data frame or NULL in `[<-`.
 
 </td>
@@ -2520,8 +2516,9 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
     with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
-    #> Error: `value` must be a vector, a bare
-    #> list, a data frame or NULL in `[<-`.
+    #> Error: `lm(mpg ~ wt, data = mtcars)`
+    #> must be a vector, a bare list, a data
+    #> frame or NULL in `[<-`.
 
 </td>
 </tr>
@@ -2626,12 +2623,12 @@ Row subassignment: `x[i, ] <- list(...)`
 <td>
     with_tbl(tbl[-1:2, ] <- tbl[1, ])
 
-    #> Error: Must subset elements with a valid
+    #> Error: Must subset rows with a valid
     #> subscript vector.
     #> [31mx[39m Negative locations can't be mixed with
     #> positive locations.
-    #> [34mℹ[39m The subscript has 2 positive values at
-    #> locations 3 and 4.
+    #> [34mℹ[39m The subscript `-1:2` has 2 positive
+    #> values at locations 3 and 4.
 
 </td>
 </tr>
@@ -2767,9 +2764,12 @@ Only values of size one can be recycled.
 <td>
     with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
-    #> Error: `value` can't be recycled to size
-    #> 3.
-    #> [31mx[39m It must be size 3 or 1, not 2.
+    #> Error: New data `tbl[1:2, ]` must be
+    #> consistent with subscript `2:4`:
+    #> * Subscript has 3 rows
+    #> * Element 1 of new data contributes 2
+    #> rows
+    #> * Only vectors of size 1 are recycled
 
 </td>
 </tr>
@@ -2813,9 +2813,11 @@ Only values of size one can be recycled.
 <td>
     with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
 
-    #> Error: `value` can't be recycled to size
-    #> 3.
-    #> [31mx[39m It must be size 3 or 1, not 2.
+    #> Error: New data `tbl2[2:3, ]` must be
+    #> * Subscript has 3 rows
+    #> * Element 1 of new data contributes 2
+    #> rows
+    #> * Only vectors of size 1 are recycled
 
 </td>
 </tr>
@@ -2894,10 +2896,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-5, ] <- tbl[1, ])
 
-    #> Error: Can't negate elements that don't
+    #> Error: Can't negate rows that don't
     #> exist.
     #> [31mx[39m The location 5 doesn't exist.
-    #> [34mℹ[39m There are only 4 elements.
+    #> [34mℹ[39m There are only 4 rows.
 
 </td>
 </tr>
@@ -2914,10 +2916,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-(5:7), ] <- tbl[1, ])
 
-    #> Error: Can't negate elements that don't
+    #> Error: Can't negate rows that don't
     #> exist.
     #> [31mx[39m The locations 5, 6, and 7 don't exist.
-    #> [34mℹ[39m There are only 4 elements.
+    #> [34mℹ[39m There are only 4 rows.
 
 </td>
 </tr>
@@ -2934,10 +2936,10 @@ supported, without warning.
 <td>
     with_tbl(tbl[-6, ] <- tbl[1, ])
 
-    #> Error: Can't negate elements that don't
+    #> Error: Can't negate rows that don't
     #> exist.
     #> [31mx[39m The location 6 doesn't exist.
-    #> [34mℹ[39m There are only 4 elements.
+    #> [34mℹ[39m There are only 4 rows.
 
 </td>
 </tr>
@@ -3092,8 +3094,12 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
 
-    #> Error: No common type for `value`
-    #> <character> and `x` <integer>.
+    #> Error: New data `tbl[1:2, 2]` must be
+    #> compatible with existing data:
+    #> * Target: column `n`
+    #> * Position: 1
+    #> * No common type for `value` <character>
+    #> and `x` <integer>.
 
 </td>
 </tr>
@@ -3116,8 +3122,12 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
 
-    #> Error: No common type for `value` <list>
-    #> and `x` <character>.
+    #> Error: New data `tbl[1:2, 3]` must be
+    #> compatible with existing data:
+    #> * Target: column `c`
+    #> * Position: 1
+    #> * No common type for `value` <list> and
+    #> `x` <character>.
 
 </td>
 </tr>
@@ -3140,8 +3150,11 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: No common type for `value`
-    #> <tbl_df<
+    #> Error: New data `tbl2[1:2, 1]` must be
+    #> compatible with existing data:
+    #> * Target: column `li`
+    #> * Position: 1
+    #> * No common type for `value` <tbl_df<
     #> n : integer
     #> c : character
     #> li: list
@@ -3167,7 +3180,11 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
     with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
 
-    #> Error: No common type for `value`
+    #> Error: New data `tbl2[1:2, 2]` must be
+    #> compatible with existing data:
+    #> * Target: column `tb`
+    #> * Position: 1
+    #> * No common type for `value`
     #> <double[,4]> and `x` <tbl_df<
     #> n : integer
     #> c : character
@@ -3288,7 +3305,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 <td>
     with_tbl(tbl[2:3, "n"] <- NULL)
 
-    #> Error: `value` must be a vector, a bare
+    #> Error: `NULL` must be a vector, a bare
     #> list or a data frame in `[<-`.
 
 </td>
@@ -3494,10 +3511,10 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     tbl[[1:2, 1]]
 
-    #> Error: Must extract column with a single
+    #> Error: Must extract row with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `1` has size 2 but must
-    #> be size 1.
+    #> [31mx[39m The subscript `1:2` has size 2 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -3513,10 +3530,9 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
     with_tbl(tbl[[1:2, 1]] <- 0)
 
-    #> Error: Must extract element with a
-    #> single valid subscript.
-    #> [31mx[39m The subscript has size 2 but must be
-    #> size 1.
+    #> valid subscript.
+    #> [31mx[39m The subscript `1:2` has size 2 but
+    #> must be size 1.
 
 </td>
 </tr>
