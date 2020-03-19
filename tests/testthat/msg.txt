@@ -126,7 +126,6 @@ New data `rhs` must be consistent with row subscript `4:1`:
 <error/tibble_error_incompatible_new_data_type>
 New data `rhs` must be compatible with existing data:
 * Target: column `a`
-* Position: 1
 * Can't frobnicate.
 
 > error_add_rows_to_grouped_df()

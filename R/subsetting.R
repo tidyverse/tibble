@@ -615,7 +615,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
       x[[j]] <- xj
     },
 
-    vctrs_error_incompatible_type = function(cnd) {
+    vctrs_error = function(cnd) {
       cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
     }
   )
@@ -761,7 +761,6 @@ error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
     bullets(
       paste0("New data `", as_label(value_arg), "` must be compatible with existing data:"),
       paste0("Target: column ", tick(name)),
-      paste0("Position: ", j),
       message
     ),
     expected = x[[j]],
