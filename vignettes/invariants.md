@@ -2772,7 +2772,7 @@ Only values of size one can be recycled.
     with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
     #> Error: New data `tbl[1:2, ]` must be
-    #> consistent with subscript `2:4`:
+    #> consistent with row subscript `2:4`:
     #> * Subscript has 3 rows
     #> * Element 1 of new data contributes 2
     #> rows
@@ -2821,6 +2821,7 @@ Only values of size one can be recycled.
     with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
 
     #> Error: New data `tbl2[2:3, ]` must be
+    #> consistent with row subscript `2:4`:
     #> * Subscript has 3 rows
     #> * Element 1 of new data contributes 2
     #> rows

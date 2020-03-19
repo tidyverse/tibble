@@ -730,7 +730,7 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
   } else {
-    target <- paste0("subscript `", as_label(i_arg), "`")
+    target <- paste0("row subscript `", as_label(i_arg), "`")
     existing <- pluralise_count("Subscript has ", nrow, " row(s)")
   }
 

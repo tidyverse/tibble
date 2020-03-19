@@ -480,7 +480,7 @@ Error: `x` can't be recycled to size 3.
 x It must be size 3 or 1, not 2.
 
 > df[1:2, ] <- 1:3
-Error: New data `1:3` must be consistent with subscript `1:2`:
+Error: New data `1:3` must be consistent with row subscript `1:2`:
 * Subscript has 2 rows
 * New data contributes 3 rows
 * Only vectors of size 1 are recycled
