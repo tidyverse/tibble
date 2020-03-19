@@ -12,7 +12,7 @@ Error: Can't subset columns that don't exist.
 x The columns `w` and `z` don't exist.
 
 > foo[as.matrix("x")]
-Error: Invalid `j`: if a matrix, it must be of type logical.
+Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -57,7 +57,7 @@ x Lossy cast from <double> to <integer>.
 Error: Can't use NA as column index with `[` at position 4.
 
 > foo[as.matrix(1)]
-Error: Invalid `j`: if a matrix, it must be of type logical.
+Error: The subscript `as.matrix(1)` is a matrix, it must be of type logical.
 
 > foo[array(1, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -167,7 +167,7 @@ x The input has size 3 but the subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 
 Error: Can't use NA as column index with `[` at position 3.
 
 > foo[as.matrix(TRUE)]
-Error: Invalid `j`: if a matrix, it must have the same dimensions as `x`.
+Error: The subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.

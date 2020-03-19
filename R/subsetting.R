@@ -213,7 +213,7 @@ NULL
 
     # Special case, returns a vector:
     if (is.matrix(j)) {
-      return(tbl_subset_matrix(x, j))
+      return(tbl_subset_matrix(x, j, j_arg))
     }
   }
 
@@ -260,7 +260,7 @@ NULL
 
     # Special case:
     if (is.matrix(j)) {
-      return(tbl_subassign_matrix(x, j, value))
+      return(tbl_subassign_matrix(x, j, value, j_arg))
     }
   }
 
