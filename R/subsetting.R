@@ -747,7 +747,8 @@ error_inconsistent_new_data <- function(nrow, value, j, i_arg, value_arg) {
       "Only vectors of size 1 are recycled"
     ),
     expected = nrow,
-    actual = vec_size(value[[j]])
+    actual = vec_size(value[[j]]),
+    j = j
   )
 }
 
