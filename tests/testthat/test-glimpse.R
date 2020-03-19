@@ -93,18 +93,13 @@ test_that("glimpse output matches known output", {
     iris2 <- as_unknown_rows(iris)
     glimpse(iris2, width = 70L)
 
-    nested_iris_df <- tibble(
-      Species = unique(iris$Species),
-      data = unname(split(iris, iris$Species))
-    )
-
-    nested_iris_tbl <- tibble(
-      Species = unique(iris$Species),
-      data = map(unname(split(iris, iris$Species)), as_tibble)
-    )
-
+    Species <- unique(iris$Species)
+    data <- unname(split(iris, iris$Species))
+    nested_iris_df <- tibble(Species, data)
     glimpse(nested_iris_df, width = 70L)
 
+    data <- map(data, as_tibble)
+    nested_iris_tbl <- tibble(Species, data)
     glimpse(nested_iris_tbl, width = 70L)
   })
 })
