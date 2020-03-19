@@ -118,13 +118,14 @@ NULL
   } else if (missing(j) || missing(i)) {
     abort(error_subset_columns_non_missing_only())
   } else {
-    i <- vectbl_as_row_location2(i, fast_nrow(x))
+    i_arg <- substitute(i)
+    i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
     x <- tbl_subset2(x, j = j, j_arg = substitute(j))
 
     if (is.null(x)) {
       x
     } else {
-      subclass_row_index_errors(vec_slice(x, i), i_arg = substitute(i))
+      vec_slice(x, i)
     }
   }
 }
@@ -152,7 +153,7 @@ NULL
   }
 
   if (!is_null(i)) {
-    i <- vectbl_as_row_location2(i, fast_nrow(x))
+    i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
   }
 
   value <- list(value)
@@ -169,7 +170,7 @@ NULL
   names(value) <- names(j)
   j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, j, value, j_arg = NULL)
+  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL)
 }
 
 
@@ -220,7 +221,7 @@ NULL
   xo <- tbl_subset_col(x, j = j, j_arg)
 
   if (!is.null(i)) {
-    xo <- tbl_subset_row(xo, i = i)
+    xo <- tbl_subset_row(xo, i = i, i_arg)
   }
 
   if (drop && length(xo) == 1L) {
@@ -266,7 +267,7 @@ NULL
   tbl_subassign(x, i, j, value, i_arg, j_arg)
 }
 
-vectbl_as_row_index <- function(i, x, i_arg = "i") {
+vectbl_as_row_index <- function(i, x, i_arg) {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -390,7 +391,7 @@ tbl_subset_col <- function(x, j, j_arg) {
   set_tibble_class(xo, nrow = fast_nrow(x))
 }
 
-tbl_subset_row <- function(x, i, i_arg = "i") {
+tbl_subset_row <- function(x, i, i_arg) {
   if (is_null(i)) return(x)
   i <- vectbl_as_row_index(i, x, i_arg)
   xo <- lapply(unclass(x), vec_slice, i = i)
@@ -459,7 +460,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
   vectbl_restore(xo, x)
 }
 
-vectbl_as_new_row_index <- function(i, x, i_arg = "i") {
+vectbl_as_new_row_index <- function(i, x, i_arg) {
   if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
@@ -535,8 +536,8 @@ vectbl_as_row_location <- function(i, n, i_arg) {
   subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg)
 }
 
-vectbl_as_row_location2 <- function(i, n, names = NULL, i_arg = "i") {
-  subclass_row_index_errors(vec_as_location2(i, n, names), i_arg = i_arg)
+vectbl_as_row_location2 <- function(i, n, i_arg) {
+  subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg)
 }
 
 vectbl_as_col_location <- function(i, n, names = NULL, j_arg) {
