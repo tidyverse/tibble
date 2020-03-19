@@ -15,7 +15,7 @@ x The columns `w` and `z` don't exist.
 Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 
 [.tbl_df is careful about column indexes (#83)
@@ -33,12 +33,12 @@ i There are only 3 columns.
 
 > foo[-1:1]
 Error: Must subset columns with a valid subscript vector.
-x Negative locations can't be mixed with positive locations.
+x Negative and positive locations can't be mixed.
 i The subscript `-1:1` has a positive value at location 3.
 
 > foo[c(-1, 1)]
 Error: Must subset columns with a valid subscript vector.
-x Negative locations can't be mixed with positive locations.
+x Negative and positive locations can't be mixed.
 i The subscript `c(-1, 1)` has a positive value at location 2.
 
 > foo[c(-1, NA)]
@@ -56,11 +56,11 @@ Error: Can't use NA as column index with `[` at position 4.
 Error: The subscript `as.matrix(1)` is a matrix, it must be of type logical.
 
 > foo[array(1, dim = c(1, 1, 1))]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 > foo[mean]
 Error: Must subset columns with a valid subscript vector.
-x The subscript `mean` has the wrong type `closure`.
+x The subscript `mean` has the wrong type `function`.
 i It must be logical, numeric, or character.
 
 > foo[foo]
@@ -87,12 +87,12 @@ Use `NA` as row index to obtain a row full of `NA` values.
 
 > foo[-1:1, ]
 Error: Must subset rows with a valid subscript vector.
-x Negative locations can't be mixed with positive locations.
+x Negative and positive locations can't be mixed.
 i The subscript `-1:1` has a positive value at location 3.
 
 > foo[c(-1, 1), ]
 Error: Must subset rows with a valid subscript vector.
-x Negative locations can't be mixed with positive locations.
+x Negative and positive locations can't be mixed.
 i The subscript `c(-1, 1)` has a positive value at location 2.
 
 > foo[c(-1, NA), ]
@@ -105,14 +105,14 @@ Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, 
 Use `NA` as row index to obtain a row full of `NA` values.
 
 > foo[as.matrix(1), ]
-Error: `i` must have one dimension, not 2.
+Error: `i` must be a one-dimensional vector but has 2 dimensions.
 
 > foo[array(1, dim = c(1, 1, 1)), ]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 > foo[mean, ]
 Error: Must subset rows with a valid subscript vector.
-x The subscript `mean` has the wrong type `closure`.
+x The subscript `mean` has the wrong type `function`.
 i It must be logical, numeric, or character.
 
 > foo[foo, ]
@@ -146,7 +146,7 @@ Error: Can't use NA as column index with `[` at position 3.
 Error: The subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 
 [.tbl_df is careful about row flags
@@ -164,10 +164,10 @@ i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
 
 > foo[as.matrix(TRUE), ]
-Error: `i` must have one dimension, not 2.
+Error: `i` must be a one-dimensional vector but has 2 dimensions.
 
 > foo[array(TRUE, dim = c(1, 1, 1)), ]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 
 [.tbl_df rejects unknown column indexes (#83)
@@ -231,7 +231,7 @@ Error: No common type for `a` <integer> and `b` <character>.
 Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
-Error: `i` must have one dimension, not 3.
+Error: `i` must be a one-dimensional vector but has 3 dimensions.
 
 
 [.tbl_df and OOB indexing
@@ -292,7 +292,7 @@ i It must be numeric or character.
 
 > foo[[mean]]
 Error: Must extract column with a single valid subscript.
-x The subscript `mean` has the wrong type `closure`.
+x The subscript `mean` has the wrong type `function`.
 i It must be numeric or character.
 
 > foo[[foo]]
@@ -546,7 +546,7 @@ x The subscript `TRUE` has size 2 but must be size 1.
 
 > foo[[mean]] <- 1
 Error: Must assign to columns with a valid subscript vector.
-x The subscript `mean` has the wrong type `closure`.
+x The subscript `mean` has the wrong type `function`.
 i It must be logical, numeric, or character.
 
 > foo[[foo]] <- 1
@@ -568,7 +568,7 @@ i It must be numeric or character.
 
 > foo[[mean, 1]] <- 1
 Error: Must assign to row with a single valid subscript.
-x The subscript `mean` has the wrong type `closure`.
+x The subscript `mean` has the wrong type `function`.
 i It must be numeric or character.
 
 > foo[[foo, 1]] <- 1
