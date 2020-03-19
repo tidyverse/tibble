@@ -88,7 +88,7 @@ NULL
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
-  tbl_subassign(x, i = NULL, as_string(name), list(value), j_arg = NULL)
+  tbl_subassign(x, i = NULL, as_string(name), list(value), i_arg = NULL, j_arg = NULL)
 }
 
 #' @rdname subsetting
@@ -263,10 +263,10 @@ NULL
     }
   }
 
-  tbl_subassign(x, i, j, value, j_arg = j_arg)
+  tbl_subassign(x, i, j, value, i_arg, j_arg)
 }
 
-vectbl_as_row_index <- function(i, x) {
+vectbl_as_row_index <- function(i, x, i_arg = "i") {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -285,9 +285,9 @@ vectbl_as_row_index <- function(i, x) {
     i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
-    vectbl_as_row_location(i, nr)
+    vectbl_as_row_location(i, nr, i_arg)
   } else {
-    vectbl_as_row_location(i, nr)
+    vectbl_as_row_location(i, nr, i_arg)
   }
 }
 
@@ -390,14 +390,14 @@ tbl_subset_col <- function(x, j, j_arg) {
   set_tibble_class(xo, nrow = fast_nrow(x))
 }
 
-tbl_subset_row <- function(x, i) {
+tbl_subset_row <- function(x, i, i_arg = "i") {
   if (is_null(i)) return(x)
-  i <- vectbl_as_row_index(i, x)
+  i <- vectbl_as_row_index(i, x, i_arg)
   xo <- lapply(unclass(x), vec_slice, i = i)
   set_tibble_class(xo, nrow = length(i))
 }
 
-tbl_subassign <- function(x, i, j, value, j_arg) {
+tbl_subassign <- function(x, i, j, value, i_arg, j_arg) {
   if (!vec_is(value)) {
     if (!is_null(i)) {
       abort(error_need_rhs_vector())
@@ -428,7 +428,7 @@ tbl_subassign <- function(x, i, j, value, j_arg) {
     xo <- tbl_subassign_col(x, j, value)
   } else {
     # Fill up rows first if necessary
-    i <- vectbl_as_new_row_index(i, x)
+    i <- vectbl_as_new_row_index(i, x, i_arg)
     x <- tbl_expand_to_nrow(x, i)
 
     if (is.null(j)) {
@@ -459,7 +459,7 @@ tbl_subassign <- function(x, i, j, value, j_arg) {
   vectbl_restore(xo, x)
 }
 
-vectbl_as_new_row_index <- function(i, x) {
+vectbl_as_new_row_index <- function(i, x, i_arg = "i") {
   if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
@@ -470,7 +470,7 @@ vectbl_as_new_row_index <- function(i, x) {
     new <- which(i > nr)
     i_new <- i[new]
     i[new] <- NA
-    i <- vectbl_as_row_location(i, nr)
+    i <- vectbl_as_row_location(i, nr, i_arg)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
       abort(error_new_rows_at_end_only(nr, i_new))
@@ -481,9 +481,9 @@ vectbl_as_new_row_index <- function(i, x) {
     i
   } else if (is_logical(i)) {
     # Don't allow OOB logical
-    vectbl_as_row_location(i, fast_nrow(x))
+    vectbl_as_row_location(i, fast_nrow(x), i_arg)
   } else {
-    i <- vectbl_as_row_index(i, x)
+    i <- vectbl_as_row_index(i, x, i_arg)
     if (anyDuplicated(i, incomparables = NA)) {
       abort(error_duplicate_row_subscript_for_assignment(i))
     }
@@ -531,8 +531,8 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg) {
   }
 }
 
-vectbl_as_row_location <- function(i, n, names = NULL, i_arg = "i") {
-  subclass_row_index_errors(vec_as_location(i, n, names), i_arg = i_arg)
+vectbl_as_row_location <- function(i, n, i_arg) {
+  subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg)
 }
 
 vectbl_as_row_location2 <- function(i, n, names = NULL, i_arg = "i") {
@@ -746,7 +746,7 @@ subclass_col_index_errors <- function(expr, j_arg) {
   )
 }
 
-subclass_row_index_errors <- function(expr, i_arg = NULL) {
+subclass_row_index_errors <- function(expr, i_arg) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
