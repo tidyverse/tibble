@@ -223,8 +223,7 @@ All columns in a tibble must be vectors:
 * Column `b` is name
 * Column `c` is NULL
 
-> error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", 
-+     "VV", letters))
+> error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 <error/tibble_error_column_must_be_vector>
 All columns in a tibble must be vectors:
 * Column 1 is QQ
@@ -234,21 +233,24 @@ All columns in a tibble must be vectors:
 * Column `C` is c
 * ... and 23 more problems
 
-> error_inconsistent_cols(10, letters[1:3], c(4, 4, 3), "Requested with `uvw` argument")
+> error_inconsistent_cols(10, letters[1:3], c(4, 4, 3),
++ "Requested with `uvw` argument")
 <error/tibble_error_inconsistent_cols>
 Tibble columns must have consistent sizes, only values of size one are recycled:
 * Size 10: Requested with `uvw` argument
 * Size 3: Column `c`
 * Size 4: Columns `a`, `b`
 
-> error_inconsistent_cols(10, letters[1:3], c(2, 2, 3), "Requested with `xyz` argument")
+> error_inconsistent_cols(10, letters[1:3], c(2, 2, 3),
++ "Requested with `xyz` argument")
 <error/tibble_error_inconsistent_cols>
 Tibble columns must have consistent sizes, only values of size one are recycled:
 * Size 10: Requested with `xyz` argument
 * Size 2: Columns `a`, `b`
 * Size 3: Column `c`
 
-> error_inconsistent_cols(NULL, letters[1:3], c(2, 2, 3), "Requested with `xyz` argument")
+> error_inconsistent_cols(NULL, letters[1:3], c(2, 2, 3),
++ "Requested with `xyz` argument")
 <error/tibble_error_inconsistent_cols>
 Tibble columns must have consistent sizes, only values of size one are recycled:
 * Size 2: Columns `a`, `b`
