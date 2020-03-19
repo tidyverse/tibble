@@ -13,7 +13,12 @@ tbl_subset_matrix <- function(x, j, j_arg) {
 }
 
 tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
-  vec_assert(value, size = 1, arg = as_label(value_arg))
+  # FIXME: use size argument in vctrs >= 0.3.0
+  vec_assert(value, arg = as_label(value_arg))
+
+  if (vec_size(value) != 1) {
+    rlang::abort(paste0(tick(as_label(j_arg)), " is a matrix, ", tick(as_label(value_arg)), " must have size 1."))
+  }
 
   cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)
@@ -26,7 +31,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
     },
 
     vctrs_error_incompatible_type = function(cnd) {
-      cnd_signal(error_incompatible_new_data_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
+      abort(error_incompatible_new_data_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
     }
   )
 
