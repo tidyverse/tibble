@@ -506,16 +506,28 @@ Error: New data `1:2` must be consistent with existing data:
 
 > df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
 > df[1:3, 1:2] <- df[2:3]
-Error: No common type for `value` <character> and `x` <integer>.
+Error: New data `df[2:3]` must be compatible with existing data:
+* Target: column `x`
+* Position: 1
+* No common type for `value` <character> and `x` <integer>.
 
 > df[1:3, 1:2] <- df[1]
-Error: No common type for `value` <integer> and `x` <character>.
+Error: New data `df[1]` must be compatible with existing data:
+* Target: column `y`
+* Position: 2
+* No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:2] <- df[[1]]
-Error: No common type for `value` <integer> and `x` <character>.
+Error: New data `df[[1]]` must be compatible with existing data:
+* Target: column `y`
+* Position: 2
+* No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:3] <- df[3:1]
-Error: No common type for `value` <list> and `x` <integer>.
+Error: New data `df[3:1]` must be compatible with existing data:
+* Target: column `x`
+* Position: 1
+* No common type for `value` <list> and `x` <integer>.
 
 > df[1:3, 1:3] <- NULL
 Error: `NULL` must be a vector, a bare list or a data frame in `[<-`.
@@ -535,7 +547,10 @@ Error: Lossy cast from `value` <double> to `x` <logical>.
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
-Error: No common type for `value` <character> and `x` <integer>.
+Error: New data `"bogus"` must be compatible with existing data:
+* Target: column `a`
+* Position: 1
+* No common type for `value` <character> and `x` <integer>.
 
 
 [[.tbl_df rejects invalid column indexes

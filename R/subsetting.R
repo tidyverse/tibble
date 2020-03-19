@@ -263,7 +263,7 @@ NULL
 
     # Special case:
     if (is.matrix(j)) {
-      return(tbl_subassign_matrix(x, j, value, j_arg))
+      return(tbl_subassign_matrix(x, j, value, j_arg, substitute(value)))
     }
   }
 
@@ -440,7 +440,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
-      xo <- tbl_subassign_row(x, i, value)
+      xo <- tbl_subassign_row(x, i, value, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
@@ -459,7 +459,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       }
 
       xj <- tbl_subset_col(x, j)
-      xj <- tbl_subassign_row(xj, i, value)
+      xj <- tbl_subassign_row(xj, i, value, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
   }
@@ -603,18 +603,21 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value) {
-  value_len <- length(value)
-
+tbl_subassign_row <- function(x, i, value, value_arg) {
   nrow <- fast_nrow(x)
-
   x <- unclass(x)
 
-  for (j in seq_along(x)) {
-    xj <- x[[j]]
-    vec_slice(xj, i) <- value[[j]]
-    x[[j]] <- xj
-  }
+  tryCatch(
+    for (j in seq_along(x)) {
+      xj <- x[[j]]
+      vec_slice(xj, i) <- value[[j]]
+      x[[j]] <- xj
+    },
+
+    vctrs_error_incompatible_type = function(cnd) {
+      cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
+    }
+  )
 
   set_tibble_class(x, nrow)
 }
@@ -625,16 +628,14 @@ fast_nrow <- function(x) {
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
   tryCatch(
-    {
-      for (j in seq_along(value)) {
-        if (!is.null(value[[j]])) {
-          value[[j]] <- vec_recycle(value[[j]], nrow)
-        }
+    for (j in seq_along(value)) {
+      if (!is.null(value[[j]])) {
+        value[[j]] <- vec_recycle(value[[j]], nrow)
       }
     },
 
     vctrs_error_recycle_incompatible_size = function(cnd) {
-      cnd_signal(error_inconsistent_new_data(nrow, value, j, i_arg, value_arg))
+      cnd_signal(error_inconsistent_new_data_size(nrow, value, j, i_arg, value_arg))
     }
   )
 
@@ -723,7 +724,7 @@ error_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-error_inconsistent_new_data <- function(nrow, value, j, i_arg, value_arg) {
+error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
@@ -748,6 +749,23 @@ error_inconsistent_new_data <- function(nrow, value, j, i_arg, value_arg) {
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),
+    j = j
+  )
+}
+
+error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
+  name <- names(x)[[j]]
+
+  tibble_error(
+    bullets(
+      paste0("New data `", as_label(value_arg), "` must be compatible with existing data:"),
+      paste0("Target: column ", tick(name)),
+      paste0("Position: ", j),
+      message
+    ),
+    expected = x[[j]],
+    actual = value[[j]],
+    name = name,
     j = j
   )
 }

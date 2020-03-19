@@ -12,15 +12,23 @@ tbl_subset_matrix <- function(x, j, j_arg) {
   unname(vec_c(!!!values, .name_spec = ~ .x))
 }
 
-tbl_subassign_matrix <- function(x, j, value, j_arg) {
+tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
   stopifnot(vec_is(value), vec_size(value) == 1)
 
   cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)
 
-  for (i in col_idx) {
-    vec_slice(x[[i]], cells[[i]]) <- value
-  }
+  tryCatch(
+    for (j in col_idx) {
+      xj <- x[[j]]
+      vec_slice(xj, cells[[j]]) <- value
+      x[[j]] <- xj
+    },
+
+    vctrs_error_incompatible_type = function(cnd) {
+      cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
+    }
+  )
 
   x
 }
