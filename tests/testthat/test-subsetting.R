@@ -637,7 +637,6 @@ verify_output("subsetting.txt", {
   foo[c(-1, 1), ]
   foo[c(-1, NA), ]
   invisible(foo[-4, ])
-  foo[c(1:3, NA), ]
   foo[as.matrix(1), ]
   foo[array(1, dim = c(1, 1, 1)), ]
   foo[mean, ]
@@ -655,7 +654,6 @@ verify_output("subsetting.txt", {
   foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
   foo[c(TRUE, TRUE), ]
   foo[c(TRUE, TRUE, FALSE, FALSE), ]
-  foo[c(TRUE, TRUE, NA), ]
   foo[as.matrix(TRUE), ]
   foo[array(TRUE, dim = c(1, 1, 1)), ]
 
@@ -682,9 +680,9 @@ verify_output("subsetting.txt", {
 
   "# [.tbl_df and OOB indexing"
   foo <- tibble(a = 1:3, b = letters[1:3])
-  foo[3:5, ]
-  foo[-(3:5), ]
-  foo["x", ]
+  invisible(foo[3:5, ])
+  invisible(foo[-(3:5), ])
+  invisible(foo["x", ])
 
   "# [.tbl_df and logical recycling"
   foo <- tibble(a = 1:4, b = a)

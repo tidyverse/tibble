@@ -104,15 +104,6 @@ i The subscript `c(-1, NA)` has a missing value at location 2.
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
-> foo[c(1:3, NA), ]
-# A tibble: 4 x 3
-      x     y     z
-  <int> <int> <int>
-1     1     1     1
-2     2     2     2
-3     3     3     3
-4    NA    NA    NA
-
 > foo[as.matrix(1), ]
 Error: `i` must have one dimension, not 2.
 
@@ -171,14 +162,6 @@ x The input has size 3 but the subscript `c(TRUE, TRUE)` has size 2.
 Error: Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
-
-> foo[c(TRUE, TRUE, NA), ]
-# A tibble: 3 x 3
-      x     y     z
-  <int> <int> <int>
-1     1     1     1
-2     2     2     2
-3    NA    NA    NA
 
 > foo[as.matrix(TRUE), ]
 Error: `i` must have one dimension, not 2.
@@ -255,35 +238,17 @@ Error: `i` must have one dimension, not 3.
 =========================
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
-> foo[3:5, ]
+> invisible(foo[3:5, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
-# A tibble: 3 x 2
-      a b    
-  <int> <chr>
-1     3 c    
-2    NA <NA> 
-3    NA <NA> 
-
-> foo[-(3:5), ]
+> invisible(foo[-(3:5), ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
-# A tibble: 2 x 2
-      a b    
-  <int> <chr>
-1     1 a    
-2     2 b    
-
-> foo["x", ]
+> invisible(foo["x", ])
 Warning: The `i` argument of ``[.tbl_df`()` must use valid row names as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
-
-# A tibble: 1 x 2
-      a b    
-  <int> <chr>
-1    NA <NA> 
 
 
 [.tbl_df and logical recycling
@@ -440,10 +405,10 @@ Error: Can't use NA as row index in a tibble for assignment.
 
 > df <- tibble(x = 1:2, y = x)
 > df[] <- mean
-Error: `mean` must be a vector, a bare list, a data frame or NULL in `[<-`.
+Error: `mean` must be a vector, a bare list, a data frame or NULL.
 
 > df[] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL in `[<-`.
+Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
 
 
 [<-.tbl_df throws an error with OOB assignment
@@ -521,7 +486,7 @@ Error: New data `df[3:1]` must be compatible with existing data:
 * No common type for `value` <list> and `x` <integer>.
 
 > df[1:3, 1:3] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame in `[<-`.
+Error: `NULL` must be a vector, a bare list or a data frame.
 
 
 [<-.tbl_df and overwriting NA
@@ -665,10 +630,10 @@ Error: New data `character()` must be consistent with existing data:
 
 > df <- tibble(x = 1:2, y = x)
 > df[1] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL in `[<-`.
+Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
 
 > df[1:2, 1] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame in `[<-`.
+Error: `NULL` must be a vector, a bare list or a data frame.
 
 
 $<- recycles only values of length one

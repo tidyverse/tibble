@@ -668,11 +668,11 @@ string_to_indices <- function(x) {
 # Errors ------------------------------------------------------------------
 
 error_need_rhs_vector <- function(value_arg) {
-  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list or a data frame in `[<-`."))
+  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list or a data frame."))
 }
 
 error_need_rhs_vector_or_null <- function(value_arg) {
-  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list, a data frame or NULL in `[<-`."))
+  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list, a data frame or NULL."))
 }
 
 error_na_column_index <- function(j) {
