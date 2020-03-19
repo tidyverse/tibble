@@ -1532,8 +1532,8 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 3:1)
 
-    #> Error: Tibble columns must have
-    #> consistent with existing data:
+    #> Error: New data `3:1` must be consistent
+    #> with existing data:
     #> * Existing data has 4 rows
     #> * New data contributes 3 rows
     #> * Only vectors of size 1 are recycled
@@ -1553,8 +1553,8 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
     with_tbl(tbl[[1]] <- 2:1)
 
-    #> Error: Tibble columns must have
-    #> consistent with existing data:
+    #> Error: New data `2:1` must be consistent
+    #> with existing data:
     #> * Existing data has 4 rows
     #> * New data contributes 2 rows
     #> * Only vectors of size 1 are recycled

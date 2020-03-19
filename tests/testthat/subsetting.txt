@@ -621,6 +621,29 @@ Error: `x` must be a vector, not a function.
 Error: `x` must be a vector, not a `lm` object.
 
 
+[[<-.tbl_df recycles only values of length one
+==============================================
+
+> df <- tibble(x = 1:3)
+> df[["x"]] <- 8:9
+Error: New data `8:9` must be consistent with existing data:
+* Existing data has 3 rows
+* New data contributes 2 rows
+* Only vectors of size 1 are recycled
+
+> df[["w"]] <- 8:9
+Error: New data `8:9` must be consistent with existing data:
+* Existing data has 3 rows
+* New data contributes 2 rows
+* Only vectors of size 1 are recycled
+
+> df[["a"]] <- character()
+Error: New data `character()` must be consistent with existing data:
+* Existing data has 3 rows
+* New data contributes 0 rows
+* Only vectors of size 1 are recycled
+
+
 [<-.tbl_df throws an error with invalid values
 ==============================================
 

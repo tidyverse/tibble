@@ -139,6 +139,7 @@ NULL
 `[[<-.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)
   j_arg <- substitute(j)
+  value_arg <- substitute(value)
 
   if (missing(i)) {
     abort(error_assign_columns_non_missing_only())
@@ -161,7 +162,7 @@ NULL
 
   value <- list(value)
 
-  j <- vectbl_as_new_col_index(j, x, value, j_arg, substitute(value))
+  j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
 
   # Side effect: check scalar, allow OOB position
   if (!identical(unname(j), NA_integer_)) {
@@ -173,7 +174,7 @@ NULL
   names(value) <- names(j)
   j <- coalesce2(unname(j), ncol(x) + 1L)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = substitute(value))
+  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
 }
 
 

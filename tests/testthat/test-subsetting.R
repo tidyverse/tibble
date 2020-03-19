@@ -794,6 +794,12 @@ verify_output("subsetting.txt", {
   df[[1]] <- mean
   df[[1]] <- lm(y ~ x, df)
 
+  "# [[<-.tbl_df recycles only values of length one"
+  df <- tibble(x = 1:3)
+  df[["x"]] <- 8:9
+  df[["w"]] <- 8:9
+  df[["a"]] <- character()
+
   "# [<-.tbl_df throws an error with invalid values"
   df <- tibble(x = 1:2, y = x)
   df[1] <- lm(y ~ x, df)
