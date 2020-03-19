@@ -115,7 +115,6 @@ NULL
       abort(error_subset_columns_non_missing_only())
     }
     tbl_subset2(x, j = i, j_arg = substitute(i))
-    subclass_col_index_errors(tbl_subset2(x, j = i), substitute(i))
   } else if (missing(j) || missing(i)) {
     abort(error_subset_columns_non_missing_only())
   } else {
@@ -537,7 +536,7 @@ vectbl_as_col_location <- function(i, n, names = NULL, j_arg) {
   subclass_col_index_errors(vec_as_location(i, n, names), j_arg = j_arg)
 }
 
-vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg = "j") {
+vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg) {
   subclass_col_index_errors(vec_as_location2(i, n, names), j_arg = j_arg)
 }
 
@@ -729,7 +728,7 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_col_index_errors <- function(expr, j_arg = NULL) {
+subclass_col_index_errors <- function(expr, j_arg) {
   tryCatch(
     force(expr),
     vctrs_error_subscript = function(cnd) {
