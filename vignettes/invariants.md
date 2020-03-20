@@ -341,7 +341,7 @@ exists.
     #> Error: Must extract column with a single
     #> valid subscript.
     #> [31mx[39m The subscript `mean` has the wrong
-    #> type `closure`.
+    #> type `function`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -902,7 +902,7 @@ vector containing positive numbers.
     #> Error: Must subset rows with a valid
     #> subscript vector.
     #> [31mx[39m The subscript `mean` has the wrong
-    #> type `closure`.
+    #> type `function`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -2285,8 +2285,8 @@ and if all columns updated are compatible with the value assigned.
 <td>
     with_tbl(tbl[is.na(tbl)] <- 1:2)
 
-    #> Error: `1:2` must have size 1, not size
-    #> 2.
+    #> Error: `is.na(tbl)` is a matrix, `1:2`
+    #> must have size 1.
 
 </td>
 </tr>
@@ -2306,7 +2306,6 @@ and if all columns updated are compatible with the value assigned.
     #> Error: New data `4` must be compatible
     #> with existing data:
     #> * Target: column `c`
-    #> * Position: 2
     #> * No common type for `value` <double>
     #> and `x` <character>.
 
@@ -2454,7 +2453,7 @@ Entire columns can be removed. Specifying `i` is an error.
     with_tbl(tbl[1, 2:3] <- NULL)
 
     #> Error: `NULL` must be a vector, a bare
-    #> list or a data frame in `[<-`.
+    #> list or a data frame.
 
 </td>
 </tr>
@@ -2481,7 +2480,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
     with_tbl(tbl[1] <- mean)
 
     #> Error: `mean` must be a vector, a bare
-    #> list, a data frame or NULL in `[<-`.
+    #> list, a data frame or NULL.
 
 </td>
 </tr>
@@ -2525,7 +2524,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 
     #> Error: `lm(mpg ~ wt, data = mtcars)`
     #> must be a vector, a bare list, a data
-    #> frame or NULL in `[<-`.
+    #> frame or NULL.
 
 </td>
 </tr>
@@ -2632,8 +2631,8 @@ Row subassignment: `x[i, ] <- list(...)`
 
     #> Error: Must assign to rows with a valid
     #> subscript vector.
-    #> [31mx[39m Negative locations can't be mixed with
-    #> positive locations.
+    #> [31mx[39m Negative and positive locations can't
+    #> be mixed.
     #> [34mℹ[39m The subscript `-1:2` has 2 positive
     #> values at locations 3 and 4.
 
@@ -3105,7 +3104,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: New data `tbl[1:2, 2]` must be
     #> compatible with existing data:
     #> * Target: column `n`
-    #> * Position: 1
     #> * No common type for `value` <character>
     #> and `x` <integer>.
 
@@ -3133,7 +3131,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: New data `tbl[1:2, 3]` must be
     #> compatible with existing data:
     #> * Target: column `c`
-    #> * Position: 1
     #> * No common type for `value` <list> and
     #> `x` <character>.
 
@@ -3161,7 +3158,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: New data `tbl2[1:2, 1]` must be
     #> compatible with existing data:
     #> * Target: column `li`
-    #> * Position: 1
     #> * No common type for `value` <tbl_df<
     #> n : integer
     #> c : character
@@ -3191,7 +3187,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: New data `tbl2[1:2, 2]` must be
     #> compatible with existing data:
     #> * Target: column `tb`
-    #> * Position: 1
     #> * No common type for `value`
     #> <double[,4]> and `x` <tbl_df<
     #> n : integer
@@ -3238,8 +3233,11 @@ type of `NA` to initialize columns.
 <td>
     with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
 
-    #> Error: Lossy cast from `value` <integer>
-    #> to `x` <logical>.
+    #> Error: New data `3:2` must be compatible
+    #> with existing data:
+    #> * Target: column `x`
+    #> * Lossy cast from `value` <integer> to
+    #> `x` <logical>.
     #> * Locations: 1, 2
 
 </td>
@@ -3314,7 +3312,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
     with_tbl(tbl[2:3, "n"] <- NULL)
 
     #> Error: `NULL` must be a vector, a bare
-    #> list or a data frame in `[<-`.
+    #> list or a data frame.
 
 </td>
 </tr>
