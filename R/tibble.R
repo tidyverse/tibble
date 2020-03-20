@@ -292,6 +292,18 @@ splice_dfs <- function(x) {
   vec_c(!!!x, .name_spec = "{inner}")
 }
 
+vectbl_recycle_rows <- function(x, n, j, name) {
+  size <- vec_size(x)
+  if (size == n) return(x)
+  if (size == 1) return(vec_recycle(x, n))
+
+  if (name == "") {
+    name <- j
+  }
+
+  abort(error_inconsistent_cols(n, name, size, "Existing data"))
+}
+
 # Errors ------------------------------------------------------------------
 
 error_tibble_row_size_one <- function(j, name, size) {
@@ -304,5 +316,29 @@ error_tibble_row_size_one <- function(j, name, size) {
   tibble_error(bullets(
     "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
+  ))
+}
+
+error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
+  tibble_error(bullets(
+    "Tibble columns must have consistent sizes, only values of size one are recycled:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    map2_chr(names(vars_split), vars_split, function(x, y) {
+      if (is.numeric(y)) {
+        text <- "Column(s) at position(s) "
+      } else {
+        text <- "Column(s) "
+        y <- tick(y)
+      }
+
+      paste0("Size ", x, ": ", pluralise_commas(text, y))
+    })
   ))
 }

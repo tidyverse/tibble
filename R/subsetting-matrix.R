@@ -1,5 +1,5 @@
-tbl_subset_matrix <- function(x, j) {
-  cells <- matrix_to_cells(j, x)
+tbl_subset_matrix <- function(x, j, j_arg) {
+  cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)
 
   if (is_empty(col_idx)) {
@@ -12,25 +12,41 @@ tbl_subset_matrix <- function(x, j) {
   unname(vec_c(!!!values, .name_spec = ~ .x))
 }
 
-tbl_subassign_matrix <- function(x, j, value) {
-  stopifnot(vec_is(value), vec_size(value) == 1)
+tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
+  # FIXME: use size argument in vctrs >= 0.3.0
 
-  cells <- matrix_to_cells(j, x)
+  if (!vec_is(value)) {
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, the data ", tick(as_label(value_arg)), " must be a vector of size 1."))
+  }
+
+  if (vec_size(value) != 1) {
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, the data ", tick(as_label(value_arg)), " must have size 1."))
+  }
+
+  cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)
 
-  for (i in col_idx) {
-    vec_slice(x[[i]], cells[[i]]) <- value
-  }
+  tryCatch(
+    for (j in col_idx) {
+      xj <- x[[j]]
+      vec_slice(xj, cells[[j]]) <- value
+      x[[j]] <- xj
+    },
+
+    vctrs_error_incompatible_type = function(cnd) {
+      abort(error_incompatible_new_data_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
+    }
+  )
 
   x
 }
 
-matrix_to_cells <- function(j, x) {
+matrix_to_cells <- function(j, x, j_arg) {
   if (!is_bare_logical(j)) {
-    rlang::abort("Invalid `j`: if a matrix, it must be of type logical.")
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, it must be of type logical."))
   }
   if (!identical(dim(j), dim(x))) {
-    rlang::abort("Invalid `j`: if a matrix, it must have the same dimensions as `x`.")
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, it must have the same dimensions as the input."))
   }
 
   # Need unlist(list(...)) because apply() isn't type stable if the return
