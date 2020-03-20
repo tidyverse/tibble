@@ -43,10 +43,10 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
 
 matrix_to_cells <- function(j, x, j_arg) {
   if (!is_bare_logical(j)) {
-    rlang::abort(paste0("The subscript `", as_label(j_arg), "` is a matrix, it must be of type logical."))
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, it must be of type logical."))
   }
   if (!identical(dim(j), dim(x))) {
-    rlang::abort(paste0("The subscript `", as_label(j_arg), "` is a matrix, it must have the same dimensions as the input."))
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, it must have the same dimensions as the input."))
   }
 
   # Need unlist(list(...)) because apply() isn't type stable if the return

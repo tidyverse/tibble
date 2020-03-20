@@ -77,7 +77,7 @@ NULL
 `$.tbl_df` <- function(x, name) {
   j <- match(as_string(name), names2(x))
   if (is.na(j)) {
-    warn(paste0("Unknown or uninitialised column: `", name, "`."))
+    warn(paste0("Unknown or uninitialised column: ", tick(name), "."))
     NULL
   } else {
     .subset2(x, j)
@@ -668,11 +668,11 @@ string_to_indices <- function(x) {
 # Errors ------------------------------------------------------------------
 
 error_need_rhs_vector <- function(value_arg) {
-  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list or a data frame."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list or a data frame."))
 }
 
 error_need_rhs_vector_or_null <- function(value_arg) {
-  tibble_error(paste0("`", as_label(value_arg), "` must be a vector, a bare list, a data frame or NULL."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or NULL."))
 }
 
 error_na_column_index <- function(j) {
@@ -730,7 +730,7 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
   } else {
-    target <- paste0("row subscript `", as_label(i_arg), "`")
+    target <- paste0("row subscript ", tick(as_label(i_arg)))
     existing <- pluralise_count("Subscript has ", nrow, " row(s)")
   }
 
@@ -743,7 +743,7 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
 
   tibble_error(
     bullets(
-      paste0("New data `", as_label(value_arg), "` must be consistent with ", target, ":"),
+      paste0("New data ", tick(as_label(value_arg)), " must be consistent with ", target, ":"),
       existing,
       new,
       "Only vectors of size 1 are recycled"
@@ -759,7 +759,7 @@ error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
 
   tibble_error(
     bullets(
-      paste0("New data `", as_label(value_arg), "` must be compatible with existing data:"),
+      paste0("New data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
       paste0("Target: column ", tick(name)),
       message
     ),
