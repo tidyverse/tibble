@@ -113,16 +113,15 @@ New data `rhs` must be consistent with existing data:
 * New data contributes 2 rows
 * Only vectors of size 1 are recycled
 
-> error_inconsistent_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), 
-+     quote(rhs))
+> error_inconsistent_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
 <error/tibble_error_inconsistent_new_data_size>
 New data `rhs` must be consistent with row subscript `4:1`:
 * Subscript has 4 rows
 * Element 2 of new data contributes 2 rows
 * Only vectors of size 1 are recycled
 
-> error_incompatible_new_data_type(tibble(a = 1), list("c"), 1, 
-+     quote(rhs), "Can't frobnicate.")
+> error_incompatible_new_data_type(tibble(a = 1), list("c"), 1, quote(rhs),
++ "Can't frobnicate.")
 <error/tibble_error_incompatible_new_data_type>
 New data `rhs` must be compatible with existing data:
 * Target: column `a`
