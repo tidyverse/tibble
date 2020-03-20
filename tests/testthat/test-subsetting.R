@@ -353,6 +353,20 @@ test_that("[[ returns NULL if name doesn't exist", {
   expect_null(df[[1, "y"]])
 })
 
+test_that("[[ drops inner names only with double subscript (#681)", {
+  a <- c(x = 1)
+  b <- data.frame(bb = 1, row.names = "y")
+  c <- matrix(1, dimnames = list(rows = "z", cols = "cc"))
+
+  df <- tibble(a, b = b, c)
+  expect_identical(df[["a"]], a)
+  expect_identical(df[[1, "a"]], 1)
+  expect_identical(df[["b"]], b)
+  expect_identical(df[[1, "b"]], data.frame(bb = 1))
+  expect_identical(df[["c"]], c)
+  expect_null(rownames(df[[1, "c"]]))
+})
+
 test_that("can use two-dimensional indexing with [[", {
   iris2 <- as_tibble(iris)
   expect_equal(iris2[[1, 2]], iris[[1, 2]])

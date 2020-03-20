@@ -128,7 +128,7 @@ NULL
     if (is.null(x)) {
       x
     } else {
-      vec_slice(x, i)
+      vectbl_strip_names(vec_slice(x, i))
     }
   }
 }
@@ -625,6 +625,18 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
+}
+
+vectbl_strip_names <- function(x) {
+  maybe_row_names <- is.data.frame(x) || is.array(x)
+
+  if (maybe_row_names) {
+    row.names(x) <- NULL
+  } else {
+    names(x) <- NULL
+  }
+
+  x
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
