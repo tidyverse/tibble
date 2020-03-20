@@ -30,7 +30,7 @@
 
     Alternatively, implement a `vec_proxy()` method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with `list_of()`.
 
-- Tibbles now unconditionally allow inner names for all columns. This is a change that may break existing comparison tests that don't expect names in columns (#630). Symptoms:
+- Added experimental support for inner names for all columns, of the form `tibble(a = c(b = 1))`. Inner names are no longer stripped when creating a tibble. They are maintained for slicing operations but not yet updated when assigning with a row subscript. This is a change that may break existing comparison tests that don't expect names in columns (#630). Symptoms:
 
     - "names for target but not for current" when comparing
 
