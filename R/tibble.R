@@ -24,9 +24,11 @@
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
 #'
-#'   Arguments are evaluated sequentially, however the [.data] pronoun is not
-#'   available to prevent masking usage in a higher level function, like
-#'   [dplyr::mutate()].
+#'   Arguments are evaluated sequentially.
+#'   You can refer to previously created elements directly or using the [.data]
+#'   pronoun.
+#'   An existing `.data` pronoun, provided e.g. inside [dplyr::mutate()],
+#'   is not available.
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
@@ -207,7 +209,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   output <- rep_along(xs, list(NULL))
 
   env <- new_environment()
-  mask <- new_data_mask(env)
+  mask <- new_data_mask_with_data(env)
 
   first_size <- .rows
 
@@ -265,6 +267,12 @@ check_valid_col <- function(x, name, pos) {
     ret <- check_valid_cols(set_names(list(x), name))
   }
   invisible(ret[[1]])
+}
+
+new_data_mask_with_data <- function(env) {
+  mask <- new_data_mask(env)
+  mask$.data <- as_data_pronoun(env)
+  mask
 }
 
 add_to_env2 <- function(x, given_name, name = given_name, env) {
