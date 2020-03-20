@@ -62,10 +62,26 @@ test_that("can't use value = NULL", {
   )
 })
 
-test_that("can't pass objects with dimensions", {
+test_that("can pass vectors (#730)", {
+  a <- c(x = 1)
+  b <- data.frame(bb = 1, row.names = "y")
+  c <- matrix(1, dimnames = list(rows = "z", cols = "cc"))
+
+  au <- c(1)
+  bu <- data.frame(bb = 1)
+  cu <- matrix(1, dimnames = list(rows = NULL, cols = "cc"))
+
+  expect_identical(enframe(a, name = NULL), tibble(value = au))
+  expect_identical(enframe(b, name = NULL), tibble(value = bu))
+  expect_identical(enframe(c, name = NULL), tibble(value = cu))
+
+  expect_identical(enframe(a), tibble(name = "x", value = au))
+  expect_identical(enframe(b), tibble(name = "y", value = bu))
+  expect_identical(enframe(c), tibble(name = "z", value = cu))
+
   expect_tibble_error(
-    enframe(iris),
-    error_enframe_has_dim(iris)
+    enframe(lm(speed ~ ., cars)),
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
   )
 })
 

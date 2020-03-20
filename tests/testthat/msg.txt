@@ -110,9 +110,9 @@ Use .name_repair to specify repair.
 <error/tibble_error_enframe_value_null>
 `value` can't be NULL.
 
-> error_enframe_has_dim(Titanic)
-<error/tibble_error_enframe_has_dim>
-`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+> error_enframe_must_be_vector(lm(speed ~ ., cars))
+<error/tibble_error_enframe_must_be_vector>
+The `x` argument to `enframe()` must be a vector, not lm.
 
 
 glimpse

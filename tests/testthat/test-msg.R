@@ -43,7 +43,7 @@ verify_output("msg.txt", {
   "#enframe"
   error_enframe_value_null()
 
-  error_enframe_has_dim(Titanic)
+  error_enframe_must_be_vector(lm(speed ~ ., cars))
 
   "# glimpse"
   error_glimpse_infinite_width()

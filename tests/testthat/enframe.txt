@@ -2,5 +2,7 @@
 Error: `value` can't be NULL.
 
 > enframe(Titanic)
-Error: `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+Error: Can't subset elements that don't exist.
+x Locations 5, 6, 7, 8, 9, etc. don't exist.
+i There are only 4 elements.
 
