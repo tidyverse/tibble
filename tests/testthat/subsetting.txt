@@ -510,10 +510,10 @@ Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))] <- NA
 > foo[is.na(foo)] <- 1:3
-Error: `is.na(foo)` is a matrix, `1:3` must have size 1.
+Error: The subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
 
 > foo[is.na(foo)] <- lm(a ~ b, foo)
-Error: `lm(a ~ b, foo)` must be a vector, not a `lm` object.
+Error: The subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
 
 
 [[.tbl_df rejects invalid column indexes

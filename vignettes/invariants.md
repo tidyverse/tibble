@@ -2285,8 +2285,8 @@ and if all columns updated are compatible with the value assigned.
 <td>
     with_tbl(tbl[is.na(tbl)] <- 1:2)
 
-    #> Error: `is.na(tbl)` is a matrix, `1:2`
-    #> must have size 1.
+    #> Error: The subscript `is.na(tbl)` is a
+    #> matrix, the data `1:2` must have size 1.
 
 </td>
 </tr>

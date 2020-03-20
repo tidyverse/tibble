@@ -14,10 +14,13 @@ tbl_subset_matrix <- function(x, j, j_arg) {
 
 tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
   # FIXME: use size argument in vctrs >= 0.3.0
-  vec_assert(value, arg = as_label(value_arg))
+
+  if (!vec_is(value)) {
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, the data ", tick(as_label(value_arg)), " must be a vector of size 1."))
+  }
 
   if (vec_size(value) != 1) {
-    rlang::abort(paste0(tick(as_label(j_arg)), " is a matrix, ", tick(as_label(value_arg)), " must have size 1."))
+    rlang::abort(paste0("The subscript ", tick(as_label(j_arg)), " is a matrix, the data ", tick(as_label(value_arg)), " must have size 1."))
   }
 
   cells <- matrix_to_cells(j, x, j_arg)
