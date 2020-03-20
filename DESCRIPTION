@@ -40,7 +40,7 @@ Imports:
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
-    vctrs (>= 0.2.99)
+    vctrs (>= 0.2.4)
 Suggests: 
     bench,
     bit64,
@@ -59,8 +59,6 @@ Suggests:
     testthat (>= 2.1.0),
     tidyr,
     withr
-Remotes: 
-    r-lib/vctrs
 VignetteBuilder: 
     knitr
 RdMacros: 

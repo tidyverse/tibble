@@ -341,7 +341,7 @@ exists.
     #> Error: Must extract column with a single
     #> valid subscript.
     #> [31mx[39m The subscript `mean` has the wrong
-    #> type `function`.
+    #> type `closure`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -902,7 +902,7 @@ vector containing positive numbers.
     #> Error: Must subset rows with a valid
     #> subscript vector.
     #> [31mx[39m The subscript `mean` has the wrong
-    #> type `function`.
+    #> type `closure`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -2631,8 +2631,8 @@ Row subassignment: `x[i, ] <- list(...)`
 
     #> Error: Must assign to rows with a valid
     #> subscript vector.
-    #> [31mx[39m Negative and positive locations can't
-    #> be mixed.
+    #> [31mx[39m Negative locations can't be mixed with
+    #> positive locations.
     #> [34mℹ[39m The subscript `-1:2` has 2 positive
     #> values at locations 3 and 4.
 
