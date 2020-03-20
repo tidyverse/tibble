@@ -145,6 +145,7 @@ verify_output("msg.txt", {
 
   error_tibble_row_size_one(3, "foo", 7)
 
+  error_as_tibble_row_bare(new_environment())
   error_as_tibble_row_size_one(3, "foo", 7)
 
   error_new_tibble_must_be_list()

@@ -380,7 +380,7 @@ test_that("as.tibble is an alias of as_tibble", {
 
 # as_tibble_row -----------------------------------------------------------
 
-test_that("as_tibbe_row() can convert named atomic vectors to data frame", {
+test_that("as_tibble_row() can convert named bare vectors to data frame", {
   expect_identical(as_tibble_row(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
   expect_identical(as_tibble_row(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
   expect_identical(as_tibble_row(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
@@ -397,6 +397,21 @@ test_that("as_tibbe_row() can convert named atomic vectors to data frame", {
   expect_tibble_error(
     as_tibble_row(setNames(nm = c(TRUE, FALSE, NA))),
     error_column_must_be_named(3)
+  )
+})
+
+test_that("as_tibbe_row() fails with non-bare vectors (#739)", {
+  expect_tibble_error(
+    as_tibble_row(Sys.time()),
+    error_as_tibble_row_bare(Sys.time())
+  )
+  expect_tibble_error(
+    as_tibble_row(iris),
+    error_as_tibble_row_bare(iris)
+  )
+  expect_tibble_error(
+    as_tibble_row(Titanic),
+    error_as_tibble_row_bare(Titanic)
   )
 })
 

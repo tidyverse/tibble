@@ -282,6 +282,10 @@ as_tibble.default <- function(x, ...) {
 as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
+  if (!is_bare_vector(x)) {
+    abort(error_as_tibble_row_bare(x))
+  }
+
   x <- set_repaired_names(x, .name_repair)
 
   check_all_lengths_one(x)
@@ -339,7 +343,13 @@ error_column_must_be_vector <- function(names, positions, classes) {
   )
 }
 
-error_as_tibble_row_size_one <- function(j, name, size, caller = "tibble_row") {
+error_as_tibble_row_bare <- function(x) {
+  tibble_error(paste0(
+    "`x` must be a bare vector in `as_tibble_row()`, not ", class(x)[[1]], "."
+  ))
+}
+
+error_as_tibble_row_size_one <- function(j, name, size) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 
