@@ -151,4 +151,9 @@ verify_output("msg.txt", {
   error_new_tibble_must_be_list()
 
   error_new_tibble_needs_nrow()
+
+  error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
+  error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))
+  error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
+  error_subset_matrix_must_have_same_dimensions(quote(t(is.na(x))))
 })

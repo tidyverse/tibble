@@ -161,9 +161,9 @@ test_that("[.tbl_df is careful about column flags (#83)", {
       error_na_column_index(3)
     )
 
-    expect_error(
+    expect_tibble_error(
       foo[as.matrix(TRUE)],
-      "."
+      error_subset_matrix_must_have_same_dimensions(quote(as.matrix(TRUE)))
     )
     expect_error(
       foo[array(TRUE, dim = c(1, 1, 1))],

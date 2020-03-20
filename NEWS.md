@@ -59,6 +59,20 @@
 
 - Internals now make heavy use of the vctrs package, following most of the invariants defined there. Name repair is the responsibility of vctrs now (#464).
 
+- All errors emitted directly by the package inherit from the `"tibble_error"` and `"rlang_error"` classes. In some cases, `"vctrs_error"` errors may be passed through. The exact subclass is subject to change.
+
+    Example: `tibble(a = quote(b))` raises an error that inherits from `"tibble_error_column_must_be_vector"`, `"tibble_error"` and `"rlang_error"`, and from `"error"` and `"condition"` like all errors. Do not rely on the wording of `"tibble_error_column_must_be_vector"`, this is likely to change.
+
+    Use the following pattern to catch errors emitted by tibble:
+
+    ```r
+    tryCatch(
+      your_code(),
+      tibble_error = function(cnd) {
+      }
+    )
+    ```
+
 - New `tibble_row()` constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (#205).
 
 - New `as_tibble_row()` and `as_tibble_col()` convert a bare vector to a one-row or one-column tibble, respectively. `as_tibble_col()` also works for non-bare vectors. Using `as_tibble()` for bare vectors is superseded (#447).
