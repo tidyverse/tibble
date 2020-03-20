@@ -34,6 +34,8 @@
 
     - "names for target but not for current" when comparing
 
+- The `.data` pronoun is no longer available in `tibble()` (#721).
+
 
 ## Breaking changes
 
