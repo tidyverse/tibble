@@ -45,7 +45,7 @@ matrix:
   - r: devel
     env:
     - DEV_VERSIONS=true
-  - r: 3.2
+  - r: 3.3
   - stage: docs
     r: release
     env:
@@ -54,7 +54,6 @@ matrix:
     os: osx
   - r: 3.5
   - r: 3.4
-  - r: 3.3
   fast_finish: true
 
 #env
