@@ -43,7 +43,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   x <- unclass(x)
 
   if (!is.list(x)) {
-    abort(error_new_tibble_must_be_list())
+    cnd_signal(error_new_tibble_must_be_list())
   }
 
   #' The `...` argument allows adding more attributes to the subclass.
@@ -66,7 +66,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
   if (!is_integerish(nrow, 1)) {
-    abort(error_new_tibble_needs_nrow())
+    cnd_signal(error_new_tibble_needs_nrow())
   }
 
   #' `x` must have names (or be empty),
@@ -75,7 +75,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     # Leaving this because creating a named list of length zero seems difficult
     names(x) <- character()
   } else if (is.null(names(x))) {
-    abort(error_names_must_be_non_null())
+    cnd_signal(error_names_must_be_non_null())
   }
 
   set_tibble_subclass(x, nrow, class)
@@ -127,7 +127,7 @@ validate_nrow <- function(names, lengths, nrow) {
   # Validate column lengths, don't recycle
   bad_len <- which(lengths != nrow)
   if (has_length(bad_len)) {
-    abort(error_inconsistent_cols(nrow, names, lengths, "Requested with `nrow` argument"))
+    cnd_signal(error_inconsistent_cols(nrow, names, lengths, "Requested with `nrow` argument"))
   }
 }
 

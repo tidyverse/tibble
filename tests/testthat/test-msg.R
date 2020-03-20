@@ -5,7 +5,7 @@ test_that("error class", {
 })
 
 test_that("aborting with class", {
-  expect_error(abort(error_enframe_value_null()), class = tibble_error_class("enframe_value_null"))
+  expect_error(cnd_signal(error_enframe_value_null()), class = tibble_error_class("enframe_value_null"))
 })
 
 verify_output("msg.txt", {

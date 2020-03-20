@@ -36,7 +36,7 @@ glimpse <- function(x, width = NULL, ...) {
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
-    abort(error_glimpse_infinite_width())
+    cnd_signal(error_glimpse_infinite_width())
   }
 
   cat_line("Rows: ", big_mark(nrow(x)))

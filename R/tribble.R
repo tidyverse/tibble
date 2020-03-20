@@ -76,7 +76,7 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    abort(error_tribble_needs_columns())
+    cnd_signal(error_tribble_needs_columns())
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (length(frame_rest) == 0L) {
@@ -104,12 +104,12 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      abort(error_tribble_lhs_column_syntax(el[[2]]))
+      cnd_signal(error_tribble_lhs_column_syntax(el[[2]]))
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      abort(error_tribble_rhs_column_syntax(candidate))
+      cnd_signal(error_tribble_rhs_column_syntax(candidate))
     }
 
     frame_names <- c(frame_names, as.character(candidate))
@@ -125,7 +125,7 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    abort(error_tribble_non_rectangular(
+    cnd_signal(error_tribble_non_rectangular(
       length(frame_names),
       length(frame_rest)
     ))
@@ -166,7 +166,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
 turn_frame_data_into_frame_matrix <- function(names, rest) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
-    abort(error_frame_matrix_list(list_cols))
+    cnd_signal(error_frame_matrix_list(list_cols))
   }
 
   frame_ncol <- length(names)

@@ -220,7 +220,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
       if (single_row) {
         if (vec_is(res)) {
           if (!vec_is(res) || vec_size(res) != 1) {
-            abort(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
+            cnd_signal(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
           }
         } else {
           res <- list(res)
@@ -301,7 +301,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  abort(error_inconsistent_cols(n, name, size, "Existing data"))
+  cnd_signal(error_inconsistent_cols(n, name, size, "Existing data"))
 }
 
 # Errors ------------------------------------------------------------------

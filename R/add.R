@@ -47,7 +47,7 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    abort(error_add_rows_to_grouped_df())
+    cnd_signal(error_add_rows_to_grouped_df())
   }
 
   if (!is.data.frame(.data)) {
@@ -59,7 +59,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
-    abort(error_inconsistent_new_rows(extra_vars))
+    cnd_signal(error_inconsistent_new_rows(extra_vars))
   }
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
@@ -158,13 +158,13 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      abort(error_inconsistent_new_cols(nrow(.data), df))
+      cnd_signal(error_inconsistent_new_cols(nrow(.data), df))
     }
   }
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    abort(error_duplicate_new_cols(extra_vars))
+    cnd_signal(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
@@ -202,7 +202,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      abort(error_both_before_after())
+      cnd_signal(error_both_before_after())
     }
   }
 }
@@ -224,7 +224,7 @@ check_names_before_after <- function(j, x) {
 
 check_needs_no_dim <- function(j) {
   if (needs_dim(j)) {
-    abort(error_dim_column_index(j))
+    cnd_signal(error_dim_column_index(j))
   }
 }
 
@@ -232,7 +232,7 @@ check_names_before_after_character <- function(j, names) {
   pos <- safe_match(j, names)
   if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
-    abort(error_unknown_column_names(unknown_names))
+    cnd_signal(error_unknown_column_names(unknown_names))
   }
   pos
 }

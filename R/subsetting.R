@@ -115,11 +115,11 @@ NULL
   # Column subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
     if (missing(i)) {
-      abort(error_subset_columns_non_missing_only())
+      cnd_signal(error_subset_columns_non_missing_only())
     }
     tbl_subset2(x, j = i, j_arg = substitute(i))
   } else if (missing(j) || missing(i)) {
-    abort(error_subset_columns_non_missing_only())
+    cnd_signal(error_subset_columns_non_missing_only())
   } else {
     i_arg <- substitute(i)
     i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
@@ -142,7 +142,7 @@ NULL
   value_arg <- substitute(value)
 
   if (missing(i)) {
-    abort(error_assign_columns_non_missing_only())
+    cnd_signal(error_assign_columns_non_missing_only())
   }
 
   if (missing(j)) {
@@ -152,7 +152,7 @@ NULL
       j_arg <- i_arg
       i_arg <- NULL
     } else {
-      abort(error_assign_columns_non_missing_only())
+      cnd_signal(error_assign_columns_non_missing_only())
     }
   }
 
@@ -358,7 +358,7 @@ vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
   stopifnot(!is.null(j))
 
   if (vec_is(j) && anyNA(j)) {
-    abort(error_na_column_index(which(is.na(j))))
+    cnd_signal(error_na_column_index(which(is.na(j))))
   }
 
   vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = assign)
@@ -405,10 +405,10 @@ tbl_subset_row <- function(x, i, i_arg) {
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (!vec_is(value)) {
     if (!is_null(i)) {
-      abort(error_need_rhs_vector(value_arg))
+      cnd_signal(error_need_rhs_vector(value_arg))
     }
     if (!is_null(value)) {
-      abort(error_need_rhs_vector_or_null(value_arg))
+      cnd_signal(error_need_rhs_vector_or_null(value_arg))
     }
   }
 
@@ -419,7 +419,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   }
 
   if (!is_bare_list(value)) {
-    abort(error_need_rhs_vector_or_null(value_arg))
+    cnd_signal(error_need_rhs_vector_or_null(value_arg))
   }
 
   i <- vectbl_as_new_row_index(i, x, i_arg)
@@ -473,7 +473,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i
   } else if (is_bare_numeric(i)) {
     if (anyDuplicated(i)) {
-      abort(error_duplicate_row_subscript_for_assignment(i))
+      cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
 
     nr <- fast_nrow(x)
@@ -484,7 +484,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
-      abort(error_new_rows_at_end_only(nr, i_new))
+      cnd_signal(error_new_rows_at_end_only(nr, i_new))
     }
 
     # Restore, caller knows how to deal
@@ -496,7 +496,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   } else {
     i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
     if (anyDuplicated(i, incomparables = NA)) {
-      abort(error_duplicate_row_subscript_for_assignment(i))
+      cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
     i
   }
@@ -508,14 +508,14 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   # Name: column name (for new columns)
 
   if (vec_is(j) && anyNA(j)) {
-    abort(error_assign_columns_non_na_only())
+    cnd_signal(error_assign_columns_non_na_only())
   }
 
   if (is_bare_character(j)) {
     set_names(match(j, names(x)), j)
   } else if (is_bare_numeric(j)) {
     if (anyDuplicated(j)) {
-      abort(error_duplicate_column_subscript_for_assignment(j))
+      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
 
     new <- which(j > ncol(x))
@@ -524,7 +524,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
     j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      abort(error_new_columns_at_end_only(ncol(x), j_new))
+      cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
     }
 
     # FIXME: Recycled names are not repaired
@@ -536,7 +536,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   } else {
     j <- vectbl_as_col_index(j, x, j_arg, assign = TRUE)
     if (anyDuplicated(j)) {
-      abort(error_duplicate_column_subscript_for_assignment(j))
+      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
     j
   }
@@ -592,7 +592,7 @@ tbl_expand_to_nrow <- function(x, i) {
   new_nrow <- max(i, nrow)
 
   if (is.na(new_nrow)) {
-    abort(error_assign_rows_non_na_only())
+    cnd_signal(error_assign_rows_non_na_only())
   }
 
   if (new_nrow != nrow) {

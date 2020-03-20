@@ -28,10 +28,6 @@ use_repair <- function(repair) {
   if (repair) "\nUse .name_repair to specify repair."
 }
 
-# https://github.com/r-lib/rlang/issues/861
-# Can't wrap properly because otherwise tibble::abort() appears in the traceback
-abort <- cnd_signal
-
 tibble_error_class <- function(class) {
   c(paste0("tibble_error_", class), "tibble_error")
 }

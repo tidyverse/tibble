@@ -23,11 +23,11 @@
 #' enframe(list(one = 1, two = 2:3, three = 4:6))
 enframe <- function(x, name = "name", value = "value") {
   if (is_null(value)) {
-    abort(error_enframe_value_null())
+    cnd_signal(error_enframe_value_null())
   }
 
   if (length(dim(x)) > 1) {
-    abort(error_enframe_has_dim(x))
+    cnd_signal(error_enframe_has_dim(x))
   }
 
   if (is_null(x)) x <- logical()

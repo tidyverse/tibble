@@ -130,7 +130,7 @@ check_valid_cols <- function(x, pos = NULL) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    abort(error_column_must_be_vector(names_x[is_xd], pos[is_xd], classes))
+    cnd_signal(error_column_must_be_vector(names_x[is_xd], pos[is_xd], classes))
   }
 
   # 657
@@ -158,7 +158,7 @@ recycle_columns <- function(x, .rows, lengths) {
   if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
-    abort(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
+    cnd_signal(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
   }
 
   if (nrow != 1L) {
@@ -283,7 +283,7 @@ as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
   if (!is_bare_vector(x)) {
-    abort(error_as_tibble_row_bare(x))
+    cnd_signal(error_as_tibble_row_bare(x))
   }
 
   x <- set_repaired_names(x, .name_repair)
@@ -297,7 +297,7 @@ check_all_lengths_one <- function(x) {
 
   bad_lengths <- which(sizes != 1)
   if (!is_empty(bad_lengths)) {
-    abort(error_as_tibble_row_size_one(
+    cnd_signal(error_as_tibble_row_size_one(
       seq_along(x)[bad_lengths],
       names2(x)[bad_lengths],
       sizes[bad_lengths])
