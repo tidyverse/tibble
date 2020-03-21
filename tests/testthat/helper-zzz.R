@@ -90,6 +90,11 @@ skip_enh_as_tibble_retired <- function() {
   skip_legacy()
 }
 
+skip_enh_bullets_format <- function() {
+  # ENH: new bullets format
+  skip_legacy()
+}
+
 skip_int_error_unknown_names <- function() {
   # INT: error_unknown_names() no longer implemented
   skip_legacy()
