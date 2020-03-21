@@ -52,7 +52,7 @@ bullets <- function(header, ...) {
   bullets <- set_default_name(bullets, "x")
 
   paste0(
-    header, "\n",
+    ensure_full_stop(header), "\n",
     format_error_bullets(ensure_full_stop(bullets))
   )
 }
@@ -83,7 +83,7 @@ commas <- function(problems) {
 }
 
 ensure_full_stop <- function(x) {
-  gsub("([^.])$", "\\1.", x)
+  gsub("(?::|([^.]))$", "\\1.", x)
 }
 
 set_default_name <- function(x, name) {
