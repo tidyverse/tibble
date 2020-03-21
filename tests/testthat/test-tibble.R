@@ -99,26 +99,8 @@ test_that("attributes are preserved", {
   expect_identical(attr(res, "meta"), attr(df, "meta"))
 })
 
-test_that(".data pronoun is not installed by tibble", {
-  local_bindings(.data = list(a = 2))
-
-  expect_identical(
-    tibble(a = 1, b = .data$a),
-    tibble(a = 1, b = 2)
-  )
-})
-
-test_that(".data pronoun can come from another data mask (#721)", {
-  env <- as_environment(list(y = 1))
-  mask <- new_data_mask(env)
-  mask$.data <- as_data_pronoun(env)
-
-  expr <- expr(tibble(x = .data$y))
-
-  expect_identical(
-    eval_tidy(expr, data = mask),
-    tibble(x = 1)
-  )
+test_that(".data pronoun", {
+  expect_identical(tibble(a = 1, b = .data$a), tibble(a = 1, b = 1))
 })
 
 test_that("tibble aliases", {
