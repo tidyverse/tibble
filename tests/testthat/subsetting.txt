@@ -446,15 +446,15 @@ x It must be size 3 or 1, not 2.
 
 > df[1:2, ] <- 1:3
 Error: New data `1:3` must be consistent with row subscript `1:2`:
-* Subscript has 2 rows
-* New data contributes 3 rows
-* Only vectors of size 1 are recycled
+x Subscript has 2 rows.
+x New data contributes 3 rows.
+i Only vectors of size 1 are recycled.
 
 > df[, ] <- 1:2
 Error: New data `1:2` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 2 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 2 rows.
+i Only vectors of size 1 are recycled.
 
 
 [<-.tbl_df and coercion
@@ -463,23 +463,23 @@ Error: New data `1:2` must be consistent with existing data:
 > df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
 > df[1:3, 1:2] <- df[2:3]
 Error: New data `df[2:3]` must be compatible with existing data:
-* Target: column `x`
-* No common type for `value` <character> and `x` <integer>.
+x Target: column `x`.
+x No common type for `value` <character> and `x` <integer>.
 
 > df[1:3, 1:2] <- df[1]
 Error: New data `df[1]` must be compatible with existing data:
-* Target: column `y`
-* No common type for `value` <integer> and `x` <character>.
+x Target: column `y`.
+x No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:2] <- df[[1]]
 Error: New data `df[[1]]` must be compatible with existing data:
-* Target: column `y`
-* No common type for `value` <integer> and `x` <character>.
+x Target: column `y`.
+x No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:3] <- df[3:1]
 Error: New data `df[3:1]` must be compatible with existing data:
-* Target: column `x`
-* No common type for `value` <list> and `x` <integer>.
+x Target: column `x`.
+x No common type for `value` <list> and `x` <integer>.
 
 > df[1:3, 1:3] <- NULL
 Error: `NULL` must be a vector, a bare list or a data frame.
@@ -491,9 +491,9 @@ Error: `NULL` must be a vector, a bare list or a data frame.
 > df <- tibble(x = rep(NA, 3))
 > df[1, "x"] <- 5
 Error: New data `5` must be compatible with existing data:
-* Target: column `x`
-* Lossy cast from `value` <double> to `x` <logical>.
-* Locations: 1
+x Target: column `x`.
+x Lossy cast from `value` <double> to `x` <logical>.
+* Locations: 1.
 
 
 [<-.tbl_df and matrix subsetting
@@ -502,8 +502,8 @@ Error: New data `5` must be compatible with existing data:
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
 Error: New data `"bogus"` must be compatible with existing data:
-* Target: column `a`
-* No common type for `value` <character> and `x` <integer>.
+x Target: column `a`.
+x No common type for `value` <character> and `x` <integer>.
 
 > foo[as.matrix("x")] <- NA
 Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
@@ -605,21 +605,21 @@ Error: `x` must be a vector, not a `lm` object.
 > df <- tibble(x = 1:3)
 > df[["x"]] <- 8:9
 Error: New data `8:9` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 2 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 2 rows.
+i Only vectors of size 1 are recycled.
 
 > df[["w"]] <- 8:9
 Error: New data `8:9` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 2 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 2 rows.
+i Only vectors of size 1 are recycled.
 
 > df[["a"]] <- character()
 Error: New data `character()` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 0 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 0 rows.
+i Only vectors of size 1 are recycled.
 
 
 [<-.tbl_df throws an error with invalid values
@@ -639,19 +639,19 @@ $<- recycles only values of length one
 > df <- tibble(x = 1:3)
 > df$x <- 8:9
 Error: New data `8:9` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 2 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 2 rows.
+i Only vectors of size 1 are recycled.
 
 > df$w <- 8:9
 Error: New data `8:9` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 2 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 2 rows.
+i Only vectors of size 1 are recycled.
 
 > df$a <- character()
 Error: New data `character()` must be consistent with existing data:
-* Existing data has 3 rows
-* New data contributes 0 rows
-* Only vectors of size 1 are recycled
+x Existing data has 3 rows.
+x New data contributes 0 rows.
+i Only vectors of size 1 are recycled.
 

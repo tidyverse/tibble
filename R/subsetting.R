@@ -756,9 +756,9 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
   tibble_error(
     bullets(
       paste0("New data ", tick(as_label(value_arg)), " must be consistent with ", target, ":"),
-      existing,
-      new,
-      "Only vectors of size 1 are recycled"
+      x = existing,
+      x = new,
+      i = "Only vectors of size 1 are recycled"
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),

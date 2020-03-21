@@ -1675,9 +1675,9 @@ Recycling also works for list, data frame, and matrix columns.
 
     #> Error: New data `3:1` must be consistent
     #> with existing data:
-    #> * Existing data has 4 rows
-    #> * New data contributes 3 rows
-    #> * Only vectors of size 1 are recycled
+    #> x Existing data has 4 rows.
+    #> x New data contributes 3 rows.
+    #> ℹ Only vectors of size 1 are recycled.
 
 </td>
 </tr>
@@ -1698,9 +1698,9 @@ Recycling also works for list, data frame, and matrix columns.
 
     #> Error: New data `2:1` must be consistent
     #> with existing data:
-    #> * Existing data has 4 rows
-    #> * New data contributes 2 rows
-    #> * Only vectors of size 1 are recycled
+    #> x Existing data has 4 rows.
+    #> x New data contributes 2 rows.
+    #> ℹ Only vectors of size 1 are recycled.
 
 </td>
 </tr>
@@ -2513,8 +2513,8 @@ and if all columns updated are compatible with the value assigned.
 
     #> Error: New data `4` must be compatible
     #> with existing data:
-    #> * Target: column `c`
-    #> * No common type for `value` <double>
+    #> x Target: column `c`.
+    #> x No common type for `value` <double>
     #> and `x` <character>.
 
 </td>
@@ -3018,10 +3018,10 @@ Only values of size one can be recycled.
 
     #> Error: New data `tbl[1:2, ]` must be
     #> consistent with row subscript `2:4`:
-    #> * Subscript has 3 rows
-    #> * Element 1 of new data contributes 2
-    #> rows
-    #> * Only vectors of size 1 are recycled
+    #> x Subscript has 3 rows.
+    #> x Element 1 of new data contributes 2
+    #> rows.
+    #> ℹ Only vectors of size 1 are recycled.
 
 </td>
 </tr>
@@ -3071,10 +3071,10 @@ Only values of size one can be recycled.
 
     #> Error: New data `tbl2[2:3, ]` must be
     #> consistent with row subscript `2:4`:
-    #> * Subscript has 3 rows
-    #> * Element 1 of new data contributes 2
-    #> rows
-    #> * Only vectors of size 1 are recycled
+    #> x Subscript has 3 rows.
+    #> x Element 1 of new data contributes 2
+    #> rows.
+    #> ℹ Only vectors of size 1 are recycled.
 
 </td>
 </tr>
@@ -3377,8 +3377,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #> Error: New data `tbl[1:2, 2]` must be
     #> compatible with existing data:
-    #> * Target: column `n`
-    #> * No common type for `value` <character>
+    #> x Target: column `n`.
+    #> x No common type for `value` <character>
     #> and `x` <integer>.
 
 </td>
@@ -3406,8 +3406,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #> Error: New data `tbl[1:2, 3]` must be
     #> compatible with existing data:
-    #> * Target: column `c`
-    #> * No common type for `value` <list> and
+    #> x Target: column `c`.
+    #> x No common type for `value` <list> and
     #> `x` <character>.
 
 </td>
@@ -3435,8 +3435,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #> Error: New data `tbl2[1:2, 1]` must be
     #> compatible with existing data:
-    #> * Target: column `li`
-    #> * No common type for `value` <tbl_df<
+    #> x Target: column `li`.
+    #> x No common type for `value` <tbl_df<
     #> n : integer
     #> c : character
     #> li: list
@@ -3466,8 +3466,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     #> Error: New data `tbl2[1:2, 2]` must be
     #> compatible with existing data:
-    #> * Target: column `tb`
-    #> * No common type for `value`
+    #> x Target: column `tb`.
+    #> x No common type for `value`
     #> <double[,4]> and `x` <tbl_df<
     #> n : integer
     #> c : character
@@ -3519,10 +3519,10 @@ type of `NA` to initialize columns.
 
     #> Error: New data `3:2` must be compatible
     #> with existing data:
-    #> * Target: column `x`
-    #> * Lossy cast from `value` <integer> to
+    #> x Target: column `x`.
+    #> x Lossy cast from `value` <integer> to
     #> `x` <logical>.
-    #> * Locations: 1, 2
+    #> * Locations: 1, 2.
 
 </td>
 </tr>

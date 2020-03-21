@@ -335,18 +335,23 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
     vars_split[[as.character(.rows)]] <- NULL
   }
 
-  tibble_error(bullets(
-    "Tibble columns must have consistent sizes, only values of size one are recycled:",
-    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
-    map2_chr(names(vars_split), vars_split, function(x, y) {
-      if (is.numeric(y)) {
-        text <- "Column(s) at position(s) "
-      } else {
-        text <- "Column(s) "
-        y <- tick(y)
-      }
+  problems <- map2_chr(names(vars_split), vars_split, function(x, y) {
+    if (is.numeric(y)) {
+      text <- "Column(s) at position(s) "
+    } else {
+      text <- "Column(s) "
+      y <- tick(y)
+    }
 
-      paste0("Size ", x, ": ", pluralise_commas(text, y))
-    })
+    paste0("Size ", x, ": ", pluralise_commas(text, y))
+  })
+
+  problems <- set_default_name(problems, "")
+
+  tibble_error(problems(
+    "Tibble columns must have consistent sizes:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    problems,
+    i = "Only values of size one are recycled"
   ))
 }

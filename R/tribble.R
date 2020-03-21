@@ -201,7 +201,7 @@ error_tribble_non_rectangular <- function(cols, cells) {
     "`tribble()` must be used with rectangular data:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
-    paste0(cells, " is not an integer multiple of ", cols, ".")
+    i = paste0(cells, " is not an integer multiple of ", cols, ".")
   ))
 }
 

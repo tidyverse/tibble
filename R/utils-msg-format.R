@@ -47,8 +47,18 @@ pluralise_n <- function(message, n) {
   message
 }
 
-bullets <- function(header, ..., .problem = " problem(s)") {
-  problems <- c(...)
+bullets <- function(header, ...) {
+  bullets <- vec_c(..., .name_spec = "{outer}")
+  bullets <- set_default_name(bullets, "x")
+
+  paste0(
+    header, "\n",
+    format_error_bullets(ensure_full_stop(bullets))
+  )
+}
+
+problems <- function(header, ..., .problem = " problem(s)") {
+  problems <- vec_c(..., .name_spec = "{outer}")
   MAX_BULLETS <- 6L
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
@@ -57,10 +67,7 @@ bullets <- function(header, ..., .problem = " problem(s)") {
     length(problems) <- MAX_BULLETS
   }
 
-  paste0(
-    header, "\n",
-    paste0("* ", problems, collapse = "\n")
-  )
+  bullets(header, problems)
 }
 
 commas <- function(problems) {
@@ -73,4 +80,16 @@ commas <- function(problems) {
   }
 
   paste0(problems, collapse = ", ")
+}
+
+ensure_full_stop <- function(x) {
+  gsub("([^.])$", "\\1.", x)
+}
+
+set_default_name <- function(x, name) {
+  if (is.null(names(x))) {
+    names(x) <- rep_along(x, name)
+  }
+
+  x
 }
