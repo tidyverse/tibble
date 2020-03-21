@@ -2511,9 +2511,9 @@ and if all columns updated are compatible with the value assigned.
 
     with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
-    #> Error: New data `4` must be compatible
-    #> with existing data:
-    #> x Target: column `c`.
+    #> Error: Assigned data `4` must be
+    #> compatible with existing data:
+    #> x The error occurred for column `c`.
     #> x No common type for `value` <double>
     #> and `x` <character>.
 
@@ -3375,9 +3375,9 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
 
-    #> Error: New data `tbl[1:2, 2]` must be
-    #> compatible with existing data:
-    #> x Target: column `n`.
+    #> Error: Assigned data `tbl[1:2, 2]` must
+    #> be compatible with existing data:
+    #> x The error occurred for column `n`.
     #> x No common type for `value` <character>
     #> and `x` <integer>.
 
@@ -3404,9 +3404,9 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
 
-    #> Error: New data `tbl[1:2, 3]` must be
-    #> compatible with existing data:
-    #> x Target: column `c`.
+    #> Error: Assigned data `tbl[1:2, 3]` must
+    #> be compatible with existing data:
+    #> x The error occurred for column `c`.
     #> x No common type for `value` <list> and
     #> `x` <character>.
 
@@ -3433,9 +3433,9 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: New data `tbl2[1:2, 1]` must be
-    #> compatible with existing data:
-    #> x Target: column `li`.
+    #> Error: Assigned data `tbl2[1:2, 1]` must
+    #> be compatible with existing data:
+    #> x The error occurred for column `li`.
     #> x No common type for `value` <tbl_df<
     #> n : integer
     #> c : character
@@ -3464,9 +3464,9 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
 
-    #> Error: New data `tbl2[1:2, 2]` must be
-    #> compatible with existing data:
-    #> x Target: column `tb`.
+    #> Error: Assigned data `tbl2[1:2, 2]` must
+    #> be compatible with existing data:
+    #> x The error occurred for column `tb`.
     #> x No common type for `value`
     #> <double[,4]> and `x` <tbl_df<
     #> n : integer
@@ -3517,9 +3517,9 @@ type of `NA` to initialize columns.
 
     with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
 
-    #> Error: New data `3:2` must be compatible
-    #> with existing data:
-    #> x Target: column `x`.
+    #> Error: Assigned data `3:2` must be
+    #> compatible with existing data:
+    #> x The error occurred for column `x`.
     #> x Lossy cast from `value` <integer> to
     #> `x` <logical>.
     #> * Locations: 1, 2.

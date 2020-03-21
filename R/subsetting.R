@@ -771,8 +771,8 @@ error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
 
   tibble_error(
     bullets(
-      paste0("New data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      paste0("Target: column ", tick(name)),
+      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
+      paste0("The error occurred for column ", tick(name)),
       message
     ),
     expected = x[[j]],
