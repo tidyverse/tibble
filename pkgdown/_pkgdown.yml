@@ -63,8 +63,6 @@ navbar:
     menu:
     - text: Data types
       href: articles/types.html
-    - text: Extending tibble
-      href: articles/extending.html
     - text: Invariants
       href: articles/invariants.html
   - text: News
