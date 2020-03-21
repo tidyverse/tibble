@@ -1674,7 +1674,7 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 3:1)
 
     #> Error: New data `3:1` must be consistent
-    #> with existing data:
+    #> with existing data.
     #> x Existing data has 4 rows.
     #> x New data contributes 3 rows.
     #> ℹ Only vectors of size 1 are recycled.
@@ -1697,7 +1697,7 @@ Recycling also works for list, data frame, and matrix columns.
     with_tbl(tbl[[1]] <- 2:1)
 
     #> Error: New data `2:1` must be consistent
-    #> with existing data:
+    #> with existing data.
     #> x Existing data has 4 rows.
     #> x New data contributes 2 rows.
     #> ℹ Only vectors of size 1 are recycled.
@@ -2512,7 +2512,7 @@ and if all columns updated are compatible with the value assigned.
     with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
     #> Error: Assigned data `4` must be
-    #> compatible with existing data:
+    #> compatible with existing data.
     #> x The error occurred for column `c`.
     #> x No common type for `value` <double>
     #> and `x` <character>.
@@ -3017,7 +3017,7 @@ Only values of size one can be recycled.
     with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
     #> Error: New data `tbl[1:2, ]` must be
-    #> consistent with row subscript `2:4`:
+    #> consistent with row subscript `2:4`.
     #> x Subscript has 3 rows.
     #> x Element 1 of new data contributes 2
     #> rows.
@@ -3070,7 +3070,7 @@ Only values of size one can be recycled.
     with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
 
     #> Error: New data `tbl2[2:3, ]` must be
-    #> consistent with row subscript `2:4`:
+    #> consistent with row subscript `2:4`.
     #> x Subscript has 3 rows.
     #> x Element 1 of new data contributes 2
     #> rows.
@@ -3376,7 +3376,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
 
     #> Error: Assigned data `tbl[1:2, 2]` must
-    #> be compatible with existing data:
+    #> be compatible with existing data.
     #> x The error occurred for column `n`.
     #> x No common type for `value` <character>
     #> and `x` <integer>.
@@ -3405,7 +3405,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
 
     #> Error: Assigned data `tbl[1:2, 3]` must
-    #> be compatible with existing data:
+    #> be compatible with existing data.
     #> x The error occurred for column `c`.
     #> x No common type for `value` <list> and
     #> `x` <character>.
@@ -3434,7 +3434,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
     #> Error: Assigned data `tbl2[1:2, 1]` must
-    #> be compatible with existing data:
+    #> be compatible with existing data.
     #> x The error occurred for column `li`.
     #> x No common type for `value` <tbl_df<
     #> n : integer
@@ -3465,7 +3465,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
 
     #> Error: Assigned data `tbl2[1:2, 2]` must
-    #> be compatible with existing data:
+    #> be compatible with existing data.
     #> x The error occurred for column `tb`.
     #> x No common type for `value`
     #> <double[,4]> and `x` <tbl_df<
@@ -3518,7 +3518,7 @@ type of `NA` to initialize columns.
     with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
 
     #> Error: Assigned data `3:2` must be
-    #> compatible with existing data:
+    #> compatible with existing data.
     #> x The error occurred for column `x`.
     #> x Lossy cast from `value` <integer> to
     #> `x` <logical>.
