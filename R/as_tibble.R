@@ -338,9 +338,9 @@ matrixToDataFrame <- function(x) {
 
 error_column_must_be_vector <- function(names, positions, classes) {
   tibble_error(
-    bullets(
+    problems(
       "All columns in a tibble must be vectors:",
-      paste0("Column ", name_or_pos(names, positions), " is ", classes)
+      x = paste0("Column ", name_or_pos(names, positions), " is ", classes)
     ),
     names = names
   )
@@ -356,7 +356,7 @@ error_as_tibble_row_size_one <- function(j, name, size) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 
-  tibble_error(bullets(
+  tibble_error(problems(
     "All elements must be size one, use `list()` to wrap.",
     paste0("Element ", desc, " is of size ", size, ".")
   ))

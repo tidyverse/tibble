@@ -1,6 +1,8 @@
 context("msg-format")
 
 test_that("bullets", {
+  skip_enh_bullets_format()
+
   expect_equal(
     unell_bullets("header", c("item 1", "item 2")),
     "header\n* item 1\n* item 2"
@@ -16,6 +18,8 @@ test_that("bullets", {
 })
 
 test_that("commas", {
+  skip_enh_bullets_format()
+
   expect_equal(
     commas("1"),
     "1"

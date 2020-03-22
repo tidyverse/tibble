@@ -756,9 +756,9 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
   tibble_error(
     bullets(
       paste0("New data ", tick(as_label(value_arg)), " must be consistent with ", target, ":"),
-      existing,
-      new,
-      "Only vectors of size 1 are recycled"
+      x = existing,
+      x = new,
+      i = "Only vectors of size 1 are recycled"
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),
@@ -771,8 +771,8 @@ error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
 
   tibble_error(
     bullets(
-      paste0("New data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      paste0("Target: column ", tick(name)),
+      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
+      paste0("The error occurred for column ", tick(name)),
       message
     ),
     expected = x[[j]],
