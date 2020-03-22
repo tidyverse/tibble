@@ -4,7 +4,7 @@
 \alias{print.tbl_df}
 \title{Legacy help page for compatibility with existing packages}
 \description{
-\lifecycle{archived}
+\lifecycle{superseded}
 
 Please see \code{\link[=print.tbl]{print.tbl()}} for the print method for tibbles.
 }
