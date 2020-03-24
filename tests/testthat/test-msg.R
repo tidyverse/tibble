@@ -83,37 +83,37 @@ verify_output("msg.txt", {
   error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
   error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
-  error_incompatible_cols(
+  error_incompatible_size(
     10,
     letters[1:3],
     c(4, 4, 3),
     "Requested with `uvw` argument"
   )
-  error_incompatible_cols(
+  error_incompatible_size(
     10,
     letters[1:3],
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_incompatible_cols(
+  error_incompatible_size(
     NULL,
     letters[1:3],
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_incompatible_cols(
+  error_incompatible_size(
     10,
     1:3,
     c(4, 4, 3),
     "Requested with `uvw` argument"
   )
-  error_incompatible_cols(
+  error_incompatible_size(
     10,
     1:3,
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_incompatible_cols(
+  error_incompatible_size(
     NULL,
     1:3,
     c(2, 2, 3),

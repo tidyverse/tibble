@@ -309,7 +309,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_incompatible_cols(n, name, size, "Existing data"))
+  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
 }
 
 # Errors ------------------------------------------------------------------
@@ -327,7 +327,7 @@ error_tibble_row_size_one <- function(j, name, size) {
   ))
 }
 
-error_incompatible_cols <- function(.rows, vars, vars_len, rows_source) {
+error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL

@@ -127,7 +127,7 @@ validate_nrow <- function(names, lengths, nrow) {
   # Validate column lengths, don't recycle
   bad_len <- which(lengths != nrow)
   if (has_length(bad_len)) {
-    cnd_signal(error_incompatible_cols(nrow, names, lengths, "Requested with `nrow` argument"))
+    cnd_signal(error_incompatible_size(nrow, names, lengths, "Requested with `nrow` argument"))
   }
 }
 
