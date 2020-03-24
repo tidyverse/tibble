@@ -33,7 +33,7 @@
 new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
-    deprecate_soft("2.0.0", "new_tibble(subclass = )", "new_tibble(class = )")
+    deprecate_soft("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
     class <- subclass
   }
 
@@ -53,7 +53,7 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   if (missing(nrow)) {
     cnd <- error_new_tibble_needs_nrow()
     if (length(x) >= 1) {
-      deprecate_soft("2.0.0", "new_tibble(nrow = 'can\\'t be missing')",
+      deprecate_soft("2.0.0", "tibble::new_tibble(nrow = 'can\\'t be missing')",
         details = cnd$message)
       nrow <- NROW(x[[1]])
     } else {
@@ -147,13 +147,9 @@ set_tibble_subclass <- function(x, nrow, subclass) {
 # Errors ------------------------------------------------------------------
 
 error_new_tibble_must_be_list <- function() {
-  tibble_error("Must pass a list as `x` argument to `new_tibble()`.")
+  tibble_error("`x` must be a list.")
 }
 
 error_new_tibble_needs_nrow <- function() {
-  tibble_error("Must pass a scalar integer as `nrow` argument to `new_tibble()`.")
-}
-
-error_new_tibble_needs_class <- function() {
-  tibble_error("Must pass a `class` argument instead of `subclass` to `new_tibble()`.")
+  tibble_error("`x` must be a scalar integer.")
 }

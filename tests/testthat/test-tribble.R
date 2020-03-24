@@ -194,3 +194,13 @@ test_that("frame_matrix cannot have list columns", {
     error_frame_matrix_list(c(2, 4))
   )
 })
+
+verify_output("tribble.txt", {
+  tribble(1)
+  tribble(~a, ~b, 1)
+  tribble(a ~ b, 1)
+  tribble(a ~ b + c, 1)
+
+  frame_matrix(1)
+  frame_matrix(~a, list(1))
+})

@@ -280,3 +280,17 @@ test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = ncol(iris))))
   expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
 })
+
+verify_output("add.txt", {
+  add_row(tibble(), a = 1)
+  add_row(tibble(), a = 1, b = 2)
+  add_row(tibble(), !!!set_names(letters))
+  add_row(dplyr::group_by(tibble(a = 1), a))
+  add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
+
+  add_column(tibble(a = 1), a = 1)
+  add_column(tibble(a = 1, b = 2), a = 1, b = 2)
+  add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
+  add_column(tibble(a = 2:3), b = 4:6)
+  add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
+})

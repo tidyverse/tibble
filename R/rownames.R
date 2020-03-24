@@ -126,5 +126,5 @@ error_existing_column_names <- function(names) {
 }
 
 error_already_has_rownames <- function() {
-  tibble_error("`df` must be a data frame without row names in `column_to_rownames()`.")
+  tibble_error("`df` must be a data frame without row names.")
 }

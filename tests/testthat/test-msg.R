@@ -70,9 +70,9 @@ verify_output("msg.txt", {
   error_column_must_be_named(seq_along(letters), repair = TRUE)
   error_column_must_be_named(4:6, repair = FALSE)
 
-  error_column_must_not_be_dot_dot("a", repair = FALSE)
-  error_column_must_not_be_dot_dot(letters[2:3], repair = TRUE)
-  error_column_must_not_be_dot_dot(LETTERS, repair = TRUE)
+  error_column_must_not_be_dot_dot(1, repair = FALSE)
+  error_column_must_not_be_dot_dot(2:3, repair = TRUE)
+  error_column_must_not_be_dot_dot(1:26, repair = TRUE)
 
   error_column_names_must_be_unique("a", repair = FALSE)
   error_column_names_must_be_unique(letters[2:3], repair = TRUE)

@@ -94,3 +94,8 @@ test_that("column_to_rownames returns tbl", {
 test_that("converting to data frame does not add row names", {
   expect_false(has_rownames(as.data.frame(as_tibble(iris))))
 })
+
+verify_output("rownames.txt", {
+  column_to_rownames(mtcars, "cyl")
+  column_to_rownames(iris, "foo")
+})

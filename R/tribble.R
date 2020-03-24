@@ -179,26 +179,26 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 # Errors ------------------------------------------------------------------
 
 error_tribble_needs_columns <- function() {
-  tibble_error("`tribble()` needs to specify at least one column using the `~name` syntax.")
+  tibble_error("Must specify at least one column using the `~name` syntax.")
 }
 
 error_tribble_lhs_column_syntax <- function(lhs) {
   tibble_error(bullets(
-    "All column specifications in `tribble()` must use the `~name` syntax.",
+    "All column specifications must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   ))
 }
 
 error_tribble_rhs_column_syntax <- function(rhs) {
   tibble_error(bullets(
-    'All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.',
+    'All column specifications must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   ))
 }
 
 error_tribble_non_rectangular <- function(cols, cells) {
   tibble_error(bullets(
-    "`tribble()` must be used with rectangular data:",
+    "Data must be rectangular:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
     i = paste0(cells, " is not an integer multiple of ", cols, ".")
@@ -207,7 +207,7 @@ error_tribble_non_rectangular <- function(cols, cells) {
 
 error_frame_matrix_list <- function(pos) {
   tibble_error(bullets(
-    "All values in `frame_matrix()` must be atomic:",
+    "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   ))
 }

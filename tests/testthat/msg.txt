@@ -1,6 +1,6 @@
 > error_enframe_value_null()
 <error/tibble_error_enframe_value_null>
-The `value` argument to `enframe()` cannot be NULL.
+`value` can't be NULL.
 
 > error_enframe_has_dim(Titanic)
 <error/tibble_error_enframe_has_dim>
@@ -133,17 +133,17 @@ Can't add rows to grouped data frames.
 
 > error_incompatible_new_rows("a")
 <error/tibble_error_incompatible_new_rows>
-New rows in `add_row()` must use columns that already exist.
+New rows can't add columns.
 x Can't find column `a` in `.data`.
 
 > error_incompatible_new_rows(letters[2:3])
 <error/tibble_error_incompatible_new_rows>
-New rows in `add_row()` must use columns that already exist.
+New rows can't add columns.
 x Can't find columns `b`, `c` in `.data`.
 
 > error_incompatible_new_rows(LETTERS)
 <error/tibble_error_incompatible_new_rows>
-New rows in `add_row()` must use columns that already exist.
+New rows can't add columns.
 x Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
 
 > error_names_must_be_non_null(repair = TRUE)
@@ -178,18 +178,18 @@ Use .name_repair to specify repair.
 <error/tibble_error_column_must_be_named>
 Columns 4, 5, 6 must be named.
 
-> error_column_must_not_be_dot_dot("a", repair = FALSE)
+> error_column_must_not_be_dot_dot(1, repair = FALSE)
 <error/tibble_error_column_must_not_be_dot_dot>
-Column `a` must not have names of the form ... or ..j.
+Column 1 must not have names of the form ... or ..j.
 
-> error_column_must_not_be_dot_dot(letters[2:3], repair = TRUE)
+> error_column_must_not_be_dot_dot(2:3, repair = TRUE)
 <error/tibble_error_column_must_not_be_dot_dot>
-Columns `b`, `c` must not have names of the form ... or ..j.
+Columns 2, 3 must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
 
-> error_column_must_not_be_dot_dot(LETTERS, repair = TRUE)
+> error_column_must_not_be_dot_dot(1:26, repair = TRUE)
 <error/tibble_error_column_must_not_be_dot_dot>
-Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not have names of the form ... or ..j.
+Columns 1, 2, 3, 4, 5, ... (and 21 more) must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
 
 > error_column_names_must_be_unique("a", repair = FALSE)
@@ -283,13 +283,13 @@ i Only values of size one are recycled.
 
 > error_incompatible_new_cols(10, data.frame(a = 1:2))
 <error/tibble_error_incompatible_new_cols>
-New columns in `add_column()` must be consistent with `.data`.
+New columns must be consistent with `.data`.
 x New column contributes 2 rows.
 i `.data` has 10 rows.
 
 > error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
 <error/tibble_error_incompatible_new_cols>
-New columns in `add_column()` must be consistent with `.data`.
+New columns must be consistent with `.data`.
 x New columns contribute 3 rows.
 i `.data` has 1 row.
 
@@ -299,41 +299,41 @@ Can't specify both `.before` and `.after`.
 
 > error_already_has_rownames()
 <error/tibble_error_already_has_rownames>
-`df` must be a data frame without row names in `column_to_rownames()`.
+`df` must be a data frame without row names.
 
 > error_glimpse_infinite_width()
 <error/tibble_error_glimpse_infinite_width>
-`glimpse()` requires a finite value for the `width` argument.
+`width` must be finite.
 
 > error_tribble_needs_columns()
 <error/tibble_error_tribble_needs_columns>
-`tribble()` needs to specify at least one column using the `~name` syntax.
+Must specify at least one column using the `~name` syntax.
 
 > error_tribble_lhs_column_syntax(quote(lhs))
 <error/tibble_error_tribble_lhs_column_syntax>
-All column specifications in `tribble()` must use the `~name` syntax.
+All column specifications must use the `~name` syntax.
 x Found `lhs` on the left-hand side of `~`.
 
 > error_tribble_rhs_column_syntax(quote(a + b))
 <error/tibble_error_tribble_rhs_column_syntax>
-All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.
+All column specifications must use the `~name` or `~"name"` syntax.
 x Found `a + b` on the right-hand side of `~`.
 
 > error_tribble_non_rectangular(5, 17)
 <error/tibble_error_tribble_non_rectangular>
-`tribble()` must be used with rectangular data.
+Data must be rectangular.
 * Found 5 columns.
 * Found 17 cells.
 i 17 is not an integer multiple of 5.
 
 > error_frame_matrix_list(2:4)
 <error/tibble_error_frame_matrix_list>
-All values in `frame_matrix()` must be atomic.
+All values must be atomic.
 x Found list-valued elements at positions 2, 3, 4.
 
 > error_tibble_row_size_one(3, "foo", 7)
 <error/tibble_error_tibble_row_size_one>
-All vectors in `tibble_row()` must be size one, use `list()` to wrap.
+All vectors must be size one, use `list()` to wrap.
 x Column `foo` is of size 7.
 
 > error_as_tibble_row_bare(new_environment())
@@ -347,11 +347,11 @@ x Element `foo` is of size 7.
 
 > error_new_tibble_must_be_list()
 <error/tibble_error_new_tibble_must_be_list>
-Must pass a list as `x` argument to `new_tibble()`.
+`x` must be a list.
 
 > error_new_tibble_needs_nrow()
 <error/tibble_error_new_tibble_needs_nrow>
-Must pass a scalar integer as `nrow` argument to `new_tibble()`.
+`x` must be a scalar integer.
 
 > error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
 <error/tibble_error_subset_matrix_must_be_vector>

@@ -1,0 +1,6 @@
+> column_to_rownames(mtcars, "cyl")
+Error: `df` must be a data frame without row names.
+
+> column_to_rownames(iris, "foo")
+Error: Can't find column `foo` in `.data`.
+

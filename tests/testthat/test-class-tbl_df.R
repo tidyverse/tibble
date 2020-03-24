@@ -39,3 +39,11 @@ test_that("names<-()", {
     class = "lifecycle_error_deprecated"
   )
 })
+
+verify_output("class-tbl_df.txt", {
+  df <- tibble(a = 1, b = 2)
+
+  names(df) <- NULL
+  names(df) <- "c"
+  names(df) <- c("..1", "..2")
+})

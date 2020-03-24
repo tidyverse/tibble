@@ -230,7 +230,7 @@ error_add_rows_to_grouped_df <- function() {
 error_incompatible_new_rows <- function(names) {
   tibble_error(
     bullets(
-      "New rows in `add_row()` must use columns that already exist:",
+      "New rows can't add columns:",
       cnd_message(error_unknown_column_names(names))
     ),
     names = names
@@ -248,7 +248,7 @@ error_unknown_column_names <- function(j, parent = NULL) {
 error_incompatible_new_cols <- function(n, df) {
   tibble_error(
     bullets(
-      "New columns in `add_column()` must be consistent with `.data`:",
+      "New columns must be consistent with `.data`:",
       x = paste0(
         pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
         nrow(df), " rows"

@@ -539,3 +539,28 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
     error_column_must_be_named(2)
   )
 })
+
+verify_output("as_tibble.txt", {
+  as_tibble(list(1))
+  as_tibble(list(1, 2))
+  as_tibble(list(a = 1, 2))
+  as_tibble(as.list(1:26))
+  as_tibble(set_names(list(1), "..1"))
+  as_tibble(set_names(list(1:26), paste0("..", 1:26)))
+  as_tibble(list(a = 1, a = 1))
+  as_tibble(list(a = 1, a = 1, b = 1, b = 1))
+  as_tibble(list(a = new_environment()))
+
+  as_tibble_row(list(1))
+  as_tibble_row(list(1, 2))
+  as_tibble_row(list(a = 1, 2))
+  as_tibble_row(as.list(1:26))
+  as_tibble_row(set_names(list(1), "..1"))
+  as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
+  as_tibble_row(list(a = 1, a = 1))
+  as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
+  as_tibble_row(list(a = new_environment()))
+
+  as_tibble_row(list(a = 1:3))
+  as_tibble_row(list(a = 1:3, b = 1:3))
+})

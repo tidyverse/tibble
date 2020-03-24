@@ -68,7 +68,7 @@ deframe <- function(x) {
 }
 
 error_enframe_value_null <- function() {
-  tibble_error("The `value` argument to `enframe()` cannot be NULL.")
+  tibble_error("`value` can't be NULL.")
 }
 
 error_enframe_has_dim <- function(x) {

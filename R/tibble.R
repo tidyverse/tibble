@@ -322,7 +322,7 @@ error_tibble_row_size_one <- function(j, name, size) {
   }
 
   tibble_error(bullets(
-    "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
