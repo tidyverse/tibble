@@ -16,7 +16,7 @@
 
 > error_na_column_index(1:3)
 <error/tibble_error_na_column_index>
-Can't use NA as column index with `[` at positions 1, 2, 3.
+Can't use NA as column index with `[` at positions 1, 2, and 3.
 
 > error_unknown_column_names("a")
 <error/tibble_error_unknown_column_names>
@@ -24,11 +24,11 @@ Can't find column `a` in `.data`.
 
 > error_unknown_column_names(c("b", "c"))
 <error/tibble_error_unknown_column_names>
-Can't find columns `b`, `c` in `.data`.
+Can't find columns `b` and `c` in `.data`.
 
 > error_unknown_column_names(LETTERS)
 <error/tibble_error_unknown_column_names>
-Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
+Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
 
 > error_existing_column_names("a")
 <error/tibble_error_existing_column_names>
@@ -36,11 +36,11 @@ Column `a` already exists in `.data`.
 
 > error_existing_column_names(c("b", "c"))
 <error/tibble_error_existing_column_names>
-Columns `b`, `c` already exist in `.data`.
+Columns `b` and `c` already exist in `.data`.
 
 > error_existing_column_names(LETTERS)
 <error/tibble_error_existing_column_names>
-Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`.
+Columns `A`, `B`, `C`, `D`, `E`, and 21 more already exist in `.data`.
 
 > error_assign_columns_non_na_only()
 <error/tibble_error_assign_columns_non_na_only>
@@ -56,7 +56,7 @@ Subscript can't be missing for tibbles in `[[<-`.
 
 > error_new_columns_at_end_only(5, 7:8)
 <error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7, 8 in a tibble with 5 columns.
+Can't assign columns 7 and 8 in a tibble with 5 columns.
 
 > error_new_columns_at_end_only(5, 7)
 <error/tibble_error_new_columns_at_end_only>
@@ -64,7 +64,7 @@ Can't assign column 7 in a tibble with 5 columns.
 
 > error_new_columns_at_end_only(1, 7:8)
 <error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7, 8 in a tibble with 1 column.
+Can't assign columns 7 and 8 in a tibble with 1 column.
 
 > error_new_columns_at_end_only(1, 7)
 <error/tibble_error_new_columns_at_end_only>
@@ -76,7 +76,7 @@ Column index 1 is used more than once for assignment.
 
 > error_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2))
 <error/tibble_error_duplicate_column_subscript_for_assignment>
-Column indexes 1, 2 are used more than once for assignment.
+Column indexes 1 and 2 are used more than once for assignment.
 
 > error_assign_rows_non_na_only()
 <error/tibble_error_assign_rows_non_na_only>
@@ -84,7 +84,7 @@ Can't use NA as row index in a tibble for assignment.
 
 > error_new_rows_at_end_only(5, 7:8)
 <error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7, 8 in a tibble with 5 rows.
+Can't assign rows 7 and 8 in a tibble with 5 rows.
 
 > error_new_rows_at_end_only(5, 7)
 <error/tibble_error_new_rows_at_end_only>
@@ -92,7 +92,7 @@ Can't assign row 7 in a tibble with 5 rows.
 
 > error_new_rows_at_end_only(1, 7:8)
 <error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7, 8 in a tibble with 1 row.
+Can't assign rows 7 and 8 in a tibble with 1 row.
 
 > error_new_rows_at_end_only(1, 7)
 <error/tibble_error_new_rows_at_end_only>
@@ -104,7 +104,7 @@ Row index 1 is used more than once for assignment.
 
 > error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2))
 <error/tibble_error_duplicate_row_subscript_for_assignment>
-Row indexes 1, 2 are used more than once for assignment.
+Row indexes 1 and 2 are used more than once for assignment.
 
 > error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs))
 <error/tibble_error_assign_incompatible_size>
@@ -139,12 +139,12 @@ x Can't find column `a` in `.data`.
 > error_incompatible_new_rows(letters[2:3])
 <error/tibble_error_incompatible_new_rows>
 New rows can't add columns.
-x Can't find columns `b`, `c` in `.data`.
+x Can't find columns `b` and `c` in `.data`.
 
 > error_incompatible_new_rows(LETTERS)
 <error/tibble_error_incompatible_new_rows>
 New rows can't add columns.
-x Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
+x Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
 
 > error_names_must_be_non_null(repair = TRUE)
 <error/tibble_error_names_must_be_non_null>
@@ -166,17 +166,17 @@ Use .name_repair to specify repair.
 
 > error_column_must_be_named(2:3, repair = TRUE)
 <error/tibble_error_column_must_be_named>
-Columns 2, 3 must be named.
+Columns 2 and 3 must be named.
 Use .name_repair to specify repair.
 
 > error_column_must_be_named(seq_along(letters), repair = TRUE)
 <error/tibble_error_column_must_be_named>
-Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named.
+Columns 1, 2, 3, 4, 5, and 21 more must be named.
 Use .name_repair to specify repair.
 
 > error_column_must_be_named(4:6, repair = FALSE)
 <error/tibble_error_column_must_be_named>
-Columns 4, 5, 6 must be named.
+Columns 4, 5, and 6 must be named.
 
 > error_column_must_not_be_dot_dot(1, repair = FALSE)
 <error/tibble_error_column_must_not_be_dot_dot>
@@ -184,12 +184,12 @@ Column 1 must not have names of the form ... or ..j.
 
 > error_column_must_not_be_dot_dot(2:3, repair = TRUE)
 <error/tibble_error_column_must_not_be_dot_dot>
-Columns 2, 3 must not have names of the form ... or ..j.
+Columns 2 and 3 must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
 
 > error_column_must_not_be_dot_dot(1:26, repair = TRUE)
 <error/tibble_error_column_must_not_be_dot_dot>
-Columns 1, 2, 3, 4, 5, ... (and 21 more) must not have names of the form ... or ..j.
+Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
 
 > error_column_names_must_be_unique("a", repair = FALSE)
@@ -198,12 +198,12 @@ Column name `a` must not be duplicated.
 
 > error_column_names_must_be_unique(letters[2:3], repair = TRUE)
 <error/tibble_error_column_names_must_be_unique>
-Column names `b`, `c` must not be duplicated.
+Column names `b` and `c` must not be duplicated.
 Use .name_repair to specify repair.
 
 > error_column_names_must_be_unique(LETTERS, repair = TRUE)
 <error/tibble_error_column_names_must_be_unique>
-Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.
+Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
 Use .name_repair to specify repair.
 
 > error_column_must_be_vector("a", 3, "environment")
@@ -238,7 +238,7 @@ x ... and 23 more problems.
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column `c`.
-* Size 4: Columns `a`, `b`.
+* Size 4: Columns `a` and `b`.
 i Only values of size one are recycled.
 
 > error_incompatible_size(10, letters[1:3], c(2, 2, 3),
@@ -246,7 +246,7 @@ i Only values of size one are recycled.
 <error/tibble_error_incompatible_size>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `xyz` argument.
-* Size 2: Columns `a`, `b`.
+* Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
@@ -254,7 +254,7 @@ i Only values of size one are recycled.
 + "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
 Tibble columns must have consistent sizes.
-* Size 2: Columns `a`, `b`.
+* Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
@@ -263,21 +263,21 @@ i Only values of size one are recycled.
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column at position 3.
-* Size 4: Columns at positions 1, 2.
+* Size 4: Columns at positions 1 and 2.
 i Only values of size one are recycled.
 
 > error_incompatible_size(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `xyz` argument.
-* Size 2: Columns at positions 1, 2.
+* Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
 > error_incompatible_size(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
 Tibble columns must have consistent sizes.
-* Size 2: Columns at positions 1, 2.
+* Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
@@ -329,7 +329,7 @@ i 17 is not an integer multiple of 5.
 > error_frame_matrix_list(2:4)
 <error/tibble_error_frame_matrix_list>
 All values must be atomic.
-x Found list-valued elements at positions 2, 3, 4.
+x Found list-valued elements at positions 2, 3, and 4.
 
 > error_tibble_row_size_one(3, "foo", 7)
 <error/tibble_error_tibble_row_size_one>

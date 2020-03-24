@@ -416,10 +416,10 @@ Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
 
 > df <- tibble(x = 1:2, y = x)
 > df[4:5] <- 3
-Error: Can't assign columns 4, 5 in a tibble with 2 columns.
+Error: Can't assign columns 4 and 5 in a tibble with 2 columns.
 
 > df[4:5, ] <- 3
-Error: Can't assign rows 4, 5 in a tibble with 2 rows.
+Error: Can't assign rows 4 and 5 in a tibble with 2 rows.
 
 > df[-4, ] <- 3
 Error: Can't negate rows that don't exist.

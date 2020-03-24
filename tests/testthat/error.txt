@@ -2,7 +2,7 @@
 [1] "Column `col` must be integer.\nFix this."
 
 > invalid_df("must be numeric", c("col1", "col2"))
-[1] "Columns `col1`, `col2` must be numeric."
+[1] "Columns `col1` and `col2` must be numeric."
 
 > use_repair(TRUE)
 [1] "\nUse .name_repair to specify repair."
