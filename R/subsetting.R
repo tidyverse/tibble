@@ -622,7 +622,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
     },
 
     vctrs_error = function(cnd) {
-      cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
+      cnd_signal(error_assign_incompatible_type(x, value, j, value_arg, cnd_message(cnd)))
     }
   )
 
@@ -772,7 +772,7 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   )
 }
 
-error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
+error_assign_incompatible_type <- function(x, value, j, value_arg, message) {
   name <- names(x)[[j]]
 
   tibble_error(

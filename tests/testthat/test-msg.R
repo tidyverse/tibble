@@ -52,7 +52,7 @@ verify_output("msg.txt", {
   error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs))
   error_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
 
-  error_incompatible_new_data_type(tibble(a = 1), list("c"), 1, quote(rhs), "Can't frobnicate.")
+  error_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(rhs), "Can't frobnicate.")
 
   error_add_rows_to_grouped_df()
 
