@@ -654,7 +654,7 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
     },
 
     vctrs_error_recycle_incompatible_size = function(cnd) {
-      cnd_signal(error_inconsistent_new_data_size(nrow, value, j, i_arg, value_arg))
+      cnd_signal(error_incompatible_new_data_size(nrow, value, j, i_arg, value_arg))
     }
   )
 
@@ -743,7 +743,7 @@ error_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
+error_incompatible_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")

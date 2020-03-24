@@ -144,7 +144,7 @@ tibble(
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
-# with inconsistent number of rows:
+# with incompatible number of rows:
 try(tibble(y = strptime("2000/01/01", "\%x")))
 try(tibble(a = 1:3, b = tibble(c = 4:7)))
 

@@ -43,12 +43,12 @@ test_that("adds empty row if no arguments", {
 test_that("error if adding row with unknown variables", {
   expect_tibble_error(
     add_row(tibble(a = 3), xxyzy = "err"),
-    error_inconsistent_new_rows("xxyzy")
+    error_incompatible_new_rows("xxyzy")
   )
 
   expect_tibble_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    error_inconsistent_new_rows(c("b", "c"))
+    error_incompatible_new_rows(c("b", "c"))
   )
 })
 
@@ -190,7 +190,7 @@ test_that("error if adding existing columns", {
 test_that("error if adding wrong number of rows with add_column()", {
   expect_tibble_error(
     add_column(tibble(a = 3), b = 4:5),
-    error_inconsistent_new_cols(1, data.frame(b = 4:5))
+    error_incompatible_new_cols(1, data.frame(b = 4:5))
   )
 })
 

@@ -104,6 +104,6 @@ test_that("new_tibble checks", {
 test_that("validate_tibble() checks", {
   expect_tibble_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
-    error_inconsistent_cols(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
+    error_incompatible_cols(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
   )
 })

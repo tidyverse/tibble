@@ -49,16 +49,16 @@ verify_output("msg.txt", {
   error_duplicate_row_subscript_for_assignment(c(1, 1))
   error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2))
 
-  error_inconsistent_new_data_size(3, list(1:2), 1, NULL, quote(rhs))
-  error_inconsistent_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
+  error_incompatible_new_data_size(3, list(1:2), 1, NULL, quote(rhs))
+  error_incompatible_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
 
   error_incompatible_new_data_type(tibble(a = 1), list("c"), 1, quote(rhs), "Can't frobnicate.")
 
   error_add_rows_to_grouped_df()
 
-  error_inconsistent_new_rows("a")
-  error_inconsistent_new_rows(letters[2:3])
-  error_inconsistent_new_rows(LETTERS)
+  error_incompatible_new_rows("a")
+  error_incompatible_new_rows(letters[2:3])
+  error_incompatible_new_rows(LETTERS)
 
   error_names_must_be_non_null(repair = TRUE)
   error_names_must_be_non_null(repair = FALSE)
@@ -83,45 +83,45 @@ verify_output("msg.txt", {
   error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
   error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
-  error_inconsistent_cols(
+  error_incompatible_cols(
     10,
     letters[1:3],
     c(4, 4, 3),
     "Requested with `uvw` argument"
   )
-  error_inconsistent_cols(
+  error_incompatible_cols(
     10,
     letters[1:3],
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_inconsistent_cols(
+  error_incompatible_cols(
     NULL,
     letters[1:3],
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_inconsistent_cols(
+  error_incompatible_cols(
     10,
     1:3,
     c(4, 4, 3),
     "Requested with `uvw` argument"
   )
-  error_inconsistent_cols(
+  error_incompatible_cols(
     10,
     1:3,
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
-  error_inconsistent_cols(
+  error_incompatible_cols(
     NULL,
     1:3,
     c(2, 2, 3),
     "Requested with `xyz` argument"
   )
 
-  error_inconsistent_new_cols(10, data.frame(a = 1:2))
-  error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4))
+  error_incompatible_new_cols(10, data.frame(a = 1:2))
+  error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
 
   error_both_before_after()
 

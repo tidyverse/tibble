@@ -53,7 +53,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
-    cnd_signal(error_inconsistent_new_rows(extra_vars))
+    cnd_signal(error_incompatible_new_rows(extra_vars))
   }
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
@@ -144,7 +144,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      cnd_signal(error_inconsistent_new_cols(nrow(.data), df))
+      cnd_signal(error_incompatible_new_cols(nrow(.data), df))
     }
   }
 
@@ -227,7 +227,7 @@ error_add_rows_to_grouped_df <- function() {
   tibble_error("Can't add rows to grouped data frames.")
 }
 
-error_inconsistent_new_rows <- function(names) {
+error_incompatible_new_rows <- function(names) {
   tibble_error(
     bullets(
       "New rows in `add_row()` must use columns that already exist:",
@@ -245,7 +245,7 @@ error_unknown_column_names <- function(j, parent = NULL) {
   tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
-error_inconsistent_new_cols <- function(n, df) {
+error_incompatible_new_cols <- function(n, df) {
   tibble_error(
     bullets(
       "New columns in `add_column()` must be consistent with `.data`:",

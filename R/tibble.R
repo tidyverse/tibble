@@ -123,7 +123,7 @@
 #' )
 #'
 #' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with inconsistent number of rows:
+#' # with incompatible number of rows:
 #' try(tibble(y = strptime("2000/01/01", "%x")))
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
@@ -309,7 +309,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_inconsistent_cols(n, name, size, "Existing data"))
+  cnd_signal(error_incompatible_cols(n, name, size, "Existing data"))
 }
 
 # Errors ------------------------------------------------------------------
@@ -327,7 +327,7 @@ error_tibble_row_size_one <- function(j, name, size) {
   ))
 }
 
-error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+error_incompatible_cols <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL

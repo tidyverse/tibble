@@ -161,7 +161,7 @@ recycle_columns <- function(x, .rows, lengths) {
   if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
-    cnd_signal(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
+    cnd_signal(error_incompatible_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
   }
 
   if (nrow != 1L) {

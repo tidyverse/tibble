@@ -106,15 +106,15 @@ Row index 1 is used more than once for assignment.
 <error/tibble_error_duplicate_row_subscript_for_assignment>
 Row indexes 1, 2 are used more than once for assignment.
 
-> error_inconsistent_new_data_size(3, list(1:2), 1, NULL, quote(rhs))
-<error/tibble_error_inconsistent_new_data_size>
+> error_incompatible_new_data_size(3, list(1:2), 1, NULL, quote(rhs))
+<error/tibble_error_incompatible_new_data_size>
 New data `rhs` must be consistent with existing data.
 x Existing data has 3 rows.
 x New data contributes 2 rows.
 i Only vectors of size 1 are recycled.
 
-> error_inconsistent_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
-<error/tibble_error_inconsistent_new_data_size>
+> error_incompatible_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
+<error/tibble_error_incompatible_new_data_size>
 New data `rhs` must be consistent with row subscript `4:1`.
 x Subscript has 4 rows.
 x Element 2 of new data contributes 2 rows.
@@ -131,18 +131,18 @@ x Can't frobnicate.
 <error/tibble_error_add_rows_to_grouped_df>
 Can't add rows to grouped data frames.
 
-> error_inconsistent_new_rows("a")
-<error/tibble_error_inconsistent_new_rows>
+> error_incompatible_new_rows("a")
+<error/tibble_error_incompatible_new_rows>
 New rows in `add_row()` must use columns that already exist.
 x Can't find column `a` in `.data`.
 
-> error_inconsistent_new_rows(letters[2:3])
-<error/tibble_error_inconsistent_new_rows>
+> error_incompatible_new_rows(letters[2:3])
+<error/tibble_error_incompatible_new_rows>
 New rows in `add_row()` must use columns that already exist.
 x Can't find columns `b`, `c` in `.data`.
 
-> error_inconsistent_new_rows(LETTERS)
-<error/tibble_error_inconsistent_new_rows>
+> error_incompatible_new_rows(LETTERS)
+<error/tibble_error_incompatible_new_rows>
 New rows in `add_row()` must use columns that already exist.
 x Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
 
@@ -232,63 +232,63 @@ x Column `B` is b.
 x Column `C` is c.
 x ... and 23 more problems.
 
-> error_inconsistent_cols(10, letters[1:3], c(4, 4, 3),
+> error_incompatible_cols(10, letters[1:3], c(4, 4, 3),
 + "Requested with `uvw` argument")
-<error/tibble_error_inconsistent_cols>
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column `c`.
 * Size 4: Columns `a`, `b`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, letters[1:3], c(2, 2, 3),
+> error_incompatible_cols(10, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `xyz` argument.
 * Size 2: Columns `a`, `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(NULL, letters[1:3], c(2, 2, 3),
+> error_incompatible_cols(NULL, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 2: Columns `a`, `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
-<error/tibble_error_inconsistent_cols>
+> error_incompatible_cols(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column at position 3.
 * Size 4: Columns at positions 1, 2.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
+> error_incompatible_cols(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 10: Requested with `xyz` argument.
 * Size 2: Columns at positions 1, 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
+> error_incompatible_cols(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
+<error/tibble_error_incompatible_cols>
 Tibble columns must have consistent sizes.
 * Size 2: Columns at positions 1, 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
-> error_inconsistent_new_cols(10, data.frame(a = 1:2))
-<error/tibble_error_inconsistent_new_cols>
+> error_incompatible_new_cols(10, data.frame(a = 1:2))
+<error/tibble_error_incompatible_new_cols>
 New columns in `add_column()` must be consistent with `.data`.
 x New column contributes 2 rows.
 i `.data` has 10 rows.
 
-> error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4))
-<error/tibble_error_inconsistent_new_cols>
+> error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
+<error/tibble_error_incompatible_new_cols>
 New columns in `add_column()` must be consistent with `.data`.
 x New columns contribute 3 rows.
 i `.data` has 1 row.

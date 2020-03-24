@@ -18,11 +18,11 @@ test_that("columns are recycled to common length", {
 test_that("columns must be same length", {
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_inconsistent_cols(NULL,  c("x", "y"), 2:3, NA)
+    error_incompatible_cols(NULL,  c("x", "y"), 2:3, NA)
   )
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
-    error_inconsistent_cols(
+    error_incompatible_cols(
       NULL,
       c("x", "y", "z"),
       2:4,
@@ -31,7 +31,7 @@ test_that("columns must be same length", {
   )
   expect_tibble_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
-    error_inconsistent_cols(
+    error_incompatible_cols(
       NULL,
       c("x", "y", "z"),
       c(4, 2, 2),
@@ -40,7 +40,7 @@ test_that("columns must be same length", {
   )
   expect_tibble_error(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
-    error_inconsistent_cols(
+    error_incompatible_cols(
       NULL,
       c("y", "z"),
       c(4, 2),
@@ -49,7 +49,7 @@ test_that("columns must be same length", {
   )
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
-    error_inconsistent_cols(
+    error_incompatible_cols(
       NULL,
       c("x", "y"),
       c(2, 4),
