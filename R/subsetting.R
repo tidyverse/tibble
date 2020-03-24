@@ -754,9 +754,9 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
 
   new <- paste0(pluralise_count("contributes ", vec_size(value[[j]]), " row(s)"))
   if (length(value) != 1) {
-    new <- paste0("Element ", j, " of new data ", new)
+    new <- paste0("The element ", j, " of new data ", new)
   } else {
-    new <- paste0("New data ", new)
+    new <- paste0("The assigned data ", new)
   }
 
   tibble_error(

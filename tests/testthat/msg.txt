@@ -110,14 +110,14 @@ Row indexes 1, 2 are used more than once for assignment.
 <error/tibble_error_assign_incompatible_size>
 New data `rhs` must be consistent with existing data.
 x Existing data has 3 rows.
-x New data contributes 2 rows.
+x The assigned data contributes 2 rows.
 i Only vectors of size 1 are recycled.
 
 > error_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
 <error/tibble_error_assign_incompatible_size>
 New data `rhs` must be consistent with row subscript `4:1`.
 x Subscript has 4 rows.
-x Element 2 of new data contributes 2 rows.
+x The element 2 of new data contributes 2 rows.
 i Only vectors of size 1 are recycled.
 
 > error_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(rhs),
