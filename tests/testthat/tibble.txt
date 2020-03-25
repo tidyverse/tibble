@@ -1,11 +1,14 @@
 > tibble(a = 1, a = 1)
+<error/tibble_error_column_duplicated>
 Error: Column name `a` must not be duplicated.
 
 > tibble(a = new_environment())
+<error/tibble_error_column_must_be_vector>
 Error: All columns in a tibble must be vectors.
 x Column `a` is environment.
 
 > tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+<error/tibble_error_incompatible_size>
 Error: Tibble columns must have compatible sizes.
 * Size 2: Existing data.
 * Size 3: Column `c`.

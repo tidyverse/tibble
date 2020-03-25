@@ -4,16 +4,16 @@
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[c("x", "y", "z")]
-Error: Can't subset columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't subset columns that don't exist.
 x The column `z` doesn't exist.
-
 > foo[c("w", "x", "y", "z")]
-Error: Can't subset columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't subset columns that don't exist.
 x The columns `w` and `z` don't exist.
-
 > foo[as.matrix("x")]
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
-
+<error/tibble_error_subset_matrix_must_be_logical>
+The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
 
@@ -23,48 +23,49 @@ Error: `i` must have one dimension, not 3.
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[0.5]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x Lossy cast from `0.5` <double> to <integer>.
-
 > foo[1:5]
-Error: Can't subset columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't subset columns that don't exist.
 x The locations 4 and 5 don't exist.
 i There are only 3 columns.
-
 > foo[-1:1]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript `-1:1` has a positive value at location 3.
-
 > foo[c(-1, 1)]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript `c(-1, 1)` has a positive value at location 2.
-
 > foo[c(-1, NA)]
-Error: Can't use NA as column index with `[` at position 2.
-
+<error/tibble_error_na_column_index>
+Can't use NA as column index with `[` at position 2.
 > foo[-4]
-Error: Can't negate columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't negate columns that don't exist.
 x The location 4 doesn't exist.
 i There are only 3 columns.
-
 > foo[c(1:3, NA)]
-Error: Can't use NA as column index with `[` at position 4.
-
+<error/tibble_error_na_column_index>
+Can't use NA as column index with `[` at position 4.
 > foo[as.matrix(1)]
-Error: The subscript `as.matrix(1)` is a matrix, it must be of type logical.
-
+<error/tibble_error_subset_matrix_must_be_logical>
+The subscript `as.matrix(1)` is a matrix, it must be of type logical.
 > foo[array(1, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
 
 > foo[mean]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x The subscript `mean` has the wrong type `closure`.
 i It must be logical, numeric, or character.
-
 > foo[foo]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
@@ -72,34 +73,33 @@ x The subscript `foo` has the wrong type `tbl_df<
 >`.
 i It must be logical, numeric, or character.
 
-
 [.tbl_df is careful about row indexes
 =====================================
 
 > foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
 > foo[0.5, ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x Lossy cast from `0.5` <double> to <integer>.
-
 > invisible(foo[1:5, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
 
 > foo[-1:1, ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript `-1:1` has a positive value at location 3.
-
 > foo[c(-1, 1), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x Negative locations can't be mixed with positive locations.
 i The subscript `c(-1, 1)` has a positive value at location 2.
-
 > foo[c(-1, NA), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x Negative locations can't have missing values.
 i The subscript `c(-1, NA)` has a missing value at location 2.
-
 > invisible(foo[-4, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
 Use `NA` as row index to obtain a row full of `NA` values.
@@ -111,12 +111,13 @@ Error: `i` must have one dimension, not 2.
 Error: `i` must have one dimension, not 3.
 
 > foo[mean, ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x The subscript `mean` has the wrong type `closure`.
 i It must be logical, numeric, or character.
-
 > foo[foo, ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
@@ -124,27 +125,26 @@ x The subscript `foo` has the wrong type `tbl_df<
 >`.
 i It must be logical, numeric, or character.
 
-
 [.tbl_df is careful about column flags (#83)
 ============================================
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[c(TRUE, TRUE)]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_size>
+Must subset columns with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE)` has size 2.
-
 > foo[c(TRUE, TRUE, FALSE, FALSE)]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_size>
+Must subset columns with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
-
 > foo[c(TRUE, TRUE, NA)]
-Error: Can't use NA as column index with `[` at position 3.
-
+<error/tibble_error_na_column_index>
+Can't use NA as column index with `[` at position 3.
 > foo[as.matrix(TRUE)]
-Error: The subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
-
+<error/tibble_error_subset_matrix_must_have_same_dimensions>
+The subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
 
@@ -154,15 +154,15 @@ Error: `i` must have one dimension, not 3.
 
 > foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
 > foo[c(TRUE, TRUE), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_size>
+Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE)` has size 2.
-
 > foo[c(TRUE, TRUE, FALSE, FALSE), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_size>
+Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 3 but the subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
-
 > foo[as.matrix(TRUE), ]
 Error: `i` must have one dimension, not 2.
 
@@ -175,47 +175,47 @@ Error: `i` must have one dimension, not 3.
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3)]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[as.list(1:3)]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[factor(1:3)]
-Error: Can't subset columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't subset columns that don't exist.
 x The columns `1`, `2`, and `3` don't exist.
-
 > foo[Sys.Date()]
-Error: Must subset columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset columns with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
-
 
 [.tbl_df rejects unknown row indexes
 ====================================
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[as.list(1:3), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[factor(1:3), ]
 Error: Can't use character names to index an unnamed vector.
 
 > foo[Sys.Date(), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must subset rows with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
-
 
 [.tbl_df and matrix subsetting
 ==============================
@@ -225,11 +225,11 @@ i It must be logical, numeric, or character.
 <unspecified> [0]
 
 > foo[!is.na(foo)]
-Error: No common type for `a` <integer> and `b` <character>.
-
+<error/vctrs_error_incompatible_type>
+No common type for `a` <integer> and `b` <character>.
 > foo[as.matrix("x")]
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
-
+<error/tibble_error_subset_matrix_must_be_logical>
+The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
 
@@ -256,62 +256,62 @@ Use `NA` as row index to obtain a row full of `NA` values.
 
 > foo <- tibble(a = 1:4, b = a)
 > foo[c(TRUE, FALSE), ]
-Error: Must subset rows with a valid subscript vector.
+<error/vctrs_error_subscript_size>
+Must subset rows with a valid subscript vector.
 i Logical subscripts must match the size of the indexed input.
 x The input has size 4 but the subscript `c(TRUE, FALSE)` has size 2.
-
 
 [[.tbl_df rejects invalid column indexes
 ========================================
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[[]]
-Error: Subscript can't be missing for tibbles in `[[`.
-
+<error/tibble_error_subset_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[`.
 > foo[[, 1]]
-Error: Subscript can't be missing for tibbles in `[[`.
-
+<error/tibble_error_subset_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[`.
 > foo[[1, ]]
-Error: Subscript can't be missing for tibbles in `[[`.
-
+<error/tibble_error_subset_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[`.
 > foo[[, ]]
-Error: Subscript can't be missing for tibbles in `[[`.
-
+<error/tibble_error_subset_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[`.
 > foo[[1:3]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `1:3` has size 3 but must be size 1.
-
 > foo[[letters[1:3]]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `letters[1:3]` has size 3 but must be size 1.
-
 > foo[[TRUE]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
-
 > foo[[mean]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `mean` has the wrong type `closure`.
 i It must be numeric or character.
-
 > foo[[foo]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
 i It must be numeric or character.
 
-
 [[.tbl_df throws error with NA index
 ====================================
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[[NA]]
-Error: Must extract column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must extract column with a single valid subscript.
 x The subscript `NA` can't be `NA`.
-
 
 $.tbl_df and partial matching/invalid columns
 =============================================
@@ -333,325 +333,325 @@ NULL
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3)] <- 1
-Error: Must assign to columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to columns with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[as.list(1:3)] <- 1
-Error: Must assign to columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to columns with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[factor(1:3)] <- 1
-Error: Can't assign to columns that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't assign to columns that don't exist.
 x The columns `1`, `2`, and `3` don't exist.
-
 > foo[Sys.Date()] <- 1
-Error: Must assign to columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to columns with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
-
 
 [<-.tbl_df rejects unknown row indexes
 ======================================
 
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[list(1:3), ] <- 1
-Error: Must assign to rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to rows with a valid subscript vector.
 x The subscript `list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[as.list(1:3), ] <- 1
-Error: Must assign to rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to rows with a valid subscript vector.
 x The subscript `as.list(1:3)` has the wrong type `list`.
 i It must be logical, numeric, or character.
-
 > foo[factor(1:3), ] <- 1
 Error: Can't use character names to index an unnamed vector.
 
 > foo[Sys.Date(), ] <- 1
-Error: Must assign to rows with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to rows with a valid subscript vector.
 x The subscript `Sys.Date()` has the wrong type `date`.
 i It must be logical, numeric, or character.
-
 
 [<-.tbl_df throws an error with duplicate indexes (#658)
 ========================================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[c(1, 1)] <- 3
-Error: Column index 1 is used more than once for assignment.
-
+<error/tibble_error_duplicate_column_subscript_for_assignment>
+Column index 1 is used more than once for assignment.
 > df[, c(1, 1)] <- 3
-Error: Column index 1 is used more than once for assignment.
-
+<error/tibble_error_duplicate_column_subscript_for_assignment>
+Column index 1 is used more than once for assignment.
 > df[c(1, 1), ] <- 3
-Error: Row index 1 is used more than once for assignment.
-
+<error/tibble_error_duplicate_row_subscript_for_assignment>
+Row index 1 is used more than once for assignment.
 
 [<-.tbl_df throws an error with NA indexes
 ==========================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[NA] <- 3
-Error: Can't use NA as column index in a tibble for assignment.
-
+<error/tibble_error_assign_columns_non_na_only>
+Can't use NA as column index in a tibble for assignment.
 > df[NA, ] <- 3
-Error: Can't use NA as row index in a tibble for assignment.
-
+<error/tibble_error_assign_rows_non_na_only>
+Can't use NA as row index in a tibble for assignment.
 
 [<-.tbl_df throws an error with bad RHS
 =======================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[] <- mean
-Error: `mean` must be a vector, a bare list, a data frame or NULL.
-
+<error/tibble_error_need_rhs_vector_or_null>
+`mean` must be a vector, a bare list, a data frame or NULL.
 > df[] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
-
+<error/tibble_error_need_rhs_vector_or_null>
+`lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
 
 [<-.tbl_df throws an error with OOB assignment
 ==============================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[4:5] <- 3
-Error: Can't assign columns 4 and 5 in a tibble with 2 columns.
-
+<error/tibble_error_new_columns_at_end_only>
+Can't assign columns 4 and 5 in a tibble with 2 columns.
 > df[4:5, ] <- 3
-Error: Can't assign rows 4 and 5 in a tibble with 2 rows.
-
+<error/tibble_error_new_rows_at_end_only>
+Can't assign rows 4 and 5 in a tibble with 2 rows.
 > df[-4, ] <- 3
-Error: Can't negate rows that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't negate rows that don't exist.
 x The location 4 doesn't exist.
 i There are only 2 rows.
-
 > df[-(4:5), ] <- 3
-Error: Can't negate rows that don't exist.
+<error/vctrs_error_subscript_oob>
+Can't negate rows that don't exist.
 x The locations 4 and 5 don't exist.
 i There are only 2 rows.
-
 
 [<-.tbl_df and recycling
 ========================
 
 > df <- tibble(x = 1:3, y = x, z = y)
 > df[1:2] <- list(0, 0, 0)
-Error: `list(0, 0, 0)` can't be recycled to size 2.
+<error/vctrs_error_recycle_incompatible_size>
+`list(0, 0, 0)` can't be recycled to size 2.
 x It must be size 2 or 1, not 3.
-
 > df[] <- list(0, 0)
-Error: `x` can't be recycled to size 3.
+<error/vctrs_error_recycle_incompatible_size>
+`x` can't be recycled to size 3.
 x It must be size 3 or 1, not 2.
-
 > df[1:2, ] <- 1:3
-Error: The assigned data `1:3` must be compatible with the row subscript `1:2`.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `1:3` must be compatible with the row subscript `1:2`.
 x 2 rows must be assigned.
 x The assigned data has 3 rows.
 i Only vectors of size 1 are recycled.
-
 > df[, ] <- 1:2
-Error: The assigned data `1:2` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `1:2` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
-
 
 [<-.tbl_df and coercion
 =======================
 
 > df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
 > df[1:3, 1:2] <- df[2:3]
-Error: The assigned data `df[2:3]` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `df[2:3]` must be compatible with existing data.
 i The error occurred for column `x`.
 x No common type for `value` <character> and `x` <integer>.
-
 > df[1:3, 1:2] <- df[1]
-Error: The assigned data `df[1]` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `df[1]` must be compatible with existing data.
 i The error occurred for column `y`.
 x No common type for `value` <integer> and `x` <character>.
-
 > df[1:3, 1:2] <- df[[1]]
-Error: The assigned data `df[[1]]` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `df[[1]]` must be compatible with existing data.
 i The error occurred for column `y`.
 x No common type for `value` <integer> and `x` <character>.
-
 > df[1:3, 1:3] <- df[3:1]
-Error: The assigned data `df[3:1]` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `df[3:1]` must be compatible with existing data.
 i The error occurred for column `x`.
 x No common type for `value` <list> and `x` <integer>.
-
 > df[1:3, 1:3] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame.
-
+<error/tibble_error_need_rhs_vector>
+`NULL` must be a vector, a bare list or a data frame.
 
 [<-.tbl_df and overwriting NA
 =============================
 
 > df <- tibble(x = rep(NA, 3))
 > df[1, "x"] <- 5
-Error: The assigned data `5` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `5` must be compatible with existing data.
 i The error occurred for column `x`.
 x Lossy cast from `value` <double> to `x` <logical>.
 * Locations: 1.
-
 
 [<-.tbl_df and matrix subsetting
 ================================
 
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
-Error: The assigned data `"bogus"` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_type>
+The assigned data `"bogus"` must be compatible with existing data.
 i The error occurred for column `a`.
 x No common type for `value` <character> and `x` <integer>.
-
 > foo[as.matrix("x")] <- NA
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
-
+<error/tibble_error_subset_matrix_must_be_logical>
+The subscript `as.matrix("x")` is a matrix, it must be of type logical.
 > foo[array("x", dim = c(1, 1, 1))] <- NA
 > foo[is.na(foo)] <- 1:3
-Error: The subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
-
+<error/tibble_error_subset_matrix_must_be_scalar>
+The subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
 > foo[is.na(foo)] <- lm(a ~ b, foo)
-Error: The subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
-
+<error/tibble_error_subset_matrix_must_be_vector>
+The subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
 
 [[.tbl_df rejects invalid column indexes
 ========================================
 
 > foo <- tibble(x = 1:10, y = 1:10)
 > foo[[]] <- 1
-Error: Subscript can't be missing for tibbles in `[[<-`.
-
+<error/tibble_error_assign_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[<-`.
 > foo[[, 1]] <- 1
-Error: Subscript can't be missing for tibbles in `[[<-`.
-
+<error/tibble_error_assign_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[<-`.
 > foo[[1, ]] <- 1
-Error: Subscript can't be missing for tibbles in `[[<-`.
-
+<error/tibble_error_assign_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[<-`.
 > foo[[, ]] <- 1
-Error: Subscript can't be missing for tibbles in `[[<-`.
-
+<error/tibble_error_assign_columns_non_missing_only>
+Subscript can't be missing for tibbles in `[[<-`.
 > foo[[1:3]] <- 1
-Error: Must assign to column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to column with a single valid subscript.
 x The subscript `1:3` has size 3 but must be size 1.
-
 > foo[[letters[1:3]]] <- 1
-Error: Must assign to column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to column with a single valid subscript.
 x The subscript `letters[1:3]` has size 3 but must be size 1.
-
 > foo[[TRUE]] <- 1
-Error: Must assign to column with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to column with a single valid subscript.
 x The subscript `TRUE` has size 2 but must be size 1.
-
 > foo[[mean]] <- 1
-Error: Must assign to columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to columns with a valid subscript vector.
 x The subscript `mean` has the wrong type `closure`.
 i It must be logical, numeric, or character.
-
 > foo[[foo]] <- 1
-Error: Must assign to columns with a valid subscript vector.
+<error/vctrs_error_subscript_type>
+Must assign to columns with a valid subscript vector.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
 i It must be logical, numeric, or character.
-
 > foo[[1:3, 1]] <- 1
-Error: Must assign to row with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to row with a single valid subscript.
 x The subscript `1:3` has size 3 but must be size 1.
-
 > foo[[TRUE, 1]] <- 1
-Error: Must assign to row with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to row with a single valid subscript.
 x The subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
-
 > foo[[mean, 1]] <- 1
-Error: Must assign to row with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to row with a single valid subscript.
 x The subscript `mean` has the wrong type `closure`.
 i It must be numeric or character.
-
 > foo[[foo, 1]] <- 1
-Error: Must assign to row with a single valid subscript.
+<error/vctrs_error_subscript_type>
+Must assign to row with a single valid subscript.
 x The subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
 i It must be numeric or character.
-
 
 [[<-.tbl_df throws an error with OOB assignment
 ===============================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[[4]] <- 3
-Error: Can't assign column 4 in a tibble with 2 columns.
-
+<error/tibble_error_new_columns_at_end_only>
+Can't assign column 4 in a tibble with 2 columns.
 
 [[<-.tbl_df throws an error with bad RHS
 ========================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[[1]] <- mean
-Error: `x` must be a vector, not a function.
-
+<error/vctrs_error_scalar_type>
+`x` must be a vector, not a function.
 > df[[1]] <- lm(y ~ x, df)
-Error: `x` must be a vector, not a `lm` object.
-
+<error/vctrs_error_scalar_type>
+`x` must be a vector, not a `lm` object.
 
 [[<-.tbl_df recycles only values of length one
 ==============================================
 
 > df <- tibble(x = 1:3)
 > df[["x"]] <- 8:9
-Error: The assigned data `8:9` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
-
 > df[["w"]] <- 8:9
-Error: The assigned data `8:9` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
-
 > df[["a"]] <- character()
-Error: The assigned data `character()` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `character()` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 0 rows.
 i Only vectors of size 1 are recycled.
-
 
 [<-.tbl_df throws an error with invalid values
 ==============================================
 
 > df <- tibble(x = 1:2, y = x)
 > df[1] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
-
+<error/tibble_error_need_rhs_vector_or_null>
+`lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
 > df[1:2, 1] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame.
-
+<error/tibble_error_need_rhs_vector>
+`NULL` must be a vector, a bare list or a data frame.
 
 $<- recycles only values of length one
 ======================================
 
 > df <- tibble(x = 1:3)
 > df$x <- 8:9
-Error: The assigned data `8:9` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
-
 > df$w <- 8:9
-Error: The assigned data `8:9` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
-
 > df$a <- character()
-Error: The assigned data `character()` must be compatible with existing data.
+<error/tibble_error_assign_incompatible_size>
+The assigned data `character()` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 0 rows.
 i Only vectors of size 1 are recycled.
-
