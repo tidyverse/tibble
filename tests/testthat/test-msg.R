@@ -68,10 +68,6 @@ verify_output("msg.txt", {
   error_new_tibble_needs_nrow()
 
   "# rownames"
-  error_existing_column_names("a")
-  error_existing_column_names(c("b", "c"))
-  error_existing_column_names(LETTERS)
-
   error_already_has_rownames()
 
   "# subsetting"

@@ -1,3 +1,9 @@
+> rownames_to_column(mtcars, "cyl")
+Error: Column name `cyl` must not be duplicated.
+
+> rowid_to_column(iris, "Species")
+Error: Column name `Species` must not be duplicated.
+
 > column_to_rownames(mtcars, "cyl")
 Error: `df` must be a data frame without row names.
 

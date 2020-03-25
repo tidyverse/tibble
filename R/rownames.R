@@ -64,9 +64,8 @@ rownames_to_column <- function(.data, var = "rowname") {
 
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var)) {
-    cnd_signal(error_existing_column_names(var))
-  }
+  # Side effect: check unique names
+  repaired_names(c(unique(names2(df)), var))
 
   new_df <- add_column(df, !!var := rownames(df), .before = 1)
   remove_rownames(new_df)
@@ -80,9 +79,8 @@ rowid_to_column <- function(.data, var = "rowid") {
 
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var)) {
-    cnd_signal(error_existing_column_names(var))
-  }
+  # Side effect: check unique names
+  repaired_names(c(unique(names2(df)), var))
 
   new_df <- add_column(df, !!var := seq_len(nrow(df)), .before = 1)
   remove_rownames(new_df)
@@ -120,10 +118,6 @@ raw_rownames <- function(x) {
 }
 
 # Errors ------------------------------------------------------------------
-
-error_existing_column_names <- function(names) {
-  tibble_error(pluralise_commas("Column(s) ", tick(names), " already exist[s] in `.data`."), names = names)
-}
 
 error_already_has_rownames <- function() {
   tibble_error("`df` must be a data frame without row names.")

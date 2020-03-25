@@ -26,7 +26,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res$rowname, rownames(mtcars))
   expect_tibble_error(
     rownames_to_column(mtcars, "wt"),
-    error_existing_column_names("wt")
+    error_column_names_must_be_unique("wt")
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -37,7 +37,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res1$`Make&Model`, rownames(mtcars))
   expect_tibble_error(
     rownames_to_column(mtcars2, "wt"),
-    error_existing_column_names("wt")
+    error_column_names_must_be_unique("wt")
   )
 })
 
@@ -48,7 +48,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
   expect_tibble_error(
     rowid_to_column(mtcars, "wt"),
-    error_existing_column_names("wt")
+    error_column_names_must_be_unique("wt")
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -59,7 +59,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
   expect_tibble_error(
     rowid_to_column(mtcars2, "wt"),
-    error_existing_column_names("wt")
+    error_column_names_must_be_unique("wt")
   )
 })
 
@@ -96,6 +96,9 @@ test_that("converting to data frame does not add row names", {
 })
 
 verify_output("rownames.txt", {
+  rownames_to_column(mtcars, "cyl")
+  rowid_to_column(iris, "Species")
+
   column_to_rownames(mtcars, "cyl")
   column_to_rownames(iris, "foo")
 })

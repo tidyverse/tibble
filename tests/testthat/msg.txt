@@ -189,18 +189,6 @@ new
 rownames
 ========
 
-> error_existing_column_names("a")
-<error/tibble_error_existing_column_names>
-Column `a` already exists in `.data`.
-
-> error_existing_column_names(c("b", "c"))
-<error/tibble_error_existing_column_names>
-Columns `b` and `c` already exist in `.data`.
-
-> error_existing_column_names(LETTERS)
-<error/tibble_error_existing_column_names>
-Columns `A`, `B`, `C`, `D`, `E`, and 21 more already exist in `.data`.
-
 > error_already_has_rownames()
 <error/tibble_error_already_has_rownames>
 `df` must be a data frame without row names.
