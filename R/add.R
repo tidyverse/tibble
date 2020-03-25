@@ -1,26 +1,18 @@
 #' Add rows to a data frame
 #'
 #' @description
-#' \lifecycle{questioning}
-#'
 #' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See [tribble()] for an easy way to create an complete
-#' data frame row-by-row.
+#' data frame row-by-row. Use [tibble_row()] to ensure that the new data
+#' has only one row.
 #'
 #' `add_case()` is an alias of `add_row()`.
-#'
-#' @section Life cycle:
-#' It is unclear if `add_row()` and its alias `add_cases()` should ensure
-#' that all columns have length one by wrapping in a list if necessary.
-#' See <https://github.com/tidyverse/tibble/pull/503> and
-#' <https://github.com/tidyverse/tibble/issues/205> for details.
 #'
 #' @param .data Data frame to append to.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
 #'   Name-value pairs, passed on to [tibble()]. Values can be defined
 #'   only for columns that already exist in `.data` and unset columns will get an
-#'   `NA` value. These arguments are passed on to [tibble()], and therefore also
-#'   support unquote via `!!` and unquote-splice via `!!!`.
+#'   `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -28,22 +20,24 @@
 #' # add_row ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
-#' add_row(df, x = 4, y = 0)
+#' df %>% add_row(x = 4, y = 0)
 #'
 #' # You can specify where to add the new rows
-#' add_row(df, x = 4, y = 0, .before = 2)
+#' df %>% add_row(x = 4, y = 0, .before = 2)
 #'
 #' # You can supply vectors, to add multiple rows (this isn't
 #' # recommended because it's a bit hard to read)
-#' add_row(df, x = 4:5, y = 0:-1)
+#' df %>% add_row(x = 4:5, y = 0:-1)
+#'
+#' # Use tibble_row() to add one row only
+#' df %>% add_row(tibble_row(x = 4, y = 0))
+#' try(df %>% add_row(tibble_row(x = 4:5, y = 0:-1)))
 #'
 #' # Absent variables get missing values
-#' add_row(df, x = 4)
+#' df %>% add_row(x = 4)
 #'
 #' # You can't create new variables
-#' \dontrun{
-#' add_row(df, z = 10)
-#' }
+#' try(df %>% add_row(z = 10))
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
