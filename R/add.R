@@ -250,7 +250,7 @@ error_incompatible_new_cols <- function(n, df) {
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(
-        pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
+        pluralise_n("New column(s) ha[s](ve)", ncol(df)), " ",
         nrow(df), " rows"
       ),
       i = pluralise_count("`.data` has ", n, " row(s)")

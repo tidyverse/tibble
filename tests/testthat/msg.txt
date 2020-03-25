@@ -40,13 +40,13 @@ Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
 > error_incompatible_new_cols(10, data.frame(a = 1:2))
 <error/tibble_error_incompatible_new_cols>
 New columns must be compatible with `.data`.
-x New column contributes 2 rows.
+x New column has 2 rows.
 i `.data` has 10 rows.
 
 > error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
 <error/tibble_error_incompatible_new_cols>
 New columns must be compatible with `.data`.
-x New columns contribute 3 rows.
+x New columns have 3 rows.
 i `.data` has 1 row.
 
 
