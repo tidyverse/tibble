@@ -31,7 +31,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_incompatible_size(10, "y", 2, "Existing data")
+    error_incompatible_size(10, "y", 2, "The existing data")
   )
 })
 

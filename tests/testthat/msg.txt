@@ -191,7 +191,7 @@ rownames
 
 > error_already_has_rownames()
 <error/tibble_error_already_has_rownames>
-`df` must be a data frame without row names.
+`.data` must be a data frame without row names.
 
 
 subsetting
@@ -279,8 +279,8 @@ Row indexes 1 and 2 are used more than once for assignment.
 
 > error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs))
 <error/tibble_error_assign_incompatible_size>
-The assigned data `rhs` must be compatible with existing data.
-x Existing data has 3 rows.
+The assigned data `rhs` must be compatible with the existing data.
+x The existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 

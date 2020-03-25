@@ -10,7 +10,7 @@ x Column `a` is environment.
 > tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
 <error/tibble_error_incompatible_size>
 Error: Tibble columns must have compatible sizes.
-* Size 2: Existing data.
+* Size 2: The existing data.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 

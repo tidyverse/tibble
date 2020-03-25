@@ -8,7 +8,7 @@ Error: Column name `Species` must not be duplicated.
 
 > column_to_rownames(mtcars, "cyl")
 <error/tibble_error_already_has_rownames>
-Error: `df` must be a data frame without row names.
+Error: `.data` must be a data frame without row names.
 
 > column_to_rownames(iris, "foo")
 <error/tibble_error_unknown_column_names>

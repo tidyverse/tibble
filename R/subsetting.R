@@ -745,8 +745,8 @@ error_duplicate_row_subscript_for_assignment <- function(i) {
 
 error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   if (is.null(i_arg)) {
-    target <- "existing data"
-    existing <- pluralise_count("Existing data has ", nrow, " row(s)")
+    target <- "the existing data"
+    existing <- pluralise_count("The existing data has ", nrow, " row(s)")
   } else {
     target <- paste0("the row subscript ", tick(as_label(i_arg)))
     existing <- pluralise_count("", nrow, " row(s) must be assigned")

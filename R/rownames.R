@@ -120,5 +120,5 @@ raw_rownames <- function(x) {
 # Errors ------------------------------------------------------------------
 
 error_already_has_rownames <- function() {
-  tibble_error("`df` must be a data frame without row names.")
+  tibble_error("`.data` must be a data frame without row names.")
 }

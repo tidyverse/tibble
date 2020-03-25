@@ -309,7 +309,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
+  cnd_signal(error_incompatible_size(n, name, size, "The existing data"))
 }
 
 # Errors ------------------------------------------------------------------
