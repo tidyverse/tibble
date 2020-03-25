@@ -1,11 +1,11 @@
 > new_tibble(1:3, nrow = 1)
-<error/tibble_error_new_tibble_must_be_list>
+<tibble_error_new_tibble_must_be_list/tibble_error/rlang_error/error/condition>
 Error: `x` must be a list.
 
 > new_tibble(as.list(1:3))
 Warning: The `nrow` argument of `new_tibble()` can't be missing as of tibble 2.0.0.
 `x` must be a scalar integer.
 
-<error/tibble_error_names_must_be_non_null>
+<tibble_error_names_must_be_non_null/tibble_error/rlang_error/error/condition>
 Error: The `names` must not be `NULL`.
 

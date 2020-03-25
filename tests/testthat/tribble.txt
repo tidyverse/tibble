@@ -1,30 +1,30 @@
 > tribble(1)
-<error/tibble_error_tribble_needs_columns>
+<tibble_error_tribble_needs_columns/tibble_error/rlang_error/error/condition>
 Error: Must specify at least one column using the `~name` syntax.
 
 > tribble(~a, ~b, 1)
-<error/tibble_error_tribble_non_rectangular>
+<tibble_error_tribble_non_rectangular/tibble_error/rlang_error/error/condition>
 Error: Data must be rectangular.
 * Found 2 columns.
 * Found 1 cells.
 i 1 is not an integer multiple of 2.
 
 > tribble(a ~ b, 1)
-<error/tibble_error_tribble_lhs_column_syntax>
+<tibble_error_tribble_lhs_column_syntax/tibble_error/rlang_error/error/condition>
 Error: All column specifications must use the `~name` syntax.
 x Found `a` on the left-hand side of `~`.
 
 > tribble(a ~ b + c, 1)
-<error/tibble_error_tribble_lhs_column_syntax>
+<tibble_error_tribble_lhs_column_syntax/tibble_error/rlang_error/error/condition>
 Error: All column specifications must use the `~name` syntax.
 x Found `a` on the left-hand side of `~`.
 
 > frame_matrix(1)
-<error/tibble_error_tribble_needs_columns>
+<tibble_error_tribble_needs_columns/tibble_error/rlang_error/error/condition>
 Error: Must specify at least one column using the `~name` syntax.
 
 > frame_matrix(~a, list(1))
-<error/tibble_error_frame_matrix_list>
+<tibble_error_frame_matrix_list/tibble_error/rlang_error/error/condition>
 Error: All values must be atomic.
 x Found list-valued element at position 1.
 
