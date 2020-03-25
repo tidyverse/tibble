@@ -39,13 +39,13 @@ Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
 
 > error_incompatible_new_cols(10, data.frame(a = 1:2))
 <error/tibble_error_incompatible_new_cols>
-New columns must be consistent with `.data`.
+New columns must be compatible with `.data`.
 x New column contributes 2 rows.
 i `.data` has 10 rows.
 
 > error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
 <error/tibble_error_incompatible_new_cols>
-New columns must be consistent with `.data`.
+New columns must be compatible with `.data`.
 x New columns contribute 3 rows.
 i `.data` has 1 row.
 
@@ -279,14 +279,14 @@ Row indexes 1 and 2 are used more than once for assignment.
 
 > error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs))
 <error/tibble_error_assign_incompatible_size>
-The assigned data `rhs` must be consistent with existing data.
+The assigned data `rhs` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > error_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
 <error/tibble_error_assign_incompatible_size>
-The assigned data `rhs` must be consistent with the row subscript `4:1`.
+The assigned data `rhs` must be compatible with the row subscript `4:1`.
 x 4 rows must be assigned.
 x The element 2 of the assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
@@ -330,7 +330,7 @@ x Column `foo` is of size 7.
 > error_incompatible_size(10, letters[1:3], c(4, 4, 3),
 + "Requested with `uvw` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column `c`.
 * Size 4: Columns `a` and `b`.
@@ -339,7 +339,7 @@ i Only values of size one are recycled.
 > error_incompatible_size(10, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `xyz` argument.
 * Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
@@ -348,14 +348,14 @@ i Only values of size one are recycled.
 > error_incompatible_size(NULL, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
 > error_incompatible_size(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column at position 3.
 * Size 4: Columns at positions 1 and 2.
@@ -363,7 +363,7 @@ i Only values of size one are recycled.
 
 > error_incompatible_size(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `xyz` argument.
 * Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
@@ -371,7 +371,7 @@ i Only values of size one are recycled.
 
 > error_incompatible_size(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
 <error/tibble_error_incompatible_size>
-Tibble columns must have consistent sizes.
+Tibble columns must have compatible sizes.
 * Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.

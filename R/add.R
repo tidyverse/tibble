@@ -248,7 +248,7 @@ error_unknown_column_names <- function(j, parent = NULL) {
 error_incompatible_new_cols <- function(n, df) {
   tibble_error(
     bullets(
-      "New columns must be consistent with `.data`:",
+      "New columns must be compatible with `.data`:",
       x = paste0(
         pluralise_n("New column(s) contribute[s]", ncol(df)), " ",
         nrow(df), " rows"

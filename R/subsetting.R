@@ -761,7 +761,7 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
 
   tibble_error(
     bullets(
-      paste0("The assigned data ", tick(as_label(value_arg)), " must be consistent with ", target, ":"),
+      paste0("The assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
       i = "Only vectors of size 1 are recycled"

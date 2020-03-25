@@ -445,13 +445,13 @@ Error: `x` can't be recycled to size 3.
 x It must be size 3 or 1, not 2.
 
 > df[1:2, ] <- 1:3
-Error: The assigned data `1:3` must be consistent with the row subscript `1:2`.
+Error: The assigned data `1:3` must be compatible with the row subscript `1:2`.
 x 2 rows must be assigned.
 x The assigned data has 3 rows.
 i Only vectors of size 1 are recycled.
 
 > df[, ] <- 1:2
-Error: The assigned data `1:2` must be consistent with existing data.
+Error: The assigned data `1:2` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
@@ -604,19 +604,19 @@ Error: `x` must be a vector, not a `lm` object.
 
 > df <- tibble(x = 1:3)
 > df[["x"]] <- 8:9
-Error: The assigned data `8:9` must be consistent with existing data.
+Error: The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df[["w"]] <- 8:9
-Error: The assigned data `8:9` must be consistent with existing data.
+Error: The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df[["a"]] <- character()
-Error: The assigned data `character()` must be consistent with existing data.
+Error: The assigned data `character()` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 0 rows.
 i Only vectors of size 1 are recycled.
@@ -638,19 +638,19 @@ $<- recycles only values of length one
 
 > df <- tibble(x = 1:3)
 > df$x <- 8:9
-Error: The assigned data `8:9` must be consistent with existing data.
+Error: The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df$w <- 8:9
-Error: The assigned data `8:9` must be consistent with existing data.
+Error: The assigned data `8:9` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df$a <- character()
-Error: The assigned data `character()` must be consistent with existing data.
+Error: The assigned data `character()` must be compatible with existing data.
 x Existing data has 3 rows.
 x The assigned data has 0 rows.
 i Only vectors of size 1 are recycled.

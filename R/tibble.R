@@ -101,7 +101,7 @@
 #' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 #'
 #' # Tibbles can contain columns that are tibbles or matrices
-#' # if the number of rows is consistent. Unnamed tibbled are
+#' # if the number of rows is compatible. Unnamed tibbled are
 #' # spliced, i.e. the inner columns are inserted into the
 #' # tibble under construction.
 #' tibble(
@@ -349,7 +349,7 @@ error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
   problems <- set_default_name(problems, "")
 
   tibble_error(problems(
-    "Tibble columns must have consistent sizes:",
+    "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,
     i = "Only values of size one are recycled"

@@ -26,7 +26,7 @@ Error: Column names `a` and `b` must not be duplicated.
 Error: Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
 
 > add_column(tibble(a = 2:3), b = 4:6)
-Error: New columns must be consistent with `.data`.
+Error: New columns must be compatible with `.data`.
 x New column contributes 3 rows.
 i `.data` has 2 rows.
 
