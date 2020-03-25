@@ -165,14 +165,7 @@ NULL
   j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
 
   # Side effect: check scalar, allow OOB position
-  if (!identical(unname(j), NA_integer_)) {
-    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
-  }
-
-  # New columns are added to the end, provide index to avoid matching column
-  # names again
-  names(value) <- names(j)
-  j <- coalesce2(unname(j), ncol(x) + 1L)
+  vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
 
   tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
 }
@@ -447,16 +440,15 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
-      new_cols <- which(is.na(j))
+      new <- which(j > ncol(x))
       value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
-      if (any(new_cols)) {
-        x <- tbl_subassign_col(
-          x, j[new_cols],
-          map(value[new_cols], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        )
-        j <- match(names(j), names(x))
+      if (has_length(new)) {
+        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
+        names(init) <- coalesce2(names2(j)[new], names2(value)[new])
+
+        x <- tbl_subassign_col(x, j[new], init)
       }
 
       xj <- tbl_subset_col(x, j, j_arg)
@@ -512,20 +504,25 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   }
 
   if (is_bare_character(j)) {
-    set_names(match(j, names(x)), j)
+    out <- match(j, names(x))
+    new <- which(is.na(out))
+    if (has_length(new)) {
+      out[new] <- seq.int(ncol(x) + 1L, length.out = length(new))
+    }
+    set_names(out, j)
   } else if (is_bare_numeric(j)) {
     if (anyDuplicated(j)) {
       cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
 
-    new <- which(j > ncol(x))
+    new <- which(abs(j) > ncol(x))
     j_new <- j[new]
-    j[new] <- NA
-    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
     }
+
+    j <- vectbl_as_col_location(j, ncol(x) + length(j), j_arg = j_arg, assign = TRUE)
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
@@ -568,9 +565,16 @@ tbl_subassign_col <- function(x, j, value) {
 
   x <- unclass(x)
 
-  # Create or update
+  # Grow, assign new names
+  new <- which(j > length(x))
+  if (has_length(new)) {
+    length(x) <- max(j[new])
+    names(x)[ j[new] ] <- coalesce2(names2(j)[new], names2(value)[new])
+  }
+
+  # Update
   for (jj in which(is_data)) {
-    ji <- coalesce2(j[[jj]], names(j)[[jj]])
+    ji <- j[[jj]]
     x[[ji]] <- value[[jj]]
   }
 
@@ -583,7 +587,9 @@ tbl_subassign_col <- function(x, j, value) {
 }
 
 coalesce2 <- function(x, y) {
-  if (is.na(x)) y else x
+  use_y <- which(is.na(x))
+  x[use_y] <- y[use_y]
+  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {

@@ -478,6 +478,12 @@ test_that("[<-.tbl_df supports adding new rows and columns with [i, j] (#651)", 
   expect_false(has_rownames(df))
 })
 
+test_that("[<-.tbl_df supports adding duplicate columns", {
+  df <- tibble(x = 1:2)
+  df[2] <- tibble(x = 3:4)
+  expect_identical(df, tibble(x = 1:2, x = 3:4, .name_repair = "minimal"))
+})
+
 test_that("[<- with explicit NULL doesn't change anything (#696)", {
   iris_tbl_orig <- as_tibble(iris)
 
