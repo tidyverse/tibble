@@ -58,9 +58,9 @@ verify_output("msg.txt", {
   error_column_must_not_be_dot_dot(2:3, repair = TRUE)
   error_column_must_not_be_dot_dot(1:26, repair = TRUE)
 
-  error_column_names_must_be_unique("a", repair = FALSE)
-  error_column_names_must_be_unique(letters[2:3], repair = TRUE)
-  error_column_names_must_be_unique(LETTERS, repair = TRUE)
+  error_column_duplicated("a", repair = FALSE)
+  error_column_duplicated(letters[2:3], repair = TRUE)
+  error_column_duplicated(LETTERS, repair = TRUE)
 
   "# new"
   error_new_tibble_must_be_list()

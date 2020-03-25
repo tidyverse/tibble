@@ -253,7 +253,7 @@ test_that("as_tibble.table() supports .name_repair", {
 
   expect_tibble_error(
     as_tibble(x),
-    error_column_names_must_be_unique("a")
+    error_column_duplicated("a")
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),

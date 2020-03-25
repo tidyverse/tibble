@@ -159,17 +159,17 @@ Use .name_repair to specify repair.
 Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
 Use .name_repair to specify repair.
 
-> error_column_names_must_be_unique("a", repair = FALSE)
-<error/tibble_error_column_names_must_be_unique>
+> error_column_duplicated("a", repair = FALSE)
+<error/tibble_error_column_duplicated>
 Column name `a` must not be duplicated.
 
-> error_column_names_must_be_unique(letters[2:3], repair = TRUE)
-<error/tibble_error_column_names_must_be_unique>
+> error_column_duplicated(letters[2:3], repair = TRUE)
+<error/tibble_error_column_duplicated>
 Column names `b` and `c` must not be duplicated.
 Use .name_repair to specify repair.
 
-> error_column_names_must_be_unique(LETTERS, repair = TRUE)
-<error/tibble_error_column_names_must_be_unique>
+> error_column_duplicated(LETTERS, repair = TRUE)
+<error/tibble_error_column_duplicated>
 Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
 Use .name_repair to specify repair.
 
