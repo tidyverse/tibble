@@ -4,37 +4,44 @@
 \alias{add_column}
 \title{Add columns to a data frame}
 \usage{
-add_column(.data, ..., .before = NULL, .after = NULL)
+add_column(
+  .data,
+  ...,
+  .before = NULL,
+  .after = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
 \item{.data}{Data frame to append to.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
-one element for each row in the data frame, or be of length 1.
-These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
-unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in
-\pkg{dplyr} verbs, columns in \code{.data} are not available for the
-expressions. Use \code{\link[dplyr:mutate]{dplyr::mutate()}} if you need to add a column based on
-existing data.}
+the same size of \code{.data} or size 1.}
 
 \item{.before, .after}{One-based column index or column name where to add the
 new columns, default: after last column.}
+
+\item{.name_repair}{Treatment of problematic column names:
+\itemize{
+\item \code{"minimal"}: No name repair or checks, beyond basic existence,
+\item \code{"unique"}: Make sure names are unique and not empty,
+\item \code{"check_unique"}: (default value), no name repair, but check they are
+\code{unique},
+\item \code{"universal"}: Make the names \code{unique} and syntactic
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
+\item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
+}
+
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
+to enforce them.}
 }
 \description{
-\lifecycle{questioning}
-
 This is a convenient way to add one or more columns to an existing data
 frame.
 }
-\section{Life cycle}{
-
-It is unclear we should have an \code{add_column()} function.
-\code{dplyr::mutate()} just added the arguments \code{.before} and \code{.after}.
-See \url{https://github.com/tidyverse/dplyr/pull/4774} and
-\url{https://github.com/tidyverse/dplyr/issues/2047} for details.
-}
-
 \examples{
 # add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)

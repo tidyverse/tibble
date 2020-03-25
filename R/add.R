@@ -101,32 +101,16 @@ rbind_at <- function(old, new, pos) {
 
 #' Add columns to a data frame
 #'
-#' @description
-#' \lifecycle{questioning}
-#'
 #' This is a convenient way to add one or more columns to an existing data
 #' frame.
-#'
-#'@section Life cycle:
-#' It is unclear we should have an `add_column()` function.
-#' `dplyr::mutate()` just added the arguments `.before` and `.after`.
-#' See <https://github.com/tidyverse/dplyr/pull/4774> and
-#' <https://github.com/tidyverse/dplyr/issues/2047> for details.
-#'
-#'
-#'
 #'
 #' @param .data Data frame to append to.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
 #'   Name-value pairs, passed on to [tibble()]. All values must have
-#'   one element for each row in the data frame, or be of length 1.
-#'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`. However, unlike in
-#'   \pkg{dplyr} verbs, columns in `.data` are not available for the
-#'   expressions. Use [dplyr::mutate()] if you need to add a column based on
-#'   existing data.
+#'   the same size of `.data` or size 1.
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
+#' @inheritParams tibble
 #' @family addition
 #' @examples
 #' # add_column ---------------------------------
@@ -143,12 +127,20 @@ rbind_at <- function(old, new, pos) {
 #' try(df %>% add_column(z = 1:5))
 #'
 #' @export
-add_column <- function(.data, ..., .before = NULL, .after = NULL) {
+add_column <- function(.data, ..., .before = NULL, .after = NULL,
+                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
   if (!is.data.frame(.data)) {
     deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
-  df <- tibble(...)
+  if ((!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
+    deprecate_warn("3.0.0", "add_column(.data = 'must have unique names')",
+      details = 'Use `.name_repair = "minimal"`.')
+    .name_repair <- "minimal"
+  }
+
+  df <- tibble(..., .name_repair = .name_repair)
 
   if (ncol(df) == 0L) {
     return(.data)
@@ -162,11 +154,6 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     }
   }
 
-  extra_vars <- intersect(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    cnd_signal(error_duplicate_new_cols(extra_vars))
-  }
-
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
   end_pos <- ncol(.data) + seq_len(ncol(df))
@@ -176,9 +163,12 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   indexes <- c(indexes_before, end_pos, indexes_after)
 
   new_data <- .data
-
   new_data[end_pos] <- df
-  vectbl_restore(new_data[indexes], .data)
+
+  out <- new_data[indexes]
+
+  out <- set_repaired_names(out, .name_repair)
+  vectbl_restore(out, .data)
 }
 
 

@@ -83,7 +83,9 @@
 
 - `tribble()` now returns columns with `"unspecified"` type for 0-row tibbles.
 
-- `add_row()` and `add_column()` now use `vec_restore()` to avoid errors when appending to sf objects or other tibble subclasses (#662).
+- `add_row()` and `add_column()` now restore attributes to avoid errors when appending to sf objects or other tibble subclasses (#662).
+
+- `add_column()` gains `.name_repair` argument. If not given, `.data` must have unique columns, with a deprecation message.
 
 - Allow `POSIXlt` columns, they are now better supported by dplyr and other tools thanks to vctrs (#626).
 

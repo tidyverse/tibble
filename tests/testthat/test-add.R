@@ -183,7 +183,7 @@ test_that("add_column() can add to empty tibble or data frame", {
 test_that("error if adding existing columns", {
   expect_tibble_error(
     add_column(tibble(a = 3), a = 5),
-    error_duplicate_new_cols("a")
+    error_column_names_must_be_unique("a")
   )
 })
 

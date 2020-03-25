@@ -88,7 +88,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
       old_rownames <- seq_len(abs(old_rownames[2L]))
     }
     old_rownames <- as.character(old_rownames)
-    add_column(result, !!rownames := old_rownames, .before = 1L)
+    add_column(result, !!rownames := old_rownames, .before = 1L, .name_repair = "minimal")
   }
 }
 
