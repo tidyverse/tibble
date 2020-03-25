@@ -123,10 +123,6 @@ verify_output("msg.txt", {
   error_inconsistent_new_cols(10, data.frame(a = 1:2))
   error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4))
 
-  error_duplicate_new_cols("a")
-  error_duplicate_new_cols(letters[2:3])
-  error_duplicate_new_cols(LETTERS)
-
   error_both_before_after()
 
   error_already_has_rownames()

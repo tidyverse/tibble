@@ -237,16 +237,6 @@ error_inconsistent_new_rows <- function(names) {
   )
 }
 
-error_duplicate_new_cols <- function(names) {
-  tibble_error(
-    bullets(
-      "Can't add duplicate columns with `add_column()`:",
-      cnd_message(error_existing_column_names(names))
-    ),
-    names = names
-  )
-}
-
 error_both_before_after <- function() {
   tibble_error("Can't specify both `.before` and `.after`.")
 }

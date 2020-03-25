@@ -293,21 +293,6 @@ New columns in `add_column()` must be consistent with `.data`.
 x New columns contribute 3 rows.
 i `.data` has 1 row.
 
-> error_duplicate_new_cols("a")
-<error/tibble_error_duplicate_new_cols>
-Can't add duplicate columns with `add_column()`.
-x Column `a` already exists in `.data`.
-
-> error_duplicate_new_cols(letters[2:3])
-<error/tibble_error_duplicate_new_cols>
-Can't add duplicate columns with `add_column()`.
-x Columns `b`, `c` already exist in `.data`.
-
-> error_duplicate_new_cols(LETTERS)
-<error/tibble_error_duplicate_new_cols>
-Can't add duplicate columns with `add_column()`.
-x Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`.
-
 > error_both_before_after()
 <error/tibble_error_both_before_after>
 Can't specify both `.before` and `.after`.
