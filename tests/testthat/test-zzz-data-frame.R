@@ -17,7 +17,7 @@ test_that("bogus columns raise an error", {
   skip_enh_tibble_null()
   expect_error(
     tibble(a = NULL),
-    error_column_must_be_vector("a", "NULL"),
+    error_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })
@@ -25,12 +25,12 @@ test_that("bogus columns raise an error", {
 test_that("bogus columns raise an error", {
   expect_legacy_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment"),
+    error_column_scalar_type("a", "environment"),
     fixed = TRUE
   )
   expect_legacy_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name"),
+    error_column_scalar_type("a", "name"),
     fixed = TRUE
   )
 })
@@ -567,7 +567,7 @@ test_that("POSIXlt isn't a valid column", {
 test_that("NULL isn't a valid column", {
   expect_legacy_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", "NULL"),
+    error_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })

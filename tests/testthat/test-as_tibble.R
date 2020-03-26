@@ -424,7 +424,7 @@ test_that("as_tibbe_col() can convert atomic vectors to data frame", {
 
   expect_tibble_error(
     as_tibble_col(lm(y ~ x, data.frame(x = 1:3, y = 2:4))),
-    error_column_must_be_vector("value", 1, "lm")
+    error_column_scalar_type("value", 1, "lm")
   )
 })
 

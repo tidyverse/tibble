@@ -31,7 +31,7 @@ Error: Column name `a` must not be duplicated.
 Error: Column names `a` and `b` must not be duplicated.
 
 > as_tibble(list(a = new_environment()))
-<tibble_error_column_must_be_vector/tibble_error/rlang_error/error/condition>
+<tibble_error_column_scalar_type/tibble_error/rlang_error/error/condition>
 Error: All columns in a tibble must be vectors.
 x Column `a` is environment.
 

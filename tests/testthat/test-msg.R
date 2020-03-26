@@ -26,10 +26,10 @@ verify_output("msg.txt", {
   error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
 
   "# as_tibble"
-  error_column_must_be_vector("a", 3, "environment")
-  error_column_must_be_vector("", 3, "environment")
-  error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
-  error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
+  error_column_scalar_type("a", 3, "environment")
+  error_column_scalar_type("", 3, "environment")
+  error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
+  error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
   error_as_tibble_row_bare(new_environment())
   error_as_tibble_row_size_one(3, "foo", 7)
@@ -107,7 +107,7 @@ verify_output("msg.txt", {
   "# subsetting-matrix"
   error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
   error_subset_matrix_must_have_same_dimensions(quote(t(is.na(x))))
-  error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
+  error_subset_matrix_scalar_type(quote(is.na(x)), quote(new_environment()))
   error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))
 
   "# tibble"
