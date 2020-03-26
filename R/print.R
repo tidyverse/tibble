@@ -108,7 +108,11 @@ NULL
 #' @rdname custom-formatting
 tbl_header <- function(x, ..., width = NULL) {
   check_dots_empty()
+  UseMethod("tbl_header")
+}
 
+#' @export
+tbl_header.tbl <- function(x, ..., width = NULL) {
   width <- tibble_width(width)
   header <- format_header(tbl_sum(x))
   format_comment(header, width)
@@ -135,7 +139,11 @@ tbl_header <- function(x, ..., width = NULL) {
 #' @rdname custom-formatting
 tbl_body <- function(x, ..., width = NULL, n = NULL, header = tbl_header(x, width = width)) {
   check_dots_empty()
+  UseMethod("tbl_body")
+}
 
+#' @export
+tbl_body.tbl <- function(x, ..., width = NULL, n = NULL, header = tbl_header(x, width = width)) {
   width <- tibble_width(width)
 
   rows <- nrow(x)
@@ -182,7 +190,11 @@ tbl_body <- function(x, ..., width = NULL, n = NULL, header = tbl_header(x, widt
 #' @rdname custom-formatting
 tbl_footer <- function(x, ..., width = NULL, n_extra = NULL, body = tbl_body(x, width = width)) {
   check_dots_empty()
+  UseMethod("tbl_footer")
+}
 
+#' @export
+tbl_footer.tbl <- function(x, ..., width = NULL, n_extra = NULL, body = tbl_body(x, width = width)) {
   width <- tibble_width(width)
 
   rows_total <- nrow(x)
