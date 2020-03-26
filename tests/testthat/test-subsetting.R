@@ -412,6 +412,14 @@ test_that("$ doesn't do partial matching", {
 
 # [[<- --------------------------------------------------------------------
 
+test_that("[[<-.tbl_df can update and add columns (#748)", {
+  df <- tibble(x = 1:2, y = x)
+  df[["x"]] <- 3:4
+  expect_identical(df, tibble(x = 3:4, y = 1:2))
+  df[["w"]] <- 5:6
+  expect_identical(df, tibble(x = 3:4, y = 1:2, w = 5:6))
+})
+
 test_that("[[<-.tbl_df can remove columns (#666)", {
   df <- tibble(x = 1:2, y = x)
   df[["x"]] <- NULL

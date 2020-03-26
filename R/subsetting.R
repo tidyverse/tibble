@@ -166,6 +166,9 @@ NULL
 
   # Side effect: check scalar, allow OOB position
   vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  # New columns are added to the end, provide index to avoid matching column
+  # names again
+  names(value) <- names(j)
 
   tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
 }
