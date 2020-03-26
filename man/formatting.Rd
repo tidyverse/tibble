@@ -50,8 +50,8 @@ available by setting the options described below.
 
 Options used by the tibble and pillar packages to format and print \code{tbl_df}
 objects.
-Used by the formatting workhorse \code{\link[=trunc_mat]{trunc_mat()}} and, therefore,
-indirectly, by \code{print.tbl()}.
+Used by \code{print.tbl()} via the formatting workhorses
+\code{tbl_header()}, \code{tbl_body()} and \code{tbl_footer()}.
 \itemize{
 \item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
 Set to \code{Inf} to always print all rows.  Default: 20.

@@ -19,9 +19,8 @@
 #'
 #' Options used by the tibble and pillar packages to format and print `tbl_df`
 #' objects.
-# FIXME: Replace trunc_mat() reference by new idioms
-#' Used by the formatting workhorse [trunc_mat()] and, therefore,
-#' indirectly, by `print.tbl()`.
+#' Used by `print.tbl()` via the formatting workhorses
+#' `tbl_header()`, `tbl_body()` and `tbl_footer()`.
 #'
 #' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
 #'   Set to `Inf` to always print all rows.  Default: 20.
@@ -82,14 +81,61 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   c(style_subtle(header), body, style_subtle(footer))
 }
 
+#' Customizing output for subclasses
+#'
+#' The experimental `tbl_*()` functions offer a new interface
+#' for overriding parts of the output of a tibble subclass
+#' without overriding the [format()] or [print()] methods.
+#'
+#' Because the formatting of the footer may depend on computations
+#' already done for formatting the header or the body,
+#' each formatter receives the formatted value of the previous component
+#' as input.
+#' Therefore, if you override `tbl_body()`, ensure the return value
+#' is consistent with the default implementation of `tbl_footer()`.
+#' Formatters may attach attributes to their return values.
+#' @param ... Must be empty.
+#' @inheritParams print.tbl
+#' @name custom-formatting
+NULL
+
+#' tbl_header
+#'
+#' `tbl_header()` is responsible for formatting the header.
+#' The default implementation presents the value of [tbl_sum()]
+#' in a tabular format, one row per value.
+#' When the tibble is printed, subtle style is applied to the header.
+#' @rdname custom-formatting
 tbl_header <- function(x, ..., width = NULL) {
   check_dots_empty()
+
   width <- tibble_width(width)
   header <- format_header(tbl_sum(x))
   format_comment(header, width)
 }
 
-tbl_body <- function(x, width = NULL, n = NULL, header) {
+#' tbl_body
+#'
+#' @description
+#' `tbl_body()` is responsible for formatting the body of the table.
+#' The default implementation calls [nrow()] and [head()] on the input,
+#' delegates the work to [pillar::colonnade()]
+#' and [pillar::squeeze()], and attaches the following attributes
+#' to the output:
+#'
+#' - `"squeezed"`: the output of `pillar::squeeze()`
+#' - `"rows_missing"`: the number of rows that are not shown in the body,
+#'   `NA` if unknown
+#' - `"rows_min"`: the minimum number of rows that the input must have
+#'
+#' This is important for formatting table objects that are proxies
+#' to remote tables or queries where the number of rows may be unknown
+#' in advance.
+#' @param header The value returned by a previous call to `tbl_header()`.
+#' @rdname custom-formatting
+tbl_body <- function(x, ..., width = NULL, n = NULL, header = tbl_header(x, width = width)) {
+  check_dots_empty()
+
   width <- tibble_width(width)
 
   rows <- nrow(x)
@@ -125,7 +171,18 @@ tbl_body <- function(x, width = NULL, n = NULL, header) {
   )
 }
 
-tbl_footer <- function(x, width = NULL, n_extra = NULL, body) {
+#' tbl_footer
+#'
+#' `tbl_footer()` is responsible for formatting the footer of the table.
+#' The default implementation queries [nrow()] and summarizes information
+#' on rows and columns missing from the output.
+#' It accesses the `"squeezed"`, `"rows_missing"` and `"rows_min"` attributes
+#' from the `body` argument.
+#' @param header The value returned by a previous call to `tbl_body()`.
+#' @rdname custom-formatting
+tbl_footer <- function(x, ..., width = NULL, n_extra = NULL, body = tbl_body(x, width = width)) {
+  check_dots_empty()
+
   width <- tibble_width(width)
 
   rows_total <- nrow(x)

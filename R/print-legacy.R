@@ -19,8 +19,8 @@ NULL
 #' In other words, `format(trunc_mat(x, ...))` is the same as `format(x, ...)`.
 #'
 #' @section Life cycle:
-# FIXME: Elaborate
-#' This function is in the questioning stage.
+#' This function is in the questioning stage, see [custom-formatting]
+#' for a modern experimental alternative.
 #'
 #' @inheritParams print.tbl
 #'

@@ -33,6 +33,7 @@ In other words, \code{format(trunc_mat(x, ...))} is the same as \code{format(x, 
 }
 \section{Life cycle}{
 
-This function is in the questioning stage.
+This function is in the questioning stage, see \link{custom-formatting}
+for a modern experimental alternative.
 }
 
