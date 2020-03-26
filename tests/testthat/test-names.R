@@ -1,14 +1,14 @@
 test_that("set_repaired_names()", {
   x <- set_names(1:3, letters[1:3])
   expect_equal(set_repaired_names(x), x)
-  expect_tibble_error(set_repaired_names(1), error_column_must_be_named(1))
+  expect_tibble_error(set_repaired_names(1), error_column_names_cannot_be_empty(1))
 })
 
 test_that("repaired_names()", {
   expect_equal(repaired_names(letters[1:3]), letters[1:3])
-  expect_tibble_error(repaired_names(c("")), error_column_must_be_named(1))
-  expect_tibble_error(repaired_names(c("..1")), error_column_must_not_be_dot_dot(1))
-  expect_tibble_error(repaired_names(c("a", "a")), error_column_duplicated("a"))
+  expect_tibble_error(repaired_names(c("")), error_column_names_cannot_be_empty(1))
+  expect_tibble_error(repaired_names(c("..1")), error_column_names_cannot_be_dot_dot(1))
+  expect_tibble_error(repaired_names(c("a", "a")), error_column_names_must_be_unique("a"))
   expect_equal(repaired_names(c("a", "a"), .name_repair = "minimal"), c("a", "a"))
 })
 

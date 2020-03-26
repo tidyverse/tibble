@@ -1,9 +1,9 @@
 > rownames_to_column(mtcars, "cyl")
-<tibble_error_column_duplicated/tibble_error/rlang_error/error/condition>
+<tibble_error_column_names_must_be_unique/tibble_error/rlang_error/error/condition>
 Error: Column name `cyl` must not be duplicated.
 
 > rowid_to_column(iris, "Species")
-<tibble_error_column_duplicated/tibble_error/rlang_error/error/condition>
+<tibble_error_column_names_must_be_unique/tibble_error/rlang_error/error/condition>
 Error: Column name `Species` must not be duplicated.
 
 > column_to_rownames(mtcars, "cyl")

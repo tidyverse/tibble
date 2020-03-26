@@ -129,7 +129,7 @@ cnd_names_non_null <- function(name) {
 cnd_names_non_na <- function(name) {
   bad_name <- which(is.na(name))
   if (has_length(bad_name)) {
-    error_column_must_be_named(bad_name)
+    error_column_names_cannot_be_empty(bad_name)
   } else {
     invisible()
   }

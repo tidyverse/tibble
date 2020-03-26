@@ -2,15 +2,15 @@
 [1] "a" "b" "c"
 
 > repaired_names("")
-<tibble_error_column_must_be_named/tibble_error/rlang_error/error/condition>
+<tibble_error_column_names_cannot_be_empty/tibble_error/rlang_error/error/condition>
 Error: Column 1 must be named.
 
 > repaired_names(c("a", "a"))
-<tibble_error_column_duplicated/tibble_error/rlang_error/error/condition>
+<tibble_error_column_names_must_be_unique/tibble_error/rlang_error/error/condition>
 Error: Column name `a` must not be duplicated.
 
 > repaired_names("..1")
-<tibble_error_column_must_not_be_dot_dot/tibble_error/rlang_error/error/condition>
+<tibble_error_column_names_cannot_be_dot_dot/tibble_error/rlang_error/error/condition>
 Error: Column 1 must not have names of the form ... or ..j.
 
 > repaired_names(c("a", "a"), .name_repair = "universal")
