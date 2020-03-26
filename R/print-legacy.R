@@ -86,32 +86,15 @@ shrink_mat <- function(df, rows, n, star) {
 #' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
-  if (is.null(width)) {
-    width <- x$width
-  }
+  width <- tibble_width(width %||% x$width)
 
-  width <- tibble_width(width)
-
-  named_header <- format_header(x)
-  if (all(names2(named_header) == "")) {
-    header <- named_header
-  } else {
-    header <- paste0(
-      justify(
-        paste0(names2(named_header), ":"),
-        right = FALSE, space = "\u00a0"
-      ),
-      # We add a space after the NBSP inserted by justify()
-      # so that wrapping occurs at the right location for very narrow outputs
-      " ",
-      named_header
-    )
-  }
-
+  header <- format_header(x$summary)
   comment <- format_comment(header, width = width)
+
   squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
+
   c(style_subtle(comment), mcf, style_subtle(footer))
 }
 
@@ -129,10 +112,6 @@ print_without_body <- function(x, ...) {
 print.trunc_mat <- function(x, ...) {
   cat_line(format(x, ...))
   invisible(x)
-}
-
-format_header <- function(x) {
-  x$summary
 }
 
 format_body <- function(x) {
@@ -185,11 +164,6 @@ format_extra_vars <- function(extra_cols) {
   }
 
   paste0(": ", collapse(extra_cols))
-}
-
-format_comment <- function(x, width) {
-  if (length(x) == 0L) return(character())
-  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
 }
 
 pre_dots <- function(x) {

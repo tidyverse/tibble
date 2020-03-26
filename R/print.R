@@ -73,6 +73,48 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' @rdname formatting
 #' @export
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
-  format(mat)
+  width <- tibble_width(width)
+
+  header <- tbl_header(x, width = width)
+  body <- tbl_body(x, width = width, n = n, header = header)
+  footer <- tbl_footer(x, width = width, n_extra = n_extra, body = body)
+
+  c(style_subtle(header), body, style_subtle(footer))
+}
+
+tbl_header <- function(x, ..., width = NULL) {
+  check_dots_empty()
+  width <- tibble_width(width)
+  header <- format_header(tbl_sum(x))
+  format_comment(header, width)
+}
+
+tbl_body <- function(x, width = NULL, n = NULL, header) {
+  character()
+}
+
+tbl_footer <- function(x, width = NULL, n_extra = NULL, body) {
+  character()
+}
+
+format_header <- function(tbl_sum) {
+  if (all(names2(tbl_sum) == "")) {
+    tbl_sum
+  } else {
+    paste0(
+      justify(
+        paste0(names2(tbl_sum), ":"),
+        right = FALSE, space = "\u00a0"
+      ),
+      # We add a space after the NBSP inserted by justify()
+      # so that wrapping occurs at the right location for very narrow outputs
+      " ",
+      tbl_sum
+    )
+  }
+}
+
+format_comment <- function(x, width) {
+  if (length(x) == 0L) return(character())
+  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
 }
