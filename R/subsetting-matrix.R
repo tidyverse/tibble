@@ -16,7 +16,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
   # FIXME: use size argument in vctrs >= 0.3.0
 
   if (!vec_is(value)) {
-    cnd_signal(error_subset_matrix_scalar_type(j_arg, value_arg))
+    cnd_signal(error_subset_matrix_must_be_vector(j_arg, value_arg))
   }
 
   if (vec_size(value) != 1) {
@@ -79,7 +79,7 @@ error_subset_matrix_must_have_same_dimensions <- function(j_arg) {
   ))
 }
 
-error_subset_matrix_scalar_type <- function(j_arg, value_arg) {
+error_subset_matrix_must_be_vector <- function(j_arg, value_arg) {
   tibble_error(paste0(
     "The subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
