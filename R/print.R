@@ -80,9 +80,6 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   footer <- tbl_footer(x, width = width, n_extra = n_extra, body = body)
 
   c(style_subtle(header), body, style_subtle(footer))
-
-  # FIXME: Remove
-  format(trunc_mat(x, n = n, width = width, n_extra = n_extra))
 }
 
 tbl_header <- function(x, ..., width = NULL) {
@@ -93,6 +90,8 @@ tbl_header <- function(x, ..., width = NULL) {
 }
 
 tbl_body <- function(x, width = NULL, n = NULL, header) {
+  width <- tibble_width(width)
+
   rows <- nrow(x)
 
   if (is_null(n) || n < 0) {
@@ -118,12 +117,25 @@ tbl_body <- function(x, width = NULL, n = NULL, header) {
   squeezed <- pillar::squeeze(shrunk$colonnade, width = width)
   body <- format_body(squeezed)
 
-  structure(body, squeezed = squeezed, rows_missing = shrunk$rows_missing)
+  structure(
+    body,
+    squeezed = squeezed,
+    rows_missing = shrunk$rows_missing,
+    rows_min = nrow(df)
+  )
 }
 
 tbl_footer <- function(x, width = NULL, n_extra = NULL, body) {
+  width <- tibble_width(width)
+
+  rows_total <- nrow(x)
+  squeezed <- attr(body, "squeezed")
+  rows_missing <- attr(body, "rows_missing")
+  rows_min <- attr(body, "rows_min")
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
-  character()
+
+  footer <- format_footer(squeezed, rows_missing, rows_total, rows_min, n_extra)
+  format_comment(pre_dots(footer), width)
 }
 
 format_header <- function(tbl_sum) {
@@ -161,6 +173,59 @@ shrink <- function(df, rows, n, star, colonnade_name = "colonnade") {
   colonnade <- pillar::colonnade(df, has_row_id = has_row_id)
 
   list2(!!colonnade_name := colonnade, rows_missing = rows_missing)
+}
+
+format_footer <- function(squeezed, rows_missing, rows_total, rows_min, n_extra) {
+  extra_rows <- format_footer_rows(
+    squeezed, rows_missing, rows_total, rows_min
+  )
+  extra_cols <- format_footer_cols(
+    pillar::extra_cols(squeezed, n = n_extra),
+    rows_total, rows_min
+  )
+
+  extra <- c(extra_rows, extra_cols)
+  if (length(extra) >= 1) {
+    extra[[1]] <- paste0("with ", extra[[1]])
+    extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
+    collapse(extra)
+  } else {
+    character()
+  }
+}
+
+format_footer_rows <- function(squeezed, rows_missing, rows_total, rows_min) {
+  if (length(squeezed) != 0) {
+    if (is.na(rows_missing)) {
+      "more rows"
+    } else if (rows_missing > 0) {
+      paste0(big_mark(rows_missing), pluralise_n(" more row(s)", rows_missing))
+    }
+  } else if (is.na(rows_total) && rows_min > 0) {
+    paste0("at least ", big_mark(rows_min), pluralise_n(" row(s) total", rows_min))
+  }
+}
+
+format_footer_cols <- function(extra_cols, rows_total, rows_min) {
+  if (length(extra_cols) == 0) return(NULL)
+
+  vars <- format_extra_vars(extra_cols)
+  paste0(
+    big_mark(length(extra_cols)), " ",
+    if (!identical(rows_total, 0L) && rows_min > 0) "more ",
+    pluralise("variable(s)", extra_cols), vars
+  )
+}
+
+format_extra_vars <- function(extra_cols) {
+  # Also covers empty extra_cols vector!
+  if (is.na(extra_cols[1])) return("")
+
+  if (anyNA(extra_cols)) {
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], symbol$ellipsis)
+  }
+
+  paste0(": ", collapse(extra_cols))
 }
 
 pre_dots <- function(x) {
