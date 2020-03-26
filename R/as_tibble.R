@@ -133,7 +133,7 @@ check_valid_cols <- function(x, pos = NULL) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    cnd_signal(error_column_must_be_vector(names_x[is_xd], pos[is_xd], classes))
+    cnd_signal(error_column_scalar_type(names_x[is_xd], pos[is_xd], classes))
   }
 
   # 657
@@ -336,7 +336,7 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_column_must_be_vector <- function(names, positions, classes) {
+error_column_scalar_type <- function(names, positions, classes) {
   tibble_error(
     problems(
       "All columns in a tibble must be vectors:",

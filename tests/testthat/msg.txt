@@ -206,24 +206,24 @@ Use .name_repair to specify repair.
 Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.
 Use .name_repair to specify repair.
 
-> error_column_must_be_vector("a", 3, "environment")
-<error/tibble_error_column_must_be_vector>
+> error_column_scalar_type("a", 3, "environment")
+<error/tibble_error_column_scalar_type>
 All columns in a tibble must be vectors.
 x Column `a` is environment.
 
-> error_column_must_be_vector("", 3, "environment")
-<error/tibble_error_column_must_be_vector>
+> error_column_scalar_type("", 3, "environment")
+<error/tibble_error_column_scalar_type>
 All columns in a tibble must be vectors.
 x Column 3 is environment.
 
-> error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
-<error/tibble_error_column_must_be_vector>
+> error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
+<error/tibble_error_column_scalar_type>
 All columns in a tibble must be vectors.
 x Column `b` is name.
 x Column `c` is NULL.
 
-> error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
-<error/tibble_error_column_must_be_vector>
+> error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
+<error/tibble_error_column_scalar_type>
 All columns in a tibble must be vectors.
 x Column 1 is QQ.
 x Column 2 is VV.
@@ -353,8 +353,8 @@ Must pass a list as `x` argument to `new_tibble()`.
 <error/tibble_error_new_tibble_needs_nrow>
 Must pass a scalar integer as `nrow` argument to `new_tibble()`.
 
-> error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
-<error/tibble_error_subset_matrix_must_be_vector>
+> error_subset_matrix_scalar_type(quote(is.na(x)), quote(new_environment()))
+<error/tibble_error_subset_matrix_scalar_type>
 The subscript `is.na(x)` is a matrix, the data `new_environment()` must be a vector of size 1.
 
 > error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))

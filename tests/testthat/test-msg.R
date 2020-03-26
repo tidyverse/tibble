@@ -78,10 +78,10 @@ verify_output("msg.txt", {
   error_column_names_must_be_unique(letters[2:3], repair = TRUE)
   error_column_names_must_be_unique(LETTERS, repair = TRUE)
 
-  error_column_must_be_vector("a", 3, "environment")
-  error_column_must_be_vector("", 3, "environment")
-  error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
-  error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
+  error_column_scalar_type("a", 3, "environment")
+  error_column_scalar_type("", 3, "environment")
+  error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
+  error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
   error_inconsistent_cols(
     10,
@@ -148,7 +148,7 @@ verify_output("msg.txt", {
 
   error_new_tibble_needs_nrow()
 
-  error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
+  error_subset_matrix_scalar_type(quote(is.na(x)), quote(new_environment()))
   error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))
   error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
   error_subset_matrix_must_have_same_dimensions(quote(t(is.na(x))))
