@@ -48,7 +48,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
     df <- as.data.frame(head(x, n))
   }
 
-  shrunk <- shrink_mat(df, rows, n, star = has_rownames(x))
+  shrunk <- shrink(df, rows, n, star = has_rownames(x), "mcf")
   trunc_info <- list(
     width = width, rows_total = rows, rows_min = nrow(df),
     n_extra = n_extra, summary = tbl_sum(x)
@@ -58,29 +58,6 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
     c(shrunk, trunc_info),
     class = c(paste0("trunc_mat_", class(x)), "trunc_mat")
   )
-}
-
-shrink_mat <- function(df, rows, n, star) {
-  df <- remove_rownames(df)
-  if (is.na(rows)) {
-    needs_dots <- (nrow(df) >= n)
-  } else {
-    needs_dots <- (rows > n)
-  }
-
-  if (needs_dots) {
-    rows_missing <- rows - n
-  } else {
-    rows_missing <- 0L
-  }
-
-  mcf <- pillar::colonnade(
-    df,
-    has_row_id = if (star) "*" else TRUE,
-    needs_dots = needs_dots
-  )
-
-  list(mcf = mcf, rows_missing = rows_missing)
 }
 
 #' @importFrom pillar style_subtle
@@ -93,6 +70,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 
   squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
+
   footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
 
   c(style_subtle(comment), mcf, style_subtle(footer))

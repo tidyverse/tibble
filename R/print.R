@@ -90,10 +90,36 @@ tbl_header <- function(x, ..., width = NULL) {
 }
 
 tbl_body <- function(x, width = NULL, n = NULL, header) {
-  character()
+  rows <- nrow(x)
+
+  if (is_null(n) || n < 0) {
+    if (is.na(rows) || rows > tibble_opt("print_max")) {
+      n <- tibble_opt("print_min")
+    } else {
+      n <- rows
+    }
+  }
+
+  if (is.na(rows)) {
+    df <- as.data.frame(head(x, n + 1))
+    if (nrow(df) <= n) {
+      rows <- nrow(df)
+    } else {
+      df <- df[seq_len(n), , drop = FALSE]
+    }
+  } else {
+    df <- as.data.frame(head(x, n))
+  }
+
+  shrunk <- shrink(df, rows, n, star = has_rownames(x))
+  squeezed <- pillar::squeeze(shrunk$colonnade, width = width)
+  body <- format_body(squeezed)
+
+  structure(body, squeezed = squeezed, rows_missing = shrunk$rows_missing)
 }
 
 tbl_footer <- function(x, width = NULL, n_extra = NULL, body) {
+  n_extra <- n_extra %||% tibble_opt("max_extra_cols")
   character()
 }
 
@@ -112,6 +138,26 @@ format_header <- function(tbl_sum) {
       tbl_sum
     )
   }
+}
+
+shrink <- function(df, rows, n, star, colonnade_name = "colonnade") {
+  if (is.na(rows)) {
+    needs_dots <- (nrow(df) >= n)
+  } else {
+    needs_dots <- (rows > n)
+  }
+
+  if (needs_dots) {
+    rows_missing <- rows - n
+  } else {
+    rows_missing <- 0L
+  }
+
+  df <- remove_rownames(df)
+  has_row_id <- if (star) "*" else TRUE
+  colonnade <- pillar::colonnade(df, has_row_id = has_row_id)
+
+  list2(!!colonnade_name := colonnade, rows_missing = rows_missing)
 }
 
 format_comment <- function(x, width) {
