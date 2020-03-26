@@ -4,14 +4,11 @@
 \alias{formatting}
 \alias{print.tbl}
 \alias{format.tbl}
-\alias{trunc_mat}
 \title{Printing tibbles}
 \usage{
 \method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 \method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
-
-trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
 \arguments{
 \item{x}{Object to format or print.}
@@ -26,7 +23,8 @@ if less than option \code{tibble.print_max}. Otherwise, will print
 means use \code{getOption("tibble.width")} or (if also \code{NULL})
 \code{getOption("width")}; the latter displays only the columns that fit on one
 screen. You can also set \code{options(tibble.width = Inf)} to override this
-default and always print all columns.}
+default and always print all columns, this may slow down printing
+substantially.}
 
 \item{n_extra}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL}, the default,
@@ -51,7 +49,8 @@ available by setting the options described below.
 
 
 Options used by the tibble and pillar packages to format and print \code{tbl_df}
-objects. Used by the formatting workhorse \code{trunc_mat()} and, therefore,
+objects.
+Used by the formatting workhorse \code{\link[=trunc_mat]{trunc_mat()}} and, therefore,
 indirectly, by \code{print.tbl()}.
 \itemize{
 \item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
@@ -86,21 +85,18 @@ titles.
 }
 
 \examples{
-print(as_tibble(mtcars))
-print(as_tibble(mtcars), n = 1)
-print(as_tibble(mtcars), n = 3)
+tbl <- tibble(
+  characters = letters[1:3],
+  numbers = 4:6,
+  data = c(3e3, 2, -1e-3)
+)
 
-print(as_tibble(iris), n = 100)
+print(tbl)
+print(tbl, n = 1)
+print(tbl, width = 20)
+print(tbl, width = 20, n_extra = 0)
 
-print(mtcars, width = 10)
-
-mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
-print(mtcars2, n = 25, n_extra = 3)
-
-trunc_mat(mtcars)
-
-if (requireNamespace("nycflights13", quietly = TRUE)) {
-  print(nycflights13::flights, n_extra = 2)
-  print(nycflights13::flights, width = Inf)
-}
+tbl_wide <- as_tibble_row(setNames(1:26, letters))
+print(tbl_wide)
+print(tbl_wide, width = Inf)
 }

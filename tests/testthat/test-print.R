@@ -1,14 +1,3 @@
-context("Truncated matrix")
-
-test_that("interface of print() identical to trunc_mat()", {
-  print_arg_names <- names(formals(print.tbl))
-  print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
-
-  trunc_mat_arg_names <- names(formals(trunc_mat))
-
-  expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
-})
-
 test_that("print() returns output invisibly", {
   expect_output(ret <- withVisible(print(as_tibble(iris))))
   expect_false(ret$visible)
@@ -20,7 +9,7 @@ test_that("trunc_mat header output", {
   skip_if_not_installed("mockr")
   testthat::skip_if(getRversion() < "3.2")
 
-  verify_output("trunc_mat.txt", unicode = TRUE, {
+  verify_output("print.txt", unicode = TRUE, {
     mtcars2 <- as_tibble(mtcars, rownames = NA)
 
     print_without_body(mtcars2, n = 8L, width = 30L)
@@ -72,11 +61,11 @@ test_that("trunc_mat header output", {
   })
 })
 
-test_that("trunc_mat output matches known output", {
+test_that("print output matches known output", {
   skip_on_non_utf8_locale()
   testthat::skip_if(getRversion() < "3.2")
 
-  verify_output("trunc_mat_full.txt", unicode = TRUE, {
+  verify_output("print_full.txt", unicode = TRUE, {
     df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
     df$y <- as.POSIXlt(df$x)
 
