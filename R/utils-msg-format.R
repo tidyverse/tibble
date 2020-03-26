@@ -93,3 +93,13 @@ set_default_name <- function(x, name) {
 
   x
 }
+
+format_n <- function(x) collapse(quote_n(x))
+
+quote_n <- function(x) {
+  if (is.character(x)) {
+    tick(x)
+  } else {
+    as.character(x)
+  }
+}

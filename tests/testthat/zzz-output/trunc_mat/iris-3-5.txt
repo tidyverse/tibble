@@ -6,10 +6,6 @@
 <body created by pillar>
 # …
 #   with
-#   147
-#   more
-#   rows,
-#   and
 #   5
 #   more
 #   variables:

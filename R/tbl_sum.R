@@ -29,6 +29,14 @@ dim_desc <- function(x) {
   paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
 
+spaces_around <- function(x) {
+  paste0(" ", x, " ")
+}
+
+mult_sign <- function() {
+  "x"
+}
+
 size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 

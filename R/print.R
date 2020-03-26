@@ -80,6 +80,9 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   footer <- tbl_footer(x, width = width, n_extra = n_extra, body = body)
 
   c(style_subtle(header), body, style_subtle(footer))
+
+  # FIXME: Remove
+  format(trunc_mat(x, n = n, width = width, n_extra = n_extra))
 }
 
 tbl_header <- function(x, ..., width = NULL) {
@@ -160,7 +163,39 @@ shrink <- function(df, rows, n, star, colonnade_name = "colonnade") {
   list2(!!colonnade_name := colonnade, rows_missing = rows_missing)
 }
 
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0(symbol$ellipsis, " ", x)
+  } else {
+    character()
+  }
+}
+
+justify <- function(x, right = TRUE, space = " ") {
+  if (length(x) == 0L) return(character())
+  width <- nchar_width(x)
+  max_width <- max(width)
+  spaces_template <- paste(rep(space, max_width), collapse = "")
+  spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
+  if (right) {
+    paste0(spaces, x)
+  } else {
+    paste0(x, spaces)
+  }
+}
+
 format_comment <- function(x, width) {
   if (length(x) == 0L) return(character())
   map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
 }
+
+big_mark <- function(x, ...) {
+  # The thousand separator,
+  # "," unless it's used for the decimal point, in which case "."
+  mark <- if (identical(getOption("OutDec"), ",")) "." else ","
+  ret <- formatC(x, big.mark = mark, format = "d", ...)
+  ret[is.na(x)] <- "??"
+  ret
+}
+
+collapse <- function(x) paste(x, collapse = ", ")
