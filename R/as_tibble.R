@@ -120,7 +120,7 @@ compat_name_repair <- function(.name_repair, validate) {
   if (!has_length(.name_repair, 1)) {
     deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   } else if (.name_repair != name_repair) {
-    warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
+    warn("`.name_repair` takes precedence over the deprecated `validate` argument argument in `as_tibble()`.")
     return(.name_repair)
   }
 

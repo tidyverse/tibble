@@ -745,23 +745,23 @@ error_duplicate_row_subscript_for_assignment <- function(i) {
 
 error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   if (is.null(i_arg)) {
-    target <- "the existing data"
-    existing <- pluralise_count("The existing data has ", nrow, " row(s)")
+    target <- "existing data"
+    existing <- pluralise_count("Existing data has ", nrow, " row(s)")
   } else {
-    target <- paste0("the row subscript ", tick(as_label(i_arg)))
+    target <- paste0("row subscript ", tick(as_label(i_arg)))
     existing <- pluralise_count("", nrow, " row(s) must be assigned")
   }
 
   new <- paste0(pluralise_count("has ", vec_size(value[[j]]), " row(s)"))
   if (length(value) != 1) {
-    new <- paste0("The element ", j, " of the assigned data ", new)
+    new <- paste0("Element ", j, " of assigned data ", new)
   } else {
-    new <- paste0("The assigned data ", new)
+    new <- paste0("Assigned data ", new)
   }
 
   tibble_error(
     bullets(
-      paste0("The assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
+      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
       i = "Only vectors of size 1 are recycled"
@@ -777,8 +777,8 @@ error_assign_incompatible_type <- function(x, value, j, value_arg, message) {
 
   tibble_error(
     bullets(
-      paste0("The assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      i = paste0("The error occurred for column ", tick(name)),
+      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
+      i = paste0("Error occurred for column ", tick(name)),
       x = message
     ),
     expected = x[[j]],

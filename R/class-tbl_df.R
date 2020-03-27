@@ -138,12 +138,12 @@ cnd_names_non_na <- function(name) {
 # Errors ------------------------------------------------------------------
 
 error_names_must_be_non_null <- function(repair = has_tibble_arg(".name_repair")) {
-  tibble_error(paste0("The `names` must not be `NULL`.", use_repair(repair)))
+  tibble_error(paste0("`names` must not be `NULL`.", use_repair(repair)))
 }
 
 error_names_must_have_length <- function(length, n) {
   tibble_error(
-    paste0("The `names` must have length ", n, ", not ", length, "."),
+    paste0("`names` must have length ", n, ", not ", length, "."),
     expected = n,
     actual = length
   )

@@ -7,5 +7,5 @@ Warning: The `nrow` argument of `new_tibble()` can't be missing as of tibble 2.0
 `x` must be a scalar integer.
 
 <tibble_error_names_must_be_non_null/tibble_error/rlang_error/error/condition>
-Error: The `names` must not be `NULL`.
+Error: `names` must not be `NULL`.
 

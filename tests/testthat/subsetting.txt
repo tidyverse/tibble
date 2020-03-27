@@ -15,7 +15,7 @@ x The columns `w` and `z` don't exist.
 
 > foo[as.matrix("x")]
 <tibble_error_subset_matrix_must_be_logical/tibble_error/rlang_error/error/condition>
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
+Error: Subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -64,7 +64,7 @@ Error: Can't use NA as column index with `[` at position 4.
 
 > foo[as.matrix(1)]
 <tibble_error_subset_matrix_must_be_logical/tibble_error/rlang_error/error/condition>
-Error: The subscript `as.matrix(1)` is a matrix, it must be of type logical.
+Error: Subscript `as.matrix(1)` is a matrix, it must be of type logical.
 
 > foo[array(1, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -166,7 +166,7 @@ Error: Can't use NA as column index with `[` at position 3.
 
 > foo[as.matrix(TRUE)]
 <tibble_error_subset_matrix_must_have_same_dimensions/tibble_error/rlang_error/error/condition>
-Error: The subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
+Error: Subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
 
 > foo[array(TRUE, dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -262,7 +262,7 @@ Error: No common type for `a` <integer> and `b` <character>.
 
 > foo[as.matrix("x")]
 <tibble_error_subset_matrix_must_be_logical/tibble_error/rlang_error/error/condition>
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
+Error: Subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))]
 Error: `i` must have one dimension, not 3.
@@ -511,16 +511,16 @@ x It must be size 3 or 1, not 2.
 
 > df[1:2, ] <- 1:3
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `1:3` must be compatible with the row subscript `1:2`.
+Error: Assigned data `1:3` must be compatible with row subscript `1:2`.
 x 2 rows must be assigned.
-x The assigned data has 3 rows.
+x Assigned data has 3 rows.
 i Only vectors of size 1 are recycled.
 
 > df[, ] <- 1:2
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `1:2` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 2 rows.
+Error: Assigned data `1:2` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 
@@ -530,26 +530,26 @@ i Only vectors of size 1 are recycled.
 > df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
 > df[1:3, 1:2] <- df[2:3]
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `df[2:3]` must be compatible with existing data.
-i The error occurred for column `x`.
+Error: Assigned data `df[2:3]` must be compatible with existing data.
+i Error occurred for column `x`.
 x No common type for `value` <character> and `x` <integer>.
 
 > df[1:3, 1:2] <- df[1]
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `df[1]` must be compatible with existing data.
-i The error occurred for column `y`.
+Error: Assigned data `df[1]` must be compatible with existing data.
+i Error occurred for column `y`.
 x No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:2] <- df[[1]]
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `df[[1]]` must be compatible with existing data.
-i The error occurred for column `y`.
+Error: Assigned data `df[[1]]` must be compatible with existing data.
+i Error occurred for column `y`.
 x No common type for `value` <integer> and `x` <character>.
 
 > df[1:3, 1:3] <- df[3:1]
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `df[3:1]` must be compatible with existing data.
-i The error occurred for column `x`.
+Error: Assigned data `df[3:1]` must be compatible with existing data.
+i Error occurred for column `x`.
 x No common type for `value` <list> and `x` <integer>.
 
 > df[1:3, 1:3] <- NULL
@@ -563,8 +563,8 @@ Error: `NULL` must be a vector, a bare list or a data frame.
 > df <- tibble(x = rep(NA, 3))
 > df[1, "x"] <- 5
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `5` must be compatible with existing data.
-i The error occurred for column `x`.
+Error: Assigned data `5` must be compatible with existing data.
+i Error occurred for column `x`.
 x Lossy cast from `value` <double> to `x` <logical>.
 * Locations: 1.
 
@@ -575,22 +575,22 @@ x Lossy cast from `value` <double> to `x` <logical>.
 > foo <- tibble(a = 1:3, b = letters[1:3])
 > foo[!is.na(foo)] <- "bogus"
 <tibble_error_assign_incompatible_type/tibble_error/rlang_error/error/condition>
-Error: The assigned data `"bogus"` must be compatible with existing data.
-i The error occurred for column `a`.
+Error: Assigned data `"bogus"` must be compatible with existing data.
+i Error occurred for column `a`.
 x No common type for `value` <character> and `x` <integer>.
 
 > foo[as.matrix("x")] <- NA
 <tibble_error_subset_matrix_must_be_logical/tibble_error/rlang_error/error/condition>
-Error: The subscript `as.matrix("x")` is a matrix, it must be of type logical.
+Error: Subscript `as.matrix("x")` is a matrix, it must be of type logical.
 
 > foo[array("x", dim = c(1, 1, 1))] <- NA
 > foo[is.na(foo)] <- 1:3
 <tibble_error_subset_matrix_must_be_scalar/tibble_error/rlang_error/error/condition>
-Error: The subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
+Error: Subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
 
 > foo[is.na(foo)] <- lm(a ~ b, foo)
 <tibble_error_subset_matrix_scalar_type/tibble_error/rlang_error/error/condition>
-Error: The subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
+Error: Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
 
 
 [[.tbl_df rejects invalid column indexes
@@ -698,23 +698,23 @@ Error: `x` must be a vector, not a `lm` object.
 > df <- tibble(x = 1:3)
 > df[["x"]] <- 8:9
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `8:9` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 2 rows.
+Error: Assigned data `8:9` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df[["w"]] <- 8:9
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `8:9` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 2 rows.
+Error: Assigned data `8:9` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df[["a"]] <- character()
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `character()` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 0 rows.
+Error: Assigned data `character()` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 0 rows.
 i Only vectors of size 1 are recycled.
 
 
@@ -737,22 +737,22 @@ $<- recycles only values of length one
 > df <- tibble(x = 1:3)
 > df$x <- 8:9
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `8:9` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 2 rows.
+Error: Assigned data `8:9` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df$w <- 8:9
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `8:9` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 2 rows.
+Error: Assigned data `8:9` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
 i Only vectors of size 1 are recycled.
 
 > df$a <- character()
 <tibble_error_assign_incompatible_size/tibble_error/rlang_error/error/condition>
-Error: The assigned data `character()` must be compatible with the existing data.
-x The existing data has 3 rows.
-x The assigned data has 0 rows.
+Error: Assigned data `character()` must be compatible with existing data.
+x Existing data has 3 rows.
+x Assigned data has 0 rows.
 i Only vectors of size 1 are recycled.
 

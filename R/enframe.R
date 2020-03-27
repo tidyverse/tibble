@@ -58,7 +58,7 @@ deframe <- function(x) {
   if (length(x) == 1) {
     return(x[[1]])
   } else if (length(x) != 2) {
-    warn("The input to `deframe()` must be a one- or two-column data frame.")
+    warn("`x` must be a one- or two-column data frame in `deframe()`.")
   }
 
   value <- x[[2L]]

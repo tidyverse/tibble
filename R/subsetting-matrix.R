@@ -67,21 +67,21 @@ cells_to_col_idx <- function(cells) {
 
 error_subset_matrix_must_be_logical <- function(j_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must be of type logical."
   ))
 }
 
 error_subset_matrix_must_have_same_dimensions <- function(j_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must have the same dimensions as the input."
   ))
 }
 
 error_subset_matrix_scalar_type <- function(j_arg, value_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must be a vector of size 1."
   ))
@@ -89,7 +89,7 @@ error_subset_matrix_scalar_type <- function(j_arg, value_arg) {
 
 error_subset_matrix_must_be_scalar <- function(j_arg, value_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must have size 1."
   ))
