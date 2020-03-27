@@ -59,8 +59,6 @@ Suggests:
     testthat (>= 2.1.0),
     tidyr,
     withr
-Remotes: 
-    r-lib/testthat#997
 VignetteBuilder: 
     knitr
 RdMacros: 

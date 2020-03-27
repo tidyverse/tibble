@@ -1,8 +1,6 @@
 > enframe(1:3, value = NULL)
-<tibble_error_enframe_value_null/tibble_error/rlang_error/error/condition>
 Error: `value` can't be NULL.
 
 > enframe(Titanic)
-<tibble_error_enframe_has_dim/tibble_error/rlang_error/error/condition>
 Error: `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
 
