@@ -58,7 +58,7 @@ deframe <- function(x) {
   if (length(x) == 1) {
     return(x[[1]])
   } else if (length(x) != 2) {
-    warn("The input to `deframe()` must be a one- or two-column data frame.")
+    warn("`x` must be a one- or two-column data frame in `deframe()`.")
   }
 
   value <- x[[2L]]
@@ -68,7 +68,7 @@ deframe <- function(x) {
 }
 
 error_enframe_value_null <- function() {
-  tibble_error("The `value` argument to `enframe()` cannot be NULL.")
+  tibble_error("`value` can't be NULL.")
 }
 
 error_enframe_has_dim <- function(x) {

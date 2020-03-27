@@ -1,10 +1,201 @@
+
+add
+===
+
+> error_add_rows_to_grouped_df()
+<error/tibble_error_add_rows_to_grouped_df>
+Can't add rows to grouped data frames.
+
+> error_incompatible_new_rows("a")
+<error/tibble_error_incompatible_new_rows>
+New rows can't add columns.
+x Can't find column `a` in `.data`.
+
+> error_incompatible_new_rows(letters[2:3])
+<error/tibble_error_incompatible_new_rows>
+New rows can't add columns.
+x Can't find columns `b` and `c` in `.data`.
+
+> error_incompatible_new_rows(LETTERS)
+<error/tibble_error_incompatible_new_rows>
+New rows can't add columns.
+x Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
+
+> error_both_before_after()
+<error/tibble_error_both_before_after>
+Can't specify both `.before` and `.after`.
+
+> error_unknown_column_names("a")
+<error/tibble_error_unknown_column_names>
+Can't find column `a` in `.data`.
+
+> error_unknown_column_names(c("b", "c"))
+<error/tibble_error_unknown_column_names>
+Can't find columns `b` and `c` in `.data`.
+
+> error_unknown_column_names(LETTERS)
+<error/tibble_error_unknown_column_names>
+Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
+
+> error_incompatible_new_cols(10, data.frame(a = 1:2))
+<error/tibble_error_incompatible_new_cols>
+New columns must be compatible with `.data`.
+x New column has 2 rows.
+i `.data` has 10 rows.
+
+> error_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4))
+<error/tibble_error_incompatible_new_cols>
+New columns must be compatible with `.data`.
+x New columns have 3 rows.
+i `.data` has 1 row.
+
+
+as_tibble
+=========
+
+> error_column_scalar_type("a", 3, "environment")
+<error/tibble_error_column_scalar_type>
+All columns in a tibble must be vectors.
+x Column `a` is environment.
+
+> error_column_scalar_type("", 3, "environment")
+<error/tibble_error_column_scalar_type>
+All columns in a tibble must be vectors.
+x Column 3 is environment.
+
+> error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
+<error/tibble_error_column_scalar_type>
+All columns in a tibble must be vectors.
+x Column `b` is name.
+x Column `c` is NULL.
+
+> error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
+<error/tibble_error_column_scalar_type>
+All columns in a tibble must be vectors.
+x Column 1 is QQ.
+x Column 2 is VV.
+x Column `A` is a.
+x Column `B` is b.
+x Column `C` is c.
+x ... and 23 more problems.
+
+> error_as_tibble_row_bare(new_environment())
+<error/tibble_error_as_tibble_row_bare>
+`x` must be a bare vector in `as_tibble_row()`, not environment.
+
+> error_as_tibble_row_size_one(3, "foo", 7)
+<error/tibble_error_as_tibble_row_size_one>
+All elements must be size one, use `list()` to wrap.
+x Element `foo` is of size 7.
+
+
+class-tbl_df
+============
+
+> error_names_must_be_non_null(repair = TRUE)
+<error/tibble_error_names_must_be_non_null>
+`names` must not be `NULL`.
+Use .name_repair to specify repair.
+
+> error_names_must_be_non_null(repair = FALSE)
+<error/tibble_error_names_must_be_non_null>
+`names` must not be `NULL`.
+
+> error_names_must_have_length(length = 5, n = 3)
+<error/tibble_error_names_must_have_length>
+`names` must have length 3, not 5.
+
+> # #enframe
 > error_enframe_value_null()
 <error/tibble_error_enframe_value_null>
-The `value` argument to `enframe()` cannot be NULL.
+`value` can't be NULL.
 
 > error_enframe_has_dim(Titanic)
 <error/tibble_error_enframe_has_dim>
 `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+
+
+glimpse
+=======
+
+> error_glimpse_infinite_width()
+<error/tibble_error_glimpse_infinite_width>
+`width` must be finite.
+
+
+names
+=====
+
+> error_column_names_cannot_be_empty(1, repair = TRUE)
+<error/tibble_error_column_names_cannot_be_empty>
+Column 1 must be named.
+Use .name_repair to specify repair.
+
+> error_column_names_cannot_be_empty(2:3, repair = TRUE)
+<error/tibble_error_column_names_cannot_be_empty>
+Columns 2 and 3 must be named.
+Use .name_repair to specify repair.
+
+> error_column_names_cannot_be_empty(seq_along(letters), repair = TRUE)
+<error/tibble_error_column_names_cannot_be_empty>
+Columns 1, 2, 3, 4, 5, and 21 more must be named.
+Use .name_repair to specify repair.
+
+> error_column_names_cannot_be_empty(4:6, repair = FALSE)
+<error/tibble_error_column_names_cannot_be_empty>
+Columns 4, 5, and 6 must be named.
+
+> error_column_names_cannot_be_dot_dot(1, repair = FALSE)
+<error/tibble_error_column_names_cannot_be_dot_dot>
+Column 1 must not have names of the form ... or ..j.
+
+> error_column_names_cannot_be_dot_dot(2:3, repair = TRUE)
+<error/tibble_error_column_names_cannot_be_dot_dot>
+Columns 2 and 3 must not have names of the form ... or ..j.
+Use .name_repair to specify repair.
+
+> error_column_names_cannot_be_dot_dot(1:26, repair = TRUE)
+<error/tibble_error_column_names_cannot_be_dot_dot>
+Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
+Use .name_repair to specify repair.
+
+> error_column_names_must_be_unique("a", repair = FALSE)
+<error/tibble_error_column_names_must_be_unique>
+Column name `a` must not be duplicated.
+
+> error_column_names_must_be_unique(letters[2:3], repair = TRUE)
+<error/tibble_error_column_names_must_be_unique>
+Column names `b` and `c` must not be duplicated.
+Use .name_repair to specify repair.
+
+> error_column_names_must_be_unique(LETTERS, repair = TRUE)
+<error/tibble_error_column_names_must_be_unique>
+Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
+Use .name_repair to specify repair.
+
+
+new
+===
+
+> error_new_tibble_must_be_list()
+<error/tibble_error_new_tibble_must_be_list>
+`x` must be a list.
+
+> error_new_tibble_needs_nrow()
+<error/tibble_error_new_tibble_needs_nrow>
+`x` must be a scalar integer.
+
+
+rownames
+========
+
+> error_already_has_rownames()
+<error/tibble_error_already_has_rownames>
+`.data` must be a data frame without row names.
+
+
+subsetting
+==========
 
 > error_need_rhs_vector(quote(RHS))
 <error/tibble_error_need_rhs_vector>
@@ -16,31 +207,11 @@ The `value` argument to `enframe()` cannot be NULL.
 
 > error_na_column_index(1:3)
 <error/tibble_error_na_column_index>
-Can't use NA as column index with `[` at positions 1, 2, 3.
+Can't use NA as column index with `[` at positions 1, 2, and 3.
 
-> error_unknown_column_names("a")
-<error/tibble_error_unknown_column_names>
-Can't find column `a` in `.data`.
-
-> error_unknown_column_names(c("b", "c"))
-<error/tibble_error_unknown_column_names>
-Can't find columns `b`, `c` in `.data`.
-
-> error_unknown_column_names(LETTERS)
-<error/tibble_error_unknown_column_names>
-Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
-
-> error_existing_column_names("a")
-<error/tibble_error_existing_column_names>
-Column `a` already exists in `.data`.
-
-> error_existing_column_names(c("b", "c"))
-<error/tibble_error_existing_column_names>
-Columns `b`, `c` already exist in `.data`.
-
-> error_existing_column_names(LETTERS)
-<error/tibble_error_existing_column_names>
-Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) already exist in `.data`.
+> error_dim_column_index(as.matrix("x"))
+<error/tibble_error_dim_column_index>
+Must use a vector in `[`, not an object of class matrix.
 
 > error_assign_columns_non_na_only()
 <error/tibble_error_assign_columns_non_na_only>
@@ -56,7 +227,7 @@ Subscript can't be missing for tibbles in `[[<-`.
 
 > error_new_columns_at_end_only(5, 7:8)
 <error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7, 8 in a tibble with 5 columns.
+Can't assign columns 7 and 8 in a tibble with 5 columns.
 
 > error_new_columns_at_end_only(5, 7)
 <error/tibble_error_new_columns_at_end_only>
@@ -64,7 +235,7 @@ Can't assign column 7 in a tibble with 5 columns.
 
 > error_new_columns_at_end_only(1, 7:8)
 <error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7, 8 in a tibble with 1 column.
+Can't assign columns 7 and 8 in a tibble with 1 column.
 
 > error_new_columns_at_end_only(1, 7)
 <error/tibble_error_new_columns_at_end_only>
@@ -76,7 +247,7 @@ Column index 1 is used more than once for assignment.
 
 > error_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2))
 <error/tibble_error_duplicate_column_subscript_for_assignment>
-Column indexes 1, 2 are used more than once for assignment.
+Column indexes 1 and 2 are used more than once for assignment.
 
 > error_assign_rows_non_na_only()
 <error/tibble_error_assign_rows_non_na_only>
@@ -84,7 +255,7 @@ Can't use NA as row index in a tibble for assignment.
 
 > error_new_rows_at_end_only(5, 7:8)
 <error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7, 8 in a tibble with 5 rows.
+Can't assign rows 7 and 8 in a tibble with 5 rows.
 
 > error_new_rows_at_end_only(5, 7)
 <error/tibble_error_new_rows_at_end_only>
@@ -92,7 +263,7 @@ Can't assign row 7 in a tibble with 5 rows.
 
 > error_new_rows_at_end_only(1, 7:8)
 <error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7, 8 in a tibble with 1 row.
+Can't assign rows 7 and 8 in a tibble with 1 row.
 
 > error_new_rows_at_end_only(1, 7)
 <error/tibble_error_new_rows_at_end_only>
@@ -104,268 +275,134 @@ Row index 1 is used more than once for assignment.
 
 > error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2))
 <error/tibble_error_duplicate_row_subscript_for_assignment>
-Row indexes 1, 2 are used more than once for assignment.
+Row indexes 1 and 2 are used more than once for assignment.
 
-> error_inconsistent_new_data_size(3, list(1:2), 1, NULL, quote(rhs))
-<error/tibble_error_inconsistent_new_data_size>
-New data `rhs` must be consistent with existing data.
-x Existing data has 3 rows.
-x New data contributes 2 rows.
-i Only vectors of size 1 are recycled.
-
-> error_inconsistent_new_data_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
-<error/tibble_error_inconsistent_new_data_size>
-New data `rhs` must be consistent with row subscript `4:1`.
-x Subscript has 4 rows.
-x Element 2 of new data contributes 2 rows.
-i Only vectors of size 1 are recycled.
-
-> error_incompatible_new_data_type(tibble(a = 1), list("c"), 1, quote(rhs),
-+ "Can't frobnicate.")
-<error/tibble_error_incompatible_new_data_type>
+> error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs))
+<error/tibble_error_assign_incompatible_size>
 Assigned data `rhs` must be compatible with existing data.
-x The error occurred for column `a`.
+x Existing data has 3 rows.
+x Assigned data has 2 rows.
+i Only vectors of size 1 are recycled.
+
+> error_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs))
+<error/tibble_error_assign_incompatible_size>
+Assigned data `rhs` must be compatible with row subscript `4:1`.
+x 4 rows must be assigned.
+x Element 2 of assigned data has 2 rows.
+i Only vectors of size 1 are recycled.
+
+> error_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(rhs),
++ "Can't frobnicate.")
+<error/tibble_error_assign_incompatible_type>
+Assigned data `rhs` must be compatible with existing data.
+i Error occurred for column `a`.
 x Can't frobnicate.
 
-> error_add_rows_to_grouped_df()
-<error/tibble_error_add_rows_to_grouped_df>
-Can't add rows to grouped data frames.
 
-> error_inconsistent_new_rows("a")
-<error/tibble_error_inconsistent_new_rows>
-New rows in `add_row()` must use columns that already exist.
-x Can't find column `a` in `.data`.
+subsetting-matrix
+=================
 
-> error_inconsistent_new_rows(letters[2:3])
-<error/tibble_error_inconsistent_new_rows>
-New rows in `add_row()` must use columns that already exist.
-x Can't find columns `b`, `c` in `.data`.
+> error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
+<error/tibble_error_subset_matrix_must_be_logical>
+Subscript `is.na(x) + 1` is a matrix, it must be of type logical.
 
-> error_inconsistent_new_rows(LETTERS)
-<error/tibble_error_inconsistent_new_rows>
-New rows in `add_row()` must use columns that already exist.
-x Can't find columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) in `.data`.
+> error_subset_matrix_must_have_same_dimensions(quote(t(is.na(x))))
+<error/tibble_error_subset_matrix_must_have_same_dimensions>
+Subscript `t(is.na(x))` is a matrix, it must have the same dimensions as the input.
 
-> error_names_must_be_non_null(repair = TRUE)
-<error/tibble_error_names_must_be_non_null>
-The `names` must not be `NULL`.
-Use .name_repair to specify repair.
+> error_subset_matrix_scalar_type(quote(is.na(x)), quote(new_environment()))
+<error/tibble_error_subset_matrix_scalar_type>
+Subscript `is.na(x)` is a matrix, the data `new_environment()` must be a vector of size 1.
 
-> error_names_must_be_non_null(repair = FALSE)
-<error/tibble_error_names_must_be_non_null>
-The `names` must not be `NULL`.
+> error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))
+<error/tibble_error_subset_matrix_must_be_scalar>
+Subscript `is.na(x)` is a matrix, the data `1:3` must have size 1.
 
-> error_names_must_have_length(length = 5, n = 3)
-<error/tibble_error_names_must_have_length>
-The `names` must have length 3, not 5.
 
-> error_column_must_be_named(1, repair = TRUE)
-<error/tibble_error_column_must_be_named>
-Column 1 must be named.
-Use .name_repair to specify repair.
+tibble
+======
 
-> error_column_must_be_named(2:3, repair = TRUE)
-<error/tibble_error_column_must_be_named>
-Columns 2, 3 must be named.
-Use .name_repair to specify repair.
+> error_tibble_row_size_one(3, "foo", 7)
+<error/tibble_error_tibble_row_size_one>
+All vectors must be size one, use `list()` to wrap.
+x Column `foo` is of size 7.
 
-> error_column_must_be_named(seq_along(letters), repair = TRUE)
-<error/tibble_error_column_must_be_named>
-Columns 1, 2, 3, 4, 5, ... (and 21 more) must be named.
-Use .name_repair to specify repair.
-
-> error_column_must_be_named(4:6, repair = FALSE)
-<error/tibble_error_column_must_be_named>
-Columns 4, 5, 6 must be named.
-
-> error_column_must_not_be_dot_dot("a", repair = FALSE)
-<error/tibble_error_column_must_not_be_dot_dot>
-Column `a` must not have names of the form ... or ..j.
-
-> error_column_must_not_be_dot_dot(letters[2:3], repair = TRUE)
-<error/tibble_error_column_must_not_be_dot_dot>
-Columns `b`, `c` must not have names of the form ... or ..j.
-Use .name_repair to specify repair.
-
-> error_column_must_not_be_dot_dot(LETTERS, repair = TRUE)
-<error/tibble_error_column_must_not_be_dot_dot>
-Columns `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not have names of the form ... or ..j.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_unique("a", repair = FALSE)
-<error/tibble_error_column_names_must_be_unique>
-Column name `a` must not be duplicated.
-
-> error_column_names_must_be_unique(letters[2:3], repair = TRUE)
-<error/tibble_error_column_names_must_be_unique>
-Column names `b`, `c` must not be duplicated.
-Use .name_repair to specify repair.
-
-> error_column_names_must_be_unique(LETTERS, repair = TRUE)
-<error/tibble_error_column_names_must_be_unique>
-Column names `A`, `B`, `C`, `D`, `E`, ... (and 21 more) must not be duplicated.
-Use .name_repair to specify repair.
-
-> error_column_must_be_vector("a", 3, "environment")
-<error/tibble_error_column_must_be_vector>
-All columns in a tibble must be vectors.
-x Column `a` is environment.
-
-> error_column_must_be_vector("", 3, "environment")
-<error/tibble_error_column_must_be_vector>
-All columns in a tibble must be vectors.
-x Column 3 is environment.
-
-> error_column_must_be_vector(letters[2:3], 3:4, c("name", "NULL"))
-<error/tibble_error_column_must_be_vector>
-All columns in a tibble must be vectors.
-x Column `b` is name.
-x Column `c` is NULL.
-
-> error_column_must_be_vector(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
-<error/tibble_error_column_must_be_vector>
-All columns in a tibble must be vectors.
-x Column 1 is QQ.
-x Column 2 is VV.
-x Column `A` is a.
-x Column `B` is b.
-x Column `C` is c.
-x ... and 23 more problems.
-
-> error_inconsistent_cols(10, letters[1:3], c(4, 4, 3),
+> error_incompatible_size(10, letters[1:3], c(4, 4, 3),
 + "Requested with `uvw` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column `c`.
-* Size 4: Columns `a`, `b`.
+* Size 4: Columns `a` and `b`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, letters[1:3], c(2, 2, 3),
+> error_incompatible_size(10, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `xyz` argument.
-* Size 2: Columns `a`, `b`.
+* Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(NULL, letters[1:3], c(2, 2, 3),
+> error_incompatible_size(NULL, letters[1:3], c(2, 2, 3),
 + "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
-* Size 2: Columns `a`, `b`.
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
+* Size 2: Columns `a` and `b`.
 * Size 3: Column `c`.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
+> error_incompatible_size(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `uvw` argument.
 * Size 3: Column at position 3.
-* Size 4: Columns at positions 1, 2.
+* Size 4: Columns at positions 1 and 2.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
+> error_incompatible_size(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
 * Size 10: Requested with `xyz` argument.
-* Size 2: Columns at positions 1, 2.
+* Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
-> error_inconsistent_cols(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
-<error/tibble_error_inconsistent_cols>
-Tibble columns must have consistent sizes.
-* Size 2: Columns at positions 1, 2.
+> error_incompatible_size(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
+<error/tibble_error_incompatible_size>
+Tibble columns must have compatible sizes.
+* Size 2: Columns at positions 1 and 2.
 * Size 3: Column at position 3.
 i Only values of size one are recycled.
 
-> error_inconsistent_new_cols(10, data.frame(a = 1:2))
-<error/tibble_error_inconsistent_new_cols>
-New columns in `add_column()` must be consistent with `.data`.
-x New column contributes 2 rows.
-i `.data` has 10 rows.
 
-> error_inconsistent_new_cols(1, data.frame(a = 1:3, b = 2:4))
-<error/tibble_error_inconsistent_new_cols>
-New columns in `add_column()` must be consistent with `.data`.
-x New columns contribute 3 rows.
-i `.data` has 1 row.
-
-> error_both_before_after()
-<error/tibble_error_both_before_after>
-Can't specify both `.before` and `.after`.
-
-> error_already_has_rownames()
-<error/tibble_error_already_has_rownames>
-`df` must be a data frame without row names in `column_to_rownames()`.
-
-> error_glimpse_infinite_width()
-<error/tibble_error_glimpse_infinite_width>
-`glimpse()` requires a finite value for the `width` argument.
+tribble
+=======
 
 > error_tribble_needs_columns()
 <error/tibble_error_tribble_needs_columns>
-`tribble()` needs to specify at least one column using the `~name` syntax.
+Must specify at least one column using the `~name` syntax.
 
 > error_tribble_lhs_column_syntax(quote(lhs))
 <error/tibble_error_tribble_lhs_column_syntax>
-All column specifications in `tribble()` must use the `~name` syntax.
+All column specifications must use the `~name` syntax.
 x Found `lhs` on the left-hand side of `~`.
 
 > error_tribble_rhs_column_syntax(quote(a + b))
 <error/tibble_error_tribble_rhs_column_syntax>
-All column specifications in `tribble()` must use the `~name` or `~"name"` syntax.
+All column specifications must use the `~name` or `~"name"` syntax.
 x Found `a + b` on the right-hand side of `~`.
 
 > error_tribble_non_rectangular(5, 17)
 <error/tibble_error_tribble_non_rectangular>
-`tribble()` must be used with rectangular data.
+Data must be rectangular.
 * Found 5 columns.
 * Found 17 cells.
 i 17 is not an integer multiple of 5.
 
 > error_frame_matrix_list(2:4)
 <error/tibble_error_frame_matrix_list>
-All values in `frame_matrix()` must be atomic.
-x Found list-valued elements at positions 2, 3, 4.
-
-> error_tibble_row_size_one(3, "foo", 7)
-<error/tibble_error_tibble_row_size_one>
-All vectors in `tibble_row()` must be size one, use `list()` to wrap.
-x Column `foo` is of size 7.
-
-> error_as_tibble_row_bare(new_environment())
-<error/tibble_error_as_tibble_row_bare>
-`x` must be a bare vector in `as_tibble_row()`, not environment.
-
-> error_as_tibble_row_size_one(3, "foo", 7)
-<error/tibble_error_as_tibble_row_size_one>
-All elements must be size one, use `list()` to wrap.
-x Element `foo` is of size 7.
-
-> error_new_tibble_must_be_list()
-<error/tibble_error_new_tibble_must_be_list>
-Must pass a list as `x` argument to `new_tibble()`.
-
-> error_new_tibble_needs_nrow()
-<error/tibble_error_new_tibble_needs_nrow>
-Must pass a scalar integer as `nrow` argument to `new_tibble()`.
-
-> error_subset_matrix_must_be_vector(quote(is.na(x)), quote(new_environment()))
-<error/tibble_error_subset_matrix_must_be_vector>
-The subscript `is.na(x)` is a matrix, the data `new_environment()` must be a vector of size 1.
-
-> error_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3))
-<error/tibble_error_subset_matrix_must_be_scalar>
-The subscript `is.na(x)` is a matrix, the data `1:3` must have size 1.
-
-> error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
-<error/tibble_error_subset_matrix_must_be_logical>
-The subscript `is.na(x) + 1` is a matrix, it must be of type logical.
-
-> error_subset_matrix_must_have_same_dimensions(quote(t(is.na(x))))
-<error/tibble_error_subset_matrix_must_have_same_dimensions>
-The subscript `t(is.na(x))` is a matrix, it must have the same dimensions as the input.
+All values must be atomic.
+x Found list-valued elements at positions 2, 3, and 4.
 

@@ -72,14 +72,24 @@ problems <- function(header, ..., .problem = " problem(s)") {
 
 commas <- function(problems) {
   MAX_BULLETS <- 6L
-  if (length(problems) >= MAX_BULLETS) {
-    n_more <- length(problems) - MAX_BULLETS + 1L
-    problems[[MAX_BULLETS]] <-
-      pluralise_n(paste0(pre_dots("(and "), n_more, " more)"), n_more)
-    length(problems) <- MAX_BULLETS
+
+  n <- length(problems)
+  if (n <= 1) {
+    return(problems)
+  } else if (n == 2) {
+    return(paste(problems, collapse = " and "))
   }
 
-  paste0(problems, collapse = ", ")
+  if (n >= MAX_BULLETS) {
+    n_more <- length(problems) - MAX_BULLETS + 1L
+    problems[[MAX_BULLETS]] <- paste0(n_more, " more")
+    length(problems) <- MAX_BULLETS
+    n <- MAX_BULLETS
+  }
+
+  problems[[n]] <- paste0("and ", problems[[n]])
+
+  paste(problems, collapse = ", ")
 }
 
 ensure_full_stop <- function(x) {

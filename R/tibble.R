@@ -101,7 +101,7 @@
 #' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 #'
 #' # Tibbles can contain columns that are tibbles or matrices
-#' # if the number of rows is consistent. Unnamed tibbled are
+#' # if the number of rows is compatible. Unnamed tibbled are
 #' # spliced, i.e. the inner columns are inserted into the
 #' # tibble under construction.
 #' tibble(
@@ -123,7 +123,7 @@
 #' )
 #'
 #' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with inconsistent number of rows:
+#' # with incompatible number of rows:
 #' try(tibble(y = strptime("2000/01/01", "%x")))
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
@@ -309,7 +309,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_inconsistent_cols(n, name, size, "Existing data"))
+  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
 }
 
 # Errors ------------------------------------------------------------------
@@ -322,12 +322,12 @@ error_tibble_row_size_one <- function(j, name, size) {
   }
 
   tibble_error(bullets(
-    "All vectors in `tibble_row()` must be size one, use `list()` to wrap.",
+    "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 
-error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
+error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -349,7 +349,7 @@ error_inconsistent_cols <- function(.rows, vars, vars_len, rows_source) {
   problems <- set_default_name(problems, "")
 
   tibble_error(problems(
-    "Tibble columns must have consistent sizes:",
+    "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,
     i = "Only values of size one are recycled"

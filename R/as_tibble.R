@@ -120,7 +120,7 @@ compat_name_repair <- function(.name_repair, validate) {
   if (!has_length(.name_repair, 1)) {
     deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   } else if (.name_repair != name_repair) {
-    warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
+    warn("`.name_repair` takes precedence over the deprecated `validate` argument argument in `as_tibble()`.")
     return(.name_repair)
   }
 
@@ -133,7 +133,7 @@ check_valid_cols <- function(x, pos = NULL) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    cnd_signal(error_column_must_be_vector(names_x[is_xd], pos[is_xd], classes))
+    cnd_signal(error_column_scalar_type(names_x[is_xd], pos[is_xd], classes))
   }
 
   # 657
@@ -161,7 +161,7 @@ recycle_columns <- function(x, .rows, lengths) {
   if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
-    cnd_signal(error_inconsistent_cols(.rows, names(x), lengths, "Requested with `.rows` argument"))
+    cnd_signal(error_incompatible_size(.rows, names(x), lengths, "Requested with `.rows` argument"))
   }
 
   if (nrow != 1L) {
@@ -336,7 +336,7 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_column_must_be_vector <- function(names, positions, classes) {
+error_column_scalar_type <- function(names, positions, classes) {
   tibble_error(
     problems(
       "All columns in a tibble must be vectors:",

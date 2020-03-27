@@ -625,7 +625,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
     },
 
     vctrs_error = function(cnd) {
-      cnd_signal(error_incompatible_new_data_type(x, value, j, value_arg, cnd_message(cnd)))
+      cnd_signal(error_assign_incompatible_type(x, value, j, value_arg, cnd_message(cnd)))
     }
   )
 
@@ -657,7 +657,7 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
     },
 
     vctrs_error_recycle_incompatible_size = function(cnd) {
-      cnd_signal(error_inconsistent_new_data_size(nrow, value, j, i_arg, value_arg))
+      cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
     }
   )
 
@@ -746,25 +746,25 @@ error_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_error(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
+error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
   } else {
     target <- paste0("row subscript ", tick(as_label(i_arg)))
-    existing <- pluralise_count("Subscript has ", nrow, " row(s)")
+    existing <- pluralise_count("", nrow, " row(s) must be assigned")
   }
 
-  new <- paste0(pluralise_count("contributes ", vec_size(value[[j]]), " row(s)"))
+  new <- paste0(pluralise_count("has ", vec_size(value[[j]]), " row(s)"))
   if (length(value) != 1) {
-    new <- paste0("Element ", j, " of new data ", new)
+    new <- paste0("Element ", j, " of assigned data ", new)
   } else {
-    new <- paste0("New data ", new)
+    new <- paste0("Assigned data ", new)
   }
 
   tibble_error(
     bullets(
-      paste0("New data ", tick(as_label(value_arg)), " must be consistent with ", target, ":"),
+      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
       i = "Only vectors of size 1 are recycled"
@@ -775,14 +775,14 @@ error_inconsistent_new_data_size <- function(nrow, value, j, i_arg, value_arg) {
   )
 }
 
-error_incompatible_new_data_type <- function(x, value, j, value_arg, message) {
+error_assign_incompatible_type <- function(x, value, j, value_arg, message) {
   name <- names(x)[[j]]
 
   tibble_error(
     bullets(
       paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      paste0("The error occurred for column ", tick(name)),
-      message
+      i = paste0("Error occurred for column ", tick(name)),
+      x = message
     ),
     expected = x[[j]],
     actual = value[[j]],

@@ -605,7 +605,7 @@ test_that("$<- throws different warning if attempting a partial initialization (
       "Unknown or uninitialised column: `z`",
       fixed = TRUE
     ),
-    error_inconsistent_new_data_size(3, list(1:2), 1, NULL, quote(`<dbl>`))
+    error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(`<dbl>`))
   )
 })
 
@@ -625,12 +625,12 @@ test_that("$<- recycles only values of length one", {
 
     expect_tibble_error(
       df$w <- 8:9,
-      error_inconsistent_new_data_size(3, list(8:9), 1, NULL, quote(8:9))
+      error_assign_incompatible_size(3, list(8:9), 1, NULL, quote(8:9))
     )
 
     expect_tibble_error(
       df$a <- character(),
-      error_inconsistent_new_data_size(3, list(character()), 1, NULL, quote(character()))
+      error_assign_incompatible_size(3, list(character()), 1, NULL, quote(character()))
     )
   })
 })

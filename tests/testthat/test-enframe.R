@@ -103,3 +103,9 @@ test_that("can deframe three-column data frame with warning", {
     fixed = TRUE
   )
 })
+
+verify_output("enframe.txt", {
+  enframe(1:3, value = NULL)
+
+  enframe(Titanic)
+})

@@ -16,7 +16,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
   # FIXME: use size argument in vctrs >= 0.3.0
 
   if (!vec_is(value)) {
-    cnd_signal(error_subset_matrix_must_be_vector(j_arg, value_arg))
+    cnd_signal(error_subset_matrix_scalar_type(j_arg, value_arg))
   }
 
   if (vec_size(value) != 1) {
@@ -34,7 +34,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
     },
 
     vctrs_error_incompatible_type = function(cnd) {
-      cnd_signal(error_incompatible_new_data_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
+      cnd_signal(error_assign_incompatible_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
     }
   )
 
@@ -67,21 +67,21 @@ cells_to_col_idx <- function(cells) {
 
 error_subset_matrix_must_be_logical <- function(j_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must be of type logical."
   ))
 }
 
 error_subset_matrix_must_have_same_dimensions <- function(j_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must have the same dimensions as the input."
   ))
 }
 
-error_subset_matrix_must_be_vector <- function(j_arg, value_arg) {
+error_subset_matrix_scalar_type <- function(j_arg, value_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must be a vector of size 1."
   ))
@@ -89,7 +89,7 @@ error_subset_matrix_must_be_vector <- function(j_arg, value_arg) {
 
 error_subset_matrix_must_be_scalar <- function(j_arg, value_arg) {
   tibble_error(paste0(
-    "The subscript ", tick(as_label(j_arg)),
+    "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must have size 1."
   ))

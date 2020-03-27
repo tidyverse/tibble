@@ -18,11 +18,11 @@ test_that("NULL is ignored (#580)", {
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", 1, "environment")
+    error_column_scalar_type("a", 1, "environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", 1, "name")
+    error_column_scalar_type("a", 1, "name")
   )
 })
 
@@ -31,7 +31,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(10, "y", 2, "Existing data")
+    error_incompatible_size(10, "y", 2, "Existing data")
   )
 })
 
@@ -114,7 +114,7 @@ test_that("tibble aliases", {
 test_that("NULL isn't a valid column", {
   expect_tibble_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", 1, "NULL")
+    error_column_scalar_type("a", 1, "NULL")
   )
 })
 
@@ -242,4 +242,10 @@ test_that("is_tibble", {
 test_that("is_tibble", {
   scoped_lifecycle_silence()
   expect_identical(is.tibble(iris), is_tibble(iris))
+})
+
+verify_output("tibble.txt", {
+  tibble(a = 1, a = 1)
+  tibble(a = new_environment())
+  tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
 })

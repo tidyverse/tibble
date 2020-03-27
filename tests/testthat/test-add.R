@@ -43,12 +43,12 @@ test_that("adds empty row if no arguments", {
 test_that("error if adding row with unknown variables", {
   expect_tibble_error(
     add_row(tibble(a = 3), xxyzy = "err"),
-    error_inconsistent_new_rows("xxyzy")
+    error_incompatible_new_rows("xxyzy")
   )
 
   expect_tibble_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    error_inconsistent_new_rows(c("b", "c"))
+    error_incompatible_new_rows(c("b", "c"))
   )
 })
 
@@ -190,7 +190,7 @@ test_that("error if adding existing columns", {
 test_that("error if adding wrong number of rows with add_column()", {
   expect_tibble_error(
     add_column(tibble(a = 3), b = 4:5),
-    error_inconsistent_new_cols(1, data.frame(b = 4:5))
+    error_incompatible_new_cols(1, data.frame(b = 4:5))
   )
 })
 
@@ -279,4 +279,18 @@ test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = 0)))
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = ncol(iris))))
   expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
+})
+
+verify_output("add.txt", {
+  add_row(tibble(), a = 1)
+  add_row(tibble(), a = 1, b = 2)
+  add_row(tibble(), !!!set_names(letters))
+  add_row(dplyr::group_by(tibble(a = 1), a))
+  add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
+
+  add_column(tibble(a = 1), a = 1)
+  add_column(tibble(a = 1, b = 2), a = 1, b = 2)
+  add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
+  add_column(tibble(a = 2:3), b = 4:6)
+  add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
 })
