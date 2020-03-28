@@ -165,7 +165,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
     header <- paste0(
       justify(
         paste0(names2(named_header), ":"),
-        right = FALSE, space = "\u00a0"
+        right = FALSE, space = NBSP
       ),
       # We add a space after the NBSP inserted by justify()
       # so that wrapping occurs at the right location for very narrow outputs
