@@ -55,13 +55,13 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     if (length(x) >= 1) {
       deprecate_soft("2.0.0", "tibble::new_tibble(nrow = 'can\\'t be missing')",
         details = cnd$message)
-      nrow <- NROW(x[[1]])
+      nrow <- vec_size(x[[1]])
     } else {
       cnd_signal(cnd)
     }
   }
   #' This should be an integer of length 1,
-  #' and every element of the list `x` should have [NROW()]
+  #' and every element of the list `x` should have [vctrs::vec_size()]
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
@@ -97,8 +97,8 @@ validate_tibble <- function(x) {
   check_valid_cols(unclass(x))
 
   #' It also makes sure that all columns have the same length,
-  #' and that [NROW()] is consistent with the data.
-  validate_nrow(names(x), col_lengths(x), NROW(x))
+  #' and that [vctrs::vec_size()] is consistent with the data.
+  validate_nrow(names(x), col_lengths(x), vec_size(x))
 
   x
 }

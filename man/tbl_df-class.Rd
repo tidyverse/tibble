@@ -27,7 +27,7 @@ Objects of class \code{tbl_df} have:
 \itemize{
 \item A \code{class} attribute of \code{c("tbl_df", "tbl", "data.frame")}.
 \item A base type of \code{"list"}, where each element of the list has the same
-\code{\link[=NROW]{NROW()}}.
+\code{\link[vctrs:vec_size]{vctrs::vec_size()}}.
 \item A \code{names} attribute that is a character vector the same length as the
 underlying list.
 \item A \code{row.names} attribute, included for compatibility with \link{data.frame}.

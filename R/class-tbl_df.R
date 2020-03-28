@@ -25,7 +25,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' Objects of class `tbl_df` have:
 #' * A `class` attribute of `c("tbl_df", "tbl", "data.frame")`.
 #' * A base type of `"list"`, where each element of the list has the same
-#'   [NROW()].
+#'   [vctrs::vec_size()].
 #' * A `names` attribute that is a character vector the same length as the
 #'   underlying list.
 #' * A `row.names` attribute, included for compatibility with [data.frame].
