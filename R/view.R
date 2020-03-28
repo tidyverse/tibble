@@ -17,11 +17,11 @@ view <- function(x, title = NULL, ...) {
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
-    title <- expr_deparse(enexpr(x))
+    title <- expr_deparse(substitute(x))
   }
 
   view_fun <- get("View", envir = as.environment("package:utils"))
-  eval_tidy(view_fun({{x}}, {{title}}))
+  eval_tidy(quo(view_fun({{x}}, !!title)))
 
   invisible(x)
 }
