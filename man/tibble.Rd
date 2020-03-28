@@ -122,7 +122,7 @@ tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
 tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 
 # Tibbles can contain columns that are tibbles or matrices
-# if the number of rows is consistent. Unnamed tibbled are
+# if the number of rows is compatible. Unnamed tibbled are
 # spliced, i.e. the inner columns are inserted into the
 # tibble under construction.
 tibble(
