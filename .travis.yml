@@ -54,6 +54,10 @@ matrix:
     os: osx
   - r: 3.5
   - r: 3.4
+  allow_failures:
+  - r: devel
+    env:
+    - DEV_VERSIONS=TRUE
   fast_finish: true
 
 #env
