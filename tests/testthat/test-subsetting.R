@@ -486,6 +486,32 @@ test_that("[<-.tbl_df supports adding new rows and columns with [i, j] (#651)", 
   expect_false(has_rownames(df))
 })
 
+test_that("[<-.tbl_df supports negative subsetting", {
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[2:3, 2:3] <- 0:-1
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[-1, 2:3] <- 0:-1
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[2:3, -1] <- 0:-1
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[2:3, -1] <- list(0:-1, 0:-1)
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[-1, -1] <- 0:-1
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+
+  df <- tibble(x = 1:3, y = x, z = y)
+  df[-1, -1] <- list(0:-1, 0:-1)
+  expect_equal(df, tibble(x = 1:3, y = 1:-1, z = 1:-1))
+})
+
 test_that("[<-.tbl_df supports adding duplicate columns", {
   df <- tibble(x = 1:2)
   df[2] <- tibble(x = 3:4)

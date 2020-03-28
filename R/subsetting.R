@@ -476,6 +476,8 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     new <- which(i > nr)
     i_new <- i[new]
     i[new] <- NA
+
+    # Only update existing, caller knows how to deal with OOB
     i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(i_new, nr)) {
@@ -518,14 +520,17 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
 
-    new <- which(abs(j) > ncol(x))
+    new <- which(j > ncol(x))
     j_new <- j[new]
+    j[new] <- NA
+
+    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
 
     if (!is_tight_sequence_at_end(j_new, ncol(x))) {
       cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
     }
 
-    j <- vectbl_as_col_location(j, ncol(x) + length(j), j_arg = j_arg, assign = TRUE)
+    j[new] <- j_new
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
