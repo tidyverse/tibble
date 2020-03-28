@@ -68,7 +68,7 @@ See examples.
 tibble_row() constructs a data frame that is guaranteed to occupy one row.
 Vector columns are required to have size one, non-vector columns are wrapped
 in a list." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,7 +95,7 @@ in a list." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -112,7 +112,7 @@ in a list." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -133,9 +133,6 @@ in a list." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -243,9 +240,11 @@ in a list.</p>
 A set of name-value pairs. These arguments are
 processed with <code><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
 unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
-<p>Arguments are evaluated sequentially, however the .data pronoun is not
-available to prevent masking usage in a higher level function, like
-<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>.</p></td>
+<p>Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the .data
+pronoun.
+An existing <code>.data</code> pronoun, provided e.g. inside <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>,
+is not available.</p></td>
     </tr>
     <tr>
       <th>.rows</th>
@@ -378,7 +377,7 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
 <span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
-<span class='co'># if the number of rows is consistent. Unnamed tibbled are</span>
+<span class='co'># if the number of rows is compatible. Unnamed tibbled are</span>
 <span class='co'># spliced, i.e. the inner columns are inserted into the</span>
 <span class='co'># tibble under construction.</span>
 <span class='fu'>tibble</span>(
@@ -410,13 +409,14 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt; 4     4     0     0     0     1           0.516           -0.122 
 #&gt; # … with 2 more variables: [,"Petal.Length"] &lt;dbl&gt;, [,"Petal.Width"] &lt;dbl&gt;</div><div class='input'>
 <span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
-<span class='co'># with inconsistent number of rows:</span>
+<span class='co'># with incompatible number of rows:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 1
 #&gt;   y                  
 #&gt;   &lt;dttm&gt;             
-#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent sizes, only values of size one are recycled:
-#&gt; * Size 3: Existing data
-#&gt; * Size 4: Column `b`</div><div class='input'>
+#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have compatible sizes.
+#&gt; * Size 3: Existing data.
+#&gt; * Size 4: Column `b`.
+#&gt; ℹ Only values of size one are recycled.</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
 <span class='fu'>tibble</span>(<span class='kw'>.rows</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 0</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.rows</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
 #&gt;   .rows
@@ -452,15 +452,10 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt;   &lt;dbl&gt; &lt;list&gt;
 #&gt; 1     1 &lt;lm&gt;  </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

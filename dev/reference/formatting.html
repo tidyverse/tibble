@@ -59,7 +59,7 @@ whether a variable is, e.g., &amp;lt;chr&amp;gt; or &amp;lt;fct&amp;gt; (charact
 Printing can be tweaked for a one-off call by calling print() explicitly
 and setting arguments like n and width. More persistent control is
 available by setting the options described below." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -86,7 +86,7 @@ available by setting the options described below." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -103,7 +103,7 @@ available by setting the options described below." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -124,9 +124,6 @@ available by setting the options described below." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -251,8 +248,9 @@ will print information about at most <code>tibble.max_extra_cols</code> extra co
     
 
 
-<p>Options used by the tibble and pillar packages to format and print <code>tbl_df</code>
-objects. Used by the formatting workhorse <code>trunc_mat()</code> and, therefore,
+<p>The following options are used by the tibble and pillar packages
+to format and print <code>tbl_df</code> objects.
+Used by the formatting workhorse <code>trunc_mat()</code> and, therefore,
 indirectly, by <code>print.tbl()</code>.</p><ul>
 <li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows printed.
 Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
@@ -554,14 +552,10 @@ titles.</p></li>
 #&gt; 10 2013-01-01 06:00:00
 #&gt; # … with 336,766 more rows</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#package-options">Package options</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

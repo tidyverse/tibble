@@ -48,10 +48,9 @@
 
 
 <meta property="og:title" content="Add columns to a data frame — add_column" />
-<meta property="og:description" content="
-This is a convenient way to add one or more columns to an existing data
+<meta property="og:description" content="This is a convenient way to add one or more columns to an existing data
 frame." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +77,7 @@ frame." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,7 +94,7 @@ frame." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -116,9 +115,6 @@ frame." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -184,12 +180,17 @@ frame." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a></p>
-<p>This is a convenient way to add one or more columns to an existing data
+    <p>This is a convenient way to add one or more columns to an existing data
 frame.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_column</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>add_column</span>(
+  <span class='no'>.data</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,28 +203,32 @@ frame.</p>
       <th>...</th>
       <td><p>&lt;<code><a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic-dots</a></code>&gt;
 Name-value pairs, passed on to <code><a href='tibble.html'>tibble()</a></code>. All values must have
-one element for each row in the data frame, or be of length 1.
-These arguments are passed on to <code><a href='tibble.html'>tibble()</a></code>, and therefore also support
-unquote via <code>!!</code> and unquote-splice via <code>!!!</code>. However, unlike in
-<span class="pkg">dplyr</span> verbs, columns in <code>.data</code> are not available for the
-expressions. Use <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> if you need to add a column based on
-existing data.</p></td>
+the same size of <code>.data</code> or size 1.</p></td>
     </tr>
     <tr>
       <th>.before, .after</th>
       <td><p>One-based column index or column name where to add the
 new columns, default: after last column.</p></td>
     </tr>
+    <tr>
+      <th>.name_repair</th>
+      <td><p>Treatment of problematic column names:</p><ul>
+<li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
+<li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
+<li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
+<code>unique</code>,</p></li>
+<li><p><code>"universal"</code>: Make the names <code>unique</code> and syntactic</p></li>
+<li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
+for names in the style of base R).</p></li>
+<li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
+</ul>
+
+<p>This argument is passed on as <code>repair</code> to <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
+See there for more details on these terms and the strategies used
+to enforce them.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
-
-    
-
-<p>It is unclear we should have an <code>add_column()</code> function.
-<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> just added the arguments <code>.before</code> and <code>.after</code>.
-See <a href='https://github.com/tidyverse/dplyr/pull/4774'>https://github.com/tidyverse/dplyr/pull/4774</a> and
-<a href='https://github.com/tidyverse/dplyr/issues/2047'>https://github.com/tidyverse/dplyr/issues/2047</a> for details.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other addition: 
@@ -245,23 +250,17 @@ See <a href='https://github.com/tidyverse/dplyr/pull/4774'>https://github.com/ti
 #&gt; 2     2     0     2
 #&gt; 3     3     1     1</div><div class='input'>
 <span class='co'># You can't overwrite existing columns</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; Error : Can't add duplicate columns with `add_column()`:
-#&gt; * Column `x` already exists in `.data`.</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'>
 <span class='co'># You can't create new observations</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>))</div><div class='output co'>#&gt; Error : New columns in `add_column()` must be consistent with `.data`:
-#&gt; * `.data` has 3 rows
-#&gt; * New column contributes 5 rows</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>add_column</span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>))</div><div class='output co'>#&gt; Error : New columns must be compatible with `.data`.
+#&gt; ✖ New column has 5 rows.
+#&gt; ℹ `.data` has 3 rows.</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#life-cycle">Life cycle</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

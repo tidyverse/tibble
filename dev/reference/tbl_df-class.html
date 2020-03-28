@@ -61,7 +61,7 @@ The general ethos is that tibbles are lazy and surly: they do less and
 complain more than base data.frames. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,7 +88,7 @@ that is more expressive and robust." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -105,7 +105,7 @@ that is more expressive and robust." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -126,9 +126,6 @@ that is more expressive and robust." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -219,7 +216,7 @@ that is more expressive and robust.</p>
 <p>Objects of class <code>tbl_df</code> have:</p><ul>
 <li><p>A <code>class</code> attribute of <code><a href='https://rdrr.io/r/base/c.html'>c("tbl_df", "tbl", "data.frame")</a></code>.</p></li>
 <li><p>A base type of <code>"list"</code>, where each element of the list has the same
-<code><a href='https://rdrr.io/r/base/nrow.html'>NROW()</a></code>.</p></li>
+<code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code>.</p></li>
 <li><p>A <code>names</code> attribute that is a character vector the same length as the
 underlying list.</p></li>
 <li><p>A <code>row.names</code> attribute, included for compatibility with <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>.
@@ -260,14 +257,10 @@ tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
 <code><a href='glimpse.html'>glimpse()</a></code></p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#properties-of-tbl-df">Properties of <code>tbl_df</code></a></li>
-      <li><a href="#behavior-of-tbl-df">Behavior of <code>tbl_df</code></a></li>
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

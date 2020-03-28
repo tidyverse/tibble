@@ -53,7 +53,7 @@ lst() constructs a list, similar to base::list(), but with some of the
 same features as tibble(). lst() builds components sequentially. When
 defining a component, you can refer to components created earlier in the
 call. lst() also generates missing names automatically." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +80,7 @@ call. lst() also generates missing names automatically." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -97,7 +97,7 @@ call. lst() also generates missing names automatically." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -118,9 +118,6 @@ call. lst() also generates missing names automatically." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -204,9 +201,11 @@ call. <code>lst()</code> also generates missing names automatically.</p>
 A set of name-value pairs. These arguments are
 processed with <code><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
 unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
-<p>Arguments are evaluated sequentially, however the .data pronoun is not
-available to prevent masking usage in a higher level function, like
-<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>.</p></td>
+<p>Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the .data
+pronoun.
+An existing <code>.data</code> pronoun, provided e.g. inside <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>,
+is not available.</p></td>
     </tr>
     </table>
 
@@ -276,15 +275,10 @@ Consider using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlan
 #&gt; [1] 1 2
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#life-cycle">Life cycle</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

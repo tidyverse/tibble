@@ -50,9 +50,11 @@
 <meta property="og:title" content="View an object — view" />
 <meta property="og:description" content="
 Calls utils::View() on the input and returns it, invisibly.
-The RStudio IDE overrides utils::View(), this is picked up
-correctly." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+If the input is not a data frame, it is processed using a variant of
+as.data.frame(head(x, n)).
+A message is printed if the number of rows exceeds n.
+This function has no effect in noninteractive sessions." />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,7 +81,7 @@ correctly." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -96,7 +98,7 @@ correctly." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -117,9 +119,6 @@ correctly." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -187,11 +186,13 @@ correctly." />
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
 <p>Calls <code><a href='https://rdrr.io/r/utils/View.html'>utils::View()</a></code> on the input and returns it, invisibly.
-The RStudio IDE overrides <code><a href='https://rdrr.io/r/utils/View.html'>utils::View()</a></code>, this is picked up
-correctly.</p>
+If the input is not a data frame, it is processed using a variant of
+<code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame(head(x, n))</a></code>.
+A message is printed if the number of rows exceeds <code>n</code>.
+This function has no effect in non<a href='https://rdrr.io/r/base/interactive.html'>interactive</a> sessions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>view</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>view</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,18 +208,25 @@ the deparsed expression is used.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Unused, for extensibility.</p></td>
+      <td><p>Unused, must be empty.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Maximum number of rows to display. Only used if <code>x</code> is not a
+data frame.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The RStudio IDE overrides <code><a href='https://rdrr.io/r/utils/View.html'>utils::View()</a></code>, this is picked up
+correctly.</p>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

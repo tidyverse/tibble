@@ -49,12 +49,16 @@
 
 <meta property="og:title" content="Get a glimpse of your data — glimpse" />
 <meta property="og:description" content="
-This is like a transposed version of print(): columns run down the page,
-and data runs across. This makes it possible to see every column in
-a data frame. It's a little like str() applied to a data frame
-but it tries to show you as much data as possible. (And it always shows
-the underlying data, even when applied to a remote data source.)" />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+glimpse() is like a transposed version of print():
+columns run down the page, and data runs across.
+This makes it possible to see every column in a data frame.
+It's a little like str() applied to a data frame
+but it tries to show you as much data as possible.
+(And it always shows the underlying data, even when applied
+to a remote data source.)
+This generic will be moved to pillar, and reexported from there
+as soon as it becomes available." />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -81,7 +85,7 @@ the underlying data, even when applied to a remote data source.)" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -98,7 +102,7 @@ the underlying data, even when applied to a remote data source.)" />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9014</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.99.99.9015</span>
         </div>
       </div>
     </div>
@@ -119,9 +123,6 @@ the underlying data, even when applied to a remote data source.)" />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/types.html">Data types</a>
-    </li>
-    <li>
-      <a href="../articles/extending.html">Extending tibble</a>
     </li>
     <li>
       <a href="../articles/invariants.html">Invariants</a>
@@ -188,11 +189,15 @@ the underlying data, even when applied to a remote data source.)" />
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
-<p>This is like a transposed version of <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>: columns run down the page,
-and data runs across. This makes it possible to see every column in
-a data frame. It's a little like <code><a href='https://rdrr.io/r/utils/str.html'>str()</a></code> applied to a data frame
-but it tries to show you as much data as possible. (And it always shows
-the underlying data, even when applied to a remote data source.)</p>
+<p><code>glimpse()</code> is like a transposed version of <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>:
+columns run down the page, and data runs across.
+This makes it possible to see every column in a data frame.
+It's a little like <code><a href='https://rdrr.io/r/utils/str.html'>str()</a></code> applied to a data frame
+but it tries to show you as much data as possible.
+(And it always shows the underlying data, even when applied
+to a remote data source.)</p>
+<p>This generic will be moved to <span class="pkg">pillar</span>, and reexported from there
+as soon as it becomes available.</p>
     </div>
 
     <pre class="usage"><span class='fu'>glimpse</span>(<span class='no'>x</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
@@ -264,15 +269,10 @@ used within a data pipe line.</p>
 #&gt; $ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, …
 #&gt; $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 …</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#s-methods">S3 methods</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
