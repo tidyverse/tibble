@@ -57,7 +57,7 @@ jobs:
   allow_failures:
   - r: devel
     env:
-    - DEV_VERSIONS=TRUE
+    - DEV_VERSIONS=true
   fast_finish: true
 
 #env
