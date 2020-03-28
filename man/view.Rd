@@ -12,7 +12,7 @@ view(x, title = NULL, ...)
 \item{title}{The title to use for the display, by default
 the deparsed expression is used.}
 
-\item{...}{Unused, for extensibility.}
+\item{...}{Unused, must be empty.}
 }
 \description{
 \lifecycle{experimental}

@@ -10,10 +10,12 @@
 #' @param x The object to display.
 #' @param title The title to use for the display, by default
 #'   the deparsed expression is used.
-#' @param ... Unused, for extensibility.
+#' @param ... Unused, must be empty.
 #'
 #' @export
 view <- function(x, title = NULL, ...) {
+  check_dots_empty()
+
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
