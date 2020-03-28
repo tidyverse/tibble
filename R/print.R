@@ -165,7 +165,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
     header <- paste0(
       justify(
         paste0(names2(named_header), ":"),
-        right = FALSE, space = "\u00a0"
+        right = FALSE, space = NBSP
       ),
       # We add a space after the NBSP inserted by justify()
       # so that wrapping occurs at the right location for very narrow outputs
@@ -177,8 +177,13 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   comment <- format_comment(header, width = width)
   squeezed <- pillar::squeeze(x$mcf, width = width)
   mcf <- format_body(squeezed)
-  footer <- format_comment(pre_dots(format_footer(x, squeezed)), width = width)
-  c(style_subtle(comment), mcf, style_subtle(footer))
+
+  # Splitting lines is important, otherwise subtle style may be lost
+  # if column names contain spaces.
+  footer <- pre_dots(format_footer(x, squeezed))
+  footer_comment <- split_lines(format_comment(footer, width = width))
+
+  c(style_subtle(comment), mcf, style_subtle(footer_comment))
 }
 
 # Needs to be defined in package code: r-lib/pkgload#85
@@ -278,6 +283,11 @@ justify <- function(x, right = TRUE, space = " ") {
     paste0(x, spaces)
   }
 }
+
+split_lines <- function(x) {
+  unlist(strsplit(x, "\n", fixed = TRUE))
+}
+
 
 #' knit_print method for trunc mat
 #' @keywords internal

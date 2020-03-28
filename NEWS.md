@@ -269,6 +269,8 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 
 - `print.tbl_df()` with a negative value for `n` behaves as if `n` was omitted (#371).
 
+- Fixed output for extra column names that contain spaces.
+
 
 
 ## Internal
