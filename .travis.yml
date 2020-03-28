@@ -40,7 +40,7 @@ stages:
   if: branch = master
 
 #jobs
-matrix:
+jobs:
   include:
   - r: devel
     env:
