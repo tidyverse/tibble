@@ -285,7 +285,7 @@ justify <- function(x, right = TRUE, space = " ") {
 }
 
 split_lines <- function(x) {
-  vec_c(!!!strsplit(x, "\n", fixed = TRUE))
+  vec_c(!!!strsplit(x, "\n", fixed = TRUE), .ptype = character())
 }
 
 

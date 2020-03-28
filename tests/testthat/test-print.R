@@ -74,7 +74,7 @@ test_that("trunc_mat header output", {
 
 test_that("trunc_mat output matches known output", {
   skip_on_non_utf8_locale()
-  testthat::skip_if(getRversion() < "3.5")
+  testthat::skip_if(getRversion() < "3.2")
 
   verify_output("trunc_mat_full.txt", unicode = TRUE, {
     df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
