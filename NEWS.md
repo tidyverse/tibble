@@ -93,6 +93,8 @@
 
 - `tibble()` ignores NULL arguments, named or unnamed (#580).
 
+- `view()` works for remote data sources by applying the same strategy as `print()` and `glimpse()`. The maximum number of rows in this case can be specified using the new `n` argument, by default it is taken from the new `"tibble.view_max"` option (#695).
+
 
 ## Output
 

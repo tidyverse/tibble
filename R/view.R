@@ -4,6 +4,12 @@
 #' \lifecycle{experimental}
 #'
 #' Calls [utils::View()] on the input and returns it, invisibly.
+#' If the input is not a data frame, it is processed using a variant of
+#' `as.data.frame(head(x, n))`.
+#' A message is printed if the number of rows exceeds `n`.
+#' This function has no effect in non[interactive] sessions.
+#'
+#' @details
 #' The RStudio IDE overrides `utils::View()`, this is picked up
 #' correctly.
 #'
@@ -11,15 +17,28 @@
 #' @param title The title to use for the display, by default
 #'   the deparsed expression is used.
 #' @param ... Unused, must be empty.
+#' @param n Maximum number of rows to display. Only used if `x` is not a
+#'   data frame.
 #'
 #' @export
-view <- function(x, title = NULL, ...) {
+view <- function(x, title = NULL, ..., n = NULL) {
   check_dots_empty()
 
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
     title <- expr_deparse(substitute(x))
+  }
+
+  if (!is.data.frame(x)) {
+    if (is.null(n)) {
+      n <- tibble_opt("view_max")
+    }
+    x <- as.data.frame(head(x, n + 1))
+    if (nrow(x) > n) {
+      message("Showing first ", n, " rows.")
+      x <- head(x, n)
+    }
   }
 
   view_fun <- get("View", envir = as.environment("package:utils"))

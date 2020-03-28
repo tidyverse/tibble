@@ -4,7 +4,7 @@
 \alias{view}
 \title{View an object}
 \usage{
-view(x, title = NULL, ...)
+view(x, title = NULL, ..., n = NULL)
 }
 \arguments{
 \item{x}{The object to display.}
@@ -13,11 +13,20 @@ view(x, title = NULL, ...)
 the deparsed expression is used.}
 
 \item{...}{Unused, must be empty.}
+
+\item{n}{Maximum number of rows to display. Only used if \code{x} is not a
+data frame.}
 }
 \description{
 \lifecycle{experimental}
 
 Calls \code{\link[utils:View]{utils::View()}} on the input and returns it, invisibly.
+If the input is not a data frame, it is processed using a variant of
+\code{as.data.frame(head(x, n))}.
+A message is printed if the number of rows exceeds \code{n}.
+This function has no effect in non\link{interactive} sessions.
+}
+\details{
 The RStudio IDE overrides \code{utils::View()}, this is picked up
 correctly.
 }
