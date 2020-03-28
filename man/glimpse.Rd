@@ -21,11 +21,16 @@ used within a data pipe line.
 \description{
 \lifecycle{maturing}
 
-This is like a transposed version of \code{print()}: columns run down the page,
-and data runs across. This makes it possible to see every column in
-a data frame. It's a little like \code{\link[=str]{str()}} applied to a data frame
-but it tries to show you as much data as possible. (And it always shows
-the underlying data, even when applied to a remote data source.)
+\code{glimpse()} is like a transposed version of \code{print()}:
+columns run down the page, and data runs across.
+This makes it possible to see every column in a data frame.
+It's a little like \code{\link[=str]{str()}} applied to a data frame
+but it tries to show you as much data as possible.
+(And it always shows the underlying data, even when applied
+to a remote data source.)
+
+This generic will be moved to \pkg{pillar}, and reexported from there
+as soon as it becomes available.
 }
 \section{S3 methods}{
 

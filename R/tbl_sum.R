@@ -5,20 +5,24 @@
 #' and additional information in the other elements (such as grouping for \pkg{dplyr}).
 #' The default implementation forwards to [pillar::obj_sum()].
 #'
+#' This generic will be moved to \pkg{pillar}, and reexported from there
+#' as soon as it becomes available.
+#'
 #' @return A named character vector, describing the dimensions in the first element
 #'   and the data source in the name of the first element.
 #'
 #' @seealso [pillar::type_sum()], [pillar::is_vector_s3()]
 #' @param x Object to summarise
 #' @export
+# Can be overridden in .onLoad()
 tbl_sum <- function(x) UseMethod("tbl_sum", x)
 
-#' @export
+# If needed, exported in .onLoad() via replace_if_pillar_has()
 tbl_sum.default <- function(x) {
   c("Description" = obj_sum(x))
 }
 
-#' @export
+# If needed, exported in .onLoad() via replace_if_pillar_has()
 tbl_sum.tbl <- function(x) {
   c("A tibble" = dim_desc(x))
 }

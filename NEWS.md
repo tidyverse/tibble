@@ -54,6 +54,8 @@
 
 - Soft-deprecate `as_tibble()` without arguments (#683).
 
+- Preparing to move `glimpse()` and `tbl_sum()` to the pillar package. If your package implements these methods, please import the generics from pillar as soon as they become available there.
+
 
 ## Features
 

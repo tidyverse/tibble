@@ -19,6 +19,10 @@ which should include the dimensions and the data source in the first element,
 and additional information in the other elements (such as grouping for \pkg{dplyr}).
 The default implementation forwards to \code{\link[pillar:obj_sum]{pillar::obj_sum()}}.
 }
+\details{
+This generic will be moved to \pkg{pillar}, and reexported from there
+as soon as it becomes available.
+}
 \seealso{
 \code{\link[pillar:type_sum]{pillar::type_sum()}}, \code{\link[pillar:is_vector_s3]{pillar::is_vector_s3()}}
 }

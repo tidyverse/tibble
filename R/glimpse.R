@@ -3,11 +3,16 @@
 #' @description
 #' \lifecycle{maturing}
 #'
-#' This is like a transposed version of `print()`: columns run down the page,
-#' and data runs across. This makes it possible to see every column in
-#' a data frame. It's a little like [str()] applied to a data frame
-#' but it tries to show you as much data as possible. (And it always shows
-#' the underlying data, even when applied to a remote data source.)
+#' `glimpse()` is like a transposed version of `print()`:
+#' columns run down the page, and data runs across.
+#' This makes it possible to see every column in a data frame.
+#' It's a little like [str()] applied to a data frame
+#' but it tries to show you as much data as possible.
+#' (And it always shows the underlying data, even when applied
+#' to a remote data source.)
+#'
+#' This generic will be moved to \pkg{pillar}, and reexported from there
+#' as soon as it becomes available.
 #'
 #' @section S3 methods:
 #' `glimpse` is an S3 generic with a customised method for `tbl`s and
@@ -26,13 +31,14 @@
 #' if (requireNamespace("nycflights13", quietly = TRUE)) {
 #'   glimpse(nycflights13::flights)
 #' }
+# Can be overridden in .onLoad()
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
 }
 
-#' @export
 #' @importFrom pillar new_pillar_title
 #' @importFrom pillar new_pillar_type
+# If needed, registered in .onLoad() via replace_if_pillar_has()
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
@@ -68,11 +74,11 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   invisible(x)
 }
 
-#' @export
+# If needed, registered in .onLoad() via replace_if_pillar_has()
 glimpse.data.frame <- glimpse.tbl
 
-#' @export
 #' @importFrom utils str
+# If needed, registered in .onLoad() via replace_if_pillar_has()
 glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
   str(x, width = tibble_width(width), max.level = max.level, ...)
   invisible(x)
