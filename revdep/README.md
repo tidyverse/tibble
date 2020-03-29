@@ -20,7 +20,7 @@
 
 # Revdeps
 
-## Failed to check (21)
+## Failed to check (22)
 
 |package          |version |error |warning |note |
 |:----------------|:-------|:-----|:-------|:----|
@@ -34,6 +34,7 @@
 |ggstatsplot      |?       |      |        |     |
 |healthcareai     |2.4.0   |1     |        |     |
 |holodeck         |?       |      |        |     |
+|mcp              |?       |      |        |     |
 |obfuscatoR       |?       |      |        |     |
 |oolong           |0.3.4   |1     |        |     |
 |statsExpressions |?       |      |        |     |
@@ -46,7 +47,7 @@
 |ToxicoGx         |?       |      |        |     |
 |trialr           |0.1.3   |1     |        |     |
 
-## New problems (35)
+## New problems (34)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
@@ -67,7 +68,6 @@
 |[INDperform](problems.md#indperform)             |0.2.2   |__+2__ |        |1    |
 |[janitor](problems.md#janitor)                   |1.2.1   |__+2__ |        |     |
 |[jstor](problems.md#jstor)                       |0.3.7   |__+1__ |        |     |
-|[mcp](problems.md#mcp)                           |0.2.0   |__+1__ |        |1    |
 |[metacoder](problems.md#metacoder)               |0.3.3   |__+1__ |        |1    |
 |[micropan](problems.md#micropan)                 |2.0     |__+1__ |        |     |
 |[modeltests](problems.md#modeltests)             |0.1.0   |__+1__ |        |     |

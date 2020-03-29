@@ -294,7 +294,7 @@ Run `revdep_details(,"concurve")` for more info
     > joe <- curve_corr(x = GroupA, y = GroupB, alternative = "two.sided", method = "pearson")
     > tibble::tibble(joe[[1]])
     Error: All columns in a tibble must be vectors.
-    [31m✖[39m Column `joe[[1]]` is data.frame.
+    [31m✖[39m Column `joe[[1]]` is a `data.frame/concurve` object.
     Backtrace:
     [90m    [39m█
     [90m 1. [39m└─tibble::tibble(joe[[1]])
@@ -712,7 +712,7 @@ Run `revdep_details(,"heemod")` for more info
     +   b, .5, 1.5
     + )
     Error: All columns in a tibble must be vectors.
-    [31m✖[39m Column `dots[i]` is lazy_dots.
+    [31m✖[39m Column `dots[i]` is a `lazy_dots` object.
     Backtrace:
     [90m     [39m█
     [90m  1. [39m└─heemod::define_dsa(a, 10, 45, b, 0.5, 1.5)
@@ -725,7 +725,7 @@ Run `revdep_details(,"heemod")` for more info
     [90m  8. [39m    ├─stats::setNames(tibble::tibble(dots[i]), names(dots)[i])
     [90m  9. [39m    └─tibble::tibble(dots[i])
     [90m 10. [39m      └─tibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
-    [90m 11. [39m        └─tibble:::che
+    [90m 11. [39m        └─t
     Execution halted
     ```
 
@@ -946,58 +946,6 @@ Run `revdep_details(,"jstor")` for more info
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# mcp
-
-<details>
-
-* Version: 0.2.0
-* Source code: https://github.com/cran/mcp
-* URL: http://lindeloev.github.io/mcp/, https://github.com/lindeloev/mcp
-* BugReports: https://github.com/lindeloev/mcp/issues
-* Date/Publication: 2020-01-09 16:30:02 UTC
-* Number of recursive dependencies: 94
-
-Run `revdep_details(,"mcp")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-    ...
-      
-      [31m──[39m [31m28. Failure: Good Poisson:
-          y ~ 1, 1 + (1 | id) ~ 1 (@test-runs.R#277) [39m [31m──[39m
-      any(stringr::str_starts(attr(gg, "condition")$message, expected_error)) isn't true.
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 1696 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 28 ]
-      1. Failure: Good priors: int_1, dnorm(3, 10), -0.5 (@test-runs.R#335) 
-      2. Failure: Good priors: int_1, dnorm(3, 10), -0.5 (@test-runs.R#335) 
-      3. Failure: Good priors: dunif(-100, -90), dnorm(100, 20) T(100, 110) (@test-runs.R#335) 
-      4. Failure: Good priors: dunif(-100, -90), dnorm(100, 20) T(100, 110) (@test-runs.R#335) 
-      5. Failure: Good priors: dirichlet(1), dirichlet(1) (@test-runs.R#335) 
-      6. Failure: Good priors: dirichlet(1), dirichlet(1) (@test-runs.R#335) 
-      7. Failure: Good priors: dirichlet(3), dirichlet(2) (@test-runs.R#335) 
-      8. Failure: Good priors: dirichlet(3), dirichlet(2) (@test-runs.R#335) 
-      9. Failure: Good y:
-          y ~ 1, y ~ 1 ~ 1, rel(1) + (1 | id) ~ rel(1) + x, ~1 (@test-runs.R#277) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘bayesplot’ ‘methods’ ‘purrr’
-      All declared Imports should be used.
     ```
 
 # metacoder
@@ -1436,7 +1384,7 @@ Run `revdep_details(,"rubias")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [1] "/tmp/Rtmpp9WfwZ/mixfile"
+    [1] "/tmp/Rtmpt8oyAh/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
