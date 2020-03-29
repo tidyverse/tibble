@@ -46,7 +46,7 @@
 |ToxicoGx         |?       |      |        |     |
 |trialr           |0.1.3   |1     |        |     |
 
-## New problems (36)
+## New problems (35)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
@@ -81,7 +81,6 @@
 |[rubias](problems.md#rubias)                     |0.3.0   |__+1__ |        |2    |
 |[SanzCircos](problems.md#sanzcircos)             |0.1.0   |__+1__ |        |1    |
 |[simrel](problems.md#simrel)                     |2.0     |__+1__ |        |     |
-|[textrecipes](problems.md#textrecipes)           |0.1.0   |__+2__ |        |     |
 |[tidytransit](problems.md#tidytransit)           |0.7.0   |__+1__ |        |2    |
 |[tidytree](problems.md#tidytree)                 |0.3.2   |       |__+1__  |1    |
 |[viafr](problems.md#viafr)                       |0.1.0   |__+1__ |        |1    |

@@ -332,26 +332,26 @@ Run `revdep_details(,"convergEU")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    + 1990,   998,  1250, 332,
     + 1991,  1600,  1350, 802
     + )
     > 
     > # Country ranking according to the indicator higher is the best:
     > res <- country_ranking(myTB,timeName="years")
-    Error: `-ord_MS[, -posizTime]` can't be recycled to size 4.
-    [31m✖[39m It must be size 4 or 1, not 3.
+    Error: Assigned data `rank(unlist(ord_MS[auxMS, -posizTime]), ties.method = "min")` must be compatible with row subscript `auxMS`.
+    [31m✖[39m 1 row must be assigned.
+    [31m✖[39m Assigned data has 3 rows.
+    [34mℹ[39m Only vectors of size 1 are recycled.
     Backtrace:
-    [90m     [39m█
-    [90m  1. [39m├─convergEU::country_ranking(myTB, timeName = "years")
-    [90m  2. [39m│ ├─base::`[<-`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:94:4[39m
-    [90m  3. [39m│ └─tibble:::`[<-.tbl_df`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:94:4[39m
-    [90m  4. [39m│   └─tibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
-    [90m  5. [39m│     └─tibble:::vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
-    [90m  6. [39m│       └─tibble:::vectbl_recycle_rhs_names(names2(value), length(j), value_arg)
-    [90m  7. [39m│         ├─base::unname(vec_recycle(set_names(names), n, x_arg = as_label(value_arg)))
-    [90m  8. [39m│         └─vctrs::vec_recycle(set_names(names), n, x_arg = as_label(value_arg))
-    [90m  9. [39m└─vctrs:::stop_recycle_incompatible_size(...)
-    [90m 10. [39
+    [90m    [39m█
+    [90m 1. [39m└─convergEU::country_ranking(myTB, timeName = "years")
+    [90m 2. [39m  ├─base::`[<-`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:97:8[39m
+    [90m 3. [39m  └─tibble:::`[<-.tbl_df`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:97:8[39m
+    [90m 4. [39m    └─tibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+    [90m 5. [39m      └─tibble:::vectbl_recycle_rhs(...)
+    [90m 6. [39m        └─base::tryCatch(...)
+    [90m 7. [39m          └─base:::tryCatchList(expr, classes, parentenv, handlers)
+    [90m 8. [39m            └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    [90m 9. [39m              └─value[[3L]](cond)
     Execution halted
     ```
 
@@ -365,16 +365,16 @@ Run `revdep_details(,"convergEU")` for more info
       [90m 13. [39mvctrs::vec_as_location(i, n, arg = as_label(i_arg))
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 1703 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 25 ]
-      1. Failure: Check the average value (@test_average_clust.R#19) 
-      2. Failure: Check the average value (@test_average_clust.R#19) 
-      3. Failure: Check the average value (@test_average_clust.R#19) 
-      4. Failure: Check the average value (@test_average_clust.R#19) 
-      5. Failure: Check the average value (@test_average_clust.R#19) 
-      6. Failure: Check the average value (@test_average_clust.R#19) 
-      7. Failure: Check the average value (@test_average_clust.R#19) 
-      8. Failure: Check the average value (@test_average_clust.R#19) 
-      9. Failure: Check the average value (@test_average_clust.R#19) 
+      [ OK: 1755 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 13 ]
+      1. Error: Ranking highBest (@test_country_ranking.R#27) 
+      2. Error: Ranking lowBest (@test_country_ranking.R#53) 
+      3. Error: Simplest test on results (@test_departure_mean.R#22) 
+      4. Error: Change time name (@test_departure_mean.R#51) 
+      5. Error: Test of eurofound dataset, scrambled, further statistics. (@test_departure_mean.R#68) 
+      6. Error: Basic exceptions (@test_gamma_conv_msteps.R#46) 
+      7. Error: Basic exceptions (@test_gamma_conv_msteps.R#81) 
+      8. Error: LowBest and highBest (@test_graph_departure.R#60) 
+      9. Error: Simplest Imputation using option cut (@test_impute_dataset.R#52) 
       1. ...
       
       Error: testthat unit tests failed
@@ -461,21 +461,21 @@ Run `revdep_details(,"cvms")` for more info
     ...
       Lengths differ: 3 is not 2
       
-      [31m──[39m [31m12. Failure: model_verbose reports the correct model functions in validate() [39m
+      [31m──[39m [31m11. Failure: model_verbose reports the correct model functions in validate() [39m
       ...$NULL not equal to as.character(...).
       Lengths differ: 3 is not 2
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 1612 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 12 ]
-      1. Error: baseline() throws expected errors (@test_baseline.R#1112) 
-      2. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
-      3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
-      4. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
-      5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#948) 
-      6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
-      7. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
-      8. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
-      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
+      [ OK: 1617 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 11 ]
+      1. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
+      2. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
+      3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
+      4. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#948) 
+      5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
+      6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
+      7. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
+      8. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
+      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#523) 
       1. ...
       
       Error: testthat unit tests failed
@@ -938,7 +938,7 @@ Run `revdep_details(,"jstor")` for more info
       Attributes: < target is NULL, current is list >
       Length mismatch: comparison on first 1 components
       Component 1: Cols in y but not x: `c(NA_character_, NA_character_)`. 
-      Component 1: Cols in x but not y: `string_name`, `suffix`, `given_name`, `author_number`, `surname`, `prefix`. 
+      Component 1: Cols in x but not y: `string_name`, `author_number`, `suffix`, `surname`, `given_name`, `prefix`. 
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 251 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
@@ -1436,7 +1436,7 @@ Run `revdep_details(,"rubias")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [1] "/tmp/Rtmp2XlGIr/mixfile"
+    [1] "/tmp/Rtmpp9WfwZ/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
@@ -1561,75 +1561,6 @@ Run `revdep_details(,"simrel")` for more info
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 169 | SKIPPED: 21 | WARNINGS: 3 | FAILED: 1 ]
       1. Error: Prepare Design (@test-utils.R#44) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# textrecipes
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/textrecipes
-* URL: https://github.com/tidymodels/textrecipes
-* BugReports: https://github.com/tidymodels/textrecipes/issues
-* Date/Publication: 2020-03-05 05:40:02 UTC
-* Number of recursive dependencies: 91
-
-Run `revdep_details(,"textrecipes")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
-    >   
-    > obj <- rec %>%
-    +   prep(training = sample_data)
-    Error: Names must not be empty.
-    Backtrace:
-    [90m     [39m█
-    [90m  1. [39m├─rec %>% prep(training = sample_data)
-    [90m  2. [39m│ ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-    [90m  3. [39m│ └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  4. [39m│   └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-    [90m  5. [39m│     └─`_fseq`(`_lhs`)
-    [90m  6. [39m│       └─magrittr::freduce(value, `_function_list`)
-    [90m  7. [39m│         ├─base::withVisible(function_list[[k]](value))
-    [90m  8. [39m│         └─function_list[[k]](value)
-    [90m  9. [39m│           ├─recipes::prep(., training = sample_data)
-    [90m 10. [39m│           └─recipes:::prep.recipe(., training = sample_data)
-    [90m 11. [39m│             ├─recipes::bake(x$steps[[i]], new_data = training)
-    [90m 12. [39m│             └─textrecipes:::bake.step_word_embeddings(x$steps[[i]], new_data = training)
-    [90m 13. [39m│               └─p
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-    ...
-      The following object is masked from 'package:stats':
-      
-          step
-      
-      > 
-      > test_check("textrecipes")
-      [31m──[39m [31m1. Error: (unknown) (@test-embeddings.R#99) [39m [31m────────────────────────────────[39m
-      Names must not be empty.
-      [1mBacktrace:[22m
-      [90m  1. [39mrec %>% prep(training = test_data, retain = TRUE)
-      [90m 29. [39mvctrs:::validate_unique(names = names)
-      [90m 30. [39mvctrs:::stop_names_cannot_be_empty(empty_names)
-      [90m 31. [39mvctrs:::stop_names(...)
-      [90m 32. [39mvctrs:::stop_vctrs(...)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 72 | SKIPPED: 9 | WARNINGS: 5 | FAILED: 1 ]
-      1. Error: (unknown) (@test-embeddings.R#99) 
       
       Error: testthat unit tests failed
       Execution halted
