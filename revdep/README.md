@@ -20,7 +20,7 @@
 
 # Revdeps
 
-## Failed to check (27)
+## Failed to check (21)
 
 |package          |version |error |warning |note |
 |:----------------|:-------|:-----|:-------|:----|
@@ -30,21 +30,15 @@
 |CNVScope         |?       |      |        |     |
 |codebook         |?       |      |        |     |
 |codemetar        |0.1.8   |1     |        |1    |
-|DCPO             |?       |      |        |     |
 |embed            |?       |      |        |     |
-|ggfan            |?       |      |        |     |
 |ggstatsplot      |?       |      |        |     |
 |healthcareai     |2.4.0   |1     |        |     |
 |holodeck         |?       |      |        |     |
 |obfuscatoR       |?       |      |        |     |
-|OncoBayes2       |?       |      |        |     |
 |oolong           |0.3.4   |1     |        |     |
-|rmdcev           |?       |      |        |     |
-|spant            |?       |      |        |     |
 |statsExpressions |?       |      |        |     |
 |STRMPS           |?       |      |        |     |
 |TestDimorph      |?       |      |        |     |
-|thurstonianIRT   |?       |      |        |     |
 |tidybayes        |?       |      |        |     |
 |tidyBF           |?       |      |        |     |
 |tidycomm         |?       |      |        |     |
@@ -52,14 +46,13 @@
 |ToxicoGx         |?       |      |        |     |
 |trialr           |0.1.3   |1     |        |     |
 
-## New problems (37)
+## New problems (36)
 
 |package                                          |version |error  |warning |note |
 |:------------------------------------------------|:-------|:------|:-------|:----|
 |[autocogs](problems.md#autocogs)                 |0.1.2   |2      |__+1__  |1    |
 |[basket](problems.md#basket)                     |0.10.1  |__+1__ |        |     |
 |[beadplexr](problems.md#beadplexr)               |0.3.0   |__+1__ |        |     |
-|[callr](problems.md#callr)                       |3.4.3   |__+1__ |        |     |
 |[casen](problems.md#casen)                       |0.1.3   |__+1__ |        |2    |
 |[CGPfunctions](problems.md#cgpfunctions)         |0.5.9   |__+1__ |        |     |
 |[concurve](problems.md#concurve)                 |2.3.0   |__+1__ |        |1    |
@@ -81,7 +74,7 @@
 |[poio](problems.md#poio)                         |0.0-3   |       |__+1__  |2    |
 |[portalr](problems.md#portalr)                   |0.3.1   |__+1__ |        |     |
 |[REDCapR](problems.md#redcapr)                   |0.10.2  |__+1__ |        |     |
-|[rematch2](problems.md#rematch2)                 |2.1.0   |__+2__ |        |     |
+|[rematch2](problems.md#rematch2)                 |2.1.1   |__+1__ |        |     |
 |[RmarineHeatWaves](problems.md#rmarineheatwaves) |0.17.0  |__+1__ |        |     |
 |[rsample](problems.md#rsample)                   |0.0.5   |__+1__ |        |     |
 |[RSDA](problems.md#rsda)                         |3.0.1   |__+1__ |        |     |
@@ -90,7 +83,7 @@
 |[simrel](problems.md#simrel)                     |2.0     |__+1__ |        |     |
 |[textrecipes](problems.md#textrecipes)           |0.1.0   |__+2__ |        |     |
 |[tidytransit](problems.md#tidytransit)           |0.7.0   |__+1__ |        |2    |
-|[tidytree](problems.md#tidytree)                 |0.3.2   |       |__+1__  |2    |
+|[tidytree](problems.md#tidytree)                 |0.3.2   |       |__+1__  |1    |
 |[viafr](problems.md#viafr)                       |0.1.0   |__+1__ |        |1    |
 |[vip](problems.md#vip)                           |0.2.1   |__+1__ |        |     |
 

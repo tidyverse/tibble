@@ -52,9 +52,13 @@ Run `revdep_details(,"autocogs")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m  6. [39mmagrittr::freduce(value, `_function_list`)
+      [90m  8. [39mfunction_list[[k]](value)
+      [90m  9. [39mautocogs:::expect_auto_cogs(...)
+      [90m 10. [39mp %>% plot_cogs()
+      [90m 12. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m 14. [39mautocogs:::`_fseq`(`_lhs`)
       [90m 15. [39mmagrittr::freduce(value, `_function_list`)
       [90m 17. [39mfunction_list[[k]](value)
       [90m 18. [39mautocogs:::plot_cogs(.)
@@ -98,9 +102,13 @@ Run `revdep_details(,"basket")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_true(inherits(plot_density(mh1), "ggplot"))
+      [90m  6. [39mbasket:::plot_density.exchangeability_model(mh1) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:33:2[39m
+      [90m  7. [39mbase::lapply(ps, function(pt) plot_density(x[[pt]])) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:53:2[39m
+      [90m  8. [39mbasket:::FUN(X[[i]], ...)
+      [90m 10. [39mbasket:::plot_density.mem(x[[pt]]) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:33:2[39m
       [90m 12. [39mtibble:::`$<-.tbl_df`(...) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:71:2[39m
       [90m 13. [39mtibble:::tbl_subassign(...)
       [90m 14. [39mtibble:::vectbl_recycle_rhs(...)
@@ -137,9 +145,13 @@ Run `revdep_details(,"beadplexr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [31m──[39m [31m1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) [39m [31m───────[39m
+      Assigned data `c("A", "B")` must be compatible with existing data.
+      [31m✖[39m Existing data has 5126 rows.
+      [31m✖[39m Assigned data has 2 rows.
+      [34mℹ[39m Only vectors of size 1 are recycled.
+      [1mBacktrace:[22m
       [90m 1. [39mbase::`$<-`(`*tmp*`, BeadID, value = c("A", "B"))
       [90m 2. [39mtibble:::`$<-.tbl_df`(`*tmp*`, BeadID, value = c("A", "B"))
       [90m 3. [39mtibble:::tbl_subassign(...)
@@ -154,45 +166,6 @@ Run `revdep_details(,"beadplexr")` for more info
       1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) 
       
       Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# callr
-
-<details>
-
-* Version: 3.4.3
-* Source code: https://github.com/cran/callr
-* URL: https://github.com/r-lib/callr#readme
-* BugReports: https://github.com/r-lib/callr/issues
-* Date/Publication: 2020-03-28 05:50:17 UTC
-* Number of recursive dependencies: 56
-
-Run `revdep_details(,"callr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      [31m──[39m [31m1. Failure: interrupt (@test-r-session.R#119) [39m [31m──────────────────────────────[39m
-      res$error is not an S3 object
-      
-      [31m──[39m [31m2. Failure: interrupt (@test-r-session.R#119) [39m [31m──────────────────────────────[39m
-      res$error inherits from `NULL` not `rlib_error`.
-      
-      [31m──[39m [31m3. Failure: interrupt (@test-r-session.R#120) [39m [31m──────────────────────────────[39m
-      res$error$parent$error is not an S3 object
-      
-      [31m──[39m [31m4. Failure: interrupt (@test-r-session.R#120) [39m [31m──────────────────────────────[39m
-      res$error$parent$error inherits from `NULL` not `interrupt`.
-      
-      ══ DONE ════════════════════════════════════════════════════════════════════════
-      Error: Test failures
       Execution halted
     ```
 
@@ -215,18 +188,22 @@ Run `revdep_details(,"casen")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      downloaded 4.8 MB
+    ...
       
+      [31m──[39m [31m3. Failure: percentiles_agrupados works properly (@test-descriptive_statistic[39m
+      `str\(est\)` does not match "7 variables".
+      Actual value: "tibble \[12 × 7\] \(S3: tbl_df/tbl/data\.frame\)\\n \$ percentil               : num \[1:12\] 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 \.\.\.\\n \$ comuna_etiqueta         : chr \[1:12\] "Valdivia" "Valdivia" "Los Lagos" "Los Lagos" \.\.\.\\n \$ sexo_etiqueta           : chr \[1:12\] "Mujer" "Hombre" "Hombre" "Mujer" \.\.\.\\n \$ comuna_codigo           : chr \[1:12\] "14101" "14101" "14104" "14104" \.\.\.\\n \$ sexo_codigo             : chr \[1:12\] "2" "1" "1" "2" \.\.\.\\n \$ mediana_ytotcorh        : num \[1:12\] 1266142 1300000 853001 853162 796676 \.\.\.\\n \$ mediana_ytotcorh_err_est: num \[1:12\] 102259 102396 31364 49559 185537 \.\.\."
+      
+      trying URL 'http://observatorio.ministeriodesarrollosocial.gob.cl/casen/layout/doc/bases/Casen1990.zip'
+      Error in utils::download.file(u, f, mode = "wb") : 
+        cannot open URL 'http://observatorio.ministeriodesarrollosocial.gob.cl/casen/layout/doc/bases/Casen1990.zip'
       trying URL 'https://pachamaltese.github.io/casen/data-rds/1990.rds'
       Content type 'application/octet-stream' length 2890424 bytes (2.8 MB)
       ==================================================
       downloaded 2.8 MB
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 7 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 3 ]
+      [ OK: 7 | SKIPPED: 0 | WARNINGS: 5 | FAILED: 3 ]
       1. Failure: media_agrupada works properly (@test-descriptive_statistics.R#7) 
       2. Failure: mediana_agrupada works properly (@test-descriptive_statistics.R#14) 
       3. Failure: percentiles_agrupados works properly (@test-descriptive_statistics.R#21) 
@@ -380,9 +357,13 @@ Run `revdep_details(,"convergEU")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m  3. [39mtibble:::`[.tbl_df`(sottoTB2, !is.na(sottoTB2[, aux]), ) [90mrevdep/checks/convergEU/new/convergEU.Rcheck/00_pkg_src/convergEU/R/impute_dataset.R:133:6[39m
+      [90m  4. [39mtibble:::tbl_subset_row(xo, i = i, i_arg)
+      [90m  5. [39mtibble:::vectbl_as_row_index(i, x, i_arg)
+      [90m  6. [39mtibble:::vectbl_as_row_location(i, nr, i_arg, assign)
+      [90m 13. [39mvctrs::vec_as_location(i, n, arg = as_label(i_arg))
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 1703 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 25 ]
       1. Failure: Check the average value (@test_average_clust.R#19) 
@@ -434,9 +415,13 @@ Run `revdep_details(,"cutpointr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      names for target but not for current
+      
+      [31m──[39m [31m11. Failure: boot_test works correctly (@test-cutpointr.R#1404) [39m [31m────────────[39m
+      btg$d not equal to bt$d.
+      names for current but not for target
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 379 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 11 ]
       1. Failure: Correct cutpoints with example data (@test-cutpointr.R#239) 
@@ -473,9 +458,13 @@ Run `revdep_details(,"cvms")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      Lengths differ: 3 is not 2
+      
+      [31m──[39m [31m12. Failure: model_verbose reports the correct model functions in validate() [39m
+      ...$NULL not equal to as.character(...).
+      Lengths differ: 3 is not 2
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 1612 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 12 ]
       1. Error: baseline() throws expected errors (@test_baseline.R#1112) 
@@ -512,9 +501,13 @@ Run `revdep_details(,"epikit")` for more info
 
 *   checking tests ...
     ```
-     ERROR
+    ...
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > library(testthat)
+      > library(epikit)
+      > 
+      > test_check("epikit")
       [31m──[39m [31m1. Failure: case_fatality_rate_df will add a total row to stratified analysis[39m
       `iris_res` not equal to `iris_n`.
       Incompatible type for column `Species`: x character, y factor
@@ -584,9 +577,13 @@ Run `revdep_details(,"evaluator")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      Expected match: "iteration"
+      Actual message: "All scenarios must be tidyrisk_scenario objects"
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_error(...)
+      [90m 6. [39mevaluator::run_simulations(good_scen, simulation_count = 10L)
+      
       [31m──[39m [31m6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summar[39m
       [[ ]] improper number of subscripts
       
@@ -666,9 +663,13 @@ Run `revdep_details(,"gratia")` for more info
 
 *   checking tests ...
     ```
+    ...
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > ## Test `gratia` using the `testthat` package
+      > 
+      > ## Setup
       > library("testthat")
       > 
       > ## Runs the tests in tests/testthat
@@ -730,9 +731,13 @@ Run `revdep_details(,"heemod")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m  4. [39mheemod:::define_dsa_(...) [90mrevdep/checks/heemod/new/heemod.Rcheck/00_pkg_src/heemod/R/tabular_input.R:639:4[39m
+      [90m 11. [39mtibble::tibble(dots[i])
+      [90m 12. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 14. [39mtibble:::check_valid_cols(set_names(list(x), name))
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 470 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 12 ]
       1. Error: Same results using 1 core or 2. (@test_parallel.R#7) 
@@ -797,9 +802,13 @@ Run `revdep_details(,"INDperform")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [31m──[39m [31m2. Error: (unknown) (@test_scoring.R#15) [39m [31m───────────────────────────────────[39m
+      Assigned data `"x < 0.3"` must be compatible with existing data.
+      [34mℹ[39m Error occurred for column `condition`.
+      [31m✖[39m No common type for `value` <character> and `x` <list>.
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`[<-`(`*tmp*`, 4, "condition", value = "x < 0.3")
       [90m 2. [39mtibble:::`[<-.tbl_df`(`*tmp*`, 4, "condition", value = "x < 0.3")
       [90m 3. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
       [90m 4. [39mtibble:::tbl_subassign_row(xj, i, value, value_arg)
@@ -872,9 +881,13 @@ Run `revdep_details(,"janitor")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m 23. [39mtibble:::tbl_subassign_matrix(x, j, value, j_arg, substitute(value))
+      [90m 24. [39mbase::tryCatch(...)
+      [90m 25. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 26. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 27. [39mvalue[[3L]](cond)
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 519 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 12 ]
       1. Error: grouped_df gets ungrouped and succeeds (@test-add-totals.R#122) 
@@ -911,9 +924,13 @@ Run `revdep_details(,"jstor")` for more info
 
 *   checking tests ...
     ```
+    ...
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > library(testthat)
+      > library(jstor)
+      > 
       > test_check("jstor")
       [31m──[39m [31m1. Failure: authors are correct (@test-books.R#117) [39m [31m────────────────────────[39m
       chap_auth[[5, "authors"]] not identical to `correct_authors`.
@@ -921,7 +938,7 @@ Run `revdep_details(,"jstor")` for more info
       Attributes: < target is NULL, current is list >
       Length mismatch: comparison on first 1 components
       Component 1: Cols in y but not x: `c(NA_character_, NA_character_)`. 
-      Component 1: Cols in x but not y: `string_name`, `author_number`, `surname`, `suffix`, `given_name`, `prefix`. 
+      Component 1: Cols in x but not y: `string_name`, `suffix`, `given_name`, `author_number`, `surname`, `prefix`. 
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 251 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
@@ -950,9 +967,13 @@ Run `revdep_details(,"mcp")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+      [31m──[39m [31m28. Failure: Good Poisson:
+          y ~ 1, 1 + (1 | id) ~ 1 (@test-runs.R#277) [39m [31m──[39m
+      any(stringr::str_starts(attr(gg, "condition")$message, expected_error)) isn't true.
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 1696 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 28 ]
       1. Failure: Good priors: int_1, dnorm(3, 10), -0.5 (@test-runs.R#335) 
       2. Failure: Good priors: int_1, dnorm(3, 10), -0.5 (@test-runs.R#335) 
@@ -998,9 +1019,13 @@ Run `revdep_details(,"metacoder")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check("metacoder")
+      [31m──[39m [31m1. Failure: Summing counts per taxon (@test--calculations.R#103) [39m [31m───────────[39m
+      sum(x$data$tax_data$`700035949`) not equal to result$`700035949`[1].
+      names for current but not for target
+      
+      [31m──[39m [31m2. Failure: Summing counts per taxon (@test--calculations.R#126) [39m [31m───────────[39m
       `total_counts` not equal to result$total[1].
       names for current but not for target
       
@@ -1087,9 +1112,13 @@ Run `revdep_details(,"modeltests")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m  7. [39mmodeltests:::aug(model, data = dl$tibble, newdata = new_dl$tibble) [90mrevdep/checks/modeltests/new/modeltests.Rcheck/00_pkg_src/modeltests/R/check_augment_data_specification.R:51:2[39m
+      [90m  9. [39mtibble:::`[<-.tbl_df`(`*tmp*`, 1, 1, value = "strawberry")
+      [90m 10. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+      [90m 11. [39mtibble:::tbl_subassign_row(xj, i, value, value_arg)
+      [90m 12. [39mbase::tryCatch(...)
+      [90m 13. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
       [90m 14. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
       [90m 15. [39mvalue[[3L]](cond)
       
@@ -1162,9 +1191,13 @@ Run `revdep_details(,"portalr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [31m──[39m [31m1. Failure: data generated by default setting is same (shrub_cover) (@test-99[39m
+      Value hashes to 273b981913, not 9e5849fa79
+      
+      [31m──[39m [31m2. Failure: data generated by default setting is same (ant colony_presence_ab[39m
+      Value hashes to b16d3f1a01, not 8ce773ce81
+      
       [31m──[39m [31m3. Failure: data generated by level = 'stake' is same (ant colony_presence_ab[39m
       Value hashes to 2194929e3e, not 4639dbfbf3
       
@@ -1203,7 +1236,7 @@ Run `revdep_details(,"REDCapR")` for more info
     ```
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
+    Complete output:
       > # Modeled after the R6 testing structure: https://github.com/wch/R6/blob/master/tests/testthat.R
       > library(testthat)
       > library(REDCapR)
@@ -1225,11 +1258,11 @@ Run `revdep_details(,"REDCapR")` for more info
 
 <details>
 
-* Version: 2.1.0
+* Version: 2.1.1
 * Source code: https://github.com/cran/rematch2
 * URL: https://github.com/r-lib/rematch2#readme
 * BugReports: https://github.com/r-lib/rematch2/issues
-* Date/Publication: 2019-07-11 17:32:41 UTC
+* Date/Publication: 2020-03-28 12:40:02 UTC
 * Number of recursive dependencies: 40
 
 Run `revdep_details(,"rematch2")` for more info
@@ -1262,28 +1295,6 @@ Run `revdep_details(,"rematch2")` for more info
     [90m 13. [39m│         └─tibble:::tbl_subset_row(xo, i = i, i_arg)
     [90
     Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      + }
-      Loading required package: testthat
-      [31m──[39m [31m1. Error: corner cases (@test-exec-all.R#46) [39m [31m───────────────────────────────[39m
-      `x` must be a vector, not a `rematch_allrecords` object.
-      [1mBacktrace:[22m
-      [90m  1. [39mrematch2::re_exec_all(.text <- character(), "")
-      [90m 11. [39mvctrs:::stop_scalar_type(...)
-      [90m 12. [39mvctrs:::stop_vctrs(msg, "vctrs_error_scalar_type", actual = x)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 69 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: corner cases (@test-exec-all.R#46) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # RmarineHeatWaves
@@ -1347,9 +1358,13 @@ Run `revdep_details(,"rsample")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > test_check(package = "rsample")
+      [31m──[39m [31m1. Failure: Bootstrap estimate of mean is close to estimate of mean from norm[39m
+      ttest$estimate not equal to single_pct_res$.estimate.
+      names for target but not for current
+      
+      [31m──[39m [31m2. Failure: Bootstrap estimate of mean is close to estimate of mean from norm[39m
       ttest$estimate not equal to single_t_res$.estimate.
       names for target but not for current
       
@@ -1421,7 +1436,7 @@ Run `revdep_details(,"rubias")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [1] "/tmp/Rtmp0zzaNs/mixfile"
+    [1] "/tmp/Rtmp2XlGIr/mixfile"
     > 
     > # note that in practice you will probably want to specify
     > # your own directory...
@@ -1527,9 +1542,13 @@ Run `revdep_details(,"simrel")` for more info
 
 *   checking tests ...
     ```
+    ...
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    Complete output:
+      > library(testthat)
+      > library(simrel)
+      > 
       > test_check("simrel")
       [31m──[39m [31m1. Error: Prepare Design (@test-utils.R#44) [39m [31m────────────────────────────────[39m
       Can't join on 'q' x 'q' because of incompatible types (list / list)
@@ -1592,9 +1611,13 @@ Run `revdep_details(,"textrecipes")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      The following object is masked from 'package:stats':
+      
+          step
+      
+      > 
+      > test_check("textrecipes")
       [31m──[39m [31m1. Error: (unknown) (@test-embeddings.R#99) [39m [31m────────────────────────────────[39m
       Names must not be empty.
       [1mBacktrace:[22m
@@ -1631,9 +1654,13 @@ Run `revdep_details(,"tidytransit")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [31m──[39m [31m1. Error: travel_times from stop with departures from transfer stops (@test-r[39m
+      Assigned data `c("stop0", "Zero", 46.9596, 7.39071, NA, 0)` must be compatible with row subscript `nrow(g2$stops) + 1`.
+      [31m✖[39m 1 row must be assigned.
+      [31m✖[39m Assigned data has 6 rows.
+      [34mℹ[39m Only vectors of size 1 are recycled.
+      [1mBacktrace:[22m
       [90m 1. [39mbase::`[<-`(...)
       [90m 2. [39mtibble:::`[<-.tbl_df`(...)
       [90m 3. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
@@ -1692,11 +1719,6 @@ Run `revdep_details(,"tidytree")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: 'ggtree', 'treeio'
-    ```
-
 *   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘utils’
@@ -1722,9 +1744,13 @@ Run `revdep_details(,"viafr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m 27. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m 29. [39mviafr:::`_fseq`(`_lhs`)
+      [90m 30. [39mmagrittr::freduce(value, `_function_list`)
+      [90m 32. [39mfunction_list[[k]](value)
+      [90m 33. [39mdplyr::mutate_if(., is.character, list(~utf8_normalize(.)))
+      [90m 34. [39mdplyr:::manip_if(...)
       [90m 35. [39mdplyr:::tbl_if_syms(.tbl, .predicate, .env, .include_group_vars = .include_group_vars)
       [90m 39. [39mdplyr:::tbl_if_vars(.tbl, .p, .env, ..., .include_group_vars = .include_group_vars)
       [90m 41. [39mtibble:::`[[.tbl_df`(.tbl, tibble_vars[[i]])
@@ -1768,9 +1794,13 @@ Run `revdep_details(,"vip")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/tinytest.R’ failed.
-    Last 13 lines of output:
+    ...
+      Running test_vip.R....................    3 tests [0;32mOK[0m 
+      Error: ----- FAILED[data]: test_pkg_earth.R<24--27>
+       call| expect_identical(current = vis_nsubsets[seq_len(nrow(vis_earth)), 
+       call| ]$Importance, target = unname(vis_earth[, "nsubsets", drop = TRUE]))
+       diff| names for current but not for target
+      ----- FAILED[data]: test_pkg_earth.R<28--31>
        call| expect_identical(current = vis_rss[seq_len(nrow(vis_earth)), 
        call| ]$Importance, target = unname(vis_earth[, "rss", drop = TRUE]))
        diff| names for current but not for target

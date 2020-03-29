@@ -204,79 +204,7 @@ Run `revdep_details(,"codemetar")` for more info
       All declared Imports should be used.
     ```
 
-# DCPO
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # embed
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# ggfan
 
 <details>
 
@@ -440,42 +368,6 @@ Run `revdep_details(,"")` for more info
 
 
 ```
-# OncoBayes2
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # oolong
 
 <details>
@@ -537,78 +429,6 @@ Error in normalize(self$components, "l1") :
   could not find function "normalize"
 ERROR: lazydata failed for package ‘oolong’
 * removing ‘/home/rstudio/tibble/revdep/checks/oolong/old/oolong.Rcheck/oolong’
-
-```
-# rmdcev
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# spant
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
 
 ```
 # statsExpressions
@@ -684,42 +504,6 @@ Run `revdep_details(,"")` for more info
 
 ```
 # TestDimorph
-
-<details>
-
-* Version: 
-* Source code: ???
-* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
-* BugReports: https://github.com/tidyverse/tibble/issues
-* Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# thurstonianIRT
 
 <details>
 
