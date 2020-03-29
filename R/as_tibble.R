@@ -145,12 +145,19 @@ make_valid_col <- function(x) {
   if (is.expression(x)) {
     x <- as.list(x)
   }
+  if (is.data.frame(x) && last(class(x)) != "data.frame") {
+    class(x) <- c(setdiff(class(x), "data.frame"), "data.frame")
+  }
   x
+}
+
+last <- function(x) {
+  x[length(x)]
 }
 
 is_valid_col <- function(x) {
   # 657
-  vec_is(x) || is.expression(x)
+  vec_is(x) || is.data.frame(x) || is.expression(x)
 }
 
 recycle_columns <- function(x, .rows, lengths) {

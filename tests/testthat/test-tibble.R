@@ -207,6 +207,14 @@ test_that("package_version is a vector (#690)", {
   expect_identical(tibble(x = ver)$x, ver)
 })
 
+test_that("support data frame classes with data.frame not at end", {
+  df <- data.frame(a = 1:3)
+  foo <- df
+  class(foo) <- c("data.frame", "foo")
+
+  expect_identical(tibble(foo)$a, 1:3)
+})
+
 
 # tibble_row() ------------------------------------------------------------
 
