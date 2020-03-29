@@ -285,7 +285,10 @@ justify <- function(x, right = TRUE, space = " ") {
 }
 
 split_lines <- function(x) {
-  vec_c(!!!strsplit(x, "\n", fixed = TRUE), .ptype = character())
+  # Avoid .ptype argument to vec_c()
+  if (is_empty(x)) return(character())
+
+  unlist(strsplit(x, "\n", fixed = TRUE))
 }
 
 

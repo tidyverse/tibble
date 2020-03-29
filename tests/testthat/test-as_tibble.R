@@ -418,13 +418,13 @@ test_that("as_tibbe_row() fails with non-bare vectors (#739)", {
 
 # as_tibble_col -----------------------------------------------------------
 
-test_that("as_tibbe_col() can convert atomic vectors to data frame", {
+test_that("as_tibble_col() can convert atomic vectors to data frame", {
   expect_identical(as_tibble_col(1:3), tibble(value = 1:3))
   expect_identical(as_tibble_col(list(4, 5:6), column_name = "data"), tibble(data = list(4, 5:6)))
 
   expect_tibble_error(
     as_tibble_col(lm(y ~ x, data.frame(x = 1:3, y = 2:4))),
-    error_column_scalar_type("value", 1, "lm")
+    error_column_scalar_type("value", 1, "a `lm` object")
   )
 })
 

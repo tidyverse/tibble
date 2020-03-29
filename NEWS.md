@@ -6,11 +6,9 @@
 
     - Error: No common type for ...
     
-    - Tibble columns must have consistent sizes, only values of size one are recycled
-    
+    - Error: Assigned data `...` must be compatible with ...
+
     - `i` must have one dimension, not 2
-    
-    - Error in matrix_to_cells(j, x) : is_bare_logical(j) is not TRUE
     
     - Error: Lossy cast from ... to ...
 
@@ -46,6 +44,8 @@
 - `tribble()` is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (#204). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with `vctrs::vec_size()` unequal 1 are wrapped in lists.
 
 - `$` warns unconditionally if column not found, `[[` doesn't warn.
+
+- `add_row()` now uses `vctrs::vec_rbind()` under the hood, this means that all columns are combined with `vctrs::vec_c()`. In particular, factor columns will be converted to character if one of the columns is a character column.
 
 
 ## Soft deprecations
