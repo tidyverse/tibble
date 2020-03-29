@@ -1268,7 +1268,7 @@ Row and column subsetting
 ### Definition of `x[[i, j]]`
 
 `i` must be a numeric vector of length 1. `x[[i, j]]` is equal to
-`x[i, ][[j]]`.[5]
+`x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[5]
 
 This implies that `j` must be a numeric or character vector of length 1.
 
