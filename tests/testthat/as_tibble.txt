@@ -24,7 +24,7 @@ Error: Column names `a` and `b` must not be duplicated.
 
 > as_tibble(list(a = new_environment()))
 Error: All columns in a tibble must be vectors.
-x Column `a` is environment.
+x Column `a` is an environment.
 
 > as_tibble_row(list(1))
 Error: Column 1 must be named.

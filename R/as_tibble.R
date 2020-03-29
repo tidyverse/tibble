@@ -132,7 +132,7 @@ check_valid_cols <- function(x, pos = NULL) {
 
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
-    classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
+    classes <- map_chr(x[is_xd], friendly_type_of)
     cnd_signal(error_column_scalar_type(names_x[is_xd], pos[is_xd], classes))
   }
 
