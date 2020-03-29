@@ -34,7 +34,8 @@ view <- function(x, title = NULL, ..., n = NULL) {
     if (is.null(n)) {
       n <- tibble_opt("view_max")
     }
-    x <- as.data.frame(head(x, n + 1))
+    x <- head(x, n + 1)
+    x <- as.data.frame(x)
     if (nrow(x) > n) {
       message("Showing first ", n, " rows.")
       x <- head(x, n)
