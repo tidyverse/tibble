@@ -43,7 +43,9 @@ view <- function(x, title = NULL, ..., n = NULL) {
   }
 
   view_fun <- get("View", envir = as.environment("package:utils"))
-  eval_tidy(quo(view_fun({{x}}, !!title)))
+  # Construct call with defused arguments, some versions of RStudio evaluate
+  # in the global environment (?).
+  eval_tidy(quo(view_fun(!!x, !!title)))
 
   invisible(x)
 }
