@@ -188,9 +188,8 @@
 <p>Subset assignment (“subassignment”) and also subsetting has become stricter. Symptoms:</p>
 <ul>
 <li><p>Error: No common type for …</p></li>
-<li><p>Tibble columns must have consistent sizes, only values of size one are recycled</p></li>
+<li><p>Error: Assigned data <code>...</code> must be compatible with …</p></li>
 <li><p><code>i</code> must have one dimension, not 2</p></li>
-<li><p>Error in matrix_to_cells(j, x) : is_bare_logical(j) is not TRUE</p></li>
 <li><p>Error: Lossy cast from … to …</p></li>
 </ul>
 <p>The “invariants” article at <a href="https://tibble.tidyverse.org/dev/articles/invariants.html" class="uri">https://tibble.tidyverse.org/dev/articles/invariants.html</a> describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.</p>
@@ -222,6 +221,7 @@
 <li><p><code><a href="https://rdrr.io/r/base/expression.html">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
 <li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://rdrr.io/pkg/vctrs/man/vec_size.html">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> warns unconditionally if column not found, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> doesn’t warn.</p></li>
+<li><p><code><a href="../reference/add_row.html">add_row()</a></code> now uses <code><a href="https://rdrr.io/pkg/vctrs/man/vec_bind.html">vctrs::vec_rbind()</a></code> under the hood, this means that all columns are combined with <code><a href="https://rdrr.io/pkg/vctrs/man/vec_c.html">vctrs::vec_c()</a></code>. In particular, factor columns will be converted to character if one of the columns is a character column.</p></li>
 </ul>
 </div>
 <div id="soft-deprecations" class="section level2">

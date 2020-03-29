@@ -937,7 +937,7 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xi-j-1" class="anchor"></a>Definition of <code>x[[i, j]]</code>
 </h3>
-<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://rdrr.io/pkg/vctrs/man/vec_slice.html">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>This implies that <code>j</code> must be a numeric or character vector of length 1.</p>
 <p>NB: <code><a href="https://rdrr.io/pkg/vctrs/man/vec_size.html">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
 </div>
