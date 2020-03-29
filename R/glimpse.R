@@ -106,7 +106,7 @@ format_v.default <- function(x) {
 
   if (!is.null(dims)){
     dims_out <- paste0(dims, collapse = " x ")
-    out <- paste0("<", class(x)[1], "[", dims_out, "]>")
+    out <- paste0("<", class(x)[[1]], "[", dims_out, "]>")
     out
   } else {
     format(x, trim = TRUE, justify = "none")

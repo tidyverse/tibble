@@ -706,7 +706,8 @@ error_na_column_index <- function(j) {
 }
 
 error_dim_column_index <- function(j) {
-  tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1L]], "."))
+  # friendly_type_of() doesn't distinguish between matrices and arrays
+  tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
 }
 
 error_assign_columns_non_na_only <- function() {
