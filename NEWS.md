@@ -1,4 +1,4 @@
-# tibble 2.99.99.9015
+# tibble 3.0.0
 
 ## Major breaking changes
 
