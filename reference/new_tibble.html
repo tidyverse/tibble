@@ -40,6 +40,12 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="Tibble constructor and validator — new_tibble" />
 <meta property="og:description" content="
@@ -51,7 +57,7 @@ This function is optimized for performance, checks are reduced to a minimum.
 validate_tibble() checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function
 runs without raising an error." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +84,7 @@ runs without raising an error." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,7 +101,7 @@ runs without raising an error." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -118,7 +124,7 @@ runs without raising an error." />
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -158,6 +164,12 @@ runs without raising an error." />
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -195,19 +207,19 @@ runs without raising an error.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A tibble-like object</p></td>
+      <td><p>A tibble-like object.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passed on to <code><a href='https://rdrr.io/r/base/structure.html'>structure()</a></code></p></td>
+      <td><p>Name-value pairs of additional attributes.</p></td>
     </tr>
     <tr>
       <th>nrow</th>
-      <td><p>The number of rows, required</p></td>
+      <td><p>The number of rows, required.</p></td>
     </tr>
     <tr>
       <th>class</th>
-      <td><p>Subclasses to assign to the new object, default: none</p></td>
+      <td><p>Subclasses to assign to the new object, default: none.</p></td>
     </tr>
     <tr>
       <th>subclass</th>
@@ -224,7 +236,7 @@ runs without raising an error.</p>
 The <code>...</code> argument allows adding more attributes to the subclass.
 An <code>nrow</code> argument is required.
 This should be an integer of length 1,
-and every element of the list <code>x</code> should have <code><a href='https://rdrr.io/r/base/nrow.html'>NROW()</a></code>
+and every element of the list <code>x</code> should have <code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code>
 equal to this value.
 (But this is not checked by the constructor).
 This takes the place of the "row.names" attribute in a data frame.
@@ -237,8 +249,7 @@ but the names are not checked for correctness.</p>
 <p><code>validate_tibble()</code> checks for "minimal" names
 and that all columns are vectors, data frames or matrices.
 It also makes sure that all columns have the same length,
-and that <code><a href='https://rdrr.io/r/base/nrow.html'>NROW()</a></code> is consistent with the data.
-1d arrays are not supported.</p>
+and that <code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code> is consistent with the data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> for ways to construct a tibble
@@ -259,23 +270,17 @@ with recycling of scalars and automatic name repair.</p></div>
 #&gt; 1          5.1         3.5          1.4         0.2 setosa 
 #&gt; 2          4.9         3            1.4         0.2 setosa 
 #&gt; 3          4.7         3.2          1.3         0.2 setosa </div><div class='input'>
-<span class='co'># The length of all columns must be consistent with the nrow argument:</span>
+<span class='co'># The length of all columns must be compatible with the nrow argument:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>new_tibble</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 2
 #&gt;       a     b
 #&gt;   &lt;int&gt; &lt;int&gt;
 #&gt; 1     1     4
 #&gt; 2     2     5</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#construction">Construction</a></li>
-      <li><a href="#validation">Validation</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -296,6 +301,23 @@ with recycling of scalars and automatic name repair.</p></div>
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

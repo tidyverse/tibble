@@ -17,9 +17,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
-<meta property="og:title" content="Column data types">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png">
+<!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Column data types">
+<meta property="og:description" content="tibble">
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +34,7 @@
   gtag('config', 'UA-115082821-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -48,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -71,7 +73,7 @@
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -110,7 +112,13 @@
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -122,7 +130,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Column data types</h1>
+      <h1 data-toc-skip>Column data types</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/types.Rmd"><code>vignettes/types.Rmd</code></a></small>
@@ -132,7 +140,7 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)</pre></body></html></div>
 <p>This vignette shows an overview of known data types and their abbreviations, and their origin. For example, <code>&lt;int&gt;</code> in the header of a column indicates an integer column, and <code>&lt;chr&gt;</code> denotes a character column.</p>
 <table class="table">
 <thead><tr class="header">
@@ -321,8 +329,8 @@
 </tbody>
 </table>
 <p>The following overview contains example values for each type:</p>
-<pre><code>#&gt; Observations: 1
-#&gt; Variables: 24
+<pre><code>#&gt; Rows: 1
+#&gt; Columns: 24
 #&gt; $ logical           &lt;lgl&gt; TRUE
 #&gt; $ integer           &lt;int&gt; 1
 #&gt; $ double            &lt;dbl&gt; 1.5
@@ -333,8 +341,8 @@
 #&gt; $ `named list`      &lt;named list&gt; [1]
 #&gt; $ factor            &lt;fct&gt; A
 #&gt; $ ordered           &lt;ord&gt; a
-#&gt; $ Date              &lt;date&gt; 2020-03-08
-#&gt; $ POSIXt            &lt;dttm&gt; 2020-03-08 16:17:22
+#&gt; $ Date              &lt;date&gt; 2020-03-29
+#&gt; $ POSIXt            &lt;dttm&gt; 2020-03-29 13:27:09
 #&gt; $ difftime          &lt;drtn&gt; 1 secs
 #&gt; $ hms               &lt;time&gt; 00:00:01
 #&gt; $ integer64         &lt;int64&gt; 10000000000
@@ -351,37 +359,32 @@
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
 <p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://rdrr.io/pkg/vctrs/man/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">pillar<span class="op">:::</span>type_sum.default</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; function (x) </span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;     if (is.object(x)) </span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;     if (typeof(x) == "complex") </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;         return("cpl")</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;     if (vec_is(x)) </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;             "missing"</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;         } else {</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;             "sym"</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;         }, typeof(x))</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; &lt;bytecode: 0x653fb10&gt;</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">pillar</span><span class="kw ns">:::</span><span class="no">type_sum.default</span>
+<span class="co">#&gt; function (x) </span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     if (is.object(x)) </span>
+<span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
+<span class="co">#&gt;     if (typeof(x) == "complex") </span>
+<span class="co">#&gt;         return("cpl")</span>
+<span class="co">#&gt;     if (vec_is(x)) </span>
+<span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
+<span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
+<span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
+<span class="co">#&gt;             "missing"</span>
+<span class="co">#&gt;         } else {</span>
+<span class="co">#&gt;             "sym"</span>
+<span class="co">#&gt;         }, typeof(x))</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; &lt;bytecode: 0x2696ff0&gt;</span>
+<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></body></html></div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#implementation">Implementation</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -402,7 +405,20 @@
 </div>
 
   
-
-
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>

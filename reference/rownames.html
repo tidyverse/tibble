@@ -40,6 +40,12 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="Tools for working with row names — rownames" />
 <meta property="og:description" content="While a tibble can have row names (e.g., when converting from a regular data
@@ -47,15 +53,15 @@ frame), they are removed when subsetting with the [ operator.
 A warning will be raised when attempting to assign non-NULL row names
 to a tibble.
 Generally, it is best to avoid row names, because they are basically a
-character column with different semantics to every other column. These
-functions allow to you detect if a data frame has row names
+character column with different semantics than every other column.
+These functions allow to you detect if a data frame has row names
 (has_rownames()), remove them (remove_rownames()), or convert
 them back-and-forth between an explicit column (rownames_to_column()
 and column_to_rownames()).
-Also included is rowid_to_column() which
-adds a column at the start of the dataframe of ascending sequential row
-ids starting at 1. Note that this will remove any existing row names." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+Also included is rowid_to_column(), which adds a column at the start of the
+dataframe of ascending sequential row ids starting at 1. Note that this will
+remove any existing row names." />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -82,7 +88,7 @@ ids starting at 1. Note that this will remove any existing row names." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -99,7 +105,7 @@ ids starting at 1. Note that this will remove any existing row names." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -122,7 +128,7 @@ ids starting at 1. Note that this will remove any existing row names." />
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -162,6 +168,12 @@ ids starting at 1. Note that this will remove any existing row names." />
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -184,14 +196,14 @@ frame), they are removed when subsetting with the <code>[</code> operator.
 A warning will be raised when attempting to assign non-<code>NULL</code> row names
 to a tibble.
 Generally, it is best to avoid row names, because they are basically a
-character column with different semantics to every other column. These
-functions allow to you detect if a data frame has row names
+character column with different semantics than every other column.</p>
+<p>These functions allow to you detect if a data frame has row names
 (<code>has_rownames()</code>), remove them (<code>remove_rownames()</code>), or convert
 them back-and-forth between an explicit column (<code>rownames_to_column()</code>
 and <code>column_to_rownames()</code>).
-Also included is <code>rowid_to_column()</code> which
-adds a column at the start of the dataframe of ascending sequential row
-ids starting at 1. Note that this will remove any existing row names.</p>
+Also included is <code>rowid_to_column()</code>, which adds a column at the start of the
+dataframe of ascending sequential row ids starting at 1. Note that this will
+remove any existing row names.</p>
     </div>
 
     <pre class="usage"><span class='fu'>has_rownames</span>(<span class='no'>.data</span>)
@@ -224,17 +236,14 @@ ids starting at 1. Note that this will remove any existing row names.</p>
 All other functions return an object of the same class as the input.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='fu'>remove_rownames</span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt;             rowname  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'>
-<span class='no'>mtcars_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>))
+    <pre class="examples"><div class='input'><span class='co'># Detect row names ----------------------------------------------------</span>
+<span class='fu'>has_rownames</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='co'># Remove row names ----------------------------------------------------</span>
+<span class='fu'>remove_rownames</span>(<span class='no'>mtcars</span>) <span class='kw'>%&gt;%</span> <span class='fu'>has_rownames</span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='co'># Convert between row names and column --------------------------------</span>
+<span class='no'>mtcars_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"car"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>()
 <span class='no'>mtcars_tbl</span></div><div class='output co'>#&gt; # A tibble: 32 x 12
-#&gt;    rowname       mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#&gt;    car           mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1 Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
 #&gt;  2 Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
@@ -246,22 +255,27 @@ All other functions return an object of the same class as the input.</p>
 #&gt;  8 Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
 #&gt;  9 Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
 #&gt; 10 Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>column_to_rownames</span>(<span class='no'>mtcars_tbl</span>))</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt; # … with 22 more rows</div><div class='input'><span class='fu'>column_to_rownames</span>(<span class='no'>mtcars_tbl</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"car"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 #&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
 #&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
 #&gt; Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 #&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div></pre>
+#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'>
+<span class='co'># Adding rowid as a column --------------------------------------------</span>
+<span class='fu'>rowid_to_column</span>(<span class='no'>iris</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1     1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2     2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3     3          4.7         3.2          1.3         0.2  setosa
+#&gt; 4     4          4.6         3.1          1.5         0.2  setosa
+#&gt; 5     5          5.0         3.6          1.4         0.2  setosa
+#&gt; 6     6          5.4         3.9          1.7         0.4  setosa</div><div class='input'>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -282,6 +296,23 @@ All other functions return an object of the same class as the input.</p>
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

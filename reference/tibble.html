@@ -40,6 +40,12 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="Build a data frame — tibble" />
 <meta property="og:description" content="tibble() constructs a data frame. It is used like base::data.frame(), but
@@ -55,9 +61,14 @@ tricks. Column names are not modified.
 tibble() builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
+If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.
 
-" />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+
+tibble_row() constructs a data frame that is guaranteed to occupy one row.
+Vector columns are required to have size one, non-vector columns are wrapped
+in a list." />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -84,7 +95,7 @@ are recycled.
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -101,7 +112,7 @@ are recycled.
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -124,7 +135,7 @@ are recycled.
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -164,6 +175,12 @@ are recycled.
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -194,22 +211,40 @@ tricks. Column names are not modified.</p></li>
 <li><p><code>tibble()</code> builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.</p></li>
+<li><p>If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.</p></li>
 </ul>
 
+<p><code>tibble_row()</code> constructs a data frame that is guaranteed to occupy one row.
+Vector columns are required to have size one, non-vector columns are wrapped
+in a list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>, <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>,
-  <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>))</pre>
+    <pre class="usage"><span class='fu'>tibble</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+)
+
+<span class='fu'>tibble_row</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created elements. These arguments are
+      <td><p>&lt;<code><a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic-dots</a></code>&gt;
+A set of name-value pairs. These arguments are
 processed with <code><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
-unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p></td>
+unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
+<p>Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the .data
+pronoun.
+An existing <code>.data</code> pronoun, provided e.g. inside <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>,
+is not available.</p></td>
     </tr>
     <tr>
       <th>.rows</th>
@@ -229,7 +264,8 @@ for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
 </ul>
 
-<p>See <a href='name-repair.html'>name-repair</a> for more details on these terms and the strategies used
+<p>This argument is passed on as <code>repair</code> to <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
+See there for more details on these terms and the strategies used
 to enforce them.</p></td>
     </tr>
     </table>
@@ -242,9 +278,10 @@ frame, i.e. it has class <code>data.frame</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
-<code><a href='enframe.html'>enframe()</a></code> to convert a named vector into tibble. Name repair is detailed
-in <a href='name-repair.html'>name-repair</a>. <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlang::list2()</a></code> provides more details on tidy dots
-semantics, i.e. exactly how quasiquotation works for the <code>...</code> argument.</p></div>
+<code><a href='enframe.html'>enframe()</a></code> to convert a named vector into a tibble. Name repair is
+detailed in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
+See quasiquotation for more details on tidy dots semantics,
+i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Unnamed arguments are named with their expression:</span>
@@ -268,21 +305,21 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt; 5     5    10     1</div><div class='input'>
 <span class='co'># Columns are available in subsequent expressions:</span>
 <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
-#&gt;        x     y
-#&gt;    &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 0.579 1.16 
-#&gt;  2 0.898 1.80 
-#&gt;  3 0.344 0.689
-#&gt;  4 0.761 1.52 
-#&gt;  5 0.731 1.46 
-#&gt;  6 0.852 1.70 
-#&gt;  7 0.976 1.95 
-#&gt;  8 0.113 0.226
-#&gt;  9 0.970 1.94 
-#&gt; 10 0.648 1.30 </div><div class='input'>
+#&gt;         x      y
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1 0.512  1.02  
+#&gt;  2 0.836  1.67  
+#&gt;  3 0.709  1.42  
+#&gt;  4 0.874  1.75  
+#&gt;  5 0.0115 0.0230
+#&gt;  6 0.888  1.78  
+#&gt;  7 0.996  1.99  
+#&gt;  8 0.500  1.00  
+#&gt;  9 0.359  0.718 
+#&gt; 10 0.775  1.55  </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	26 obs. of  1 variable:
-#&gt;  $ letters: chr  "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	2 obs. of  1 variable:
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
+#&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
@@ -296,8 +333,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
 <span class='co'># but it forces you to take charge of names, if they need repair:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.
-#&gt; Use .name_repair to specify repair.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x...1</span>
 #&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   x...1 x...2
@@ -315,44 +351,52 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt; <span class='message'>* `a 1` -&gt; a.1</span>
 #&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## You can specify your own name repair function:</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; x.1</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x   x.1
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
 <span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
-<span class='fu'>tibble</span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'>tibble</span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `year 1` -&gt; year_1</span>
+#&gt; <span class='message'>* `year 2` -&gt; year_2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   year_1 year_2
 #&gt;    &lt;dbl&gt;  &lt;dbl&gt;
 #&gt; 1      1      2</div><div class='input'>
 <span class='co'>## purrr-style anonymous functions and constants</span>
 <span class='co'>## are also supported</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span>(<span class='no'>.</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span>(<span class='no'>.</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; x.1</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       x   x.1
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; a</span>
+#&gt; <span class='message'>* x -&gt; b</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;       a     b
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     2</div><div class='input'>
 <span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
-<span class='co'># if the number of rows is consistent:</span>
+<span class='co'># if the number of rows is compatible. Unnamed tibbled are</span>
+<span class='co'># spliced, i.e. the inner columns are inserted into the</span>
+<span class='co'># tibble under construction.</span>
 <span class='fu'>tibble</span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
-    <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
+  <span class='fu'>tibble</span>(
+    <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
+    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
   ),
-  <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-    <span class='kw'>f</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-      <span class='kw'>g</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+    <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
+      <span class='kw'>f</span> <span class='kw'>=</span> <span class='no'>b</span>
     )
   )
-)</div><div class='output co'>#&gt; # A tibble: 3 x 3
-#&gt;       a   b$c    $d e$f$g
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1     1     4     7 a    
-#&gt; 2     2     5     8 b    
-#&gt; 3     3     6     9 c    </div><div class='input'><span class='fu'>tibble</span>(
+)</div><div class='output co'>#&gt; # A tibble: 3 x 4
+#&gt;       a     b     c d$e$f
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     4     7     4
+#&gt; 2     2     5     8     5
+#&gt; 3     3     6     9     6</div><div class='input'><span class='fu'>tibble</span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>,
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>4</span>),
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
@@ -365,10 +409,14 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt; 4     4     0     0     0     1           0.516           -0.122 
 #&gt; # … with 2 more variables: [,"Petal.Length"] &lt;dbl&gt;, [,"Petal.Width"] &lt;dbl&gt;</div><div class='input'>
 <span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
-<span class='co'># with inconsistent number of rows:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; Error : Column `y` is a date/time and must be stored as POSIXct, not POSIXlt.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have consistent lengths, only values of length one are recycled:
-#&gt; * Length 3: Column `a`
-#&gt; * Length 4: Column `b`</div><div class='input'>
+<span class='co'># with incompatible number of rows:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 1
+#&gt;   y                  
+#&gt;   &lt;dttm&gt;             
+#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have compatible sizes.
+#&gt; * Size 3: Existing data.
+#&gt; * Size 4: Column `b`.
+#&gt; ℹ Only values of size one are recycled.</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
 <span class='fu'>tibble</span>(<span class='kw'>.rows</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 0</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.rows</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
 #&gt;   .rows
@@ -384,7 +432,7 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     1     3</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quosures and expressions:</span>
-<span class='fu'>tibble</span>(!!!<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'>tibble</span>(!!! <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
 #&gt;  1     1     2
@@ -397,17 +445,17 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
 #&gt;  8     8    16
 #&gt;  9     9    18
 #&gt; 10    10    20</div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
 
+<span class='co'># Use tibble_row() to construct a one-row tibble:</span>
+<span class='fu'>tibble_row</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;       a lm    
+#&gt;   &lt;dbl&gt; &lt;list&gt;
+#&gt; 1     1 &lt;lm&gt;  </div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -428,6 +476,23 @@ semantics, i.e. exactly how quasiquotation works for the <code>...</code> argume
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

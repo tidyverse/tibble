@@ -40,6 +40,12 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="Build a list — lst" />
 <meta property="og:description" content="
@@ -47,7 +53,7 @@ lst() constructs a list, similar to base::list(), but with some of the
 same features as tibble(). lst() builds components sequentially. When
 defining a component, you can refer to components created earlier in the
 call. lst() also generates missing names automatically." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -74,7 +80,7 @@ call. lst() also generates missing names automatically." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -91,7 +97,7 @@ call. lst() also generates missing names automatically." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -114,7 +120,7 @@ call. lst() also generates missing names automatically." />
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -154,6 +160,12 @@ call. lst() also generates missing names automatically." />
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -185,10 +197,15 @@ call. <code>lst()</code> also generates missing names automatically.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created elements. These arguments are
+      <td><p>&lt;<code><a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic-dots</a></code>&gt;
+A set of name-value pairs. These arguments are
 processed with <code><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
-unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p></td>
+unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
+<p>Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the .data
+pronoun.
+An existing <code>.data</code> pronoun, provided e.g. inside <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>,
+is not available.</p></td>
     </tr>
     </table>
 
@@ -210,7 +227,7 @@ Consider using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlan
 #&gt; [1] 5
 #&gt; 
 #&gt; $x
-#&gt; [1] 0.3608737 0.6525100 0.1435592 0.6807986 0.8592859
+#&gt; [1] 0.8056800 0.8140513 0.4039110 0.2184310 0.4183614
 #&gt; </div><div class='input'>
 <span class='co'># missing names are constructed from user's input</span>
 <span class='fu'>lst</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>4</span>:<span class='fl'>6</span>], <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>3</span>))</div><div class='output co'>#&gt; $`1:3`
@@ -220,7 +237,7 @@ Consider using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlan
 #&gt; [1] "d" "e" "f"
 #&gt; 
 #&gt; $`runif(3)`
-#&gt; [1] 0.8386300 0.8813129 0.2376977
+#&gt; [1] 0.6688707 0.5076503 0.6603593
 #&gt; </div><div class='input'>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>3</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>4</span>:<span class='fl'>6</span>]
@@ -258,15 +275,10 @@ Consider using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlan
 #&gt; [1] 1 2
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#life-cycle">Life cycle</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -287,6 +299,23 @@ Consider using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlan
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

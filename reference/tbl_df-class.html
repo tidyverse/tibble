@@ -40,6 +40,12 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="<code>tbl_df</code> class — tbl_df-class" />
 <meta property="og:description" content="The tbl_df class is a subclass of data.frame,
@@ -55,7 +61,7 @@ The general ethos is that tibbles are lazy and surly: they do less and
 complain more than base data.frames. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust." />
-<meta property="og:image" content="https://tibble.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -82,7 +88,7 @@ that is more expressive and robust." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -99,7 +105,7 @@ that is more expressive and robust." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
         </div>
       </div>
     </div>
@@ -122,7 +128,7 @@ that is more expressive and robust." />
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/extending.html">Extending tibble</a>
+      <a href="../articles/invariants.html">Invariants</a>
     </li>
   </ul>
 </li>
@@ -162,6 +168,12 @@ that is more expressive and robust." />
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -174,7 +186,7 @@ that is more expressive and robust." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1><code>tbl_df</code> class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tbl-df.r'><code>R/tbl-df.r</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/class-tbl_df.R'><code>R/class-tbl_df.R</code></a></small>
     <div class="hidden name"><code>tbl_df-class.Rd</code></div>
     </div>
 
@@ -189,7 +201,7 @@ central data structure for the set of packages known as the
 <a href='http://tidyr.tidyverse.org/'>tidyr</a>, and
 <a href='http://readr.tidyverse.org/'>readr</a>.</p>
 <p>The general ethos is that tibbles are lazy and surly: they do less and
-complain more than base <a href='https://rdrr.io/r/base/data.frame.html'>data.frames</a>. This forces
+complain more than base <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>s. This forces
 problems to be tackled earlier and more explicitly, typically leading to code
 that is more expressive and robust.</p>
     </div>
@@ -204,11 +216,10 @@ that is more expressive and robust.</p>
 <p>Objects of class <code>tbl_df</code> have:</p><ul>
 <li><p>A <code>class</code> attribute of <code><a href='https://rdrr.io/r/base/c.html'>c("tbl_df", "tbl", "data.frame")</a></code>.</p></li>
 <li><p>A base type of <code>"list"</code>, where each element of the list has the same
-<code><a href='https://rdrr.io/r/base/nrow.html'>NROW()</a></code>.</p></li>
+<code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code>.</p></li>
 <li><p>A <code>names</code> attribute that is a character vector the same length as the
 underlying list.</p></li>
-<li><p>A <code>row.names</code> attribute, included for compatibility with the base
-<a href='https://rdrr.io/r/base/data.frame.html'>data.frame class</a>.
+<li><p>A <code>row.names</code> attribute, included for compatibility with <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>.
 This attribute is only consulted to query the number of rows,
 any row names that might be stored there are ignored
 by most tibble methods.</p></li>
@@ -220,14 +231,15 @@ by most tibble methods.</p></li>
 
 
 <p>How default behaviour of tibbles differs from that of
-<a href='https://rdrr.io/r/base/data.frame.html'>data.frames</a>, during creation and access:</p><ul>
+<a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>s, during creation and access:</p><ul>
 <li><p>Column data is not coerced. A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.
 Read more in <code><a href='tibble.html'>tibble()</a></code>.</p></li>
-<li><p>Recycling only happens for a length 1 input.</p></li>
+<li><p>Recycling only happens for a length 1 input.
+Read more in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_recycle.html'>vctrs::vec_recycle()</a></code>.</p></li>
 <li><p>Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
-must indicate how to resolve. Read more in <a href='name-repair.html'>name-repair</a>.</p></li>
+must indicate how to resolve. Read more in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></li>
 <li><p>Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></li>
 <li><p><code>df[, j]</code> returns a tibble; it does not automatically extract the column
@@ -245,14 +257,10 @@ tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
 <code><a href='glimpse.html'>glimpse()</a></code></p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#properties-of-tbl-df">Properties of <code>tbl_df</code></a></li>
-      <li><a href="#behavior-of-tbl-df">Behavior of <code>tbl_df</code></a></li>
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -273,6 +281,23 @@ tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '24f802ea87b9d1054ef63db70ff7c836',
+    indexName: 'tibble',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

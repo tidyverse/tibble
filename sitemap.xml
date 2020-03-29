@@ -40,7 +40,7 @@
     <loc>https://tibble.tidyverse.org/reference/lst.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/reference/name-repair-retired.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/name-repair-superseded.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/name-repair.html</loc>
@@ -82,9 +82,18 @@
     <loc>https://tibble.tidyverse.org/articles/extending.html</loc>
   </url>
   <url>
+    <loc>https://tibble.tidyverse.org/articles/invariants.html</loc>
+  </url>
+  <url>
     <loc>https://tibble.tidyverse.org/articles/tibble.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/articles/types.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/wip/subassign.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/wip/subset.html</loc>
   </url>
 </urlset>
