@@ -97,9 +97,6 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be a list')",
-    "as_tibble_row()")
-
   .name_repair <- compat_name_repair(.name_repair, validate)
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
