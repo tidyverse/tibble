@@ -773,7 +773,7 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
       paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
-      i = "Only vectors of size 1 are recycled"
+      i = if (nrow != 1) "Only vectors of size 1 are recycled"
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),

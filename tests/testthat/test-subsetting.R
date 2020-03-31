@@ -804,6 +804,7 @@ verify_output("subsetting.txt", {
   df <- tibble(x = 1:3, y = x, z = y)
   df[1:2] <- list(0, 0, 0)
   df[] <- list(0, 0)
+  df[1, ] <- 1:3
   df[1:2, ] <- 1:3
   df[,] <- 1:2
 
