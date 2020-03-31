@@ -2,6 +2,10 @@ url: https://tibble.tidyverse.org
 
 template:
   package: tidytemplate
+  params:
+    docsearch:
+      api_key: 24f802ea87b9d1054ef63db70ff7c836
+      index_name: tibble
 
 home:
   strip_header: true
@@ -22,7 +26,6 @@ reference:
 - title: Coercion
   contents:
   - as_tibble
-  - "name-repair"
   - new_tibble
   - validate_tibble
   - enframe
@@ -60,8 +63,8 @@ navbar:
     menu:
     - text: Data types
       href: articles/types.html
-    - text: Extending tibble
-      href: articles/extending.html
+    - text: Invariants
+      href: articles/invariants.html
   - text: News
     menu:
     - text: "Release notes"

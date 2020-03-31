@@ -22,4 +22,10 @@
 ^\.drake$
 ^adhoc$
 ^man/figures/logo.svg$
+^man/figures/logo-og-1280x640.png$
 ^minver$
+^LICENSE\.md$
+^\.github/workflows/R-CMD-check\.yaml$
+^\.github/workflows/pr-commands\.yaml$
+^tests/testthat/helper-rstudio\.R$
+^vignettes/invariants\.md$

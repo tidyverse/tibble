@@ -5,13 +5,14 @@
 \alias{tibble-package}
 \title{tibble: Simple Data Frames}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame.
+Provides a 'tbl_df' class (the 'tibble') that
+    provides stricter checking and better formatting than the traditional
+    data frame.
 }
 \details{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+\lifecycle{stable}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
@@ -40,10 +41,56 @@ Resources on specific topics:
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
 }
+\section{Package options}{
+
+The following option is used for viewing tabular data with \code{view()}:
+\itemize{
+\item \code{tibble.view_max}: Maximum number of rows shown if the input is not a
+data frame. Default: 1000.
+}
+
+
+
+The following options are used by the tibble and pillar packages
+to format and print \code{tbl_df} objects.
+Used by the formatting workhorse \code{trunc_mat()} and, therefore,
+indirectly, by \code{print.tbl()}.
+\itemize{
+\item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
+Set to \code{Inf} to always print all rows.  Default: 20.
+\item \code{tibble.print_min}: Number of rows printed if row number threshold is
+exceeded. Default: 10.
+\item \code{tibble.width}: Output width. Default: \code{NULL} (use \code{width} option).
+\item \code{tibble.max_extra_cols}: Number of extra columns printed in reduced form.
+Default: 100.
+}
+
+
+
+\itemize{
+\item \code{pillar.bold}: Use bold font, e.g. for column headers? This currently
+defaults to \code{FALSE}, because many terminal fonts have poor support for
+bold fonts.
+\item \code{pillar.subtle}: Use subtle style, e.g. for row numbers and data types?
+Default: \code{TRUE}.
+\item \code{pillar.subtle_num}: Use subtle style for insignificant digits? Default:
+\code{FALSE}, is also affected by the \code{pillar.subtle} option.
+\item \code{pillar.neg}: Highlight negative numbers? Default: \code{TRUE}.
+\item \code{pillar.sigfig}: The number of significant digits that will be printed and
+highlighted, default: \code{3}. Set the \code{pillar.subtle} option to \code{FALSE} to
+turn off highlighting of significant digits.
+\item \code{pillar.min_title_chars}: The minimum number of characters for the column
+title, default: \code{15}.  Column titles may be truncated up to that width to
+save horizontal space. Set to \code{Inf} to turn off truncation of column
+titles.
+}
+
+}
+
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://tibble.tidyverse.org/}
+  \item \url{https://tibble.tidyverse.org/}
   \item \url{https://github.com/tidyverse/tibble}
   \item Report bugs at \url{https://github.com/tidyverse/tibble/issues}
 }

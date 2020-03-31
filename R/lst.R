@@ -1,7 +1,7 @@
 #' Build a list
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+#' \lifecycle{questioning}
 #'
 #' `lst()` constructs a list, similar to [base::list()], but with some of the
 #' same features as [tibble()]. `lst()` builds components sequentially. When
@@ -41,10 +41,13 @@
 #' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
   xs <- quos(..., .named = TRUE)
-  lst_quos(xs)$output
+  lst_quos(xs)
 }
 
-lst_quos <- function(xs, transform = function(x, i) x) {
+lst_quos <- function(xs) {
+  # TODO:
+  # - soft-deprecate lst()
+
   # Evaluate each column in turn
   col_names <- names2(xs)
   lengths <- rep_along(xs, 0L)
@@ -57,34 +60,9 @@ lst_quos <- function(xs, transform = function(x, i) x) {
     if (!is_null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      output <- transform(output, i)
     }
     names(output)[[i]] <- col_names[[i]]
   }
 
-  list(output = output, lengths = lengths)
-}
-
-expand_lst <- function(x, i) {
-  idx_to_fix <- integer()
-  if (i > 1L) {
-    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
-      idx_to_fix <- i
-      idx_boilerplate <- 1L
-    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
-      idx_to_fix <- seq2(1L, i - 1L)
-      idx_boilerplate <- i
-    }
-  }
-
-  if (length(idx_to_fix) > 0L) {
-    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
-  }
-
-  x
-}
-
-expand_vecs <- function(x, length) {
-  ones <- rep(1L, length)
-  map(x, subset_rows, ones)
+  output
 }

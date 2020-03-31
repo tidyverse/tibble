@@ -1,9 +1,9 @@
-Fix for regression with R-oldrel introduced in tibble 2.1.2.
+Major release.
 
 ## Test environments
 
-* local install, R 3.6.0
-* ubuntu 16.04 (on travis-ci), R 3.2, R 3.3, R 3.4, R-oldrel, R-release and R-devel
+* local install, R 3.6.3
+* ubuntu 18.04 (on travis-ci), R 3.2, R 3.3, R 3.4, R-oldrel, R-release and R-devel
 * win-builder
 * r-hub
 
@@ -14,4 +14,4 @@ Fix for regression with R-oldrel introduced in tibble 2.1.2.
 
 ## Reverse dependencies
 
-No behavior changes, no checks carried out.
+All broken downstream package maintainers were notified, many have already updated on CRAN or GitHub.

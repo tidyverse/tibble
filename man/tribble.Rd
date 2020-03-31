@@ -7,15 +7,17 @@
 tribble(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{tibble}.
-Variable names should be formulas, and may only appear before the
-data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Arguments specifying the structure of a \code{tibble}.
+Variable names should be formulas, and may only appear before the data.
+These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
+and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}}.}
 }
 \value{
 A \link{tibble}.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
@@ -36,4 +38,8 @@ tribble(
   "a", 1:3,
   "b", 4:6
 )
+}
+\seealso{
+See \link{quasiquotation} for more details on tidy dots semantics,
+i.e. exactly how  the \code{...} argument is processed.
 }

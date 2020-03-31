@@ -2,16 +2,31 @@
 % Please edit documentation in R/tibble.R
 \name{tibble}
 \alias{tibble}
+\alias{tibble_row}
 \title{Build a data frame}
 \usage{
-tibble(..., .rows = NULL, .name_repair = c("check_unique", "unique",
-  "universal", "minimal"))
+tibble(
+  ...,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
+
+tibble_row(
+  ...,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
-\item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created elements. These arguments are
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+A set of name-value pairs. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start with a dot.}
+unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
+
+Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the \link{.data}
+pronoun.
+An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
+is not available.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
@@ -28,7 +43,8 @@ for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
-See \link{name-repair} for more details on these terms and the strategies used
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
 to enforce them.}
 }
 \value{
@@ -51,7 +67,13 @@ tricks. Column names are not modified.
 \item \code{tibble()} builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
+\item If a column evaluates to a data frame or tibble, it is nested or spliced.
+See examples.
 }
+
+\code{tibble_row()} constructs a data frame that is guaranteed to occupy one row.
+Vector columns are required to have size one, non-vector columns are wrapped
+in a list.
 }
 \examples{
 # Unnamed arguments are named with their expression:
@@ -100,16 +122,18 @@ tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
 tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 
 # Tibbles can contain columns that are tibbles or matrices
-# if the number of rows is consistent:
+# if the number of rows is compatible. Unnamed tibbled are
+# spliced, i.e. the inner columns are inserted into the
+# tibble under construction.
 tibble(
   a = 1:3,
-  b = tibble(
-    c = 4:6,
-    d = 7:9
+  tibble(
+    b = 4:6,
+    c = 7:9
   ),
-  e = tibble(
-    f = tibble(
-      g = letters[1:3]
+  d = tibble(
+    e = tibble(
+      f = b
     )
   )
 )
@@ -120,7 +144,7 @@ tibble(
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
-# with inconsistent number of rows:
+# with incompatible number of rows:
 try(tibble(y = strptime("2000/01/01", "\%x")))
 try(tibble(a = 1:3, b = tibble(c = 4:7)))
 
@@ -134,12 +158,16 @@ tibble(x = 1, y = x)
 tibble(x = 1, y = !!x)
 
 # You can splice-unquote a list of quosures and expressions:
-tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
+tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
 
+
+# Use tibble_row() to construct a one-row tibble:
+tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
-\code{enframe()} to convert a named vector into tibble. Name repair is detailed
-in \link{name-repair}. \code{\link[rlang:list2]{rlang::list2()}} provides more details on tidy dots
-semantics, i.e. exactly how \link{quasiquotation} works for the \code{...} argument.
+\code{enframe()} to convert a named vector into a tibble. Name repair is
+detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See \link{quasiquotation} for more details on tidy dots semantics,
+i.e. exactly how  the \code{...} argument is processed.
 }

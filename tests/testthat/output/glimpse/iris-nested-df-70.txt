@@ -1,4 +1,0 @@
-Observations: 3
-Variables: 2
-$ Species <fct> setosa, versicolor, virginica
-$ data    <list> [<data.frame[50 x 5]>, <data.frame[50 x 5]>, <data…

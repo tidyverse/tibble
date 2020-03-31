@@ -1,0 +1,28 @@
+> repaired_names(letters[1:3])
+[1] "a" "b" "c"
+
+> repaired_names("")
+Error: Column 1 must be named.
+
+> repaired_names(c("a", "a"))
+Error: Column name `a` must not be duplicated.
+
+> repaired_names("..1")
+Error: Column 1 must not have names of the form ... or ..j.
+
+> repaired_names(c("a", "a"), .name_repair = "universal")
+Message: New names:
+* a -> a...1
+* a -> a...2
+
+[1] "a...1" "a...2"
+
+> repaired_names(c("a", "a"), .name_repair = "universal", quiet = TRUE)
+[1] "a...1" "a...2"
+
+> repaired_names(c("if"), .name_repair = "universal")
+Message: New names:
+* `if` -> .if
+
+[1] ".if"
+

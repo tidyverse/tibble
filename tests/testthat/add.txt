@@ -1,0 +1,35 @@
+> add_row(tibble(), a = 1)
+Error: New rows can't add columns.
+x Can't find column `a` in `.data`.
+
+> add_row(tibble(), a = 1, b = 2)
+Error: New rows can't add columns.
+x Can't find columns `a` and `b` in `.data`.
+
+> add_row(tibble(), !!!set_names(letters))
+Error: New rows can't add columns.
+x Can't find columns `a`, `b`, `c`, `d`, `e`, and 21 more in `.data`.
+
+> add_row(dplyr::group_by(tibble(a = 1), a))
+Error: Can't add rows to grouped data frames.
+
+> add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
+Error: Can't specify both `.before` and `.after`.
+
+> add_column(tibble(a = 1), a = 1)
+Error: Column name `a` must not be duplicated.
+
+> add_column(tibble(a = 1, b = 2), a = 1, b = 2)
+Error: Column names `a` and `b` must not be duplicated.
+
+> add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
+Error: Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
+
+> add_column(tibble(a = 2:3), b = 4:6)
+Error: New columns must be compatible with `.data`.
+x New column has 3 rows.
+i `.data` has 2 rows.
+
+> add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
+Error: Can't specify both `.before` and `.after`.
+
