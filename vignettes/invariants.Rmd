@@ -216,7 +216,6 @@ df[[NA_integer_]]
 df[[-1]]
 df[[4]]
 df[[1.5]]
-df[[Inf]]
 ```
 
 Character OOB access is silent because a common package idiom is to check for the absence of a column with `is.null(df[[var]])`.
