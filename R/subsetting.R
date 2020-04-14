@@ -399,28 +399,11 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  if (!vec_is(value)) {
-    if (!is_null(i)) {
-      cnd_signal(error_need_rhs_vector(value_arg))
-    }
-    if (!is_null(value)) {
-      cnd_signal(error_need_rhs_vector_or_null(value_arg))
-    }
-  }
-
-  if (is_null(value) || is_atomic(value)) {
-    value <- list(value)
-  } else {
-    value <- unclass(value)
-  }
-
-  if (!is_bare_list(value)) {
-    cnd_signal(error_need_rhs_vector_or_null(value_arg))
-  }
-
   i <- vectbl_as_new_row_index(i, x, i_arg)
 
   if (is.null(i)) {
+    value <- vectbl_wrap_rhs_col(value, value_arg)
+
     if (is.null(j)) {
       j <- seq_along(x)
     } else {
@@ -434,6 +417,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   } else {
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
+    value <- vectbl_wrap_rhs_row(value, value_arg, i = i)
 
     if (is.null(j)) {
       value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
@@ -665,7 +649,33 @@ vectbl_strip_names <- function(x) {
   x
 }
 
-vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
+vectbl_wrap_rhs_col <- function(value, value_arg) {
+  if (is_null(value)) {
+    list(value)
+  } else if (!vec_is(value)) {
+    cnd_signal(error_need_rhs_vector_or_null(value_arg))
+  } else if (is_atomic(value)) {
+    list(value)
+  } else {
+    value <- unclass(value)
+    if (!is_bare_list(value)) {
+      cnd_signal(error_need_rhs_vector_or_null(value_arg))
+    }
+    value
+  }
+}
+
+vectbl_wrap_rhs_row <- function(value, value_arg, i) {
+  if (!vec_is(value)) {
+    cnd_signal(error_need_rhs_vector(value_arg))
+  } else if (is_atomic(value)) {
+    list(value)
+  } else {
+    unclass(value)
+  }
+}
+
+vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
   tryCatch(
     for (j in seq_along(value)) {
       if (!is.null(value[[j]])) {
@@ -786,6 +796,7 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
       x = existing,
       x = new,
       i = if (nrow != 1) "Only vectors of size 1 are recycled"
+      i = if (nrow == 1 && vec_size(value[[j]]) != 1) "Row updates require a list value. Do you need `list()` or `as.list()`?"
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),
