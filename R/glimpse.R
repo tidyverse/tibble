@@ -57,7 +57,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   brief_summary <- summary[-1]
 
   if (has_length(brief_summary)) {
-    cat_line(names(brief_summary), ": ", brief_summary)
+    cli::cat_line(names(brief_summary), ": ", brief_summary)
   }
 
   if (ncol(df) == 0) return(invisible(x))
