@@ -548,6 +548,18 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
+  if (is_bare_logical(i) && is.matrix(i) && ncol(i) == 1 && nrow(i) == n) {
+    what <- paste0(
+      "tibble::", if (assign) "`[<-`" else "`[`",
+      "(i = 'can\\'t be a logical matrix')"
+    )
+
+    lifecycle::deprecate_soft("3.0.0", what,
+      details = "Convert to a logical vector."
+    )
+    i <- i[, 1]
+  }
+
   subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
 }
 
