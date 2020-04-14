@@ -1,3 +1,12 @@
+# tibble 3.0.0.9001
+
+- Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.
+- Subsetting and subassignment with logical matrices with one column work again, with a deprecation warning.
+- Use delayed import for cli to work around unload problems in downstream packages (#754).
+- Remove superseded signal for `as_tibble.list()`, because `as_tibble_row()` only works for size 1.
+- Tweak invariants vignette title.
+
+
 # tibble 3.0.0.9000
 
 - Same as previous version.
