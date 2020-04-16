@@ -795,7 +795,7 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
       paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
-      i = if (nrow != 1) "Only vectors of size 1 are recycled"
+      i = if (nrow != 1) "Only vectors of size 1 are recycled",
       i = if (nrow == 1 && vec_size(value[[j]]) != 1) "Row updates require a list value. Do you need `list()` or `as.list()`?"
     ),
     expected = nrow,
