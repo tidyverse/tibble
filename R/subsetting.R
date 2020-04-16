@@ -417,7 +417,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   } else {
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
-    value <- vectbl_wrap_rhs_row(value, value_arg, i = i)
+    value <- vectbl_wrap_rhs_row(value, value_arg)
 
     if (is.null(j)) {
       value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
@@ -651,23 +651,35 @@ vectbl_strip_names <- function(x) {
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
   if (is_null(value)) {
-    list(value)
-  } else if (!vec_is(value)) {
-    cnd_signal(error_need_rhs_vector_or_null(value_arg))
-  } else if (is_atomic(value)) {
-    list(value)
-  } else {
-    value <- unclass(value)
-    if (!is_bare_list(value)) {
-      cnd_signal(error_need_rhs_vector_or_null(value_arg))
-    }
-    value
+    return(list(value))
   }
+
+  value <- result_vectbl_wrap_rhs(value)
+  if (is_null(value)) {
+    cnd_signal(error_need_rhs_vector_or_null(value_arg))
+  }
+
+  value
 }
 
-vectbl_wrap_rhs_row <- function(value, value_arg, i) {
-  if (!vec_is(value)) {
+vectbl_wrap_rhs_row <- function(value, value_arg) {
+  value <- result_vectbl_wrap_rhs(value)
+  if (is_null(value)) {
     cnd_signal(error_need_rhs_vector(value_arg))
+  }
+
+  value
+}
+
+result_vectbl_wrap_rhs <- function(value) {
+  if (!vec_is(value)) {
+    NULL
+  } else if (is.array(value)) {
+    if (any(dim(value)[-1:-2] != 1)) {
+      return(NULL)
+    }
+    dim(value) <- head(dim(value), 2)
+    as.list(as.data.frame(value, stringsAsFactors = FALSE))
   } else if (is_atomic(value)) {
     list(value)
   } else {
@@ -716,11 +728,11 @@ string_to_indices <- function(x) {
 # Errors ------------------------------------------------------------------
 
 error_need_rhs_vector <- function(value_arg) {
-  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list or a data frame."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
 }
 
 error_need_rhs_vector_or_null <- function(value_arg) {
-  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or NULL."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
 }
 
 error_na_column_index <- function(j) {

@@ -405,10 +405,10 @@ Error: Can't use NA as row index in a tibble for assignment.
 
 > df <- tibble(x = 1:2, y = x)
 > df[] <- mean
-Error: `mean` must be a vector, a bare list, a data frame or NULL.
+Error: `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
 
 > df[] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
+Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
 
 
 [<-.tbl_df throws an error with OOB assignment
@@ -488,7 +488,7 @@ i Error occurred for column `x`.
 x No common type for `value` <list> and `x` <integer>.
 
 > df[1:3, 1:3] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame.
+Error: `NULL` must be a vector, a bare list, a data frame or a matrix.
 
 
 [<-.tbl_df and overwriting NA
@@ -633,10 +633,10 @@ i Only vectors of size 1 are recycled.
 
 > df <- tibble(x = 1:2, y = x)
 > df[1] <- lm(y ~ x, df)
-Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame or NULL.
+Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
 
 > df[1:2, 1] <- NULL
-Error: `NULL` must be a vector, a bare list or a data frame.
+Error: `NULL` must be a vector, a bare list, a data frame or a matrix.
 
 
 $<- recycles only values of length one

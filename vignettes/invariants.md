@@ -2522,6 +2522,132 @@ and if all columns updated are compatible with the value assigned.
 </tbody>
 </table>
 
+### `a` is a matrix or array
+
+If `is.matrix(a)`, then `a` is coerced to a data frame with
+`as.data.frame()` before assigning. If rows are assigned, the matrix
+type must be compatible with all columns. If `is.array(a)` and
+`any(dim(a)[-1:-2] != 1)`, an error is thrown.
+
+<table class="dftbl">
+<tbody>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+
+    with_tbl(tbl[1:2] <- matrix(8:1, ncol = 2))
+    #> # A tibble: 4 x 3
+    #>       n     c li       
+    #>   <int> <int> <list>   
+    #> 1     8     4 <dbl [1]>
+    #> 2     7     3 <int [2]>
+    #> 3     6     2 <int [3]>
+    #> 4     5     1 <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+
+    with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
+    #>    n c         li
+    #> 1  6 3          9
+    #> 2  5 2     10, 11
+    #> 3  4 1 12, 13, 14
+    #> 4 NA h       text
+
+</td>
+<td>
+
+    with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
+
+    #> Error: Assigned data `matrix(6:1, ncol =
+    #> 2)` must be compatible with existing
+    #> data.
+    #> ℹ Error occurred for column `c`.
+    #> x No common type for `value` <integer>
+    #> and `x` <character>.
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+
+    with_tbl(tbl[1:2] <- array(4:1, dim = c(4, 1, 1)))
+    #> # A tibble: 4 x 3
+    #>       n     c li       
+    #>   <int> <int> <list>   
+    #> 1     4     4 <dbl [1]>
+    #> 2     3     3 <int [2]>
+    #> 3     2     2 <int [3]>
+    #> 4     1     1 <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+</td>
+<td>
+
+    with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 2, 1)))
+    #> # A tibble: 4 x 3
+    #>       n     c li       
+    #>   <int> <int> <list>   
+    #> 1     8     4 <dbl [1]>
+    #> 2     7     3 <int [2]>
+    #> 3     6     2 <int [3]>
+    #> 4     5     1 <chr [1]>
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+
+    with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
+    #>   n c         li
+    #> 1 8 4          9
+    #> 2 7 3     10, 11
+    #> 3 6 2 12, 13, 14
+    #> 4 5 1       text
+
+</td>
+<td>
+
+    with_tbl(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
+
+    #> Error: `array(8:1, dim = c(2, 1, 4))`
+    #> must be a vector, a bare list, a data
+    #> frame, a matrix, or NULL.
+
+</td>
+</tr>
+<tr style="vertical-align:top">
+<td>
+
+    with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
+    #>   n c         li
+    #> 1 8 4          9
+    #> 2 7 3     10, 11
+    #> 3 6 2 12, 13, 14
+    #> 4 5 1       text
+
+</td>
+<td>
+
+    with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
+
+    #> Error: `array(8:1, dim = c(4, 1, 2))`
+    #> must be a vector, a bare list, a data
+    #> frame, a matrix, or NULL.
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### `a` is another type of vector
 
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
@@ -2564,11 +2690,8 @@ This is primarily provided for backward compatbility.
 </tbody>
 </table>
 
-Matrices are vectors, so they are also wrapped in `list()` before
-assignment. This consistently creates matrix columns, unlike data
-frames, which creates matrix columns when assigning to one column, but
-treats the matrix like a data frame when assigning to more than one
-column.
+Matrices must be wrapped in `list()` before assignment to create a
+matrix column.
 
 <table class="dftbl">
 <tbody>
@@ -2577,7 +2700,7 @@ column.
 </td>
 <td>
 
-    with_tbl(tbl[1] <- matrix(1:8, ncol = 2))
+    with_tbl(tbl[1] <- list(matrix(1:8, ncol = 2)))
     #> # A tibble: 4 x 3
     #>   n[,1]  [,2] c     li       
     #>   <int> <int> <chr> <list>   
@@ -2596,18 +2719,10 @@ column.
 </tr>
 <tr style="vertical-align:top">
 <td>
-
-    with_df(df[1:2] <- matrix(1:8, ncol = 2))
-    #>   n c         li
-    #> 1 1 5          9
-    #> 2 2 6     10, 11
-    #> 3 3 7 12, 13, 14
-    #> 4 4 8       text
-
 </td>
 <td>
 
-    with_tbl(tbl[1:2] <- matrix(1:8, ncol = 2))
+    with_tbl(tbl[1:2] <- list(matrix(1:8, ncol = 2)))
     #> # A tibble: 4 x 3
     #>   n[,1]  [,2] c[,1]  [,2] li       
     #>   <int> <int> <int> <int> <list>   
@@ -2673,7 +2788,7 @@ Entire columns can be removed. Specifying `i` is an error.
     with_tbl(tbl[1, 2:3] <- NULL)
 
     #> Error: `NULL` must be a vector, a bare
-    #> list or a data frame.
+    #> list, a data frame or a matrix.
 
 </td>
 </tr>
@@ -2703,7 +2818,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
     with_tbl(tbl[1] <- mean)
 
     #> Error: `mean` must be a vector, a bare
-    #> list, a data frame or NULL.
+    #> list, a data frame, a matrix, or NULL.
 
 </td>
 </tr>
@@ -2749,7 +2864,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 
     #> Error: `lm(mpg ~ wt, data = mtcars)`
     #> must be a vector, a bare list, a data
-    #> frame or NULL.
+    #> frame, a matrix, or NULL.
 
 </td>
 </tr>
@@ -3601,7 +3716,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
     with_tbl(tbl[2:3, "n"] <- NULL)
 
     #> Error: `NULL` must be a vector, a bare
-    #> list or a data frame.
+    #> list, a data frame or a matrix.
 
 </td>
 </tr>

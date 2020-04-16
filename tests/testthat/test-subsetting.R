@@ -518,6 +518,38 @@ test_that("[<-.tbl_df supports adding duplicate columns", {
   expect_identical(df, tibble(x = 1:2, x = 3:4, .name_repair = "minimal"))
 })
 
+
+test_that("[<-.tbl_df supports matrix on the RHS (#762)", {
+  df <- tibble(x = 1:4, y = letters[1:4])
+  df[1:2] <- matrix(8:1, ncol = 2)
+  expect_identical(df, tibble(x = 8:5, y = 4:1))
+
+  df <- tibble(x = 1:4, y = letters[1:4])
+  df[1:2] <- array(4:1, dim = c(4, 1, 1))
+  expect_identical(df, tibble(x = 4:1, y = 4:1))
+
+  df <- tibble(x = 1:4, y = letters[1:4])
+  df[1:2] <- array(8:1, dim = c(4, 2, 1))
+  expect_identical(df, tibble(x = 8:5, y = 4:1))
+
+  df <- tibble(x = 1:4, y = letters[1:4])
+  expect_tibble_error(
+    df[1:3, 1:2] <- matrix(6:1, ncol = 2),
+    error_assign_incompatible_type(
+      df, matrix(6:1, ncol = 2), 2, quote(matrix(6:1, ncol = 2)),
+      cnd_message(tryCatch(vec_assign(letters, 1:3, 3:1), error = identity))
+    )
+  )
+  expect_tibble_error(
+    df[1:2] <- array(8:1, dim = c(2, 1, 4)),
+    error_need_rhs_vector_or_null(quote(array(8:1, dim = c(2, 1, 4))))
+  )
+  expect_tibble_error(
+    df[1:2] <- array(8:1, dim = c(4, 1, 2)),
+    error_need_rhs_vector_or_null(quote(array(8:1, dim = c(4, 1, 2))))
+  )
+})
+
 test_that("[<- with explicit NULL doesn't change anything (#696)", {
   iris_tbl_orig <- as_tibble(iris)
 
