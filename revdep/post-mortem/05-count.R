@@ -31,10 +31,12 @@ fog_dump %>%
 
 # load sf prior to adding to tibble
 fog_dump %>%
-  count(str_detect(message, fixed("sfc")))
+  filter(str_detect(message, fixed("sfc"))) %>%
+  pull(message) %>%
+  cli::cat_line()
 
 fog_dump %>%
-  count(str_detect(message, fixed("Input must be a vector")))
+  filter(str_detect(message, fixed("Input must be a vector")))
 
 fog_dump %>%
   count(str_detect(message, "Lossy cast from .* to .* <logical>"))
