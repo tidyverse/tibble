@@ -1,3 +1,8 @@
+# tibble 3.0.0.9002
+
+- `[<-` coerces matrices to data frames (#762).
+
+
 # tibble 3.0.0.9001
 
 - Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.
