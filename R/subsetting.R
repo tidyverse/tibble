@@ -316,7 +316,8 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 warn_oob <- function(oob, n) {
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
   }
 }
 
@@ -334,7 +335,8 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 warn_oob_negative <- function(oob, n) {
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
   }
 }
 
@@ -343,7 +345,8 @@ fix_oob_invalid <- function(i, is_na_orig) {
 
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
 
     i[oob] <- NA_integer_
   }
@@ -363,12 +366,14 @@ vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
 tbl_subset2 <- function(x, j, j_arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
-      details = "Recursive subsetting is deprecated for tibbles.")
+      details = "Recursive subsetting is deprecated for tibbles.",
+      env = foreign_caller_env())
 
     return(as.matrix(x)[[j]])
   } else if (has_length(j, 2) && is.numeric(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
-      details = "Recursive subsetting is deprecated for tibbles.")
+      details = "Recursive subsetting is deprecated for tibbles.",
+      env = foreign_caller_env())
 
     return(.subset2(x, j))
   } else if (is.character(j)) {
