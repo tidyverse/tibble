@@ -176,9 +176,11 @@ test_that("as_tibble() implements universal names", {
 
 
 test_that("as_tibble() implements custom name repair", {
-  invalid_df <- as_tibble(
-    list(3, 4, 5),
-    .name_repair = function(x) make.names(x, unique = TRUE)
+  expect_silent(
+    invalid_df <- as_tibble(
+      list(3, 4, 5),
+      .name_repair = function(x) make.names(x, unique = TRUE)
+    )
   )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
