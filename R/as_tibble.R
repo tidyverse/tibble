@@ -69,7 +69,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
-  .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -97,7 +97,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
@@ -109,17 +109,20 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   recycle_columns(x, .rows, lengths)
 }
 
-compat_name_repair <- function(.name_repair, validate) {
+compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
   if (is.null(validate)) return(.name_repair)
 
-  name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
-  if (!has_length(.name_repair, 1)) {
-    deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
-  } else if (.name_repair != name_repair) {
-    warn("`.name_repair` takes precedence over the deprecated `validate` argument argument in `as_tibble()`.")
-    return(.name_repair)
+  if (!.missing_name_repair) {
+    name_repair <- .name_repair
+  } else if (isTRUE(validate)) {
+    name_repair <- "check_unique"
+  } else {
+    name_repair <- "minimal"
   }
+
+  deprecate_soft("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
+    env = foreign_caller_env())
 
   name_repair
 }
