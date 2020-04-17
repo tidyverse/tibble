@@ -1,3 +1,10 @@
+# tibble 3.0.0.9003
+
+- More soft-deprecation warnings are actually visible.
+- `as_tibble(validate = )` now always triggers a deprecation warning.
+- Subsetting and subassignment of rows with one-column matrices work again, with a deprecation warning (#760).
+
+
 # tibble 3.0.0.9002
 
 - `[<-` coerces matrices to data frames (#762).
