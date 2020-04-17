@@ -34,4 +34,16 @@ with_lifecycle_errors <- function(expr) {
 # Enable once signal_superseded() reaches stable state
 signal_superseded <- function(...) {}
 
+foreign_caller_env <- function(my_env = env_parent()) {
+  for (n in 2:10) {
+    caller <- caller_env(n)
+    if (!is_reference(env_parent(caller), my_env)) {
+      return(caller)
+    }
+  }
+
+  # Safety net
+  caller
+}
+
 # nocov end

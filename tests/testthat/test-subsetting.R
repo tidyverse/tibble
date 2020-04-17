@@ -284,6 +284,14 @@ test_that("[.tbl_df ignores drop argument (with warning) without j argument (#30
   expect_warning(expect_identical(df_all[1, drop = TRUE], df_all[1]))
 })
 
+test_that("[.tbl_df emits errors with matrix row subsetting (#760)", {
+  scoped_lifecycle_errors()
+
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_error(foo[matrix(1:2, ncol = 2), ])
+  expect_error(foo[matrix(rep(TRUE, 10), ncol = 2), ])
+})
+
 
 test_that("[.tbl_df is careful about attributes (#155)", {
   df <- tibble(x = 1:2, y = x)
@@ -723,7 +731,6 @@ verify_output("subsetting.txt", {
   foo[c(-1, 1), ]
   foo[c(-1, NA), ]
   invisible(foo[-4, ])
-  foo[as.matrix(1), ]
   foo[array(1, dim = c(1, 1, 1)), ]
   foo[mean, ]
   foo[foo, ]
@@ -740,7 +747,6 @@ verify_output("subsetting.txt", {
   foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
   foo[c(TRUE, TRUE), ]
   foo[c(TRUE, TRUE, FALSE, FALSE), ]
-  foo[as.matrix(TRUE), ]
   foo[array(TRUE, dim = c(1, 1, 1)), ]
 
   "# [.tbl_df rejects unknown column indexes (#83)"
@@ -801,6 +807,11 @@ verify_output("subsetting.txt", {
   foo[as.list(1:3)] <- 1
   foo[factor(1:3)] <- 1
   foo[Sys.Date()] <- 1
+
+  "# [.tbl_df emits lifecycle warnings with one-column matrix indexes (#760)"
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  invisible(foo[matrix(1:2, ncol = 1), ])
+  invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
 
   "# [<-.tbl_df rejects unknown row indexes"
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)

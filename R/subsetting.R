@@ -532,14 +532,15 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
-  if (is_bare_logical(i) && is.matrix(i) && ncol(i) == 1 && nrow(i) == n) {
+  if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
       "tibble::", if (assign) "`[<-`" else "`[`",
-      "(i = 'can\\'t be a logical matrix')"
+      "(i = 'can\\'t be a matrix')"
     )
 
     lifecycle::deprecate_soft("3.0.0", what,
-      details = "Convert to a logical vector."
+      details = "Convert to a vector.",
+      env = foreign_caller_env()
     )
     i <- i[, 1]
   }
