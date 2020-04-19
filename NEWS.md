@@ -1,3 +1,8 @@
+# tibble 3.0.0.9004
+
+- If `.name_repair` is a function, no repair messages are shown (#763).
+
+
 # tibble 3.0.0.9003
 
 - More soft-deprecation warnings are actually visible.
