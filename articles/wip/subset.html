@@ -12,10 +12,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
+<script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
 <!-- docsearch --><script src="../../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../../docsearch.css" rel="stylesheet">
@@ -48,9 +49,9 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../../index.html">tibble</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
         </div>
       </div>
     </div>
@@ -460,8 +461,19 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">tbl</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>)]]
-<span class="co">#&gt; [1] 2</span></pre></body></html></div>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">tbl</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>)]]</pre></body></html></div>
+<div class="warning">
+<pre><code>#&gt; Warning: The `j` argument of
+#&gt; ``[[.tbl_df`()` can't be a vector of
+#&gt; length 2 as of tibble 3.0.0.
+#&gt; Recursive subsetting is deprecated for
+#&gt; tibbles.
+#&gt; This warning is displayed once every 8
+#&gt; hours.
+#&gt; Call `lifecycle::last_warnings()` to see
+#&gt; where this warning was generated.</code></pre>
+</div>
+<pre><code>#&gt; [1] 2</code></pre>
 </td>
 </tr></tbody></table>
 </div>
@@ -474,7 +486,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>]
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -486,7 +498,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">df</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">df</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]</pre></body></html></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[.data.frame`(df, "a",
 #&gt; drop = FALSE): 'drop' argument will be
@@ -499,7 +511,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; 4 4</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]</pre></body></html></div>
 <div class="warning">
 <pre><code>#&gt; Warning: `drop` argument ignored for
 #&gt; subsetting a tibble with `x[j]`, it has
@@ -516,7 +528,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="no">df</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="no">df</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]</pre></body></html></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[.data.frame`(df, "a", drop
 #&gt; = TRUE): 'drop' argument will be ignored</code></pre>
@@ -528,7 +540,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; 4 4</code></pre>
 </td>
 <td>
-<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="no">tbl</span>[<span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]</pre></body></html></div>
 <div class="warning">
 <pre><code>#&gt; Warning: `drop` argument ignored for
 #&gt; subsetting a tibble with `x[j]`, it has
@@ -547,7 +559,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>]
+<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -561,20 +573,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>]
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, 4):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
@@ -585,14 +597,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, NA):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -601,7 +613,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA_character_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb66"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA_character_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df,
 #&gt; NA_character_): undefined columns
@@ -609,7 +621,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb66"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_character_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb68"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_character_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -618,14 +630,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb68"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA_integer_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb70"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">NA_integer_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df,
 #&gt; NA_integer_): undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb70"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_integer_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb72"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_integer_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -637,11 +649,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb72"><html><body><pre class="r"><span class="no">df</span>[, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb74"><html><body><pre class="r"><span class="no">df</span>[, <span class="st">"a"</span>]
 <span class="co">#&gt; [1] 1 2 3 4</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb73"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb75"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -655,7 +667,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb74"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb76"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -669,17 +681,17 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb75"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb77"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; [1] 1 2 3 4</span></pre></body></html></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb76"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">1</span>]
+<div class="sourceCode" id="cb78"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">1</span>]
 <span class="co">#&gt; [1] 1 2 3 4</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb77"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>]
+<div class="sourceCode" id="cb79"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -693,20 +705,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb78"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">0</span>]
+<div class="sourceCode" id="cb80"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">0</span>]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb79"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb81"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, , 4):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb81"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb83"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
@@ -717,14 +729,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb83"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb85"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, , NA):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb85"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb87"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -733,7 +745,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb87"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA_character_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb89"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA_character_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, ,
 #&gt; NA_character_): undefined columns
@@ -741,7 +753,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb89"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA_character_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb91"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA_character_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -750,14 +762,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb91"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA_integer_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">NA_integer_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, ,
 #&gt; NA_integer_): undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA_integer_</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb95"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA_integer_</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
 #&gt; `[` at position 1.</code></pre>
@@ -771,7 +783,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb95"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
+<div class="sourceCode" id="cb97"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -785,7 +797,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb96"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]
+<div class="sourceCode" id="cb98"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -793,7 +805,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb97"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>]
+<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -807,7 +819,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb98"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">3</span>]
+<div class="sourceCode" id="cb100"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">3</span>]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -819,14 +831,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, 1:4):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb101"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb103"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
@@ -839,7 +851,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb103"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>:<span class="fl">2</span>]
+<div class="sourceCode" id="cb105"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>:<span class="fl">2</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -851,14 +863,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb104"><html><body><pre class="r"><span class="no">df</span>[-<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb106"><html><body><pre class="r"><span class="no">df</span>[-<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.default`(df, -1:2): only 0's
 #&gt; may be mixed with negative subscripts</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb106"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb108"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -873,7 +885,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb108"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>]
+<div class="sourceCode" id="cb110"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   b     cd       </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;list&gt;   </span>
@@ -887,7 +899,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb109"><html><body><pre class="r"><span class="no">tbl</span>[-(<span class="fl">1</span>:<span class="fl">2</span>)]
+<div class="sourceCode" id="cb111"><html><body><pre class="r"><span class="no">tbl</span>[-(<span class="fl">1</span>:<span class="fl">2</span>)]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;   cd       </span>
 <span class="co">#&gt;   &lt;list&gt;   </span>
@@ -901,7 +913,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb110"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]
+<div class="sourceCode" id="cb112"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -909,7 +921,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb111"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb113"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">TRUE</span>]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -923,7 +935,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb112"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb114"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -931,7 +943,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb113"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
+<div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -945,7 +957,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb114"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
+<div class="sourceCode" id="cb116"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;   b    </span>
 <span class="co">#&gt;   &lt;chr&gt;</span>
@@ -957,7 +969,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]
+<div class="sourceCode" id="cb117"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]
 <span class="co">#&gt;   b</span>
 <span class="co">#&gt; 1 e</span>
 <span class="co">#&gt; 2 f</span>
@@ -965,7 +977,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <span class="co">#&gt; 4 h</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb116"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb118"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -978,7 +990,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb118"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb120"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, c(FALSE,
 #&gt; TRUE, FALSE, TRUE)): undefined columns
@@ -986,7 +998,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb120"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb122"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -1005,7 +1017,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb122"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
+<div class="sourceCode" id="cb124"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1019,7 +1031,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb123"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]
+<div class="sourceCode" id="cb125"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>()]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -1027,7 +1039,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb124"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">2</span>]
+<div class="sourceCode" id="cb126"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">2</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1041,7 +1053,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb125"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">3</span>]
+<div class="sourceCode" id="cb127"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">3</span>]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1053,14 +1065,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb126"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb128"><html><body><pre class="r"><span class="no">df</span>[, <span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, , 1:4):
 #&gt; undefined columns selected</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb128"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb130"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">1</span>:<span class="fl">4</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
@@ -1073,7 +1085,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb130"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">0</span>:<span class="fl">2</span>]
+<div class="sourceCode" id="cb132"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">0</span>:<span class="fl">2</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1085,14 +1097,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb131"><html><body><pre class="r"><span class="no">df</span>[, -<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb133"><html><body><pre class="r"><span class="no">df</span>[, -<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset(x, j): only 0's may be
 #&gt; mixed with negative subscripts</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb133"><html><body><pre class="r"><span class="no">tbl</span>[, -<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb135"><html><body><pre class="r"><span class="no">tbl</span>[, -<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -1107,7 +1119,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb135"><html><body><pre class="r"><span class="no">tbl</span>[, -<span class="fl">1</span>]
+<div class="sourceCode" id="cb137"><html><body><pre class="r"><span class="no">tbl</span>[, -<span class="fl">1</span>]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   b     cd       </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;list&gt;   </span>
@@ -1119,7 +1131,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb136"><html><body><pre class="r"><span class="no">df</span>[, -(<span class="fl">1</span>:<span class="fl">2</span>)]
+<div class="sourceCode" id="cb138"><html><body><pre class="r"><span class="no">df</span>[, -(<span class="fl">1</span>:<span class="fl">2</span>)]
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] 9</span>
 <span class="co">#&gt; </span>
@@ -1133,7 +1145,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <span class="co">#&gt; [1] "text"</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb137"><html><body><pre class="r"><span class="no">tbl</span>[, -(<span class="fl">1</span>:<span class="fl">2</span>)]
+<div class="sourceCode" id="cb139"><html><body><pre class="r"><span class="no">tbl</span>[, -(<span class="fl">1</span>:<span class="fl">2</span>)]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;   cd       </span>
 <span class="co">#&gt;   &lt;list&gt;   </span>
@@ -1147,7 +1159,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb138"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]
+<div class="sourceCode" id="cb140"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -1155,7 +1167,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb139"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb141"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">TRUE</span>]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1169,7 +1181,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb140"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb142"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 4 x 0</span></pre></body></html></div>
 </td>
 </tr>
@@ -1177,7 +1189,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb141"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
+<div class="sourceCode" id="cb143"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1189,11 +1201,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb142"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
+<div class="sourceCode" id="cb144"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
 <span class="co">#&gt; [1] "e" "f" "g" "h"</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb143"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
+<div class="sourceCode" id="cb145"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)]
 <span class="co">#&gt; # A tibble: 4 x 1</span>
 <span class="co">#&gt;   b    </span>
 <span class="co">#&gt;   &lt;chr&gt;</span>
@@ -1205,11 +1217,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb144"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]
+<div class="sourceCode" id="cb146"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]
 <span class="co">#&gt; [1] "e" "f" "g" "h"</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb145"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb147"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -1222,7 +1234,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb147"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb149"><html><body><pre class="r"><span class="no">df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in `[.data.frame`(df, , c(FALSE,
 #&gt; TRUE, FALSE, TRUE)): undefined columns
@@ -1230,7 +1242,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb149"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
+<div class="sourceCode" id="cb151"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>)]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
@@ -1249,7 +1261,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb151"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, ]
+<div class="sourceCode" id="cb153"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, ]
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1258,7 +1270,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb152"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, , <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb154"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, , <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; $a</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="co">#&gt; </span>
@@ -1270,7 +1282,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <span class="co">#&gt; [1] 9</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb153"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, , <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb155"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, , <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1281,7 +1293,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb154"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, ]
+<div class="sourceCode" id="cb156"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, ]
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1293,7 +1305,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb155"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>, ]
+<div class="sourceCode" id="cb157"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">0</span>, ]
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span>
 <span class="co">#&gt; #   cd &lt;list&gt;</span></pre></body></html></div>
@@ -1303,7 +1315,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb156"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>(), ]
+<div class="sourceCode" id="cb158"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>(), ]
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span>
 <span class="co">#&gt; #   cd &lt;list&gt;</span></pre></body></html></div>
@@ -1313,18 +1325,29 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb157"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">5</span>, ]
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;       a b     cd    </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb159"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">5</span>, ]</pre></body></html></div>
+<div class="warning">
+<pre><code>#&gt; Warning: The `i` argument of
+#&gt; ``[.tbl_df`()` must lie in [0, rows] if
+#&gt; positive, as of tibble 3.0.0.
+#&gt; Use `NA` as row index to obtain a row
+#&gt; full of `NA` values.
+#&gt; This warning is displayed once every 8
+#&gt; hours.
+#&gt; Call `lifecycle::last_warnings()` to see
+#&gt; where this warning was generated.</code></pre>
+</div>
+<pre><code>#&gt; # A tibble: 1 x 3
+#&gt;       a b     cd    
+#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;
+#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb158"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">4</span>:<span class="fl">5</span>, ]
+<div class="sourceCode" id="cb162"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">4</span>:<span class="fl">5</span>, ]
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1336,7 +1359,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb159"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>, ]
+<div class="sourceCode" id="cb163"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>, ]
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1347,14 +1370,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb160"><html><body><pre class="r"><span class="no">df</span>[-<span class="fl">1</span>:<span class="fl">2</span>, ]</pre></body></html></div>
+<div class="sourceCode" id="cb164"><html><body><pre class="r"><span class="no">df</span>[-<span class="fl">1</span>:<span class="fl">2</span>, ]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in xj[i]: only 0's may be mixed
 #&gt; with negative subscripts</code></pre>
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb162"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>:<span class="fl">2</span>, ]</pre></body></html></div>
+<div class="sourceCode" id="cb166"><html><body><pre class="r"><span class="no">tbl</span>[-<span class="fl">1</span>:<span class="fl">2</span>, ]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1369,7 +1392,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb164"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA</span>, ]
+<div class="sourceCode" id="cb168"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA</span>, ]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span>
@@ -1383,7 +1406,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb165"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_integer_</span>, ]
+<div class="sourceCode" id="cb169"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA_integer_</span>, ]
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       a b     cd    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span>
@@ -1394,7 +1417,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb166"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="fl">1</span>), ]
+<div class="sourceCode" id="cb170"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="fl">1</span>), ]
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1409,7 +1432,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb167"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">TRUE</span>, ]
+<div class="sourceCode" id="cb171"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">TRUE</span>, ]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1423,7 +1446,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb168"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">FALSE</span>, ]
+<div class="sourceCode" id="cb172"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">FALSE</span>, ]
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span>
 <span class="co">#&gt; #   cd &lt;list&gt;</span></pre></body></html></div>
@@ -1431,13 +1454,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb169"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
+<div class="sourceCode" id="cb173"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
 <span class="co">#&gt;   a b         cd</span>
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb170"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]</pre></body></html></div>
+<div class="sourceCode" id="cb174"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1450,14 +1473,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb172"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]
+<div class="sourceCode" id="cb176"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]
 <span class="co">#&gt;   a b         cd</span>
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb173"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]</pre></body></html></div>
+<div class="sourceCode" id="cb177"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1472,7 +1495,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb175"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
+<div class="sourceCode" id="cb179"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1482,14 +1505,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb176"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]
+<div class="sourceCode" id="cb180"><html><body><pre class="r"><span class="no">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]
 <span class="co">#&gt;     a    b         cd</span>
 <span class="co">#&gt; 1   1    e          9</span>
 <span class="co">#&gt; 3   3    g 12, 13, 14</span>
 <span class="co">#&gt; NA NA &lt;NA&gt;       NULL</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb177"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]</pre></body></html></div>
+<div class="sourceCode" id="cb181"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="fl">TRUE</span>), ]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1506,11 +1529,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb179"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb183"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, <span class="st">"a"</span>]
 <span class="co">#&gt; [1] 1</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb180"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb184"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>]
 <span class="co">#&gt; # A tibble: 1 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -1521,7 +1544,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb181"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb185"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 1 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -1532,17 +1555,17 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb182"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb186"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; [1] 1</span></pre></body></html></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb183"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb187"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>]
 <span class="co">#&gt; [1] 1 2</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb184"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>]
+<div class="sourceCode" id="cb188"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>]
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -1554,7 +1577,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb185"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb189"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;       a</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
@@ -1566,7 +1589,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb186"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb190"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="st">"a"</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; [1] 1 2</span></pre></body></html></div>
 </td>
 </tr>
@@ -1574,7 +1597,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb187"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
+<div class="sourceCode" id="cb191"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1585,7 +1608,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb188"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
+<div class="sourceCode" id="cb192"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1594,7 +1617,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb189"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb193"><html><body><pre class="r"><span class="no">df</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; $a</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="co">#&gt; </span>
@@ -1602,7 +1625,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <span class="co">#&gt; [1] "e"</span></pre></body></html></div>
 </td>
 <td>
-<div class="sourceCode" id="cb190"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
+<div class="sourceCode" id="cb194"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>]
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1613,7 +1636,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb191"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
+<div class="sourceCode" id="cb195"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)]
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;       a b    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span>
@@ -1628,7 +1651,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb192"><html><body><pre class="r"><span class="no">tbl</span>[]
+<div class="sourceCode" id="cb196"><html><body><pre class="r"><span class="no">tbl</span>[]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1642,7 +1665,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb193"><html><body><pre class="r"><span class="no">tbl</span>[,]
+<div class="sourceCode" id="cb197"><html><body><pre class="r"><span class="no">tbl</span>[,]
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
