@@ -1,3 +1,8 @@
+# tibble 3.0.1
+
+- Same as previous version.
+
+
 # tibble 3.0.0.9004
 
 - If `.name_repair` is a function, no repair messages are shown (#763).
