@@ -96,7 +96,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.0.9003</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.1.9000</span>
         </div>
       </div>
     </div>
@@ -131,6 +131,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Release notes</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/">Version 3.0.0</a>
+    </li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/">Version 2.1.1</a>
     </li>
@@ -180,45 +183,45 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tibble-3-0-0-9003" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0.9003">
-<a href="#tibble-3-0-0-9003" class="anchor"></a>tibble 3.0.0.9003<small> Unreleased </small>
-</h1>
-<ul>
-<li>More soft-deprecation warnings are actually visible.</li>
-<li>
-<code><a href="../reference/as_tibble.html">as_tibble(validate = )</a></code> now always triggers a deprecation warning.</li>
-<li>Subsetting and subassignment of rows with one-column matrices work again, with a deprecation warning (<a href='https://github.com/tidyverse/tibble/issues/760'>#760</a>).</li>
-</ul>
-</div>
-    <div id="tibble-3-0-0-9002" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0.9002">
-<a href="#tibble-3-0-0-9002" class="anchor"></a>tibble 3.0.0.9002<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code>[&lt;-</code> coerces matrices to data frames (<a href='https://github.com/tidyverse/tibble/issues/762'>#762</a>).</li>
-</ul>
-</div>
-    <div id="tibble-3-0-0-9001" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0.9001">
-<a href="#tibble-3-0-0-9001" class="anchor"></a>tibble 3.0.0.9001<small> Unreleased </small>
-</h1>
-<ul>
-<li>Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.</li>
-<li>Subsetting and subassignment with logical matrices with one column work again, with a deprecation warning.</li>
-<li>Use delayed import for cli to work around unload problems in downstream packages (<a href='https://github.com/tidyverse/tibble/issues/754'>#754</a>).</li>
-<li>Remove superseded signal for <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>, because <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> only works for size 1.</li>
-<li>Tweak invariants vignette title.</li>
-</ul>
-</div>
-    <div id="tibble-3-0-0-9000" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0.9000">
-<a href="#tibble-3-0-0-9000" class="anchor"></a>tibble 3.0.0.9000<small> Unreleased </small>
+    <div id="tibble-3-0-1-9000" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.1.9000">
+<a href="#tibble-3-0-1-9000" class="anchor"></a>tibble 3.0.1.9000<small> Unreleased </small>
 </h1>
 <ul>
 <li>Same as previous version.</li>
 </ul>
+</div>
+    <div id="tibble-3-0-1" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.1">
+<a href="#tibble-3-0-1" class="anchor"></a>tibble 3.0.1<small> 2020-04-20 </small>
+</h1>
+<div id="compatibility-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#compatibility-fixes" class="anchor"></a>Compatibility fixes</h2>
+<ul>
+<li><p><code>[&lt;-.tbl_df()</code> coerces matrices to data frames (<a href='https://github.com/tidyverse/tibble/issues/762'>#762</a>).</p></li>
+<li><p>Use delayed import for cli to work around unload problems in downstream packages (<a href='https://github.com/tidyverse/tibble/issues/754'>#754</a>).</p></li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li><p>More soft-deprecation warnings are actually visible.</p></li>
+<li><p>If <code>.name_repair</code> is a function, no repair messages are shown (<a href='https://github.com/tidyverse/tibble/issues/763'>#763</a>).</p></li>
+<li><p>Remove superseded signal for <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>, because <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> only works for size 1.</p></li>
+</ul>
+</div>
+<div id="enhancements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#enhancements" class="anchor"></a>Enhancements</h2>
+<ul>
+<li><p><code><a href="../reference/as_tibble.html">as_tibble(validate = )</a></code> now always triggers a deprecation warning.</p></li>
+<li><p>Subsetting and subassignment of rows with one-column matrices work again, with a deprecation warning (<a href='https://github.com/tidyverse/tibble/issues/760'>#760</a>).</p></li>
+<li><p>Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.</p></li>
+<li><p>Tweak title of “Invariants” vignette.</p></li>
+</ul>
+</div>
 </div>
     <div id="tibble-3-0-0" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.0">
@@ -466,9 +469,9 @@
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> shows information obtained from <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code>, e.g. grouping information for <code>grouped_df</code> from dplyr (<a href='https://github.com/tidyverse/tibble/issues/550'>#550</a>).</p></li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.</p></li>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> disambiguates outputs for factors if the levels contain commas (<a href='https://github.com/tidyverse/tibble/issues/384'>#384</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
@@ -497,9 +500,9 @@
 <h1 class="page-header" data-toc-text="1.4.2">
 <a href="#tibble-1-4-2" class="anchor"></a>tibble 1.4.2<small> 2018-01-22 </small>
 </h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fix OS X builds.</li>
 <li>The <code>tibble.width</code> option is honored again (<a href='https://github.com/tidyverse/tibble/issues/369'>#369</a>).</li>
@@ -554,9 +557,9 @@
 <code><a href="../reference/subsetting.html">`[.tbl_df`()</a></code> supports <code>drop = TRUE</code> and omits the warning if <code>j</code> is passed. The calls <code>df[i, j, drop = TRUE]</code> and <code>df[j, drop = TRUE]</code> are now compatible with data frames again (<a href='https://github.com/tidyverse/tibble/issues/307'>#307</a>, <a href='https://github.com/tidyverse/tibble/issues/311'>#311</a>).</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Improved compatibility with remote data sources for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/328'>#328</a>).</li>
 <li>Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (<a href='https://github.com/tidyverse/tibble/issues/318'>#318</a>).</li>
@@ -580,9 +583,9 @@
 <h1 class="page-header" data-toc-text="1.3.4">
 <a href="#tibble-1-3-4" class="anchor"></a>tibble 1.3.4<small> 2017-08-22 </small>
 </h1>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call are recycled prior to evaluating subsequent arguments, improving consistency with <code>mutate()</code> (<a href='https://github.com/tidyverse/tibble/issues/213'>#213</a>).</li>
 <li>Recycling of values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call maintains their class (<a href='https://github.com/tidyverse/tibble/issues/284'>#284</a>).</li>
@@ -611,9 +614,9 @@
 <h1 class="page-header" data-toc-text="1.3.3">
 <a href="#tibble-1-3-3" class="anchor"></a>tibble 1.3.3<small> 2017-05-28 </small>
 </h1>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Added <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code>ungroup()</code> in dplyr 0.5.0 and earlier (<a href='https://github.com/tidyverse/tibble/issues/256'>#256</a>, <a href='https://github.com/tidyverse/tibble/issues/263'>#263</a>).</li>
 <li>The column width for non-syntactic columns is computed correctly again (<a href='https://github.com/tidyverse/tibble/issues/258'>#258</a>).</li>
@@ -627,9 +630,9 @@
 <h1 class="page-header" data-toc-text="1.3.1">
 <a href="#tibble-1-3-1" class="anchor"></a>tibble 1.3.1<small> 2017-05-17 </small>
 </h1>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Subsetting zero columns no longer returns wrong number of rows (<a href='https://github.com/tidyverse/tibble/issues/241'>#241</a>, <a href='https://github.com/echasnovski'>@echasnovski</a>).</li>
 </ul>
@@ -672,9 +675,9 @@
 <h1 class="page-header" data-toc-text="1.3.0">
 <a href="#tibble-1-3-0" class="anchor"></a>tibble 1.3.0<small> 2017-04-01 </small>
 </h1>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Time series matrices (objects of class <code>mts</code> and <code>ts</code>) are now supported in <code><a href="../reference/as_tibble.html">as_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/184'>#184</a>).</li>
 <li>The <code>all_equal()</code> function (called by <code>all.equal.tbl_df()</code>) now forwards to <code>dplyr</code> and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (<code>data.frame</code> vs. <code>tbl_df</code>) are ignored. The <code>all.equal.tbl_df()</code> method gives a warning and forwards to <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code> if <code>dplyr</code> is not installed; call <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal(as.data.frame(...), ...)</a></code> to avoid the warning. This ensures consistent behavior of this function, regardless if <code>dplyr</code> is loaded or not (<a href='https://github.com/tidyverse/tibble/issues/198'>#198</a>).</li>
@@ -745,9 +748,9 @@
 <h1 class="page-header" data-toc-text="1.2">
 <a href="#tibble-1-2" class="anchor"></a>tibble 1.2<small> 2016-08-26 </small>
 </h1>
-<div id="bug-fixes-7" class="section level2">
+<div id="bug-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>The <code>tibble.width</code> option is used for <code><a href="../reference/glimpse.html">glimpse()</a></code> only if it is finite (<a href='https://github.com/tidyverse/tibble/issues/153'>#153</a>, <a href='https://github.com/kwstat'>@kwstat</a>).</li>
 <li>New <code>as_tibble.poly()</code> to support conversion of a <code>poly</code> object to a tibble (<a href='https://github.com/tidyverse/tibble/issues/110'>#110</a>).</li>
@@ -863,9 +866,9 @@
 <code><a href="../reference/rownames.html">has_rownames()</a></code> supports arguments that are not data frames.</li>
 </ul>
 </div>
-<div id="bug-fixes-8" class="section level2">
+<div id="bug-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-9" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Two-dimensional indexing with <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> works (<a href='https://github.com/tidyverse/tibble/issues/58'>#58</a>, <a href='https://github.com/tidyverse/tibble/issues/63'>#63</a>).</li>
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
