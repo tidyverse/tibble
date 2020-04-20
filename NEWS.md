@@ -1,3 +1,8 @@
+# tibble 3.0.1.9000
+
+- Same as previous version.
+
+
 # tibble 3.0.1
 
 ## Compatibility fixes
