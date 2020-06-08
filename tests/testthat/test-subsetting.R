@@ -167,7 +167,7 @@ test_that("[.tbl_df is careful about column flags (#83)", {
     )
     expect_error(
       foo[array(TRUE, dim = c(1, 1, 1))],
-      "."
+      class = "vctrs_error_subscript_type"
     )
   })
 })
