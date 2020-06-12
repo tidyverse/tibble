@@ -41,7 +41,7 @@ as soon as it becomes available.
 \examples{
 glimpse(mtcars)
 
-if (requireNamespace("nycflights13", quietly = TRUE)) {
-  glimpse(nycflights13::flights)
-}
+\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+glimpse(nycflights13::flights)
+\dontshow{\}) # examplesIf}
 }

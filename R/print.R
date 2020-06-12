@@ -57,10 +57,10 @@
 #'
 #' trunc_mat(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   print(nycflights13::flights, n_extra = 2)
-#'   print(nycflights13::flights, width = Inf)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' print(nycflights13::flights, n_extra = 2)
+#' print(nycflights13::flights, width = Inf)
+#'
 #' @name formatting
 NULL
 

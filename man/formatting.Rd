@@ -100,8 +100,8 @@ print(mtcars2, n = 25, n_extra = 3)
 
 trunc_mat(mtcars)
 
-if (requireNamespace("nycflights13", quietly = TRUE)) {
-  print(nycflights13::flights, n_extra = 2)
-  print(nycflights13::flights, width = Inf)
-}
+\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+print(nycflights13::flights, n_extra = 2)
+print(nycflights13::flights, width = Inf)
+\dontshow{\}) # examplesIf}
 }
