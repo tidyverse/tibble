@@ -147,6 +147,15 @@ test_that("can add new column", {
   expect_identical(df_all_new$k, 3:1)
 })
 
+test_that("add_column() works with 0-col tibbles (#786)", {
+  local_options(lifecycle_verbosity = "error")
+
+  expect_identical(
+    add_column(new_tibble(list(), nrow = 1), a = 1),
+    tibble(a = 1)
+  )
+})
+
 test_that("add_column() keeps class of object", {
   iris_new <- add_column(iris, x = 1:150)
   expect_equal(class(iris), class(iris_new))
