@@ -15,6 +15,9 @@ x Found `a` on the left-hand side of `~`.
 Error: All column specifications must use the `~name` syntax.
 x Found `a` on the left-hand side of `~`.
 
+> tribble(~b, 1, "a")
+Error: Can't combine `b` <double> and `b` <character>.
+
 > frame_matrix(1)
 Error: Must specify at least one column using the `~name` syntax.
 

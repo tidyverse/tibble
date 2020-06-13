@@ -204,6 +204,7 @@ verify_output("tribble.txt", {
   tribble(~a, ~b, 1)
   tribble(a ~ b, 1)
   tribble(a ~ b + c, 1)
+  tribble(~ b, 1, "a")
 
   frame_matrix(1)
   frame_matrix(~a, list(1))
