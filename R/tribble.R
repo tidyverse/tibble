@@ -156,7 +156,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
     if (inherits(col, "list") && !some(col, needs_list_col)) {
       subclass_tribble_c_errors(
         names(frame_col)[[i]],
-        col <- vec_c(!!! col)
+        col <- vec_c(!!! unname(col))
       )
     }
 
