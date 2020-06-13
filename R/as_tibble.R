@@ -310,7 +310,7 @@ check_all_lengths_one <- function(x) {
 
 
 #' @description
-#' `as_tibble_column()` converts a vector to a tibble with one column.
+#' `as_tibble_col()` converts a vector to a tibble with one column.
 #'
 #' @param column_name Name of the column.
 #'
