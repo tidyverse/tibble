@@ -1,7 +1,5 @@
 # tibble 3.0.1.9000
 
-- `tribble()` now handles named inputs better (#775)
-
 - Same as previous version.
 
 
