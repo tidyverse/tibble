@@ -162,8 +162,25 @@ test_that("tribble returns 0x0 tibble when there's no argument", {
   expect_equal(df, tibble())
 })
 
-test_that("names stripped at appropriate time", {
-  expect_equal(tribble(~ x, c(a = 1)), tibble(x = 1))
+test_that("names stripped at appropriate time (#775)", {
+  expect_equal(
+    tribble(~ x, c(a = 1)),
+    tibble(x = 1)
+  )
+})
+
+test_that("lubridate::Period (#784)", {
+  expect_equal(
+    tribble(~ x, lubridate::days(1), lubridate::days(2)),
+    tibble(x = lubridate::days(1:2))
+  )
+})
+
+test_that("formattable (#785)", {
+  expect_equal(
+    tribble(~ x, formattable::formattable(1.0, 1), formattable::formattable(2.0, 1)),
+    tibble(x = formattable::formattable(1:2 + 0, 1))
+  )
 })
 
 # ---- frame_matrix() ----
@@ -204,6 +221,7 @@ verify_output("tribble.txt", {
   tribble(~a, ~b, 1)
   tribble(a ~ b, 1)
   tribble(a ~ b + c, 1)
+  tribble(~ b, 1, "a")
 
   frame_matrix(1)
   frame_matrix(~a, list(1))
