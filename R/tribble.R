@@ -155,7 +155,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
     if (!some(col, needs_list_col) && inherits(col, "list")) {
       # Assign names for somewhat nice error message, remove later
       names(col) <- rep_along(col, names(frame_col)[[i]])
-      col <- unname(vec_c(!!! col))
+      col <- vec_c(!!! unname(col))
     }
 
     frame_col[[i]] <- unname(col)

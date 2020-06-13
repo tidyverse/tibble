@@ -162,6 +162,10 @@ test_that("tribble returns 0x0 tibble when there's no argument", {
   expect_equal(df, tibble())
 })
 
+test_that("names stripped at appropriate time", {
+  expect_equal(tribble(~ x, c(a = 1)), tibble(x = 1))
+})
+
 # ---- frame_matrix() ----
 
 test_that("frame_matrix constructs a matrix as expected", {
