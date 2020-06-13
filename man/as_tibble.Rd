@@ -115,7 +115,7 @@ that implements tibble's treatment of \link{rownames}.
 \code{as_tibble_row()} converts a vector to a tibble with one row.
 If the input is a list, all elements must have length one.
 
-\code{as_tibble_column()} converts a vector to a tibble with one column.
+\code{as_tibble_col()} converts a vector to a tibble with one column.
 }
 \section{Row names}{
 
