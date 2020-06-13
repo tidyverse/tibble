@@ -138,6 +138,7 @@ turn_frame_data_into_tibble <- function(names, rest) {
   nrow <- length(rest) / length(names)
   dim(rest) <- c(length(names), nrow)
   dimnames(rest) <- list(names, NULL)
+
   frame_mat <- t(rest)
   frame_col <- turn_matrix_into_column_list(frame_mat)
 
@@ -152,10 +153,11 @@ turn_matrix_into_column_list <- function(frame_mat) {
   for (i in seq_len(ncol(frame_mat))) {
     col <- frame_mat[, i]
 
-    if (!some(col, needs_list_col) && inherits(col, "list")) {
-      # Assign names for somewhat nice error message, remove later
-      names(col) <- rep_along(col, names(frame_col)[[i]])
-      col <- vec_c(!!! unname(col))
+    if (inherits(col, "list") && !some(col, needs_list_col)) {
+      subclass_tribble_c_errors(
+        names(frame_col)[[i]],
+        col <- vec_c(!!! col)
+      )
     }
 
     frame_col[[i]] <- unname(col)
@@ -174,6 +176,16 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 
   colnames(frame_mat) <- names
   frame_mat
+}
+
+subclass_tribble_c_errors <- function(name, code) {
+  tryCatch(
+    code,
+
+    vctrs_error = function(cnd) {
+      cnd_signal(error_tribble_c(name, cnd))
+    }
+  )
 }
 
 # Errors ------------------------------------------------------------------
@@ -210,4 +222,10 @@ error_frame_matrix_list <- function(pos) {
     "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   ))
+}
+
+error_tribble_c <- function(name, cnd) {
+  cnd$message <- paste0("Can't create column ", tick(name), ": ", cnd_header(cnd))
+  cnd$class <- c(tibble_error_class("tribble_c"), class(cnd))
+  cnd
 }
