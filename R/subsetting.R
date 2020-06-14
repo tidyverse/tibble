@@ -370,21 +370,25 @@ tbl_subset2 <- function(x, j, j_arg) {
       env = foreign_caller_env())
 
     return(as.matrix(x)[[j]])
-  } else if (has_length(j, 2) && is.numeric(j)) {
-    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
-      details = "Recursive subsetting is deprecated for tibbles.",
-      env = foreign_caller_env())
-
-    return(.subset2(x, j))
-  } else if (is.character(j)) {
-    # Side effect: check that j is a scalar and not NA, allow invalid column names
-    vectbl_as_col_location2(j, length(x) + 1L, c(names(x), j), j_arg = j_arg)
-
-    # Don't warn when accessing invalid column names
-    return(.subset2(x, j))
+  } else if (is.numeric(j)) {
+    if (length(j) == 1L) {
+      if (j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
+        # Side effect: throw error for invalid j
+        vectbl_as_col_location2(j, length(x), j_arg = j_arg)
+      }
+    } else if (length(j) == 2L) {
+      deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+        details = "Recursive subsetting is deprecated for tibbles.",
+        env = foreign_caller_env())
+    } else {
+      # Side effect: throw error for invalid j
+      vectbl_as_col_location2(j, length(x), j_arg = j_arg)
+    }
+  } else if (is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)) {
+    # Side effect: throw error for invalid j
+    vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
   }
 
-  j <- vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
   .subset2(x, j)
 }
 
