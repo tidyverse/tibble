@@ -144,7 +144,7 @@ tibble <- function(...,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is.null <- map_lgl(xs, quo_is.null)
+  is.null <- map_lgl(xs, quo_is_null)
 
   tibble_quos(xs[!is.null], .rows, .name_repair)
 }
@@ -166,7 +166,7 @@ tibble_row <- function(...,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is.null <- map_lgl(xs, quo_is.null)
+  is.null <- map_lgl(xs, quo_is_null)
 
   tibble_quos(xs[!is.null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }
