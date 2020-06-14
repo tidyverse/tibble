@@ -94,7 +94,7 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n) || n < 0) {
+  if (is.null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {

@@ -176,14 +176,14 @@ pos_from_before_after_names <- function(before, after, names) {
 }
 
 pos_from_before_after <- function(before, after, len) {
-  if (is_null(before)) {
-    if (is_null(after)) {
+  if (is.null(before)) {
+    if (is.null(after)) {
       len
     } else {
       limit_pos_range(after, len)
     }
   } else {
-    if (is_null(after)) {
+    if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
       cnd_signal(error_both_before_after())

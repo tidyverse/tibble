@@ -57,7 +57,7 @@ lst_quos <- function(xs) {
   for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
-    if (!is_null(res)) {
+    if (!is.null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
     }

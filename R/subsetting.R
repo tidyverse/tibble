@@ -156,7 +156,7 @@ NULL
     }
   }
 
-  if (!is_null(i)) {
+  if (!is.null(i)) {
     i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg, assign = TRUE)
   }
 
@@ -393,7 +393,7 @@ tbl_subset2 <- function(x, j, j_arg) {
 }
 
 tbl_subset_col <- function(x, j, j_arg) {
-  if (is_null(j)) return(x)
+  if (is.null(j)) return(x)
   j <- vectbl_as_col_index(j, x, j_arg = j_arg)
   xo <- .subset(x, j)
   xo <- set_repaired_names(xo, .name_repair = "minimal")
@@ -401,7 +401,7 @@ tbl_subset_col <- function(x, j, j_arg) {
 }
 
 tbl_subset_row <- function(x, i, i_arg) {
-  if (is_null(i)) return(x)
+  if (is.null(i)) return(x)
   i <- vectbl_as_row_index(i, x, i_arg)
   xo <- lapply(unclass(x), vec_slice, i = i)
   set_tibble_class(xo, nrow = length(i))
@@ -574,7 +574,7 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !map_lgl(value, is_null)
+  is_data <- !map_lgl(value, is.null)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
@@ -660,12 +660,12 @@ vectbl_strip_names <- function(x) {
 }
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
-  if (is_null(value)) {
+  if (is.null(value)) {
     return(list(value))
   }
 
   value <- result_vectbl_wrap_rhs(value)
-  if (is_null(value)) {
+  if (is.null(value)) {
     cnd_signal(error_need_rhs_vector_or_null(value_arg))
   }
 
@@ -674,7 +674,7 @@ vectbl_wrap_rhs_col <- function(value, value_arg) {
 
 vectbl_wrap_rhs_row <- function(value, value_arg) {
   value <- result_vectbl_wrap_rhs(value)
-  if (is_null(value)) {
+  if (is.null(value)) {
     cnd_signal(error_need_rhs_vector(value_arg))
   }
 

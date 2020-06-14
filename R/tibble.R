@@ -144,9 +144,9 @@ tibble <- function(...,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
+  is.null <- map_lgl(xs, quo_is.null)
 
-  tibble_quos(xs[!is_null], .rows, .name_repair)
+  tibble_quos(xs[!is.null], .rows, .name_repair)
 }
 
 #' tibble_row()
@@ -166,9 +166,9 @@ tibble_row <- function(...,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
+  is.null <- map_lgl(xs, quo_is.null)
 
-  tibble_quos(xs[!is_null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
+  tibble_quos(xs[!is.null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }
 
 #' Test if the object is a tibble
@@ -216,7 +216,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   for (j in seq_along(xs)) {
     res <- eval_tidy(xs[[j]], mask)
 
-    if (!is_null(res)) {
+    if (!is.null(res)) {
       # Single-row mode: Vectors must be length one, non-vectors are wrapped
       # in a list (which is length one by definition)
       if (single_row) {
