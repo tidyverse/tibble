@@ -372,7 +372,7 @@ tbl_subset2 <- function(x, j, j_arg) {
     return(as.matrix(x)[[j]])
   } else if (is.numeric(j)) {
     if (length(j) == 1L) {
-      if (j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
+      if (is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
         # Side effect: throw error for invalid j
         vectbl_as_col_location2(j, length(x), j_arg = j_arg)
       }
