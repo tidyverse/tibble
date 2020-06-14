@@ -789,6 +789,10 @@ verify_output("subsetting.txt", {
   foo[[1:3]]
   foo[[ letters[1:3] ]]
   foo[[TRUE]]
+  foo[[-1]]
+  foo[[1.5]]
+  foo[[3]]
+  foo[[Inf]]
   foo[[mean]]
   foo[[foo]]
 

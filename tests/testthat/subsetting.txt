@@ -290,6 +290,23 @@ Error: Must extract column with a single valid subscript.
 x Subscript `TRUE` has the wrong type `logical`.
 i It must be numeric or character.
 
+> foo[[-1]]
+Error: Must extract column with a single valid subscript.
+x Subscript `-1` has value -1 but must be a positive location.
+
+> foo[[1.5]]
+Error: Must extract column with a single valid subscript.
+x Can't convert from `1.5` <double> to <integer> due to loss of precision.
+
+> foo[[3]]
+Error: Can't subset columns that don't exist.
+x Location 3 doesn't exist.
+i There are only 2 columns.
+
+> foo[[Inf]]
+Error: Must extract column with a single valid subscript.
+x Can't convert from `Inf` <double> to <integer> due to loss of precision.
+
 > foo[[mean]]
 Error: Must extract column with a single valid subscript.
 x Subscript `mean` has the wrong type `function`.
