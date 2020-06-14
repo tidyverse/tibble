@@ -107,7 +107,7 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
-\item \code{\link[methods:matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
+\item \code{\link[methods:StructureClasses]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
