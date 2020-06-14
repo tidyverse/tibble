@@ -1,7 +1,7 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
@@ -47,7 +47,7 @@
 #'  Read more in [rownames].
 
 #' @param _n,validate
-#'   \lifecycle{soft-deprecated}
+#'   `r lifecycle::badge("soft-deprecated")`
 #'
 #'   For compatibility only, do not use for new code.
 #' @export

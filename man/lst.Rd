@@ -22,7 +22,7 @@ is not available.}
 A named list.
 }
 \description{
-\lifecycle{questioning}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a>}}{\strong{Questioning}}
 
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
 same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When

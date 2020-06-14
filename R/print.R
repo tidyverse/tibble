@@ -1,7 +1,7 @@
 #' Printing tibbles
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
@@ -74,7 +74,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' Legacy help page for compatibility with existing packages
 #'
 #' @description
-#' \lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`
 #'
 #' Please see [print.tbl()] for the print method for tibbles.
 #'

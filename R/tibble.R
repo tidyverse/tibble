@@ -186,7 +186,7 @@ is_tibble <- function(x) {
 #' Deprecated test for tibble-ness
 #'
 #' @description
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Please use [is_tibble()] instead.
 #'

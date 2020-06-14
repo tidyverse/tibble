@@ -66,8 +66,6 @@ Remotes:
     r-lib/testthat
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)

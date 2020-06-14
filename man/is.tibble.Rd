@@ -10,7 +10,7 @@ is.tibble(x)
 \item{x}{An object}
 }
 \description{
-\lifecycle{soft-deprecated}
+\ifelse{html}{\figure{lifecycle-soft-deprecated.svg}{options: alt='Soft-deprecated lifecycle'}}{\strong{Soft-deprecated}}
 
 Please use \code{\link[=is_tibble]{is_tibble()}} instead.
 }

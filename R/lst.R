@@ -1,7 +1,7 @@
 #' Build a list
 #'
 #' @description
-#' \lifecycle{questioning}
+#' `r lifecycle::badge("questioning")`
 #'
 #' `lst()` constructs a list, similar to [base::list()], but with some of the
 #' same features as [tibble()]. `lst()` builds components sequentially. When

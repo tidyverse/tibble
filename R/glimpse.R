@@ -1,7 +1,7 @@
 #' Get a glimpse of your data
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `glimpse()` is like a transposed version of `print()`:
 #' columns run down the page, and data runs across.

@@ -26,7 +26,7 @@ as.tibble(x, ...)
 frame_data(...)
 }
 \description{
-\lifecycle{deprecated}
+\ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}
 
 Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 
