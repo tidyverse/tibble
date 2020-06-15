@@ -351,16 +351,6 @@ fix_oob_invalid <- function(i, is_na_orig) {
   i
 }
 
-vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
-  j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = assign)
-
-  if (anyNA(j)) {
-    cnd_signal(error_na_column_index(which(is.na(j))))
-  }
-
-  j
-}
-
 tbl_subset2 <- function(x, j, j_arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
@@ -392,7 +382,13 @@ tbl_subset2 <- function(x, j, j_arg) {
 
 tbl_subset_col <- function(x, j, j_arg) {
   if (is.null(j)) return(x)
-  j <- vectbl_as_col_index(j, x, j_arg = j_arg)
+
+  j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
+
+  if (anyNA(j)) {
+    cnd_signal(error_na_column_index(which(is.na(j))))
+  }
+
   xo <- .subset(x, j)
   if (anyDuplicated(j)) {
     xo <- set_repaired_names(xo, .name_repair = "minimal")
@@ -532,10 +528,16 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 
     set_names(j, names)
   } else {
-    j <- vectbl_as_col_index(j, x, j_arg, assign = TRUE)
+    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
+
+    if (anyNA(j)) {
+      cnd_signal(error_na_column_index(which(is.na(j))))
+    }
+
     if (anyDuplicated(j)) {
       cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
+
     j
   }
 }
