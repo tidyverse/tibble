@@ -307,9 +307,9 @@ vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
 }
 
 fix_oob <- function(i, n, warn = TRUE) {
-  if (all(i >= 0, na.rm = TRUE)) {
+  if (any(i > 0, na.rm = TRUE)) {
     fix_oob_positive(i, n, warn)
-  } else if (all(i <= 0, na.rm = TRUE)) {
+  } else if (any(i < 0, na.rm = TRUE)) {
     fix_oob_negative(i, n, warn)
   } else {
     # Will throw error in vec_as_location()
@@ -319,39 +319,27 @@ fix_oob <- function(i, n, warn = TRUE) {
 
 fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
-  if (warn) {
-    warn_oob(oob, n)
+  if (warn && length(oob) > 0) {
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
+                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+                   env = foreign_caller_env())
   }
 
   i[oob] <- NA_integer_
   i
 }
 
-warn_oob <- function(oob, n) {
-  if (has_length(oob)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env())
-  }
-}
-
 fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
-  if (warn) {
-    warn_oob_negative(which(oob), n)
+  if (warn && any(oob, na.rm = TRUE)) {
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
+                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+                   env = foreign_caller_env())
   }
 
   i <- i[!oob]
   if (is_empty(i)) i <- seq_len(n)
   i
-}
-
-warn_oob_negative <- function(oob, n) {
-  if (has_length(oob)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env())
-  }
 }
 
 fix_oob_invalid <- function(i, is_na_orig) {
