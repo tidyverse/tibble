@@ -43,7 +43,9 @@ x Negative and positive locations can't be mixed.
 i Subscript `c(-1, 1)` has a positive value at location 2.
 
 > foo[c(-1, NA)]
-Error: Can't use NA as column index with `[` at position 2.
+Error: Must subset columns with a valid subscript vector.
+x Negative locations can't have missing values.
+i Subscript `c(-1, NA)` has a missing value at location 2.
 
 > foo[-4]
 Error: Can't negate columns that don't exist.

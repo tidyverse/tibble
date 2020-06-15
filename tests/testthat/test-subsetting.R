@@ -122,7 +122,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     )
     expect_error(
       foo[c(-1, NA)],
-      class = "tibble_error_na_column_index"
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(

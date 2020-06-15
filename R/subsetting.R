@@ -352,13 +352,13 @@ fix_oob_invalid <- function(i, is_na_orig) {
 }
 
 vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
-  stopifnot(!is.null(j))
+  j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = assign)
 
-  if (vec_is(j) && anyNA(j)) {
+  if (anyNA(j)) {
     cnd_signal(error_na_column_index(which(is.na(j))))
   }
 
-  vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = assign)
+  j
 }
 
 tbl_subset2 <- function(x, j, j_arg) {
