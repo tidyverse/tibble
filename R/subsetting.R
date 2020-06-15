@@ -216,7 +216,23 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- tbl_subset_col(x, j = j, j_arg)
+  xo <- x
+
+  if (!is.null(j)) {
+    j <- vectbl_as_col_location(j, length(xo), names(xo), j_arg = j_arg, assign = FALSE)
+
+    if (anyNA(j)) {
+      cnd_signal(error_na_column_index(which(is.na(j))))
+    }
+
+    xo <- .subset(x, j)
+
+    if (anyDuplicated(j)) {
+      xo <- set_repaired_names(xo, .name_repair = "minimal")
+    }
+
+    xo <- set_tibble_class(xo, nrow = fast_nrow(x))
+  }
 
   if (!is.null(i)) {
     xo <- tbl_subset_row(xo, i = i, i_arg)
@@ -378,22 +394,6 @@ tbl_subset2 <- function(x, j, j_arg) {
   }
 
   .subset2(x, j)
-}
-
-tbl_subset_col <- function(x, j, j_arg) {
-  if (is.null(j)) return(x)
-
-  j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
-
-  if (anyNA(j)) {
-    cnd_signal(error_na_column_index(which(is.na(j))))
-  }
-
-  xo <- .subset(x, j)
-  if (anyDuplicated(j)) {
-    xo <- set_repaired_names(xo, .name_repair = "minimal")
-  }
-  set_tibble_class(xo, nrow = fast_nrow(x))
 }
 
 tbl_subset_row <- function(x, i, i_arg) {
