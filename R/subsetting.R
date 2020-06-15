@@ -443,7 +443,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
         x <- tbl_subassign_col(x, j[new], init)
       }
 
-      xj <- tbl_subset_col(x, j, j_arg)
+      xj <- .subset(x, j)
       xj <- tbl_subassign_row(xj, i, value, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
