@@ -556,19 +556,19 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
     i <- i[, 1]
   }
 
-  subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg, assign = assign)
 }
 
 vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
-  subclass_row_index_errors(vec_as_location2(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
 }
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location(j, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(vec_as_location(j, n, names), j_arg = j_arg, assign = assign)
 }
 
 vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location2(j, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(vec_as_location2(j, n, names), j_arg = j_arg, assign = assign)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
