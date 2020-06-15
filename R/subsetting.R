@@ -75,13 +75,11 @@ NULL
 #' @inheritParams base::`[.data.frame`
 #' @export
 `$.tbl_df` <- function(x, name) {
-  j <- match(as_string(name), names2(x))
-  if (is.na(j)) {
+  out <- .subset2(x, name)
+  if (is.null(out)) {
     warn(paste0("Unknown or uninitialised column: ", tick(name), "."))
-    NULL
-  } else {
-    .subset2(x, j)
   }
+  out
 }
 
 
