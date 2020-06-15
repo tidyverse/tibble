@@ -69,7 +69,7 @@ bm <- function(df) {
     # df[idx, c(TRUE, FALSE, TRUE)],
 
     check = FALSE,
-    iterations = 1000
+    iterations = 10000
   )
 }
 
