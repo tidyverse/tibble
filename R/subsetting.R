@@ -618,7 +618,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
   nrow <- fast_nrow(x)
   x <- unclass(x)
 
-  tryCatch(
+  withCallingHandlers(
     for (j in seq_along(x)) {
       xj <- x[[j]]
       vec_slice(xj, i) <- value[[j]]
@@ -688,7 +688,7 @@ result_vectbl_wrap_rhs <- function(value) {
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  tryCatch(
+  withCallingHandlers(
     for (j in seq_along(value)) {
       if (!is.null(value[[j]])) {
         value[[j]] <- vec_recycle(value[[j]], nrow)
@@ -835,8 +835,8 @@ error_assign_incompatible_type <- function(x, value, j, value_arg, message) {
 # Subclassing errors ------------------------------------------------------
 
 subclass_col_index_errors <- function(expr, j_arg, assign) {
-  tryCatch(
-    force(expr),
+  withCallingHandlers(
+    expr,
     vctrs_error_subscript = function(cnd) {
       cnd$subscript_arg <- j_arg
       cnd$subscript_elt <- "column"
@@ -849,8 +849,8 @@ subclass_col_index_errors <- function(expr, j_arg, assign) {
 }
 
 subclass_row_index_errors <- function(expr, i_arg, assign) {
-  tryCatch(
-    force(expr),
+  withCallingHandlers(
+    expr,
     vctrs_error_subscript = function(cnd) {
       cnd$subscript_arg <- i_arg
       cnd$subscript_elt <- "row"
