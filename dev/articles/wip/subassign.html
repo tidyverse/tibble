@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
+<!--optional theme--><link href="../../.css" rel="stylesheet">
 <!-- docsearch --><script src="../../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Subassignment">
@@ -498,8 +499,8 @@
 <td>
 <div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu">with_df</span>(<span class="no">df</span>$<span class="no">c</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="fl">4</span>:<span class="fl">3</span>)
 <span class="co">#&gt;   a b         cd          c</span>
-<span class="co">#&gt; 1 1 e          9          4</span>
-<span class="co">#&gt; 2 2 f     10, 11          3</span>
+<span class="co">#&gt; 1 1 e          4          4</span>
+<span class="co">#&gt; 2 2 f          3          3</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text       text</span></pre></body></html></div>
 </td>
@@ -578,15 +579,15 @@
 </tr>
 </tbody></table>
 <p>For columns of the stricter <code>"vctrs_vctr"</code> class, this class implements the check, which then works identically for data frames and tibbles:</p>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="fu">with_df</span>({ <span class="no">df</span>$<span class="no">v</span> <span class="kw">=</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(<span class="fl">1</span>:<span class="fl">4</span>); <span class="no">df</span>$<span class="no">v</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(<span class="fl">4</span>:<span class="fl">3</span>)})
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="fu">with_df</span>({ <span class="no">df</span>$<span class="no">v</span> <span class="kw">=</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html">new_vctr</a></span>(<span class="fl">1</span>:<span class="fl">4</span>); <span class="no">df</span>$<span class="no">v</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html">new_vctr</a></span>(<span class="fl">4</span>:<span class="fl">3</span>)})
 <span class="co">#&gt;   a b         cd v</span>
 <span class="co">#&gt; 1 1 e          9 4</span>
 <span class="co">#&gt; 2 2 f     10, 11 3</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14 3</span>
 <span class="co">#&gt; 4 4 h       text 4</span>
-<span class="fu">with_df</span>({ <span class="no">df</span>$<span class="no">v</span> <span class="kw">=</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(<span class="fl">1</span>:<span class="fl">4</span>); <span class="no">df</span>$<span class="no">v</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">new_vctr</a></span>(<span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">3</span>])})</pre></body></html></div>
+<span class="fu">with_df</span>({ <span class="no">df</span>$<span class="no">v</span> <span class="kw">=</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html">new_vctr</a></span>(<span class="fl">1</span>:<span class="fl">4</span>); <span class="no">df</span>$<span class="no">v</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="kw pkg">vctrs</span><span class="kw ns">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html">new_vctr</a></span>(<span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">3</span>])})</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: No common type for `x` &lt;vctrs_vctr&gt; and `value` &lt;vctrs_vctr&gt;.</code></pre>
+<pre><code>#&gt; Error: Can't convert &lt;vctrs_vctr&gt; to &lt;vctrs_vctr&gt;.</code></pre>
 </div>
 </div>
 </div>
@@ -853,8 +854,8 @@
 <pre><code>#&gt; Error: Assigned data `1.5` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Lossy cast from `value` &lt;double&gt; to
-#&gt; `x` &lt;integer&gt;.
+#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.
 #&gt; * Locations: 1.</code></pre>
 </div>
 </td>
@@ -874,8 +875,8 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -908,8 +909,8 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -942,8 +943,7 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1001,8 +1001,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to row with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `1:2` has size 2 but
-#&gt; must be size 1.</code></pre>
+#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1020,8 +1020,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to row with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `1:2` has size 2 but
-#&gt; must be size 1.</code></pre>
+#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1039,8 +1039,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to column with a
 #&gt; single valid subscript.
-#&gt; ✖ The subscript `c("cd", "d")` has size
-#&gt; 2 but must be size 1.</code></pre>
+#&gt; ✖ Subscript `c("cd", "d")` has size 2
+#&gt; but must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1089,8 +1089,8 @@
 <pre><code>#&gt; Error: Assigned data `1.5` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Lossy cast from `value` &lt;double&gt; to
-#&gt; `x` &lt;integer&gt;.
+#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.
 #&gt; * Locations: 1.</code></pre>
 </div>
 </td>
@@ -1110,8 +1110,8 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1144,8 +1144,7 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1164,8 +1163,7 @@
 <pre><code>#&gt; Error: Assigned data `list("x")` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1198,8 +1196,8 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1232,8 +1230,7 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;list&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1540,7 +1537,7 @@
 <div class="sourceCode" id="cb143"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>]))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;fct&gt; &lt;list&gt;   </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
 <span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
@@ -1554,7 +1551,7 @@
 <div class="sourceCode" id="cb144"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">b</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">1</span>, <span class="kw">a</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>]))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;fct&gt; &lt;list&gt;   </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
 <span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
@@ -1568,7 +1565,7 @@
 <div class="sourceCode" id="cb145"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">c</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">1</span>, <span class="kw">d</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>]))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;fct&gt; &lt;list&gt;   </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
 <span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
@@ -1607,8 +1604,8 @@
 <td>
 <div class="sourceCode" id="cb150"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>], <span class="kw">c</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">4</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 2.
-#&gt; ✖ It must be size 2 or 1, not 3.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 3 to
+#&gt; size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1638,8 +1635,8 @@
 <td>
 <div class="sourceCode" id="cb154"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">4</span>:<span class="fl">1</span>, <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>]))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1655,8 +1652,8 @@
 <td>
 <div class="sourceCode" id="cb157"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">4</span>:<span class="fl">1</span>, <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">1</span>]))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1681,8 +1678,7 @@
 <pre><code>#&gt; Error: Assigned data `1` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ No common type for `value` &lt;double&gt;
-#&gt; and `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1701,8 +1697,8 @@
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1718,8 +1714,8 @@
 <td>
 <div class="sourceCode" id="cb166"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">2</span>, ] <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="st">"x"</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1761,8 +1757,8 @@
 <td>
 <div class="sourceCode" id="cb173"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">2</span>, ] <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="st">"x"</span>, <span class="kw">c</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="kw">d</span> <span class="kw">=</span> <span class="st">"z"</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 4 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1823,8 +1819,7 @@
 <pre><code>#&gt; Error: Assigned data `1` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ No common type for `value` &lt;double&gt;
-#&gt; and `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1843,8 +1838,8 @@
 <pre><code>#&gt; Error: Assigned data `1:2` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ No common type for `value` &lt;integer&gt;
-#&gt; and `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;integer&gt; to
+#&gt; &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1863,8 +1858,8 @@
 <pre><code>#&gt; Error: Assigned data `c("x", "y")` must
 #&gt; be compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1880,8 +1875,8 @@
 <td>
 <div class="sourceCode" id="cb188"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">2</span>:<span class="fl">3</span>, ] <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1937,8 +1932,8 @@
 <td>
 <div class="sourceCode" id="cb196"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">2</span>:<span class="fl">3</span>, ] <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="st">"x"</span>, <span class="kw">c</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"y"</span>), <span class="kw">d</span> <span class="kw">=</span> <span class="st">"z"</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 4 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2097,8 +2092,8 @@
 <td>
 <div class="sourceCode" id="cb217"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2109,7 +2104,7 @@
 <div class="sourceCode" id="cb219"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">4</span>:<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     4 x         2</span>
 <span class="co">#&gt; 2     3 x         2</span>
 <span class="co">#&gt; 3     2 x         2</span>
@@ -2123,7 +2118,7 @@
 <div class="sourceCode" id="cb220"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1 x         2</span>
 <span class="co">#&gt; 2     1 x         2</span>
 <span class="co">#&gt; 3     1 x         2</span>
@@ -2135,10 +2130,9 @@
 <div class="sourceCode" id="cb221"><html><body><pre class="r"><span class="fu">with_df</span>(<span class="no">df</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span>))</pre></body></html></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, ,
-#&gt; value = structure(list(X1 = 1, X.x.
-#&gt; = structure(1L, .Label = "x", class =
-#&gt; "factor"), : provided 4 variables to
-#&gt; replace 3 variables</code></pre>
+#&gt; value = structure(list(X1 = 1, X.x. =
+#&gt; "x", : provided 4 variables to replace 3
+#&gt; variables</code></pre>
 </div>
 <pre><code>#&gt;   a b cd
 #&gt; 1 1 x  2
@@ -2149,8 +2143,8 @@
 <td>
 <div class="sourceCode" id="cb224"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 4 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2248,8 +2242,8 @@
 <td>
 <div class="sourceCode" id="cb237"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[,] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 2 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2260,7 +2254,7 @@
 <div class="sourceCode" id="cb239"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[,] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">4</span>:<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     4 x         2</span>
 <span class="co">#&gt; 2     3 x         2</span>
 <span class="co">#&gt; 3     2 x         2</span>
@@ -2274,7 +2268,7 @@
 <div class="sourceCode" id="cb240"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[,] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1 x         2</span>
 <span class="co">#&gt; 2     1 x         2</span>
 <span class="co">#&gt; 3     1 x         2</span>
@@ -2299,8 +2293,8 @@
 <td>
 <div class="sourceCode" id="cb244"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[,] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `x` can't be recycled to size 3.
-#&gt; ✖ It must be size 3 or 1, not 4.</code></pre>
+<pre><code>#&gt; Error: Can't recycle input of size 4 to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2339,8 +2333,8 @@
 <pre><code>#&gt; Error: Assigned data `"b"` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr></tbody></table>

@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
@@ -264,11 +268,11 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> now splices anonymous data frames, <code><a href="../reference/tibble.html">tibble(tibble(a = 1), b = a)</a></code> is equivalent to <code><a href="../reference/tibble.html">tibble(a = 1, b = a)</a></code>. This means that <code><a href="../reference/tibble.html">tibble(iris)</a></code> now has five columns, use <code><a href="../reference/tibble.html">tibble(iris = iris)</a></code> if the intention is to create a packed data frame (<a href='https://github.com/tidyverse/tibble/issues/581'>#581</a>).</p></li>
-<li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://rdrr.io/pkg/vctrs/man/vec_as_names.html">?vctrs::vec_as_names</a></code> instead.</p></li>
+<li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html">?vctrs::vec_as_names</a></code> instead.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/expression.html">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
-<li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://rdrr.io/pkg/vctrs/man/vec_size.html">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
+<li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> warns unconditionally if column not found, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> doesn’t warn.</p></li>
-<li><p><code><a href="../reference/add_row.html">add_row()</a></code> now uses <code><a href="https://rdrr.io/pkg/vctrs/man/vec_bind.html">vctrs::vec_rbind()</a></code> under the hood, this means that all columns are combined with <code><a href="https://rdrr.io/pkg/vctrs/man/vec_c.html">vctrs::vec_c()</a></code>. In particular, factor columns will be converted to character if one of the columns is a character column.</p></li>
+<li><p><code><a href="../reference/add_row.html">add_row()</a></code> now uses <code><a href="https://vctrs.r-lib.org/reference/vec_bind.html">vctrs::vec_rbind()</a></code> under the hood, this means that all columns are combined with <code><a href="https://vctrs.r-lib.org/reference/vec_c.html">vctrs::vec_c()</a></code>. In particular, factor columns will be converted to character if one of the columns is a character column.</p></li>
 </ul>
 </div>
 <div id="soft-deprecations" class="section level2">
@@ -925,7 +929,7 @@
 <li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/11'>#11</a>, <a href='https://github.com/zhilongjia'>@zhilongjia</a>).</li>
 <li>New <code><a href="../reference/rownames.html">has_rownames()</a></code> and <code><a href="../reference/rownames.html">remove_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/44'>#44</a>).</li>
 <li>New <code><a href="../reference/name-repair-superseded.html">repair_names()</a></code> fixes missing and duplicate names (<a href='https://github.com/tidyverse/tibble/issues/10'>#10</a>, <a href='https://github.com/tidyverse/tibble/issues/15'>#15</a>, <a href='https://github.com/r2evans'>@r2evans</a>).</li>
-<li>New <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">is_vector_s3()</a></code>.</li>
+<li>New <code><a href="https://rdrr.io/pkg/pillar/man/deprecated.html">is_vector_s3()</a></code>.</li>
 </ul>
 </li>
 <li>Features

@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
@@ -223,7 +227,7 @@ that is more expressive and robust.</p>
 <p>Objects of class <code>tbl_df</code> have:</p><ul>
 <li><p>A <code>class</code> attribute of <code><a href='https://rdrr.io/r/base/c.html'>c("tbl_df", "tbl", "data.frame")</a></code>.</p></li>
 <li><p>A base type of <code>"list"</code>, where each element of the list has the same
-<code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code>.</p></li>
+<code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code>.</p></li>
 <li><p>A <code>names</code> attribute that is a character vector the same length as the
 underlying list.</p></li>
 <li><p>A <code>row.names</code> attribute, included for compatibility with <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>.
@@ -243,10 +247,10 @@ by most tibble methods.</p></li>
 List-columns are expressly anticipated and do not require special tricks.
 Read more in <code><a href='tibble.html'>tibble()</a></code>.</p></li>
 <li><p>Recycling only happens for a length 1 input.
-Read more in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_recycle.html'>vctrs::vec_recycle()</a></code>.</p></li>
+Read more in <code><a href='https://vctrs.r-lib.org/reference/vec_recycle.html'>vctrs::vec_recycle()</a></code>.</p></li>
 <li><p>Column names are not munged, although missing names are auto-populated.
 Empty and duplicated column names are strongly discouraged, but the user
-must indicate how to resolve. Read more in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></li>
+must indicate how to resolve. Read more in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></li>
 <li><p>Row names are not added and are strongly discouraged, in favor of storing
 that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></li>
 <li><p><code>df[, j]</code> returns a tibble; it does not automatically extract the column
