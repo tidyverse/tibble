@@ -63,7 +63,8 @@ Suggests:
     tidyr,
     withr
 Remotes: 
-    r-lib/testthat
+    r-lib/testthat,
+    rstudio/rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
