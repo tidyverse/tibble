@@ -384,6 +384,9 @@ tbl_subset2 <- function(x, j, j_arg) {
       # Side effect: throw error for invalid j
       vectbl_as_col_location2(j, length(x), j_arg = j_arg)
     }
+  } else if (is.symbol(j)) {
+    # FIXME: Only relevant for R < 3.4
+    j <- as.character(j)
   } else if (is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)) {
     # Side effect: throw error for invalid j
     vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
