@@ -25,7 +25,7 @@ x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array
 > foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
 > foo[0.5]
 Error: Must subset columns with a valid subscript vector.
-x Can't convert from `0.5` <double> to <integer> due to loss of precision.
+x Can't convert from <double> to <integer> due to loss of precision.
 
 > foo[1:5]
 Error: Can't subset columns that don't exist.
@@ -43,7 +43,9 @@ x Negative and positive locations can't be mixed.
 i Subscript `c(-1, 1)` has a positive value at location 2.
 
 > foo[c(-1, NA)]
-Error: Can't use NA as column index with `[` at position 2.
+Error: Must subset columns with a valid subscript vector.
+x Negative locations can't have missing values.
+i Subscript `c(-1, NA)` has a missing value at location 2.
 
 > foo[-4]
 Error: Can't negate columns that don't exist.
@@ -81,7 +83,7 @@ i It must be logical, numeric, or character.
 > foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
 > foo[0.5, ]
 Error: Must subset rows with a valid subscript vector.
-x Can't convert from `0.5` <double> to <integer> due to loss of precision.
+x Can't convert from <double> to <integer> due to loss of precision.
 
 > invisible(foo[1:5, ])
 Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
@@ -296,7 +298,7 @@ x Subscript `-1` has value -1 but must be a positive location.
 
 > foo[[1.5]]
 Error: Must extract column with a single valid subscript.
-x Can't convert from `1.5` <double> to <integer> due to loss of precision.
+x Can't convert from <double> to <integer> due to loss of precision.
 
 > foo[[3]]
 Error: Can't subset columns that don't exist.
@@ -305,7 +307,7 @@ i There are only 2 columns.
 
 > foo[[Inf]]
 Error: Must extract column with a single valid subscript.
-x Can't convert from `Inf` <double> to <integer> due to loss of precision.
+x Can't convert from <double> to <integer> due to loss of precision.
 
 > foo[[mean]]
 Error: Must extract column with a single valid subscript.

@@ -179,7 +179,7 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 }
 
 subclass_tribble_c_errors <- function(name, code) {
-  tryCatch(
+  withCallingHandlers(
     code,
 
     vctrs_error = function(cnd) {
