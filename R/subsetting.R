@@ -397,7 +397,9 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  i <- vectbl_as_new_row_index(i, x, i_arg)
+  if (!is.null(i_arg) && !is.null(i)) {
+    i <- vectbl_as_new_row_index(i, x, i_arg)
+  }
 
   if (is.null(i)) {
     value <- vectbl_wrap_rhs_col(value, value_arg)
