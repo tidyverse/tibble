@@ -457,12 +457,12 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i_new <- i[new]
     i[new] <- NA
 
-    # Only update existing, caller knows how to deal with OOB
-    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
-
     if (!is_tight_sequence_at_end(i_new, nr)) {
       cnd_signal(error_new_rows_at_end_only(nr, i_new))
     }
+
+    # Only update existing, caller knows how to deal with OOB
+    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
     # Restore, caller knows how to deal
     i[new] <- i_new
@@ -500,17 +500,10 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
 
+    j <- numtbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
+
     new <- which(j > ncol(x))
     j_new <- j[new]
-    j[new] <- NA
-
-    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
-
-    if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
-    }
-
-    j[new] <- j_new
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
@@ -552,6 +545,17 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
 
 vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
   subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
+}
+
+numtbl_as_col_location <- function(j, n, j_arg, assign = FALSE) {
+  subclass_col_index_errors(
+    if (assign) {
+      num_as_location(j, n, missing = "error", oob = "extend", zero = "error")
+    } else {
+      num_as_location(j, n)
+    },
+    j_arg = j_arg, assign = assign
+  )
 }
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {

@@ -448,7 +448,9 @@ Error: `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or
 
 > df <- tibble(x = 1:2, y = x)
 > df[4:5] <- 3
-Error: Can't assign columns 4 and 5 in a tibble with 2 columns.
+Error: Can't assign to columns beyond the end with non-consecutive locations.
+i Input has size 2.
+x Subscript `4:5` contains non-consecutive location 4.
 
 > df[4:5, ] <- 3
 Error: Can't assign rows 4 and 5 in a tibble with 2 rows.
@@ -621,7 +623,9 @@ i It must be numeric or character.
 
 > df <- tibble(x = 1:2, y = x)
 > df[[4]] <- 3
-Error: Can't assign column 4 in a tibble with 2 columns.
+Error: Can't assign to columns beyond the end with non-consecutive locations.
+i Input has size 2.
+x Subscript `4` contains non-consecutive location 4.
 
 
 [[<-.tbl_df throws an error with bad RHS
