@@ -580,7 +580,7 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !map_lgl(value, is.null)
+  is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
