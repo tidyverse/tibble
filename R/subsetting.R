@@ -429,7 +429,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       if (!is.null(j_arg)) {
         j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
       }
-      new <- which(j > ncol(x))
+      new <- which(j > length(x))
       value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
@@ -502,7 +502,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
     out <- match(j, names(x))
     new <- which(is.na(out))
     if (has_length(new)) {
-      out[new] <- seq.int(ncol(x) + 1L, length.out = length(new))
+      out[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
     set_names(out, j)
   } else if (is_bare_numeric(j)) {
@@ -510,17 +510,17 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       cnd_signal(error_duplicate_column_subscript_for_assignment(j))
     }
 
-    new <- which(j > ncol(x))
+    new <- which(j > length(x))
     if (length(new) > 0) {
       j_new <- j[new]
       j[new] <- NA
 
-      if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-        cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
+      if (!is_tight_sequence_at_end(j_new, length(x))) {
+        cnd_signal(error_new_columns_at_end_only(length(x), j_new))
       }
     }
 
-    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
+    j <- vectbl_as_col_location(j, length(x), j_arg = j_arg, assign = TRUE)
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
     names <- vectbl_recycle_rhs_names(names2(value), length(j), value_arg)
