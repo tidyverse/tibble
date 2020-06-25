@@ -721,6 +721,9 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
 }
 
 vectbl_recycle_rhs_names <- function(names, n, value_arg) {
+  if (n == 1L && length(names) == 1L) {
+    return(names)
+  }
   unname(vec_recycle(set_names(names), n, x_arg = as_label(value_arg)))
 }
 
