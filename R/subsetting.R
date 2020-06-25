@@ -162,8 +162,10 @@ NULL
 
   j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
 
-  # Side effect: check scalar, allow OOB position
-  vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  # Side effect: check scalar
+  if (length(j) != 1L) {
+    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  }
   # New columns are added to the end, provide index to avoid matching column
   # names again
   names(value) <- names(j)
