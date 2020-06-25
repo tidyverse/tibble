@@ -88,7 +88,7 @@ NULL
 `$<-.tbl_df` <- function(x, name, value) {
   tbl_subassign(
     x, i = NULL, as_string(name), list(value),
-    i_arg = NULL, j_arg = NULL, value_arg = substitute(value)
+    i_arg = NULL, j_arg = name, value_arg = substitute(value)
   )
 }
 
@@ -406,7 +406,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       j <- seq_along(x)
-    } else {
+    } else if (!is.null(j_arg)) {
       j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
     }
 
@@ -426,7 +426,9 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+      if (!is.null(j_arg)) {
+        j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+      }
       new <- which(j > ncol(x))
       value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
