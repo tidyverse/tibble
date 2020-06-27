@@ -494,20 +494,20 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   # Values: index
   # Name: column name (for new columns)
 
-  if (vec_is(j) && anyNA(j)) {
-    cnd_signal(error_assign_columns_non_na_only())
-  }
-
   if (is_bare_character(j)) {
+    if (anyNA(j)) {
+      cnd_signal(error_assign_columns_non_na_only())
+    }
+
     out <- match(j, names(x))
     new <- which(is.na(out))
     if (has_length(new)) {
       out[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
-    set_names(out, j)
+    j <- set_names(out, j)
   } else if (is_bare_numeric(j)) {
-    if (anyDuplicated(j)) {
-      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
+    if (anyNA(j)) {
+      cnd_signal(error_assign_columns_non_na_only())
     }
 
     new <- which(j > length(x))
@@ -530,20 +530,20 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    set_names(j, names)
+    j <- set_names(j, names)
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
-
-    if (anyDuplicated(j)) {
-      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
-    }
-
-    j
   }
+
+  if (anyDuplicated(j)) {
+    cnd_signal(error_duplicate_column_subscript_for_assignment(j))
+  }
+
+  j
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
@@ -690,34 +690,41 @@ vectbl_wrap_rhs_row <- function(value, value_arg) {
 result_vectbl_wrap_rhs <- function(value) {
   if (!vec_is(value)) {
     NULL
+  } else if (is.list(value)) {
+    # Also covers the case of data frames
+    unclass(value)
   } else if (is.array(value)) {
     if (any(dim(value)[-1:-2] != 1)) {
       return(NULL)
     }
     dim(value) <- head(dim(value), 2)
     as.list(as.data.frame(value, stringsAsFactors = FALSE))
-  } else if (is_atomic(value)) {
-    list(value)
   } else {
-    unclass(value)
+    list(value)
   }
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  withCallingHandlers(
-    for (j in seq_along(value)) {
-      if (!is.null(value[[j]])) {
-        value[[j]] <- vec_recycle(value[[j]], nrow)
+  if (length(value) > 0L && (nrow != 1L || vec_size(value[[1L]]) != 1L)) {
+    withCallingHandlers(
+      for (j in seq_along(value)) {
+        if (!is.null(value[[j]])) {
+          value[[j]] <- vec_recycle(value[[j]], nrow)
+        }
+      },
+
+      vctrs_error_recycle_incompatible_size = function(cnd) {
+        cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
       }
-    },
+    )
+  }
 
-    vctrs_error_recycle_incompatible_size = function(cnd) {
-      cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
-    }
-  )
+  if (length(value) != 1L || ncol != 1L) {
+    # Errors have been caught beforehand in vectbl_recycle_rhs_names()
+    value <- vec_recycle(value, ncol)
+  }
 
-  # Errors have been caught beforehand in vectbl_recycle_rhs_names()
-  vec_recycle(value, ncol)
+  value
 }
 
 vectbl_recycle_rhs_names <- function(names, n, value_arg) {

@@ -426,7 +426,7 @@ Error: Row index 1 is used more than once for assignment.
 
 > df <- tibble(x = 1:2, y = x)
 > df[NA] <- 3
-Error: Can't use NA as column index in a tibble for assignment.
+Error: Can't use NA as column index with `[` at positions 1 and 2.
 
 > df[NA, ] <- 3
 Error: Can't use NA as row index in a tibble for assignment.
