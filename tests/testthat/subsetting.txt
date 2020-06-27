@@ -578,7 +578,8 @@ x Subscript `letters[1:3]` has size 3 but must be size 1.
 
 > foo[[TRUE]] <- 1
 Error: Must assign to column with a single valid subscript.
-x Subscript `TRUE` has size 2 but must be size 1.
+x Subscript `TRUE` has the wrong type `logical`.
+i It must be numeric or character.
 
 > foo[[mean]] <- 1
 Error: Must assign to columns with a valid subscript vector.
@@ -586,12 +587,12 @@ x Subscript `mean` has the wrong type `function`.
 i It must be logical, numeric, or character.
 
 > foo[[foo]] <- 1
-Error: Must assign to columns with a valid subscript vector.
+Error: Must assign to column with a single valid subscript.
 x Subscript `foo` has the wrong type `tbl_df<
   x: integer
   y: integer
 >`.
-i It must be logical, numeric, or character.
+i It must be numeric or character.
 
 > foo[[1:3, 1]] <- 1
 Error: Must assign to row with a single valid subscript.

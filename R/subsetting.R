@@ -160,12 +160,13 @@ NULL
 
   value <- list(value)
 
-  j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
-
   # Side effect: check scalar
-  if (length(j) != 1L) {
+  if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
     vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   }
+
+  j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+
   # New columns are added to the end, provide index to avoid matching column
   # names again
   names(value) <- names(j)
