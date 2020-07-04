@@ -29,3 +29,4 @@
 ^\.github/workflows/pr-commands\.yaml$
 ^tests/testthat/helper-rstudio\.R$
 ^vignettes/invariants\.md$
+^bench$
