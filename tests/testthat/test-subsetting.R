@@ -436,6 +436,13 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
   expect_identical(df, tibble(y = 1:2))
 })
 
+test_that("[[<-.tbl_df requires scalar, positive if numeric", {
+  df <- tibble(x = 1:2, y = x)
+  expect_error(df[[c("x", "y")]] <- 1, class = "vctrs_error_subscript_type")
+  expect_error(df[[1:2]] <- 1, class = "vctrs_error_subscript_type")
+  expect_error(df[[-1]] <- 1, class = "vctrs_error_subscript_type")
+})
+
 # [<- ---------------------------------------------------------------------
 
 test_that("[<-.tbl_df can remove columns", {
