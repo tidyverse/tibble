@@ -63,7 +63,7 @@ Suggests:
     tidyr,
     withr
 Remotes: 
-    r-lib/testthat,
+    r-lib/testthat@v2.3.2,
     rstudio/rmarkdown
 VignetteBuilder: 
     knitr
