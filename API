@@ -40,10 +40,10 @@ view(x, title = NULL, ...)
 ## Own S3 methods
 
 as_tibble.NULL(x, ...)
-as_tibble.data.frame(x, validate = TRUE, ..., .rows = NULL, .name_repair = c("check_unique", "unique", "universal", "minimal"), rownames = pkgconfig::get_config("tibble::rownames", NULL))
+as_tibble.data.frame(x, validate = NULL, ..., .rows = NULL, .name_repair = c("check_unique", "unique", "universal", "minimal"), rownames = pkgconfig::get_config("tibble::rownames", NULL))
 as_tibble.default(x, ...)
-as_tibble.list(x, validate = TRUE, ..., .rows = NULL, .name_repair = c("check_unique", "unique", "universal", "minimal"))
-as_tibble.matrix(x, ..., .name_repair = NULL)
+as_tibble.list(x, validate = NULL, ..., .rows = NULL, .name_repair = c("check_unique", "unique", "universal", "minimal"))
+as_tibble.matrix(x, ..., validate = NULL, .name_repair = NULL)
 as_tibble.poly(x, ...)
 as_tibble.table(x, `_n` = "n", ..., n = `_n`)
 as_tibble.ts(x, ..., .name_repair = "minimal")

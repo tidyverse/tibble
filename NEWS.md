@@ -1,3 +1,12 @@
+# tibble 2.0.1
+
+- tibble names can again be set to `NULL` within RStudio, as some R routines within RStudio relied on this behaviour (#563, @kevinushey).
+
+- `as_tibble.matrix(validate = TRUE)` works again, with a lifecycle warning (#558).
+
+- Replace `new_list_along()` by `rep_along()` to support rlang 0.3.1 (#557, @lionel-).
+
+
 # tibble 2.0.0
 
 ## Breaking changes

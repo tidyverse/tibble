@@ -4,6 +4,8 @@
 \alias{name-repair}
 \title{Repair the names of a vector}
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 tibble deals with a few levels of name repair:
 \itemize{
 \item \code{minimal} names exist. The \code{names} attribute is not \code{NULL}. The name of
