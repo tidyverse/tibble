@@ -80,7 +80,7 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/all-1-30-0.txt")
 
   expect_output_file_rel(
-    print(trunc_mat(tibble(`\n` = c("\n", '"')))),
+    print(trunc_mat(tibble(`\n` = c("\n", '"'), `\r` = factor(`\n`)))),
     "trunc_mat/newline.txt")
 
   expect_output_file_rel(

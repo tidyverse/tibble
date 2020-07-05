@@ -11,3 +11,8 @@ test_that("lst handles internal references", {
   expect_identical(lst(a = 1, b = a), list(a = 1, b = 1))
   expect_identical(lst(a = NULL, b = a), list(a = NULL, b = NULL))
 })
+
+test_that("lst supports duplicate names (#291)", {
+  expect_identical(lst(a = 1, a = a + 1, b = a), list(a = 1, a = 2, b = 2))
+  expect_identical(lst(b = 1, a = b, a = b + 1, b = a), list(b = 1, a = 1, a = 2, b = 2))
+})

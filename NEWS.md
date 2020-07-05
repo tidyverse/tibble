@@ -1,3 +1,22 @@
+# tibble 1.3.4 (2017-08-21)
+
+## Bug fixes
+
+- Values of length 1 in a `tibble()` call are recycled prior to evaluating subsequent arguments, improving consistency with `mutate()` (#213).
+- Recycling of values of length 1 in a `tibble()` call maintains their class (#284).
+- `add_row()` now always preserves the column data types of the input data frame the same way as `rbind()` does (#296).
+- `lst()` now again handles duplicate names, the value defined last is used in case of a clash.
+- Adding columns to zero-row data frames now also works when mixing lengths 1 and 0 in the new columns (#167).
+- The `validate` argument is now also supported in `as_tibble.tbl_df()`, with default to `FALSE` (#278).  It must be passed as named argument, as in `as_tibble(validate = TRUE)`.
+
+## Formatting
+
+- `format_v()` now always surrounds lists with `[]` brackets, even if their length is one. This affects `glimpse()` output for list columns (#106).
+- Factor levels are escaped when printing (#277).
+- Non-syntactic names are now also escaped in `glimpse()` (#280).
+- `tibble()` gives a consistent error message in the case of duplicate column names (#291).
+
+
 # tibble 1.3.3 (2017-05-27)
 
 ## Bug fixes

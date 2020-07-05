@@ -15,7 +15,7 @@
 \usage{
 as_tibble(x, ...)
 
-\method{as_tibble}{tbl_df}(x, ...)
+\method{as_tibble}{tbl_df}(x, ..., validate = FALSE)
 
 \method{as_tibble}{data.frame}(x, validate = TRUE, ...)
 
@@ -37,7 +37,8 @@ as_tibble(x, ...)
 \item{validate}{When \code{TRUE}, verifies that the input is a valid data
 frame (i.e. all columns are named, and are 1d vectors or lists). You may
 want to suppress this when you know that you already have a valid data
-frame and you want to save some time.}
+frame and you want to save some time, or to explicitly enable it
+if you have a tibble that you want to re-check.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
 }

@@ -213,6 +213,18 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 
+test_that("as_tibble() can validate (#278)", {
+  df <- tibble(a = 1, b = 2)
+  names(df) <- c("", NA)
+  expect_error(as_tibble(df), NA)
+  expect_error(
+    as_tibble(df, validate = TRUE),
+    "Columns 1, 2 must be named",
+    fixed = TRUE
+  )
+})
+
+
 test_that("as_data_frame is an alias of as_tibble", {
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })
@@ -287,7 +299,7 @@ test_that("columns must be named (#1101)", {
 
 test_that("names must be unique (#820)", {
   expect_error(
-    check_tibble(list(x = 1, x = 2)),
+    check_tibble(list(x = 1, x = 2, y = 3)),
     "Column `x` must have a unique name",
     fixed = TRUE
   )
@@ -295,5 +307,34 @@ test_that("names must be unique (#820)", {
     check_tibble(list(x = 1, x = 2, y = 3, y = 4)),
     "Columns `x`, `y` must have unique names",
     fixed = TRUE
+  )
+})
+
+test_that("mutate() semantics for tibble() (#213)", {
+  expect_equal(
+    tibble(a = 1:2, b = 1, c = b / sum(b)),
+    tibble(a = 1:2, b = c(1, 1), c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, a = 1:2, c = b / sum(b)),
+    tibble(b = c(1, 1), a = 1:2, c = c(0.5, 0.5))
+  )
+
+  expect_equal(
+    tibble(b = 1, c = b / sum(b), a = 1:2),
+    tibble(b = c(1, 1), c = c(1, 1), a = 1:2)
+  )
+})
+
+test_that("types preserved when recycling in tibble() (#284)", {
+  expect_equal(
+    tibble(a = 1:2, b = as.difftime(1, units = "hours")),
+    tibble(a = 1:2, b = as.difftime(c(1, 1), units = "hours"))
+  )
+
+  expect_equal(
+    tibble(b = as.difftime(1, units = "hours"), a = 1:2),
+    tibble(b = as.difftime(c(1, 1), units = "hours"), a = 1:2)
   )
 })
