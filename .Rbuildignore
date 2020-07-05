@@ -8,3 +8,4 @@
 ^revdep$
 ^README-.*\.png$
 ^appveyor\.yml$
+^bench$
