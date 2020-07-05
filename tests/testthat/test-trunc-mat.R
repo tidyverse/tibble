@@ -1,5 +1,14 @@
 context("Truncated matrix")
 
+test_that("interface of print() identical to trunc_mat()", {
+  print_arg_names <- names(formals(print.tbl_df))
+  print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
+
+  trunc_mat_arg_names <- names(formals(trunc_mat))
+
+  expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
+})
+
 test_that("print() returns output invisibly", {
   expect_output(ret <- withVisible(print(as_tibble(mtcars))))
   expect_false(ret$visible)
@@ -7,6 +16,8 @@ test_that("print() returns output invisibly", {
 })
 
 test_that("trunc_mat output matches known output", {
+  skip_on_os("windows")
+
   expect_output_file_rel(
     print(as_tibble(mtcars), n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt")
@@ -48,6 +59,10 @@ test_that("trunc_mat output matches known output", {
     "trunc_mat/zero_cols-5-30.txt")
 
   expect_output_file_rel(
+    print(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L),
+    "trunc_mat/zero-rows_unk-5-30.txt")
+
+  expect_output_file_rel(
     print(as_unknown_rows(iris[, character()]), n = 5L, width = 30L),
     "trunc_mat/zero-cols_unk-5-30.txt")
 
@@ -78,6 +93,8 @@ test_that("trunc_mat output matches known output", {
 })
 
 test_that("trunc_mat for POSIXlt columns (#86)", {
+  skip_on_os("windows")
+
   df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
   df$y <- as.POSIXlt(df$x)
 
@@ -95,4 +112,14 @@ test_that("trunc_mat for wide-character columns (#100)", {
   expect_output_file_rel(
     print(df, n = 8L, width = 60L),
     "trunc_mat/wide-8-60.txt")
+})
+
+test_that("trunc_mat backticks non-syntactic names", {
+  tb <- tibble(
+    `:)` = "smile",
+    ` ` = "space"
+  )
+  narrow <- trunc_mat(tb, width = 5)
+  expect_equal(names(narrow$table), "`:)`")
+  expect_equal(names(narrow$extra), "` `")
 })

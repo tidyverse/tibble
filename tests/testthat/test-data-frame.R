@@ -208,27 +208,3 @@ test_that("names must be unique (#820)", {
     "Each variable must have a unique name"
   )
 })
-
-# add_row ---------------------------------------------------------------
-
-test_that("can add new row", {
-  df_all_new <- add_row(df_all, a = 4, b = 3L)
-  expect_identical(nrow(df_all_new), nrow(df_all) + 1L)
-  expect_identical(df_all_new$a, c(df_all$a, 4))
-  expect_identical(df_all_new$b, c(df_all$b, 3L))
-  expect_identical(df_all_new$c, c(df_all$c, NA))
-
-  iris_new <- add_row(iris, Species = "unknown")
-  expect_equal(class(iris), class(iris_new))
-
-  iris_new <- add_row(as_tibble(iris), Species = "unknown")
-  expect_equal(class(as_tibble(iris)), class(iris_new))
-
-  new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
-  expect_true(all(is.na(new_iris_row)))
-})
-
-test_that("error if adding row with unknown variables", {
-  expect_error(add_row(tibble(a = 3), xxyzy = "err"),
-               "would add new variables")
-})

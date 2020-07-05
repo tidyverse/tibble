@@ -15,7 +15,7 @@ You can create a tibble from an existing object with `as_tibble()`:
 ``` r
 library(tibble)
 as_tibble(iris)
-#> <tibble [150 x 5]>
+#> # A tibble: 150 × 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
 #> 1           5.1         3.5          1.4         0.2  setosa
@@ -28,7 +28,7 @@ as_tibble(iris)
 #> 8           5.0         3.4          1.5         0.2  setosa
 #> 9           4.4         2.9          1.4         0.2  setosa
 #> 10          4.9         3.1          1.5         0.1  setosa
-#> ... with 140 more rows
+#> # ... with 140 more rows
 ```
 
 This will work for reasonable inputs that are already data.frame, list, matrix, or table.
@@ -37,7 +37,7 @@ You can also create a new tibble from vectors that represent the columns with `t
 
 ``` r
 tibble(x = 1:5, y = 1, z = x ^ 2 + y)
-#> <tibble [5 x 3]>
+#> # A tibble: 5 × 3
 #>       x     y     z
 #>   <int> <dbl> <dbl>
 #> 1     1     1     2
@@ -49,15 +49,15 @@ tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
-You can define a tibble row-by-row with `frame_data()`:
+You can define a tibble row-by-row with `tribble()`:
 
 ``` r
-frame_data(
+tribble(
   ~x, ~y,  ~z,
   "a", 2,  3.6,
   "b", 1,  8.5
 )
-#> <tibble [2 x 3]>
+#> # A tibble: 2 × 3
 #>       x     y     z
 #>   <chr> <dbl> <dbl>
 #> 1     a     2   3.6
@@ -81,7 +81,7 @@ Tibbles have a refined print method that shows only the first 10 rows, and all t
 ``` r
 library(nycflights13)
 flights
-#> <tibble [336,776 x 19]>
+#> # A tibble: 336,776 × 19
 #>     year month   day dep_time sched_dep_time dep_delay arr_time
 #>    <int> <int> <int>    <int>          <int>     <dbl>    <int>
 #> 1   2013     1     1      517            515         2      830
@@ -94,17 +94,18 @@ flights
 #> 8   2013     1     1      557            600        -3      709
 #> 9   2013     1     1      557            600        -3      838
 #> 10  2013     1     1      558            600        -2      753
-#> ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
-#>   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-#>   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-#>   minute <dbl>, time_hour <time>
+#> # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
+#> #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+#> #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+#> #   minute <dbl>, time_hour <dttm>
 ```
 
-Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
+Tibbles are strict about subsetting. If you try to access a variable that does not exist via `$`, you'll get a warning:
 
 ``` r
 flights$yea
-#> Error: Unknown column 'yea'
+#> Warning: Unknown column 'yea'
+#> NULL
 ```
 
 Tibbles also clearly delineate `[` and `[[`: `[` always returns another tibble, `[[` always returns a vector. No more `drop = FALSE`!

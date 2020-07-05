@@ -1,8 +1,8 @@
-context("frame_data()")
+context("tribble()")
 
-test_that("frame_data() constructs 'tibble' as expected", {
+test_that("tribble() constructs 'tibble' as expected", {
 
-  result <- frame_data(
+  result <- tribble(
     ~colA, ~colB,
     "a", 1,
     "b", 2
@@ -12,7 +12,7 @@ test_that("frame_data() constructs 'tibble' as expected", {
   expect_equal(result, compared)
 
   ## wide
-  wide <- frame_data(
+  wide <- tribble(
     ~colA, ~colB, ~colC, ~colD,
     1, 2, 3, 4,
     5, 6, 7, 8
@@ -28,7 +28,7 @@ test_that("frame_data() constructs 'tibble' as expected", {
   expect_equal(wide, wide_expectation)
 
   ## long
-  long <- frame_data(
+  long <- tribble(
     ~colA, ~colB,
     1, 6,
     2, 7,
@@ -46,34 +46,34 @@ test_that("frame_data() constructs 'tibble' as expected", {
 
 })
 
-test_that("frame_data() creates lists for non-atomic inputs (#7)", {
+test_that("tribble() creates lists for non-atomic inputs (#7)", {
   expect_identical(
-    frame_data(~a, ~b, NA, "A", letters, LETTERS[-1L]),
+    tribble(~a, ~b, NA, "A", letters, LETTERS[-1L]),
     tibble(a = list(NA, letters), b = list("A", LETTERS[-1L]))
   )
 
   expect_identical(
-    frame_data(~a, ~b, NA, NULL, 1, 2),
+    tribble(~a, ~b, NA, NULL, 1, 2),
     tibble(a = c(NA, 1), b = list(NULL, 2))
   )
 })
 
-test_that("frame_data() errs appropriately on bad calls", {
+test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(frame_data(a~b), "single argument")
+  expect_error(tribble(a~b), "single argument")
 
   # invalid colname syntax
-  expect_error(frame_data(~a + b), "symbol or string")
+  expect_error(tribble(~a + b), "symbol or string")
 
-  # frame_data() must be passed colnames
-  expect_error(frame_data(
+  # tribble() must be passed colnames
+  expect_error(tribble(
     "a", "b",
     1, 2
   ))
 
-  # frame_data() must produce rectangular structure (no filling)
-  expect_error(frame_data(
+  # tribble() must produce rectangular structure (no filling)
+  expect_error(tribble(
     ~a, ~b, ~c,
     1, 2,
     3, 4, 5
@@ -81,8 +81,8 @@ test_that("frame_data() errs appropriately on bad calls", {
 
 })
 
-test_that("frame_data can have list columns", {
-  df <- frame_data(
+test_that("tribble can have list columns", {
+  df <- tribble(
     ~x, ~y,
     1,  list(a = 1),
     2,  list(b = 2)
@@ -91,13 +91,13 @@ test_that("frame_data can have list columns", {
   expect_equal(df$y, list(list(a = 1), list(b = 2)))
 })
 
-test_that("frame_data creates n-col empty data frame", {
-  df <- frame_data(~x, ~y)
+test_that("tribble creates n-col empty data frame", {
+  df <- tribble(~x, ~y)
   expect_equal(names(df), c("x", "y"))
 })
 
-test_that("frame_data recognizes quoted non-formula call", {
-  df <- frame_data(
+test_that("tribble recognizes quoted non-formula call", {
+  df <- tribble(
     ~x, ~y,
     quote(mean(1)), 1
   )

@@ -21,7 +21,7 @@
 #'   \code{$} warns.}
 #' }
 #' @section Important functions:
-#' \code{\link{tibble}} and \code{\link{frame_data}} for construction,
+#' \code{\link{tibble}} and \code{\link{tribble}} for construction,
 #' \code{\link{as_tibble}} for coercion,
 #' and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
 "_PACKAGE"

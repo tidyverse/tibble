@@ -9,6 +9,10 @@
 #'   \code{getOption("width")}; the latter displays only the columns that
 #'   fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 #'   override this default and always print all columns.
+#' @param n_extra Number of extra columns to print abbreviated information for,
+#'   if the width is too small for the entire tibble. If \code{NULL}, the
+#'   default, will print information about at most \code{tibble.max_extra_cols}
+#'   extra columns.
 #' @seealso \link{tibble-package}
 #' @keywords internal
 #' @examples
@@ -19,6 +23,11 @@
 #' print(as_tibble(mtcars), n = 3)
 #' print(as_tibble(mtcars), n = 100)
 #'
+#' if (!requireNamespace("nycflights13", quietly = TRUE))
+#'   stop("Please install the nycflights13 package to run the rest of this example")
+#'
+#' print(nycflights13::flights, n_extra = 2)
+#' print(nycflights13::flights, width = Inf)
 #' @name formatting
 NULL
 
@@ -56,8 +65,10 @@ shrink_mat <- function(df, width, rows, n, star) {
   }
 
   df <- remove_rownames(df)
+  col_names <- tickit(colnames(df))
+  names(var_types) <- col_names
 
-  # Minimum width of each column is 5 "(int)", so we can make a quick first
+  # Minimum width of each column is 5 "<int>", so we can make a quick first
   # pass
   max_cols <- floor(width / 5)
   extra_wide <- (seq_along(df) > max_cols)
@@ -77,8 +88,7 @@ shrink_mat <- function(df, width, rows, n, star) {
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
-
-  names <- c("", colnames(mat))
+  names <- c("", col_names)
 
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
@@ -97,19 +107,18 @@ shrink_mat <- function(df, width, rows, n, star) {
     df[[1]] <- substr(df[[1]], 1, width)
   }
   shrunk <- format(df[, !too_wide, drop = FALSE])
+
   shrunk <- rbind(" " = classes, shrunk)
   if (star)
     rownames(shrunk)[[1]] <- "*"
-  colnames(shrunk) <- colnames(df)[!too_wide]
+  colnames(shrunk) <- col_names[!too_wide]
 
   if (is.na(rows))
     needs_dots <- (nrow(df) >= n)
   else
     needs_dots <- (rows > n)
+
   if (needs_dots) {
-    dot_width <- pmin(w[-1][!too_wide], 3)
-    dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""),
-      FUN.VALUE = character(1))
     rows_missing <- rows - n
   } else {
     rows_missing <- 0L
@@ -178,7 +187,7 @@ format_extra_rows <- function(x) {
     } else if (x$rows_missing > 0) {
       paste0(big_mark(x$rows_missing), " more rows")
     }
-  } else if (is.na(x$rows_total)) {
+  } else if (is.na(x$rows_total) && x$rows_min > 0) {
     paste0("at least ", x$rows_min, " rows total")
   }
 }
@@ -195,7 +204,7 @@ format_extra_cols <- function(x) {
       vars <- ""
     }
     paste0(length(x$extra), " ",
-           if (!identical(x$rows_total, 0L)) "more ",
+           if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
            "variables", vars)
   }
 }
@@ -247,7 +256,25 @@ big_mark <- function(x, ...) {
 }
 
 tibble_width <- function(width) {
-  width %||% tibble_opt("width") %||% getOption("width")
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width))
+    return(width)
+
+  getOption("width")
+}
+
+tibble_glimpse_width <- function(width) {
+  if (!is.null(width))
+    return(width)
+
+  width <- tibble_opt("width")
+  if (!is.null(width) && is.finite(width))
+    return(width)
+
+  getOption("width")
 }
 
 format_n <- function(x) collapse(quote_n(x))

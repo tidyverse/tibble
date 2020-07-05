@@ -199,11 +199,12 @@ list_to_tibble <- function(x, validate, rownames = NULL) {
 #' @export
 #' @rdname as_tibble
 as_tibble.matrix <- function(x, ...) {
-  x <- matrixToDataFrame(x)
-  if (is.null(colnames(x))) {
-    colnames(x) <- paste0("V", seq_len(ncol(x)))
-  }
-  x
+  matrixToDataFrame(x)
+}
+
+#' @export
+as_tibble.poly <- function(x, ...) {
+  as_tibble(unclass(x))
 }
 
 #' @export
@@ -266,51 +267,6 @@ is.tibble <- function(x) {
 #' @export
 is_tibble <- is.tibble
 
-
-#' Add a row to a data frame
-#'
-#' This is a convenient way to add a single row of data to an existing data
-#' frame. See \code{\link{frame_data}} for an easy way to create an complete
-#' data frame row-by-row.
-#'
-#' @param .data Data frame to append to.
-#' @param ... Name-value pairs. If you don't supply the name of a variable,
-#'   it'll be given the value \code{NA}.
-#' @examples
-#' # add_row ---------------------------------
-#' df <- tibble(x = 1:3, y = 3:1)
-#'
-#' add_row(df, x = 4, y = 0)
-#'
-#' # You can supply vectors, to add multiple rows (this isn't
-#' # recommended because it's a bit hard to read)
-#' add_row(df, x = 4:5, y = 0:-1)
-#'
-#' # Absent variables get missing values
-#' add_row(df, x = 4)
-#'
-#' # You can't create new variables
-#' \dontrun{
-#' add_row(df, z = 10)
-#' }
-#' @export
-add_row <- function(.data, ...) {
-  df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(1L)
-
-  extra_vars <- setdiff(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    stopc(
-      "This row would add new variables: ", format_n(extra_vars)
-    )
-  }
-
-  missing_vars <- setdiff(names(.data), names(df))
-  df[missing_vars] <- NA
-  df <- df[names(.data)]
-
-  rbind(.data, df)
-}
 
 # Validity checks --------------------------------------------------------------
 
