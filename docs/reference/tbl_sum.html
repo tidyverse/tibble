@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Provide a succinct summary of an object — obj_sum • tibble</title>
+<title>Provide a succinct summary of an object — tbl_sum • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -93,46 +93,35 @@
     </div>
 
     
-    <p><code>type_sum()</code> gives a brief summary of object type. Objects that commonly
-occur in a data frame should return a string with four or less characters.
-
-    <code>obj_sum()</code> also includes the size of the object if <code>is_vector_s3()</code>
-is <code>TRUE</code>.
-
-    <code>tbl_sum()</code> gives a brief textual description of a table-like object,
+    <p><code>tbl_sum()</code> gives a brief textual description of a table-like object,
 which should include the dimensions, the data source, and possible grouping
-(for <code>dplyr</code>).  The default implementation forwards to <code>obj_sum()</code>.</p>
+(for <code>dplyr</code>).  The default implementation forwards to <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::obj_sum()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>obj_sum</span>(<span class='no'>x</span>)
-
-<span class='fu'>type_sum</span>(<span class='no'>x</span>)
-
-<span class='fu'>tbl_sum</span>(<span class='no'>x</span>)
-
-<span class='fu'>is_vector_s3</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>tbl_sum</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object to summarise. Generally only methods of atomic vectors
-and variants have been implemented.</p></td>
+      <td><p>Object to summarise</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>obj_sum</span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; [1] "int [10]"</div><div class='input'><span class='fu'>obj_sum</span>(<span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>10</span>))</div><div class='output co'>#&gt; [1] "int [10 × 1]"</div><div class='input'><span class='fu'>obj_sum</span>(<span class='fu'>Sys.Date</span>())</div><div class='output co'>#&gt; [1] "date [1]"</div><div class='input'><span class='fu'>obj_sum</span>(<span class='fu'>Sys.time</span>())</div><div class='output co'>#&gt; [1] "dttm [1]"</div><div class='input'><span class='fu'>obj_sum</span>(<span class='no'>mean</span>)</div><div class='output co'>#&gt; [1] "fun"</div></pre>
+    <p><code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::type_sum()</a></code>, <code><a href='http://www.rdocumentation.org/packages/pillar/topics/type_sum'>pillar::is_vector_s3()</a></code></p>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -143,7 +132,7 @@ and variants have been implemented.</p></td>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

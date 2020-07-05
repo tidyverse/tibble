@@ -1,4 +1,4 @@
-#' Coerce lists and matrices to data frames.
+#' Coerce lists and matrices to data frames
 #'
 #' [as.data.frame()] is effectively a thin wrapper around `data.frame`,
 #' and hence is rather slow (because it calls [data.frame()] on each element
@@ -98,7 +98,7 @@ list_to_tibble <- function(x, validate) {
   if (validate) {
     x <- check_tibble(x)
   } else if (has_null_names(x)) {
-    x <- set_names(x, rep_along(x, ""))
+    names(x) <- rep_along(x, "")
   }
   x <- recycle_columns(x)
 

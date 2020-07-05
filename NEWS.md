@@ -1,18 +1,44 @@
-## tibble 1.4.1 (2017-12-24)
+# tibble 1.4.2 (2018-01-22)
 
-### New formatting
+Bug fixes
+---------
+
+- Fix OS X builds.
+- The `tibble.width` option is honored again (#369).
+- `tbl[1, , drop = TRUE]` now behaves identically to data frames (#367).
+- Fix error message when accessing columns using a logical index vector (#337, @mundl).
+- `glimpse()` returns its input for zero-column data frames.
+
+Features
+--------
+
+- `enframe(NULL)` now returns the same as `enframe(logical())` (#352).
+- `tribble()` now ignores trailing commas (#342, @LaDilettante).
+- Updated vignettes and website documentation.
+
+Performance
+-----------
+
+- Faster printing of very wide tibbles (#360).
+- Faster construction and subsetting for tibbles (#353).
+- Only call `nrow()` and `head()` in `glimpse()`, not `ncol()`.
+
+
+# tibble 1.4.1 (2017-12-24)
+
+## New formatting
 
 The new pillar package is now responsible for formatting tibbles. Pillar will try to display as many columns as possible, if necessary truncating or shortening the output. Colored output highlights important information and guides the eye. The vignette in the tibble package describes how to adapt custom data types for optimal display in a tibble.
 
-### New features
+## New features
 
 - Make `add_case()` an alias for `add_row()` (#324, @LaDilettante).
 - `as_tibble()` gains `rownames` argument (#288, #289).
 - `as_tibble.matrix()` repairs column names.
 - Tibbles now support character subsetting (#312).
-- ``` `[.tbl_df`() ``` supports `drop = TRUE` and omits the warning if `j` is passed. The calls `df[i, j, drop = TRUE]` and `df[i, drop = TRUE]` are now compatible with data frames again (#307, #311).
+- ``` `[.tbl_df`() ``` supports `drop = TRUE` and omits the warning if `j` is passed. The calls `df[i, j, drop = TRUE]` and `df[j, drop = TRUE]` are now compatible with data frames again (#307, #311).
 
-### Bug fixes
+## Bug fixes
 
 - Improved compatibility with remote data sources for `glimpse()` (#328).
 - Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (#318).
@@ -20,7 +46,7 @@ The new pillar package is now responsible for formatting tibbles. Pillar will tr
 - Prevent `add_column()` from dropping classes and attributes by removing the use of `cbind()`. Additionally this ensures that `add_column()` can be used with grouped data frames (#303, @DavisVaughan).
 - `add_column()` to an empty zero-row tibble with a variable of nonzero length now produces a correct error message (#319).
 
-### Internal changes
+## Internal changes
 
 - Reexporting `has_name()` from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.
 - Compatible with R 3.1 (#323).

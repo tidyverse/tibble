@@ -47,7 +47,7 @@ check_names_df.logical <- function(j, x) {
   if (!(length(j) %in% c(1L, length(x)))) {
     stopc(
       "Length of logical index vector must be 1 or ", length(x),
-      " (the number of rows), not ", length(j)
+      " (the number of columns), not ", length(j)
     )
   }
   if (anyNA(j)) {

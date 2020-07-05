@@ -59,7 +59,7 @@ frame_matrix <- function(...) {
 }
 
 extract_frame_data_from_dots <- function(...) {
-  dots <- list(...)
+  dots <- dots_list(...)
 
   # Extract the names.
   frame_names <- extract_frame_names_from_dots(dots)
@@ -85,11 +85,13 @@ extract_frame_names_from_dots <- function(dots) {
 
   for (i in seq_along(dots)) {
     el <- dots[[i]]
-    if (!is.call(el))
+    if (!is.call(el)) {
       break
+    }
 
-    if (!identical(el[[1]], as.name("~")))
+    if (!identical(el[[1]], as.name("~"))) {
       break
+    }
 
     if (length(el) != 2) {
       stopc("Expected a column name with a single argument; e.g. `~name`")
@@ -132,7 +134,7 @@ turn_frame_data_into_tibble <- function(names, rest) {
 
   # Create a tbl_df and return it
   names(frame_col) <- names
-  as_tibble(frame_col)
+  new_tibble(frame_col)
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {

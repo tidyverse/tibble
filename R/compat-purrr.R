@@ -1,4 +1,4 @@
-# nocov - compat-purrr (last updated: rlang 0.0.0.9007)
+# nocov start - compat-purrr (last updated: rlang 0.1.9000)
 
 # This file serves as a reference for compatibility functions for
 # purrr. They are not drop-in replacements but allow a similar style
@@ -11,7 +11,8 @@ map <- function(.x, .f, ...) {
 }
 map_mold <- function(.x, .f, .mold, ...) {
   out <- vapply(.x, .f, .mold, ..., USE.NAMES = FALSE)
-  rlang::set_names(out, names(.x))
+  names(out) <- names(.x)
+  out
 }
 map_lgl <- function(.x, .f, ...) {
   map_mold(.x, .f, logical(1), ...)

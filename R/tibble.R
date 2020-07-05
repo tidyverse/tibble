@@ -1,4 +1,4 @@
-#' Build a data frame or list.
+#' Build a data frame or list
 #'
 #' @description
 #' `tibble()` is a trimmed down version of [data.frame()] that:
@@ -11,13 +11,16 @@
 #' * Adds `tbl_df` class to output.
 #' * Automatically adds column names.
 #'
+#' `data_frame()` is an alias to `tibble()`.
+#'
+#' `tibble_()` and its alias `data_frame_()` use lazy evaluation and are
+#' deprecated. New code should use `tibble()` or `data_frame()` with
+#' [quasiquotation].
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.  These arguments are
 #'   processed with [rlang::quos()] and support unquote via `!!` and
 #'   unquote-splice via `!!!`.
-#' @param xs  A list of unevaluated expressions created with `~`,
-#'   [quote()], or (deprecated) [lazyeval::lazy()].
 #' @seealso [as_tibble()] to turn an existing list into
 #'   a data frame.
 #' @export
@@ -51,6 +54,7 @@ tibble <- function(...) {
 }
 
 #' @export
+#' @usage NULL
 #' @rdname tibble
 tibble_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())
@@ -59,7 +63,6 @@ tibble_ <- function(xs) {
 
 #' @export
 #' @rdname tibble
-#' @usage NULL
 data_frame <- tibble
 
 #' @export
@@ -68,18 +71,21 @@ data_frame <- tibble
 data_frame_ <- tibble_
 
 
-#' Test if the object is a tibble.
+#' Test if the object is a tibble
+#'
+#' This function returns `FALSE` for regular data frames and `TRUE` for tibbles.
 #'
 #' @param x An object
 #' @return `TRUE` if the object inherits from the `tbl_df` class.
 #' @export
-is.tibble <- function(x) {
+is_tibble <- function(x) {
   "tbl_df" %in% class(x)
 }
 
-#' @rdname is.tibble
+#' @rdname is_tibble
+#' @usage NULL
 #' @export
-is_tibble <- is.tibble
+is.tibble <- is_tibble
 
 
 # Validity checks --------------------------------------------------------------
@@ -114,13 +120,13 @@ check_tibble <- function(x) {
 }
 
 recycle_columns <- function(x) {
-  if (length(x) == 0) {
-    return(x)
-  }
-
   # Validate column lengths, allow recycling
   lengths <- map_int(x, NROW)
-  max <- max(c(lengths[lengths != 1L], 0L))
+
+  # Shortcut if all columns have the same length (including zero length!)
+  if (all(lengths == lengths[1L])) return(x)
+
+  max <- max(lengths[lengths != 1L], 0L)
 
   bad_len <- lengths != 1L & lengths != max
   if (any(bad_len)) {

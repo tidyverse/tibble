@@ -8,9 +8,9 @@ tibble <img src="man/figures/logo.png" align="right" />
 Overview
 --------
 
-A **tibble**, or `tbl_df`, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don't change variable names or types, and don't do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced `print method()` which makes them easier to use with large datasets containing complex objects.
+A **tibble**, or `tbl_df`, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don't change variable names or types, and don't do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced `print()` method which makes them easier to use with large datasets containing complex objects.
 
-If you are new to tibbles, the best place to start is the [tibbles](http://r4ds.had.co.nz/tibbles.html) in R for data science.
+If you are new to tibbles, the best place to start is the [tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
 Installation
 ------------
@@ -37,7 +37,7 @@ library(tibble)
 as_tibble(iris)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           <dbl>       <dbl>        <dbl>       <dbl> <fctr> 
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>  
 #>  1         5.10        3.50         1.40       0.200 setosa 
 #>  2         4.90        3.00         1.40       0.200 setosa 
 #>  3         4.70        3.20         1.30       0.200 setosa 

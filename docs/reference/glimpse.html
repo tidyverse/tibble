@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a glimpse of your data. — glimpse • tibble</title>
+<title>Get a glimpse of your data — glimpse • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,11 +89,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a glimpse of your data.</h1>
+    <h1>Get a glimpse of your data</h1>
     </div>
 
     
-    <p>This is like a transposed version of print: columns run down the page,
+    <p>This is like a transposed version of <code>print()</code>: columns run down the page,
 and data runs across. This makes it possible to see every column in
 a data frame. It's a little like <code>str()</code> applied to a data frame
 but it tries to show you as much data as possible. (And it always shows
@@ -116,7 +116,7 @@ the underlying data, even when applied to a remote data source.)</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed onto individual methods.</p></td>
+      <td><p>Other arguments passed on to individual methods.</p></td>
     </tr>
     </table>
     
@@ -148,7 +148,7 @@ used within a data pipe line.</p>
 <span class='kw'>if</span> (!<span class='fu'>requireNamespace</span>(<span class='st'>"nycflights13"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
   <span class='fu'>stop</span>(<span class='st'>"Please install the nycflights13 package to run the rest of this example"</span>)
 
-<span class='fu'>glimpse</span>(<span class='kw'>nycflights13</span><span class='kw'>::</span><span class='no'>flights</span>)</div><div class='output co'>#&gt; Observations: 336,776
+<span class='fu'>glimpse</span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/nycflights13/topics/flights'>flights</a></span>)</div><div class='output co'>#&gt; Observations: 336,776
 #&gt; Variables: 19
 #&gt; $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...
 #&gt; $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
@@ -191,7 +191,7 @@ used within a data pipe line.</p>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

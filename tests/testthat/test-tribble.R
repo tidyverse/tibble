@@ -1,7 +1,6 @@
 context("tribble()")
 
 test_that("tribble() constructs 'tibble' as expected", {
-
   result <- tribble(
     ~colA, ~colB,
     "a", 1,
@@ -43,7 +42,17 @@ test_that("tribble() constructs 'tibble' as expected", {
   )
 
   expect_equal(long, long_expectation)
+})
 
+test_that("tribble() tolerates a trailing comma", {
+  result <- tribble(
+    ~colA, ~colB,
+    "a", 1,
+    "b", 2,
+  )
+
+  compared <- tibble(colA = c("a", "b"), colB = c(1, 2))
+  expect_equal(result, compared)
 })
 
 test_that("tribble() handles columns with a class (#161)", {
@@ -109,14 +118,13 @@ test_that("tribble() errs appropriately on bad calls", {
     ),
     fixed = TRUE
   )
-
 })
 
 test_that("tribble can have list columns", {
   df <- tribble(
     ~x, ~y,
-    1,  list(a = 1),
-    2,  list(b = 2)
+    1, list(a = 1),
+    2, list(b = 2)
   )
   expect_equal(df$x, c(1, 2))
   expect_equal(df$y, list(list(a = 1), list(b = 2)))
@@ -146,8 +154,8 @@ test_that("tribble returns 0x0 tibble when there's no argument", {
 test_that("frame_matrix constructs a matrix as expected", {
   result <- frame_matrix(
     ~col1, ~col2,
-    10,     3,
-    5,     2
+       10,     3,
+        5,     2
   )
   expected <- matrix(c(10, 5, 3, 2), ncol = 2)
   colnames(expected) <- c("col1", "col2")
@@ -166,7 +174,7 @@ test_that("frame_matrix constructs empty matrix as expected", {
 test_that("frame_matrix cannot have list columns", {
   expect_error(
     frame_matrix(
-      ~x,  ~y,
+      ~x,   ~y,
       "a", 1:3,
       "b", 4:6
     ),

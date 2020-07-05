@@ -1,26 +1,27 @@
 Package: tibble
-Encoding: UTF-8
-Version: 1.4.1
 Title: Simple Data Frames
-Description: Provides a 'tbl_df' class (the 'tibble') that provides
-    stricter checking and better formatting than the traditional data frame.
+Version: 1.4.2
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", "ctb"),
     person("RStudio", role = "cph")
     )
+Description: Provides a 'tbl_df' class (the 'tibble') that provides
+    stricter checking and better formatting than the traditional data frame.
+License: MIT + file LICENSE
 URL: http://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
 BugReports: https://github.com/tidyverse/tibble/issues
-Depends:
+Depends: 
     R (>= 3.1.0)
-Imports:
+Imports: 
+    cli,
     crayon,
     methods,
-    pillar,
+    pillar (>= 1.1.0),
     rlang,
     utils
-Suggests:
+Suggests: 
     covr,
     dplyr,
     import,
@@ -28,14 +29,14 @@ Suggests:
     microbenchmark,
     mockr,
     nycflights13,
-    testthat,
     rmarkdown,
+    testthat,
     withr
+VignetteBuilder: knitr
+Encoding: UTF-8
 LazyData: yes
-License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
-VignetteBuilder: knitr
 Collate: 
     'add.R'
     'as_tibble.R'
@@ -53,7 +54,7 @@ Collate:
     'rownames.R'
     'strrep.R'
     'tbl-df.r'
-    'tibble-pkg.R'
+    'tibble-package.R'
     'tribble.R'
     'type-sum.r'
     'utils-format.r'
