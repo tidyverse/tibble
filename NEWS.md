@@ -1,3 +1,8 @@
+# tibble 3.0.1.9002
+
+- Subassignment is now faster (#794).
+
+
 # tibble 3.0.1.9001
 
 - Subsetting is faster again (#790).
