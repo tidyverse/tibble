@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.0.1.9001
+Version: 3.0.1.9002
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -63,11 +63,11 @@ Suggests:
     tidyr,
     withr
 Remotes: 
-    r-lib/testthat,
+    r-lib/testthat@v2.3.2,
     rstudio/rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1.9000
