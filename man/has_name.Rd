@@ -26,4 +26,3 @@ Unnamed objects are treated as if all names are empty strings.
 has_name(iris, "Species")
 has_name(mtcars, "gears")
 }
-

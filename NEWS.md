@@ -1,3 +1,49 @@
+# tibble 1.3.0 (2017-01-10)
+
+## Bug fixes
+
+- Time series matrices (objects of class `mts` and `ts`) are now supported in `as_tibble()` (#184).
+- The `all_equal()` function (called by `all.equal.tbl_df()`) now forwards to `dplyr` and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (`data.frame` vs. `tbl_df`) are ignored. The `all.equal.tbl_df()` method gives a warning and forwards to `NextMethod()` if `dplyr` is not installed; call `all.equal(as.data.frame(...), ...)` to avoid the warning. This ensures consistent behavior of this function, regardless if `dplyr` is loaded or not (#198).
+
+## Interface changes
+
+- Now requiring R 3.1.0 instead of R 3.1.3 (#189).
+- Add `as.tibble()` as an alias to `as_tibble()` (#160, @LaDilettante).
+- New `frame_matrix()`, similar to `frame_data()` but for matrices (#140, #168, @LaDilettante).
+- New `deframe()` as reverse operation to `enframe()` (#146, #214).
+- Removed unused dependency on `assertthat`.
+
+## Features
+
+### General
+
+- Keep column classes when adding row to empty tibble (#171, #177, @LaDilettante).
+- Singular and plural variants for error messages that mention a list of objects (#116, #138, @LaDilettante).
+- `add_column()` can add columns of length 1 (#162, #164, @LaDilettante).
+
+### Input validation
+
+- An attempt to read or update a missing column now throws a clearer warning (#199).
+- An attempt to call `add_row()` for a grouped data frame results in a helpful error message (#179).
+
+### Printing
+
+- Render Unicode multiplication sign as `x` if it cannot be represented in the current locale (#192, @ncarchedi).
+- Backtick `NA` names in printing (#206, #207, @jennybc).
+- `glimpse()` now uses `type_sum()` also for S3 objects (#185, #186, @holstius).
+- The `max.print` option is ignored when printing a tibble (#194, #195, @t-kalinowski).
+
+## Documentation
+
+- Fix typo in `obj_sum` documentation (#193, @etiennebr).
+- Reword documentation for `tribble()` (#191, @kwstat).
+- Now explicitly stating minimum Rcpp version 0.12.3.
+
+## Internal
+
+- Using registration of native routines.
+
+
 # tibble 1.2 (2016-08-26)
 
 ## Bug fixes

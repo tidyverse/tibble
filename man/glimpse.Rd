@@ -15,21 +15,22 @@ glimpse(x, width = NULL, ...)
 \item{...}{Other arguments passed onto individual methods.}
 }
 \value{
-x original x is (invisibly) returned, allowing \code{glimpse} to be
+x original x is (invisibly) returned, allowing \code{glimpse()} to be
 used within a data pipe line.
 }
 \description{
 This is like a transposed version of print: columns run down the page,
 and data runs across. This makes it possible to see every column in
-a data frame. It's a little like \code{\link{str}} applied to a data frame
+a data frame. It's a little like \code{\link[=str]{str()}} applied to a data frame
 but it tries to show you as much data as possible. (And it always shows
 the underlying data, even when applied to a remote data source.)
 }
 \section{S3 methods}{
 
 \code{glimpse} is an S3 generic with a customised method for \code{tbl}s and
-\code{data.frames}, and a default method that calls \code{\link{str}}.
+\code{data.frames}, and a default method that calls \code{\link[=str]{str()}}.
 }
+
 \examples{
 glimpse(mtcars)
 
@@ -38,4 +39,3 @@ if (!requireNamespace("nycflights13", quietly = TRUE))
 
 glimpse(nycflights13::flights)
 }
-

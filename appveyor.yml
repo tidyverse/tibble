@@ -23,10 +23,30 @@ environment:
     WARNINGS_ARE_ERRORS: 1
 
   matrix:
+  - R_VERSION: devel
+    GCC_PATH: mingw_32
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+
   - R_VERSION: release
     R_ARCH: x64
 
+  - R_VERSION: stable
+
   - R_VERSION: patched
+
+  - R_VERSION: oldrel
+    RTOOLS_VERSION: 33
+    CRAN: http://cran.rstudio.com
+
+  - R_VERSION: 3.1.3
+    RTOOLS_VERSION: 32
+    CRAN: http://cran.rstudio.com
+
+matrix:
+  fast_finish: true
 
 build_script:
   - travis-tool.sh install_deps

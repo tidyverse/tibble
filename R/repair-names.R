@@ -1,6 +1,6 @@
 #' Repair object names.
 #'
-#' \code{repair_names} ensures its input has non-missing and
+#' `repair_names()` ensures its input has non-missing and
 #' unique names (duplicated names get a numeric suffix). Valid names are
 #' left as is.
 #'
@@ -8,7 +8,7 @@
 #' @param prefix A string, the prefix to use for new column names.
 #' @param sep A string inserted between the column name and de-duplicating
 #'    number.
-#' @return \code{x} with valid names.
+#' @return `x` with valid names.
 #' @export
 #' @examples
 #' repair_names(list(3, 4, 5)) # works for lists, too

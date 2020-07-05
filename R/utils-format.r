@@ -1,17 +1,17 @@
 #' Tools for describing matrices
 #'
 #' @param x Object to show.
-#' @param n Number of rows to show. If \code{NULL}, the default, will print
-#'   all rows if less than option \code{tibble.print_max}. Otherwise, will
-#'   print \code{tibble.print_min} rows.
+#' @param n Number of rows to show. If `NULL`, the default, will print
+#'   all rows if less than option `tibble.print_max`. Otherwise, will
+#'   print `tibble.print_min` rows.
 #' @param width Width of text output to generate. This defaults to NULL, which
-#'   means use \code{getOption("tibble.width")} or (if also NULL)
-#'   \code{getOption("width")}; the latter displays only the columns that
-#'   fit on one screen. You can also set \code{options(tibble.width = Inf)} to
+#'   means use `getOption("tibble.width")` or (if also NULL)
+#'   `getOption("width")`; the latter displays only the columns that
+#'   fit on one screen. You can also set `options(tibble.width = Inf)` to
 #'   override this default and always print all columns.
 #' @param n_extra Number of extra columns to print abbreviated information for,
-#'   if the width is too small for the entire tibble. If \code{NULL}, the
-#'   default, will print information about at most \code{tibble.max_extra_cols}
+#'   if the width is too small for the entire tibble. If `NULL`, the
+#'   default, will print information about at most `tibble.max_extra_cols`
 #'   extra columns.
 #' @seealso \link{tibble-package}
 #' @keywords internal
@@ -149,6 +149,8 @@ print_summary <- function(x) {
 
 print_table <- function(x) {
   if (!is.null(x$table)) {
+    old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
+    on.exit(options(old_option), add = TRUE)
     print(x$table)
   }
 }
@@ -275,6 +277,42 @@ tibble_glimpse_width <- function(width) {
     return(width)
 
   getOption("width")
+}
+
+pluralise_msg <- function(message, objects) {
+  paste0(pluralise(message, objects), format_n(objects))
+}
+
+pluralise <- function(message, objects) {
+  stopifnot(length(objects) > 0)
+  if (length(objects) == 1) {
+    # strip [, unless there is space in between
+    message <- gsub("\\[(\\S+)\\]", "\\1", message, perl = TRUE)
+    # remove ( and its content, unless there is space in between
+    message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
+  } else {
+    # strip (, unless there is space in between
+    message <- gsub("\\((\\S+)\\)", "\\1", message, perl = TRUE)
+    # remove [ and its content, unless there is space in between
+    message <- gsub("\\[[^\\] ]+\\]\\s+", "", message, perl = TRUE)
+  }
+
+  message
+}
+
+mult_sign <- function() {
+  # unicode multiplication sign
+  mult <- "\u00d7"
+  # if unicode doesn't render, use lowercase x
+  if (enc2native(mult) != mult) {
+    mult <- "x"
+  }
+
+  mult
+}
+
+spaces_around <- function(x) {
+  paste0(" ", x, " ")
 }
 
 format_n <- function(x) collapse(quote_n(x))

@@ -18,4 +18,3 @@ is_tibble(x)
 \description{
 Test if the object is a tibble.
 }
-

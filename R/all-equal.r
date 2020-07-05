@@ -1,18 +1,18 @@
 #' Flexible equality comparison for data frames.
 #'
-#' When comparing two \code{tbl_df} using \code{\link{all.equal}}, column and
-#' row order is ignored by default, and types are not coerced.  The \code{dplyr}
-#' package provides a much more efficient implementation for this functionality.
+#' When comparing two `tbl_df` using [all.equal()], column and
+#' row order is ignored by default, and types are not coerced.  The `dplyr`
+#' package is necessary to use this function.
 #'
 #' @param target,current Two data frames to compare.
 #' @param ignore_col_order Should order of columns be ignored?
 #' @param ignore_row_order Should order of rows be ignored?
 #' @param convert Should similar classes be converted? Currently this will
 #'   convert factor to character and integer to double.
-#' @param ... Ignored. Needed for compatibility with \code{all.equal}.
-#' @return \code{TRUE} if equal, otherwise a character vector describing
-#'   the reasons why they're not equal. Use \code{\link{isTRUE}} if using the
-#'   result in an \code{if} expression.
+#' @param ... Ignored. Needed for compatibility with `all.equal()`.
+#' @return `TRUE` if equal, otherwise a character vector describing
+#'   the reasons why they're not equal. Use [isTRUE()] if using the
+#'   result in an `if` expression.
 #' @examples
 #' scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
 #' mtcars_df <- as_tibble(mtcars)
@@ -32,72 +32,28 @@
 #' all.equal(df1, df2, convert = TRUE)
 all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
-
-  if (!identical(class(target), class(current))) {
-    return(paste0("Different types: ",
-                  "x ", format_n(class(target)), ", ",
-                  "y ", format_n(class(current))))
-  }
-  if (nrow(target) != nrow(current)) {
-    return("Different number of rows")
-  }
-  extra_x <- setdiff(names(target), names(current))
-  if (length(extra_x) > 0L) {
-    return(paste0("Cols in x but not y: ", format_n(extra_x)))
-  }
-  extra_y <- setdiff(names(current), names(target))
-  if (length(extra_y) > 0L) {
-    return(paste0("Cols in y but not x: ", format_n(extra_y)))
-  }
-  if (!ignore_col_order && names(target) != names(current)) {
-    return("Column names same but in different order")
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("Please install dplyr to use all_equal()", call. = FALSE)
   }
 
-  current <- as_tibble(remove_rownames(current))
-  target <- as_tibble(remove_rownames(target))
+  dplyr_all_equal <- get(
+    "all.equal.tbl_df", asNamespace("dplyr"), mode = "function",
+    inherits = FALSE)
+  stopifnot(getNamespaceName(environment(dplyr_all_equal)) == "dplyr")
 
-  current <- current[names(target)]
-
-  types <- unlist(mapply(
-    function(x, y) {
-      if (!identical(class(x), class(y))) {
-        paste0("x ", class(x), ", y ", class(y))
-      }
-    },
-    target, current
-  ))
-
-  if (length(types) > 0L) {
-    types <- paste0("Incompatible type for column ", names(types), ": ", types)
-    if (convert) {
-      lapply(types, warningc)
-    } else {
-      return(types)
-    }
-  }
-
-  factor_levels <- unlist(mapply(
-    function(x, y) {
-      if (!identical(levels(x), levels(y))) {
-        TRUE
-      }
-    },
-    target, current
-  ))
-
-  if (length(factor_levels) > 0L) {
-    return(paste0("Factor levels not equal for column ", names(factor_levels)))
-  }
-
-  if (ignore_row_order) {
-    target <- target[do.call(order, unname(target)), ]
-    current <- current[do.call(order, unname(current)), ]
-  }
-
-  all.equal(as.data.frame(target), as.data.frame(current), ...)
+  dplyr_all_equal(
+    target = target, current = current, ignore_col_order = ignore_col_order,
+    ignore_row_order = ignore_row_order, convert = convert, ...)
 }
 
 #' @export
 #' @rdname all_equal
 #' @method all.equal tbl_df
-all.equal.tbl_df <- all_equal
+all.equal.tbl_df <- function(target, current, ...) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    warning("Please install dplyr to use all.equal() on tibbles", call. = FALSE)
+    return(NextMethod())
+  }
+
+  all_equal(target, current, ...)
+}

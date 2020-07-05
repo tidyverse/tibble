@@ -2,25 +2,30 @@
 % Please edit documentation in R/enframe.R
 \name{enframe}
 \alias{enframe}
-\title{Converting atomic vectors to data frames}
+\alias{deframe}
+\title{Converting atomic vectors to data frames, and vice versa}
 \usage{
 enframe(x, name = "name", value = "value")
+
+deframe(x)
 }
 \arguments{
-\item{x}{An atomic vector}
+\item{x}{An atomic vector (for \code{enframe()}) or a data frame (for \code{deframe()})}
 
 \item{name, value}{Names of the columns that store the names and values}
 }
 \value{
-A \code{\link{tibble}}
+A \link{tibble}
 }
 \description{
-A helper function that converts named atomic vectors or lists to two-column
+\code{enframe()} converts named atomic vectors or lists to two-column
 data frames.
 For unnamed vectors, the natural sequence is used as name column.
+
+\code{deframe()} converts two-column data frames to a named vector or list,
+using the first column as name and the second column as value.
 }
 \examples{
 enframe(1:3)
 enframe(c(a = 5, b = 7))
 }
-

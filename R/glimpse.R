@@ -2,20 +2,20 @@
 #'
 #' This is like a transposed version of print: columns run down the page,
 #' and data runs across. This makes it possible to see every column in
-#' a data frame. It's a little like \code{\link{str}} applied to a data frame
+#' a data frame. It's a little like [str()] applied to a data frame
 #' but it tries to show you as much data as possible. (And it always shows
 #' the underlying data, even when applied to a remote data source.)
 #'
 #' @section S3 methods:
-#' \code{glimpse} is an S3 generic with a customised method for \code{tbl}s and
-#' \code{data.frames}, and a default method that calls \code{\link{str}}.
+#' `glimpse` is an S3 generic with a customised method for `tbl`s and
+#' `data.frames`, and a default method that calls [str()].
 #'
 #' @param x An object to glimpse at.
 #' @param width Width of output: defaults to the setting of the option
-#'   \code{tibble.width} (if finite) or the width of the console.
+#'   `tibble.width` (if finite) or the width of the console.
 #' @param ... Other arguments passed onto individual methods.
-#' @return x original x is (invisibly) returned, allowing \code{glimpse} to be
-#' used within a data pipe line.
+#' @return x original x is (invisibly) returned, allowing `glimpse()` to be
+#'   used within a data pipe line.
 #' @export
 #' @examples
 #' glimpse(mtcars)
@@ -43,8 +43,8 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
 
-  var_types <- vapply(df, type_sum, character(1))
-  var_names <- paste0("$ ", format(names(df)), " <", var_types, "> ")
+  var_types <- vapply(x, type_sum, character(1))
+  var_names <- paste0("$ ", format(names(x)), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 

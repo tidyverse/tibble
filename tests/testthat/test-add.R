@@ -48,8 +48,7 @@ test_that("error if adding row with unknown variables", {
 test_that("can add multiple rows", {
   df <- tibble(a = 3L)
   df_new <- add_row(df, a = 4:5)
-  expect_identical(nrow(df_new), nrow(df) + 2L)
-  expect_identical(df_new$a, 3:5)
+  expect_identical(df_new, tibble(a = 3:5))
 })
 
 test_that("can recycle when adding rows", {
@@ -63,22 +62,19 @@ test_that("can recycle when adding rows", {
 test_that("can add as first row via .before = 1", {
   df <- tibble(a = 3L)
   df_new <- add_row(df, a = 2L, .before = 1)
-  expect_identical(nrow(df_new), nrow(df) + 1L)
-  expect_identical(df_new$a, 2:3)
+  expect_identical(df_new, tibble(a = 2:3))
 })
 
 test_that("can add as first row via .after = 0", {
   df <- tibble(a = 3L)
   df_new <- add_row(df, a = 2L, .after = 0)
-  expect_identical(nrow(df_new), nrow(df) + 1L)
-  expect_identical(df_new$a, 2:3)
+  expect_identical(df_new, tibble(a = 2:3))
 })
 
 test_that("can add row inbetween", {
   df <- tibble(a = 1:3)
   df_new <- add_row(df, a = 4:5, .after = 2)
-  expect_identical(nrow(df_new), nrow(df) + 2L)
-  expect_identical(df_new$a, c(1:2, 4:5, 3L))
+  expect_identical(df_new, tibble(a = c(1:2, 4:5, 3L)))
 })
 
 test_that("error if both .before and .after are given", {
@@ -98,6 +94,17 @@ test_that("adding to a list column adds a NULL value (#148)", {
   expect_null(add_row(data_frame(a = as.list(1:3)), .before = 1)$a[[1]])
   expect_null(add_row(data_frame(a = as.list(1:3)), .after = 1)$a[[2]])
   expect_null(add_row(data_frame(a = as.list(1:3), b = 1:3), b = 4:6)$a[[5]])
+})
+
+test_that("add_row() keeps the class of empty columns", {
+  new_tibble <- add_row(df_empty, to_be_added = 5)
+  expect_equal(sapply(df_empty, class), sapply(new_tibble, class))
+})
+
+test_that("add_row() fails nicely for grouped data frames (#179)", {
+  expect_error(
+    add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
+    "grouped data frame")
 })
 
 # add_column ------------------------------------------------------------
@@ -151,49 +158,49 @@ test_that("error if adding wrong number of rows with add_column()", {
 test_that("can add multiple columns", {
   df <- tibble(a = 1:3)
   df_new <- add_column(df, b = 4:6, c = 3:1)
-  expect_identical(ncol(df_new), ncol(df) + 2L)
-  expect_identical(df_new$b, 4:6)
-  expect_identical(df_new$c, 3:1)
+  expect_identical(df_new, tibble(a = 1:3, b = 4:6, c = 3:1))
 })
 
 test_that("can recycle when adding columns", {
   df <- tibble(a = 1:3)
   df_new <- add_column(df, b = 4, c = 3:1)
-  expect_identical(ncol(df_new), ncol(df) + 2L)
-  expect_identical(df_new$b, rep(4, 3))
-  expect_identical(df_new$c, 3:1)
+  expect_identical(df_new, tibble(a = 1:3, b = rep(4, 3), c = 3:1))
+})
+
+test_that("can recycle when adding a column of length 1", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4)
+  expect_identical(df_new, tibble(a = 1:3, b = rep(4, 3)))
+})
+
+test_that("can recyle when adding multiple columns of length 1", {
+  df <- tibble(a = 1:3)
+  df_new <- add_column(df, b = 4, c = 5)
+  expect_identical(df_new, tibble(a = 1:3, b = rep(4, 3), c = rep(5, 3)))
 })
 
 test_that("can add as first column via .before = 1", {
   df <- tibble(a = 3L)
   df_new <- add_column(df, b = 2L, .before = 1)
-  expect_identical(ncol(df_new), ncol(df) + 1L)
-  expect_identical(names(df_new), c("b", "a"))
-  expect_identical(df_new$b, 2L)
+  expect_identical(df_new, tibble(b = 2L, a = 3L))
 })
 
 test_that("can add as first column via .after = 0", {
   df <- tibble(a = 3L)
   df_new <- add_column(df, b = 2L, .after = 0)
-  expect_identical(ncol(df_new), ncol(df) + 1L)
-  expect_identical(names(df_new), c("b", "a"))
-  expect_identical(df_new$b, 2L)
+  expect_identical(df_new, tibble(b = 2L, a = 3L))
 })
 
 test_that("can add column inbetween", {
   df <- tibble(a = 1:3, c = 4:6)
   df_new <- add_column(df, b = -1:1, .after = 1)
-  expect_identical(ncol(df_new), ncol(df) + 1L)
-  expect_identical(names(df_new), c("a", "b", "c"))
-  expect_identical(df_new$b, -1:1)
+  expect_identical(df_new, tibble(a = 1:3, b = -1:1, c = 4:6))
 })
 
 test_that("can add column relative to named column", {
   df <- tibble(a = 1:3, c = 4:6)
   df_new <- add_column(df, b = -1:1, .before = "c")
-  expect_identical(ncol(df_new), ncol(df) + 1L)
-  expect_identical(names(df_new), c("a", "b", "c"))
-  expect_identical(df_new$b, -1:1)
+  expect_identical(df_new, tibble(a = 1:3, b = -1:1, c = 4:6))
 })
 
 test_that("error if both .before and .after are given", {
@@ -204,8 +211,8 @@ test_that("error if both .before and .after are given", {
 
 test_that("error if column named by .before or .after not found", {
   df <- tibble(a = 1:3)
-  expect_error(add_column(df, b = 4:6, .after = "x"), "Unknown columns")
-  expect_error(add_column(df, b = 4:6, .before = "x"), "Unknown columns")
+  expect_error(add_column(df, b = 4:6, .after = "x"), "Unknown column: 'x'")
+  expect_error(add_column(df, b = 4:6, .before = "x"), "Unknown column: 'x'")
 })
 
 test_that("missing row names stay missing when adding column", {

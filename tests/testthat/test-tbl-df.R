@@ -37,12 +37,14 @@ test_that("[ with 0 cols creates correct row names (#656)", {
 })
 
 test_that("[.tbl_df is careful about names (#1245)",{
-  foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo["z"], "Unknown columns 'z'", fixed = TRUE)
-  expect_error(foo[ c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
+  z_msg <- "Unknown column: 'z'"
 
-  expect_error(foo[, "z"], "Unknown columns 'z'", fixed = TRUE)
-  expect_error(foo[, c("x", "y", "z") ], "Unknown columns 'z'", fixed = TRUE)
+  foo <- tibble(x = 1:10, y = 1:10)
+  expect_error(foo["z"], z_msg, fixed = TRUE)
+  expect_error(foo[ c("x", "y", "z") ], z_msg, fixed = TRUE)
+
+  expect_error(foo[, "z"], z_msg, fixed = TRUE)
+  expect_error(foo[, c("x", "y", "z") ], z_msg, fixed = TRUE)
 
   expect_error(foo[as.matrix("x")], "matrix")
   expect_error(foo[array("x", dim = c(1, 1, 1))], "array")
@@ -51,11 +53,11 @@ test_that("[.tbl_df is careful about names (#1245)",{
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
-  expect_error(foo[0.5], "Invalid non-integer column indexes: 0.5", fixed = TRUE)
+  expect_error(foo[0.5], "Invalid non-integer column index: 0.5", fixed = TRUE)
   expect_error(foo[1:5], "Invalid column indexes: 4, 5", fixed = TRUE)
   expect_error(foo[-1:1], "mixed with negative")
   expect_error(foo[c(-1, 1)], "mixed with negative")
-  expect_error(foo[-4], "Invalid negative column indexes: -4", fixed = TRUE)
+  expect_error(foo[-4], "Invalid negative column index: -4", fixed = TRUE)
   expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 
   expect_error(foo[as.matrix(1)], "matrix")
@@ -127,15 +129,20 @@ test_that("can use two-dimensional indexing with [[", {
 test_that("$ throws warning if name doesn't exist", {
   df <- tibble(x = 1)
   expect_warning(expect_null(df$y),
-                 "Unknown column 'y'")
+                 "Unknown or uninitialised column: 'y'")
+})
+
+test_that("$ throws different warning if attempting a partial initialization (#199)", {
+  df <- tibble(x = 1)
+  expect_warning(df$y[1] <- 2, "Unknown or uninitialised column: 'y'")
 })
 
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
   expect_warning(expect_null(df$p),
-                 "Unknown column 'p'")
+                 "Unknown or uninitialised column: 'p'")
   expect_warning(expect_null(df$part),
-                 "Unknown column 'part'")
+                 "Unknown or uninitialised column: 'part'")
   expect_error(df$partial, NA)
 })
 
