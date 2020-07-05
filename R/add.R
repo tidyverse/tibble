@@ -51,6 +51,10 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
     abort(error_add_rows_to_grouped_df())
   }
 
+  if (!is.data.frame(.data)) {
+    signal_soft_deprecated("`.data` must be a data frame in `add_row()` and `add_case()`.")
+  }
+
   df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
@@ -134,6 +138,10 @@ rbind_at <- function(old, new, pos) {
 #' }
 #' @export
 add_column <- function(.data, ..., .before = NULL, .after = NULL) {
+  if (!is.data.frame(.data)) {
+    signal_soft_deprecated("`.data` must be a data frame in `add_column()`.")
+  }
+
   df <- tibble(...)
 
   if (ncol(df) == 0L) {

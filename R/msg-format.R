@@ -47,6 +47,8 @@ pluralise_n <- function(message, n) {
   message
 }
 
+# Also exists in compat-name-repair.R, need to make sure to overwrite with a better version
+#' @include compat-name-repair.R
 bullets <- function(header, ..., .problem = " problem(s)") {
   problems <- c(...)
   MAX_BULLETS <- 6L
