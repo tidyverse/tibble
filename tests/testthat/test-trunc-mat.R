@@ -10,22 +10,36 @@ test_that("interface of print() identical to trunc_mat()", {
 })
 
 test_that("print() returns output invisibly", {
-  expect_output(ret <- withVisible(print(as_tibble(mtcars))))
+  expect_output(ret <- withVisible(print(as_tibble(iris))))
   expect_false(ret$visible)
-  expect_identical(ret$value, as_tibble(mtcars))
+  expect_identical(ret$value, as_tibble(iris))
 })
 
 test_that("trunc_mat output matches known output", {
   skip_on_os("windows")
+  skip_if_not_installed("mockr")
+  testthat::skip_if(getRversion() < "3.2")
+
+  mtcars2 <- as_tibble(mtcars, rownames = NA)
 
   expect_output_file_rel(
-    print_without_body(as_tibble(mtcars), n = 8L, width = 30L),
+    print_without_body(mtcars2, n = 8L, width = 30L),
     "trunc_mat/mtcars-8-30.txt"
   )
 
   expect_output_file_rel(
     print_without_body(as_tibble(iris), n = 5L, width = 30L),
     "trunc_mat/iris-5-30.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_tibble(iris), n = -1L, width = 30L),
+    "trunc_mat/iris-neg-30.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_tibble(iris), n = Inf, width = 30L),
+    "trunc_mat/iris-inf-30.txt"
   )
 
   expect_output_file_rel(
@@ -41,6 +55,21 @@ test_that("trunc_mat output matches known output", {
   expect_output_file_rel(
     print_without_body(as_unknown_rows(iris), n = 10, width = 70L),
     "trunc_mat/iris_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:9, ]), n = 10, width = 70L),
+    "trunc_mat/iris_9_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:10, ]), n = 10, width = 70L),
+    "trunc_mat/iris_10_unk-10-70.txt"
+  )
+
+  expect_output_file_rel(
+    print_without_body(as_unknown_rows(iris[1:11, ]), n = 10, width = 70L),
+    "trunc_mat/iris_11_unk-10-70.txt"
   )
 
   expect_output_file_rel(
@@ -110,7 +139,7 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
   df$y <- as.POSIXlt(df$x)
 
   expect_output_file_rel(
-    print(as_tibble(df), n = 8L, width = 60L),
+    print(df, n = 8L, width = 60L),
     "trunc_mat/POSIXlt-8-60.txt"
   )
 })

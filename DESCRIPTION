@@ -1,10 +1,11 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 1.4.2
+Version: 2.0.0
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", "ctb"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", "ctb"),
     person("RStudio", role = "cph")
     )
 Description: Provides a 'tbl_df' class (the 'tibble') that provides
@@ -15,48 +16,58 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends: 
     R (>= 3.1.0)
 Imports: 
-    cli,
-    crayon,
+    cli (>= 1.0.1),
+    crayon (>= 1.3.4),
+    fansi (>= 0.4.0),
     methods,
-    pillar (>= 1.1.0),
-    rlang,
+    pillar (>= 1.3.1),
+    pkgconfig (>= 2.0.2),
+    rlang (>= 0.3.0.1),
     utils
 Suggests: 
-    covr,
-    dplyr,
-    import,
-    knitr (>= 1.5.32),
-    microbenchmark,
-    mockr,
-    nycflights13,
-    rmarkdown,
-    testthat,
-    withr
+    bench (>= 1.0.1),
+    covr (>= 3.2.1),
+    dplyr (>= 0.7.8),
+    htmltools (>= 0.3.6),
+    import (>= 1.1.0),
+    knitr (>= 1.21),
+    mockr (>= 0.1),
+    nycflights13 (>= 1.0.0),
+    rmarkdown (>= 1.11),
+    testthat (>= 2.0.1),
+    withr (>= 2.1.2)
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
-RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd"))
+RoxygenNote: 6.1.1
 Collate: 
     'add.R'
     'as_tibble.R'
     'check-names.R'
     'compat-lazyeval.R'
+    'compat-lifecycle.R'
     'compat-purrr.R'
+    'tribble.R'
+    'deprecated.R'
     'enframe.R'
     'exports.R'
     'glimpse.R'
     'has-name.R'
-    'tibble.R'
     'lst.R'
+    'msg-format.R'
+    'msg.R'
     'new.R'
     'repair-names.R'
     'rownames.R'
     'strrep.R'
+    'subsetting.R'
     'tbl-df.r'
     'tibble-package.R'
-    'tribble.R'
+    'tibble.R'
     'type-sum.r'
     'utils-format.r'
     'utils.r'
+    'view.R'
     'wrap.R'
+    'zzz.R'

@@ -7,11 +7,44 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, error = TRUE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
-options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(tibble)
 set.seed(1014)
+
+options(crayon.enabled = TRUE)
+options(pillar.bold = TRUE)
+
+knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
+
+colourise_chunk <- function(type) {
+  function(x, options) {
+    # lines <- strsplit(x, "\\n")[[1]]
+    lines <- x
+    if (type != "output") {
+      lines <- crayon::red(lines)
+    }
+    paste0(
+      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
+      paste0(
+        sgr_to_html(htmltools::htmlEscape(lines)),
+        collapse = "\n"
+      ),
+      "</code></pre></div>"
+    )
+  }
+}
+
+knitr::knit_hooks$set(
+  output = colourise_chunk("output"),
+  message = colourise_chunk("message"),
+  warning = colourise_chunk("warning"),
+  error = colourise_chunk("error")
+)
+
+# Fallback if fansi is missing
+sgr_to_html <- identity
+sgr_to_html <- fansi::sgr_to_html
 ```
 
 Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).
@@ -61,16 +94,21 @@ To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into t
 
 `as_tibble()` has been written with an eye for performance:
 
-```{r}
-if (requireNamespace("microbenchmark", quiet = TRUE)) {
-  l <- replicate(26, sample(100), simplify = FALSE)
-  names(l) <- letters
+```{r error = TRUE, eval = FALSE}
+l <- replicate(26, sample(100), simplify = FALSE)
+names(l) <- letters
 
-  microbenchmark::microbenchmark(
-    as_tibble(l),
-    as.data.frame(l)
-  )
-}
+timing <- bench::mark(
+  as_tibble(l),
+  as.data.frame(l),
+  check = FALSE
+)
+
+timing
+```
+
+```{r echo = FALSE}
+readRDS("timing.rds")
 ```
 
 The speed of `as.data.frame()` is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.
@@ -81,10 +119,10 @@ There are three key differences between tibbles and data frames: printing, subse
 
 ### Printing
 
-When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type:
+When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
     
 ```{r}
-tibble(x = 1:1000)
+tibble(x = -5:1000)
 ```
 
 You can control the default appearance with options:

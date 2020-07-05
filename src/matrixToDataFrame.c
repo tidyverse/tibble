@@ -84,40 +84,6 @@ static void get_dim(SEXP x, R_xlen_t *nrowptr, R_xlen_t *ncolptr)
 }
 
 
-static SEXP get_names(SEXP x, R_xlen_t ncol)
-{
-  int nprot = 0;
-  SEXP colnames = R_NilValue;
-
-  // check for column names, use them if present
-  SEXP dimnames;
-  PROTECT(dimnames = Rf_getAttrib(x, R_DimNamesSymbol)); nprot++;
-  if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) == 2) {
-    colnames = VECTOR_ELT(dimnames, 1);
-    if (TYPEOF(colnames) != STRSXP) {
-      colnames = R_NilValue;
-    }
-  }
-
-  // otherwise, allocate new names
-  if (Rf_isNull(colnames)) {
-    PROTECT(colnames = Rf_allocVector(STRSXP, ncol)); nprot++;
-
-    // Maximum number of (base 10) digits in a non-negative R_xlen_t.
-    // 1 + floor(log10(2^64 - 1)) = 20
-    const int XLEN_DIGIT_MAX = 20;
-    char buf[XLEN_DIGIT_MAX + 2]; // V + (number) + NUL
-
-    for (R_xlen_t i = 0; i < ncol; i++) {
-      sprintf(buf, "V%"PRIu64, (uint64_t)(i + 1));
-      SET_STRING_ELT(colnames, i, Rf_mkCharCE(buf, CE_UTF8));
-    }
-  }
-
-  UNPROTECT(nprot);
-  return colnames;
-}
-
 static SEXP get_rownames(SEXP x, R_xlen_t nrow)
 {
   int nprot = 0;
@@ -286,7 +252,6 @@ SEXP tibble_matrixToDataFrame(SEXP x)
 
   copy_column_attributes(out, x, ncol);
 
-  Rf_setAttrib(out, R_NamesSymbol, get_names(x, ncol));
   Rf_setAttrib(out, R_RowNamesSymbol, get_rownames(x, nrow));
   Rf_setAttrib(out, R_ClassSymbol, get_class());
 

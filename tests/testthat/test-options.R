@@ -95,6 +95,7 @@ test_that("print.tbl ignores max.print option", {
   iris2 <- as_tibble(iris)
   expect_output(
     withr::with_options(list(max.print = 3), print(iris2)),
-    capture_output(print(iris2)), fixed = TRUE
+    capture_output(print(iris2)),
+    fixed = TRUE
   )
 })

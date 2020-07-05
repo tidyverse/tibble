@@ -17,15 +17,22 @@ has_nonnull_names <- function(x) {
 
 set_class <- `class<-`
 
-is_1d <- function(x) {
-  # dimension check is for matrices and data.frames
-  is_vector(x) && !needs_dim(x)
+check_no_dim <- function(x) {
+  if (is_atomic(x) && has_dim(x)) {
+    abort(error_1d_array_column())
+  }
+  invisible(x)
 }
 
 strip_dim <- function(x) {
-  # Careful update only if necessary, to avoid copying which is checked by
-  # the "copying" test in dplyr
-  if (is_atomic(x) && has_dim(x)) {
+  if (is.matrix(x)) {
+    rownames(x) <- NULL
+  } else if (is.data.frame(x)) {
+    x <- remove_rownames(x)
+    x[] <- map(x, strip_dim)
+  } else if (is_atomic(x) && has_dim(x)) {
+    # Careful update only if necessary, to avoid copying which is checked by
+    # the "copying" test in dplyr
     dim(x) <- NULL
   }
   x
@@ -36,19 +43,9 @@ needs_list_col <- function(x) {
 }
 
 # Work around bug in R 3.3.0
-safe_match <- function(x, table) {
-  # nocov start
-  if (getRversion() == "3.3.0") {
-    match(x, table, incomparables = character())
-  } else {
-    match(x, table)
-  }
-  # nocov end
-}
+# Can be ressigned during loading (#544)
+safe_match <- match
 
-stopc <- function(...) {
-  abort(paste0(...))
-}
 
 warningc <- function(...) {
   warn(paste0(...))
@@ -62,19 +59,57 @@ cat_line <- function(...) {
   cat(paste0(..., "\n"), sep = "")
 }
 
+# FIXME: Also exists in pillar, do we need to export?
+tick <- function(x) {
+  ifelse(is.na(x), "NA", encodeString(x, quote = "`"))
+}
+
 is_syntactic <- function(x) {
-  ret <- make.names(x) == x
+  ret <- (make_syntactic(x) == x)
   ret[is.na(x)] <- FALSE
   ret
 }
 
-tick_non_syntactic <- function(x) {
+tick_if_needed <- function(x) {
   needs_ticks <- !is_syntactic(x)
   x[needs_ticks] <- tick(x[needs_ticks])
   x
 }
 
-tick <- function(x) {
-  x[is.na(x)] <- "NA"
-  encodeString(x, quote = "`")
+## from rematch2, except we don't add tbl_df or tbl classes to the return value
+re_match <- function(text, pattern, perl = TRUE, ...) {
+
+  stopifnot(is.character(pattern), length(pattern) == 1, !is.na(pattern))
+  text <- as.character(text)
+
+  match <- regexpr(pattern, text, perl = perl, ...)
+
+  start  <- as.vector(match)
+  length <- attr(match, "match.length")
+  end    <- start + length - 1L
+
+  matchstr <- substring(text, start, end)
+  matchstr[ start == -1 ] <- NA_character_
+
+  res <- data.frame(
+    stringsAsFactors = FALSE,
+    .text = text,
+    .match = matchstr
+  )
+
+  if (!is.null(attr(match, "capture.start"))) {
+
+    gstart  <- attr(match, "capture.start")
+    glength <- attr(match, "capture.length")
+    gend    <- gstart + glength - 1L
+
+    groupstr <- substring(text, gstart, gend)
+    groupstr[ gstart == -1 ] <- NA_character_
+    dim(groupstr) <- dim(gstart)
+
+    res <- cbind(groupstr, res, stringsAsFactors = FALSE)
+  }
+
+  names(res) <- c(attr(match, "capture.names"), ".text", ".match")
+  res
 }

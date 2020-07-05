@@ -8,12 +8,15 @@ frame_matrix(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{frame_matrix}.
-Column names should be formulas, and may only appear before the data.}
+Column names should be formulas, and may only appear before the
+data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
 }
 \value{
 A \link{matrix}.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
 This is useful for small matrices, e.g. covariance matrices, where readability

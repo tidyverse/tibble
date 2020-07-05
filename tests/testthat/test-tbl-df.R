@@ -5,6 +5,7 @@ context("tbl_df")
 
 test_that("[ never drops", {
   mtcars2 <- as_tibble(mtcars)
+
   expect_is(mtcars2[, 1], "data.frame")
   expect_is(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
@@ -12,6 +13,7 @@ test_that("[ never drops", {
 
 test_that("[ retains class", {
   mtcars2 <- as_tibble(mtcars)
+
   expect_identical(class(mtcars2), class(mtcars2[1:5, ]))
   expect_identical(class(mtcars2), class(mtcars2[, 1:5]))
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
@@ -57,23 +59,37 @@ test_that("[ with 0 cols returns correct number of rows", {
 })
 
 test_that("[.tbl_df is careful about names (#1245)", {
-  z_msg <- "Column `z` not found"
-
   foo <- tibble(x = 1:10, y = 1:10)
-  expect_error(foo["z"], z_msg, fixed = TRUE)
-  expect_error(foo[ c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo["z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
-  expect_error(foo[, "z"], z_msg, fixed = TRUE)
-  expect_error(foo[, c("x", "y", "z") ], z_msg, fixed = TRUE)
+  expect_error(
+    foo[, "z"],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
+  expect_error(
+    foo[, c("x", "y", "z")],
+    error_unknown_names("z"),
+    fixed = TRUE
+  )
 
   expect_error(
     foo[as.matrix("x")],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array("x", dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -84,12 +100,12 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[0.5],
-    "Column index must be integer, not 0.5",
+    error_nonint_column_index(1, 0.5),
     fixed = TRUE
   )
   expect_error(
     foo[1:5],
-    "Column indexes must be at most 3 if positive, not 4, 5",
+    error_large_column_index(3, 4:5, 4:5),
     fixed = TRUE
   )
 
@@ -99,23 +115,23 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_error(
     foo[-4],
-    "Column index must be at least -3 if negative, not -4",
+    error_small_column_index(3, 1, -4),
     fixed = TRUE
   )
   expect_error(
     foo[c(1:3, NA)],
-    "NA column indexes not supported",
+    error_na_column_index(),
     fixed = TRUE
   )
 
   expect_error(
     foo[as.matrix(1)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(1, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -129,28 +145,28 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_error(
     foo[c(TRUE, TRUE)],
-    "Length of logical index vector must be 1 or 3 (the number of columns), not 2",
+    error_mismatch_column_flag(3, 2),
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    "Length of logical index vector must be 1 or 3 (the number of columns), not 4",
+    error_mismatch_column_flag(3, 4),
     fixed = TRUE
   )
   expect_error(
     foo[c(TRUE, TRUE, NA)],
-    "NA column indexes not supported",
+    error_na_column_flag(),
     fixed = TRUE
   )
 
   expect_error(
     foo[as.matrix(TRUE)],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    "Can't use matrix or array for column indexing",
+    error_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -159,27 +175,27 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(
     foo[list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[as.list(1:3)],
-    "Unsupported index type: list",
+    error_unsupported_index(as.list(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[factor(1:3)],
-    "Unsupported index type: factor",
+    error_unsupported_index(factor(1:3)),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.Date()],
-    "Unsupported index type: Date",
+    error_unsupported_index(Sys.Date()),
     fixed = TRUE
   )
   expect_error(
     foo[Sys.time()],
-    "Unsupported index type: POSIXct",
+    error_unsupported_index(Sys.time()),
     fixed = TRUE
   )
 })
@@ -189,17 +205,17 @@ test_that("[.tbl_df supports character subsetting (#312)", {
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
   expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
   expect_identical(foo[as.character(9:12), ], foo[9:12, ])
-  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
 test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
-  foo <- as_tibble(mtcars)
+  foo <- as_tibble(mtcars, rownames = NA)
   idx <- function(x) rownames(mtcars)[x]
   expect_identical(foo[idx(2:4), ], foo[2:4, ])
   expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
   expect_identical(foo[idx(29:34), ], foo[29:34, ])
-  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
   expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
@@ -221,13 +237,40 @@ test_that("[.tbl_df is no-op if args missing", {
 
 test_that("[.tbl_df supports drop argument (#311)", {
   expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][1])
-  expect_identical(df_all[1, , drop = TRUE], as.data.frame(df_all)[1, , drop = TRUE])
+  expect_identical(df_all[1, , drop = TRUE], df_all[1, , ])
 })
 
 test_that("[.tbl_df ignores drop argument (with warning) without j argument (#307)", {
   expect_warning(expect_identical(df_all[1, drop = TRUE], df_all[1]))
 })
 
+
+test_that("[.tbl_df is careful about attributes (#155)", {
+  df <- tibble(x = 1:2, y = x)
+  attr(df, "along for the ride") <- "still here"
+
+  expect_identical(attr(df[names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df["x"], "along for the ride"), "still here")
+  expect_identical(attr(df[1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[2], "along for the ride"), "still here")
+  expect_identical(attr(df[c(TRUE, FALSE)], "along for the ride"), "still here")
+  expect_identical(attr(df[, names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df[, "x"], "along for the ride"), "still here")
+  expect_identical(attr(df[, 1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[, 2], "along for the ride"), "still here")
+  expect_identical(attr(df[, c(TRUE, FALSE)], "along for the ride"), "still here")
+  expect_identical(attr(df[1, names(df)], "along for the ride"), "still here")
+  expect_identical(attr(df[1, "x"], "along for the ride"), "still here")
+  expect_identical(attr(df[1, 1:2], "along for the ride"), "still here")
+  expect_identical(attr(df[1, 2], "along for the ride"), "still here")
+  expect_identical(attr(df[1, c(TRUE, FALSE)], "along for the ride"), "still here")
+
+  expect_identical(attr(df[1:2, ], "along for the ride"), "still here")
+  expect_identical(attr(df[-1, ], "along for the ride"), "still here")
+
+  expect_identical(attr(df[, ], "along for the ride"), "still here")
+  expect_identical(attr(df[], "along for the ride"), "still here")
+})
 
 # [[ ----------------------------------------------------------------------
 
@@ -284,26 +327,29 @@ test_that("$ doesn't do partial matching", {
   expect_error(df$partial, NA)
 })
 
-# is.tibble ---------------------------------------------------------------
+# is_tibble ---------------------------------------------------------------
 
-test_that("is.tibble", {
-  expect_false(is.tibble(iris))
-  expect_true(is.tibble(as_tibble(iris)))
-  expect_false(is.tibble(NULL))
-  expect_false(is.tibble(0))
+test_that("is_tibble", {
+  expect_false(is_tibble(iris))
+  expect_true(is_tibble(as_tibble(iris)))
+  expect_false(is_tibble(NULL))
+  expect_false(is_tibble(0))
 })
 
 test_that("is_tibble", {
-  expect_identical(is.tibble, is_tibble)
+  scoped_lifecycle_silence()
+  expect_identical(is.tibble(iris), is_tibble(iris))
 })
 
 # new_tibble --------------------------------------------------------------
 
-test_that("new_tibble", {
+test_that("new_tibble() with deprecated subclass argument", {
   tbl <- new_tibble(
     data.frame(a = 1:3),
+    names = "b",
     attr1 = "value1",
     attr2 = 2,
+    nrow = 3,
     subclass = "nt"
   )
 
@@ -312,25 +358,97 @@ test_that("new_tibble", {
   expect_equal(
     unclass(tbl),
     structure(
-      list(a = 1:3),
+      list(b = 1:3),
       attr1 = "value1",
       attr2 = 2,
-      .Names = "a",
+      .Names = "b",
+      row.names = .set_row_names(3L)
+    )
+  )
+})
+
+test_that("new_tibble() with new class argument", {
+  tbl <- new_tibble(
+    data.frame(a = 1:3),
+    names = "b",
+    attr1 = "value1",
+    attr2 = 2,
+    nrow = 3,
+    class = "nt"
+  )
+
+  # Can't compare directly due to dplyr:::all.equal.tbl_df()
+  expect_identical(class(tbl), c("nt", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    unclass(tbl),
+    structure(
+      list(b = 1:3),
+      attr1 = "value1",
+      attr2 = 2,
+      .Names = "b",
       row.names = .set_row_names(3L)
     )
   )
 })
 
 test_that("new_tibble checks", {
-  expect_identical(new_tibble(list()), tibble())
-  expect_identical(new_tibble(list(a = 1:3, b = 4:6)), tibble(a = 1:3, b = 4:6))
-  expect_error(new_tibble(list(1)), "names", fixed = TRUE)
-  expect_error(new_tibble(list(a = 1, b = 2:3)), "length", fixed = TRUE)
+  scoped_lifecycle_errors()
+
+  expect_identical(new_tibble(list(), nrow = 0), tibble())
+  expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
+  expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
+  expect_error(
+    new_tibble(1:3, nrow = 1),
+    error_new_tibble_must_be_list(),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(list(a = 1)),
+    error_new_tibble_needs_nrow(),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(list(1), nrow = NULL),
+    error_new_tibble_needs_nrow(),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(list(1), nrow = 1),
+    error_names_must_be_non_null(repair = FALSE),
+    fixed = TRUE
+  )
+  expect_error(
+    new_tibble(set_names(list(1), NA_character_), nrow = 1),
+    NA
+  )
+  expect_error(
+    new_tibble(set_names(list(1), ""), nrow = 1),
+    NA
+  )
+  expect_error(
+    new_tibble(list(a = 1, b = 2:3), nrow = 1),
+    NA
+  )
   expect_error(
     new_tibble(
-      structure(list(a = 1, b = 2), row.names = .set_row_names(2))
+      structure(list(a = 1, b = 2), row.names = .set_row_names(2)),
+      nrow = 1
     ),
-    "length",
+    NA
+  )
+})
+
+
+test_that("validate_tibble() checks", {
+  expect_error(
+    validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
+    error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
+    fixed = TRUE
+  )
+
+  expect_error(
+    validate_tibble(new_tibble(list(a = array(1:3)), nrow = 3)),
+    error_1d_array_column(),
     fixed = TRUE
   )
 })

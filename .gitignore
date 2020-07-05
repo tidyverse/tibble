@@ -12,3 +12,4 @@ inst/doc
 *.Rds
 vignettes/*.R
 .DS_Store
+.drake

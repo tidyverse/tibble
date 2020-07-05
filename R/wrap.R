@@ -10,15 +10,5 @@ wrap <- function(..., indent = 0, prefix = "", width) {
 }
 
 strwrap2 <- function(x, width, indent) {
-  col_strwrap(x, width = max(width, 0), indent = indent, exdent = indent + 2)
+  fansi::strwrap_ctl(x, width = max(width, 0), indent = indent, exdent = indent + 2)
 }
-
-make_color_aware <- function(fun) {
-  nchar <- function(x, ...) pillar::get_extent(x)
-  nchar
-
-  environment(fun) <- environment()
-  fun
-}
-
-col_strwrap <- make_color_aware(strwrap)

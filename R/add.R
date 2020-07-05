@@ -1,16 +1,27 @@
 #' Add rows to a data frame
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+#'
 #' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See [tribble()] for an easy way to create an complete
 #' data frame row-by-row.
 #'
 #' `add_case()` is an alias of `add_row()`.
 #'
+#' @section Life cycle:
+#' It is unclear if `add_row()` and its alias `add_cases()` should ensure
+#' that all columns have length one by wrapping in a list if necessary.
+#' See <https://github.com/tidyverse/tibble/pull/503> and
+#' <https://github.com/tidyverse/tibble/issues/205> for details.
+#'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
-#'   in `.data` can be used, unset columns will get an `NA` value.
-#'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`.
+#' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
+#'   only for columns that already exist in `.data` and unset columns will get an
+#'   `NA` value. These arguments are passed on to [tibble()], and therefore also
+#'   support unquote via `!!` and unquote-splice via `!!!`. However, unlike in
+#'   \pkg{dplyr} verbs, columns in `.data` are not available for the expressions.
+#'
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -37,15 +48,15 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    stop("Can't add rows to grouped data frames", call. = FALSE)
+    abort(error_add_rows_to_grouped_df())
   }
 
   df <- tibble(...)
   attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
 
   extra_vars <- setdiff(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    stopc(pluralise_msg("Can't add row with new variable(s) ", extra_vars))
+  if (has_length(extra_vars)) {
+    abort(error_inconsistent_new_rows(extra_vars))
   }
 
   missing_vars <- setdiff(names(.data), names(df))
@@ -99,7 +110,10 @@ rbind_at <- function(old, new, pos) {
 #' @param ... Name-value pairs, passed on to [tibble()]. All values must have
 #'   one element for each row in the data frame, or be of length 1.
 #'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`.
+#'   unquote via `!!` and unquote-splice via `!!!`. However, unlike in
+#'   \pkg{dplyr} verbs, columns in `.data` are not available for the
+#'   expressions. Use [dplyr::mutate()] if you need to add a column based on
+#'   existing data.
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
 #' @family addition
@@ -130,20 +144,13 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      stopc(
-        "`.data` must have ", nrow(.data),
-        pluralise_n(" row(s)", nrow(.data)),
-        ", not ", nrow(df)
-      )
+      abort(error_inconsistent_new_cols(nrow(.data), df))
     }
   }
 
   extra_vars <- intersect(names(df), names(.data))
   if (length(extra_vars) > 0) {
-    stopc(
-      pluralise_msg("Column(s) ", extra_vars),
-      pluralise(" already exist[s]", extra_vars)
-    )
+    abort(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
@@ -179,7 +186,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      stopc("Can't specify both `.before` and `.after`")
+      abort(error_both_before_after())
     }
   }
 }

@@ -10,22 +10,32 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Only columns that exist
-in \code{.data} can be used, unset columns will get an \code{NA} value.
-These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
-unquote via \code{!!} and unquote-splice via \code{!!!}.}
+\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
+only for columns that already exist in \code{.data} and unset columns will get an
+\code{NA} value. These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also
+support unquote via \code{!!} and unquote-splice via \code{!!!}. However, unlike in
+\pkg{dplyr} verbs, columns in \code{.data} are not available for the expressions.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+
 This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
 data frame row-by-row.
-}
-\details{
+
 \code{add_case()} is an alias of \code{add_row()}.
 }
+\section{Life cycle}{
+
+It is unclear if \code{add_row()} and its alias \code{add_cases()} should ensure
+that all columns have length one by wrapping in a list if necessary.
+See \url{https://github.com/tidyverse/tibble/pull/503} and
+\url{https://github.com/tidyverse/tibble/issues/205} for details.
+}
+
 \examples{
 # add_row ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
@@ -50,3 +60,4 @@ add_row(df, z = 10)
 \seealso{
 Other addition: \code{\link{add_column}}
 }
+\concept{addition}

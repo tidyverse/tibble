@@ -1,75 +1,89 @@
-#' @include tibble.R
+#' Build a list
 #'
 #' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
 #'
-#' `lst()` is similar to [list()], but like `tibble()`, it
-#' evaluates its arguments lazily and in order, and automatically adds names.
+#' `lst()` constructs a list, similar to [base::list()], but with some of the
+#' same features as [tibble()]. `lst()` builds components sequentially. When
+#' defining a component, you can refer to components created earlier in the
+#' call. `lst()` also generates missing names automatically.
 #'
-#' `lst_()` uses lazy evaluation and is deprecated. New code should use `lst()`
-#' with [quasiquotation].
+#' @section Life cycle:
+#' The `lst()` function is in the [questioning
+#' stage](https://www.tidyverse.org/lifecycle/#questioning). It is essentially
+#' [rlang::list2()], but with a couple features copied from [tibble()]. It's not
+#' clear that a function for creating lists belongs in the tibble package.
+#' Consider using [rlang::list2()] instead.
 #'
+#' @inheritParams tibble
+#' @return A named list.
 #' @export
 #' @examples
+#' # the value of n can be used immediately in the definition of x
 #' lst(n = 5, x = runif(n))
 #'
-#' # You can splice-unquote a list of quotes and formulas
-#' lst(!!! list(n = rlang::quo(2 + 3), y = quote(runif(n))))
+#' # missing names are constructed from user's input
+#' lst(1:3, z = letters[4:6], runif(3))
 #'
-#' @export
-#' @rdname tibble
+#' a <- 1:3
+#' b <- letters[4:6]
+#' lst(a, b)
+#'
+#' # pre-formed quoted expressions can be used with lst() and then
+#' # unquoted (with !!) or unquoted and spliced (with !!!)
+#' n1 <- 2
+#' n2 <- 3
+#' n_stuff <- quote(n1 + n2)
+#' x_stuff <- quote(seq_len(n))
+#' lst(!!!list(n = n_stuff, x = x_stuff))
+#' lst(n = !!n_stuff, x = !!x_stuff)
+#' lst(n = 4, x = !!x_stuff)
+#' lst(!!!list(n = 2, x = x_stuff))
 lst <- function(...) {
-  xs <- quos(..., .named = 500L)
-  lst_quos(xs)
+  xs <- quos(..., .named = TRUE)
+  lst_quos(xs)$output
 }
 
-lst_quos <- function(xs, expand = FALSE) {
-  n <- length(xs)
-  if (n == 0) {
-    return(list())
-  }
-
+lst_quos <- function(xs, transform = function(x, i) x) {
   # Evaluate each column in turn
   col_names <- names2(xs)
-  output <- list_len(n)
-  names(output) <- character(n)
+  output <- new_list_along(xs, names = rep_along(xs, ""))
+  lengths <- rep_along(xs, 0L)
 
-  for (i in seq_len(n)) {
+  for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
+      lengths[[i]] <- NROW(res)
       output[[i]] <- res
-      if (expand) output <- expand_lst(output, i)
+      output <- transform(output, i)
     }
-    names(output)[i] <- col_names[[i]]
+    names(output)[[i]] <- col_names[[i]]
   }
 
-  output
+  list(output = output, lengths = lengths)
 }
 
-expand_lst <- function(output, i) {
+expand_lst <- function(x, i) {
   idx_to_fix <- integer()
   if (i > 1L) {
-    if (length(output[[i]]) == 1L && length(output[[1L]]) != 1L) {
+    if (NROW(x[[i]]) == 1L && NROW(x[[1L]]) != 1L) {
       idx_to_fix <- i
       idx_boilerplate <- 1L
-    } else if (length(output[[i]]) != 1L && all(map(output[seq2(1L, i - 1L)], length) == 1L)) {
+    } else if (NROW(x[[i]]) != 1L && NROW(x[[1L]]) == 1L) {
       idx_to_fix <- seq2(1L, i - 1L)
       idx_boilerplate <- i
     }
   }
 
   if (length(idx_to_fix) > 0L) {
-    ones <- rep(1L, length(output[[idx_boilerplate]]))
-    output[idx_to_fix] <- map(output[idx_to_fix], `[`, ones)
+    x[idx_to_fix] <- expand_vecs(x[idx_to_fix], NROW(x[[idx_boilerplate]]))
   }
 
-  output
+  x
 }
 
-#' @export
-#' @usage NULL
-#' @rdname tibble
-lst_ <- function(xs) {
-  xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!! xs)
+expand_vecs <- function(x, length) {
+  ones <- rep(1L, length)
+  map(x, subset_rows, ones)
 }

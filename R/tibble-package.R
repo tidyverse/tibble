@@ -1,58 +1,42 @@
 #' @useDynLib tibble, .registration = TRUE
 #' @importFrom utils head tail
+#' @importFrom pkgconfig set_config
 #' @import rlang
 #' @aliases NULL tibble-package
-#' @details The S3 class `tbl_df` wraps a local data frame. The main
-#' advantage to using a `tbl_df` over a regular data frame is the printing:
-#' tbl objects only print a few rows and all the columns that fit on one screen,
-#' describing the rest of it as text.
+#' @details
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
 #'
-#' @section Methods:
+#' The tibble package provides utilities for handling __tibbles__, where
+#' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
+#' class is a special case of the base [`data.frame`][base::data.frame()].
+#' class, developed in response to lessons learned over many years of data
+#' analysis with data frames.
 #'
-#' `tbl_df` implements four important base methods:
+#' Tibble is the central data structure for the set of packages known as the
+#' [tidyverse](https://www.tidyverse.org/packages/), including
+#' [dplyr](http://dplyr.tidyverse.org/),
+#' [ggplot2](http://ggplot2.tidyverse.org/),
+#' [tidyr](http://tidyr.tidyverse.org/), and
+#' [readr](http://readr.tidyverse.org/).
 #'
-#' \describe{
-#' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see [print.tbl()]}
-#' \item{\code{[}}{Does not simplify (drop) by default, returns a data frame}
-#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
-#'   so is considerably faster. Returns `NULL` if column does not exist,
-#'   `$` warns.}
-#' }
-#' @section Important functions:
-#' [tibble()] and [tribble()] for construction,
-#' [as_tibble()] for coercion,
-#' and [print.tbl()] and [glimpse()] for display.
-#' @examples
-#' tibble(a = 1:26, b = letters)
-#' as_tibble(iris)
+#' General resources:
+#'   * Website for the tibble package: <https://tibble.tidyverse.org>
+#'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for Data
+#'     Science*
+#'
+#' Resources on specific topics:
+#'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]
+#'   * Inspect a tibble: [print.tbl()], [glimpse()]
+#'   * Details on the S3 `tbl_df` class: [`tbl_df-class`]
 "_PACKAGE"
 
-#' Package options
-#'
-#' Display options for `tbl_df`, used by [trunc_mat()] and
-#' (indirectly) by [print.tbl()].
-#'
-#' @name tibble-options
-#' @inheritSection pillar::`pillar-package` Package options
-#' @section Package options:
-(op.tibble <- list(
-  #' - `tibble.print_max`: Row number threshold: Maximum number of rows
-  #'     printed. Set to `Inf` to always print all rows.  Default: 20.
+## user-facing docs kept in `formatting` topic; see utils-format.r
+op.tibble <- list(
   tibble.print_max = 20L,
-
-  #' - `tibble.print_min`: Number of rows printed if row number
-  #'     threshold is exceeded. Default: 10.
   tibble.print_min = 10L,
-
-  #' - `tibble.width`: Output width. Default: `NULL` (use
-  #'     `width` option).
   tibble.width = NULL,
-
-  #' - `tibble.max_extra_cols`: Number of extra columns
-  #'     printed in reduced form. Default: 100.
   tibble.max_extra_cols = 100L
-))
+)
 
 tibble_opt <- function(x) {
   x_tibble <- paste0("tibble.", x)

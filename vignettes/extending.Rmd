@@ -1,7 +1,6 @@
 ---
 title: "Extending tibble"
 author: "Kirill Müller, Hadley Wickham"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Extending tibble}
@@ -317,7 +316,8 @@ This is picked up by the default implementation of `obj_sum()`, which then shows
 An example of an object of this type in base R is `POSIXlt`: it is a list with 9 components.
 
 ```{r}
-x <- as.POSIXlt(Sys.time() + c(0, 60, 3600)) 
+time <- as.POSIXlt("2018-12-20 23:29:51", tz = "CET")
+x <- as.POSIXlt(time + c(0, 60, 3600))
 str(unclass(x))
 ```
 

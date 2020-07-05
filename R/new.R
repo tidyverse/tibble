@@ -1,106 +1,141 @@
-#' Constructor
+#' Tibble constructor and validator
 #'
-#' Creates a subclass of a tibble.
-#' This function is mostly useful for package authors that implement subclasses
-#' of a tibble, like \pkg{sf} or \pkg{tibbletime}.
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
+#' Creates or validates a subclass of a tibble.
+#' These function is mostly useful for package authors that implement subclasses
+#' of a tibble, like \pkg{sf} or \pkg{tsibble}.
+#'
+#' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
+#' This function is optimized for performance, checks are reduced to a minimum.
 #'
 #' @param x A tibble-like object
 #' @param ... Passed on to [structure()]
-#' @param nrow The number of rows, guessed from the data by default
-#' @param subclass Subclasses to assign to the new object, default: none
+#' @param nrow The number of rows, required
+#' @param class Subclasses to assign to the new object, default: none
+#' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
+#'
+#' @seealso
+#' [tibble()] and [as_tibble()] for ways to construct a tibble
+#' with recycling of scalars and automatic name repair.
+#'
 #' @export
 #' @examples
-#' new_tibble(list(a = 1:3, b = 4:6))
-#'
-#' # One particular situation where the nrow argument is essential:
-#' new_tibble(list(), nrow = 150, subclass = "my_tibble")
-#'
-#' # It's safest to always pass it along:
+#' # The nrow argument is always required:
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
-#' \dontrun{
-#' # All columns must be the same length:
-#' new_tibble(list(a = 1:3, b = 4.6))
+#' # Existing row.names attributes are ignored:
+#' try(new_tibble(iris, nrow = 3))
 #'
-#' # The length must be consistent with the nrow argument if available:
-#' new_tibble(list(a = 1:3, b = 4:6), nrow = 2)
-#' }
-new_tibble <- function(x, ..., nrow = NULL, subclass = NULL) {
-  #' @details
-  #' `x` must be a named (or empty) list, but the names are not currently
-  #' checked for correctness.
-  stopifnot(is.list(x))
-  if (length(x) == 0) names(x) <- character()
-  stopifnot(has_nonnull_names(x))
+#' # The length of all columns must be consistent with the nrow argument:
+#' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
+new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
+  # For compatibility with tibble < 2.0.0
+  if (is.null(class)) {
+    class <- subclass
+  }
 
-  #' @details
+  #' @section Construction:
+  #'
+  #' For `new_tibble()`, `x` must be a list.
+  x <- unclass(x)
+
+  if (!is.list(x)) {
+    stop(error_new_tibble_must_be_list())
+  }
+
   #' The `...` argument allows adding more attributes to the subclass.
   x <- update_tibble_attrs(x, ...)
 
-  #' @details
-  #' The `row.names` attribute will be computed from the `nrow` argument,
-  #' overriding any existing attribute of this name in `x` or in the `...`
-  #' arguments.
-  #' If `nrow` is `NULL`, the number of rows will be guessed from the data.
-  if (is.null(nrow)) nrow <- guess_nrow(x)
-  attr(x, "row.names") <- .set_row_names(nrow)
-  #' The `new_tibble()` constructor makes sure that the `row.names` attribute
-  #' is consistent with the data before returning.
-  validate_nrow(x)
+  #' An `nrow` argument is required.
+  if (missing(nrow)) {
+    if (length(x) >= 1) {
+      signal_soft_deprecated(error_new_tibble_needs_nrow())
+      nrow <- NROW(x[[1]])
+    } else {
+      abort(error_new_tibble_needs_nrow())
+    }
+  }
+  #' This should be an integer of length 1,
+  #' and every element of the list `x` should have [NROW()]
+  #' equal to this value.
+  #' (But this is not checked by the constructor).
+  #' This takes the place of the "row.names" attribute in a data frame.
+  if (!is_integerish(nrow, 1)) {
+    abort(error_new_tibble_needs_nrow())
+  }
 
-  #' @details
-  #' The `class` attribute of the returned object always consists of
-  #' `c("tbl_df", "tbl", "data.frame")`. If the `subclass` argument is set,
-  #' it will be prepended to that list of classes.
-  set_tibble_class(x, subclass)
+  #' `x` must have names (or be empty),
+  #' but the names are not checked for correctness.
+  if (length(x) == 0) {
+    # Leaving this because creating a named list of length zero seems difficult
+    names(x) <- character()
+  } else if (is.null(names(x))) {
+    abort(error_names_must_be_non_null())
+  }
+
+  set_tibble_subclass(x, nrow, class)
+}
+
+#' @description
+#' `validate_tibble()` checks a tibble for internal consistency.
+#' Correct behavior can be guaranteed only if this function
+#' runs without raising an error.
+#'
+#' @rdname new_tibble
+#' @export
+validate_tibble <- function(x) {
+  #' @section Validation:
+  #' `validate_tibble()` checks for "minimal" names
+  check_minimal_names(x)
+
+  #' and that all columns are vectors, data frames or matrices.
+  check_valid_cols(x)
+
+  #' It also makes sure that all columns have the same length,
+  #' and that [NROW()] is consistent with the data.
+  validate_nrow(names(x), col_lengths(x), NROW(x))
+
+  #' 1d arrays are not supported.
+  map(x, check_no_dim)
+
+  x
+}
+
+col_lengths <- function(x) {
+  map_int(x, NROW)
+}
+
+validate_nrow <- function(names, lengths, nrow) {
+  # Validate column lengths, don't recycle
+  bad_len <- which(lengths != nrow)
+  if (has_length(bad_len)) {
+    abort(error_inconsistent_cols(nrow, names, lengths, "`nrow` argument"))
+  }
 }
 
 update_tibble_attrs <- function(x, ...) {
   # Can't use structure() here because it breaks the row.names attribute
   attribs <- list(...)
-
-  # reduce2() is not in the purrr compat layer
-  nested_attribs <- map2(names(attribs), attribs, function(name, value) set_names(list(value), name))
-  x <- reduce(
-    .init = x,
-    nested_attribs,
-    function(x, attr) {
-      if (!is.null(attr[[1]])) {
-        attr(x, names(attr)) <- attr[[1]]
-      }
-      x
-    }
-  )
+  if (has_length(attribs)) {
+    attributes(x)[names(attribs)] <- attribs
+  }
 
   x
 }
 
-guess_nrow <- function(x) {
-  if (!is.null(.row_names_info(x, 0L))) {
-    .row_names_info(x, 2L)
-  } else if (length(x) == 0) {
-    0L
-  } else {
-    NROW(x[[1L]])
-  }
+tibble_class <- c("tbl_df", "tbl", "data.frame")
+
+# Two dedicated functions for faster subsetting
+set_tibble_class <- function(x, nrow) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- tibble_class
+  x
 }
 
-validate_nrow <- function(x) {
-  # Validate column lengths, don't recycle
-  lengths <- map_int(x, NROW)
-  first <- .row_names_info(x, 2L)
-
-  bad_len <- lengths != first
-  if (any(bad_len)) {
-    invalid_df_msg(
-      paste0("must be length ", first, ", not "), x, bad_len, lengths[bad_len]
-    )
-  }
-
-  invisible(x)
-}
-
-set_tibble_class <- function(x, subclass = NULL) {
-  class(x) <- c(subclass, "tbl_df", "tbl", "data.frame")
+set_tibble_subclass <- function(x, nrow, subclass) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- c(subclass, tibble_class)
   x
 }

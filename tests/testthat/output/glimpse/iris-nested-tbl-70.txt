@@ -1,0 +1,4 @@
+Observations: 3
+Variables: 2
+$ Species <fct> setosa, versicolor, virginica
+$ data    <list> [<tbl_df[50 x 5]>, <tbl_df[50 x 5]>, <tbl_df[50 x …

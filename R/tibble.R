@@ -1,164 +1,164 @@
-#' Build a data frame or list
+#' Build a data frame
 #'
 #' @description
-#' `tibble()` is a trimmed down version of [data.frame()] that:
 #'
-#' * Never coerces inputs (i.e. strings stay as strings!).
-#' * Never adds `row.names`.
-#' * Never munges column names.
-#' * Only recycles length 1 inputs.
-#' * Evaluates its arguments lazily and in order.
-#' * Adds `tbl_df` class to output.
-#' * Automatically adds column names.
+#' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
+#' with a couple notable differences:
 #'
-#' `data_frame()` is an alias to `tibble()`.
-#'
-#' `tibble_()` and its alias `data_frame_()` use lazy evaluation and are
-#' deprecated. New code should use `tibble()` or `data_frame()` with
-#' [quasiquotation].
+#'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in
+#'     addition to `data.frame`. This allows so-called "tibbles" to exhibit some
+#'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
+#'     fully described in [`tbl_df`][tbl_df-class].
+#'   * `tibble()` is much lazier than [base::data.frame()] in terms of
+#'     transforming the user's input. Character vectors are not coerced to
+#'     factor. List-columns are expressly anticipated and do not require special
+#'     tricks. Column names are not modified.
+#'   * `tibble()` builds columns sequentially. When defining a column, you can
+#'     refer to columns created earlier in the call. Only columns of length one
+#'     are recycled.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.  These arguments are
-#'   processed with [rlang::quos()] and support unquote via `!!` and
-#'   unquote-splice via `!!!`.
-#' @seealso [as_tibble()] to turn an existing list into
-#'   a data frame.
+#'   so you can refer to previously created elements. These arguments are
+#'   processed with [rlang::quos()] and support unquote via [`!!`] and
+#'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
+#' @param .rows The number of rows, useful to create a 0-column tibble or
+#'   just as an additional check.
+#' @param .name_repair Treatment of problematic column names:
+#'   * `"minimal"`: No name repair or checks, beyond basic existence,
+#'   * `"unique"`: Make sure names are unique and not empty,
+#'   * `"check_unique"`: (default value), no name repair, but check they are
+#'     `unique`,
+#'   * `"universal"`: Make the names `unique` and syntactic
+#'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
+#'     for names in the style of base R).
+#'   * A purrr-style anonymous function, see [rlang::as_function()]
+#'
+#'   See [name-repair] for more details on these terms and the strategies used
+#'   to enforce them.
+#'
+#' @return A tibble, which is a colloquial term for an object of class
+#'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
+#'   frame, i.e. it has class `data.frame`.
+#' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
+#'   `enframe()` to convert a named vector into tibble. Name repair is detailed
+#'   in [name-repair]. [rlang::list2()] provides more details on tidy dots
+#'   semantics, i.e. exactly how [quasiquotation] works for the `...` argument.
 #' @export
 #' @examples
+#' # Unnamed arguments are named with their expression:
 #' a <- 1:5
-#' tibble(a, b = a * 2)
+#' tibble(a, a * 2)
+#'
+#' # Scalars (vectors of length one) are recycled:
 #' tibble(a, b = a * 2, c = 1)
+#'
+#' # Columns are available in subsequent expressions:
 #' tibble(x = runif(10), y = x * 2)
 #'
-#' lst(n = 5, x = runif(n))
-#'
-#' # tibble never coerces its inputs
+#' # tibble() never coerces its inputs,
 #' str(tibble(letters))
 #' str(tibble(x = list(diag(1), diag(2))))
 #'
-#' # or munges column names
+#' # or munges column names (unless requested),
 #' tibble(`a + b` = 1:5)
 #'
-#' # You can splice-unquote a list of quotes and formulas
-#' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+#' # but it forces you to take charge of names, if they need repair:
+#' try(tibble(x = 1, x = 2))
+#' tibble(x = 1, x = 2, .name_repair = "unique")
+#' tibble(x = 1, x = 2, .name_repair = "minimal")
 #'
-#' # data frames can only contain 1d atomic vectors and lists
-#' # and can not contain POSIXlt
-#' \dontrun{
-#' tibble(x = tibble(1, 2, 3))
-#' tibble(y = strptime("2000/01/01", "%x"))
-#' }
-tibble <- function(...) {
+#' ## By default, non-syntactic names are allowed,
+#' df <- tibble(`a 1` = 1, `a 2` = 2)
+#' ## because you can still index by name:
+#' df[["a 1"]]
+#' df$`a 1`
+#' with(df, `a 1`)
+#'
+#' ## Syntactic names are easier to work with, though, and you can request them:
+#' df <- tibble(`a 1` = 1, `a 2` = 2, .name_repair = "universal")
+#' df$a.1
+#'
+#' ## You can specify your own name repair function:
+#' tibble(x = 1, x = 2, .name_repair = make.unique)
+#'
+#' fix_names <- function(x) gsub("\\s+", "_", x)
+#' tibble(`year 1` = 1, `year 2` = 2, .name_repair = fix_names)
+#'
+#' ## purrr-style anonymous functions and constants
+#' ## are also supported
+#' tibble(x = 1, x = 2, .name_repair = ~ make.names(., unique = TRUE))
+#'
+#' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
+#'
+#' # Tibbles can contain columns that are tibbles or matrices
+#' # if the number of rows is consistent:
+#' tibble(
+#'   a = 1:3,
+#'   b = tibble(
+#'     c = 4:6,
+#'     d = 7:9
+#'   ),
+#'   e = tibble(
+#'     f = tibble(
+#'       g = letters[1:3]
+#'     )
+#'   )
+#' )
+#' tibble(
+#'   a = 1:4,
+#'   b = diag(4),
+#'   c = cov(iris[1:4])
+#' )
+#'
+#' # data can not contain POSIXlt columns, or tibbles or matrices
+#' # with inconsistent number of rows:
+#' try(tibble(y = strptime("2000/01/01", "%x")))
+#' try(tibble(a = 1:3, b = tibble(c = 4:7)))
+#'
+#' # Use := to create columns with names that start with a dot:
+#' tibble(.rows = 3)
+#' tibble(.rows := 3)
+#'
+#' # You can unquote an expression:
+#' x <- 3
+#' tibble(x = 1, y = x)
+#' tibble(x = 1, y = !!x)
+#'
+#' # You can splice-unquote a list of quosures and expressions:
+#' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
+#'
+tibble <- function(...,
+                   .rows = NULL,
+                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(..., .named = TRUE)
-  as_tibble(lst_quos(xs, expand = TRUE))
+  xlq <- lst_quos(xs, transform = expand_lst)
+  lst_to_tibble(xlq$output, .rows, .name_repair, lengths = xlq$lengths)
 }
-
-#' @export
-#' @usage NULL
-#' @rdname tibble
-tibble_ <- function(xs) {
-  xs <- compat_lazy_dots(xs, caller_env())
-  tibble(!!! xs)
-}
-
-#' @export
-#' @rdname tibble
-data_frame <- tibble
-
-#' @export
-#' @rdname tibble
-#' @usage NULL
-data_frame_ <- tibble_
-
 
 #' Test if the object is a tibble
 #'
-#' This function returns `FALSE` for regular data frames and `TRUE` for tibbles.
+#' This function returns `TRUE` for tibbles or subclasses thereof,
+#' and `FALSE` for all other objects, including regular data frames.
 #'
 #' @param x An object
 #' @return `TRUE` if the object inherits from the `tbl_df` class.
 #' @export
 is_tibble <- function(x) {
-  "tbl_df" %in% class(x)
+  inherits(x, "tbl_df")
 }
 
-#' @rdname is_tibble
-#' @usage NULL
+#' Deprecated test for tibble-ness
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("soft-deprecated")}
+#'
+#' Please use [is_tibble()] instead.
+#'
+#' @inheritParams is_tibble
 #' @export
-is.tibble <- is_tibble
+#' @keywords internal
+is.tibble <- function(x) {
+  signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
 
-
-# Validity checks --------------------------------------------------------------
-
-check_tibble <- function(x) {
-  # Names
-  names_x <- names2(x)
-  bad_name <- is.na(names_x) | names_x == ""
-  if (any(bad_name)) {
-    invalid_df("must be named", x, which(bad_name))
-  }
-
-  dups <- duplicated(names_x)
-  if (any(dups)) {
-    invalid_df("must have [a] unique name(s)", x, dups)
-  }
-
-  # Types
-  is_1d <- map_lgl(x, is_1d)
-  if (any(!is_1d)) {
-    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
-  }
-
-  x[] <- map(x, strip_dim)
-
-  posixlt <- map_lgl(x, inherits, "POSIXlt")
-  if (any(posixlt)) {
-    invalid_df("[is](are) [a] date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
-  }
-
-  x
-}
-
-recycle_columns <- function(x) {
-  # Validate column lengths, allow recycling
-  lengths <- map_int(x, NROW)
-
-  # Shortcut if all columns have the same length (including zero length!)
-  if (all(lengths == lengths[1L])) return(x)
-
-  max <- max(lengths[lengths != 1L], 0L)
-
-  bad_len <- lengths != 1L & lengths != max
-  if (any(bad_len)) {
-    invalid_df_msg(
-      paste0("must be length 1 or ", max, ", not "), x, bad_len, lengths[bad_len]
-    )
-  }
-
-  short <- lengths == 1
-  if (max > 1L && any(short)) {
-    x[short] <- map(x[short], rep, max)
-  }
-
-  x
-}
-
-invalid_df <- function(problem, df, vars) {
-  if (is.logical(vars)) {
-    vars <- names(df)[vars]
-  }
-  stopc(
-    pluralise_msg("Column(s) ", vars), " ",
-    pluralise(problem, vars)
-  )
-}
-
-invalid_df_msg <- function(problem, df, vars, extra) {
-  if (is.logical(vars)) {
-    vars <- names(df)[vars]
-  }
-  stopc(
-    pluralise_msg("Column(s) ", vars), " ",
-    pluralise_msg(problem, extra)
-  )
+  is_tibble(x)
 }

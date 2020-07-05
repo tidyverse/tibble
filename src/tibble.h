@@ -2,7 +2,7 @@
 #define TIBBLE_H
 
 #define R_NO_REMAP
-#include <Rdefines.h>
+#include <Rinternals.h>
 
 SEXP tibble_matrixToDataFrame(SEXP xSEXP);
 SEXP tibble_string_to_indices(SEXP x);
