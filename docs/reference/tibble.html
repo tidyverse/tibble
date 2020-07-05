@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a data frame or list. — tibble • tibble</title>
+<title>Build a data frame or list — tibble • tibble</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,7 +89,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a data frame or list.</h1>
+    <h1>Build a data frame or list</h1>
     </div>
 
     
@@ -101,12 +101,24 @@
 <li><p>Evaluates its arguments lazily and in order.</p></li>
 <li><p>Adds <code>tbl_df</code> class to output.</p></li>
 <li><p>Automatically adds column names.</p></li>
-</ul>
+</ul><p><code>data_frame()</code> is an alias to <code>tibble()</code>.
+
+    <code>tibble_()</code> and its alias <code>data_frame_()</code> use lazy evaluation and are
+deprecated. New code should use <code>tibble()</code> or <code>data_frame()</code> with
+quasiquotation.
+
+    <code>lst()</code> is similar to <code>list()</code>, but like <code>tibble()</code>, it
+evaluates its arguments lazily and in order, and automatically adds names.
+
+    <code>lst_()</code> uses lazy evaluation and is deprecated. New code should use <code>lst()</code>
+with quasiquotation.</p>
     
 
     <pre class="usage"><span class='fu'>tibble</span>(<span class='no'>...</span>)
 
-<span class='fu'>tibble_</span>(<span class='no'>xs</span>)</pre>
+<span class='fu'>data_frame</span>(<span class='no'>...</span>)
+
+<span class='fu'>lst</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -114,12 +126,9 @@
     <tr>
       <th>...</th>
       <td><p>A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created variables.</p></td>
-    </tr>
-    <tr>
-      <th>xs</th>
-      <td><p>A list of unevaluated expressions created with <code>~</code>,
-<code>quote()</code>, or <code><a href='http://www.rdocumentation.org/packages/lazyeval/topics/lazy_'>lazyeval::lazy()</a></code>.</p></td>
+so you can refer to previously created variables.  These arguments are
+processed with <code><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>rlang::quos()</a></code> and support unquote via <code>!!</code> and
+unquote-splice via <code>!!!</code>.</p></td>
     </tr>
     </table>
     
@@ -131,38 +140,38 @@ a data frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
-<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 × 2
+<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
 #&gt;       a     b
 #&gt;   &lt;int&gt; &lt;dbl&gt;
-#&gt; 1     1     2
-#&gt; 2     2     4
-#&gt; 3     3     6
-#&gt; 4     4     8
-#&gt; 5     5    10</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 5 × 3
+#&gt; 1     1  2.00
+#&gt; 2     2  4.00
+#&gt; 3     3  6.00
+#&gt; 4     4  8.00
+#&gt; 5     5 10.0 </div><div class='input'><span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 3
 #&gt;       a     b     c
 #&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2     1
-#&gt; 2     2     4     1
-#&gt; 3     3     6     1
-#&gt; 4     4     8     1
-#&gt; 5     5    10     1</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 × 2
-#&gt;             x          y
-#&gt;         &lt;dbl&gt;      &lt;dbl&gt;
-#&gt; 1  0.52365044 1.04730087
-#&gt; 2  0.83706173 1.67412345
-#&gt; 3  0.03350404 0.06700807
-#&gt; 4  0.04332844 0.08665688
-#&gt; 5  0.79210294 1.58420589
-#&gt; 6  0.20269896 0.40539793
-#&gt; 7  0.06879545 0.13759090
-#&gt; 8  0.86444107 1.72888215
-#&gt; 9  0.07708986 0.15417972
-#&gt; 10 0.43100342 0.86200684</div><div class='input'>
-<span class='fu'><a href='lst.html'>lst</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
+#&gt; 1     1  2.00  1.00
+#&gt; 2     2  4.00  1.00
+#&gt; 3     3  6.00  1.00
+#&gt; 4     4  8.00  1.00
+#&gt; 5     5 10.0   1.00</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
+#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 0.361 0.722
+#&gt;  2 0.653 1.31 
+#&gt;  3 0.144 0.287
+#&gt;  4 0.681 1.36 
+#&gt;  5 0.859 1.72 
+#&gt;  6 0.839 1.68 
+#&gt;  7 0.881 1.76 
+#&gt;  8 0.238 0.475
+#&gt;  9 0.579 1.16 
+#&gt; 10 0.898 1.80 </div><div class='input'>
+<span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
 #&gt; [1] 5
 #&gt; 
 #&gt; $x
-#&gt; [1] 0.9736226 0.5709573 0.7544066 0.2424543 0.6271579
+#&gt; [1] 0.3444290 0.7608582 0.7311036 0.8524324 0.9758180
 #&gt; </div><div class='input'>
 <span class='co'># tibble never coerces its inputs</span>
 <span class='fu'>str</span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	26 obs. of  1 variable:
@@ -171,7 +180,7 @@ a data frame.</p>
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
 <span class='co'># or munges column names</span>
-<span class='fu'>tibble</span>(<span class='kw'>`a + b`</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; # A tibble: 5 × 1
+<span class='fu'>tibble</span>(<span class='kw'>`a + b`</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 1
 #&gt;   `a + b`
 #&gt;     &lt;int&gt;
 #&gt; 1       1
@@ -179,26 +188,39 @@ a data frame.</p>
 #&gt; 3       3
 #&gt; 4       4
 #&gt; 5       5</div><div class='input'>
-<span class='co'># With the SE version, you give it a list of formulas/expressions</span>
-<span class='fu'>tibble_</span>(<span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> ~<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 × 2
+<span class='co'># You can splice-unquote a list of quotes and formulas</span>
+<span class='fu'>tibble</span>(!!! <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
 #&gt;        x     y
 #&gt;    &lt;int&gt; &lt;dbl&gt;
-#&gt; 1      1     2
-#&gt; 2      2     4
-#&gt; 3      3     6
-#&gt; 4      4     8
-#&gt; 5      5    10
-#&gt; 6      6    12
-#&gt; 7      7    14
-#&gt; 8      8    16
-#&gt; 9      9    18
-#&gt; 10    10    20</div><div class='input'>
-<span class='co'># data frames can only contain 1d atomic vectors and lists</span>
-<span class='co'># and can not contain POSIXlt</span>
-<span class='fu'>not_run</span>({
-  <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
-  <span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>strptime</span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>))
-})</div></pre>
+#&gt;  1     1  2.00
+#&gt;  2     2  4.00
+#&gt;  3     3  6.00
+#&gt;  4     4  8.00
+#&gt;  5     5 10.0 
+#&gt;  6     6 12.0 
+#&gt;  7     7 14.0 
+#&gt;  8     8 16.0 
+#&gt;  9     9 18.0 
+#&gt; 10    10 20.0 </div><div class='input'>
+# data frames can only contain 1d atomic vectors and lists
+# and can not contain POSIXlt
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
+<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>strptime</span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>))
+<span class='co'># }</span><div class='input'><span class='fu'>lst</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='no'>n</span>))</div><div class='output co'>#&gt; $n
+#&gt; [1] 5
+#&gt; 
+#&gt; $x
+#&gt; [1] 0.11304750 0.97026228 0.64808278 0.05607304 0.47313710
+#&gt; </div><div class='input'>
+<span class='co'># You can splice-unquote a list of quotes and formulas</span>
+<span class='fu'>lst</span>(!!! <span class='fu'>list</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rlang/topics/quotation'>quo</a></span>(<span class='fl'>2</span> + <span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>quote</span>(<span class='fu'>runif</span>(<span class='no'>n</span>))))</div><div class='output co'>#&gt; $n
+#&gt; [1] 5
+#&gt; 
+#&gt; $y
+#&gt; [1] 0.2946250 0.6102996 0.1211089 0.6294165 0.7119553
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -219,7 +241,7 @@ a data frame.</p>
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
+  <p>Developed by Kirill Müller, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

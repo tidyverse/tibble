@@ -127,9 +127,10 @@ df2 <- tibble(abc = 1)
 df2$a
 ```
 
-tibbles also ignore the `drop` argument:
+As of version 1.4.1, tibbles no longer ignore the `drop` argument:
 
 ```{r}
+data.frame(a = 1:3)[, "a", drop = TRUE]
 tibble(a = 1:3)[, "a", drop = TRUE]
 ```
 

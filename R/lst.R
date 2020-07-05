@@ -1,7 +1,12 @@
 #' @include tibble.R
 #'
-#' @description `lst()` is similar to [list()], but like `tibble()`, it
+#' @description
+#'
+#' `lst()` is similar to [list()], but like `tibble()`, it
 #' evaluates its arguments lazily and in order, and automatically adds names.
+#'
+#' `lst_()` uses lazy evaluation and is deprecated. New code should use `lst()`
+#' with [quasiquotation].
 #'
 #' @export
 #' @examples
@@ -32,7 +37,7 @@ lst_quos <- function(xs, expand = FALSE) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is_null(res)) {
-      output[[i]] <-  res
+      output[[i]] <- res
       if (expand) output <- expand_lst(output, i)
     }
     names(output)[i] <- col_names[[i]]
@@ -62,6 +67,7 @@ expand_lst <- function(output, i) {
 }
 
 #' @export
+#' @usage NULL
 #' @rdname tibble
 lst_ <- function(xs) {
   xs <- compat_lazy_dots(xs, caller_env())

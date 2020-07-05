@@ -9,6 +9,8 @@
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
 #'   in `.data` can be used, unset columns will get an `NA` value.
+#'   These arguments are passed on to [tibble()], and therefore also support
+#'   unquote via `!!` and unquote-splice via `!!!`.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -96,6 +98,8 @@ rbind_at <- function(old, new, pos) {
 #' @param .data Data frame to append to.
 #' @param ... Name-value pairs, passed on to [tibble()]. All values must have
 #'   one element for each row in the data frame, or be of length 1.
+#'   These arguments are passed on to [tibble()], and therefore also support
+#'   unquote via `!!` and unquote-splice via `!!!`.
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
 #' @family addition
@@ -181,5 +185,5 @@ pos_from_before_after <- function(before, after, len) {
 }
 
 limit_pos_range <- function(pos, len) {
-  max(c(0L, min(c(len, pos))))
+  max(0L, min(len, pos))
 }

@@ -7,24 +7,19 @@
 \alias{data_frame_}
 \alias{lst}
 \alias{lst_}
-\title{Build a data frame or list.}
+\title{Build a data frame or list}
 \usage{
 tibble(...)
 
-tibble_(xs)
+data_frame(...)
 
 lst(...)
-
-lst_(xs)
 }
 \arguments{
 \item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
 so you can refer to previously created variables.  These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{!!} and
 unquote-splice via \code{!!!}.}
-
-\item{xs}{A list of unevaluated expressions created with \code{~},
-\code{\link[=quote]{quote()}}, or (deprecated) \code{\link[lazyeval:lazy]{lazyeval::lazy()}}.}
 }
 \description{
 \code{tibble()} is a trimmed down version of \code{\link[=data.frame]{data.frame()}} that:
@@ -38,8 +33,17 @@ unquote-splice via \code{!!!}.}
 \item Automatically adds column names.
 }
 
+\code{data_frame()} is an alias to \code{tibble()}.
+
+\code{tibble_()} and its alias \code{data_frame_()} use lazy evaluation and are
+deprecated. New code should use \code{tibble()} or \code{data_frame()} with
+\link{quasiquotation}.
+
 \code{lst()} is similar to \code{\link[=list]{list()}}, but like \code{tibble()}, it
 evaluates its arguments lazily and in order, and automatically adds names.
+
+\code{lst_()} uses lazy evaluation and is deprecated. New code should use \code{lst()}
+with \link{quasiquotation}.
 }
 \examples{
 a <- 1:5

@@ -4,7 +4,7 @@ $ a <dbl> 1.0, 2.5, NA
 $ b <int> 1, 2, NA
 $ c <lgl> TRUE, FALSE, NA
 $ d <chr> "a", "b", NA
-$ e <fctr> a, b, NA
+$ e <fct> a, b, NA
 $ f <date> 2015-12-10, 2015-12...
 $ g <dttm> 2015-12-09 10:51:35...
 $ h <list> [1, 2, NA]

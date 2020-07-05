@@ -87,20 +87,20 @@
 <li>
 <p>It never changes an input’s type (i.e., no more <code>stringsAsFactors = FALSE</code>!).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> letters)
-<span class="co">#&gt; # A tibble: 26 × 1</span>
-<span class="co">#&gt;       x</span>
+<span class="co">#&gt; # A tibble: 26 x 1</span>
+<span class="co">#&gt;   x    </span>
 <span class="co">#&gt;   &lt;chr&gt;</span>
-<span class="co">#&gt; 1     a</span>
-<span class="co">#&gt; 2     b</span>
-<span class="co">#&gt; 3     c</span>
-<span class="co">#&gt; 4     d</span>
+<span class="co">#&gt; 1 a    </span>
+<span class="co">#&gt; 2 b    </span>
+<span class="co">#&gt; 3 c    </span>
+<span class="co">#&gt; 4 d    </span>
 <span class="co">#&gt; # ... with 22 more rows</span></code></pre></div>
 <p>This makes it easier to use with list-columns:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="kw">list</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">1</span>:<span class="dv">20</span>))
-<span class="co">#&gt; # A tibble: 3 × 2</span>
-<span class="co">#&gt;       x          y</span>
-<span class="co">#&gt;   &lt;int&gt;     &lt;list&gt;</span>
-<span class="co">#&gt; 1     1  &lt;int [5]&gt;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>))
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;       x y         </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;list&gt;    </span>
+<span class="co">#&gt; 1     1 &lt;int [5]&gt; </span>
 <span class="co">#&gt; 2     2 &lt;int [10]&gt;</span>
 <span class="co">#&gt; 3     3 &lt;int [20]&gt;</span></code></pre></div>
 <p>List-columns are most commonly created by <code>do()</code>, but they can be useful to create by hand.</p>
@@ -114,15 +114,15 @@
 </li>
 <li>
 <p>It evaluates its arguments lazily and sequentially:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">5</span>, <span class="dt">y =</span> x ^<span class="st"> </span><span class="dv">2</span>)
-<span class="co">#&gt; # A tibble: 5 × 2</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">y =</span> x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+<span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;       x     y</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1</span>
-<span class="co">#&gt; 2     2     4</span>
-<span class="co">#&gt; 3     3     9</span>
-<span class="co">#&gt; 4     4    16</span>
-<span class="co">#&gt; # ... with 1 more rows</span></code></pre></div>
+<span class="co">#&gt; 1     1  1.00</span>
+<span class="co">#&gt; 2     2  4.00</span>
+<span class="co">#&gt; 3     3  9.00</span>
+<span class="co">#&gt; 4     4 16.0 </span>
+<span class="co">#&gt; # ... with 1 more row</span></code></pre></div>
 </li>
 <li><p>It never uses <code>row.names()</code>. The whole point of tidy data is to store variables in a consistent way. So it never stores a variable as special attribute.</p></li>
 <li><p>It only recycles vectors of length 1. This is because recycling vectors of greater lengths is a frequent source of bugs.</p></li>
@@ -133,32 +133,28 @@
 <a href="#coercion" class="anchor"></a>Coercion</h2>
 <p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code>as.data.frame()</code> methods, and in fact, it’s precisely what <code>as.data.frame()</code> does, but it’s similar to <code>do.call(cbind, lapply(x, data.frame))</code> - i.e. it coerces each component to a data frame and then <code>cbinds()</code> them all together.</p>
 <p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> has been written with an eye for performance:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">26</span>, <span class="kw">sample</span>(<span class="dv">100</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)
-<span class="kw">names</span>(l) &lt;-<span class="st"> </span>letters
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">"microbenchmark"</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)) {
+  l &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">26</span>, <span class="kw">sample</span>(<span class="dv">100</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)
+  <span class="kw">names</span>(l) &lt;-<span class="st"> </span>letters
 
-microbenchmark::<span class="kw">microbenchmark</span>(
-  <span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(l),
-  <span class="kw">as.data.frame</span>(l)
-)
-<span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;              expr      min       lq      mean   median       uq      max</span>
-<span class="co">#&gt;      as_tibble(l)  215.614  365.403  422.6626  380.678  395.287 2955.611</span>
-<span class="co">#&gt;  as.data.frame(l) 1400.574 2010.204 2193.1325 2038.702 2116.091 5450.629</span>
-<span class="co">#&gt;  neval cld</span>
-<span class="co">#&gt;    100  a </span>
-<span class="co">#&gt;    100   b</span></code></pre></div>
+  microbenchmark<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(
+    <span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(l),
+    <span class="kw">as.data.frame</span>(l)
+  )
+}
+<span class="co">#&gt; Loading required namespace: microbenchmark</span></code></pre></div>
 <p>The speed of <code>as.data.frame()</code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tibbles-vs-data-frames" class="anchor"></a>Tibbles vs data frames</h2>
-<p>There are two key differences between tibbles and data frames: printing and subsetting.</p>
+<p>There are three key differences between tibbles and data frames: printing, subsetting, and recycling rules.</p>
 <div id="printing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#printing" class="anchor"></a>Printing</h3>
 <p>When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">1000</span>)
-<span class="co">#&gt; # A tibble: 1,000 × 1</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)
+<span class="co">#&gt; # A tibble: 1,000 x 1</span>
 <span class="co">#&gt;       x</span>
 <span class="co">#&gt;   &lt;int&gt;</span>
 <span class="co">#&gt; 1     1</span>
@@ -176,32 +172,63 @@ microbenchmark::<span class="kw">microbenchmark</span>(
 <h3 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h3>
 <p>Tibbles are quite strict about subsetting. <code>[</code> always returns another tibble. Contrast this with a data frame: sometimes <code>[</code> returns a data frame and sometimes it just returns a vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">3</span>:<span class="dv">1</span>)
-<span class="kw">class</span>(df1[, <span class="dv">1</span>:<span class="dv">2</span>])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)
+<span class="kw">class</span>(df1[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])
 <span class="co">#&gt; [1] "data.frame"</span>
 <span class="kw">class</span>(df1[, <span class="dv">1</span>])
 <span class="co">#&gt; [1] "integer"</span>
 
-df2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">3</span>:<span class="dv">1</span>)
-<span class="kw">class</span>(df2[, <span class="dv">1</span>:<span class="dv">2</span>])
+df2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)
+<span class="kw">class</span>(df2[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span>
 <span class="kw">class</span>(df2[, <span class="dv">1</span>])
 <span class="co">#&gt; [1] "tbl_df"     "tbl"        "data.frame"</span></code></pre></div>
 <p>To extract a single column use <code>[[</code> or <code>$</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(df2[[<span class="dv">1</span>]])
 <span class="co">#&gt; [1] "integer"</span>
-<span class="kw">class</span>(df2$x)
+<span class="kw">class</span>(df2<span class="op">$</span>x)
 <span class="co">#&gt; [1] "integer"</span></code></pre></div>
 <p>Tibbles are also stricter with <code>$</code>. Tibbles never do partial matching, and will throw a warning and return <code>NULL</code> if the column does not exist:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">abc =</span> <span class="dv">1</span>)
-df$a
+df<span class="op">$</span>a
 <span class="co">#&gt; [1] 1</span>
 
 df2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">abc =</span> <span class="dv">1</span>)
-df2$a
+df2<span class="op">$</span>a
 <span class="co">#&gt; Warning: Unknown or uninitialised column: 'a'.</span>
 <span class="co">#&gt; NULL</span></code></pre></div>
-<p>tibbles also ignore the <code>drop</code> argument.</p>
+<p>As of version 1.4.1, tibbles no longer ignore the <code>drop</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]
+<span class="co">#&gt; [1] 1 2 3</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)[, <span class="st">"a"</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]
+<span class="co">#&gt; [1] 1 2 3</span></code></pre></div>
+</div>
+<div id="recycling" class="section level3">
+<h3 class="hasAnchor">
+<a href="#recycling" class="anchor"></a>Recycling</h3>
+<p>When constructing a tibble, only values of length 1 are recycled. The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error. This also extends to tibbles with <em>zero</em> rows, which is sometimes important for programming:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;       a     b</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1  1.00     1</span>
+<span class="co">#&gt; 2  1.00     2</span>
+<span class="co">#&gt; 3  1.00     3</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">1</span>)
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;       a     b</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1  1.00</span>
+<span class="co">#&gt; 2     2  1.00</span>
+<span class="co">#&gt; 3     3  1.00</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+<span class="co">#&gt; Error: Column `c` must be length 1 or 3, not 2</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="kw">integer</span>())
+<span class="co">#&gt; # A tibble: 0 x 2</span>
+<span class="co">#&gt; # ... with 2 variables: a &lt;dbl&gt;, b &lt;int&gt;</span>
+<span class="kw"><a href="../reference/tibble.html">tibble</a></span>(<span class="dt">a =</span> <span class="kw">integer</span>(), <span class="dt">b =</span> <span class="dv">1</span>)
+<span class="co">#&gt; # A tibble: 0 x 2</span>
+<span class="co">#&gt; # ... with 2 variables: a &lt;int&gt;, b &lt;dbl&gt;</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -209,7 +236,8 @@ df2$a
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#creating">Creating</a></li>
       <li><a href="#coercion">Coercion</a></li>
@@ -226,7 +254,7 @@ df2$a
 </div>
 
 <div class="author">
-  <p>Developed by Kirill Müller, <a href="http://hadley.nz">Hadley Wickham</a>, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>.</p>
+  <p>Developed by Kirill Müller, <a href="http://hadley.nz">Hadley Wickham</a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 
