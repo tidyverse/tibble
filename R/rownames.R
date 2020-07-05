@@ -10,6 +10,9 @@
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
 #' and `column_to_rownames()`).
+#' Also included is `rowid_to_column()` which
+#' adds a column at the start of the dataframe of ascending sequential row
+#' ids starting at 1. Note that this will remove any existing row names.
 #'
 #' In the printed output, the presence of row names is indicated by a star just
 #' above the row numbers.
@@ -49,19 +52,24 @@ remove_rownames <- function(df) {
 rownames_to_column <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var))
-    stopc("There is a column named ", var, " already!")
+  if (has_name(df, var)) {
+    stopc("Column `", var, "` already exists")
+  }
 
-  rn <- tibble(rownames(df))
-  names(rn) <- var
+  new_df <- add_column(df, !!(var) := rownames(df), .before = 1)
+  new_df
+}
 
-  attribs <- attributes(df)
+#' @export
+#' @rdname rownames
+rowid_to_column <- function(df, var = "rowid") {
+  stopifnot(is.data.frame(df))
 
-  new_df <- c(rn, df)
-  attribs[["names"]] <- names(new_df)
+  if (has_name(df, var)) {
+    stopc("Column `", var, "` already exists")
+  }
 
-  attributes(new_df) <- attribs[names(attribs) != "row.names"]
-  attr(new_df, "row.names") <- .set_row_names(nrow(df))
+  new_df <- add_column(df, !!(var) := seq_len(nrow(df)), .before = 1)
   new_df
 }
 
@@ -70,11 +78,13 @@ rownames_to_column <- function(df, var = "rowname") {
 column_to_rownames <- function(df, var = "rowname") {
   stopifnot(is.data.frame(df))
 
-  if (has_rownames(df))
-    stopc("This data frame already has row names.")
+  if (has_rownames(df)) {
+    stopc("`df` already has row names")
+  }
 
-  if (!has_name(df, var))
-    stopc("This data frame has no column named ", var, ".")
+  if (!has_name(df, var)) {
+    stopc("Column `num2` not found")
+  }
 
   rownames(df) <- df[[var]]
   df[[var]] <- NULL
@@ -83,7 +93,7 @@ column_to_rownames <- function(df, var = "rowname") {
 
 #' @export
 `row.names<-.tbl_df` <- function(x, value) {
-  if (!is.null(value)) {
+  if (!is_null(value)) {
     warningc("Setting row names on a tibble is deprecated.")
   }
   NextMethod()

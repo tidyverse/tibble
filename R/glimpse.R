@@ -31,28 +31,29 @@ glimpse <- function(x, width = NULL, ...) {
 #' @export
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
-  stopifnot(is.finite(width))
+  if (!is.finite(width)) {
+    stopc("`width` must be finite")
+  }
 
-  cat("Observations: ", big_mark(nrow(x)), "\n", sep = "")
+  cat_line("Observations: ", big_mark(nrow(x)))
   if (ncol(x) == 0) return(invisible())
 
-  cat("Variables: ", big_mark(ncol(x)), "\n", sep = "")
+  cat_line("Variables: ", big_mark(ncol(x)))
 
   # this is an overestimate, but shouldn't be too expensive.
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
 
-  var_types <- vapply(x, type_sum, character(1))
-  var_names <- paste0("$ ", format(names(x)), " <", var_types, "> ")
+  var_types <- map_chr(x, type_sum)
+  var_names <- paste0("$ ", justify(names(x), right = FALSE), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 
-  formatted <- vapply(df, function(x) paste0(format_v(x), collapse = ", "),
-    character(1), USE.NAMES = FALSE)
+  formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
-  cat(paste0(var_names, truncated, collapse = "\n"), "\n", sep = "")
+  cat_line(var_names, truncated)
   invisible(x)
 }
 
@@ -85,14 +86,15 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 
 #' @export
 format_v.list <- function(x) {
-  x <- lapply(x, format_v)
-  atomic <- vapply(x, length, integer(1L)) == 1L
-  x <- vapply(x, function(x) paste(x, collapse = ", "), character(1L))
+  x <- map(x, format_v)
+  atomic <- map_int(x, length) == 1L
+  x <- map_chr(x, collapse)
   x[!atomic] <- paste0("<", x[!atomic], ">")
-  if (length(x) == 1L)
+  if (length(x) == 1L) {
     x
-  else
-    paste0("[", paste(x, collapse = ", "), "]")
+  } else {
+    paste0("[", collapse(x), "]")
+  }
 }
 
 #' @export

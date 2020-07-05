@@ -1,0 +1,54 @@
+template:
+  package: tidytemplate
+  default_assets: false
+
+home:
+  strip_header: true
+  links:
+  - text: Learn more
+    href: http://r4ds.had.co.nz/tibbles.html
+
+reference:
+- title: Tibbles
+  contents:
+  - ends_with("ibble")
+  - enframe
+  - all_equal
+  - has_name
+
+- title: Manipulation
+  contents:
+  - add_row
+  - add_column
+  - repair_names
+
+- title: Helpers
+  contents:
+  - glimpse
+  - rownames
+
+- title: Vectors, matrices, and lists
+  contents:
+  - deframe
+  - lst
+  - contains("matrix")
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Intro
+    href: articles/tibble.html
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: Extending tibble
+      href: articles/extending.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/tidyverse/tibble
+
+

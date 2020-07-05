@@ -13,8 +13,8 @@ test_that("pluralise leaves alone parentheses / square brackets that have spaces
 })
 
 test_that("pluralise_msg works correctly", {
-  expect_identical(pluralise_msg("[an] index(es): ", c("x")), "an index: 'x'")
-  expect_identical(pluralise_msg("[an] index(es): ", c("x", "y")), "indexes: 'x', 'y'")
-  expect_identical(pluralise_msg("[an] index(es): ", c(-4, -5)), "indexes: -4, -5")
+  expect_identical(pluralise_msg("[an] index(es) ", c("x")), "an index `x`")
+  expect_identical(pluralise_msg("[an] index(es) ", c("x", "y")), "indexes `x`, `y`")
+  expect_identical(pluralise_msg("[an] index(es) ", c(-4, -5)), "indexes -4, -5")
 })
 

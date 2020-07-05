@@ -3,17 +3,9 @@
 language: r
 cache: packages
 r:
-  - oldrel
-  - release
-  - devel
-
-r_github_packages:
-  - jimhester/covr
+- oldrel
+- release
+- devel
 
 after_success:
-  - Rscript -e 'covr::codecov()'
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+- Rscript -e 'covr::codecov()'

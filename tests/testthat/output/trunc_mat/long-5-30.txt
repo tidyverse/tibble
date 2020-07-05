@@ -1,4 +1,4 @@
-# A tibble: 10,000 × 1
+# A tibble: 10,000 x 1
       a
   <int>
 1     1

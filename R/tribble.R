@@ -33,6 +33,7 @@ tribble <- function(...) {
 
 #' @export
 #' @rdname tribble
+#' @usage NULL
 frame_data <- tribble
 
 #' Row-wise matrix creation
@@ -65,7 +66,7 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    stopc("expected at least one column name; e.g. '~name'")
+    stopc("Expected at least one column name; e.g. `~name`")
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (length(frame_rest) == 0L) {
@@ -91,12 +92,15 @@ extract_frame_names_from_dots <- function(dots) {
       break
 
     if (length(el) != 2) {
-      stopc("expected a column name with a single argument; e.g. '~name'")
+      stopc("Expected a column name with a single argument; e.g. `~name`")
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      stopc("expected a symbol or string denoting a column name")
+      stopc(
+        "Expected a symbol or string denoting a column name, not ",
+        friendly_type(type_of(candidate))
+      )
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
@@ -136,18 +140,18 @@ turn_matrix_into_column_list <- function(frame_mat) {
   # if a frame_mat's col is a list column, keep it unchanged (does not unlist)
   for (i in seq_len(ncol(frame_mat))) {
     col <- frame_mat[, i]
-    if (any(vapply(col, needs_list_col, logical(1L)))) {
+    if (some(col, needs_list_col) || !inherits(col, "list")) {
       frame_col[[i]] <- col
     } else {
-      frame_col[[i]] <- unlist(col)
+      frame_col[[i]] <- invoke(c, col)
     }
   }
   return(frame_col)
 }
 
 turn_frame_data_into_frame_matrix <- function(names, rest) {
-  if (any(vapply(rest, needs_list_col, logical(1)))) {
-    stopc("frame_matrix() cannot have list columns")
+  if (some(rest, needs_list_col)) {
+    stopc("Can't use list columns in `frame_matrix()`")
   }
 
   frame_ncol <- length(names)

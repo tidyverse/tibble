@@ -36,8 +36,28 @@ test_that("[ with 0 cols creates correct row names (#656)", {
   expect_identical(zero_row, as_tibble(iris)[0])
 })
 
+test_that("[ with 0 cols returns correct number of rows", {
+  iris_tbl <- as_tibble(iris)
+  nrow_iris <- nrow(iris_tbl)
+
+  expect_equal(nrow(iris_tbl[0]), nrow_iris)
+  expect_equal(nrow(iris_tbl[, 0]), nrow_iris)
+
+  expect_equal(nrow(iris_tbl[, 0][1:10, ]), 10)
+  expect_equal(nrow(iris_tbl[0][1:10, ]), 10)
+  expect_equal(nrow(iris_tbl[1:10, ][, 0]), 10)
+  expect_equal(nrow(iris_tbl[1:10, ][0]), 10)
+  expect_equal(nrow(iris_tbl[1:10, 0]), 10)
+
+  expect_equal(nrow(iris_tbl[, 0][-(1:10), ]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[0][-(1:10), ]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), ][, 0]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), ][0]), nrow_iris - 10)
+  expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
+})
+
 test_that("[.tbl_df is careful about names (#1245)",{
-  z_msg <- "Unknown column: 'z'"
+  z_msg <- "Column `z` not found"
 
   foo <- tibble(x = 1:10, y = 1:10)
   expect_error(foo["z"], z_msg, fixed = TRUE)
@@ -46,22 +66,58 @@ test_that("[.tbl_df is careful about names (#1245)",{
   expect_error(foo[, "z"], z_msg, fixed = TRUE)
   expect_error(foo[, c("x", "y", "z") ], z_msg, fixed = TRUE)
 
-  expect_error(foo[as.matrix("x")], "matrix")
-  expect_error(foo[array("x", dim = c(1, 1, 1))], "array")
+  expect_error(
+    foo[as.matrix("x")],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[array("x", dim = c(1, 1, 1))],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
 })
 
 test_that("[.tbl_df is careful about column indexes (#83)",{
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
-  expect_error(foo[0.5], "Invalid non-integer column index: 0.5", fixed = TRUE)
-  expect_error(foo[1:5], "Invalid column indexes: 4, 5", fixed = TRUE)
-  expect_error(foo[-1:1], "mixed with negative")
-  expect_error(foo[c(-1, 1)], "mixed with negative")
-  expect_error(foo[-4], "Invalid negative column index: -4", fixed = TRUE)
-  expect_error(foo[c(1:3, NA)], "NA column indexes not supported", fixed = TRUE)
 
-  expect_error(foo[as.matrix(1)], "matrix")
-  expect_error(foo[array(1, dim = c(1, 1, 1))], "array")
+  expect_error(
+    foo[0.5],
+    "Column index must be integer, not 0.5",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[1:5],
+    "Column indexes must be at most 3 if positive, not 4, 5",
+    fixed = TRUE
+  )
+
+  # Message from base R
+  expect_error(foo[-1:1])
+  expect_error(foo[c(-1, 1)])
+
+  expect_error(
+    foo[-4],
+    "Column index must be at least -3 if negative, not -4",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c(1:3, NA)],
+    "NA column indexes not supported",
+    fixed = TRUE
+  )
+
+  expect_error(
+    foo[as.matrix(1)],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[array(1, dim = c(1, 1, 1))],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
 })
 
 test_that("[.tbl_df is careful about column flags (#83)",{
@@ -71,21 +127,61 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   expect_identical(foo[FALSE], foo[integer()])
   expect_identical(foo[c(FALSE, TRUE, FALSE)], foo[2])
 
-  expect_error(foo[c(TRUE, TRUE)], "Length of logical index vector must be 1 or 3, got: 2", fixed = TRUE)
-  expect_error(foo[c(TRUE, TRUE, FALSE, FALSE)], "Length of logical index vector must be 1 or 3, got: 4", fixed = TRUE)
-  expect_error(foo[c(TRUE, TRUE, NA)], "NA column indexes not supported", fixed = TRUE)
+  expect_error(
+    foo[c(TRUE, TRUE)],
+    "Length of logical index vector must be 1 or 3 (the number of rows), not 2",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c(TRUE, TRUE, FALSE, FALSE)],
+    "Length of logical index vector must be 1 or 3 (the number of rows), not 4",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[c(TRUE, TRUE, NA)],
+    "NA column indexes not supported",
+    fixed = TRUE
+  )
 
-  expect_error(foo[as.matrix(TRUE)], "matrix")
-  expect_error(foo[array(TRUE, dim = c(1, 1, 1))], "array")
+  expect_error(
+    foo[as.matrix(TRUE)],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[array(TRUE, dim = c(1, 1, 1))],
+    "Can't use matrix or array for column indexing",
+    fixed = TRUE
+  )
 })
 
 test_that("[.tbl_df rejects unknown column indexes (#83)",{
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  expect_error(foo[list(1:3)], "Unsupported index type: list", fixed = TRUE)
-  expect_error(foo[as.list(1:3)], "Unsupported index type: list", fixed = TRUE)
-  expect_error(foo[factor(1:3)], "Unsupported index type: factor", fixed = TRUE)
-  expect_error(foo[Sys.Date()], "Unsupported index type: Date", fixed = TRUE)
-  expect_error(foo[Sys.time()], "Unsupported index type: POSIXct", fixed = TRUE)
+  expect_error(
+    foo[list(1:3)],
+    "Unsupported index type: list",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[as.list(1:3)],
+    "Unsupported index type: list",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[factor(1:3)],
+    "Unsupported index type: factor",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[Sys.Date()],
+    "Unsupported index type: Date",
+    fixed = TRUE
+  )
+  expect_error(
+    foo[Sys.time()],
+    "Unsupported index type: POSIXct",
+    fixed = TRUE
+  )
 })
 
 test_that("[.tbl_df is no-op if args missing",{

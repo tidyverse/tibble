@@ -14,16 +14,47 @@ test_that("setting row names on a tibble raises a warning", {
 })
 
 test_that("rownames_to_column keeps the tbl classes (#882)", {
-  res <- rownames_to_column( mtcars, "Make&Model" )
+  res <- rownames_to_column(mtcars)
   expect_false(has_rownames(res))
-  expect_equal( class(res), class(mtcars) )
-  expect_error(rownames_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!")  )
-  res1 <- rownames_to_column( as_tibble(mtcars), "Make&Model" )
+  expect_equal(class(res), class(mtcars))
+  expect_equal(res$rowname, rownames(mtcars))
+  expect_error(
+    rownames_to_column(mtcars, "wt"),
+    "Column `wt` already exists",
+    fixed = TRUE
+  )
+
+  res1 <- rownames_to_column(as_tibble(mtcars), "Make&Model")
   expect_false(has_rownames(res1))
-  expect_equal( class(res1), class(as_tibble(mtcars)) )
-  expect_error(rownames_to_column( mtcars, "wt"),
-               paste("There is a column named wt already!")  )
+  expect_equal(class(res1), class(as_tibble(mtcars)))
+  expect_equal(res1$`Make&Model`, rownames(mtcars))
+  expect_error(
+    rownames_to_column(as_tibble(mtcars), "wt"),
+    "Column `wt` already exists",
+    fixed = TRUE
+  )
+})
+
+test_that("rowid_to_column keeps the tbl classes", {
+  res <- rowid_to_column(mtcars)
+  expect_false(has_rownames(res))
+  expect_equal(class(res), class(mtcars))
+  expect_equal(res$rowid, seq_len(nrow(mtcars)))
+  expect_error(
+    rowid_to_column(mtcars, "wt"),
+    "Column `wt` already exists",
+    fixed = TRUE
+  )
+
+  res1 <- rowid_to_column(as_tibble(mtcars), "row_id")
+  expect_false(has_rownames(res1))
+  expect_equal(class(res1), class(as_tibble(mtcars)))
+  expect_equal(res1$row_id, seq_len(nrow(mtcars)))
+  expect_error(
+    rowid_to_column(as_tibble(mtcars), "wt"),
+    "Column `wt` already exists",
+    fixed = TRUE
+  )
 })
 
 test_that("column_to_rownames returns tbl", {
@@ -43,9 +74,16 @@ test_that("column_to_rownames returns tbl", {
   expect_warning(res <- column_to_rownames(res0, var = "num"))
   expect_true(has_rownames(res))
   expect_equal(rownames(res), as.character(mtcars1$num))
-  expect_error(column_to_rownames(res), "This data frame already has row names.")
-  expect_error(column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
-               paste("This data frame has no column named num2."))
+  expect_error(
+    column_to_rownames(res),
+    "`df` already has row names",
+    fixed = TRUE
+  )
+  expect_error(
+    column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
+    "Column `num2` not found",
+    fixed = TRUE
+  )
 })
 
 test_that("converting to data frame does not add row names", {

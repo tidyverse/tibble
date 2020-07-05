@@ -46,6 +46,23 @@ test_that("tribble() constructs 'tibble' as expected", {
 
 })
 
+test_that("tribble() handles columns with a class (#161)", {
+  sys_date <- Sys.Date()
+  sys_time <- Sys.time()
+  date_time_col <- tribble(
+    ~dt, ~dttm,
+    sys_date, sys_time,
+    as.Date("2003-01-02"), as.POSIXct("2004-04-05 13:45:17", tz = "UTC")
+  )
+
+  date_time_col_expectation <- tibble(
+    dt = c(sys_date, as.Date("2003-01-02")),
+    dttm = c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
+  )
+
+  expect_equal(date_time_col, date_time_col_expectation)
+})
+
 test_that("tribble() creates lists for non-atomic inputs (#7)", {
   expect_identical(
     tribble(~a, ~b, NA, "A", letters, LETTERS[-1L]),
@@ -61,23 +78,37 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
-  expect_error(tribble(a~b), "single argument")
+  expect_error(
+    tribble(a~b),
+    "Expected a column name with a single argument; e.g. `~name`",
+    fixed = TRUE
+  )
 
   # invalid colname syntax
-  expect_error(tribble(~a + b), "symbol or string")
+  expect_error(
+    tribble(~a + b),
+    "Expected a symbol or string denoting a column name, not a call",
+    fixed = TRUE
+  )
 
   # tribble() must be passed colnames
-  expect_error(tribble(
-    "a", "b",
-    1, 2
-  ))
+  expect_error(
+    tribble(
+      "a", "b",
+      1, 2
+    ),
+    fixed = TRUE
+  )
 
   # tribble() must produce rectangular structure (no filling)
-  expect_error(tribble(
-    ~a, ~b, ~c,
-    1, 2,
-    3, 4, 5
-  ))
+  expect_error(
+    tribble(
+      ~a, ~b, ~c,
+      1, 2,
+      3, 4, 5
+    ),
+    fixed = TRUE
+  )
 
 })
 
@@ -133,9 +164,13 @@ test_that("frame_matrix constructs empty matrix as expected", {
 })
 
 test_that("frame_matrix cannot have list columns", {
-  expect_error(frame_matrix(
-    ~x,  ~y,
-    "a", 1:3,
-    "b", 4:6
-  ), "cannot have list columns")
+  expect_error(
+    frame_matrix(
+      ~x,  ~y,
+      "a", 1:3,
+      "b", 4:6
+    ),
+    "Can't use list columns in `frame_matrix()`",
+    fixed = TRUE
+  )
 })

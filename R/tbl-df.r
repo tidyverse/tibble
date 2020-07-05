@@ -10,9 +10,21 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @rdname formatting
 #' @export
-print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  print(trunc_mat(x, n = n, width = width, n_extra = n_extra))
+format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  format(trunc_mat(x, n = n, width = width, n_extra = n_extra))
+}
+
+#' @rdname formatting
+#' @export
+print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
+}
+
+#' @rdname formatting
+#' @export
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
 }
 
 #' @export
@@ -57,19 +69,21 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   # First, subset columns
   if (!missing(j)) {
     j <- check_names_df(j, x)
-    x <- .subset(x, j)
+    result <- .subset(x, j)
+  } else {
+    result <- x
   }
 
   # Next, subset rows
   if (!missing(i)) {
-    if (length(x) == 0) {
+    if (length(result) == 0) {
       nr <- length(attr(x, "row.names")[i])
     } else {
-      x <- lapply(x, `[`, i)
-      nr <- length(x[[1]])
+      result <- map(result, `[`, i)
+      nr <- length(result[[1]])
     }
   }
 
-  attr(x, "row.names") <- .set_row_names(nr)
-  as_tibble.data.frame(x, validate = FALSE)
+  attr(result, "row.names") <- .set_row_names(nr)
+  as_tibble.data.frame(result, validate = FALSE)
 }
