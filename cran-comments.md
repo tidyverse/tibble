@@ -1,4 +1,4 @@
-Fix for tests after the pillar upgrade, as requested by CRAN.
+Fix for regression with R-oldrel introduced in tibble 2.1.2.
 
 ## Test environments
 
