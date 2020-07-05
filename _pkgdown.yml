@@ -1,3 +1,5 @@
+url: https://tibble.tidyverse.org
+
 template:
   package: tidytemplate
 
@@ -10,16 +12,25 @@ home:
 reference:
 - title: Tibbles
   contents:
-  - tibble-package
+  - "tibble-package"
   - tibble
-  - ends_with("ibble")
-  - enframe
-  - has_name
-  - tibble-options
+  - formatting
+  - "tibble-options"
+  - tribble
   - -reexports
+
+- title: Coercion
+  contents:
+  - as_tibble
+  - "name-repair"
+  - new_tibble
+  - validate_tibble
+  - enframe
+  - deframe
 
 - title: Manipulation
   contents:
+  - subsetting
   - add_row
   - add_column
 
@@ -56,7 +67,7 @@ navbar:
     href: https://github.com/tidyverse/tibble
 
 development:
-  mode: devel
+  mode: auto
 
 authors:
   Kirill Müller:

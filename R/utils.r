@@ -113,3 +113,7 @@ re_match <- function(text, pattern, perl = TRUE, ...) {
   names(res) <- c(attr(match, "capture.names"), ".text", ".match")
   res
 }
+
+is_rstudio <- function() {
+  !is.na(Sys.getenv("RSTUDIO", unset = NA))
+}

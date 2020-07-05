@@ -72,6 +72,14 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @export
 `names<-.tbl_df` <- function(x, value) {
+
+  # workaround for RStudio v1.1, which relies on the ability to set
+  # data.frame names to NULL
+  if (is.null(value) && is_rstudio()) {
+    attr(x, "names") <- NULL
+    return(x)
+  }
+
   check_names_non_null(value, signal_soft_deprecated)
 
   if (!has_length(value, length(x))) {

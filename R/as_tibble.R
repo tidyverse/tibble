@@ -85,12 +85,12 @@ as_tibble <- function(x, ...,
 
 #' @export
 #' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = TRUE, ...,
+as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
-  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
+  .name_repair <- compat_name_repair(.name_repair, validate)
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -113,10 +113,10 @@ as_tibble.data.frame <- function(x, validate = TRUE, ...,
 
 #' @export
 #' @rdname as_tibble
-as_tibble.list <- function(x, validate = TRUE, ..., .rows = NULL,
+as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  .name_repair <- compat_name_repair(.name_repair, missing(validate), validate)
+  .name_repair <- compat_name_repair(.name_repair, validate)
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
@@ -128,8 +128,8 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   recycle_columns(x, .rows, lengths)
 }
 
-compat_name_repair <- function(.name_repair, missing_validate, validate) {
-  if (missing_validate) return(.name_repair)
+compat_name_repair <- function(.name_repair, validate) {
+  if (is.null(validate)) return(.name_repair)
 
   name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
@@ -211,7 +211,7 @@ guess_nrow <- function(lengths, .rows) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
+as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   m <- matrixToDataFrame(x)
   names <- colnames(x)
   if (is.null(.name_repair)) {
@@ -227,9 +227,10 @@ as_tibble.matrix <- function(x, ..., .name_repair = NULL) {
     } else {
       .name_repair <- "check_unique"
     }
+    validate <- NULL
   }
   colnames(m) <- names
-  as_tibble(m, ..., .name_repair = .name_repair)
+  as_tibble(m, ..., validate = validate, .name_repair = .name_repair)
 }
 
 #' @export

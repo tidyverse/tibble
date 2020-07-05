@@ -90,7 +90,7 @@ check <- function(tarball, lib, ...) {
   pkgs <- c(...)
   check_lib <- fs::file_temp("checklib")
   create_lib(pkgs, check_lib)
-  withr::with_libpaths(c(lib, check_lib), rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(600)))
+  withr::with_libpaths(c(lib, check_lib), rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(3600)))
 }
 
 compare <- function(old, new) {

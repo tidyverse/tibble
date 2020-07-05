@@ -1,6 +1,6 @@
 add_package_checks()
 
-if (Sys.getenv("BUILD_PKGDOWN") != "") {
+if (Sys.getenv("BUILD_PKGDOWN") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
   # - `ci()$is_tag()`: Only for tags, not for branches
@@ -13,6 +13,7 @@ if (Sys.getenv("BUILD_PKGDOWN") != "") {
     add_step(step_setup_ssh())
 
   get_stage("deploy") %>%
+    add_step(step_setup_push_deploy(path = "docs", branch = "gh-pages")) %>%
     add_step(step_build_pkgdown()) %>%
-    add_step(step_push_deploy())
+    add_step(step_do_push_deploy(path = "docs"))
 }
