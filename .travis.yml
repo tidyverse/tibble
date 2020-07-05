@@ -41,15 +41,15 @@ jobs:
   - r: devel
     env:
     - DEV_VERSIONS=TRUE
-  - r: 3.1
+  - r: 3.2
   - stage: full
     os: osx
   - r: release
     env:
     - BUILD_PKGDOWN=true
+  - r: 3.5
   - r: 3.4
   - r: 3.3
-  - r: 3.2
   fast_finish: true
 
 #env
