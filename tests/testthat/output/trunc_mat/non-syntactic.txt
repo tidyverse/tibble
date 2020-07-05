@@ -1,4 +1,2 @@
 # A tibble: 1 x 2
-  `mean(x)` `var(x)`
-      <dbl>    <dbl>
-1         5        3
+<body created by pillar>

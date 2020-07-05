@@ -19,6 +19,10 @@
 #'   want to suppress this when you know that you already have a valid data
 #'   frame and you want to save some time, or to explicitly enable it
 #'   if you have a tibble that you want to re-check.
+#' @param rownames If `NULL`, remove row names (default for matrices, may become
+#'   default for data frames in the future). If `NA`, keep row names (current
+#'   default for data frames). Otherwise, the name of the new column that will
+#'   contain the existing row names.
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)
@@ -57,50 +61,54 @@ as_tibble <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.tbl_df <- function(x, ..., validate = FALSE) {
+as_tibble.tbl_df <- function(x, ..., validate = FALSE, rownames = NULL) {
   if (validate) return(NextMethod())
   x
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = TRUE, ...) {
-  list_to_tibble(x, validate, raw_rownames(x))
+as_tibble.data.frame <- function(x, validate = TRUE, ..., rownames = NA) {
+  old_rownames <- raw_rownames(x)
+  result <- list_to_tibble(x, validate)
+  if (is.null(rownames)) {
+    result
+  } else if (is.na(rownames)) {
+    attr(result, "row.names") <- old_rownames
+    result
+  } else {
+    add_column(result, !! rownames := old_rownames, .before = 1L)
+  }
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = TRUE, ...) {
   if (length(x) == 0) {
-    list_to_tibble(repair_names(list()), validate = FALSE, .set_row_names(0L))
+    list_to_tibble(repair_names(list()), validate = FALSE)
   } else {
     list_to_tibble(x, validate)
   }
 }
 
-list_to_tibble <- function(x, validate, rownames = NULL) {
+list_to_tibble <- function(x, validate) {
   # this is to avoid any method dispatch that may happen when processing x
   x <- unclass(x)
 
   if (validate) {
     x <- check_tibble(x)
+  } else if (has_null_names(x)) {
+    x <- set_names(x, rep_along(x, ""))
   }
   x <- recycle_columns(x)
 
-  if (is.null(rownames)) {
-    rownames <- .set_row_names(NROW(x[[1L]]))
-  }
-
-  class(x) <- c("tbl_df", "tbl", "data.frame")
-  attr(x, "row.names") <- rownames
-
-  x
+  new_tibble(x)
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.matrix <- function(x, ...) {
-  matrixToDataFrame(x)
+as_tibble.matrix <- function(x, ..., rownames = NULL) {
+  as_tibble(repair_names(matrixToDataFrame(x)), ..., rownames = rownames)
 }
 
 #' @export

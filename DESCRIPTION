@@ -1,6 +1,6 @@
 Package: tibble
 Encoding: UTF-8
-Version: 1.3.4
+Version: 1.4.1
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.
@@ -15,22 +15,47 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends:
     R (>= 3.1.0)
 Imports:
+    crayon,
     methods,
+    pillar,
     rlang,
-    Rcpp (>= 0.12.3),
     utils
 Suggests:
     covr,
     dplyr,
+    import,
     knitr (>= 1.5.32),
     microbenchmark,
+    mockr,
     nycflights13,
     testthat,
     rmarkdown,
     withr
-LinkingTo: Rcpp
 LazyData: yes
 License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Collate: 
+    'add.R'
+    'as_tibble.R'
+    'check-names.R'
+    'compat-lazyeval.R'
+    'compat-purrr.R'
+    'enframe.R'
+    'exports.R'
+    'glimpse.R'
+    'has-name.R'
+    'tibble.R'
+    'lst.R'
+    'new.R'
+    'repair-names.R'
+    'rownames.R'
+    'strrep.R'
+    'tbl-df.r'
+    'tibble-pkg.R'
+    'tribble.R'
+    'type-sum.r'
+    'utils-format.r'
+    'utils.r'
+    'wrap.R'

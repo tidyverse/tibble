@@ -56,7 +56,7 @@ test_that("[ with 0 cols returns correct number of rows", {
   expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
 })
 
-test_that("[.tbl_df is careful about names (#1245)",{
+test_that("[.tbl_df is careful about names (#1245)", {
   z_msg <- "Column `z` not found"
 
   foo <- tibble(x = 1:10, y = 1:10)
@@ -78,7 +78,7 @@ test_that("[.tbl_df is careful about names (#1245)",{
   )
 })
 
-test_that("[.tbl_df is careful about column indexes (#83)",{
+test_that("[.tbl_df is careful about column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[1:3], foo)
 
@@ -120,7 +120,7 @@ test_that("[.tbl_df is careful about column indexes (#83)",{
   )
 })
 
-test_that("[.tbl_df is careful about column flags (#83)",{
+test_that("[.tbl_df is careful about column flags (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[TRUE], foo)
   expect_identical(foo[c(TRUE, TRUE, TRUE)], foo)
@@ -155,7 +155,7 @@ test_that("[.tbl_df is careful about column flags (#83)",{
   )
 })
 
-test_that("[.tbl_df rejects unknown column indexes (#83)",{
+test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_error(
     foo[list(1:3)],
@@ -184,18 +184,53 @@ test_that("[.tbl_df rejects unknown column indexes (#83)",{
   )
 })
 
-test_that("[.tbl_df is no-op if args missing",{
+test_that("[.tbl_df supports character subsetting (#312)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[as.character(2:4), ], foo[2:4, ])
+  expect_identical(foo[as.character(-3:-5), ], foo[-3:-5, ])
+  expect_identical(foo[as.character(9:12), ], foo[9:12, ])
+  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
+test_that("[.tbl_df supports character subsetting if row names are present (#312)", {
+  foo <- as_tibble(mtcars)
+  idx <- function(x) rownames(mtcars)[x]
+  expect_identical(foo[idx(2:4), ], foo[2:4, ])
+  expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
+  expect_identical(foo[idx(29:34), ], foo[29:34, ])
+  expect_identical(foo[letters, ], foo[rep_along(letters, NA_integer_), ])
+  expect_identical(foo["9a", ], foo[NA_integer_, ])
+})
+
+test_that("[.tbl_df supports logical subsetting (#318)", {
+  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+  expect_identical(foo[c(FALSE, rep(TRUE, 3), rep(F, 6)), ], foo[2:4, ])
+  expect_identical(foo[TRUE, ], foo)
+  expect_identical(foo[FALSE, ], foo[0L, ])
+  expect_warning(
+    foo[c(TRUE, FALSE), ],
+    "Length of logical index must be 1 or 10, not 2",
+    fixed = TRUE
+  )
+})
+
+test_that("[.tbl_df is no-op if args missing", {
   expect_identical(df_all[], df_all)
 })
 
-test_that("[.tbl_df warns for drop argument",{
-  expect_warning(df_all[1, 2, drop = TRUE], "ignored")
+test_that("[.tbl_df supports drop argument (#311)", {
+  expect_identical(df_all[1, 2, drop = TRUE], df_all[[2]][1])
+})
+
+test_that("[.tbl_df ignores drop argument (with warning) without j argument (#307)", {
+  expect_warning(expect_identical(df_all[1, drop = TRUE], df_all[1]))
 })
 
 
 # [[ ----------------------------------------------------------------------
 
-test_that("[[.tbl_df ignores exact argument",{
+test_that("[[.tbl_df ignores exact argument", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_warning(foo[["x"]], NA)
   expect_warning(foo[["x", exact = FALSE]], "ignored")
@@ -224,8 +259,10 @@ test_that("can use two-dimensional indexing with [[", {
 
 test_that("$ throws warning if name doesn't exist", {
   df <- tibble(x = 1)
-  expect_warning(expect_null(df$y),
-                 "Unknown or uninitialised column: 'y'")
+  expect_warning(
+    expect_null(df$y),
+    "Unknown or uninitialised column: 'y'"
+  )
 })
 
 test_that("$ throws different warning if attempting a partial initialization (#199)", {
@@ -235,10 +272,14 @@ test_that("$ throws different warning if attempting a partial initialization (#1
 
 test_that("$ doesn't do partial matching", {
   df <- tibble(partial = 1)
-  expect_warning(expect_null(df$p),
-                 "Unknown or uninitialised column: 'p'")
-  expect_warning(expect_null(df$part),
-                 "Unknown or uninitialised column: 'part'")
+  expect_warning(
+    expect_null(df$p),
+    "Unknown or uninitialised column: 'p'"
+  )
+  expect_warning(
+    expect_null(df$part),
+    "Unknown or uninitialised column: 'part'"
+  )
   expect_error(df$partial, NA)
 })
 
@@ -253,4 +294,42 @@ test_that("is.tibble", {
 
 test_that("is_tibble", {
   expect_identical(is.tibble, is_tibble)
+})
+
+# new_tibble --------------------------------------------------------------
+
+test_that("new_tibble", {
+  tbl <- new_tibble(
+    data.frame(a = 1:3),
+    attr1 = "value1",
+    attr2 = 2,
+    subclass = "nt"
+  )
+
+  # Can't compare directly due to dplyr:::all.equal.tbl_df()
+  expect_identical(class(tbl), c("nt", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    unclass(tbl),
+    structure(
+      list(a = 1:3),
+      attr1 = "value1",
+      attr2 = 2,
+      .Names = "a",
+      row.names = .set_row_names(3L)
+    )
+  )
+})
+
+test_that("new_tibble checks", {
+  expect_identical(new_tibble(list()), tibble())
+  expect_identical(new_tibble(list(a = 1:3, b = 4:6)), tibble(a = 1:3, b = 4:6))
+  expect_error(new_tibble(list(1)), "names", fixed = TRUE)
+  expect_error(new_tibble(list(a = 1, b = 2:3)), "length", fixed = TRUE)
+  expect_error(
+    new_tibble(
+      structure(list(a = 1, b = 2), row.names = .set_row_names(2))
+    ),
+    "length",
+    fixed = TRUE
+  )
 })

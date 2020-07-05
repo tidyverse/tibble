@@ -31,41 +31,49 @@ test_that("format_v for list", {
 test_that("glimpse output matches known output", {
   expect_output_file_rel(
     glimpse(as_tibble(mtcars), width = 70L),
-    "glimpse/mtcars-70.txt")
+    "glimpse/mtcars-70.txt"
+  )
 
   expect_output_file_rel(
     glimpse(as_tibble(iris), width = 70L),
-    "glimpse/iris-70.txt")
+    "glimpse/iris-70.txt"
+  )
 
   expect_output_file_rel(
     glimpse(as_tibble(iris[integer()]), width = 70L),
-    "glimpse/iris-empty-70.txt")
+    "glimpse/iris-empty-70.txt"
+  )
 
   expect_output_file_rel(
     glimpse(tibble("mean(x)" = 5, "var(x)" = 3), width = 28),
-    "glimpse/non-syntactic.txt")
+    "glimpse/non-syntactic.txt"
+  )
 
   expect_output_file_rel(
     glimpse(as_tibble(df_all), width = 70L),
-    "glimpse/all-70.txt")
+    "glimpse/all-70.txt"
+  )
 
   withr::with_options(
     list(tibble.width = 50),
     expect_output_file_rel(
       glimpse(as_tibble(df_all)),
-      "glimpse/all-50.txt")
+      "glimpse/all-50.txt"
+    )
   )
 
   withr::with_options(
     list(tibble.width = 35),
     expect_output_file_rel(
       glimpse(as_tibble(df_all)),
-      "glimpse/all-35.txt")
+      "glimpse/all-35.txt"
+    )
   )
 
   expect_output_file_rel(
     glimpse(5),
-    "glimpse/5.txt")
+    "glimpse/5.txt"
+  )
 })
 
 test_that("glimpse(width = Inf) raises legible error", {

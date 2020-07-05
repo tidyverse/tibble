@@ -1,5 +1,2 @@
 # A tibble: 2 x 2
-   `\n`   `\r`
-  <chr> <fctr>
-1  "\n"   "\n"
-2  "\""   "\""
+<body of 4 row(s) created by pillar>

@@ -13,7 +13,9 @@
 #'
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created variables.
+#'   so you can refer to previously created variables.  These arguments are
+#'   processed with [rlang::quos()] and support unquote via `!!` and
+#'   unquote-splice via `!!!`.
 #' @param xs  A list of unevaluated expressions created with `~`,
 #'   [quote()], or (deprecated) [lazyeval::lazy()].
 #' @seealso [as_tibble()] to turn an existing list into
@@ -116,7 +118,7 @@ recycle_columns <- function(x) {
     return(x)
   }
 
-  # Validate column lengths
+  # Validate column lengths, allow recycling
   lengths <- map_int(x, NROW)
   max <- max(c(lengths[lengths != 1L], 0L))
 
@@ -154,4 +156,3 @@ invalid_df_msg <- function(problem, df, vars, extra) {
     pluralise_msg(problem, extra)
   )
 }
-

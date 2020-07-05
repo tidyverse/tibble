@@ -4,11 +4,13 @@
 #' frame. See [tribble()] for an easy way to create an complete
 #' data frame row-by-row.
 #'
+#' `add_case()` is an alias of `add_row()`.
+#'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs. If you don't supply the name of a variable,
-#'   it'll be given the value `NA`.
+#' @param ... Name-value pairs, passed on to [tibble()]. Only columns that exist
+#'   in `.data` can be used, unset columns will get an `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
-#'   default: after last row
+#'   default: after last row.
 #' @family addition
 #' @examples
 #' # add_row ---------------------------------
@@ -54,6 +56,11 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   set_class(remove_rownames(out), class(.data))
 }
 
+#' @export
+#' @rdname add_row
+#' @usage NULL
+add_case <- add_row
+
 na_value <- function(boilerplate) {
   if (is.list(boilerplate)) {
     list(NULL)
@@ -87,13 +94,13 @@ rbind_at <- function(old, new, pos) {
 #' frame.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, all values must have one element for each row
-#'   in the data frame, or be of length 1
+#' @param ... Name-value pairs, passed on to [tibble()]. All values must have
+#'   one element for each row in the data frame, or be of length 1.
 #' @param .before,.after One-based column index or column name where to add the
-#'   new columns, default: after last column
+#'   new columns, default: after last column.
 #' @family addition
 #' @examples
-#' # add_row ---------------------------------
+#' # add_column ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
 #' add_column(df, z = -1:1, w = 0)
@@ -137,16 +144,14 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
 
-  if (pos <= 0L) {
-    out <- cbind(df, .data)
-  } else if (pos >= ncol(.data)) {
-    out <- cbind(.data, df)
-  } else {
-    indexes <- seq_len(pos)
-    out <- cbind(.data[indexes], df, .data[-indexes])
-  }
+  end_pos <- ncol(.data) + seq_len(ncol(df))
 
-  set_class(remove_rownames(out), class(.data))
+  indexes_before <- rlang::seq2(1L, pos)
+  indexes_after <- rlang::seq2(pos + 1L, ncol(.data))
+  indexes <- c(indexes_before, end_pos, indexes_after)
+
+  .data[end_pos] <- df
+  .data[indexes]
 }
 
 
@@ -164,13 +169,17 @@ pos_from_before_after <- function(before, after, len) {
     if (is_null(after)) {
       len
     } else {
-      after
+      limit_pos_range(after, len)
     }
   } else {
     if (is_null(after)) {
-      before - 1L
+      limit_pos_range(before - 1L, len)
     } else {
       stopc("Can't specify both `.before` and `.after`")
     }
   }
+}
+
+limit_pos_range <- function(pos, len) {
+  max(c(0L, min(c(len, pos))))
 }

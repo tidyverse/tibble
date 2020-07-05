@@ -60,7 +60,6 @@ test_that("length 1 vectors are recycled", {
     tibble(x = 1:10, y = 1:2),
     "Column `y` must be length 1 or 10, not 2",
     fixed = TRUE
-
   )
 })
 
@@ -95,7 +94,7 @@ test_that("names in list columns are preserved", {
 
 test_that("attributes are preserved", {
   df <- structure(
-    data.frame( x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2) ),
+    data.frame(x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2)),
     meta = "this is important"
   )
   res <- as_tibble(df)
@@ -179,15 +178,19 @@ test_that("NULL makes 0 x 0 tbl_df", {
 
 test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
   df <- tibble()
-  expect_equal(class(df),
-               c("tbl_df", "tbl", "data.frame"))
-  expect_equal(class(structure(df, class = c("my_df", class(df)))),
-               c("my_df", "tbl_df", "tbl", "data.frame"))
+  expect_equal(
+    class(df),
+    c("tbl_df", "tbl", "data.frame")
+  )
+  expect_equal(
+    class(structure(df, class = c("my_df", class(df)))),
+    c("my_df", "tbl_df", "tbl", "data.frame")
+  )
 })
 
 
 test_that("Can convert tables to data frame", {
-  mtcars_table <- xtabs(mtcars, formula = ~vs+am+cyl)
+  mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
 
   mtcars_tbl <- as_tibble(mtcars_table)
   expect_equal(names(mtcars_tbl), c(names(dimnames(mtcars_table)), "n"))
@@ -222,6 +225,29 @@ test_that("as_tibble() can validate (#278)", {
     "Columns 1, 2 must be named",
     fixed = TRUE
   )
+})
+
+
+test_that("as_tibble() adds empty names if not validating", {
+  invalid_df <- as_tibble(list(3, 4, 5), validate = FALSE)
+  expect_equal(length(invalid_df), 3)
+  expect_equal(nrow(invalid_df), 1)
+  expect_equal(names(invalid_df), rep("", 3))
+})
+
+
+test_that("as_tibble() can convert row names", {
+  df <- data.frame(a = 1:3, b = 2:4, row.names = letters[5:7])
+  expect_identical(
+    as_tibble(df, rownames = NULL),
+    tibble(a = 1:3, b = 2:4)
+  )
+  expect_identical(
+    as_tibble(df, rownames = "id"),
+    tibble(id = letters[5:7], a = 1:3, b = 2:4)
+  )
+  expect_identical(rownames(as_tibble(df)), rownames(df))
+  expect_identical(unclass(as_tibble(df)), unclass(df))
 })
 
 

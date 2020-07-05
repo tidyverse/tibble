@@ -11,7 +11,7 @@ test_that("other types", {
 })
 
 test_that("vectorized", {
-  expect_equal(has_name(list(a = 1), letters ), c(TRUE, rep(FALSE, 25)))
+  expect_equal(has_name(list(a = 1), letters), c(TRUE, rep(FALSE, 25)))
 })
 
 test_that("NA", {
