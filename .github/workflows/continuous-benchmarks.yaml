@@ -34,3 +34,6 @@ jobs:
 
       - name: Push benchmarks
         run: Rscript -e "bench::cb_push()"
+
+      - name: Fail
+        run: Rscript -e "stop()"
