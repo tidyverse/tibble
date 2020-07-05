@@ -17,6 +17,7 @@ jobs:
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/bench")
+          install.packages("here")
         shell: Rscript {0}
 
       - name: Install package
