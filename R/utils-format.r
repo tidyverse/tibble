@@ -33,11 +33,10 @@ NULL
 
 #' @export
 #' @rdname formatting
-#' @importFrom stats setNames
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is.null(n)) {
+  if (is_null(n)) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -50,22 +49,26 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   width <- tibble_width(width)
 
   shrunk <- shrink_mat(df, width, rows, n, star = has_rownames(x))
-  trunc_info <- list(width = width, rows_total = rows, rows_min = nrow(df),
-                     n_extra = n_extra, summary = tbl_sum(x))
+  trunc_info <- list(
+    width = width, rows_total = rows, rows_min = nrow(df),
+    n_extra = n_extra, summary = tbl_sum(x)
+  )
 
-  structure(c(shrunk, trunc_info), class = "trunc_mat")
+  structure(
+    c(shrunk, trunc_info),
+    class = c(paste0("trunc_mat_", class(x)), "trunc_mat")
+  )
 }
 
-#' @importFrom stats setNames
 shrink_mat <- function(df, width, rows, n, star) {
-  var_types <- vapply(df, type_sum, character(1))
+  var_types <- map_chr(df, type_sum)
 
   if (ncol(df) == 0 || nrow(df) == 0) {
     return(new_shrunk_mat(NULL, var_types))
   }
 
   df <- remove_rownames(df)
-  col_names <- tickit(colnames(df))
+  col_names <- tick_non_syntactic(colnames(df))
   names(var_types) <- col_names
 
   # Minimum width of each column is 5 "<int>", so we can make a quick first
@@ -75,16 +78,16 @@ shrink_mat <- function(df, width, rows, n, star) {
   df[] <- df[!extra_wide]
 
   # List columns need special treatment because format can't be trusted
-  classes <- paste0("<", vapply(df, type_sum, character(1)), ">")
-  is_list <- vapply(df, is.list, logical(1))
-  df[is_list] <- lapply(df[is_list], function(x) {
+  classes <- paste0("<", map_chr(df, type_sum), ">")
+  is_list <- map_lgl(df, is.list)
+  df[is_list] <- map(df[is_list], function(x) {
     summary <- obj_sum(x)
     paste0("<", summary, ">")
   })
 
-  # Character columns need special treatment because of NA
-  is_character <- vapply(df, is.character, logical(1))
-  df[is_character] <- lapply(df[is_character], format_character)
+  # Character columns need special treatment because of NA and escapes
+  is_character <- map_lgl(df, is.character)
+  df[is_character] <- map(df[is_character], format_character)
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -93,8 +96,8 @@ shrink_mat <- function(df, width, rows, n, star) {
   # Column needs to be as wide as widest of name, values, and class
   w <- pmax(
     pmax(
-      nchar_width(encodeString(values)),
-      nchar_width(encodeString(names))
+      nchar_width(values),
+      nchar_width(tick_non_syntactic(names))
     ),
     nchar_width(encodeString(c("", classes)))
   )
@@ -133,57 +136,65 @@ new_shrunk_mat <- function(table, extra, rows_missing = NULL) {
 }
 
 #' @export
+format.trunc_mat <- function(x, ...) {
+  named_header <- format_header(x)
+  if (all(names2(named_header) == "")) {
+    header <- named_header
+  } else {
+    header <- paste0(
+      justify(
+        paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
+      ),
+      # We add a space after the NBSP inserted by justify()
+      # so that wrapping occurs at the right location for very narrow outputs
+      " ",
+      named_header
+    )
+  }
+  c(
+    format_comment(header, width = x$width),
+    format_body(x),
+    format_comment(pre_dots(format_footer(x)), width = x$width)
+  )
+}
+
+#' @export
 print.trunc_mat <- function(x, ...) {
-  print_summary(x)
-  print_table(x)
-  print_extra(x)
+  cat_line(format(x, ...))
   invisible(x)
 }
 
-print_summary <- function(x) {
-  summary <- format_summary(x)
-  if (length(summary) > 0) {
-    print_comment(summary, width = x$width)
-  }
-}
-
-print_table <- function(x) {
-  if (!is.null(x$table)) {
-    old_option <- options(max.print = min(prod(dim(x$table)), 2147483647L))
-    on.exit(options(old_option), add = TRUE)
-    print(x$table)
-  }
-}
-
-print_extra <- function(x) {
-  extra <- format_extra(x)
-  if (length(extra) > 0) {
-    print_comment("... ", collapse(extra), width = x$width)
-  }
-}
-
-print_comment <- function(..., width) {
-  cat_line(wrap(..., prefix = "# ", width = min(width, getOption("width"))))
-}
-
-format_summary <- function(x) {
+format_header <- function(x) {
   x$summary
 }
 
-format_extra <- function(x) {
-  extra_rows <- format_extra_rows(x)
-  extra_cols <- format_extra_cols(x)
+format_body <- function(x) {
+  table <- x$table
+  if (is_null(table)) return()
+
+  table_with_row_names <- c(list(row.names(table)), table)
+  table_with_names <- map2(as.list(names(table_with_row_names)), table_with_row_names, c)
+  same_width_table <- map(table_with_names, justify)
+  rows <- invoke(paste, same_width_table)
+  rows
+}
+
+format_footer <- function(x) {
+  extra_rows <- format_footer_rows(x)
+  extra_cols <- format_footer_cols(x)
 
   extra <- c(extra_rows, extra_cols)
   if (length(extra) >= 1) {
     extra[[1]] <- paste0("with ", extra[[1]])
-    extra[-1] <- vapply(extra[-1], function(ex) paste0("and ", ex), character(1))
+    extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
+    collapse(extra)
+  } else {
+    character()
   }
-  extra
 }
 
-format_extra_rows <- function(x) {
-  if (!is.null(x$table)) {
+format_footer_rows <- function(x) {
+  if (!is_null(x$table)) {
     if (is.na(x$rows_missing)) {
       "more rows"
     } else if (x$rows_missing > 0) {
@@ -194,7 +205,7 @@ format_extra_rows <- function(x) {
   }
 }
 
-format_extra_cols <- function(x) {
+format_footer_cols <- function(x) {
   if (length(x$extra) > 0) {
     var_types <- paste0(names(x$extra), NBSP, "<", x$extra, ">")
     if (x$n_extra > 0) {
@@ -211,15 +222,47 @@ format_extra_cols <- function(x) {
   }
 }
 
+format_comment <- function(x, width) {
+  if (length(x) == 0L) return(character())
+  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
+}
+
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0("... ", x)
+  } else {
+    character()
+  }
+}
+
+justify <- function(x, right = TRUE, space = " ") {
+  if (length(x) == 0L) return(character())
+  width <- nchar_width(x)
+  max_width <- max(width)
+  spaces_template <- paste(rep(space, max_width), collapse = "")
+  spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
+  if (right) {
+    paste0(spaces, x)
+  } else {
+    paste0(x, spaces)
+  }
+}
+
 #' knit_print method for trunc mat
 #' @keywords internal
 #' @export
 knit_print.trunc_mat <- function(x, options) {
-  summary <- format_summary(x)
+  header <- format_header(x)
+  if (length(header) > 0L) {
+    header[names2(header) != ""] <- paste0(names2(header), ": ", header)
+    summary <- header
+  } else {
+    summary <- character()
+  }
 
   kable <- knitr::kable(x$table, row.names = FALSE)
 
-  extra <- format_extra(x)
+  extra <- format_footer(x)
 
   if (length(extra) > 0) {
     extra <- wrap("(", collapse(extra), ")", width = x$width)
@@ -246,8 +289,16 @@ wrap <- function(..., indent = 0, prefix = "", width) {
 
 
 format_character <- function(x) {
-  x[is.na(x)] <- "<NA>"
-  x
+  res <- quote_escaped(x)
+  res[is.na(x)] <- "<NA>"
+  res
+}
+
+quote_escaped <- function(x) {
+  res <- encodeString(x, quote = '"')
+  plain <- which(res == paste0('"', x, '"'))
+  res[plain] <- x[plain]
+  res
 }
 
 # function for the thousand separator,
@@ -258,22 +309,22 @@ big_mark <- function(x, ...) {
 }
 
 tibble_width <- function(width) {
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   width <- tibble_opt("width")
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   getOption("width")
 }
 
 tibble_glimpse_width <- function(width) {
-  if (!is.null(width))
+  if (!is_null(width))
     return(width)
 
   width <- tibble_opt("width")
-  if (!is.null(width) && is.finite(width))
+  if (!is_null(width) && is.finite(width))
     return(width)
 
   getOption("width")
@@ -284,31 +335,28 @@ pluralise_msg <- function(message, objects) {
 }
 
 pluralise <- function(message, objects) {
-  stopifnot(length(objects) > 0)
-  if (length(objects) == 1) {
+  pluralise_n(message, length(objects))
+}
+
+pluralise_n <- function(message, n) {
+  stopifnot(n > 0)
+  if (n == 1) {
     # strip [, unless there is space in between
-    message <- gsub("\\[(\\S+)\\]", "\\1", message, perl = TRUE)
+    message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)
     # remove ( and its content, unless there is space in between
     message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
   } else {
     # strip (, unless there is space in between
-    message <- gsub("\\((\\S+)\\)", "\\1", message, perl = TRUE)
+    message <- gsub("\\(([^\\) ]+)\\)", "\\1", message, perl = TRUE)
     # remove [ and its content, unless there is space in between
-    message <- gsub("\\[[^\\] ]+\\]\\s+", "", message, perl = TRUE)
+    message <- gsub("\\[[^\\] ]+\\]\\s*", "", message, perl = TRUE)
   }
 
   message
 }
 
 mult_sign <- function() {
-  # unicode multiplication sign
-  mult <- "\u00d7"
-  # if unicode doesn't render, use lowercase x
-  if (enc2native(mult) != mult) {
-    mult <- "x"
-  }
-
-  mult
+  "x"
 }
 
 spaces_around <- function(x) {
@@ -321,6 +369,6 @@ quote_n <- function(x) UseMethod("quote_n")
 #' @export
 quote_n.default <- function(x) as.character(x)
 #' @export
-quote_n.character <- function(x) encodeString(x, quote = "'")
+quote_n.character <- function(x) tick(x)
 
 collapse <- function(x) paste(x, collapse = ", ")

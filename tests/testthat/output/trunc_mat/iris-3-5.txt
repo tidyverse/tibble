@@ -1,7 +1,7 @@
 # A
 #   tibble:
 #   150
-#   ×
+#   x
 #   5
   Sepal.Length
          <dbl>

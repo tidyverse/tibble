@@ -1,3 +1,35 @@
+# tibble 1.3.1 (2017-05-16)
+
+## Bug fixes
+
+- Subsetting zero columns no longer returns wrong number of rows (#241, @echasnovski).
+
+
+## Interface changes
+
+- New `set_tidy_names()` and `tidy_names()`, a simpler version of `repair_names()` which works unchanged for now (#217).
+- New `rowid_to_column()` that adds a `rowid` column as first column and removes row names (#243, @barnettjacob).
+- The `all.equal.tbl_df()` method has been removed, calling `all.equal()` now forwards to `base::all.equal.data.frame()`. To compare tibbles ignoring row and column order, please use `dplyr::all_equal()` (#247).
+
+
+## Formatting
+
+- Printing now uses `x` again instead of the Unicode multiplication sign, to avoid encoding issues (#216).
+- String values are now quoted when printing if they contain non-printable characters or quotes (#253).
+- The `print()`, `format()`, and `tbl_sum()` methods are now implemented for class `"tbl"` and not for `"tbl_df"`. This allows subclasses to use tibble's formatting facilities. The formatting of the header can be tweaked by implementing `tbl_sum()` for the subclass, which is expected to return a named character vector. The `print.tbl_df()` method is still implemented for compatibility with downstream packages, but only calls `NextMethod()`.
+- Own printing routine, not relying on `print.data.frame()` anymore. Now providing `format.tbl_df()` and full support for Unicode characters in names and data, also for `glimpse()` (#235).
+
+
+## Misc
+
+- Improve formatting of error messages (#223).
+- Using `rlang` instead of `lazyeval` (#225, @lionel-), and `rlang` functions (#244).
+- `tribble()` now handles values that have a class (#237, @NikNakk).
+- Minor efficiency gains by replacing `any(is.na())` with `anyNA()` (#229, @csgillespie).
+- The `microbenchmark` package is now used conditionally (#245).
+- `pkgdown` website.
+
+
 # tibble 1.3.0 (2017-01-10)
 
 ## Bug fixes
@@ -132,7 +164,7 @@ Follow-up release.
 - Subsetting with empty index (e.g., `x[]`) also removes row names.
 
 
-# Documentation
+## Documentation
 
 - Document behavior of `as_tibble.tbl_df()` for subclasses (#60).
 - Document and test that subsetting removes row names.
@@ -151,8 +183,7 @@ Follow-up release.
 - Use new `expect_output_file()` from `testthat`.
 
 
-Version 1.0 (2016-03-21)
-===
+# Version 1.0 (2016-03-21)
 
 - Initial CRAN release
 

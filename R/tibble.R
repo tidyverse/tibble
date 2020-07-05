@@ -1,64 +1,155 @@
-#' @useDynLib tibble, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
-#' @importFrom utils head tail
-#' @aliases NULL
-#' @details The S3 class `tbl_df` wraps a local data frame. The main
-#' advantage to using a `tbl_df` over a regular data frame is the printing:
-#' tbl objects only print a few rows and all the columns that fit on one screen,
-#' describing the rest of it as text.
+#' Build a data frame or list.
 #'
-#' @section Methods:
+#' @description
+#' `tibble()` is a trimmed down version of [data.frame()] that:
 #'
-#' `tbl_df` implements four important base methods:
+#' * Never coerces inputs (i.e. strings stay as strings!).
+#' * Never adds `row.names`.
+#' * Never munges column names.
+#' * Only recycles length 1 inputs.
+#' * Evaluates its arguments lazily and in order.
+#' * Adds `tbl_df` class to output.
+#' * Automatically adds column names.
 #'
-#' \describe{
-#' \item{print}{By default only prints the first 10 rows (at most 20), and the
-#'   columns that fit on screen; see [print.tbl_df()]}
-#' \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
-#' \item{\code{[[}, `$`}{Calls [.subset2()] directly,
-#'   so is considerably faster. Returns `NULL` if column does not exist,
-#'   `$` warns.}
+#'
+#' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
+#'   so you can refer to previously created variables.
+#' @param xs  A list of unevaluated expressions created with `~`,
+#'   [quote()], or (deprecated) [lazyeval::lazy()].
+#' @seealso [as_tibble()] to turn an existing list into
+#'   a data frame.
+#' @export
+#' @examples
+#' a <- 1:5
+#' tibble(a, b = a * 2)
+#' tibble(a, b = a * 2, c = 1)
+#' tibble(x = runif(10), y = x * 2)
+#'
+#' lst(n = 5, x = runif(n))
+#'
+#' # tibble never coerces its inputs
+#' str(tibble(letters))
+#' str(tibble(x = list(diag(1), diag(2))))
+#'
+#' # or munges column names
+#' tibble(`a + b` = 1:5)
+#'
+#' # You can splice-unquote a list of quotes and formulas
+#' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+#'
+#' # data frames can only contain 1d atomic vectors and lists
+#' # and can not contain POSIXlt
+#' \dontrun{
+#' tibble(x = tibble(1, 2, 3))
+#' tibble(y = strptime("2000/01/01", "%x"))
 #' }
-#' @section Important functions:
-#' [tibble()] and [tribble()] for construction,
-#' [as_tibble()] for coercion,
-#' and [print.tbl_df()] and [glimpse()] for display.
-"_PACKAGE"
-
-#' @name tibble-package
-#' @section Package options:
-#' Display options for `tbl_df`, used by [trunc_mat()] and
-#' (indirectly) by [print.tbl_df()].
-#' \describe{
-(op.tibble <- list(
-  #' \item{`tibble.print_max`}{Row number threshold: Maximum number of rows
-  #'   printed. Set to `Inf` to always print all rows.  Default: 20.}
-  tibble.print_max = 20L,
-
-  #' \item{`tibble.print_min`}{Number of rows printed if row number
-  #'   threshold is exceeded. Default: 10.}
-  tibble.print_min = 10L,
-
-  #' \item{`tibble.width`}{Output width. Default: `NULL` (use
-  #'   `width` option).}
-  tibble.width = NULL,
-
-  #' \item{`tibble.max_extra_cols`}{Number of extra columns
-  #'   printed in reduced form. Default: 100.}
-  tibble.max_extra_cols = 100L
-  #' }
-))
-
-tibble_opt <- function(x) {
-  x_tibble <- paste0("tibble.", x)
-  res <- getOption(x_tibble)
-  if (!is.null(res))
-    return(res)
-
-  x_dplyr <- paste0("dplyr.", x)
-  res <- getOption(x_dplyr)
-  if (!is.null(res))
-    return(res)
-
-  op.tibble[[x_tibble]]
+tibble <- function(...) {
+  as_tibble(lst(...))
 }
+
+#' @export
+#' @rdname tibble
+tibble_ <- function(xs) {
+  as_tibble(lst_(xs))
+}
+
+#' @export
+#' @rdname tibble
+#' @usage NULL
+data_frame <- tibble
+
+#' @export
+#' @rdname tibble
+#' @usage NULL
+data_frame_ <- tibble_
+
+
+#' Test if the object is a tibble.
+#'
+#' @param x An object
+#' @return `TRUE` if the object inherits from the `tbl_df` class.
+#' @export
+is.tibble <- function(x) {
+  "tbl_df" %in% class(x)
+}
+
+#' @rdname is.tibble
+#' @export
+is_tibble <- is.tibble
+
+
+# Validity checks --------------------------------------------------------------
+
+check_tibble <- function(x) {
+  # Names
+  names_x <- names2(x)
+  bad_name <- is.na(names_x) | names_x == ""
+  if (any(bad_name)) {
+    invalid_df("must be named", x, which(bad_name))
+  }
+
+  dups <- duplicated(names_x)
+  if (any(dups)) {
+    invalid_df("must have [a] unique name(s)", x, dups)
+  }
+
+  # Types
+  is_1d <- map_lgl(x, is_1d)
+  if (any(!is_1d)) {
+    invalid_df("must be [a] 1d atomic vector(s) or [a] list(s)", x, !is_1d)
+  }
+
+  x[] <- map(x, strip_dim)
+
+  posixlt <- map_lgl(x, inherits, "POSIXlt")
+  if (any(posixlt)) {
+    invalid_df("[is](are) [a] date(s)/time(s) and must be stored as POSIXct, not POSIXlt", x, posixlt)
+  }
+
+  x
+}
+
+recycle_columns <- function(x) {
+  if (length(x) == 0) {
+    return(x)
+  }
+
+  # Validate column lengths
+  lengths <- map_int(x, NROW)
+  max <- max(lengths)
+
+  bad_len <- lengths != 1L & lengths != max
+  if (any(bad_len)) {
+    invalid_df_msg(
+      paste0("must be length 1 or ", max, ", not "), x, bad_len, lengths[bad_len]
+    )
+  }
+
+  short <- lengths == 1
+  if (max != 1L && any(short)) {
+    x[short] <- map(x[short], rep, max)
+  }
+
+  x
+}
+
+invalid_df <- function(problem, df, vars) {
+  if (is.logical(vars)) {
+    vars <- names(df)[vars]
+  }
+  stopc(
+    pluralise_msg("Column(s) ", vars), " ",
+    pluralise(problem, vars)
+  )
+}
+
+invalid_df_msg <- function(problem, df, vars, extra) {
+  if (is.logical(vars)) {
+    vars <- names(df)[vars]
+  }
+  stopc(
+    pluralise_msg("Column(s) ", vars), " ",
+    pluralise_msg(problem, extra)
+  )
+}
+

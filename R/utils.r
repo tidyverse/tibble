@@ -1,31 +1,6 @@
-names2 <- function(x) {
-  xnames <- names(x)
-  if (is.null(xnames)) {
-    rep("", length(x))
-  } else {
-    ifelse(is.na(xnames), "", xnames)
-  }
-}
-
-"%||%" <- function(x, y) {
-  if(is.null(x)) y else x
-}
-
-# is.atomic() is TRUE for atomic vectors AND NULL!
-is_atomic <- function(x) {
-  is.atomic(x) && !is.null(x)
-}
-
-is_vector <- function(x) {
-  is_atomic(x) || is.list(x)
-}
-
-has_names <- function(x) {
-  !is.null(names(x))
-}
 
 has_dim <- function(x) {
-  length(dim(x)) > 0L || has_names(x)
+  length(dim(x)) > 0L || is_named(x)
 }
 
 needs_dim <- function(x) {
@@ -42,31 +17,33 @@ is_1d <- function(x) {
 strip_dim <- function(x) {
   # Careful update only if necessary, to avoid copying which is checked by
   # the "copying" test in dplyr
-  if (is_atomic(x) && has_dim(x))
+  if (is_atomic(x) && has_dim(x)) {
     dim(x) <- NULL
+  }
   x
 }
 
 needs_list_col <- function(x) {
-  is.list(x) || length(x) != 1L
+  is_list(x) || length(x) != 1L
 }
 
 # Work around bug in R 3.3.0
 safe_match <- function(x, table) {
   # nocov start
-  if (getRversion() == "3.3.0")
+  if (getRversion() == "3.3.0") {
     match(x, table, incomparables = character())
-  else
+  } else {
     match(x, table)
+  }
   # nocov end
 }
 
 stopc <- function(...) {
-  stop(..., call. = FALSE, domain = NA)
+  abort(paste0(...))
 }
 
 warningc <- function(...) {
-  warning(..., call. = FALSE, domain = NA)
+  warn(paste0(...))
 }
 
 nchar_width <- function(x) {
@@ -74,7 +51,7 @@ nchar_width <- function(x) {
 }
 
 cat_line <- function(...) {
-  cat(..., "\n", sep = "")
+  cat(paste0(..., "\n"), sep = "")
 }
 
 is_syntactic <- function(x) {
@@ -83,8 +60,13 @@ is_syntactic <- function(x) {
   ret
 }
 
-tickit <- function(x) {
+tick_non_syntactic <- function(x) {
   needs_ticks <- !is_syntactic(x)
-  x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
+  x[needs_ticks] <- tick(x[needs_ticks])
   x
+}
+
+tick <- function(x) {
+  x[is.na(x)] <- "NA"
+  encodeString(x, quote = "`")
 }

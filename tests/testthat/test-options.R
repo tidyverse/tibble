@@ -74,7 +74,7 @@ test_that("tibble_glimpse_width ignores Inf tibble.width", {
   )
 })
 
-test_that("print.tbl_df ignores max.print option", {
+test_that("print.tbl ignores max.print option", {
   iris2 <- as_tibble(iris)
   expect_output(
     withr::with_options(list(max.print = 3), print(iris2)),

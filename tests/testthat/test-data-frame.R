@@ -1,22 +1,29 @@
 context("tibble")
 
 test_that("tibble returns correct number of rows with all combinatinos", {
-
   expect_equal(nrow(tibble(value = 1:10)), 10L)
-
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
-
   expect_equal(nrow(tibble(name = "recycle_me", value = 1:10)), 10L)
-
   expect_equal(nrow(tibble(name = "recycle_me", value = 1:10, value2 = 11:20)), 10L)
-
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
-
 })
 
 test_that("can't make tibble containing data.frame or array", {
-  expect_error(tibble(mtcars), "must be a 1d atomic vector or list")
-  expect_error(tibble(diag(5)), "must be a 1d atomic vector or list")
+  expect_error(
+    tibble(mtcars),
+    "Column `mtcars` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    tibble(diag(5)),
+    "Column `diag(5)` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    tibble(mtcars, diag(5)),
+    "Columns `mtcars`, `diag(5)` must be 1d atomic vectors or lists",
+    fixed = TRUE
+  )
 })
 
 test_that("dim attribute is stripped of 1D array (#84)", {
@@ -24,19 +31,36 @@ test_that("dim attribute is stripped of 1D array (#84)", {
 })
 
 test_that("bogus columns raise an error", {
-  expect_error(as_tibble(list(1)), "named")
-  expect_error(tibble(a = NULL), "1d atomic vector or list")
-  expect_error(tibble(a = ~a), "1d atomic vector or list")
-  expect_error(tibble(a = new.env()), "1d atomic vector or list")
-  expect_error(tibble(a = quote(a)), "1d atomic vector or list")
+  expect_error(
+    as_tibble(list(1)),
+    "Column 1 must be named",
+    fixed = TRUE
+  )
+  expect_error(
+    tibble(a = NULL),
+    "Column `a` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    tibble(a = new.env()),
+    "Column `a` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    tibble(a = quote(a)),
+    "Column `a` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
 })
 
 test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10)), 10)
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_error(
-    nrow(tibble(x = 1:10, y = 1:2)),
-    "Variables must be length 1 or 10"
+    tibble(x = 1:10, y = 1:2),
+    "Column `y` must be length 1 or 10, not 2",
+    fixed = TRUE
+
   )
 })
 
@@ -88,21 +112,55 @@ test_that("tibble aliases", {
 # as_tibble -----------------------------------------------------------
 
 test_that("columns must be same length", {
-  l <- list(x = 1:2, y = 1:3)
-  expect_error(as_tibble(l), "must be length 1 or")
+  expect_error(
+    as_tibble(list(x = 1:2, y = 1:3)),
+    "Column `x` must be length 1 or 3, not 2",
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
+    "Columns `x`, `y` must be length 1 or 4, not 2, 3",
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
+    "Columns `y`, `z` must be length 1 or 4, not 2, 2",
+    fixed = TRUE
+  )
 })
 
 test_that("columns must be named", {
   l1 <- list(1:10)
   l2 <- list(x = 1, 2)
 
-  expect_error(as_tibble(l1), "must be named")
-  expect_error(as_tibble(l2), "must be named")
+  expect_error(
+    as_tibble(l1),
+    "Column 1 must be named",
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(l2),
+    "Column 2 must be named",
+    fixed = TRUE
+  )
 })
 
 test_that("can't coerce list data.frame or array", {
-  expect_error(as_tibble(list(x = mtcars)), "must be a 1d atomic vector or list")
-  expect_error(as_tibble(list(x = diag(5))), "must be a 1d atomic vector or list")
+  expect_error(
+    as_tibble(list(x = mtcars)),
+    "Column `x` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(list(x = diag(5))),
+    "Column `x` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    as_tibble(list(x = mtcars, y = diag(5))),
+    "Columns `x`, `y` must be 1d atomic vectors or lists",
+    fixed = TRUE
+  )
 })
 
 test_that("empty list() makes 0 x 0 tbl_df", {
@@ -169,21 +227,39 @@ test_that("as.tibble is an alias of as_tibble", {
 test_that("2d object isn't a valid column", {
   expect_error(
     check_tibble(list(x = mtcars)),
-    "Each variable must be a 1d atomic vector"
+    "Column `x` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    check_tibble(list(x = mtcars, y = mtcars)),
+    "Columns `x`, `y` must be 1d atomic vectors or lists",
+    fixed = TRUE
   )
 })
 
 test_that("POSIXlt isn't a valid column", {
   expect_error(
     check_tibble(list(x = as.POSIXlt(Sys.time()))),
-    "Date/times must be stored as POSIXct"
+    "Column `x` is a date/time and must be stored as POSIXct, not POSIXlt",
+    fixed = TRUE
+  )
+  expect_error(
+    check_tibble(list(x = as.POSIXlt(Sys.time()), y = as.POSIXlt(Sys.time()))),
+    "Columns `x`, `y` are dates/times and must be stored as POSIXct, not POSIXlt",
+    fixed = TRUE
   )
 })
 
 test_that("NULL isn't a valid column", {
   expect_error(
     check_tibble(list(a = NULL)),
-    "Each variable must be a 1d atomic vector"
+    "Column `a` must be a 1d atomic vector or a list",
+    fixed = TRUE
+  )
+  expect_error(
+    check_tibble(list(a = NULL, b = NULL)),
+    "Columns `a`, `b` must be 1d atomic vectors or lists",
+    fixed = TRUE
   )
 })
 
@@ -192,23 +268,32 @@ test_that("columns must be named (#1101)", {
 
   expect_error(
     check_tibble(l),
-    "Each variable must be named"
+    "Columns 1, 2 must be named",
+    fixed = TRUE
   )
 
   expect_error(
     check_tibble(setNames(l, c("x", ""))),
-    "Each variable must be named"
+    "Column 2 must be named",
+    fixed = TRUE
   )
 
   expect_error(
     check_tibble(setNames(l, c("x", NA))),
-    "Each variable must be named"
+    "Column 2 must be named",
+    fixed = TRUE
   )
 })
 
 test_that("names must be unique (#820)", {
   expect_error(
     check_tibble(list(x = 1, x = 2)),
-    "Each variable must have a unique name"
+    "Column `x` must have a unique name",
+    fixed = TRUE
+  )
+  expect_error(
+    check_tibble(list(x = 1, x = 2, y = 3, y = 4)),
+    "Columns `x`, `y` must have unique names",
+    fixed = TRUE
   )
 })

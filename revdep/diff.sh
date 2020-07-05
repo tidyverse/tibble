@@ -2,7 +2,7 @@
 
 set -e
 
-old_tag=v1.2
+old_tag=v1.3.0
 branch=$(git symbolic-ref --short HEAD)
 
 cd $(dirname $0)/..
@@ -23,7 +23,7 @@ rm -rf revdep/install
 git add revdep
 git commit -m "revdep update for clean state" || true
 
-_R_CHECK_SUGGESTS_ONLY_=true R -f revdep/check.R
+NOT_CRAN=FALSE _R_CHECK_SUGGESTS_ONLY_=true R -f revdep/check.R
 #echo $old_tag >> revdep/README.md
 
 mv revdep revdep-$old_tag
@@ -49,7 +49,7 @@ git fetch --all
 git rebase
 git push origin HEAD
 
-_R_CHECK_SUGGESTS_ONLY_=true R -f revdep/check.R
+NOT_CRAN=FALSE _R_CHECK_SUGGESTS_ONLY_=true R -f revdep/check.R
 #echo $branch >> revdep/README.md
 
 cp revdep/README.md revdep/README-${branch}.md
