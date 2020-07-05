@@ -9,18 +9,18 @@ add_column(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, all values must have one element for each row
-in the data frame, or be of length 1}
+\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
+one element for each row in the data frame, or be of length 1.}
 
 \item{.before, .after}{One-based column index or column name where to add the
-new columns, default: after last column}
+new columns, default: after last column.}
 }
 \description{
 This is a convenient way to add one or more columns to an existing data
 frame.
 }
 \examples{
-# add_row ---------------------------------
+# add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
 add_column(df, z = -1:1, w = 0)

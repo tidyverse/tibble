@@ -3,20 +3,17 @@
 #   150
 #   x
 #   5
-  Sepal.Length
-         <dbl>
-1          5.1
-2          4.9
-3          4.7
+<body created by pillar>
 # ...
 #   with
 #   147
 #   more
 #   rows,
 #   and
-#   4
+#   5
 #   more
 #   variables:
+#   Sepal.Length <dbl>,
 #   Sepal.Width <dbl>,
 #   Petal.Length <dbl>,
 #   Petal.Width <dbl>,

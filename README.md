@@ -37,17 +37,17 @@ library(tibble)
 as_tibble(iris)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           <dbl>       <dbl>        <dbl>       <dbl>  <fctr>
-#>  1          5.1         3.5          1.4         0.2  setosa
-#>  2          4.9         3.0          1.4         0.2  setosa
-#>  3          4.7         3.2          1.3         0.2  setosa
-#>  4          4.6         3.1          1.5         0.2  setosa
-#>  5          5.0         3.6          1.4         0.2  setosa
-#>  6          5.4         3.9          1.7         0.4  setosa
-#>  7          4.6         3.4          1.4         0.3  setosa
-#>  8          5.0         3.4          1.5         0.2  setosa
-#>  9          4.4         2.9          1.4         0.2  setosa
-#> 10          4.9         3.1          1.5         0.1  setosa
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fctr> 
+#>  1         5.10        3.50         1.40       0.200 setosa 
+#>  2         4.90        3.00         1.40       0.200 setosa 
+#>  3         4.70        3.20         1.30       0.200 setosa 
+#>  4         4.60        3.10         1.50       0.200 setosa 
+#>  5         5.00        3.60         1.40       0.200 setosa 
+#>  6         5.40        3.90         1.70       0.400 setosa 
+#>  7         4.60        3.40         1.40       0.300 setosa 
+#>  8         5.00        3.40         1.50       0.200 setosa 
+#>  9         4.40        2.90         1.40       0.200 setosa 
+#> 10         4.90        3.10         1.50       0.100 setosa 
 #> # ... with 140 more rows
 ```
 
@@ -60,11 +60,11 @@ tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 #> # A tibble: 5 x 3
 #>       x     y     z
 #>   <int> <dbl> <dbl>
-#> 1     1     1     2
-#> 2     2     1     5
-#> 3     3     1    10
-#> 4     4     1    17
-#> 5     5     1    26
+#> 1     1  1.00  2.00
+#> 2     2  1.00  5.00
+#> 3     3  1.00 10.0 
+#> 4     4  1.00 17.0 
+#> 5     5  1.00 26.0
 ```
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
@@ -78,8 +78,8 @@ tribble(
   "b", 1,  8.5
 )
 #> # A tibble: 2 x 3
-#>       x     y     z
+#>   x         y     z
 #>   <chr> <dbl> <dbl>
-#> 1     a     2   3.6
-#> 2     b     1   8.5
+#> 1 a      2.00  3.60
+#> 2 b      1.00  8.50
 ```

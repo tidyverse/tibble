@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R
 \name{add_row}
 \alias{add_row}
+\alias{add_case}
 \title{Add rows to a data frame}
 \usage{
 add_row(.data, ..., .before = NULL, .after = NULL)
@@ -9,16 +10,19 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs. If you don't supply the name of a variable,
-it'll be given the value \code{NA}.}
+\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Only columns that exist
+in \code{.data} can be used, unset columns will get an \code{NA} value.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
-default: after last row}
+default: after last row.}
 }
 \description{
 This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
 data frame row-by-row.
+}
+\details{
+\code{add_case()} is an alias of \code{add_row()}.
 }
 \examples{
 # add_row ---------------------------------
