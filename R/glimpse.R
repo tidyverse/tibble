@@ -1,5 +1,8 @@
 #' Get a glimpse of your data
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' This is like a transposed version of `print()`: columns run down the page,
 #' and data runs across. This makes it possible to see every column in
 #' a data frame. It's a little like [str()] applied to a data frame
@@ -20,19 +23,20 @@
 #' @examples
 #' glimpse(mtcars)
 #'
-#' if (!requireNamespace("nycflights13", quietly = TRUE))
-#'   stop("Please install the nycflights13 package to run the rest of this example")
-#'
-#' glimpse(nycflights13::flights)
+#' if (requireNamespace("nycflights13", quietly = TRUE)) {
+#'   glimpse(nycflights13::flights)
+#' }
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
 }
 
 #' @export
+#' @importFrom pillar new_pillar_title
+#' @importFrom pillar new_pillar_type
 glimpse.tbl <- function(x, width = NULL, ...) {
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
-    stopc("`width` must be finite")
+    abort(error_glimpse_infinite_width())
   }
 
   cat_line("Observations: ", big_mark(nrow(x)))
@@ -41,16 +45,22 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
-
   cat_line("Variables: ", big_mark(ncol(df)))
+
+  summary <- tbl_sum(x)
+  brief_summary <- summary[-1]
+
+  if (has_length(brief_summary)) {
+    cat_line(names(brief_summary), ": ", brief_summary)
+  }
+
   if (ncol(df) == 0) return(invisible(x))
 
-  var_types <- map_chr(df, type_sum)
-  ticked_names <- tick_non_syntactic(names(df))
-  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " <", var_types, "> ")
+  var_types <- map_chr(map(df, new_pillar_type), format)
+  ticked_names <- format(new_pillar_title(tick_if_needed(names(df))))
+  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " ", var_types, " ")
 
-  data_width <- width - nchar(var_names) - 2
-
+  data_width <- width - crayon::col_nchar(var_names) - 2
   formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
@@ -71,10 +81,12 @@ glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
 str_trunc <- function(x, max_width) {
   width <- nchar(x)
 
+  nchar_ellipsis <- nchar_width(cli::symbol$ellipsis)
+
   for (i in seq_along(x)) {
     if (width[i] <= max_width[i]) next
 
-    x[i] <- paste0(substr(x[i], 1, max_width[i] - 3), "...")
+    x[i] <- paste0(substr(x[i], 1, max_width[i] - nchar_ellipsis), cli::symbol$ellipsis)
   }
 
   x
@@ -83,12 +95,22 @@ str_trunc <- function(x, max_width) {
 format_v <- function(x) UseMethod("format_v")
 
 #' @export
-format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
+format_v.default <- function(x) {
+  dims <- dim(x)
+
+  if (!is.null(dims)){
+    dims_out <- paste0(dims, collapse = " x ")
+    out <- paste0("<", class(x)[1], "[", dims_out, "]>")
+    out
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}
 
 #' @export
 format_v.list <- function(x) {
   out <- map(x, format_v)
-  atomic <- map_int(out, length) == 1L
+  atomic <- (map_int(out, length) == 1L)
   out <- map_chr(out, collapse)
   out[!atomic] <- paste0("<", out[!atomic], ">")
   paste0("[", collapse(out), "]")
@@ -96,3 +118,12 @@ format_v.list <- function(x) {
 
 #' @export
 format_v.character <- function(x) encodeString(x, quote = '"')
+
+#' @export
+format_v.factor <- function(x) {
+  if (any(grepl(",", x, fixed = TRUE))) {
+    encodeString(as.character(x), quote = '"')
+  } else {
+    format(x, trim = TRUE, justify = "none")
+  }
+}

@@ -1,14 +1,15 @@
 #' Row-wise tibble creation
 #'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
 #' Create [tibble]s using an easier to read row-by-row layout.
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' `frame_data()` is an older name for `tribble()`. It will eventually
-#' be phased out.
-#'
 #' @param ... Arguments specifying the structure of a `tibble`.
-#'   Variable names should be formulas, and may only appear before the data.
+#'   Variable names should be formulas, and may only appear before the
+#'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [tibble].
 #' @export
 #' @examples
@@ -31,12 +32,10 @@ tribble <- function(...) {
   turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
 }
 
-#' @export
-#' @rdname tribble
-#' @usage NULL
-frame_data <- tribble
-
 #' Row-wise matrix creation
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
 #'
 #' Create matrices laying out the data in rows, similar to
 #' `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
@@ -44,7 +43,8 @@ frame_data <- tribble
 #' is important. The syntax is inspired by [tribble()].
 #'
 #' @param ... Arguments specifying the structure of a `frame_matrix`.
-#'   Column names should be formulas, and may only appear before the data.
+#'   Column names should be formulas, and may only appear before the
+#'   data. These arguments support [tidy dots][rlang::tidy-dots].
 #' @return A [matrix].
 #' @export
 #' @examples
@@ -59,14 +59,14 @@ frame_matrix <- function(...) {
 }
 
 extract_frame_data_from_dots <- function(...) {
-  dots <- dots_list(...)
+  dots <- list2(...)
 
   # Extract the names.
   frame_names <- extract_frame_names_from_dots(dots)
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    stopc("Expected at least one column name; e.g. `~name`")
+    abort(error_tribble_needs_columns())
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (length(frame_rest) == 0L) {
@@ -94,18 +94,15 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      stopc("Expected a column name with a single argument; e.g. `~name`")
+      abort(error_tribble_lhs_column_syntax(el[[2]]))
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      stopc(
-        "Expected a symbol or string denoting a column name, not ",
-        friendly_type(type_of(candidate))
-      )
+      abort(error_tribble_rhs_column_syntax(candidate))
     }
 
-    frame_names <- c(frame_names, as.character(el[[2]]))
+    frame_names <- c(frame_names, as.character(candidate))
   }
 
   frame_names
@@ -118,13 +115,10 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    stopc(
-      sprintf(
-        "invalid specification: had %s elements and %s columns",
-        length(frame_rest),
-        length(frame_names)
-      )
-    )
+    abort(error_tribble_non_rectangular(
+      length(frame_names),
+      length(frame_rest)
+    ))
   }
 }
 
@@ -132,9 +126,13 @@ turn_frame_data_into_tibble <- function(names, rest) {
   frame_mat <- matrix(rest, ncol = length(names), byrow = TRUE)
   frame_col <- turn_matrix_into_column_list(frame_mat)
 
+  if (length(frame_col) == 0) {
+    return(new_tibble(list(), nrow = 0))
+  }
+
   # Create a tbl_df and return it
   names(frame_col) <- names
-  new_tibble(frame_col)
+  new_tibble(frame_col, nrow = NROW(frame_col[[1]]))
 }
 
 turn_matrix_into_column_list <- function(frame_mat) {
@@ -152,8 +150,9 @@ turn_matrix_into_column_list <- function(frame_mat) {
 }
 
 turn_frame_data_into_frame_matrix <- function(names, rest) {
-  if (some(rest, needs_list_col)) {
-    stopc("Can't use list columns in `frame_matrix()`")
+  list_cols <- which(map_lgl(rest, needs_list_col))
+  if (has_length(list_cols)) {
+    abort(error_frame_matrix_list(list_cols))
   }
 
   frame_ncol <- length(names)

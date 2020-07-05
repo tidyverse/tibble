@@ -1,6 +1,5 @@
 template:
   package: tidytemplate
-  default_assets: false
 
 home:
   strip_header: true
@@ -23,13 +22,13 @@ reference:
   contents:
   - add_row
   - add_column
-  - repair_names
 
 - title: Helpers
   contents:
   - glimpse
   - rownames
   - tbl_sum
+  - view
   - reexports
 
 - title: Vectors, matrices, and lists
@@ -56,4 +55,9 @@ navbar:
   - icon: fa-github fa-lg
     href: https://github.com/tidyverse/tibble
 
+development:
+  mode: devel
 
+authors:
+  Kirill Müller:
+    href: http://krlmlr.info

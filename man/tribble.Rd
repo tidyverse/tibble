@@ -2,26 +2,24 @@
 % Please edit documentation in R/tribble.R
 \name{tribble}
 \alias{tribble}
-\alias{frame_data}
 \title{Row-wise tibble creation}
 \usage{
 tribble(...)
 }
 \arguments{
 \item{...}{Arguments specifying the structure of a \code{tibble}.
-Variable names should be formulas, and may only appear before the data.}
+Variable names should be formulas, and may only appear before the
+data. These arguments support \link[rlang:tidy-dots]{tidy dots}.}
 }
 \value{
 A \link{tibble}.
 }
 \description{
+\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.
-}
-\details{
-\code{frame_data()} is an older name for \code{tribble()}. It will eventually
-be phased out.
 }
 \examples{
 tribble(

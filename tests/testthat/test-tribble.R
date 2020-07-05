@@ -86,17 +86,24 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 
 test_that("tribble() errs appropriately on bad calls", {
 
+  # no colname
+  expect_error(
+    tribble(1, 2, 3),
+    error_tribble_needs_columns(),
+    fixed = TRUE
+  )
+
   # invalid colname syntax
   expect_error(
-    tribble(a~b),
-    "Expected a column name with a single argument; e.g. `~name`",
+    tribble(a ~ b),
+    error_tribble_lhs_column_syntax(quote(a)),
     fixed = TRUE
   )
 
   # invalid colname syntax
   expect_error(
     tribble(~a + b),
-    "Expected a symbol or string denoting a column name, not a call",
+    error_tribble_rhs_column_syntax(quote(a + b)),
     fixed = TRUE
   )
 
@@ -116,6 +123,17 @@ test_that("tribble() errs appropriately on bad calls", {
       1, 2,
       3, 4, 5
     ),
+    error_tribble_non_rectangular(3, 5),
+    fixed = TRUE
+  )
+
+  expect_error(
+    tribble(
+      ~a, ~b, ~c, ~d,
+      1, 2, 3, 4, 5,
+      6, 7, 8, 9,
+    ),
+    error_tribble_non_rectangular(4, 9),
     fixed = TRUE
   )
 })
@@ -178,7 +196,7 @@ test_that("frame_matrix cannot have list columns", {
       "a", 1:3,
       "b", 4:6
     ),
-    "Can't use list columns in `frame_matrix()`",
+    error_frame_matrix_list(c(2, 4)),
     fixed = TRUE
   )
 })

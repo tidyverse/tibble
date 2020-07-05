@@ -4,11 +4,8 @@
 \name{reexports}
 \alias{reexports}
 \alias{has_name}
-\alias{reexports}
 \alias{obj_sum}
-\alias{reexports}
 \alias{type_sum}
-\alias{reexports}
 \alias{is_vector_s3}
 \title{Objects exported from other packages}
 \keyword{internal}

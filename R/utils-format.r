@@ -1,42 +1,99 @@
-#' Tools for describing matrices
+#' Printing tibbles
 #'
-#' @param x Object to show.
-#' @param n Number of rows to show. If `NULL`, the default, will print
-#'   all rows if less than option `tibble.print_max`. Otherwise, will
-#'   print `tibble.print_min` rows.
-#' @param width Width of text output to generate. This defaults to NULL, which
-#'   means use `getOption("tibble.width")` or (if also NULL)
-#'   `getOption("width")`; the latter displays only the columns that
-#'   fit on one screen. You can also set `options(tibble.width = Inf)` to
-#'   override this default and always print all columns.
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#'
+#' One of the main features of the `tbl_df` class is the printing:
+#'
+#' * Tibbles only print as many rows and columns as fit on one screen,
+#'   supplemented by a summary of the remaining rows and columns.
+#' * Tibble reveals the type of each column, which keeps the user informed about
+#'   whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
+#'
+#' Printing can be tweaked for a one-off call by calling `print()` explicitly
+#' and setting arguments like `n` and `width`. More persistent control is
+#' available by setting the options described below.
+#'
+#' @inheritSection pillar::`pillar-package` Package options
+#' @section Package options:
+#'
+#' Options used by the tibble and pillar packages to format and print `tbl_df`
+#' objects. Used by the formatting workhorse `trunc_mat()` and, therefore,
+#' indirectly, by `print.tbl()`.
+#'
+#' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
+#'   Set to `Inf` to always print all rows.  Default: 20.
+#' * `tibble.print_min`: Number of rows printed if row number threshold is
+#'   exceeded. Default: 10.
+#' * `tibble.width`: Output width. Default: `NULL` (use `width` option).
+#' * `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
+#'   Default: 100.
+#'
+#' @param x Object to format or print.
+#' @param ... Other arguments passed on to individual methods.
+#' @param n Number of rows to show. If `NULL`, the default, will print all rows
+#'   if less than option `tibble.print_max`. Otherwise, will print
+#'   `tibble.print_min` rows.
+#' @param width Width of text output to generate. This defaults to `NULL`, which
+#'   means use `getOption("tibble.width")` or (if also `NULL`)
+#'   `getOption("width")`; the latter displays only the columns that fit on one
+#'   screen. You can also set `options(tibble.width = Inf)` to override this
+#'   default and always print all columns.
 #' @param n_extra Number of extra columns to print abbreviated information for,
-#'   if the width is too small for the entire tibble. If `NULL`, the
-#'   default, will print information about at most `tibble.max_extra_cols`
-#'   extra columns.
-#' @seealso \link{tibble-package}
-#' @keywords internal
+#'   if the width is too small for the entire tibble. If `NULL`, the default,
+#'   will print information about at most `tibble.max_extra_cols` extra columns.
 #' @examples
-#' trunc_mat(mtcars)
-#'
 #' print(as_tibble(mtcars))
 #' print(as_tibble(mtcars), n = 1)
 #' print(as_tibble(mtcars), n = 3)
-#' print(as_tibble(mtcars), n = 100)
 #'
-#' if (!requireNamespace("nycflights13", quietly = TRUE))
-#'   stop("Please install the nycflights13 package to run the rest of this example")
+#' print(as_tibble(iris), n = 100)
 #'
-#' print(nycflights13::flights, n_extra = 2)
-#' print(nycflights13::flights, width = Inf)
+#' print(mtcars, width = 10)
+#'
+#' mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
+#' print(mtcars2, n = 25, n_extra = 3)
+#'
+#' trunc_mat(mtcars)
+#'
+#' if (requireNamespace("nycflights13", quietly = TRUE)) {
+#'   print(nycflights13::flights, n_extra = 2)
+#'   print(nycflights13::flights, width = Inf)
+#' }
 #' @name formatting
 NULL
+
+#' @rdname formatting
+#' @export
+print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+  invisible(x)
+}
+
+#' Legacy help page for compatibility with existing packages
+#'
+#' @description
+#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("archived")}
+#'
+#' Please see [print.tbl()] for the print method for tibbles.
+#'
+#' @name print.tbl_df
+#' @keywords internal
+NULL
+
+#' @rdname formatting
+#' @export
+format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
+  format(mat)
+}
 
 #' @export
 #' @rdname formatting
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n)) {
+  if (is_null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -45,7 +102,16 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   }
   n_extra <- n_extra %||% tibble_opt("max_extra_cols")
 
-  df <- as.data.frame(head(x, n))
+  if (is.na(rows)) {
+    df <- as.data.frame(head(x, n + 1))
+    if (nrow(df) <= n) {
+      rows <- nrow(df)
+    } else {
+      df <- df[seq_len(n), , drop = FALSE]
+    }
+  } else {
+    df <- as.data.frame(head(x, n))
+  }
 
   shrunk <- shrink_mat(df, rows, n, star = has_rownames(x))
   trunc_info <- list(
@@ -97,7 +163,8 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   } else {
     header <- paste0(
       justify(
-        paste0(names2(named_header), ":"), right = FALSE, space = "\u00a0"
+        paste0(names2(named_header), ":"),
+        right = FALSE, space = "\u00a0"
       ),
       # We add a space after the NBSP inserted by justify()
       # so that wrapping occurs at the right location for very narrow outputs
@@ -192,7 +259,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0("... ", x)
+    paste0(cli::symbol$ellipsis, " ", x)
   } else {
     character()
   }
@@ -292,31 +359,6 @@ tibble_glimpse_width <- function(width) {
   }
 
   getOption("width")
-}
-
-pluralise_msg <- function(message, objects) {
-  paste0(pluralise(message, objects), format_n(objects))
-}
-
-pluralise <- function(message, objects) {
-  pluralise_n(message, length(objects))
-}
-
-pluralise_n <- function(message, n) {
-  stopifnot(n >= 0)
-  if (n == 1) {
-    # strip [, unless there is space in between
-    message <- gsub("\\[([^\\] ]+)\\]", "\\1", message, perl = TRUE)
-    # remove ( and its content, unless there is space in between
-    message <- gsub("\\([^\\) ]+\\)", "", message, perl = TRUE)
-  } else {
-    # strip (, unless there is space in between
-    message <- gsub("\\(([^\\) ]+)\\)", "\\1", message, perl = TRUE)
-    # remove [ and its content, unless there is space in between
-    message <- gsub("\\[[^\\] ]+\\]\\s*", "", message, perl = TRUE)
-  }
-
-  message
 }
 
 mult_sign <- function() {

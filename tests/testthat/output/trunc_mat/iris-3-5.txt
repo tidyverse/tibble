@@ -4,7 +4,7 @@
 #   x
 #   5
 <body created by pillar>
-# ...
+# …
 #   with
 #   147
 #   more

@@ -1,0 +1,3 @@
+# CODEOWNERS for tibble
+# https://www.tidyverse.org/development/understudies
+.github/CODEOWNERS @krlmlr @hadley
