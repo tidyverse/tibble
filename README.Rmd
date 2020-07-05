@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -16,7 +18,7 @@ knitr::opts_chunk$set(
 
 [![Build Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/tibble) 
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/tibble/master.svg)](https://codecov.io/github/tidyverse/tibble?branch=master)
+[![codecov](https://codecov.io/gh/krlmlr/bindrcpp/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/bindrcpp)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 
 ## Overview

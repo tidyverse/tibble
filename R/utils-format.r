@@ -97,7 +97,7 @@ shrink_mat <- function(df, width, rows, n, star) {
   w <- pmax(
     pmax(
       nchar_width(values),
-      nchar_width(tick_non_syntactic(names))
+      nchar_width(names)
     ),
     nchar_width(encodeString(c("", classes)))
   )

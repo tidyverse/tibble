@@ -1,3 +1,13 @@
+# tibble 1.3.2 (2017-05-23)
+
+## Bug fixes
+
+- Fix error in `tidy_names(syntactic = TRUE, quiet = FALSE)` if not all names are fixed (#260, @imanuelcostigan).
+- The column width for non-syntactic columns is computed correctly again (#258).
+- The `print.tbl_df()` method is identical to `print.tbl()`, instead of calling `NextMethod()`, to protect against malformed tibbles that inherit from `"tbl_df"` but not `"tbl"`, as created e.g. by `ungroup()` in dplyr 0.5.0 and earlier.
+- Remove unused import declaration for assertthat.
+
+
 # tibble 1.3.1 (2017-05-16)
 
 ## Bug fixes

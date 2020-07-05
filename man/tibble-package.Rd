@@ -5,7 +5,7 @@
 \alias{tibble-package}
 \title{tibble: Simple Data Frames}
 \description{
-Provides a 'tbl_df' class (the "tibble") that provides
+Provides a 'tbl_df' class (the 'tibble') that provides
 stricter checking and better formatting than the traditional data frame.
 }
 \details{
@@ -72,7 +72,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Romain Francois \email{romain@r-enthusiasts.com} [contributor]
-  \item RStudio [copyright holder, funder]
+  \item RStudio [copyright holder]
 }
 
 }
