@@ -9,3 +9,4 @@
 ^README-.*\.png$
 ^appveyor\.yml$
 ^bench$
+^\.github$
