@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 2.1.1
+Version: 2.1.2
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
@@ -16,26 +16,26 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends: 
     R (>= 3.1.0)
 Imports: 
-    cli (>= 1.0.1),
+    cli,
     crayon (>= 1.3.4),
     fansi (>= 0.4.0),
     methods,
     pillar (>= 1.3.1),
-    pkgconfig (>= 2.0.2),
-    rlang (>= 0.3.1),
+    pkgconfig,
+    rlang (>= 0.3.0),
     utils
 Suggests: 
-    bench (>= 1.0.1),
-    covr (>= 3.2.1),
-    dplyr (>= 0.7.8),
-    htmltools (>= 0.3.6),
-    import (>= 1.1.0),
-    knitr (>= 1.21),
-    mockr (>= 0.1),
-    nycflights13 (>= 1.0.0),
-    rmarkdown (>= 1.11),
-    testthat (>= 2.0.1),
-    withr (>= 2.1.2)
+    bench,
+    covr,
+    dplyr,
+    htmltools,
+    import,
+    knitr,
+    mockr,
+    nycflights13,
+    rmarkdown,
+    testthat,
+    withr
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: yes
