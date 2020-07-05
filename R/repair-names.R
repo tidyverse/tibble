@@ -13,7 +13,8 @@
 #' @examples
 #' repair_names(list(3, 4, 5)) # works for lists, too
 #' repair_names(mtcars) # a no-op
-#' tbl <- as_data_frame(structure(list(3, 4, 5), class = "data.frame"))
+#' tbl <- as_tibble(structure(list(3, 4, 5), class = "data.frame"),
+#'                  validate = FALSE)
 #' repair_names(tbl)
 repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0) {

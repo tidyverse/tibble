@@ -2,24 +2,21 @@
 % Please edit documentation in R/frame-data.R
 \name{frame_data}
 \alias{frame_data}
-\alias{tibble}
 \title{Row-wise tibble creation}
 \usage{
 frame_data(...)
-
-tibble(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{data_frame}.
+\item{...}{Arguments specifying the structure of a \code{tibble}.
 Variable names should be formulas, and may only appear before the data.}
 }
 \value{
-A \code{\link{tbl_df}}.
+A \code{\link{tibble}}.
 }
 \description{
-Create \code{\link{data_frame}}s laying out the data in rows, rather than
+Create \code{\link{tibble}}s laying out the data in rows, rather than
 in columns. This is useful for small tables of data where readability is
-important.
+important.  Please see \link{tibble-package} for a general introduction.
 }
 \examples{
 frame_data(

@@ -1,12 +1,12 @@
 #' Row-wise tibble creation
 #'
-#' Create \code{\link{data_frame}}s laying out the data in rows, rather than
+#' Create \code{\link{tibble}}s laying out the data in rows, rather than
 #' in columns. This is useful for small tables of data where readability is
-#' important.
+#' important.  Please see \link{tibble-package} for a general introduction.
 #'
-#' @param ... Arguments specifying the structure of a \code{data_frame}.
+#' @param ... Arguments specifying the structure of a \code{tibble}.
 #'   Variable names should be formulas, and may only appear before the data.
-#' @return A \code{\link{tbl_df}}.
+#' @return A \code{\link{tibble}}.
 #' @export
 #' @examples
 #' frame_data(
@@ -34,7 +34,7 @@ frame_data <- function(...) {
     if (i > length(dots)) {
       out <- rep(list(logical()), length(frame_names))
       names(out) <- frame_names
-      return(as_data_frame(out))
+      return(as_tibble(out))
     }
 
     el <- dots[[i]]
@@ -45,14 +45,12 @@ frame_data <- function(...) {
       break
 
     if (length(el) != 2) {
-      stop("expected a column name with a single argument; e.g. '~ name'",
-        call. = FALSE)
+      stopc("expected a column name with a single argument; e.g. '~ name'")
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      stop("expected a symbol or string denoting a column name",
-        call. = FALSE)
+      stopc("expected a symbol or string denoting a column name")
     }
 
     frame_names <- c(frame_names, as.character(el[[2]]))
@@ -61,7 +59,7 @@ frame_data <- function(...) {
   }
 
   if (!length(frame_names)) {
-    stop("no column names detected in 'frame_data()' call", call. = FALSE)
+    stopc("no column names detected in 'frame_data()' call")
   }
 
   frame_rest <- dots[i:length(dots)]
@@ -72,13 +70,12 @@ frame_data <- function(...) {
   # structure.
   frame_ncol <- length(frame_names)
   if (n_elements %% frame_ncol != 0) {
-    stop(
+    stopc(
       sprintf(
         "invalid 'frame_data()' specification: had %s elements and %s columns",
         n_elements,
         frame_ncol
-      ),
-      call. = FALSE
+      )
     )
   }
 
@@ -94,9 +91,5 @@ frame_data <- function(...) {
 
   # Create a tbl_df and return it
   names(frame_col) <- frame_names
-  as_data_frame(frame_col)
+  as_tibble(frame_col)
 }
-
-#' @rdname frame_data
-#' @export
-tibble <- frame_data

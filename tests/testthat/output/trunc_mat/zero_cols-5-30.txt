@@ -1,2 +1,1 @@
-Source: local data frame [150 x 0]
-
+# A tibble: 150 x 0

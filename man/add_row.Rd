@@ -19,7 +19,7 @@ data frame row-by-row.
 }
 \examples{
 # add_row ---------------------------------
-df <- data_frame(x = 1:3, y = 3:1)
+df <- tibble(x = 1:3, y = 3:1)
 
 add_row(df, x = 4, y = 0)
 

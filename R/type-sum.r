@@ -1,9 +1,15 @@
 #' Provide a succinct summary of an object
 #'
+#' @description
 #' \code{type_sum} gives a brief summary of object type. Objects that commonly
 #' occur in a data frame should return a string with four or less characters.
+#'
 #' \code{obj_sum} also includes the size of the object if \code{is_s3_vector}
 #' is \code{TRUE}.
+#'
+#' \code{tbl_sum} gives a brief textual description of a table-like object,
+#' which should include the dimensions, the data source, and possible grouping
+#' (for dplyr).  The default implementation forwards to \code{obj_sum}
 #'
 #' @param x an object to summarise. Generally only methods of atomic vectors
 #'   and variants have been implemented.
@@ -23,9 +29,21 @@ obj_sum.default <- function(x) {
 }
 
 #' @export
+obj_sum.list <- function(x) {
+  vapply(x, obj_sum.default, character(1L))
+}
+
+#' @export
+obj_sum.POSIXlt <- function(x) {
+  rep("POSIXlt", length(x))
+}
+
+#' @export
 #' @rdname obj_sum
 type_sum <- function(x) UseMethod("type_sum")
 
+#' @export
+type_sum.ordered <- function(x) "ord"
 #' @export
 type_sum.factor <- function(x) "fctr"
 #' @export
@@ -34,6 +52,8 @@ type_sum.POSIXt <- function(x) "time"
 type_sum.Date <- function(x) "date"
 #' @export
 type_sum.data.frame <- function(x) class(x)[[1]]
+#' @export
+type_sum.tbl_df <- function(x) "tibble"
 #' @export
 type_sum.default <- function(x) {
   if (!is.object(x)) {
@@ -48,22 +68,56 @@ type_sum.default <- function(x) {
       typeof(x)
     )
   } else if (!isS4(x)) {
-    paste0("S3: ", paste0(class(x), collapse = "/"))
+    paste0("S3: ", class(x)[[1]])
   } else {
     paste0("S4: ", methods::is(x)[[1]])
   }
 }
 
+#' @rdname obj_sum
+#' @export
+tbl_sum <- function(x) UseMethod("tbl_sum", x)
+
+#' @export
+tbl_sum.default <- function(x) obj_sum(x)
+
+#' @export
+tbl_sum.tbl_df <- function(x) {
+  paste0("A tibble: ", dim_desc(x))
+}
+
+# FIXME: This belongs in dplyr, but can only be added there once tibble has been
+# updated.
+# nocov start
+#' @export
+tbl_sum.grouped_df <- function(x) {
+  NULL
+}
+
+#' @export
+tbl_sum.tbl_sql <- function(x) {
+  NULL
+}
+# nocov end
+
+dim_desc <- function(x) {
+  dim <- dim(x) %||% length(x)
+  format_dim <- vapply(dim, big_mark, character(1))
+  format_dim[is.na(dim)] <- "??"
+  paste0(format_dim, collapse = " x ")
+}
+
 size_sum <- function(x) {
   if (!is_vector_s3(x)) return("")
 
-  dim <- dim(x) %||% length(x)
-  paste0(" [", paste0(dim, collapse = ","), "]" )
+  paste0(" [", dim_desc(x), "]" )
 }
 
 #' @export
 #' @rdname obj_sum
 is_vector_s3 <- function(x) UseMethod("is_vector_s3")
+#' @export
+is_vector_s3.ordered <- function(x) TRUE
 #' @export
 is_vector_s3.factor <- function(x) TRUE
 #' @export

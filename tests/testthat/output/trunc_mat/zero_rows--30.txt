@@ -1,4 +1,3 @@
-Source: local data frame [0 x 2]
-
-Variables not shown: a <chr>,
-  b <lgl>.
+# A tibble: 0 x 2
+# ... with 2 variables:
+#   a <chr>, b <lgl>

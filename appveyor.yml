@@ -12,6 +12,11 @@ install:
 
 # Adapt as necessary starting from here
 
+branches:
+  only:
+    - master
+    - production
+
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1

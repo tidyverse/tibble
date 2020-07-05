@@ -15,7 +15,7 @@
 #'   result in an \code{if} expression.
 #' @examples
 #' scramble <- function(x) x[sample(nrow(x)), sample(ncol(x))]
-#' mtcars_df <- as_data_frame(mtcars)
+#' mtcars_df <- as_tibble(mtcars)
 #'
 #' # By default, ordering of rows and columns ignored
 #' all.equal(mtcars_df, scramble(mtcars_df))
@@ -25,8 +25,8 @@
 #' all.equal(mtcars_df, scramble(mtcars_df), ignore_row_order = FALSE)
 #'
 #' # By default all.equal is sensitive to variable differences
-#' df1 <- data_frame(x = "a")
-#' df2 <- data_frame(x = factor("a"))
+#' df1 <- tibble(x = "a")
+#' df2 <- tibble(x = factor("a"))
 #' all.equal(df1, df2)
 #' # But you can request to convert similar types
 #' all.equal(df1, df2, convert = TRUE)
@@ -34,25 +34,29 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
                       ignore_row_order = TRUE, convert = FALSE, ...) {
 
   if (!identical(class(target), class(current))) {
-    return(paste0("Different types: x ", paste(class(target), collapse = ", "),
-                  ", y ", paste(class(current), collapse = ", ")))
+    return(paste0("Different types: ",
+                  "x ", format_n(class(target)), ", ",
+                  "y ", format_n(class(current))))
   }
   if (nrow(target) != nrow(current)) {
     return("Different number of rows")
   }
   extra_x <- setdiff(names(target), names(current))
   if (length(extra_x) > 0L) {
-    return(paste0("Cols in x but not y: ", paste(extra_x, collapse = ", ")))
+    return(paste0("Cols in x but not y: ", format_n(extra_x)))
   }
   extra_y <- setdiff(names(current), names(target))
   if (length(extra_y) > 0L) {
-    return(paste0("Cols in y but not x: ", paste(extra_y, collapse = ", ")))
+    return(paste0("Cols in y but not x: ", format_n(extra_y)))
   }
   if (!ignore_col_order && names(target) != names(current)) {
     return("Column names same but in different order")
   }
 
-  current <- `rownames<-`(current[names(target)], rownames(current))
+  current <- as_tibble(remove_rownames(current))
+  target <- as_tibble(remove_rownames(target))
+
+  current <- current[names(target)]
 
   types <- unlist(mapply(
     function(x, y) {
@@ -66,7 +70,7 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
   if (length(types) > 0L) {
     types <- paste0("Incompatible type for column ", names(types), ": ", types)
     if (convert) {
-      lapply(types, warning, call. = FALSE)
+      lapply(types, warningc)
     } else {
       return(types)
     }

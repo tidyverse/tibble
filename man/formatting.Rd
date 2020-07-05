@@ -8,7 +8,7 @@
 \usage{
 \method{print}{tbl_df}(x, ..., n = NULL, width = NULL)
 
-trunc_mat(x, n = NULL, width = NULL, n_extra = 100)
+trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
 \arguments{
 \item{x}{Object to show.}
@@ -29,10 +29,10 @@ Tools for describing matrices
 \examples{
 trunc_mat(mtcars)
 
-print(tbl_df(mtcars))
-print(tbl_df(mtcars), n = 1)
-print(tbl_df(mtcars), n = 3)
-print(tbl_df(mtcars), n = 100)
+print(as_tibble(mtcars))
+print(as_tibble(mtcars), n = 1)
+print(as_tibble(mtcars), n = 3)
+print(as_tibble(mtcars), n = 100)
 
 }
 \seealso{

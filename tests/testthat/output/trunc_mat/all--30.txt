@@ -1,9 +1,10 @@
-Source: local data frame [2 x 8]
-
+# A tibble: 3 x 9
       a     b     c     d
   <dbl> <int> <lgl> <chr>
 1   1.0     1  TRUE     a
 2   2.5     2 FALSE     b
-Variables not shown: e
-  <fctr>, f <date>, g <time>,
-  h <list>.
+3    NA    NA    NA  <NA>
+# ... with 5 more variables:
+#   e <fctr>, f <date>,
+#   g <time>, h <list>,
+#   i <list>

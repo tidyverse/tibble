@@ -1,6 +1,6 @@
 Package: tibble
 Encoding: UTF-8
-Version: 1.0
+Version: 1.1
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class that offers better checking and
     printing capabilities than traditional data frames.
@@ -22,7 +22,7 @@ Imports:
 Suggests:
     testthat,
     withr,
-    knitr,
+    knitr (>= 1.5.32),
     rmarkdown,
     Lahman (>= 3.0.1),
     microbenchmark

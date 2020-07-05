@@ -1,19 +1,23 @@
-Source: local data frame [150 x 5]
-
-   Sepal.Length
-          <dbl>
-1           5.1
-2           4.9
-3           4.7
-..          ...
-Variables
-  not
-  shown:
-  Sepal.Width
-  <dbl>,
-  Petal.Length
-  <dbl>,
-  Petal.Width
-  <dbl>,
-  Species
-  <fctr>.
+# A
+#   tibble:
+#   150
+#   x
+#   5
+  Sepal.Length
+         <dbl>
+1          5.1
+2          4.9
+3          4.7
+# ...
+#   with
+#   147
+#   more
+#   rows,
+#   and
+#   4
+#   more
+#   variables:
+#   Sepal.Width <dbl>,
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fctr>

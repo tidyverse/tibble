@@ -3,12 +3,15 @@
 \name{obj_sum}
 \alias{is_vector_s3}
 \alias{obj_sum}
+\alias{tbl_sum}
 \alias{type_sum}
 \title{Provide a succinct summary of an object}
 \usage{
 obj_sum(x)
 
 type_sum(x)
+
+tbl_sum(x)
 
 is_vector_s3(x)
 }
@@ -19,8 +22,13 @@ and variants have been implemented.}
 \description{
 \code{type_sum} gives a brief summary of object type. Objects that commonly
 occur in a data frame should return a string with four or less characters.
+
 \code{obj_sum} also includes the size of the object if \code{is_s3_vector}
 is \code{TRUE}.
+
+\code{tbl_sum} gives a brief textual description of a table-like object,
+which should include the dimensions, the data source, and possible grouping
+(for dplyr).  The default implementation forwards to \code{obj_sum}
 }
 \examples{
 obj_sum(1:10)

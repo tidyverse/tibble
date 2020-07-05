@@ -1,3 +1,79 @@
+# tibble 1.1 (2016-07-01)
+
+Follow-up release.
+
+## Breaking changes
+
+- `tibble()` is no longer an alias for `frame_data()` (#82).
+- Remove `tbl_df()` (#57).
+- `$` returns `NULL` if column not found, without partial matching. A warning is given (#109).
+- `[[` returns `NULL` if column not found (#109).
+
+
+## Output
+
+- Reworked output: More concise summary (begins with hash `#` and contains more text (#95)), removed empty line, showing number of hidden rows and columns (#51). The trailing metadata also begins with hash `#` (#101). Presence of row names is indicated by a star in printed output (#72).
+- Format `NA` values in character columns as `<NA>`, like `print.data.frame()` does (#69).
+- The number of printed extra cols is now an option (#68, @lionel-).
+- Computation of column width properly handles wide (e.g., Chinese) characters, tests still fail on Windows (#100).
+- `glimpse()` shows nesting structure for lists and uses angle brackets for type (#98).
+- Tibbles with `POSIXlt` columns can be printed now, the text `<POSIXlt>` is shown as placeholder to encourage usage of `POSIXct` (#86).
+- `type_sum()` shows only topmost class for S3 objects.
+
+
+## Error reporting
+
+- Strict checking of integer and logical column indexes. For integers, passing a non-integer index or an out-of-bounds index raises an error. For logicals, only vectors of length 1 or `ncol` are supported. Passing a matrix or an array now raises an error in any case (#83).
+- Warn if setting non-`NULL` row names (#75).
+- Consistently surround variable names with single quotes in error messages.
+- Use "Unknown column 'x'" as error message if column not found, like base R (#94).
+- `stop()` and `warning()` are now always called with `call. = FALSE`.
+
+
+## Coercion
+
+- The `.Dim` attribute is silently stripped from columns that are 1d matrices (#84).
+- Converting a tibble without row names to a regular data frame does not add explicit row names.
+- `as_tibble.data.frame()` preserves attributes, and uses `as_tibble.list()` to calling overriden methods which may lead to endless recursion.
+
+
+## New features
+
+- New `has_name() (#102).
+- Prefer `tibble()` and `as_tibble()` over `data_frame()` and `as_data_frame()` in code and documentation (#82).
+- New `is.tibble()` and `is_tibble()` (#79).
+- New `enframe()` that converts vectors to two-column tibbles (#31, #74).
+- `obj_sum()` and `type_sum()` show `"tibble"` instead of `"tbl_df"` for tibbles (#82).
+- `as_tibble.data.frame()` gains `validate` argument (as in `as_tibble.list()`), if `TRUE` the input is validated.
+- Implement `as_tibble.default()` (#71, hadley/dplyr#1752).
+- `has_rownames()` supports arguments that are not data frames.
+
+
+## Bug fixes
+
+- Two-dimensional indexing with `[[` works (#58, #63).
+- Subsetting with empty index (e.g., `x[]`) also removes row names.
+
+
+# Documentation
+
+- Document behavior of `as_tibble.tbl_df()` for subclasses (#60).
+- Document and test that subsetting removes row names.
+
+
+## Internal
+
+- Don't rely on `knitr` internals for testing (#78).
+- Fix compatibility with `knitr` 1.13 (#76).
+- Enhance `knit_print()` tests.
+- Provide default implementation for `tbl_sum.tbl_sql()` and `tbl_sum.tbl_grouped_df()` to allow `dplyr` release before a `tibble` release.
+- Explicit tests for `format_v()` (#98).
+- Test output for `NULL` value of `tbl_sum()`.
+- Test subsetting in all variants (#62).
+- Add missing test from dplyr.
+- Use new `expect_output_file()` from `testthat`.
+
+
 Version 1.0 (2016-03-21)
 ===
 

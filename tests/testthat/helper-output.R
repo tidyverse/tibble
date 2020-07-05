@@ -1,23 +1,18 @@
 output_file <- function(filename) file.path("output", filename)
 
-try_read_output <- function(filename) {
-  filepath <- output_file(filename)
-  if (!file.exists(filepath))
-    return(character())
-  readLines(filepath)
+expect_output_file_rel <- function(x, filename) {
+  expect_output_file(x, output_file(filename), update = TRUE)
 }
 
-write_output <- function(text, filename) {
-  tryCatch(
-    writeLines(text, output_file(filename)),
-    error = function(e) NULL
+expect_output_knit <- function(knit, filename, envir = parent.frame()) {
+  expect_asis_output_with_cacheable(substitute(knit), envir)
+  expect_output_file_rel(cat(knit), filename)
+}
+
+expect_asis_output_with_cacheable <- function(knit_call, envir) {
+  asis_output_args <- with_mock(
+    `knitr::asis_output` = function(...) list(...),
+    eval(knit_call, envir = envir)
   )
-}
-
-expect_output_identical <- function(x, filename) {
-  expr <- substitute(x)
-  out <- eval(bquote(expect_equal(
-    capture.output(.(expr)),
-    try_read_output(.(filename)))), parent.frame())
-  write_output(out, filename)
+  expect_true(asis_output_args[["cacheable"]])
 }
