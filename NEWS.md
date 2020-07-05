@@ -1,3 +1,9 @@
+# tibble 2.1.2
+
+- Relax version requirements.
+- Fix test failing after pillar upgrade.
+
+
 # tibble 2.1.1
 
 - Three dots are used even for `"unique"` name repair (#566).

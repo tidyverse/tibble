@@ -404,6 +404,7 @@ test_that("new_tibble checks", {
   )
   expect_error(
     new_tibble(list(a = 1)),
+    class = "defunctError",
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )
