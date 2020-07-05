@@ -59,61 +59,6 @@ cat_line <- function(...) {
   cat(paste0(..., "\n"), sep = "")
 }
 
-# FIXME: Also exists in pillar, do we need to export?
-tick <- function(x) {
-  ifelse(is.na(x), "NA", encodeString(x, quote = "`"))
-}
-
-is_syntactic <- function(x) {
-  ret <- (make_syntactic(x) == x)
-  ret[is.na(x)] <- FALSE
-  ret
-}
-
-tick_if_needed <- function(x) {
-  needs_ticks <- !is_syntactic(x)
-  x[needs_ticks] <- tick(x[needs_ticks])
-  x
-}
-
-## from rematch2, except we don't add tbl_df or tbl classes to the return value
-re_match <- function(text, pattern, perl = TRUE, ...) {
-
-  stopifnot(is.character(pattern), length(pattern) == 1, !is.na(pattern))
-  text <- as.character(text)
-
-  match <- regexpr(pattern, text, perl = perl, ...)
-
-  start  <- as.vector(match)
-  length <- attr(match, "match.length")
-  end    <- start + length - 1L
-
-  matchstr <- substring(text, start, end)
-  matchstr[ start == -1 ] <- NA_character_
-
-  res <- data.frame(
-    stringsAsFactors = FALSE,
-    .text = text,
-    .match = matchstr
-  )
-
-  if (!is.null(attr(match, "capture.start"))) {
-
-    gstart  <- attr(match, "capture.start")
-    glength <- attr(match, "capture.length")
-    gend    <- gstart + glength - 1L
-
-    groupstr <- substring(text, gstart, gend)
-    groupstr[ gstart == -1 ] <- NA_character_
-    dim(groupstr) <- dim(gstart)
-
-    res <- cbind(groupstr, res, stringsAsFactors = FALSE)
-  }
-
-  names(res) <- c(attr(match, "capture.names"), ".text", ".match")
-  res
-}
-
 is_rstudio <- function() {
   !is.na(Sys.getenv("RSTUDIO", unset = NA))
 }

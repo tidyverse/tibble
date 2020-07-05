@@ -19,9 +19,13 @@ download <- function(pkg, available, ...) {
 }
 
 get_i_lib <- function() {
-  path <- "revdep/libs/cran"
-  fs::dir_create(path)
-  fs::path_real(path)
+  # In a private library
+  # path <- "revdep/libs/cran"
+  # fs::dir_create(path)
+  # fs::path_real(path)
+
+  # In a Rocker-based setup (private library doesn't work there?)
+  .libPaths()[[1]]
 }
 
 install <- function(pkg, path, ...) {
@@ -33,11 +37,13 @@ install <- function(pkg, path, ...) {
 
   lib <- get_i_lib()
 
-  withr::with_envvar(
-    c(R_LIBS_USER = lib),
-    # Suppress warnings about loaded packages
-    retry(system(paste0("R CMD INSTALL ", path)))
-  )
+  if (!dir.exists(file.path(lib, pkg))) {
+    withr::with_envvar(
+      c(R_LIBS_USER = lib),
+      # Suppress warnings about loaded packages
+      retry(system(paste0("R CMD INSTALL ", path)))
+    )
+  }
   stopifnot(dir.exists(file.path(lib, pkg)))
 
   structure(
@@ -87,10 +93,18 @@ get_deps <- function(i_pkg) {
 }
 
 check <- function(tarball, lib, ...) {
-  pkgs <- c(...)
+  pkgs <- list(...)
+  is_error <- map_lgl(pkgs, inherits, "try_error")
+
   check_lib <- fs::file_temp("checklib")
-  create_lib(pkgs, check_lib)
-  withr::with_libpaths(c(lib, check_lib), rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(3600)))
+  create_lib(pkgs[!is_error], check_lib)
+  withr::with_envvar(
+    c("_R_CHECK_FORCE_SUGGESTS_" = "0"),
+    withr::with_libpaths(
+      c(lib, check_lib),
+      rcmdcheck::rcmdcheck(tarball, quiet = TRUE, timeout = ignore(600))
+    )
+  )
 }
 
 compare <- function(old, new) {
@@ -154,7 +168,7 @@ get_plan <- function() {
 
   create_dep_list <- function(deps, base_pkgs) {
     valid_deps <- setdiff(deps, base_pkgs)
-    syms(glue("i_{valid_deps}"))
+    map(syms(glue("i_{valid_deps}")), ~ expr(try(!!.)))
   }
 
   plan_install <-
@@ -254,7 +268,7 @@ get_plan <- function() {
 
 plan <- get_plan()
 
-clean("compare_all")
+#clean("compare_all")
 
 #trace(conditionCall.condition, recover)
 make(

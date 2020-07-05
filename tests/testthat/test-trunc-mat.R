@@ -16,7 +16,7 @@ test_that("print() returns output invisibly", {
 })
 
 test_that("trunc_mat output matches known output", {
-  skip_on_os("windows")
+  skip_on_non_utf8_locale()
   skip_if_not_installed("mockr")
   testthat::skip_if(getRversion() < "3.2")
 
@@ -133,7 +133,7 @@ test_that("trunc_mat output matches known output", {
 })
 
 test_that("trunc_mat for POSIXlt columns (#86)", {
-  skip_on_os("windows")
+  skip_on_non_utf8_locale()
 
   df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
   df$y <- as.POSIXlt(df$x)
@@ -145,7 +145,7 @@ test_that("trunc_mat for POSIXlt columns (#86)", {
 })
 
 test_that("trunc_mat for wide-character columns (#100)", {
-  skip_on_os("windows") # capture_output_lines() forces native encoding
+  skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
 
   x <- c("\u6210\u4ea4\u65e5\u671f", "\u5408\u540c\u5f55\u5165\u65e5\u671f")
   df <- setNames(tibble(1:3, 4:6), x)
@@ -157,7 +157,7 @@ test_that("trunc_mat for wide-character columns (#100)", {
 })
 
 test_that("trunc_mat for wide-character columns in non-UTF-8 locale", {
-  skip_on_os("windows") # capture_output_lines() forces native encoding
+  skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
 
   with_non_utf8_locale({
     x <- c("\u6210\u4ea4\u65e5\u671f", "\u5408\u540c\u5f55\u5165\u65e5\u671f")

@@ -1,9 +1,9 @@
-Hotfix for two problems discovered after release of tibble 2.0.0.
+Fix for a problem with the new name repair, discovered after release of tibble 2.0.1.
 
 ## Test environments
 
-* local install, R 3.5.1
-* ubuntu 14.04 (on travis-ci), R 3.1, R 3.2, R-oldrel, R-release and R-devel
+* local install, R 3.5.2
+* ubuntu 14.04 (on travis-ci), R 3.1, R 3.2, R 3.3, R-oldrel, R-release and R-devel
 * win-builder
 * r-hub
 
@@ -14,4 +14,4 @@ Hotfix for two problems discovered after release of tibble 2.0.0.
 
 ## Reverse dependencies
 
-We checked all direct reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.  Check results were identical, except for codemetar (unrelated to this change, the package accesses a remote API) and pkgcache (which is broken by tibble 2.0.0 and fixed with the release at hand).
+We checked all direct and indirect reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.  Check results were identical, except for readxl (update already on CRAN) and ggstatsplot (already fixed in the development version: https://github.com/IndrajeetPatil/ggstatsplot/issues/183).

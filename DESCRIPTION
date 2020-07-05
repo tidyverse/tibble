@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 2.0.1
+Version: 2.1.1
 Authors@R: c(
     person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
@@ -47,6 +47,7 @@ Collate:
     'check-names.R'
     'compat-lazyeval.R'
     'compat-lifecycle.R'
+    'compat-name-repair.R'
     'compat-purrr.R'
     'tribble.R'
     'deprecated.R'
