@@ -53,6 +53,7 @@ make_syntactic <- function(name, syntactic) {
   blank <- name == ""
   fix_syntactic <- (name != "") & !is_syntactic(name)
   name[fix_syntactic] <- make.names(name[fix_syntactic])
+  name
 }
 
 append_pos <- function(name) {
