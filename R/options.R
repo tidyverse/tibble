@@ -27,12 +27,12 @@ tibble_opt <- function(x, dplyr = TRUE) {
 }
 
 tibble_width <- function(width) {
-  if (!is_null(width)) {
+  if (!is.null(width)) {
     return(width)
   }
 
   width <- tibble_opt("width")
-  if (!is_null(width)) {
+  if (!is.null(width)) {
     return(width)
   }
 
@@ -40,12 +40,12 @@ tibble_width <- function(width) {
 }
 
 tibble_glimpse_width <- function(width) {
-  if (!is_null(width)) {
+  if (!is.null(width)) {
     return(width)
   }
 
   width <- tibble_opt("width")
-  if (!is_null(width) && is.finite(width)) {
+  if (!is.null(width) && is.finite(width)) {
     return(width)
   }
 

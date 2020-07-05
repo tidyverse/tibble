@@ -1,7 +1,7 @@
 #' Tibble constructor and validator
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses

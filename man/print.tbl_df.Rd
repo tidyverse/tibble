@@ -4,7 +4,7 @@
 \alias{print.tbl_df}
 \title{Legacy help page for compatibility with existing packages}
 \description{
-\lifecycle{superseded}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#superseded'><img src='figures/lifecycle-superseded.svg' alt='Superseded lifecycle'></a>}}{\strong{Superseded}}
 
 Please see \code{\link[=print.tbl]{print.tbl()}} for the print method for tibbles.
 }

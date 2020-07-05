@@ -19,7 +19,7 @@ tibble_row(
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
+processed with \code{\link[rlang:nse-defuse]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.

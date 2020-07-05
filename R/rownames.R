@@ -107,7 +107,7 @@ column_to_rownames <- function(.data, var = "rowname") {
 
 #' @export
 `row.names<-.tbl_df` <- function(x, value) {
-  if (!is_null(value)) {
+  if (!is.null(value)) {
     warn("Setting row names on a tibble is deprecated.")
   }
   NextMethod()

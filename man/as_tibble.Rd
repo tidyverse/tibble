@@ -86,7 +86,7 @@ into this column and the \code{row.names} attribute is deleted.
 Read more in \link{rownames}.
 }}
 
-\item{_n, validate}{\lifecycle{soft-deprecated}
+\item{_n, validate}{\ifelse{html}{\figure{lifecycle-soft-deprecated.svg}{options: alt='Soft-deprecated lifecycle'}}{\strong{Soft-deprecated}}
 
 For compatibility only, do not use for new code.}
 
@@ -95,7 +95,7 @@ For compatibility only, do not use for new code.}
 \item{column_name}{Name of the column.}
 }
 \description{
-\lifecycle{maturing}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
@@ -107,7 +107,7 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
-\item \code{\link[methods:matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
+\item \code{\link[methods:StructureClasses]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
@@ -115,7 +115,7 @@ that implements tibble's treatment of \link{rownames}.
 \code{as_tibble_row()} converts a vector to a tibble with one row.
 If the input is a list, all elements must have length one.
 
-\code{as_tibble_column()} converts a vector to a tibble with one column.
+\code{as_tibble_col()} converts a vector to a tibble with one column.
 }
 \section{Row names}{
 

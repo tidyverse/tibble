@@ -1,7 +1,7 @@
 #' View an object
 #'
 #' @description
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("experimental")`
 #'
 #' Calls [utils::View()] on the input and returns it, invisibly.
 #' If the input is not a data frame, it is processed using a variant of

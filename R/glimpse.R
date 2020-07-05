@@ -1,7 +1,7 @@
 #' Get a glimpse of your data
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `glimpse()` is like a transposed version of `print()`:
 #' columns run down the page, and data runs across.
@@ -28,9 +28,9 @@
 #' @examples
 #' glimpse(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   glimpse(nycflights13::flights)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' glimpse(nycflights13::flights)
+#'
 # Can be overridden in .onLoad()
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")

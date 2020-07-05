@@ -122,7 +122,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     )
     expect_error(
       foo[c(-1, NA)],
-      class = "tibble_error_na_column_index"
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(
@@ -167,7 +167,7 @@ test_that("[.tbl_df is careful about column flags (#83)", {
     )
     expect_error(
       foo[array(TRUE, dim = c(1, 1, 1))],
-      "."
+      class = "vctrs_error_subscript_type"
     )
   })
 })
@@ -789,6 +789,10 @@ verify_output("subsetting.txt", {
   foo[[1:3]]
   foo[[ letters[1:3] ]]
   foo[[TRUE]]
+  foo[[-1]]
+  foo[[1.5]]
+  foo[[3]]
+  foo[[Inf]]
   foo[[mean]]
   foo[[foo]]
 
