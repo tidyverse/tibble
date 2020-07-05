@@ -2,6 +2,7 @@
 % Please edit documentation in R/tbl-df.r, R/utils-format.r
 \name{format.tbl}
 \alias{format.tbl}
+\alias{format.tbl_df}
 \alias{print.tbl}
 \alias{print.tbl_df}
 \alias{formatting}
@@ -9,6 +10,8 @@
 \title{Tools for describing matrices}
 \usage{
 \method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+
+\method{format}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 \method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
