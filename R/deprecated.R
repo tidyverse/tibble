@@ -1,7 +1,7 @@
 #' Deprecated functions
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("deprecated")}
+#' \lifecycle{deprecated}
 #'
 #' Use [tibble()] instead of `data_frame()`.
 #'
@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @name deprecated
 data_frame <- function(...) {
-  signal_soft_deprecated("`data_frame()` is deprecated, use `tibble()`.")
+  deprecate_warn("1.1.0", "data_frame()", "tibble()")
 
   # Unquote-splice to avoid argument matching
   tibble(!!!quos(...))
@@ -22,7 +22,8 @@ data_frame <- function(...) {
 #' @keywords internal
 #' @rdname deprecated
 tibble_ <- function(xs) {
-  signal_soft_deprecated("`tibble_()` and `data_frame_()` are deprecated, use `tibble()` with quasiquotation.")
+  deprecate_soft("2.0.0", "tibble_()", "tibble()",
+    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.')
 
   xs <- compat_lazy_dots(xs, caller_env())
   tibble(!!!xs)
@@ -30,12 +31,19 @@ tibble_ <- function(xs) {
 
 #' @export
 #' @rdname deprecated
-data_frame_ <- tibble_
+data_frame_ <- function(xs) {
+  deprecate_soft("2.0.0", "data_frame_()", "tibble()",
+    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.')
+
+  xs <- compat_lazy_dots(xs, caller_env())
+  tibble(!!!xs)
+}
 
 #' @export
 #' @rdname deprecated
 lst_ <- function(xs) {
-  signal_soft_deprecated("`lst_()` is deprecated, use `lst()` with quasiquotation.")
+  deprecate_soft("2.0.0", "lst_()", "lst()",
+    details = '`lst()` supports dynamic dots, see `?"dyn-dots"`.')
 
   xs <- compat_lazy_dots(xs, caller_env())
   lst(!!!xs)
@@ -48,7 +56,8 @@ lst_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
-  signal_soft_deprecated("`as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).")
+  deprecate_warn("2.0.0", "as_data_frame()", "as_tibble()",
+    details = "The signature and semantics have changed, see `?as_tibble`.")
 
   as_tibble(x, ...)
 }
@@ -56,18 +65,26 @@ as_data_frame <- function(x, ...) {
 #' @export
 #' @rdname deprecated
 as.tibble <- function(x, ...) {
-  signal_soft_deprecated("`as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).")
+  deprecate_warn("2.0.0", "as.tibble()", "as_tibble()",
+    details = "The signature and semantics have changed, see `?as_tibble`.")
 
   as_tibble(x, ...)
 }
 
-#' @include tribble.R
 #' @description
 #' Use [tribble()] instead of `frame_data()`.
 #' @export
 #' @rdname deprecated
 frame_data <- function(...) {
-  signal_soft_deprecated("`frame_data()` is deprecated, use `tribble()`.")
+  deprecate_soft("2.0.0", "frame_data()", "tribble()")
 
   tribble(...)
 }
+
+#' Name repair
+#'
+#' Please review [vctrs::vec_as_names()].
+#'
+#' @name name-repair
+#' @keywords internal
+NULL

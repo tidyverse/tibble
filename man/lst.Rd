@@ -7,16 +7,22 @@
 lst(...)
 }
 \arguments{
-\item{...}{A set of name-value pairs. Arguments are evaluated sequentially,
-so you can refer to previously created elements. These arguments are
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+A set of name-value pairs. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}. Use \code{:=} to create columns that start with a dot.}
+unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
+
+Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the \link{.data}
+pronoun.
+An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
+is not available.}
 }
 \value{
 A named list.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("questioning")}
+\lifecycle{questioning}
 
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
 same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When

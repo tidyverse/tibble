@@ -39,11 +39,9 @@ test_that("preserves col names", {
 })
 
 test_that("supports compat col names", {
-  scoped_lifecycle_silence()
-
   x <- matrix(1:4, nrow = 2)
 
-  out <- as_tibble(x)
+  expect_warning(out <- as_tibble(x))
   expect_equal(names(out), c("V1", "V2"))
 })
 
@@ -135,11 +133,19 @@ test_that("converting from matrix supports storing row names in a column", {
   expect_identical(out, df)
 })
 
-test_that("converting from matrix throws an error if user turns missing row names into column", {
+test_that("converting from matrix uses implicit row names when `rownames =` is passed", {
   x <- matrix(1:30, 6, 5)
-  expect_error(
-    as_tibble(x, rownames = "id", .name_repair = "minimal"),
-    error_as_tibble_needs_rownames(),
-    fixed = TRUE
+  y <- as_tibble(x, rownames = "id", .name_repair = "minimal")
+  z <- new_tibble(
+    list(
+      id = c("1", "2", "3", "4", "5", "6"),
+      c(1L, 2L, 3L, 4L, 5L, 6L),
+      c(7L, 8L, 9L, 10L, 11L, 12L),
+      c(13L, 14L, 15L, 16L, 17L, 18L),
+      c(19L, 20L, 21L, 22L, 23L, 24L),
+      c(25L, 26L, 27L, 28L, 29L, 30L)
+    ),
+    nrow = 6
   )
+  expect_equal(y, z)
 })

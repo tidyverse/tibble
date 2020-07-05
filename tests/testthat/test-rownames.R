@@ -24,10 +24,9 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
   expect_equal(res$rowname, rownames(mtcars))
-  expect_error(
+  expect_tibble_error(
     rownames_to_column(mtcars, "wt"),
-    error_existing_names("wt"),
-    fixed = TRUE
+    error_column_names_must_be_unique("wt")
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -36,10 +35,9 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(mtcars2))
   expect_equal(res1$`Make&Model`, rownames(mtcars))
-  expect_error(
+  expect_tibble_error(
     rownames_to_column(mtcars2, "wt"),
-    error_existing_names("wt"),
-    fixed = TRUE
+    error_column_names_must_be_unique("wt")
   )
 })
 
@@ -48,10 +46,9 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
-  expect_error(
+  expect_tibble_error(
     rowid_to_column(mtcars, "wt"),
-    error_existing_names("wt"),
-    fixed = TRUE
+    error_column_names_must_be_unique("wt")
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -60,10 +57,9 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(mtcars2))
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
-  expect_error(
+  expect_tibble_error(
     rowid_to_column(mtcars2, "wt"),
-    error_existing_names("wt"),
-    fixed = TRUE
+    error_column_names_must_be_unique("wt")
   )
 })
 
@@ -85,18 +81,24 @@ test_that("column_to_rownames returns tbl", {
   expect_warning(res <- column_to_rownames(res0, var = "num"), NA)
   expect_true(has_rownames(res))
   expect_equal(rownames(res), as.character(mtcars1$num))
-  expect_error(
+  expect_tibble_error(
     column_to_rownames(res),
-    error_already_has_rownames(),
-    fixed = TRUE
+    error_already_has_rownames()
   )
-  expect_error(
+  expect_tibble_error(
     column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
-    error_unknown_names("num2"),
-    fixed = TRUE
+    error_unknown_column_names("num2")
   )
 })
 
 test_that("converting to data frame does not add row names", {
   expect_false(has_rownames(as.data.frame(as_tibble(iris))))
+})
+
+verify_output("rownames.txt", {
+  rownames_to_column(mtcars, "cyl")
+  rowid_to_column(iris, "Species")
+
+  column_to_rownames(mtcars, "cyl")
+  column_to_rownames(iris, "foo")
 })

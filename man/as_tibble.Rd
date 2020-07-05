@@ -8,33 +8,55 @@
 \alias{as_tibble.table}
 \alias{as_tibble.NULL}
 \alias{as_tibble.default}
+\alias{as_tibble_row}
+\alias{as_tibble_col}
 \title{Coerce lists, matrices, and more to data frames}
 \usage{
-as_tibble(x, ..., .rows = NULL, .name_repair = c("check_unique",
-  "unique", "universal", "minimal"),
-  rownames = pkgconfig::get_config("tibble::rownames", NULL))
-
-\method{as_tibble}{data.frame}(x, validate = NULL, ..., .rows = NULL,
+as_tibble(
+  x,
+  ...,
+  .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"),
-  rownames = pkgconfig::get_config("tibble::rownames", NULL))
+  rownames = pkgconfig::get_config("tibble::rownames", NULL)
+)
 
-\method{as_tibble}{list}(x, validate = NULL, ..., .rows = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal"))
+\method{as_tibble}{data.frame}(
+  x,
+  validate = NULL,
+  ...,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  rownames = pkgconfig::get_config("tibble::rownames", NULL)
+)
 
-\method{as_tibble}{matrix}(x, ..., validate = NULL,
-  .name_repair = NULL)
+\method{as_tibble}{list}(
+  x,
+  validate = NULL,
+  ...,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 
-\method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`)
+\method{as_tibble}{matrix}(x, ..., validate = NULL, .name_repair = NULL)
 
-\method{as_tibble}{NULL}(x, ...)
+\method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique")
+
+\method{as_tibble}{`NULL`}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
+
+as_tibble_row(
+  x,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
+
+as_tibble_col(x, column_name = "value")
 }
 \arguments{
 \item{x}{A data frame, list, matrix, or other object that could reasonably be
 coerced to a tibble.}
 
-\item{...}{Other arguments passed on to individual methods.}
+\item{...}{Unused, for extensibility.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
@@ -51,7 +73,8 @@ for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
-See \link{name-repair} for more details on these terms and the strategies used
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
 to enforce them.}
 
 \item{rownames}{How to treat existing row names of a data frame or matrix:
@@ -63,14 +86,18 @@ into this column and the \code{row.names} attribute is deleted.
 Read more in \link{rownames}.
 }}
 
-\item{_n, validate}{For compatibility only, do not use for new code.}
+\item{_n, validate}{\lifecycle{soft-deprecated}
+
+For compatibility only, do not use for new code.}
 
 \item{n}{Name for count column, default: \code{"n"}.}
+
+\item{column_name}{Name of the column.}
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
-\code{as_tibble()} turns an existing object, such as a data frame, list, or
+\code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
 in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
 \code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to
@@ -80,13 +107,15 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
-\item list
 \item \code{\link[methods:matrix-class]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
-\item Default: An atomic vector is first coerced to a list and, unlike
-\code{\link[base:as.data.frame]{base::as.data.frame()}}, the returned tibble has one column per element.
-Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
+\item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
+
+\code{as_tibble_row()} converts a vector to a tibble with one row.
+If the input is a list, all elements must have length one.
+
+\code{as_tibble_column()} converts a vector to a tibble with one column.
 }
 \section{Row names}{
 
@@ -100,39 +129,30 @@ For existing code that relies on the retention of row names, call
 package's \code{\link[=.onLoad]{.onLoad()}}  function.
 }
 
-\examples{
-l <- list(x = 1:500, y = runif(500), z = 500:1)
-df <- as_tibble(l)
+\section{Life cycle}{
 
+Using \code{as_tibble()} for vectors is superseded as of version 3.0.0,
+prefer the more expressive maturing \code{as_tibble_row()} and
+\code{as_tibble_col()} variants for new code.
+}
+
+\examples{
 m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 df <- as_tibble(m)
 
-as_tibble(as.list(1:3), .name_repair = "unique")
+as_tibble_row(c(a = 1, b = 2))
+as_tibble_row(list(c = "three", d = list(4:5)))
+as_tibble_row(1:3, .name_repair = "unique")
 
-# Prefer enframe() for vectors
-enframe(1:3)
-enframe(1:3, name = NULL)
-
-# For list-like inputs, `as_tibble()` is considerably simpler than
-# `as.data.frame()` and hence faster
-\dontrun{
-if (requireNamespace("bench", quietly = TRUE)) {
-  l2 <- replicate(26, sample(letters), simplify = FALSE)
-  names(l2) <- letters
-  bench::mark(
-    as_tibble(l2, .name_repair = "universal"),
-    as_tibble(l2, .name_repair = "unique"),
-    as_tibble(l2, .name_repair = "minimal"),
-    as_tibble(l2),
-    as.data.frame(l2),
-    check = FALSE
-  )
-}
-}
+as_tibble_col(1:3)
+as_tibble_col(
+  list(c = "three", d = list(4:5)),
+  column_name = "data"
+)
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
 converts a named vector to a tibble with a column of names and column of
-values. \link{name-repair} documents the details of name repair.
+values. Name repair is implemented using \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 }

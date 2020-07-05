@@ -28,10 +28,14 @@ sudo: false
 dist: trusty
 cache: packages
 latex: false
+fortran: false
 
 #stages: test, full
 stages:
 - name: test
+  if: branch != docs
+- name: docs
+  if: branch = docs OR branch = master
 - name: full
   if: branch = master
 
@@ -40,16 +44,20 @@ jobs:
   include:
   - r: devel
     env:
-    - DEV_VERSIONS=TRUE
-  - r: 3.2
-  - stage: full
-    os: osx
-  - r: release
+    - DEV_VERSIONS=true
+  - r: 3.3
+  - stage: docs
+    r: release
     env:
     - BUILD_PKGDOWN=true
+  - stage: full
+    os: osx
   - r: 3.5
   - r: 3.4
-  - r: 3.3
+  allow_failures:
+  - r: devel
+    env:
+    - DEV_VERSIONS=true
   fast_finish: true
 
 #env
@@ -58,6 +66,14 @@ env:
   - _R_CHECK_FORCE_SUGGESTS_=false
   - _R_CHECK_SYSTEM_CLOCK_=false
   - MAKEFLAGS="-j 2"
+
+#notifications
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+# Custom parts:
 
 #services
 services:

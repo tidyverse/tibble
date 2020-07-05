@@ -1,0 +1,4 @@
+Rows: 1
+Columns: 2
+$ `mean(x)` <dbl> 5
+$ `var(x)`  <dbl> 3
