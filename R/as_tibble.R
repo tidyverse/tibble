@@ -1,9 +1,9 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+#' \lifecycle{maturing}
 #'
-#' `as_tibble()` turns an existing object, such as a data frame, list, or
+#' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
 #' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
@@ -12,12 +12,9 @@
 #' `as_tibble()` is an S3 generic, with methods for:
 #' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
 #'   that implements tibble's treatment of [rownames].
-#' * list
 #' * [`matrix`][methods::matrix-class], [`poly`][stats::poly()],
 #'   [`ts`][stats::ts()], [`table`][base::table()]
-#' * Default: An atomic vector is first coerced to a list and, unlike
-#'   [base::as.data.frame()], the returned tibble has one column per element.
-#'   Other inputs are first coerced with [base::as.data.frame()].
+#' * Default: Other inputs are first coerced with [base::as.data.frame()].
 #'
 #' @section Row names:
 #' The default behavior is to silently remove row names.
@@ -29,13 +26,18 @@
 #' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your
 #' package's [.onLoad()]  function.
 #'
+#' @section Life cycle:
+#' Using `as_tibble()` for vectors is superseded as of version 3.0.0,
+#' prefer the more expressive maturing `as_tibble_row()` and
+#' `as_tibble_col()` variants for new code.
+#'
 #' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
 #'   converts a named vector to a tibble with a column of names and column of
-#'   values. [name-repair] documents the details of name repair.
+#'   values. Name repair is implemented using [vctrs::vec_as_names()].
 #'
 #' @param x A data frame, list, matrix, or other object that could reasonably be
 #'   coerced to a tibble.
-#' @param ... Other arguments passed on to individual methods.
+#' @param ... Unused, for extensibility.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
 #'   * `NULL`: remove row names. This is the default.
@@ -44,38 +46,15 @@
 #'     into this column and the `row.names` attribute is deleted.
 #'  Read more in [rownames].
 
-#' @param _n,validate For compatibility only, do not use for new code.
+#' @param _n,validate
+#'   \lifecycle{soft-deprecated}
+#'
+#'   For compatibility only, do not use for new code.
 #' @export
 #' @examples
-#' l <- list(x = 1:500, y = runif(500), z = 500:1)
-#' df <- as_tibble(l)
-#'
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
-#'
-#' as_tibble(as.list(1:3), .name_repair = "unique")
-#'
-#' # Prefer enframe() for vectors
-#' enframe(1:3)
-#' enframe(1:3, name = NULL)
-#'
-#' # For list-like inputs, `as_tibble()` is considerably simpler than
-#' # `as.data.frame()` and hence faster
-#' \dontrun{
-#' if (requireNamespace("bench", quietly = TRUE)) {
-#'   l2 <- replicate(26, sample(letters), simplify = FALSE)
-#'   names(l2) <- letters
-#'   bench::mark(
-#'     as_tibble(l2, .name_repair = "universal"),
-#'     as_tibble(l2, .name_repair = "unique"),
-#'     as_tibble(l2, .name_repair = "minimal"),
-#'     as_tibble(l2),
-#'     as.data.frame(l2),
-#'     check = FALSE
-#'   )
-#' }
-#' }
 as_tibble <- function(x, ...,
                       .rows = NULL,
                       .name_repair = c("check_unique", "unique", "universal", "minimal"),
@@ -96,7 +75,8 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
-  result <- as_tibble.list(unclass(x), ..., .rows = .rows, .name_repair = .name_repair)
+
+  result <- lst_to_tibble(unclass(x), .rows, .name_repair)
 
   if (is.null(rownames)) {
     result
@@ -104,10 +84,11 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (is.integer(old_rownames)) {
-      abort(error_as_tibble_needs_rownames())
+    if (length(old_rownames) > 0 && is.na(old_rownames[1L])) {  # if implicit rownames
+      old_rownames <- seq_len(abs(old_rownames[2L]))
     }
-    add_column(result, !!rownames := old_rownames, .before = 1L)
+    old_rownames <- as.character(old_rownames)
+    add_column(result, !!rownames := old_rownames, .before = 1L, .name_repair = "minimal")
   }
 }
 
@@ -116,15 +97,18 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
+  signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be a list')",
+    "as_tibble_row()")
+
   .name_repair <- compat_name_repair(.name_repair, validate)
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
+  x <- unclass(x)
   x <- set_repaired_names(x, .name_repair)
-  check_valid_cols(x)
-  x[] <- map(x, strip_dim)
+  x <- check_valid_cols(x)
   recycle_columns(x, .rows, lengths)
 }
 
@@ -134,45 +118,42 @@ compat_name_repair <- function(.name_repair, validate) {
   name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
   if (!has_length(.name_repair, 1)) {
-    signal_soft_deprecated("The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.")
+    deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   } else if (.name_repair != name_repair) {
-    warn("The `.name_repair` argument to `as_tibble()` takes precedence over the deprecated `validate` argument.")
+    warn("`.name_repair` takes precedence over the deprecated `validate` argument argument in `as_tibble()`.")
     return(.name_repair)
   }
 
   name_repair
 }
 
-# TODO: Still necessary with vctrs (because vctrs_size() already checks this)?
-check_valid_cols <- function(x) {
+check_valid_cols <- function(x, pos = NULL) {
   names_x <- names2(x)
-  is_xd <- which(!map_lgl(x, is_1d_or_2d))
+
+  is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
-    classes <- map_chr(x[is_xd], function(x) class(x)[[1]])
-    abort(error_column_must_be_vector(names_x[is_xd], classes))
+    classes <- map_chr(x[is_xd], friendly_type_of)
+    cnd_signal(error_column_scalar_type(names_x[is_xd], pos[is_xd], classes))
   }
 
-  posixlt <- which(map_lgl(x, inherits, "POSIXlt"))
-  if (has_length(posixlt)) {
-    abort(error_time_column_must_be_posixct(names_x[posixlt]))
-  }
-
+  # 657
+  x[] <- map(x, make_valid_col)
   invisible(x)
 }
 
-is_1d_or_2d <- function(x) {
-  # dimension check is for matrices and data.frames
-  (is_vector(x) && !needs_dim(x)) || is.data.frame(x) || is.matrix(x)
+make_valid_col <- function(x) {
+  if (is.expression(x)) {
+    x <- as.list(x)
+  }
+  x
+}
+
+is_valid_col <- function(x) {
+  # 657
+  vec_is(x) || is.expression(x)
 }
 
 recycle_columns <- function(x, .rows, lengths) {
-  if (is.null(lengths)) {
-    lengths <- col_lengths(x)
-    need_recycle <- FALSE
-  } else {
-    need_recycle <- TRUE
-  }
-
   nrow <- guess_nrow(lengths, .rows)
 
   # Shortcut if all columns have the requested or implied length
@@ -180,13 +161,13 @@ recycle_columns <- function(x, .rows, lengths) {
   if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
-    abort(error_inconsistent_cols(.rows, names(x), lengths, "`.rows` argument"))
+    cnd_signal(error_incompatible_size(.rows, names(x), lengths, "Requested with `.rows` argument"))
   }
 
-  if (need_recycle && nrow != 1L) {
+  if (nrow != 1L) {
     short <- which(lengths == 1L)
     if (has_length(short)) {
-      x[short] <- expand_vecs(x[short], nrow)
+      x[short] <- map(x[short], vec_recycle, nrow)
     }
   }
 
@@ -216,7 +197,8 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   names <- colnames(x)
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      signal_soft_deprecated('`as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.')
+      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have column names if `.name_repair` is omitted')",
+        details = "Using compatibility `.name_repair`.")
       compat_names <- paste0("V", seq_along(m))
       if (is.null(names)) {
         names <- compat_names
@@ -252,21 +234,30 @@ as_tibble.ts <- function(x, ..., .name_repair = "minimal") {
 #' @export
 #' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
-as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
+as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique") {
   if (!missing(`_n`)) {
     warn("Please pass `n` as a named argument to `as_tibble.table()`.")
   }
 
   df <- as.data.frame(x, stringsAsFactors = FALSE)
-  names(df) <- c(names2(dimnames(x)), n)
 
-  as_tibble(df, ...)
+  names(df) <- repaired_names(
+    c(names2(dimnames(x)), n), .name_repair = .name_repair,
+    details = "Use `names(dimnames(x)) <- ...` to assign names to a table."
+  )
+
+  # Names already repaired:
+  as_tibble(df, ..., .name_repair = "minimal")
 }
 
 #' @export
 #' @rdname as_tibble
 as_tibble.NULL <- function(x, ...) {
-  as_tibble(list(), ...)
+  if (missing(x)) {
+    deprecate_soft("3.0.0", "as_tibble(x = 'can\\'t be missing')")
+  }
+
+  new_tibble(list(), nrow = 0)
 }
 
 #' @export
@@ -274,7 +265,99 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
-    signal_soft_deprecated("Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.")
+    signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
+      "as_tibble_col()")
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
+}
+
+#' @description
+#' `as_tibble_row()` converts a vector to a tibble with one row.
+#' If the input is a list, all elements must have length one.
+#'
+#' @rdname as_tibble
+#' @export
+#' @examples
+#'
+#' as_tibble_row(c(a = 1, b = 2))
+#' as_tibble_row(list(c = "three", d = list(4:5)))
+#' as_tibble_row(1:3, .name_repair = "unique")
+as_tibble_row <- function(x,
+                          .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
+  if (!is_bare_vector(x)) {
+    cnd_signal(error_as_tibble_row_bare(x))
+  }
+
+  x <- set_repaired_names(x, .name_repair)
+
+  check_all_lengths_one(x)
+  new_tibble(as.list(x), nrow = 1)
+}
+
+check_all_lengths_one <- function(x) {
+  sizes <- col_lengths(x)
+
+  bad_lengths <- which(sizes != 1)
+  if (!is_empty(bad_lengths)) {
+    cnd_signal(error_as_tibble_row_size_one(
+      seq_along(x)[bad_lengths],
+      names2(x)[bad_lengths],
+      sizes[bad_lengths])
+    )
+  }
+}
+
+
+#' @description
+#' `as_tibble_column()` converts a vector to a tibble with one column.
+#'
+#' @param column_name Name of the column.
+#'
+#' @rdname as_tibble
+#' @export
+#' @examples
+#'
+#' as_tibble_col(1:3)
+#' as_tibble_col(
+#'   list(c = "three", d = list(4:5)),
+#'   column_name = "data"
+#' )
+as_tibble_col <- function(x, column_name = "value") {
+  # Side effect: checking that x is a vector
+  tibble(!!column_name := x)
+}
+
+# External ----------------------------------------------------------------
+
+matrixToDataFrame <- function(x) {
+  .Call(`tibble_matrixToDataFrame`, x)
+}
+
+# Errors ------------------------------------------------------------------
+
+error_column_scalar_type <- function(names, positions, classes) {
+  tibble_error(
+    problems(
+      "All columns in a tibble must be vectors:",
+      x = paste0("Column ", name_or_pos(names, positions), " is ", classes)
+    ),
+    names = names
+  )
+}
+
+error_as_tibble_row_bare <- function(x) {
+  tibble_error(paste0(
+    "`x` must be a bare vector in `as_tibble_row()`, not ", class(x)[[1]], "."
+  ))
+}
+
+error_as_tibble_row_size_one <- function(j, name, size) {
+  desc <- tick(name)
+  desc[name == ""] <- paste0("at position ", j[name == ""])
+
+  tibble_error(problems(
+    "All elements must be size one, use `list()` to wrap.",
+    paste0("Element ", desc, " is of size ", size, ".")
+  ))
 }

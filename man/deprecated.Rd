@@ -26,7 +26,7 @@ as.tibble(x, ...)
 frame_data(...)
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("deprecated")}
+\lifecycle{deprecated}
 
 Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 

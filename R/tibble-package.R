@@ -2,9 +2,15 @@
 #' @importFrom utils head tail
 #' @importFrom pkgconfig set_config
 #' @import rlang
+#' @import lifecycle
+#' @import ellipsis
+#' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
+#' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_slice<-
+#' @importFrom vctrs unspecified
+#' @importFrom cli symbol cat_line
 #' @aliases NULL tibble-package
 #' @details
-#' \Sexpr[results=rd, stage=render]{tibble:::lifecycle("stable")}
+#' \lifecycle{stable}
 #'
 #' The tibble package provides utilities for handling __tibbles__, where
 #' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
@@ -28,28 +34,9 @@
 #'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]
 #'   * Inspect a tibble: [print.tbl()], [glimpse()]
 #'   * Details on the S3 `tbl_df` class: [`tbl_df-class`]
+#' @inheritSection formatting Package options
+#' @section Package options:
+#' The following option is used for viewing tabular data with `view()`:
+#' - `tibble.view_max`: Maximum number of rows shown if the input is not a
+#'   data frame. Default: 1000.
 "_PACKAGE"
-
-## user-facing docs kept in `formatting` topic; see utils-format.r
-op.tibble <- list(
-  tibble.print_max = 20L,
-  tibble.print_min = 10L,
-  tibble.width = NULL,
-  tibble.max_extra_cols = 100L
-)
-
-tibble_opt <- function(x) {
-  x_tibble <- paste0("tibble.", x)
-  res <- getOption(x_tibble)
-  if (!is.null(res)) {
-    return(res)
-  }
-
-  x_dplyr <- paste0("dplyr.", x)
-  res <- getOption(x_dplyr)
-  if (!is.null(res)) {
-    return(res)
-  }
-
-  op.tibble[[x_tibble]]
-}

@@ -1,0 +1,6 @@
+> enframe(1:3, value = NULL)
+Error: `value` can't be NULL.
+
+> enframe(Titanic)
+Error: `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+

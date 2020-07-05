@@ -41,23 +41,21 @@ test_that("adds empty row if no arguments", {
 })
 
 test_that("error if adding row with unknown variables", {
-  expect_error(
+  expect_tibble_error(
     add_row(tibble(a = 3), xxyzy = "err"),
-    error_inconsistent_new_rows("xxyzy"),
-    fixed = TRUE
+    error_incompatible_new_rows("xxyzy")
   )
 
-  expect_error(
+  expect_tibble_error(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    error_inconsistent_new_rows(c("b", "c")),
-    fixed = TRUE
+    error_incompatible_new_rows(c("b", "c"))
   )
 })
 
 test_that("deprecated adding rows to non-data-frames", {
-  scoped_lifecycle_errors()
-
-  expect_error(add_row(as.matrix(mtcars), mpg = 4))
+  expect_error(
+    expect_warning(add_row(as.matrix(mtcars), mpg = 4))
+  )
 })
 
 test_that("can add multiple rows", {
@@ -99,17 +97,16 @@ test_that("can safely add to factor columns everywhere (#296)", {
   expect_identical(add_row(df), tibble(a = factor(c(letters[1:3], NA))))
   expect_identical(add_row(df, .before = 1), tibble(a = factor(c(NA, letters[1:3]))))
   expect_identical(add_row(df, .before = 2), tibble(a = factor(c("a", NA, letters[2:3]))))
-  expect_identical(add_row(df, a = "d"), tibble(a = factor(c(letters[1:4]))))
-  expect_identical(add_row(df, a = "d", .before = 1), tibble(a = factor(c("d", letters[1:3]))))
-  expect_identical(add_row(df, a = "d", .before = 2), tibble(a = factor(c("a", "d", letters[2:3]))))
+  expect_identical(add_row(df, a = "d"), tibble(a = c(letters[1:4])))
+  expect_identical(add_row(df, a = "d", .before = 1), tibble(a = c("d", letters[1:3])))
+  expect_identical(add_row(df, a = "d", .before = 2), tibble(a = c("a", "d", letters[2:3])))
 })
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_error(
+  expect_tibble_error(
     add_row(df, a = 4:5, .after = 2, .before = 3),
-    error_both_before_after(),
-    fixed = TRUE
+    error_both_before_after()
   )
 })
 
@@ -134,10 +131,9 @@ test_that("add_row() keeps the class of empty columns", {
 
 test_that("add_row() fails nicely for grouped data frames (#179)", {
   skip_if_not_installed("dplyr")
-  expect_error(
+  expect_tibble_error(
     add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
-    error_add_rows_to_grouped_df(),
-    fixed = TRUE
+    error_add_rows_to_grouped_df()
   )
 })
 
@@ -185,18 +181,16 @@ test_that("add_column() can add to empty tibble or data frame", {
 })
 
 test_that("error if adding existing columns", {
-  expect_error(
+  expect_tibble_error(
     add_column(tibble(a = 3), a = 5),
-    error_duplicate_new_cols("a"),
-    fixed = TRUE
+    error_column_names_must_be_unique("a")
   )
 })
 
 test_that("error if adding wrong number of rows with add_column()", {
-  expect_error(
+  expect_tibble_error(
     add_column(tibble(a = 3), b = 4:5),
-    error_inconsistent_new_cols(1, data.frame(b = 4:5)),
-    fixed = TRUE
+    error_incompatible_new_cols(1, data.frame(b = 4:5))
   )
 })
 
@@ -256,31 +250,28 @@ test_that("can add column relative to named column", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_error(
+  expect_tibble_error(
     add_column(df, b = 4:6, .after = 2, .before = 3),
-    error_both_before_after(),
-    fixed = TRUE
+    error_both_before_after()
   )
 })
 
 test_that("error if column named by .before or .after not found", {
   df <- tibble(a = 1:3)
-  expect_error(
+  expect_tibble_error(
     add_column(df, b = 4:6, .after = "x"),
-    error_unknown_names("x"),
-    fixed = TRUE
+    error_unknown_column_names("x")
   )
-  expect_error(
+  expect_tibble_error(
     add_column(df, b = 4:6, .before = "x"),
-    error_unknown_names("x"),
-    fixed = TRUE
+    error_unknown_column_names("x")
   )
 })
 
-test_that("deprecated adding rows to non-data-frames", {
-  scoped_lifecycle_errors()
-
-  expect_error(add_column(as.matrix(mtcars), x = 1))
+test_that("deprecated adding columns to non-data-frames", {
+  expect_error(
+    expect_warning(add_column(as.matrix(mtcars), x = 1))
+  )
 })
 
 test_that("missing row names stay missing when adding column", {
@@ -288,4 +279,18 @@ test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = 0)))
   expect_false(has_rownames(add_column(iris, x = 1:150, .after = ncol(iris))))
   expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
+})
+
+verify_output("add.txt", {
+  add_row(tibble(), a = 1)
+  add_row(tibble(), a = 1, b = 2)
+  add_row(tibble(), !!!set_names(letters))
+  add_row(dplyr::group_by(tibble(a = 1), a))
+  add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
+
+  add_column(tibble(a = 1), a = 1)
+  add_column(tibble(a = 1, b = 2), a = 1, b = 2)
+  add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
+  add_column(tibble(a = 2:3), b = 4:6)
+  add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
 })

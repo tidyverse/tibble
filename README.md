@@ -101,3 +101,18 @@ tribble(
 #> 1 a         2   3.6
 #> 2 b         1   8.5
 ```
+
+## Related work
+
+The tibble print method draws inspiration from
+[data.table](http://r-datatable.com/), and
+[r-frame](https://github.com/patperry/r-frame). Like `data.table()`,
+`tibble()` doesn’t coerce strings to factors by default, doesn’t change
+column names, and doesn’t use rownames.
+
+---
+## Code of Conduct
+
+Please note that the tibble project is released with a [Contributor Code
+of Conduct](https://tibble.tidyverse.org/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

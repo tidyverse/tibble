@@ -1,135 +1,76 @@
-# abjutils
+# autocogs
 
-Version: 0.2.1
+<details>
+
+* Version: 0.1.2
+* Source code: https://github.com/cran/autocogs
+* URL: https://github.com/schloerke/autocogs
+* BugReports: https://github.com/schloerke/autocogs/issues
+* Date/Publication: 2019-02-12 00:03:28 UTC
+* Number of recursive dependencies: 76
+
+Run `revdep_details(,"autocogs")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘autocogs’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+    See ‘/home/rstudio/tibble/revdep/checks/autocogs/new/autocogs.Rcheck/00install.out’ for details.
+    ```
 
 ## In both
 
 *   checking examples ... ERROR
     ```
     ...
+    $remove
+    character(0)
+    
+    attr(,"class")
+    [1] "cog_spec"
+    [1] FALSE
     > 
-    > {
-    + #sampling the parameters
-    + sample_cnj(3, foros = "0000",
-    + anos = "2015", orgao = 8, tr = 26,
-    + first_dig = "0",sample_pars = TRUE, return_df = FALSE)
-    + 
-    + sample_cnj(10, foros = c("0000","0001"),
-    + anos = c("2014","2015"), orgao = 8, tr = 26,
-    + first_dig = "0",sample_pars = TRUE, return_df = FALSE)
-    + 
-    + #not sampling the parameters
-    + 
-    + sample_cnj(3, foros = c("0000","0001","0002"),
-    + anos = c("2014","2015","2016"), orgao = rep(8,3), tr = rep(26,3),
-    + first_dig = "0",sample_pars = FALSE, return_df = FALSE)
-    + }
-    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-      there is no package called ‘R6’
-    Calls: sample_cnj ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+    > # set up data
+    > p <- ggplot2::qplot(Sepal.Length, Sepal.Width, data = iris, geom = c("point", "smooth"))
+    > dt <- tibble::data_frame(panel = list(p))
+    Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+    Please use `tibble()` instead.
+    [90mThis warning is displayed once every 8 hours.[39m
+    [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
+    > 
+    > # compute cognostics like normal
+    > add_panel_cogs(dt)
+    Error in switch(as.character(layer$stat_params$method), loess = "geom_smooth_loess",  : 
+      EXPR must be a length 1 vector
+    Calls: add_panel_cogs ... get_layer_info -> layer_info -> layer_info.ggplot -> lapply -> FUN
     Execution halted
     ```
 
 *   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      Error: package or namespace load failed for 'testthat' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
-       there is no package called 'R6'
-      Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘httr’ ‘progress’
-      All declared Imports should be used.
-    ```
-
-# alphavantager
-
-Version: 0.1.0
-
-## Newly fixed
-
-*   checking PDF version of manual ... WARNING
-    ```
-    LaTeX errors when creating PDF version.
-    This typically indicates Rd problems.
-    LaTeX errors found:
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘devtools’
-      All declared Imports should be used.
-    ```
-
-# anomalyDetection
-
-Version: 0.2.4
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘caret’
-      All declared Imports should be used.
-    ```
-
-# available
-
-Version: 1.0.0
-
-## In both
-
-*   checking examples ... ERROR
     ```
     ...
-    > ### Title: Suggest a package name based on a development package title or
-    > ###   description
-    > ### Aliases: suggest
-    > 
-    > ### ** Examples
-    > 
-    > ## Not run: 
-    > ##D # Default will use the title from the current path.
-    > ##D suggest()
-    > ##D 
-    > ##D # Can also suggest based on the description
-    > ##D suggest(field = "Description")
-    > ## End(Not run)
-    > 
-    > # Or by explictly using the text argument
-    > suggest(text =
-    +   "A Package for Displaying Visual Scenes as They May Appear to an Animal with Lower Acuity")
-    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-      there is no package called ‘bindr’
-    Calls: suggest ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      7: getExportedValue(pkg, name)
-      8: asNamespace(ns)
-      9: getNamespace(ns)
-      10: tryCatch(loadNamespace(name), error = function(e) stop(e))
-      11: tryCatchList(expr, classes, parentenv, handlers)
-      12: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      13: value[[3L]](cond)
+      [90m  6. [39mmagrittr::freduce(value, `_function_list`)
+      [90m  8. [39mfunction_list[[k]](value)
+      [90m  9. [39mautocogs:::expect_auto_cogs(...)
+      [90m 10. [39mp %>% plot_cogs()
+      [90m 12. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m 14. [39mautocogs:::`_fseq`(`_lhs`)
+      [90m 15. [39mmagrittr::freduce(value, `_function_list`)
+      [90m 17. [39mfunction_list[[k]](value)
+      [90m 18. [39mautocogs:::plot_cogs(.)
+      [90m 19. [39mautocogs:::get_layer_info(p, keep = keep_layers, ...) [90mrevdep/checks/autocogs/new/autocogs.Rcheck/00_pkg_src/autocogs/R/plot_cogs.R:21:2[39m
+      [90m 21. [39mautocogs:::layer_info.ggplot(p, keep = keep, ...) [90mrevdep/checks/autocogs/new/autocogs.Rcheck/00_pkg_src/autocogs/R/layer_info.R:14:2[39m
+      [90m 22. [39mbase::lapply(...) [90mrevdep/checks/autocogs/new/autocogs.Rcheck/00_pkg_src/autocogs/R/layer_info.R:36:2[39m
+      [90m 23. [39mautocogs:::FUN(X[[i]], ...)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 14 SKIPPED: 0 FAILED: 2
-      1. Error: pick_word_from_title: ignores common words (@test-namr.R#5) 
-      2. Error: namr: works on real examples (@test-namr.R#33) 
+      [ OK: 241 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 2 ]
+      1. Failure: ggplot2 layers (@test-layers.R#20) 
+      2. Error: ggplot2::geom_smooth (@test-plot_cogs.R#246) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -137,1291 +78,1035 @@ Version: 1.0.0
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘purrr’
+    Namespaces in Imports field not imported from:
+      ‘MASS’ ‘broom’ ‘diptest’ ‘ggplot2’ ‘hexbin’ ‘moments’
       All declared Imports should be used.
     ```
 
-# babynames
+# basket
 
-Version: 0.3.0
+<details>
 
-## Newly fixed
+* Version: 0.10.1
+* Source code: https://github.com/cran/basket
+* URL: https://github.com/kaneplusplus/basket
+* BugReports: https://github.com/kaneplusplus/basket/issues
+* Date/Publication: 2020-03-11 05:40:02 UTC
+* Number of recursive dependencies: 83
 
-*   checking replacement functions ... WARNING
+Run `revdep_details(,"basket")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
     ```
-    Fatal error: cannot create 'R_TempDir'
-    The argument of a replacement function which corresponds to the right
-    hand side must be named ‘value’.
+    ...
+      [1mBacktrace:[22m
+      [90m  1. [39mtestthat::expect_true(inherits(plot_density(mh1), "ggplot"))
+      [90m  6. [39mbasket:::plot_density.exchangeability_model(mh1) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:33:2[39m
+      [90m  7. [39mbase::lapply(ps, function(pt) plot_density(x[[pt]])) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:53:2[39m
+      [90m  8. [39mbasket:::FUN(X[[i]], ...)
+      [90m 10. [39mbasket:::plot_density.mem(x[[pt]]) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:33:2[39m
+      [90m 12. [39mtibble:::`$<-.tbl_df`(...) [90mrevdep/checks/basket/new/basket.Rcheck/00_pkg_src/basket/R/plot.r:71:2[39m
+      [90m 13. [39mtibble:::tbl_subassign(...)
+      [90m 14. [39mtibble:::vectbl_recycle_rhs(...)
+      [90m 15. [39mbase::tryCatch(...)
+      [90m 16. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 17. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 18. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 32 | SKIPPED: 2 | WARNINGS: 0 | FAILED: 2 ]
+      1. Error: (unknown) (@test-mcmc.r#74) 
+      2. Error: (unknown) (@test-plot.r#16) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
-*   checking foreign function calls ... NOTE
+# beadplexr
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/beadplexr
+* URL: https://gitlab.com/ustervbo/beadplexr
+* BugReports: https://gitlab.com/ustervbo/beadplexr/issues
+* Date/Publication: 2020-02-05 17:00:02 UTC
+* Number of recursive dependencies: 126
+
+Run `revdep_details(,"beadplexr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
     ```
-    Fatal error: cannot create 'R_TempDir'
-    See chapter ‘System and foreign language interfaces’ in the ‘Writing R
-    Extensions’ manual.
+    ...
+      [31m──[39m [31m1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) [39m [31m───────[39m
+      Assigned data `c("A", "B")` must be compatible with existing data.
+      [31m✖[39m Existing data has 5126 rows.
+      [31m✖[39m Assigned data has 2 rows.
+      [34mℹ[39m Only vectors of size 1 are recycled.
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`$<-`(`*tmp*`, BeadID, value = c("A", "B"))
+      [90m 2. [39mtibble:::`$<-.tbl_df`(`*tmp*`, BeadID, value = c("A", "B"))
+      [90m 3. [39mtibble:::tbl_subassign(...)
+      [90m 4. [39mtibble:::vectbl_recycle_rhs(...)
+      [90m 5. [39mbase::tryCatch(...)
+      [90m 6. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 7. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 8. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 398 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: ident_bead_pop() works (@test_identify_assay_analyte.R#39) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
-*   checking Rd \usage sections ... NOTE
+# casen
+
+<details>
+
+* Version: 0.1.3
+* Source code: https://github.com/cran/casen
+* URL: https://pachamaltese.github.io/casen/
+* BugReports: https://github.com/pachamaltese/casen/issues
+* Date/Publication: 2020-03-20 17:40:02 UTC
+* Number of recursive dependencies: 81
+
+Run `revdep_details(,"casen")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
     ```
-    Fatal error: cannot create 'R_TempDir'
-    The \usage entries for S3 methods should use the \method markup and not
-    their full name.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
+    ...
+      
+      [31m──[39m [31m3. Failure: percentiles_agrupados works properly (@test-descriptive_statistic[39m
+      `str\(est\)` does not match "7 variables".
+      Actual value: "tibble \[12 × 7\] \(S3: tbl_df/tbl/data\.frame\)\\n \$ percentil               : num \[1:12\] 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 0\.7 \.\.\.\\n \$ comuna_etiqueta         : chr \[1:12\] "Valdivia" "Valdivia" "Los Lagos" "Los Lagos" \.\.\.\\n \$ sexo_etiqueta           : chr \[1:12\] "Mujer" "Hombre" "Hombre" "Mujer" \.\.\.\\n \$ comuna_codigo           : chr \[1:12\] "14101" "14101" "14104" "14104" \.\.\.\\n \$ sexo_codigo             : chr \[1:12\] "2" "1" "1" "2" \.\.\.\\n \$ mediana_ytotcorh        : num \[1:12\] 1266142 1300000 853001 853162 796676 \.\.\.\\n \$ mediana_ytotcorh_err_est: num \[1:12\] 102259 102396 31364 49559 185537 \.\.\."
+      
+      trying URL 'http://observatorio.ministeriodesarrollosocial.gob.cl/casen/layout/doc/bases/Casen1990.zip'
+      Error in utils::download.file(u, f, mode = "wb") : 
+        cannot open URL 'http://observatorio.ministeriodesarrollosocial.gob.cl/casen/layout/doc/bases/Casen1990.zip'
+      trying URL 'https://pachamaltese.github.io/casen/data-rds/1990.rds'
+      Content type 'application/octet-stream' length 2890424 bytes (2.8 MB)
+      ==================================================
+      downloaded 2.8 MB
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 7 | SKIPPED: 0 | WARNINGS: 5 | FAILED: 3 ]
+      1. Failure: media_agrupada works properly (@test-descriptive_statistics.R#7) 
+      2. Failure: mediana_agrupada works properly (@test-descriptive_statistics.R#14) 
+      3. Failure: percentiles_agrupados works properly (@test-descriptive_statistics.R#21) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 ## In both
 
-*   checking installed package size ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
-      installed size is  9.1Mb
-      sub-directories of 1Mb or more:
-        data   8.9Mb
+    Namespaces in Imports field not imported from:
+      ‘Rcpp’ ‘fs’ ‘janitor’ ‘tibble’
+      All declared Imports should be used.
     ```
 
-# banR
-
-Version: 0.2.0
-
-## In both
-
-*   checking package dependencies ... ERROR
+*   checking data for non-ASCII characters ... NOTE
     ```
-    Package required but not available: ‘httr’
+      Note: found 75 marked UTF-8 strings
+    ```
+
+# CGPfunctions
+
+<details>
+
+* Version: 0.5.9
+* Source code: https://github.com/cran/CGPfunctions
+* URL: https://github.com/ibecav/CGPfunctions
+* BugReports: https://github.com/ibecav/CGPfunctions/issues
+* Date/Publication: 2020-03-06 18:00:10 UTC
+* Number of recursive dependencies: 160
+
+Run `revdep_details(,"CGPfunctions")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘CGPfunctions-Ex.R’ failed
+    The error most likely occurred in:
     
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# bikedata
-
-Version: 0.1.0
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Packages required but not available: ‘DBI’ ‘BH’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# billboard
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 660 marked UTF-8 strings
-    ```
-
-# bioCancer
-
-Version: 1.4.0
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Error: processing vignette 'bioCancer.Rmd' failed with diagnostics:
-    path for html_dependency not found: 
-    Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      ‘magrittr’ ‘ggplot2’ ‘lubridate’ ‘tidyr’ ‘cgdsr’ ‘RCurl’ ‘XML’
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 22.3Mb
-      sub-directories of 1Mb or more:
-        base        6.9Mb
-        bioCancer   3.1Mb
-        doc         2.8Mb
-        quant       7.7Mb
-    ```
-
-# blkbox
-
-Version: 1.0
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘bigrf’
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘glmnet’ ‘gtools’ ‘knitr’ ‘nnet’ ‘parallel’ ‘rJava’ ‘reshape’
-      ‘rmarkdown’ ‘shinyjs’
-      All declared Imports should be used.
-    Missing or unexported object: ‘xgboost::predict’
-    ```
-
-# breathtestcore
-
-Version: 0.4.0
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘breathteststan’
-    ```
-
-# breathteststan
-
-Version: 0.4.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 28.9Mb
-      sub-directories of 1Mb or more:
-        libs  28.7Mb
-    ```
-
-# bsam
-
-Version: 1.1.2
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘rworldxtra’ ‘sp’
-      All declared Imports should be used.
-    ```
-
-# caffsim
-
-Version: 0.2.2
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘markdown’
-      All declared Imports should be used.
-    ```
-
-# cepR
-
-Version: 0.1.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 287 marked UTF-8 strings
-    ```
-
-# childsds
-
-Version: 0.6.7
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘gamlss.dist’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 20 marked UTF-8 strings
-    ```
-
-# congressbr
-
-Version: 0.1.1
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 1 marked UTF-8 string
-    ```
-
-# countyweather
-
-Version: 0.1.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 1 marked UTF-8 string
-    ```
-
-# crosswalkr
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘dplyr’
-      All declared Imports should be used.
-    ```
-
-# dataonderivatives
-
-Version: 0.3.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘stats’
-      All declared Imports should be used.
-    ```
-
-# dbplyr
-
-Version: 1.2.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# dexter
-
-Version: 0.6.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 109 marked UTF-8 strings
-    ```
-
-# dotwhisker
-
-Version: 0.3.0
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘arm’
-    ```
-
-# dplyr
-
-Version: 0.7.4
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 33.0Mb
-      sub-directories of 1Mb or more:
-        libs  31.1Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 4 marked UTF-8 strings
-    ```
-
-# driftR
-
-Version: 1.0.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘ggplot2’ ‘readr’
-      All declared Imports should be used.
-    ```
-
-# esc
-
-Version: 0.4.0
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘metafor’
-    ```
-
-# exifr
-
-Version: 0.2.1
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 13.3Mb
-      sub-directories of 1Mb or more:
-        exiftool  12.3Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘dplyr’
-      All declared Imports should be used.
-    ```
-
-# filesstrings
-
-Version: 2.0.2
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘dplyr’
-    ```
-
-# FSelectorRcpp
-
-Version: 0.1.8
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 11.5Mb
-      sub-directories of 1Mb or more:
-        doc    2.2Mb
-        libs   9.1Mb
-    ```
-
-# ftDK
-
-Version: 1.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 39 marked UTF-8 strings
-    ```
-
-# gastempt
-
-Version: 0.4.01
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 58.8Mb
-      sub-directories of 1Mb or more:
-        libs  58.4Mb
-    ```
-
-# geojson
-
-Version: 0.2.0
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘jqr’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# GerminaR
-
-Version: 1.2
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘DT’ ‘shinydashboard’
-      All declared Imports should be used.
-    ```
-
-# getTBinR
-
-Version: 0.5.0
-
-## In both
+    > ### Name: chaid_table
+    > ### Title: Produce CHAID results tables from a partykit CHAID model
+    > ### Aliases: chaid_table
+    > 
+    > ### ** Examples
+    > 
+    > library(CGPfunctions)
+    > chaid_table(chaidUS)
+    Error: Assigned data `min(unlist(nodeapply(chaidobject, ids = all_nodes, FUN = function(n) n$info)[[i]]))` must be compatible with existing data.
+    [34mℹ[39m Error occurred for column `adjustedp`.
+    [31m✖[39m Lossy cast from `value` <double> to `x` <logical>.
+    ```
+
+# concurve
+
+<details>
+
+* Version: 2.3.0
+* Source code: https://github.com/cran/concurve
+* URL: https://data.lesslikely.com/concurve/, https://github.com/zadchow/concurve, https://lesslikely.com/
+* BugReports: https://github.com/zadchow/concurve/issues
+* Date/Publication: 2019-12-04 11:20:03 UTC
+* Number of recursive dependencies: 113
+
+Run `revdep_details(,"concurve")` for more info
+
+</details>
+
+## Newly broken
 
 *   checking examples ... ERROR
     ```
     ...
-    > ### Title: Generic Get Data Function
-    > ### Aliases: get_data
+    
+    > ### Name: curve_corr
+    > ### Title: Computes Consonance Intervals for Correlations
+    > ### Aliases: curve_corr
     > 
     > ### ** Examples
     > 
     > 
-    > tb_burden <- get_data(url = "https://extranet.who.int/tme/generateCSV.asp?ds=estimates",
-    + save_name = "TB_burden",
-    + save = TRUE, 
-    + download_data = TRUE)
-    Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  1951    0  1951    0     0   1905      0 --:--:--  0:00:01 --:--:--  1907
-    100  272k    0  272k    0     0   249k      0 --:--:--  0:00:01 --:--:--  249k
-    Error in curl::curl_download(input, tt, mode = "wb", quiet = !showProgress) : 
-      GnuTLS recv error (-110): The TLS connection was non-properly terminated.
-    Calls: get_data -> <Anonymous> -> <Anonymous> -> .Call
+    > GroupA <- rnorm(50)
+    > GroupB <- rnorm(50)
+    > joe <- curve_corr(x = GroupA, y = GroupB, alternative = "two.sided", method = "pearson")
+    > tibble::tibble(joe[[1]])
+    Error: All columns in a tibble must be vectors.
+    [31m✖[39m Column `joe[[1]]` is a `data.frame/concurve` object.
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─tibble::tibble(joe[[1]])
+    [90m 2. [39m  └─tibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+    [90m 3. [39m    └─tibble:::check_valid_col(res, col_names[[j]], j)
+    [90m 4. [39m      └─tibble:::check_valid_cols(set_names(list(x), name))
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘MASS’ ‘compiler’ ‘rlang’
+      All declared Imports should be used.
+    ```
+
+# convergEU
+
+<details>
+
+* Version: 0.4.1
+* Source code: https://github.com/cran/convergEU
+* URL: https://local.disia.unifi.it/stefanini/RESEARCH/coneu/tutorial-conv.html
+* Date/Publication: 2020-03-13 11:10:05 UTC
+* Number of recursive dependencies: 140
+
+Run `revdep_details(,"convergEU")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    + 1991,  1600,  1350, 802
+    + )
+    > 
+    > # Country ranking according to the indicator higher is the best:
+    > res <- country_ranking(myTB,timeName="years")
+    Error: Assigned data `rank(unlist(ord_MS[auxMS, -posizTime]), ties.method = "min")` must be compatible with row subscript `auxMS`.
+    [31m✖[39m 1 row must be assigned.
+    [31m✖[39m Assigned data has 3 rows.
+    [34mℹ[39m Only vectors of size 1 are recycled.
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─convergEU::country_ranking(myTB, timeName = "years")
+    [90m 2. [39m  ├─base::`[<-`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:97:8[39m
+    [90m 3. [39m  └─tibble:::`[<-.tbl_df`(...) [90m00_pkg_src/convergEU/R/country_ranking.R:97:8[39m
+    [90m 4. [39m    └─tibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+    [90m 5. [39m      └─tibble:::vectbl_recycle_rhs(...)
+    [90m 6. [39m        └─base::tryCatch(...)
+    [90m 7. [39m          └─base:::tryCatchList(expr, classes, parentenv, handlers)
+    [90m 8. [39m            └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    [90m 9. [39m              └─value[[3L]](cond)
     Execution halted
     ```
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      [90m  3. [39mtibble:::`[.tbl_df`(sottoTB2, !is.na(sottoTB2[, aux]), ) [90mrevdep/checks/convergEU/new/convergEU.Rcheck/00_pkg_src/convergEU/R/impute_dataset.R:133:6[39m
+      [90m  4. [39mtibble:::tbl_subset_row(xo, i = i, i_arg)
+      [90m  5. [39mtibble:::vectbl_as_row_index(i, x, i_arg)
+      [90m  6. [39mtibble:::vectbl_as_row_location(i, nr, i_arg, assign)
+      [90m 13. [39mvctrs::vec_as_location(i, n, arg = as_label(i_arg))
+      
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 0 SKIPPED: 0 FAILED: 12
-      1. Error: (unknown) (@test-get_data.R#11) 
-      2. Error: (unknown) (@test-get_data_dict.R#4) 
-      3. Error: (unknown) (@test-get_tb_burden.R#4) 
-      4. Error: map_tb_burden produces a plot (@test-map_tb_burden.R#6) 
-      5. Error: map_tb_burden produces a plot when a log transform is used (@test-map_tb_burden.R#14) 
-      6. Error: map_tb_burden produces an interactive plot (@test-map_tb_burden.R#22) 
-      7. Error: plot_tb_burden produces a plot (@test-plot_tb_burden.R#4) 
-      8. Error: plot_tb_burden produces an interactive plot (@test-plot_tb_burden.R#11) 
-      9. Error: plot_tb_burden_overview produces a plot (@test-plot_tb_burden_overview.R#5) 
+      [ OK: 1755 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 13 ]
+      1. Error: Ranking highBest (@test_country_ranking.R#27) 
+      2. Error: Ranking lowBest (@test_country_ranking.R#53) 
+      3. Error: Simplest test on results (@test_departure_mean.R#22) 
+      4. Error: Change time name (@test_departure_mean.R#51) 
+      5. Error: Test of eurofound dataset, scrambled, further statistics. (@test_departure_mean.R#68) 
+      6. Error: Basic exceptions (@test_gamma_conv_msteps.R#46) 
+      7. Error: Basic exceptions (@test_gamma_conv_msteps.R#81) 
+      8. Error: LowBest and highBest (@test_graph_departure.R#60) 
+      9. Error: Simplest Imputation using option cut (@test_impute_dataset.R#52) 
       1. ...
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100   116    0   116    0     0    253      0 --:--:-- --:--:-- --:--:--   253
-    100  272k    0  272k    0     0   236k      0 --:--:--  0:00:01 --:--:--  236k
-    Quitting from lines 38-41 (intro.Rmd) 
-    Error: processing vignette 'intro.Rmd' failed with diagnostics:
-    GnuTLS recv error (-110): The TLS connection was non-properly terminated.
-    Execution halted
-    ```
-
-# ggalt
-
-Version: 0.4.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘plotly’
-      All declared Imports should be used.
-    ```
-
-# ggconf
-
-Version: 0.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# ggeffects
-
-Version: 0.3.1
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘ordinal’
-    ```
-
-# ggenealogy
-
-Version: 0.3.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 2356 marked UTF-8 strings
-    ```
-
-# ggfan
-
-Version: 0.1.1
-
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘colorspace’ ‘grid’ ‘rstan’
+      ‘devtools’ ‘formattable’ ‘gridExtra’ ‘kableExtra’ ‘knitr’ ‘magrittr’
+      ‘readr’ ‘readxl’ ‘tidyverse’
       All declared Imports should be used.
     ```
 
-# ggformula
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 1 marked UTF-8 string
+    ```
 
-Version: 0.6.1
+# cutpointr
+
+<details>
+
+* Version: 1.0.1
+* Source code: https://github.com/cran/cutpointr
+* URL: https://github.com/thie1e/cutpointr
+* BugReports: https://github.com/thie1e/cutpointr/issues
+* Date/Publication: 2019-12-18 15:00:08 UTC
+* Number of recursive dependencies: 74
+
+Run `revdep_details(,"cutpointr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      names for target but not for current
+      
+      [31m──[39m [31m11. Failure: boot_test works correctly (@test-cutpointr.R#1404) [39m [31m────────────[39m
+      btg$d not equal to bt$d.
+      names for current but not for target
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 379 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 11 ]
+      1. Failure: Correct cutpoints with example data (@test-cutpointr.R#239) 
+      2. Failure: Correct cutpoints with example data (@test-cutpointr.R#240) 
+      3. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#563) 
+      4. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#564) 
+      5. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#570) 
+      6. Failure: Results for constrained metrics are equal to results by OptimalCutpoints (@test-cutpointr.R#571) 
+      7. Failure: Main metric gets replaced correctly when ties are broken (@test-cutpointr.R#1023) 
+      8. Failure: boot_ci works correctly (@test-cutpointr.R#1378) 
+      9. Failure: boot_test works correctly (@test-cutpointr.R#1396) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# cvms
+
+<details>
+
+* Version: 0.3.2
+* Source code: https://github.com/cran/cvms
+* URL: https://github.com/ludvigolsen/cvms
+* BugReports: https://github.com/ludvigolsen/cvms/issues
+* Date/Publication: 2019-12-01 23:10:02 UTC
+* Number of recursive dependencies: 115
+
+Run `revdep_details(,"cvms")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      Lengths differ: 3 is not 2
+      
+      [31m──[39m [31m11. Failure: model_verbose reports the correct model functions in validate() [39m
+      ...$NULL not equal to as.character(...).
+      Lengths differ: 3 is not 2
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 1617 | SKIPPED: 12 | WARNINGS: 2 | FAILED: 11 ]
+      1. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#910) 
+      2. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#923) 
+      3. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#936) 
+      4. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#948) 
+      5. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#962) 
+      6. Failure: model_verbose reports the correct model functions in cross_validate() (@test_cross_validate.R#975) 
+      7. Failure: multinomial random predictions work with cross_validate_fn() (@test_cross_validate_fn.R#1448) 
+      8. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#512) 
+      9. Failure: model_verbose reports the correct model functions in validate() (@test_validate.R#523) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# epikit
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/epikit
+* URL: https://github.com/R4EPI/epikit, https://r4epis.netlify.com, https://r4epi.github.io/epikit
+* BugReports: https://github.com/R4EPI/epikit/issues
+* Date/Publication: 2020-03-05 20:40:02 UTC
+* Number of recursive dependencies: 69
+
+Run `revdep_details(,"epikit")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(epikit)
+      > 
+      > test_check("epikit")
+      [31m──[39m [31m1. Failure: case_fatality_rate_df will add a total row to stratified analysis[39m
+      `iris_res` not equal to `iris_n`.
+      Incompatible type for column `Species`: x character, y factor
+      
+      [31m──[39m [31m2. Failure: case_fatality_rate_df will add a total row to stratified analysis[39m
+      `iris_res` not equal to `iris_n`.
+      Incompatible type for column `Species`: x character, y factor
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 107 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 2 ]
+      1. Failure: case_fatality_rate_df will add a total row to stratified analysis (@test-proportion.R#152) 
+      2. Failure: case_fatality_rate_df will add a total row to stratified analysis and merge CI (@test-proportion.R#173) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 ## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 180-186 (ggformula.Rmd) 
-    Error: processing vignette 'ggformula.Rmd' failed with diagnostics:
-    there is no package called 'mosaicModel'
-    Execution halted
-    ```
 
 *   checking package dependencies ... NOTE
     ```
-    Package suggested but not available for checking: ‘mosaicModel’
+    Package suggested but not available for checking: ‘epidict’
     ```
 
-# ggfortify
+# evaluator
 
-Version: 0.4.1
+<details>
 
-## In both
+* Version: 0.4.1
+* Source code: https://github.com/cran/evaluator
+* URL: https://evaluator.tidyrisk.org
+* BugReports: https://github.com/davidski/evaluator/issues
+* Date/Publication: 2019-07-22 15:00:03 UTC
+* Number of recursive dependencies: 134
+
+Run `revdep_details(,"evaluator")` for more info
+
+</details>
+
+## Newly broken
 
 *   checking examples ... ERROR
     ```
     ...
+    Running examples in ‘evaluator-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: exposure_histogram
+    > ### Title: Display a histogram of losses for a scenario
+    > ### Aliases: exposure_histogram
+    > 
     > ### ** Examples
     > 
-    > data(Canada, package = 'vars')
-    > autoplot(AirPassengers)
-    > autoplot(UKgas, ts.geom = 'bar')
-    > autoplot(Canada)
-    > autoplot(Canada, facets = FALSE)
-    > 
-    > library(zoo)
-    
-    Attaching package: ‘zoo’
-    
-    The following objects are masked from ‘package:base’:
-    
-        as.Date, as.Date.numeric
-    
-    > autoplot(xts::as.xts(AirPassengers))
-    Error in data.frame(index(model), ...) : 
-      arguments imply differing number of rows: 144, 1, 0
-    Calls: autoplot ... autoplot.xts -> <Anonymous> -> fortify.zoo -> cbind -> data.frame
+    > data(mc_simulation_results)
+    > result <- mc_simulation_results[[1, "results"]]
+    > exposure_histogram(result)
+    Error: `data` must be a data frame, or other object coercible by `fortify()`, not a list
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─evaluator::exposure_histogram(result)
+    [90m 2. [39m  ├─ggplot2::ggplot(simulation_result, aes(x = .data$ale)) [90m00_pkg_src/evaluator/R/common_graphs.R:173:2[39m
+    [90m 3. [39m  └─ggplot2:::ggplot.default(simulation_result, aes(x = .data$ale))
+    [90m 4. [39m    ├─ggplot2::fortify(data, ...)
+    [90m 5. [39m    └─ggplot2:::fortify.default(data, ...)
     Execution halted
     ```
 
 *   checking tests ...
     ```
+    ...
+      Expected match: "iteration"
+      Actual message: "All scenarios must be tidyrisk_scenario objects"
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_error(...)
+      [90m 6. [39mevaluator::run_simulations(good_scen, simulation_count = 10L)
+      
+      [31m──[39m [31m6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summar[39m
+      [[ ]] improper number of subscripts
+      
+      # Scenario model: openfair_tef_tc_diff_lm
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 128 | SKIPPED: 4 | WARNINGS: 12 | FAILED: 6 ]
+      1. Error: SR model works as expected (@test-openfair.R#220) 
+      2. Error: Simulation respects maximum ALE (@test-simulate.R#21) 
+      3. Failure: Missing mandatory OpenFAIR factors are detected (@test-simulate.R#29) 
+      4. Failure: Bad scenario parameters throw an error (@test-simulate.R#36) 
+      5. Failure: Multiple simulations deprecates the simulation_count parameters (@test-simulate.R#56) 
+      6. Error: Simulation summary handles NAs for tc/diff exceedance (@test-summarize.R#17) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# forestmangr
+
+<details>
+
+* Version: 0.9.1
+* Source code: https://github.com/cran/forestmangr
+* URL: https://github.com/sollano/forestmangr#readme
+* BugReports: https://github.com/sollano/forestmangr/issues
+* Date/Publication: 2019-01-02 23:10:27 UTC
+* Number of recursive dependencies: 124
+
+Run `revdep_details(,"forestmangr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    2: `.key` is deprecated 
+    > 
+    > # This can also be done directly using "merge_est" as output:
+    > nls_table(exfm14,dh ~ b0 * (1 - exp( -b1 * age )  )^b2, 
+    +           mod_start = tab_coef ,
+    +           .groups = "strata", 
+    +           output = "merge_est", 
+    +           est.name = "dh_est" ) %>% 
+    +   mutate(
+    +   bias = bias_per(y = dh, yhat = dh_est),
+    +   rmse = rmse_per(y = dh, yhat = dh_est) ) %>% 
+    +   head(15)
+    Error in bias_per(y = dh, yhat = dh_est) : object 'dh_est' not found
+    Calls: %>% ... as.data.frame -> mutate -> mutate.tbl_df -> mutate_impl -> bias_per
+    In addition: Warning messages:
+    1: `.key` is deprecated 
+    2: unnest() has a new interface. See ?unnest for details.
+    Try `df %>% unnest(c(est_n, data_n))`, with `mutate()` if needed 
+    3: unnest() has a new interface. See ?unnest for details.
+    Try `df %>% unnest(c(dat, est))`, with `mutate()` if needed 
+    Execution halted
+    ```
+
+# gratia
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/gratia
+* URL: https://gavinsimpson.github.io/gratia
+* BugReports: https://github.com/gavinsimpson/gratia/issues
+* Date/Publication: 2020-01-19 20:20:03 UTC
+* Number of recursive dependencies: 111
+
+Run `revdep_details(,"gratia")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      10: FUN(X[[i]], ...)
-      11: as.vector(lag(ts, k))
-      12: lag(ts, k)
-      13: bad_args("x", "must be a vector, not a ts object, do you want `stats::lag()`?")
-      14: glubort(fmt_args(args), ..., .envir = .envir)
-      15: .abort(text)
+    Complete output:
+      > ## Test `gratia` using the `testthat` package
+      > 
+      > ## Setup
+      > library("testthat")
+      > 
+      > ## Runs the tests in tests/testthat
+      > test_check("gratia")
+      Loading required package: gratia
+      list()
+      [31m──[39m [31m1. Failure: subsetting works for smooth_samples (@test-subsetting.R#23) [39m [31m────[39m
+      Names of `attrs` ('names', 'row.names', 'class', 'seed', 'data_names') don't match 'row.names', 'names', 'class', 'seed', 'data_names'
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 1435 SKIPPED: 9 FAILED: 3
-      1. Error: fortify.ts works for timeserieses (@test-base_ts.R#13) 
-      2. Error: autoplot works for xts (@test-ts.R#122) 
-      3. Error: gglagplot (@test-tslib.R#103) 
+      [ OK: 519 | SKIPPED: 77 | WARNINGS: 0 | FAILED: 1 ]
+      1. Failure: subsetting works for smooth_samples (@test-subsetting.R#23) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Loading required package: ggplot2
-    Loading required package: MASS
-    Loading required package: strucchange
-    Loading required package: zoo
-    
-    Attaching package: 'zoo'
-    
-    The following objects are masked from 'package:base':
-    
-        as.Date, as.Date.numeric
-    
-    Loading required package: sandwich
-    Loading required package: urca
-    Loading required package: lmtest
-    Quitting from lines 169-174 (intro_Chinese.Rmd) 
-    Error: processing vignette 'intro_Chinese.Rmd' failed with diagnostics:
-    arguments imply differing number of rows: 144, 1, 0
-    Execution halted
-    ```
+# heemod
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.4Mb
-      sub-directories of 1Mb or more:
-        doc   5.0Mb
-    ```
+<details>
 
-# ggguitar
+* Version: 0.11.0
+* Source code: https://github.com/cran/heemod
+* BugReports: https://github.com/pierucci/heemod/issues
+* Date/Publication: 2019-10-22 08:40:05 UTC
+* Number of recursive dependencies: 93
 
-Version: 0.1.1
+Run `revdep_details(,"heemod")` for more info
 
-## In both
+</details>
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘gridExtra’ ‘lazyeval’ ‘readr’
-      All declared Imports should be used.
-    ```
+## Newly broken
 
-# ggimage
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘scales’
-      All declared Imports should be used.
-    ```
-
-# ggplot2
-
-Version: 2.2.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘reshape2’
-      All declared Imports should be used.
-    ```
-
-# ggplotAssist
-
-Version: 0.1.3
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘gcookbook’ ‘ggthemes’ ‘moonBook’ ‘tidyverse’
-      All declared Imports should be used.
-    ```
-
-# ggraptR
-
-Version: 1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘DBI’ ‘GGally’ ‘RColorBrewer’ ‘Rcpp’ ‘assertthat’ ‘backports’
-      ‘colorspace’ ‘colourpicker’ ‘evaluate’ ‘futile.options’ ‘gdtools’
-      ‘gtable’ ‘htmltools’ ‘htmlwidgets’ ‘httpuv’ ‘labeling’ ‘lambda.r’
-      ‘lazyeval’ ‘magrittr’ ‘miniUI’ ‘munsell’ ‘plyr’ ‘reshape’ ‘rprojroot’
-      ‘scales’ ‘stringi’ ‘stringr’ ‘svglite’ ‘tibble’ ‘xtable’ ‘yaml’
-      All declared Imports should be used.
-    ```
-
-# haven
-
-Version: 1.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘hms’
-      All declared Imports should be used.
-    ```
-
-*   checking for GNU extensions in Makefiles ... NOTE
-    ```
-    GNU make is a SystemRequirements.
-    ```
-
-# hddtools
-
-Version: 0.7
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      trying URL 'ftp://ftp.bafg.de/pub/REFERATE/GRDC/ltdata/africa.zip'
-      Content type 'unknown' length 10558875 bytes (10.1 MB)
-      ==================================================
-      ── 1. Error: Test tsGRDC function (@test-tsGRDC.R#6)  ──────────────────────────
-      cannot open the connection
-      1: tsGRDC(stationID = 1107700) at testthat/test-tsGRDC.R:6
-      2: readLines(fpath)
-      3: file(con, "r")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 25 SKIPPED: 0 FAILED: 1
-      1. Error: Test tsGRDC function (@test-tsGRDC.R#6) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# highcharter
-
-Version: 0.5.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 16.5Mb
-      sub-directories of 1Mb or more:
-        doc          13.7Mb
-        htmlwidgets   1.9Mb
-    ```
-
-# htmlTable
-
-Version: 1.11.2
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘pxweb’
-    ```
-
-# huxtable
-
-Version: 2.0.0
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      9: rmarkdown::render("table-tester-2.Rmd", quiet = TRUE, output_format = "pdf_document")
-      10: convert(output_file, run_citeproc)
-      11: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
-             output_format$pandoc$args, !quiet)
-      12: stop("pandoc document conversion failed with error ", result, call. = FALSE)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 298 SKIPPED: 48 FAILED: 4
-      1. Failure: Quick output functions work (@test-output.R#135) 
-      2. Failure: Quick output functions work (@test-output.R#136) 
-      3. Error: Row heights do not screw up LaTeX multicol (@test-with-pandoc.R#20) 
-      4. Error: table-tester-2.Rmd renders without errors in LaTeX (@test-with-pandoc.R#27) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    ! LaTeX Error: File `siunitx.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
-    Enter file name: 
-    ! Emergency stop.
-    <read *> 
-             
-    l.132 \usepackage
-    
-    pandoc: Error producing PDF
-    Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
-    pandoc document conversion failed with error 43
-    Execution halted
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘xtable’
-    ```
-
-# incgraph
-
-Version: 1.0.1
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘orca’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# IONiseR
-
-Version: 2.0.0
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
+*   checking examples ... ERROR
     ```
     ...
-    The following object is masked from 'package:base':
-    
-        apply
-    
-    
-    Attaching package: 'GenomicAlignments'
-    
-    The following object is masked from 'package:dplyr':
-    
-        last
-    
-    
-    Attaching package: 'ShortRead'
-    
-    The following object is masked from 'package:dplyr':
-    
-        id
-    
-    Error: processing vignette 'IONiseR.Rmd' failed with diagnostics:
-    path for html_dependency not found: 
+    > 
+    > define_dsa(
+    +   a, 10, 45,
+    +   b, .5, 1.5
+    + )
+    Error: All columns in a tibble must be vectors.
+    [31m✖[39m Column `dots[i]` is a `lazy_dots` object.
+    Backtrace:
+    [90m     [39m█
+    [90m  1. [39m└─heemod::define_dsa(a, 10, 45, b, 0.5, 1.5)
+    [90m  2. [39m  └─heemod:::define_dsa_(...) [90m00_pkg_src/heemod/R/sensitivity_define.R:47:2[39m
+    [90m  3. [39m    ├─base::suppressWarnings(...) [90m00_pkg_src/heemod/R/sensitivity_define.R:68:4[39m
+    [90m  4. [39m    │ └─base::withCallingHandlers(expr, warning = function(w) invokeRestart("muffleWarning"))
+    [90m  5. [39m    ├─dplyr::bind_rows(...) [90m00_pkg_src/heemod/R/sensitivity_define.R:69:6[39m
+    [90m  6. [39m    │ ├─dplyr:::flatten_bindable(dots_values(...))
+    [90m  7. [39m    │ └─rlang::dots_values(...)
+    [90m  8. [39m    ├─stats::setNames(tibble::tibble(dots[i]), names(dots)[i])
+    [90m  9. [39m    └─tibble::tibble(dots[i])
+    [90m 10. [39m      └─tibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+    [90m 11. [39m        └─t
     Execution halted
     ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.4Mb
-      sub-directories of 1Mb or more:
-        doc       3.6Mb
-        extdata   1.5Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      ‘start_time’
-    readFast5Summary.mc: no visible binding for global variable ‘duration’
-    readFast5Summary.mc: no visible binding for global variable
-      ‘num_events’
-    [,Fast5Summary-ANY-ANY-ANY: no visible binding for global variable
-      ‘baseCalledTemplate’
-    [,Fast5Summary-ANY-ANY-ANY: no visible binding for global variable
-      ‘baseCalledComplement’
-    [,Fast5Summary-ANY-ANY-ANY: no visible binding for global variable
-      ‘component’
-    [,Fast5Summary-ANY-ANY-ANY: no visible binding for global variable
-      ‘idx’
-    show,Fast5Summary: no visible binding for global variable ‘full_2D’
-    show,Fast5Summary: no visible binding for global variable ‘pass’
-    Undefined global functions or variables:
-      := AAAAA TTTTT accumulation baseCalledComplement baseCalledTemplate
-      bases_called category channel circleFun component duration error freq
-      full_2D group hour idx matrixCol matrixRow meanZValue mean_value
-      median_signal minute mux name nbases new_reads num_events oddEven
-      pass pentamer rbindlist readIDs seq_length start_time time_bin
-      time_group x y zvalue
-    ```
-
-# jpmesh
-
-Version: 1.0.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘readr’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 176 marked UTF-8 strings
-    ```
-
-# jpndistrict
-
-Version: 0.3.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 502 marked UTF-8 strings
-    ```
-
-# kokudosuuchi
-
-Version: 0.4.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘stringi’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 52458 marked UTF-8 strings
-    ```
-
-# KraljicMatrix
-
-Version: 0.2.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘dplyr’ ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# modelr
-
-Version: 0.1.1
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘lme4’, ‘rstanarm’
-    ```
-
-# modeval
-
-Version: 0.1.3
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Warning: Deprecated
-    Quitting from lines 112-115 (modeval.Rmd) 
-    Error: processing vignette 'modeval.Rmd' failed with diagnostics:
-    the argument has already been evaluated
-    Execution halted
-    ```
-
-# mosaicModel
-
-Version: 0.3.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘MASS’ ‘caret’ ‘ggformula’ ‘knitr’ ‘testthat’ ‘tidyverse’
-      All declared Imports should be used.
-    ```
-
-# mregions
-
-Version: 0.1.6
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘geojsonio’
-    
-    Package which this enhances but not available for checking: ‘leaflet’
-    ```
-
-# mrgsolve
-
-Version: 0.8.10
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.9Mb
-      sub-directories of 1Mb or more:
-        libs   5.7Mb
-    ```
-
-# mudata2
-
-Version: 1.0.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘hms’ ‘methods’
-      All declared Imports should be used.
-    ```
-
-# myTAI
-
-Version: 0.6.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.8Mb
-      sub-directories of 1Mb or more:
-        data   2.0Mb
-        doc    2.7Mb
-    ```
-
-# NipponMap
-
-Version: 0.1
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages which this enhances but not available for checking:
-      ‘kokudosuuchi’ ‘estatapi’ ‘jpndistrict’ ‘jpmesh’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘cshapes’, ‘mapdata’
-    ```
-
-# noaastormevents
-
-Version: 0.1.0
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘hurricaneexposuredata’
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘RColorBrewer’ ‘XML’ ‘choroplethr’ ‘choroplethrMaps’ ‘data.table’
-      ‘forcats’ ‘hurricaneexposure’ ‘plyr’
-      All declared Imports should be used.
-    ```
-
-# nycflights13
-
-Version: 0.2.2
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.0Mb
-      sub-directories of 1Mb or more:
-        data   6.9Mb
-    ```
-
-# observer
-
-Version: 0.1.2
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘ensurer’, ‘validate’
-    ```
-
-# odbc
-
-Version: 1.1.4
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.1Mb
-      sub-directories of 1Mb or more:
-        libs   5.7Mb
-    ```
-
-# parlitools
-
-Version: 0.2.1
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 13 marked UTF-8 strings
-    ```
-
-# perccalc
-
-Version: 1.0.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘MASS’ ‘devtools’ ‘ggplot2’ ‘haven’ ‘tidyverse’
-      All declared Imports should be used.
-    ```
-
-# petro.One
-
-Version: 0.1.1
-
-## In both
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      8: all.equal(x, y, tolerance = tolerance, check.attributes = check.attributes, ...)
-      9: all.equal.numeric(x, y, tolerance = tolerance, check.attributes = check.attributes, 
-             ...)
-      10: stop(gettextf("'%s' must be logical", "check.attributes"), domain = NA)
+    ...
+      [90m  4. [39mheemod:::define_dsa_(...) [90mrevdep/checks/heemod/new/heemod.Rcheck/00_pkg_src/heemod/R/tabular_input.R:639:4[39m
+      [90m 11. [39mtibble::tibble(dots[i])
+      [90m 12. [39mtibble:::tibble_quos(xs[!is_null], .rows, .name_repair)
+      [90m 13. [39mtibble:::check_valid_col(res, col_names[[j]], j)
+      [90m 14. [39mtibble:::check_valid_cols(set_names(list(x), name))
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 78 SKIPPED: 0 FAILED: 5
-      1. Error: when read_multipage standard type only (@test_multipage.R#79) 
-      2. Error: when read_multipage journal-paper only (@test_multipage.R#90) 
-      3. Error: when read_multipage journal-paper only (@test_multipage.R#97) 
-      4. Error: when read_multipage journal-paper only (@test_multipage.R#104) 
-      5. Error: expect_equal_scale is 10% tolerance (@test_utils.R#6) 
+      [ OK: 470 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 12 ]
+      1. Error: Same results using 1 core or 2. (@test_parallel.R#7) 
+      2. Failure: Parameter evaluation (@test_parameters.R#81) 
+      3. Error: we can run construct_part_surv_tib (@test_part_surv.R#298) 
+      4. Error: define sensitivity (@test_sensitivity.R#5) 
+      5. Error: run sensitivity (@test_sensitivity.R#101) 
+      6. Error: discount rate as a parameter works (@test_sensitivity.R#173) 
+      7. Error: sensitivity expression inputs (@test_sensitivity.R#236) 
+      8. Error: can read multinomial parameters from file (@test_tabular_input.R#110) 
+      9. Failure: Bad parameter file input is caught. (@test_tabular_input.R#379) 
+      1. ...
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘Rgraphviz’ ‘cluster’ ‘graph’
-      All declared Imports should be used.
-    ```
-
-# PKPDmisc
-
-Version: 2.1.1
-
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking package dependencies ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘purrr’
-      All declared Imports should be used.
+    Package suggested but not available for checking: ‘rgho’
     ```
 
-# PlackettLuce
+# INDperform
 
-Version: 0.2-1
+<details>
 
-## In both
+* Version: 0.2.2
+* Source code: https://github.com/cran/INDperform
+* URL: https://github.com/saskiaotto/INDperform
+* BugReports: https://github.com/SaskiaAOtto/INDperform/issues
+* Date/Publication: 2020-01-09 12:30:14 UTC
+* Number of recursive dependencies: 83
 
-*   checking re-building of vignette outputs ... WARNING
+Run `revdep_details(,"INDperform")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
     ```
-    Error in re-building vignettes:
-      ...
-    Error: processing vignette 'Overview.Rmd' failed with diagnostics:
-    path for html_dependency not found: 
+    Running examples in ‘INDperform-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: merge_models
+    > ### Title: Merging two model output tibbles.
+    > ### Aliases: merge_models
+    > 
+    > ### ** Examples
+    > 
+    > # Using some models of the Baltic Sea demo data:
+    > # Merging GAM and GAMM tibbles
+    > test_ids <- 47:50 # choose subset
+    > gam_tbl <- model_gam_ex[test_ids,]
+    > gamm_tbl <- model_gamm(ind_init_ex[test_ids,], filter= gam_tbl$tac)
+    Error in model_gamm(ind_init_ex[test_ids, ], filter = gam_tbl$tac) : 
+      No IND~pressure GAMM could be fitted! Check if you chose the correct error distribution (default is gaussian()).
     Execution halted
     ```
 
-# pointblank
+*   checking tests ...
+    ```
+    ...
+      [31m──[39m [31m2. Error: (unknown) (@test_scoring.R#15) [39m [31m───────────────────────────────────[39m
+      Assigned data `"x < 0.3"` must be compatible with existing data.
+      [34mℹ[39m Error occurred for column `condition`.
+      [31m✖[39m No common type for `value` <character> and `x` <list>.
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`[<-`(`*tmp*`, 4, "condition", value = "x < 0.3")
+      [90m 2. [39mtibble:::`[<-.tbl_df`(`*tmp*`, 4, "condition", value = "x < 0.3")
+      [90m 3. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+      [90m 4. [39mtibble:::tbl_subassign_row(xj, i, value, value_arg)
+      [90m 5. [39mbase::tryCatch(...)
+      [90m 6. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 7. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 8. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 544 | SKIPPED: 0 | WARNINGS: 8 | FAILED: 2 ]
+      1. Error: (unknown) (@test_model_gamm.R#4) 
+      2. Error: (unknown) (@test_scoring.R#15) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
-Version: 0.1
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.3Mb
+      sub-directories of 1Mb or more:
+        data   3.1Mb
+        help   1.6Mb
+    ```
+
+# janitor
+
+<details>
+
+* Version: 1.2.1
+* Source code: https://github.com/cran/janitor
+* URL: https://github.com/sfirke/janitor
+* BugReports: https://github.com/sfirke/janitor/issues
+* Date/Publication: 2020-01-22 19:20:02 UTC
+* Number of recursive dependencies: 59
+
+Run `revdep_details(,"janitor")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > # calculates correctly even with totals column and/or row:
+    > mtcars %>%
+    +   tabyl(am, cyl) %>%
+    +   adorn_totals("row") %>%
+    +   adorn_percentages()
+    Error: Assigned data `name` must be compatible with existing data.
+    [34mℹ[39m Error occurred for column `am`.
+    [31m✖[39m No common type for `value` <character> and `x` <double>.
+    Backtrace:
+    [90m     [39m█
+    [90m  1. [39m└─mtcars %>% tabyl(am, cyl) %>% adorn_totals("row") %>% adorn_percentages()
+    [90m  2. [39m  ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+    [90m  3. [39m  └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+    [90m  4. [39m    └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+    [90m  5. [39m      └─`_fseq`(`_lhs`)
+    [90m  6. [39m        └─magrittr::freduce(value, `_function_list`)
+    [90m  7. [39m          └─function_list[[i]](value)
+    [90m  8. [39m            └─janitor::adorn_totals(., "row")
+    [90m  9. [39m              ├─base::`[<-`(`*tmp*`, 1, 1, value = "Total") [90m00_pkg_src/janitor/R/adorn_totals.R:67:6[39m
+    [90m 10. [39m              └─tibble:::`[<-.tbl_df`(`*tmp*`, 1, 1, value = "Total") [90m00_pkg_src
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      [90m 23. [39mtibble:::tbl_subassign_matrix(x, j, value, j_arg, substitute(value))
+      [90m 24. [39mbase::tryCatch(...)
+      [90m 25. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 26. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 27. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 519 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 12 ]
+      1. Error: grouped_df gets ungrouped and succeeds (@test-add-totals.R#122) 
+      2. Error: na.rm value works correctly (@test-add-totals.R#129) 
+      3. Error: add_totals respects if input was data.frame (@test-add-totals.R#141) 
+      4. Error: add_totals respects if input was data_frame (@test-add-totals.R#148) 
+      5. Error: works with non-numeric columns mixed in; fill character specification (@test-add-totals.R#192) 
+      6. Error: automatically invokes purrr::map when called on a 3-way tabyl (@test-add-totals.R#251) 
+      7. Error: deprecated functions adorn_totals_col and adorn_totals_row function as expected (@test-add-totals.R#283) 
+      8. Error: (unknown) (@test-adorn-percentages.R#44) 
+      9. Error: non-tabyls are treated correctly (@test-adorn-title.R#49) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# jstor
+
+<details>
+
+* Version: 0.3.7
+* Source code: https://github.com/cran/jstor
+* URL: https://github.com/ropensci/jstor, https://ropensci.github.io/jstor/
+* BugReports: https://github.com/ropensci/jstor/issues
+* Date/Publication: 2019-09-05 02:10:11 UTC
+* Number of recursive dependencies: 68
+
+Run `revdep_details(,"jstor")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(jstor)
+      > 
+      > test_check("jstor")
+      [31m──[39m [31m1. Failure: authors are correct (@test-books.R#117) [39m [31m────────────────────────[39m
+      chap_auth[[5, "authors"]] not identical to `correct_authors`.
+      names for current but not for target
+      Attributes: < target is NULL, current is list >
+      Length mismatch: comparison on first 1 components
+      Component 1: Cols in y but not x: `c(NA_character_, NA_character_)`. 
+      Component 1: Cols in x but not y: `string_name`, `author_number`, `suffix`, `surname`, `given_name`, `prefix`. 
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 251 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
+      1. Failure: authors are correct (@test-books.R#117) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# metacoder
+
+<details>
+
+* Version: 0.3.3
+* Source code: https://github.com/cran/metacoder
+* URL: https://grunwaldlab.github.io/metacoder_documentation/
+* BugReports: https://github.com/grunwaldlab/metacoder/issues
+* Date/Publication: 2019-07-18 06:35:33 UTC
+* Number of recursive dependencies: 147
+
+Run `revdep_details(,"metacoder")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      > test_check("metacoder")
+      [31m──[39m [31m1. Failure: Summing counts per taxon (@test--calculations.R#103) [39m [31m───────────[39m
+      sum(x$data$tax_data$`700035949`) not equal to result$`700035949`[1].
+      names for current but not for target
+      
+      [31m──[39m [31m2. Failure: Summing counts per taxon (@test--calculations.R#126) [39m [31m───────────[39m
+      `total_counts` not equal to result$total[1].
+      names for current but not for target
+      
+      [31m──[39m [31m3. Failure: Parsing the UNITE general release fasta (@test--parsers_and_write[39m
+      result$data$tax_data$unite_seq[5] not equal to "CCAAATCATGTCTCCCGGCCGCAAGGCAGGTGCAGGCGTTTAACCCTTTGTGAACCAAAAAACCTTTCGCTTCGGCAGCAGCTCGGTTGGAGACAGCCTCTGTGTCAGCCTGCCGCTAGCACCAATTATCAAAACTTGCGGTTAGCAACATTGTCTGATTACCAAATTTTCGAATGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCCCGCATCGATGAAGAACGCAGCGAAACGCGATAGTTAATGTGAATTGCAGAATTCAGTGAATCATCGAGTCTTTGAACGCACATTGCGCCCATTGGTATTCCATTGGGCATGTCTGTTTGAGCGTCATTACAACCCTCGGTCACCACCGGTTTTGAGCGAGCAGGGTCTTCGGATCCAGCTGGCTTTAAAGTTGTAAGCTCTGCTGGCTGCTCGGCCCAACCAGAACATAGTAAAATCATGCTTGTTCAAGGTTCGCGGTCGAAGCGGTACGGCCTGAACAATACCTACCACCTCTTAGG".
+      names for target but not for current
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 93 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 3 ]
+      1. Failure: Summing counts per taxon (@test--calculations.R#103) 
+      2. Failure: Summing counts per taxon (@test--calculations.R#126) 
+      3. Failure: Parsing the UNITE general release fasta (@test--parsers_and_writers.R#119) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘Hmisc’ ‘digest’ ‘htmltools’ ‘knitr’ ‘lazyWeave’ ‘lubridate’ ‘rJava’
+      ‘ggrepel’ ‘reshape’ ‘svglite’
       All declared Imports should be used.
+    ```
+
+# micropan
+
+<details>
+
+* Version: 2.0
+* Source code: https://github.com/cran/micropan
+* Date/Publication: 2020-01-19 18:30:06 UTC
+* Number of recursive dependencies: 27
+
+Run `revdep_details(,"micropan")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > data(xmpl.panmat)
+    > 
+    > # Estimating binomial mixture models
+    > binmix.lst <- binomixEstimate(xmpl.panmat, K.range = 3:8)
+    binomixEstimate: Fitting 3 component model...
+    Error: Assigned data `lst[[1]]` must be compatible with row subscript `i`.
+    [31m✖[39m 1 row must be assigned.
+    [31m✖[39m Assigned data has 3 rows.
+    [34mℹ[39m Only vectors of size 1 are recycled.
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─micropan::binomixEstimate(xmpl.panmat, K.range = 3:8)
+    [90m 2. [39m  ├─base::`[<-`(...) [90m00_pkg_src/micropan/R/binomix.R:132:4[39m
+    [90m 3. [39m  └─tibble:::`[<-.tbl_df`(...) [90m00_pkg_src/micropan/R/binomix.R:132:4[39m
+    [90m 4. [39m    └─tibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+    [90m 5. [39m      └─tibble:::vectbl_recycle_rhs(...)
+    [90m 6. [39m        └─base::tryCatch(...)
+    [90m 7. [39m          └─base:::tryCatchList(expr, classes, parentenv, handlers)
+    [90m 8. [39m            └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    [90m 9. [39m              └─value[[3L]](cond)
+    Execution halted
+    ```
+
+# modeltests
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/modeltests
+* URL: https://github.com/alexpghayes/modeltests
+* BugReports: https://github.com/alexpghayes/modeltests/issues
+* Date/Publication: 2020-02-29 12:20:21 UTC
+* Number of recursive dependencies: 47
+
+Run `revdep_details(,"modeltests")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [90m  7. [39mmodeltests:::aug(model, data = dl$tibble, newdata = new_dl$tibble) [90mrevdep/checks/modeltests/new/modeltests.Rcheck/00_pkg_src/modeltests/R/check_augment_data_specification.R:51:2[39m
+      [90m  9. [39mtibble:::`[<-.tbl_df`(`*tmp*`, 1, 1, value = "strawberry")
+      [90m 10. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+      [90m 11. [39mtibble:::tbl_subassign_row(xj, i, value, value_arg)
+      [90m 12. [39mbase::tryCatch(...)
+      [90m 13. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 14. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 15. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 257 | SKIPPED: 0 | WARNINGS: 25 | FAILED: 7 ]
+      1. Error: add_missing = TRUE (@test-augment_data_helper.R#65) 
+      2. Failure: add_missing = FALSE, test_newdata = FALSE (@test-check_augment_data_specification.R#34) 
+      3. Failure: add_missing = FALSE, test_newdata = FALSE (@test-check_augment_data_specification.R#45) 
+      4. Failure: add_missing = FALSE, test_newdata = TRUE (@test-check_augment_data_specification.R#69) 
+      5. Failure: add_missing = FALSE, test_newdata = TRUE (@test-check_augment_data_specification.R#80) 
+      6. Failure: add_missing = TRUE, test_newdata = TRUE (@test-check_augment_data_specification.R#104) 
+      7. Failure: add_missing = TRUE, test_newdata = TRUE (@test-check_augment_data_specification.R#115) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # poio
 
-Version: 0.0-3
+<details>
+
+* Version: 0.0-3
+* Source code: https://github.com/cran/poio
+* URL: https://github.com/RL10N/poio
+* BugReports: https://github.com/RL10N/poio/issues
+* Date/Publication: 2017-01-29 10:16:13
+* Number of recursive dependencies: 88
+
+Run `revdep_details(,"poio")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘poio’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+    See ‘/home/rstudio/tibble/revdep/checks/poio/new/poio.Rcheck/00install.out’ for details.
+    ```
 
 ## In both
 
@@ -1435,9 +1120,532 @@ Version: 0.0-3
       Note: found 8 marked UTF-8 strings
     ```
 
-# prisonbrief
+# portalr
 
-Version: 0.1.0
+<details>
+
+* Version: 0.3.1
+* Source code: https://github.com/cran/portalr
+* URL: https://weecology.github.io/portalr/, https://github.com/weecology/portalr
+* BugReports: https://github.com/weecology/portalr/issues
+* Date/Publication: 2020-01-16 15:00:02 UTC
+* Number of recursive dependencies: 103
+
+Run `revdep_details(,"portalr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [31m──[39m [31m1. Failure: data generated by default setting is same (shrub_cover) (@test-99[39m
+      Value hashes to 273b981913, not 9e5849fa79
+      
+      [31m──[39m [31m2. Failure: data generated by default setting is same (ant colony_presence_ab[39m
+      Value hashes to b16d3f1a01, not 8ce773ce81
+      
+      [31m──[39m [31m3. Failure: data generated by level = 'stake' is same (ant colony_presence_ab[39m
+      Value hashes to 2194929e3e, not 4639dbfbf3
+      
+      [31m──[39m [31m4. Failure: data generated by level = 'plot' is same (ant colony_presence_abs[39m
+      Value hashes to 255aef31fb, not 60e9306bfc
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 193 | SKIPPED: 10 | WARNINGS: 0 | FAILED: 4 ]
+      1. Failure: data generated by default setting is same (shrub_cover) (@test-99-regression.R#166) 
+      2. Failure: data generated by default setting is same (ant colony_presence_absence) (@test-99-regression.R#177) 
+      3. Failure: data generated by level = 'stake' is same (ant colony_presence_absence) (@test-99-regression.R#195) 
+      4. Failure: data generated by level = 'plot' is same (ant colony_presence_absence) (@test-99-regression.R#213) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# REDCapR
+
+<details>
+
+* Version: 0.10.2
+* Source code: https://github.com/cran/REDCapR
+* URL: https://github.com/OuhscBbmc/REDCapR, http://ouhsc.edu/bbmc/, http://project-redcap.org
+* BugReports: https://github.com/OuhscBbmc/REDCapR/issues
+* Date/Publication: 2019-09-23 04:30:02 UTC
+* Number of recursive dependencies: 101
+
+Run `revdep_details(,"REDCapR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/test-all.R’ failed.
+    Complete output:
+      > # Modeled after the R6 testing structure: https://github.com/wch/R6/blob/master/tests/testthat.R
+      > library(testthat)
+      > library(REDCapR)
+      > 
+      > testthat::test_check("REDCapR")
+      [31m──[39m [31m1. Failure: validate_no_logical -concern dataset (@test-validate.R#36) [39m [31m─────[39m
+      ds$field_index not equal to 2.
+      names for target but not for current
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 135 | SKIPPED: 79 | WARNINGS: 0 | FAILED: 1 ]
+      1. Failure: validate_no_logical -concern dataset (@test-validate.R#36) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# rematch2
+
+<details>
+
+* Version: 2.1.1
+* Source code: https://github.com/cran/rematch2
+* URL: https://github.com/r-lib/rematch2#readme
+* BugReports: https://github.com/r-lib/rematch2/issues
+* Date/Publication: 2020-03-28 12:40:02 UTC
+* Number of recursive dependencies: 40
+
+Run `revdep_details(,"rematch2")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > # Match first occurrence
+    > pos <- re_exec(notables, name_rex)
+    > pos
+    Error: Input must be a vector, not a `rematch_records` object.
+    Backtrace:
+    [90m     [39m█
+    [90m  1. [39m├─(function (x, ...) ...
+    [90m  2. [39m├─tibble:::print.tbl(x)
+    [90m  3. [39m│ ├─cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+    [90m  4. [39m│ │ └─base::paste0(..., collapse = "\n")
+    [90m  5. [39m│ ├─base::format(x, ..., n = n, width = width, n_extra = n_extra)
+    [90m  6. [39m│ └─tibble:::format.tbl(x, ..., n = n, width = width, n_extra = n_extra)
+    [90m  7. [39m│   └─tibble::trunc_mat(x, n = n, width = width, n_extra = n_extra)
+    [90m  8. [39m│     ├─base::as.data.frame(head(x, n))
+    [90m  9. [39m│     ├─utils::head(x, n)
+    [90m 10. [39m│     └─utils:::head.data.frame(x, n)
+    [90m 11. [39m│       ├─x[seq_len(n), , drop = FALSE]
+    [90m 12. [39m│       └─tibble:::`[.tbl_df`(x, seq_len(n), , drop = FALSE)
+    [90m 13. [39m│         └─tibble:::tbl_subset_row(xo, i = i, i_arg)
+    [90
+    Execution halted
+    ```
+
+# RmarineHeatWaves
+
+<details>
+
+* Version: 0.17.0
+* Source code: https://github.com/cran/RmarineHeatWaves
+* URL: https://github.com/ajsmit/RmarineHeatWaves
+* Date/Publication: 2018-06-04 17:43:40 UTC
+* Number of recursive dependencies: 71
+
+Run `revdep_details(,"RmarineHeatWaves")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### ** Examples
+    > 
+    > ts_dat <- make_whole(sst_WA)
+    > res <- detect(ts_dat, climatology_start = "1983-01-01",
+    +               climatology_end = "2012-12-31")
+    Error: Assigned data `zoo::na.approx(tDat[59:61, no_NA], maxgap = 1, na.rm = TRUE)` must be compatible with existing data.
+    [34mℹ[39m Error occurred for column `doy`.
+    [31m✖[39m Can't cast <double[,31]> to <double>.
+    Can not decrease dimensions.
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─RmarineHeatWaves::detect(...)
+    [90m 2. [39m  ├─base::`[<-`(...) [90m00_pkg_src/RmarineHeatWaves/R/RmarineHeatWaves.R:265:4[39m
+    [90m 3. [39m  └─tibble:::`[<-.tbl_df`(...) [90m00_pkg_src/RmarineHeatWaves/R/RmarineHeatWaves.R:265:4[39m
+    [90m 4. [39m    └─tibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+    [90m 5. [39m      └─tibble:::tbl_subassign_row(xj, i, value, value_arg)
+    [90m 6. [39m        └─base::tryCatch(...)
+    [90m 7. [39m          └─base:::tryCatchList(expr, classes, parentenv, handlers)
+    [90m 8. [39m            └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    [90m 9. [39m              └─value[[3L]](cond)
+    Execution halted
+    ```
+
+# rsample
+
+<details>
+
+* Version: 0.0.5
+* Source code: https://github.com/cran/rsample
+* URL: https://tidymodels.github.io/rsample
+* BugReports: https://github.com/tidymodels/rsample/issues
+* Date/Publication: 2019-07-12 22:20:11 UTC
+* Number of recursive dependencies: 89
+
+Run `revdep_details(,"rsample")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      > test_check(package = "rsample")
+      [31m──[39m [31m1. Failure: Bootstrap estimate of mean is close to estimate of mean from norm[39m
+      ttest$estimate not equal to single_pct_res$.estimate.
+      names for target but not for current
+      
+      [31m──[39m [31m2. Failure: Bootstrap estimate of mean is close to estimate of mean from norm[39m
+      ttest$estimate not equal to single_t_res$.estimate.
+      names for target but not for current
+      
+      [31m──[39m [31m3. Failure: Bootstrap estimate of mean is close to estimate of mean from norm[39m
+      ttest$estimate not equal to single_bca_res$.estimate.
+      names for target but not for current
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 529 | SKIPPED: 0 | WARNINGS: 13 | FAILED: 3 ]
+      1. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#53) 
+      2. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#63) 
+      3. Failure: Bootstrap estimate of mean is close to estimate of mean from normal distribution (@test_bootci.R#73) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# RSDA
+
+<details>
+
+* Version: 3.0.1
+* Source code: https://github.com/cran/RSDA
+* URL: http://www.oldemarrodriguez.com
+* Date/Publication: 2020-01-21 07:50:31 UTC
+* Number of recursive dependencies: 125
+
+Run `revdep_details(,"RSDA")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘RSDA-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: VeterinaryData
+    > ### Title: Symbolic interval data example
+    > ### Aliases: VeterinaryData
+    > ### Keywords: datasets
+    > 
+    > ### ** Examples
+    > 
+    > data(VeterinaryData)
+    > VeterinaryData
+    Error in get(x, envir = ns, inherits = FALSE) : 
+      object 'warningc' not found
+    Calls: <Anonymous> ... head.data.frame -> [ -> [.symbolic_tbl -> getFromNamespace -> get
+    Execution halted
+    ```
+
+# rubias
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/rubias
+* Date/Publication: 2019-06-10 15:00:03 UTC
+* Number of recursive dependencies: 70
+
+Run `revdep_details(,"rubias")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    [1] "/tmp/Rtmpt8oyAh/mixfile"
+    > 
+    > # note that in practice you will probably want to specify
+    > # your own directory...
+    > 
+    > # run the function
+    > write_gsi_sim_mixture(chinook_mix, 5, prefix)
+    Error: Assigned data `0` must be compatible with existing data.
+    [34mℹ[39m Error occurred for column `repunit`.
+    [31m✖[39m No common type for `value` <double> and `x` <character>.
+    Backtrace:
+    [90m    [39m█
+    [90m 1. [39m└─rubias::write_gsi_sim_mixture(chinook_mix, 5, prefix)
+    [90m 2. [39m  ├─base::`[<-`(`*tmp*`, is.na(mix), value = 0) [90m00_pkg_src/rubias/R/write_gsi_sim_mixture.R:36:2[39m
+    [90m 3. [39m  └─tibble:::`[<-.tbl_df`(`*tmp*`, is.na(mix), value = 0) [90m00_pkg_src/rubias/R/write_gsi_sim_mixture.R:36:2[39m
+    [90m 4. [39m    └─tibble:::tbl_subassign_matrix(x, j, value, j_arg, substitute(value))
+    [90m 5. [39m      └─base::tryCatch(...)
+    [90m 6. [39m        └─base:::tryCatchList(expr, classes, parentenv, handlers)
+    [90m 7. [39m          └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    [90m 8. [39m            └─value[[3L]](cond)
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 11.1Mb
+      sub-directories of 1Mb or more:
+        libs   9.2Mb
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
+    ```
+
+# SanzCircos
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/SanzCircos
+* Date/Publication: 2018-05-04 10:52:54 UTC
+* Number of recursive dependencies: 42
+
+Run `revdep_details(,"SanzCircos")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > ### Title: make_circos_links
+    > ### Aliases: make_circos_links
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > links_df <- data.frame(chrom = c(rep("chr1", 5), rep("chr2", 5)),
+    + band = c(rep("band1", 3), rep("band2", 2), "band1", rep("band2", 4)),
+    + link = c(1, 2, 3, 1, 2, 1, 1, 3, 4, 5),
+    + start = c(1, 3, 5, 10, 35, 1, 5, 8, 13, 15),
+    + end = c(3, 5, 10, 35, 39, 5, 8, 13, 15, 21))
+    > 
+    > links <- make_circos_links(links_df, "chrom", "band", "link", "start", "end", status = TRUE)
+    Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
+    Please use `as_tibble()` instead.
+    The signature and semantics have changed, see `?as_tibble`.
+    [90mThis warning is displayed once every 8 hours.[39m
+    [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
+    Error: Assigned data `as.character(df[[chromosome_grouping]][i])` must be compatible with existing data.
+    [34mℹ[39m Error occurred for column `V2`.
+    [31m✖[39m Lossy cast from `value` <character> to `x` <logical>.
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘purrr’ ‘tidyr’
+      All declared Imports should be used.
+    ```
+
+# simrel
+
+<details>
+
+* Version: 2.0
+* Source code: https://github.com/cran/simrel
+* URL: https://simulatr.github.io/simrel/
+* BugReports: https://github.com/simulatr/simrel/issues
+* Date/Publication: 2019-04-01 18:00:09 UTC
+* Number of recursive dependencies: 97
+
+Run `revdep_details(,"simrel")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(simrel)
+      > 
+      > test_check("simrel")
+      [31m──[39m [31m1. Error: Prepare Design (@test-utils.R#44) [39m [31m────────────────────────────────[39m
+      Can't join on 'q' x 'q' because of incompatible types (list / list)
+      [1mBacktrace:[22m
+      [90m 1. [39mtestthat::expect_identical(prepare_design(opts), dgn)
+      [90m 3. [39mtestthat:::compare.default(act$val, exp$val)
+      [90m 5. [39mdplyr:::all.equal.tbl_df(x, y, ...)
+      [90m 6. [39mdplyr:::equal_data_frame(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 169 | SKIPPED: 21 | WARNINGS: 3 | FAILED: 1 ]
+      1. Error: Prepare Design (@test-utils.R#44) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# tidytransit
+
+<details>
+
+* Version: 0.7.0
+* Source code: https://github.com/cran/tidytransit
+* URL: https://github.com/r-transit/tidytransit
+* BugReports: https://github.com/r-transit/tidytransit
+* Date/Publication: 2020-03-15 17:30:02 UTC
+* Number of recursive dependencies: 83
+
+Run `revdep_details(,"tidytransit")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [31m──[39m [31m1. Error: travel_times from stop with departures from transfer stops (@test-r[39m
+      Assigned data `c("stop0", "Zero", 46.9596, 7.39071, NA, 0)` must be compatible with row subscript `nrow(g2$stops) + 1`.
+      [31m✖[39m 1 row must be assigned.
+      [31m✖[39m Assigned data has 6 rows.
+      [34mℹ[39m Only vectors of size 1 are recycled.
+      [1mBacktrace:[22m
+      [90m 1. [39mbase::`[<-`(...)
+      [90m 2. [39mtibble:::`[<-.tbl_df`(...)
+      [90m 3. [39mtibble:::tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+      [90m 4. [39mtibble:::vectbl_recycle_rhs(...)
+      [90m 5. [39mbase::tryCatch(...)
+      [90m 6. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+      [90m 7. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      [90m 8. [39mvalue[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 106 | SKIPPED: 9 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: travel_times from stop with departures from transfer stops (@test-raptor.R#210) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        doc       1.3Mb
+        extdata   4.4Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 62 marked UTF-8 strings
+    ```
+
+# tidytree
+
+<details>
+
+* Version: 0.3.2
+* Source code: https://github.com/cran/tidytree
+* URL: https://yulab-smu.github.io/treedata-book/
+* BugReports: https://github.com/YuLab-SMU/tidytree/issues
+* Date/Publication: 2020-03-12 06:30:02 UTC
+* Number of recursive dependencies: 72
+
+Run `revdep_details(,"tidytree")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘tidytree’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+    See ‘/home/rstudio/tibble/revdep/checks/tidytree/new/tidytree.Rcheck/00install.out’ for details.
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘utils’
+      All declared Imports should be used.
+    ```
+
+# viafr
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/viafr
+* URL: https://github.com/stefanieschneider/viafr
+* BugReports: https://github.com/stefanieschneider/viafr/issues
+* Date/Publication: 2019-07-01 11:40:03 UTC
+* Number of recursive dependencies: 55
+
+Run `revdep_details(,"viafr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      [90m 27. [39m[ base::eval(...) ][90m with 1 more call[39m
+      [90m 29. [39mviafr:::`_fseq`(`_lhs`)
+      [90m 30. [39mmagrittr::freduce(value, `_function_list`)
+      [90m 32. [39mfunction_list[[k]](value)
+      [90m 33. [39mdplyr::mutate_if(., is.character, list(~utf8_normalize(.)))
+      [90m 34. [39mdplyr:::manip_if(...)
+      [90m 35. [39mdplyr:::tbl_if_syms(.tbl, .predicate, .env, .include_group_vars = .include_group_vars)
+      [90m 39. [39mdplyr:::tbl_if_vars(.tbl, .p, .env, ..., .include_group_vars = .include_group_vars)
+      [90m 41. [39mtibble:::`[[.tbl_df`(.tbl, tibble_vars[[i]])
+      [90m 42. [39mtibble:::tbl_subset2(x, j = i, j_arg = substitute(i))
+      [90m 43. [39mtibble:::vectbl_as_col_location2(...)
+      [90m 50. [39mvctrs::vec_as_location2(i, n, names, arg = as_label(j_arg))
+      [90m 51. [39mvctrs:::result_get(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 36 | SKIPPED: 0 | WARNINGS: 31 | FAILED: 2 ]
+      1. Error: query list (@test_search.R#4) 
+      2. Error: valid query (@test_search.R#33) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 ## In both
 
@@ -1446,947 +1654,46 @@ Version: 0.1.0
       Note: found 2 marked UTF-8 strings
     ```
 
-# profile
+# vip
 
-Version: 1.0
+<details>
 
-## In both
+* Version: 0.2.1
+* Source code: https://github.com/cran/vip
+* URL: https://github.com/koalaverse/vip/
+* BugReports: https://github.com/koalaverse/vip/issues
+* Date/Publication: 2020-01-20 19:20:02 UTC
+* Number of recursive dependencies: 182
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘profile-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: read_rprof
-    > ### Title: File I/O for profiler data
-    > ### Aliases: read_rprof read_pprof write_rprof write_pprof
-    > 
-    > ### ** Examples
-    > 
-    > rprof_file <- system.file("samples/rprof/1.out", package = "profile")
-    > ds <- read_rprof(rprof_file)
-    > ds
-    Profile data: 22 samples
-    > pprof_file <- tempfile("profile", fileext = ".pb.gz")
-    > write_pprof(ds, pprof_file)
-    Error: Package RProtoBuf is required to read pprof files.
-    Execution halted
-    ```
+Run `revdep_details(,"vip")` for more info
 
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘RProtoBuf’
-    ```
+</details>
 
-# psychmeta
-
-Version: 0.2.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 5 marked UTF-8 strings
-    ```
-
-# railtrails
-
-Version: 0.0.1
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 4483 marked UTF-8 strings
-    ```
-
-# rclimateca
-
-Version: 1.0.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 24 marked UTF-8 strings
-    ```
-
-# rcv
-
-Version: 0.2.1
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 6543 marked UTF-8 strings
-    ```
-
-# readr
-
-Version: 1.1.1
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 13.3Mb
-      sub-directories of 1Mb or more:
-        libs  12.8Mb
-    ```
-
-*   checking compiled code ... NOTE
-    ```
-    File ‘readr/libs/readr.so’:
-      Found non-API calls to R: ‘R_GetConnection’, ‘R_WriteConnection’
-    
-    Compiled code should not call non-API entry points in R.
-    
-    See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-    ```
-
-# readtext
-
-Version: 0.50
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘antiword’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# readxl
-
-Version: 1.0.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.6Mb
-      sub-directories of 1Mb or more:
-        libs   4.3Mb
-    ```
-
-# refimpact
-
-Version: 1.0.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘curl’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 85 marked UTF-8 strings
-    ```
-
-# repurrrsive
-
-Version: 0.1.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 8 marked UTF-8 strings
-    ```
-
-# rerddap
-
-Version: 0.4.2
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘taxize’
-    ```
-
-# rFSA
-
-Version: 0.9.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘methods’
-      All declared Imports should be used.
-    ```
-
-# rmapzen
-
-Version: 0.3.3
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘geojsonio’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# rmarkdown
-
-Version: 1.8
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.6Mb
-      sub-directories of 1Mb or more:
-        rmd   6.1Mb
-    ```
-
-# rnoaa
-
-Version: 0.7.0
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘ncdf4’
-    ```
-
-# rodham
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘stringr’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 59 marked UTF-8 strings
-    ```
-
-# rtimicropem
-
-Version: 1.3
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘R6’
-      All declared Imports should be used.
-    ```
-
-# rtweet
-
-Version: 0.6.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 113868 marked UTF-8 strings
-    ```
-
-# RxODE
-
-Version: 0.6-1
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘SnakeCharmR’
-    ```
-
-# SanFranBeachWater
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# scanstatistics
-
-Version: 1.0.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.0Mb
-      sub-directories of 1Mb or more:
-        libs   6.4Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘gamlss.dist’
-      All declared Imports should be used.
-    ```
-
-# sf
-
-Version: 0.6-0
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    Running examples in ‘sf-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: geos_measures
-    > ### Title: Compute geometric measurements
-    > ### Aliases: geos_measures st_area geos_measures st_length geos_measures
-    > ###   st_distance
-    > 
-    > ### ** Examples
-    > 
-    > b0 = st_polygon(list(rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))))
-    > b1 = b0 + 2
-    > b2 = b0 + c(-0.2, 2)
-    > x = st_sfc(b0, b1, b2)
-    > st_area(x)
-    [1] 4 4 4
-    > line = st_sfc(st_linestring(rbind(c(30,30), c(40,40))), crs = 4326)
-    > st_length(line)
-    Error in st_length(line) : 
-      package lwgeom required, please install it first
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 795-797 (sf1.Rmd) 
-    Error: processing vignette 'sf1.Rmd' failed with diagnostics:
-    package lwgeom required, please install it first
-    Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘lwgeom’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 20.1Mb
-      sub-directories of 1Mb or more:
-        doc     10.1Mb
-        libs     6.1Mb
-        sqlite   1.5Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘lwgeom’
-    ```
-
-# sjlabelled
-
-Version: 1.0.6
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘sjPlot’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘sjPlot’
-    ```
-
-# sjmisc
-
-Version: 2.6.3
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘sjPlot’
-    ```
-
-# sjPlot
-
-Version: 2.4.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘prediction’
-      All declared Imports should be used.
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘plm’
-    ```
-
-# sjstats
-
-Version: 0.14.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘knitr’
-      All declared Imports should be used.
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘sjPlot’, ‘MuMIn’, ‘piecewiseSEM’
-    ```
-
-# skimr
-
-Version: 1.0.1
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘skimr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: skim
-    > ### Title: Get useful summary statistic from a data frame
-    > ### Aliases: skim
-    > 
-    > ### ** Examples
-    > 
-    > skim(iris)
-    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-      there is no package called ‘bindr’
-    Calls: skim ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-    Execution halted
-    ```
+## Newly broken
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 125 SKIPPED: 1 FAILED: 29
-      1. Error: Formatting options change printed output (@test-formats.R#30) 
-      2. Failure: Skimming functions can be changed. (@test-functions.R#146) 
-      3. Failure: Skimming functions for new types can be added (@test-functions.R#233) 
-      4. Failure: Set skimming functions for multiple types (@test-functions.R#251) 
-      5. Error: Skimming a data frame works as expected (@test-skim.R#4) 
-      6. Error: Using skim_tee returns the object (@test-skim.R#36) 
-      7. Error: Using skim_tee prints out the object (@test-skim.R#41) 
-      8. Error: Skimming a grouped data frame works as expected (@test-skim.R#48) 
-      9. Error: skim_to_wide works as expected. (@test-skim.R#78) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 48-50 (Using_skimr.Rmd) 
-    Error: processing vignette 'Using_skimr.Rmd' failed with diagnostics:
-    there is no package called 'bindr'
-    Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘knitr’
-      All declared Imports should be used.
-    ```
-
-# solrium
-
-Version: 1.0.0
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘XML’
-    ```
-
-# statsDK
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘dplyr’ ‘ggplot2’ ‘stringr’
-      All declared Imports should be used.
-    ```
-
-# survminer
-
-Version: 0.4.1
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        doc   4.9Mb
-    ```
-
-# sweep
-
-Version: 0.2.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘lazyeval’ ‘lubridate’ ‘tidyr’
-      All declared Imports should be used.
-    ```
-
-# taxa
-
-Version: 0.2.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘knitr’ ‘lazyeval’ ‘rlang’
-      All declared Imports should be used.
-    ```
-
-# TCGAbiolinks
-
-Version: 2.5.9
-
-## In both
-
-*   checking examples ... ERROR
-    ```
     ...
-    |NA                          |NA                             |NA                   |NA                           |
-    |Thymic Epithelial Neoplasms |Neuroepitheliomatous Neoplasms |Basal Cell Neoplasms |Ductal and Lobular Neoplasms |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    |NA                          |NA                             |NA                   |NA                           |
-    Error in checkProjectInput(project) : 
-      Please set a valid project argument from the column id above. Project TCGA-ACC was not found.
-    Calls: GDCquery -> checkProjectInput
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 113 SKIPPED: 0 FAILED: 16
-      1. Error: TCGAanalyze_survival creates pdf (@test-analyse.R#4) 
-      2. Error: Results from TCGAanalyze_DEA and DMR in starburst plot are correct (@test-analyse.R#182) 
-      3. Error: GDCdownload API method for two files is working  (@test-prepare-download.R#4) 
-      4. Error: GDCdownload API method for one files is working  (@test-prepare-download.R#20) 
-      5. Error: GDCprepare accepts more than one project (@test-prepare-download.R#50) 
-      6. Error: Accecpts more than one platform (@test-prepare-download.R#68) 
-      7. Error: GDCquery can filter by data.category (@test-query.R#5) 
-      8. Error: GDCquery accepts more than one project (@test-query.R#11) 
-      9. Error: GDCquery can filter by sample.type (@test-query.R#23) 
-      1. ...
-      
-      Error: testthat unit tests failed
+      Running test_vip.R....................    3 tests [0;32mOK[0m 
+      Error: ----- FAILED[data]: test_pkg_earth.R<24--27>
+       call| expect_identical(current = vis_nsubsets[seq_len(nrow(vis_earth)), 
+       call| ]$Importance, target = unname(vis_earth[, "nsubsets", drop = TRUE]))
+       diff| names for current but not for target
+      ----- FAILED[data]: test_pkg_earth.R<28--31>
+       call| expect_identical(current = vis_rss[seq_len(nrow(vis_earth)), 
+       call| ]$Importance, target = unname(vis_earth[, "rss", drop = TRUE]))
+       diff| names for current but not for target
+      ----- FAILED[data]: test_pkg_earth.R<32--35>
+       call| expect_identical(current = vis_gcv[seq_len(nrow(vis_earth)), 
+       call| ]$Importance, target = unname(vis_earth[, "gcv", drop = TRUE]))
+       diff| names for current but not for target
+      ----- FAILED[data]: test_pkg_glmnet.R<36--39>
+       call| expect_identical(current = vis1$Importance, target = coef(fit1, 
+       call| s = min(fit1$lambda))[-1L])
+       diff| names for current but not for target
+      ----- FAILED[data]: test_pkg_glmnet.R<40--43>
+       call| expect_identical(current = vis2$Importance, t
+      In addition: There were 50 or more warnings (use warnings() to see the first 50)
       Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-    The following objects are masked from 'package:S4Vectors':
-    
-        first, intersect, rename, setdiff, setequal, union
-    
-    The following objects are masked from 'package:BiocGenerics':
-    
-        combine, intersect, setdiff, union
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 16-20 (clinical.Rmd) 
-    Error: processing vignette 'clinical.Rmd' failed with diagnostics:
-    there is no package called 'DT'
-    Execution halted
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 61.0Mb
-      sub-directories of 1Mb or more:
-        R      1.1Mb
-        data   2.3Mb
-        doc   57.4Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      ‘limmacontrasts.fit’
-    TCGAanalyze_analyseGRN: no visible global function definition for
-      ‘knnmi.cross’
-    TCGAanalyze_networkInference: no visible global function definition for
-      ‘c3net’
-    TCGAanalyze_networkInference: no visible global function definition for
-      ‘minet’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dNetInduce’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dNetPipeline’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dCommSignif’
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘visNet’
-    TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
-    getTSS: no visible global function definition for ‘promoters’
-    Undefined global functions or variables:
-      c3net dCommSignif dNetInduce dNetPipeline knnmi.cross
-      limmacontrasts.fit limmamakeContrasts minet portions promoters value
-      visNet
-    ```
-
-*   checking for unstated dependencies in vignettes ... NOTE
-    ```
-    'library' or 'require' call not declared from: ‘DT’
-    ```
-
-# tibbletime
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tidyselect’
-      All declared Imports should be used.
-    ```
-
-# tidyinftheo
-
-Version: 0.2.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘tibble’ ‘tidyverse’
-      All declared Imports should be used.
-    ```
-
-# tidyquant
-
-Version: 0.5.3
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-         })
-      9: expr_type_of(.x)
-      10: typeof(x)
-      11: duplicate(quo)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 149 SKIPPED: 2 FAILED: 5
-      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
-      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
-      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
-      4. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
-      5. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-    
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing AAPL.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
-    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing FB.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': status was 'Couldn't resolve host name'
-    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing GOOG.
-    Warning in value[[3L]](cond) : Returning as nested data frame.
-    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
-    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-    object 'Ask' not found
-    Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘broom’ ‘curl’ ‘devtools’ ‘rvest’ ‘timeSeries’ ‘tseries’ ‘zoo’
-      All declared Imports should be used.
-    ```
-
-# tidyr
-
-Version: 0.7.2
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 23 marked UTF-8 strings
-    ```
-
-# tidyRSS
-
-Version: 1.2.2
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘testthat’
-      All declared Imports should be used.
-    ```
-
-# tidyverse
-
-Version: 1.2.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘dbplyr’ ‘reprex’ ‘rlang’
-      All declared Imports should be used.
-    ```
-
-# timekit
-
-Version: 0.3.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘forecast’
-      All declared Imports should be used.
-    ```
-
-# timetk
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘forecast’
-      All declared Imports should be used.
-    ```
-
-# tipr
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘broom’ ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# tsibble
-
-Version: 0.1.0
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ── 1. Error: (unknown) (@test-tsibble.R#74)  ───────────────────────────────────
-      'to' must be a finite number
-      1: seq.POSIXt(ymd_h("2017-01-01 0"), ymd_h("2017-01-01 12"), by = "3 hour") at testthat/test-tsibble.R:74
-      
-      ── 2. Failure: From seconds to higher date (@test-tsummarise.R#35)  ────────────
-      as_tibble(res3) not equal to tibble(date_min = ymd_h("2017-01-01 0"), value = 5).
-      Rows in x but not y: 1. Rows in y but not x: 1. 
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 179 SKIPPED: 0 FAILED: 2
-      1. Error: (unknown) (@test-tsibble.R#74) 
-      2. Failure: From seconds to higher date (@test-tsummarise.R#35) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# ukbtools
-
-Version: 0.10.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘plyr’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 5 marked UTF-8 strings
-    ```
-
-# valr
-
-Version: 0.3.1
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 15.7Mb
-      sub-directories of 1Mb or more:
-        libs  14.2Mb
-    ```
-
-# waccR
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘lubridate’ ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# wikitaxa
-
-Version: 0.2.0
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 166 marked UTF-8 strings
-    ```
-
-# XKCDdata
-
-Version: 0.1.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘tibble’
-      All declared Imports should be used.
-    ```
-
-# zeligverse
-
-Version: 0.1.1
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘Amelia’ ‘MatchIt’ ‘WhatIf’
-      All declared Imports should be used.
-    ```
-
-# zFactor
-
-Version: 0.1.7
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rootSolve’
-      All declared Imports should be used.
     ```
 

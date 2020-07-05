@@ -1,2 +1,0 @@
-Observations: 150
-Variables: 0

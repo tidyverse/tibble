@@ -12,20 +12,25 @@ glimpse(x, width = NULL, ...)
 \item{width}{Width of output: defaults to the setting of the option
 \code{tibble.width} (if finite) or the width of the console.}
 
-\item{...}{Other arguments passed on to individual methods.}
+\item{...}{Unused, for extensibility.}
 }
 \value{
 x original x is (invisibly) returned, allowing \code{glimpse()} to be
 used within a data pipe line.
 }
 \description{
-\Sexpr[results=rd, stage=render]{tibble:::lifecycle("maturing")}
+\lifecycle{maturing}
 
-This is like a transposed version of \code{print()}: columns run down the page,
-and data runs across. This makes it possible to see every column in
-a data frame. It's a little like \code{\link[=str]{str()}} applied to a data frame
-but it tries to show you as much data as possible. (And it always shows
-the underlying data, even when applied to a remote data source.)
+\code{glimpse()} is like a transposed version of \code{print()}:
+columns run down the page, and data runs across.
+This makes it possible to see every column in a data frame.
+It's a little like \code{\link[=str]{str()}} applied to a data frame
+but it tries to show you as much data as possible.
+(And it always shows the underlying data, even when applied
+to a remote data source.)
+
+This generic will be moved to \pkg{pillar}, and reexported from there
+as soon as it becomes available.
 }
 \section{S3 methods}{
 
