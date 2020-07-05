@@ -1,15 +1,15 @@
 #' Provide a succinct summary of an object
 #'
 #' @description
-#' \code{type_sum} gives a brief summary of object type. Objects that commonly
+#' `type_sum()` gives a brief summary of object type. Objects that commonly
 #' occur in a data frame should return a string with four or less characters.
 #'
-#' \code{obj_sum} also includes the size of the object if \code{is_s3_vector}
-#' is \code{TRUE}.
+#' `obj_sum()` also includes the size of the object if `is_vector_s3()`
+#' is `TRUE`.
 #'
-#' \code{tbl_sum} gives a brief textual description of a table-like object,
+#' `tbl_sum()` gives a brief textual description of a table-like object,
 #' which should include the dimensions, the data source, and possible grouping
-#' (for dplyr).  The default implementation forwards to \code{obj_sum}
+#' (for `dplyr`).  The default implementation forwards to `obj_sum()`.
 #'
 #' @param x an object to summarise. Generally only methods of atomic vectors
 #'   and variants have been implemented.
@@ -106,7 +106,7 @@ dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))
   format_dim[is.na(dim)] <- "??"
-  paste0(format_dim, collapse = " \u00d7 ")
+  paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
 
 size_sum <- function(x) {

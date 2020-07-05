@@ -155,8 +155,12 @@ test_that("Can convert named atomic vectors to data frame", {
 })
 
 
-test_that("as_tibble alias", {
+test_that("as_data_frame is an alias of as_tibble", {
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
+})
+
+test_that("as.tibble is an alias of as_tibble", {
+  expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
 
 

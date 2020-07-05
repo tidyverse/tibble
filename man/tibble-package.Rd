@@ -3,7 +3,7 @@
 \docType{package}
 \name{tibble-package}
 \alias{tibble-package}
-\title{Simple Data Frames}
+\title{tibble: Simple Data Frames}
 \description{
 Provides a 'tbl_df' class that offers better checking and
 printing capabilities than traditional data frames.
@@ -21,34 +21,57 @@ describing the rest of it as text.
 
 \describe{
 \item{print}{By default only prints the first 10 rows (at most 20), and the
-  columns that fit on screen; see \code{\link{print.tbl_df}}}
+columns that fit on screen; see \code{\link[=print.tbl_df]{print.tbl_df()}}}
 \item{\code{[}}{Never simplifies (drops), so always returns data.frame}
-\item{\code{[[}, \code{$}}{Calls \code{\link{.subset2}} directly,
-  so is considerably faster. Returns \code{NULL} if column does not exist,
-  \code{$} warns.}
+\item{\code{[[}, \code{$}}{Calls \code{\link[=.subset2]{.subset2()}} directly,
+so is considerably faster. Returns \code{NULL} if column does not exist,
+\code{$} warns.}
 }
 }
 
 \section{Important functions}{
 
-\code{\link{tibble}} and \code{\link{tribble}} for construction,
-\code{\link{as_tibble}} for coercion,
-and \code{\link{print.tbl_df}} and \code{\link{glimpse}} for display.
+\code{\link[=tibble]{tibble()}} and \code{\link[=tribble]{tribble()}} for construction,
+\code{\link[=as_tibble]{as_tibble()}} for coercion,
+and \code{\link[=print.tbl_df]{print.tbl_df()}} and \code{\link[=glimpse]{glimpse()}} for display.
 }
 
 \section{Package options}{
 
-Display options for \code{tbl_df}, used by \code{\link{trunc_mat}} and
-(indirectly) by \code{\link{print.tbl_df}}.
+Display options for \code{tbl_df}, used by \code{\link[=trunc_mat]{trunc_mat()}} and
+(indirectly) by \code{\link[=print.tbl_df]{print.tbl_df()}}.
 \describe{
 \item{\code{tibble.print_max}}{Row number threshold: Maximum number of rows
-  printed. Set to \code{Inf} to always print all rows.  Default: 20.}
+printed. Set to \code{Inf} to always print all rows.  Default: 20.}
 \item{\code{tibble.print_min}}{Number of rows printed if row number
-  threshold is exceeded. Default: 10.}
+threshold is exceeded. Default: 10.}
 \item{\code{tibble.width}}{Output width. Default: \code{NULL} (use
-  \code{width} option).}
+\code{width} option).}
 \item{\code{tibble.max_extra_cols}}{Number of extra columns
-  printed in reduced form. Default: 100.}
+printed in reduced form. Default: 100.}
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tidyverse/tibble}
+  \item Report bugs at \url{https://github.com/tidyverse/tibble/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+
+Authors:
+\itemize{
+  \item Hadley Wickham \email{hadley@rstudio.com}
+  \item Romain Francois \email{romain@r-enthusiasts.com}
+}
+
+Other contributors:
+\itemize{
+  \item RStudio [copyright holder]
+}
+
+}

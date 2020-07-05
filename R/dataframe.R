@@ -1,26 +1,26 @@
 #' Build a data frame or list.
 #'
-#' \code{tibble} is a trimmed down version of \code{\link{data.frame}} that:
+#' `tibble()` is a trimmed down version of [data.frame()] that:
 #' \enumerate{
 #' \item Never coerces inputs (i.e. strings stay as strings!).
-#' \item Never adds \code{row.names}.
+#' \item Never adds `row.names`.
 #' \item Never munges column names.
 #' \item Only recycles length 1 inputs.
 #' \item Evaluates its arguments lazily and in order.
-#' \item Adds \code{tbl_df} class to output.
+#' \item Adds `tbl_df` class to output.
 #' \item Automatically adds column names.
 #' }
 #'
-#' \code{lst} is similar to \code{\link{list}}, but like \code{tibble}, it
+#' `lst()` is similar to [list()], but like `tibble()`, it
 #' evaluates its arguments lazily and in order, and automatically adds names.
 #'
-#' \code{data_frame} is an alias to \code{tibble}.
+#' `data_frame` is an alias to `tibble`.
 #'
 #' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
 #'   so you can refer to previously created variables.
-#' @param xs  A list of unevaluated expressions created with \code{~},
-#'   \code{quote()}, or \code{\link[lazyeval]{lazy}}.
-#' @seealso \code{\link{as_tibble}} to turn an existing list into
+#' @param xs  A list of unevaluated expressions created with `~`,
+#'   [quote()], or [lazyeval::lazy()].
+#' @seealso [as_tibble()] to turn an existing list into
 #'   a data frame.
 #' @export
 #' @examples
@@ -105,21 +105,21 @@ lst_ <- function(xs) {
 
 #' Coerce lists and matrices to data frames.
 #'
-#' \code{as.data.frame} is effectively a thin wrapper around \code{data.frame},
-#' and hence is rather slow (because it calls \code{data.frame} on each element
-#' before \code{cbind}ing together). \code{as_tibble} is a new S3 generic
+#' [as.data.frame()] is effectively a thin wrapper around `data.frame`,
+#' and hence is rather slow (because it calls [data.frame()] on each element
+#' before [cbind]ing together). `as_tibble` is a new S3 generic
 #' with more efficient methods for matrices and data frames.
 #'
 #' This is an S3 generic. tibble includes methods for data frames (adds tbl_df
 #' classes), tibbles (returns unchanged input), lists, matrices, and tables.
-#' Other types are first coerced via \code{\link[base]{as.data.frame}} with
-#' \code{stringsAsFactors = FALSE}.
+#' Other types are first coerced via `as.data.frame()` with
+#' `stringsAsFactors = FALSE`.
 #'
-#' \code{as_data_frame} is an alias.
+#' `as_data_frame` and `as.tibble` are aliases.
 #'
 #' @param x A list. Each element of the list must have the same length.
 #' @param ... Other arguments passed on to individual methods.
-#' @param validate When \code{TRUE}, verifies that the input is a valid data
+#' @param validate When `TRUE`, verifies that the input is a valid data
 #'   frame (i.e. all columns are named, and are 1d vectors or lists). You may
 #'   want to suppress this when you know that you already have a valid data
 #'   frame and you want to save some time.
@@ -208,7 +208,12 @@ as_tibble.poly <- function(x, ...) {
 }
 
 #' @export
-#' @param n Name for count column, default: \code{"n"}.
+as_tibble.ts <- function(x, ...) {
+  as_tibble(as.data.frame(x, ...))
+}
+
+#' @export
+#' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
 as_tibble.table <- function(x, n = "n", ...) {
   as_tibble(as.data.frame(x, responseName = n, stringsAsFactors = FALSE))
@@ -225,6 +230,12 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE, ...))
+}
+
+#' @export
+#' @rdname as_tibble
+as.tibble <- function(x, ...) {
+  UseMethod("as_tibble")
 }
 
 #' @export
@@ -257,7 +268,7 @@ as_data_frame.default <- as_tibble.default
 #' Test if the object is a tibble.
 #'
 #' @param x An object
-#' @return \code{TRUE} if the object inherits from the \code{tbl_df} class.
+#' @return `TRUE` if the object inherits from the `tbl_df` class.
 #' @export
 is.tibble <- function(x) {
   "tbl_df" %in% class(x)

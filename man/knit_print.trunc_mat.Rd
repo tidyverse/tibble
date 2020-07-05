@@ -10,4 +10,3 @@ knit_print.trunc_mat(x, options)
 knit_print method for trunc mat
 }
 \keyword{internal}
-

@@ -64,3 +64,7 @@ test_that("glimpse output matches known output", {
     glimpse(5),
     "glimpse/5.txt")
 })
+
+test_that("glimpse(width = Inf) raises legible error", {
+  expect_error(glimpse(mtcars, width = Inf), "is[.]finite")
+})

@@ -10,3 +10,6 @@
 ^appveyor\.yml$
 ^bench$
 ^\.github$
+^\.deploy_key\.pub$
+^\.deploy_key\.enc$
+^API$

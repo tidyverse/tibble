@@ -37,4 +37,3 @@ add_column(df, z = 1:5)
 \seealso{
 Other addition: \code{\link{add_row}}
 }
-
