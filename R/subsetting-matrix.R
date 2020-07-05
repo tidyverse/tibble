@@ -26,7 +26,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
   cells <- matrix_to_cells(j, x, j_arg)
   col_idx <- cells_to_col_idx(cells)
 
-  tryCatch(
+  withCallingHandlers(
     for (j in col_idx) {
       xj <- x[[j]]
       vec_slice(xj, cells[[j]]) <- value

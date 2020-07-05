@@ -1,3 +1,13 @@
+# tibble 3.0.1.9001
+
+- Subsetting is faster again (#790).
+- `is.null()` is preferred over `is_null()` for speed.
+- `[[` as fast as `$` again, performs all relevant checks inline instead of relying on `vctrs::vec_as_location2()` (#780).
+- `tribble()` now better handles named inputs (#775) and objects of non-vtrs classes like `lubridate::Period` (#784) and `formattable::formattable` (#785).
+- `add_column()` works without warning for 0-column data frames (#786).
+- Refer to `NA_integer_`.
+
+
 # tibble 3.0.1.9000
 
 - Same as previous version.
