@@ -17,7 +17,8 @@
 #' @param validate When `TRUE`, verifies that the input is a valid data
 #'   frame (i.e. all columns are named, and are 1d vectors or lists). You may
 #'   want to suppress this when you know that you already have a valid data
-#'   frame and you want to save some time.
+#'   frame and you want to save some time, or to explicitly enable it
+#'   if you have a tibble that you want to re-check.
 #' @export
 #' @examples
 #' l <- list(x = 1:500, y = runif(500), z = 500:1)
@@ -56,7 +57,8 @@ as_tibble <- function(x, ...) {
 
 #' @export
 #' @rdname as_tibble
-as_tibble.tbl_df <- function(x, ...) {
+as_tibble.tbl_df <- function(x, ..., validate = FALSE) {
+  if (validate) return(NextMethod())
   x
 }
 

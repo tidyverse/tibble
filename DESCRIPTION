@@ -1,6 +1,6 @@
 Package: tibble
 Encoding: UTF-8
-Version: 1.3.3
+Version: 1.3.4
 Title: Simple Data Frames
 Description: Provides a 'tbl_df' class (the 'tibble') that provides
     stricter checking and better formatting than the traditional data frame.

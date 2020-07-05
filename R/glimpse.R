@@ -46,7 +46,8 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   df <- as.data.frame(head(x, rows))
 
   var_types <- map_chr(x, type_sum)
-  var_names <- paste0("$ ", justify(names(x), right = FALSE), " <", var_types, "> ")
+  ticked_names <- tick_non_syntactic(names(x))
+  var_names <- paste0("$ ", justify(ticked_names, right = FALSE), " <", var_types, "> ")
 
   data_width <- width - nchar(var_names) - 2
 
@@ -86,15 +87,11 @@ format_v.default <- function(x) format(x, trim = TRUE, justify = "none")
 
 #' @export
 format_v.list <- function(x) {
-  x <- map(x, format_v)
-  atomic <- map_int(x, length) == 1L
-  x <- map_chr(x, collapse)
-  x[!atomic] <- paste0("<", x[!atomic], ">")
-  if (length(x) == 1L) {
-    x
-  } else {
-    paste0("[", collapse(x), "]")
-  }
+  out <- map(x, format_v)
+  atomic <- map_int(out, length) == 1L
+  out <- map_chr(out, collapse)
+  out[!atomic] <- paste0("<", out[!atomic], ">")
+  paste0("[", collapse(out), "]")
 }
 
 #' @export

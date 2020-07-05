@@ -67,13 +67,15 @@ rbind_at <- function(old, new, pos) {
     old <- old[1, ]
     out <- rbind(old, new)[-1, ]
   } else {
-    if (pos <= 0L) {
-      out <- rbind(new, old)
-    } else if (pos >= nrow(old)) {
-      out <- rbind(old, new)
-    } else {
-      indexes <- seq_len(pos)
-      out <- rbind(old[indexes, ], new, old[-indexes, ])
+    out <- rbind(old, new)
+    if (pos < nrow(old)) {
+      pos <- max(pos, 0L)
+      idx <- c(
+        seq2(1L, pos),
+        seq2(nrow(old) + 1L, nrow(old) + nrow(new)),
+        seq2(pos + 1L, nrow(old))
+      )
+      out <- out[idx, ]
     }
   }
   out

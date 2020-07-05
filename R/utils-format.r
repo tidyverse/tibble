@@ -81,15 +81,19 @@ shrink_mat <- function(df, width, rows, n, star) {
 
   # List columns need special treatment because format() can't be trusted
   is_list <- map_lgl(df, is.list)
-  # Character columns need special treatment because of NA and escapes
-  is_character <- map_lgl(df, is.character)
 
   df[is_list] <- map(df[is_list], function(x) {
     summary <- obj_sum(x)
     paste0("<", summary, ">")
   })
 
+  # Character columns need special treatment because of NA and escapes
+  is_character <- map_lgl(df, is.character)
   df[is_character] <- map(df[is_character], format_character)
+
+  # Factor columns need special treatment because of NA and escapes
+  is_factor <- map_lgl(df, is.factor)
+  df[is_factor] <- map(df[is_factor], format_factor)
 
   mat <- format(df, justify = "left")
   values <- c(format(rownames(mat))[[1]], unlist(mat[1, ]))
@@ -289,6 +293,10 @@ wrap <- function(..., indent = 0, prefix = "", width) {
 }
 
 
+
+format_factor <- function(x) {
+  format_character(as.character(x))
+}
 
 format_character <- function(x) {
   res <- quote_escaped(x)

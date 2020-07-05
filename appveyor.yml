@@ -8,56 +8,35 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  ps: Bootstrap
+  - ps: Bootstrap
+  - cmd: R -q -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
+  - cmd: R -q -e "getOption('repos')"
+  - cmd: R -q -e "install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
+
+cache:
+- C:\RLibrary
+
+before_build: R -q -e "tic::before_install()"
+build_script: R -q -e "tic::install()"
+after_build: R -q -e "tic::after_install()"
+before_test: R -q -e "tic::before_script()"
+test_script: R -q -e "tic::script()"
+on_success: R -q -e "try(tic::after_success(), silent = TRUE)"
+on_failure: R -q -e "tic::after_failure()"
+before_deploy: R -q -e "tic::before_deploy()"
+deploy_script: R -q -e "tic::deploy()"
+after_deploy: R -q -e "tic::after_deploy()"
+on_finish: R -q -e "tic::after_script()"
 
 # Adapt as necessary starting from here
 
-branches:
-  only:
-    - master
-    - production
-    - /r-.*/
+#on_failure:
+#  - 7z a failure.zip *.Rcheck\*
+#  - appveyor PushArtifact failure.zip
 
 environment:
-  global:
-    WARNINGS_ARE_ERRORS: 1
-
-  matrix:
-  - R_VERSION: devel
-    GCC_PATH: mingw_32
-
-  - R_VERSION: devel
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-
-  - R_VERSION: release
-    R_ARCH: x64
-
-  - R_VERSION: stable
-
-  - R_VERSION: patched
-
-  - R_VERSION: oldrel
-    RTOOLS_VERSION: 33
-    CRAN: http://cran.rstudio.com
-
-  - R_VERSION: 3.1.3
-    RTOOLS_VERSION: 32
-    CRAN: http://cran.rstudio.com
-
-matrix:
-  fast_finish: true
-
-build_script:
-  - travis-tool.sh r_install curl
-  - travis-tool.sh install_deps
-
-test_script:
-  - travis-tool.sh run_tests
-
-on_failure:
-  - 7z a failure.zip *.Rcheck\*
-  - appveyor PushArtifact failure.zip
+  GITHUB_PAT:
+    secure: ydE+Zo04e/ffDUNpRKEqjTJFbiL/aozpxl886+6s8YSPtUDOcUbhNmwmhYlY10sc
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
