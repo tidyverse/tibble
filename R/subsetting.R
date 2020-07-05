@@ -88,7 +88,7 @@ NULL
 `$<-.tbl_df` <- function(x, name, value) {
   tbl_subassign(
     x, i = NULL, as_string(name), list(value),
-    i_arg = NULL, j_arg = NULL, value_arg = substitute(value)
+    i_arg = NULL, j_arg = name, value_arg = substitute(value)
   )
 }
 
@@ -160,10 +160,13 @@ NULL
 
   value <- list(value)
 
+  # Side effect: check scalar
+  if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
+    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  }
+
   j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
 
-  # Side effect: check scalar, allow OOB position
-  vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   # New columns are added to the end, provide index to avoid matching column
   # names again
   names(value) <- names(j)
@@ -395,14 +398,16 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  i <- vectbl_as_new_row_index(i, x, i_arg)
+  if (!is.null(i_arg) && !is.null(i)) {
+    i <- vectbl_as_new_row_index(i, x, i_arg)
+  }
 
   if (is.null(i)) {
     value <- vectbl_wrap_rhs_col(value, value_arg)
 
     if (is.null(j)) {
       j <- seq_along(x)
-    } else {
+    } else if (!is.null(j_arg)) {
       j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
     }
 
@@ -422,8 +427,10 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
-      j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
-      new <- which(j > ncol(x))
+      if (!is.null(j_arg)) {
+        j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+      }
+      new <- which(j > length(x))
       value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
@@ -454,18 +461,22 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     nr <- fast_nrow(x)
 
     new <- which(i > nr)
-    i_new <- i[new]
-    i[new] <- NA
+    if (length(new) > 0) {
+      i_new <- i[new]
+      i[new] <- NA
+
+      if (!is_tight_sequence_at_end(i_new, nr)) {
+        cnd_signal(error_new_rows_at_end_only(nr, i_new))
+      }
+    }
 
     # Only update existing, caller knows how to deal with OOB
     i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
-    if (!is_tight_sequence_at_end(i_new, nr)) {
-      cnd_signal(error_new_rows_at_end_only(nr, i_new))
-    }
-
     # Restore, caller knows how to deal
-    i[new] <- i_new
+    if (length(new) > 0) {
+      i[new] <- i_new
+    }
     i
   } else if (is_logical(i)) {
     # Don't allow OOB logical
@@ -484,53 +495,56 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   # Values: index
   # Name: column name (for new columns)
 
-  if (vec_is(j) && anyNA(j)) {
-    cnd_signal(error_assign_columns_non_na_only())
-  }
-
   if (is_bare_character(j)) {
+    if (anyNA(j)) {
+      cnd_signal(error_assign_columns_non_na_only())
+    }
+
     out <- match(j, names(x))
     new <- which(is.na(out))
     if (has_length(new)) {
-      out[new] <- seq.int(ncol(x) + 1L, length.out = length(new))
+      out[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
-    set_names(out, j)
+    j <- set_names(out, j)
   } else if (is_bare_numeric(j)) {
-    if (anyDuplicated(j)) {
-      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
+    if (anyNA(j)) {
+      cnd_signal(error_assign_columns_non_na_only())
     }
 
-    new <- which(j > ncol(x))
-    j_new <- j[new]
-    j[new] <- NA
+    new <- which(j > length(x))
+    if (length(new) > 0) {
+      j_new <- j[new]
+      j[new] <- NA
 
-    j <- vectbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
-
-    if (!is_tight_sequence_at_end(j_new, ncol(x))) {
-      cnd_signal(error_new_columns_at_end_only(ncol(x), j_new))
+      if (!is_tight_sequence_at_end(j_new, length(x))) {
+        cnd_signal(error_new_columns_at_end_only(length(x), j_new))
+      }
     }
 
-    j[new] <- j_new
-
+    j <- vectbl_as_col_location(j, length(x), j_arg = j_arg, assign = TRUE)
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
     names <- vectbl_recycle_rhs_names(names2(value), length(j), value_arg)
-    names[new][names[new] == ""] <- paste0("...", j_new)
 
-    set_names(j, names)
+    if (length(new) > 0) {
+      j[new] <- j_new
+      names[new][names[new] == ""] <- paste0("...", j_new)
+    }
+
+    j <- set_names(j, names)
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
-
-    if (anyDuplicated(j)) {
-      cnd_signal(error_duplicate_column_subscript_for_assignment(j))
-    }
-
-    j
   }
+
+  if (anyDuplicated(j)) {
+    cnd_signal(error_duplicate_column_subscript_for_assignment(j))
+  }
+
+  j
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
@@ -567,7 +581,7 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !map_lgl(value, is.null)
+  is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
@@ -677,37 +691,47 @@ vectbl_wrap_rhs_row <- function(value, value_arg) {
 result_vectbl_wrap_rhs <- function(value) {
   if (!vec_is(value)) {
     NULL
+  } else if (is.list(value)) {
+    # Also covers the case of data frames
+    unclass(value)
   } else if (is.array(value)) {
     if (any(dim(value)[-1:-2] != 1)) {
       return(NULL)
     }
     dim(value) <- head(dim(value), 2)
     as.list(as.data.frame(value, stringsAsFactors = FALSE))
-  } else if (is_atomic(value)) {
-    list(value)
   } else {
-    unclass(value)
+    list(value)
   }
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  withCallingHandlers(
-    for (j in seq_along(value)) {
-      if (!is.null(value[[j]])) {
-        value[[j]] <- vec_recycle(value[[j]], nrow)
+  if (length(value) > 0L && (nrow != 1L || vec_size(value[[1L]]) != 1L)) {
+    withCallingHandlers(
+      for (j in seq_along(value)) {
+        if (!is.null(value[[j]])) {
+          value[[j]] <- vec_recycle(value[[j]], nrow)
+        }
+      },
+
+      vctrs_error_recycle_incompatible_size = function(cnd) {
+        cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
       }
-    },
+    )
+  }
 
-    vctrs_error_recycle_incompatible_size = function(cnd) {
-      cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
-    }
-  )
+  if (length(value) != 1L || ncol != 1L) {
+    # Errors have been caught beforehand in vectbl_recycle_rhs_names()
+    value <- vec_recycle(value, ncol)
+  }
 
-  # Errors have been caught beforehand in vectbl_recycle_rhs_names()
-  vec_recycle(value, ncol)
+  value
 }
 
 vectbl_recycle_rhs_names <- function(names, n, value_arg) {
+  if (n == 1L && length(names) == 1L) {
+    return(names)
+  }
   unname(vec_recycle(set_names(names), n, x_arg = as_label(value_arg)))
 }
 
