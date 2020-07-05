@@ -90,8 +90,8 @@ all_equal <- function(target, current, ignore_col_order = TRUE,
   }
 
   if (ignore_row_order) {
-    target <- target[do.call(order, target), ]
-    current <- current[do.call(order, current), ]
+    target <- target[do.call(order, unname(target)), ]
+    current <- current[do.call(order, unname(current)), ]
   }
 
   all.equal(as.data.frame(target), as.data.frame(current), ...)

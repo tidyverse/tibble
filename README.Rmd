@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -40,10 +42,10 @@ tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
-You can define a tibble row-by-row with `frame_data()`:
+You can define a tibble row-by-row with `tribble()`:
 
 ```{r}
-frame_data(
+tribble(
   ~x, ~y,  ~z,
   "a", 2,  3.6,
   "b", 1,  8.5
@@ -67,7 +69,7 @@ library(nycflights13)
 flights
 ```
 
-Tibbles are strict about subsetting. If you try to access a variable that does not exist, you'll get an error:
+Tibbles are strict about subsetting. If you try to access a variable that does not exist via `$`, you'll get a warning:
 
 ```{r, error = TRUE}
 flights$yea

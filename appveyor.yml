@@ -16,6 +16,7 @@ branches:
   only:
     - master
     - production
+    - /r-.*/
 
 environment:
   global:

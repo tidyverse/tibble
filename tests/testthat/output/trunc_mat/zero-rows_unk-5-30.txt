@@ -1,0 +1,6 @@
+# ... with 5 variables:
+#   Sepal.Length <dbl>,
+#   Sepal.Width <dbl>,
+#   Petal.Length <dbl>,
+#   Petal.Width <dbl>,
+#   Species <fctr>

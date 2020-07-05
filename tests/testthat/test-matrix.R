@@ -15,14 +15,31 @@ test_that("preserves col names", {
   expect_equal(names(out), c("a", "b"))
 })
 
+test_that("creates col names", {
+  x <- matrix(1:4, nrow = 2)
+
+  out <- as_tibble(x)
+  expect_equal(names(out), c("V1", "V2"))
+})
+
 test_that("preserves attributes except dim and names", {
-  date <- Sys.Date() + 0:1
-  dim(date) <- c(2, 1)
-  colnames(date) <- "a"
+  date <- Sys.Date() + 0:3
+  dim(date) <- c(2, 2)
+  colnames(date) <- c("a", "b")
+  attr(date, "special") <- 42
 
   out <- as_tibble.matrix(date)
-  expect_equal(attributes(out[[1]])$name, NULL)
+  expect_null(attributes(out[[1]])$names)
   expect_equal(attributes(out[[1]])$class, "Date")
+  expect_equal(attributes(out[[2]])$special, 42)
+})
+
+test_that("properly handles poly class (#110)", {
+  p <- poly(1:6, 3)
+  p_df <- as_tibble(p)
+
+  expect_equal(names(p_df), colnames(p))
+  expect_equal(class(p_df[[1L]]), class(p[,1]))
 })
 
 test_that("handles atomic vectors", {

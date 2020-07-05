@@ -6,7 +6,7 @@
 \alias{trunc_mat}
 \title{Tools for describing matrices}
 \usage{
-\method{print}{tbl_df}(x, ..., n = NULL, width = NULL)
+\method{print}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
@@ -22,6 +22,11 @@ means use \code{getOption("tibble.width")} or (if also NULL)
 \code{getOption("width")}; the latter displays only the columns that
 fit on one screen. You can also set \code{options(tibble.width = Inf)} to
 override this default and always print all columns.}
+
+\item{n_extra}{Number of extra columns to print abbreviated information for,
+if the width is too small for the entire tibble. If \code{NULL}, the
+default, will print information about at most \code{tibble.max_extra_cols}
+extra columns.}
 }
 \description{
 Tools for describing matrices
@@ -34,6 +39,11 @@ print(as_tibble(mtcars), n = 1)
 print(as_tibble(mtcars), n = 3)
 print(as_tibble(mtcars), n = 100)
 
+if (!requireNamespace("nycflights13", quietly = TRUE))
+  stop("Please install the nycflights13 package to run the rest of this example")
+
+print(nycflights13::flights, n_extra = 2)
+print(nycflights13::flights, width = Inf)
 }
 \seealso{
 \link{tibble-package}

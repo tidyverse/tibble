@@ -1,6 +1,6 @@
-# A tibble: 12 x 2
+# A tibble: 12 × 2
                     x         y
-               <time>    <time>
+               <dttm>    <dttm>
 1 2016-01-01 12:34:57 <POSIXlt>
 2 2016-01-01 12:34:58 <POSIXlt>
 3 2016-01-01 12:34:59 <POSIXlt>

@@ -8,5 +8,6 @@
 
 ## Reverse dependencies
 
-I checked all 10 reverse dependencies for version 1.0 and for the current release,
-and compared the results. They were identical.
+I checked all 30 reverse dependencies for version 1.0 and for the current release,
+and compared the results. They were identical, except for the `bigrf` package
+which failed memory allocation in both cases but for two different reasons.

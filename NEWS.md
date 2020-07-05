@@ -1,3 +1,34 @@
+# tibble 1.2 (2016-08-26)
+
+## Bug fixes
+
+- The `tibble.width` option is used for `glimpse()` only if it is finite (#153, @kwstat).
+- New `as_tibble.poly()` to support conversion of a `poly` object to a tibble (#110).
+- `add_row()` now correctly handles existing columns of type `list` that are not updated (#148).
+- `all.equal()` doesn't throw an error anymore if one of the columns is named `na.last`, `decreasing` or `method` (#107, @BillDunlap).
+
+## Interface changes
+
+- New `add_column()`, analogously to `add_row()` (#99).
+- `print.tbl_df()` gains `n_extra` method and will have the same interface as `trunc_mat()` from now on.
+- `add_row()` and `add_column()` gain `.before` and `.after` arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named `.before` or `.after` (#99).
+- Rename `frame_data()` to `tribble()`, stands for "transposed tibble". The former is still available as alias (#132, #143).
+
+## Features
+
+- `add_row()` now can add multiple rows, with recycling (#142, @jennybc).
+- Use multiply character `×` instead of `x` when printing dimensions (#126). Output tests had to be disabled for this on Windows.
+- Back-tick non-semantic column names on output (#131).
+- Use `dttm` instead of `time` for `POSIXt` values (#133), which is now used for columns of the `difftime` class.
+- Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).
+
+## Documentation
+
+- New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (#151).
+- Added more examples for `print.tbl_df()`, now using data from `nycflights13` instead of `Lahman` (#121), with guidance to install `nycflights13` package if necessary (#152).
+- Minor changes in vignette (#115, @helix123).
+
+
 # tibble 1.1 (2016-07-01)
 
 Follow-up release.
@@ -39,7 +70,7 @@ Follow-up release.
 
 ## New features
 
-- New `has_name() (#102).
+- New `has_name()` (#102).
 - Prefer `tibble()` and `as_tibble()` over `data_frame()` and `as_data_frame()` in code and documentation (#82).
 - New `is.tibble()` and `is_tibble()` (#79).
 - New `enframe()` that converts vectors to two-column tibbles (#31, #74).

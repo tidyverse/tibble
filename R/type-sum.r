@@ -47,7 +47,9 @@ type_sum.ordered <- function(x) "ord"
 #' @export
 type_sum.factor <- function(x) "fctr"
 #' @export
-type_sum.POSIXt <- function(x) "time"
+type_sum.POSIXt <- function(x) "dttm"
+#' @export
+type_sum.difftime <- function(x) "time"
 #' @export
 type_sum.Date <- function(x) "date"
 #' @export
@@ -104,7 +106,7 @@ dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- vapply(dim, big_mark, character(1))
   format_dim[is.na(dim)] <- "??"
-  paste0(format_dim, collapse = " x ")
+  paste0(format_dim, collapse = " \u00d7 ")
 }
 
 size_sum <- function(x) {
@@ -124,6 +126,8 @@ is_vector_s3.factor <- function(x) TRUE
 is_vector_s3.Date <- function(x) TRUE
 #' @export
 is_vector_s3.POSIXct <- function(x) TRUE
+#' @export
+is_vector_s3.difftime <- function(x) TRUE
 #' @export
 is_vector_s3.data.frame <- function(x) TRUE
 #' @export

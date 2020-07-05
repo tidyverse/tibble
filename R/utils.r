@@ -32,6 +32,8 @@ needs_dim <- function(x) {
   length(dim(x)) > 1L
 }
 
+set_class <- `class<-`
+
 is_1d <- function(x) {
   # dimension check is for matrices and data.frames
   is_vector(x) && !needs_dim(x)
@@ -73,4 +75,12 @@ nchar_width <- function(x) {
 
 cat_line <- function(...) {
   cat(..., "\n", sep = "")
+}
+
+is_syntactic <- function(x) make.names(x) == x
+
+tickit <- function(x) {
+  needs_ticks <- !is_syntactic(x)
+  x[needs_ticks] <- paste0("`", gsub("`", "\\\\`", x[needs_ticks]), "`")
+  x
 }
