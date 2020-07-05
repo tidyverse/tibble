@@ -24,7 +24,7 @@ jobs:
         run: R CMD INSTALL .
 
       - name: Fetch existing benchmarks
-        run: Rscript -e 'bench::cb_fetch()'
+        run: Rscript -e 'bench::cb_fetch()' || true
 
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
