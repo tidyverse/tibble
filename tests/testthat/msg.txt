@@ -199,11 +199,11 @@ subsetting
 
 > error_need_rhs_vector(quote(RHS))
 <error/tibble_error_need_rhs_vector>
-`RHS` must be a vector, a bare list or a data frame.
+`RHS` must be a vector, a bare list, a data frame or a matrix.
 
 > error_need_rhs_vector_or_null(quote(RHS))
 <error/tibble_error_need_rhs_vector_or_null>
-`RHS` must be a vector, a bare list, a data frame or NULL.
+`RHS` must be a vector, a bare list, a data frame, a matrix, or NULL.
 
 > error_na_column_index(1:3)
 <error/tibble_error_na_column_index>

@@ -1,5 +1,5 @@
 unell <- function(x) {
-  gsub(symbol$ellipsis, "...", x, fixed = TRUE)
+  gsub(cli::symbol$ellipsis, "...", x, fixed = TRUE)
 }
 
 unell_bullets <- function(...) {
