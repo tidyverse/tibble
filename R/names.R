@@ -10,7 +10,7 @@ repaired_names <- function(name,
                            details = NULL) {
 
   subclass_name_repair_errors(name = name, details = details,
-    vec_as_names(name, repair = .name_repair, quiet = quiet)
+    vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair))
   )
 }
 

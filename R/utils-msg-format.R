@@ -93,7 +93,7 @@ commas <- function(problems) {
 }
 
 ensure_full_stop <- function(x) {
-  gsub("(?::|([^.]))$", "\\1.", x)
+  gsub("(?::|([^.?]))$", "\\1.", x)
 }
 
 set_default_name <- function(x, name) {

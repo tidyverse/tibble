@@ -1,3 +1,32 @@
+# tibble 3.0.1
+
+## Compatibility fixes
+
+- `[<-.tbl_df()` coerces matrices to data frames (#762).
+
+- Use delayed import for cli to work around unload problems in downstream packages (#754).
+
+
+## Bug fixes
+
+- More soft-deprecation warnings are actually visible.
+
+- If `.name_repair` is a function, no repair messages are shown (#763).
+
+- Remove superseded signal for `as_tibble.list()`, because `as_tibble_row()` only works for size 1.
+
+
+## Enhancements
+
+- `as_tibble(validate = )` now always triggers a deprecation warning.
+
+- Subsetting and subassignment of rows with one-column matrices work again, with a deprecation warning (#760).
+
+- Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.
+
+- Tweak title of "Invariants" vignette.
+
+
 # tibble 3.0.0
 
 ## Major breaking changes

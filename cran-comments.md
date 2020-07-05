@@ -1,4 +1,4 @@
-Major release.
+Patch release to fix errors caught after major release.
 
 ## Test environments
 
@@ -14,4 +14,4 @@ Major release.
 
 ## Reverse dependencies
 
-All broken downstream package maintainers were notified, many have already updated on CRAN or GitHub.
+Not checked.
