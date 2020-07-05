@@ -77,16 +77,18 @@ shrink_mat <- function(df, width, rows, n, star) {
   extra_wide <- (seq_along(df) > max_cols)
   df[] <- df[!extra_wide]
 
-  # List columns need special treatment because format can't be trusted
   classes <- paste0("<", map_chr(df, type_sum), ">")
+
+  # List columns need special treatment because format() can't be trusted
   is_list <- map_lgl(df, is.list)
+  # Character columns need special treatment because of NA and escapes
+  is_character <- map_lgl(df, is.character)
+
   df[is_list] <- map(df[is_list], function(x) {
     summary <- obj_sum(x)
     paste0("<", summary, ">")
   })
 
-  # Character columns need special treatment because of NA and escapes
-  is_character <- map_lgl(df, is.character)
   df[is_character] <- map(df[is_character], format_character)
 
   mat <- format(df, justify = "left")

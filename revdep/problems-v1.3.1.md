@@ -16,6 +16,7 @@
 
 |package        |*  |version |date       |source                           |
 |:--------------|:--|:-------|:----------|:--------------------------------|
+|assertthat     |   |0.2.0   |2017-04-11 |cran (@0.2.0)                    |
 |covr           |   |2.2.2   |2017-01-05 |cran (@2.2.2)                    |
 |dplyr          |   |0.5.0   |2016-06-24 |CRAN (R 3.4.0)                   |
 |knitr          |   |1.16    |2017-05-18 |cran (@1.16)                     |
@@ -30,24 +31,25 @@
 
 # Check results
 
-14 packages with problems
+15 packages with problems
 
-|package      |version | errors| warnings| notes|
-|:------------|:-------|------:|--------:|-----:|
-|dat          |0.2.0   |      1|        0|     0|
-|dplyr        |0.5.0   |      1|        0|     2|
-|filesstrings |0.4.0   |      1|        0|     0|
-|ggimage      |0.0.4   |      1|        0|     0|
-|haven        |1.0.0   |      2|        0|     2|
-|huxtable     |0.3.0   |      1|        0|     0|
-|officer      |0.1.3   |      2|        1|     0|
-|olsrr        |0.1.0   |      0|        1|     0|
-|radiant.data |0.8.1   |      1|        0|     0|
-|readtext     |0.50    |      1|        0|     0|
-|rio          |0.5.0   |      2|        1|     0|
-|tidyquant    |0.5.1   |      2|        1|     1|
-|timekit      |0.3.0   |      1|        1|     0|
-|unpivotr     |0.1.1   |      1|        0|     0|
+|package       |version | errors| warnings| notes|
+|:-------------|:-------|------:|--------:|-----:|
+|dat           |0.2.0   |      1|        0|     0|
+|dplyr         |0.5.0   |      1|        0|     2|
+|filesstrings  |0.4.0   |      1|        0|     0|
+|FSelectorRcpp |0.1.3   |      1|        0|     2|
+|ggimage       |0.0.4   |      1|        0|     0|
+|haven         |1.0.0   |      2|        0|     2|
+|huxtable      |0.3.0   |      1|        0|     0|
+|officer       |0.1.3   |      2|        1|     0|
+|olsrr         |0.1.0   |      0|        1|     0|
+|rbcb          |0.1.1   |      1|        0|     0|
+|readtext      |0.50    |      1|        0|     0|
+|rio           |0.5.0   |      2|        1|     0|
+|tidyquant     |0.5.1   |      2|        1|     1|
+|timekit       |0.3.0   |      1|        0|     0|
+|unpivotr      |0.1.1   |      1|        0|     0|
 
 ## dat (0.2.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -57,7 +59,7 @@ Bug reports: https://github.com/wahani/dat/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [12s/18s]
+  Running ‘testthat.R’ [13s/26s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                                ^
@@ -85,7 +87,7 @@ Bug reports: https://github.com/hadley/dplyr/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [8s/13s]
+  Running ‘testthat.R’ [9s/19s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   testthat results ================================================================
@@ -147,6 +149,43 @@ Last 13 lines of output:
   Execution halted
 ```
 
+## FSelectorRcpp (0.1.3)
+Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>  
+Bug reports: https://github.com/mi2-warsaw/FSelectorRcpp/issues
+
+1 error  | 0 warnings | 2 notes
+
+```
+checking tests ... ERROR
+  Running ‘testthat.R’ [4s/11s]
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  The following objects are masked from 'package:base':
+  
+      intersect, setdiff, setequal, union
+  
+  > library(entropy)
+  
+  Attaching package: 'entropy'
+  
+  The following object is masked from 'package:FSelectorRcpp':
+  
+      discretize
+  
+  > 
+  > test_check("FSelectorRcpp")
+  Segmentation fault (core dumped)
+
+checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘RTCGA.rnaseq’
+
+checking installed package size ... NOTE
+  installed size is 10.5Mb
+  sub-directories of 1Mb or more:
+    doc    2.2Mb
+    libs   8.1Mb
+```
+
 ## ggimage (0.0.4)
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>  
 Bug reports: https://github.com/GuangchuangYu/ggimage/issues
@@ -185,9 +224,9 @@ The error most likely occurred in:
 > tmp <- tempfile(fileext = ".dta")
 > write_dta(mtcars, tmp)
 > read_dta(tmp)
-Invalid timestamp string (length=17): 27 Mai 2017 22:54
+Invalid timestamp string (length=17): 27 Mai 2017 21:35
 Error in df_parse_dta_file(spec, encoding) : 
-  Failed to parse /tmp/Rtmpu5IV2u/filecfc063e3e269.dta: The file's timestamp string is invalid.
+  Failed to parse /tmp/Rtmp0MLkSO/file86b5375208f.dta: The file's timestamp string is invalid.
 Calls: read_dta -> df_parse_dta_file -> .Call
 Execution halted
 
@@ -232,7 +271,7 @@ Bug reports: https://github.com/hughjonesd/huxtable/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [10s/16s]
+  Running ‘testthat.R’ [11s/20s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
          message = handle_message)) at /tmp/Rtmpf6YF8j/devtools1eed5a0addc9/testthat/R/evaluate-promise.R:42
@@ -279,7 +318,7 @@ Error: file.exists(src) is not TRUE
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [173s/263s]
+  Running ‘testthat.R’ [174s/262s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
   8: function_list[[k]](value) at /tmp/RtmpT6Czo8/R.INSTALL13c163d710cb/magrittr/R/freduce.R:20
@@ -350,35 +389,32 @@ An irrecoverable exception occurred. R is aborting now ...
 Segmentation fault (core dumped)
 ```
 
-## radiant.data (0.8.1)
-Maintainer: Vincent Nijs <radiant@rady.ucsd.edu>  
-Bug reports: https://github.com/radiant-rstats/radiant.data/issues
+## rbcb (0.1.1)
+Maintainer: Wilson Freitas <wilson.freitas@gmail.com>  
+Bug reports: https://github.com/wilsonfreitas/rbcb/issues
 
 1 error  | 0 warnings | 0 notes
 
 ```
-checking examples ... ERROR
-Running examples in ‘radiant.data-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: plot.pivotr
-> ### Title: Plot method for the pivotr function
-> ### Aliases: plot.pivotr
-> 
-> ### ** Examples
-... 11 lines ...
- 4: f(..., self = self)
- 5: self$position$compute_layer(data, params, layout)
- 6: f(..., self = self)
- 7: l$compute_position(d, layout)
- 8: f(l = layers[[i]], d = data[[i]])
- 9: by_layer(function(l, d) l$compute_position(d, layout))
-10: ggplot_build(x)
-11: print.ggplot(x)
-12: function (x, ...) UseMethod("print")(x)
-An irrecoverable exception occurred. R is aborting now ...
-Segmentation fault (core dumped)
+checking tests ... ERROR
+  Running ‘testthat.R’ [2s/350s]
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  1: get_series(1, start_date = "2017-03-01", end_date = "2017-03-01", as = "text") at testthat/test-get_series.R:4
+  2: stop("BCB API Request error, status code = ", res$status_code)
+  
+  2. Error: it should get one series as data.frame (@test-get_series.R#11) -------
+  BCB API Request error, status code = 502
+  1: get_series(1, last = 10) at testthat/test-get_series.R:11
+  2: stop("BCB API Request error, status code = ", res$status_code)
+  
+  testthat results ================================================================
+  OK: 22 SKIPPED: 0 FAILED: 2
+  1. Error: it should get series json (@test-get_series.R#4) 
+  2. Error: it should get one series as data.frame (@test-get_series.R#11) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 ```
 
 ## readtext (0.50)
@@ -418,7 +454,7 @@ The error most likely occurred in:
 > 
 > # convert Stata to CSV and open converted file
 > convert("mtcars.dta", "mtcars.csv")
-Invalid timestamp string (length=17): 27 Mai 2017 23:23
+Invalid timestamp string (length=17): 27 Mai 2017 22:06
 Error in df_parse_dta_file(spec, encoding) : 
   Failed to parse /home/muelleki/git/R/tibble/revdep/checks/rio.Rcheck/mtcars.dta: The file's timestamp string is invalid.
 Calls: convert ... standardize_attributes -> read_dta -> df_parse_dta_file -> .Call
@@ -537,7 +573,7 @@ checking installed package size ... NOTE
 Maintainer: Matt Dancho <mdancho@business-science.io>  
 Bug reports: https://github.com/business-science/timekit/issues
 
-1 error  | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
 checking tests ... ERROR
@@ -559,29 +595,6 @@ Last 13 lines of output:
   testthat results ================================================================
   OK: 39 SKIPPED: 0 FAILED: 0
   Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-17: fun(x, options = options)
-18: value_fun(ev$value, ev$visible)
-19: withVisible(value_fun(ev$value, ev$visible))
-20: withCallingHandlers(withVisible(value_fun(ev$value, ev$visible)),     warning = wHandler, error = eHandler, message = mHandler)
-21: handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value,     ev$visible)), warning = wHandler, error = eHandler, message = mHandler))
-22: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
-23: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
-... 8 lines ...
-31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet,     encoding = encoding)
-32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv())
-33: vweave_rmarkdown(...)
-34: engine$weave(file, quiet = quiet, encoding = enc)
-35: doTryCatch(return(expr), name, parentenv, handler)
-36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-37: tryCatchList(expr, classes, parentenv, handlers)
-38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
-39: buildVignettes(dir = "/home/muelleki/git/R/tibble/revdep/checks/timekit.Rcheck/vign_test/timekit")
-An irrecoverable exception occurred. R is aborting now ...
-Segmentation fault (core dumped)
 ```
 
 ## unpivotr (0.1.1)

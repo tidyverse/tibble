@@ -16,6 +16,10 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @rdname formatting
 #' @export
+format.tbl_df <- format.tbl
+
+#' @rdname formatting
+#' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
