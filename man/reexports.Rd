@@ -7,7 +7,6 @@
 \alias{\%>\%}
 \alias{obj_sum}
 \alias{type_sum}
-\alias{is_vector_s3}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -17,7 +16,7 @@ below to see their documentation.
 \describe{
   \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 
-  \item{pillar}{\code{\link[pillar:deprecated]{is_vector_s3}}, \code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar]{type_sum}}}
+  \item{pillar}{\code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar]{type_sum}}}
 
   \item{rlang}{\code{\link[rlang]{has_name}}}
 }}
