@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
+<!--optional theme--><link href="../../.css" rel="stylesheet">
 <!-- docsearch --><script src="../../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Subsetting">
@@ -51,7 +52,7 @@
         <a class="navbar-brand" href="../../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
         </div>
       </div>
     </div>
@@ -430,8 +431,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Must extract row with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `1:2` has size 2 but
-#&gt; must be size 1.</code></pre>
+#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -453,8 +454,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Must extract row with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `1:2` has size 2 but
-#&gt; must be size 1.</code></pre>
+#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -593,7 +594,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
-#&gt; ✖ The location 4 doesn't exist.
+#&gt; ✖ Location 4 doesn't exist.
 #&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
@@ -610,7 +611,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="no">tbl</span>[<span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+#&gt; `[` at positions 1, 2, and 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -725,7 +726,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
-#&gt; ✖ The location 4 doesn't exist.
+#&gt; ✖ Location 4 doesn't exist.
 #&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
@@ -742,7 +743,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="sourceCode" id="cb87"><html><body><pre class="r"><span class="no">tbl</span>[, <span class="fl">NA</span>]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+#&gt; `[` at positions 1, 2, and 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -845,7 +846,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
-#&gt; ✖ The location 4 doesn't exist.
+#&gt; ✖ Location 4 doesn't exist.
 #&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
@@ -877,10 +878,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
-#&gt; ✖ Negative locations can't be mixed with
-#&gt; positive locations.
-#&gt; ℹ The subscript `-1:2` has 2 positive
-#&gt; values at locations 3 and 4.</code></pre>
+#&gt; ✖ Negative and positive locations can't
+#&gt; be mixed.
+#&gt; ℹ Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -986,7 +987,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 3 but the subscript
+#&gt; ✖ Input has size 3 but subscript
 #&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
 </div>
 </td>
@@ -1007,7 +1008,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 3 but the subscript
+#&gt; ✖ Input has size 3 but subscript
 #&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
 #&gt; 4.</code></pre>
 </div>
@@ -1079,7 +1080,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
-#&gt; ✖ The location 4 doesn't exist.
+#&gt; ✖ Location 4 doesn't exist.
 #&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
@@ -1111,10 +1112,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Must subset columns with a valid
 #&gt; subscript vector.
-#&gt; ✖ Negative locations can't be mixed with
-#&gt; positive locations.
-#&gt; ℹ The subscript `-1:2` has 2 positive
-#&gt; values at locations 3 and 4.</code></pre>
+#&gt; ✖ Negative and positive locations can't
+#&gt; be mixed.
+#&gt; ℹ Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1230,7 +1231,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 3 but the subscript
+#&gt; ✖ Input has size 3 but subscript
 #&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
 </div>
 </td>
@@ -1251,7 +1252,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 3 but the subscript
+#&gt; ✖ Input has size 3 but subscript
 #&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
 #&gt; 4.</code></pre>
 </div>
@@ -1333,8 +1334,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <pre><code>#&gt; Warning: The `i` argument of
 #&gt; ``[.tbl_df`()` must lie in [0, rows] if
 #&gt; positive, as of tibble 3.0.0.
-#&gt; Use `NA` as row index to obtain a row
-#&gt; full of `NA` values.
+#&gt; Use `NA_integer_` as row index to obtain
+#&gt; a row full of `NA` values.
 #&gt; This warning is displayed once every 8
 #&gt; hours.
 #&gt; Call `lifecycle::last_warnings()` to see
@@ -1384,10 +1385,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
-#&gt; ✖ Negative locations can't be mixed with
-#&gt; positive locations.
-#&gt; ℹ The subscript `-1:2` has 2 positive
-#&gt; values at locations 3 and 4.</code></pre>
+#&gt; ✖ Negative and positive locations can't
+#&gt; be mixed.
+#&gt; ℹ Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1469,7 +1470,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 4 but the subscript
+#&gt; ✖ Input has size 4 but subscript
 #&gt; `c(TRUE, FALSE)` has size 2.</code></pre>
 </div>
 </td>
@@ -1489,7 +1490,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 4 but the subscript
+#&gt; ✖ Input has size 4 but subscript
 #&gt; `c(TRUE, FALSE, TRUE)` has size 3.</code></pre>
 </div>
 </td>
@@ -1521,7 +1522,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977">Ja
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 4 but the subscript
+#&gt; ✖ Input has size 4 but subscript
 #&gt; `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has
 #&gt; size 5.</code></pre>
 </div>

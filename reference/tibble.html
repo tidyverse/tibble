@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
@@ -116,7 +120,7 @@ in a list." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
         </div>
       </div>
     </div>
@@ -271,7 +275,7 @@ for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
 </ul>
 
-<p>This argument is passed on as <code>repair</code> to <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
+<p>This argument is passed on as <code>repair</code> to <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
 See there for more details on these terms and the strategies used
 to enforce them.</p></td>
     </tr>
@@ -286,7 +290,7 @@ frame, i.e. it has class <code>data.frame</code>.</p>
 
     <div class='dont-index'><p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
 <code><a href='enframe.html'>enframe()</a></code> to convert a named vector into a tibble. Name repair is
-detailed in <code><a href='https://rdrr.io/pkg/vctrs/man/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
+detailed in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
 See quasiquotation for more details on tidy dots semantics,
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
@@ -419,10 +423,13 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt; * Size 4: Column `b`.
 #&gt; ℹ Only values of size one are recycled.</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
-<span class='fu'>tibble</span>(<span class='kw'>.rows</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 0</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.rows</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
-#&gt;   .rows
-#&gt;   &lt;dbl&gt;
-#&gt; 1     3</div><div class='input'>
+<span class='fu'>tibble</span>(<span class='kw'>.dotted</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
+#&gt;   .dotted
+#&gt;     &lt;dbl&gt;
+#&gt; 1       3</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.dotted</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
+#&gt;   .dotted
+#&gt;     &lt;dbl&gt;
+#&gt; 1       3</div><div class='input'>
 <span class='co'># You can unquote an expression:</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
 <span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2

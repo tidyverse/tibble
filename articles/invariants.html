@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
+<!--optional theme--><link href="../.css" rel="stylesheet">
 <!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Invariants for subsetting and subassignment">
@@ -51,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
         </div>
       </div>
     </div>
@@ -159,7 +160,7 @@
     color: violet;
 }
 </style>
-<p>This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. The goal is to define a small set of invariants that consistently define how behaviors interact. Some behaviors are defined using functions of the vctrs package, e.g. <code><a href="https://rdrr.io/pkg/vctrs/man/vec_slice.html">vec_slice()</a></code>, <code><a href="https://rdrr.io/pkg/vctrs/man/vec_recycle.html">vec_recycle()</a></code> and <code><a href="https://rdrr.io/pkg/vctrs/man/vec_as_index.html">vec_as_index()</a></code>. Refer to their documentation for more details about the invariants that they follow.</p>
+<p>This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. The goal is to define a small set of invariants that consistently define how behaviors interact. Some behaviors are defined using functions of the vctrs package, e.g. <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html">vec_slice()</a></code>, <code><a href="https://vctrs.r-lib.org/reference/vec_recycle.html">vec_recycle()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index()</a></code>. Refer to their documentation for more details about the invariants that they follow.</p>
 <p>The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing. We resolve this by first defining column access with <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, then column-wise subsetting with <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>, then row-wise subsetting, then the composition of both.</p>
 <div id="conventions" class="section level2">
 <h2 class="hasAnchor">
@@ -321,8 +322,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `c("n", "c")` has size 2
-#&gt; but must be size 1.</code></pre>
+#&gt; ✖ Subscript `c("n", "c")` has size 2 but
+#&gt; must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -336,8 +337,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `TRUE` has the wrong
-#&gt; type `logical`.
+#&gt; ✖ Subscript `TRUE` has the wrong type
+#&gt; `logical`.
 #&gt; ℹ It must be numeric or character.</code></pre>
 </div>
 </td>
@@ -355,8 +356,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `mean` has the wrong
-#&gt; type `closure`.
+#&gt; ✖ Subscript `mean` has the wrong type
+#&gt; `function`.
 #&gt; ℹ It must be numeric or character.</code></pre>
 </div>
 </td>
@@ -374,7 +375,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `NA` can't be `NA`.</code></pre>
+#&gt; ✖ Subscript `NA` can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -388,7 +389,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `NA_character_` can't be
+#&gt; ✖ Subscript `NA_character_` can't be
 #&gt; `NA`.</code></pre>
 </div>
 </td>
@@ -403,8 +404,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `NA_integer_` can't be
-#&gt; `NA`.</code></pre>
+#&gt; ✖ Subscript `NA_integer_` can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -413,8 +413,8 @@
 <div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">df</span><span class="kw">[[</span>-<span class="fl">1</span>]]</pre></body></html></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
-#&gt; attempt to select more than one element
-#&gt; in get1index &lt;real&gt;</code></pre>
+#&gt; invalid negative subscript in get1index
+#&gt; &lt;real&gt;</code></pre>
 </div>
 </td>
 <td>
@@ -422,8 +422,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ The subscript `-1` has value -1 but
-#&gt; must be a positive location.</code></pre>
+#&gt; ✖ Subscript `-1` has value -1 but must
+#&gt; be a positive location.</code></pre>
 </div>
 </td>
 </tr>
@@ -440,7 +440,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
-#&gt; ✖ The location 4 doesn't exist.
+#&gt; ✖ Location 4 doesn't exist.
 #&gt; ℹ There are only 3 columns.</code></pre>
 </div>
 </td>
@@ -455,8 +455,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ Lossy cast from `1.5` &lt;double&gt; to
-#&gt; &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.</code></pre>
 </div>
 </td>
 </tr>
@@ -470,8 +470,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
-#&gt; ✖ Lossy cast from `Inf` &lt;double&gt; to
-#&gt; &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.</code></pre>
 </div>
 </td>
 </tr>
@@ -567,7 +567,7 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xj-1" class="anchor"></a>Definition of <code>x[j]</code>
 </h3>
-<p><code>j</code> is converted to an integer vector by <code><a href="https://rdrr.io/pkg/vctrs/man/vec_as_index.html">vec_as_index(j, ncol(x), names = names(x))</a></code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code><a href="../reference/tibble.html">tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</a></code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code><a href="https://rdrr.io/r/base/nrow.html">ncol(x)</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><code>j</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index(j, ncol(x), names = names(x))</a></code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code><a href="../reference/tibble.html">tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</a></code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code><a href="https://rdrr.io/r/base/nrow.html">ncol(x)</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -665,8 +665,8 @@
 <td>
 <div class="sourceCode" id="cb68"><html><body><pre class="r"><span class="no">tbl</span>[!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">tbl</span>)]</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: No common type for `n` &lt;integer&gt;
-#&gt; and `c` &lt;character&gt;.</code></pre>
+<pre><code>#&gt; Error: Can't combine `n` &lt;integer&gt; and
+#&gt; `c` &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -759,8 +759,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
-#&gt; ✖ The subscript `mean` has the wrong
-#&gt; type `closure`.
+#&gt; ✖ Subscript `mean` has the wrong type
+#&gt; `function`.
 #&gt; ℹ It must be logical, numeric, or
 #&gt; character.</code></pre>
 </div>
@@ -779,8 +779,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
-#&gt; ✖ The subscript `list(1)` has the wrong
-#&gt; type `list`.
+#&gt; ✖ Subscript `list(1)` has the wrong type
+#&gt; `list`.
 #&gt; ℹ It must be logical, numeric, or
 #&gt; character.</code></pre>
 </div>
@@ -812,8 +812,8 @@
 <pre><code>#&gt; Warning: The `i` argument of
 #&gt; ``[.tbl_df`()` must lie in [0, rows] if
 #&gt; positive, as of tibble 3.0.0.
-#&gt; Use `NA` as row index to obtain a row
-#&gt; full of `NA` values.</code></pre>
+#&gt; Use `NA_integer_` as row index to obtain
+#&gt; a row full of `NA` values.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;       n c     li    
@@ -833,8 +833,8 @@
 <pre><code>#&gt; Warning: The `i` argument of
 #&gt; ``[.tbl_df`()` must use valid row names
 #&gt; as of tibble 3.0.0.
-#&gt; Use `NA` as row index to obtain a row
-#&gt; full of `NA` values.</code></pre>
+#&gt; Use `NA_integer_` as row index to obtain
+#&gt; a row full of `NA` values.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;       n c     li    
@@ -858,7 +858,7 @@
 #&gt; subscript vector.
 #&gt; ℹ Logical subscripts must match the size
 #&gt; of the indexed input.
-#&gt; ✖ The input has size 4 but the subscript
+#&gt; ✖ Input has size 4 but subscript
 #&gt; `c(TRUE, FALSE)` has size 2.</code></pre>
 </div>
 </td>
@@ -940,9 +940,9 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xi-j-1" class="anchor"></a>Definition of <code>x[[i, j]]</code>
 </h3>
-<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://rdrr.io/pkg/vctrs/man/vec_slice.html">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>This implies that <code>j</code> must be a numeric or character vector of length 1.</p>
-<p>NB: <code><a href="https://rdrr.io/pkg/vctrs/man/vec_size.html">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
+<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
 </div>
 </div>
 <div id="column-update" class="section level2">
@@ -1220,9 +1220,8 @@
 <td>
 <div class="sourceCode" id="cb124"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `list(0, 0, 0)` can't be recycled
-#&gt; to size 2.
-#&gt; ✖ It must be size 2 or 1, not 3.</code></pre>
+<pre><code>#&gt; Error: Can't recycle `list(0, 0, 0)`
+#&gt; (size 3) to size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1238,9 +1237,8 @@
 <td>
 <div class="sourceCode" id="cb127"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">1</span>:<span class="fl">3</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>))</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: `list(0, 0)` can't be recycled to
-#&gt; size 3.
-#&gt; ✖ It must be size 3 or 1, not 2.</code></pre>
+<pre><code>#&gt; Error: Can't recycle `list(0, 0)` (size
+#&gt; 2) to size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1402,8 +1400,7 @@
 <pre><code>#&gt; Error: Assigned data `4` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `c`.
-#&gt; ✖ No common type for `value` &lt;double&gt;
-#&gt; and `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1444,8 +1441,8 @@
 #&gt; 2)` must be compatible with existing
 #&gt; data.
 #&gt; ℹ Error occurred for column `c`.
-#&gt; ✖ No common type for `value` &lt;integer&gt;
-#&gt; and `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;integer&gt; to
+#&gt; &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1518,7 +1515,7 @@
 <div id="a-is-another-type-of-vector" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-another-type-of-vector" class="anchor"></a><code>a</code> is another type of vector</h3>
-<p>If <code><a href="https://rdrr.io/pkg/vctrs/man/vec_assert.html">vec_is(a)</a></code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
+<p>If <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html">vec_is(a)</a></code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1642,7 +1639,7 @@
 <div id="a-is-not-a-vector" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-not-a-vector" class="anchor"></a><code>a</code> is not a vector</h3>
-<p>Any other type for <code>a</code> is an error. Note that if <code><a href="https://rdrr.io/r/base/list.html">is.list(a)</a></code> is <code>TRUE</code>, but <code><a href="https://rdrr.io/r/base/class.html">inherits(a, "list")</a></code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://rdrr.io/pkg/vctrs/man/vec_assert.html">?vec_is</a></code> and <code><a href="https://rdrr.io/pkg/vctrs/man/vec_data.html">?vec_proxy</a></code> for details.</p>
+<p>Any other type for <code>a</code> is an error. Note that if <code><a href="https://rdrr.io/r/base/list.html">is.list(a)</a></code> is <code>TRUE</code>, but <code><a href="https://rdrr.io/r/base/class.html">inherits(a, "list")</a></code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html">?vec_is</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html">?vec_proxy</a></code> for details.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1866,7 +1863,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
-#&gt; ✖ The location 5 doesn't exist.
+#&gt; ✖ Location 5 doesn't exist.
 #&gt; ℹ There are only 4 rows.</code></pre>
 </div>
 </td>
@@ -1885,7 +1882,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
-#&gt; ✖ The locations 5, 6, and 7 don't exist.
+#&gt; ✖ Locations 5, 6, and 7 don't exist.
 #&gt; ℹ There are only 4 rows.</code></pre>
 </div>
 </td>
@@ -1904,7 +1901,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
-#&gt; ✖ The location 6 doesn't exist.
+#&gt; ✖ Location 6 doesn't exist.
 #&gt; ℹ There are only 4 rows.</code></pre>
 </div>
 </td>
@@ -1951,8 +1948,8 @@
 <pre><code>#&gt; Error: Assigned data `tbl[1:2, 2]` must
 #&gt; be compatible with existing data.
 #&gt; ℹ Error occurred for column `n`.
-#&gt; ✖ No common type for `value` &lt;character&gt;
-#&gt; and `x` &lt;integer&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1977,8 +1974,7 @@
 <pre><code>#&gt; Error: Assigned data `tbl[1:2, 3]` must
 #&gt; be compatible with existing data.
 #&gt; ℹ Error occurred for column `c`.
-#&gt; ✖ No common type for `value` &lt;list&gt; and
-#&gt; `x` &lt;character&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;list&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -2000,14 +1996,10 @@
 <td>
 <div class="sourceCode" id="cb218"><html><body><pre class="r"><span class="fu">with_tbl</span>(<span class="no">tbl</span>[<span class="fl">2</span>:<span class="fl">3</span>, <span class="fl">3</span>] <span class="kw">&lt;-</span> <span class="no">tbl2</span>[<span class="fl">1</span>:<span class="fl">2</span>, <span class="fl">1</span>])</pre></body></html></div>
 <div class="error">
-<pre><code>#&gt; Error: Assigned data `tbl2[1:2, 1]` must
-#&gt; be compatible with existing data.
-#&gt; ℹ Error occurred for column `li`.
-#&gt; ✖ No common type for `value` &lt;tbl_df&lt;
-#&gt; n : integer
-#&gt; c : character
-#&gt; li: list
-#&gt; &gt;&gt; and `x` &lt;list&gt;.</code></pre>
+<pre><code>#&gt; Error in df_cast_opts(x, to, ..., opts =
+#&gt; opts, x_arg = x_arg, to_arg = to_arg):
+#&gt; Internal error in `df_cast()`: Data
+#&gt; frame must have names.</code></pre>
 </div>
 </td>
 </tr>
@@ -2031,12 +2023,8 @@
 <pre><code>#&gt; Error: Assigned data `tbl2[1:2, 2]` must
 #&gt; be compatible with existing data.
 #&gt; ℹ Error occurred for column `tb`.
-#&gt; ✖ No common type for `value`
-#&gt; &lt;double[,4]&gt; and `x` &lt;tbl_df&lt;
-#&gt; n : integer
-#&gt; c : character
-#&gt; li: list
-#&gt; &gt;&gt;.</code></pre>
+#&gt; ✖ Can't convert &lt;double[,4]&gt; to
+#&gt; &lt;tbl_df&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -2073,8 +2061,8 @@
 <pre><code>#&gt; Error: Assigned data `3:2` must be
 #&gt; compatible with existing data.
 #&gt; ℹ Error occurred for column `x`.
-#&gt; ✖ Lossy cast from `value` &lt;integer&gt; to
-#&gt; `x` &lt;logical&gt;.
+#&gt; ✖ Can't convert from &lt;integer&gt; to
+#&gt; &lt;logical&gt; due to loss of precision.
 #&gt; * Locations: 1, 2.</code></pre>
 </div>
 </td>
@@ -2169,14 +2157,14 @@
 <a href="#definition-of-xi-j---a-1" class="anchor"></a>Definition of <code>x[[i, j]] &lt;- a</code>
 </h3>
 <p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]] &lt;- a</code> is equivalent to <code>x[i, ][[j]] &lt;- a</code>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
-<p>NB: <code><a href="https://rdrr.io/pkg/vctrs/man/vec_size.html">vec_size(a)</a></code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
+<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vec_size(a)</a></code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
 <li id="fn1"><p><code>x[j][[jj]]</code> is equal to <code>x[[ j[[jj]] ]]</code>, in particular <code>x[j][[1]]</code> is equal to <code>x[[j]]</code> for scalar numeric or integer <code>j</code>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code><a href="https://rdrr.io/pkg/vctrs/man/vec_as_index.html">vec_as_index(i, nrow(x))</a></code> first.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index(i, nrow(x))</a></code> first.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p><code>x[,]</code> is equivalent to <code>x[]</code> because <code>x[, j]</code> is equivalent to <code>x[j]</code>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>A more efficient implementation of <code>x[i, j]</code> would forward to <code>x[j][i, ]</code>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Cell subsetting <code>x[[i, j]]</code> is not defined in terms of <code>x[[j]][[i]]</code> because that definition does not generalise to list, matrix and data frame columns. A more efficient implementation of <code>x[[i, j]]</code> would check that <code>j</code> is a scalar and forward to <code>x[i, j][[1]]</code>.<a href="#fnref5" class="footnote-back">↩</a></p></li>

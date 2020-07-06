@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
@@ -105,7 +109,7 @@ runs without raising an error." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
         </div>
       </div>
     </div>
@@ -243,7 +247,7 @@ runs without raising an error.</p>
 The <code>...</code> argument allows adding more attributes to the subclass.
 An <code>nrow</code> argument is required.
 This should be an integer of length 1,
-and every element of the list <code>x</code> should have <code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code>
+and every element of the list <code>x</code> should have <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code>
 equal to this value.
 (But this is not checked by the constructor).
 This takes the place of the "row.names" attribute in a data frame.
@@ -256,7 +260,7 @@ but the names are not checked for correctness.</p>
 <p><code>validate_tibble()</code> checks for "minimal" names
 and that all columns are vectors, data frames or matrices.
 It also makes sure that all columns have the same length,
-and that <code><a href='https://rdrr.io/pkg/vctrs/man/vec_size.html'>vctrs::vec_size()</a></code> is consistent with the data.</p>
+and that <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code> is consistent with the data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> for ways to construct a tibble

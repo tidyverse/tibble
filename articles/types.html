@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
+<!--optional theme--><link href="../.css" rel="stylesheet">
 <!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Column data types">
@@ -51,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
         </div>
       </div>
     </div>
@@ -229,7 +230,7 @@
 <tr class="odd">
 <td align="left"></td>
 <td align="left">difftime</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/new_date.html">vctrs::new_duration(1)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/new_date.html">vctrs::new_duration(1)</a></code></td>
 <td align="left">drtn</td>
 </tr>
 <tr class="even">
@@ -272,38 +273,38 @@
 <tr class="even">
 <td align="left">vctrs types</td>
 <td align="left">unspecified</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/unspecified.html">vctrs::unspecified(1L)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/unspecified.html">vctrs::unspecified(1L)</a></code></td>
 <td align="left">???</td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
 <td align="left">vctrs_list_of</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/list_of.html">vctrs::list_of(c(1L))</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/list_of.html">vctrs::list_of(c(1L))</a></code></td>
 <td align="left">list<int></int>
 </td>
 </tr>
 <tr class="even">
 <td align="left"></td>
 <td align="left">vctrs_vctr</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/new_vctr.html">vctrs::new_vctr(1L)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/new_vctr.html">vctrs::new_vctr(1L)</a></code></td>
 <td align="left">vctrs_vc</td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
 <td align="left">vctrs_unspecified</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/unspecified.html">vctrs::unspecified(1)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/unspecified.html">vctrs::unspecified(1)</a></code></td>
 <td align="left">???</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
 <td align="left">vctrs_partial_factor</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/partial_factor.html">vctrs::partial_factor(letters)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/partial_factor.html">vctrs::partial_factor(letters)</a></code></td>
 <td align="left">prtl_fctr</td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
 <td align="left">vctrs_partial_frame</td>
-<td align="left"><code><a href="https://rdrr.io/pkg/vctrs/man/partial_frame.html">vctrs::partial_frame(a = 1)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/partial_frame.html">vctrs::partial_frame(a = 1)</a></code></td>
 <td align="left">prtl</td>
 </tr>
 <tr class="even">
@@ -345,32 +346,28 @@
 #&gt; $ `named list`      &lt;named list&gt; [1]
 #&gt; $ factor            &lt;fct&gt; A
 #&gt; $ ordered           &lt;ord&gt; a
-#&gt; $ Date              &lt;date&gt; 2020-04-19
-#&gt; $ POSIXt            &lt;dttm&gt; 2020-04-19 19:17:00
+#&gt; $ Date              &lt;date&gt; 2020-07-06
+#&gt; $ POSIXt            &lt;dttm&gt; 2020-07-06 04:54:25
 #&gt; $ difftime          &lt;drtn&gt; 1 secs
 #&gt; $ hms               &lt;time&gt; 00:00:01
 #&gt; $ integer64         &lt;int64&gt; 10000000000
-#&gt; $ blob              &lt;blob&gt; blob[1 B]
+#&gt; $ blob              &lt;blob&gt; [00]
 #&gt; $ data.frame        &lt;df[,1]&gt; &lt;data.frame[1 x 1]&gt;
 #&gt; $ tbl_df            &lt;tibble&gt; &lt;tbl_df[1 x 1]&gt;
 #&gt; $ AsIs              &lt;I&lt;int&gt;&gt; 1
 #&gt; $ unspecified       &lt;???&gt; NA
-#&gt; $ vctrs_list_of     &lt;list&lt;int&gt;&gt; 1
+#&gt; $ vctrs_list_of     &lt;list&lt;int&gt;&gt; [1]
 #&gt; $ vctrs_vctr        &lt;vctrs_vc&gt; 1
 #&gt; $ vctrs_unspecified &lt;???&gt; NA
 #&gt; $ quosures          &lt;quos&gt; [~1]</code></pre>
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
-<p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://rdrr.io/pkg/vctrs/man/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
+<p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">pillar</span><span class="kw ns">:::</span><span class="no">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
-<span class="co">#&gt;     if (is.object(x)) </span>
-<span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
-<span class="co">#&gt;     if (typeof(x) == "complex") </span>
-<span class="co">#&gt;         return("cpl")</span>
-<span class="co">#&gt;     if (vec_is(x)) </span>
+<span class="co">#&gt;     if (is.object(x) || vec_is(x)) </span>
 <span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
 <span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
 <span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
@@ -379,7 +376,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x4ef5df8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x6ce3bb8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></body></html></div>
 </div>
   </div>
