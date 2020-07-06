@@ -72,7 +72,8 @@
 NULL
 
 #' @rdname subsetting
-#' @inheritParams base::`[.data.frame`
+#' @inheritParams base::Extract.data.frame
+#' @param name A [name] or a string.
 #' @export
 `$.tbl_df` <- function(x, name) {
   out <- .subset2(x, name)

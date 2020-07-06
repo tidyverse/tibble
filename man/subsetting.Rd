@@ -25,9 +25,7 @@
 \arguments{
 \item{x}{data frame.}
 
-\item{name}{
-    A literal character string or a \link[base]{name} (possibly \link[base]{backtick}
-    quoted).}
+\item{name}{A \link{name} or a string.}
 
 \item{value}{A value to store in a row, column, range or cell.
 Tibbles are stricter than data frames in what is accepted here.}
