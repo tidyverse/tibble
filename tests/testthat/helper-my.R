@@ -8,8 +8,9 @@ vec_cast.character.mychr <- function(x, to, ...) {
   unclass(x)
 }
 
-vctrs::s3_register("vctrs::vec_ptype2", "mychr.character")
-vctrs::s3_register("vctrs::vec_cast", "character.mychr")
+# Explicit method required for R CMD check:
+vctrs::s3_register("vctrs::vec_ptype2", "mychr.character", vec_ptype2.mychr.character)
+vctrs::s3_register("vctrs::vec_cast", "character.mychr", vec_cast.character.mychr)
 
 myint <- function(x) {
   structure(x, class = c("myint", "integer"))
@@ -21,8 +22,9 @@ vec_cast.integer.myint <- function(x, to, ...) {
   as.integer(unclass(x))
 }
 
-vctrs::s3_register("vctrs::vec_ptype2", "myint.integer")
-vctrs::s3_register("vctrs::vec_cast", "integer.myint")
+# Explicit method required for R CMD check:
+vctrs::s3_register("vctrs::vec_ptype2", "myint.integer", vec_ptype2.myint.integer)
+vctrs::s3_register("vctrs::vec_cast", "integer.myint", vec_cast.integer.myint)
 
 mylgl <- function(x) {
   structure(x, class = c("mylgl", "logical"))
@@ -34,5 +36,6 @@ vec_cast.logical.mylgl <- function(x, to, ...) {
   unclass(x)
 }
 
-vctrs::s3_register("vctrs::vec_ptype2", "mylgl.logical")
-vctrs::s3_register("vctrs::vec_cast", "logical.mylgl")
+# Explicit method required for R CMD check:
+vctrs::s3_register("vctrs::vec_ptype2", "mylgl.logical", vec_ptype2.mylgl.logical)
+vctrs::s3_register("vctrs::vec_cast", "logical.mylgl", vec_cast.logical.mylgl)
