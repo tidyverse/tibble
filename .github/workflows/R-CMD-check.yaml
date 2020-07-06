@@ -29,7 +29,6 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      _R_CHECK_XREFS_MIND_SUSPECT_ANCHORS_: TRUE
 
     steps:
       - uses: actions/checkout@v1
@@ -67,7 +66,7 @@ jobs:
 
       - name: Check
         run:
-          Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
+          Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'), error_on = 'note', check_dir = 'check')"
 
       - name: Upload check results
         if: failure()
