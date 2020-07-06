@@ -392,6 +392,36 @@ test_that("can use two-dimensional indexing with matrix and data frame columns (
   expect_identical(df[[1, "z"]], df[1, ]$z)
 })
 
+test_that("can use classed character indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[mychr(letters[1:2])], df)
+  expect_identical(df[[mychr("a")]], df[["a"]])
+  expect_null(df[[mychr("c")]])
+
+  expect_silent(df[mychr(letters[1:2])] <- df)
+  expect_silent(df[[mychr("c")]] <- 1)
+  expect_silent(df[[mychr("a")]] <-  df[["a"]])
+})
+
+test_that("can use classed integer indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[myint(1:3), myint(1:2)], df)
+  expect_identical(df[[myint(2)]], df[[2]])
+
+  expect_silent(df[mylgl(TRUE), ] <- df)
+  expect_silent(df[[myint(2)]] <- df[[2]])
+  expect_silent(df[[myint(3)]] <- 1)
+})
+
+test_that("can use classed logical indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[mylgl(TRUE), mylgl(TRUE)], df)
+  expect_silent(df[mylgl(TRUE), mylgl(TRUE)] <- df)
+})
+
 # $ -----------------------------------------------------------------------
 
 test_that("$ throws warning if name doesn't exist", {

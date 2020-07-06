@@ -160,6 +160,10 @@ NULL
 
   value <- list(value)
 
+  if (is.object(j)) {
+    j <- vectbl_as_col_subscript2(j, j_arg, assign = TRUE)
+  }
+
   # Side effect: check scalar
   if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
     vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
@@ -365,7 +369,13 @@ tbl_subset2 <- function(x, j, j_arg) {
       env = foreign_caller_env())
 
     return(as.matrix(x)[[j]])
-  } else if (is.numeric(j)) {
+  }
+
+  if (is.object(j)) {
+    j <- vectbl_as_col_subscript2(j, j_arg)
+  }
+
+  if (is.numeric(j)) {
     if (length(j) == 1L) {
       if (is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
         # Side effect: throw error for invalid j
@@ -574,6 +584,10 @@ vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
 
 vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
   subclass_col_index_errors(vec_as_location2(j, n, names), j_arg = j_arg, assign = assign)
+}
+
+vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE) {
+  subclass_col_index_errors(vec_as_subscript2(j, logical = "error"), j_arg = j_arg, assign = assign)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
