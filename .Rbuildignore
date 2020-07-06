@@ -32,4 +32,3 @@
 ^tests/testthat/helper-rstudio\.R$
 ^vignettes/invariants\.md$
 ^bench$
-^depends\.rds$
