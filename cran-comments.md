@@ -1,4 +1,4 @@
-tibble 3.0.2
+tibble 3.0.2: Performance
 
 ## Cran Repository Policy
 
@@ -7,12 +7,10 @@ tibble 3.0.2
 ## R CMD check results
 
 - [x] Checked locally, R 4.0.1
-- [ ] Checked on CI system, R 4.0.2
-- [ ] Checked on win-builder, R devel
+- [x] Checked on CI system, R 4.0.2
+- [x] Checked on win-builder, R devel
 
 OK
-
-- [ ] Explain R CMD check failures or remove this line.
 
 ## CRAN failures
 
