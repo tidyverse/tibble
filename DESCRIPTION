@@ -64,7 +64,7 @@ Suggests:
     withr
 Remotes: 
     r-lib/testthat@v2.3.2,
-    rstudio/rmarkdown
+    rstudio/rmarkdown@v2.3
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
