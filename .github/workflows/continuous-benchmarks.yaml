@@ -33,4 +33,7 @@ jobs:
         run: git notes --ref benchmarks show
 
       - name: Push benchmarks
-        run: Rscript -e "bench::cb_push()"
+        run: |
+          bench::cb_pull()
+          bench::cb_push()
+        shell: Rscript {0}
