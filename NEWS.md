@@ -1,3 +1,8 @@
+# tibble 3.0.2
+
+- Same as previous version.
+
+
 # tibble 3.0.1.9003
 
 - `is_vector_s3()` is no longer reexported from pillar (#789).
