@@ -1,3 +1,10 @@
+# tibble 3.0.1.9003
+
+- `is_vector_s3()` is no longer reexported from pillar (#789).
+- `[[` works with classed indexes again, e.g. created with `glue::glue()` (#778).
+- Implement continuous benchmarking (#793).
+
+
 # tibble 3.0.1.9002
 
 - Subassignment is now faster (#794).
