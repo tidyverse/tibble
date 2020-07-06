@@ -62,9 +62,6 @@ Suggests:
     testthat (>= 2.1.0),
     tidyr,
     withr
-Remotes: 
-    r-lib/testthat@v2.3.2,
-    rstudio/rmarkdown@v2.3
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
