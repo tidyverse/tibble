@@ -100,7 +100,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.1.9002</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.2.9000</span>
         </div>
       </div>
     </div>
@@ -187,38 +187,48 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tibble-3-0-1-9002" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.1.9002">
-<a href="#tibble-3-0-1-9002" class="anchor"></a>tibble 3.0.1.9002<small> Unreleased </small>
-</h1>
-<ul>
-<li>Subassignment is now faster (<a href='https://github.com/tidyverse/tibble/issues/794'>#794</a>).</li>
-</ul>
-</div>
-    <div id="tibble-3-0-1-9001" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.1.9001">
-<a href="#tibble-3-0-1-9001" class="anchor"></a>tibble 3.0.1.9001<small> Unreleased </small>
-</h1>
-<ul>
-<li>Subsetting is faster again (<a href='https://github.com/tidyverse/tibble/issues/790'>#790</a>).</li>
-<li>
-<code><a href="https://rdrr.io/r/base/NULL.html">is.null()</a></code> is preferred over <code>is_null()</code> for speed.</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> as fast as <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> again, performs all relevant checks inline instead of relying on <code><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vctrs::vec_as_location2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/780'>#780</a>).</li>
-<li>
-<code><a href="../reference/tribble.html">tribble()</a></code> now better handles named inputs (<a href='https://github.com/tidyverse/tibble/issues/775'>#775</a>) and objects of non-vtrs classes like <code>lubridate::Period</code> (<a href='https://github.com/tidyverse/tibble/issues/784'>#784</a>) and <code><a href="https://rdrr.io/pkg/formattable/man/formattable.html">formattable::formattable</a></code> (<a href='https://github.com/tidyverse/tibble/issues/785'>#785</a>).</li>
-<li>
-<code><a href="../reference/add_column.html">add_column()</a></code> works without warning for 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/786'>#786</a>).</li>
-<li>Refer to <code>NA_integer_</code>.</li>
-</ul>
-</div>
-    <div id="tibble-3-0-1-9000" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.1.9000">
-<a href="#tibble-3-0-1-9000" class="anchor"></a>tibble 3.0.1.9000<small> Unreleased </small>
+    <div id="tibble-3-0-2-9000" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.2.9000">
+<a href="#tibble-3-0-2-9000" class="anchor"></a>tibble 3.0.2.9000<small> Unreleased </small>
 </h1>
 <ul>
 <li>Same as previous version.</li>
 </ul>
+</div>
+    <div id="tibble-3-0-2" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.2">
+<a href="#tibble-3-0-2" class="anchor"></a>tibble 3.0.2<small> 2020-07-07 </small>
+</h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> works with classed indexes again, e.g. created with <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/778'>#778</a>).</li>
+<li>
+<code><a href="../reference/add_column.html">add_column()</a></code> works without warning for 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/786'>#786</a>).</li>
+<li>
+<code><a href="../reference/tribble.html">tribble()</a></code> now better handles named inputs (<a href='https://github.com/tidyverse/tibble/issues/775'>#775</a>) and objects of non-vtrs classes like <code>lubridate::Period</code> (<a href='https://github.com/tidyverse/tibble/issues/784'>#784</a>) and <code><a href="https://rdrr.io/pkg/formattable/man/formattable.html">formattable::formattable</a></code> (<a href='https://github.com/tidyverse/tibble/issues/785'>#785</a>).</li>
+</ul>
+</div>
+<div id="performance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performance" class="anchor"></a>Performance</h2>
+<ul>
+<li>Subsetting and subassignment are faster (<a href='https://github.com/tidyverse/tibble/issues/780'>#780</a>, <a href='https://github.com/tidyverse/tibble/issues/790'>#790</a>, <a href='https://github.com/tidyverse/tibble/issues/794'>#794</a>).</li>
+<li>
+<code><a href="https://rdrr.io/r/base/NULL.html">is.null()</a></code> is preferred over <code>is_null()</code> for speed.</li>
+<li>Implement continuous benchmarking (<a href='https://github.com/tidyverse/tibble/issues/793'>#793</a>).</li>
+</ul>
+</div>
+<div id="compatibility" class="section level2">
+<h2 class="hasAnchor">
+<a href="#compatibility" class="anchor"></a>Compatibility</h2>
+<ul>
+<li>
+<code>is_vector_s3()</code> is no longer reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/789'>#789</a>).</li>
+</ul>
+</div>
 </div>
     <div id="tibble-3-0-1" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.1">
@@ -232,9 +242,9 @@
 <li><p>Use delayed import for cli to work around unload problems in downstream packages (<a href='https://github.com/tidyverse/tibble/issues/754'>#754</a>).</p></li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li><p>More soft-deprecation warnings are actually visible.</p></li>
 <li><p>If <code>.name_repair</code> is a function, no repair messages are shown (<a href='https://github.com/tidyverse/tibble/issues/763'>#763</a>).</p></li>
@@ -345,9 +355,9 @@
 <li><p><code><a href="../reference/view.html">view()</a></code> now uses the created (or passed) title argument (<a href='https://github.com/tidyverse/tibble/issues/610'>#610</a>, <a href='https://github.com/xvrdm'>@xvrdm</a>).</p></li>
 </ul>
 </div>
-<div id="performance" class="section level2">
+<div id="performance-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance" class="anchor"></a>Performance</h2>
+<a href="#performance-1" class="anchor"></a>Performance</h2>
 <ul>
 <li>Construction and subsetting of large data frames is faster now (<a href='https://github.com/tidyverse/tibble/issues/717'>#717</a>, <a href='https://github.com/romainfrancois'>@romainfrancois</a>).</li>
 </ul>
@@ -498,9 +508,9 @@
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> shows information obtained from <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code>, e.g. grouping information for <code>grouped_df</code> from dplyr (<a href='https://github.com/tidyverse/tibble/issues/550'>#550</a>).</p></li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.</p></li>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> disambiguates outputs for factors if the levels contain commas (<a href='https://github.com/tidyverse/tibble/issues/384'>#384</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
@@ -529,9 +539,9 @@
 <h1 class="page-header" data-toc-text="1.4.2">
 <a href="#tibble-1-4-2" class="anchor"></a>tibble 1.4.2<small> 2018-01-22 </small>
 </h1>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fix OS X builds.</li>
 <li>The <code>tibble.width</code> option is honored again (<a href='https://github.com/tidyverse/tibble/issues/369'>#369</a>).</li>
@@ -553,9 +563,9 @@
 <li>Updated vignettes and website documentation.</li>
 </ul>
 </div>
-<div id="performance-1" class="section level2">
+<div id="performance-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance-1" class="anchor"></a>Performance</h2>
+<a href="#performance-2" class="anchor"></a>Performance</h2>
 <ul>
 <li>Faster printing of very wide tibbles (<a href='https://github.com/tidyverse/tibble/issues/360'>#360</a>).</li>
 <li>Faster construction and subsetting for tibbles (<a href='https://github.com/tidyverse/tibble/issues/353'>#353</a>).</li>
@@ -586,9 +596,9 @@
 <code><a href="../reference/subsetting.html">`[.tbl_df`()</a></code> supports <code>drop = TRUE</code> and omits the warning if <code>j</code> is passed. The calls <code>df[i, j, drop = TRUE]</code> and <code>df[j, drop = TRUE]</code> are now compatible with data frames again (<a href='https://github.com/tidyverse/tibble/issues/307'>#307</a>, <a href='https://github.com/tidyverse/tibble/issues/311'>#311</a>).</li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Improved compatibility with remote data sources for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/328'>#328</a>).</li>
 <li>Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (<a href='https://github.com/tidyverse/tibble/issues/318'>#318</a>).</li>
@@ -612,9 +622,9 @@
 <h1 class="page-header" data-toc-text="1.3.4">
 <a href="#tibble-1-3-4" class="anchor"></a>tibble 1.3.4<small> 2017-08-22 </small>
 </h1>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call are recycled prior to evaluating subsequent arguments, improving consistency with <code>mutate()</code> (<a href='https://github.com/tidyverse/tibble/issues/213'>#213</a>).</li>
 <li>Recycling of values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call maintains their class (<a href='https://github.com/tidyverse/tibble/issues/284'>#284</a>).</li>
@@ -643,9 +653,9 @@
 <h1 class="page-header" data-toc-text="1.3.3">
 <a href="#tibble-1-3-3" class="anchor"></a>tibble 1.3.3<small> 2017-05-28 </small>
 </h1>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Added <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code>ungroup()</code> in dplyr 0.5.0 and earlier (<a href='https://github.com/tidyverse/tibble/issues/256'>#256</a>, <a href='https://github.com/tidyverse/tibble/issues/263'>#263</a>).</li>
 <li>The column width for non-syntactic columns is computed correctly again (<a href='https://github.com/tidyverse/tibble/issues/258'>#258</a>).</li>
@@ -659,9 +669,9 @@
 <h1 class="page-header" data-toc-text="1.3.1">
 <a href="#tibble-1-3-1" class="anchor"></a>tibble 1.3.1<small> 2017-05-17 </small>
 </h1>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Subsetting zero columns no longer returns wrong number of rows (<a href='https://github.com/tidyverse/tibble/issues/241'>#241</a>, <a href='https://github.com/echasnovski'>@echasnovski</a>).</li>
 </ul>
@@ -704,9 +714,9 @@
 <h1 class="page-header" data-toc-text="1.3.0">
 <a href="#tibble-1-3-0" class="anchor"></a>tibble 1.3.0<small> 2017-04-01 </small>
 </h1>
-<div id="bug-fixes-7" class="section level2">
+<div id="bug-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Time series matrices (objects of class <code>mts</code> and <code>ts</code>) are now supported in <code><a href="../reference/as_tibble.html">as_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/184'>#184</a>).</li>
 <li>The <code>all_equal()</code> function (called by <code>all.equal.tbl_df()</code>) now forwards to <code>dplyr</code> and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (<code>data.frame</code> vs. <code>tbl_df</code>) are ignored. The <code>all.equal.tbl_df()</code> method gives a warning and forwards to <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code> if <code>dplyr</code> is not installed; call <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal(as.data.frame(...), ...)</a></code> to avoid the warning. This ensures consistent behavior of this function, regardless if <code>dplyr</code> is loaded or not (<a href='https://github.com/tidyverse/tibble/issues/198'>#198</a>).</li>
@@ -777,9 +787,9 @@
 <h1 class="page-header" data-toc-text="1.2">
 <a href="#tibble-1-2" class="anchor"></a>tibble 1.2<small> 2016-08-26 </small>
 </h1>
-<div id="bug-fixes-8" class="section level2">
+<div id="bug-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-9" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>The <code>tibble.width</code> option is used for <code><a href="../reference/glimpse.html">glimpse()</a></code> only if it is finite (<a href='https://github.com/tidyverse/tibble/issues/153'>#153</a>, <a href='https://github.com/kwstat'>@kwstat</a>).</li>
 <li>New <code>as_tibble.poly()</code> to support conversion of a <code>poly</code> object to a tibble (<a href='https://github.com/tidyverse/tibble/issues/110'>#110</a>).</li>
@@ -895,9 +905,9 @@
 <code><a href="../reference/rownames.html">has_rownames()</a></code> supports arguments that are not data frames.</li>
 </ul>
 </div>
-<div id="bug-fixes-9" class="section level2">
+<div id="bug-fixes-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-9" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-10" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Two-dimensional indexing with <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> works (<a href='https://github.com/tidyverse/tibble/issues/58'>#58</a>, <a href='https://github.com/tidyverse/tibble/issues/63'>#63</a>).</li>
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
@@ -954,7 +964,7 @@
 <li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/11'>#11</a>, <a href='https://github.com/zhilongjia'>@zhilongjia</a>).</li>
 <li>New <code><a href="../reference/rownames.html">has_rownames()</a></code> and <code><a href="../reference/rownames.html">remove_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/44'>#44</a>).</li>
 <li>New <code><a href="../reference/name-repair-superseded.html">repair_names()</a></code> fixes missing and duplicate names (<a href='https://github.com/tidyverse/tibble/issues/10'>#10</a>, <a href='https://github.com/tidyverse/tibble/issues/15'>#15</a>, <a href='https://github.com/r2evans'>@r2evans</a>).</li>
-<li>New <code><a href="https://rdrr.io/pkg/pillar/man/deprecated.html">is_vector_s3()</a></code>.</li>
+<li>New <code>is_vector_s3()</code>.</li>
 </ul>
 </li>
 <li>Features
