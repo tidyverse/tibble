@@ -21,7 +21,6 @@ with_lifecycle_warnings <- function(expr) {
 }
 
 scoped_lifecycle_errors <- function(frame = rlang::caller_env()) {
-  scoped_lifecycle_warnings(frame = frame)
   rlang::scoped_options(.frame = frame,
     lifecycle_verbosity = "error"
   )
