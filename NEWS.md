@@ -1,3 +1,8 @@
+# tibble 3.0.3
+
+- Same as previous version.
+
+
 # tibble 3.0.2.9002
 
 - Fix test compatibility with rlang 0.4.7.
