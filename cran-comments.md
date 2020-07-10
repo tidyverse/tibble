@@ -1,4 +1,4 @@
-tibble 3.0.2: Performance
+tibble 3.0.3
 
 ## Cran Repository Policy
 
@@ -6,12 +6,15 @@ tibble 3.0.2: Performance
 
 ## R CMD check results
 
-- [x] Checked locally, R 4.0.1
-- [x] Checked on CI system, R 4.0.2
-- [x] Checked on win-builder, R devel
+- [x] Checked locally, R 4.0.2
+- [ ] Checked on CI system, R 4.0.2
+- [ ] Checked on win-builder, R devel
 
-OK
+- [ ] Check the boxes above after successful execution and remove this line. Then run `fledge::release().
 
-## CRAN failures
+## Current CRAN check results
 
-- [x] Checked on 2020-07-06, no errors found.
+- [x] Checked on 2020-07-10, errors found: https://cran.r-project.org/web/checks/check_results_tibble.html
+- [ ] ERROR: r-devel-linux-x86_64-fedora-clang
+
+Check results at: https://cran.r-project.org/web/checks/check_results_tibble.html
