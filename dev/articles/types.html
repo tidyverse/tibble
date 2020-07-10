@@ -53,7 +53,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.2.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.2.9001</span>
         </div>
       </div>
     </div>
@@ -347,8 +347,8 @@
 #&gt; $ `named list`      &lt;named list&gt; [1]
 #&gt; $ factor            &lt;fct&gt; A
 #&gt; $ ordered           &lt;ord&gt; a
-#&gt; $ Date              &lt;date&gt; 2020-07-09
-#&gt; $ POSIXt            &lt;dttm&gt; 2020-07-09 19:32:22
+#&gt; $ Date              &lt;date&gt; 2020-07-10
+#&gt; $ POSIXt            &lt;dttm&gt; 2020-07-10 07:20:39
 #&gt; $ difftime          &lt;drtn&gt; 1 secs
 #&gt; $ hms               &lt;time&gt; 00:00:01
 #&gt; $ integer64         &lt;int64&gt; 10000000000
@@ -368,7 +368,7 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">pillar</span><span class="kw ns">:::</span><span class="no">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
-<span class="co">#&gt;     if (is.object(x) || vec_is(x)) </span>
+<span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) </span>
 <span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
 <span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
 <span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
@@ -377,7 +377,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x518f8c0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x6ae5bb8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></body></html></div>
 </div>
   </div>
