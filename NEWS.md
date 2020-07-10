@@ -1,3 +1,8 @@
+# tibble 3.0.2.9002
+
+- Fix test compatibility with rlang 0.4.7.
+
+
 # tibble 3.0.2.9001
 
 - Fix warning about `needs_dots` arguments with pillar >= 1.4.5 (#798).
