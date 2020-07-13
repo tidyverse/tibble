@@ -90,7 +90,7 @@ See vctrs::vec_as_names() for the implementation of the underlying logic." />
 
   </head>
 
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -252,22 +252,27 @@ number.</p></td>
 
 
 <p>These functions are superseded. The <code>repair_names()</code> logic
-will also remain available in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names_legacy.html'>vctrs::vec_as_names_legacy()</a></code>.</p><pre><span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='no'>...</span>, <span class='no'>`.name_repair = "unique"`</span>)
-<span class='co'>## is preferred to</span>
-<span class='no'>df</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='no'>...</span>)
-<span class='fu'>set_tidy_names</span>(<span class='no'>df</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+will also remain available in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names_legacy.html'>vctrs::vec_as_names_legacy()</a></code>.</p><pre>tibble(..., `.name_repair = "unique"`)
+## is preferred to
+df &lt;- tibble(...)
+set_tidy_names(df, syntactic = FALSE)
 
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='no'>...</span>, <span class='no'>`.name_repair = "universal"`</span>)
-<span class='co'>## is preferred to</span>
-<span class='no'>df</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='no'>...</span>)
-<span class='fu'>set_tidy_names</span>(<span class='no'>df</span>, <span class='kw'>syntactic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+tibble(..., `.name_repair = "universal"`)
+## is preferred to
+df &lt;- tibble(...)
+set_tidy_names(df, syntactic = TRUE)
+</pre>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#life-cycle">Life cycle</a></li>
+    </ul>
+
   </div>
 </div>
 

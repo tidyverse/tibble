@@ -83,7 +83,7 @@
 
   </head>
 
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -183,12 +183,12 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
+      <h1>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="tibble-3-0-3-9000" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.3.9000">
+<h1 class="page-header">
 <a href="#tibble-3-0-3-9000" class="anchor"></a>tibble 3.0.3.9000<small> Unreleased </small>
 </h1>
 <ul>
@@ -196,7 +196,7 @@
 </ul>
 </div>
     <div id="tibble-3-0-3" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.3">
+<h1 class="page-header">
 <a href="#tibble-3-0-3" class="anchor"></a>tibble 3.0.3<small> 2020-07-10 </small>
 </h1>
 <ul>
@@ -205,7 +205,7 @@
 </ul>
 </div>
     <div id="tibble-3-0-2" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.2">
+<h1 class="page-header">
 <a href="#tibble-3-0-2" class="anchor"></a>tibble 3.0.2<small> 2020-07-07 </small>
 </h1>
 <div id="bug-fixes" class="section level2">
@@ -236,7 +236,7 @@
 </div>
 </div>
     <div id="tibble-3-0-1" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.1">
+<h1 class="page-header">
 <a href="#tibble-3-0-1" class="anchor"></a>tibble 3.0.1<small> 2020-04-20 </small>
 </h1>
 <div id="compatibility-fixes" class="section level2">
@@ -268,7 +268,7 @@
 </div>
 </div>
     <div id="tibble-3-0-0" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0">
+<h1 class="page-header">
 <a href="#tibble-3-0-0" class="anchor"></a>tibble 3.0.0<small> 2020-03-30 </small>
 </h1>
 <div id="major-breaking-changes" class="section level2">
@@ -292,7 +292,7 @@
 <li><p>Error: Expected a vector, not a <code>...</code> object</p></li>
 </ul>
 <p>If you implement a class that wraps a list as S3 vector, you need to include <code>"list"</code> in the class:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="no">x</span>, <span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"your_s3_class"</span>, <span class="st">"list"</span>))</pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(x, <span class="dt">class =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"your_s3_class"</span>, <span class="st">"list"</span>))</a></code></pre></div>
 <p>Alternatively, implement a <code>vec_proxy()</code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code>list_of()</code>.</p>
 </li>
 <li>
@@ -333,11 +333,11 @@
 <p>All errors emitted directly by the package inherit from the <code>"tibble_error"</code> and <code>"rlang_error"</code> classes. In some cases, <code>"vctrs_error"</code> errors may be passed through. The exact subclass is subject to change.</p>
 <p>Example: <code><a href="../reference/tibble.html">tibble(a = quote(b))</a></code> raises an error that inherits from <code>"tibble_error_column_must_be_vector"</code>, <code>"tibble_error"</code> and <code>"rlang_error"</code>, and from <code>"error"</code> and <code>"condition"</code> like all errors. Do not rely on the wording of <code>"tibble_error_column_must_be_vector"</code>, this is likely to change.</p>
 <p>Use the following pattern to catch errors emitted by tibble:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span>(
-  <span class="fu">your_code</span>(),
-  <span class="kw">tibble_error</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">cnd</span>) {
-  }
-)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span>(</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">your_code</span>(),</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">tibble_error =</span> <span class="cf">function</span>(cnd) {</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 </li>
 <li><p>New <code><a href="../reference/tibble.html">tibble_row()</a></code> constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (<a href='https://github.com/tidyverse/tibble/issues/205'>#205</a>).</p></li>
 <li><p>New <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> convert a bare vector to a one-row or one-column tibble, respectively. <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> also works for non-bare vectors. Using <code><a href="../reference/as_tibble.html">as_tibble()</a></code> for bare vectors is superseded (<a href='https://github.com/tidyverse/tibble/issues/447'>#447</a>).</p></li>
@@ -379,7 +379,7 @@
 </div>
 </div>
     <div id="tibble-2-1-3" class="section level1">
-<h1 class="page-header" data-toc-text="2.1.3">
+<h1 class="page-header">
 <a href="#tibble-2-1-3" class="anchor"></a>tibble 2.1.3<small> 2019-06-06 </small>
 </h1>
 <ul>
@@ -387,7 +387,7 @@
 </ul>
 </div>
     <div id="tibble-2-1-2" class="section level1">
-<h1 class="page-header" data-toc-text="2.1.2">
+<h1 class="page-header">
 <a href="#tibble-2-1-2" class="anchor"></a>tibble 2.1.2<small> 2019-05-29 </small>
 </h1>
 <ul>
@@ -396,7 +396,7 @@
 </ul>
 </div>
     <div id="tibble-2-1-1" class="section level1">
-<h1 class="page-header" data-toc-text="2.1.1">
+<h1 class="page-header">
 <a href="#tibble-2-1-1" class="anchor"></a>tibble 2.1.1<small> 2019-03-16 </small>
 </h1>
 <ul>
@@ -406,7 +406,7 @@
 </ul>
 </div>
     <div id="tibble-2-0-1" class="section level1">
-<h1 class="page-header" data-toc-text="2.0.1">
+<h1 class="page-header">
 <a href="#tibble-2-0-1" class="anchor"></a>tibble 2.0.1<small> 2019-01-12 </small>
 </h1>
 <ul>
@@ -416,7 +416,7 @@
 </ul>
 </div>
     <div id="tibble-2-0-0" class="section level1">
-<h1 class="page-header" data-toc-text="2.0.0">
+<h1 class="page-header">
 <a href="#tibble-2-0-0" class="anchor"></a>tibble 2.0.0<small> 2019-01-04 </small>
 </h1>
 <div id="breaking-changes-1" class="section level2">
@@ -534,14 +534,14 @@
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> is now faster for very wide tibbles.</p></li>
 <li><p>Subsetting with the <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> operator is faster (<a href='https://github.com/tidyverse/tibble/issues/544'>#544</a>).</p></li>
 <li><p>Avoid use of <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> in examples if packages are not installed (<a href='https://github.com/tidyverse/tibble/issues/453'>#453</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
-<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code>requireNamespace()</code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
+<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> checks column length only once (<a href='https://github.com/tidyverse/tibble/issues/365'>#365</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
 <li><p>Using <code><a href="https://rlang.r-lib.org/reference/list2.html">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
 </ul>
 </div>
 </div>
     <div id="tibble-1-4-2" class="section level1">
-<h1 class="page-header" data-toc-text="1.4.2">
+<h1 class="page-header">
 <a href="#tibble-1-4-2" class="anchor"></a>tibble 1.4.2<small> 2018-01-22 </small>
 </h1>
 <div id="bug-fixes-3" class="section level2">
@@ -579,7 +579,7 @@
 </div>
 </div>
     <div id="tibble-1-4-1" class="section level1">
-<h1 class="page-header" data-toc-text="1.4.1">
+<h1 class="page-header">
 <a href="#tibble-1-4-1" class="anchor"></a>tibble 1.4.1<small> 2017-12-25 </small>
 </h1>
 <div id="new-formatting" class="section level2">
@@ -624,7 +624,7 @@
 </div>
 </div>
     <div id="tibble-1-3-4" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.4">
+<h1 class="page-header">
 <a href="#tibble-1-3-4" class="anchor"></a>tibble 1.3.4<small> 2017-08-22 </small>
 </h1>
 <div id="bug-fixes-5" class="section level2">
@@ -655,7 +655,7 @@
 </div>
 </div>
     <div id="tibble-1-3-3" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.3">
+<h1 class="page-header">
 <a href="#tibble-1-3-3" class="anchor"></a>tibble 1.3.3<small> 2017-05-28 </small>
 </h1>
 <div id="bug-fixes-6" class="section level2">
@@ -671,7 +671,7 @@
 </div>
 </div>
     <div id="tibble-1-3-1" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.1">
+<h1 class="page-header">
 <a href="#tibble-1-3-1" class="anchor"></a>tibble 1.3.1<small> 2017-05-17 </small>
 </h1>
 <div id="bug-fixes-7" class="section level2">
@@ -716,7 +716,7 @@
 </div>
 </div>
     <div id="tibble-1-3-0" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.0">
+<h1 class="page-header">
 <a href="#tibble-1-3-0" class="anchor"></a>tibble 1.3.0<small> 2017-04-01 </small>
 </h1>
 <div id="bug-fixes-8" class="section level2">
@@ -789,7 +789,7 @@
 </div>
 </div>
     <div id="tibble-1-2" class="section level1">
-<h1 class="page-header" data-toc-text="1.2">
+<h1 class="page-header">
 <a href="#tibble-1-2" class="anchor"></a>tibble 1.2<small> 2016-08-26 </small>
 </h1>
 <div id="bug-fixes-9" class="section level2">
@@ -839,7 +839,7 @@
 </div>
 </div>
     <div id="tibble-1-1" class="section level1">
-<h1 class="page-header" data-toc-text="1.1">
+<h1 class="page-header">
 <a href="#tibble-1-1" class="anchor"></a>tibble 1.1<small> 2016-07-04 </small>
 </h1>
 <p>Follow-up release.</p>
@@ -943,7 +943,7 @@
 </div>
 </div>
     <div id="version-1-0" class="section level1">
-<h1 class="page-header" data-toc-text="1.0">
+<h1 class="page-header">
 <a href="#version-1-0" class="anchor"></a>Version 1.0<small> 2016-03-23 </small>
 </h1>
 <ul>
@@ -1025,9 +1025,30 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tibble-3-0-3-9000">3.0.3.9000</a></li>
+        <li><a href="#tibble-3-0-3">3.0.3</a></li>
+        <li><a href="#tibble-3-0-2">3.0.2</a></li>
+        <li><a href="#tibble-3-0-1">3.0.1</a></li>
+        <li><a href="#tibble-3-0-0">3.0.0</a></li>
+        <li><a href="#tibble-2-1-3">2.1.3</a></li>
+        <li><a href="#tibble-2-1-2">2.1.2</a></li>
+        <li><a href="#tibble-2-1-1">2.1.1</a></li>
+        <li><a href="#tibble-2-0-1">2.0.1</a></li>
+        <li><a href="#tibble-2-0-0">2.0.0</a></li>
+        <li><a href="#tibble-1-4-2">1.4.2</a></li>
+        <li><a href="#tibble-1-4-1">1.4.1</a></li>
+        <li><a href="#tibble-1-3-4">1.3.4</a></li>
+        <li><a href="#tibble-1-3-3">1.3.3</a></li>
+        <li><a href="#tibble-1-3-1">1.3.1</a></li>
+        <li><a href="#tibble-1-3-0">1.3.0</a></li>
+        <li><a href="#tibble-1-2">1.2</a></li>
+        <li><a href="#tibble-1-1">1.1</a></li>
+        <li><a href="#version-1-0">1.0</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
