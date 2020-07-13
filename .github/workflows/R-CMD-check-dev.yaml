@@ -49,7 +49,7 @@ jobs:
           library(remotes)
           deps <- readRDS('.github/depends.Rds')
           deps[['installed']] <- vapply(deps[['package']], remotes:::local_sha, character(1))
-          update(deps)
+          update(deps, type = "binary")
           lapply(deps$package, function(x) try(remotes::install_dev(x)))
           remotes::install_cran('rcmdcheck')
         shell: Rscript {0}
