@@ -33,18 +33,17 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-        shell: Rscript {0}
+      - name: "Prepare timestamp for cache"
+        if: runner.os != 'Windows'
+        id: date
+        run: echo "::set-output name=date::$(date -Ihours)"
 
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
+          key: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-
 
       - name: Install dependencies
