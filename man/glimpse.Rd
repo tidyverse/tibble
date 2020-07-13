@@ -19,7 +19,7 @@ x original x is (invisibly) returned, allowing \code{glimpse()} to be
 used within a data pipe line.
 }
 \description{
-\lifecycle{maturing}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{glimpse()} is like a transposed version of \code{print()}:
 columns run down the page, and data runs across.
@@ -41,7 +41,7 @@ as soon as it becomes available.
 \examples{
 glimpse(mtcars)
 
-if (requireNamespace("nycflights13", quietly = TRUE)) {
-  glimpse(nycflights13::flights)
-}
+\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+glimpse(nycflights13::flights)
+\dontshow{\}) # examplesIf}
 }

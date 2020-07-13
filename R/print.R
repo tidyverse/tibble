@@ -1,7 +1,7 @@
 #' Printing tibbles
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
@@ -57,24 +57,24 @@
 #'
 #' trunc_mat(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   print(nycflights13::flights, n_extra = 2)
-#'   print(nycflights13::flights, width = Inf)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' print(nycflights13::flights, n_extra = 2)
+#' print(nycflights13::flights, width = Inf)
+#'
 #' @name formatting
 NULL
 
 #' @rdname formatting
 #' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+  cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
 }
 
 #' Legacy help page for compatibility with existing packages
 #'
 #' @description
-#' \lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`
 #'
 #' Please see [print.tbl()] for the print method for tibbles.
 #'
@@ -94,7 +94,7 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n) || n < 0) {
+  if (is.null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -142,8 +142,7 @@ shrink_mat <- function(df, rows, n, star) {
 
   mcf <- pillar::colonnade(
     df,
-    has_row_id = if (star) "*" else TRUE,
-    needs_dots = needs_dots
+    has_row_id = if (star) "*" else TRUE
   )
 
   list(mcf = mcf, rows_missing = rows_missing)
@@ -198,7 +197,7 @@ print_without_body <- function(x, ...) {
 
 #' @export
 print.trunc_mat <- function(x, ...) {
-  cat_line(format(x, ...))
+  cli::cat_line(format(x, ...))
   invisible(x)
 }
 
@@ -252,7 +251,7 @@ format_extra_vars <- function(extra_cols) {
   if (is.na(extra_cols[1])) return("")
 
   if (anyNA(extra_cols)) {
-    extra_cols <- c(extra_cols[!is.na(extra_cols)], symbol$ellipsis)
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
   }
 
   paste0(": ", collapse(extra_cols))
@@ -265,7 +264,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0(symbol$ellipsis, " ", x)
+    paste0(cli::symbol$ellipsis, " ", x)
   } else {
     character()
   }

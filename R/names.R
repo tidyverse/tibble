@@ -10,7 +10,7 @@ repaired_names <- function(name,
                            details = NULL) {
 
   subclass_name_repair_errors(name = name, details = details,
-    vec_as_names(name, repair = .name_repair, quiet = quiet)
+    vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair))
   )
 }
 
@@ -31,8 +31,8 @@ error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".n
 # Subclassing errors ------------------------------------------------------
 
 subclass_name_repair_errors <- function(expr, name, details = NULL) {
-  tryCatch(
-    force(expr),
+  withCallingHandlers(
+    expr,
 
     # FIXME: use cnd$names with vctrs >= 0.3.0
     vctrs_error_names_cannot_be_empty = function(cnd) {

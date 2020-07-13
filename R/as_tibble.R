@@ -1,7 +1,7 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
@@ -47,7 +47,7 @@
 #'  Read more in [rownames].
 
 #' @param _n,validate
-#'   \lifecycle{soft-deprecated}
+#'   `r lifecycle::badge("soft-deprecated")`
 #'
 #'   For compatibility only, do not use for new code.
 #' @export
@@ -69,7 +69,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
 
-  .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -97,10 +97,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be a list')",
-    "as_tibble_row()")
-
-  .name_repair <- compat_name_repair(.name_repair, validate)
+  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
@@ -112,17 +109,20 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   recycle_columns(x, .rows, lengths)
 }
 
-compat_name_repair <- function(.name_repair, validate) {
+compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
   if (is.null(validate)) return(.name_repair)
 
-  name_repair <- if (isTRUE(validate)) "check_unique" else "minimal"
 
-  if (!has_length(.name_repair, 1)) {
-    deprecate_soft("3.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
-  } else if (.name_repair != name_repair) {
-    warn("`.name_repair` takes precedence over the deprecated `validate` argument argument in `as_tibble()`.")
-    return(.name_repair)
+  if (!.missing_name_repair) {
+    name_repair <- .name_repair
+  } else if (isTRUE(validate)) {
+    name_repair <- "check_unique"
+  } else {
+    name_repair <- "minimal"
   }
+
+  deprecate_soft("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
+    env = foreign_caller_env())
 
   name_repair
 }
@@ -197,7 +197,7 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   names <- colnames(x)
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have column names if `.name_repair` is omitted')",
+      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
         details = "Using compatibility `.name_repair`.")
       compat_names <- paste0("V", seq_along(m))
       if (is.null(names)) {
@@ -273,6 +273,8 @@ as_tibble.default <- function(x, ...) {
 
 #' @description
 #' `as_tibble_row()` converts a vector to a tibble with one row.
+#' The input must be a bare vector, e.g. vectors of dates are not
+#' supported yet.
 #' If the input is a list, all elements must have length one.
 #'
 #' @rdname as_tibble
@@ -286,6 +288,7 @@ as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
   if (!is_bare_vector(x)) {
+    # FIXME: Remove entry from help once fixed (#797)
     cnd_signal(error_as_tibble_row_bare(x))
   }
 
@@ -310,7 +313,7 @@ check_all_lengths_one <- function(x) {
 
 
 #' @description
-#' `as_tibble_column()` converts a vector to a tibble with one column.
+#' `as_tibble_col()` converts a vector to a tibble with one column.
 #'
 #' @param column_name Name of the column.
 #'

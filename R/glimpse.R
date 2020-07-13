@@ -1,7 +1,7 @@
 #' Get a glimpse of your data
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `glimpse()` is like a transposed version of `print()`:
 #' columns run down the page, and data runs across.
@@ -28,9 +28,9 @@
 #' @examples
 #' glimpse(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   glimpse(nycflights13::flights)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' glimpse(nycflights13::flights)
+#'
 # Can be overridden in .onLoad()
 glimpse <- function(x, width = NULL, ...) {
   UseMethod("glimpse")
@@ -45,19 +45,19 @@ glimpse.tbl <- function(x, width = NULL, ...) {
     cnd_signal(error_glimpse_infinite_width())
   }
 
-  cat_line("Rows: ", big_mark(nrow(x)))
+  cli::cat_line("Rows: ", big_mark(nrow(x)))
 
   # this is an overestimate, but shouldn't be too expensive.
   # every type needs at least three characters: "x, "
   rows <- as.integer(width / 3)
   df <- as.data.frame(head(x, rows))
-  cat_line("Columns: ", big_mark(ncol(df)))
+  cli::cat_line("Columns: ", big_mark(ncol(df)))
 
   summary <- tbl_sum(x)
   brief_summary <- summary[-1]
 
   if (has_length(brief_summary)) {
-    cat_line(names(brief_summary), ": ", brief_summary)
+    cli::cat_line(names(brief_summary), ": ", brief_summary)
   }
 
   if (ncol(df) == 0) return(invisible(x))
@@ -70,7 +70,7 @@ glimpse.tbl <- function(x, width = NULL, ...) {
   formatted <- map_chr(df, function(x) collapse(format_v(x)))
   truncated <- str_trunc(formatted, data_width)
 
-  cat_line(var_names, truncated)
+  cli::cat_line(var_names, truncated)
   invisible(x)
 }
 
@@ -87,12 +87,12 @@ glimpse.default <- function(x, width = NULL, max.level = 3, ...) {
 str_trunc <- function(x, max_width) {
   width <- nchar(x)
 
-  nchar_ellipsis <- nchar_width(symbol$ellipsis)
+  nchar_ellipsis <- nchar_width(cli::symbol$ellipsis)
 
   for (i in seq_along(x)) {
     if (width[i] <= max_width[i]) next
 
-    x[i] <- paste0(substr(x[i], 1, max_width[i] - nchar_ellipsis), symbol$ellipsis)
+    x[i] <- paste0(substr(x[i], 1, max_width[i] - nchar_ellipsis), cli::symbol$ellipsis)
   }
 
   x

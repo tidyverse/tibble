@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.0.0
+Version: 3.0.3.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -49,10 +49,12 @@ Suggests:
     covr,
     dplyr,
     evaluate,
+    formattable,
     hms,
     htmltools,
     import,
     knitr,
+    lubridate,
     mockr,
     nycflights13,
     purrr,
@@ -62,9 +64,7 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1.9000

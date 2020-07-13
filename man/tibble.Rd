@@ -19,7 +19,7 @@ tibble_row(
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
+processed with \code{\link[rlang:nse-defuse]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
@@ -149,8 +149,8 @@ try(tibble(y = strptime("2000/01/01", "\%x")))
 try(tibble(a = 1:3, b = tibble(c = 4:7)))
 
 # Use := to create columns with names that start with a dot:
-tibble(.rows = 3)
-tibble(.rows := 3)
+tibble(.dotted = 3)
+tibble(.dotted := 3)
 
 # You can unquote an expression:
 x <- 3

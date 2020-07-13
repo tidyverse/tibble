@@ -1,3 +1,67 @@
+# tibble 3.0.3.9000
+
+- Internal changes only.
+
+
+# tibble 3.0.3
+
+- Fix test compatibility with rlang 0.4.7.
+
+- Fix warning about `needs_dots` arguments with pillar >= 1.4.5 (#798).
+
+
+# tibble 3.0.2
+
+## Bug fixes
+
+- `[[` works with classed indexes again, e.g. created with `glue::glue()` (#778).
+
+- `add_column()` works without warning for 0-column data frames (#786).
+
+- `tribble()` now better handles named inputs (#775) and objects of non-vtrs classes like `lubridate::Period` (#784) and `formattable::formattable` (#785).
+
+## Performance
+
+- Subsetting and subassignment are faster (#780, #790, #794).
+
+- `is.null()` is preferred over `is_null()` for speed.
+
+- Implement continuous benchmarking (#793).
+
+## Compatibility
+
+- `is_vector_s3()` is no longer reexported from pillar (#789).
+
+
+# tibble 3.0.1
+
+## Compatibility fixes
+
+- `[<-.tbl_df()` coerces matrices to data frames (#762).
+
+- Use delayed import for cli to work around unload problems in downstream packages (#754).
+
+
+## Bug fixes
+
+- More soft-deprecation warnings are actually visible.
+
+- If `.name_repair` is a function, no repair messages are shown (#763).
+
+- Remove superseded signal for `as_tibble.list()`, because `as_tibble_row()` only works for size 1.
+
+
+## Enhancements
+
+- `as_tibble(validate = )` now always triggers a deprecation warning.
+
+- Subsetting and subassignment of rows with one-column matrices work again, with a deprecation warning (#760).
+
+- Attempts to update a tibble row with an atomic vector give a clearer error message. Recycling message for subassignment appears only if target size is != 1.
+
+- Tweak title of "Invariants" vignette.
+
+
 # tibble 3.0.0
 
 ## Major breaking changes

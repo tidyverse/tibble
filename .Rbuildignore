@@ -11,6 +11,8 @@
 ^revdep$
 ^README-.*\.png$
 ^appveyor\.yml$
+^bench$
+^\.github$
 ^\.deploy_key\.pub$
 ^\.deploy_key\.enc$
 ^API$
@@ -29,3 +31,4 @@
 ^\.github/workflows/pr-commands\.yaml$
 ^tests/testthat/helper-rstudio\.R$
 ^vignettes/invariants\.md$
+^bench$

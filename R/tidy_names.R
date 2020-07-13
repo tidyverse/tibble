@@ -1,7 +1,7 @@
 #' Superseded functions for name repair
 #'
 #' @description
-#' \lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`
 #'
 #' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts

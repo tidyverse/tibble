@@ -11,7 +11,7 @@
 #' @return A named character vector, describing the dimensions in the first element
 #'   and the data source in the name of the first element.
 #'
-#' @seealso [pillar::type_sum()], [pillar::is_vector_s3()]
+#' @seealso [pillar::type_sum()]
 #' @param x Object to summarise
 #' @export
 # Can be overridden in .onLoad()
@@ -34,7 +34,7 @@ dim_desc <- function(x) {
 }
 
 size_sum <- function(x) {
-  if (!is_vector_s3(x)) return("")
+  if (!vec_is(x)) return("")
 
   paste0(" [", dim_desc(x), "]")
 }
@@ -49,7 +49,3 @@ pillar::type_sum
 
 #' @export
 type_sum.tbl_df <- function(x) "tibble"
-
-#' @importFrom pillar is_vector_s3
-#' @export
-pillar::is_vector_s3

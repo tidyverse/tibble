@@ -21,7 +21,6 @@ with_lifecycle_warnings <- function(expr) {
 }
 
 scoped_lifecycle_errors <- function(frame = rlang::caller_env()) {
-  scoped_lifecycle_warnings(frame = frame)
   rlang::scoped_options(.frame = frame,
     lifecycle_verbosity = "error"
   )
@@ -33,5 +32,17 @@ with_lifecycle_errors <- function(expr) {
 
 # Enable once signal_superseded() reaches stable state
 signal_superseded <- function(...) {}
+
+foreign_caller_env <- function(my_env = ns_env()) {
+  for (n in 2:10) {
+    caller <- caller_env(n)
+    if (!is_reference(env_parent(caller), my_env)) {
+      return(caller)
+    }
+  }
+
+  # Safety net
+  caller
+}
 
 # nocov end
