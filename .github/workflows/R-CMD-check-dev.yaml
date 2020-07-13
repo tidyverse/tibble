@@ -5,6 +5,8 @@ on:
   pull_request:
     branches:
       - master
+  schedule:
+    - cron:  '0 8 * * *'
 
 name: R-CMD-check
 
