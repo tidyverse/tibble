@@ -8,7 +8,7 @@ on:
   schedule:
     - cron:  '0 8 * * *'
 
-name: R-CMD-check
+name: rcc dev
 
 jobs:
   R-CMD-check:
