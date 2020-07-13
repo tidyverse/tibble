@@ -8,7 +8,8 @@ if (ci_has_env("DEV_VERSIONS")) {
 # Build only for master or release branches
 if (ci_has_env("BUILD_PKGDOWN") && grepl("^master$|^r-|^docs$", ci_get_branch())) {
   get_stage("install") %>%
-    add_step(step_install_github("tidyverse/tidytemplate"))
+    add_step(step_install_github("tidyverse/tidytemplate")) %>%
+    add_step(step_install_github("r-lib/pkgdown"))
 
   do_pkgdown(deploy = ci_can_push())
 }
