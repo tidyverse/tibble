@@ -62,7 +62,7 @@ jobs:
           library(remotes)
           deps <- remotes::dev_package_deps(dependencies = TRUE)
           update(deps)
-          lapply(deps$package, function(x) try(remotes::install_dev(x)))
+          lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
           remotes::install_cran('rcmdcheck')
         shell: Rscript {0}
 
