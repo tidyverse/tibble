@@ -18,10 +18,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
+          - {os: ubuntu-16.04,   r: '4.0', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
 
     steps:
       - uses: actions/checkout@v2
@@ -58,7 +59,7 @@ jobs:
           library(remotes)
           deps <- readRDS('.github/depends.Rds')
           deps[['installed']] <- vapply(deps[['package']], remotes:::local_sha, character(1))
-          update(deps, type = "binary")
+          update(deps)
           lapply(deps$package, function(x) try(remotes::install_dev(x)))
           remotes::install_cran('rcmdcheck')
         shell: Rscript {0}
