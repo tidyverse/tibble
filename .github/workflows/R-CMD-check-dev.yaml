@@ -47,12 +47,17 @@ jobs:
           key: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-
 
+      - name: Install remotes
+        run: |
+          install.packages("remotes")
+        shell: Rscript {0}
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "install.packages("remotes"); remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
