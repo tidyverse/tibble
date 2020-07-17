@@ -58,6 +58,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install.packages("remotes")
           library(remotes)
           deps <- remotes::dev_package_deps(dependencies = TRUE)
           update(deps)
