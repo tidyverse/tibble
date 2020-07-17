@@ -16,7 +16,9 @@ jobs:
         uses: r-lib/actions/setup-r@master
 
       - name: Configure Git identity
-        run: git config --global user.name="$GITHUB_WORKFLOW" user.email="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ID}@ghactions.local"
+        run: |
+          git config --global user.name "$GITHUB_WORKFLOW"
+          git config --global user.email="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ID}@ghactions.local"
         shell: bash
 
       - name: Install dependencies
