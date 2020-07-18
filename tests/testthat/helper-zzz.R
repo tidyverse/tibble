@@ -159,7 +159,7 @@ output_file <- function(filename) file.path("zzz-output", filename)
 
 expect_output_file_rel <- function(x, filename) {
   withr::with_options(
-    list(digits = 4, width = 80),
+    list(digits = 4, width = 80, cli.unicode = l10n_info()$`UTF-8`),
     expect_output_file(x, output_file(filename), update = TRUE)
   )
 }
