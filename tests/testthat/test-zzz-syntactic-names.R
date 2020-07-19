@@ -205,6 +205,7 @@ test_that("complicated inputs", {
 })
 
 test_that("message", {
+  skip_legacy()
   expect_message(
     universal_names(c("a b", "b c")),
     "New names:\n* `a b` -> a.b\n* `b c` -> b.c\n",
@@ -242,6 +243,7 @@ test_that("unnamed input gives uniquely named output", {
 })
 
 test_that("messages by default", {
+  skip_legacy()
   expect_message(
     set_universal_names(set_names(1, "a:b")),
     "New names:\n* `a:b` -> a.b\n",

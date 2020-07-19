@@ -112,8 +112,7 @@ test_that("tribble() errs appropriately on bad calls", {
     tribble(
       "a", "b",
       1, 2
-    ),
-    fixed = TRUE
+    )
   )
 
   # tribble() must produce rectangular structure (no filling)

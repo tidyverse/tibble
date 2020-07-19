@@ -3,7 +3,7 @@ expect_legacy_error <- function(code, ...) {
 }
 
 expect_legacy_warning <- function(code, ...) {
-  expect_warning(code)
+  suppressWarnings(expect_warning(code))
 }
 
 skip_legacy <- function() {

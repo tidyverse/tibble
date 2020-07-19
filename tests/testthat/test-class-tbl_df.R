@@ -28,9 +28,11 @@ test_that("names<-()", {
   }
 
   # Two warnings, require testthat > 2.3.2:
-  expect_warning(
-    expect_identical(set_tbl_names("c"), new_tbl("c", NA_character_)),
-    class = "lifecycle_warning_deprecated"
+  suppressWarnings(
+    expect_warning(
+      expect_identical(set_tbl_names("c"), new_tbl("c", NA_character_)),
+      class = "lifecycle_warning_deprecated"
+    )
   )
 
   expect_warning(
