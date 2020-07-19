@@ -19,7 +19,7 @@ jobs:
         run: |
           env | sort
           git config --global user.name "$GITHUB_WORKFLOW"
-          git config --global user.email "${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ID}@ghactions.local"
+          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
         shell: bash
 
       - name: Install dependencies
