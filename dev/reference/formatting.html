@@ -94,7 +94,7 @@ available by setting the options described below." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -214,12 +214,12 @@ available by setting the options described below.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, n = <span class='kw'>NULL</span>, width = <span class='kw'>NULL</span>, n_extra = <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for tbl</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, n = <span class='kw'>NULL</span>, width = <span class='kw'>NULL</span>, n_extra = <span class='kw'>NULL</span>)
 
-<span class='fu'>trunc_mat</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/formatting.html'>trunc_mat</a></span>(<span class='kw'>x</span>, n = <span class='kw'>NULL</span>, width = <span class='kw'>NULL</span>, n_extra = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -261,8 +261,8 @@ will print information about at most <code>tibble.max_extra_cols</code> extra co
 
 <p>The following options are used by the tibble and pillar packages
 to format and print <code>tbl_df</code> objects.
-Used by the formatting workhorse <code>trunc_mat()</code> and, therefore,
-indirectly, by <code>print.tbl()</code>.</p><ul>
+Used by the formatting workhorse <code><a href='https://tibble.tidyverse.org/reference/formatting.html'>trunc_mat()</a></code> and, therefore,
+indirectly, by <code><a href='https://tibble.tidyverse.org/reference/formatting.html'>print.tbl()</a></code>.</p><ul>
 <li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows printed.
 Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
 <li><p><code>tibble.print_min</code>: Number of rows printed if row number threshold is
@@ -295,135 +295,135 @@ titles.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 32 x 11
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='kw'>mtcars</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 11</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt;  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt;  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt;  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt;  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt;  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt;  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt;  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt;  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 11
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 2</span><span>  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 3</span><span>  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'> 4</span><span>  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 5</span><span>  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+#&gt; </span><span style='color: #555555;'> 6</span><span>  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 7</span><span>  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+#&gt; </span><span style='color: #555555;'> 8</span><span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+#&gt; </span><span style='color: #555555;'> 9</span><span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+#&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='kw'>mtcars</span>), n = <span class='fl'>1</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1    21     6   160   110   3.9  2.62  16.5     0     1     4     4
-#&gt; # … with 31 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>mtcars</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 11
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    21     6   160   110   3.9  2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'># … with 31 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='kw'>mtcars</span>), n = <span class='fl'>3</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4
-#&gt; 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4
-#&gt; 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
-#&gt; # … with 29 more rows</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='no'>iris</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; # A tibble: 150 x 5
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  21       6   160   110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'>2</span><span>  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'>3</span><span>  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'># … with 29 more rows</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='kw'>iris</span>), n = <span class='fl'>100</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 150 x 5</span><span>
 #&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
-#&gt;            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
-#&gt;   1          5.1         3.5          1.4         0.2 setosa    
-#&gt;   2          4.9         3            1.4         0.2 setosa    
-#&gt;   3          4.7         3.2          1.3         0.2 setosa    
-#&gt;   4          4.6         3.1          1.5         0.2 setosa    
-#&gt;   5          5           3.6          1.4         0.2 setosa    
-#&gt;   6          5.4         3.9          1.7         0.4 setosa    
-#&gt;   7          4.6         3.4          1.4         0.3 setosa    
-#&gt;   8          5           3.4          1.5         0.2 setosa    
-#&gt;   9          4.4         2.9          1.4         0.2 setosa    
-#&gt;  10          4.9         3.1          1.5         0.1 setosa    
-#&gt;  11          5.4         3.7          1.5         0.2 setosa    
-#&gt;  12          4.8         3.4          1.6         0.2 setosa    
-#&gt;  13          4.8         3            1.4         0.1 setosa    
-#&gt;  14          4.3         3            1.1         0.1 setosa    
-#&gt;  15          5.8         4            1.2         0.2 setosa    
-#&gt;  16          5.7         4.4          1.5         0.4 setosa    
-#&gt;  17          5.4         3.9          1.3         0.4 setosa    
-#&gt;  18          5.1         3.5          1.4         0.3 setosa    
-#&gt;  19          5.7         3.8          1.7         0.3 setosa    
-#&gt;  20          5.1         3.8          1.5         0.3 setosa    
-#&gt;  21          5.4         3.4          1.7         0.2 setosa    
-#&gt;  22          5.1         3.7          1.5         0.4 setosa    
-#&gt;  23          4.6         3.6          1           0.2 setosa    
-#&gt;  24          5.1         3.3          1.7         0.5 setosa    
-#&gt;  25          4.8         3.4          1.9         0.2 setosa    
-#&gt;  26          5           3            1.6         0.2 setosa    
-#&gt;  27          5           3.4          1.6         0.4 setosa    
-#&gt;  28          5.2         3.5          1.5         0.2 setosa    
-#&gt;  29          5.2         3.4          1.4         0.2 setosa    
-#&gt;  30          4.7         3.2          1.6         0.2 setosa    
-#&gt;  31          4.8         3.1          1.6         0.2 setosa    
-#&gt;  32          5.4         3.4          1.5         0.4 setosa    
-#&gt;  33          5.2         4.1          1.5         0.1 setosa    
-#&gt;  34          5.5         4.2          1.4         0.2 setosa    
-#&gt;  35          4.9         3.1          1.5         0.2 setosa    
-#&gt;  36          5           3.2          1.2         0.2 setosa    
-#&gt;  37          5.5         3.5          1.3         0.2 setosa    
-#&gt;  38          4.9         3.6          1.4         0.1 setosa    
-#&gt;  39          4.4         3            1.3         0.2 setosa    
-#&gt;  40          5.1         3.4          1.5         0.2 setosa    
-#&gt;  41          5           3.5          1.3         0.3 setosa    
-#&gt;  42          4.5         2.3          1.3         0.3 setosa    
-#&gt;  43          4.4         3.2          1.3         0.2 setosa    
-#&gt;  44          5           3.5          1.6         0.6 setosa    
-#&gt;  45          5.1         3.8          1.9         0.4 setosa    
-#&gt;  46          4.8         3            1.4         0.3 setosa    
-#&gt;  47          5.1         3.8          1.6         0.2 setosa    
-#&gt;  48          4.6         3.2          1.4         0.2 setosa    
-#&gt;  49          5.3         3.7          1.5         0.2 setosa    
-#&gt;  50          5           3.3          1.4         0.2 setosa    
-#&gt;  51          7           3.2          4.7         1.4 versicolor
-#&gt;  52          6.4         3.2          4.5         1.5 versicolor
-#&gt;  53          6.9         3.1          4.9         1.5 versicolor
-#&gt;  54          5.5         2.3          4           1.3 versicolor
-#&gt;  55          6.5         2.8          4.6         1.5 versicolor
-#&gt;  56          5.7         2.8          4.5         1.3 versicolor
-#&gt;  57          6.3         3.3          4.7         1.6 versicolor
-#&gt;  58          4.9         2.4          3.3         1   versicolor
-#&gt;  59          6.6         2.9          4.6         1.3 versicolor
-#&gt;  60          5.2         2.7          3.9         1.4 versicolor
-#&gt;  61          5           2            3.5         1   versicolor
-#&gt;  62          5.9         3            4.2         1.5 versicolor
-#&gt;  63          6           2.2          4           1   versicolor
-#&gt;  64          6.1         2.9          4.7         1.4 versicolor
-#&gt;  65          5.6         2.9          3.6         1.3 versicolor
-#&gt;  66          6.7         3.1          4.4         1.4 versicolor
-#&gt;  67          5.6         3            4.5         1.5 versicolor
-#&gt;  68          5.8         2.7          4.1         1   versicolor
-#&gt;  69          6.2         2.2          4.5         1.5 versicolor
-#&gt;  70          5.6         2.5          3.9         1.1 versicolor
-#&gt;  71          5.9         3.2          4.8         1.8 versicolor
-#&gt;  72          6.1         2.8          4           1.3 versicolor
-#&gt;  73          6.3         2.5          4.9         1.5 versicolor
-#&gt;  74          6.1         2.8          4.7         1.2 versicolor
-#&gt;  75          6.4         2.9          4.3         1.3 versicolor
-#&gt;  76          6.6         3            4.4         1.4 versicolor
-#&gt;  77          6.8         2.8          4.8         1.4 versicolor
-#&gt;  78          6.7         3            5           1.7 versicolor
-#&gt;  79          6           2.9          4.5         1.5 versicolor
-#&gt;  80          5.7         2.6          3.5         1   versicolor
-#&gt;  81          5.5         2.4          3.8         1.1 versicolor
-#&gt;  82          5.5         2.4          3.7         1   versicolor
-#&gt;  83          5.8         2.7          3.9         1.2 versicolor
-#&gt;  84          6           2.7          5.1         1.6 versicolor
-#&gt;  85          5.4         3            4.5         1.5 versicolor
-#&gt;  86          6           3.4          4.5         1.6 versicolor
-#&gt;  87          6.7         3.1          4.7         1.5 versicolor
-#&gt;  88          6.3         2.3          4.4         1.3 versicolor
-#&gt;  89          5.6         3            4.1         1.3 versicolor
-#&gt;  90          5.5         2.5          4           1.3 versicolor
-#&gt;  91          5.5         2.6          4.4         1.2 versicolor
-#&gt;  92          6.1         3            4.6         1.4 versicolor
-#&gt;  93          5.8         2.6          4           1.2 versicolor
-#&gt;  94          5           2.3          3.3         1   versicolor
-#&gt;  95          5.6         2.7          4.2         1.3 versicolor
-#&gt;  96          5.7         3            4.2         1.2 versicolor
-#&gt;  97          5.7         2.9          4.2         1.3 versicolor
-#&gt;  98          6.2         2.9          4.3         1.3 versicolor
-#&gt;  99          5.1         2.5          3           1.1 versicolor
-#&gt; 100          5.7         2.8          4.1         1.3 versicolor
-#&gt; # … with 50 more rows</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mtcars</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt;                      mpg
+#&gt;            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>  1</span><span>          5.1         3.5          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  2</span><span>          4.9         3            1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  3</span><span>          4.7         3.2          1.3         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  4</span><span>          4.6         3.1          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  5</span><span>          5           3.6          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  6</span><span>          5.4         3.9          1.7         0.4 setosa    
+#&gt; </span><span style='color: #555555;'>  7</span><span>          4.6         3.4          1.4         0.3 setosa    
+#&gt; </span><span style='color: #555555;'>  8</span><span>          5           3.4          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'>  9</span><span>          4.4         2.9          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 10</span><span>          4.9         3.1          1.5         0.1 setosa    
+#&gt; </span><span style='color: #555555;'> 11</span><span>          5.4         3.7          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 12</span><span>          4.8         3.4          1.6         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 13</span><span>          4.8         3            1.4         0.1 setosa    
+#&gt; </span><span style='color: #555555;'> 14</span><span>          4.3         3            1.1         0.1 setosa    
+#&gt; </span><span style='color: #555555;'> 15</span><span>          5.8         4            1.2         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 16</span><span>          5.7         4.4          1.5         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 17</span><span>          5.4         3.9          1.3         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 18</span><span>          5.1         3.5          1.4         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 19</span><span>          5.7         3.8          1.7         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 20</span><span>          5.1         3.8          1.5         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 21</span><span>          5.4         3.4          1.7         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 22</span><span>          5.1         3.7          1.5         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 23</span><span>          4.6         3.6          1           0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 24</span><span>          5.1         3.3          1.7         0.5 setosa    
+#&gt; </span><span style='color: #555555;'> 25</span><span>          4.8         3.4          1.9         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 26</span><span>          5           3            1.6         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 27</span><span>          5           3.4          1.6         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 28</span><span>          5.2         3.5          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 29</span><span>          5.2         3.4          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 30</span><span>          4.7         3.2          1.6         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 31</span><span>          4.8         3.1          1.6         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 32</span><span>          5.4         3.4          1.5         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 33</span><span>          5.2         4.1          1.5         0.1 setosa    
+#&gt; </span><span style='color: #555555;'> 34</span><span>          5.5         4.2          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 35</span><span>          4.9         3.1          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 36</span><span>          5           3.2          1.2         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 37</span><span>          5.5         3.5          1.3         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 38</span><span>          4.9         3.6          1.4         0.1 setosa    
+#&gt; </span><span style='color: #555555;'> 39</span><span>          4.4         3            1.3         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 40</span><span>          5.1         3.4          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 41</span><span>          5           3.5          1.3         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 42</span><span>          4.5         2.3          1.3         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 43</span><span>          4.4         3.2          1.3         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 44</span><span>          5           3.5          1.6         0.6 setosa    
+#&gt; </span><span style='color: #555555;'> 45</span><span>          5.1         3.8          1.9         0.4 setosa    
+#&gt; </span><span style='color: #555555;'> 46</span><span>          4.8         3            1.4         0.3 setosa    
+#&gt; </span><span style='color: #555555;'> 47</span><span>          5.1         3.8          1.6         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 48</span><span>          4.6         3.2          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 49</span><span>          5.3         3.7          1.5         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 50</span><span>          5           3.3          1.4         0.2 setosa    
+#&gt; </span><span style='color: #555555;'> 51</span><span>          7           3.2          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 52</span><span>          6.4         3.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 53</span><span>          6.9         3.1          4.9         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 54</span><span>          5.5         2.3          4           1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 55</span><span>          6.5         2.8          4.6         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 56</span><span>          5.7         2.8          4.5         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 57</span><span>          6.3         3.3          4.7         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 58</span><span>          4.9         2.4          3.3         1   versicolor
+#&gt; </span><span style='color: #555555;'> 59</span><span>          6.6         2.9          4.6         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 60</span><span>          5.2         2.7          3.9         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 61</span><span>          5           2            3.5         1   versicolor
+#&gt; </span><span style='color: #555555;'> 62</span><span>          5.9         3            4.2         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 63</span><span>          6           2.2          4           1   versicolor
+#&gt; </span><span style='color: #555555;'> 64</span><span>          6.1         2.9          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 65</span><span>          5.6         2.9          3.6         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 66</span><span>          6.7         3.1          4.4         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 67</span><span>          5.6         3            4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 68</span><span>          5.8         2.7          4.1         1   versicolor
+#&gt; </span><span style='color: #555555;'> 69</span><span>          6.2         2.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 70</span><span>          5.6         2.5          3.9         1.1 versicolor
+#&gt; </span><span style='color: #555555;'> 71</span><span>          5.9         3.2          4.8         1.8 versicolor
+#&gt; </span><span style='color: #555555;'> 72</span><span>          6.1         2.8          4           1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 73</span><span>          6.3         2.5          4.9         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 74</span><span>          6.1         2.8          4.7         1.2 versicolor
+#&gt; </span><span style='color: #555555;'> 75</span><span>          6.4         2.9          4.3         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 76</span><span>          6.6         3            4.4         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 77</span><span>          6.8         2.8          4.8         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 78</span><span>          6.7         3            5           1.7 versicolor
+#&gt; </span><span style='color: #555555;'> 79</span><span>          6           2.9          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 80</span><span>          5.7         2.6          3.5         1   versicolor
+#&gt; </span><span style='color: #555555;'> 81</span><span>          5.5         2.4          3.8         1.1 versicolor
+#&gt; </span><span style='color: #555555;'> 82</span><span>          5.5         2.4          3.7         1   versicolor
+#&gt; </span><span style='color: #555555;'> 83</span><span>          5.8         2.7          3.9         1.2 versicolor
+#&gt; </span><span style='color: #555555;'> 84</span><span>          6           2.7          5.1         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 85</span><span>          5.4         3            4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 86</span><span>          6           3.4          4.5         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 87</span><span>          6.7         3.1          4.7         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 88</span><span>          6.3         2.3          4.4         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 89</span><span>          5.6         3            4.1         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 90</span><span>          5.5         2.5          4           1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 91</span><span>          5.5         2.6          4.4         1.2 versicolor
+#&gt; </span><span style='color: #555555;'> 92</span><span>          6.1         3            4.6         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 93</span><span>          5.8         2.6          4           1.2 versicolor
+#&gt; </span><span style='color: #555555;'> 94</span><span>          5           2.3          3.3         1   versicolor
+#&gt; </span><span style='color: #555555;'> 95</span><span>          5.6         2.7          4.2         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 96</span><span>          5.7         3            4.2         1.2 versicolor
+#&gt; </span><span style='color: #555555;'> 97</span><span>          5.7         2.9          4.2         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 98</span><span>          6.2         2.9          4.3         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 99</span><span>          5.1         2.5          3           1.1 versicolor
+#&gt; </span><span style='color: #555555;'>100</span><span>          5.7         2.8          4.1         1.3 versicolor
+#&gt; </span><span style='color: #555555;'># … with 50 more rows</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>mtcars</span>, width = <span class='fl'>10</span>)</div><div class='output co'>#&gt;                      mpg
 #&gt; Mazda RX4           21.0
 #&gt; Mazda RX4 Wag       21.0
 #&gt; Datsun 710          22.8
@@ -786,117 +786,113 @@ titles.</p></li>
 #&gt; Ferrari Dino           6
 #&gt; Maserati Bora          8
 #&gt; Volvo 142E             2</div><div class='input'>
-<span class='no'>mtcars2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>mtcars</span>, <span class='no'>mtcars</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='kw'>mtcars2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>mtcars</span>, <span class='kw'>mtcars</span>), .name_repair = <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* mpg -&gt; mpg...1</span>
 #&gt; <span class='message'>* cyl -&gt; cyl...2</span>
 #&gt; <span class='message'>* disp -&gt; disp...3</span>
 #&gt; <span class='message'>* hp -&gt; hp...4</span>
 #&gt; <span class='message'>* drat -&gt; drat...5</span>
-#&gt; <span class='message'>* ...</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mtcars2</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 22
+#&gt; <span class='message'>* ...</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>mtcars2</span>, n = <span class='fl'>25</span>, n_extra = <span class='fl'>3</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 22</span><span>
 #&gt;    mpg...1 cyl...2 disp...3 hp...4 drat...5 wt...6 qsec...7 vs...8 am...9
-#&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1    21         6    160      110     3.9    2.62     16.5      0      1
-#&gt;  2    21         6    160      110     3.9    2.88     17.0      0      1
-#&gt;  3    22.8       4    108       93     3.85   2.32     18.6      1      1
-#&gt;  4    21.4       6    258      110     3.08   3.22     19.4      1      0
-#&gt;  5    18.7       8    360      175     3.15   3.44     17.0      0      0
-#&gt;  6    18.1       6    225      105     2.76   3.46     20.2      1      0
-#&gt;  7    14.3       8    360      245     3.21   3.57     15.8      0      0
-#&gt;  8    24.4       4    147.      62     3.69   3.19     20        1      0
-#&gt;  9    22.8       4    141.      95     3.92   3.15     22.9      1      0
-#&gt; 10    19.2       6    168.     123     3.92   3.44     18.3      1      0
-#&gt; 11    17.8       6    168.     123     3.92   3.44     18.9      1      0
-#&gt; 12    16.4       8    276.     180     3.07   4.07     17.4      0      0
-#&gt; 13    17.3       8    276.     180     3.07   3.73     17.6      0      0
-#&gt; 14    15.2       8    276.     180     3.07   3.78     18        0      0
-#&gt; 15    10.4       8    472      205     2.93   5.25     18.0      0      0
-#&gt; 16    10.4       8    460      215     3      5.42     17.8      0      0
-#&gt; 17    14.7       8    440      230     3.23   5.34     17.4      0      0
-#&gt; 18    32.4       4     78.7     66     4.08   2.2      19.5      1      1
-#&gt; 19    30.4       4     75.7     52     4.93   1.62     18.5      1      1
-#&gt; 20    33.9       4     71.1     65     4.22   1.84     19.9      1      1
-#&gt; 21    21.5       4    120.      97     3.7    2.46     20.0      1      0
-#&gt; 22    15.5       8    318      150     2.76   3.52     16.9      0      0
-#&gt; 23    15.2       8    304      150     3.15   3.44     17.3      0      0
-#&gt; 24    13.3       8    350      245     3.73   3.84     15.4      0      0
-#&gt; 25    19.2       8    400      175     3.08   3.84     17.0      0      0
-#&gt; # … with 7 more rows, and 13 more variables: gear...10 &lt;dbl&gt;, carb...11 &lt;dbl&gt;,
-#&gt; #   mpg...12 &lt;dbl&gt;, …</div><div class='input'>
-<span class='fu'>trunc_mat</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; # Description: df[,11] [32 × 11]
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>    21         6    160      110     3.9    2.62     16.5      0      1
+#&gt; </span><span style='color: #555555;'> 2</span><span>    21         6    160      110     3.9    2.88     17.0      0      1
+#&gt; </span><span style='color: #555555;'> 3</span><span>    22.8       4    108       93     3.85   2.32     18.6      1      1
+#&gt; </span><span style='color: #555555;'> 4</span><span>    21.4       6    258      110     3.08   3.22     19.4      1      0
+#&gt; </span><span style='color: #555555;'> 5</span><span>    18.7       8    360      175     3.15   3.44     17.0      0      0
+#&gt; </span><span style='color: #555555;'> 6</span><span>    18.1       6    225      105     2.76   3.46     20.2      1      0
+#&gt; </span><span style='color: #555555;'> 7</span><span>    14.3       8    360      245     3.21   3.57     15.8      0      0
+#&gt; </span><span style='color: #555555;'> 8</span><span>    24.4       4    147.      62     3.69   3.19     20        1      0
+#&gt; </span><span style='color: #555555;'> 9</span><span>    22.8       4    141.      95     3.92   3.15     22.9      1      0
+#&gt; </span><span style='color: #555555;'>10</span><span>    19.2       6    168.     123     3.92   3.44     18.3      1      0
+#&gt; </span><span style='color: #555555;'>11</span><span>    17.8       6    168.     123     3.92   3.44     18.9      1      0
+#&gt; </span><span style='color: #555555;'>12</span><span>    16.4       8    276.     180     3.07   4.07     17.4      0      0
+#&gt; </span><span style='color: #555555;'>13</span><span>    17.3       8    276.     180     3.07   3.73     17.6      0      0
+#&gt; </span><span style='color: #555555;'>14</span><span>    15.2       8    276.     180     3.07   3.78     18        0      0
+#&gt; </span><span style='color: #555555;'>15</span><span>    10.4       8    472      205     2.93   5.25     18.0      0      0
+#&gt; </span><span style='color: #555555;'>16</span><span>    10.4       8    460      215     3      5.42     17.8      0      0
+#&gt; </span><span style='color: #555555;'>17</span><span>    14.7       8    440      230     3.23   5.34     17.4      0      0
+#&gt; </span><span style='color: #555555;'>18</span><span>    32.4       4     78.7     66     4.08   2.2      19.5      1      1
+#&gt; </span><span style='color: #555555;'>19</span><span>    30.4       4     75.7     52     4.93   1.62     18.5      1      1
+#&gt; </span><span style='color: #555555;'>20</span><span>    33.9       4     71.1     65     4.22   1.84     19.9      1      1
+#&gt; </span><span style='color: #555555;'>21</span><span>    21.5       4    120.      97     3.7    2.46     20.0      1      0
+#&gt; </span><span style='color: #555555;'>22</span><span>    15.5       8    318      150     2.76   3.52     16.9      0      0
+#&gt; </span><span style='color: #555555;'>23</span><span>    15.2       8    304      150     3.15   3.44     17.3      0      0
+#&gt; </span><span style='color: #555555;'>24</span><span>    13.3       8    350      245     3.73   3.84     15.4      0      0
+#&gt; </span><span style='color: #555555;'>25</span><span>    19.2       8    400      175     3.08   3.84     17.0      0      0
+#&gt; </span><span style='color: #555555;'># … with 7 more rows, and 13 more variables: gear...10 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, carb...11 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   mpg...12 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, …</span><span></div><div class='input'>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/formatting.html'>trunc_mat</a></span>(<span class='kw'>mtcars</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># Description: df[,11] [32 × 11]</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt;  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt;  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt;  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt;  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt;  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt;  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt;  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt;  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/nycflights13/man/flights.html'>flights</a></span>, <span class='kw'>n_extra</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 x 19
+#&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 2</span><span>  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 3</span><span>  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'> 4</span><span>  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 5</span><span>  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+#&gt; </span><span style='color: #555555;'> 6</span><span>  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 7</span><span>  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+#&gt; </span><span style='color: #555555;'> 8</span><span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+#&gt; </span><span style='color: #555555;'> 9</span><span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+#&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>nycflights13</span>::<span class='kw'><a href='https://rdrr.io/pkg/nycflights13/man/flights.html'>flights</a></span>, n_extra = <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 336,776 x 19</span><span>
 #&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-#&gt;  1  2013     1     1      517            515         2      830            819
-#&gt;  2  2013     1     1      533            529         4      850            830
-#&gt;  3  2013     1     1      542            540         2      923            850
-#&gt;  4  2013     1     1      544            545        -1     1004           1022
-#&gt;  5  2013     1     1      554            600        -6      812            837
-#&gt;  6  2013     1     1      554            558        -4      740            728
-#&gt;  7  2013     1     1      555            600        -5      913            854
-#&gt;  8  2013     1     1      557            600        -3      709            723
-#&gt;  9  2013     1     1      557            600        -3      838            846
-#&gt; 10  2013     1     1      558            600        -2      753            745
-#&gt; # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
-#&gt; #   carrier &lt;chr&gt;, …</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw pkg'>nycflights13</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/nycflights13/man/flights.html'>flights</a></span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; # A tibble: 336,776 x 19
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      517            515         2      830            819
+#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      533            529         4      850            830
+#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      542            540         2      923            850
+#&gt; </span><span style='color: #555555;'> 4</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      544            545        -</span><span style='color: #BB0000;'>1</span><span>     </span><span style='text-decoration: underline;'>1</span><span>004           </span><span style='text-decoration: underline;'>1</span><span>022
+#&gt; </span><span style='color: #555555;'> 5</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      554            600        -</span><span style='color: #BB0000;'>6</span><span>      812            837
+#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      554            558        -</span><span style='color: #BB0000;'>4</span><span>      740            728
+#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      555            600        -</span><span style='color: #BB0000;'>5</span><span>      913            854
+#&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      557            600        -</span><span style='color: #BB0000;'>3</span><span>      709            723
+#&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      557            600        -</span><span style='color: #BB0000;'>3</span><span>      838            846
+#&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      558            600        -</span><span style='color: #BB0000;'>2</span><span>      753            745
+#&gt; </span><span style='color: #555555;'># … with 336,766 more rows, and 11 more variables: arr_delay </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   carrier </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, …</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>nycflights13</span>::<span class='kw'><a href='https://rdrr.io/pkg/nycflights13/man/flights.html'>flights</a></span>, width = <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 336,776 x 19</span><span>
 #&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-#&gt;  1  2013     1     1      517            515         2      830            819
-#&gt;  2  2013     1     1      533            529         4      850            830
-#&gt;  3  2013     1     1      542            540         2      923            850
-#&gt;  4  2013     1     1      544            545        -1     1004           1022
-#&gt;  5  2013     1     1      554            600        -6      812            837
-#&gt;  6  2013     1     1      554            558        -4      740            728
-#&gt;  7  2013     1     1      555            600        -5      913            854
-#&gt;  8  2013     1     1      557            600        -3      709            723
-#&gt;  9  2013     1     1      557            600        -3      838            846
-#&gt; 10  2013     1     1      558            600        -2      753            745
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      517            515         2      830            819
+#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      533            529         4      850            830
+#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      542            540         2      923            850
+#&gt; </span><span style='color: #555555;'> 4</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      544            545        -</span><span style='color: #BB0000;'>1</span><span>     </span><span style='text-decoration: underline;'>1</span><span>004           </span><span style='text-decoration: underline;'>1</span><span>022
+#&gt; </span><span style='color: #555555;'> 5</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      554            600        -</span><span style='color: #BB0000;'>6</span><span>      812            837
+#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      554            558        -</span><span style='color: #BB0000;'>4</span><span>      740            728
+#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      555            600        -</span><span style='color: #BB0000;'>5</span><span>      913            854
+#&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      557            600        -</span><span style='color: #BB0000;'>3</span><span>      709            723
+#&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      557            600        -</span><span style='color: #BB0000;'>3</span><span>      838            846
+#&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1      558            600        -</span><span style='color: #BB0000;'>2</span><span>      753            745
 #&gt;    arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
-#&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
-#&gt;  2        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
-#&gt;  3        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
-#&gt;  4       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
-#&gt;  5       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
-#&gt;  6        12 UA        1696 N39463  EWR    ORD        150      719     5     58
-#&gt;  7        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
-#&gt;  8       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
-#&gt;  9        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
-#&gt; 10         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>        11 UA        </span><span style='text-decoration: underline;'>1</span><span>545 N14228  EWR    IAH        227     </span><span style='text-decoration: underline;'>1</span><span>400     5     15
+#&gt; </span><span style='color: #555555;'> 2</span><span>        20 UA        </span><span style='text-decoration: underline;'>1</span><span>714 N24211  LGA    IAH        227     </span><span style='text-decoration: underline;'>1</span><span>416     5     29
+#&gt; </span><span style='color: #555555;'> 3</span><span>        33 AA        </span><span style='text-decoration: underline;'>1</span><span>141 N619AA  JFK    MIA        160     </span><span style='text-decoration: underline;'>1</span><span>089     5     40
+#&gt; </span><span style='color: #555555;'> 4</span><span>       -</span><span style='color: #BB0000;'>18</span><span> B6         725 N804JB  JFK    BQN        183     </span><span style='text-decoration: underline;'>1</span><span>576     5     45
+#&gt; </span><span style='color: #555555;'> 5</span><span>       -</span><span style='color: #BB0000;'>25</span><span> DL         461 N668DN  LGA    ATL        116      762     6      0
+#&gt; </span><span style='color: #555555;'> 6</span><span>        12 UA        </span><span style='text-decoration: underline;'>1</span><span>696 N39463  EWR    ORD        150      719     5     58
+#&gt; </span><span style='color: #555555;'> 7</span><span>        19 B6         507 N516JB  EWR    FLL        158     </span><span style='text-decoration: underline;'>1</span><span>065     6      0
+#&gt; </span><span style='color: #555555;'> 8</span><span>       -</span><span style='color: #BB0000;'>14</span><span> EV        </span><span style='text-decoration: underline;'>5</span><span>708 N829AS  LGA    IAD         53      229     6      0
+#&gt; </span><span style='color: #555555;'> 9</span><span>        -</span><span style='color: #BB0000;'>8</span><span> B6          79 N593JB  JFK    MCO        140      944     6      0
+#&gt; </span><span style='color: #555555;'>10</span><span>         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
 #&gt;    time_hour          
-#&gt;    &lt;dttm&gt;             
-#&gt;  1 2013-01-01 05:00:00
-#&gt;  2 2013-01-01 05:00:00
-#&gt;  3 2013-01-01 05:00:00
-#&gt;  4 2013-01-01 05:00:00
-#&gt;  5 2013-01-01 06:00:00
-#&gt;  6 2013-01-01 05:00:00
-#&gt;  7 2013-01-01 06:00:00
-#&gt;  8 2013-01-01 06:00:00
-#&gt;  9 2013-01-01 06:00:00
-#&gt; 10 2013-01-01 06:00:00
-#&gt; # … with 336,766 more rows</div></pre>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2013-01-01 </span><span style='color: #555555;'>05:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2013-01-01 </span><span style='color: #555555;'>05:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2013-01-01 </span><span style='color: #555555;'>05:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2013-01-01 </span><span style='color: #555555;'>05:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2013-01-01 </span><span style='color: #555555;'>06:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2013-01-01 </span><span style='color: #555555;'>05:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2013-01-01 </span><span style='color: #555555;'>06:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2013-01-01 </span><span style='color: #555555;'>06:00:00</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2013-01-01 </span><span style='color: #555555;'>06:00:00</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> 2013-01-01 </span><span style='color: #555555;'>06:00:00</span><span>
+#&gt; </span><span style='color: #555555;'># … with 336,766 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#package-options">Package options</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

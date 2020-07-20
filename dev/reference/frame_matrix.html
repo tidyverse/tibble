@@ -88,7 +88,7 @@ is important. The syntax is inspired by tribble()." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -198,10 +198,10 @@ is important. The syntax is inspired by tribble()." />
 <p>Create matrices laying out the data in rows, similar to
 <code><a href='https://rdrr.io/r/base/matrix.html'>matrix(..., byrow = TRUE)</a></code>, with a nicer-to-read syntax.
 This is useful for small matrices, e.g. covariance matrices, where readability
-is important. The syntax is inspired by <code><a href='tribble.html'>tribble()</a></code>.</p>
+is important. The syntax is inspired by <code><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>frame_matrix</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://tibble.tidyverse.org/reference/frame_matrix.html'>frame_matrix</a></span>(<span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,8 +225,8 @@ and support unquote via <code>!!</code> and unquote-splice via <code>!!!</code>.
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>frame_matrix</span>(
-  ~<span class='no'>col1</span>, ~<span class='no'>col2</span>,
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/frame_matrix.html'>frame_matrix</a></span>(
+  <span class='op'>~</span><span class='kw'>col1</span>, <span class='op'>~</span><span class='kw'>col2</span>,
   <span class='fl'>1</span>,     <span class='fl'>3</span>,
   <span class='fl'>5</span>,     <span class='fl'>2</span>
 )</div><div class='output co'>#&gt;      col1 col2
@@ -234,14 +234,9 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt; [2,]    5    2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

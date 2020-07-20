@@ -103,7 +103,7 @@ in a list." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -209,37 +209,37 @@ in a list." />
     </div>
 
     <div class="ref-description">
-    <p><code>tibble()</code> constructs a data frame. It is used like <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>, but
+    <p><code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble()</a></code> constructs a data frame. It is used like <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>, but
 with a couple notable differences:</p><ul>
-<li><p>The returned data frame has the class <code><a href='tbl_df-class.html'>tbl_df</a></code>, in
+<li><p>The returned data frame has the class <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a></code>, in
 addition to <code>data.frame</code>. This allows so-called "tibbles" to exhibit some
-special behaviour, such as <a href='formatting.html'>enhanced printing</a>. Tibbles are
-fully described in <code><a href='tbl_df-class.html'>tbl_df</a></code>.</p></li>
-<li><p><code>tibble()</code> is much lazier than <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> in terms of
+special behaviour, such as <a href='https://tibble.tidyverse.org/reference/formatting.html'>enhanced printing</a>. Tibbles are
+fully described in <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a></code>.</p></li>
+<li><p><code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble()</a></code> is much lazier than <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> in terms of
 transforming the user's input. Character vectors are not coerced to
 factor. List-columns are expressly anticipated and do not require special
 tricks. Column names are not modified.</p></li>
-<li><p><code>tibble()</code> builds columns sequentially. When defining a column, you can
+<li><p><code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble()</a></code> builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.</p></li>
 <li><p>If a column evaluates to a data frame or tibble, it is nested or spliced.
 See examples.</p></li>
 </ul>
 
-<p><code>tibble_row()</code> constructs a data frame that is guaranteed to occupy one row.
+<p><code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble_row()</a></code> constructs a data frame that is guaranteed to occupy one row.
 Vector columns are required to have size one, non-vector columns are wrapped
 in a list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tibble</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>.rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+    <pre class="usage"><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>...</span>,
+  .rows = <span class='kw'>NULL</span>,
+  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
 )
 
-<span class='fu'>tibble_row</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble_row</a></span>(
+  <span class='kw'>...</span>,
+  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -284,191 +284,186 @@ to enforce them.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble, which is a colloquial term for an object of class
-<code><a href='tbl_df-class.html'>tbl_df</a></code>. A <code><a href='tbl_df-class.html'>tbl_df</a></code> object is also a data
+<code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a></code>. A <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a></code> object is also a data
 frame, i.e. it has class <code>data.frame</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Use <code><a href='as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
-<code><a href='enframe.html'>enframe()</a></code> to convert a named vector into a tibble. Name repair is
+    <div class='dont-index'><p>Use <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble()</a></code> to turn an existing object into a tibble. Use
+<code><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe()</a></code> to convert a named vector into a tibble. Name repair is
 detailed in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.
 See quasiquotation for more details on tidy dots semantics,
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Unnamed arguments are named with their expression:</span>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
-<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='no'>a</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
+<span class='kw'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='kw'>a</span>, <span class='kw'>a</span> <span class='op'>*</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 2</span><span>
 #&gt;       a `a * 2`
-#&gt;   &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1     1       2
-#&gt; 2     2       4
-#&gt; 3     3       6
-#&gt; 4     4       8
-#&gt; 5     5      10</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1       2
+#&gt; </span><span style='color: #555555;'>2</span><span>     2       4
+#&gt; </span><span style='color: #555555;'>3</span><span>     3       6
+#&gt; </span><span style='color: #555555;'>4</span><span>     4       8
+#&gt; </span><span style='color: #555555;'>5</span><span>     5      10</div><div class='input'>
 <span class='co'># Scalars (vectors of length one) are recycled:</span>
-<span class='fu'>tibble</span>(<span class='no'>a</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 3
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='kw'>a</span>, b = <span class='kw'>a</span> <span class='op'>*</span> <span class='fl'>2</span>, c = <span class='fl'>1</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 3</span><span>
 #&gt;       a     b     c
-#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2     1
-#&gt; 2     2     4     1
-#&gt; 3     3     6     1
-#&gt; 4     4     8     1
-#&gt; 5     5    10     1</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     2     4     1
+#&gt; </span><span style='color: #555555;'>3</span><span>     3     6     1
+#&gt; </span><span style='color: #555555;'>4</span><span>     4     8     1
+#&gt; </span><span style='color: #555555;'>5</span><span>     5    10     1</div><div class='input'>
 <span class='co'># Columns are available in subsequent expressions:</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>10</span>), y = <span class='kw'>x</span> <span class='op'>*</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
 #&gt;         x      y
-#&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1 0.512  1.02  
-#&gt;  2 0.836  1.67  
-#&gt;  3 0.709  1.42  
-#&gt;  4 0.874  1.75  
-#&gt;  5 0.0115 0.0230
-#&gt;  6 0.888  1.78  
-#&gt;  7 0.996  1.99  
-#&gt;  8 0.500  1.00  
-#&gt;  9 0.359  0.718 
-#&gt; 10 0.775  1.55  </div><div class='input'>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 0.512  1.02  
+#&gt; </span><span style='color: #555555;'> 2</span><span> 0.836  1.67  
+#&gt; </span><span style='color: #555555;'> 3</span><span> 0.709  1.42  
+#&gt; </span><span style='color: #555555;'> 4</span><span> 0.874  1.75  
+#&gt; </span><span style='color: #555555;'> 5</span><span> 0.011</span><span style='text-decoration: underline;'>5</span><span> 0.023</span><span style='text-decoration: underline;'>0</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> 0.888  1.78  
+#&gt; </span><span style='color: #555555;'> 7</span><span> 0.996  1.99  
+#&gt; </span><span style='color: #555555;'> 8</span><span> 0.500  1.00  
+#&gt; </span><span style='color: #555555;'> 9</span><span> 0.359  0.718 
+#&gt; </span><span style='color: #555555;'>10</span><span> 0.775  1.55  </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='no'>letters</span>))</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
-#&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='kw'>letters</span>))</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
+#&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>))))</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
 <span class='co'># or munges column names (unless requested),</span>
-<span class='fu'>tibble</span>(<span class='kw'>`a + b`</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 1
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(`a + b` = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 1</span><span>
 #&gt;   `a + b`
-#&gt;     &lt;int&gt;
-#&gt; 1       1
-#&gt; 2       2
-#&gt; 3       3
-#&gt; 4       4
-#&gt; 5       5</div><div class='input'>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       1
+#&gt; </span><span style='color: #555555;'>2</span><span>       2
+#&gt; </span><span style='color: #555555;'>3</span><span>       3
+#&gt; </span><span style='color: #555555;'>4</span><span>       4
+#&gt; </span><span style='color: #555555;'>5</span><span>       5</div><div class='input'>
 <span class='co'># but it forces you to take charge of names, if they need repair:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>))</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>, .name_repair = <span class='st'>"unique"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x...1</span>
-#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   x...1 x...2
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>, .name_repair = <span class='st'>"minimal"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       x     x
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'>## By default, non-syntactic names are allowed,</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(`a 1` = <span class='fl'>1</span>, `a 2` = <span class='fl'>2</span>)
 <span class='co'>## because you can still index by name:</span>
-<span class='no'>df</span><span class='kw'>[[</span><span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='no'>df</span>$<span class='no'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>df</span>, <span class='no'>`a 1`</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='kw'>df</span>[[<span class='st'>"a 1"</span>]]</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw'>df</span><span class='op'>$</span><span class='kw'>`a 1`</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='kw'>df</span>, <span class='kw'>`a 1`</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## Syntactic names are easier to work with, though, and you can request them:</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(<span class='kw'>`a 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`a 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(`a 1` = <span class='fl'>1</span>, `a 2` = <span class='fl'>2</span>, .name_repair = <span class='st'>"universal"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `a 1` -&gt; a.1</span>
-#&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='no'>df</span>$<span class='no'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+#&gt; <span class='message'>* `a 2` -&gt; a.2</span></div><div class='input'><span class='kw'>df</span><span class='op'>$</span><span class='kw'>a.1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## You can specify your own name repair function:</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>make.unique</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>, .name_repair = <span class='kw'>make.unique</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       x   x.1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
-<span class='no'>fix_names</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='no'>x</span>)
-<span class='fu'>tibble</span>(<span class='kw'>`year 1`</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>`year 2`</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='no'>fix_names</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+<span class='kw'>fix_names</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='kw'>x</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(`year 1` = <span class='fl'>1</span>, `year 2` = <span class='fl'>2</span>, .name_repair = <span class='kw'>fix_names</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   year_1 year_2
-#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1      1      2</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1      2</div><div class='input'>
 <span class='co'>## purrr-style anonymous functions and constants</span>
 <span class='co'>## are also supported</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span>(<span class='no'>.</span>, <span class='kw'>unique</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>, .name_repair = <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span>(<span class='kw'>.</span>, unique = <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       x   x.1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, x = <span class='fl'>2</span>, .name_repair = <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       a     b
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
 <span class='co'># if the number of rows is compatible. Unnamed tibbled are</span>
 <span class='co'># spliced, i.e. the inner columns are inserted into the</span>
 <span class='co'># tibble under construction.</span>
-<span class='fu'>tibble</span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-  <span class='fu'>tibble</span>(
-    <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
-    <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>9</span>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+  <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    b = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>,
+    c = <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span>
   ),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-    <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(
-      <span class='kw'>f</span> <span class='kw'>=</span> <span class='no'>b</span>
+  d = <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    e = <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+      f = <span class='kw'>b</span>
     )
   )
-)</div><div class='output co'>#&gt; # A tibble: 3 x 4
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 4</span><span>
 #&gt;       a     b     c d$e$f
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     4     7     4
-#&gt; 2     2     5     8     5
-#&gt; 3     3     6     9     6</div><div class='input'><span class='fu'>tibble</span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>4</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
-)</div><div class='output co'>#&gt; # A tibble: 4 x 3
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4     7     4
+#&gt; </span><span style='color: #555555;'>2</span><span>     2     5     8     5
+#&gt; </span><span style='color: #555555;'>3</span><span>     3     6     9     6</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>,
+  b = <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>4</span>),
+  c = <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='kw'>iris</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>])
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 3</span><span>
 #&gt;       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Lengt… [,"Sepal.Width"]
-#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-#&gt; 1     1     1     0     0     0           0.686           -0.0424
-#&gt; 2     2     0     1     0     0          -0.0424           0.190 
-#&gt; 3     3     0     0     1     0           1.27            -0.330 
-#&gt; 4     4     0     0     0     1           0.516           -0.122 
-#&gt; # … with 2 more variables: [,"Petal.Length"] &lt;dbl&gt;, [,"Petal.Width"] &lt;dbl&gt;</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     1     0     0     0           0.686           -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>     2     0     1     0     0          -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>           0.190 
+#&gt; </span><span style='color: #555555;'>3</span><span>     3     0     0     1     0           1.27            -</span><span style='color: #BB0000;'>0.330</span><span> 
+#&gt; </span><span style='color: #555555;'>4</span><span>     4     0     0     0     1           0.516           -</span><span style='color: #BB0000;'>0.122</span><span> 
+#&gt; </span><span style='color: #555555;'># … with 2 more variables: [,"Petal.Length"] </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, [,"Petal.Width"] </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
 <span class='co'># with incompatible number of rows:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; # A tibble: 1 x 1
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(y = <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span>(<span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span>)))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
 #&gt;   y                  
-#&gt;   &lt;dttm&gt;             
-#&gt; 1 NA                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>tibble</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>tibble</span>(<span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have compatible sizes.
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>                 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b = <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(c = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span>)))</div><div class='output co'>#&gt; Error : Tibble columns must have compatible sizes.
 #&gt; * Size 3: Existing data.
 #&gt; * Size 4: Column `b`.
-#&gt; ℹ Only values of size one are recycled.</div><div class='input'>
+#&gt; </span><span style='color: #0000BB;'>ℹ</span><span> Only values of size one are recycled.</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
-<span class='fu'>tibble</span>(<span class='kw'>.dotted</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(.dotted = <span class='fl'>3</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
 #&gt;   .dotted
-#&gt;     &lt;dbl&gt;
-#&gt; 1       3</div><div class='input'><span class='fu'>tibble</span>(<span class='no'>.dotted</span> <span class='kw'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 1
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       3</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='kw'>.dotted</span> <span class='op'>:=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
 #&gt;   .dotted
-#&gt;     &lt;dbl&gt;
-#&gt; 1       3</div><div class='input'>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       3</div><div class='input'>
 <span class='co'># You can unquote an expression:</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
-<span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, y = <span class='kw'>x</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       x     y
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     1</div><div class='input'><span class='fu'>tibble</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> !!<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     1</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(x = <span class='fl'>1</span>, y = <span class='op'>!</span><span class='op'>!</span><span class='kw'>x</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       x     y
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     3</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     3</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quosures and expressions:</span>
-<span class='fu'>tibble</span>(!!! <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>quo</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span>(<span class='no'>x</span> * <span class='fl'>2</span>)))</div><div class='output co'>#&gt; # A tibble: 10 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='op'>!</span><span class='op'>!</span><span class='op'>!</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(x = <span class='kw'>rlang</span>::<span class='fu'><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>quo</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>), y = <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span>(<span class='kw'>x</span> <span class='op'>*</span> <span class='fl'>2</span>)))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
 #&gt;        x     y
-#&gt;    &lt;int&gt; &lt;dbl&gt;
-#&gt;  1     1     2
-#&gt;  2     2     4
-#&gt;  3     3     6
-#&gt;  4     4     8
-#&gt;  5     5    10
-#&gt;  6     6    12
-#&gt;  7     7    14
-#&gt;  8     8    16
-#&gt;  9     9    18
-#&gt; 10    10    20</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'> 2</span><span>     2     4
+#&gt; </span><span style='color: #555555;'> 3</span><span>     3     6
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     8
+#&gt; </span><span style='color: #555555;'> 5</span><span>     5    10
+#&gt; </span><span style='color: #555555;'> 6</span><span>     6    12
+#&gt; </span><span style='color: #555555;'> 7</span><span>     7    14
+#&gt; </span><span style='color: #555555;'> 8</span><span>     8    16
+#&gt; </span><span style='color: #555555;'> 9</span><span>     9    18
+#&gt; </span><span style='color: #555555;'>10</span><span>    10    20</div><div class='input'>
 
 <span class='co'># Use tibble_row() to construct a one-row tibble:</span>
-<span class='fu'>tibble_row</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lm</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble_row</a></span>(a = <span class='fl'>1</span>, lm = <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Petal.Width</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       a lm    
-#&gt;   &lt;dbl&gt; &lt;list&gt;
-#&gt; 1     1 &lt;lm&gt;  </div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 </span><span style='color: #555555;'>&lt;lm&gt;</span><span>  </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
