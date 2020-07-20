@@ -457,12 +457,12 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i_new <- i[new]
     i[new] <- NA
 
+    # Only update existing, caller knows how to deal with OOB
+    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
+
     if (!is_tight_sequence_at_end(i_new, nr)) {
       cnd_signal(error_new_rows_at_end_only(nr, i_new))
     }
-
-    # Only update existing, caller knows how to deal with OOB
-    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
 
     # Restore, caller knows how to deal
     i[new] <- i_new
