@@ -102,9 +102,9 @@ test_that("glimpse works for structures with unknown rows", {
   skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
   iris2 <- as_unknown_rows(iris)
 
-  expect_output_file(
+  expect_output_file_rel(
     glimpse(iris2, width = 70L),
-    output_file("glimpse/iris-70-na-nrow.txt")
+    "glimpse/iris-70-na-nrow.txt"
   )
 })
 

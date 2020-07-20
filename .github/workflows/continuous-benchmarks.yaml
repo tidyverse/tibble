@@ -1,0 +1,46 @@
+on: push
+
+name: Continuous Benchmarks
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    defaults:
+      run:
+        shell: Rscript {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "$GITHUB_WORKFLOW"
+          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
+        shell: bash
+
+      - name: Install dependencies
+        run: |
+          install.packages("remotes")
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_github("r-lib/bench")
+          install.packages("here")
+
+      - name: Install package
+        run: R CMD INSTALL .
+        shell: bash
+
+      - name: Fetch existing benchmarks
+        run: try(bench::cb_fetch())
+
+      - name: Run benchmarks
+        run: bench::cb_run()
+
+      - name: Show benchmarks
+        run: git notes --ref benchmarks show
+        shell: bash
+
+      - name: Push benchmarks
+        run: bench::cb_push()

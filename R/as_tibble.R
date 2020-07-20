@@ -197,7 +197,7 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   names <- colnames(x)
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have column names if `.name_repair` is omitted')",
+      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
         details = "Using compatibility `.name_repair`.")
       compat_names <- paste0("V", seq_along(m))
       if (is.null(names)) {
@@ -273,6 +273,8 @@ as_tibble.default <- function(x, ...) {
 
 #' @description
 #' `as_tibble_row()` converts a vector to a tibble with one row.
+#' The input must be a bare vector, e.g. vectors of dates are not
+#' supported yet.
 #' If the input is a list, all elements must have length one.
 #'
 #' @rdname as_tibble
@@ -286,6 +288,7 @@ as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
   if (!is_bare_vector(x)) {
+    # FIXME: Remove entry from help once fixed (#797)
     cnd_signal(error_as_tibble_row_bare(x))
   }
 

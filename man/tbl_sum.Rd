@@ -24,5 +24,5 @@ This generic will be moved to \pkg{pillar}, and reexported from there
 as soon as it becomes available.
 }
 \seealso{
-\code{\link[pillar:type_sum]{pillar::type_sum()}}, \code{\link[pillar:deprecated]{pillar::is_vector_s3()}}
+\code{\link[pillar:type_sum]{pillar::type_sum()}}
 }

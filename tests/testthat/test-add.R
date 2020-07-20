@@ -279,7 +279,10 @@ test_that("error if column named by .before or .after not found", {
 
 test_that("deprecated adding columns to non-data-frames", {
   expect_error(
-    expect_warning(add_column(as.matrix(mtcars), x = 1))
+    # Two lifecycle warnings, requires testthat > 2.3.2:
+    suppressWarnings(
+      expect_warning(add_column(as.matrix(mtcars), x = 1))
+    )
   )
 })
 

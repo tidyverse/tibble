@@ -1,16 +1,36 @@
-# tibble 3.0.1.9001
+# tibble 3.0.3.9000
 
-- Subsetting is faster again (#790).
-- `is.null()` is preferred over `is_null()` for speed.
-- `[[` as fast as `$` again, performs all relevant checks inline instead of relying on `vctrs::vec_as_location2()` (#780).
-- `tribble()` now better handles named inputs (#775) and objects of non-vtrs classes like `lubridate::Period` (#784) and `formattable::formattable` (#785).
+- Internal changes only.
+
+
+# tibble 3.0.3
+
+- Fix test compatibility with rlang 0.4.7.
+
+- Fix warning about `needs_dots` arguments with pillar >= 1.4.5 (#798).
+
+
+# tibble 3.0.2
+
+## Bug fixes
+
+- `[[` works with classed indexes again, e.g. created with `glue::glue()` (#778).
+
 - `add_column()` works without warning for 0-column data frames (#786).
-- Refer to `NA_integer_`.
 
+- `tribble()` now better handles named inputs (#775) and objects of non-vtrs classes like `lubridate::Period` (#784) and `formattable::formattable` (#785).
 
-# tibble 3.0.1.9000
+## Performance
 
-- Same as previous version.
+- Subsetting and subassignment are faster (#780, #790, #794).
+
+- `is.null()` is preferred over `is_null()` for speed.
+
+- Implement continuous benchmarking (#793).
+
+## Compatibility
+
+- `is_vector_s3()` is no longer reexported from pillar (#789).
 
 
 # tibble 3.0.1

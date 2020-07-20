@@ -39,6 +39,8 @@ test_that("preserves col names", {
 })
 
 test_that("supports compat col names", {
+  scoped_lifecycle_warnings()
+
   x <- matrix(1:4, nrow = 2)
 
   expect_warning(out <- as_tibble(x))
