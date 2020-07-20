@@ -16,35 +16,6 @@ options(crayon.enabled = TRUE)
 options(pillar.bold = TRUE)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
-
-colourise_chunk <- function(type) {
-  function(x, options) {
-    # lines <- strsplit(x, "\\n")[[1]]
-    lines <- x
-    if (type != "output") {
-      lines <- crayon::red(lines)
-    }
-    paste0(
-      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
-      paste0(
-        sgr_to_html(htmltools::htmlEscape(lines)),
-        collapse = "\n"
-      ),
-      "</code></pre></div>"
-    )
-  }
-}
-
-knitr::knit_hooks$set(
-  output = colourise_chunk("output"),
-  message = colourise_chunk("message"),
-  warning = colourise_chunk("warning"),
-  error = colourise_chunk("error")
-)
-
-# Fallback if fansi is missing
-sgr_to_html <- identity
-sgr_to_html <- fansi::sgr_to_html
 ```
 
 Tibbles are a modern take on data frames.
