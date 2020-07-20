@@ -273,9 +273,7 @@ as_tibble.default <- function(x, ...) {
 
 #' @description
 #' `as_tibble_row()` converts a vector to a tibble with one row.
-#' The input must be a bare vector, e.g. vectors of dates are not
-#' supported yet.
-#' If the input is a list, all elements must have length one.
+#' If the input is a list, all elements must have size one.
 #'
 #' @rdname as_tibble
 #' @export
@@ -287,15 +285,18 @@ as_tibble.default <- function(x, ...) {
 as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
 
-  if (!is_bare_vector(x)) {
-    # FIXME: Remove entry from help once fixed (#797)
-    cnd_signal(error_as_tibble_row_bare(x))
+  if (!vec_is(x)) {
+    cnd_signal(error_as_tibble_row_vector(x))
   }
 
-  x <- set_repaired_names(x, .name_repair)
+  names <- vec_names2(x, repair = .name_repair)
+  x <- vec_set_names(x, NULL)
+  slices <- lapply(seq_len(vec_size(x)), vec_slice, x = x)
+  names(slices) <- names
 
-  check_all_lengths_one(x)
-  new_tibble(as.list(x), nrow = 1)
+  check_all_lengths_one(slices)
+
+  new_tibble(slices, nrow = 1)
 }
 
 check_all_lengths_one <- function(x) {
@@ -349,9 +350,9 @@ error_column_scalar_type <- function(names, positions, classes) {
   )
 }
 
-error_as_tibble_row_bare <- function(x) {
+error_as_tibble_row_vector <- function(x) {
   tibble_error(paste0(
-    "`x` must be a bare vector in `as_tibble_row()`, not ", class(x)[[1]], "."
+    "`x` must be a vector in `as_tibble_row()`, not ", class(x)[[1]], "."
   ))
 }
 

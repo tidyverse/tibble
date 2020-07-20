@@ -80,8 +80,7 @@ x Column `C` is c.
 x ... and 23 more problems.
 
 > error_as_tibble_row_bare(new_environment())
-<error/tibble_error_as_tibble_row_bare>
-`x` must be a bare vector in `as_tibble_row()`, not environment.
+Error in error_as_tibble_row_bare(new_environment()): could not find function "error_as_tibble_row_bare"
 
 > error_as_tibble_row_size_one(3, "foo", 7)
 <error/tibble_error_as_tibble_row_size_one>

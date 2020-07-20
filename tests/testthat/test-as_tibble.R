@@ -404,18 +404,29 @@ test_that("as_tibble_row() can convert named bare vectors to data frame", {
   )
 })
 
-test_that("as_tibbe_row() fails with non-bare vectors (#739)", {
+test_that("as_tibbe_row() works with non-bare vectors (#797)", {
   expect_tibble_error(
-    as_tibble_row(Sys.time()),
-    error_as_tibble_row_bare(Sys.time())
+    as_tibble_row(new_environment()),
+    error_as_tibble_row_vector(new_environment())
   )
-  expect_tibble_error(
-    as_tibble_row(iris),
-    error_as_tibble_row_bare(iris)
+
+  time <- Sys.time()
+  expect_identical(
+    as_tibble_row(time, .name_repair = "unique"),
+    tibble(...1 = time)
+  )
+  expect_identical(
+    as_tibble_row(trees[1:3, ], .name_repair = "unique"),
+    tibble(...1 = trees[1, ], ...2 = trees[2, ], ...3 = trees[3, ])
   )
   expect_tibble_error(
     as_tibble_row(Titanic),
-    error_as_tibble_row_bare(Titanic)
+    tibble(
+      "1st" = Titanic[1, ],
+      "2nd" = Titanic[2, ],
+      "3rd" = Titanic[3, ],
+      Crew  = Titanic[4, ]
+    )
   )
 })
 

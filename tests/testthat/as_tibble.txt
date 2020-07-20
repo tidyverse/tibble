@@ -27,38 +27,55 @@ Error: All columns in a tibble must be vectors.
 x Column `a` is an environment.
 
 > as_tibble_row(list(1))
-Error: Column 1 must be named.
+Error: Names can't be empty.
+x Empty name found at location 1.
 
 > as_tibble_row(list(1, 2))
-Error: Columns 1 and 2 must be named.
+Error: Names can't be empty.
+x Empty names found at locations 1 and 2.
 
 > as_tibble_row(list(a = 1, 2))
-Error: Column 2 must be named.
+Error: Names can't be empty.
+x Empty name found at location 2.
 
 > as_tibble_row(as.list(1:26))
-Error: Columns 1, 2, 3, 4, 5, and 21 more must be named.
+Error: Names can't be empty.
+x Empty names found at locations 1, 2, 3, 4, 5, etc.
 
 > as_tibble_row(set_names(list(1), "..1"))
-Error: Column 1 must not have names of the form ... or ..j.
+Error: Names can't be of the form `...` or `..j`.
+x These names are invalid:
+  * "..1" at location 1.
 
 > as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
 Error: `nm` must be `NULL` or a character vector the same length as `x`
 
 > as_tibble_row(list(a = 1, a = 1))
-Error: Column name `a` must not be duplicated.
+Error: Names must be unique.
+x These names are duplicated:
+  * "a" at locations 1 and 2.
 
 > as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
-Error: Column names `a` and `b` must not be duplicated.
+Error: Names must be unique.
+x These names are duplicated:
+  * "a" at locations 1 and 2.
+  * "b" at locations 3 and 4.
 
 > as_tibble_row(list(a = new_environment()))
-Error: Input must be a vector, not an environment.
+# A tibble: 1 x 1
+  a     
+  <list>
+1 <env> 
 
 > as_tibble_row(list(a = 1:3))
-Error: All elements must be size one, use `list()` to wrap.
-x Element `a` is of size 3.
+# A tibble: 1 x 1
+  a        
+  <list>   
+1 <int [3]>
 
 > as_tibble_row(list(a = 1:3, b = 1:3))
-Error: All elements must be size one, use `list()` to wrap.
-x Element `a` is of size 3.
-x Element `b` is of size 3.
+# A tibble: 1 x 2
+  a         b        
+  <list>    <list>   
+1 <int [3]> <int [3]>
 
