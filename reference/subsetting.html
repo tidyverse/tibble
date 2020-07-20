@@ -119,7 +119,7 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
         </div>
       </div>
     </div>
@@ -208,12 +208,12 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
     </div>
 
     <div class="ref-description">
-    <p>Accessing columns, rows, or cells via <code>$</code>, <code>[[</code>, or <code>[</code> is mostly similar to
+    <p>Accessing columns, rows, or cells via <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code>, or <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> is mostly similar to
 regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:</p><ul>
-<li><p><code>[</code> always returns a tibble by default, even if
+<li><p><code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> always returns a tibble by default, even if
 only one column is accessed.</p></li>
-<li><p>Partial matching of column names with <code>$</code> and <code>[[</code> is not supported, a
+<li><p>Partial matching of column names with <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> and <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code> is not supported, a
 warning is given and <code>NULL</code> is returned.</p></li>
 <li><p>Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.</p></li>
@@ -285,67 +285,67 @@ Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</co
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For better compatibility with older code written for regular data frames,
-<code>[</code> supports a <code>drop</code> argument which defaults to <code>FALSE</code>.
-New code should use <code>[[</code> to turn a column into a vector.</p>
+<code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> supports a <code>drop</code> argument which defaults to <code>FALSE</code>.
+New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code> to turn a column into a vector.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
-<span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>bc</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
+    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, bc = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>)
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, bc = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>)
 
 <span class='co'># Subsetting single columns:</span>
-<span class='no'>df</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
+<span class='kw'>df</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='kw'>tbl</span>[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;       a
-#&gt;   &lt;int&gt;
-#&gt; 1     1
-#&gt; 2     2
-#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>[, <span class='st'>"a"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     2
+#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='kw'>tbl</span>[, <span class='st'>"a"</span>, drop = <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>tbl</span>)[, <span class='st'>"a"</span>]</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
 <span class='co'># Subsetting single rows with the drop argument:</span>
-<span class='no'>df</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; $a
+<span class='kw'>df</span>[<span class='fl'>1</span>, , drop = <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
 #&gt; $bc
 #&gt; [1] 4
-#&gt; </div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, , <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt; </div><div class='input'><span class='kw'>tbl</span>[<span class='fl'>1</span>, , drop = <span class='fl'>TRUE</span>]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       a    bc
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='no'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='kw'>tbl</span>[<span class='fl'>1</span>, ])</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
 #&gt; $bc
 #&gt; [1] 4
 #&gt; </div><div class='input'>
 <span class='co'># Accessing non-existent columns:</span>
-<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='no'>df</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"b"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: `exact` ignored.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='no'>df</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
-<span class='no'>tbl</span>$<span class='no'>bd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
-<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='no'>df</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
-<span class='no'>tbl</span>$<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fl'>7</span>:<span class='fl'>9</span>
-<span class='no'>df</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'><span class='no'>tbl</span>$<span class='no'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'>
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
+<span class='kw'>df</span>[[<span class='st'>"b"</span>, exact = <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='kw'>tbl</span>[[<span class='st'>"b"</span>, exact = <span class='fl'>FALSE</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: `exact` ignored.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>bd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
+<span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>bd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"n"</span>, <span class='st'>"e"</span>, <span class='st'>"w"</span>)
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `b`.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>b</span> <span class='op'>&lt;-</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span>
+<span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>b</span> <span class='op'>&lt;-</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span>
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'><span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>b</span></div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'>
 <span class='co'># Identical behavior:</span>
-<span class='no'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; # A tibble: 1 x 4
+<span class='kw'>tbl</span>[<span class='fl'>1</span>, ]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
 #&gt;       a    bc bd        b
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;
-#&gt; 1     1     4 n         7</div><div class='input'><span class='no'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4 n         7</div><div class='input'><span class='kw'>tbl</span>[<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;      bc     a
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     4     1</div><div class='input'><span class='no'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     4     1</div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;      bc     a
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     4     1
-#&gt; 2     5     2
-#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     4     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     5     2
+#&gt; </span><span style='color: #555555;'>3</span><span>     6     3</div><div class='input'><span class='kw'>tbl</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bc"</span>, <span class='st'>"a"</span>)]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;      bc     a
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     4     1
-#&gt; 2     5     2
-#&gt; 3     6     3</div><div class='input'><span class='no'>tbl</span>[<span class='st'>"a"</span>]</div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     4     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     5     2
+#&gt; </span><span style='color: #555555;'>3</span><span>     6     3</div><div class='input'><span class='kw'>tbl</span>[<span class='st'>"a"</span>]</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;       a
-#&gt;   &lt;int&gt;
-#&gt; 1     1
-#&gt; 2     2
-#&gt; 3     3</div><div class='input'><span class='no'>tbl</span>$<span class='no'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>tbl</span><span class='kw'>[[</span><span class='st'>"a"</span>]]</div><div class='output co'>#&gt; [1] 1 2 3</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     2
+#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='kw'>tbl</span><span class='op'>$</span><span class='kw'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='kw'>tbl</span>[[<span class='st'>"a"</span>]]</div><div class='output co'>#&gt; [1] 1 2 3</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

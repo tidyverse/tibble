@@ -109,7 +109,7 @@ runs without raising an error." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
         </div>
       </div>
     </div>
@@ -202,16 +202,16 @@ runs without raising an error." />
 <p>Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like <span class="pkg">sf</span> or <span class="pkg">tsibble</span>.</p>
-<p><code>new_tibble()</code> creates a new object as a subclass of <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code>.
+<p><code><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble()</a></code> creates a new object as a subclass of <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code>.
 This function is optimized for performance, checks are reduced to a minimum.</p>
-<p><code>validate_tibble()</code> checks a tibble for internal consistency.
+<p><code><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>validate_tibble()</a></code> checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function
 runs without raising an error.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>nrow</span>, <span class='kw'>class</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subclass</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, <span class='kw'>nrow</span>, class = <span class='kw'>NULL</span>, subclass = <span class='kw'>NULL</span>)
 
-<span class='fu'>validate_tibble</span>(<span class='no'>x</span>)</pre>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>validate_tibble</a></span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,7 +243,7 @@ runs without raising an error.</p>
     
 
 
-<p>For <code>new_tibble()</code>, <code>x</code> must be a list.
+<p>For <code><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble()</a></code>, <code>x</code> must be a list.
 The <code>...</code> argument allows adding more attributes to the subclass.
 An <code>nrow</code> argument is required.
 This should be an integer of length 1,
@@ -257,36 +257,36 @@ but the names are not checked for correctness.</p>
 
     
 
-<p><code>validate_tibble()</code> checks for "minimal" names
+<p><code><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>validate_tibble()</a></code> checks for "minimal" names
 and that all columns are vectors, data frames or matrices.
 It also makes sure that all columns have the same length,
 and that <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code> is consistent with the data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> for ways to construct a tibble
+    <div class='dont-index'><p><code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble()</a></code> and <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble()</a></code> for ways to construct a tibble
 with recycling of scalars and automatic name repair.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># The nrow argument is always required:</span>
-<span class='fu'>new_tibble</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>), nrow = <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;       a     b
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     4
-#&gt; 2     2     5
-#&gt; 3     3     6</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4
+#&gt; </span><span style='color: #555555;'>2</span><span>     2     5
+#&gt; </span><span style='color: #555555;'>3</span><span>     3     6</div><div class='input'>
 <span class='co'># Existing row.names attributes are ignored:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>new_tibble</span>(<span class='no'>iris</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 5
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble</a></span>(<span class='kw'>iris</span>, nrow = <span class='fl'>3</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
 #&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-#&gt; 1          5.1         3.5          1.4         0.2 setosa 
-#&gt; 2          4.9         3            1.4         0.2 setosa 
-#&gt; 3          4.7         3.2          1.3         0.2 setosa </div><div class='input'>
+#&gt;          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span>          5.1         3.5          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'>2</span><span>          4.9         3            1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'>3</span><span>          4.7         3.2          1.3         0.2 setosa </div><div class='input'>
 <span class='co'># The length of all columns must be compatible with the nrow argument:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>new_tibble</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 2
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/new_tibble.html'>new_tibble</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>), nrow = <span class='fl'>2</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
 #&gt;       a     b
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     4
-#&gt; 2     2     5</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4
+#&gt; </span><span style='color: #555555;'>2</span><span>     2     5</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -52,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="types_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Column data types</h1>
@@ -145,7 +145,12 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org">tibble</a></span>)
+</pre></div>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
 <p>This vignette shows an overview of known data types and their abbreviations, and their origin. For example, <code>&lt;int&gt;</code> in the header of a column indicates an integer column, and <code>&lt;chr&gt;</code> denotes a character column.</p>
 <table class="table">
 <thead><tr class="header">
@@ -273,7 +278,7 @@
 <tr class="even">
 <td align="left">vctrs types</td>
 <td align="left">unspecified</td>
-<td align="left"><code><a href="https://vctrs.r-lib.org/reference/unspecified.html">vctrs::unspecified(1L)</a></code></td>
+<td align="left"><code><a href="https://vctrs.r-lib.org/reference/unspecified.html">vctrs::unspecified(1)</a></code></td>
 <td align="left">???</td>
 </tr>
 <tr class="odd">
@@ -291,41 +296,35 @@
 </tr>
 <tr class="odd">
 <td align="left"></td>
-<td align="left">vctrs_unspecified</td>
-<td align="left"><code><a href="https://vctrs.r-lib.org/reference/unspecified.html">vctrs::unspecified(1)</a></code></td>
-<td align="left">???</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
 <td align="left">vctrs_partial_factor</td>
 <td align="left"><code><a href="https://vctrs.r-lib.org/reference/partial_factor.html">vctrs::partial_factor(letters)</a></code></td>
 <td align="left">prtl_fctr</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">vctrs_partial_frame</td>
 <td align="left"><code><a href="https://vctrs.r-lib.org/reference/partial_frame.html">vctrs::partial_frame(a = 1)</a></code></td>
 <td align="left">prtl</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Language objects</td>
 <td align="left">function</td>
 <td align="left"><code>function() NULL</code></td>
 <td align="left">fn</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">symbol</td>
 <td align="left"><code><a href="https://rdrr.io/r/base/substitute.html">quote(a)</a></code></td>
 <td align="left">sym</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left">expression</td>
 <td align="left"><code><a href="https://rdrr.io/r/base/parse.html">parse(text = "a &lt;- 1\nb&lt;- 2")</a></code></td>
 <td align="left">expression</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left">quosures</td>
 <td align="left"><code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">rlang::quos(a = 1)</a></code></td>
@@ -333,41 +332,46 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div id="example-values" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-values" class="anchor"></a>Example values</h2>
 <p>The following overview contains example values for each type:</p>
 <pre><code>#&gt; Rows: 1
-#&gt; Columns: 24
-#&gt; $ logical           &lt;lgl&gt; TRUE
-#&gt; $ integer           &lt;int&gt; 1
-#&gt; $ double            &lt;dbl&gt; 1.5
-#&gt; $ character         &lt;chr&gt; "A"
-#&gt; $ complex           &lt;cpl&gt; 0+1i
-#&gt; $ raw               &lt;raw&gt; 01
-#&gt; $ list              &lt;list&gt; [1]
-#&gt; $ `named list`      &lt;named list&gt; [1]
-#&gt; $ factor            &lt;fct&gt; A
-#&gt; $ ordered           &lt;ord&gt; a
-#&gt; $ Date              &lt;date&gt; 2020-07-09
-#&gt; $ POSIXt            &lt;dttm&gt; 2020-07-09 19:24:41
-#&gt; $ difftime          &lt;drtn&gt; 1 secs
-#&gt; $ hms               &lt;time&gt; 00:00:01
-#&gt; $ integer64         &lt;int64&gt; 10000000000
-#&gt; $ blob              &lt;blob&gt; [00]
-#&gt; $ data.frame        &lt;df[,1]&gt; &lt;data.frame[1 x 1]&gt;
-#&gt; $ tbl_df            &lt;tibble&gt; &lt;tbl_df[1 x 1]&gt;
-#&gt; $ AsIs              &lt;I&lt;int&gt;&gt; 1
-#&gt; $ unspecified       &lt;???&gt; NA
-#&gt; $ vctrs_list_of     &lt;list&lt;int&gt;&gt; [1]
-#&gt; $ vctrs_vctr        &lt;vctrs_vc&gt; 1
-#&gt; $ vctrs_unspecified &lt;???&gt; NA
-#&gt; $ quosures          &lt;quos&gt; [~1]</code></pre>
+#&gt; Columns: 23
+#&gt; $ logical       &lt;lgl&gt; TRUE
+#&gt; $ integer       &lt;int&gt; 1
+#&gt; $ double        &lt;dbl&gt; 1.5
+#&gt; $ character     &lt;chr&gt; "A"
+#&gt; $ complex       &lt;cpl&gt; 0+1i
+#&gt; $ raw           &lt;raw&gt; 01
+#&gt; $ list          &lt;list&gt; [1]
+#&gt; $ `named list`  &lt;named list&gt; [1]
+#&gt; $ factor        &lt;fct&gt; A
+#&gt; $ ordered       &lt;ord&gt; a
+#&gt; $ Date          &lt;date&gt; 2020-07-20
+#&gt; $ POSIXt        &lt;dttm&gt; 2020-07-20 02:58:27
+#&gt; $ difftime      &lt;drtn&gt; 1 secs
+#&gt; $ hms           &lt;time&gt; 00:00:01
+#&gt; $ integer64     &lt;int64&gt; 10000000000
+#&gt; $ blob          &lt;blob&gt; [00]
+#&gt; $ data.frame    &lt;df[,1]&gt; &lt;data.frame[1 x 1]&gt;
+#&gt; $ tbl_df        &lt;tibble&gt; &lt;tbl_df[1 x 1]&gt;
+#&gt; $ AsIs          &lt;I&lt;int&gt;&gt; 1
+#&gt; $ unspecified   &lt;???&gt; NA
+#&gt; $ vctrs_list_of &lt;list&lt;int&gt;&gt; [1]
+#&gt; $ vctrs_vctr    &lt;vctrs_vc&gt; 1
+#&gt; $ quosures      &lt;quos&gt; [~1]</code></pre>
+</div>
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
 <p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">pillar</span><span class="kw ns">:::</span><span class="no">type_sum.default</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">pillar</span>:::<span class="kw">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
-<span class="co">#&gt;     if (is.object(x) || vec_is(x)) </span>
+<span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) </span>
 <span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
 <span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
 <span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
@@ -376,8 +380,9 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x4f80a78&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></body></html></div>
+<span class="co">#&gt; &lt;bytecode: 0x7ffc13ee59c8&gt;</span>
+<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span>
+</pre></div>
 </div>
   </div>
 

@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tibble" class="section level1">
+<div id="tibble-" class="section level1">
 
 
 <div id="overview" class="section level2">
@@ -148,7 +148,8 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># The easiest way to get tibble is to install the whole tidyverse:</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># The easiest way to get tibble is to install the whole tidyverse:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidyverse"</span>)
 
 <span class="co"># Alternatively, install just tibble:</span>
@@ -156,14 +157,16 @@
 
 <span class="co"># Or the the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidyverse/tibble"</span>)</pre></div>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"tidyverse/tibble"</span>)
+</pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Create a tibble from an existing object with <code><a href="reference/as_tibble.html">as_tibble()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
-<span class="fu"><a href="reference/as_tibble.html">as_tibble</a></span>(<span class="no">iris</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org">tibble</a></span>)
+<span class="fu"><a href="reference/as_tibble.html">as_tibble</a></span>(<span class="kw">iris</span>)
 <span class="co">#&gt; # A tibble: 150 x 5</span>
 <span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
 <span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span>
@@ -177,10 +180,12 @@
 <span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa </span>
 <span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa </span>
 <span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa </span>
-<span class="co">#&gt; # … with 140 more rows</span></pre></div>
+<span class="co">#&gt; # … with 140 more rows</span>
+</pre></div>
 <p>This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.</p>
 <p>You can also create a new tibble from column vectors with <code><a href="reference/tibble.html">tibble()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/tibble.html">tibble</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">5</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">z</span> <span class="kw">=</span> <span class="no">x</span> ^ <span class="fl">2</span> + <span class="no">y</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="reference/tibble.html">tibble</a></span>(x = <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y = <span class="fl">1</span>, z = <span class="kw">x</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">+</span> <span class="kw">y</span>)
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;       x     y     z</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -188,11 +193,13 @@
 <span class="co">#&gt; 2     2     1     5</span>
 <span class="co">#&gt; 3     3     1    10</span>
 <span class="co">#&gt; 4     4     1    17</span>
-<span class="co">#&gt; 5     5     1    26</span></pre></div>
+<span class="co">#&gt; 5     5     1    26</span>
+</pre></div>
 <p><code><a href="reference/tibble.html">tibble()</a></code> does much less than <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <code><a href="https://rdrr.io/r/base/row.names.html">row.names()</a></code>. You can read more about these features in the vignette, <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
 <p>You can define a tibble row-by-row with <code><a href="reference/tribble.html">tribble()</a></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/tribble.html">tribble</a></span>(
-  ~<span class="no">x</span>, ~<span class="no">y</span>,  ~<span class="no">z</span>,
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="reference/tribble.html">tribble</a></span>(
+  <span class="op">~</span><span class="kw">x</span>, <span class="op">~</span><span class="kw">y</span>,  <span class="op">~</span><span class="kw">z</span>,
   <span class="st">"a"</span>, <span class="fl">2</span>,  <span class="fl">3.6</span>,
   <span class="st">"b"</span>, <span class="fl">1</span>,  <span class="fl">8.5</span>
 )
@@ -200,7 +207,8 @@
 <span class="co">#&gt;   x         y     z</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a         2   3.6</span>
-<span class="co">#&gt; 2 b         1   8.5</span></pre></div>
+<span class="co">#&gt; 2 b         1   8.5</span>
+</pre></div>
 </div>
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">

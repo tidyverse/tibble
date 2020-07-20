@@ -113,7 +113,7 @@ remove any existing row names." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
         </div>
       </div>
     </div>
@@ -203,29 +203,29 @@ remove any existing row names." />
 
     <div class="ref-description">
     <p>While a tibble can have row names (e.g., when converting from a regular data
-frame), they are removed when subsetting with the <code>[</code> operator.
+frame), they are removed when subsetting with the <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> operator.
 A warning will be raised when attempting to assign non-<code>NULL</code> row names
 to a tibble.
 Generally, it is best to avoid row names, because they are basically a
 character column with different semantics than every other column.</p>
 <p>These functions allow to you detect if a data frame has row names
-(<code>has_rownames()</code>), remove them (<code>remove_rownames()</code>), or convert
-them back-and-forth between an explicit column (<code>rownames_to_column()</code>
-and <code>column_to_rownames()</code>).
-Also included is <code>rowid_to_column()</code>, which adds a column at the start of the
+(<code><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames()</a></code>), remove them (<code><a href='https://tibble.tidyverse.org/reference/rownames.html'>remove_rownames()</a></code>), or convert
+them back-and-forth between an explicit column (<code><a href='https://tibble.tidyverse.org/reference/rownames.html'>rownames_to_column()</a></code>
+and <code><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames()</a></code>).
+Also included is <code><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column()</a></code>, which adds a column at the start of the
 dataframe of ascending sequential row ids starting at 1. Note that this will
 remove any existing row names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>has_rownames</span>(<span class='no'>.data</span>)
+    <pre class="usage"><span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames</a></span>(<span class='kw'>.data</span>)
 
-<span class='fu'>remove_rownames</span>(<span class='no'>.data</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>remove_rownames</a></span>(<span class='kw'>.data</span>)
 
-<span class='fu'>rownames_to_column</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rownames_to_column</a></span>(<span class='kw'>.data</span>, var = <span class='st'>"rowname"</span>)
 
-<span class='fu'>rowid_to_column</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowid"</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span>(<span class='kw'>.data</span>, var = <span class='st'>"rowid"</span>)
 
-<span class='fu'>column_to_rownames</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"rowname"</span>)</pre>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames</a></span>(<span class='kw'>.data</span>, var = <span class='st'>"rowname"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,31 +242,31 @@ remove any existing row names.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>column_to_rownames()</code> always returns a data frame.
-<code>has_rownames()</code> returns a scalar logical.
+    <p><code><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames()</a></code> always returns a data frame.
+<code><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames()</a></code> returns a scalar logical.
 All other functions return an object of the same class as the input.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Detect row names ----------------------------------------------------</span>
-<span class='fu'>has_rownames</span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_rownames</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames</a></span>(<span class='kw'>mtcars</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames</a></span>(<span class='kw'>iris</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='co'># Remove row names ----------------------------------------------------</span>
-<span class='fu'>remove_rownames</span>(<span class='no'>mtcars</span>) <span class='kw'>%&gt;%</span> <span class='fu'>has_rownames</span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>remove_rownames</a></span>(<span class='kw'>mtcars</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>has_rownames</a></span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='co'># Convert between row names and column --------------------------------</span>
-<span class='no'>mtcars_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>rownames_to_column</span>(<span class='no'>mtcars</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"car"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='as_tibble.html'>as_tibble</a></span>()
-<span class='no'>mtcars_tbl</span></div><div class='output co'>#&gt; # A tibble: 32 x 12
+<span class='kw'>mtcars_tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rownames_to_column</a></span>(<span class='kw'>mtcars</span>, var = <span class='st'>"car"</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>()
+<span class='kw'>mtcars_tbl</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 12</span><span>
 #&gt;    car           mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt;  2 Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt;  3 Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt;  4 Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt;  5 Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt;  6 Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt;  7 Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt;  8 Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt;  9 Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; 10 Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows</div><div class='input'><span class='fu'>column_to_rownames</span>(<span class='no'>mtcars_tbl</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"car"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 2</span><span> Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 3</span><span> Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'> 4</span><span> Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 5</span><span> Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+#&gt; </span><span style='color: #555555;'> 6</span><span> Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 7</span><span> Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+#&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+#&gt; </span><span style='color: #555555;'> 9</span><span> Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+#&gt; </span><span style='color: #555555;'>10</span><span> Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames</a></span>(<span class='kw'>mtcars_tbl</span>, var = <span class='st'>"car"</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 #&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
 #&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
@@ -274,14 +274,13 @@ All other functions return an object of the same class as the input.</p>
 #&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 #&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'>
 <span class='co'># Adding rowid as a column --------------------------------------------</span>
-<span class='fu'>rowid_to_column</span>(<span class='no'>iris</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span>(<span class='kw'>iris</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1     1          5.1         3.5          1.4         0.2  setosa
 #&gt; 2     2          4.9         3.0          1.4         0.2  setosa
 #&gt; 3     3          4.7         3.2          1.3         0.2  setosa
 #&gt; 4     4          4.6         3.1          1.5         0.2  setosa
 #&gt; 5     5          5.0         3.6          1.4         0.2  setosa
-#&gt; 6     6          5.4         3.9          1.7         0.4  setosa</div><div class='input'>
-</div></pre>
+#&gt; 6     6          5.4         3.9          1.7         0.4  setosa</div><div class='input'></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
