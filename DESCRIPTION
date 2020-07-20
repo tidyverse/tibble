@@ -63,7 +63,7 @@ Suggests:
     tidyr,
     withr
 Remotes: 
-    r-lib/vctrs#1194
+    r-lib/vctrs
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
