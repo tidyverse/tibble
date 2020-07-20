@@ -32,6 +32,13 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Configure Git identity
+        run: |
+          env | sort
+          git config --global user.name "$GITHUB_WORKFLOW"
+          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
+        shell: bash
+
       - name: Install dependencies
         run: |
           install.packages("remotes")

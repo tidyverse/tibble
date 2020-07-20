@@ -12,6 +12,12 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "$GITHUB_WORKFLOW"
+          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
+        shell: bash
+
       - name: Install dependencies
         run: |
           install.packages("remotes")
