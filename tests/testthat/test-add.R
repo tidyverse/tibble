@@ -137,6 +137,16 @@ test_that("add_row() fails nicely for grouped data frames (#179)", {
   )
 })
 
+test_that("add_row() works when adding zero row input (#809)", {
+  x <- tibble(x = 1, y = 2)
+  y <- tibble(y = double())
+
+  expect_identical(add_row(x, x = double()), x)
+  expect_identical(add_row(x, y), x)
+  expect_identical(add_row(x, NULL), x)
+  expect_identical(add_row(x, ), x)
+})
+
 # add_column ------------------------------------------------------------
 
 test_that("can add new column", {
