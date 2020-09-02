@@ -36,7 +36,9 @@ test_that("add_row() keeps class of object when adding in the beginning", {
 })
 
 test_that("adds empty row if no arguments", {
-  new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
+  iris1 <- add_row(iris)
+  expect_equal(nrow(iris1), nrow(iris) + 1)
+  new_iris_row <- iris1[nrow(iris1), , drop = TRUE]
   expect_true(all(is.na(new_iris_row)))
 })
 
