@@ -170,6 +170,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://vctrs.r-lib.org">vctrs</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org">tibble</a></span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'tibble'</span>
+<span class="co">#&gt; The following object is masked from 'package:vctrs':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     data_frame</span>
 <span class="kw">new_df</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(n = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1L</span>, <span class="fl">NA</span>, <span class="fl">3L</span>, <span class="fl">NA</span>))
   <span class="kw">df</span><span class="op">$</span><span class="kw">c</span> <span class="op">&lt;-</span> <span class="kw">letters</span>[<span class="fl">5</span><span class="op">:</span><span class="fl">8</span>]

@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.5.1.9000
 pkgdown_sha: c37e563eaef054183e04defce8fb01321590fb5e
 articles: []
-last_built: 2020-07-21T07:24Z
+last_built: 2020-09-02T03:04Z
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles
