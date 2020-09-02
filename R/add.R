@@ -48,8 +48,12 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
     deprecate_warn("2.1.1", "add_row(.data = 'must be a data frame')")
   }
 
-  df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
+  if (dots_n(...) == 0L) {
+    # A single row of missing values is added if no input is supplied
+    df <- new_tibble(list(), nrow = 1L)
+  } else {
+    df <- tibble(...)
+  }
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
