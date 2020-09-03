@@ -62,11 +62,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          library(remotes)
-          deps <- remotes::dev_package_deps(dependencies = TRUE)
-          update(deps)
-          lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
-          remotes::install_cran('rcmdcheck')
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
+          remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
       - name: Session info
