@@ -293,8 +293,7 @@
 </ul>
 <p>If you implement a class that wraps a list as S3 vector, you need to include <code>"list"</code> in the class:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="kw">x</span>, class = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"your_s3_class"</span>, <span class="st">"list"</span>))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="kw">x</span>, class = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"your_s3_class"</span>, <span class="st">"list"</span>))</pre></div>
 <p>Alternatively, implement a <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html">vec_proxy()</a></code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code><a href="https://vctrs.r-lib.org/reference/list_of.html">list_of()</a></code>.</p>
 </li>
 <li>
@@ -340,8 +339,7 @@
   <span class="fu">your_code</span>(),
   tibble_error = <span class="fu">function</span>(<span class="kw">cnd</span>) {
   }
-)
-</pre></div>
+)</pre></div>
 </li>
 <li><p>New <code><a href="../reference/tibble.html">tibble_row()</a></code> constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (<a href='https://github.com/tidyverse/tibble/issues/205'>#205</a>).</p></li>
 <li><p>New <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> convert a bare vector to a one-row or one-column tibble, respectively. <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> also works for non-bare vectors. Using <code><a href="../reference/as_tibble.html">as_tibble()</a></code> for bare vectors is superseded (<a href='https://github.com/tidyverse/tibble/issues/447'>#447</a>).</p></li>
@@ -538,7 +536,7 @@
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> is now faster for very wide tibbles.</p></li>
 <li><p>Subsetting with the <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> operator is faster (<a href='https://github.com/tidyverse/tibble/issues/544'>#544</a>).</p></li>
 <li><p>Avoid use of <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> in examples if packages are not installed (<a href='https://github.com/tidyverse/tibble/issues/453'>#453</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
-<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code>requireNamespace()</code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
+<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> checks column length only once (<a href='https://github.com/tidyverse/tibble/issues/365'>#365</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
 <li><p>Using <code><a href="https://rlang.r-lib.org/reference/list2.html">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
 </ul>
