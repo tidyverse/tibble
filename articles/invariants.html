@@ -167,8 +167,13 @@
 <a href="#conventions" class="anchor"></a>Conventions</h2>
 <p>In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://vctrs.r-lib.org">vctrs</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org">tibble</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://vctrs.r-lib.org/">vctrs</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org/">tibble</a></span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'tibble'</span>
+<span class="co">#&gt; The following object is masked from 'package:vctrs':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     data_frame</span>
 <span class="kw">new_df</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(n = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1L</span>, <span class="fl">NA</span>, <span class="fl">3L</span>, <span class="fl">NA</span>))
   <span class="kw">df</span><span class="op">$</span><span class="kw">c</span> <span class="op">&lt;-</span> <span class="kw">letters</span>[<span class="fl">5</span><span class="op">:</span><span class="fl">8</span>]
@@ -177,8 +182,7 @@
 }
 <span class="kw">new_tbl</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="fu"><a href="../reference/as_tibble.html">as_tibble</a></span>(<span class="fu">new_df</span>())
-}
-</pre></div>
+}</pre></div>
 <p>Results of the same code for data frames and tibbles are presented side by side:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
@@ -188,8 +192,7 @@
 <span class="co">#&gt; 1  1 e          9</span>
 <span class="co">#&gt; 2 NA f     10, 11</span>
 <span class="co">#&gt; 3  3 g 12, 13, 14</span>
-<span class="co">#&gt; 4 NA h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb3"><pre class="downlit">
@@ -200,16 +203,14 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>If the results are identical (after converting to a data frame if necessary), only the tibble result is shown.</p>
 <p>Subsetting operations are read-only. The same objects are reused in all examples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu">new_df</span>()
-<span class="kw">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span>()
-</pre></div>
+<span class="kw">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span>()</pre></div>
 <p>Where needed, we also show examples with hierarchical columns containing a data frame or a matrix:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">new_tbl2</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
@@ -225,8 +226,7 @@
   <span class="kw">df2</span>
 }
 <span class="kw">df2</span> <span class="op">&lt;-</span> <span class="fu">new_df2</span>()
-<span class="kw">tbl2</span> <span class="op">&lt;-</span> <span class="fu">new_tbl2</span>()
-</pre></div>
+<span class="kw">tbl2</span> <span class="op">&lt;-</span> <span class="fu">new_tbl2</span>()</pre></div>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -239,8 +239,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>For subset assignment (subassignment, for short), we need a fresh copy of the data for each test. The <code>with_*()</code> functions (omitted here for brevity) allow for a more concise notation. These functions take an assignment expression, execute it on a fresh copy of the data, and return the data for printing. The first example prints what’s really executed, further examples omit this output.</p>
@@ -257,8 +256,7 @@
 <span class="co">#&gt; 1 NA e          9</span>
 <span class="co">#&gt; 2  3 f     10, 11</span>
 <span class="co">#&gt; 3 NA g 12, 13, 14</span>
-<span class="co">#&gt; 4  1 h       text</span>
-</pre></div>
+<span class="co">#&gt; 4  1 h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb8"><pre class="downlit">
@@ -274,8 +272,7 @@
 <span class="co">#&gt; 1    NA e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3    NA g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -294,8 +291,7 @@
 <td>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">tbl</span>[[<span class="fl">1</span>]]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -304,8 +300,7 @@
 <td>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/base-internal.html">.subset2</a></span>(<span class="kw">tbl</span>, <span class="fl">1</span>)
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -316,13 +311,11 @@
 <td>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]]
-<span class="co">#&gt; [1] NA</span>
-</pre></div>
+<span class="co">#&gt; [1] NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]]</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: The `j` argument of
 #&gt; ``[[.tbl_df`()` can't be a vector of
@@ -336,8 +329,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="kw">df</span>[[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"n"</span>, <span class="st">"c"</span>)]]
-</pre></div>
+<span class="kw">df</span>[[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"n"</span>, <span class="st">"c"</span>)]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
 #&gt; subscript out of bounds</code></pre>
@@ -345,8 +337,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"n"</span>, <span class="st">"c"</span>)]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"n"</span>, <span class="st">"c"</span>)]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -359,13 +350,11 @@
 <td>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">TRUE</span>]]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">TRUE</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">TRUE</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -378,8 +367,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="kw">df</span>[[<span class="kw">mean</span>]]
-</pre></div>
+<span class="kw">df</span>[[<span class="kw">mean</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
 #&gt; invalid subscript type 'closure'</code></pre>
@@ -387,8 +375,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb24"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="kw">mean</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="kw">mean</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -405,13 +392,11 @@
 <td>
 <div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">NA</span>]]
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb27"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">NA</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">NA</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -423,13 +408,11 @@
 <td>
 <div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">NA_character_</span>]]
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb30"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">NA_character_</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">NA_character_</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -442,13 +425,11 @@
 <td>
 <div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">NA_integer_</span>]]
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb33"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">NA_integer_</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">NA_integer_</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -459,8 +440,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb35"><pre class="downlit">
-<span class="kw">df</span>[[<span class="op">-</span><span class="fl">1</span>]]
-</pre></div>
+<span class="kw">df</span>[[<span class="op">-</span><span class="fl">1</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
 #&gt; invalid negative subscript in get1index
@@ -469,8 +449,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb37"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="op">-</span><span class="fl">1</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="op">-</span><span class="fl">1</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -482,8 +461,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb39"><pre class="downlit">
-<span class="kw">df</span>[[<span class="fl">4</span>]]
-</pre></div>
+<span class="kw">df</span>[[<span class="fl">4</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
 #&gt; subscript out of bounds</code></pre>
@@ -491,8 +469,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb41"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">4</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">4</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't subset columns that don't
 #&gt; exist.
@@ -505,13 +482,11 @@
 <td>
 <div class="sourceCode" id="cb43"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">1.5</span>]]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb44"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">1.5</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">1.5</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -524,13 +499,11 @@
 <td>
 <div class="sourceCode" id="cb46"><pre class="downlit">
 <span class="kw">df</span>[[<span class="fl">Inf</span>]]
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb47"><pre class="downlit">
-<span class="kw">tbl</span>[[<span class="fl">Inf</span>]]
-</pre></div>
+<span class="kw">tbl</span>[[<span class="fl">Inf</span>]]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -547,8 +520,7 @@
 <td>
 <div class="sourceCode" id="cb49"><pre class="downlit">
 <span class="kw">tbl</span>[[<span class="st">"x"</span>]]
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -564,8 +536,7 @@
 <td>
 <div class="sourceCode" id="cb50"><pre class="downlit">
 <span class="kw">tbl</span><span class="op">$</span><span class="kw">n</span>
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -574,8 +545,7 @@
 <td>
 <div class="sourceCode" id="cb51"><pre class="downlit">
 <span class="kw">tbl</span><span class="op">$</span><span class="st">"n"</span>
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -584,8 +554,7 @@
 <td>
 <div class="sourceCode" id="cb52"><pre class="downlit">
 <span class="kw">tbl</span>[[<span class="st">"n"</span>]]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -605,13 +574,11 @@
 <span class="co">#&gt; [1] 12 13 14</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span>
-</pre></div>
+<span class="co">#&gt; [1] "text"</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb54"><pre class="downlit">
-<span class="kw">tbl</span><span class="op">$</span><span class="kw">l</span>
-</pre></div>
+<span class="kw">tbl</span><span class="op">$</span><span class="kw">l</span></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Unknown or uninitialised
 #&gt; column: `l`.</code></pre>
@@ -623,13 +590,11 @@
 <td>
 <div class="sourceCode" id="cb57"><pre class="downlit">
 <span class="kw">df</span><span class="op">$</span><span class="kw">not_present</span>
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb58"><pre class="downlit">
-<span class="kw">tbl</span><span class="op">$</span><span class="kw">not_present</span>
-</pre></div>
+<span class="kw">tbl</span><span class="op">$</span><span class="kw">not_present</span></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: Unknown or uninitialised
 #&gt; column: `not_present`.</code></pre>
@@ -660,8 +625,7 @@
 <span class="co">#&gt; 1     1 e    </span>
 <span class="co">#&gt; 2    NA f    </span>
 <span class="co">#&gt; 3     3 g    </span>
-<span class="co">#&gt; 4    NA h</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>When subsetting repeated indexes, the resulting column names are undefined, do not rely on them.</p>
@@ -673,8 +637,7 @@
 <span class="co">#&gt; 1  1   1</span>
 <span class="co">#&gt; 2 NA  NA</span>
 <span class="co">#&gt; 3  3   3</span>
-<span class="co">#&gt; 4 NA  NA</span>
-</pre></div>
+<span class="co">#&gt; 4 NA  NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb63"><pre class="downlit">
@@ -685,8 +648,7 @@
 <span class="co">#&gt; 1     1     1</span>
 <span class="co">#&gt; 2    NA    NA</span>
 <span class="co">#&gt; 3     3     3</span>
-<span class="co">#&gt; 4    NA    NA</span>
-</pre></div>
+<span class="co">#&gt; 4    NA    NA</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>For tibbles with repeated column names, subsetting by name uses the first matching column.</p>
@@ -697,8 +659,7 @@
 <td>
 <div class="sourceCode" id="cb64"><pre class="downlit">
 <span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()]
-<span class="co">#&gt; # A tibble: 4 x 0</span>
-</pre></div>
+<span class="co">#&gt; # A tibble: 4 x 0</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>Tibbles support indexing by a logical matrix, but only if all values in the returned vector are compatible.</p>
@@ -711,14 +672,12 @@
 <span class="co">#&gt; [1] NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] NA</span>
-</pre></div>
+<span class="co">#&gt; [1] NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit">
 <span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">tbl</span>)]
-<span class="co">#&gt; [1] NA NA</span>
-</pre></div>
+<span class="co">#&gt; [1] NA NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -753,13 +712,11 @@
 <span class="co">#&gt; [1] 12 13 14</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[10]]</span>
-<span class="co">#&gt; [1] "text"</span>
-</pre></div>
+<span class="co">#&gt; [1] "text"</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb68"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">tbl</span>)]
-</pre></div>
+<span class="kw">tbl</span>[<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">tbl</span>)]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't combine `n` &lt;integer&gt; and
 #&gt; `c` &lt;character&gt;.</code></pre>
@@ -778,8 +735,7 @@
 <td>
 <div class="sourceCode" id="cb70"><pre class="downlit">
 <span class="kw">df</span>[, <span class="fl">1</span>]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb71"><pre class="downlit">
@@ -790,8 +746,7 @@
 <span class="co">#&gt; 1     1</span>
 <span class="co">#&gt; 2    NA</span>
 <span class="co">#&gt; 3     3</span>
-<span class="co">#&gt; 4    NA</span>
-</pre></div>
+<span class="co">#&gt; 4    NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -806,8 +761,7 @@
 <span class="co">#&gt; 1     1 e    </span>
 <span class="co">#&gt; 2    NA f    </span>
 <span class="co">#&gt; 3     3 g    </span>
-<span class="co">#&gt; 4    NA h</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -823,8 +777,7 @@
 <td>
 <div class="sourceCode" id="cb73"><pre class="downlit">
 <span class="kw">tbl</span>[, <span class="fl">1</span>, drop = <span class="fl">TRUE</span>]
-<span class="co">#&gt; [1]  1 NA  3 NA</span>
-</pre></div>
+<span class="co">#&gt; [1]  1 NA  3 NA</span></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -846,8 +799,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     3 g     &lt;int [3]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 1     3 g     &lt;int [3]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 <p>This means that <code>i</code> must be a numeric vector, or a logical vector of length <code><a href="https://rdrr.io/r/base/nrow.html">nrow(x)</a></code> or 1. For compatibility, <code>i</code> can also be a character vector containing positive numbers.</p>
@@ -855,8 +807,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb75"><pre class="downlit">
-<span class="kw">df</span>[<span class="kw">mean</span>, ]
-</pre></div>
+<span class="kw">df</span>[<span class="kw">mean</span>, ]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in xj[i]: invalid subscript type
 #&gt; 'closure'</code></pre>
@@ -864,8 +815,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb77"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="kw">mean</span>, ]
-</pre></div>
+<span class="kw">tbl</span>[<span class="kw">mean</span>, ]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -879,8 +829,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb79"><pre class="downlit">
-<span class="kw">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>), ]
-</pre></div>
+<span class="kw">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>), ]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in xj[i]: invalid subscript type
 #&gt; 'list'</code></pre>
@@ -888,8 +837,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb81"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>), ]
-</pre></div>
+<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>), ]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -909,8 +857,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -921,13 +868,11 @@
 <div class="sourceCode" id="cb84"><pre class="downlit">
 <span class="kw">df</span>[<span class="fl">10</span>, ]
 <span class="co">#&gt;     n    c   li</span>
-<span class="co">#&gt; NA NA &lt;NA&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="fl">10</span>, ]
-</pre></div>
+<span class="kw">tbl</span>[<span class="fl">10</span>, ]</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: The `i` argument of
 #&gt; ``[.tbl_df`()` must lie in [0, rows] if
@@ -946,13 +891,11 @@
 <div class="sourceCode" id="cb88"><pre class="downlit">
 <span class="kw">df</span>[<span class="st">"x"</span>, ]
 <span class="co">#&gt;     n    c   li</span>
-<span class="co">#&gt; NA NA &lt;NA&gt; NULL</span>
-</pre></div>
+<span class="co">#&gt; NA NA &lt;NA&gt; NULL</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb89"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="st">"x"</span>, ]
-</pre></div>
+<span class="kw">tbl</span>[<span class="st">"x"</span>, ]</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning: The `i` argument of
 #&gt; ``[.tbl_df`()` must use valid row names
@@ -974,13 +917,11 @@
 <span class="kw">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 1 e          9</span>
-<span class="co">#&gt; 3 3 g 12, 13, 14</span>
-</pre></div>
+<span class="co">#&gt; 3 3 g 12, 13, 14</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb93"><pre class="downlit">
-<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]
-</pre></div>
+<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>), ]</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1005,8 +946,7 @@
 <span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span>
 <span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;</span>
 <span class="co">#&gt; 3    NA &lt;NA&gt;  &lt;NULL&gt;</span>
-<span class="co">#&gt; 4    NA &lt;NA&gt;  &lt;NULL&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA &lt;NA&gt;  &lt;NULL&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1018,8 +958,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       n c     li    </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span>
-</pre></div>
+<span class="co">#&gt; 1    NA &lt;NA&gt;  &lt;NULL&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1041,8 +980,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $li</span>
 <span class="co">#&gt; $li[[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-</pre></div>
+<span class="co">#&gt; [1] 9</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb98"><pre class="downlit">
@@ -1050,8 +988,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 <!-- TODO: soft-deprecate -->
@@ -1081,8 +1018,7 @@
 <span class="kw">df</span>[[<span class="fl">1</span>, <span class="fl">1</span>]]
 <span class="co">#&gt; [1] 1</span>
 <span class="kw">df</span>[[<span class="fl">1</span>, <span class="fl">3</span>]]
-<span class="co">#&gt; [1] 9</span>
-</pre></div>
+<span class="co">#&gt; [1] 9</span></pre></div>
 <p>This implies that <code>j</code> must be a numeric or character vector of length 1.</p>
 <p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
 </div>
@@ -1109,15 +1045,13 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2    NA f     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;dbl [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;dbl [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit">
-<span class="fu">with_df2</span>(<span class="kw">df2</span>[[<span class="st">"tb"</span>]] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span>, ])
-</pre></div>
+<span class="fu">with_df2</span>(<span class="kw">df2</span>[[<span class="st">"tb"</span>]] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[[&lt;-.data.frame`(`*tmp*`,
 #&gt; "tb", value = structure(list(n = 1L, :
@@ -1134,15 +1068,13 @@
 <span class="co">#&gt; 2     1 e     &lt;dbl [1…     0     1     0</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1…     0     0     1</span>
 <span class="co">#&gt; 4     1 e     &lt;dbl [1…     0     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb104"><pre class="downlit">
-<span class="fu">with_df2</span>(<span class="kw">df2</span>[[<span class="st">"m"</span>]] <span class="op">&lt;-</span> <span class="kw">df2</span>[[<span class="st">"m"</span>]][<span class="fl">1</span>, , drop = <span class="fl">FALSE</span>])
-</pre></div>
+<span class="fu">with_df2</span>(<span class="kw">df2</span>[[<span class="st">"m"</span>]] <span class="op">&lt;-</span> <span class="kw">df2</span>[[<span class="st">"m"</span>]][<span class="fl">1</span>, , drop = <span class="fl">FALSE</span>])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[[&lt;-.data.frame`(`*tmp*`, "m",
 #&gt; value = structure(c(1, 0, 0, :
@@ -1159,8 +1091,7 @@
 <span class="co">#&gt; 2    NA f     &lt;int [2…     1     0     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3…     1     0     0</span>
 <span class="co">#&gt; 4    NA h     &lt;chr [1…     1     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1178,8 +1109,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     0</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1190,8 +1120,7 @@
 <span class="co">#&gt; 1  1 e          9  0</span>
 <span class="co">#&gt; 2 NA f     10, 11  0</span>
 <span class="co">#&gt; 3  3 g 12, 13, 14  0</span>
-<span class="co">#&gt; 4 NA h       text  0</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text  0</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb109"><pre class="downlit">
@@ -1202,15 +1131,13 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     0</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb110"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[[<span class="fl">5</span>]] <span class="op">&lt;-</span> <span class="fl">0</span>)
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[[<span class="fl">5</span>]] <span class="op">&lt;-</span> <span class="fl">0</span>)</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in format.data.frame(if (omit)
 #&gt; x[seq_len(n0), , drop = FALSE] else
@@ -1225,8 +1152,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb113"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[[<span class="fl">5</span>]] <span class="op">&lt;-</span> <span class="fl">0</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[[<span class="fl">5</span>]] <span class="op">&lt;-</span> <span class="fl">0</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't assign column 5 in a tibble
 #&gt; with 3 columns.</code></pre>
@@ -1256,8 +1182,7 @@
 <span class="co">#&gt; 1     0 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     0 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     0 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1272,8 +1197,7 @@
 <span class="co">#&gt; 1     0 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     0 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     0 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1291,8 +1215,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     0</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1307,8 +1230,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     0</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     0</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1340,8 +1262,7 @@
 <span class="co">#&gt; 1 x         4 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2 x         3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3 x         2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4 x         1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4 x         1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1356,8 +1277,7 @@
 <span class="co">#&gt; 1     1 x         4</span>
 <span class="co">#&gt; 2    NA x         3</span>
 <span class="co">#&gt; 3     3 x         2</span>
-<span class="co">#&gt; 4    NA x         1</span>
-</pre></div>
+<span class="co">#&gt; 4    NA x         1</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1375,15 +1295,13 @@
 <span class="co">#&gt; 1     1     1 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1     1 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     1     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb122"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>))
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>))</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 1:2, value = list(0, 0, 0)): provided 3
@@ -1397,8 +1315,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't recycle `list(0, 0, 0)`
 #&gt; (size 3) to size 2.</code></pre>
@@ -1413,13 +1330,11 @@
 <span class="co">#&gt; 1 0 0  0</span>
 <span class="co">#&gt; 2 0 0  0</span>
 <span class="co">#&gt; 3 0 0  0</span>
-<span class="co">#&gt; 4 0 0  0</span>
-</pre></div>
+<span class="co">#&gt; 4 0 0  0</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0</span>, <span class="fl">0</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't recycle `list(0, 0)` (size
 #&gt; 2) to size 3.</code></pre>
@@ -1431,8 +1346,7 @@
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb130"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>)] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>)] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, c(1,
 #&gt; 1), value = list(1, 2)): duplicate
@@ -1441,8 +1355,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb132"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>)] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>)] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Column index 1 is used more than
 #&gt; once for assignment.</code></pre>
@@ -1462,8 +1375,7 @@
 <span class="co">#&gt; 1     4 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 <p><code>NA</code> indexes are not supported.</p>
@@ -1482,8 +1394,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; x         4</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt; x         3</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt; x         2</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt; x         1</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt; x         1</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1498,8 +1409,7 @@
 <span class="co">#&gt; 1     1 e     x         4</span>
 <span class="co">#&gt; 2    NA f     x         3</span>
 <span class="co">#&gt; 3     3 g     x         2</span>
-<span class="co">#&gt; 4    NA h     x         1</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     x         1</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1510,8 +1420,7 @@
 <span class="co">#&gt; 1  1 e          9  4</span>
 <span class="co">#&gt; 2 NA f     10, 11  3</span>
 <span class="co">#&gt; 3  3 g 12, 13, 14  2</span>
-<span class="co">#&gt; 4 NA h       text  1</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text  1</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb138"><pre class="downlit">
@@ -1522,15 +1431,13 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     4</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     3</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     1</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;     1</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb139"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">5</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">4</span><span class="op">:</span><span class="fl">1</span>))
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">5</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">4</span><span class="op">:</span><span class="fl">1</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 5,
 #&gt; value = list(4:1)): new columns would
@@ -1539,8 +1446,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb141"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">5</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">4</span><span class="op">:</span><span class="fl">1</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">5</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">4</span><span class="op">:</span><span class="fl">1</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't assign column 5 in a tibble
 #&gt; with 3 columns.</code></pre>
@@ -1558,8 +1464,7 @@
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 2 4 f     10, 11</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
-<span class="co">#&gt; 4 4 h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 4 h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb144"><pre class="downlit">
@@ -1570,8 +1475,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     4 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1582,13 +1486,11 @@
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 2 1 f     10, 11</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
-<span class="co">#&gt; 4 2 h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 2 h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb146"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">tbl</span>)] <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">tbl</span>)] <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Subscript `is.na(tbl)` is a
 #&gt; matrix, the data `1:2` must have size 1.</code></pre>
@@ -1603,13 +1505,11 @@
 <span class="co">#&gt; 1 4 4          9</span>
 <span class="co">#&gt; 2 4 f     10, 11</span>
 <span class="co">#&gt; 3 4 g 12, 13, 14</span>
-<span class="co">#&gt; 4 4 h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 4 h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb149"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">TRUE</span>, <span class="fl">5</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">FALSE</span>, <span class="fl">7</span>)), ncol = <span class="fl">3</span>)] <span class="op">&lt;-</span> <span class="fl">4</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">TRUE</span>, <span class="fl">5</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">FALSE</span>, <span class="fl">7</span>)), ncol = <span class="fl">3</span>)] <span class="op">&lt;-</span> <span class="fl">4</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `4` must be
 #&gt; compatible with existing data.
@@ -1637,8 +1537,7 @@
 <span class="co">#&gt; 1     8     4 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     7     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     6     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     5     1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     5     1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1649,13 +1548,11 @@
 <span class="co">#&gt; 1  6 3          9</span>
 <span class="co">#&gt; 2  5 2     10, 11</span>
 <span class="co">#&gt; 3  4 1 12, 13, 14</span>
-<span class="co">#&gt; 4 NA h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb153"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol = <span class="fl">2</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol = <span class="fl">2</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `matrix(6:1, ncol =
 #&gt; 2)` must be compatible with existing
@@ -1678,8 +1575,7 @@
 <span class="co">#&gt; 1     4     4 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     3     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1694,8 +1590,7 @@
 <span class="co">#&gt; 1     8     4 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     7     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     6     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     5     1 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     5     1 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1706,13 +1601,11 @@
 <span class="co">#&gt; 1 8 4          9</span>
 <span class="co">#&gt; 2 7 3     10, 11</span>
 <span class="co">#&gt; 3 6 2 12, 13, 14</span>
-<span class="co">#&gt; 4 5 1       text</span>
-</pre></div>
+<span class="co">#&gt; 4 5 1       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb158"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span>)))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span>)))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `array(8:1, dim = c(2, 1, 4))`
 #&gt; must be a vector, a bare list, a data
@@ -1728,13 +1621,11 @@
 <span class="co">#&gt; 1 8 4          9</span>
 <span class="co">#&gt; 2 7 3     10, 11</span>
 <span class="co">#&gt; 3 6 2 12, 13, 14</span>
-<span class="co">#&gt; 4 5 1       text</span>
-</pre></div>
+<span class="co">#&gt; 4 5 1       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb161"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span>)))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span>(<span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span>)))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `array(8:1, dim = c(4, 1, 2))`
 #&gt; must be a vector, a bare list, a data
@@ -1761,8 +1652,7 @@
 <span class="co">#&gt; 1     0 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     0 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     0 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1777,8 +1667,7 @@
 <span class="co">#&gt; 1     0 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     0 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     0 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     0 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1796,8 +1685,7 @@
 <span class="co">#&gt; 1     1     5 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     2     6 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     7 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     8 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     4     8 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1818,8 +1706,7 @@
 <span class="co">#&gt; 1     1     5     1     5 &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     2     6     2     6 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     7     3     7 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     8     4     8 &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4     4     8     4     8 &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1842,8 +1729,7 @@
 <span class="co">#&gt; 1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4 h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1858,15 +1744,13 @@
 <span class="co">#&gt; 1     1</span>
 <span class="co">#&gt; 2    NA</span>
 <span class="co">#&gt; 3     3</span>
-<span class="co">#&gt; 4    NA</span>
-</pre></div>
+<span class="co">#&gt; 4    NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb169"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
 #&gt; replacement has length zero</code></pre>
@@ -1874,8 +1758,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb171"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `NULL` must be a vector, a bare
 #&gt; list, a data frame or a matrix.</code></pre>
@@ -1892,8 +1775,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb173"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">mean</span>)
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">mean</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in rep(value, length.out = n):
 #&gt; attempt to replicate an object of type
@@ -1902,8 +1784,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb175"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">mean</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">mean</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `mean` must be a vector, a bare
 #&gt; list, a data frame, a matrix, or NULL.</code></pre>
@@ -1913,8 +1794,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb177"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span>, data = <span class="kw">mtcars</span>))
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span>, data = <span class="kw">mtcars</span>))</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 1, value = structure(list(coefficients
@@ -1953,8 +1833,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb183"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span>, data = <span class="kw">mtcars</span>))
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span>, data = <span class="kw">mtcars</span>))</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `lm(mpg ~ wt, data = mtcars)`
 #&gt; must be a vector, a bare list, a data
@@ -1984,8 +1863,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2000,8 +1878,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2019,8 +1896,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2035,15 +1911,13 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     1 f     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb189"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, ] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ])
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, ] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 2:4,
 #&gt; , value = structure(list(n = c(1L, :
@@ -2052,8 +1926,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb191"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `tbl[1:2, ]` must
 #&gt; be compatible with row subscript `2:4`.
@@ -2079,8 +1952,7 @@
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2098,8 +1970,7 @@
 <span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
 <span class="co">#&gt; 5     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 6     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 7     1 e     &lt;dbl [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 7     1 e     &lt;dbl [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2112,13 +1983,11 @@
 <span class="co">#&gt; 3  3    g 12, 13, 14</span>
 <span class="co">#&gt; 4 NA    h       text</span>
 <span class="co">#&gt; 5 NA &lt;NA&gt;       NULL</span>
-<span class="co">#&gt; 6  1    e          9</span>
-</pre></div>
+<span class="co">#&gt; 6  1    e          9</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb196"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">6</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">6</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't assign row 6 in a tibble
 #&gt; with 4 rows.</code></pre>
@@ -2133,13 +2002,11 @@
 <span class="co">#&gt; 1 1 e  9</span>
 <span class="co">#&gt; 2 1 e  9</span>
 <span class="co">#&gt; 3 1 e  9</span>
-<span class="co">#&gt; 4 1 e  9</span>
-</pre></div>
+<span class="co">#&gt; 4 1 e  9</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb199"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span><span class="fl">5</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span><span class="fl">5</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
@@ -2156,13 +2023,11 @@
 <span class="co">#&gt; 1 1 e  9</span>
 <span class="co">#&gt; 2 1 e  9</span>
 <span class="co">#&gt; 3 1 e  9</span>
-<span class="co">#&gt; 4 1 e  9</span>
-</pre></div>
+<span class="co">#&gt; 4 1 e  9</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb202"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span>(<span class="fl">5</span><span class="op">:</span><span class="fl">7</span>), ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span>(<span class="fl">5</span><span class="op">:</span><span class="fl">7</span>), ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
@@ -2179,13 +2044,11 @@
 <span class="co">#&gt; 1 1 e  9</span>
 <span class="co">#&gt; 2 1 e  9</span>
 <span class="co">#&gt; 3 1 e  9</span>
-<span class="co">#&gt; 4 1 e  9</span>
-</pre></div>
+<span class="co">#&gt; 4 1 e  9</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb205"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span><span class="fl">6</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="op">-</span><span class="fl">6</span>, ] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span>, ])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't negate rows that don't
 #&gt; exist.
@@ -2208,8 +2071,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -2231,13 +2093,11 @@
 <span class="co">#&gt; 1    1 e          9</span>
 <span class="co">#&gt; 2    e f     10, 11</span>
 <span class="co">#&gt; 3    f g 12, 13, 14</span>
-<span class="co">#&gt; 4 &lt;NA&gt; h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 &lt;NA&gt; h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb209"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `tbl[1:2, 2]` must
 #&gt; be compatible with existing data.
@@ -2250,8 +2110,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb211"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span>] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span>])
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span>] <span class="op">&lt;-</span> <span class="kw">df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span>])</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2:3, 2, value = list(9, 10:11)):
@@ -2266,8 +2125,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb214"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span>] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span>])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span>] <span class="op">&lt;-</span> <span class="kw">tbl</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span>])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `tbl[1:2, 3]` must
 #&gt; be compatible with existing data.
@@ -2279,8 +2137,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb216"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">df2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span>])
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">df2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span>])</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 2:3, 3, value = structure(list(n =
@@ -2295,8 +2152,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb219"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">tbl2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span>])
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">tbl2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span>])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Internal error in
 #&gt; `df_cast_opts()`: Data frame must have
@@ -2307,8 +2163,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb221"><pre class="downlit">
-<span class="fu">with_df2</span>(<span class="kw">df2</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">df2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])
-</pre></div>
+<span class="fu">with_df2</span>(<span class="kw">df2</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">df2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])</pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in matrix(value, n, p): data
 #&gt; length [8] is not a sub-multiple or
@@ -2322,8 +2177,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb224"><pre class="downlit">
-<span class="fu">with_tbl2</span>(<span class="kw">tbl2</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">tbl2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])
-</pre></div>
+<span class="fu">with_tbl2</span>(<span class="kw">tbl2</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">tbl2</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span>])</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `tbl2[1:2, 2]` must
 #&gt; be compatible with existing data.
@@ -2346,8 +2200,7 @@
 <span class="co">#&gt; 2    NA f     &lt;int [2…     1     1     1</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3…    NA    NA    NA</span>
 <span class="co">#&gt; 4    NA h     &lt;chr [1…     0     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2361,13 +2214,11 @@
 <span class="co">#&gt; 1  1 e          9 NA</span>
 <span class="co">#&gt; 2 NA f     10, 11  3</span>
 <span class="co">#&gt; 3  3 g 12, 13, 14  2</span>
-<span class="co">#&gt; 4 NA h       text NA</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text NA</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb228"><pre class="downlit">
-<span class="fu">with_tbl</span>({<span class="kw">tbl</span><span class="op">$</span><span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">NA</span>; <span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"x"</span>] <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">2</span>})
-</pre></div>
+<span class="fu">with_tbl</span>({<span class="kw">tbl</span><span class="op">$</span><span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">NA</span>; <span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"x"</span>] <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">2</span>})</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `3:2` must be
 #&gt; compatible with existing data.
@@ -2390,8 +2241,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     3</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2405,8 +2255,7 @@
 <span class="co">#&gt; 1  1 e          9</span>
 <span class="co">#&gt; 2  1 f     10, 11</span>
 <span class="co">#&gt; 3  1 g 12, 13, 14</span>
-<span class="co">#&gt; 4 NA h       text</span>
-</pre></div>
+<span class="co">#&gt; 4 NA h       text</span></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb232"><pre class="downlit">
@@ -2417,8 +2266,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
 <span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2433,15 +2281,13 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;    NA</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;     1</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span>
-</pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb234"><pre class="downlit">
-<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)
-</pre></div>
+<span class="fu">with_df</span>(<span class="kw">df</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
 #&gt; replacement has length zero</code></pre>
@@ -2449,8 +2295,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb236"><pre class="downlit">
-<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)
-</pre></div>
+<span class="fu">with_tbl</span>(<span class="kw">tbl</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span>] <span class="op">&lt;-</span> <span class="kw">NULL</span>)</pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `NULL` must be a vector, a bare
 #&gt; list, a data frame or a matrix.</code></pre>
@@ -2472,8 +2317,7 @@
 <span class="co">#&gt; 2    NA f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 5     0 &lt;NA&gt;  &lt;NULL&gt;</span>
-</pre></div>
+<span class="co">#&gt; 5     0 &lt;NA&gt;  &lt;NULL&gt;</span></pre></div>
 </td>
 </tr></tbody></table>
 </div>

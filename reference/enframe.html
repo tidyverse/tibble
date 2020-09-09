@@ -198,26 +198,26 @@ If the input has only one column, an unnamed vector is returned." />
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
-<p><code><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe()</a></code> converts named atomic vectors or lists to one- or two-column
+<p><code>enframe()</code> converts named atomic vectors or lists to one- or two-column
 data frames.
 For a list, the result will be a nested tibble with a column of type <code>list</code>.
 For unnamed vectors, the natural sequence is used as name column.</p>
-<p><code><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe()</a></code> converts two-column data frames to a named vector or list,
+<p><code>deframe()</code> converts two-column data frames to a named vector or list,
 using the first column as name and the second column as value.
 If the input has only one column, an unnamed vector is returned.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe</a></span>(<span class='kw'>x</span>, name = <span class='st'>"name"</span>, value = <span class='st'>"value"</span>)
+    <pre class="usage"><span class='fu'>enframe</span>(<span class='kw'>x</span>, name = <span class='st'>"name"</span>, value = <span class='st'>"value"</span>)
 
-<span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe</a></span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>deframe</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An atomic vector (for <code><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe()</a></code>) or a data frame with one or two columns
-(for <code><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe()</a></code>).</p></td>
+      <td><p>An atomic vector (for <code>enframe()</code>) or a data frame with one or two columns
+(for <code>deframe()</code>).</p></td>
     </tr>
     <tr>
       <th>name, value</th>
@@ -228,26 +228,32 @@ If <code>name</code> is <code>NULL</code>, a one-column tibble is returned; <cod
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a> with two columns (if <code>name</code> is not <code>NULL</code>, the default)
+    <p>A <a href='tibble.html'>tibble</a> with two columns (if <code>name</code> is not <code>NULL</code>, the default)
 or one column (otherwise).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>enframe</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;    name value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     1
 #&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     3</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a = <span class='fl'>5</span>, b = <span class='fl'>7</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>     3     3</div><div class='input'><span class='fu'>enframe</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a = <span class='fl'>5</span>, b = <span class='fl'>7</span>))
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
 #&gt;   name  value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> a         5
-#&gt; </span><span style='color: #555555;'>2</span><span> b         7</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(one = <span class='fl'>1</span>, two = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, three = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> b         7</div><div class='input'><span class='fu'>enframe</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(one = <span class='fl'>1</span>, two = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, three = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>))
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;   name  value    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'>1</span><span> one   </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span> two   </span><span style='color: #555555;'>&lt;int [2]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> three </span><span style='color: #555555;'>&lt;int [3]&gt;</span><span></div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>enframe</a></span>(<span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>))</div><div class='output co'>#&gt; 1 2 3 
-#&gt; 3 2 1 </div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>))</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://tibble.tidyverse.org/reference/enframe.html'>deframe</a></span>(<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)))</div><div class='output co'>#&gt; [[1]]
+#&gt; </span><span style='color: #555555;'>3</span><span> three </span><span style='color: #555555;'>&lt;int [3]&gt;</span><span></div><div class='input'><span class='fu'>deframe</span>(<span class='fu'>enframe</span>(<span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>))
+</div><div class='output co'>#&gt; 1 2 3 
+#&gt; 3 2 1 </div><div class='input'><span class='fu'>deframe</span>(<span class='fu'><a href='tibble.html'>tibble</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>))
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'>deframe</span>(<span class='fu'><a href='tibble.html'>tibble</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)))
+</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] 1
 #&gt; 
 #&gt; [[2]]
