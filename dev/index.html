@@ -196,7 +196,7 @@
 <span class="c">#&gt; <span style="color: #BCBCBC;">4</span><span>     4     1    17</span></span>
 <span class="c">#&gt; <span style="color: #BCBCBC;">5</span><span>     5     1    26</span></span>
 </pre>
-<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html"><code>row.names()</code></a>. You can read more about these features in the vignette, <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
+<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html"><code>row.names()</code></a>. You can read more about these features in the vignette, <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>vignette("tibble", package = "tibble")</code></a>.</p>
 <p>You can define a tibble row-by-row with <a href="https://tibble.tidyverse.org/reference/tribble.html"><code>tribble()</code></a>:</p>
 <pre class="chroma">
 <span class="nf"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
