@@ -293,7 +293,7 @@
 </ul>
 <p>If you implement a class that wraps a list as S3 vector, you need to include <code>"list"</code> in the class:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="kw">x</span>, class = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"your_s3_class"</span>, <span class="st">"list"</span>))</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="va">x</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"your_s3_class"</span>, <span class="st">"list"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>Alternatively, implement a <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html">vec_proxy()</a></code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code><a href="https://vctrs.r-lib.org/reference/list_of.html">list_of()</a></code>.</p>
 </li>
 <li>
@@ -335,11 +335,11 @@
 <p>Example: <code><a href="../reference/tibble.html">tibble(a = quote(b))</a></code> raises an error that inherits from <code>"tibble_error_column_must_be_vector"</code>, <code>"tibble_error"</code> and <code>"rlang_error"</code>, and from <code>"error"</code> and <code>"condition"</code> like all errors. Do not rely on the wording of <code>"tibble_error_column_must_be_vector"</code>, this is likely to change.</p>
 <p>Use the following pattern to catch errors emitted by tibble:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span>(
-  <span class="fu">your_code</span>(),
-  tibble_error = <span class="fu">function</span>(<span class="kw">cnd</span>) {
-  }
-)</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span>
+  <span class="fu">your_code</span><span class="op">(</span><span class="op">)</span>,
+  tibble_error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">cnd</span><span class="op">)</span> <span class="op">{</span>
+  <span class="op">}</span>
+<span class="op">)</span></pre></div>
 </li>
 <li><p>New <code><a href="../reference/tibble.html">tibble_row()</a></code> constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (<a href='https://github.com/tidyverse/tibble/issues/205'>#205</a>).</p></li>
 <li><p>New <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> convert a bare vector to a one-row or one-column tibble, respectively. <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> also works for non-bare vectors. Using <code><a href="../reference/as_tibble.html">as_tibble()</a></code> for bare vectors is superseded (<a href='https://github.com/tidyverse/tibble/issues/447'>#447</a>).</p></li>
