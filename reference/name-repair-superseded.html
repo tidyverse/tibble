@@ -205,11 +205,11 @@ specific levels of name repair: <code>minimal</code>, <code>unique</code>, and <
 See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code> for the implementation of the underlying logic.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_names</span>(<span class='kw'>name</span>, syntactic = <span class='fl'>FALSE</span>, quiet = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>tidy_names</span><span class='op'>(</span><span class='va'>name</span>, syntactic <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>set_tidy_names</span>(<span class='kw'>x</span>, syntactic = <span class='fl'>FALSE</span>, quiet = <span class='fl'>FALSE</span>)
+<span class='fu'>set_tidy_names</span><span class='op'>(</span><span class='va'>x</span>, syntactic <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>repair_names</span>(<span class='kw'>x</span>, prefix = <span class='st'>"V"</span>, sep = <span class='st'>""</span>)</pre>
+<span class='fu'>repair_names</span><span class='op'>(</span><span class='va'>x</span>, prefix <span class='op'>=</span> <span class='st'>"V"</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -252,15 +252,15 @@ number.</p></td>
 
 
 <p>These functions are superseded. The <code>repair_names()</code> logic
-will also remain available in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names_legacy.html'>vctrs::vec_as_names_legacy()</a></code>.</p><pre><span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>...</span>, <span class='kw'>`.name_repair = "unique"`</span>)
+will also remain available in <code><a href='https://vctrs.r-lib.org/reference/vec_as_names_legacy.html'>vctrs::vec_as_names_legacy()</a></code>.</p><pre><span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>...</span>, <span class='va'>`.name_repair = "unique"`</span><span class='op'>)</span>
 <span class='co'>## is preferred to</span>
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>...</span>)
-<span class='fu'>set_tidy_names</span>(<span class='kw'>df</span>, syntactic = <span class='fl'>FALSE</span>)
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>set_tidy_names</span><span class='op'>(</span><span class='va'>df</span>, syntactic <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>...</span>, <span class='kw'>`.name_repair = "universal"`</span>)
+<span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>...</span>, <span class='va'>`.name_repair = "universal"`</span><span class='op'>)</span>
 <span class='co'>## is preferred to</span>
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span>(<span class='kw'>...</span>)
-<span class='fu'>set_tidy_names</span>(<span class='kw'>df</span>, syntactic = <span class='fl'>TRUE</span>)
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>set_tidy_names</span><span class='op'>(</span><span class='va'>df</span>, syntactic <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </pre>
 
 

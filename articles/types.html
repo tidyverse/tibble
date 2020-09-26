@@ -146,7 +146,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tibble.tidyverse.org/">tibble</a></span>)</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></pre></div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
@@ -348,8 +348,8 @@
 #&gt; $ `named list`  &lt;named list&gt; [1]
 #&gt; $ factor        &lt;fct&gt; A
 #&gt; $ ordered       &lt;ord&gt; a
-#&gt; $ Date          &lt;date&gt; 2020-09-09
-#&gt; $ POSIXt        &lt;dttm&gt; 2020-09-09 03:19:20
+#&gt; $ Date          &lt;date&gt; 2020-09-26
+#&gt; $ POSIXt        &lt;dttm&gt; 2020-09-26 15:58:37
 #&gt; $ difftime      &lt;drtn&gt; 1 secs
 #&gt; $ hms           &lt;time&gt; 00:00:01
 #&gt; $ integer64     &lt;int64&gt; 10000000000
@@ -367,7 +367,7 @@
 <a href="#implementation" class="anchor"></a>Implementation</h2>
 <p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">pillar</span>:::<span class="kw">type_sum.default</span>
+<span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) </span>
@@ -379,7 +379,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fefb4199e98&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7f7fe8b3c540&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></div>
 </div>
   </div>

@@ -229,51 +229,51 @@ If the input is a list, all elements must have length one.</p>
 <p><code>as_tibble_col()</code> converts a vector to a tibble with one column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_tibble</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>...</span>,
-  .rows = <span class='kw'>NULL</span>,
-  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>),
-  rownames = <span class='kw'>pkgconfig</span>::<span class='fu'><a href='https://rdrr.io/pkg/pkgconfig/man/get_config.html'>get_config</a></span>(<span class='st'>"tibble::rownames"</span>, <span class='kw'>NULL</span>)
-)
+    <pre class="usage"><span class='fu'>as_tibble</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  .rows <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>,
+  rownames <span class='op'>=</span> <span class='fu'>pkgconfig</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgconfig/man/get_config.html'>get_config</a></span><span class='op'>(</span><span class='st'>"tibble::rownames"</span>, <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>as_tibble</span>(
-  <span class='kw'>x</span>,
-  validate = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  .rows = <span class='kw'>NULL</span>,
-  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>),
-  rownames = <span class='kw'>pkgconfig</span>::<span class='fu'><a href='https://rdrr.io/pkg/pkgconfig/man/get_config.html'>get_config</a></span>(<span class='st'>"tibble::rownames"</span>, <span class='kw'>NULL</span>)
-)
+<span class='fu'>as_tibble</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  validate <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  .rows <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>,
+  rownames <span class='op'>=</span> <span class='fu'>pkgconfig</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgconfig/man/get_config.html'>get_config</a></span><span class='op'>(</span><span class='st'>"tibble::rownames"</span>, <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>as_tibble</span>(
-  <span class='kw'>x</span>,
-  validate = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  .rows = <span class='kw'>NULL</span>,
-  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
-)
+<span class='fu'>as_tibble</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  validate <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  .rows <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>as_tibble</span>(<span class='kw'>x</span>, <span class='kw'>...</span>, validate = <span class='kw'>NULL</span>, .name_repair = <span class='kw'>NULL</span>)
+<span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, validate <span class='op'>=</span> <span class='cn'>NULL</span>, .name_repair <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for table</span>
-<span class='fu'>as_tibble</span>(<span class='kw'>x</span>, `_n` = <span class='st'>"n"</span>, <span class='kw'>...</span>, n = <span class='kw'>`_n`</span>, .name_repair = <span class='st'>"check_unique"</span>)
+<span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>x</span>, `_n` <span class='op'>=</span> <span class='st'>"n"</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='va'>`_n`</span>, .name_repair <span class='op'>=</span> <span class='st'>"check_unique"</span><span class='op'>)</span>
 
 <span class='co'># S3 method for `NULL`</span>
-<span class='fu'>as_tibble</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>as_tibble</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>as_tibble_row</span>(
-  <span class='kw'>x</span>,
-  .name_repair = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span>)
-)
+<span class='fu'>as_tibble_row</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>as_tibble_col</span>(<span class='kw'>x</span>, column_name = <span class='st'>"value"</span>)</pre>
+<span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='va'>x</span>, column_name <span class='op'>=</span> <span class='st'>"value"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -358,19 +358,19 @@ converts a named vector to a tibble with a column of names and column of
 values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>), ncol = <span class='fl'>5</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>m</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='kw'>m</span>)
+    <pre class="examples"><div class='input'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>50</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span><span class='op'>)</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 
-<span class='fu'>as_tibble_row</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a = <span class='fl'>1</span>, b = <span class='fl'>2</span>))
+<span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;       a     b
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'><span class='fu'>as_tibble_row</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(c = <span class='st'>"three"</span>, d = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span>)))
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   c     d        
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> three </span><span style='color: #555555;'>&lt;int [2]&gt;</span><span></div><div class='input'><span class='fu'>as_tibble_row</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair = <span class='st'>"unique"</span>)
+#&gt; </span><span style='color: #555555;'>1</span><span> three </span><span style='color: #555555;'>&lt;int [2]&gt;</span><span></div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
@@ -378,16 +378,16 @@ values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/
 #&gt;    ...1  ...2  ...3
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     2     3</div><div class='input'>
-<span class='fu'>as_tibble_col</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)
+<span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;   value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1
 #&gt; </span><span style='color: #555555;'>2</span><span>     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='fu'>as_tibble_col</span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(c = <span class='st'>"three"</span>, d = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span>)),
-  column_name = <span class='st'>"data"</span>
-)
+#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='fu'>as_tibble_col</span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+  column_name <span class='op'>=</span> <span class='st'>"data"</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 1</span><span>
 #&gt;   data        
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;named list&gt;</span><span>
