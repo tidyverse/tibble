@@ -70,7 +70,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
+          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); writeLines(req)')
 
       - name: Install dependencies
         run: |
