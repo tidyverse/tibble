@@ -44,8 +44,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-${{steps.date.outputs.date}}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-
 
       - name: Install remotes
         run: |
