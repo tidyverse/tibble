@@ -44,8 +44,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-dev-${{ matrix.config.r }}-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-${{steps.date.outputs.date}}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-
 
       - name: Install remotes
         run: |
@@ -58,15 +58,12 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); writeLines(req)')
+          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "16.04"); writeLines(req)')
 
 
       - name: Install dependencies
         run: |
-          library(remotes)
-          deps <- remotes::dev_package_deps(dependencies = TRUE)
-          update(deps)
-          lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
