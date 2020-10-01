@@ -2,21 +2,13 @@
 % Please edit documentation in R/print.R
 \name{formatting}
 \alias{formatting}
-\alias{print.tbl}
-\alias{format.tbl}
 \alias{trunc_mat}
 \title{Printing tibbles}
 \usage{
-\method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
-
-\method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
-
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
 \arguments{
 \item{x}{Object to format or print.}
-
-\item{...}{Other arguments passed on to individual methods.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
 if less than option \code{tibble.print_max}. Otherwise, will print
@@ -31,6 +23,8 @@ default and always print all columns.}
 \item{n_extra}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
+
+\item{...}{Other arguments passed on to individual methods.}
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
