@@ -1,3 +1,10 @@
+# tibble 3.0.3.9001
+
+- `add_row(df)` adds an empty row again (#809, @DavisVaughan).
+
+- Adapt tests to the development version of testthat.
+
+
 # tibble 3.0.3.9000
 
 - Internal changes only.
