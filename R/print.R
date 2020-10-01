@@ -65,6 +65,7 @@
 NULL
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
+#' @rdname formatting
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
@@ -82,6 +83,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 NULL
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
+#' @rdname formatting
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
   format(mat)
