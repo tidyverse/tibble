@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Accessing columns, rows, or cells via `$`, `[[`, or `[` is mostly similar to
-#' [regular data frames][base::Extract.data.frame]. However, the
+#' [regular data frames][base::Extract]. However, the
 #' behavior is different for tibbles and data frames in some cases:
 #' * `[` always returns a tibble by default, even if
 #'   only one column is accessed.
@@ -25,6 +25,7 @@
 #' `[` supports a `drop` argument which defaults to `FALSE`.
 #' New code should use `[[` to turn a column into a vector.
 #'
+#' @param x A tibble.
 #' @param value A value to store in a row, column, range or cell.
 #'   Tibbles are stricter than data frames in what is accepted here.
 #'
@@ -72,7 +73,6 @@
 NULL
 
 #' @rdname subsetting
-#' @inheritParams base::Extract.data.frame
 #' @param name A [name] or a string.
 #' @export
 `$.tbl_df` <- function(x, name) {
@@ -133,7 +133,6 @@ NULL
 }
 
 #' @rdname subsetting
-#' @inheritParams base::`[[<-.data.frame`
 #' @export
 `[[<-.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)
@@ -254,7 +253,6 @@ NULL
 }
 
 #' @rdname subsetting
-#' @inheritParams base::`[<-.data.frame`
 #' @export
 `[<-.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)

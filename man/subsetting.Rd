@@ -23,7 +23,7 @@
 \method{[}{tbl_df}(x, i, j, ...) <- value
 }
 \arguments{
-\item{x}{data frame.}
+\item{x}{A tibble.}
 
 \item{name}{A \link{name} or a string.}
 
@@ -41,7 +41,7 @@ Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 }
 \description{
 Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
-\link[base:Extract.data.frame]{regular data frames}. However, the
+\link[base:Extract]{regular data frames}. However, the
 behavior is different for tibbles and data frames in some cases:
 \itemize{
 \item \code{[} always returns a tibble by default, even if

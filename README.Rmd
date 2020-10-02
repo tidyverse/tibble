@@ -1,5 +1,5 @@
 ---
-output: github_document
+output: downlit::readme_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -57,7 +57,7 @@ You can also create a new tibble from column vectors with `tibble()`:
 tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 ```
 
-`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
+`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble", package = "tibble")`.
 
 You can define a tibble row-by-row with `tribble()`:
 
@@ -71,7 +71,7 @@ tribble(
 
 ## Related work
 
-The tibble print method draws inspiration from [data.table](http://r-datatable.com/), and [frame](https://github.com/patperry/r-frame). Like `data.table()`, `tibble()` doesn't coerce strings to factors by default, doesn't change column names, and doesn't use rownames.
+The tibble print method draws inspiration from [data.table](http://r-datatable.com/), and [frame](https://github.com/patperry/r-frame). Like `data.table::data.table()`, `tibble()` doesn't coerce strings to factors by default, doesn't change column names, and doesn't use rownames.
 
 ---
 ## Code of Conduct
