@@ -81,11 +81,6 @@ verify_output("msg.txt", {
   error_subset_columns_non_missing_only()
   error_assign_columns_non_missing_only()
 
-  error_new_columns_at_end_only(5, 7:8)
-  error_new_columns_at_end_only(5, 7)
-  error_new_columns_at_end_only(1, 7:8)
-  error_new_columns_at_end_only(1, 7)
-
   error_duplicate_column_subscript_for_assignment(c(1, 1))
   error_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2))
 

@@ -520,7 +520,7 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    j <- numtbl_as_col_location(j, ncol(x), j_arg = j_arg, assign = TRUE)
+    j <- numtbl_as_col_location_assign(j, ncol(x), j_arg = j_arg)
 
     new <- which(j > ncol(x))
     j_new <- j[new]
@@ -571,14 +571,10 @@ vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
   subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
 }
 
-numtbl_as_col_location <- function(j, n, j_arg, assign = FALSE) {
+numtbl_as_col_location_assign <- function(j, n, j_arg) {
   subclass_col_index_errors(
-    if (assign) {
-      num_as_location(j, n, missing = "error", oob = "extend", zero = "error")
-    } else {
-      num_as_location(j, n)
-    },
-    j_arg = j_arg, assign = assign
+    num_as_location(j, n, missing = "error", oob = "extend", zero = "error"),
+    j_arg = j_arg, assign = TRUE
   )
 }
 
@@ -799,14 +795,6 @@ error_subset_columns_non_missing_only <- function() {
 
 error_assign_columns_non_missing_only <- function() {
   tibble_error("Subscript can't be missing for tibbles in `[[<-`.")
-}
-
-error_new_columns_at_end_only <- function(ncol, j) {
-  j <- j[j > ncol + 1]
-  tibble_error(
-    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
-    ncol = ncol, j = j
-  )
 }
 
 error_duplicate_column_subscript_for_assignment <- function(j) {
