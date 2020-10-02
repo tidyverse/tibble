@@ -469,24 +469,8 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
 
     nr <- fast_nrow(x)
 
-    new <- which(i > nr)
-    if (length(new) > 0) {
-      i_new <- i[new]
-      i[new] <- NA
-
-      if (!is_tight_sequence_at_end(i_new, nr)) {
-        cnd_signal(error_new_rows_at_end_only(nr, i_new))
-      }
-    }
-
     # Only update existing, caller knows how to deal with OOB
-    i <- vectbl_as_row_location(i, nr, i_arg, assign = TRUE)
-
-    # Restore, caller knows how to deal
-    if (length(new) > 0) {
-      i[new] <- i_new
-    }
-    i
+    numtbl_as_row_location_assign(i, nr, i_arg)
   } else if (is_logical(i)) {
     # Don't allow OOB logical
     vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
@@ -520,17 +504,11 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    new <- which(j > length(x))
-    if (length(new) > 0) {
-      j_new <- j[new]
-      j[new] <- NA
+    j <- numtbl_as_col_location_assign(j, ncol(x), j_arg = j_arg)
 
-      if (!is_tight_sequence_at_end(j_new, length(x))) {
-        cnd_signal(error_new_columns_at_end_only(length(x), j_new))
-      }
-    }
+    new <- which(j > ncol(x))
+    j_new <- j[new]
 
-    j <- vectbl_as_col_location(j, length(x), j_arg = j_arg, assign = TRUE)
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
     names <- vectbl_recycle_rhs_names(names2(value), length(j), value_arg)
@@ -556,6 +534,13 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
   j
 }
 
+numtbl_as_row_location_assign <- function(i, n, i_arg) {
+  subclass_row_index_errors(
+    num_as_location(i, n, missing = "error", oob = "extend", zero = "error"),
+    i_arg = i_arg, assign = TRUE
+  )
+}
+
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
   if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
@@ -575,6 +560,13 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
 
 vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
   subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
+}
+
+numtbl_as_col_location_assign <- function(j, n, j_arg) {
+  subclass_col_index_errors(
+    num_as_location(j, n, missing = "error", oob = "extend", zero = "error"),
+    j_arg = j_arg, assign = TRUE
+  )
 }
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
@@ -796,14 +788,6 @@ error_assign_columns_non_missing_only <- function() {
   tibble_error("Subscript can't be missing for tibbles in `[[<-`.")
 }
 
-error_new_columns_at_end_only <- function(ncol, j) {
-  j <- j[j > ncol + 1]
-  tibble_error(
-    pluralise_commas("Can't assign column(s) ", j, " in a tibble with ", ncol, pluralise_n(" column(s).", ncol)),
-    ncol = ncol, j = j
-  )
-}
-
 error_duplicate_column_subscript_for_assignment <- function(j) {
   j <- unique(j[duplicated(j)])
   tibble_error(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
@@ -811,14 +795,6 @@ error_duplicate_column_subscript_for_assignment <- function(j) {
 
 error_assign_rows_non_na_only <- function() {
   tibble_error("Can't use NA as row index in a tibble for assignment.")
-}
-
-error_new_rows_at_end_only <- function(nrow, i) {
-  i <- i[i > nrow + 1]
-  tibble_error(
-    pluralise_commas("Can't assign row(s) ", i, " in a tibble with ", nrow, pluralise_n(" row(s).", nrow)),
-    nrow = nrow, i = i
-  )
 }
 
 error_duplicate_row_subscript_for_assignment <- function(i) {
