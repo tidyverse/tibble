@@ -27,6 +27,11 @@ tbl_sum.tbl <- function(x) {
   c("A tibble" = dim_desc(x))
 }
 
+# Registered in zzz.R for pillar >= 1.4.99
+tbl_sum.tbl_df <- function(x) {
+  c("A tibble" = dim_desc(x))
+}
+
 dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- map_chr(dim, big_mark)
