@@ -62,13 +62,19 @@
 #' print(nycflights13::flights, width = Inf)
 #'
 #' @name formatting
+#' @aliases print.tbl format.tbl
 NULL
 
 # If needed, registered in .onLoad() via register_if_pillar_hasnt()
-#' @rdname formatting
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
+}
+
+# Only for documentation, doesn't do anything
+#' @rdname formatting
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
 }
 
 #' Legacy help page for compatibility with existing packages
@@ -83,10 +89,15 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 NULL
 
 # If needed, registered in .onLoad() via register_if_pillar_hasnt()
-#' @rdname formatting
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
   format(mat)
+}
+
+# Only for documentation, doesn't do anything
+#' @rdname formatting
+format.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
 }
 
 #' @export
@@ -187,6 +198,17 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 
 # Needs to be defined in package code: r-lib/pkgload#85
 print_without_body <- function(x, ...) {
+  if (packageVersion("pillar") >= "1.4.99") {
+    class(x) <- c("tbl_df_without_body", class(x))
+    print(x, ...)
+  } else {
+    print_with_mocked_format_body(x, ...)
+  }
+}
+
+print_with_mocked_format_body <- function(x, ...) {
+  scoped_lifecycle_silence()
+
   mockr::with_mock(
     format_body = function(x, ...) {
       paste0("<body created by pillar>")
