@@ -1,3 +1,10 @@
+# tibble 3.0.3.9002
+
+- Export format() and print() only if pillar doesn't (#816).
+
+- Fix documentation link to `base::Extract`.
+
+
 # tibble 3.0.3.9001
 
 - `add_row(df)` adds an empty row again (#809, @DavisVaughan).
