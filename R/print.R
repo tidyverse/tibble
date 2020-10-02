@@ -64,7 +64,7 @@
 #' @name formatting
 NULL
 
-# If needed, exported in .onLoad() via replace_if_pillar_has()
+# If needed, registered in .onLoad() via register_if_pillar_hasnt()
 #' @rdname formatting
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
@@ -82,7 +82,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' @keywords internal
 NULL
 
-# If needed, exported in .onLoad() via replace_if_pillar_has()
+# If needed, registered in .onLoad() via register_if_pillar_hasnt()
 #' @rdname formatting
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
