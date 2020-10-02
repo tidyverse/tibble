@@ -1,3 +1,8 @@
+# tibble 3.0.3.9003
+
+- Use `vctrs::num_as_location()` internally for subset assignment of rows and columns for better error messages (#746).
+
+
 # tibble 3.0.3.9002
 
 - Export format() and print() only if pillar doesn't (#816).
