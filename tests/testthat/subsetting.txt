@@ -453,7 +453,9 @@ i Input has size 2.
 x Subscript `4:5` contains non-consecutive location 4.
 
 > df[4:5, ] <- 3
-Error: Can't assign rows 4 and 5 in a tibble with 2 rows.
+Error: Can't assign to rows beyond the end with non-consecutive locations.
+i Input has size 2.
+x Subscript `4:5` contains non-consecutive location 4.
 
 > df[-4, ] <- 3
 Error: Can't negate rows that don't exist.

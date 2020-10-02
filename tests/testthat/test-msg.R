@@ -86,11 +86,6 @@ verify_output("msg.txt", {
 
   error_assign_rows_non_na_only()
 
-  error_new_rows_at_end_only(5, 7:8)
-  error_new_rows_at_end_only(5, 7)
-  error_new_rows_at_end_only(1, 7:8)
-  error_new_rows_at_end_only(1, 7)
-
   error_duplicate_row_subscript_for_assignment(c(1, 1))
   error_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2))
 
