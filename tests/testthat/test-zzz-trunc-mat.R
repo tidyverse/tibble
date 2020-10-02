@@ -1,5 +1,7 @@
 context("Truncated matrix")
 
+scoped_lifecycle_silence()
+
 test_that("interface of print() identical to trunc_mat()", {
   print_arg_names <- names(formals(print.tbl))
   print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
