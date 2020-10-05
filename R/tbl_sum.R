@@ -15,20 +15,23 @@
 #' @param x Object to summarise
 #' @export
 # Can be overridden in .onLoad()
-tbl_sum <- function(x) UseMethod("tbl_sum", x)
+tbl_sum <- function(x, ...) {
+  check_dots_empty()
+  UseMethod("tbl_sum", x)
+}
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
-tbl_sum.default <- function(x) {
+tbl_sum.default <- function(x, ...) {
   c("Description" = obj_sum(x))
 }
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
-tbl_sum.tbl <- function(x) {
-  c("A tibble" = dim_desc(x))
+tbl_sum.tbl <- function(x, ...) {
+  c("A data frame" = dim_desc(x))
 }
 
 # Registered in zzz.R for pillar >= 1.4.99
-tbl_sum.tbl_df <- function(x) {
+tbl_sum.tbl_df <- function(x, ...) {
   c("A tibble" = dim_desc(x))
 }
 
