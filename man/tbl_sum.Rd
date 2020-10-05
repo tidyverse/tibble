@@ -7,7 +7,9 @@
 tbl_sum(x, ...)
 }
 \arguments{
-\item{x}{Object to summarise}
+\item{x}{Object to summarise.}
+
+\item{...}{Must be empty.}
 }
 \value{
 A named character vector, describing the dimensions in the first element
