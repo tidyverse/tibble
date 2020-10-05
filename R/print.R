@@ -187,7 +187,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 
 # Needs to be defined in package code: r-lib/pkgload#85
 print_without_body <- function(x, ...) {
-  if (packageVersion("pillar") >= "1.4.99") {
+  if (utils::packageVersion("pillar") >= "1.4.99") {
     class(x) <- c("tbl_df_without_body", class(x))
     print(x, ...)
   } else {
