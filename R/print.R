@@ -77,17 +77,6 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   NextMethod()
 }
 
-#' Legacy help page for compatibility with existing packages
-#'
-#' @description
-#' `r lifecycle::badge("superseded")`
-#'
-#' Please see [print.tbl()] for the print method for tibbles.
-#'
-#' @name print.tbl_df
-#' @keywords internal
-NULL
-
 # If needed, registered in .onLoad() via register_if_pillar_hasnt()
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
