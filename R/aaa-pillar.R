@@ -1,3 +1,4 @@
+# nocov start
 replace_if_pillar_has <- function(fun) {
   pillar_ns <- asNamespace("pillar")
 
@@ -33,3 +34,4 @@ register_method <- function(method, name) {
   vctrs::s3_register(generic, class, method)
   invisible()
 }
+# nocov end
