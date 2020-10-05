@@ -12,7 +12,7 @@
     tbl_sum.default, tbl_sum.tbl, format.tbl, print.tbl
   )
 
-  if (packageVersion("pillar") >= "1.4.99") {
+  if (utils::packageVersion("pillar") >= "1.4.99") {
     vctrs::s3_register("pillar::tbl_sum", "tbl_df")
   }
 }
