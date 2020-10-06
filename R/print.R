@@ -186,15 +186,6 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 }
 
 # Needs to be defined in package code: r-lib/pkgload#85
-print_without_body <- function(x, ...) {
-  if (utils::packageVersion("pillar") >= "1.4.99") {
-    class(x) <- c("tbl_df_without_body", class(x))
-    print(x, ...)
-  } else {
-    print_with_mocked_format_body(x, ...)
-  }
-}
-
 print_with_mocked_format_body <- function(x, ...) {
   scoped_lifecycle_silence()
 
