@@ -39,13 +39,13 @@ enframe <- function(x, name = "name", value = "value") {
   if (is.null(name)) {
     df <- list(vec_set_names(x, NULL))
   } else if (is.null(vec_names(x))) {
-    df <- list(seq_along(x), x)
+    df <- list(seq_len(vec_size(x)), x)
   } else {
     df <- list(vec_names2(x), vec_set_names(x, NULL))
   }
 
   names(df) <- c(name, value)
-  new_tibble(df, nrow = length(x))
+  new_tibble(df, nrow = vec_size(x))
 }
 
 #' @rdname enframe

@@ -66,18 +66,28 @@ test_that("can pass vectors (#730)", {
   a <- c(x = 1)
   b <- data.frame(bb = 1, row.names = "y")
   c <- matrix(1, dimnames = list(rows = "z", cols = "cc"))
+  d <- array(1:120, dim = 5:2, dimnames = list(
+    d1 = letters[1:5], d2 = letters[6:9],
+    d3 = LETTERS[10:12], d4 = LETTERS[13:14]
+  ))
 
   au <- c(1)
   bu <- data.frame(bb = 1)
   cu <- matrix(1, dimnames = list(rows = NULL, cols = "cc"))
+  du <- array(1:120, dim = 5:2, dimnames = list(
+    d1 = NULL, d2 = letters[6:9],
+    d3 = LETTERS[10:12], d4 = LETTERS[13:14]
+  ))
 
   expect_identical(enframe(a, name = NULL), tibble(value = au))
   expect_identical(enframe(b, name = NULL), tibble(value = bu))
   expect_identical(enframe(c, name = NULL), tibble(value = cu))
+  expect_identical(enframe(d, name = NULL), tibble(value = du))
 
   expect_identical(enframe(a), tibble(name = "x", value = au))
   expect_identical(enframe(b), tibble(name = "y", value = bu))
   expect_identical(enframe(c), tibble(name = "z", value = cu))
+  expect_identical(enframe(d), tibble(name = letters[1:5], value = du))
 
   expect_tibble_error(
     enframe(lm(speed ~ ., cars)),
@@ -123,5 +133,7 @@ test_that("can deframe three-column data frame with warning", {
 verify_output("enframe.txt", {
   enframe(1:3, value = NULL)
 
-  enframe(Titanic)
+  # Work around https://github.com/r-lib/pillar/issues/142
+  nrow(enframe(Titanic))
+  enframe(Titanic)$value
 })
