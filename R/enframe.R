@@ -21,6 +21,8 @@
 #' enframe(1:3)
 #' enframe(c(a = 5, b = 7))
 #' enframe(list(one = 1, two = 2:3, three = 4:6))
+#' enframe(trees)
+#' enframe(matrix(1:6, ncol = 2))
 enframe <- function(x, name = "name", value = "value") {
   if (is.null(value)) {
     cnd_signal(error_enframe_value_null())
