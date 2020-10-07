@@ -50,7 +50,7 @@ test_that("can use custom names", {
 
 test_that("can enframe without names", {
   expect_identical(
-    enframe(letters, name = NULL, value = "letter"),
+    expect_deprecated(enframe(letters, name = NULL, value = "letter")),
     tibble(letter = letters)
   )
 })
@@ -63,30 +63,28 @@ test_that("can't use value = NULL", {
 })
 
 test_that("can pass vectors (#730)", {
-  a <- c(x = 1)
-  b <- data.frame(bb = 1, row.names = "y")
-  c <- matrix(1, dimnames = list(rows = "z", cols = "cc"))
+  a <- set_names(1:5, letters[2:6])
+  au <- 1:5
+  expect_identical(enframe(a), tibble(name = letters[2:6], value = au))
+
+  b <- data.frame(bb = 1:3, row.names = letters[4:6])
+  bu <- data.frame(bb = 1:3)
+  expect_identical(enframe(b), tibble(name = letters[4:6], value = bu))
+
+  cu <- matrix(1:6, nrow = 3, ncol = 2)
+  colnames(cu) <- letters[1:2]
+  c <- cu
+  rownames(c) <- letters[24:26]
+  expect_identical(enframe(c), tibble(name = letters[24:26], value = cu))
+
   d <- array(1:120, dim = 5:2, dimnames = list(
     d1 = letters[1:5], d2 = letters[6:9],
     d3 = LETTERS[10:12], d4 = LETTERS[13:14]
   ))
-
-  au <- c(1)
-  bu <- data.frame(bb = 1)
-  cu <- matrix(1, dimnames = list(rows = NULL, cols = "cc"))
   du <- array(1:120, dim = 5:2, dimnames = list(
     d1 = NULL, d2 = letters[6:9],
     d3 = LETTERS[10:12], d4 = LETTERS[13:14]
   ))
-
-  expect_identical(enframe(a, name = NULL), tibble(value = au))
-  expect_identical(enframe(b, name = NULL), tibble(value = bu))
-  expect_identical(enframe(c, name = NULL), tibble(value = cu))
-  expect_identical(enframe(d, name = NULL), tibble(value = du))
-
-  expect_identical(enframe(a), tibble(name = "x", value = au))
-  expect_identical(enframe(b), tibble(name = "y", value = bu))
-  expect_identical(enframe(c), tibble(name = "z", value = cu))
   expect_identical(enframe(d), tibble(name = letters[1:5], value = du))
 
   expect_tibble_error(
@@ -107,7 +105,7 @@ test_that("can deframe two-column data frame", {
 
 test_that("can deframe one-column data frame", {
   expect_identical(
-    deframe(tibble(value = 3:1)),
+    expect_deprecated(deframe(tibble(value = 3:1))),
     3:1
   )
 })
