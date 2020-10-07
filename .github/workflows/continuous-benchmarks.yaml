@@ -17,7 +17,6 @@ jobs:
 
       - name: Configure Git identity
         run: |
-          env | sort
           git config --global user.name "$GITHUB_WORKFLOW"
           git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
         shell: bash
@@ -25,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages("remotes")
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_github("r-lib/bench")
           install.packages("here")
 

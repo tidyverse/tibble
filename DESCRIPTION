@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.0.3.9000
+Version: 3.0.3.9004
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -41,7 +41,7 @@ Imports:
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
-    vctrs (>= 0.3.2.9000)
+    vctrs (>= 0.3.4)
 Suggests: 
     bench,
     bit64,
@@ -62,8 +62,6 @@ Suggests:
     testthat (>= 2.1.0),
     tidyr,
     withr
-Remotes: 
-    r-lib/vctrs
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

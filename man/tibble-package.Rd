@@ -83,6 +83,10 @@ turn off highlighting of significant digits.
 title, default: \code{15}.  Column titles may be truncated up to that width to
 save horizontal space. Set to \code{Inf} to turn off truncation of column
 titles.
+\item \code{pillar.min_chars}: The minimum number of characters wide to
+display character columns, default: \code{0}.  Character columns may be
+truncated up to that width to save horizontal space. Set to \code{Inf} to
+turn off truncation of character columns.
 }
 
 }

@@ -1,5 +1,7 @@
 context("options")
 
+scoped_lifecycle_silence()
+
 test_that("tibble option takes preference", {
   withr::with_options(
     list(

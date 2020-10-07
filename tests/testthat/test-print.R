@@ -1,14 +1,5 @@
 context("Truncated matrix")
 
-test_that("interface of print() identical to trunc_mat()", {
-  print_arg_names <- names(formals(print.tbl))
-  print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
-
-  trunc_mat_arg_names <- names(formals(trunc_mat))
-
-  expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
-})
-
 test_that("print() returns output invisibly", {
   expect_output(ret <- withVisible(print(as_tibble(iris))))
   expect_false(ret$visible)
@@ -63,12 +54,12 @@ test_that("trunc_mat header output", {
       width = 30L
     )
 
-    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
+    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
 
-    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
+    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
 
     df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
-    print_without_body(trunc_mat(df, width = 28))
+    print_with_mocked_format_body(trunc_mat(df, width = 28))
   })
 })
 
