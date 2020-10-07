@@ -1,3 +1,10 @@
+# tibble 3.0.3.9004
+
+- Establish compatibility with upcoming pillar 1.5.0 (#818).
+
+- `tbl_sum()` gains `...` argument and shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
+
+
 # tibble 3.0.3.9003
 
 - Use `vctrs::num_as_location()` internally for subset assignment of rows and columns for better error messages (#746).
