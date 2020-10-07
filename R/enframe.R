@@ -74,7 +74,7 @@ deframe <- function(x) {
 
   value <- x[[2L]]
   name <- x[[1L]]
-  vec_set_names(value, name)
+  vec_set_names(value, as.character(name))
 }
 
 # Errors ------------------------------------------------------------------

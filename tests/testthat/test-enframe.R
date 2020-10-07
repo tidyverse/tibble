@@ -101,6 +101,10 @@ test_that("can deframe two-column data frame", {
     deframe(tibble(name = letters[1:3], value = 3:1)),
     c(a = 3L, b = 2L, c = 1L)
   )
+  expect_identical(
+    deframe(tibble(name = 1:3, value = 3:1)),
+    c("1" = 3L, "2" = 2L, "3" = 1L)
+  )
 })
 
 test_that("can deframe one-column data frame", {
