@@ -1,6 +1,7 @@
 test_that("output", {
   verify_output("tbl_sum.txt", {
     str(tbl_sum(1:3))
+    str(tbl_sum(vctrs::new_data_frame(a = 1:3, class = "tbl")))
     str(tbl_sum(tibble(a = 1:3, b = letters[2:4])))
 
     dim_desc(iris)

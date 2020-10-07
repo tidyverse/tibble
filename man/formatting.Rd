@@ -4,12 +4,14 @@
 \alias{formatting}
 \alias{print.tbl}
 \alias{format.tbl}
+\alias{print.tbl_df}
+\alias{format.tbl_df}
 \alias{trunc_mat}
 \title{Printing tibbles}
 \usage{
-\method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{print}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
-\method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{format}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
