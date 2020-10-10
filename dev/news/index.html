@@ -100,7 +100,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.3.9003</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.4.9000</span>
         </div>
       </div>
     </div>
@@ -187,6 +187,31 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3049000" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.4.9000">
+<a href="#tibble-3049000" class="anchor"></a>tibble 3.0.4.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Internal changes only.</li>
+</ul>
+</div>
+    <div id="tibble-304" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.4">
+<a href="#tibble-304" class="anchor"></a>tibble 3.0.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>Internal changes only.</li>
+</ul>
+</div>
+    <div id="tibble-3039004" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.3.9004">
+<a href="#tibble-3039004" class="anchor"></a>tibble 3.0.3.9004<small> Unreleased </small>
+</h1>
+<ul>
+<li><p>Establish compatibility with upcoming pillar 1.5.0 (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
+<li><p><code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> gains <code>...</code> argument and shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
+</ul>
+</div>
     <div id="tibble-3039003" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.3.9003">
 <a href="#tibble-3039003" class="anchor"></a>tibble 3.0.3.9003<small> Unreleased </small>
@@ -476,7 +501,7 @@
 <li><p><code><a href="../reference/rownames.html">column_to_rownames()</a></code> now always coerces to a data frame, because row names are no longer supported in tibbles (<a href='https://github.com/tidyverse/tibble/issues/114'>#114</a>).</p></li>
 <li><p>In all <code>*_rownames()</code> functions, the first argument has been renamed to <code>.data</code> for consistency (<a href='https://github.com/tidyverse/tibble/issues/412'>#412</a>).</p></li>
 <li><p>Subsetting one row with <code>[..., , drop = TRUE]</code> returns a tibble (<a href='https://github.com/tidyverse/tibble/issues/442'>#442</a>).</p></li>
-<li><p>The <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code> method has been removed, the <code><a href="../reference/formatting.html">print.tbl()</a></code> method handles printing (<a href='https://github.com/tidyverse/tibble/issues/519'>#519</a>).</p></li>
+<li><p>The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method has been removed, the <code><a href="../reference/formatting.html">print.tbl()</a></code> method handles printing (<a href='https://github.com/tidyverse/tibble/issues/519'>#519</a>).</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
@@ -532,7 +557,7 @@
 <ul>
 <li><p>The <code><a href="../reference/name-repair-superseded.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> helpers the list of new names using a bullet list with at most six items (<a href='https://github.com/tidyverse/tibble/issues/406'>#406</a>).</p></li>
 <li><p>A one-character ellipse (<code>cli::symbol$ellipsis</code>) is printed instead of <code>"..."</code> where available, this affects <code><a href="../reference/glimpse.html">glimpse()</a></code> output and truncated lists (<a href='https://github.com/tidyverse/tibble/issues/403'>#403</a>).</p></li>
-<li><p>Column names and types are now formatted identically with <code><a href="../reference/glimpse.html">glimpse()</a></code> and <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code>.</p></li>
+<li><p>Column names and types are now formatted identically with <code><a href="../reference/glimpse.html">glimpse()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</p></li>
 <li><p><code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> quotes variable names when reporting on repair (<a href='https://github.com/tidyverse/tibble/issues/407'>#407</a>).</p></li>
 <li><p>All error messages now follow the tidyverse style guide (<a href='https://github.com/tidyverse/tibble/issues/223'>#223</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> prints an informative error message when using the <code>rownames</code> argument and the input data frame or matrix does not have row names (<a href='https://github.com/tidyverse/tibble/issues/388'>#388</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
@@ -547,7 +572,7 @@
 <ul>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.</p></li>
 <li><p><code><a href="../reference/glimpse.html">glimpse()</a></code> disambiguates outputs for factors if the levels contain commas (<a href='https://github.com/tidyverse/tibble/issues/384'>#384</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
-<li><p><code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code> with a negative value for <code>n</code> behaves as if <code>n</code> was omitted (<a href='https://github.com/tidyverse/tibble/issues/371'>#371</a>).</p></li>
+<li><p><code><a href="../reference/formatting.html">print.tbl_df()</a></code> with a negative value for <code>n</code> behaves as if <code>n</code> was omitted (<a href='https://github.com/tidyverse/tibble/issues/371'>#371</a>).</p></li>
 <li><p>Fixed output for extra column names that contain spaces.</p></li>
 </ul>
 </div>
@@ -724,8 +749,8 @@
 <ul>
 <li>Printing now uses <code>x</code> again instead of the Unicode multiplication sign, to avoid encoding issues (<a href='https://github.com/tidyverse/tibble/issues/216'>#216</a>).</li>
 <li>String values are now quoted when printing if they contain non-printable characters or quotes (<a href='https://github.com/tidyverse/tibble/issues/253'>#253</a>).</li>
-<li>The <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html">format()</a></code>, and <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code>.</li>
-<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html">print.data.frame()</a></code> anymore. Now providing <code>format.tbl_df()</code> and full support for Unicode characters in names and data, also for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
+<li>The <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html">format()</a></code>, and <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code>.</li>
+<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html">print.data.frame()</a></code> anymore. Now providing <code><a href="../reference/formatting.html">format.tbl_df()</a></code> and full support for Unicode characters in names and data, also for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
 </ul>
 </div>
 <div id="misc" class="section level2">
@@ -838,7 +863,7 @@
 <ul>
 <li>New <code><a href="../reference/add_column.html">add_column()</a></code>, analogously to <code><a href="../reference/add_row.html">add_row()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/99'>#99</a>).</li>
 <li>
-<code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code> gains <code>n_extra</code> method and will have the same interface as <code><a href="../reference/formatting.html">trunc_mat()</a></code> from now on.</li>
+<code><a href="../reference/formatting.html">print.tbl_df()</a></code> gains <code>n_extra</code> method and will have the same interface as <code><a href="../reference/formatting.html">trunc_mat()</a></code> from now on.</li>
 <li>
 <code><a href="../reference/add_row.html">add_row()</a></code> and <code><a href="../reference/add_column.html">add_column()</a></code> gain <code>.before</code> and <code>.after</code> arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named <code>.before</code> or <code>.after</code> (<a href='https://github.com/tidyverse/tibble/issues/99'>#99</a>).</li>
 <li>Rename <code><a href="../reference/deprecated.html">frame_data()</a></code> to <code><a href="../reference/tribble.html">tribble()</a></code>, stands for “transposed tibble”. The former is still available as alias (<a href='https://github.com/tidyverse/tibble/issues/132'>#132</a>, <a href='https://github.com/tidyverse/tibble/issues/143'>#143</a>).</li>
@@ -861,7 +886,7 @@
 <a href="#documentation-1" class="anchor"></a>Documentation</h2>
 <ul>
 <li>New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (<a href='https://github.com/tidyverse/tibble/issues/151'>#151</a>).</li>
-<li>Added more examples for <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code>, now using data from <code>nycflights13</code> instead of <code>Lahman</code> (<a href='https://github.com/tidyverse/tibble/issues/121'>#121</a>), with guidance to install <code>nycflights13</code> package if necessary (<a href='https://github.com/tidyverse/tibble/issues/152'>#152</a>).</li>
+<li>Added more examples for <code><a href="../reference/formatting.html">print.tbl_df()</a></code>, now using data from <code>nycflights13</code> instead of <code>Lahman</code> (<a href='https://github.com/tidyverse/tibble/issues/121'>#121</a>), with guidance to install <code>nycflights13</code> package if necessary (<a href='https://github.com/tidyverse/tibble/issues/152'>#152</a>).</li>
 <li>Minor changes in vignette (<a href='https://github.com/tidyverse/tibble/issues/115'>#115</a>, <a href='https://github.com/helix123'>@helix123</a>).</li>
 </ul>
 </div>
@@ -1032,7 +1057,7 @@
 <code>all_equal()</code> allows to compare data frames ignoring row and column order, and optionally ignoring minor differences in type (e.g. int vs. double) (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/821'>#821</a>). Used by <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> for tibbles. (This package contains a pure R implementation of <code>all_equal()</code>, the <code>dplyr</code> code has identical behavior but is written in C++ and thus faster.)</li>
 <li>The internals of <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">as_data_frame()</a></code> have been aligned, so <code><a href="../reference/deprecated.html">as_data_frame()</a></code> will now automatically recycle length-1 vectors. Both functions give more informative error messages if you are attempting to create an invalid data frame. You can no longer create a data frame with duplicated names (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/820'>#820</a>). Both functions now check that you don’t have any <code>POSIXlt</code> columns, and tell you to use <code>POSIXct</code> if you do (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/813'>#813</a>). <code><a href="../reference/deprecated.html">data_frame(NULL)</a></code> raises error “must be a 1d atomic vector or list”.</li>
 <li>
-<code><a href="../reference/formatting.html">trunc_mat()</a></code> and <code><a href="../reference/print.tbl_df.html">print.tbl_df()</a></code> are considerably faster if you have very wide data frames. They will now also only list the first 100 additional variables not already on screen - control this with the new <code>n_extra</code> parameter to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1161'>#1161</a>). The type of list columns is printed correctly (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1379'>#1379</a>). The <code>width</code> argument is used also for 0-row or 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/18'>#18</a>).</li>
+<code><a href="../reference/formatting.html">trunc_mat()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code> are considerably faster if you have very wide data frames. They will now also only list the first 100 additional variables not already on screen - control this with the new <code>n_extra</code> parameter to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1161'>#1161</a>). The type of list columns is printed correctly (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1379'>#1379</a>). The <code>width</code> argument is used also for 0-row or 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/18'>#18</a>).</li>
 <li>When used in list-columns, S4 objects only print the class name rather than the full class hierarchy (<a href='https://github.com/tidyverse/tibble/issues/33'>#33</a>).</li>
 <li>Add test that <code>[.tbl_df()</code> does not change class (<a href='https://github.com/tidyverse/tibble/issues/41'>#41</a>, <a href='https://github.com/jennybc'>@jennybc</a>). Improve <code>[.tbl_df()</code> error message.</li>
 </ul>
