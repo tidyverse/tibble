@@ -52,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.4</span>
         </div>
       </div>
     </div>
@@ -1154,8 +1154,11 @@
 <div class="sourceCode" id="cb113"><pre class="downlit">
 <span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't assign column 5 in a tibble
-#&gt; with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't assign to columns beyond
+#&gt; the end with non-consecutive locations.
+#&gt; ℹ Input has size 3.
+#&gt; ✖ Subscript `5` contains non-consecutive
+#&gt; location 5.</code></pre>
 </div>
 </td>
 </tr>
@@ -1448,8 +1451,11 @@
 <div class="sourceCode" id="cb141"><pre class="downlit">
 <span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't assign column 5 in a tibble
-#&gt; with 3 columns.</code></pre>
+<pre><code>#&gt; Error: Can't assign to columns beyond
+#&gt; the end with non-consecutive locations.
+#&gt; ℹ Input has size 3.
+#&gt; ✖ Subscript `5` contains non-consecutive
+#&gt; location 5.</code></pre>
 </div>
 </td>
 </tr>
@@ -1989,8 +1995,11 @@
 <div class="sourceCode" id="cb196"><pre class="downlit">
 <span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't assign row 6 in a tibble
-#&gt; with 4 rows.</code></pre>
+<pre><code>#&gt; Error: Can't assign to rows beyond the
+#&gt; end with non-consecutive locations.
+#&gt; ℹ Input has size 4.
+#&gt; ✖ Subscript `6` contains non-consecutive
+#&gt; location 6.</code></pre>
 </div>
 </td>
 </tr>
