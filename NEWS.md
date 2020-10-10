@@ -1,3 +1,8 @@
+# tibble 3.0.4
+
+- Internal changes only.
+
+
 # tibble 3.0.3.9004
 
 - Establish compatibility with upcoming pillar 1.5.0 (#818).
