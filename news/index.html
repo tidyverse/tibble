@@ -196,8 +196,7 @@
 <a href="#compatibility" class="anchor"></a>Compatibility</h2>
 <ul>
 <li><p>Establish compatibility with upcoming pillar 1.5.0 (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
-<li><p>Implementers of <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> are now required to include <code>...</code> in the signature, the generic may be extended once all downstream packages have adapted.</p></li>
-<li><p><code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> methods gain <code>...</code> argument and shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
+<li><p><code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
 <li><p>Export <code><a href="../reference/formatting.html">format.tbl()</a></code> and <code><a href="../reference/formatting.html">print.tbl()</a></code> only if pillar doesn’t (<a href='https://github.com/tidyverse/tibble/issues/816'>#816</a>).</p></li>
 <li><p>Use <code><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vctrs::num_as_location()</a></code> internally for subset assignment of rows and columns for better error messages (<a href='https://github.com/tidyverse/tibble/issues/746'>#746</a>).</p></li>
 <li><p>Adapt tests to the development version of testthat.</p></li>
