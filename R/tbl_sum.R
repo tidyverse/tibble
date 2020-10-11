@@ -13,11 +13,9 @@
 #'
 #' @seealso [pillar::type_sum()]
 #' @param x Object to summarise.
-#' @param ... Must be empty.
 #' @export
 # Can be overridden in .onLoad()
-tbl_sum <- function(x, ...) {
-  check_dots_empty()
+tbl_sum <- function(x) {
   UseMethod("tbl_sum", x)
 }
 
