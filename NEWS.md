@@ -5,38 +5,23 @@
 
 # tibble 3.0.4
 
-- Internal changes only.
-
-
-# tibble 3.0.3.9004
+## Compatibility
 
 - Establish compatibility with upcoming pillar 1.5.0 (#818).
 
-- `tbl_sum()` gains `...` argument and shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
+- `tbl_sum()` shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
 
-
-# tibble 3.0.3.9003
+- Export `format.tbl()` and `print.tbl()` only if pillar doesn't (#816).
 
 - Use `vctrs::num_as_location()` internally for subset assignment of rows and columns for better error messages (#746).
 
+- Adapt tests to the development version of testthat.
 
-# tibble 3.0.3.9002
-
-- Export format() and print() only if pillar doesn't (#816).
+## Bug fixes
 
 - Fix documentation link to `base::Extract`.
 
-
-# tibble 3.0.3.9001
-
 - `add_row(df)` adds an empty row again (#809, @DavisVaughan).
-
-- Adapt tests to the development version of testthat.
-
-
-# tibble 3.0.3.9000
-
-- Internal changes only.
 
 
 # tibble 3.0.3

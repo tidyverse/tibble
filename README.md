@@ -8,7 +8,7 @@
 
 A **tibble**, or `tbl_df`, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced [`print()`](https://rdrr.io/r/base/print.html) method which makes them easier to use with large datasets containing complex objects.
 
-If you are new to tibbles, the best place to start is the [tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for data science*.
+If you are new to tibbles, the best place to start is the [tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
 ## Installation
 
@@ -82,7 +82,7 @@ You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.o
 
 ## Related work
 
-The tibble print method draws inspiration from [data.table](http://r-datatable.com/), and [frame](https://github.com/patperry/r-frame). Like [`data.table::data.table()`](https://Rdatatable.gitlab.io/data.table/reference/data.table.html), [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.
+The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like [`data.table::data.table()`](https://Rdatatable.gitlab.io/data.table/reference/data.table.html), [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.
 
 -----
 

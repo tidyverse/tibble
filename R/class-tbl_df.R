@@ -10,10 +10,10 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' "tibble" refers to a data frame that has the `tbl_df` class. Tibble is the
 #' central data structure for the set of packages known as the
 #' [tidyverse](https://www.tidyverse.org/packages/), including
-#' [dplyr](http://dplyr.tidyverse.org/),
-#' [ggplot2](http://ggplot2.tidyverse.org/),
-#' [tidyr](http://tidyr.tidyverse.org/), and
-#' [readr](http://readr.tidyverse.org/).
+#' [dplyr](https://dplyr.tidyverse.org/),
+#' [ggplot2](https://ggplot2.tidyverse.org/),
+#' [tidyr](https://tidyr.tidyverse.org/), and
+#' [readr](https://readr.tidyverse.org/).
 #'
 #' The general ethos is that tibbles are lazy and surly: they do less and
 #' complain more than base [data.frame]s. This forces

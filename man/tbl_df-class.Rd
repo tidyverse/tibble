@@ -10,10 +10,10 @@ created in order to have different default behaviour. The colloquial term
 "tibble" refers to a data frame that has the \code{tbl_df} class. Tibble is the
 central data structure for the set of packages known as the
 \href{https://www.tidyverse.org/packages/}{tidyverse}, including
-\href{http://dplyr.tidyverse.org/}{dplyr},
-\href{http://ggplot2.tidyverse.org/}{ggplot2},
-\href{http://tidyr.tidyverse.org/}{tidyr}, and
-\href{http://readr.tidyverse.org/}{readr}.
+\href{https://dplyr.tidyverse.org/}{dplyr},
+\href{https://ggplot2.tidyverse.org/}{ggplot2},
+\href{https://tidyr.tidyverse.org/}{tidyr}, and
+\href{https://readr.tidyverse.org/}{readr}.
 
 The general ethos is that tibbles are lazy and surly: they do less and
 complain more than base \link{data.frame}s. This forces

@@ -3,15 +3,16 @@ on:
     branches:
     - master
     - docs
+    - "cran-*"
 
 name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
 
     steps:
       - uses: actions/checkout@v2
@@ -31,8 +32,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Configure Git identity
         run: |
@@ -40,6 +41,21 @@ jobs:
           git config --global user.name "$GITHUB_WORKFLOW"
           git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
         shell: bash
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
+
+      - name: Install pkgdown sysdeps
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
 
       - name: Install dependencies
         run: |

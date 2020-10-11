@@ -22,15 +22,15 @@ analysis with data frames.
 
 Tibble is the central data structure for the set of packages known as the
 \href{https://www.tidyverse.org/packages/}{tidyverse}, including
-\href{http://dplyr.tidyverse.org/}{dplyr},
-\href{http://ggplot2.tidyverse.org/}{ggplot2},
-\href{http://tidyr.tidyverse.org/}{tidyr}, and
-\href{http://readr.tidyverse.org/}{readr}.
+\href{https://dplyr.tidyverse.org/}{dplyr},
+\href{https://ggplot2.tidyverse.org/}{ggplot2},
+\href{https://tidyr.tidyverse.org/}{tidyr}, and
+\href{https://readr.tidyverse.org/}{readr}.
 
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
 Science}
 }
 
