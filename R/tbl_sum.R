@@ -20,17 +20,17 @@ tbl_sum <- function(x) {
 }
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
-tbl_sum.default <- function(x, ...) {
+tbl_sum.default <- function(x) {
   c("Description" = obj_sum(x))
 }
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
-tbl_sum.tbl <- function(x, ...) {
+tbl_sum.tbl <- function(x) {
   c("A data frame" = dim_desc(x))
 }
 
 #' @export
-tbl_sum.tbl_df <- function(x, ...) {
+tbl_sum.tbl_df <- function(x) {
   c("A tibble" = dim_desc(x))
 }
 

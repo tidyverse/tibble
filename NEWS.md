@@ -4,9 +4,7 @@
 
 - Establish compatibility with upcoming pillar 1.5.0 (#818).
 
-- Implementers of `tbl_sum()` are now required to include `...` in the signature, the generic may be extended once all downstream packages have adapted.
-
-- `tbl_sum()` methods gain `...` argument and shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
+- `tbl_sum()` shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
 
 - Export `format.tbl()` and `print.tbl()` only if pillar doesn't (#816).
 
