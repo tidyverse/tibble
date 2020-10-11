@@ -82,7 +82,7 @@ You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.o
 
 ## Related work
 
-The tibble print method draws inspiration from [data.table](http://r-datatable.com/), and [frame](https://github.com/patperry/r-frame). Like [`data.table::data.table()`](https://Rdatatable.gitlab.io/data.table/reference/data.table.html), [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.
+The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like [`data.table::data.table()`](https://Rdatatable.gitlab.io/data.table/reference/data.table.html), [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.
 
 -----
 
