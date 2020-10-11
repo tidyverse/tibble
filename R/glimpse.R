@@ -40,6 +40,9 @@ glimpse <- function(x, width = NULL, ...) {
 #' @importFrom pillar new_pillar_type
 # If needed, registered in .onLoad() via replace_if_pillar_has()
 glimpse.tbl <- function(x, width = NULL, ...) {
+  writeLines("<tibble::glimpse()>")
+  return(invisible(x))
+
   width <- tibble_glimpse_width(width)
   if (!is.finite(width)) {
     cnd_signal(error_glimpse_infinite_width())

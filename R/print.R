@@ -67,7 +67,7 @@ NULL
 
 # If needed, registered in .onLoad() via register_if_pillar_hasnt()
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+  cli::cat_line("<print(tibble::tibble())>")
   invisible(x)
 }
 
@@ -79,6 +79,8 @@ print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 # If needed, registered in .onLoad() via register_if_pillar_hasnt()
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  return("<format(tibble::tibble())>")
+
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
   format(mat)
 }
@@ -151,6 +153,8 @@ shrink_mat <- function(df, rows, n, star) {
 #' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
+  return("<format(tibble::trunc_mat())>")
+
   if (is.null(width)) {
     width <- x$width
   }
@@ -199,7 +203,7 @@ print_with_mocked_format_body <- function(x, ...) {
 
 #' @export
 print.trunc_mat <- function(x, ...) {
-  cli::cat_line(format(x, ...))
+  cli::cat_line("<print(tibble::trunc_mat())>")
   invisible(x)
 }
 
