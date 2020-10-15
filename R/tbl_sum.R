@@ -29,7 +29,7 @@ tbl_sum.tbl <- function(x) {
   c("A data frame" = dim_desc(x))
 }
 
-#' @export
+# Must be registered in .onLoad() until pillar 1.5.0 is on CRAN
 tbl_sum.tbl_df <- function(x) {
   c("A tibble" = dim_desc(x))
 }
