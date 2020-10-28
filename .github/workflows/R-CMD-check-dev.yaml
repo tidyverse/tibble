@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: ubuntu-18.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -34,6 +34,8 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
+      - uses: r-lib/actions/setup-pandoc@master
+
       - name: "Prepare timestamp for cache"
         if: runner.os != 'Windows'
         id: date
@@ -41,11 +43,11 @@ jobs:
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-dev-2-
+          key: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          restore-keys: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-
 
       - name: Install remotes
         run: |
@@ -58,7 +60,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "16.04"); writeLines(req)')
+          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); writeLines(req)')
 
 
       - name: Install dependencies
