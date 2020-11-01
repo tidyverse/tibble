@@ -70,7 +70,7 @@ test_that("missing names are imputed from call", {
 
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- tibble()
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
   expect_identical(attr(zero, "names"), character(0L))
 })
@@ -179,14 +179,14 @@ test_that("columns must be same length", {
 
 test_that("empty list() makes 0 x 0 tbl_df", {
   zero <- as_tibble(list())
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
 })
 
 
 test_that("NULL makes 0 x 0 tbl_df", {
   nnnull <- as_tibble(NULL)
-  expect_is(nnnull, "tbl_df")
+  expect_s3_class(nnnull, "tbl_df")
   expect_equal(dim(nnnull), c(0L, 0L))
 })
 
