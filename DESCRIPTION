@@ -60,11 +60,13 @@ Suggests:
     nycflights13,
     purrr,
     rmarkdown,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     tidyr,
     withr
 VignetteBuilder: 
     knitr
+Remotes: 
+    r-lib/testthat@v3.0.0
 Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
