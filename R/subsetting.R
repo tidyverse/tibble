@@ -753,10 +753,6 @@ vectbl_restore <- function(xo, x) {
   .Call(`tibble_restore_impl`, xo, x)
 }
 
-string_to_indices <- function(x) {
-  .Call(`tibble_string_to_indices`, as.character(x))
-}
-
 # Errors ------------------------------------------------------------------
 
 error_need_rhs_vector <- function(value_arg) {
