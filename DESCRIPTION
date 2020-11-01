@@ -50,6 +50,7 @@ Suggests:
     dplyr,
     evaluate,
     formattable,
+    ggplot2,
     hms,
     htmltools,
     import,
