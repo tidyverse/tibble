@@ -161,17 +161,27 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
+  expect_snapshot(
+    invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
+  )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), vec_as_names(rep("", 3), repair = "unique"))
+  expect_equal(
+    names(invalid_df),
+    vec_as_names(rep("", 3), repair = "unique", quiet = TRUE)
+  )
 })
 
 test_that("as_tibble() implements universal names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
+  expect_snapshot(
+    invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
+  )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
-  expect_equal(names(invalid_df), vec_as_names(rep("", 3), repair = "universal"))
+  expect_equal(
+    names(invalid_df),
+    vec_as_names(rep("", 3), repair = "universal", quiet = TRUE)
+  )
 })
 
 
@@ -210,14 +220,14 @@ test_that("as_tibble.matrix() supports .name_repair", {
   x <- matrix(1:6, nrow = 3)
 
   expect_warning(as_tibble(x))
-  expect_identical(
-    names(as_tibble(x, .name_repair = "minimal")),
-    rep("", 2)
+
+  minimal <- as_tibble(x, .name_repair = "minimal")
+  expect_identical(names(minimal), rep("", 2))
+
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    paste0("...", 1:2)
-  )
+  expect_identical(names(universal), paste0("...", 1:2))
 
   x <- matrix(1:6, nrow = 3, dimnames = list(x = LETTERS[1:3], y = c("if", "when")))
 
@@ -229,10 +239,10 @@ test_that("as_tibble.matrix() supports .name_repair", {
     names(as_tibble(x, .name_repair = "minimal")),
     c("if", "when")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    c(".if", "when")
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), c(".if", "when"))
 })
 
 test_that("as_tibble.poly() supports .name_repair", {
@@ -246,10 +256,10 @@ test_that("as_tibble.poly() supports .name_repair", {
     names(as_tibble(x, .name_repair = "minimal")),
     as.character(1:3)
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    paste0("...", 1:3)
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), paste0("...", 1:3))
 })
 
 test_that("as_tibble.table() supports .name_repair", {
@@ -263,10 +273,10 @@ test_that("as_tibble.table() supports .name_repair", {
     names(as_tibble(x, .name_repair = "minimal")),
     c("a", "a", "n")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    c("a...1", "a...2", "n")
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), c("a...1", "a...2", "n"))
 
   x <- table("if" = c(1, 1, 1, 2, 2, 2), "when" = c(3, 4, 5, 3, 4, 5))
 
@@ -278,10 +288,10 @@ test_that("as_tibble.table() supports .name_repair", {
     names(as_tibble(x, .name_repair = "minimal")),
     c("if", "when", "n")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    c(".if", "when", "n")
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), c(".if", "when", "n"))
 
   x <- table("m" = c(1, 1, 1, 2, 2, 2), "n" = c(3, 4, 5, 3, 4, 5))
 
@@ -289,10 +299,10 @@ test_that("as_tibble.table() supports .name_repair", {
     names(as_tibble(x, .name_repair = "minimal")),
     c("m", "n", "n")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    c("m", "n...2", "n...3")
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), c("m", "n...2", "n...3"))
 })
 
 test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
@@ -306,10 +316,10 @@ test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
     names(as_tibble(x, .name_repair = "minimal")),
     rep("", 2)
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    paste0("...", 1:2)
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), paste0("...", 1:2))
 
   x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = c("if", "when"))
 
@@ -321,10 +331,10 @@ test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
     names(as_tibble(x, .name_repair = "minimal")),
     c("if", "when")
   )
-  expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
-    c(".if", "when")
+  expect_snapshot(
+    universal <- as_tibble(x, .name_repair = "universal")
   )
+  expect_identical(names(universal), c(".if", "when"))
 })
 
 test_that("as_tibble() can convert row names", {

@@ -48,10 +48,14 @@ test_that("supports compat col names", {
 test_that("creates col names with name repair", {
   x <- matrix(1:4, nrow = 2)
 
-  out <- as_tibble(x, .name_repair = "unique")
+  expect_snapshot(
+    out <- as_tibble(x, .name_repair = "unique")
+  )
   expect_equal(names(out), c("...1", "...2"))
 
-  out <- as_tibble(x, .name_repair = "universal")
+  expect_snapshot(
+    out <- as_tibble(x, .name_repair = "universal")
+  )
   expect_equal(names(out), c("...1", "...2"))
 })
 
