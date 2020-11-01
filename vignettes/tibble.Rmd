@@ -99,7 +99,7 @@ It encapsulates best practices for data frames:
 ## Coercion
 
 To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into tibbles.
-Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods, and in fact, it's precisely what `as.data.frame()` does, but it's similar to `do.call(cbind, lapply(x, data.frame))` - i.e. it coerces each component to a data frame and then `cbinds()` them all together.
+Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods, and in fact, it's precisely what `as.data.frame()` does, but it's similar to `do.call(cbind, lapply(x, data.frame))` - i.e. it coerces each component to a data frame and then uses `cbind()` to bind them all together.
 
 `as_tibble()` has been written with an eye for performance:
 
