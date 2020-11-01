@@ -1,7 +1,7 @@
 scoped_lifecycle_silence()
 
 test_that("interface of print() identical to trunc_mat()", {
-  if (packageVersion("pillar") >= "1.4.99") {
+  if (utils::packageVersion("pillar") >= "1.4.99") {
     print_arg_names <- names(formals(pillar:::print.tbl))
   } else {
     print_arg_names <- names(formals(print.tbl))
