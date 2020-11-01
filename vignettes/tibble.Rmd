@@ -73,7 +73,7 @@ It encapsulates best practices for data frames:
     tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
     ```
     
-    List-columns are most commonly created by `do()`, but they can be useful to
+    List-columns are often created by `tidyr::nest()`, but they can be useful to
     create by hand.
       
   * It never adjusts the names of variables:
