@@ -188,7 +188,7 @@
 </span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">3</span><span>     3 </span><span style="color: #555555;">&lt;int [20]&gt;</span><span>
 </span></code></pre>
 </div>
-<p>List-columns are most commonly created by <code>do()</code>, but they can be useful to create by hand.</p>
+<p>List-columns are often created by <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::nest()</a></code>, but they can be useful to create by hand.</p>
 </li>
 <li>
 <p>It never adjusts the names of variables:</p>
@@ -228,7 +228,7 @@
 <div id="coercion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coercion" class="anchor"></a>Coercion</h2>
-<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> methods, and in fact, it’s precisely what <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> does, but it’s similar to <code><a href="https://rdrr.io/r/base/do.call.html">do.call(cbind, lapply(x, data.frame))</a></code> - i.e. it coerces each component to a data frame and then <code>cbinds()</code> them all together.</p>
+<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> methods, and in fact, it’s precisely what <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> does, but it’s similar to <code><a href="https://rdrr.io/r/base/do.call.html">do.call(cbind, lapply(x, data.frame))</a></code> - i.e. it coerces each component to a data frame and then uses <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> to bind them all together.</p>
 <p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> has been written with an eye for performance:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
