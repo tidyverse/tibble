@@ -11,7 +11,7 @@ expect_cnd_equivalent <- function(actual, expected) {
   expected$trace <- NULL
   expected$parent <- NULL
   expected$body <- NULL
-  expect_equivalent(actual, expected)
+  expect_equal(actual, expected)
 }
 
 expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) {
