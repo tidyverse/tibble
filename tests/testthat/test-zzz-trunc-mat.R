@@ -1,5 +1,3 @@
-context("Truncated matrix")
-
 scoped_lifecycle_silence()
 
 test_that("interface of print() identical to trunc_mat()", {

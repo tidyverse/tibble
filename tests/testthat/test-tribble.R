@@ -1,5 +1,3 @@
-context("tribble()")
-
 test_that("tribble() constructs 'tibble' as expected", {
   result <- tribble(
     ~colA, ~colB,

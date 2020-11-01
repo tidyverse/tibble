@@ -1,5 +1,3 @@
-context("tbl_df")
-
 local_options(lifecycle_verbosity = "quiet")
 
 # [ -----------------------------------------------------------------------

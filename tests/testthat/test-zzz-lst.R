@@ -1,5 +1,3 @@
-context("lst")
-
 test_that("lst handles named and unnamed NULL arguments", {
   expect_equivalent(lst(NULL), list("NULL" = NULL))
   expect_identical(lst(a = NULL), list(a = NULL))

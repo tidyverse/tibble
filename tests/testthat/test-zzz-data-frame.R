@@ -1,5 +1,3 @@
-context("tibble")
-
 test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)

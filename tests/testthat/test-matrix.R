@@ -1,5 +1,3 @@
-context("matrix")
-
 test_that("correct rows and cols", {
   x <- matrix(1:6, nrow = 2)
   out <- as_tibble(x, .name_repair = "minimal")

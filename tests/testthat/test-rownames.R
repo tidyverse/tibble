@@ -1,5 +1,3 @@
-context("rownames")
-
 test_that("has_rownames and remove_rownames", {
   expect_false(has_rownames(iris))
   expect_true(has_rownames(mtcars))

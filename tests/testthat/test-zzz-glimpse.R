@@ -1,5 +1,3 @@
-context("Glimpse")
-
 test_that("format_v for values", {
   expect_equal(format_v(1), "1")
   expect_equal(format_v(1:3), c("1", "2", "3"))

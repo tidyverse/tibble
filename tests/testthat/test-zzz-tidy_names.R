@@ -1,5 +1,3 @@
-context("tidy_names")
-
 test_that("zero-length inputs given character names", {
   out <- set_tidy_names(character())
   expect_equal(names(out), character())

@@ -1,5 +1,3 @@
-context("Truncated matrix")
-
 test_that("print() returns output invisibly", {
   expect_output(ret <- withVisible(print(as_tibble(iris))))
   expect_false(ret$visible)

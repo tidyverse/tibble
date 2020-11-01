@@ -1,5 +1,3 @@
-context("msg")
-
 test_that("error class", {
   expect_equal(tibble_error_class("boo"), c("tibble_error_boo", "tibble_error"))
 })
