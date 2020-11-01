@@ -643,15 +643,15 @@ test_that("handles atomic vectors", {
   out <- as_tibble(x, .name_repair = "minimal")
   expect_equal(out[[1]], c("a", "a"))
 
-  x <- matrix(complex(real = 1, imag = 2), nrow = 2)
+  x <- matrix(complex(real = 1, imaginary = 2), nrow = 2)
   out <- as_tibble(x, .name_repair = "minimal")
   expect_equal(out[[1]], as.vector(x))
 })
 
 test_that("forwarding to as.data.frame() for ts objects (#184)", {
   mts <- cbind(
-    A = ts(c(1, 1, 2, 2),     start = 2016, freq = 4),
-    B = ts(c(11, 11, 12, 13), start = 2016, freq = 4)
+    A = ts(c(1, 1, 2, 2),     start = 2016, frequency = 4),
+    B = ts(c(11, 11, 12, 13), start = 2016, frequency = 4)
   )
   expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))
 })
