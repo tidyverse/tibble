@@ -102,8 +102,8 @@ test_that("can deframe three-column data frame with warning", {
   )
 })
 
-verify_output("enframe.txt", {
+test_that("output test", expect_snapshot({
   enframe(1:3, value = NULL)
 
   enframe(Titanic)
-})
+}))

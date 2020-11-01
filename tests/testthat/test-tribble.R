@@ -214,7 +214,7 @@ test_that("frame_matrix cannot have list columns", {
   )
 })
 
-verify_output("tribble.txt", {
+test_that("output test", expect_snapshot({
   tribble(1)
   tribble(~a, ~b, 1)
   tribble(a ~ b, 1)
@@ -223,4 +223,4 @@ verify_output("tribble.txt", {
 
   frame_matrix(1)
   frame_matrix(~a, list(1))
-})
+}))

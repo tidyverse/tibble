@@ -545,31 +545,6 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
   )
 })
 
-verify_output("as_tibble.txt", {
-  as_tibble(list(1))
-  as_tibble(list(1, 2))
-  as_tibble(list(a = 1, 2))
-  as_tibble(as.list(1:26))
-  as_tibble(set_names(list(1), "..1"))
-  as_tibble(set_names(list(1:26), paste0("..", 1:26)))
-  as_tibble(list(a = 1, a = 1))
-  as_tibble(list(a = 1, a = 1, b = 1, b = 1))
-  as_tibble(list(a = new_environment()))
-
-  as_tibble_row(list(1))
-  as_tibble_row(list(1, 2))
-  as_tibble_row(list(a = 1, 2))
-  as_tibble_row(as.list(1:26))
-  as_tibble_row(set_names(list(1), "..1"))
-  as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
-  as_tibble_row(list(a = 1, a = 1))
-  as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
-  as_tibble_row(list(a = new_environment()))
-
-  as_tibble_row(list(a = 1:3))
-  as_tibble_row(list(a = 1:3, b = 1:3))
-})
-
 test_that("correct rows and cols", {
   x <- matrix(1:6, nrow = 2)
   out <- as_tibble(x, .name_repair = "minimal")
@@ -725,3 +700,28 @@ test_that("converting from matrix uses implicit row names when `rownames =` is p
   )
   expect_equal(y, z)
 })
+
+test_that("output test", expect_snapshot({
+  as_tibble(list(1))
+  as_tibble(list(1, 2))
+  as_tibble(list(a = 1, 2))
+  as_tibble(as.list(1:26))
+  as_tibble(set_names(list(1), "..1"))
+  as_tibble(set_names(list(1:26), paste0("..", 1:26)))
+  as_tibble(list(a = 1, a = 1))
+  as_tibble(list(a = 1, a = 1, b = 1, b = 1))
+  as_tibble(list(a = new_environment()))
+
+  as_tibble_row(list(1))
+  as_tibble_row(list(1, 2))
+  as_tibble_row(list(a = 1, 2))
+  as_tibble_row(as.list(1:26))
+  as_tibble_row(set_names(list(1), "..1"))
+  as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
+  as_tibble_row(list(a = 1, a = 1))
+  as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
+  as_tibble_row(list(a = new_environment()))
+
+  as_tibble_row(list(a = 1:3))
+  as_tibble_row(list(a = 1:3, b = 1:3))
+}))

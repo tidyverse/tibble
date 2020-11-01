@@ -303,7 +303,7 @@ test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
 })
 
-verify_output("add.txt", {
+test_that("output test", expect_snapshot({
   add_row(tibble(), a = 1)
   add_row(tibble(), a = 1, b = 2)
   add_row(tibble(), !!!set_names(letters))
@@ -315,4 +315,4 @@ verify_output("add.txt", {
   add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
   add_column(tibble(a = 2:3), b = 4:6)
   add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
-})
+}))
