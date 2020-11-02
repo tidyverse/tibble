@@ -47,6 +47,7 @@ Suggests:
     bit64,
     blob,
     covr,
+    DiagrammeR,
     dplyr,
     evaluate,
     formattable,
