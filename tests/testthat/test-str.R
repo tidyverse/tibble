@@ -1,7 +1,5 @@
-test_that("str output matches known output", {
-  skip_on_non_utf8_locale()
-
-  verify_output("str.txt", unicode = TRUE, {
+test_that("output test", {
+  expect_snapshot({
     str(as_tibble(mtcars), width = 70L)
 
     str(as_tibble(iris), width = 70L)

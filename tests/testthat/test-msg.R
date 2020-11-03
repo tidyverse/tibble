@@ -1,5 +1,3 @@
-context("msg")
-
 test_that("error class", {
   expect_equal(tibble_error_class("boo"), c("tibble_error_boo", "tibble_error"))
 })
@@ -8,7 +6,7 @@ test_that("aborting with class", {
   expect_error(cnd_signal(error_enframe_value_null()), class = tibble_error_class("enframe_value_null")[[1]])
 })
 
-verify_output("msg.txt", {
+test_that("output test", expect_snapshot({
   "# add"
   error_add_rows_to_grouped_df()
 
@@ -150,4 +148,4 @@ verify_output("msg.txt", {
   error_tribble_non_rectangular(5, 17)
 
   error_frame_matrix_list(2:4)
-})
+}))

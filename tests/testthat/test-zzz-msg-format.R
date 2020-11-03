@@ -1,5 +1,3 @@
-context("msg-format")
-
 test_that("bullets", {
   skip_enh_bullets_format()
 

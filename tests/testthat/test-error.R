@@ -21,10 +21,10 @@ test_that("tibble_error()", {
   )
 })
 
-verify_output("error.txt", {
+test_that("output test", expect_snapshot({
   invalid_df("must be integer", "col", "\nFix this.")
   invalid_df("must be numeric", c("col1", "col2"))
 
   use_repair(TRUE)
   use_repair(FALSE)
-})
+}))

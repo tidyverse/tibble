@@ -108,7 +108,7 @@ test_that("validate_tibble() checks", {
   )
 })
 
-verify_output("new.txt", {
+test_that("output test", expect_snapshot({
   new_tibble(1:3, nrow = 1)
   new_tibble(as.list(1:3))
-})
+}))

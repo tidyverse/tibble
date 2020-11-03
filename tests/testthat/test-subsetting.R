@@ -3,8 +3,8 @@
 test_that("[ never drops", {
   mtcars2 <- as_tibble(mtcars)
 
-  expect_is(mtcars2[, 1], "data.frame")
-  expect_is(mtcars2[, 1], "tbl_df")
+  expect_s3_class(mtcars2[, 1], "data.frame")
+  expect_s3_class(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
 })
 
@@ -28,7 +28,7 @@ test_that("[ and as_tibble commute", {
 
 test_that("[ with 0 cols creates correct row names (#656)", {
   zero_row <- as_tibble(iris)[, 0]
-  expect_is(zero_row, "tbl_df")
+  expect_s3_class(zero_row, "tbl_df")
   expect_equal(nrow(zero_row), 150)
   expect_equal(ncol(zero_row), 0)
 
@@ -738,7 +738,7 @@ test_that("$<- recycles only values of length one", {
   })
 })
 
-verify_output("subsetting.txt", {
+test_that("output test", expect_snapshot({
   "# [.tbl_df is careful about names (#1245)"
   foo <- tibble(x = 1:10, y = 1:10)
   foo[c("x", "y", "z")]
@@ -953,4 +953,4 @@ verify_output("subsetting.txt", {
   df$x <- 8:9
   df$w <- 8:9
   df$a <- character()
-})
+}))

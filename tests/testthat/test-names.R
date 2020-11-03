@@ -12,7 +12,7 @@ test_that("repaired_names()", {
   expect_equal(repaired_names(c("a", "a"), .name_repair = "minimal"), c("a", "a"))
 })
 
-verify_output("names.txt", {
+test_that("output test", expect_snapshot({
   repaired_names(letters[1:3])
   repaired_names("")
   repaired_names(c("a", "a"))
@@ -20,4 +20,4 @@ verify_output("names.txt", {
   repaired_names(c("a", "a"), .name_repair = "universal")
   repaired_names(c("a", "a"), .name_repair = "universal", quiet = TRUE)
   repaired_names(c("if"), .name_repair = "universal")
-})
+}))
