@@ -149,14 +149,14 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>This vignette shows how to decorate columns for custom formatting. We use the formattable package for demonstration because it already contains useful vector classes that apply a custom formatting to numbers.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://renkun.me/formattable">formattable</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://renkun.me/formattable">formattable</a></span><span class="op">)</span>
 
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/formattable/man/digits.html">digits</a></span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">tbl</span>
@@ -165,10 +165,10 @@
 <span class="co">#&gt;   &lt;formttbl&gt;</span>
 <span class="co">#&gt; 1 9.000     </span>
 <span class="co">#&gt; 2 10.000    </span>
-<span class="co">#&gt; 3 11.000</span></pre></div>
+<span class="co">#&gt; 3 11.000</span></code></pre></div>
 <p>The <code>x</code> column in the tibble above is a regular number with a formatting method. It always will be shown with three digits after the decimal point. This also applies to columns derived from <code>x</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -195,10 +195,10 @@
 <span class="co">#&gt;   &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     9.000    10.000    81.000    91.000     9.000     0.412   111.667     1</span>
 <span class="co">#&gt; 2    10.000    11.000   100.000   111.000     9.000    -0.544   111.667     1</span>
-<span class="co">#&gt; 3    11.000    12.000   121.000   133.000    10.000    -1.000   111.667     1</span></pre></div>
+<span class="co">#&gt; 3    11.000    12.000   121.000   133.000    10.000    -1.000   111.667     1</span></code></pre></div>
 <p>Summaries also maintain the formatting.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">tbl2</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tbl2</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
@@ -207,10 +207,10 @@
 <span class="co">#&gt;         lag         z</span>
 <span class="co">#&gt;   &lt;dbl:fmt&gt; &lt;dbl:fmt&gt;</span>
 <span class="co">#&gt; 1     9.000    90.500</span>
-<span class="co">#&gt; 2    10.000   121.000</span></pre></div>
+<span class="co">#&gt; 2    10.000   121.000</span></code></pre></div>
 <p>Same for pivoting operations.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
 
 <span class="va">stocks</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -221,24 +221,24 @@
 <span class="co">#&gt; # A tibble: 4 x 6</span>
 <span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span>
 <span class="co">#&gt;   &lt;fct&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt;</span>
-<span class="co">#&gt; 1 1     $9,122.77 $8,673.03 $3,108.36   $585.80 $5,295.55</span>
-<span class="co">#&gt; 2 2     $7,310.70 $3,757.79 $9,117.33 $9,267.70 $6,624.29</span>
-<span class="co">#&gt; 3 3     $1,075.54 $2,932.22 $1,265.66 $4,814.27 $7,924.11</span>
-<span class="co">#&gt; 4 4     $6,344.88 $4,544.61 $7,323.76 $5,307.05 $2,208.23</span></pre></div>
+<span class="co">#&gt; 1 1     $6,876.46   $418.27 $2,485.38 $1,259.02 $4,963.22</span>
+<span class="co">#&gt; 2 2     $3,825.28 $8,688.63 $8,498.96 $7,156.30 $2,442.04</span>
+<span class="co">#&gt; 3 3     $3,927.93 $8,491.54 $7,162.53   $682.55 $8,053.97</span>
+<span class="co">#&gt; 4 4     $5,212.09 $9,496.11 $1,691.39 $6,107.63 $6,576.90</span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065">some work</a> to show apply the formatting to the scales.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="co"># Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar</span>
 <span class="va">stocks</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">stock</span>, color <span class="op">=</span> <span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It pays off to specify formatting very early in the process. The diagram below shows the principal stages of data analysis and exploration from “R for data science”.</p>
-<div id="htmlwidget-6eb7eff2a613afd0bb07" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6eb7eff2a613afd0bb07">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
-<div id="htmlwidget-c5b35b4db419da06628b" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c5b35b4db419da06628b">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
+<div id="htmlwidget-c26b7b0fcee28b90d5e2" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c26b7b0fcee28b90d5e2">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
+<div id="htmlwidget-74d3e23187afde308fda" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74d3e23187afde308fda">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
 <ul>
 <li>give a good user experience for analysis
 <ul>
@@ -256,8 +256,8 @@
 </li>
 </ul>
 <p>Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow where parts of the “Tidy”, “Transform” or even “Visualize” stages are run on the database. Often it’s possible to derive a rule-based approach for formatting.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">tbl3</span> <span class="op">&lt;-</span> 
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tbl3</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, x <span class="op">=</span> <span class="fl">9</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
     y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>, 
@@ -287,10 +287,10 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl:fmt&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt;</span>
 <span class="co">#&gt; 1 a         9.000   10.000     81.0     91.0    9.000    0.412    111.7    1.000</span>
 <span class="co">#&gt; 2 b        10.000   11.000    100.0    111.0    9.000   -0.544    111.7    1.000</span>
-<span class="co">#&gt; 3 c        11.000   12.000    121.0    133.0   10.000   -1.000    111.7    1.000</span></pre></div>
+<span class="co">#&gt; 3 c        11.000   12.000    121.0    133.0   10.000   -1.000    111.7    1.000</span></code></pre></div>
 <p>These rules can be stored in <code><a href="https://ggplot2.tidyverse.org/reference/tidyeval.html">quos()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/tidyeval.html">quos</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/tidyeval.html">quos</a></span><span class="op">(</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">3</span><span class="op">)</span>,
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span>
@@ -302,7 +302,7 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl:fmt&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt;</span>
 <span class="co">#&gt; 1 a         9.000   10.000     81.0     91.0    9.000    0.412    111.7    1.000</span>
 <span class="co">#&gt; 2 b        10.000   11.000    100.0    111.0    9.000   -0.544    111.7    1.000</span>
-<span class="co">#&gt; 3 c        11.000   12.000    121.0    133.0   10.000   -1.000    111.7    1.000</span></pre></div>
+<span class="co">#&gt; 3 c        11.000   12.000    121.0    133.0   10.000   -1.000    111.7    1.000</span></code></pre></div>
 <p>This poses a few drawbacks:</p>
 <ul>
 <li>The syntax is repetitive and not very intuitive</li>
