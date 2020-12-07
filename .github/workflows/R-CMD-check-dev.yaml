@@ -1,14 +1,8 @@
+# This workflow calls the GitHub API very frequently.
+# Can't be run as part of commits
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
   schedule:
-    - cron:  '0 8 * * *'
+    - cron:  '0 1 * * *'
 
 name: rcc dev
 
@@ -30,6 +24,11 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+      - name: Check rate limits
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash
+
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@v1
@@ -38,7 +37,13 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: "Prepare timestamp for cache"
+      - name: Install remotes
+        run: |
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
+        shell: Rscript {0}
+
+      - name: Prepare cache keys
         if: runner.os != 'Windows'
         id: date
         run: echo "::set-output name=date::$(date -Ihours)"
@@ -51,11 +56,6 @@ jobs:
           key: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-
 
-      - name: Install remotes
-        run: |
-          install.packages("remotes")
-        shell: Rscript {0}
-
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
@@ -66,7 +66,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          library(remotes)
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
           deps <- remotes::dev_package_deps(dependencies = TRUE)
           update(deps)
           lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
@@ -76,18 +77,24 @@ jobs:
       - name: Session info
         run: |
           options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
           pkgs <- installed.packages()[, "Package"]
-          if (!("sessioninfo" %in% pkgs)) install.packages("sessioninfo")
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
+
+      # Begin custom: after install
+      # End custom: after install
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
           _R_CHECK_SYSTEM_CLOCK_: false
           _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
-          RCMDCHECK_ERROR_ON: note
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = Sys.getenv("RCMDCHECK_ERROR_ON"), check_dir = "check")
+        run: |
+          error_on <- "note"
+          # Begin custom: rcmdcheck error_on
+          # End custom: rcmdcheck error_on
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
 
       - name: Show testthat output
@@ -101,3 +108,9 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Check rate limits
+        if: always()
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash
