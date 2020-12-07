@@ -1,0 +1,52 @@
+# Push back changes to main actions-subtree repository
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '.github/workflows/*'
+
+name: Push back to actions-subtree
+
+jobs:
+  create_key:
+    runs-on: ubuntu-18.04
+
+    name: Push on change
+
+    steps:
+      - name: Check out our repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git identity
+        run: |
+          git log HEAD^.. --pretty=format:"git config --global user.name '%an' && git config --global user.email '%ae'" | tee /dev/stderr | sh
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.ACTIONS_SUBTREE_KEY_DEPLOY }}
+          known_hosts: 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+          name: id_rsa # optional
+
+      - name: Clone actions-subtree
+        run: |
+          git clone git@github.com:${{ secrets.ACTIONS_SUBTREE_REMOTE_REPO }} actions-subtree
+
+      - name: Extract subtree
+        run: |
+          git subtree split --prefix=.github/workflows -b actions-subtree
+
+      - name: Merge subtree manually
+        run: |
+          set -x
+          cd actions-subtree
+          git remote add target ..
+          git fetch target
+          git checkout ${{ github.repository }}
+          git merge --squash --ff target/actions-subtree
+          git commit --no-edit
+          git push
