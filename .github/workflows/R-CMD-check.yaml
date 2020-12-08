@@ -37,8 +37,8 @@ jobs:
           - {os: ubuntu-16.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-16.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-16.04,   r: '3.3',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          # Begin custom matrix elements
-          # End custom matrix elements
+          # Begin custom: matrix elements
+          # End custom: matrix elements
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -87,6 +87,9 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
+
+      # Begin custom: before install
+      # End custom: before install
 
       - name: Install dependencies
         run: |

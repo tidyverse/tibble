@@ -61,6 +61,9 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
 
+      # Begin custom: before install
+      # End custom: before install
+
       - name: Install pkgdown sysdeps
         if: runner.os == 'Linux'
         env:
@@ -75,6 +78,9 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
+
+      # Begin custom: after install
+      # End custom: after install
 
       - name: Install package
         run: R CMD INSTALL .

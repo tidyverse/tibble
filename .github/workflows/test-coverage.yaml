@@ -56,6 +56,9 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "16.04"); if (length(req) > 0) cat(req, sep = "\n")')
 
+      # Begin custom: before install
+      # End custom: before install
+
       - name: Install dependencies
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
