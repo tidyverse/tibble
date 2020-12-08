@@ -18,6 +18,7 @@ reference:
   contents:
   - "tibble-package"
   - tibble
+  - "tbl_df-class"
   - formatting
   - "tibble-options"
   - tribble
@@ -25,6 +26,7 @@ reference:
 
 - title: Coercion
   contents:
+  - is_tibble
   - as_tibble
   - new_tibble
   - validate_tibble
