@@ -9,7 +9,7 @@ articles:
   types: types.html
   wip/subassign: subassign.html
   wip/subset: subset.html
-last_built: 2020-12-08T08:13Z
+last_built: 2020-12-10T04:50Z
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles
