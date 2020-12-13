@@ -21,9 +21,11 @@ test_that("names<-()", {
   scoped_lifecycle_warnings()
 
   if (!is_rstudio()) {
-    expect_warning(
-      set_tbl_names(NULL),
-      class = "lifecycle_warning_deprecated"
+    suppressWarnings(
+      expect_warning(
+        set_tbl_names(NULL),
+        class = "lifecycle_warning_deprecated"
+      )
     )
   }
 
