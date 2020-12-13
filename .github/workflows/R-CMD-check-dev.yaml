@@ -12,6 +12,9 @@ jobs:
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
+    # Begin custom: services
+    # End custom: services
+
     strategy:
       fail-fast: false
       matrix:
@@ -22,6 +25,10 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
 
     steps:
       - name: Check rate limits
@@ -40,7 +47,7 @@ jobs:
       - name: Install remotes
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
       - name: Prepare cache keys
@@ -100,7 +107,7 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
 
-      - name: Show testthat output
+      - name: Show test output
         if: always()
         run: find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
         shell: bash

@@ -79,7 +79,7 @@ jobs:
       - name: Install remotes
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
       - name: Prepare cache keys

@@ -5,15 +5,28 @@ on:
     - main
     - "docs*"
     - "cran-*"
+  pull_request:
+    branches:
+      - main
+      - master
+  schedule:
+    - cron:  '20 2 * * *'
 
 name: pkgdown
 
 jobs:
   pkgdown:
     runs-on: ubuntu-18.04
+
+    # Begin custom: services
+    # End custom: services
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
 
     steps:
       - name: Check rate limits
@@ -23,19 +36,19 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v1
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Install remotes
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
-      - name: Query dependencies
+      - name: Prepare cache keys
         run: |
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
@@ -76,13 +89,10 @@ jobs:
       - name: Install dependencies
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
-          remotes::install_deps(dependencies = TRUE)
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
-
-      # Begin custom: after install
-      # End custom: after install
 
       - name: Install package
         run: R CMD INSTALL .
@@ -95,8 +105,11 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
+      # Begin custom: after install
+      # End custom: after install
+
       - name: Build site
-        if: github.event_name == 'pull_request'
+        if: github.event_name != 'push'
         run: |
           pkgdown::build_site()
         shell: Rscript {0}
