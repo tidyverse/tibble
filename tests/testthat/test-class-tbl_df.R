@@ -49,6 +49,8 @@ test_that("names<-()", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("testthat", "3.0.0.9000")
+
   expect_snapshot({
     df <- tibble(a = 1, b = 2)
 
