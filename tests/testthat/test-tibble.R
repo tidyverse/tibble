@@ -242,8 +242,10 @@ test_that("is_tibble", {
   expect_identical(is.tibble(iris), is_tibble(iris))
 })
 
-test_that("output test", expect_snapshot({
-  tibble(a = 1, a = 1)
-  tibble(a = new_environment())
-  tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
-}))
+test_that("output test", {
+  expect_snapshot({
+    tibble(a = 1, a = 1)
+    tibble(a = new_environment())
+    tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+  })
+})

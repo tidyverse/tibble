@@ -46,10 +46,12 @@ test_that("names<-()", {
   )
 })
 
-test_that("output test", expect_snapshot({
-  df <- tibble(a = 1, b = 2)
+test_that("output test", {
+  expect_snapshot({
+    df <- tibble(a = 1, b = 2)
 
-  names(df) <- NULL
-  names(df) <- "c"
-  names(df) <- c("..1", "..2")
-}))
+    names(df) <- NULL
+    names(df) <- "c"
+    names(df) <- c("..1", "..2")
+  })
+})

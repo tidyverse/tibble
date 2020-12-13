@@ -20,14 +20,16 @@ test_that("pluralise_msg works correctly", {
   expect_identical(pluralise_msg("[an ]index(es) ", c(-4, -5)), "indexes -4, -5")
 })
 
-test_that("output test", expect_snapshot({
-  "# Bullets"
-  bullets("header", c("item 1", "item 2"))
-  bullets("header", LETTERS)
-  bullets("header", 1:6)
+test_that("output test", {
+  expect_snapshot({
+    "# Bullets"
+    bullets("header", c("item 1", "item 2"))
+    bullets("header", LETTERS)
+    bullets("header", 1:6)
 
-  "# Commas"
-  commas("1")
-  commas(letters[2:4])
-  commas(LETTERS)
-}))
+    "# Commas"
+    commas("1")
+    commas(letters[2:4])
+    commas(LETTERS)
+  })
+})
