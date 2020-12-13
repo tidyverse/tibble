@@ -243,7 +243,7 @@ test_that("is_tibble", {
 })
 
 test_that("output test", {
-  expect_snapshot({
+  expect_snapshot_with_error({
     tibble(a = 1, a = 1)
     tibble(a = new_environment())
     tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)

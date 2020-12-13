@@ -13,7 +13,7 @@ test_that("repaired_names()", {
 })
 
 test_that("output test", {
-  expect_snapshot({
+  expect_snapshot_with_error({
     repaired_names(letters[1:3])
     repaired_names("")
     repaired_names(c("a", "a"))

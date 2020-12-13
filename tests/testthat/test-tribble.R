@@ -215,7 +215,7 @@ test_that("frame_matrix cannot have list columns", {
 })
 
 test_that("output test", {
-  expect_snapshot({
+  expect_snapshot_with_error({
     tribble(1)
     tribble(~a, ~b, 1)
     tribble(a ~ b, 1)

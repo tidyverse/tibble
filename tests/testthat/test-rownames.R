@@ -94,7 +94,7 @@ test_that("converting to data frame does not add row names", {
 })
 
 test_that("output test", {
-  expect_snapshot({
+  expect_snapshot_with_error({
     rownames_to_column(mtcars, "cyl")
     rowid_to_column(iris, "Species")
 

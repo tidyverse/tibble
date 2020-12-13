@@ -103,7 +103,7 @@ test_that("can deframe three-column data frame with warning", {
 })
 
 test_that("output test", {
-  expect_snapshot({
+  expect_snapshot_with_error({
     enframe(1:3, value = NULL)
 
     enframe(Titanic)
