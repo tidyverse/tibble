@@ -1,3 +1,8 @@
+# tibble 3.0.5
+
+- Same as previous version.
+
+
 # tibble 3.0.4.9001
 
 - Establish compatibility with testthat 3.0.1 (#832).
