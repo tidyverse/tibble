@@ -193,7 +193,9 @@ print_with_mocked_format_body <- function(x, ...) {
     format_body = function(x, ...) {
       paste0("<body created by pillar>")
     },
-    print(x, ...)
+    {
+      print(x, ...)
+    }
   )
 }
 
