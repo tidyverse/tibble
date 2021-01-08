@@ -52,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.4</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.5</span>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@
 </li>
         <li>
   <a href="https://github.com/tidyverse/tibble">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,8 +145,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
@@ -348,8 +348,8 @@
 #&gt; $ `named list`  &lt;named list&gt; [1]
 #&gt; $ factor        &lt;fct&gt; A
 #&gt; $ ordered       &lt;ord&gt; a
-#&gt; $ Date          &lt;date&gt; 2020-10-11
-#&gt; $ POSIXt        &lt;dttm&gt; 2020-10-11 18:13:47
+#&gt; $ Date          &lt;date&gt; 2021-01-08
+#&gt; $ POSIXt        &lt;dttm&gt; 2021-01-08 06:06:03
 #&gt; $ difftime      &lt;drtn&gt; 1 secs
 #&gt; $ hms           &lt;time&gt; 00:00:01
 #&gt; $ integer64     &lt;int64&gt; 10000000000
@@ -366,8 +366,8 @@
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
 <p>The column header is obtained by calling <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html">vctrs::vec_ptype_abbr()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) </span>
@@ -379,8 +379,8 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x56145ba359d8&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x557ce6f43bb8&gt;</span>
+<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>
 
