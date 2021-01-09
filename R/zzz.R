@@ -9,10 +9,10 @@
   # Simplify once pillar 1.5.0 is on CRAN
   replace_if_pillar_has(glimpse)
   replace_if_pillar_has(tbl_sum)
-  register_if_pillar_hasnt(
-    glimpse.default, glimpse.data.frame, glimpse.tbl,
-    tbl_sum.default, tbl_sum.tbl, format.tbl, print.tbl
-  )
+  register_if_pillar_hasnt(c(
+    "glimpse.default", "glimpse.data.frame", "glimpse.tbl",
+    "tbl_sum.default", "tbl_sum.tbl", "format.tbl", "print.tbl"
+  ))
 
   vctrs::s3_register("tibble::tbl_sum", "tbl_df")
 }
