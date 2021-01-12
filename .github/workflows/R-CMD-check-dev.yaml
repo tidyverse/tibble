@@ -76,8 +76,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          install.packages("https://github.com/krlmlr/remotes/archive/f-rate-limit-gh.tar.gz", repos = NULL)
           deps <- remotes::dev_package_deps(dependencies = TRUE)
           update(deps)
           lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
