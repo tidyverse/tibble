@@ -56,8 +56,3 @@ vec_ptype_abbr.tbl_df <- function(x, ...) {
   }
   abbr
 }
-
-#' @export
-type_sum.tbl_df <- function(x) {
-  vec_ptype_abbr(x)
-}
