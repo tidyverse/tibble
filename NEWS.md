@@ -1,6 +1,6 @@
 # tibble 3.0.6
 
-- Same as previous version.
+- Ignore errors in `formats.Rmd` vignette.
 
 
 # tibble 3.0.5.9002
