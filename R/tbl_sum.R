@@ -49,4 +49,15 @@ pillar::obj_sum
 pillar::type_sum
 
 #' @export
-type_sum.tbl_df <- function(x) "tibble"
+vec_ptype_abbr.tbl_df <- function(x, ...) {
+  abbr <- class(x)[[1]]
+  if (abbr == "tbl_df") {
+    abbr <- "tibble"
+  }
+  abbr
+}
+
+#' @export
+type_sum.tbl_df <- function(x) {
+  vec_ptype_abbr(x)
+}
