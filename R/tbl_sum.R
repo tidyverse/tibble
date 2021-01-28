@@ -40,12 +40,6 @@ dim_desc <- function(x) {
   paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
 
-size_sum <- function(x) {
-  if (!vec_is(x)) return("")
-
-  paste0(" [", dim_desc(x), "]")
-}
-
 #' @importFrom pillar obj_sum
 #' @export
 pillar::obj_sum
@@ -55,4 +49,10 @@ pillar::obj_sum
 pillar::type_sum
 
 #' @export
-type_sum.tbl_df <- function(x) "tibble"
+vec_ptype_abbr.tbl_df <- function(x, ...) {
+  abbr <- class(x)[[1]]
+  if (abbr == "tbl_df") {
+    abbr <- "tibble"
+  }
+  abbr
+}

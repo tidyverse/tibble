@@ -7,9 +7,5 @@ test_that("output test", {
     dim_desc(iris)
     dim_desc(Titanic)
     dim_desc(1:3)
-
-    size_sum(trees)
-    size_sum(Titanic)
-    size_sum(1:3)
   })
 })
