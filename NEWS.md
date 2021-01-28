@@ -1,3 +1,8 @@
+# tibble 3.0.6
+
+- Same as previous version.
+
+
 # tibble 3.0.5.9002
 
 - Internal changes only.
