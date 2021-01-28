@@ -1,3 +1,18 @@
+# tibble 3.0.6.9000
+
+- Internal changes only.
+
+
+# tibble 3.0.6
+
+- Same as previous version.
+
+
+# tibble 3.0.5.9002
+
+- Internal changes only.
+
+
 # tibble 3.0.5.9001
 
 - Avoid tidy evaluation in pillar compatibility code.
