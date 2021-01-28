@@ -40,12 +40,6 @@ dim_desc <- function(x) {
   paste0(format_dim, collapse = spaces_around(mult_sign()))
 }
 
-size_sum <- function(x) {
-  if (!vec_is(x)) return("")
-
-  paste0(" [", dim_desc(x), "]")
-}
-
 #' @importFrom pillar obj_sum
 #' @export
 pillar::obj_sum
