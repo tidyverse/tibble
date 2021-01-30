@@ -745,6 +745,8 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("lifecycle", "0.2.0.9000")
+
   expect_snapshot_with_error({
     "# [.tbl_df is careful about names (#1245)"
     foo <- tibble(x = 1:10, y = 1:10)
