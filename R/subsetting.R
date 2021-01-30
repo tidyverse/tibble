@@ -407,10 +407,6 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  if (!is.null(i_arg) && !is.null(i)) {
-    i <- vectbl_as_new_row_index(i, x, i_arg)
-  }
-
   if (is.null(i)) {
     value <- vectbl_wrap_rhs_col(value, value_arg)
 
@@ -422,9 +418,12 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
     xo <- tbl_subassign_col(x, j, value)
-  } else if (is_empty(i)) {
+  } else if (is.null(i_arg)) {
+    # x[NULL, ...] <- value
     return(x)
   } else {
+    i <- vectbl_as_new_row_index(i, x, i_arg)
+
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
     value <- vectbl_wrap_rhs_row(value, value_arg)

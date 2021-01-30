@@ -615,6 +615,12 @@ test_that("[<- with explicit NULL doesn't change anything (#696)", {
   expect_identical(iris_tbl, iris_tbl_orig)
 })
 
+test_that("[<- with FALSE still adds column (#846)", {
+  tbl <- tibble(a = 1:3)
+  tbl[FALSE, "b"] <- 2
+  expect_identical(tbl, tibble(a = 1:3, b = NA_real_))
+})
+
 test_that("[<-.tbl_df is careful about attributes (#155)", {
   df <- tibble(x = 1:2, y = x)
   attr(df, "along for the ride") <- "still here"
