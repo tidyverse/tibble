@@ -5,22 +5,9 @@
 
 # tibble 3.0.6
 
-- Same as previous version.
-
-
-# tibble 3.0.5.9002
-
-- Internal changes only.
-
-
-# tibble 3.0.5.9001
-
+- `vec_ptype_abbr.tbl_df()` and `type_sum.tbl_df()` now uses the name of the topmost class for subclasses of `"tbl_df"` (#843).
+- Ignore errors in `formats.Rmd` vignette.
 - Avoid tidy evaluation in pillar compatibility code.
-
-
-# tibble 3.0.5.9000
-
-- Internal changes only.
 
 
 # tibble 3.0.5
