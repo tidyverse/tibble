@@ -6,8 +6,9 @@
 #' behavior is different for tibbles and data frames in some cases:
 #' * `[` always returns a tibble by default, even if
 #'   only one column is accessed.
-#' * Partial matching of column names with `$` and `[[` is not supported, a
-#'   warning is given and `NULL` is returned.
+#' * Partial matching of column names with `$` and `[[` is not supported, and
+#'   `NULL` is returned.
+#'   For `$`, a warning is given.
 #' * Only scalars (vectors of length one) or vectors with the
 #'   same length as the number of rows can be used for assignment.
 #' * Rows outside of the tibble's boundaries cannot be accessed.

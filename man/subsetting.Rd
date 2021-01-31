@@ -46,8 +46,9 @@ behavior is different for tibbles and data frames in some cases:
 \itemize{
 \item \code{[} always returns a tibble by default, even if
 only one column is accessed.
-\item Partial matching of column names with \code{$} and \code{[[} is not supported, a
-warning is given and \code{NULL} is returned.
+\item Partial matching of column names with \code{$} and \code{[[} is not supported, and
+\code{NULL} is returned.
+For \code{$}, a warning is given.
 \item Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
 \item Rows outside of the tibble's boundaries cannot be accessed.
