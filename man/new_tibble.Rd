@@ -21,7 +21,7 @@ validate_tibble(x)
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
 \description{
-\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
