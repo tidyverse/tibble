@@ -48,6 +48,10 @@ pillar::obj_sum
 #' @export
 pillar::type_sum
 
+#' @importFrom pillar size_sum
+#' @export
+pillar::size_sum
+
 #' @export
 vec_ptype_abbr.tbl_df <- function(x, ...) {
   abbr <- class(x)[[1]]
