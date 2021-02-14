@@ -22,7 +22,7 @@ error_column_names_cannot_be_empty <- function(names, repair_hint, parent = NULL
   tibble_error(invalid_df("must be named", names, use_repair(repair_hint)), names = names, parent = parent)
 }
 
-error_column_names_cannot_be_dot_dot <- function(names, repair_hint = has_tibble_arg(".name_repair"), parent = NULL) {
+error_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NULL) {
   tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent)
 }
 
