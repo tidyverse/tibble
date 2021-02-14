@@ -259,7 +259,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
   names(output) <- col_names
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, repair = TRUE, .name_repair = .name_repair)
+  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair)
 
   new_tibble(output, nrow = first_size %||% 0L)
 }

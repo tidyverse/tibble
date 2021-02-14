@@ -10,7 +10,7 @@ tbl_subset_col <- function(x, j, j_arg) {
 
   xo <- .subset(x, j)
   if (anyDuplicated(j)) {
-    xo <- set_repaired_names(xo, repair = FALSE, .name_repair = "minimal")
+    xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
   }
   set_tibble_class(xo, nrow = fast_nrow(x))
 }

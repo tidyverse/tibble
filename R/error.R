@@ -24,8 +24,8 @@ invalid_df <- function(problem, vars, ...) {
   )
 }
 
-use_repair <- function(repair) {
-  if (repair) "\nUse .name_repair to specify repair."
+use_repair <- function(repair_hint) {
+  if (repair_hint) "\nUse .name_repair to specify repair."
 }
 
 tibble_error_class <- function(class) {

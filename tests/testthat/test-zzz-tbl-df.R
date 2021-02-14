@@ -435,7 +435,7 @@ test_that("new_tibble checks", {
   )
   expect_legacy_error(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null(repair = FALSE),
+    error_names_must_be_non_null(repair_hint = FALSE),
     fixed = TRUE
   )
   expect_error(

@@ -136,58 +136,58 @@
     Code
       # # names
     Code
-      error_column_names_cannot_be_empty(1, repair = TRUE)
+      error_column_names_cannot_be_empty(1, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Column 1 must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(2:3, repair = TRUE)
+      error_column_names_cannot_be_empty(2:3, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 2 and 3 must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(seq_along(letters), repair = TRUE)
+      error_column_names_cannot_be_empty(seq_along(letters), repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(4:6, repair = FALSE)
+      error_column_names_cannot_be_empty(4:6, repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 4, 5, and 6 must be named.
     Code
-      error_column_names_cannot_be_dot_dot(1, repair = FALSE)
+      error_column_names_cannot_be_dot_dot(1, repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Column 1 must not have names of the form ... or ..j.
     Code
-      error_column_names_cannot_be_dot_dot(2:3, repair = TRUE)
+      error_column_names_cannot_be_dot_dot(2:3, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Columns 2 and 3 must not have names of the form ... or ..j.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_dot_dot(1:26, repair = TRUE)
+      error_column_names_cannot_be_dot_dot(1:26, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
       Use .name_repair to specify repair.
     Code
-      error_column_names_must_be_unique("a", repair = FALSE)
+      error_column_names_must_be_unique("a", repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
     Code
-      error_column_names_must_be_unique(letters[2:3], repair = TRUE)
+      error_column_names_must_be_unique(letters[2:3], repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column names `b` and `c` must not be duplicated.
       Use .name_repair to specify repair.
     Code
-      error_column_names_must_be_unique(LETTERS, repair = TRUE)
+      error_column_names_must_be_unique(LETTERS, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
