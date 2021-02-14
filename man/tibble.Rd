@@ -61,9 +61,13 @@ addition to \code{data.frame}. This allows so-called "tibbles" to exhibit some
 special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
 fully described in \code{\link[=tbl_df-class]{tbl_df}}.
 \item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of
-transforming the user's input. Character vectors are not coerced to
-factor. List-columns are expressly anticipated and do not require special
-tricks. Column names are not modified.
+transforming the user's input.
+\itemize{
+\item Character vectors are not coerced to factor.
+\item List-columns are expressly anticipated and do not require special tricks.
+\item Column names are not modified.
+\item Inner names in columns are left unchanged.
+}
 \item \code{tibble()} builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.

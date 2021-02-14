@@ -10,9 +10,13 @@
 #'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
 #'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'     transforming the user's input. Character vectors are not coerced to
-#'     factor. List-columns are expressly anticipated and do not require special
-#'     tricks. Column names are not modified.
+#'     transforming the user's input.
+#'
+#'       - Character vectors are not coerced to factor.
+#'       - List-columns are expressly anticipated and do not require special tricks.
+#'       - Column names are not modified.
+#'       - Inner names in columns are left unchanged.
+#'
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
