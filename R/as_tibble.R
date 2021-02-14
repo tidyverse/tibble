@@ -242,8 +242,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
   df <- as.data.frame(x, stringsAsFactors = FALSE)
 
   names(df) <- repaired_names(
-    c(names2(dimnames(x)), n), .name_repair = .name_repair,
-    details = "Use `names(dimnames(x)) <- ...` to assign names to a table."
+    c(names2(dimnames(x)), n), .name_repair = .name_repair, repair = TRUE
   )
 
   # Names already repaired:

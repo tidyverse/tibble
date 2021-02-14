@@ -263,12 +263,12 @@ test_that("as_tibble.poly() supports .name_repair", {
 })
 
 test_that("as_tibble.table() supports .name_repair", {
-  x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
+  expect_snapshot(error = TRUE, {
+    as_tibble(table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5)))
+    as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
+  })
 
-  expect_tibble_error(
-    as_tibble(x),
-    error_column_names_must_be_unique("a")
-  )
+  x <- table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5))
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
     c("a", "a", "n")
