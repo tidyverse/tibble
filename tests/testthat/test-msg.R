@@ -34,8 +34,7 @@ test_that("output test", {
     error_as_tibble_row_size_one(3, "foo", 7)
 
     "# class-tbl_df"
-    error_names_must_be_non_null(repair = TRUE)
-    error_names_must_be_non_null(repair = FALSE)
+    error_names_must_be_non_null()
 
     error_names_must_have_length(length = 5, n = 3)
 

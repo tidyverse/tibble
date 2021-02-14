@@ -105,13 +105,7 @@
     Code
       # # class-tbl_df
     Code
-      error_names_must_be_non_null(repair = TRUE)
-    Output
-      <error/tibble_error_names_must_be_non_null>
-      `names` must not be `NULL`.
-      Use .name_repair to specify repair.
-    Code
-      error_names_must_be_non_null(repair = FALSE)
+      error_names_must_be_non_null()
     Output
       <error/tibble_error_names_must_be_non_null>
       `names` must not be `NULL`.
