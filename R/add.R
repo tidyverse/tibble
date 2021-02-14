@@ -165,7 +165,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
 
   out <- new_data[indexes]
 
-  out <- set_repaired_names(out, .name_repair)
+  out <- set_repaired_names(out, repair = TRUE, .name_repair)
   vectbl_restore(out, .data)
 }
 

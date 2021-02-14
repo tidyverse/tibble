@@ -1,13 +1,14 @@
 set_repaired_names <- function(x,
+                               repair,
                                .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                quiet = FALSE) {
-  set_names(x, repaired_names(names2(x), .name_repair = .name_repair, quiet = quiet))
+  set_names(x, repaired_names(names2(x), repair, .name_repair = .name_repair, quiet = quiet))
 }
 
 repaired_names <- function(name,
+                           repair,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
                            quiet = FALSE,
-                           repair = FALSE,
                            details = NULL) {
 
   subclass_name_repair_errors(name = name, details = details, repair = repair,
@@ -17,7 +18,7 @@ repaired_names <- function(name,
 
 # Errors ------------------------------------------------------------------
 
-error_column_names_cannot_be_empty <- function(names, repair = has_tibble_arg(".name_repair"), parent = NULL) {
+error_column_names_cannot_be_empty <- function(names, repair, parent = NULL) {
   tibble_error(invalid_df("must be named", names, use_repair(repair)), names = names, parent = parent)
 }
 

@@ -236,7 +236,7 @@ NULL
     xo <- .subset(x, j)
 
     if (anyDuplicated(j)) {
-      xo <- set_repaired_names(xo, .name_repair = "minimal")
+      xo <- set_repaired_names(xo, repair = FALSE, .name_repair = "minimal")
     }
 
     xo <- set_tibble_class(xo, nrow = fast_nrow(x))

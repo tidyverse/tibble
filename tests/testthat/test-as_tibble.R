@@ -122,25 +122,25 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
   expect_tibble_error(
     as_tibble(l1),
-    error_column_names_cannot_be_empty(1)
+    error_column_names_cannot_be_empty(1, repair = TRUE)
   )
 
   l2 <- list(x = 1, 2)
   expect_tibble_error(
     as_tibble(l2),
-    error_column_names_cannot_be_empty(2)
+    error_column_names_cannot_be_empty(2, repair = TRUE)
   )
 
   l3 <- list(x = 1, ... = 2)
   expect_tibble_error(
     as_tibble(l3),
-    error_column_names_cannot_be_dot_dot(2)
+    error_column_names_cannot_be_dot_dot(2, repair = TRUE)
   )
 
   l4 <- list(x = 1, ..1 = 2)
   expect_tibble_error(
     as_tibble(l4),
-    error_column_names_cannot_be_dot_dot(2)
+    error_column_names_cannot_be_dot_dot(2, repair = TRUE)
   )
 
   df <- list(a = 1, b = 2)
@@ -148,7 +148,7 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   df <- new_tibble(df, nrow = 1)
   expect_tibble_error(
     as_tibble(df),
-    error_column_names_cannot_be_empty(1:2)
+    error_column_names_cannot_be_empty(1:2, repair = TRUE)
   )
 })
 
@@ -410,7 +410,7 @@ test_that("as_tibble_row() can convert named bare vectors to data frame", {
   )
   expect_tibble_error(
     as_tibble_row(setNames(nm = c(TRUE, FALSE, NA))),
-    error_column_names_cannot_be_empty(3)
+    error_column_names_cannot_be_empty(3, repair = TRUE)
   )
 })
 
@@ -453,7 +453,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_names_cannot_be_empty(2)
+    error_column_names_cannot_be_empty(2, repair = TRUE)
   )
 
   expect_warning(
@@ -480,7 +480,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_names_cannot_be_empty(2)
+    error_column_names_cannot_be_empty(2, repair = TRUE)
   )
 })
 
@@ -488,7 +488,7 @@ test_that("`validate` always raises lifecycle warning.", {
   expect_deprecated(
     expect_tibble_error(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2)
+      error_column_names_cannot_be_empty(2, repair = TRUE)
     )
   )
 
@@ -511,7 +511,7 @@ test_that("`validate` always raises lifecycle warning.", {
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_names_cannot_be_empty(2)
+    error_column_names_cannot_be_empty(2, repair = TRUE)
   )
 })
 
@@ -519,7 +519,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
   expect_deprecated(
     expect_tibble_error(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2)
+      error_column_names_cannot_be_empty(2, repair = TRUE)
     )
   )
 
@@ -540,7 +540,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
   expect_deprecated(
     expect_tibble_error(
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2)
+      error_column_names_cannot_be_empty(2, repair = TRUE)
     )
   )
 })

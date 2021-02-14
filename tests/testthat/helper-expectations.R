@@ -1,5 +1,5 @@
 expect_tibble_error <- function(object, cnd, fixed = NULL) {
-  cnd_actual <- expect_error(object, regexp = cnd_message(cnd), class = class(cnd)[[1]], fixed = TRUE)
+  cnd_actual <- expect_error(object, class = class(cnd)[[1]])
   expect_cnd_equivalent(cnd_actual, cnd)
   expect_s3_class(cnd_actual, class(cnd), exact = TRUE)
 }
