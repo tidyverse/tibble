@@ -26,7 +26,7 @@ error_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NU
   tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent)
 }
 
-error_column_names_must_be_unique <- function(names, repair_hint = has_tibble_arg(".name_repair"), parent = NULL) {
+error_column_names_must_be_unique <- function(names, repair_hint, parent = NULL) {
   tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair_hint)), names = names, parent = parent)
 }
 
