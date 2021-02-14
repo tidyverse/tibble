@@ -1,17 +1,3 @@
-# Looks into top-level tibble function,
-# returns TRUE if that function has a given argument.
-has_tibble_arg <- function(arg_name, n_frames = 5) {
-  frames <- utils::tail(sys.frames(), n_frames)
-  frame_env <- map(frames, parent.env)
-  frame_is_namespace <- which(map_lgl(frame_env, identical, ns_env()))
-
-  if (is_empty(frame_is_namespace)) return(FALSE)
-
-  my_vars <- names(formals(sys.function(frame_is_namespace[[1]])))
-
-  arg_name %in% my_vars
-}
-
 invalid_df <- function(problem, vars, ...) {
   if (is.character(vars)) {
     vars <- tick(vars)
