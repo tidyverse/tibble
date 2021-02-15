@@ -61,7 +61,7 @@ Suggests:
     nycflights13,
     purrr,
     rmarkdown,
-    testthat (>= 3.0.1),
+    testthat (>= 3.0.2),
     tidyr,
     withr
 VignetteBuilder: 

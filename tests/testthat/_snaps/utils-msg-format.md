@@ -2,7 +2,6 @@
 
     Code
       # # Bullets
-    Code
       bullets("header", c("item 1", "item 2"))
     Output
       [1] "header.\nx item 1.\nx item 2."
@@ -16,7 +15,6 @@
       [1] "header.\n* 1.\n* 2.\n* 3.\n* 4.\n* 5.\n* 6."
     Code
       # # Commas
-    Code
       commas("1")
     Output
       [1] "1"
