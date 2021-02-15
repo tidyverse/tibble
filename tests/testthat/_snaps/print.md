@@ -2,7 +2,6 @@
 
     Code
       mtcars2 <- as_tibble(mtcars, rownames = NA)
-    Code
       print_without_body(mtcars2, n = 8L, width = 30L)
     Output
       # A tibble: 32 x 11
@@ -166,7 +165,6 @@
       #   more variables
     Code
       df <- tibble(`mean(x)` = 5, `var(x)` = 3)
-    Code
       print_with_mocked_format_body(trunc_mat(df, width = 28))
     Output
       # A tibble: 1 x 2
@@ -176,9 +174,7 @@
 
     Code
       df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
-    Code
       df$y <- as.POSIXlt(df$x)
-    Code
       print(df, n = 8L, width = 60L)
     Output
       # A tibble: 12 x 2
@@ -195,9 +191,7 @@
       # ... with 4 more rows
     Code
       x <- c("成交日期", "合同录入日期")
-    Code
       df <- setNames(tibble(1:3, 4:6), x)
-    Code
       print(df, n = 8L, width = 60L)
     Output
       # A tibble: 3 x 2

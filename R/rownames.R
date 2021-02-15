@@ -65,7 +65,7 @@ rownames_to_column <- function(.data, var = "rowname") {
   stopifnot(is.data.frame(df))
 
   # Side effect: check unique names
-  repaired_names(c(unique(names2(df)), var))
+  repaired_names(c(unique(names2(df)), var), repair_hint = FALSE)
 
   new_df <- add_column(df, !!var := rownames(df), .before = 1)
   remove_rownames(new_df)
@@ -80,7 +80,7 @@ rowid_to_column <- function(.data, var = "rowid") {
   stopifnot(is.data.frame(df))
 
   # Side effect: check unique names
-  repaired_names(c(unique(names2(df)), var))
+  repaired_names(c(unique(names2(df)), var), repair_hint = FALSE)
 
   new_df <- add_column(df, !!var := seq_len(nrow(df)), .before = 1)
   remove_rownames(new_df)

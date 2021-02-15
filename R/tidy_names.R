@@ -98,7 +98,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
 #' @export
 #' @rdname name-repair-superseded
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
-  x <- set_repaired_names(x, "minimal", quiet = TRUE)
+  x <- set_repaired_names(x, repair_hint = FALSE, "minimal", quiet = TRUE)
   new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
   set_names(x, new_names)
 }

@@ -4,6 +4,7 @@
       tibble(a = 1, a = 1)
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
+      Use .name_repair to specify repair.
     Code
       tibble(a = new_environment())
     Error <tibble_error_column_scalar_type>

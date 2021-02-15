@@ -104,7 +104,7 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   x <- unclass(x)
-  x <- set_repaired_names(x, .name_repair)
+  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair)
   x <- check_valid_cols(x)
   recycle_columns(x, .rows, lengths)
 }
@@ -242,7 +242,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
   df <- as.data.frame(x, stringsAsFactors = FALSE)
 
   names(df) <- repaired_names(
-    c(names2(dimnames(x)), n), .name_repair = .name_repair, repair = TRUE
+    c(names2(dimnames(x)), n), repair_hint = TRUE, .name_repair = .name_repair
   )
 
   # Names already repaired:
@@ -291,7 +291,7 @@ as_tibble_row <- function(x,
     cnd_signal(error_as_tibble_row_bare(x))
   }
 
-  x <- set_repaired_names(x, .name_repair)
+  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair)
 
   check_all_lengths_one(x)
   new_tibble(as.list(x), nrow = 1)
