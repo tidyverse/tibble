@@ -1,3 +1,10 @@
+# tibble 3.0.6.9001
+
+- `as_tibble()` hints more often to use the `.name_repair` argument if column names are invalid (#855).
+- `as_tibble.table()` mentions `.name_repair` argument in the error message (#839).
+- `tbl[FALSE, "column"] <- x` adds new column again (#846).
+
+
 # tibble 3.0.6.9000
 
 - Internal changes only.
