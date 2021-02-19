@@ -19,7 +19,7 @@ x original x is (invisibly) returned, allowing \code{glimpse()} to be
 used within a data pipe line.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{glimpse()} is like a transposed version of \code{print()}:
 columns run down the page, and data runs across.

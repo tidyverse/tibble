@@ -21,7 +21,7 @@ A \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default
 or one column (otherwise).
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{enframe()} converts named atomic vectors or lists to one- or two-column
 data frames.

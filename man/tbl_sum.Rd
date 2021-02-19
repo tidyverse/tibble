@@ -4,7 +4,7 @@
 \alias{tbl_sum}
 \title{Provide a succinct summary of an object}
 \usage{
-tbl_sum(x)
+tbl_sum(x, ...)
 }
 \arguments{
 \item{x}{Object to summarise.}

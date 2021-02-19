@@ -17,7 +17,7 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{matrix}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
