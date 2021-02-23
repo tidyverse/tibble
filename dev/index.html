@@ -40,6 +40,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -55,7 +57,7 @@
         <a class="navbar-brand" href="index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -143,22 +145,22 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <a href="https://rdrr.io/r/base/print.html"><code>print()</code></a> method which makes them easier to use with large datasets containing complex objects.</p>
-<p>If you are new to tibbles, the best place to start is the <a href="https://r4ds.had.co.nz/tibbles.html">tibbles chapter</a> in <em>R for data science</em>.</p>
+<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <a href="https://rdrr.io/r/base/print.html" class="external-link"><code>print()</code></a> method which makes them easier to use with large datasets containing complex objects.</p>
+<p>If you are new to tibbles, the best place to start is the <a href="https://r4ds.had.co.nz/tibbles.html" class="external-link">tibbles chapter</a> in <em>R for data science</em>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <pre class="chroma">
 <span class="c"># The easiest way to get tibble is to install the whole tidyverse:</span>
-<span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="s">"tidyverse"</span>)
+<span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span>(<span class="s">"tidyverse"</span>)
 
 <span class="c"># Alternatively, install just tibble:</span>
-<span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="s">"tibble"</span>)
+<span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span>(<span class="s">"tibble"</span>)
 
 <span class="c"># Or the the development version from GitHub:</span>
 <span class="c"># install.packages("devtools")</span>
-<span class="k">devtools</span>::<span class="nf"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="s">"tidyverse/tibble"</span>)
+<span class="k">devtools</span>::<span class="nf"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span>(<span class="s">"tidyverse/tibble"</span>)
 </pre>
 </div>
 <div id="usage" class="section level2">
@@ -166,7 +168,7 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Create a tibble from an existing object with <code><a href="reference/as_tibble.html">as_tibble()</a></code>:</p>
 <pre class="chroma">
-<span class="nf"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="k"><a href="https://tibble.tidyverse.org/">tibble</a></span>)
+<span class="nf"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span>(<span class="k"><a href="https://tibble.tidyverse.org/">tibble</a></span>)
 <span class="nf"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="k">iris</span>)
 <span class="c">#&gt; <span style="color: #949494;"># A tibble: 150 x 5</span></span>
 <span class="c">#&gt;    <span style="font-weight: bold;">Sepal.Length</span><span> </span><span style="font-weight: bold;">Sepal.Width</span><span> </span><span style="font-weight: bold;">Petal.Length</span><span> </span><span style="font-weight: bold;">Petal.Width</span><span> </span><span style="font-weight: bold;">Species</span></span>
@@ -196,7 +198,7 @@
 <span class="c">#&gt; <span style="color: #BCBCBC;">4</span><span>     4     1    17</span></span>
 <span class="c">#&gt; <span style="color: #BCBCBC;">5</span><span>     5     1    26</span></span>
 </pre>
-<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html"><code>row.names()</code></a>. You can read more about these features in the vignette, <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>vignette("tibble", package = "tibble")</code></a>.</p>
+<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html" class="external-link"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html" class="external-link"><code>row.names()</code></a>. You can read more about these features in the vignette, <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>vignette("tibble", package = "tibble")</code></a>.</p>
 <p>You can define a tibble row-by-row with <a href="https://tibble.tidyverse.org/reference/tribble.html"><code>tribble()</code></a>:</p>
 <pre class="chroma">
 <span class="nf"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
@@ -214,7 +216,7 @@
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">
 <a href="#related-work" class="anchor"></a>Related work</h2>
-<p>The tibble print method draws inspiration from <a href="https://rdatatable.gitlab.io/data.table">data.table</a>, and <a href="https://github.com/patperry/r-frame">frame</a>. Like <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html"><code>data.table::data.table()</code></a>, <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.</p>
+<p>The tibble print method draws inspiration from <a href="https://rdatatable.gitlab.io/data.table" class="external-link">data.table</a>, and <a href="https://github.com/patperry/r-frame" class="external-link">frame</a>. Like <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link"><code>data.table::data.table()</code></a>, <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.</p>
 <hr>
 </div>
 <div id="code-of-conduct" class="section level2">
@@ -227,7 +229,7 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tibble">https://​cloud.r-project.org/​package=tibble</a>
 </li>
@@ -239,22 +241,25 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
 <a href="http://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small>  </li>
@@ -264,22 +269,24 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/tidyverse/tibble"><img src="https://travis-ci.org/tidyverse/tibble.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/tidyverse/tibble"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/gh/tidyverse/tibble"><img src="https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://cran.r-project.org/package=tibble"><img src="https://www.r-pkg.org/badges/version/tibble" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a></li>
+<li><a href="https://travis-ci.org/tidyverse/tibble" class="external-link"><img src="https://travis-ci.org/tidyverse/tibble.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/tidyverse/tibble" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://codecov.io/gh/tidyverse/tibble" class="external-link"><img src="https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://cran.r-project.org/package=tibble" class="external-link"><img src="https://www.r-pkg.org/badges/version/tibble" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
 <div class="author">

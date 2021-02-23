@@ -38,6 +38,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -52,8 +54,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -89,22 +91,22 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Release notes</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/">Version 3.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/" class="external-link">Version 3.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/">Version 2.1.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/" class="external-link">Version 2.1.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/">Version 2.0.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/" class="external-link">Version 2.0.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/">Version 2.0.0 pre-announcement</a>
+      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/" class="external-link">Version 2.0.0 pre-announcement</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/">Version 1.4.2</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/" class="external-link">Version 1.4.2</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/">Version 1.4.1</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/" class="external-link">Version 1.4.1</a>
     </li>
     <li>
       <a href="../news/index.html">Change log</a>
@@ -112,7 +114,7 @@
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/tibble">
+  <a href="https://github.com/tidyverse/tibble" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
@@ -139,7 +141,7 @@
       <h1 data-toc-skip>Invariants for subsetting and subassignment</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/invariants.Rmd"><code>vignettes/invariants.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/invariants.Rmd" class="external-link"><code>vignettes/invariants.Rmd</code></a></small>
       <div class="hidden name"><code>invariants.Rmd</code></div>
 
     </div>
@@ -161,24 +163,24 @@
     color: violet;
 }
 </style>
-<p>This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. The goal is to define a small set of invariants that consistently define how behaviors interact. Some behaviors are defined using functions of the vctrs package, e.g. <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html">vec_slice()</a></code>, <code><a href="https://vctrs.r-lib.org/reference/vec_recycle.html">vec_recycle()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index()</a></code>. Refer to their documentation for more details about the invariants that they follow.</p>
-<p>The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing. We resolve this by first defining column access with <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, then column-wise subsetting with <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>, then row-wise subsetting, then the composition of both.</p>
+<p>This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. The goal is to define a small set of invariants that consistently define how behaviors interact. Some behaviors are defined using functions of the vctrs package, e.g. <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vec_slice()</a></code>, <code><a href="https://vctrs.r-lib.org/reference/vec_recycle.html" class="external-link">vec_recycle()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index()</a></code>. Refer to their documentation for more details about the invariants that they follow.</p>
+<p>The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing. We resolve this by first defining column access with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>, then column-wise subsetting with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code>, then row-wise subsetting, then the composition of both.</p>
 <div id="conventions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conventions" class="anchor"></a>Conventions</h2>
 <p>In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vctrs.r-lib.org/">vctrs</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://vctrs.r-lib.org/" class="external-link">vctrs</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'tibble'</span>
 <span class="co">#&gt; The following object is masked from 'package:vctrs':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     data_frame</span>
 <span class="va">new_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="cn">NA</span>, <span class="fl">3L</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="cn">NA</span>, <span class="fl">3L</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
   <span class="va">df</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>
-  <span class="va">df</span><span class="op">$</span><span class="va">li</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">14</span>, <span class="st">"text"</span><span class="op">)</span>
+  <span class="va">df</span><span class="op">$</span><span class="va">li</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">14</span>, <span class="st">"text"</span><span class="op">)</span>
   <span class="va">df</span>
 <span class="op">}</span>
 <span class="va">new_tbl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
@@ -217,13 +219,13 @@
 <code class="sourceCode R"><span class="va">new_tbl2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>
     tb <span class="op">=</span> <span class="va">tbl</span>,
-    m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
+    m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
   <span class="op">)</span>
 <span class="op">}</span>
 <span class="va">new_df2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">new_tbl2</span><span class="op">(</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">tb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">tb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span>
   <span class="va">df2</span>
 <span class="op">}</span>
 <span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">new_df2</span><span class="op">(</span><span class="op">)</span>
@@ -247,7 +249,7 @@
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;   df &lt;- new_df()</span>
 <span class="co">#&gt;   df$n &lt;- rev(df$n)</span>
@@ -261,7 +263,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;   tbl &lt;- new_tbl()</span>
 <span class="co">#&gt;   tbl$n &lt;- rev(tbl$n)</span>
@@ -284,7 +286,7 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xj" class="anchor"></a>Definition of <code>x[[j]]</code>
 </h3>
-<p><code>x[[j]]</code> is equal to <code><a href="https://rdrr.io/r/base/base-internal.html">.subset2(x, j)</a></code>.</p>
+<p><code>x[[j]]</code> is equal to <code><a href="https://rdrr.io/r/base/base-internal.html" class="external-link">.subset2(x, j)</a></code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -300,13 +302,13 @@
 </td>
 <td>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/base-internal.html">.subset2</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/base-internal.html" class="external-link">.subset2</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; [1]  1 NA  3 NA</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
-<p>NB: <code>x[[j]]</code> always returns an object of size <code><a href="https://rdrr.io/r/base/nrow.html">nrow(x)</a></code> if the column exists.</p>
-<p><code>j</code> must be a single number or a string, as enforced by <code><a href="https://rdrr.io/r/base/base-internal.html">.subset2(x, j)</a></code>.</p>
+<p>NB: <code>x[[j]]</code> always returns an object of size <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> if the column exists.</p>
+<p><code>j</code> must be a single number or a string, as enforced by <code><a href="https://rdrr.io/r/base/base-internal.html" class="external-link">.subset2(x, j)</a></code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -318,9 +320,9 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: The `j` argument of
-#&gt; ``[[.tbl_df`()` can't be a vector of
-#&gt; length 2 as of tibble 3.0.0.
+<pre><code>#&gt; Warning: The `j` argument of `[[.tbl_df`
+#&gt; can't be a vector of length 2 as of
+#&gt; tibble 3.0.0.
 #&gt; Recursive subsetting is deprecated for
 #&gt; tibbles.</code></pre>
 </div>
@@ -330,7 +332,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in .subset2(x, i, exact = exact):
 #&gt; subscript out of bounds</code></pre>
@@ -338,7 +340,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must extract column with a single
 #&gt; valid subscript.
@@ -514,7 +516,7 @@
 </td>
 </tr>
 </tbody></table>
-<p>Character OOB access is silent because a common package idiom is to check for the absence of a column with <code><a href="https://rdrr.io/r/base/NULL.html">is.null(df[[var]])</a></code>.</p>
+<p>Character OOB access is silent because a common package idiom is to check for the absence of a column with <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null(df[[var]])</a></code>.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -613,7 +615,7 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xj-1" class="anchor"></a>Definition of <code>x[j]</code>
 </h3>
-<p><code>j</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index(j, ncol(x), names = names(x))</a></code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code><a href="../reference/tibble.html">tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</a></code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code><a href="https://rdrr.io/r/base/nrow.html">ncol(x)</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><code>j</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index(j, ncol(x), names = names(x))</a></code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code><a href="../reference/tibble.html">tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</a></code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol(x)</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -633,7 +635,7 @@
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt;    n n.1</span>
 <span class="co">#&gt; 1  1   1</span>
 <span class="co">#&gt; 2 NA  NA</span>
@@ -642,7 +644,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       n     n</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt;</span>
@@ -653,13 +655,13 @@
 </td>
 </tr></tbody></table>
 <p>For tibbles with repeated column names, subsetting by name uses the first matching column.</p>
-<p><code><a href="https://rdrr.io/r/base/nrow.html">nrow(df[j])</a></code> equals <code><a href="https://rdrr.io/r/base/nrow.html">nrow(df)</a></code>.</p>
+<p><code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(df[j])</a></code> equals <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(df)</a></code>.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; # A tibble: 4 x 0</span></code></pre></div>
 </td>
 </tr></tbody></table>
@@ -668,7 +670,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] NA</span>
 <span class="co">#&gt; </span>
@@ -677,14 +679,14 @@
 </td>
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; [1] NA NA</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="co">#&gt; </span>
@@ -717,7 +719,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't combine `n` &lt;integer&gt; and
 #&gt; `c` &lt;character&gt;.</code></pre>
@@ -771,7 +773,7 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-x-j-drop-true" class="anchor"></a>Definition of <code>x[, j, drop = TRUE]</code>
 </h3>
-<p>For backward compatiblity, <code>x[, j, drop = TRUE]</code> performs column <strong>extraction</strong>, returning <code>x[j][[1]]</code> when <code><a href="https://rdrr.io/r/base/nrow.html">ncol(x[j])</a></code> is 1.</p>
+<p>For backward compatiblity, <code>x[, j, drop = TRUE]</code> performs column <strong>extraction</strong>, returning <code>x[j][[1]]</code> when <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol(x[j])</a></code> is 1.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -803,7 +805,7 @@
 <span class="co">#&gt; 1     3 g     &lt;int [3]&gt;</span></code></pre></div>
 </td>
 </tr></tbody></table>
-<p>This means that <code>i</code> must be a numeric vector, or a logical vector of length <code><a href="https://rdrr.io/r/base/nrow.html">nrow(x)</a></code> or 1. For compatibility, <code>i</code> can also be a character vector containing positive numbers.</p>
+<p>This means that <code>i</code> must be a numeric vector, or a logical vector of length <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> or 1. For compatibility, <code>i</code> can also be a character vector containing positive numbers.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -830,7 +832,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in xj[i]: invalid subscript type
 #&gt; 'list'</code></pre>
@@ -838,7 +840,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -875,9 +877,9 @@
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">10</span>, <span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: The `i` argument of
-#&gt; ``[.tbl_df`()` must lie in [0, rows] if
-#&gt; positive, as of tibble 3.0.0.
+<pre><code>#&gt; Warning: The `i` argument of `[.tbl_df`
+#&gt; must lie in [0, rows] if positive, as of
+#&gt; tibble 3.0.0.
 #&gt; Use `NA_integer_` as row index to obtain
 #&gt; a row full of `NA` values.</code></pre>
 </div>
@@ -898,9 +900,9 @@
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"x"</span>, <span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: The `i` argument of
-#&gt; ``[.tbl_df`()` must use valid row names
-#&gt; as of tibble 3.0.0.
+<pre><code>#&gt; Warning: The `i` argument of `[.tbl_df`
+#&gt; must use valid row names as of tibble
+#&gt; 3.0.0.
 #&gt; Use `NA_integer_` as row index to obtain
 #&gt; a row full of `NA` values.</code></pre>
 </div>
@@ -915,14 +917,14 @@
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>
+<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 3 3 g 12, 13, 14</span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Must subset rows with a valid
 #&gt; subscript vector.
@@ -1014,14 +1016,14 @@
 <h3 class="hasAnchor">
 <a href="#definition-of-xi-j-1" class="anchor"></a>Definition of <code>x[[i, j]]</code>
 </h3>
-<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="va">df</span><span class="op">[[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; [1] 9</span></code></pre></div>
 <p>This implies that <code>j</code> must be a numeric or character vector of length 1.</p>
-<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
+<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
 </div>
 </div>
 <div id="column-update" class="section level2">
@@ -1032,14 +1034,14 @@
 <a href="#definition-of-xj---a" class="anchor"></a>Definition of <code>x[[j]] &lt;- a</code>
 </h3>
 <p>If <code>a</code> is a vector then <code>x[[j]] &lt;- a</code> replaces the <code>j</code>th column with value <code>a</code>.</p>
-<p><code>a</code> is recycled to the same size as <code>x</code> so must have size <code><a href="https://rdrr.io/r/base/nrow.html">nrow(x)</a></code> or 1. (The only exception is when <code>a</code> is <code>NULL</code>, as described below.) Recycling also works for list, data frame, and matrix columns.</p>
+<p><code>a</code> is recycled to the same size as <code>x</code> so must have size <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> or 1. (The only exception is when <code>a</code> is <code>NULL</code>, as described below.) Recycling also works for list, data frame, and matrix columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"li"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"li"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1068,8 +1070,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1…     1     0     0</span>
 <span class="co">#&gt; 2     1 e     &lt;dbl [1…     0     1     0</span>
 <span class="co">#&gt; 3     1 e     &lt;dbl [1…     0     0     1</span>
-<span class="co">#&gt; 4     1 e     &lt;dbl [1…     0     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; 4     1 e     &lt;dbl [1…     0     0     0</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1091,8 +1092,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1…     1     0     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2…     1     0     0</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3…     1     0     0</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1…     1     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1…     1     0     0</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1245,21 +1245,21 @@
 <a href="#column-subassignment-xj---a" class="anchor"></a>Column subassignment: <code>x[j] &lt;- a</code>
 </h2>
 <ul>
-<li>If <code>j</code> is missing, it’s replaced with <code><a href="https://rdrr.io/r/base/seq.html">seq_along(x)</a></code>
+<li>If <code>j</code> is missing, it’s replaced with <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along(x)</a></code>
 </li>
 <li>If <code>j</code> is logical vector, it’s converted to numeric with <code>seq_along(x)[j]</code>.</li>
 </ul>
 <div id="a-is-a-list-or-data-frame" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-a-list-or-data-frame" class="anchor"></a><code>a</code> is a list or data frame</h3>
-<p>If <code><a href="https://rdrr.io/r/base/class.html">inherits(a, "list")</a></code> or <code><a href="https://rdrr.io/r/base/class.html">inherits(a, "data.frame")</a></code> is <code>TRUE</code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[[j[[1]]] &lt;- a[[1]]</code>, <code>x[[j[[2]]]] &lt;- a[[2]]</code>, …</p>
+<p>If <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "list")</a></code> or <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "data.frame")</a></code> is <code>TRUE</code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[[j[[1]]] &lt;- a[[1]]</code>, <code>x[[j[[2]]]] &lt;- a[[2]]</code>, …</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   n         c li       </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;int&gt; &lt;list&gt;   </span>
@@ -1274,7 +1274,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"li"</span>, <span class="st">"x"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"li"</span>, <span class="st">"x"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n li        x</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
@@ -1285,14 +1285,14 @@
 </td>
 </tr>
 </tbody></table>
-<p>If <code><a href="https://rdrr.io/r/base/length.html">length(a)</a></code> equals 1, then it is recycled to the same length as <code>j</code>.</p>
+<p>If <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length(a)</a></code> equals 1, then it is recycled to the same length as <code>j</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n     c li       </span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;   </span>
@@ -1305,7 +1305,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 1:2, value = list(0, 0, 0)): provided 3
@@ -1319,7 +1319,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't recycle `list(0, 0, 0)`
 #&gt; (size 3) to size 2.</code></pre>
@@ -1329,7 +1329,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   n c li</span>
 <span class="co">#&gt; 1 0 0  0</span>
 <span class="co">#&gt; 2 0 0  0</span>
@@ -1338,7 +1338,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't recycle `list(0, 0)` (size
 #&gt; 2) to size 3.</code></pre>
@@ -1350,7 +1350,7 @@
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, c(1,
 #&gt; 1), value = list(1, 2)): duplicate
@@ -1359,7 +1359,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Column index 1 is used more than
 #&gt; once for assignment.</code></pre>
@@ -1372,7 +1372,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;       c li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;list&gt;   </span>
@@ -1391,7 +1391,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span><span class="st">"x"</span>, x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span><span class="st">"x"</span>, x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 5</span>
 <span class="co">#&gt;       n c     li        x         y</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt; &lt;int&gt;</span>
@@ -1406,7 +1406,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"x"</span>, x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span>, x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;       n c     li        x</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;</span>
@@ -1419,7 +1419,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    n c         li V4</span>
 <span class="co">#&gt; 1  1 e          9  4</span>
 <span class="co">#&gt; 2 NA f     10, 11  3</span>
@@ -1428,7 +1428,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;       n c     li         ...4</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span>
@@ -1441,7 +1441,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 5,
 #&gt; value = list(4:1)): new columns would
@@ -1450,7 +1450,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Can't assign to columns beyond
 #&gt; the end with non-consecutive locations.
@@ -1466,7 +1466,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 2 4 f     10, 11</span>
@@ -1475,7 +1475,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1488,7 +1488,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 1 e          9</span>
 <span class="co">#&gt; 2 1 f     10, 11</span>
@@ -1497,7 +1497,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Subscript `is.na(tbl)` is a
 #&gt; matrix, the data `1:2` must have size 1.</code></pre>
@@ -1507,7 +1507,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 4 4          9</span>
 <span class="co">#&gt; 2 4 f     10, 11</span>
@@ -1516,7 +1516,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `4` must be
 #&gt; compatible with existing data.
@@ -1530,14 +1530,14 @@
 <div id="a-is-a-matrix-or-array" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-a-matrix-or-array" class="anchor"></a><code>a</code> is a matrix or array</h3>
-<p>If <code><a href="https://rdrr.io/r/base/matrix.html">is.matrix(a)</a></code>, then <code>a</code> is coerced to a data frame with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> before assigning. If rows are assigned, the matrix type must be compatible with all columns. If <code><a href="https://rdrr.io/r/base/array.html">is.array(a)</a></code> and <code><a href="https://rdrr.io/r/base/any.html">any(dim(a)[-1:-2] != 1)</a></code>, an error is thrown.</p>
+<p>If <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">is.matrix(a)</a></code>, then <code>a</code> is coerced to a data frame with <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> before assigning. If rows are assigned, the matrix type must be compatible with all columns. If <code><a href="https://rdrr.io/r/base/array.html" class="external-link">is.array(a)</a></code> and <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any(dim(a)[-1:-2] != 1)</a></code>, an error is thrown.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n     c li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
@@ -1550,7 +1550,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    n c         li</span>
 <span class="co">#&gt; 1  6 3          9</span>
 <span class="co">#&gt; 2  5 2     10, 11</span>
@@ -1559,7 +1559,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `matrix(6:1, ncol =
 #&gt; 2)` must be compatible with existing
@@ -1575,7 +1575,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n     c li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
@@ -1590,7 +1590,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n     c li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
@@ -1603,7 +1603,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 8 4          9</span>
 <span class="co">#&gt; 2 7 3     10, 11</span>
@@ -1612,7 +1612,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `array(8:1, dim = c(2, 1, 4))`
 #&gt; must be a vector, a bare list, a data
@@ -1623,7 +1623,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   n c         li</span>
 <span class="co">#&gt; 1 8 4          9</span>
 <span class="co">#&gt; 2 7 3     10, 11</span>
@@ -1632,7 +1632,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `array(8:1, dim = c(4, 1, 2))`
 #&gt; must be a vector, a bare list, a data
@@ -1645,7 +1645,7 @@
 <div id="a-is-another-type-of-vector" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-another-type-of-vector" class="anchor"></a><code>a</code> is another type of vector</h3>
-<p>If <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html">vec_is(a)</a></code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
+<p>If <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html" class="external-link">vec_is(a)</a></code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1667,7 +1667,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1678,14 +1678,14 @@
 </td>
 </tr>
 </tbody></table>
-<p>Matrices must be wrapped in <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> before assignment to create a matrix column.</p>
+<p>Matrices must be wrapped in <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> before assignment to create a matrix column.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
 </td>
 <td>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   n[,1]  [,2] c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1706,7 +1706,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   n[,1]  [,2] c[,1]  [,2] li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
@@ -1777,7 +1777,7 @@
 <div id="a-is-not-a-vector" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-is-not-a-vector" class="anchor"></a><code>a</code> is not a vector</h3>
-<p>Any other type for <code>a</code> is an error. Note that if <code><a href="https://rdrr.io/r/base/list.html">is.list(a)</a></code> is <code>TRUE</code>, but <code><a href="https://rdrr.io/r/base/class.html">inherits(a, "list")</a></code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html">?vec_is</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html">?vec_proxy</a></code> for details.</p>
+<p>Any other type for <code>a</code> is an error. Note that if <code><a href="https://rdrr.io/r/base/list.html" class="external-link">is.list(a)</a></code> is <code>TRUE</code>, but <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "list")</a></code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html" class="external-link">?vec_is</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">?vec_proxy</a></code> for details.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1801,7 +1801,7 @@
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
 #&gt; 1, value = structure(list(coefficients
@@ -1840,7 +1840,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `lm(mpg ~ wt, data = mtcars)`
 #&gt; must be a vector, a bare list, a data
@@ -1878,7 +1878,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -1911,7 +1911,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">tbl</span><span class="op">$</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="va">tbl</span><span class="op">$</span><span class="va">li</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">tbl</span><span class="op">$</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="va">tbl</span><span class="op">$</span><span class="va">li</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -2074,7 +2074,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -2209,8 +2209,7 @@
 <span class="co">#&gt; 1     1 e     &lt;dbl [1…     1     0     0</span>
 <span class="co">#&gt; 2    NA f     &lt;int [2…     1     1     1</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3…    NA    NA    NA</span>
-<span class="co">#&gt; 4    NA h     &lt;chr [1…     0     0     0</span>
-<span class="co">#&gt; # … with 1 more variable: [,4] &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; 4    NA h     &lt;chr [1…     0     0     0</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2319,7 +2318,7 @@
 </td>
 <td>
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;       n c     li       </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
@@ -2336,18 +2335,18 @@
 <a href="#definition-of-xi-j---a-1" class="anchor"></a>Definition of <code>x[[i, j]] &lt;- a</code>
 </h3>
 <p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]] &lt;- a</code> is equivalent to <code>x[i, ][[j]] &lt;- a</code>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
-<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vec_size(a)</a></code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
+<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vec_size(a)</a></code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
 <li id="fn1"><p><code>x[j][[jj]]</code> is equal to <code>x[[ j[[jj]] ]]</code>, in particular <code>x[j][[1]]</code> is equal to <code>x[[j]]</code> for scalar numeric or integer <code>j</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html">vec_as_index(i, nrow(x))</a></code> first.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index(i, nrow(x))</a></code> first.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p><code>x[,]</code> is equivalent to <code>x[]</code> because <code>x[, j]</code> is equivalent to <code>x[j]</code>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>A more efficient implementation of <code>x[i, j]</code> would forward to <code>x[j][i, ]</code>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>Cell subsetting <code>x[[i, j]]</code> is not defined in terms of <code>x[[j]][[i]]</code> because that definition does not generalise to list, matrix and data frame columns. A more efficient implementation of <code>x[[i, j]]</code> would check that <code>j</code> is a scalar and forward to <code>x[i, j][[1]]</code>.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> behaves almost completely symmetrically to <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> when comparing subsetting and subassignment.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> behaves almost completely symmetrically to <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> when comparing subsetting and subassignment.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p><code>x[i, ]</code> is symmetrically for subset and subassignment.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p><code>x[i, j]</code> is symmetrically for subsetting and subassignment. A more efficient implementation of <code>x[i, j] &lt;- a</code> would forward to <code>x[j][i, ] &lt;- a</code>.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p><code>x[[i, j]]</code> is symmetrically for subsetting and subassignment. An efficient implementation would check that <code>i</code> and <code>j</code> are scalar and forward to <code>x[i, j][[1]] &lt;- a</code>.<a href="#fnref9" class="footnote-back">↩︎</a></p></li>
@@ -2366,13 +2365,14 @@
 
 
       <footer><div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by <a href="http://krlmlr.info">Kirill Müller</a>, <a href="http://hadley.nz">Hadley Wickham</a>.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 

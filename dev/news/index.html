@@ -81,9 +81,15 @@
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -100,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -187,6 +193,19 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3069001" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.6.9001">
+<a href="#tibble-3069001" class="anchor"></a>tibble 3.0.6.9001<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/as_tibble.html">as_tibble()</a></code> hints more often to use the <code>.name_repair</code> argument if column names are invalid (<a href='https://github.com/tidyverse/tibble/issues/855'>#855</a>).</li>
+<li>
+<code><a href="../reference/as_tibble.html">as_tibble.table()</a></code> mentions <code>.name_repair</code> argument in the error message (<a href='https://github.com/tidyverse/tibble/issues/839'>#839</a>).</li>
+<li>
+<code>tbl[FALSE, "column"] &lt;- x</code> adds new column again (<a href='https://github.com/tidyverse/tibble/issues/846'>#846</a>).</li>
+</ul>
+</div>
     <div id="tibble-3069000" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.6.9000">
 <a href="#tibble-3069000" class="anchor"></a>tibble 3.0.6.9000<small> Unreleased </small>
@@ -225,7 +244,7 @@
 <li><p>Establish compatibility with upcoming pillar 1.5.0 (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
 <li><p><code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
 <li><p>Register <code><a href="../reference/formatting.html">format.tbl()</a></code> and <code><a href="../reference/formatting.html">print.tbl()</a></code> methods only if pillar doesn’t (<a href='https://github.com/tidyverse/tibble/issues/816'>#816</a>).</p></li>
-<li><p>Use <code><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vctrs::num_as_location()</a></code> internally for subset assignment of rows and columns for better error messages (<a href='https://github.com/tidyverse/tibble/issues/746'>#746</a>).</p></li>
+<li><p>Use <code><a href="https://vctrs.r-lib.org/reference/vec_as_location.html" class="external-link">vctrs::num_as_location()</a></code> internally for subset assignment of rows and columns for better error messages (<a href='https://github.com/tidyverse/tibble/issues/746'>#746</a>).</p></li>
 <li><p>Adapt tests to the development version of testthat.</p></li>
 </ul>
 </div>
@@ -233,7 +252,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li><p>Fix documentation link to <code><a href="https://rdrr.io/r/base/Extract.html">base::Extract</a></code>.</p></li>
+<li><p>Fix documentation link to <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">base::Extract</a></code>.</p></li>
 <li><p><code><a href="../reference/add_row.html">add_row(df)</a></code> adds an empty row again (<a href='https://github.com/tidyverse/tibble/issues/809'>#809</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</p></li>
 </ul>
 </div>
@@ -255,9 +274,9 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> works with classed indexes again, e.g. created with <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/778'>#778</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> works with classed indexes again, e.g. created with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/778'>#778</a>).</p></li>
 <li><p><code><a href="../reference/add_column.html">add_column()</a></code> works without warning for 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/786'>#786</a>).</p></li>
-<li><p><code><a href="../reference/tribble.html">tribble()</a></code> now better handles named inputs (<a href='https://github.com/tidyverse/tibble/issues/775'>#775</a>) and objects of non-vtrs classes like <code>lubridate::Period</code> (<a href='https://github.com/tidyverse/tibble/issues/784'>#784</a>) and <code><a href="https://renkun-ken.github.io/formattable/reference/formattable.html">formattable::formattable</a></code> (<a href='https://github.com/tidyverse/tibble/issues/785'>#785</a>).</p></li>
+<li><p><code><a href="../reference/tribble.html">tribble()</a></code> now better handles named inputs (<a href='https://github.com/tidyverse/tibble/issues/775'>#775</a>) and objects of non-vtrs classes like <code>lubridate::Period</code> (<a href='https://github.com/tidyverse/tibble/issues/784'>#784</a>) and <code><a href="https://renkun-ken.github.io/formattable/reference/formattable.html" class="external-link">formattable::formattable</a></code> (<a href='https://github.com/tidyverse/tibble/issues/785'>#785</a>).</p></li>
 </ul>
 </div>
 <div id="performance" class="section level2">
@@ -265,7 +284,7 @@
 <a href="#performance" class="anchor"></a>Performance</h2>
 <ul>
 <li><p>Subsetting and subassignment are faster (<a href='https://github.com/tidyverse/tibble/issues/780'>#780</a>, <a href='https://github.com/tidyverse/tibble/issues/790'>#790</a>, <a href='https://github.com/tidyverse/tibble/issues/794'>#794</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/base/NULL.html">is.null()</a></code> is preferred over <code>is_null()</code> for speed.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null()</a></code> is preferred over <code>is_null()</code> for speed.</p></li>
 <li><p>Implement continuous benchmarking (<a href='https://github.com/tidyverse/tibble/issues/793'>#793</a>).</p></li>
 </ul>
 </div>
@@ -326,7 +345,7 @@
 <li><p><code>i</code> must have one dimension, not 2</p></li>
 <li><p>Error: Lossy cast from … to …</p></li>
 </ul>
-<p>The “invariants” article at <a href="https://tibble.tidyverse.org/dev/articles/invariants.html" class="uri">https://tibble.tidyverse.org/dev/articles/invariants.html</a> describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.</p>
+<p>The “invariants” article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.</p>
 </li>
 <li>
 <p>List classes are no longer automatically treated as vectors. Symptoms:</p>
@@ -338,7 +357,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="va">x</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"your_s3_class"</span>, <span class="st">"list"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, implement a <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html">vec_proxy()</a></code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code><a href="https://vctrs.r-lib.org/reference/list_of.html">list_of()</a></code>.</p>
+<p>Alternatively, implement a <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">vec_proxy()</a></code> method as described in https://vctrs.r-lib.org/reference/vec_data.html, or construct your class with <code><a href="https://vctrs.r-lib.org/reference/list_of.html" class="external-link">list_of()</a></code>.</p>
 </li>
 <li>
 <p>Added experimental support for inner names for all columns, of the form <code><a href="../reference/tibble.html">tibble(a = c(b = 1))</a></code>. Inner names are no longer stripped when creating a tibble. They are maintained for slicing operations but not yet updated when assigning with a row subscript. This is a change that may break existing comparison tests that don’t expect names in columns (<a href='https://github.com/tidyverse/tibble/issues/630'>#630</a>). Symptoms:</p>
@@ -353,11 +372,11 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> now splices anonymous data frames, <code><a href="../reference/tibble.html">tibble(tibble(a = 1), b = a)</a></code> is equivalent to <code><a href="../reference/tibble.html">tibble(a = 1, b = a)</a></code>. This means that <code><a href="../reference/tibble.html">tibble(iris)</a></code> now has five columns, use <code><a href="../reference/tibble.html">tibble(iris = iris)</a></code> if the intention is to create a packed data frame (<a href='https://github.com/tidyverse/tibble/issues/581'>#581</a>).</p></li>
-<li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html">?vctrs::vec_as_names</a></code> instead.</p></li>
-<li><p><code><a href="https://rdrr.io/r/base/expression.html">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
-<li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://vctrs.r-lib.org/reference/vec_size.html">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
-<li><p><code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> warns unconditionally if column not found, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> doesn’t warn.</p></li>
-<li><p><code><a href="../reference/add_row.html">add_row()</a></code> now uses <code><a href="https://vctrs.r-lib.org/reference/vec_bind.html">vctrs::vec_rbind()</a></code> under the hood, this means that all columns are combined with <code><a href="https://vctrs.r-lib.org/reference/vec_c.html">vctrs::vec_c()</a></code>. In particular, factor columns will be converted to character if one of the columns is a character column.</p></li>
+<li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">?vctrs::vec_as_names</a></code> instead.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
+<li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> warns unconditionally if column not found, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> doesn’t warn.</p></li>
+<li><p><code><a href="../reference/add_row.html">add_row()</a></code> now uses <code><a href="https://vctrs.r-lib.org/reference/vec_bind.html" class="external-link">vctrs::vec_rbind()</a></code> under the hood, this means that all columns are combined with <code><a href="https://vctrs.r-lib.org/reference/vec_c.html" class="external-link">vctrs::vec_c()</a></code>. In particular, factor columns will be converted to character if one of the columns is a character column.</p></li>
 </ul>
 </div>
 <div id="soft-deprecations" class="section level2">
@@ -395,7 +414,7 @@
 <li><p><code><a href="../reference/add_column.html">add_column()</a></code> gains <code>.name_repair</code> argument. If not given, <code>.data</code> must have unique columns, with a deprecation message.</p></li>
 <li><p>Allow <code>POSIXlt</code> columns, they are now better supported by dplyr and other tools thanks to vctrs (<a href='https://github.com/tidyverse/tibble/issues/626'>#626</a>).</p></li>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> ignores NULL arguments, named or unnamed (<a href='https://github.com/tidyverse/tibble/issues/580'>#580</a>).</p></li>
-<li><p><code><a href="../reference/view.html">view()</a></code> works for remote data sources by applying the same strategy as <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> and <code><a href="../reference/glimpse.html">glimpse()</a></code>. The maximum number of rows in this case can be specified using the new <code>n</code> argument, by default it is taken from the new <code>"tibble.view_max"</code> option (<a href='https://github.com/tidyverse/tibble/issues/695'>#695</a>).</p></li>
+<li><p><code><a href="../reference/view.html">view()</a></code> works for remote data sources by applying the same strategy as <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="../reference/glimpse.html">glimpse()</a></code>. The maximum number of rows in this case can be specified using the new <code>n</code> argument, by default it is taken from the new <code>"tibble.view_max"</code> option (<a href='https://github.com/tidyverse/tibble/issues/695'>#695</a>).</p></li>
 </ul>
 </div>
 <div id="output" class="section level2">
@@ -421,7 +440,7 @@
 <li><p>Import lifecycle package (<a href='https://github.com/tidyverse/tibble/issues/669'>#669</a>).</p></li>
 <li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> removes redundant subclasses from the <code>"class"</code> attribute.</p></li>
 <li><p>Using classed conditions. All classes start with <code>"tibble_error_"</code> and also contain <code>"tibble_error"</code> (<a href='https://github.com/tidyverse/tibble/issues/659'>#659</a>).</p></li>
-<li><p>The magrittr pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code> is reexported.</p></li>
+<li><p>The magrittr pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></code> is reexported.</p></li>
 </ul>
 </div>
 </div>
@@ -486,10 +505,10 @@
 <li>
 <p><code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> (and also <code><a href="../reference/as_tibble.html">as_tibble.matrix()</a></code>) strip row names by default. Code that relies on tibbles keeping row names now will see:</p>
 <ul>
-<li>a different result when calling <code><a href="../reference/rownames.html">rownames()</a></code> or <code><a href="https://rdrr.io/r/base/row.names.html">row.names()</a></code>,</li>
+<li>a different result when calling <code><a href="../reference/rownames.html">rownames()</a></code> or <code><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names()</a></code>,</li>
 <li>rows full of <code>NA</code> values when subsetting rows with with a character vector, e.g. <code>as_tibble(mtcars)["Mazda RX4", ]</code>.</li>
 </ul>
-<p>Call <code><a href="https://rdrr.io/pkg/pkgconfig/man/set_config.html">pkgconfig::set_config("tibble::rownames", NA)</a></code> to revert to the old behavior of keeping row names. Packages that import <em>tibble</em> can call <code>set_config()</code> in their <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> function (<a href='https://github.com/tidyverse/tibble/issues/114'>#114</a>).</p>
+<p>Call <code><a href="https://rdrr.io/pkg/pkgconfig/man/set_config.html" class="external-link">pkgconfig::set_config("tibble::rownames", NA)</a></code> to revert to the old behavior of keeping row names. Packages that import <em>tibble</em> can call <code>set_config()</code> in their <code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onLoad()</a></code> function (<a href='https://github.com/tidyverse/tibble/issues/114'>#114</a>).</p>
 </li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> drops extra classes, in particular <code>as_tibble.grouped_df()</code> now removes grouping (<a href='https://github.com/tidyverse/tibble/issues/535'>#535</a>).</p></li>
 <li><p><code><a href="../reference/rownames.html">column_to_rownames()</a></code> now always coerces to a data frame, because row names are no longer supported in tibbles (<a href='https://github.com/tidyverse/tibble/issues/114'>#114</a>).</p></li>
@@ -528,7 +547,7 @@
 <code>NA</code>: keep row names,</li>
 <li>A string: the name of the new column that will contain the existing row names, which are no longer present in the result.</li>
 </ul>
-<p>The old default can be restored by calling <code><a href="https://rdrr.io/pkg/pkgconfig/man/set_config.html">pkgconfig::set_config("tibble::rownames", NA)</a></code>, this also works for packages that import <em>tibble</em>.</p>
+<p>The old default can be restored by calling <code><a href="https://rdrr.io/pkg/pkgconfig/man/set_config.html" class="external-link">pkgconfig::set_config("tibble::rownames", NA)</a></code>, this also works for packages that import <em>tibble</em>.</p>
 </li>
 <li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> now also strip the <code>"dim"</code> attribute from columns that are one-dimensional arrays. (<code><a href="../reference/tibble.html">tibble()</a></code> already did this before.)</p></li>
 <li><p>Internally, all <code><a href="../reference/as_tibble.html">as_tibble()</a></code> implementation forward all extra arguments and <code>...</code> to <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code> where they are handled. This means that the common <code>.rows</code> and <code>.name_repair</code> can be used for all inputs. We suggest that your implementations of this method do the same.</p></li>
@@ -542,7 +561,7 @@
 <h2 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h2>
 <ul>
-<li>Added experimental <code><a href="../reference/view.html">view()</a></code> function that always returns its input invisibly and calls <code><a href="https://rdrr.io/r/utils/View.html">utils::View()</a></code> only in interactive mode (<a href='https://github.com/tidyverse/tibble/issues/373'>#373</a>).</li>
+<li>Added experimental <code><a href="../reference/view.html">view()</a></code> function that always returns its input invisibly and calls <code><a href="https://rdrr.io/r/utils/View.html" class="external-link">utils::View()</a></code> only in interactive mode (<a href='https://github.com/tidyverse/tibble/issues/373'>#373</a>).</li>
 </ul>
 </div>
 <div id="output-1" class="section level2">
@@ -576,14 +595,14 @@
 <ul>
 <li><p>Skip dplyr in tests if unavailable (<a href='https://github.com/tidyverse/tibble/issues/420'>#420</a>, <a href='https://github.com/QuLogic'>@QuLogic</a>).</p></li>
 <li><p>Skip mockr in tests if unavailable (<a href='https://github.com/tidyverse/tibble/issues/454'>#454</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
-<li><p>Use <code><a href="https://rdrr.io/pkg/fansi/man/strwrap_ctl.html">fansi::strwrap_ctl()</a></code> instead of own string wrapping routine.</p></li>
+<li><p>Use <code><a href="https://rdrr.io/pkg/fansi/man/strwrap_ctl.html" class="external-link">fansi::strwrap_ctl()</a></code> instead of own string wrapping routine.</p></li>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> uses recycled values during construction but unrecycled values for validation.</p></li>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> is now faster for very wide tibbles.</p></li>
-<li><p>Subsetting with the <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> operator is faster (<a href='https://github.com/tidyverse/tibble/issues/544'>#544</a>).</p></li>
-<li><p>Avoid use of <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> in examples if packages are not installed (<a href='https://github.com/tidyverse/tibble/issues/453'>#453</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
-<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
+<li><p>Subsetting with the <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> operator is faster (<a href='https://github.com/tidyverse/tibble/issues/544'>#544</a>).</p></li>
+<li><p>Avoid use of <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> in examples if packages are not installed (<a href='https://github.com/tidyverse/tibble/issues/453'>#453</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
+<li><p>Fix <code><a href="../reference/as_tibble.html">as_tibble()</a></code> examples by using correct argument names in <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code> call (<a href='https://github.com/tidyverse/tibble/issues/424'>#424</a>, <a href='https://github.com/michaelweylandt'>@michaelweylandt</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> checks column length only once (<a href='https://github.com/tidyverse/tibble/issues/365'>#365</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
-<li><p>Using <code><a href="https://rlang.r-lib.org/reference/list2.html">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
+<li><p>Using <code><a href="https://rlang.r-lib.org/reference/list2.html" class="external-link">rlang::list2()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/391'>#391</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</p></li>
 </ul>
 </div>
 </div>
@@ -621,7 +640,7 @@
 <ul>
 <li>Faster printing of very wide tibbles (<a href='https://github.com/tidyverse/tibble/issues/360'>#360</a>).</li>
 <li>Faster construction and subsetting for tibbles (<a href='https://github.com/tidyverse/tibble/issues/353'>#353</a>).</li>
-<li>Only call <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> in <code><a href="../reference/glimpse.html">glimpse()</a></code>, not <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code>.</li>
+<li>Only call <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> in <code><a href="../reference/glimpse.html">glimpse()</a></code>, not <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol()</a></code>.</li>
 </ul>
 </div>
 </div>
@@ -655,7 +674,7 @@
 <li>Improved compatibility with remote data sources for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/328'>#328</a>).</li>
 <li>Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (<a href='https://github.com/tidyverse/tibble/issues/318'>#318</a>).</li>
 <li>Fixed width for word wrapping of the extra information (<a href='https://github.com/tidyverse/tibble/issues/301'>#301</a>).</li>
-<li>Prevent <code><a href="../reference/add_column.html">add_column()</a></code> from dropping classes and attributes by removing the use of <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code>. Additionally this ensures that <code><a href="../reference/add_column.html">add_column()</a></code> can be used with grouped data frames (<a href='https://github.com/tidyverse/tibble/issues/303'>#303</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</li>
+<li>Prevent <code><a href="../reference/add_column.html">add_column()</a></code> from dropping classes and attributes by removing the use of <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code>. Additionally this ensures that <code><a href="../reference/add_column.html">add_column()</a></code> can be used with grouped data frames (<a href='https://github.com/tidyverse/tibble/issues/303'>#303</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</li>
 <li>
 <code><a href="../reference/add_column.html">add_column()</a></code> to an empty zero-row tibble with a variable of nonzero length now produces a correct error message (<a href='https://github.com/tidyverse/tibble/issues/319'>#319</a>).</li>
 </ul>
@@ -664,7 +683,7 @@
 <h2 class="hasAnchor">
 <a href="#internal-changes" class="anchor"></a>Internal changes</h2>
 <ul>
-<li>Reexporting <code><a href="https://rlang.r-lib.org/reference/has_name.html">has_name()</a></code> from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.</li>
+<li>Reexporting <code><a href="https://rlang.r-lib.org/reference/has_name.html" class="external-link">has_name()</a></code> from rlang, instead of forwarding, to avoid warning when importing both rlang and tibble.</li>
 <li>Compatible with R 3.1 (<a href='https://github.com/tidyverse/tibble/issues/323'>#323</a>).</li>
 <li>Remove Rcpp dependency (<a href='https://github.com/tidyverse/tibble/issues/313'>#313</a>, <a href='https://github.com/patperry'>@patperry</a>).</li>
 </ul>
@@ -678,10 +697,10 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call are recycled prior to evaluating subsequent arguments, improving consistency with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/213'>#213</a>).</li>
+<li>Values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call are recycled prior to evaluating subsequent arguments, improving consistency with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/213'>#213</a>).</li>
 <li>Recycling of values of length 1 in a <code><a href="../reference/tibble.html">tibble()</a></code> call maintains their class (<a href='https://github.com/tidyverse/tibble/issues/284'>#284</a>).</li>
 <li>
-<code><a href="../reference/add_row.html">add_row()</a></code> now always preserves the column data types of the input data frame the same way as <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> does (<a href='https://github.com/tidyverse/tibble/issues/296'>#296</a>).</li>
+<code><a href="../reference/add_row.html">add_row()</a></code> now always preserves the column data types of the input data frame the same way as <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind()</a></code> does (<a href='https://github.com/tidyverse/tibble/issues/296'>#296</a>).</li>
 <li>
 <code><a href="../reference/lst.html">lst()</a></code> now again handles duplicate names, the value defined last is used in case of a clash.</li>
 <li>Adding columns to zero-row data frames now also works when mixing lengths 1 and 0 in the new columns (<a href='https://github.com/tidyverse/tibble/issues/167'>#167</a>).</li>
@@ -709,7 +728,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Added <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> in dplyr 0.5.0 and earlier (<a href='https://github.com/tidyverse/tibble/issues/256'>#256</a>, <a href='https://github.com/tidyverse/tibble/issues/263'>#263</a>).</li>
+<li>Added <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> methods for both <code>tbl</code> and <code>tbl_df</code> classes, to protect against malformed tibbles that inherit from <code>"tbl_df"</code> but not <code>"tbl"</code>, as created e.g. by <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> in dplyr 0.5.0 and earlier (<a href='https://github.com/tidyverse/tibble/issues/256'>#256</a>, <a href='https://github.com/tidyverse/tibble/issues/263'>#263</a>).</li>
 <li>The column width for non-syntactic columns is computed correctly again (<a href='https://github.com/tidyverse/tibble/issues/258'>#258</a>).</li>
 <li>Printing a tibble doesn’t apply quote escaping to list columns.</li>
 <li>Fix error in <code><a href="../reference/name-repair-superseded.html">tidy_names(syntactic = TRUE, quiet = FALSE)</a></code> if not all names are fixed (<a href='https://github.com/tidyverse/tibble/issues/260'>#260</a>, <a href='https://github.com/imanuelcostigan'>@imanuelcostigan</a>).</li>
@@ -734,7 +753,7 @@
 <ul>
 <li>New <code><a href="../reference/name-repair-superseded.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code>, a simpler version of <code><a href="../reference/name-repair-superseded.html">repair_names()</a></code> which works unchanged for now (<a href='https://github.com/tidyverse/tibble/issues/217'>#217</a>).</li>
 <li>New <code><a href="../reference/rownames.html">rowid_to_column()</a></code> that adds a <code>rowid</code> column as first column and removes row names (<a href='https://github.com/tidyverse/tibble/issues/243'>#243</a>, <a href='https://github.com/barnettjacob'>@barnettjacob</a>).</li>
-<li>The <code>all.equal.tbl_df()</code> method has been removed, calling <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> now forwards to <code>base::all.equal.data.frame()</code>. To compare tibbles ignoring row and column order, please use <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html">dplyr::all_equal()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/247'>#247</a>).</li>
+<li>The <code>all.equal.tbl_df()</code> method has been removed, calling <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> now forwards to <code>base::all.equal.data.frame()</code>. To compare tibbles ignoring row and column order, please use <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html" class="external-link">dplyr::all_equal()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/247'>#247</a>).</li>
 </ul>
 </div>
 <div id="formatting-1" class="section level2">
@@ -743,8 +762,8 @@
 <ul>
 <li>Printing now uses <code>x</code> again instead of the Unicode multiplication sign, to avoid encoding issues (<a href='https://github.com/tidyverse/tibble/issues/216'>#216</a>).</li>
 <li>String values are now quoted when printing if they contain non-printable characters or quotes (<a href='https://github.com/tidyverse/tibble/issues/253'>#253</a>).</li>
-<li>The <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html">format()</a></code>, and <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code>.</li>
-<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html">print.data.frame()</a></code> anymore. Now providing <code><a href="../reference/formatting.html">format.tbl_df()</a></code> and full support for Unicode characters in names and data, also for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
+<li>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code>, and <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="../reference/tbl_sum.html">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod()</a></code>.</li>
+<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html" class="external-link">print.data.frame()</a></code> anymore. Now providing <code><a href="../reference/formatting.html">format.tbl_df()</a></code> and full support for Unicode characters in names and data, also for <code><a href="../reference/glimpse.html">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
 </ul>
 </div>
 <div id="misc" class="section level2">
@@ -755,7 +774,7 @@
 <li>Using <code>rlang</code> instead of <code>lazyeval</code> (<a href='https://github.com/tidyverse/tibble/issues/225'>#225</a>, <a href='https://github.com/lionel-'>@lionel-</a>), and <code>rlang</code> functions (<a href='https://github.com/tidyverse/tibble/issues/244'>#244</a>).</li>
 <li>
 <code><a href="../reference/tribble.html">tribble()</a></code> now handles values that have a class (<a href='https://github.com/tidyverse/tibble/issues/237'>#237</a>, <a href='https://github.com/NikNakk'>@NikNakk</a>).</li>
-<li>Minor efficiency gains by replacing <code><a href="https://rdrr.io/r/base/any.html">any(is.na())</a></code> with <code><a href="https://rdrr.io/r/base/NA.html">anyNA()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/229'>#229</a>, <a href='https://github.com/csgillespie'>@csgillespie</a>).</li>
+<li>Minor efficiency gains by replacing <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any(is.na())</a></code> with <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">anyNA()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/229'>#229</a>, <a href='https://github.com/csgillespie'>@csgillespie</a>).</li>
 <li>The <code>microbenchmark</code> package is now used conditionally (<a href='https://github.com/tidyverse/tibble/issues/245'>#245</a>).</li>
 <li>
 <code>pkgdown</code> website.</li>
@@ -771,7 +790,7 @@
 <a href="#bug-fixes-9" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Time series matrices (objects of class <code>mts</code> and <code>ts</code>) are now supported in <code><a href="../reference/as_tibble.html">as_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/184'>#184</a>).</li>
-<li>The <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html">all_equal()</a></code> function (called by <code>all.equal.tbl_df()</code>) now forwards to <code>dplyr</code> and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (<code>data.frame</code> vs. <code>tbl_df</code>) are ignored. The <code>all.equal.tbl_df()</code> method gives a warning and forwards to <code><a href="https://rdrr.io/r/base/UseMethod.html">NextMethod()</a></code> if <code>dplyr</code> is not installed; call <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal(as.data.frame(...), ...)</a></code> to avoid the warning. This ensures consistent behavior of this function, regardless if <code>dplyr</code> is loaded or not (<a href='https://github.com/tidyverse/tibble/issues/198'>#198</a>).</li>
+<li>The <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html" class="external-link">all_equal()</a></code> function (called by <code>all.equal.tbl_df()</code>) now forwards to <code>dplyr</code> and fails with a helpful message if not installed. Data frames with list columns cannot be compared anymore, and differences in the declared class (<code>data.frame</code> vs. <code>tbl_df</code>) are ignored. The <code>all.equal.tbl_df()</code> method gives a warning and forwards to <code><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod()</a></code> if <code>dplyr</code> is not installed; call <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal(as.data.frame(...), ...)</a></code> to avoid the warning. This ensures consistent behavior of this function, regardless if <code>dplyr</code> is loaded or not (<a href='https://github.com/tidyverse/tibble/issues/198'>#198</a>).</li>
 </ul>
 </div>
 <div id="interface-changes-1" class="section level2">
@@ -813,7 +832,7 @@
 <li>Render Unicode multiplication sign as <code>x</code> if it cannot be represented in the current locale (<a href='https://github.com/tidyverse/tibble/issues/192'>#192</a>, <a href='https://github.com/ncarchedi'>@ncarchedi</a>).</li>
 <li>Backtick <code>NA</code> names in printing (<a href='https://github.com/tidyverse/tibble/issues/206'>#206</a>, <a href='https://github.com/tidyverse/tibble/issues/207'>#207</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</li>
 <li>
-<code><a href="../reference/glimpse.html">glimpse()</a></code> now uses <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">type_sum()</a></code> also for S3 objects (<a href='https://github.com/tidyverse/tibble/issues/185'>#185</a>, <a href='https://github.com/tidyverse/tibble/issues/186'>#186</a>, <a href='https://github.com/holstius'>@holstius</a>).</li>
+<code><a href="../reference/glimpse.html">glimpse()</a></code> now uses <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> also for S3 objects (<a href='https://github.com/tidyverse/tibble/issues/185'>#185</a>, <a href='https://github.com/tidyverse/tibble/issues/186'>#186</a>, <a href='https://github.com/holstius'>@holstius</a>).</li>
 <li>The <code>max.print</code> option is ignored when printing a tibble (<a href='https://github.com/tidyverse/tibble/issues/194'>#194</a>, <a href='https://github.com/tidyverse/tibble/issues/195'>#195</a>, <a href='https://github.com/t-kalinowski'>@t-kalinowski</a>).</li>
 </ul>
 </div>
@@ -848,7 +867,7 @@
 <li>
 <code><a href="../reference/add_row.html">add_row()</a></code> now correctly handles existing columns of type <code>list</code> that are not updated (<a href='https://github.com/tidyverse/tibble/issues/148'>#148</a>).</li>
 <li>
-<code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> doesn’t throw an error anymore if one of the columns is named <code>na.last</code>, <code>decreasing</code> or <code>method</code> (<a href='https://github.com/tidyverse/tibble/issues/107'>#107</a>, <a href='https://github.com/BillDunlap'>@BillDunlap</a>).</li>
+<code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> doesn’t throw an error anymore if one of the columns is named <code>na.last</code>, <code>decreasing</code> or <code>method</code> (<a href='https://github.com/tidyverse/tibble/issues/107'>#107</a>, <a href='https://github.com/BillDunlap'>@BillDunlap</a>).</li>
 </ul>
 </div>
 <div id="interface-changes-2" class="section level2">
@@ -898,9 +917,9 @@
 <code><a href="../reference/tibble.html">tibble()</a></code> is no longer an alias for <code><a href="../reference/deprecated.html">frame_data()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
 <li>Remove <code><a href="../reference/tbl_df-class.html">tbl_df()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/57'>#57</a>).</li>
 <li>
-<code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> returns <code>NULL</code> if column not found, without partial matching. A warning is given (<a href='https://github.com/tidyverse/tibble/issues/109'>#109</a>).</li>
+<code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> returns <code>NULL</code> if column not found, without partial matching. A warning is given (<a href='https://github.com/tidyverse/tibble/issues/109'>#109</a>).</li>
 <li>
-<code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> returns <code>NULL</code> if column not found (<a href='https://github.com/tidyverse/tibble/issues/109'>#109</a>).</li>
+<code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> returns <code>NULL</code> if column not found (<a href='https://github.com/tidyverse/tibble/issues/109'>#109</a>).</li>
 </ul>
 </div>
 <div id="output-2" class="section level2">
@@ -908,14 +927,14 @@
 <a href="#output-2" class="anchor"></a>Output</h2>
 <ul>
 <li>Reworked output: More concise summary (begins with hash <code>#</code> and contains more text (<a href='https://github.com/tidyverse/tibble/issues/95'>#95</a>)), removed empty line, showing number of hidden rows and columns (<a href='https://github.com/tidyverse/tibble/issues/51'>#51</a>). The trailing metadata also begins with hash <code>#</code> (<a href='https://github.com/tidyverse/tibble/issues/101'>#101</a>). Presence of row names is indicated by a star in printed output (<a href='https://github.com/tidyverse/tibble/issues/72'>#72</a>).</li>
-<li>Format <code>NA</code> values in character columns as <code>&lt;NA&gt;</code>, like <code><a href="https://rdrr.io/r/base/print.dataframe.html">print.data.frame()</a></code> does (<a href='https://github.com/tidyverse/tibble/issues/69'>#69</a>).</li>
+<li>Format <code>NA</code> values in character columns as <code>&lt;NA&gt;</code>, like <code><a href="https://rdrr.io/r/base/print.dataframe.html" class="external-link">print.data.frame()</a></code> does (<a href='https://github.com/tidyverse/tibble/issues/69'>#69</a>).</li>
 <li>The number of printed extra cols is now an option (<a href='https://github.com/tidyverse/tibble/issues/68'>#68</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</li>
 <li>Computation of column width properly handles wide (e.g., Chinese) characters, tests still fail on Windows (<a href='https://github.com/tidyverse/tibble/issues/100'>#100</a>).</li>
 <li>
 <code><a href="../reference/glimpse.html">glimpse()</a></code> shows nesting structure for lists and uses angle brackets for type (<a href='https://github.com/tidyverse/tibble/issues/98'>#98</a>).</li>
 <li>Tibbles with <code>POSIXlt</code> columns can be printed now, the text <code>&lt;POSIXlt&gt;</code> is shown as placeholder to encourage usage of <code>POSIXct</code> (<a href='https://github.com/tidyverse/tibble/issues/86'>#86</a>).</li>
 <li>
-<code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">type_sum()</a></code> shows only topmost class for S3 objects.</li>
+<code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> shows only topmost class for S3 objects.</li>
 </ul>
 </div>
 <div id="error-reporting" class="section level2">
@@ -927,7 +946,7 @@
 <li>Consistently surround variable names with single quotes in error messages.</li>
 <li>Use “Unknown column ‘x’” as error message if column not found, like base R (<a href='https://github.com/tidyverse/tibble/issues/94'>#94</a>).</li>
 <li>
-<code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> and <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> are now always called with <code>call. = FALSE</code>.</li>
+<code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> and <code><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning()</a></code> are now always called with <code>call. = FALSE</code>.</li>
 </ul>
 </div>
 <div id="coercion" class="section level2">
@@ -944,12 +963,12 @@
 <h2 class="hasAnchor">
 <a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
-<li>New <code><a href="https://rlang.r-lib.org/reference/has_name.html">has_name()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/102'>#102</a>).</li>
+<li>New <code><a href="https://rlang.r-lib.org/reference/has_name.html" class="external-link">has_name()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/102'>#102</a>).</li>
 <li>Prefer <code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> over <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">as_data_frame()</a></code> in code and documentation (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
 <li>New <code><a href="../reference/is.tibble.html">is.tibble()</a></code> and <code><a href="../reference/is_tibble.html">is_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/79'>#79</a>).</li>
 <li>New <code><a href="../reference/enframe.html">enframe()</a></code> that converts vectors to two-column tibbles (<a href='https://github.com/tidyverse/tibble/issues/31'>#31</a>, <a href='https://github.com/tidyverse/tibble/issues/74'>#74</a>).</li>
 <li>
-<code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">obj_sum()</a></code> and <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">type_sum()</a></code> show <code>"tibble"</code> instead of <code>"tbl_df"</code> for tibbles (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
+<code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">obj_sum()</a></code> and <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> show <code>"tibble"</code> instead of <code>"tbl_df"</code> for tibbles (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
 <li>
 <code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> gains <code>validate</code> argument (as in <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>), if <code>TRUE</code> the input is validated.</li>
 <li>Implement <code><a href="../reference/as_tibble.html">as_tibble.default()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/71'>#71</a>, hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1752'>#1752</a>).</li>
@@ -961,7 +980,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-11" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Two-dimensional indexing with <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> works (<a href='https://github.com/tidyverse/tibble/issues/58'>#58</a>, <a href='https://github.com/tidyverse/tibble/issues/63'>#63</a>).</li>
+<li>Two-dimensional indexing with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> works (<a href='https://github.com/tidyverse/tibble/issues/58'>#58</a>, <a href='https://github.com/tidyverse/tibble/issues/63'>#63</a>).</li>
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
 </ul>
 </div>
@@ -1011,7 +1030,7 @@
 <li>
 <code><a href="../reference/formatting.html">trunc_mat()</a></code>, <code><a href="../reference/knit_print.trunc_mat.html">knit_print.trunc_mat()</a></code>
 </li>
-<li><code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">type_sum()</a></code></li>
+<li><code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code></li>
 <li>New <code><a href="../reference/lst.html">lst()</a></code> and <code><a href="../reference/deprecated.html">lst_()</a></code> create lists in the same way that <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">data_frame_()</a></code> create data frames (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1290'>#1290</a>). <code><a href="../reference/lst.html">lst(NULL)</a></code> doesn’t raise an error (<a href='https://github.com/tidyverse/tibble/issues/17'>#17</a>, <a href='https://github.com/jennybc'>@jennybc</a>), but always uses deparsed expression as name (even for <code>NULL</code>).</li>
 <li>New <code><a href="../reference/add_row.html">add_row()</a></code> makes it easy to add a new row to data frame (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1021'>#1021</a>).</li>
 <li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/11'>#11</a>, <a href='https://github.com/zhilongjia'>@zhilongjia</a>).</li>
@@ -1026,7 +1045,7 @@
 <li>New <code>as_data_frame.table()</code> with argument <code>n</code> to control name of count column (<a href='https://github.com/tidyverse/tibble/issues/22'>#22</a>, <a href='https://github.com/tidyverse/tibble/issues/23'>#23</a>).</li>
 <li>Use <code>tibble</code> prefix for options (<a href='https://github.com/tidyverse/tibble/issues/13'>#13</a>, <a href='https://github.com/tidyverse/tibble/issues/36'>#36</a>).</li>
 <li>
-<code><a href="../reference/glimpse.html">glimpse()</a></code> now (invisibly) returns its argument (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1570'>#1570</a>). It is now a generic, the default method dispatches to <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1325'>#1325</a>). The default width is obtained from the <code>tibble.width</code> option (<a href='https://github.com/tidyverse/tibble/issues/35'>#35</a>, <a href='https://github.com/tidyverse/tibble/issues/56'>#56</a>).</li>
+<code><a href="../reference/glimpse.html">glimpse()</a></code> now (invisibly) returns its argument (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1570'>#1570</a>). It is now a generic, the default method dispatches to <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1325'>#1325</a>). The default width is obtained from the <code>tibble.width</code> option (<a href='https://github.com/tidyverse/tibble/issues/35'>#35</a>, <a href='https://github.com/tidyverse/tibble/issues/56'>#56</a>).</li>
 <li>
 <code><a href="../reference/deprecated.html">as_data_frame()</a></code> is now an S3 generic with methods for lists (the old <code><a href="../reference/deprecated.html">as_data_frame()</a></code>), data frames (trivial), matrices (with efficient C++ implementation) (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/876'>#876</a>), and <code>NULL</code> (returns a 0-row 0-column data frame) (<a href='https://github.com/tidyverse/tibble/issues/17'>#17</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</li>
 <li>Non-scalar input to <code><a href="../reference/deprecated.html">frame_data()</a></code> and <code><a href="../reference/tibble.html">tibble()</a></code> (including lists) creates list-valued columns (<a href='https://github.com/tidyverse/tibble/issues/7'>#7</a>). These functions return 0-row but n-col data frame if no data.</li>
@@ -1046,12 +1065,12 @@
 <li>
 <code><a href="../reference/tbl_df-class.html">tbl_df()</a></code> automatically generates column names (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1606'>#1606</a>).</li>
 <li>
-<code>tbl_df</code>s gain <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> methods that are ~5x faster than the defaults, never do partial matching (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1504'>#1504</a>), and throw an error if the variable does not exist. <code>[[.tbl_df()</code> falls back to regular subsetting when used with anything other than a single string (<a href='https://github.com/tidyverse/tibble/issues/29'>#29</a>). <code><a href="https://rdrr.io/r/base/Extract.html">base::getElement()</a></code> now works with tibbles (<a href='https://github.com/tidyverse/tibble/issues/9'>#9</a>).</li>
+<code>tbl_df</code>s gain <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> methods that are ~5x faster than the defaults, never do partial matching (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1504'>#1504</a>), and throw an error if the variable does not exist. <code>[[.tbl_df()</code> falls back to regular subsetting when used with anything other than a single string (<a href='https://github.com/tidyverse/tibble/issues/29'>#29</a>). <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">base::getElement()</a></code> now works with tibbles (<a href='https://github.com/tidyverse/tibble/issues/9'>#9</a>).</li>
 <li>
-<code><a href="https://dplyr.tidyverse.org/reference/all_equal.html">all_equal()</a></code> allows to compare data frames ignoring row and column order, and optionally ignoring minor differences in type (e.g. int vs. double) (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/821'>#821</a>). Used by <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> for tibbles. (This package contains a pure R implementation of <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html">all_equal()</a></code>, the <code>dplyr</code> code has identical behavior but is written in C++ and thus faster.)</li>
+<code><a href="https://dplyr.tidyverse.org/reference/all_equal.html" class="external-link">all_equal()</a></code> allows to compare data frames ignoring row and column order, and optionally ignoring minor differences in type (e.g. int vs. double) (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/821'>#821</a>). Used by <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> for tibbles. (This package contains a pure R implementation of <code><a href="https://dplyr.tidyverse.org/reference/all_equal.html" class="external-link">all_equal()</a></code>, the <code>dplyr</code> code has identical behavior but is written in C++ and thus faster.)</li>
 <li>The internals of <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">as_data_frame()</a></code> have been aligned, so <code><a href="../reference/deprecated.html">as_data_frame()</a></code> will now automatically recycle length-1 vectors. Both functions give more informative error messages if you are attempting to create an invalid data frame. You can no longer create a data frame with duplicated names (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/820'>#820</a>). Both functions now check that you don’t have any <code>POSIXlt</code> columns, and tell you to use <code>POSIXct</code> if you do (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/813'>#813</a>). <code><a href="../reference/deprecated.html">data_frame(NULL)</a></code> raises error “must be a 1d atomic vector or list”.</li>
 <li>
-<code><a href="../reference/formatting.html">trunc_mat()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code> are considerably faster if you have very wide data frames. They will now also only list the first 100 additional variables not already on screen - control this with the new <code>n_extra</code> parameter to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1161'>#1161</a>). The type of list columns is printed correctly (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1379'>#1379</a>). The <code>width</code> argument is used also for 0-row or 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/18'>#18</a>).</li>
+<code><a href="../reference/formatting.html">trunc_mat()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code> are considerably faster if you have very wide data frames. They will now also only list the first 100 additional variables not already on screen - control this with the new <code>n_extra</code> parameter to <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1161'>#1161</a>). The type of list columns is printed correctly (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1379'>#1379</a>). The <code>width</code> argument is used also for 0-row or 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/18'>#18</a>).</li>
 <li>When used in list-columns, S4 objects only print the class name rather than the full class hierarchy (<a href='https://github.com/tidyverse/tibble/issues/33'>#33</a>).</li>
 <li>Add test that <code>[.tbl_df()</code> does not change class (<a href='https://github.com/tidyverse/tibble/issues/41'>#41</a>, <a href='https://github.com/jennybc'>@jennybc</a>). Improve <code>[.tbl_df()</code> error message.</li>
 </ul>
@@ -1067,9 +1086,8 @@
 <li>
 <p>Code quality</p>
 <ul>
-<li>Test using new-style Travis-CI and AppVeyor. Full test coverage (<a href='https://github.com/tidyverse/tibble/issues/24'>#24</a>,
-<a href='https://github.com/tidyverse/tibble/issues/53'>#53</a>). Regression tests load known output from file (<a href='https://github.com/tidyverse/tibble/issues/49'>#49</a>).</li>
-<li>Renamed <code>obj_type()</code> to <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">obj_sum()</a></code>, improvements, better integration with <code><a href="https://rdrr.io/pkg/pillar/man/type_sum.html">type_sum()</a></code>.</li>
+<li>Test using new-style Travis-CI and AppVeyor. Full test coverage (<a href='https://github.com/tidyverse/tibble/issues/24'>#24</a>, <a href='https://github.com/tidyverse/tibble/issues/53'>#53</a>). Regression tests load known output from file (<a href='https://github.com/tidyverse/tibble/issues/49'>#49</a>).</li>
+<li>Renamed <code>obj_type()</code> to <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">obj_sum()</a></code>, improvements, better integration with <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code>.</li>
 <li>Internal cleanup.</li>
 </ul>
 </li>
@@ -1088,7 +1106,7 @@
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -1120,6 +1138,8 @@
 </script>
 
 
+
+  
 
   </body>
 </html>

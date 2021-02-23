@@ -90,9 +90,15 @@ runs without raising an error." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -109,7 +115,7 @@ runs without raising an error." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -198,7 +204,7 @@ runs without raising an error." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
 <p>Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like <span class="pkg">sf</span> or <span class="pkg">tsibble</span>.</p>
@@ -269,27 +275,27 @@ with recycling of scalars and automatic name repair.</p></div>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># The nrow argument is always required:</span>
 <span class='fu'>new_tibble</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     5
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     6</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     5
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     6</div><div class='input'>
 <span class='co'># Existing row.names attributes are ignored:</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>new_tibble</span><span class='op'>(</span><span class='va'>iris</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 5</span><span>
 #&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>          5.1         3.5          1.4         0.2 setosa 
-#&gt; </span><span style='color: #555555;'>2</span><span>          4.9         3            1.4         0.2 setosa 
-#&gt; </span><span style='color: #555555;'>3</span><span>          4.7         3.2          1.3         0.2 setosa </div><div class='input'>
+#&gt;          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          5.1         3.5          1.4         0.2 setosa 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>          4.9         3            1.4         0.2 setosa 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>          4.7         3.2          1.3         0.2 setosa </div><div class='input'>
 <span class='co'># The length of all columns must be compatible with the nrow argument:</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>new_tibble</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 2</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     5</div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     5</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -301,7 +307,7 @@ with recycling of scalars and automatic name repair.</p></div>
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -333,6 +339,8 @@ with recycling of scalars and automatic name repair.</p></div>
 </script>
 
 
+
+  
 
   </body>
 </html>

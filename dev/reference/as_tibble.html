@@ -100,9 +100,15 @@ as_tibble_col() converts a vector to a tibble with one column." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -119,7 +125,7 @@ as_tibble_col() converts a vector to a tibble with one column." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -208,7 +214,7 @@ as_tibble_col() converts a vector to a tibble with one column." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
 <p><code>as_tibble()</code> turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class <code><a href='tbl_df-class.html'>tbl_df</a></code>. This is
 in contrast with <code><a href='tibble.html'>tibble()</a></code>, which builds a tibble from individual columns.
@@ -321,7 +327,7 @@ Read more in <a href='rownames.html'>rownames</a>.</p></li>
     </tr>
     <tr>
       <th>_n, validate</th>
-      <td><p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
+      <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated'><img src='figures/lifecycle-soft-deprecated.svg' alt='[Soft-deprecated]' /></a></p>
 <p>For compatibility only, do not use for new code.</p></td>
     </tr>
     <tr>
@@ -363,36 +369,36 @@ values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 
 <span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;   c     d        
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> three </span><span style='color: #555555;'>&lt;int [2]&gt;</span><span></div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> three </span><span style='color: #949494;'>&lt;int [2]&gt;</span><span></div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
-#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 3</span><span>
 #&gt;    ...1  ...2  ...3
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2     3</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2     3</div><div class='input'>
 <span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 1</span><span>
 #&gt;   value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='fu'>as_tibble_col</span><span class='op'>(</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='fu'>as_tibble_col</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
   column_name <span class='op'>=</span> <span class='st'>"data"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 1</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 1</span><span>
 #&gt;   data        
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;named list&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>2</span><span> </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>  </div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>  </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -404,7 +410,7 @@ values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -436,6 +442,8 @@ values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/
 </script>
 
 
+
+  
 
   </body>
 </html>

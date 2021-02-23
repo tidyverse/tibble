@@ -86,9 +86,15 @@ add_case() is an alias of add_row()." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -105,7 +111,7 @@ add_case() is an alias of add_row()." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -234,53 +240,53 @@ default: after last row.</p></td>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, y <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
 
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     0</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4     0</div><div class='input'>
 <span class='co'># You can specify where to add the new rows</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span>, y <span class='op'>=</span> <span class='fl'>0</span>, .before <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     4     0
-#&gt; </span><span style='color: #555555;'>3</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>4</span><span>     3     1</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     4     0
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     3     1</div><div class='input'>
 <span class='co'># You can supply vectors, to add multiple rows (this isn't</span>
 <span class='co'># recommended because it's a bit hard to read)</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     0
-#&gt; </span><span style='color: #555555;'>5</span><span>     5    -</span><span style='color: #BB0000;'>1</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4     0
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5    -</span><span style='color: #BB0000;'>1</span><span></div><div class='input'>
 <span class='co'># Use tibble_row() to add one row only</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span><span class='fu'><a href='tibble.html'>tibble_row</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     0</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span><span class='fu'><a href='tibble.html'>tibble_row</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4     0</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span><span class='fu'><a href='tibble.html'>tibble_row</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Error : All vectors must be size one, use `list()` to wrap.
 #&gt; </span><span style='color: #BB0000;'>✖</span><span> Column `x` is of size 2.</div><div class='input'>
 <span class='co'># Absent variables get missing values</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4    </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4    </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'>
 <span class='co'># You can't create new variables</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>add_row</span><span class='op'>(</span>z <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Error : New rows can't add columns.
@@ -296,7 +302,7 @@ default: after last row.</p></td>
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -328,6 +334,8 @@ default: after last row.</p></td>
 </script>
 
 
+
+  
 
   </body>
 </html>

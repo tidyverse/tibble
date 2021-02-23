@@ -63,9 +63,12 @@ addition to data.frame. This allows so-called &quot;tibbles&quot; to exhibit som
 special behaviour, such as enhanced printing. Tibbles are
 fully described in tbl_df.
 tibble() is much lazier than base::data.frame() in terms of
-transforming the user's input. Character vectors are not coerced to
-factor. List-columns are expressly anticipated and do not require special
-tricks. Column names are not modified.
+transforming the user's input.
+Character vectors are not coerced to factor.
+List-columns are expressly anticipated and do not require special tricks.
+Column names are not modified.
+Inner names in columns are left unchanged.
+
 tibble() builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
@@ -101,9 +104,15 @@ in a list." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -120,7 +129,7 @@ in a list." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.0.6.9001</span>
         </div>
       </div>
     </div>
@@ -216,9 +225,12 @@ addition to <code>data.frame</code>. This allows so-called "tibbles" to exhibit 
 special behaviour, such as <a href='formatting.html'>enhanced printing</a>. Tibbles are
 fully described in <code><a href='tbl_df-class.html'>tbl_df</a></code>.</p></li>
 <li><p><code>tibble()</code> is much lazier than <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> in terms of
-transforming the user's input. Character vectors are not coerced to
-factor. List-columns are expressly anticipated and do not require special
-tricks. Column names are not modified.</p></li>
+transforming the user's input.</p><ul>
+<li><p>Character vectors are not coerced to factor.</p></li>
+<li><p>List-columns are expressly anticipated and do not require special tricks.</p></li>
+<li><p>Column names are not modified.</p></li>
+<li><p>Inner names in columns are left unchanged.</p></li>
+</ul></li>
 <li><p><code>tibble()</code> builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.</p></li>
@@ -298,39 +310,39 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
     <pre class="examples"><div class='input'><span class='co'># Unnamed arguments are named with their expression:</span>
 <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
 <span class='fu'>tibble</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>a</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 2</span><span>
 #&gt;       a `a * 2`
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1       2
-#&gt; </span><span style='color: #555555;'>2</span><span>     2       4
-#&gt; </span><span style='color: #555555;'>3</span><span>     3       6
-#&gt; </span><span style='color: #555555;'>4</span><span>     4       8
-#&gt; </span><span style='color: #555555;'>5</span><span>     5      10</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1       2
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2       4
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3       6
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4       8
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5      10</div><div class='input'>
 <span class='co'># Scalars (vectors of length one) are recycled:</span>
 <span class='fu'>tibble</span><span class='op'>(</span><span class='va'>a</span>, b <span class='op'>=</span> <span class='va'>a</span> <span class='op'>*</span> <span class='fl'>2</span>, c <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 3</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 3</span><span>
 #&gt;       a     b     c
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     4     1
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     6     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     8     1
-#&gt; </span><span style='color: #555555;'>5</span><span>     5    10     1</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     4     1
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     6     1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4     8     1
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5    10     1</div><div class='input'>
 <span class='co'># Columns are available in subsequent expressions:</span>
 <span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>x</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 2</span><span>
 #&gt;         x      y
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 0.512  1.02  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 0.836  1.67  
-#&gt; </span><span style='color: #555555;'> 3</span><span> 0.709  1.42  
-#&gt; </span><span style='color: #555555;'> 4</span><span> 0.874  1.75  
-#&gt; </span><span style='color: #555555;'> 5</span><span> 0.011</span><span style='text-decoration: underline;'>5</span><span> 0.023</span><span style='text-decoration: underline;'>0</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span> 0.888  1.78  
-#&gt; </span><span style='color: #555555;'> 7</span><span> 0.996  1.99  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 0.500  1.00  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 0.359  0.718 
-#&gt; </span><span style='color: #555555;'>10</span><span> 0.775  1.55  </div><div class='input'>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.512  1.02  
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.836  1.67  
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.709  1.42  
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.874  1.75  
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.011</span><span style='text-decoration: underline;'>5</span><span> 0.023</span><span style='text-decoration: underline;'>0</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.888  1.78  
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.996  1.99  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.500  1.00  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.359  0.718 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.775  1.55  </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
@@ -341,27 +353,28 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
 <span class='co'># or munges column names (unless requested),</span>
 <span class='fu'>tibble</span><span class='op'>(</span>`a + b` <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 1</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 1</span><span>
 #&gt;   `a + b`
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       1
-#&gt; </span><span style='color: #555555;'>2</span><span>       2
-#&gt; </span><span style='color: #555555;'>3</span><span>       3
-#&gt; </span><span style='color: #555555;'>4</span><span>       4
-#&gt; </span><span style='color: #555555;'>5</span><span>       5</div><div class='input'>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>       1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>       2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>       3
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       4
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       5</div><div class='input'>
 <span class='co'># but it forces you to take charge of names, if they need repair:</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Error : Column name `x` must not be duplicated.
+#&gt; Use .name_repair to specify repair.</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* x -&gt; x...1</span>
-#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt; <span class='message'>* x -&gt; x...2</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;   x...1 x...2
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='st'>"minimal"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='st'>"minimal"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x     x
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'>## By default, non-syntactic names are allowed,</span>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='op'>(</span>`a 1` <span class='op'>=</span> <span class='fl'>1</span>, `a 2` <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 <span class='co'>## because you can still index by name:</span>
@@ -377,28 +390,28 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 </div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='co'>## You can specify your own name repair function:</span>
 <span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='va'>make.unique</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x   x.1
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='va'>fix_names</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>"\\s+"</span>, <span class='st'>"_"</span>, <span class='va'>x</span><span class='op'>)</span>
 <span class='fu'>tibble</span><span class='op'>(</span>`year 1` <span class='op'>=</span> <span class='fl'>1</span>, `year 2` <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='va'>fix_names</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;   year_1 year_2
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      1      2</div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      1      2</div><div class='input'>
 <span class='co'>## purrr-style anonymous functions and constants</span>
 <span class='co'>## are also supported</span>
 <span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span><span class='op'>(</span><span class='va'>.</span>, unique <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x   x.1
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='fl'>2</span>, .name_repair <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'>
 <span class='co'># Tibbles can contain columns that are tibbles or matrices</span>
 <span class='co'># if the number of rows is compatible. Unnamed tibbled are</span>
 <span class='co'># spliced, i.e. the inner columns are inserted into the</span>
@@ -415,78 +428,77 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
     <span class='op'>)</span>
   <span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 4</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 4</span><span>
 #&gt;       a     b     c d$e$f
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4     7     4
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     5     8     5
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     6     9     6</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4     7     4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     5     8     5
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     6     9     6</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>
   a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>,
   b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>,
   c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 3</span><span>
-#&gt;       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Lengt… [,"Sepal.Width"]
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1     0     0     0           0.686           -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     0     1     0     0          -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>           0.190 
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     0     0     1     0           1.27            -</span><span style='color: #BB0000;'>0.330</span><span> 
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     0     0     0     1           0.516           -</span><span style='color: #BB0000;'>0.122</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 2 more variables: [,"Petal.Length"] </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, [,"Petal.Width"] </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 3</span><span>
+#&gt;       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Length"] [,"Sepal.Width"]
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1     0     0     0             0.686           -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     0     1     0     0            -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>           0.190 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     0     0     1     0             1.27            -</span><span style='color: #BB0000;'>0.330</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4     0     0     0     1             0.516           -</span><span style='color: #BB0000;'>0.122</span><span> </div><div class='input'>
 <span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span>
 <span class='co'># with incompatible number of rows:</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span><span class='op'>(</span><span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 1</span><span>
 #&gt;   y                  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>                 </div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'>tibble</span><span class='op'>(</span>c <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>                 </div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'>tibble</span><span class='op'>(</span>c <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Error : Tibble columns must have compatible sizes.
 #&gt; * Size 3: Existing data.
 #&gt; * Size 4: Column `b`.
 #&gt; </span><span style='color: #0000BB;'>ℹ</span><span> Only values of size one are recycled.</div><div class='input'>
 <span class='co'># Use := to create columns with names that start with a dot:</span>
 <span class='fu'>tibble</span><span class='op'>(</span>.dotted <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 1</span><span>
 #&gt;   .dotted
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       3</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>.dotted</span> <span class='op'>:=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>       3</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>.dotted</span> <span class='op'>:=</span> <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 1</span><span>
 #&gt;   .dotted
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       3</div><div class='input'>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>       3</div><div class='input'>
 <span class='co'># You can unquote an expression:</span>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
 <span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1</div><div class='input'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     3</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     3</div><div class='input'>
 <span class='co'># You can splice-unquote a list of quosures and expressions:</span>
 <span class='fu'>tibble</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='op'>!</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'>rlang</span><span class='fu'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/nse-defuse.html'>quo</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 2</span><span>
 #&gt;        x     y
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>     1     2
-#&gt; </span><span style='color: #555555;'> 2</span><span>     2     4
-#&gt; </span><span style='color: #555555;'> 3</span><span>     3     6
-#&gt; </span><span style='color: #555555;'> 4</span><span>     4     8
-#&gt; </span><span style='color: #555555;'> 5</span><span>     5    10
-#&gt; </span><span style='color: #555555;'> 6</span><span>     6    12
-#&gt; </span><span style='color: #555555;'> 7</span><span>     7    14
-#&gt; </span><span style='color: #555555;'> 8</span><span>     8    16
-#&gt; </span><span style='color: #555555;'> 9</span><span>     9    18
-#&gt; </span><span style='color: #555555;'>10</span><span>    10    20</div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     1     2
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     2     4
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     3     6
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     4     8
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     5    10
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     6    12
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     7    14
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     8    16
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     9    18
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    10    20</div><div class='input'>
 
 <span class='co'># Use tibble_row() to construct a one-row tibble:</span>
 <span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Petal.Width</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       a lm    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1 </span><span style='color: #555555;'>&lt;lm&gt;</span><span>  </div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 </span><span style='color: #949494;'>&lt;lm&gt;</span><span>  </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -498,7 +510,7 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -530,6 +542,8 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 </script>
 
 
+
+  
 
   </body>
 </html>
