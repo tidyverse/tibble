@@ -5,11 +5,6 @@
   } else {
     safe_match <<- safe_match_default
   }
-
-  # Simplify once pillar 1.5.0 is on CRAN
-  register_if_pillar_hasnt(c(
-    "format.tbl", "print.tbl"
-  ))
 }
 
 safe_match_3_0 <- function(x, table) {
