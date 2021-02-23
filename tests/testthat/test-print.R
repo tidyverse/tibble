@@ -63,6 +63,7 @@ test_that("output test", {
 test_that("full output test", {
   skip_if(getRversion() < "3.2")
   skip_on_os("windows")
+  skip_on_os("mac")
 
   expect_snapshot({
     df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
