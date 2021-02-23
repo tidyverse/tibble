@@ -322,7 +322,7 @@ knit_print.trunc_mat <- function(x, options) {
   }
 
   res <- paste(c("", "", summary, "", kable, "", extra), collapse = "\n")
-  knitr::asis_output(crayon::strip_style(res), cacheable = TRUE)
+  knitr::asis_output(fansi::strip_sgr(res), cacheable = TRUE)
 }
 
 format_knitr_body <- function(x) {
