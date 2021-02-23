@@ -1,3 +1,8 @@
+# tibble 3.1.0
+
+- Same as previous version.
+
+
 # tibble 3.0.6.9002
 
 - cli and crayon are now suggested packages (#475).
