@@ -37,7 +37,7 @@ Imports:
     lifecycle (>= 0.2.0),
     magrittr,
     methods,
-    pillar (>= 1.4.3),
+    pillar (>= 1.5.0),
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
@@ -73,3 +73,5 @@ RoxygenNote: 7.1.1.9001
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: subsetting, as_tibble, add
+Remotes: 
+    r-lib/pillar@v1.5.0
