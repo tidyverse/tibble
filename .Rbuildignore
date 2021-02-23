@@ -19,7 +19,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^docs-dev$
-^tic\.R$
 ^\.github$
 ^\.drake$
 ^adhoc$
