@@ -123,12 +123,6 @@
       <error/tibble_error_enframe_has_dim>
       `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
     Code
-      # # glimpse
-      error_glimpse_infinite_width()
-    Output
-      <error/tibble_error_glimpse_infinite_width>
-      `width` must be finite.
-    Code
       # # names
       error_column_names_cannot_be_empty(1, repair_hint = TRUE)
     Output

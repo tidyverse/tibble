@@ -65,6 +65,11 @@ skip_dep_new_tibble_subclass <- function() {
   skip_legacy()
 }
 
+skip_dep_glimpse <- function() {
+  # DEP: glimpse() and format_v() now in pillar
+  skip_legacy()
+}
+
 skip_enh_posixlt_supported <- function() {
   # ENH: POSIXlt supported
   skip_legacy()

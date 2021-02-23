@@ -43,9 +43,6 @@ test_that("output test", {
 
     error_enframe_has_dim(Titanic)
 
-    "# glimpse"
-    error_glimpse_infinite_width()
-
     "# names"
     error_column_names_cannot_be_empty(1, repair_hint = TRUE)
     error_column_names_cannot_be_empty(2:3, repair_hint = TRUE)
