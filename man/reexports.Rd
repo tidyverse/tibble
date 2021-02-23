@@ -5,6 +5,7 @@
 \alias{reexports}
 \alias{has_name}
 \alias{\%>\%}
+\alias{tbl_sum}
 \alias{obj_sum}
 \alias{type_sum}
 \alias{size_sum}
@@ -17,7 +18,7 @@ below to see their documentation.
 \describe{
   \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 
-  \item{pillar}{\code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar:type_sum]{size_sum}}, \code{\link[pillar]{type_sum}}}
+  \item{pillar}{\code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar:type_sum]{size_sum}}, \code{\link[pillar]{tbl_sum}}, \code{\link[pillar]{type_sum}}}
 
   \item{rlang}{\code{\link[rlang]{has_name}}}
 }}
