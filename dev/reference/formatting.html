@@ -56,8 +56,7 @@
 
 
 <meta property="og:title" content="Printing tibbles — formatting" />
-<meta property="og:description" content="
-One of the main features of the tbl_df class is the printing:
+<meta property="og:description" content="One of the main features of the tbl_df class is the printing:
 Tibbles only print as many rows and columns as fit on one screen,
 supplemented by a summary of the remaining rows and columns.
 Tibble reveals the type of each column, which keeps the user informed about
@@ -66,7 +65,11 @@ whether a variable is, e.g., &amp;lt;chr&amp;gt; or &amp;lt;fct&amp;gt; (charact
 
 Printing can be tweaked for a one-off call by calling print() explicitly
 and setting arguments like n and width. More persistent control is
-available by setting the options described below." />
+available by setting the options described below.
+As of tibble 3.1.0, printing is handled entirely by the pillar package.
+If you implement a package that extend tibble,
+the printed output can be customized in various ways.
+See vignette(&quot;extending&quot;, package = &quot;pillar&quot;) for details." />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
@@ -206,8 +209,7 @@ available by setting the options described below." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
-<p>One of the main features of the <code>tbl_df</code> class is the printing:</p><ul>
+    <p>One of the main features of the <code>tbl_df</code> class is the printing:</p><ul>
 <li><p>Tibbles only print as many rows and columns as fit on one screen,
 supplemented by a summary of the remaining rows and columns.</p></li>
 <li><p>Tibble reveals the type of each column, which keeps the user informed about
@@ -217,15 +219,17 @@ whether a variable is, e.g., <code>&lt;chr&gt;</code> or <code>&lt;fct&gt;</code
 <p>Printing can be tweaked for a one-off call by calling <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code> explicitly
 and setting arguments like <code>n</code> and <code>width</code>. More persistent control is
 available by setting the options described below.</p>
+<p>As of tibble 3.1.0, printing is handled entirely by the <span class="pkg">pillar</span> package.
+If you implement a package that extend tibble,
+the printed output can be customized in various ways.
+See <code><a href='https://pillar.r-lib.org//articles/extending.html'>vignette("extending", package = "pillar")</a></code> for details.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl_df</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for tbl_df</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='fu'>trunc_mat</span><span class='op'>(</span><span class='va'>x</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -250,7 +254,7 @@ if less than option <code>tibble.print_max</code>. Otherwise, will print
 means use <code><a href='https://rdrr.io/r/base/options.html'>getOption("tibble.width")</a></code> or (if also <code>NULL</code>)
 <code><a href='https://rdrr.io/r/base/options.html'>getOption("width")</a></code>; the latter displays only the columns that fit on one
 screen. You can also set <code><a href='https://rdrr.io/r/base/options.html'>options(tibble.width = Inf)</a></code> to override this
-default and always print all columns.</p></td>
+default and always print all columns, this may be slow for very wide tibbles.</p></td>
     </tr>
     <tr>
       <th>n_extra</th>
@@ -267,7 +271,7 @@ will print information about at most <code>tibble.max_extra_cols</code> extra co
 
 <p>The following options are used by the tibble and pillar packages
 to format and print <code>tbl_df</code> objects.
-Used by the formatting workhorse <code>trunc_mat()</code> and, therefore,
+Used by the formatting workhorse <code><a href='trunc_mat.html'>trunc_mat()</a></code> and, therefore,
 indirectly, by <code>print.tbl()</code>.</p><ul>
 <li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows printed.
 Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
@@ -839,21 +843,6 @@ turn off truncation of character columns.</p></li>
 #&gt; </span><span style='color: #BCBCBC;'>25</span><span>    19.2       8    400      175     3.08   3.84     17.0      0      0
 #&gt; </span><span style='color: #949494;'># … with 7 more rows, and 13 more variables: gear...10 &lt;dbl&gt;, carb...11 &lt;dbl&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   mpg...12 &lt;dbl&gt;, …</span><span></div><div class='input'>
-<span class='fu'>trunc_mat</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># Description: df[,11] [32 × 11]</span><span>
-#&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; </span><span style='color: #949494;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'>nycflights13</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/nycflights13/man/flights.html'>flights</a></span>, n_extra <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 336,776 x 19</span><span>
 #&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
