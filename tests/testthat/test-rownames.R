@@ -93,6 +93,10 @@ test_that("converting to data frame does not add row names", {
   expect_false(has_rownames(as.data.frame(as_tibble(iris))))
 })
 
+test_that("work around structure() bug (#852)", {
+  expect_false(has_rownames(structure(trees, .drop = FALSE)))
+})
+
 test_that("output test", {
   expect_snapshot_with_error({
     rownames_to_column(mtcars, "cyl")

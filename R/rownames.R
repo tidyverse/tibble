@@ -45,7 +45,7 @@ NULL
 #' @export
 #' @rdname rownames
 has_rownames <- function(.data) {
-  .row_names_info(.data) > 0L
+  .row_names_info(.data) > 0L && !is.na(.row_names_info(.data, 0L)[[1L]])
 }
 
 #' @export
