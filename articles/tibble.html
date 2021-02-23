@@ -37,6 +37,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -51,8 +53,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.6</span>
+          <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
         </div>
       </div>
     </div>
@@ -88,22 +90,22 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Release notes</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/">Version 3.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/" class="external-link">Version 3.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/">Version 2.1.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/" class="external-link">Version 2.1.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/">Version 2.0.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/" class="external-link">Version 2.0.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/">Version 2.0.0 pre-announcement</a>
+      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/" class="external-link">Version 2.0.0 pre-announcement</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/">Version 1.4.2</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/" class="external-link">Version 1.4.2</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/">Version 1.4.1</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/" class="external-link">Version 1.4.1</a>
     </li>
     <li>
       <a href="../news/index.html">Change log</a>
@@ -111,7 +113,7 @@
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/tibble">
+  <a href="https://github.com/tidyverse/tibble" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +140,7 @@
       <h1 data-toc-skip>Tibbles</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/tibble.Rmd"><code>vignettes/tibble.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/tibble.Rmd" class="external-link"><code>vignettes/tibble.Rmd</code></a></small>
       <div class="hidden name"><code>tibble.Rmd</code></div>
 
     </div>
@@ -147,7 +149,7 @@
     
 <p>Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="creating" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating" class="anchor"></a>Creating</h2>
@@ -176,7 +178,7 @@
 </div>
 <p>This makes it easier to use with list-columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># A tibble: 3 x 2</span><span>
 </span><span style="color: #555555;">#&gt;</span><span>       </span><span style="font-weight: bold;">x</span><span> </span><span style="font-weight: bold;">y</span><span>         
@@ -186,18 +188,18 @@
 </span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">3</span><span>     3 </span><span style="color: #555555;">&lt;int [20]&gt;</span><span>
 </span></code></pre>
 </div>
-<p>List-columns are often created by <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::nest()</a></code>, but they can be useful to create by hand.</p>
+<p>List-columns are often created by <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest()</a></code>, but they can be useful to create by hand.</p>
 </li>
 <li>
 <p>It never adjusts the names of variables:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "crazy.name"
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "crazy name"
 </span></code></pre>
@@ -219,37 +221,37 @@
 </span></code></pre>
 </div>
 </li>
-<li><p>It never uses <code><a href="https://rdrr.io/r/base/row.names.html">row.names()</a></code>. The whole point of tidy data is to store variables in a consistent way. So it never stores a variable as special attribute.</p></li>
+<li><p>It never uses <code><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names()</a></code>. The whole point of tidy data is to store variables in a consistent way. So it never stores a variable as special attribute.</p></li>
 <li><p>It only recycles vectors of length 1. This is because recycling vectors of greater lengths is a frequent source of bugs.</p></li>
 </ul>
 </div>
 <div id="coercion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coercion" class="anchor"></a>Coercion</h2>
-<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> methods, and in fact, it’s precisely what <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> does, but it’s similar to <code><a href="https://rdrr.io/r/base/do.call.html">do.call(cbind, lapply(x, data.frame))</a></code> - i.e. it coerces each component to a data frame and then uses <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> to bind them all together.</p>
+<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods, and in fact, it’s precisely what <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> does, but it’s similar to <code><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call(cbind, lapply(x, data.frame))</a></code> - i.e. it coerces each component to a data frame and then uses <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code> to bind them all together.</p>
 <p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> has been written with an eye for performance:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span>
+<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span>
 
-<span class="va">timing</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bench/man/mark.html">mark</a></span><span class="op">(</span>
+<span class="va">timing</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bench/man/mark.html" class="external-link">mark</a></span><span class="op">(</span>
   <span class="fu"><a href="../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>,
   check <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 
 <span class="va">timing</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># A tibble: 2 x 14</span><span>
-</span><span style="color: #555555;">#&gt;</span><span>   </span><span style="font-weight: bold;">expression</span><span> </span><span style="font-weight: bold;">min</span><span>         </span><span style="font-weight: bold;">mean</span><span>         </span><span style="font-weight: bold;">median</span><span>      </span><span style="font-weight: bold;">max</span><span>         </span><span style="font-weight: bold;">`itr/sec`</span><span>
-</span><span style="color: #555555;">#&gt;</span><span>   </span><span style="color: #555555;font-style: italic;">&lt;chr&gt;</span><span>      </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>  </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>   </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>  </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>      </span><span style="color: #555555;font-style: italic;">&lt;dbl&gt;</span><span>
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">1</span><span> as_tibble… 0.000287696 0.0006251376 0.000327178 0.004508219     </span><span style="text-decoration: underline;">1</span><span>600.
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">2</span><span> as.data.f… 0.000791522 0.0016640039 0.001098172 0.007652914      601.
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 8 more variables: </span><span style="color: #555555;font-weight: bold;">mem_alloc</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;bnch_byt&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">n_gc</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;dbl&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">n_itr</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;int&gt;</span><span style="color: #555555;">,</span><span>
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">#   </span><span style="color: #555555;font-weight: bold;">total_time</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">result</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;list&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">memory</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;list&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">time</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;list&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">gc</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;list&gt;</span><span>
+</span><span style="color: #555555;">#&gt;</span><span>   </span><span style="font-weight: bold;">expression</span><span>       </span><span style="font-weight: bold;">min</span><span>         </span><span style="font-weight: bold;">mean</span><span>         </span><span style="font-weight: bold;">median</span><span>      </span><span style="font-weight: bold;">max</span><span>         </span><span style="font-weight: bold;">`itr/sec`</span><span>
+</span><span style="color: #555555;">#&gt;</span><span>   </span><span style="color: #555555;font-style: italic;">&lt;chr&gt;</span><span>            </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>  </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>   </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>  </span><span style="color: #555555;font-style: italic;">&lt;bench_tm&gt;</span><span>      </span><span style="color: #555555;font-style: italic;">&lt;dbl&gt;</span><span>
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">1</span><span> as_tibble(l)     0.000287696 0.0006251376 0.000327178 0.004508219     </span><span style="text-decoration: underline;">1</span><span>600.
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">2</span><span> as.data.frame(l) 0.000791522 0.0016640039 0.001098172 0.007652914      601.
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 8 more variables: </span><span style="color: #555555;font-weight: bold;">mem_alloc</span><span style="color: #555555;"> &lt;bnch_byt&gt;, </span><span style="color: #555555;font-weight: bold;">n_gc</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555;font-weight: bold;">n_itr</span><span style="color: #555555;"> &lt;int&gt;,</span><span>
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;">#   </span><span style="color: #555555;font-weight: bold;">total_time</span><span style="color: #555555;"> &lt;bench_tm&gt;, </span><span style="color: #555555;font-weight: bold;">result</span><span style="color: #555555;"> &lt;list&gt;, </span><span style="color: #555555;font-weight: bold;">memory</span><span style="color: #555555;"> &lt;list&gt;, </span><span style="color: #555555;font-weight: bold;">time</span><span style="color: #555555;"> &lt;list&gt;, </span><span style="color: #555555;font-weight: bold;">gc</span><span style="color: #555555;"> &lt;list&gt;</span><span>
 </span></code></pre>
 </div>
-<p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
+<p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
 <h2 class="hasAnchor">
@@ -280,23 +282,23 @@
 </div>
 <p>You can control the default appearance with options:</p>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/base/options.html">options(tibble.print_max = n, tibble.print_min = m)</a></code>: if there are more than <code>n</code> rows, print only the first <code>m</code> rows. Use <code><a href="https://rdrr.io/r/base/options.html">options(tibble.print_max = Inf)</a></code> to always show all rows.</p></li>
-<li><p><code><a href="https://rdrr.io/r/base/options.html">options(tibble.width = Inf)</a></code> will always print all columns, regardless of the width of the screen.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.print_max = n, tibble.print_min = m)</a></code>: if there are more than <code>n</code> rows, print only the first <code>m</code> rows. Use <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.print_max = Inf)</a></code> to always show all rows.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.width = Inf)</a></code> will always print all columns, regardless of the width of the screen.</p></li>
 </ul>
 </div>
 <div id="subsetting" class="section level3">
 <h3 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h3>
-<p>Tibbles are quite strict about subsetting. <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> always returns another tibble. Contrast this with a data frame: sometimes <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> returns a data frame and sometimes it just returns a vector:</p>
+<p>Tibbles are quite strict about subsetting. <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> always returns another tibble. Contrast this with a data frame: sometimes <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> returns a data frame and sometimes it just returns a vector:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "data.frame"
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "integer"
 </span></code></pre>
@@ -304,33 +306,33 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "tbl_df"     "tbl"        "data.frame"
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "tbl_df"     "tbl"        "data.frame"
 </span></code></pre>
 </div>
-<p>To extract a single column use <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>:</p>
+<p>To extract a single column use <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "integer"
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "integer"
 </span></code></pre>
 </div>
-<p>Tibbles are also stricter with <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>. Tibbles never do partial matching, and will throw a warning and return <code>NULL</code> if the column does not exist:</p>
+<p>Tibbles are also stricter with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>. Tibbles never do partial matching, and will throw a warning and return <code>NULL</code> if the column does not exist:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">df</span><span class="op">$</span><span class="va">a</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] 1
@@ -350,7 +352,7 @@
 </div>
 <p>As of version 1.4.1, tibbles no longer ignore the <code>drop</code> argument:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] 1 2 3
 </span></code></pre>
@@ -398,17 +400,17 @@
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># A tibble: 0 x 2</span><span>
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555;font-weight: bold;">a</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;dbl&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">b</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;int&gt;</span><span>
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555;font-weight: bold;">a</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555;font-weight: bold;">b</span><span style="color: #555555;"> &lt;int&gt;</span><span>
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># A tibble: 0 x 2</span><span>
-</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555;font-weight: bold;">a</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;int&gt;</span><span style="color: #555555;">, </span><span style="color: #555555;font-weight: bold;">b</span><span style="color: #555555;"> </span><span style="color: #555555;font-style: italic;">&lt;dbl&gt;</span><span>
+</span><span style="color: #555555;">#&gt;</span><span> </span><span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555;font-weight: bold;">a</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555;font-weight: bold;">b</span><span style="color: #555555;"> &lt;dbl&gt;</span><span>
 </span></code></pre>
 </div>
 </div>
@@ -426,13 +428,14 @@
 
 
       <footer><div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by <a href="http://krlmlr.info">Kirill Müller</a>, <a href="http://hadley.nz">Hadley Wickham</a>.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 

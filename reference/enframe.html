@@ -56,8 +56,7 @@
 
 
 <meta property="og:title" content="Converting vectors to data frames, and vice versa — enframe" />
-<meta property="og:description" content="
-enframe() converts named atomic vectors or lists to one- or two-column
+<meta property="og:description" content="enframe() converts named atomic vectors or lists to one- or two-column
 data frames.
 For a list, the result will be a nested tibble with a column of type list.
 For unnamed vectors, the natural sequence is used as name column.
@@ -89,9 +88,15 @@ If the input has only one column, an unnamed vector is returned." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -108,7 +113,7 @@ If the input has only one column, an unnamed vector is returned." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.6</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
         </div>
       </div>
     </div>
@@ -197,8 +202,7 @@ If the input has only one column, an unnamed vector is returned." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
-<p><code>enframe()</code> converts named atomic vectors or lists to one- or two-column
+    <p><code>enframe()</code> converts named atomic vectors or lists to one- or two-column
 data frames.
 For a list, the result will be a nested tibble with a column of type <code>list</code>.
 For unnamed vectors, the natural sequence is used as name column.</p>
@@ -233,23 +237,23 @@ or one column (otherwise).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>enframe</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;    name value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     3</div><div class='input'><span class='fu'>enframe</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>5</span>, b <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3</div><div class='input'><span class='fu'>enframe</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>5</span>, b <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 2</span><span>
 #&gt;   name  value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a         5
-#&gt; </span><span style='color: #555555;'>2</span><span> b         7</div><div class='input'><span class='fu'>enframe</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>one <span class='op'>=</span> <span class='fl'>1</span>, two <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, three <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         5
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         7</div><div class='input'><span class='fu'>enframe</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>one <span class='op'>=</span> <span class='fl'>1</span>, two <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, three <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;   name  value    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> one   </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> two   </span><span style='color: #555555;'>&lt;int [2]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> three </span><span style='color: #555555;'>&lt;int [3]&gt;</span><span></div><div class='input'><span class='fu'>deframe</span><span class='op'>(</span><span class='fu'>enframe</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> one   </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> two   </span><span style='color: #949494;'>&lt;int [2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> three </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span></div><div class='input'><span class='fu'>deframe</span><span class='op'>(</span><span class='fu'>enframe</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 1 2 3 
 #&gt; 3 2 1 </div><div class='input'><span class='fu'>deframe</span><span class='op'>(</span><span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'>deframe</span><span class='op'>(</span><span class='fu'><a href='tibble.html'>tibble</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
@@ -273,7 +277,7 @@ or one column (otherwise).</p>
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -305,6 +309,8 @@ or one column (otherwise).</p>
 </script>
 
 
+
+  
 
   </body>
 </html>

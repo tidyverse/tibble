@@ -61,8 +61,9 @@ regular data frames. However, the
 behavior is different for tibbles and data frames in some cases:
 [ always returns a tibble by default, even if
 only one column is accessed.
-Partial matching of column names with $ and [[ is not supported, a
-warning is given and NULL is returned.
+Partial matching of column names with $ and [[ is not supported, and
+NULL is returned.
+For $, a warning is given.
 Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
 Rows outside of the tibble's boundaries cannot be accessed.
@@ -100,9 +101,15 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
   gtag('config', 'UA-115082821-1');
 </script>
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -119,7 +126,7 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.6</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
         </div>
       </div>
     </div>
@@ -213,8 +220,9 @@ data frame behavior, coerce to a data frame via as.data.frame()." />
 behavior is different for tibbles and data frames in some cases:</p><ul>
 <li><p><code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> always returns a tibble by default, even if
 only one column is accessed.</p></li>
-<li><p>Partial matching of column names with <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> and <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code> is not supported, a
-warning is given and <code>NULL</code> is returned.</p></li>
+<li><p>Partial matching of column names with <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> and <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code> is not supported, and
+<code>NULL</code> is returned.
+For <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>, a warning is given.</p></li>
 <li><p>Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.</p></li>
 <li><p>Rows outside of the tibble's boundaries cannot be accessed.</p></li>
@@ -295,12 +303,12 @@ New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></
 <span class='co'># Subsetting single columns:</span>
 <span class='va'>df</span><span class='op'>[</span>, <span class='st'>"a"</span><span class='op'>]</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span>, <span class='st'>"a"</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 1</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 1</span><span>
 #&gt;       a
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span>, <span class='st'>"a"</span>, drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>]</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span>, <span class='st'>"a"</span>, drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>]</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span><span class='op'>[</span>, <span class='st'>"a"</span><span class='op'>]</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
 <span class='co'># Subsetting single rows with the drop argument:</span>
@@ -311,10 +319,10 @@ New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></
 #&gt; $bc
 #&gt; [1] 4
 #&gt; </div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, , drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;       a    bc
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, <span class='op'>]</span><span class='op'>)</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, <span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $a
 #&gt; [1] 1
 #&gt; 
@@ -340,32 +348,32 @@ New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></
 </div><div class='output co'>#&gt; [1] 7 8 9</div><div class='input'>
 <span class='co'># Identical behavior:</span>
 <span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, <span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 4</span><span>
 #&gt;       a    bc bd        b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4 n         7</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     4 n         7</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
 #&gt;      bc     a
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     4     1</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;      bc     a
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     4     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     5     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     6     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     6     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bc"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;      bc     a
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     4     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     5     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     6     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='st'>"a"</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     6     3</div><div class='input'><span class='va'>tbl</span><span class='op'>[</span><span class='st'>"a"</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 1</span><span>
 #&gt;       a
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3</div><div class='input'><span class='va'>tbl</span><span class='op'>$</span><span class='va'>a</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='va'>tbl</span><span class='op'>$</span><span class='va'>a</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='va'>tbl</span><span class='op'>[[</span><span class='st'>"a"</span><span class='op'>]</span><span class='op'>]</span>
 </div><div class='output co'>#&gt; [1] 1 2 3</div></span></pre>
   </div>
@@ -379,7 +387,7 @@ New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></
 
       <footer>
       <div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
 <div class="author">
@@ -411,6 +419,8 @@ New code should use <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></
 </script>
 
 
+
+  
 
   </body>
 </html>

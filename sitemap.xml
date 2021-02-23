@@ -25,9 +25,6 @@
     <loc>https://tibble.tidyverse.org/reference/frame_matrix.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/reference/glimpse.html</loc>
-  </url>
-  <url>
     <loc>https://tibble.tidyverse.org/reference/is.tibble.html</loc>
   </url>
   <url>
@@ -61,9 +58,6 @@
     <loc>https://tibble.tidyverse.org/reference/tbl_df-class.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/reference/tbl_sum.html</loc>
-  </url>
-  <url>
     <loc>https://tibble.tidyverse.org/reference/tibble-package.html</loc>
   </url>
   <url>
@@ -71,6 +65,9 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/tribble.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/reference/trunc_mat.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/view.html</loc>
