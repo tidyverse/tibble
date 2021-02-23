@@ -1,14 +1,4 @@
 # nocov start
-replace_if_pillar_has <- function(fun) {
-  pillar_ns <- asNamespace("pillar")
-
-  fun <- as_string(ensym(fun))
-  value <- mget(fun, pillar_ns, mode = "function", ifnotfound = list(NULL))[[1]]
-  if (!is.null(value)) {
-    assign(fun, value, inherits = TRUE)
-  }
-}
-
 register_if_pillar_hasnt <- function(names) {
   pillar_ns <- asNamespace("pillar")
 

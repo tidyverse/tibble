@@ -7,9 +7,7 @@
   }
 
   # Simplify once pillar 1.5.0 is on CRAN
-  replace_if_pillar_has(glimpse)
   register_if_pillar_hasnt(c(
-    "glimpse.default", "glimpse.data.frame", "glimpse.tbl",
     "format.tbl", "print.tbl"
   ))
 }
