@@ -37,5 +37,5 @@ tibble_error <- function(x, ..., parent = NULL) {
   call <- sys.call(-1)
   fn_name <- as_name(call[[1]])
   class <- tibble_error_class(gsub("^error_", "", fn_name))
-  error_cnd(.subclass = class, ..., message = x, parent = parent)
+  error_cnd(class, ..., message = x, parent = parent)
 }

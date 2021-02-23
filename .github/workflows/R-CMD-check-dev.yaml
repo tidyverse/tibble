@@ -1,0 +1,124 @@
+# This workflow calls the GitHub API very frequently.
+# Can't be run as part of commits
+on:
+  schedule:
+    - cron:  '0 1 * * *'
+
+name: rcc dev
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-18.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
+
+    steps:
+      - name: Check rate limits
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash
+
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - name: Install remotes
+        run: |
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+        shell: Rscript {0}
+
+      - name: Prepare cache keys
+        if: runner.os != 'Windows'
+        id: date
+        run: echo "::set-output name=date::$(date -Ihours)"
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          restore-keys: ${{ matrix.config.os }}-r-dev-${{ matrix.config.r }}-
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
+
+      # Begin custom: before install
+      # End custom: before install
+
+      - name: Install dependencies
+        run: |
+          deps <- remotes::dev_package_deps(dependencies = TRUE)
+          update(deps)
+          lapply(setNames(nm = deps$package), function(x) try(remotes::install_dev(x)))
+          remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      # Begin custom: after install
+      # End custom: after install
+
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          _R_CHECK_SYSTEM_CLOCK_: false
+          _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
+        run: |
+          error_on <- "note"
+          # Begin custom: rcmdcheck error_on
+          # End custom: rcmdcheck error_on
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = error_on, check_dir = "check")
+        shell: Rscript {0}
+
+      - name: Show test output
+        if: always()
+        run: find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+        shell: bash
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
+
+      - name: Check rate limits
+        if: always()
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash

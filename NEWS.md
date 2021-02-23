@@ -1,6 +1,34 @@
-# tibble 3.0.3.9000
+# tibble 3.0.6
 
-- Internal changes only.
+- `vec_ptype_abbr.tbl_df()` and `type_sum.tbl_df()` now uses the name of the topmost class for subclasses of `"tbl_df"` (#843).
+- Ignore errors in `formats.Rmd` vignette.
+- Avoid tidy evaluation in pillar compatibility code.
+
+
+# tibble 3.0.5
+
+- Use testthat edition 3, compatible with testthat 3.0.1 (#827, #832).
+
+
+# tibble 3.0.4
+
+## Compatibility
+
+- Establish compatibility with upcoming pillar 1.5.0 (#818).
+
+- `tbl_sum()` shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
+
+- Register `format.tbl()` and `print.tbl()` methods only if pillar doesn't (#816).
+
+- Use `vctrs::num_as_location()` internally for subset assignment of rows and columns for better error messages (#746).
+
+- Adapt tests to the development version of testthat.
+
+## Bug fixes
+
+- Fix documentation link to `base::Extract`.
+
+- `add_row(df)` adds an empty row again (#809, @DavisVaughan).
 
 
 # tibble 3.0.3

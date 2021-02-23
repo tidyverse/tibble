@@ -1,5 +1,3 @@
-context("options")
-
 test_that("tibble option takes preference", {
   withr::with_options(
     list(

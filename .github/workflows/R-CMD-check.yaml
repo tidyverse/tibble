@@ -1,99 +1,161 @@
+# NOTE: This workflow is overkill for most R packages
+# check-standard.yaml is likely a better choice
+# usethis::use_github_action("check-standard") will install it.
+#
+# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
+# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
 on:
   push:
     branches:
+      - main
       - master
   pull_request:
     branches:
+      - main
       - master
+  schedule:
+    - cron:  '20 2 * * *'
 
-name: R-CMD-check
+name: rcc
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.config.os }}${{ matrix.config.os-version }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }}${{ matrix.config.os-version }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
+
+    # Begin custom: services
+    # End custom: services
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'devel'}
-          - {os: macOS-latest,   r: 'release'}
-          - {os: windows-latest, r: '4.0'}
-          - {os: ubuntu-16.04,   r: '4.0', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.6', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.4', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.2', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: macOS-latest,                 r: 'release'}
+          - {os: windows-latest,               r: 'release', rspm: "https://packagemanager.rstudio.com/all/latest" }
+          - {os: windows-latest,               r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/all/latest" }
+          - {os: ubuntu-, os-version: 20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-, os-version: 18.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
+          - {os: ubuntu-, os-version: 16.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: ubuntu-, os-version: 16.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest", http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
+          - {os: ubuntu-, os-version: 16.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
+          # Begin custom: R 3.5
+          - {os: ubuntu-, os-version: 16.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          # End custom: R 3.5
+
+          # Begin custom: R 3.4
+          - {os: ubuntu-, os-version: 16.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          # End custom: R 3.4
+
+          # Begin custom: R 3.3
+          - {os: ubuntu-, os-version: 16.04,   r: '3.3',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          # End custom: R 3.3
+
+          # Begin custom: matrix elements
+          # End custom: matrix elements
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
 
     steps:
+      - name: Check rate limits
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash
+
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Query dependencies
+      - name: Install remotes
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+        shell: Rscript {0}
+
+      - name: Prepare cache keys
+        if: runner.os != 'Windows'
+        run: |
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+          key: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-2-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "${{matrix.config.os-version}}"))')
+
+      # Begin custom: before install
+      # End custom: before install
 
       - name: Install dependencies
-        run:
-          Rscript -e "library(remotes)" -e "deps <- readRDS('.github/depends.Rds')" -e "deps[['installed']] <- vapply(deps[['package']], remotes:::local_sha, character(1))" -e "update(deps)" -e "remotes::install_cran('rcmdcheck')"
+        run: |
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+          update.packages(.libPaths()[[1]], ask = FALSE)
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
+          remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
 
       - name: Session info
         run: |
           options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
+      # Begin custom: after install
+      # End custom: after install
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "note", check_dir = "check")
+          _R_CHECK_SYSTEM_CLOCK_: false
+          _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
+        run: |
+          error_on <- "note"
+          # Begin custom: rcmdcheck error_on
+          # End custom: rcmdcheck error_on
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
 
-      - name: Show testthat output
+      - name: Show test output
         if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        run: find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
         shell: bash
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Test coverage
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
-        run:
-          Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+      - name: Check rate limits
+        if: always()
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash

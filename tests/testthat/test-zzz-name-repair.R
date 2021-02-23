@@ -1,5 +1,3 @@
-context("test-name_repair")
-
 # minimal names -------------------------------------------------------------
 test_that("minimal names are made from `n` when `name = NULL`", {
   expect_identical(minimal_names(NULL, 2), c("", ""))

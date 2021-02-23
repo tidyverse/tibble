@@ -12,7 +12,7 @@ Provides a 'tbl_df' class (the 'tibble') that
     data frame.
 }
 \details{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a>}}{\strong{Stable}}
+\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a>}}{\strong{Stable}}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
@@ -22,15 +22,15 @@ analysis with data frames.
 
 Tibble is the central data structure for the set of packages known as the
 \href{https://www.tidyverse.org/packages/}{tidyverse}, including
-\href{http://dplyr.tidyverse.org/}{dplyr},
-\href{http://ggplot2.tidyverse.org/}{ggplot2},
-\href{http://tidyr.tidyverse.org/}{tidyr}, and
-\href{http://readr.tidyverse.org/}{readr}.
+\href{https://dplyr.tidyverse.org/}{dplyr},
+\href{https://ggplot2.tidyverse.org/}{ggplot2},
+\href{https://tidyr.tidyverse.org/}{tidyr}, and
+\href{https://readr.tidyverse.org/}{readr}.
 
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
 Science}
 }
 
@@ -83,6 +83,10 @@ turn off highlighting of significant digits.
 title, default: \code{15}.  Column titles may be truncated up to that width to
 save horizontal space. Set to \code{Inf} to turn off truncation of column
 titles.
+\item \code{pillar.min_chars}: The minimum number of characters wide to
+display character columns, default: \code{0}.  Character columns may be
+truncated up to that width to save horizontal space. Set to \code{Inf} to
+turn off truncation of character columns.
 }
 
 }

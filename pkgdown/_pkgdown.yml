@@ -11,13 +11,14 @@ home:
   strip_header: true
   links:
   - text: Learn more
-    href: http://r4ds.had.co.nz/tibbles.html
+    href: https://r4ds.had.co.nz/tibbles.html
 
 reference:
 - title: Tibbles
   contents:
   - "tibble-package"
   - tibble
+  - "tbl_df-class"
   - formatting
   - "tibble-options"
   - tribble
@@ -25,6 +26,7 @@ reference:
 
 - title: Coercion
   contents:
+  - is_tibble
   - as_tibble
   - new_tibble
   - validate_tibble

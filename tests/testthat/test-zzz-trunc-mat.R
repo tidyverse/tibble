@@ -1,12 +1,18 @@
-context("Truncated matrix")
+scoped_lifecycle_silence()
 
 test_that("interface of print() identical to trunc_mat()", {
-  print_arg_names <- names(formals(print.tbl))
-  print_arg_names_without_ellipsis <- setdiff(print_arg_names, "...")
+  if (utils::packageVersion("pillar") >= "1.4.99") {
+    print_arg_names <- names(formals(pillar:::print.tbl))
+  } else {
+    print_arg_names <- names(formals(print.tbl))
+  }
+
+  print_arg_names_without <- setdiff(print_arg_names, c("...", "width"))
 
   trunc_mat_arg_names <- names(formals(trunc_mat))
+  trunc_mat_arg_names_without <- setdiff(trunc_mat_arg_names, "width")
 
-  expect_equal(print_arg_names_without_ellipsis, trunc_mat_arg_names)
+  expect_equal(print_arg_names_without, trunc_mat_arg_names_without)
 })
 
 test_that("print() returns output invisibly", {
@@ -117,17 +123,17 @@ test_that("trunc_mat output matches known output", {
   )
 
   expect_output_file_rel(
-    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
+    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L)),
     "trunc_mat/all-1-30-2.txt"
   )
 
   expect_output_file_rel(
-    print_without_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L)),
+    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L)),
     "trunc_mat/all-1-30-0.txt"
   )
 
   expect_output_file_rel(
-    print_without_body(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
+    print_with_mocked_format_body(trunc_mat(tibble("mean(x)" = 5, "var(x)" = 3), width = 28)),
     "trunc_mat/non-syntactic.txt"
   )
 })

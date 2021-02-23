@@ -4,12 +4,14 @@
 \alias{formatting}
 \alias{print.tbl}
 \alias{format.tbl}
+\alias{print.tbl_df}
+\alias{format.tbl_df}
 \alias{trunc_mat}
 \title{Printing tibbles}
 \usage{
-\method{print}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{print}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
-\method{format}{tbl}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{format}{tbl_df}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
 trunc_mat(x, n = NULL, width = NULL, n_extra = NULL)
 }
@@ -33,7 +35,7 @@ if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 One of the main features of the \code{tbl_df} class is the printing:
 \itemize{
@@ -82,6 +84,10 @@ turn off highlighting of significant digits.
 title, default: \code{15}.  Column titles may be truncated up to that width to
 save horizontal space. Set to \code{Inf} to turn off truncation of column
 titles.
+\item \code{pillar.min_chars}: The minimum number of characters wide to
+display character columns, default: \code{0}.  Character columns may be
+truncated up to that width to save horizontal space. Set to \code{Inf} to
+turn off truncation of character columns.
 }
 
 }

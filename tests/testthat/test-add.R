@@ -1,5 +1,3 @@
-context("add")
-
 # add_row ---------------------------------------------------------------
 
 test_that("can add new row", {
@@ -36,7 +34,9 @@ test_that("add_row() keeps class of object when adding in the beginning", {
 })
 
 test_that("adds empty row if no arguments", {
-  new_iris_row <- add_row(iris)[nrow(iris) + 1, , drop = TRUE]
+  iris1 <- add_row(iris)
+  expect_equal(nrow(iris1), nrow(iris) + 1)
+  new_iris_row <- iris1[nrow(iris1), , drop = TRUE]
   expect_true(all(is.na(new_iris_row)))
 })
 
@@ -135,6 +135,16 @@ test_that("add_row() fails nicely for grouped data frames (#179)", {
     add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
     error_add_rows_to_grouped_df()
   )
+})
+
+test_that("add_row() works when adding zero row input (#809)", {
+  x <- tibble(x = 1, y = 2)
+  y <- tibble(y = double())
+
+  expect_identical(add_row(x, x = double()), x)
+  expect_identical(add_row(x, y), x)
+  expect_identical(add_row(x, NULL), x)
+  expect_identical(add_row(x, ), x)
 })
 
 # add_column ------------------------------------------------------------
@@ -279,7 +289,10 @@ test_that("error if column named by .before or .after not found", {
 
 test_that("deprecated adding columns to non-data-frames", {
   expect_error(
-    expect_warning(add_column(as.matrix(mtcars), x = 1))
+    # Two lifecycle warnings, requires testthat > 2.3.2:
+    suppressWarnings(
+      expect_warning(add_column(as.matrix(mtcars), x = 1))
+    )
   )
 })
 
@@ -290,16 +303,18 @@ test_that("missing row names stay missing when adding column", {
   expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
 })
 
-verify_output("add.txt", {
-  add_row(tibble(), a = 1)
-  add_row(tibble(), a = 1, b = 2)
-  add_row(tibble(), !!!set_names(letters))
-  add_row(dplyr::group_by(tibble(a = 1), a))
-  add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
+test_that("output test", {
+  expect_snapshot_with_error({
+    add_row(tibble(), a = 1)
+    add_row(tibble(), a = 1, b = 2)
+    add_row(tibble(), !!!set_names(letters))
+    add_row(dplyr::group_by(tibble(a = 1), a))
+    add_row(tibble(a = 1), a = 2, .before = 1, .after = 1)
 
-  add_column(tibble(a = 1), a = 1)
-  add_column(tibble(a = 1, b = 2), a = 1, b = 2)
-  add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
-  add_column(tibble(a = 2:3), b = 4:6)
-  add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
+    add_column(tibble(a = 1), a = 1)
+    add_column(tibble(a = 1, b = 2), a = 1, b = 2)
+    add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
+    add_column(tibble(a = 2:3), b = 4:6)
+    add_column(tibble(a = 1), b = 1, .before = 1, .after = 1)
+  })
 })
