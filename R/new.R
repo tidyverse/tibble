@@ -1,8 +1,6 @@
 #' Tibble constructor and validator
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses
 #' of a tibble, like \pkg{sf} or \pkg{tsibble}.

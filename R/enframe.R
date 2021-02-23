@@ -1,8 +1,6 @@
 #' Converting vectors to data frames, and vice versa
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' `enframe()` converts named atomic vectors or lists to one- or two-column
 #' data frames.
 #' For a list, the result will be a nested tibble with a column of type `list`.

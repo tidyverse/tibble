@@ -17,8 +17,6 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{tibble}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
-
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.
