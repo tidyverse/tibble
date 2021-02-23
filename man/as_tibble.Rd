@@ -95,8 +95,6 @@ For compatibility only, do not use for new code.}
 \item{column_name}{Name of the column.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
-
 \code{as_tibble()} turns an existing object, such as a data frame or
 matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
 in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
@@ -134,7 +132,7 @@ package's \code{\link[=.onLoad]{.onLoad()}}  function.
 \section{Life cycle}{
 
 Using \code{as_tibble()} for vectors is superseded as of version 3.0.0,
-prefer the more expressive maturing \code{as_tibble_row()} and
+prefer the more expressive \code{as_tibble_row()} and
 \code{as_tibble_col()} variants for new code.
 }
 

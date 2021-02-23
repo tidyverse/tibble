@@ -1,8 +1,6 @@
 #' Row-wise tibble creation
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' Create [tibble]s using an easier to read row-by-row layout.
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
@@ -40,8 +38,6 @@ tribble <- function(...) {
 #' Row-wise matrix creation
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' Create matrices laying out the data in rows, similar to
 #' `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
 #' This is useful for small matrices, e.g. covariance matrices, where readability

@@ -1,8 +1,6 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
@@ -28,7 +26,7 @@
 #'
 #' @section Life cycle:
 #' Using `as_tibble()` for vectors is superseded as of version 3.0.0,
-#' prefer the more expressive maturing `as_tibble_row()` and
+#' prefer the more expressive `as_tibble_row()` and
 #' `as_tibble_col()` variants for new code.
 #'
 #' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
