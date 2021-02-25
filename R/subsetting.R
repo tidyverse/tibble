@@ -176,7 +176,7 @@ NULL
   # names again
   names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
 }
 
 
