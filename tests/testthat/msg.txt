@@ -225,22 +225,6 @@ Subscript can't be missing for tibbles in `[[`.
 <error/tibble_error_assign_columns_non_missing_only>
 Subscript can't be missing for tibbles in `[[<-`.
 
-> error_new_columns_at_end_only(5, 7:8)
-<error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7 and 8 in a tibble with 5 columns.
-
-> error_new_columns_at_end_only(5, 7)
-<error/tibble_error_new_columns_at_end_only>
-Can't assign column 7 in a tibble with 5 columns.
-
-> error_new_columns_at_end_only(1, 7:8)
-<error/tibble_error_new_columns_at_end_only>
-Can't assign columns 7 and 8 in a tibble with 1 column.
-
-> error_new_columns_at_end_only(1, 7)
-<error/tibble_error_new_columns_at_end_only>
-Can't assign column 7 in a tibble with 1 column.
-
 > error_duplicate_column_subscript_for_assignment(c(1, 1))
 <error/tibble_error_duplicate_column_subscript_for_assignment>
 Column index 1 is used more than once for assignment.
@@ -252,22 +236,6 @@ Column indexes 1 and 2 are used more than once for assignment.
 > error_assign_rows_non_na_only()
 <error/tibble_error_assign_rows_non_na_only>
 Can't use NA as row index in a tibble for assignment.
-
-> error_new_rows_at_end_only(5, 7:8)
-<error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7 and 8 in a tibble with 5 rows.
-
-> error_new_rows_at_end_only(5, 7)
-<error/tibble_error_new_rows_at_end_only>
-Can't assign row 7 in a tibble with 5 rows.
-
-> error_new_rows_at_end_only(1, 7:8)
-<error/tibble_error_new_rows_at_end_only>
-Can't assign rows 7 and 8 in a tibble with 1 row.
-
-> error_new_rows_at_end_only(1, 7)
-<error/tibble_error_new_rows_at_end_only>
-Can't assign row 7 in a tibble with 1 row.
 
 > error_duplicate_row_subscript_for_assignment(c(1, 1))
 <error/tibble_error_duplicate_row_subscript_for_assignment>

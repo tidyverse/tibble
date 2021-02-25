@@ -2,6 +2,10 @@
  Named chr "int [3]"
  - attr(*, "names")= chr "Description"
 
+> str(tbl_sum(vctrs::new_data_frame(a = 1:3, class = "tbl")))
+ Named chr "0 x 0"
+ - attr(*, "names")= chr "A data frame"
+
 > str(tbl_sum(tibble(a = 1:3, b = letters[2:4])))
  Named chr "3 x 2"
  - attr(*, "names")= chr "A tibble"

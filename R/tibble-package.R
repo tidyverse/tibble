@@ -6,7 +6,7 @@
 #' @import ellipsis
 #' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_slice<-
-#' @importFrom vctrs unspecified vec_as_subscript2
+#' @importFrom vctrs unspecified vec_as_subscript2 num_as_location
 #' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`
@@ -19,14 +19,14 @@
 #'
 #' Tibble is the central data structure for the set of packages known as the
 #' [tidyverse](https://www.tidyverse.org/packages/), including
-#' [dplyr](http://dplyr.tidyverse.org/),
-#' [ggplot2](http://ggplot2.tidyverse.org/),
-#' [tidyr](http://tidyr.tidyverse.org/), and
-#' [readr](http://readr.tidyverse.org/).
+#' [dplyr](https://dplyr.tidyverse.org/),
+#' [ggplot2](https://ggplot2.tidyverse.org/),
+#' [tidyr](https://tidyr.tidyverse.org/), and
+#' [readr](https://readr.tidyverse.org/).
 #'
 #' General resources:
 #'   * Website for the tibble package: <https://tibble.tidyverse.org>
-#'   * [Tibbles chapter](http://r4ds.had.co.nz/tibbles.html) in *R for Data
+#'   * [Tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for Data
 #'     Science*
 #'
 #' Resources on specific topics:

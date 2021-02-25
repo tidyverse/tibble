@@ -383,7 +383,7 @@ df[1, , drop = TRUE]
 
 [^bracket-flip]: A more efficient implementation of `x[i, j]` would forward to `x[j][i, ]`.
 
-```{r bracket-i-j-equivalent-to-j-subset-then-i, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r bracket-i-j-equivalent-to-i-subset-then-j, dftbl = TRUE, include = eval_details, eval = eval_details}
 df[1, 1]
 df[1, ][1]
 identical(df[1, 2:3], df[2:3][1, ])
@@ -399,6 +399,11 @@ identical(df2[2:3, 1:2], df2[1:2][2:3, ])
 
 [^bracket2-flip]: Cell subsetting `x[[i, j]]` is not defined in terms of `x[[j]][[i]]` because that definition does not generalise to list, matrix and data frame columns.
 A more efficient implementation of `x[[i, j]]` would check that `j` is a scalar and forward to `x[i, j][[1]]`.
+
+```{r bracket-bracket-i-j-equivalent-to-i-subset-then-j}
+df[[1, 1]]
+df[[1, 3]]
+```
 
 This implies that `j` must be a numeric or character vector of length 1.
 
