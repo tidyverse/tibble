@@ -205,6 +205,8 @@ test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
+  scoped_lifecycle_warnings()
+
   x <- matrix(1:6, nrow = 3)
 
   expect_warning(as_tibble(x))

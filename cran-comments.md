@@ -1,4 +1,4 @@
-tibble 3.0.2: Performance
+tibble 3.0.3
 
 ## Cran Repository Policy
 
@@ -6,12 +6,11 @@ tibble 3.0.2: Performance
 
 ## R CMD check results
 
-- [x] Checked locally, R 4.0.1
+- [x] Checked locally, R 4.0.2
 - [x] Checked on CI system, R 4.0.2
 - [x] Checked on win-builder, R devel
 
-OK
+## Current CRAN check results
 
-## CRAN failures
-
-- [x] Checked on 2020-07-06, no errors found.
+- [x] Checked on 2020-07-10, errors found: https://cran.r-project.org/web/checks/check_results_tibble.html
+- [x] Fixed compatibility with rlang 0.4.7.
