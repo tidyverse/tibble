@@ -67,7 +67,7 @@ NULL
 #' @rdname formatting
 #' @export
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
+  cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
 }
 
@@ -197,7 +197,7 @@ print_without_body <- function(x, ...) {
 
 #' @export
 print.trunc_mat <- function(x, ...) {
-  cat_line(format(x, ...))
+  cli::cat_line(format(x, ...))
   invisible(x)
 }
 
@@ -251,7 +251,7 @@ format_extra_vars <- function(extra_cols) {
   if (is.na(extra_cols[1])) return("")
 
   if (anyNA(extra_cols)) {
-    extra_cols <- c(extra_cols[!is.na(extra_cols)], symbol$ellipsis)
+    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
   }
 
   paste0(": ", collapse(extra_cols))
@@ -264,7 +264,7 @@ format_comment <- function(x, width) {
 
 pre_dots <- function(x) {
   if (length(x) > 0) {
-    paste0(symbol$ellipsis, " ", x)
+    paste0(cli::symbol$ellipsis, " ", x)
   } else {
     character()
   }

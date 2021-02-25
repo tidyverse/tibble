@@ -4,7 +4,7 @@ title: "Invariants for subsetting and subassignment"
 output: rmarkdown::html_vignette
 # devtools::load_all(); eval_details <- TRUE; rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
 vignette: >
-  %\VignetteIndexEntry{invariants}
+  %\VignetteIndexEntry{Invariants for subsetting and subassignment}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -577,6 +577,21 @@ with_df(df[is.na(df)] <- 1:2)
 with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 ```
 
+### `a` is a matrix or array
+
+If `is.matrix(a)`, then `a` is coerced to a data frame with `as.data.frame()` before assigning.
+If rows are assigned, the matrix type must be compatible with all columns.
+If `is.array(a)` and `any(dim(a)[-1:-2] != 1)`, an error is thrown.
+
+```{r bracket-assign-array, dftbl = TRUE}
+with_df(df[1:2] <- matrix(8:1, ncol = 2))
+with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
+with_df(df[1:2] <- array(4:1, dim = c(4, 1, 1)))
+with_df(df[1:2] <- array(8:1, dim = c(4, 2, 1)))
+with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
+with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
+```
+
 ### `a` is another type of vector
 
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
@@ -587,13 +602,12 @@ with_df(df[1] <- 0)
 with_df(df[1] <- list(0))
 ```
 
-Matrices are vectors, so they are also wrapped in `list()` before assignment.
-This consistently creates matrix columns, unlike data frames, which creates matrix columns when assigning to one column, but treats the matrix like a data frame when assigning to more than one column.
+Matrices must be wrapped in `list()` before assignment to create a matrix column.
 
 ```{r bracket-assign-matrix, dftbl = TRUE}
-with_df(df[1] <- matrix(1:8, ncol = 2))
+with_df(df[1] <- list(matrix(1:8, ncol = 2)))
 
-with_df(df[1:2] <- matrix(1:8, ncol = 2))
+with_df(df[1:2] <- list(matrix(1:8, ncol = 2)))
 ```
 
 ### `a` is `NULL`

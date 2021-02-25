@@ -316,7 +316,8 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 warn_oob <- function(oob, n) {
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
   }
 }
 
@@ -334,7 +335,8 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 warn_oob_negative <- function(oob, n) {
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
   }
 }
 
@@ -343,7 +345,8 @@ fix_oob_invalid <- function(i, is_na_orig) {
 
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
-      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+      details = "Use `NA` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env())
 
     i[oob] <- NA_integer_
   }
@@ -363,12 +366,14 @@ vectbl_as_col_index <- function(j, x, j_arg, assign = FALSE) {
 tbl_subset2 <- function(x, j, j_arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
-      details = "Recursive subsetting is deprecated for tibbles.")
+      details = "Recursive subsetting is deprecated for tibbles.",
+      env = foreign_caller_env())
 
     return(as.matrix(x)[[j]])
   } else if (has_length(j, 2) && is.numeric(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
-      details = "Recursive subsetting is deprecated for tibbles.")
+      details = "Recursive subsetting is deprecated for tibbles.",
+      env = foreign_caller_env())
 
     return(.subset2(x, j))
   } else if (is.character(j)) {
@@ -399,28 +404,11 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  if (!vec_is(value)) {
-    if (!is_null(i)) {
-      cnd_signal(error_need_rhs_vector(value_arg))
-    }
-    if (!is_null(value)) {
-      cnd_signal(error_need_rhs_vector_or_null(value_arg))
-    }
-  }
-
-  if (is_null(value) || is_atomic(value)) {
-    value <- list(value)
-  } else {
-    value <- unclass(value)
-  }
-
-  if (!is_bare_list(value)) {
-    cnd_signal(error_need_rhs_vector_or_null(value_arg))
-  }
-
   i <- vectbl_as_new_row_index(i, x, i_arg)
 
   if (is.null(i)) {
+    value <- vectbl_wrap_rhs_col(value, value_arg)
+
     if (is.null(j)) {
       j <- seq_along(x)
     } else {
@@ -434,6 +422,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   } else {
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
+    value <- vectbl_wrap_rhs_row(value, value_arg)
 
     if (is.null(j)) {
       value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
@@ -548,6 +537,19 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
+  if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
+    what <- paste0(
+      "tibble::", if (assign) "`[<-`" else "`[`",
+      "(i = 'can\\'t be a matrix')"
+    )
+
+    lifecycle::deprecate_soft("3.0.0", what,
+      details = "Convert to a vector.",
+      env = foreign_caller_env()
+    )
+    i <- i[, 1]
+  }
+
   subclass_row_index_errors(vec_as_location(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
 }
 
@@ -555,12 +557,12 @@ vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
   subclass_row_index_errors(vec_as_location2(i, n, arg = as_label(i_arg)), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_col_location <- function(i, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location(i, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
+vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
+  subclass_col_index_errors(vec_as_location(j, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
 }
 
-vectbl_as_col_location2 <- function(i, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location2(i, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
+vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
+  subclass_col_index_errors(vec_as_location2(j, n, names, arg = as_label(j_arg)), j_arg = j_arg, assign = assign)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
@@ -653,7 +655,45 @@ vectbl_strip_names <- function(x) {
   x
 }
 
-vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg, full) {
+vectbl_wrap_rhs_col <- function(value, value_arg) {
+  if (is_null(value)) {
+    return(list(value))
+  }
+
+  value <- result_vectbl_wrap_rhs(value)
+  if (is_null(value)) {
+    cnd_signal(error_need_rhs_vector_or_null(value_arg))
+  }
+
+  value
+}
+
+vectbl_wrap_rhs_row <- function(value, value_arg) {
+  value <- result_vectbl_wrap_rhs(value)
+  if (is_null(value)) {
+    cnd_signal(error_need_rhs_vector(value_arg))
+  }
+
+  value
+}
+
+result_vectbl_wrap_rhs <- function(value) {
+  if (!vec_is(value)) {
+    NULL
+  } else if (is.array(value)) {
+    if (any(dim(value)[-1:-2] != 1)) {
+      return(NULL)
+    }
+    dim(value) <- head(dim(value), 2)
+    as.list(as.data.frame(value, stringsAsFactors = FALSE))
+  } else if (is_atomic(value)) {
+    list(value)
+  } else {
+    unclass(value)
+  }
+}
+
+vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
   tryCatch(
     for (j in seq_along(value)) {
       if (!is.null(value[[j]])) {
@@ -694,11 +734,11 @@ string_to_indices <- function(x) {
 # Errors ------------------------------------------------------------------
 
 error_need_rhs_vector <- function(value_arg) {
-  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list or a data frame."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
 }
 
 error_need_rhs_vector_or_null <- function(value_arg) {
-  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or NULL."))
+  tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
 }
 
 error_na_column_index <- function(j) {
@@ -773,7 +813,8 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
       paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
       x = existing,
       x = new,
-      i = "Only vectors of size 1 are recycled"
+      i = if (nrow != 1) "Only vectors of size 1 are recycled",
+      i = if (nrow == 1 && vec_size(value[[j]]) != 1) "Row updates require a list value. Do you need `list()` or `as.list()`?"
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),

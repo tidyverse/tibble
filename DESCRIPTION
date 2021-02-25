@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.0.0
+Version: 3.0.1
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",

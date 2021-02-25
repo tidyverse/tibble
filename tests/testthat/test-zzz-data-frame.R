@@ -642,6 +642,8 @@ test_that("`validate` triggers deprecation message, but then works", {
 })
 
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
+  skip_legacy()
+
   scoped_lifecycle_warnings()
 
   expect_legacy_error(
@@ -678,6 +680,8 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
+  skip_legacy()
+
   expect_legacy_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
