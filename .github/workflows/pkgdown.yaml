@@ -88,11 +88,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
-          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
           remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
+
+      # Begin custom: install
+      # End custom: install
 
       - name: Install package
         run: R CMD INSTALL .

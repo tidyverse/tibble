@@ -27,16 +27,4 @@
       dim_desc(1:3)
     Output
       [1] "3"
-    Code
-      size_sum(trees)
-    Output
-      [1] " [31 x 3]"
-    Code
-      size_sum(Titanic)
-    Output
-      [1] " [4 x 2 x 2 x 2]"
-    Code
-      size_sum(1:3)
-    Output
-      [1] " [3]"
 

@@ -40,6 +40,7 @@ test_that("format_v for list", {
 
 test_that("glimpse output matches known output", {
   skip_on_non_utf8_locale()
+  skip_if(packageVersion("pillar") >= "1.4.99")
 
   expect_output_file_rel(
     glimpse(as_tibble(mtcars), width = 70L),
@@ -98,6 +99,7 @@ test_that("glimpse(width = Inf) raises legible error", {
 
 test_that("glimpse works for structures with unknown rows", {
   skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
+  skip_if(packageVersion("pillar") >= "1.4.99")
   iris2 <- as_unknown_rows(iris)
 
   expect_output_file_rel(
@@ -108,6 +110,7 @@ test_that("glimpse works for structures with unknown rows", {
 
 test_that("glimpse calls tbl_sum() (#550)", {
   skip_on_non_utf8_locale() # capture_output_lines() forces native encoding
+  skip_if(packageVersion("pillar") >= "1.4.99")
   iris2 <- as_override_tbl_sum(iris)
 
   expect_output(
@@ -119,6 +122,7 @@ test_that("glimpse calls tbl_sum() (#550)", {
 
 test_that("glimpse works on nested data (#486)", {
   skip_on_non_utf8_locale()
+  skip_if(packageVersion("pillar") >= "1.4.99")
 
   nested_iris_df <- tibble(
     Species = unique(iris$Species),

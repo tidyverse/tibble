@@ -18,7 +18,7 @@ the deparsed expression is used.}
 data frame.}
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
 Calls \code{\link[utils:View]{utils::View()}} on the input and returns it, invisibly.
 If the input is not a data frame, it is processed using a variant of

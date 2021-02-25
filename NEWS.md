@@ -1,3 +1,10 @@
+# tibble 3.0.6
+
+- `vec_ptype_abbr.tbl_df()` and `type_sum.tbl_df()` now uses the name of the topmost class for subclasses of `"tbl_df"` (#843).
+- Ignore errors in `formats.Rmd` vignette.
+- Avoid tidy evaluation in pillar compatibility code.
+
+
 # tibble 3.0.5
 
 - Use testthat edition 3, compatible with testthat 3.0.1 (#827, #832).
