@@ -2559,8 +2559,8 @@ type must be compatible with all columns. If `is.array(a)` and
     #> 2)` must be compatible with existing
     #> data.
     #> ℹ Error occurred for column `c`.
-    #> x No common type for `value` <integer>
-    #> and `x` <character>.
+    #> x Can't convert <integer> to
+    #> <character>.
 
 </td>
 </tr>
