@@ -59,7 +59,7 @@ We resolve this by first defining column access with `[[` and `$`, then column-w
 In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent:
 
 ```{r setup}
-library(vctrs)
+library(vctrs, mask.ok = TRUE)
 library(tibble)
 
 new_df <- function() {

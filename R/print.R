@@ -142,8 +142,7 @@ shrink_mat <- function(df, rows, n, star) {
 
   mcf <- pillar::colonnade(
     df,
-    has_row_id = if (star) "*" else TRUE,
-    needs_dots = needs_dots
+    has_row_id = if (star) "*" else TRUE
   )
 
   list(mcf = mcf, rows_missing = rows_missing)
