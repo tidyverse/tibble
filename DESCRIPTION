@@ -72,4 +72,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Config/testthat/start-first: subsetting, as_tibble, add
+Config/testthat/start-first: subsetting, as_tibble, add, invariants
