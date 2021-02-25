@@ -39,14 +39,13 @@ indexes, both of which are optionally missing. We resolve this by first
 defining column access with `[[` and `$`, then column-wise subsetting
 with `[`, then row-wise subsetting, then the composition of both.
 
-Conventions
------------
+## Conventions
 
 In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
-    library(vctrs)
     library(tibble)
+    library(vctrs, mask.ok = TRUE)
     new_df <- function() {
       df <- data.frame(n = c(1L, NA, 3L, NA))
       df$c <- letters[5:8]
@@ -183,8 +182,7 @@ executed, further examples omit this output.
 </tbody>
 </table>
 
-Column extraction
------------------
+## Column extraction
 
 ### Definition of `x[[j]]`
 
@@ -303,9 +301,9 @@ exists.
 
     tbl[[1:2]]
 
-    #> Warning: The `j` argument of
-    #> ``[[.tbl_df`()` can't be a vector of
-    #> length 2 as of tibble 3.0.0.
+    #> Warning: The `j` argument of `[[.tbl_df`
+    #> can't be a vector of length 2 as of
+    #> tibble 3.0.0.
     #> Recursive subsetting is deprecated for
     #> tibbles.
 
@@ -328,7 +326,7 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `c("n", "c")` has size 2 but
+    #> x Subscript `c("n", "c")` has size 2 but
     #> must be size 1.
 
 </td>
@@ -346,9 +344,9 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `TRUE` has the wrong type
+    #> x Subscript `TRUE` has the wrong type
     #> `logical`.
-    #> [34mℹ[39m It must be numeric or character.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -367,9 +365,9 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `mean` has the wrong type
+    #> x Subscript `mean` has the wrong type
     #> `function`.
-    #> [34mℹ[39m It must be numeric or character.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -394,7 +392,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `NA` can't be `NA`.
+    #> x Subscript `NA` can't be `NA`.
 
 </td>
 </tr>
@@ -411,7 +409,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `NA_character_` can't be
+    #> x Subscript `NA_character_` can't be
     #> `NA`.
 
 </td>
@@ -429,7 +427,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `NA_integer_` can't be `NA`.
+    #> x Subscript `NA_integer_` can't be `NA`.
 
 </td>
 </tr>
@@ -449,7 +447,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `-1` has value -1 but must
+    #> x Subscript `-1` has value -1 but must
     #> be a positive location.
 
 </td>
@@ -469,8 +467,8 @@ an error:
 
     #> Error: Can't subset columns that don't
     #> exist.
-    #> [31mx[39m Location 4 doesn't exist.
-    #> [34mℹ[39m There are only 3 columns.
+    #> x Location 4 doesn't exist.
+    #> ℹ There are only 3 columns.
 
 </td>
 </tr>
@@ -487,7 +485,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Can't convert from `1.5` <double> to
+    #> x Can't convert from <double> to
     #> <integer> due to loss of precision.
 
 </td>
@@ -505,7 +503,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Can't convert from `Inf` <double> to
+    #> x Can't convert from <double> to
     #> <integer> due to loss of precision.
 
 </td>
@@ -613,6 +611,10 @@ is rarely used in packages, it can raise a warning:
 <td>
 
     df$l
+
+    #> Warning in df$l: partial match of 'l' to
+    #> 'li'
+
     #> [[1]]
     #> [1] 9
     #> 
@@ -658,8 +660,7 @@ is rarely used in packages, it can raise a warning:
 </tbody>
 </table>
 
-Column subsetting
------------------
+## Column subsetting
 
 ### Definition of `x[j]`
 
@@ -937,8 +938,7 @@ For backward compatiblity, `x[, j, drop = TRUE]` performs column
 </tbody>
 </table>
 
-Row subsetting
---------------
+## Row subsetting
 
 ### Definition of `x[i, ]`
 
@@ -984,9 +984,9 @@ vector containing positive numbers.
 
     #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m Subscript `mean` has the wrong type
+    #> x Subscript `mean` has the wrong type
     #> `function`.
-    #> [34mℹ[39m It must be logical, numeric, or
+    #> ℹ It must be logical, numeric, or
     #> character.
 
 </td>
@@ -1006,9 +1006,9 @@ vector containing positive numbers.
 
     #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m Subscript `list(1)` has the wrong type
+    #> x Subscript `list(1)` has the wrong type
     #> `list`.
-    #> [34mℹ[39m It must be logical, numeric, or
+    #> ℹ It must be logical, numeric, or
     #> character.
 
 </td>
@@ -1045,9 +1045,9 @@ Exception: OOB values generate warnings instead of errors:
 
     tbl[10, ]
 
-    #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` must lie in [0, rows] if
-    #> positive, as of tibble 3.0.0.
+    #> Warning: The `i` argument of `[.tbl_df`
+    #> must lie in [0, rows] if positive, as of
+    #> tibble 3.0.0.
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
@@ -1070,9 +1070,9 @@ Exception: OOB values generate warnings instead of errors:
 
     tbl["x", ]
 
-    #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` must use valid row names
-    #> as of tibble 3.0.0.
+    #> Warning: The `i` argument of `[.tbl_df`
+    #> must use valid row names as of tibble
+    #> 3.0.0.
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
@@ -1106,9 +1106,9 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 
     #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [34mℹ[39m Logical subscripts must match the size
+    #> ℹ Logical subscripts must match the size
     #> of the indexed input.
-    #> [31mx[39m Input has size 4 but subscript
+    #> x Input has size 4 but subscript
     #> `c(TRUE, FALSE)` has size 2.
 
 </td>
@@ -1188,8 +1188,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 </table>
 <!-- TODO: soft-deprecate -->
 
-Row and column subsetting
--------------------------
+## Row and column subsetting
 
 ### Definition of `x[]` and `x[,]`
 
@@ -1269,13 +1268,17 @@ Row and column subsetting
 `i` must be a numeric vector of length 1. `x[[i, j]]` is equal to
 `x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[5]
 
+    df[[1, 1]]
+    #> [1] 1
+    df[[1, 3]]
+    #> [1] 9
+
 This implies that `j` must be a numeric or character vector of length 1.
 
 NB: `vec_size(x[[i, j]])` always equals 1. Unlike `x[i, ]`, `x[[i, ]]`
 is not valid.
 
-Column update
--------------
+## Column update
 
 ### Definition of `x[[j]] <- a`
 
@@ -1405,8 +1408,9 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m Subscript `TRUE` has size 3 but must
-    #> be size 1.
+    #> x Subscript `TRUE` has the wrong type
+    #> `logical`.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -1426,7 +1430,7 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m Subscript `1:3` has size 3 but must be
+    #> x Subscript `1:3` has size 3 but must be
     #> size 1.
 
 </td>
@@ -1446,7 +1450,7 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m Subscript `c("n", "c")` has size 2 but
+    #> x Subscript `c("n", "c")` has size 2 but
     #> must be size 1.
 
 </td>
@@ -1467,8 +1471,9 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m Subscript `FALSE` has size 0 but must
-    #> be size 1.
+    #> x Subscript `FALSE` has the wrong type
+    #> `logical`.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -1487,7 +1492,7 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> x Subscript `1:2` has size 2 but must be
     #> size 1.
 
 </td>
@@ -1506,8 +1511,10 @@ value `a`.
 
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error in if (length(j) != 1L ||
+    #> (is.numeric(j) && j < 0) ||
+    #> is.logical(j)) {: missing value where
+    #> TRUE/FALSE needed
 
 </td>
 </tr>
@@ -1525,8 +1532,9 @@ value `a`.
 
     with_tbl(tbl[[NA]] <- 0)
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
+    #> x Subscript `NA` can't be `NA`.
 
 </td>
 </tr>
@@ -1594,7 +1602,6 @@ Recycling also works for list, data frame, and matrix columns.
     #> 2     1 e     <dbl [1…     0     1     0
     #> 3     1 e     <dbl [1…     0     0     1
     #> 4     1 e     <dbl [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -1618,7 +1625,6 @@ Recycling also works for list, data frame, and matrix columns.
     #> 2    NA f     <int [2…     1     0     0
     #> 3     3 g     <int [3…     1     0     0
     #> 4    NA h     <chr [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -1773,8 +1779,11 @@ needed.
 
     with_tbl(tbl[[5]] <- 0)
 
-    #> Error: Can't assign column 5 in a tibble
-    #> with 3 columns.
+    #> Error: Can't assign to columns beyond
+    #> the end with non-consecutive locations.
+    #> ℹ Input has size 3.
+    #> x Subscript `5` contains non-consecutive
+    #> location 5.
 
 </td>
 </tr>
@@ -1847,8 +1856,6 @@ needed.
     #> 2      0     1     0     0     0     1
     #> 3      0     0     1     0     0     0
     #> 4      0     0     0     1     0     0
-    #> # … with 2 more variables: [,3] <dbl>,
-    #> #   [,4] <dbl>
 
 </td>
 </tr>
@@ -2034,8 +2041,7 @@ Removing a nonexistent column is a no-op.
 </tbody>
 </table>
 
-Column subassignment: `x[j] <- a`
----------------------------------
+## Column subassignment: `x[j] <- a`
 
 -   If `j` is missing, it’s replaced with `seq_along(x)`
 -   If `j` is logical vector, it’s converted to numeric with
@@ -2222,8 +2228,8 @@ modifications).
 
     with_tbl(tbl[NA] <- list("x"))
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error: Can't use NA as column index with
+    #> `[` at positions 1, 2, and 3.
 
 </td>
 </tr>
@@ -2336,8 +2342,6 @@ existing column.
     #> 2      0     1     0     0     0     1
     #> 3      0     0     1     0     0     0
     #> 4      0     0     0     1     0     0
-    #> # … with 2 more variables: [,3] <dbl>,
-    #> #   [,4] <dbl>
 
 </td>
 </tr>
@@ -2436,8 +2440,11 @@ that order of precedence).
 
     with_tbl(tbl[5] <- list(4:1))
 
-    #> Error: Can't assign column 5 in a tibble
-    #> with 3 columns.
+    #> Error: Can't assign to columns beyond
+    #> the end with non-consecutive locations.
+    #> ℹ Input has size 3.
+    #> x Subscript `5` contains non-consecutive
+    #> location 5.
 
 </td>
 </tr>
@@ -2868,8 +2875,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 </table>
 <!-- HW: we need better error messages for these cases -->
 
-Row subassignment: `x[i, ] <- list(...)`
-----------------------------------------
+## Row subassignment: `x[i, ] <- list(...)`
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,
 `vec_slice(x[[j_2]], i) <- a[[2]]`, … .[7]
@@ -2914,33 +2920,47 @@ Row subassignment: `x[i, ] <- list(...)`
 <tbody>
 <tr style="vertical-align:top">
 <td>
+
+    with_df(df[0:2, ] <- df[1, ])
+    #>    n c         li
+    #> 1  1 e          9
+    #> 2  1 e          9
+    #> 3  3 g 12, 13, 14
+    #> 4 NA h       text
+
 </td>
 <td>
 
     with_tbl(tbl[0:2, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     3 g     <int [3]>
-    #> 4    NA h     <chr [1]>
+
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `0:2` can't contain `0`
+    #> values.
+    #> ℹ It has a `0` value at location 1.
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+
+    with_df(df[0, ] <- df[1, ])
+    #>    n c         li
+    #> 1  1 e          9
+    #> 2 NA f     10, 11
+    #> 3  3 g 12, 13, 14
+    #> 4 NA h       text
+
 </td>
 <td>
 
     with_tbl(tbl[0, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2    NA f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4    NA h     <chr [1]>
+
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `0` can't contain `0`
+    #> values.
+    #> ℹ It has a `0` value at location 1.
 
 </td>
 </tr>
@@ -2975,9 +2995,9 @@ Row subassignment: `x[i, ] <- list(...)`
 
     #> Error: Must assign to rows with a valid
     #> subscript vector.
-    #> [31mx[39m Negative and positive locations can't
+    #> x Negative and positive locations can't
     #> be mixed.
-    #> [34mℹ[39m Subscript `-1:2` has 2 positive values
+    #> ℹ Subscript `-1:2` has 2 positive values
     #> at locations 3 and 4.
 
 </td>
@@ -2997,8 +3017,11 @@ Row subassignment: `x[i, ] <- list(...)`
 
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error: Can't use NA as row index in a
-    #> tibble for assignment.
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `NA_integer_` can't contain
+    #> missing values.
+    #> x It has a missing value at location 1.
 
 </td>
 </tr>
@@ -3017,8 +3040,11 @@ Row subassignment: `x[i, ] <- list(...)`
 
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error: Can't use NA as row index in a
-    #> tibble for assignment.
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `NA_integer_` can't contain
+    #> missing values.
+    #> x It has a missing value at location 1.
 
 </td>
 </tr>
@@ -3160,7 +3186,6 @@ Only values of size one can be recycled.
     #> 2     1 e     <dbl [1…     1     0     0
     #> 3     1 e     <dbl [1…     1     0     0
     #> 4     1 e     <dbl [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3249,8 +3274,11 @@ supported, without warning.
 
     with_tbl(tbl[6, ] <- tbl[1, ])
 
-    #> Error: Can't assign row 6 in a tibble
-    #> with 4 rows.
+    #> Error: Can't assign to rows beyond the
+    #> end with non-consecutive locations.
+    #> ℹ Input has size 4.
+    #> x Subscript `6` contains non-consecutive
+    #> location 6.
 
 </td>
 </tr>
@@ -3271,8 +3299,8 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m Location 5 doesn't exist.
-    #> [34mℹ[39m There are only 4 rows.
+    #> x Location 5 doesn't exist.
+    #> ℹ There are only 4 rows.
 
 </td>
 </tr>
@@ -3293,8 +3321,8 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m Locations 5, 6, and 7 don't exist.
-    #> [34mℹ[39m There are only 4 rows.
+    #> x Locations 5, 6, and 7 don't exist.
+    #> ℹ There are only 4 rows.
 
 </td>
 </tr>
@@ -3315,8 +3343,8 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m Location 6 doesn't exist.
-    #> [34mℹ[39m There are only 4 rows.
+    #> x Location 6 doesn't exist.
+    #> ℹ There are only 4 rows.
 
 </td>
 </tr>
@@ -3366,9 +3394,9 @@ positive numbers.
 
     with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 
-    #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` must use valid row names
-    #> as of tibble 3.0.0.
+    #> Warning: The `i` argument of `[.tbl_df`
+    #> must use valid row names as of tibble
+    #> 3.0.0.
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
@@ -3393,9 +3421,9 @@ positive numbers.
 
     with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 
-    #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` must use valid row names
-    #> as of tibble 3.0.0.
+    #> Warning: The `i` argument of `[.tbl_df`
+    #> must use valid row names as of tibble
+    #> 3.0.0.
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
@@ -3422,9 +3450,9 @@ positive numbers.
 
     with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 
-    #> Warning: The `i` argument of
-    #> ``[.tbl_df`()` must use valid row names
-    #> as of tibble 3.0.0.
+    #> Warning: The `i` argument of `[.tbl_df`
+    #> must use valid row names as of tibble
+    #> 3.0.0.
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
@@ -3457,8 +3485,7 @@ positive numbers.
 </tbody>
 </table>
 
-Row and column subassignment
-----------------------------
+## Row and column subassignment
 
 ### Definition of `x[i, j] <- a`
 
@@ -3541,10 +3568,9 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error in df_cast_opts(x, to, ..., opts =
-    #> opts, x_arg = x_arg, to_arg = to_arg):
-    #> Internal error in `df_cast()`: Data
-    #> frame must have names.
+    #> Error: Internal error in
+    #> `df_cast_opts()`: Data frame must have
+    #> names.
 
 </td>
 </tr>
@@ -3589,7 +3615,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> 2    NA f     <int [2…     1     1     1
     #> 3     3 g     <int [3…    NA    NA    NA
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3850,7 +3875,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3867,7 +3891,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3891,7 +3914,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3908,7 +3930,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3928,7 +3949,7 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must extract row with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> x Subscript `1:2` has size 2 but must be
     #> size 1.
 
 </td>
@@ -3949,7 +3970,7 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must assign to row with a single
     #> valid subscript.
-    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> x Subscript `1:2` has size 2 but must be
     #> size 1.
 
 </td>
