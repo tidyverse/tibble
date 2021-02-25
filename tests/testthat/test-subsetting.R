@@ -450,6 +450,14 @@ test_that("$ doesn't do partial matching", {
 
 # [[<- --------------------------------------------------------------------
 
+test_that("[[<-.tbl_df with two indexes assigns", {
+  df <- tibble(x = 1:2, y = x)
+  df[[1, "x"]] <- 3
+  expect_identical(df, tibble(x = 3:2, y = 1:2))
+  df[[2, 2]] <- 0
+  expect_identical(df, tibble(x = 3:2, y = 1:0))
+})
+
 test_that("[[<-.tbl_df can update and add columns (#748)", {
   df <- tibble(x = 1:2, y = x)
   df[["x"]] <- 3:4
@@ -913,7 +921,7 @@ test_that("output test", {
     foo[is.na(foo)] <- 1:3
     foo[is.na(foo)] <- lm(a ~ b, foo)
 
-    "# [[.tbl_df rejects invalid column indexes"
+    "# [[<-.tbl_df rejects invalid column indexes"
     foo <- tibble(x = 1:10, y = 1:10)
     foo[[]] <- 1
     foo[[, 1]] <- 1
