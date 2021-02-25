@@ -1,5 +1,3 @@
-context("tibble")
-
 test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
@@ -62,7 +60,7 @@ test_that("missing names are imputed from call", {
 
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- tibble()
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
   expect_identical(attr(zero, "names"), character(0L))
 })
@@ -244,8 +242,10 @@ test_that("is_tibble", {
   expect_identical(is.tibble(iris), is_tibble(iris))
 })
 
-verify_output("tibble.txt", {
-  tibble(a = 1, a = 1)
-  tibble(a = new_environment())
-  tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+test_that("output test", {
+  expect_snapshot_with_error({
+    tibble(a = 1, a = 1)
+    tibble(a = new_environment())
+    tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+  })
 })

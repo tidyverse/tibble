@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.0.4
+Version: 3.0.5
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -47,9 +47,11 @@ Suggests:
     bit64,
     blob,
     covr,
+    DiagrammeR,
     dplyr,
     evaluate,
     formattable,
+    ggplot2,
     hms,
     htmltools,
     import,
@@ -59,7 +61,7 @@ Suggests:
     nycflights13,
     purrr,
     rmarkdown,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.1),
     tidyr,
     withr
 VignetteBuilder: 
@@ -68,3 +70,6 @@ Encoding: UTF-8
 LazyData: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Config/testthat/start-first: subsetting, as_tibble, add

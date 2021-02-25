@@ -1,5 +1,3 @@
-context("msg")
-
 skip("All of them")
 
 test_that("error_enframe_value_null()", {

@@ -1,5 +1,3 @@
-context("tribble()")
-
 test_that("tribble() constructs 'tibble' as expected", {
   result <- tribble(
     ~colA, ~colB,
@@ -216,13 +214,15 @@ test_that("frame_matrix cannot have list columns", {
   )
 })
 
-verify_output("tribble.txt", {
-  tribble(1)
-  tribble(~a, ~b, 1)
-  tribble(a ~ b, 1)
-  tribble(a ~ b + c, 1)
-  tribble(~ b, 1, "a")
+test_that("output test", {
+  expect_snapshot_with_error({
+    tribble(1)
+    tribble(~a, ~b, 1)
+    tribble(a ~ b, 1)
+    tribble(a ~ b + c, 1)
+    tribble(~ b, 1, "a")
 
-  frame_matrix(1)
-  frame_matrix(~a, list(1))
+    frame_matrix(1)
+    frame_matrix(~a, list(1))
+  })
 })

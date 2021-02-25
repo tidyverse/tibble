@@ -1,5 +1,3 @@
-context("matrix")
-
 test_that("correct rows and cols", {
   x <- matrix(1:6, nrow = 2)
   out <- as_tibble(x, .name_repair = "minimal")
@@ -50,10 +48,10 @@ test_that("supports compat col names", {
 test_that("creates col names with name repair", {
   x <- matrix(1:4, nrow = 2)
 
-  out <- as_tibble(x, .name_repair = "unique")
+  suppressMessages(out <- as_tibble(x, .name_repair = "unique"))
   expect_equal(names(out), c("...1", "...2"))
 
-  out <- as_tibble(x, .name_repair = "universal")
+  suppressMessages(out <- as_tibble(x, .name_repair = "universal"))
   expect_equal(names(out), c("...1", "...2"))
 })
 
@@ -94,15 +92,15 @@ test_that("handles atomic vectors", {
   out <- as_tibble(x, .name_repair = "minimal")
   expect_equal(out[[1]], c("a", "a"))
 
-  x <- matrix(complex(real = 1, imag = 2), nrow = 2)
+  x <- matrix(complex(real = 1, imaginary = 2), nrow = 2)
   out <- as_tibble(x, .name_repair = "minimal")
   expect_equal(out[[1]], as.vector(x))
 })
 
 test_that("forwarding to as.data.frame() for ts objects (#184)", {
   mts <- cbind(
-    A = ts(c(1, 1, 2, 2),     start = 2016, freq = 4),
-    B = ts(c(11, 11, 12, 13), start = 2016, freq = 4)
+    A = ts(c(1, 1, 2, 2),     start = 2016, frequency = 4),
+    B = ts(c(11, 11, 12, 13), start = 2016, frequency = 4)
   )
   expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))
 })

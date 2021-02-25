@@ -1,5 +1,3 @@
-context("universal_names")
-
 # make_syntactic -------------------------------------------------------------
 expect_syntactic <- function(name, exp_syn_name) {
   expect_identical(

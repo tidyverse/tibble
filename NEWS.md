@@ -1,3 +1,8 @@
+# tibble 3.0.5
+
+- Use testthat edition 3, compatible with testthat 3.0.1 (#827, #832).
+
+
 # tibble 3.0.4
 
 ## Compatibility
@@ -6,7 +11,7 @@
 
 - `tbl_sum()` shows "data frame" instead of "tibble" for objects inheriting from `"tbl"` but not `"tbl_df"` (#818).
 
-- Export `format.tbl()` and `print.tbl()` only if pillar doesn't (#816).
+- Register `format.tbl()` and `print.tbl()` methods only if pillar doesn't (#816).
 
 - Use `vctrs::num_as_location()` internally for subset assignment of rows and columns for better error messages (#746).
 

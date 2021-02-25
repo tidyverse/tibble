@@ -1,5 +1,3 @@
-context("Glimpse")
-
 test_that("format_v for values", {
   expect_equal(format_v(1), "1")
   expect_equal(format_v(1:3), c("1", "2", "3"))
@@ -58,10 +56,8 @@ test_that("glimpse calls tbl_sum() (#550)", {
   )
 })
 
-test_that("glimpse output matches known output", {
-  skip_on_non_utf8_locale()
-
-  verify_output("glimpse.txt", unicode = TRUE, {
+test_that("output test", {
+  expect_snapshot({
     glimpse(as_tibble(mtcars), width = 70L)
 
     glimpse(as_tibble(iris), width = 70L)
