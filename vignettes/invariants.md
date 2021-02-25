@@ -45,7 +45,7 @@ In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
     library(tibble)
-    library(vctrs, mask.ok = "data_frame")
+    suppressWarnings(library(vctrs))
     new_df <- function() {
       df <- data.frame(n = c(1L, NA, 3L, NA))
       df$c <- letters[5:8]
