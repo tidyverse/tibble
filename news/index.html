@@ -210,7 +210,7 @@
 <a href="#features" class="anchor"></a>Features</h2>
 <ul>
 <li><p>Importing pillar 1.5.0, cli and crayon are now suggested packages (<a href='https://github.com/tidyverse/tibble/issues/475'>#475</a>).</p></li>
-<li><p><code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">size_sum()</a></code> is now reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/850'>#850</a>, <a href='https://github.com/topepo'>@topepo</a>).</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">size_sum()</a></code> is now reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/850'>#850</a>, <a href='https://github.com/topepo'>@topepo</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> hints more often to use the <code>.name_repair</code> argument if column names are invalid (<a href='https://github.com/tidyverse/tibble/issues/855'>#855</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble.table()</a></code> mentions <code>.name_repair</code> argument in the error message (<a href='https://github.com/tidyverse/tibble/issues/839'>#839</a>).</p></li>
 </ul>
@@ -252,7 +252,7 @@
 <a href="#compatibility" class="anchor"></a>Compatibility</h2>
 <ul>
 <li><p>Establish compatibility with upcoming pillar 1.5.0 (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
-<li><p><code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> shows “data frame” instead of “tibble” for objects inheriting from <code>"tbl"</code> but not <code>"tbl_df"</code> (<a href='https://github.com/tidyverse/tibble/issues/818'>#818</a>).</p></li>
 <li><p>Register <code><a href="../reference/formatting.html">format.tbl()</a></code> and <code><a href="../reference/formatting.html">print.tbl()</a></code> methods only if pillar doesn’t (<a href='https://github.com/tidyverse/tibble/issues/816'>#816</a>).</p></li>
 <li><p>Use <code><a href="https://vctrs.r-lib.org/reference/vec_as_location.html" class="external-link">vctrs::num_as_location()</a></code> internally for subset assignment of rows and columns for better error messages (<a href='https://github.com/tidyverse/tibble/issues/746'>#746</a>).</p></li>
 <li><p>Adapt tests to the development version of testthat.</p></li>
@@ -395,7 +395,7 @@
 <ul>
 <li><p>Soft-deprecate <code>subclass</code> argument to <code><a href="../reference/new_tibble.html">new_tibble()</a></code>.</p></li>
 <li><p>Soft-deprecate <code><a href="../reference/as_tibble.html">as_tibble()</a></code> without arguments (<a href='https://github.com/tidyverse/tibble/issues/683'>#683</a>).</p></li>
-<li><p>Preparing to move <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> and <code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> to the pillar package. If your package implements these methods, please import the generics from pillar as soon as they become available there.</p></li>
+<li><p>Preparing to move <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> and <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> to the pillar package. If your package implements these methods, please import the generics from pillar as soon as they become available there.</p></li>
 </ul>
 </div>
 <div id="features-1" class="section level2">
@@ -424,7 +424,7 @@
 <li><p><code><a href="../reference/add_column.html">add_column()</a></code> gains <code>.name_repair</code> argument. If not given, <code>.data</code> must have unique columns, with a deprecation message.</p></li>
 <li><p>Allow <code>POSIXlt</code> columns, they are now better supported by dplyr and other tools thanks to vctrs (<a href='https://github.com/tidyverse/tibble/issues/626'>#626</a>).</p></li>
 <li><p><code><a href="../reference/tibble.html">tibble()</a></code> ignores NULL arguments, named or unnamed (<a href='https://github.com/tidyverse/tibble/issues/580'>#580</a>).</p></li>
-<li><p><code><a href="../reference/view.html">view()</a></code> works for remote data sources by applying the same strategy as <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code>. The maximum number of rows in this case can be specified using the new <code>n</code> argument, by default it is taken from the new <code>"tibble.view_max"</code> option (<a href='https://github.com/tidyverse/tibble/issues/695'>#695</a>).</p></li>
+<li><p><code><a href="../reference/view.html">view()</a></code> works for remote data sources by applying the same strategy as <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code>. The maximum number of rows in this case can be specified using the new <code>n</code> argument, by default it is taken from the new <code>"tibble.view_max"</code> option (<a href='https://github.com/tidyverse/tibble/issues/695'>#695</a>).</p></li>
 </ul>
 </div>
 <div id="output" class="section level2">
@@ -432,7 +432,7 @@
 <a href="#output" class="anchor"></a>Output</h2>
 <ul>
 <li><p>Formatting dimensions never uses scientific notation.</p></li>
-<li><p><code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> uses “Rows” and “Columns” instead of “Variables” and “Observations”, because we’re not sure if the data is tidy here (<a href='https://github.com/tidyverse/tibble/issues/614'>#614</a>).</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> uses “Rows” and “Columns” instead of “Variables” and “Observations”, because we’re not sure if the data is tidy here (<a href='https://github.com/tidyverse/tibble/issues/614'>#614</a>).</p></li>
 <li><p><code><a href="../reference/view.html">view()</a></code> now uses the created (or passed) title argument (<a href='https://github.com/tidyverse/tibble/issues/610'>#610</a>, <a href='https://github.com/xvrdm'>@xvrdm</a>).</p></li>
 </ul>
 </div>
@@ -579,22 +579,22 @@
 <a href="#output-1" class="anchor"></a>Output</h2>
 <ul>
 <li><p>The <code><a href="../reference/name-repair-superseded.html">set_tidy_names()</a></code> and <code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> helpers the list of new names using a bullet list with at most six items (<a href='https://github.com/tidyverse/tibble/issues/406'>#406</a>).</p></li>
-<li><p>A one-character ellipse (<code>cli::symbol$ellipsis</code>) is printed instead of <code>"..."</code> where available, this affects <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> output and truncated lists (<a href='https://github.com/tidyverse/tibble/issues/403'>#403</a>).</p></li>
-<li><p>Column names and types are now formatted identically with <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</p></li>
+<li><p>A one-character ellipse (<code>cli::symbol$ellipsis</code>) is printed instead of <code>"..."</code> where available, this affects <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> output and truncated lists (<a href='https://github.com/tidyverse/tibble/issues/403'>#403</a>).</p></li>
+<li><p>Column names and types are now formatted identically with <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> and <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</p></li>
 <li><p><code><a href="../reference/name-repair-superseded.html">tidy_names()</a></code> quotes variable names when reporting on repair (<a href='https://github.com/tidyverse/tibble/issues/407'>#407</a>).</p></li>
 <li><p>All error messages now follow the tidyverse style guide (<a href='https://github.com/tidyverse/tibble/issues/223'>#223</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> prints an informative error message when using the <code>rownames</code> argument and the input data frame or matrix does not have row names (<a href='https://github.com/tidyverse/tibble/issues/388'>#388</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
 <li><p><code><a href="../reference/rownames.html">column_to_rownames()</a></code> uses the real variable name in its error message (<a href='https://github.com/tidyverse/tibble/issues/399'>#399</a>, <a href='https://github.com/alexwhan'>@alexwhan</a>).</p></li>
 <li><p>Lazy tibbles with exactly 10 rows no longer show “…with more rows” (<a href='https://github.com/tidyverse/tibble/issues/371'>#371</a>).</p></li>
-<li><p><code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> shows information obtained from <code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code>, e.g. grouping information for <code>grouped_df</code> from dplyr (<a href='https://github.com/tidyverse/tibble/issues/550'>#550</a>).</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> shows information obtained from <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code>, e.g. grouping information for <code>grouped_df</code> from dplyr (<a href='https://github.com/tidyverse/tibble/issues/550'>#550</a>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li><p><code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.</p></li>
-<li><p><code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> disambiguates outputs for factors if the levels contain commas (<a href='https://github.com/tidyverse/tibble/issues/384'>#384</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> takes coloring into account when computing column width, the output is no longer truncated prematurely when coloring is enabled.</p></li>
+<li><p><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> disambiguates outputs for factors if the levels contain commas (<a href='https://github.com/tidyverse/tibble/issues/384'>#384</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</p></li>
 <li><p><code><a href="../reference/formatting.html">print.tbl_df()</a></code> with a negative value for <code>n</code> behaves as if <code>n</code> was omitted (<a href='https://github.com/tidyverse/tibble/issues/371'>#371</a>).</p></li>
 <li><p>Fixed output for extra column names that contain spaces.</p></li>
 </ul>
@@ -630,7 +630,7 @@
 <code>tbl[1, , drop = TRUE]</code> now behaves identically to data frames (<a href='https://github.com/tidyverse/tibble/issues/367'>#367</a>).</li>
 <li>Fix error message when accessing columns using a logical index vector (<a href='https://github.com/tidyverse/tibble/issues/337'>#337</a>, <a href='https://github.com/mundl'>@mundl</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> returns its input for zero-column data frames.</li>
+<code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> returns its input for zero-column data frames.</li>
 </ul>
 </div>
 <div id="features-2" class="section level2">
@@ -650,7 +650,7 @@
 <ul>
 <li>Faster printing of very wide tibbles (<a href='https://github.com/tidyverse/tibble/issues/360'>#360</a>).</li>
 <li>Faster construction and subsetting for tibbles (<a href='https://github.com/tidyverse/tibble/issues/353'>#353</a>).</li>
-<li>Only call <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> in <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code>, not <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol()</a></code>.</li>
+<li>Only call <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> in <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code>, not <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol()</a></code>.</li>
 </ul>
 </div>
 </div>
@@ -681,7 +681,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Improved compatibility with remote data sources for <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/328'>#328</a>).</li>
+<li>Improved compatibility with remote data sources for <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/328'>#328</a>).</li>
 <li>Logical indexes are supported, a warning is raised if the length does not match the number of rows or 1 (<a href='https://github.com/tidyverse/tibble/issues/318'>#318</a>).</li>
 <li>Fixed width for word wrapping of the extra information (<a href='https://github.com/tidyverse/tibble/issues/301'>#301</a>).</li>
 <li>Prevent <code><a href="../reference/add_column.html">add_column()</a></code> from dropping classes and attributes by removing the use of <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code>. Additionally this ensures that <code><a href="../reference/add_column.html">add_column()</a></code> can be used with grouped data frames (<a href='https://github.com/tidyverse/tibble/issues/303'>#303</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</li>
@@ -722,9 +722,9 @@
 <a href="#formatting" class="anchor"></a>Formatting</h2>
 <ul>
 <li>
-<code>format_v()</code> now always surrounds lists with <code>[]</code> brackets, even if their length is one. This affects <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> output for list columns (<a href='https://github.com/tidyverse/tibble/issues/106'>#106</a>).</li>
+<code>format_v()</code> now always surrounds lists with <code>[]</code> brackets, even if their length is one. This affects <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> output for list columns (<a href='https://github.com/tidyverse/tibble/issues/106'>#106</a>).</li>
 <li>Factor levels are escaped when printing (<a href='https://github.com/tidyverse/tibble/issues/277'>#277</a>).</li>
-<li>Non-syntactic names are now also escaped in <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/280'>#280</a>).</li>
+<li>Non-syntactic names are now also escaped in <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/280'>#280</a>).</li>
 <li>
 <code><a href="../reference/tibble.html">tibble()</a></code> gives a consistent error message in the case of duplicate column names (<a href='https://github.com/tidyverse/tibble/issues/291'>#291</a>).</li>
 </ul>
@@ -772,8 +772,8 @@
 <ul>
 <li>Printing now uses <code>x</code> again instead of the Unicode multiplication sign, to avoid encoding issues (<a href='https://github.com/tidyverse/tibble/issues/216'>#216</a>).</li>
 <li>String values are now quoted when printing if they contain non-printable characters or quotes (<a href='https://github.com/tidyverse/tibble/issues/253'>#253</a>).</li>
-<li>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code>, and <code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod()</a></code>.</li>
-<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html" class="external-link">print.data.frame()</a></code> anymore. Now providing <code><a href="../reference/formatting.html">format.tbl_df()</a></code> and full support for Unicode characters in names and data, also for <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
+<li>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code>, and <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> methods are now implemented for class <code>"tbl"</code> and not for <code>"tbl_df"</code>. This allows subclasses to use tibble’s formatting facilities. The formatting of the header can be tweaked by implementing <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> for the subclass, which is expected to return a named character vector. The <code><a href="../reference/formatting.html">print.tbl_df()</a></code> method is still implemented for compatibility with downstream packages, but only calls <code><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod()</a></code>.</li>
+<li>Own printing routine, not relying on <code><a href="https://rdrr.io/r/base/print.dataframe.html" class="external-link">print.data.frame()</a></code> anymore. Now providing <code><a href="../reference/formatting.html">format.tbl_df()</a></code> and full support for Unicode characters in names and data, also for <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/235'>#235</a>).</li>
 </ul>
 </div>
 <div id="misc" class="section level2">
@@ -842,7 +842,7 @@
 <li>Render Unicode multiplication sign as <code>x</code> if it cannot be represented in the current locale (<a href='https://github.com/tidyverse/tibble/issues/192'>#192</a>, <a href='https://github.com/ncarchedi'>@ncarchedi</a>).</li>
 <li>Backtick <code>NA</code> names in printing (<a href='https://github.com/tidyverse/tibble/issues/206'>#206</a>, <a href='https://github.com/tidyverse/tibble/issues/207'>#207</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> now uses <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> also for S3 objects (<a href='https://github.com/tidyverse/tibble/issues/185'>#185</a>, <a href='https://github.com/tidyverse/tibble/issues/186'>#186</a>, <a href='https://github.com/holstius'>@holstius</a>).</li>
+<code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> now uses <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">type_sum()</a></code> also for S3 objects (<a href='https://github.com/tidyverse/tibble/issues/185'>#185</a>, <a href='https://github.com/tidyverse/tibble/issues/186'>#186</a>, <a href='https://github.com/holstius'>@holstius</a>).</li>
 <li>The <code>max.print</code> option is ignored when printing a tibble (<a href='https://github.com/tidyverse/tibble/issues/194'>#194</a>, <a href='https://github.com/tidyverse/tibble/issues/195'>#195</a>, <a href='https://github.com/t-kalinowski'>@t-kalinowski</a>).</li>
 </ul>
 </div>
@@ -872,7 +872,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-11" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>The <code>tibble.width</code> option is used for <code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> only if it is finite (<a href='https://github.com/tidyverse/tibble/issues/153'>#153</a>, <a href='https://github.com/kwstat'>@kwstat</a>).</li>
+<li>The <code>tibble.width</code> option is used for <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> only if it is finite (<a href='https://github.com/tidyverse/tibble/issues/153'>#153</a>, <a href='https://github.com/kwstat'>@kwstat</a>).</li>
 <li>New <code>as_tibble.poly()</code> to support conversion of a <code>poly</code> object to a tibble (<a href='https://github.com/tidyverse/tibble/issues/110'>#110</a>).</li>
 <li>
 <code><a href="../reference/add_row.html">add_row()</a></code> now correctly handles existing columns of type <code>list</code> that are not updated (<a href='https://github.com/tidyverse/tibble/issues/148'>#148</a>).</li>
@@ -941,10 +941,10 @@
 <li>The number of printed extra cols is now an option (<a href='https://github.com/tidyverse/tibble/issues/68'>#68</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</li>
 <li>Computation of column width properly handles wide (e.g., Chinese) characters, tests still fail on Windows (<a href='https://github.com/tidyverse/tibble/issues/100'>#100</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> shows nesting structure for lists and uses angle brackets for type (<a href='https://github.com/tidyverse/tibble/issues/98'>#98</a>).</li>
+<code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> shows nesting structure for lists and uses angle brackets for type (<a href='https://github.com/tidyverse/tibble/issues/98'>#98</a>).</li>
 <li>Tibbles with <code>POSIXlt</code> columns can be printed now, the text <code>&lt;POSIXlt&gt;</code> is shown as placeholder to encourage usage of <code>POSIXct</code> (<a href='https://github.com/tidyverse/tibble/issues/86'>#86</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> shows only topmost class for S3 objects.</li>
+<code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">type_sum()</a></code> shows only topmost class for S3 objects.</li>
 </ul>
 </div>
 <div id="error-reporting" class="section level2">
@@ -978,7 +978,7 @@
 <li>New <code><a href="../reference/is.tibble.html">is.tibble()</a></code> and <code><a href="../reference/is_tibble.html">is_tibble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/79'>#79</a>).</li>
 <li>New <code><a href="../reference/enframe.html">enframe()</a></code> that converts vectors to two-column tibbles (<a href='https://github.com/tidyverse/tibble/issues/31'>#31</a>, <a href='https://github.com/tidyverse/tibble/issues/74'>#74</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">obj_sum()</a></code> and <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code> show <code>"tibble"</code> instead of <code>"tbl_df"</code> for tibbles (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
+<code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">obj_sum()</a></code> and <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">type_sum()</a></code> show <code>"tibble"</code> instead of <code>"tbl_df"</code> for tibbles (<a href='https://github.com/tidyverse/tibble/issues/82'>#82</a>).</li>
 <li>
 <code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> gains <code>validate</code> argument (as in <code><a href="../reference/as_tibble.html">as_tibble.list()</a></code>), if <code>TRUE</code> the input is validated.</li>
 <li>Implement <code><a href="../reference/as_tibble.html">as_tibble.default()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/71'>#71</a>, hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1752'>#1752</a>).</li>
@@ -1011,7 +1011,7 @@
 <li>Enhance <code>knit_print()</code> tests.</li>
 <li>Provide default implementation for <code>tbl_sum.tbl_sql()</code> and <code>tbl_sum.tbl_grouped_df()</code> to allow <code>dplyr</code> release before a <code>tibble</code> release.</li>
 <li>Explicit tests for <code>format_v()</code> (<a href='https://github.com/tidyverse/tibble/issues/98'>#98</a>).</li>
-<li>Test output for <code>NULL</code> value of <code><a href="https://pillar.r-lib.org//reference/tbl_sum.html" class="external-link">tbl_sum()</a></code>.</li>
+<li>Test output for <code>NULL</code> value of <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code>.</li>
 <li>Test subsetting in all variants (<a href='https://github.com/tidyverse/tibble/issues/62'>#62</a>).</li>
 <li>Add missing test from dplyr.</li>
 <li>Use new <code>expect_output_file()</code> from <code>testthat</code>.</li>
@@ -1036,11 +1036,11 @@
 <li>
 <code><a href="../reference/deprecated.html">frame_data()</a></code>, <code><a href="../reference/tibble.html">tibble()</a></code>
 </li>
-<li><code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code></li>
+<li><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code></li>
 <li>
 <code><a href="../reference/trunc_mat.html">trunc_mat()</a></code>, <code><a href="../reference/knit_print.trunc_mat.html">knit_print.trunc_mat()</a></code>
 </li>
-<li><code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code></li>
+<li><code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">type_sum()</a></code></li>
 <li>New <code><a href="../reference/lst.html">lst()</a></code> and <code><a href="../reference/deprecated.html">lst_()</a></code> create lists in the same way that <code><a href="../reference/deprecated.html">data_frame()</a></code> and <code><a href="../reference/deprecated.html">data_frame_()</a></code> create data frames (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1290'>#1290</a>). <code><a href="../reference/lst.html">lst(NULL)</a></code> doesn’t raise an error (<a href='https://github.com/tidyverse/tibble/issues/17'>#17</a>, <a href='https://github.com/jennybc'>@jennybc</a>), but always uses deparsed expression as name (even for <code>NULL</code>).</li>
 <li>New <code><a href="../reference/add_row.html">add_row()</a></code> makes it easy to add a new row to data frame (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1021'>#1021</a>).</li>
 <li>New <code><a href="../reference/rownames.html">rownames_to_column()</a></code> and <code><a href="../reference/rownames.html">column_to_rownames()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/11'>#11</a>, <a href='https://github.com/zhilongjia'>@zhilongjia</a>).</li>
@@ -1055,7 +1055,7 @@
 <li>New <code>as_data_frame.table()</code> with argument <code>n</code> to control name of count column (<a href='https://github.com/tidyverse/tibble/issues/22'>#22</a>, <a href='https://github.com/tidyverse/tibble/issues/23'>#23</a>).</li>
 <li>Use <code>tibble</code> prefix for options (<a href='https://github.com/tidyverse/tibble/issues/13'>#13</a>, <a href='https://github.com/tidyverse/tibble/issues/36'>#36</a>).</li>
 <li>
-<code><a href="https://pillar.r-lib.org//reference/glimpse.html" class="external-link">glimpse()</a></code> now (invisibly) returns its argument (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1570'>#1570</a>). It is now a generic, the default method dispatches to <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1325'>#1325</a>). The default width is obtained from the <code>tibble.width</code> option (<a href='https://github.com/tidyverse/tibble/issues/35'>#35</a>, <a href='https://github.com/tidyverse/tibble/issues/56'>#56</a>).</li>
+<code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> now (invisibly) returns its argument (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1570'>#1570</a>). It is now a generic, the default method dispatches to <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/1325'>#1325</a>). The default width is obtained from the <code>tibble.width</code> option (<a href='https://github.com/tidyverse/tibble/issues/35'>#35</a>, <a href='https://github.com/tidyverse/tibble/issues/56'>#56</a>).</li>
 <li>
 <code><a href="../reference/deprecated.html">as_data_frame()</a></code> is now an S3 generic with methods for lists (the old <code><a href="../reference/deprecated.html">as_data_frame()</a></code>), data frames (trivial), matrices (with efficient C++ implementation) (hadley/dplyr<a href='https://github.com/tidyverse/tibble/issues/876'>#876</a>), and <code>NULL</code> (returns a 0-row 0-column data frame) (<a href='https://github.com/tidyverse/tibble/issues/17'>#17</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</li>
 <li>Non-scalar input to <code><a href="../reference/deprecated.html">frame_data()</a></code> and <code><a href="../reference/tibble.html">tibble()</a></code> (including lists) creates list-valued columns (<a href='https://github.com/tidyverse/tibble/issues/7'>#7</a>). These functions return 0-row but n-col data frame if no data.</li>
@@ -1097,7 +1097,7 @@
 <p>Code quality</p>
 <ul>
 <li>Test using new-style Travis-CI and AppVeyor. Full test coverage (<a href='https://github.com/tidyverse/tibble/issues/24'>#24</a>, <a href='https://github.com/tidyverse/tibble/issues/53'>#53</a>). Regression tests load known output from file (<a href='https://github.com/tidyverse/tibble/issues/49'>#49</a>).</li>
-<li>Renamed <code>obj_type()</code> to <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">obj_sum()</a></code>, improvements, better integration with <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">type_sum()</a></code>.</li>
+<li>Renamed <code>obj_type()</code> to <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">obj_sum()</a></code>, improvements, better integration with <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">type_sum()</a></code>.</li>
 <li>Internal cleanup.</li>
 </ul>
 </li>
@@ -1116,7 +1116,7 @@
 
       <footer>
       <div class="tidyverse">
-  <p><p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.,Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
 <div class="author">

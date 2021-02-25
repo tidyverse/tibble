@@ -350,8 +350,8 @@
 #&gt; $ `named list`  &lt;named list&gt; [1]
 #&gt; $ factor        &lt;fct&gt; A
 #&gt; $ ordered       &lt;ord&gt; a
-#&gt; $ Date          &lt;date&gt; 2021-02-23
-#&gt; $ POSIXt        &lt;dttm&gt; 2021-02-23 09:02:33
+#&gt; $ Date          &lt;date&gt; 2021-02-25
+#&gt; $ POSIXt        &lt;dttm&gt; 2021-02-25 06:37:46
 #&gt; $ difftime      &lt;drtn&gt; 1 secs
 #&gt; $ hms           &lt;time&gt; 00:00:01
 #&gt; $ integer64     &lt;int64&gt; 10000000000
@@ -367,7 +367,7 @@
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#implementation" class="anchor"></a>Implementation</h2>
-<p>The column header is obtained by calling <code><a href="https://pillar.r-lib.org//reference/type_sum.html" class="external-link">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html" class="external-link">vctrs::vec_ptype_abbr()</a></code>:</p>
+<p>The column header is obtained by calling <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html" class="external-link">vctrs::vec_ptype_abbr()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
@@ -381,7 +381,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x55b01f4bb7f0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x562679b23a78&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>
@@ -397,8 +397,7 @@
 
 
       <footer><div class="tidyverse">
-  <p></p>
-<p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>Developed by <a href="http://krlmlr.info" class="external-link external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link external-link">Hadley Wickham</a>.,Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
 <div class="author">
