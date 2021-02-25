@@ -586,7 +586,7 @@
     Error <tibble_error_subset_matrix_scalar_type>
       Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
     Code
-      # # [[.tbl_df rejects invalid column indexes
+      # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]] <- 1
     Error <tibble_error_assign_columns_non_missing_only>
@@ -620,11 +620,16 @@
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
+      foo[[NA_integer_]] <- 1
+    Error <vctrs_error_subscript_type>
+      Must assign to column with a single valid subscript.
+      x Subscript `NA_integer_` can't be `NA`.
+    Code
       foo[[mean]] <- 1
     Error <vctrs_error_subscript_type>
-      Must assign to columns with a valid subscript vector.
+      Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be logical, numeric, or character.
+      i It must be numeric or character.
     Code
       foo[[foo]] <- 1
     Error <vctrs_error_subscript_type>

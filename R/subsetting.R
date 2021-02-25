@@ -166,7 +166,7 @@ NULL
   }
 
   # Side effect: check scalar
-  if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
+  if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
     vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   }
 
@@ -176,7 +176,7 @@ NULL
   # names again
   names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
 }
 
 
