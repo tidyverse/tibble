@@ -485,7 +485,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> x Can't convert from `1.5` <double> to
+    #> x Can't convert from <double> to
     #> <integer> due to loss of precision.
 
 </td>
@@ -503,7 +503,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> x Can't convert from `Inf` <double> to
+    #> x Can't convert from <double> to
     #> <integer> due to loss of precision.
 
 </td>
@@ -1048,8 +1048,8 @@ Exception: OOB values generate warnings instead of errors:
     #> Warning: The `i` argument of `[.tbl_df`
     #> must lie in [0, rows] if positive, as of
     #> tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -1073,8 +1073,8 @@ Exception: OOB values generate warnings instead of errors:
     #> Warning: The `i` argument of `[.tbl_df`
     #> must use valid row names as of tibble
     #> 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -1403,8 +1403,9 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> x Subscript `TRUE` has size 3 but must
-    #> be size 1.
+    #> x Subscript `TRUE` has the wrong type
+    #> `logical`.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -1465,8 +1466,9 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> x Subscript `FALSE` has size 0 but must
-    #> be size 1.
+    #> x Subscript `FALSE` has the wrong type
+    #> `logical`.
+    #> ℹ It must be numeric or character.
 
 </td>
 </tr>
@@ -1504,8 +1506,10 @@ value `a`.
 
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error in if (length(j) != 1L ||
+    #> (is.numeric(j) && j < 0) ||
+    #> is.logical(j)) {: missing value where
+    #> TRUE/FALSE needed
 
 </td>
 </tr>
@@ -1523,8 +1527,9 @@ value `a`.
 
     with_tbl(tbl[[NA]] <- 0)
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
+    #> x Subscript `NA` can't be `NA`.
 
 </td>
 </tr>
@@ -2219,8 +2224,8 @@ modifications).
 
     with_tbl(tbl[NA] <- list("x"))
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error: Can't use NA as column index with
+    #> `[` at positions 1, 2, and 3.
 
 </td>
 </tr>
@@ -3365,8 +3370,8 @@ positive numbers.
     #> Warning: The `i` argument of `[.tbl_df`
     #> must use valid row names as of tibble
     #> 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -3392,8 +3397,8 @@ positive numbers.
     #> Warning: The `i` argument of `[.tbl_df`
     #> must use valid row names as of tibble
     #> 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -3421,8 +3426,8 @@ positive numbers.
     #> Warning: The `i` argument of `[.tbl_df`
     #> must use valid row names as of tibble
     #> 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
