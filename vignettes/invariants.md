@@ -1268,6 +1268,11 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 `i` must be a numeric vector of length 1. `x[[i, j]]` is equal to
 `x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[5]
 
+    df[[1, 1]]
+    #> [1] 1
+    df[[1, 3]]
+    #> [1] 9
+
 This implies that `j` must be a numeric or character vector of length 1.
 
 NB: `vec_size(x[[i, j]])` always equals 1. Unlike `x[i, ]`, `x[[i, ]]`
@@ -1776,8 +1781,11 @@ needed.
 
     with_tbl(tbl[[5]] <- 0)
 
-    #> Error: Can't assign column 5 in a tibble
-    #> with 3 columns.
+    #> Error: Can't assign to columns beyond
+    #> the end with non-consecutive locations.
+    #> ℹ Input has size 3.
+    #> x Subscript `5` contains non-consecutive
+    #> location 5.
 
 </td>
 </tr>
@@ -2438,8 +2446,11 @@ that order of precedence).
 
     with_tbl(tbl[5] <- list(4:1))
 
-    #> Error: Can't assign column 5 in a tibble
-    #> with 3 columns.
+    #> Error: Can't assign to columns beyond
+    #> the end with non-consecutive locations.
+    #> ℹ Input has size 3.
+    #> x Subscript `5` contains non-consecutive
+    #> location 5.
 
 </td>
 </tr>
@@ -2915,33 +2926,47 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <tbody>
 <tr style="vertical-align:top">
 <td>
+
+    with_df(df[0:2, ] <- df[1, ])
+    #>    n c         li
+    #> 1  1 e          9
+    #> 2  1 e          9
+    #> 3  3 g 12, 13, 14
+    #> 4 NA h       text
+
 </td>
 <td>
 
     with_tbl(tbl[0:2, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2     1 e     <dbl [1]>
-    #> 3     3 g     <int [3]>
-    #> 4    NA h     <chr [1]>
+
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `0:2` can't contain `0`
+    #> values.
+    #> ℹ It has a `0` value at location 1.
 
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
+
+    with_df(df[0, ] <- df[1, ])
+    #>    n c         li
+    #> 1  1 e          9
+    #> 2 NA f     10, 11
+    #> 3  3 g 12, 13, 14
+    #> 4 NA h       text
+
 </td>
 <td>
 
     with_tbl(tbl[0, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
-    #>       n c     li       
-    #>   <int> <chr> <list>   
-    #> 1     1 e     <dbl [1]>
-    #> 2    NA f     <int [2]>
-    #> 3     3 g     <int [3]>
-    #> 4    NA h     <chr [1]>
+
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `0` can't contain `0`
+    #> values.
+    #> ℹ It has a `0` value at location 1.
 
 </td>
 </tr>
@@ -2998,8 +3023,11 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 
     with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
-    #> Error: Can't use NA as row index in a
-    #> tibble for assignment.
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `NA_integer_` can't contain
+    #> missing values.
+    #> x It has a missing value at location 1.
 
 </td>
 </tr>
@@ -3018,8 +3046,11 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 
     with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 
-    #> Error: Can't use NA as row index in a
-    #> tibble for assignment.
+    #> Error: Must assign to rows with a valid
+    #> subscript vector.
+    #> x Subscript `NA_integer_` can't contain
+    #> missing values.
+    #> x It has a missing value at location 1.
 
 </td>
 </tr>
@@ -3250,8 +3281,11 @@ supported, without warning.
 
     with_tbl(tbl[6, ] <- tbl[1, ])
 
-    #> Error: Can't assign row 6 in a tibble
-    #> with 4 rows.
+    #> Error: Can't assign to rows beyond the
+    #> end with non-consecutive locations.
+    #> ℹ Input has size 4.
+    #> x Subscript `6` contains non-consecutive
+    #> location 6.
 
 </td>
 </tr>
