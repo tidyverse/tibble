@@ -586,7 +586,7 @@
     Error <tibble_error_subset_matrix_scalar_type>
       Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
     Code
-      # # [[.tbl_df rejects invalid column indexes
+      # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]] <- 1
     Error <tibble_error_assign_columns_non_missing_only>
