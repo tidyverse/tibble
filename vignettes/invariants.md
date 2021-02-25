@@ -44,8 +44,8 @@ with `[`, then row-wise subsetting, then the composition of both.
 In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
-    library(vctrs, mask.ok = TRUE)
     library(tibble)
+    library(vctrs, mask.ok = TRUE)
     new_df <- function() {
       df <- data.frame(n = c(1L, NA, 3L, NA))
       df$c <- letters[5:8]
@@ -1602,7 +1602,6 @@ Recycling also works for list, data frame, and matrix columns.
     #> 2     1 e     <dbl [1…     0     1     0
     #> 3     1 e     <dbl [1…     0     0     1
     #> 4     1 e     <dbl [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -1626,7 +1625,6 @@ Recycling also works for list, data frame, and matrix columns.
     #> 2    NA f     <int [2…     1     0     0
     #> 3     3 g     <int [3…     1     0     0
     #> 4    NA h     <chr [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -1858,8 +1856,6 @@ needed.
     #> 2      0     1     0     0     0     1
     #> 3      0     0     1     0     0     0
     #> 4      0     0     0     1     0     0
-    #> # … with 2 more variables: [,3] <dbl>,
-    #> #   [,4] <dbl>
 
 </td>
 </tr>
@@ -2346,8 +2342,6 @@ existing column.
     #> 2      0     1     0     0     0     1
     #> 3      0     0     1     0     0     0
     #> 4      0     0     0     1     0     0
-    #> # … with 2 more variables: [,3] <dbl>,
-    #> #   [,4] <dbl>
 
 </td>
 </tr>
@@ -3192,7 +3186,6 @@ Only values of size one can be recycled.
     #> 2     1 e     <dbl [1…     1     0     0
     #> 3     1 e     <dbl [1…     1     0     0
     #> 4     1 e     <dbl [1…     1     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3622,7 +3615,6 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> 2    NA f     <int [2…     1     1     1
     #> 3     3 g     <int [3…    NA    NA    NA
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3883,7 +3875,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3900,7 +3891,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3924,7 +3914,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
@@ -3941,7 +3930,6 @@ to `x[i, ][[j]] <- a`.[9]
     #> 2    NA f     <int [2…     0     1     0
     #> 3     3 g     <int [3…     0     0     1
     #> 4    NA h     <chr [1…     0     0     0
-    #> # … with 1 more variable: [,4] <dbl>
 
 </td>
 </tr>
