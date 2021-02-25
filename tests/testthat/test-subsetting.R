@@ -938,6 +938,7 @@ test_that("output test", {
     foo[[1:3]] <- 1
     foo[[ letters[1:3] ]] <- 1
     foo[[TRUE]] <- 1
+    foo[[NA_integer_]] <- 1
     foo[[mean]] <- 1
     foo[[foo]] <- 1
     foo[[1:3, 1]] <- 1

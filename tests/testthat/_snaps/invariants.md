@@ -424,8 +424,9 @@
       x Subscript `1:2` has size 2 but must be size 1.
     Code
       with_df(df[[NA_integer_]] <- 0)
-    Error <simpleError>
-      missing value where TRUE/FALSE needed
+    Error <vctrs_error_subscript_type>
+      Must assign to column with a single valid subscript.
+      x Subscript `NA_integer_` can't be `NA`.
     Code
       with_df(df[[NA]] <- 0)
     Error <vctrs_error_subscript_type>
@@ -433,8 +434,9 @@
       x Subscript `NA` can't be `NA`.
     Code
       with_df(df[[NA_character_]] <- 0)
-    Error <tibble_error_assign_columns_non_na_only>
-      Can't use NA as column index in a tibble for assignment.
+    Error <vctrs_error_subscript_type>
+      Must assign to column with a single valid subscript.
+      x Subscript `NA_character_` can't be `NA`.
     Code
       with_df(df[["li"]] <- list(0))
     Output

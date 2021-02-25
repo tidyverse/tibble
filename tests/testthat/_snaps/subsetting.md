@@ -620,11 +620,16 @@
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
+      foo[[NA_integer_]] <- 1
+    Error <vctrs_error_subscript_type>
+      Must assign to column with a single valid subscript.
+      x Subscript `NA_integer_` can't be `NA`.
+    Code
       foo[[mean]] <- 1
     Error <vctrs_error_subscript_type>
-      Must assign to columns with a valid subscript vector.
+      Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be logical, numeric, or character.
+      i It must be numeric or character.
     Code
       foo[[foo]] <- 1
     Error <vctrs_error_subscript_type>

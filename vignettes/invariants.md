@@ -1511,10 +1511,9 @@ value `a`.
 
     with_tbl(tbl[[NA_integer_]] <- 0)
 
-    #> Error in if (length(j) != 1L ||
-    #> (is.numeric(j) && j < 0) ||
-    #> is.logical(j)) {: missing value where
-    #> TRUE/FALSE needed
+    #> Error: Must assign to column with a
+    #> single valid subscript.
+    #> x Subscript `NA_integer_` can't be `NA`.
 
 </td>
 </tr>
@@ -1552,8 +1551,10 @@ value `a`.
 
     with_tbl(tbl[[NA_character_]] <- 0)
 
-    #> Error: Can't use NA as column index in a
-    #> tibble for assignment.
+    #> Error: Must assign to column with a
+    #> single valid subscript.
+    #> x Subscript `NA_character_` can't be
+    #> `NA`.
 
 </td>
 </tr>
