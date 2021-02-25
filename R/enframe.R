@@ -1,7 +1,7 @@
 #' Converting vectors to data frames, and vice versa
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' `enframe()` converts named atomic vectors or lists to one- or two-column
 #' data frames.
@@ -22,7 +22,7 @@
 #' enframe(c(a = 5, b = 7))
 #' enframe(list(one = 1, two = 2:3, three = 4:6))
 enframe <- function(x, name = "name", value = "value") {
-  if (is_null(value)) {
+  if (is.null(value)) {
     cnd_signal(error_enframe_value_null())
   }
 
@@ -30,11 +30,11 @@ enframe <- function(x, name = "name", value = "value") {
     cnd_signal(error_enframe_has_dim(x))
   }
 
-  if (is_null(x)) x <- logical()
+  if (is.null(x)) x <- logical()
 
-  if (is_null(name)) {
+  if (is.null(name)) {
     df <- list(unname(x))
-  } else if (is_null(names(x))) {
+  } else if (is.null(names(x))) {
     df <- list(seq_along(x), x)
   } else {
     df <- list(names(x), unname(x))

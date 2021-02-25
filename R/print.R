@@ -1,7 +1,7 @@
 #' Printing tibbles
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
@@ -57,10 +57,10 @@
 #'
 #' trunc_mat(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   print(nycflights13::flights, n_extra = 2)
-#'   print(nycflights13::flights, width = Inf)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' print(nycflights13::flights, n_extra = 2)
+#' print(nycflights13::flights, width = Inf)
+#'
 #' @name formatting
 NULL
 
@@ -74,7 +74,7 @@ print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' Legacy help page for compatibility with existing packages
 #'
 #' @description
-#' \lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`
 #'
 #' Please see [print.tbl()] for the print method for tibbles.
 #'
@@ -94,7 +94,7 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n) || n < 0) {
+  if (is.null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {

@@ -6,10 +6,10 @@
 #' @import ellipsis
 #' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_slice<-
-#' @importFrom vctrs unspecified
+#' @importFrom vctrs unspecified vec_as_subscript2
 #' @aliases NULL tibble-package
 #' @details
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The tibble package provides utilities for handling __tibbles__, where
 #' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]

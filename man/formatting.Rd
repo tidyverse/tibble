@@ -33,7 +33,7 @@ if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
 \description{
-\lifecycle{maturing}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 One of the main features of the \code{tbl_df} class is the printing:
 \itemize{
@@ -100,8 +100,8 @@ print(mtcars2, n = 25, n_extra = 3)
 
 trunc_mat(mtcars)
 
-if (requireNamespace("nycflights13", quietly = TRUE)) {
-  print(nycflights13::flights, n_extra = 2)
-  print(nycflights13::flights, width = Inf)
-}
+\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+print(nycflights13::flights, n_extra = 2)
+print(nycflights13::flights, width = Inf)
+\dontshow{\}) # examplesIf}
 }

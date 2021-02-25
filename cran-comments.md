@@ -1,17 +1,17 @@
-Patch release to fix errors caught after major release.
+tibble 3.0.2: Performance
 
-## Test environments
+## Cran Repository Policy
 
-* local install, R 3.6.3
-* ubuntu 18.04 (on travis-ci), R 3.2, R 3.3, R 3.4, R-oldrel, R-release and R-devel
-* win-builder
-* r-hub
+- [x] Reviewed CRP last edited 2020-05-21.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+- [x] Checked locally, R 4.0.1
+- [x] Checked on CI system, R 4.0.2
+- [x] Checked on win-builder, R devel
 
+OK
 
-## Reverse dependencies
+## CRAN failures
 
-Not checked.
+- [x] Checked on 2020-07-06, no errors found.
