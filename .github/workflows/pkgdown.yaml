@@ -6,6 +6,8 @@ on:
     - "docs*"
     - "cran-*"
     - "r-*"
+    tags:
+    - "v*"
   pull_request:
     branches:
       - main
