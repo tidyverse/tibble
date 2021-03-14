@@ -126,6 +126,7 @@ jobs:
           options(width = 100)
           if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
           pkgs <- installed.packages()[, "Package"]
+          if (!("sessioninfo" %in% pkgs)) install.packages("sessioninfo")
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
@@ -146,7 +147,8 @@ jobs:
 
       - name: Show test output
         if: always()
-        run: find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+        run: |
+          find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
         shell: bash
 
       - name: Upload check results
