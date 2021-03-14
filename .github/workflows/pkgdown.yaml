@@ -5,10 +5,12 @@ on:
     - main
     - "docs*"
     - "cran-*"
+    - "r-*"
   pull_request:
     branches:
       - main
       - master
+      - "r-*"
   schedule:
     - cron:  '20 2 * * *'
 
@@ -99,7 +101,7 @@ jobs:
       # End custom: install
 
       - name: Install package
-        run: R CMD INSTALL .
+        run: R CMD INSTALL . --with-keep.source --with-keep.parse.data
 
       - name: Session info
         run: |
