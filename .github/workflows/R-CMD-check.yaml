@@ -86,14 +86,14 @@ jobs:
           if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
-      - name: Prepare cache keys
+      - name: Query dependencies
         if: runner.os != 'Windows'
         run: |
           saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages
+      - name: Restore R package cache
         if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
