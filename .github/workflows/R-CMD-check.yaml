@@ -9,10 +9,12 @@ on:
     branches:
       - main
       - master
+      - "r-*"
   pull_request:
     branches:
       - main
       - master
+      - "r-*"
   schedule:
     - cron:  '20 2 * * *'
 
