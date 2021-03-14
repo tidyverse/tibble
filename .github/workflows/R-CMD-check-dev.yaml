@@ -18,7 +18,6 @@ jobs:
     name: Collect deps
 
     env:
-      _R_CHECK_BASHISMS_: FALSE
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -195,6 +194,7 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     env:
+      _R_CHECK_BASHISMS_: FALSE
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
