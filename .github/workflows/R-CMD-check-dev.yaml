@@ -18,6 +18,7 @@ jobs:
     name: Collect deps
 
     env:
+      _R_CHECK_BASHISMS_: FALSE
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -144,7 +145,7 @@ jobs:
           valid_dev_dep <- vapply(packages, has_dev_dep, logical(1))
 
           # https://github.com/r-lib/remotes/issues/576
-          valid_dev_dep[packages %in% c("igraph", "duckdb")] <- FALSE
+          valid_dev_dep[packages %in% c("igraph", "duckdb", "logging")] <- FALSE
 
           deps <- packages[valid_dev_dep]
           if (any(!valid_dev_dep)) {
