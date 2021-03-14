@@ -52,13 +52,13 @@ jobs:
           if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
-      - name: Prepare cache keys
+      - name: Query dependencies
         run: |
           saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages
+      - name: Restore R package cache
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -66,10 +66,11 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Configure Git identity
+        if: github.event_name == 'push'
         run: |
           env | sort
-          git config --global user.name "$GITHUB_WORKFLOW"
-          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
         shell: bash
 
       - name: Install system dependencies
@@ -79,8 +80,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
-          # For some reason gert is installed from source and needs this
-          sudo apt-get install -y libgit2-dev
 
       # Begin custom: before install
       # End custom: before install
@@ -90,7 +89,8 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+          # For some reason harfbuzz and gert are installed from source and needs this
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev libgit2-dev
 
       - name: Install dependencies
         run: |
@@ -116,16 +116,16 @@ jobs:
       # Begin custom: after install
       # End custom: after install
 
-      - name: Build site
-        if: github.event_name != 'push'
-        run: |
-          pkgdown::build_site()
-        shell: Rscript {0}
-
       - name: Deploy package
         if: github.event_name == 'push'
         run: |
           pkgdown::deploy_to_branch(new_process = FALSE)
+        shell: Rscript {0}
+
+      - name: Build site
+        if: github.event_name != 'push'
+        run: |
+          pkgdown::build_site()
         shell: Rscript {0}
 
       - name: Check rate limits
