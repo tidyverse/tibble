@@ -173,7 +173,7 @@ jobs:
           echo $matrix | jq .
           echo $matrix | json2yaml
 
-  R-CMD-check:
+  R-CMD-check-dev:
     needs: matrix
 
     runs-on: ubuntu-18.04
