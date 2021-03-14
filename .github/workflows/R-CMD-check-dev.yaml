@@ -194,7 +194,6 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     env:
-      _R_CHECK_BASHISMS_: FALSE
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -244,10 +243,11 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
-      - name: Add fake qpdf
+      - name: Add fake qpdf and checkbashisms
         if: runner.os == 'Linux'
         run: |
           sudo ln -s $(which true) /usr/local/bin/qpdf
+          sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
       # Begin custom: before install
       # End custom: before install
