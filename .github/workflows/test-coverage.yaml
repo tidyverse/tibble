@@ -8,7 +8,7 @@ on:
       - main
       - master
 
-name: test-coverage
+name: covr
 
 jobs:
   test-coverage:
