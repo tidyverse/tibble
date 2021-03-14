@@ -12,12 +12,12 @@ name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
 
     # Begin custom: services
     # End custom: services
     env:
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
@@ -63,7 +63,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
       # Begin custom: before install
       # End custom: before install
