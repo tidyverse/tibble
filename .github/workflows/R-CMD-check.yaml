@@ -126,7 +126,6 @@ jobs:
           options(width = 100)
           if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
           pkgs <- installed.packages()[, "Package"]
-          if (!("sessioninfo" %in% pkgs)) install.packages("sessioninfo")
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
@@ -139,6 +138,7 @@ jobs:
           _R_CHECK_SYSTEM_CLOCK_: false
           _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
         run: |
+          options(crayon.enabled = TRUE)
           error_on <- "note"
           # Begin custom: rcmdcheck error_on
           # End custom: rcmdcheck error_on
