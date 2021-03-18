@@ -155,7 +155,7 @@ jobs:
 
       - name: Install local package
         run: |
-          remotes::install_local(".")
+          remotes::install_local(".", force = TRUE)
         shell: Rscript {0}
 
       - name: Session info new
