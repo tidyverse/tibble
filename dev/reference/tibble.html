@@ -345,9 +345,9 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.775  1.55  </div><div class='input'>
 <span class='co'># tibble() never coerces its inputs,</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; tibble [26 × 1] (S3: tbl_df/tbl/data.frame)
+</div><div class='output co'>#&gt; tibble[,1] [26 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ letters: chr [1:26] "a" "b" "c" "d" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; tibble [2 × 1] (S3: tbl_df/tbl/data.frame)
+</div><div class='output co'>#&gt; tibble[,1] [2 × 1] (S3: tbl_df/tbl/data.frame)
 #&gt;  $ x:List of 2
 #&gt;   ..$ : num [1, 1] 1
 #&gt;   ..$ : num [1:2, 1:2] 1 0 0 1</div><div class='input'>
@@ -510,7 +510,7 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 
       <footer>
       <div class="tidyverse">
-  <p><p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
