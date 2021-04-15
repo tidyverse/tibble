@@ -54,7 +54,6 @@ Suggests:
     ggplot2,
     hms,
     htmltools,
-    import,
     knitr,
     lubridate,
     mockr,
