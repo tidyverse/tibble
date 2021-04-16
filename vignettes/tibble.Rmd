@@ -211,3 +211,14 @@ tibble(a = 1:3, c = 1:2)
 tibble(a = 1, b = integer())
 tibble(a = integer(), b = 1)
 ```
+
+
+### Arithmetic operations
+
+Unlike data frames, tibbles don't support arithmetic operations on all columns.
+The result is silently coerced to a data frame.
+
+```{r}
+tbl <- tibble(a = 1:3, b = 4:6)
+tbl * 2
+```
