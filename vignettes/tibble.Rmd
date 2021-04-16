@@ -183,6 +183,20 @@ data.frame(a = 1:3)[, "a", drop = TRUE]
 tibble(a = 1:3)[, "a", drop = TRUE]
 ```
 
+Tibbles do not support row names.
+Thy are removed when converting to a tibble or when subsetting:
+
+```{r}
+df <- data.frame(a = 1:3, row.names = letters[1:3])
+rownames(df)
+rownames(as_tibble(df))
+
+tbl <- tibble(a = 1:3)
+rownames(tbl) <- letters[1:3]
+rownames(tbl)
+rownames(tbl[1, ])
+```
+
 
 ### Recycling
 
