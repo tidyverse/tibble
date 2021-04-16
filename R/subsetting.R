@@ -53,12 +53,12 @@
 #'
 #' df[["b", exact = FALSE]]
 #' tbl[["b", exact = FALSE]]
-#' @examples
 #'
 #' df$bd <- c("n", "e", "w")
 #' tbl$bd <- c("n", "e", "w")
 #' df$b
 #' tbl$b
+#' @examples
 #'
 #' df$b <- 7:9
 #' tbl$b <- 7:9

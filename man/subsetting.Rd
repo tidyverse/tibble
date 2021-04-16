@@ -89,12 +89,12 @@ tbl$b
 
 df[["b", exact = FALSE]]
 tbl[["b", exact = FALSE]]
-\dontshow{\}) # examplesIf}
 
 df$bd <- c("n", "e", "w")
 tbl$bd <- c("n", "e", "w")
 df$b
 tbl$b
+\dontshow{\}) # examplesIf}
 
 df$b <- 7:9
 tbl$b <- 7:9
