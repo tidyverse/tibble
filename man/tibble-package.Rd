@@ -87,6 +87,8 @@ titles.
 display character columns, default: \code{0}.  Character columns may be
 truncated up to that width to save horizontal space. Set to \code{Inf} to
 turn off truncation of character columns.
+\item \code{pillar.max_dec_width}: The maximum allowed width for decimal notation,
+default 13.
 }
 
 }
