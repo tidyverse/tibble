@@ -75,6 +75,9 @@ extract_frame_data_from_dots <- function(...) {
     cnd_signal(error_tribble_needs_columns())
   }
   frame_rest <- dots[-seq_along(frame_names)]
+  if (!is.null(names(frame_rest))) {
+    cnd_signal(error_tribble_named_after_tilde())
+  }
   if (length(frame_rest) == 0L) {
     # Can't decide on type in absence of data -- use logical which is
     # coercible to all types
@@ -188,6 +191,10 @@ subclass_tribble_c_errors <- function(name, code) {
 
 error_tribble_needs_columns <- function() {
   tibble_error("Must specify at least one column using the `~name` syntax.")
+}
+
+error_tribble_named_after_tilde <- function() {
+  tibble_error("When using the `~name` syntax, subsequent values must not have names.")
 }
 
 error_tribble_lhs_column_syntax <- function(lhs) {
