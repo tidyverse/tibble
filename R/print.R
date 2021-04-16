@@ -33,6 +33,9 @@
 #' * `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
 #'   Default: 100.
 #'
+#' The output uses color and highlighting according to the `"cli.num_colors"` option.
+#' Set it to `1` to suppress colored and highlighted output.
+#'
 #' @param x Object to format or print.
 #' @param ... Other arguments passed on to individual methods.
 #' @param n Number of rows to show. If `NULL`, the default, will print all rows

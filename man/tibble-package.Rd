@@ -65,6 +65,9 @@ exceeded. Default: 10.
 Default: 100.
 }
 
+The output uses color and highlighting according to the \code{"cli.num_colors"} option.
+Set it to \code{1} to suppress colored and highlighted output.
+
 
 
 \itemize{
