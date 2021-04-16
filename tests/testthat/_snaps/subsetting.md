@@ -682,7 +682,7 @@
     Code
       df[[1]] <- lm(y ~ x, df)
     Error <vctrs_error_scalar_type>
-      Input must be a vector, not a `lm` object.
+      Input must be a vector, not a <lm> object.
     Code
       # # [[<-.tbl_df recycles only values of length one
       df <- tibble(x = 1:3)
