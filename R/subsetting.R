@@ -46,12 +46,14 @@
 #' tbl[1, , drop = TRUE]
 #' as.list(tbl[1, ])
 #'
+#' @examplesIf (Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")
 #' # Accessing non-existent columns:
 #' df$b
 #' tbl$b
 #'
 #' df[["b", exact = FALSE]]
 #' tbl[["b", exact = FALSE]]
+#' @examples
 #'
 #' df$bd <- c("n", "e", "w")
 #' tbl$bd <- c("n", "e", "w")
