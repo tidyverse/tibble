@@ -110,7 +110,7 @@ Provides a 'tbl_df' class (the 'tibble') that
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
         </div>
       </div>
     </div>
@@ -244,10 +244,7 @@ data frame. Default: 1000.</p></li>
 
 
 
-<p>The following options are used by the tibble and pillar packages
-to format and print <code>tbl_df</code> objects.
-Used by the formatting workhorse <code><a href='trunc_mat.html'>trunc_mat()</a></code> and, therefore,
-indirectly, by <code><a href='formatting.html'>print.tbl()</a></code>.</p><ul>
+<p>The following options control printing of <code>tbl</code> and <code>tbl_df</code> objects:</p><ul>
 <li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows printed.
 Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
 <li><p><code>tibble.print_min</code>: Number of rows printed if row number threshold is
@@ -257,6 +254,8 @@ exceeded. Default: 10.</p></li>
 Default: 100.</p></li>
 </ul>
 
+<p>The output uses color and highlighting according to the <code>"cli.num_colors"</code> option.
+Set it to <code>1</code> to suppress colored and highlighted output.</p>
 
 
 <ul>
@@ -279,6 +278,8 @@ titles.</p></li>
 display character columns, default: <code>0</code>.  Character columns may be
 truncated up to that width to save horizontal space. Set to <code>Inf</code> to
 turn off truncation of character columns.</p></li>
+<li><p><code>pillar.max_dec_width</code>: The maximum allowed width for decimal notation,
+default 13.</p></li>
 </ul>
 
 
@@ -317,12 +318,12 @@ turn off truncation of character columns.</p></li>
 
       <footer>
       <div class="tidyverse">
-  <p>Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.,Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='http://hadley.nz'>Hadley Wickham</a>.
+    Developed by <a href='https://krlmlr.info'>Kirill Müller</a>, <a href='http://hadley.nz'>Hadley Wickham</a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

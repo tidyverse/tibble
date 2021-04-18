@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
         </div>
       </div>
     </div>
@@ -267,7 +267,7 @@
 <td align="left"></td>
 <td align="left">tbl_df</td>
 <td align="left"><code><a href="../reference/tibble.html">tibble(a = 1)</a></code></td>
-<td align="left">tibble</td>
+<td align="left">tibble[,1]</td>
 </tr>
 <tr class="odd">
 <td align="left">Unchanged</td>
@@ -346,23 +346,23 @@
 #&gt; $ character     &lt;chr&gt; "A"
 #&gt; $ complex       &lt;cpl&gt; 0+1i
 #&gt; $ raw           &lt;raw&gt; 01
-#&gt; $ list          &lt;list&gt; [1]
-#&gt; $ `named list`  &lt;named list&gt; [1]
+#&gt; $ list          &lt;list&gt; 1
+#&gt; $ `named list`  &lt;named list&gt; 1
 #&gt; $ factor        &lt;fct&gt; A
 #&gt; $ ordered       &lt;ord&gt; a
-#&gt; $ Date          &lt;date&gt; 2021-02-25
-#&gt; $ POSIXt        &lt;dttm&gt; 2021-02-25 07:01:42
+#&gt; $ Date          &lt;date&gt; 2021-04-18
+#&gt; $ POSIXt        &lt;dttm&gt; 2021-04-18 04:14:08
 #&gt; $ difftime      &lt;drtn&gt; 1 secs
 #&gt; $ hms           &lt;time&gt; 00:00:01
 #&gt; $ integer64     &lt;int64&gt; 10000000000
-#&gt; $ blob          &lt;blob&gt; [00]
+#&gt; $ blob          &lt;blob&gt; 00
 #&gt; $ data.frame    &lt;df[,1]&gt; &lt;data.frame[1 x 1]&gt;
-#&gt; $ tbl_df        &lt;tibble&gt; &lt;tbl_df[1 x 1]&gt;
+#&gt; $ tbl_df        &lt;tibble[,1]&gt; &lt;tbl_df[1 x 1]&gt;
 #&gt; $ AsIs          &lt;I&lt;int&gt;&gt; 1
 #&gt; $ unspecified   &lt;???&gt; NA
-#&gt; $ vctrs_list_of &lt;list&lt;int&gt;&gt; [1]
+#&gt; $ vctrs_list_of &lt;list&lt;int&gt;&gt; 1
 #&gt; $ vctrs_vctr    &lt;vctrs_vc&gt; 1
-#&gt; $ quosures      &lt;quos&gt; [~1]</code></pre>
+#&gt; $ quosures      &lt;quos&gt; &lt;~1&gt;</code></pre>
 </div>
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
@@ -372,8 +372,14 @@
 <code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
-<span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) </span>
-<span class="co">#&gt;         return(vctrs::vec_ptype_abbr(x))</span>
+<span class="co">#&gt;     pillar_attr &lt;- attr(x, "pillar")</span>
+<span class="co">#&gt;     label &lt;- pillar_attr$label</span>
+<span class="co">#&gt;     if (!is.null(label)) {</span>
+<span class="co">#&gt;         return(I(label))</span>
+<span class="co">#&gt;     }</span>
+<span class="co">#&gt;     if (is.object(x) || vctrs::vec_is(x)) {</span>
+<span class="co">#&gt;         return(vec_ptype_abbr(x))</span>
+<span class="co">#&gt;     }</span>
 <span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
 <span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
 <span class="co">#&gt;             "missing"</span>
@@ -381,7 +387,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x55dd30b18ed8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55795c2f96c0&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>
@@ -397,12 +403,12 @@
 
 
       <footer><div class="tidyverse">
-  <p>Developed by <a href="http://krlmlr.info" class="external-link external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link external-link">Hadley Wickham</a>.,Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org" class="external-link">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by <a href="http://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
     Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
