@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.1
+
+- Same as previous version.
+
+
 # tibble 3.1.0.9001
 
 - `num()` and `char()` are reexported from pillar (#880).
