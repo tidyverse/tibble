@@ -82,6 +82,7 @@ df[1, , drop = TRUE]
 tbl[1, , drop = TRUE]
 as.list(tbl[1, ])
 
+\dontshow{if ((Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Accessing non-existent columns:
 df$b
 tbl$b
@@ -93,6 +94,7 @@ df$bd <- c("n", "e", "w")
 tbl$bd <- c("n", "e", "w")
 df$b
 tbl$b
+\dontshow{\}) # examplesIf}
 
 df$b <- 7:9
 tbl$b <- 7:9

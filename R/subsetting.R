@@ -46,6 +46,7 @@
 #' tbl[1, , drop = TRUE]
 #' as.list(tbl[1, ])
 #'
+#' @examplesIf (Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")
 #' # Accessing non-existent columns:
 #' df$b
 #' tbl$b
@@ -57,6 +58,7 @@
 #' tbl$bd <- c("n", "e", "w")
 #' df$b
 #' tbl$b
+#' @examples
 #'
 #' df$b <- 7:9
 #' tbl$b <- 7:9
