@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e 'install.packages("styler")'
       - name: Style
-        run: Rscript -e 'styler::style_pkg()'
+        run: Rscript -e 'styler::style_pkg(strict = FALSE)'
       - name: commit
         run: |
           git add \*.R
