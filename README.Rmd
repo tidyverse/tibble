@@ -14,11 +14,12 @@ knitr::opts_chunk$set(
 
 # tibble <img src="man/figures/logo.png" align="right" />
 
-[![Build Status](https://travis-ci.org/tidyverse/tibble.svg?branch=master)](https://travis-ci.org/tidyverse/tibble) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/tibble?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/tibble) 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions)
 [![codecov](https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/tibble)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+<!-- badges: end -->
 
 ## Overview
 
@@ -57,7 +58,7 @@ You can also create a new tibble from column vectors with `tibble()`:
 tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 ```
 
-`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble", package = "tibble")`.
+`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in the vignette, `vignette("tibble")`.
 
 You can define a tibble row-by-row with `tribble()`:
 
