@@ -64,7 +64,7 @@ You can also create a new tibble from column vectors with [`tibble()`](https://t
 <span class='c'>#&gt; <span style='color: #555555;'>4</span><span>     4     1    17</span></span>
 <span class='c'>#&gt; <span style='color: #555555;'>5</span><span>     5     1    26</span></span></pre>
 
-[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in the vignette, `vignette("tibble")`.
+[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in `vignette("tibble")`.
 
 You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html):
 
