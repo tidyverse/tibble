@@ -51,10 +51,7 @@ data frame. Default: 1000.
 
 
 
-The following options are used by the tibble and pillar packages
-to format and print \code{tbl_df} objects.
-Used by the formatting workhorse \code{trunc_mat()} and, therefore,
-indirectly, by \code{print.tbl()}.
+The following options control printing of \code{tbl} and \code{tbl_df} objects:
 \itemize{
 \item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
 Set to \code{Inf} to always print all rows.  Default: 20.

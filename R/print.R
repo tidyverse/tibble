@@ -20,10 +20,7 @@
 #' @inheritSection pillar::`pillar-package` Package options
 #' @section Package options:
 #'
-#' The following options are used by the tibble and pillar packages
-#' to format and print `tbl_df` objects.
-#' Used by the formatting workhorse `trunc_mat()` and, therefore,
-#' indirectly, by `print.tbl()`.
+#' The following options control printing of `tbl` and `tbl_df` objects:
 #'
 #' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
 #'   Set to `Inf` to always print all rows.  Default: 20.
