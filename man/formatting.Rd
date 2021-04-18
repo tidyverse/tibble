@@ -43,6 +43,9 @@ whether a variable is, e.g., \verb{<chr>} or \verb{<fct>} (character versus fact
 Printing can be tweaked for a one-off call by calling \code{print()} explicitly
 and setting arguments like \code{n} and \code{width}. More persistent control is
 available by setting the options described below.
+See also \code{vignette("digits", package = "pillar")} for a comparison to base options,
+and \code{pillar::num()} and \code{pillar::char()} for creating columns
+with custom formatting options.
 
 As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 If you implement a package that extend tibble,
