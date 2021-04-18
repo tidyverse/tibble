@@ -229,8 +229,7 @@
 <div id="coercion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coercion" class="anchor"></a>Coercion</h2>
-<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods, and in fact, it’s precisely what <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> does, but it’s similar to <code><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call(cbind, lapply(x, data.frame))</a></code> - i.e. it coerces each component to a data frame and then uses <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code> to bind them all together.</p>
-<p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> has been written with an eye for performance:</p>
+<p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods. The method for lists has been written with an eye for performance:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span>
@@ -286,6 +285,7 @@
 <li><p><code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.print_max = n, tibble.print_min = m)</a></code>: if there are more than <code>n</code> rows, print only the first <code>m</code> rows. Use <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.print_max = Inf)</a></code> to always show all rows.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(tibble.width = Inf)</a></code> will always print all columns, regardless of the width of the screen.</p></li>
 </ul>
+<p>See <code><a href="../reference/tibble-package.html">?"tibble-package"</a></code> for the available options, and <code><a href="../articles/types.html">vignette("types")</a></code> for an overview of the type abbreviations.</p>
 </div>
 <div id="subsetting" class="section level3">
 <h3 class="hasAnchor">
@@ -351,7 +351,7 @@
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> NULL
 </span></code></pre>
 </div>
-<p>As of version 1.4.1, tibbles no longer ignore the <code>drop</code> argument:</p>
+<p>However, tibbles respect the <code>drop</code> argument if it is provided:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode">
@@ -398,11 +398,12 @@
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span> [1] "1"
 </span></code></pre>
 </div>
+<p>See <code><a href="../articles/invariants.html">vignette("invariants")</a></code> for a detailed comparison between tibbles and data frames.</p>
 </div>
 <div id="recycling" class="section level3">
 <h3 class="hasAnchor">
 <a href="#recycling" class="anchor"></a>Recycling</h3>
-<p>When constructing a tibble, only values of length 1 are recycled. The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error. This also extends to tibbles with <em>zero</em> rows, which is sometimes important for programming:</p>
+<p>When constructing a tibble, only values of length 1 are recycled. The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
@@ -434,6 +435,7 @@
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Only values of size one are recycled.
 </span></code></pre>
 </div>
+<p>This also extends to tibbles with <em>zero</em> rows, which is sometimes important for programming:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
@@ -452,7 +454,7 @@
 <div id="arithmetic-operations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#arithmetic-operations" class="anchor"></a>Arithmetic operations</h3>
-<p>Unlike data frames, tibbles don’t support arithmetic operations on all columns. The result is silently coerced to a data frame.</p>
+<p>Unlike data frames, tibbles don’t support arithmetic operations on all columns. The result is silently coerced to a data frame. Do not rely on this behavior, it may become an error in a forthcoming version.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>
 <span class="va">tbl</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
