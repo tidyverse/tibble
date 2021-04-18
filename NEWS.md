@@ -1,3 +1,13 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# tibble 3.1.0.9001
+
+- `num()` and `char()` are reexported from pillar (#880).
+- `tribble()` and `frame_matrix()` give an error if values are named (#871, @lorenzwalthert).
+- Document `cli.num_colors` option (#410).
+- Fix `new_tibble()` examples for compatibility with pillar 1.6.0.
+
+
 # tibble 3.1.0.9000
 
 - Internal changes only.
