@@ -30,6 +30,17 @@
 #'   "a", 1:3,
 #'   "b", 4:6
 #' )
+#' @examplesIf rlang::is_installed(dplyr, "1.0.5")
+#'
+#' # Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
+#' tribble(
+#'   ~ a,          ~ b,          ~ c,
+#'     1, "2000-01-01",        "1.5"
+#' ) %>%
+#'   dplyr::mutate(
+#'     dplyr::across(a, as.integer),
+#'     dplyr::across(b, as.Date)
+#'   )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
   turn_frame_data_into_tibble(data$frame_names, data$frame_rest)

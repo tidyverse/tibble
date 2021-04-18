@@ -36,6 +36,18 @@ tribble(
   "a", 1:3,
   "b", 4:6
 )
+\dontshow{if (rlang::is_installed(dplyr, "1.0.5")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+# Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
+tribble(
+  ~ a,          ~ b,          ~ c,
+    1, "2000-01-01",        "1.5"
+) \%>\%
+  dplyr::mutate(
+    dplyr::across(a, as.integer),
+    dplyr::across(b, as.Date)
+  )
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 See \link{quasiquotation} for more details on tidy dots semantics,
