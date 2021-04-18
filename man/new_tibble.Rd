@@ -21,8 +21,6 @@ validate_tibble(x)
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
 \description{
-\ifelse{html}{\out{<a href='https://lifecycle.r-lib.org/articles/stages.html'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
-
 Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like \pkg{sf} or \pkg{tsibble}.
@@ -62,10 +60,10 @@ and that \code{\link[vctrs:vec_size]{vctrs::vec_size()}} is consistent with the 
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
 # Existing row.names attributes are ignored:
-try(new_tibble(iris, nrow = 3))
+try(validate_tibble(new_tibble(iris, nrow = 3)))
 
 # The length of all columns must be compatible with the nrow argument:
-try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
+try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} for ways to construct a tibble

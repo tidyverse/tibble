@@ -26,16 +26,13 @@
        $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
     Code
       # No columns
-    Code
       str(as_tibble(iris[integer()]), width = 70L)
     Output
       tibble [150 x 0] (S3: tbl_df/tbl/data.frame)
        Named list()
     Code
       # Non-syntactic names
-    Code
       df <- tibble(`mean(x)` = 5, `var(x)` = 3)
-    Code
       str(df, width = 28)
     Output
       tibble [1 x 2] (S3: tbl_df/tbl/data.frame)
@@ -66,7 +63,6 @@
         .. ..$ : logi NA
     Code
       # options(tibble.width = 50)
-    Code
       withr::with_options(list(tibble.width = 50), str(as_tibble(df_all)))
     Output
       tibble [3 x 9] (S3: tbl_df/tbl/data.frame)
@@ -91,7 +87,6 @@
         .. ..$ : logi NA
     Code
       # options(tibble.width = 35)
-    Code
       withr::with_options(list(tibble.width = 35), str(as_tibble(df_all)))
     Output
       tibble [3 x 9] (S3: tbl_df/tbl/data.frame)
@@ -116,13 +111,11 @@
         .. ..$ : logi NA
     Code
       # non-tibble
-    Code
       str(5)
     Output
        num 5
     Code
       iris2 <- as_unknown_rows(iris)
-    Code
       str(iris2, width = 70L)
     Output
       unknown_rows [?? x 5] (S3: unknown_rows/tbl_df/tbl/data.frame)
@@ -133,11 +126,8 @@
        $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
     Code
       Species <- unique(iris$Species)
-    Code
       data <- unname(split(iris, iris$Species))
-    Code
       nested_iris_df <- tibble(Species, data)
-    Code
       str(nested_iris_df, width = 70L)
     Output
       tibble [3 x 2] (S3: tbl_df/tbl/data.frame)
@@ -163,9 +153,7 @@
         .. ..$ Species     : Factor w/ 3 levels "setosa","versicolor",..: 3 3 3 3 3 3 3 3 3 3 ...
     Code
       data <- map(data, as_tibble)
-    Code
       nested_iris_tbl <- tibble(Species, data)
-    Code
       str(nested_iris_tbl, width = 70L)
     Output
       tibble [3 x 2] (S3: tbl_df/tbl/data.frame)

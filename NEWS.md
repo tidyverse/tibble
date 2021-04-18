@@ -1,3 +1,38 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# tibble 3.1.1
+
+- `num()` and `char()` are reexported from pillar (#880).
+- `tribble()` and `frame_matrix()` give an error if values are named (#871, @lorenzwalthert).
+- Document `cli.num_colors` option (#410).
+- Fix `new_tibble()` examples for compatibility with pillar 1.6.0.
+
+
+# tibble 3.1.0
+
+## Bug fixes
+
+- `has_rownames()` now works correctly for data frames with a `"row.names"` attribute malformed due to a problem in `structure()` (#852).
+
+- `tbl[FALSE, "column"] <- x` adds new column again (#846).
+
+## Features
+
+- Importing pillar 1.5.0, cli and crayon are now suggested packages (#475).
+
+- `size_sum()` is now reexported from pillar (#850, @topepo).
+
+- `as_tibble()` hints more often to use the `.name_repair` argument if column names are invalid (#855).
+
+- `as_tibble.table()` mentions `.name_repair` argument in the error message (#839).
+
+## Internal
+
+- Remove compatibility code for pillar < 1.5.0 (#861).
+
+- Moved most functions to the "stable" lifecycle (#860).
+
+
 # tibble 3.0.6
 
 - `vec_ptype_abbr.tbl_df()` and `type_sum.tbl_df()` now uses the name of the topmost class for subclasses of `"tbl_df"` (#843).
@@ -97,11 +132,11 @@
 - Subset assignment ("subassignment") and also subsetting has become stricter. Symptoms:
 
     - Error: No common type for ...
-    
+
     - Error: Assigned data `...` must be compatible with ...
 
     - `i` must have one dimension, not 2
-    
+
     - Error: Lossy cast from ... to ...
 
     The "invariants" article at https://tibble.tidyverse.org/dev/articles/invariants.html describes the invariants that the operations follow in tibble, and the most important differences to data frames. We tried to make subsetting and subassignment as safe as possible, so that errors are caught early on, while introducing as little friction as possible.
@@ -109,7 +144,7 @@
 - List classes are no longer automatically treated as vectors. Symptoms:
 
     - Error: All columns in a tibble must be vectors
-    
+
     - Error: Expected a vector, not a `...` object
 
     If you implement a class that wraps a list as S3 vector, you need to include `"list"` in the class:
@@ -276,7 +311,7 @@ To improve compatibility with existing code, breaking changes were reduced to a 
 - `as_tibble.data.frame()` (and also `as_tibble.matrix()`) strip row names by default.  Code that relies on tibbles keeping row names now will see:
     - a different result when calling `rownames()` or `row.names()`,
     - rows full of `NA` values when subsetting rows with with a character vector, e.g. `as_tibble(mtcars)["Mazda RX4", ]`.
-    
+
     Call `pkgconfig::set_config("tibble::rownames", NA)` to revert to the old behavior of keeping row names. Packages that import _tibble_ can call `set_config()` in their `.onLoad()` function (#114).
 
 - `as_tibble()` drops extra classes, in particular `as_tibble.grouped_df()` now removes grouping (#535).
@@ -312,9 +347,9 @@ To improve compatibility with existing code, breaking changes were reduced to a 
     - `NA`: keep row names,
     - A string: the name of the new column that will contain the existing row names,
       which are no longer present in the result.
-    
+
     The old default can be restored by calling `pkgconfig::set_config("tibble::rownames", NA)`, this also works for packages that import _tibble_.
-    
+
 - `new_tibble()` and `as_tibble()` now also strip the `"dim"` attribute from columns that are one-dimensional arrays. (`tibble()` already did this before.)
 
 - Internally, all `as_tibble()` implementation forward all extra arguments and `...` to `as_tibble.list()` where they are handled.  This means that the common `.rows` and `.name_repair` can be used for all inputs.  We suggest that your implementations of this method do the same.

@@ -10,9 +10,13 @@
 #'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
 #'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'     transforming the user's input. Character vectors are not coerced to
-#'     factor. List-columns are expressly anticipated and do not require special
-#'     tricks. Column names are not modified.
+#'     transforming the user's input.
+#'
+#'       - Character vectors are not coerced to factor.
+#'       - List-columns are expressly anticipated and do not require special tricks.
+#'       - Column names are not modified.
+#'       - Inner names in columns are left unchanged.
+#'
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
@@ -255,7 +259,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
   names(output) <- col_names
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, .name_repair = .name_repair)
+  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair)
 
   new_tibble(output, nrow = first_size %||% 0L)
 }

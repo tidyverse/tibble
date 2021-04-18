@@ -6,8 +6,9 @@
 #' behavior is different for tibbles and data frames in some cases:
 #' * `[` always returns a tibble by default, even if
 #'   only one column is accessed.
-#' * Partial matching of column names with `$` and `[[` is not supported, a
-#'   warning is given and `NULL` is returned.
+#' * Partial matching of column names with `$` and `[[` is not supported, and
+#'   `NULL` is returned.
+#'   For `$`, a warning is given.
 #' * Only scalars (vectors of length one) or vectors with the
 #'   same length as the number of rows can be used for assignment.
 #' * Rows outside of the tibble's boundaries cannot be accessed.
@@ -45,6 +46,7 @@
 #' tbl[1, , drop = TRUE]
 #' as.list(tbl[1, ])
 #'
+#' @examplesIf (Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")
 #' # Accessing non-existent columns:
 #' df$b
 #' tbl$b
@@ -56,6 +58,7 @@
 #' tbl$bd <- c("n", "e", "w")
 #' df$b
 #' tbl$b
+#' @examples
 #'
 #' df$b <- 7:9
 #' tbl$b <- 7:9
@@ -165,7 +168,7 @@ NULL
   }
 
   # Side effect: check scalar
-  if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
+  if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
     vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   }
 
@@ -175,7 +178,7 @@ NULL
   # names again
   names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
 }
 
 
@@ -235,7 +238,7 @@ NULL
     xo <- .subset(x, j)
 
     if (anyDuplicated(j)) {
-      xo <- set_repaired_names(xo, .name_repair = "minimal")
+      xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
 
     xo <- set_tibble_class(xo, nrow = fast_nrow(x))
@@ -407,10 +410,6 @@ tbl_subset_row <- function(x, i, i_arg) {
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  if (!is.null(i_arg) && !is.null(i)) {
-    i <- vectbl_as_new_row_index(i, x, i_arg)
-  }
-
   if (is.null(i)) {
     value <- vectbl_wrap_rhs_col(value, value_arg)
 
@@ -422,9 +421,12 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
     xo <- tbl_subassign_col(x, j, value)
-  } else if (is_empty(i)) {
+  } else if (is.null(i_arg)) {
+    # x[NULL, ...] <- value
     return(x)
   } else {
+    i <- vectbl_as_new_row_index(i, x, i_arg)
+
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
     value <- vectbl_wrap_rhs_row(value, value_arg)

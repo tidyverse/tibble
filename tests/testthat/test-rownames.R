@@ -24,7 +24,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res$rowname, rownames(mtcars))
   expect_tibble_error(
     rownames_to_column(mtcars, "wt"),
-    error_column_names_must_be_unique("wt")
+    error_column_names_must_be_unique("wt", repair = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -35,7 +35,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res1$`Make&Model`, rownames(mtcars))
   expect_tibble_error(
     rownames_to_column(mtcars2, "wt"),
-    error_column_names_must_be_unique("wt")
+    error_column_names_must_be_unique("wt", repair = FALSE)
   )
 })
 
@@ -46,7 +46,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
   expect_tibble_error(
     rowid_to_column(mtcars, "wt"),
-    error_column_names_must_be_unique("wt")
+    error_column_names_must_be_unique("wt", repair = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -57,7 +57,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
   expect_tibble_error(
     rowid_to_column(mtcars2, "wt"),
-    error_column_names_must_be_unique("wt")
+    error_column_names_must_be_unique("wt", repair = FALSE)
   )
 })
 
@@ -91,6 +91,10 @@ test_that("column_to_rownames returns tbl", {
 
 test_that("converting to data frame does not add row names", {
   expect_false(has_rownames(as.data.frame(as_tibble(iris))))
+})
+
+test_that("work around structure() bug (#852)", {
+  expect_false(has_rownames(structure(trees, .drop = FALSE)))
 })
 
 test_that("output test", {

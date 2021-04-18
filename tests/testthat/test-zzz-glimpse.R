@@ -1,4 +1,6 @@
 test_that("format_v for values", {
+  skip_dep_glimpse()
+
   expect_equal(format_v(1), "1")
   expect_equal(format_v(1:3), c("1", "2", "3"))
   expect_equal(format_v(NA), "NA")
@@ -7,6 +9,8 @@ test_that("format_v for values", {
 })
 
 test_that("format_v for character", {
+  skip_dep_glimpse()
+
   expect_equal(format_v("1"), paste0('"', "1", '"'))
   expect_equal(format_v(letters), paste0('"', letters, '"'))
   expect_equal(format_v(NA_character_), "NA")
@@ -14,6 +18,8 @@ test_that("format_v for character", {
 })
 
 test_that("format_v for factor", {
+  skip_dep_glimpse()
+
   expect_equal(format_v(factor(c("1", "a"))), c("1", "a"))
   expect_equal(format_v(factor(c("foo", '"bar"'))), c("foo", "\"bar\""))
   expect_equal(format_v(factor()), character())
@@ -26,6 +32,8 @@ test_that("format_v for factor", {
 })
 
 test_that("format_v for list", {
+  skip_dep_glimpse()
+
   expect_equal(format_v(list(1:3)), "[<1, 2, 3>]")
   expect_equal(format_v(as.list(1:3)), "[1, 2, 3]")
   expect_equal(format_v(list(1:3, 4)), "[<1, 2, 3>, 4]")
@@ -39,6 +47,8 @@ test_that("format_v for list", {
 })
 
 test_that("glimpse output matches known output", {
+  skip_dep_glimpse()
+
   skip_on_non_utf8_locale()
   skip_if(packageVersion("pillar") >= "1.4.99")
 

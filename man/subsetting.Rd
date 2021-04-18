@@ -46,8 +46,9 @@ behavior is different for tibbles and data frames in some cases:
 \itemize{
 \item \code{[} always returns a tibble by default, even if
 only one column is accessed.
-\item Partial matching of column names with \code{$} and \code{[[} is not supported, a
-warning is given and \code{NULL} is returned.
+\item Partial matching of column names with \code{$} and \code{[[} is not supported, and
+\code{NULL} is returned.
+For \code{$}, a warning is given.
 \item Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
 \item Rows outside of the tibble's boundaries cannot be accessed.
@@ -81,6 +82,7 @@ df[1, , drop = TRUE]
 tbl[1, , drop = TRUE]
 as.list(tbl[1, ])
 
+\dontshow{if ((Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Accessing non-existent columns:
 df$b
 tbl$b
@@ -92,6 +94,7 @@ df$bd <- c("n", "e", "w")
 tbl$bd <- c("n", "e", "w")
 df$b
 tbl$b
+\dontshow{\}) # examplesIf}
 
 df$b <- 7:9
 tbl$b <- 7:9

@@ -1,8 +1,6 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' `as_tibble()` turns an existing object, such as a data frame or
 #' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
 #' in contrast with [tibble()], which builds a tibble from individual columns.
@@ -28,7 +26,7 @@
 #'
 #' @section Life cycle:
 #' Using `as_tibble()` for vectors is superseded as of version 3.0.0,
-#' prefer the more expressive maturing `as_tibble_row()` and
+#' prefer the more expressive `as_tibble_row()` and
 #' `as_tibble_col()` variants for new code.
 #'
 #' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
@@ -104,7 +102,7 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
   x <- unclass(x)
-  x <- set_repaired_names(x, .name_repair)
+  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair)
   x <- check_valid_cols(x)
   recycle_columns(x, .rows, lengths)
 }
@@ -242,8 +240,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
   df <- as.data.frame(x, stringsAsFactors = FALSE)
 
   names(df) <- repaired_names(
-    c(names2(dimnames(x)), n), .name_repair = .name_repair,
-    details = "Use `names(dimnames(x)) <- ...` to assign names to a table."
+    c(names2(dimnames(x)), n), repair_hint = TRUE, .name_repair = .name_repair
   )
 
   # Names already repaired:
@@ -292,7 +289,7 @@ as_tibble_row <- function(x,
     cnd_signal(error_as_tibble_row_bare(x))
   }
 
-  x <- set_repaired_names(x, .name_repair)
+  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair)
 
   check_all_lengths_one(x)
   new_tibble(as.list(x), nrow = 1)

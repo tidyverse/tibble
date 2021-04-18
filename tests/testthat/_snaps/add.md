@@ -30,10 +30,12 @@
       add_column(tibble(a = 1), a = 1)
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
+      Use .name_repair to specify repair.
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
     Error <tibble_error_column_names_must_be_unique>
       Column names `a` and `b` must not be duplicated.
+      Use .name_repair to specify repair.
     Code
       add_column(tibble(a = "a", b = "b", c = "c", d = "d", e = "e", f = "f", g = "g",
         h = "h", i = "i", j = "j", k = "k", l = "l", m = "m", n = "n", o = "o", p = "p",
@@ -43,6 +45,7 @@
       r = "r", s = "s", t = "t", u = "u", v = "v", w = "w", x = "x", y = "y", z = "z")
     Error <tibble_error_column_names_must_be_unique>
       Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
+      Use .name_repair to specify repair.
     Code
       add_column(tibble(a = 2:3), b = 4:6)
     Error <tibble_error_incompatible_new_cols>

@@ -62,29 +62,29 @@ library(tibble)
 It encapsulates best practices for data frames:
 
   * It never changes an input's type (i.e., no more `stringsAsFactors = FALSE`!).
-    
+
     ```{r}
     tibble(x = letters)
     ```
-    
+
     This makes it easier to use with list-columns:
-    
+
     ```{r}
     tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
     ```
-    
+
     List-columns are often created by `tidyr::nest()`, but they can be useful to
     create by hand.
-      
+
   * It never adjusts the names of variables:
-  
+
     ```{r}
     names(data.frame(`crazy name` = 1))
     names(tibble(`crazy name` = 1))
     ```
 
   * It evaluates its arguments lazily and sequentially:
-  
+
     ```{r}
     tibble(x = 1:5, y = x ^ 2)
     ```
@@ -92,16 +92,15 @@ It encapsulates best practices for data frames:
   * It never uses `row.names()`.
     The whole point of tidy data is to store variables in a consistent way.
     So it never stores a variable as special attribute.
-  
+
   * It only recycles vectors of length 1.
     This is because recycling vectors of greater lengths is a frequent source of bugs.
 
 ## Coercion
 
 To complement `tibble()`, tibble provides `as_tibble()` to coerce objects into tibbles.
-Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods, and in fact, it's precisely what `as.data.frame()` does, but it's similar to `do.call(cbind, lapply(x, data.frame))` - i.e. it coerces each component to a data frame and then uses `cbind()` to bind them all together.
-
-`as_tibble()` has been written with an eye for performance:
+Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods.
+The method for lists has been written with an eye for performance:
 
 ```{r error = TRUE, eval = FALSE}
 l <- replicate(26, sample(100), simplify = FALSE)
@@ -130,7 +129,7 @@ There are three key differences between tibbles and data frames: printing, subse
 
 When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen.
 It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
-    
+
 ```{r}
 tibble(x = -5:1000)
 ```
@@ -142,12 +141,14 @@ You can control the default appearance with options:
 
 * `options(tibble.width = Inf)` will always print all columns, regardless of the width of the screen.
 
+See `?"tibble-package"` for the available options, and `vignette("types")` for an overview of the type abbreviations.
+
 ### Subsetting
 
 Tibbles are quite strict about subsetting.
 `[` always returns another tibble.
 Contrast this with a data frame: sometimes `[` returns a data frame and sometimes it just returns a vector:
-    
+
 ```{r}
 df1 <- data.frame(x = 1:3, y = 3:1)
 class(df1[, 1:2])
@@ -176,24 +177,56 @@ df2 <- tibble(abc = 1)
 df2$a
 ```
 
-As of version 1.4.1, tibbles no longer ignore the `drop` argument:
+However, tibbles respect the `drop` argument if it is provided:
 
 ```{r}
 data.frame(a = 1:3)[, "a", drop = TRUE]
 tibble(a = 1:3)[, "a", drop = TRUE]
 ```
 
+Tibbles do not support row names.
+They are removed when converting to a tibble or when subsetting:
+
+```{r}
+df <- data.frame(a = 1:3, row.names = letters[1:3])
+rownames(df)
+rownames(as_tibble(df))
+
+tbl <- tibble(a = 1:3)
+rownames(tbl) <- letters[1:3]
+rownames(tbl)
+rownames(tbl[1, ])
+```
+
+See `vignette("invariants")` for a detailed comparison between tibbles and data frames.
+
 
 ### Recycling
 
 When constructing a tibble, only values of length 1 are recycled.
-The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error.
-This also extends to tibbles with *zero* rows, which is sometimes important for programming:
+The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error:
 
 ```{r, error = TRUE}
 tibble(a = 1, b = 1:3)
 tibble(a = 1:3, b = 1)
 tibble(a = 1:3, c = 1:2)
+```
+
+This also extends to tibbles with *zero* rows, which is sometimes important for programming:
+
+```{r}
 tibble(a = 1, b = integer())
 tibble(a = integer(), b = 1)
+```
+
+
+### Arithmetic operations
+
+Unlike data frames, tibbles don't support arithmetic operations on all columns.
+The result is silently coerced to a data frame.
+Do not rely on this behavior, it may become an error in a forthcoming version.
+
+```{r}
+tbl <- tibble(a = 1:3, b = 4:6)
+tbl * 2
 ```

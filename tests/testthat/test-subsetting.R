@@ -450,6 +450,14 @@ test_that("$ doesn't do partial matching", {
 
 # [[<- --------------------------------------------------------------------
 
+test_that("[[<-.tbl_df with two indexes assigns", {
+  df <- tibble(x = 1:2, y = x)
+  df[[1, "x"]] <- 3
+  expect_identical(df, tibble(x = 3:2, y = 1:2))
+  df[[2, 2]] <- 0
+  expect_identical(df, tibble(x = 3:2, y = 1:0))
+})
+
 test_that("[[<-.tbl_df can update and add columns (#748)", {
   df <- tibble(x = 1:2, y = x)
   df[["x"]] <- 3:4
@@ -615,6 +623,12 @@ test_that("[<- with explicit NULL doesn't change anything (#696)", {
   expect_identical(iris_tbl, iris_tbl_orig)
 })
 
+test_that("[<- with FALSE still adds column (#846)", {
+  tbl <- tibble(a = 1:3)
+  tbl[FALSE, "b"] <- 2
+  expect_identical(tbl, tibble(a = 1:3, b = NA_real_))
+})
+
 test_that("[<-.tbl_df is careful about attributes (#155)", {
   df <- tibble(x = 1:2, y = x)
   attr(df, "along for the ride") <- "still here"
@@ -739,6 +753,8 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("lifecycle", "0.2.0.9000")
+
   expect_snapshot_with_error({
     "# [.tbl_df is careful about names (#1245)"
     foo <- tibble(x = 1:10, y = 1:10)
@@ -913,7 +929,7 @@ test_that("output test", {
     foo[is.na(foo)] <- 1:3
     foo[is.na(foo)] <- lm(a ~ b, foo)
 
-    "# [[.tbl_df rejects invalid column indexes"
+    "# [[<-.tbl_df rejects invalid column indexes"
     foo <- tibble(x = 1:10, y = 1:10)
     foo[[]] <- 1
     foo[[, 1]] <- 1
@@ -922,6 +938,7 @@ test_that("output test", {
     foo[[1:3]] <- 1
     foo[[ letters[1:3] ]] <- 1
     foo[[TRUE]] <- 1
+    foo[[NA_integer_]] <- 1
     foo[[mean]] <- 1
     foo[[foo]] <- 1
     foo[[1:3, 1]] <- 1
