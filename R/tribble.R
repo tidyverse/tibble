@@ -30,7 +30,7 @@
 #'   "a", 1:3,
 #'   "b", 4:6
 #' )
-#' @examplesIf rlang::is_installed(dplyr, "1.0.5")
+#' @examplesIf rlang::is_installed("dplyr") && packageVersion("dplyr") >= "1.0.5"
 #'
 #' # Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
 #' tribble(
