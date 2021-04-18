@@ -11,6 +11,9 @@
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly
 #' and setting arguments like `n` and `width`. More persistent control is
 #' available by setting the options described below.
+#' See also `vignette("digits", package = "pillar")` for a comparison to base options,
+#' and `pillar::num()` and `pillar::char()` for creating columns
+#' with custom formatting options.
 #'
 #' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 #' If you implement a package that extend tibble,
