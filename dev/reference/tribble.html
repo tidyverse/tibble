@@ -250,7 +250,20 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 #&gt;   x     y        
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     </span><span style='color: #949494;'>&lt;int [3]&gt;</span><span></div><div class='input'>
+<span class='co'># Use dplyr::mutate(dplyr::across(...)) to assign an explicit type</span>
+<span class='fu'>tribble</span><span class='op'>(</span>
+  <span class='op'>~</span> <span class='va'>a</span>,          <span class='op'>~</span> <span class='va'>b</span>,          <span class='op'>~</span> <span class='va'>c</span>,
+    <span class='fl'>1</span>, <span class='st'>"2000-01-01"</span>,        <span class='st'>"1.5"</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
+    <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>as.integer</span><span class='op'>)</span>,
+    <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>as.Date</span><span class='op'>)</span>
+  <span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 3</span><span>
+#&gt;       a b          c    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 2000-01-01 1.5  </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
