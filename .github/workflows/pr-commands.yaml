@@ -6,7 +6,8 @@ jobs:
   document:
     if: startsWith(github.event.comment.body, '/document')
     name: document
-    runs-on: macOS-latest
+    # macos is actually better here due to native binary packages
+    runs-on: macos-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -17,21 +18,35 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           install-r: false
+      - name: Configure Git identity
+        run: |
+          env | sort
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        shell: bash
       - name: Install dependencies
-        run: Rscript -e 'install.packages(c("remotes", "roxygen2"))' -e 'remotes::install_deps(dependencies = TRUE)'
+        run: |
+          install.packages(c("remotes", "roxygen2"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
       - name: Document
-        run: Rscript -e 'roxygen2::roxygenise()'
+        run: |
+          roxygen2::roxygenise()
+        shell: Rscript {0}
       - name: commit
         run: |
-          git add man/\* NAMESPACE
-          git commit -m 'Document'
+          if [ -n "$(git status --porcelain man/ NAMESPACE)" ]; then
+            git add man/ NAMESPACE
+            git commit -m 'Document'
+          fi
       - uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   style:
     if: startsWith(github.event.comment.body, '/style')
     name: style
-    runs-on: macOS-latest
+    # macos is actually better here due to native binary packages
+    runs-on: macos-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -42,21 +57,33 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           install-r: false
+      - name: Configure Git identity
+        run: |
+          env | sort
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        shell: bash
       - name: Install dependencies
-        run: Rscript -e 'install.packages("styler")'
+        run: |
+          install.packages("styler")
+        shell: Rscript {0}
       - name: Style
-        run: Rscript -e 'styler::style_pkg(strict = FALSE)'
+        run: |
+          styler::style_pkg(strict = FALSE)
+        shell: Rscript {0}
       - name: commit
         run: |
-          git add \*.R
-          git commit -m 'Style'
+          if [ -n "$(git status --porcelain '*.R' '*.Rmd')" ]; then
+            git add '*.R' '*.Rmd'
+            git commit -m 'Style'
+          fi
       - uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   merge:
     if: startsWith(github.event.comment.body, '/merge')
     name: merge
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Create and merge pull request
         run: |
@@ -71,6 +98,6 @@ jobs:
           # curl -s -X PUT --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" $PR_URL/merge
   # A mock job just to ensure we have a successful build status
   finish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - run: true
