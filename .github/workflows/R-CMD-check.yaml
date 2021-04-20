@@ -114,6 +114,12 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "${{matrix.config.os-version}}"))')
 
+      - name: Add fake qpdf and checkbashisms
+        if: runner.os == 'Linux'
+        run: |
+          sudo ln -s $(which true) /usr/local/bin/qpdf
+          sudo ln -s $(which true) /usr/local/bin/checkbashisms
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
