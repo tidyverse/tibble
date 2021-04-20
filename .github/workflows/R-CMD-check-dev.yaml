@@ -2,7 +2,7 @@
 # Can't be run as part of commits
 on:
   schedule:
-    - cron:  '0 1 * * *'
+    - cron:  '5 0 * * *'
   push:
     paths:
       - ".github/workflows/R-CMD-check-dev.yaml"
