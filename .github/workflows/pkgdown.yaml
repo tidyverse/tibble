@@ -40,6 +40,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      # Begin custom: before install
+      # End custom: before install
+
       - uses: r-lib/actions/setup-r@v1
         with:
           install-r: false
@@ -81,9 +84,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
-
-      # Begin custom: before install
-      # End custom: before install
 
       - name: Install pkgdown sysdeps
         if: runner.os == 'Linux'
