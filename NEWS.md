@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.2.9000
+
+- Bump required versions of ellipsis and vctrs to avoid warning during package load.
+
+
 # tibble 3.1.2
 
 - Bump required versions of ellipsis and vctrs to avoid warning during package load.
