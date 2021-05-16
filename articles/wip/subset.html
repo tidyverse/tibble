@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="../../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
         </div>
       </div>
     </div>
@@ -166,7 +166,7 @@
 <figure><a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link"><img src="alignment.png" title="Alignment chart" style="width:100.0%" alt="Alignment"></a>
 <figcaption>
 Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link">Jacqueline Nolis</a>
-</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
+</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code>$</code>, <code>[[</code> and <code>[</code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
 <span class="va">new_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
@@ -223,8 +223,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section" class="anchor"></a>$</h2>
-<p>With <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
+<a href="#section" class="anchor" aria-hidden="true"></a>$</h2>
+<p>With <code>$</code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -318,7 +318,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </div>
 <div id="section-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-1" class="anchor"></a>[[</h2>
+<a href="#section-1" class="anchor" aria-hidden="true"></a>[[</h2>
 <p>The <code>exact</code> argument is not supported by tibbles.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -419,7 +419,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 </tr>
 </tbody></table>
-<p>With two indexes, a single element is returned. List columns are not unpacked by tibbles, the <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> only unpacks columns.</p>
+<p>With two indexes, a single element is returned. List columns are not unpacked by tibbles, the <code>[[</code> only unpacks columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -503,8 +503,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </div>
 <div id="section-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-2" class="anchor"></a>[</h2>
-<p>With <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
+<a href="#section-2" class="anchor" aria-hidden="true"></a>[</h2>
+<p>With <code>[</code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -526,9 +526,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[.data.frame`(df, "a",
-#&gt; drop = FALSE): 'drop' argument will be
-#&gt; ignored</code></pre>
+<pre><code>#&gt; Warning in `[.data.frame`(df, "a", drop
+#&gt; =
+#&gt; FALSE): 'drop' argument will be ignored</code></pre>
 </div>
 <pre><code>#&gt;   a
 #&gt; 1 1
@@ -542,7 +542,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="warning">
 <pre><code>#&gt; Warning: `drop` argument ignored for
 #&gt; subsetting a tibble with `x[j]`, it has
-#&gt; an effect only for `x[i, j]`.</code></pre>
+#&gt; an
+#&gt; effect only for `x[i, j]`.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 4 x 1
 #&gt;       a
@@ -559,7 +560,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[.data.frame`(df, "a", drop
-#&gt; = TRUE): 'drop' argument will be ignored</code></pre>
+#&gt; =
+#&gt; TRUE): 'drop' argument will be ignored</code></pre>
 </div>
 <pre><code>#&gt;   a
 #&gt; 1 1
@@ -573,7 +575,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="warning">
 <pre><code>#&gt; Warning: `drop` argument ignored for
 #&gt; subsetting a tibble with `x[j]`, it has
-#&gt; an effect only for `x[i, j]`.</code></pre>
+#&gt; an
+#&gt; effect only for `x[i, j]`.</code></pre>
 </div>
 <pre><code>#&gt; # A tibble: 4 x 1
 #&gt;       a

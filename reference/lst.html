@@ -112,7 +112,7 @@ evaluation and auto-name semantics." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
         </div>
       </div>
     </div>
@@ -209,7 +209,7 @@ call. <code>lst()</code> also generates missing names automatically.</p>
 evaluation and auto-name semantics.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lst</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>lst</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,65 +233,72 @@ is not available.</p></td>
     <p>A named list.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># the value of n can be used immediately in the definition of x</span>
-<span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $n
-#&gt; [1] 5
-#&gt; 
-#&gt; $x
-#&gt; [1] 0.8056800 0.8140513 0.4039110 0.2184310 0.4183614
-#&gt; </div><div class='input'>
-<span class='co'># missing names are constructed from user's input</span>
-<span class='fu'>lst</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, z <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`1:3`
-#&gt; [1] 1 2 3
-#&gt; 
-#&gt; $z
-#&gt; [1] "d" "e" "f"
-#&gt; 
-#&gt; $`runif(3)`
-#&gt; [1] 0.6688707 0.5076503 0.6603593
-#&gt; </div><div class='input'>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>
-<span class='fu'>lst</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $a
-#&gt; [1] 1 2 3
-#&gt; 
-#&gt; $b
-#&gt; [1] "d" "e" "f"
-#&gt; </div><div class='input'>
-<span class='co'># pre-formed quoted expressions can be used with lst() and then</span>
-<span class='co'># unquoted (with !!) or unquoted and spliced (with !!!)</span>
-<span class='va'>n1</span> <span class='op'>&lt;-</span> <span class='fl'>2</span>
-<span class='va'>n2</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
-<span class='va'>n_stuff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='va'>n1</span> <span class='op'>+</span> <span class='va'>n2</span><span class='op'>)</span>
-<span class='va'>x_stuff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>lst</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='va'>n_stuff</span>, x <span class='op'>=</span> <span class='va'>x_stuff</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $n
-#&gt; [1] 5
-#&gt; 
-#&gt; $x
-#&gt; [1] 1 2 3 4 5
-#&gt; </div><div class='input'><span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>n_stuff</span>, x <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x_stuff</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $n
-#&gt; [1] 5
-#&gt; 
-#&gt; $x
-#&gt; [1] 1 2 3 4 5
-#&gt; </div><div class='input'><span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>4</span>, x <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x_stuff</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $n
-#&gt; [1] 4
-#&gt; 
-#&gt; $x
-#&gt; [1] 1 2 3 4
-#&gt; </div><div class='input'><span class='fu'>lst</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>x_stuff</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $n
-#&gt; [1] 2
-#&gt; 
-#&gt; $x
-#&gt; [1] 1 2
-#&gt; </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># the value of n can be used immediately in the definition of x</span></span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span>, x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.8056800 0.8140513 0.4039110 0.2184310 0.4183614</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># missing names are constructed from user's input</span></span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, z <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`1:3`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "d" "e" "f"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`runif(3)`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.6688707 0.5076503 0.6603593</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $a</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "d" "e" "f"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># pre-formed quoted expressions can be used with lst() and then</span></span>
+<span class='r-in'><span class='co'># unquoted (with !!) or unquoted and spliced (with !!!)</span></span>
+<span class='r-in'><span class='va'>n1</span> <span class='op'>&lt;-</span> <span class='fl'>2</span></span>
+<span class='r-in'><span class='va'>n2</span> <span class='op'>&lt;-</span> <span class='fl'>3</span></span>
+<span class='r-in'><span class='va'>n_stuff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='va'>n1</span> <span class='op'>+</span> <span class='va'>n2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x_stuff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='va'>n_stuff</span>, x <span class='op'>=</span> <span class='va'>x_stuff</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 3 4 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>n_stuff</span>, x <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x_stuff</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 3 4 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>4</span>, x <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>x_stuff</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 3 4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>lst</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>x_stuff</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
