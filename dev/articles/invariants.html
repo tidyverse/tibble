@@ -164,10 +164,10 @@
 }
 </style>
 <p>This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames. The goal is to define a small set of invariants that consistently define how behaviors interact. Some behaviors are defined using functions of the vctrs package, e.g. <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vec_slice()</a></code>, <code><a href="https://vctrs.r-lib.org/reference/vec_recycle.html" class="external-link">vec_recycle()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index()</a></code>. Refer to their documentation for more details about the invariants that they follow.</p>
-<p>The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing. We resolve this by first defining column access with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>, then column-wise subsetting with <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code>, then row-wise subsetting, then the composition of both.</p>
+<p>The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing. We resolve this by first defining column access with <code>[[</code> and <code>$</code>, then column-wise subsetting with <code>[</code>, then row-wise subsetting, then the composition of both.</p>
 <div id="conventions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#conventions" class="anchor"></a>Conventions</h2>
+<a href="#conventions" class="anchor" aria-hidden="true"></a>Conventions</h2>
 <p>In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
@@ -281,12 +281,12 @@
 </div>
 <div id="column-extraction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#column-extraction" class="anchor"></a>Column extraction</h2>
+<a href="#column-extraction" class="anchor" aria-hidden="true"></a>Column extraction</h2>
 <div id="definition-of-xj" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xj" class="anchor"></a>Definition of <code>x[[j]]</code>
+<a href="#definition-of-xj" class="anchor" aria-hidden="true"></a>Definition of <code>x[[j]]</code>
 </h3>
-<p><code>x[[j]]</code> is equal to <code><a href="https://rdrr.io/r/base/base-internal.html" class="external-link">.subset2(x, j)</a></code>.</p>
+<p><code>x[[j]]</code> is equal to <code>.subset2(x, j)</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -307,8 +307,8 @@
 </td>
 </tr>
 </tbody></table>
-<p>NB: <code>x[[j]]</code> always returns an object of size <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> if the column exists.</p>
-<p><code>j</code> must be a single number or a string, as enforced by <code><a href="https://rdrr.io/r/base/base-internal.html" class="external-link">.subset2(x, j)</a></code>.</p>
+<p>NB: <code>x[[j]]</code> always returns an object of size <code>nrow(x)</code> if the column exists.</p>
+<p><code>j</code> must be a single number or a string, as enforced by <code>.subset2(x, j)</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -516,7 +516,7 @@
 </td>
 </tr>
 </tbody></table>
-<p>Character OOB access is silent because a common package idiom is to check for the absence of a column with <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null(df[[var]])</a></code>.</p>
+<p>Character OOB access is silent because a common package idiom is to check for the absence of a column with <code>is.null(df[[var]])</code>.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -529,7 +529,7 @@
 </div>
 <div id="definition-of-xname" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xname" class="anchor"></a>Definition of <code>x$name</code>
+<a href="#definition-of-xname" class="anchor" aria-hidden="true"></a>Definition of <code>x$name</code>
 </h3>
 <p><code>x$name</code> and <code>x$"name"</code> are equal to <code>x[["name"]]</code>.</p>
 <table class="table dftbl"><tbody>
@@ -610,12 +610,12 @@
 </div>
 <div id="column-subsetting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#column-subsetting" class="anchor"></a>Column subsetting</h2>
+<a href="#column-subsetting" class="anchor" aria-hidden="true"></a>Column subsetting</h2>
 <div id="definition-of-xj-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xj-1" class="anchor"></a>Definition of <code>x[j]</code>
+<a href="#definition-of-xj-1" class="anchor" aria-hidden="true"></a>Definition of <code>x[j]</code>
 </h3>
-<p><code>j</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index(j, ncol(x), names = names(x))</a></code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code><a href="../reference/tibble.html">tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</a></code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol(x)</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><code>j</code> is converted to an integer vector by <code>vec_as_index(j, ncol(x), names = names(x))</code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code>tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code>ncol(x)</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -655,7 +655,7 @@
 </td>
 </tr></tbody></table>
 <p>For tibbles with repeated column names, subsetting by name uses the first matching column.</p>
-<p><code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(df[j])</a></code> equals <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(df)</a></code>.</p>
+<p><code>nrow(df[j])</code> equals <code>nrow(df)</code>.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -730,7 +730,7 @@
 </div>
 <div id="definition-of-x-j" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-x-j" class="anchor"></a>Definition of <code>x[, j]</code>
+<a href="#definition-of-x-j" class="anchor" aria-hidden="true"></a>Definition of <code>x[, j]</code>
 </h3>
 <p><code>x[, j]</code> is equal to <code>x[j]</code>. Tibbles do not perform column extraction if <code>x[j]</code> would yield a single column.</p>
 <table class="table dftbl"><tbody>
@@ -771,9 +771,9 @@
 </div>
 <div id="definition-of-x-j-drop-true" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-x-j-drop-true" class="anchor"></a>Definition of <code>x[, j, drop = TRUE]</code>
+<a href="#definition-of-x-j-drop-true" class="anchor" aria-hidden="true"></a>Definition of <code>x[, j, drop = TRUE]</code>
 </h3>
-<p>For backward compatiblity, <code>x[, j, drop = TRUE]</code> performs column <strong>extraction</strong>, returning <code>x[j][[1]]</code> when <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol(x[j])</a></code> is 1.</p>
+<p>For backward compatiblity, <code>x[, j, drop = TRUE]</code> performs column <strong>extraction</strong>, returning <code>x[j][[1]]</code> when <code>ncol(x[j])</code> is 1.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -787,12 +787,12 @@
 </div>
 <div id="row-subsetting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#row-subsetting" class="anchor"></a>Row subsetting</h2>
+<a href="#row-subsetting" class="anchor" aria-hidden="true"></a>Row subsetting</h2>
 <div id="definition-of-xi" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi" class="anchor"></a>Definition of <code>x[i, ]</code>
+<a href="#definition-of-xi" class="anchor" aria-hidden="true"></a>Definition of <code>x[i, ]</code>
 </h3>
-<p><code>x[i, ]</code> is equal to <code><a href="../reference/tibble.html">tibble(vec_slice(x[[1]], i), vec_slice(x[[2]], i), ...)</a></code>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p><code>x[i, ]</code> is equal to <code>tibble(vec_slice(x[[1]], i), vec_slice(x[[2]], i), ...)</code>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -805,7 +805,7 @@
 <span class="co">#&gt; 1     3 g     &lt;int [3]&gt;</span></code></pre></div>
 </td>
 </tr></tbody></table>
-<p>This means that <code>i</code> must be a numeric vector, or a logical vector of length <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> or 1. For compatibility, <code>i</code> can also be a character vector containing positive numbers.</p>
+<p>This means that <code>i</code> must be a numeric vector, or a logical vector of length <code>nrow(x)</code> or 1. For compatibility, <code>i</code> can also be a character vector containing positive numbers.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -968,7 +968,7 @@
 </div>
 <div id="definition-of-xi-drop-true" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi-drop-true" class="anchor"></a>Definition of <code>x[i, , drop = TRUE]</code>
+<a href="#definition-of-xi-drop-true" class="anchor" aria-hidden="true"></a>Definition of <code>x[i, , drop = TRUE]</code>
 </h3>
 <p><code>drop = TRUE</code> has no effect when not selecting a single row:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
@@ -999,42 +999,42 @@
 </div>
 <div id="row-and-column-subsetting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#row-and-column-subsetting" class="anchor"></a>Row and column subsetting</h2>
+<a href="#row-and-column-subsetting" class="anchor" aria-hidden="true"></a>Row and column subsetting</h2>
 <div id="definition-of-x-and-x" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-x-and-x" class="anchor"></a>Definition of <code>x[]</code> and <code>x[,]</code>
+<a href="#definition-of-x-and-x" class="anchor" aria-hidden="true"></a>Definition of <code>x[]</code> and <code>x[,]</code>
 </h3>
 <p><code>x[]</code> and <code>x[,]</code> are equivalent to <code>x</code>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 </div>
 <div id="definition-of-xi-j" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi-j" class="anchor"></a>Definition of <code>x[i, j]</code>
+<a href="#definition-of-xi-j" class="anchor" aria-hidden="true"></a>Definition of <code>x[i, j]</code>
 </h3>
 <p><code>x[i, j]</code> is equal to <code>x[i, ][j]</code>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 </div>
 <div id="definition-of-xi-j-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi-j-1" class="anchor"></a>Definition of <code>x[[i, j]]</code>
+<a href="#definition-of-xi-j-1" class="anchor" aria-hidden="true"></a>Definition of <code>x[[i, j]]</code>
 </h3>
-<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vctrs::vec_slice(x[[j]], i)</a></code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]]</code> is equal to <code>x[i, ][[j]]</code>, or <code>vctrs::vec_slice(x[[j]], i)</code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="va">df</span><span class="op">[[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; [1] 9</span></code></pre></div>
 <p>This implies that <code>j</code> must be a numeric or character vector of length 1.</p>
-<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vec_size(x[[i, j]])</a></code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
+<p>NB: <code>vec_size(x[[i, j]])</code> always equals 1. Unlike <code>x[i, ]</code>, <code>x[[i, ]]</code> is not valid.</p>
 </div>
 </div>
 <div id="column-update" class="section level2">
 <h2 class="hasAnchor">
-<a href="#column-update" class="anchor"></a>Column update</h2>
+<a href="#column-update" class="anchor" aria-hidden="true"></a>Column update</h2>
 <div id="definition-of-xj---a" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xj---a" class="anchor"></a>Definition of <code>x[[j]] &lt;- a</code>
+<a href="#definition-of-xj---a" class="anchor" aria-hidden="true"></a>Definition of <code>x[[j]] &lt;- a</code>
 </h3>
 <p>If <code>a</code> is a vector then <code>x[[j]] &lt;- a</code> replaces the <code>j</code>th column with value <code>a</code>.</p>
-<p><code>a</code> is recycled to the same size as <code>x</code> so must have size <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow(x)</a></code> or 1. (The only exception is when <code>a</code> is <code>NULL</code>, as described below.) Recycling also works for list, data frame, and matrix columns.</p>
+<p><code>a</code> is recycled to the same size as <code>x</code> so must have size <code>nrow(x)</code> or 1. (The only exception is when <code>a</code> is <code>NULL</code>, as described below.) Recycling also works for list, data frame, and matrix columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1170,7 +1170,7 @@
 </div>
 <div id="definition-of-xname---a" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xname---a" class="anchor"></a>Definition of <code>x$name &lt;- a</code>
+<a href="#definition-of-xname---a" class="anchor" aria-hidden="true"></a>Definition of <code>x$name &lt;- a</code>
 </h3>
 <p><code>x$name &lt;- a</code> and <code>x$"name" &lt;- a</code> are equivalent to <code>x[["name"]] &lt;- a</code>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <table class="table dftbl"><tbody>
@@ -1242,17 +1242,17 @@
 </div>
 <div id="column-subassignment-xj---a" class="section level2">
 <h2 class="hasAnchor">
-<a href="#column-subassignment-xj---a" class="anchor"></a>Column subassignment: <code>x[j] &lt;- a</code>
+<a href="#column-subassignment-xj---a" class="anchor" aria-hidden="true"></a>Column subassignment: <code>x[j] &lt;- a</code>
 </h2>
 <ul>
-<li>If <code>j</code> is missing, it’s replaced with <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along(x)</a></code>
+<li>If <code>j</code> is missing, it’s replaced with <code>seq_along(x)</code>
 </li>
 <li>If <code>j</code> is logical vector, it’s converted to numeric with <code>seq_along(x)[j]</code>.</li>
 </ul>
 <div id="a-is-a-list-or-data-frame" class="section level3">
 <h3 class="hasAnchor">
-<a href="#a-is-a-list-or-data-frame" class="anchor"></a><code>a</code> is a list or data frame</h3>
-<p>If <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "list")</a></code> or <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "data.frame")</a></code> is <code>TRUE</code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[[j[[1]]] &lt;- a[[1]]</code>, <code>x[[j[[2]]]] &lt;- a[[2]]</code>, …</p>
+<a href="#a-is-a-list-or-data-frame" class="anchor" aria-hidden="true"></a><code>a</code> is a list or data frame</h3>
+<p>If <code>inherits(a, "list")</code> or <code>inherits(a, "data.frame")</code> is <code>TRUE</code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[[j[[1]]] &lt;- a[[1]]</code>, <code>x[[j[[2]]]] &lt;- a[[2]]</code>, …</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1285,7 +1285,7 @@
 </td>
 </tr>
 </tbody></table>
-<p>If <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length(a)</a></code> equals 1, then it is recycled to the same length as <code>j</code>.</p>
+<p>If <code>length(a)</code> equals 1, then it is recycled to the same length as <code>j</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1308,7 +1308,8 @@
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 1:2, value = list(0, 0, 0)): provided 3
+#&gt; 1:2,
+#&gt; value = list(0, 0, 0)): provided 3
 #&gt; variables to replace 2 variables</code></pre>
 </div>
 <pre><code>#&gt;   n c         li
@@ -1529,8 +1530,8 @@
 </div>
 <div id="a-is-a-matrix-or-array" class="section level3">
 <h3 class="hasAnchor">
-<a href="#a-is-a-matrix-or-array" class="anchor"></a><code>a</code> is a matrix or array</h3>
-<p>If <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">is.matrix(a)</a></code>, then <code>a</code> is coerced to a data frame with <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> before assigning. If rows are assigned, the matrix type must be compatible with all columns. If <code><a href="https://rdrr.io/r/base/array.html" class="external-link">is.array(a)</a></code> and <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any(dim(a)[-1:-2] != 1)</a></code>, an error is thrown.</p>
+<a href="#a-is-a-matrix-or-array" class="anchor" aria-hidden="true"></a><code>a</code> is a matrix or array</h3>
+<p>If <code>is.matrix(a)</code>, then <code>a</code> is coerced to a data frame with <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> before assigning. If rows are assigned, the matrix type must be compatible with all columns. If <code>is.array(a)</code> and <code>any(dim(a)[-1:-2] != 1)</code>, an error is thrown.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1644,8 +1645,8 @@
 </div>
 <div id="a-is-another-type-of-vector" class="section level3">
 <h3 class="hasAnchor">
-<a href="#a-is-another-type-of-vector" class="anchor"></a><code>a</code> is another type of vector</h3>
-<p>If <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html" class="external-link">vec_is(a)</a></code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
+<a href="#a-is-another-type-of-vector" class="anchor" aria-hidden="true"></a><code>a</code> is another type of vector</h3>
+<p>If <code>vec_is(a)</code>, then <code>x[j] &lt;- a</code> is equivalent to <code>x[j] &lt;- list(a)</code>. This is primarily provided for backward compatbility.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1720,7 +1721,7 @@
 </div>
 <div id="a-is-null" class="section level3">
 <h3 class="hasAnchor">
-<a href="#a-is-null" class="anchor"></a><code>a</code> is <code>NULL</code>
+<a href="#a-is-null" class="anchor" aria-hidden="true"></a><code>a</code> is <code>NULL</code>
 </h3>
 <p>Entire columns can be removed. Specifying <code>i</code> is an error.</p>
 <table class="table dftbl"><tbody>
@@ -1776,8 +1777,8 @@
 </div>
 <div id="a-is-not-a-vector" class="section level3">
 <h3 class="hasAnchor">
-<a href="#a-is-not-a-vector" class="anchor"></a><code>a</code> is not a vector</h3>
-<p>Any other type for <code>a</code> is an error. Note that if <code><a href="https://rdrr.io/r/base/list.html" class="external-link">is.list(a)</a></code> is <code>TRUE</code>, but <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits(a, "list")</a></code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html" class="external-link">?vec_is</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">?vec_proxy</a></code> for details.</p>
+<a href="#a-is-not-a-vector" class="anchor" aria-hidden="true"></a><code>a</code> is not a vector</h3>
+<p>Any other type for <code>a</code> is an error. Note that if <code>is.list(a)</code> is <code>TRUE</code>, but <code>inherits(a, "list")</code> is <code>FALSE</code>, then <code>a</code> is considered to be a scalar. See <code><a href="https://vctrs.r-lib.org/reference/vec_assert.html" class="external-link">?vec_is</a></code> and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">?vec_proxy</a></code> for details.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1803,29 +1804,29 @@
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 1, value = structure(list(coefficients
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, 1,
+#&gt; value = structure(list(coefficients
 #&gt; = c(`(Intercept)` = 37.285126167342, :
 #&gt; replacement element 2 has 32 rows to
 #&gt; replace 4 rows</code></pre>
 </div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 1, value = structure(list(coefficients
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, 1,
+#&gt; value = structure(list(coefficients
 #&gt; = c(`(Intercept)` = 37.285126167342, :
 #&gt; replacement element 3 has 32 rows to
 #&gt; replace 4 rows</code></pre>
 </div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 1, value = structure(list(coefficients
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, 1,
+#&gt; value = structure(list(coefficients
 #&gt; = c(`(Intercept)` = 37.285126167342, :
 #&gt; replacement element 5 has 32 rows to
 #&gt; replace 4 rows</code></pre>
 </div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 1, value = structure(list(coefficients
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, 1,
+#&gt; value = structure(list(coefficients
 #&gt; = c(`(Intercept)` = 37.285126167342, :
 #&gt; replacement element 7 has 5 rows to
 #&gt; replace 4 rows</code></pre>
@@ -1854,7 +1855,7 @@
 </div>
 <div id="row-subassignment-xi---list---" class="section level2">
 <h2 class="hasAnchor">
-<a href="#row-subassignment-xi---list---" class="anchor"></a>Row subassignment: <code>x[i, ] &lt;- list(...)</code>
+<a href="#row-subassignment-xi---list---" class="anchor" aria-hidden="true"></a>Row subassignment: <code>x[i, ] &lt;- list(...)</code>
 </h2>
 <p><code>x[i, ] &lt;- a</code> is the same as <code>vec_slice(x[[j_1]], i) &lt;- a[[1]]</code>, <code>vec_slice(x[[j_2]], i) &lt;- a[[2]]</code>, … .<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 <table class="table dftbl"><tbody>
@@ -2087,10 +2088,10 @@
 </div>
 <div id="row-and-column-subassignment" class="section level2">
 <h2 class="hasAnchor">
-<a href="#row-and-column-subassignment" class="anchor"></a>Row and column subassignment</h2>
+<a href="#row-and-column-subassignment" class="anchor" aria-hidden="true"></a>Row and column subassignment</h2>
 <div id="definition-of-xi-j---a" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi-j---a" class="anchor"></a>Definition of <code>x[i, j] &lt;- a</code>
+<a href="#definition-of-xi-j---a" class="anchor" aria-hidden="true"></a>Definition of <code>x[i, j] &lt;- a</code>
 </h3>
 <p><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, ][j] &lt;- a</code>.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <p>Subassignment to <code>x[i, j]</code> is stricter for tibbles than for data frames. <code>x[i, j] &lt;- a</code> can’t change the data type of existing columns.</p>
@@ -2123,9 +2124,9 @@
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 2:3, 2, value = list(9, 10:11)):
-#&gt; provided 2 variables to replace 1
-#&gt; variables</code></pre>
+#&gt; 2:3,
+#&gt; 2, value = list(9, 10:11)): provided 2
+#&gt; variables to replace 1 variables</code></pre>
 </div>
 <pre><code>#&gt;    n c         li
 #&gt; 1  1 e          9
@@ -2150,9 +2151,10 @@
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 2:3, 3, value = structure(list(n =
-#&gt; c(1L, : provided 3 variables to replace
-#&gt; 1 variables</code></pre>
+#&gt; 2:3,
+#&gt; 3, value = structure(list(n = c(1L, :
+#&gt; provided 3 variables to replace 1
+#&gt; variables</code></pre>
 </div>
 <pre><code>#&gt;    n c   li
 #&gt; 1  1 e    9
@@ -2332,21 +2334,21 @@
 </div>
 <div id="definition-of-xi-j---a-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#definition-of-xi-j---a-1" class="anchor"></a>Definition of <code>x[[i, j]] &lt;- a</code>
+<a href="#definition-of-xi-j---a-1" class="anchor" aria-hidden="true"></a>Definition of <code>x[[i, j]] &lt;- a</code>
 </h3>
 <p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]] &lt;- a</code> is equivalent to <code>x[i, ][[j]] &lt;- a</code>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
-<p>NB: <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vec_size(a)</a></code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
+<p>NB: <code>vec_size(a)</code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
 <li id="fn1"><p><code>x[j][[jj]]</code> is equal to <code>x[[ j[[jj]] ]]</code>, in particular <code>x[j][[1]]</code> is equal to <code>x[[j]]</code> for scalar numeric or integer <code>j</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code><a href="https://vctrs.r-lib.org/reference/vec_as_index.html" class="external-link">vec_as_index(i, nrow(x))</a></code> first.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Row subsetting <code>x[i, ]</code> is not defined in terms of <code>x[[j]][i]</code> because that definition does not generalise to matrix and data frame columns. For efficiency and backward compatibility, <code>i</code> is converted to an integer vector by <code>vec_as_index(i, nrow(x))</code> first.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p><code>x[,]</code> is equivalent to <code>x[]</code> because <code>x[, j]</code> is equivalent to <code>x[j]</code>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>A more efficient implementation of <code>x[i, j]</code> would forward to <code>x[j][i, ]</code>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>Cell subsetting <code>x[[i, j]]</code> is not defined in terms of <code>x[[j]][[i]]</code> because that definition does not generalise to list, matrix and data frame columns. A more efficient implementation of <code>x[[i, j]]</code> would check that <code>j</code> is a scalar and forward to <code>x[i, j][[1]]</code>.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p><code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> behaves almost completely symmetrically to <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code> when comparing subsetting and subassignment.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><code>$</code> behaves almost completely symmetrically to <code>[[</code> when comparing subsetting and subassignment.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p><code>x[i, ]</code> is symmetrically for subset and subassignment.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p><code>x[i, j]</code> is symmetrically for subsetting and subassignment. A more efficient implementation of <code>x[i, j] &lt;- a</code> would forward to <code>x[j][i, ] &lt;- a</code>.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p><code>x[[i, j]]</code> is symmetrically for subsetting and subassignment. An efficient implementation would check that <code>i</code> and <code>j</code> are scalar and forward to <code>x[i, j][[1]] &lt;- a</code>.<a href="#fnref9" class="footnote-back">↩︎</a></p></li>

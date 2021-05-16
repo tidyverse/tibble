@@ -231,7 +231,7 @@ that is more expressive and robust.</p>
 
 
 <p>Objects of class <code>tbl_df</code> have:</p><ul>
-<li><p>A <code>class</code> attribute of <code><a href='https://rdrr.io/r/base/c.html'>c("tbl_df", "tbl", "data.frame")</a></code>.</p></li>
+<li><p>A <code>class</code> attribute of <code>c("tbl_df", "tbl", "data.frame")</code>.</p></li>
 <li><p>A base type of <code>"list"</code>, where each element of the list has the same
 <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code>.</p></li>
 <li><p>A <code>names</code> attribute that is a character vector the same length as the
@@ -261,7 +261,7 @@ must indicate how to resolve. Read more in <code><a href='https://vctrs.r-lib.or
 that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></li>
 <li><p><code>df[, j]</code> returns a tibble; it does not automatically extract the column
 inside. <code>df[, j, drop = FALSE]</code> is the default. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
-<li><p>There is no partial matching when <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> is used to index by name. <code>df$name</code>
+<li><p>There is no partial matching when <code>$</code> is used to index by name. <code>df$name</code>
 for a nonexistent name generates a warning. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
 <li><p>Printing and inspection are a very high priority. The goal is to convey as
 much information as possible, in a concise way, even for large and complex

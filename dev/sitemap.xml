@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tibble.tidyverse.org/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/SUPPORT.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/extending.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/formats.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/invariants.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/tibble.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/types.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/wip/subassign.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/wip/subset.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://tibble.tidyverse.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/add_column.html</loc>
@@ -23,6 +68,9 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/frame_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/reference/index.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/is.tibble.html</loc>
@@ -71,26 +119,5 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/view.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/extending.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/formats.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/invariants.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/tibble.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/types.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/wip/subassign.html</loc>
-  </url>
-  <url>
-    <loc>https://tibble.tidyverse.org/articles/wip/subset.html</loc>
   </url>
 </urlset>

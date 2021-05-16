@@ -233,7 +233,7 @@ If the input is a list, all elements must have length one.</p>
 <p><code>as_tibble_col()</code> converts a vector to a tibble with one column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_tibble</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>as_tibble</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>...</span>,
   .rows <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -277,7 +277,7 @@ If the input is a list, all elements must have length one.</p>
   .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='va'>x</span>, column_name <span class='op'>=</span> <span class='st'>"value"</span><span class='op'>)</span></pre>
+<span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='va'>x</span>, column_name <span class='op'>=</span> <span class='st'>"value"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -346,7 +346,7 @@ Read more in <a href='rownames.html'>rownames</a>.</p></li>
 <p>New code should explicitly convert row names to a new column using the
 <code>rownames</code> argument.</p>
 <p>For existing code that relies on the retention of row names, call
-<code><a href='https://rdrr.io/pkg/pkgconfig/man/set_config.html'>pkgconfig::set_config("tibble::rownames" = NA)</a></code> in your script or in your
+<code>pkgconfig::set_config("tibble::rownames" = NA)</code> in your script or in your
 package's <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onLoad()</a></code>  function.</p>
     <h2 class="hasAnchor" id="life-cycle"><a class="anchor" href="#life-cycle"></a>Life cycle</h2>
 
@@ -362,41 +362,47 @@ converts a named vector to a tibble with a column of names and column of
 values. Name repair is implemented using <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>vctrs::vec_as_names()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>50</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span><span class='op'>)</span>
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-
-<span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
-#&gt;       a     b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2</div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
-#&gt;   c     d        
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> three </span><span style='color: #949494;'>&lt;int [2]&gt;</span><span></div><div class='input'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>New names:</span>
-#&gt; <span class='message'>* `` -&gt; ...1</span>
-#&gt; <span class='message'>* `` -&gt; ...2</span>
-#&gt; <span class='message'>* `` -&gt; ...3</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 3</span><span>
-#&gt;    ...1  ...2  ...3
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2     3</div><div class='input'>
-<span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 1</span><span>
-#&gt;   value
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3</div><div class='input'><span class='fu'>as_tibble_col</span><span class='op'>(</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
-  column_name <span class='op'>=</span> <span class='st'>"data"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 1</span><span>
-#&gt;   data        
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>  </div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>50</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a     b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>     1     2</span></span>
+<span class='r-in'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   c     d        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> three </span><span style='color: #949494;'>&lt;int [2]&gt;</span></span>
+<span class='r-in'><span class='fu'>as_tibble_row</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, .name_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> New names:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `` -&gt; ...1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `` -&gt; ...2</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `` -&gt; ...3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ...1  ...2  ...3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>     1     2     3</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>as_tibble_col</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 x 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>     1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span>     2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span>     3</span></span>
+<span class='r-in'><span class='fu'>as_tibble_col</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>c <span class='op'>=</span> <span class='st'>"three"</span>, d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>  column_name <span class='op'>=</span> <span class='st'>"data"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 2 x 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   data        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>   </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>  </span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
