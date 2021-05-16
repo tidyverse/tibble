@@ -5,11 +5,6 @@
 - Bump required versions of ellipsis and vctrs to avoid warning during package load.
 
 
-# tibble 3.1.1.9000
-
-- Same as previous version.
-
-
 # tibble 3.1.1
 
 - `num()` and `char()` are reexported from pillar (#880).
