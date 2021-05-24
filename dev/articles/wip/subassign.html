@@ -1877,10 +1877,10 @@
 <div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, 2,
-#&gt; ,
-#&gt; value = structure(list(a = 1, : provided
-#&gt; 4 variables to replace 3 variables</code></pre>
+<pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
+#&gt; 2, , value = structure(list(a = 1, :
+#&gt; provided 4 variables to replace 3
+#&gt; variables</code></pre>
 </div>
 <pre><code>#&gt;   a b         cd
 #&gt; 1 1 e          9
@@ -2076,9 +2076,9 @@
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 2:3, ,
-#&gt; value = structure(list(a = 1, : provided
-#&gt; 4 variables to replace 3 variables</code></pre>
+#&gt; 2:3, , value = structure(list(a =
+#&gt; 1, : provided 4 variables to replace 3
+#&gt; variables</code></pre>
 </div>
 <pre><code>#&gt;   a b   cd
 #&gt; 1 1 e    9
@@ -2116,22 +2116,19 @@
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 0:1, ,
-#&gt; value = structure(list(a = 1:2, :
+#&gt; 0:1, , value = structure(list(a = 1:2, :
 #&gt; replacement element 1 has 2 rows to
 #&gt; replace 1 rows</code></pre>
 </div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 0:1, ,
-#&gt; value = structure(list(a = 1:2, :
+#&gt; 0:1, , value = structure(list(a = 1:2, :
 #&gt; replacement element 2 has 2 rows to
 #&gt; replace 1 rows</code></pre>
 </div>
 <div class="warning">
 <pre><code>#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,
-#&gt; 0:1, ,
-#&gt; value = structure(list(a = 1:2, :
+#&gt; 0:1, , value = structure(list(a = 1:2, :
 #&gt; replacement element 3 has 2 rows to
 #&gt; replace 1 rows</code></pre>
 </div>

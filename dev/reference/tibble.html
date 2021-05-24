@@ -348,10 +348,10 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># tibble() never coerces its inputs,</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble[,1] [26 × 1] (S3: tbl_df/tbl/data.frame)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble [26 × 1] (S3: tbl_df/tbl/data.frame)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  $ letters: chr [1:26] "a" "b" "c" "d" ...</span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble[,1] [2 × 1] (S3: tbl_df/tbl/data.frame)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble [2 × 1] (S3: tbl_df/tbl/data.frame)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  $ x:List of 2</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ : num [1, 1] 1</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ : num [1:2, 1:2] 1 0 0 1</span>
