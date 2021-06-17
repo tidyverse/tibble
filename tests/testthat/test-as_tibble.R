@@ -204,12 +204,14 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  expect_identical(
-    expect_warning(as_tibble(diag(3), validate = TRUE)),
-    tibble(
-      V1 = c(1, 0, 0),
-      V2 = c(0, 1, 0),
-      V3 = c(0, 0, 1)
+  expect_warning(
+    expect_identical(
+      as_tibble(diag(3), validate = TRUE),
+      tibble(
+        V1 = c(1, 0, 0),
+        V2 = c(0, 1, 0),
+        V3 = c(0, 0, 1)
+      )
     )
   )
 })
