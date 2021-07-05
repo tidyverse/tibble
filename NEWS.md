@@ -4,6 +4,8 @@
 
 - Bump required versions of ellipsis and vctrs to avoid warning during package load.
 
+- `new_tibble()` is now faster (#901, @mgirlich).
+
 
 # tibble 3.1.2
 
