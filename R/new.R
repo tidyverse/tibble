@@ -138,7 +138,7 @@ tibble_class <- c("tbl_df", "tbl", "data.frame")
 # Two dedicated functions for faster creation
 set_tibble_subclass <- function(x, nrow, subclass) {
   attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(setdiff(subclass, tibble_class), tibble_class)
+  class(x) <- c(class[!class %in% tibble_class], tibble_class)
   x
 }
 
