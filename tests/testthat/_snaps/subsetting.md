@@ -559,11 +559,14 @@
       # # [<-.tbl_df and overwriting NA
       df <- tibble(x = rep(NA, 3))
       df[1, "x"] <- 5
-    Error <tibble_error_assign_incompatible_type>
-      Assigned data `5` must be compatible with existing data.
-      i Error occurred for column `x`.
-      x Can't convert from <double> to <logical> due to loss of precision.
-      * Locations: 1.
+      df
+    Output
+      # A tibble: 3 x 1
+            x
+        <dbl>
+      1     5
+      2    NA
+      3    NA
     Code
       # # [<-.tbl_df and matrix subsetting
       foo <- tibble(a = 1:3, b = letters[1:3])

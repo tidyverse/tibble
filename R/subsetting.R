@@ -644,9 +644,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
 
   withCallingHandlers(
     for (j in seq_along(x)) {
-      xj <- x[[j]]
-      vec_slice(xj, i) <- value[[j]]
-      x[[j]] <- xj
+      x[[j]] <- vectbl_assign(x[[j]], i, value[[j]])
     },
 
     vctrs_error = function(cnd) {
@@ -659,6 +657,30 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
+}
+
+vectbl_assign <- function(x, i, value) {
+  if (!is.logical(value) && vec_size(i) == vec_size(value) && tibble_need_coerce(x)) {
+    # x is a vector full of logical NAs here!
+    x <- value[NA_integer_][x]
+  }
+
+  vec_slice(x, i) <- value
+  x
+}
+
+tibble_need_coerce <- function(x) {
+  if (!is.logical(x)) {
+    return(FALSE)
+  }
+
+  for (i in seq_along(x)) {
+    if (!is.na(x[[i]])) {
+      return(FALSE)
+    }
+  }
+
+  TRUE
 }
 
 vectbl_strip_names <- function(x) {

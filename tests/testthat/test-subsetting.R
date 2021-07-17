@@ -920,6 +920,7 @@ test_that("output test", {
     "# [<-.tbl_df and overwriting NA"
     df <- tibble(x = rep(NA, 3))
     df[1, "x"] <- 5
+    df
 
     "# [<-.tbl_df and matrix subsetting"
     foo <- tibble(a = 1:3, b = letters[1:3])
