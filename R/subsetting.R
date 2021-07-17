@@ -661,8 +661,7 @@ fast_nrow <- function(x) {
 
 vectbl_assign <- function(x, i, value) {
   if (!is.logical(value) && vec_size(i) == vec_size(value) && .Call("tibble_need_coerce", x)) {
-    # x is a vector full of logical NAs here!
-    x <- value[x]
+    x <- vec_slice(value, rep(NA_integer_, length(x)))
   }
 
   vec_slice(x, i) <- value
