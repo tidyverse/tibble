@@ -660,27 +660,13 @@ fast_nrow <- function(x) {
 }
 
 vectbl_assign <- function(x, i, value) {
-  if (!is.logical(value) && vec_size(i) == vec_size(value) && tibble_need_coerce(x)) {
+  if (!is.logical(value) && vec_size(i) == vec_size(value) && .Call("tibble_need_coerce", x)) {
     # x is a vector full of logical NAs here!
     x <- value[NA_integer_][x]
   }
 
   vec_slice(x, i) <- value
   x
-}
-
-tibble_need_coerce <- function(x) {
-  if (!is.logical(x)) {
-    return(FALSE)
-  }
-
-  for (i in seq_along(x)) {
-    if (!is.na(x[[i]])) {
-      return(FALSE)
-    }
-  }
-
-  TRUE
 }
 
 vectbl_strip_names <- function(x) {
