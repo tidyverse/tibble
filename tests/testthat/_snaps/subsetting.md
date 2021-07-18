@@ -568,6 +568,54 @@
       2    NA
       3    NA
     Code
+      # # [<-.tbl_df and overwriting with NA
+      df <- tibble(a = TRUE, b = 1L, c = sqrt(2), d = 0+3i + 1, e = "e", f = raw(1),
+      g = tibble(x = 1, y = 1), h = matrix(1:3, nrow = 1))
+      df[FALSE, "a"] <- NA
+      df[FALSE, "b"] <- NA
+      df[FALSE, "c"] <- NA
+      df[FALSE, "d"] <- NA
+      df[FALSE, "e"] <- NA
+      df[FALSE, "f"] <- NA
+      df[FALSE, "g"] <- NA
+      df[FALSE, "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 TRUE      1  1.41 1+3i  e     00        1     1     1     2     3
+    Code
+      df[integer(), "a"] <- NA
+      df[integer(), "b"] <- NA
+      df[integer(), "c"] <- NA
+      df[integer(), "d"] <- NA
+      df[integer(), "e"] <- NA
+      df[integer(), "f"] <- NA
+      df[integer(), "g"] <- NA
+      df[integer(), "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 TRUE      1  1.41 1+3i  e     00        1     1     1     2     3
+    Code
+      df[1, "a"] <- NA
+      df[1, "b"] <- NA
+      df[1, "c"] <- NA
+      df[1, "d"] <- NA
+      df[1, "e"] <- NA
+      df[1, "f"] <- NA
+      df[1, "g"] <- NA
+      df[1, "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 NA       NA    NA NA    <NA>  00       NA    NA    NA    NA    NA
+    Code
       # # [<-.tbl_df and matrix subsetting
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"

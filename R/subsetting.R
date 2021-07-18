@@ -660,8 +660,15 @@ fast_nrow <- function(x) {
 }
 
 vectbl_assign <- function(x, i, value) {
-  if (!is.logical(value) && .Call("tibble_need_coerce", x)) {
-    x <- vec_slice(value, rep(NA_integer_, length(x)))
+  if (is.logical(value)) {
+    if (.Call("tibble_need_coerce", value)) {
+      vec_slice(x, i) <- vec_slice(x, NA_integer_)
+      return(x)
+    }
+  } else {
+    if (.Call("tibble_need_coerce", x)) {
+      x <- vec_slice(value, rep(NA_integer_, length(x)))
+    }
   }
 
   vec_slice(x, i) <- value
