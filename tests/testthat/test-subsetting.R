@@ -481,6 +481,12 @@ test_that("[[<-.tbl_df requires scalar, positive if numeric", {
   expect_error(df[[-1]] <- 1, class = "vctrs_error_subscript_type")
 })
 
+test_that("[[<-.tbl_df supports symbols (#691)", {
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[[quote(x)]] <- 10:1
+  expect_identical(foo$x, 10:1)
+})
+
 # [<- ---------------------------------------------------------------------
 
 test_that("[<-.tbl_df can remove columns", {
