@@ -670,7 +670,7 @@ vectbl_assign <- function(x, i, value) {
     }
   }
 
-  vec_slice(x, i) <- value
+  x <- vec_assign(x, i, value)
   x
 }
 
