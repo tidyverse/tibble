@@ -168,8 +168,10 @@ NULL
   }
 
   # Side effect: check scalar
-  if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
-    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  if (!is.symbol(j)) {
+    if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
+      vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+    }
   }
 
   j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
