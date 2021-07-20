@@ -557,16 +557,18 @@
       `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # [<-.tbl_df and overwriting NA
-      df <- tibble(x = rep(NA, 3))
+      df <- tibble(x = rep(NA, 3), z = matrix(NA, ncol = 2, dimnames = list(NULL, c(
+        "a", "b"))))
       df[1, "x"] <- 5
+      df[1, "z"] <- 5
       df
     Output
-      # A tibble: 3 x 1
-            x
-        <dbl>
-      1     5
-      2    NA
-      3    NA
+      # A tibble: 3 x 2
+            x z[,"a"] [,"b"]
+        <dbl>   <dbl>  <dbl>
+      1     5       5      5
+      2    NA      NA     NA
+      3    NA      NA     NA
     Code
       # # [<-.tbl_df and overwriting with NA
       df <- tibble(a = TRUE, b = 1L, c = sqrt(2), d = 0+3i + 1, e = "e", f = raw(1),

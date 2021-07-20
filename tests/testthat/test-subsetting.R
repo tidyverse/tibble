@@ -924,8 +924,9 @@ test_that("output test", {
     df[1:3, 1:3] <- NULL
 
     "# [<-.tbl_df and overwriting NA"
-    df <- tibble(x = rep(NA, 3))
+    df <- tibble(x = rep(NA, 3), z = matrix(NA, ncol = 2, dimnames = list(NULL, c("a", "b"))))
     df[1, "x"] <- 5
+    df[1, "z"] <- 5
     df
 
     "# [<-.tbl_df and overwriting with NA"

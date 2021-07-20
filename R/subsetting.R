@@ -668,7 +668,11 @@ vectbl_assign <- function(x, i, value) {
     }
   } else {
     if (.Call("tibble_need_coerce", x)) {
+      d <- dim(x)
+      dn <- dimnames(x)
       x <- vec_slice(value, rep(NA_integer_, length(x)))
+      dim(x) <- d
+      dimnames(x) <- dn
     }
   }
 
