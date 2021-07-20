@@ -60,10 +60,10 @@ test_that("can't use value = NULL", {
   )
 })
 
-test_that("can't pass objects with dimensions", {
+test_that("can't pass non-vector", {
   expect_tibble_error(
-    enframe(iris),
-    error_enframe_has_dim(iris)
+    enframe(lm(speed ~ ., cars)),
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
   )
 })
 
@@ -106,6 +106,7 @@ test_that("output test", {
   expect_snapshot_with_error({
     enframe(1:3, value = NULL)
 
-    enframe(Titanic)
+    nrow(enframe(Titanic))
+    enframe(Titanic)$value
   })
 })

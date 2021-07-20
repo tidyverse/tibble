@@ -40,8 +40,7 @@ test_that("output test", {
 
     "#enframe"
     error_enframe_value_null()
-
-    error_enframe_has_dim(Titanic)
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
 
     "# names"
     error_column_names_cannot_be_empty(1, repair_hint = TRUE)
