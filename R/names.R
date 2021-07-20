@@ -1,3 +1,11 @@
+vectbl_names2 <- function(x,
+                          .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                          quiet = FALSE) {
+
+  name <- vec_names2(x, repair = "minimal", quiet = quiet)
+  repaired_names(name, repair_hint = TRUE, .name_repair = .name_repair, quiet = quiet)
+}
+
 set_repaired_names <- function(x,
                                repair_hint,
                                .name_repair = c("check_unique", "unique", "universal", "minimal"),

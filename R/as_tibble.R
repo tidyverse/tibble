@@ -286,7 +286,7 @@ as_tibble_row <- function(x,
     cnd_signal(error_as_tibble_row_vector(x))
   }
 
-  names <- vec_names2(x, repair = .name_repair)
+  names <- vectbl_names2(x, .name_repair = .name_repair)
   x <- vec_set_names(x, NULL)
   slices <- lapply(seq_len(vec_size(x)), vec_slice, x = x)
   names(slices) <- names
