@@ -287,9 +287,14 @@ as_tibble_row <- function(x,
   }
 
   names <- vectbl_names2(x, .name_repair = .name_repair)
-  x <- vec_set_names(x, NULL)
-  slices <- lapply(seq_len(vec_size(x)), vec_slice, x = x)
-  names(slices) <- names
+
+  if (is_bare_list(x)) {
+    slices <- x
+  } else {
+    x <- vec_set_names(x, NULL)
+    slices <- lapply(seq_len(vec_size(x)), vec_slice, x = x)
+    names(slices) <- names
+  }
 
   check_all_lengths_one(slices)
 
