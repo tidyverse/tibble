@@ -1,4 +1,4 @@
-# A tibble: 3 x 9
+# A tibble: 3 × 9
 <body created by pillar>
 # … with 2 more rows, and 5
 #   more variables

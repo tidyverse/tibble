@@ -10,6 +10,7 @@
 \alias{char}
 \alias{\%>\%}
 \alias{tbl_sum}
+\alias{dim_desc}
 \alias{obj_sum}
 \alias{type_sum}
 \alias{size_sum}
@@ -22,7 +23,7 @@ below to see their documentation.
 \describe{
   \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 
-  \item{pillar}{\code{\link[pillar]{char}}, \code{\link[pillar]{glimpse}}, \code{\link[pillar]{num}}, \code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar:type_sum]{size_sum}}, \code{\link[pillar]{tbl_sum}}, \code{\link[pillar]{type_sum}}}
+  \item{pillar}{\code{\link[pillar]{char}}, \code{\link[pillar]{dim_desc}}, \code{\link[pillar]{glimpse}}, \code{\link[pillar]{num}}, \code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar:type_sum]{size_sum}}, \code{\link[pillar]{tbl_sum}}, \code{\link[pillar]{type_sum}}}
 
   \item{rlang}{\code{\link[rlang]{has_name}}}
 }}
