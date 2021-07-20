@@ -161,7 +161,7 @@
 
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://renkun-ken.github.io/formattable/reference/digits.html" class="external-link">digits</a></span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="va">tbl</span>
-<span class="co">#&gt; # A tibble: 3 x 1</span>
+<span class="co">#&gt; # A tibble: 3 × 1</span>
 <span class="co">#&gt;   x         </span>
 <span class="co">#&gt;   &lt;formttbl&gt;</span>
 <span class="co">#&gt; 1 9.000     </span>
@@ -172,6 +172,9 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following object is masked from 'package:tibble':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     dim_desc</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     filter, lag</span>
@@ -191,7 +194,7 @@
   <span class="op">)</span>
 
 <span class="va">tbl2</span>
-<span class="co">#&gt; # A tibble: 3 x 8</span>
+<span class="co">#&gt; # A tibble: 3 × 8</span>
 <span class="co">#&gt;           x         y         z         v       lag       sin      mean   var</span>
 <span class="co">#&gt;   &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     9.000    10.000    81.000    91.000     9.000     0.412   111.667     1</span>
@@ -203,7 +206,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt; # A tibble: 2 × 2</span>
 <span class="co">#&gt;         lag         z</span>
 <span class="co">#&gt;   &lt;dbl:fmt&gt; &lt;dbl:fmt&gt;</span>
 <span class="co">#&gt; 1     9.000    90.500</span>
@@ -218,13 +221,13 @@
 
 <span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span><span class="va">id</span>, names_from <span class="op">=</span> <span class="va">year</span>, values_from <span class="op">=</span> <span class="va">stock</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 6</span>
+<span class="co">#&gt; # A tibble: 4 × 6</span>
 <span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span>
 <span class="co">#&gt;   &lt;fct&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt;</span>
-<span class="co">#&gt; 1 1       $170.12 $4,516.48 $6,656.47    $55.22 $8,467.67</span>
-<span class="co">#&gt; 2 2     $9,673.33 $4,312.09 $1,832.29 $7,045.49 $5,959.99</span>
-<span class="co">#&gt; 3 3     $1,495.85 $2,762.88 $5,888.29   $736.58 $3,284.19</span>
-<span class="co">#&gt; 4 4       $630.23 $4,826.82 $1,873.52 $2,106.05 $3,100.87</span></code></pre></div>
+<span class="co">#&gt; 1 1     $7,965.72 $7,886.87 $6,108.16 $2,049.35 $9,874.32</span>
+<span class="co">#&gt; 2 2     $7,807.20 $7,614.37 $4,130.80 $3,426.62   $161.25</span>
+<span class="co">#&gt; 3 3     $9,733.08 $4,132.49 $2,450.42 $3,493.13 $2,987.39</span>
+<span class="co">#&gt; 4 4     $4,177.34   $577.33 $7,820.13 $8,976.19 $3,716.10</span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
@@ -235,10 +238,10 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It pays off to specify formatting very early in the process. The diagram below shows the principal stages of data analysis and exploration from “R for data science”.</p>
-<div id="htmlwidget-958312b8dd6d882b316a" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-958312b8dd6d882b316a">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
-<div id="htmlwidget-193e8062e57dd29cbabb" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-193e8062e57dd29cbabb">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
+<div id="htmlwidget-bd05bbcf0f65446ecb60" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bd05bbcf0f65446ecb60">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
+<div id="htmlwidget-6d20968d28b1ade004c3" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6d20968d28b1ade004c3">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
 <ul>
 <li>give a good user experience for analysis
 <ul>
@@ -270,7 +273,7 @@
   <span class="op">)</span>
 
 <span class="va">tbl3</span>
-<span class="co">#&gt; # A tibble: 3 x 9</span>
+<span class="co">#&gt; # A tibble: 3 × 9</span>
 <span class="co">#&gt;   id        x     y     z     v   lag    sin  mean   var</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a         9    10    81    91     9  0.412  112.     1</span>
@@ -282,7 +285,7 @@
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">3</span><span class="op">)</span>,
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">1</span><span class="op">)</span>
   <span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 9</span>
+<span class="co">#&gt; # A tibble: 3 × 9</span>
 <span class="co">#&gt;   id            x        y        z        v      lag      sin     mean      var</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl:fmt&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt;</span>
 <span class="co">#&gt; 1 a         9.000   10.000     81.0     91.0    9.000    0.412    111.7    1.000</span>
@@ -297,7 +300,7 @@
 
 <span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rules</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 9</span>
+<span class="co">#&gt; # A tibble: 3 × 9</span>
 <span class="co">#&gt;   id            x        y        z        v      lag      sin     mean      var</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl:fmt&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt; &lt;dbl:fm&gt;</span>
 <span class="co">#&gt; 1 a         9.000   10.000     81.0     91.0    9.000    0.412    111.7    1.000</span>

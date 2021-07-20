@@ -161,7 +161,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">letters</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 26 x 1</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 26 × 1</span>
 <span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">x</span>    
 <span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span> a    
@@ -181,7 +181,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 2</span>
 <span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">x</span> <span style="font-weight: bold;">y</span>         
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;list&gt;</span>    
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span>     1 <span style="color: #555555;">&lt;int [5]&gt;</span> 
@@ -211,7 +211,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="va">x</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 5 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 5 × 2</span>
 <span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">x</span>     <span style="font-weight: bold;">y</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span>     1     1
@@ -242,7 +242,7 @@
 
 <span class="va">timing</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 2 x 14</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 2 × 14</span>
 <span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">expression</span>       <span style="font-weight: bold;">min</span>         <span style="font-weight: bold;">mean</span>         <span style="font-weight: bold;">median</span>      <span style="font-weight: bold;">max</span>         <span style="font-weight: bold;">`itr/sec`</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #555555; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> as_tibble(l)     0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.
@@ -264,7 +264,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1,006 x 1</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1,006 × 1</span>
 <span style="color: #555555;">#&gt;</span>        <span style="font-weight: bold;">x</span>
 <span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span>    -<span style="color: #BB0000;">5</span>
@@ -407,7 +407,7 @@
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 2</span>
 <span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span>     1     1
@@ -418,7 +418,7 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 2</span>
 <span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span>     1     1
@@ -439,14 +439,14 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 0 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 0 × 2</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555; font-weight: bold;">a</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">b</span><span style="color: #555555;"> &lt;int&gt;</span>
 </code></pre>
 </div>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 0 x 2</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 0 × 2</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 2 variables: </span><span style="color: #555555; font-weight: bold;">a</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555; font-weight: bold;">b</span><span style="color: #555555;"> &lt;dbl&gt;</span>
 </code></pre>
 </div>
