@@ -106,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.2.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.2.9001</span>
         </div>
       </div>
     </div>
@@ -193,6 +193,20 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3129001" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.2.9001">
+<a href="#tibble-3129001" class="anchor" aria-hidden="true"></a>tibble 3.1.2.9001<small> Unreleased </small></h1>
+<ul><li>Use <code><a href="https://pillar.r-lib.org/reference/dim_desc.html" class="external-link">pillar::dim_desc()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/859'>#859</a>).</li>
+<li>
+<code>[[&lt;-()</code> supports symbols (<a href='https://github.com/tidyverse/tibble/issues/893'>#893</a>).</li>
+<li>
+<code><a href="../reference/enframe.html">enframe()</a></code> and <code><a href="../reference/enframe.html">deframe()</a></code> support arbitrary vectors (<a href='https://github.com/tidyverse/tibble/issues/730'>#730</a>).</li>
+<li>
+<code><a href="../reference/tibble.html">tibble()</a></code> and <code><a href="../reference/tibble.html">tibble_row()</a></code> ignore all columns that evaluate to <code>NULL</code>, not only those where a verbatim <code>NULL</code> is passed (<a href='https://github.com/tidyverse/tibble/issues/895'>#895</a>, <a href='https://github.com/tidyverse/tibble/issues/900'>#900</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> is now faster (<a href='https://github.com/tidyverse/tibble/issues/901'>#901</a>, <a href='https://github.com/mgirlich'>@mgirlich</a>).</li>
+<li>Establish compatibility with testthat &gt; 3.0.3 (<a href='https://github.com/tidyverse/tibble/issues/896'>#896</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</li>
+</ul></div>
     <div id="tibble-3129000" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.2.9000">
 <a href="#tibble-3129000" class="anchor" aria-hidden="true"></a>tibble 3.1.2.9000<small> Unreleased </small></h1>
