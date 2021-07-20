@@ -1,4 +1,4 @@
-# A tibble: 150 x 5
+# A tibble: 150 × 5
 <body created by pillar>
 # … with 3 more variables:
 #   Petal.Length <dbl>,
