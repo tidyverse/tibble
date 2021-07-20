@@ -1,5 +1,15 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.2.9001
+
+- Use `pillar::dim_desc()` (#859).
+- `[[<-()` supports symbols (#893).
+- `enframe()` and `deframe()` support arbitrary vectors (#730).
+- `tibble()` and `tibble_row()` ignore all columns that evaluate to `NULL`, not only those where a verbatim `NULL` is passed (#895, #900).
+- `new_tibble()` is now faster (#901, @mgirlich).
+- Establish compatibility with testthat > 3.0.3 (#896, @lionel-).
+
+
 # tibble 3.1.2.9000
 
 - Bump required versions of ellipsis and vctrs to avoid warning during package load.
