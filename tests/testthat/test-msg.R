@@ -30,7 +30,7 @@ test_that("output test", {
     error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
     error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
-    error_as_tibble_row_bare(new_environment())
+    error_as_tibble_row_vector(new_environment())
     error_as_tibble_row_size_one(3, "foo", 7)
 
     "# class-tbl_df"

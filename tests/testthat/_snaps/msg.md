@@ -90,10 +90,10 @@
       x Column `C` is c.
       x ... and 23 more problems.
     Code
-      error_as_tibble_row_bare(new_environment())
+      error_as_tibble_row_vector(new_environment())
     Output
-      <error/tibble_error_as_tibble_row_bare>
-      `x` must be a bare vector in `as_tibble_row()`, not environment.
+      <error/tibble_error_as_tibble_row_vector>
+      `x` must be a vector in `as_tibble_row()`, not environment.
     Code
       error_as_tibble_row_size_one(3, "foo", 7)
     Output
