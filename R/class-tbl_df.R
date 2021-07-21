@@ -136,22 +136,15 @@ cnd_names_non_na <- function(name) {
 }
 
 #' @rawNamespace if (getRversion() >= "4.0.0") S3method(rbind, tbl_df)
-if (getRversion() >= "4.0.0") rbind.tbl_df <- function(..., deparse.level = NULL) {
-  if (!is.null(deparse.level)) {
-    deprecate_soft("3.1.3", "tibble::rbind(deparse.level =)",
-      details = "This argument is ignored with rbind() for tibbles.")
-  }
+if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
+  # deparse.level is part of the interface of the generic but not passed along
+  # for data frame methods
 
   vec_rbind(...)
 }
 
 #' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
-if (getRversion() >= "4.0.0") cbind.tbl_df <- function(..., deparse.level = NULL) {
-  if (!is.null(deparse.level)) {
-    deprecate_soft("3.1.3", "tibble::cbind(deparse.level =)",
-                   details = "This argument is ignored with cbind() for tibbles.")
-  }
-
+if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
   vec_cbind(...)
 }
 
