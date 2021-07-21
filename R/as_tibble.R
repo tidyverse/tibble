@@ -288,6 +288,7 @@ as_tibble_row <- function(x,
 
   names <- vectbl_names2(x, .name_repair = .name_repair)
 
+  # FIXME: Use vec_chop2() when https://github.com/r-lib/vctrs/pull/1226 is in
   if (is_bare_list(x)) {
     slices <- x
   } else {
