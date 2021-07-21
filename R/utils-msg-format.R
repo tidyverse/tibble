@@ -47,14 +47,14 @@ pluralise_n <- function(message, n) {
   message
 }
 
-bullets <- function(header, ...) {
-  # FIXME: Use * as bullet with rlang >= 0.4.12
+bullets <- function(header, ..., info = NULL) {
+  # FIXME: Convert info to i with rlang >= 0.4.12
   bullets <- vec_c(..., .name_spec = "{outer}")
-  bullets <- set_default_name(bullets, "i", reset_null = FALSE)
 
   paste0(
     ensure_full_stop(header), "\n",
-    format_error_bullets(ensure_full_stop(bullets))
+    format_error_bullets(ensure_full_stop(bullets)),
+    if (!is.null(info)) paste0("\n", format_error_bullets(c(i = info)))
   )
 }
 

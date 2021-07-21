@@ -8,8 +8,8 @@
       tribble(~a, ~b, 1)
     Error <tibble_error_tribble_non_rectangular>
       Data must be rectangular.
-      i Found 2 columns.
-      i Found 1 cells.
+      * Found 2 columns.
+      * Found 1 cells.
       i 1 is not an integer multiple of 2.
     Code
       tribble(a ~ b, 1)

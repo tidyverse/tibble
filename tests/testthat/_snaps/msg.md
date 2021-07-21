@@ -316,55 +316,55 @@
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 10: Requested with `uvw` argument.
-      i Size 3: Column `c`.
-      i Size 4: Columns `a` and `b`.
-      i Only values of size one are recycled.
+      * Size 10: Requested with `uvw` argument.
+      * Size 3: Column `c`.
+      * Size 4: Columns `a` and `b`.
+      i Only values of size one are recycled
     Code
       error_incompatible_size(10, letters[1:3], c(2, 2, 3),
       "Requested with `xyz` argument")
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 10: Requested with `xyz` argument.
-      i Size 2: Columns `a` and `b`.
-      i Size 3: Column `c`.
-      i Only values of size one are recycled.
+      * Size 10: Requested with `xyz` argument.
+      * Size 2: Columns `a` and `b`.
+      * Size 3: Column `c`.
+      i Only values of size one are recycled
     Code
       error_incompatible_size(NULL, letters[1:3], c(2, 2, 3),
       "Requested with `xyz` argument")
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 2: Columns `a` and `b`.
-      i Size 3: Column `c`.
-      i Only values of size one are recycled.
+      * Size 2: Columns `a` and `b`.
+      * Size 3: Column `c`.
+      i Only values of size one are recycled
     Code
       error_incompatible_size(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 10: Requested with `uvw` argument.
-      i Size 3: Column at position 3.
-      i Size 4: Columns at positions 1 and 2.
-      i Only values of size one are recycled.
+      * Size 10: Requested with `uvw` argument.
+      * Size 3: Column at position 3.
+      * Size 4: Columns at positions 1 and 2.
+      i Only values of size one are recycled
     Code
       error_incompatible_size(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 10: Requested with `xyz` argument.
-      i Size 2: Columns at positions 1 and 2.
-      i Size 3: Column at position 3.
-      i Only values of size one are recycled.
+      * Size 10: Requested with `xyz` argument.
+      * Size 2: Columns at positions 1 and 2.
+      * Size 3: Column at position 3.
+      i Only values of size one are recycled
     Code
       error_incompatible_size(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
     Output
       <error/tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      i Size 2: Columns at positions 1 and 2.
-      i Size 3: Column at position 3.
-      i Only values of size one are recycled.
+      * Size 2: Columns at positions 1 and 2.
+      * Size 3: Column at position 3.
+      i Only values of size one are recycled
     Code
       # # tribble
       error_tribble_needs_columns()
@@ -388,8 +388,8 @@
     Output
       <error/tibble_error_tribble_non_rectangular>
       Data must be rectangular.
-      i Found 5 columns.
-      i Found 17 cells.
+      * Found 5 columns.
+      * Found 17 cells.
       i 17 is not an integer multiple of 5.
     Code
       error_frame_matrix_list(2:4)
