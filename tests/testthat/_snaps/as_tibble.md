@@ -149,7 +149,7 @@
     Code
       as_tibble(set_names(list(1:26), paste0("..", 1:26)))
     Error <rlang_error>
-      `nm` must be `NULL` or a character vector the same length as `x`
+      The size of `nm` (26) must be compatible with the size of `x` (1).
     Code
       as_tibble(list(a = 1, a = 1))
     Error <tibble_error_column_names_must_be_unique>
@@ -193,7 +193,7 @@
     Code
       as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
     Error <rlang_error>
-      `nm` must be `NULL` or a character vector the same length as `x`
+      The size of `nm` (26) must be compatible with the size of `x` (1).
     Code
       as_tibble_row(list(a = 1, a = 1))
     Error <tibble_error_column_names_must_be_unique>
