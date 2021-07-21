@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.3
+
+- Same as previous version.
+
+
 # tibble 3.1.2.9002
 
 - Establish compatibility with rlang > 0.4.11 (#908).
