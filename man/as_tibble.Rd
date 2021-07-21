@@ -111,9 +111,7 @@ that implements tibble's treatment of \link{rownames}.
 }
 
 \code{as_tibble_row()} converts a vector to a tibble with one row.
-The input must be a bare vector, e.g. vectors of dates are not
-supported yet.
-If the input is a list, all elements must have length one.
+If the input is a list, all elements must have size one.
 
 \code{as_tibble_col()} converts a vector to a tibble with one column.
 }
