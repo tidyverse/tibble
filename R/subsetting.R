@@ -646,9 +646,7 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
 
   withCallingHandlers(
     for (j in seq_along(x)) {
-      xj <- x[[j]]
-      vec_slice(xj, i) <- value[[j]]
-      x[[j]] <- xj
+      x[[j]] <- vectbl_assign(x[[j]], i, value[[j]])
     },
 
     vctrs_error = function(cnd) {
@@ -661,6 +659,24 @@ tbl_subassign_row <- function(x, i, value, value_arg) {
 
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
+}
+
+vectbl_assign <- function(x, i, value) {
+  if (is.logical(value)) {
+    if (.Call("tibble_need_coerce", value)) {
+      value <- vec_slice(x, NA_integer_)
+    }
+  } else {
+    if (.Call("tibble_need_coerce", x)) {
+      d <- dim(x)
+      dn <- dimnames(x)
+      x <- vec_slice(value, rep(NA_integer_, length(x)))
+      dim(x) <- d
+      dimnames(x) <- dn
+    }
+  }
+
+  vec_assign(x, i, value)
 }
 
 vectbl_strip_names <- function(x) {

@@ -61,3 +61,19 @@ SEXP tibble_string_to_indices(SEXP x) {
   UNPROTECT(1);
   return out;
 }
+
+SEXP tibble_need_coerce(SEXP x) {
+  if (TYPEOF(x) != LGLSXP) {
+    return(Rf_ScalarLogical(0));
+  }
+
+  const R_xlen_t len = Rf_xlength(x);
+  const int* px = LOGICAL(x);
+  for (R_xlen_t i = 0; i < len; ++i) {
+    if (px[i] != NA_LOGICAL) {
+      return(Rf_ScalarLogical(0));
+    }
+  }
+
+  return(Rf_ScalarLogical(1));
+}
