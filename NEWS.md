@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.3.9000
+
+- Same as previous version.
+
+
 # tibble 3.1.3
 
 - Same as previous version.
