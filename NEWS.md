@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.2.9002
+
+- Establish compatibility with rlang > 0.4.11 (#908).
+- `as_tibble_row()` supports arbitrary vectors (#797).
+- `tbl[row, col] <- rhs` treats an all-`NA` logical vector as a missing value both for existing data (#773) and for the right-hand side value (#868). This means that a column initialized with `NA` (of type `logical`) will change its type when a row is updated to a value of a different type. 
+
+
 # tibble 3.1.2.9001
 
 - Use `pillar::dim_desc()` (#859).
