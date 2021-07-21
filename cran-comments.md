@@ -7,8 +7,8 @@ tibble 3.1.3
 ## R CMD check results
 
 - [x] Checked locally, R 4.1.0
-- [ ] Checked on CI system, R 4.1.0
-- [ ] Checked on win-builder, R devel
+- [x] Checked on CI system, R 4.1.0
+- [x] Checked on win-builder, R devel
 
 Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
 
