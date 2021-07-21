@@ -354,6 +354,6 @@ error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
     "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,
-    info = "Only values of size one are recycled"
+    info = "Only values of size one are recycled."
   ))
 }

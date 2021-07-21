@@ -319,7 +319,7 @@
       * Size 10: Requested with `uvw` argument.
       * Size 3: Column `c`.
       * Size 4: Columns `a` and `b`.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       error_incompatible_size(10, letters[1:3], c(2, 2, 3),
       "Requested with `xyz` argument")
@@ -329,7 +329,7 @@
       * Size 10: Requested with `xyz` argument.
       * Size 2: Columns `a` and `b`.
       * Size 3: Column `c`.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       error_incompatible_size(NULL, letters[1:3], c(2, 2, 3),
       "Requested with `xyz` argument")
@@ -338,7 +338,7 @@
       Tibble columns must have compatible sizes.
       * Size 2: Columns `a` and `b`.
       * Size 3: Column `c`.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       error_incompatible_size(10, 1:3, c(4, 4, 3), "Requested with `uvw` argument")
     Output
@@ -347,7 +347,7 @@
       * Size 10: Requested with `uvw` argument.
       * Size 3: Column at position 3.
       * Size 4: Columns at positions 1 and 2.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       error_incompatible_size(10, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
     Output
@@ -356,7 +356,7 @@
       * Size 10: Requested with `xyz` argument.
       * Size 2: Columns at positions 1 and 2.
       * Size 3: Column at position 3.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       error_incompatible_size(NULL, 1:3, c(2, 2, 3), "Requested with `xyz` argument")
     Output
@@ -364,7 +364,7 @@
       Tibble columns must have compatible sizes.
       * Size 2: Columns at positions 1 and 2.
       * Size 3: Column at position 3.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
     Code
       # # tribble
       error_tribble_needs_columns()

@@ -16,5 +16,5 @@
       Tibble columns must have compatible sizes.
       * Size 2: Existing data.
       * Size 3: Column `c`.
-      i Only values of size one are recycled
+      i Only values of size one are recycled.
 
