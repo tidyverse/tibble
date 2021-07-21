@@ -106,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.2.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.2.9002</span>
         </div>
       </div>
     </div>
@@ -193,6 +193,15 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3129002" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.2.9002">
+<a href="#tibble-3129002" class="anchor" aria-hidden="true"></a>tibble 3.1.2.9002<small> Unreleased </small></h1>
+<ul><li>Establish compatibility with rlang &gt; 0.4.11 (<a href='https://github.com/tidyverse/tibble/issues/908'>#908</a>).</li>
+<li>
+<code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> supports arbitrary vectors (<a href='https://github.com/tidyverse/tibble/issues/797'>#797</a>).</li>
+<li>
+<code>tbl[row, col] &lt;- rhs</code> treats an all-<code>NA</code> logical vector as a missing value both for existing data (<a href='https://github.com/tidyverse/tibble/issues/773'>#773</a>) and for the right-hand side value (<a href='https://github.com/tidyverse/tibble/issues/868'>#868</a>). This means that a column initialized with <code>NA</code> (of type <code>logical</code>) will change its type when a row is updated to a value of a different type.</li>
+</ul></div>
     <div id="tibble-3129001" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.2.9001">
 <a href="#tibble-3129001" class="anchor" aria-hidden="true"></a>tibble 3.1.2.9001<small> Unreleased </small></h1>
