@@ -48,10 +48,9 @@ pluralise_n <- function(message, n) {
 }
 
 bullets <- function(header, ...) {
+  # FIXME: Use * as bullet with rlang >= 0.4.12
   bullets <- vec_c(..., .name_spec = "{outer}")
-  if (packageVersion("rlang") >= "0.4.11.9001") {
-    bullets <- set_default_name(bullets, "*")
-  }
+  bullets <- set_default_name(bullets, "i", reset_null = FALSE)
 
   paste0(
     ensure_full_stop(header), "\n",
@@ -99,9 +98,11 @@ ensure_full_stop <- function(x) {
   set_names(gsub("(?::|([^.?]))$", "\\1.", x), names(x))
 }
 
-set_default_name <- function(x, name) {
+set_default_name <- function(x, name, reset_null = TRUE) {
   if (is.null(names(x))) {
-    names(x) <- rep_along(x, name)
+    if (reset_null) {
+      names(x) <- rep_along(x, name)
+    }
   } else {
     names(x)[names(x) == ""] <- name
   }

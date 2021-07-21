@@ -14,7 +14,7 @@
       tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
     Error <tibble_error_incompatible_size>
       Tibble columns must have compatible sizes.
-      * Size 2: Existing data.
-      * Size 3: Column `c`.
+      i Size 2: Existing data.
+      i Size 3: Column `c`.
       i Only values of size one are recycled.
 
