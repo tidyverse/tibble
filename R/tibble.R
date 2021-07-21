@@ -325,7 +325,7 @@ error_tibble_row_size_one <- function(j, name, size) {
     desc <- paste0("at position ", j)
   }
 
-  tibble_error(bullets(
+  tibble_error(problems(
     "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
@@ -350,9 +350,7 @@ error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
     paste0("Size ", x, ": ", pluralise_commas(text, y))
   })
 
-  problems <- set_default_name(problems, "")
-
-  tibble_error(problems(
+  tibble_error(bullets(
     "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,

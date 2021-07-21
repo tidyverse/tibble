@@ -32,38 +32,38 @@
       writeLines(bullets("header", c("item 1", "item 2")))
     Output
       header.
-      x item 1.
-      x item 2.
+      * item 1.
+      * item 2.
     Code
       writeLines(bullets("header", LETTERS))
     Output
       header.
-      x A.
-      x B.
-      x C.
-      x D.
-      x E.
-      x F.
-      x G.
-      x H.
-      x I.
-      x J.
-      x K.
-      x L.
-      x M.
-      x N.
-      x O.
-      x P.
-      x Q.
-      x R.
-      x S.
-      x T.
-      x U.
-      x V.
-      x W.
-      x X.
-      x Y.
-      x Z.
+      * A.
+      * B.
+      * C.
+      * D.
+      * E.
+      * F.
+      * G.
+      * H.
+      * I.
+      * J.
+      * K.
+      * L.
+      * M.
+      * N.
+      * O.
+      * P.
+      * Q.
+      * R.
+      * S.
+      * T.
+      * U.
+      * V.
+      * W.
+      * X.
+      * Y.
+      * Z.
     Code
       writeLines(bullets("header", 1:6))
     Output

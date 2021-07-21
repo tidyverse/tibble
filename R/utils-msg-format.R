@@ -49,7 +49,9 @@ pluralise_n <- function(message, n) {
 
 bullets <- function(header, ...) {
   bullets <- vec_c(..., .name_spec = "{outer}")
-  bullets <- set_default_name(bullets, "x")
+  if (packageVersion("rlang") >= "0.4.11.9001") {
+    bullets <- set_default_name(bullets, "*")
+  }
 
   paste0(
     ensure_full_stop(header), "\n",
@@ -59,6 +61,7 @@ bullets <- function(header, ...) {
 
 problems <- function(header, ..., .problem = " problem(s)") {
   problems <- vec_c(..., .name_spec = "{outer}")
+  problems <- set_default_name(problems, "x")
   MAX_BULLETS <- 6L
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
@@ -93,12 +96,14 @@ commas <- function(problems) {
 }
 
 ensure_full_stop <- function(x) {
-  gsub("(?::|([^.?]))$", "\\1.", x)
+  set_names(gsub("(?::|([^.?]))$", "\\1.", x), names(x))
 }
 
 set_default_name <- function(x, name) {
   if (is.null(names(x))) {
     names(x) <- rep_along(x, name)
+  } else {
+    names(x)[names(x) == ""] <- name
   }
 
   x
