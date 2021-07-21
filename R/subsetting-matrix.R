@@ -28,9 +28,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
 
   withCallingHandlers(
     for (j in col_idx) {
-      xj <- x[[j]]
-      vec_slice(xj, cells[[j]]) <- value
-      x[[j]] <- xj
+      x[[j]] <- vectbl_assign(x[[j]], cells[[j]], value)
     },
 
     vctrs_error_incompatible_type = function(cnd) {
