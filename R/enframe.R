@@ -33,7 +33,7 @@ enframe <- function(x, name = "name", value = "value") {
   }
 
   if (is.null(name)) {
-    df <- list(vec_set_names(x, NULL))
+    df <- list(vectbl_set_names(x))
   } else if (is.null(vec_names(x))) {
     df <- list(seq_len(vec_size(x)), x)
   } else {
