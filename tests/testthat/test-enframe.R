@@ -121,6 +121,7 @@ test_that("output test", {
     enframe(1:3, value = NULL)
 
     nrow(enframe(Titanic))
+    vec_names(enframe(Titanic)$value)
     enframe(Titanic)$value
   })
 })
