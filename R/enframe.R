@@ -34,14 +34,23 @@ enframe <- function(x, name = "name", value = "value") {
 
   if (is.null(name)) {
     df <- list(vec_set_names(x, NULL))
-  } else if (is.null(names(x))) {
+  } else if (is.null(vec_names(x))) {
     df <- list(seq_len(vec_size(x)), x)
   } else {
-    df <- list(vec_names2(x), vec_set_names(x, NULL))
+    df <- list(vec_names2(x), vectbl_set_names(x))
   }
 
   names(df) <- c(name, value)
   new_tibble(df, nrow = vec_size(x))
+}
+
+vectbl_set_names <- function(x, names = NULL) {
+  # Work around https://github.com/r-lib/vctrs/issues/1419
+  if (inherits(x, "vctrs_rcrd")) {
+    # A rcrd can't have names?
+    return(x)
+  }
+  vec_set_names(x, names)
 }
 
 #' @rdname enframe
@@ -63,7 +72,7 @@ deframe <- function(x) {
 
   value <- x[[2L]]
   name <- x[[1L]]
-  vec_set_names(value, as.character(name))
+  vectbl_set_names(value, as.character(name))
 }
 
 error_enframe_value_null <- function() {

@@ -102,6 +102,20 @@ test_that("can deframe three-column data frame with warning", {
   )
 })
 
+
+# roundtrip----------------------------------------------------------------
+
+test_that("can roundtrip record", {
+  rcrd <- new_rcrd(data.frame(a = 1:3))
+  expect_identical(deframe(enframe(rcrd)), rcrd)
+  rcrd_named <- new_rcrd(data.frame(a = 1:3, row.names = letters[1:3]))
+  expect_identical(deframe(enframe(rcrd_named)), rcrd_named)
+})
+
+
+# output ------------------------------------------------------------------
+
+
 test_that("output test", {
   expect_snapshot_with_error({
     enframe(1:3, value = NULL)
