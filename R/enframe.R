@@ -6,7 +6,7 @@
 #' For a list, the result will be a nested tibble with a column of type `list`.
 #' For unnamed vectors, the natural sequence is used as name column.
 #'
-#' @param x An atomic vector (for `enframe()`) or a data frame with one or two columns
+#' @param x A vector (for `enframe()`) or a data frame with one or two columns
 #'   (for `deframe()`).
 #' @param name,value Names of the columns that store the names and values.
 #'   If `name` is `NULL`, a one-column tibble is returned; `value` cannot be `NULL`.

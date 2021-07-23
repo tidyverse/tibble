@@ -10,7 +10,7 @@ enframe(x, name = "name", value = "value")
 deframe(x)
 }
 \arguments{
-\item{x}{An atomic vector (for \code{enframe()}) or a data frame with one or two columns
+\item{x}{A vector (for \code{enframe()}) or a data frame with one or two columns
 (for \code{deframe()}).}
 
 \item{name, value}{Names of the columns that store the names and values.
