@@ -11,7 +11,7 @@
 #' @param name,value Names of the columns that store the names and values.
 #'   If `name` is `NULL`, a one-column tibble is returned; `value` cannot be `NULL`.
 #'
-#' @return A [tibble] with two columns (if `name` is not `NULL`, the default)
+#' @return Fpr `enframe()`, a [tibble] with two columns (if `name` is not `NULL`, the default)
 #'   or one column (otherwise).
 #' @export
 #'
@@ -59,6 +59,7 @@ vectbl_set_names <- function(x, names = NULL) {
 #' `deframe()` converts two-column data frames to a named vector or list,
 #' using the first column as name and the second column as value.
 #' If the input has only one column, an unnamed vector is returned.
+#' @return For `deframe()`, a vector (named or unnamed).
 #' @export
 #' @examples
 #' deframe(enframe(3:1))

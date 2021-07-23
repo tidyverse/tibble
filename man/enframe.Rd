@@ -17,8 +17,10 @@ deframe(x)
 If \code{name} is \code{NULL}, a one-column tibble is returned; \code{value} cannot be \code{NULL}.}
 }
 \value{
-A \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
+Fpr \code{enframe()}, a \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
 or one column (otherwise).
+
+For \code{deframe()}, a vector (named or unnamed).
 }
 \description{
 \code{enframe()} converts named atomic vectors or lists to one- or two-column
