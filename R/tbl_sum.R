@@ -8,7 +8,6 @@ tbl_sum.tbl_df <- function(x) {
 }
 
 #' @importFrom pillar dim_desc
-#' @export
 pillar::dim_desc
 
 #' @importFrom pillar obj_sum

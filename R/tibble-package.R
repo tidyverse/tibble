@@ -8,7 +8,8 @@
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_assign
 #' @importFrom vctrs vec_cbind
 #' @importFrom vctrs unspecified vec_as_subscript2 num_as_location vec_ptype_abbr
-#' @importFrom vctrs vec_names2 vec_set_names
+#' @importFrom vctrs vec_names vec_names2 vec_set_names
+#' @importFrom vctrs new_rcrd
 #' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`

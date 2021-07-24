@@ -10,15 +10,17 @@ enframe(x, name = "name", value = "value")
 deframe(x)
 }
 \arguments{
-\item{x}{An atomic vector (for \code{enframe()}) or a data frame with one or two columns
+\item{x}{A vector (for \code{enframe()}) or a data frame with one or two columns
 (for \code{deframe()}).}
 
 \item{name, value}{Names of the columns that store the names and values.
 If \code{name} is \code{NULL}, a one-column tibble is returned; \code{value} cannot be \code{NULL}.}
 }
 \value{
-A \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
+Fpr \code{enframe()}, a \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
 or one column (otherwise).
+
+For \code{deframe()}, a vector (named or unnamed).
 }
 \description{
 \code{enframe()} converts named atomic vectors or lists to one- or two-column
