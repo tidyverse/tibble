@@ -49,11 +49,6 @@ test_that("trunc_mat output matches known output", {
   )
 
   expect_output_file_rel(
-    print_without_body(as_tibble(iris), n = 3L, width = 5L),
-    "trunc_mat/iris-3-5.txt"
-  )
-
-  expect_output_file_rel(
     print_without_body(as_tibble(iris), n = NULL, width = 70L),
     "trunc_mat/iris--70.txt"
   )
