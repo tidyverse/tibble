@@ -140,12 +140,12 @@ if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
   # deparse.level is part of the interface of the generic but not passed along
   # for data frame methods
 
-  vec_rbind(...)
+  vec_rbind(!!!list(...))
 }
 
 #' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
 if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
-  vec_cbind(...)
+  vec_cbind(!!!list(...))
 }
 
 # Errors ------------------------------------------------------------------

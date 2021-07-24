@@ -53,6 +53,10 @@ test_that("rbind()", {
   expect_equal(rbind(tibble(a = 1)), tibble(a = 1))
   expect_equal(rbind(tibble(a = 1), data.frame(a = 2)), tibble(a = 1:2))
   expect_equal(rbind(tibble(a = 1), data.frame(b = 2)), tibble(a = c(1, NA), b = c(NA, 2)))
+  expect_equal(
+    rbind(tibble(a = 1), .name_repair = "universal"),
+    tibble(a = c(1, NA), ...1 = c(NA, "universal"))
+  )
   expect_equal(rbind(data.frame(a = 1), tibble(a = 2)), data.frame(a = 1:2))
 })
 
@@ -61,6 +65,10 @@ test_that("cbind()", {
   expect_equal(cbind(tibble(a = 1)), tibble(a = 1))
   expect_equal(cbind(tibble(a = 1), data.frame(b = 2)), tibble(a = 1, b = 2))
   expect_equal(cbind(tibble(a = 1), data.frame(b = 2:3)), tibble(a = c(1, 1), b = 2:3))
+  expect_equal(
+    cbind(tibble(a = 1), .name_repair = "universal"),
+    tibble(a = 1, .name_repair := "universal")
+  )
   expect_equal(cbind(data.frame(a = 1), tibble(b = 2)), data.frame(a = 1, b = 2))
 })
 
