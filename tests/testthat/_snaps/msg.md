@@ -187,11 +187,6 @@
       <error/tibble_error_new_tibble_must_be_list>
       `x` must be a list.
     Code
-      error_new_tibble_needs_nrow()
-    Output
-      <error/tibble_error_new_tibble_needs_nrow>
-      `x` must be a scalar integer.
-    Code
       # # rownames
       error_already_has_rownames()
     Output
