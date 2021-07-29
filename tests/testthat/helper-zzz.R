@@ -105,6 +105,11 @@ skip_enh_enframe_vector <- function() {
   skip_legacy()
 }
 
+skip_enh_print_tbl_args <- function() {
+  # ENH: print() and format() support more arguments
+  skip_legacy()
+}
+
 skip_int_error_unknown_names <- function() {
   # INT: error_unknown_names() no longer implemented
   skip_legacy()
