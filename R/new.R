@@ -60,7 +60,9 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (!is_integerish(nrow, 1)) {
+  if (is_integerish(nrow, 1)) {
+    nrow <- as.integer(nrow)
+  } else {
     cnd_signal(error_new_tibble_needs_nrow())
   }
 
@@ -87,14 +89,25 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   #' but the names are not checked for correctness.
   if (length(x) == 0) {
     # Leaving this because creating a named list of length zero seems difficult
-    names(x) <- character()
-  } else if (is.null(names(x))) {
+    args[["names"]] <- character()
+  } else if (is.null(args[["names"]])) {
     cnd_signal(error_names_must_be_non_null())
   }
 
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(class[!class %in% tibble_class], tibble_class)
-  x
+  if (is.null(class)) {
+    class <- tibble_class_no_data_frame
+  } else {
+    class <- c(class[!class %in% tibble_class], tibble_class_no_data_frame)
+  }
+
+  slots <- c("x", "n", "class")
+  args[slots] <- list(x, nrow, class)
+
+  # `new_data_frame()` restores compact row names
+  args[["row.names"]] <- NULL
+
+  # do.call() is faster than exec() in this case
+  do.call(new_data_frame, args)
 }
 
 #' @description
@@ -148,6 +161,7 @@ validate_nrow <- function(names, lengths, nrow) {
 }
 
 tibble_class <- c("tbl_df", "tbl", "data.frame")
+tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Errors ------------------------------------------------------------------
 
