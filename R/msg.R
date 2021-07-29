@@ -316,12 +316,14 @@ error_new_tibble_needs_class <- function() {
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_name_repair_errors <- function(expr, name) {
+subclass_name_repair_errors <- function(expr, name, details = NULL) {
   tryCatch(
     force(expr),
 
     vctrs_error_names_cannot_be_empty = function(cnd) {
       cnd <- error_column_must_be_named(cnd$locations, parent = cnd)
+      cnd$body <- details
+
       cnd_signal(cnd)
     },
     vctrs_error_names_cannot_be_dot_dot = function(cnd) {

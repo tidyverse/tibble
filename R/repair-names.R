@@ -6,9 +6,10 @@ set_repaired_names <- function(x,
 
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
-                           quiet = FALSE) {
+                           quiet = FALSE,
+                           details = NULL) {
 
-  subclass_name_repair_errors(name = name,
+  subclass_name_repair_errors(name = name, details = details,
     vec_as_names(name, repair = .name_repair, quiet = quiet)
   )
 
@@ -40,10 +41,10 @@ check_minimal_names <- function(x) {
   invisible(x)
 }
 
-#' Retired functions for name repair
+#' Superseded functions for name repair
 #'
 #' @description
-#' \lifecycle{soft-deprecated}
+#' \lifecycle{superseded}
 #'
 #' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
@@ -54,7 +55,9 @@ check_minimal_names <- function(x) {
 #' specific levels of name repair: `minimal`, `unique`, and `universal`.
 #' See [vctrs::vec_as_names()] for the implementation of the underlying logic.
 #'
-#' `repair_names()` should be considered retired, the underlying functionality
+#' @section Life cycle:
+#'
+#' These functions are superseded. The `repair_names()` logic
 #' will also remain available in [vctrs::vec_as_names_legacy()].
 #'
 #' ```
@@ -79,7 +82,8 @@ check_minimal_names <- function(x) {
 #' @return `x` with repaired names or a repaired version of `name`.
 #'
 #' @export
-#' @name name-repair-retired
+#' @name name-repair-superseded
+#' @aliases name-repair-retired
 #' @keywords internal
 tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   # Local functions to preserve behavior in v1.4.2
@@ -135,7 +139,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
 }
 
 #' @export
-#' @rdname name-repair-retired
+#' @rdname name-repair-superseded
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
   x <- set_repaired_names(x, "minimal", quiet = TRUE)
   new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
@@ -146,7 +150,7 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 #' @param sep A string inserted between the column name and de-duplicating
 #'   number.
 #' @export
-#' @rdname name-repair-retired
+#' @rdname name-repair-superseded
 repair_names <- function(x, prefix = "V", sep = "") {
   if (length(x) == 0) {
     names(x) <- character()

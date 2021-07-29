@@ -10,10 +10,10 @@
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
 #'
-#' @param x A tibble-like object
-#' @param ... Passed on to [structure()]
-#' @param nrow The number of rows, required
-#' @param class Subclasses to assign to the new object, default: none
+#' @param x A tibble-like object.
+#' @param ... Name-value pairs of additional attributes.
+#' @param nrow The number of rows, required.
+#' @param class Subclasses to assign to the new object, default: none.
 #' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
 #'
 #' @seealso

@@ -90,6 +90,11 @@ skip_int_error_unknown_names <- function() {
   skip_legacy()
 }
 
+skip_int_error_names_must_be_null <- function() {
+  # INT: error_names_must_be_null() no longer implemented
+  skip_legacy()
+}
+
 universal_names <- function(...) {
   # INT: universal_names() no longer implemented
   skip_legacy()

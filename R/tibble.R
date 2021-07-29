@@ -19,15 +19,14 @@
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
 #'     See examples.
 #'
-#' @param ... A set of name-value pairs. These arguments are
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   A set of name-value pairs. These arguments are
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
 #'
-#'   Arguments are evaluated sequentially.
-#'   You can refer to previously created elements directly or using the [.data]
-#'   pronoun.
-#'   An existing `.data` pronoun, provided e.g. inside [dplyr::mutate()],
-#'   is not available.
+#'   Arguments are evaluated sequentially, however the [.data] pronoun is not
+#'   available to prevent masking usage in a higher level function, like
+#'   [dplyr::mutate()].
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
@@ -208,7 +207,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   output <- rep_along(xs, list(NULL))
 
   env <- new_environment()
-  mask <- new_data_mask_with_data(env)
+  mask <- new_data_mask(env)
 
   first_size <- .rows
 
@@ -257,12 +256,6 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   output <- set_repaired_names(output, .name_repair = .name_repair)
 
   new_tibble(output, nrow = first_size %||% 0L)
-}
-
-new_data_mask_with_data <- function(env) {
-  mask <- new_data_mask(env)
-  mask$.data <- as_data_pronoun(env)
-  mask
 }
 
 add_to_env2 <- function(x, given_name, name = given_name, env) {

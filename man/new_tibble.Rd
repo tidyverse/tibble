@@ -10,13 +10,13 @@ new_tibble(x, ..., nrow, class = NULL, subclass = NULL)
 validate_tibble(x)
 }
 \arguments{
-\item{x}{A tibble-like object}
+\item{x}{A tibble-like object.}
 
-\item{...}{Passed on to \code{\link[=structure]{structure()}}}
+\item{...}{Name-value pairs of additional attributes.}
 
-\item{nrow}{The number of rows, required}
+\item{nrow}{The number of rows, required.}
 
-\item{class}{Subclasses to assign to the new object, default: none}
+\item{class}{Subclasses to assign to the new object, default: none.}
 
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }

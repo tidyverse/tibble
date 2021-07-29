@@ -7,15 +7,14 @@
 lst(...)
 }
 \arguments{
-\item{...}{A set of name-value pairs. These arguments are
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+A set of name-value pairs. These arguments are
 processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
-Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the \link{.data}
-pronoun.
-An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
-is not available.}
+Arguments are evaluated sequentially, however the \link{.data} pronoun is not
+available to prevent masking usage in a higher level function, like
+\code{\link[dplyr:mutate]{dplyr::mutate()}}.}
 }
 \value{
 A named list.

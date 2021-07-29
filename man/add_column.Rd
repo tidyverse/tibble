@@ -9,7 +9,8 @@ add_column(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
 one element for each row in the data frame, or be of length 1.
 These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
 unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in

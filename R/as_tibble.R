@@ -32,7 +32,7 @@
 #'
 #' @param x A data frame, list, matrix, or other object that could reasonably be
 #'   coerced to a tibble.
-#' @param ... Other arguments passed on to individual methods.
+#' @param ... Unused, for extensibility.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
 #'   * `NULL`: remove row names. This is the default.
@@ -238,15 +238,20 @@ as_tibble.ts <- function(x, ..., .name_repair = "minimal") {
 #' @export
 #' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
-as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`) {
+as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique") {
   if (!missing(`_n`)) {
     warn("Please pass `n` as a named argument to `as_tibble.table()`.")
   }
 
   df <- as.data.frame(x, stringsAsFactors = FALSE)
-  names(df) <- c(names2(dimnames(x)), n)
 
-  as_tibble(df, ...)
+  names(df) <- repaired_names(
+    c(names2(dimnames(x)), n), .name_repair = .name_repair,
+    details = "Use `names(dimnames(x)) <- ...` to assign names to a table."
+  )
+
+  # Names already repaired:
+  as_tibble(df, ..., .name_repair = "minimal")
 }
 
 #' @export
