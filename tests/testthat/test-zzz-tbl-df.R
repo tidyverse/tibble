@@ -422,6 +422,13 @@ test_that("new_tibble checks", {
     error_new_tibble_must_be_list(),
     fixed = TRUE
   )
+})
+
+test_that("new_tibble checks (2)", {
+  skip_enh_new_tibble_nrow_null()
+
+  scoped_lifecycle_errors()
+
   expect_legacy_error(
     new_tibble(list(a = 1)),
     class = get_defunct_error_class(),
@@ -433,6 +440,11 @@ test_that("new_tibble checks", {
     error_new_tibble_needs_nrow(),
     fixed = TRUE
   )
+})
+
+test_that("new_tibble checks (3)", {
+  scoped_lifecycle_errors()
+
   expect_legacy_error(
     new_tibble(list(1), nrow = 1),
     error_names_must_be_non_null(repair_hint = FALSE),
