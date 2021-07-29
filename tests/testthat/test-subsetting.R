@@ -1022,12 +1022,14 @@ test_that("output test", {
 })
 
 test_that("[[<- restores class", {
+  skip_if_not_installed("dplyr")
+
   df <- dplyr::group_by(mtcars, cyl)
   df[[1]] <- mtcars$cyl
-  expect_is(df, "grouped_df")
+  expect_s3_class(df, "grouped_df")
 
   df <- dplyr::group_by(mtcars, cyl)
   df[[2]] <- mtcars$vs
-  expect_is(df, "grouped_df")
+  expect_s3_class(df, "grouped_df")
   expect_identical(dplyr::group_data(df)$cyl, c(0, 1))
 })
