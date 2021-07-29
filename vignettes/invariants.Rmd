@@ -351,7 +351,8 @@ Unlike data frames, only logical vectors of length 1 are recycled.
 df[c(TRUE, FALSE), ]
 ```
 
-NB: scalar logicals are recycled, but scalar numerics are not. That makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
+NB: scalar logicals are recycled, but scalar numerics are not.
+That makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 
 ```{r bracket-i-na, dftbl = TRUE}
 df[NA, ]
@@ -586,7 +587,8 @@ with_df(df[1] <- 0)
 with_df(df[1] <- list(0))
 ```
 
-Matrices are vectors, so they are also wrapped in `list()` before assignment. This consistently creates matrix columns, unlike data frames, which creates matrix columns when assigning to one column, but treats the matrix like a data frame when assigning to more than one column.
+Matrices are vectors, so they are also wrapped in `list()` before assignment.
+This consistently creates matrix columns, unlike data frames, which creates matrix columns when assigning to one column, but treats the matrix like a data frame when assigning to more than one column.
 
 ```{r bracket-assign-matrix, dftbl = TRUE}
 with_df(df[1] <- matrix(1:8, ncol = 2))
