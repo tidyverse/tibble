@@ -1,8 +1,6 @@
 #' Row-wise tibble creation
 #'
 #' @description
-#' \lifecycle{maturing}
-#'
 #' Create [tibble]s using an easier to read row-by-row layout.
 #' This is useful for small tables of data where readability is
 #' important.  Please see \link{tibble-package} for a general introduction.
@@ -32,6 +30,17 @@
 #'   "a", 1:3,
 #'   "b", 4:6
 #' )
+#' @examplesIf rlang::is_installed("dplyr") && packageVersion("dplyr") >= "1.0.5"
+#'
+#' # Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
+#' tribble(
+#'   ~ a,          ~ b,          ~ c,
+#'     1, "2000-01-01",        "1.5"
+#' ) %>%
+#'   dplyr::mutate(
+#'     dplyr::across(a, as.integer),
+#'     dplyr::across(b, as.Date)
+#'   )
 tribble <- function(...) {
   data <- extract_frame_data_from_dots(...)
   turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
@@ -40,8 +49,6 @@ tribble <- function(...) {
 #' Row-wise matrix creation
 #'
 #' @description
-#' \lifecycle{maturing}
-#'
 #' Create matrices laying out the data in rows, similar to
 #' `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
 #' This is useful for small matrices, e.g. covariance matrices, where readability
@@ -76,9 +83,12 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    abort(error_tribble_needs_columns())
+    cnd_signal(error_tribble_needs_columns())
   }
   frame_rest <- dots[-seq_along(frame_names)]
+  if (!is.null(names(frame_rest))) {
+    cnd_signal(error_tribble_named_after_tilde())
+  }
   if (length(frame_rest) == 0L) {
     # Can't decide on type in absence of data -- use logical which is
     # coercible to all types
@@ -104,12 +114,12 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      abort(error_tribble_lhs_column_syntax(el[[2]]))
+      cnd_signal(error_tribble_lhs_column_syntax(el[[2]]))
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      abort(error_tribble_rhs_column_syntax(candidate))
+      cnd_signal(error_tribble_rhs_column_syntax(candidate))
     }
 
     frame_names <- c(frame_names, as.character(candidate))
@@ -125,7 +135,7 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    abort(error_tribble_non_rectangular(
+    cnd_signal(error_tribble_non_rectangular(
       length(frame_names),
       length(frame_rest)
     ))
@@ -138,6 +148,7 @@ turn_frame_data_into_tibble <- function(names, rest) {
   nrow <- length(rest) / length(names)
   dim(rest) <- c(length(names), nrow)
   dimnames(rest) <- list(names, NULL)
+
   frame_mat <- t(rest)
   frame_col <- turn_matrix_into_column_list(frame_mat)
 
@@ -152,10 +163,11 @@ turn_matrix_into_column_list <- function(frame_mat) {
   for (i in seq_len(ncol(frame_mat))) {
     col <- frame_mat[, i]
 
-    if (!some(col, needs_list_col) && inherits(col, "list")) {
-      # Assign names for somewhat nice error message, remove later
-      names(col) <- rep_along(col, names(frame_col)[[i]])
-      col <- unname(vec_c(!!! col))
+    if (inherits(col, "list") && !some(col, needs_list_col)) {
+      subclass_tribble_c_errors(
+        names(frame_col)[[i]],
+        col <- vec_c(!!! unname(col))
+      )
     }
 
     frame_col[[i]] <- unname(col)
@@ -166,7 +178,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
 turn_frame_data_into_frame_matrix <- function(names, rest) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
-    abort(error_frame_matrix_list(list_cols))
+    cnd_signal(error_frame_matrix_list(list_cols))
   }
 
   frame_ncol <- length(names)
@@ -174,4 +186,60 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
 
   colnames(frame_mat) <- names
   frame_mat
+}
+
+subclass_tribble_c_errors <- function(name, code) {
+  withCallingHandlers(
+    code,
+
+    vctrs_error = function(cnd) {
+      cnd_signal(error_tribble_c(name, cnd))
+    }
+  )
+}
+
+# Errors ------------------------------------------------------------------
+
+error_tribble_needs_columns <- function() {
+  tibble_error("Must specify at least one column using the `~name` syntax.")
+}
+
+error_tribble_named_after_tilde <- function() {
+  tibble_error("When using the `~name` syntax, subsequent values must not have names.")
+}
+
+error_tribble_lhs_column_syntax <- function(lhs) {
+  tibble_error(problems(
+    "All column specifications must use the `~name` syntax.",
+    paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
+  ))
+}
+
+error_tribble_rhs_column_syntax <- function(rhs) {
+  tibble_error(problems(
+    'All column specifications must use the `~name` or `~"name"` syntax.',
+    paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
+  ))
+}
+
+error_tribble_non_rectangular <- function(cols, cells) {
+  tibble_error(bullets(
+    "Data must be rectangular:",
+    paste0("Found ", cols, " columns."),
+    paste0("Found ", cells, " cells."),
+    info = paste0(cells, " is not an integer multiple of ", cols, ".")
+  ))
+}
+
+error_frame_matrix_list <- function(pos) {
+  tibble_error(problems(
+    "All values must be atomic:",
+    pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
+  ))
+}
+
+error_tribble_c <- function(name, cnd) {
+  cnd$message <- paste0("Can't create column ", tick(name), ": ", cnd_header(cnd))
+  cnd$class <- c(tibble_error_class("tribble_c"), class(cnd))
+  cnd
 }

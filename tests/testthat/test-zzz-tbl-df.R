@@ -1,5 +1,3 @@
-context("tbl_df")
-
 local_options(lifecycle_verbosity = "quiet")
 
 # [ -----------------------------------------------------------------------
@@ -7,8 +5,8 @@ local_options(lifecycle_verbosity = "quiet")
 test_that("[ never drops", {
   mtcars2 <- as_tibble(mtcars)
 
-  expect_is(mtcars2[, 1], "data.frame")
-  expect_is(mtcars2[, 1], "tbl_df")
+  expect_s3_class(mtcars2[, 1], "data.frame")
+  expect_s3_class(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
 })
 
@@ -32,7 +30,7 @@ test_that("[ and as_tibble commute", {
 
 test_that("[ with 0 cols creates correct row names (#656)", {
   zero_row <- as_tibble(iris)[, 0]
-  expect_is(zero_row, "tbl_df")
+  expect_s3_class(zero_row, "tbl_df")
   expect_equal(nrow(zero_row), 150)
   expect_equal(ncol(zero_row), 0)
 
@@ -437,7 +435,7 @@ test_that("new_tibble checks", {
   )
   expect_legacy_error(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null(repair = FALSE),
+    error_names_must_be_non_null(repair_hint = FALSE),
     fixed = TRUE
   )
   expect_error(

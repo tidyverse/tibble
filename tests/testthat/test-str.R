@@ -1,7 +1,7 @@
-test_that("str output matches known output", {
-  skip_on_non_utf8_locale()
+test_that("output test", {
+  skip_if_not_installed("pillar", "1.6.0.9001")
 
-  verify_output("str.txt", unicode = TRUE, {
+  expect_snapshot({
     str(as_tibble(mtcars), width = 70L)
 
     str(as_tibble(iris), width = 70L)
@@ -33,18 +33,13 @@ test_that("str output matches known output", {
     iris2 <- as_unknown_rows(iris)
     str(iris2, width = 70L)
 
-    nested_iris_df <- tibble(
-      Species = unique(iris$Species),
-      data = unname(split(iris, iris$Species))
-    )
-
-    nested_iris_tbl <- tibble(
-      Species = unique(iris$Species),
-      data = map(unname(split(iris, iris$Species)), as_tibble)
-    )
-
+    Species <- unique(iris$Species)
+    data <- unname(split(iris, iris$Species))
+    nested_iris_df <- tibble(Species, data)
     str(nested_iris_df, width = 70L)
 
+    data <- map(data, as_tibble)
+    nested_iris_tbl <- tibble(Species, data)
     str(nested_iris_tbl, width = 70L)
   })
 })

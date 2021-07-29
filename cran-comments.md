@@ -1,17 +1,17 @@
-Fix for regression with R-oldrel introduced in tibble 2.1.2.
+tibble 3.1.3
 
-## Test environments
+## Cran Repository Policy
 
-* local install, R 3.6.0
-* ubuntu 16.04 (on travis-ci), R 3.2, R 3.3, R 3.4, R-oldrel, R-release and R-devel
-* win-builder
-* r-hub
+- [x] Reviewed CRP last edited 2021-04-25.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+- [x] Checked locally, R 4.1.0
+- [x] Checked on CI system, R 4.1.0
+- [x] Checked on win-builder, R devel
 
+Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
 
-## Reverse dependencies
+## Current CRAN check results
 
-No behavior changes, no checks carried out.
+- [x] Checked on 2021-07-21, no problems found.

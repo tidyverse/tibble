@@ -1,5 +1,3 @@
-context("enframe")
-
 
 # enframe -----------------------------------------------------------------
 
@@ -64,6 +62,8 @@ test_that("can't use value = NULL", {
 })
 
 test_that("can't pass objects with dimensions", {
+  skip_enh_enframe_vector()
+
   expect_legacy_error(
     enframe(iris),
     error_enframe_has_dim(iris),

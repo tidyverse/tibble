@@ -1,57 +1,7 @@
-set_repaired_names <- function(x,
-                               .name_repair = c("check_unique", "unique", "universal", "minimal"),
-                               quiet = FALSE) {
-  set_names(x, repaired_names(names2(x), .name_repair = .name_repair, quiet = quiet))
-}
-
-repaired_names <- function(name,
-                           .name_repair = c("check_unique", "unique", "universal", "minimal"),
-                           quiet = FALSE,
-                           details = NULL) {
-
-  subclass_name_repair_errors(name = name, details = details,
-    vec_as_names(name, repair = .name_repair, quiet = quiet)
-  )
-
-}
-
-cnd_signal_if <- function(x) {
-  if (!is.null(x)) {
-    cnd_signal(x)
-  }
-}
-
-cnd_names_non_null <- function(name) {
-  if (is.null(name)) {
-    error_names_must_be_non_null()
-  } else {
-    invisible()
-  }
-}
-
-cnd_names_non_na <- function(name) {
-  bad_name <- which(is.na(name))
-  if (has_length(bad_name)) {
-    error_column_must_be_named(bad_name)
-  } else {
-    invisible()
-  }
-}
-
-check_minimal <- function(name) {
-  cnd_signal_if(cnd_names_non_null(name))
-  cnd_signal_if(cnd_names_non_na(name))
-}
-
-check_minimal_names <- function(x) {
-  check_minimal(names(x))
-  invisible(x)
-}
-
 #' Superseded functions for name repair
 #'
 #' @description
-#' \lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`
 #'
 #' @description
 #' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
@@ -148,7 +98,7 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
 #' @export
 #' @rdname name-repair-superseded
 set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
-  x <- set_repaired_names(x, "minimal", quiet = TRUE)
+  x <- set_repaired_names(x, repair_hint = FALSE, "minimal", quiet = TRUE)
   new_names <- tidy_names(names(x), syntactic = syntactic, quiet = quiet)
   set_names(x, new_names)
 }

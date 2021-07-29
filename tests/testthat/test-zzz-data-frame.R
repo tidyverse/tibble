@@ -1,5 +1,3 @@
-context("tibble")
-
 test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
@@ -17,7 +15,7 @@ test_that("bogus columns raise an error", {
   skip_enh_tibble_null()
   expect_error(
     tibble(a = NULL),
-    error_column_must_be_vector("a", "NULL"),
+    error_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })
@@ -25,12 +23,12 @@ test_that("bogus columns raise an error", {
 test_that("bogus columns raise an error", {
   expect_legacy_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", "environment"),
+    error_column_scalar_type("a", "environment"),
     fixed = TRUE
   )
   expect_legacy_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", "name"),
+    error_column_scalar_type("a", "name"),
     fixed = TRUE
   )
 })
@@ -72,7 +70,7 @@ test_that("missing names are imputed from call", {
 
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- tibble()
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
   expect_identical(attr(zero, "names"), character(0L))
 })
@@ -181,14 +179,14 @@ test_that("columns must be same length", {
 
 test_that("empty list() makes 0 x 0 tbl_df", {
   zero <- as_tibble(list())
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
 })
 
 
 test_that("NULL makes 0 x 0 tbl_df", {
   nnnull <- as_tibble(NULL)
-  expect_is(nnnull, "tbl_df")
+  expect_s3_class(nnnull, "tbl_df")
   expect_equal(dim(nnnull), c(0L, 0L))
 })
 
@@ -272,28 +270,28 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
   expect_legacy_error(
     as_tibble(l1),
-    error_column_must_be_named(1, repair = TRUE),
+    error_column_must_be_named(1, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l2 <- list(x = 1, 2)
   expect_legacy_error(
     as_tibble(l2),
-    error_column_must_be_named(2, repair = TRUE),
+    error_column_must_be_named(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l3 <- list(x = 1, ... = 2)
   expect_legacy_error(
     as_tibble(l3),
-    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    error_column_must_not_be_dot_dot(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l4 <- list(x = 1, ..1 = 2)
   expect_legacy_error(
     as_tibble(l4),
-    error_column_must_not_be_dot_dot(2, repair = TRUE),
+    error_column_must_not_be_dot_dot(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
@@ -302,7 +300,7 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   df <- new_tibble(df, nrow = 1)
   expect_legacy_error(
     as_tibble(df),
-    error_column_must_be_named(1:2, repair = TRUE),
+    error_column_must_be_named(1:2, repair_hint = TRUE),
     fixed = TRUE
   )
 })
@@ -315,14 +313,18 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
+  suppressMessages(
+    invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
+  )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), unique_names(rep("", 3)))
 })
 
 test_that("as_tibble() implements universal names", {
-  invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
+  suppressMessages(
+    invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
+  )
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(names(invalid_df), universal_names(rep("", 3)))
@@ -383,7 +385,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
     rep("", 2)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     paste0("...", 1:2)
   )
 
@@ -398,7 +400,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
     c("if", "when")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     c(".if", "when")
   )
 })
@@ -415,7 +417,7 @@ test_that("as_tibble.poly() supports .name_repair", {
     as.character(1:3)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     paste0("...", 1:3)
   )
 })
@@ -432,7 +434,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("a", "a", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     c("a...1", "a...2", "n")
   )
 
@@ -447,7 +449,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("if", "when", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     c(".if", "when", "n")
   )
 
@@ -458,7 +460,7 @@ test_that("as_tibble.table() supports .name_repair", {
     c("m", "n", "n")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     c("m", "n...2", "n...3")
   )
 })
@@ -475,7 +477,7 @@ test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
     rep("", 2)
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     paste0("...", 1:2)
   )
 
@@ -490,7 +492,7 @@ test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
     c("if", "when")
   )
   expect_identical(
-    names(as_tibble(x, .name_repair = "universal")),
+    names(suppressMessages(as_tibble(x, .name_repair = "universal"))),
     c(".if", "when")
   )
 })
@@ -567,7 +569,7 @@ test_that("POSIXlt isn't a valid column", {
 test_that("NULL isn't a valid column", {
   expect_legacy_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", "NULL"),
+    error_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })
@@ -610,7 +612,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -637,11 +639,13 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 
 test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
+  skip_legacy()
+
   scoped_lifecycle_warnings()
 
   expect_legacy_error(
@@ -649,7 +653,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -673,17 +677,19 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
+  skip_legacy()
+
   expect_legacy_error(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -707,7 +713,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair = TRUE)
+    error_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 

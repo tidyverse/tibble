@@ -45,7 +45,7 @@ NULL
 #' @export
 #' @rdname rownames
 has_rownames <- function(.data) {
-  .row_names_info(.data) > 0L
+  .row_names_info(.data) > 0L && !is.na(.row_names_info(.data, 0L)[[1L]])
 }
 
 #' @export
@@ -64,9 +64,8 @@ rownames_to_column <- function(.data, var = "rowname") {
 
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var)) {
-    abort(error_existing_column_names(var))
-  }
+  # Side effect: check unique names
+  repaired_names(c(unique(names2(df)), var), repair_hint = FALSE)
 
   new_df <- add_column(df, !!var := rownames(df), .before = 1)
   remove_rownames(new_df)
@@ -80,9 +79,8 @@ rowid_to_column <- function(.data, var = "rowid") {
 
   stopifnot(is.data.frame(df))
 
-  if (has_name(df, var)) {
-    abort(error_existing_column_names(var))
-  }
+  # Side effect: check unique names
+  repaired_names(c(unique(names2(df)), var), repair_hint = FALSE)
 
   new_df <- add_column(df, !!var := seq_len(nrow(df)), .before = 1)
   remove_rownames(new_df)
@@ -94,11 +92,11 @@ column_to_rownames <- function(.data, var = "rowname") {
   stopifnot(is.data.frame(.data))
 
   if (has_rownames(.data)) {
-    abort(error_already_has_rownames())
+    cnd_signal(error_already_has_rownames())
   }
 
   if (!has_name(.data, var)) {
-    abort(error_unknown_column_names(var))
+    cnd_signal(error_unknown_column_names(var))
   }
 
   .data <- as.data.frame(.data)
@@ -109,7 +107,7 @@ column_to_rownames <- function(.data, var = "rowname") {
 
 #' @export
 `row.names<-.tbl_df` <- function(x, value) {
-  if (!is_null(value)) {
+  if (!is.null(value)) {
     warn("Setting row names on a tibble is deprecated.")
   }
   NextMethod()
@@ -117,4 +115,10 @@ column_to_rownames <- function(.data, var = "rowname") {
 
 raw_rownames <- function(x) {
   .row_names_info(x, 0L) %||% .set_row_names(.row_names_info(x, 2L))
+}
+
+# Errors ------------------------------------------------------------------
+
+error_already_has_rownames <- function() {
+  tibble_error("`.data` must be a data frame without row names.")
 }

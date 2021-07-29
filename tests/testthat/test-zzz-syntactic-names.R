@@ -1,5 +1,3 @@
-context("universal_names")
-
 # make_syntactic -------------------------------------------------------------
 expect_syntactic <- function(name, exp_syn_name) {
   expect_identical(
@@ -205,6 +203,7 @@ test_that("complicated inputs", {
 })
 
 test_that("message", {
+  skip_legacy()
   expect_message(
     universal_names(c("a b", "b c")),
     "New names:\n* `a b` -> a.b\n* `b c` -> b.c\n",
@@ -242,6 +241,7 @@ test_that("unnamed input gives uniquely named output", {
 })
 
 test_that("messages by default", {
+  skip_legacy()
   expect_message(
     set_universal_names(set_names(1, "a:b")),
     "New names:\n* `a:b` -> a.b\n",
@@ -264,7 +264,7 @@ test_that("non-universal names", {
 test_that("check_syntactic() imposes check_minimal()", {
   expect_legacy_error(
     check_syntactic(NULL),
-    error_names_must_be_non_null(repair = FALSE),
+    error_names_must_be_non_null(repair_hint = FALSE),
     fixed = TRUE
   )
 })
@@ -280,7 +280,7 @@ test_that("check_syntactic() imposes check_unique()", {
 test_that("check_syntactic() errors for non-syntactic names", {
   expect_legacy_error(
     check_syntactic(c("x", "a:b", "break")),
-    error_column_names_must_be_syntactic(c("a:b", "break"), repair = FALSE),
+    error_column_names_must_be_syntactic(c("a:b", "break"), repair_hint = FALSE),
     fixed = TRUE
   )
 })

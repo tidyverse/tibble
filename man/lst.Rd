@@ -9,32 +9,27 @@ lst(...)
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
+processed with \code{\link[rlang:nse-defuse]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
-Arguments are evaluated sequentially, however the \link{.data} pronoun is not
-available to prevent masking usage in a higher level function, like
-\code{\link[dplyr:mutate]{dplyr::mutate()}}.}
+Arguments are evaluated sequentially.
+You can refer to previously created elements directly or using the \link{.data}
+pronoun.
+An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
+is not available.}
 }
 \value{
 A named list.
 }
 \description{
-\lifecycle{questioning}
-
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
 same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When
 defining a component, you can refer to components created earlier in the
 call. \code{lst()} also generates missing names automatically.
-}
-\section{Life cycle}{
 
-The \code{lst()} function is in the \href{https://www.tidyverse.org/lifecycle/#questioning}{questioning stage}. It is essentially
-\code{\link[rlang:list2]{rlang::list2()}}, but with a couple features copied from \code{\link[=tibble]{tibble()}}. It's not
-clear that a function for creating lists belongs in the tibble package.
-Consider using \code{\link[rlang:list2]{rlang::list2()}} instead.
+See \code{\link[rlang:list2]{rlang::list2()}} for a simpler and faster alternative without tibble's
+evaluation and auto-name semantics.
 }
-
 \examples{
 # the value of n can be used immediately in the definition of x
 lst(n = 5, x = runif(n))

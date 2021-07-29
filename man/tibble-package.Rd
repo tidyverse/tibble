@@ -12,7 +12,7 @@ Provides a 'tbl_df' class (the 'tibble') that
     data frame.
 }
 \details{
-\lifecycle{stable}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
@@ -22,15 +22,15 @@ analysis with data frames.
 
 Tibble is the central data structure for the set of packages known as the
 \href{https://www.tidyverse.org/packages/}{tidyverse}, including
-\href{http://dplyr.tidyverse.org/}{dplyr},
-\href{http://ggplot2.tidyverse.org/}{ggplot2},
-\href{http://tidyr.tidyverse.org/}{tidyr}, and
-\href{http://readr.tidyverse.org/}{readr}.
+\href{https://dplyr.tidyverse.org/}{dplyr},
+\href{https://ggplot2.tidyverse.org/}{ggplot2},
+\href{https://tidyr.tidyverse.org/}{tidyr}, and
+\href{https://readr.tidyverse.org/}{readr}.
 
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
 Science}
 }
 
@@ -41,6 +41,58 @@ Resources on specific topics:
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
 }
+\section{Package options}{
+
+The following option is used for viewing tabular data with \code{view()}:
+\itemize{
+\item \code{tibble.view_max}: Maximum number of rows shown if the input is not a
+data frame. Default: 1000.
+}
+
+
+
+The following options control printing of \code{tbl} and \code{tbl_df} objects:
+\itemize{
+\item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
+Set to \code{Inf} to always print all rows.  Default: 20.
+\item \code{tibble.print_min}: Number of rows printed if row number threshold is
+exceeded. Default: 10.
+\item \code{tibble.width}: Output width. Default: \code{NULL} (use \code{width} option).
+\item \code{tibble.max_extra_cols}: Number of extra columns printed in reduced form.
+Default: 100.
+}
+
+The output uses color and highlighting according to the \code{"cli.num_colors"} option.
+Set it to \code{1} to suppress colored and highlighted output.
+
+
+
+\itemize{
+\item \code{pillar.bold}: Use bold font, e.g. for column headers? This currently
+defaults to \code{FALSE}, because many terminal fonts have poor support for
+bold fonts.
+\item \code{pillar.subtle}: Use subtle style, e.g. for row numbers and data types?
+Default: \code{TRUE}.
+\item \code{pillar.subtle_num}: Use subtle style for insignificant digits? Default:
+\code{FALSE}, is also affected by the \code{pillar.subtle} option.
+\item \code{pillar.neg}: Highlight negative numbers? Default: \code{TRUE}.
+\item \code{pillar.sigfig}: The number of significant digits that will be printed and
+highlighted, default: \code{3}. Set the \code{pillar.subtle} option to \code{FALSE} to
+turn off highlighting of significant digits.
+\item \code{pillar.min_title_chars}: The minimum number of characters for the column
+title, default: \code{15}.  Column titles may be truncated up to that width to
+save horizontal space. Set to \code{Inf} to turn off truncation of column
+titles.
+\item \code{pillar.min_chars}: The minimum number of characters wide to
+display character columns, default: \code{0}.  Character columns may be
+truncated up to that width to save horizontal space. Set to \code{Inf} to
+turn off truncation of character columns.
+\item \code{pillar.max_dec_width}: The maximum allowed width for decimal notation,
+default 13.
+}
+
+}
+
 \seealso{
 Useful links:
 \itemize{

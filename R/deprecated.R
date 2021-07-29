@@ -1,7 +1,7 @@
 #' Deprecated functions
 #'
 #' @description
-#' \lifecycle{deprecated}
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Use [tibble()] instead of `data_frame()`.
 #'
@@ -71,7 +71,6 @@ as.tibble <- function(x, ...) {
   as_tibble(x, ...)
 }
 
-#' @include tribble.R
 #' @description
 #' Use [tribble()] instead of `frame_data()`.
 #' @export

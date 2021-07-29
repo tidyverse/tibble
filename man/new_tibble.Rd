@@ -21,8 +21,6 @@ validate_tibble(x)
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
 \description{
-\lifecycle{maturing}
-
 Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like \pkg{sf} or \pkg{tsibble}.
@@ -40,7 +38,7 @@ runs without raising an error.
 For \code{new_tibble()}, \code{x} must be a list.
 An \code{nrow} argument is required.
 This should be an integer of length 1,
-and every element of the list \code{x} should have \code{\link[=NROW]{NROW()}}
+and every element of the list \code{x} should have \code{\link[vctrs:vec_size]{vctrs::vec_size()}}
 equal to this value.
 (But this is not checked by the constructor).
 This takes the place of the "row.names" attribute in a data frame.
@@ -53,7 +51,7 @@ but the names are not checked for correctness.
 \code{validate_tibble()} checks for "minimal" names
 and that all columns are vectors, data frames or matrices.
 It also makes sure that all columns have the same length,
-and that \code{\link[=NROW]{NROW()}} is consistent with the data.
+and that \code{\link[vctrs:vec_size]{vctrs::vec_size()}} is consistent with the data.
 }
 
 \examples{
@@ -61,10 +59,10 @@ and that \code{\link[=NROW]{NROW()}} is consistent with the data.
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
 # Existing row.names attributes are ignored:
-try(new_tibble(iris, nrow = 3))
+try(validate_tibble(new_tibble(iris, nrow = 3)))
 
-# The length of all columns must be consistent with the nrow argument:
-try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
+# The length of all columns must be compatible with the nrow argument:
+try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} for ways to construct a tibble

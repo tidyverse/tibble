@@ -3,7 +3,7 @@ expect_legacy_error <- function(code, ...) {
 }
 
 expect_legacy_warning <- function(code, ...) {
-  expect_warning(code)
+  suppressWarnings(expect_warning(code))
 }
 
 skip_legacy <- function() {
@@ -65,6 +65,11 @@ skip_dep_new_tibble_subclass <- function() {
   skip_legacy()
 }
 
+skip_dep_glimpse <- function() {
+  # DEP: glimpse() and format_v() now in pillar
+  skip_legacy()
+}
+
 skip_enh_posixlt_supported <- function() {
   # ENH: POSIXlt supported
   skip_legacy()
@@ -87,6 +92,21 @@ skip_enh_empty_tribble_unspecified <- function() {
 
 skip_enh_as_tibble_retired <- function() {
   # ENH: retiring as_tibble() for vectors and lists, #447
+  skip_legacy()
+}
+
+skip_enh_bullets_format <- function() {
+  # ENH: new bullets format
+  skip_legacy()
+}
+
+skip_enh_enframe_vector <- function() {
+  # ENH: enframe() supports all vectors (#730)
+  skip_legacy()
+}
+
+skip_enh_print_tbl_args <- function() {
+  # ENH: print() and format() support more arguments
   skip_legacy()
 }
 
@@ -154,11 +174,15 @@ output_file <- function(filename) file.path("zzz-output", filename)
 
 expect_output_file_rel <- function(x, filename) {
   withr::with_options(
-    list(digits = 4, width = 80),
-    expect_output_file(x, output_file(filename), update = TRUE)
+    list(digits = 4, width = 80, cli.unicode = l10n_info()$`UTF-8`),
+    suppressWarnings(expect_output_file(x, output_file(filename), update = TRUE))
   )
 }
 
 expect_output_knit <- function(knit, filename, envir = parent.frame()) {
   expect_output_file_rel(cat(knit), filename)
+}
+
+expect_output <- function(...) {
+  suppressWarnings(testthat::expect_output(...))
 }

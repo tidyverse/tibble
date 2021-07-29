@@ -1,5 +1,3 @@
-context("tibble")
-
 test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
@@ -15,14 +13,19 @@ test_that("NULL is ignored (#580)", {
   expect_identical(tibble(b = 1, NULL, c = 2:3), tibble(b = 1, c = 2:3))
 })
 
+test_that("NULL is ignored when passed by value (#895, #900)", {
+  expect_identical(tibble(a = c()), tibble(a = NULL))
+  expect_identical(tibble(a = c(), a = 1), tibble(a = 1))
+})
+
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
-    error_column_must_be_vector("a", 1, "environment")
+    error_column_scalar_type("a", 1, "an environment")
   )
   expect_tibble_error(
     tibble(a = quote(a)),
-    error_column_must_be_vector("a", 1, "name")
+    error_column_scalar_type("a", 1, "a symbol")
   )
 })
 
@@ -31,7 +34,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_tibble_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(10, "y", 2, "Existing data")
+    error_incompatible_size(10, "y", 2, "Existing data")
   )
 })
 
@@ -62,7 +65,7 @@ test_that("missing names are imputed from call", {
 
 test_that("empty input makes 0 x 0 tbl_df", {
   zero <- tibble()
-  expect_is(zero, "tbl_df")
+  expect_s3_class(zero, "tbl_df")
   expect_equal(dim(zero), c(0L, 0L))
   expect_identical(attr(zero, "names"), character(0L))
 })
@@ -99,26 +102,8 @@ test_that("attributes are preserved", {
   expect_identical(attr(res, "meta"), attr(df, "meta"))
 })
 
-test_that(".data pronoun is not installed by tibble", {
-  local_bindings(.data = list(a = 2))
-
-  expect_identical(
-    tibble(a = 1, b = .data$a),
-    tibble(a = 1, b = 2)
-  )
-})
-
-test_that(".data pronoun can come from another data mask (#721)", {
-  env <- as_environment(list(y = 1))
-  mask <- new_data_mask(env)
-  mask$.data <- as_data_pronoun(env)
-
-  expr <- expr(tibble(x = .data$y))
-
-  expect_identical(
-    eval_tidy(expr, data = mask),
-    tibble(x = 1)
-  )
+test_that(".data pronoun", {
+  expect_identical(tibble(a = 1, b = .data$a), tibble(a = 1, b = 1))
 })
 
 test_that("tibble aliases", {
@@ -132,7 +117,7 @@ test_that("tibble aliases", {
 test_that("NULL isn't a valid column", {
   expect_tibble_error(
     check_valid_cols(list(a = NULL)),
-    error_column_must_be_vector("a", 1, "NULL")
+    error_column_scalar_type("a", 1, "NULL")
   )
 })
 
@@ -164,117 +149,6 @@ test_that("types preserved when recycling in tibble() (#284)", {
     tibble(b = as.difftime(c(1, 1), units = "hours"), a = 1:2)
   )
 })
-
-test_that("`validate` triggers deprecation message, but then works", {
-  scoped_lifecycle_warnings()
-
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(list(a = 1, "hi"), validate = TRUE),
-      "deprecated",
-      fixed = TRUE
-    ),
-    error_column_must_be_named(2)
-  )
-
-  expect_warning(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
-    "deprecated",
-    fixed = TRUE
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi", a = 2)
-  names(df) <- c("a", "", "a")
-  expect_warning(
-    df <- as_tibble(df, validate = FALSE),
-    "deprecated",
-    fixed = TRUE
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi")
-  names(df) <- c("a", "")
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(df, validate = TRUE),
-      "deprecated",
-      fixed = TRUE
-    ),
-    error_column_must_be_named(2)
-  )
-})
-
-test_that("Consistent `validate` and `.name_repair` used together keep silent.", {
-  scoped_lifecycle_warnings()
-
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
-      NA
-    ),
-    error_column_must_be_named(2)
-  )
-
-  expect_warning(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal"),
-    NA
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi", a = 2)
-  names(df) <- c("a", "", "a")
-  expect_warning(
-    df <- as_tibble(df, validate = FALSE, .name_repair = "minimal"),
-    NA
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi")
-  names(df) <- c("a", "")
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
-      NA
-    ),
-    error_column_must_be_named(2)
-  )
-})
-
-test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
-      "precedence"
-    ),
-    error_column_must_be_named(2)
-  )
-
-  expect_warning(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = TRUE, .name_repair = "minimal"),
-    "precedence"
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi", a = 2)
-  names(df) <- c("a", "", "a")
-  expect_warning(
-    df <- as_tibble(df, validate = TRUE, .name_repair = "minimal"),
-    "precedence"
-  )
-  expect_identical(names(df), c("a", "", "a"))
-
-  df <- data.frame(a = 1, "hi")
-  names(df) <- c("a", "")
-  expect_tibble_error(
-    expect_warning(
-      as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
-      "precedence"
-    ),
-    error_column_must_be_named(2)
-  )
-})
-
 
 # Data frame and matrix columns -------------------------------------------
 
@@ -357,4 +231,26 @@ test_that("returns a single row (#416)", {
     tibble_row(iris[2:3, ]),
     error_tibble_row_size_one(1, "", 2)
   )
+})
+
+# is_tibble ---------------------------------------------------------------
+
+test_that("is_tibble", {
+  expect_false(is_tibble(iris))
+  expect_true(is_tibble(as_tibble(iris)))
+  expect_false(is_tibble(NULL))
+  expect_false(is_tibble(0))
+})
+
+test_that("is_tibble", {
+  scoped_lifecycle_silence()
+  expect_identical(is.tibble(iris), is_tibble(iris))
+})
+
+test_that("output test", {
+  expect_snapshot_with_error({
+    tibble(a = 1, a = 1)
+    tibble(a = new_environment())
+    tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+  })
 })

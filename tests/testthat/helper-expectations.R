@@ -1,5 +1,5 @@
 expect_tibble_error <- function(object, cnd, fixed = NULL) {
-  cnd_actual <- expect_error(object, regexp = cnd_message(cnd), class = class(cnd), fixed = TRUE)
+  cnd_actual <- expect_error(object, class = class(cnd)[[1]])
   expect_cnd_equivalent(cnd_actual, cnd)
   expect_s3_class(cnd_actual, class(cnd), exact = TRUE)
 }
@@ -11,7 +11,7 @@ expect_cnd_equivalent <- function(actual, expected) {
   expected$trace <- NULL
   expected$parent <- NULL
   expected$body <- NULL
-  expect_equivalent(actual, expected)
+  expect_equal(actual, expected)
 }
 
 expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) {
@@ -22,5 +22,15 @@ expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) 
   if (has_length(exp_fields)) {
     expect_true(is_empty(setdiff(!!names(exp_fields), names(cnd))))
     expect_equal(cnd[names(exp_fields)], exp_fields)
+  }
+}
+
+expect_snapshot_with_error <- function(code) {
+  code <- rlang::enexpr(code)
+
+  if (packageVersion("testthat") > "3.0.0") {
+    rlang::eval_tidy(rlang::quo(expect_snapshot(!!code, error = TRUE)))
+  } else {
+    rlang::eval_tidy(rlang::quo(expect_snapshot(!!code)))
   }
 }

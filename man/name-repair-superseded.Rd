@@ -34,7 +34,7 @@ number.}
 \code{x} with repaired names or a repaired version of \code{name}.
 }
 \description{
-\lifecycle{superseded}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 
 \code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()} were early efforts
 to facilitate \emph{post hoc} name repair in tibble, given that \code{\link[=tibble]{tibble()}} and

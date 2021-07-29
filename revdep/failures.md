@@ -1,3 +1,111 @@
+# apaTables
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# broom
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# broom.mixed
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # CNVScope
 
 <details>
@@ -34,27 +142,355 @@ Run `revdep_details(,"")` for more info
 
 
 ```
-# dmdScheme
+# codebook
 
 <details>
 
-* Version: 1.0.0
-* Source code: https://github.com/cran/dmdScheme
-* URL: https://exp-micro-ecol-hub.github.io/dmdScheme/, https://github.com/Exp-Micro-Ecol-Hub/dmdScheme
-* BugReports: https://github.com/rkrug/dmdScheme/issues
-* Date/Publication: 2020-01-10 17:20:03 UTC
-* Number of recursive dependencies: 88
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"dmdScheme")` for more info
+Run `revdep_details(,"")` for more info
 
 </details>
 
-## Newly broken
+## Error before installation
 
-*   checking whether package ‘dmdScheme’ can be installed ... ERROR
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# codemetar
+
+<details>
+
+* Version: 0.1.8
+* Source code: https://github.com/cran/codemetar
+* URL: https://github.com/ropensci/codemetar, https://ropensci.github.io/codemetar
+* BugReports: https://github.com/ropensci/codemetar/issues
+* Date/Publication: 2019-04-22 04:20:03 UTC
+* Number of recursive dependencies: 79
+
+Run `revdep_details(,"codemetar")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘memoise’
+      All declared Imports should be used.
+    ```
+
+# embed
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# ggstatsplot
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# healthcareai
+
+<details>
+
+* Version: 2.4.0
+* Source code: https://github.com/cran/healthcareai
+* URL: http://docs.healthcare.ai
+* BugReports: https://github.com/HealthCatalyst/healthcareai-r/issues
+* Date/Publication: 2020-02-28 18:00:05 UTC
+* Number of recursive dependencies: 119
+
+Run `revdep_details(,"healthcareai")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+# holodeck
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# mcp
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/home/rstudio/tibble/revdep/checks/mcp/old/mcp.Rcheck’
+* using R version 3.6.2 (2019-12-12)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘mcp/DESCRIPTION’ ... OK
+* this is package ‘mcp’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mcp’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Namespaces in Imports field not imported from:
+  ‘bayesplot’ ‘methods’ ‘purrr’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+ OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+  Running ‘testthat.R’
+
+See
+  ‘/home/rstudio/tibble/revdep/checks/mcp/old/mcp.Rcheck/00check.log’
+for details.
+
+
+
+
+
+
+```
+# obfuscatoR
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# oolong
+
+<details>
+
+* Version: 0.3.4
+* Source code: https://github.com/cran/oolong
+* URL: https://github.com/chainsawriot/oolong
+* BugReports: https://github.com/chainsawriot/oolong/issues
+* Date/Publication: 2020-03-21 17:40:06 UTC
+* Number of recursive dependencies: 121
+
+Run `revdep_details(,"oolong")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘oolong’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/home/rstudio/tibble/revdep/checks/dmdScheme/new/dmdScheme.Rcheck/00install.out’ for details.
+    See ‘/home/rstudio/tibble/revdep/checks/oolong/new/oolong.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -62,106 +498,75 @@ Run `revdep_details(,"dmdScheme")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘dmdScheme’ ...
-** package ‘dmdScheme’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘oolong’ ...
+** package ‘oolong’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-
-#############################################
-The cache will be in a temporary location and be deleted when you quit R.
-It is located at
-   /tmp/RtmpQ6XBTS/dmdScheme_25e861a01e82
-To make it permanent, call
-   cache(createPermanent = TRUE)
-and restart R
-and a permanent cache will be created which will survive restarts.
-#############################################
-
-
-trying URL 'https://github.com/Exp-Micro-Ecol-Hub/dmdSchemeRepository/raw/master/schemes/dmdScheme_0.9.5.tar.gz'
-Content type 'application/octet-stream' length 27511 bytes (26 KB)
-==================================================
-downloaded 26 KB
-
-Scheme definition `/tmp/RtmpQ6XBTS/file25e829afa8b7/dmdScheme_0.9.5.tar.gz, installed with
-name:    dmdScheme
-version: 0.9.5
-Error: package or namespace load failed for ‘dmdScheme’:
- .onAttach failed in attachNamespace() for 'dmdScheme', details:
-  call: NULL
-  error: No common type for `..1$microcosmVolume` <double> and `..2$microcosmVolume` <character>.
-Error: loading failed
-Execution halted
-ERROR: loading failed
-* removing ‘/home/rstudio/tibble/revdep/checks/dmdScheme/new/dmdScheme.Rcheck/dmdScheme’
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘text2vec’ is not available and has been replaced
+by .GlobalEnv when processing object ‘abstracts_warplda’
+Warning: namespace ‘text2vec’ is not available and has been replaced
+by .GlobalEnv when processing object ‘abstracts_warplda’
+Error in normalize(self$components, "l1") : 
+  could not find function "normalize"
+ERROR: lazydata failed for package ‘oolong’
+* removing ‘/home/rstudio/tibble/revdep/checks/oolong/new/oolong.Rcheck/oolong’
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘dmdScheme’ ...
-** package ‘dmdScheme’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘oolong’ ...
+** package ‘oolong’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘text2vec’ is not available and has been replaced
+by .GlobalEnv when processing object ‘abstracts_warplda’
+Warning: namespace ‘text2vec’ is not available and has been replaced
+by .GlobalEnv when processing object ‘abstracts_warplda’
+Error in normalize(self$components, "l1") : 
+  could not find function "normalize"
+ERROR: lazydata failed for package ‘oolong’
+* removing ‘/home/rstudio/tibble/revdep/checks/oolong/old/oolong.Rcheck/oolong’
 
-#############################################
-The cache will be in a temporary location and be deleted when you quit R.
-It is located at
-   /tmp/Rtmp8eQ1aN/dmdScheme_1f0034491fb6
-To make it permanent, call
-   cache(createPermanent = TRUE)
-and restart R
-and a permanent cache will be created which will survive restarts.
-#############################################
+```
+# statsExpressions
 
+<details>
 
-trying URL 'https://github.com/Exp-Micro-Ecol-Hub/dmdSchemeRepository/raw/master/schemes/dmdScheme_0.9.5.tar.gz'
-Content type 'application/octet-stream' length 27511 bytes (26 KB)
-==================================================
-downloaded 26 KB
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
 
-Scheme definition `/tmp/Rtmp8eQ1aN/file1f007f57244e/dmdScheme_0.9.5.tar.gz, installed with
-name:    dmdScheme
-version: 0.9.5
-Theme switched to dmdScheme_0.9.5
-** testing if installed package can be loaded from final location
+Run `revdep_details(,"")` for more info
 
-#############################################
-The cache will be in a temporary location and be deleted when you quit R.
-It is located at
-   /tmp/Rtmpb4mNQW/dmdScheme_1fe373b33168
-To make it permanent, call
-   cache(createPermanent = TRUE)
-and restart R
-and a permanent cache will be created which will survive restarts.
-#############################################
+</details>
+
+## Error before installation
+
+### Devel
+
+```
 
 
-trying URL 'https://github.com/Exp-Micro-Ecol-Hub/dmdSchemeRepository/raw/master/schemes/dmdScheme_0.9.5.tar.gz'
-Content type 'application/octet-stream' length 27511 bytes (26 KB)
-==================================================
-downloaded 26 KB
 
-Scheme definition `/tmp/Rtmpb4mNQW/file1fe3655792f2/dmdScheme_0.9.5.tar.gz, installed with
-name:    dmdScheme
-version: 0.9.5
-Theme switched to dmdScheme_0.9.5
-** testing if installed package keeps a record of temporary installation path
-* DONE (dmdScheme)
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
 
 ```
 # STRMPS
@@ -200,68 +605,239 @@ Run `revdep_details(,"")` for more info
 
 
 ```
-# textrecipes
+# TestDimorph
 
 <details>
 
-* Version: 0.0.2
-* Source code: https://github.com/cran/textrecipes
-* URL: https://github.com/tidymodels/textrecipes
-* BugReports: https://github.com/tidymodels/textrecipes/issues
-* Date/Publication: 2019-09-07 11:20:02 UTC
-* Number of recursive dependencies: 91
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"textrecipes")` for more info
+Run `revdep_details(,"")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘textrecipes’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/rstudio/tibble/revdep/checks/textrecipes/new/textrecipes.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘textrecipes’ ...
-** package ‘textrecipes’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/mnt/library/textrecipes/rsparse/libs/rsparse.so':
-  float.so: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘textrecipes’
-* removing ‘/home/rstudio/tibble/revdep/checks/textrecipes/new/textrecipes.Rcheck/textrecipes’
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘textrecipes’ ...
-** package ‘textrecipes’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/mnt/library/textrecipes/rsparse/libs/rsparse.so':
-  float.so: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘textrecipes’
-* removing ‘/home/rstudio/tibble/revdep/checks/textrecipes/old/textrecipes.Rcheck/textrecipes’
+
+
+
+
+
 
 ```
+# tidybayes
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# tidyBF
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# tidycomm
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# tidymodels
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# ToxicoGx
+
+<details>
+
+* Version: 
+* Source code: ???
+* URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
+* BugReports: https://github.com/tidyverse/tibble/issues
+* Number of recursive dependencies: 0
+
+Run `revdep_details(,"")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# trialr
+
+<details>
+
+* Version: 0.1.3
+* Source code: https://github.com/cran/trialr
+* URL: https://github.com/brockk/trialr
+* BugReports: https://github.com/brockk/trialr/issues
+* Date/Publication: 2020-01-08 22:30:10 UTC
+* Number of recursive dependencies: 102
+
+Run `revdep_details(,"trialr")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+

@@ -7,24 +7,22 @@
 
 static SEXP pairlist_shallow_copy(SEXP p)
 {
-  int nprot = 0;
-
   SEXP attr;
-  PROTECT(attr = Rf_cons(CAR(p), R_NilValue)); nprot++;
+  PROTECT(attr = Rf_cons(CAR(p), R_NilValue));
   SEXP q = attr;
   SET_TAG(q, TAG(p));
   p = CDR(p);
 
   while (!Rf_isNull(p)) {
     SEXP s;
-    PROTECT(s = Rf_cons(CAR(p), R_NilValue)); nprot++;
+    s = Rf_cons(CAR(p), R_NilValue);
     SETCDR(q, s);
     q = CDR(q);
     SET_TAG(q, TAG(p));
     p = CDR(p);
   }
 
-  UNPROTECT(nprot);
+  UNPROTECT(1);
   return attr ;
 }
 

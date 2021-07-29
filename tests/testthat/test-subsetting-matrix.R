@@ -18,5 +18,5 @@ test_that("[<-.tbl_df supports subsetting with a logical matrix (#649)", {
   expect_error(foo[m] <- 1:3)
 
   m <- matrix(c(rep(FALSE, 18), rep(TRUE, 3), rep(FALSE, 9)), ncol = 3)
-  expect_error(foo[m] <- 1, class = "vctrs_error_incompatible_type")
+  expect_error(foo[m] <- 1, class = "tibble_error_assign_incompatible_type")
 })

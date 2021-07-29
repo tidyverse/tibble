@@ -10,10 +10,10 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' "tibble" refers to a data frame that has the `tbl_df` class. Tibble is the
 #' central data structure for the set of packages known as the
 #' [tidyverse](https://www.tidyverse.org/packages/), including
-#' [dplyr](http://dplyr.tidyverse.org/),
-#' [ggplot2](http://ggplot2.tidyverse.org/),
-#' [tidyr](http://tidyr.tidyverse.org/), and
-#' [readr](http://readr.tidyverse.org/).
+#' [dplyr](https://dplyr.tidyverse.org/),
+#' [ggplot2](https://ggplot2.tidyverse.org/),
+#' [tidyr](https://tidyr.tidyverse.org/), and
+#' [readr](https://readr.tidyverse.org/).
 #'
 #' The general ethos is that tibbles are lazy and surly: they do less and
 #' complain more than base [data.frame]s. This forces
@@ -25,7 +25,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' Objects of class `tbl_df` have:
 #' * A `class` attribute of `c("tbl_df", "tbl", "data.frame")`.
 #' * A base type of `"list"`, where each element of the list has the same
-#'   [NROW()].
+#'   [vctrs::vec_size()].
 #' * A `names` attribute that is a character vector the same length as the
 #'   underlying list.
 #' * A `row.names` attribute, included for compatibility with [data.frame].
@@ -116,4 +116,35 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
   attr(x, "names") <- as.character(value)
   x
+}
+
+cnd_names_non_null <- function(name) {
+  if (is.null(name)) {
+    error_names_must_be_non_null()
+  } else {
+    invisible()
+  }
+}
+
+cnd_names_non_na <- function(name) {
+  bad_name <- which(is.na(name))
+  if (has_length(bad_name)) {
+    error_column_names_cannot_be_empty(bad_name, repair_hint = FALSE)
+  } else {
+    invisible()
+  }
+}
+
+# Errors ------------------------------------------------------------------
+
+error_names_must_be_non_null <- function() {
+  tibble_error("`names` must not be `NULL`.")
+}
+
+error_names_must_have_length <- function(length, n) {
+  tibble_error(
+    paste0("`names` must have length ", n, ", not ", length, "."),
+    expected = n,
+    actual = length
+  )
 }
