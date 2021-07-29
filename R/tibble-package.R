@@ -35,7 +35,6 @@
 #'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]
 #'   * Inspect a tibble: [print.tbl()], [glimpse()]
 #'   * Details on the S3 `tbl_df` class: [`tbl_df-class`]
-#' @inheritSection formatting Package options
 #' @section Package options:
 #' The following option is used for viewing tabular data with `view()`:
 #' - `tibble.view_max`: Maximum number of rows shown if the input is not a

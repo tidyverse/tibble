@@ -19,7 +19,7 @@
 #' the printed output can be customized in various ways.
 #' See `vignette("extending", package = "pillar")` for details.
 #'
-#' @inheritSection pillar::`pillar-package` Package options
+#' @inherit pillar::pillar_options
 #' @section Package options:
 #'
 #' The following options control printing of `tbl` and `tbl_df` objects:
