@@ -61,6 +61,7 @@ These function is mostly useful for package authors that implement subclasses
 of a tibble, like sf or tsibble.
 new_tibble() creates a new object as a subclass of tbl_df, tbl and data.frame.
 This function is optimized for performance, checks are reduced to a minimum.
+See vctrs::new_data_frame() for details.
 validate_tibble() checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function
 runs without raising an error." />
@@ -207,13 +208,14 @@ runs without raising an error." />
 These function is mostly useful for package authors that implement subclasses
 of a tibble, like <span class="pkg">sf</span> or <span class="pkg">tsibble</span>.</p>
 <p><code>new_tibble()</code> creates a new object as a subclass of <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code>.
-This function is optimized for performance, checks are reduced to a minimum.</p>
+This function is optimized for performance, checks are reduced to a minimum.
+See <code><a href='https://vctrs.r-lib.org/reference/new_data_frame.html'>vctrs::new_data_frame()</a></code> for details.</p>
 <p><code>validate_tibble()</code> checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function
 runs without raising an error.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>new_tibble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, <span class='va'>nrow</span>, class <span class='op'>=</span> <span class='cn'>NULL</span>, subclass <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>new_tibble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, nrow <span class='op'>=</span> <span class='cn'>NULL</span>, class <span class='op'>=</span> <span class='cn'>NULL</span>, subclass <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='fu'>validate_tibble</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></code></pre></div>
 
@@ -230,7 +232,7 @@ runs without raising an error.</p>
     </tr>
     <tr>
       <th>nrow</th>
-      <td><p>The number of rows, required.</p></td>
+      <td><p>The number of rows, inferred from <code>x</code> if omitted.</p></td>
     </tr>
     <tr>
       <th>class</th>
@@ -248,9 +250,8 @@ runs without raising an error.</p>
 
 
 <p>For <code>new_tibble()</code>, <code>x</code> must be a list.
-An <code>nrow</code> argument is required.
-This should be an integer of length 1,
-and every element of the list <code>x</code> should have <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code>
+The <code>nrow</code> argument may be omitted as of tibble 3.1.4.
+If present, every element of the list <code>x</code> should have <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::vec_size()</a></code>
 equal to this value.
 (But this is not checked by the constructor).
 This takes the place of the "row.names" attribute in a data frame.
@@ -267,7 +268,9 @@ and that <code><a href='https://vctrs.r-lib.org/reference/vec_size.html'>vctrs::
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code> and <code><a href='as_tibble.html'>as_tibble()</a></code> for ways to construct a tibble
-with recycling of scalars and automatic name repair.</p></div>
+with recycling of scalars and automatic name repair,
+and <code><a href='https://vctrs.r-lib.org/reference/df_list.html'>vctrs::df_list()</a></code> and <code><a href='https://vctrs.r-lib.org/reference/new_data_frame.html'>vctrs::new_data_frame()</a></code>
+for lower-level implementations.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># The nrow argument is always required:</span></span>
