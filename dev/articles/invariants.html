@@ -2213,7 +2213,7 @@
 </td>
 </tr>
 </tbody></table>
-<p>This means that columns initialized with <code>NA</code> (which is a logical) cannot be later filled with values of a different type. Use the correct type of <code>NA</code> to initialize columns.</p>
+<p>A notable exception is the population of a column full of <code>NA</code> (which is of type <code>logical</code>), or the use of <code>NA</code> on the right-hand side of the assignment.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -2232,9 +2232,33 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="op">{</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span><span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt;    n    c   li</span>
+<span class="co">#&gt; 1  1    e    9</span>
+<span class="co">#&gt; 2 NA &lt;NA&gt;   NA</span>
+<span class="co">#&gt; 3  3 &lt;NA&gt;   NA</span>
+<span class="co">#&gt; 4 NA    h text</span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="op">{</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span><span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt;       n c     li       </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
+<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
+<span class="co">#&gt; 2    NA &lt;NA&gt;  &lt;NULL&gt;   </span>
+<span class="co">#&gt; 3     3 &lt;NA&gt;  &lt;NULL&gt;   </span>
+<span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;</span></code></pre></div>
+</td>
+</tr>
+</tbody></table>
+<p>For programming, it is always safer (and faster) to use the correct type of <code>NA</code> to initialize columns.</p>
+<table class="table dftbl"><tbody><tr style="vertical-align:top">
+<td>
+</td>
+<td>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="op">{</span><span class="va">tbl</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="cn">NA_integer_</span>; <span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"x"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">2</span><span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
 <span class="co">#&gt;       n c     li            x</span>
@@ -2244,13 +2268,12 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
 <span class="co">#&gt; 4    NA h     &lt;chr [1]&gt;    NA</span></code></pre></div>
 </td>
-</tr>
-</tbody></table>
+</tr></tbody></table>
 <p>For new columns, <code>x[i, j] &lt;- a</code> fills the unassigned rows with <code>NA</code>.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt;    n c         li</span>
 <span class="co">#&gt; 1  1 e          9</span>
@@ -2259,7 +2282,7 @@
 <span class="co">#&gt; 4 NA h       text</span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
 <span class="co">#&gt;       n c     li       </span>
@@ -2274,7 +2297,7 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"x"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
 <span class="co">#&gt;       n c     li            x</span>
@@ -2287,7 +2310,7 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error in x[[jj]][iseq] &lt;- vjj:
@@ -2295,7 +2318,7 @@
 </div>
 </td>
 <td>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <pre><code>#&gt; Error: `NULL` must be a vector, a bare
@@ -2309,7 +2332,7 @@
 <td>
 </td>
 <td>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 × 3</span>
 <span class="co">#&gt;       n c     li       </span>
