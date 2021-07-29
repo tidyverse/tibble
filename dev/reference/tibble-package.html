@@ -242,47 +242,6 @@ Science</em></p></li>
 data frame. Default: 1000.</p></li>
 </ul>
 
-
-
-<p>The following options control printing of <code>tbl</code> and <code>tbl_df</code> objects:</p><ul>
-<li><p><code>tibble.print_max</code>: Row number threshold: Maximum number of rows printed.
-Set to <code>Inf</code> to always print all rows.  Default: 20.</p></li>
-<li><p><code>tibble.print_min</code>: Number of rows printed if row number threshold is
-exceeded. Default: 10.</p></li>
-<li><p><code>tibble.width</code>: Output width. Default: <code>NULL</code> (use <code>width</code> option).</p></li>
-<li><p><code>tibble.max_extra_cols</code>: Number of extra columns printed in reduced form.
-Default: 100.</p></li>
-</ul>
-
-<p>The output uses color and highlighting according to the <code>"cli.num_colors"</code> option.
-Set it to <code>1</code> to suppress colored and highlighted output.</p>
-
-
-<ul>
-<li><p><code>pillar.bold</code>: Use bold font, e.g. for column headers? This currently
-defaults to <code>FALSE</code>, because many terminal fonts have poor support for
-bold fonts.</p></li>
-<li><p><code>pillar.subtle</code>: Use subtle style, e.g. for row numbers and data types?
-Default: <code>TRUE</code>.</p></li>
-<li><p><code>pillar.subtle_num</code>: Use subtle style for insignificant digits? Default:
-<code>FALSE</code>, is also affected by the <code>pillar.subtle</code> option.</p></li>
-<li><p><code>pillar.neg</code>: Highlight negative numbers? Default: <code>TRUE</code>.</p></li>
-<li><p><code>pillar.sigfig</code>: The number of significant digits that will be printed and
-highlighted, default: <code>3</code>. Set the <code>pillar.subtle</code> option to <code>FALSE</code> to
-turn off highlighting of significant digits.</p></li>
-<li><p><code>pillar.min_title_chars</code>: The minimum number of characters for the column
-title, default: <code>15</code>.  Column titles may be truncated up to that width to
-save horizontal space. Set to <code>Inf</code> to turn off truncation of column
-titles.</p></li>
-<li><p><code>pillar.min_chars</code>: The minimum number of characters wide to
-display character columns, default: <code>0</code>.  Character columns may be
-truncated up to that width to save horizontal space. Set to <code>Inf</code> to
-turn off truncation of character columns.</p></li>
-<li><p><code>pillar.max_dec_width</code>: The maximum allowed width for decimal notation,
-default 13.</p></li>
-</ul>
-
-
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Useful links:</p><ul>
