@@ -11,13 +11,14 @@
 ^revdep$
 ^README-.*\.png$
 ^appveyor\.yml$
+^bench$
+^\.github$
 ^\.deploy_key\.pub$
 ^\.deploy_key\.enc$
 ^API$
 ^_pkgdown\.yml$
 ^docs$
 ^docs-dev$
-^tic\.R$
 ^\.github$
 ^\.drake$
 ^adhoc$
@@ -25,3 +26,8 @@
 ^man/figures/logo-og-1280x640.png$
 ^minver$
 ^LICENSE\.md$
+^\.github/workflows/R-CMD-check\.yaml$
+^\.github/workflows/pr-commands\.yaml$
+^tests/testthat/helper-rstudio\.R$
+^vignettes/invariants\.md$
+^bench$

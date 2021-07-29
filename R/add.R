@@ -1,27 +1,18 @@
 #' Add rows to a data frame
 #'
 #' @description
-#' \lifecycle{questioning}
-#'
 #' This is a convenient way to add one or more rows of data to an existing data
 #' frame. See [tribble()] for an easy way to create an complete
-#' data frame row-by-row.
+#' data frame row-by-row. Use [tibble_row()] to ensure that the new data
+#' has only one row.
 #'
 #' `add_case()` is an alias of `add_row()`.
 #'
-#' @section Life cycle:
-#' It is unclear if `add_row()` and its alias `add_cases()` should ensure
-#' that all columns have length one by wrapping in a list if necessary.
-#' See <https://github.com/tidyverse/tibble/pull/503> and
-#' <https://github.com/tidyverse/tibble/issues/205> for details.
-#'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. Values can be defined
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Name-value pairs, passed on to [tibble()]. Values can be defined
 #'   only for columns that already exist in `.data` and unset columns will get an
-#'   `NA` value. These arguments are passed on to [tibble()], and therefore also
-#'   support unquote via `!!` and unquote-splice via `!!!`. However, unlike in
-#'   \pkg{dplyr} verbs, columns in `.data` are not available for the expressions.
-#'
+#'   `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -29,44 +20,50 @@
 #' # add_row ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
-#' add_row(df, x = 4, y = 0)
+#' df %>% add_row(x = 4, y = 0)
 #'
 #' # You can specify where to add the new rows
-#' add_row(df, x = 4, y = 0, .before = 2)
+#' df %>% add_row(x = 4, y = 0, .before = 2)
 #'
 #' # You can supply vectors, to add multiple rows (this isn't
 #' # recommended because it's a bit hard to read)
-#' add_row(df, x = 4:5, y = 0:-1)
+#' df %>% add_row(x = 4:5, y = 0:-1)
+#'
+#' # Use tibble_row() to add one row only
+#' df %>% add_row(tibble_row(x = 4, y = 0))
+#' try(df %>% add_row(tibble_row(x = 4:5, y = 0:-1)))
 #'
 #' # Absent variables get missing values
-#' add_row(df, x = 4)
+#' df %>% add_row(x = 4)
 #'
 #' # You can't create new variables
-#' \dontrun{
-#' add_row(df, z = 10)
-#' }
+#' try(df %>% add_row(z = 10))
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    abort(error_add_rows_to_grouped_df())
+    cnd_signal(error_add_rows_to_grouped_df())
   }
 
   if (!is.data.frame(.data)) {
-    signal_soft_deprecated("`.data` must be a data frame in `add_row()` and `add_case()`.")
+    deprecate_warn("2.1.1", "add_row(.data = 'must be a data frame')")
   }
 
-  df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
+  if (dots_n(...) == 0L) {
+    # A single row of missing values is added if no input is supplied
+    df <- new_tibble(list(), nrow = 1L)
+  } else {
+    df <- tibble(...)
+  }
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
-    abort(error_inconsistent_new_rows(extra_vars))
+    cnd_signal(error_incompatible_new_rows(extra_vars))
   }
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
   out <- rbind_at(.data, df, pos)
 
-  vec_restore(out, .data)
+  vectbl_restore(out, .data)
 }
 
 #' @export
@@ -106,38 +103,42 @@ rbind_at <- function(old, new, pos) {
 #' frame.
 #'
 #' @param .data Data frame to append to.
-#' @param ... Name-value pairs, passed on to [tibble()]. All values must have
-#'   one element for each row in the data frame, or be of length 1.
-#'   These arguments are passed on to [tibble()], and therefore also support
-#'   unquote via `!!` and unquote-splice via `!!!`. However, unlike in
-#'   \pkg{dplyr} verbs, columns in `.data` are not available for the
-#'   expressions. Use [dplyr::mutate()] if you need to add a column based on
-#'   existing data.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   Name-value pairs, passed on to [tibble()]. All values must have
+#'   the same size of `.data` or size 1.
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
+#' @inheritParams tibble
 #' @family addition
 #' @examples
 #' # add_column ---------------------------------
 #' df <- tibble(x = 1:3, y = 3:1)
 #'
-#' add_column(df, z = -1:1, w = 0)
+#' df %>% add_column(z = -1:1, w = 0)
+#' df %>% add_column(z = -1:1, .before = "y")
 #'
 #' # You can't overwrite existing columns
-#' \dontrun{
-#' add_column(df, x = 4:6)
-#' }
+#' try(df %>% add_column(x = 4:6))
+#'
 
 #' # You can't create new observations
-#' \dontrun{
-#' add_column(df, z = 1:5)
-#' }
+#' try(df %>% add_column(z = 1:5))
+#'
 #' @export
-add_column <- function(.data, ..., .before = NULL, .after = NULL) {
+add_column <- function(.data, ..., .before = NULL, .after = NULL,
+                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+
   if (!is.data.frame(.data)) {
-    signal_soft_deprecated("`.data` must be a data frame in `add_column()`.")
+    deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
-  df <- tibble(...)
+  if (has_length(.data) && (!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
+    deprecate_warn("3.0.0", "add_column(.data = 'must have unique names')",
+      details = 'Use `.name_repair = "minimal"`.')
+    .name_repair <- "minimal"
+  }
+
+  df <- tibble(..., .name_repair = .name_repair)
 
   if (ncol(df) == 0L) {
     return(.data)
@@ -147,13 +148,8 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      abort(error_inconsistent_new_cols(nrow(.data), df))
+      cnd_signal(error_incompatible_new_cols(nrow(.data), df))
     }
-  }
-
-  extra_vars <- intersect(names(df), names(.data))
-  if (length(extra_vars) > 0) {
-    abort(error_duplicate_new_cols(extra_vars))
   }
 
   pos <- pos_from_before_after_names(.before, .after, colnames(.data))
@@ -165,9 +161,12 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL) {
   indexes <- c(indexes_before, end_pos, indexes_after)
 
   new_data <- .data
-
   new_data[end_pos] <- df
-  vec_restore(new_data[indexes], .data)
+
+  out <- new_data[indexes]
+
+  out <- set_repaired_names(out, repair_hint = TRUE, .name_repair)
+  vectbl_restore(out, .data)
 }
 
 
@@ -181,21 +180,86 @@ pos_from_before_after_names <- function(before, after, names) {
 }
 
 pos_from_before_after <- function(before, after, len) {
-  if (is_null(before)) {
-    if (is_null(after)) {
+  if (is.null(before)) {
+    if (is.null(after)) {
       len
     } else {
       limit_pos_range(after, len)
     }
   } else {
-    if (is_null(after)) {
+    if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      abort(error_both_before_after())
+      cnd_signal(error_both_before_after())
     }
   }
 }
 
 limit_pos_range <- function(pos, len) {
   max(0L, min(len, pos))
+}
+
+# check_names_before_after ------------------------------------------------
+
+check_names_before_after <- function(j, x) {
+  if (!is_bare_character(j)) {
+    return(j)
+  }
+
+  check_needs_no_dim(j)
+  check_names_before_after_character(j, x)
+}
+
+check_needs_no_dim <- function(j) {
+  if (needs_dim(j)) {
+    cnd_signal(error_dim_column_index(j))
+  }
+}
+
+check_names_before_after_character <- function(j, names) {
+  pos <- safe_match(j, names)
+  if (anyNA(pos)) {
+    unknown_names <- j[is.na(pos)]
+    cnd_signal(error_unknown_column_names(unknown_names))
+  }
+  pos
+}
+
+# Errors ------------------------------------------------------------------
+
+error_add_rows_to_grouped_df <- function() {
+  tibble_error("Can't add rows to grouped data frames.")
+}
+
+error_incompatible_new_rows <- function(names) {
+  tibble_error(
+    problems(
+      "New rows can't add columns:",
+      cnd_message(error_unknown_column_names(names))
+    ),
+    names = names
+  )
+}
+
+error_both_before_after <- function() {
+  tibble_error("Can't specify both `.before` and `.after`.")
+}
+
+error_unknown_column_names <- function(j, parent = NULL) {
+  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+}
+
+error_incompatible_new_cols <- function(n, df) {
+  tibble_error(
+    bullets(
+      "New columns must be compatible with `.data`:",
+      x = paste0(
+        pluralise_n("New column(s) ha[s](ve)", ncol(df)), " ",
+        nrow(df), " rows"
+      ),
+      i = pluralise_count("`.data` has ", n, " row(s)")
+    ),
+    expected = n,
+    actual = nrow(df)
+  )
 }

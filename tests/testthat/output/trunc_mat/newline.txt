@@ -1,2 +1,0 @@
-# A tibble: 2 x 2
-<body of 4 row(s) created by pillar>

@@ -1,19 +1,13 @@
 #' Build a list
 #'
 #' @description
-#' \lifecycle{questioning}
-#'
 #' `lst()` constructs a list, similar to [base::list()], but with some of the
 #' same features as [tibble()]. `lst()` builds components sequentially. When
 #' defining a component, you can refer to components created earlier in the
 #' call. `lst()` also generates missing names automatically.
 #'
-#' @section Life cycle:
-#' The `lst()` function is in the [questioning
-#' stage](https://www.tidyverse.org/lifecycle/#questioning). It is essentially
-#' [rlang::list2()], but with a couple features copied from [tibble()]. It's not
-#' clear that a function for creating lists belongs in the tibble package.
-#' Consider using [rlang::list2()] instead.
+#' See [rlang::list2()] for a simpler and faster alternative without tibble's
+#' evaluation and auto-name semantics.
 #'
 #' @inheritParams tibble
 #' @return A named list.
@@ -57,7 +51,7 @@ lst_quos <- function(xs) {
   for (i in seq_along(xs)) {
     unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
     res <- eval_tidy(xs[[i]], unique_output)
-    if (!is_null(res)) {
+    if (!is.null(res)) {
       lengths[[i]] <- NROW(res)
       output[[i]] <- res
     }

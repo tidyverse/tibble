@@ -4,21 +4,39 @@
 \alias{add_column}
 \title{Add columns to a data frame}
 \usage{
-add_column(.data, ..., .before = NULL, .after = NULL)
+add_column(
+  .data,
+  ...,
+  .before = NULL,
+  .after = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
-one element for each row in the data frame, or be of length 1.
-These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also support
-unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in
-\pkg{dplyr} verbs, columns in \code{.data} are not available for the
-expressions. Use \code{\link[dplyr:mutate]{dplyr::mutate()}} if you need to add a column based on
-existing data.}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
+the same size of \code{.data} or size 1.}
 
 \item{.before, .after}{One-based column index or column name where to add the
 new columns, default: after last column.}
+
+\item{.name_repair}{Treatment of problematic column names:
+\itemize{
+\item \code{"minimal"}: No name repair or checks, beyond basic existence,
+\item \code{"unique"}: Make sure names are unique and not empty,
+\item \code{"check_unique"}: (default value), no name repair, but check they are
+\code{unique},
+\item \code{"universal"}: Make the names \code{unique} and syntactic
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
+\item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
+}
+
+This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+See there for more details on these terms and the strategies used
+to enforce them.}
 }
 \description{
 This is a convenient way to add one or more columns to an existing data
@@ -28,16 +46,15 @@ frame.
 # add_column ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
-add_column(df, z = -1:1, w = 0)
+df \%>\% add_column(z = -1:1, w = 0)
+df \%>\% add_column(z = -1:1, .before = "y")
 
 # You can't overwrite existing columns
-\dontrun{
-add_column(df, x = 4:6)
-}
+try(df \%>\% add_column(x = 4:6))
+
 # You can't create new observations
-\dontrun{
-add_column(df, z = 1:5)
-}
+try(df \%>\% add_column(z = 1:5))
+
 }
 \seealso{
 Other addition: 

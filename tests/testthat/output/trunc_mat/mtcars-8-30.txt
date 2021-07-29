@@ -1,8 +1,0 @@
-# A tibble: 32 x 11
-<body created by pillar>
-# … with 24 more rows, and 7
-#   more variables:
-#   drat <dbl>, wt <dbl>,
-#   qsec <dbl>, vs <dbl>,
-#   am <dbl>, gear <dbl>,
-#   carb <dbl>

@@ -1,6 +1,0 @@
-# A tibble: 3 x 9
-<body created by pillar>
-# … with 5 more variables:
-#   e <fct>, f <date>,
-#   g <dttm>, h <list>,
-#   i <list>

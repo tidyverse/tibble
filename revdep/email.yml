@@ -1,0 +1,6 @@
+release_date: Mar 18
+rel_release_date: days
+my_news_url: https://github.com/tidyverse/tibble/blob/master/NEWS.md
+release_version: 3.0.0
+release_details: Major update, using vctrs internally.
+my_name: Kirill

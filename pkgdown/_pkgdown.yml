@@ -11,13 +11,14 @@ home:
   strip_header: true
   links:
   - text: Learn more
-    href: http://r4ds.had.co.nz/tibbles.html
+    href: https://r4ds.had.co.nz/tibbles.html
 
 reference:
 - title: Tibbles
   contents:
   - "tibble-package"
   - tibble
+  - "tbl_df-class"
   - formatting
   - "tibble-options"
   - tribble
@@ -25,6 +26,7 @@ reference:
 
 - title: Coercion
   contents:
+  - is_tibble
   - as_tibble
   - new_tibble
   - validate_tibble
@@ -61,13 +63,15 @@ navbar:
     href: reference/index.html
   - text: Articles
     menu:
-    - text: Extending tibble
-      href: articles/extending.html
+    - text: Data types
+      href: articles/types.html
     - text: Invariants
       href: articles/invariants.html
   - text: News
     menu:
     - text: "Release notes"
+    - text: "Version 3.0.0"
+      href: https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/
     - text: "Version 2.1.1"
       href: https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/
     - text: "Version 2.0.1"
@@ -89,4 +93,4 @@ development:
 
 authors:
   Kirill Müller:
-    href: http://krlmlr.info
+    href: https://krlmlr.info

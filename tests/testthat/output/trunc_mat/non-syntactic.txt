@@ -1,2 +1,0 @@
-# A tibble: 1 x 2
-<body created by pillar>

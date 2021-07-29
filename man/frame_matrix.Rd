@@ -7,7 +7,8 @@
 frame_matrix(...)
 }
 \arguments{
-\item{...}{Arguments specifying the structure of a \code{frame_matrix}.
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Arguments specifying the structure of a \code{frame_matrix}.
 Column names should be formulas, and may only appear before the data.
 These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
 and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}}.}
@@ -16,8 +17,6 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{matrix}.
 }
 \description{
-\lifecycle{maturing}
-
 Create matrices laying out the data in rows, similar to
 \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
 This is useful for small matrices, e.g. covariance matrices, where readability

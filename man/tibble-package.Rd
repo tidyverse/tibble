@@ -12,7 +12,7 @@ Provides a 'tbl_df' class (the 'tibble') that
     data frame.
 }
 \details{
-\lifecycle{stable}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
@@ -22,15 +22,15 @@ analysis with data frames.
 
 Tibble is the central data structure for the set of packages known as the
 \href{https://www.tidyverse.org/packages/}{tidyverse}, including
-\href{http://dplyr.tidyverse.org/}{dplyr},
-\href{http://ggplot2.tidyverse.org/}{ggplot2},
-\href{http://tidyr.tidyverse.org/}{tidyr}, and
-\href{http://readr.tidyverse.org/}{readr}.
+\href{https://dplyr.tidyverse.org/}{dplyr},
+\href{https://ggplot2.tidyverse.org/}{ggplot2},
+\href{https://tidyr.tidyverse.org/}{tidyr}, and
+\href{https://readr.tidyverse.org/}{readr}.
 
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{http://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
+\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
 Science}
 }
 
@@ -41,6 +41,15 @@ Resources on specific topics:
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
 }
 }
+\section{Package options}{
+
+The following option is used for viewing tabular data with \code{view()}:
+\itemize{
+\item \code{tibble.view_max}: Maximum number of rows shown if the input is not a
+data frame. Default: 1000.
+}
+}
+
 \seealso{
 Useful links:
 \itemize{

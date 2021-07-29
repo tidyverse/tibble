@@ -48,6 +48,16 @@ test_that("new_tibble() with new class argument", {
   )
 })
 
+test_that("new_tibble() with additional attributes", {
+  df <- data.frame(a = 1:3)
+  foo <- df
+  attr(foo, "foo") <- "bar"
+
+  tbl_df <- new_tibble(df, nrow = 3, foo = "baz")
+  tbl_foo <- new_tibble(foo, nrow = 3, foo = "baz")
+  expect_identical(tbl_df, tbl_foo)
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
@@ -68,7 +78,7 @@ test_that("new_tibble checks", {
   )
   expect_tibble_error(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null(repair = FALSE)
+    error_names_must_be_non_null()
   )
   expect_error(
     new_tibble(set_names(list(1), NA_character_), nrow = 1),
@@ -94,6 +104,13 @@ test_that("new_tibble checks", {
 test_that("validate_tibble() checks", {
   expect_tibble_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
-    error_inconsistent_cols(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
+    error_incompatible_size(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
   )
+})
+
+test_that("output test", {
+  expect_snapshot_with_error({
+    new_tibble(1:3, nrow = 1)
+    new_tibble(as.list(1:3))
+  })
 })

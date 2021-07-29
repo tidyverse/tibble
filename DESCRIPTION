@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 2.99.99.9011
+Version: 3.1.3.9001
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -30,73 +30,44 @@ BugReports: https://github.com/tidyverse/tibble/issues
 Depends: 
     R (>= 3.1.0)
 Imports: 
-    cli,
-    crayon (>= 1.3.4),
+    ellipsis (>= 0.3.2),
     fansi (>= 0.4.0),
-    lifecycle,
+    lifecycle (>= 0.2.0),
     magrittr,
     methods,
-    pillar (>= 1.4.2.9001),
+    pillar (>= 1.6.0),
     pkgconfig,
-    rlang (>= 0.4.2),
+    rlang (>= 0.4.3),
     utils,
-    vctrs (>= 0.2.0.9001)
+    vctrs (>= 0.3.8)
 Suggests: 
     bench,
+    bit64,
+    blob,
+    cli,
     covr,
+    crayon (>= 1.3.4),
+    DiagrammeR,
     dplyr,
     evaluate,
+    formattable,
+    ggplot2,
+    hms,
     htmltools,
-    import,
     knitr,
+    lubridate,
     mockr,
     nycflights13,
+    purrr,
     rmarkdown,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.2),
+    tidyr,
     withr
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
-Remotes: 
-    r-lib/pillar,
-    r-lib/vctrs
 Encoding: UTF-8
-LazyData: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
-Collate: 
-    'add.R'
-    'as_tibble.R'
-    'check-names.R'
-    'compat-lazyeval.R'
-    'compat-lifecycle.R'
-    'compat-purrr.R'
-    'tribble.R'
-    'deprecated.R'
-    'dftbl.R'
-    'enframe.R'
-    'exports.R'
-    'glimpse.R'
-    'has-name.R'
-    'lst.R'
-    'msg-format.R'
-    'msg.R'
-    'new.R'
-    'pipe.R'
-    'repair-names.R'
-    'rownames.R'
-    'str.R'
-    'strrep.R'
-    'subsetting-matrix.R'
-    'subsetting.R'
-    'tbl-df.R'
-    'tibble-package.R'
-    'tibble.R'
-    'tick.R'
-    'type-sum.R'
-    'utils-format.R'
-    'utils.R'
-    'view.R'
-    'wrap.R'
-    'zzz.R'
+RoxygenNote: 7.1.1.9001
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Config/testthat/start-first: subsetting, as_tibble, add, invariants

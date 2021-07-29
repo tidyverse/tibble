@@ -52,8 +52,8 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
       }
   )
 
-  if (is_null(out)) {
-    abort(sprintf("Can't convert a %s to a quosure", typeof(lazy)))
+  if (is.null(out)) {
+    cnd_signal(sprintf("Can't convert a %s to a quosure", typeof(lazy)))
   } else {
     out
   }

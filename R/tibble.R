@@ -10,19 +10,29 @@
 #'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
 #'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'     transforming the user's input. Character vectors are not coerced to
-#'     factor. List-columns are expressly anticipated and do not require special
-#'     tricks. Column names are not modified.
+#'     transforming the user's input.
+#'
+#'       - Character vectors are not coerced to factor.
+#'       - List-columns are expressly anticipated and do not require special tricks.
+#'       - Column names are not modified.
+#'       - Inner names in columns are left unchanged.
+#'
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
 #'     See examples.
 #'
-#' @param ... A set of name-value pairs. Arguments are evaluated sequentially,
-#'   so you can refer to previously created elements. These arguments are
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#'   A set of name-value pairs. These arguments are
 #'   processed with [rlang::quos()] and support unquote via [`!!`] and
 #'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
+#'
+#'   Arguments are evaluated sequentially.
+#'   You can refer to previously created elements directly or using the [.data]
+#'   pronoun.
+#'   An existing `.data` pronoun, provided e.g. inside [dplyr::mutate()],
+#'   is not available.
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
@@ -95,7 +105,7 @@
 #' tibble(x = 1, x = 2, .name_repair = ~ c("a", "b"))
 #'
 #' # Tibbles can contain columns that are tibbles or matrices
-#' # if the number of rows is consistent. Unnamed tibbled are
+#' # if the number of rows is compatible. Unnamed tibbled are
 #' # spliced, i.e. the inner columns are inserted into the
 #' # tibble under construction.
 #' tibble(
@@ -117,13 +127,13 @@
 #' )
 #'
 #' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with inconsistent number of rows:
+#' # with incompatible number of rows:
 #' try(tibble(y = strptime("2000/01/01", "%x")))
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
 #' # Use := to create columns with names that start with a dot:
-#' tibble(.rows = 3)
-#' tibble(.rows := 3)
+#' tibble(.dotted = 3)
+#' tibble(.dotted := 3)
 #'
 #' # You can unquote an expression:
 #' x <- 3
@@ -138,9 +148,7 @@ tibble <- function(...,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
-
-  tibble_quos(xs[!is_null], .rows, .name_repair)
+  tibble_quos(xs, .rows, .name_repair)
 }
 
 #' tibble_row()
@@ -158,11 +166,9 @@ tibble <- function(...,
 #' tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
 tibble_row <- function(...,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  xs <- quos(...)
+  xs <- enquos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
-
-  tibble_quos(xs[!is_null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
+  tibble_quos(xs, .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }
 
 #' Test if the object is a tibble
@@ -180,7 +186,7 @@ is_tibble <- function(x) {
 #' Deprecated test for tibble-ness
 #'
 #' @description
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Please use [is_tibble()] instead.
 #'
@@ -188,7 +194,7 @@ is_tibble <- function(x) {
 #' @export
 #' @keywords internal
 is.tibble <- function(x) {
-  signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
+  deprecate_warn("2.0.0", "is.tibble()", "is_tibble()")
 
   is_tibble(x)
 }
@@ -210,13 +216,13 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   for (j in seq_along(xs)) {
     res <- eval_tidy(xs[[j]], mask)
 
-    if (!is_null(res)) {
+    if (!is.null(res)) {
       # Single-row mode: Vectors must be length one, non-vectors are wrapped
       # in a list (which is length one by definition)
       if (single_row) {
         if (vec_is(res)) {
-          if (!vec_is(res, size = 1)) {
-            abort(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
+          if (vec_size(res) != 1) {
+            cnd_signal(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
           }
         } else {
           res <- list(res)
@@ -238,7 +244,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
           first_size <- current_size
         } else {
-          res <- vec_recycle_rows(res, first_size, j, given_col_names[[j]])
+          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]])
         }
       }
 
@@ -248,10 +254,23 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   }
 
   names(output) <- col_names
+
+  is_null <- map_lgl(output, is.null)
+  output <- output[!is_null]
+
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, .name_repair = .name_repair)
+  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair)
 
   new_tibble(output, nrow = first_size %||% 0L)
+}
+
+check_valid_col <- function(x, name, pos) {
+  if (name == "") {
+    ret <- check_valid_cols(list(x), pos = pos)
+  } else {
+    ret <- check_valid_cols(set_names(list(x), name))
+  }
+  invisible(ret[[1]])
 }
 
 new_data_mask_with_data <- function(env) {
@@ -276,6 +295,65 @@ add_to_env <- function(x, name, env) {
 }
 
 splice_dfs <- function(x) {
+  # Avoiding .ptype argument to vec_c()
+  if (is_empty(x)) {
+    return(list())
+  }
+
   x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
-  vec_c(!!!x, .ptype = list(), .name_spec = "{inner}")
+  vec_c(!!!x, .name_spec = "{inner}")
+}
+
+vectbl_recycle_rows <- function(x, n, j, name) {
+  size <- vec_size(x)
+  if (size == n) return(x)
+  if (size == 1) return(vec_recycle(x, n))
+
+  if (name == "") {
+    name <- j
+  }
+
+  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
+}
+
+# Errors ------------------------------------------------------------------
+
+error_tibble_row_size_one <- function(j, name, size) {
+  if (name != "") {
+    desc <- tick(name)
+  } else {
+    desc <- paste0("at position ", j)
+  }
+
+  tibble_error(problems(
+    "All vectors must be size one, use `list()` to wrap.",
+    paste0("Column ", desc, " is of size ", size, ".")
+  ))
+}
+
+error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
+  vars_split <- split(vars, vars_len)
+
+  vars_split[["1"]] <- NULL
+  if (!is.null(.rows)) {
+    vars_split[[as.character(.rows)]] <- NULL
+  }
+
+  problems <- map2_chr(names(vars_split), vars_split, function(x, y) {
+    if (is.numeric(y)) {
+      text <- "Column(s) at position(s) "
+    } else {
+      text <- "Column(s) "
+      y <- tick(y)
+    }
+
+    paste0("Size ", x, ": ", pluralise_commas(text, y))
+  })
+
+  tibble_error(bullets(
+    "Tibble columns must have compatible sizes:",
+    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+    problems,
+    info = "Only values of size one are recycled."
+  ))
 }

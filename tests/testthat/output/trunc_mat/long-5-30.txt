@@ -1,3 +1,0 @@
-# A tibble: 10,000 x 1
-<body created by pillar>
-# … with 9,995 more rows

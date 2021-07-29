@@ -10,52 +10,44 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{Data frame to append to.}
 
-\item{...}{Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
 only for columns that already exist in \code{.data} and unset columns will get an
-\code{NA} value. These arguments are passed on to \code{\link[=tibble]{tibble()}}, and therefore also
-support unquote via \verb{!!} and unquote-splice via \verb{!!!}. However, unlike in
-\pkg{dplyr} verbs, columns in \code{.data} are not available for the expressions.}
+\code{NA} value.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
 }
 \description{
-\lifecycle{questioning}
-
 This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
-data frame row-by-row.
+data frame row-by-row. Use \code{\link[=tibble_row]{tibble_row()}} to ensure that the new data
+has only one row.
 
 \code{add_case()} is an alias of \code{add_row()}.
 }
-\section{Life cycle}{
-
-It is unclear if \code{add_row()} and its alias \code{add_cases()} should ensure
-that all columns have length one by wrapping in a list if necessary.
-See \url{https://github.com/tidyverse/tibble/pull/503} and
-\url{https://github.com/tidyverse/tibble/issues/205} for details.
-}
-
 \examples{
 # add_row ---------------------------------
 df <- tibble(x = 1:3, y = 3:1)
 
-add_row(df, x = 4, y = 0)
+df \%>\% add_row(x = 4, y = 0)
 
 # You can specify where to add the new rows
-add_row(df, x = 4, y = 0, .before = 2)
+df \%>\% add_row(x = 4, y = 0, .before = 2)
 
 # You can supply vectors, to add multiple rows (this isn't
 # recommended because it's a bit hard to read)
-add_row(df, x = 4:5, y = 0:-1)
+df \%>\% add_row(x = 4:5, y = 0:-1)
+
+# Use tibble_row() to add one row only
+df \%>\% add_row(tibble_row(x = 4, y = 0))
+try(df \%>\% add_row(tibble_row(x = 4:5, y = 0:-1)))
 
 # Absent variables get missing values
-add_row(df, x = 4)
+df \%>\% add_row(x = 4)
 
 # You can't create new variables
-\dontrun{
-add_row(df, z = 10)
-}
+try(df \%>\% add_row(z = 10))
 }
 \seealso{
 Other addition: 
