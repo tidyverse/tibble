@@ -44,9 +44,6 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     cnd_signal(error_new_tibble_must_be_list())
   }
 
-  #' The `...` argument allows adding more attributes to the subclass.
-  x <- update_tibble_attrs(x, ...)
-
   #' An `nrow` argument is required.
   if (missing(nrow)) {
     cnd <- error_new_tibble_needs_nrow()
@@ -63,22 +60,54 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (!is_integerish(nrow, 1)) {
+  if (is_integerish(nrow, 1)) {
+    nrow <- as.integer(nrow)
+  } else {
     cnd_signal(error_new_tibble_needs_nrow())
+  }
+
+  args <- attributes(x)
+
+  if (is.null(args)) {
+    args <- list()
+  }
+
+  new_attrs <- pairlist2(...)
+  nms <- names(new_attrs)
+
+  for (i in seq_along(nms)) {
+    nm <- nms[[i]]
+
+    if (nm == "") {
+      next
+    }
+
+    args[[nm]] <- new_attrs[[i]]
   }
 
   #' `x` must have names (or be empty),
   #' but the names are not checked for correctness.
   if (length(x) == 0) {
     # Leaving this because creating a named list of length zero seems difficult
-    names(x) <- character()
-  } else if (is.null(names(x))) {
+    args[["names"]] <- character()
+  } else if (is.null(args[["names"]])) {
     cnd_signal(error_names_must_be_non_null())
   }
 
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(class[!class %in% tibble_class], tibble_class)
-  x
+  if (is.null(class)) {
+    class <- tibble_class_no_data_frame
+  } else {
+    class <- c(class[!class %in% tibble_class], tibble_class_no_data_frame)
+  }
+
+  slots <- c("x", "n", "class")
+  args[slots] <- list(x, nrow, class)
+
+  # `new_data_frame()` restores compact row names
+  args[["row.names"]] <- NULL
+
+  # do.call() is faster than exec() in this case
+  do.call(new_data_frame, args)
 }
 
 #' @description
@@ -131,11 +160,8 @@ validate_nrow <- function(names, lengths, nrow) {
   }
 }
 
-update_tibble_attrs <- function(x, ...) {
-  .Call(`tibble_update_attrs`, x, pairlist2(...))
-}
-
 tibble_class <- c("tbl_df", "tbl", "data.frame")
+tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Errors ------------------------------------------------------------------
 

@@ -36,7 +36,6 @@ runs without raising an error.
 
 
 For \code{new_tibble()}, \code{x} must be a list.
-The \code{...} argument allows adding more attributes to the subclass.
 An \code{nrow} argument is required.
 This should be an integer of length 1,
 and every element of the list \code{x} should have \code{\link[vctrs:vec_size]{vctrs::vec_size()}}
