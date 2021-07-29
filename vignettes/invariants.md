@@ -75,7 +75,7 @@ by side:
 <td>
 
     new_tbl()
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -123,7 +123,7 @@ a data frame or a matrix:
 <td>
 
     new_tbl()
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -169,7 +169,7 @@ executed, further examples omit this output.
     #>   tbl$n <- rev(tbl$n)
     #>   tbl
     #> }
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1    NA e     <dbl [1]>
@@ -679,7 +679,7 @@ vector, or a logical vector with length 1 or `ncol(x)`.[1]
 <td>
 
     tbl[1:2]
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>       n c    
     #>   <int> <chr>
     #> 1     1 e    
@@ -711,7 +711,7 @@ undefined, do not rely on them.
 <td>
 
     tbl[c(1, 1)]
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>       n     n
     #>   <int> <int>
     #> 1     1     1
@@ -737,7 +737,7 @@ first matching column.
 <td>
 
     tbl[integer()]
-    #> # A tibble: 4 x 0
+    #> # A tibble: 4 × 0
 
 </td>
 </tr>
@@ -831,7 +831,7 @@ the returned vector are compatible.
 <td>
 
     tbl[, 1]
-    #> # A tibble: 4 x 1
+    #> # A tibble: 4 × 1
     #>       n
     #>   <int>
     #> 1     1
@@ -847,7 +847,7 @@ the returned vector are compatible.
 <td>
 
     tbl[, 1:2]
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>       n c    
     #>   <int> <chr>
     #> 1     1 e    
@@ -953,7 +953,7 @@ For backward compatiblity, `x[, j, drop = TRUE]` performs column
 <td>
 
     tbl[3, ]
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     3 g     <int [3]>
@@ -1019,7 +1019,7 @@ vector containing positive numbers.
 <td>
 
     tbl["1", ]
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1051,7 +1051,7 @@ Exception: OOB values generate warnings instead of errors:
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li    
     #>   <int> <chr> <list>
     #> 1    NA <NA>  <NULL>
@@ -1076,7 +1076,7 @@ Exception: OOB values generate warnings instead of errors:
     #> Use `NA_integer_` as row index to obtain
     #> a row full of `NA` values.
 
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li    
     #>   <int> <chr> <list>
     #> 1    NA <NA>  <NULL>
@@ -1127,7 +1127,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 <td>
 
     tbl[NA, ]
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li    
     #>   <int> <chr> <list>
     #> 1    NA <NA>  <NULL>
@@ -1143,7 +1143,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 <td>
 
     tbl[NA_integer_, ]
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li    
     #>   <int> <chr> <list>
     #> 1    NA <NA>  <NULL>
@@ -1177,7 +1177,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 <td>
 
     tbl[1, , drop = TRUE]
-    #> # A tibble: 1 x 3
+    #> # A tibble: 1 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1210,7 +1210,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 <td>
 
     tbl[1, 1]
-    #> # A tibble: 1 x 1
+    #> # A tibble: 1 × 1
     #>       n
     #>   <int>
     #> 1     1
@@ -1223,7 +1223,7 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 <td>
 
     tbl[1, ][1]
-    #> # A tibble: 1 x 1
+    #> # A tibble: 1 × 1
     #>       n
     #>   <int>
     #> 1     1
@@ -1293,7 +1293,7 @@ value `a`.
 <td>
 
     with_tbl(tbl[[1]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -1309,7 +1309,7 @@ value `a`.
 <td>
 
     with_tbl(tbl[[3]] <- 4:1)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c        li
     #>   <int> <chr> <int>
     #> 1     1 e         4
@@ -1325,7 +1325,7 @@ value `a`.
 <td>
 
     with_tbl2(tbl2[[1]] <- 0)
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>      tb m[,1]  [,2]  [,3]  [,4]
     #>   <dbl> <dbl> <dbl> <dbl> <dbl>
     #> 1     0     1     0     0     0
@@ -1341,7 +1341,7 @@ value `a`.
 <td>
 
     with_tbl2(tbl2[[2]] <- 4:1)
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     4
@@ -1361,7 +1361,7 @@ value `a`.
 <td>
 
     with_tbl(tbl[[1]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -1377,7 +1377,7 @@ value `a`.
 <td>
 
     with_tbl(tbl[["c"]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n     c li       
     #>   <int> <dbl> <list>   
     #> 1     1     0 <dbl [1]>
@@ -1573,7 +1573,7 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
 
     with_tbl(tbl[["li"]] <- list(0))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1596,7 +1596,7 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
 
     with_tbl2(tbl2[["tb"]] <- tbl[1, ])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -1619,7 +1619,7 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
 
     with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -1639,7 +1639,7 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
 
     with_tbl(tbl[[1]] <- 1)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1655,7 +1655,7 @@ Recycling also works for list, data frame, and matrix columns.
 <td>
 
     with_tbl(tbl[[1]] <- 4:1)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     4 e     <dbl [1]>
@@ -1725,7 +1725,7 @@ needed.
 <td>
 
     with_tbl(tbl[["x"]] <- 0)
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li            x
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
@@ -1749,7 +1749,7 @@ needed.
 <td>
 
     with_tbl(tbl[[4]] <- 0)
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li         ...4
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
@@ -1802,7 +1802,7 @@ needed.
 <td>
 
     with_tbl(tbl[[1]] <- tbl[[2]])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>   n     c     li       
     #>   <chr> <chr> <list>   
     #> 1 e     e     <dbl [1]>
@@ -1818,7 +1818,7 @@ needed.
 <td>
 
     with_tbl(tbl[[2]] <- tbl[[3]])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c         li       
     #>   <int> <list>    <list>   
     #> 1     1 <dbl [1]> <dbl [1]>
@@ -1834,7 +1834,7 @@ needed.
 <td>
 
     with_tbl(tbl[[3]] <- tbl2[[1]])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c      li$n $c    $li      
     #>   <int> <chr> <int> <chr> <list>   
     #> 1     1 e         1 e     <dbl [1]>
@@ -1850,7 +1850,7 @@ needed.
 <td>
 
     with_tbl2(tbl2[[1]] <- tbl2[[2]])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
     #>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
     #> 1      1     0     0     0     1     0
@@ -1866,7 +1866,7 @@ needed.
 <td>
 
     with_tbl2(tbl2[[2]] <- tbl[[1]])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     1
@@ -1889,7 +1889,7 @@ needed.
 <td>
 
     with_tbl(tbl[[1]] <- NULL)
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>   c     li       
     #>   <chr> <list>   
     #> 1 e     <dbl [1]>
@@ -1905,7 +1905,7 @@ needed.
 <td>
 
     with_tbl2(tbl2[[2]] <- NULL)
-    #> # A tibble: 4 x 1
+    #> # A tibble: 4 × 1
     #>    tb$n $c    $li      
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1928,7 +1928,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl[["q"]] <- NULL)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -1954,7 +1954,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl$n <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -1970,7 +1970,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl[["n"]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -1990,7 +1990,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl$"n" <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -2013,7 +2013,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl$l <- 0)
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li            l
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
@@ -2029,7 +2029,7 @@ Removing a nonexistent column is a no-op.
 <td>
 
     with_tbl(tbl[["l"]] <- 0)
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li            l
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>     0
@@ -2062,7 +2062,7 @@ If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then
 <td>
 
     with_tbl(tbl[1:2] <- list("x", 4:1))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>   n         c li       
     #>   <chr> <int> <list>   
     #> 1 x         4 <dbl [1]>
@@ -2078,7 +2078,7 @@ If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then
 <td>
 
     with_tbl(tbl[c("li", "x", "c")] <- list("x", 4:1, NULL))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n li        x
     #>   <int> <chr> <int>
     #> 1     1 x         4
@@ -2101,7 +2101,7 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 <td>
 
     with_tbl(tbl[1:2] <- list(1))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n     c li       
     #>   <dbl> <dbl> <list>   
     #> 1     1     1 <dbl [1]>
@@ -2197,7 +2197,7 @@ modifications).
 <td>
 
     with_tbl(tbl[1:2] <- list(NULL, 4:1))
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>       c li       
     #>   <int> <list>   
     #> 1     4 <dbl [1]>
@@ -2288,7 +2288,7 @@ existing column.
 <td>
 
     with_tbl(tbl[1] <- tbl[2])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>   n     c     li       
     #>   <chr> <chr> <list>   
     #> 1 e     e     <dbl [1]>
@@ -2304,7 +2304,7 @@ existing column.
 <td>
 
     with_tbl(tbl[2] <- tbl[3])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c         li       
     #>   <int> <list>    <list>   
     #> 1     1 <dbl [1]> <dbl [1]>
@@ -2320,7 +2320,7 @@ existing column.
 <td>
 
     with_tbl(tbl[3] <- tbl2[1])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c      li$n $c    $li      
     #>   <int> <chr> <int> <chr> <list>   
     #> 1     1 e         1 e     <dbl [1]>
@@ -2336,7 +2336,7 @@ existing column.
 <td>
 
     with_tbl2(tbl2[1] <- tbl2[2])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
     #>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
     #> 1      1     0     0     0     1     0
@@ -2352,7 +2352,7 @@ existing column.
 <td>
 
     with_tbl2(tbl2[2] <- tbl[1])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li           m
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     1
@@ -2377,7 +2377,7 @@ that order of precedence).
 <td>
 
     with_tbl(tbl[c("x", "y")] <- tibble("x", x = 4:1))
-    #> # A tibble: 4 x 5
+    #> # A tibble: 4 × 5
     #>       n c     li        x         y
     #>   <int> <chr> <list>    <chr> <int>
     #> 1     1 e     <dbl [1]> x         4
@@ -2393,7 +2393,7 @@ that order of precedence).
 <td>
 
     with_tbl(tbl[3:4] <- list("x", x = 4:1))
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li        x
     #>   <int> <chr> <chr> <int>
     #> 1     1 e     x         4
@@ -2417,7 +2417,7 @@ that order of precedence).
 <td>
 
     with_tbl(tbl[4] <- list(4:1))
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li         ...4
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>     4
@@ -2471,7 +2471,7 @@ and if all columns updated are compatible with the value assigned.
 <td>
 
     with_tbl(tbl[is.na(tbl)] <- 4)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -2541,7 +2541,7 @@ type must be compatible with all columns. If `is.array(a)` and
 <td>
 
     with_tbl(tbl[1:2] <- matrix(8:1, ncol = 2))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n     c li       
     #>   <int> <int> <list>   
     #> 1     8     4 <dbl [1]>
@@ -2581,7 +2581,7 @@ type must be compatible with all columns. If `is.array(a)` and
 <td>
 
     with_tbl(tbl[1:2] <- array(4:1, dim = c(4, 1, 1)))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n     c li       
     #>   <int> <int> <list>   
     #> 1     4     4 <dbl [1]>
@@ -2597,7 +2597,7 @@ type must be compatible with all columns. If `is.array(a)` and
 <td>
 
     with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 2, 1)))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n     c li       
     #>   <int> <int> <list>   
     #> 1     8     4 <dbl [1]>
@@ -2665,7 +2665,7 @@ This is primarily provided for backward compatbility.
 <td>
 
     with_tbl(tbl[1] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -2681,7 +2681,7 @@ This is primarily provided for backward compatbility.
 <td>
 
     with_tbl(tbl[1] <- list(0))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <dbl> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -2705,7 +2705,7 @@ matrix column.
 <td>
 
     with_tbl(tbl[1] <- list(matrix(1:8, ncol = 2)))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>   n[,1]  [,2] c     li       
     #>   <int> <int> <chr> <list>   
     #> 1     1     5 e     <dbl [1]>
@@ -2727,7 +2727,7 @@ matrix column.
 <td>
 
     with_tbl(tbl[1:2] <- list(matrix(1:8, ncol = 2)))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>   n[,1]  [,2] c[,1]  [,2] li       
     #>   <int> <int> <int> <int> <list>   
     #> 1     1     5     1     5 <dbl [1]>
@@ -2752,7 +2752,7 @@ Entire columns can be removed. Specifying `i` is an error.
 <td>
 
     with_tbl(tbl[1] <- NULL)
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>   c     li       
     #>   <chr> <list>   
     #> 1 e     <dbl [1]>
@@ -2768,7 +2768,7 @@ Entire columns can be removed. Specifying `i` is an error.
 <td>
 
     with_tbl(tbl[, 2:3] <- NULL)
-    #> # A tibble: 4 x 1
+    #> # A tibble: 4 × 1
     #>       n
     #>   <int>
     #> 1     1
@@ -2889,7 +2889,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
 
     with_tbl(tbl[2:3, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -2905,7 +2905,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
 
     with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -2971,7 +2971,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
 
     with_tbl(tbl[-2, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3055,7 +3055,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
 
     with_tbl(tbl[TRUE, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3071,7 +3071,7 @@ scalar. See `?vec_is` and `?vec_proxy` for details.
 <td>
 
     with_tbl(tbl[FALSE, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3114,7 +3114,7 @@ Only values of size one can be recycled.
 <td>
 
     with_tbl(tbl[2:3, ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3130,7 +3130,7 @@ Only values of size one can be recycled.
 <td>
 
     with_tbl(tbl[2:3, ] <- list(tbl$n[1], tbl$c[1:2], tbl$li[1]))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3180,7 +3180,7 @@ Only values of size one can be recycled.
 <td>
 
     with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -3228,7 +3228,7 @@ supported, without warning.
 <td>
 
     with_tbl(tbl[5, ] <- tbl[1, ])
-    #> # A tibble: 5 x 3
+    #> # A tibble: 5 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3245,7 +3245,7 @@ supported, without warning.
 <td>
 
     with_tbl(tbl[5:7, ] <- tbl[1, ])
-    #> # A tibble: 7 x 3
+    #> # A tibble: 7 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3363,7 +3363,7 @@ positive numbers.
 <td>
 
     with_tbl(tbl[as.character(1:3), ] <- tbl[1, ])
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3609,7 +3609,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 <td>
 
     with_tbl2(tbl2[2:3, 2] <- tbl[1:2, 1])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -3658,7 +3658,7 @@ type of `NA` to initialize columns.
 <td>
 
     with_tbl({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li            x
     #>   <int> <chr> <list>    <int>
     #> 1     1 e     <dbl [1]>    NA
@@ -3689,7 +3689,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 <td>
 
     with_tbl(tbl[2:3, "n"] <- 1)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3705,7 +3705,7 @@ For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 <td>
 
     with_tbl(tbl[2:3, "x"] <- 1)
-    #> # A tibble: 4 x 4
+    #> # A tibble: 4 × 4
     #>       n c     li            x
     #>   <int> <chr> <list>    <dbl>
     #> 1     1 e     <dbl [1]>    NA
@@ -3747,7 +3747,7 @@ Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with
 <td>
 
     with_tbl(tbl[5, "n"] <- list(0L))
-    #> # A tibble: 5 x 3
+    #> # A tibble: 5 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <dbl [1]>
@@ -3782,7 +3782,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl(tbl[[1, 1]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -3806,7 +3806,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl(tbl[1, ][[1]] <- 0)
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     0 e     <dbl [1]>
@@ -3830,7 +3830,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl(tbl[[1, 3]] <- list(NULL))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <NULL>   
@@ -3846,7 +3846,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl(tbl[1, ][[3]] <- list(NULL))
-    #> # A tibble: 4 x 3
+    #> # A tibble: 4 × 3
     #>       n c     li       
     #>   <int> <chr> <list>   
     #> 1     1 e     <NULL>   
@@ -3869,7 +3869,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl2(tbl2[[1, 1]] <- tbl[1, ])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -3885,7 +3885,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     0     0
@@ -3908,7 +3908,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl2(tbl2[[1, 2]] <- t(1:4))
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     2     3
@@ -3924,7 +3924,7 @@ to `x[i, ][[j]] <- a`.[9]
 <td>
 
     with_tbl2(tbl2[1, ][[2]] <- t(1:4))
-    #> # A tibble: 4 x 2
+    #> # A tibble: 4 × 2
     #>    tb$n $c    $li      m[,1]  [,2]  [,3]
     #>   <int> <chr> <list>   <dbl> <dbl> <dbl>
     #> 1     1 e     <dbl [1…     1     2     3
