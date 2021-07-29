@@ -53,9 +53,9 @@ test_that("error if adding row with unknown variables", {
 })
 
 test_that("deprecated adding rows to non-data-frames", {
-  scoped_lifecycle_errors()
-
-  expect_error(add_row(as.matrix(mtcars), mpg = 4))
+  expect_error(
+    expect_warning(add_row(as.matrix(mtcars), mpg = 4))
+  )
 })
 
 test_that("can add multiple rows", {
@@ -268,10 +268,10 @@ test_that("error if column named by .before or .after not found", {
   )
 })
 
-test_that("deprecated adding rows to non-data-frames", {
-  scoped_lifecycle_errors()
-
-  expect_error(add_column(as.matrix(mtcars), x = 1))
+test_that("deprecated adding columns to non-data-frames", {
+  expect_error(
+    expect_warning(add_column(as.matrix(mtcars), x = 1))
+  )
 })
 
 test_that("missing row names stay missing when adding column", {

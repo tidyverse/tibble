@@ -15,25 +15,32 @@ repaired_names <- function(name,
 
 }
 
-check_names_non_null <- function(name, abort = rlang::abort) {
-  if (is.null(name)) {
-    abort(error_names_must_be_non_null())
+cnd_signal_if <- function(x) {
+  if (!is.null(x)) {
+    cnd_signal(x)
   }
-  invisible(name)
 }
 
-check_names_non_na <- function(name, abort = rlang::abort) {
+cnd_names_non_null <- function(name) {
+  if (is.null(name)) {
+    error_names_must_be_non_null()
+  } else {
+    invisible()
+  }
+}
+
+cnd_names_non_na <- function(name) {
   bad_name <- which(is.na(name))
   if (has_length(bad_name)) {
-    abort(error_column_must_be_named(bad_name))
+    error_column_must_be_named(bad_name)
+  } else {
+    invisible()
   }
-
-  invisible(name)
 }
 
 check_minimal <- function(name) {
-  check_names_non_null(name)
-  check_names_non_na(name)
+  cnd_signal_if(cnd_names_non_null(name))
+  cnd_signal_if(cnd_names_non_na(name))
 }
 
 check_minimal_names <- function(x) {

@@ -124,7 +124,7 @@ test_that(".data pronoun can come from another data mask (#721)", {
 test_that("tibble aliases", {
   scoped_lifecycle_silence()
   expect_identical(data_frame(a = 1), tibble(a = 1))
-  expect_identical(data_frame_, tibble_)
+  expect_identical(data_frame_(list(a = ~1)), tibble_(list(a = ~1)))
 })
 
 
@@ -240,31 +240,11 @@ test_that("Can convert tables to data frame", {
 })
 
 
-test_that("Can convert unnamed atomic vectors to tibble by default", {
-  scoped_lifecycle_warnings()
-  expect_warning(
-    expect_equal(as_tibble(1:3), tibble(value = 1:3)),
-    "discouraged",
-    fixed = TRUE
-  )
-
-  expect_warning(
-    expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA))),
-    "discouraged",
-    fixed = TRUE
-  )
-
-  expect_warning(
-    expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5)),
-    "discouraged",
-    fixed = TRUE
-  )
-
-  expect_warning(
-    expect_equal(as_tibble(letters), tibble(value = letters)),
-    "discouraged",
-    fixed = TRUE
-  )
+test_that("Superseded: Can convert unnamed atomic vectors to tibble by default", {
+  expect_equal(as_tibble(1:3), tibble(value = 1:3))
+  expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA)))
+  expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5))
+  expect_equal(as_tibble(letters), tibble(value = letters))
 })
 
 
@@ -355,10 +335,8 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  scoped_lifecycle_silence()
-
   expect_identical(
-    as_tibble(diag(3), validate = TRUE),
+    expect_warning(as_tibble(diag(3), validate = TRUE)),
     tibble(
       V1 = c(1, 0, 0),
       V2 = c(0, 1, 0),
@@ -368,15 +346,9 @@ test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
-  scoped_lifecycle_errors() # When removing this, double-check error messages below.
-
   x <- matrix(1:6, nrow = 3)
 
-  expect_error_cnd(
-    as_tibble(x),
-    class = get_defunct_error_class(),
-    "name"
-  )
+  expect_warning(as_tibble(x))
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
     rep("", 2)

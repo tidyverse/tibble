@@ -192,7 +192,7 @@ is_tibble <- function(x) {
 #' @export
 #' @keywords internal
 is.tibble <- function(x) {
-  signal_soft_deprecated("`is.tibble()` is deprecated, use `is_tibble()`.")
+  deprecate_warn("2.0.0", "is.tibble()", "is_tibble()")
 
   is_tibble(x)
 }

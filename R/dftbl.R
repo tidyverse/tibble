@@ -1,6 +1,8 @@
 set_dftbl_hooks <- function() {
-  set_dftbl_opts_hook()
-  set_dftbl_knit_hook()
+  width <- 40
+
+  set_dftbl_opts_hook(width)
+  set_dftbl_knit_hook(width)
   set_dftbl_source_hook()
   set_dftbl_chunk_hook()
   set_dftbl_error_hook()
@@ -13,24 +15,26 @@ set_dftbl_hooks <- function() {
 # The code is also evaluated, if the results are identical (disregarding the
 # class), only the tibble copy is retained.
 #
-set_dftbl_opts_hook <- function() {
-  knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
-}
+set_dftbl_opts_hook <- function(width) {
+  force(width)
 
-dftbl_opts_hook <- function(options) {
-  df_code <- options$code
-  tbl_code <- gsub("df", "tbl", df_code, fixed = TRUE)
+  dftbl_opts_hook <- function(options) {
+    df_code <- options$code
+    tbl_code <- gsub("df", "tbl", df_code, fixed = TRUE)
 
-  # FIXME: Evaluate, but surround in <details> element
-  if (!isTRUE(options$dftbl_always) && isTRUE(options$eval)) {
-    same <- map2_lgl(df_code, tbl_code, same_as_tbl_code)
-    df_code[same] <- ""
+    # FIXME: Evaluate, but surround in <details> element
+    if (!isTRUE(options$dftbl_always) && isTRUE(options$eval)) {
+      same <- map2_lgl(df_code, tbl_code, same_as_tbl_code)
+      df_code[same] <- ""
+    }
+
+    new_code <- as.vector(t(matrix(c(df_code, tbl_code), ncol = 2)))
+    options$code <- new_code
+    options$width <- width - 4
+    options
   }
 
-  new_code <- as.vector(t(matrix(c(df_code, tbl_code), ncol = 2)))
-  options$code <- new_code
-  options$width <- 36
-  options
+  knitr::opts_hooks$set(dftbl = dftbl_opts_hook)
 }
 
 utils::globalVariables(c("new_df", "new_tbl"))
@@ -77,13 +81,15 @@ as_tibble_deep <- function(x) {
 }
 
 # dftbl chunks have a reduced width
-set_dftbl_knit_hook <- function() {
+set_dftbl_knit_hook <- function(width) {
+  force(width)
+
   # Need to use a closure here to keep state
   old_width <- NULL
 
   dftbl_knit_hook <- function(before, options, envir) {
     if (before) {
-      old_width <<- options(width = 40)
+      old_width <<- options(width = width)
     } else {
       options(old_width)
       old_width <<- NULL
@@ -156,7 +162,7 @@ set_dftbl_error_hook <- function() {
   dftbl_error_hook <- function(x, options) {
     if (isTRUE(options$dftbl)) {
       x <- strsplit(x, "\n", fixed = TRUE)[[1]]
-      x <- unlist(map(x, strwrap, getOption("width"), prefix = "#> ", initial = ""))
+      x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
       x <- paste(paste0(x, "\n"), collapse = "")
     }
     x <- old_error_hook(x, options)
@@ -166,12 +172,18 @@ set_dftbl_error_hook <- function() {
   knitr::knit_hooks$set(error = dftbl_error_hook)
 }
 
+# I don't understand why knitr doesn't wrap warning output.
 set_dftbl_warning_hook <- function() {
   # Need to use a closure here to daisy-chain hooks
 
   old_warning_hook <- knitr::knit_hooks$get("warning")
 
   dftbl_warning_hook <- function(x, options) {
+    if (isTRUE(options$dftbl)) {
+      x <- strsplit(x, "\n", fixed = TRUE)[[1]]
+      x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
+      x <- paste(paste0(x, "\n"), collapse = "")
+    }
     x <- old_warning_hook(x, options)
     paste0('<div class="warning">', x, '</div>')
   }

@@ -85,6 +85,11 @@ skip_enh_empty_tribble_unspecified <- function() {
   skip_legacy()
 }
 
+skip_enh_as_tibble_retired <- function() {
+  # ENH: retiring as_tibble() for vectors and lists, #447
+  skip_legacy()
+}
+
 skip_int_error_unknown_names <- function() {
   # INT: error_unknown_names() no longer implemented
   skip_legacy()
@@ -92,6 +97,16 @@ skip_int_error_unknown_names <- function() {
 
 skip_int_error_names_must_be_null <- function() {
   # INT: error_names_must_be_null() no longer implemented
+  skip_legacy()
+}
+
+skip_int_data_frame_tibble_diff <- function() {
+  # INT: changed data_frame_() implementation to support custom deprecation warning
+  skip_legacy()
+}
+
+skip_int_lifecycle <- function() {
+  # INT: lifecycle changes classes for deprecation messages in R < 3.6
   skip_legacy()
 }
 

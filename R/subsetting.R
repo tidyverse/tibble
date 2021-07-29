@@ -260,12 +260,7 @@ vectbl_as_row_index <- function(i, x) {
       i <- fix_oob(i, nr, warn = FALSE)
     }
 
-    oob <- which(is.na(i) & !is_na_orig)
-
-    if (has_length(oob)) {
-      warn_deprecated("Only valid row names can be used for indexing. Use `NA` as row index to obtain a row full of `NA` values.")
-      i[oob] <- NA_integer_
-    }
+    i <- fix_oob_invalid(i, is_na_orig)
     i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
@@ -298,10 +293,8 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 
 warn_oob <- function(oob, n) {
   if (has_length(oob)) {
-    warn_deprecated(paste0(
-      "Row indexes must be between 0 and the number of rows (", n, "). ",
-      "Use `NA` as row index to obtain a row full of `NA` values."
-    ))
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'if integer must be between 0 and the number of rows')",
+      details = "Use `NA` as row index to obtain a row full of `NA` values.")
   }
 }
 
@@ -318,11 +311,21 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 
 warn_oob_negative <- function(oob, n) {
   if (has_length(oob)) {
-    warn_deprecated(paste0(
-      "Negative row indexes must be between 0 and the number of rows negated (", -n, "). ",
-      "Use `NA` as row index to obtain a row full of `NA` values."
-    ))
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'if negative integer must be between 0 and the number of rows negated')",
+      details = "Use `NA` as row index to obtain a row full of `NA` values.")
   }
+}
+
+fix_oob_invalid <- function(i, is_na_orig) {
+  oob <- which(is.na(i) & !is_na_orig)
+
+  if (has_length(oob)) {
+    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
+      details = "Use `NA` as row index to obtain a row full of `NA` values.")
+
+    i[oob] <- NA_integer_
+  }
+  i
 }
 
 vectbl_as_col_index <- function(j, x, arg = NULL) {
@@ -340,10 +343,14 @@ vectbl_as_col_index <- function(j, x, arg = NULL) {
 
 tbl_subset2 <- function(x, j) {
   if (is.matrix(j)) {
-    signal_soft_deprecated("Calling `[[` with a matrix (recursive subsetting) is deprecated and will eventually be converted to an error.")
+    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
+      details = "Recursive subsetting is deprecated for tibbles.")
+
     return(as.matrix(x)[[j]])
   } else if (has_length(j, 2) && is.numeric(j)) {
-    signal_soft_deprecated("Calling `[[` with a vector of length 2 (recursive subsetting) is deprecated and will eventually be converted to an error.")
+    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+      details = "Recursive subsetting is deprecated for tibbles.")
+
     return(.subset2(x, j))
   } else if (is.character(j)) {
     check_scalar(j)

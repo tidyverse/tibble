@@ -80,16 +80,37 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
     return(x)
   }
 
-  check_names_non_null(value, signal_soft_deprecated)
+  cnd <- cnd_names_non_null(value)
+  if (!is.null(cnd)) {
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')",
+      details = cnd$message)
 
-  if (!has_length(value, length(x))) {
-    signal_soft_deprecated(error_names_must_have_length(length(value), length(x)), "error_names_must_have_length")
+    # FIXME: value <- rep("", length(x))
   }
 
-  check_names_non_na(value, signal_soft_deprecated)
+  if (!has_length(value, length(x))) {
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')",
+      details = error_names_must_have_length(length(value), length(x))$message)
+
+    # FIXME: Reset NA to "" in names
+
+    if (length(value) < length(x)) {
+      value <- c(value, rep(NA_character_, length(x) - length(value)))
+    } else {
+      length(value) <- length(x)
+    }
+  }
+
+  cnd <- cnd_names_non_na(value)
+  if (!is.null(cnd)) {
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')",
+      details = cnd$message)
+
+    # FIXME: Reset NA to "" in names
+  }
 
   if (!is_character(value)) {
-    signal_soft_deprecated("Must use a character vector as names.")
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
     value <- as.character(value)
   }
 

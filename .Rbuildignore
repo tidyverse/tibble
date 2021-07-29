@@ -27,3 +27,4 @@
 ^LICENSE\.md$
 ^\.github/workflows/R-CMD-check\.yaml$
 ^\.github/workflows/pr-commands\.yaml$
+^tests/testthat/helper-rstudio\.R$
