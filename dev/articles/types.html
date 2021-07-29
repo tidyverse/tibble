@@ -352,7 +352,7 @@
 #&gt; $ factor        &lt;fct&gt; A
 #&gt; $ ordered       &lt;ord&gt; a
 #&gt; $ Date          &lt;date&gt; 2021-07-29
-#&gt; $ POSIXt        &lt;dttm&gt; 2021-07-29 09:07:55
+#&gt; $ POSIXt        &lt;dttm&gt; 2021-07-29 09:44:01
 #&gt; $ difftime      &lt;drtn&gt; 1 secs
 #&gt; $ hms           &lt;time&gt; 00:00:01
 #&gt; $ integer64     &lt;int64&gt; 10000000000
@@ -373,7 +373,7 @@
 <code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
 <span class="co">#&gt; function (x) </span>
 <span class="co">#&gt; {</span>
-<span class="co">#&gt;     pillar_attr &lt;- attr(x, "pillar")</span>
+<span class="co">#&gt;     pillar_attr &lt;- attr(x, "pillar", exact = TRUE)</span>
 <span class="co">#&gt;     label &lt;- pillar_attr$label</span>
 <span class="co">#&gt;     if (!is.null(label)) {</span>
 <span class="co">#&gt;         return(I(label))</span>
@@ -388,7 +388,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x55847b030988&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x56348bc2b450&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>
