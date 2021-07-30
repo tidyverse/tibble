@@ -96,6 +96,7 @@ scrub_file <- function(path, in_path = path) {
 
 test_galley <- function(name) {
   testthat::skip_on_cran()
+  testthat::skip_if("covr" %in% loadedNamespaces())
 
   rmd_name <- paste0(name, ".Rmd")
   md_name <- paste0(name, ".md")
