@@ -60,8 +60,8 @@ render_galley <- function(name, md_name) {
     ),
     error = function(e) {
       writeLines(c("", out_text, ""))
-      # stop(e)
-      rlang::abort(paste0("Error rendering ", name))
+      stop(e)
+      # rlang::abort(paste0("Error rendering ", name))
     }
   )
 
