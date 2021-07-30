@@ -59,6 +59,7 @@ Suggests:
     lubridate,
     mockr,
     nycflights13,
+    pkgbuild,
     pkgload,
     purrr,
     rmarkdown,
