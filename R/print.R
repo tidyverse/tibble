@@ -7,15 +7,17 @@
 #'   supplemented by a summary of the remaining rows and columns.
 #' * Tibble reveals the type of each column, which keeps the user informed about
 #'   whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
+#'   See `vignette("types", package = "pillar")` for an overview of common
+#'   type abbreviations.
 #'
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly
 #' and setting arguments like `n` and `width`. More persistent control is
-#' available by setting the options described below.
+#' available by setting the options described in [pillar_options].
 #' See also `vignette("digits", package = "pillar")` for a comparison to base options,
 #' and [num()] and [char()] for creating columns with custom formatting options.
 #'
 #' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
-#' If you implement a package that extend tibble,
+#' If you implement a package that extends tibble,
 #' the printed output can be customized in various ways.
 #' See `vignette("extending", package = "pillar")` for details,
 #' and [pillar_options] for options that control the display in the console.
