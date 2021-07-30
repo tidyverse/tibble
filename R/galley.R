@@ -1,4 +1,5 @@
 render_galley_ext <- function(input_path, pkg, installed, output_dir, output_file) {
+  # stopifnot(!installed)
   if (installed) {
     library(pkg, character.only = TRUE)
   } else {
@@ -33,6 +34,7 @@ render_galley <- function(name, md_name) {
   pkg <- utils::packageName()
   # FIXME: Hack!
   installed <- galley_use_installed()
+  # stopifnot(!installed)
 
   if (installed) {
     input_path <- system.file("doc", name, package = pkg)
@@ -59,6 +61,7 @@ render_galley <- function(name, md_name) {
     ),
     error = function(e) {
       writeLines(c("", out_text, ""))
+      # stop(e)
       rlang::abort(paste0("Error rendering ", name))
     }
   )
