@@ -45,9 +45,20 @@ render_galley <- function(name) {
   path
 }
 
+scrub_tempdir <- function(x) {
+  tmpdir <- tempdir()
+  stable_tmpdir <- gsub("(Rtmp).*$", "\\1Galley", tmpdir)
+
+  tmpdir_rx <- utils::glob2rx(paste0("*", tmpdir, "*"), trim.head = TRUE)
+  gsub(tmpdir_rx, stable_tmpdir, x)
+}
+
 scrub <- function(x) {
   x <- gsub("[<]bytecode: 0x.*[>]", "<bytecode: 0x1ee4c0de>", x)
   x <- gsub("[<]environment: 0x.*[>]", "<environment: 0xdeadbeef>", x)
+
+  x <- scrub_tempdir(x)
+
   paste0(x, "\n", collapse = "")
 }
 

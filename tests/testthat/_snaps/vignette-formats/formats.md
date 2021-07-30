@@ -97,10 +97,10 @@ Same for pivoting operations.
     #> # A tibble: 4 x 6
     #>   id    `2018`     `2019`     `2020`     `2021`     `2022`    
     #>   <fct> <formttbl> <formttbl> <formttbl> <formttbl> <formttbl>
-    #> 1 1     $5,681.41  $7,633.45  $2,812.55  $989.93    $3,809.53 
-    #> 2 2     $9,559.84  $8,591.01  $8,931.21  $2,839.85  $225.93   
-    #> 3 3     $1,726.58  $9,521.11  $5,163.27  $7,032.07  $2,712.22 
-    #> 4 4     $2,588.99  $6,746.50  $8,778.09  $9,154.22  $9,652.18
+    #> 1 1     $1,072.73  $7,856.76  $2,336.34  $8,683.40  $1,991.32 
+    #> 2 2     $2,796.81  $9,579.46  $7,578.11  $4,564.49  $298.99   
+    #> 3 3     $3,393.41  $5,402.56  $1,351.83  $292.02    $5,665.08 
+    #> 4 4     $2,076.23  $4,699.05  $4,663.43  $863.56    $3,681.43
 
 For ggplot2 we need to do [some
 work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the
@@ -113,22 +113,22 @@ formatting to the scales.
       ggplot(aes(x = year, y = stock, color = id)) +
       geom_line()
 
-![](/var/folders/cw/805_99kx0lq50gkr0hr81_y40000gp/T//RtmpPr7xW5/file158e26eae7baa_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](/var/folders/cw/805_99kx0lq50gkr0hr81_y40000gp/T//RtmpGalley/file15aed4776f335_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 It pays off to specify formatting very early in the process. The diagram
 below shows the principal stages of data analysis and exploration from
 “R for data science”.
 
-<div id="htmlwidget-6dc32edd520262e1afca" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6dc32edd520262e1afca">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d9739f217cd63424b6aa" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d9739f217cd63424b6aa">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script>
 
 The subsequent diagram adds data formats, communication options, and
 explicit data formatting. The original r4ds transitions are highlighted
 in bold. There are two principal options where to apply formatting for
 results: right before communicating them, or right after importing.
 
-<div id="htmlwidget-c3042d12038b93e1179e" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c3042d12038b93e1179e">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-340a65bf5d8adf0029d4" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-340a65bf5d8adf0029d4">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script>
 
 Applying formatting early in the process gives the added benefit of
 showing the data in a useful format during the “Tidy”, “Transform”, and
