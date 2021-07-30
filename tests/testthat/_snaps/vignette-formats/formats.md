@@ -132,7 +132,7 @@ stocks %>%
   geom_line()
 ```
 
-![](/private/var/folders/cw/805_99kx0lq50gkr0hr81_y40000gp/T/RtmpnoK8WK/formats_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".

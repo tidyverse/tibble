@@ -75,11 +75,10 @@ render_galley <- function(name, md_name) {
 }
 
 scrub_tempdir <- function(x) {
-  tmpdir <- tempdir()
-  stable_tmpdir <- gsub("(Rtmp).*$", "\\1Galley", tmpdir)
+  stable_tmpdir <- "${TEMP}"
 
-  tmpdir_rx <- utils::glob2rx(paste0("*", tmpdir, "*"), trim.head = TRUE)
-  gsub(tmpdir_rx, stable_tmpdir, x)
+  tmpdir_rx <- utils::glob2rx(paste0("*", dirname(tempdir()), "*"), trim.head = TRUE)
+  gsub(paste0("(/private)?", tmpdir_rx, "[/\\\\]+Rtmp[0-9a-zA-Z]+"), stable_tmpdir, x)
 }
 
 scrub <- function(x) {
