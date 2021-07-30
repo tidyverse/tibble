@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tibble: Simple Data Frames — tibble-package • tibble</title>
+<title>Package options — tibble_options • tibble</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -55,11 +55,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="tibble: Simple Data Frames — tibble-package" />
-<meta property="og:description" content="
-Provides a 'tbl_df' class (the 'tibble') that
-    provides stricter checking and better formatting than the traditional
-    data frame." />
+<meta property="og:title" content="Package options — tibble_options" />
+<meta property="og:description" content="Options that affect interactive display.
+See pillar_options for options that affect display on the console." />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
@@ -193,71 +191,56 @@ Provides a 'tbl_df' class (the 'tibble') that
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tibble: Simple Data Frames</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tibble-package.R'><code>R/tibble-package.R</code></a></small>
-    <div class="hidden name"><code>tibble-package.Rd</code></div>
+    <h1>Package options</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/options.R'><code>R/options.R</code></a></small>
+    <div class="hidden name"><code>tibble_options.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><img src='figures/logo.png' align='right' alt='logo' width='120' /></p>
-<p>Provides a 'tbl_df' class (the 'tibble') that
-    provides stricter checking and better formatting than the traditional
-    data frame.</p>
+    <p>Options that affect interactive display.
+See pillar_options for options that affect display on the console.</p>
     </div>
 
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='va'>tibble_options</span></code></pre></div>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#stable'><img src='figures/lifecycle-stable.svg' alt='[Stable]' /></a></p>
-<p>The tibble package provides utilities for handling <strong>tibbles</strong>, where
-"tibble" is a colloquial term for the S3 <code><a href='tbl_df-class.html'>tbl_df</a></code> class. The <code><a href='tbl_df-class.html'>tbl_df</a></code>
-class is a special case of the base <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.
-class, developed in response to lessons learned over many years of data
-analysis with data frames.</p>
-<p>Tibble is the central data structure for the set of packages known as the
-<a href='https://www.tidyverse.org/packages/'>tidyverse</a>, including
-<a href='https://dplyr.tidyverse.org/'>dplyr</a>,
-<a href='https://ggplot2.tidyverse.org/'>ggplot2</a>,
-<a href='https://tidyr.tidyverse.org/'>tidyr</a>, and
-<a href='https://readr.tidyverse.org/'>readr</a>.</p>
-<p>General resources:</p><ul>
-<li><p>Website for the tibble package: <a href='https://tibble.tidyverse.org'>https://tibble.tidyverse.org</a></p></li>
-<li><p><a href='https://r4ds.had.co.nz/tibbles.html'>Tibbles chapter</a> in <em>R for Data
-Science</em></p></li>
-</ul>
+    <p>These options can be set via <code><a href='https://rdrr.io/r/base/options.html'>options()</a></code> and queried via <code><a href='https://rdrr.io/r/base/options.html'>getOption()</a></code>.
+For this, add a <code>tibble.</code> prefix (the package name and a dot) to the option name.
+Example: for an option <code>foo</code>, use <code>options(tibble.foo = value)</code> to set it
+and <code>getOption("tibble.foo")</code> to retrieve the current value.
+An option value of <code>NULL</code> means that the default is used.</p>
+    <h2 class="hasAnchor" id="options-for-the-tibble-package"><a class="anchor" href="#options-for-the-tibble-package"></a>Options for the tibble package</h2>
 
-<p>Resources on specific topics:</p><ul>
-<li><p>Create a tibble: <code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='enframe.html'>enframe()</a></code></p></li>
-<li><p>Inspect a tibble: <code><a href='formatting.html'>print.tbl()</a></code>, <code><a href='https://pillar.r-lib.org/reference/glimpse.html'>glimpse()</a></code></p></li>
-<li><p>Details on the S3 <code>tbl_df</code> class: <code><a href='tbl_df-class.html'>tbl_df</a></code></p></li>
-<li><p>Package options: <a href='tibble_options.html'>tibble_options</a></p></li>
-</ul>
+    
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://tibble.tidyverse.org/'>https://tibble.tidyverse.org/</a></p></li>
-<li><p><a href='https://github.com/tidyverse/tibble'>https://github.com/tidyverse/tibble</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/tidyverse/tibble/issues'>https://github.com/tidyverse/tibble/issues</a></p></li>
-</ul>
-
-</div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p><strong>Maintainer</strong>: Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a></p>
-<p>Authors:</p><ul>
-<li><p>Hadley Wickham <a href='mailto:hadley@rstudio.com'>hadley@rstudio.com</a></p></li>
-</ul>
-
-<p>Other contributors:</p><ul>
-<li><p>Romain Francois <a href='mailto:romain@r-enthusiasts.com'>romain@r-enthusiasts.com</a> [contributor]</p></li>
-<li><p>Jennifer Bryan <a href='mailto:jenny@rstudio.com'>jenny@rstudio.com</a> [contributor]</p></li>
-<li><p>RStudio [copyright holder]</p></li>
+<ul>
+<li><p><code>view_max</code>: Maximum number of rows shown by <code><a href='view.html'>view()</a></code>
+if the input is not a data frame, passed on to <code><a href='https://rdrr.io/r/utils/head.html'>head()</a></code>. Default: <code>1000</code>.</p></li>
 </ul>
 
 
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># Default setting:</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"tibble.view_max"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Change for the duration of the session:</span></span>
+<span class='r-in'><span class='va'>old</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>tibble.view_max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># view() would show only 100 rows e.g. for a lazy data frame</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Change back to the original value:</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='va'>old</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Local scope:</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/eval.html'>local</a></span><span class='op'>(</span><span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>rlang</span><span class='fu'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/local_options.html'>local_options</a></span><span class='op'>(</span>tibble.view_max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='co'># view() would show only 100 rows e.g. for a lazy data frame</span></span>
+<span class='r-in'><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># view() would show the default 1000 rows e.g. for a lazy data frame</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
