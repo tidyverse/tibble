@@ -204,11 +204,6 @@
       <error/tibble_error_need_rhs_vector_or_null>
       `RHS` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
-      error_na_column_index(1:3)
-    Output
-      <error/tibble_error_na_column_index>
-      Can't use NA as column index with `[` at positions 1, 2, and 3.
-    Code
       error_dim_column_index(as.matrix("x"))
     Output
       <error/tibble_error_dim_column_index>

@@ -787,10 +787,6 @@ error_need_rhs_vector_or_null <- function(value_arg) {
   tibble_error(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
 }
 
-error_na_column_index <- function(j) {
-  tibble_error(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
-}
-
 error_dim_column_index <- function(j) {
   # friendly_type_of() doesn't distinguish between matrices and arrays
   tibble_error(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))

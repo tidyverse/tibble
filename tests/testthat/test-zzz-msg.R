@@ -28,13 +28,6 @@ test_that("error_unsupported_index()", {
   )
 })
 
-test_that("error_na_column_index()", {
-  expect_equal(
-    error_na_column_index(),
-    "Can't use numeric NA as column index with `[`."
-  )
-})
-
 test_that("error_nonint_column_index()", {
   expect_equal(
     error_nonint_column_index(2:3, 3:4 + 0.5),
