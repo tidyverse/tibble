@@ -18,7 +18,7 @@
 #'   the deparsed expression is used.
 #' @param ... Unused, must be empty.
 #' @param n Maximum number of rows to display. Only used if `x` is not a
-#'   data frame.
+#'   data frame. Uses the `view_max` [option][tibble_options] by default.
 #'
 #' @export
 view <- function(x, title = NULL, ..., n = NULL) {
