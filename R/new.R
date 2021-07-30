@@ -1,8 +1,6 @@
 #' Tibble constructor and validator
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' Creates or validates a subclass of a tibble.
 #' These function is mostly useful for package authors that implement subclasses
 #' of a tibble, like \pkg{sf} or \pkg{tsibble}.
@@ -26,10 +24,10 @@
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
 #' # Existing row.names attributes are ignored:
-#' try(new_tibble(iris, nrow = 3))
+#' try(validate_tibble(new_tibble(iris, nrow = 3)))
 #'
 #' # The length of all columns must be compatible with the nrow argument:
-#' try(new_tibble(list(a = 1:3, b = 4:6), nrow = 2))
+#' try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
 new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {

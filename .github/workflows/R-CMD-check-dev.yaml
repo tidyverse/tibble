@@ -131,14 +131,20 @@ jobs:
             nrow(parts) == 1
           }
 
-          deps <- tools::package_dependencies(read.dcf("DESCRIPTION")[1, "Package"], which = c("Depends", "Imports", "LinkingTo", "Suggests"))
-          packages <- sort(deps[[1]])
+          if (!requireNamespace("desc", quietly = TRUE)) {
+            install.packages("desc")
+          }
+
+          deps_df <- desc::desc_get_deps()
+          deps_df <- deps_df[deps_df$type %in% c("Depends", "Imports", "LinkingTo", "Suggests"), ]
+
+          packages <- sort(deps_df$package)
           packages <- intersect(packages, rownames(available.packages()))
 
           valid_dev_dep <- vapply(packages, has_dev_dep, logical(1))
 
           # https://github.com/r-lib/remotes/issues/576
-          valid_dev_dep[packages %in% c("igraph", "duckdb")] <- FALSE
+          valid_dev_dep[packages %in% c("igraph", "duckdb", "logging")] <- FALSE
 
           deps <- packages[valid_dev_dep]
           if (any(!valid_dev_dep)) {
@@ -173,7 +179,7 @@ jobs:
           echo $matrix | jq .
           echo $matrix | json2yaml
 
-  R-CMD-check:
+  R-CMD-check-dev:
     needs: matrix
 
     runs-on: ubuntu-18.04
@@ -237,10 +243,11 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
-      - name: Add fake qpdf
+      - name: Add fake qpdf and checkbashisms
         if: runner.os == 'Linux'
         run: |
           sudo ln -s $(which true) /usr/local/bin/qpdf
+          sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
       # Begin custom: before install
       # End custom: before install

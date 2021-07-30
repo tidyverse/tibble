@@ -2,9 +2,7 @@
 
     Code
       # # [.tbl_df is careful about names (#1245)
-    Code
       foo <- tibble(x = 1:10, y = 1:10)
-    Code
       foo[c("x", "y", "z")]
     Error <vctrs_error_subscript_oob>
       Can't subset columns that don't exist.
@@ -25,9 +23,7 @@
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       # # [.tbl_df is careful about column indexes (#83)
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[0.5]
     Error <vctrs_error_subscript_type>
       Must subset columns with a valid subscript vector.
@@ -93,9 +89,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [.tbl_df is careful about row indexes
-    Code
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
-    Code
       foo[0.5, ]
     Error <vctrs_error_subscript_type>
       Must subset rows with a valid subscript vector.
@@ -151,9 +145,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [.tbl_df is careful about column flags (#83)
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[c(TRUE, TRUE)]
     Error <vctrs_error_subscript_size>
       Must subset columns with a valid subscript vector.
@@ -180,9 +172,7 @@
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       # # [.tbl_df is careful about row flags
-    Code
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
-    Code
       foo[c(TRUE, TRUE), ]
     Error <vctrs_error_subscript_size>
       Must subset rows with a valid subscript vector.
@@ -201,9 +191,7 @@
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       # # [.tbl_df rejects unknown column indexes (#83)
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[list(1:3)]
     Error <vctrs_error_subscript_type>
       Must subset columns with a valid subscript vector.
@@ -228,9 +216,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [.tbl_df rejects unknown row indexes
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[list(1:3), ]
     Error <vctrs_error_subscript_type>
       Must subset rows with a valid subscript vector.
@@ -254,9 +240,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [.tbl_df and matrix subsetting
-    Code
       foo <- tibble(a = 1:3, b = letters[1:3])
-    Code
       foo[is.na(foo)]
     Output
       <unspecified> [0]
@@ -275,9 +259,7 @@
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       # # [.tbl_df and OOB indexing
-    Code
       foo <- tibble(a = 1:3, b = letters[1:3])
-    Code
       invisible(foo[3:5, ])
     Warning <lifecycle_warning_deprecated>
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
@@ -294,9 +276,7 @@
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       # # [.tbl_df and logical recycling
-    Code
       foo <- tibble(a = 1:4, b = a)
-    Code
       foo[c(TRUE, FALSE), ]
     Error <vctrs_error_subscript_size>
       Must subset rows with a valid subscript vector.
@@ -304,9 +284,7 @@
       x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
     Code
       # # [[.tbl_df rejects invalid column indexes
-    Code
       foo <- tibble(x = 1:10, y = 1:10)
-    Code
       foo[[]]
     Error <tibble_error_subset_columns_non_missing_only>
       Subscript can't be missing for tibbles in `[[`.
@@ -376,18 +354,14 @@
       i It must be numeric or character.
     Code
       # # [[.tbl_df throws error with NA index
-    Code
       foo <- tibble(x = 1:10, y = 1:10)
-    Code
       foo[[NA]]
     Error <vctrs_error_subscript_type>
       Must extract column with a single valid subscript.
       x Subscript `NA` can't be `NA`.
     Code
       # # $.tbl_df and partial matching/invalid columns
-    Code
       foo <- tibble(data = 1:10)
-    Code
       foo$d
     Warning <warning>
       Unknown or uninitialised column: `d`.
@@ -401,9 +375,7 @@
       NULL
     Code
       # # [<-.tbl_df rejects unknown column indexes (#83)
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[list(1:3)] <- 1
     Error <vctrs_error_subscript_type>
       Must assign to columns with a valid subscript vector.
@@ -428,9 +400,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [.tbl_df emits lifecycle warnings with one-column matrix indexes (#760)
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       invisible(foo[matrix(1:2, ncol = 1), ])
     Warning <lifecycle_warning_deprecated>
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
@@ -442,9 +412,7 @@
       Convert to a vector.
     Code
       # # [<-.tbl_df rejects unknown row indexes
-    Code
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-    Code
       foo[list(1:3), ] <- 1
     Error <vctrs_error_subscript_type>
       Must assign to rows with a valid subscript vector.
@@ -468,9 +436,7 @@
       i It must be logical, numeric, or character.
     Code
       # # [<-.tbl_df throws an error with duplicate indexes (#658)
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[c(1, 1)] <- 3
     Error <tibble_error_duplicate_column_subscript_for_assignment>
       Column index 1 is used more than once for assignment.
@@ -484,9 +450,7 @@
       Row index 1 is used more than once for assignment.
     Code
       # # [<-.tbl_df throws an error with NA indexes
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[NA] <- 3
     Error <tibble_error_na_column_index>
       Can't use NA as column index with `[` at positions 1 and 2.
@@ -496,9 +460,7 @@
       Can't use NA as row index in a tibble for assignment.
     Code
       # # [<-.tbl_df throws an error with bad RHS
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[] <- mean
     Error <tibble_error_need_rhs_vector_or_null>
       `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
@@ -508,9 +470,7 @@
       `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       # # [<-.tbl_df throws an error with OOB assignment
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[4:5] <- 3
     Error <vctrs_error_subscript_oob>
       Can't assign to columns beyond the end with non-consecutive locations.
@@ -536,9 +496,7 @@
       i There are only 2 rows.
     Code
       # # [<-.tbl_df and recycling
-    Code
       df <- tibble(x = 1:3, y = x, z = y)
-    Code
       df[1:2] <- list(0, 0, 0)
     Error <vctrs_error_incompatible_size>
       Can't recycle `list(0, 0, 0)` (size 3) to size 2.
@@ -569,9 +527,7 @@
       i Only vectors of size 1 are recycled.
     Code
       # # [<-.tbl_df and coercion
-    Code
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
-    Code
       df[1:3, 1:2] <- df[2:3]
     Error <tibble_error_assign_incompatible_type>
       Assigned data `df[2:3]` must be compatible with existing data.
@@ -601,9 +557,7 @@
       `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # [<-.tbl_df and overwriting NA
-    Code
       df <- tibble(x = rep(NA, 3))
-    Code
       df[1, "x"] <- 5
     Error <tibble_error_assign_incompatible_type>
       Assigned data `5` must be compatible with existing data.
@@ -612,9 +566,7 @@
       * Locations: 1.
     Code
       # # [<-.tbl_df and matrix subsetting
-    Code
       foo <- tibble(a = 1:3, b = letters[1:3])
-    Code
       foo[!is.na(foo)] <- "bogus"
     Error <tibble_error_assign_incompatible_type>
       Assigned data `"bogus"` must be compatible with existing data.
@@ -626,7 +578,6 @@
       Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))] <- NA
-    Code
       foo[is.na(foo)] <- 1:3
     Error <tibble_error_subset_matrix_must_be_scalar>
       Subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
@@ -635,10 +586,8 @@
     Error <tibble_error_subset_matrix_scalar_type>
       Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
     Code
-      # # [[.tbl_df rejects invalid column indexes
-    Code
+      # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
-    Code
       foo[[]] <- 1
     Error <tibble_error_assign_columns_non_missing_only>
       Subscript can't be missing for tibbles in `[[<-`.
@@ -671,11 +620,16 @@
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
+      foo[[NA_integer_]] <- 1
+    Error <vctrs_error_subscript_type>
+      Must assign to column with a single valid subscript.
+      x Subscript `NA_integer_` can't be `NA`.
+    Code
       foo[[mean]] <- 1
     Error <vctrs_error_subscript_type>
-      Must assign to columns with a valid subscript vector.
+      Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be logical, numeric, or character.
+      i It must be numeric or character.
     Code
       foo[[foo]] <- 1
     Error <vctrs_error_subscript_type>
@@ -713,9 +667,7 @@
       i It must be numeric or character.
     Code
       # # [[<-.tbl_df throws an error with OOB assignment
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[[4]] <- 3
     Error <vctrs_error_subscript_oob>
       Can't assign to columns beyond the end with non-consecutive locations.
@@ -723,21 +675,17 @@
       x Subscript `4` contains non-consecutive location 4.
     Code
       # # [[<-.tbl_df throws an error with bad RHS
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[[1]] <- mean
     Error <vctrs_error_scalar_type>
       Input must be a vector, not a function.
     Code
       df[[1]] <- lm(y ~ x, df)
     Error <vctrs_error_scalar_type>
-      Input must be a vector, not a `lm` object.
+      Input must be a vector, not a <lm> object.
     Code
       # # [[<-.tbl_df recycles only values of length one
-    Code
       df <- tibble(x = 1:3)
-    Code
       df[["x"]] <- 8:9
     Error <tibble_error_assign_incompatible_size>
       Assigned data `8:9` must be compatible with existing data.
@@ -760,9 +708,7 @@
       i Only vectors of size 1 are recycled.
     Code
       # # [<-.tbl_df throws an error with invalid values
-    Code
       df <- tibble(x = 1:2, y = x)
-    Code
       df[1] <- lm(y ~ x, df)
     Error <tibble_error_need_rhs_vector_or_null>
       `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
@@ -772,9 +718,7 @@
       `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # $<- recycles only values of length one
-    Code
       df <- tibble(x = 1:3)
-    Code
       df$x <- 8:9
     Error <tibble_error_assign_incompatible_size>
       Assigned data `8:9` must be compatible with existing data.

@@ -2,7 +2,6 @@
 
     Code
       # # add
-    Code
       error_add_rows_to_grouped_df()
     Output
       <error/tibble_error_add_rows_to_grouped_df>
@@ -61,7 +60,6 @@
       i `.data` has 1 row.
     Code
       # # as_tibble
-    Code
       error_column_scalar_type("a", 3, "environment")
     Output
       <error/tibble_error_column_scalar_type>
@@ -104,14 +102,7 @@
       x Element `foo` is of size 7.
     Code
       # # class-tbl_df
-    Code
-      error_names_must_be_non_null(repair = TRUE)
-    Output
-      <error/tibble_error_names_must_be_non_null>
-      `names` must not be `NULL`.
-      Use .name_repair to specify repair.
-    Code
-      error_names_must_be_non_null(repair = FALSE)
+      error_names_must_be_non_null()
     Output
       <error/tibble_error_names_must_be_non_null>
       `names` must not be `NULL`.
@@ -122,7 +113,6 @@
       `names` must have length 3, not 5.
     Code
       # #enframe
-    Code
       error_enframe_value_null()
     Output
       <error/tibble_error_enframe_value_null>
@@ -133,74 +123,65 @@
       <error/tibble_error_enframe_has_dim>
       `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
     Code
-      # # glimpse
-    Code
-      error_glimpse_infinite_width()
-    Output
-      <error/tibble_error_glimpse_infinite_width>
-      `width` must be finite.
-    Code
       # # names
-    Code
-      error_column_names_cannot_be_empty(1, repair = TRUE)
+      error_column_names_cannot_be_empty(1, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Column 1 must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(2:3, repair = TRUE)
+      error_column_names_cannot_be_empty(2:3, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 2 and 3 must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(seq_along(letters), repair = TRUE)
+      error_column_names_cannot_be_empty(seq_along(letters), repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_empty(4:6, repair = FALSE)
+      error_column_names_cannot_be_empty(4:6, repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_cannot_be_empty>
       Columns 4, 5, and 6 must be named.
     Code
-      error_column_names_cannot_be_dot_dot(1, repair = FALSE)
+      error_column_names_cannot_be_dot_dot(1, repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Column 1 must not have names of the form ... or ..j.
     Code
-      error_column_names_cannot_be_dot_dot(2:3, repair = TRUE)
+      error_column_names_cannot_be_dot_dot(2:3, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Columns 2 and 3 must not have names of the form ... or ..j.
       Use .name_repair to specify repair.
     Code
-      error_column_names_cannot_be_dot_dot(1:26, repair = TRUE)
+      error_column_names_cannot_be_dot_dot(1:26, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
       Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
       Use .name_repair to specify repair.
     Code
-      error_column_names_must_be_unique("a", repair = FALSE)
+      error_column_names_must_be_unique("a", repair_hint = FALSE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
     Code
-      error_column_names_must_be_unique(letters[2:3], repair = TRUE)
+      error_column_names_must_be_unique(letters[2:3], repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column names `b` and `c` must not be duplicated.
       Use .name_repair to specify repair.
     Code
-      error_column_names_must_be_unique(LETTERS, repair = TRUE)
+      error_column_names_must_be_unique(LETTERS, repair_hint = TRUE)
     Output
       <error/tibble_error_column_names_must_be_unique>
       Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
       Use .name_repair to specify repair.
     Code
       # # new
-    Code
       error_new_tibble_must_be_list()
     Output
       <error/tibble_error_new_tibble_must_be_list>
@@ -212,14 +193,12 @@
       `x` must be a scalar integer.
     Code
       # # rownames
-    Code
       error_already_has_rownames()
     Output
       <error/tibble_error_already_has_rownames>
       `.data` must be a data frame without row names.
     Code
       # # subsetting
-    Code
       error_need_rhs_vector(quote(RHS))
     Output
       <error/tibble_error_need_rhs_vector>
@@ -305,7 +284,6 @@
       x Can't frobnicate.
     Code
       # # subsetting-matrix
-    Code
       error_subset_matrix_must_be_logical(quote(is.na(x) + 1))
     Output
       <error/tibble_error_subset_matrix_must_be_logical>
@@ -327,7 +305,6 @@
       Subscript `is.na(x)` is a matrix, the data `1:3` must have size 1.
     Code
       # # tibble
-    Code
       error_tibble_row_size_one(3, "foo", 7)
     Output
       <error/tibble_error_tibble_row_size_one>
@@ -390,7 +367,6 @@
       i Only values of size one are recycled.
     Code
       # # tribble
-    Code
       error_tribble_needs_columns()
     Output
       <error/tibble_error_tribble_needs_columns>

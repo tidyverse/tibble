@@ -12,7 +12,7 @@ Provides a 'tbl_df' class (the 'tibble') that
     data frame.
 }
 \details{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a>}}{\strong{Stable}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
@@ -51,10 +51,7 @@ data frame. Default: 1000.
 
 
 
-The following options are used by the tibble and pillar packages
-to format and print \code{tbl_df} objects.
-Used by the formatting workhorse \code{trunc_mat()} and, therefore,
-indirectly, by \code{print.tbl()}.
+The following options control printing of \code{tbl} and \code{tbl_df} objects:
 \itemize{
 \item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
 Set to \code{Inf} to always print all rows.  Default: 20.
@@ -64,6 +61,9 @@ exceeded. Default: 10.
 \item \code{tibble.max_extra_cols}: Number of extra columns printed in reduced form.
 Default: 100.
 }
+
+The output uses color and highlighting according to the \code{"cli.num_colors"} option.
+Set it to \code{1} to suppress colored and highlighted output.
 
 
 
@@ -87,6 +87,8 @@ titles.
 display character columns, default: \code{0}.  Character columns may be
 truncated up to that width to save horizontal space. Set to \code{Inf} to
 turn off truncation of character columns.
+\item \code{pillar.max_dec_width}: The maximum allowed width for decimal notation,
+default 13.
 }
 
 }

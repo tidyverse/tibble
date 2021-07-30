@@ -1,8 +1,6 @@
 #' Printing tibbles
 #'
 #' @description
-#' `r lifecycle::badge("maturing")`
-#'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
 #' * Tibbles only print as many rows and columns as fit on one screen,
@@ -13,14 +11,18 @@
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly
 #' and setting arguments like `n` and `width`. More persistent control is
 #' available by setting the options described below.
+#' See also `vignette("digits", package = "pillar")` for a comparison to base options,
+#' and [num()] and [char()] for creating columns with custom formatting options.
+#'
+#' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
+#' If you implement a package that extend tibble,
+#' the printed output can be customized in various ways.
+#' See `vignette("extending", package = "pillar")` for details.
 #'
 #' @inheritSection pillar::`pillar-package` Package options
 #' @section Package options:
 #'
-#' The following options are used by the tibble and pillar packages
-#' to format and print `tbl_df` objects.
-#' Used by the formatting workhorse `trunc_mat()` and, therefore,
-#' indirectly, by `print.tbl()`.
+#' The following options control printing of `tbl` and `tbl_df` objects:
 #'
 #' * `tibble.print_max`: Row number threshold: Maximum number of rows printed.
 #'   Set to `Inf` to always print all rows.  Default: 20.
@@ -29,6 +31,9 @@
 #' * `tibble.width`: Output width. Default: `NULL` (use `width` option).
 #' * `tibble.max_extra_cols`: Number of extra columns printed in reduced form.
 #'   Default: 100.
+#'
+#' The output uses color and highlighting according to the `"cli.num_colors"` option.
+#' Set it to `1` to suppress colored and highlighted output.
 #'
 #' @param x Object to format or print.
 #' @param ... Other arguments passed on to individual methods.
@@ -39,7 +44,7 @@
 #'   means use `getOption("tibble.width")` or (if also `NULL`)
 #'   `getOption("width")`; the latter displays only the columns that fit on one
 #'   screen. You can also set `options(tibble.width = Inf)` to override this
-#'   default and always print all columns.
+#'   default and always print all columns, this may be slow for very wide tibbles.
 #' @param n_extra Number of extra columns to print abbreviated information for,
 #'   if the width is too small for the entire tibble. If `NULL`, the default,
 #'   will print information about at most `tibble.max_extra_cols` extra columns.
@@ -55,8 +60,6 @@
 #' mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
 #' print(mtcars2, n = 25, n_extra = 3)
 #'
-#' trunc_mat(mtcars)
-#'
 #' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
 #' print(nycflights13::flights, n_extra = 2)
 #' print(nycflights13::flights, width = Inf)
@@ -65,22 +68,10 @@
 #' @aliases print.tbl format.tbl
 NULL
 
-# If needed, registered in .onLoad() via register_if_pillar_hasnt()
-print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
-  invisible(x)
-}
-
 # Only for documentation, doesn't do anything
 #' @rdname formatting
 print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   NextMethod()
-}
-
-# If needed, registered in .onLoad() via register_if_pillar_hasnt()
-format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
-  format(mat)
 }
 
 # Only for documentation, doesn't do anything
@@ -89,9 +80,23 @@ format.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   NextMethod()
 }
 
+#' Legacy printing
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
+#' Do not use this function.
+#' If you implement a package that extend tibble,
+#' the printed output can be customized in various ways.
+#' See `vignette("extending", package = "pillar")` for details.
+#'
+#' @inheritParams formatting
 #' @export
-#' @rdname formatting
+#' @keywords internal
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
+  deprecate_soft("3.1.0", "tibble::trunc_mat()",
+    details = "Printing has moved to the pillar package.")
+
   rows <- nrow(x)
 
   if (is.null(n) || n < 0) {
@@ -319,7 +324,7 @@ knit_print.trunc_mat <- function(x, options) {
   }
 
   res <- paste(c("", "", summary, "", kable, "", extra), collapse = "\n")
-  knitr::asis_output(crayon::strip_style(res), cacheable = TRUE)
+  knitr::asis_output(fansi::strip_sgr(res), cacheable = TRUE)
 }
 
 format_knitr_body <- function(x) {

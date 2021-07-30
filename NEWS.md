@@ -1,6 +1,31 @@
-# tibble 3.0.6.9000
+# tibble 3.1.0.9000
 
 - Internal changes only.
+
+
+# tibble 3.1.0
+
+## Bug fixes
+
+- `has_rownames()` now works correctly for data frames with a `"row.names"` attribute malformed due to a problem in `structure()` (#852).
+
+- `tbl[FALSE, "column"] <- x` adds new column again (#846).
+
+## Features
+
+- Importing pillar 1.5.0, cli and crayon are now suggested packages (#475).
+
+- `size_sum()` is now reexported from pillar (#850, @topepo).
+
+- `as_tibble()` hints more often to use the `.name_repair` argument if column names are invalid (#855).
+
+- `as_tibble.table()` mentions `.name_repair` argument in the error message (#839).
+
+## Internal
+
+- Remove compatibility code for pillar < 1.5.0 (#861).
+
+- Moved most functions to the "stable" lifecycle (#860).
 
 
 # tibble 3.0.6

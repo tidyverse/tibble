@@ -1,4 +1,6 @@
 test_that("output test", {
+  skip_if_not_installed("pillar", "1.6.0.9001")
+
   expect_snapshot({
     str(as_tibble(mtcars), width = 70L)
 

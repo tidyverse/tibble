@@ -88,7 +88,7 @@ test_that("new_tibble checks", {
   )
   expect_tibble_error(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null(repair = FALSE)
+    error_names_must_be_non_null()
   )
   expect_error(
     new_tibble(set_names(list(1), NA_character_), nrow = 1),

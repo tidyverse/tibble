@@ -17,8 +17,6 @@ and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}
 A \link{tibble}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
-
 Create \link{tibble}s using an easier to read row-by-row layout.
 This is useful for small tables of data where readability is
 important.  Please see \link{tibble-package} for a general introduction.
@@ -38,6 +36,18 @@ tribble(
   "a", 1:3,
   "b", 4:6
 )
+\dontshow{if (rlang::is_installed("dplyr") && packageVersion("dplyr") >= "1.0.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+# Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
+tribble(
+  ~ a,          ~ b,          ~ c,
+    1, "2000-01-01",        "1.5"
+) \%>\%
+  dplyr::mutate(
+    dplyr::across(a, as.integer),
+    dplyr::across(b, as.Date)
+  )
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 See \link{quasiquotation} for more details on tidy dots semantics,

@@ -46,6 +46,7 @@
 #' tbl[1, , drop = TRUE]
 #' as.list(tbl[1, ])
 #'
+#' @examplesIf (Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")
 #' # Accessing non-existent columns:
 #' df$b
 #' tbl$b
@@ -57,6 +58,7 @@
 #' tbl$bd <- c("n", "e", "w")
 #' df$b
 #' tbl$b
+#' @examples
 #'
 #' df$b <- 7:9
 #' tbl$b <- 7:9
@@ -166,7 +168,7 @@ NULL
   }
 
   # Side effect: check scalar
-  if (length(j) != 1L || (is.numeric(j) && j < 0) || is.logical(j)) {
+  if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
     vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
   }
 
@@ -176,7 +178,7 @@ NULL
   # names again
   names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = NULL, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
 }
 
 
@@ -236,7 +238,7 @@ NULL
     xo <- .subset(x, j)
 
     if (anyDuplicated(j)) {
-      xo <- set_repaired_names(xo, .name_repair = "minimal")
+      xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
 
     xo <- set_tibble_class(xo, nrow = fast_nrow(x))

@@ -34,8 +34,7 @@ test_that("output test", {
     error_as_tibble_row_size_one(3, "foo", 7)
 
     "# class-tbl_df"
-    error_names_must_be_non_null(repair = TRUE)
-    error_names_must_be_non_null(repair = FALSE)
+    error_names_must_be_non_null()
 
     error_names_must_have_length(length = 5, n = 3)
 
@@ -44,22 +43,19 @@ test_that("output test", {
 
     error_enframe_has_dim(Titanic)
 
-    "# glimpse"
-    error_glimpse_infinite_width()
-
     "# names"
-    error_column_names_cannot_be_empty(1, repair = TRUE)
-    error_column_names_cannot_be_empty(2:3, repair = TRUE)
-    error_column_names_cannot_be_empty(seq_along(letters), repair = TRUE)
-    error_column_names_cannot_be_empty(4:6, repair = FALSE)
+    error_column_names_cannot_be_empty(1, repair_hint = TRUE)
+    error_column_names_cannot_be_empty(2:3, repair_hint = TRUE)
+    error_column_names_cannot_be_empty(seq_along(letters), repair_hint = TRUE)
+    error_column_names_cannot_be_empty(4:6, repair_hint = FALSE)
 
-    error_column_names_cannot_be_dot_dot(1, repair = FALSE)
-    error_column_names_cannot_be_dot_dot(2:3, repair = TRUE)
-    error_column_names_cannot_be_dot_dot(1:26, repair = TRUE)
+    error_column_names_cannot_be_dot_dot(1, repair_hint = FALSE)
+    error_column_names_cannot_be_dot_dot(2:3, repair_hint = TRUE)
+    error_column_names_cannot_be_dot_dot(1:26, repair_hint = TRUE)
 
-    error_column_names_must_be_unique("a", repair = FALSE)
-    error_column_names_must_be_unique(letters[2:3], repair = TRUE)
-    error_column_names_must_be_unique(LETTERS, repair = TRUE)
+    error_column_names_must_be_unique("a", repair_hint = FALSE)
+    error_column_names_must_be_unique(letters[2:3], repair_hint = TRUE)
+    error_column_names_must_be_unique(LETTERS, repair_hint = TRUE)
 
     "# new"
     error_new_tibble_must_be_list()
