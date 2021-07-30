@@ -9,6 +9,7 @@
 #' @importFrom vctrs unspecified vec_as_subscript2 num_as_location vec_ptype_abbr
 #' @importFrom vctrs vec_names vec_names2 vec_set_names
 #' @importFrom vctrs new_rcrd
+#' @importFrom vctrs new_data_frame
 #' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`
