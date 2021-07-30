@@ -71,14 +71,16 @@ scrub_file <- function(path) {
 }
 
 test_galley <- function(name) {
-  skip_on_cran()
+  testthat::skip_on_cran()
 
   rmd_name <- paste0(name, ".Rmd")
   md_name <- paste0(name, ".md")
 
   path <- render_galley(rmd_name, md_name)
 
-  expect_snapshot_file(path, name = md_name, compare = compare_file_text)
+  testthat::expect_snapshot_file(
+    path, name = md_name, compare = testthat::compare_file_text
+  )
 
   # FIXME: Test generated files
 }
