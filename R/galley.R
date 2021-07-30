@@ -45,3 +45,11 @@ render_galley <- function(name) {
 
   path
 }
+
+test_galley <- function(name) {
+  rmd_name <- paste0(name, ".Rmd")
+  md_name <- paste0(name, ".md")
+
+  path <- render_galley(rmd_name)
+  expect_snapshot_file(path, name = md_name, compare = compare_file_text)
+}
