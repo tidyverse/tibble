@@ -10,3 +10,17 @@ vignette_path <- function(name) {
 
   abort(paste0("Can't find vignette `", name, "`."))
 }
+
+render_galley <- function(name) {
+  path <- tempfile(fileext = ".md")
+
+  suppressMessages(capture.output(
+    rmarkdown::render(
+      vignette_path(name),
+      output_file = path,
+      output_format = rmarkdown::md_document(preserve_yaml = TRUE)
+    )
+  ))
+
+  path
+}
