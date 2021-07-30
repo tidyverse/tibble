@@ -113,7 +113,7 @@ formatting to the scales.
       ggplot(aes(x = year, y = stock, color = id)) +
       geom_line()
 
-![](/var/folders/cw/805_99kx0lq50gkr0hr81_y40000gp/T//RtmpGalley/file15ba51af0cf6d_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](/var/folders/cw/805_99kx0lq50gkr0hr81_y40000gp/T//RtmpGalley/formats_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 It pays off to specify formatting very early in the process. The diagram
 below shows the principal stages of data analysis and exploration from

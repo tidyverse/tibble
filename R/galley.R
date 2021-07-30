@@ -24,11 +24,13 @@ render_galley_ext <- function(name, pkg, installed, path) {
   )
 }
 
-render_galley <- function(name) {
+render_galley <- function(name, md_name) {
   pkg <- utils::packageName()
   # FIXME: Hack!
   installed <- inherits(testthat::get_reporter(), "CheckReporter")
-  path <- tempfile(fileext = ".md")
+
+  # Need fixed file name for stability
+  path <- file.path(tempdir(), md_name)
 
   out <- callr::r(
     render_galley_ext,
@@ -74,7 +76,9 @@ test_galley <- function(name) {
   rmd_name <- paste0(name, ".Rmd")
   md_name <- paste0(name, ".md")
 
-  path <- render_galley(rmd_name)
+  path <- render_galley(rmd_name, md_name)
 
   expect_snapshot_file(path, name = md_name, compare = compare_file_text)
+
+  # FIXME: Test generated files
 }
