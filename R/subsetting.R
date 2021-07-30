@@ -559,11 +559,17 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
     i <- i[, 1]
   }
 
-  subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(
+    vec_as_location(i, n),
+    i_arg = i_arg, assign = assign
+  )
 }
 
 vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
-  subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(
+    vec_as_location2(i, n),
+    i_arg = i_arg, assign = assign
+  )
 }
 
 numtbl_as_col_location_assign <- function(j, n, j_arg) {
@@ -574,11 +580,17 @@ numtbl_as_col_location_assign <- function(j, n, j_arg) {
 }
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location(j, n, names), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(
+    vec_as_location(j, n, names),
+    j_arg = j_arg, assign = assign
+  )
 }
 
 vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location2(j, n, names), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(
+    vec_as_location2(j, n, names),
+    j_arg = j_arg, assign = assign
+  )
 }
 
 vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE) {
