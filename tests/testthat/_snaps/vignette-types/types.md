@@ -251,5 +251,5 @@ time it is more useful to override `vctrs::vec_ptype_abbr()`:
     #>             "sym"
     #>         }, typeof(x))
     #> }
-    #> <bytecode: 0x148409970>
+    #> <bytecode: 0x1ee4c0de>
     #> <environment: namespace:pillar>
