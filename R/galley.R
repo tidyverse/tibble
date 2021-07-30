@@ -37,16 +37,21 @@ render_galley <- function(name, md_name) {
   # Need fixed file name for stability
   path <- file.path(tempdir(), md_name)
 
-  out <- callr::r(
-    render_galley_ext,
-    args = list(name = name, pkg = pkg, installed = installed, path = path),
-    stderr = "2>&1"
-  )
+  out_text <- character()
 
-  if (!file.exists(path)) {
-    writeLines(c("", out, ""))
-    rlang::abort(paste0("Error rendering ", name))
-  }
+  knit_path <- tryCatch(
+    callr::r(
+      render_galley_ext,
+      args = list(name = name, pkg = pkg, installed = installed, path = path),
+      callback = function(x) {
+        out_text <<- c(out_text, x)
+      }
+    ),
+    error = function(e) {
+      writeLines(c("", out_text, ""))
+      rlang::abort(paste0("Error rendering ", name))
+    }
+  )
 
   scrub_file(path)
 
