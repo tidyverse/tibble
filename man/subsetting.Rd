@@ -23,11 +23,9 @@
 \method{[}{tbl_df}(x, i, j, ...) <- value
 }
 \arguments{
-\item{x}{data frame.}
+\item{x}{A tibble.}
 
-\item{name}{
-    A literal character string or a \link[base]{name} (possibly \link[base]{backtick}
-    quoted).}
+\item{name}{A \link{name} or a string.}
 
 \item{value}{A value to store in a row, column, range or cell.
 Tibbles are stricter than data frames in what is accepted here.}
@@ -43,13 +41,14 @@ Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 }
 \description{
 Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
-\link[base:Extract.data.frame]{regular data frames}. However, the
+\link[base:Extract]{regular data frames}. However, the
 behavior is different for tibbles and data frames in some cases:
 \itemize{
 \item \code{[} always returns a tibble by default, even if
 only one column is accessed.
-\item Partial matching of column names with \code{$} and \code{[[} is not supported, a
-warning is given and \code{NULL} is returned.
+\item Partial matching of column names with \code{$} and \code{[[} is not supported, and
+\code{NULL} is returned.
+For \code{$}, a warning is given.
 \item Only scalars (vectors of length one) or vectors with the
 same length as the number of rows can be used for assignment.
 \item Rows outside of the tibble's boundaries cannot be accessed.

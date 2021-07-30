@@ -21,6 +21,8 @@ library(purrr)
 library(tibble)
 ```
 
+## Overview
+
 This vignette shows an overview of known data types and their abbreviations, and their origin.
 For example, `<int>` in the header of a column indicates an integer column, and `<chr>` denotes a character column.
 
@@ -81,12 +83,11 @@ data <- list(
   ),
 
   "vctrs types" = rlang::quos(
-    unspecified = vctrs::unspecified(1L),
+    unspecified = vctrs::unspecified(1),
 
     vctrs_list_of = vctrs::list_of(c(1L)),
     vctrs_vctr = vctrs::new_vctr(1L),
 
-    vctrs_unspecified = vctrs::unspecified(1),
     vctrs_partial_factor = vctrs::partial_factor(letters),
     vctrs_partial_frame = vctrs::partial_frame(a = 1)
   ),
@@ -120,6 +121,8 @@ tbl %>%
   mutate(Example = paste0("`", Example, "`")) %>% 
   knitr::kable(escape = FALSE)
 ```
+
+## Example values
 
 The following overview contains example values for each type:
 

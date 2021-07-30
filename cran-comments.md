@@ -1,17 +1,19 @@
-Patch release to fix errors caught after major release.
+tibble 3.0.6
 
-## Test environments
+## Cran Repository Policy
 
-* local install, R 3.6.3
-* ubuntu 18.04 (on travis-ci), R 3.2, R 3.3, R 3.4, R-oldrel, R-release and R-devel
-* win-builder
-* r-hub
+- [x] Reviewed CRP last edited 2020-10-29.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+- [x] Checked locally, R 4.0.3
+- [x] Checked on CI system, R 4.0.3
+- [x] Checked on win-builder, R devel
 
+Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
 
-## Reverse dependencies
+## Current CRAN check results
 
-Not checked.
+- [x] Checked on 2021-01-28, problems found: https://cran.r-project.org/web/checks/check_results_tibble.html
+- [x] ERROR: r-devel-windows-ix86+x86_64: False positive
+- [x] WARN: r-patched-solaris-x86, r-release-macos-x86_64, r-oldrel-macos-x86_64: Fixed vignette

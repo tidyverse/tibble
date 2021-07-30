@@ -1,3 +1,4 @@
+# nocov start
 replace_if_pillar_has <- function(fun) {
   pillar_ns <- asNamespace("pillar")
 
@@ -8,20 +9,28 @@ replace_if_pillar_has <- function(fun) {
   }
 }
 
-register_if_pillar_hasnt <- function(...) {
+register_if_pillar_hasnt <- function(names) {
   pillar_ns <- asNamespace("pillar")
 
   # Register our method implementations only if pillar doesn't provide them
-  methods <- enquos(..., .named = TRUE)
-  pillar_methods <- mget(names(methods), pillar_ns, mode = "function", ifnotfound = list(NULL))
-  methods <- methods[map_lgl(pillar_methods, is.null)]
+  methods <- mget(names, asNamespace("tibble"), mode = "function")
+  pillar_methods <- mget(names, pillar_ns, mode = "function", ifnotfound = list(NULL))
 
-  if (is_empty(methods)) return()
+  pillar_has <- !map_lgl(pillar_methods, is.null)
 
-  methods <- map(methods, eval_tidy)
-  classes <- sub("^[^.]*.", "", names(methods))
-  fun <- sub("[.].*$", "", names(methods)[[1]])
+  imap(methods[!pillar_has], register_method)
 
-  map2(classes, methods, vctrs::s3_register, generic = paste0("tibble::", fun))
+  # Get our implementations out of sight to avoid confusing load_all()
+  #map2(names(methods)[pillar_has], pillar_methods[pillar_has], assign, inherits = TRUE)
+  rm(list = names[pillar_has], inherits = TRUE)
+}
+
+register_method <- function(method, name) {
+  class <- sub("^[^.]*.", "", name)
+  fun <- sub("[.].*$", "", name)
+  generic <- paste0("tibble::", fun)
+
+  vctrs::s3_register(generic, class, method)
   invisible()
 }
+# nocov end

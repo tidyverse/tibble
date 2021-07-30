@@ -1,7 +1,7 @@
 #' Deprecated functions
 #'
 #' @description
-#' \lifecycle{deprecated}
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Use [tibble()] instead of `data_frame()`.
 #'

@@ -10,9 +10,13 @@
 #'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
 #'     fully described in [`tbl_df`][tbl_df-class].
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'     transforming the user's input. Character vectors are not coerced to
-#'     factor. List-columns are expressly anticipated and do not require special
-#'     tricks. Column names are not modified.
+#'     transforming the user's input.
+#'
+#'       - Character vectors are not coerced to factor.
+#'       - List-columns are expressly anticipated and do not require special tricks.
+#'       - Column names are not modified.
+#'       - Inner names in columns are left unchanged.
+#'
 #'   * `tibble()` builds columns sequentially. When defining a column, you can
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
@@ -128,8 +132,8 @@
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
 #' # Use := to create columns with names that start with a dot:
-#' tibble(.rows = 3)
-#' tibble(.rows := 3)
+#' tibble(.dotted = 3)
+#' tibble(.dotted := 3)
 #'
 #' # You can unquote an expression:
 #' x <- 3
@@ -144,9 +148,9 @@ tibble <- function(...,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
+  is.null <- map_lgl(xs, quo_is_null)
 
-  tibble_quos(xs[!is_null], .rows, .name_repair)
+  tibble_quos(xs[!is.null], .rows, .name_repair)
 }
 
 #' tibble_row()
@@ -166,9 +170,9 @@ tibble_row <- function(...,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   xs <- quos(...)
 
-  is_null <- map_lgl(xs, quo_is_null)
+  is.null <- map_lgl(xs, quo_is_null)
 
-  tibble_quos(xs[!is_null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
+  tibble_quos(xs[!is.null], .rows = 1, .name_repair = .name_repair, single_row = TRUE)
 }
 
 #' Test if the object is a tibble
@@ -186,7 +190,7 @@ is_tibble <- function(x) {
 #' Deprecated test for tibble-ness
 #'
 #' @description
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Please use [is_tibble()] instead.
 #'
@@ -216,7 +220,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   for (j in seq_along(xs)) {
     res <- eval_tidy(xs[[j]], mask)
 
-    if (!is_null(res)) {
+    if (!is.null(res)) {
       # Single-row mode: Vectors must be length one, non-vectors are wrapped
       # in a list (which is length one by definition)
       if (single_row) {

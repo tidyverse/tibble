@@ -1,5 +1,3 @@
-context("has-name")
-
 test_that("basic", {
   expect_true(has_name(iris, "Species"))
   expect_false(has_name(mtcars, "gears"))

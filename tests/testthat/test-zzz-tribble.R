@@ -1,5 +1,3 @@
-context("tribble()")
-
 test_that("tribble() constructs 'tibble' as expected", {
   result <- tribble(
     ~colA, ~colB,
@@ -66,7 +64,7 @@ test_that("tribble() handles columns with a class (#161)", {
 
   date_time_col_expectation <- tibble(
     dt = c(sys_date, as.Date("2003-01-02")),
-    dttm = c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
+    dttm = vec_c(sys_time, as.POSIXct("2004-04-05 13:45:17", tz = "UTC"))
   )
 
   expect_equal(date_time_col, date_time_col_expectation)
@@ -112,8 +110,7 @@ test_that("tribble() errs appropriately on bad calls", {
     tribble(
       "a", "b",
       1, 2
-    ),
-    fixed = TRUE
+    )
   )
 
   # tribble() must produce rectangular structure (no filling)

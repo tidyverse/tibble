@@ -7,9 +7,10 @@ set_repaired_names <- function(x,
 repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
                            quiet = FALSE,
+                           repair = FALSE,
                            details = NULL) {
 
-  subclass_name_repair_errors(name = name, details = details,
+  subclass_name_repair_errors(name = name, details = details, repair = repair,
     vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair))
   )
 }
@@ -30,23 +31,23 @@ error_column_names_must_be_unique <- function(names, repair = has_tibble_arg(".n
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_name_repair_errors <- function(expr, name, details = NULL) {
-  tryCatch(
-    force(expr),
+subclass_name_repair_errors <- function(expr, name, details = NULL, repair = FALSE) {
+  withCallingHandlers(
+    expr,
 
     # FIXME: use cnd$names with vctrs >= 0.3.0
     vctrs_error_names_cannot_be_empty = function(cnd) {
-      cnd <- error_column_names_cannot_be_empty(detect_empty_names(name), parent = cnd)
+      cnd <- error_column_names_cannot_be_empty(detect_empty_names(name), parent = cnd, repair = repair)
       cnd$body <- details
 
       cnd_signal(cnd)
     },
     vctrs_error_names_cannot_be_dot_dot = function(cnd) {
-      cnd <- error_column_names_cannot_be_dot_dot(detect_dot_dot(name), parent = cnd)
+      cnd <- error_column_names_cannot_be_dot_dot(detect_dot_dot(name), parent = cnd, repair = repair)
       cnd_signal(cnd)
     },
     vctrs_error_names_must_be_unique = function(cnd) {
-      cnd <- error_column_names_must_be_unique(detect_duplicates(name), parent = cnd)
+      cnd <- error_column_names_must_be_unique(detect_duplicates(name), parent = cnd, repair = repair)
       cnd_signal(cnd)
     }
   )

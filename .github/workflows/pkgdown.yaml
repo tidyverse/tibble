@@ -1,0 +1,128 @@
+on:
+  push:
+    branches:
+    - master
+    - main
+    - "docs*"
+    - "cran-*"
+  pull_request:
+    branches:
+      - main
+      - master
+  schedule:
+    - cron:  '20 2 * * *'
+
+name: pkgdown
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-18.04
+
+    # Begin custom: services
+    # End custom: services
+    env:
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
+
+    steps:
+      - name: Check rate limits
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash
+
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - name: Install remotes
+        run: |
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+        shell: Rscript {0}
+
+      - name: Prepare cache keys
+        run: |
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Configure Git identity
+        run: |
+          env | sort
+          git config --global user.name "$GITHUB_WORKFLOW"
+          git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
+        shell: bash
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'req <- remotes::system_requirements("ubuntu", "18.04"); if (length(req) > 0) cat(req, sep = "\n")')
+          # For some reason gert is installed from source and needs this
+          sudo apt-get install -y libgit2-dev
+
+      # Begin custom: before install
+      # End custom: before install
+
+      - name: Install pkgdown sysdeps
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
+          remotes::install_github("r-lib/pkgdown")
+        shell: Rscript {0}
+
+      # Begin custom: install
+      # End custom: install
+
+      - name: Install package
+        run: R CMD INSTALL .
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      # Begin custom: after install
+      # End custom: after install
+
+      - name: Build site
+        if: github.event_name != 'push'
+        run: |
+          pkgdown::build_site()
+        shell: Rscript {0}
+
+      - name: Deploy package
+        if: github.event_name == 'push'
+        run: |
+          pkgdown::deploy_to_branch(new_process = FALSE)
+        shell: Rscript {0}
+
+      - name: Check rate limits
+        if: always()
+        run: |
+          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+        shell: bash

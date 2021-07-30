@@ -1,5 +1,3 @@
-context("rownames")
-
 test_that("has_rownames and remove_rownames", {
   expect_false(has_rownames(iris))
   expect_true(has_rownames(mtcars))
@@ -95,10 +93,12 @@ test_that("converting to data frame does not add row names", {
   expect_false(has_rownames(as.data.frame(as_tibble(iris))))
 })
 
-verify_output("rownames.txt", {
-  rownames_to_column(mtcars, "cyl")
-  rowid_to_column(iris, "Species")
+test_that("output test", {
+  expect_snapshot_with_error({
+    rownames_to_column(mtcars, "cyl")
+    rowid_to_column(iris, "Species")
 
-  column_to_rownames(mtcars, "cyl")
-  column_to_rownames(iris, "foo")
+    column_to_rownames(mtcars, "cyl")
+    column_to_rownames(iris, "foo")
+  })
 })

@@ -9,7 +9,7 @@ lst(...)
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
+processed with \code{\link[rlang:nse-defuse]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
@@ -22,7 +22,7 @@ is not available.}
 A named list.
 }
 \description{
-\lifecycle{questioning}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a>}}{\strong{Questioning}}
 
 \code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
 same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When
@@ -31,7 +31,8 @@ call. \code{lst()} also generates missing names automatically.
 }
 \section{Life cycle}{
 
-The \code{lst()} function is in the \href{https://www.tidyverse.org/lifecycle/#questioning}{questioning stage}. It is essentially
+The \code{lst()} function is in the questioning stage.
+It is essentially
 \code{\link[rlang:list2]{rlang::list2()}}, but with a couple features copied from \code{\link[=tibble]{tibble()}}. It's not
 clear that a function for creating lists belongs in the tibble package.
 Consider using \code{\link[rlang:list2]{rlang::list2()}} instead.

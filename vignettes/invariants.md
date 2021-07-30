@@ -328,8 +328,8 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `c("n", "c")` has size 2
-    #> but must be size 1.
+    #> [31mx[39m Subscript `c("n", "c")` has size 2 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -346,8 +346,8 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `TRUE` has the wrong
-    #> type `logical`.
+    #> [31mx[39m Subscript `TRUE` has the wrong type
+    #> `logical`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -367,8 +367,8 @@ exists.
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `mean` has the wrong
-    #> type `closure`.
+    #> [31mx[39m Subscript `mean` has the wrong type
+    #> `function`.
     #> [34mℹ[39m It must be numeric or character.
 
 </td>
@@ -394,7 +394,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `NA` can't be `NA`.
+    #> [31mx[39m Subscript `NA` can't be `NA`.
 
 </td>
 </tr>
@@ -411,7 +411,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `NA_character_` can't be
+    #> [31mx[39m Subscript `NA_character_` can't be
     #> `NA`.
 
 </td>
@@ -429,8 +429,7 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `NA_integer_` can't be
-    #> `NA`.
+    #> [31mx[39m Subscript `NA_integer_` can't be `NA`.
 
 </td>
 </tr>
@@ -440,8 +439,8 @@ an error:
     df[[-1]]
 
     #> Error in .subset2(x, i, exact = exact):
-    #> attempt to select more than one element
-    #> in get1index <real>
+    #> invalid negative subscript in get1index
+    #> <real>
 
 </td>
 <td>
@@ -450,8 +449,8 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `-1` has value -1 but
-    #> must be a positive location.
+    #> [31mx[39m Subscript `-1` has value -1 but must
+    #> be a positive location.
 
 </td>
 </tr>
@@ -470,7 +469,7 @@ an error:
 
     #> Error: Can't subset columns that don't
     #> exist.
-    #> [31mx[39m The location 4 doesn't exist.
+    #> [31mx[39m Location 4 doesn't exist.
     #> [34mℹ[39m There are only 3 columns.
 
 </td>
@@ -488,8 +487,8 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Lossy cast from `1.5` <double> to
-    #> <integer>.
+    #> [31mx[39m Can't convert from `1.5` <double> to
+    #> <integer> due to loss of precision.
 
 </td>
 </tr>
@@ -506,8 +505,8 @@ an error:
 
     #> Error: Must extract column with a single
     #> valid subscript.
-    #> [31mx[39m Lossy cast from `Inf` <double> to
-    #> <integer>.
+    #> [31mx[39m Can't convert from `Inf` <double> to
+    #> <integer> due to loss of precision.
 
 </td>
 </tr>
@@ -806,8 +805,8 @@ the returned vector are compatible.
 
     tbl[!is.na(tbl)]
 
-    #> Error: No common type for `n` <integer>
-    #> and `c` <character>.
+    #> Error: Can't combine `n` <integer> and
+    #> `c` <character>.
 
 </td>
 </tr>
@@ -985,8 +984,8 @@ vector containing positive numbers.
 
     #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m The subscript `mean` has the wrong
-    #> type `closure`.
+    #> [31mx[39m Subscript `mean` has the wrong type
+    #> `function`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -1007,8 +1006,8 @@ vector containing positive numbers.
 
     #> Error: Must subset rows with a valid
     #> subscript vector.
-    #> [31mx[39m The subscript `list(1)` has the wrong
-    #> type `list`.
+    #> [31mx[39m Subscript `list(1)` has the wrong type
+    #> `list`.
     #> [34mℹ[39m It must be logical, numeric, or
     #> character.
 
@@ -1049,8 +1048,8 @@ Exception: OOB values generate warnings instead of errors:
     #> Warning: The `i` argument of
     #> ``[.tbl_df`()` must lie in [0, rows] if
     #> positive, as of tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -1074,8 +1073,8 @@ Exception: OOB values generate warnings instead of errors:
     #> Warning: The `i` argument of
     #> ``[.tbl_df`()` must use valid row names
     #> as of tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> # A tibble: 1 x 3
     #>       n c     li    
@@ -1109,7 +1108,7 @@ Unlike data frames, only logical vectors of length 1 are recycled.
     #> subscript vector.
     #> [34mℹ[39m Logical subscripts must match the size
     #> of the indexed input.
-    #> [31mx[39m The input has size 4 but the subscript
+    #> [31mx[39m Input has size 4 but subscript
     #> `c(TRUE, FALSE)` has size 2.
 
 </td>
@@ -1406,8 +1405,8 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m The subscript `TRUE` has size 3 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `TRUE` has size 3 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1427,8 +1426,8 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m The subscript `1:3` has size 3 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `1:3` has size 3 but must be
+    #> size 1.
 
 </td>
 </tr>
@@ -1447,8 +1446,8 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m The subscript `c("n", "c")` has size 2
-    #> but must be size 1.
+    #> [31mx[39m Subscript `c("n", "c")` has size 2 but
+    #> must be size 1.
 
 </td>
 </tr>
@@ -1468,8 +1467,8 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m The subscript `FALSE` has size 0 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `FALSE` has size 0 but must
+    #> be size 1.
 
 </td>
 </tr>
@@ -1488,8 +1487,8 @@ value `a`.
 
     #> Error: Must assign to column with a
     #> single valid subscript.
-    #> [31mx[39m The subscript `1:2` has size 2 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> size 1.
 
 </td>
 </tr>
@@ -2125,9 +2124,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 
     with_tbl(tbl[1:2] <- list(0, 0, 0))
 
-    #> Error: `list(0, 0, 0)` can't be recycled
-    #> to size 2.
-    #> [31mx[39m It must be size 2 or 1, not 3.
+    #> Error: Can't recycle `list(0, 0, 0)`
+    #> (size 3) to size 2.
 
 </td>
 </tr>
@@ -2146,9 +2144,8 @@ If `length(a)` equals 1, then it is recycled to the same length as `j`.
 
     with_tbl(tbl[1:3] <- list(0, 0))
 
-    #> Error: `list(0, 0)` can't be recycled to
-    #> size 3.
-    #> [31mx[39m It must be size 3 or 1, not 2.
+    #> Error: Can't recycle `list(0, 0)` (size
+    #> 2) to size 3.
 
 </td>
 </tr>
@@ -2514,8 +2511,7 @@ and if all columns updated are compatible with the value assigned.
     #> Error: Assigned data `4` must be
     #> compatible with existing data.
     #> ℹ Error occurred for column `c`.
-    #> x No common type for `value` <double>
-    #> and `x` <character>.
+    #> x Can't convert <double> to <character>.
 
 </td>
 </tr>
@@ -2566,8 +2562,8 @@ type must be compatible with all columns. If `is.array(a)` and
     #> 2)` must be compatible with existing
     #> data.
     #> ℹ Error occurred for column `c`.
-    #> x No common type for `value` <integer>
-    #> and `x` <character>.
+    #> x Can't convert <integer> to
+    #> <character>.
 
 </td>
 </tr>
@@ -2979,10 +2975,10 @@ Row subassignment: `x[i, ] <- list(...)`
 
     #> Error: Must assign to rows with a valid
     #> subscript vector.
-    #> [31mx[39m Negative locations can't be mixed with
-    #> positive locations.
-    #> [34mℹ[39m The subscript `-1:2` has 2 positive
-    #> values at locations 3 and 4.
+    #> [31mx[39m Negative and positive locations can't
+    #> be mixed.
+    #> [34mℹ[39m Subscript `-1:2` has 2 positive values
+    #> at locations 3 and 4.
 
 </td>
 </tr>
@@ -3275,7 +3271,7 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m The location 5 doesn't exist.
+    #> [31mx[39m Location 5 doesn't exist.
     #> [34mℹ[39m There are only 4 rows.
 
 </td>
@@ -3297,7 +3293,7 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m The locations 5, 6, and 7 don't exist.
+    #> [31mx[39m Locations 5, 6, and 7 don't exist.
     #> [34mℹ[39m There are only 4 rows.
 
 </td>
@@ -3319,7 +3315,7 @@ supported, without warning.
 
     #> Error: Can't negate rows that don't
     #> exist.
-    #> [31mx[39m The location 6 doesn't exist.
+    #> [31mx[39m Location 6 doesn't exist.
     #> [34mℹ[39m There are only 4 rows.
 
 </td>
@@ -3373,8 +3369,8 @@ positive numbers.
     #> Warning: The `i` argument of
     #> ``[.tbl_df`()` must use valid row names
     #> as of tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -3400,8 +3396,8 @@ positive numbers.
     #> Warning: The `i` argument of
     #> ``[.tbl_df`()` must use valid row names
     #> as of tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -3429,8 +3425,8 @@ positive numbers.
     #> Warning: The `i` argument of
     #> ``[.tbl_df`()` must use valid row names
     #> as of tibble 3.0.0.
-    #> Use `NA` as row index to obtain a row
-    #> full of `NA` values.
+    #> Use `NA_integer_` as row index to obtain
+    #> a row full of `NA` values.
 
     #> Error: Can't use NA as row index in a
     #> tibble for assignment.
@@ -3491,8 +3487,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: Assigned data `tbl[1:2, 2]` must
     #> be compatible with existing data.
     #> ℹ Error occurred for column `n`.
-    #> x No common type for `value` <character>
-    #> and `x` <integer>.
+    #> x Can't convert <character> to
+    #> <integer>.
 
 </td>
 </tr>
@@ -3520,8 +3516,7 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: Assigned data `tbl[1:2, 3]` must
     #> be compatible with existing data.
     #> ℹ Error occurred for column `c`.
-    #> x No common type for `value` <list> and
-    #> `x` <character>.
+    #> x Can't convert <list> to <character>.
 
 </td>
 </tr>
@@ -3546,14 +3541,10 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 
     with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
-    #> Error: Assigned data `tbl2[1:2, 1]` must
-    #> be compatible with existing data.
-    #> ℹ Error occurred for column `li`.
-    #> x No common type for `value` <tbl_df<
-    #> n : integer
-    #> c : character
-    #> li: list
-    #> >> and `x` <list>.
+    #> Error in df_cast_opts(x, to, ..., opts =
+    #> opts, x_arg = x_arg, to_arg = to_arg):
+    #> Internal error in `df_cast()`: Data
+    #> frame must have names.
 
 </td>
 </tr>
@@ -3580,12 +3571,8 @@ Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
     #> Error: Assigned data `tbl2[1:2, 2]` must
     #> be compatible with existing data.
     #> ℹ Error occurred for column `tb`.
-    #> x No common type for `value`
-    #> <double[,4]> and `x` <tbl_df<
-    #> n : integer
-    #> c : character
-    #> li: list
-    #> >>.
+    #> x Can't convert <double[,4]> to
+    #> <tbl_df>.
 
 </td>
 </tr>
@@ -3633,8 +3620,8 @@ type of `NA` to initialize columns.
     #> Error: Assigned data `3:2` must be
     #> compatible with existing data.
     #> ℹ Error occurred for column `x`.
-    #> x Lossy cast from `value` <integer> to
-    #> `x` <logical>.
+    #> x Can't convert from <integer> to
+    #> <logical> due to loss of precision.
     #> * Locations: 1, 2.
 
 </td>
@@ -3941,8 +3928,8 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must extract row with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `1:2` has size 2 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> size 1.
 
 </td>
 </tr>
@@ -3962,8 +3949,8 @@ to `x[i, ][[j]] <- a`.[9]
 
     #> Error: Must assign to row with a single
     #> valid subscript.
-    #> [31mx[39m The subscript `1:2` has size 2 but
-    #> must be size 1.
+    #> [31mx[39m Subscript `1:2` has size 2 but must be
+    #> size 1.
 
 </td>
 </tr>

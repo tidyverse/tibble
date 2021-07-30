@@ -1,7 +1,7 @@
 #' Printing tibbles
 #'
 #' @description
-#' \lifecycle{maturing}
+#' `r lifecycle::badge("maturing")`
 #'
 #' One of the main features of the `tbl_df` class is the printing:
 #'
@@ -57,36 +57,36 @@
 #'
 #' trunc_mat(mtcars)
 #'
-#' if (requireNamespace("nycflights13", quietly = TRUE)) {
-#'   print(nycflights13::flights, n_extra = 2)
-#'   print(nycflights13::flights, width = Inf)
-#' }
+#' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
+#' print(nycflights13::flights, n_extra = 2)
+#' print(nycflights13::flights, width = Inf)
+#'
 #' @name formatting
+#' @aliases print.tbl format.tbl
 NULL
 
-#' @rdname formatting
-#' @export
+# If needed, registered in .onLoad() via register_if_pillar_hasnt()
 print.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cli::cat_line(format(x, ..., n = n, width = width, n_extra = n_extra))
   invisible(x)
 }
 
-#' Legacy help page for compatibility with existing packages
-#'
-#' @description
-#' \lifecycle{superseded}
-#'
-#' Please see [print.tbl()] for the print method for tibbles.
-#'
-#' @name print.tbl_df
-#' @keywords internal
-NULL
-
+# Only for documentation, doesn't do anything
 #' @rdname formatting
-#' @export
+print.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
+}
+
+# If needed, registered in .onLoad() via register_if_pillar_hasnt()
 format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   mat <- trunc_mat(x, n = n, width = width, n_extra = n_extra)
   format(mat)
+}
+
+# Only for documentation, doesn't do anything
+#' @rdname formatting
+format.tbl_df <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  NextMethod()
 }
 
 #' @export
@@ -94,7 +94,7 @@ format.tbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   rows <- nrow(x)
 
-  if (is_null(n) || n < 0) {
+  if (is.null(n) || n < 0) {
     if (is.na(rows) || rows > tibble_opt("print_max")) {
       n <- tibble_opt("print_min")
     } else {
@@ -142,8 +142,7 @@ shrink_mat <- function(df, rows, n, star) {
 
   mcf <- pillar::colonnade(
     df,
-    has_row_id = if (star) "*" else TRUE,
-    needs_dots = needs_dots
+    has_row_id = if (star) "*" else TRUE
   )
 
   list(mcf = mcf, rows_missing = rows_missing)
@@ -187,12 +186,16 @@ format.trunc_mat <- function(x, width = NULL, ...) {
 }
 
 # Needs to be defined in package code: r-lib/pkgload#85
-print_without_body <- function(x, ...) {
+print_with_mocked_format_body <- function(x, ...) {
+  scoped_lifecycle_silence()
+
   mockr::with_mock(
     format_body = function(x, ...) {
       paste0("<body created by pillar>")
     },
-    print(x, ...)
+    {
+      print(x, ...)
+    }
   )
 }
 

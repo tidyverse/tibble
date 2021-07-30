@@ -3,8 +3,8 @@
 test_that("[ never drops", {
   mtcars2 <- as_tibble(mtcars)
 
-  expect_is(mtcars2[, 1], "data.frame")
-  expect_is(mtcars2[, 1], "tbl_df")
+  expect_s3_class(mtcars2[, 1], "data.frame")
+  expect_s3_class(mtcars2[, 1], "tbl_df")
   expect_equal(mtcars2[, 1], mtcars2[1])
 })
 
@@ -28,7 +28,7 @@ test_that("[ and as_tibble commute", {
 
 test_that("[ with 0 cols creates correct row names (#656)", {
   zero_row <- as_tibble(iris)[, 0]
-  expect_is(zero_row, "tbl_df")
+  expect_s3_class(zero_row, "tbl_df")
   expect_equal(nrow(zero_row), 150)
   expect_equal(ncol(zero_row), 0)
 
@@ -122,7 +122,7 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
     )
     expect_error(
       foo[c(-1, NA)],
-      class = "tibble_error_na_column_index"
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(
@@ -167,7 +167,7 @@ test_that("[.tbl_df is careful about column flags (#83)", {
     )
     expect_error(
       foo[array(TRUE, dim = c(1, 1, 1))],
-      "."
+      class = "vctrs_error_subscript_type"
     )
   })
 })
@@ -392,6 +392,36 @@ test_that("can use two-dimensional indexing with matrix and data frame columns (
   expect_identical(df[[1, "z"]], df[1, ]$z)
 })
 
+test_that("can use classed character indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[mychr(letters[1:2])], df)
+  expect_identical(df[[mychr("a")]], df[["a"]])
+  expect_null(df[[mychr("c")]])
+
+  expect_silent(df[mychr(letters[1:2])] <- df)
+  expect_silent(df[[mychr("c")]] <- 1)
+  expect_silent(df[[mychr("a")]] <-  df[["a"]])
+})
+
+test_that("can use classed integer indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[myint(1:3), myint(1:2)], df)
+  expect_identical(df[[myint(2)]], df[[2]])
+
+  expect_silent(df[mylgl(TRUE), ] <- df)
+  expect_silent(df[[myint(2)]] <- df[[2]])
+  expect_silent(df[[myint(3)]] <- 1)
+})
+
+test_that("can use classed logical indexes (#778)", {
+  df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
+
+  expect_identical(df[mylgl(TRUE), mylgl(TRUE)], df)
+  expect_silent(df[mylgl(TRUE), mylgl(TRUE)] <- df)
+})
+
 # $ -----------------------------------------------------------------------
 
 test_that("$ throws warning if name doesn't exist", {
@@ -434,6 +464,13 @@ test_that("[[<-.tbl_df can remove columns (#666)", {
   expect_identical(df, tibble(y = 1:2))
   df[["z"]] <- NULL
   expect_identical(df, tibble(y = 1:2))
+})
+
+test_that("[[<-.tbl_df requires scalar, positive if numeric", {
+  df <- tibble(x = 1:2, y = x)
+  expect_error(df[[c("x", "y")]] <- 1, class = "vctrs_error_subscript_type")
+  expect_error(df[[1:2]] <- 1, class = "vctrs_error_subscript_type")
+  expect_error(df[[-1]] <- 1, class = "vctrs_error_subscript_type")
 })
 
 # [<- ---------------------------------------------------------------------
@@ -578,6 +615,12 @@ test_that("[<- with explicit NULL doesn't change anything (#696)", {
   expect_identical(iris_tbl, iris_tbl_orig)
 })
 
+test_that("[<- with FALSE still adds column (#846)", {
+  tbl <- tibble(a = 1:3)
+  tbl[FALSE, "b"] <- 2
+  expect_identical(tbl, tibble(a = 1:3, b = NA_real_))
+})
+
 test_that("[<-.tbl_df is careful about attributes (#155)", {
   df <- tibble(x = 1:2, y = x)
   attr(df, "along for the ride") <- "still here"
@@ -701,215 +744,223 @@ test_that("$<- recycles only values of length one", {
   })
 })
 
-verify_output("subsetting.txt", {
-  "# [.tbl_df is careful about names (#1245)"
-  foo <- tibble(x = 1:10, y = 1:10)
-  foo[c("x", "y", "z")]
-  foo[c("w", "x", "y", "z")]
-  foo[as.matrix("x")]
-  foo[array("x", dim = c(1, 1, 1))]
+test_that("output test", {
+  skip_if_not_installed("lifecycle", "0.2.0.9000")
 
-  "# [.tbl_df is careful about column indexes (#83)"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[0.5]
-  foo[1:5]
-  foo[-1:1]
-  foo[c(-1, 1)]
-  foo[c(-1, NA)]
-  foo[-4]
-  foo[c(1:3, NA)]
-  foo[as.matrix(1)]
-  foo[array(1, dim = c(1, 1, 1))]
-  foo[mean]
-  foo[foo]
+  expect_snapshot_with_error({
+    "# [.tbl_df is careful about names (#1245)"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[c("x", "y", "z")]
+    foo[c("w", "x", "y", "z")]
+    foo[as.matrix("x")]
+    foo[array("x", dim = c(1, 1, 1))]
 
-  "# [.tbl_df is careful about row indexes"
-  foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
-  foo[0.5, ]
-  invisible(foo[1:5, ])
-  foo[-1:1, ]
-  foo[c(-1, 1), ]
-  foo[c(-1, NA), ]
-  invisible(foo[-4, ])
-  foo[array(1, dim = c(1, 1, 1)), ]
-  foo[mean, ]
-  foo[foo, ]
+    "# [.tbl_df is careful about column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[0.5]
+    foo[1:5]
+    foo[-1:1]
+    foo[c(-1, 1)]
+    foo[c(-1, NA)]
+    foo[-4]
+    foo[c(1:3, NA)]
+    foo[as.matrix(1)]
+    foo[array(1, dim = c(1, 1, 1))]
+    foo[mean]
+    foo[foo]
 
-  "# [.tbl_df is careful about column flags (#83)"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[c(TRUE, TRUE)]
-  foo[c(TRUE, TRUE, FALSE, FALSE)]
-  foo[c(TRUE, TRUE, NA)]
-  foo[as.matrix(TRUE)]
-  foo[array(TRUE, dim = c(1, 1, 1))]
+    "# [.tbl_df is careful about row indexes"
+    foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
+    foo[0.5, ]
+    invisible(foo[1:5, ])
+    foo[-1:1, ]
+    foo[c(-1, 1), ]
+    foo[c(-1, NA), ]
+    invisible(foo[-4, ])
+    foo[array(1, dim = c(1, 1, 1)), ]
+    foo[mean, ]
+    foo[foo, ]
 
-  "# [.tbl_df is careful about row flags"
-  foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
-  foo[c(TRUE, TRUE), ]
-  foo[c(TRUE, TRUE, FALSE, FALSE), ]
-  foo[array(TRUE, dim = c(1, 1, 1)), ]
+    "# [.tbl_df is careful about column flags (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[c(TRUE, TRUE)]
+    foo[c(TRUE, TRUE, FALSE, FALSE)]
+    foo[c(TRUE, TRUE, NA)]
+    foo[as.matrix(TRUE)]
+    foo[array(TRUE, dim = c(1, 1, 1))]
 
-  "# [.tbl_df rejects unknown column indexes (#83)"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[list(1:3)]
-  foo[as.list(1:3)]
-  foo[factor(1:3)]
-  foo[Sys.Date()]
+    "# [.tbl_df is careful about row flags"
+    foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
+    foo[c(TRUE, TRUE), ]
+    foo[c(TRUE, TRUE, FALSE, FALSE), ]
+    foo[array(TRUE, dim = c(1, 1, 1)), ]
 
-  "# [.tbl_df rejects unknown row indexes"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[list(1:3), ]
-  foo[as.list(1:3), ]
-  foo[factor(1:3), ]
-  foo[Sys.Date(), ]
+    "# [.tbl_df rejects unknown column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3)]
+    foo[as.list(1:3)]
+    foo[factor(1:3)]
+    foo[Sys.Date()]
 
-  "# [.tbl_df and matrix subsetting"
-  foo <- tibble(a = 1:3, b = letters[1:3])
-  foo[is.na(foo)]
-  foo[!is.na(foo)]
-  foo[as.matrix("x")]
-  foo[array("x", dim = c(1, 1, 1))]
+    "# [.tbl_df rejects unknown row indexes"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3), ]
+    foo[as.list(1:3), ]
+    foo[factor(1:3), ]
+    foo[Sys.Date(), ]
 
-  "# [.tbl_df and OOB indexing"
-  foo <- tibble(a = 1:3, b = letters[1:3])
-  invisible(foo[3:5, ])
-  invisible(foo[-(3:5), ])
-  invisible(foo["x", ])
+    "# [.tbl_df and matrix subsetting"
+    foo <- tibble(a = 1:3, b = letters[1:3])
+    foo[is.na(foo)]
+    foo[!is.na(foo)]
+    foo[as.matrix("x")]
+    foo[array("x", dim = c(1, 1, 1))]
 
-  "# [.tbl_df and logical recycling"
-  foo <- tibble(a = 1:4, b = a)
-  foo[c(TRUE, FALSE), ]
+    "# [.tbl_df and OOB indexing"
+    foo <- tibble(a = 1:3, b = letters[1:3])
+    invisible(foo[3:5, ])
+    invisible(foo[-(3:5), ])
+    invisible(foo["x", ])
 
-  "# [[.tbl_df rejects invalid column indexes"
-  foo <- tibble(x = 1:10, y = 1:10)
-  foo[[]]
-  foo[[, 1]]
-  foo[[1, ]]
-  foo[[, ]]
-  foo[[1:3]]
-  foo[[ letters[1:3] ]]
-  foo[[TRUE]]
-  foo[[mean]]
-  foo[[foo]]
+    "# [.tbl_df and logical recycling"
+    foo <- tibble(a = 1:4, b = a)
+    foo[c(TRUE, FALSE), ]
 
-  "# [[.tbl_df throws error with NA index"
-  foo <- tibble(x = 1:10, y = 1:10)
-  foo[[NA]]
+    "# [[.tbl_df rejects invalid column indexes"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[[]]
+    foo[[, 1]]
+    foo[[1, ]]
+    foo[[, ]]
+    foo[[1:3]]
+    foo[[ letters[1:3] ]]
+    foo[[TRUE]]
+    foo[[-1]]
+    foo[[1.5]]
+    foo[[3]]
+    foo[[Inf]]
+    foo[[mean]]
+    foo[[foo]]
 
-  "# $.tbl_df and partial matching/invalid columns"
-  foo <- tibble(data = 1:10)
-  foo$d
-  foo$e
+    "# [[.tbl_df throws error with NA index"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[[NA]]
 
-  "# [<-.tbl_df rejects unknown column indexes (#83)"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[list(1:3)] <- 1
-  foo[as.list(1:3)] <- 1
-  foo[factor(1:3)] <- 1
-  foo[Sys.Date()] <- 1
+    "# $.tbl_df and partial matching/invalid columns"
+    foo <- tibble(data = 1:10)
+    foo$d
+    foo$e
 
-  "# [.tbl_df emits lifecycle warnings with one-column matrix indexes (#760)"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  invisible(foo[matrix(1:2, ncol = 1), ])
-  invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
+    "# [<-.tbl_df rejects unknown column indexes (#83)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3)] <- 1
+    foo[as.list(1:3)] <- 1
+    foo[factor(1:3)] <- 1
+    foo[Sys.Date()] <- 1
 
-  "# [<-.tbl_df rejects unknown row indexes"
-  foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
-  foo[list(1:3), ] <- 1
-  foo[as.list(1:3), ] <- 1
-  foo[factor(1:3), ] <- 1
-  foo[Sys.Date(), ] <- 1
+    "# [.tbl_df emits lifecycle warnings with one-column matrix indexes (#760)"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    invisible(foo[matrix(1:2, ncol = 1), ])
+    invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
 
-  "# [<-.tbl_df throws an error with duplicate indexes (#658)"
-  df <- tibble(x = 1:2, y = x)
-  df[c(1, 1)] <- 3
-  df[, c(1, 1)] <- 3
-  df[c(1, 1), ] <- 3
+    "# [<-.tbl_df rejects unknown row indexes"
+    foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
+    foo[list(1:3), ] <- 1
+    foo[as.list(1:3), ] <- 1
+    foo[factor(1:3), ] <- 1
+    foo[Sys.Date(), ] <- 1
 
-  "# [<-.tbl_df throws an error with NA indexes"
-  df <- tibble(x = 1:2, y = x)
-  df[NA] <- 3
-  df[NA, ] <- 3
+    "# [<-.tbl_df throws an error with duplicate indexes (#658)"
+    df <- tibble(x = 1:2, y = x)
+    df[c(1, 1)] <- 3
+    df[, c(1, 1)] <- 3
+    df[c(1, 1), ] <- 3
 
-  "# [<-.tbl_df throws an error with bad RHS"
-  df <- tibble(x = 1:2, y = x)
-  df[] <- mean
-  df[] <- lm(y ~ x, df)
+    "# [<-.tbl_df throws an error with NA indexes"
+    df <- tibble(x = 1:2, y = x)
+    df[NA] <- 3
+    df[NA, ] <- 3
 
-  "# [<-.tbl_df throws an error with OOB assignment"
-  df <- tibble(x = 1:2, y = x)
-  df[4:5] <- 3
-  df[4:5, ] <- 3
-  df[-4, ] <- 3
-  df[-(4:5), ] <- 3
+    "# [<-.tbl_df throws an error with bad RHS"
+    df <- tibble(x = 1:2, y = x)
+    df[] <- mean
+    df[] <- lm(y ~ x, df)
 
-  "# [<-.tbl_df and recycling"
-  df <- tibble(x = 1:3, y = x, z = y)
-  df[1:2] <- list(0, 0, 0)
-  df[] <- list(0, 0)
-  df[1, ] <- 1:3
-  df[1:2, ] <- 1:3
-  df[,] <- 1:2
+    "# [<-.tbl_df throws an error with OOB assignment"
+    df <- tibble(x = 1:2, y = x)
+    df[4:5] <- 3
+    df[4:5, ] <- 3
+    df[-4, ] <- 3
+    df[-(4:5), ] <- 3
 
-  "# [<-.tbl_df and coercion"
-  df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
-  df[1:3, 1:2] <- df[2:3]
-  df[1:3, 1:2] <- df[1]
-  df[1:3, 1:2] <- df[[1]]
-  df[1:3, 1:3] <- df[3:1]
-  df[1:3, 1:3] <- NULL
+    "# [<-.tbl_df and recycling"
+    df <- tibble(x = 1:3, y = x, z = y)
+    df[1:2] <- list(0, 0, 0)
+    df[] <- list(0, 0)
+    df[1, ] <- 1:3
+    df[1:2, ] <- 1:3
+    df[,] <- 1:2
 
-  "# [<-.tbl_df and overwriting NA"
-  df <- tibble(x = rep(NA, 3))
-  df[1, "x"] <- 5
+    "# [<-.tbl_df and coercion"
+    df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
+    df[1:3, 1:2] <- df[2:3]
+    df[1:3, 1:2] <- df[1]
+    df[1:3, 1:2] <- df[[1]]
+    df[1:3, 1:3] <- df[3:1]
+    df[1:3, 1:3] <- NULL
 
-  "# [<-.tbl_df and matrix subsetting"
-  foo <- tibble(a = 1:3, b = letters[1:3])
-  foo[!is.na(foo)] <- "bogus"
-  foo[as.matrix("x")] <- NA
-  foo[array("x", dim = c(1, 1, 1))] <- NA
-  foo[is.na(foo)] <- 1:3
-  foo[is.na(foo)] <- lm(a ~ b, foo)
+    "# [<-.tbl_df and overwriting NA"
+    df <- tibble(x = rep(NA, 3))
+    df[1, "x"] <- 5
 
-  "# [[.tbl_df rejects invalid column indexes"
-  foo <- tibble(x = 1:10, y = 1:10)
-  foo[[]] <- 1
-  foo[[, 1]] <- 1
-  foo[[1, ]] <- 1
-  foo[[, ]] <- 1
-  foo[[1:3]] <- 1
-  foo[[ letters[1:3] ]] <- 1
-  foo[[TRUE]] <- 1
-  foo[[mean]] <- 1
-  foo[[foo]] <- 1
-  foo[[1:3, 1]] <- 1
-  foo[[TRUE, 1]] <- 1
-  foo[[mean, 1]] <- 1
-  foo[[foo, 1]] <- 1
+    "# [<-.tbl_df and matrix subsetting"
+    foo <- tibble(a = 1:3, b = letters[1:3])
+    foo[!is.na(foo)] <- "bogus"
+    foo[as.matrix("x")] <- NA
+    foo[array("x", dim = c(1, 1, 1))] <- NA
+    foo[is.na(foo)] <- 1:3
+    foo[is.na(foo)] <- lm(a ~ b, foo)
 
-  "# [[<-.tbl_df throws an error with OOB assignment"
-  df <- tibble(x = 1:2, y = x)
-  df[[4]] <- 3
+    "# [[.tbl_df rejects invalid column indexes"
+    foo <- tibble(x = 1:10, y = 1:10)
+    foo[[]] <- 1
+    foo[[, 1]] <- 1
+    foo[[1, ]] <- 1
+    foo[[, ]] <- 1
+    foo[[1:3]] <- 1
+    foo[[ letters[1:3] ]] <- 1
+    foo[[TRUE]] <- 1
+    foo[[mean]] <- 1
+    foo[[foo]] <- 1
+    foo[[1:3, 1]] <- 1
+    foo[[TRUE, 1]] <- 1
+    foo[[mean, 1]] <- 1
+    foo[[foo, 1]] <- 1
 
-  "# [[<-.tbl_df throws an error with bad RHS"
-  df <- tibble(x = 1:2, y = x)
-  df[[1]] <- mean
-  df[[1]] <- lm(y ~ x, df)
+    "# [[<-.tbl_df throws an error with OOB assignment"
+    df <- tibble(x = 1:2, y = x)
+    df[[4]] <- 3
 
-  "# [[<-.tbl_df recycles only values of length one"
-  df <- tibble(x = 1:3)
-  df[["x"]] <- 8:9
-  df[["w"]] <- 8:9
-  df[["a"]] <- character()
+    "# [[<-.tbl_df throws an error with bad RHS"
+    df <- tibble(x = 1:2, y = x)
+    df[[1]] <- mean
+    df[[1]] <- lm(y ~ x, df)
 
-  "# [<-.tbl_df throws an error with invalid values"
-  df <- tibble(x = 1:2, y = x)
-  df[1] <- lm(y ~ x, df)
-  df[1:2, 1] <- NULL
+    "# [[<-.tbl_df recycles only values of length one"
+    df <- tibble(x = 1:3)
+    df[["x"]] <- 8:9
+    df[["w"]] <- 8:9
+    df[["a"]] <- character()
 
-  "# $<- recycles only values of length one"
-  df <- tibble(x = 1:3)
-  df$x <- 8:9
-  df$w <- 8:9
-  df$a <- character()
+    "# [<-.tbl_df throws an error with invalid values"
+    df <- tibble(x = 1:2, y = x)
+    df[1] <- lm(y ~ x, df)
+    df[1:2, 1] <- NULL
+
+    "# $<- recycles only values of length one"
+    df <- tibble(x = 1:3)
+    df$x <- 8:9
+    df$w <- 8:9
+    df$a <- character()
+  })
 })

@@ -11,11 +11,13 @@
 #' @return A named character vector, describing the dimensions in the first element
 #'   and the data source in the name of the first element.
 #'
-#' @seealso [pillar::type_sum()], [pillar::is_vector_s3()]
-#' @param x Object to summarise
+#' @seealso [pillar::type_sum()]
+#' @param x Object to summarise.
 #' @export
 # Can be overridden in .onLoad()
-tbl_sum <- function(x) UseMethod("tbl_sum", x)
+tbl_sum <- function(x) {
+  UseMethod("tbl_sum", x)
+}
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
 tbl_sum.default <- function(x) {
@@ -24,6 +26,11 @@ tbl_sum.default <- function(x) {
 
 # If needed, exported in .onLoad() via replace_if_pillar_has()
 tbl_sum.tbl <- function(x) {
+  c("A data frame" = dim_desc(x))
+}
+
+# Must be registered in .onLoad() until pillar 1.5.0 is on CRAN
+tbl_sum.tbl_df <- function(x) {
   c("A tibble" = dim_desc(x))
 }
 
@@ -31,12 +38,6 @@ dim_desc <- function(x) {
   dim <- dim(x) %||% length(x)
   format_dim <- map_chr(dim, big_mark)
   paste0(format_dim, collapse = spaces_around(mult_sign()))
-}
-
-size_sum <- function(x) {
-  if (!is_vector_s3(x)) return("")
-
-  paste0(" [", dim_desc(x), "]")
 }
 
 #' @importFrom pillar obj_sum
@@ -48,8 +49,10 @@ pillar::obj_sum
 pillar::type_sum
 
 #' @export
-type_sum.tbl_df <- function(x) "tibble"
-
-#' @importFrom pillar is_vector_s3
-#' @export
-pillar::is_vector_s3
+vec_ptype_abbr.tbl_df <- function(x, ...) {
+  abbr <- class(x)[[1]]
+  if (abbr == "tbl_df") {
+    abbr <- "tibble"
+  }
+  abbr
+}

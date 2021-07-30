@@ -25,7 +25,7 @@ is_syntactic <- function(x) {
 
 is_syntactic_impl <- function(x) {
   unchanged_after_repair <- (x == make.names(x))
-  # http://r.789695.n4.nabble.com/Dots-are-not-fixed-by-make-names-td4752920.html
+  # https://r.789695.n4.nabble.com/Dots-are-not-fixed-by-make-names-td4752920.html
   dot_dot_dot_or_numbers <- grepl("^(?:(?:[.][.][.])|(?:[.][.][0-9]+))$", x)
 
   unchanged_after_repair & !dot_dot_dot_or_numbers

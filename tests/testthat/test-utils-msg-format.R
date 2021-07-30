@@ -1,16 +1,3 @@
-verify_output("utils-msg-format.txt", {
-  "# Bullets"
-  bullets("header", c("item 1", "item 2"))
-  bullets("header", LETTERS)
-  bullets("header", 1:6)
-
-  "# Commas"
-  commas("1")
-  commas(letters[2:4])
-  commas(LETTERS)
-})
-
-
 test_that("pluralise works correctly", {
   expect_identical(pluralise("[an ]index(es)", c("x")), "an index")
   expect_identical(pluralise("[an ]index(es)", c("x", "y")), "indexes")
@@ -31,4 +18,18 @@ test_that("pluralise_msg works correctly", {
   expect_identical(pluralise_msg("[an ]index(es) ", c("x")), "an index `x`")
   expect_identical(pluralise_msg("[an ]index(es) ", c("x", "y")), "indexes `x`, `y`")
   expect_identical(pluralise_msg("[an ]index(es) ", c(-4, -5)), "indexes -4, -5")
+})
+
+test_that("output test", {
+  expect_snapshot({
+    "# Bullets"
+    bullets("header", c("item 1", "item 2"))
+    bullets("header", LETTERS)
+    bullets("header", 1:6)
+
+    "# Commas"
+    commas("1")
+    commas(letters[2:4])
+    commas(LETTERS)
+  })
 })

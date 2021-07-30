@@ -19,7 +19,7 @@ tibble_row(
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link{!!}} and
+processed with \code{\link[rlang:nse-defuse]{rlang::quos()}} and support unquote via \code{\link{!!}} and
 unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
@@ -61,9 +61,13 @@ addition to \code{data.frame}. This allows so-called "tibbles" to exhibit some
 special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
 fully described in \code{\link[=tbl_df-class]{tbl_df}}.
 \item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of
-transforming the user's input. Character vectors are not coerced to
-factor. List-columns are expressly anticipated and do not require special
-tricks. Column names are not modified.
+transforming the user's input.
+\itemize{
+\item Character vectors are not coerced to factor.
+\item List-columns are expressly anticipated and do not require special tricks.
+\item Column names are not modified.
+\item Inner names in columns are left unchanged.
+}
 \item \code{tibble()} builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
@@ -149,8 +153,8 @@ try(tibble(y = strptime("2000/01/01", "\%x")))
 try(tibble(a = 1:3, b = tibble(c = 4:7)))
 
 # Use := to create columns with names that start with a dot:
-tibble(.rows = 3)
-tibble(.rows := 3)
+tibble(.dotted = 3)
+tibble(.dotted := 3)
 
 # You can unquote an expression:
 x <- 3

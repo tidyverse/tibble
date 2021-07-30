@@ -1,5 +1,3 @@
-context("enframe")
-
 
 # enframe -----------------------------------------------------------------
 
@@ -104,8 +102,10 @@ test_that("can deframe three-column data frame with warning", {
   )
 })
 
-verify_output("enframe.txt", {
-  enframe(1:3, value = NULL)
+test_that("output test", {
+  expect_snapshot_with_error({
+    enframe(1:3, value = NULL)
 
-  enframe(Titanic)
+    enframe(Titanic)
+  })
 })

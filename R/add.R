@@ -48,8 +48,12 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
     deprecate_warn("2.1.1", "add_row(.data = 'must be a data frame')")
   }
 
-  df <- tibble(...)
-  attr(df, "row.names") <- .set_row_names(max(1L, nrow(df)))
+  if (dots_n(...) == 0L) {
+    # A single row of missing values is added if no input is supplied
+    df <- new_tibble(list(), nrow = 1L)
+  } else {
+    df <- tibble(...)
+  }
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
@@ -128,7 +132,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
     deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
-  if ((!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
+  if (has_length(.data) && (!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
     deprecate_warn("3.0.0", "add_column(.data = 'must have unique names')",
       details = 'Use `.name_repair = "minimal"`.')
     .name_repair <- "minimal"
@@ -176,14 +180,14 @@ pos_from_before_after_names <- function(before, after, names) {
 }
 
 pos_from_before_after <- function(before, after, len) {
-  if (is_null(before)) {
-    if (is_null(after)) {
+  if (is.null(before)) {
+    if (is.null(after)) {
       len
     } else {
       limit_pos_range(after, len)
     }
   } else {
-    if (is_null(after)) {
+    if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
       cnd_signal(error_both_before_after())
