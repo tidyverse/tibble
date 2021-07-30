@@ -711,8 +711,8 @@
       4     1 <chr [1]>
     Code
       with_df(df[NA] <- list("x"))
-    Error <tibble_error_na_column_index>
-      Can't use NA as column index with `[` at positions 1, 2, and 3.
+    Error <tibble_error_duplicate_column_subscript_for_assignment>
+      Column index NA is used more than once for assignment.
     Code
       with_df(df[NA_integer_] <- list("x"))
     Error <tibble_error_assign_columns_non_na_only>

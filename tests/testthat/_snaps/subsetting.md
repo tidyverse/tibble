@@ -60,8 +60,10 @@
       i There are only 3 columns.
     Code
       foo[c(1:3, NA)]
-    Error <tibble_error_na_column_index>
-      Can't use NA as column index with `[` at position 4.
+    Error <vctrs_error_subscript_type>
+      Must subset columns with a valid subscript vector.
+      x Subscript `c(1:3, NA)` can't contain missing values.
+      x It has a missing value at location 4.
     Code
       foo[as.matrix(1)]
     Error <tibble_error_subset_matrix_must_be_logical>
@@ -159,8 +161,8 @@
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
     Code
       foo[c(TRUE, TRUE, NA)]
-    Error <tibble_error_na_column_index>
-      Can't use NA as column index with `[` at position 3.
+    Error <rlang_error>
+      Internal error in `df_slice()`: Columns must match the data frame size.
     Code
       foo[as.matrix(TRUE)]
     Error <tibble_error_subset_matrix_must_have_same_dimensions>
@@ -452,8 +454,8 @@
       # # [<-.tbl_df throws an error with NA indexes
       df <- tibble(x = 1:2, y = x)
       df[NA] <- 3
-    Error <tibble_error_na_column_index>
-      Can't use NA as column index with `[` at positions 1 and 2.
+    Error <tibble_error_duplicate_column_subscript_for_assignment>
+      Column index NA is used more than once for assignment.
     Code
       df[NA, ] <- 3
     Error <tibble_error_assign_rows_non_na_only>

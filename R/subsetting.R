@@ -233,10 +233,6 @@ NULL
   if (!is.null(j)) {
     j <- vectbl_as_col_location(j, length(xo), names(xo), j_arg = j_arg, assign = FALSE)
 
-    if (anyNA(j)) {
-      cnd_signal(error_na_column_index(which(is.na(j))))
-    }
-
     xo <- .subset(x, j)
 
     if (anyDuplicated(j)) {
@@ -525,10 +521,6 @@ vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
     j <- set_names(j, names)
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
-
-    if (anyNA(j)) {
-      cnd_signal(error_na_column_index(which(is.na(j))))
-    }
   }
 
   if (anyDuplicated(j)) {
@@ -581,7 +573,7 @@ numtbl_as_col_location_assign <- function(j, n, j_arg) {
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
   subclass_col_index_errors(
-    vec_as_location(j, n, names, missing = if (assign) "error" else "propagate"),
+    vec_as_location(j, n, names, missing = "error"),
     j_arg = j_arg, assign = assign
   )
 }
