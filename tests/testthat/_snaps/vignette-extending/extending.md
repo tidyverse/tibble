@@ -8,5 +8,4 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This material has moved to
-<https://vctrs.r-lib.org/articles/pillar.html>.
+This material has moved to <https://vctrs.r-lib.org/articles/pillar.html>.

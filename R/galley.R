@@ -1,10 +1,8 @@
-render_galley_ext <- function(name, pkg, installed, path) {
+render_galley_ext <- function(input_path, pkg, installed, output_dir, output_file) {
   if (installed) {
     library(pkg, character.only = TRUE)
-    in_path <- system.file("doc", name, package = pkg)
   } else {
     pkgload::load_all()
-    in_path <- system.file("vignettes", name, package = pkg)
   }
 
   testthat::local_reproducible_output()
@@ -18,8 +16,10 @@ render_galley_ext <- function(name, pkg, installed, path) {
   set.seed(20210730)
 
   rmarkdown::render(
-    in_path,
-    output_file = path,
+    input_path,
+    output_dir = output_dir,
+    output_file = output_file,
+    run_pandoc = FALSE,
     output_format = rmarkdown::md_document(preserve_yaml = TRUE)
   )
 }
@@ -34,15 +34,25 @@ render_galley <- function(name, md_name) {
   # FIXME: Hack!
   installed <- galley_use_installed()
 
+  if (installed) {
+    input_path <- system.file("doc", name, package = pkg)
+  } else {
+    input_path <- system.file("vignettes", name, package = pkg)
+  }
+
   # Need fixed file name for stability
-  path <- file.path(tempdir(), md_name)
+  output_dir <- tempdir()
+  output_file <- md_name
 
   out_text <- character()
 
   knit_path <- tryCatch(
     callr::r(
       render_galley_ext,
-      args = list(name = name, pkg = pkg, installed = installed, path = path),
+      args = list(
+        input_path = input_path, pkg = pkg, installed = installed,
+        output_dir = output_dir, output_file = output_file
+      ),
       callback = function(x) {
         out_text <<- c(out_text, x)
       }
@@ -53,7 +63,10 @@ render_galley <- function(name, md_name) {
     }
   )
 
-  scrub_file(path)
+  path <- file.path(output_dir, output_file)
+  full_knit_path <- file.path(dirname(input_path), knit_path)
+  scrub_file(path, full_knit_path)
+  unlink(full_knit_path)
 
   path
 }
@@ -75,8 +88,8 @@ scrub <- function(x) {
   paste0(x, "\n", collapse = "")
 }
 
-scrub_file <- function(path) {
-  text <- brio::read_lines(path)
+scrub_file <- function(path, in_path = path) {
+  text <- brio::read_lines(in_path)
   brio::write_file(scrub(text), path)
 }
 
