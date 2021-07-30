@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.3.9001
+
+- Adapt to pillar 1.6.2.
+- `enframe()` also works for data frames, creates a packed data frame.
+- Fix tests for compatibility with pillar 1.6.2.
+
+
 # tibble 3.1.3.9000
 
 - Same as previous version.
