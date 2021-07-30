@@ -15,6 +15,7 @@ render_galley_ext <- function(name, pkg, installed, path) {
   Sys.Date <- function() {
     structure(18838, class = "Date")
   }
+  set.seed(20210730)
 
   rmarkdown::render(
     in_path,
