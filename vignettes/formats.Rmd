@@ -1,6 +1,7 @@
 ---
 title: "Column formats"
 output: rmarkdown::html_vignette
+always_allow_html: true
 vignette: >
   %\VignetteIndexEntry{Column formats}
   %\VignetteEngine{knitr::rmarkdown}
