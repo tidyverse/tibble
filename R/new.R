@@ -7,16 +7,19 @@
 #'
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
+#' See [vctrs::new_data_frame()] for details.
 #'
 #' @param x A tibble-like object.
 #' @param ... Name-value pairs of additional attributes.
-#' @param nrow The number of rows, required.
+#' @param nrow The number of rows, inferred from `x` if omitted.
 #' @param class Subclasses to assign to the new object, default: none.
 #' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
 #'
 #' @seealso
 #' [tibble()] and [as_tibble()] for ways to construct a tibble
-#' with recycling of scalars and automatic name repair.
+#' with recycling of scalars and automatic name repair,
+#' and [vctrs::df_list()] and [vctrs::new_data_frame()]
+#' for lower-level implementations.
 #'
 #' @export
 #' @examples
@@ -28,7 +31,7 @@
 #'
 #' # The length of all columns must be compatible with the nrow argument:
 #' try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
-new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
+new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
     deprecate_soft("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
@@ -45,26 +48,13 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 
   #' The `...` argument allows adding more attributes to the subclass.
   #'
-  #' An `nrow` argument is required.
-  if (missing(nrow)) {
-    cnd <- error_new_tibble_needs_nrow()
-    if (length(x) >= 1) {
-      deprecate_soft("2.0.0", "tibble::new_tibble(nrow = 'can\\'t be missing')",
-        details = cnd$message)
-      nrow <- vec_size(x[[1]])
-    } else {
-      cnd_signal(cnd)
-    }
-  }
-  #' This should be an integer of length 1,
-  #' and every element of the list `x` should have [vctrs::vec_size()]
+  #' The `nrow` argument may be omitted as of tibble 3.1.4.
+  #' If present, every element of the list `x` should have [vctrs::vec_size()]
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (is_integerish(nrow, 1)) {
+  if (!is.null(nrow) && is_integerish(nrow, 1)) {
     nrow <- as.integer(nrow)
-  } else {
-    cnd_signal(error_new_tibble_needs_nrow())
   }
 
   args <- attributes(x)
@@ -168,8 +158,4 @@ tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 error_new_tibble_must_be_list <- function() {
   tibble_error("`x` must be a list.")
-}
-
-error_new_tibble_needs_nrow <- function() {
-  tibble_error("`x` must be a scalar integer.")
 }

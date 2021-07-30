@@ -85,6 +85,11 @@ skip_enh_tibble_null <- function() {
   skip_legacy()
 }
 
+skip_enh_new_tibble_nrow_null <- function() {
+  # ENH: new_tibble(nrow = NULL), #781
+  skip_legacy()
+}
+
 skip_enh_empty_tribble_unspecified <- function() {
   # ENH: zero-row tribbles create unspecified columns
   skip_legacy()

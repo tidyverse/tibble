@@ -84,6 +84,11 @@ test_that("new_tibble() allows setting names through `...`", {
   )
 })
 
+test_that("new_tibble() supports missing `nrow` (#781)", {
+  expect_identical(new_tibble(list()), tibble())
+  expect_identical(new_tibble(list(a = 1:3)), tibble(a = 1:3))
+})
+
 test_that("new_tibble() doesn't retain any `x` attributes besides names", {
   x <- new_tibble(list(a = 1), foo = "bar", nrow = 1L, class = "subtbl")
 
@@ -103,14 +108,6 @@ test_that("new_tibble checks", {
   expect_tibble_error(
     new_tibble(1:3, nrow = 1),
     error_new_tibble_must_be_list()
-  )
-  expect_error(
-    new_tibble(list(a = 1)),
-    class = get_defunct_error_class()
-  )
-  expect_tibble_error(
-    new_tibble(list(1), nrow = NULL),
-    error_new_tibble_needs_nrow()
   )
   expect_tibble_error(
     new_tibble(list(1), nrow = 1),

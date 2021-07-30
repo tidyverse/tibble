@@ -5,7 +5,7 @@
 \alias{validate_tibble}
 \title{Tibble constructor and validator}
 \usage{
-new_tibble(x, ..., nrow, class = NULL, subclass = NULL)
+new_tibble(x, ..., nrow = NULL, class = NULL, subclass = NULL)
 
 validate_tibble(x)
 }
@@ -14,7 +14,7 @@ validate_tibble(x)
 
 \item{...}{Name-value pairs of additional attributes.}
 
-\item{nrow}{The number of rows, required.}
+\item{nrow}{The number of rows, inferred from \code{x} if omitted.}
 
 \item{class}{Subclasses to assign to the new object, default: none.}
 
@@ -27,6 +27,7 @@ of a tibble, like \pkg{sf} or \pkg{tsibble}.
 
 \code{new_tibble()} creates a new object as a subclass of \code{tbl_df}, \code{tbl} and \code{data.frame}.
 This function is optimized for performance, checks are reduced to a minimum.
+See \code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}} for details.
 
 \code{validate_tibble()} checks a tibble for internal consistency.
 Correct behavior can be guaranteed only if this function
@@ -39,9 +40,8 @@ For \code{new_tibble()}, \code{x} must be a list. The only attributes of \code{x
 are retained are the names.
 The \code{...} argument allows adding more attributes to the subclass.
 
-An \code{nrow} argument is required.
-This should be an integer of length 1,
-and every element of the list \code{x} should have \code{\link[vctrs:vec_size]{vctrs::vec_size()}}
+The \code{nrow} argument may be omitted as of tibble 3.1.4.
+If present, every element of the list \code{x} should have \code{\link[vctrs:vec_size]{vctrs::vec_size()}}
 equal to this value.
 (But this is not checked by the constructor).
 This takes the place of the "row.names" attribute in a data frame.
@@ -69,5 +69,7 @@ try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
 }
 \seealso{
 \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} for ways to construct a tibble
-with recycling of scalars and automatic name repair.
+with recycling of scalars and automatic name repair,
+and \code{\link[vctrs:df_list]{vctrs::df_list()}} and \code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}}
+for lower-level implementations.
 }
