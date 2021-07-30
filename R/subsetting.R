@@ -560,7 +560,7 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
   }
 
   subclass_row_index_errors(
-    vec_as_location(i, n),
+    vec_as_location(i, n, missing = if (assign) "error" else "propagate"),
     i_arg = i_arg, assign = assign
   )
 }
@@ -581,7 +581,7 @@ numtbl_as_col_location_assign <- function(j, n, j_arg) {
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
   subclass_col_index_errors(
-    vec_as_location(j, n, names),
+    vec_as_location(j, n, names, missing = if (assign) "error" else "propagate"),
     j_arg = j_arg, assign = assign
   )
 }
