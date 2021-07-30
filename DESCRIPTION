@@ -35,7 +35,7 @@ Imports:
     lifecycle (>= 0.2.0),
     magrittr,
     methods,
-    pillar (>= 1.6.0),
+    pillar (>= 1.6.2),
     pkgconfig,
     rlang (>= 0.4.3),
     utils,
