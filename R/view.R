@@ -32,7 +32,7 @@ view <- function(x, title = NULL, ..., n = NULL) {
 
   if (!is.data.frame(x)) {
     if (is.null(n)) {
-      n <- tibble_opt("view_max")
+      n <- get_tibble_option_view_max()
     }
     x <- head(x, n + 1)
     x <- as.data.frame(x)

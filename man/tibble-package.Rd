@@ -39,17 +39,9 @@ Resources on specific topics:
 \item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=enframe]{enframe()}}
 \item Inspect a tibble: \code{\link[=print.tbl]{print.tbl()}}, \code{\link[=glimpse]{glimpse()}}
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
+\item Package options: \link{tibble_options}
 }
 }
-\section{Package options}{
-
-The following option is used for viewing tabular data with \code{view()}:
-\itemize{
-\item \code{tibble.view_max}: Maximum number of rows shown if the input is not a
-data frame. Default: 1000.
-}
-}
-
 \seealso{
 Useful links:
 \itemize{
