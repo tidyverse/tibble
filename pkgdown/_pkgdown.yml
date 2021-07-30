@@ -20,7 +20,7 @@ reference:
   - tibble
   - "tbl_df-class"
   - formatting
-  - "tibble-options"
+  - tibble_options
   - tribble
   - -reexports
 
