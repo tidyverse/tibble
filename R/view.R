@@ -37,7 +37,7 @@ view <- function(x, title = NULL, ..., n = NULL) {
     x <- head(x, n + 1)
     x <- as.data.frame(x)
     if (nrow(x) > n) {
-      message("Showing first ", n, " rows.")
+      message("Showing the first ", n, " rows.")
       x <- head(x, n)
     }
   }
