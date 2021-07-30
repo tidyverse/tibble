@@ -1,45 +1,35 @@
-vignette_path <- function(name) {
-  path <- system.file("vignettes", name, package = utils::packageName())
-  if (path != "") {
-    return(path)
-  }
-  path <- system.file("doc", name, package = utils::packageName())
-  if (path != "") {
-    return(path)
+render_galley_ext <- function(name, pkg, installed, path) {
+  if (installed) {
+    library(pkg, character.only = TRUE)
+    in_path <- system.file("doc", name, package = pkg)
+  } else {
+    pkgload::load_all()
+    in_path <- system.file("vignettes", name, package = pkg)
   }
 
-  abort(paste0("Can't find vignette `", name, "`."))
-}
+  testthat::local_reproducible_output()
 
-local_methods <- function(..., .frame = rlang::caller_env()) {
-  rlang::local_bindings(..., .env = rlang::global_env(), .frame = .frame)
+  rmarkdown::render(
+    in_path,
+    output_file = path,
+    output_format = rmarkdown::md_document(preserve_yaml = TRUE)
+  )
 }
 
 render_galley <- function(name) {
+  pkg <- utils::packageName()
+  # FIXME: Hack!
+  installed <- inherits(testthat::get_reporter(), "CheckReporter")
   path <- tempfile(fileext = ".md")
 
-  out <- evaluate::evaluate(quote(
-    rmarkdown::render(
-      vignette_path(name),
-      output_file = path,
-      output_format = rmarkdown::md_document(preserve_yaml = TRUE)
-    )
-  ))
+  out <- callr::r(
+    render_galley_ext,
+    args = list(name = name, pkg = pkg, installed = installed, path = path),
+    stderr = "2>&1"
+  )
 
   if (!file.exists(path)) {
-    my_replay <- function(x) UseMethod("my_replay")
-
-    my_replay_message <- function(x) evaluate::replay(conditionMessage(x))
-
-    local_methods(
-      my_replay.default = function(x) evaluate::replay(x),
-      my_replay.message = my_replay_message,
-      my_replay.warning = my_replay_message,
-      my_replay.error = my_replay_message
-    )
-    writeLines("")
-    lapply(out, my_replay)
-    writeLines("")
+    writeLines(c("", out, ""))
     rlang::abort(paste0("Error rendering ", name))
   }
 
