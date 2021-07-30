@@ -24,10 +24,15 @@ render_galley_ext <- function(name, pkg, installed, path) {
   )
 }
 
+galley_use_installed <- function() {
+  names <- lapply(sys.calls(), `[[`, 1)
+  any(vapply(names, identical, quote(test_check), FUN.VALUE = logical(1)))
+}
+
 render_galley <- function(name, md_name) {
   pkg <- utils::packageName()
   # FIXME: Hack!
-  installed <- rlang::is_attached("package:testthat")
+  installed <- galley_use_installed()
 
   # Need fixed file name for stability
   path <- file.path(tempdir(), md_name)
