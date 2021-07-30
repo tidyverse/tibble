@@ -90,10 +90,10 @@
       x Column `C` is c.
       x ... and 23 more problems.
     Code
-      error_as_tibble_row_bare(new_environment())
+      error_as_tibble_row_vector(new_environment())
     Output
-      <error/tibble_error_as_tibble_row_bare>
-      `x` must be a bare vector in `as_tibble_row()`, not environment.
+      <error/tibble_error_as_tibble_row_vector>
+      `x` must be a vector in `as_tibble_row()`, not environment.
     Code
       error_as_tibble_row_size_one(3, "foo", 7)
     Output
@@ -118,10 +118,10 @@
       <error/tibble_error_enframe_value_null>
       `value` can't be NULL.
     Code
-      error_enframe_has_dim(Titanic)
+      error_enframe_must_be_vector(lm(speed ~ ., cars))
     Output
-      <error/tibble_error_enframe_has_dim>
-      `x` must not have more than one dimension. `length(dim(x))` must be zero or one, not 4.
+      <error/tibble_error_enframe_must_be_vector>
+      The `x` argument to `enframe()` must be a vector, not lm.
     Code
       # # names
       error_column_names_cannot_be_empty(1, repair_hint = TRUE)

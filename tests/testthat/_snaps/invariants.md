@@ -1191,11 +1191,14 @@
         df$x <- NA
         df[2:3, "x"] <- 3:2
       })
-    Error <tibble_error_assign_incompatible_type>
-      Assigned data `3:2` must be compatible with existing data.
-      i Error occurred for column `x`.
-      x Can't convert from <integer> to <logical> due to loss of precision.
-      * Locations: 1, 2.
+    Output
+      # A tibble: 4 x 4
+            n c     li            x
+        <int> <chr> <list>    <int>
+      1     1 e     <dbl [1]>    NA
+      2    NA f     <int [2]>     3
+      3     3 g     <int [3]>     2
+      4    NA h     <chr [1]>    NA
     Code
       with_df({
         df$x <- NA_integer_

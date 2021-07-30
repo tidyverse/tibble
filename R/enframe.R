@@ -24,22 +24,24 @@ enframe <- function(x, name = "name", value = "value") {
     cnd_signal(error_enframe_value_null())
   }
 
-  if (length(dim(x)) > 1) {
-    cnd_signal(error_enframe_has_dim(x))
+  if (is.null(x)) {
+    x <- logical()
   }
 
-  if (is.null(x)) x <- logical()
+  if (!vec_is(x)) {
+    cnd_signal(error_enframe_must_be_vector(x))
+  }
 
   if (is.null(name)) {
-    df <- list(unname(x))
+    df <- list(vec_set_names(x, NULL))
   } else if (is.null(names(x))) {
-    df <- list(seq_along(x), x)
+    df <- list(seq_len(vec_size(x)), x)
   } else {
-    df <- list(names(x), unname(x))
+    df <- list(vec_names2(x), vec_set_names(x, NULL))
   }
 
   names(df) <- c(name, value)
-  new_tibble(df, nrow = length(x))
+  new_tibble(df, nrow = vec_size(x))
 }
 
 #' @rdname enframe
@@ -61,14 +63,15 @@ deframe <- function(x) {
 
   value <- x[[2L]]
   name <- x[[1L]]
-  names(value) <- name
-  value
+  vec_set_names(value, as.character(name))
 }
 
 error_enframe_value_null <- function() {
   tibble_error("`value` can't be NULL.")
 }
 
-error_enframe_has_dim <- function(x) {
-  tibble_error(paste0("`x` must not have more than one dimension. `length(dim(x))` must be zero or one, not ", length(dim(x)), "."))
+error_enframe_must_be_vector <- function(x) {
+  tibble_error(paste0(
+    "The `x` argument to `enframe()` must be a vector, not ", class(x)[[1]], "."
+  ))
 }

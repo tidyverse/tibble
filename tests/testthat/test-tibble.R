@@ -13,6 +13,11 @@ test_that("NULL is ignored (#580)", {
   expect_identical(tibble(b = 1, NULL, c = 2:3), tibble(b = 1, c = 2:3))
 })
 
+test_that("NULL is ignored when passed by value (#895, #900)", {
+  expect_identical(tibble(a = c()), tibble(a = NULL))
+  expect_identical(tibble(a = c(), a = 1), tibble(a = 1))
+})
+
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),

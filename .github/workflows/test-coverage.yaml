@@ -17,6 +17,7 @@ jobs:
     # Begin custom: services
     # End custom: services
     env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
@@ -32,6 +33,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      # Begin custom: before install
+      # End custom: before install
+
       - uses: r-lib/actions/setup-r@v1
         with:
           install-r: false
@@ -44,13 +48,15 @@ jobs:
           if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
         shell: Rscript {0}
 
-      - name: Prepare cache keys
+      - name: Query dependencies
+        if: runner.os != 'Windows'
         run: |
           saveRDS(remotes::dev_package_deps(dependencies = TRUE, type = .Platform$pkgType), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
       - name: Restore R package cache
+        if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -65,8 +71,11 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
-      # Begin custom: before install
-      # End custom: before install
+      - name: Add fake qpdf and checkbashisms
+        if: runner.os == 'Linux'
+        run: |
+          sudo ln -s $(which true) /usr/local/bin/qpdf
+          sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
       - name: Install dependencies
         run: |

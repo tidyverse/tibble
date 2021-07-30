@@ -30,7 +30,7 @@ test_that("output test", {
     error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
     error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
-    error_as_tibble_row_bare(new_environment())
+    error_as_tibble_row_vector(new_environment())
     error_as_tibble_row_size_one(3, "foo", 7)
 
     "# class-tbl_df"
@@ -40,8 +40,7 @@ test_that("output test", {
 
     "#enframe"
     error_enframe_value_null()
-
-    error_enframe_has_dim(Titanic)
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
 
     "# names"
     error_column_names_cannot_be_empty(1, repair_hint = TRUE)

@@ -204,12 +204,14 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  expect_identical(
-    expect_warning(as_tibble(diag(3), validate = TRUE)),
-    tibble(
-      V1 = c(1, 0, 0),
-      V2 = c(0, 1, 0),
-      V3 = c(0, 0, 1)
+  expect_warning(
+    expect_identical(
+      as_tibble(diag(3), validate = TRUE),
+      tibble(
+        V1 = c(1, 0, 0),
+        V2 = c(0, 1, 0),
+        V3 = c(0, 0, 1)
+      )
     )
   )
 })
@@ -414,18 +416,41 @@ test_that("as_tibble_row() can convert named bare vectors to data frame", {
   )
 })
 
-test_that("as_tibbe_row() fails with non-bare vectors (#739)", {
+test_that("as_tibble_row() works with non-bare vectors (#797)", {
   expect_tibble_error(
-    as_tibble_row(Sys.time()),
-    error_as_tibble_row_bare(Sys.time())
+    as_tibble_row(new_environment()),
+    error_as_tibble_row_vector(new_environment())
   )
-  expect_tibble_error(
-    as_tibble_row(iris),
-    error_as_tibble_row_bare(iris)
+
+  time <- vec_slice(Sys.time(), 1)
+  expect_identical(
+    as_tibble_row(time, .name_repair = "unique"),
+    tibble(...1 = time)
   )
-  expect_tibble_error(
+  expect_identical(
+    as_tibble_row(trees[1:3, ], .name_repair = "unique"),
+    tibble(
+      ...1 = remove_rownames(trees[1, ]),
+      ...2 = remove_rownames(trees[2, ]),
+      ...3 = remove_rownames(trees[3, ])
+    )
+  )
+
+  remove_first_dimname <- function(x) {
+    dn <- dimnames(x)
+    dn[1] <- list(NULL)
+    dimnames(x) <- dn
+    x
+  }
+
+  expect_identical(
     as_tibble_row(Titanic),
-    error_as_tibble_row_bare(Titanic)
+    tibble(
+      "1st" = remove_first_dimname(Titanic[1,,,, drop = FALSE]),
+      "2nd" = remove_first_dimname(Titanic[2,,,, drop = FALSE]),
+      "3rd" = remove_first_dimname(Titanic[3,,,, drop = FALSE]),
+      Crew  = remove_first_dimname(Titanic[4,,,, drop = FALSE])
+    )
   )
 })
 
