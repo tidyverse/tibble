@@ -44,6 +44,7 @@ Suggests:
     bench,
     bit64,
     blob,
+    brio,
     callr,
     cli,
     covr,
