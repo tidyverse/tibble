@@ -26,8 +26,7 @@ render_galley_ext <- function(input_path, pkg, installed, output_dir, output_fil
 }
 
 galley_use_installed <- function() {
-  names <- lapply(sys.calls(), `[[`, 1)
-  any(vapply(names, identical, quote(test_check), FUN.VALUE = logical(1)))
+  grepl("[.]Rcheck$", basename(normalizePath("../..")))
 }
 
 render_galley <- function(name, md_name) {
