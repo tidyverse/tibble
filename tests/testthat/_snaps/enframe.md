@@ -9,42 +9,46 @@
     Output
       [1] 4
     Code
+      vec_names(enframe(Titanic)$value)
+    Output
+      NULL
+    Code
       enframe(Titanic)$value
     Output
       , , Age = Child, Survived = No
       
             Sex
       Class  Male Female
-        1st     0      0
-        2nd     0      0
-        3rd    35     17
-        Crew    0      0
+        [1,]    0      0
+        [2,]    0      0
+        [3,]   35     17
+        [4,]    0      0
       
       , , Age = Adult, Survived = No
       
             Sex
       Class  Male Female
-        1st   118      4
-        2nd   154     13
-        3rd   387     89
-        Crew  670      3
+        [1,]  118      4
+        [2,]  154     13
+        [3,]  387     89
+        [4,]  670      3
       
       , , Age = Child, Survived = Yes
       
             Sex
       Class  Male Female
-        1st     5      1
-        2nd    11     13
-        3rd    13     14
-        Crew    0      0
+        [1,]    5      1
+        [2,]   11     13
+        [3,]   13     14
+        [4,]    0      0
       
       , , Age = Adult, Survived = Yes
       
             Sex
       Class  Male Female
-        1st    57    140
-        2nd    14     80
-        3rd    75     76
-        Crew  192     20
+        [1,]   57    140
+        [2,]   14     80
+        [3,]   75     76
+        [4,]  192     20
       
 

@@ -22,10 +22,15 @@ test_that("pluralise_msg works correctly", {
 
 test_that("output test", {
   expect_snapshot({
+    "# Problems"
+    writeLines(problems("header", c("item 1", "item 2")))
+    writeLines(problems("header", LETTERS))
+    writeLines(problems("header", 1:6))
+
     "# Bullets"
-    bullets("header", c("item 1", "item 2"))
-    bullets("header", LETTERS)
-    bullets("header", 1:6)
+    writeLines(bullets("header", c("item 1", "item 2")))
+    writeLines(bullets("header", LETTERS))
+    writeLines(bullets("header", 1:6))
 
     "# Commas"
     commas("1")

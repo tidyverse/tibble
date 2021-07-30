@@ -233,7 +233,7 @@ error_add_rows_to_grouped_df <- function() {
 
 error_incompatible_new_rows <- function(names) {
   tibble_error(
-    bullets(
+    problems(
       "New rows can't add columns:",
       cnd_message(error_unknown_column_names(names))
     ),

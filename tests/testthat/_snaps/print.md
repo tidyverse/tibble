@@ -42,29 +42,6 @@
       #   Petal.Width <dbl>,
       #   Species <fct>
     Code
-      print_without_body(as_tibble(iris), n = 3L, width = 5L)
-    Output
-      # A
-      #   tibble:
-      #   150
-      #   x
-      #   5
-      <body created by pillar>
-      # ...
-      #   with
-      #   147
-      #   more
-      #   rows,
-      #   and
-      #   5
-      #   more
-      #   variables:
-      #   Sepal.Length <dbl>,
-      #   Sepal.Width <dbl>,
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
-    Code
       print_without_body(as_tibble(iris), n = NULL, width = 70L)
     Output
       # A tibble: 150 x 5

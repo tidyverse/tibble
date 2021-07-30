@@ -19,8 +19,6 @@ test_that("output test", {
 
     print_without_body(as_tibble(iris), n = Inf, width = 30L)
 
-    print_without_body(as_tibble(iris), n = 3L, width = 5L)
-
     print_without_body(as_tibble(iris), n = NULL, width = 70L)
 
     print_without_body(as_unknown_rows(iris), n = 10, width = 70L)
