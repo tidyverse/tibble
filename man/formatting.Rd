@@ -30,22 +30,22 @@
 \item{x}{Object to format or print.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use the \code{width} \link[pillar:pillar_options]{option}.}
+means use the \code{width} \link[=pillar_options]{option}.}
 
-\item{...}{Passed on to \code{\link[pillar:tbl_format_setup]{tbl_format_setup()}}.}
+\item{...}{Passed on to \code{\link[=tbl_format_setup]{tbl_format_setup()}}.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than the \code{print_max} \link[pillar:pillar_options]{option}.
+if less than the \code{print_max} \link[=pillar_options]{option}.
 Otherwise, will print as many rows as specified by the
-\code{print_min} \link[pillar:pillar_options]{option}.}
+\code{print_min} \link[=pillar_options]{option}.}
 
 \item{max_extra_cols}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL},
-the \code{max_extra_cols} \link[pillar:pillar_options]{option} is used.
+the \code{max_extra_cols} \link[=pillar_options]{option} is used.
 The previously defined \code{n_extra} argument is soft-deprecated.}
 
 \item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
-the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
+the \code{max_footer_lines} \link[=pillar_options]{option} is used.}
 }
 \description{
 One of the main features of the \code{tbl_df} class is the printing:
