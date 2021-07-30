@@ -25,7 +25,7 @@
 #'
 #' # Local scope:
 #' local({
-#'   rlang::local_options(tibble.view_max = 200)
+#'   rlang::local_options(tibble.view_max = 100)
 #'   # view() would show only 100 rows e.g. for a lazy data frame
 #' })
 #' # view() would show the default 1000 rows e.g. for a lazy data frame
