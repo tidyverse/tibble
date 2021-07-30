@@ -1,9 +1,11 @@
 test_that("invariants vignette", {
+  skip_on_cran()
+
   path <- tempfile(fileext = ".md")
 
   suppressMessages(capture.output(
     rmarkdown::render(
-      system.file("vignettes/invariants.Rmd", package = "tibble"),
+      vignette_path("invariants.Rmd"),
       output_file = path,
       output_format = rmarkdown::md_document(preserve_yaml = TRUE)
     )
