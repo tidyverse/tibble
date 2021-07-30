@@ -27,7 +27,7 @@ render_galley_ext <- function(name, pkg, installed, path) {
 render_galley <- function(name, md_name) {
   pkg <- utils::packageName()
   # FIXME: Hack!
-  installed <- inherits(testthat::get_reporter(), "CheckReporter")
+  installed <- rlang::is_attached("package:testthat")
 
   # Need fixed file name for stability
   path <- file.path(tempdir(), md_name)
