@@ -78,7 +78,7 @@ The following overview contains example values for each type:
 #> $ factor        <fct> A
 #> $ ordered       <ord> a
 #> $ Date          <date> 2021-07-30
-#> $ POSIXt        <dttm> 2021-07-30 06:11:25
+#> $ POSIXt        <dttm> 2021-07-30 04:11:25
 #> $ difftime      <drtn> 1 secs
 #> $ hms           <time> 00:00:01
 #> $ integer64     <int64> 10000000000

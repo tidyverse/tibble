@@ -9,7 +9,7 @@ render_galley_ext <- function(input_path, pkg, installed, output_dir, output_fil
   testthat::local_reproducible_output()
 
   Sys.time <- function() {
-    structure(1627618285.45488, class = c("POSIXct", "POSIXt"))
+    structure(1627618285.45488, class = c("POSIXct", "POSIXt"), tzone = "UTC")
   }
   Sys.Date <- function() {
     structure(18838, class = "Date")
