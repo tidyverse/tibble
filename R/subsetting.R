@@ -130,7 +130,8 @@ NULL
     if (is.null(x)) {
       x
     } else {
-      vectbl_strip_names(vec_slice(x, i))
+      # Drop inner names with double subscript
+      vec_set_names(vec_slice(x, i), NULL)
     }
   }
 }
@@ -682,18 +683,6 @@ vectbl_assign <- function(x, i, value) {
   }
 
   vec_assign(x, i, value)
-}
-
-vectbl_strip_names <- function(x) {
-  maybe_row_names <- is.data.frame(x) || is.array(x)
-
-  if (maybe_row_names) {
-    row.names(x) <- NULL
-  } else {
-    names(x) <- NULL
-  }
-
-  x
 }
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
