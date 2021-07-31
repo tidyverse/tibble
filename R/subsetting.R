@@ -602,26 +602,17 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  # Assertion
-  stopifnot(!is.null(names(j)) || length(j) == 0)
-
   is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
 
   # Grow, assign new names
-  new_pos <- (j > length(x))
-  new <- which(new_pos)
-
-  # Grow, assign new names
+  new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
     names(x)[ j[new] ] <- names2(j)[new]
   }
-
-  # This must work now
-  names(x)[ j[!new_pos] ] <- names2(j)[!new_pos]
 
   # Update
   for (jj in which(is_data)) {
