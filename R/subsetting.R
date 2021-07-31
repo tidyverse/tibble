@@ -168,7 +168,8 @@ NULL
 
   # Side effect: check scalar
   if (is.symbol(j)) {
-    j <- as_utf8_character(j)
+    # FIXME: as_utf8_character() needs rlang > 0.4.11
+    j <- chr_unserialise_unicode(as.character(j))
   } else {
     if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
       vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
