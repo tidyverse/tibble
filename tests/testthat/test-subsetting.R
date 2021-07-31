@@ -16,6 +16,15 @@ test_that("[ retains class", {
   expect_identical(class(mtcars2), class(mtcars2[1:5, 1:5]))
 })
 
+test_that("[ removes row names", {
+  tbl <- tibble(a = 1:3)
+  expect_warning(rownames(tbl) <- letters[1:3], "deprecated")
+
+  expect_equal(rownames(tbl), letters[1:3])
+  expect_equal(rownames(tbl[1, ]), "1")
+  expect_equal(rownames(tbl["a"]), as.character(1:3))
+})
+
 test_that("[ and as_tibble commute", {
   mtcars2 <- as_tibble(mtcars)
   expect_identical(mtcars2, as_tibble(mtcars))
