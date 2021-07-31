@@ -169,7 +169,7 @@ NULL
   # Side effect: check scalar
   if (!is.symbol(j)) {
     if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
-      vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+      vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
     }
   }
 
