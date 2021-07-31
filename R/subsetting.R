@@ -757,7 +757,7 @@ set_tibble_class <- function(x, nrow) {
 # External ----------------------------------------------------------------
 
 vectbl_restore <- function(xo, x) {
-  .Call(`tibble_restore_impl`, xo, x)
+  tibble_reconstruct(xo, x)
 }
 
 # Errors ------------------------------------------------------------------
