@@ -40,6 +40,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'
 #' * Column data is not coerced. A character vector is not turned into a factor.
 #'   List-columns are expressly anticipated and do not require special tricks.
+#'   Internal names are never stripped from column data.
 #'   Read more in [tibble()].
 #' * Recycling only happens for a length 1 input.
 #'   Read more in [vctrs::vec_recycle()].
@@ -52,11 +53,12 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'   inside. `df[, j, drop = FALSE]` is the default. Read more in [subsetting].
 #' * There is no partial matching when `$` is used to index by name. `df$name`
 #'   for a nonexistent name generates a warning. Read more in [subsetting].
-#' * Printing and inspection are a very high priority. The goal is to convey as
-#'   much information as possible, in a concise way, even for large and complex
-#'   tibbles. Read more in [formatting].
 #'
 #' See `vignette("invariants")` for a detailed description of the behavior.
+#'
+#' Furthermore, printing and inspection are a very high priority.
+#' The goal is to convey as much information as possible, in a concise way,
+#' even for large and complex tibbles. Read more in [formatting].
 #'
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class

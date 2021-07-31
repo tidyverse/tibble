@@ -45,6 +45,7 @@ How default behaviour of tibbles differs from that of
 \itemize{
 \item Column data is not coerced. A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.
+Internal names are never stripped from column data.
 Read more in \code{\link[=tibble]{tibble()}}.
 \item Recycling only happens for a length 1 input.
 Read more in \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}.
@@ -57,12 +58,13 @@ that info as a column. Read about in \link{rownames}.
 inside. \code{df[, j, drop = FALSE]} is the default. Read more in \link{subsetting}.
 \item There is no partial matching when \code{$} is used to index by name. \code{df$name}
 for a nonexistent name generates a warning. Read more in \link{subsetting}.
-\item Printing and inspection are a very high priority. The goal is to convey as
-much information as possible, in a concise way, even for large and complex
-tibbles. Read more in \link{formatting}.
 }
 
 See \code{vignette("invariants")} for a detailed description of the behavior.
+
+Furthermore, printing and inspection are a very high priority.
+The goal is to convey as much information as possible, in a concise way,
+even for large and complex tibbles. Read more in \link{formatting}.
 }
 
 \seealso{
