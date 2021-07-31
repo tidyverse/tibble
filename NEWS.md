@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.3.9002
+
+- `x[j] <- list(name = value)` uses name repair when new columns are created (#929). 
+- `as.data.frame.tbl_df()` strips inner column names (#837).
+- New `?tibble_options` help page (#912).
+- Vignettes are now tested with a snapshot test (#919).
+- `new_tibble()` allows omitting the `nrow` argument again (#781).
+- `new_tibble()` uses `vctrs::new_data_frame()` internally (#726, @DavisVaughan).
+- `enframe()` no longer works for data frames.
+
+
 # tibble 3.1.3.9001
 
 - Adapt to pillar 1.6.2.
