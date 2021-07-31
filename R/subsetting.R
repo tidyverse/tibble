@@ -167,7 +167,10 @@ NULL
   }
 
   # Side effect: check scalar
-  if (!is.symbol(j)) {
+  if (is.symbol(j)) {
+    # FIXME: as_utf8_character() needs rlang > 0.4.11
+    j <- chr_unserialise_unicode(as.character(j))
+  } else {
     if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
       vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
     }
@@ -417,11 +420,13 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       j <- seq_along(x)
+      names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
       j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
     }
 
     value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
+
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(i_arg)) {
     # x[NULL, ...] <- value
@@ -488,19 +493,20 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
 vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   # Creates a named index vector
   # Values: index
-  # Name: column name (for new columns)
+  # Name: column name (for all columns)
 
   if (is_bare_character(j)) {
     if (anyNA(j)) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    out <- match(j, names(x))
-    new <- which(is.na(out))
+    names <- j
+
+    j <- match(names, names(x))
+    new <- which(is.na(j))
     if (has_length(new)) {
-      out[new] <- seq.int(length(x) + 1L, length.out = length(new))
+      j[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
-    j <- set_names(out, j)
   } else if (is_bare_numeric(j)) {
     if (anyNA(j)) {
       cnd_signal(error_assign_columns_non_na_only())
@@ -508,7 +514,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     j <- numtbl_as_col_location_assign(j, length(x), j_arg = j_arg)
 
-    new <- which(j > length(x))
+    old <- (j <= length(x))
+    new <- which(!old)
     j_new <- j[new]
 
     if (length(names) != 1L) {
@@ -524,20 +531,23 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    j <- set_names(j, names)
+    names[old] <- names(x)[ j[old] ]
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
+
+    old <- (j <= length(x))
+    names[old] <- names(x)[ j[old] ]
   }
 
   if (anyDuplicated(j)) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
-  j
+  set_names(j, names)
 }
 
 numtbl_as_row_location_assign <- function(i, n, i_arg) {
