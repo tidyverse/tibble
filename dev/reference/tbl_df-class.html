@@ -203,7 +203,7 @@ that is more expressive and robust." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1><code>tbl_df</code> class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/class-tbl_df.R'><code>R/class-tbl_df.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/tibble/blob/master/R/tbl_df.R'><code>R/tbl_df.R</code></a></small>
     <div class="hidden name"><code>tbl_df-class.Rd</code></div>
     </div>
 
@@ -251,6 +251,7 @@ by most tibble methods.</p></li>
 <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>s, during creation and access:</p><ul>
 <li><p>Column data is not coerced. A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.
+Internal names are never stripped from column data.
 Read more in <code><a href='tibble.html'>tibble()</a></code>.</p></li>
 <li><p>Recycling only happens for a length 1 input.
 Read more in <code><a href='https://vctrs.r-lib.org/reference/vec_recycle.html'>vctrs::vec_recycle()</a></code>.</p></li>
@@ -263,12 +264,12 @@ that info as a column. Read about in <a href='rownames.html'>rownames</a>.</p></
 inside. <code>df[, j, drop = FALSE]</code> is the default. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
 <li><p>There is no partial matching when <code>$</code> is used to index by name. <code>df$name</code>
 for a nonexistent name generates a warning. Read more in <a href='subsetting.html'>subsetting</a>.</p></li>
-<li><p>Printing and inspection are a very high priority. The goal is to convey as
-much information as possible, in a concise way, even for large and complex
-tibbles. Read more in <a href='formatting.html'>formatting</a>.</p></li>
 </ul>
 
 <p>See <code><a href='../articles/invariants.html'>vignette("invariants")</a></code> for a detailed description of the behavior.</p>
+<p>Furthermore, printing and inspection are a very high priority.
+The goal is to convey as much information as possible, in a concise way,
+even for large and complex tibbles. Read more in <a href='formatting.html'>formatting</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tibble.html'>tibble()</a></code>, <code><a href='as_tibble.html'>as_tibble()</a></code>, <code><a href='tribble.html'>tribble()</a></code>, <code><a href='formatting.html'>print.tbl()</a></code>,
