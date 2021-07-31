@@ -499,12 +499,13 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    out <- match(j, names(x))
-    new <- which(is.na(out))
+    names <- j
+
+    j <- match(names, names(x))
+    new <- which(is.na(j))
     if (has_length(new)) {
-      out[new] <- seq.int(length(x) + 1L, length.out = length(new))
+      j[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
-    j <- set_names(out, j)
   } else if (is_bare_numeric(j)) {
     if (anyNA(j)) {
       cnd_signal(error_assign_columns_non_na_only())
@@ -512,7 +513,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     j <- numtbl_as_col_location_assign(j, length(x), j_arg = j_arg)
 
-    new <- which(j > length(x))
+    old <- (j <= length(x))
+    new <- which(!old)
     j_new <- j[new]
 
     if (length(names) != 1L) {
@@ -528,8 +530,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    names[j <= length(x)] <- names(x)[ j[j <= length(x)] ]
-    j <- set_names(j, names)
+    names[old] <- names(x)[ j[old] ]
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
@@ -537,15 +538,15 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
 
-    names[j <= length(x)] <- names(x)[ j[j <= length(x)] ]
-    j <- set_names(j, names)
+    old <- (j <= length(x))
+    names[old] <- names(x)[ j[old] ]
   }
 
   if (anyDuplicated(j)) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
-  j
+  set_names(j, names)
 }
 
 numtbl_as_row_location_assign <- function(i, n, i_arg) {
