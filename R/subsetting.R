@@ -256,7 +256,7 @@ NULL
   if (drop && length(xo) == 1L) {
     tbl_subset2(xo, 1L, j_arg)
   } else {
-    vectbl_restore(xo, x)
+    tibble_reconstruct(xo, x)
   }
 }
 
@@ -462,7 +462,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     }
   }
 
-  vectbl_restore(xo, x)
+  tibble_reconstruct(xo, x)
 }
 
 vectbl_as_new_row_index <- function(i, x, i_arg) {
@@ -774,12 +774,6 @@ set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
   class(x) <- tibble_class
   x
-}
-
-# External ----------------------------------------------------------------
-
-vectbl_restore <- function(xo, x) {
-  tibble_reconstruct(xo, x)
 }
 
 # Errors ------------------------------------------------------------------
