@@ -449,8 +449,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # Fill up columns if necessary
       if (has_length(new)) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        names(init) <- coalesce2(names2(j)[new], names2(value)[new])
-
         x <- tbl_subassign_col(x, j[new], init)
       }
 
@@ -622,12 +620,6 @@ tbl_subassign_col <- function(x, j, value) {
 
   # Restore
   set_tibble_class(x, nrow)
-}
-
-coalesce2 <- function(x, y) {
-  use_y <- which(is.na(x))
-  x[use_y] <- y[use_y]
-  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
