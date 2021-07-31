@@ -71,6 +71,7 @@ NULL
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   class(x) <- "data.frame"
+  x[] <- map(x, vec_set_names, NULL)
   x
 }
 
