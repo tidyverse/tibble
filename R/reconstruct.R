@@ -1,139 +1,15 @@
-#' Extending tibble with new data frame subclasses
-#'
-#' @description
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
-#'
-#' These three functions, along with `names<-` and 1d numeric `[`
-#' (i.e. `x[loc]`) methods, provide a minimal interface for extending tibble
-#' to work with new data frame subclasses. This means that for simple cases
-#' you should only need to provide a couple of methods, rather than a method
-#' for every tibble verb.
-#'
-#' These functions are a stop-gap measure until we figure out how to solve
-#' the problem more generally, but it's likely that any code you write to
-#' implement them will find a home in what comes next.
-#'
-#' # Basic advice
-#'
-#' This section gives you basic advice if you want to extend tibble to work with
-#' your custom data frame subclass, and you want the tibble methods to behave
-#' in basically the same way.
-#'
-#' * If you have data frame attributes that don't depend on the rows or columns
-#'   (and should unconditionally be preserved), you don't need to do anything.
-#'
-#' * If you have __scalar__ attributes that depend on __rows__, implement a
-#'   `tibble_reconstruct()` method. Your method should recompute the attribute
-#'   depending on rows now present.
-#'
-#' * If you have __scalar__ attributes that depend on __columns__, implement a
-#'   `tibble_reconstruct()` method and a 1d `[` method. For example, if your
-#'   class requires that certain columns be present, your method should return
-#'   a data.frame or tibble when those columns are removed.
-#'
-#' * If your attributes are __vectorised__ over __rows__, implement a
-#'   `tibble_row_slice()` method. This gives you access to `i` so you can
-#'   modify the row attribute accordingly. You'll also need to think carefully
-#'   about how to recompute the attribute in `tibble_reconstruct()`, and
-#'   you will need to carefully verify the behaviour of each verb, and provide
-#'   additional methods as needed.
-#'
-#' * If your attributes that are __vectorised__ over __columns__, implement
-#'   `tibble_col_modify()`, 1d `[`, and `names<-` methods. All of these methods
-#'   know which columns are being modified, so you can update the column
-#'   attribute according. You'll also need to think carefully about how to
-#'   recompute the attribute in `tibble_reconstruct()`, and you will need to
-#'   carefully verify the behaviour of each verb, and provide additional
-#'   methods as needed.
-#'
-#' # Current usage
-#'
-#' * `arrange()`, `filter()`, `slice()`, `semi_join()`, and `anti_join()`
-#'   work by generating a vector of row indices, and then subsetting
-#'   with `tibble_row_slice()`.
-#'
-#' * `mutate()` generates a list of new column value (using `NULL` to indicate
-#'   when columns should be deleted), then passes that to `tibble_col_modify()`.
-#'   `transmute()` does the same then uses 1d `[` to select the columns.
-#'
-#' * `summarise()` works similarly to `mutate()` but the data modified by
-#'   `tibble_col_modify()` comes from `group_data()`.
-#'
-#' * `select()` uses 1d `[` to select columns, then `names<-` to rename them.
-#'   `rename()` just uses `names<-`. `relocate()` just uses 1d `[`.
-#'
-#' * `inner_join()`, `left_join()`, `right_join()`, and `full_join()`
-#'   coerces `x` to a tibble, modify the rows, then uses `tibble_reconstruct()`
-#'   to convert back to the same type as `x`.
-#'
-#' * `nest_join()` uses `tibble_col_modify()` to cast the key variables to
-#'   common type and add the nested-df that `y` becomes.
-#'
-#' * `distinct()` does a `mutate()` if any expressions are present, then
-#'   uses 1d `[` to select variables to keep, then `tibble_row_slice()` to
-#'   select distinct rows.
-#'
-#' Note that `group_by()` and `ungroup()` don't use any these generics and
-#' you'll need to provide methods directly.
-#'
-#' @keywords internal
-#' @param data A tibble. We use tibbles because they avoid some inconsistent
-#'    subset-assignment use cases
-#' @name tibble_extending
-NULL
+# Keep in sync with generics.R in dplyr
+# Imported from 3de24a738243a3d07c87b3f4e4afa5f6b02ff561
 
-#' @export
-#' @rdname tibble_extending
-#' @param i A numeric or logical vector that indexes the rows of `.data`.
 tibble_row_slice <- function(data, i, ...) {
   if (!is.numeric(i) && !is.logical(i)) {
     abort("`i` must be an numeric or logical vector.")
   }
 
-  UseMethod("tibble_row_slice")
-}
-
-#' @export
-tibble_row_slice.data.frame <- function(data, i, ...) {
   tibble_reconstruct(vec_slice(data, i), data)
 }
 
-#' @export
-tibble_row_slice.grouped_df <- function(data, i, ..., preserve = FALSE) {
-  out <- vec_slice(as.data.frame(data), i)
-
-  # Index into group_indices, then use that to restore the grouping structure
-  groups <- group_data(data)
-  new_id <- vec_slice(group_indices(data), i)
-  new_grps <- vec_group_loc(new_id)
-
-  rows <- rep(list_of(integer()), length.out = nrow(groups))
-  rows[new_grps$key] <- new_grps$loc
-  groups$.rows <- rows
-  if (!preserve && isTRUE(attr(groups, ".drop"))) {
-    groups <- group_data_trim(groups)
-  }
-
-  new_grouped_df(out, groups)
-}
-
-#' @export
-tibble_row_slice.rowwise_df <- function(data, i, ..., preserve = FALSE) {
-  out <- vec_slice(data, i)
-  group_data <- vec_slice(group_keys(data), i)
-  new_rowwise_df(out, group_data)
-}
-
-#' @export
-#' @rdname tibble_extending
-#' @param cols A named list used modify columns. A `NULL` value should remove
-#'   an existing column.
 tibble_col_modify <- function(data, cols) {
-  UseMethod("tibble_col_modify")
-}
-
-#' @export
-tibble_col_modify.data.frame <- function(data, cols) {
   # Must be implemented from first principles to avoiding edge cases in
   # [.data.frame and [.tibble (2.1.3 and earlier).
 
@@ -141,7 +17,7 @@ tibble_col_modify.data.frame <- function(data, cols) {
   cols <- vec_recycle_common(!!!cols, .size = nrow(data))
 
   # Transform to list to avoid stripping inner names with `[[<-`
-  out <- as.list(tibble_vec_data(data))
+  out <- as.list(dplyr_vec_data(data))
 
   nms <- as_utf8_character(names2(cols))
   names(out) <- as_utf8_character(names2(out))
@@ -158,40 +34,11 @@ tibble_col_modify.data.frame <- function(data, cols) {
   tibble_reconstruct(out, data)
 }
 
-#' @export
-tibble_col_modify.grouped_df <- function(data, cols) {
-  out <- tibble_col_modify(as_tibble(data), cols)
-
-  if (any(names(cols) %in% group_vars(data))) {
-    # regroup
-    grouped_df(out, group_vars(data), drop = group_by_drop_default(data))
-  } else {
-    new_grouped_df(out, group_data(data))
-  }
-}
-
-#' @export
-tibble_col_modify.rowwise_df <- function(data, cols) {
-  out <- tibble_col_modify(as_tibble(data), cols)
-  rowwise_df(out, group_vars(data))
-}
-
-#' @param template Template to use for restoring attributes
-#' @export
-#' @rdname tibble_extending
 tibble_reconstruct <- function(data, template) {
   # Strip attributes before dispatch to make it easier to implement
   # methods and prevent unexpected leaking of irrelevant attributes.
-  data <- tibble_new_data_frame(data)
-  return(tibble_reconstruct_dispatch(data, template))
-  UseMethod("tibble_reconstruct", template)
-}
-tibble_reconstruct_dispatch <- function(data, template) {
-  UseMethod("tibble_reconstruct", template)
-}
+  data <- dplyr_new_data_frame(data)
 
-#' @export
-tibble_reconstruct.data.frame <- function(data, template) {
   attrs <- attributes(template)
   attrs$names <- names(data)
   attrs$row.names <- .row_names_info(data, type = 0L)
@@ -200,56 +47,31 @@ tibble_reconstruct.data.frame <- function(data, template) {
   data
 }
 
-#' @export
-tibble_reconstruct.grouped_df <- function(data, template) {
-  group_vars <- group_intersect(template, data)
-  grouped_df(data, group_vars, drop = group_by_drop_default(template))
+# Until fixed upstream. `vec_data()` should not return lists from data
+# frames.
+dplyr_vec_data <- function(x) {
+  out <- vec_data(x)
+
+  if (is.data.frame(x)) {
+    new_data_frame(out, n = nrow(x))
+  } else {
+    out
+  }
 }
 
-#' @export
-tibble_reconstruct.rowwise_df <- function(data, template) {
-  group_vars <- group_intersect(template, data)
-  rowwise_df(data, group_vars)
-}
+# Until vctrs::new_data_frame() forwards row names automatically
+dplyr_new_data_frame <- function(x = data.frame(),
+                                 n = NULL,
+                                 ...,
+                                 row.names = NULL,
+                                 class = NULL) {
+  row.names <- row.names %||% .row_names_info(x, type = 0L)
 
-tibble_col_select <- function(.data, loc, names = NULL) {
-  loc <- vec_as_location(loc, n = ncol(.data), names = names(.data))
-
-  out <- .data[loc]
-  if (!inherits(out, "data.frame")) {
-    abort(c(
-      "Can't reconstruct data frame.",
-      x = glue("The `[` method for class <{classes_data}> must return a data frame.",
-        classes_data = glue_collapse(class(.data), sep = "/")
-      ),
-      i = glue("It returned a <{classes_out}>.",
-        classes_out = glue_collapse(class(out), sep = "/")
-      )
-    ))
-  }
-  if (length(out) != length(loc)) {
-    abort(c(
-      "Can't reconstruct data frame.",
-      x = glue("The `[` method for class <{classes_data}> must return a data frame with {length(loc)} column{s}.",
-        classes_data = glue_collapse(class(.data), sep = "/"),
-        s = if(length(loc) == 1) "" else "s"
-      ),
-      i = glue("It returned a <{classes_out}> of {length(out)} column{s}.",
-        classes_out = glue_collapse(class(out), sep = "/"),
-        s = if(length(out) == 1) "" else "s"
-      )
-    ))
-  }
-
-  # Patch base data frames to restore extra attributes that `[.data.frame` drops.
-  # We require `[` methods to keep extra attributes for all data frame subclasses.
-  if (identical(class(.data), "data.frame")) {
-    out <- tibble_reconstruct(out, .data)
-  }
-
-  if (!is.null(names)) {
-    names(out) <- names
-  }
-
-  out
+  new_data_frame(
+    x,
+    n = n,
+    ...,
+    row.names = row.names,
+    class = class
+  )
 }

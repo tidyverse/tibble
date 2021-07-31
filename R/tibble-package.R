@@ -10,6 +10,7 @@
 #' @importFrom vctrs vec_names vec_names2 vec_set_names
 #' @importFrom vctrs new_rcrd
 #' @importFrom vctrs new_data_frame
+#' @importFrom vctrs vec_recycle_common vec_data
 #' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`
