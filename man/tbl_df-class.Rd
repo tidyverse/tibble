@@ -61,6 +61,8 @@ for a nonexistent name generates a warning. Read more in \link{subsetting}.
 much information as possible, in a concise way, even for large and complex
 tibbles. Read more in \link{formatting}.
 }
+
+See \code{vignette("invariants")} for a detailed description of the behavior.
 }
 
 \seealso{
