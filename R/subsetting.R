@@ -419,11 +419,13 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       j <- seq_along(x)
+      names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
       j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
     }
 
     value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
+
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(i_arg)) {
     # x[NULL, ...] <- value
@@ -490,7 +492,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
 vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   # Creates a named index vector
   # Values: index
-  # Name: column name (for new columns)
+  # Name: column name (for all columns)
 
   if (is_bare_character(j)) {
     if (anyNA(j)) {
@@ -526,6 +528,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
+    names[j <= length(x)] <- names(x)[ j[j <= length(x)] ]
     j <- set_names(j, names)
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
@@ -533,6 +536,9 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
+
+    names[j <= length(x)] <- names(x)[ j[j <= length(x)] ]
+    j <- set_names(j, names)
   }
 
   if (anyDuplicated(j)) {
@@ -594,17 +600,26 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  # Assertion
+  stopifnot(!is.null(names(j)) || length(j) == 0)
+
   is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
 
   # Grow, assign new names
-  new <- which(j > length(x))
+  new_pos <- (j > length(x))
+  new <- which(new_pos)
+
+  # Grow, assign new names
   if (has_length(new)) {
     length(x) <- max(j[new])
     names(x)[ j[new] ] <- names2(j)[new]
   }
+
+  # This must work now
+  names(x)[ j[!new_pos] ] <- names2(j)[!new_pos]
 
   # Update
   for (jj in which(is_data)) {
