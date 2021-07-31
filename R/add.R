@@ -95,6 +95,8 @@ rbind_at <- function(old, new, pos) {
     seq2(pos + 1L, nrow(old))
   )
   vec_slice(out, idx)
+
+  # tibble_reconstruct
 }
 
 #' Add columns to a data frame
