@@ -179,7 +179,8 @@ NULL
   value <- list(value)
   names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
+  out <- tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
+  out
 }
 
 
@@ -288,7 +289,8 @@ NULL
     }
   }
 
-  tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+  out <- tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+  out
 }
 
 vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
