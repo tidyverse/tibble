@@ -595,6 +595,11 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  if (!is.null(names(j))) {
+    names(value) <- names(j)
+    names(j) <- NULL
+  }
+
   is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
@@ -604,7 +609,7 @@ tbl_subassign_col <- function(x, j, value) {
   new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
-    names(x)[ j[new] ] <- coalesce2(names2(j)[new], names2(value)[new])
+    names(x)[ j[new] ] <- names2(value)[new]
   }
 
   # Update
