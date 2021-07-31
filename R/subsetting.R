@@ -507,9 +507,9 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    j <- numtbl_as_col_location_assign(j, ncol(x), j_arg = j_arg)
+    j <- numtbl_as_col_location_assign(j, length(x), j_arg = j_arg)
 
-    new <- which(j > ncol(x))
+    new <- which(j > length(x))
     j_new <- j[new]
 
     # FIXME: Recycled names are not repaired
