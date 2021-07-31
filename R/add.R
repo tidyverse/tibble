@@ -63,7 +63,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   pos <- pos_from_before_after(.before, .after, nrow(.data))
   out <- rbind_at(.data, df, pos)
 
-  vectbl_restore(out, .data)
+  tibble_reconstruct(out, .data)
 }
 
 #' @export
@@ -166,7 +166,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
   out <- new_data[indexes]
 
   out <- set_repaired_names(out, repair_hint = TRUE, .name_repair)
-  vectbl_restore(out, .data)
+  tibble_reconstruct(out, .data)
 }
 
 
