@@ -514,8 +514,12 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    if (length(j) != 1L || length(names) != 1L) {
-      names <- unname(vec_recycle(set_names(names), length(j), x_arg = as_label(value_arg)))
+    if (length(names) != 1L) {
+      # Side effect: check compatibility
+      vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    } else if (length(j) != 1L) {
+      # length(names) == 1
+      names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
     }
 
     if (length(new) > 0) {
