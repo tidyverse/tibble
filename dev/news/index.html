@@ -106,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.3.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.3.9002</span>
         </div>
       </div>
     </div>
@@ -193,6 +193,22 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3139002" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.3.9002">
+<a href="#tibble-3139002" class="anchor" aria-hidden="true"></a>tibble 3.1.3.9002<small> Unreleased </small></h1>
+<ul><li>
+<code>x[j] &lt;- list(name = value)</code> uses name repair when new columns are created (<a href='https://github.com/tidyverse/tibble/issues/929'>#929</a>).</li>
+<li>
+<code>as.data.frame.tbl_df()</code> strips inner column names (<a href='https://github.com/tidyverse/tibble/issues/837'>#837</a>).</li>
+<li>New <code><a href="../reference/tibble_options.html">?tibble_options</a></code> help page (<a href='https://github.com/tidyverse/tibble/issues/912'>#912</a>).</li>
+<li>Vignettes are now tested with a snapshot test (<a href='https://github.com/tidyverse/tibble/issues/919'>#919</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> allows omitting the <code>nrow</code> argument again (<a href='https://github.com/tidyverse/tibble/issues/781'>#781</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> uses <code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code> internally (<a href='https://github.com/tidyverse/tibble/issues/726'>#726</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</li>
+<li>
+<code><a href="../reference/enframe.html">enframe()</a></code> no longer works for data frames.</li>
+</ul></div>
     <div id="tibble-3139001" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.3.9001">
 <a href="#tibble-3139001" class="anchor" aria-hidden="true"></a>tibble 3.1.3.9001<small> Unreleased </small></h1>
