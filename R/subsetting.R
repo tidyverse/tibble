@@ -178,10 +178,9 @@ NULL
   # New columns are added to the end, provide index to avoid matching column
   # names again
   value <- list(value)
-  names(value) <- names(j)
-  names(j) <- NULL
 
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
+  # j is already pretty
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = NULL, value_arg = value_arg)
 }
 
 
