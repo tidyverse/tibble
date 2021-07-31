@@ -7,7 +7,7 @@
 #'   supplemented by a summary of the remaining rows and columns.
 #' * Tibble reveals the type of each column, which keeps the user informed about
 #'   whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
-#'   See `vignette("types", package = "pillar")` for an overview of common
+#'   See `vignette("types")` for an overview of common
 #'   type abbreviations.
 #'
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly

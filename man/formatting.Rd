@@ -54,7 +54,7 @@ One of the main features of the \code{tbl_df} class is the printing:
 supplemented by a summary of the remaining rows and columns.
 \item Tibble reveals the type of each column, which keeps the user informed about
 whether a variable is, e.g., \verb{<chr>} or \verb{<fct>} (character versus factor).
-See \code{vignette("types", package = "pillar")} for an overview of common
+See \code{vignette("types")} for an overview of common
 type abbreviations.
 }
 
