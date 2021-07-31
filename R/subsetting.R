@@ -601,32 +601,42 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  # Fix order
+  order_j <- order(j)
+  value <- value[order_j]
+  j <- j[order_j]
+
   # tibble_col_modify
 
-  is_data <- !vapply(value, is.null, NA)
-  nrow <- fast_nrow(x)
+  # Adapt to interface
+  names(value) <- names(j)
 
-  x <- unclass(x)
+  # New names
+  tweak_names <- (j > length(x))
+  need_tweak_names <- any(tweak_names)
 
-  # Grow, assign new names
-  new <- which(j > length(x))
-  if (has_length(new)) {
-    length(x) <- max(j[new])
-    names(x)[ j[new] ] <- names2(j)[new]
+  if (need_tweak_names) {
+    new_names <- names(x)
+    new_names[ j[tweak_names] ] <- names(j)[tweak_names]
+
+    # New names ("" means appending at end)
+    names(value)[tweak_names] <- ""
+
+    # Removed names, use vapply() for speed
+    col_is_null <- vapply(value, is.null, NA)
+    if (any(col_is_null)) {
+      new_names <- new_names[ -j[col_is_null] ]
+    }
   }
 
-  # Update
-  for (jj in which(is_data)) {
-    ji <- j[[jj]]
-    x[[ji]] <- value[[jj]]
+  out <- tibble_col_modify(x, value)
+
+  # This calls `names<-()` for the tibble class
+  if (need_tweak_names) {
+    names(out) <- new_names
   }
 
-  # Remove
-  j_remove <- j[!is_data & !is.na(j)]
-  if (has_length(j_remove)) x <- x[-j_remove]
-
-  # Restore
-  set_tibble_class(x, nrow)
+  return(out)
 }
 
 tbl_expand_to_nrow <- function(x, i) {
