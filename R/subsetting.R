@@ -179,6 +179,7 @@ NULL
   # names again
   value <- list(value)
   names(value) <- names(j)
+  names(j) <- NULL
 
   tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
 }
