@@ -80,10 +80,10 @@ print(as_tibble(iris), n = 100)
 print(mtcars, width = 10)
 
 mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
-print(mtcars2, n = 25, n_extra = 3)
+print(mtcars2, n = 25, max_extra_cols = 3)
 
 \dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-print(nycflights13::flights, n_extra = 2)
+print(nycflights13::flights, max_footer_lines = 1)
 print(nycflights13::flights, width = Inf)
 \dontshow{\}) # examplesIf}
 }
