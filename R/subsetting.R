@@ -410,9 +410,7 @@ tbl_subset2 <- function(x, j, j_arg) {
 tbl_subset_row <- function(x, i, i_arg) {
   if (is.null(i)) return(x)
   i <- vectbl_as_row_index(i, x, i_arg)
-  # tibble_row_slice
-  xo <- lapply(unclass(x), vec_slice, i = i)
-  set_tibble_class(xo, nrow = length(i))
+  tibble_row_slice(x, i)
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
@@ -652,8 +650,7 @@ tbl_expand_to_nrow <- function(x, i) {
   if (new_nrow != nrow) {
     # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
-    # tibble_row_slice
-    x <- vec_slice(x, i_expand)
+    x <- tibble_row_slice(x, i_expand)
   }
 
   x
