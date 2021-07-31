@@ -3,10 +3,10 @@
 
 tibble_row_slice <- function(data, i, ...) {
   if (!is.numeric(i) && !is.logical(i)) {
-    abort("`i` must be an numeric or logical vector.")
+    abort("`i` must be a numeric or logical vector.")
   }
 
-  tibble_reconstruct(vec_slice(data, i), data)
+  tibble_reconstruct(vec_slice(remove_rownames(data), i), data)
 }
 
 tibble_col_modify <- function(data, cols) {
