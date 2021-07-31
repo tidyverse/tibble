@@ -130,7 +130,8 @@ NULL
     if (is.null(x)) {
       x
     } else {
-      vectbl_strip_names(vec_slice(x, i))
+      # Drop inner names with double subscript
+      vec_set_names(vec_slice(x, i), NULL)
     }
   }
 }
@@ -227,10 +228,10 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- x
-
-  if (!is.null(j)) {
-    j <- vectbl_as_col_location(j, length(xo), names(xo), j_arg = j_arg, assign = FALSE)
+  if (is.null(j)) {
+    xo <- x
+  } else {
+    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
@@ -680,18 +681,6 @@ vectbl_assign <- function(x, i, value) {
   }
 
   vec_assign(x, i, value)
-}
-
-vectbl_strip_names <- function(x) {
-  maybe_row_names <- is.data.frame(x) || is.array(x)
-
-  if (maybe_row_names) {
-    row.names(x) <- NULL
-  } else {
-    names(x) <- NULL
-  }
-
-  x
 }
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
