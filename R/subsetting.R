@@ -410,6 +410,7 @@ tbl_subset2 <- function(x, j, j_arg) {
 tbl_subset_row <- function(x, i, i_arg) {
   if (is.null(i)) return(x)
   i <- vectbl_as_row_index(i, x, i_arg)
+  # tibble_row_slice
   xo <- lapply(unclass(x), vec_slice, i = i)
   set_tibble_class(xo, nrow = length(i))
 }
@@ -602,6 +603,8 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  # tibble_col_modify
+
   is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
@@ -640,6 +643,7 @@ tbl_expand_to_nrow <- function(x, i) {
   if (new_nrow != nrow) {
     # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
+    # tibble_row_slice
     x <- vec_slice(x, i_expand)
   }
 
