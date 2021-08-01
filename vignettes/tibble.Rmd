@@ -110,7 +110,7 @@ You can control the default appearance with options:
 
 * `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?pillar::pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, and `vignette("digits", package = "pillar")` for details on the formatting of numbers.
+See `?pillar::pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, `vignette("numbers")` for details on the formatting of numbers, and `vignette("digits")` for a comparison with data frame printing.
 
 ### Subsetting
 

@@ -61,8 +61,9 @@ type abbreviations.
 Printing can be tweaked for a one-off call by calling \code{print()} explicitly
 and setting arguments like \code{n} and \code{width}. More persistent control is
 available by setting the options described in \link[pillar:pillar_options]{pillar::pillar_options}.
-See also \code{vignette("digits", package = "pillar")} for a comparison to base options,
-and \code{\link[=num]{num()}} and \code{\link[=char]{char()}} for creating columns with custom formatting options.
+See also \code{vignette("digits")} for a comparison to base options,
+and \code{vignette("numbers")} that showcases \code{\link[=num]{num()}} and \code{\link[=char]{char()}}
+for creating columns with custom formatting options.
 
 As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 If you implement a package that extends tibble,

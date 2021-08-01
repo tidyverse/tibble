@@ -11,6 +11,7 @@ vignette: >
 
 Tibbles print numbers with three significant digits by default, switching to scientific notation if the available space is too small.
 Underlines are used to highlight groups of three digits.
+The display differs from the default display for data frames, see `vignette("digits")` for an overview over the differences.
 This display works for many, but not for all use cases.
 
 
