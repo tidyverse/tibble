@@ -19,7 +19,7 @@
 #' @inheritParams ellipsis::dots_empty
 #' @param x A numeric vector.
 #' @param sigfig Define the number of significant digits to show. Must be one or greater.
-#'   The `"pillar.sigfig"` option is not consulted.
+#'   The `"pillar.sigfig"` [option][pillar::pillar_options] is not consulted.
 #'   Can't be combined with `digits`.
 #' @param digits Number of digits after the decimal points to show.
 #'   Positive numbers specify the exact number of digits to show.

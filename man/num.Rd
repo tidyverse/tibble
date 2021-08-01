@@ -22,7 +22,7 @@ num(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{sigfig}{Define the number of significant digits to show. Must be one or greater.
-The \code{"pillar.sigfig"} option is not consulted.
+The \code{"pillar.sigfig"} \link[pillar:pillar_options]{option} is not consulted.
 Can't be combined with \code{digits}.}
 
 \item{digits}{Number of digits after the decimal points to show.
