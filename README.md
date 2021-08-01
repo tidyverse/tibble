@@ -29,25 +29,26 @@ If you are new to tibbles, the best place to start is the [tibbles chapter](http
 
 ## Usage
 
+<pre class='chroma'>
+<span class='kr'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='o'>(</span><span class='nv'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='o'>)</span></pre>
+
 Create a tibble from an existing object with [`as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html):
 
 <pre class='chroma'>
-<span class='kr'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='o'>(</span><span class='nv'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='o'>)</span>
-<span class='nf'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='o'>(</span><span class='nv'>iris</span><span class='o'>)</span>
-<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 150 × 5</span></span>
-<span class='c'>#&gt;    <span style='font-weight: bold;'>Sepal.Length</span> <span style='font-weight: bold;'>Sepal.Width</span> <span style='font-weight: bold;'>Petal.Length</span> <span style='font-weight: bold;'>Petal.Width</span> <span style='font-weight: bold;'>Species</span></span>
-<span class='c'>#&gt;           <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;fct&gt;</span>  </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 1</span>          5.1         3.5          1.4         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 2</span>          4.9         3            1.4         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 3</span>          4.7         3.2          1.3         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 4</span>          4.6         3.1          1.5         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 5</span>          5           3.6          1.4         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 6</span>          5.4         3.9          1.7         0.4 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 7</span>          4.6         3.4          1.4         0.3 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 8</span>          5           3.4          1.5         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'> 9</span>          4.4         2.9          1.4         0.2 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'>10</span>          4.9         3.1          1.5         0.1 setosa </span>
-<span class='c'>#&gt; <span style='color: #555555;'># … with 140 more rows</span></span></pre>
+<span class='nv'>data</span> <span class='o'>&lt;-</span> <span class='nf'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='o'>(</span>a <span class='o'>=</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>3</span>, b <span class='o'>=</span> <span class='nv'>letters</span><span class='o'>[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>3</span><span class='o'>]</span>, c <span class='o'>=</span> <span class='nf'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='o'>(</span><span class='o'>)</span> <span class='o'>-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>3</span><span class='o'>)</span>
+<span class='nv'>data</span>
+<span class='c'>#&gt;   a b          c</span>
+<span class='c'>#&gt; 1 1 a 2021-07-31</span>
+<span class='c'>#&gt; 2 2 b 2021-07-30</span>
+<span class='c'>#&gt; 3 3 c 2021-07-29</span>
+
+<span class='nf'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='o'>(</span><span class='nv'>data</span><span class='o'>)</span>
+<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 3 × 3</span></span>
+<span class='c'>#&gt;       <span style='font-weight: bold;'>a</span> <span style='font-weight: bold;'>b</span>     <span style='font-weight: bold;'>c</span>         </span>
+<span class='c'>#&gt;   <span style='color: #555555; font-style: italic;'>&lt;int&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;date&gt;</span>    </span>
+<span class='c'>#&gt; <span style='color: #555555;'>1</span>     1 a     2021-07-31</span>
+<span class='c'>#&gt; <span style='color: #555555;'>2</span>     2 b     2021-07-30</span>
+<span class='c'>#&gt; <span style='color: #555555;'>3</span>     3 c     2021-07-29</span></pre>
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.
 
