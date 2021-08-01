@@ -10,34 +10,34 @@ test_that("can add new row", {
 })
 
 test_that("add_row() keeps class of object", {
-  iris_new <- add_row(iris, Species = "unknown")
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_row(trees, Volume = NA)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_row(as_tibble(iris), Species = "unknown")
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_row(as_tibble(trees), Volume = NA)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("add_row() keeps class of object when adding in the middle", {
-  iris_new <- add_row(iris, Species = "unknown", .after = 10)
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_row(trees, Volume = NA, .after = 10)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_row(as_tibble(iris), Species = "unknown")
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_row(as_tibble(trees), Volume = NA)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("add_row() keeps class of object when adding in the beginning", {
-  iris_new <- add_row(iris, Species = "unknown", .after = 0)
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_row(trees, Volume = NA, .after = 0)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_row(as_tibble(iris), Species = "unknown")
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_row(as_tibble(trees), Volume = NA)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("adds empty row if no arguments", {
-  iris1 <- add_row(iris)
-  expect_equal(nrow(iris1), nrow(iris) + 1)
-  new_iris_row <- iris1[nrow(iris1), , drop = TRUE]
-  expect_true(all(is.na(new_iris_row)))
+  trees1 <- add_row(trees)
+  expect_equal(nrow(trees1), nrow(trees) + 1)
+  new_trees_row <- trees1[nrow(trees1), , drop = TRUE]
+  expect_true(all(is.na(new_trees_row)))
 })
 
 test_that("error if adding row with unknown variables", {
@@ -65,12 +65,12 @@ test_that("can add multiple rows", {
 })
 
 test_that("can recycle when adding rows", {
-  iris_new <- add_row(iris, Sepal.Length = -1:-2, Species = "unknown")
-  expect_identical(nrow(iris_new), nrow(iris) + 2L)
-  expect_identical(iris_new$Sepal.Length, c(iris$Sepal.Length, -1:-2))
+  trees_new <- add_row(trees, Height = -1:-2, Volume = 2:3)
+  expect_identical(nrow(trees_new), nrow(trees) + 2L)
+  expect_identical(trees_new$Height, c(trees$Height, -1:-2))
   expect_identical(
-    as.character(iris_new$Species),
-    c(as.character(iris$Species), "unknown", "unknown")
+    trees_new$Volume,
+    c(trees$Volume, 2:3)
   )
 })
 
@@ -111,10 +111,10 @@ test_that("error if both .before and .after are given", {
 })
 
 test_that("missing row names stay missing when adding row", {
-  expect_false(has_rownames(iris))
-  expect_false(has_rownames(add_row(iris, Species = "unknown", .after = 0)))
-  expect_false(has_rownames(add_row(iris, Species = "unknown", .after = nrow(iris))))
-  expect_false(has_rownames(add_row(iris, Species = "unknown", .before = 10)))
+  expect_false(has_rownames(trees))
+  expect_false(has_rownames(add_row(trees, Volume = NA, .after = 0)))
+  expect_false(has_rownames(add_row(trees, Volume = NA, .after = nrow(trees))))
+  expect_false(has_rownames(add_row(trees, Volume = NA, .before = 10)))
 })
 
 test_that("adding to a list column adds a NULL value (#148)", {
@@ -132,7 +132,7 @@ test_that("add_row() keeps the class of empty columns", {
 test_that("add_row() fails nicely for grouped data frames (#179)", {
   skip_if_not_installed("dplyr")
   expect_tibble_error(
-    add_row(dplyr::group_by(iris, Species), Petal.Width = 3),
+    add_row(dplyr::group_by(trees, Volume), Height = 3),
     error_add_rows_to_grouped_df()
   )
 })
@@ -173,31 +173,31 @@ test_that("add_column() works with 0-col tibbles (#786)", {
 })
 
 test_that("add_column() keeps class of object", {
-  iris_new <- add_column(iris, x = 1:150)
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_column(trees, x = 1:31)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_column(as_tibble(iris), x = 1:150)
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_column(as_tibble(trees), x = 1:31)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("add_column() keeps class of object when adding in the middle", {
-  iris_new <- add_column(iris, x = 1:150, .after = 3)
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_column(trees, x = 1:31, .after = 3)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_column(as_tibble(iris), x = 1:150)
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_column(as_tibble(trees), x = 1:31)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("add_column() keeps class of object when adding in the beginning", {
-  iris_new <- add_column(iris, x = 1:150, .after = 0)
-  expect_equal(class(iris), class(iris_new))
+  trees_new <- add_column(trees, x = 1:31, .after = 0)
+  expect_equal(class(trees), class(trees_new))
 
-  iris_new <- add_column(as_tibble(iris), x = 1:150)
-  expect_equal(class(as_tibble(iris)), class(iris_new))
+  trees_new <- add_column(as_tibble(trees), x = 1:31)
+  expect_equal(class(as_tibble(trees)), class(trees_new))
 })
 
 test_that("add_column() keeps unchanged if no arguments", {
-  expect_identical(iris, add_column(iris))
+  expect_identical(trees, add_column(trees))
 })
 
 test_that("add_column() can add to empty tibble or data frame", {
@@ -303,10 +303,10 @@ test_that("deprecated adding columns to non-data-frames", {
 })
 
 test_that("missing row names stay missing when adding column", {
-  expect_false(has_rownames(iris))
-  expect_false(has_rownames(add_column(iris, x = 1:150, .after = 0)))
-  expect_false(has_rownames(add_column(iris, x = 1:150, .after = ncol(iris))))
-  expect_false(has_rownames(add_column(iris, x = 1:150, .before = 2)))
+  expect_false(has_rownames(trees))
+  expect_false(has_rownames(add_column(trees, x = 1:31, .after = 0)))
+  expect_false(has_rownames(add_column(trees, x = 1:31, .after = ncol(trees))))
+  expect_false(has_rownames(add_column(trees, x = 1:31, .before = 2)))
 })
 
 test_that("output test", {

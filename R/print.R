@@ -43,7 +43,7 @@
 #' print(as_tibble(mtcars), n = 1)
 #' print(as_tibble(mtcars), n = 3)
 #'
-#' print(as_tibble(iris), n = 100)
+#' print(as_tibble(trees), n = 100)
 #'
 #' print(mtcars, width = 10)
 #'

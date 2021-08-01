@@ -144,7 +144,7 @@ tibble(
 tibble(
   a = 1:4,
   b = diag(4),
-  c = cov(iris[1:4])
+  c = cov(trees[1:4])
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
@@ -166,7 +166,7 @@ tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
 
 
 # Use tibble_row() to construct a one-row tibble:
-tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
+tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use

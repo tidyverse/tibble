@@ -1,5 +1,5 @@
 test_that("basic", {
-  expect_true(has_name(iris, "Species"))
+  expect_true(has_name(trees, "Volume"))
   expect_false(has_name(mtcars, "gears"))
 })
 

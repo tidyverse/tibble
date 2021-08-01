@@ -59,7 +59,7 @@ and that \code{\link[vctrs:vec_size]{vctrs::vec_size()}} is consistent with the 
 new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 
 # Existing row.names attributes are ignored:
-try(validate_tibble(new_tibble(iris, nrow = 3)))
+try(validate_tibble(new_tibble(trees, nrow = 3)))
 
 # The length of all columns must be compatible with the nrow argument:
 try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
