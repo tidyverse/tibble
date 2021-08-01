@@ -148,33 +148,35 @@ It also prints an abbreviated description of the column type, and uses font styl
 
 
 ```r
-tibble(x = -5:1000)
+tibble(x = -5:100, y = 123.456 * (3 ^ x))
 ```
 
-<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'># A tibble: 1,006 x 1</span>
-<span style='color: #555555;'>#&gt;</span>        <span style='font-weight: bold;'>x</span>
-<span style='color: #555555;'>#&gt;</span>    <span style='color: #555555; font-style: italic;'>&lt;int&gt;</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 1</span>    -<span style='color: #BB0000;'>5</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 2</span>    -<span style='color: #BB0000;'>4</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 3</span>    -<span style='color: #BB0000;'>3</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 4</span>    -<span style='color: #BB0000;'>2</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 5</span>    -<span style='color: #BB0000;'>1</span>
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 6</span>     0
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 7</span>     1
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 8</span>     2
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 9</span>     3
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'>10</span>     4
-<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'># ... with 996 more rows</span>
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'># A tibble: 106 x 2</span>
+<span style='color: #555555;'>#&gt;</span>        <span style='font-weight: bold;'>x</span>         <span style='font-weight: bold;'>y</span>
+<span style='color: #555555;'>#&gt;</span>    <span style='color: #555555; font-style: italic;'>&lt;int&gt;</span>     <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 1</span>    -<span style='color: #BB0000;'>5</span>     0.508
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 2</span>    -<span style='color: #BB0000;'>4</span>     1.52 
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 3</span>    -<span style='color: #BB0000;'>3</span>     4.57 
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 4</span>    -<span style='color: #BB0000;'>2</span>    13.7  
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 5</span>    -<span style='color: #BB0000;'>1</span>    41.2  
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 6</span>     0   123.   
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 7</span>     1   370.   
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 8</span>     2  <span style='text-decoration: underline;'>1</span>111.   
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'> 9</span>     3  <span style='text-decoration: underline;'>3</span>333.   
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'>10</span>     4 <span style='text-decoration: underline;'>10</span>000.   
+<span style='color: #555555;'>#&gt;</span> <span style='color: #555555;'># ... with 96 more rows</span>
 </code></pre></div>
+
+Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.
 
 You can control the default appearance with options:
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
-  Use `options(tibble.print_max = Inf)` to always show all rows.
+* `options(pillar.print_max = n, pillar.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
+  Use `options(pillar.print_max = Inf)` to always show all rows.
 
-* `options(tibble.width = Inf)` will always print all columns, regardless of the width of the screen.
+* `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?"tibble-package"` for the available options, and `vignette("types")` for an overview of the type abbreviations.
+See `?pillar::pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, and `vignette("digits", package = "pillar")` for details on the formatting of numbers.
 
 ### Subsetting
 
