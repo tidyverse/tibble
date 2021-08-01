@@ -34,19 +34,19 @@ Create a tibble from an existing object with [`as_tibble()`](https://tibble.tidy
 <pre class='chroma'>
 <span class='kr'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='o'>(</span><span class='nv'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='o'>)</span>
 <span class='nf'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='o'>(</span><span class='nv'>iris</span><span class='o'>)</span>
-<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 150 x 5</span></span>
-<span class='c'>#&gt;    <span style='font-weight: bold;'>Sepal.Length</span><span> </span><span style='font-weight: bold;'>Sepal.Width</span><span> </span><span style='font-weight: bold;'>Petal.Length</span><span> </span><span style='font-weight: bold;'>Petal.Width</span><span> </span><span style='font-weight: bold;'>Species</span></span>
-<span class='c'>#&gt;           <span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 1</span><span>          5.1         3.5          1.4         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 2</span><span>          4.9         3            1.4         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 3</span><span>          4.7         3.2          1.3         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 4</span><span>          4.6         3.1          1.5         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 5</span><span>          5           3.6          1.4         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 6</span><span>          5.4         3.9          1.7         0.4 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 7</span><span>          4.6         3.4          1.4         0.3 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 8</span><span>          5           3.4          1.5         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'> 9</span><span>          4.4         2.9          1.4         0.2 setosa </span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>10</span><span>          4.9         3.1          1.5         0.1 setosa </span></span>
+<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 150 × 5</span></span>
+<span class='c'>#&gt;    <span style='font-weight: bold;'>Sepal.Length</span> <span style='font-weight: bold;'>Sepal.Width</span> <span style='font-weight: bold;'>Petal.Length</span> <span style='font-weight: bold;'>Petal.Width</span> <span style='font-weight: bold;'>Species</span></span>
+<span class='c'>#&gt;           <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;fct&gt;</span>  </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 1</span>          5.1         3.5          1.4         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 2</span>          4.9         3            1.4         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 3</span>          4.7         3.2          1.3         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 4</span>          4.6         3.1          1.5         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 5</span>          5           3.6          1.4         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 6</span>          5.4         3.9          1.7         0.4 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 7</span>          4.6         3.4          1.4         0.3 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 8</span>          5           3.4          1.5         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'> 9</span>          4.4         2.9          1.4         0.2 setosa </span>
+<span class='c'>#&gt; <span style='color: #555555;'>10</span>          4.9         3.1          1.5         0.1 setosa </span>
 <span class='c'>#&gt; <span style='color: #555555;'># … with 140 more rows</span></span></pre>
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.
@@ -55,16 +55,16 @@ You can also create a new tibble from column vectors with [`tibble()`](https://t
 
 <pre class='chroma'>
 <span class='nf'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='o'>(</span>x <span class='o'>=</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>5</span>, y <span class='o'>=</span> <span class='m'>1</span>, z <span class='o'>=</span> <span class='nv'>x</span> <span class='o'>^</span> <span class='m'>2</span> <span class='o'>+</span> <span class='nv'>y</span><span class='o'>)</span>
-<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span></span>
-<span class='c'>#&gt;       <span style='font-weight: bold;'>x</span><span>     </span><span style='font-weight: bold;'>y</span><span>     </span><span style='font-weight: bold;'>z</span></span>
-<span class='c'>#&gt;   <span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>1</span><span>     1     1     2</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>2</span><span>     2     1     5</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>3</span><span>     3     1    10</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>4</span><span>     4     1    17</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>5</span><span>     5     1    26</span></span></pre>
+<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 5 × 3</span></span>
+<span class='c'>#&gt;       <span style='font-weight: bold;'>x</span>     <span style='font-weight: bold;'>y</span>     <span style='font-weight: bold;'>z</span></span>
+<span class='c'>#&gt;   <span style='color: #555555; font-style: italic;'>&lt;int&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='c'>#&gt; <span style='color: #555555;'>1</span>     1     1     2</span>
+<span class='c'>#&gt; <span style='color: #555555;'>2</span>     2     1     5</span>
+<span class='c'>#&gt; <span style='color: #555555;'>3</span>     3     1    10</span>
+<span class='c'>#&gt; <span style='color: #555555;'>4</span>     4     1    17</span>
+<span class='c'>#&gt; <span style='color: #555555;'>5</span>     5     1    26</span></pre>
 
-[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in `vignette("tibble")`.
+[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in [`vignette("tibble")`](https://tibble.tidyverse.org/articles/tibble.html).
 
 You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html):
 
@@ -74,11 +74,11 @@ You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.o
   <span class='s'>"a"</span>, <span class='m'>2</span>,  <span class='m'>3.6</span>,
   <span class='s'>"b"</span>, <span class='m'>1</span>,  <span class='m'>8.5</span>
 <span class='o'>)</span>
-<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span></span>
-<span class='c'>#&gt;   <span style='font-weight: bold;'>x</span><span>         </span><span style='font-weight: bold;'>y</span><span>     </span><span style='font-weight: bold;'>z</span></span>
-<span class='c'>#&gt;   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>1</span><span> a         2   3.6</span></span>
-<span class='c'>#&gt; <span style='color: #555555;'>2</span><span> b         1   8.5</span></span></pre>
+<span class='c'>#&gt; <span style='color: #555555;'># A tibble: 2 × 3</span></span>
+<span class='c'>#&gt;   <span style='font-weight: bold;'>x</span>         <span style='font-weight: bold;'>y</span>     <span style='font-weight: bold;'>z</span></span>
+<span class='c'>#&gt;   <span style='color: #555555; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='c'>#&gt; <span style='color: #555555;'>1</span> a         2   3.6</span>
+<span class='c'>#&gt; <span style='color: #555555;'>2</span> b         1   8.5</span></pre>
 
 ## Related work
 
