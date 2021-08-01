@@ -67,14 +67,14 @@ type abbreviations.
 
 Printing can be tweaked for a one-off call by calling print() explicitly
 and setting arguments like n and width. More persistent control is
-available by setting the options described in pillar_options.
+available by setting the options described in pillar::pillar_options.
 See also vignette(&quot;digits&quot;, package = &quot;pillar&quot;) for a comparison to base options,
 and num() and char() for creating columns with custom formatting options.
 As of tibble 3.1.0, printing is handled entirely by the pillar package.
 If you implement a package that extends tibble,
 the printed output can be customized in various ways.
 See vignette(&quot;extending&quot;, package = &quot;pillar&quot;) for details,
-and pillar_options for options that control the display in the console." />
+and pillar::pillar_options for options that control the display in the console." />
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
@@ -225,14 +225,14 @@ type abbreviations.</p></li>
 
 <p>Printing can be tweaked for a one-off call by calling <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code> explicitly
 and setting arguments like <code>n</code> and <code>width</code>. More persistent control is
-available by setting the options described in pillar_options.
+available by setting the options described in <a href='https://pillar.r-lib.org/reference/pillar_options.html'>pillar::pillar_options</a>.
 See also <code><a href='https://pillar.r-lib.org/articles/digits.html'>vignette("digits", package = "pillar")</a></code> for a comparison to base options,
 and <code><a href='https://pillar.r-lib.org/reference/num.html'>num()</a></code> and <code><a href='https://pillar.r-lib.org/reference/char.html'>char()</a></code> for creating columns with custom formatting options.</p>
 <p>As of tibble 3.1.0, printing is handled entirely by the <span class="pkg">pillar</span> package.
 If you implement a package that extends tibble,
 the printed output can be customized in various ways.
 See <code><a href='https://pillar.r-lib.org/articles/extending.html'>vignette("extending", package = "pillar")</a></code> for details,
-and pillar_options for options that control the display in the console.</p>
+and <a href='https://pillar.r-lib.org/reference/pillar_options.html'>pillar::pillar_options</a> for options that control the display in the console.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for tbl_df</span>
@@ -265,7 +265,7 @@ and pillar_options for options that control the display in the console.</p>
     <tr>
       <th>width</th>
       <td><p>Width of text output to generate. This defaults to <code>NULL</code>, which
-means use the <code>width</code> option.</p></td>
+means use the <code>width</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -274,21 +274,21 @@ means use the <code>width</code> option.</p></td>
     <tr>
       <th>n</th>
       <td><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
-if less than the <code>print_max</code> option.
+if less than the <code>print_max</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.
 Otherwise, will print as many rows as specified by the
-<code>print_min</code> option.</p></td>
+<code>print_min</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.</p></td>
     </tr>
     <tr>
       <th>max_extra_cols</th>
       <td><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>,
-the <code>max_extra_cols</code> option is used.
+the <code>max_extra_cols</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a> is used.
 The previously defined <code>n_extra</code> argument is soft-deprecated.</p></td>
     </tr>
     <tr>
       <th>max_footer_lines</th>
       <td><p>Maximum number of footer lines. If <code>NULL</code>,
-the <code>max_footer_lines</code> option is used.</p></td>
+the <code>max_footer_lines</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a> is used.</p></td>
     </tr>
     </table>
 
