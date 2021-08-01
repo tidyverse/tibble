@@ -131,8 +131,10 @@ When you print a tibble, it only shows the first ten rows and all the columns th
 It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
 
 ```{r}
-tibble(x = -5:1000)
+tibble(x = -5:100, y = 123.456 * (3 ^ x))
 ```
+
+Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.
 
 You can control the default appearance with options:
 
@@ -141,7 +143,7 @@ You can control the default appearance with options:
 
 * `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?pillar_options` and `?tibble_options` for the available options, and `vignette("types")` for an overview of the type abbreviations.
+See `?pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, and `vignette("digits", package = "pillar")` for details on the formatting of numbers.
 
 ### Subsetting
 
