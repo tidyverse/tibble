@@ -20,6 +20,8 @@ reference:
   - tibble
   - "tbl_df-class"
   - formatting
+  - num
+  - char
   - tibble_options
   - tribble
   - -reexports
