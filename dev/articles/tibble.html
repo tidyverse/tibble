@@ -286,7 +286,7 @@
 <li><p><code>options(pillar.print_max = n, pillar.print_min = m)</code>: if there are more than <code>n</code> rows, print only the first <code>m</code> rows. Use <code>options(pillar.print_max = Inf)</code> to always show all rows.</p></li>
 <li><p><code>options(pillar.width = n)</code>: use <code>n</code> character slots horizontally to show the data. If <code>n &gt; getOption("width")</code>, this will result in multiple tiers. Use <code>options(pillar.width = Inf)</code> to always print all columns, regardless of the width of the screen.</p></li>
 </ul>
-<p>See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> and <code><a href="../reference/tibble_options.html">?tibble_options</a></code> for the available options, <code><a href="../articles/types.html">vignette("types")</a></code> for an overview of the type abbreviations, and <code><a href="https://pillar.r-lib.org/articles/digits.html" class="external-link">vignette("digits", package = "pillar")</a></code> for details on the formatting of numbers.</p>
+<p>See <code>?pillar_options</code> and <code><a href="../reference/tibble_options.html">?tibble_options</a></code> for the available options, <code><a href="../articles/types.html">vignette("types")</a></code> for an overview of the type abbreviations, and <code><a href="https://pillar.r-lib.org/articles/digits.html" class="external-link">vignette("digits", package = "pillar")</a></code> for details on the formatting of numbers.</p>
 </div>
 <div id="subsetting" class="section level3">
 <h3 class="hasAnchor">
@@ -431,8 +431,8 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error: Tibble columns must have compatible sizes.
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 3: Existing data.
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 2: Column `c`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> * Size 3: Existing data.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> * Size 2: Column `c`.
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Only values of size one are recycled.
 </span></code></pre>
 </div>
