@@ -25,13 +25,13 @@ vignette: >
 </style>
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  error = TRUE,
-  collapse = TRUE,
-  #eval = FALSE, echo = FALSE,
-  comment = "#>"
-)
+# To suppress messages
+library(tibble)
+library(vctrs)
 
+knitr::opts_chunk$set(error = TRUE)
+
+tibble:::set_fansi_hooks()
 tibble:::set_dftbl_hooks()
 
 options(
@@ -59,7 +59,7 @@ In this article, all behaviors are demonstrated using one example data frame and
 
 ```{r setup}
 library(tibble)
-suppressMessages(library(vctrs))
+library(vctrs)
 
 new_df <- function() {
   df <- data.frame(n = c(1L, NA, 3L, NA))
