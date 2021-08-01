@@ -9,7 +9,9 @@ tibble_options
 }
 \description{
 Options that affect interactive display.
-See \link[pillar:pillar_options]{pillar::pillar_options} for options that affect display on the console.
+See \link[pillar:pillar_options]{pillar::pillar_options} for options that affect display on the console,
+and \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}} for enabling and disabling colored output
+via ANSI sequences like \verb{[3m[38;5;246m[39m[23m}.
 }
 \details{
 These options can be set via \code{\link[=options]{options()}} and queried via \code{\link[=getOption]{getOption()}}.
