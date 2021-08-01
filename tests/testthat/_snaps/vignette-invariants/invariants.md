@@ -1,9 +1,9 @@
 ---
-title: "Invariants for subsetting and subassignment"
+title: "Invariants: Comparing behavior with data frames"
 #output: rmarkdown::word_document
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Invariants for subsetting and subassignment}
+  %\VignetteIndexEntry{Invariants: Comparing behavior with data frames}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

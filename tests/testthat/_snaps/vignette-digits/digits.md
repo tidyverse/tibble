@@ -1,8 +1,8 @@
 ---
-title: "Significant figures and scientific notation"
+title: "Comparison with data frames"
 output: html_vignette
 vignette: >
-  %\VignetteIndexEntry{Significant figures and scientific notation}
+  %\VignetteIndexEntry{Comparison with data frames}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
