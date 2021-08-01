@@ -2,7 +2,7 @@
 % Please edit documentation in R/pillar.R
 \name{char}
 \alias{char}
-\title{Format a character vector in a tibble}
+\title{Format a character vector}
 \usage{
 char(
   x,

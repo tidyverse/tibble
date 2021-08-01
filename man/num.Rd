@@ -2,7 +2,7 @@
 % Please edit documentation in R/pillar.R
 \name{num}
 \alias{num}
-\title{Format a numeric vector in a tibble}
+\title{Format a numeric vector}
 \usage{
 num(
   x,

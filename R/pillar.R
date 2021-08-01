@@ -1,4 +1,4 @@
-#' Format a numeric vector in a tibble
+#' Format a numeric vector
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -111,7 +111,7 @@
 # Assigned in .onLoad()
 num <- NULL
 
-#' Format a character vector in a tibble
+#' Format a character vector
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
