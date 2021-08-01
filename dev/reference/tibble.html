@@ -456,15 +456,9 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span></span>
 <span class='r-in'>  a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>,</span>
 <span class='r-in'>  b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>,</span>
-<span class='r-in'>  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-in'>  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span><span class='op'>(</span><span class='va'>trees</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 3</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Length"] [,"Sepal.Width"]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     1     1     0     0     0             0.686           -<span style='color: #BB0000;'>0.042</span><span style='color: #BB0000; text-decoration: underline;'>4</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>     2     0     1     0     0            -<span style='color: #BB0000;'>0.042</span><span style='color: #BB0000; text-decoration: underline;'>4</span>           0.190 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     3     0     0     1     0             1.27            -<span style='color: #BB0000;'>0.330</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span>     4     0     0     0     1             0.516           -<span style='color: #BB0000;'>0.122</span> </span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in `[.data.frame`(trees, 1:4)</span> undefined columns selected</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span></span>
 <span class='r-in'><span class='co'># with incompatible number of rows:</span></span>
@@ -522,7 +516,7 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-in'></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Use tibble_row() to construct a one-row tibble:</span></span>
-<span class='r-in'><span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Petal.Width</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Height</span> <span class='op'>~</span> <span class='va'>Girth</span> <span class='op'>+</span> <span class='va'>Volume</span>, data <span class='op'>=</span> <span class='va'>trees</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       a lm    </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span></span>

@@ -283,10 +283,10 @@ for lower-level implementations.</p></div>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     3     6</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Existing row.names attributes are ignored:</span></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>validate_tibble</span><span class='op'>(</span><span class='fu'>new_tibble</span><span class='op'>(</span><span class='va'>iris</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>validate_tibble</span><span class='op'>(</span><span class='fu'>new_tibble</span><span class='op'>(</span><span class='va'>trees</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 3: Requested with `nrow` argument.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 150: Columns `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width`, and `Species`.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 31: Columns `Girth`, `Height`, and `Volume`.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>ℹ</span> Only values of size one are recycled.</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># The length of all columns must be compatible with the nrow argument:</span></span>
