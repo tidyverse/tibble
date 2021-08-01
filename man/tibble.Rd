@@ -142,9 +142,9 @@ tibble(
   )
 )
 tibble(
-  a = 1:4,
-  b = diag(4),
-  c = cov(trees[1:4])
+  a = 1:3,
+  b = diag(3),
+  c = cor(trees)
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
