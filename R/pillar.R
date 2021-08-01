@@ -126,7 +126,7 @@ num <- NULL
 #' @inheritParams ellipsis::dots_empty
 #' @param x A character vector.
 #' @param min_chars The minimum width to allocate to this column, defaults to 15.
-#'   The `"pillar.min_chars"` option is not consulted.
+#'   The `"pillar.min_chars"` [option][pillar::pillar_options] is not consulted.
 #' @param shorten How to abbreviate the data if necessary:
 #' - `"back"` (default): add an ellipsis at the end
 #' - `"front"`: add an ellipsis at the front

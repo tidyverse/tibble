@@ -17,7 +17,7 @@ char(
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{min_chars}{The minimum width to allocate to this column, defaults to 15.
-The \code{"pillar.min_chars"} option is not consulted.}
+The \code{"pillar.min_chars"} \link[pillar:pillar_options]{option} is not consulted.}
 
 \item{shorten}{How to abbreviate the data if necessary:
 \itemize{
