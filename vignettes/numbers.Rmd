@@ -25,6 +25,8 @@ library(tibble)
 ## Per-column number formatting
 
 The new `num()` constructor allows creating vectors that behave like numbers but allow customizing their display.
+Below a few examples are shown, see `?num` for a comprehensive overview.
+Similarly, `char()` allows customizing the display of character columns.
 
 ```{r numbers-5}
 num(-1:3, notation = "sci")
