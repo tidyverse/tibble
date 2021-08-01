@@ -9,7 +9,7 @@ tibble_options
 }
 \description{
 Options that affect interactive display.
-See \link{pillar_options} for options that affect display on the console.
+See \link[pillar:pillar_options]{pillar::pillar_options} for options that affect display on the console.
 }
 \details{
 These options can be set via \code{\link[=options]{options()}} and queried via \code{\link[=getOption]{getOption()}}.

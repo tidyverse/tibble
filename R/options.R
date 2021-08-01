@@ -1,7 +1,7 @@
 #' Package options
 #'
 #' Options that affect interactive display.
-#' See [pillar_options] for options that affect display on the console.
+#' See [pillar::pillar_options] for options that affect display on the console.
 #'
 #' These options can be set via [options()] and queried via [getOption()].
 #' For this, add a `tibble.` prefix (the package name and a dot) to the option name.
