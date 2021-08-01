@@ -50,38 +50,38 @@
 #' @examples
 #' # Display as a vector
 #' num(9:11 * 100 + 0.5)
-#' @examplesIf rlang::is_installed("tibble")
+#' @examples
 #'
 #' # Significant figures
-#' tibble::tibble(
+#' tibble(
 #'   x3 = num(9:11 * 100 + 0.5, sigfig = 3),
 #'   x4 = num(9:11 * 100 + 0.5, sigfig = 4),
 #'   x5 = num(9:11 * 100 + 0.5, sigfig = 5),
 #' )
 #'
 #' # Maximum digits after the decimal points
-#' tibble::tibble(
+#' tibble(
 #'   x0 = num(9:11 * 100 + 0.5, digits =  0),
 #'   x1 = num(9:11 * 100 + 0.5, digits = -1),
 #'   x2 = num(9:11 * 100 + 0.5, digits = -2),
 #' )
 #'
 #' # Use fixed digits and a currency label
-#' tibble::tibble(
+#' tibble(
 #'   usd = num(9:11 * 100 + 0.5, digits = 2, label = "USD"),
 #'   gbp = num(9:11 * 100 + 0.5, digits = 2, label = "£"),
 #'   chf = num(9:11 * 100 + 0.5, digits = 2, label = "SFr")
 #' )
 #'
 #' # Scale
-#' tibble::tibble(
+#' tibble(
 #'   small  = num(9:11 / 1000 + 0.00005, label = "%", scale = 100),
 #'   medium = num(9:11 /  100 + 0.0005 , label = "%", scale = 100),
 #'   large  = num(9:11 /   10 + 0.005  , label = "%", scale = 100)
 #' )
 #'
 #' # Notation
-#' tibble::tibble(
+#' tibble(
 #'   sci = num(10^(-13:6), notation = "sci"),
 #'   eng = num(10^(-13:6), notation = "eng"),
 #'   si  = num(10^(-13:6), notation = "si"),
@@ -89,20 +89,20 @@
 #' )
 #'
 #' # Fixed exponent
-#' tibble::tibble(
+#' tibble(
 #'   scimin = num(10^(-7:6) * 123, notation = "sci", fixed_exponent = -Inf),
 #'   engmin = num(10^(-7:6) * 123, notation = "eng", fixed_exponent = -Inf),
 #'   simin  = num(10^(-7:6) * 123, notation = "si",  fixed_exponent = -Inf)
 #' )
 #'
-#' tibble::tibble(
+#' tibble(
 #'   scismall = num(10^(-7:6) * 123, notation = "sci", fixed_exponent = -3),
 #'   scilarge = num(10^(-7:6) * 123, notation = "sci", fixed_exponent = 3),
 #'   scimax   = num(10^(-7:6) * 123, notation = "sci", fixed_exponent = Inf)
 #' )
 #'
 #' #' Extra significant digits
-#' tibble::tibble(
+#' tibble(
 #'   default = num(100 + 1:3 * 0.001),
 #'   extra1 = num(100 + 1:3 * 0.001, extra_sigfig = TRUE),
 #'   extra2 = num(100 + 1:3 * 0.0001, extra_sigfig = TRUE),
@@ -142,7 +142,7 @@ num <- NULL
 #'
 #' # Plain character vectors get truncated if space is limited:
 #' data_with_id <- function(id) {
-#'   tibble::tibble(
+#'   tibble(
 #'     id,
 #'     some_number_1 = 1, some_number_2 = 2, some_number_3 = 3,
 #'     some_number_4 = 4, some_number_5 = 5, some_number_6 = 6,
@@ -158,11 +158,11 @@ num <- NULL
 #'
 #' # Lorem Ipsum, one sentence per row.
 #' lipsum <- unlist(strsplit(stringi::stri_rand_lipsum(1), "(?<=[.]) +", perl = TRUE))
-#' tibble::tibble(
+#' tibble(
 #'   back = char(lipsum, shorten = "back"),
 #'   front = char(lipsum, shorten = "front"),
 #'   mid   = char(lipsum, shorten = "mid")
 #' )
-#' tibble::tibble(abbr = char(lipsum, shorten = "abbreviate"))
+#' tibble(abbr = char(lipsum, shorten = "abbreviate"))
 # Assigned in .onLoad()
 char <- NULL

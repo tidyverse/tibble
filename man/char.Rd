@@ -45,7 +45,7 @@ rand_strings <- stringi::stri_rand_strings(10, seq(40, 22, by = -2))
 
 # Plain character vectors get truncated if space is limited:
 data_with_id <- function(id) {
-  tibble::tibble(
+  tibble(
     id,
     some_number_1 = 1, some_number_2 = 2, some_number_3 = 3,
     some_number_4 = 4, some_number_5 = 5, some_number_6 = 6,
@@ -61,12 +61,12 @@ data_with_id(char(rand_strings, min_chars = 24, shorten = "mid"))
 
 # Lorem Ipsum, one sentence per row.
 lipsum <- unlist(strsplit(stringi::stri_rand_lipsum(1), "(?<=[.]) +", perl = TRUE))
-tibble::tibble(
+tibble(
   back = char(lipsum, shorten = "back"),
   front = char(lipsum, shorten = "front"),
   mid   = char(lipsum, shorten = "mid")
 )
-tibble::tibble(abbr = char(lipsum, shorten = "abbreviate"))
+tibble(abbr = char(lipsum, shorten = "abbreviate"))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
