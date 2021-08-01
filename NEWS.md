@@ -212,7 +212,7 @@
 
 ## Breaking changes
 
-- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(iris)` now has five columns, use `tibble(iris = iris)` if the intention is to create a packed data frame (#581).
+- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(trees)` now has three columns, use `tibble(trees = trees)` if the intention is to create a packed data frame (#581).
 
 - The `name-repair` help topic is gone, refer to `?vctrs::vec_as_names` instead.
 

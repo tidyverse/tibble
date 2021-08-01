@@ -2,7 +2,7 @@ test_that("needs_dim()", {
   expect_false(needs_dim(NULL))
   expect_false(needs_dim(1))
   expect_false(needs_dim(1:3))
-  expect_true(needs_dim(iris))
+  expect_true(needs_dim(trees))
   expect_true(needs_dim(Titanic))
 })
 
@@ -20,7 +20,7 @@ test_that("needs_list_col()", {
   expect_true(needs_list_col(1:3))
   expect_true(needs_list_col(integer()))
   expect_true(needs_list_col(NULL))
-  expect_true(needs_list_col(iris))
+  expect_true(needs_list_col(trees))
   expect_true(needs_list_col(Titanic))
 })
 
