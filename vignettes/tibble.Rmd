@@ -136,12 +136,12 @@ tibble(x = -5:1000)
 
 You can control the default appearance with options:
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
-  Use `options(tibble.print_max = Inf)` to always show all rows.
+* `options(pillar.print_max = n, pillar.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
+  Use `options(pillar.print_max = Inf)` to always show all rows.
 
-* `options(tibble.width = Inf)` will always print all columns, regardless of the width of the screen.
+* `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?"tibble-package"` for the available options, and `vignette("types")` for an overview of the type abbreviations.
+See `?pillar_options` and `?tibble_options` for the available options, and `vignette("types")` for an overview of the type abbreviations.
 
 ### Subsetting
 
