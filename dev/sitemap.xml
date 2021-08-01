@@ -16,6 +16,9 @@
     <loc>https://tibble.tidyverse.org/SUPPORT.html</loc>
   </url>
   <url>
+    <loc>https://tibble.tidyverse.org/articles/digits.html</loc>
+  </url>
+  <url>
     <loc>https://tibble.tidyverse.org/articles/extending.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/articles/invariants.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/articles/numbers.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/articles/tibble.html</loc>
@@ -56,6 +62,9 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/as_tibble.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/reference/char.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/deprecated.html</loc>
@@ -92,6 +101,9 @@
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/new_tibble.html</loc>
+  </url>
+  <url>
+    <loc>https://tibble.tidyverse.org/reference/num.html</loc>
   </url>
   <url>
     <loc>https://tibble.tidyverse.org/reference/reexports.html</loc>
