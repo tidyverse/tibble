@@ -41,12 +41,7 @@ In this article, all behaviors are demonstrated using one example data frame and
 
 ```r
 library(tibble)
-suppressWarnings(library(vctrs))
-#> 
-#> Attaching package: 'vctrs'
-#> The following object is masked from 'package:tibble':
-#> 
-#>     data_frame
+suppressMessages(library(vctrs))
 new_df <- function() {
   df <- data.frame(n = c(1L, NA, 3L, NA))
   df$c <- letters[5:8]
