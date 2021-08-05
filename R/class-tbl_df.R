@@ -140,12 +140,34 @@ if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
   # deparse.level is part of the interface of the generic but not passed along
   # for data frame methods
 
-  vec_rbind(!!!list(...))
+  e <- tryCatch(
+    return(vec_rbind(!!!list(...))),
+    error = identity
+  )
+  lifecycle::deprecate_soft("3.2.0", "tibble::rbind()",
+    details = paste0(
+      "rbind() now forwards to vctrs::vec_rbind(), this call has failed. Falling back to legacy behavior. Error:\n",
+      conditionMessage(e)
+    ),
+    user_env = caller_env(2)
+  )
+  NextMethod("rbind")
 }
 
 #' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
 if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
-  vec_cbind(!!!list(...))
+  e <- tryCatch(
+    return(vec_cbind(!!!list(...))),
+    error = identity
+  )
+  lifecycle::deprecate_soft("3.2.0", "tibble::cbind()",
+    details = paste0(
+      "cbind() now forwards to vctrs::vec_cbind(), this call has failed. Falling back to legacy behavior. Error:\n",
+      conditionMessage(e)
+    ),
+    user_env = caller_env(2)
+  )
+  NextMethod("cbind")
 }
 
 # Errors ------------------------------------------------------------------
