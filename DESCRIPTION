@@ -64,6 +64,7 @@ Suggests:
     pkgload,
     purrr,
     rmarkdown,
+    stringi,
     testthat (>= 3.0.2),
     tidyr,
     withr

@@ -20,6 +20,8 @@ reference:
   - tibble
   - "tbl_df-class"
   - formatting
+  - num
+  - char
   - tibble_options
   - tribble
   - -reexports
@@ -65,8 +67,12 @@ navbar:
     menu:
     - text: Data types
       href: articles/types.html
-    - text: Invariants
+    - text: Comparing behavior with data frames
       href: articles/invariants.html
+    - text: Controlling display of numbers
+      href: articles/numbers.html
+    - text: Comparing display with data frames
+      href: articles/digits.html
   - text: News
     menu:
     - text: "Release notes"
