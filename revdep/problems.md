@@ -78,7 +78,7 @@ Run `cloud_details(, "comparer")` for more info
       `actual`:   FALSE
       `expected`: TRUE 
       
-      [ FAIL 4 | WARN 1 | SKIP 0 | PASS 238 ]
+      [ FAIL 4 | WARN 0 | SKIP 0 | PASS 238 ]
       Error: Test failures
       Execution halted
     ```
@@ -129,92 +129,6 @@ Run `cloud_details(, "crosstable")` for more info
       Execution halted
     ```
 
-# dat
-
-<details>
-
-* Version: 0.5.0
-* GitHub: https://github.com/wahani/dat
-* Source code: https://github.com/cran/dat
-* Date/Publication: 2020-05-15 19:40:03 UTC
-* Number of recursive dependencies: 72
-
-Run `cloud_details(, "dat")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        9. │     └─base::as.data.frame(x) test-mutar-data-table.R:6:4
-       10. └─base::cbind(dat, list(a = mean(dat$x)))
-       11.   └─tibble:::cbind(deparse.level, ...)
-       12.     └─vctrs::vec_cbind(!!!list(...))
-       13.       └─(function () ...
-       14.         ├─vctrs::vec_cbind_frame_ptype(x = x)
-       15.         └─vctrs:::vec_cbind_frame_ptype.default(x = x)
-       16.           ├─x[0]
-       17.           └─dat:::`[.DataFrame`(x, 0)
-       18.             └─dat:::handleCols(...)
-       19.               └─(function (classes, fdef, mtable) ...
-      
-      [ FAIL 1 | WARN 4 | SKIP 1 | PASS 118 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# designr
-
-<details>
-
-* Version: 0.1.12
-* GitHub: https://github.com/mmrabe/designr
-* Source code: https://github.com/cran/designr
-* Date/Publication: 2021-04-22 14:00:15 UTC
-* Number of recursive dependencies: 102
-
-Run `cloud_details(, "designr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘designr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: factor.design
-    > ### Title: Factorial Designs
-    > ### Aliases: factor.design
-    > 
-    > ### ** Examples
-    > 
-    > # To create an empty design:
-    ...
-      4. │     ├─base::do.call(...)
-      5. │     └─(function (...) ...
-      6. │       └─designr:::na_join(ret, el)
-      7. │         └─base::cbind(...)
-      8. │           └─tibble:::cbind(deparse.level, ...)
-      9. │             └─vctrs::vec_cbind(!!!list(...))
-     10. └─vctrs::stop_incompatible_size(...)
-     11.   └─vctrs:::stop_incompatible(...)
-     12.     └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 47 marked UTF-8 strings
-    ```
-
 # drake
 
 <details>
@@ -236,17 +150,17 @@ Run `cloud_details(, "drake")` for more info
       Running ‘testthat.R’
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      ── 5. Error (test-8-decorated-storr.R:264:3): flow with rds format ─────────────
-      Error: Can't combine `..1$command` <character> and `..2$command` <list>.
       Backtrace:
-        1. drake::drake_plan(...) test-8-decorated-storr.R:264:2
-        2. drake:::parse_custom_plan_columns(plan, envir = envir)
-        7. tibble:::rbind(deparse.level, ...)
-        8. vctrs::vec_rbind(!!!list(...))
-       10. vctrs::vec_default_ptype2(...)
-       11. vctrs::stop_incompatible_type(...)
-       12. vctrs:::stop_incompatible(...)
-       13. vctrs:::stop_vctrs(...)
+       1. drake::drake_plan(...) test-7-dsl.R:404:2
+       2. drake:::transform_plan_(...)
+       3. drake:::convert_splits_to_maps(plan)
+      
+      ── 3. Error (test-7-dsl.R:1328:3): row order does not matter ───────────────────
+      Error: object of type 'symbol' is not subsettable
+      Backtrace:
+       1. drake::drake_plan(...) test-7-dsl.R:1328:2
+       2. drake:::transform_plan_(...)
+       3. drake:::convert_splits_to_maps(plan)
       
       ══ DONE ════════════════════════════════════════════════════════════════════════
       Error: Test failures
@@ -366,50 +280,9 @@ Run `cloud_details(, "egor")` for more info
        8.     └─egor:::plot_one_ego_graph(...)
        9.       └─igraph::plot.igraph(...)
       
-      [ FAIL 6 | WARN 1 | SKIP 0 | PASS 211 ]
+      [ FAIL 7 | WARN 1 | SKIP 0 | PASS 210 ]
       Error: Test failures
       Execution halted
-    ```
-
-# ExpertChoice
-
-<details>
-
-* Version: 0.2.0
-* GitHub: https://github.com/JedStephens/ExpertChoice
-* Source code: https://github.com/cran/ExpertChoice
-* Date/Publication: 2020-04-03 14:30:02 UTC
-* Number of recursive dependencies: 53
-
-Run `cloud_details(, "ExpertChoice")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ExpertChoice-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: check_overshadow
-    > ### Title: Check Overshadow - Pareto Dominate Solutions
-    > ### Aliases: check_overshadow
-    > 
-    > ### ** Examples
-    > 
-    > #See Step 7 of the Practical Introduction to ExpertChoice Vignette.
-    ...
-      2.   ├─base::duplicated(...)
-      3.   └─base::rbind(dplyr::as_tibble(fractional_factorial_design), dplyr::as_tibble(full_factorial))
-      4.     └─tibble:::rbind(deparse.level, ...)
-      5.       └─vctrs::vec_rbind(!!!list(...))
-      6.         └─(function () ...
-      7.           └─vctrs::vec_default_ptype2(...)
-      8.             └─vctrs::stop_incompatible_type(...)
-      9.               └─vctrs:::stop_incompatible(...)
-     10.                 └─vctrs:::stop_vctrs(...)
-    Execution halted
     ```
 
 # fgeo.tool
@@ -542,119 +415,6 @@ Run `cloud_details(, "geonet")` for more info
     New names:
     ```
 
-# ggiraph
-
-<details>
-
-* Version: 0.7.10
-* GitHub: https://github.com/davidgohel/ggiraph
-* Source code: https://github.com/cran/ggiraph
-* Date/Publication: 2021-05-19 16:50:04 UTC
-* Number of recursive dependencies: 99
-
-Run `cloud_details(, "ggiraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ggiraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: annotate_interactive
-    > ### Title: Create interactive annotations
-    > ### Aliases: annotate_interactive
-    > 
-    > ### ** Examples
-    > 
-    > # add interactive annotation to a ggplot -------
-    ...
-      7. │       └─base::lapply(def_fonts, font_family_exists)
-      8. │         └─ggiraph:::FUN(X[[i]], ...)
-      9. │           └─ggiraph:::fortify_font_db()
-     10. │             └─base::rbind(db_sys, db_reg)
-     11. │               └─tibble:::rbind(deparse.level, ...)
-     12. │                 └─vctrs::vec_rbind(!!!list(...))
-     13. └─vctrs::stop_incompatible_type(...)
-     14.   └─vctrs:::stop_incompatible(...)
-     15.     └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        3. │   └─ggiraph:::default_fontname()
-        4. │     ├─base::unlist(lapply(def_fonts, font_family_exists))
-        5. │     └─base::lapply(def_fonts, font_family_exists)
-        6. │       └─ggiraph:::FUN(X[[i]], ...)
-        7. │         └─ggiraph:::fortify_font_db()
-        8. │           └─base::rbind(db_sys, db_reg)
-        9. │             └─tibble:::rbind(deparse.level, ...)
-       10. │               └─vctrs::vec_rbind(!!!list(...))
-       11. └─vctrs::stop_incompatible_type(...)
-       12.   └─vctrs:::stop_incompatible(...)
-       13.     └─vctrs:::stop_vctrs(...)
-      
-      [ FAIL 28 | WARN 0 | SKIP 0 | PASS 192 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.9Mb
-      sub-directories of 1Mb or more:
-        libs   6.5Mb
-    ```
-
-# ggiraphExtra
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/cardiomoon/ggiraphExtra
-* Source code: https://github.com/cran/ggiraphExtra
-* Date/Publication: 2020-10-06 07:00:02 UTC
-* Number of recursive dependencies: 94
-
-Run `cloud_details(, "ggiraphExtra")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ggiraphExtra-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: ggAncova
-    > ### Title: Make an interactive plot for an ANCOVA model
-    > ### Aliases: ggAncova ggAncova.default ggAncova.formula ggAncova.lm
-    > 
-    > ### ** Examples
-    > 
-    > require(moonBook)
-    ...
-     11. │             └─base::lapply(def_fonts, font_family_exists)
-     12. │               └─ggiraph:::FUN(X[[i]], ...)
-     13. │                 └─ggiraph:::fortify_font_db()
-     14. │                   └─base::rbind(db_sys, db_reg)
-     15. │                     └─tibble:::rbind(deparse.level, ...)
-     16. │                       └─vctrs::vec_rbind(!!!list(...))
-     17. └─vctrs::stop_incompatible_type(...)
-     18.   └─vctrs:::stop_incompatible(...)
-     19.     └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
 # ggspatial
 
 <details>
@@ -775,57 +535,19 @@ Run `cloud_details(, "grobblR")` for more info
       Running ‘testthat.R’
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
+        9. │ └─base::unlist(list(...))
+       10. ├─grobblR::grob_col(.)
+       11. │ └─grob_col_class$new(...)
+       12. │   └─grobblR:::initialize(...)
+       13. ├─grobblR::alter_at(., ~"bold", columns = 1, aesthetic = "font_face")
        14. │ └─methods::is(grob_object, "grob_matrix_object")
        15. └─grobblR::grob_matrix(.)
        16.   └─grobblR:::column_names_to_row(grob_object)
        17.     └─base::rbind(column_names, mat)
        18.       └─tibble:::rbind(deparse.level, ...)
-       19.         └─vctrs::vec_rbind(!!!list(...))
-       20.           └─(function () ...
-       21.             └─vctrs::vec_default_ptype2(...)
-       22.               └─vctrs::stop_incompatible_type(...)
-       23.                 └─vctrs:::stop_incompatible(...)
-       24.                   └─vctrs:::stop_vctrs(...)
+       19.         └─base::NextMethod("rbind")
       
       [ FAIL 9 | WARN 0 | SKIP 0 | PASS 12 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# groupr
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/ngriffiths21/groupr
-* Source code: https://github.com/cran/groupr
-* Date/Publication: 2020-10-14 12:30:06 UTC
-* Number of recursive dependencies: 57
-
-Run `cloud_details(, "groupr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        4. ├─groupr:::pivot_cg(testb3, "is_ok")
-        5. │ ├─dplyr::group_modify(x, ~col_grps(., rows))
-        6. │ └─dplyr:::group_modify.data.frame(x, ~col_grps(., rows))
-        7. │   └─groupr:::.f(.data, group_keys(.data), ...)
-        8. │     └─groupr:::col_grps(., rows)
-        9. │       └─base::cbind(...)
-       10. │         └─tibble:::cbind(deparse.level, ...)
-       11. │           └─vctrs::vec_cbind(!!!list(...))
-       12. └─vctrs::stop_incompatible_size(...)
-       13.   └─vctrs:::stop_incompatible(...)
-       14.     └─vctrs:::stop_vctrs(...)
-      
-      [ FAIL 3 | WARN 0 | SKIP 0 | PASS 18 ]
       Error: Test failures
       Execution halted
     ```
@@ -898,44 +620,6 @@ Run `cloud_details(, "HEDA")` for more info
     > 
     > hpk_flow_cg <- ReversalCount(hpk_flow_cln)
     New names:
-    ```
-
-# heemod
-
-<details>
-
-* Version: 0.14.2
-* GitHub: https://github.com/pierucci/heemod
-* Source code: https://github.com/cran/heemod
-* Date/Publication: 2021-01-22 13:00:02 UTC
-* Number of recursive dependencies: 117
-
-Run `cloud_details(, "heemod")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        3. │ └─base::rbind(should_be_fits_3, direct_dist_def_3)
-        4. │   └─tibble:::rbind(deparse.level, ...)
-        5. │     └─vctrs::vec_rbind(!!!list(...))
-        6. │       └─(function () ...
-        7. │         └─vctrs::vec_default_ptype2(...)
-        8. │           └─vctrs::stop_incompatible_type(...)
-        9. │             └─vctrs:::stop_incompatible(...)
-       10. │               └─vctrs:::stop_vctrs(...)
-       11. ├─dplyr::ungroup(.)
-       12. ├─dplyr::do(., fit = join_fits_across_time(.data))
-       13. └─dplyr::group_by(., .data$.strategy, .data$.type)
-      
-      [ FAIL 1 | WARN 6 | SKIP 0 | PASS 503 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # htmlTable
@@ -1096,8 +780,8 @@ Run `cloud_details(, "impactr")` for more info
       ── Failure (test-read_acc.R:94:3): read_acc() works with date format separated by `/` ──
       `sep_dash` (`actual`) not equal to `sep_slash` (`expected`).
       
-      `attr(actual, 'problems')` is <pointer: 0x55b404ea54b0>
-      `attr(expected, 'problems')` is <pointer: 0x55b408620840>
+      `attr(actual, 'problems')` is <pointer: 0x561158aaf810>
+      `attr(expected, 'problems')` is <pointer: 0x56115ba39510>
       
       [ FAIL 9 | WARN 6 | SKIP 4 | PASS 53 ]
       Error: Test failures
@@ -1382,77 +1066,6 @@ Run `cloud_details(, "msigdbr")` for more info
         R   5.8Mb
     ```
 
-# neonstore
-
-<details>
-
-* Version: 0.4.3
-* GitHub: NA
-* Source code: https://github.com/cran/neonstore
-* Date/Publication: 2021-04-27 20:00:02 UTC
-* Number of recursive dependencies: 80
-
-Run `cloud_details(, "neonstore")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘neonstore-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: neon_citation
-    > ### Title: Generate the appropriate citation for your data
-    > ### Aliases: neon_citation
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-      6.           ├─base::do.call(rbind, x)
-      7.           └─(function (..., deparse.level = 1) ...
-      8.             └─tibble:::rbind(deparse.level, ...)
-      9.               └─vctrs::vec_rbind(!!!list(...))
-     10.                 └─(function () ...
-     11.                   └─vctrs::vec_default_ptype2(...)
-     12.                     └─vctrs::stop_incompatible_type(...)
-     13.                       └─vctrs:::stop_incompatible(...)
-     14.                         └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        4.       └─neonstore::neon_filename_parser(files)
-        5.         └─neonstore:::ragged_bind(...)
-        6.           ├─base::do.call(rbind, x)
-        7.           └─(function (..., deparse.level = 1) ...
-        8.             └─tibble:::rbind(deparse.level, ...)
-        9.               └─vctrs::vec_rbind(!!!list(...))
-       10.                 └─(function () ...
-       11.                   └─vctrs::vec_default_ptype2(...)
-       12.                     └─vctrs::stop_incompatible_type(...)
-       13.                       └─vctrs:::stop_incompatible(...)
-       14.                         └─vctrs:::stop_vctrs(...)
-      
-      [ FAIL 3 | WARN 0 | SKIP 18 | PASS 16 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘rhdf5’
-    ```
-
 # OncoBayes2
 
 <details>
@@ -1723,54 +1336,6 @@ Run `cloud_details(, "PKNCA")` for more info
       Execution halted
     ```
 
-# prettyglm
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/prettyglm
-* Date/Publication: 2021-06-24 07:40:05 UTC
-* Number of recursive dependencies: 127
-
-Run `cloud_details(, "prettyglm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘prettyglm-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: pretty_relativities
-    > ### Title: pretty_relativities
-    > ### Aliases: pretty_relativities
-    > 
-    > ### ** Examples
-    > 
-    > library(dplyr)
-    ...
-      3.   │ └─base::withCallingHandlers(...)
-      4.   └─base::rbind(count_df_all, count_df)
-      5.     └─tibble:::rbind(deparse.level, ...)
-      6.       └─vctrs::vec_rbind(!!!list(...))
-      7.         └─(function () ...
-      8.           └─vctrs::vec_default_ptype2(...)
-      9.             └─vctrs::stop_incompatible_type(...)
-     10.               └─vctrs:::stop_incompatible(...)
-     11.                 └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘parsnip’
-    ```
-
 # psychmeta
 
 <details>
@@ -1909,44 +1474,6 @@ Run `cloud_details(, "reproducer")` for more info
     > 
     > rrData = reproduceTablesOfPaperMetaAnalysisForFamiliesOfExperiments()
     New names:
-    ```
-
-# RKorAPClient
-
-<details>
-
-* Version: 0.6.1
-* GitHub: https://github.com/KorAP/RKorAPClient
-* Source code: https://github.com/cran/RKorAPClient
-* Date/Publication: 2021-03-12 22:10:11 UTC
-* Number of recursive dependencies: 112
-
-Run `cloud_details(, "RKorAPClient")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Backtrace:
-          █
-       1. ├─`%>%`(...) test-demos.R:89:2
-       2. ├─RKorAPClient::hc_freq_by_year_ci(.)
-       3. │ └─`%>%`(...)
-       4. ├─base::cbind(...)
-       5. │ └─tibble:::cbind(deparse.level, ...)
-       6. │   └─vctrs::vec_cbind(!!!list(...))
-       7. └─vctrs::stop_incompatible_size(...)
-       8.   └─vctrs:::stop_incompatible(...)
-       9.     └─vctrs:::stop_vctrs(...)
-      
-      [ FAIL 3 | WARN 0 | SKIP 0 | PASS 47 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # rubias
@@ -2472,156 +1999,6 @@ Run `cloud_details(, "twoxtwo")` for more info
       Execution halted
     ```
 
-# VarBundle
-
-<details>
-
-* Version: 0.3.0
-* GitHub: NA
-* Source code: https://github.com/cran/VarBundle
-* Date/Publication: 2018-08-17 08:40:10 UTC
-* Number of recursive dependencies: 57
-
-Run `cloud_details(, "VarBundle")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-           █
-        1. └─VarBundle::varbundle(ll) test-varbundle.R:40:2
-        2.   ├─base::do.call(rbind, lapply(1:length(x), create_df))
-        3.   └─(function (..., deparse.level = 1) ...
-        4.     └─tibble:::rbind(deparse.level, ...)
-        5.       └─vctrs::vec_rbind(!!!list(...))
-        6.         └─(function () ...
-        7.           └─vctrs::vec_default_ptype2(...)
-        8.             └─vctrs::stop_incompatible_type(...)
-        9.               └─vctrs:::stop_incompatible(...)
-       10.                 └─vctrs:::stop_vctrs(...)
-      
-      [ FAIL 3 | WARN 0 | SKIP 0 | PASS 38 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# visR
-
-<details>
-
-* Version: 0.2.0
-* GitHub: https://github.com/openpharma/visR
-* Source code: https://github.com/cran/visR
-* Date/Publication: 2021-06-14 09:00:02 UTC
-* Number of recursive dependencies: 123
-
-Run `cloud_details(, "visR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘visR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_tableone
-    > ### Title: Calculate summary statistics
-    > ### Aliases: get_tableone get_tableone.default
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-      6. │   └─tibble:::rbind(deparse.level, ...)
-      7. │     └─vctrs::vec_rbind(!!!list(...))
-      8. │       └─(function () ...
-      9. │         └─vctrs::vec_default_ptype2(...)
-     10. │           └─vctrs::stop_incompatible_type(...)
-     11. │             └─vctrs:::stop_incompatible(...)
-     12. │               └─vctrs:::stop_vctrs(...)
-     13. ├─dplyr::select(., variable, statistic, everything())
-     14. └─dplyr::rename(., statistic = summary_id)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        8. │ ├─`%>%`(...)
-        9. │ └─base::rbind(data_ns, data_summary)
-       10. │   └─tibble:::rbind(deparse.level, ...)
-       11. │     └─vctrs::vec_rbind(!!!list(...))
-       12. │       └─(function () ...
-       13. │         └─vctrs::vec_default_ptype2(...)
-       14. │           └─vctrs::stop_incompatible_type(...)
-       15. │             └─vctrs:::stop_incompatible(...)
-       16. │               └─vctrs:::stop_vctrs(...)
-       17. ├─dplyr::select(., variable, statistic, everything())
-       18. └─dplyr::rename(., statistic = summary_id)
-      
-      [ FAIL 9 | WARN 0 | SKIP 12 | PASS 527 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘parcats’
-      All declared Imports should be used.
-    ```
-
-# vlda
-
-<details>
-
-* Version: 1.1.5
-* GitHub: https://github.com/pnuwon/vlda
-* Source code: https://github.com/cran/vlda
-* Date/Publication: 2020-06-26 08:50:02 UTC
-* Number of recursive dependencies: 47
-
-Run `cloud_details(, "vlda")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘vlda-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: vlda_plot
-    > ### Title: VLDA Plot
-    > ### Aliases: vlda_plot
-    > ### Keywords: Plot Visualzation
-    > 
-    > ### ** Examples
-    > 
-    ...
-      9. │           └─base::lapply(def_fonts, font_family_exists)
-     10. │             └─ggiraph:::FUN(X[[i]], ...)
-     11. │               └─ggiraph:::fortify_font_db()
-     12. │                 └─base::rbind(db_sys, db_reg)
-     13. │                   └─tibble:::rbind(deparse.level, ...)
-     14. │                     └─vctrs::vec_rbind(!!!list(...))
-     15. └─vctrs::stop_incompatible_type(...)
-     16.   └─vctrs:::stop_incompatible(...)
-     17.     └─vctrs:::stop_vctrs(...)
-    Execution halted
-    ```
-
 # workflowsets
 
 <details>
@@ -2656,50 +2033,9 @@ Run `cloud_details(, "workflowsets")` for more info
        13.   └─tune:::collect_metrics.tune_results(.x[[i]], ...)
        14.     └─tune::estimate_tune_results(x)
       
-      [ FAIL 1 | WARN 30 | SKIP 6 | PASS 326 ]
+      [ FAIL 1 | WARN 27 | SKIP 6 | PASS 326 ]
       Error: Test failures
       Execution halted
-    ```
-
-# wpa
-
-<details>
-
-* Version: 1.6.0
-* GitHub: https://github.com/microsoft/wpa
-* Source code: https://github.com/cran/wpa
-* Date/Publication: 2021-07-06 09:30:02 UTC
-* Number of recursive dependencies: 116
-
-Run `cloud_details(, "wpa")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘wpa-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: collaboration_rank
-    > ### Title: Collaboration Ranking
-    > ### Aliases: collaboration_rank collab_rank
-    > 
-    > ### ** Examples
-    > 
-    > # Return rank table
-    ...
-      2.   └─wpa::create_rank(...)
-      3.     └─base::rbind(results, table1)
-      4.       └─tibble:::rbind(deparse.level, ...)
-      5.         └─vctrs::vec_rbind(!!!list(...))
-      6.           └─(function () ...
-      7.             └─vctrs::vec_default_ptype2(...)
-      8.               └─vctrs::stop_incompatible_type(...)
-      9.                 └─vctrs:::stop_incompatible(...)
-     10.                   └─vctrs:::stop_vctrs(...)
-    Execution halted
     ```
 
 # xpose4
