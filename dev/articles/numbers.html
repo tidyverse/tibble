@@ -171,8 +171,7 @@
 </code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">old</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>pillar.sigfig <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">old</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>pillar.sigfig <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">123.4567</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
@@ -182,8 +181,7 @@
 </code></pre>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Restore old options, see also rlang::local_options() for a more elegant way</span>
+<code class="sourceCode R"><span class="co"># Restore old options, see also rlang::local_options() for a more elegant way</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old</span><span class="op">)</span></code></pre></div>
 <p>This changes the display of all columns. Read on to see how too specify display options on a column-by-column basis.</p>
 </div>
@@ -199,8 +197,7 @@
 </code></pre>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>
   x4 <span class="op">=</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">12</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,
   x1 <span class="op">=</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">12</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
   usd <span class="op">=</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">12</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span>,
