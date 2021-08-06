@@ -31,14 +31,12 @@ tibble(x = 123.4567)
 #>       x
 #>   <dbl>
 #> 1  123.
-
 old <- options(pillar.sigfig = 7)
 tibble(x = 123.4567)
 #> # A tibble: 1 x 1
 #>          x
 #>      <dbl>
 #> 1 123.4567
-
 # Restore old options, see also rlang::local_options() for a more elegant way
 options(old)
 ```
@@ -58,7 +56,6 @@ Similarly, `char()` allows customizing the display of character columns.
 num(-1:3, notation = "sci")
 #> <pillar_num(sci)[5]>
 #> [1] -1e0  0    1e0  2e0  3e0
-
 tibble(
   x4 = num(8:12 * 100 + 0.5, digits = 4),
   x1 = num(8:12 * 100 + 0.5, digits = -1),
