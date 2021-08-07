@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.4
+
+- Same as previous version.
+
+
 # tibble 3.1.3.9003
 
 - `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
