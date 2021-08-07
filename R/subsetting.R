@@ -725,7 +725,7 @@ result_vectbl_wrap_rhs <- function(value) {
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  if (length(value) > 0L && (nrow != 1L || vec_size(value[[1L]]) != 1L)) {
+  if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
         if (!is.null(value[[j]])) {

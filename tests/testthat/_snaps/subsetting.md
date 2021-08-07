@@ -534,8 +534,11 @@
       i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1, ] <- list(a = 1, b = 1:3)
-    Error <vctrs_error_incompatible_size>
-      Can't recycle input of size 2 to size 3.
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1:2, ] <- list(a = 1:3, b = 1)
     Error <tibble_error_assign_incompatible_size>
