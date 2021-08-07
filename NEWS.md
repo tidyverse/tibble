@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.3.9003
+
+- `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
+- Move `vignette("digits")`, `vignette("numbers")`, `?num` and `?char` from the pillar package here (#913).
+- Replace `iris` by `trees` (#943).
+- Various documentation improvements.
+
+
 # tibble 3.1.3.9002
 
 - `x[j] <- list(name = value)` uses name repair when new columns are created (#929). 
