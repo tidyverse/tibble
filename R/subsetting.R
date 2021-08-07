@@ -440,7 +440,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
     if (is.null(j)) {
-      value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
       xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
@@ -450,7 +449,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
         j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
       }
       new <- which(j > length(x))
-      value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
       if (has_length(new)) {
