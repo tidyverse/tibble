@@ -8,6 +8,8 @@ jobs:
     defaults:
       run:
         shell: Rscript {0}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
