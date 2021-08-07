@@ -129,7 +129,7 @@ in a list." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
         </div>
       </div>
     </div>
@@ -152,7 +152,13 @@ in a list." />
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/invariants.html">Invariants</a>
+      <a href="../articles/invariants.html">Comparing behavior with data frames</a>
+    </li>
+    <li>
+      <a href="../articles/numbers.html">Controlling display of numbers</a>
+    </li>
+    <li>
+      <a href="../articles/digits.html">Comparing display with data frames</a>
     </li>
   </ul>
 </li>
@@ -333,18 +339,18 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-in'><span class='co'># Columns are available in subsequent expressions:</span></span>
 <span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>x</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 10 × 2</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         x      y</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 0.512  1.02  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 0.836  1.67  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 0.709  1.42  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 0.874  1.75  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 0.011<span style='text-decoration: underline;'>5</span> 0.023<span style='text-decoration: underline;'>0</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 0.888  1.78  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 0.996  1.99  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 0.500  1.00  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 0.359  0.718 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 0.775  1.55  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         x     y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 0.900  1.80 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 0.617  1.23 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 0.704  1.41 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 0.546  1.09 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 0.807  1.61 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 0.184  0.368</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 0.725  1.45 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 0.623  1.25 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 0.057<span style='text-decoration: underline;'>4</span> 0.115</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 0.636  1.27 </span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># tibble() never coerces its inputs,</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span><span class='op'>)</span></span>
@@ -454,29 +460,28 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>     2     5     8     5</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     3     6     9     6</span>
 <span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span></span>
-<span class='r-in'>  a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>,</span>
-<span class='r-in'>  b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>,</span>
-<span class='r-in'>  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-in'>  a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,</span>
+<span class='r-in'>  b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>,</span>
+<span class='r-in'>  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>trees</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 3</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       a b[,1]  [,2]  [,3]  [,4] c[,"Sepal.Length"] [,"Sepal.Width"]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     1     1     0     0     0             0.686           -<span style='color: #BB0000;'>0.042</span><span style='color: #BB0000; text-decoration: underline;'>4</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>     2     0     1     0     0            -<span style='color: #BB0000;'>0.042</span><span style='color: #BB0000; text-decoration: underline;'>4</span>           0.190 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     3     0     0     1     0             1.27            -<span style='color: #BB0000;'>0.330</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span>     4     0     0     0     1             0.516           -<span style='color: #BB0000;'>0.122</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a b[,1]  [,2]  [,3] c[,"Girth"] [,"Height"] [,"Volume"]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     1     1     0     0       1           0.519       0.967</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>     2     0     1     0       0.519       1           0.598</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     3     0     0     1       0.967       0.598       1    </span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># data can not contain POSIXlt columns, or tibbles or matrices</span></span>
 <span class='r-in'><span class='co'># with incompatible number of rows:</span></span>
 <span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></span><span class='op'>(</span><span class='st'>"2000/01/01"</span>, <span class='st'>"%x"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 1</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   y                  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> <span style='color: #BB0000;'>NA</span>                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   y     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> <span style='color: #BB0000;'>NA</span>    </span>
 <span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'>tibble</span><span class='op'>(</span>c <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> * Size 3: Existing data.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> * Size 4: Column `b`.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 3: Existing data.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 4: Column `b`.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>ℹ</span> Only values of size one are recycled.</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Use := to create columns with names that start with a dot:</span></span>
@@ -522,7 +527,7 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-in'></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Use tibble_row() to construct a one-row tibble:</span></span>
-<span class='r-in'><span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Petal.Width</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Height</span> <span class='op'>~</span> <span class='va'>Girth</span> <span class='op'>+</span> <span class='va'>Volume</span>, data <span class='op'>=</span> <span class='va'>trees</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       a lm    </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span></span>

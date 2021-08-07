@@ -106,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
         </div>
       </div>
     </div>
@@ -129,7 +129,13 @@
       <a href="../articles/types.html">Data types</a>
     </li>
     <li>
-      <a href="../articles/invariants.html">Invariants</a>
+      <a href="../articles/invariants.html">Comparing behavior with data frames</a>
+    </li>
+    <li>
+      <a href="../articles/numbers.html">Controlling display of numbers</a>
+    </li>
+    <li>
+      <a href="../articles/digits.html">Comparing display with data frames</a>
     </li>
   </ul>
 </li>
@@ -193,9 +199,44 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-314" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.4">
+<a href="#tibble-314" class="anchor" aria-hidden="true"></a>tibble 3.1.4<small> Unreleased </small></h1>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>
+<code>as.data.frame.tbl_df()</code> strips inner column names (<a href='https://github.com/tidyverse/tibble/issues/837'>#837</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> allows omitting the <code>nrow</code> argument again (<a href='https://github.com/tidyverse/tibble/issues/781'>#781</a>).</li>
+</ul></div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
+<ul><li>Move <code><a href="../articles/digits.html">vignette("digits")</a></code>, <code><a href="../articles/numbers.html">vignette("numbers")</a></code>, <code><a href="../reference/num.html">?num</a></code> and <code><a href="../reference/char.html">?char</a></code> from the pillar package here (<a href='https://github.com/tidyverse/tibble/issues/913'>#913</a>).</li>
+<li>Replace <code>iris</code> by <code>trees</code> (<a href='https://github.com/tidyverse/tibble/issues/943'>#943</a>).</li>
+<li>Various documentation improvements.</li>
+<li>New <code><a href="../reference/tibble_options.html">?tibble_options</a></code> help page (<a href='https://github.com/tidyverse/tibble/issues/912'>#912</a>).</li>
+</ul></div>
+<div id="performance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performance" class="anchor" aria-hidden="true"></a>Performance</h2>
+<ul><li>
+<code>x[i, j] &lt;- one_row_value</code> avoids explicit recycling of the right-hand side, the recycling happens implicitly in <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vctrs::vec_assign()</a></code> for performance (<a href='https://github.com/tidyverse/tibble/issues/922'>#922</a>).</li>
+</ul></div>
+<div id="internal" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal" class="anchor" aria-hidden="true"></a>Internal</h2>
+<ul><li>Vignettes are now tested with a snapshot test (<a href='https://github.com/tidyverse/tibble/issues/919'>#919</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> uses <code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code> internally (<a href='https://github.com/tidyverse/tibble/issues/726'>#726</a>, <a href='https://github.com/DavisVaughan'>@DavisVaughan</a>).</li>
+<li>Adapt to pillar 1.6.2.</li>
+<li>Fix tests for compatibility with pillar 1.6.2.</li>
+</ul></div>
+</div>
     <div id="tibble-313" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.3">
-<a href="#tibble-313" class="anchor" aria-hidden="true"></a>tibble 3.1.3<small> Unreleased </small></h1>
+<a href="#tibble-313" class="anchor" aria-hidden="true"></a>tibble 3.1.3<small> 2021-07-23 </small></h1>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
@@ -204,9 +245,9 @@
 <li>
 <code>[[&lt;-()</code> supports symbols (<a href='https://github.com/tidyverse/tibble/issues/893'>#893</a>).</li>
 </ul></div>
-<div id="features" class="section level2">
+<div id="features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-1" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> supports arbitrary vectors (<a href='https://github.com/tidyverse/tibble/issues/797'>#797</a>).</li>
 <li>
@@ -216,9 +257,9 @@
 <li>
 <code><a href="../reference/new_tibble.html">new_tibble()</a></code> is now faster (<a href='https://github.com/tidyverse/tibble/issues/901'>#901</a>, <a href='https://github.com/mgirlich'>@mgirlich</a>).</li>
 </ul></div>
-<div id="internal" class="section level2">
+<div id="internal-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-1" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li>Establish compatibility with rlang &gt; 0.4.11 (<a href='https://github.com/tidyverse/tibble/issues/908'>#908</a>).</li>
 <li>Use <code><a href="https://pillar.r-lib.org/reference/dim_desc.html" class="external-link">pillar::dim_desc()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/859'>#859</a>).</li>
 <li>Establish compatibility with testthat &gt; 3.0.3 (<a href='https://github.com/tidyverse/tibble/issues/896'>#896</a>, <a href='https://github.com/lionel-'>@lionel-</a>).</li>
@@ -234,7 +275,7 @@
 <h1 class="page-header" data-toc-text="3.1.1">
 <a href="#tibble-311" class="anchor" aria-hidden="true"></a>tibble 3.1.1<small> 2021-04-18 </small></h1>
 <ul><li>
-<code><a href="https://pillar.r-lib.org/reference/num.html" class="external-link">num()</a></code> and <code><a href="https://pillar.r-lib.org/reference/char.html" class="external-link">char()</a></code> are reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/880'>#880</a>).</li>
+<code><a href="../reference/num.html">num()</a></code> and <code><a href="../reference/char.html">char()</a></code> are reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/880'>#880</a>).</li>
 <li>
 <code><a href="../reference/tribble.html">tribble()</a></code> and <code><a href="../reference/frame_matrix.html">frame_matrix()</a></code> give an error if values are named (<a href='https://github.com/tidyverse/tibble/issues/871'>#871</a>, <a href='https://github.com/lorenzwalthert'>@lorenzwalthert</a>).</li>
 <li>Document <code>cli.num_colors</code> option (<a href='https://github.com/tidyverse/tibble/issues/410'>#410</a>).</li>
@@ -249,17 +290,17 @@
 <ul><li><p><code><a href="../reference/rownames.html">has_rownames()</a></code> now works correctly for data frames with a <code>"row.names"</code> attribute malformed due to a problem in <code><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/852'>#852</a>).</p></li>
 <li><p><code>tbl[FALSE, "column"] &lt;- x</code> adds new column again (<a href='https://github.com/tidyverse/tibble/issues/846'>#846</a>).</p></li>
 </ul></div>
-<div id="features-1" class="section level2">
+<div id="features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-1" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-2" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li><p>Importing pillar 1.5.0, cli and crayon are now suggested packages (<a href='https://github.com/tidyverse/tibble/issues/475'>#475</a>).</p></li>
 <li><p><code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">size_sum()</a></code> is now reexported from pillar (<a href='https://github.com/tidyverse/tibble/issues/850'>#850</a>, <a href='https://github.com/topepo'>@topepo</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> hints more often to use the <code>.name_repair</code> argument if column names are invalid (<a href='https://github.com/tidyverse/tibble/issues/855'>#855</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble.table()</a></code> mentions <code>.name_repair</code> argument in the error message (<a href='https://github.com/tidyverse/tibble/issues/839'>#839</a>).</p></li>
 </ul></div>
-<div id="internal-1" class="section level2">
+<div id="internal-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-1" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-2" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li><p>Remove compatibility code for pillar &lt; 1.5.0 (<a href='https://github.com/tidyverse/tibble/issues/861'>#861</a>).</p></li>
 <li><p>Moved most functions to the “stable” lifecycle (<a href='https://github.com/tidyverse/tibble/issues/860'>#860</a>).</p></li>
 </ul></div>
@@ -312,9 +353,9 @@
 <li><p><code><a href="../reference/add_column.html">add_column()</a></code> works without warning for 0-column data frames (<a href='https://github.com/tidyverse/tibble/issues/786'>#786</a>).</p></li>
 <li><p><code><a href="../reference/tribble.html">tribble()</a></code> now better handles named inputs (<a href='https://github.com/tidyverse/tibble/issues/775'>#775</a>) and objects of non-vtrs classes like <code>lubridate::Period</code> (<a href='https://github.com/tidyverse/tibble/issues/784'>#784</a>) and <code><a href="https://renkun-ken.github.io/formattable/reference/formattable.html" class="external-link">formattable::formattable</a></code> (<a href='https://github.com/tidyverse/tibble/issues/785'>#785</a>).</p></li>
 </ul></div>
-<div id="performance" class="section level2">
+<div id="performance-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance" class="anchor" aria-hidden="true"></a>Performance</h2>
+<a href="#performance-1" class="anchor" aria-hidden="true"></a>Performance</h2>
 <ul><li><p>Subsetting and subassignment are faster (<a href='https://github.com/tidyverse/tibble/issues/780'>#780</a>, <a href='https://github.com/tidyverse/tibble/issues/790'>#790</a>, <a href='https://github.com/tidyverse/tibble/issues/794'>#794</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null()</a></code> is preferred over <code>is_null()</code> for speed.</p></li>
 <li><p>Implement continuous benchmarking (<a href='https://github.com/tidyverse/tibble/issues/793'>#793</a>).</p></li>
@@ -383,7 +424,7 @@
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
-<ul><li><p><code><a href="../reference/tibble.html">tibble()</a></code> now splices anonymous data frames, <code>tibble(tibble(a = 1), b = a)</code> is equivalent to <code>tibble(a = 1, b = a)</code>. This means that <code>tibble(iris)</code> now has five columns, use <code>tibble(iris = iris)</code> if the intention is to create a packed data frame (<a href='https://github.com/tidyverse/tibble/issues/581'>#581</a>).</p></li>
+<ul><li><p><code><a href="../reference/tibble.html">tibble()</a></code> now splices anonymous data frames, <code>tibble(tibble(a = 1), b = a)</code> is equivalent to <code>tibble(a = 1, b = a)</code>. This means that <code>tibble(trees)</code> now has three columns, use <code>tibble(trees = trees)</code> if the intention is to create a packed data frame (<a href='https://github.com/tidyverse/tibble/issues/581'>#581</a>).</p></li>
 <li><p>The <code>name-repair</code> help topic is gone, refer to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">?vctrs::vec_as_names</a></code> instead.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression()</a></code> columns are converted to lists as a workaround for lacking support in vctrs (<a href='https://github.com/tidyverse/tibble/issues/657'>#657</a>).</p></li>
 <li><p><code><a href="../reference/tribble.html">tribble()</a></code> is now stricter when combining values. All values in a column must be compatible, otherwise an error occurs (<a href='https://github.com/tidyverse/tibble/issues/204'>#204</a>). The criteria for wrapping in a list column are now based on vctrs principles: non-vectors or vectors with <code><a href="https://vctrs.r-lib.org/reference/vec_size.html" class="external-link">vctrs::vec_size()</a></code> unequal 1 are wrapped in lists.</p></li>
@@ -397,9 +438,9 @@
 <li><p>Soft-deprecate <code><a href="../reference/as_tibble.html">as_tibble()</a></code> without arguments (<a href='https://github.com/tidyverse/tibble/issues/683'>#683</a>).</p></li>
 <li><p>Preparing to move <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> and <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> to the pillar package. If your package implements these methods, please import the generics from pillar as soon as they become available there.</p></li>
 </ul></div>
-<div id="features-2" class="section level2">
+<div id="features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-2" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-3" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li><p>Internals now make heavy use of the vctrs package, following most of the invariants defined there. Name repair is the responsibility of vctrs now (<a href='https://github.com/tidyverse/tibble/issues/464'>#464</a>).</p></li>
 <li>
 <p>All errors emitted directly by the package inherit from the <code>"tibble_error"</code> and <code>"rlang_error"</code> classes. In some cases, <code>"vctrs_error"</code> errors may be passed through. The exact subclass is subject to change.</p>
@@ -431,14 +472,14 @@
 <li><p><code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> uses “Rows” and “Columns” instead of “Variables” and “Observations”, because we’re not sure if the data is tidy here (<a href='https://github.com/tidyverse/tibble/issues/614'>#614</a>).</p></li>
 <li><p><code><a href="../reference/view.html">view()</a></code> now uses the created (or passed) title argument (<a href='https://github.com/tidyverse/tibble/issues/610'>#610</a>, <a href='https://github.com/xvrdm'>@xvrdm</a>).</p></li>
 </ul></div>
-<div id="performance-1" class="section level2">
+<div id="performance-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance-1" class="anchor" aria-hidden="true"></a>Performance</h2>
+<a href="#performance-2" class="anchor" aria-hidden="true"></a>Performance</h2>
 <ul><li>Construction and subsetting of large data frames is faster now (<a href='https://github.com/tidyverse/tibble/issues/717'>#717</a>, <a href='https://github.com/romainfrancois'>@romainfrancois</a>).</li>
 </ul></div>
-<div id="internal-2" class="section level2">
+<div id="internal-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-2" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-3" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li><p>Import lifecycle package (<a href='https://github.com/tidyverse/tibble/issues/669'>#669</a>).</p></li>
 <li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> removes redundant subclasses from the <code>"class"</code> attribute.</p></li>
 <li><p>Using classed conditions. All classes start with <code>"tibble_error_"</code> and also contain <code>"tibble_error"</code> (<a href='https://github.com/tidyverse/tibble/issues/659'>#659</a>).</p></li>
@@ -561,9 +602,9 @@
 <li><p><code><a href="../reference/formatting.html">print.tbl_df()</a></code> with a negative value for <code>n</code> behaves as if <code>n</code> was omitted (<a href='https://github.com/tidyverse/tibble/issues/371'>#371</a>).</p></li>
 <li><p>Fixed output for extra column names that contain spaces.</p></li>
 </ul></div>
-<div id="internal-3" class="section level2">
+<div id="internal-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-3" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-4" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li><p>Skip dplyr in tests if unavailable (<a href='https://github.com/tidyverse/tibble/issues/420'>#420</a>, <a href='https://github.com/QuLogic'>@QuLogic</a>).</p></li>
 <li><p>Skip mockr in tests if unavailable (<a href='https://github.com/tidyverse/tibble/issues/454'>#454</a>, <a href='https://github.com/Enchufa2'>@Enchufa2</a>).</p></li>
 <li><p>Use <code><a href="https://rdrr.io/pkg/fansi/man/strwrap_ctl.html" class="external-link">fansi::strwrap_ctl()</a></code> instead of own string wrapping routine.</p></li>
@@ -590,18 +631,18 @@
 <li>
 <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> returns its input for zero-column data frames.</li>
 </ul></div>
-<div id="features-3" class="section level2">
+<div id="features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-3" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-4" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code>enframe(NULL)</code> now returns the same as <code>enframe(logical())</code> (<a href='https://github.com/tidyverse/tibble/issues/352'>#352</a>).</li>
 <li>
 <code><a href="../reference/tribble.html">tribble()</a></code> now ignores trailing commas (<a href='https://github.com/tidyverse/tibble/issues/342'>#342</a>, <a href='https://github.com/anhqle'>@anhqle</a>).</li>
 <li>Updated vignettes and website documentation.</li>
 </ul></div>
-<div id="performance-2" class="section level2">
+<div id="performance-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#performance-2" class="anchor" aria-hidden="true"></a>Performance</h2>
+<a href="#performance-3" class="anchor" aria-hidden="true"></a>Performance</h2>
 <ul><li>Faster printing of very wide tibbles (<a href='https://github.com/tidyverse/tibble/issues/360'>#360</a>).</li>
 <li>Faster construction and subsetting for tibbles (<a href='https://github.com/tidyverse/tibble/issues/353'>#353</a>).</li>
 <li>Only call <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> in <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code>, not <code><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol()</a></code>.</li>
@@ -738,9 +779,9 @@
 <li>New <code><a href="../reference/enframe.html">deframe()</a></code> as reverse operation to <code><a href="../reference/enframe.html">enframe()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/146'>#146</a>, <a href='https://github.com/tidyverse/tibble/issues/214'>#214</a>).</li>
 <li>Removed unused dependency on <code>assertthat</code>.</li>
 </ul></div>
-<div id="features-4" class="section level2">
+<div id="features-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-4" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-5" class="anchor" aria-hidden="true"></a>Features</h2>
 <div id="general" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general" class="anchor" aria-hidden="true"></a>General</h3>
@@ -765,16 +806,16 @@
 <li>The <code>max.print</code> option is ignored when printing a tibble (<a href='https://github.com/tidyverse/tibble/issues/194'>#194</a>, <a href='https://github.com/tidyverse/tibble/issues/195'>#195</a>, <a href='https://github.com/t-kalinowski'>@t-kalinowski</a>).</li>
 </ul></div>
 </div>
-<div id="documentation" class="section level2">
+<div id="documentation-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
+<a href="#documentation-1" class="anchor" aria-hidden="true"></a>Documentation</h2>
 <ul><li>Fix typo in <code>obj_sum</code> documentation (<a href='https://github.com/tidyverse/tibble/issues/193'>#193</a>, <a href='https://github.com/etiennebr'>@etiennebr</a>).</li>
 <li>Reword documentation for <code><a href="../reference/tribble.html">tribble()</a></code> (<a href='https://github.com/tidyverse/tibble/issues/191'>#191</a>, <a href='https://github.com/kwstat'>@kwstat</a>).</li>
 <li>Now explicitly stating minimum Rcpp version 0.12.3.</li>
 </ul></div>
-<div id="internal-4" class="section level2">
+<div id="internal-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-4" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-5" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li>Using registration of native routines.</li>
 </ul></div>
 </div>
@@ -801,9 +842,9 @@
 <code><a href="../reference/add_row.html">add_row()</a></code> and <code><a href="../reference/add_column.html">add_column()</a></code> gain <code>.before</code> and <code>.after</code> arguments which indicate the row (by number) or column (by number or name) before or after which the new data are inserted. Updated or added columns cannot be named <code>.before</code> or <code>.after</code> (<a href='https://github.com/tidyverse/tibble/issues/99'>#99</a>).</li>
 <li>Rename <code><a href="../reference/deprecated.html">frame_data()</a></code> to <code><a href="../reference/tribble.html">tribble()</a></code>, stands for “transposed tibble”. The former is still available as alias (<a href='https://github.com/tidyverse/tibble/issues/132'>#132</a>, <a href='https://github.com/tidyverse/tibble/issues/143'>#143</a>).</li>
 </ul></div>
-<div id="features-5" class="section level2">
+<div id="features-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-5" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-6" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code><a href="../reference/add_row.html">add_row()</a></code> now can add multiple rows, with recycling (<a href='https://github.com/tidyverse/tibble/issues/142'>#142</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</li>
 <li>Use multiply character <code>×</code> instead of <code>x</code> when printing dimensions (<a href='https://github.com/tidyverse/tibble/issues/126'>#126</a>). Output tests had to be disabled for this on Windows.</li>
@@ -811,9 +852,9 @@
 <li>Use <code>dttm</code> instead of <code>time</code> for <code>POSIXt</code> values (<a href='https://github.com/tidyverse/tibble/issues/133'>#133</a>), which is now used for columns of the <code>difftime</code> class.</li>
 <li>Better output for 0-row results when total number of rows is unknown (e.g., for SQL data sources).</li>
 </ul></div>
-<div id="documentation-1" class="section level2">
+<div id="documentation-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation-1" class="anchor" aria-hidden="true"></a>Documentation</h2>
+<a href="#documentation-2" class="anchor" aria-hidden="true"></a>Documentation</h2>
 <ul><li>New object summary vignette that shows which methods to define for custom vector classes to be used as tibble columns (<a href='https://github.com/tidyverse/tibble/issues/151'>#151</a>).</li>
 <li>Added more examples for <code><a href="../reference/formatting.html">print.tbl_df()</a></code>, now using data from <code>nycflights13</code> instead of <code>Lahman</code> (<a href='https://github.com/tidyverse/tibble/issues/121'>#121</a>), with guidance to install <code>nycflights13</code> package if necessary (<a href='https://github.com/tidyverse/tibble/issues/152'>#152</a>).</li>
 <li>Minor changes in vignette (<a href='https://github.com/tidyverse/tibble/issues/115'>#115</a>, <a href='https://github.com/helix123'>@helix123</a>).</li>
@@ -886,15 +927,15 @@
 <ul><li>Two-dimensional indexing with <code>[[</code> works (<a href='https://github.com/tidyverse/tibble/issues/58'>#58</a>, <a href='https://github.com/tidyverse/tibble/issues/63'>#63</a>).</li>
 <li>Subsetting with empty index (e.g., <code>x[]</code>) also removes row names.</li>
 </ul></div>
-<div id="documentation-2" class="section level2">
+<div id="documentation-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation-2" class="anchor" aria-hidden="true"></a>Documentation</h2>
+<a href="#documentation-3" class="anchor" aria-hidden="true"></a>Documentation</h2>
 <ul><li>Document behavior of <code>as_tibble.tbl_df()</code> for subclasses (<a href='https://github.com/tidyverse/tibble/issues/60'>#60</a>).</li>
 <li>Document and test that subsetting removes row names.</li>
 </ul></div>
-<div id="internal-5" class="section level2">
+<div id="internal-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-5" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-6" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li>Don’t rely on <code>knitr</code> internals for testing (<a href='https://github.com/tidyverse/tibble/issues/78'>#78</a>).</li>
 <li>Fix compatibility with <code>knitr</code> 1.13 (<a href='https://github.com/tidyverse/tibble/issues/76'>#76</a>).</li>
 <li>Enhance <code>knit_print()</code> tests.</li>
