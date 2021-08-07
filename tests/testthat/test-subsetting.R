@@ -918,6 +918,14 @@ test_that("output test", {
     df[1, ] <- list(a = 1, b = 1:3)
     df[1:2, ] <- list(a = 1:3, b = 1)
     df[1:2, ] <- list(a = 1, b = 1:3)
+    df[1, 1:2] <- list(a = 1:3, b = 1)
+    df[1, 1:2] <- list(a = 1, b = 1:3)
+    df[1:2, 1:2] <- list(a = 1:3, b = 1)
+    df[1:2, 1:2] <- list(a = 1, b = 1:3)
+    df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
+    df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
+    df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
+    df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
 
     "# [<-.tbl_df and coercion"
     df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
