@@ -14,6 +14,8 @@ jobs:
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
+        with:
+          install-r: false
 
       - name: Configure Git identity
         run: |
