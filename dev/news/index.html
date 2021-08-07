@@ -106,7 +106,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.3.9002</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.3.9003</span>
         </div>
       </div>
     </div>
@@ -199,6 +199,15 @@
       <small>Source: <a href='https://github.com/tidyverse/tibble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tibble-3139003" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.3.9003">
+<a href="#tibble-3139003" class="anchor" aria-hidden="true"></a>tibble 3.1.3.9003<small> Unreleased </small></h1>
+<ul><li>
+<code>x[i, j] &lt;- one_row_value</code> avoids explicit recycling of the right-hand side, the recycling happens implicitly in <code><a href="https://vctrs.r-lib.org/reference/vec_slice.html" class="external-link">vctrs::vec_assign()</a></code> for performance (<a href='https://github.com/tidyverse/tibble/issues/922'>#922</a>).</li>
+<li>Move <code><a href="../articles/digits.html">vignette("digits")</a></code>, <code><a href="../articles/numbers.html">vignette("numbers")</a></code>, <code><a href="../reference/num.html">?num</a></code> and <code><a href="../reference/char.html">?char</a></code> from the pillar package here (<a href='https://github.com/tidyverse/tibble/issues/913'>#913</a>).</li>
+<li>Replace <code>iris</code> by <code>trees</code> (<a href='https://github.com/tidyverse/tibble/issues/943'>#943</a>).</li>
+<li>Various documentation improvements.</li>
+</ul></div>
     <div id="tibble-3139002" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.3.9002">
 <a href="#tibble-3139002" class="anchor" aria-hidden="true"></a>tibble 3.1.3.9002<small> Unreleased </small></h1>
