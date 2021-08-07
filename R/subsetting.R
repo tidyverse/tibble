@@ -725,6 +725,11 @@ result_vectbl_wrap_rhs <- function(value) {
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
+  value <- vectbl_recycle_rhs_rows(value, nrow, i_arg, value_arg)
+  vectbl_recycle_rhs_cols(value, ncol)
+}
+
+vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
   if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
@@ -739,8 +744,12 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
     )
   }
 
+  value
+}
+
+vectbl_recycle_rhs_cols <- function(value, ncol) {
   if (length(value) != 1L || ncol != 1L) {
-    # Errors have been caught beforehand in vectbl_recycle_rhs_names()
+    # Errors have been caught beforehand in vectbl_as_new_col_index()
     value <- vec_recycle(value, ncol)
   }
 
