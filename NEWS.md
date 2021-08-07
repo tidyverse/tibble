@@ -4,7 +4,6 @@
 
 ## Features
 
-- `x[j] <- list(name = value)` uses name repair when new columns are created (#929).
 - `as.data.frame.tbl_df()` strips inner column names (#837).
 - `new_tibble()` allows omitting the `nrow` argument again (#781).
 
