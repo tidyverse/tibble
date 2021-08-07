@@ -425,7 +425,8 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
     }
 
-    value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_rows(value, fast_nrow(x), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_cols(value, length(j))
 
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(i_arg)) {
