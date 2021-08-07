@@ -441,7 +441,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
-      xo <- tbl_subassign_row(x, i, value, value_arg)
+      xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
@@ -459,7 +459,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       }
 
       xj <- .subset(x, j)
-      xj <- tbl_subassign_row(xj, i, value, value_arg)
+      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
   }
@@ -647,17 +647,21 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, value_arg) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
   nrow <- fast_nrow(x)
   x <- unclass(x)
+  recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
     for (j in seq_along(x)) {
-      x[[j]] <- vectbl_assign(x[[j]], i, value[[j]])
+      x[[j]] <- vectbl_assign(x[[j]], i, recycled_value[[j]])
     },
 
     vctrs_error = function(cnd) {
-      cnd_signal(error_assign_incompatible_type(x, value, j, value_arg, cnd_message(cnd)))
+      # Side effect: check if `value` can be recycled
+      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
+
+      cnd_signal(error_assign_incompatible_type(x, recycled_value, j, value_arg, cnd_message(cnd)))
     }
   )
 
