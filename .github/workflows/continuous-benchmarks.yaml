@@ -21,6 +21,11 @@ jobs:
           git config --global user.email "${GITHUB_EVENT_NAME}@ghactions.local"
         shell: bash
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
       - name: Install dependencies
         run: |
           if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
