@@ -34,7 +34,7 @@ jobs:
           if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
           remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_github("r-lib/bench")
-          install.packages("here")
+          if (!requireNamespace("here", quietly = TRUE)) install.packages("here")
 
       - name: Install package
         run: R CMD INSTALL .
