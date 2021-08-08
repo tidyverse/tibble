@@ -78,7 +78,7 @@ The following overview contains example values for each type:
 #> $ factor        <fct> A
 #> $ ordered       <ord> a
 #> $ Date          <date> 2021-07-30
-#> $ POSIXt        <dttm> 2021-07-30 06:11:25
+#> $ POSIXt        <dttm> 2021-07-30 04:11:25
 #> $ difftime      <drtn> 1 secs
 #> $ hms           <time> 00:00:01
 #> $ integer64     <int64> 10000000000
@@ -102,23 +102,4 @@ but most of the time it is more useful to override `vctrs::vec_ptype_abbr()`:
 
 ```r
 pillar:::type_sum.default
-#> function (x) 
-#> {
-#>     pillar_attr <- attr(x, "pillar", exact = TRUE)
-#>     label <- pillar_attr$label
-#>     if (!is.null(label)) {
-#>         return(I(label))
-#>     }
-#>     if (is.object(x) || vctrs::vec_is(x)) {
-#>         return(vec_ptype_abbr(x))
-#>     }
-#>     switch(typeof(x), builtin = , special = , closure = "fn", 
-#>         environment = "env", symbol = if (is_missing(x)) {
-#>             "missing"
-#>         } else {
-#>             "sym"
-#>         }, typeof(x))
-#> }
-#> <bytecode: 0x1ee4c0de>
-#> <environment: namespace:pillar>
 ```
