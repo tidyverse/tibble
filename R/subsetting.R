@@ -540,6 +540,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
 
+    if (length(names) != 1L) {
+      # Side effect: check compatibility
+      vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    } else if (length(j) != 1L) {
+      # length(names) == 1
+      names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    }
+
     old <- (j <= length(x))
     names[old] <- names(x)[ j[old] ]
   }

@@ -462,9 +462,6 @@
       # # [<-.tbl_df and logical indexes
       df <- tibble(x = 1:2, y = x)
       df[FALSE] <- 1
-    Error <rlang_error>
-      `nm` must be `NULL` or a character vector the same length as `x`
-    Code
       df
     Output
       # A tibble: 2 x 2
