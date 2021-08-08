@@ -350,8 +350,8 @@ tibble(a = 1:3, c = 1:2)
 ```
 
 <div class="sourceCode"><pre class="sourceCode"><code class="sourceCode"><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> Error: Tibble columns must have compatible sizes.
-</span><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> * Size 3: Existing data.
-</span><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> * Size 2: Column `c`.
+</span><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> </span><span style='color: #00BBBB;'>*</span><span style='color: #BB0000;'> Size 3: Existing data.
+</span><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> </span><span style='color: #00BBBB;'>*</span><span style='color: #BB0000;'> Size 2: Column `c`.
 </span><span style='color: #555555;'>#&gt;</span><span style='color: #BB0000;'> </span><span style='color: #0000BB;'>i</span><span style='color: #BB0000;'> Only values of size one are recycled.
 </span></code></pre></div>
 

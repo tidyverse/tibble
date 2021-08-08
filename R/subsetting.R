@@ -130,7 +130,8 @@ NULL
     if (is.null(x)) {
       x
     } else {
-      vectbl_strip_names(vec_slice(x, i))
+      # Drop inner names with double subscript
+      vec_set_names(vec_slice(x, i), NULL)
     }
   }
 }
@@ -168,7 +169,7 @@ NULL
   # Side effect: check scalar
   if (!is.symbol(j)) {
     if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
-      vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+      vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
     }
   }
 
@@ -177,9 +178,9 @@ NULL
   # New columns are added to the end, provide index to avoid matching column
   # names again
   value <- list(value)
-  names(value) <- names(j)
 
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
+  # j is already pretty
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = NULL, value_arg = value_arg)
 }
 
 
@@ -227,10 +228,10 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- x
-
-  if (!is.null(j)) {
-    j <- vectbl_as_col_location(j, length(xo), names(xo), j_arg = j_arg, assign = FALSE)
+  if (is.null(j)) {
+    xo <- x
+  } else {
+    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
 
     xo <- .subset(x, j)
 
@@ -444,8 +445,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # Fill up columns if necessary
       if (has_length(new)) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        names(init) <- coalesce2(names2(j)[new], names2(value)[new])
-
         x <- tbl_subassign_col(x, j[new], init)
       }
 
@@ -606,7 +605,7 @@ tbl_subassign_col <- function(x, j, value) {
   new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
-    names(x)[ j[new] ] <- coalesce2(names2(j)[new], names2(value)[new])
+    names(x)[ j[new] ] <- names2(j)[new]
   }
 
   # Update
@@ -621,12 +620,6 @@ tbl_subassign_col <- function(x, j, value) {
 
   # Restore
   set_tibble_class(x, nrow)
-}
-
-coalesce2 <- function(x, y) {
-  use_y <- which(is.na(x))
-  x[use_y] <- y[use_y]
-  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -684,18 +677,6 @@ vectbl_assign <- function(x, i, value) {
   }
 
   vec_assign(x, i, value)
-}
-
-vectbl_strip_names <- function(x) {
-  maybe_row_names <- is.data.frame(x) || is.array(x)
-
-  if (maybe_row_names) {
-    row.names(x) <- NULL
-  } else {
-    names(x) <- NULL
-  }
-
-  x
 }
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
