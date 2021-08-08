@@ -161,8 +161,20 @@
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
     Code
       foo[c(TRUE, TRUE, NA)]
-    Error <rlang_error>
-      Internal error in `df_slice()`: Columns must match the data frame size.
+    Output
+      # A tibble: 10 x 3
+             x     y
+         <int> <int>
+       1     1     1
+       2     2     2
+       3     3     3
+       4     4     4
+       5     5     5
+       6     6     6
+       7     7     7
+       8     8     8
+       9     9     9
+      10    10    10
     Code
       foo[as.matrix(TRUE)]
     Error <tibble_error_subset_matrix_must_have_same_dimensions>
