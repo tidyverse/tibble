@@ -56,6 +56,8 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'   much information as possible, in a concise way, even for large and complex
 #'   tibbles. Read more in [formatting].
 #'
+#' See `vignette("invariants")` for a detailed description of the behavior.
+#'
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class
 #' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()],
