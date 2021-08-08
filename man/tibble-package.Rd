@@ -39,60 +39,9 @@ Resources on specific topics:
 \item Create a tibble: \code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=enframe]{enframe()}}
 \item Inspect a tibble: \code{\link[=print.tbl]{print.tbl()}}, \code{\link[=glimpse]{glimpse()}}
 \item Details on the S3 \code{tbl_df} class: \code{\linkS4class{tbl_df}}
+\item Package options: \link{tibble_options}
 }
 }
-\section{Package options}{
-
-The following option is used for viewing tabular data with \code{view()}:
-\itemize{
-\item \code{tibble.view_max}: Maximum number of rows shown if the input is not a
-data frame. Default: 1000.
-}
-
-
-
-The following options control printing of \code{tbl} and \code{tbl_df} objects:
-\itemize{
-\item \code{tibble.print_max}: Row number threshold: Maximum number of rows printed.
-Set to \code{Inf} to always print all rows.  Default: 20.
-\item \code{tibble.print_min}: Number of rows printed if row number threshold is
-exceeded. Default: 10.
-\item \code{tibble.width}: Output width. Default: \code{NULL} (use \code{width} option).
-\item \code{tibble.max_extra_cols}: Number of extra columns printed in reduced form.
-Default: 100.
-}
-
-The output uses color and highlighting according to the \code{"cli.num_colors"} option.
-Set it to \code{1} to suppress colored and highlighted output.
-
-
-
-\itemize{
-\item \code{pillar.bold}: Use bold font, e.g. for column headers? This currently
-defaults to \code{FALSE}, because many terminal fonts have poor support for
-bold fonts.
-\item \code{pillar.subtle}: Use subtle style, e.g. for row numbers and data types?
-Default: \code{TRUE}.
-\item \code{pillar.subtle_num}: Use subtle style for insignificant digits? Default:
-\code{FALSE}, is also affected by the \code{pillar.subtle} option.
-\item \code{pillar.neg}: Highlight negative numbers? Default: \code{TRUE}.
-\item \code{pillar.sigfig}: The number of significant digits that will be printed and
-highlighted, default: \code{3}. Set the \code{pillar.subtle} option to \code{FALSE} to
-turn off highlighting of significant digits.
-\item \code{pillar.min_title_chars}: The minimum number of characters for the column
-title, default: \code{15}.  Column titles may be truncated up to that width to
-save horizontal space. Set to \code{Inf} to turn off truncation of column
-titles.
-\item \code{pillar.min_chars}: The minimum number of characters wide to
-display character columns, default: \code{0}.  Character columns may be
-truncated up to that width to save horizontal space. Set to \code{Inf} to
-turn off truncation of character columns.
-\item \code{pillar.max_dec_width}: The maximum allowed width for decimal notation,
-default 13.
-}
-
-}
-
 \seealso{
 Useful links:
 \itemize{

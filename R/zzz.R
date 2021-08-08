@@ -5,6 +5,9 @@
   } else {
     safe_match <<- safe_match_default
   }
+
+  num <<- pillar::num
+  char <<- pillar::char
 }
 
 safe_match_3_0 <- function(x, table) {

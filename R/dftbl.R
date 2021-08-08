@@ -40,9 +40,6 @@ set_dftbl_opts_hook <- function(width) {
 utils::globalVariables(c("new_df", "new_tbl"))
 
 same_as_tbl_code <- function(df_code, tbl_code) {
-  df <- new_df()
-  tbl <- new_tbl()
-
   handler <- evaluate::new_output_handler(
     value = function(x, visible) {
       if (visible) x else NULL

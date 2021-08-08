@@ -58,6 +58,37 @@ test_that("new_tibble() with additional attributes", {
   expect_identical(tbl_df, tbl_foo)
 })
 
+test_that("new_tibble() can add attributes on zero column tibbles with no attributes", {
+  expect_identical(
+    attr(new_tibble(list(), nrow = 0L, foo = 10), "foo"),
+    10
+  )
+})
+
+test_that("new_tibble() ignores unnamed additional attributes", {
+  expect_identical(
+    new_tibble(list(x = 1), "foo", nrow = 1),
+    new_tibble(list(x = 1), nrow = 1)
+  )
+
+  expect_identical(
+    new_tibble(list(x = 1), "foo", bar = "bar", nrow = 1),
+    new_tibble(list(x = 1), bar = "bar", nrow = 1)
+  )
+})
+
+test_that("new_tibble() allows setting names through `...`", {
+  expect_identical(
+    new_tibble(list(1), names = "x", nrow = 1),
+    new_tibble(list(x = 1), nrow = 1)
+  )
+})
+
+test_that("new_tibble() supports missing `nrow` (#781)", {
+  expect_identical(new_tibble(list()), tibble())
+  expect_identical(new_tibble(list(a = 1:3)), tibble(a = 1:3))
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
@@ -67,14 +98,6 @@ test_that("new_tibble checks", {
   expect_tibble_error(
     new_tibble(1:3, nrow = 1),
     error_new_tibble_must_be_list()
-  )
-  expect_error(
-    new_tibble(list(a = 1)),
-    class = get_defunct_error_class()
-  )
-  expect_tibble_error(
-    new_tibble(list(1), nrow = NULL),
-    error_new_tibble_needs_nrow()
   )
   expect_tibble_error(
     new_tibble(list(1), nrow = 1),

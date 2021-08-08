@@ -3,6 +3,16 @@ test_that("as.data.frame()", {
   expect_identical(as.data.frame(as_tibble(df)), df)
 })
 
+test_that("as.data.frame() strips inner names (#837)", {
+  tbl <- tibble(a = c(b = 1:3))
+  expect_identical(as.data.frame(tbl)$a, 1:3)
+})
+
+test_that("as.data.frame() keeps inner names for lists (#837)", {
+  tbl <- tibble(a = list(b = 1:3))
+  expect_identical(as.data.frame(tbl)$a, list(b = 1:3))
+})
+
 test_that("names<-()", {
   new_tbl <- function(...) {
     data <- list(1, "b")

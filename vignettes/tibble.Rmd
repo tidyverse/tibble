@@ -7,44 +7,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r, echo = FALSE, message = FALSE, error = TRUE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```{r setup, include = FALSE}
 library(tibble)
 set.seed(1014)
 
-options(crayon.enabled = TRUE)
-options(pillar.bold = TRUE)
-
-knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
-
-colourise_chunk <- function(type) {
-  function(x, options) {
-    # lines <- strsplit(x, "\\n")[[1]]
-    lines <- x
-    if (type != "output") {
-      lines <- crayon::red(lines)
-    }
-    paste0(
-      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
-      paste0(
-        sgr_to_html(htmltools::htmlEscape(lines)),
-        collapse = "\n"
-      ),
-      "</code></pre></div>"
-    )
-  }
-}
-
-knitr::knit_hooks$set(
-  output = colourise_chunk("output"),
-  message = colourise_chunk("message"),
-  warning = colourise_chunk("warning"),
-  error = colourise_chunk("error")
-)
-
-# Fallback if fansi is missing
-sgr_to_html <- identity
-sgr_to_html <- fansi::sgr_to_html
+tibble:::set_fansi_hooks()
 ```
 
 Tibbles are a modern take on data frames.
@@ -131,17 +98,19 @@ When you print a tibble, it only shows the first ten rows and all the columns th
 It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
 
 ```{r}
-tibble(x = -5:1000)
+tibble(x = -5:100, y = 123.456 * (3 ^ x))
 ```
+
+Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.
 
 You can control the default appearance with options:
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
-  Use `options(tibble.print_max = Inf)` to always show all rows.
+* `options(pillar.print_max = n, pillar.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
+  Use `options(pillar.print_max = Inf)` to always show all rows.
 
-* `options(tibble.width = Inf)` will always print all columns, regardless of the width of the screen.
+* `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?"tibble-package"` for the available options, and `vignette("types")` for an overview of the type abbreviations.
+See `?pillar::pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, `vignette("numbers")` for details on the formatting of numbers, and `vignette("digits")` for a comparison with data frame printing.
 
 ### Subsetting
 

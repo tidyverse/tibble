@@ -7,16 +7,19 @@
 #'
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
+#' See [vctrs::new_data_frame()] for details.
 #'
 #' @param x A tibble-like object.
 #' @param ... Name-value pairs of additional attributes.
-#' @param nrow The number of rows, required.
+#' @param nrow The number of rows, inferred from `x` if omitted.
 #' @param class Subclasses to assign to the new object, default: none.
 #' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
 #'
 #' @seealso
 #' [tibble()] and [as_tibble()] for ways to construct a tibble
-#' with recycling of scalars and automatic name repair.
+#' with recycling of scalars and automatic name repair,
+#' and [vctrs::df_list()] and [vctrs::new_data_frame()]
+#' for lower-level implementations.
 #'
 #' @export
 #' @examples
@@ -24,11 +27,11 @@
 #' new_tibble(list(a = 1:3, b = 4:6), nrow = 3)
 #'
 #' # Existing row.names attributes are ignored:
-#' try(validate_tibble(new_tibble(iris, nrow = 3)))
+#' try(validate_tibble(new_tibble(trees, nrow = 3)))
 #'
 #' # The length of all columns must be compatible with the nrow argument:
 #' try(validate_tibble(new_tibble(list(a = 1:3, b = 4:6), nrow = 2)))
-new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
+new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
     deprecate_soft("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
@@ -44,41 +47,57 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
     cnd_signal(error_new_tibble_must_be_list())
   }
 
-  #' The `...` argument allows adding more attributes to the subclass.
-  x <- update_tibble_attrs(x, ...)
-
-  #' An `nrow` argument is required.
-  if (missing(nrow)) {
-    cnd <- error_new_tibble_needs_nrow()
-    if (length(x) >= 1) {
-      deprecate_soft("2.0.0", "tibble::new_tibble(nrow = 'can\\'t be missing')",
-        details = cnd$message)
-      nrow <- vec_size(x[[1]])
-    } else {
-      cnd_signal(cnd)
-    }
-  }
-  #' This should be an integer of length 1,
-  #' and every element of the list `x` should have [vctrs::vec_size()]
+  #' The `nrow` argument may be omitted as of tibble 3.1.4.
+  #' If present, every element of the list `x` should have [vctrs::vec_size()]
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (!is_integerish(nrow, 1)) {
-    cnd_signal(error_new_tibble_needs_nrow())
+  if (!is.null(nrow) && is_integerish(nrow, 1)) {
+    nrow <- as.integer(nrow)
+  }
+
+  args <- attributes(x)
+
+  if (is.null(args)) {
+    args <- list()
+  }
+
+  new_attrs <- pairlist2(...)
+  nms <- names(new_attrs)
+
+  for (i in seq_along(nms)) {
+    nm <- nms[[i]]
+
+    if (nm == "") {
+      next
+    }
+
+    args[[nm]] <- new_attrs[[i]]
   }
 
   #' `x` must have names (or be empty),
   #' but the names are not checked for correctness.
   if (length(x) == 0) {
     # Leaving this because creating a named list of length zero seems difficult
-    names(x) <- character()
-  } else if (is.null(names(x))) {
+    args[["names"]] <- character()
+  } else if (is.null(args[["names"]])) {
     cnd_signal(error_names_must_be_non_null())
   }
 
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- c(class[!class %in% tibble_class], tibble_class)
-  x
+  if (is.null(class)) {
+    class <- tibble_class_no_data_frame
+  } else {
+    class <- c(class[!class %in% tibble_class], tibble_class_no_data_frame)
+  }
+
+  slots <- c("x", "n", "class")
+  args[slots] <- list(x, nrow, class)
+
+  # `new_data_frame()` restores compact row names
+  args[["row.names"]] <- NULL
+
+  # do.call() is faster than exec() in this case
+  do.call(new_data_frame, args)
 }
 
 #' @description
@@ -131,18 +150,11 @@ validate_nrow <- function(names, lengths, nrow) {
   }
 }
 
-update_tibble_attrs <- function(x, ...) {
-  .Call(`tibble_update_attrs`, x, pairlist2(...))
-}
-
 tibble_class <- c("tbl_df", "tbl", "data.frame")
+tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Errors ------------------------------------------------------------------
 
 error_new_tibble_must_be_list <- function() {
   tibble_error("`x` must be a list.")
-}
-
-error_new_tibble_needs_nrow <- function() {
-  tibble_error("`x` must be a scalar integer.")
 }
