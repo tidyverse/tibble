@@ -90,10 +90,10 @@ test_that("tibble_glimpse_width ignores Inf tibble.width", {
 })
 
 test_that("print.tbl ignores max.print option", {
-  iris2 <- as_tibble(iris)
+  trees2 <- as_tibble(trees)
   expect_output(
-    withr::with_options(list(max.print = 3), print(iris2)),
-    capture_output(print(iris2)),
+    withr::with_options(list(max.print = 3), print(trees2)),
+    capture_output(print(trees2)),
     fixed = TRUE
   )
 })

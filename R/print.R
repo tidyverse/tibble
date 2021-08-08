@@ -12,38 +12,39 @@
 #'
 #' Printing can be tweaked for a one-off call by calling `print()` explicitly
 #' and setting arguments like `n` and `width`. More persistent control is
-#' available by setting the options described in [pillar_options].
-#' See also `vignette("digits", package = "pillar")` for a comparison to base options,
-#' and [num()] and [char()] for creating columns with custom formatting options.
+#' available by setting the options described in [pillar::pillar_options].
+#' See also `vignette("digits")` for a comparison to base options,
+#' and `vignette("numbers")` that showcases [num()] and [char()]
+#' for creating columns with custom formatting options.
 #'
 #' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 #' If you implement a package that extends tibble,
 #' the printed output can be customized in various ways.
 #' See `vignette("extending", package = "pillar")` for details,
-#' and [pillar_options] for options that control the display in the console.
+#' and [pillar::pillar_options] for options that control the display in the console.
 #'
 # Copied from pillar::format.tbl() to avoid roxygen2 warning
 #' @param x Object to format or print.
 #' @param ... Passed on to [tbl_format_setup()].
 #' @param n Number of rows to show. If `NULL`, the default, will print all rows
-#'   if less than the `print_max` [option][pillar_options].
+#'   if less than the `print_max` [option][pillar::pillar_options].
 #'   Otherwise, will print as many rows as specified by the
-#'   `print_min` [option][pillar_options].
+#'   `print_min` [option][pillar::pillar_options].
 #' @param width Width of text output to generate. This defaults to `NULL`, which
-#'   means use the `width` [option][pillar_options].
+#'   means use the `width` [option][pillar::pillar_options].
 #' @param max_extra_cols Number of extra columns to print abbreviated information for,
 #'   if the width is too small for the entire tibble. If `NULL`,
-#'   the `max_extra_cols` [option][pillar_options] is used.
+#'   the `max_extra_cols` [option][pillar::pillar_options] is used.
 #'   The previously defined `n_extra` argument is soft-deprecated.
 #' @param max_footer_lines Maximum number of footer lines. If `NULL`,
-#'   the `max_footer_lines` [option][pillar_options] is used.
+#'   the `max_footer_lines` [option][pillar::pillar_options] is used.
 #'
 #' @examples
 #' print(as_tibble(mtcars))
 #' print(as_tibble(mtcars), n = 1)
 #' print(as_tibble(mtcars), n = 3)
 #'
-#' print(as_tibble(iris), n = 100)
+#' print(as_tibble(trees), n = 100)
 #'
 #' print(mtcars, width = 10)
 #'

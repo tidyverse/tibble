@@ -1,7 +1,9 @@
 #' Package options
 #'
 #' Options that affect interactive display.
-#' See [pillar_options] for options that affect display on the console.
+#' See [pillar::pillar_options] for options that affect display on the console,
+#' and [cli::num_ansi_colors()] for enabling and disabling colored output
+#' via ANSI sequences like `[3m[38;5;246m[39m[23m`.
 #'
 #' These options can be set via [options()] and queried via [getOption()].
 #' For this, add a `tibble.` prefix (the package name and a dot) to the option name.

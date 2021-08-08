@@ -25,7 +25,7 @@
 #' @examples
 #' # Detect row names ----------------------------------------------------
 #' has_rownames(mtcars)
-#' has_rownames(iris)
+#' has_rownames(trees)
 #'
 #' # Remove row names ----------------------------------------------------
 #' remove_rownames(mtcars) %>% has_rownames()
@@ -36,7 +36,7 @@
 #' column_to_rownames(mtcars_tbl, var = "car") %>% head()
 #'
 #' # Adding rowid as a column --------------------------------------------
-#' rowid_to_column(iris) %>% head()
+#' rowid_to_column(trees) %>% head()
 #'
 #' @name rownames
 NULL

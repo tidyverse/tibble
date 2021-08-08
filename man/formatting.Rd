@@ -30,22 +30,22 @@
 \item{x}{Object to format or print.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use the \code{width} \link[=pillar_options]{option}.}
+means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{...}{Passed on to \code{\link[=tbl_format_setup]{tbl_format_setup()}}.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than the \code{print_max} \link[=pillar_options]{option}.
+if less than the \code{print_max} \link[pillar:pillar_options]{option}.
 Otherwise, will print as many rows as specified by the
-\code{print_min} \link[=pillar_options]{option}.}
+\code{print_min} \link[pillar:pillar_options]{option}.}
 
 \item{max_extra_cols}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL},
-the \code{max_extra_cols} \link[=pillar_options]{option} is used.
+the \code{max_extra_cols} \link[pillar:pillar_options]{option} is used.
 The previously defined \code{n_extra} argument is soft-deprecated.}
 
 \item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
-the \code{max_footer_lines} \link[=pillar_options]{option} is used.}
+the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
 }
 \description{
 One of the main features of the \code{tbl_df} class is the printing:
@@ -60,22 +60,23 @@ type abbreviations.
 
 Printing can be tweaked for a one-off call by calling \code{print()} explicitly
 and setting arguments like \code{n} and \code{width}. More persistent control is
-available by setting the options described in \link{pillar_options}.
-See also \code{vignette("digits", package = "pillar")} for a comparison to base options,
-and \code{\link[=num]{num()}} and \code{\link[=char]{char()}} for creating columns with custom formatting options.
+available by setting the options described in \link[pillar:pillar_options]{pillar::pillar_options}.
+See also \code{vignette("digits")} for a comparison to base options,
+and \code{vignette("numbers")} that showcases \code{\link[=num]{num()}} and \code{\link[=char]{char()}}
+for creating columns with custom formatting options.
 
 As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 If you implement a package that extends tibble,
 the printed output can be customized in various ways.
 See \code{vignette("extending", package = "pillar")} for details,
-and \link{pillar_options} for options that control the display in the console.
+and \link[pillar:pillar_options]{pillar::pillar_options} for options that control the display in the console.
 }
 \examples{
 print(as_tibble(mtcars))
 print(as_tibble(mtcars), n = 1)
 print(as_tibble(mtcars), n = 3)
 
-print(as_tibble(iris), n = 100)
+print(as_tibble(trees), n = 100)
 
 print(mtcars, width = 10)
 

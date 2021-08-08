@@ -8,12 +8,16 @@ jobs:
     defaults:
       run:
         shell: Rscript {0}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
+        with:
+          install-r: false
 
       - name: Configure Git identity
         run: |
@@ -23,10 +27,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages("remotes")
+          if (!requireNamespace("curl", quietly = TRUE)) install.packages("curl")
+          if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
           remotes::install_deps(dependencies = TRUE, type = .Platform$pkgType)
           remotes::install_github("r-lib/bench")
-          install.packages("here")
+          if (!requireNamespace("here", quietly = TRUE)) install.packages("here")
 
       - name: Install package
         run: R CMD INSTALL .
