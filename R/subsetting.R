@@ -424,7 +424,8 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
     }
 
-    value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_rows(value, fast_nrow(x), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_cols(value, length(j))
 
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(i_arg)) {
@@ -438,8 +439,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
     if (is.null(j)) {
-      value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
-      xo <- tbl_subassign_row(x, i, value, value_arg)
+      xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
@@ -448,7 +448,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
         j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
       }
       new <- which(j > length(x))
-      value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
       if (has_length(new)) {
@@ -457,7 +456,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       }
 
       xj <- .subset(x, j)
-      xj <- tbl_subassign_row(xj, i, value, value_arg)
+      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
   }
@@ -657,17 +656,21 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, value_arg) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
   nrow <- fast_nrow(x)
   x <- unclass(x)
+  recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
     for (j in seq_along(x)) {
-      x[[j]] <- vectbl_assign(x[[j]], i, value[[j]])
+      x[[j]] <- vectbl_assign(x[[j]], i, recycled_value[[j]])
     },
 
     vctrs_error = function(cnd) {
-      cnd_signal(error_assign_incompatible_type(x, value, j, value_arg, cnd_message(cnd)))
+      # Side effect: check if `value` can be recycled
+      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
+
+      cnd_signal(error_assign_incompatible_type(x, recycled_value, j, value_arg, cnd_message(cnd)))
     }
   )
 
@@ -736,7 +739,12 @@ result_vectbl_wrap_rhs <- function(value) {
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  if (length(value) > 0L && (nrow != 1L || vec_size(value[[1L]]) != 1L)) {
+  value <- vectbl_recycle_rhs_rows(value, nrow, i_arg, value_arg)
+  vectbl_recycle_rhs_cols(value, ncol)
+}
+
+vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
+  if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
         if (!is.null(value[[j]])) {
@@ -750,8 +758,12 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
     )
   }
 
+  value
+}
+
+vectbl_recycle_rhs_cols <- function(value, ncol) {
   if (length(value) != 1L || ncol != 1L) {
-    # Errors have been caught beforehand in vectbl_recycle_rhs_names()
+    # Errors have been caught beforehand in vectbl_as_new_col_index()
     value <- vec_recycle(value, ncol)
   }
 

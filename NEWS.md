@@ -1,5 +1,23 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.4.9000
+
+- Same as previous version.
+
+
+# tibble 3.1.4
+
+- Same as previous version.
+
+
+# tibble 3.1.3.9003
+
+- `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
+- Move `vignette("digits")`, `vignette("numbers")`, `?num` and `?char` from the pillar package here (#913).
+- Replace `iris` by `trees` (#943).
+- Various documentation improvements.
+
+
 # tibble 3.1.3.9002
 
 - `x[j] <- list(name = value)` uses name repair when new columns are created (#929). 
@@ -212,7 +230,7 @@
 
 ## Breaking changes
 
-- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(iris)` now has five columns, use `tibble(iris = iris)` if the intention is to create a packed data frame (#581).
+- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(trees)` now has three columns, use `tibble(trees = trees)` if the intention is to create a packed data frame (#581).
 
 - The `name-repair` help topic is gone, refer to `?vctrs::vec_as_names` instead.
 

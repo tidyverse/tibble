@@ -1,8 +1,8 @@
 test_that("has_rownames and remove_rownames", {
-  expect_false(has_rownames(iris))
+  expect_false(has_rownames(trees))
   expect_true(has_rownames(mtcars))
   expect_false(has_rownames(remove_rownames(mtcars)))
-  expect_false(has_rownames(remove_rownames(iris)))
+  expect_false(has_rownames(remove_rownames(trees)))
   expect_false(has_rownames(1:10))
 })
 
@@ -90,7 +90,7 @@ test_that("column_to_rownames returns tbl", {
 })
 
 test_that("converting to data frame does not add row names", {
-  expect_false(has_rownames(as.data.frame(as_tibble(iris))))
+  expect_false(has_rownames(as.data.frame(as_tibble(trees))))
 })
 
 test_that("work around structure() bug (#852)", {
@@ -100,9 +100,9 @@ test_that("work around structure() bug (#852)", {
 test_that("output test", {
   expect_snapshot_with_error({
     rownames_to_column(mtcars, "cyl")
-    rowid_to_column(iris, "Species")
+    rowid_to_column(trees, "Volume")
 
     column_to_rownames(mtcars, "cyl")
-    column_to_rownames(iris, "foo")
+    column_to_rownames(trees, "foo")
   })
 })

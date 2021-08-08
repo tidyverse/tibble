@@ -1,10 +1,9 @@
 ---
-title: "Invariants for subsetting and subassignment"
+title: "Invariants: Comparing behavior with data frames"
 #output: rmarkdown::word_document
 output: rmarkdown::html_vignette
-# devtools::load_all(); eval_details <- TRUE; rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
 vignette: >
-  %\VignetteIndexEntry{Invariants for subsetting and subassignment}
+  %\VignetteIndexEntry{Invariants: Comparing behavior with data frames}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -42,12 +41,7 @@ In this article, all behaviors are demonstrated using one example data frame and
 
 ```r
 library(tibble)
-suppressWarnings(library(vctrs))
-#> 
-#> Attaching package: 'vctrs'
-#> The following object is masked from 'package:tibble':
-#> 
-#>     data_frame
+library(vctrs)
 new_df <- function() {
   df <- data.frame(n = c(1L, NA, 3L, NA))
   df$c <- letters[5:8]
@@ -224,11 +218,95 @@ tbl[[1]]
 </td></tr></tbody></table>
 
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+identical(df[[3]], .subset2(df, 3))
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl[[3]], .subset2(tbl, 3))
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2[["df"]], .subset2(df2, "df"))
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2[["tbl"]], .subset2(tbl2, "tbl"))
+#> [1] TRUE
+```
+
+</td></tr></tbody></table>
 
 NB: `x[[j]]` always returns an object of size `nrow(x)` if the column exists.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+vec_size(df[[1]])
+#> [1] 4
+```
+
+</td><td>
+
+```r
+vec_size(tbl[[1]])
+#> [1] 4
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+vec_size(df[[3]])
+#> [1] 4
+```
+
+</td><td>
+
+```r
+vec_size(tbl[[3]])
+#> [1] 4
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+vec_size(df2[[1]])
+#> [1] 4
+```
+
+</td><td>
+
+```r
+vec_size(tbl2[[1]])
+#> [1] 4
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+vec_size(df2[[2]])
+#> [1] 4
+```
+
+</td><td>
+
+```r
+vec_size(tbl2[[2]])
+#> [1] 4
+```
+
+</td></tr></tbody></table>
 
 `j` must be a single number or a string, as enforced by `.subset2(x, j)`.
 
@@ -582,7 +660,49 @@ tbl[["n"]]
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+identical(df$li, df[["li"]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl$li, tbl[["li"]])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2$tb, df2[["tb"]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2$tb, tbl2[["tb"]])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2$m, df2[["m"]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2$m, tbl2[["m"]])
+#> [1] TRUE
+```
+
+</td></tr></tbody></table>
 
 Unlike data frames, tibbles do not partially match names.
 Because `df$x` is rarely used in packages, it can raise a warning:
@@ -859,7 +979,35 @@ tbl[, 1:2]
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+identical(df[, 2:3], df[2:3])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl[, 2:3], tbl[2:3])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2[, 1:2], df2[1:2])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2[, 1:2], tbl2[1:2])
+#> [1] TRUE
+```
+
+</td></tr></tbody></table>
 
 ### Definition of `x[, j, drop = TRUE]`
 
@@ -881,7 +1029,49 @@ tbl[, 1, drop = TRUE]
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+identical(df[, 3, drop = TRUE], df[[3]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl[, 3, drop = TRUE], tbl[[3]])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2[, 1, drop = TRUE], df2[[1]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2[, 1, drop = TRUE], tbl2[[1]])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2[, 2, drop = TRUE], df2[[2]])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2[, 2, drop = TRUE], tbl2[[2]])
+#> [1] TRUE
+```
+
+</td></tr></tbody></table>
 
 ## Row subsetting
 
@@ -1193,7 +1383,84 @@ tbl[1, , drop = TRUE]
 
 [^bracket-flip]: A more efficient implementation of `x[i, j]` would forward to `x[j][i, ]`.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+df[1, 1]
+#> [1] 1
+```
+
+</td><td>
+
+```r
+tbl[1, 1]
+#> # A tibble: 1 x 1
+#>       n
+#>   <int>
+#> 1     1
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+df[1, ][1]
+#>   n
+#> 1 1
+```
+
+</td><td>
+
+```r
+tbl[1, ][1]
+#> # A tibble: 1 x 1
+#>       n
+#>   <int>
+#> 1     1
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df[1, 2:3], df[2:3][1, ])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl[1, 2:3], tbl[2:3][1, ])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df[2:3, 1], df[1][2:3, ])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl[2:3, 1], tbl[1][2:3, ])
+#> [1] TRUE
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+identical(df2[2:3, 1:2], df2[1:2][2:3, ])
+#> [1] TRUE
+```
+
+</td><td>
+
+```r
+identical(tbl2[2:3, 1:2], tbl2[1:2][2:3, ])
+#> [1] TRUE
+```
+
+</td></tr></tbody></table>
 
 
 ### Definition of `x[[i, j]]`
@@ -1223,11 +1490,384 @@ Unlike `x[i, ]`, `x[[i, ]]` is not valid.
 
 If `a` is a vector then `x[[j]] <- a` replaces the `j`th column with value `a`.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[1]] <- 0)
+#>   n c         li
+#> 1 0 e          9
+#> 2 0 f     10, 11
+#> 3 0 g 12, 13, 14
+#> 4 0 h       text
+```
 
+</td><td>
 
+```r
+with_tbl(tbl[[1]] <- 0)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <dbl> <chr> <list>   
+#> 1     0 e     <dbl [1]>
+#> 2     0 f     <int [2]>
+#> 3     0 g     <int [3]>
+#> 4     0 h     <chr [1]>
+```
 
+</td></tr><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[3]] <- 4:1)
+#>    n c li
+#> 1  1 e  4
+#> 2 NA f  3
+#> 3  3 g  2
+#> 4 NA h  1
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[3]] <- 4:1)
+#> # A tibble: 4 x 3
+#>       n c        li
+#>   <int> <chr> <int>
+#> 1     1 e         4
+#> 2    NA f         3
+#> 3     3 g         2
+#> 4    NA h         1
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[1]] <- 0)
+#>   tb m.1 m.2 m.3 m.4
+#> 1  0   1   0   0   0
+#> 2  0   0   1   0   0
+#> 3  0   0   0   1   0
+#> 4  0   0   0   0   1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[[1]] <- 0)
+#> # A tibble: 4 x 2
+#>      tb m[,1]  [,2]  [,3]  [,4]
+#>   <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1     0     1     0     0     0
+#> 2     0     0     1     0     0
+#> 3     0     0     0     1     0
+#> 4     0     0     0     0     1
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[2]] <- 4:1)
+#>   tb.n tb.c      tb.li m
+#> 1    1    e          9 4
+#> 2   NA    f     10, 11 3
+#> 3    3    g 12, 13, 14 2
+#> 4   NA    h       text 1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[[2]] <- 4:1)
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li           m
+#>   <int> <chr> <list>    <int>
+#> 1     1 e     <dbl [1]>     4
+#> 2    NA f     <int [2]>     3
+#> 3     3 g     <int [3]>     2
+#> 4    NA h     <chr [1]>     1
+```
+
+</td></tr></tbody></table>
+
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1]] <- 0)
+#>   n c         li
+#> 1 0 e          9
+#> 2 0 f     10, 11
+#> 3 0 g 12, 13, 14
+#> 4 0 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- 0)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <dbl> <chr> <list>   
+#> 1     0 e     <dbl [1]>
+#> 2     0 f     <int [2]>
+#> 3     0 g     <int [3]>
+#> 4     0 h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[["c"]] <- 0)
+#>    n c         li
+#> 1  1 0          9
+#> 2 NA 0     10, 11
+#> 3  3 0 12, 13, 14
+#> 4 NA 0       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[["c"]] <- 0)
+#> # A tibble: 4 x 3
+#>       n     c li       
+#>   <int> <dbl> <list>   
+#> 1     1     0 <dbl [1]>
+#> 2    NA     0 <int [2]>
+#> 3     3     0 <int [3]>
+#> 4    NA     0 <chr [1]>
+```
+
+</td></tr></tbody></table>
+
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[TRUE]] <- 0)
+#>   n c         li
+#> 1 0 e          9
+#> 2 0 f     10, 11
+#> 3 0 g 12, 13, 14
+#> 4 0 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[TRUE]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `TRUE` has the wrong type
+#> `logical`.
+#> i It must be numeric or character.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1:3]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in `[[<-`(`*tmp*`, i, value =
+#> value): recursive indexing failed at
+#> level 2
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[1:3]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `1:3` has size 3 but must be
+#> size 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[c("n", "c")]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in x[[i]] <- value: more elements
+#> supplied than there are to replace
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[c("n", "c")]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `c("n", "c")` has size 2 but
+#> must be size 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[FALSE]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in x[[i]] <- value: attempt to
+#> select less than one element in
+#> integerOneIndex
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[FALSE]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `FALSE` has the wrong type
+#> `logical`.
+#> i It must be numeric or character.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1:2]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in x[[i]] <- value: more elements
+#> supplied than there are to replace
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[1:2]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `1:2` has size 2 but must be
+#> size 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[NA_integer_]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in x[[i]] <- value: attempt to
+#> select more than one element in
+#> integerOneIndex
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[NA_integer_]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `NA_integer_` can't be `NA`.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[NA]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in x[[i]] <- value: attempt to
+#> select more than one element in
+#> integerOneIndex
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[NA]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `NA` can't be `NA`.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[NA_character_]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in if (names(x)[nc] == "")
+#> names(x)[nc] <- paste0("V", nc): missing
+#> value where TRUE/FALSE needed
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[NA_character_]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to column with a
+#> single valid subscript.
+#> x Subscript `NA_character_` can't be
+#> `NA`.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 `a` is recycled to the same size as `x` so must have size `nrow(x)` or 1.
 (The only exception is when `a` is `NULL`, as described below.)
@@ -1313,7 +1953,114 @@ with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[1]] <- 1)
+#>   n c         li
+#> 1 1 e          9
+#> 2 1 f     10, 11
+#> 3 1 g 12, 13, 14
+#> 4 1 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- 1)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <dbl> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2     1 f     <int [2]>
+#> 3     1 g     <int [3]>
+#> 4     1 h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1]] <- 4:1)
+#>   n c         li
+#> 1 4 e          9
+#> 2 3 f     10, 11
+#> 3 2 g 12, 13, 14
+#> 4 1 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- 4:1)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     4 e     <dbl [1]>
+#> 2     3 f     <int [2]>
+#> 3     2 g     <int [3]>
+#> 4     1 h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1]] <- 3:1)
+```
+
+<div class="error">
+
+```
+#> Error in `[[<-.data.frame`(`*tmp*`, 1,
+#> value = 3:1): replacement has 3 rows,
+#> data has 4
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[1]] <- 3:1)
+```
+
+<div class="error">
+
+```
+#> Error: Assigned data `3:1` must be
+#> compatible with existing data.
+#> x Existing data has 4 rows.
+#> x Assigned data has 3 rows.
+#> i Only vectors of size 1 are recycled.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1]] <- 2:1)
+#>   n c         li
+#> 1 2 e          9
+#> 2 1 f     10, 11
+#> 3 2 g 12, 13, 14
+#> 4 1 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- 2:1)
+```
+
+<div class="error">
+
+```
+#> Error: Assigned data `2:1` must be
+#> compatible with existing data.
+#> x Existing data has 4 rows.
+#> x Assigned data has 2 rows.
+#> i Only vectors of size 1 are recycled.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 `j` must be a scalar numeric or a string, and cannot be `NA`.
 If `j` is OOB, a new column is added on the right hand side, with name repair if needed.
@@ -1415,15 +2162,207 @@ with_tbl(tbl[[5]] <- 0)
 
 `df[[j]] <- a` replaces the complete column so can change the type.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[1]] <- df[[2]])
+#>   n c         li
+#> 1 e e          9
+#> 2 f f     10, 11
+#> 3 g g 12, 13, 14
+#> 4 h h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- tbl[[2]])
+#> # A tibble: 4 x 3
+#>   n     c     li       
+#>   <chr> <chr> <list>   
+#> 1 e     e     <dbl [1]>
+#> 2 f     f     <int [2]>
+#> 3 g     g     <int [3]>
+#> 4 h     h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[2]] <- df[[3]])
+#>    n          c         li
+#> 1  1          9          9
+#> 2 NA     10, 11     10, 11
+#> 3  3 12, 13, 14 12, 13, 14
+#> 4 NA       text       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[2]] <- tbl[[3]])
+#> # A tibble: 4 x 3
+#>       n c         li       
+#>   <int> <list>    <list>   
+#> 1     1 <dbl [1]> <dbl [1]>
+#> 2    NA <int [2]> <int [2]>
+#> 3     3 <int [3]> <int [3]>
+#> 4    NA <chr [1]> <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[3]] <- df2[[1]])
+#>    n c li.n li.c      li.li
+#> 1  1 e    1    e          9
+#> 2 NA f   NA    f     10, 11
+#> 3  3 g    3    g 12, 13, 14
+#> 4 NA h   NA    h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[3]] <- tbl2[[1]])
+#> # A tibble: 4 x 3
+#>       n c      li$n $c    $li      
+#>   <int> <chr> <int> <chr> <list>   
+#> 1     1 e         1 e     <dbl [1]>
+#> 2    NA f        NA f     <int [2]>
+#> 3     3 g         3 g     <int [3]>
+#> 4    NA h        NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[1]] <- df2[[2]])
+#>   tb.1 tb.2 tb.3 tb.4 m.1 m.2 m.3 m.4
+#> 1    1    0    0    0   1   0   0   0
+#> 2    0    1    0    0   0   1   0   0
+#> 3    0    0    1    0   0   0   1   0
+#> 4    0    0    0    1   0   0   0   1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[[1]] <- tbl2[[2]])
+#> # A tibble: 4 x 2
+#>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
+#>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1      1     0     0     0     1     0
+#> 2      0     1     0     0     0     1
+#> 3      0     0     1     0     0     0
+#> 4      0     0     0     1     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[2]] <- df[[1]])
+#>   tb.n tb.c      tb.li  m
+#> 1    1    e          9  1
+#> 2   NA    f     10, 11 NA
+#> 3    3    g 12, 13, 14  3
+#> 4   NA    h       text NA
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[[2]] <- tbl[[1]])
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li           m
+#>   <int> <chr> <list>    <int>
+#> 1     1 e     <dbl [1]>     1
+#> 2    NA f     <int [2]>    NA
+#> 3     3 g     <int [3]>     3
+#> 4    NA h     <chr [1]>    NA
+```
+
+</td></tr></tbody></table>
 
 `[[<-` supports removing a column by assigning `NULL` to it.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[1]] <- NULL)
+#>   c         li
+#> 1 e          9
+#> 2 f     10, 11
+#> 3 g 12, 13, 14
+#> 4 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1]] <- NULL)
+#> # A tibble: 4 x 2
+#>   c     li       
+#>   <chr> <list>   
+#> 1 e     <dbl [1]>
+#> 2 f     <int [2]>
+#> 3 g     <int [3]>
+#> 4 h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[2]] <- NULL)
+#>   tb.n tb.c      tb.li
+#> 1    1    e          9
+#> 2   NA    f     10, 11
+#> 3    3    g 12, 13, 14
+#> 4   NA    h       text
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[[2]] <- NULL)
+#> # A tibble: 4 x 1
+#>    tb$n $c    $li      
+#>   <int> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr></tbody></table>
 
 Removing a nonexistent column is a no-op.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[["q"]] <- NULL)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[["q"]] <- NULL)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr></tbody></table>
 
 ### Definition of `x$name <- a`
 
@@ -1481,7 +2420,31 @@ with_tbl(tbl[["n"]] <- 0)
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df$"n" <- 0)
+#>   n c         li
+#> 1 0 e          9
+#> 2 0 f     10, 11
+#> 3 0 g 12, 13, 14
+#> 4 0 h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl$"n" <- 0)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <dbl> <chr> <list>   
+#> 1     0 e     <dbl [1]>
+#> 2     0 f     <int [2]>
+#> 3     0 g     <int [3]>
+#> 4     0 h     <chr [1]>
+```
+
+</td></tr></tbody></table>
 
 `$<-` does not perform partial matching.
 
@@ -1748,11 +2711,217 @@ with_tbl(tbl[1:2] <- list(NULL, 4:1))
 
 `NA` indexes are not supported.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[NA] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`, NA,
+#> value = list("x")): missing values are
+#> not allowed in subscripted assignments
+#> of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error: Can't use NA as column index with
+#> `[` at positions 1, 2, and 3.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[NA_integer_] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`,
+#> NA_integer_, value = list("x")): missing
+#> values are not allowed in subscripted
+#> assignments of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA_integer_] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error: Can't use NA as column index in a
+#> tibble for assignment.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[NA_character_] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`,
+#> NA_character_, value = list("x")):
+#> missing values are not allowed in
+#> subscripted assignments of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA_character_] <- list("x"))
+```
+
+<div class="error">
+
+```
+#> Error: Can't use NA as column index in a
+#> tibble for assignment.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 Just like column updates, `[<-` supports changing the type of an existing column.
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[1] <- df[2])
+#>   n c         li
+#> 1 e e          9
+#> 2 f f     10, 11
+#> 3 g g 12, 13, 14
+#> 4 h h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[1] <- tbl[2])
+#> # A tibble: 4 x 3
+#>   n     c     li       
+#>   <chr> <chr> <list>   
+#> 1 e     e     <dbl [1]>
+#> 2 f     f     <int [2]>
+#> 3 g     g     <int [3]>
+#> 4 h     h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[2] <- df[3])
+#>    n          c         li
+#> 1  1          9          9
+#> 2 NA     10, 11     10, 11
+#> 3  3 12, 13, 14 12, 13, 14
+#> 4 NA       text       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[2] <- tbl[3])
+#> # A tibble: 4 x 3
+#>       n c         li       
+#>   <int> <list>    <list>   
+#> 1     1 <dbl [1]> <dbl [1]>
+#> 2    NA <int [2]> <int [2]>
+#> 3     3 <int [3]> <int [3]>
+#> 4    NA <chr [1]> <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[3] <- df2[1])
+#>    n c li.n li.c      li.li
+#> 1  1 e    1    e          9
+#> 2 NA f   NA    f     10, 11
+#> 3  3 g    3    g 12, 13, 14
+#> 4 NA h   NA    h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[3] <- tbl2[1])
+#> # A tibble: 4 x 3
+#>       n c      li$n $c    $li      
+#>   <int> <chr> <int> <chr> <list>   
+#> 1     1 e         1 e     <dbl [1]>
+#> 2    NA f        NA f     <int [2]>
+#> 3     3 g         3 g     <int [3]>
+#> 4    NA h        NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[1] <- df2[2])
+#>   tb.1 tb.2 tb.3 tb.4 m.1 m.2 m.3 m.4
+#> 1    1    0    0    0   1   0   0   0
+#> 2    0    1    0    0   0   1   0   0
+#> 3    0    0    1    0   0   0   1   0
+#> 4    0    0    0    1   0   0   0   1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[1] <- tbl2[2])
+#> # A tibble: 4 x 2
+#>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
+#>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1      1     0     0     0     1     0
+#> 2      0     1     0     0     0     1
+#> 3      0     0     1     0     0     0
+#> 4      0     0     0     1     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[2] <- df[1])
+#>   tb.n tb.c      tb.li  m
+#> 1    1    e          9  1
+#> 2   NA    f     10, 11 NA
+#> 3    3    g 12, 13, 14  3
+#> 4   NA    h       text NA
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[2] <- tbl[1])
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li           m
+#>   <int> <chr> <list>    <int>
+#> 1     1 e     <dbl [1]>     1
+#> 2    NA f     <int [2]>    NA
+#> 3     3 g     <int [3]>     3
+#> 4    NA h     <chr [1]>    NA
+```
+
+</td></tr></tbody></table>
 
 Appending columns at the end (without gaps) is supported.
 The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of precedence).
@@ -2512,7 +3681,255 @@ with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[0:2, ] <- df[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2  1 e          9
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[0:2, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to rows with a valid
+#> subscript vector.
+#> x Subscript `0:2` can't contain `0`
+#> values.
+#> i It has a `0` value at location 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[0, ] <- df[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[0, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to rows with a valid
+#> subscript vector.
+#> x Subscript `0` can't contain `0`
+#> values.
+#> i It has a `0` value at location 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[-2, ] <- df[1, ])
+#>    n c     li
+#> 1  1 e      9
+#> 2 NA f 10, 11
+#> 3  1 e      9
+#> 4  1 e      9
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[-2, ] <- tbl[1, ])
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     1 e     <dbl [1]>
+#> 4     1 e     <dbl [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[-1:2, ] <- df[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in seq_len(nrows)[i]: only 0's may
+#> be mixed with negative subscripts
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[-1:2, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to rows with a valid
+#> subscript vector.
+#> x Negative and positive locations can't
+#> be mixed.
+#> i Subscript `-1:2` has 2 positive values
+#> at locations 3 and 4.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[NA_integer_, ] <- df[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`,
+#> NA_integer_, , value = structure(list(:
+#> missing values are not allowed in
+#> subscripted assignments of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to rows with a valid
+#> subscript vector.
+#> x Subscript `NA_integer_` can't contain
+#> missing values.
+#> x It has a missing value at location 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[NA_integer_, ] <- df2[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`,
+#> NA_integer_, , value = structure(list(:
+#> missing values are not allowed in
+#> subscripted assignments of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to rows with a valid
+#> subscript vector.
+#> x Subscript `NA_integer_` can't contain
+#> missing values.
+#> x It has a missing value at location 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[TRUE, ] <- df[1, ])
+#>   n c li
+#> 1 1 e  9
+#> 2 1 e  9
+#> 3 1 e  9
+#> 4 1 e  9
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[TRUE, ] <- tbl[1, ])
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2     1 e     <dbl [1]>
+#> 3     1 e     <dbl [1]>
+#> 4     1 e     <dbl [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[FALSE, ] <- df[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[FALSE, ] <- tbl[1, ])
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[NA, ] <- df[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`, NA, ,
+#> value = structure(list(n = 1L, : missing
+#> values are not allowed in subscripted
+#> assignments of data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Can't use NA as row index in a
+#> tibble for assignment.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 Only values of size one can be recycled.
 
@@ -2598,7 +4015,68 @@ with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df2(df2[2:4, ] <- df2[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`, 2:4,
+#> , value = structure(list(tb =
+#> structure(list(: replacement element 1
+#> is a matrix/data frame of 1 row, need 3
+```
+
+</div></td><td>
+
+```r
+with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li      m[,1]  [,2]  [,3]
+#>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+#> 1     1 e     <dbl [1~     1     0     0
+#> 2     1 e     <dbl [1~     1     0     0
+#> 3     1 e     <dbl [1~     1     0     0
+#> 4     1 e     <dbl [1~     1     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[2:4, ] <- df2[2:3, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`, 2:4,
+#> , value = structure(list(tb =
+#> structure(list(: replacement element 1
+#> is a matrix/data frame of 2 rows, need 3
+```
+
+</div></td><td>
+
+```r
+with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
+```
+
+<div class="error">
+
+```
+#> Error: Assigned data `tbl2[2:3, ]` must
+#> be compatible with row subscript `2:4`.
+#> x 3 rows must be assigned.
+#> x Element 1 of assigned data has 2 rows.
+#> i Only vectors of size 1 are recycled.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 For compatibility, only a warning is issued for indexing beyond the number of rows.
 Appending rows right at the end of the existing data is supported, without warning.
@@ -2798,7 +4276,147 @@ with_tbl(tbl[as.character(1:3), ] <- tbl[1, ])
 
 </td></tr></tbody></table>
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[as.character(-(1:3)), ] <- df[1, ])
+#>     n c         li
+#> 1   1 e          9
+#> 2  NA f     10, 11
+#> 3   3 g 12, 13, 14
+#> 4  NA h       text
+#> -1  1 e          9
+#> -2  1 e          9
+#> -3  1 e          9
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
+```
+
+<div class="warning">
+
+```
+#> Warning: The `i` argument of `[.tbl_df`
+#> must use valid row names as of tibble
+#> 3.0.0.
+#> Use `NA_integer_` as row index to obtain
+#> a row full of `NA` values.
+```
+
+</div><div class="error">
+
+```
+#> Error: Can't use NA as row index in a
+#> tibble for assignment.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[as.character(3:5), ] <- df[1, ])
+#>    n c     li
+#> 1  1 e      9
+#> 2 NA f 10, 11
+#> 3  1 e      9
+#> 4  1 e      9
+#> 5  1 e      9
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
+```
+
+<div class="warning">
+
+```
+#> Warning: The `i` argument of `[.tbl_df`
+#> must use valid row names as of tibble
+#> 3.0.0.
+#> Use `NA_integer_` as row index to obtain
+#> a row full of `NA` values.
+```
+
+</div><div class="error">
+
+```
+#> Error: Can't use NA as row index in a
+#> tibble for assignment.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[as.character(-(3:5)), ] <- df[1, ])
+#>     n c         li
+#> 1   1 e          9
+#> 2  NA f     10, 11
+#> 3   3 g 12, 13, 14
+#> 4  NA h       text
+#> -3  1 e          9
+#> -4  1 e          9
+#> -5  1 e          9
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
+```
+
+<div class="warning">
+
+```
+#> Warning: The `i` argument of `[.tbl_df`
+#> must use valid row names as of tibble
+#> 3.0.0.
+#> Use `NA_integer_` as row index to obtain
+#> a row full of `NA` values.
+```
+
+</div><div class="error">
+
+```
+#> Error: Can't use NA as row index in a
+#> tibble for assignment.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[NA_character_, ] <- df[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[<-.data.frame`(`*tmp*`,
+#> NA_character_, , value =
+#> structure(list(: missing values are not
+#> allowed in subscripted assignments of
+#> data frames
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[NA_character_, ] <- tbl[1, ])
+```
+
+<div class="error">
+
+```
+#> Error: Can't use NA as row index in a
+#> tibble for assignment.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 ## Row and column subassignment
 
@@ -3185,7 +4803,265 @@ with_tbl(tbl[5, "n"] <- list(0L))
 An efficient implementation would check that `i` and `j` are scalar and forward to `x[i, j][[1]] <- a`.
 
 
+<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
+```r
+with_df(df[[1, 1]] <- 0)
+#>    n c         li
+#> 1  0 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1, 1]] <- 0)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     0 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[1, ][[1]] <- 0)
+#>    n c         li
+#> 1  0 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[1, ][[1]] <- 0)
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     0 e     <dbl [1]>
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1, 3]] <- list(NULL))
+#>    n c         li
+#> 1  1 e       NULL
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[[1, 3]] <- list(NULL))
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <NULL>   
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[1, ][[3]] <- list(NULL))
+#>    n c         li
+#> 1  1 e       NULL
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
+```
+
+</td><td>
+
+```r
+with_tbl(tbl[1, ][[3]] <- list(NULL))
+#> # A tibble: 4 x 3
+#>       n c     li       
+#>   <int> <chr> <list>   
+#> 1     1 e     <NULL>   
+#> 2    NA f     <int [2]>
+#> 3     3 g     <int [3]>
+#> 4    NA h     <chr [1]>
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[1, 1]] <- df[1, ])
+```
+
+<div class="error">
+
+```
+#> Error in `[[<-.data.frame`(`*tmp*`,
+#> iseq, value = structure(list(n = 1L, :
+#> replacement has 1 row, data has 4
+```
+
+</div></td><td>
+
+```r
+with_tbl2(tbl2[[1, 1]] <- tbl[1, ])
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li      m[,1]  [,2]  [,3]
+#>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+#> 1     1 e     <dbl [1~     1     0     0
+#> 2    NA f     <int [2~     0     1     0
+#> 3     3 g     <int [3~     0     0     1
+#> 4    NA h     <chr [1~     0     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[1, ][[1]] <- df[1, ])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li      m[,1]  [,2]  [,3]
+#>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+#> 1     1 e     <dbl [1~     1     0     0
+#> 2    NA f     <int [2~     0     1     0
+#> 3     3 g     <int [3~     0     0     1
+#> 4    NA h     <chr [1~     0     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[[1, 2]] <- t(1:4))
+```
+
+<div class="error">
+
+```
+#> Error in x[[jseq]][[iseq]] <- value:
+#> more elements supplied than there are to
+#> replace
+```
+
+</div></td><td>
+
+```r
+with_tbl2(tbl2[[1, 2]] <- t(1:4))
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li      m[,1]  [,2]  [,3]
+#>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+#> 1     1 e     <dbl [1~     1     2     3
+#> 2    NA f     <int [2~     0     1     0
+#> 3     3 g     <int [3~     0     0     1
+#> 4    NA h     <chr [1~     0     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df2(df2[1, ][[2]] <- t(1:4))
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   2   3   4
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
+```
+
+</td><td>
+
+```r
+with_tbl2(tbl2[1, ][[2]] <- t(1:4))
+#> # A tibble: 4 x 2
+#>    tb$n $c    $li      m[,1]  [,2]  [,3]
+#>   <int> <chr> <list>   <dbl> <dbl> <dbl>
+#> 1     1 e     <dbl [1~     1     2     3
+#> 2    NA f     <int [2~     0     1     0
+#> 3     3 g     <int [3~     0     0     1
+#> 4    NA h     <chr [1~     0     0     0
+```
+
+</td></tr><tr style="vertical-align:top"><td>
+
+```r
+df[[1:2, 1]]
+```
+
+<div class="error">
+
+```
+#> Error in col[[i, exact = exact]]:
+#> attempt to select more than one element
+#> in vectorIndex
+```
+
+</div></td><td>
+
+```r
+tbl[[1:2, 1]]
+```
+
+<div class="error">
+
+```
+#> Error: Must extract row with a single
+#> valid subscript.
+#> x Subscript `1:2` has size 2 but must be
+#> size 1.
+```
+
+</div></td></tr><tr style="vertical-align:top"><td>
+
+```r
+with_df(df[[1:2, 1]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error in `[[<-.data.frame`(`*tmp*`, 1:2,
+#> 1, value = 0): only a single element
+#> should be replaced
+```
+
+</div></td><td>
+
+```r
+with_tbl(tbl[[1:2, 1]] <- 0)
+```
+
+<div class="error">
+
+```
+#> Error: Must assign to row with a single
+#> valid subscript.
+#> x Subscript `1:2` has size 2 but must be
+#> size 1.
+```
+
+</div>
+
+</td></tr></tbody></table>
 
 NB: `vec_size(a)` must equal 1.
 Unlike `x[i, ] <-`, `x[[i, ]] <-` is not valid.
