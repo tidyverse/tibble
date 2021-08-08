@@ -895,6 +895,13 @@ test_that("output test", {
     df[NA] <- 3
     df[NA, ] <- 3
 
+    "# [<-.tbl_df and logical indexes"
+    df <- tibble(x = 1:2, y = x)
+    df[FALSE] <- 1
+    df
+    df[, TRUE] <- 2
+    df
+
     "# [<-.tbl_df throws an error with bad RHS"
     df <- tibble(x = 1:2, y = x)
     df[] <- mean
