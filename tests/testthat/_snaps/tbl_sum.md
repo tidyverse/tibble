@@ -16,9 +16,9 @@
        Named chr "3 x 2"
        - attr(*, "names")= chr "A tibble"
     Code
-      dim_desc(iris)
+      dim_desc(trees)
     Output
-      [1] "150 x 5"
+      [1] "31 x 3"
     Code
       dim_desc(Titanic)
     Output

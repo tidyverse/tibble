@@ -1,10 +1,9 @@
 ---
-title: "Invariants for subsetting and subassignment"
+title: "Invariants: Comparing behavior with data frames"
 #output: rmarkdown::word_document
 output: rmarkdown::html_vignette
-# devtools::load_all(); eval_details <- TRUE; rmarkdown::render("vignettes/invariants.Rmd", output_format = rmarkdown::md_document(preserve_yaml = TRUE)); system("pandoc vignettes/invariants.md -o vignettes/invariants.html")
 vignette: >
-  %\VignetteIndexEntry{Invariants for subsetting and subassignment}
+  %\VignetteIndexEntry{Invariants: Comparing behavior with data frames}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,13 +25,13 @@ vignette: >
 </style>
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  error = TRUE,
-  collapse = TRUE,
-  #eval = FALSE, echo = FALSE,
-  comment = "#>"
-)
+# To suppress messages
+library(tibble)
+library(vctrs)
 
+knitr::opts_chunk$set(error = TRUE)
+
+tibble:::set_fansi_hooks()
 tibble:::set_dftbl_hooks()
 
 options(
@@ -43,7 +42,7 @@ options(
 )
 
 # Set to FALSE for production
-if (!exists("eval_details")) eval_details <- FALSE
+eval_details <- (Sys.getenv("IN_GALLEY") != "")
 ```
 
 This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames.
@@ -60,7 +59,7 @@ In this article, all behaviors are demonstrated using one example data frame and
 
 ```{r setup}
 library(tibble)
-suppressWarnings(library(vctrs))
+library(vctrs)
 
 new_df <- function() {
   df <- data.frame(n = c(1L, NA, 3L, NA))
@@ -570,6 +569,8 @@ The name of new columns is determined by the LHS, the RHS, or by name repair (in
 ```{r bracket-assign-names, dftbl = TRUE}
 with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
 with_df(df[3:4] <- list("x", x = 4:1))
+with_df(df[3:5] <- list("x"))
+with_df(df[3:5] <- list(x = 4:1))
 with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```

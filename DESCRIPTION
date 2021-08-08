@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.1.3.9001
+Version: 3.1.4.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -20,8 +20,7 @@ Authors@R:
              email = "jenny@rstudio.com"),
       person(given = "RStudio",
              role = "cph"))
-Description: Provides a 'tbl_df' class (the 'tibble') that
-    provides stricter checking and better formatting than the traditional
+Description: Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional
     data frame.
 License: MIT + file LICENSE
 URL: https://tibble.tidyverse.org/,
@@ -64,12 +63,14 @@ Suggests:
     pkgload,
     purrr,
     rmarkdown,
+    stringi,
     testthat (>= 3.0.2),
     tidyr,
     withr
 VignetteBuilder: 
     knitr
 Remotes: 
+    r-lib/rlang,
     r-lib/pillar@v1.6.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
