@@ -131,7 +131,7 @@ NULL
       x
     } else {
       # Drop inner names with double subscript
-      vec_set_names(vec_slice(x, i), NULL)
+      vectbl_set_names(vec_slice(x, i), NULL)
     }
   }
 }
