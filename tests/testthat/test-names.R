@@ -13,6 +13,8 @@ test_that("repaired_names()", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("vctrs", "0.8.3.9001")
+
   expect_snapshot_with_error({
     repaired_names(letters[1:3], repair_hint = FALSE)
     repaired_names("", repair_hint = FALSE)
