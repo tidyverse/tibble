@@ -206,8 +206,6 @@
 <p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -233,7 +231,10 @@
   <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/eval_tidy.html" class="external-link">eval_tidy</a></span><span class="op">(</span><span class="va">full_code</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>This function takes an assignment expression and executes it on a fresh copy of the data. The first example prints what’s really executed, further examples omit this output.</p>
-<table class="table dftbl"><tbody><tr style="vertical-align:top">
+<table class="table dftbl"><tbody>
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -248,6 +249,8 @@
 <span class="co">#&gt; 3 2 g 12, 13, 14</span>
 <span class="co">#&gt; 4 1 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -264,7 +267,8 @@
 <span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr></tbody></table>
+</tr>
+</tbody></table>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
 <a href="#section" class="anchor" aria-hidden="true"></a>$&lt;-</h2>
@@ -273,7 +277,7 @@
 <a href="#scalars-and-full-length" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
 <p>Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn’t happen:</p>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
 <td>
@@ -290,8 +294,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -301,10 +303,6 @@
 <span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -320,8 +318,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -335,7 +331,7 @@
 </tr>
 </tbody></table>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
 <td>
@@ -352,8 +348,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -363,10 +357,6 @@
 <span class="co">#&gt; 2     2     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     2 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -381,8 +371,6 @@
 </td>
 </tr>
 <tr style="vertical-align:top">
-<td>
-</td>
 <td>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
@@ -402,7 +390,9 @@
 <a href="#recycling" class="anchor" aria-hidden="true"></a>Recycling</h3>
 <p>Tibbles allow recycling only for vectors of length 1 or of the same length as the data.</p>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
@@ -412,6 +402,8 @@
 <span class="co">#&gt; 3 1 g 12, 13, 14</span>
 <span class="co">#&gt; 4 2 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
@@ -423,8 +415,6 @@
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -434,6 +424,8 @@
 #&gt; data has 4</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -445,8 +437,6 @@
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
@@ -456,6 +446,8 @@
 #&gt; data has 4</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
@@ -467,8 +459,6 @@
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
@@ -478,6 +468,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14 1</span>
 <span class="co">#&gt; 4 4 h       text 2</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
@@ -497,7 +489,7 @@
 <a href="#subset-assignment" class="anchor" aria-hidden="true"></a>Subset assignment</h3>
 <p>Updating parts of a column extracted by <code>$</code> is the responsibility of the column vector. Tibbles can’t control what happens after <code>$</code> has returned.</p>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
 <td>
@@ -514,8 +506,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -526,8 +516,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
@@ -537,6 +525,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -551,10 +541,6 @@
 #&gt; ✖ Assigned data has 2 rows.
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -602,8 +588,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -638,7 +622,7 @@
 <a href="#scalars-and-full-length-1" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
 <p>As with <code>$</code> subsetting, columns are consistently overwritten, and partial matching doesn’t occur. Numeric indexing is supported, but tibbles don’t support creation of new numbered columns for a good reason.</p>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
 <td>
 </td>
 <td>
@@ -655,8 +639,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -666,10 +648,6 @@
 <span class="co">#&gt; 2 x     f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3 x     g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4 x     h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
@@ -685,8 +663,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
@@ -696,10 +672,6 @@
 <span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt; x    </span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; x</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
@@ -715,8 +687,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -726,10 +696,6 @@
 <span class="co">#&gt; 2 x     f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3 x     g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4 x     h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
@@ -797,8 +763,6 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -808,10 +772,6 @@
 <span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
@@ -827,8 +787,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"b"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -838,10 +796,6 @@
 <span class="co">#&gt; 2     2 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 b     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 a     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
@@ -856,8 +810,6 @@
 </td>
 </tr>
 <tr style="vertical-align:top">
-<td>
-</td>
 <td>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
@@ -877,7 +829,9 @@
 <a href="#cells" class="anchor" aria-hidden="true"></a>Cells</h3>
 <p>Tibbles are stricter when updating single cells, the value must be coercible to the existing contents. Updating a list column requires the contents to be wrapped in a list, consistently with <code>[[</code> subsetting which returns a list if a cell in a list column is accessed:</p>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -887,6 +841,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -898,8 +854,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span>
@@ -909,6 +863,8 @@
 <span class="co">#&gt; 3 3.0 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4.0 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
@@ -921,8 +877,6 @@
 #&gt; • Locations: 1.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -932,6 +886,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -942,10 +898,6 @@
 #&gt; ✖ Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
@@ -983,8 +935,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -995,8 +945,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -1006,6 +954,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1016,8 +966,6 @@
 #&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span><span class="op">)</span>
@@ -1027,6 +975,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span><span class="op">)</span>
@@ -1038,8 +988,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1049,6 +997,8 @@
 #&gt; non-existent column: c</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -1060,8 +1010,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt; &lt;NA&gt; </span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; &lt;NA&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1071,6 +1019,8 @@
 #&gt; element should be replaced</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1081,8 +1031,6 @@
 #&gt; size 1.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1092,6 +1040,8 @@
 #&gt; non-existent column: c</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1102,8 +1052,6 @@
 #&gt; size 1.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1113,6 +1061,8 @@
 #&gt; element in non-existent column: d</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1134,7 +1084,9 @@
 <h3 class="hasAnchor">
 <a href="#scalars" class="anchor" aria-hidden="true"></a>Scalars</h3>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -1144,6 +1096,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -1155,8 +1109,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span>
@@ -1166,6 +1118,8 @@
 <span class="co">#&gt; 3 3.0 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4.0 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
@@ -1178,8 +1132,6 @@
 #&gt; • Locations: 1.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -1189,6 +1141,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1199,10 +1153,6 @@
 #&gt; ✖ Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
@@ -1260,8 +1210,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
@@ -1272,8 +1220,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt; &lt;NA&gt; </span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; &lt;NA&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -1283,6 +1229,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1293,10 +1241,6 @@
 #&gt; ✖ Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
@@ -1361,8 +1305,6 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1372,10 +1314,6 @@
 <span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
@@ -1391,8 +1329,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"c"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
@@ -1402,10 +1338,6 @@
 <span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     3</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
@@ -1421,8 +1353,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1432,10 +1362,6 @@
 <span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
@@ -1451,8 +1377,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1463,8 +1387,6 @@
 <span class="co">#&gt; 3     3 g         2</span>
 <span class="co">#&gt; 4     4 h         1</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
@@ -1474,6 +1396,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14  2</span>
 <span class="co">#&gt; 4 4 h       text  1</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
@@ -1484,10 +1408,6 @@
 <span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     3</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
@@ -1503,8 +1423,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"b"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1514,10 +1432,6 @@
 <span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
@@ -1533,8 +1447,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"cd"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1544,10 +1456,6 @@
 <span class="co">#&gt; 2     2 f         1</span>
 <span class="co">#&gt; 3     3 g         1</span>
 <span class="co">#&gt; 4     4 h         1</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
@@ -1563,8 +1471,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1574,10 +1480,6 @@
 <span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
@@ -1621,8 +1523,6 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1632,10 +1532,6 @@
 <span class="co">#&gt; 2     3     3 &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2     2 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
@@ -1651,8 +1547,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1662,10 +1556,6 @@
 <span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
@@ -1681,8 +1571,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>c <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, d <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1692,10 +1580,6 @@
 <span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
@@ -1736,8 +1620,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -1748,8 +1630,6 @@
 <span class="co">#&gt; 3     2     1 &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
@@ -1759,6 +1639,8 @@
 <span class="co">#&gt; 3 2 b 12, 13, 14 2</span>
 <span class="co">#&gt; 4 1 a       text 1</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1767,8 +1649,6 @@
 #&gt; size 3.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
@@ -1778,6 +1658,8 @@
 <span class="co">#&gt; 3 2 b  2</span>
 <span class="co">#&gt; 4 1 a  1</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1793,7 +1675,9 @@
 <h3 class="hasAnchor">
 <a href="#full-length-rows" class="anchor" aria-hidden="true"></a>Full length rows</h3>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -1803,6 +1687,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -1813,8 +1699,6 @@
 #&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
@@ -1824,6 +1708,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -1835,8 +1721,6 @@
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">)</span>
@@ -1846,6 +1730,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1854,8 +1740,6 @@
 #&gt; size 3.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1865,6 +1749,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1876,8 +1762,6 @@
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1893,6 +1777,8 @@
 #&gt; 3 3 g 12, 13, 14
 #&gt; 4 4 h       text</code></pre>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1901,8 +1787,6 @@
 #&gt; size 3.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1912,6 +1796,8 @@
 <span class="co">#&gt; 3 3 g 12, 13, 14</span>
 <span class="co">#&gt; 4 4 h       text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1923,8 +1809,6 @@
 #&gt; ℹ It has a `0` value at location 1.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1935,6 +1819,8 @@
 <span class="co">#&gt; 4 4 h       text</span>
 <span class="co">#&gt; 5 1 x          y</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1954,7 +1840,9 @@
 <h3 class="hasAnchor">
 <a href="#multiple-full-length-rows" class="anchor" aria-hidden="true"></a>Multiple full length rows</h3>
 <table class="table dftbl"><tbody>
-<tr style="vertical-align:top">
+<tr>
+<td>
+</td>
 <td>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
@@ -1964,6 +1852,8 @@
 <span class="co">#&gt; 3 1 1    1</span>
 <span class="co">#&gt; 4 4 h text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -1974,8 +1864,6 @@
 #&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
@@ -1985,6 +1873,8 @@
 <span class="co">#&gt; 3 2 2    2</span>
 <span class="co">#&gt; 4 4 h text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
@@ -1996,8 +1886,6 @@
 #&gt; &lt;character&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span>
@@ -2007,6 +1895,8 @@
 <span class="co">#&gt; 3 y y    y</span>
 <span class="co">#&gt; 4 4 h text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2018,8 +1908,6 @@
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -2029,6 +1917,8 @@
 <span class="co">#&gt; 3 2 y    2</span>
 <span class="co">#&gt; 4 4 h text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2037,8 +1927,6 @@
 #&gt; size 3.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -2048,6 +1936,8 @@
 <span class="co">#&gt; 3 1 x    y</span>
 <span class="co">#&gt; 4 4 h text</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -2058,10 +1948,6 @@
 <span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span>
 <span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
@@ -2102,8 +1988,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2114,8 +1998,6 @@
 <span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span>
 <span class="co">#&gt; 4     2 x     &lt;chr [1]&gt;</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2143,6 +2025,8 @@
 #&gt; 3 3 g 12, 13, 14
 #&gt; 4 4 h       text</code></pre>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2153,10 +2037,6 @@
 #&gt; values.
 #&gt; ℹ It has a `0` value at location 1.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
@@ -2179,8 +2059,6 @@
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2190,10 +2068,6 @@
 <span class="co">#&gt; 2     1     1     1</span>
 <span class="co">#&gt; 3     1     1     1</span>
 <span class="co">#&gt; 4     1     1     1</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
@@ -2272,8 +2146,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2283,10 +2155,6 @@
 <span class="co">#&gt; 2     3 x         2</span>
 <span class="co">#&gt; 3     2 x         2</span>
 <span class="co">#&gt; 4     1 x         2</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
@@ -2327,8 +2195,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2338,10 +2204,6 @@
 <span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
 <span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
 <span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
@@ -2357,8 +2219,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2369,8 +2229,6 @@
 <span class="co">#&gt; 3     2     2     2</span>
 <span class="co">#&gt; 4     1     1     1</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
@@ -2380,6 +2238,8 @@
 <span class="co">#&gt; 3 1 3  2</span>
 <span class="co">#&gt; 4 3 2  1</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -2391,8 +2251,6 @@
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -2402,6 +2260,8 @@
 #&gt; need 12</code></pre>
 </div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -2413,8 +2273,6 @@
 #&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span>
@@ -2424,6 +2282,8 @@
 <span class="co">#&gt; 3 1 x  1</span>
 <span class="co">#&gt; 4 1 x  1</span></code></pre></div>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2431,10 +2291,6 @@
 <pre><code>#&gt; Error: Can't recycle input of size 2 to
 #&gt; size 3.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
@@ -2450,8 +2306,6 @@
 </tr>
 <tr style="vertical-align:top">
 <td>
-</td>
-<td>
 <div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
@@ -2462,8 +2316,6 @@
 <span class="co">#&gt; 3     1 x         2</span>
 <span class="co">#&gt; 4     1 x         2</span></code></pre></div>
 </td>
-</tr>
-<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2479,6 +2331,8 @@
 #&gt; 3 1 x  2
 #&gt; 4 1 x  2</code></pre>
 </td>
+</tr>
+<tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2486,10 +2340,6 @@
 <pre><code>#&gt; Error: Can't recycle input of size 4 to
 #&gt; size 3.</code></pre>
 </div>
-</td>
-</tr>
-<tr style="vertical-align:top">
-<td>
 </td>
 <td>
 <div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
