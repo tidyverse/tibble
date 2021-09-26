@@ -7,6 +7,8 @@ test_that("aborting with class", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("rlang", "0.4.11.9001")
+
   expect_snapshot({
     "# add"
     error_add_rows_to_grouped_df()
