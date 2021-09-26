@@ -129,7 +129,7 @@ in a list." />
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
         </div>
       </div>
     </div>
@@ -272,8 +272,9 @@ unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that 
 <p>Arguments are evaluated sequentially.
 You can refer to previously created elements directly or using the .data
 pronoun.
-An existing <code>.data</code> pronoun, provided e.g. inside <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>,
-is not available.</p></td>
+To refer explicitly to objects in the calling environment, use <code>!!</code> or
+.env, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
+named <code>.data</code>.</p></td>
     </tr>
     <tr>
       <th>.rows</th>
@@ -480,8 +481,8 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> <span style='color: #BB0000;'>NA</span>    </span>
 <span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'>tibble</span><span class='op'>(</span>c <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 3: Existing data.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> Size 4: Column `b`.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Size 3: Existing data.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Size 4: Column `b`.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>ℹ</span> Only values of size one are recycled.</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Use := to create columns with names that start with a dot:</span></span>
@@ -525,6 +526,32 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>     9    18</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>    10    20</span>
 <span class='r-in'></span>
+<span class='r-in'><span class='co'># Use .data, .env and !! to refer explicitly to columns or outside objects</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1</span></span>
+<span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a     b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     2     2</span>
+<span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='va'>.data</span><span class='op'>$</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a     b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     2     2</span>
+<span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='va'>.env</span><span class='op'>$</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a     b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     2     1</span>
+<span class='r-in'><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       a     b</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     2     1</span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='va'>.env</span><span class='op'>$</span><span class='va'>bogus</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error in eval_bare(sym(nm), x) : object 'bogus' not found</span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>bogus</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error in quos(...) : object 'bogus' not found</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Use tibble_row() to construct a one-row tibble:</span></span>
 <span class='r-in'><span class='fu'>tibble_row</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, lm <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Height</span> <span class='op'>~</span> <span class='va'>Girth</span> <span class='op'>+</span> <span class='va'>Volume</span>, data <span class='op'>=</span> <span class='va'>trees</span><span class='op'>)</span><span class='op'>)</span></span>
