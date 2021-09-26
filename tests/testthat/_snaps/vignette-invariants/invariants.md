@@ -3355,6 +3355,12 @@ with_tbl(tbl[1] <- list(matrix(1:8, ncol = 2)))
 
 </td></tr><tr style="vertical-align:top"><td>
 
+
+</td><td>
+
+
+</td></tr><tr style="vertical-align:top"><td>
+
 ```r
 with_df(df[1:2] <- list(matrix(1:8, ncol = 2)))
 #>   n.1 n.2 c.1 c.2         li
