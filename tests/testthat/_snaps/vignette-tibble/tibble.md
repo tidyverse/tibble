@@ -178,7 +178,6 @@ class(df1[, 1:2])
 #> [1] "data.frame"
 class(df1[, 1])
 #> [1] "integer"
-
 df2 <- tibble(x = 1:3, y = 3:1)
 class(df2[, 1:2])
 #> [1] "tbl_df"     "tbl"        "data.frame"
@@ -204,7 +203,6 @@ Tibbles never do partial matching, and will throw a warning and return `NULL` if
 df <- data.frame(abc = 1)
 df$a
 #> [1] 1
-
 df2 <- tibble(abc = 1)
 df2$a
 #> Warning: Unknown or uninitialised column: `a`.
@@ -231,7 +229,6 @@ rownames(df)
 #> [1] "a" "b" "c"
 rownames(as_tibble(df))
 #> [1] "1" "2" "3"
-
 tbl <- tibble(a = 1:3)
 rownames(tbl) <- letters[1:3]
 #> Warning: Setting row names on a tibble is deprecated.

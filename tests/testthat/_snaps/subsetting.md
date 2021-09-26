@@ -363,13 +363,13 @@
       # # $.tbl_df and partial matching/invalid columns
       foo <- tibble(data = 1:10)
       foo$d
-    Warning <warning>
+    Warning <rlang_warning>
       Unknown or uninitialised column: `d`.
     Output
       NULL
     Code
       foo$e
-    Warning <warning>
+    Warning <rlang_warning>
       Unknown or uninitialised column: `e`.
     Output
       NULL
