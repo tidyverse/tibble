@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.1.4.9000
+Version: 3.1.4.9001
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -69,12 +69,9 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
-Remotes: 
-    r-lib/rlang,
-    r-lib/pillar@v1.6.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: subsetting, as_tibble, add, invariants

@@ -11,7 +11,7 @@
 #' @param name,value Names of the columns that store the names and values.
 #'   If `name` is `NULL`, a one-column tibble is returned; `value` cannot be `NULL`.
 #'
-#' @return Fpr `enframe()`, a [tibble] with two columns (if `name` is not `NULL`, the default)
+#' @return For `enframe()`, a [tibble] with two columns (if `name` is not `NULL`, the default)
 #'   or one column (otherwise).
 #' @export
 #'

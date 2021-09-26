@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.4.9001
+
+- Avoid blanket import for lifecycle package for compatibility with upcoming rlang (#955, @romainfrancois).
+
+
 # tibble 3.1.4.9000
 
 - Same as previous version.
@@ -7,38 +12,28 @@
 
 # tibble 3.1.4
 
-- Same as previous version.
+## Features
 
+- `as.data.frame.tbl_df()` strips inner column names (#837).
+- `new_tibble()` allows omitting the `nrow` argument again (#781).
 
-# tibble 3.1.3.9003
+## Documentation
 
-- `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
 - Move `vignette("digits")`, `vignette("numbers")`, `?num` and `?char` from the pillar package here (#913).
 - Replace `iris` by `trees` (#943).
 - Various documentation improvements.
-
-
-# tibble 3.1.3.9002
-
-- `x[j] <- list(name = value)` uses name repair when new columns are created (#929). 
-- `as.data.frame.tbl_df()` strips inner column names (#837).
 - New `?tibble_options` help page (#912).
+
+## Performance
+
+- `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
+
+## Internal
+
 - Vignettes are now tested with a snapshot test (#919).
-- `new_tibble()` allows omitting the `nrow` argument again (#781).
 - `new_tibble()` uses `vctrs::new_data_frame()` internally (#726, @DavisVaughan).
-- `enframe()` no longer works for data frames.
-
-
-# tibble 3.1.3.9001
-
 - Adapt to pillar 1.6.2.
-- `enframe()` also works for data frames, creates a packed data frame.
 - Fix tests for compatibility with pillar 1.6.2.
-
-
-# tibble 3.1.3.9000
-
-- Same as previous version.
 
 
 # tibble 3.1.3

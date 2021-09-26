@@ -459,6 +459,26 @@
     Error <tibble_error_assign_rows_non_na_only>
       Can't use NA as row index in a tibble for assignment.
     Code
+      # # [<-.tbl_df and logical indexes
+      df <- tibble(x = 1:2, y = x)
+      df[FALSE] <- 1
+      df
+    Output
+      # A tibble: 2 x 2
+            x     y
+        <int> <int>
+      1     1     1
+      2     2     2
+    Code
+      df[, TRUE] <- 2
+      df
+    Output
+      # A tibble: 2 x 2
+            x     y
+        <dbl> <dbl>
+      1     2     2
+      2     2     2
+    Code
       # # [<-.tbl_df throws an error with bad RHS
       df <- tibble(x = 1:2, y = x)
       df[] <- mean

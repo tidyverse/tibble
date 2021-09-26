@@ -89,6 +89,13 @@ test_that("new_tibble() supports missing `nrow` (#781)", {
   expect_identical(new_tibble(list(a = 1:3)), tibble(a = 1:3))
 })
 
+test_that("new_tibble() supports language objects", {
+  expect_identical(
+    new_tibble(list(), foo = quote(bar())),
+    structure(new_tibble(list()), foo = quote(bar()))
+  )
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
