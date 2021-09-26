@@ -15,8 +15,9 @@ unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start
 Arguments are evaluated sequentially.
 You can refer to previously created elements directly or using the \link{.data}
 pronoun.
-An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
-is not available.}
+To refer explicitly to objects in the calling environment, use \code{\link{!!}} or
+\link{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
+named \code{.data}.}
 }
 \value{
 A named list.
