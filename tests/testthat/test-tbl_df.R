@@ -13,6 +13,11 @@ test_that("as.data.frame() keeps inner names for lists (#837)", {
   expect_identical(as.data.frame(tbl)$a, list(b = 1:3))
 })
 
+test_that("as.data.frame() keeps inner names for records", {
+  tbl <- tibble(x = new_rcrd(list(a = 1:3)))
+  expect_identical(as.data.frame(tbl)$x, new_rcrd(list(a = 1:3)))
+})
+
 test_that("names<-()", {
   new_tbl <- function(...) {
     data <- list(1, "b")
