@@ -11,7 +11,7 @@ articles:
   types: types.html
   subassign: wip/subassign.html
   subset: wip/subset.html
-last_built: 2021-09-26T19:12Z
+last_built: 2021-09-26T19:15Z
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles
