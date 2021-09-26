@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.4.9002
+
+- Avoid necessity to set `"tibble.view_max"` option for lazy tables (#954).
+
+
 # tibble 3.1.4.9001
 
 - Avoid blanket import for lifecycle package for compatibility with upcoming rlang (#955, @romainfrancois).
