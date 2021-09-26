@@ -104,6 +104,7 @@ library(tidyr)
 #> The following object is masked from 'package:testthat':
 #> 
 #>     matches
+
 stocks <- 
   expand_grid(id = factor(1:4), year = 2018:2022) %>% 
   mutate(stock = currency(runif(20) * 10000))
@@ -188,6 +189,7 @@ tbl3
 #> 1 a         9    10    81    91     9  0.412  112.     1
 #> 2 b        10    11   100   111     9 -0.544  112.     1
 #> 3 c        11    12   121   133    10 -1.00   112.     1
+
 tbl3 %>% 
   mutate(
     across(where(is.numeric), digits, 3),

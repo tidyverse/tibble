@@ -161,9 +161,11 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
-  expect_snapshot(
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
+  expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
-  )
+  })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(
@@ -173,9 +175,11 @@ test_that("as_tibble() implements unique names", {
 })
 
 test_that("as_tibble() implements universal names", {
-  expect_snapshot(
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
+  expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
-  )
+  })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(
@@ -217,6 +221,8 @@ test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   scoped_lifecycle_warnings()
 
   x <- matrix(1:6, nrow = 3)
@@ -248,6 +254,8 @@ test_that("as_tibble.matrix() supports .name_repair", {
 })
 
 test_that("as_tibble.poly() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- poly(1:6, 3)
 
   expect_identical(
@@ -265,6 +273,8 @@ test_that("as_tibble.poly() supports .name_repair", {
 })
 
 test_that("as_tibble.table() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   expect_snapshot(error = TRUE, {
     as_tibble(table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5)))
     as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
@@ -308,6 +318,8 @@ test_that("as_tibble.table() supports .name_repair", {
 })
 
 test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
 
   expect_identical(
@@ -383,12 +395,12 @@ test_that("as_tibble() converts implicit row names when `rownames =` is passed",
   )
 })
 
-test_that("as_data_frame is an alias of as_tibble", {
+test_that("as_data_frame() is an alias of as_tibble()", {
   scoped_lifecycle_silence()
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })
 
-test_that("as.tibble is an alias of as_tibble", {
+test_that("as.tibble() is an alias of as_tibble()", {
   scoped_lifecycle_silence()
   expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
@@ -618,6 +630,8 @@ test_that("supports compat col names", {
 })
 
 test_that("creates col names with name repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- matrix(1:4, nrow = 2)
 
   expect_snapshot(
