@@ -26,10 +26,6 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
-```
-#> Warning: replacing previous import 'lifecycle::last_warnings' by
-#> 'rlang::last_warnings' when loading 'hms'
-```
 
 
 |Class                       |Data type            |Example                          |Column header |
