@@ -17,7 +17,7 @@ deframe(x)
 If \code{name} is \code{NULL}, a one-column tibble is returned; \code{value} cannot be \code{NULL}.}
 }
 \value{
-Fpr \code{enframe()}, a \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
+For \code{enframe()}, a \link{tibble} with two columns (if \code{name} is not \code{NULL}, the default)
 or one column (otherwise).
 
 For \code{deframe()}, a vector (named or unnamed).
