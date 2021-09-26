@@ -2977,54 +2977,6 @@ with_tbl(tbl[3:4] <- list("x", x = 4:1))
 </td></tr><tr style="vertical-align:top"><td>
 
 ```r
-with_df(df[3:5] <- list("x"))
-#>    n c li V4 V5
-#> 1  1 e  x  x  x
-#> 2 NA f  x  x  x
-#> 3  3 g  x  x  x
-#> 4 NA h  x  x  x
-```
-
-</td><td>
-
-```r
-with_tbl(tbl[3:5] <- list("x"))
-#> # A tibble: 4 x 5
-#>       n c     li    ...4  ...5 
-#>   <int> <chr> <chr> <chr> <chr>
-#> 1     1 e     x     x     x    
-#> 2    NA f     x     x     x    
-#> 3     3 g     x     x     x    
-#> 4    NA h     x     x     x
-```
-
-</td></tr><tr style="vertical-align:top"><td>
-
-```r
-with_df(df[3:5] <- list(x = 4:1))
-#>    n c li x x.1
-#> 1  1 e  4 4   4
-#> 2 NA f  3 3   3
-#> 3  3 g  2 2   2
-#> 4 NA h  1 1   1
-```
-
-</td><td>
-
-```r
-with_tbl(tbl[3:5] <- list(x = 4:1))
-#> # A tibble: 4 x 5
-#>       n c        li x...4 x...5
-#>   <int> <chr> <int> <int> <int>
-#> 1     1 e         4     4     4
-#> 2    NA f         3     3     3
-#> 3     3 g         2     2     2
-#> 4    NA h         1     1     1
-```
-
-</td></tr><tr style="vertical-align:top"><td>
-
-```r
 with_df(df[4] <- list(4:1))
 #>    n c         li V4
 #> 1  1 e          9  4
