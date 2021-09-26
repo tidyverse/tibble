@@ -141,7 +141,7 @@
 
       
 
-      </header><script src="formats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="formats_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="formats_files/d3-3.3.8/d3.min.js"></script><script src="formats_files/dagre-0.4.0/dagre-d3.min.js"></script><link href="formats_files/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet">
+      </header><script src="formats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="formats_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="formats_files/d3-3.3.8/d3.min.js"></script><script src="formats_files/dagre-0.4.0/dagre-d3.min.js"></script><link href="formats_files/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet">
 <script src="formats_files/mermaid-0.3.0/dist/mermaid.slim.min.js"></script><link href="formats_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
 <script src="formats_files/chromatography-0.1/chromatography.js"></script><script src="formats_files/DiagrammeR-binding-1.0.6.1/DiagrammeR.js"></script><div class="row">
   <div class="col-md-9 contents">
@@ -227,10 +227,10 @@
 <span class="co">#&gt; # A tibble: 4 × 6</span>
 <span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span>
 <span class="co">#&gt;   &lt;fct&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt; &lt;dbl:fmt&gt;</span>
-<span class="co">#&gt; 1 1     $1,611.50 $8,527.35 $2,235.88 $3,770.84 $6,699.64</span>
-<span class="co">#&gt; 2 2     $7,382.32 $5,214.57 $3,897.95 $4,779.88 $7,686.29</span>
-<span class="co">#&gt; 3 3       $343.84 $2,489.10 $5,406.03 $5,256.02 $2,285.85</span>
-<span class="co">#&gt; 4 4     $4,797.22 $6,661.88 $7,965.17 $9,083.18 $7,075.94</span></code></pre></div>
+<span class="co">#&gt; 1 1     $7,790.52 $4,214.37 $4,758.55 $5,576.46 $3,217.19</span>
+<span class="co">#&gt; 2 2     $1,543.52 $3,310.20 $9,049.07 $8,973.25 $9,373.86</span>
+<span class="co">#&gt; 3 3     $9,307.92 $2,156.05 $7,913.02 $7,131.37 $8,274.88</span>
+<span class="co">#&gt; 4 4     $4,696.42 $4,371.61   $944.50 $8,305.97 $1,696.01</span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
@@ -241,10 +241,10 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It pays off to specify formatting very early in the process. The diagram below shows the principal stages of data analysis and exploration from “R for data science”.</p>
-<div id="htmlwidget-83625cb0cf495bd277a6" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-83625cb0cf495bd277a6">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
-<div id="htmlwidget-998462f0d7c665929940" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-998462f0d7c665929940">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
+<div id="htmlwidget-77cf0a1670d1fbb533f1" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77cf0a1670d1fbb533f1">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
+<div id="htmlwidget-9823a02dc72c861fb8ef" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9823a02dc72c861fb8ef">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
 <ul>
 <li>give a good user experience for analysis
 <ul>
@@ -282,7 +282,6 @@
 <span class="co">#&gt; 1 a         9    10    81    91     9  0.412  112.     1</span>
 <span class="co">#&gt; 2 b        10    11   100   111     9 -0.544  112.     1</span>
 <span class="co">#&gt; 3 c        11    12   121   133    10 -1.00   112.     1</span>
-
 <span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">3</span><span class="op">)</span>,
