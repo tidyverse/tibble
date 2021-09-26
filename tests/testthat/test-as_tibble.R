@@ -161,7 +161,7 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
@@ -175,7 +175,7 @@ test_that("as_tibble() implements unique names", {
 })
 
 test_that("as_tibble() implements universal names", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
@@ -221,7 +221,7 @@ test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   scoped_lifecycle_warnings()
 
@@ -254,7 +254,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
 })
 
 test_that("as_tibble.poly() supports .name_repair", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   x <- poly(1:6, 3)
 
@@ -273,7 +273,7 @@ test_that("as_tibble.poly() supports .name_repair", {
 })
 
 test_that("as_tibble.table() supports .name_repair", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   expect_snapshot(error = TRUE, {
     as_tibble(table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5)))
@@ -318,7 +318,7 @@ test_that("as_tibble.table() supports .name_repair", {
 })
 
 test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
 
@@ -630,7 +630,7 @@ test_that("supports compat col names", {
 })
 
 test_that("creates col names with name repair", {
-  skip_if_not_installed("vctrs", "0.8.3.9001")
+  skip_if_not_installed("vctrs", "0.3.8.9001")
 
   x <- matrix(1:4, nrow = 2)
 
