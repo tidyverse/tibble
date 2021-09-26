@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.5
+
+- Same as previous version.
+
+
 # tibble 3.1.4.9002
 
 - Avoid necessity to set `"tibble.view_max"` option for lazy tables (#954).
