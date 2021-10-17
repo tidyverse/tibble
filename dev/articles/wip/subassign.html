@@ -267,11 +267,11 @@
 </td>
 </tr></tbody></table>
 <div id="section" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section" class="anchor" aria-hidden="true"></a>$&lt;-</h2>
+<h2>$&lt;-<a class="anchor" aria-label="anchor" href="#section"></a>
+</h2>
 <div id="scalars-and-full-length" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars-and-full-length" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
+<h3>Scalars and full length<a class="anchor" aria-label="anchor" href="#scalars-and-full-length"></a>
+</h3>
 <p>Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn’t happen:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -399,8 +399,8 @@
 </tbody></table>
 </div>
 <div id="recycling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#recycling" class="anchor" aria-hidden="true"></a>Recycling</h3>
+<h3>Recycling<a class="anchor" aria-label="anchor" href="#recycling"></a>
+</h3>
 <p>Tibbles allow recycling only for vectors of length 1 or of the same length as the data.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -494,8 +494,8 @@
 </tbody></table>
 </div>
 <div id="subset-assignment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subset-assignment" class="anchor" aria-hidden="true"></a>Subset assignment</h3>
+<h3>Subset assignment<a class="anchor" aria-label="anchor" href="#subset-assignment"></a>
+</h3>
 <p>Updating parts of a column extracted by <code>$</code> is the responsibility of the column vector. Tibbles can’t control what happens after <code>$</code> has returned.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -632,11 +632,11 @@
 </div>
 </div>
 <div id="section-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section-1" class="anchor" aria-hidden="true"></a>[[&lt;-</h2>
+<h2>[[&lt;-<a class="anchor" aria-label="anchor" href="#section-1"></a>
+</h2>
 <div id="scalars-and-full-length-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars-and-full-length-1" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
+<h3>Scalars and full length<a class="anchor" aria-label="anchor" href="#scalars-and-full-length-1"></a>
+</h3>
 <p>As with <code>$</code> subsetting, columns are consistently overwritten, and partial matching doesn’t occur. Numeric indexing is supported, but tibbles don’t support creation of new numbered columns for a good reason.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -874,8 +874,8 @@
 </tbody></table>
 </div>
 <div id="cells" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cells" class="anchor" aria-hidden="true"></a>Cells</h3>
+<h3>Cells<a class="anchor" aria-label="anchor" href="#cells"></a>
+</h3>
 <p>Tibbles are stricter when updating single cells, the value must be coercible to the existing contents. Updating a list column requires the contents to be wrapped in a list, consistently with <code>[[</code> subsetting which returns a list if a cell in a list column is accessed:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -919,7 +919,7 @@
 #&gt;  [34mℹ [39m Error occurred for column `a`.
 #&gt;  [31m✖ [39m Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
-#&gt; * Locations: 1.</code></pre>
+#&gt;  [36m• [39m Locations: 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1129,11 +1129,11 @@
 </div>
 </div>
 <div id="section-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section-2" class="anchor" aria-hidden="true"></a>[&lt;-</h2>
+<h2>[&lt;-<a class="anchor" aria-label="anchor" href="#section-2"></a>
+</h2>
 <div id="scalars" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars" class="anchor" aria-hidden="true"></a>Scalars</h3>
+<h3>Scalars<a class="anchor" aria-label="anchor" href="#scalars"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1176,7 +1176,7 @@
 #&gt;  [34mℹ [39m Error occurred for column `a`.
 #&gt;  [31m✖ [39m Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
-#&gt; * Locations: 1.</code></pre>
+#&gt;  [36m• [39m Locations: 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1357,8 +1357,8 @@
 </tbody></table>
 </div>
 <div id="full-length-columns" class="section level3">
-<h3 class="hasAnchor">
-<a href="#full-length-columns" class="anchor" aria-hidden="true"></a>Full length columns</h3>
+<h3>Full length columns<a class="anchor" aria-label="anchor" href="#full-length-columns"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1617,8 +1617,8 @@
 </tbody></table>
 </div>
 <div id="multiple-full-length-columns" class="section level3">
-<h3 class="hasAnchor">
-<a href="#multiple-full-length-columns" class="anchor" aria-hidden="true"></a>Multiple full length columns</h3>
+<h3>Multiple full length columns<a class="anchor" aria-label="anchor" href="#multiple-full-length-columns"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1791,8 +1791,8 @@
 </tbody></table>
 </div>
 <div id="full-length-rows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#full-length-rows" class="anchor" aria-hidden="true"></a>Full length rows</h3>
+<h3>Full length rows<a class="anchor" aria-label="anchor" href="#full-length-rows"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1952,8 +1952,8 @@
 </tbody></table>
 </div>
 <div id="multiple-full-length-rows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#multiple-full-length-rows" class="anchor" aria-hidden="true"></a>Multiple full length rows</h3>
+<h3>Multiple full length rows<a class="anchor" aria-label="anchor" href="#multiple-full-length-rows"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -2175,8 +2175,8 @@
 </tbody></table>
 </div>
 <div id="unspecified" class="section level3">
-<h3 class="hasAnchor">
-<a href="#unspecified" class="anchor" aria-hidden="true"></a>Unspecified</h3>
+<h3>Unspecified<a class="anchor" aria-label="anchor" href="#unspecified"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -2507,8 +2507,8 @@
 </tbody></table>
 </div>
 <div id="subset-assignment-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subset-assignment-1" class="anchor" aria-hidden="true"></a>Subset assignment</h3>
+<h3>Subset assignment<a class="anchor" aria-label="anchor" href="#subset-assignment-1"></a>
+</h3>
 <p>Due to tibble’s default of <code>drop = FALSE</code>, updating a portion of a <code>[</code> subset is still safe, because tibble is still in control. Only one example is given here.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>

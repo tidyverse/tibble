@@ -157,8 +157,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor" aria-hidden="true"></a>Overview</h2>
+<h2>Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>This vignette shows an overview of known data types and their abbreviations, and their origin. For example, <code>&lt;int&gt;</code> in the header of a column indicates an integer column, and <code>&lt;chr&gt;</code> denotes a character column.</p>
 <table class="table">
 <thead><tr class="header">
@@ -342,8 +342,8 @@
 </table>
 </div>
 <div id="example-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-values" class="anchor" aria-hidden="true"></a>Example values</h2>
+<h2>Example values<a class="anchor" aria-label="anchor" href="#example-values"></a>
+</h2>
 <p>The following overview contains example values for each type:</p>
 <pre><code>#&gt; Rows: 1
 #&gt; Columns: 23
@@ -357,8 +357,8 @@
 #&gt; $ `named list`   [3m [38;5;246m&lt;named list&gt; [39m [23m 1
 #&gt; $ factor         [3m [38;5;246m&lt;fct&gt; [39m [23m A
 #&gt; $ ordered        [3m [38;5;246m&lt;ord&gt; [39m [23m a
-#&gt; $ Date           [3m [38;5;246m&lt;date&gt; [39m [23m 2021-10-03
-#&gt; $ POSIXt         [3m [38;5;246m&lt;dttm&gt; [39m [23m 2021-10-03 09:41:46
+#&gt; $ Date           [3m [38;5;246m&lt;date&gt; [39m [23m 2021-10-17
+#&gt; $ POSIXt         [3m [38;5;246m&lt;dttm&gt; [39m [23m 2021-10-17 06:09:41
 #&gt; $ difftime       [3m [38;5;246m&lt;drtn&gt; [39m [23m 1 secs
 #&gt; $ hms            [3m [38;5;246m&lt;time&gt; [39m [23m 00:00:01
 #&gt; $ integer64      [3m [38;5;246m&lt;int64&gt; [39m [23m 10000000000
@@ -372,8 +372,8 @@
 #&gt; $ quosures       [3m [38;5;246m&lt;quos&gt; [39m [23m &lt;~1&gt;</code></pre>
 </div>
 <div id="implementation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#implementation" class="anchor" aria-hidden="true"></a>Implementation</h2>
+<h2>Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
+</h2>
 <p>The column header is obtained by calling <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html" class="external-link">vctrs::vec_ptype_abbr()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
@@ -394,7 +394,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x559d139be3d0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55ffe7c8cca8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>

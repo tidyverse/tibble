@@ -158,8 +158,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="options" class="section level2">
-<h2 class="hasAnchor">
-<a href="#options" class="anchor" aria-hidden="true"></a>Options</h2>
+<h2>Options<a class="anchor" aria-label="anchor" href="#options"></a>
+</h2>
 <p>The easiest way to customize the display of numbers and other data in a tibble is to define options. See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> for a comprehensive overview.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">123.4567</span><span class="op">)</span></code></pre></div>
@@ -186,8 +186,8 @@
 <p>This changes the display of all columns. Read on to see how too specify display options on a column-by-column basis.</p>
 </div>
 <div id="per-column-number-formatting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#per-column-number-formatting" class="anchor" aria-hidden="true"></a>Per-column number formatting</h2>
+<h2>Per-column number formatting<a class="anchor" aria-label="anchor" href="#per-column-number-formatting"></a>
+</h2>
 <p>The new <code><a href="../reference/num.html">num()</a></code> constructor allows creating vectors that behave like numbers but allow customizing their display. Below a few examples are shown, see <code><a href="../reference/num.html">?num</a></code> for a comprehensive overview. Similarly, <code><a href="../reference/char.html">char()</a></code> allows customizing the display of character columns.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, notation <span class="op">=</span> <span class="st">"sci"</span><span class="op">)</span></code></pre></div>
@@ -220,13 +220,12 @@
 <p>The pillar package that is responsible for the display of tibbles tries hard to get the number display right, however it is impossible to accommodate all use cases. Whenever the default formatting does not suit the application, <code><a href="../reference/num.html">num()</a></code> or <code><a href="../reference/char.html">char()</a></code> allow redefining the formatting for individual columns. The formatting survives most data transformations.</p>
 </div>
 <div id="computing-on-num" class="section level2">
-<h2 class="hasAnchor">
-<a href="#computing-on-num" class="anchor" aria-hidden="true"></a>Computing on <code>num</code>
+<h2>Computing on <code>num</code><a class="anchor" aria-label="anchor" href="#computing-on-num"></a>
 </h2>
 <p>Formatting numbers is useful for presentation of results. If defined early on in the analysis, the formatting options survive most operations. It is worth defining output options that suit your data once early on in the process, to benefit from the formatting throughout the analysis. We are working on seamlessly applying this formatting to the final presentation (plots, tables, …).</p>
 <div id="arithmetics" class="section level3">
-<h3 class="hasAnchor">
-<a href="#arithmetics" class="anchor" aria-hidden="true"></a>Arithmetics</h3>
+<h3>Arithmetics<a class="anchor" aria-label="anchor" href="#arithmetics"></a>
+</h3>
 <p>When applying arithmetic operations on numbers created by <code><a href="../reference/num.html">num()</a></code>, the result inherits the formatting of the first <code>num</code> object.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">2</span></code></pre></div>
@@ -279,8 +278,8 @@
 </div>
 </div>
 <div id="mathematics" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mathematics" class="anchor" aria-hidden="true"></a>Mathematics</h3>
+<h3>Mathematics<a class="anchor" aria-label="anchor" href="#mathematics"></a>
+</h3>
 <p>Similarly, for mathematical operations, the formatting is inherited.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, label <span class="op">=</span> <span class="st">"$"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -305,8 +304,8 @@
 </div>
 </div>
 <div id="override" class="section level3">
-<h3 class="hasAnchor">
-<a href="#override" class="anchor" aria-hidden="true"></a>Override</h3>
+<h3>Override<a class="anchor" aria-label="anchor" href="#override"></a>
+</h3>
 <p>In some cases, the ideal formatting changes after a transformation. <code><a href="../reference/num.html">num()</a></code> can be applied repeatedly, the last setting wins.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">0.125</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
@@ -332,8 +331,8 @@
 </div>
 </div>
 <div id="recovery" class="section level3">
-<h3 class="hasAnchor">
-<a href="#recovery" class="anchor" aria-hidden="true"></a>Recovery</h3>
+<h3>Recovery<a class="anchor" aria-label="anchor" href="#recovery"></a>
+</h3>
 <p>The <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code> function is one of the examples where the formatting is lost:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span>

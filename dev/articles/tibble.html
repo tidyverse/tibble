@@ -158,8 +158,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <div id="creating" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating" class="anchor" aria-hidden="true"></a>Creating</h2>
+<h2>Creating<a class="anchor" aria-label="anchor" href="#creating"></a>
+</h2>
 <p><code><a href="../reference/tibble.html">tibble()</a></code> is a nice way to create data frames. It encapsulates best practices for data frames:</p>
 <ul>
 <li>
@@ -233,8 +233,8 @@
 </ul>
 </div>
 <div id="coercion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coercion" class="anchor" aria-hidden="true"></a>Coercion</h2>
+<h2>Coercion<a class="anchor" aria-label="anchor" href="#coercion"></a>
+</h2>
 <p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods. The method for lists has been written with an eye for performance:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -260,12 +260,12 @@
 <p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div id="tibbles-vs-data-frames" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tibbles-vs-data-frames" class="anchor" aria-hidden="true"></a>Tibbles vs data frames</h2>
+<h2>Tibbles vs data frames<a class="anchor" aria-label="anchor" href="#tibbles-vs-data-frames"></a>
+</h2>
 <p>There are three key differences between tibbles and data frames: printing, subsetting, and recycling rules.</p>
 <div id="printing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#printing" class="anchor" aria-hidden="true"></a>Printing</h3>
+<h3>Printing<a class="anchor" aria-label="anchor" href="#printing"></a>
+</h3>
 <p>When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">100</span>, y <span class="op">=</span> <span class="fl">123.456</span> <span class="op">*</span> <span class="op">(</span><span class="fl">3</span> <span class="op">^</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -295,8 +295,8 @@
 <p>See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> and <code><a href="../reference/tibble_options.html">?tibble_options</a></code> for the available options, <code><a href="../articles/types.html">vignette("types")</a></code> for an overview of the type abbreviations, <code><a href="../articles/numbers.html">vignette("numbers")</a></code> for details on the formatting of numbers, and <code><a href="../articles/digits.html">vignette("digits")</a></code> for a comparison with data frame printing.</p>
 </div>
 <div id="subsetting" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subsetting" class="anchor" aria-hidden="true"></a>Subsetting</h3>
+<h3>Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
+</h3>
 <p>Tibbles are quite strict about subsetting. <code>[</code> always returns another tibble. Contrast this with a data frame: sometimes <code>[</code> returns a data frame and sometimes it just returns a vector:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
@@ -408,8 +408,8 @@
 <p>See <code><a href="../articles/invariants.html">vignette("invariants")</a></code> for a detailed comparison between tibbles and data frames.</p>
 </div>
 <div id="recycling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#recycling" class="anchor" aria-hidden="true"></a>Recycling</h3>
+<h3>Recycling<a class="anchor" aria-label="anchor" href="#recycling"></a>
+</h3>
 <p>When constructing a tibble, only values of length 1 are recycled. The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -437,8 +437,8 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Tibble columns must have compatible sizes.
-</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> * Size 3: Existing data.
-</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> * Size 2: Column `c`.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 3: Existing data.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 2: Column `c`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Only values of size one are recycled.
 </span></code></pre>
 </div>
@@ -459,8 +459,8 @@
 </div>
 </div>
 <div id="arithmetic-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#arithmetic-operations" class="anchor" aria-hidden="true"></a>Arithmetic operations</h3>
+<h3>Arithmetic operations<a class="anchor" aria-label="anchor" href="#arithmetic-operations"></a>
+</h3>
 <p>Unlike data frames, tibbles don’t support arithmetic operations on all columns. The result is silently coerced to a data frame. Do not rely on this behavior, it may become an error in a forthcoming version.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>
