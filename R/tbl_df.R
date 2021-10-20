@@ -146,6 +146,15 @@ if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
   # deparse.level is part of the interface of the generic but not passed along
   # for data frame methods
 
+  if (tibble_options$rbind_trace()) {
+    writeLines("rbind()")
+    print(list(...))
+    writeLines("rbind() results")
+    print(base:::rbind.data.frame(...))
+    try(print(vec_rbind(!!!list(...))))
+    writeLines("rbind() end")
+  }
+
   e <- tryCatch(
     return(vec_rbind(!!!list(...))),
     error = identity
@@ -162,6 +171,15 @@ if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
 
 #' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
 if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
+  if (tibble_options$cbind_trace()) {
+    writeLines("cbind()")
+    print(list(...))
+    writeLines("cbind() results")
+    print(base:::cbind.data.frame(...))
+    try(print(vec_cbind(!!!list(...))))
+    writeLines("cbind() end")
+  }
+
   e <- tryCatch(
     return(vec_cbind(!!!list(...))),
     error = identity
