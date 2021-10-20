@@ -741,7 +741,7 @@ test_that("converting from matrix uses implicit row names when `rownames =` is p
 })
 
 test_that("output test", {
-  skip_if_not_installed("rlang", "0.4.11.9001")
+  skip_if_not_installed("rlang", "0.99.0.9000")
   expect_snapshot_with_error({
     as_tibble(list(1))
     as_tibble(list(1, 2))
