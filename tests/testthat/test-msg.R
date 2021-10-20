@@ -7,7 +7,7 @@ test_that("aborting with class", {
 })
 
 test_that("output test", {
-  skip_if_not_installed("rlang", "0.4.11.9001")
+  skip_if_not_installed("rlang", "0.99.0.9000")
 
   expect_snapshot({
     "# add"
