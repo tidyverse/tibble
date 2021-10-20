@@ -2,8 +2,8 @@
 #' @importFrom utils head tail
 #' @importFrom pkgconfig set_config
 #' @import rlang
-#' @import lifecycle
 #' @import ellipsis
+#' @importFrom lifecycle deprecate_soft deprecate_warn expect_deprecated
 #' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_assign
 #' @importFrom vctrs vec_cbind

@@ -36,6 +36,6 @@ tibble_options <- list2(
   #' - `view_max`: Maximum number of rows shown by [view()]
   #'   if the input is not a data frame, passed on to [head()]. Default: `1000`.
   view_max = make_option_impl(
-    getOption("tibble.view_max", default = tibble_opt("view_max", 1000L))
+    getOption("tibble.view_max", default = 1000L)
   ),
 )

@@ -373,6 +373,9 @@ test_that("[[ drops inner names only with double subscript (#681)", {
   expect_identical(df[[1, "b"]], data.frame(bb = 1))
   expect_identical(df[["c"]], c)
   expect_null(rownames(df[[1, "c"]]))
+
+  df <- tibble(x = new_rcrd(list(a = 1:3)))
+  expect_identical(df[[1, "x"]], new_rcrd(list(a = 1L)))
 })
 
 test_that("can use two-dimensional indexing with [[", {
@@ -759,7 +762,7 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
-  skip_if_not_installed("lifecycle", "0.2.0.9000")
+  skip_if_not_installed("rlang", "0.4.11.9001")
 
   expect_snapshot_with_error({
     "# [.tbl_df is careful about names (#1245)"
@@ -894,6 +897,13 @@ test_that("output test", {
     df <- tibble(x = 1:2, y = x)
     df[NA] <- 3
     df[NA, ] <- 3
+
+    "# [<-.tbl_df and logical indexes"
+    df <- tibble(x = 1:2, y = x)
+    df[FALSE] <- 1
+    df
+    df[, TRUE] <- 2
+    df
 
     "# [<-.tbl_df throws an error with bad RHS"
     df <- tibble(x = 1:2, y = x)

@@ -60,8 +60,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ubuntu-18.04-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ubuntu-18.04-${{ hashFiles('.github/R-version') }}-2-
+          key: ubuntu-18.04-${{ hashFiles('.github/R-version') }}-3-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ubuntu-18.04-${{ hashFiles('.github/R-version') }}-3-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'

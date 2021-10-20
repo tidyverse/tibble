@@ -31,8 +31,9 @@
 #'   Arguments are evaluated sequentially.
 #'   You can refer to previously created elements directly or using the [.data]
 #'   pronoun.
-#'   An existing `.data` pronoun, provided e.g. inside [dplyr::mutate()],
-#'   is not available.
+#'   To refer explicitly to objects in the calling environment, use [`!!`] or
+#'   [.env], e.g. `!!.data` or `.env$.data` for the special case of an object
+#'   named `.data`.
 #' @param .rows The number of rows, useful to create a 0-column tibble or
 #'   just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
@@ -143,6 +144,14 @@
 #' # You can splice-unquote a list of quosures and expressions:
 #' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
+#' # Use .data, .env and !! to refer explicitly to columns or outside objects
+#' a <- 1
+#' tibble(a = 2, b = a)
+#' tibble(a = 2, b = .data$a)
+#' tibble(a = 2, b = .env$a)
+#' tibble(a = 2, b = !!a)
+#' try(tibble(a = 2, b = .env$bogus))
+#' try(tibble(a = 2, b = !!bogus))
 tibble <- function(...,
                    .rows = NULL,
                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {

@@ -72,7 +72,7 @@ NULL
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   class(x) <- "data.frame"
   unname <- which(!map_lgl(x, is_bare_list))
-  x[unname] <- map(x[unname], vec_set_names, NULL)
+  x[unname] <- map(x[unname], vectbl_set_names, NULL)
   x
 }
 
