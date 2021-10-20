@@ -141,10 +141,23 @@ cnd_names_non_na <- function(name) {
   }
 }
 
-#' @rawNamespace if (getRversion() >= "4.0.0") S3method(rbind, tbl_df)
-if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
-  # deparse.level is part of the interface of the generic but not passed along
-  # for data frame methods
+#' Binding rows and columns
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' In tibble 4.0.0, the [rbind()] and [cbind()] methods
+#' will become stricter.
+#' These functions are designed to help the transition to those stricter
+#' versions.
+#' Replace calls to `rbind()` and `cbind()` with `tbl_rbind()` and `tbl_cbind()`,
+#' respectively, to preview how your code will behave after the upgrade.
+#' Set the `tibble.rbind_trace` or `tibble.cbind_trace` options to `TRUE`
+#' to enable diagnostic information.
+#' @export
+tbl_rbind <- function(...) {
+  # deparse.level is part of the interface of the rbind generic
+  # but not passed along for data frame methods
 
   if (tibble_options$rbind_trace()) {
     writeLines("rbind()")
@@ -155,22 +168,12 @@ if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
     writeLines("rbind() end")
   }
 
-  e <- tryCatch(
-    return(vec_rbind(!!!list(...))),
-    error = identity
-  )
-  lifecycle::deprecate_soft("3.2.0", "tibble::rbind()",
-    details = paste0(
-      "rbind() now forwards to vctrs::vec_rbind(), this call has failed. Falling back to legacy behavior. Error:\n",
-      conditionMessage(e)
-    ),
-    user_env = caller_env(2)
-  )
-  NextMethod("rbind")
+  vec_rbind(!!!list(...))
 }
 
-#' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
-if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
+#' @rdname tbl_rbind
+#' @export
+tbl_cbind <- function(...) {
   if (tibble_options$cbind_trace()) {
     writeLines("cbind()")
     print(list(...))
@@ -180,18 +183,25 @@ if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
     writeLines("cbind() end")
   }
 
-  e <- tryCatch(
-    return(vec_cbind(!!!list(...))),
-    error = identity
-  )
-  lifecycle::deprecate_soft("3.2.0", "tibble::cbind()",
-    details = paste0(
-      "cbind() now forwards to vctrs::vec_cbind(), this call has failed. Falling back to legacy behavior. Error:\n",
-      conditionMessage(e)
-    ),
-    user_env = caller_env(2)
-  )
-  NextMethod("cbind")
+  vec_cbind(!!!list(...))
+}
+
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(rbind, tbl_df)
+if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
+  if (tibble_options$rbind_base()) {
+    NextMethod("rbind")
+  } else {
+    tbl_rbind(...)
+  }
+}
+
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
+if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
+  if (tibble_options$cbind_base()) {
+    NextMethod("cbind")
+  } else {
+    tbl_cbind(...)
+  }
 }
 
 # Errors ------------------------------------------------------------------

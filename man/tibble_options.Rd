@@ -29,6 +29,10 @@ if the input is not a data frame, passed on to \code{\link[=head]{head()}}. Defa
 Default: \code{FALSE}.
 \item \code{cbind_trace}: Print diagnostic information for \code{\link[=cbind]{cbind()}}  calls.
 Default: \code{FALSE}.
+\item \code{rbind_base}: Forware \code{\link[=rbind]{rbind()}}  calls to base.
+Default: \code{FALSE}.
+\item \code{cbind_base}: Forware \code{\link[=cbind]{cbind()}}  calls to base.
+Default: \code{FALSE}.
 }
 }
 
