@@ -2,6 +2,7 @@ url: https://tibble.tidyverse.org
 
 template:
   package: tidytemplate
+  bootstrap: 5
   params:
     docsearch:
       api_key: 24f802ea87b9d1054ef63db70ff7c836
