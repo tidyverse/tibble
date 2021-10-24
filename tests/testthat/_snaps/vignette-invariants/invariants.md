@@ -825,14 +825,18 @@ df[c(1, 1)]
 
 ```r
 tbl[c(1, 1)]
-#> # A tibble: 4 x 2
-#>       n     n
-#>   <int> <int>
-#> 1     1     1
-#> 2    NA    NA
-#> 3     3     3
-#> 4    NA    NA
 ```
+
+<div class="error">
+
+```
+#> Error in
+#> error_duplicate_column_subscript(j):
+#> could not find function
+#> "error_duplicate_column_subscript"
+```
+
+</div>
 
 </td></tr></tbody></table>
 
@@ -2735,8 +2739,10 @@ with_tbl(tbl[NA] <- list("x"))
 <div class="error">
 
 ```
-#> Error: Can't use NA as column index with
-#> `[` at positions 1, 2, and 3.
+#> Error in
+#> error_duplicate_column_subscript(j):
+#> could not find function
+#> "error_duplicate_column_subscript"
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>

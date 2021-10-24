@@ -595,7 +595,11 @@ numtbl_as_col_location_assign <- function(j, n, j_arg) {
 }
 
 vectbl_as_col_location <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location(j, n, names), j_arg = j_arg, assign = assign)
+  out <- subclass_col_index_errors(vec_as_location(j, n, names), j_arg = j_arg, assign = assign)
+  if (anyDuplicated(out)) {
+    abort(error_duplicate_column_subscript(j))
+  }
+  out
 }
 
 vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
