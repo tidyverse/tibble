@@ -52,7 +52,10 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   #' equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
-  if (!is.null(nrow) && is_integerish(nrow, 1)) {
+  if (!is.null(nrow)) {
+    if (!is.numeric(nrow) || length(nrow) != 1 || nrow < 0 || !is_integerish(nrow, 1) || nrow >= 2147483648) {
+      cnd_signal(error_new_tibble_nrow_must_be_nonnegative())
+    }
     nrow <- as.integer(nrow)
   }
 
@@ -94,6 +97,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   args[slots] <- list(x, nrow, class)
 
   # `new_data_frame()` restores compact row names
+  # Can't add to the assignment above, a literal NULL would be inserted otherwise
   args[["row.names"]] <- NULL
 
   # need exec() to avoid evaluating language attributes (e.g. rsample)
@@ -157,4 +161,8 @@ tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 error_new_tibble_must_be_list <- function() {
   tibble_error("`x` must be a list.")
+}
+
+error_new_tibble_nrow_must_be_nonnegative <- function() {
+  tibble_error("`nrow` must be a nonnegative number.")
 }
