@@ -60,6 +60,7 @@ test_that("output test", {
 
     "# new"
     error_new_tibble_must_be_list()
+    error_new_tibble_nrow_must_be_nonnegative()
 
     "# rownames"
     error_already_has_rownames()
