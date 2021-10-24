@@ -96,8 +96,8 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   # `new_data_frame()` restores compact row names
   args[["row.names"]] <- NULL
 
-  # do.call() is faster than exec() in this case
-  do.call(new_data_frame, args)
+  # need exec() to avoid evaluating language attributes (e.g. rsample)
+  exec(new_data_frame, !!!args)
 }
 
 #' @description
