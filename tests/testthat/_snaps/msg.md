@@ -187,6 +187,11 @@
       <error/tibble_error_new_tibble_must_be_list>
       Error: `x` must be a list.
     Code
+      error_new_tibble_nrow_must_be_nonnegative()
+    Output
+      <error/tibble_error_new_tibble_nrow_must_be_nonnegative>
+      Error: `nrow` must be a nonnegative whole number smaller than 2^31.
+    Code
       # # rownames
       error_already_has_rownames()
     Output

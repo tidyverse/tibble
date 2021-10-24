@@ -164,5 +164,5 @@ error_new_tibble_must_be_list <- function() {
 }
 
 error_new_tibble_nrow_must_be_nonnegative <- function() {
-  tibble_error("`nrow` must be a nonnegative number.")
+  tibble_error("`nrow` must be a nonnegative whole number smaller than 2^31.")
 }
