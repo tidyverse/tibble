@@ -1,138 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tibble.tidyverse.org/dev/CODE_OF_CONDUCT.html</loc>
+    <loc>https://tibble.tidyverse.org/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/CONTRIBUTING.html</loc>
+    <loc>https://tibble.tidyverse.org/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/LICENSE-text.html</loc>
+    <loc>https://tibble.tidyverse.org/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/LICENSE.html</loc>
+    <loc>https://tibble.tidyverse.org/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/SUPPORT.html</loc>
+    <loc>https://tibble.tidyverse.org/SUPPORT.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/digits.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/digits.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/extending.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/extending.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/formats.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/formats.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/index.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/invariants.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/invariants.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/numbers.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/numbers.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/types.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/types.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/wip/subassign.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/wip/subassign.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/articles/wip/subset.html</loc>
+    <loc>https://tibble.tidyverse.org/articles/wip/subset.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/authors.html</loc>
+    <loc>https://tibble.tidyverse.org/authors.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/index.html</loc>
+    <loc>https://tibble.tidyverse.org/index.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/news/index.html</loc>
+    <loc>https://tibble.tidyverse.org/news/index.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/add_column.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/add_column.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/add_row.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/add_row.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/as_tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/as_tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/char.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/char.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/deprecated.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/deprecated.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/enframe.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/enframe.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/formatting.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/formatting.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/frame_matrix.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/frame_matrix.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/index.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/is.tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/is.tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/is_tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/is_tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/knit_print.trunc_mat.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/knit_print.trunc_mat.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/lst.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/lst.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/name-repair-superseded.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/name-repair-superseded.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/name-repair.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/name-repair.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/new_tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/new_tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/num.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/num.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/reexports.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/rownames.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/rownames.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/subsetting.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/subsetting.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/tbl_df-class.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/tbl_df-class.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/tibble-package.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/tibble-package.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/tibble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/tibble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/tibble_options.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/tibble_options.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/tribble.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/tribble.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/trunc_mat.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/trunc_mat.html</loc>
   </url>
   <url>
-    <loc>https://tibble.tidyverse.org/dev/reference/view.html</loc>
+    <loc>https://tibble.tidyverse.org/reference/view.html</loc>
   </url>
 </urlset>
