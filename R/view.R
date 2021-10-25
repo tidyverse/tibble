@@ -27,7 +27,7 @@ view <- function(x, title = NULL, ..., n = NULL) {
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
-    title <- expr_deparse(substitute(x))
+    title <- expr_deparse(substitute(x), width = Inf)
   }
 
   if (!is.data.frame(x)) {
