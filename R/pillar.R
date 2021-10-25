@@ -111,6 +111,16 @@
 # Assigned in .onLoad()
 num <- NULL
 
+#' set_num_opts
+#'
+#' `set_num_opts()` adds formatting options to an arbitrary numeric vector,
+#' useful for composing with other types.
+#'
+#' @export
+#' @rdname num
+# Assigned in .onLoad()
+set_num_opts <- NULL
+
 #' Format a character vector
 #'
 #' @description
@@ -166,3 +176,13 @@ num <- NULL
 #' tibble(abbr = char(lipsum, shorten = "abbreviate"))
 # Assigned in .onLoad()
 char <- NULL
+
+#' set_char_opts
+#'
+#' `set_char_opts()` adds formatting options to an arbitrary character vector,
+#' useful for composing with other types.
+#'
+#' @export
+#' @rdname char
+# Assigned in .onLoad()
+set_char_opts <- NULL
