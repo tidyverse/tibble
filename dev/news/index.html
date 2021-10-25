@@ -26,7 +26,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.5.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.5.9001</span>
         </div>
       </div>
     </div>
@@ -109,6 +109,15 @@
       <small>Source: <a href="https://github.com/tidyverse/tibble/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="3.1.5.9001" id="tibble-3159001">tibble 3.1.5.9001<a class="anchor" aria-label="anchor" href="#tibble-3159001"></a></h2>
+<ul><li>
+<code><a href="../reference/view.html">view()</a></code> uses <code>rlang::lxpr_deparse(width = Inf)</code> to avoid errors with long <code>|&gt;</code> pipes (<a href="https://github.com/tidyverse/tibble/issues/957" class="external-link">#957</a>).</li>
+<li>
+<code><a href="../reference/num.html">set_num_opts()</a></code> and <code><a href="../reference/char.html">set_char_opts()</a></code> are reexported from pillar (<a href="https://github.com/tidyverse/tibble/issues/959" class="external-link">#959</a>).</li>
+<li>
+<code><a href="../reference/new_tibble.html">new_tibble()</a></code> checks that the <code>nrow</code> argument is nonnegative and less than 2^31 (<a href="https://github.com/tidyverse/tibble/issues/916" class="external-link">#916</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="3.1.5.9000" id="tibble-3159000">tibble 3.1.5.9000<a class="anchor" aria-label="anchor" href="#tibble-3159000"></a></h2>
 <ul><li>Same as previous version.</li>
