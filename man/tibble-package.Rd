@@ -7,8 +7,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional
-    data frame.
+Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional data frame.
 }
 \details{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
