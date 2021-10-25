@@ -88,7 +88,7 @@ navbar:
       href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/
     - text: "Version 1.4.1"
       href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/
-    - text: "Change log"
+    - text: "Changelog"
       href: news/index.html
   right:
   - icon: fa-github fa-lg
