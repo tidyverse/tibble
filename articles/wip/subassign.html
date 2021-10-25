@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="../../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.6</span>
         </div>
       </div>
     </div>
@@ -194,13 +194,13 @@
 <td>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 <p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
@@ -210,13 +210,13 @@
 <td>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 <p>For subassignment, we need a fresh copy of the data for each test. The <code>with_*()</code> functions allow for a more concise notation (<code>with_tbl()</code> omitted here for brevity):</p>
@@ -256,21 +256,21 @@
 <span class="co">#&gt;   tbl$a &lt;- rev(tbl$a)</span>
 <span class="co">#&gt;   tbl</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr></tbody></table>
-<div id="section" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section" class="anchor" aria-hidden="true"></a>$&lt;-</h2>
-<div id="scalars-and-full-length" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars-and-full-length" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
+<div class="section level2">
+<h2 id="section">$&lt;-<a class="anchor" aria-label="anchor" href="#section"></a>
+</h2>
+<div class="section level3">
+<h3 id="scalars-and-full-length">Scalars and full length<a class="anchor" aria-label="anchor" href="#scalars-and-full-length"></a>
+</h3>
 <p>Assigning a scalar or a full-length vector to a column consistently overwrites existing data or appends a new column at the end. Partial matching doesn’t happen:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -279,13 +279,13 @@
 <td>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -294,13 +294,13 @@
 <td>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     1 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     1 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     1 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -309,13 +309,13 @@
 <td>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd            c</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     1</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     1</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -324,13 +324,13 @@
 <td>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e         1</span>
-<span class="co">#&gt; 2     2 f         1</span>
-<span class="co">#&gt; 3     3 g         1</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -341,13 +341,13 @@
 <td>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -356,13 +356,13 @@
 <td>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     4 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     3 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     4 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     3 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     2 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -371,13 +371,13 @@
 <td>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd            c</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     4</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     3</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -386,20 +386,20 @@
 <td>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e         4</span>
-<span class="co">#&gt; 2     2 f         3</span>
-<span class="co">#&gt; 3     3 g         2</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="recycling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#recycling" class="anchor" aria-hidden="true"></a>Recycling</h3>
+<div class="section level3">
+<h3 id="recycling">Recycling<a class="anchor" aria-label="anchor" href="#recycling"></a>
+</h3>
 <p>Tibbles allow recycling only for vectors of length 1 or of the same length as the data.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -418,9 +418,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1:2` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 2 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 2 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -440,9 +440,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1:3` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 3 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 3 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -462,9 +462,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1:5` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 5 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 5 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -484,17 +484,17 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1:2` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 2 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 2 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="subset-assignment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subset-assignment" class="anchor" aria-hidden="true"></a>Subset assignment</h3>
+<div class="section level3">
+<h3 id="subset-assignment">Subset assignment<a class="anchor" aria-label="anchor" href="#subset-assignment"></a>
+</h3>
 <p>Updating parts of a column extracted by <code>$</code> is the responsibility of the column vector. Tibbles can’t control what happens after <code>$</code> has returned.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -503,13 +503,13 @@
 <td>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -518,13 +518,13 @@
 <td>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">b</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 4     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 3     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 4     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 3     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -547,9 +547,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `&lt;int&gt;` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 2 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 2 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -559,13 +559,13 @@
 <td>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;int [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [1]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;int [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -591,13 +591,13 @@
 #&gt; items to replace is not a multiple of
 #&gt; replacement length</code></pre>
 </div>
-<pre><code>#&gt; # A tibble: 4 × 3
+<pre><code>#&gt;  [38;5;246m# A tibble: 4 × 3 [39m
 #&gt;       a b     cd       
-#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   
-#&gt; 1     4 e     &lt;dbl [1]&gt;
-#&gt; 2     3 f     &lt;int [2]&gt;
-#&gt; 3     4 g     &lt;int [3]&gt;
-#&gt; 4     4 h     &lt;chr [1]&gt;</code></pre>
+#&gt;    [3m [38;5;246m&lt;int&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;list&gt; [39m [23m   
+#&gt;  [38;5;250m1 [39m     4 e      [38;5;246m&lt;dbl [1]&gt; [39m
+#&gt;  [38;5;250m2 [39m     3 f      [38;5;246m&lt;int [2]&gt; [39m
+#&gt;  [38;5;250m3 [39m     4 g      [38;5;246m&lt;int [3]&gt; [39m
+#&gt;  [38;5;250m4 [39m     4 h      [38;5;246m&lt;chr [1]&gt; [39m</code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -606,13 +606,13 @@
 <td>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     4 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     3 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     4 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     3 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -630,12 +630,12 @@
 </div>
 </div>
 </div>
-<div id="section-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section-1" class="anchor" aria-hidden="true"></a>[[&lt;-</h2>
-<div id="scalars-and-full-length-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars-and-full-length-1" class="anchor" aria-hidden="true"></a>Scalars and full length</h3>
+<div class="section level2">
+<h2 id="section-1">[[&lt;-<a class="anchor" aria-label="anchor" href="#section-1"></a>
+</h2>
+<div class="section level3">
+<h3 id="scalars-and-full-length-1">Scalars and full length<a class="anchor" aria-label="anchor" href="#scalars-and-full-length-1"></a>
+</h3>
 <p>As with <code>$</code> subsetting, columns are consistently overwritten, and partial matching doesn’t occur. Numeric indexing is supported, but tibbles don’t support creation of new numbered columns for a good reason.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -644,13 +644,13 @@
 <td>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -659,13 +659,13 @@
 <td>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;   a     b     cd       </span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1 x     e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2 x     f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3 x     g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4 x     h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> x     e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> x     f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> x     g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> x     h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -674,13 +674,13 @@
 <td>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"b"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 x     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 x     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 x     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 x     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 x     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -689,13 +689,13 @@
 <td>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        c    </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; x    </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; x    </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; x</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> x</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -704,13 +704,13 @@
 <td>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd   </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     x    </span>
-<span class="co">#&gt; 2     2 f     x    </span>
-<span class="co">#&gt; 3     3 g     x    </span>
-<span class="co">#&gt; 4     4 h     x</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     x</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -719,13 +719,13 @@
 <td>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;   a     b     cd       </span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1 x     e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2 x     f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3 x     g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4 x     h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> x     e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> x     f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> x     g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> x     h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -734,13 +734,13 @@
 <td>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 x     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 x     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 x     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 x     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 x     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -756,13 +756,13 @@
 <td>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        ...4 </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; x    </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; x    </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; x</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> x</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -787,8 +787,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Can't assign to columns beyond
 #&gt; the end with non-consecutive locations.
-#&gt; ℹ Input has size 3.
-#&gt; ✖ Subscript `5` contains non-consecutive
+#&gt;  [34mℹ [39m Input has size 3.
+#&gt;  [31m✖ [39m Subscript `5` contains non-consecutive
 #&gt; location 5.</code></pre>
 </div>
 </td>
@@ -801,13 +801,13 @@
 <td>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -816,13 +816,13 @@
 <td>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;   a     b     cd       </span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1 d     e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2 c     f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3 b     g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4 a     h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> d     e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> c     f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> b     g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> a     h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -831,13 +831,13 @@
 <td>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"b"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 d     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 c     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 b     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 a     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 d     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 c     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 b     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 a     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -846,13 +846,13 @@
 <td>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        c    </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; d    </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; c    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; b    </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; a</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> d    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> c    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> b    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> a</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -861,20 +861,20 @@
 <td>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd   </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     d    </span>
-<span class="co">#&gt; 2     2 f     c    </span>
-<span class="co">#&gt; 3     3 g     b    </span>
-<span class="co">#&gt; 4     4 h     a</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     d    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     c    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     b    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     a</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="cells" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cells" class="anchor" aria-hidden="true"></a>Cells</h3>
+<div class="section level3">
+<h3 id="cells">Cells<a class="anchor" aria-label="anchor" href="#cells"></a>
+</h3>
 <p>Tibbles are stricter when updating single cells, the value must be coercible to the existing contents. Updating a list column requires the contents to be wrapped in a list, consistently with <code>[[</code> subsetting which returns a list if a cell in a list column is accessed:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -890,13 +890,13 @@
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -915,10 +915,10 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1.5` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
-#&gt; * Locations: 1.</code></pre>
+#&gt;  [36m• [39m Locations: 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -938,8 +938,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -950,13 +950,13 @@
 <td>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"b"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -975,8 +975,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -987,13 +987,13 @@
 <td>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1012,8 +1012,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `cd`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1030,13 +1030,13 @@
 <td>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1052,13 +1052,13 @@
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        c    </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #BB0000;">NA</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1077,7 +1077,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to row with a single
 #&gt; valid subscript.
-#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
 #&gt; size 1.</code></pre>
 </div>
 </td>
@@ -1098,7 +1098,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to row with a single
 #&gt; valid subscript.
-#&gt; ✖ Subscript `1:2` has size 2 but must be
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
 #&gt; size 1.</code></pre>
 </div>
 </td>
@@ -1119,7 +1119,7 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to column with a
 #&gt; single valid subscript.
-#&gt; ✖ Subscript `c("cd", "d")` has size 2
+#&gt;  [31m✖ [39m Subscript `c("cd", "d")` has size 2
 #&gt; but must be size 1.</code></pre>
 </div>
 </td>
@@ -1127,12 +1127,12 @@
 </tbody></table>
 </div>
 </div>
-<div id="section-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#section-2" class="anchor" aria-hidden="true"></a>[&lt;-</h2>
-<div id="scalars" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scalars" class="anchor" aria-hidden="true"></a>Scalars</h3>
+<div class="section level2">
+<h2 id="section-2">[&lt;-<a class="anchor" aria-label="anchor" href="#section-2"></a>
+</h2>
+<div class="section level3">
+<h3 id="scalars">Scalars<a class="anchor" aria-label="anchor" href="#scalars"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1147,13 +1147,13 @@
 <td>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1172,10 +1172,10 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1.5` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert from &lt;double&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
-#&gt; * Locations: 1.</code></pre>
+#&gt;  [36m• [39m Locations: 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1195,8 +1195,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -1207,13 +1207,13 @@
 <td>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"b"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1232,8 +1232,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `cd`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1253,8 +1253,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `list("x")` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `cd`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1264,13 +1264,13 @@
 <td>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        c    </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #BB0000;">NA</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1289,8 +1289,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -1301,13 +1301,13 @@
 <td>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 x     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 x     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1326,8 +1326,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `cd`.
-#&gt; ✖ Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `cd`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to &lt;list&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1344,20 +1344,20 @@
 <td>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd        ...4 </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt; x    </span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt; &lt;NA&gt; </span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt; &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span> x    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #BB0000;">NA</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="full-length-columns" class="section level3">
-<h3 class="hasAnchor">
-<a href="#full-length-columns" class="anchor" aria-hidden="true"></a>Full length columns</h3>
+<div class="section level3">
+<h3 id="full-length-columns">Full length columns<a class="anchor" aria-label="anchor" href="#full-length-columns"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1365,13 +1365,13 @@
 <td>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1380,13 +1380,13 @@
 <td>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"b"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     4 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     3 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     4 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     3 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     2 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1395,13 +1395,13 @@
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"c"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd            c</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     4</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     3</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1410,13 +1410,13 @@
 <td>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"cd"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e         4</span>
-<span class="co">#&gt; 2     2 f         3</span>
-<span class="co">#&gt; 3     3 g         2</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1425,13 +1425,13 @@
 <td>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1440,13 +1440,13 @@
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     4 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     3 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     4 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     3 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     2 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1455,13 +1455,13 @@
 <td>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e         4</span>
-<span class="co">#&gt; 2     2 f         3</span>
-<span class="co">#&gt; 3     3 g         2</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1477,13 +1477,13 @@
 <td>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd         ...4</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     4</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     3</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     2</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1492,13 +1492,13 @@
 <td>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1507,13 +1507,13 @@
 <td>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"b"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     1 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     1 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     1 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1522,13 +1522,13 @@
 <td>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"c"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd            c</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     1</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     1</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1537,13 +1537,13 @@
 <td>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"cd"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e         1</span>
-<span class="co">#&gt; 2     2 f         1</span>
-<span class="co">#&gt; 3     3 g         1</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1552,13 +1552,13 @@
 <td>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1567,13 +1567,13 @@
 <td>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     1 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2     1 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     1 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     1 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1582,13 +1582,13 @@
 <td>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e         1</span>
-<span class="co">#&gt; 2     2 f         1</span>
-<span class="co">#&gt; 3     3 g         1</span>
-<span class="co">#&gt; 4     4 h         1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g         1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h         1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1604,20 +1604,20 @@
 <td>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="co">#&gt;       a b     cd         ...4</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;     1</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;     1</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;     1</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1</span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="multiple-full-length-columns" class="section level3">
-<h3 class="hasAnchor">
-<a href="#multiple-full-length-columns" class="anchor" aria-hidden="true"></a>Multiple full length columns</h3>
+<div class="section level3">
+<h3 id="multiple-full-length-columns">Multiple full length columns<a class="anchor" aria-label="anchor" href="#multiple-full-length-columns"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1625,13 +1625,13 @@
 <td>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4     4 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3     3 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     4 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3     3 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2     2 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1640,13 +1640,13 @@
 <td>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1     1 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1     1 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     1 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     1 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1655,13 +1655,13 @@
 <td>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 d     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 c     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 b     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 a     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1670,13 +1670,13 @@
 <td>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, a <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 d     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 c     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 b     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 a     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1685,13 +1685,13 @@
 <td>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>c <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, d <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4 d     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3 c     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2 b     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 a     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 d     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 c     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 b     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 a     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1700,13 +1700,13 @@
 <td>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4     4 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3     3 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2     2 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     4 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3     3 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2     2 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1740,13 +1740,13 @@
 <td>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     4     1 &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     3     1 &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     2     1 &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1     1 &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     1 <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3     1 <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2     1 <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1 <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1789,9 +1789,9 @@
 </tr>
 </tbody></table>
 </div>
-<div id="full-length-rows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#full-length-rows" class="anchor" aria-hidden="true"></a>Full length rows</h3>
+<div class="section level3">
+<h3 id="full-length-rows">Full length rows<a class="anchor" aria-label="anchor" href="#full-length-rows"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1809,8 +1809,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `b`.
+#&gt;  [31m✖ [39m Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1830,8 +1830,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"x"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -1868,13 +1868,13 @@
 <td>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1918,9 +1918,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to rows with a valid
 #&gt; subscript vector.
-#&gt; ✖ Subscript `0` can't contain `0`
+#&gt;  [31m✖ [39m Subscript `0` can't contain `0`
 #&gt; values.
-#&gt; ℹ It has a `0` value at location 1.</code></pre>
+#&gt;  [34mℹ [39m It has a `0` value at location 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1938,21 +1938,21 @@
 <td>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 5     1 x     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="multiple-full-length-rows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#multiple-full-length-rows" class="anchor" aria-hidden="true"></a>Multiple full length rows</h3>
+<div class="section level3">
+<h3 id="multiple-full-length-rows">Multiple full length rows<a class="anchor" aria-label="anchor" href="#multiple-full-length-rows"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1970,8 +1970,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
+#&gt;  [34mℹ [39m Error occurred for column `b`.
+#&gt;  [31m✖ [39m Can't convert &lt;double&gt; to &lt;character&gt;.</code></pre>
 </div>
 </td>
 </tr>
@@ -1991,8 +1991,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `1:2` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `b`.
-#&gt; ✖ Can't convert &lt;integer&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `b`.
+#&gt;  [31m✖ [39m Can't convert &lt;integer&gt; to
 #&gt; &lt;character&gt;.</code></pre>
 </div>
 </td>
@@ -2013,8 +2013,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `c("x", "y")` must
 #&gt; be compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -2051,13 +2051,13 @@
 <td>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2066,13 +2066,13 @@
 <td>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 3     2 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2106,13 +2106,13 @@
 <td>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 4     2 x     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     2 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2149,9 +2149,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Must assign to rows with a valid
 #&gt; subscript vector.
-#&gt; ✖ Subscript `0:1` can't contain `0`
+#&gt;  [31m✖ [39m Subscript `0:1` can't contain `0`
 #&gt; values.
-#&gt; ℹ It has a `0` value at location 1.</code></pre>
+#&gt;  [34mℹ [39m It has a `0` value at location 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -2161,21 +2161,21 @@
 <td>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     1 x     &lt;chr [1]&gt;</span>
-<span class="co">#&gt; 5     2 x     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     2 x     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="unspecified" class="section level3">
-<h3 class="hasAnchor">
-<a href="#unspecified" class="anchor" aria-hidden="true"></a>Unspecified</h3>
+<div class="section level3">
+<h3 id="unspecified">Unspecified<a class="anchor" aria-label="anchor" href="#unspecified"></a>
+</h3>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -2183,13 +2183,13 @@
 <td>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b    cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1</span>
-<span class="co">#&gt; 2     1     1     1</span>
-<span class="co">#&gt; 3     1     1     1</span>
-<span class="co">#&gt; 4     1     1     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2198,13 +2198,13 @@
 <td>
 <div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b    cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     4     4     4</span>
-<span class="co">#&gt; 2     3     3     3</span>
-<span class="co">#&gt; 3     2     2     2</span>
-<span class="co">#&gt; 4     1     1     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     4     4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3     3     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2     2     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2223,9 +2223,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `3:1` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 3 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 3 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2245,9 +2245,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `5:1` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 5 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 5 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2276,13 +2276,13 @@
 <td>
 <div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     4 x         2</span>
-<span class="co">#&gt; 2     3 x         2</span>
-<span class="co">#&gt; 3     2 x         2</span>
-<span class="co">#&gt; 4     1 x         2</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 x         2</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2291,13 +2291,13 @@
 <td>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 x         2</span>
-<span class="co">#&gt; 2     1 x         2</span>
-<span class="co">#&gt; 3     1 x         2</span>
-<span class="co">#&gt; 4     1 x         2</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 x         2</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2331,13 +2331,13 @@
 <td>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2346,13 +2346,13 @@
 <td>
 <div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b    cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1</span>
-<span class="co">#&gt; 2     1     1     1</span>
-<span class="co">#&gt; 3     1     1     1</span>
-<span class="co">#&gt; 4     1     1     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2361,13 +2361,13 @@
 <td>
 <div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a     b    cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     4     4     4</span>
-<span class="co">#&gt; 2     3     3     3</span>
-<span class="co">#&gt; 3     2     2     2</span>
-<span class="co">#&gt; 4     1     1     1</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     4     4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3     3     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2     2     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1     1     1</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2386,9 +2386,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `3:1` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 3 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 3 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2408,9 +2408,9 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `5:1` must be
 #&gt; compatible with existing data.
-#&gt; ✖ Existing data has 4 rows.
-#&gt; ✖ Assigned data has 5 rows.
-#&gt; ℹ Only vectors of size 1 are recycled.</code></pre>
+#&gt;  [31m✖ [39m Existing data has 4 rows.
+#&gt;  [31m✖ [39m Assigned data has 5 rows.
+#&gt;  [34mℹ [39m Only vectors of size 1 are recycled.</code></pre>
 </div>
 </td>
 </tr>
@@ -2439,13 +2439,13 @@
 <td>
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     4 x         2</span>
-<span class="co">#&gt; 2     3 x         2</span>
-<span class="co">#&gt; 3     2 x         2</span>
-<span class="co">#&gt; 4     1 x         2</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     2 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 x         2</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2454,13 +2454,13 @@
 <td>
 <div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b        cd</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 x         2</span>
-<span class="co">#&gt; 2     1 x         2</span>
-<span class="co">#&gt; 3     1 x         2</span>
-<span class="co">#&gt; 4     1 x         2</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 x         2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 x         2</span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -2494,20 +2494,20 @@
 <td>
 <div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;   </span>
-<span class="co">#&gt; 1     1 e     &lt;dbl [1]&gt;</span>
-<span class="co">#&gt; 2     2 f     &lt;int [2]&gt;</span>
-<span class="co">#&gt; 3     3 g     &lt;int [3]&gt;</span>
-<span class="co">#&gt; 4     4 h     &lt;chr [1]&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="subset-assignment-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subset-assignment-1" class="anchor" aria-hidden="true"></a>Subset assignment</h3>
+<div class="section level3">
+<h3 id="subset-assignment-1">Subset assignment<a class="anchor" aria-label="anchor" href="#subset-assignment-1"></a>
+</h3>
 <p>Due to tibble’s default of <code>drop = FALSE</code>, updating a portion of a <code>[</code> subset is still safe, because tibble is still in control. Only one example is given here.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
@@ -2525,8 +2525,8 @@
 <div class="error">
 <pre><code>#&gt; Error: Assigned data `"b"` must be
 #&gt; compatible with existing data.
-#&gt; ℹ Error occurred for column `a`.
-#&gt; ✖ Can't convert &lt;character&gt; to
+#&gt;  [34mℹ [39m Error occurred for column `a`.
+#&gt;  [31m✖ [39m Can't convert &lt;character&gt; to
 #&gt; &lt;integer&gt;.</code></pre>
 </div>
 </td>
@@ -2551,7 +2551,7 @@
 
 <div class="author">
   <p>
-    Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Developed by .
     Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>

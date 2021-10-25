@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.6</span>
         </div>
       </div>
     </div>
@@ -156,9 +156,9 @@
 <p>Tibbles are a modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
-<div id="creating" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating" class="anchor" aria-hidden="true"></a>Creating</h2>
+<div class="section level2">
+<h2 id="creating">Creating<a class="anchor" aria-label="anchor" href="#creating"></a>
+</h2>
 <p><code><a href="../reference/tibble.html">tibble()</a></code> is a nice way to create data frames. It encapsulates best practices for data frames:</p>
 <ul>
 <li>
@@ -166,32 +166,32 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">letters</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 26 × 1</span>
-#&gt;    <span style="font-weight: bold;">x</span>    
-#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>
-#&gt; <span style="color: #BCBCBC;"> 1</span> a    
-#&gt; <span style="color: #BCBCBC;"> 2</span> b    
-#&gt; <span style="color: #BCBCBC;"> 3</span> c    
-#&gt; <span style="color: #BCBCBC;"> 4</span> d    
-#&gt; <span style="color: #BCBCBC;"> 5</span> e    
-#&gt; <span style="color: #BCBCBC;"> 6</span> f    
-#&gt; <span style="color: #BCBCBC;"> 7</span> g    
-#&gt; <span style="color: #BCBCBC;"> 8</span> h    
-#&gt; <span style="color: #BCBCBC;"> 9</span> i    
-#&gt; <span style="color: #BCBCBC;">10</span> j    
-#&gt; <span style="color: #949494;"># … with 16 more rows</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 1</span>
+<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">x</span>    
+<span style="color: #949494;">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> a    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> b    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> c    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> d    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> e    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> f    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> g    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> h    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> i    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">10</span> j    
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 16 more rows</span>
 </code></pre>
 </div>
 <p>This makes it easier to use with list-columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span>
-#&gt;       <span style="font-weight: bold;">x</span> <span style="font-weight: bold;">y</span>         
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    
-#&gt; <span style="color: #BCBCBC;">1</span>     1 <span style="color: #949494;">&lt;int [5]&gt;</span> 
-#&gt; <span style="color: #BCBCBC;">2</span>     2 <span style="color: #949494;">&lt;int [10]&gt;</span>
-#&gt; <span style="color: #BCBCBC;">3</span>     3 <span style="color: #949494;">&lt;int [20]&gt;</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">x</span> <span style="font-weight: bold;">y</span>         
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 <span style="color: #949494;">&lt;int [5]&gt;</span> 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2 <span style="color: #949494;">&lt;int [10]&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 <span style="color: #949494;">&lt;int [20]&gt;</span>
 </code></pre>
 </div>
 <p>List-columns are often created by <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest()</a></code>, but they can be useful to create by hand.</p>
@@ -201,13 +201,13 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "crazy.name"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "crazy.name"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>`crazy name` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "crazy name"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "crazy name"
 </code></pre>
 </div>
 </li>
@@ -216,14 +216,14 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="va">x</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span>
-#&gt;       <span style="font-weight: bold;">x</span>     <span style="font-weight: bold;">y</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1     1
-#&gt; <span style="color: #BCBCBC;">2</span>     2     4
-#&gt; <span style="color: #BCBCBC;">3</span>     3     9
-#&gt; <span style="color: #BCBCBC;">4</span>     4    16
-#&gt; <span style="color: #BCBCBC;">5</span>     5    25
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">x</span>     <span style="font-weight: bold;">y</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2     4
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     9
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>     4    16
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5    25
 </code></pre>
 </div>
 </li>
@@ -231,9 +231,9 @@
 <li><p>It only recycles vectors of length 1. This is because recycling vectors of greater lengths is a frequent source of bugs.</p></li>
 </ul>
 </div>
-<div id="coercion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coercion" class="anchor" aria-hidden="true"></a>Coercion</h2>
+<div class="section level2">
+<h2 id="coercion">Coercion<a class="anchor" aria-label="anchor" href="#coercion"></a>
+</h2>
 <p>To complement <code><a href="../reference/tibble.html">tibble()</a></code>, tibble provides <code><a href="../reference/as_tibble.html">as_tibble()</a></code> to coerce objects into tibbles. Generally, <code><a href="../reference/as_tibble.html">as_tibble()</a></code> methods are much simpler than <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods. The method for lists has been written with an eye for performance:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -247,42 +247,42 @@
 
 <span class="va">timing</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 2 × 14</span>
-#&gt;   <span style="font-weight: bold;">expression</span>       <span style="font-weight: bold;">min</span>         <span style="font-weight: bold;">mean</span>         <span style="font-weight: bold;">median</span>      <span style="font-weight: bold;">max</span>         <span style="font-weight: bold;">`itr/sec`</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> as_tibble(l)     0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.
-#&gt; <span style="color: #BCBCBC;">2</span> as.data.frame(l) 0.000791522 0.0016640039 0.001098172 0.007652914      601.
-#&gt; <span style="color: #949494;"># … with 8 more variables: </span><span style="color: #949494; font-weight: bold;">mem_alloc</span><span style="color: #949494;"> &lt;bnch_byt&gt;, </span><span style="color: #949494; font-weight: bold;">n_gc</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">n_itr</span><span style="color: #949494;"> &lt;int&gt;,</span>
-#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">total_time</span><span style="color: #949494;"> &lt;bench_tm&gt;, </span><span style="color: #949494; font-weight: bold;">result</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">memory</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">time</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">gc</span><span style="color: #949494;"> &lt;list&gt;</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span>
+<span style="color: #949494;">#&gt;</span>   <span style="font-weight: bold;">expression</span>       <span style="font-weight: bold;">min</span>         <span style="font-weight: bold;">mean</span>         <span style="font-weight: bold;">median</span>      <span style="font-weight: bold;">max</span>         <span style="font-weight: bold;">`itr/sec`</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> as_tibble(l)     0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span> as.data.frame(l) 0.000791522 0.0016640039 0.001098172 0.007652914      601.
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 8 more variables: </span><span style="color: #949494; font-weight: bold;">mem_alloc</span><span style="color: #949494;"> &lt;bnch_byt&gt;, </span><span style="color: #949494; font-weight: bold;">n_gc</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">n_itr</span><span style="color: #949494;"> &lt;int&gt;,</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">total_time</span><span style="color: #949494;"> &lt;bench_tm&gt;, </span><span style="color: #949494; font-weight: bold;">result</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">memory</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">time</span><span style="color: #949494;"> &lt;list&gt;, </span><span style="color: #949494; font-weight: bold;">gc</span><span style="color: #949494;"> &lt;list&gt;</span>
 </code></pre>
 </div>
 <p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
-<div id="tibbles-vs-data-frames" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tibbles-vs-data-frames" class="anchor" aria-hidden="true"></a>Tibbles vs data frames</h2>
+<div class="section level2">
+<h2 id="tibbles-vs-data-frames">Tibbles vs data frames<a class="anchor" aria-label="anchor" href="#tibbles-vs-data-frames"></a>
+</h2>
 <p>There are three key differences between tibbles and data frames: printing, subsetting, and recycling rules.</p>
-<div id="printing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#printing" class="anchor" aria-hidden="true"></a>Printing</h3>
+<div class="section level3">
+<h3 id="printing">Printing<a class="anchor" aria-label="anchor" href="#printing"></a>
+</h3>
 <p>When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">100</span>, y <span class="op">=</span> <span class="fl">123.456</span> <span class="op">*</span> <span class="op">(</span><span class="fl">3</span> <span class="op">^</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 106 × 2</span>
-#&gt;        <span style="font-weight: bold;">x</span>         <span style="font-weight: bold;">y</span>
-#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;"> 1</span>    -<span style="color: #BB0000;">5</span>     0.508
-#&gt; <span style="color: #BCBCBC;"> 2</span>    -<span style="color: #BB0000;">4</span>     1.52 
-#&gt; <span style="color: #BCBCBC;"> 3</span>    -<span style="color: #BB0000;">3</span>     4.57 
-#&gt; <span style="color: #BCBCBC;"> 4</span>    -<span style="color: #BB0000;">2</span>    13.7  
-#&gt; <span style="color: #BCBCBC;"> 5</span>    -<span style="color: #BB0000;">1</span>    41.2  
-#&gt; <span style="color: #BCBCBC;"> 6</span>     0   123.   
-#&gt; <span style="color: #BCBCBC;"> 7</span>     1   370.   
-#&gt; <span style="color: #BCBCBC;"> 8</span>     2  <span style="text-decoration: underline;">1</span>111.   
-#&gt; <span style="color: #BCBCBC;"> 9</span>     3  <span style="text-decoration: underline;">3</span>333.   
-#&gt; <span style="color: #BCBCBC;">10</span>     4 <span style="text-decoration: underline;">10</span>000.   
-#&gt; <span style="color: #949494;"># … with 96 more rows</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 106 × 2</span>
+<span style="color: #949494;">#&gt;</span>        <span style="font-weight: bold;">x</span>         <span style="font-weight: bold;">y</span>
+<span style="color: #949494;">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    -<span style="color: #BB0000;">5</span>     0.508
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    -<span style="color: #BB0000;">4</span>     1.52 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    -<span style="color: #BB0000;">3</span>     4.57 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    -<span style="color: #BB0000;">2</span>    13.7  
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    -<span style="color: #BB0000;">1</span>    41.2  
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     0   123.   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     1   370.   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     2  <span style="text-decoration: underline;">1</span>111.   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     3  <span style="text-decoration: underline;">3</span>333.   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">10</span>     4 <span style="text-decoration: underline;">10</span>000.   
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 96 more rows</span>
 </code></pre>
 </div>
 <p>Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.</p>
@@ -293,21 +293,21 @@
 </ul>
 <p>See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> and <code><a href="../reference/tibble_options.html">?tibble_options</a></code> for the available options, <code><a href="../articles/types.html">vignette("types")</a></code> for an overview of the type abbreviations, <code><a href="../articles/numbers.html">vignette("numbers")</a></code> for details on the formatting of numbers, and <code><a href="../articles/digits.html">vignette("digits")</a></code> for a comparison with data frame printing.</p>
 </div>
-<div id="subsetting" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subsetting" class="anchor" aria-hidden="true"></a>Subsetting</h3>
+<div class="section level3">
+<h3 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
+</h3>
 <p>Tibbles are quite strict about subsetting. <code>[</code> always returns another tibble. Contrast this with a data frame: sometimes <code>[</code> returns a data frame and sometimes it just returns a vector:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "data.frame"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "data.frame"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "integer"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "integer"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -315,26 +315,26 @@
 <span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "tbl_df"     "tbl"        "data.frame"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "tbl_df"     "tbl"        "data.frame"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "tbl_df"     "tbl"        "data.frame"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "tbl_df"     "tbl"        "data.frame"
 </code></pre>
 </div>
 <p>To extract a single column use <code>[[</code> or <code>$</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "integer"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "integer"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "integer"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "integer"
 </code></pre>
 </div>
 <p>Tibbles are also stricter with <code>$</code>. Tibbles never do partial matching, and will throw a warning and return <code>NULL</code> if the column does not exist:</p>
@@ -342,7 +342,7 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">df</span><span class="op">$</span><span class="va">a</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1
 </code></pre>
 </div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -350,24 +350,24 @@
 <span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">df2</span><span class="op">$</span><span class="va">a</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #BB0000;">#&gt; Warning: Unknown or uninitialised column: `a`.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Warning: Unknown or uninitialised column: `a`.
 </span></code></pre>
 </div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; NULL
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> NULL
 </code></pre>
 </div>
 <p>However, tibbles respect the <code>drop</code> argument if it is provided:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1 2 3
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1 2 3
 </code></pre>
 </div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1 2 3
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1 2 3
 </code></pre>
 </div>
 <p>Tibbles do not support row names. They are removed when converting to a tibble or when subsetting:</p>
@@ -375,13 +375,13 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, row.names <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="fu"><a href="../reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "a" "b" "c"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "a" "b" "c"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/rownames.html">rownames</a></span><span class="op">(</span><span class="fu"><a href="../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "1" "2" "3"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "1" "2" "3"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -389,86 +389,86 @@
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="../reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #BB0000;">#&gt; Warning: Setting row names on a tibble is deprecated.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Warning: Setting row names on a tibble is deprecated.
 </span></code></pre>
 </div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "a" "b" "c"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "a" "b" "c"
 </code></pre>
 </div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] "1"
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] "1"
 </code></pre>
 </div>
 <p>See <code><a href="../articles/invariants.html">vignette("invariants")</a></code> for a detailed comparison between tibbles and data frames.</p>
 </div>
-<div id="recycling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#recycling" class="anchor" aria-hidden="true"></a>Recycling</h3>
+<div class="section level3">
+<h3 id="recycling">Recycling<a class="anchor" aria-label="anchor" href="#recycling"></a>
+</h3>
 <p>When constructing a tibble, only values of length 1 are recycled. The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span>
-#&gt;       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1     1
-#&gt; <span style="color: #BCBCBC;">2</span>     1     2
-#&gt; <span style="color: #BCBCBC;">3</span>     1     3
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     2
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1     3
 </code></pre>
 </div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span>
-#&gt;       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1     1
-#&gt; <span style="color: #BCBCBC;">2</span>     2     1
-#&gt; <span style="color: #BCBCBC;">3</span>     3     1
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">a</span>     <span style="font-weight: bold;">b</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     1
 </code></pre>
 </div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #BB0000;">#&gt; Error: Tibble columns must have compatible sizes.
-#&gt; * Size 3: Existing data.
-#&gt; * Size 2: Column `c`.
-#&gt; </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Only values of size one are recycled.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Tibble columns must have compatible sizes.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 3: Existing data.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Size 2: Column `c`.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Only values of size one are recycled.
 </span></code></pre>
 </div>
 <p>This also extends to tibbles with <em>zero</em> rows, which is sometimes important for programming:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span>
-#&gt; <span style="color: #949494;"># … with 2 variables: </span><span style="color: #949494; font-weight: bold;">a</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">b</span><span style="color: #949494;"> &lt;int&gt;</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 2</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 2 variables: </span><span style="color: #949494; font-weight: bold;">a</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">b</span><span style="color: #949494;"> &lt;int&gt;</span>
 </code></pre>
 </div>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span>
-#&gt; <span style="color: #949494;"># … with 2 variables: </span><span style="color: #949494; font-weight: bold;">a</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">b</span><span style="color: #949494;"> &lt;dbl&gt;</span>
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 2</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 2 variables: </span><span style="color: #949494; font-weight: bold;">a</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">b</span><span style="color: #949494;"> &lt;dbl&gt;</span>
 </code></pre>
 </div>
 </div>
-<div id="arithmetic-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#arithmetic-operations" class="anchor" aria-hidden="true"></a>Arithmetic operations</h3>
+<div class="section level3">
+<h3 id="arithmetic-operations">Arithmetic operations<a class="anchor" aria-label="anchor" href="#arithmetic-operations"></a>
+</h3>
 <p>Unlike data frames, tibbles don’t support arithmetic operations on all columns. The result is silently coerced to a data frame. Do not rely on this behavior, it may become an error in a forthcoming version.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>
 <span class="va">tbl</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt;   a  b
-#&gt; 1 2  8
-#&gt; 2 4 10
-#&gt; 3 6 12
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span>   a  b
+<span style="color: #949494;">#&gt;</span> 1 2  8
+<span style="color: #949494;">#&gt;</span> 2 4 10
+<span style="color: #949494;">#&gt;</span> 3 6 12
 </code></pre>
 </div>
 </div>
@@ -491,7 +491,7 @@
 
 <div class="author">
   <p>
-    Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Developed by .
     Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>

@@ -54,7 +54,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.6</span>
         </div>
       </div>
     </div>
@@ -156,100 +156,100 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
 <p>Base R offers the <code>"digits"</code> and <code>"scipen"</code> options to control the number of significant digits and the switch to scientific notation. For tibble, the options <code>"pillar.sigfig"</code> and <code>"pillar.max_dec_width"</code> fulfill a similar purpose. This vignette showcases similarities and differences. See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> and <code><a href="../reference/tibble_options.html">?tibble_options</a></code> for an overview over all options.</p>
-<div id="digits" class="section level2">
-<h2 class="hasAnchor">
-<a href="#digits" class="anchor" aria-hidden="true"></a>Digits</h2>
-<div id="basic-differences" class="section level3">
-<h3 class="hasAnchor">
-<a href="#basic-differences" class="anchor" aria-hidden="true"></a>Basic differences</h3>
+<div class="section level2">
+<h2 id="digits">Digits<a class="anchor" aria-label="anchor" href="#digits"></a>
+</h2>
+<div class="section level3">
+<h3 id="basic-differences">Basic differences<a class="anchor" aria-label="anchor" href="#basic-differences"></a>
+</h3>
 <p>The default for <code>getOption("digits")</code> is 7, whereas the <code>"pillar.sigfig"</code> option defaults to 3. In the default setting, pillar prints the first three digits only (i.e. the digits that represent &gt; 99.9% of the value of the number). Another difference is that pillar will show at most the specified number of significant digits, even if space is available. The rationale is to allow a quick glance over the most significant digits of a number, without spending too much horizontal space and without distraction from insignificant digits.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.345</span>, <span class="fl">123.45</span>, <span class="fl">1234.5</span>, <span class="fl">12345</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1]     1.23    12.35   123.45  1234.50 12345.00
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1]     1.23    12.35   123.45  1234.50 12345.00
 </code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.345</span>, <span class="fl">123.45</span>, <span class="fl">1234.5</span>, <span class="fl">12345</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 5 × 1</span>
-#&gt;          <span style="font-weight: bold;">x</span>
-#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1.23
-#&gt; <span style="color: #BCBCBC;">2</span>    12.3 
-#&gt; <span style="color: #BCBCBC;">3</span>   123.  
-#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.  
-#&gt; <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 1</span>
+<span style="color: #949494;">#&gt;</span>          <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1.23
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    12.3 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>   123.  
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.  
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345
 </code></pre>
 </div>
 </div>
-<div id="terminal-zeros" class="section level3">
-<h3 class="hasAnchor">
-<a href="#terminal-zeros" class="anchor" aria-hidden="true"></a>Terminal zeros</h3>
+<div class="section level3">
+<h3 id="terminal-zeros">Terminal zeros<a class="anchor" aria-label="anchor" href="#terminal-zeros"></a>
+</h3>
 <p>Terminal zeros are only shown in pillar if there is a nonzero value past the significant digits shown. This is in contrast to base R where terminal zeros are always shown if there is space, but hidden if the value is too insignificant:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.00001</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1 1
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1 1
 </code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.00001</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span>
-#&gt;       <span style="font-weight: bold;">x</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>  1   
-#&gt; <span style="color: #BCBCBC;">2</span>  1.00
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 1</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.00
 </code></pre>
 </div>
 </div>
-<div id="trailing-dot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#trailing-dot" class="anchor" aria-hidden="true"></a>Trailing dot</h3>
+<div class="section level3">
+<h3 id="trailing-dot">Trailing dot<a class="anchor" aria-label="anchor" href="#trailing-dot"></a>
+</h3>
 <p>A trailing decimal separator is shown if there is a fractional part but the integer part already exceeds the significant digits. The presence of the decimal separator does <strong>not</strong> indicate that the number is larger, only that there exists a nonzero fractional part:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">123</span>, <span class="fl">123.45</span>, <span class="fl">567.89</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 123 123 568
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 123 123 568
 </code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">123</span>, <span class="fl">123.45</span>, <span class="fl">567.89</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 3 × 1</span>
-#&gt;       <span style="font-weight: bold;">x</span>
-#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>  123 
-#&gt; <span style="color: #BCBCBC;">2</span>  123.
-#&gt; <span style="color: #BCBCBC;">3</span>  568.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 1</span>
+<span style="color: #949494;">#&gt;</span>       <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>  123 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>  123.
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>  568.
 </code></pre>
 </div>
 </div>
-<div id="showing-more-digits" class="section level3">
-<h3 class="hasAnchor">
-<a href="#showing-more-digits" class="anchor" aria-hidden="true"></a>Showing more digits</h3>
+<div class="section level3">
+<h3 id="showing-more-digits">Showing more digits<a class="anchor" aria-label="anchor" href="#showing-more-digits"></a>
+</h3>
 <p>To show more significant digits, set the <code>"pillar.sigfig"</code> option to a larger value:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>pillar.sigfig <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.345</span>, <span class="fl">123.45</span>, <span class="fl">1234.5</span>, <span class="fl">12345</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1]     1.2345    12.3450   123.4500  1234.5000 12345.0000
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1]     1.2345    12.3450   123.4500  1234.5000 12345.0000
 </code></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.345</span>, <span class="fl">123.45</span>, <span class="fl">1234.5</span>, <span class="fl">12345</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 5 × 1</span>
-#&gt;            <span style="font-weight: bold;">x</span>
-#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1.234<span style="text-decoration: underline;">5</span>
-#&gt; <span style="color: #BCBCBC;">2</span>    12.345 
-#&gt; <span style="color: #BCBCBC;">3</span>   123.45  
-#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.5   
-#&gt; <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 1</span>
+<span style="color: #949494;">#&gt;</span>            <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1.234<span style="text-decoration: underline;">5</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    12.345 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>   123.45  
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.5   
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345
 </code></pre>
 </div>
 <p>Setting <code>"pillar.sigfig"</code> to a larger value will not enhance the display with digits deemed insignificant:</p>
@@ -258,183 +258,183 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>pillar.sigfig <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.3456</span>, <span class="fl">123.4567</span>, <span class="fl">1234.5678</span>, <span class="fl">12345.6789</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1]     1.2345    12.3456   123.4567  1234.5678 12345.6789
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1]     1.2345    12.3456   123.4567  1234.5678 12345.6789
 </code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.3456</span>, <span class="fl">123.4567</span>, <span class="fl">1234.5678</span>, <span class="fl">12345.6789</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 5 × 1</span>
-#&gt;            <span style="font-weight: bold;">x</span>
-#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span>     1.234<span style="text-decoration: underline;">5</span>
-#&gt; <span style="color: #BCBCBC;">2</span>    12.345<span style="text-decoration: underline;">6</span>
-#&gt; <span style="color: #BCBCBC;">3</span>   123.456<span style="text-decoration: underline;">7</span>
-#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.568 
-#&gt; <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345.68
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 1</span>
+<span style="color: #949494;">#&gt;</span>            <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1.234<span style="text-decoration: underline;">5</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    12.345<span style="text-decoration: underline;">6</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>   123.456<span style="text-decoration: underline;">7</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">1</span>234.568 
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">12</span>345.68
 </code></pre>
 </div>
 </div>
-<div id="fixed-number-of-digits" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fixed-number-of-digits" class="anchor" aria-hidden="true"></a>Fixed number of digits</h3>
+<div class="section level3">
+<h3 id="fixed-number-of-digits">Fixed number of digits<a class="anchor" aria-label="anchor" href="#fixed-number-of-digits"></a>
+</h3>
 <p>To show a fixed number of decimal digits, use <code><a href="../reference/num.html">num()</a></code> with a <code>digits</code> argument:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2345</span>, <span class="fl">12.345</span>, <span class="fl">123.45</span>, <span class="fl">1234.5</span>, <span class="fl">12345</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; &lt;pillar_num:.2![5]&gt;
-#&gt; [1]     1.23    12.35   123.45  1234.50 12345.00
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> &lt;pillar_num:.2![5]&gt;
+<span style="color: #949494;">#&gt;</span> [1]     1.23    12.35   123.45  1234.50 12345.00
 </code></pre>
 </div>
 <p>See <code><a href="../articles/numbers.html">vignette("numbers")</a></code> for details.</p>
 </div>
 </div>
-<div id="scientific-notation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#scientific-notation" class="anchor" aria-hidden="true"></a>Scientific notation</h2>
-<div id="when-is-it-used" class="section level3">
-<h3 class="hasAnchor">
-<a href="#when-is-it-used" class="anchor" aria-hidden="true"></a>When is it used?</h3>
+<div class="section level2">
+<h2 id="scientific-notation">Scientific notation<a class="anchor" aria-label="anchor" href="#scientific-notation"></a>
+</h2>
+<div class="section level3">
+<h3 id="when-is-it-used">When is it used?<a class="anchor" aria-label="anchor" href="#when-is-it-used"></a>
+</h3>
 <p>Both base R and pillar switch to scientific notation when the decimal representation becomes too wide. The larger <code>getOption("scipen")</code>, the stronger the resistance to switching to scientific notation. The default <code>0</code> seems to be anchored at 13 digits for the integer part.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">123456789012</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 123456789012
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 123456789012
 </code></pre>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">123456789012.3</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 123456789012
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 123456789012
 </code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1234567890123</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1.234568e+12
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1.234568e+12
 </code></pre>
 </div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1234567890123.4</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1.234568e+12
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1.234568e+12
 </code></pre>
 </div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fl">1234567890123</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1234567890123
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1234567890123
 </code></pre>
 </div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">12345678901234</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1.234568e+13
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1.234568e+13
 </code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">12345678901234.5</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; [1] 1.234568e+13
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> [1] 1.234568e+13
 </code></pre>
 </div>
 <p>The <code>"pillar.max_dec_width"</code> option is similar, it indicates the width that must be exceeded for a switch to scientific notation to happen. This width includes the decimal separator.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">123456789012</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;              <span style="font-weight: bold;">x</span>
-#&gt;          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">123</span>456<span style="text-decoration: underline;">789</span>012
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>              <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">123</span>456<span style="text-decoration: underline;">789</span>012
 </code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">123456789012.3</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;               <span style="font-weight: bold;">x</span>
-#&gt;           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">123</span>456<span style="text-decoration: underline;">789</span>012.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>               <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">123</span>456<span style="text-decoration: underline;">789</span>012.
 </code></pre>
 </div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1234567890123</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;               <span style="font-weight: bold;">x</span>
-#&gt;           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> 1<span style="text-decoration: underline;">234</span>567<span style="text-decoration: underline;">890</span>123
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>               <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1<span style="text-decoration: underline;">234</span>567<span style="text-decoration: underline;">890</span>123
 </code></pre>
 </div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1234567890123.4</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;             <span style="font-weight: bold;">x</span>
-#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> 1.234<span style="text-decoration: underline;">568</span><span style="color: #949494;">e</span>12
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>             <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1.234<span style="text-decoration: underline;">568</span><span style="color: #949494;">e</span>12
 </code></pre>
 </div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>pillar.max_dec_width <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>
 <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1234567890123</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;               <span style="font-weight: bold;">x</span>
-#&gt;           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> 1<span style="text-decoration: underline;">234</span>567<span style="text-decoration: underline;">890</span>123
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>               <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1<span style="text-decoration: underline;">234</span>567<span style="text-decoration: underline;">890</span>123
 </code></pre>
 </div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">12345678901234</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;                <span style="font-weight: bold;">x</span>
-#&gt;            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> 12<span style="text-decoration: underline;">345</span>678<span style="text-decoration: underline;">901</span>234
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>                <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> 12<span style="text-decoration: underline;">345</span>678<span style="text-decoration: underline;">901</span>234
 </code></pre>
 </div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">12345678901234.5</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span>
-#&gt;             <span style="font-weight: bold;">x</span>
-#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-#&gt; <span style="color: #BCBCBC;">1</span> 1.234<span style="text-decoration: underline;">568</span><span style="color: #949494;">e</span>13
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span>
+<span style="color: #949494;">#&gt;</span>             <span style="font-weight: bold;">x</span>
+<span style="color: #949494;">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1.234<span style="text-decoration: underline;">568</span><span style="color: #949494;">e</span>13
 </code></pre>
 </div>
 </div>
-<div id="enforce-notation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#enforce-notation" class="anchor" aria-hidden="true"></a>Enforce notation</h3>
+<div class="section level3">
+<h3 id="enforce-notation">Enforce notation<a class="anchor" aria-label="anchor" href="#enforce-notation"></a>
+</h3>
 <p>To avoid switching to scientific notation, set the <code>"pillar.max_dec_width"</code> option to a large value. Note that if the required width is not available to show the column, it will not be shown at all in this case. The <code>notation</code> argument to <code><a href="../reference/num.html">num()</a></code> offers more options:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">12345678901234567</span>, notation <span class="op">=</span> <span class="st">"dec"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; &lt;pillar_num(dec)[1]&gt;
-#&gt; [1] 12345678901234568
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> &lt;pillar_num(dec)[1]&gt;
+<span style="color: #949494;">#&gt;</span> [1] 12345678901234568
 </code></pre>
 </div>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">12345678901234567</span>, notation <span class="op">=</span> <span class="st">"sci"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; &lt;pillar_num(sci)[1]&gt;
-#&gt; [1] 1.234568e16
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> &lt;pillar_num(sci)[1]&gt;
+<span style="color: #949494;">#&gt;</span> [1] 1.234568e16
 </code></pre>
 </div>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">12345678901234567</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; &lt;pillar_num(eng)[1]&gt;
-#&gt; [1] 12.34568e15
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> &lt;pillar_num(eng)[1]&gt;
+<span style="color: #949494;">#&gt;</span> [1] 12.34568e15
 </code></pre>
 </div>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">12345678901234567</span>, notation <span class="op">=</span> <span class="st">"si"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode">#&gt; &lt;pillar_num(si)[1]&gt;
-#&gt; [1] 12.34568P
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> &lt;pillar_num(si)[1]&gt;
+<span style="color: #949494;">#&gt;</span> [1] 12.34568P
 </code></pre>
 </div>
 </div>
@@ -457,7 +457,7 @@
 
 <div class="author">
   <p>
-    Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>.
+    Developed by .
     Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>

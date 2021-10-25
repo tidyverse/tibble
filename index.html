@@ -54,8 +54,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+          <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.6</span>
         </div>
       </div>
     </div>
@@ -97,22 +97,22 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Release notes</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/">Version 3.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/" class="external-link">Version 3.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/">Version 2.1.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/" class="external-link">Version 2.1.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/">Version 2.0.1</a>
+      <a href="https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/" class="external-link">Version 2.0.1</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/">Version 2.0.0 pre-announcement</a>
+      <a href="https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/" class="external-link">Version 2.0.0 pre-announcement</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/">Version 1.4.2</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/" class="external-link">Version 1.4.2</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/">Version 1.4.1</a>
+      <a href="https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/" class="external-link">Version 1.4.1</a>
     </li>
     <li>
       <a href="news/index.html">Change log</a>
@@ -120,7 +120,7 @@
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/tibble">
+  <a href="https://github.com/tidyverse/tibble" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -143,20 +143,20 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tibble-" class="section level1">
+<div class="section level1">
 
 <!-- badges: start -->
 
 <!-- badges: end -->
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor" aria-hidden="true"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <a href="https://rdrr.io/r/base/print.html" class="external-link"><code>print()</code></a> method which makes them easier to use with large datasets containing complex objects.</p>
 <p>If you are new to tibbles, the best place to start is the <a href="https://r4ds.had.co.nz/tibbles.html" class="external-link">tibbles chapter</a> in <em>R for data science</em>.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <pre class="chroma">
 <span class="c"># The easiest way to get tibble is to install the whole tidyverse:</span>
 <span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="o">(</span><span class="s">"tidyverse"</span><span class="o">)</span>
@@ -168,9 +168,9 @@
 <span class="c"># install.packages("devtools")</span>
 <span class="nf">devtools</span><span class="nf">::</span><span class="nf"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="o">(</span><span class="s">"tidyverse/tibble"</span><span class="o">)</span></pre>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <pre class="chroma">
 <span class="kr"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="o">(</span><span class="nv"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="o">)</span></pre>
 <p>Create a tibble from an existing object with <a href="https://tibble.tidyverse.org/reference/as_tibble.html"><code>as_tibble()</code></a>:</p>
@@ -215,15 +215,15 @@
 <span class="c">#&gt; <span style="color: #555555;">1</span> a         2   3.6</span>
 <span class="c">#&gt; <span style="color: #555555;">2</span> b         1   8.5</span></pre>
 </div>
-<div id="related-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#related-work" class="anchor" aria-hidden="true"></a>Related work</h2>
+<div class="section level2">
+<h2 id="related-work">Related work<a class="anchor" aria-label="anchor" href="#related-work"></a>
+</h2>
 <p>The tibble print method draws inspiration from <a href="https://rdatatable.gitlab.io/data.table" class="external-link">data.table</a>, and <a href="https://github.com/patperry/r-frame" class="external-link">frame</a>. Like <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link"><code>data.table::data.table()</code></a>, <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.</p>
 <hr>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the tibble project is released with a <a href="https://tibble.tidyverse.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
@@ -233,13 +233,13 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tibble">https://​cloud.r-project.org/​package=tibble</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tibble" class="external-link">https://​cloud.r-project.org/​package=tibble</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/tidyverse/tibble/">https://​github.com/​tidyverse/​tibble/​</a>
+<li>Browse source code at <br><a href="https://github.com/tidyverse/tibble/" class="external-link">https://​github.com/​tidyverse/​tibble/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/tidyverse/tibble/issues">https://​github.com/​tidyverse/​tibble/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/tidyverse/tibble/issues" class="external-link">https://​github.com/​tidyverse/​tibble/​issues</a>
 </li>
-<li>Learn more at <br><a href="https://r4ds.had.co.nz/tibbles.html">https://​r4ds.had.co.nz/​tibbles.html</a>
+<li>Learn more at <br><a href="https://r4ds.had.co.nz/tibbles.html" class="external-link">https://​r4ds.had.co.nz/​tibbles.html</a>
 </li>
 </ul>
 </div>
@@ -248,7 +248,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -264,9 +264,9 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<a href="https://krlmlr.info" class="external-link">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small>  </li>
 <li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
+<a href="http://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
@@ -286,13 +286,13 @@
 
 
       <footer><div class="tidyverse">
-  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>tibble is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org" class="external-link">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="http://hadley.nz">Hadley Wickham</a>.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
