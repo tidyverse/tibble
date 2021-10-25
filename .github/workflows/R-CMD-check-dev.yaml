@@ -2,16 +2,18 @@
 # Can't be run as part of commits
 on:
   schedule:
-    - cron:  '5 0 * * *'
+    - cron:  '5 0 * * *' # only run on main branch
   push:
     branches:
     - "cran-*"
+    tags:
+    - "v*"
 
 name: rcc dev
 
 jobs:
   matrix:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -235,8 +237,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ubuntu-18.04-r-dev-release-${{ matrix.package }}-1-${{steps.date.outputs.date}}
-          restore-keys: ubuntu-18.04-r-dev-release-${{ matrix.package }}-1-
+          key: ubuntu-20.04-r-dev-release-${{ matrix.package }}-1-${{steps.date.outputs.date}}
+          restore-keys: ubuntu-20.04-r-dev-release-${{ matrix.package }}-1-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
