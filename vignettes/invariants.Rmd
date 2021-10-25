@@ -569,8 +569,6 @@ The name of new columns is determined by the LHS, the RHS, or by name repair (in
 ```{r bracket-assign-names, dftbl = TRUE}
 with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
 with_df(df[3:4] <- list("x", x = 4:1))
-with_df(df[3:5] <- list("x"))
-with_df(df[3:5] <- list(x = 4:1))
 with_df(df[4] <- list(4:1))
 with_df(df[5] <- list(4:1))
 ```

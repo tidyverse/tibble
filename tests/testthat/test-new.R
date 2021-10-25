@@ -99,6 +99,13 @@ test_that("new_tibble() doesn't retain any `x` attributes besides names", {
   expect_s3_class(result, class(tibble()), exact = TRUE)
 })
 
+test_that("new_tibble() supports language objects", {
+  expect_identical(
+    new_tibble(list(), foo = quote(bar())),
+    structure(new_tibble(list()), foo = quote(bar()))
+  )
+})
+
 test_that("new_tibble checks", {
   scoped_lifecycle_errors()
 
@@ -108,6 +115,22 @@ test_that("new_tibble checks", {
   expect_tibble_error(
     new_tibble(1:3, nrow = 1),
     error_new_tibble_must_be_list()
+  )
+  expect_tibble_error(
+    new_tibble(list(a = 1), nrow = -1),
+    error_new_tibble_nrow_must_be_nonnegative()
+  )
+  expect_tibble_error(
+    new_tibble(list(a = 1), nrow = "a"),
+    error_new_tibble_nrow_must_be_nonnegative()
+  )
+  expect_tibble_error(
+    new_tibble(list(a = 1), nrow = 1:2),
+    error_new_tibble_nrow_must_be_nonnegative()
+  )
+  expect_tibble_error(
+    new_tibble(list(a = 1), nrow = 2147483648),
+    error_new_tibble_nrow_must_be_nonnegative()
   )
   expect_tibble_error(
     new_tibble(list(1), nrow = 1),

@@ -2,9 +2,22 @@
 % Please edit documentation in R/pillar.R
 \name{num}
 \alias{num}
+\alias{set_num_opts}
 \title{Format a numeric vector}
 \usage{
 num(
+  x,
+  ...,
+  sigfig = NULL,
+  digits = NULL,
+  label = NULL,
+  scale = NULL,
+  notation = c("fit", "dec", "sci", "eng", "si"),
+  fixed_exponent = NULL,
+  extra_sigfig = NULL
+)
+
+set_num_opts(
   x,
   ...,
   sigfig = NULL,
@@ -70,6 +83,9 @@ The formatting is applied when the vector is printed or formatted,
 and also in a tibble column.
 The formatting annotation and the class survives most arithmetic transformations,
 the most notable exceptions are \code{\link[=var]{var()}} and \code{\link[=sd]{sd()}}.
+
+\code{set_num_opts()} adds formatting options to an arbitrary numeric vector,
+useful for composing with other types.
 }
 \examples{
 # Display as a vector

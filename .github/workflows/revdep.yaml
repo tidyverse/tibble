@@ -2,7 +2,7 @@
 on:
   push:
     branches:
-      - "revdep*"
+      - "revdep*" # never run automatically on main branch
 
 name: revdep
 

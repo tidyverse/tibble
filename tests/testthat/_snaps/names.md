@@ -23,10 +23,10 @@
       Column 1 must not have names of the form ... or ..j.
     Code
       repaired_names(c("a", "a"), repair_hint = FALSE, .name_repair = "universal")
-    Message <simpleMessage>
+    Message <rlib_message_name_repair>
       New names:
-      * a -> a...1
-      * a -> a...2
+      * `a` -> `a...1`
+      * `a` -> `a...2`
     Output
       [1] "a...1" "a...2"
     Code
@@ -36,9 +36,9 @@
       [1] "a...1" "a...2"
     Code
       repaired_names(c("if"), repair_hint = FALSE, .name_repair = "universal")
-    Message <simpleMessage>
+    Message <rlib_message_name_repair>
       New names:
-      * `if` -> .if
+      * `if` -> `.if`
     Output
       [1] ".if"
 

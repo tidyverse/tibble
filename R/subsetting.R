@@ -131,7 +131,7 @@ NULL
       x
     } else {
       # Drop inner names with double subscript
-      vec_set_names(vec_slice(x, i), NULL)
+      vectbl_set_names(vec_slice(x, i), NULL)
     }
   }
 }
@@ -517,12 +517,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     new <- which(!old)
     j_new <- j[new]
 
+    # FIXME: Recycled names are not repaired
+    # FIXME: Hard-coded name repair
     if (length(names) != 1L) {
       # Side effect: check compatibility
       vec_recycle(names, length(j), x_arg = as_label(value_arg))
     } else if (length(j) != 1L) {
+      # length(names) == 1
       names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
-      names[new] <- paste0(names[new], "...", j[new])
     }
 
     if (length(new) > 0) {
@@ -536,6 +538,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
+    }
+
+    if (length(names) != 1L) {
+      # Side effect: check compatibility
+      vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    } else if (length(j) != 1L) {
+      # length(names) == 1
+      names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
     }
 
     old <- (j <= length(x))
