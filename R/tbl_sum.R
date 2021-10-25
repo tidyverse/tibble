@@ -3,7 +3,7 @@
 pillar::tbl_sum
 
 #' @export
-tbl_sum.tbl_df <- function(x) {
+tbl_sum.tbl_df <- function(x, ...) {
   c("A tibble" = dim_desc(x))
 }
 
