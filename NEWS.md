@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.6
+
+- Same as previous version.
+
+
 # tibble 3.1.5.9001
 
 - `view()` uses `rlang::lxpr_deparse(width = Inf)` to avoid errors with long `|>` pipes (#957).
