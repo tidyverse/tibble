@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.5.9001
+
+- `view()` uses `rlang::lxpr_deparse(width = Inf)` to avoid errors with long `|>` pipes (#957).
+- `set_num_opts()` and `set_char_opts()` are reexported from pillar (#959).
+- `new_tibble()` checks that the `nrow` argument is nonnegative and less than 2^31 (#916).
+
+
 # tibble 3.1.5.9000
 
 - Same as previous version.
