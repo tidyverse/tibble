@@ -10,7 +10,7 @@
 #' `as_tibble()` is an S3 generic, with methods for:
 #' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
 #'   that implements tibble's treatment of [rownames].
-#' * [`matrix`][methods::matrix-class], [`poly`][stats::poly()],
+#' * [`matrix`][base::matrix()], [`poly`][stats::poly()],
 #'   [`ts`][stats::ts()], [`table`][base::table()]
 #' * Default: Other inputs are first coerced with [base::as.data.frame()].
 #'
