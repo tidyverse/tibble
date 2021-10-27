@@ -112,7 +112,7 @@ See vctrs::vec_as_names() for the implementation of the underlying logic."><meta
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Superseded functions for name repair</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/tidy_names.R" class="external-link"><code>R/tidy_names.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/tidy_names.R" class="external-link"><code>R/tidy_names.R</code></a></small>
     <div class="hidden name"><code>name-repair-superseded.Rd</code></div>
     </div>
 
@@ -135,16 +135,20 @@ See <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="e
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>name</dt><dd><p>A <code>names</code> attribute, usually a character vector.</p></dd>
-</dl><dl><dt>syntactic</dt><dd><p>Should names be made syntactically valid? If <code>FALSE</code>, uses
+    <dl><dt>name</dt>
+<dd><p>A <code>names</code> attribute, usually a character vector.</p></dd>
+<dt>syntactic</dt>
+<dd><p>Should names be made syntactically valid? If <code>FALSE</code>, uses
 same logic as <code>.name_repair = "unique"</code>. If <code>TRUE</code>, uses same logic as
 <code>.name_repair = "universal"</code>.</p></dd>
-</dl><dl><dt>quiet</dt><dd><p>Whether to suppress messages about name repair.</p></dd>
-</dl><dl><dt>x</dt><dd><p>A vector.</p></dd>
-</dl><dl><dt>prefix</dt><dd><p>A string, the prefix to use for new column names.</p></dd>
-</dl><dl><dt>sep</dt><dd><p>A string inserted between the column name and de-duplicating
+<dt>quiet</dt>
+<dd><p>Whether to suppress messages about name repair.</p></dd>
+<dt>x</dt>
+<dd><p>A vector.</p></dd>
+<dt>prefix</dt>
+<dd><p>A string, the prefix to use for new column names.</p></dd>
+<dt>sep</dt>
+<dd><p>A string inserted between the column name and de-duplicating
 number.</p></dd>
 </dl></div>
     <div id="value">

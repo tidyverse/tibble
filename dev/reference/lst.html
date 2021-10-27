@@ -111,7 +111,7 @@ evaluation and auto-name semantics."><meta property="og:image" content="https://
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Build a list</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/lst.R" class="external-link"><code>R/lst.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/lst.R" class="external-link"><code>R/lst.R</code></a></small>
     <div class="hidden name"><code>lst.Rd</code></div>
     </div>
 
@@ -129,12 +129,12 @@ evaluation and auto-name semantics.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>...</dt><dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
+    <dl><dt>...</dt>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 A set of name-value pairs. These arguments are
 processed with <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">rlang::quos()</a></code> and support unquote via <code>!!</code> and
-unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.Arguments are evaluated sequentially.
+unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
+<p>Arguments are evaluated sequentially.
 You can refer to previously created elements directly or using the .data
 pronoun.
 To refer explicitly to objects in the calling environment, use <code>!!</code> or

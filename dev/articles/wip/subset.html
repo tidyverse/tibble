@@ -147,7 +147,7 @@
       <h1 data-toc-skip>Subsetting</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/wip/subset.Rmd" class="external-link"><code>vignettes/wip/subset.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/vignettes/wip/subset.Rmd" class="external-link"><code>vignettes/wip/subset.Rmd</code></a></small>
       <div class="hidden name"><code>subset.Rmd</code></div>
 
     </div>
@@ -299,10 +299,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">c</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: Unknown or uninitialised
-#&gt; column: `c`.</code></pre>
+<pre><code><span class="co">#&gt; Warning: Unknown or uninitialised</span>
+<span class="co">#&gt; column: `c`.</span></code></pre>
 </div>
-<pre><code>#&gt; NULL</code></pre>
+<pre><code><span class="co">#&gt; NULL</span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -315,10 +315,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">d</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: Unknown or uninitialised
-#&gt; column: `d`.</code></pre>
+<pre><code><span class="co">#&gt; Warning: Unknown or uninitialised</span>
+<span class="co">#&gt; column: `d`.</span></code></pre>
 </div>
-<pre><code>#&gt; NULL</code></pre>
+<pre><code><span class="co">#&gt; NULL</span></code></pre>
 </td>
 </tr>
 </tbody></table>
@@ -376,19 +376,19 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `exact` ignored.</code></pre>
+<pre><code><span class="co">#&gt; Warning: `exact` ignored.</span></code></pre>
 </div>
-<pre><code>#&gt; [[1]]
-#&gt; [1] 9
-#&gt; 
-#&gt; [[2]]
-#&gt; [1] 10 11
-#&gt; 
-#&gt; [[3]]
-#&gt; [1] 12 13 14
-#&gt; 
-#&gt; [[4]]
-#&gt; [1] "text"</code></pre>
+<pre><code><span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] 9</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] 10 11</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] 12 13 14</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt; [1] "text"</span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -420,9 +420,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `exact` ignored.</code></pre>
+<pre><code><span class="co">#&gt; Warning: `exact` ignored.</span></code></pre>
 </div>
-<pre><code>#&gt; NULL</code></pre>
+<pre><code><span class="co">#&gt; NULL</span></code></pre>
 </td>
 </tr>
 </tbody></table>
@@ -455,18 +455,18 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in col[[i, exact = exact]]:
-#&gt; subscript out of bounds</code></pre>
+<pre><code><span class="co">#&gt; Error in col[[i, exact = exact]]:</span>
+<span class="co">#&gt; subscript out of bounds</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract row with a single
-#&gt; valid subscript.
-#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
-#&gt; size 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must extract row with a single</span>
+<span class="co">#&gt; valid subscript.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
+<span class="co">#&gt; size 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -489,10 +489,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must extract row with a single
-#&gt; valid subscript.
-#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
-#&gt; size 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must extract row with a single</span>
+<span class="co">#&gt; valid subscript.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
+<span class="co">#&gt; size 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -533,31 +533,31 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[.data.frame`(df, "a",
-#&gt; drop = FALSE): 'drop' argument will be
-#&gt; ignored</code></pre>
+<pre><code><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span>
+<span class="co">#&gt; drop = FALSE): 'drop' argument will be</span>
+<span class="co">#&gt; ignored</span></code></pre>
 </div>
-<pre><code>#&gt;   a
-#&gt; 1 1
-#&gt; 2 2
-#&gt; 3 3
-#&gt; 4 4</code></pre>
+<pre><code><span class="co">#&gt;   a</span>
+<span class="co">#&gt; 1 1</span>
+<span class="co">#&gt; 2 2</span>
+<span class="co">#&gt; 3 3</span>
+<span class="co">#&gt; 4 4</span></code></pre>
 </td>
 <td>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `drop` argument ignored for
-#&gt; subsetting a tibble with `x[j]`, it has
-#&gt; an effect only for `x[i, j]`.</code></pre>
+<pre><code><span class="co">#&gt; Warning: `drop` argument ignored for</span>
+<span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span>
+<span class="co">#&gt; an effect only for `x[i, j]`.</span></code></pre>
 </div>
-<pre><code>#&gt;  [38;5;246m# A tibble: 4 × 1 [39m
-#&gt;       a
-#&gt;    [3m [38;5;246m&lt;int&gt; [39m [23m
-#&gt;  [38;5;250m1 [39m     1
-#&gt;  [38;5;250m2 [39m     2
-#&gt;  [38;5;250m3 [39m     3
-#&gt;  [38;5;250m4 [39m     4</code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
+<span class="co">#&gt;       a</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -565,30 +565,30 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning in `[.data.frame`(df, "a", drop
-#&gt; = TRUE): 'drop' argument will be ignored</code></pre>
+<pre><code><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span>
+<span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></code></pre>
 </div>
-<pre><code>#&gt;   a
-#&gt; 1 1
-#&gt; 2 2
-#&gt; 3 3
-#&gt; 4 4</code></pre>
+<pre><code><span class="co">#&gt;   a</span>
+<span class="co">#&gt; 1 1</span>
+<span class="co">#&gt; 2 2</span>
+<span class="co">#&gt; 3 3</span>
+<span class="co">#&gt; 4 4</span></code></pre>
 </td>
 <td>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
 <div class="warning">
-<pre><code>#&gt; Warning: `drop` argument ignored for
-#&gt; subsetting a tibble with `x[j]`, it has
-#&gt; an effect only for `x[i, j]`.</code></pre>
+<pre><code><span class="co">#&gt; Warning: `drop` argument ignored for</span>
+<span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span>
+<span class="co">#&gt; an effect only for `x[i, j]`.</span></code></pre>
 </div>
-<pre><code>#&gt;  [38;5;246m# A tibble: 4 × 1 [39m
-#&gt;       a
-#&gt;    [3m [38;5;246m&lt;int&gt; [39m [23m
-#&gt;  [38;5;250m1 [39m     1
-#&gt;  [38;5;250m2 [39m     2
-#&gt;  [38;5;250m3 [39m     3
-#&gt;  [38;5;250m4 [39m     4</code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
+<span class="co">#&gt;       a</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -620,18 +620,18 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, 4):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, 4):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset columns that don't
-#&gt; exist.
-#&gt;  [31m✖ [39m Location 4 doesn't exist.
-#&gt;  [34mℹ [39m There are only 3 columns.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't subset columns that don't</span>
+<span class="co">#&gt; exist.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -640,16 +640,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, NA):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, NA):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at positions 1, 2, and 3.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at positions 1, 2, and 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -658,17 +658,17 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df,
-#&gt; NA_character_): undefined columns
-#&gt; selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df,</span>
+<span class="co">#&gt; NA_character_): undefined columns</span>
+<span class="co">#&gt; selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at position 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -677,16 +677,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df,
-#&gt; NA_integer_): undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df,</span>
+<span class="co">#&gt; NA_integer_): undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at position 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -767,18 +767,18 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, , 4):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , 4):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset columns that don't
-#&gt; exist.
-#&gt;  [31m✖ [39m Location 4 doesn't exist.
-#&gt;  [34mℹ [39m There are only 3 columns.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't subset columns that don't</span>
+<span class="co">#&gt; exist.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -787,16 +787,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, , NA):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , NA):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at positions 1, 2, and 3.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at positions 1, 2, and 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -805,17 +805,17 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, ,
-#&gt; NA_character_): undefined columns
-#&gt; selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, ,</span>
+<span class="co">#&gt; NA_character_): undefined columns</span>
+<span class="co">#&gt; selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at position 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -824,16 +824,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, ,
-#&gt; NA_integer_): undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, ,</span>
+<span class="co">#&gt; NA_integer_): undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't use NA as column index with
-#&gt; `[` at position 1.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't use NA as column index with</span>
+<span class="co">#&gt; `[` at position 1.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -899,18 +899,18 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, 1:4):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, 1:4):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset columns that don't
-#&gt; exist.
-#&gt;  [31m✖ [39m Location 4 doesn't exist.
-#&gt;  [34mℹ [39m There are only 3 columns.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't subset columns that don't</span>
+<span class="co">#&gt; exist.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -934,20 +934,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.default`(df, -1:2): only 0's
-#&gt; may be mixed with negative subscripts</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.default`(df, -1:2): only 0's</span>
+<span class="co">#&gt; may be mixed with negative subscripts</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [31m✖ [39m Negative and positive locations can't
-#&gt; be mixed.
-#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
-#&gt; at locations 3 and 4.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
+<span class="co">#&gt; be mixed.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
+<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1058,12 +1058,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 3 but subscript
-#&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
+<span class="co">#&gt; `c(FALSE, TRUE)` has size 2.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1072,22 +1072,22 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, c(FALSE,
-#&gt; TRUE, FALSE, TRUE)): undefined columns
-#&gt; selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE,</span>
+<span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span>
+<span class="co">#&gt; selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 3 but subscript
-#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
-#&gt; 4.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
+<span class="co">#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size</span>
+<span class="co">#&gt; 4.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1153,18 +1153,18 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, , 1:4):
-#&gt; undefined columns selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4):</span>
+<span class="co">#&gt; undefined columns selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Can't subset columns that don't
-#&gt; exist.
-#&gt;  [31m✖ [39m Location 4 doesn't exist.
-#&gt;  [34mℹ [39m There are only 3 columns.</code></pre>
+<pre><code><span class="co">#&gt; Error: Can't subset columns that don't</span>
+<span class="co">#&gt; exist.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1188,20 +1188,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in .subset(x, j): only 0's may be
-#&gt; mixed with negative subscripts</code></pre>
+<pre><code><span class="co">#&gt; Error in .subset(x, j): only 0's may be</span>
+<span class="co">#&gt; mixed with negative subscripts</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [31m✖ [39m Negative and positive locations can't
-#&gt; be mixed.
-#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
-#&gt; at locations 3 and 4.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
+<span class="co">#&gt; be mixed.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
+<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1324,12 +1324,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 3 but subscript
-#&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
+<span class="co">#&gt; `c(FALSE, TRUE)` has size 2.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1338,22 +1338,22 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in `[.data.frame`(df, , c(FALSE,
-#&gt; TRUE, FALSE, TRUE)): undefined columns
-#&gt; selected</code></pre>
+<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , c(FALSE,</span>
+<span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span>
+<span class="co">#&gt; selected</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset columns with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 3 but subscript
-#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
-#&gt; 4.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset columns with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
+<span class="co">#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size</span>
+<span class="co">#&gt; 4.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1474,20 +1474,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error in xj[i]: only 0's may be mixed
-#&gt; with negative subscripts</code></pre>
+<pre><code><span class="co">#&gt; Error in xj[i]: only 0's may be mixed</span>
+<span class="co">#&gt; with negative subscripts</span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset rows with a valid
-#&gt; subscript vector.
-#&gt;  [31m✖ [39m Negative and positive locations can't
-#&gt; be mixed.
-#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
-#&gt; at locations 3 and 4.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset rows with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
+<span class="co">#&gt; be mixed.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
+<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1572,12 +1572,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset rows with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 4 but subscript
-#&gt; `c(TRUE, FALSE)` has size 2.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset rows with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
+<span class="co">#&gt; `c(TRUE, FALSE)` has size 2.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1594,12 +1594,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset rows with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 4 but subscript
-#&gt; `c(TRUE, FALSE, TRUE)` has size 3.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset rows with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
+<span class="co">#&gt; `c(TRUE, FALSE, TRUE)` has size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1629,13 +1629,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code>#&gt; Error: Must subset rows with a valid
-#&gt; subscript vector.
-#&gt;  [34mℹ [39m Logical subscripts must match the size
-#&gt; of the indexed input.
-#&gt;  [31m✖ [39m Input has size 4 but subscript
-#&gt; `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has
-#&gt; size 5.</code></pre>
+<pre><code><span class="co">#&gt; Error: Must subset rows with a valid</span>
+<span class="co">#&gt; subscript vector.</span>
+<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
+<span class="co">#&gt; of the indexed input.</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
+<span class="co">#&gt; `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has</span>
+<span class="co">#&gt; size 5.</span></code></pre>
 </div>
 </td>
 </tr>

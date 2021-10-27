@@ -112,7 +112,7 @@ useful for composing with other types."><meta property="og:image" content="https
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Format a character vector</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/pillar.R" class="external-link"><code>R/pillar.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/pillar.R" class="external-link"><code>R/pillar.R</code></a></small>
     <div class="hidden name"><code>char.Rd</code></div>
     </div>
 
@@ -143,14 +143,15 @@ useful for composing with other types.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>A character vector.</p></dd>
-</dl><dl><dt>...</dt><dd><p>These dots are for future extensions and must be empty.</p></dd>
-</dl><dl><dt>min_chars</dt><dd><p>The minimum width to allocate to this column, defaults to 15.
+    <dl><dt>x</dt>
+<dd><p>A character vector.</p></dd>
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+<dt>min_chars</dt>
+<dd><p>The minimum width to allocate to this column, defaults to 15.
 The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is not consulted.</p></dd>
-</dl><dl><dt>shorten</dt><dd><p>How to abbreviate the data if necessary:
-</p><ul><li><p><code>"back"</code> (default): add an ellipsis at the end</p></li>
+<dt>shorten</dt>
+<dd><p>How to abbreviate the data if necessary:</p><ul><li><p><code>"back"</code> (default): add an ellipsis at the end</p></li>
 <li><p><code>"front"</code>: add an ellipsis at the front</p></li>
 <li><p><code>"mid"</code>: add an ellipsis in the middle</p></li>
 <li><p><code>"abbreviate"</code>: use <code><a href="https://rdrr.io/r/base/abbreviate.html" class="external-link">abbreviate()</a></code></p></li>

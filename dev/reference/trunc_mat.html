@@ -111,7 +111,7 @@ See vignette("extending", package = "pillar") for details.'><meta property="og:i
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Legacy printing</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/print.R" class="external-link"><code>R/print.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/print.R" class="external-link"><code>R/print.R</code></a></small>
     <div class="hidden name"><code>trunc_mat.Rd</code></div>
     </div>
 
@@ -129,18 +129,20 @@ See <code><a href="https://pillar.r-lib.org/articles/extending.html" class="exte
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>Object to format or print.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
+    <dl><dt>x</dt>
+<dd><p>Object to format or print.</p></dd>
+<dt>n</dt>
+<dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than option <code>tibble.print_max</code>. Otherwise, will print
 <code>tibble.print_min</code> rows.</p></dd>
-</dl><dl><dt>width</dt><dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
+<dt>width</dt>
+<dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use <code>getOption("tibble.width")</code> or (if also <code>NULL</code>)
 <code>getOption("width")</code>; the latter displays only the columns that fit on one
 screen. You can also set <code>options(tibble.width = Inf)</code> to override this
 default and always print all columns, this may be slow for very wide tibbles.</p></dd>
-</dl><dl><dt>n_extra</dt><dd><p>Number of extra columns to print abbreviated information for,
+<dt>n_extra</dt>
+<dd><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>, the default,
 will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></dd>
 </dl></div>

@@ -147,7 +147,7 @@
       <h1 data-toc-skip>Column data types</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/vignettes/types.Rmd" class="external-link"><code>vignettes/types.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/vignettes/types.Rmd" class="external-link"><code>vignettes/types.Rmd</code></a></small>
       <div class="hidden name"><code>types.Rmd</code></div>
 
     </div>
@@ -345,31 +345,31 @@
 <h2 id="example-values">Example values<a class="anchor" aria-label="anchor" href="#example-values"></a>
 </h2>
 <p>The following overview contains example values for each type:</p>
-<pre><code>#&gt; Rows: 1
-#&gt; Columns: 23
-#&gt; $ logical        [3m [38;5;246m&lt;lgl&gt; [39m [23m TRUE
-#&gt; $ integer        [3m [38;5;246m&lt;int&gt; [39m [23m 1
-#&gt; $ double         [3m [38;5;246m&lt;dbl&gt; [39m [23m 1.5
-#&gt; $ character      [3m [38;5;246m&lt;chr&gt; [39m [23m "A"
-#&gt; $ complex        [3m [38;5;246m&lt;cpl&gt; [39m [23m 0+1i
-#&gt; $ raw            [3m [38;5;246m&lt;raw&gt; [39m [23m 01
-#&gt; $ list           [3m [38;5;246m&lt;list&gt; [39m [23m 1
-#&gt; $ `named list`   [3m [38;5;246m&lt;named list&gt; [39m [23m 1
-#&gt; $ factor         [3m [38;5;246m&lt;fct&gt; [39m [23m A
-#&gt; $ ordered        [3m [38;5;246m&lt;ord&gt; [39m [23m a
-#&gt; $ Date           [3m [38;5;246m&lt;date&gt; [39m [23m 2021-10-25
-#&gt; $ POSIXt         [3m [38;5;246m&lt;dttm&gt; [39m [23m 2021-10-25 03:54:49
-#&gt; $ difftime       [3m [38;5;246m&lt;drtn&gt; [39m [23m 1 secs
-#&gt; $ hms            [3m [38;5;246m&lt;time&gt; [39m [23m 00:00:01
-#&gt; $ integer64      [3m [38;5;246m&lt;int64&gt; [39m [23m 10000000000
-#&gt; $ blob           [3m [38;5;246m&lt;blob&gt; [39m [23m 00
-#&gt; $ data.frame     [3m [38;5;246m&lt;df[,1]&gt; [39m [23m &lt;data.frame[1 x 1]&gt;
-#&gt; $ tbl_df         [3m [38;5;246m&lt;tibble[,1]&gt; [39m [23m &lt;tbl_df[1 x 1]&gt;
-#&gt; $ AsIs           [3m [38;5;246m&lt;I&lt;int&gt;&gt; [39m [23m 1
-#&gt; $ unspecified    [3m [38;5;246m&lt;???&gt; [39m [23m NA
-#&gt; $ vctrs_list_of  [3m [38;5;246m&lt;list&lt;int&gt;&gt; [39m [23m 1
-#&gt; $ vctrs_vctr     [3m [38;5;246m&lt;vctrs_vc&gt; [39m [23m 1
-#&gt; $ quosures       [3m [38;5;246m&lt;quos&gt; [39m [23m &lt;~1&gt;</code></pre>
+<pre><code><span class="co">#&gt; Rows: 1</span>
+<span class="co">#&gt; Columns: 23</span>
+<span class="co">#&gt; $ logical       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span>
+<span class="co">#&gt; $ integer       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span>
+<span class="co">#&gt; $ double        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.5</span>
+<span class="co">#&gt; $ character     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A"</span>
+<span class="co">#&gt; $ complex       <span style="color: #949494; font-style: italic;">&lt;cpl&gt;</span> 0+1i</span>
+<span class="co">#&gt; $ raw           <span style="color: #949494; font-style: italic;">&lt;raw&gt;</span> 01</span>
+<span class="co">#&gt; $ list          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> 1</span>
+<span class="co">#&gt; $ `named list`  <span style="color: #949494; font-style: italic;">&lt;named list&gt;</span> 1</span>
+<span class="co">#&gt; $ factor        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> A</span>
+<span class="co">#&gt; $ ordered       <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> a</span>
+<span class="co">#&gt; $ Date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2021-10-27</span>
+<span class="co">#&gt; $ POSIXt        <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2021-10-27 16:52:42</span>
+<span class="co">#&gt; $ difftime      <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span> 1 secs</span>
+<span class="co">#&gt; $ hms           <span style="color: #949494; font-style: italic;">&lt;time&gt;</span> 00:00:01</span>
+<span class="co">#&gt; $ integer64     <span style="color: #949494; font-style: italic;">&lt;int64&gt;</span> 10000000000</span>
+<span class="co">#&gt; $ blob          <span style="color: #949494; font-style: italic;">&lt;blob&gt;</span> 00</span>
+<span class="co">#&gt; $ data.frame    <span style="color: #949494; font-style: italic;">&lt;df[,1]&gt;</span> &lt;data.frame[1 x 1]&gt;</span>
+<span class="co">#&gt; $ tbl_df        <span style="color: #949494; font-style: italic;">&lt;tibble[,1]&gt;</span> &lt;tbl_df[1 x 1]&gt;</span>
+<span class="co">#&gt; $ AsIs          <span style="color: #949494; font-style: italic;">&lt;I&lt;int&gt;&gt;</span> 1</span>
+<span class="co">#&gt; $ unspecified   <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> NA</span>
+<span class="co">#&gt; $ vctrs_list_of <span style="color: #949494; font-style: italic;">&lt;list&lt;int&gt;&gt;</span> 1</span>
+<span class="co">#&gt; $ vctrs_vctr    <span style="color: #949494; font-style: italic;">&lt;vctrs_vc&gt;</span> 1</span>
+<span class="co">#&gt; $ quosures      <span style="color: #949494; font-style: italic;">&lt;quos&gt;</span> &lt;~1&gt;</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
@@ -394,7 +394,7 @@
 <span class="co">#&gt;             "sym"</span>
 <span class="co">#&gt;         }, typeof(x))</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x562d53fcaed8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x5584130d7528&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
 </div>
   </div>

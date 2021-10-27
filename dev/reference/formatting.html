@@ -125,7 +125,7 @@ and pillar::pillar_options for options that control the display in the console.'
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Printing tibbles</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/print.R" class="external-link"><code>R/print.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/print.R" class="external-link"><code>R/print.R</code></a></small>
     <div class="hidden name"><code>formatting.Rd</code></div>
     </div>
 
@@ -172,21 +172,25 @@ and <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="exte
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>Object to format or print.</p></dd>
-</dl><dl><dt>width</dt><dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
+    <dl><dt>x</dt>
+<dd><p>Object to format or print.</p></dd>
+<dt>width</dt>
+<dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use the <code>width</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Passed on to <code>tbl_format_setup()</code>.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
+<dt>...</dt>
+<dd><p>Passed on to <code>tbl_format_setup()</code>.</p></dd>
+<dt>n</dt>
+<dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than the <code>print_max</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.
 Otherwise, will print as many rows as specified by the
 <code>print_min</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
-</dl><dl><dt>max_extra_cols</dt><dd><p>Number of extra columns to print abbreviated information for,
+<dt>max_extra_cols</dt>
+<dd><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>,
 the <code>max_extra_cols</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.
 The previously defined <code>n_extra</code> argument is soft-deprecated.</p></dd>
-</dl><dl><dt>max_footer_lines</dt><dd><p>Maximum number of footer lines. If <code>NULL</code>,
+<dt>max_footer_lines</dt>
+<dd><p>Maximum number of footer lines. If <code>NULL</code>,
 the <code>max_footer_lines</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.</p></dd>
 </dl></div>
     </div>

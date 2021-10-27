@@ -110,7 +110,7 @@ add_case() is an alias of add_row()."><meta property="og:image" content="https:/
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add rows to a data frame</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/add.R" class="external-link"><code>R/add.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/add.R" class="external-link"><code>R/add.R</code></a></small>
     <div class="hidden name"><code>add_row.Rd</code></div>
     </div>
 
@@ -127,14 +127,15 @@ has only one row.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>.data</dt><dd><p>Data frame to append to.</p></dd>
-</dl><dl><dt>...</dt><dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
+    <dl><dt>.data</dt>
+<dd><p>Data frame to append to.</p></dd>
+<dt>...</dt>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 Name-value pairs, passed on to <code><a href="tibble.html">tibble()</a></code>. Values can be defined
 only for columns that already exist in <code>.data</code> and unset columns will get an
 <code>NA</code> value.</p></dd>
-</dl><dl><dt>.before, .after</dt><dd><p>One-based row index where to add the new rows,
+<dt>.before, .after</dt>
+<dd><p>One-based row index where to add the new rows,
 default: after last row.</p></dd>
 </dl></div>
     <div id="see-also">

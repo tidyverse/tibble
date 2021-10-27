@@ -107,7 +107,7 @@ frame."><meta property="og:image" content="https://tibble.tidyverse.org/logo.svg
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add columns to a data frame</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/add.R" class="external-link"><code>R/add.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/add.R" class="external-link"><code>R/add.R</code></a></small>
     <div class="hidden name"><code>add_column.Rd</code></div>
     </div>
 
@@ -127,16 +127,17 @@ frame.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>.data</dt><dd><p>Data frame to append to.</p></dd>
-</dl><dl><dt>...</dt><dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
+    <dl><dt>.data</dt>
+<dd><p>Data frame to append to.</p></dd>
+<dt>...</dt>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 Name-value pairs, passed on to <code><a href="tibble.html">tibble()</a></code>. All values must have
 the same size of <code>.data</code> or size 1.</p></dd>
-</dl><dl><dt>.before, .after</dt><dd><p>One-based column index or column name where to add the
+<dt>.before, .after</dt>
+<dd><p>One-based column index or column name where to add the
 new columns, default: after last column.</p></dd>
-</dl><dl><dt>.name_repair</dt><dd><p>Treatment of problematic column names:
-</p><ul><li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
+<dt>.name_repair</dt>
+<dd><p>Treatment of problematic column names:</p><ul><li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
 <li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
 <li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
 <code>unique</code>,</p></li>
@@ -144,9 +145,9 @@ new columns, default: after last column.</p></dd>
 <li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
 for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href="https://rlang.r-lib.org/reference/as_function.html" class="external-link">rlang::as_function()</a></code></p></li>
-</ul>This argument is passed on as <code>repair</code> to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.
+</ul><p>This argument is passed on as <code>repair</code> to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.
 See there for more details on these terms and the strategies used
-to enforce them.</dd>
+to enforce them.</p></dd>
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>

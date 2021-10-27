@@ -118,7 +118,7 @@ useful for composing with other types."><meta property="og:image" content="https
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Format a numeric vector</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/pillar.R" class="external-link"><code>R/pillar.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/pillar.R" class="external-link"><code>R/pillar.R</code></a></small>
     <div class="hidden name"><code>num.Rd</code></div>
     </div>
 
@@ -165,25 +165,29 @@ useful for composing with other types.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>A numeric vector.</p></dd>
-</dl><dl><dt>...</dt><dd><p>These dots are for future extensions and must be empty.</p></dd>
-</dl><dl><dt>sigfig</dt><dd><p>Define the number of significant digits to show. Must be one or greater.
+    <dl><dt>x</dt>
+<dd><p>A numeric vector.</p></dd>
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+<dt>sigfig</dt>
+<dd><p>Define the number of significant digits to show. Must be one or greater.
 The <code>"pillar.sigfig"</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is not consulted.
 Can't be combined with <code>digits</code>.</p></dd>
-</dl><dl><dt>digits</dt><dd><p>Number of digits after the decimal points to show.
+<dt>digits</dt>
+<dd><p>Number of digits after the decimal points to show.
 Positive numbers specify the exact number of digits to show.
 Negative numbers specify (after negation) the maximum number of digits to show.
 With <code>digits = 2</code>, the numbers 1.2 and 1.234 are printed as 1.20 and 1.23,
 with <code>digits = -2</code> as 1.2 and 1.23, respectively.
 Can't be combined with <code>sigfig</code>.</p></dd>
-</dl><dl><dt>label</dt><dd><p>A label to show instead of the type description.</p></dd>
-</dl><dl><dt>scale</dt><dd><p>Multiplier to apply to the data before showing.
+<dt>label</dt>
+<dd><p>A label to show instead of the type description.</p></dd>
+<dt>scale</dt>
+<dd><p>Multiplier to apply to the data before showing.
 Useful for displaying e.g. percentages.
 Must be combined with <code>label</code>.</p></dd>
-</dl><dl><dt>notation</dt><dd><p>One of <code>"fit"</code>, <code>"dec"</code>, <code>"sci"</code>, <code>"eng"</code>, or <code>"si"</code>.
-</p><ul><li><p><code>"fit"</code>: Use decimal notation if it fits and if it consumes 13 digits or less,
+<dt>notation</dt>
+<dd><p>One of <code>"fit"</code>, <code>"dec"</code>, <code>"sci"</code>, <code>"eng"</code>, or <code>"si"</code>.</p><ul><li><p><code>"fit"</code>: Use decimal notation if it fits and if it consumes 13 digits or less,
 otherwise use scientific notation. (The default for numeric pillars.)</p></li>
 <li><p><code>"dec"</code>: Use decimal notation, regardless of width.</p></li>
 <li><p><code>"sci"</code>: Use scientific notation.</p></li>
@@ -191,10 +195,12 @@ otherwise use scientific notation. (The default for numeric pillars.)</p></li>
 using exponents that are a multiple of three.</p></li>
 <li><p><code>"si"</code>: Use SI notation, prefixes between <code>1e-24</code> and <code>1e24</code> are supported.</p></li>
 </ul></dd>
-</dl><dl><dt>fixed_exponent</dt><dd><p>Use the same exponent for all numbers in scientific, engineering or SI notation.
+<dt>fixed_exponent</dt>
+<dd><p>Use the same exponent for all numbers in scientific, engineering or SI notation.
 <code>-Inf</code> uses the smallest, <code>+Inf</code> the largest fixed_exponent present in the data.
 The default is to use varying exponents.</p></dd>
-</dl><dl><dt>extra_sigfig</dt><dd><p>If <code>TRUE</code>, increase the number of significant digits if the data consists of
+<dt>extra_sigfig</dt>
+<dd><p>If <code>TRUE</code>, increase the number of significant digits if the data consists of
 numbers of the same magnitude with subtle differences.</p></dd>
 </dl></div>
     <div id="see-also">
