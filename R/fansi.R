@@ -1,4 +1,4 @@
-# nocov start - https://github.com/tidyverse/tibble/blob/master/R/fansi.R
+# nocov start - https://github.com/tidyverse/tibble/blob/main/R/fansi.R
 set_fansi_hooks <- function() {
   knitr::opts_chunk$set(collapse = TRUE)
 
