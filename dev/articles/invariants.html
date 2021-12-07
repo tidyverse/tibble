@@ -382,7 +382,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must extract column with a single
 #&gt; valid subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `c("n", "c")` has size 2 but
 #&gt; must be size 1.
@@ -405,9 +405,16 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
-#&gt; valid subscript.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract column with a single valid
+#&gt; subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `TRUE` has the wrong type
+#&gt; `logical`.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> It must be numeric or character.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract element with a single valid
+#&gt; subscript.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript has the wrong type
 #&gt; `logical`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> It must be numeric or character.
 </span></code></pre>
@@ -432,9 +439,16 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="va">mean</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
-#&gt; valid subscript.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract column with a single valid
+#&gt; subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `mean` has the wrong type
+#&gt; `function`.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> It must be numeric or character.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract element with a single valid
+#&gt; subscript.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript has the wrong type
 #&gt; `function`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> It must be numeric or character.
 </span></code></pre>
@@ -459,7 +473,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must extract column with a single
 #&gt; valid subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `NA` can't be `NA`.
 </span></code></pre>
@@ -481,7 +495,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_character_</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must extract column with a single
 #&gt; valid subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `NA_character_` can't be
 #&gt; `NA`.
@@ -504,7 +518,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_integer_</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must extract column with a single
 #&gt; valid subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `NA_integer_` can't be `NA`.
 </span></code></pre>
@@ -530,7 +544,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must extract column with a single
 #&gt; valid subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `-1` has value -1 but must
 #&gt; be a positive location.
@@ -556,8 +570,8 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't subset columns that don't
-#&gt; exist.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't subset columns that don't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Location 4 doesn't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> There are only 3 columns.
 </span></code></pre>
@@ -579,10 +593,20 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1.5</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
-#&gt; valid subscript.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract column with a single valid
+#&gt; subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract element with a single valid
+#&gt; subscript.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't convert from &lt;double&gt; to &lt;integer&gt;
+#&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Locations: 1
 </span></code></pre>
 </div>
 </div>
@@ -602,10 +626,20 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">Inf</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must extract column with a single
-#&gt; valid subscript.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract column with a single valid
+#&gt; subscript.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert from &lt;double&gt; to
 #&gt; &lt;integer&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Must extract element with a single valid
+#&gt; subscript.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert from &lt;double&gt; to
+#&gt; &lt;integer&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't convert from &lt;double&gt; to &lt;integer&gt;
+#&gt; due to loss of precision.
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> Locations: 1
 </span></code></pre>
 </div>
 </div>
@@ -867,8 +901,9 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't combine `n` &lt;integer&gt; and
-#&gt; `c` &lt;character&gt;.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't combine `n` &lt;integer&gt; and `c`
+#&gt; &lt;character&gt;.
 </span></code></pre>
 </div>
 </div>
@@ -984,7 +1019,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="va">mean</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must subset rows with a valid
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must subset rows with a valid
 #&gt; subscript vector.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `mean` has the wrong type
 #&gt; `function`.
@@ -1012,7 +1047,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must subset rows with a valid
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must subset rows with a valid
 #&gt; subscript vector.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `list(1)` has the wrong type
 #&gt; `list`.
@@ -1123,7 +1158,7 @@
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Must subset rows with a valid
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Must subset rows with a valid
 #&gt; subscript vector.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Logical subscripts must match the size
 #&gt; of the indexed input.
@@ -1399,8 +1434,9 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't assign to columns beyond
-#&gt; the end with non-consecutive locations.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't assign to columns beyond the end
+#&gt; with non-consecutive locations.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Input has size 3.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `5` contains non-consecutive
 #&gt; location 5.
@@ -1594,8 +1630,9 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't recycle `list(0, 0, 0)`
-#&gt; (size 3) to size 2.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't recycle `list(0, 0, 0)` (size 3)
+#&gt; to size 2.
 </span></code></pre>
 </div>
 </div>
@@ -1619,8 +1656,9 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't recycle `list(0, 0)` (size
-#&gt; 2) to size 3.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't recycle `list(0, 0)` (size 2) to
+#&gt; size 3.
 </span></code></pre>
 </div>
 </div>
@@ -1646,7 +1684,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Column index 1 is used more than
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Column index 1 is used more than
 #&gt; once for assignment.
 </span></code></pre>
 </div>
@@ -1758,8 +1796,9 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't assign to columns beyond
-#&gt; the end with non-consecutive locations.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't assign to columns beyond the end
+#&gt; with non-consecutive locations.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Input has size 3.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `5` contains non-consecutive
 #&gt; location 5.
@@ -1817,7 +1856,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Subscript `is.na(tbl)` is a
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Subscript `is.na(tbl)` is a
 #&gt; matrix, the data `1:2` must have size 1.
 </span></code></pre>
 </div>
@@ -1842,7 +1881,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `4` must be
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `4` must be
 #&gt; compatible with existing data.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Error occurred for column `c`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert &lt;double&gt; to &lt;character&gt;.
@@ -1895,7 +1934,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `matrix(6:1, ncol =
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `matrix(6:1, ncol =
 #&gt; 2)` must be compatible with existing
 #&gt; data.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Error occurred for column `c`.
@@ -1960,7 +1999,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `array(8:1, dim = c(2, 1, 4))`
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `array(8:1, dim = c(2, 1, 4))`
 #&gt; must be a vector, a bare list, a data
 #&gt; frame, a matrix, or NULL.
 </span></code></pre>
@@ -1986,7 +2025,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `array(8:1, dim = c(4, 1, 2))`
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `array(8:1, dim = c(4, 1, 2))`
 #&gt; must be a vector, a bare list, a data
 #&gt; frame, a matrix, or NULL.
 </span></code></pre>
@@ -2144,7 +2183,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `NULL` must be a vector, a bare
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `NULL` must be a vector, a bare
 #&gt; list, a data frame or a matrix.
 </span></code></pre>
 </div>
@@ -2177,7 +2216,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mean</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `mean` must be a vector, a bare
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `mean` must be a vector, a bare
 #&gt; list, a data frame, a matrix, or NULL.
 </span></code></pre>
 </div>
@@ -2244,7 +2283,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `lm(mpg ~ wt, data = mtcars)`
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `lm(mpg ~ wt, data = mtcars)`
 #&gt; must be a vector, a bare list, a data
 #&gt; frame, a matrix, or NULL.
 </span></code></pre>
@@ -2354,7 +2393,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `tbl[1:2, ]` must
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `tbl[1:2, ]` must
 #&gt; be compatible with row subscript `2:4`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ 3 rows must be assigned.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Element 1 of assigned data has 2 rows.
@@ -2427,8 +2466,9 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't assign to rows beyond the
-#&gt; end with non-consecutive locations.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't assign to rows beyond the end with
+#&gt; non-consecutive locations.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Input has size 4.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Subscript `6` contains non-consecutive
 #&gt; location 6.
@@ -2455,8 +2495,8 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't negate rows that don't
-#&gt; exist.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't negate rows that don't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Location 5 doesn't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> There are only 4 rows.
 </span></code></pre>
@@ -2482,8 +2522,8 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't negate rows that don't
-#&gt; exist.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't negate rows that don't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Locations 5, 6, and 7 don't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> There are only 4 rows.
 </span></code></pre>
@@ -2509,8 +2549,8 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">6</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Can't negate rows that don't
-#&gt; exist.
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;">
+</span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Can't negate rows that don't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Location 6 doesn't exist.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> There are only 4 rows.
 </span></code></pre>
@@ -2566,7 +2606,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `tbl[1:2, 2]` must
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `tbl[1:2, 2]` must
 #&gt; be compatible with existing data.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Error occurred for column `n`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert &lt;character&gt; to
@@ -2603,7 +2643,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `tbl[1:2, 3]` must
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `tbl[1:2, 3]` must
 #&gt; be compatible with existing data.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Error occurred for column `c`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert &lt;list&gt; to &lt;character&gt;.
@@ -2639,7 +2679,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Internal error in
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Internal error in
 #&gt; `df_cast_opts()`: Data frame must have
 #&gt; names.
 </span></code></pre>
@@ -2673,7 +2713,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl2</span><span class="op">(</span><span class="va">tbl2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: Assigned data `tbl2[1:2, 2]` must
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> Assigned data `tbl2[1:2, 2]` must
 #&gt; be compatible with existing data.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ℹ</span><span style="color: #BB0000;"> Error occurred for column `tb`.
 </span><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> ✖ Can't convert &lt;double[,4]&gt; to
@@ -2835,7 +2875,7 @@
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="error">
 <div class="sourceCode">
-<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> Error: `NULL` must be a vector, a bare
+<pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;">:</span><span style="color: #BB0000;"> `NULL` must be a vector, a bare
 #&gt; list, a data frame or a matrix.
 </span></code></pre>
 </div>

@@ -149,7 +149,8 @@ bugs that are hard to catch. If you rely on code that requires the original
 data frame behavior, coerce to a data frame via <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre><code># S3 method for tbl_df
+    <div id="ref-usage">
+    <div class="sourceCode"><pre><code># S3 method for tbl_df
 $(x, name)
 
 # S3 method for tbl_df
@@ -166,8 +167,8 @@ $(x, name) &lt;- value
 
 # S3 method for tbl_df
 [(x, i, j, ...) &lt;- value</code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
@@ -193,11 +194,10 @@ Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</co
 <code>[</code> supports a <code>drop</code> argument which defaults to <code>FALSE</code>.
 New code should use <code>[[</code> to turn a column into a vector.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Subsetting single columns:</span></span>

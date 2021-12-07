@@ -120,9 +120,10 @@ This is useful for small matrices, e.g. covariance matrices, where readability
 is important. The syntax is inspired by <code><a href="tribble.html">tribble()</a></code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">frame_matrix</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">frame_matrix</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
@@ -141,11 +142,10 @@ and support unquote via <code>!!</code> and unquote-splice via <code>!!!</code>.
     <div class="dont-index"><p>See quasiquotation for more details on tidy dots semantics,
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">frame_matrix</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">frame_matrix</span><span class="op">(</span></span>
 <span class="r-in">  <span class="op">~</span><span class="va">col1</span>, <span class="op">~</span><span class="va">col2</span>,</span>
 <span class="r-in">  <span class="fl">1</span>,     <span class="fl">3</span>,</span>
 <span class="r-in">  <span class="fl">5</span>,     <span class="fl">2</span></span>

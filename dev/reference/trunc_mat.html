@@ -124,9 +124,10 @@ the printed output can be customized in various ways.
 See <code><a href="https://pillar.r-lib.org/articles/extending.html" class="external-link">vignette("extending", package = "pillar")</a></code> for details.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">trunc_mat</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">NULL</span>, width <span class="op">=</span> <span class="cn">NULL</span>, n_extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">trunc_mat</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">NULL</span>, width <span class="op">=</span> <span class="cn">NULL</span>, n_extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
@@ -146,7 +147,6 @@ default and always print all columns, this may be slow for very wide tibbles.</p
 if the width is too small for the entire tibble. If <code>NULL</code>, the default,
 will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></dd>
 </dl></div>
-    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

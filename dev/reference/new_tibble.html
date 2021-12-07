@@ -130,11 +130,12 @@ Correct behavior can be guaranteed only if this function
 runs without raising an error.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">new_tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, nrow <span class="op">=</span> <span class="cn">NULL</span>, class <span class="op">=</span> <span class="cn">NULL</span>, subclass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, nrow <span class="op">=</span> <span class="cn">NULL</span>, class <span class="op">=</span> <span class="cn">NULL</span>, subclass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 
 <span class="fu">validate_tibble</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
@@ -178,11 +179,10 @@ with recycling of scalars and automatic name repair,
 and <code><a href="https://vctrs.r-lib.org/reference/df_list.html" class="external-link">vctrs::df_list()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code>
 for lower-level implementations.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># The nrow argument is always required:</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># The nrow argument is always required:</span></span>
 <span class="r-in"><span class="fu">new_tibble</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b</span>

@@ -120,9 +120,10 @@ and <code><a href="https://cli.r-lib.org/reference/num_ansi_colors.html" class="
 via ANSI sequences like <code>[3m[38;5;246m[39m[23m</code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="va">tibble_options</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="va">tibble_options</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="details">
     <h2>Details</h2>
     <p>These options can be set via <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> and queried via <code><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption()</a></code>.
@@ -138,11 +139,10 @@ An option value of <code>NULL</code> means that the default is used.</p>
 <ul><li><p><code>view_max</code>: Maximum number of rows shown by <code><a href="view.html">view()</a></code>
 if the input is not a data frame, passed on to <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>. Default: <code>1000</code>.</p></li>
 </ul></div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Default setting:</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Default setting:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"tibble.view_max"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"></span>

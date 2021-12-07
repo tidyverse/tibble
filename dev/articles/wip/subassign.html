@@ -223,14 +223,14 @@
 <p>For subassignment, we need a fresh copy of the data for each test. The <code>with_*()</code> functions allow for a more concise notation (<code>with_tbl()</code> omitted here for brevity):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">with_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">code</span>, <span class="va">verbose</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">code</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">enexpr</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span>
+  <span class="va">code</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">enexpr</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span>
   
-  <span class="va">full_code</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">quo</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">full_code</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">quo</a></span><span class="op">(</span><span class="op">{</span>
     <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">new_df</span><span class="op">(</span><span class="op">)</span>
     <span class="op">!</span><span class="op">!</span><span class="va">code</span>
     <span class="va">df</span>
   <span class="op">}</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">verbose</span><span class="op">)</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/expr_print.html" class="external-link">expr_print</a></span><span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/quosure.html" class="external-link">quo_get_expr</a></span><span class="op">(</span><span class="va">full_code</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">verbose</span><span class="op">)</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/expr_print.html" class="external-link">expr_print</a></span><span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/quosure-tools.html" class="external-link">quo_get_expr</a></span><span class="op">(</span><span class="va">full_code</span><span class="op">)</span><span class="op">)</span>
   <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/eval_tidy.html" class="external-link">eval_tidy</a></span><span class="op">(</span><span class="va">full_code</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>This function takes an assignment expression and executes it on a fresh copy of the data. The first example prints what’s really executed, further examples omit this output.</p>
@@ -417,7 +417,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1:2` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1:2` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span>
@@ -439,7 +439,7 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1:3` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1:3` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span>
@@ -461,7 +461,7 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1:5` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1:5` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span>
@@ -483,7 +483,7 @@
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1:2` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1:2` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span>
@@ -546,7 +546,7 @@
 <span class="co">#&gt; column: `c`.</span></code></pre>
 </div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `&lt;int&gt;` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `&lt;int&gt;` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span>
@@ -627,7 +627,7 @@
 <span class="co">#&gt; 4 4 h       text 4</span>
 <span class="fu">with_df</span><span class="op">(</span><span class="op">{</span> <span class="va">df</span><span class="op">$</span><span class="va">v</span> <span class="op">=</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html" class="external-link">new_vctr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>; <span class="va">df</span><span class="op">$</span><span class="va">v</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html" class="external-link">new_vctr</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't convert &lt;vctrs_vctr&gt; to &lt;vctrs_vctr&gt;.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span> Can't convert &lt;vctrs_vctr&gt; to &lt;vctrs_vctr&gt;.</span></code></pre>
 </div>
 </div>
 </div>
@@ -786,8 +786,9 @@
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't assign to columns beyond</span>
-<span class="co">#&gt; the end with non-consecutive locations.</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_subscript()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't assign to columns beyond the end</span>
+<span class="co">#&gt; with non-consecutive locations.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Input has size 3.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `5` contains non-consecutive</span>
 <span class="co">#&gt; location 5.</span></code></pre>
@@ -914,7 +915,7 @@
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1.5` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1.5` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
@@ -937,7 +938,7 @@
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -974,7 +975,7 @@
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -1011,7 +1012,7 @@
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `cd`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></code></pre>
@@ -1076,7 +1077,7 @@
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Must assign to row with a single</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Must assign to row with a single</span>
 <span class="co">#&gt; valid subscript.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
 <span class="co">#&gt; size 1.</span></code></pre>
@@ -1097,7 +1098,7 @@
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Must assign to row with a single</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Must assign to row with a single</span>
 <span class="co">#&gt; valid subscript.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
 <span class="co">#&gt; size 1.</span></code></pre>
@@ -1118,7 +1119,7 @@
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Must assign to column with a</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Must assign to column with a</span>
 <span class="co">#&gt; single valid subscript.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `c("cd", "d")` has size 2</span>
 <span class="co">#&gt; but must be size 1.</span></code></pre>
@@ -1171,7 +1172,7 @@
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1.5` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1.5` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
@@ -1194,7 +1195,7 @@
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -1231,7 +1232,7 @@
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `cd`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></code></pre>
@@ -1252,7 +1253,7 @@
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `list("x")` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `list("x")` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `cd`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></code></pre>
@@ -1288,7 +1289,7 @@
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -1325,7 +1326,7 @@
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `cd`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></code></pre>
@@ -1730,8 +1731,8 @@
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 3 to</span>
-<span class="co">#&gt; size 2.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 3 to size 2.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1764,8 +1765,8 @@
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1783,8 +1784,8 @@
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1808,7 +1809,7 @@
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `b`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;double&gt; to &lt;character&gt;.</span></code></pre>
@@ -1829,7 +1830,7 @@
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"x"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"x"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -1851,8 +1852,8 @@
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1898,8 +1899,8 @@
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 4 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 4 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -1917,7 +1918,7 @@
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Must assign to rows with a valid</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Must assign to rows with a valid</span>
 <span class="co">#&gt; subscript vector.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `0` can't contain `0`</span>
 <span class="co">#&gt; values.</span>
@@ -1969,7 +1970,7 @@
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `b`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;double&gt; to &lt;character&gt;.</span></code></pre>
@@ -1990,7 +1991,7 @@
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `1:2` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `1:2` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `b`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;integer&gt; to</span>
@@ -2012,7 +2013,7 @@
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `c("x", "y")` must</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `c("x", "y")` must</span>
 <span class="co">#&gt; be compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
@@ -2034,8 +2035,8 @@
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2096,8 +2097,8 @@
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 4 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 4 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2148,7 +2149,7 @@
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Must assign to rows with a valid</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Must assign to rows with a valid</span>
 <span class="co">#&gt; subscript vector.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `0:1` can't contain `0`</span>
 <span class="co">#&gt; values.</span>
@@ -2222,7 +2223,7 @@
 <div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `3:1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `3:1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span>
@@ -2244,7 +2245,7 @@
 <div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `5:1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `5:1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span>
@@ -2266,8 +2267,8 @@
 <div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2321,8 +2322,8 @@
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 4 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 4 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2385,7 +2386,7 @@
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `3:1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `3:1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span>
@@ -2407,7 +2408,7 @@
 <div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `5:1` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `5:1` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Existing data has 4 rows.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span>
@@ -2429,8 +2430,8 @@
 <div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 2 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 2 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2484,8 +2485,8 @@
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Can't recycle input of size 4 to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`stop_vctrs()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; Can't recycle input of size 4 to size 3.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -2524,7 +2525,7 @@
 <div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"b"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error: Assigned data `"b"` must be</span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span> Assigned data `"b"` must be</span>
 <span class="co">#&gt; compatible with existing data.</span>
 <span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Error occurred for column `a`.</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span>
