@@ -117,7 +117,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v1
         with:
         # Begin custom: rcmdcheck error_on
-          error_on: '"note"'
+          error-on: '"note"'
         # End custom: rcmdcheck error_on
 
       - name: Show test output
