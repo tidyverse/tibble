@@ -30,7 +30,7 @@
        Named list()
     Code
       # Non-syntactic names
-      df <- tibble(`mean(x)` = 5, `var(x)` = 3)
+      df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
       str(df, width = 28)
     Output
       tibble [1 x 2] (S3: tbl_df/tbl/data.frame)
