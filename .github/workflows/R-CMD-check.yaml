@@ -21,7 +21,38 @@ on:
 name: rcc
 
 jobs:
-  R-CMD-check:
+  R-CMD-check-smoke:
+    runs-on: ubuntu-latest
+
+    name: "Smoke test: stock R"
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: rcc-smoke-1
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ runner.os }}-smoke-test
+
+  # Windows checks are run in parallel and independently,
+  # because they alone can take as long as the smoke and full tests combined.
+  R-CMD-check-windows:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
@@ -31,16 +62,43 @@ jobs:
 
     strategy:
       fail-fast: false
-      # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
-      # Need to figure out how to smoke-test
-      max-parallel: 5
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
-
           - {os: windows-latest, r: 'release'}
           # Use 3.6 to trigger usage of RTools35
           - {os: windows-latest, r: '3.6'}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          r-version: ${{ matrix.config.r }}
+          cache-version: rcc-main-1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ runner.os }}-r${{ matrix.config.r }}
+
+  R-CMD-check-full:
+    runs-on: ${{ matrix.config.os }}
+    needs: R-CMD-check-smoke
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-latest,   r: 'release'}
 
           - {os: ubuntu-20.04,   r: 'release'}
 
@@ -62,79 +120,27 @@ jobs:
           # End custom: R 3.4
 
           # Begin custom: matrix elements
+          - { os: macOS-latest,   r: 'release',    mysql_client: false,   RMARIADB_FORCE_MARIADBCONFIG: 1,    desc: mariadb_config }
+          - { os: macOS-latest,   r: 'release',    mysql_client: true,    RMARIADB_FORCE_MYSQLCONFIG: 1,      desc: mysql_config }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: true,    mysql_server: true,                 desc: "MySQL server + client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: true,    mysql_server: false,                desc: "MariaDB server, MySQL client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: true,                 desc: "MySQL server, MariaDB client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: false,                desc: "MariaDB server + client" }
           # End custom: matrix elements
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_KEEP_PKG_SOURCE: yes
-      # prevent rgl issues because no X11 display is available
-      RGL_USE_NULL: true
-      _R_CHECK_SYSTEM_CLOCK_: false
-      _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
-      # Begin custom: env vars
-      # End custom: env vars
 
     steps:
-      - name: Check rate limits
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash
-
       - uses: actions/checkout@v2
 
-      # Begin custom: before install
-      # End custom: before install
+      - uses: ./.github/workflows/custom/before-install
 
-      - uses: r-lib/actions/setup-pandoc@v1
-
-      - uses: r-lib/actions/setup-r@v1
+      - uses: ./.github/workflows/install
         with:
           r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
+          cache-version: rcc-main-1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: r-lib/actions/setup-r-dependencies@v1
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
         with:
-          extra-packages: rcmdcheck
-
-      - name: Add fake qpdf and checkbashisms
-        if: runner.os == 'Linux'
-        run: |
-          sudo ln -s $(which true) /usr/local/bin/qpdf
-          sudo ln -s $(which true) /usr/local/bin/checkbashisms
-
-      - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
-
-      # Begin custom: after install
-      # End custom: after install
-
-      - uses: r-lib/actions/check-r-package@v1
-        with:
-        # Begin custom: rcmdcheck error_on
-          error-on: '"note"'
-        # End custom: rcmdcheck error_on
-
-      - name: Show test output
-        if: always()
-        run: |
-          find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
-
-      - name: Check rate limits
-        if: always()
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash
+          results: ${{ runner.os }}-r${{ matrix.config.r }}

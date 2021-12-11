@@ -1,0 +1,57 @@
+name: 'Actions to run for installing R packages'
+inputs:
+  token:
+    description: GitHub token, set to secrets.GITHUB_TOKEN
+    required: true
+  r-version:
+    description: Passed on to r-lib/actions/setup-r@v1
+    required: false
+    default: release
+  install-r:
+    description: Passed on to r-lib/actions/setup-r@v1
+    required: false
+    default: true
+  extra-packages:
+    description: Passed on to r-lib/actions/setup-r@v1
+    required: false
+    default: rcmdcheck
+  cache-version:
+    description: Passed on to r-lib/actions/setup-r-dependencies@v1
+    required: false
+    default: 1
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set environment variables
+      run: |
+        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=true" | tee -a $GITHUB_ENV
+        echo "R_KEEP_PKG_SOURCE=yes" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_SYSTEM_CLOCK_=false" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_FUTURE_FILE_TIMESTAMPS_=false" | tee -a $GITHUB_ENV
+        # prevent rgl issues because no X11 display is available
+        echo "RGL_USE_NULL=true" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - uses: r-lib/actions/setup-pandoc@v1
+
+    - uses: r-lib/actions/setup-r@v1
+      with:
+        r-version: ${{ inputs.r-version }}
+        install-r: ${{ inputs.install-r }}
+        http-user-agent: ${{ matrix.config.http-user-agent }}
+        use-public-rspm: true
+
+    - uses: cynkra/actions/setup-r-dependencies@master
+      env:
+        GITHUB_PAT: ${{ inputs.token }}
+      with:
+        extra-packages: ${{ inputs.extra-packages }}
+        cache-version: ${{ inputs.cache-version }}
+
+    - name: Add fake qpdf and checkbashisms
+      if: runner.os == 'Linux'
+      run: |
+        sudo ln -s $(which true) /usr/local/bin/qpdf
+        sudo ln -s $(which true) /usr/local/bin/checkbashisms
+      shell: bash

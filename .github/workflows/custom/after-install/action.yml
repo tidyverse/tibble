@@ -1,0 +1,9 @@
+name: 'Actions to run after R packages are installed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Empty
+      run: |
+        true
+      shell: bash

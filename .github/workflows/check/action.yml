@@ -1,0 +1,25 @@
+name: 'Actions to check an R package'
+inputs:
+  results:
+    description: Slug for check results
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: r-lib/actions/check-r-package@v1
+      with:
+        error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
+
+    - name: Show test output
+      if: always()
+      run: |
+        find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+      shell: bash
+
+    - name: Upload check results
+      if: failure()
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ inputs.results }}-results
+        path: check
