@@ -11,6 +11,12 @@ runs:
       with:
         error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
 
+    - name: Run coverage check
+      if: ${{ matrix.config.covr }}
+      run: |
+        covr::codecov()
+      shell: Rscript {0}
+
     - name: Show test output
       if: always()
       run: |

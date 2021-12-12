@@ -46,7 +46,7 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
-        extra-packages: ${{ inputs.extra-packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'covr' }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add fake qpdf and checkbashisms
