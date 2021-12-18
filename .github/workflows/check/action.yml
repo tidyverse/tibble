@@ -7,7 +7,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: r-lib/actions/check-r-package@v1
+    - uses: r-lib/actions/check-r-package@v2
       with:
         error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
 

@@ -50,9 +50,14 @@ jobs:
         with:
           results: ${{ runner.os }}-smoke-test
 
-  # Windows checks are run in parallel and independently,
-  # because they alone can take as long as the smoke and full tests combined.
+  # Windows checks can be run in parallel and independently
+  # when they alone take as long as the smoke and full tests combined.
+  # To achieve this, remove the "needs:" element below.
   R-CMD-check-windows:
+    # Begin custom: early run
+    needs: R-CMD-check-smoke
+    # End custom: early run
+
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
@@ -86,8 +91,9 @@ jobs:
           results: ${{ runner.os }}-r${{ matrix.config.r }}
 
   R-CMD-check-full:
-    runs-on: ${{ matrix.config.os }}
     needs: R-CMD-check-smoke
+
+    runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
 
