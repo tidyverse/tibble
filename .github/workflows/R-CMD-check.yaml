@@ -51,9 +51,9 @@ jobs:
 
       - uses: ./.github/workflows/custom/after-install
 
-      - uses: ./.github/workflows/roxygenize
-
       - uses: ./.github/workflows/style
+
+      - uses: ./.github/workflows/roxygenize
 
       - id: commit
         uses: ./.github/workflows/commit
