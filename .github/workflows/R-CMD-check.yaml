@@ -23,6 +23,8 @@ name: rcc
 jobs:
   R-CMD-check-smoke:
     runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
 
     name: "Smoke test: stock R"
 
@@ -36,6 +38,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: ./.github/workflows/git-identity
+
       - uses: ./.github/workflows/custom/before-install
 
       - uses: ./.github/workflows/install
@@ -43,12 +47,61 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
           cache-version: rcc-smoke-1
+          extra-packages: rcmdcheck roxygen2 styler
 
       - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/roxygenize
+
+      - uses: ./.github/workflows/style
+
+      - id: commit
+        uses: ./.github/workflows/commit
 
       - uses: ./.github/workflows/check
         with:
           results: ${{ runner.os }}-smoke-test
+
+  # Runs in a separate workflow, because it's using dev pkgdown
+  # which might bring in other dev dependencies
+  pkgdown:
+    needs: R-CMD-check-smoke
+
+    runs-on: ubuntu-latest
+
+    name: "pkgdown"
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.rcc-smoke.outputs.sha }}
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/git-identity
+        if: github.event_name == 'push'
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: pkgdown-1
+          extra-packages: r-lib/pkgdown local::.
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/pkgdown-build
+        if: github.event_name != 'push'
+
+      - uses: ./.github/workflows/pkgdown-deploy
+        if: github.event_name == 'push'
 
   # Windows checks can be run in parallel and independently
   # when they alone take as long as the smoke and full tests combined.
@@ -75,6 +128,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.rcc-smoke.outputs.sha }}
 
       - uses: ./.github/workflows/custom/before-install
 
@@ -130,6 +185,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.rcc-smoke.outputs.sha }}
 
       - uses: ./.github/workflows/custom/before-install
 

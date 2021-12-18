@@ -1,0 +1,9 @@
+name: 'Action to build a pkgdown website'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build site
+      run: |
+        pkgdown::build_site()
+      shell: Rscript {0}

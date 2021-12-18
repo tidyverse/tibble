@@ -1,0 +1,37 @@
+name: 'Action to auto-style a package'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check styler options
+      id: check
+      run: |
+        set -x
+        scope=$(grep Config/autostyle/scope DESCRIPTION | cut -d " " -f 2)
+        strict=$(grep Config/autostyle/strict DESCRIPTION | cut -d " " -f 2)
+        echo ::set-output name=scope::$scope
+        echo ::set-output name=strict::$strict
+      shell: bash
+
+    - name: Enable styler cache
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        styler::cache_activate(verbose = TRUE)
+      shell: Rscript {0}
+
+    - uses: actions/cache@v2
+      if: ${{ steps.check.outputs.scope }}
+      with:
+        path: |
+          ~/.cache/R/R.cache
+        key: ${{ runner.os }}-
+
+    - name: Run styler
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        strict <- as.logical("${{ steps.check.outputs.strict }}")
+        if (is.na(strict)) {
+          strict = FALSE
+        }
+        styler::style_pkg(scope = "${{ steps.check.outputs.scope }}", strict = strict)
+      shell: Rscript {0}

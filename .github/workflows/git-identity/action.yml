@@ -1,0 +1,11 @@
+name: 'Actions to set up a Git identity'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure Git identity
+      run: |
+        env | sort
+        git config --local user.name "$GITHUB_ACTOR"
+        git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      shell: bash

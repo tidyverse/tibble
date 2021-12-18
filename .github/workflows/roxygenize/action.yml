@@ -1,0 +1,9 @@
+name: 'Action to create documentation with roxygen2'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Roxygenize
+      run: |
+        roxygen2::roxygenize()
+      shell: Rscript {0}

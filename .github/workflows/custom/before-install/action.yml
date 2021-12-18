@@ -1,4 +1,4 @@
-name: 'Actions to run before R packages are installed'
+name: 'Custom steps to run before R packages are installed'
 
 runs:
   using: "composite"
