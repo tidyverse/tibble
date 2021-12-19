@@ -93,6 +93,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
           cache-version: pkgdown-1
+          needs: website
           extra-packages: r-lib/pkgdown local::.
 
       - uses: ./.github/workflows/custom/after-install

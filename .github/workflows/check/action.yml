@@ -14,7 +14,11 @@ runs:
     - name: Run coverage check
       if: ${{ matrix.config.covr }}
       run: |
-        covr::codecov()
+        if (dir.exists("tests/testthat")) {
+          covr::codecov()
+        } else {
+          message("No tests found, coverage not tested.")
+        }
       shell: Rscript {0}
 
     - name: Show test output
