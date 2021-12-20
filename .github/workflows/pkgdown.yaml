@@ -1,0 +1,46 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Also included in R-CMD-check.yaml, this workflow only listens to pushes to branches
+# that start with "docs*"
+on:
+  push:
+    branches:
+      - "docs*"
+
+name: pkgdown
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
+
+    name: "pkgdown"
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/git-identity
+        if: github.event_name == 'push'
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: pkgdown-1
+          needs: website
+          extra-packages: r-lib/pkgdown local::.
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/pkgdown-build
+        if: github.event_name != 'push'
+
+      - uses: ./.github/workflows/pkgdown-deploy
+        if: github.event_name == 'push'

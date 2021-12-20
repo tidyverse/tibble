@@ -21,7 +21,7 @@ on:
 name: rcc
 
 jobs:
-  R-CMD-check-smoke:
+  rcc-smoke:
     runs-on: ubuntu-latest
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
@@ -47,7 +47,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
           cache-version: rcc-smoke-1
-          extra-packages: rcmdcheck roxygen2 styler
+          needs: check
+          extra-packages: any::rcmdcheck any::roxygen2 any::styler
 
       - uses: ./.github/workflows/custom/after-install
 
@@ -65,7 +66,7 @@ jobs:
   # Runs in a separate workflow, because it's using dev pkgdown
   # which might bring in other dev dependencies
   pkgdown:
-    needs: R-CMD-check-smoke
+    needs: rcc-smoke
 
     runs-on: ubuntu-latest
 
@@ -107,9 +108,9 @@ jobs:
   # Windows checks can be run in parallel and independently
   # when they alone take as long as the smoke and full tests combined.
   # To achieve this, remove the "needs:" element below.
-  R-CMD-check-windows:
+  rcc-windows:
     # Begin custom: early run
-    needs: R-CMD-check-smoke
+    needs: rcc-smoke
     # End custom: early run
 
     runs-on: ${{ matrix.config.os }}
@@ -139,6 +140,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           cache-version: rcc-main-1
           token: ${{ secrets.GITHUB_TOKEN }}
+          needs: check
 
       - uses: ./.github/workflows/custom/after-install
 
@@ -146,8 +148,8 @@ jobs:
         with:
           results: ${{ runner.os }}-r${{ matrix.config.r }}
 
-  R-CMD-check-full:
-    needs: R-CMD-check-smoke
+  rcc-full:
+    needs: rcc-smoke
 
     runs-on: ${{ matrix.config.os }}
 
@@ -196,6 +198,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           cache-version: rcc-main-1
           token: ${{ secrets.GITHUB_TOKEN }}
+          needs: check
 
       - uses: ./.github/workflows/custom/after-install
 
