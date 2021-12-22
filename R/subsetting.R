@@ -256,7 +256,7 @@ NULL
   if (drop && length(xo) == 1L) {
     tbl_subset2(xo, 1L, j_arg)
   } else {
-    vectbl_restore(xo, x)
+    tibble_reconstruct(xo, x)
   }
 }
 
@@ -410,8 +410,7 @@ tbl_subset2 <- function(x, j, j_arg) {
 tbl_subset_row <- function(x, i, i_arg) {
   if (is.null(i)) return(x)
   i <- vectbl_as_row_index(i, x, i_arg)
-  xo <- lapply(unclass(x), vec_slice, i = i)
-  set_tibble_class(xo, nrow = length(i))
+  tibble_row_slice(x, i)
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
@@ -462,7 +461,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     }
   }
 
-  vectbl_restore(xo, x)
+  tibble_reconstruct(xo, x)
 }
 
 vectbl_as_new_row_index <- function(i, x, i_arg) {
@@ -611,30 +610,42 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !vapply(value, is.null, NA)
-  nrow <- fast_nrow(x)
+  # Fix order
+  order_j <- order(j)
+  value <- value[order_j]
+  j <- j[order_j]
 
-  x <- unclass(x)
+  # tibble_col_modify
 
-  # Grow, assign new names
-  new <- which(j > length(x))
-  if (has_length(new)) {
-    length(x) <- max(j[new])
-    names(x)[ j[new] ] <- names2(j)[new]
+  # Adapt to interface
+  names(value) <- names(j)
+
+  # New names
+  tweak_names <- (j > length(x))
+  need_tweak_names <- any(tweak_names)
+
+  if (need_tweak_names) {
+    new_names <- names(x)
+    new_names[ j[tweak_names] ] <- names(j)[tweak_names]
+
+    # New names ("" means appending at end)
+    names(value)[tweak_names] <- ""
+
+    # Removed names, use vapply() for speed
+    col_is_null <- vapply(value, is.null, NA)
+    if (any(col_is_null)) {
+      new_names <- new_names[ -j[col_is_null] ]
+    }
   }
 
-  # Update
-  for (jj in which(is_data)) {
-    ji <- j[[jj]]
-    x[[ji]] <- value[[jj]]
+  out <- tibble_col_modify(x, value)
+
+  # This calls `names<-()` for the tibble class
+  if (need_tweak_names) {
+    names(out) <- new_names
   }
 
-  # Remove
-  j_remove <- j[!is_data & !is.na(j)]
-  if (has_length(j_remove)) x <- x[-j_remove]
-
-  # Restore
-  set_tibble_class(x, nrow)
+  return(out)
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -649,7 +660,7 @@ tbl_expand_to_nrow <- function(x, i) {
   if (new_nrow != nrow) {
     # FIXME: vec_expand()?
     i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
-    x <- vec_slice(x, i_expand)
+    x <- tibble_row_slice(x, i_expand)
   }
 
   x
@@ -774,12 +785,6 @@ set_tibble_class <- function(x, nrow) {
   attr(x, "row.names") <- .set_row_names(nrow)
   class(x) <- tibble_class
   x
-}
-
-# External ----------------------------------------------------------------
-
-vectbl_restore <- function(xo, x) {
-  .Call(`tibble_restore_impl`, xo, x)
 }
 
 # Errors ------------------------------------------------------------------
