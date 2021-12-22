@@ -66,7 +66,6 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
-
   .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   old_rownames <- raw_rownames(x)
@@ -94,7 +93,6 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-
   .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
@@ -120,7 +118,8 @@ compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
   }
 
   deprecate_soft("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
-    env = foreign_caller_env())
+    env = foreign_caller_env()
+  )
 
   name_repair
 }
@@ -196,7 +195,8 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
       deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
-        details = "Using compatibility `.name_repair`.")
+        details = "Using compatibility `.name_repair`."
+      )
       compat_names <- paste0("V", seq_along(m))
       if (is.null(names)) {
         names <- compat_names
@@ -241,7 +241,8 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
   df <- as.data.frame(x, stringsAsFactors = FALSE)
 
   names(df) <- repaired_names(
-    c(names2(dimnames(x)), n), repair_hint = TRUE, .name_repair = .name_repair
+    c(names2(dimnames(x)), n),
+    repair_hint = TRUE, .name_repair = .name_repair
   )
 
   # Names already repaired:
@@ -263,8 +264,10 @@ as_tibble.NULL <- function(x, ...) {
 as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
-    signal_superseded("3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
-      "as_tibble_col()")
+    signal_superseded(
+      "3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
+      "as_tibble_col()"
+    )
   }
   as_tibble(as.data.frame(value, stringsAsFactors = FALSE), ...)
 }
@@ -282,7 +285,6 @@ as_tibble.default <- function(x, ...) {
 #' as_tibble_row(1:3, .name_repair = "unique")
 as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-
   if (!vec_is(x)) {
     cnd_signal(error_as_tibble_row_vector(x))
   }
@@ -311,8 +313,8 @@ check_all_lengths_one <- function(x) {
     cnd_signal(error_as_tibble_row_size_one(
       seq_along(x)[bad_lengths],
       names2(x)[bad_lengths],
-      sizes[bad_lengths])
-    )
+      sizes[bad_lengths]
+    ))
   }
 }
 

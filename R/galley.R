@@ -105,7 +105,8 @@ test_galley <- function(name) {
   path <- render_galley(rmd_name, md_name)
 
   testthat::expect_snapshot_file(
-    path, name = md_name, compare = testthat::compare_file_text
+    path,
+    name = md_name, compare = testthat::compare_file_text
   )
 
   # FIXME: Test generated files

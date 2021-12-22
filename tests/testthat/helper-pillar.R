@@ -13,7 +13,8 @@ if (utils::packageVersion("pillar") >= "1.4.99") {
   }
 
   # Need explicit method, because can't be found in method env
-  vctrs::s3_register("pillar::tbl_format_body", "tbl_df_without_body",
+  vctrs::s3_register(
+    "pillar::tbl_format_body", "tbl_df_without_body",
     tbl_format_body.tbl_df_without_body
   )
 }

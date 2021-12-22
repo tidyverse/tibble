@@ -41,7 +41,7 @@ tribble(
 # Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
 tribble(
   ~a, ~b, ~c,
-    1, "2000-01-01", "1.5"
+  1, "2000-01-01", "1.5"
 ) \%>\%
   dplyr::mutate(
     dplyr::across(a, as.integer),

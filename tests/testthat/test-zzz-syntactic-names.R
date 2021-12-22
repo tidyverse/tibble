@@ -9,8 +9,8 @@ expect_syntactic <- function(name, exp_syn_name) {
 
 test_that("make_syntactic(): empty or NA", {
   expect_syntactic(
-      c("", NA_character_),
-      c(".", ".")
+    c("", NA_character_),
+    c(".", ".")
   )
 })
 
@@ -37,8 +37,8 @@ test_that("make_syntactic(): dots", {
 
 test_that("make_syntactic(): number", {
   expect_syntactic(
-      c("0", "1", "22", "333"),
-      c("...0", "...1", "...22", "...333")
+    c("0", "1", "22", "333"),
+    c("...0", "...1", "...22", "...333")
   )
 })
 

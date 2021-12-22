@@ -65,7 +65,6 @@ same_as_tbl <- function(df, tbl) {
 
   if (is.data.frame(tbl_obj)) {
     df[[length(df)]] <- as_tibble_deep(df_obj)
-
   }
 
   identical(df, tbl)

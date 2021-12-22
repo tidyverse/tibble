@@ -23,7 +23,8 @@ data_frame <- function(...) {
 #' @rdname deprecated
 tibble_ <- function(xs) {
   deprecate_soft("2.0.0", "tibble_()", "tibble()",
-    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.')
+    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.'
+  )
 
   xs <- compat_lazy_dots(xs, caller_env())
   tibble(!!!xs)
@@ -33,7 +34,8 @@ tibble_ <- function(xs) {
 #' @rdname deprecated
 data_frame_ <- function(xs) {
   deprecate_soft("2.0.0", "data_frame_()", "tibble()",
-    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.')
+    details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.'
+  )
 
   xs <- compat_lazy_dots(xs, caller_env())
   tibble(!!!xs)
@@ -43,7 +45,8 @@ data_frame_ <- function(xs) {
 #' @rdname deprecated
 lst_ <- function(xs) {
   deprecate_soft("2.0.0", "lst_()", "lst()",
-    details = '`lst()` supports dynamic dots, see `?"dyn-dots"`.')
+    details = '`lst()` supports dynamic dots, see `?"dyn-dots"`.'
+  )
 
   xs <- compat_lazy_dots(xs, caller_env())
   lst(!!!xs)
@@ -57,7 +60,8 @@ lst_ <- function(xs) {
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
   deprecate_warn("2.0.0", "as_data_frame()", "as_tibble()",
-    details = "The signature and semantics have changed, see `?as_tibble`.")
+    details = "The signature and semantics have changed, see `?as_tibble`."
+  )
 
   as_tibble(x, ...)
 }
@@ -66,7 +70,8 @@ as_data_frame <- function(x, ...) {
 #' @rdname deprecated
 as.tibble <- function(x, ...) {
   deprecate_warn("2.0.0", "as.tibble()", "as_tibble()",
-    details = "The signature and semantics have changed, see `?as_tibble`.")
+    details = "The signature and semantics have changed, see `?as_tibble`."
+  )
 
   as_tibble(x, ...)
 }

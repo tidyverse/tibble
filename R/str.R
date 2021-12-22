@@ -4,7 +4,8 @@ str.tbl_df <- function(object, ..., indent.str = " ", nest.lev = 0) {
   cat(
     tibble::obj_sum(object),
     " (S3: ", paste0(class(object), collapse = "/"), ")",
-    "\n", sep = ""
+    "\n",
+    sep = ""
   )
 
   utils::str(
