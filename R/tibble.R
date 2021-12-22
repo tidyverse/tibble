@@ -309,7 +309,9 @@ splice_dfs <- function(x) {
     return(list())
   }
 
-  x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
+  x <- imap(x, function(.x, .y) {
+    if (.y == "") unclass(.x) else list2(!!.y := .x)
+  })
   vec_c(!!!x, .name_spec = "{inner}")
 }
 

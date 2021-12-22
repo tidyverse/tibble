@@ -91,7 +91,8 @@ NULL
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
   tbl_subassign(
-    x, i = NULL, as_string(name), list(value),
+    x,
+    i = NULL, as_string(name), list(value),
     i_arg = NULL, j_arg = name, value_arg = substitute(value)
   )
 }
@@ -335,8 +336,9 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
   if (warn && length(oob) > 0) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-                   env = foreign_caller_env())
+      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env()
+    )
   }
 
   i[oob] <- NA_integer_
@@ -347,8 +349,9 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
   if (warn && any(oob, na.rm = TRUE)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-                   env = foreign_caller_env())
+      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+      env = foreign_caller_env()
+    )
   }
 
   i <- i[!oob]
@@ -362,7 +365,8 @@ fix_oob_invalid <- function(i, is_na_orig) {
   if (has_length(oob)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env())
+      env = foreign_caller_env()
+    )
 
     i[oob] <- NA_integer_
   }
@@ -373,7 +377,8 @@ tbl_subset2 <- function(x, j, j_arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.",
-      env = foreign_caller_env())
+      env = foreign_caller_env()
+    )
 
     return(as.matrix(x)[[j]])
   }
@@ -391,7 +396,8 @@ tbl_subset2 <- function(x, j, j_arg) {
     } else if (length(j) == 2L) {
       deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
         details = "Recursive subsetting is deprecated for tibbles.",
-        env = foreign_caller_env())
+        env = foreign_caller_env()
+      )
     } else {
       # Side effect: throw error for invalid j
       vectbl_as_col_location2(j, length(x), j_arg = j_arg)
@@ -664,7 +670,6 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
     for (j in seq_along(x)) {
       x[[j]] <- vectbl_assign(x[[j]], i, recycled_value[[j]])
     },
-
     vctrs_error = function(cnd) {
       # Side effect: check if `value` can be recycled
       vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
@@ -750,7 +755,6 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
           value[[j]] <- vec_recycle(value[[j]], nrow)
         }
       },
-
       vctrs_error_recycle_incompatible_size = function(cnd) {
         cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
       }

@@ -126,14 +126,14 @@ rbind_at <- function(old, new, pos) {
 #' @export
 add_column <- function(.data, ..., .before = NULL, .after = NULL,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-
   if (!is.data.frame(.data)) {
     deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
   if (has_length(.data) && (!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
     deprecate_warn("3.0.0", "add_column(.data = 'must have unique names')",
-      details = 'Use `.name_repair = "minimal"`.')
+      details = 'Use `.name_repair = "minimal"`.'
+    )
     .name_repair <- "minimal"
   }
 

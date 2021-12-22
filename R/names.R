@@ -1,7 +1,6 @@
 vectbl_names2 <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal"),
                           quiet = FALSE) {
-
   name <- vec_names2(x, repair = "minimal", quiet = quiet)
   repaired_names(name, repair_hint = TRUE, .name_repair = .name_repair, quiet = quiet)
 }
@@ -18,8 +17,8 @@ repaired_names <- function(name,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
                            quiet = FALSE,
                            details = NULL) {
-
-  subclass_name_repair_errors(name = name, details = details, repair_hint = repair_hint,
+  subclass_name_repair_errors(
+    name = name, details = details, repair_hint = repair_hint,
     vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair))
   )
 }

@@ -30,7 +30,6 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
     for (j in col_idx) {
       x[[j]] <- vectbl_assign(x[[j]], cells[[j]], value)
     },
-
     vctrs_error_incompatible_type = function(cnd) {
       cnd_signal(error_assign_incompatible_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
     }
