@@ -50,11 +50,9 @@
 #'
 #' mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
 #' print(mtcars2, n = 25, max_extra_cols = 3)
-#'
 #' @examplesIf requireNamespace("nycflights13", quietly = TRUE)
 #' print(nycflights13::flights, max_footer_lines = 1)
 #' print(nycflights13::flights, width = Inf)
-#'
 #' @name formatting
 #' @aliases print.tbl format.tbl
 NULL

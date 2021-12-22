@@ -9,7 +9,7 @@ tbl_subset_matrix <- function(x, j, j_arg) {
   values <- map2(x[col_idx], cells[col_idx], vec_slice)
 
   # Also checks conformity of vectors:
-  unname(vec_c(!!!values, .name_spec = ~ .x))
+  unname(vec_c(!!!values, .name_spec = ~.x))
 }
 
 tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
