@@ -163,7 +163,7 @@ tibble(x = 1, y = x)
 tibble(x = 1, y = !!x)
 
 # You can splice-unquote a list of quosures and expressions:
-tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 
 # Use .data, .env and !! to refer explicitly to columns or outside objects
 a <- 1
