@@ -46,7 +46,7 @@ jobs:
           install-r: false
           cache-version: rcc-smoke-1
           needs: check
-          extra-packages: any::rcmdcheck any::roxygen2 any::styler
+          extra-packages: any::rcmdcheck any::roxygen2 r-lib/styler@f-empty-example-lines
 
       - uses: ./.github/workflows/custom/after-install
 
