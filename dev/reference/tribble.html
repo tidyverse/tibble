@@ -171,8 +171,8 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Use dplyr::mutate(dplyr::across(...)) to assign an explicit type</span></span>
 <span class="r-in"><span class="fu">tribble</span><span class="op">(</span></span>
-<span class="r-in">  <span class="op">~</span> <span class="va">a</span>,          <span class="op">~</span> <span class="va">b</span>,          <span class="op">~</span> <span class="va">c</span>,</span>
-<span class="r-in">    <span class="fl">1</span>, <span class="st">"2000-01-01"</span>,        <span class="st">"1.5"</span></span>
+<span class="r-in">  <span class="op">~</span><span class="va">a</span>, <span class="op">~</span><span class="va">b</span>, <span class="op">~</span><span class="va">c</span>,</span>
+<span class="r-in">    <span class="fl">1</span>, <span class="st">"2000-01-01"</span>, <span class="st">"1.5"</span></span>
 <span class="r-in"><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span class="r-in">    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">as.integer</span><span class="op">)</span>,</span>
