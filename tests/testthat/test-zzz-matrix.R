@@ -99,7 +99,7 @@ test_that("handles atomic vectors", {
 
 test_that("forwarding to as.data.frame() for ts objects (#184)", {
   mts <- cbind(
-    A = ts(c(1, 1, 2, 2), start = 2016, frequency = 4),
+    A = ts(c(1, 1, 2, 2),     start = 2016, frequency = 4),
     B = ts(c(11, 11, 12, 13), start = 2016, frequency = 4)
   )
   expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))

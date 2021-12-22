@@ -18,7 +18,7 @@ test_that("columns are recycled to common length", {
 test_that("columns must be same length", {
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_incompatible_size(NULL, c("x", "y"), 2:3, NA)
+    error_incompatible_size(NULL,  c("x", "y"), 2:3, NA)
   )
   expect_tibble_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
@@ -93,7 +93,7 @@ test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
 
 
 test_that("Can convert tables to data frame", {
-  mtcars_table <- xtabs(mtcars, formula = ~ vs + am + cyl)
+  mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
 
   mtcars2 <- as_tibble(mtcars_table)
   expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "n"))
@@ -202,7 +202,7 @@ test_that("as_tibble() implements custom name repair", {
 
   invalid_df_purrr <- as_tibble(
     list(3, 4, 5),
-    .name_repair = ~ make.names(., unique = TRUE)
+    .name_repair = ~make.names(., unique = TRUE)
   )
   expect_identical(invalid_df_purrr, invalid_df)
 })
@@ -458,10 +458,10 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
   expect_identical(
     as_tibble_row(Titanic),
     tibble(
-      "1st" = remove_first_dimname(Titanic[1, , , , drop = FALSE]),
-      "2nd" = remove_first_dimname(Titanic[2, , , , drop = FALSE]),
-      "3rd" = remove_first_dimname(Titanic[3, , , , drop = FALSE]),
-      Crew  = remove_first_dimname(Titanic[4, , , , drop = FALSE])
+      "1st" = remove_first_dimname(Titanic[1,,,, drop = FALSE]),
+      "2nd" = remove_first_dimname(Titanic[2,,,, drop = FALSE]),
+      "3rd" = remove_first_dimname(Titanic[3,,,, drop = FALSE]),
+      Crew  = remove_first_dimname(Titanic[4,,,, drop = FALSE])
     )
   )
 })
@@ -689,7 +689,7 @@ test_that("handles atomic vectors", {
 
 test_that("forwarding to as.data.frame() for ts objects (#184)", {
   mts <- cbind(
-    A = ts(c(1, 1, 2, 2), start = 2016, frequency = 4),
+    A = ts(c(1, 1, 2, 2),     start = 2016, frequency = 4),
     B = ts(c(11, 11, 12, 13), start = 2016, frequency = 4)
   )
   expect_identical(as_tibble(mts), as_tibble(as.data.frame(mts)))
@@ -767,3 +767,4 @@ test_that("output test", {
     as_tibble_row(list(a = 1:3, b = 1:3))
   })
 })
+

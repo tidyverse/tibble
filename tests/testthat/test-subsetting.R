@@ -404,7 +404,7 @@ test_that("can use classed character indexes (#778)", {
 
   expect_silent(df[mychr(letters[1:2])] <- df)
   expect_silent(df[[mychr("c")]] <- 1)
-  expect_silent(df[[mychr("a")]] <- df[["a"]])
+  expect_silent(df[[mychr("a")]] <-  df[["a"]])
 })
 
 test_that("can use classed integer indexes (#778)", {
@@ -850,7 +850,7 @@ test_that("output test", {
     foo[[1, ]]
     foo[[, ]]
     foo[[1:3]]
-    foo[[letters[1:3]]]
+    foo[[ letters[1:3] ]]
     foo[[TRUE]]
     foo[[-1]]
     foo[[1.5]]
@@ -923,7 +923,7 @@ test_that("output test", {
     df[] <- list(0, 0)
     df[1, ] <- 1:3
     df[1:2, ] <- 1:3
-    df[, ] <- 1:2
+    df[,] <- 1:2
     df[1, ] <- list(a = 1:3, b = 1)
     df[1, ] <- list(a = 1, b = 1:3)
     df[1:2, ] <- list(a = 1:3, b = 1)
@@ -1005,7 +1005,7 @@ test_that("output test", {
     foo[[1, ]] <- 1
     foo[[, ]] <- 1
     foo[[1:3]] <- 1
-    foo[[letters[1:3]]] <- 1
+    foo[[ letters[1:3] ]] <- 1
     foo[[TRUE]] <- 1
     foo[[NA_integer_]] <- 1
     foo[[mean]] <- 1

@@ -72,7 +72,7 @@ test_that("empty input makes 0 x 0 tbl_df", {
 
 test_that("SE version", {
   scoped_lifecycle_silence()
-  expect_identical(tibble_(list(a = ~ 1:10)), tibble(a = 1:10))
+  expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
 test_that("names are maintained vectors (#630)", {
