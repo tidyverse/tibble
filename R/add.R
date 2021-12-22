@@ -120,7 +120,6 @@ rbind_at <- function(old, new, pos) {
 #' # You can't overwrite existing columns
 #' try(df %>% add_column(x = 4:6))
 #'
-
 #' # You can't create new observations
 #' try(df %>% add_column(z = 1:5))
 #'

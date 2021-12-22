@@ -532,7 +532,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    names[old] <- names(x)[ j[old] ]
+    names[old] <- names(x)[j[old]]
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
@@ -549,7 +549,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     }
 
     old <- (j <= length(x))
-    names[old] <- names(x)[ j[old] ]
+    names[old] <- names(x)[j[old]]
   }
 
   if (anyDuplicated(j)) {
@@ -620,7 +620,7 @@ tbl_subassign_col <- function(x, j, value) {
   new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
-    names(x)[ j[new] ] <- names2(j)[new]
+    names(x)[j[new]] <- names2(j)[new]
   }
 
   # Update

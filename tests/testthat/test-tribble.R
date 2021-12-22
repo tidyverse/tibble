@@ -98,7 +98,7 @@ test_that("tribble() errs appropriately on bad calls", {
 
   # invalid colname syntax
   expect_tibble_error(
-    tribble(~a + b),
+    tribble(~ a + b),
     error_tribble_rhs_column_syntax(quote(a + b))
   )
 
@@ -162,21 +162,21 @@ test_that("tribble returns 0x0 tibble when there's no argument", {
 
 test_that("names stripped at appropriate time (#775)", {
   expect_equal(
-    tribble(~ x, c(a = 1)),
+    tribble(~x, c(a = 1)),
     tibble(x = 1)
   )
 })
 
 test_that("lubridate::Period (#784)", {
   expect_equal(
-    tribble(~ x, lubridate::days(1), lubridate::days(2)),
+    tribble(~x, lubridate::days(1), lubridate::days(2)),
     tibble(x = lubridate::days(1:2))
   )
 })
 
 test_that("formattable (#785)", {
   expect_equal(
-    tribble(~ x, formattable::formattable(1.0, 1), formattable::formattable(2.0, 1)),
+    tribble(~x, formattable::formattable(1.0, 1), formattable::formattable(2.0, 1)),
     tibble(x = formattable::formattable(1:2 + 0, 1))
   )
 })
@@ -186,8 +186,8 @@ test_that("formattable (#785)", {
 test_that("frame_matrix constructs a matrix as expected", {
   result <- frame_matrix(
     ~col1, ~col2,
-       10,     3,
-        5,     2
+       10, 3,
+        5, 2
   )
   expected <- matrix(c(10, 5, 3, 2), ncol = 2)
   colnames(expected) <- c("col1", "col2")
@@ -231,7 +231,7 @@ test_that("output test", {
     tribble(~a, ~b, 1)
     tribble(a ~ b, 1)
     tribble(a ~ b + c, 1)
-    tribble(~ b, 1, "a")
+    tribble(~b, 1, "a")
 
     frame_matrix(1)
     frame_matrix(~a, list(1))

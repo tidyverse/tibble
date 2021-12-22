@@ -82,7 +82,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     attr(result, "row.names") <- old_rownames
     result
   } else {
-    if (length(old_rownames) > 0 && is.na(old_rownames[1L])) {  # if implicit rownames
+    if (length(old_rownames) > 0 && is.na(old_rownames[1L])) { # if implicit rownames
       old_rownames <- seq_len(abs(old_rownames[2L]))
     }
     old_rownames <- as.character(old_rownames)
