@@ -77,7 +77,7 @@ test_that("empty input makes 0 x 0 tbl_df", {
 
 test_that("SE version", {
   scoped_lifecycle_silence()
-  expect_identical(tibble_(list(a = ~ 1:10)), tibble(a = 1:10))
+  expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
 })
 
 test_that("names are stripped from vectors", {
@@ -205,7 +205,7 @@ test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
 
 
 test_that("Can convert tables to data frame", {
-  mtcars_table <- xtabs(mtcars, formula = ~ vs + am + cyl)
+  mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
 
   mtcars2 <- as_tibble(mtcars_table)
   expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "n"))
@@ -342,7 +342,7 @@ test_that("as_tibble() implements custom name repair", {
 
   invalid_df_purrr <- as_tibble(
     list(3, 4, 5),
-    .name_repair = ~ make.names(., unique = TRUE)
+    .name_repair = ~make.names(., unique = TRUE)
   )
   expect_identical(invalid_df_purrr, invalid_df)
 })

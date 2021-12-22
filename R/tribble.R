@@ -34,8 +34,8 @@
 #'
 #' # Use dplyr::mutate(dplyr::across(...)) to assign an explicit type
 #' tribble(
-#'   ~a,          ~b,          ~c,
-#'   1, "2000-01-01",        "1.5"
+#'   ~ a,          ~ b,          ~ c,
+#'     1, "2000-01-01",        "1.5"
 #' ) %>%
 #'   dplyr::mutate(
 #'     dplyr::across(a, as.integer),
@@ -166,7 +166,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
     if (inherits(col, "list") && !some(col, needs_list_col)) {
       subclass_tribble_c_errors(
         names(frame_col)[[i]],
-        col <- vec_c(!!!unname(col))
+        col <- vec_c(!!! unname(col))
       )
     }
 

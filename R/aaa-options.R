@@ -11,18 +11,20 @@ make_option_impl <- function(getter, option_name = NULL, env = caller_env()) {
   local_setter_name <- paste0("local_", utils::packageName(env), "_option_", name)
   setter_name <- paste0("set_", utils::packageName(env), "_option_", name)
 
-  local_setter_body <- expr({
-    out <- !!call2("local_options", !!option_name := sym("value"), .frame = sym("env"))
-    !!call2(getter_name)
-    invisible(out[[1]])
-  }
+  local_setter_body <- expr(
+    {
+      out <- !!call2("local_options", !!option_name := sym("value"), .frame = sym("env"))
+      !!call2(getter_name)
+      invisible(out[[1]])
+    }
   )
 
-  setter_body <- expr({
-    out <- !!call2("options", !!option_name := sym("value"))
-    !!call2(getter_name)
-    invisible(out[[1]])
-  }
+  setter_body <- expr(
+    {
+      out <- !!call2("options", !!option_name := sym("value"))
+      !!call2(getter_name)
+      invisible(out[[1]])
+    }
   )
 
   body <- expr({

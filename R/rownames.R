@@ -37,6 +37,7 @@
 #'
 #' # Adding rowid as a column --------------------------------------------
 #' rowid_to_column(trees) %>% head()
+#'
 #' @name rownames
 NULL
 

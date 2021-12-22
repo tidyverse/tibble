@@ -45,6 +45,7 @@
 #' df[1, , drop = TRUE]
 #' tbl[1, , drop = TRUE]
 #' as.list(tbl[1, ])
+#'
 #' @examplesIf (Sys.getenv("NOT_CRAN") != "true" || Sys.getenv("IN_PKGDOWN") == "true")
 #' # Accessing non-existent columns:
 #' df$b
@@ -334,8 +335,8 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
   if (warn && length(oob) > 0) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env())
+                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+                   env = foreign_caller_env())
   }
 
   i[oob] <- NA_integer_
@@ -346,8 +347,8 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
   if (warn && any(oob, na.rm = TRUE)) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env())
+                   details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
+                   env = foreign_caller_env())
   }
 
   i <- i[!oob]
@@ -531,7 +532,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    names[old] <- names(x)[j[old]]
+    names[old] <- names(x)[ j[old] ]
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
@@ -548,7 +549,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     }
 
     old <- (j <= length(x))
-    names[old] <- names(x)[j[old]]
+    names[old] <- names(x)[ j[old] ]
   }
 
   if (anyDuplicated(j)) {
@@ -619,7 +620,7 @@ tbl_subassign_col <- function(x, j, value) {
   new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
-    names(x)[j[new]] <- names2(j)[new]
+    names(x)[ j[new] ] <- names2(j)[new]
   }
 
   # Update

@@ -60,4 +60,5 @@ column_to_rownames(mtcars_tbl, var = "car") \%>\% head()
 
 # Adding rowid as a column --------------------------------------------
 rowid_to_column(trees) \%>\% head()
+
 }
