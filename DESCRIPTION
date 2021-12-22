@@ -77,3 +77,5 @@ Config/testthat/parallel: true
 Config/testthat/start-first: subsetting, as_tibble, add, invariants
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
+Config/Needs/website: tidyverse/tidytemplate
+Config/Needs/website: tidyverse/tidytemplate
