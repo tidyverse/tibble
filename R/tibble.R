@@ -142,7 +142,7 @@
 #' tibble(x = 1, y = !!x)
 #'
 #' # You can splice-unquote a list of quosures and expressions:
-#' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+#' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
 #' # Use .data, .env and !! to refer explicitly to columns or outside objects
 #' a <- 1
@@ -309,7 +309,9 @@ splice_dfs <- function(x) {
     return(list())
   }
 
-  x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
+  x <- imap(x, function(.x, .y) {
+    if (.y == "") unclass(.x) else list2(!!.y := .x)
+  })
   vec_c(!!!x, .name_spec = "{inner}")
 }
 

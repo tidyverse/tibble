@@ -9,8 +9,8 @@ expect_syntactic <- function(name, exp_syn_name) {
 
 test_that("make_syntactic(): empty or NA", {
   expect_syntactic(
-      c("", NA_character_),
-      c(".", ".")
+    c("", NA_character_),
+    c(".", ".")
   )
 })
 
@@ -23,7 +23,7 @@ test_that("make_syntactic(): reserved words", {
 
 test_that("make_syntactic(): underscore", {
   expect_syntactic(
-    c( "_",  "_1",  "_a}"),
+    c("_",  "_1",  "_a}"),
     c("._", "._1", "._a.")
   )
 })
@@ -37,49 +37,49 @@ test_that("make_syntactic(): dots", {
 
 test_that("make_syntactic(): number", {
   expect_syntactic(
-      c(   "0",    "1",    "22",    "333"),
-      c("...0", "...1", "...22", "...333")
+    c("0",    "1",    "22",    "333"),
+    c("...0", "...1", "...22", "...333")
   )
 })
 
 test_that("make_syntactic(): number then character", {
   expect_syntactic(
-    c(  "0a",   "1b",   "22c",   "333d"),
+    c("0a",   "1b",   "22c",   "333d"),
     c("..0a", "..1b", "..22c", "..333d")
   )
 })
 
 test_that("make_syntactic(): number then non-character", {
   expect_syntactic(
-    c(  "0)",   "1&",   "22*",   "333@"),
+    c("0)",   "1&",   "22*",   "333@"),
     c("..0.", "..1.", "..22.", "..333.")
   )
 })
 
 test_that("make_syntactic(): dot then number", {
   expect_syntactic(
-    c(  ".0",   ".1",   ".22",   ".333"),
+    c(".0",   ".1",   ".22",   ".333"),
     c("...0", "...1", "...22", "...333")
   )
 })
 
 test_that("make_syntactic(): dot then number then character", {
   expect_syntactic(
-    c( ".0a",  ".1b",  ".22c",  ".333d"),
+    c(".0a",  ".1b",  ".22c",  ".333d"),
     c("..0a", "..1b", "..22c", "..333d")
   )
 })
 
 test_that("make_syntactic(): dot then number then non-character", {
   expect_syntactic(
-    c( ".0)",  ".1&",  ".22*",  ".333@"),
+    c(".0)",  ".1&",  ".22*",  ".333@"),
     c("..0.", "..1.", "..22.", "..333.")
   )
 })
 
 test_that("make_syntactic(): dot dot then number", {
   expect_syntactic(
-    c( "..0",  "..1",  "..22",  "..333"),
+    c("..0",  "..1",  "..22",  "..333"),
     c("...0", "...1", "...22", "...333")
   )
 })

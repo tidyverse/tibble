@@ -93,7 +93,7 @@ test_that("as_tibble.tbl_df() leaves classes unchanged (#60)", {
 
 
 test_that("Can convert tables to data frame", {
-  mtcars_table <- xtabs(mtcars, formula = ~vs + am + cyl)
+  mtcars_table <- xtabs(mtcars, formula = ~ vs + am + cyl)
 
   mtcars2 <- as_tibble(mtcars_table)
   expect_equal(names(mtcars2), c(names(dimnames(mtcars_table)), "n"))
@@ -202,7 +202,7 @@ test_that("as_tibble() implements custom name repair", {
 
   invalid_df_purrr <- as_tibble(
     list(3, 4, 5),
-    .name_repair = ~make.names(., unique = TRUE)
+    .name_repair = ~ make.names(., unique = TRUE)
   )
   expect_identical(invalid_df_purrr, invalid_df)
 })
@@ -458,10 +458,10 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
   expect_identical(
     as_tibble_row(Titanic),
     tibble(
-      "1st" = remove_first_dimname(Titanic[1,,,, drop = FALSE]),
-      "2nd" = remove_first_dimname(Titanic[2,,,, drop = FALSE]),
-      "3rd" = remove_first_dimname(Titanic[3,,,, drop = FALSE]),
-      Crew  = remove_first_dimname(Titanic[4,,,, drop = FALSE])
+      "1st" = remove_first_dimname(Titanic[1, , , , drop = FALSE]),
+      "2nd" = remove_first_dimname(Titanic[2, , , , drop = FALSE]),
+      "3rd" = remove_first_dimname(Titanic[3, , , , drop = FALSE]),
+      Crew  = remove_first_dimname(Titanic[4, , , , drop = FALSE])
     )
   )
 })
@@ -767,4 +767,3 @@ test_that("output test", {
     as_tibble_row(list(a = 1:3, b = 1:3))
   })
 })
-
