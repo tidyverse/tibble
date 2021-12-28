@@ -79,6 +79,53 @@ The pillar package that is responsible for the display of tibbles tries hard to 
 Whenever the default formatting does not suit the application, `num()` or `char()` allow redefining the formatting for individual columns.
 The formatting survives most data transformations.
 
+## Rule-based number formatting
+
+Currently, formatting must be applied manually for each column.
+The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
+
+
+```r
+library(dplyr, warn.conflicts = FALSE)
+
+markets <-
+  EuStockMarkets %>%
+  as_tibble() %>%
+  mutate(time = time(EuStockMarkets), .before = 1)
+
+markets
+#> # A tibble: 1,860 x 5
+#>     time   DAX   SMI   CAC  FTSE
+#>    <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1 1991. 1629. 1678. 1773. 2444.
+#>  2 1992. 1614. 1688. 1750. 2460.
+#>  3 1992. 1607. 1679. 1718  2448.
+#>  4 1992. 1621. 1684. 1708. 2470.
+#>  5 1992. 1618. 1687. 1723. 2485.
+#>  6 1992. 1611. 1672. 1714. 2467.
+#>  7 1992. 1631. 1683. 1734. 2488.
+#>  8 1992. 1640. 1704. 1757. 2508.
+#>  9 1992. 1635. 1698. 1754  2510.
+#> 10 1992. 1646. 1716. 1754. 2497.
+#> # ... with 1,850 more rows
+
+markets %>%
+  mutate(across(-time, num, digits = 3))
+#> # A tibble: 1,860 x 5
+#>     time       DAX       SMI       CAC      FTSE
+#>    <dbl> <num:.3!> <num:.3!> <num:.3!> <num:.3!>
+#>  1 1991.  1628.750  1678.100  1772.800  2443.600
+#>  2 1992.  1613.630  1688.500  1750.500  2460.200
+#>  3 1992.  1606.510  1678.600  1718.000  2448.200
+#>  4 1992.  1621.040  1684.100  1708.100  2470.400
+#>  5 1992.  1618.160  1686.600  1723.100  2484.700
+#>  6 1992.  1610.610  1671.600  1714.300  2466.800
+#>  7 1992.  1630.750  1682.900  1734.500  2487.900
+#>  8 1992.  1640.170  1703.600  1757.400  2508.400
+#>  9 1992.  1635.470  1697.500  1754.000  2510.500
+#> 10 1992.  1645.890  1716.300  1754.300  2497.400
+#> # ... with 1,850 more rows
+```
 
 ## Computing on `num`
 
