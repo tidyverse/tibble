@@ -23,7 +23,7 @@ runs:
           fi
           git add .
           git commit -m "Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git push
+          git push -u origin HEAD
           echo ::set-output name=sha::$(git rev-parse HEAD)
         fi
       shell: bash
