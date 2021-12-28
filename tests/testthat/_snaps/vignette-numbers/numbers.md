@@ -89,8 +89,7 @@ The following pattern may help doing this consistently for all columns in a tibb
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-
-  EuStockMarkets %>%
-  as_tibble() %>%
+  as_tibble(EuStockMarkets) %>%
   mutate(time = time(EuStockMarkets), .before = 1)
 
 markets
@@ -108,7 +107,6 @@ markets
 #>  9 1992. 1635. 1698. 1754  2510.
 #> 10 1992. 1646. 1716. 1754. 2497.
 #> # ... with 1,850 more rows
-
 markets %>%
   mutate(across(-time, num, digits = 3))
 #> # A tibble: 1,860 x 5
