@@ -72,12 +72,10 @@ The following pattern may help doing this consistently for all columns in a tibb
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-
-  EuStockMarkets %>%
-  as_tibble() %>%
+  as_tibble(EuStockMarkets) %>%
   mutate(time = time(EuStockMarkets), .before = 1)
 
 markets
-
 markets %>%
   mutate(across(-time, num, digits = 3))
 ```
