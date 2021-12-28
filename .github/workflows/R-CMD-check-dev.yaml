@@ -66,6 +66,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - uses: ./.github/workflows/install
         with:
@@ -91,6 +92,7 @@ jobs:
         shell: Rscript {0}
 
       - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - uses: ./.github/workflows/check
         with:

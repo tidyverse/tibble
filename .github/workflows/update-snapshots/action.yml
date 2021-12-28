@@ -1,0 +1,46 @@
+name: 'Action to create pull requests for updated snapshots'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Test files
+      run: |
+        rx <- "^test-(.*)[.][rR]$"
+        files <- dir("tests/testthat", pattern = rx)
+        has_snapshot <- vapply(files, function(.x) any(grepl("snapshot", readLines(file.path("tests/testthat", .x)), fixed = TRUE)), logical(1))
+        if (any(has_snapshot)) {
+          patterns <- gsub(rx, "^\\1$", files[has_snapshot])
+          pattern <- paste0(patterns, collapse = "|")
+          result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
+          failures <- result[result$failed > 0, ]
+          if (nrow(failures) > 0) {
+            writeLines("Tests failed")
+            print(failures[names(failures) != "result"])
+            print(failures$result)
+            testthat::snapshot_accept()
+          }
+        }
+      shell: Rscript {0}
+
+    - name: Derive branch name
+      id: matrix-branch
+      run: |
+        echo "::set-output name=name::$(echo '${{ toJSON(matrix.config) }}' | jq -c . | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
+      shell: bash
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v3
+      with:
+        base: ${{ github.head_ref }}
+        branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-branch.outputs.name }}
+        delete-branch: true
+        title: Snapshot updates for ${{ github.job }}
+        add-paths: |
+          tests/testthat/_snaps
+
+    - name: Fail if pull request created
+      if: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        false
+      shell: bash

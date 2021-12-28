@@ -29,6 +29,7 @@ jobs:
         if: github.event_name == 'push'
 
       - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - uses: ./.github/workflows/install
         with:
@@ -39,6 +40,7 @@ jobs:
           extra-packages: r-lib/pkgdown local::.
 
       - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - uses: ./.github/workflows/pkgdown-build
         if: github.event_name != 'push'
