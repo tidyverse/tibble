@@ -18,6 +18,14 @@ test_that("as.data.frame() keeps inner names for records", {
   expect_identical(as.data.frame(tbl)$x, new_rcrd(list(a = 1:3)))
 })
 
+test_that("as.data.frame() keeps zero-column data frames and matrices (#970)", {
+  tbl <- tibble(x = 1:2, y = new_tibble(list(), nrow = 2))
+  expect_identical(as.data.frame(tbl)$y, tbl$y)
+
+  mat <- tibble(x = 1:2, y = matrix(integer(), nrow = 2))
+  expect_identical(as.data.frame(mat)$y, mat$y)
+})
+
 test_that("names<-()", {
   new_tbl <- function(...) {
     data <- list(1, "b")

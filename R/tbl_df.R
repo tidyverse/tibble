@@ -70,9 +70,10 @@ NULL
 
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
-  class(x) <- "data.frame"
+  class(x) <- tibble_class
   unname <- which(!map_lgl(x, is_bare_list))
-  x[unname] <- map(x[unname], vectbl_set_names, NULL)
+  x[unname] <- map(.subset(x, unname), vectbl_set_names, NULL)
+  class(x) <- "data.frame"
   x
 }
 
