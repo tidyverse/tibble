@@ -31,11 +31,20 @@
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
       Use .name_repair to specify repair.
+      Caused by error in `stop_vctrs()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 2.
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
     Error <tibble_error_column_names_must_be_unique>
       Column names `a` and `b` must not be duplicated.
       Use .name_repair to specify repair.
+      Caused by error in `stop_vctrs()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 3.
+        * "b" at locations 2 and 4.
     Code
       add_column(tibble(a = "a", b = "b", c = "c", d = "d", e = "e", f = "f", g = "g",
         h = "h", i = "i", j = "j", k = "k", l = "l", m = "m", n = "n", o = "o", p = "p",
@@ -46,6 +55,15 @@
     Error <tibble_error_column_names_must_be_unique>
       Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
       Use .name_repair to specify repair.
+      Caused by error in `stop_vctrs()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 27.
+        * "b" at locations 2 and 28.
+        * "c" at locations 3 and 29.
+        * "d" at locations 4 and 30.
+        * "e" at locations 5 and 31.
+        * ...
     Code
       add_column(tibble(a = 2:3), b = 4:6)
     Error <tibble_error_incompatible_new_cols>

@@ -28,6 +28,9 @@
     Error <vctrs_error_subscript_type>
       Must subset columns with a valid subscript vector.
       x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error in `stop_vctrs()`:
+      ! Can't convert from <double> to <integer> due to loss of precision.
+      * Locations: 1
     Code
       foo[1:5]
     Error <vctrs_error_subscript_oob>
@@ -94,6 +97,9 @@
     Error <vctrs_error_subscript_type>
       Must subset rows with a valid subscript vector.
       x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error in `stop_vctrs()`:
+      ! Can't convert from <double> to <integer> due to loss of precision.
+      * Locations: 1
     Code
       invisible(foo[1:5, ])
     Warning <lifecycle_warning_deprecated>
@@ -316,6 +322,10 @@
       Must extract column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `logical`.
+      i It must be numeric or character.
     Code
       foo[[-1]]
     Error <vctrs_error_subscript_type>
@@ -326,6 +336,12 @@
     Error <vctrs_error_subscript_type>
       Must extract column with a single valid subscript.
       x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error in `stop_vctrs()`:
+      ! Can't convert from <double> to <integer> due to loss of precision.
+      * Locations: 1
     Code
       foo[[3]]
     Error <vctrs_error_subscript_oob>
@@ -337,11 +353,21 @@
     Error <vctrs_error_subscript_type>
       Must extract column with a single valid subscript.
       x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Can't convert from <double> to <integer> due to loss of precision.
+      Caused by error in `stop_vctrs()`:
+      ! Can't convert from <double> to <integer> due to loss of precision.
+      * Locations: 1
     Code
       foo[[mean]]
     Error <vctrs_error_subscript_type>
       Must extract column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
+      i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo]]
@@ -764,6 +790,10 @@
       Must assign to column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `logical`.
+      i It must be numeric or character.
     Code
       foo[[NA_integer_]] <- 1
     Error <vctrs_error_subscript_type>
@@ -774,6 +804,10 @@
     Error <vctrs_error_subscript_type>
       Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
+      i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo]] <- 1
@@ -795,17 +829,32 @@
       Must assign to row with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `logical`.
+      i It must be numeric or character.
     Code
       foo[[mean, 1]] <- 1
     Error <vctrs_error_subscript_type>
       Must assign to row with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
       i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `function`.
+      i It must be numeric or character.
     Code
       foo[[foo, 1]] <- 1
     Error <vctrs_error_subscript_type>
       Must assign to row with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
+        x: integer
+        y: integer
+      >`.
+      i It must be numeric or character.
+      Caused by error:
+      ! Must extract element with a single valid subscript.
+      x Subscript has the wrong type `tbl_df<
         x: integer
         y: integer
       >`.
