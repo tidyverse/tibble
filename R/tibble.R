@@ -127,7 +127,7 @@
 #'   a = 1:3,
 #'   b = diag(3),
 #'   c = cor(trees),
-#'   d = Titanic[1:3,,,]
+#'   d = Titanic[1:3, , , ]
 #' )
 #'
 #' # data can not contain POSIXlt columns, or tibbles or matrices
