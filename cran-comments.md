@@ -1,4 +1,4 @@
-tibble 3.1.5
+tibble 3.1.6
 
 ## Cran Repository Policy
 
@@ -12,4 +12,4 @@ tibble 3.1.5
 
 ## Current CRAN check results
 
-- [x] Checked on 2021-09-26, no problems found.
+- [x] Checked on 2021-10-25, no problems found.

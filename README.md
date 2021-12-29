@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions) [![codecov](https://codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg)](https://codecov.io/gh/tidyverse/tibble) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble) [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions) [![codecov](https://app.codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble) [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 <!-- badges: end -->
 
@@ -25,7 +25,7 @@ If you are new to tibbles, the best place to start is the [tibbles chapter](http
 
 <span class='c'># Or the the development version from GitHub:</span>
 <span class='c'># install.packages("devtools")</span>
-<span class='nf'>devtools</span><span class='nf'>::</span><span class='nf'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span><span class='o'>(</span><span class='s'>"tidyverse/tibble"</span><span class='o'>)</span></pre>
+<span class='nf'>devtools</span><span class='nf'>::</span><span class='nf'><a href='https://devtools.r-lib.org/reference/remote-reexports.html'>install_github</a></span><span class='o'>(</span><span class='s'>"tidyverse/tibble"</span><span class='o'>)</span></pre>
 
 ## Usage
 
@@ -38,17 +38,17 @@ Create a tibble from an existing object with [`as_tibble()`](https://tibble.tidy
 <span class='nv'>data</span> <span class='o'>&lt;-</span> <span class='nf'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='o'>(</span>a <span class='o'>=</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>3</span>, b <span class='o'>=</span> <span class='nv'>letters</span><span class='o'>[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>3</span><span class='o'>]</span>, c <span class='o'>=</span> <span class='nf'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='o'>(</span><span class='o'>)</span> <span class='o'>-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>3</span><span class='o'>)</span>
 <span class='nv'>data</span>
 <span class='c'>#&gt;   a b          c</span>
-<span class='c'>#&gt; 1 1 a 2021-07-31</span>
-<span class='c'>#&gt; 2 2 b 2021-07-30</span>
-<span class='c'>#&gt; 3 3 c 2021-07-29</span>
+<span class='c'>#&gt; 1 1 a 2021-12-28</span>
+<span class='c'>#&gt; 2 2 b 2021-12-27</span>
+<span class='c'>#&gt; 3 3 c 2021-12-26</span>
 
 <span class='nf'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='o'>(</span><span class='nv'>data</span><span class='o'>)</span>
 <span class='c'>#&gt; <span style='color: #555555;'># A tibble: 3 × 3</span></span>
 <span class='c'>#&gt;       <span style='font-weight: bold;'>a</span> <span style='font-weight: bold;'>b</span>     <span style='font-weight: bold;'>c</span>         </span>
 <span class='c'>#&gt;   <span style='color: #555555; font-style: italic;'>&lt;int&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #555555; font-style: italic;'>&lt;date&gt;</span>    </span>
-<span class='c'>#&gt; <span style='color: #555555;'>1</span>     1 a     2021-07-31</span>
-<span class='c'>#&gt; <span style='color: #555555;'>2</span>     2 b     2021-07-30</span>
-<span class='c'>#&gt; <span style='color: #555555;'>3</span>     3 c     2021-07-29</span></pre>
+<span class='c'>#&gt; <span style='color: #555555;'>1</span>     1 a     2021-12-28</span>
+<span class='c'>#&gt; <span style='color: #555555;'>2</span>     2 b     2021-12-27</span>
+<span class='c'>#&gt; <span style='color: #555555;'>3</span>     3 c     2021-12-26</span></pre>
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.
 
@@ -65,7 +65,7 @@ You can also create a new tibble from column vectors with [`tibble()`](https://t
 <span class='c'>#&gt; <span style='color: #555555;'>4</span>     4     1    17</span>
 <span class='c'>#&gt; <span style='color: #555555;'>5</span>     5     1    26</span></pre>
 
-[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in [`vignette("tibble")`](https://tibble.tidyverse.org/articles/tibble.html).
+[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html): it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html). You can read more about these features in `vignette("tibble")`.
 
 You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html):
 
