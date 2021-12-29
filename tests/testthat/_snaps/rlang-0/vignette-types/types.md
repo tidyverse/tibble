@@ -26,10 +26,6 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
-```
-#> Warning in fun(pkgname, pkgpath): Can't find generic `pillar_shaft` in package
-#> bit64 to register S3 method.
-```
 
 
 |Class                       |Data type            |Example                          |Column header |
