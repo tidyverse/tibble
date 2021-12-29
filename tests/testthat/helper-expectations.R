@@ -28,9 +28,19 @@ expect_error_cnd <- function(object, class, message = NULL, ..., .fixed = TRUE) 
 expect_snapshot_with_error <- function(code) {
   code <- rlang::enexpr(code)
 
-  if (packageVersion("testthat") > "3.0.0") {
+  if (packageVersion("testthat") >= "3.1.1") {
+    rlang::eval_tidy(rlang::quo(expect_snapshot(variant = rlang_variant(), !!code, error = TRUE)))
+  } else if (packageVersion("testthat") > "3.0.0") {
     rlang::eval_tidy(rlang::quo(expect_snapshot(!!code, error = TRUE)))
   } else {
     rlang::eval_tidy(rlang::quo(expect_snapshot(!!code)))
+  }
+}
+
+rlang_variant <- function() {
+  if (packageVersion("rlang") >= "0.99.0.9003") {
+    variant <- "rlang-1"
+  } else {
+    variant <- "rlang-0"
   }
 }
