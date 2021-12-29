@@ -130,14 +130,14 @@
 #'   d = Titanic[1:3, , , ]
 #' )
 #'
-#' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with incompatible number of rows:
-#' try(tibble(y = strptime("2000/01/01", "%x")))
+#' # Data can not contain tibbles or matrices with incompatible number of rows:
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
 #' # Use := to create columns with names that start with a dot:
-#' tibble(.dotted = 3)
 #' tibble(.dotted := 3)
+#'
+#' # This also works, but might break in the future:
+#' tibble(.dotted = 3)
 #'
 #' # You can unquote an expression:
 #' x <- 3
