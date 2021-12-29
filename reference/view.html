@@ -111,7 +111,7 @@ This function has no effect in noninteractive sessions."><meta property="og:imag
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>View an object</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/view.R" class="external-link"><code>R/view.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/view.R" class="external-link"><code>R/view.R</code></a></small>
     <div class="hidden name"><code>view.Rd</code></div>
     </div>
 
@@ -124,25 +124,27 @@ A message is printed if the number of rows exceeds <code>n</code>.
 This function has no effect in non<a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a> sessions.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">view</span><span class="op">(</span><span class="va">x</span>, title <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, n <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">view</span><span class="op">(</span><span class="va">x</span>, title <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, n <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>The object to display.</p></dd>
-</dl><dl><dt>title</dt><dd><p>The title to use for the display, by default
+    <dl><dt>x</dt>
+<dd><p>The object to display.</p></dd>
+<dt>title</dt>
+<dd><p>The title to use for the display, by default
 the deparsed expression is used.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Unused, must be empty.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Maximum number of rows to display. Only used if <code>x</code> is not a
+<dt>...</dt>
+<dd><p>Unused, must be empty.</p></dd>
+<dt>n</dt>
+<dd><p>Maximum number of rows to display. Only used if <code>x</code> is not a
 data frame. Uses the <code>view_max</code> <a href="tibble_options.html">option</a> by default.</p></dd>
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>The RStudio IDE overrides <code><a href="https://rdrr.io/r/utils/View.html" class="external-link">utils::View()</a></code>, this is picked up
 correctly.</p>
-    </div>
     </div>
 
   </div>

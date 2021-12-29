@@ -118,7 +118,7 @@ remove any existing row names."><meta property="og:image" content="https://tibbl
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tools for working with row names</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/rownames.R" class="external-link"><code>R/rownames.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/rownames.R" class="external-link"><code>R/rownames.R</code></a></small>
     <div class="hidden name"><code>rownames.Rd</code></div>
     </div>
 
@@ -138,7 +138,8 @@ dataframe of ascending sequential row ids starting at 1. Note that this will
 remove any existing row names.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">has_rownames</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">has_rownames</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span>
 
 <span class="fu">remove_rownames</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span>
 
@@ -147,14 +148,14 @@ remove any existing row names.</p>
 <span class="fu">rowid_to_column</span><span class="op">(</span><span class="va">.data</span>, var <span class="op">=</span> <span class="st">"rowid"</span><span class="op">)</span>
 
 <span class="fu">column_to_rownames</span><span class="op">(</span><span class="va">.data</span>, var <span class="op">=</span> <span class="st">"rowname"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>.data</dt><dd><p>A data frame.</p></dd>
-</dl><dl><dt>var</dt><dd><p>Name of column to use for rownames.</p></dd>
+    <dl><dt>.data</dt>
+<dd><p>A data frame.</p></dd>
+<dt>var</dt>
+<dd><p>Name of column to use for rownames.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -162,11 +163,10 @@ remove any existing row names.</p>
 <code>has_rownames()</code> returns a scalar logical.
 All other functions return an object of the same class as the input.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Detect row names ----------------------------------------------------</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Detect row names ----------------------------------------------------</span></span>
 <span class="r-in"><span class="fu">has_rownames</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span class="fu">has_rownames</span><span class="op">(</span><span class="va">trees</span><span class="op">)</span></span>

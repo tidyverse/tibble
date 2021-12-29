@@ -109,7 +109,7 @@ is important. The syntax is inspired by tribble()."><meta property="og:image" co
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Row-wise matrix creation</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/tribble.R" class="external-link"><code>R/tribble.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/tribble.R" class="external-link"><code>R/tribble.R</code></a></small>
     <div class="hidden name"><code>frame_matrix.Rd</code></div>
     </div>
 
@@ -120,14 +120,14 @@ This is useful for small matrices, e.g. covariance matrices, where readability
 is important. The syntax is inspired by <code><a href="tribble.html">tribble()</a></code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">frame_matrix</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">frame_matrix</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>...</dt><dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
+    <dl><dt>...</dt>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 Arguments specifying the structure of a <code>frame_matrix</code>.
 Column names should be formulas, and may only appear before the data.
 These arguments are processed with <code><a href="https://rlang.r-lib.org/reference/list2.html" class="external-link">rlang::list2()</a></code>
@@ -142,11 +142,10 @@ and support unquote via <code>!!</code> and unquote-splice via <code>!!!</code>.
     <div class="dont-index"><p>See quasiquotation for more details on tidy dots semantics,
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">frame_matrix</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">frame_matrix</span><span class="op">(</span></span>
 <span class="r-in">  <span class="op">~</span><span class="va">col1</span>, <span class="op">~</span><span class="va">col2</span>,</span>
 <span class="r-in">  <span class="fl">1</span>,     <span class="fl">3</span>,</span>
 <span class="r-in">  <span class="fl">5</span>,     <span class="fl">2</span></span>

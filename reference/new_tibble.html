@@ -114,7 +114,7 @@ runs without raising an error."><meta property="og:image" content="https://tibbl
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tibble constructor and validator</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/new.R" class="external-link"><code>R/new.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/new.R" class="external-link"><code>R/new.R</code></a></small>
     <div class="hidden name"><code>new_tibble.Rd</code></div>
     </div>
 
@@ -130,20 +130,24 @@ Correct behavior can be guaranteed only if this function
 runs without raising an error.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">new_tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, nrow <span class="op">=</span> <span class="cn">NULL</span>, class <span class="op">=</span> <span class="cn">NULL</span>, subclass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, nrow <span class="op">=</span> <span class="cn">NULL</span>, class <span class="op">=</span> <span class="cn">NULL</span>, subclass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 
 <span class="fu">validate_tibble</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>A tibble-like object.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Name-value pairs of additional attributes.</p></dd>
-</dl><dl><dt>nrow</dt><dd><p>The number of rows, inferred from <code>x</code> if omitted.</p></dd>
-</dl><dl><dt>class</dt><dd><p>Subclasses to assign to the new object, default: none.</p></dd>
-</dl><dl><dt>subclass</dt><dd><p>Deprecated, retained for compatibility. Please use the <code>class</code> argument.</p></dd>
+    <dl><dt>x</dt>
+<dd><p>A tibble-like object.</p></dd>
+<dt>...</dt>
+<dd><p>Name-value pairs of additional attributes.</p></dd>
+<dt>nrow</dt>
+<dd><p>The number of rows, inferred from <code>x</code> if omitted.</p></dd>
+<dt>class</dt>
+<dd><p>Subclasses to assign to the new object, default: none.</p></dd>
+<dt>subclass</dt>
+<dd><p>Deprecated, retained for compatibility. Please use the <code>class</code> argument.</p></dd>
 </dl></div>
     <div id="construction">
     <h2>Construction</h2>
@@ -175,11 +179,10 @@ with recycling of scalars and automatic name repair,
 and <code><a href="https://vctrs.r-lib.org/reference/df_list.html" class="external-link">vctrs::df_list()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code>
 for lower-level implementations.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># The nrow argument is always required:</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># The nrow argument is always required:</span></span>
 <span class="r-in"><span class="fu">new_tibble</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b</span>
@@ -191,15 +194,15 @@ for lower-level implementations.</p></div>
 <span class="r-in"><span class="co"># Existing row.names attributes are ignored:</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">validate_tibble</span><span class="op">(</span><span class="fu">new_tibble</span><span class="op">(</span><span class="va">trees</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 3: Requested with `nrow` argument.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 31: Columns `Girth`, `Height`, and `Volume`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Size 3: Requested with `nrow` argument.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Size 31: Columns `Girth`, `Height`, and `Volume`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Only values of size one are recycled.</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># The length of all columns must be compatible with the nrow argument:</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">validate_tibble</span><span class="op">(</span><span class="fu">new_tibble</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 2: Requested with `nrow` argument.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 3: Columns `a` and `b`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Size 2: Requested with `nrow` argument.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Size 3: Columns `a` and `b`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Only values of size one are recycled.</span>
 </code></pre></div>
     </div>

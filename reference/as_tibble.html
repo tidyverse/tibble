@@ -121,7 +121,7 @@ as_tibble_col() converts a vector to a tibble with one column."><meta property="
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Coerce lists, matrices, and more to data frames</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/as_tibble.R" class="external-link"><code>R/as_tibble.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/as_tibble.R" class="external-link"><code>R/as_tibble.R</code></a></small>
     <div class="hidden name"><code>as_tibble.Rd</code></div>
     </div>
 
@@ -141,7 +141,8 @@ If the input is a list, all elements must have size one.</p>
 <p><code>as_tibble_col()</code> converts a vector to a tibble with one column.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">as_tibble</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">as_tibble</span><span class="op">(</span>
   <span class="va">x</span>,
   <span class="va">...</span>,
   .rows <span class="op">=</span> <span class="cn">NULL</span>,
@@ -186,19 +187,20 @@ If the input is a list, all elements must have size one.</p>
 <span class="op">)</span>
 
 <span class="fu">as_tibble_col</span><span class="op">(</span><span class="va">x</span>, column_name <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>A data frame, list, matrix, or other object that could reasonably be
+    <dl><dt>x</dt>
+<dd><p>A data frame, list, matrix, or other object that could reasonably be
 coerced to a tibble.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Unused, for extensibility.</p></dd>
-</dl><dl><dt>.rows</dt><dd><p>The number of rows, useful to create a 0-column tibble or
+<dt>...</dt>
+<dd><p>Unused, for extensibility.</p></dd>
+<dt>.rows</dt>
+<dd><p>The number of rows, useful to create a 0-column tibble or
 just as an additional check.</p></dd>
-</dl><dl><dt>.name_repair</dt><dd><p>Treatment of problematic column names:
-</p><ul><li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
+<dt>.name_repair</dt>
+<dd><p>Treatment of problematic column names:</p><ul><li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
 <li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
 <li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
 <code>unique</code>,</p></li>
@@ -206,19 +208,23 @@ just as an additional check.</p></dd>
 <li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
 for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href="https://rlang.r-lib.org/reference/as_function.html" class="external-link">rlang::as_function()</a></code></p></li>
-</ul>This argument is passed on as <code>repair</code> to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.
+</ul><p>This argument is passed on as <code>repair</code> to <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.
 See there for more details on these terms and the strategies used
-to enforce them.</dd>
-</dl><dl><dt>rownames</dt><dd><p>How to treat existing row names of a data frame or matrix:
-</p><ul><li><p><code>NULL</code>: remove row names. This is the default.</p></li>
+to enforce them.</p></dd>
+<dt>rownames</dt>
+<dd><p>How to treat existing row names of a data frame or matrix:</p><ul><li><p><code>NULL</code>: remove row names. This is the default.</p></li>
 <li><p><code>NA</code>: keep row names.</p></li>
 <li><p>A string: the name of a new column. Existing rownames are transferred
 into this column and the <code>row.names</code> attribute is deleted.
 Read more in <a href="rownames.html">rownames</a>.</p></li>
 </ul></dd>
-</dl><dl><dt>_n, validate</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated" class="external-link"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a>For compatibility only, do not use for new code.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Name for count column, default: <code>"n"</code>.</p></dd>
-</dl><dl><dt>column_name</dt><dd><p>Name of the column.</p></dd>
+<dt>_n, validate</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated" class="external-link"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a></p>
+<p>For compatibility only, do not use for new code.</p></dd>
+<dt>n</dt>
+<dd><p>Name for count column, default: <code>"n"</code>.</p></dd>
+<dt>column_name</dt>
+<dd><p>Name of the column.</p></dd>
 </dl></div>
     <div id="row-names">
     <h2>Row names</h2>
@@ -245,11 +251,10 @@ prefer the more expressive <code>as_tibble_row()</code> and
 converts a named vector to a tibble with a column of names and column of
 values. Name repair is implemented using <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
 <span class="r-in"></span>

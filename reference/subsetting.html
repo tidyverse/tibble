@@ -125,7 +125,7 @@ data frame behavior, coerce to a data frame via as.data.frame()."><meta property
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Subsetting tibbles</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/subsetting.R" class="external-link"><code>R/subsetting.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/subsetting.R" class="external-link"><code>R/subsetting.R</code></a></small>
     <div class="hidden name"><code>subsetting.Rd</code></div>
     </div>
 
@@ -149,7 +149,8 @@ bugs that are hard to catch. If you rely on code that requires the original
 data frame behavior, coerce to a data frame via <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre><code># S3 method for tbl_df
+    <div id="ref-usage">
+    <div class="sourceCode"><pre><code># S3 method for tbl_df
 $(x, name)
 
 # S3 method for tbl_df
@@ -166,20 +167,25 @@ $(x, name) &lt;- value
 
 # S3 method for tbl_df
 [(x, i, j, ...) &lt;- value</code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>A tibble.</p></dd>
-</dl><dl><dt>name</dt><dd><p>A <a href="https://rdrr.io/r/base/name.html" class="external-link">name</a> or a string.</p></dd>
-</dl><dl><dt>value</dt><dd><p>A value to store in a row, column, range or cell.
+    <dl><dt>x</dt>
+<dd><p>A tibble.</p></dd>
+<dt>name</dt>
+<dd><p>A <a href="https://rdrr.io/r/base/name.html" class="external-link">name</a> or a string.</p></dd>
+<dt>value</dt>
+<dd><p>A value to store in a row, column, range or cell.
 Tibbles are stricter than data frames in what is accepted here.</p></dd>
-</dl><dl><dt>i, j</dt><dd><p>Row and column indices. If <code>j</code> is omitted, <code>i</code> is used as column index.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Ignored.</p></dd>
-</dl><dl><dt>exact</dt><dd><p>Ignored, with a warning.</p></dd>
-</dl><dl><dt>drop</dt><dd><p>Coerce to a vector if fetching one column via <code>tbl[, j]</code> .
+<dt>i, j</dt>
+<dd><p>Row and column indices. If <code>j</code> is omitted, <code>i</code> is used as column index.</p></dd>
+<dt>...</dt>
+<dd><p>Ignored.</p></dd>
+<dt>exact</dt>
+<dd><p>Ignored, with a warning.</p></dd>
+<dt>drop</dt>
+<dd><p>Coerce to a vector if fetching one column via <code>tbl[, j]</code> .
 Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</code> .</p></dd>
 </dl></div>
     <div id="details">
@@ -188,11 +194,10 @@ Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</co
 <code>[</code> supports a <code>drop</code> argument which defaults to <code>FALSE</code>.
 New code should use <code>[[</code> to turn a column into a vector.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, bc <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Subsetting single columns:</span></span>

@@ -125,7 +125,7 @@ and pillar::pillar_options for options that control the display in the console.'
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Printing tibbles</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/master/R/print.R" class="external-link"><code>R/print.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/print.R" class="external-link"><code>R/print.R</code></a></small>
     <div class="hidden name"><code>formatting.Rd</code></div>
     </div>
 
@@ -149,7 +149,8 @@ See <code><a href="https://pillar.r-lib.org/articles/extending.html" class="exte
 and <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">pillar::pillar_options</a> for options that control the display in the console.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for tbl_df</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for tbl_df</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>
   <span class="va">x</span>,
   width <span class="op">=</span> <span class="cn">NULL</span>,
@@ -168,32 +169,35 @@ and <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="exte
   max_extra_cols <span class="op">=</span> <span class="cn">NULL</span>,
   max_footer_lines <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>x</dt><dd><p>Object to format or print.</p></dd>
-</dl><dl><dt>width</dt><dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
+    <dl><dt>x</dt>
+<dd><p>Object to format or print.</p></dd>
+<dt>width</dt>
+<dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use the <code>width</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Passed on to <code>tbl_format_setup()</code>.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
+<dt>...</dt>
+<dd><p>Passed on to <code>tbl_format_setup()</code>.</p></dd>
+<dt>n</dt>
+<dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than the <code>print_max</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.
 Otherwise, will print as many rows as specified by the
 <code>print_min</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
-</dl><dl><dt>max_extra_cols</dt><dd><p>Number of extra columns to print abbreviated information for,
+<dt>max_extra_cols</dt>
+<dd><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>,
 the <code>max_extra_cols</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.
 The previously defined <code>n_extra</code> argument is soft-deprecated.</p></dd>
-</dl><dl><dt>max_footer_lines</dt><dd><p>Maximum number of footer lines. If <code>NULL</code>,
+<dt>max_footer_lines</dt>
+<dd><p>Maximum number of footer lines. If <code>NULL</code>,
 the <code>max_footer_lines</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.</p></dd>
 </dl></div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
