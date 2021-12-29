@@ -73,6 +73,8 @@ transforming the user's input.
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
+If it evaluates to a matrix or a array, it remains a matrix or array,
+respectively.
 See examples.
 }
 
@@ -145,7 +147,8 @@ tibble(
 tibble(
   a = 1:3,
   b = diag(3),
-  c = cor(trees)
+  c = cor(trees),
+  d = Titanic[1:3,,,]
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
