@@ -44,3 +44,17 @@ rlang_variant <- function() {
     variant <- "rlang-0"
   }
 }
+
+rlang_pillar_variant <- function() {
+  if (packageVersion("rlang") >= "0.99.0.9003") {
+    if (packageVersion("pillar") > "1.6.4") {
+      skip("Not testing dev rlang + dev pillar")
+    } else {
+      variant <- "rlang-1"
+    }
+  } else if (packageVersion("pillar") > "1.6.4") {
+    variant <- "pillar-1.6.5"
+  } else {
+    variant <- "rlang-0"
+  }
+}
