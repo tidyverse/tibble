@@ -25,7 +25,7 @@ runs:
     - name: Derive branch name
       id: matrix-branch
       run: |
-        echo "::set-output name=name::$(echo '${{ toJSON(matrix.config) }}' | jq -c . | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
+        echo "::set-output name=name::$(echo '${{ toJSON(matrix) }}' | jq -c . | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
       shell: bash
 
     - name: Create Pull Request
