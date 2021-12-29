@@ -5,5 +5,5 @@ runs:
   steps:
     - name: Roxygenize
       run: |
-        roxygen2::roxygenize()
+        try(roxygen2::roxygenize())
       shell: Rscript {0}

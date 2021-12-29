@@ -11,18 +11,30 @@ runs:
         if (any(has_snapshot)) {
           patterns <- gsub(rx, "^\\1$", files[has_snapshot])
           pattern <- paste0(patterns, collapse = "|")
-          result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
-          failures <- result[result$failed > 0, ]
-          if (nrow(failures) > 0) {
-            writeLines("Tests failed")
-            print(failures[names(failures) != "result"])
-            print(failures$result)
-            testthat::snapshot_accept()
-          }
+          tryCatch(
+            {
+              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
+              failures <- result[result$failed > 0, ]
+              if (nrow(failures) > 0) {
+                writeLines("Tests failed")
+                print(failures[names(failures) != "result"])
+                print(failures$result)
+                testthat::snapshot_accept()
+              }
+            },
+            error = print
+          )
         }
       shell: Rscript {0}
 
+    - name: Check changed files
+      id: check-changed
+      run: |
+        echo "::set-output name=changed::$(git status --porcelain -- tests/testthat/_snaps)"
+      shell: bash
+
     - name: Derive branch name
+      if: ${{ steps.check-changed.outputs.changed }}
       id: matrix-desc
       run: |
         config=$(echo '${{ toJSON(matrix) }}' | jq -c .)
@@ -31,6 +43,7 @@ runs:
       shell: bash
 
     - name: Create pull request
+      if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
       uses: peter-evans/create-pull-request@v3
       with:
