@@ -23,19 +23,21 @@ runs:
       shell: Rscript {0}
 
     - name: Derive branch name
-      id: matrix-branch
+      id: matrix-desc
       run: |
-        echo "::set-output name=name::$(echo '${{ toJSON(matrix.config) }}' | jq -c . | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
+        config=$(echo '${{ toJSON(matrix) }}' | jq -c .)
+        echo "::set-output name=text::$(echo ${config})"
+        echo "::set-output name=branch::$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
       shell: bash
 
-    - name: Create Pull Request
+    - name: Create pull request
       id: cpr
       uses: peter-evans/create-pull-request@v3
       with:
         base: ${{ github.head_ref }}
-        branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-branch.outputs.name }}
+        branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
         delete-branch: true
-        title: Snapshot updates for ${{ github.job }}
+        title: Snapshot updates for ${{ github.job }} (${{ steps.matrix-desc.outputs.text }})
         add-paths: |
           tests/testthat/_snaps
 

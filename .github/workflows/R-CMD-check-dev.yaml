@@ -73,7 +73,7 @@ jobs:
           install-r: false
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: check
-          extra-packages: "any::rcmdcheck any::remotes"
+          extra-packages: "any::rcmdcheck any::remotes ."
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dev version of ${{ matrix.package }}
