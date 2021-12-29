@@ -63,6 +63,22 @@ The pillar package that is responsible for the display of tibbles tries hard to 
 Whenever the default formatting does not suit the application, `num()` or `char()` allow redefining the formatting for individual columns.
 The formatting survives most data transformations.
 
+## Rule-based number formatting
+
+Currently, formatting must be applied manually for each column.
+The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+
+markets <-
+  as_tibble(EuStockMarkets) %>%
+  mutate(time = time(EuStockMarkets), .before = 1)
+
+markets
+markets %>%
+  mutate(across(-time, num, digits = 3))
+```
 
 ## Computing on `num`
 
