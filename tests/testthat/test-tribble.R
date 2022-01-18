@@ -217,7 +217,7 @@ test_that("frame_matrix cannot have list columns", {
 test_that("tribble and frame_matrix cannot have named arguments", {
   expect_tibble_error(
     extract_frame_data_from_dots(
-      ~x,   ~y,
+      ~x, ~y,
       "a" = 1:3,
       "b" = 4:6
     ),
