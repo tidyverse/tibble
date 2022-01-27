@@ -66,13 +66,13 @@ tibble(
   char = char(paste(LETTERS, collapse = " "), shorten = "mid")
 )
 #> # A tibble: 5 x 7
-#>          x4       x1     usd percent   eng      si char                         
-#>   <num:.4!> <num:.1>     USD       % [e-3]    <si> <char>                       
-#> 1  800.5000    800.5  800.50    8.05     1 123   m A B C D E F G ~ T U V W X Y Z
-#> 2  900.5000    900.5  900.50    9.05    10   1.23  A B C D E F G ~ T U V W X Y Z
-#> 3 1000.5000   1000.5 1000.50   10.0    100  12.3   A B C D E F G ~ T U V W X Y Z
-#> 4 1100.5000   1100.5 1100.50   11.0   1000 123     A B C D E F G ~ T U V W X Y Z
-#> 5 1200.5000   1200.5 1200.50   12.0  10000   1.23k A B C D E F G ~ T U V W X Y Z
+#>          x4       x1     usd percent      eng      si char                      
+#>   <num:.4!> <num:.1>     USD       %    <eng>    <si> <char>                    
+#> 1  800.5000    800.5  800.50    8.05     1e-3 123   m A B C D E F ~T U V W X Y Z
+#> 2  900.5000    900.5  900.50    9.05    10e-3   1.23  A B C D E F ~T U V W X Y Z
+#> 3 1000.5000   1000.5 1000.50   10.0    100e-3  12.3   A B C D E F ~T U V W X Y Z
+#> 4 1100.5000   1100.5 1100.50   11.0   1000e-3 123     A B C D E F ~T U V W X Y Z
+#> 5 1200.5000   1200.5 1200.50   12.0  10000e-3   1.23k A B C D E F ~T U V W X Y Z
 ```
 
 The pillar package that is responsible for the display of tibbles tries hard to get the number display right, however it is impossible to accommodate all use cases.
