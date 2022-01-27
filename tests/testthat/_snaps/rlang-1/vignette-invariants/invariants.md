@@ -361,7 +361,7 @@ tbl[[c("n", "c")]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but
@@ -384,16 +384,10 @@ tbl[[TRUE]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `TRUE` has the wrong type
-#> `logical`.
-#> i It must be numeric or character.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Subscript has the wrong type
 #> `logical`.
 #> i It must be numeric or character.
 ```
@@ -420,16 +414,10 @@ tbl[[mean]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `mean` has the wrong type
-#> `function`.
-#> i It must be numeric or character.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Subscript has the wrong type
 #> `function`.
 #> i It must be numeric or character.
 ```
@@ -456,7 +444,7 @@ tbl[[NA]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `NA` can't be `NA`.
@@ -478,7 +466,7 @@ tbl[[NA_character_]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `NA_character_` can't be
@@ -501,7 +489,7 @@ tbl[[NA_integer_]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
@@ -530,7 +518,7 @@ tbl[[-1]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
 #> x Subscript `-1` has value -1 but must
@@ -559,7 +547,7 @@ tbl[[4]]
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in `vec_as_location2_result()`:
 #> ! Can't subset columns that don't exist.
 #> x Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -581,20 +569,12 @@ tbl[[1.5]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
-#> x Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> Caused by error in `stop_vctrs()`:
-#> ! Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> * Locations: 1
+#> x Subscript `1.5` has the wrong type
+#> `double`.
+#> i It must be numeric or character.
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>
@@ -613,20 +593,12 @@ tbl[[Inf]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single
 #> valid subscript.
-#> x Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> Caused by error in `stop_vctrs()`:
-#> ! Can't convert from <double> to
-#> <integer> due to loss of precision.
-#> * Locations: 1
+#> x Subscript `Inf` has the wrong type
+#> `double`.
+#> i It must be numeric or character.
 ```
 
 </div>
@@ -959,7 +931,7 @@ tbl[!is.na(tbl)]
 <div class="error">
 
 ```
-#> Error in `stop_vctrs()`:
+#> Error:
 #> ! Can't combine `n` <integer> and `c`
 #> <character>.
 ```
@@ -1167,7 +1139,7 @@ tbl[mean, ]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_row_location()`:
 #> ! Must subset rows with a valid
 #> subscript vector.
 #> x Subscript `mean` has the wrong type
@@ -1198,7 +1170,7 @@ tbl[list(1), ]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_row_location()`:
 #> ! Must subset rows with a valid
 #> subscript vector.
 #> x Subscript `list(1)` has the wrong type
@@ -1319,7 +1291,7 @@ tbl[c(TRUE, FALSE), ]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_row_location()`:
 #> ! Must subset rows with a valid
 #> subscript vector.
 #> i Logical subscripts must match the size
@@ -1701,16 +1673,10 @@ with_tbl(tbl[[TRUE]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `TRUE` has the wrong type
-#> `logical`.
-#> i It must be numeric or character.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Subscript has the wrong type
 #> `logical`.
 #> i It must be numeric or character.
 ```
@@ -1738,7 +1704,7 @@ with_tbl(tbl[[1:3]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `1:3` has size 3 but must be
@@ -1767,7 +1733,7 @@ with_tbl(tbl[[c("n", "c")]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but
@@ -1797,16 +1763,10 @@ with_tbl(tbl[[FALSE]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `FALSE` has the wrong type
-#> `logical`.
-#> i It must be numeric or character.
-#> Caused by error:
-#> ! Must extract element with a single
-#> valid subscript.
-#> x Subscript has the wrong type
 #> `logical`.
 #> i It must be numeric or character.
 ```
@@ -1833,7 +1793,7 @@ with_tbl(tbl[[1:2]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `1:2` has size 2 but must be
@@ -1863,7 +1823,7 @@ with_tbl(tbl[[NA_integer_]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
@@ -1892,7 +1852,7 @@ with_tbl(tbl[[NA]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `NA` can't be `NA`.
@@ -1921,7 +1881,7 @@ with_tbl(tbl[[NA_character_]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Must assign to column with a single
 #> valid subscript.
 #> x Subscript `NA_character_` can't be
@@ -2212,7 +2172,8 @@ with_tbl(tbl[[5]] <- 0)
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_col_location_assign()`:
 #> ! Can't assign to columns beyond the end
 #> with non-consecutive locations.
 #> i Input has size 3.
@@ -2682,7 +2643,7 @@ with_tbl(tbl[1:2] <- list(0, 0, 0))
 <div class="error">
 
 ```
-#> Error in `stop_vctrs()`:
+#> Error in `vectbl_as_new_col_index()`:
 #> ! Can't recycle `list(0, 0, 0)` (size 3)
 #> to size 2.
 ```
@@ -2707,7 +2668,7 @@ with_tbl(tbl[1:3] <- list(0, 0))
 <div class="error">
 
 ```
-#> Error in `stop_vctrs()`:
+#> Error in `vectbl_as_new_col_index()`:
 #> ! Can't recycle `list(0, 0)` (size 2) to
 #> size 3.
 ```
@@ -3093,7 +3054,8 @@ with_tbl(tbl[5] <- list(4:1))
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_col_location_assign()`:
 #> ! Can't assign to columns beyond the end
 #> with non-consecutive locations.
 #> i Input has size 3.
@@ -3733,7 +3695,8 @@ with_tbl(tbl[0:2, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Must assign to rows with a valid
 #> subscript vector.
 #> x Subscript `0:2` can't contain `0`
@@ -3761,7 +3724,8 @@ with_tbl(tbl[0, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Must assign to rows with a valid
 #> subscript vector.
 #> x Subscript `0` can't contain `0`
@@ -3815,7 +3779,8 @@ with_tbl(tbl[-1:2, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Must assign to rows with a valid
 #> subscript vector.
 #> x Negative and positive locations can't
@@ -3848,7 +3813,8 @@ with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Must assign to rows with a valid
 #> subscript vector.
 #> x Subscript `NA_integer_` can't contain
@@ -3880,7 +3846,8 @@ with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 <div class="error">
 
 ```
-#> Error:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Must assign to rows with a valid
 #> subscript vector.
 #> x Subscript `NA_integer_` can't contain
@@ -4199,7 +4166,8 @@ with_tbl(tbl[6, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Can't assign to rows beyond the end
 #> with non-consecutive locations.
 #> i Input has size 4.
@@ -4227,7 +4195,8 @@ with_tbl(tbl[-5, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Can't negate rows that don't exist.
 #> x Location 5 doesn't exist.
 #> i There are only 4 rows.
@@ -4253,7 +4222,8 @@ with_tbl(tbl[-(5:7), ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Can't negate rows that don't exist.
 #> x Locations 5, 6, and 7 don't exist.
 #> i There are only 4 rows.
@@ -4279,7 +4249,8 @@ with_tbl(tbl[-6, ] <- tbl[1, ])
 <div class="error">
 
 ```
-#> Error in `stop_subscript()`:
+#> Error in
+#> `numtbl_as_row_location_assign()`:
 #> ! Can't negate rows that don't exist.
 #> x Location 6 doesn't exist.
 #> i There are only 4 rows.
@@ -4578,9 +4549,10 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 <div class="error">
 
 ```
-#> Error:
-#> ! Internal error in `df_cast_opts()`:
-#> Data frame must have names.
+#> Error in `df_cast_opts()`:
+#> ! Data frame must have names.
+#> i This is an internal error, please
+#> report it to the package authors.
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>
@@ -5073,7 +5045,7 @@ tbl[[1:2, 1]]
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_row_location2()`:
 #> ! Must extract row with a single valid
 #> subscript.
 #> x Subscript `1:2` has size 2 but must be
@@ -5103,7 +5075,7 @@ with_tbl(tbl[[1:2, 1]] <- 0)
 <div class="error">
 
 ```
-#> Error:
+#> Error in `vectbl_as_row_location2()`:
 #> ! Must assign to row with a single valid
 #> subscript.
 #> x Subscript `1:2` has size 2 but must be

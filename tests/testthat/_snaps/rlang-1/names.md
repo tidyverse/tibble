@@ -8,7 +8,7 @@
       repaired_names("", repair_hint = FALSE)
     Error <tibble_error_column_names_cannot_be_empty>
       Column 1 must be named.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 1.
     Code
@@ -16,14 +16,14 @@
     Error <tibble_error_column_names_cannot_be_empty>
       Column 1 must be named.
       Use .name_repair to specify repair.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 1.
     Code
       repaired_names(c("a", "a"), repair_hint = FALSE)
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
@@ -31,7 +31,7 @@
       repaired_names("..1", repair_hint = FALSE)
     Error <tibble_error_column_names_cannot_be_dot_dot>
       Column 1 must not have names of the form ... or ..j.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names can't be of the form `...` or `..j`.
       x These names are invalid:
         * "..1" at location 1.

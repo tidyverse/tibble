@@ -5,7 +5,7 @@
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
       Use .name_repair to specify repair.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
