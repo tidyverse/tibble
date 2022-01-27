@@ -55,7 +55,7 @@
         <a class="navbar-brand" href="../index.html">tibble</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.6.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">3.1.6.9001</span>
         </div>
       </div>
     </div>
@@ -1285,12 +1285,13 @@
 <code class="sourceCode R"><span class="fu">with_tbl2</span><span class="op">(</span><span class="va">tbl2</span><span class="op">[[</span><span class="st">"tb"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span>
-<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>      <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>  <span style="font-weight: bold;">[,3]</span>
-<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     1     0     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     0     1     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     0     0     1
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     0     0     0
+<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>       <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: </span><span style="color: #949494; font-weight: bold;">m[3:4]</span><span style="color: #949494;"> &lt;dbl&gt;</span>
 </code></pre>
 </div>
 </td>
@@ -1313,12 +1314,13 @@
 <code class="sourceCode R"><span class="fu">with_tbl2</span><span class="op">(</span><span class="va">tbl2</span><span class="op">[[</span><span class="st">"m"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[[</span><span class="st">"m"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span>
-<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>      <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>  <span style="font-weight: bold;">[,3]</span>
-<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     1     0     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2</span>…     1     0     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3</span>…     1     0     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1</span>…     1     0     0
+<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>       <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: </span><span style="color: #949494; font-weight: bold;">m[3:4]</span><span style="color: #949494;"> &lt;dbl&gt;</span>
 </code></pre>
 </div>
 </td>
@@ -2691,12 +2693,13 @@
 <code class="sourceCode R"><span class="fu">with_tbl2</span><span class="op">(</span><span class="va">tbl2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode"><code class="sourceCode"><span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span>
-<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>      <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>  <span style="font-weight: bold;">[,3]</span>
-<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1</span>…     1     0     0
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2</span>…     1     1     1
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3</span>…    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>
-<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1</span>…     0     0     0
+<span style="color: #949494;">#&gt;</span>    <span style="font-weight: bold;">tb$n</span> <span style="font-weight: bold;">$c</span>    <span style="font-weight: bold;">$li</span>       <span style="font-weight: bold;">m[,1]</span>  <span style="font-weight: bold;">[,2]</span>
+<span style="color: #949494;">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     1     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     1
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>
+<span style="color: #949494;">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     0     0
+<span style="color: #949494;">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: </span><span style="color: #949494; font-weight: bold;">m[3:4]</span><span style="color: #949494;"> &lt;dbl&gt;</span>
 </code></pre>
 </div>
 </td>
