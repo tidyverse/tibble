@@ -145,6 +145,69 @@ cnd_names_non_na <- function(name) {
   }
 }
 
+#' Binding rows and columns
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' In tibble 4.0.0, the [rbind()] and [cbind()] methods
+#' will become stricter.
+#' These functions are designed to help the transition to those stricter
+#' versions.
+#' Replace calls to `rbind()` and `cbind()` with `tbl_rbind()` and `tbl_cbind()`,
+#' respectively, to preview how your code will behave after the upgrade.
+#' Set the `tibble.rbind_trace` or `tibble.cbind_trace` options to `TRUE`
+#' to enable diagnostic information.
+#' @export
+tbl_rbind <- function(...) {
+  # deparse.level is part of the interface of the rbind generic
+  # but not passed along for data frame methods
+
+  if (tibble_options$rbind_trace()) {
+    writeLines("rbind()")
+    print(list(...))
+    writeLines("rbind() results")
+    print(base:::rbind.data.frame(...))
+    try(print(vec_rbind(!!!list(...))))
+    writeLines("rbind() end")
+  }
+
+  vec_rbind(!!!list(...))
+}
+
+#' @rdname tbl_rbind
+#' @export
+tbl_cbind <- function(...) {
+  if (tibble_options$cbind_trace()) {
+    writeLines("cbind()")
+    print(list(...))
+    writeLines("cbind() results")
+    print(base:::cbind.data.frame(...))
+    try(print(vec_cbind(!!!list(...))))
+    writeLines("cbind() end")
+  }
+
+  vec_cbind(!!!list(...))
+}
+
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(rbind, tbl_df)
+if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
+  if (tibble_options$rbind_base()) {
+    NextMethod("rbind")
+  } else {
+    tbl_rbind(...)
+  }
+}
+
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
+if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
+  if (tibble_options$cbind_base()) {
+    NextMethod("cbind")
+  } else {
+    tbl_cbind(...)
+  }
+}
+
 # Errors ------------------------------------------------------------------
 
 error_names_must_be_non_null <- function() {

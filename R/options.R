@@ -38,4 +38,24 @@ tibble_options <- list2(
   view_max = make_option_impl(
     getOption("tibble.view_max", default = 1000L)
   ),
+  #' - `rbind_trace`: Print diagnostic information for [rbind()]  calls.
+  #'   Default: `FALSE`.
+  rbind_trace = make_option_impl(
+    getOption("tibble.rbind_trace", default = FALSE)
+  ),
+  #' - `cbind_trace`: Print diagnostic information for [cbind()]  calls.
+  #'   Default: `FALSE`.
+  cbind_trace = make_option_impl(
+    getOption("tibble.cbind_trace", default = FALSE)
+  ),
+  #' - `rbind_base`: Forware [rbind()]  calls to base.
+  #'   Default: `FALSE`.
+  rbind_base = make_option_impl(
+    getOption("tibble.rbind_base", default = FALSE)
+  ),
+  #' - `cbind_base`: Forware [cbind()]  calls to base.
+  #'   Default: `FALSE`.
+  cbind_base = make_option_impl(
+    getOption("tibble.cbind_base", default = FALSE)
+  ),
 )

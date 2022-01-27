@@ -25,6 +25,14 @@ An option value of \code{NULL} means that the default is used.
 \itemize{
 \item \code{view_max}: Maximum number of rows shown by \code{\link[=view]{view()}}
 if the input is not a data frame, passed on to \code{\link[=head]{head()}}. Default: \code{1000}.
+\item \code{rbind_trace}: Print diagnostic information for \code{\link[=rbind]{rbind()}}  calls.
+Default: \code{FALSE}.
+\item \code{cbind_trace}: Print diagnostic information for \code{\link[=cbind]{cbind()}}  calls.
+Default: \code{FALSE}.
+\item \code{rbind_base}: Forware \code{\link[=rbind]{rbind()}}  calls to base.
+Default: \code{FALSE}.
+\item \code{cbind_base}: Forware \code{\link[=cbind]{cbind()}}  calls to base.
+Default: \code{FALSE}.
 }
 }
 
