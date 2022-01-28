@@ -4,7 +4,7 @@
       rownames_to_column(mtcars, "cyl")
     Error <tibble_error_column_names_must_be_unique>
       Column name `cyl` must not be duplicated.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "cyl" at locations 2 and 12.
@@ -12,7 +12,7 @@
       rowid_to_column(trees, "Volume")
     Error <tibble_error_column_names_must_be_unique>
       Column name `Volume` must not be duplicated.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "Volume" at locations 3 and 4.

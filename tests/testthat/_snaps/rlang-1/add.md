@@ -31,7 +31,7 @@
     Error <tibble_error_column_names_must_be_unique>
       Column name `a` must not be duplicated.
       Use .name_repair to specify repair.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
@@ -40,7 +40,7 @@
     Error <tibble_error_column_names_must_be_unique>
       Column names `a` and `b` must not be duplicated.
       Use .name_repair to specify repair.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 3.
@@ -55,7 +55,7 @@
     Error <tibble_error_column_names_must_be_unique>
       Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
       Use .name_repair to specify repair.
-      Caused by error in `stop_vctrs()`:
+      Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 27.
