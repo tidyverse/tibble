@@ -6,7 +6,7 @@ test_that("tibble_error()", {
   expect_identical(
     error_foo(),
     error_cnd(
-      .subclass = c("tibble_error_foo", "tibble_error"),
+      class = c("tibble_error_foo", "tibble_error"),
       message = "message",
       foo = 42,
       bar = 7
