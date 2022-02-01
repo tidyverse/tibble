@@ -95,6 +95,10 @@ format.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
 #' @param n_extra Number of extra columns to print abbreviated information for,
 #'   if the width is too small for the entire tibble. If `NULL`, the default,
 #'   will print information about at most `tibble.max_extra_cols` extra columns.
+#'
+#' @return An object with a `print()` method that will print the input
+#'   similarly to a tibble.
+#'   The internal data format is an implementation detail, do not rely on it.
 #' @export
 #' @keywords internal
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
