@@ -16,6 +16,10 @@ on:
   schedule:
     - cron:  '10 0 * * *'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
+
 name: rcc
 
 jobs:

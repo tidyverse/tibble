@@ -27,6 +27,11 @@ runs:
         }
       shell: Rscript {0}
 
+    - name: Add snapshots
+      run: |
+        git add -- tests/testthat/_snaps
+      shell: bash
+
     - name: Check changed files
       id: check-changed
       run: |

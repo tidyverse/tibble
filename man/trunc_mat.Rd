@@ -23,6 +23,11 @@ default and always print all columns, this may be slow for very wide tibbles.}
 if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
+\value{
+An object with a \code{print()} method that will print the input
+similarly to a tibble.
+The internal data format is an implementation detail, do not rely on it.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
