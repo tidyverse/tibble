@@ -1,0 +1,16 @@
+name: 'Action to determine extra packages to be installed'
+outputs:
+  packages:
+    description: "List of extra packages"
+    value: ${{ steps.get-extra.outputs.packages }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get extra packages
+      id: get-extra
+      run: |
+        set -x
+        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
+        echo ::set-output name=packages::$packages
+      shell: bash

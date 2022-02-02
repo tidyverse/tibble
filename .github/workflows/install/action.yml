@@ -52,12 +52,15 @@ runs:
         http-user-agent: ${{ matrix.config.http-user-agent }}
         use-public-rspm: true
 
+    - id: get-extra
+      uses: ./.github/workflows/get-extra
+
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
         needs: ${{ inputs.needs }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'any::covr' }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'any::covr' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add pkg.lock to .gitignore
