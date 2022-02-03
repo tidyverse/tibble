@@ -21,6 +21,8 @@
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
+#'     If it evaluates to a matrix or a array, it remains a matrix or array,
+#'     respectively.
 #'     See examples.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
@@ -124,17 +126,18 @@
 #' tibble(
 #'   a = 1:3,
 #'   b = diag(3),
-#'   c = cor(trees)
+#'   c = cor(trees),
+#'   d = Titanic[1:3, , , ]
 #' )
 #'
-#' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with incompatible number of rows:
-#' try(tibble(y = strptime("2000/01/01", "%x")))
+#' # Data can not contain tibbles or matrices with incompatible number of rows:
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
 #' # Use := to create columns with names that start with a dot:
-#' tibble(.dotted = 3)
 #' tibble(.dotted := 3)
+#'
+#' # This also works, but might break in the future:
+#' tibble(.dotted = 3)
 #'
 #' # You can unquote an expression:
 #' x <- 3
