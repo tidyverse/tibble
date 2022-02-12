@@ -1,10 +1,16 @@
-name: 'Action to create pull requests for updated snapshots'
+name: "Action to create pull requests for updated testthat snapshots"
+description: >
+  This action will run `testthat::test_local()` for tests that seem to use snapshots,
+  this is determined by reading and grepping the test files.
+  If the tests are failing, snapshots are updated, and a pull request is opened.
 
 runs:
   using: "composite"
   steps:
-    - name: Test files
+    - name: Run tests on test files that use snapshots
+      id: run-tests
       run: |
+        ## -- Run tests on test files that use snapshots --
         rx <- "^test-(.*)[.][rR]$"
         files <- dir("tests/testthat", pattern = rx)
         has_snapshot <- vapply(files, function(.x) any(grepl("snapshot", readLines(file.path("tests/testthat", .x)), fixed = TRUE)), logical(1))
@@ -20,19 +26,26 @@ runs:
                 print(failures[names(failures) != "result"])
                 print(failures$result)
                 testthat::snapshot_accept()
+                writeLines("::set-output name=changed::true")
               }
             },
             error = print
           )
+        } else {
+          writeLines("No snapshots found.")
         }
       shell: Rscript {0}
 
-    - name: Add snapshots
+    - name: Add snapshots to Git
+      if: ${{ steps.run-tests.outputs.changed }}
       run: |
+        ## -- Add snapshots to Git --
+        mkdir -p tests/testthat/_snaps
         git add -- tests/testthat/_snaps
       shell: bash
 
     - name: Check changed files
+      if: ${{ steps.run-tests.outputs.changed }}
       id: check-changed
       run: |
         echo "::set-output name=changed::$(git status --porcelain -- tests/testthat/_snaps)"
