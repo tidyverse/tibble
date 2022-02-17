@@ -20,13 +20,15 @@ runs:
           tryCatch(
             {
               result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
-              failures <- result[result$failed > 0, ]
+              failures <- result[result$failed + result$warning > 0, ]
               if (nrow(failures) > 0) {
-                writeLines("Tests failed")
+                writeLines("Snapshot tests failed/warned.")
                 print(failures[names(failures) != "result"])
                 print(failures$result)
                 testthat::snapshot_accept()
                 writeLines("::set-output name=changed::true")
+              } else {
+                writeLines("Snapshot tests ran successfully.")
               }
             },
             error = print

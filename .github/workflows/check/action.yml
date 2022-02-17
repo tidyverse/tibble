@@ -24,7 +24,10 @@ runs:
     - name: Show test output
       if: always()
       run: |
+        ## -- Show test output --
+        echo "::group::Test output"
         find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+        echo "::endgroup::"
       shell: bash
 
     - name: Upload check results
