@@ -71,11 +71,11 @@ tbl2 <-
 
 tbl2
 #> # A tibble: 3 x 8
-#>   x          y          z          v          lag        sin      mean       var
-#>   <formttbl> <formttbl> <formttbl> <formttbl> <formttbl> <formtt> <formtt> <dbl>
-#> 1 9.000      10.000     81.000     91.000     9.000      0.412    111.667      1
-#> 2 10.000     11.000     100.000    111.000    9.000      -0.544   111.667      1
-#> 3 11.000     12.000     121.000    133.000    10.000     -1.000   111.667      1
+#>   x          y          z          v          lag        sin       mean      var
+#>   <formttbl> <formttbl> <formttbl> <formttbl> <formttbl> <formttb> <formt> <dbl>
+#> 1 9.000      10.000     81.000     91.000     9.000      0.412     111.667     1
+#> 2 10.000     11.000     100.000    111.000    9.000      -0.544    111.667     1
+#> 3 11.000     12.000     121.000    133.000    10.000     -1.000    111.667     1
 ```
 
 Summaries also maintain the formatting.
@@ -188,11 +188,11 @@ tbl3 %>%
     across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
   )
 #> # A tibble: 3 x 9
-#>   id    x          y          z          v          lag     sin     mean   var  
-#>   <chr> <formttbl> <formttbl> <formttbl> <formttbl> <formt> <formt> <form> <for>
-#> 1 a     9.000      10.000     81.0       91.0       9.000   0.412   111.7  1.000
-#> 2 b     10.000     11.000     100.0      111.0      9.000   -0.544  111.7  1.000
-#> 3 c     11.000     12.000     121.0      133.0      10.000  -1.000  111.7  1.000
+#>   id    x          y          z          v          lag       sin    mean  var  
+#>   <chr> <formttbl> <formttbl> <formttbl> <formttbl> <formttb> <form> <for> <for>
+#> 1 a     9.000      10.000     81.0       91.0       9.000     0.412  111.7 1.000
+#> 2 b     10.000     11.000     100.0      111.0      9.000     -0.544 111.7 1.000
+#> 3 c     11.000     12.000     121.0      133.0      10.000    -1.000 111.7 1.000
 ```
 
 These rules can be stored in `quos()`:
@@ -207,11 +207,11 @@ rules <- quos(
 tbl3 %>% 
   mutate(!!!rules)
 #> # A tibble: 3 x 9
-#>   id    x          y          z          v          lag     sin     mean   var  
-#>   <chr> <formttbl> <formttbl> <formttbl> <formttbl> <formt> <formt> <form> <for>
-#> 1 a     9.000      10.000     81.0       91.0       9.000   0.412   111.7  1.000
-#> 2 b     10.000     11.000     100.0      111.0      9.000   -0.544  111.7  1.000
-#> 3 c     11.000     12.000     121.0      133.0      10.000  -1.000  111.7  1.000
+#>   id    x          y          z          v          lag       sin    mean  var  
+#>   <chr> <formttbl> <formttbl> <formttbl> <formttbl> <formttb> <form> <for> <for>
+#> 1 a     9.000      10.000     81.0       91.0       9.000     0.412  111.7 1.000
+#> 2 b     10.000     11.000     100.0      111.0      9.000     -0.544 111.7 1.000
+#> 3 c     11.000     12.000     121.0      133.0      10.000    -1.000 111.7 1.000
 ```
 
 This poses a few drawbacks:
