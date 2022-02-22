@@ -2,7 +2,7 @@
 
     Code
       out <- set_tidy_names(1:3)
-    Message <simpleMessage>
+    Message
       New names:
        -> ..1
        -> ..2
@@ -12,7 +12,7 @@
 
     Code
       set_tidy_names(set_names(1, ""))
-    Message <simpleMessage>
+    Message
       New names:
        -> ..1
     Output
@@ -23,7 +23,7 @@
 
     Code
       names <- tidy_names(c("a", "b", "a", "c", "b"))
-    Message <simpleMessage>
+    Message
       New names:
       a -> a..1
       b -> b..2
@@ -34,7 +34,7 @@
 
     Code
       names <- tidy_names("")
-    Message <simpleMessage>
+    Message
       New names:
        -> ..1
 
@@ -42,7 +42,7 @@
 
     Code
       names <- tidy_names(NA_character_)
-    Message <simpleMessage>
+    Message
       New names:
        -> ..1
 
@@ -51,21 +51,21 @@
     Code
       expect_equal(tidy_names(c("a..2", "a")), c("a..2", "a"))
       expect_equal(tidy_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
-    Message <simpleMessage>
+    Message
       New names:
       a..3 -> a..1
       a -> a..2
       a -> a..3
     Code
       expect_equal(tidy_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
-    Message <simpleMessage>
+    Message
       New names:
       a..2 -> a..1
       a -> a..2
       a -> a..3
     Code
       expect_equal(tidy_names(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
-    Message <simpleMessage>
+    Message
       New names:
       a..2 -> a..1
       a..2 -> a..3
@@ -74,7 +74,7 @@
 
     Code
       names <- tidy_names(c("a b"), syntactic = TRUE)
-    Message <simpleMessage>
+    Message
       New names:
       a b -> a.b
 
@@ -82,7 +82,7 @@
 
     Code
       names <- tidy_names(c("a b", "c"), syntactic = TRUE)
-    Message <simpleMessage>
+    Message
       New names:
       a b -> a.b
 
