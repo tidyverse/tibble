@@ -5,7 +5,7 @@
     Condition
       Error:
       ! Column name `cyl` must not be duplicated.
-      Caused by error in `repaired_names()`:
+      Caused by error in `stop_vctrs()`:
       ! Names must be unique.
       x These names are duplicated:
         * "cyl" at locations 2 and 12.
@@ -14,7 +14,7 @@
     Condition
       Error:
       ! Column name `Volume` must not be duplicated.
-      Caused by error in `repaired_names()`:
+      Caused by error in `stop_vctrs()`:
       ! Names must be unique.
       x These names are duplicated:
         * "Volume" at locations 3 and 4.
