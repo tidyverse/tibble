@@ -28,7 +28,7 @@
     Code
       tribble(~b, 1, "a")
     Condition
-      Error:
+      Error in `stop_vctrs()`:
       ! Can't create column `b`: Can't combine `..1` <double> and `..2` <character>.
     Code
       frame_matrix(1)
