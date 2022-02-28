@@ -55,44 +55,35 @@ reference:
   - lst
   - contains("matrix")
 
-navbar:
-  title: ~
-  type: default
-  left:
-  - text: Intro
-    href: articles/tibble.html
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: Data types
-      href: articles/types.html
-    - text: Comparing behavior with data frames
-      href: articles/invariants.html
-    - text: Controlling display of numbers
-      href: articles/numbers.html
-    - text: Comparing display with data frames
-      href: articles/digits.html
-  - text: News
-    menu:
-    - text: "Release notes"
-    - text: "Version 3.0.0"
-      href: https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/
-    - text: "Version 2.1.1"
-      href: https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/
-    - text: "Version 2.0.1"
-      href: https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/
-    - text: "Version 2.0.0 pre-announcement"
-      href: https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/
-    - text: "Version 1.4.2"
-      href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/
-    - text: "Version 1.4.1"
-      href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/
-    - text: "Changelog"
-      href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/tidyverse/tibble
+articles:
+- title: Basics
+  navbar: ~
+  contents:
+  - types
+  - numbers
+  - digits
+
+- title: Developer
+  navbar: Developer
+  contents:
+  - extending
+  - invariants
+  - formats
+
+news:
+  releases:
+  - text: "Version 3.0.0"
+    href: https://www.tidyverse.org/blog/2020/04/tibble-3-0-0/
+  - text: "Version 2.1.1"
+    href: https://www.tidyverse.org/articles/2019/03/tibble-2.1.1/
+  - text: "Version 2.0.1"
+    href: https://www.tidyverse.org/articles/2019/01/tibble-2.0.1/
+  - text: "Version 2.0.0 pre-announcement"
+    href: https://www.tidyverse.org/articles/2018/11/tibble-2.0.0-pre-announce/
+  - text: "Version 1.4.2"
+    href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/
+  - text: "Version 1.4.1"
+    href: https://www.tidyverse.org/articles/2018/01/tibble-1-4-1/
 
 development:
   mode: auto

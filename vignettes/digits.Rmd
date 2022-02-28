@@ -1,8 +1,8 @@
 ---
-title: "Comparison with data frames"
+title: "Comparing display with data frames"
 output: html_vignette
 vignette: >
-  %\VignetteIndexEntry{Comparison with data frames}
+  %\VignetteIndexEntry{Comparing display with data frames}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
