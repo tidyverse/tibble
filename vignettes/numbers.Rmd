@@ -10,8 +10,10 @@ vignette: >
 ```{r setup, include = FALSE}
 library(tibble)
 set.seed(1014)
-
-tibble:::set_fansi_hooks()
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 Tibbles print numbers with three significant digits by default, switching to scientific notation if the available space is too small.
