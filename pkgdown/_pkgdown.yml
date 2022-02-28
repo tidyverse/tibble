@@ -2,13 +2,13 @@ url: https://tibble.tidyverse.org
 
 template:
   package: tidytemplate
-  params:
-    docsearch:
-      api_key: 24f802ea87b9d1054ef63db70ff7c836
-      index_name: tibble
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script defer data-domain="tibble.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 home:
-  strip_header: true
   links:
   - text: Learn more
     href: https://r4ds.had.co.nz/tibbles.html
