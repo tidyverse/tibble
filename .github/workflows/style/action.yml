@@ -1,0 +1,61 @@
+name: 'Action to auto-style a package'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check styler options
+      id: check
+      run: |
+        set -x
+        scope=$( ( grep Config/autostyle/scope DESCRIPTION || true ) | cut -d " " -f 2)
+        strict=$( ( grep Config/autostyle/strict DESCRIPTION || true ) | cut -d " " -f 2)
+        echo ::set-output name=scope::$scope
+        echo ::set-output name=strict::$strict
+      shell: bash
+
+    - uses: actions/cache@v2
+      if: ${{ steps.check.outputs.scope }}
+      with:
+        path: |
+          ~/.cache/R/R.cache
+        key: ${{ runner.os }}-2-${{ github.run_id }}-
+        restore-keys: |
+          ${{ runner.os }}-2-
+
+    - name: Show cache
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        ls -l ~/.cache/R/R.cache
+        ls -l ~/.cache/R/R.cache/styler
+        gdu -s --inodes ~/.cache/R/R.cache/styler/* || du -s --inodes ~/.cache/R/R.cache/styler/*
+      shell: bash
+
+    - name: Imprint run ID
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        touch ~/.cache/R/R.cache/${{ github.run_id }}
+      shell: bash
+
+    - name: Enable styler cache
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        styler::cache_activate(verbose = TRUE)
+      shell: Rscript {0}
+
+    - name: Run styler
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        strict <- as.logical("${{ steps.check.outputs.strict }}")
+        if (is.na(strict)) {
+          strict = FALSE
+        }
+        styler::style_pkg(scope = "${{ steps.check.outputs.scope }}", strict = strict)
+      shell: Rscript {0}
+
+    - name: Show cache again
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        ls -l ~/.cache/R/R.cache
+        ls -l ~/.cache/R/R.cache/styler
+        gdu -s --inodes ~/.cache/R/R.cache/styler/* || du -s --inodes ~/.cache/R/R.cache/styler/*
+      shell: bash

@@ -26,7 +26,7 @@ jobs:
         shell: bash
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "roxygen2"))
+          install.packages(c("remotes", "roxygen2"), type = "binary")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Document
@@ -65,7 +65,7 @@ jobs:
         shell: bash
       - name: Install dependencies
         run: |
-          install.packages("styler")
+          install.packages(c("styler", "roxygen2"), type = "binary")
         shell: Rscript {0}
       - name: Style
         run: |

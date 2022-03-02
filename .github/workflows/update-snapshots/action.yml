@@ -1,0 +1,81 @@
+name: "Action to create pull requests for updated testthat snapshots"
+description: >
+  This action will run `testthat::test_local()` for tests that seem to use snapshots,
+  this is determined by reading and grepping the test files.
+  If the tests are failing, snapshots are updated, and a pull request is opened.
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run tests on test files that use snapshots
+      id: run-tests
+      run: |
+        ## -- Run tests on test files that use snapshots --
+        rx <- "^test-(.*)[.][rR]$"
+        files <- dir("tests/testthat", pattern = rx)
+        has_snapshot <- vapply(files, function(.x) any(grepl("snapshot", readLines(file.path("tests/testthat", .x)), fixed = TRUE)), logical(1))
+        if (any(has_snapshot)) {
+          patterns <- gsub(rx, "^\\1$", files[has_snapshot])
+          pattern <- paste0(patterns, collapse = "|")
+          tryCatch(
+            {
+              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
+              failures <- result[result$failed + result$warning > 0, ]
+              if (nrow(failures) > 0) {
+                writeLines("Snapshot tests failed/warned.")
+                print(failures[names(failures) != "result"])
+                print(failures$result)
+                testthat::snapshot_accept()
+                writeLines("::set-output name=changed::true")
+              } else {
+                writeLines("Snapshot tests ran successfully.")
+              }
+            },
+            error = print
+          )
+        } else {
+          writeLines("No snapshots found.")
+        }
+      shell: Rscript {0}
+
+    - name: Add snapshots to Git
+      if: ${{ steps.run-tests.outputs.changed }}
+      run: |
+        ## -- Add snapshots to Git --
+        mkdir -p tests/testthat/_snaps
+        git add -- tests/testthat/_snaps
+      shell: bash
+
+    - name: Check changed files
+      if: ${{ steps.run-tests.outputs.changed }}
+      id: check-changed
+      run: |
+        echo "::set-output name=changed::$(git status --porcelain -- tests/testthat/_snaps)"
+      shell: bash
+
+    - name: Derive branch name
+      if: ${{ steps.check-changed.outputs.changed }}
+      id: matrix-desc
+      run: |
+        config=$(echo '${{ toJSON(matrix) }}' | jq -c .)
+        echo "::set-output name=text::$(echo ${config})"
+        echo "::set-output name=branch::$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
+      shell: bash
+
+    - name: Create pull request
+      if: ${{ steps.check-changed.outputs.changed }}
+      id: cpr
+      uses: peter-evans/create-pull-request@v3
+      with:
+        base: ${{ github.head_ref }}
+        branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
+        delete-branch: true
+        title: Snapshot updates for ${{ github.job }} (${{ steps.matrix-desc.outputs.text }})
+        add-paths: |
+          tests/testthat/_snaps
+
+    - name: Fail if pull request created
+      if: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        false
+      shell: bash

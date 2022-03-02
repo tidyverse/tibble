@@ -75,3 +75,6 @@ RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: subsetting, as_tibble, add, invariants
+Config/autostyle/scope: line_breaks
+Config/autostyle/strict: true
+Config/Needs/website: tidyverse/tidytemplate

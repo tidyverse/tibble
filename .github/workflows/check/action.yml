@@ -1,0 +1,38 @@
+name: 'Actions to check an R package'
+inputs:
+  results:
+    description: Slug for check results
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: r-lib/actions/check-r-package@v2
+      with:
+        error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
+
+    - name: Run coverage check
+      if: ${{ matrix.config.covr }}
+      run: |
+        if (dir.exists("tests/testthat")) {
+          covr::codecov()
+        } else {
+          message("No tests found, coverage not tested.")
+        }
+      shell: Rscript {0}
+
+    - name: Show test output
+      if: always()
+      run: |
+        ## -- Show test output --
+        echo "::group::Test output"
+        find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+        echo "::endgroup::"
+      shell: bash
+
+    - name: Upload check results
+      if: failure()
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ inputs.results }}-results
+        path: check

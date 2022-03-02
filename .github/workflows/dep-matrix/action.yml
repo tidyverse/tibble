@@ -1,0 +1,134 @@
+name: 'Actions to compute a matrix with all dependent packages'
+outputs:
+  matrix:
+    description: "Generated matrix"
+    value: ${{ steps.set-matrix.outputs.matrix }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: set-matrix
+      run: |
+        # Determine package dependencies
+        # From remotes
+        read_dcf <- function(path) {
+          fields <- colnames(read.dcf(path))
+          as.list(read.dcf(path, keep.white = fields)[1, ])
+        }
+
+        re_match <- function(text, pattern, perl = TRUE, ...) {
+
+          stopifnot(is.character(pattern), length(pattern) == 1, !is.na(pattern))
+          text <- as.character(text)
+
+          match <- regexpr(pattern, text, perl = perl, ...)
+
+          start  <- as.vector(match)
+          length <- attr(match, "match.length")
+          end    <- start + length - 1L
+
+          matchstr <- substring(text, start, end)
+          matchstr[ start == -1 ] <- NA_character_
+
+          res <- data.frame(
+            stringsAsFactors = FALSE,
+            .text = text,
+            .match = matchstr
+          )
+
+          if (!is.null(attr(match, "capture.start"))) {
+
+            gstart  <- attr(match, "capture.start")
+            glength <- attr(match, "capture.length")
+            gend    <- gstart + glength - 1L
+
+            groupstr <- substring(text, gstart, gend)
+            groupstr[ gstart == -1 ] <- NA_character_
+            dim(groupstr) <- dim(gstart)
+
+            res <- cbind(groupstr, res, stringsAsFactors = FALSE)
+          }
+
+          names(res) <- c(attr(match, "capture.names"), ".text", ".match")
+          class(res) <- c("tbl_df", "tbl", class(res))
+          res
+        }
+
+        dev_split_ref <- function(x) {
+          re_match(x, "^(?<pkg>[^@#]+)(?<ref>[@#].*)?$")
+        }
+
+        has_dev_dep <- function(package) {
+          cran_url <- "https://cloud.r-project.org"
+
+          refs <- dev_split_ref(package)
+          url <- file.path(cran_url, "web", "packages", refs[["pkg"]], "DESCRIPTION")
+
+          f <- tempfile()
+          on.exit(unlink(f))
+
+          utils::download.file(url, f)
+          desc <- read_dcf(f)
+
+          url_fields <- c(desc$URL, desc$BugReports)
+
+          if (length(url_fields) == 0) {
+            return(FALSE)
+          }
+
+          pkg_urls <- unlist(strsplit(url_fields, "[[:space:]]*,[[:space:]]*"))
+
+          # Remove trailing "/issues" from the BugReports URL
+          pkg_urls <- sub("/issues$", "", pkg_urls)
+
+          valid_domains <- c("github[.]com", "gitlab[.]com", "bitbucket[.]org")
+
+          parts <-
+            re_match(pkg_urls,
+              sprintf("^https?://(?<domain>%s)/(?<username>%s)/(?<repo>%s)(?:/(?<subdir>%s))?",
+                domain = paste0(valid_domains, collapse = "|"),
+                username = "[^/]+",
+                repo = "[^/@#]+",
+                subdir = "[^/@$ ]+"
+              )
+            )[c("domain", "username", "repo", "subdir")]
+
+          # Remove cases which don't match and duplicates
+
+          parts <- unique(stats::na.omit(parts))
+
+          nrow(parts) == 1
+        }
+
+        if (!requireNamespace("desc", quietly = TRUE)) {
+          install.packages("desc")
+        }
+
+        deps_df <- desc::desc_get_deps()
+        deps_df <- deps_df[deps_df$type %in% c("Depends", "Imports", "LinkingTo", "Suggests"), ]
+
+        packages <- sort(deps_df$package)
+        packages <- intersect(packages, rownames(available.packages()))
+
+        valid_dev_dep <- vapply(packages, has_dev_dep, logical(1))
+
+        # https://github.com/r-lib/remotes/issues/576
+        valid_dev_dep[packages %in% c("igraph", "duckdb", "logging")] <- FALSE
+
+        deps <- packages[valid_dev_dep]
+        if (any(!valid_dev_dep)) {
+          msg <- paste0(
+            "Could not determine development repository for packages: ",
+            paste(packages[!valid_dev_dep], collapse = ", ")
+          )
+          writeLines(paste0("::warning::", msg))
+        }
+
+        json <- paste0(
+          '{"package":[',
+          paste0('"', deps, '"', collapse = ","),
+          ']}'
+        )
+        writeLines(json)
+        writeLines(paste0("::set-output name=matrix::", json))
+      shell: Rscript {0}
