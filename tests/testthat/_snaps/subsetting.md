@@ -363,13 +363,13 @@
       # # $.tbl_df and partial matching/invalid columns
       foo <- tibble(data = 1:10)
       foo$d
-    Warning <warning>
+    Warning <rlang_warning>
       Unknown or uninitialised column: `d`.
     Output
       NULL
     Code
       foo$e
-    Warning <warning>
+    Warning <rlang_warning>
       Unknown or uninitialised column: `e`.
     Output
       NULL
@@ -459,6 +459,26 @@
     Error <tibble_error_assign_rows_non_na_only>
       Can't use NA as row index in a tibble for assignment.
     Code
+      # # [<-.tbl_df and logical indexes
+      df <- tibble(x = 1:2, y = x)
+      df[FALSE] <- 1
+      df
+    Output
+      # A tibble: 2 x 2
+            x     y
+        <int> <int>
+      1     1     1
+      2     2     2
+    Code
+      df[, TRUE] <- 2
+      df
+    Output
+      # A tibble: 2 x 2
+            x     y
+        <dbl> <dbl>
+      1     2     2
+      2     2     2
+    Code
       # # [<-.tbl_df throws an error with bad RHS
       df <- tibble(x = 1:2, y = x)
       df[] <- mean
@@ -526,6 +546,78 @@
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
     Code
+      df[1, ] <- list(a = 1:3, b = 1)
+    Error <vctrs_error_incompatible_size>
+      Can't recycle input of size 2 to size 3.
+    Code
+      df[1, ] <- list(a = 1, b = 1:3)
+    Error <vctrs_error_incompatible_size>
+      Can't recycle input of size 2 to size 3.
+    Code
+      df[1:2, ] <- list(a = 1:3, b = 1)
+    Error <vctrs_error_incompatible_size>
+      Can't recycle input of size 2 to size 3.
+    Code
+      df[1:2, ] <- list(a = 1, b = 1:3)
+    Error <vctrs_error_incompatible_size>
+      Can't recycle input of size 2 to size 3.
+    Code
+      df[1, 1:2] <- list(a = 1:3, b = 1)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
+    Code
+      df[1, 1:2] <- list(a = 1, b = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
+    Code
+      df[1:2, 1:2] <- list(a = 1:3, b = 1)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
+    Code
+      df[1:2, 1:2] <- list(a = 1, b = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
+    Code
+      df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
+    Code
+      df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
+    Code
+      df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
+    Code
+      df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
+    Error <tibble_error_assign_incompatible_size>
+      Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
+    Code
       # # [<-.tbl_df and coercion
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
       df[1:3, 1:2] <- df[2:3]
@@ -557,13 +649,66 @@
       `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # [<-.tbl_df and overwriting NA
-      df <- tibble(x = rep(NA, 3))
+      df <- tibble(x = rep(NA, 3), z = matrix(NA, ncol = 2, dimnames = list(NULL, c(
+        "a", "b"))))
       df[1, "x"] <- 5
-    Error <tibble_error_assign_incompatible_type>
-      Assigned data `5` must be compatible with existing data.
-      i Error occurred for column `x`.
-      x Can't convert from <double> to <logical> due to loss of precision.
-      * Locations: 1.
+      df[1, "z"] <- 5
+      df
+    Output
+      # A tibble: 3 x 2
+            x z[,"a"] [,"b"]
+        <dbl>   <dbl>  <dbl>
+      1     5       5      5
+      2    NA      NA     NA
+      3    NA      NA     NA
+    Code
+      # # [<-.tbl_df and overwriting with NA
+      df <- tibble(a = TRUE, b = 1L, c = sqrt(2), d = 0+3i + 1, e = "e", f = raw(1),
+      g = tibble(x = 1, y = 1), h = matrix(1:3, nrow = 1))
+      df[FALSE, "a"] <- NA
+      df[FALSE, "b"] <- NA
+      df[FALSE, "c"] <- NA
+      df[FALSE, "d"] <- NA
+      df[FALSE, "e"] <- NA
+      df[FALSE, "f"] <- NA
+      df[FALSE, "g"] <- NA
+      df[FALSE, "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 TRUE      1  1.41 1+3i  e     00        1     1     1     2     3
+    Code
+      df[integer(), "a"] <- NA
+      df[integer(), "b"] <- NA
+      df[integer(), "c"] <- NA
+      df[integer(), "d"] <- NA
+      df[integer(), "e"] <- NA
+      df[integer(), "f"] <- NA
+      df[integer(), "g"] <- NA
+      df[integer(), "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 TRUE      1  1.41 1+3i  e     00        1     1     1     2     3
+    Code
+      df[1, "a"] <- NA
+      df[1, "b"] <- NA
+      df[1, "c"] <- NA
+      df[1, "d"] <- NA
+      df[1, "e"] <- NA
+      df[1, "f"] <- NA
+      df[1, "g"] <- NA
+      df[1, "h"] <- NA
+      df
+    Output
+      # A tibble: 1 x 8
+        a         b     c d     e     f       g$x    $y h[,1]  [,2]  [,3]
+        <lgl> <int> <dbl> <cpl> <chr> <raw> <dbl> <dbl> <int> <int> <int>
+      1 NA       NA    NA NA    <NA>  00       NA    NA    NA    NA    NA
     Code
       # # [<-.tbl_df and matrix subsetting
       foo <- tibble(a = 1:3, b = letters[1:3])

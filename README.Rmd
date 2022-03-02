@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions)
-[![codecov](https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/tibble)
+[![codecov](https://app.codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
@@ -43,11 +43,17 @@ devtools::install_github("tidyverse/tibble")
 
 ## Usage
 
+```{r}
+library(tibble)
+```
+
 Create a tibble from an existing object with `as_tibble()`:
 
 ```{r}
-library(tibble)
-as_tibble(iris)
+data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
+data
+
+as_tibble(data)
 ```
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.

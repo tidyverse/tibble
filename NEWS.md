@@ -1,5 +1,72 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.6
+
+- `set_num_opts()` and `set_char_opts()` are reexported from pillar (#959).
+- `view()` uses `rlang::expr_deparse(width = Inf)` to avoid errors with long `|>` pipes (#957).
+- `new_tibble()` checks that the `nrow` argument is nonnegative and less than 2^31 (#916).
+- `tbl_sum.tbl_df()` has an ellipsis in its formals for extensibility.
+
+
+# tibble 3.1.5
+
+- Avoid necessity to set `"tibble.view_max"` option for lazy tables (#954).
+- Avoid blanket import for lifecycle package for compatibility with upcoming rlang (#955, @romainfrancois).
+
+
+# tibble 3.1.4
+
+## Features
+
+- `as.data.frame.tbl_df()` strips inner column names (#837).
+- `new_tibble()` allows omitting the `nrow` argument again (#781).
+
+## Documentation
+
+- Move `vignette("digits")`, `vignette("numbers")`, `?num` and `?char` from the pillar package here (#913).
+- Replace `iris` by `trees` (#943).
+- Various documentation improvements.
+- New `?tibble_options` help page (#912).
+
+## Performance
+
+- `x[i, j] <- one_row_value` avoids explicit recycling of the right-hand side, the recycling happens implicitly in `vctrs::vec_assign()` for performance (#922).
+
+## Internal
+
+- Vignettes are now tested with a snapshot test (#919).
+- `new_tibble()` uses `vctrs::new_data_frame()` internally (#726, @DavisVaughan).
+- Adapt to pillar 1.6.2.
+- Fix tests for compatibility with pillar 1.6.2.
+
+
+# tibble 3.1.3
+
+## Bug fixes
+
+- `tbl[row, col] <- rhs` treats an all-`NA` logical vector as a missing value both for existing data (#773) and for the right-hand side value (#868). This means that a column initialized with `NA` (of type `logical`) will change its type when a row is updated to a value of a different type. 
+- `[[<-()` supports symbols (#893).
+
+## Features
+
+- `as_tibble_row()` supports arbitrary vectors (#797).
+- `enframe()` and `deframe()` support arbitrary vectors (#730).
+- `tibble()` and `tibble_row()` ignore all columns that evaluate to `NULL`, not only those where a verbatim `NULL` is passed (#895, #900).
+- `new_tibble()` is now faster (#901, @mgirlich).
+
+## Internal
+
+- Establish compatibility with rlang > 0.4.11 (#908).
+- Use `pillar::dim_desc()` (#859).
+- Establish compatibility with testthat > 3.0.3 (#896, @lionel-).
+- Bump required versions of ellipsis and vctrs to avoid warning during package load.
+
+
+# tibble 3.1.2
+
+- Bump required versions of ellipsis and vctrs to avoid warning during package load.
+
+
 # tibble 3.1.1
 
 - `num()` and `char()` are reexported from pillar (#880).
@@ -162,7 +229,7 @@
 
 ## Breaking changes
 
-- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(iris)` now has five columns, use `tibble(iris = iris)` if the intention is to create a packed data frame (#581).
+- `tibble()` now splices anonymous data frames, `tibble(tibble(a = 1), b = a)` is equivalent to `tibble(a = 1, b = a)`. This means that `tibble(trees)` now has three columns, use `tibble(trees = trees)` if the intention is to create a packed data frame (#581).
 
 - The `name-repair` help topic is gone, refer to `?vctrs::vec_as_names` instead.
 

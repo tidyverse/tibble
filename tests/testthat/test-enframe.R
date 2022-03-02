@@ -60,10 +60,10 @@ test_that("can't use value = NULL", {
   )
 })
 
-test_that("can't pass objects with dimensions", {
+test_that("can't pass non-vector", {
   expect_tibble_error(
-    enframe(iris),
-    error_enframe_has_dim(iris)
+    enframe(lm(speed ~ ., cars)),
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
   )
 })
 
@@ -102,10 +102,27 @@ test_that("can deframe three-column data frame with warning", {
   )
 })
 
+
+# roundtrip----------------------------------------------------------------
+
+test_that("can roundtrip record", {
+  rcrd <- new_rcrd(data.frame(a = 1:3))
+  expect_identical(deframe(enframe(rcrd)), rcrd)
+  expect_identical(deframe(enframe(rcrd, name = NULL)), rcrd)
+  rcrd_named <- new_rcrd(data.frame(a = 1:3, row.names = letters[1:3]))
+  expect_identical(deframe(enframe(rcrd_named)), rcrd_named)
+})
+
+
+# output ------------------------------------------------------------------
+
+
 test_that("output test", {
   expect_snapshot_with_error({
     enframe(1:3, value = NULL)
 
-    enframe(Titanic)
+    nrow(enframe(Titanic))
+    vec_names(enframe(Titanic)$value)
+    enframe(Titanic)$value
   })
 })

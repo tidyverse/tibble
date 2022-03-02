@@ -13,83 +13,53 @@
       #   am <dbl>, gear <dbl>,
       #   carb <dbl>
     Code
-      print_without_body(as_tibble(iris), n = 5L, width = 30L)
+      print_without_body(as_tibble(trees), n = 5L, width = 30L)
     Output
-      # A tibble: 150 x 5
+      # A tibble: 31 x 3
       <body created by pillar>
-      # ... with 145 more rows, and
-      #   3 more variables:
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
+      # ... with 26 more rows
     Code
-      print_without_body(as_tibble(iris), n = -1L, width = 30L)
+      print_without_body(as_tibble(trees), n = -1L, width = 30L)
     Output
-      # A tibble: 150 x 5
+      # A tibble: 31 x 3
       <body created by pillar>
-      # ... with 140 more rows, and
-      #   3 more variables:
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
+      # ... with 21 more rows
     Code
-      print_without_body(as_tibble(iris), n = Inf, width = 30L)
+      print_without_body(as_tibble(trees), n = Inf, width = 15L)
     Output
-      # A tibble: 150 x 5
+      # A tibble: 31
+      #   x 3
       <body created by pillar>
-      # ... with 3 more variables:
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
-    Code
-      print_without_body(as_tibble(iris), n = 3L, width = 5L)
-    Output
-      # A
-      #   tibble:
-      #   150
-      #   x
-      #   5
-      <body created by pillar>
-      # ...
-      #   with
-      #   147
+      # ... with 1
       #   more
-      #   rows,
-      #   and
-      #   5
-      #   more
-      #   variables:
-      #   Sepal.Length <dbl>,
-      #   Sepal.Width <dbl>,
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
+      #   variable:
+      #   Volume <dbl>
     Code
-      print_without_body(as_tibble(iris), n = NULL, width = 70L)
+      print_without_body(as_tibble(trees), n = NULL, width = 70L)
     Output
-      # A tibble: 150 x 5
+      # A tibble: 31 x 3
       <body created by pillar>
-      # ... with 140 more rows
+      # ... with 21 more rows
     Code
-      print_without_body(as_unknown_rows(iris), n = 10, width = 70L)
+      print_without_body(as_unknown_rows(trees), n = 10, width = 70L)
     Output
-      # A tibble: ?? x 5
+      # A tibble: ?? x 3
       <body created by pillar>
       # ... with more rows
     Code
-      print_without_body(as_unknown_rows(iris[1:9, ]), n = 10, width = 70L)
+      print_without_body(as_unknown_rows(trees[1:9, ]), n = 10, width = 70L)
     Output
-      # A tibble: ?? x 5
+      # A tibble: ?? x 3
       <body created by pillar>
     Code
-      print_without_body(as_unknown_rows(iris[1:10, ]), n = 10, width = 70L)
+      print_without_body(as_unknown_rows(trees[1:10, ]), n = 10, width = 70L)
     Output
-      # A tibble: ?? x 5
+      # A tibble: ?? x 3
       <body created by pillar>
     Code
-      print_without_body(as_unknown_rows(iris[1:11, ]), n = 10, width = 70L)
+      print_without_body(as_unknown_rows(trees[1:11, ]), n = 10, width = 70L)
     Output
-      # A tibble: ?? x 5
+      # A tibble: ?? x 3
       <body created by pillar>
       # ... with more rows
     Code
@@ -120,23 +90,21 @@
       # ... with 2 variables:
       #   a <chr>, b <lgl>
     Code
-      print_without_body(as_tibble(iris)[character()], n = 5L, width = 30L)
+      print_without_body(as_tibble(trees)[character()], n = 5L, width = 30L)
     Output
-      # A tibble: 150 x 0
+      # A tibble: 31 x 0
       <body created by pillar>
     Code
-      print_without_body(as_unknown_rows(iris[integer(), ]), n = 5L, width = 30L)
+      print_without_body(as_unknown_rows(trees[integer(), ]), n = 5L, width = 30L)
     Output
-      # A tibble: ?? x 5
+      # A tibble: ?? x 3
       <body created by pillar>
-      # ... with 5 variables:
-      #   Sepal.Length <dbl>,
-      #   Sepal.Width <dbl>,
-      #   Petal.Length <dbl>,
-      #   Petal.Width <dbl>,
-      #   Species <fct>
+      # ... with 3 variables:
+      #   Girth <dbl>,
+      #   Height <dbl>,
+      #   Volume <dbl>
     Code
-      print_without_body(as_unknown_rows(iris[, character()]), n = 5L, width = 30L)
+      print_without_body(as_unknown_rows(trees[, character()]), n = 5L, width = 30L)
     Output
       # A tibble: ?? x 0
       <body created by pillar>

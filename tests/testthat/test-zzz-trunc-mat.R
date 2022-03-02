@@ -1,6 +1,8 @@
 scoped_lifecycle_silence()
 
 test_that("interface of print() identical to trunc_mat()", {
+  skip_enh_print_tbl_args()
+
   if (utils::packageVersion("pillar") >= "1.4.99") {
     print_arg_names <- names(formals(pillar:::print.tbl))
   } else {
@@ -46,11 +48,6 @@ test_that("trunc_mat output matches known output", {
   expect_output_file_rel(
     print_without_body(as_tibble(iris), n = Inf, width = 30L),
     "trunc_mat/iris-inf-30.txt"
-  )
-
-  expect_output_file_rel(
-    print_without_body(as_tibble(iris), n = 3L, width = 5L),
-    "trunc_mat/iris-3-5.txt"
   )
 
   expect_output_file_rel(

@@ -7,6 +7,8 @@ test_that("aborting with class", {
 })
 
 test_that("output test", {
+  skip_if_not_installed("rlang", "0.99.0.9000")
+
   expect_snapshot({
     "# add"
     error_add_rows_to_grouped_df()
@@ -30,7 +32,7 @@ test_that("output test", {
     error_column_scalar_type(letters[2:3], 3:4, c("name", "NULL"))
     error_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters))
 
-    error_as_tibble_row_bare(new_environment())
+    error_as_tibble_row_vector(new_environment())
     error_as_tibble_row_size_one(3, "foo", 7)
 
     "# class-tbl_df"
@@ -40,8 +42,7 @@ test_that("output test", {
 
     "#enframe"
     error_enframe_value_null()
-
-    error_enframe_has_dim(Titanic)
+    error_enframe_must_be_vector(lm(speed ~ ., cars))
 
     "# names"
     error_column_names_cannot_be_empty(1, repair_hint = TRUE)
@@ -59,8 +60,7 @@ test_that("output test", {
 
     "# new"
     error_new_tibble_must_be_list()
-
-    error_new_tibble_needs_nrow()
+    error_new_tibble_nrow_must_be_nonnegative()
 
     "# rownames"
     error_already_has_rownames()

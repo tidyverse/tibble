@@ -161,9 +161,11 @@ test_that("as_tibble() makes names `minimal`, even if not fixing names", {
 })
 
 test_that("as_tibble() implements unique names", {
-  expect_snapshot(
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
+  expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "unique")
-  )
+  })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(
@@ -173,9 +175,11 @@ test_that("as_tibble() implements unique names", {
 })
 
 test_that("as_tibble() implements universal names", {
-  expect_snapshot(
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
+  expect_snapshot({
     invalid_df <- as_tibble(list(3, 4, 5), .name_repair = "universal")
-  )
+  })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
   expect_equal(
@@ -204,17 +208,21 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  expect_identical(
-    expect_warning(as_tibble(diag(3), validate = TRUE)),
-    tibble(
-      V1 = c(1, 0, 0),
-      V2 = c(0, 1, 0),
-      V3 = c(0, 0, 1)
+  expect_warning(
+    expect_identical(
+      as_tibble(diag(3), validate = TRUE),
+      tibble(
+        V1 = c(1, 0, 0),
+        V2 = c(0, 1, 0),
+        V3 = c(0, 0, 1)
+      )
     )
   )
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   scoped_lifecycle_warnings()
 
   x <- matrix(1:6, nrow = 3)
@@ -246,6 +254,8 @@ test_that("as_tibble.matrix() supports .name_repair", {
 })
 
 test_that("as_tibble.poly() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- poly(1:6, 3)
 
   expect_identical(
@@ -263,6 +273,8 @@ test_that("as_tibble.poly() supports .name_repair", {
 })
 
 test_that("as_tibble.table() supports .name_repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   expect_snapshot(error = TRUE, {
     as_tibble(table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5)))
     as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
@@ -306,6 +318,8 @@ test_that("as_tibble.table() supports .name_repair", {
 })
 
 test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
 
   expect_identical(
@@ -381,12 +395,12 @@ test_that("as_tibble() converts implicit row names when `rownames =` is passed",
   )
 })
 
-test_that("as_data_frame is an alias of as_tibble", {
+test_that("as_data_frame() is an alias of as_tibble()", {
   scoped_lifecycle_silence()
   expect_identical(as_data_frame(NULL), as_tibble(NULL))
 })
 
-test_that("as.tibble is an alias of as_tibble", {
+test_that("as.tibble() is an alias of as_tibble()", {
   scoped_lifecycle_silence()
   expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
@@ -414,18 +428,41 @@ test_that("as_tibble_row() can convert named bare vectors to data frame", {
   )
 })
 
-test_that("as_tibbe_row() fails with non-bare vectors (#739)", {
+test_that("as_tibble_row() works with non-bare vectors (#797)", {
   expect_tibble_error(
-    as_tibble_row(Sys.time()),
-    error_as_tibble_row_bare(Sys.time())
+    as_tibble_row(new_environment()),
+    error_as_tibble_row_vector(new_environment())
   )
-  expect_tibble_error(
-    as_tibble_row(iris),
-    error_as_tibble_row_bare(iris)
+
+  time <- vec_slice(Sys.time(), 1)
+  expect_identical(
+    as_tibble_row(time, .name_repair = "unique"),
+    tibble(...1 = time)
   )
-  expect_tibble_error(
+  expect_identical(
+    as_tibble_row(trees[1:3, ], .name_repair = "unique"),
+    tibble(
+      ...1 = remove_rownames(trees[1, ]),
+      ...2 = remove_rownames(trees[2, ]),
+      ...3 = remove_rownames(trees[3, ])
+    )
+  )
+
+  remove_first_dimname <- function(x) {
+    dn <- dimnames(x)
+    dn[1] <- list(NULL)
+    dimnames(x) <- dn
+    x
+  }
+
+  expect_identical(
     as_tibble_row(Titanic),
-    error_as_tibble_row_bare(Titanic)
+    tibble(
+      "1st" = remove_first_dimname(Titanic[1,,,, drop = FALSE]),
+      "2nd" = remove_first_dimname(Titanic[2,,,, drop = FALSE]),
+      "3rd" = remove_first_dimname(Titanic[3,,,, drop = FALSE]),
+      Crew  = remove_first_dimname(Titanic[4,,,, drop = FALSE])
+    )
   )
 })
 
@@ -593,6 +630,8 @@ test_that("supports compat col names", {
 })
 
 test_that("creates col names with name repair", {
+  skip_if_not_installed("vctrs", "0.3.8.9001")
+
   x <- matrix(1:4, nrow = 2)
 
   expect_snapshot(
@@ -702,6 +741,7 @@ test_that("converting from matrix uses implicit row names when `rownames =` is p
 })
 
 test_that("output test", {
+  skip_if_not_installed("rlang", "0.99.0.9000")
   expect_snapshot_with_error({
     as_tibble(list(1))
     as_tibble(list(1, 2))

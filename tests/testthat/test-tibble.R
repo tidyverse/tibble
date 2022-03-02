@@ -13,6 +13,11 @@ test_that("NULL is ignored (#580)", {
   expect_identical(tibble(b = 1, NULL, c = 2:3), tibble(b = 1, c = 2:3))
 })
 
+test_that("NULL is ignored when passed by value (#895, #900)", {
+  expect_identical(tibble(a = c()), tibble(a = NULL))
+  expect_identical(tibble(a = c(), a = 1), tibble(a = 1))
+})
+
 test_that("bogus columns raise an error", {
   expect_tibble_error(
     tibble(a = new.env()),
@@ -172,8 +177,8 @@ test_that("auto-splicing anonymous tibbles (#581)", {
 
 test_that("can coerce list data.frame or array (#416)", {
   expect_identical(
-    as_tibble(list(x = iris)),
-    new_tibble(list(x = iris), nrow = nrow(iris))
+    as_tibble(list(x = trees)),
+    new_tibble(list(x = trees), nrow = nrow(trees))
   )
   expect_identical(
     as_tibble(list(x = diag(5))),
@@ -209,21 +214,21 @@ test_that("package_version is a vector (#690)", {
 # tibble_row() ------------------------------------------------------------
 
 test_that("returns a single row (#416)", {
-  model <- lm(Petal.Width ~ Petal.Length + Species, data = iris)
+  model <- lm(Height ~ Girth + Volume, data = trees)
   expect_identical(
     tibble_row(a = 1, b = vctrs::list_of(2:3), lm = model),
     tibble(a = 1, b = vctrs::list_of(2:3), lm = list(model))
   )
   expect_equal(
-    tibble_row(iris[1, ]),
-    tibble(iris[1, ])
+    tibble_row(trees[1, ]),
+    tibble(trees[1, ])
   )
   expect_tibble_error(
     tibble_row(a = 1, b = 2:3),
     error_tibble_row_size_one(2, "b", 2)
   )
   expect_tibble_error(
-    tibble_row(iris[2:3, ]),
+    tibble_row(trees[2:3, ]),
     error_tibble_row_size_one(1, "", 2)
   )
 })
@@ -231,15 +236,15 @@ test_that("returns a single row (#416)", {
 # is_tibble ---------------------------------------------------------------
 
 test_that("is_tibble", {
-  expect_false(is_tibble(iris))
-  expect_true(is_tibble(as_tibble(iris)))
+  expect_false(is_tibble(trees))
+  expect_true(is_tibble(as_tibble(trees)))
   expect_false(is_tibble(NULL))
   expect_false(is_tibble(0))
 })
 
 test_that("is_tibble", {
   scoped_lifecycle_silence()
-  expect_identical(is.tibble(iris), is_tibble(iris))
+  expect_identical(is.tibble(trees), is_tibble(trees))
 })
 
 test_that("output test", {

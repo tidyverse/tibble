@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 library(dplyr)
 library(tidyr)
 library(purrr)
+requireNamespace("hms", quietly = TRUE)
 ```
 
 ```{r setup}
@@ -142,6 +143,6 @@ The column header is obtained by calling `pillar::type_sum()` on the column.
 This is an S3 method that can be overridden,
 but most of the time it is more useful to override `vctrs::vec_ptype_abbr()`:
 
-```{r type_sum_default}
+```{r type_sum_default, results = if (Sys.getenv("IN_GALLEY") != "") "hide" else "markup"}
 pillar:::type_sum.default
 ```

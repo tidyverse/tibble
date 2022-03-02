@@ -85,6 +85,11 @@ skip_enh_tibble_null <- function() {
   skip_legacy()
 }
 
+skip_enh_new_tibble_nrow_null <- function() {
+  # ENH: new_tibble(nrow = NULL), #781
+  skip_legacy()
+}
+
 skip_enh_empty_tribble_unspecified <- function() {
   # ENH: zero-row tribbles create unspecified columns
   skip_legacy()
@@ -97,6 +102,16 @@ skip_enh_as_tibble_retired <- function() {
 
 skip_enh_bullets_format <- function() {
   # ENH: new bullets format
+  skip_legacy()
+}
+
+skip_enh_enframe_vector <- function() {
+  # ENH: enframe() supports all vectors (#730)
+  skip_legacy()
+}
+
+skip_enh_print_tbl_args <- function() {
+  # ENH: print() and format() support more arguments
   skip_legacy()
 }
 

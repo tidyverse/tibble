@@ -209,14 +209,14 @@ error_tribble_named_after_tilde <- function() {
 }
 
 error_tribble_lhs_column_syntax <- function(lhs) {
-  tibble_error(bullets(
+  tibble_error(problems(
     "All column specifications must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   ))
 }
 
 error_tribble_rhs_column_syntax <- function(rhs) {
-  tibble_error(bullets(
+  tibble_error(problems(
     'All column specifications must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   ))
@@ -227,12 +227,12 @@ error_tribble_non_rectangular <- function(cols, cells) {
     "Data must be rectangular:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
-    i = paste0(cells, " is not an integer multiple of ", cols, ".")
+    info = paste0(cells, " is not an integer multiple of ", cols, ".")
   ))
 }
 
 error_frame_matrix_list <- function(pos) {
-  tibble_error(bullets(
+  tibble_error(problems(
     "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   ))

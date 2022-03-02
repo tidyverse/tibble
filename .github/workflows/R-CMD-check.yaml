@@ -16,7 +16,7 @@ on:
       - master
       - "r-*"
   schedule:
-    - cron:  '20 2 * * *'
+    - cron:  '10 0 * * *'
 
 name: rcc
 
@@ -31,6 +31,9 @@ jobs:
 
     strategy:
       fail-fast: false
+      # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
+      # Need to figure out how to smoke-test
+      max-parallel: 5
       matrix:
         config:
           - { os: macOS-latest,                 r: 'release' }
@@ -41,6 +44,10 @@ jobs:
           - { os: ubuntu-, os-version: 18.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
           - { os: ubuntu-, os-version: 18.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest" }
 
+          # Begin custom: R 3.6
+          - {os: ubuntu-, os-version: 18.04,   r: '3.6',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
+          # End custom: R 3.6
+
           # Begin custom: R 3.5
           - {os: ubuntu-, os-version: 18.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           # End custom: R 3.5
@@ -48,10 +55,6 @@ jobs:
           # Begin custom: R 3.4
           - {os: ubuntu-, os-version: 18.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           # End custom: R 3.4
-
-          # Begin custom: R 3.3
-          - {os: ubuntu-, os-version: 18.04,   r: '3.3',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
-          # End custom: R 3.3
 
           # Begin custom: matrix elements
           # End custom: matrix elements
@@ -71,6 +74,9 @@ jobs:
         shell: bash
 
       - uses: actions/checkout@v2
+
+      # Begin custom: before install
+      # End custom: before install
 
       - uses: r-lib/actions/setup-r@v1
         with:
@@ -97,19 +103,23 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-2-
+          key: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-3-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ matrix.config.os }}${{ matrix.config.os-version }}-${{ hashFiles('.github/R-version') }}-3-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
+          sudo apt-get update -y
           while read -r cmd
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "${{matrix.config.os-version}}"))')
 
-      # Begin custom: before install
-      # End custom: before install
+      - name: Add fake qpdf and checkbashisms
+        if: runner.os == 'Linux'
+        run: |
+          sudo ln -s $(which true) /usr/local/bin/qpdf
+          sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
       - name: Install dependencies
         run: |

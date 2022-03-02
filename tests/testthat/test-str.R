@@ -1,13 +1,11 @@
 test_that("output test", {
-  skip_if_not_installed("pillar", "1.6.0.9001")
-
   expect_snapshot({
     str(as_tibble(mtcars), width = 70L)
 
-    str(as_tibble(iris), width = 70L)
+    str(as_tibble(trees), width = 70L)
 
     "No columns"
-    str(as_tibble(iris[integer()]), width = 70L)
+    str(as_tibble(trees[integer()]), width = 70L)
 
     "Non-syntactic names"
     df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
@@ -30,16 +28,16 @@ test_that("output test", {
     "non-tibble"
     str(5)
 
-    iris2 <- as_unknown_rows(iris)
-    str(iris2, width = 70L)
+    trees2 <- as_unknown_rows(trees)
+    str(trees2, width = 70L)
 
-    Species <- unique(iris$Species)
-    data <- unname(split(iris, iris$Species))
-    nested_iris_df <- tibble(Species, data)
-    str(nested_iris_df, width = 70L)
+    Volume <- unique(trees$Volume)
+    data <- unname(split(trees, trees$Volume))
+    nested_trees_df <- tibble(Volume, data)
+    str(nested_trees_df, width = 70L)
 
     data <- map(data, as_tibble)
-    nested_iris_tbl <- tibble(Species, data)
-    str(nested_iris_tbl, width = 70L)
+    nested_trees_tbl <- tibble(Volume, data)
+    str(nested_trees_tbl, width = 70L)
   })
 })

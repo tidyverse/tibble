@@ -130,7 +130,8 @@ NULL
     if (is.null(x)) {
       x
     } else {
-      vectbl_strip_names(vec_slice(x, i))
+      # Drop inner names with double subscript
+      vectbl_set_names(vec_slice(x, i), NULL)
     }
   }
 }
@@ -161,24 +162,28 @@ NULL
     i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg, assign = TRUE)
   }
 
-  value <- list(value)
-
   if (is.object(j)) {
     j <- vectbl_as_col_subscript2(j, j_arg, assign = TRUE)
   }
 
   # Side effect: check scalar
-  if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
-    vectbl_as_col_location2(j, length(x) + 1L, j_arg = j_arg, assign = TRUE)
+  if (is.symbol(j)) {
+    # FIXME: as_utf8_character() needs rlang > 0.4.11
+    j <- chr_unserialise_unicode(as.character(j))
+  } else {
+    if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
+      vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
+    }
   }
 
-  j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+  j <- vectbl_as_new_col_index(j, x, j_arg)
 
   # New columns are added to the end, provide index to avoid matching column
   # names again
-  names(value) <- names(j)
+  value <- list(value)
 
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = j_arg, value_arg = value_arg)
+  # j is already pretty
+  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = NULL, value_arg = value_arg)
 }
 
 
@@ -226,10 +231,10 @@ NULL
   }
 
   # From here on, i, j and drop contain correct values:
-  xo <- x
-
-  if (!is.null(j)) {
-    j <- vectbl_as_col_location(j, length(xo), names(xo), j_arg = j_arg, assign = FALSE)
+  if (is.null(j)) {
+    xo <- x
+  } else {
+    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
@@ -415,11 +420,14 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     if (is.null(j)) {
       j <- seq_along(x)
+      names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+      j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
     }
 
-    value <- vectbl_recycle_rhs(value, fast_nrow(x), length(j), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_rows(value, fast_nrow(x), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_cols(value, length(j))
+
     xo <- tbl_subassign_col(x, j, value)
   } else if (is.null(i_arg)) {
     # x[NULL, ...] <- value
@@ -432,28 +440,24 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
     if (is.null(j)) {
-      value <- vectbl_recycle_rhs(value, length(i), length(x), i_arg, value_arg)
-      xo <- tbl_subassign_row(x, i, value, value_arg)
+      xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, x, value, j_arg, value_arg)
+        j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
       }
       new <- which(j > length(x))
-      value <- vectbl_recycle_rhs(value, length(i), length(j), i_arg, value_arg)
 
       # Fill up columns if necessary
       if (has_length(new)) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        names(init) <- coalesce2(names2(j)[new], names2(value)[new])
-
         x <- tbl_subassign_col(x, j[new], init)
       }
 
       xj <- .subset(x, j)
-      xj <- tbl_subassign_row(xj, i, value, value_arg)
+      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
       xo <- tbl_subassign_col(x, j, unclass(xj))
     }
   }
@@ -485,55 +489,74 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   }
 }
 
-vectbl_as_new_col_index <- function(j, x, value, j_arg, value_arg) {
+vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   # Creates a named index vector
   # Values: index
-  # Name: column name (for new columns)
+  # Name: column name (for all columns)
 
   if (is_bare_character(j)) {
     if (anyNA(j)) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    out <- match(j, names(x))
-    new <- which(is.na(out))
+    names <- j
+
+    j <- match(names, names(x))
+    new <- which(is.na(j))
     if (has_length(new)) {
-      out[new] <- seq.int(length(x) + 1L, length.out = length(new))
+      j[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
-    j <- set_names(out, j)
   } else if (is_bare_numeric(j)) {
     if (anyNA(j)) {
       cnd_signal(error_assign_columns_non_na_only())
     }
 
-    j <- numtbl_as_col_location_assign(j, ncol(x), j_arg = j_arg)
+    j <- numtbl_as_col_location_assign(j, length(x), j_arg = j_arg)
 
-    new <- which(j > ncol(x))
+    old <- (j <= length(x))
+    new <- which(!old)
     j_new <- j[new]
 
     # FIXME: Recycled names are not repaired
     # FIXME: Hard-coded name repair
-    names <- vectbl_recycle_rhs_names(names2(value), length(j), value_arg)
+    if (length(names) != 1L) {
+      # Side effect: check compatibility
+      vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    } else if (length(j) != 1L) {
+      # length(names) == 1
+      names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    }
 
     if (length(new) > 0) {
       j[new] <- j_new
       names[new][names[new] == ""] <- paste0("...", j_new)
     }
 
-    j <- set_names(j, names)
+    names[old] <- names(x)[ j[old] ]
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
 
     if (anyNA(j)) {
       cnd_signal(error_na_column_index(which(is.na(j))))
     }
+
+    if (length(names) != 1L) {
+      # Side effect: check compatibility
+      vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    } else if (length(j) != 1L) {
+      # length(names) == 1
+      names <- vec_recycle(names, length(j), x_arg = as_label(value_arg))
+    }
+
+    old <- (j <= length(x))
+    names[old] <- names(x)[ j[old] ]
   }
 
   if (anyDuplicated(j)) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
-  j
+  set_names(j, names)
 }
 
 numtbl_as_row_location_assign <- function(i, n, i_arg) {
@@ -597,7 +620,7 @@ tbl_subassign_col <- function(x, j, value) {
   new <- which(j > length(x))
   if (has_length(new)) {
     length(x) <- max(j[new])
-    names(x)[ j[new] ] <- coalesce2(names2(j)[new], names2(value)[new])
+    names(x)[ j[new] ] <- names2(j)[new]
   }
 
   # Update
@@ -612,12 +635,6 @@ tbl_subassign_col <- function(x, j, value) {
 
   # Restore
   set_tibble_class(x, nrow)
-}
-
-coalesce2 <- function(x, y) {
-  use_y <- which(is.na(x))
-  x[use_y] <- y[use_y]
-  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -638,19 +655,21 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, value_arg) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
   nrow <- fast_nrow(x)
   x <- unclass(x)
+  recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
     for (j in seq_along(x)) {
-      xj <- x[[j]]
-      vec_slice(xj, i) <- value[[j]]
-      x[[j]] <- xj
+      x[[j]] <- vectbl_assign(x[[j]], i, recycled_value[[j]])
     },
 
     vctrs_error = function(cnd) {
-      cnd_signal(error_assign_incompatible_type(x, value, j, value_arg, cnd_message(cnd)))
+      # Side effect: check if `value` can be recycled
+      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
+
+      cnd_signal(error_assign_incompatible_type(x, recycled_value, j, value_arg, cnd_message(cnd)))
     }
   )
 
@@ -661,16 +680,22 @@ fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
 
-vectbl_strip_names <- function(x) {
-  maybe_row_names <- is.data.frame(x) || is.array(x)
-
-  if (maybe_row_names) {
-    row.names(x) <- NULL
+vectbl_assign <- function(x, i, value) {
+  if (is.logical(value)) {
+    if (.Call("tibble_need_coerce", value)) {
+      value <- vec_slice(x, NA_integer_)
+    }
   } else {
-    names(x) <- NULL
+    if (.Call("tibble_need_coerce", x)) {
+      d <- dim(x)
+      dn <- dimnames(x)
+      x <- vec_slice(value, rep(NA_integer_, length(x)))
+      dim(x) <- d
+      dimnames(x) <- dn
+    }
   }
 
-  x
+  vec_assign(x, i, value)
 }
 
 vectbl_wrap_rhs_col <- function(value, value_arg) {
@@ -713,7 +738,12 @@ result_vectbl_wrap_rhs <- function(value) {
 }
 
 vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  if (length(value) > 0L && (nrow != 1L || vec_size(value[[1L]]) != 1L)) {
+  value <- vectbl_recycle_rhs_rows(value, nrow, i_arg, value_arg)
+  vectbl_recycle_rhs_cols(value, ncol)
+}
+
+vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
+  if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
         if (!is.null(value[[j]])) {
@@ -727,19 +757,16 @@ vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
     )
   }
 
+  value
+}
+
+vectbl_recycle_rhs_cols <- function(value, ncol) {
   if (length(value) != 1L || ncol != 1L) {
-    # Errors have been caught beforehand in vectbl_recycle_rhs_names()
+    # Errors have been caught beforehand in vectbl_as_new_col_index()
     value <- vec_recycle(value, ncol)
   }
 
   value
-}
-
-vectbl_recycle_rhs_names <- function(names, n, value_arg) {
-  if (n == 1L && length(names) == 1L) {
-    return(names)
-  }
-  unname(vec_recycle(set_names(names), n, x_arg = as_label(value_arg)))
 }
 
 # Dedicated functions for faster subsetting

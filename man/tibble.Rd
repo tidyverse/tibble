@@ -25,8 +25,9 @@ unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start
 Arguments are evaluated sequentially.
 You can refer to previously created elements directly or using the \link{.data}
 pronoun.
-An existing \code{.data} pronoun, provided e.g. inside \code{\link[dplyr:mutate]{dplyr::mutate()}},
-is not available.}
+To refer explicitly to objects in the calling environment, use \code{\link{!!}} or
+\link{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
+named \code{.data}.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
 just as an additional check.}
@@ -142,9 +143,9 @@ tibble(
   )
 )
 tibble(
-  a = 1:4,
-  b = diag(4),
-  c = cov(iris[1:4])
+  a = 1:3,
+  b = diag(3),
+  c = cor(trees)
 )
 
 # data can not contain POSIXlt columns, or tibbles or matrices
@@ -164,9 +165,17 @@ tibble(x = 1, y = !!x)
 # You can splice-unquote a list of quosures and expressions:
 tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
 
+# Use .data, .env and !! to refer explicitly to columns or outside objects
+a <- 1
+tibble(a = 2, b = a)
+tibble(a = 2, b = .data$a)
+tibble(a = 2, b = .env$a)
+tibble(a = 2, b = !!a)
+try(tibble(a = 2, b = .env$bogus))
+try(tibble(a = 2, b = !!bogus))
 
 # Use tibble_row() to construct a one-row tibble:
-tibble_row(a = 1, lm = lm(Petal.Width ~ Petal.Length + Species, data = iris))
+tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 }
 \seealso{
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use

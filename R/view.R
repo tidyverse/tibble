@@ -18,7 +18,7 @@
 #'   the deparsed expression is used.
 #' @param ... Unused, must be empty.
 #' @param n Maximum number of rows to display. Only used if `x` is not a
-#'   data frame.
+#'   data frame. Uses the `view_max` [option][tibble_options] by default.
 #'
 #' @export
 view <- function(x, title = NULL, ..., n = NULL) {
@@ -27,17 +27,17 @@ view <- function(x, title = NULL, ..., n = NULL) {
   if (!interactive()) return(invisible(x))
 
   if (is.null(title)) {
-    title <- expr_deparse(substitute(x))
+    title <- expr_deparse(substitute(x), width = Inf)
   }
 
   if (!is.data.frame(x)) {
     if (is.null(n)) {
-      n <- tibble_opt("view_max")
+      n <- get_tibble_option_view_max()
     }
     x <- head(x, n + 1)
     x <- as.data.frame(x)
     if (nrow(x) > n) {
-      message("Showing first ", n, " rows.")
+      message("Showing the first ", n, " rows.")
       x <- head(x, n)
     }
   }

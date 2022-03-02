@@ -27,41 +27,41 @@ test_that("[ and as_tibble commute", {
 })
 
 test_that("[ with 0 cols creates correct row names (#656)", {
-  zero_row <- as_tibble(iris)[, 0]
+  zero_row <- as_tibble(trees)[, 0]
   expect_s3_class(zero_row, "tbl_df")
-  expect_equal(nrow(zero_row), 150)
+  expect_equal(nrow(zero_row), 31)
   expect_equal(ncol(zero_row), 0)
 
-  expect_identical(zero_row, as_tibble(iris)[0])
+  expect_identical(zero_row, as_tibble(trees)[0])
 })
 
 test_that("[ with 0 cols returns correct number of rows", {
-  iris_tbl <- as_tibble(iris)
-  nrow_iris <- nrow(iris_tbl)
+  trees_tbl <- as_tibble(trees)
+  nrow_trees <- nrow(trees_tbl)
 
-  expect_equal(nrow(iris_tbl[0]), nrow_iris)
-  expect_equal(nrow(iris_tbl[, 0]), nrow_iris)
+  expect_equal(nrow(trees_tbl[0]), nrow_trees)
+  expect_equal(nrow(trees_tbl[, 0]), nrow_trees)
 
-  expect_equal(nrow(iris_tbl[, 0][1:10, ]), 10)
-  expect_equal(nrow(iris_tbl[0][1:10, ]), 10)
-  expect_equal(nrow(iris_tbl[1:10, ][, 0]), 10)
-  expect_equal(nrow(iris_tbl[1:10, ][0]), 10)
-  expect_equal(nrow(iris_tbl[1:10, 0]), 10)
+  expect_equal(nrow(trees_tbl[, 0][1:10, ]), 10)
+  expect_equal(nrow(trees_tbl[0][1:10, ]), 10)
+  expect_equal(nrow(trees_tbl[1:10, ][, 0]), 10)
+  expect_equal(nrow(trees_tbl[1:10, ][0]), 10)
+  expect_equal(nrow(trees_tbl[1:10, 0]), 10)
 
-  expect_equal(nrow(iris_tbl[, 0][-(1:10), ]), nrow_iris - 10)
-  expect_equal(nrow(iris_tbl[0][-(1:10), ]), nrow_iris - 10)
-  expect_equal(nrow(iris_tbl[-(1:10), ][, 0]), nrow_iris - 10)
-  expect_equal(nrow(iris_tbl[-(1:10), ][0]), nrow_iris - 10)
-  expect_equal(nrow(iris_tbl[-(1:10), 0]), nrow_iris - 10)
+  expect_equal(nrow(trees_tbl[, 0][-(1:10), ]), nrow_trees - 10)
+  expect_equal(nrow(trees_tbl[0][-(1:10), ]), nrow_trees - 10)
+  expect_equal(nrow(trees_tbl[-(1:10), ][, 0]), nrow_trees - 10)
+  expect_equal(nrow(trees_tbl[-(1:10), ][0]), nrow_trees - 10)
+  expect_equal(nrow(trees_tbl[-(1:10), 0]), nrow_trees - 10)
 })
 
 test_that("[ with explicit NULL works as expected (#696)", {
-  iris_tbl <- as_tibble(iris)
+  trees_tbl <- as_tibble(trees)
 
-  expect_identical(iris_tbl[NULL], iris_tbl[0])
-  expect_identical(iris_tbl[, NULL], iris_tbl[, 0])
-  expect_identical(iris_tbl[NULL, ], iris_tbl[0, ])
-  expect_identical(iris_tbl[NULL, NULL], tibble())
+  expect_identical(trees_tbl[NULL], trees_tbl[0])
+  expect_identical(trees_tbl[, NULL], trees_tbl[, 0])
+  expect_identical(trees_tbl[NULL, ], trees_tbl[0, ])
+  expect_identical(trees_tbl[NULL, NULL], tibble())
 })
 
 test_that("[.tbl_df is careful about names (#1245)", {
@@ -373,12 +373,15 @@ test_that("[[ drops inner names only with double subscript (#681)", {
   expect_identical(df[[1, "b"]], data.frame(bb = 1))
   expect_identical(df[["c"]], c)
   expect_null(rownames(df[[1, "c"]]))
+
+  df <- tibble(x = new_rcrd(list(a = 1:3)))
+  expect_identical(df[[1, "x"]], new_rcrd(list(a = 1L)))
 })
 
 test_that("can use two-dimensional indexing with [[", {
-  iris2 <- as_tibble(iris)
-  expect_equal(iris2[[1, 2]], iris[[1, 2]])
-  expect_equal(iris2[[2, 3]], iris[[2, 3]])
+  trees2 <- as_tibble(trees)
+  expect_equal(trees2[[1, 2]], trees[[1, 2]])
+  expect_equal(trees2[[2, 3]], trees[[2, 3]])
 })
 
 test_that("can use two-dimensional indexing with matrix and data frame columns (#440)", {
@@ -479,6 +482,12 @@ test_that("[[<-.tbl_df requires scalar, positive if numeric", {
   expect_error(df[[c("x", "y")]] <- 1, class = "vctrs_error_subscript_type")
   expect_error(df[[1:2]] <- 1, class = "vctrs_error_subscript_type")
   expect_error(df[[-1]] <- 1, class = "vctrs_error_subscript_type")
+})
+
+test_that("[[<-.tbl_df supports symbols (#691)", {
+  foo <- tibble(x = 1:10, y = 1:10)
+  foo[[quote(x)]] <- 10:1
+  expect_identical(foo$x, 10:1)
 })
 
 # [<- ---------------------------------------------------------------------
@@ -604,23 +613,23 @@ test_that("[<-.tbl_df supports matrix on the RHS (#762)", {
 })
 
 test_that("[<- with explicit NULL doesn't change anything (#696)", {
-  iris_tbl_orig <- as_tibble(iris)
+  trees_tbl_orig <- as_tibble(trees)
 
-  iris_tbl <- iris_tbl_orig
-  iris_tbl[NULL] <- NA
-  expect_identical(iris_tbl, iris_tbl_orig)
+  trees_tbl <- trees_tbl_orig
+  trees_tbl[NULL] <- NA
+  expect_identical(trees_tbl, trees_tbl_orig)
 
-  iris_tbl <- iris_tbl_orig
-  iris_tbl[, NULL] <- NA
-  expect_identical(iris_tbl, iris_tbl_orig)
+  trees_tbl <- trees_tbl_orig
+  trees_tbl[, NULL] <- NA
+  expect_identical(trees_tbl, trees_tbl_orig)
 
-  iris_tbl <- iris_tbl_orig
-  iris_tbl[NULL, ] <- NA
-  expect_identical(iris_tbl, iris_tbl_orig)
+  trees_tbl <- trees_tbl_orig
+  trees_tbl[NULL, ] <- NA
+  expect_identical(trees_tbl, trees_tbl_orig)
 
-  iris_tbl <- iris_tbl_orig
-  iris_tbl[NULL, NULL] <- NA
-  expect_identical(iris_tbl, iris_tbl_orig)
+  trees_tbl <- trees_tbl_orig
+  trees_tbl[NULL, NULL] <- NA
+  expect_identical(trees_tbl, trees_tbl_orig)
 })
 
 test_that("[<- with FALSE still adds column (#846)", {
@@ -753,7 +762,7 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
-  skip_if_not_installed("lifecycle", "0.2.0.9000")
+  skip_if_not_installed("rlang", "0.99.0.9000")
 
   expect_snapshot_with_error({
     "# [.tbl_df is careful about names (#1245)"
@@ -889,6 +898,13 @@ test_that("output test", {
     df[NA] <- 3
     df[NA, ] <- 3
 
+    "# [<-.tbl_df and logical indexes"
+    df <- tibble(x = 1:2, y = x)
+    df[FALSE] <- 1
+    df
+    df[, TRUE] <- 2
+    df
+
     "# [<-.tbl_df throws an error with bad RHS"
     df <- tibble(x = 1:2, y = x)
     df[] <- mean
@@ -908,6 +924,18 @@ test_that("output test", {
     df[1, ] <- 1:3
     df[1:2, ] <- 1:3
     df[,] <- 1:2
+    df[1, ] <- list(a = 1:3, b = 1)
+    df[1, ] <- list(a = 1, b = 1:3)
+    df[1:2, ] <- list(a = 1:3, b = 1)
+    df[1:2, ] <- list(a = 1, b = 1:3)
+    df[1, 1:2] <- list(a = 1:3, b = 1)
+    df[1, 1:2] <- list(a = 1, b = 1:3)
+    df[1:2, 1:2] <- list(a = 1:3, b = 1)
+    df[1:2, 1:2] <- list(a = 1, b = 1:3)
+    df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
+    df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
+    df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
+    df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
 
     "# [<-.tbl_df and coercion"
     df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
@@ -918,8 +946,49 @@ test_that("output test", {
     df[1:3, 1:3] <- NULL
 
     "# [<-.tbl_df and overwriting NA"
-    df <- tibble(x = rep(NA, 3))
+    df <- tibble(x = rep(NA, 3), z = matrix(NA, ncol = 2, dimnames = list(NULL, c("a", "b"))))
     df[1, "x"] <- 5
+    df[1, "z"] <- 5
+    df
+
+    "# [<-.tbl_df and overwriting with NA"
+    df <- tibble(
+      a = TRUE,
+      b = 1L,
+      c = sqrt(2),
+      d = 3i + 1,
+      e = "e",
+      f = raw(1),
+      g = tibble(x = 1, y = 1),
+      h = matrix(1:3, nrow = 1)
+    )
+    df[FALSE, "a"] <- NA
+    df[FALSE, "b"] <- NA
+    df[FALSE, "c"] <- NA
+    df[FALSE, "d"] <- NA
+    df[FALSE, "e"] <- NA
+    df[FALSE, "f"] <- NA
+    df[FALSE, "g"] <- NA
+    df[FALSE, "h"] <- NA
+    df
+    df[integer(), "a"] <- NA
+    df[integer(), "b"] <- NA
+    df[integer(), "c"] <- NA
+    df[integer(), "d"] <- NA
+    df[integer(), "e"] <- NA
+    df[integer(), "f"] <- NA
+    df[integer(), "g"] <- NA
+    df[integer(), "h"] <- NA
+    df
+    df[1, "a"] <- NA
+    df[1, "b"] <- NA
+    df[1, "c"] <- NA
+    df[1, "d"] <- NA
+    df[1, "e"] <- NA
+    df[1, "f"] <- NA
+    df[1, "g"] <- NA
+    df[1, "h"] <- NA
+    df
 
     "# [<-.tbl_df and matrix subsetting"
     foo <- tibble(a = 1:3, b = letters[1:3])
@@ -972,4 +1041,17 @@ test_that("output test", {
     df$w <- 8:9
     df$a <- character()
   })
+})
+
+test_that("[[<- restores class", {
+  skip_if_not_installed("dplyr")
+
+  df <- dplyr::group_by(mtcars, cyl)
+  df[[1]] <- mtcars$cyl
+  expect_s3_class(df, "grouped_df")
+
+  df <- dplyr::group_by(mtcars, cyl)
+  df[[2]] <- mtcars$vs
+  expect_s3_class(df, "grouped_df")
+  expect_identical(dplyr::group_data(df)$cyl, c(0, 1))
 })
