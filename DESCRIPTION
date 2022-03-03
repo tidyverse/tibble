@@ -19,7 +19,7 @@ Authors@R:
              role = "ctb",
              email = "jenny@rstudio.com"),
       person(given = "RStudio",
-             role = "cph"))
+             role = c("cph", "fnd")))
 Description: Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional
     data frame.
 License: MIT + file LICENSE
