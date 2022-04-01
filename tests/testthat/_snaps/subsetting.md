@@ -5,14 +5,14 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[c("x", "y", "z")]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't subset columns that don't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't subset columns past the end.
       x Column `z` doesn't exist.
     Code
       foo[c("w", "x", "y", "z")]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't subset columns that don't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't subset columns past the end.
       x Columns `w` and `z` don't exist.
     Code
       foo[as.matrix("x")]
@@ -22,7 +22,7 @@
     Code
       foo[array("x", dim = c(1, 1, 1))]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -30,46 +30,43 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[0.5]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error in `stop_vctrs()`:
-      ! Can't convert from <double> to <integer> due to loss of precision.
-      * Locations: 1
+      x Can't convert from `j` <double> to <integer> due to loss of precision.
     Code
       foo[1:5]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't subset columns that don't exist.
-      x Locations 4 and 5 don't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't subset columns past the end.
+      i Locations 4 and 5 don't exist.
       i There are only 3 columns.
     Code
       foo[-1:1]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `-1:1` has a positive value at location 3.
     Code
       foo[c(-1, 1)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `c(-1, 1)` has a positive value at location 2.
     Code
       foo[c(-1, NA)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Negative locations can't have missing values.
       i Subscript `c(-1, NA)` has a missing value at location 2.
     Code
       foo[-4]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't negate columns that don't exist.
-      x Location 4 doesn't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't negate columns past the end.
+      i Location 4 doesn't exist.
       i There are only 3 columns.
     Code
       foo[c(1:3, NA)]
@@ -84,20 +81,20 @@
     Code
       foo[array(1, dim = c(1, 1, 1))]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       foo[mean]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `mean` has the wrong type `function`.
       i It must be logical, numeric, or character.
     Code
       foo[foo]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -110,12 +107,9 @@
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[0.5, ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error in `stop_vctrs()`:
-      ! Can't convert from <double> to <integer> due to loss of precision.
-      * Locations: 1
+      x Can't convert from `i` <double> to <integer> due to loss of precision.
     Code
       invisible(foo[1:5, ])
     Condition
@@ -125,21 +119,21 @@
     Code
       foo[-1:1, ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `-1:1` has a positive value at location 3.
     Code
       foo[c(-1, 1), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `c(-1, 1)` has a positive value at location 2.
     Code
       foo[c(-1, NA), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Negative locations can't have missing values.
       i Subscript `c(-1, NA)` has a missing value at location 2.
@@ -152,20 +146,20 @@
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       foo[mean, ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `mean` has the wrong type `function`.
       i It must be logical, numeric, or character.
     Code
       foo[foo, ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -178,14 +172,14 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[c(TRUE, TRUE)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
@@ -202,7 +196,7 @@
     Code
       foo[array(TRUE, dim = c(1, 1, 1))]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -210,21 +204,21 @@
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[c(TRUE, TRUE), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
     Code
       foo[array(TRUE, dim = c(1, 1, 1)), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -232,27 +226,27 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3)]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3)]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't subset columns that don't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't subset columns past the end.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -261,26 +255,26 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3), ]
     Condition
-      Error:
+      Error in `vec_as_location()`:
       ! Can't use character names to index an unnamed vector.
     Code
       foo[Sys.Date(), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -293,7 +287,7 @@
     Code
       foo[!is.na(foo)]
     Condition
-      Error in `stop_vctrs()`:
+      Error:
       ! Can't combine `a` <integer> and `b` <character>.
     Code
       foo[as.matrix("x")]
@@ -303,7 +297,7 @@
     Code
       foo[array("x", dim = c(1, 1, 1))]
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -331,7 +325,7 @@
       foo <- tibble(a = 1:4, b = a)
       foo[c(TRUE, FALSE), ]
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
@@ -360,73 +354,55 @@
     Code
       foo[[1:3]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[letters[1:3]]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `letters[1:3]` has size 3 but must be size 1.
     Code
       foo[[TRUE]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[-1]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `-1` has value -1 but must be a positive location.
     Code
       foo[[1.5]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error in `stop_vctrs()`:
-      ! Can't convert from <double> to <integer> due to loss of precision.
-      * Locations: 1
+      x Subscript `1.5` has the wrong type `double`.
+      i It must be numeric or character.
     Code
       foo[[3]]
     Condition
-      Error in `stop_subscript()`:
-      ! Can't subset columns that don't exist.
-      x Location 3 doesn't exist.
+      Error in `vec_as_location2_result()`:
+      ! Can't subset columns past the end.
+      i Location 3 doesn't exist.
       i There are only 2 columns.
     Code
       foo[[Inf]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Can't convert from <double> to <integer> due to loss of precision.
-      Caused by error in `stop_vctrs()`:
-      ! Can't convert from <double> to <integer> due to loss of precision.
-      * Locations: 1
+      x Subscript `Inf` has the wrong type `double`.
+      i It must be numeric or character.
     Code
       foo[[mean]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo]]
@@ -443,7 +419,7 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[NA]]
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `NA` can't be `NA`.
     Code
@@ -467,27 +443,27 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3)] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3)] <- 1
     Condition
-      Error in `stop_subscript()`:
-      ! Can't assign to columns that don't exist.
+      Error in `vectbl_as_col_location()`:
+      ! Can't assign to columns past the end.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location()`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -510,26 +486,26 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3), ] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3), ] <- 1
     Condition
-      Error:
+      Error in `vec_as_location()`:
       ! Can't use character names to index an unnamed vector.
     Code
       foo[Sys.Date(), ] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location()`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -599,42 +575,42 @@
       df <- tibble(x = 1:2, y = x)
       df[4:5] <- 3
     Condition
-      Error in `stop_subscript()`:
+      Error in `numtbl_as_col_location_assign()`:
       ! Can't assign to columns beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4:5` contains non-consecutive location 4.
     Code
       df[4:5, ] <- 3
     Condition
-      Error in `stop_subscript()`:
+      Error in `numtbl_as_row_location_assign()`:
       ! Can't assign to rows beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4:5` contains non-consecutive location 4.
     Code
       df[-4, ] <- 3
     Condition
-      Error in `stop_subscript()`:
-      ! Can't negate rows that don't exist.
-      x Location 4 doesn't exist.
+      Error in `numtbl_as_row_location_assign()`:
+      ! Can't negate rows past the end.
+      i Location 4 doesn't exist.
       i There are only 2 rows.
     Code
       df[-(4:5), ] <- 3
     Condition
-      Error in `stop_subscript()`:
-      ! Can't negate rows that don't exist.
-      x Locations 4 and 5 don't exist.
+      Error in `numtbl_as_row_location_assign()`:
+      ! Can't negate rows past the end.
+      i Locations 4 and 5 don't exist.
       i There are only 2 rows.
     Code
       # # [<-.tbl_df and recycling
       df <- tibble(x = 1:3, y = x, z = y)
       df[1:2] <- list(0, 0, 0)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_as_new_col_index()`:
       ! Can't recycle `list(0, 0, 0)` (size 3) to size 2.
     Code
       df[] <- list(0, 0)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_recycle_rhs_cols()`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, ] <- 1:3
@@ -663,22 +639,22 @@
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_recycle_rhs_cols()`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_recycle_rhs_cols()`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1:2, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_recycle_rhs_cols()`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1:2, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `stop_vctrs()`:
+      Error in `vectbl_recycle_rhs_cols()`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
@@ -891,42 +867,34 @@
     Code
       foo[[1:3]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[letters[1:3]]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `letters[1:3]` has size 3 but must be size 1.
     Code
       foo[[TRUE]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[NA_integer_]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `NA_integer_` can't be `NA`.
     Code
       foo[[mean]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_location2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo]] <- 1
@@ -941,44 +909,29 @@
     Code
       foo[[1:3, 1]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location2()`:
       ! Must assign to row with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[TRUE, 1]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location2()`:
       ! Must assign to row with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[mean, 1]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location2()`:
       ! Must assign to row with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo, 1]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_row_location2()`:
       ! Must assign to row with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-      >`.
-      i It must be numeric or character.
-      Caused by error:
-      ! Must extract element with a single valid subscript.
-      x Subscript has the wrong type `tbl_df<
         x: integer
         y: integer
       >`.
@@ -988,7 +941,7 @@
       df <- tibble(x = 1:2, y = x)
       df[[4]] <- 3
     Condition
-      Error in `stop_subscript()`:
+      Error in `numtbl_as_col_location_assign()`:
       ! Can't assign to columns beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4` contains non-consecutive location 4.
@@ -997,13 +950,13 @@
       df <- tibble(x = 1:2, y = x)
       df[[1]] <- mean
     Condition
-      Error in `stop_vctrs()`:
-      ! Input must be a vector, not a function.
+      Error in `vec_size()`:
+      ! `x` must be a vector, not a function.
     Code
       df[[1]] <- lm(y ~ x, df)
     Condition
-      Error in `stop_vctrs()`:
-      ! Input must be a vector, not a <lm> object.
+      Error in `vec_size()`:
+      ! `x` must be a vector, not a <lm> object.
     Code
       # # [[<-.tbl_df recycles only values of length one
       df <- tibble(x = 1:3)
