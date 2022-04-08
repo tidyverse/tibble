@@ -589,8 +589,8 @@
 <span class="co">#&gt; 4 4 h       text 4</span>
 <span class="fu">with_df</span><span class="op">(</span><span class="op">{</span> <span class="va">df</span><span class="op">$</span><span class="va">v</span> <span class="op">=</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html" class="external-link">new_vctr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>; <span class="va">df</span><span class="op">$</span><span class="va">v</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_vctr.html" class="external-link">new_vctr</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;vctrs_vctr&gt; to &lt;vctrs_vctr&gt;.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[&lt;-`:</span></span>
+<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert `value` &lt;vctrs_vctr&gt; to &lt;vctrs_vctr&gt;.</span></code></pre>
 </div>
 </div>
 </div>
@@ -749,12 +749,14 @@
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't assign to columns beyond the end</span>
-<span class="co">#&gt; with non-consecutive locations.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Input has size 3.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `5` contains non-consecutive</span>
-<span class="co">#&gt; location 5.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_col_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:520:4: [0m
+#&gt;  [33m! [39m Can't assign to columns beyond the end
+#&gt; with non-consecutive locations.
+#&gt;  [34mℹ [39m Input has size 3.
+#&gt;  [31m✖ [39m Subscript `5` contains non-consecutive
+#&gt; location 5.</code></pre>
 </div>
 </td>
 </tr>
@@ -1044,11 +1046,12 @@
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must assign to row with a single valid</span>
-<span class="co">#&gt; subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
-<span class="co">#&gt; size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:163:4: [0m
+#&gt;  [33m! [39m Must assign to row with a single valid
+#&gt; subscript.
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1066,11 +1069,12 @@
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must assign to row with a single valid</span>
-<span class="co">#&gt; subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
-<span class="co">#&gt; size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:163:4: [0m
+#&gt;  [33m! [39m Must assign to row with a single valid
+#&gt; subscript.
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1088,11 +1092,12 @@
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must assign to column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `c("cd", "d")` has size 2</span>
-<span class="co">#&gt; but must be size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:176:6: [0m
+#&gt;  [33m! [39m Must assign to column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `c("cd", "d")` has size 2
+#&gt; but must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -1707,9 +1712,10 @@
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 3 to size</span>
-<span class="co">#&gt; 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 3 to size
+#&gt; 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1742,9 +1748,10 @@
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1762,9 +1769,10 @@
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"cd"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1833,9 +1841,10 @@
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:667:2: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1881,9 +1890,10 @@
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 4 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:667:2: [0m
+#&gt;  [33m! [39m Can't recycle input of size 4 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1901,12 +1911,14 @@
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must assign to rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `0` can't contain `0`</span>
-<span class="co">#&gt; values.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It has a `0` value at location 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Must assign to rows with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Subscript `0` can't contain `0`
+#&gt; values.
+#&gt;  [34mℹ [39m It has a `0` value at location 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -2022,9 +2034,10 @@
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:667:2: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2085,9 +2098,10 @@
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 4 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:667:2: [0m
+#&gt;  [33m! [39m Can't recycle input of size 4 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2138,12 +2152,14 @@
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must assign to rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `0:1` can't contain `0`</span>
-<span class="co">#&gt; values.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It has a `0` value at location 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Must assign to rows with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Subscript `0:1` can't contain `0`
+#&gt; values.
+#&gt;  [34mℹ [39m It has a `0` value at location 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -2259,9 +2275,10 @@
 <div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2315,9 +2332,10 @@
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 4 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 4 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2426,9 +2444,10 @@
 <div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 2 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -2482,9 +2501,10 @@
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 4 to size</span>
-<span class="co">#&gt; 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_recycle_rhs_cols()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:435:4: [0m
+#&gt;  [33m! [39m Can't recycle input of size 4 to size
+#&gt; 3.</code></pre>
 </div>
 </td>
 </tr>

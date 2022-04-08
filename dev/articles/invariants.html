@@ -299,11 +299,12 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `c("n", "c")` has size 2 but</span>
-<span class="co">#&gt; must be size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `c("n", "c")` has size 2 but
+#&gt; must be size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -317,18 +318,13 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `TRUE` has the wrong type</span>
-<span class="co">#&gt; `logical`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract element with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript has the wrong type</span>
-<span class="co">#&gt; `logical`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `TRUE` has the wrong type
+#&gt; `logical`.
+#&gt;  [34mℹ [39m It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -345,18 +341,13 @@
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="va">mean</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `mean` has the wrong type</span>
-<span class="co">#&gt; `function`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract element with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript has the wrong type</span>
-<span class="co">#&gt; `function`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `mean` has the wrong type
+#&gt; `function`.
+#&gt;  [34mℹ [39m It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -373,10 +364,11 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA` can't be `NA`.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `NA` can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -390,11 +382,12 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_character_</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_character_` can't be</span>
-<span class="co">#&gt; `NA`.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `NA_character_` can't be
+#&gt; `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -408,10 +401,11 @@
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_integer_</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_integer_` can't be `NA`.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `NA_integer_` can't be `NA`.</code></pre>
 </div>
 </td>
 </tr>
@@ -429,11 +423,12 @@
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `-1` has value -1 but must</span>
-<span class="co">#&gt; be a positive location.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `-1` has value -1 but must
+#&gt; be a positive location.</code></pre>
 </div>
 </td>
 </tr>
@@ -450,10 +445,10 @@
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vec_as_location2_result()`:</span></span>
+<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 4 doesn't exist.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 3 columns.</span></code></pre>
 </div>
 </td>
 </tr>
@@ -467,20 +462,13 @@
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1.5</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract element with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `1.5` has the wrong type
+#&gt; `double`.
+#&gt;  [34mℹ [39m It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -494,20 +482,13 @@
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="cn">Inf</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract element with a single</span>
-<span class="co">#&gt; valid subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert from &lt;double&gt; to</span>
-<span class="co">#&gt; &lt;integer&gt; due to loss of precision.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+#&gt;  [33m! [39m Must extract column with a single
+#&gt; valid subscript.
+#&gt;  [31m✖ [39m Subscript `Inf` has the wrong type
+#&gt; `double`.
+#&gt;  [34mℹ [39m It must be numeric or character.</code></pre>
 </div>
 </td>
 </tr>
@@ -715,7 +696,7 @@
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
 <span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't combine `n` &lt;integer&gt; and `c`</span>
 <span class="co">#&gt; &lt;character&gt;.</span></code></pre>
 </div>
@@ -812,13 +793,14 @@
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="va">mean</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `mean` has the wrong type</span>
-<span class="co">#&gt; `function`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be logical, numeric, or</span>
-<span class="co">#&gt; character.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Subscript `mean` has the wrong type
+#&gt; `function`.
+#&gt;  [34mℹ [39m It must be logical, numeric, or
+#&gt; character.</code></pre>
 </div>
 </td>
 </tr>
@@ -835,13 +817,14 @@
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `list(1)` has the wrong type</span>
-<span class="co">#&gt; `list`.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be logical, numeric, or</span>
-<span class="co">#&gt; character.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Subscript `list(1)` has the wrong type
+#&gt; `list`.
+#&gt;  [34mℹ [39m It must be logical, numeric, or
+#&gt; character.</code></pre>
 </div>
 </td>
 </tr>
@@ -920,13 +903,14 @@
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
-<span class="co">#&gt; `c(TRUE, FALSE)` has size 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 4 but subscript
+#&gt; `c(TRUE, FALSE)` has size 2.</code></pre>
 </div>
 </td>
 </tr></tbody></table>
@@ -1147,12 +1131,14 @@
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't assign to columns beyond the end</span>
-<span class="co">#&gt; with non-consecutive locations.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Input has size 3.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `5` contains non-consecutive</span>
-<span class="co">#&gt; location 5.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_col_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:520:4: [0m
+#&gt;  [33m! [39m Can't assign to columns beyond the end
+#&gt; with non-consecutive locations.
+#&gt;  [34mℹ [39m Input has size 3.
+#&gt;  [31m✖ [39m Subscript `5` contains non-consecutive
+#&gt; location 5.</code></pre>
 </div>
 </td>
 </tr>
@@ -1313,9 +1299,10 @@
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle `list(0, 0, 0)` (size 3)</span>
-<span class="co">#&gt; to size 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_new_col_index()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:431:6: [0m
+#&gt;  [33m! [39m Can't recycle `list(0, 0, 0)` (size 3)
+#&gt; to size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1333,9 +1320,10 @@
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_vctrs()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle `list(0, 0)` (size 2) to</span>
-<span class="co">#&gt; size 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_new_col_index()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:431:6: [0m
+#&gt;  [33m! [39m Can't recycle `list(0, 0)` (size 2) to
+#&gt; size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1447,12 +1435,14 @@
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't assign to columns beyond the end</span>
-<span class="co">#&gt; with non-consecutive locations.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Input has size 3.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `5` contains non-consecutive</span>
-<span class="co">#&gt; location 5.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_col_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:520:4: [0m
+#&gt;  [33m! [39m Can't assign to columns beyond the end
+#&gt; with non-consecutive locations.
+#&gt;  [34mℹ [39m Input has size 3.
+#&gt;  [31m✖ [39m Subscript `5` contains non-consecutive
+#&gt; location 5.</code></pre>
 </div>
 </td>
 </tr>
@@ -2002,12 +1992,14 @@
 <div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">6</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't assign to rows beyond the end</span>
-<span class="co">#&gt; with non-consecutive locations.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Input has size 4.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `6` contains non-consecutive</span>
-<span class="co">#&gt; location 6.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Can't assign to rows beyond the end
+#&gt; with non-consecutive locations.
+#&gt;  [34mℹ [39m Input has size 4.
+#&gt;  [31m✖ [39m Subscript `6` contains non-consecutive
+#&gt; location 6.</code></pre>
 </div>
 </td>
 </tr>
@@ -2025,10 +2017,12 @@
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't negate rows that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 5 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 4 rows.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Can't negate rows past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 5 doesn't exist.
+#&gt;  [36mℹ [39m There are only 4 rows.</code></pre>
 </div>
 </td>
 </tr>
@@ -2046,10 +2040,13 @@
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't negate rows that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Locations 5, 6, and 7 don't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 4 rows.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Can't negate rows past the end.
+#&gt;  [1m [22m [36mℹ [39m Locations 5, 6, and 7 don't
+#&gt; exist.
+#&gt;  [36mℹ [39m There are only 4 rows.</code></pre>
 </div>
 </td>
 </tr>
@@ -2067,10 +2064,12 @@
 <div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">6</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't negate rows that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 6 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 4 rows.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in [0m
+ [1m#&gt; `numtbl_as_row_location_assign()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+#&gt;  [33m! [39m Can't negate rows past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 6 doesn't exist.
+#&gt;  [36mℹ [39m There are only 4 rows.</code></pre>
 </div>
 </td>
 </tr>
@@ -2172,9 +2171,13 @@
 <div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Internal error in `df_cast_opts()`:</span>
-<span class="co">#&gt; Data frame must have names.</span></code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `df_cast_opts()`:</span></span>
+<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Data frame must have names.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In file <span style="color: #0000BB;">type-data-frame.c</span> at line</span>
+<span class="co">#&gt; 679.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> This is an internal error in the</span>
+<span class="co">#&gt; rlang package, please report it to</span>
+<span class="co">#&gt; the package authors.</span></code></pre>
 </div>
 </td>
 </tr>

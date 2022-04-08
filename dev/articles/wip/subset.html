@@ -420,11 +420,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid</span>
-<span class="co">#&gt; subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
-<span class="co">#&gt; size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:128:4: [0m
+#&gt;  [33m! [39m Must extract row with a single valid
+#&gt; subscript.
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -447,11 +448,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid</span>
-<span class="co">#&gt; subscript.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be</span>
-<span class="co">#&gt; size 1.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:128:4: [0m
+#&gt;  [33m! [39m Must extract row with a single valid
+#&gt; subscript.
+#&gt;  [31m✖ [39m Subscript `1:2` has size 2 but must be
+#&gt; size 1.</code></pre>
 </div>
 </td>
 </tr>
@@ -587,10 +589,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Can't subset columns past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 4 doesn't exist.
+#&gt;  [36mℹ [39m There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -737,10 +740,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Can't subset columns past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 4 doesn't exist.
+#&gt;  [36mℹ [39m There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -872,10 +876,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Can't subset columns past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 4 doesn't exist.
+#&gt;  [36mℹ [39m There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -907,13 +912,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
-<span class="co">#&gt; be mixed.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
-<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Negative and positive locations can't
+#&gt; be mixed.
+#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1024,13 +1030,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
-<span class="co">#&gt; `c(FALSE, TRUE)` has size 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 3 but subscript
+#&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1048,14 +1055,15 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
-<span class="co">#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size</span>
-<span class="co">#&gt; 4.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 3 but subscript
+#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
+#&gt; 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1129,10 +1137,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop_subscript()`:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Location 4 doesn't exist.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> There are only 3 columns.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Can't subset columns past the end.
+#&gt;  [1m [22m [36mℹ [39m Location 4 doesn't exist.
+#&gt;  [36mℹ [39m There are only 3 columns.</code></pre>
 </div>
 </td>
 </tr>
@@ -1164,13 +1173,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
-<span class="co">#&gt; be mixed.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
-<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Negative and positive locations can't
+#&gt; be mixed.
+#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1293,13 +1303,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
-<span class="co">#&gt; `c(FALSE, TRUE)` has size 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 3 but subscript
+#&gt; `c(FALSE, TRUE)` has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1317,14 +1328,15 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript</span>
-<span class="co">#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size</span>
-<span class="co">#&gt; 4.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:238:4: [0m
+#&gt;  [33m! [39m Must subset columns with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 3 but subscript
+#&gt; `c(FALSE, TRUE, FALSE, TRUE)` has size
+#&gt; 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1453,13 +1465,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't</span>
-<span class="co">#&gt; be mixed.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values</span>
-<span class="co">#&gt; at locations 3 and 4.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:318:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [31m✖ [39m Negative and positive locations can't
+#&gt; be mixed.
+#&gt;  [34mℹ [39m Subscript `-1:2` has 2 positive values
+#&gt; at locations 3 and 4.</code></pre>
 </div>
 </td>
 </tr>
@@ -1544,13 +1557,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
-<span class="co">#&gt; `c(TRUE, FALSE)` has size 2.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 4 but subscript
+#&gt; `c(TRUE, FALSE)` has size 2.</code></pre>
 </div>
 </td>
 </tr>
@@ -1567,13 +1581,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
-<span class="co">#&gt; `c(TRUE, FALSE, TRUE)` has size 3.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 4 but subscript
+#&gt; `c(TRUE, FALSE, TRUE)` has size 3.</code></pre>
 </div>
 </td>
 </tr>
@@ -1603,14 +1618,15 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid</span>
-<span class="co">#&gt; subscript vector.</span>
-<span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size</span>
-<span class="co">#&gt; of the indexed input.</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript</span>
-<span class="co">#&gt; `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has</span>
-<span class="co">#&gt; size 5.</span></code></pre>
+<pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
+ [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+#&gt;  [33m! [39m Must subset rows with a valid
+#&gt; subscript vector.
+#&gt;  [34mℹ [39m Logical subscripts must match the size
+#&gt; of the indexed input.
+#&gt;  [31m✖ [39m Input has size 4 but subscript
+#&gt; `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has
+#&gt; size 5.</code></pre>
 </div>
 </td>
 </tr>

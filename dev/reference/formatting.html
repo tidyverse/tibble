@@ -612,12 +612,28 @@ the <code>max_footer_lines</code> <a href="https://pillar.r-lib.org/reference/pi
 <span class="r-in"></span>
 <span class="r-in"><span class="va">mtcars2</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">)</span>, .name_repair <span class="op">=</span> <span class="st">"unique"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * mpg -&gt; mpg...1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * cyl -&gt; cyl...2</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * disp -&gt; disp...3</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * hp -&gt; hp...4</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * drat -&gt; drat...5</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `mpg` -&gt; `mpg...1`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `cyl` -&gt; `cyl...2`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `disp` -&gt; `disp...3`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `hp` -&gt; `hp...4`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `drat` -&gt; `drat...5`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `wt` -&gt; `wt...6`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `qsec` -&gt; `qsec...7`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `vs` -&gt; `vs...8`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `am` -&gt; `am...9`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `gear` -&gt; `gear...10`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `carb` -&gt; `carb...11`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `mpg` -&gt; `mpg...12`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `cyl` -&gt; `cyl...13`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `disp` -&gt; `disp...14`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `hp` -&gt; `hp...15`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `drat` -&gt; `drat...16`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `wt` -&gt; `wt...17`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `qsec` -&gt; `qsec...18`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `vs` -&gt; `vs...19`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `am` -&gt; `am...20`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `gear` -&gt; `gear...21`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `carb` -&gt; `carb...22`</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mtcars2</span>, n <span class="op">=</span> <span class="fl">25</span>, max_extra_cols <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mpg...1 cyl...2 disp...3 hp...4 drat...5 wt...6 qsec...7 vs...8 am...9</span>
