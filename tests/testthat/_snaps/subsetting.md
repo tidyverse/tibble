@@ -6,13 +6,13 @@
       foo[c("x", "y", "z")]
     Condition
       Error in `vectbl_as_col_location()`:
-      ! Can't subset columns past the end.
+      ! Can't subset columns that don't exist.
       x Column `z` doesn't exist.
     Code
       foo[c("w", "x", "y", "z")]
     Condition
       Error in `vectbl_as_col_location()`:
-      ! Can't subset columns past the end.
+      ! Can't subset columns that don't exist.
       x Columns `w` and `z` don't exist.
     Code
       foo[as.matrix("x")]
@@ -241,7 +241,7 @@
       foo[factor(1:3)]
     Condition
       Error in `vectbl_as_col_location()`:
-      ! Can't subset columns past the end.
+      ! Can't subset columns that don't exist.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()]
@@ -458,7 +458,7 @@
       foo[factor(1:3)] <- 1
     Condition
       Error in `vectbl_as_col_location()`:
-      ! Can't assign to columns past the end.
+      ! Can't assign to columns that don't exist.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()] <- 1
