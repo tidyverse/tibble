@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.6.9002
+
+- Avoid listing `dim_desc()` in reexports.
+- Require rlang 1.0.1 and pillar 1.7.0 (#1063).
+- Add more examples for data frame and matrix columns (#978, #1012).
+- Prefer `class` over `.subclass` in `rlang::error_cnd()` (#1015, #1060).
+- `trunc_mat()` now returns a value with a different structure. This is considered an implementation detail that can change in the future, do not rely on it. The only guarantee is that calling `print()` will display the input like a tibble (#1059).
+
+
 # tibble 3.1.6.9001
 
 - Same as previous version.
