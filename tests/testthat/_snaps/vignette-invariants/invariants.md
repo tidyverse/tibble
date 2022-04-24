@@ -4562,7 +4562,7 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 #> Error in `df_cast_opts()`:
 #> ! Data frame must have names.
 #> i In file 'type-data-frame.c' at line
-#> 683.
+#> 679.
 #> i This is an internal error in the rlang
 #> package, please report it to the package
 #> authors.
