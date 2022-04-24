@@ -42,6 +42,7 @@
 #'   * `NA`: keep row names.
 #'   * A string: the name of a new column. Existing rownames are transferred
 #'     into this column and the `row.names` attribute is deleted.
+#'     This column is subject to name repair.
 #'  Read more in [rownames].
 
 #' @param _n,validate
@@ -68,25 +69,43 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
 
+  if (!is.null(rownames)) {
+    if (length(rownames) != 1) {
+      abort("The `rownames` argument must be `NULL` or have length 1.")
+    }
+
+    if (!is.na(rownames) && !is.character(rownames)) {
+      abort("The `rownames` argument must be `NULL` or `NA` or a string.")
+    }
+
+    if (is.na(rownames) && is.character(rownames)) {
+      abort("The `rownames` argument must be `NULL` or `NA` or a non-`NA` string.")
+    }
+  }
+
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
     .rows <- nrow(x)
   }
 
-  result <- lst_to_tibble(unclass(x), .rows, .name_repair)
+  x <- unclass(x)
 
-  if (is.null(rownames)) {
-    result
-  } else if (is.na(rownames)) {
-    attr(result, "row.names") <- old_rownames
-    result
-  } else {
+  if (is.character(rownames)) {
     if (length(old_rownames) > 0 && is.na(old_rownames[1L])) { # if implicit rownames
       old_rownames <- seq_len(abs(old_rownames[2L]))
     }
     old_rownames <- as.character(old_rownames)
-    add_column(result, !!rownames := old_rownames, .before = 1L, .name_repair = "minimal")
+
+    x <- c(set_names(list(old_rownames), rownames), x)
   }
+
+  result <- lst_to_tibble(x, .rows, .name_repair)
+
+  if (!is.null(rownames) && is.na(rownames)) {
+    attr(result, "row.names") <- old_rownames
+  }
+
+  result
 }
 
 #' @export

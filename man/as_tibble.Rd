@@ -83,6 +83,7 @@ to enforce them.}
 \item \code{NA}: keep row names.
 \item A string: the name of a new column. Existing rownames are transferred
 into this column and the \code{row.names} attribute is deleted.
+This column is subject to name repair.
 Read more in \link{rownames}.
 }}
 

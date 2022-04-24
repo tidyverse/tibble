@@ -1,3 +1,37 @@
+# Argument check for rownames argument
+
+    Code
+      as_tibble(data.frame(), rownames = letters)
+    Condition
+      Error in `as_tibble()`:
+      ! The `rownames` argument must be `NULL` or have length 1.
+    Code
+      as_tibble(data.frame(), rownames = 1)
+    Condition
+      Error in `as_tibble()`:
+      ! The `rownames` argument must be `NULL` or `NA` or a string.
+    Code
+      as_tibble(data.frame(), rownames = NA_character_)
+    Condition
+      Error in `as_tibble()`:
+      ! The `rownames` argument must be `NULL` or `NA` or a non-`NA` string.
+
+# Name repair for rownames argument (#1070)
+
+    Code
+      as_tibble(data.frame(a = 1:3), rownames = "a", .name_repair = "unique")
+    Message
+      New names:
+      * `a` -> `a...1`
+      * `a` -> `a...2`
+    Output
+      # A tibble: 3 x 2
+        a...1 a...2
+        <chr> <int>
+      1 1         1
+      2 2         2
+      3 3         3
+
 # as_tibble() implements unique names
 
     Code

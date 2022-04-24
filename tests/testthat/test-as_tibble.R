@@ -58,6 +58,21 @@ test_that("columns must be same length", {
   )
 })
 
+test_that("Argument check for rownames argument", {
+  expect_snapshot(error = TRUE, {
+    as_tibble(data.frame(), rownames = letters)
+    as_tibble(data.frame(), rownames = 1)
+    as_tibble(data.frame(), rownames = NA_character_)
+  })
+})
+
+test_that("Name repair for rownames argument (#1070)", {
+  expect_error(as_tibble(data.frame(a = 1:3), rownames = "a"))
+  expect_snapshot({
+    as_tibble(data.frame(a = 1:3), rownames = "a", .name_repair = "unique")
+  })
+})
+
 test_that("empty list() makes 0 x 0 tbl_df", {
   zero <- as_tibble(list())
   expect_s3_class(zero, "tbl_df")
