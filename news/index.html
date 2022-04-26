@@ -73,22 +73,21 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.1.7" id="tibble-317">tibble 3.1.7<a class="anchor" aria-label="anchor" href="#tibble-317"></a></h2>
-<ul><li>Same as previous version.</li></ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.6.9002" id="tibble-3169002">tibble 3.1.6.9002<a class="anchor" aria-label="anchor" href="#tibble-3169002"></a></h2>
+<div class="section level3">
+<h3 id="breaking-change-3-1-7">Breaking change<a class="anchor" aria-label="anchor" href="#breaking-change-3-1-7"></a></h3>
+<ul><li>
+<code><a href="../reference/trunc_mat.html">trunc_mat()</a></code> now returns a value with a different structure. This is considered an implementation detail that can change in the future, do not rely on it. The only guarantee is that calling <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> will display the input like a tibble (<a href="https://github.com/tidyverse/tibble/issues/1059" class="external-link">#1059</a>).</li></ul></div>
+<div class="section level3">
+<h3 id="documentation-3-1-7">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-1-7"></a></h3>
 <ul><li>Avoid listing <code><a href="https://dplyr.tidyverse.org/reference/dim_desc.html" class="external-link">dim_desc()</a></code> in reexports.</li>
-<li>Require rlang 1.0.1 and pillar 1.7.0 (<a href="https://github.com/tidyverse/tibble/issues/1063" class="external-link">#1063</a>).</li>
 <li>Add more examples for data frame and matrix columns (<a href="https://github.com/tidyverse/tibble/issues/978" class="external-link">#978</a>, <a href="https://github.com/tidyverse/tibble/issues/1012" class="external-link">#1012</a>).</li>
-<li>Prefer <code>class</code> over <code>.subclass</code> in <code><a href="https://rlang.r-lib.org/reference/cnd.html" class="external-link">rlang::error_cnd()</a></code> (<a href="https://github.com/tidyverse/tibble/issues/1015" class="external-link">#1015</a>, <a href="https://github.com/tidyverse/tibble/issues/1060" class="external-link">#1060</a>).</li>
-<li>
-<code><a href="../reference/trunc_mat.html">trunc_mat()</a></code> now returns a value with a different structure. This is considered an implementation detail that can change in the future, do not rely on it. The only guarantee is that calling <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> will display the input like a tibble (<a href="https://github.com/tidyverse/tibble/issues/1059" class="external-link">#1059</a>).</li>
 </ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.6.9001" id="tibble-3169001">tibble 3.1.6.9001<a class="anchor" aria-label="anchor" href="#tibble-3169001"></a></h2>
-<ul><li>Same as previous version.</li></ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.6.9000" id="tibble-3169000">tibble 3.1.6.9000<a class="anchor" aria-label="anchor" href="#tibble-3169000"></a></h2>
-<ul><li>Same as previous version.</li></ul></div>
+<div class="section level3">
+<h3 id="internal-3-1-7">Internal<a class="anchor" aria-label="anchor" href="#internal-3-1-7"></a></h3>
+<ul><li>Require rlang 1.0.1 and pillar 1.7.0 (<a href="https://github.com/tidyverse/tibble/issues/1063" class="external-link">#1063</a>).</li>
+<li>Prefer <code>class</code> over <code>.subclass</code> in <code><a href="https://rlang.r-lib.org/reference/cnd.html" class="external-link">rlang::error_cnd()</a></code> (<a href="https://github.com/tidyverse/tibble/issues/1015" class="external-link">#1015</a>, <a href="https://github.com/tidyverse/tibble/issues/1060" class="external-link">#1060</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.1.6" id="tibble-316">tibble 3.1.6<a class="anchor" aria-label="anchor" href="#tibble-316"></a></h2><p class="text-muted">CRAN release: 2021-11-07</p>
 <ul><li>
