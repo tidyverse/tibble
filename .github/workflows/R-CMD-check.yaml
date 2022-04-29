@@ -151,7 +151,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           r-version: ${{ matrix.config.r }}
-          cache-version: rcc-main-1
+          cache-version: rcc-windows-1
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: check
 
@@ -214,7 +214,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           r-version: ${{ matrix.config.r }}
-          cache-version: rcc-main-1
+          cache-version: rcc-full-1
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: check
 
