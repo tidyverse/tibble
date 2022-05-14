@@ -5,7 +5,7 @@
 \alias{tibble-package}
 \title{tibble: Simple Data Frames}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional data frame.
 }
