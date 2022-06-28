@@ -4563,7 +4563,7 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 #> ! Data frame must have names.
 #> i In file 'type-data-frame.c' at line
 #> 683.
-#> i This is an internal error in the rlang
+#> i This is an internal error in the vctrs
 #> package, please report it to the package
 #> authors.
 ```
